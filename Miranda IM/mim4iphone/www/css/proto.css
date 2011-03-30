@@ -1,0 +1,98 @@
+/*ICQ*/
+.cl-icon-ICQ-offline
+{
+
+	background: url(../images/proto/icq/icq_offline.png);
+}
+
+.cl-icon-ICQ-online
+{
+	background: url(../images/proto/icq/icq.png);
+}
+
+
+.cl-icon-ICQ-na
+{
+	background: url(../images/proto/icq/icq_na.png);
+}
+
+.cl-icon-ICQ-invisible
+{
+	background: url(../images/proto/icq/icq.png);
+	opacity: 0.5;
+}
+
+/*MSN*/
+
+.cl-icon-MSN-offline
+{
+
+	background: url(../images/proto/msn/msn_offline.png) center center no-repeat;
+}
+
+.cl-icon-MSN-online
+{
+	background: url(../images/proto/msn/msn.png) center center no-repeat;
+}
+
+.cl-icon-MSN-invisible
+{
+	background: url(../images/proto/msn/msn.png) center center no-repeat;
+	opacity: 0.5;
+}
+
+/*AIM*/
+
+.cl-icon-AIM-offline
+{
+	background: url(../images/proto/aim/aim_offline.png) center center no-repeat;
+}
+
+.cl-icon-AIM-online
+{
+	background: url(../images/proto/aim/aim.png) center center no-repeat;
+}
+
+.cl-icon-AIM-invisible
+{
+	background: url(../images/proto/aim/aim.png) center center no-repeat;
+	opacity: 0.5;
+}
+
+/*JABBER*/
+
+.cl-icon-JABBER-offline
+{
+	background: url(../images/proto/jabber/jabber_offline.png) center center no-repeat;
+}
+
+.cl-icon-JABBER-online
+{
+	background: url(../images/proto/jabber/jabber.png) center center no-repeat;
+}
+
+.cl-icon-JABBER-invisible
+{
+	background: url(../images/proto/jabber/jabber.png) center center no-repeat;
+	opacity: 0.5;
+}
+
+/*YAHOO*/
+
+.cl-icon-YAHOO-offline
+{
+	background: url(../images/proto/yahoo/yahoo_offline.png) center center no-repeat;
+}
+
+.cl-icon-YAHOO-online
+{
+	background: url(../images/proto/yahoo/yahoo.png) center center no-repeat;
+}
+
+.cl-icon-YAHOO-invisible
+{
+	background: url(../images/proto/yahoo/yahoo.png) center center no-repeat;
+	opacity: 0.5;
+}
+
+/* TODO */

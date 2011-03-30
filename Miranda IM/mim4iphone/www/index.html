@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html manifest="/mir.manifest">
+<head>
+	<title>Miranda IM</title>
+	<script type="text/javascript" src="js/jquery.1-5-1.min.js"></script>
+	<script type="text/javascript" src="js/iscroll4.min.js"></script>
+	<script type="text/javascript" src="js/ichat.js"></script>
+	<script type="text/javascript" src="js/mir.min.js"></script>
+	<script type="text/javascript">
+		var addToHomeConfig = {
+			animationIn: 'bubble',
+			animationOut: 'drop',
+			lifespan:10000,
+			message: 'Miranda IM should be added to your home screen.',
+		};
+	</script>
+	<script type="text/javascript" src="js/add2home.min.js"></script>
+
+	<link rel="stylesheet" href="css/mir.css" type="text/css" />
+	<link rel="stylesheet" href="css/ichat.css" type="text/css" />
+	<link rel="stylesheet" href="css/proto.css" type="text/css" />
+	<link rel="stylesheet" href="css/add2home.css" type="text/css" />
+	
+	<!-- iPhone -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-touch-fullscreen" content="yes" />
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="apple-touch-icon-precomposed" href="images/mir.png"/>
+	<link rel="apple-touch-startup-image" href="images/mir_splash.png" />
+</head>
+<body>
+	<div id="cltoolbartop"><span id="cltitle">Miranda IM</span></div>
+	<div id="wrapper">
+		<div id="sview">
+			<div id="acc"></div>
+			<div id="cl">
+			</div>
+			<div id="msg">
+			</div>
+			<!-- Must always be last -->
+			<div id="sendmsg">
+			</div>
+		</div>
+	</div>
+	<div id="cltoolbar">
+		<ul>
+			<li rel="#cl" id="clmenu-contacts" class="contacts active">
+				<span>
+					Contacts
+					<div class="clbadge" id="cl-other-events">0</div>
+				</span>
+			</li>
+			<li rel="#acc" id="clmenu-acc" class="box">
+				<span>
+					Accounts
+				</span>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
