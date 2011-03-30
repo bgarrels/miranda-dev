@@ -1,0 +1,10 @@
+These are nearly "unstable" builds from the Miranda IM trunk.
+The building environment is as follows:
+
+MSVC 2010 builds:
+* Microsoft Visual C++ 2010 SP1 
+
+Common components:
+* DirectX SDK 9.29.1962 (June 2010)
+* Microsoft Windows SDK v7.1
+
