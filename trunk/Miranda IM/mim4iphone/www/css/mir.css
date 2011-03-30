@@ -1,0 +1,364 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	-webkit-user-select: none;
+    -webkit-text-size-adjust: none;
+	font-family: Helvetica;
+	overflow: hidden;
+}
+
+#wrapper 
+{
+	height: 250px;		 
+
+	position:relative;	 
+	z-index:1;			 
+
+	width:100%;
+	overflow: hidden;
+}
+
+#sview
+{
+	float:left;
+	width:100%;
+	padding:0;
+}
+
+#cl .cl-contact:nth-child(odd)
+{
+	background-color: #fdfdfd;
+}
+
+#cl .cl-contact
+{
+	height: 55px;
+	line-height: 55px;
+	/* border-bottom: solid 1px #f2f2f2; */
+	background-color: #fcfcfc; 
+	-webkit-tap-highlight-color:rgba(255,0,0,255);
+	vertical-align:middle;
+}
+
+#cl .cl-contact-icon
+{
+	vertical-align: middle;
+	margin-left: 2px;
+	padding: 0px;
+	margin-right: 0px;
+	
+	height: 32px;
+	width: 32px;
+	border: 0;
+}
+
+#cl span.cl-contact-text
+{	
+	font-weight: bold;
+	font-size: 20px;
+	margin-left: 10px;
+}
+#cl span.cl-contact-text-offline
+{
+	color: grey;
+}
+
+#cl span.cl-contact-text-away, span.cl-contact-text-na, span.cl-contact-text-dnd
+{
+	font-style: italic;
+	opacity: 0.5;
+}
+
+#cl .cl-contact-icon-avatar
+{
+	position: relative;
+	top: 2px;
+	float: right;
+	display: inline;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	/*border: 1px solid #efefef;*/
+	width: 42px;
+	height: 42px;
+	vertical-align: middle;
+}
+
+#cl .cl-contact-unread
+{
+	font-weight: bold;
+	color: #ffffff;
+	background-color: #F21149;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* webkit */
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	margin-left: 5px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	vertical-align: top;
+	-webkit-box-shadow: 1px 1px 4px #000000;
+	-moz-box-shadow: 1px 1px 4px #000000;
+	box-shadow: 1px 1px 4px #000000; 
+}
+
+#cl .cl-contact-status
+{
+	margin-left: 5px;
+}
+
+#msg
+{
+	display: none;
+	background-color: #ffffff;
+}
+
+.ajaxload
+{
+	display: block;
+	padding: 0;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	vertical-align: middle;
+	width: 16px;
+	background: url(../images/ajax.gif) no-repeat;
+	background-position:center; 
+}
+
+.msg-text
+{
+	font-size: 18px;
+	color: #111111;
+	-webkit-user-select: auto;
+}
+
+.msg-text-out
+{
+	color: #000000;
+}
+
+.msg-text-status
+{
+	color: grey;
+}
+
+.msg-date
+{
+	font-style: italic;
+	font-size: x-small;
+	color: #e0e0e0;
+}
+
+#cltoolbartop
+{
+	width:100%;
+	height:20px;
+	line-height:20px;
+	background-color: #000000;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#666666), to(#666666), color-stop(0,#333333));
+	padding:0;
+	margin: 0;
+	color:#eee;
+	font-size: small;
+	text-align:center;
+	color:#f3f3f3;
+	text-decoration:none;
+	font-weight:bold;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.5);
+
+}
+
+#sendmsg
+{
+	display: none;
+	height: 55px;
+	-webkit-appearance: none;
+	opacity: 0.6;
+}
+
+#cl-send-area
+{
+	background-color: transparent;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font-size: 20px;
+	opacity: 1;
+}
+
+.clbadge
+{
+	
+	display: none;
+	font-size: 12px;
+	opacity: 0.8;
+	position: relative;
+	margin: 0;
+	top: -40px;
+	left: 34px;
+	width: 20px;
+	overflow: hidden;
+	font-weight: bold;
+	color: #ffffff;
+	background-color: #F21149;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* webkit */
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	margin-left: 5px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	vertical-align: top;
+	-webkit-box-shadow: 1px 1px 4px #000000;
+	-moz-box-shadow: 1px 1px 4px #000000;
+	box-shadow: 1px 1px 4px #000000; 
+}
+
+.pinbackground
+{
+	background: #c7ced5 url(../images/pin.png);
+}
+
+#acc
+{
+	padding-top: 10px;
+	display: none;
+}
+
+#acc label
+{
+    color: #4D4D70;
+    display: block;
+    font-size: inherit;
+    font-weight: bold;
+    line-height: 24px;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.acc-win
+{
+	background-color: #fefefe;
+	opacity: 0.6;
+	display: block;
+	margin-top: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	border: 1px solid #ADB4BA;
+	width: 90%;
+	border-radius:  15px;
+}
+
+.acc-table
+{
+	width: 100%;
+	margin: auto;
+}
+
+.acc-table-field
+{
+	font-weight: bold;
+}
+
+#cltoolbar
+{
+	width: 100%;
+	height: 49px;
+	background-color: #000000;
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #999), color-stop(0.02, #666), color-stop(1, #222));;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	border-top:1px solid #444;
+	display:block;
+}
+
+#cltoolbar ul {
+	margin: 0 auto;
+	padding: 3px 0 0;
+	list-style: none;
+	display: block;
+	height: 46px;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+}
+
+#cltoolbar li {
+	margin: 0 2px;
+	float: left;
+	position: relative;
+}
+
+#cltoolbar li.active {
+	border: 3px solid;
+	border-width: 0 3px;
+	-webkit-border-image: url("../images/footer-hover.png") 0 3;
+}
+
+#cltoolbar span {
+	padding: 29px 3px 3px;
+	float: left;
+	width: 54px;
+	color: #bbb;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	background: url("../images/footer-buttons.png") no-repeat -2px -50px;
+}
+
+#cltoolbar li.active span {
+	padding-left: 0;
+	padding-right: 0;
+	color: #fff;
+}
+
+#cltoolbar .contacts.active span {
+	background-position: -5px top;
+}
+
+#cltoolbar .feed span {
+	background-position: -66px -50px;
+}
+
+#cltoolbar .feed.active span {
+	background-position: -69px top;
+}
+
+#cltoolbar .msg span {
+	background-position: -130px -50px;
+}
+
+#cltoolbar .msg.active span {
+	background-position: -133px top;
+}
+
+#cltoolbar .box span {
+	background-position: -194px -50px;
+}
+
+#cltoolbar .box.active span {
+	background-position: -197px top;
+}
+
+#cltoolbar .games span {
+	background-position: -258px -50px;
+}
+
+#cltoolbar .games.active span {
+	background-position: -261px top;
+}
+
+#cltoolbar .chat span {
+	background-position: -322px -50px;
+}
+
+#cltoolbar .chat.active span {
+	background-position: -325px top;
+}

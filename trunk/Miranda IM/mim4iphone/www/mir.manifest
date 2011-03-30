@@ -1,0 +1,27 @@
+CACHE MANIFEST
+NETWORK:
+/api/*
+CACHE:
+# html/css
+/index.html
+/css/add2home.css
+/css/ichat.css
+/css/mir.css
+/css/proto.css
+# js
+/js/add2home.min.js
+/js/ichat.js
+/js/iscroll4.min.js
+/js/jquery-1-5-1.min.js
+/js/mir.min.js
+# images
+/images/ajax.gif
+/images/noavatar.png
+/images/footer-buttons.png
+/images/1x1.png
+/images/mir_splash.png
+# protocols
+/images/proto/icq/icq.png
+/images/proto/icq/icq_offline.png
+#sounds
+/sounds/message.mp3
