@@ -1,0 +1,90 @@
+; Pluginname: AutoReplacer 
+; Version: 0.0.1.5
+; Dateiname: AutoReplacer.dll
+; Autor: Angelo Luiz Tartari aka Corsario
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=593
+; ‹bersetzung: 13.06.06 von Weishaupt
+
+[Adds AutoCorrection and AutoText features to message window.]
+F¸gt Rechtschreibkorrektur und Textvorschl‰ge dem Nachrichtenfenster hinzu.
+
+; Options page name
+[AutoCorrection]
+Rechtschreibkorrektur
+[AutoText]
+Textvorschl‰ge
+
+; Options page
+[&Enable AutoCorrection]
+Automatische Rechtschreibkorrektur aktivieren
+[&Enable AutoText]
+Textvorschl‰ge aktivieren
+[Correct TWo INitial &CApitals]
+Zwei Groﬂbuchstaben am Wortanfang korrigieren
+[Capitalize first letter of &sentences]
+Anfangsbuchstaben eines Satzes groﬂ schreiben
+[Capitalize &names of days]
+Anfangsbuchstaben von Wochentagen groﬂ schreiben
+[Correct accidental usage of cAPS &LOCK Key]
+Unbeabsichtigte Verwendung der Feststelltaste korrigieren
+[AutoText entries]
+Textvorschlag Eintr‰ge
+[Replace]
+Ersetze
+[With]
+mit
+[E&xceptions...]
+Ausnahmen...
+[Exceptions]
+Ausnahmen
+[&Capitalize]
+Groﬂschreiben
+[&TWo INitial CApitals]
+ZWei GRoﬂbuchstaben am WOrtanfang
+[Do not capitalize sentences beginning with]
+Keine Groﬂschreibung, wenn der Satz folgendermaﬂen beginnt
+[Do not correct words beginning with]
+Wˆrter nicht korrigieren, wenn sie folgendermaﬂen beginnen
+[Select an item to delete.]
+W‰hle einen Eintrag aus um ihn zu lˆschen.
+
+;Import/Export der Eintr‰ge
+[import AutoText entries]
+Textvorschlag-Eintr‰ge importieren
+[import AutoCorrection entries]
+Rechtschreibkorrektur-Eintr‰ge importieren
+[import capitalize exception entries]
+Eintr‰ge mit Kleinschreibung trotz Satzanfang importieren
+[import two initial capitals exception entries]
+Eintr‰ge mit ZWei GRoﬂbuchstaben am Wortanfang import.
+[export AutoText entries]
+Textvorschlag-Eintr‰ge exportieren
+[export AutoCorrection entries]
+Rechtschreibkorrektur-Eintr‰ge exportieren
+[export capitalize exception entries]
+Eintr‰ge mit Kleinschreibung troz Satzanfang exportieren
+[export two initial capitals exception entries]
+Eintr‰ge mit ZWei GRoﬂbuchstaben am Wortanfang export.
+[&Do it!]
+&Los!
+[I want to...]
+Ich mˆchte...
+[Importing sucessfully completed.]
+Importieren erfolgreich abgeschlossen.
+[Exporting sucessfully completed.]
+Exportieren erfolgreich abgeschlossen.
+[Invalid path and/or filename.]
+Ung¸ltiger Pfad und/oder Dateiname.
+
+[Change Case]
+Groﬂ- und Kleinschreibung ‰ndern
+[UPPPERCASE]
+GROSSBUCHSTABEN
+[minorcase]
+kleinbuchstaben
+[iNVERTED]
+vERKEHRT
+[Sentence case]
+Satzbeginn groﬂ schreiben
+[Title Case]
+Eigennamen groﬂ schreiben

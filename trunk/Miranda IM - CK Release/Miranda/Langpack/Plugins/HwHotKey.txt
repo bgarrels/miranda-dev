@@ -1,0 +1,7 @@
+; Pluginname: HwHotKey  
+; Version: 1.0.0.2
+; Dateiname: HwHotKey.dll
+; Autor: f2065
+; Übersetzung: 22.11.10 von CK
+
+;todo

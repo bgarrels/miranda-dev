@@ -1,0 +1,20 @@
+; Pluginname: RealReconnect
+; Version: 0.0.1.2
+; Dateiname: realreconnect.dll
+; Autor: gilya
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4354
+; Übersetzung: 18.04.06 von miroerr
+
+[&Create log file]
+Log Datei &erstellen
+[&Reconnect interval seconds]
+Intervall-Sek. zum &Verbinden
+[Reconnect for these &protocols:]
+Für diese &Protokolle wiederverbinden:
+
+[Finished]
+Abgeschlossen:
+[Started]
+Begonnen:
+[reconnecting]
+Wiederverbinden

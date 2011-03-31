@@ -1,0 +1,70 @@
+; Pluginname: WinAmpNotify
+; Version: 1.7.5.0
+; Dateiname: winampnotify.dll
+; Autor: Angelo Luiz Tartari
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=305
+; Übersetzung: 27.06.05 von ANdyDU
+
+[WinampNotify]
+WinAmpNotify
+
+[Use &hotkey to show popup]
+&Hotkey zum Öffnen d. Popups
+[Hotkey :]
+Hotkey:
+[Do not notify when a new song begins to play, only notify when the hotkey is pressed]
+Keine Meldung wenn ein neuer Song beginnt außer der 'Hotkey' wurde gedrückt.
+[/music replacement]
+/music Ersetzung
+[&Enable replacement]
+Ersetzung aktivieren
+[Replace "/music" text in message dialog with]
+"/music" in Dialogen ersetzen mit Text
+[Advanced text options]
+Erweiterte Textoptionen
+[Put here the same title formatting from your player (You'll be able to use it on the above text)]
+Hier das gleiche Textformat des Players eingeben (Es kann dann auf den oben genannten Text verwendet werden)
+
+[song title (shown in the playlist)]
+Titel (wie in der Playliste)
+[the song length]
+Titellänge
+[samplerate (ex. 44 kHz)]
+Samplerate (Bsp. 44kHz)
+[bitrate (ex. 128 kBit/s)]
+Bitrate (Bsp. 128 kBit/s)
+[channels (ex. Mono/Stereo)]
+Kanäle (Bsp. Mono/Stereo)
+[elapsed time]
+gespielte Zeit
+[remaining time]
+Verbleibende Zeit
+[playlist position]
+Playlisten-Position
+
+[Go to previous track]
+vorherige Track
+[Go to next track]
+nächster Track
+[Stop with fadeout]
+Stop nach Ausblenden
+[Stop after current track]
+Stop nach jetzigem Track
+[Close Winamp]
+WinAmp schließen
+[Open file info box]
+Datei-Infos öffnen
+[Raise volume by 1%]
+Lautstärke um 1% erhöhen
+[Lower volume by 1%]
+Lautstärke um 1% verringern
+[Open jump to time dialog]
+'Jump to time'-Dialog öffnen
+[Open jump to file dialog]
+'Jump to file'-Dialog öffnen
+[Add current track as a bookmark]
+Aktuellen Track als Bookmark einfügen
+[Close PopUp immediately after left click]
+PopUp nach Linksklick schließen
+[Close PopUp immediately after right click]
+PopUp nach Rechtsklick schließen

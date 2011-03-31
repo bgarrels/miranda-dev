@@ -1,0 +1,22 @@
+; Pluginname: SpinChat
+; Version: 0.1.4b
+; Dateiname: spinchat.dll
+; Autor: Tharo
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2310
+; Übersetzung: Sebijk
+; Besonderheiten: Die meisten Übersetzungen sind in der Sprachdatei schon erhalten, deswegen kommt hier nur die unübersetzten Phrasen rein ! 
+
+[(MUST be a registered Login)]
+Login muss registriert sein
+[SpinChat Options]
+SpinChat-Optionen
+[SpinChat Protocol]
+SpinChat-Protokoll
+[Account Infomation]
+Konto-Informationen
+[The changes you have made require you to reconnect to the baseProtocol network before they take effect]
+Die Änderungen, die du gemacht hast, werden erst wirksam, wenn du dich neu ins SpinChat-Protokoll angemeldet hast
+[Cannot connect to Server. \nTry Spinchat.de port 3001, 3003 or 3004.]
+Konnte sich mit dem Server nicht verbinden. \nVersuche Spinchat.de port 3001, 3003 oder 30004.
+[Keep connection alive (send a ping packet every minute)]
+Verbindung aufrechterhalten (Jede Minute einen Ping-Paket senden)

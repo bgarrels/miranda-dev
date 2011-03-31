@@ -1,0 +1,23 @@
+; Pluginname: WordLookUp Plugin 
+; Version: 0.0.0.3
+; Dateiname: WordLookUp.dll
+; Autor: JackBauer
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1743
+; Übersetzung: 23.08.07 von Lastwebpage
+
+[Please configure search engines under \n Options->Plugins->WordLookUp]
+Bitte Suchmaschinen unter \n Optionen->Plugins->WordLookUp konfigurieren.
+[Search Command Configuration]
+Suchkommando Konfiguration
+[Search Command]
+Suchkommando
+[Load defaults]
+Standard laden
+[Insert %s at the position in the searchstring where the searchword should be.\nPress Load defaults to load the std. Search Command Configuration]
+Fügen %s ein wo das Suchwort stehen soll.\nDrücken Sie Standard laden um die Standardeinstellungen zu laden. 
+[Number of messages to show in the WordLookUp Window]
+Anzahl der Nachrichen die im WordLookUp Fenster angezeigt werden sollen
+[WordLookUp Window Configuration]
+WordLookUp Fenster Konfiguration
+[Invalid searchcommand. Missing %s in the searchstring.\nGo to Options->Plugins->WordLookUp and check searchstring configuration.]
+Ungültiges Suchkommando. Fehlendes %s in dem Suchstring.\nPrüfen Sie die Suchstringkonfiguration unter Einstellungen->Plugins->WordLookUp.

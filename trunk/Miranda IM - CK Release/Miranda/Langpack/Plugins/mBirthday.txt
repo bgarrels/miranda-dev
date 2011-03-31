@@ -1,0 +1,57 @@
+; Pluginname: mBirthday 
+; Version: 0.0.0.6
+; Dateiname: mBirthday.dll
+; Autor: Bankrut
+; Übersetzung: derula, Wayne & CHEF-KOCH
+
+[Add a mark to contact with birthday near]
+Markiere Kontakte, die bald Geburtstag haben
+ 
+[Mark with]
+Zeichen:
+[Mark contacts with birthday near]
+Markiere Kontakte, die bald Geburtstag haben
+[Use a char mark]
+Mit Zeichen markieren
+[Add char mark before contact name]
+Zeichen vor den Namen setzen
+[Use MultiWindow icon]
+MultiWindow-Icon verwenden
+[Use PopUp]
+Popups zeigen
+[Timeout:]
+Dauer:
+[Notify]
+Erinnere
+[day(s) before birthday.]
+Tag(e) vor Geburtstag.
+[Set contact status to Invisible if birthday near]
+Kontaktstatus auf unsichtbar setzen, wenn Geburtstag sich nähert
+[Set birthday date:]
+Geburtsdatum ändern
+[Use found birthday date]
+Gefundenes Geburtsdatum
+[Use mBirthday date]
+mBirthday-Datum
+[Do not use any birthday date]
+Kein Geburtsdatum verwenden
+[Year:]
+Jahr:
+[Month:]
+Monat:
+[Day:]
+Tag:
+[day to]
+Tag bis zu
+[days to]
+Tage bis zu
+[birthday...]
+Geburtstag...
+[year(s) old]
+Jahr(e) alt
+[Has birthday]
+hat Geburtstag
+[&Birthday list]
+&Geburtstagsliste
+[&User birthday]
+&Geburtstag

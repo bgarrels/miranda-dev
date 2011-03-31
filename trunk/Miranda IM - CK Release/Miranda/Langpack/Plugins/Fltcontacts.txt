@@ -1,0 +1,50 @@
+; Pluginname: Fltcontacts
+; Version: 1.0.2.2
+; Dateiname: fltcontacts.dll
+; Autor: Jasho
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=482
+; Übersetzung: 27.09.2006 von Boa
+; Besonderheiten: Entwicklung eingestellt!
+
+[Remove thumb]
+Entferne Floater
+[Hide all thumbs]
+Verstecke alle Floater
+[Show all thumbs]
+Zeige alle Floater
+
+[Show/Hide all thumbs]
+Zeige/Verstecke alle Floater
+
+[Hiding contacts]
+Kontakte ausblenden
+[Hide offline contacts]
+Offline Kontakte ausblenden
+[Hide all contacts]
+Alle Kontakte ausblenden
+[Hide when a fulscreen app is active]
+Bei Vollbild-Anwendung ausblenden
+[Hide when contact list is shown]
+Ausblenden, wenn Kontaktliste gezeigt wird
+[Stick together]
+Zusammenheften
+[Use fixed width]
+Feste Breite
+[requires mToolTip or Tipper plugin]
+Benötigt mToolTip oder Tipper Plugin
+[Bring to front]
+In den Vordergrund
+[Bring to front every]
+In den Vordergrund alle
+
+[<Contact List Text>]
+<Kontakt Listen Text>
+[Floating Contacts Background]
+Floating Contacts Hintergrund
+[Draw border]
+Umrandung
+[Left-top edges color:]
+Schatten oben links:
+[Right-bottom eges color:]
+Schatten unten rechts:
+ 

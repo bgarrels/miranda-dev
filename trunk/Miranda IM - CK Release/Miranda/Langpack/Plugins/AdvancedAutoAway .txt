@@ -1,0 +1,79 @@
+; Pluginname: AdvancedAutoAway 
+; Version: 0.8.0.40
+; Dateiname: advancedautoaway.dll
+; Autor: P Boon aka unreg
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4254
+; Unique ID: {f0fdf73a-753d-499d-8dba-336db79cdd41}
+; Übersetzung: andydu am 27.07.05
+
+[Advanced Auto Away]
+Erw. Auto-Abwesenheit
+[Auto Away General]
+AutoAway Allgemein
+[Auto Away Messages]
+AutoAway-Meldungen
+
+[Specify settings for each protocol]
+Einstellungen für jedes Protokoll einzeln
+[Use same settings for all protocols]
+Gleiche Einstellungen für alle Protokolle
+[Ignore caps-lock, num-lock and scroll-lock keys]
+Ignoriere Feststell-, Nummernblock- und Rollentaste
+[Ignore CRTL, ALT, SHIFT, TAB, ESC and Windows keys]
+Ignoriere Strg-, Alt-, Shift-, Tab-, Esc- und Windowstaste
+[Ignore any key combination with above keys]
+Ignoriere Kombinationen mit obigen Tasten
+[Monitor keyboard activity]
+Tastaturtätigkeit überwachen
+[Monitor mouse activity]
+Maustätigkeit überwachen
+[Check interval (secs)]
+Prüfintervall (s)
+[Confirm dialog timeout (secs)]
+Dialogfenster autom. schließen (s)
+[Turn off Autoanswer]
+Deaktiviere Autoantwort
+
+[Variables...]
+Variablen
+[Auto Away Status Messages]
+Autom. Abwesenheitsmeldungen
+
+[Auto Away Rules]
+Abwesenheitsregeln
+[Only set if current status is]
+Nur setzen bei akt. Status
+[when screen saver engages]
+wenn der Bildschirmschoner startet
+[when workstation is locked]
+wenn der Computer gesperrt wird
+[after]
+nach
+[Set if status is]
+Setzen wenn Status ist
+[only set when inactive]
+Nur bei Untätigkeit setzen
+[Monitor Miranda's activity only]
+Nur Mirandas Aktivität überwachen
+[Reset status on return]
+Status nach Rückkehr zurücksetzen
+[Confirm resetting status]
+Zurücksetzen des Status bestätigen
+
+[minutes of %s mode]
+Min. im Status "%s"
+
+[AdvancedAutoAway, an Auto Away module with some more options than the original.]
+AdvancedAutoAway ist ein Modul, um automatisch den Status 'Abwesend' zu aktivieren.
+
+[You enabled \"Change my status mode to\" in the \"Idle\" options dialog, AdvancedAutoAway's options are ignored.]
+Sie haben \"Mein Status ändern zu:\" unter 'Status -> Inaktivität' aktiviert, die AutoAway-Einstellungen werden ignoriert.
+[You are running the ANSI version Miranda. Please use the ANSI build of this plugin.]
+Sie benutzen die ANSI-Version von Miranda IM. Bitte benutzen Sie die dazu passenden ANSI-Plugins.
+[You are running the ANSI version Miranda. It's recommened to use the ANSI build of this plugin.]
+Sie benutzen die ANSI-Version von Miranda IM. Es wird empfohlen, ANSI-Plugins dazu zu benutzen.
+[You are running the UNICODE version Miranda. Please use the UNICODE build of this plugin.]
+Sie benutzen die Unicode-Version von Miranda IM. Bitte benutzen Sie die dazu passenden Unicode-Plugins.
+[You are running the UNICODE version Miranda. It's recommened to use the UNICODE build of this plugin.]
+Sie benutzen die Unicode-Version von Miranda IM. Es wird empfohlen, Unicode-Plugins dazu zu benutzen.
+ 

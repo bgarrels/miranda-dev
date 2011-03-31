@@ -1,0 +1,200 @@
+; Pluginname: Updater 
+; Version: 0.6.1.3
+; Dateiname: updater.dll
+; Unique ID: {66dceb80-0384-4507-9774-cc20a7ef1d6d}
+; Autor: Scott Ellis
+; SVN: https://server.scottellis.com.au/svn/mim_plugs/updater
+; Übersetzung: 08.12.05 von Dober
+
+[Automatic Updater for Miranda]
+Automatische Aktualisierung von Miranda-IM-Plugins.
+[Updater connection]
+Update-Benachrichtigung (Plugins)
+
+[Component Name]
+Komponentenname
+
+[New Version]
+Neue Version
+[Current Version]
+Aktuelle Version
+
+[Could not create data file for restart.]
+Konnte keine Datei für den Neustart erstellen.
+[Could not create data file for restart]
+Konnte keine Datei für den Neustart erstellen
+[Miranda's not 'OK TO EXIT'.]
+Miranda ist nicht zum Beenden bereit.
+
+[Check for Updates]
+Auf Updates prüfen
+[Check for Plugin Updates]
+Auf Plugin-Updates prüfen
+[Restart]
+Neustart
+[Update and Exit]
+Updaten und beenden
+
+[Select Updates Folder]
+Updateverzeichnis wählen
+
+[Progress - %d%%]
+Fortschritt - %d%%
+
+[Downloading Updates]
+Lade Updates
+[Progress - Downloading updates...]
+Fortschritt - Lade Updates herunter...
+[Downloading]
+Lade
+[Downloading plugin: %s]
+Lade Plugin: %s
+[Skipping plugin: %s]
+Überspringe Plugin: %s
+[No network - aborting update check]
+Kein Netzwerk - Updateprüfung abgebrochen
+[Checking for Updates]
+Prüfe auf Updates
+[Progress - Checking for updates...]
+Fortschritt - Prüfe auf Updates...
+[Downloading XML data]
+Lade XML-Daten herunter
+[Checking for updates]
+Prüfe auf Updates
+[Scanning plugins folder]
+Durchsuche "Plugins"-Verzeichnis
+[Scanning language packs]
+Durchsuche Sprachdateien
+[Checking plugin: %s]
+Prüfe Plugin: %s
+[Updates Available]
+Updates verfügbar
+[Click here to install]
+Hier für Installation klicken
+[Could not create backup folder]
+Konnte Backup-Ordner nicht erstellen
+[Check for updates]
+Auf Updates prüfen
+
+[Failed to download "%s" - Invalid response, code %d]
+Herunterladen von "%s" gescheitert - Ungültige Antwort, Code %d
+[Failed to download "%s": ]
+Herunterladen von "%s" gescheitert:
+
+[Confirm Files]
+Dateien bestätigen
+[Uncheck the files that you do not want installed:]
+Dateien, die nicht installiert werden sollen, abwählen:
+[Invert Selection]
+Auswahl umkehren
+[Select DLLs]
+DLLs wählen
+[updaterpopups]
+Updater-Popups
+
+[Use Beta?]
+Beta verwenden?
+[FORCED]
+Erzwungen
+[TRUE]
+Ja
+[FALSE]
+Nein
+[Update on major version change.]
+Update bei größerer Versionsänderung
+[Update on minor version change.]
+Update bei geringer Versionsänderung
+[Update on release number change.]
+Update bei neuer Releasenummer
+[Update on build number change.]
+Update bei neuen Buildnummern
+[Check for updates on startup]
+Beim Start auf Updates prüfen
+[(But only once per day)]
+Nur einmal am Tag
+[Check daily]
+Täglich prüfen
+[Install without confirmation if idle]
+Bei Inaktivität selbstständig installieren
+[Only install DLLs automatically]
+Nur DLLs automatisch installieren
+[Backup updated files]
+Sicherung vorher erstellen
+[Use popups for progress info]
+Popups für Fortschrittsanzeige
+[Show 'Restart' menu item]
+Neustart-Menüeintrag anzeigen
+[Show 'Update and Exit' menu item]
+'Updaten und beenden'-Menüeintrag
+[Keep downloaded archives]
+Heruntergeladene Archive speichern
+[Don't unzip]
+Nicht entpacken
+[Global Status Control]
+Globale Statuskontrolle
+[Start offline, restore after update check]
+Offline starten, nach Updateprüfung online gehen
+[Confirm Updates]
+Updates bestätigen
+[Updates are available for the following components:]
+Updates sind für folgende Komponenten verfügbar:
+[Confirm install for individual files]
+Installation für einzelne Dateien bestätigen
+[Download but do not install]
+Herunterladen ohne Installation
+[Changelog]
+Änderungen
+
+[Updates Found]
+Updates gefunden
+[Updater has detected updated versions\nof the following Miranda components:]
+Updater hat aktualisierte Versionen folgender Miranda-Komponenten gefunden:
+
+[LastUpdateDay]
+Letzte Update Tag:
+[Temporary Files]
+Temporäre Dateien
+[Saved Archives]
+Archivierte Dateien
+[Data:]
+Daten:
+[Backups:]
+Backup:
+[Saved archives:]
+Archivierte Dateien:
+[WARNING: Updater will move or delete everything in the 'Updates' folder when installing - so do not point it at anything important (e.g. your plugins folder) or put anything other than updates in there!]
+WARNUNG: Updater löscht bei Installation alles im 'Updates'-Ordner - bitte kein wichtiges Verzeichnis (z. B. 'Plugins'-Ordner) wählen und keine wichtige Dateien im Ordner ablegen!
+
+[Restart Miranda IM]
+Miranda IM neustarten
+[Check for Updates of Plugins]
+Suche nach updatebaren Plugins
+[Update and Exit Miranda IM]
+Update und beende Miranda IM
+
+[BZ2 Decompression, configuration error]
+BZ2-Dekompression, Konfigurationsfehler
+[BZ2 Decompression, parameter error]
+BZ2-Dekompression, Parameterfehler
+[DB2 Decompression, memory error]
+DB2-Dekompression, Speicherfehler
+[Failed to download XML data: ]
+Herunterladen der XML-Daten gescheitert: 
+[Updater: Error Downloading XML Data]
+Updater: Fehler beim Herunterladen der XML-Daten\n(Möglicherweise Fehler auf der Addonseite?)
+[Failed to download XML data - Response is NULL]
+Herunterladen der XML-Daten gescheitert - Antwort ist Null
+[Error downloading XML data...\nResponse is NULL]
+Fehler beim Herunterladen der XML-Daten...\nAntwort ist Null
+[Updater Error]
+Updater-Fehler
+[Failed to download XML data - Invalid response, code %d]
+Herunterladen der XML-Daten gescheitert - Ungültige Antwort, Code %d\n(Möglicherweise Addons-Seite nicht erreichbar?)
+[Failed to decompress XML data]
+Dekomprimieren der XML-Daten gescheitert
+[The folder you have chosen for temporary files is not empty.\nALL FILES in this folder will be REMOVED during the update process.]
+Der Ordner für temporäre Dateien ist NICHT leer.\nALLE DATEIEN in diesem Ordner werden während eines Aktualisierungsvorgangs GELÖSCHT!
+[Updated Miranda components detected.\nClick here to install.]
+Aktualisierte Miranda-IM-Komponenten gefunden.\nKlicken Sie hier, um sie zu installieren.
+[CheckForUpdates service called]
+Prüfe Update-Dienst 

@@ -1,0 +1,15 @@
+; Pluginname: Flash Avatars Service 
+; Versionen: 0.0.1.14
+; Dateiname: flashavatars.dll 
+; Unique ID: {72765a6f-b017-42f1-b30f-5e0941273a3f}
+; Autor: Big Muscle
+; Übersetzung: Sebijk
+; Besonderheiten: Benötigt Adobe Flash ActiveX-Plugin!
+
+[Load and display flash avatars]
+Lädt und zeigt Flash-Avatare
+
+[Flash.ocx not registered!]
+Adobe Flash ist nicht installiert!
+[You have installed Flash 8.\r\nThis version of Flash contains a bug which can causes random crashes.\r\nIt's recommended to upgrade or downgrade your Flash library]
+Sie haben Adobe Flash in Version 8.x installiert.\r\nDiese Version besitzt viele Fehler und ist stark veraltet.\r\nEs wird empfohlen ein Flash-Update auf Version 10.x durchzuführen. 

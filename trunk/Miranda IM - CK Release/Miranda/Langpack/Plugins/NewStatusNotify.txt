@@ -1,0 +1,403 @@
+; Pluginname: NewStatusNotify 
+; Version: 1.1.2.6 Beta 1
+; Dateiname: NewStatusNotify.dll, NewStatusNotifyW.dll
+; Autor: Luca "hrk" Santarelli, BlackFox
+; Link: http://www.vasilich.org/blog/
+; Übersetzung: 06.07.05 von Lastwebpage
+
+; Pluginname: NewXStatusNotify YM 
+; Version: 1.4.0.7
+; Dateiname: NewXStatusNotify.dll, NewXstatusNotifyW.dll
+; Autor(en): Luca Santarelli, Vasilich, yaho
+; Unique ID: {ebf19652-e434-4d79-9897-91a0ff226f51}
+; Link: http://miranda-easy.net/mods.php
+; SVN: http://www.assembla.com/code/miranda_plugins/subversion/nodes
+
+;ONLINE
+[(M) is back online!]
+Er ist wieder online!
+[(F) is back online!]
+Sie ist wieder online!
+[(U) is back online!]
+Kontakt ist wieder online!
+
+;OFFLINE
+[(M) went offline! :(]
+Er ist offline! :(
+[(F) went offline! :(]
+Sie ist offline! :(
+[(U) went offline! :(]
+Kontakt ist offline! :(
+
+;INVISIBLE
+[(M) hide in shadows...]
+Er ist nun unsichtbar...
+[(F) hide in shadows...]
+Sie ist nun unsichtbar...
+[(U) hide in shadows...]
+Kontakt ist nun unsichtbar...
+
+[(M) hides in shadows...]
+Er ist nun unsichtbar...
+[(F) hides in shadows...]
+Sie ist nun unsichtbar...
+[(U) hides in shadows...]
+Kontakt ist nun unsichtbar...
+
+; FREEFORCHAT
+[(M) feels talkative!]
+Er fühlt sich gesprächig!
+[(F) feels talkative!]
+Sie fühlt sich gesprächig!
+[(U) feels talkative!]
+Kontakt fühlt sich gesprächig!
+
+;AWAY
+[(M) went Away]
+Er ist abwesend.
+[(F) went Away]
+Sie ist abwesend.
+[(U) went Away]
+Kontakt ist abwesend.
+
+;NA, NotAvailable
+[(M) isn't there anymore!]
+Er ist nicht da!
+[(F) isn't there anymore!]
+Sie ist nicht da!
+[(U) isn't there anymore!]
+Kontakt ist nicht da!
+
+;OCCUPIED, BUSY
+[(M) has something else to do.]
+Er ist beschäftigt.
+[(F) has something else to do.]
+Sie ist beschäftigt.
+[(U) has something else to do.]
+Kontakt ist beschäftigt.
+
+;DND, Do Not Disturb
+[(M) doesn't want to be disturbed!]
+Er möchte nicht gestört werden!
+[(F) doesn't want to be disturbed!]
+Sie möchte nicht gestört werden!
+[(U) doesn't want to be disturbed!]
+Kontakt möchte nicht gestört werden!
+
+;OUTTOLUNCH
+[(M) is eating something]
+Er isst gerade.
+[(F) is eating something]
+Sie isst gerade.
+[(U) is eating something]
+Kontakt isst gerade.
+
+;ONTHEPHONE
+[(M) had to answer the phone]
+Er telefoniert gerade.
+[(F) had to answer the phone]
+Sie telefoniert gerade.
+[(U) had to answer the phone]
+Kontakt telefoniert gerade.
+
+[Use default...]
+Benutze Standard...
+[Notify when a contact changes to one of these statuses]
+Melden, wenn ein Kontakt den Status ändert in:
+[Always when changing from offline]
+Immer, wenn er vorher offline war
+[Plugin activation]
+Plugin-Aktivierung
+[Automatically turn off PopUps and Sounds on status change]
+Statusmeldungen deaktivieren, wenn eigener Status:
+[Temporarily disable NewStatusNotify (disables popups and sounds)]
+Statusmeldungen deaktivieren (keine Popups und keine Klänge)
+[Put an item in the main menu to easily enable/disable the plugin]
+Menüpunkt im Hauptmenü zum An- und Ausschalten der Statusbenachrichtigungen
+[Use individual sounds]
+Individuelle Klänge nutzen
+[Show PopUps when I connect]
+Popups beim Verbinden
+[Do not warn me for people not in my Contact List]
+Nur Meldungen für Personen in meiner Kontaktliste
+[Blink icon in the system tray]
+Icon blinkt im Systemtray
+[Use status icon]
+Statusicon benutzen
+[&Log status changes to file]
+Statusänderungen in &Logdatei speichern
+[Sound options]
+Klangeinstellungen
+[Use Internal &Speaker]
+Internen Laut&sprecher benutzen
+[&Avoid clipping]
+Verschnitt vermeiden
+[To select the sounds to play, click on "Sounds" in the menu on the left.]
+Um die Klänge einzustellen, im Menü links auf 'Customize -> Klänge' klicken.
+[Automatically disable sounds or popups when I change to:]
+Klänge und Popups deaktivieren, so lange ich in einem der folgenden Status bin:
+[Contact status change notifications]
+Benachrichtigungen über Statusänderungen von Kontakten
+[Enable sound notifications for this contact]
+Benachrichtigung per Ton für diesen Kontakt aktivieren
+[Enable popup notifications for this contact]
+Benachrichtigung per Popup für diesen Kontakt aktivieren
+[XStatus notify]
+XStatus-Benachr.
+[Disable all]
+Alle deaktivieren
+[Enable all]
+Alle aktivieren
+
+[Sound for the status]
+Klang für den Status
+[(default sound)]
+Standardton
+[From offline]
+Von offline
+
+[Hey, it's you!]
+Hey, du bist es!
+[Hey, it *was* you!]
+Hey, du *warst* es!
+[Prev&iew]
+Vorschau
+
+[User: Online]
+Kontakt: Online
+[User: Offline]
+Kontakt: Offline
+[User: Away]
+Kontakt: Abwesend
+[User: Not Available]
+Kontakt: Außer Haus
+[User: Occupied]
+Kontakt: Beschäftigt
+[User: Do Not Disturb]
+Kontakt: Bitte nicht stören
+[User: Free For Chat]
+Kontakt: Für Chat bereit
+[User: Invisible]
+Kontakt: Unsichtbar
+[User: Out To Lunch]
+Kontakt: Zum Essen
+[User: On The Phone]
+Kontakt: Am Telefon
+[User: from offline (has priority!)]
+Kontakt: war offline (hat Priorität!)
+
+[Disable status &notification]
+Statusmeldung deaktiviere&n
+[Enable status &notification]
+Statusmeldung aktiviere&n
+
+[Status Notify]
+Status-Benachrichtigung
+
+[Popups on contact status change to:]
+Popup, wenn Kontakt Status ändert in:
+
+[Use cus&tom colors]
+Eigene Farben verwenden
+[Use &Windows colours]
+&Windowsfarben verwenden
+[Use Pop&up colours]
+Pop&upfarben verwenden
+
+[Popup title]
+Popuptitel
+[Show contact &group name]
+&Gruppe des Kontaktes anzeigen
+
+[Use standard &descriptions]
+Standar&d-Beschreibungen benutzen
+[Use &alternative descriptions]
+&Alternative Beschreibungen benutzen
+[Read status &message]
+Statusnachricht lesen
+[Show &previous status too]
+Auch vorherigen Status zeigen
+
+[Open message]
+Nachricht öffnen
+
+[Individual sounds are disabled.\n\nTo enable them, go to Options -  Status - Notify, enable \n""Use individual sounds"" checkbox, and then reopen this dialog.]
+Individuelle Klänge sind deaktiviert.\n\nUm sie zu aktivieren, in den Einstellungen unter Status=>Statusbenachrichtigungen die Option "Individuelle Klänge nutzen" aktivieren und diesen Dialog anschließend neu öffnen.
+[Status notify]
+Status-Benachrichtigung
+[with sounds]
+Mit Klängen
+[with popups]
+Mit Popups
+
+[(was %s)]
+(war %s)
+[<retrieving status message>]
+<Statusnachricht wird ermittelt>
+[This is "from offline" status message]
+Dies ist die Statusnachricht eines Kontaktes, der gerade offline war
+
+[Notifies you when a contact changes his/hers status.]
+Informiert Sie, wenn ein Kontakt seinen Status geändert hat.
+[You cannot specify a value lower than %d and higher than %d.]
+Werte kleiner als %d und größer als %d sind nicht zulässig.
+
+[Notifies you when a contact changes his/her (X)status.]
+Benachrichtigt Sie, wenn ein Kontakt seinen (X)Status ändert.
+
+[Put an item in the main menu to easily enable/disable the plugin (note: requires a restart of Miranda)]
+Menüpunkt im Hauptmenü zum An- und Ausschalten des Plugins (Hinweis: Neustart von Miranda erforderlich)
+
+[Individual sounds are disabled.\n\nTo enable them, go to Options -  Status - Notify, enable \n"Use individual sounds" checkbox, and then reopen this dialog.]
+Individuelle Klänge sind deaktiviert.\n\nUm diese einzuschalten, aktiviere unter Einstellungen -> Status -> Statusmeldungen die Option "Individuelle Klänge nutzen" und öffne anschließend diesen Dialog erneut.
+
+[Notifies you when a contact changes his/her (X)status]
+Benachrichtigt Sie, wenn ein Kontakt seinen (X)Status ändert.
+
+[Disable for XStatus 'Music']
+Für XStatus 'Musik' deaktivieren
+[Disable globally]
+Global deaktivieren
+
+[Cut message length to:]
+Nachrichtenlänge beschränken auf:
+[React only to global status changes]
+Nur auf globale Statusänderungen reagieren
+
+[XStatus change:]
+XStatus-Änderung:
+[Message change:]
+Nachrichtänderung
+[Remove:]
+Entfernen:
+[changed XStatus to %n:%b%d]
+ändert den XStatus in %n:%b%d
+[changed XStatus message:%b%d]
+ändert die XStatusnachricht in :%b%d
+[Title and message separator:]
+Trenner für Titel und Nachricht:
+[These variables are available:\r\n\r\n%n ... new XStatus name\r\n%o ... old XStatus name\r\n%d ... XStatus details (title[separator]message)\r\n%b ... line break (can be used as separator)]
+Diese Variablen sind verfügbar:\n\n%n ... neuer XStatus-Name\n%o ... alter XStatus-Name\n%d ... XStatus-Details (Titel[Trenner]Nachricht)\n%b ... Zeilenumbruch (kann als Trenner verwendet werden)
+[Reset templates]
+Vorlagen zurücksetzen
+[Do you want to reset all templates to default?]
+Möchten Sie alle Vorlagen auf Standard zurücksetzen?
+[changed XStatus to %n @ %d]
+ändert den XStatus in %n @ %d
+[changed XStatus message @ %d]
+ändert die XStatusnachricht in @ %d
+[has XStatus %n @ %d]
+hat den XStatus %n @ %d
+[On opening ML:]
+Bei Log-Öffnung:
+[<no message>]
+Keine Nachricht
+
+[XStatus changed]
+XStatus-Änderung
+[XStatus message changed]
+XStatus-Nachrichtenänderrung
+[XStatus removed]
+XStatus-Entfernung
+
+[Log to message window]
+Loggen im Nachrichtenfenster
+
+[[%s-%s] %s (%s) changed XStatus ]
+[%s-%s] %s (%s) ändert den XStatus
+[Can't open the log file!]
+Log konnte nicht geöffnet werden!
+
+[Enable XStatus notify]
+Aktiviere XStatus-Benachr.
+[Enable XStatus logging]
+Aktiviere XStatus-Logging
+[Use Popup colours]
+Benutze Popup-Farben
+
+[Enable status notification]
+Aktiviere Statusbenachrichtigung
+[Disable status notification]
+Deaktiviere Statusbenachrichtigung
+[Statuses messages]
+Statusnachrichten
+[Disable for extra status 'Music']
+Deaktiviere für den XStatus 'Musik'
+[Truncate message length to:]
+Kürze Länge der Nachricht auf:
+[Title - text delimiter:]
+Titel-Text-Trennzeichen:
+[New message:]
+Neue Nachricht:
+[New status:]
+Neuer Status:
+[Toggle status notification]
+Wechsel Statusbenachrichtigungen
+[Status notification enabled]
+Statusbenachrichtigung aktivieren
+[Status notification disabled]
+Statusbenachrichtigung deaktivieren
+
+;Popups (xstatus.h)
+[changed %N to: %T%D%I]
+änderte %N in: %T%D%I
+[changed %N message to:%D%I]
+änderte %N-Nachricht in:%D%I
+[removed %N]
+entfernte %N
+[changed %N @ %T%D%I]
+änderte %N @ %T%D%I
+[changed %N message @ %I]
+änderte Nachricht für %N @ %I
+[has %N @ %T%D%I]
+hat %N @ %T%D%I
+[Extra status changed]
+XStatus wurde geändert
+[Extra status removed]
+XStatus wurde entfernt
+[Extra status message changed]
+XStatusnachricht wurde geändert
+[This is status message]
+ Dies ist eine Statusnachricht
+
+;Variables help text
+[These variables are available:\r\n\r\n\%N\textra status name (Xstatus, Mood, Activity)\r\n\%T\textra status title\r\n\%I\textra status text\r\n\%D\tdelimiter\r\n\%B\tline break (can be used as delimiter)]
+Diese Variablen stehen zur Verfügung:\r\n\r\n\%N\tXStatusname (XStatus, Mood, Activity)\r\n\%T\tXStatustitel\r\n\%I\tXStatustext\r\n\%D\tTrennzeichen\r\n\%B\tZeilenumbruch (kann als Trennzeichen benutzt werden)
+
+;resource.rc (aus Kompatibilitätsgründen einige Strings gekürzt!)
+[Automatically turn off Popups and Sounds on status change]
+Deaktiviere automatisch Popups und Klänge bei Statusänderung
+[Don't notify me for people not in my Contact List]
+Nicht benachrichtigen bei Leuten, die nicht in meiner Kontaktliste sind
+[Go to Customize -> Sound to select the sounds]
+Gehen Sie zu Customize -> Klänge und wählen Sie die Klänge aus
+[Extra status notify]
+XStatusbenachrichtigung
+[Extra status logging]
+XStatusaufzeichnung
+[Prevent identical logs]
+Verhindere identische Aufzeichnungen
+[Keep events in history]
+Behalte Ereignisse im Verlauf
+[Disable when my status is:]
+Deaktivieren, wenn mein Status:
+[Disable only if I change global status ]
+Deaktiviere nur, falls ich den globalen Status ändere
+[Enable logging extra status to message window]
+Aktiviere XStatus-Aufzeichnung im Nachrichtenfenster
+[Disable only if I change global status]
+Deaktiviere nur, falls ich den globalen Status ändere
+[Read status message]
+Lese Statusnachricht
+[Use alternative descriptions]
+Benutze alternative Beschreibung
+[Show status description]
+Zeige Statusbeschreibung
+[Show contact group name]
+Zeige Kontaktgruppenname 
+
+; options.cpp
+[Show available variables]
+Zeige verfügbare Variablen
+[Reset all templates to default]
+Setze alle Vorlagen auf Standard zurück

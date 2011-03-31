@@ -1,0 +1,192 @@
+; Pluginname: FTP File 
+; Version: 0.0.1.1 (alt)
+; Dateiname: ftpfile.dll
+; Autor: Joel Jonsson
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=981
+; Übersetzung: miroerr
+
+; Pluginname: FTP File YM 
+; Version: 0.5.0.0 (neu)
+; Dateiname: ftpfile.dll
+; Autoren: Joel Jonsson, yaho
+; Unique ID: {9502e511-7e5d-49a1-8ba5-b1aee70fa5bf}
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3714
+; Übersetzung: Tuxman
+
+;Main
+;Open file dialog
+[FTP file - Select files]
+FTP File - Wählen Sie Dateien aus
+[Default FTP server]
+Standard FTP-Server
+[Use passive mode]
+Benutze Passiv-Modus
+[Enter archive name manually (not implemented)]
+Vergebe Archivnamen manuell (nicht implementiert)
+[Compression level:]
+Kompressionsstufe:
+
+;Error messages
+[FTP File YM won't be loaded because libcurl.dll is missing or wrong version!]
+FTP File YM konnte nicht geladen werden, da die libcurl.dll fehlt, im falschen Verzeichnis liegt oder in der falschen Version vorliegt.
+[Error has occurred while trying to create a dialog!]
+Es ist ein Fehler aufgetreten, weil Sie versucht haben, einen Dialog zu erstellen.
+[You have to fill and enable at least one FTP server in setting.]
+Sie müssen erst die FTP-Server Einstellungen ausfüllen und aktivieren.
+[You have to fill FTP server setting before upload a file.]
+Sie müssen erst die FTP-Server einstellungen vornehmen, bevor Sie eine Datei uploaden können.
+[FTP File Error]
+FTP File - Fehler
+[You must change the settings before you FTP a file.]
+Sie müssen die Einstellungen ändern, bevor Sie eine Datei mittels FTP senden.
+[Error calling function InternetOpen]
+Fehler beim Aufruf der Funktion InternetOpen
+[Error connecting to server]
+Fehler bei der Verbindung zum Server
+[Aborting all files...]
+Breche alle Dateien ab...
+[Could not change remote directory to %s (%d, %d)\n\nMore info:\n%s\n\nRetry will try to create the directory]
+Konnte Verzeichnis nicht zu %s wechseln (%d, %d)\n\nWeitere Informationen:\n%s\n\nWiederholen wird versuchen das Verzeichnis zu erstellen
+[Could not change remote directory to %s (%d)\n\nRetry will try to create the directory]
+Konnte Verzeichnis nicht zu %s wechseln (%d)\n\nWiederholen wird versuchen das Verzeichnis zu erstellen
+[Could not create directory]
+Konnte Verzeichnis nicht erstellen
+[Error opening local file %s]
+Fehler beim Öffnen der lokalen Datei %s
+[Ignoring this file: %s]
+Ignoriere diese Datei: %s
+[Error opening file on server]
+Fehler beim Öffnen der Datei auf dem Server
+[Error writing remote file file %s]
+Fehler beim Schreiben der entfernten Datei %s
+[Error reading local file %s (%d)\nIgnoring this file...]
+Fehler beim Lesen der Datei %s (%d)\nIgnoriere Datei...
+[%s\nsent bytes (%d) didn't match filesize (%d)]
+%s\ngesendete Bytes (%d) stimmten nicht mit Dateigröße (%d) überein
+[FtpCommand error]
+Fehler im FTP-Befehl
+[Ignoring error.]
+Ignoriere Fehler.
+[%s (%d, %d)\n\nMore info:\n%s\n\n%s]
+%s (%d, %d)\n\nWeitere Informationen:\n%s\n\n%s
+[Do you want to delete a partially uploaded file?]
+Wollen Sie eine teilweise hochgeladene Datei löschen?
+[Could not delete file from server]
+Konnte Datei nicht löschen
+
+;Upload dialog 
+[FTP File (uploading file)]
+FTP-Datei (hochladend)
+[FTP File (paused)]
+FTP-Datei (Pause)
+[Upload info]
+Uploadinfos
+[Upload speed:]
+Uploadgeschw.:
+[Cancel all]
+Alle abbr.
+
+;Sounds
+[File upload complete]
+Dateiupload abgeschlossen
+[Upload canceled]
+Upload abgebrochen
+
+;Icons
+[Send file]
+Datei senden
+[FTP Server %d]
+FTP-Server %d
+
+;Options page
+[FTP server]
+FTP-Server
+[Directory on server]
+Serververzeichnis
+[Command after upload]
+Befehl nach Upload
+[Use Passive mode]
+Passiven Modus nutzen
+[File URL options]
+Datei-URL-Optionen
+[Automatically send URL to the contact]
+Automatisch URL an Kontakt senden
+[Copy URL to message log]
+URL in Verlauf kopieren
+[Copy URL to clipboard]
+URL in die Zwischenablage kopieren
+[Remove national characters from filename]
+Entferne Sonderzeichen aus Dateinamen
+
+; Hotkeys
+[Show FTPFile manager]
+Zeige FTP-File-Dialog
+
+[Account name]
+Kontoname
+[Aborting file upload...]
+Dateiupload abgebrochen...
+[Automatically delete file from FTP server after (experimental):]
+Datei automatisch vom FTP-Server löschen nach: (experimentell)
+[Autosend download link to contact]
+Sende Downloadlink automatisch an Kontakt
+[Close dialog after upload is completed]
+Schließe Dialog, wenn der Dateiupload abgeschlossen ist
+[Close dialog after upload finishes]
+Schließe Dialog, wenn Dateiupload fertig ist
+[Completed:]
+Abgeschlossen:
+[Copy download link to message log]
+Kopiere Downloadlink ins Nachrichtenfenster
+[Copy link to clipboard]
+Kopiere Link in die Zwischenablage
+[Could not change remote directory.\nDo you want to upload file?]
+Konnte Remoteverzeichnis nicht ändern.\n Wollen Sie die Datei hochladen?
+[Download url:]
+Downloadlink:
+[Enter archive name manually]
+Archivnamen manuell setzen
+[Error occurred when connecting to server.]
+Es ist ein Fehler beim Verbinden aufgetreten.
+[Error occurred when creating file on server: %s\nCheck your firewall setting (especially ESS users).]
+Es ist ein Fehler bei der Dateierstellung aufgetreten: %s\nKontrollieren Sie ihre Firewall-Einstellungen.
+[Error occurred when executing FTP command.]
+Es ist ein Fehler beim Ausführen eines FTP-Befehls aufgetreten.
+[Error occurred when opening local file.\nAborting file upload...]
+Es ist ein Fehler beim Öffnen der lokalen Datei aufgetreten.\nDateiupload wird abgebrochen...
+[Error occurred when writing file on server: %s]
+Es ist ein Fehler beim Schreiben der Datei aufgetreten: %s
+[File download link]
+Dateidownloadlink
+[File: %s\r\nUpload is finished!]
+Datei: %s\nUpload ist abgeschlossen!
+[FTP account]
+FTP-Konten
+[Hide inactive accounts]
+Verstecke inaktive Konten
+[Host name]
+Hostname
+[Ignoring error...]
+Ignoriere Fehler...
+[Menu items]
+Menüeinträge
+[Sending for:]
+Gesendet an:
+[Upload manager - %d file(s)]
+Uploadmanager - %d Datei(en)
+[Use submenu (restart required)]
+In Untermenü anzeigen (Neustart notwendig)
+[You have to fill FTP server setting before upload file.]
+Sie müssen die FTP-Daten eingeben, bevor Sie eine Datei hochladen können.
+
+;FTP-Dateimanager
+[Delete from FTP]
+Vom FTP löschen
+[Delete from list]
+Aus Liste löschen
+[Deselect all]
+Markierungen aufheben
+[FTP File manager]
+FTP-Dateimanager
+[No files...]
+Keine Dateien...

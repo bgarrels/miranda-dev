@@ -1,0 +1,26 @@
+; Pluginname: mDynDNS 
+; Version: 0.8.1.2
+; Dateiname: mDynDNS.dll
+; Autor: kirsen, merlin
+; Link: http://code.google.com/p/merlins-miranda/downloads/list
+; Übersetzung: 30.06.07 von Foso
+
+[Register new account on dyndns.org]
+Ein neues Konto auf dyndns.org registrieren...
+[Your IP on dyndns.org account, has been updated.]
+Ihre IP auf dyndns.org, wurde aktualisiert.
+[Netlib Connection Error.]
+Netlib Verbindungsfehler
+[Enable updating notification]
+Updatebenachrichtigung aktivieren
+[Enable error popups]
+Fehlerpopups aktivieren
+[There was a serious problem with updating domain alias to it's previous IP. In order not to get abuse the mDynDns plugin will stop working. To get additional information please refer to the readme.txt.]
+Beim Updaten des Domain Alias auf eine frühere IP wurde ein ernstes Problem festgestellt. Um den Dienst nicht zu überlasten wird das mDynDns-Plugin seine Versuche vorübergehend einstellen. Für weitere Informationen konsultieren Sie bitte die readme.txt.
+
+[Your IP]
+Ihre IP-Adresse
+[Next IP check in:]
+Nächste IP-Prüfung in:
+[Your account details are incomplete. Please check your account details.]
+Ihre Kontodaten sind unvollständig. Bitte prüfen Sie diese!

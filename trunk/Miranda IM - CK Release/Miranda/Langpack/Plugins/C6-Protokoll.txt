@@ -1,0 +1,321 @@
+; Pluginname: C6 Protocol 
+; Version: 0.1.6.2
+; Dateiname: c6.dll
+; Download (alte Version): http://addons.miranda-im.org/details.php?action=viewfile&id=2450
+; Aktuelle Version: http://r3vindt.altervista.org/
+; Übersetzung: 18.04.2009 von Sebijk
+
+[C6 Protocol]
+C6-Protokoll
+[Atlantide/C6 Protocol for Miranda IM]
+Atlantide/C6-Protokoll für Miranda IM
+
+[Invite User]
+Benutzer einladen
+[New Room]
+Neuer Raum
+[Set Status Message]
+Statusnachricht setzen
+[Secretariat]
+Sekretariat
+[Select User]
+Benutzer auswählen
+[View Profile]
+Profil ansehen
+
+[Chat Invite Event]
+Chateinladungs-Ereignisse
+[Invitation]
+Einladungen
+[Load C6 Contacts]
+C6-Kontakte laden
+[Load Contact List]
+Kontaktliste laden
+[Load from file]
+Aus Datei laden
+[Read Online Message]
+Onlinenachricht lesen
+[Save C6 Contacts]
+C6-Kontakte speichern
+[Save Contact List]
+Kontaktliste speichern
+[Save on file]
+Speichern in Datei
+[Web Details]
+Web-Details
+[Web Search]
+Websuche
+[client-to-client connections]
+Client-zu-Client-Verbindungen
+[server connection]
+Server-Verbindung
+
+[(*) required restart]
+(*) benötigt Neustart
+[(Modify My Details)]
+(Meine Details ändern)
+[0 rooms]
+0 Räume
+;[Argument]
+[Automatic Connected with Last Nick (only New Login)]
+Automatisch mit dem letzten Nicknamen verbinden (nur beim neuen Login)
+[Automatic Remove Avatar Unused on Exit]
+Unbenutzte Avatare beim Beenden automatisch entfernen
+;[Avatar Unused Cleaning]
+[Blacklist]
+Schwarze Liste
+;[C6]
+[C6 Account Setup]
+C6-Konto konfigurieren
+[C6 UniqueKey or Nick:]
+C6-UniqueKey oder Nick:
+[C6 UniqueKey or Nickname:]
+C6-UniqueKey oder Nickname:
+[Choose WhiteList or BlackList]
+Weiße oder Schwarze Liste wählen
+[Cinema:]
+Video:
+[Clean]
+Leeren
+[Clear Msg]
+Nachrichten leeren
+[Comment:]
+Kommentar:
+[Create !]
+Erstellen !
+[Create a new C6 messenger account using the C6 website]
+Ein neues C6-Messengerkonto über die C6-Website erstellen
+[Deliver them on Mail Box]
+Auf dem E-Mail-Postfach ausliefern
+[Deliver them on Miranda IM]
+Auf Miranda IM ausliefern
+;[Dislike:]
+[Enable Avatar Support (*)]
+Avatar-Unterstützung aktivieren (*)
+[Enable Server-side contact list]
+Serverseitige Kontaktliste aktivieren
+;[Flags:]
+[Force Auth request (*)]
+Autorisierungsanfrage erzwingen (*)
+[Get Extended Capabilities from Server (reconnection request)]
+Erweiterte Fähigkeiten vom Server holen (Verbindungswiederherstellungsanfrage)
+[Groupchat Invite]
+Gruppenchat-Einladung
+[IP Visible]
+IP-Adresse zeigen
+[Ignore Message]
+Ignorier-Nachricht
+[Insert nick]
+Nickname eingeben
+[Invisible Status in Advanced Search]
+Unsichtbarkeitsstatus in der erweiterten Suche
+[Invite !]
+Einladen !
+[Invite Message]
+Einladungsnachricht
+;[Kind]
+[Last Online:]
+Zuletzt online:
+;[Load Preferred Search]
+[Manage C6 Server Contacts]
+C6-Serverkontakte verwalten
+[Music:]
+Musik:
+[No Notification and authorization]
+Keine Benachrichtigung und Autorisierung
+[No Secretariat (use Contact List)]
+Kein Sekretariat (Kontaktliste verwenden)
+[Notification when someone insert you in own contact list]
+Status in der erweiterten Suche unsichtbar machen
+[Offline Messages]
+Offlinenachrichten
+[Permissions]
+Rechte
+[Please enter your C6 account details to continue:]
+Bitte geben Sie Ihre C6-Kontodaten zum Fortfahren ein:
+[Popup Messages]
+Popup-Nachrichten
+;[Programme]
+[Required always your authorization]
+Benötigt immer Ihre Autorisierung
+[Reset Search]
+Suche zurücksetzen
+[Room Create]
+Raum erstellen
+[Room Name]
+Raumname
+[Save Preferred Search]
+Bevorzugte Suche speichern
+[Save server data on File]
+Serverdaten speichern auf Datei
+[Secretariat Not Visible]
+Sekretariat nicht sichtbar
+[Send Typing Notification (*)]
+Tippbenachrichtigungen senden (*)
+[ServerList]
+Serverliste
+[Show Welcome Message Periodically]
+Willkommensnachricht immer anzeigen
+[Use BBCodes (for Text Formatting)]
+BBCodes benutzen (für Textformatierung)
+[Use Default Log]
+Standard-Log benutzen
+[Whitelist]
+Weiße Liste
+[Work:]
+Arbeiten
+;[XCAP]
+
+[%d room(s)]
+%d Raum/Räume
+[C6 Private]
+C6 privat
+[C6 Public]
+C6 öffentlich
+[Cinema/Tv]
+Kino/TV
+[Cities]
+Städte
+[Create Room]
+Raum erstellen
+;[Entry Into...]
+;[Hi Tech]
+[Invite from %s]
+Einladung vom %s
+[Loading...]
+Laden...
+[Netfriend Private]
+Netfriend privat
+[Netfriend Public]
+Netfriend öffentlich
+[No Room Name Specified]
+Kein Raumname spezifiziert
+[No Update]
+Kein Update
+[Online Message]
+Onlinenachricht
+[Reply To...]
+Antworten zu...
+[Room create by]
+Raum erstellt von
+[Try To enter in This Room?\nWarning: It Can be a Private NetFriend Room.]
+Möchten Sie diesen Raum betreten?\nWarnung: Es könnte eventuell ein privater Netfriend-Raum sein.
+[Update every 1 Minute]
+minütlich aktualisieren
+[Update every 3 Minutes]
+alle 3 Minuten aktualisieren
+[Update every 5 Minutes]
+alle 5 Minuten aktualisieren
+[Warning: The content of this Room is not controlled by Virgilio]
+Warnung: Der Inhalt des Raums wird nicht von Virgilio kontrolliert
+[Welcome]
+Willkommen
+[set Password for Room]
+Kennwort für Raum setzen
+
+[Failed Connected.]
+Fehler beim Verbinden.
+
+[%i[Ignored]%I]
+%i[Ignoriert]%I
+[&Invite User...]
+Kontakt e&inladen
+[&Leave Room]
+Raum ver&lassen
+[Guest]
+Gast
+;[Impossible operation]
+;[Leader]
+;[Mod]
+;[Screened]
+[is not Ignored]
+wird nicht ignoriert
+[now is Ignored]
+wird nun ignoriert
+
+[BlackList]
+Schwarze Liste
+[Get List from Server...]
+Liste vom Server holen...
+[The changes you have made require you to reconnect to the C6 Messenger network before they take effect]
+Die Änderungen erfordern eine Neueinwahl zum C6-Messenger
+[WhiteList]
+Weiße Liste
+; protocols/oc6/c6_server.c
+[Invalid Packet/Protocol.]
+Falsches Paket/Protokoll.
+[Login: INVALID NAME.]
+Anmeldung: Ungültiger Name.
+[Login: No User.]
+Anmeldung: Kein Benutzer.
+[Login: Password Error.]
+Anmeldung: Kennwortfehler.
+[Login: User is already connected.]
+Anmeldung: Benutzer ist bereits verbunden.
+[Login: You have not entered a nick name.]
+Anmeldung: Sie haben keinen Nicknamen eingegeben.
+[Login: You have not entered a password.]
+Anmeldung: Sie haben kein Kennwort eingegeben.
+;[No Thread]
+[Packet Error, Close Connenction.]
+Paketfehler, Verbindung geschlossen.
+;[Room Create Busy.]
+[Room does not Exist.]
+Raum existiert nicht.
+[Room has Error.]
+Raum hat Fehler.
+[Room is Full.]
+Raum ist voll.
+[Server Maintenance.]
+Server-Wartungsarbeiten.
+[Socket Error, Close Connenction.]
+Socketfehler, Verbindung geschlossen.
+[This Room required a password]
+Dieser Raum benötigt ein Kennwort
+[Unable to connect to login server.]
+Es konnte keine Verbindung zum Anmeldeserver hergestellt werden.
+[User is Banned !]
+Benutzer ist gebannt!
+[You are banned from:]
+Sie wurden verbannt von:
+[has Added you to Contact List]
+hat Sie in der Kontaktliste hinzugefügt
+[requests Authorization in Server List]
+fragt nach der Autorisierung in der Serverliste
+
+[Cinema]
+Video
+[Contact is Offline, message sended anyway.]
+Kontakt ist offline, Nachricht wurde trotzdem gesendet
+;[Dislike]
+[File Transfer: No Memory available.]
+Dateitransfer: Nicht genügend Arbeitsspeicher verfügbar.
+[Men]
+Männer
+[Message in Secretariat]
+Nachricht im Sekretariat
+[Messages to contacts must be shorter than 512 characters.]
+Nachrichten an Kontakte müssen kürzer als 512 Zeichen sein.
+
+[Sorry, You are in My Ignore List!]
+Entschuldigung, aber Sie sind in meiner Ignorierliste!
+
+[http Request failed: 1]
+HTTP-Request fehlgeschlagen: 1
+[http Request failed: 2]
+HTTP-Request fehlgeschlagen: 2
+
+[Last Nick (only New Login)]
+Letzten Nick verwenden (nur beim neuen Login)
+[No Secretariat (use clist)]
+Kein Sekretariat verwenden (clist benutzen)
+[Secretariat Not Visible]
+Sekretariat verstecken
+[Use BBCodes]
+BBCodes verwenden
+[Use New Room (*)]
+Neuen Raum verwenden (*)
+[Get Extended Capabilities from Server (XCAP) (*)]
+Erweiterte Fähigkeiten vom Server holen (XCAP) (*)
+[Avatar Support (*)]
+Avatar-Unterstützung aktivieren (*)

@@ -1,0 +1,39 @@
+; Pluginname: VyChat 
+; Version: 0.2.0.0
+; Dateiname: VyChat.dll
+; Autor: Mr.Mag!K
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=641
+; Übersetzung: Foso am 10.4.07
+
+[Accept private messages from contacts not on my list]
+Nachrichten von Kontakten außerhalb meiner Liste akzeptieren
+[VyChat: Join channel]
+VyChat: Channel betreten
+[Away message:]
+Abwesenheitsnachricht:
+[DND message:]
+DND Nachricht: 
+[VyChat group name:]
+VyChat Gruppenname:
+[Remove contacts from list when they go offline]
+Kontakte von der Liste löschen wenn sie offline gehen
+[Alert sound]
+Alarm Sound
+[Use current logged on user]
+Aktuellen Benutzer benutzen
+[Change topic]
+Topic ändern
+[Wait for replies:]
+Warten auf Antworten:
+[(double-click to remove)]
+(Doppelklick zum Löschen)
+[Show popup when user joins a channel you are in]
+Popup wenn ein User einen Channel betritt indem ich bin
+[Show popup when user joins a channel you are on]
+Popup wenn jemand einen Channel betritt indem ich bin
+[Show popup when user parts a channel you are on]
+Popup wenn jemand einen Channel teilt indem ich bin
+[Show popups with channel topics]
+Popup mit Channeltopics anzeigen
+[Send all private messages as Vypress Chat popup msgs]
+Alle Privatnachrichten als Popupnachrichten anzeigen

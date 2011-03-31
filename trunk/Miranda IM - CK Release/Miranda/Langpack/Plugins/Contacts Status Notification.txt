@@ -1,0 +1,106 @@
+; Pluginname: Contacts Status Notification
+; Version: 0.1.2.2
+; Dateiname: StatusChange.dll
+; Autor: j110
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1702
+; Übersetzung: 17.12.05 von Stefan1200
+; Besonderheiten: Entwicklung eingestellt!
+
+[Contacts Status]
+Kontakt Status
+[Icon blinking]
+Blinkendes Icon
+[Individual sounds]
+Individuelle Klänge
+[Don't notify after protocol connection]
+Nicht nach Protokollverb. benachricht.
+[Watch selected protocols]
+Überwache ausgewählte Protokolle
+[Use Events/Ignore/Online settings]
+Verw. Ereign./Ignor./Onl. Einstellungen
+[Notify if protocol disconnected]
+Anz. wenn d. Protok. die Verb. trennt
+[Contacts notification]
+Kontakt Benachrichtigung
+[Any changes]
+Alle Änderungen
+[Become from Offline]
+Wenn vorher Offline
+[Go to && become from Offline]
+Ändert zu && wenn vorher Offline
+[Selected statuses]
+Ausgewählte Status
+[Everyone becomes from Offline]
+Jedermann war vorher Offline
+[Use color:]
+Benutze Farbe:
+[Popup actions]
+Popup Aktionen
+[Contact info]
+Kontaktprofil
+[Disable popup]
+Deaktiviere Popup
+[Custom popup delay]
+Spezielle Popupverzög.
+[Show contact's gender (if available)]
+Zeige Kontaktgeschlecht (wenn vorh.)
+[Show previous status of contact]
+Zeige vorherigen Status vom Kontakt
+[Show away message (if available)]
+Zeige Abwesenheitsn. (wenn vorh.)
+[Status: From Offline]
+Status: Von Offline
+[Status: Away]
+Status: Abwesend
+[Status: DND]
+Status: Bitte nicht stören
+[Status: NA]
+Status: Außer Haus
+[Status: Occupied]
+Status: Beschäftigt
+[Status: Free for chat]
+Status: Für Chat bereit
+[Status: Invisible]
+Status: Unsichtbar
+[Status: On the phone]
+Status: Am Telefon
+[Status: Out to lunch]
+Status: Zum Essen
+[User is %s]
+Benutzer ist %s
+[User going to %s]
+Benutzer geht %s
+[%s\nUser has been %s]
+%s\nBenutzer war %s
+[%s\nMessage: %s]
+%s\nNachricht: %s
+[Nobody]
+Niemand
+[Some reason]
+Irgendein Grund
+[Enable &status change notification]
+Aktiviere &Status Änderungsbenachrichtigung
+[Disable &status change notification]
+Deaktiviere &Status Änderungsbenachrichtigung
+[Some protocol]
+Irgendein Protokoll
+[Color schema]
+Farbschema
+[Simple]
+Einfach
+[Online colors:]
+Online Farben:
+[Away colors:]
+Abwesend Farben:
+[Offline colors:]
+Offline Farben:
+[Custom color schema]
+Eigenes Farbschema
+[User status:]
+Benutzer Status:
+[User status]
+Benutzer Status
+[Use colors:]
+Verwende Farbe:
+[Custom colors:]
+Eigene Farben:

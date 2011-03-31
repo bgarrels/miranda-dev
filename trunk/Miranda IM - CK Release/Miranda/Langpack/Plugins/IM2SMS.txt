@@ -1,0 +1,22 @@
+; Pluginname: IM2SMS 
+; Version: 0.2.0.0
+; Dateiname: IM2SMS.dll
+; Autor: tornado
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3303
+; Übersetzung: 22.10.07 von Foso
+; Besonderheiten: Entwicklung eingestellt!
+
+[How do you want to activate IM2SMS?]
+Möchten Sie IM2SMS aktivieren?
+[Only from the main menu]
+Nur vom Hauptmenü
+[When I'm...]
+Wenn ich...
+[Target cellphone number:]
+Zieltelefonnummer:
+[(e.g. +97254XXXXXXX)]
+(z.B. +49254XXXXXXX)
+[Activate IM2S&MS]
+IM2S&MS aktivieren
+[Deactivate IM2S&MS]
+IM2S&MS deaktivieren 

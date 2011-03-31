@@ -1,0 +1,249 @@
+; Pluginname: ISee 
+; Version: 0.4.0.32 
+; Pluginname: ICQ BM 
+; Version: 0.5.0.4
+; Dateiname: ICQ.dll
+; Autor: Bio, Big Muscle
+; Link Bio: http://etplanet.com/bio/miranda/ICQ.dll
+; Link Big Muscle: http://home.karneval.cz/01027053/Miranda/
+; Besonderheiten: Entwicklung eingestellt!
+
+[Upload necessary groups]
+Notwendige Gruppen hochladen
+[Upload all groups]
+Alle Gruppen hochladen
+[Upload visible/invisible lists]
+Sichtbarkeitslisten hochladen
+[Upload ignore list]
+Ignorierlisten hochladen
+
+[ - MANUAL MODE - ]
+ - Manueller Modus -
+[REUPLOAD awaiting auth. contacts]
+Aut. für Kontakte neu hochladen
+[UPDATE nicknames on server]
+Nicknamen auf dem Server aktualisieren
+[UPLOAD all local list contacts]
+Alle lokalen Kontakte hochladen
+[UPLOAD shown in local list]
+sichtbare Kontakte aus lokaler Liste hochladen
+[DELETE not shown in local list]
+Kontakte nicht in lokaler Liste löschen
+[UPLOAD visible/invisible lists]
+(Un-)Sichtbarkeitsliste hochladen
+[DELETE visible/invisible lists]
+(Un-)Sichtbarkeitsliste löschen
+
+[<unremovable once applied>]
+<kann nachträglich nicht entfernt werden>
+
+[ICQ Account Setup]
+ICQ-Accounteinstellungen
+[Hyperlink]
+Link
+[Please enter your ICQ account details to continue:]
+Um fortzufahren, bitte ICQ-Nummer und Passwort eingeben, oder erstellen Sie einen neuen Account:
+[Enter an authorization request]
+Autorisierungsanfrage eingeben
+[This Mod is dedicated to Samuel-Khanh Giang, who will forever live in our hearts!]
+Diese Mod ist Samuel-Khanh Giang gewidmet, der immer in unseren Herzen weiterlebt!
+
+; resources.rc:IDD_OPT_ICQ
+[User ID and password]
+Nutzer-ID und -Passwort
+[Hint: ICQ number must be empty to have ability register new one.]
+Hinweis: ICQ-Feld muss leer sein um einen neuen Account anzulegen.
+[* WARNING * EgoBrain and his "HotCoffee project" are GPL violators!, Using my plugins in "HotCoffee project" is strictly prohibited!]
+Bitte beachten Sie, dass das Ändern der "ClientID" unlösbare Probleme hervorrufen kann! BEVOR Sie Fehler berichten, ändern Sie sie auf "Miranda IM"!
+[Quick login]
+Schnellere Anmeldung
+
+[%s Contacts]
+%s Kontakte
+
+[Update my contacts' nicks from the server]
+Nicks der Kontakte vom Server aktualisieren
+[Add and remove contacts from the server's list when I add/remove them from mine]
+Änderungen (Löschen/Hinzufügen) an meiner Liste auch auf dem Server durchführen
+[Rename contacts on the server's list when I rename them in mine]
+Benenne Kontakte auf der Serverliste um, wenn sie lokal umbenannt werden
+
+[Check avatar validity before saving]
+Vor dem Speichern auf Gültigkeit prüfen (*)
+[Link avatars as contact photos (mToolTip photos)]
+Avatare als Kontaktfotos verlinken (mToolTip-Fotos)
+[You will need to reconnect to the ICQ network for the changes you have made on this page to take effect.]
+Die Änderungen werden erst nach einer Neuverbindung zum ICQ-Netzwerk aktiv.
+
+[To enable RTF text reciving you must reconnect your Miranda after option is enabled]
+Die RTF-Schriftformatierungen können momentan AUSSCHLIESSLICH vom HISTORY++-Plugin dargestellt werden!!\n*ALLE* Nachrichten werden aber UNWIDERRUFLICH MIT FORMATIERUNGSZEICHEN gespeichert!\n\nUm RTF-Textempfang zu aktivieren muss Miranda neu gestartet werden.
+[Show icon in contact list, if connection establised]
+Icon in der Kontaktliste bei Verbindung anzeigen
+
+[Advanced Features]
+Erweiterte Funktionen
+[Incognito Status-Message request]
+Versteckte Statusnachrichtenanfrage
+[Incognito Away-Request]
+Statusnachricht lesen (versteckt)
+[Privacy Menu && Users Status Scan Placement]
+Privatsphäremenü- und Benutzerstatusscan-Platzierung
+
+[%s Privacy]
+%s Privatsphäre
+
+[Allow direct connections only for file transfers and chats]
+Direktverbindungen nur für Dateiübertragungen und Chats nutzen
+
+; resources.rc:IDD_OPT_POPUPS
+[Popup when unknown detected]
+..wenn unbek. Client entdeckt wird
+
+[Enabled ?]
+Aktiviert?
+
+[ICQ Client Info]
+ICQ-Client-Info
+[Universal Protocol Features]
+Allgemeine Protokollfunktionen
+[Miranda Features]
+Miranda-Funktionen
+[Miranda Features (unknown)]
+Miranda-Funktionen (unbekannt)
+[Unknow Flags (decoded)]
+Unbekannte Flags (dekodiert)
+[Unknown Flags (other)]
+Unbekannte Flags (andere)
+[ICQ Contact Info]
+ICQ-Kontakt-Info
+[Member since:]
+Benutzer seit:
+[Client Name:]
+Benutzerclient:
+[&Check Status / IP]
+&Status/IP ermitteln
+[&Check Status]
+&Status ermitteln
+[Check &Miranda]
+&Miranda prüfen
+[&Get Capabilities]
+&Funktionen prüfen
+[&Retrieve IP]
+IP e&rmitteln
+[&Ignore Check]
+&Ignorieren prüfen
+[Msg Ignored!]
+Nachricht ignoriert!
+[Msg Accepted!]
+Nachricht akzeptiert!
+; IDD_INFO_ICQ
+
+[Sample Unknown]
+Beispiel: Unbekannter Client
+; ICQ Plus Popups
+[Advanced PopUps options]
+Erweiterte Popupeinstellungen
+[Sample User Status Scan Started]
+Beispiel: Benutzerstatusscan gestartet
+[Sample Users Status Scan Started]
+Beispiel: Benutzerstatusscan gestartet
+[Sample User Status Scan Complete]
+Beispiel: Benutzerstatusscan abgeschlossen
+[Sample Users Status Scan Complete]
+Beispiel: Benutzerstatusscan abgeschlossen
+[Sample ...was found!]
+Beispiel: ... wurde gefunden!
+[Sample Spambot Found]
+Beispiel: Spambot gefunden
+[Sample Unknown Found]
+Beispiel: Es wurde etwas unbekanntes gefunden
+[Sample Visibility event]
+Beispiel: Sichtbarkeitsereignis
+[Sample ClientChange event]
+Beispiel: Clientwechselereignis
+[Check Your Ignore State]
+überprüft, ob Sie ignoriert werden
+[Removed Himself]
+Löscht sich selbst
+[XStatus Updater]
+XStatus-Änderung
+
+[Privacy Settings]
+Privatsphäre-Einstellungen
+[Default, corresponding to status]
+Standard (abhängig vom Status)
+[As previous except Invisible list users]
+Wie zuvor, ausgenommen Kontakte in der Unsichtbarkeitsliste
+
+; init.c
+[Request authorisation]
+Autorisierung anfragen
+[Grant authorisation]
+Autorisierung gewähren
+[Remove me from user's list]
+Entferne mich von der Kontaktliste des Kontakts
+[Please re-type your new password in order to confirm it before it is updated.]
+Bitte neues Passwort vor der Aktualisierung zum Bestätigen nochmals eintippen.
+
+; icq_fieldnames.c
+
+; changeinfo/constants.c
+; [Web Building]
+; [Other Services]
+
+; UI/askauthentication.c
+[Please authorize me to add you to my contact list.]
+Bitte autorisiere mich für das Hinzufügen zu meiner Kontaktliste.
+
+; UI/loginpassword.c
+[Enter a password for UIN %u:]
+Bitte Passwort für UIN %u eingeben:
+
+[Autorization Granted]
+Autorisierung gewährt
+[Autorization Denied]
+Autorisierung abgelehnt
+[Authorization Granted]
+Autorisierung gewährt
+[Authorization Denied]
+Autorisierung abgelehnt
+[Contact Removed Self]
+Kontakt löscht sich selbst
+
+
+[Are you sure you want to remove yourself from this user's contact list ?]
+Sind Sie sich sicher, dass Sie von der Kontaktliste dieses Benutzers entfernt werden wollen?
+[Are you sure you want to revoke user's authorisation (this will remove you from his/her list on some clients) ?]
+Sind Sie sich sicher, dass Sie diesem Kontakt Ihre Autorisierung entziehen wollen? Dies entfernt Sie von dessen Kontaktliste in einigen Clients.
+[Other clients]
+Sonstige Clients
+[Us&er Status]
+B&enutzerstatus
+[Status Scan Complete]
+Benutzerstatusscan abgeschlossen
+[ICQ: Status Scan Complete]
+ICQ: Benutzerstatusscan abgeschlossen
+[The contact does not support receiving offline messages.]
+Dieser Kontakt unterstützt keine Offlinenachrichten.
+
+; Icon (Einstellungen -> Icons -> ICQ)
+[Incognito Request]
+Statusnachricht lesen (versteckt)
+[Manage Server List]
+Serverliste verwalten
+[Direct Connection]
+Direkte Verbindung
+[Scan]
+Scannen
+[Scan start]
+Scannen begonnen
+[Scan pause]
+Scannen pausiert
+[Scan stop]
+Scannen beendet
+[Advanced Features Menu]
+Erweiterte-Funktionen-Menü
+[Disable menu item]
+Menüpunkt deaktiviert
+[Enable menu item]
+Menüpunkt aktiviert

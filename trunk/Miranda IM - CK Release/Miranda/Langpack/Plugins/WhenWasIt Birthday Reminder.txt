@@ -1,0 +1,172 @@
+; Pluginname: WhenWasIt Birthday Reminder 
+; Version: 0.3.2.5
+; Dateiname: WhenWasIt.dll
+; Autor: eblis
+; Link ANSI: http://addons.miranda-im.org/details.php?action=viewfile&id=2878
+; Link Unicode: http://addons.miranda-im.org/details.php?action=viewfile&id=3037
+; Übersetzung: 29.06.06 von Weishaupt
+
+[Notifies you of upcoming birthdays.]
+Erinnert Sie an kommende Geburtstage.
+[%s has birthday in %d days.]
+%s hat in %d Tagen Geburtstag.
+[%s has birthday tomorrow.]
+%s hat morgen Geburtstag.
+[%s has birthday today.]
+%s hat heute Geburtstag.
+[%s had birthday %d days ago.]
+%s hatte vor %d Tagen Geburtstag.
+[%s had birthday yesterday.]
+%s hatte gestern Geburtstag.
+[Birthday - %s]
+Geburtstag - %s
+[%s\n%s will be %d years old.]
+%s\n%s wird %d Jahre alt.
+[%s\n%s just turned %d.]
+%s\n%s ist %d geworden.
+[DTB]
+TZG
+[Set birthday for %s:]
+Setze Geburtstag für %s:
+[Upcoming birthdays]
+Kommende Geburtstage
+[No upcoming birthdays.]
+Keine kommenden Geburtstage.
+[Starting to refresh user details]
+Beginne Kontaktdetails auf neusten Stand zu bringen
+[Done refreshing user details]
+Kontakt Details wurden auf den neusten Stand gebracht
+;Nicht mehr in Sprachdatei???
+[Show all contacts]
+Alle Kontakte zeigen
+[In background]
+im Hintergrund
+[Notify of birthdays using:]
+Benachrichtige über Geburtstage mittels:
+[Set popup delay when notifying of upcoming birthdays.\nFormat: default delay [ | delay for birthdays occuring today]]
+Popupverzögerung bei Geburtstagserinnerungen einstellen.\nFormat: Standardverzögerung ( | Verzögerung für heutige Geburtstage )
+[Don't show popups for subcontacts]
+Keine Popups für Unterkontakte zeigen
+[Show popup when no birthdays are near]
+Popups auch zeigen, wenn keine nahen Geburtstage
+[Popup mouse click]
+Mausklick auf Popup
+[Use slot]
+Verwende
+[to draw icon.]
+für Icons.
+[Play sounds when there are]
+Klang spielen, wenn nur noch
+[days or less to birthday.]
+Tage oder weniger zum Geburtstag.
+[Start notifying ]
+Erinnere mich
+[days in advance and]
+Tage im Voraus und
+[afterwards]
+danach
+[hours.]
+Stunden.
+[Only notify once per day.]
+Nur 1x am Tag benachrichtigen
+[By default use]
+Benutze
+[Contact list icon]
+Kontaktlisten-Icon
+[to save birthday data.]
+zum Speichern der Geburtstagsdaten.
+[Upcoming age]
+Kommendes Alter
+[Current age]
+Aktuelles Alter
+[in birthday list window]
+in der Geburtstagsliste.
+[Notify for]
+Benachrichtige für
+[All contacts except hidden ones]
+Alle nicht ausgeblendeten Kontakte
+[All contacts except ignored ones]
+Alle nicht ignorierten Kontakte
+[All contacts except hidden and ignored ones]
+Alle nicht ignorierten oder ausgeblendeten Kontakte
+[Check for birthdays]
+Prüfe Geburtstage
+[Birthday list]
+Geburtstagsliste
+[Refresh user details]
+Details aktualisieren
+[Import birthdays]
+Geburtstage importieren
+[Export birthdays]
+Geburtstage exportieren
+[Add/change user &birthday]
+Ge&burtstag ändern/hinzufügen
+[Birthday near]
+Geburtstag nahe
+[Birthday today]
+Geburtstag heute
+[Birthdays (When Was It)]
+Geburtstage (When Was It)
+[Please select a file to import birthdays from ...]
+Bitte Datei für den Import der Geburtstage wählen...
+[Please select a file to export birthdays to ...]
+Bitte Datei für den Export der Geburtstage wählen...
+[Exporting birthdays to file: %s]
+Exportiere Geburtstage in Datei: %s
+[Done exporting birthdays]
+Export der Geburtstage abgeschlossen
+[Importing birthdays from file: %s]
+Importiere Geburtstage aus Datei: %s
+[Done importing birthdays]
+Import der Geburtstage abgeschlossen
+[Could not find UID '%s [%s]' in current database, skipping]
+Kann die UID '%s [%s]' nicht in der aktuellen Profildatei finde, überspringe
+;ANSI version - please don't mix
+[Could not find UID '%s [%S]' in current database, skipping]
+Kann die UID '%s [%S]' nicht in der aktuellen Profildatei finde, überspringe
+;UNICODE version - please don't mix
+;UNICODE Version - Bitte nicht vermischen!
+[%s protocol]
+%s Protokoll
+;ANSI version - please don't mix
+;ANSI Version - Bitte nicht vermischen!
+[%S protocol]
+%S Protokoll
+;UNICODE version - please don't mix
+[Please select the module where you want the date of birth to be saved.\r\n\"UserInfo\" is the default location.\r\nUse \"Protocol module\" to make the data visible in User Details.\n\"mBirthday module\" uses the same module as mBirthday plugin.]
+Bitte wählen sie das Modul, in dem die Geburtsdaten gespeichert werden sollen.\r\n\"UserInfo-Modul\" ist das standardmäßige Modul.\r\nNutzen Sie \"Protokollmodul\" um die Daten im Kontaktprofil sichtbar zu machen.\n\"mBirthday-Modul\" nutzt das selbe Modul wie das mBirthday-Plugin.
+[Birthday list (%d)]
+Geburtstagsliste (%d)
+[UserInfo module]
+UserInfo-Modul
+[Protocol module]
+Protokollmodul
+[mBirthday module]
+mBirthday-Modul
+
+[1 day to birthday]
+1 Tag bis zum Geburtstag
+[2 days to birthday]
+2 Tage bis zum Geburtstag
+[3 days to birthday]
+3 Tage bis zum Geburtstag
+[4 days to birthday]
+4 Tage bis zum Geburtstag
+[5 days to birthday]
+5 Tage bis zum Geburtstag
+[6 days to birthday]
+6 Tage bis zum Geburtstag
+[7 days to birthday]
+7 Tage bis zum Geburtstag
+[8 days to birthday]
+8 Tage bis zum Geburtstag
+[9 days to birthday]
+9 Tage bis zum Geburtstag
+[more then 9 days to birthday]
+mehr als 9 Tage bis zum Geburtstag
+[Check birthdays menu item]
+Prüfe Geburtstage
+[List birthdays menu item]
+Geburtstagsliste
+[Add/change birthday]
+Geburtstag ändern/hinzufügen

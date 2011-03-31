@@ -1,0 +1,300 @@
+; Pluginname: YAMN tweety 
+; Version: 0.1.2.5
+; Dateiname: YAMN.dll
+; Autor(en): y_b tweety (majvan), merlin & mataes 
+; Unique ID: {b047a7e5-027a-4cfc-8b18-eda8345d2790}
+; Link: YAMN tweety http://addons.miranda-im.org/details.php?action=viewfile&id=2165
+
+[Check mail]
+E-Mails abrufen
+[Check &mail (YAMN)]
+E-&Mails abrufen
+[Bad user name or error while logging]
+Falscher Benutzername oder Fehler beim Login
+[Bad user or password or error while logging]
+Benutzer/Passwort falsch oder Fehler beim Login
+[Cannot get number of messages]
+Anzahl der Nachrichten nicht erhalten
+[Cannot resolve message signatures]
+Nachrichtensignatur nicht auflösbar
+[Cannot get sizes of messages]
+Größe der Nachricht nicht erhalten
+[Cannot find server]
+Kann Server nicht finden
+[Cannot connect to server]
+Kann nicht zum Server verbinden
+[System error occured]
+Systemfehler aufgetreten
+
+[Mail notifier and browser for Miranda IM. Included POP3 protocol.]
+E-Mail-Benachrichtigung und -Browser für Miranda IM über das POP3-Protokoll.
+
+[Check &mail (All Account)]
+E-&Mails von allen Konten abrufen
+
+[Do you also want to remove native YAMN plugins settings?]
+Möchten Sie vorherige YAMN-Einstellungen entfernen?
+[YAMN uninstalling]
+YAMN deinstallieren
+[This YAMN is intended for Windows 95, 98 or Me. You should use native WinNT version.]
+Diese YAMN-Version läuft nur unter Windows 95, 98 oder Me. Sie sollten die native WinNT-Version benutzen.
+[This YAMN cannot run on Windows 95, 98 or Me. Why? Read FAQ. You should download Win9x version.]
+Diese YAMN-Version läuft nicht unter Windows 95, 98 oder Me. Wieso? Lesen Sie die FAQ. Sie sollten die Version für Windows 9x herunterladen.
+[YAMN error]
+YAMN-Fehler
+[This YAMN beta version is intended for testing. After crash, you should send report to author. Please read included readme when available. Thank you.]
+Diese YAMN-Beta-Version ist nur zum Testen gedacht. Nach einem Absturz sollten Sie dem Autor die Fehlermeldung senden. Bitte lesen Sie dazu die beigefügte Liesmich-Datei, falls vorhanden. Danke.
+[This YAMN beta version is intended for testing. You should inform author if it works or when it does not work. Please read included readme when available. Thank you.]
+Diese YAMN-Beta-Version ist nur zum Testen gedacht. Sie sollten den Entwickler informieren, ob sie läuft oder nicht läuft. Bitte lesen Sie dazu die beigefügte Liesmich-Datei, falls vorhanden. Danke.
+[This YAMN creates extended debug logfiles. It is not intended for general use.]
+Diese YAMN-Version erstellt eine Debug-Logdatei. Diese ist für die normale Benutzung nicht nötig.
+[You have to delete manually YAMN plugins located in \"Plugins/YAMN\" folder.]
+Sie müssen manuell das YAMN-Plugin in dem Ordner \"Plugins/YAMN\" löschen.
+
+[YAMN: new mail message]
+YAMN: Neue E-Mail-Nachricht
+[YAMN: new mail]
+YAMN: Neue E-Mail
+[YAMN: connect failed]
+YAMN: Verbindung fehlgeschlagen
+
+[No new mail message]
+Keine neue E-Mail-Nachricht
+[No new mail]
+Keine neue E-Mail
+
+[- connection error]
+- Verbindungsfehler
+
+[Copy selected]
+Ausgewählte Nachrichten kopieren
+[Delete confirmation]
+Löschen bestätigen
+[%s - %d new mail messages, %d total]
+%s - %d neue E-Mails, %d gesamt
+[- new mail message(s)]
+- neue E-Mail(s)
+[ - new mail(s)]
+ - neue E-Mail(s)
+[%s : %d new mail message(s), %d total]
+%s : %d neue E-Mail(s), %d gesamt
+[%d new mail message(s), %d total]
+%d neue E-Mail(s), %d gesamt
+[No new mail message, %d spam(s)]
+Keine neue E-Mail, %d Spam-Mail(s)
+[No new mail, %d spam(s)]
+Keine neue E-Mail, %d Spam-Mail(s)
+[Check &mail (This Account)]
+E-&Mails von diesem Konto abrufen
+[Run application]
+Programm ausführen
+[Delete selected]
+Markierte E-Mail(s) löschen
+[Do you really want to delete %d selected mails?]
+Möchten Sie %d markierte Mail(s) wirklich löschen?
+[Mail source]
+E-Mail-Quelle
+
+[Connect Fail]
+Verbindungsfehlschlag
+[Launch application]
+Programm ausführen
+[Found new version of account book, not compatible with this version of YAMN.]
+Neuere Version einer Kontodatei gefunden, die nicht kompatibel mit dieser Version von YAMN ist.
+[YAMN (internal POP3) read error]
+YAMN (interner POP3)-Lesefehler
+[Error reading account file. Account file corrupted.]
+Fehler beim Lesen der Kontodatei. Kontodatei beschädigt.
+[Memory allocation error while data reading]
+Speicher-Zuordnungsfehler während des Lesens der Daten
+[Reading file error. File already in use?]
+Datei-Lesefehler. Datei bereits in Benutzung?
+[Error while copying data to disk occured. File in use?]
+Ein Fehler trat beim Kopieren der Datei auf. Datei in Benutzung?
+[POP3 plugin- write file error]
+POP3-Plugin - Datei-Schreibfehler
+[Connecting to server]
+Verbinde zum Server
+[Entering POP3 account]
+Eingabe des POP3-Kontos
+[Searching for new mail message]
+Suche nach neuen E-Mail-Nachrichten
+[Searching for new mail]
+Suche neue E-Mail(s)
+[Reading new mails (%d%% done)]
+Lese neue E-Mail(s) (%d%% fertig)
+[Deleting requested mails]
+Lösche angeforderte E-Mail(s)
+[Memory allocation error.]
+Speicher-Zuordnungsfehler.
+[Account is about to be stopped.]
+Konto wird angehalten.
+[Cannot connect to POP3 server.]
+Kann nicht zum POP3-Server verbinden.
+[Cannot allocate memory for received data.]
+Kann keinen Speicher für empfangene Daten zuordnen.
+[Cannot login to POP3 server.]
+Kann nicht auf POP3-Server einloggen.
+[Bad user or password.]
+Benutzername oder Passwort falsch.
+[Server does not support APOP authorization.]
+Server unterstützt keine APOP-Autorisierung.
+[Error while executing POP3 command.]
+Fehler beim Ausführen eines POP3-Befehls.
+[Cannot connect to server with NetLib.]
+Kann nicht via NetLib zum Server verbinden.
+[Cannot send data.]
+Kann Daten nicht senden.
+[Cannot receive data.]
+Kann Daten nicht empfangen.
+[OpenSSL not loaded.]
+OpenSSL nicht geladen.
+[Windows socket 2.0 init failed.]
+Windows-Socket-2.0-Initialisierung fehlgeschlagen.
+[DNS lookup error.]
+DNS-Lookup-Fehler.
+[Error while creating base socket.]
+Fehler beim Erstellen des Grundsockets.
+[Error connecting to server with socket.]
+Fehler beim Verbinden zum Server via Socket.
+[Error while creating SSL structure.]
+Fehler beim Erstellen der SSL-Struktur.
+[Error connecting socket with SSL.]
+Fehler beim Verbinden zum Socket via SSL.
+[Server rejected connection with SSL.]
+Server hat die Verbindung via SSL zurückgesetzt.
+[Cannot write SSL data.]
+Kann SSL-Daten nicht schreiben.
+[Cannot read SSL data.]
+Kann SSL-Daten nicht lesen.
+[Error %d-%d-%d-%d:]
+Fehler %d-$d-%d-%d:
+
+[No account selected]
+Kein Konto ausgewählt
+[Time left to next check [s]: %d]
+Zeit bis zur nächsten Abfrage [s]: %d
+[You have N new mails]
+Sie haben N neue E-Mail(s)
+[Connection failed message]
+"Verbindung fehlgeschlagen"-Nachricht
+[Select executable used for notification]
+Programm für Benachrichtigungen auswählen
+[Do you really want to delete this account?]
+Möchten Sie dieses Konto wirklich löschen?
+[Delete account confirmation]
+Bestätigung der Kontolöschung
+[Please wait while no account is in use.]
+Bitte warten, während kein Konto verwendet wird.
+[Please wait while account is in use.]
+Bitte warten, während das Benutzerkonto abgefragt wird.
+[This is not a valid number value]
+Dies ist kein gültiger Zahlenwert
+[Input error]
+Eingabefehler
+[Cannot allocate memory space for new account]
+Kein Speicher für neues Konto verfügbar
+[Memory error]
+Speicherfehler
+
+[YAMN General Options]
+Allgemeine YAMN-Einstellungen
+[Hotkey for mail check:]
+Hotkey zum Abrufen aller E-Mail-Konten:
+[TopToolBar button "Check mail"]
+TopToolbar-Button "E-Mails abrufen"
+[Enable YAMN Main Menu (Require Restart)]
+Aktiviere YAMN-Hauptmenüeintrag (Neustart erforderlich)
+[Show YAMN as a Protocol  (Require Restart)]
+Zeige YAMN als ein Protokoll (Neustart erforderlich)
+[MailBrowser Options]
+Einstellungen für E-Mail-Browser
+[Enable Close on Delete Button]
+Aktiviere "Schließen beim Löschen"
+[Date/Time Representation]
+Datums-/Zeitdarstellung
+[Show long localised date]
+Zeige langes Datumsformat
+[Don't show today's date]
+Heutiges Datum nicht zeigen
+[Don't show seconds]
+Sekunden nicht zeigen
+[Installed plugins]
+Installierte Plugins
+[Contact:]
+Kontakt:
+
+[Codepage:]
+Zeichensatz:
+[Mail Notifications]
+E-Mail-Hinweis
+[Reset counter]
+Zähler zurücksetzen
+[Check this account]
+Dieses Konto prüfen
+[Tray icon notification]
+Trayiconhinweis
+[Single popup]
+Einzelnes Popup anzeigen
+[Multi popup]
+Mehrere Popups anzeigen
+[..s Popup duration]
+s Anzeigedauer
+[Use custom colour]
+Benutzerdefinierte Farbe
+[Popup if no mail]
+Popup anzeigen
+[Sound notification if failed]
+Tonhinweis bei Fehlern
+[Message notification if failed]
+Nachrichthinweis bei Fehlern
+[Tray icon notification if failed]
+Trayiconhinweis bei Fehlern
+[Popup notification if failed]
+Popup anzeigen
+[Startup check]
+Prüfe beim Start
+[Auto retrieve body]
+Automatisch den E-Mail-Body abfragen
+[Default codepage:]
+Standard-Zeichensatz:
+[Check interval [min]:]
+Prüfintervall (min):
+[Only check when ...]
+Nur prüfen, wenn...
+[Check from menu]
+Prüfe vom Menü
+[New mail notifications]
+Neue E-Mail - Hinweis
+[No new mail notifications]
+Keine neue E-Mail - Hinweis
+[Connection failure notifications]
+Verbindungsfehler - Hinweis
+[Persistant message]
+Dauerhafte Mitteilung
+[Disable STLS]
+STLS deaktivieren
+[Sound]
+Klanghinweis
+[Execute Application]
+Programm ausführen
+[Tray Icon]
+Trayicon
+[Use contact notification for this account]
+Kontaktlistenhinweis für dieses Konto
+[Check while...]
+Prüfe bei Status
+[Replace nick name]
+Ersetze Nickname
+[Disable Events]
+Deak. Ereign.
+[Check while ...]
+Prüfe während
+[Check while:]
+Prüfe während:
+
+[YAMN Account Folder]
+Kontoordner
+
+[Launch Application]
+Programm ausführen

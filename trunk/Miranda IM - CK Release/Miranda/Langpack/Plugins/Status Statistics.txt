@@ -1,0 +1,25 @@
+; Pluginname: Status Statistics
+; Version: 0.0.1.41
+; Dateiname: StatusStatistics.dll
+; Autor: Aleksandr Kuvhynov
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3605
+; Übersetzung: 22.03.2009 von Killua
+
+[Status statistics]
+Status Statistik
+[Whole week]
+Ganze Woche
+[Sundays]
+Sonntags
+[Mondays]
+Montags
+[Tuesdays]
+Dienstags
+[Wednesdays]
+Mittwochs
+[Thursdays]
+Donnerstags
+[Fridays]
+Freitags
+[Saturdays]
+Samstags

@@ -1,0 +1,12 @@
+; Pluginname: HotContact 
+; Version: 0.0.0.5
+; Dateiname: HotContact.dll
+; Autor: LittleAndi
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1212
+; Übersetzung: 19.05.06 von miroerr
+; Besonderheiten: Entwicklung eingestellt!
+
+[HotContact global settings]
+HotContact allgemeine Einstellungen
+[Simulate double-click instead of launching the message window]
+Doppelklick simulieren anstatt das Nachrichtenfenster zu starten

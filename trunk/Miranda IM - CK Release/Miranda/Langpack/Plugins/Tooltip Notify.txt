@@ -1,0 +1,53 @@
+; Pluginname: Tooltip Notify 
+; Version: Tooltip Notify 0.6.0.46
+; Dateiname: ttnotify.dll
+; Autor: perf
+; Download: http://addons.miranda-im.org/details.php?id=1290
+; Übersetzung: 18.04.06 von miroerr
+
+[Tooltip Notify]
+Tooltip-Benachrichtigung
+[Shows a small tooltip above system tray area when a contact status is changed]
+Zeigt eine Popup-Benachrichtigung, wenn ein Kontakt seinen Status ändert.
+[Notify upon the following events]
+Bei folgenden Ereignissen benachrichtigen
+[All other]
+Alles andere
+
+[Suppress notifications on connection for]
+Anzeige ausblenden bei Verbindung für
+[Prefix proto name]
+Protok.-Namenspräfix
+[Suppress notifications upon connection for]
+Unterdrücke Benachrichtigungen beim Verbinden für
+[Show tooltip for]
+Tooltip zeigen
+[Duration x2 upon online event]
+Doppelte Dauer bei Onlinehinweis
+[Double click on tooltip]
+Doppelklick auf Tooltip
+[Shows/Hides CList]
+Zeigt/Versteckt CList
+[Opens message dialog]
+Öffnet Nachricht
+[Background color:]
+Hintergrundfarbe:
+[Work in conjunction with 'Suppress online notification']
+In Verbindung mit 'Online Benachr. unterdrücken'
+[Auto positioning]
+Autom. Positionieren
+[Transparent input]
+Transparente Vorgabe
+[Transparent tooltip]
+Transparenter Tooltip
+[Choose]
+Wählen
+[Allow tooltip notifications for the following users:]
+Erlaube Tooltip-Benachrichtigungen für die folgenden Kontakte:
+[is]
+ist
+[Obey 'Suppress online notification' settings]
+Erzwinge die Einhaltung des Unterdrückens von Online-Benachrichtigungen
+
+[Other Status]
+Andere Status

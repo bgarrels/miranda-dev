@@ -1,0 +1,1358 @@
+; Pluginname: Jabber Protocol 
+; Version: 0.9.11.2
+; Dateiname: jabber.dll
+; Unique ID: {144e80a2-d198-428b-acbe-9d55dacc7fde}
+; Autor(en): George Hazan, Maxim Mluhov, Victor Pavlychko, Artem Shpynov, Michael Stepura
+; Link: Stable & Testing
+; Übersetzung: 26.02.07 von Lastwebpage
+
+[User %s changed status to %s with message: %s]
+Benutzer %s änderte den Status zu '%s' mit der Nachricht: %s
+[User %s changed status to %s]
+Benutzer %s änderte den Status zu '%s'
+
+[approved subscription request]
+genehmigt Autorisierungsanfrage
+[sent subscription request]
+sende Autorisierungsanfrage
+[declined subscription]
+Autorisierungsanfrage zurückgezogen
+[sent error presence]
+sende Anwesenheitsfehler
+[sent unknown presence type]
+sende unbekannten Anwesenheitstyp
+
+[UseSSL]
+Nutze SSL
+[UseTLS]
+Nutze TLS
+
+[Public XMPP Network]
+Jabber (XMPP)(unverschlüsselt)
+[Secure XMPP Network]
+Jabber (XMPP)(TLS)
+[Secure XMPP Network (old style)]
+Jabber( XMPP)(SSL, veraltet)
+[Jabber protocol plugin for Miranda IM (%s)]
+Jabber-Protokollunterstützung für Miranda IM (%s)
+
+; [JABBER] Option -> Jabber
+[Resource:]
+Standort:
+[Priority:]
+Priorität:
+[Register new user]
+Neu registrieren
+[List of public servers]
+Liste öffentlicher Server
+[Use hostname as resource]
+Computername als Standort
+[Use custom connection host and port:]
+Verwende eigenen Verbindungshost und -port:
+[Jabber Protocol]
+Jabber-Protokoll
+
+[Manually specify connection host]
+Host manuell eingeben
+[User directory:]
+Benutzersuchdienst (des Servers):
+[System default]
+Systemstandard
+[Language for human-readable resources:]
+Sprache für serverseitige Dialoge (wenn möglich):
+[These changes will take effect the next time you connect to the Jabber network.]
+Änderungen werden erst nach einer Neueinwahl ins Jabbernetzwerk aktiv.
+
+[Chat options]
+Konferenzeinstellungen
+[Autoaccept multiuser chat invitations]
+Konferenzen bei Einladungen automatisch beitreten
+[Automatically join bookmarks on login]
+Lesezeichen beim Einloggen automatisch betreten (Lesezeichendetails beachten!)
+[Automatically join conferences on login]
+Konferenzen beim Einloggen automatisch betreten (zur Kontaktliste hinzugefügt)
+[Do not show multiuser chat invitations]
+Konferenzeinladungen nicht anzeigen
+[Log events]
+Ereignisse aufzeichnen
+[Ban notifications]
+Bannbenachrichtigung
+[User %s in now banned.]
+Nutzer %s wurde verbannt.
+[Room configuration changes]
+Änderungen der Raumeinstellungen
+[Room configuration was changed.]
+Raumeinstellungen wurden geändert.]
+[Affiliation changes]
+Änderungen der Mitgliedschaft (Affiliation) 
+[Affiliation of %s was changed to '%s'.]
+Mitgliedschaft (Affiliation) von %s wurde geändert in '%s'.
+[Role changes]
+Änderungen der Rolle (Role)
+[Role of %s was changed to '%s'.]
+Rolle (Role) von %s wurde geändert in '%s'.
+[Invite Users]
+Benutzer einladen
+[Send groupchat invitation.]
+Versende Gruppenchat-Einladung.
+[Send groupchat invitation]
+Versende Gruppenchat-Einladung
+[Invitation reason:]
+Einladungsgrund:
+[Incoming groupchat invitation.]
+Einladung zu einem Gruppenchat.
+
+[Custom messages]
+Benutzerdefinierte Nachrichten
+;[Quit:]
+;[I'm happy Miranda IM user. Get it at http://miranda-im.org/.]
+;[Slap:]
+;[/me slaps %s around a bit with a large trout]
+
+[Allow file sending through direct peer-to-peer connection]
+Dateitransfer durch Direktverbindung der Clients aktivieren
+[Specify external address:]
+Externe Adresse angeben:
+[Allow file sending through bytestream proxy server:]
+Dateitransfer über Bytestream-Proxyserver aktivieren:
+[Specify proxy server]
+Proxyserver angeben
+[Hint:]
+Tipp:
+[Try to uncheck all checkmarks above if you're experiencing troubles with sending files. But it can cause problems with transfer of large files.]
+Wenn alle 3 Einstellungen deaktiviert sind, wird die 'In-Band'-Methode verwendet. Näheres hierzu findet man im deutschen Wiki.
+
+[Send messages slower, but with full acknowledgement]
+Nachrichten langsamer, aber mit voller Bestätigung senden
+[Log chat state changes]
+Logge Chatstatusänderungen (Fenster schließen, Gone, XEP-85)
+[Log presence subscription state changes]
+Logge Autorisierungsstatus-Änderungen 
+[Log presence errors]
+Logge Statusfehler
+[Enable user moods receiving]
+Empfang von Stimmung aktivieren (Moods, XEP-107)
+[Enable user tunes receiving]
+Empfang von Musikinformationen aktivieren (Tunes, XEP-118)
+[Enable user activity receiving]
+Empfang von Aktivität aktivieren (Activity, XEP-108)
+[Receive notes]
+Empfang von Notizen aktivieren (Erweiterung von XEP-049)
+[Automatically save received notes]
+Empfangene Notiz im Verlauf, autom. Speicherung, kein Trayicon
+
+[Conferences]
+Konferenzen
+[Automatically join Bookmarks on login]
+Lesezeichen beim Einloggen automatisch betreten (Lesez.->Bearb.->Autobeitritt)
+[Hide conference windows at startup]
+Konferenzfenster beim Start von Miranda nicht öffnen, nur beitreten
+
+[Server options]
+Servereinstellungen
+[Disable SASL authentication (for old servers)]
+SASL-Authentifizierung deaktivieren (nur bei älteren Servern aktivieren!)
+[Enable stream compression (if possible)]
+Nutze Datenstromkompression (wenn möglich)
+[Enable XMPP server ping (XEP-0199)]
+Aktiviere XMPP-Server-Ping (XEP-0199, Trennung, wenn Server nicht antwortet)
+
+;Sonstiges
+[Enable remote controlling (from another resource of same JID only)]
+Fernsteuerung aktivieren (nur von einer anderen Jabberressource derselben JID)
+[Show transport agents on contact list]
+Zeige Transportagenten in der Kontaktliste
+[Automatically add contact when accept authorization]
+Kontakt bei akzeptierter Autorisierung automatisch hinzufügen
+[Automatically accept authorization requests]
+Autorisierungsanfragen automatisch akzeptieren
+[Fix incorrect timestamps in incoming messages]
+Korrigiere falsche Zeitangaben in empfangenen Nachrichten
+[Disable frame]
+Deaktiviere Kontaktlisten-Element (erfordert Neustart)
+
+[Security]
+Sicherheit
+[Allow servers to request version (XEP-0092)]
+Erlaube Servern das Abfragen der Version (XEP-0092)
+[Show information about operating system in version replies]
+Veröffentliche Informationen über das Betriebssystem bei Versionsanfragen
+[Accept only in band incoming filetransfers (don't disclose own IP)]
+Akzeptiere nur "In-Band"-Dateitransfers (enthüllt nicht die eigene IP)
+[Accept HTTP Authentication requests (XEP-0070)]
+Akzeptiere HTTP-Authentifizierungs-Anfragen (XEP-0070)
+
+[Roster control]
+Rosterverwaltung
+[Roster (contact list on server) management]
+Roster (Kontaktliste auf dem Server)-Verwaltung
+
+[Services...]
+Spezielle Funktionen...
+[Service Discovery...]
+Diensterkennung...
+[Service Discovery]
+Diensterkennung
+[Service Discovery [Account: %s]]
+Diensterkennung [Konto: %s]
+[Discovery succeeded]
+Erkennung erfolgreich
+[Discovery failed]
+Erkennung fehlgeschlagen
+[Discovery in progress]
+Erkennung läuft
+[Registered Transports]
+Registrierte Transporte
+[Registered Transports...]
+Registrierte Transporte
+[Registered transports]
+Registrierte Transporte
+[Browse local transports]
+Transporte des Anmeldeservers
+[Local Server Transports]
+Transporte des Anmeldeservers
+[Local Transports...]
+Transporte des Anmeldeservers...
+[Browse Chatrooms]
+Konferenzräume durchsuchen
+[Browse Chatrooms...]
+Konferenzräume durchsuchen
+[View as list]
+Listenansicht
+[View as tree]
+Baumansicht
+[Browse chatrooms]
+Konferenzräume durchsuchen
+[Apply filter]
+Filter aktivieren
+[Reset filter]
+Filter deaktivieren
+[Set filter...]
+Filter setzen... (Entertaste drücken, um Filterwort auf Liste anzuwenden)
+[Node hierarchy]
+Node-Struktur
+
+;Kontextmenü
+[Join]
+Betreten
+[Contact Menu...]
+Kontaktmenü...
+[View vCard]
+vCard zeigen
+[Refresh Info]
+Info aktualisieren
+[Refresh Children]
+Kindelemente aktualisieren
+[Add to favorites]
+Zu Favoriten hinzufügen
+[Browse all favorites]
+Alle Favoriten durchsuchen
+[Remove all favorites]
+Alle Favoriten löschen
+[Copy JID]
+JID kopieren
+[Copy node name]
+Nodenamen kopieren
+[Copy node information]
+Nodeinformationen kopieren
+[Add search directory]
+Suchverzeichnis hinzufügen
+[Login/logout]
+Anmelden/Abmelden
+[Resolve nicks]
+Nicks auflösen
+[Agents list]
+Agentenliste
+
+[Join chatroom]
+Konferenzraum betreten
+[Bookmark chatroom]
+Zu Lesezeichen hinzufügen
+; Bevor hier wieder einer meint, er müsse diese Phrasen löschen,
+; der sollte mal unter Einstellungen -> Icons -> JABBER gucken!!!
+[Convert to Room]
+In Konferenzraum umwandeln
+[Convert to room]
+in Konferenzraum umwandeln
+
+; Diensterkennung: Tooltips im Fenster
+[Jid:]
+JID:
+[Identities:]
+Identitäten:
+[Supported features:]
+Unterstützte Funktionen:
+
+[Bookmark Details]
+Lesezeichendetails
+[Bookmark Type]
+Art des Lesezeichens
+[Auto-join]
+Auto-Beitr.
+[Room JID / URL]
+Raum-JID/URL
+[Room JID/ URL:]
+Raum-JID/URL:
+[Address (JID or URL)]
+Adresse (JID oder URL)
+[Bookmark Name:]
+Lesezeichenname:
+[Auto-join (Automatically join Bookmarks must be enabled in Miranda options)]
+Raum automatisch beim Verbinden betreten. (Muss auch in den Jabbereinstellungen aktiviert sein)
+[Server side bookmarks\nStore conference rooms and web links on server.]
+Auf Server gespeicherte Lesezeichen\nSpeicherung von Konferenzräumen, URLs und Transporten auf dem Server.
+[Server side bookmarks]
+Auf Server gespeicherte Lesezeichen
+[Store conference rooms and web links on server.]
+Speicherung von Konferenzräumen, URLs und Transporten auf dem Server
+
+; [JABBER] Jabber Agents Dialog
+[Jabber Agents]
+Jabberagenten
+[Register/Search Jabber Agents]
+Jabberagenten suchen/registrieren
+[Jabber server:]
+Jabberserver:
+[Register...]
+Registrieren
+[Browse/Join chat room...]
+Konferenzraum suchen/betreten
+[Registered Jabber Transports]
+Angemeldete Jabbertransporte/Gateways
+[Unregister]
+Löschen
+[Register with a new service...]
+bei speziellem Agenten anmelden
+[Use this proxy]
+Diesen Proxyserver benutzen
+[Commands...]
+Befehle ausführen...
+
+[Jabber Multi-User Conference\nCreate or join existing conference room.]
+Jabber-Mehrbenutzerkonferenz (MUC)\nKonferenzräume betreten oder erstellen.
+[Jabber Multi-User Conference]
+Anmeldung Jabber-Mehrbenutzerkonferenz
+[Create or Join Groupchat]
+Konferenzräume betreten/erstellen
+[Create/Join groupchat]
+Konferenzräume betreten/erstellen
+[Create/Join groupchat...]
+Konferenzräume betreten/erstellen
+[Create or Join Jabber Multi-User Conference Room]
+Konferenzräume betreten oder erstellen
+[Create or join existing conference room.]
+Einen Raum erstellen oder einen bestehenden betreten.
+[Conference server:]
+Konferenzserver:
+[Join...]
+Betreten
+[Multi-User Conference Invitation [Account: %s]]
+Einladung in einen Konferenzraum [Konto: %s]
+[The following invitation to join a multi-user conference is received.]
+Sie haben folgende Einladung für einen Konferenzraum erhalten.
+[Visitor]
+Besucher
+[Visitors]
+Besucher
+[&Visitor]
+Besucher
+[Visitor *]
+Besucher *
+[Participant]
+Teilnehmer
+[Participants]
+Teilnehmer
+[&Participant]
+Teilnehmer
+[Participant *]
+Teilnehmer *
+;[Moderators]
+[&None]
+Kei&ne
+[None *]
+Keine *
+[Member]
+Mitglied
+[&Member]
+&Mitglied
+[Member *]
+Mitglied *
+[Admin]
+Administrator
+[&Admin]
+&Administrator
+[Admin *]
+Administrator *
+[Owners]
+Besitzer
+[&Owner]
+Besitzer
+[Owner *]
+Besitzer *
+[Outcast (&ban)]
+Ver&bannt
+
+;Konferenzen
+[Affiliation:]
+Mitglieds.:
+[Affiliation:\t]
+Mitgliedschaft:\t
+[&Affiliations]
+Mitgliedsch&aft (Affiliation)
+[Moderators]
+Moderatoren
+[&Roles]
+&Rolle (Role)
+[Role:]
+Rolle:
+[Role:\t\t]
+Rolle:\t\t
+
+[&Participant list]
+&Teilnehmerliste (Participant)
+[&Moderator list]
+&Moderatorenliste
+[Mo&derator List...]
+Mo&deratorenliste
+[Moderator List]
+Moderatorenliste
+[&Member list]
+&Mitgliederliste (Member)
+[&Member List...]
+&Mitgliederliste
+[Member List]
+Mitgliederliste
+[&Admin list]
+&Administratorliste
+[&Admin List...]
+&Administratorliste
+[Admin List]
+Administratorenliste
+[Voice List]
+Liste der Benutzer mit Stimmrecht
+[Owner List]
+Besitzerliste
+[&Owner list]
+Besitzerliste (&Owner)
+[&Owner List...]
+Besitzerliste
+[Outcast list (&ban)]
+Liste verbannter &Benutzer (Outcast)
+[&Ban List...]
+Liste verbannter &Benutzer
+[Ban List]
+Liste verbannter Benutzer
+[&Voice List...]
+Liste der Benutzer mit Schreibrechten (Teilnehmer)
+[Change &Nickname...]
+&Nickname ändern
+[Change &nickname]
+&Nickname ändern
+[View/change &topic]
+&Thema setzen
+[Set &topic]
+&Thema setzen
+[&Invite a user]
+Benutzer in diesen MUC e&inladen
+[&Invite a User...]
+Benutzer in diesen MUC e&inladen
+[Invite to room]
+Benutzer in anderen MUC einladen
+[&Room options]
+&Raumeinstellungen
+[Room &configuration]
+Raumeinstellungen
+[Room Con&figuration...]
+Raumeinstellungen...
+[&Destroy room]
+Raum zerstören
+[Destroy Room...]
+Raum zerstören...
+[Change nickname in]
+Nickname ändern
+[Set &role]
+Setze &Rolle
+[Set &affiliation]
+Setze Mitgliedsch&aft
+[Toggle Member]
+Umschalten Mitglied<->kein Mitglied
+[Toggle &Voice]
+Umschalten Besucher<->Teilnehmer
+[Toggle Moderator]
+Umschalten Teilnehmer<->Moderator
+[Toggle Admin]
+Umschalten Mitglied<->Administrator
+[Toggle Owner]
+Umschalten Administrator<->Besitzer
+[Ban]
+Bann
+[Member &info]
+Mitglieder&infos (Jabber-Dialog)
+[Member Information\n<user id>]
+Information über Mitglied:\n<user id>
+[Member Information]
+Information über Mitglied:
+[Real JID not available]
+Echte JID nicht verfügbar
+[Reason to destroy]
+Grund der Zerstörung von:
+[Conflict]
+Konflikt
+[Jabber Error Message]
+Jabberfehlermeldung
+[Set topic for]
+Setze Thema für
+[Copy room topic]
+Thema des Raums kopieren
+[Jabber Groupchat Invite a User]
+Jabberbenutzer zu Konferenz einladen
+[Room JID:]
+Raum-JID:
+[Copy room &JID]
+Raum-&JID kopieren
+[Other JID:]
+Andere JID:
+[&Invite]
+E&inladen
+[Recently visited chatrooms:]
+Zuletzt besuchte Konferenzräume:
+[Add to roster]
+Zur Server-Kontaktliste hinzufügen
+[&Add to roster]
+Zu Server-Kont&aktliste hinzufügen
+[Add to Bookmarks]
+Als Lesezeichen speichern
+[Add to &bookmarks]
+Als Lesezeichen speichern
+[Copy &nickname]
+&Nicknamen kopieren
+[Copy real &JID]
+Echte &JID kopieren
+[Copy in-room JID]
+JID für diesen Raum kopieren
+[Real &JID: %s]
+Echte &JID: %s
+[Real JID:\t]
+Echte JID:\t
+
+[Change Password...]
+Passwort ändern...
+[Set New Password for]
+Neues Passwort für
+[Current Password:]
+Aktuelles Passwort:
+[New Password:]
+Neues Passwort:
+[Confirm New Password:]
+Bestätigung:
+[New password does not match.]
+Neues Passwort und Bestätigung stimmen nicht überein.
+[Current password is incorrect.]
+Aktuelles Passwort ist falsch.
+[Password is successfully changed. Don't forget to update your password in the Jabber protocol option.]
+Passwort wurde geändert, bitte das entsprechende Feld unter Einstellungen->Protokolle->Jabber ebenfalls ändern.
+[Password cannot be changed.]
+Passwort kann nicht geändert werden
+
+; [JABBER] Personal vCard
+[Personal vCard]
+Persönliche Jabber-vCard
+[Jabber vCard]
+Jabber-vCard
+[YYYY-MM-DD]
+JJJJ-MM-TT (1991-10-31)
+[Address1:]
+Adresse 1:
+[Address2:]
+Adresse 2:
+[ZIP:]
+PLZ:
+[Saving]
+Speichern
+[Jabber vCard: Add Phone Number]
+Jabber-vCard: Telefonnummer hinzufügen
+[Jabber vCard: Edit Phone Number]
+Jabber-vCard: Telefonnummer ändern
+[Jabber vCard: Add Email Address]
+Jabber-vCard: E-Mail-Adresse hinzufügen
+[Jabber vCard: Edit Email Address]
+Jabber-vCard: E-Mail-Adresse ändern
+[Phone number:]
+Telefonnummer:
+
+[Privacy Lists...]
+Privatsphärelisten
+[Privacy Lists\nFlexible way to configure visibility and more.]
+Privatsphärelisten\nBerechtigungen einstellen für Status senden/empfangen, Nachrichten und Querys.
+[Privacy Lists]
+Privatsphärelisten
+[Privacy Lists [Account: %s]]
+Privatsphärelisten [Konto: %s]
+[Privacy settings:]
+Privatsphäreeinstellungen
+[Active list (current session):]
+Aktive Liste (aktuelle Sitzung):
+[Default list (all sessions):]
+Standardliste (alle Sitzungen):
+[Privacy rules editor:]
+Regeleditor Privatsphäre
+[Selected list:]
+Ausgewählte Liste:
+[Privacy rule]
+Privatsphäreregel
+[Simple mode]
+Einfache Ansicht
+[Advanced mode]
+Erweiterte Ansicht
+[If:]
+Wenn:
+[Then:]
+Dann:
+[Queries]
+Querys
+[Outgoing presence]
+Status senden
+[Presence (out)]
+Status senden
+[Incoming presence]
+Status empfangen
+[Presence (in)]
+Status empf.
+[following stanza types:]
+Folgende Stanzatypen:
+[Subscription]
+Autorisierung
+[Any]
+Beliebig
+[** Subsription: none **]
+** Autorisierung: keine **
+[** Subsription: from **]
+** Autorisierung: Von **
+[** Subsription: to **]
+** Autorisierung: Nach **
+[** Subsription: both **]
+** Autorisierung: Beide **
+[** Default **]
+** Standard **
+[New privacy list name:]
+Neue Privatsphärenliste:
+[Enter the name of the new list:]
+Name der neuen Liste:
+[ (act., def.)]
+ (aktiv, std.)
+[ (active)]
+ (aktiv)
+[ (default)]
+ (standard)
+[Flexible way to configure visibility and more.]
+Berechtigungen einstellen für Status senden/empfangen, Nachrichten und Querys.
+[Lists:]
+Liste
+[Rules:]
+Regeln
+[List Editor...]
+Liste bearbeiten...
+
+;Tooltips
+[Add list...]
+Neue Liste
+[Remove list]
+Liste löschen
+[Add rule]
+Regel hinzufügen
+[Edit rule]
+Regel editieren
+[Move rule up]
+Regel nach oben
+[Move rule down]
+Regel nach unten
+[Delete rule]
+Regel löschen
+[Add new...]
+Neue Liste...
+[Simple Mode]
+Einfacher Modus
+[Advanced Mode]
+Erweiterter Modus
+[Add JID]
+JID hinzufügen
+
+;Fehler, Warungen
+[Privacy list %s set as default]
+Privatsphäreliste %s als Standard gesetzt
+[Default privacy list successfully declined]
+Standardprivatsphäreliste erfolgreich entfernt
+[Error occurred while setting list %s as default]
+Fehler beim Setzen der Liste %s als Standard
+[Privacy list %s set as active]
+Privatsphäreliste %s auf aktiv gesetzt
+[Error occurred while setting active list]
+Fehler beim Setzen der aktiven Liste
+[Error occurred while setting default list]
+Fehler beim Setzen der Standardprivatsphäreliste
+[Active privacy list successfully declined]
+Aktive Privatsphäreliste erfolgreich entfernt
+[Error occurred while setting list %s as active]
+Fehler beim Setzen der Liste %s als aktiv
+[Can't remove active or default list]
+Aktive oder Standardliste konnte nicht gelöscht werden!
+[Privacy lists successfully saved]
+Privatsphärenlisten erfolgreich gespeichert.
+[Error occurred while applying changes]
+Fehler beim Speichern der Privatsphärenlisten aufgetreten
+[Privacy lists are not saved, discard any changes and exit?]
+Privatsphärenlisten nicht gespeichert, Änderungen ignorieren und schließen?
+[Please specify groupchat directory first.]
+Geben Sie zuerst einen Konferenzserver an.
+[List has no rules, empty lists will be deleted then changes applied]
+Liste ist leer und wird bei "Übernehmen" gelöscht.
+[No list selected]
+Keine Liste ausgewählt
+[Warning: privacy lists were changed on server.]
+Warnung: Privatsphäreliste wurde auf Server geändert
+[Unable to save list because you are currently offline.]
+Liste kann nicht gespeichert werden, weil Sie zurzeit offline sind.
+[Please save list before you make it the default list]
+Bitte zuerst die Liste speichern, bevor sie als Standardliste aktiviert wird.
+[First, save the list]
+Zuerst Liste speichern
+
+;Regelanzeige
+[Else ]
+SONST 
+[then ]
+DANN 
+[allow ]
+erlaube  
+[deny ]
+verweigere 
+[all.]
+alle.
+[ and ]
+ UND 
+[If jabber id is ']
+WENN JID ist gleich '
+[ (nickname: ]
+ (Nickname: 
+[If group is ']
+WENN Gruppe ist gleich '
+[If subscription is ']
+WENN Autorisierung ist gleich '
+[incoming presences]
+eingehenden Status
+[outgoing presences]
+ausgehenden Status
+[queries]
+Querys
+
+[Roster editor\nView and modify your server-side contact list.]
+Serverseitige Kontaktliste\nAnzeigen und Änderung der serverseitigen Kontaktliste. (Jabberjargon: Roster)
+[Roster editor]
+Serverseitige Kontaktliste
+[Roster Editor]
+Serverseitige Kontaktliste
+[View and modify your server-side contact list.]
+Anzeigen und Änderung der serverseitigen Kontaktliste (Jabberjargon: Roster)
+
+[XML Console]
+XML-Konsole
+[Presences]
+Status
+[Filter mode]
+Filtermodus
+;[xmlns]
+[all attributes]
+Alle Attribute
+;[disabled]
+[Refresh list]
+Liste neu laden
+
+[Jabber notebook\nStore notes on server and access them from anywhere.]
+Jabber-Notizbuch\nAuf diese Notizen haben Sie von überall aus Zugriff.
+[Jabber Notebook]
+Jabber-Notizbuch
+[Jabber notebook]
+Jabber-Notizbuch, mit Speicherung auf Server
+[Store notes on server and access them from anywhere.]
+Auf diese Notizen haben Sie von überall aus Zugriff.
+[All notes]
+Alle Notizen
+[All tags]
+Alle Schlagwörter
+[Notes are not saved, close this window without uploading data to server?]
+Notizen wurden nicht gespeichert. Fenster schließen, ohne diese auf den Server hochzuladen?
+[Edit Note]
+Notiz editieren
+[Tags:]
+Schlagwörter: (mehrere Schlagwörter durch Komma trennen)
+[Incoming note]
+Eingehende Notiz
+
+[Send Note]
+Notiz senden
+[Incoming note from %s]
+Eingehende Notiz von %s
+[Send note to %s]
+Sende Notiz an %s
+[From: %s]
+Von: %s
+
+; [JABBER] Ad-Hoc
+[Commands]
+Befehle
+[Jabber Ad-Hoc commands at]
+Jabber-Ad-Hoc-Befehl an
+[Instruction:]
+Hinweis
+[Execute]
+Ausführen
+
+[Select Command]
+Befehl wählen
+[Not supported]
+Wird nicht unterstützt
+[Requesting command list. Please wait...]
+Liste der verfügbaren Befehle wird abgefragt. Bitte warten Sie...
+[Set status]
+Status setzen
+[Choose the status and status message]
+Bitte wählen Sie den Status und die Statusnachricht aus
+[Leave groupchats]
+Konferenzräume verlassen
+[Set options]
+Einstellungen vornehmen
+[Forward unread messages]
+Ungelesene Nachrichten weiterleiten
+[Quit Miranda IM]
+Miranda IM schließen
+[Priority]
+Priorität
+[Set the desired options]
+Die gewünschten Einstellungen vornehmen
+[Automatically Accept File Transfers]
+Dateitransfer automatisch annehmen
+[Play sounds]
+Klänge abspielen
+[Disable remote controlling (check twice what your are doing)]
+Fernsteuerung deaktivieren (Vorsicht!)
+[message(s) forwarded]
+Nachricht(en) weitergeleitet
+[Workstation successfully locked]
+Arbeitsstation erfolgreich gesperrt!
+[Please confirm Miranda IM shutdown]
+Bitte bestätigen Sie das Beenden von Miranda IM
+[I agree]
+Ich bestätige
+
+; [JABBER] Registration dialog
+[Jabber Account Registration]
+Jabber-Accountregistrierung
+[Register]
+Registrieren
+[No message]
+Keine Nachr.
+[Sending registration information...]
+Registrierungsdaten werden gesendet...
+[Requesting registration instruction...]
+Registrierungsanweisung wird empfangen...
+[Error: Cannot resolve server address]
+Fehler: Serveradresse nicht auflösbar
+[Error: Connection lost]
+Fehler: Verbindung unterbrochen
+[Registration successful]
+Registrierung erfolgreich
+
+[Confirm password]
+Passwort bestätigen
+[Passwords do not match.]
+Passwörter stimmen nicht überein.
+
+; [JABBER] Jabber Agent Registration Dialog
+[Jabber Agent Registration]
+Anmeldung an Jabberagenten
+
+[HTTP Authorization]
+HTTP-Authentifizierung
+[HTTP Authorization\nAccept or reject incoming request]
+HTTP-Authentifizierung\nEingehende Anfragen akzeptieren oder ablehnen.
+[Accept or reject incoming request]
+Eingehende Anfragen akzeptieren oder ablehnen.
+[Someone (maybe you) has requested the following file:]
+Jemand, evtl. Sie selbst, erfragte die folgende Daten:
+[Request was sent from JID:]
+Anfrage wurde gesendet von JID:
+[The transaction identifier is:]
+Die Transaktions-Kennung ist:
+[Request method is:]
+Abfragemethode ist:
+[If you wish to confirm this request, please click authorize. Otherwise, press deny to reject it.]
+Wenn Sie der Anfrage zustimmen wollen, klicken Sie auf 'Autorisieren', wenn Sie ablehnen wollen, auf 'Ablehnen'.
+
+; [JABBER] General
+[Agents...]
+Agenten...
+[Multi-User Conference...]
+Mehrbenutzerkonferenz...
+[Personal vCard...]
+Persönliches Profil (vCard)...
+[Bookmarks...]
+Lesezeichen...
+[Jabber Bookmarks]
+Lesezeichen-Konferenzräume
+[Bookmark Name]
+Lesezeichennamen
+[Reset log]
+Log löschen
+
+; [JABBER] Join Multi-User Conference Room Dialog
+[Join Jabber Multi-User Conference Room]
+Jabber-Mehrbenutzerkonferenzraum betreten
+[Room:]
+Raum:
+
+; [JABBER] Tlen plugin specific
+[Show invisible users]
+Zeige unsichtbare Kontakte
+[Tlen Authentication]
+Tlen-Authentifizierung
+
+[View and update Jabber personal vCard]
+Persönliche vCard anzeigen und editieren
+[Save Changes]
+Speichern
+
+; File Assocation Manager
+[Jabber Link Protocol]
+Jabber-Link-Protokoll
+
+;Einloggen
+[Jabber Password]
+Jabber-Passwort
+[Save password for this session]
+Passwort für diese Sitzung speichern
+
+;Icons
+[Moods]
+Stimmungen
+
+;Frame, Menüs und Dialoge, Moods selber sind im Core
+[User mood]
+Stimmung
+[Mood:]
+Stimmung:
+[Mood message:]
+Statustext für Stimmung:
+[Set mood...]
+Setze Stimmung...
+[Set Mood]
+Setze Stimmung
+
+;Icons
+[Activities]
+Aktivitäten
+
+;Frame und Dialoge, Activity selber sind im Core
+[User activity]
+Aktivität
+[Activity:]
+Aktivität:
+[Activity message:]
+Statustext für Aktivität:
+[Set activity...]
+Setze Aktivität...
+[Set Activity]
+Setze Aktivität
+
+[Search service]
+Suchdienst
+[Go]
+Los
+[Find a contact by entering the search criteria in the given fields. Note: Each field supports wild card searches (%)]
+Findet einen Kontakt anhand der gegebenen Suchkriterien. Jedes Feld unterstützt die Suche mit Platzhaltern (%).
+[Error %s %s\r\nPlease select other server]
+Fehler %s %s\r\nBitte den Server wechseln!
+[Select/type search service URL above and press <Go>]
+Bitte die Suchdienst-URL eingeben oder auswählen!
+[You have to be connected to server]
+Hinweis: Sie müssen mit dem Server verbunden sein!
+
+[Mood]
+Stimmung
+[Activity]
+Aktivität
+[Tune]
+Lied
+[Last logoff time]
+Zuletzt abgemeldet
+[Logoff message]
+Abmeldenachricht
+[Last active resource]
+Letzter aktiver Standort
+
+[Resource]
+Standort
+[Resource priority]
+Priorität des Standortes
+[Idle since]
+Untätig seit
+[Client capabilities]
+Fähigkeiten dieses Clients
+
+[Software information]
+Software-Information
+[Operating system]
+Betriebssystem
+[Operating system version]
+Betriebssystem-Version
+[Software]
+Software
+[Software version]
+Software-Version
+[Miranda IM core version]
+Miranda IM Core-Version
+
+[Copy only this value]
+Nur diesen Wert kopieren
+[<no information available>]
+<keine Informationen verfügbar>
+[<Photo not available while offline>]
+<Foto im Offlinemodus nicht verfügbar>
+[<No photo>]
+<Kein Foto>
+
+[&Convert to Chat Room]
+In Konferenzraum umwandeln (kein MU&C!)
+[&Convert to Contact]
+In Kontakt umwandeln
+
+[Jabber Resource]
+Jabberstandort
+[Last Active]
+Zuletzt aktiv
+[Server's Choice]
+Serverauswahl
+
+[Send Presence]
+Chatstatus setzen
+[&Send presence]
+Chatstatus &setzen
+
+;SRMM Kontextmenü
+[Last active]
+letzte Aktivität
+[Highest priority (server's choice)]
+Höchste Priorität (Auswahl durch Server)
+[No activity yet, use server's choice]
+Keine Aktivität festgestellt, Auswahl durch Server
+
+[Resource priority [%d]]
+Standort-Priorität [%d]
+[Increase priority by 10]
+Erhöhe Priorität um 10
+[Increase priority by 5]
+Erhöhe Priorität um 5
+[Increase priority by 1]
+Erhöhe Priorität um 1
+[Decrease priority by 1]
+Senke Priorität um 1
+[Decrease priority by 5]
+Senke Priorität um 5
+[Decrease priority by 10]
+Senke Priorität um 10
+
+[Join conference]
+Konferenz betreten
+[Open bookmarks]
+Lesezeichen öffnen
+[Privacy lists]
+Privatsphärelisten
+[Service discovery]
+Diensterkennung
+
+[Navigate home]
+Zurück zum Anmeldeserver
+[Refresh node]
+Node aktualisieren
+[Browse node]
+Node durchsuchen
+[RSS service]
+RSS-Dienst
+[Send note]
+Notiz senden
+[Storage service]
+Speicherdienst
+[Weather service]
+Wetterdienst
+[Discovery]
+Diensterkennung
+[Generic privacy list]
+Auswählbare Privatsphärenliste
+[Active privacy list]
+Aktive Privatsphärenliste
+[Default privacy list]
+Standard-Privatsphärenliste
+[Allow Messages]
+Nachrichten erlauben
+[Allow Presences (in)]
+Status empfangen erlauben
+[Allow Presences (out)]
+Status senden erlauben
+[Allow Queries]
+Querys erlauben
+[Deny Messages]
+Nachrichten verweigern
+[Deny Presences (in)]
+Status empfangen verweigern
+[Deny Presences (out)]
+Status senden verweigern
+[Deny Queries]
+Querys verweigern
+[Conference bot]
+Konferenz-Bot
+
+[Advanced Status]
+Erweiterter Status
+[Transports]
+Transporte
+
+[Loading...]
+Lade ...
+[Please wait for room list to download.]
+Bitte warten Sie bis die Raumliste gedownloaded ist.
+[<no nick>]
+<Kein Nick>
+[Room list request timed out.]
+Raumlistenanforderung überschritt das Timeout.
+[No rooms available on server.]
+Auf dem Server sind keine Räume verfügbar.
+[Failed to retrieve room list from server.]
+Fehler beim abrufen der Raumliste vom Server.
+[Redirect]
+Umgeleitet
+[Bad request]
+Fehlerhafte Anfrage
+[Unauthorized]
+nicht autorisiert
+[Payment required]
+Bezahlung erforderlich
+[Forbidden]
+verboten
+[Not found]
+nicht gefunden
+[Not allowed]
+nicht erlaubt
+[Not acceptable]
+nicht akzeptiert
+[Registration required]
+Registrierung erforderlich
+[Request timeout]
+Zeitüberschreitung der Anfrage
+[Not implemented]
+Nicht unterstützt
+[Remote server error]
+Fehler beim Remoteserver
+[Service unavailable]
+Service nicht unterstützt
+[Remote server timeout]
+Zeitüberschreitung beim Remoteserver
+[Unknwon error message]
+Unbekannte Fehlermeldung
+
+; [JABBER] Miscellaneous message box
+[Jabber Authentication]
+Jabber-Authentifizierung
+[Authentication failed for]
+Authentifizierung fehlgeschlagen für
+[CHAT plugin is required for conferences. Install it before chatting]
+Chat.dll ist für Mehrbenutzerkonferenzen erforderlich. Bitte installieren Sie diese Datei nach.
+
+[Account removal warning]
+Konto wirklich löschen?
+[This operation will kill your account, roster and all another information stored at the server. Are you ready to do that?]
+Dieser Vorgang wird Ihr Konto auf diesem Server entgültig löschen. Alle Kontakte und andere, auf dem Server, gespeicherten Daten gehen unwiederbringlich verloren. Wollen Sie dieses wirklich ausführen?
+
+[closed chat session]
+hat das Nachrichtenfenster geschlossen
+
+;GMail Mod
+[Functionality]
+Funktionen
+[Enable GMail functionality]
+GMail-Unterstützung aktivieren
+[Synchronize Clock]
+Uhrzeit synchronisieren
+[Use Fake Contact]
+Pseudokontakt nutzen
+[Show Request]
+Anfrage zeigen
+[Suppress Errors]
+Fehler unterdrücken
+[Suppress startup check]
+keine Startüberprüfung
+[Silently]
+Unbemerkt
+[Use PopUps]
+Popups zeigen
+[Show Result]
+Ergebnis zeigen
+[Don't re-request mail box Automatically]
+Posteingang nicht automatisch erneut abfragen
+
+[Visit GMail on E-Mail PopUp click]
+GMail bei Klick auf Popup besuchen
+
+[Check Now!]
+Jetzt prüfen
+[Messages: ]
+Nachrichten:
+;[Debug: ]
+[Clock: ]
+Uhrzeit:
+[Errors: ]
+Fehler:
+[Treat Invisible as Unavailable]
+'Unsichtbar' als 'Offline' anzeigen
+[Saving chats to server is: ]
+Chats auf Server speichern:
+
+[New E-Mail]
+Neue E-Mail
+[New Mail Notify]
+Neue E-Mail-Benachrichtigung
+[StartTLS if available]
+TLS, falls verfügbar
+
+[Last]
+Letzte
+[hour]
+Stunde
+[week]
+Woche
+;[Labels]
+[New mail from]
+Neue E-Mail von
+;[MinThrd: ]
+[MinTime: ]
+MinZeit: 
+[Mailbox request]
+Mailboxanfrage
+[Mailbox result]
+Mailboxergebnis
+[Matched]
+Treffer
+[Error Code]
+Fehlermeldung
+[Synchronized]
+Synchronisiert
+[System clock]
+Systemuhrzeit
+[synchronized]
+synchronisiert
+[NOT ]
+NICHT 
+[LocalDrift]
+Lokale Abweichung
+[No connection]
+Keine Verbindung
+[Impossible to check]
+Überprüfung unmöglich
+[wait]
+warten
+[Some One]
+Irgendjemand
+[Me Myself]
+Ich selbst
+[A GMail notify test]
+GMail-Benachrichtigungstest
+[Hi, I am trying the e-mail notification in JGmail.dll]
+Dies ist nur ein Test der E-Mail-Benachrichtigung in JGmail.dll
+		
+[Show Labels]
+Labels zeigen
+[Labels query:]
+Label-Query:
+
+[Visit GMail]
+Google Mail besuchen
+
+[Jabber Google Talk Protocol]
+Jabber Google Talk-Protokoll
+[Jabber Protocol (GMail)]
+Jabber-Protokoll (GMail)
+
+; Icons
+[Agents]
+Agenten
+[Revoke]
+Widerrufen
+[E-Mail Error]
+E-Mail-Fehler
+[E-Mail Clock]
+E-Mail-Uhr
+[Convert to Chat / Contact]
+In Konferenz/Kontakt umwandeln
+[VCard Menu]
+vCard-Menü
+[Transport Logon/Off]
+Transport an-/abmelden
+[Request]
+Anfrage
+[AdHoc Command]
+Ad-Hoc-Befehl
+[OpenID Request]
+OpenID-Anfrage
+
+[ Meebo specific options ]
+ Meebo-spezifische Optionen 
+[Automatically authorize all new contacts]
+Alle Kontakte automatisch autorisieren
+[Always remove meebome contacts when they go offline]
+meebo-me-Kontakte immer entfernen, wenn sie offline gehen
+[Move meebome contacts to group:]
+meebo-me-Kontakte verschieben in:
+
+[Extensions]
+Erweiterungen
+[ Extended Features ]
+ Erweiterte Funktionen 
+[None installed right now]
+Keine Erweiterungen installiert
+[* changes will be applied after miranda restart]
+* benötigt Neustart
+; jingle.dll Plugin
+[Enable voice calls]
+Voice Call aktivieren
+; meebo.dll Plugin
+[This is a meebo server]
+Das ist ein meebo-Server
+
+; Diese Optionen sind erst ab der Version 0.8 von Miranda IM mit dem Meebo Plugin für Jabber sichtbar
+[Automatically authorize meebo me contacts]
+Alle Kontakte automatisch autorisieren
+[Remove meebo me contacts that don't have history when they go offline]
+meebo-me-Kontakte immer entfernen, wenn sie offline gehen und keine Verlaufsliste haben
+[Remove meebo me contacts that have history when they go offline]
+meebo-me-Kontakte immer entfernen, wenn sie offline gehen und eine Verlaufsliste haben
+[Move meebo me contacts to group:]
+meebo-me-Kontakte verschieben in:
+
+; [JABBER] User info dialog	
+[Resources:]
+Standorte:
+[Subscription type:]
+Autorisierungstyp
+[Last logoff time:]
+Letzte Abmeldung:	
+[none ( not on roster )]	
+Keine (nicht in Server-Kontaktliste)
+; Experte-Einstellungen (nur für GMail & GTalk Mod und ältere Jabber-Versionen)
+[Specify external address]
+Externe Adresse eingeben
+[Allow file sending through bytestream proxy server]
+Dateitransfer über Bytestream-Proxyserver aktivieren
+[Disable main menu]
+Hauptmenüeintrag deaktivieren
+[Add room to Bookmarks when adding to roster]
+Konferenz den Lesezeichen hinzufügen, wenn sie der Kontaktl. hinzugefügt wird
+[Validate contacts being added]
+Existenz hinzugefügter Kontakte überprüfen

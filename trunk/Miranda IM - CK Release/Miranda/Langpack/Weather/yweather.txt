@@ -1,0 +1,10 @@
+;============================================================
+;  Module: yweather.ini
+;  Plugin: weather
+;  Versions:
+;  Translators: CHEF-KOCH
+;  Template:
+;  URL:
+;============================================================
+[Feel]
+Gefühlt

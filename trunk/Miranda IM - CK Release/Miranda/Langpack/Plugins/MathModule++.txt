@@ -1,0 +1,524 @@
+; Pluginname: MathModule++
+; Version: 0.1.2.0
+; Dateiname: MathModulePP.dll
+; Autor: Michael "Protogenes" Kunz
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3413
+
+[MimeTeX location:]
+MimeTeX-Pfad:
+[Adjust formula size: %.1f%%]
+Formelgröße anpassen: %.1f%%
+[ForeColor:]
+Vordergrundfarbe:
+[BackColor:]
+Hintergrundfarbe:
+[create images with alpha channel]
+Bilder mit Alphakanal erzeugen
+[Buffering]
+Zwischenspeicher
+[Buffer images in memory]
+Bilder im Arbeitspeicher zwischenspeichern
+[%d images]
+%d Bilder
+[Buffer images on HDD in]
+Bilder auf Festplatte zwischenspeichern unter
+[Clear Buffer]
+Speicher leeren
+[MimeTex.exe|MimeTex.exe|Executeables|*.exe]
+MimeTex.exe|MimeTex.exe|Anwendungen|*.exe
+[Select MathModule++ buffer directory]
+Wähle Verzeichnis für Festplattenspeicher
+[Cannot find Mimetex.exe in:\n\r\n\r%s\n\r%s\n\r%s\n\r%s\n\r\n\rNo formulae will be shown until you select mimetex in options.]
+Kann MimeTex.exe in:\n\r\n\r%s\n\r%s\n\r%s\n\r%s\n\r\n\rnicht finden. Es wird keine Formel angezeigt, bis sie MimeTex ausgewählt haben.
+[MathModule++ error]
+MathModule++-Fehler
+[Rebuild menu]
+Menü neu erstellen
+[Reset menu]
+Menü zurücksetzen
+[Auto update]
+automatisch aktualisieren
+[Save Preview as...]
+Vorschau speichern unter...
+[Configure Preview...]
+Menü einrichten...
+[New profile]
+Neues Profil
+[Add default profiles]
+Standardprofil hinzufügen
+[Import profile]
+Profil importieren
+[Export profile]
+Profil exportieren
+[Preview Formula:]
+Formelvorschau:
+[part to insert left of caret:]
+linker Teil der einzufügenden Formel:
+[part to insert right of caret:]
+rechter Teil der einzufügenden Formel:
+[You are about to reset your preview profile settigs to default. All changes will be lost.\n\rDo you want to continue?]
+Sie sind dabei Ihre Vorschauprofile in den Ausgangsstatus zurückzusetzen. Alle Änderungen gehen verloren.\n\rMöchten Sie fortfahren?
+[Reset preview profile settings]
+Vorschauprofile zurücksetzen
+[brackets]
+Klammern
+[relations/comparisons]
+Relationen/Vergleiche
+[special symbols]
+spezielle Symbole
+[set operations]
+Mengenoperatoren
+[arrows]
+Pfeile
+[functions]
+Funktionen
+[accents]
+Akzente
+[greek letters]
+Griechische Buchstaben
+[round braket]
+Runde Klammer
+[square bracket]
+Eckige Klammer
+[left sided brakets]
+Klammern links
+[left round braket]
+Runde Klammer links
+[left square bracket]
+Eckige Klammer links
+[right sided brakets]
+Klammern rechts
+[right round braket]
+Runde Klammer rechts
+[right square bracket]
+Eckige Klammer rechts
+[smaller]
+kleiner
+[less or equal]
+kleiner gleich
+[not smaller]
+nicht kleiner
+[not less or equal]
+nicht kleiner gleich
+[larger]
+größer
+[geater or equal]
+größer gleich
+[equal]
+gleich
+[not equal]
+ungleich
+[equivalent]
+äquivalent
+[not equivalent]
+nicht äquivalent
+[approximation]
+Ännäherung
+[congruent]
+kongruent
+[proportional to]
+proportional zu
+[Alpha]
+Alpha
+[Beta]
+Beta
+[Gamma]
+Gamma
+[Delta]
+Delta
+[Epsilon]
+Epsilon
+[Zeta]
+Zeta
+[Eta]
+Eta
+[Theta]
+Theta
+[Jota]
+Jota
+[Kappa]
+Kappa
+[Lambda]
+Lambda
+[My]
+My
+[Ny]
+Ny
+[Xi]
+Xi
+[Omikron]
+Omikron
+[Pi]
+Pi
+[Rho]
+Rho
+[Sigma]
+Sigma
+[Tau]
+Tau
+[Ypsilon]
+Ypsilon
+[Phi]
+Phi
+[Chi]
+Chi
+[Psi]
+Psi
+[Omega]
+Omega
+[alpha]
+alpha
+[beta]
+beta
+[gamma]
+gamma
+[delta]
+delta
+[epsilon]
+epsilon
+[zeta]
+zeta
+[eta]
+eta
+[theta]
+theta
+[jota]
+jota
+[kappa]
+kappa
+[lambda]
+lambda
+[my]
+my
+[ny]
+ny
+[xi]
+xi
+[omikron]
+omikron
+[pi]
+pi
+[rho]
+rho
+[sigma]
+sigma
+[tau]
+tau
+[ypsilon]
+ypsilon
+[phi]
+phi
+[chi]
+chi
+[psi]
+psi
+[omega]
+omega
+[double sided brakets]
+beidseitige Klammern
+[brace]
+geschwungene Klammer
+[floor]
+unten abgewinkelt
+[ceiling]
+oben abgewinkelt
+[angle]
+Winkel
+[pipe]
+Rohr
+[double pipe]
+Doppelrohr
+[left invisible border]
+linke Seite unsichtbar
+[left brace]
+geschwungene Klammer links
+[left floor]
+unten abgewinkelt links
+[left ceiling]
+oben abgewinkelt links
+[left angle]
+Winkel links
+[left pipe]
+Rohr links
+[left double pipe]
+Doppelrohr links
+[right invisible border]
+rechte Seite unsichtbar
+[right brace]
+geschwungene Klammer rechts
+[right floor]
+unten abgewinkelt rechts
+[right ceiling]
+oben abgewinkelt rechts
+[right angle]
+Winkel rechts
+[right pipe]
+Rohr rechts
+[right double pipe]
+Doppelrohr rechts
+[overbrace]
+geschwungene Klammer oben
+[underbrace]
+geschwungene Klammer unten
+[less, predecessor...]
+kleiner als, Vorgänger...
+[predecessor]
+Vorgänger
+[triangle left]
+Dreieck links
+[subset]
+Teilmenge
+[subset or equal]
+Teilmenge oder gleich
+[not predecessor]
+nicht Vorgänger
+[not triangle left]
+nicht Dreieck links
+[not subset]
+nicht Teilmenge
+[not subset or equal]
+nicht Teilmenge oder gleich
+[greater, successor...]
+größer als, Nachfolger...
+[successor]
+Nachfolger
+[triangle right]
+Dreieck rechts
+[superset]
+Obermenge
+[superset or equal]
+Obermenge oder gleich
+[not larger]
+nicht größer als
+[not geater or equal]
+nicht größer als oder gleich
+[not successor]
+nicht Nachfolger
+[not triangle right]
+nicht Dreieck rechts
+[not superset]
+nicht Obermenge
+[not superset or equal]
+nicht Obermenge oder gleich
+[infinity]
+unendlich
+[partial]
+Partial
+[nabla]
+Nabla
+[for all]
+für alle
+[exists]
+existiert
+[imaginary unit]
+imaginäre Einheit
+[real]
+Real
+[imaginary part]
+imaginärer Teil
+[aleph]
+Aleph
+[angle]
+Winkel
+[bot]
+kleinstes Element
+[top]
+größtes Element
+[diamond]
+Diamant
+[ell]
+Ell
+[wp]
+Weierstraßsches P
+[hbar]
+H-quer
+[negation]
+Negation
+[plus minus]
+Plus Minus
+[minus plus]
+Minus Plus
+[mal]
+mal
+[div]
+Durch
+[asterix]
+Stern
+[center dot]
+Punkt(mittig)
+[circle]
+Kreis
+[bullet]
+dicker Punkt
+[o times]
+O Mal
+[o plus]
+O Plus
+[o minus]
+O Minus
+[o dot]
+O Punkt
+[o slash]
+O Schräge
+[not ones...]
+nicht...
+[not for all]
+nicht für alle
+[not exists]
+nicht existiert
+[not in]
+nicht Element von
+[not reverse in]
+nicht Element von (andersrum)
+[not subset]
+nicht Teilmenge
+[not subset or equal]
+nicht Teilmenge oder gleich
+[not cup]
+nicht Vereinigungsmenge
+[not cap]
+nicht Schnittmenge
+[not vee]
+nicht ODER
+[not wedge]
+nicht UND
+[for all]
+für alle
+[exists]
+existiert
+[in]
+Element von
+[reverse in]
+Element von (andersrum)
+[subset]
+Teilmenge
+[subset or equal]
+Teilmenge oder gleich
+[cup]
+Vereinigungsmenge
+[cap]
+Schnittmenge
+[vee]
+ODER
+[wedge]
+UND
+[big cup]
+große Vereinigungsmenge
+[big cap]
+große Schnittmenge
+[single line arrows]
+einlinige Pfeile
+[right]
+rechts
+[up]
+hoch
+[left]
+links
+[down]
+runter
+[left right arrow]
+Links-Rechtspfeil
+[up down arrow]
+Hoch-Runterpfeil
+[long right]
+langer Rechtspfeil
+[long up]
+langer Hochpfeil
+[long left]
+langer Linkspfeil
+[long down]
+langer Runterpfeil
+[long left right arrow]
+langer Links-Rechtspfeil
+[long up down arrow]
+langer Hoch-Runterpfeil
+[double line arrows]
+zweilinige Pfeile
+[right]
+rechts
+[up]
+hoch
+[left]
+links
+[down]
+runter
+[left right arrow]
+Links-Rechtspfeil
+[up down arrow]
+Hoch-Runterpfeil
+[long right]
+langer Rechtspfeil
+[long up]
+langer Hochpfeil
+[long left]
+langer Linkspfeil
+[long down]
+langer Runterpfeil
+[long left right arrow]
+langer Links-Rechtspfeil
+[long up down arrow]
+langer Hoch-Runterpfeil
+[diagonal arrows]
+diagonale Pfeile
+[north east]
+Nord-Ost
+[south east]
+Süd-Ost
+[south west]
+Süd-West
+[north west]
+Nord-West
+[fraction]
+Bruch
+[vector]
+Vektor
+[matrix]
+Matrix
+[root]
+Wurzel
+[n-th root]
+n-te Wurzel
+[sum]
+Summe 
+[product]
+Produkt
+[coproduct]
+Ko-Produkt
+[integral]
+Integral
+[double integral]
+Doppelintegral
+[ring integral]
+Ringintegral
+[vector]
+Vektor
+[hat]
+Dach
+[widehat]
+weites Dach
+[tilde]
+Tilde
+[widetilde]
+weite Tilde
+[bar]
+Quer
+[overline]
+überstrichen
+[underline]
+unterstrichen
+[single letter]
+einzelne Buchstabenzeichen
+[Review]
+Überprüfung
+[breve]
+Brevis
+[acute]
+Akut
+[grave]
+Gravis
+[dot]
+Punkt
+[double dot]
+Doppelpunkt
+[Opacity]
+Deckkraft

@@ -1,0 +1,149 @@
+; Pluginname: Tlen Protocol 
+; Version: 1.0.7.3
+; Dateiname: tlen.dll
+; Autor: the_leech
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1485
+; Übersetzung: Foso 28.01.07
+
+[Tlen Authentication]
+Tlen-Authentifizierung
+[Accept all alerts]
+Alle Alarme akzeptieren
+[Ignore alerts from unauthorized contacts]
+Nur Alarme von autorisierten Kontakten akzeptieren 
+[Ignore all alerts]
+Alle Alarme ignorieren
+[Always ask me]
+Immer fragen
+[Accept invitations from authorized contacts]
+Einladungen von autorisierten Kontakten akzeptieren
+[Accept all invitations]
+Alle Einladungen akzeptieren
+[Ignore invitations from unauthorized contacts]
+Nur Einladungen von autorisierten Kontakten akzeptieren 
+[Ignore all invitation]
+Alle Einladungen ignorieren
+[<Last message>]
+<Letzte Nachricht>
+[<Ask me>]
+<Frage mich>
+[These changes will take effect the next time you connect to the Tlen network.]
+Diese Änderungen werden erst nach erneuter Verbindung zum Tlen-Netzwerk aktiv.
+[Tlen Protocol Option]
+Tlen-Protokolloptionen
+[The connection requires an OpenSSL library, which is not installed.]
+Die Verbindung benötigt eine OpenSSL-Bibliothek, welche nicht installiert ist.
+
+[Forwarding]
+Weiterleitung
+[Tlen login]
+Tlen-Anmeldung
+[Tlen Chats...]
+Tlen-Chats...
+
+[Incoming mail]
+Eingehende E-Mail
+[Private conference]
+Private Konferenz
+[New mail]
+Neue E-Mail
+[Unknown error message]
+Unbekannte Fehlernachricht
+[You have been kicked. Reason: %s ]
+Sie wurden gekickt. Grund: %s
+[An alert has been received.]
+Ein Alarm wurde empfangen.
+[Voice Chat]
+Sprachchat
+[You cannot join this chat room, because you are banned.]
+Sie können diesen Chatraum nicht betreten, da Sie gebannt wurden.
+[Chat room not found.]
+Chatraum nicht gefunden.
+[This is a private chat room and you are not one of the members.]
+Dies ist ein privater Chatraum und Sie sind keines der Mitglieder.
+[Unknown error code : %d]
+Unbekannter Fehlercode: %d
+[You cannot send any message unless you join this chat room.]
+Sie können keine Nachricht senden, bevor Sie nicht den Chatraum betreten haben.
+[Nickname '%s' is already registered.]
+Nick '%s' ist bereits registriert.
+[Nickname already in use, please try another one. Hint: '%s' is free.]
+Der Nick wird bereits verwendet, bitte versuchen Sie einen anderen. Hinweis: '%s' ist frei.
+[You cannot register more than %s nicknames.]
+Sie können nicht mehr als %s Nicks registrieren.
+[Anonymous nicknames are not allowed in this chat room.]
+Anonyme Nicks sind in diesem Chatraum nicht erlaubt.
+[You cannot create more than %s chat rooms.]
+Sie können nicht mehr als %s Chaträume erstellen.
+[Chat room with already created.]
+Chatraum wurde bereits erstellt.
+[You cannot join more than %s chat rooms.]
+Sie können nicht mehr als %s Chaträume betreten.
+[Create a new account]
+Neuen Account erstellen
+[Automatically reconnect after unintentional disconnection]
+Automatisch wiederverbinden nach unbeabsichtigtem Abbruch der Verbindung.
+[Show offline users with status messages as invisible in contact list]
+Zeige Offline-Kontakte mit Statusnachrichten als Unsichtbar in der Kontaktliste
+[Use Nudge plugin]
+Benutze Nudge-Plugin
+[Send and receive client version information]
+Sende und empfange Versionsinformationen
+[Enable Always Visible and Never Visible]
+Aktiviere Immer sichtbar und Niemals sichtbar
+[File Transfer and Voice Chats]
+Datenübertragung und Sprachchats
+[Use proxy for incoming connections]
+Benutze Proxy für eingehende Nachrichten
+[Expert Options]
+Experten-Optionen
+[Enable incoming mail notification]
+Aktiviere Benachrichtigung bei eingehenden E-Mails
+[Year of birth:]
+Geburtsjahr:
+[School:]
+Schule:
+[Looking for:]
+Interessen:
+[Recording device:]
+Aufnahmegerät
+[Playback device:]
+Wiedergabegerät
+[Subscription:]
+Beschreibung:
+[Personal Information]
+Persönliche Informationen
+[The following invitation to join a voice chat is received.]
+Die folgende Einladung, einem Chatraum beizutreten, ist eingegangen.
+[Multi-User Conference]
+Gruppenkonferenz
+[Voice chats]
+Sprachchats
+[Log alerts as messages]
+Alarme als Nachrichten speichern
+[Voice chat]
+Sprachchat
+[Alert]
+Alarm
+[%s Web Messages]
+%s Web-Nachrichten
+[Web message]
+Web-Nachricht
+[Tlen Inbox]
+Tlen-Posteingang
+
+[Login server:]
+Anmelde-Server:
+[Connection Host:]
+Verbindungshost:
+[Leave status message after disconnection]
+Statusnachricht nach Trennung belassen
+[Ignore advertisements]
+Werbung ignorieren
+
+;tlen.rc
+;[Alert policy]
+;[Group chat policy]
+;[Voice Chats]
+;[Voice chat policy]
+;[P&ermanent]

@@ -1,0 +1,24 @@
+; Pluginname: Window Start Position 
+; Version: 0.2.0.2
+; Dateiname: start_position.dll
+; Autor: souFrag
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1673
+; Übersetzung: 12.12.07 von Weishaupt
+; Besonderheiten: Entwicklung eingestellt!
+
+[Contact List Window Start Position]
+Kontaktlistenfenster Startposition
+[Always start...]
+Starte immer...
+[Pixels from Top]
+Pixel von oben :
+[Pixels from Side]
+Pixel von der Seite :
+[Opened]
+Geöffnet
+[Minimized to System Tray]
+Minimiere zum Systemtray
+[Window Start Position]
+Windows Start Position
+[Pixels from Bottom]
+Pixel von unten

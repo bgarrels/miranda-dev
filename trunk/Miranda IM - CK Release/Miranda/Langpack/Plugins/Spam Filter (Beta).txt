@@ -1,0 +1,379 @@
+; Pluginname: Spam Filter (Beta) 
+; Version: 2.5.2.4
+; Dateiname: spamfilter.dll
+; Autor: HeikoH
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2188
+; Übersetzung: hrathh, Weishaupt, FoSo
+
+[Spam Filter]
+Spam-Filter
+[Filters out advertisment messages, messages sent by robots and other disliked messages such as hoax messages.]
+Dieses Plugin filtert Werbe-Nachrichten, automatisch versandte Nachrichten und unerwünschte Nachrichten, wie Kettennachrichten, heraus.
+
+[Enable &spam popups]
+&Spam-Meldungen aktivieren
+[Disable &spam popups]
+&Spam-Meldungen deaktivieren
+[&Mark as spammer]
+&Als Spam-Versender markieren...
+[Mark contact as spammer]
+Kontakt als Spam-Versender markieren
+[Are you sure that the contact \"%s\" shall be marked as spammer?\r\n\r\nMarking a contact as spammer means that all associated messages will be recognized as spam and the contact will be completely ignored in the future.\r\nA contact that was marked as spammer can be unignored using the options dialog.]
+Soll der Kontakt \"%s\" wirklich als Spam-Versender markiert werden?\r\n\r\nEinen Kontakt als Spam-Versender markieren bedeutet, dass alle seine Nachrichten als Spam erkannt werden und der Kontakt für die Zukunft komplett ignoriert wird.\r\nSpam-versender können in der Einstellungen wieder aktiviert werden.
+
+[Disliked Message Alert!]
+Unerwünschte Nachricht-Alarm!
+[Advertisment Alert!]
+Werbung-Alarm!
+[Robot Alert!]
+Automatische Nachricht-Alarm!
+
+[Spam Filter Error]
+Spam-Filter Fehler
+[The log file "%s\"\r\ncan not be written. Please check the settings.]
+Die Protokollierdatei\r\n\"%s\" kann nicht geschrieben werden. Bitte überprüfen Sie die Einstellungen.
+[You did not install any Spam Definition files! Spam Filter can not work as powerful as it could.\r\n\r\nPlease install at least one language of the Spam Definitions.]
+Es wurden keine Spam-Definitionen installiert! Der Spam-Filter kann nicht so ausgeprägt funktionieren, wie er könnte.\r\n\r\nBitte installieren Sie mindestens eine Sprache der Spam-Definitionen.
+
+[Advertisment Alert]
+Werbung eingegangen
+[Disliked Message Alert]
+Unerwünschte Nachricht eingegangen
+[Robot Alert]
+Automatische Nachricht eingegangen
+
+[Spam Message Overlay]
+Spam-Nachricht Indikator
+
+[ (spammer)]
+ (Spam-Versender)
+
+[Manually set as spam]
+Manuell as Spam markiert
+[Is empty]
+Enthält keinen Text
+[Is multiple]
+Ist mehrfach empfangene Nachricht
+[Is capitalized]
+Enthält nur große Buchstaben
+[Contains URL address]
+Enthält URL-Adresse
+[Contains phone number]
+Enthält Telefonnummer
+[Is teaser]
+Ist Locknachricht
+[User is known as spammer]
+Benutzer ist als Spam-Versender bekannt
+[Contains 1 bad phrase]
+Enthält 1 Spam-Wort
+[Contains %u bad phrases]
+Enthält %u Spam-Wörter
+[Contains 1 differently formated bad phrases]
+Enthält 1 abweichend formatiertes Wort
+[Contains %u differently formated bad phrases]
+Enthält %u abweichend formatierte Wörter
+[Contains 1 good phrase]
+Enthält 1 positives Wort
+[Contains %u good phrases]
+Enthält %u positive Wörter
+[Contains 1 disliked indicating phrase]
+Enthält 1 unerwünschte Wortkombination
+[Contains %u disliked indicating phrase]
+Enthält %u unerwünschte Wortkombinationen
+; Separator:
+;[, ]
+[Message deleted]
+Nachricht gelöscht
+[Message marked read]
+Nachricht als gelesen markiert
+[User ignored]
+Benutzer ignoriert
+
+[[%log_date% %log_time%, User: %log_user%, Type: %log_type%]\r\nRecognition: %log_recognition%\t\r\nResult: %log_result%\r\n%log_message%\r\n\r\n]
+(%log_date% %log_time%, Benutzer: %log_user%, Typ: %log_type%]\r\nErkennung: %log_recognition%\t\r\nErgebnis: %log_result%\r\n%log_message%\r\n\r\n)
+
+;[\"%log_date%\";\"%log_time%\";\"%log_user%\";\"%log_type%\";\"%log_recognition%\";\"%log_result%\";\"%log_message%\"\r\n]
+[Date;Time;User;Type;Recognition;Result;Message\r\n]
+Datum;Uhrzeit;Benutzer;Typ;Erkennung;Ergebnis;Nachricht\r\n
+
+[Received Spam]
+Empfangene Spam-Nachrichten
+[Logged since]
+Protokolliert seit
+[Recognition:]
+Erkennung:
+[Result:]
+Ergebnis:
+
+[&Advertisment Filter (recommended)]
+&Werbung-Filter (empfohlen)
+[Filters out advertisments from unknown users that are not on the contact list.]
+Filtert Werbe-Nachrichten von Benutzern, die nicht in der Kontaktliste aufgeführt sind, heraus.
+[C&onfigure...]
+K&onfigurieren...
+[&Robot Filter]
+&Automatische Nachrichten-Filter
+[Filters out all automated messages from unknown contacts via requesting a correct answer from the sender.]
+Filtert alle automatisch versandten Nachrichten heraus, durch Anforderung einer korrekten Antwort von unbekannten Versendern.
+[Co&nfigure...]
+Ko&nfigurieren...
+[&Disliked Messages Filter]
+&Unerwünschte Nachrichten-Filter
+[Filters out disliked messages such as hoax messages from known contacts that are on your contact list.]
+Filtert unerwünschte Nachrichten, wie Kettennachrichten, von Kontakten, die in der Kontaktliste aufgeführt sind, heraus.
+[Con&figure...]
+Kon&figurieren...
+[Mar&k spam messages as read]
+Spam als &gelesen markieren
+[D&elete spam messages]
+Spam-Nachrichten &löschen
+[Show &popup when a spam message is received]
+&Popup-Fenster anzeigen, wenn eine Spam-Nachricht eingeht
+[Auto Ignore]
+Automatisch Ignorieren
+[Automatically &ignore spamming users]
+Spam-Versender automatisch ignorieren
+[Allowed spam per &user:]
+&Erlaubte Spam-Nachrichten:
+[Rese&t...]
+Zurückse&tzen
+[Reset Automatic Ignore]
+Automatisches Ignorieren zurücksetzen
+[Are you sure that the Auto Ignore counters shall really be reset?\n\nSpammers that are not already ignored will then not be remembered any longer.]
+Sollen die Zähler für das Automatische Ignorieren wirklich zurückgesetzt werden?\r\nSpam-Versender, die noch nicht ignoriert sind werden dann nicht mehr vorgemerkt sein.
+[Message Types]
+Nachrichtentypen
+[Types of incoming e&vents which shall be checked for spam:]
+Eingehende Nachrichtentypen die überprüft werden sollen:
+[Spam Logging]
+Protokollierung
+[&Log spam messages to file:]
+Spam in Datei &speichern:
+; Default Log file name:
+;[Spam.xml]
+;[&...]
+[&Show]
+&Anzeigen
+
+[Configure Advertisment Filter]
+Werbe-Filter konfigurieren
+[Bad Phrases]
+Spam-Wortkombinationen
+[Look for standard &bad phrases in received messages]
+Auf &Standard Spam-Wörter in empfangenen Nachrichten prüfen
+[Also watch for following &customized bad phrases:]
+Auch nach &folgenden Spam-Wörtern suchen:
+[Automated message]
+Automatisch generierte Nachricht
+[All&owed bad phrases until spam:]
+Erlau&bte Anzahl an Spam-Wörtern:
+[Recogni&ze different formating]
+Abweichende &Formatierung erkennen
+[Allowed &formated bad phrases:]
+Erlaubte formatierte &Wörter:
+[Known Spammers]
+Spam-Versender
+[Filter out messages from standard &known spammers]
+Nachrichten von standardmäßigen Spam-Versendern herausfiltern
+[Bad Contents]
+Spam-Inhalte
+[&URL addresses]
+&URL-Adressen
+[&Phone numbers]
+&Telefonnummern
+[C&apitalized messages]
+&Großgeschriebene Nachrichten
+[&Empty messages]
+&Leere Nachrichten
+[Messages containing &spaces only]
+Nachrichten die nur Leerzeichen enthalten
+[&Multiple messages with same content]
+&Mehrere Nachrichten mit gleichem Inhalt
+[&Teaser messages]
+&Locknachrichten
+[Good Phrases]
+Positive Wortkombinationen
+[Messages are &no spam when containing some of the following phrases:]
+Nachrichten &nicht als Spam ansehen, wenn folgende Wörter enthalten sind:
+[Allo&wed phrases until no spam:]
+Erlaubte &positive Wörter:
+[(You can use normal words or Regular Expressions)]
+(Man kann Wörter oder ganze Ausdrücke verwenden)
+
+[Configure Robot Filter]
+Filter für automatisch versendete Nachrichten konfigurieren
+[Message Texts]
+Nachrichtentexte
+[&Instruction:]
+&Anleitung:
+[Please reply \"%securitycode%\" without quotes if you want to contact me. If you don't reply correctly your messages will be ignored. Sorry for the inconvenience.\r\n\r\n(Automated message)"]
+Bitte \"%securitycode%\" ohne Anführungszeichen zurücksenden, um mit mir in Kontakt zu treten. Alle anderen Nachrichten werden zunächst ignoriert. Entschuldigunbg für die Unannehmlichkeiten.\r\n\r\n(Automatische Nachricht)
+[&Confirmation:]
+&Bestätigung:
+[Thank you for your patience. All your messages are now no longer queued and go through directly\r\n\r\n(Automated message)]
+Danke für die geduld. Alle Nachrichten werden nun direkt empfangen.\r\n\r\n(Automatische Nachricht)
+[(You can use the substitute symbols %sender%, %message% and %securitycode% for the appropriate contents.)]
+(Die Platzhalter %sender%, %message% und %securitycode% können für die jeweiligen Inhalte verwendet werden.)
+[Add the message texts to contact &history]
+Zum &Nachrichtenverlauf hinzufügen
+[Security Code]
+Richtige Antwort
+[The following text needs to be replied by the contact to confirm that the message was not sent automatically:]
+Der folgende Text muss vom Benutzer zurückgesendet werden um zu bestätigen, dass seine Nachricht nicht automatisch versandt wurde:
+[&Scramble]
+&Zufall
+; Random chars (Note: misunderstandable chars removed)
+;[abcdefghkmnpqrstuvwxyz23456789ABCDEFGHJKLMNPQRSTUVWXYZ23456789]
+[(You can use readable words, too.)]
+(Lesbare Wörter sind auch möglich.)
+[Note: The filter gets invoked after the Advertisment Filter.\nThus, no instruction message will be sent in reply to advertisment messages.]
+Beachte: Der Filter wird erst nach dem Werbe-Filter angewendet.\nDeshalb wird auf Werbe-Nachrichten nicht mit dieser Anweisung geantwortet.
+
+[Configure Disliked Messages Filter]
+Filter für unerwünschte Nachrichten konfigurieren
+[Hoax Messages]
+Kettennachrichten
+[Look for &known hoax message texts]
+Auf &bekannte Texte von Kettennachrichten prüfen
+[Indicating Phrases]
+Wortkombinationen
+[Look for the following indicating &phrases:]
+Auf folgende &Worte prüfen:
+[Please forward]
+Bitte weiterleiten
+[Auto &reply to disliked messages using the following text:]
+Autom. auf unerwünschte Nachrichten mit folgendem Text &antworten:
+[Hi %sender%,\r\nI don't like such messages. Please don't send them to me anymore.\r\nThanks.\r\n\r\n(Automated message)]
+Hallo %sender%\r\nIch kann solche Nachrichten nicht ausstehen. Bitte sende sie mir nicht mehr.\r\nDanke.\r\n\r\n(Automatisch generierte Nachricht))
+[(You can use the substitute symbols %s and %s for the appropriate contents.)]
+(Die Platzhalter %sender% und %message% können für die jeweiligen Inhalte verwendet werden.)
+[Add the reply to contact &history]
+Zum &Verlauf des Kontakts hinzufügen
+
+[Select Log File]
+Protokollierdatei festlegen
+[Text Files (*.txt)]
+Textdokumente (*.txt)
+[Log Files (*.log)]
+Log-Dateien (*.log)
+[Comma Separated Values Files (*.csv)]
+CSV (Trenzeichen-getrennt) (*.csv)
+[XML Files (*.xml)]
+XML-Dateien (*.xml)
+[All Logging Files (*.log; *.txt; *.csv; *.xml)]
+Alle Protokollierdateien (*.log; *.txt; *.csv; *.xml)
+
+[&New indicating phrase:]
+&Neue Wortkombination:
+[Add bad phrase]
+Spam-Wort hinzufügen
+[Remove bad phrase]
+Spam-Wort entfernen
+[The entered bad phrase \"%s\" already exists in the list.\r\n\r\nThe filter doesn't differentiate between lower and upper case.\nTwo entries with the same phrase are not neccessary\nand will decrease the filter quality.\r\n\r\nShall the bad phrase be added anyway?]
+Das soeben eingegebene Spam-Wort \"%s\" existiert bereits in der Liste.\r\n\r\nDer Filter unterscheidet nicht zwischen Groß- und Kleinschreibung\nin den Wörtern, deshalb sind zwei Einträge mit demselben Wort nicht notwendig\nund würden die Filterqualität negativ beeinflussen.\r\n\r\nSoll das Spam-Wort dennoch hinzugefügt werden?
+[The entered bad phrase \"%s\" already exists in the default bad phrases lists.\r\n\r\nAllowing the same bad phrase in the customized bad phrases lists will\npull down the filter quality.\r\n\r\nShall the bad phrase be added anyway?]
+Das soeben eingegebene Spam-Wort \"%s\" existiert bereits in den Standard-Wörtern.\r\n\r\nEin selbsteingegebenes Spam-Wort sollte jedoch nicht in den Standard-Wörtern\nvorkommen, da dadurch die Filter-Qualität negativ beeinflusst werden könnte.\r\n\r\nSoll das Spam-Wort dennoch hinzugefügt werden?
+[Add good phrase]
+Positives Wort hinzufügen
+[Remove good phrase]
+Positives Wort entfernen
+[The entered good phrase \"%s\" already exists in the list.\r\n\r\nThe filter doesn't differentiate between lower and upper case.\nTwo entries with the same phrase are not neccessary\nand will decrease the filter quality.\r\n\r\nShall the good phrase be added anyway?]
+Das soeben eingegebene positive Wort \"%s\" existiert bereits in der Liste.\r\n\r\nDer Filter unterscheidet nicht zwischen Groß- und Kleinschreibung\nin den Wörtern, deshalb sind zwei Einträge mit demselben Wort nicht notwendig\nund würden die Filterqualität negativ beeinflussen.\r\n\r\nSoll das positive Wort dennoch hinzugefügt werden?
+[Add indicating phrase/pattern]
+Wortkombination hinzufügen
+[Remove indicating phrase]
+Wortkombination entfernen
+[The entered indicating phrase \"%s\" already exists in the list.\r\n\r\nThe filter doesn't differentiate between lower and upper case.\nTwo entries with the same phrase are not neccessary\nand will decrease the filter quality.\r\n\r\nShall the chain indicating phrase be added anyway?]
+Die soeben eingegebene Wortkombination \"%s\" existiert bereits in der Liste.\r\n\r\nDer Filter unterscheidet nicht zwischen Groß- und Kleinschreibung\nin den Wörtern, deshalb sind zwei Einträge mit demselben Wort nicht notwendig\nund würden die Filterqualität negativ beeinflussen.\r\n\r\nSoll die Wortkombination dennoch hinzugefügt werden?
+
+[You chose to ignore all kind of messages from contacts that are not on your contact list although the spam filter is activated.\r\n\r\nShall the spam filter be deactivated?]
+Nachrichten von Benutzern, die nicht auf der Kontaktliste sind, werden im Moment ignoriert.\r\nJedoch ist der Spam-Filter aktiviert, der unerwünschte Nachrichten von solchen Benutzern herausfiltert.\r\n\r\nSoll der Spam-Filter deaktiviert werden?
+
+[Mark spam messages as read]
+Markiere Spam Nachrichten als gelesen
+
+[Spam Notification]
+Spam Benachrichtigung
+[Show &popup on spam message]
+Zeige Popup bei Spam Nachricht
+
+[Popup Background]
+Popup Hintergrund
+[Spammer Indicator]
+Spammer Anzeiger
+[Spam Definitions]
+Spam Definitionen
+[&Unmark spammer]
+&Spammer austragen
+[&Hide spammers from contact list]
+Spammer in der Kontaktliste verstecken
+[Store spammers in special &group:]
+Spammer in spezieller &Gruppe speichern:
+[Messages containing &known hoax message texts]
+Nachrichten die bekannte &Kettennachrichten beinhalten
+[Indicating Phrases/Patterns]
+Hinweisende Sätze/Schemata
+[Disliked Contents]
+Ungewünschter Inhalt
+[Warning: Not all Spam Definitions are available! Some features are disabled.]
+Achtung: Nicht alle Definitionen sind verfügbar! Manche Features sind deaktiviert.
+[(You can use the substitute symbols %sender% and %message% for the appropriate contents.)]
+Du kannst die Variablen %sender% und %message% (Nachricht) für den empfangenen Inhalt nutzen.
+[Bad Phrases/Patterns]
+Unerwünschte Sätze/Schemata
+[Good Phrases/Patterns]
+Erwünschte Sätze/Schemata
+[Add good phrase/pattern]
+Erwünschte Sätze/Schemata hinzufügen
+[Remove good phrase/pattern]
+Erwünschte Sätze/Schemata entfernen
+[Remove bad phrase/pattern]
+Unerwünschte Sätze/Schemata entfernen
+[Add bad phrase/pattern]
+Unerwünschte Sätze/Schemata hinzufügen
+[The following contacts were recognized as spammers:]
+Der/Die folgende(n) Kontakt(e) wurde(n) als Spammer erkannt:
+[Ignored Spammers]
+Ignorierte Spammer
+[Phone Number Recognition]
+Telefonnummer-Erkennung
+[URL Recognition]
+URL-Erkennung 
+[Installed Spam Definitions for filter:]
+Installierte Spamdefinitonen zum Filtern:
+[Disliked Messages Filter]
+Filter für ungewünschte Nachrichten
+[Advertisment Filter]
+Anzeigen-Filter
+[Download more Spam Definitions]
+Weitere Spamdefiniton runterladen
+[Spam Definitions: Advertisment Filter]
+Spamdefintionen: Anzeigen-Filter
+[Spam Definitions: Disliked Messages Filter]
+Spamdefintionen: Filter für ungewünschte Nachrichten
+[Known Hoax Texts]
+Bekannte Hoax Texte
+[&Hide users until they identified themselves]
+Benutzer verstecken bis sie sich identifiziert haben
+[(You can use the substitute symbols %sender%, %message%, %securitycode% and %triesleft% for the appropriate contents.)]
+Sie können die Variablen %sender%, %message%, %securitycode% und %triesleft% verwenden für den passenden Inhalt.
+[Spa&mmers]
+Spa&mmer
+[Use variables in the message text]
+Variablen im Nachrichtentext benutzen
+[&New phrase/pattern:]
+Neue Sätze/Schemata:
+[(Regular Expressions disabled)]
+(Regelmäßige Ausdrücke deaktiviert)
+[&Random]
+Zufall
+[Different Format Recognition: Numbers]
+Verschiedene Format Erkennung: Nummern
+[Different Format Recognition: Separators]
+Verschiedene Format Erkennung: Separatoren
+[Different Format Recognition: Text]
+Verschiedene Format Erkennung: Text
+[Default Bad Words]
+Böse Wörter 
+[Known Teaser Texts]
+Bekannte harte Nüsse

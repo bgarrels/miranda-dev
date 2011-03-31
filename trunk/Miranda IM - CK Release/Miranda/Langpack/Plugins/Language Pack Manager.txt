@@ -1,0 +1,64 @@
+; Pluginname: Language Pack Manager
+; Version 1.0.1.1
+; Dateiname: langman.dll
+; Autor: hrathh
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3002
+; Übersetzung: H. Herkenrath
+; Besonderheiten: Entwicklung ist eingestellt !
+
+[Language Pack Manager]
+Sprachdatei-Manager
+[Helps you manage Language Packs of different languages.]
+Hilft dabei Sprachdateien verschiedener Sprachen zu verwalten.
+
+[Language Pack Manager Plugin]
+Sprachdatei-Manager
+[The Language Pack Manager plugin can not be loaded. It requires Miranda IM %s or later.]
+Der Sprachdatei-Manager kann nicht geladen werden. Es wird Miranda IM %s oder neuer benötigt.
+[This version of the Language Pack Manager plugin is incompatible with your Miranda IM version. Install the ANSI version of the plugin instead.]
+Diese Version des Sprachdatei-Managers ist inkompatibel mit der installierten Version von Miranda IM. Statt der aktuellen Version muss die ANSI-Version verwendet werden.  
+
+[Installed Languages]
+Installierte Sprachpakete
+[&Languages]
+&Sprachen
+[No Help Pack installed!]
+Keine Hilfedatei installiert!
+[Not included:]
+Nicht enthalten:
+[Last modified using:]
+Unter Verwendung von:
+[Locale:]
+Lokale:
+[Incompatible]
+Nicht kompatibel
+[All installed plugins are included.]
+Alle installierten Plugins sind enthalten.
+[Download more Language Packs]
+Weitere Sprachdateien herunterladen
+[Select your language]
+Wählen Sie Ihre Sprache
+[Note: This will download and install the newest language pack available for the selected language. There might be language packs from other authors available on the file listing.]
+Achtung: Dies wird die neueste Version der gewählten Sprache runterladen und installieren. Vielleicht gibt es Sprachpakete von anderen Autoren im File listing. 
+[Miranda IM is available in many languages.\nHere is a list of all available languages of the file listing, please select your native &language:]
+Miranda IM ist in vielen Sprachen verfügbar.\nHier ist eine Liste alle verfügbaren Sprachen im File listing, bitte wählen Sie Ihre &Muttersprache:
+[Download &all languages]
+Alle &Sprachen runterladen
+[Automatically check for new &versions of Language Packs]
+Automatisch nach neuen Versionen der Sprachpakete prüfen
+[Language Pack Update HTTP connection]
+Sprachpaket Update HTTP Verbindung
+[The download succeeded!]
+Download abgeschlossen!
+[Language Pack Download finished]
+Sprachpaket Download fertig
+[The download failed!\n\nThe language pack could not be downloaded or extracted.]
+Download fehlgeschlagen!\n\nDas Sprachpaket konnte nicht runtergeladen oder extrahiert werden.
+; Context Menu
+[&Remove...]
+&Entfernen...
+
+[All names of the Language Packs can be translated]
+Alle Namen der Sprachdatei.Pakete können übersetzt werden
+[English (default)]
+Englisch (Standard)

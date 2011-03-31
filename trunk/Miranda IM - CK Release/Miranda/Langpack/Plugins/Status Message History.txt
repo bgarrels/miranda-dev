@@ -1,0 +1,19 @@
+; Pluginname: Status Message History 
+; Version: 0.1.0.2
+; Dateiname: smh.dll, smhW.dll
+; Autor: pescuma
+; Link ANSI: http://addons.miranda-im.org/details.php?action=viewfile&id=3062
+; Link Unicode: http://addons.miranda-im.org/details.php?action=viewfile&id=3063
+; Übersetzung: 21.02.07 von Foso
+
+[Don't save Unicode parts for 7bit ANSI history (saves db space)]
+Bitte keine Unicodeteile für 7-Bit Ansi Verlauf verwenden (verringert DB)
+[Track when contacts change their status messages]
+Speichern, wenn Kontakt seine Statusnachricht wechselt
+[Track when contacts remove their status messages]
+Speichern, wenn Kontakt seine Statusnachricht entfernt
+
+[changed his/her status message to %s]
+wechselte seine/ihre Statusnachricht zu %s
+[removed his/her status message]
+entfernte seine/ihre Statusnachricht

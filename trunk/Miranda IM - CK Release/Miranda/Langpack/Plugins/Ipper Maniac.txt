@@ -1,0 +1,56 @@
+; Pluginname: Ipper Maniac
+; Version: 0.0.1.23
+; Dateiname: mIpper.dll
+; Autor: Alexander Logvinov 
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=993
+; Übersetzung: 14.02.07 von mistaTT
+; Besonderheiten: Entwicklung eingestellt!
+
+[Send &IP-addresses]
+IP-Adresse senden
+
+[Sends your IP-addresses to selected user]
+Sendet Ihre IP-Adresse dem gewählten Benutzer
+
+[Message template:]
+Nachrichtenvorlage:
+[Insert addresses in message (without sending)]
+IP in Nachricht einfügen (ohne zu senden)
+[Send each address in new message]
+Für jede Adresse eine neue Nachricht senden
+[Add message to history]
+Nachricht zum Nachrichtenverlauf hinzufügen
+[Show IP selection window]
+Zeige Fenster zur auswahl der Adresse
+[Use DNS name if exists]
+Benutze DNS-Name wenn bekannt
+[Try to get external addresses]
+Versuche externe IP zu bestimmen
+[Use addresses of PPP connections only]
+Nur Adressen von PPP Verbindungen benutzen
+[Remote support]
+Fernverwaltung
+[Command:]
+Befehl:
+[Enable remote support]
+Aktiviere Fernverwaltung
+[Remote command:]
+Fernbefehl:
+[Use custom lists]
+Benutze eigene Listen
+[Custom lists]
+Eigene Listen
+[Include addresses:]
+IPs einschließen
+[Exclude addresses:]
+IPs ausschließen
+[Macros for message templates:\n\n%ip = IP\n%dns = DNS\n%nl = new line\n%me = your nick\n%rcp = recip. nick]
+Variablen für die Nachrichtenvorlage:\n\n%ip = IP\n%dns = DNS\n%nl = Neue Zeile\n%me = Dein Nichname\n%rcp = Empfänger Nickname
+[Warning! Experimental!\nMakes connection to checkip.dyndns.org. May not work properly because of firewall restrictions or transparent proxy.]
+Warnung! Experimentell!\nNimmt Verbindung mit checkip.dyndns.org auf. Könnte nicht richtig funktionieren wegen Firewallbeschränkungen oder Transparentem Proxy.
+
+[Choose IP-addresses]
+Wähle IP-Adresse
+
+[This plugin allows you to send your IP-addresses to people in your contact list with minimal troubles. It is also able to send IP by remote call.]
+Dieses Plugin sendet Ihre IP-Adressen an Leute in Ihrer Kontakliste.

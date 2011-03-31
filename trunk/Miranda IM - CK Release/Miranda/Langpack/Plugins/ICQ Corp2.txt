@@ -1,0 +1,12 @@
+; Pluginname: ICQ Corp2 
+; Version: 0.0.1.1
+; Dateiname: icq corp.dll
+; Autor: Eugene Tarasenko, Scherbina Vladimir, aka Sad
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2435
+; Übersetzung: Sebijk
+; Besonderheiten: Entwicklung eingestellt!
+
+[Send messages only via server]
+Sende Nachr. nur über den Server
+[Connect timeout (p2p mode only):]
+Verbindungs-Timeout (P2P-Modus):

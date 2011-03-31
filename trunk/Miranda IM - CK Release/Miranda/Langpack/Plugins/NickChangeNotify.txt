@@ -1,0 +1,65 @@
+; Pluginname: NickChangeNotify 
+; Version: 0.0.2.9
+; Dateiname: ncn.dll
+; Autor: noname
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1114
+; Übersetzung: 14.07.05 von Dober
+
+[Delayed notification (to avoid duplications)]
+Verzögere Ereignisbenachrichtigungen (um Doppelte Nachrichten zu verhindern)
+[Notify when contact removed their nickname]
+Benachrichtige wenn Kontakt seinen Nick ändert
+[Notify when nickname equals to custom name]
+Benachrichtige wenn der Nick dem Eigenen Name entspricht
+[Notify when contact is offline]
+Benachrichtige wenn der Kontakt offline geht
+[External History]
+Externen Verlauf 
+[Internal History]
+Internen Verlauf
+[Maximum entries]
+Maximalen Einträge 
+[PopUp text]
+Popup Text
+
+[My Custom Name]
+Mein Nutzeralias
+[Old Nickame]
+Alter Nickname
+[New Nickame]
+Neuer Nickname
+[Nickname Changed]
+Nickname geändert
+[Enable/Disable internal logging for this contact]
+Interne Protokollierung für diesen Kontakt de-/aktivieren
+[Enable/Disable external logging]
+Externe Protokollierung de-/aktivieren
+[Enable/Disable popups for this contact]
+Popups für diesen Kontakt de-/aktivieren
+[View nickname history]
+Nickverlauf
+[History format]
+Verlaufs-Format.
+[Log format]
+Log-Format.
+[Use contact's custom nickname to display popup]
+Eigenen Alias in Popup verwenden
+
+[PopUp display time]
+Anzeigedauer
+[Maximun history entry]
+Maximale Verlaufseinträge
+[Disable ni&ckname change notification]
+Nickänderungsmeldung deaktivieren
+[Enable ni&ckname change notification]
+Nickänderungsmeldung aktivieren
+[View Nickname History]
+Nickverlauf
+[Nickname History]
+Nickverlauf
+
+[changes his/her nickname to:]
+ändert seinen/ihren Nicknamen in:
+
+[Temporarily disable Popups]
+Popups temporär deaktiveren

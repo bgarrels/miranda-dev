@@ -1,0 +1,227 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,7
+ PRODUCTVERSION 1,0,0,7
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "Floating contacts plugin for Miranda"
+            VALUE "FileVersion", "1, 0, 0, 7"
+            VALUE "InternalName", "FltCont"
+            VALUE "LegalCopyright", "Copyright © 2002 Iavor Vajarov"
+            VALUE "OriginalFilename", "FltCont.dll"
+            VALUE "ProductName", "FltCont"
+            VALUE "ProductVersion", "1, 0, 0, 7"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_OPT_FLTCONT DIALOGEX 0, 0, 277, 234
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+EXSTYLE WS_EX_CONTROLPARENT
+FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+BEGIN
+    GROUPBOX        "Properties",IDC_STATIC,4,4,269,59
+    CONTROL         "Hide offline contacts",IDC_CHK_HIDE_OFFLINE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,18,95,10
+    CONTROL         "Stick together",IDC_CHK_STICK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,32,95,11
+    CONTROL         "Use fixed width",IDC_CHK_WIDTH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,46,65,12
+    EDITTEXT        IDC_TXT_WIDTH,87,45,30,12,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "",IDC_WIDTHSPIN,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS | UDS_HOTTRACK,117,44,11,14
+    LTEXT           "pixels",IDC_LBL_WIDTH,133,47,27,8
+    GROUPBOX        "Fonts",IDC_STATIC,4,64,269,125
+    COMBOBOX        IDC_FONTID,12,77,253,87,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "same",IDC_STSAMETEXT,19,91,45,10,SS_CENTERIMAGE
+    CONTROL         "Typeface",IDC_SAMETYPE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,64,91,52,10
+    CONTROL         "Size",IDC_SAMESIZE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,117,91,45,10
+    CONTROL         "Style",IDC_SAMESTYLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,163,91,48,10
+    CONTROL         "Colour",IDC_SAMECOLOUR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,212,91,53,10
+    LTEXT           "as:",IDC_STASTEXT,19,107,45,10,SS_CENTERIMAGE
+    COMBOBOX        IDC_SAMEAS,64,104,201,88,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_STHORZBAR,"Static",SS_ETCHEDHORZ,9,123,256,1
+    COMBOBOX        IDC_TYPEFACE,12,130,136,182,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_SCRIPT,156,130,60,68,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_FONTSIZE,226,130,40,69,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Bold",IDC_BOLD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,147,45,10
+    CONTROL         "Italic",IDC_ITALIC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,65,147,52,10
+    CONTROL         "Underline",IDC_UNDERLINE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,117,147,66,10
+    CONTROL         "",IDC_COLOUR,"ColourPicker",WS_TABSTOP,206,147,59,12
+    EDITTEXT        IDC_SAMPLE,63,163,151,16,ES_CENTER | ES_READONLY | NOT WS_TABSTOP
+    GROUPBOX        "Win 2000 / XP",IDC_GROUP_OPACITY,4,190,269,34,WS_GROUP
+    LTEXT           "Opacity:",IDC_STATIC,12,203,65,10
+    CONTROL         "Slider1",IDC_SLIDER_OPACITY,"msctls_trackbar32",TBS_TOP | TBS_NOTICKS | WS_TABSTOP,78,203,130,12
+    CTEXT           "100 %",IDC_OPACITY,212,205,32,8
+    CONTROL         "Hide all contacts",IDC_CHK_HIDE_ALL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,170,16,74,13
+    CONTROL         "Hide when a fulscreen app is active",IDC_CHK_HIDE_WHEN_FULSCREEN,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,170,28,93,20
+END
+
+IDD_OPT_THUMB DIALOGEX 0, 0, 237, 174
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+EXSTYLE WS_EX_CONTROLPARENT
+FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+BEGIN
+    GROUPBOX        "Border",IDC_STATIC,4,4,229,59
+    CONTROL         "Draw border",IDC_DRAWBORDER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,20,81,10
+    LTEXT           "Left-top edges color:",IDC_STATIC,22,33,94,8,NOT WS_GROUP
+    CONTROL         "",IDC_LTEDGESCOLOR,"ColourPicker",WS_TABSTOP,116,32,32,10
+    LTEXT           "Right-bottom eges color:",IDC_STATIC,22,46,94,8,NOT WS_GROUP
+    CONTROL         "",IDC_RBEDGESCOLOR,"ColourPicker",WS_TABSTOP,116,45,32,10
+    GROUPBOX        "Background",IDC_STATIC,4,67,229,103
+    LTEXT           "Background colour:",IDC_STATIC,12,83,72,8,NOT WS_GROUP
+    CONTROL         "",IDC_BKGCOLOUR,"ColourPicker",WS_TABSTOP,84,82,32,10
+    CONTROL         "Use background bitmap",IDC_BITMAP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,97,161,10
+    EDITTEXT        IDC_FILENAME,22,111,184,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BROWSE,208,111,15,11
+    CONTROL         "Stretch to width",IDC_STRETCHH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,22,128,100,10
+    CONTROL         "Stretch to height",IDC_STRETCHV,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,122,128,101,10
+    CONTROL         "Tile horizontally",IDC_TILEH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,22,141,100,10
+    CONTROL         "Tile vertically",IDC_TILEV,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,122,141,101,10
+    CONTROL         "Stretch proportionally",IDC_PROPORTIONAL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,122,154,101,10
+END
+
+IDD_TABVIEW DIALOGEX 0, 0, 320, 266
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TABVIEW,"SysTabControl32",0x0,7,7,306,252
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_OPT_FLTCONT, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 273
+        VERTGUIDE, 12
+        VERTGUIDE, 22
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 230
+        HORZGUIDE, 18
+    END
+
+    IDD_OPT_THUMB, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 233
+        VERTGUIDE, 12
+        VERTGUIDE, 22
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 170
+    END
+
+    IDD_TABVIEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 313
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 259
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_HIDE                ICON                    "icon1.ico"
+IDI_SHOW                ICON                    "icon2.ico"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

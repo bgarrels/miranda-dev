@@ -1,0 +1,17 @@
+; Pluginname: Skype Status Change 
+; Version: 0.0.0.17
+; Dateiname: skypestatuschange.dll
+; Autor: Dioksin
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4003
+; Übersetzung: FREAK_THEMIGHTY am 17.06.2010
+
+[Change Skype Status]
+Skype-Status ändern
+[&Check any protocol or any status to exclude it from synchronization:]
+Protokolle oder Status auswählen, die ni&cht synchronisiert werden sollen:
+[Synchronize status message]
+Statusnachricht synchronisieren
+[Changes Skype Status according to miranda-Status]
+Skype-Status gemäss Miranda-Status ändern
+[Synchronize if current status differs from previous one]
+Synchronisieren, falls aktiver Status unterschiedlich ist 

@@ -1,0 +1,20 @@
+; Pluginname: Bonsai 
+; Version: 0.0.1.1
+; Dateiname: bonsai.dll
+; Autor: Cristian Libotean (eblis)
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3218
+; Übersetzung: 21.12.06 von HyperCriSiS
+; Besonderheiten: Entwicklung eingestellt!
+
+[Arrange Options]
+Optionen gliedern
+[Current group]
+Aktuelle Gruppe
+[Current title]
+Aktueller Titel
+[Initial group]
+Standard Gruppe
+[Initial title]
+Standard Titel
+[Options group and title]
+Optionen Gruppe und Titel

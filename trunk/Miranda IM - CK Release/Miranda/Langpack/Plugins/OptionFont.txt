@@ -1,0 +1,15 @@
+; Pluginname: OptionFont 
+; Version: 0.0.0.2
+; Dateiname: OptionFont.dll
+; Autor: wintime98
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=334
+; Übersetzung: 01.07.05 von baphomet 
+
+[Option Font]
+Alternative Schriftarten
+[&Change Option Window's Font]
+Optionen-S&chriftart ändern
+[Changes the font used by other windows\n(Require restart Miranda)]
+Die Schriftart sämtlicher Fenster ändern.\n(Neustart von Miranda IM erforderlich)
+[Changes the font in the option window.]
+Ändert die Schriftart im Optionsfenster.

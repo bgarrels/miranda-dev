@@ -1,0 +1,26 @@
+; Pluginname: LogService 
+; Version: 0.1.0.1
+; Dateiname: logservice.dll
+; Autor: Deathdemon
+; Übersetzung: 16.12.07 von FREAK_THEMIGHTY
+; Besonderheiten: Entwicklung eingestellt!
+
+[The unicode version of LogService plugin requires db3x plugin version 0.5.1.0 or later]
+Die Unicode-Version von LogService benötigt das dbx-Plugin in Version 0.5.1.0 oder höher
+[Actual contents of the log message will be here]
+Inhalt des aktuellen Logs
+
+[Open Variables help dialog for log format string]
+Hilfe zu Variablen in der Logdatei
+[Open Variables help dialog for log path]
+Hilfe zu Variablen im Speicherpfad
+[Reset settings for this log to default values]
+Einstellungen dieses Logs auf Standardeinstellungen zurücksetzen
+[Log format string. In general, %extratext% variable should be present in it.]
+Formatierung. %extratext%-Variable sollte hier enthalten sein.
+[Use %extratext% for the actual log message]
+Verwenden Sie %extratext% für die Nachricht selbst.
+[Limit log size to]
+Dateigröße begrenzen auf
+[KB (0 = unlimited)]
+KB (0 = unbegrenzt)

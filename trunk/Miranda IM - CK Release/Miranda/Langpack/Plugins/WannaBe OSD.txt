@@ -1,0 +1,25 @@
+; Pluginname: WannaBe OSD 
+; Version: 0.2.0.5
+; Dateiname: wbOSD.dll, wbOSDW.dll
+; Autor: andree
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1963
+; Übersetzung: 0123hallo
+
+[Shadow align]
+Schattenausrichtung
+[Shadow color]
+Schattenfarbe
+[Alternative shadow]
+Alternativer Schatten
+[Shadow distance]
+Schattenabstand
+[Show events]
+Zeige Ereignisse
+[Show testing OSD]
+Zeige Test-OSD
+[Window width:]
+Fensterbreite:
+[Window height:]
+Fensterhöhe:
+[%s is %s]
+%s ist %s

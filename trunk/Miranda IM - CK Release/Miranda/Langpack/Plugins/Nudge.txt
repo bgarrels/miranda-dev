@@ -1,0 +1,66 @@
+; Pluginname: Nudge 
+; Version: 0.0.1.19
+; Dateiname: nudge.dll
+; Autor: tweety
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2708
+; Übersetzung: 24.03.06 von FREAK_THEMIGHTY
+
+[Protocol options]
+Protokolleinstellungen
+[Specify options for each protocol]
+Optionen für jedes Protokoll einzeln einstellen
+[Enable clist shaking]
+Kontaktliste schütteln
+[Enable message window shaking]
+Nachrichtenfenster schütteln
+[Show as status change]
+als Statusänderung anzeigen
+[Auto resend nudge after]
+Nudge automatisch zurücksenden nach
+[Treat nudge as a message]
+Text als Nachricht einfügen
+[Sending text]
+beim Senden
+[Receiving text]
+beim Empfangen
+[Allow sending* one nudge to the same contact every :]
+Zeitlimit zum Senden* von Nudges zum selben Kontakt:
+[Allow receiving one nudge from the same contact every :]
+Zeitlimit zum Empfangen von Nudges vom selben Kontakt:
+[Allow nudges when you're:]
+Nudges erlauben in Status
+[Popup duration]
+Anzeigedauer
+[* Nudge sending delay is hardcoded and cannot be changed.]
+* Diese Beschränkung kann nicht durch den Benutzer geändert werden.
+[Window Shaking]
+Schütteln
+[Shaking Clist Options]
+Schütteln der Kontaktliste
+[Shaking Message Window Options]
+Schütteln des Nachrichtenfensters
+[Number of moves]
+Anzahl Bewegungen
+[Width of move]
+Bewegungsstärke
+[Send &Nudge]
+&Nudge senden
+[You received a nudge]
+Du bekommst eine Nudge
+[Nudge : Send a nudge]
+Nudge: Nudge senden
+[Nudge : Shake contact list/chat window]
+Nudge: Kontaktliste/Nachrichtenfenster schütteln
+[Shake the contact list]
+Kontaktliste schütteln
+[Shake the chat window]
+Nachrichtenfenster schütteln
+[You are not allowed to send too much nudge (only 1 each %d sec, %d sec left)]
+Sie dürfen nur 1 Nudge in %d Sekunden senden, warten Sie noch %d Sekunden.
+
+[Nudge as Default]
+Standard Nudge
+[Nudge for]
+Nudge für
+[Plugin to shake the clist and chat window]
+Plugin zum Schütteln der Kontaktliste und des Nachrichtenfenster.

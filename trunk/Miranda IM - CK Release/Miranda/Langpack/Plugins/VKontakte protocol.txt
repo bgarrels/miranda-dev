@@ -1,0 +1,214 @@
+; Pluginname: VKontakte protocol
+; Version: 0.4.4.0
+; Dateiname: vkontakte.dll
+; Autor: Andrey Lukyanov
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3730
+; Übersetzung: 15.08.2008 von Sebijk, 07.10.2010 von Foso
+
+[VKontakte Protocol]
+VKontakte-Protokoll
+[Protocol Icon]
+Protokoll-Icon
+[E-mail or login:]
+E-Mail oder Login:
+[New note]
+Neue Notiz
+[&Open my VKontakte web page]
+Meine VK&ontakte-Webseite öffnen
+[&Open contact web page]
+K&ontaktwebseite öffnen
+[Other settings]
+Andere Optionen
+[Send 'Keep-online' message each]
+Aktivität alle
+[Check for new messages each]
+Prüfe auf neue Nachrichten alle
+[Update friends' status each]
+Aktualisiere Freundestatus alle
+[second(s)]
+Sekunde(n)
+[Please enter your VKontakte account details to continue:]
+Bitte geben Sie Ihre VKontakte-Kontodaten zum Fortfahren ein:
+[VKontakte Protocol for Miranda IM]
+VKontakte-Protokoll für Miranda IM
+[VKontakte HTTP connections]
+VKontakte-HTTP-Verbindungen
+[Remove subject of incoming message, if empty]
+Leeren Betreff eingehender Nachrichten entfernen
+[Get only minimal contact details (name, date of birth, phones)]
+Nur minimale Kontaktdetails ermitteln (Name, Geburtsdatum, Telefon)
+[At home]
+Zuhause
+[At university]
+Beim Universität
+[At work]
+Beim Arbeiten
+[At party]
+Auf der Feier
+[Custom...]
+Benutzerdefiniert...
+[Please input new custom status message]
+Bitte geben Sie eine benutzerdefinierte Statusnachricht ein
+[My &main page...]
+&Meine Hauptseite...
+[My &photos...]
+Meine Fotos...
+[My &friends...]
+Meine &Freunde...
+[My &wall...]
+Meine &Wand...
+[My &groups...]
+Meine &Gruppen...
+[My &audio...]
+Meine Medien...
+[My &notes...]
+Meine &Notizen...
+[My &questions...]
+Meine Fragen...
+[Read additional status]
+Zusätzlichen Status lesen
+[&Update Details for all users]
+Details von allen Kontakten akt&ualisieren
+[Details update completed for all contacts.]
+Details wurden für alle Kontakte aktualisiert.
+[Enable contacts XStatus support]
+Zusätzliche Statusunterstützung bei Kontakten aktivieren
+[Update contacts avatars each]
+Aktualisiere Avatare alle
+[Update avatars, when getting contacts details]
+Avatare aktualisieren, wenn Kontaktdetails ermittelt werden
+[You cannot send messages more often than once in 1 second. Please try again later.]
+Sie können nicht mehr als eine Nachricht pro Sekunde senden. Bitte versuchen Sie es später noch einmal.
+[Thank you for usage of VKontakte plugin!\r\n\r\nWould you like to join VKontakte group about the plugin (http://vkontakte.ru/club6929403)?\r\nIf you press Cancel now, the same question will be asked again during next Miranda start.]
+Danke für das Benutzen des VKontakteplugin!\r\n\r\ Würden Sie gerne der VKontakte-Gruppe über das Plugin (http://vkontakte.ru/club6929403) beitreten?\r\nWenn Sie jetzt "Abbrechen" drücken werden Sie beim nächsten Mirandastart erneut gefragt.
+[Use protocol icon]
+Benutze Protokoll-Icons
+[Test informational popup]
+Test Informationspopup
+
+[News support settings]
+News-Unterstützungseinstellungen
+[Receive news]
+News empfangen
+[Check for news each]
+Prüfe News alle
+[Receive minimal news (for today only, not all types)]
+Nur minimale News empfangen (nur für heute, nicht alle Typen)
+[Display news of the following types only (not applicable for minimal news)]
+Zeige nur folgende Typen von News an (nicht anwendbar bei minimalen News)
+[Questions]
+Fragen
+[Themes]
+Stile
+[Friends]
+Freunde
+[Statuses]
+Statuse
+[Audio]
+Audio
+[Gifts]
+Geschenke
+[Applications]
+Anwendungen
+[Display news in the separate contact]
+News im separaten Kontakt anzeigen
+[Display links in the news]
+Links in den News zeigen
+[Error: Cannot connect to the server]
+Fehler: Konnte keine Verbindung zum Server herstellen
+[Error: Your e-mail or password was rejected]
+Fehler: Ihre E-Mail oder Kennwort wurde verworfen
+[Error: Unknown error during sign on]
+Fehler: Unbekannter Fehler beim Anmelden
+[Photos]
+Fotos
+[Meetings]
+Treffen
+[Personal data]
+Persönliche Daten
+[Enable avatars support]
+Avatar-Unterstützung aktivieren
+[Receive News]
+News empfangen
+[Create a new VKontakte account using the VKontakte website]
+Ein neues VKontakte-Konto über die VKontakte-Webseite erstellen
+[Create new VKontakte account]
+Ein neues VKontakte-Konto erstellen
+[Retrieve a lost password or VKontakte number]
+Vergessenes Kennwort oder VKontakte-Nummer anfordern
+
+[Groups news support settings]
+Gruppennachrichten-Einstellungen
+[Receive groups news]
+Gruppennachrichten empfangen
+[Check for groups news each]
+Überprüfe Gruppennachrichten alle
+[Display groups news of the following types only]
+Zeige nur Gruppennachrichten mit folgenden Typen:
+[Display links in the groups news]
+Zeige Links in den Gruppennachrichten
+
+[Comments]
+Kommentare
+[Comments news support settings]
+Kommentarnachrichten-Einstellungen
+[Receive comments news]
+Kommentarnachrichten empfangen
+[Check for comments news each]
+Überprüfe Kommentarnachrichten alle
+[Display comments news of the following types only]
+Zeige nur Kommentarnachrichten mit folgenden Typen:
+[Display links in the comments news]
+Zeige Links in den Kommentarnachrichten
+
+[Advanced (continued)]
+Erweitert (Fortsetzung)
+[Use VKontakte's page URL instead of contact's homepage]
+Benutze VKontakte-Seiten-URL anstelle von Kontakthomepage
+[Display XStatus for offline contacts]
+Zeige XStatus for Offline-Kontakte
+[Use local time for incoming messages]
+Lokale Zeit für eingehende Nachrichten benutzen
+[Don't delete contacts from the server]
+Keine Kontakte vom Server entfernen
+[Update status for non-friend contacts]
+Status für unbekannte Kontakten aktualisieren
+[Use the following group by default for new contacts]
+Folgende Standard-Gruppe für neue Kontakte benutzen:
+[The wall]
+Die Wand
+[Read messages from the wall]
+Nachrichten von der Wand lesen
+[Read messages each]
+Lese Nachrichten alle
+[Use local time for messages from the wall]
+Lokale Zeit für Nachrichten von der Wand verwenden
+[Display wall messages in the separate contact]
+Wand-Nachrichten in einem separaten Kontakt anzeigen
+
+[In a relationship]
+In einer Partnerschaft
+[It's complicated]
+Es ist zu kompliziert
+[Actively searching]
+Aktiv am Suchen
+[Political views:]
+Politisch:
+[Communist]
+Kommunist
+[Socialist]
+Sozialist
+[Conservative]
+Konservativ
+[Ultraconservative]
+Ultakonservativ
+[College:]
+Kolleg:
+[Faculty:]
+Fakultät:
+[Educational status:]
+Bildungsstatus:
+
+[No session details are received. Some functions will not work properly.]
+Keine Sitzungsdetails wurden empfangen. Einige Funktionen werden nicht richtig funktionieren.
+ 

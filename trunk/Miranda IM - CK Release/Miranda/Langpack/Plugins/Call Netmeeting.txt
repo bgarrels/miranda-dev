@@ -1,0 +1,20 @@
+; Pluginname: Call Netmeeting 
+; Version: 1.0.0.96
+; Dateiname: callnetmeeting.dll
+; Autor: gelsim
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=683
+; Übersetzung: 22.07.05 von Hauke
+; Besonderheiten: Entwicklung eingestellt!
+
+[&Netmeeting call]
+Über NetMeeting anrufen
+[Call NetMeeting Plugin]
+Plugin für NetMeeting-Anrufe
+[Error can´t get protocol!]
+Fehler: Protokoll nicht gefunden
+[Error can´t get user email!]
+Fehler: E-Mail nicht gefunden
+[Error can´t get user address!]
+Fehler: Kontaktadresse nicht gefunden
+[Use external IP?]
+Externe IP nutzen?

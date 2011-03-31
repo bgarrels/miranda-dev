@@ -1,0 +1,84 @@
+; Pluginname: Smart Auto Away 
+; Version: 0.0.2.9
+; Dateiname: saa.dll
+; Autor: YB
+; Link: http://saaplugin.no-ip.info/
+; Übersetzung: Mardruk 26.06.06
+
+[Apply to all protocols]
+Für alle Protokolle
+[Requested Status:]
+Gewünschter Status:
+[Current Status:]
+Aktueller Status:
+
+[Short Idle]
+Kurz inaktiv
+[Long Idle]
+Lange inaktiv
+[Only if my requested status is:]
+Nur, wenn aktueller Status:
+
+[If Windows is inactive]
+Wenn Windows untätig ist
+[Use GetLastInputInfo()]
+Nutze GetLastInputInfo()
+[If Miranda is inactive]
+Wenn Miranda untätig ist
+[Force short idle if:]
+Gehe in kurze Inaktivität, wenn:
+[Workstation is Locked (2k/XP]
+Arbeitsplatz ist gesperrt 
+[inactivity times:]
+Inaktivitätszeiten:
+[Short idle after]
+Kurz inaktiv nach
+[Long idle after]
+Lange inaktiv nach
+[Do not share my idle info.]
+Untätigkeitsinfo nicht weitergeben
+[Do not set "Not Idle" automaticaly]
+Nicht automatisch "Nicht inaktiv" setzen
+[Set "Not Idle" on manual status change]
+Bei manuellem Statuswechsel nicht "Inaktiv" werden
+[Simulate Idle]
+Inaktivität simulieren
+[Be Not Idle]
+Sei nicht inaktiv
+[Be Short Idle]
+Sei kurz inaktiv
+[Be Long Idle]
+Sei lange inaktiv
+[Disable Idle menu. (restart is required)]
+Inaktivitätsmenü deaktivieren (erfordert Neustart)
+
+[I am here:]
+Ich bin da:
+[Use:]
+Nutze:
+[Set the default status message after]
+Setze die Standardstatusnachricht nach
+
+[Variables to use]
+Nutzbare Variablen
+[-- Date --]
+-- Datum --
+[-- Time --]
+-- Zeit --
+[-- Time Zone --]
+-- Zeitzone --
+[total bias]
+Gesamtabw.
+[time zone name]
+Zeitzonenname
+[-- Format --]
+-- Formatierung --
+
+[If my current status is:]
+Nur, wenn der aktuelle Status:
+[Do not reconnect after fatal error]
+nach fatalem Fehler kein Wiederverbinden 
+[Keep main status offline*]
+Globalen Status offline halten*
+[* Setting this option may confuse other plugins]
+*Diese Option könnte andere Plugins stören

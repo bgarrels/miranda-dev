@@ -1,0 +1,109 @@
+; Pluginname: Gadu-Gadu Protocol
+; Version: 0.9.11.2
+; Dateiname: gg.dll
+; Unique ID: {f3ff65f3-250e-416a-bee9-58c93f85ab33}
+; Autor(en): OnO, Bartosz Bia³ek, Adam Strzelecki
+; Link: Stable & Testing
+; Übersetzung: 12.01.07 von xero
+
+[Delete image from the list]
+Lösche Bild(er) von der Liste
+[Save image to disk]
+Speichere Bild auf die Festplatte
+[Image received]
+Bild empfangen
+[Could not load token image.]
+Konnte kein 'Token'-Bild laden.
+[Message with [img] BBCode]
+Nachrichten mit [img] BBCode
+
+[Provides support for Gadu-Gadu protocol]
+Bietet Unterstützung für das Gadu-Gadu-Protokoll an.
+
+[Friends only]
+Nur Freunde 
+[Show links from unknown contacts]
+Zeige Links von unbekannten Kontakten
+[Show offline users with status message as invisible in contact list]
+Offlinenutzer mit Statusnachricht in Kontaktliste als unsichtbar anzeigen
+[After disconnection leave away message of status:]
+Nach Beenden folgende Statusnachricht nutzen:
+[Receive image and after image is received use:]
+Datei empfangen und nach Empfang folgendes benutzen:
+[Show contacts not on my list having me on their list]
+Kontake anzeigen, die mich in ihrer Kontaktliste haben
+[Conference policy]
+Konferenzverhalten
+[if total participant count greater than:]
+wenn Anzahl der Teilnehmer größer ist als:
+[if unknown participant count greater than:]
+wenn Anzahl unbekannter Teilnehmer größer ist als:
+[in other case]
+in anderem Fall
+[<Last Status>]
+<Letzter Status>
+[Show connection errors]
+Über Verbindungsfehler benachrichtigen
+[Manually specify connection servers' hosts]
+Manuell Server/Hosts eintragen
+[Use SSL secure connection]
+Sichere SSL-Verbindung benutzen
+[* new line is separator]
+Neue Zeile ist Trennzeichen
+[** hostname:port format]
+Hostname im Portformat
+[Use direct connections]
+Direkte Verbindung benutzen
+[Use forwarding]
+'Forwarding' verwenden
+[Open conference...]
+Konferenz eröffnen
+[Clear ignored conferences]
+Ignorierte Konferenzen löschen
+[Import List From Server]
+Liste von Server importieren
+[Import List From Text File...]
+Liste aus Textdatei importieren
+[Remove List From Server]
+Liste vom Server löschen
+[Export List To Server]
+Liste auf Server exportieren
+[Export List To Text File...]
+Liste in Textdatei exportieren
+[Create Gadu-Gadu account]
+Gadu-Gadu-Konto erstellen
+[This will create new Gadu-Gadu account.]
+Dies wird ein neues Gadu-Gadu-Konto erstellen.
+[Confirm password:]
+Passwort bestätigen:
+[New e-mail:]
+Neue E-Mail:
+[Open &conference...]
+Konferenz öffnen
+[* new line is separator\n** hostname:port format]
+* Zeilenumbruch ist Trenner\n ** hostname:port-Format
+[Export List To &Server]
+Liste zum &Server exportieren
+[&Remove List From Server]
+Liste vom Server entfe&rnen
+[Import List From &Server]
+Liste vom &Server importieren
+[&Clear ignored conferences]
+Ignorierte Konferenzen löschen
+[Import List From &Text File...]
+Liste aus einer &Textdatei importieren...
+[Export List To &Text File...]
+Liste in eine &Textdatei exportieren...
+[You have to be connected before you can import/export contacts from/to server.]
+Sie müssen verbunden sein, bevor Sie Kontakte vom/zum Server ex-/importieren können.
+[There are no ignored conferences.]
+Es gibt keine ignorierten Konferenzen.
+[List import successful.]
+Importieren erfolgreich.
+[List export successful.]
+Exportieren erfolgreich.
+[You have to be connected to open new conference.]
+Sie müssen verbunden sein, bevor Sie eine neue Konferenz öffnen können.
+
+[Gadu-Gadu Number:]
+Gadu-Gadu Nummer:

@@ -1,0 +1,194 @@
+; Pluginname: ContactsMenuItemEx 
+; Version: 1.3.0.3
+; Dateiname: cmiex.dll
+; Unique ID: {977be6af-cd5f-4fe1-af2f-535b8aaeb749}
+; Autor: Heiko Schillinger, Baloo, jarvis
+; Link: 
+; Übersetzung: 23.06.05 von lastwebpage
+
+; Pluginname: MenuItemEx 
+; Version: 1.3.0.7
+; Dateiname: menuex.dll
+; Unique ID: {b1902a52-9114-4d7e-ac2e-b3a52e01d574}
+; Autor: Heiko Schillinger, Baloo, Billy_Bons
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4036
+; Übersetzung: 25.09.05 von Dober & CHEF-KOCH
+
+[MenuItemEx]
+Erweitertes Kontaktmenü
+[Extended Contacts Menu]
+Erweitertes Kontaktmenü
+[ContactsEx]
+Erweitertes Kontaktmenü
+
+[Useful stuff]
+Nützliches
+[Browse Received Files]
+Empfangene Dateien anzeigen
+[Browse Files]
+Dateien anzeigen
+[Folder View]
+Ordneransicht
+[Explorer View]
+Exploreransicht
+[Show Menu Item]
+Menüeintrag anzeigen
+[Hide Menu Item]
+Menüeintrag ausblenden
+[Disable Menu Item]
+Menüeintrag deaktivieren
+[Last Online]
+Zuletzt online
+[Last Online Options]
+Optionen für "Zuletzt online"
+[Show Last Online Time]
+"Zuletzt online" anzeigen
+[Adds a context menu item to your contacts showing the time the contact was last online.]
+Menüpunkt mit dem Zeitpunkt, wann der Kontakt zuletzt online war, im Kontaktmenü einfügen.
+[Enable Last Online]
+Menüpunkt aktivieren
+[Menu item text:]
+Menüpunktbeschriftung:
+[If last online is unknown:]
+Wenn "Zuletzt online"-Zeit unbekannt:
+[If contact is currently online:]
+Wenn Kontakt gerade online ist:
+[Last Online Variables]
+Variablen für "Zuletzt online"
+[Last Online Format]
+Zuletzt-online-Format
+[Year]
+Jahr
+[Month (01-12)]
+Monat (01 - 12)
+[Day (01-31)]
+Tag (01 - 31)
+[Hour (01-24)]
+Stunde (01 - 24)
+[Hour (1-12)]
+Stunde (1 - 12)
+[Minutes (00-60)]
+Minuten (00 - 60)
+[AM/PM]
+Vormittags/Nachmittags
+[Seconds (00-60)]
+Sekunden (00 - 60)
+[Browse Files Options]
+Optionen für "Empfangene Dateien anzeigen"
+[Adds a "Browse Files" context menu item to your contacts.]
+Menüpunkt "Empfangene Dateien anzeigen" im Kontaktmenü einfügen.
+[Enable Browse Files]
+Menüpunkt aktivieren
+[Folder view type:]
+Ansichtsart für Ordner:
+[If contacts directory is empty:]
+Wenn das Verzeichnis leer ist:
+[If contacts directory does not exist:]
+Wenn das Verzeichnis nicht existiert:
+[View Homepage Options]
+Optionen für "Homepage ansehen"
+[Adds a "View Homepage" context menu item to your contacts.]
+Menüpunkt "Homepage ansehen" im Kontaktmenü einfügen.
+[Enable View Homepage]
+Menüpunkt aktivieren
+[If contact is missing a homepage:]
+Wenn keine Homepage angegeben wurde:
+[Hide menu item if directory does not exist]
+Menüpunkt ausblenden, wenn kein Verzeichnis existiert
+[Month Name]
+Monatsname
+[Month Name Short]
+Monatsname (kurz)
+[Day of Week]
+Wochentag
+[Day of Week Short]
+Wochentag (kurz)
+[Icon in menu item:]
+Statusicon im Kontaktmenü:
+[Hide Icon]
+Icon ausblenden
+[Copy IP]
+IP-Adresse kopieren
+[Copy IP Address]
+IP-Adresse kopieren
+[Copy IP Address Options]
+Optionen für "IP-Adresse kopieren"
+[Adds a "Copy IP Adress" context menu item to your contacts.]
+Menüpunkt "IP-Adresse kopieren" im Kontaktmenü einfügen.
+[Enable Copy IP Address]
+Menüpunkt aktivieren
+[If contact's IP address is unknown:]
+Wenn die IP-Adresse unbekannt ist:
+[X-Status Message]
+XStatusnachricht
+
+; not in lp
+[Last Status]
+letzter Status
+[Adds contact specific options: Browse Files, View Website, Last Online, and Copy IP Address]
+Kontaktspezifische Optionen werden eingefügt: Dateiempfangsordner, Link zur Webseite, "Zuletzt online" und IP-Adresse kopieren.
+
+[Protocol...]
+Protokoll...
+[Request Authorization]
+Autorisierung anfragen
+[Copy Info]
+Info kopieren
+[Add protocol name]
+Protokollname hinzufügen
+[Hide from list]
+In Liste verstecken
+[Show in list]
+In Liste zeigen
+[Ignore...]
+Ignorieren...
+[Place and Ignoration]
+Ignorieren, Protokoll, Gruppe
+[Send 'You were added']
+'Sie wurden hinzugefügt' senden
+[Copy ID]
+ID kopieren
+[Never visible]
+Nie sichtbar
+[Note: plugin retrieving status message is needed]
+Achtung: Plugin zum Empfang der Statusnachricht benötigt
+[Copy MirVer]
+MirVer kopieren
+[Group...]
+Gruppe...
+[Copy Status Message]
+Statusnachricht kopieren
+[Copy xStatus Message]
+XStatusnachricht kopieren
+
+[* Use Ctrl+click to see popup with the copied text]
+* Strg+Klick = Popup mit dem kopierten Text anzeigen
+[Add item name]
+Nachrichtentyp hinzufügen
+[Convert]
+Konvertieren
+[Copy to Account]
+In Konto kopieren
+[Copy to Account (Ctrl+click for move to Account)]
+In Konto kopieren (Strg+Klick zum Verschieben)
+[Copy Status Message (SMR needed)]
+Statusnachricht kopieren (benötigt SMR)
+[Open ignore settings]
+Ignoriereinstellungen öffnen
+[Show alpha icons]
+Alpha-Icons zeigen
+[Show alpha icon]
+Alpha-Icon zeigen
+[Show ID in menu item]
+Zeige ID im Menüeinträg
+[Shown menu items]
+Menüeinträge
+[Trim too long ID]
+Sehr lange IDs kürzen
+[User Online]
+Benutzerstatus
+[XStatus message]
+XStatusnachricht
+
+[Set user properties by contact menu]
+Setzen Sie diverse Kontakteinstellungen über das Kontaktmenü.

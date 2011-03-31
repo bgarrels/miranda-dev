@@ -1,0 +1,53 @@
+; Pluginname: Quick Messages
+; Version: 0.0.4.2
+; Dateiname: quickmessages.dll
+; Unique ID: {37ed754b-6cf9-40ed-9eb6-0fef8e822475}
+; Autor: MaD_CLuSTeR
+; Link: http://miranda.radicaled.ru/index.php?plugin=3
+; Übersetzung: 22.10.10 von Foso
+
+[Misc.]
+Versch.
+[Auto-send on Left-Click]
+Autom. Senden bei Linksklick
+[Auto-send on Right-Click]
+Autom. Senden bei Rechtsklick
+[Enable QuickMenu]
+Quickmenü aktivieren
+[Button Left-Click menu]
+Schaltfläche Links-Klick Menü
+[Button Right-Click value]
+Schaltfläche Rechts-Klick Wert
+[Consider as ServiceName]
+Behandeln als Servicename
+[New Menu Entry]
+Neuer Menüeintrag
+[New Button]
+Neue Schaltfläche
+[Add to QuickMenu]
+Zum QuickMenü hinzufügen
+[Menu entry value:]
+Menüeintrag-Wert:
+
+[Quick Messages Help]
+Quick Messages Hilfe
+[List of variables:]
+Liste der Variablen
+[- Selected text]
+- Ausgewählter Text
+[- Text from Clipboard]
+- Text aus Zwischenablage
+[- Contacts Protocol name (upper case)]
+- Kontaktprotokollname (Großschrift)
+[- Contact display name]
+- Kontakt-Anzeigename
+[- Contact first name]
+- Kontaktvorname
+[Contact last name]
+- Kontaktnachname
+[Tips:]
+Tipps:
+[*Rename menu item into "---" to insert separator]
+*Benennen Sie Menüeintrag als "---" um Trennzeichen einzufügen
+[*Use drag'n'drop for arranging menu items]
+*Benutzen Sie drag'n'drop um Menüeinträge zu verwalten

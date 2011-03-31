@@ -1,0 +1,28 @@
+; Pluginname: un4seen's bass interface
+; Version: 0.0.0.9
+; Dateiname: bass_interface.dll
+; Benötigt: bass.dll (http://uk.un4seen.com/files/bass24.zip) v2.4.5.0
+; Autor: tico-tico
+; Unique ID: {2f07ea05-05b5-4ff0-875d-c590da2ddac1}
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4284
+
+[un4seen's bass interface]
+Un4seen's Bass Interface
+[un4seen's bass version: %d.%d.%d.%d]
+Un4seen's Bass Version: %d.%d.%d.%d
+[Current bass.dll path:]
+Aktuelles Verzeichnis der Bass.dll:
+[bass.dll loading error]
+Fehler beim Laden der bass.dll 
+[Maximum number of channels:]
+Maximale Anzahl der Audiokanäle:
+[Output Device (applied after restart):]
+Ausgabe über Gerät: (Wechsel erfordert Neustart von Miranda IM!):
+[Quiet time:]
+Ruhezeit:
+[download bass library]
+Herunterladen der Bass-Bibliothek
+[--default device--]
+Standard-Ausgabegerät
+[Play only if]
+Spiele nur wenn:

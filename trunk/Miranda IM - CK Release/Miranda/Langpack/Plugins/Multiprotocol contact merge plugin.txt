@@ -1,0 +1,96 @@
+; Pluginname: Multiprotocol contact merge plugin 
+; Version: 0.2.5.0
+; Dateiname: mergeContacts.dll
+; Author: Spin
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1985
+; Übersetzung: 06.10.05 von freak
+; Besonderheiten: Entwicklung eingestellt!
+
+[Could not get status icon]
+Konnte Statusicons nicht laden.
+[This value is invalid.\nEnter a number between (and including) 0 and 7.]
+Dieser Wert ist ungültig.\nGib einen Wert zwischen (inklusive) 0 und 7 ein.
+[This value is invalid.\nEnter a number between (and including) 0 and 60000.]
+Dieser Wert ist ungültig.\nGib einen Wert zwischen (inklusive) 0 und 60000 ein.
+[This is a main contact all sub contacts will\nbe removed as well. Proceed?]
+Dies ist ein Hauptkontakt, alle Unterkontakte\nwerden ebenfalls gelöscht. Fortfahren?
+;Tooltip i.e. "ICQ message from X"
+[message from]
+Nachricht von
+
+;Info text
+[Contact hierarchy]
+Kontakt Hierarchie
+
+[Insert as main contact]
+Als Hauptkontakt einfügen
+[Insert as sub contact]
+Als Unterkontakt einfügen
+[Remove selected]
+Ausgewählte entfernen
+
+[Show main contact status in contact menus]
+Zeige Status des Hauptkontaktes im Kontaktmenü
+[Automatically open main contact window on doubleclick (if online)]
+Falls Hauptkontakt online, automatisch auf Doppelklick öffnen
+[Select next online contact if main contact is offline]
+Falls Hauptkontakt offline, nächsten online Kontakt wählen
+[Forward all received messages to the main contact]
+Alle empfangenen Nachrichten an den Hauptkontakt weiterleiten
+[Dynamically set the best contact as main]
+Dynamisch den besten Kontakt als Hauptkontakt setzen
+[Prefer main contact to others (e.g. show main contact status as long as not offline)]
+Hauptkontakt anderen bevorzugen (z.B. Status so lange wie nicht offline zeigen)
+[Show a different icon for merged contacts]
+Andere Icon für zusammengeführte Kontakte anzeigen
+[Icon change delay (set higher if the new icons don't always show)]
+Icon in Intervallen ändern (hochsetzen falls die neuen Icons nicht immer gezeigt werden).
+[Show number of sub contacts as name postfix (i.e. "Name [2]")]
+Anzahl der Unterkontakte als Postfix anzeigen (z.B. "Name [2]") 
+[Show a '*' symbol as postfix]
+Zeige ein * als Postfix
+[* May require you to close and restart Miranda]
+*erfordert einen Neustart von Miranda
+[hierarchy]
+Hierarchie
+[Priorize contacts by]
+Kontakte ordnen nach
+
+[Enter the contact information above or drag'n'drop any contact from the contact list.]
+Schiebe die zu zusammen-\nführenden Kontakte aus der Kontaktliste in dieses Fenster.
+[Doubleclick on a sub contact to swap it with the main contact.]
+Doppelklick auf einen Unterkontakt macht diesen zum Hauptkontakt
+[Number of contacts to show in contact menus:]
+Anzahl Kontakte im Kontaktmenü zeigen
+[Status information might be wrong until you re-logon.]
+Statusangaben könnten zum nächsten Einloggen falsch sein.
+
+[This contact is not on your list...]
+Dieser Kontakt ist nicht in deiner Kontaktliste.
+[This contact is allready a sub contact.\nDelete it first and reinsert it here...]
+Dieser Kontakt ist bereits ein Unterkontakt.\nLösche ihn zuerst und füge ihn erneut ein.
+[This contact is allready a main contact.\nDelete it first and reinsert it here...]
+Dieser Kontakt ist bereits ein Hauptkontakt.\nLösche ihn zuerst und füge ihn erneut ein.
+[No main contact selected for this sub contact!\nPlease select a contact from the list]
+Dieser Unterkontakt wurde keinem Hauptkontakt zugeordnet!\n
+[Invalid main contact!]
+Ungültiger Hauptkontakt!
+
+[Merge Contacts]
+Kontakte zusammenführen
+
+[Hierarchy]
+Hierarchie
+
+[Sub contacts:]
+Zeige Unterkontakte
+[Show all sub contacts]
+Zeige alle Unterkontakte
+
+[Merged Contact]
+zusammengefasste Kontakte
+[Please select the sub contact you wish to send a message to.]
+Bitte den Unterkontakt auswählen an den Du eine Nachricht senden willst.
+
+[MAIN]
+HAUPT

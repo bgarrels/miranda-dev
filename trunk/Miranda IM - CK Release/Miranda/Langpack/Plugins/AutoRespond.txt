@@ -1,0 +1,16 @@
+; Pluginname: AutoRespond 
+; Version: 0.0.0.3
+; Dateiname: autoreply.dll
+; Autor: parkand
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=318
+; Übersetzung: KcDaRookie am 04.01.07
+; Besonderheiten: Entwicklung eingestellt!
+
+[Auto Response - Settings]
+Automatische Antwort - Einstellungen
+[Auto Respond when in Away / NA]
+Auto-Antwort, wenn Abwesend / NA
+[Message to Respond with...]
+Automatische Antwortnachricht...
+[Set Respond Msg]
+Antwort setzen

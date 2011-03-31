@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Miranda Plugin">
+      <UniqueIdentifier>{2ddc6049-e862-4d68-880f-327a6f865c6c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="authpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="buddylist.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="buddylistgames2packet.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="buddylistgamespacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="buddylistnamespacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="buddylistonlinepacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="clanbuddylistnamespacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="client.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="clientinformationpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="clientloginpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="clientversionpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="dummyxfiregameresolver.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="invitebuddypacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="inviterequestpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="loginfailedpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="loginsuccesspacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="messageackpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="messagepacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="monitoredobj.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="otherloginpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="packetreader.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="recvdidpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="recvoldversionpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="recvprefspacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="recvremovebuddypacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="recvstatusmessagepacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="sendacceptinvitationpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="senddenyinvitationpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="sendgameserverpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="sendgamestatus2packet.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="sendgamestatuspacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="sendkeepalivepacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="sendmessagepacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="sendnickchangepacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="sendremovebuddypacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="sendstatusmessagepacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="sendtypingpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SHA1.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="socket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="variablevalue.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="xfireclanpacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiregame.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiregameresolver.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="xfirepacket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="xfirepacketcontent.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="xfireparse.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="xfirerecvpacketcontent.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiresendpacketcontent.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="xfireutils.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Miranda Plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="options.cpp">
+      <Filter>Miranda Plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="services.cpp">
+      <Filter>Miranda Plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="tools.cpp">
+      <Filter>Miranda Plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="userdetails.cpp">
+      <Filter>Miranda Plugin</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="xfiretest.cpp.old">
+      <Filter>Quelldateien</Filter>
+    </None>
+    <None Include="Export.def">
+      <Filter>Miranda Plugin</Filter>
+    </None>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="authpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="buddylist.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="buddylistgames2packet.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="buddylistgamespacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="buddylistnamespacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="buddylistonlinepacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="clanbuddylistnamespacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="client.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="clientinformationpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="clientloginpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="clientversionpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="dummyxfiregameresolver.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="invitebuddypacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="inviterequestpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="loginfailedpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="loginsuccesspacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="messageackpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="messagepacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="monitoredobj.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="otherloginpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="packetlistener.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="packetreader.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="recvdidpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="recvoldversionpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="recvprefspacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="recvremovebuddypacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="recvstatusmessagepacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="sendacceptinvitationpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="senddenyinvitationpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="sendgameserverpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="sendgamestatus2packet.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="sendgamestatuspacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="sendkeepalivepacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="sendmessagepacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="sendnickchangepacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="sendremovebuddypacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="sendstatusmessagepacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="sendtypingpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SHA1.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="socket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="socketexception.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="variablevalue.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="xdebug.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="xfireclanpacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiregame.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiregameresolver.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="xfirepacket.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="xfirepacketcontent.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="xfireparse.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="xfirerecvpacketcontent.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiresendpacketcontent.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="xfireutils.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="baseProtocol.h">
+      <Filter>Miranda Plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="m_folders.h">
+      <Filter>Miranda Plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Miranda Plugin</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc">
+      <Filter>Miranda Plugin</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

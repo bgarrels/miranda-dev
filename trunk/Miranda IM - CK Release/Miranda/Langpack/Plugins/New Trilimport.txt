@@ -1,0 +1,26 @@
+; Pluginname: New Trilimport
+; Version: 0.0.1.2
+; Dateiname: NewTrilImport.dll
+; Autor: Frz
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=655
+; Übersetzung: 07.11.07 von Foso
+; Besonderheiten: Entwicklung eingestellt!
+
+[GO]
+Los
+[Import ICQ]
+ICQ Importieren
+[Import AIM]
+AIM Importieren
+[Import YIM]
+YIM Importieren
+[Import MSN]
+MSN Importieren
+[Import Metacontacts]
+Metacontacts Importieren
+[As Groups]
+Als Gruppen
+[To Root]
+In den Root
+[&Trillian Import...]
+&Trillian Importieren...

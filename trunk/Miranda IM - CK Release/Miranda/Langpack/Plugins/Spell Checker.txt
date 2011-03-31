@@ -1,0 +1,115 @@
+; Pluginname: Spell Checker 
+; Version: 0.2.5.0
+; Dateiname: spellchecker.dll
+; Author: Pescuma
+; Unique ID: {36753ae3-840b-4797-94a5-fd9f5852b942}
+; Link: http://forums.miranda-im.org/showthread.php?t=11555
+; Übersetzung: Armageddon
+
+[Enable/disable spell checker]
+Akt-/deaktiviere Spell Checker
+
+[Spell checker for the message windows. Uses Hunspell to do the checking.]
+Rechtschreibprüfung für das Nachrichtenfenster. Benutzt Hunspell für die Überprüfung.
+[Flags DLL]
+Flaggen-DLL
+[Dictionaries]
+Wörterbücher
+[Custom Dictionaries]
+Benutzerdefinierte Wörterbücher
+[Spell Checker]
+Rechtschreibprüfung
+[Default language:]
+Standardsprache:
+[Auto-replace words with dictionary suggestions]
+Wörter automatisch über Wörterbuch korrigieren
+[Ignore words with numbers]
+Wörter mit Nummern ignorieren
+[Ignore words in UPPER CASE]
+Wörter in Großbuchstaben ignorieren
+[Ask before sending a message with spelling errors]
+Vor dem Senden einer Nachricht mit Rechtschreibfehlern nachfragen
+[Download more dictionaries]
+Mehr Wörterbücher herunterladen
+[Underline type:]
+Unterstreichungsart:
+[Dotted]
+Gepunktet
+[Dash]
+Gestrichelt
+[Dash dot]
+Strich Punkt
+[Dash dot dot]
+Strich Punkt Punkt
+[Wave]
+Gewellt
+[Thick]
+Dick
+[Show corrections in submenu]
+Korrekturen in Untermenü anzeigen
+[Show all corrections in context menu (takes more time to show)]
+Alle Korrekturen im Kontextmenü anzeigen (zeitaufwändig)
+[Show wrong word]
+Falsches Wort anzeigen
+[Use input language to select dictionary]
+Eingabesprache verwenden, um Wörterbuch auszuwählen
+[Use dictionaries from other programs]
+Wörterbücher anderer Programme verwenden (z. B. Firefox)
+[Avoid removing underscores (slows down checking of long texts)]
+Entferne Unterstreichungen vermeiden (verlangsamt Prüfung längerer Texte)
+[Unknown Flag]
+Unbekannte Flagge
+[Spell Checker: No language found]
+Rechtschreibprüfung: Keine Sprache gefunden
+
+[Enable spell checking]
+Rechtschreibprüfung aktivieren
+[Always replace with]
+Immer ersetzen durch
+[Ignore all]
+Ignoriere alle
+[Add to dictionary]
+In Wörterbuch aufnehmen
+[Wrong word: %s]
+Falsches Wort: %s
+[Corrections]
+Korrekturen
+[Wrong words]
+Falsche Wörter
+
+[Could not find the message dialog. This usually means one of two things:\n- In tabSRMM the checkbox 'Enable event API' is disabled or\n- You are using SRMM (which don't support Spell Checker)]
+Das SpellChecker Plugin konnte das Nachrichtenfenster nicht finden. Dies kann eine von folgenden Ursachen haben:\n- Die Einstellung "Event API für externe Plugins" (unter Einstellungen=>Nachrichtensitzung) in TABsrmm ist deaktiviert oder\n- Es wird SRMM verwendet welches keine Rechtschreibüberprüfung ermöglicht.
+[There are spelling errors. Are you sure you want to send this message?]
+Es sind Rechtschreibfehler vorhanden. Möchten Sie dennoch die Nachricht senden?
+
+[Auto-replacements]
+Automatische Ersetzungen
+
+[Replacements]
+Ersetzungen
+[Enable auto-replacements]
+Automatische Ersetzungen einschalten
+[Wrong word]
+Falsches Wort
+[Correction]
+Korrektur
+[Add auto-replace word]
+Wort automatisch ersetzen
+[Wrong word:]
+Falsches Wort:
+[Correction:]
+Korrektur:
+[No separators and all lowercase chars]
+Keine Leerzeichen und nur Kleinbuchstaben
+[Use variables in correction]
+Variabeln in Korrekturen benutzen
+[The wrong word can't be empty!]
+Das falsche Wort darf nicht leer sein!
+[The correction can't be empty!]
+Die Korrektur darf nicht leer sein!
+[The correction can't be the equal to the wrong word!]
+Die Korrektur darf nicht mit dem falschen Wort gleich sein!
+[Wrong Correction]
+Falsche Korrektur
+[The wrong word typed by the user]
+Das falsche Wort vom Benutzer getippt

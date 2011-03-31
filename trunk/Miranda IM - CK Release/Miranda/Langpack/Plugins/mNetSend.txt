@@ -1,0 +1,140 @@
+; Pluginname: mNetSend 
+; Version: 0.0.1.11
+; Dateiname: mNetSend.dll
+; Autor: PVOID
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2589
+; Übersetzung: 13.05.2007 von Dober
+; Besonderheiten: Entwicklung eingestellt!
+
+; CMailSlot.cpp
+; [Can't create a mail-slot for listening]
+; [Can't create RAW socket for safe mail-slot.]
+; [No host. It’s possibly shut down.]
+
+; CProtocol.cpp
+; [Can't register NetBIOS name ]
+
+; CStatusManager.cpp
+; [No NetBIOS interface]
+; [Nobody to check]
+; [No active NetBIOS interface]
+; [Can't register the name for extra features]
+
+; FirstRunDialog.cpp
+[Default name is needed.]
+Standardname wird benötigt.
+; [mNetSend First Run]
+
+; GeneralServices.cpp
+; [Can't stop messenger service]
+
+; mNetSend.rc:IDD_DIALOG_OPTIONS
+[Settings take effect after reconnecting]
+Änderungen werden erst nach erneuten Verbinden aktiviert
+[Delete selected name]
+Ausgewählten Namen löschen
+[Make selected name default]
+Ausgewählten Namen als Standard
+; [Mailslots]
+[You can use\n %USER% to add username\n %COMPUTER% to add computer name]
+Mit %USER% können Sie einen Benutzernamen und mit %COMPUTER% einen Computernamen hinzuzufügen
+[Do not use mail-slots]
+Mailslots nicht verwenden
+[Use unsafe mail-slots]
+Unsicheren Mailslot verwenden
+[Use safe mail-slots (administrator mode only)]
+Sicheren Mailslot verwenden (Administratormodus erforderlich)
+[Enable extra features (requires Miranda restart)]
+Extrafunkionen aktivieren (Neustart notwendig)
+[Status check interval]
+Statuscheck Intervall
+
+; mNetSend.rc:IDD_DIALOG_USERINFO
+[MAC Address]
+MAC-Adresse
+[IP Address]
+IP-Adresse
+; [Extra features of mNetSend are enabled]
+
+; mNetSend.rc:IDD_DIALOG_FIRSTRUN
+[mNetSend first run]
+mNetSend - Erster Start
+; [Names of the computer and the logged on user will be used for Winpopup. The name of the computer will be default]
+; [Use computer and user standard names also]
+; [Please define the settings before using mNetSend]
+; [I want to use default settings]
+; [I want to use custom settings]
+
+; mNetSend.rc:IDD_DIALOG_QMS
+[Quick Message Send]
+Schnelles senden
+[Target name]
+Zielname
+[Use target’s computer name or its IP address when sending over the mail-slot  ]
+Computernamen oder IP-Adresse des Zielnamen benutzen wenn über den Mail-Slot gesendet wird
+; [Send from]
+; Gesendet von
+[Default name]
+Standardname
+[If you enter one of your NetBIOS names, it will be used for this message session]
+Wenn Sie einen Ihrer NetBIOS Namen eingeben, wird er für diese Nachrichtensitzung verwendet
+[Send messages over NetBIOS]
+Nachricht über NetBIOS senden
+[Send messages over MailSLot]
+Nachricht über Mail-Slot senden
+[Send message over NetBIOS]
+Nachricht über NetBIOS senden
+[Send message over mail-slot]
+Nachricht über Mail-Slot senden
+
+; mNetSend.rc:IDD_DIALOG_ADD
+[Quick Contact Add]
+Schnelles hinzufügen
+[NetBIOS name to add to the contacts list]
+NetBIOS Name zum Hinzufügen in die Kontaktliste
+
+; NetworkDialog.cpp
+; [Too many names. Delete some and try again!]
+[Please enter the name you want to add]
+Bitte geben Sie den Namen ein, den Sie hinzufügen möchten
+[This name already exists. Please try a different one]
+Den Namen gibt es bereits. Bitte nehmen Sie einen anderen
+[You need at least one name in order to use mNetSend plug-in!]
+Sie brauchen mindest einen Namen um mNetSend nutzen zu können!
+[The interval should be more than 20 milliseconds]
+Der Intervall sollte mehr als 20 Millisekunden betragen
+; [NetBIOS Interface]
+
+; QuickSend.cpp
+[You need to be online for this operation]
+Sie müssen online sein, um diese Funktion nutzen zu können
+[Please define a receiver for this message]
+Bitte geben Sie einen Empfänger für diese Nachricht ein
+[The name is too long. It should have no more than 15 symbols]
+Der Name ist zu lang. Er sollte nicht mehr als 15 Zeichen haben
+[Please define a sender for this message]
+Bitte geben Sie einen Sender für diese Nachricht ein
+[Enter the message to send]
+Nachricht zum Senden eingeben
+[Sending the message...]
+Nachricht wird gesendet...
+[The message is successfully delivered]
+Die Nachricht wurde gesendet
+[Message delivery failure]
+Nachrichtenversand fehlgeschlagen
+[You need to be online for this function]
+Sie müssen online sein, um diese Funktion nutzen zu können
+[Quick Send]
+Schnelles senden
+[Define a NetBIOS name to add]
+Geben Sie einen NetBIOS Namen zum Hinzufügen ein
+[NetBIOS name can't be longer than 15 symbols]
+NetBIOSnamen können nicht länger als 15 Zeichen sein.
+[&Send quick message...]
+Schnellnachricht schicken...
+[A&dd contact]
+Kontakt hinzufügen
+[Send options]
+Versand-Optionen
+[Send options for]
+Versand-Optionen für

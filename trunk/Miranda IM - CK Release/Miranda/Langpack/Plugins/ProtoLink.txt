@@ -1,0 +1,21 @@
+; Pluginname: ProtoLink 
+; Version: 0.2.1.0
+; Dateiname: ProtoLink.dll
+; Autor: Jacek_FH
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2218
+; Übersetzung: 21.07.05 von Dober
+
+[Registered associations]
+Registrierte Dateitypen/Links
+[&ICQ files - .icq]
+&ICQ-Dateien (*.icq)
+[&Yahoo links - ymsgr:]
+&Yahoo-Links (ymsgr:)
+[&Jabber links - xmpp:]
+&Jabber-Links (xmpp:)
+[&Gadu-Gadu links - gg:]
+&Gadu-Gadu-Links (gg:)
+[&Tlen links - tlen:]
+&Tlen-Links (tlen:)
+[&WPKontakt links - wpmgr:]
+&WPKontakt-Links (wpmgr:)

@@ -1,0 +1,90 @@
+; Pluginname: Voice Service 
+; Version: 0.0.0.8
+; Dateiname: voiceservice.dll, voiceserviceW.dll
+; Autor: Pescuma
+; Link: http://pescuma.mirandaim.ru/miranda/voiceservice
+; Übersetzung: Sebijk
+
+[Voice Calls]
+Anrufe
+[Provide services for protocols that support voice calls]
+Stellt die Anruf-Unterstützung für Protokolle bereit.
+
+[New Voice Call]
+Neuer Anruf
+[%s wants to start a voice call with you. What you want to do?]
+%s möchte dich anrufen. Möchtest du das zulassen?
+[Drop]
+Auflegen
+[From now on, repeat this action for this contact]
+Ab sofort diese Aktion für diesen Kontakt wiederholen
+[Auto actions]
+Voreinstellungen
+[ Automatic Actions ]
+Voreinstellungen
+[Auto accept this contact calls]
+Anrufe vom diesen Kontakt immer annehmen
+[Auto drop this contacts calls]
+Anrufe von diesen Kontakt immer ablehnen
+[Auto-size frame]
+Frame automatisch anpassen
+
+;[Talking]
+;Spricht
+[Calling]
+Ruft an
+[Ended]
+Beendet
+[On Hold]
+Angehalten
+[Ringing]
+Ringring
+
+[Voice Call]
+Anrufen
+[Answer Voice Call]
+Anruf annehmen
+[Hold Voice Call]
+Anruf anhalten
+[Drop Voice Call]
+Auflegen
+
+[Voice call ringing]
+Anruf empfangen
+[Calling %s]
+%s wird angerufen
+[Ringing call from %s]
+%s ruft dich an
+[Voice call ended]
+Anruf beendet
+[Call from %s started]
+Anruf von %s gestartet
+[Voice call started]
+Anruf gestartet
+[Call from %s is on hold]
+Anruf von %s wurde angehalten
+[Voice call on hold]
+Anruf ist angehalten worden
+[Call from %s has ended]
+Anruf von %s wurde beendet
+
+[Answer call]
+Anruf annehmen
+[Drop call]
+Auflegen
+
+[Calling a contact]
+Ruft ein Kontakt an
+[End of a Call]
+Ende eines Anrufs
+[Started talking]
+Gespräch gestartet
+[Put a call on Hold]
+Hat ein Anruf angehalten
+
+[Echo cancelation]
+Echo Reduzierung
+[Microphone boost]
+Mikrofon Boost
+[Automatic Actions]
+Automatische Aktionen

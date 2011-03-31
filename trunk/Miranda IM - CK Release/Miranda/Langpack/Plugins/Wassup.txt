@@ -1,0 +1,240 @@
+; Pluginname: Wassup 
+; Version: 0.3.1.2
+; Dateiname: wassup.dll
+; Author: tornado
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=358
+; Übersetzung: 21.07.05 von andydu
+
+[Updates since:]
+Updates seit:
+[Error!]
+Fehler!
+[Select highlighted]
+Markierte auswählen
+[Skip File]
+Datei überspr.
+[Abort]
+Abbruch
+[Current:]
+Aktuell:
+[Nightly updates]
+Nightly Updates
+[Latest nightly build:]
+Letzte Nightly vom:
+[Querying...]
+Abrufen...
+[Changelogs...]
+Änderungslog...
+[Select file:]
+Datei auswählen:
+[Install]
+Installieren
+
+[Auto-Checkups]
+Autmatische Updatesuche
+[A new nightly]
+Neue Nightly
+[Updated plugins]
+Aktualis. Plugins
+[Customisation files]
+Desgning-Dateien
+[Localisation files]
+Sprachdateien
+[Updated tools]
+Aktualis. Tools
+[Updated docs]
+Aktualis. Dokus
+[Every]
+Alle
+[hour/s]
+Stunden
+[Do not save files to disk]
+Datei nicht speichern
+[Open file/directory when download finishes]
+Datei/Verzeichnis öffnen nach dem Download
+[Remember dialog size and position]
+Dialoggröße und -pos. speichern
+[Add a TopToolBar button]
+TopToolbar-Button zufügen
+[Miranda Installer path:]
+Ort Miranda-Installer:
+;[Wassup Updates]
+[There are some updates you should check out]
+Es gibt ein paar Updates! Bitte prüfen.
+[Subcategory]
+Unterkategorie
+[Last Update]
+Letztes Update
+[Select Miranda Installer's path]
+Pfad zum Miranda-Installer wählen
+;[Miranda Installer (MirInst.exe)]
+[Executables (*.exe)]
+Programme (*.exe)
+[Miranda's changelog]
+Änderungen: Miranda
+[Protocols' changelog]
+Änderungen: Protokolle
+[Plugins' changelog]
+Änderungen: Plugins
+[Latest nightly build]
+Letzte Nightly
+[Latest nightly build (Debug)]
+Letzte Nightly (Debugversion)
+[Latest nightly build (Source)]
+Letzte Nightly (Quellcode)
+[The latest Miranda IM build, should be used with caution.]
+Die letzte Miranda IM Nightly sollte mit Vorsicht verwenden werden.
+[The latest Miranda IM build, built with debugging information. Mostly useful for developers.]
+Miranda IM Nightly mit Debug-Informationen für Entwickler
+[The latest Miranda IM build's source code]
+Miranda IM Nightly - Quellcode
+[>> Resolving...]
+>> Auflösen...
+[<< Connecting...]
+<< Verbinden...
+[>> Connected!]
+>> Verbunden!
+[<< Waiting for reply...]
+<< Warte auf Antwort...
+[>> Received %lu/%lu bytes (%d%%)]
+>> Erhalten: %lu/%lu Bytes (%d%%)
+[Customise]
+Design
+[Localisation]
+Sprachdateien
+;[Tools]
+[Documentation]
+Dokumentation
+[Development]
+Entwicklung
+[Emoticons]
+Smiley-Dateien
+[Source Code]
+Quellcode
+[Details]
+Details
+[More]
+Mehr
+;[Nightly]
+[Development files]
+Entwicklerdateien
+[Show me]
+Anzeigen
+[A new nightly version of Miranda IM]
+Eine neue Miranda IM Nightly
+[Some plugins were updated]
+Aktualisierte Plugins
+[Updated customisation files]
+Aktualisierte Design-Dateien
+[Updated localisation files]
+Aktualisierte Sprachdateien
+[Updated documentation]
+Aktualisierte Dokus
+[Using Cache...]
+Nutze Cache...
+[Source Type (*.%s)]
+Quelltyp (*.%s)
+[Save download to...]
+Speichern unter...
+[Resolving %s...]
+Auflösen %s...
+[Connecting to %s...]
+Verbinde zu %s...
+[Connected!]
+Verbunden!
+[Waiting for reply]
+Warte auf Antwort
+[Receiving file...]
+Empfange Datei...
+;[N/A]
+[/ %lu files]
+/ %lu Dateien
+[%lu MB/sec]
+%lu MB/sek
+[%lu KB/sec]
+%lu KB/sek
+[%lu bytes/sec]
+%lu Bytes/sek
+[Stopped by user]
+Abbruch durch Nutzer
+[Error has occured during transfer!]
+Fehler während der Übertragung!
+[Press OK to continue]
+Zum Fortfahren OK klicken
+[Are you sure you would like to abort?]
+Wirklich abbrechen?
+[Select directory to save to:]
+Speicherort wählen:
+; this is the plugin description shown in the plugins options page
+[Check for Miranda IM updates]
+Auf Miranda IM Updates prüfen
+;[Nightlies]
+[Components]
+Komponenten
+[Could not initialize WinSock! Try restarting Miranda]
+Kann WinSock nicht initialisieren! Miranda neu starten!
+;[Plugins Updates]
+[All Selections]
+Alles Markierte
+[Web Info]
+Webinfo
+[Some of your tracked plugins have updates]
+Einige der beobachteten Plugins haben Updates
+[Looking up installed plugins...]
+Suche nach installierten Plugins...
+[Latest version]
+Letzte Version
+[Last checked version]
+Zuletzt geprüft
+[Installed version]
+Installierte Version
+[Highlight updates...]
+Updates hervorheben...
+[Since last time I checked]
+Zuletzt geprüft von mir
+[Since:]
+Seit:
+[Current build date:]
+Aktuelle Version:
+[Get List from Server]
+Liste vom Server laden
+[Plugins Selection]
+Pluginauswahl
+[Only select active plugins]
+Nur aktive Plugins wählen
+[Select installed plugins]
+Installierte Plugins wählen
+[Select Updated]
+Aktuelle auswählen
+[Always show complete changelog]
+Immer gesamte Änderungsliste zeigen
+[Updated devel files]
+Aktualis. Entwicklerdateien
+[&Copy URL to clipboard]
+URL in Zwischenablage kopieren
+
+[Background Images]
+Hintergrundbilder
+[Connectivity]
+Konnektivität
+[Development Kits]
+Entwickler-Tools
+;[Interface]
+[Messaging/Chat Bots]
+Nachrichten/Chatbots
+[Messaging/Message Dialogs]
+Nachrichten/Dialoge
+[Messaging/Enhancements]
+Nachrichten/Verbesserungen
+[Protocols/IM Protocols]
+Protokolle/IM Protokolle
+[Protocols/LAN Protocols]
+Protokolle/LAN-Protokolle
+[Protocols/Other Protocols]
+Protokolle/Andere Protokolle
+[Protocols/Protocol Extension]
+Protokolle/Protokollerweiterung
+[Status and Events]
+Status und Ereignisse
+[Security and Privacy]
+Sicherheit und Privates

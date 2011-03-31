@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{2e61a37b-e7d6-4502-8ce0-98238aeff1f5}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Workers">
+      <UniqueIdentifier>{7ecbf5f8-6787-4b3c-a5a6-18f2e4b37bd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Wizard Pages">
+      <UniqueIdentifier>{1f0911d7-ff5f-409a-ae4c-a1acbcb786e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{e5574e4a-c643-4f09-8277-c1aef0703cd9}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{23dec603-6892-4273-9319-7607a5e49a58}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="disk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="encryption.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="langpack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wizard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="worker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aggressive.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="contactchain.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="eventchain.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="finaltasks.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="initialchecks.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="modulechain.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="settingschain.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="user.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="cleaning.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="fileaccess.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="finished.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="openerror.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="progress.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="selectdb.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="welcome.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="database.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbtool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\dbthdr.emf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\dbtool.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\dbtool.emf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\dbtool.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\delete.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\profileg.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\profiler.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\profiley.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="dbtool.exe.manifest" />
+  </ItemGroup>
+</Project>

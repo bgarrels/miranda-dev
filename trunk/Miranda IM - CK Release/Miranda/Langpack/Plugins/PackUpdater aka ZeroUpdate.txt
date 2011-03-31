@@ -1,0 +1,75 @@
+; Pluginname: PackUpdater aka ZeroUpdate
+; Version: 0.0.0.6
+; Dateiname: packupdater.dll 
+; Autor(en): Mataes, ZERO_BiT
+; Link: http://mataes.googlecode.com/svn/Miranda/Plugins/PackUpdater
+; Übersetzung: CHEF-KOCH am 11.09.2010
+
+[Simple updater for Miranda IM premodified packs]
+Einfaches Update für vorgefertigte Miranda-IM-Pakete 
+[Pack Updater]
+Paket-Updater
+[Check for pack updates]
+Auf Paket-Updates prüfen
+[Downloading pack updates...]
+Lade nun Paket-Updates ...
+[No updates found.]
+Keine Updates gefunden.
+[Update found!]
+Update gefunden!
+[Download update]
+Lade Update
+[View info]
+Zeige Informationen
+[Current version:]
+Aktuelle Version:
+[New version:]
+Neue Version:
+[An error occured while downloading the update]
+Ein Fehler ist während des Downloads des Paket-Updates aufgetreten
+[Download complete. Start updating? All your data will be saved and Miranda IM will be closed.]
+Download komplett. Die Aktualisierung starten? Alle Ihre Daten werden gesichert und Miranda IM wird geschlossen.
+[Downloading version info...]
+Lade Versionsinformationen ...
+[You have chosen not to install the update immediately.\nYou can install it manually from this location:\n\n]
+Sie haben sich entschieden, das Update nicht zu installieren.\nSie können es später von diesem Ort installieren:\n\n
+[Automatically check for pack updates]
+Automatisch nach Paketaktualisierungen suchen
+[Pack update options]
+Paket-Update-Optionen
+[Name of Update's file is not supported.]
+Dateiformat der Update-Dateien wird nicht unterstützt.
+[Clear pack updates folder]
+Leere Aktualisierungsverzeichnis
+[* Needs popup actions to be enabled]
+* Braucht Popupaktionen für Aktivierung
+
+[Message boxes (*)]
+Nachrichtenboxen*
+[Info messages]
+Infonachrichten
+[Progress dialogs]
+Fortschrittsdialog
+[Not sets for Message boxes]
+Gilt nicht für Nachrichtenfenster
+
+[Message boxes]
+Nachrichtenfenster
+[Remind about not installed pack update]
+Erinnerung an nicht installierte Update-Pakete
+[Not sets for ""Message boxes""]
+Nicht gesetzt für "Nachrichtenboxen"
+
+[URL for checking updates not found.]
+URL für die zu prüfenden Updates wurden nicht gefunden.
+[Downloading version info...]
+Downloade Versionsinformation ...
+[Name of Update's file is not supported.]
+Name der Update-Dateien wird nicht unterstützt.
+[Update is not possible!\nYou have no Administrator's rights.\nPlease run Miranda IM with Administrator's rights.]
+Das Update ist nicht möglich!\nSie haben keine Administratorrechte.\Bitte starten sie Miranda IM mit Adminrechten.
+
+[URL for checking updates not found.]
+Die URL für die Aktualisierungsprüfung wurde nicht gefunden.
+[Update checking already started!]
+Die Prüfung auf Aktualisierungen wurde bereits gestartet!

@@ -1,0 +1,117 @@
+; Pluginname: Miranda database - with AutoBackups 
+; Version: 0.5.6.1
+; Dateiname: dbx_3x.dll
+; Autor: sje
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2004
+; Übersetzung: 06.07.05 von Lastwebpage
+
+; Pluginname: Miranda Memory-Mapped Secured Database with AutoBackups 
+; Dateiname: dbx_mmap_sa.dll 
+; Version: 0.7.5.3
+; Dateiname: db_autobackups.dll
+; Version: 0.0.0.7
+; Autor: chaos.persei, FYR, nullbie, Billy_Bons
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3667
+; Übersetzung: 04.12.07 von Sebijk
+
+;about
+[DB Autobackuper plugin for Secured DataBase]
+DB Autobackuper-Plugin für eine sichere Datenbank
+
+; IDD_COPYPROGRESS
+[Backup in Progress]
+Sicherheitskopie wird erstellt
+
+;IDD_OPTIONS
+[Automatic Backups]
+Automatische Sicherung
+[When Miranda starts]
+Während des Startvorgangs
+[When Miranda exits]
+Während des Beendens
+[Number of backups to keep:]
+Anzahl der gespeicherten Sicherungen:
+[Backup to folder:]
+Ordner für Sicherungen:
+[Folders plugin installed.\nGo to the Customize -> Folders to change settings]
+Folders-Plugin ist installiert.\nUnter 'Customize -> Verzeichnisse' können Sie die Einstellungen ändern
+[Go to the Customize -> Folders to change settings]
+Gehen Sie unter 'Customize -> Verzeichnisse' dort können Sie die Einstellungen ändern
+[Disable progress bar]
+Keine Fortschrittsanzeige
+[Backup NOW]
+Jetzt sichern
+
+; Hauptmenüeintrag
+[Backup Profile]
+Sicherheitskopie des Profils erstellen
+
+; Icons:
+[Database Backups]
+Profildateisicherung
+
+; Verzeichisse:
+[Backup Folder]
+Sicherungsordner
+
+;dbx_mmap_sa
+[Provides Miranda database support: global settings, contacts, history, settings per contact. Enhanced modification with Encoding and Autobackups]
+Stellt Unterstützung für die Miranda-Profildatei bereit: Globale Einstellungen, Kontakte, Verlauf, Einstellungen pro Kontakt. Erweiterte Modifikation mit Verschlüsselung und autom. Sicherung.
+
+;login window
+[Login to Miranda IM]
+Einloggen bei Miranda IM
+[Please enter password for]
+Bitte Passwort eingeben für
+[Password is not correct!]
+Das Passwort ist inkorrekt!
+[New password]
+Neues Passwort
+[Old password]
+Altes Passwort
+[Passwords do not match!]
+Passwörter stimmen nicht überein!
+[Passwords doesnt match!]
+Passwörter stimmen nicht überein!
+[Wrong password!]
+Passwort ist inkorrekt!
+[Set Password]
+Passwort setzen
+[Crypto module doesnt chosen, using first found]
+Verschlüsselungsplugin wurde nicht gewählt, nutze das erste gefundene!
+[Secure alghoritm developed in russian universities]
+Sicherer Algorithmus, welcher an russischen Universitäten entwickelt wurde
+[Old, very easy to crack stream cipher]
+Alte, leicht zu knackende Verschlüsselung
+
+;options -> Database Features
+[Database Features]
+Profildateifunktionen
+[Save Profile as...]
+Profil speichern unter...
+[Save Profile As...]
+Profil speichern unter...
+[Please enter your new password]
+Bitte geben Sie ein neues Passwort ein
+[Database encryption]
+Verschlüsselung des Profils
+
+;db_autobackup
+[DB Autobackuper default plugins for Secured DataBase]
+Standardplugin des SecuredMMAP-Datenbanktreibers für die automatische Profildateisicherung.
+[Database backuped]
+Profildatei gesichert
+[Database AutoBackups]
+Profildateisicherung
+[Backup progress]
+Fortschritt der Sicherung
+[Copying database file...]
+Kopiere Profildatei...
+[Rotating backup files...]
+Rotiere Sicherungsdateien...
+[Crypto modules not found]
+Verschlüsselungsplugins wurden nicht gefunden!
+[Sorry, but your database encrypted with unknown module]
+Entschuldigung, aber Ihre Datenbankverschlüsselung ist ungültig
+[DB is already secured!]
+Datenbank ist bereits sicher!

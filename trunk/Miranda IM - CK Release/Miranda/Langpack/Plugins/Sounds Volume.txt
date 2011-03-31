@@ -1,0 +1,23 @@
+; Pluginname: Sounds Volume 
+; Version: 0.0.1.1
+; Dateiname: sndVol.dll
+; Autor: Std
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1163
+; Übersetzung: 07.07.05 von Lastwebpage
+
+[Sound Volume]
+Lautstärke Klänge
+[Sounds Volume]
+Lautstärke Klänge
+[ Volume ]
+ Lautstärke 
+[Auto-preview]
+Auto-Vorschau
+[Mute button]
+Stumm-Button
+[Set mRadio volume]
+mRadio Lautstärke festlegen
+[Mute mRadio]
+mRadio stumm Button
+[Use windows default colour]
+Windowsfarben verwenden

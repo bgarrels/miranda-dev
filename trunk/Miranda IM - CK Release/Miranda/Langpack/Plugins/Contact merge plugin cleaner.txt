@@ -1,0 +1,16 @@
+; Pluginname: Contact merge plugin cleaner 
+; Version: 0.0.1.0
+; Dateiname: cleanMergeContacts.dll
+; Autor: Spin
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2343
+; Übersetzung: 13.10.05 von FREAK_THEMIGHTY
+; Besonderheiten: Entwicklung eingestellt!
+
+[Clear all MergeContacts database entries]
+Alle MergeContacts Datenbankeinträge löschen
+[I will delete all database entries related to the\nMerge Contacts plugin now (cleans merged hierarchy as well).\nProceed?]
+Ich will alle Datenbankeinträge des MergeContacts Plugins löschen.\n(dies beinhaltet auch den zusammengeführten Verlauf).\nFortfahren?
+[Please confirm]
+Bitte bestätigen
+[Done. Please restart Miranda.]
+Erledigt. Bitte Miranda neustarten.

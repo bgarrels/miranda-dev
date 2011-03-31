@@ -1,0 +1,21 @@
+; Pluginname: SearchBar 
+; Version: 0.0.0.2
+; Dateiname: searchbar.dll
+; Autor: pboon
+; Link: 
+; Übersetzung: 0123hallo 28. April 2008
+
+[Always open URL in a new window]
+Eine URL immer in einem neuem Fenster öffnen
+[Create context menu in message dialog]
+Inhaltsmenü im Nachrichtenfenster erstellen
+[Create SearchBar on contact list]
+Suchleiste in der Kontaktliste erstellen
+[Clear box after opening URL]
+Nach dem Öffnen der URL den Suchfeld-Inhalt löschen
+[Add Search Setting]
+Suchmaschine hinzufügen
+[UrlFormat]
+URL-Format
+[Machine Identifier]
+Ident

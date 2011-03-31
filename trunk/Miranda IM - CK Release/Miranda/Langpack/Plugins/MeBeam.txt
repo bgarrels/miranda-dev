@@ -1,0 +1,13 @@
+; Pluginname: MeBeam
+; Version: 0.2.0.0
+; Dateiname: mebeam.dll
+; Autor: ghazan
+; Übersetzung: 17.11.07 von Sebijk
+; Besonderheiten: Entwicklung eingestellt!
+
+[You are invited to video chat at http://www.mebeam.com/miranda_php_mir_%s]
+Sie wurden zum Video/Audio-Chat unter http://www.mebeam.com/miranda_php_mir_%s eingeladen.
+[Start MeBeam video chat]
+MeBeam Video/Audio-Chat starten
+[Allows people to support video & audio chats.]
+Stellt die Video & Audio-Chatunterstützung über MeBeam.com bereit.

@@ -1,0 +1,225 @@
+; Pluginname: New GPG encryption 
+; Version: 0.0.0.11
+; Dateiname: new_gpg.dll
+; Autor: sss (Gluzskiy Alexandr)
+; Link: http://sss.chaoslab.ru/tracker/mim_plugs/
+; Unique ID: {4227c050-8d97-48d2-91ec-6a952b3dab94}
+; ChangeLog: http://sss.chaoslab.ru/git/?p=mim_plugs.git;a=log;h=refs/heads/new_gpg
+; Source: http://sss.chaoslab.ru/git/?p=mim_plugs.git;a=snapshot;h=refs/heads/new_gpg;sf=zip
+; Git: http://sss.chaoslab.ru/git/?p=mim_plugs.git;a=shortlog;h=refs/heads/new_gpg
+; Übersetzung: 13.08.2010 von CHEF-KOCH
+; Einige Header und PushButtons sind zur Zeit noch nicht übersetzbar aber schon im String drinne, falls irgendwann übersetzbar einfach ; entfernen!
+
+; Sie erhielten eine Nachricht von einem Kontakt mit ausgeschalteter Verschlüsselung.\nWollen Sie die Verschlüsselung für diesen Kontakt einschalten?
+; [Own secret key warning]
+; Eigene geheime Schlüsselwarnung
+; GPG-Anwendung bekamm eine Zeitüberschreitung, abgebrochen
+; [Set path to gpg.exe first!]
+; Setzen Sie zunächst den Pfad zu gpg.exe!
+; Der Name darf kein ' (' oder ')' enthalten
+; [public key decryption failed: bad passphrase]
+; Der Verschlüsselung schlug fehl: Falsche Passphrase
+; [Failed to decrypt GPG encrypted message:\n]
+; GPG-Verschlüsselung schlug fehl, Nachricht:\n
+; [Append tags to encodedecoded messages]
+; Anhang-Tag für enkodierte nachricht
+; [Select existing public key from list]
+; Wählen Sie einen existierenden Schlüssel aus der Liste
+; [we have secret key for this public key, do not removing from GPG keyring]
+; Wir haben den geheimen Schlüssel für diesen öffentlichen Schlüssel, nicht vom GPG-Schlüsselbund entfernen
+; [Set own key]
+; [Generate key]
+; [Load other]
+
+[Key ID]
+Schlüssel-ID
+[Automatic key exchange]
+Automatischer Schlüsselaustausch
+[Creation date]
+Erstelldatum
+[Failed to open file]
+Konnte die Datei nicht öffnen
+[\\new_key]
+\\neuer Schlüssel
+[Name cannot contain '(' or ')']
+Der Name darf kein '(' oder ')' beinhalten
+[please choose gpg binary location]
+bitte wählen Sie das GPG-Hauptverzeichnis aus
+[gpg binary does not exists.\nplease choose another location]
+GPG-Verzeichnis existiert nicht.\nBitte wählen Sie ein anderes Verzeichnis aus.
+[GPG execution timed out, aborted]
+GPG-Ausführung dauerte zu lange, Vorgang wird abgebrochen!
+[You have supported version of gpg binary, and gpg language file in place!\ngpg plugin should work fine on your installation!\njust press ok in wollowing diallog.]
+Sie haben eine unterstützte Version des GPG-Verzeichnis' & GPG-Sprachdatei!\nDas GPG-Plugin sollte mit Ihrer Installation wunderbar zusammenarbeiten.\nBitte klicken Sie auf 'Ok' im Dialog. 
+[EXE Executables]
+.exe-Anwendungsdatei
+[Choose gpg.exe]
+Wählen sie den Pfad zur gpg.exe aus
+[wrong gpg binary location found in system.\nplease choose another location]
+Ein falsches GPG-Verzeichnis wurde im System gefunden.\nBitte wählen Sie ein anderes Verzeichnis aus.
+[Unsupported gnupg version found, use at you own risk!\nrecommended to use GnuPG v1.x.x with this plugn.]
+Eine nicht unterstützte GnuPG-Version wurde gefunden, benutzen Sie diese auf eigenes Risiko!\nEs wird empfohlen, GnuPG v1.x.x mit diesem Plugin zu benutzen.
+[Invalid Email]
+Ungültige E-Mail-Adresse
+[Invalid date]
+Ungültiges Datum
+[You must set encryption algorythm first]
+Sie müssen als Erstes einen Verschlüsselungsalgorithmus setzen
+[There is existing key for contact, would you like to replace with new key ?]
+Für diesen Kontakt existiert bereits ein Schlüssel, wollen Sie ihn durch einen neuen Schlüssel ersetzen?
+[New public key was received, do you want to import it?]
+Ein neuer Schlüssel wurde empfangen, wollen Sie ihn importieren?
+[Received key from ]
+Schlüssel wurde empfangen von 
+[Set secret key in following dialog.\nI do not know if password protected key is work...]
+Setze geheimen Schlüssel im folgenden Dialog.\nIch weiß nicht, ob der Kennwort-Schlüssel funktioniert ...
+[Key length must be of length from 1024 to 4096 bits]
+Schlüssellänge muss zwischen 1024 und 4096 Bit betragen.
+[Name must contain at least 5 characters]
+Der Name muss mind. 5 Zeichen beinhalten.
+[Current private key id: ]
+Aktuelle Schlüssel-ID:
+[not set]
+nicht gesetzt
+[Encrypt file transfers]
+Dateitransfer verschlüsseln
+[please set keyring's home directory]
+bitte setzen Sie den Hauptordner für die Schlüssel
+
+[Do you want try to decrypt encrypted message ?]
+Wollen Sie versuchen, die verschlüsselte Nachricht zu entschlüsseln?
+[There is no assurance this key belongs to the named user]
+Es gibt keine Garantie, dass dieser Schlüssel zu dem entsprechenden Benutzer gehört.
+[We trying to encrypt with untrusted key, do you want to trust this key permanently ?]
+Sie versuchen, mit nicht vertrauenswürdigem Schlüssel zu verschlüsseln, wollen Sie diesem Schlüssel dauerhaft vertrauen?
+[We received encrypted message from contact with encryption turned off.\nDo you want turn on encryption for this contact ?]
+Sie haben eine verschlüsselte Nachricht von einem Kontakt empfangen der die Verschlüsselung deaktiviert hat.\nWollen Sie die Verschlüsselung für diesen Kontakt deaktivieren?
+
+[GPG encryption status]
+GPG-Verschlüsselungsstatus
+[Home directory:]
+Hauptverzeichnis:
+[Comment:]
+Kommentar:
+[GnuPG binary:]
+GnuPG-Verzeichnis:
+[Open:]
+Offen:
+[Close:]
+Zu:
+[Key password:]
+Schlüsselpasswort:
+[Select keyserver for key search:]
+Wählen Sie den Keyserver für die Schlüsselsuche aus:
+[Key length]
+Schlüssellänge
+[Select key for use]
+Wählen Sie den zu verwendenden Schlüssel aus
+[Add tags to encoded and decoded messages]
+Füge Tags zu ver- und entschlüsselten Nachrichten hinzu
+[Default password]
+Standardpasswort
+[Set GPG bin path and keyring home dir.]
+Setze GPG-Heimverzeichnis und -Schlüsselverzeichnis
+[GnuPG2 binary]
+GnuPG2-Verzeichnis:
+[Home directory]
+Wurzelverzeichnis:
+[Userlist]
+Benutzerliste
+[Turn on debug log]
+Schalte Debug-Log ein
+[Select own key]
+Wähle eigenen Schlüssel
+[Userlist:]
+Benutzerliste:
+[Import PubKey]
+Importiere Schlüssel
+[Export PubKey]
+Exportiere Schlüssel
+[It can take a long time, be patient]
+Es kann eine Weile dauern, bitte warten Sie
+[0 - does not expire]
+0 - verfällt nicht
+[Incomming message tags:]
+Eingehende Nachrichten-Tags:
+[Outgoing message tags:]
+Ausgehende Nachrichten-Tags:
+[Use jabber api on Miranda IM >= 0.9 (recomended)]
+Nutze Jabber-API in Miranda IM >= 0.9 (empfohlen)
+
+[Toggle GPG encryption]
+GPG-Verschlüsselung umschalten
+[/ToggleEncryption]
+GPG-Verschlüsselung umschalten
+[Send public key]
+Sende öffentl. Schlüssel
+[/SendKey]
+Sende Privatschlüssel
+
+[Do you want to toggle encryption for all subcontacts ?]
+Wollen Sie die Verschlüsselung für alle Unterkontakte wechseln?
+[Turn off GPG encryption]
+GPG-Verschlüsselung deaktivieren
+
+[GnuPG Variables]
+GnuPG Variablen
+[Set home diractory]
+Setze Heimverzeichnis
+[Load GPG puplic key]
+Lade öffentlichen GPG-Schlüssel
+[Next:\n]
+Nächster:\n
+[Turn on GPG encryption]
+GPG-Verschlüsselung aktivieren
+[Where is no public or private key.]
+Wo ist der öffentliche oder private Schlüssel?
+[Set file containing GPG public key]
+Setzen Sie die Datei, die den GPG-Schlüssel enthält
+[Key already in scret key ring.]
+Der Schlüssel ist bereits im geheimen Hauptverzeichnis.
+[already in secret keyring]
+bereits in geheimem Hauptverzeichnis
+[temporary_exported.asc]
+temporär_exportierte.asc
+[Do you want load key for all subcontacts ?]
+Wollen Sie alle Schlüssel für den Unterkontakt laden?
+[INFO]
+Information
+[This is not public or private key]
+Dies ist kein öffentlicher oder privater Schlüssel
+[Load Public GPG Key (Key ID: ]
+Lade öffentlichen GPG-Schlüssel (Schlüssel-ID: 
+[ found in prescense, and exists in keyring.)]
+ gegenwärtig gefunden, er existiert im Hauptverzeichnis.)
+[ found in prescense.)]
+gegenwärtig gefunden.
+[This key not used by any contact, do you want to remove it from publick keyring ?]
+Dieser Schlüssel wird von keinem Kontakt verwendet, wollen Sie ihn aus dem System löschen?
+[we have secret key for this public key, do not removing from GPG keyring]
+Sie haben einen geheimen Schlüssel, entfernen Sie ihn nicht aus dem GPG-Schlüsselbund!
+[Key removed from GPG keyring]
+Schlüssel aus dem GPG-Schlüsselbund entfernt
+[Do you want to remove key from entire metacontact (all subcontacts) ?]
+Wollen Sie den Schlüssel für den gesamten Metakontakt (und Unterkontakte) löschen?
+[Metacontact detected]
+Metakontakt entdeckt
+[.asc pubkey file]
+.asc-Pubkey-Datei
+[Set log file]
+Setze Logdatei
+[LOG files]
+Logdateien
+[<GPGdec>]
+<GPG geöffnet>
+[/GPGdec>]
+</GPG geschlossen>
+[<GPGenc>]
+<GPG geöffnet>
+[</GPGenc>]
+</GPG geschlossen>
+
+[Secured]
+Sicher
+[Unsecured]
+Unsicher

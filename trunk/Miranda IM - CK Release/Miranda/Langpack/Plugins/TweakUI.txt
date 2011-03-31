@@ -1,0 +1,29 @@
+; Pluginname: TweakUI 
+; Version: 0.0.0.45Beta
+; Dateiname: TweakUI.dll
+; Autor: Corsario
+; Link: http://angelo-t.sites.uol.com.br/miranda/
+; Übersetzung: 23.07.05 von baphomet
+
+[Use default border]
+Benutze Standardrahmen
+[Thin-line border]
+Dünner Rahmen
+[Double border]
+Doppelter Rahmen
+[Static edge]
+Fester Rahmen
+[Sunken edge]
+Vertiefter Rahmen
+[All border's changes will hide the titlebar.]
+Alle Änderungen verstecken die Menüleiste.
+[Translucency]
+Transparenz
+[Make main window transparent, but let contacts opaque]
+Hauptfenster transparent, Kontakte undurchsichtig
+[Contact's opacity:]
+Durchlässigkeit:
+[Disable background picture]
+Hintergrundbild deaktivieren
+[Some changes need a Miranda restart to take effect]
+Einige Änderungen benötigen einen Neustart

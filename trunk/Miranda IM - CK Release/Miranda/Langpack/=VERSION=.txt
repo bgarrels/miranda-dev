@@ -1,0 +1,1 @@
+; FLID: Deutsche Sprachdatei-GermanLanguagePack 0.12.00.00

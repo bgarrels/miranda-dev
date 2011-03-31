@@ -1,0 +1,21 @@
+; Pluginname: Received Files Folders 
+; Version: 0.1.1.0a
+; Dateiname: ReceivedFilesFolders.dll
+; Autor: bartsimp
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1304
+; Übersetzung: 14.07.05 von Strictly4me
+
+[Open received files folders]
+Öffne Verzeichnis 'Empfangene Dateien'
+[Received Files Folders]
+Empfangene Dateien
+[Received Files Folder Options]
+Einstellungen für Empfangene Dateien
+[Show 'Open received files folder' on contacts menu]
+Zeige 'Empfangene Dateien' im Kontaktmenü
+[Show 'Open received files folder' on main menu]
+Zeige 'Empfangene Dateien' im Hauptmenü
+[The folder don't exist]
+Das Verzeichnis 'Empfangene Dateien' existiert nicht
+[Integrate in TobToolBar]
+In TopToolbar integrieren

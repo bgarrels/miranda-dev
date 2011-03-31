@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0fff69f4-4f97-4e28-b54e-29b5943010e2}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{912ccac2-5046-43c6-b9ae-128dc39e0f7c}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{c1aeb530-ddb3-4043-b2e6-a303f23951ad}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="backup.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commonheaders.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="database.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbcache.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbcontacts.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbevents.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbheaders.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbmodulechain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbsettings.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="encrypt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="initmenu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SecureDB.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sha256.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="commonheaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="database.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SecureDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sha256.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="db3xS.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="version.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icos\logo.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\pass.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

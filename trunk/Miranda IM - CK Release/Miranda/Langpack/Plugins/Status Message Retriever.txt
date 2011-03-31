@@ -1,0 +1,54 @@
+; Pluginname: Status Message Retriever 
+; Version: 1.0.0.7
+; Dateiname: smr.dll
+; Unique ID: {800a5c24-737b-499f-96a2-4046daa841b1}
+; Autor: Pescuma
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2813
+; Übersetzung: 13.05.06 von HyperCriSiS
+
+[Enable Status Message Check]
+Statusnachrichtenabruf aktivieren
+[Disable Status Message Check]
+Statusnachrichtenabruf deaktivieren
+
+[Status Msg Retrieve]
+Statusnachrichten abrufen
+
+[Retrieve status message based on timer / status change]
+Empfängt Statusnachrichten anhand von Timern und Statuswechseln.
+[ Retrieve ]
+ Abruf
+[Retrieve status messages every]
+Statusnachrichten abrufen alle
+[Retrieve on status change]
+Abruf nach Statusänderung
+[Also retrieve after]
+Abruf auch nach 
+[seconds after status change]
+Sekunden nach Änderung
+[ Clear ]
+ Löschen
+[Clear message on status change]
+Nachricht nach Statusänderung löschen
+[Always clear message if status does not support messages]
+Nachricht löschen wenn Status keine Nachrichten unterstützt
+[(even for contacts with msg check disabled)]
+ (auch bei Kontakten mit deaktivierter Statuskontrolle)
+[ XStatus ]
+ XStatus
+[If contact has XStatus set:]
+Bei gesetztem XStatus:
+[Retrieve as usual]
+Standardabruf
+[Clear only if XStatus message is set]
+Nur bei gesetzter XStatus-Nachricht löschen
+[Set to XStatus Name]
+Setzen auf XStatus-Name
+[Set to XStatus Message]
+Setzen auf XStatus-Nachricht
+[Set to XStatus Name: XStatus Message]
+Setzen auf XStatus-Name: XStatus-Nachricht
+[Get status messages for these protocols:]
+Statusnachricht für diese Protokolle abrufen:
+[This feature is mainly for use with protocols that store status messages on server rather then in database (like ICQ). Don't enable it for MSN or Jabber - they already save the status message in database and won't work correctly if you enable this.]
+Diese Funktion ist hauptsächlich für Protokolle geeignet, welche die Statusnachrichten auf dem Server anstatt in der Profildatei speichern (wie ICQ). Aktivieren Sie dies NICHT für MSN oder Jabber - diese speichern die Statusnachrichten bereits in der Datenbank und funktionieren nicht mehr korrekt, wenn Sie dies aktivieren.

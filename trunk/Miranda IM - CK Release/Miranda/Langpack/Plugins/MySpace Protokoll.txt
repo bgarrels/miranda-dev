@@ -1,0 +1,72 @@
+; Pluginname: MySpace Protokoll 
+; Version: 0.0.7.1
+; Dateiname: myspace.dll
+; Autor: Scott Ellis
+; Link: http://www.scottellis.com.au/miranda_plugins/ver_MySpace.html
+; Übersetzung: 20.07.07 von AImXOo0o
+; Besonderheiten: Entwicklung eingestellt!
+
+[MySpace IM protocol]
+MySpace-IM-Protokoll
+[Sign up for a new account]
+Neues Konto erstellen
+[Handle myim: links on websites]
+myim:-Links auf Webseiten verarbeiten
+[Add friends]
+Freunde hinzufügen
+[Show profile]
+Profil anzeigen
+[MYSPACE Notifications]
+MySpace-Benachrichtigungen
+[New blog comment]
+Neuer Blog-Kommentar
+[New friend request]
+Neue Freundanfrage
+[New picture comment]
+Neuer Bildkommentar
+[New profile comment]
+Neues Profilkommentar
+[New blog subscription post]
+Neue Blogeinträge
+[Blog comments]
+Blogkommentare
+[Profile comments]
+Profilkommentare
+[Friend requests]
+Freundanfragen
+[Picture comments]
+Bildkommentare
+[Blog subscription posts]
+Benachrichtigung über neue Blogbeiträge
+[Unknown messages from server]
+Unbekannte Nachrichten von Server
+[You have unread mail]
+Sie haben ungelesene E-Mails
+[You have unread profile comments]
+Sie haben ungelesene Profilkommentare
+[You have new friend requests]
+Sie haben neue Freundschaftsanfragen
+[You have unread picture comments]
+Sie haben ungelesene Bilderkommentare
+[The password provided is incorrect]
+Das übermittelte Passwort ist falsch.
+[Choose Nick Name]
+Wählen Sie einen Nicknamen aus
+[Before you can choose the MySpace IM network, you must choose a unique nick name.]
+Bevor Sie das MySpace-IM-Netzwerk nutzen können, müssen Sie einen einzigartigen Nicknamen auswählen.
+[NickName:]
+Nickname:
+[Fill in the box above and click the button to see whether the nick name you have chosen is allowed.]
+Füllen Sie das oben stehende Feld aus und betätigen Sie den Button, um zu sehen, ob der augewählte Nickname erlaubt ist.
+[Check if Available]
+Prüfe, ob verfügbar
+[Checking availability. Please wait.]
+Prüfe Verfügbarkeit. Bitte warten.
+[That nick name is available. Press OK to use it as your personal nick name.]
+Dieser Nickname ist verfügbar. Klicken Sie auf OK um ihn als Ihren persönlichen Nicknamen zu verwenden.
+[Setting nick name. Please wait.]
+Setze Nicknamen. Bitte warten.
+[Failed to set your nick name.]
+Setzen des Nicknamen fehlgeschlagen.
+[Error getting contact list from DB]
+Ein Fehler ist bei der Kontaktliste in der Datenbank aufgetreten

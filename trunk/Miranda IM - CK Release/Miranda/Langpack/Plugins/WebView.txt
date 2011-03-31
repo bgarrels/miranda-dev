@@ -1,0 +1,55 @@
+; Pluginname: WebView 
+; Version: 0.1.2.0
+; Dateiname: webview.dll
+; Autor: Bumper1
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=980
+; Übersetzung: 22.06.07 von Foso
+
+[Open web page]
+Webseite öffnen
+[View Data in Popup]
+Daten in Popup anzeigen
+[Update Data]
+Daten erneuern
+[The Web Page Has Changed.]
+Die Webseite wurde geändert.
+[Open cache folder]
+Cacheordner öffnen
+[Disable Updates when Global Status is:]
+Updates deaktivieren, wenn der globale Status ist:
+[Alert Options]
+Alarmoptionen
+[Open/Close window]
+Fenster öffnen/schließen
+[Contact Options]
+Kontaktoptionen
+[Click here to open this URL in a browser window.]
+Klicken Sie hier, um die URL im Browserfenster zu öffnen.
+[Processing data, please wait...]
+Daten werden verarbeitet, bitte warten...
+[Download in progress, please wait...]
+Download in Vorbereitung, bitte warten...
+[Bytes displayed]
+Angezeigte Bytes
+[Contact name:]
+Kontaktname:
+[Events And Alerts]
+Ereignisse and Alarm
+[Whole web page]
+Gesamte Webseite
+[Alert Type:]
+Alarmtyp:
+[Alert When:]
+Alarm, wenn:
+[Enable Alerts]
+Alarm aktivieren
+[Add Time And Date Of Alert To Contact Name]
+Zeit und Datum des Alarms zum Kontaktnamen hinzufügen
+[Use 24 hour time format instead of 12 hour]
+24-Stunden- anstelle von 12-Stunden-Zeitformat benutzen
+[Alert When Specific Area Of Web Page Changes]
+Alarm, wenn ein bestimmter Bereich der Webseite ändert
+[Between Start and End strings]
+Zwischen Start- und Ende-Strings
+[End:]
+Ende:

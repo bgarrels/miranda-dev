@@ -1,0 +1,48 @@
+; Pluginname: miOverlay 
+; Version: 0.0.0.8
+; Dateiname: miOverlayW.dll, miOverlayA.dll
+; Autor: dufte 
+; Link: http://xfire.miranda-im.de/miOverlayW.dll
+; Übersetzung: 0123hallo
+
+[Display messages as ingame overlay popup. [Built: Jan 14 2010 18:21:59]]
+Zeigt Nachrichten als Ingame-Overlay-Popup an.
+
+[Overlay Position]
+Overlay-Position
+[Screen]
+Bildschirm
+[Here you can specify the overlay position on your screen.]
+Hier können Sie die Overlay-Position auf Ihrem Bildschirm angeben.
+[Offset (px):]
+Versatz (px):
+[Displaytime]
+Anzeigedauer
+[Overlay scale:]
+Ovl.-Skalierung:
+[no scale]
+Keine Skalierung
+[1/3 of resolution width]
+1/3 der Auflösungsbreite
+[1/4 of resolution width]
+1/4 der Auflösungsbreite
+[1/5 of resolution width]
+1/5 der Auflösungsbreite
+[Disable Overlay]
+Overlay deaktivieren
+[Skip fullscreen detection]
+Vollbilderkennung überspringen
+[Use 32bit Overlay (faster, NVidia cards dont support it)]
+Benutze 32bit-Overlay (schneller, NVidia-Karten unterstützen dies nicht)
+[Disable Aero (Miranda restart needed)]
+Deaktiviere Aero (erfordert Neustart von Miranda)
+[*Restart needed. Currently only inbuilt Skins are supported.]
+*Neustart benötigt. Zurzeit werden nur "inbuild"-Skins unterstützt.
+
+[Ingame message]
+"Ingame"-Nachricht
+
+[&Disable Overlay]
+Overlay &deaktivieren
+[&Enable Overlay]
+Overlay aktivi&eren

@@ -1,0 +1,35 @@
+; Pluginname: Splash Screen 
+; Version: 0.1.2.2
+; Dateiname: advSplashScreen.dll
+; Autor: Thief
+; Link: http://dev.mirandaim.ru/~thief/
+; Übersetzung: 18.08.06 von Weishaupt
+
+[Shows a splash at Miranda startup]
+Zeigt einen "Splash" während des Startvorgangs von Miranda.
+[Splash Options]
+Splash - Optionen
+[Splash:]
+Bild(er):
+[Active:]
+Aktiv:
+[Show splash]
+Splash zeigen
+[Play sound]
+Sound abspielen
+[Fade in:]
+Einblenden
+[Fade out:]
+Ausblenden
+[steps]
+Blendgeschwindigkeit
+[msecs]
+Millisekunden
+[Show random splash]
+Bild zufällig aussuchen
+[Prefix:]
+Präfix:
+[Show Miranda Version]
+Zeige Mirandaversion
+[Advaimg library not found. Please get it from nigtlies to be able to use images.]
+Advaimg.dll nicht gefunden. Bitte entnehmen Sie die Datei aus der aktuellen Stable-/Testing-Version.

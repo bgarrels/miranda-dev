@@ -1,0 +1,15 @@
+UseActions Plugin, version 0.0.0.3
+	* enlarged variables string length from 512 to 1024
+	* update of m_actman.h from Awkward's trunk
+	! removed minor memleak when freeing action request results (thx Merlin)
+
+UseActions Plugin, version 0.0.0.2
+	+ added calling of action named "#Autostart" at start of Miranda
+	* fix for TTB detection
+	+ Updater support
+	+ added possibility to insert separators before contactmenuitems and mainmenuitems
+	* delete "Flags" from DB if =0
+	+ attempt to deregister all possible controls and erase all owned DB settings for an Action before removing it.
+	* adaptation to new ActMan structures (v0.6+)
+	+ new Version resource
+  

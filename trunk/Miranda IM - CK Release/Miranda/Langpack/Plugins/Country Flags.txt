@@ -1,0 +1,22 @@
+; Pluginname: Country Flags 
+; Version: 0.1.0.3
+; Dateiname: flags.dll
+; Autor: HeikoH
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3462
+; Link Unicode: http://addons.miranda-im.org/details.php?action=viewfile&id=3463
+; Übersetzung: 26.03.07 von Foso
+; Besonderheiten: Entwicklung eingestellt!
+
+[Show country flag as &status icon on message window]
+Zeige Länderflagge in der Statuszeile im Nachrichtenfenster
+[Show country flag as &extra image on contact list]
+Zeige Länderflagge als Spalte in der &Kontaktliste
+[In following contact list &column:]
+Verwende folgende &Spalte:
+[Include &IP-to-country lookup in country detection]
+IP-Datenbank zur Bestimmung des Landes verwenden
+[Use &unknown flag if country can not be determined]
+"Unbekannt" anzeigen, wenn Land nicht bestimmbar
+
+[Service offering misc country utilities and especially flag icons.]
+Dienst, der diverse Werkzeuge im Bezug auf Länder bereitstellt, insbesondere die Darstellung von Länderflaggenicons.

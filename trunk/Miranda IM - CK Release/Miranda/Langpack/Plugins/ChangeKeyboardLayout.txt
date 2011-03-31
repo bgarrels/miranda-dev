@@ -1,0 +1,39 @@
+; Pluginname: ChangeKeyboardLayout 
+; Version: 0.0.1.2
+; Dateiname: ChangeKeyboardLayout.dll
+; Autor: Yasnii
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3632
+; Übersetzung: Hajuskin 11.07.07
+
+[Changing layout:]
+Layout ändern:
+[Changing layout (alternative):]
+Layout ändern (alternativ):
+[Inverting lettercase:]
+Groß-/Kleinschreibung umkehren:
+["Current word" mode]
+nur aktuelles Wort
+[Layout of text is the current layout]
+Layout des Textes ist aktuelles Layout
+[Two-way changing layout (experimental)]
+2-Wege-Layoutänderung (experimentell)
+[Log operations]
+Ergebnisbehandlung
+[Copy result to clipboard]
+Ergebnis in Zwischenablage kopieren
+[Show result in PopUp]
+Ergebnis als Popup zeigen
+[Strings for keyboard layouts]
+Zeichenketten für Tastaturlayout
+[Set Caps Lock state when inverting lettercase:]
+Caps Lock Status bei Umkehrung der Groß-/Kleinschreibung ändern:
+[Invert current state]
+Aktuellen Status umkehren
+[Switch off]
+Ausschalten
+[Leave as it is]
+Beibehalten
+[PopUp colours]
+Popupfarben
+[Custom colours]
+Eigene Farben

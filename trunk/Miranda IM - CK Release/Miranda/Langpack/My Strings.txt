@@ -1,0 +1,11 @@
+;============================================================
+;  Module: CHEF-KOCHsPack
+;  Plugin:
+;  Versions:
+;  Translators: CHEF-KOCH
+;  Dates:
+;  Template: 
+;  URL: 
+;============================================================
+[Begin]
+Beginnen

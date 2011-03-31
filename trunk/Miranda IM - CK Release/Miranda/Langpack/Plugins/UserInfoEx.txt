@@ -1,0 +1,694 @@
+; Pluginname: UserInfoEx 
+; Version: 0.8.4.2
+; Dateiname: uinfoex.dll, uinfoexW.dll
+; Unique ID: {9c23a24b-e6aa-43c6-b0b8-d6c36d2f7b57}
+; Autoren: DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2537
+; SVN: http://userinfoex.googlecode.com/svn/trunk
+; Übersetzung: 16.09.06 von DeathAxe & CHEF-KOCH
+
+[Gives extended ability to edit information about your contacts locally. It does not matter what information your contact gives about himself. If you know more you can add more.]
+Ermöglicht das (lokale) Einfügen zusätzlicher Profilinformationen eines Kontaktes.
+
+;Menüeintrag anzeigen
+[AccountMenu]
+Kontomenü
+[Cascade:]
+Kaskadieren:
+[Country Flags]
+Länderflaggen
+
+;Extraicons
+[This options require a contact list which supports extra icons.]
+Diese Einstellungen setzen eine Kontaktliste voraus, die Extraicons unterstützt.
+[Replace the following default icons:]
+Ersetze folgende Standardicons:
+
+;Icons
+[Check file version of default IconPack to prevent wrong icon display]
+Version des Standardiconpacks überprüfen, um falsche Icons zu vermeiden
+[Display icons on each dialog button]
+Zeige Icons auf jedem Button
+
+;Metakontakte
+[Scan SubContacts for missing information]
+Vervollständige Kontaktinformation aus Unterkontakten
+
+[Enable extended 'GetContactInfo' module (*)]
+Erweitertes "GetContactInfo"-Modul aktivieren (*)
+[Enable extended 'send/receive email' service (*)]
+Erweitertes "send/receive e-mail"-Modul aktivieren (*)
+[Use Windows Timezone]
+Zeitzone auf der Basis der jeweiligen Windows-Zeitzone setzen
+
+[(*) Requires Miranda to be restarted.]
+(*) Erfordert einen Neustart von Miranda IM.
+[Reset factory defaults]
+Urzustand wiederherstellen
+
+;Farben
+[Enable colours to give information about information's status.]
+Aktiviere farbige Informationsstatusanzeige
+[Protocol's information]
+Protokollinformationen
+[Custom information]
+Angepasste Informationen
+[Overwritten information]
+Überschriebene Informationen
+[Changed information]
+Veränderte Informationen
+[Info of a MetaContact's SubContact]
+Informationen des Unterkontaktes aus einem Metakontakt
+[Do you want to cancel the current refresh procedure?]
+Möchten Sie die derzeitige Aktualisierung abbrechen?
+
+;Allgemein
+[Preparing...]
+Vorbereiten ...
+[Adapt propertysheet pages to aero mode.]
+Passe Benutzer-Informationsseite der Aero-Oberfläche an (ab Vista+)
+[Make protocol based contact information readonly.]
+Schreibschutz für protokollbasierte Kontaktinformationen
+[Change my ICQ details with UserInfoEx. (Disabled if ICQ doesn't support it)]
+Ändere mein ICQ-Profil mit UserInfoEx. (Nur aktiv, wenn von ICQ unterstützt)
+[Check the Modules in the TreeView which you want to export for the contact. To add    the file as a new list entry later you need to export at least the protocol module.]
+Wählen Sie die Module in der Baumstruktur aus, die Sie von dem Kontakt exportieren möchten. Um eine Datei in der Listenansicht einzufügen, müssen Sie mindestens ein Protokoll-Modul exportieren.
+
+;Baumansicht
+[Enable groups in details dialog's treeview.]
+Aktiviere Gruppen im Baum des Profildialogs
+[Sort all tree items alphabetically.]
+Baum alphabetisch sortieren
+
+;Erinnerung
+[Reminder disabled]
+Erinnerung deaktiviert
+[Anniversaries only]
+Nur Jahrestage
+[Birthdays only]
+Nur Geburtstage
+[Bithdays only]
+Nur Geburtstage
+[everything]
+alles
+[Time of last check:]
+Letzte Überprüfung:
+
+[Icon flashing on event]
+Icon blinkt am Jahrestag
+[Show menu items]
+Menüeintrag zeigen
+[Use ignore list]
+Ignorierliste verwenden
+[Perform check on each startup]
+Bei jedem Start prüfen
+[Automatically backup and keep protocol based birthdays up to date]
+Automatische Sicherung und Aktualisierung protokollbasierender Geburtsdaten
+
+[Remind me]
+Erinnere mich
+[days before.]
+Tage vorher.
+[Birthday compatibility mode:]
+Birthday-Kompatibilitätsmodus:
+[UserInfo (default)]
+UserInfo (Standard)
+[CList extra icon:]
+CList-Extraicon:
+
+[&Export Group]
+Exportiere Gruppe
+[&Import Group]
+Importiere Gruppe
+[Abort Refreshing Contact Details]
+Kontaktinformationen-Aktualisieren abgebrochen
+[The function caused an exception!]
+Die Funktion verursachte eine Ausnahme!
+[Miranda must be online for refreshing contact information!]
+Miranda IM muss online sein um die Kontaktinformationen erneuern zu können!
+[[b]%s (%S)...[/b]\n%d Contacts remaning]
+[b]%s (%S)...[/b]\n%d verbleibende Kontakte
+[Use Zodiac as default avatar]
+Benutze Tierkreiszeichen als Standard-Avatar
+[Importing...\nPlease wait!]
+Importiere ...\nBitte warten Sie!
+[Enter country, area code and phone number:]
+Geben Sie Land und Telefonnummer ein:
+[Or enter a full international number:]
+Oder geben Sie eine internationale Nummer ein:
+[Phone can receive SMS text messages]
+Telefon kann SMS-Texte erhalten.
+[Enter your full e-mail address.\n(e.g.: john.doe@provider.com)]
+Geben Sie hier die volle eMail-Adresse ein.\n(z.B.:john.doe@provider.de)
+[Anniversary Editor]
+Jahrestag-Editor
+[Anniversary Editor\nAdd/Edit your anniversary here.]
+Jahrestag-Editor\nHinzufügen/Editieren der Jahrestage
+[Upcomming anniversaries\nThis list gives you some overview about all your contact's anniversaries.]
+Kommende Jubiläen\nDiese Liste gibt Ihnen einen Überblick von allen Jubiläen Ihrer Kontakte.
+[Edit Contact Information]
+Kontakt bearbeiten
+[Naming]
+Namensgebung
+[Your contact's local time is:]
+Lokalzeit des Kontakts:
+[Anniversaries]
+Jahrestage
+[Reminder settings:]
+Erinnerung konfigurieren:
+[Contact added to ContactList:]
+In Liste aufgenommen am:
+[Just from the beginning.]
+Von Anfang an.
+[from Module:]
+vom Modul:
+[County/State:]
+Bundesland:
+[Office:]
+Büro:
+[Superior:]
+Vorgesetzte(r):
+[Assistant:]
+Assistent(in):
+[1. language:]
+1. Sprache:
+[2. language:]
+2. Sprache:
+[3. language:]
+3. Sprache:
+[Company]
+Unternehmen
+[Language skills:]
+Sprachkenntnisse:
+[Enter your phone number\nand don't worry about formating.]
+Geben Sie eine Nummer ein,\n keine Sorge wegen der Formatierung.
+[Enter your number, don't worry about formating.]
+Geben Sie eine Nummer ein, keine Sorge wegen der Formatierung.
+[Enter a category for this number:]
+Geben Sie eine Kategorie für die Nummer an:
+[Add E-Mail]
+E-Mail hinzufügen
+[Enter your full e-mail address.]
+Geben Sie die vollständige Adresse ein.
+[(e.g.: john.doe@provider.com)]
+(z. B.: john.doe@provider.de)
+[Enter a representitive name for the e-mail address here.]
+Geben Sie einen Namen für die E-Mail-Adresse ein.
+[Enter the e-mail address here.]
+Geben Sie hier ihre E-Mail-Adresse ein
+[Popup this dialog on a contact's anniversary]
+Zeige diesen Dialog an Jahrestagen
+[Replace message boxes with popups]
+Ersetze Hinweisfenster durch Popups
+[Replace progress dialogs with popups]
+Ersetze Fortschrittsanzeige durch Popups
+[Birthday popup colours]
+Farben für Erinnerung
+[Show reminder messages as popups (if reminder is enabled)]
+Zeige Erinnerungen als Popup (wenn Erinnerung aktiviert)
+[Anniversary popup colours]
+Farben für Jahrestage
+[Add Affiliation]
+Mitgliedschaft hzfg.
+[Add Past]
+Vergangenheit hzfg.
+[Add Interest]
+Interesse hzfg.
+[Select Modules]
+Module auswählen
+[Check all]
+Alle auswählen
+[Uncheck all]
+Keine auswählen
+[Import complete]
+Import komplett
+[Add Anniversary]
+Jahrestag hinzufügen
+[You can edit the annviversary here.]
+Hier können Sie den Jahrestag bearbeiten.
+[Enter a name for the anniversary here please:]
+Geben Sie hier den Namen des Jahrestages ein:
+[Select a date here:]
+Wählen Sie hier ein Datum aus:
+[Use global reminder settings.]
+Verwende globale Einstellungen.
+[Remind me of this anniversary.]
+Erinnere mich an diesen Jahrestag.
+[Don't remind me of this anniversary.]
+Erinnere mich nicht an diesen Jahrestag.
+[Anniversary list]
+Liste der Jahrestage
+[This list gives you some overview about all your contact's anniversaries.]
+Diese Liste gibt Ihnen eine Übersicht über alle Jahrestage ihrer Kontakte.
+[with birthday:]
+mit Geburtsdatum:
+[female:]
+Weiblich:
+[male:]
+Männlich:
+[number of contacts:]
+Anzahl aller Kontakte:
+[Statistics:]
+Statistik:
+[added contacts: %u / %u\nadded settings: %u / %u\nadded events %u / %u\nduplicated events: %u]
+Importierte Kontakte: %u / %u\nImportierte Einstellungen: %u / %u\nImportierte Ereignisse: %u / %u\nDoppelte Ereignisse: %u
+
+;[Popup this dialog on a contact's anniversary]
+[average age:]
+Durchschnittsalter:
+[Cascading menu items is available only if the genmenu plugin is installed.]
+Das Kaskadieren der Menüeinträge ist nur unter Miranda 0.7 und höher verfügbar.
+[Enable contact menu items to export/import vCards]
+Aktiviere Kontaktmenüeinträge für Export/Import
+[Cascade main menu items]
+Kaskadiere Hauptmenü
+[Use Zodiac as avatar]
+Sternzeichen als Avatar nutzen
+[Make item labels readonly.]
+Schreibgeschützte Baumelemente
+[Copy UserInfo and mBirthday module from SubContact to set missing information]
+Kopiere UserInfo- und mBirthday-Modul aus dem Unter- in den Metakontakt
+[This is the reminder message]
+Dies ist eine Erinnerungsnachricht!
+
+;[IconPack]
+[Cascade contact menu:]
+Kaskadiere Kontaktmenü
+[Ex-/Import items]
+Ex-/Importieren
+[Enable extended 'View homepage' module (*)]
+Erweitertes "View homepage"-Modul aktivieren (*)
+[Enable extended 'Phone' module (*)]
+Erweitertes "Phone"-Modul aktivieren (*)
+[Zodiac:]
+Sternz.:
+[Aries]
+Widder
+[Taurus]
+Stier
+[Gemini]
+Zwillinge
+[Cancer]
+Krebs
+[Leo]
+Löwe
+[Virgo]
+Jungfrau
+[Libra]
+Waage
+[Scorpio]
+Scorpion
+[Sagittarius]
+Schütze
+[Capricorn]
+Steinbock
+[Aquarius]
+Wassermann
+[Pisces]
+Fische
+[%s provides a new birthday via protocol.\nIt is %s. The old one was %s.\n\nDo you want to use this as the new birthday for this contact?]
+%s hat sein Geburtsdatum über das Protokoll aktualisiert.\nEs lautet jetzt: %s. (Das alte war: %s)\n\nSoll das neue Datum übernommen werden?
+[Update custom birthday]
+Geburtsdatum aktualisieren
+[Keeps your custom birthday up to date.]
+Hält Geburtsdaten auf dem neuesten Stand.
+[Due to a parameter error, one of the treeitems can't be added!]
+Wegen eines Parameterfehlers kann eins der Baumeinträge nicht hinzugefügt werden!
+[An fatal error occured on adding a property sheet page!\nDialog creation aborted!]
+Beim Erstellen der Seite ist ein schwerer Fehler aufgetreten!
+[Rename Item]
+Umbenennen
+[Hide Item]
+Verstecken
+[Show Items:]
+Zeigen:
+[Set for all contacts with the same protocol]
+Für alle Kontakte mit gleichem Protokoll
+[Set for all contacts]
+Für alle Kontakte übernehmen
+[Creating unique name for a page failed with %d and error code %d]
+Das Erstellen eines eindeutigen Namens für eine Seite fehlgeschlagen mit %d und dem Fehlercode %d
+[Creating the label for a page failed with %d and error code %d]
+Das Erstellen des Labels für eine Seite fehlgeschlagen mit %d und dem Fehlercode %d
+[The dialog template type is no longer supported]
+Das Dialog Template wird nicht länger unterstützt. 
+[The contact %s(%s) has no unique id in the vCard,\nbut there is a contact in your clist with the same nick and protocol.\nDo you wish to use this contact?]
+Der Kontakt %s(%s) besitzt keine ID in der vCard,\naber ein Kontakt in deiner Liste hat denselben Alias und dasselbe Protokoll.\nSollen die Informationen für diesen Kontakt überschrieben werden?
+[Edit E-Mail]
+E-Mail bearbeiten
+[Edit Phone Number]
+Tel. bearbeiten
+[The phone number should start with a + and consist of\nnumbers, spaces, brackets and hyphens only.]
+Die Telefonnummer sollte mit + beginnen und nur aus\nNummern, Leerzeichen, Klammern und Bindestrichen bestehen.
+[Choose the item to display.]
+Wählen Sie einen Eintrag zum Anzeigen aus.
+[Edit the currently displayed item.]
+Bearbeiten des angezeigten Eintrags.
+[Add a new custom item.]
+Fügt einen neuen Eintrag hinzu.
+[Delete the selected item.]
+Löscht den ausgewählten Eintrag.
+[CRITICAL: Unable to edit current entry!\nThis should not happen!]
+Schwerer Fehler: Der gewählte Eintrag kann nicht bearbeitet werden!\nDas sollte nicht passieren!
+[Do you really want to delete the current selected item?\n\t%s\n\t%s]
+Soll der gewählte Eintrag wirklich gelöscht werden?\n\t%s\n\t%s
+[Removes an item from the list]
+Löscht einen Eintrag aus der Liste
+[Anniversary]
+Jahrestag
+[Age/Nr.]
+Alter/Nr.
+[ETA]
+Ausstehende Tage
+[This is a messge from "Extended UserInfo"]
+Eine Meldung des "Extended-UserInfo"-Plugins.
+[Error message from "Extended UserInfo"]
+Fehlermeldung von "UserInfoEx"
+[Protocol '%s' is offline]
+Protokoll '%s' ist offline.
+[Upload Details]
+Profil hochladen
+[You are not currently connected to the ICQ network.\nYou must be online in order to update your information on the server.\n\nYour changes will be saved to database only.]
+Es besteht momentan keine Verbindung mit dem ICQ-Netzwerk.\nUm das Profil hochladen zu können, muss vorher eine Verbindung aufgebaut werden.\n\nDas Profil wird nur in der Profildatei gespeichert.
+[Uploading]
+Lade hoch
+[Creating the imagelist failed!]
+Das erstellen der Bildliste ist fehlgeschlagen!
+[No pages have been added. Canceling dialog creation!]
+Es wurden keine Seiten hinzugefügt.\nDer Dialog wird nicht angezeigt!
+[Details dialog failed to be created. Returning error is %d.]
+Der Kontaktinformationsdialog konnte nicht erstellt werden.\nFehler %d.
+[The Page to add has invalid parameters!]
+Für die hinzuzufügende Seite wurden falsche Parameter angegeben.
+[Fatal memory allocation error on creating treeitem object]
+Schwerwiegende Speicherbelegungsfehler beim Erstellen des Baumstrukturobjektes
+[Upload ICQ Details]
+ICQ-Profil hochladen
+[Upload failed]
+Hochladen fehlgeschlagen
+[Your details were not uploaded successfully.\nThey were written to database only.]
+Das Profil konnte nicht erfolgreich hochgeladen werden.\nEs wurde nur lokal in der Profildatei gespeichert.
+[The selected contact is no SubContact of this MetaContact anymore]
+Ausgewählter Kontakt ist kein Unterkontakt dieses Metakontakts mehr
+[Warning, some of the changes to the TreeView were not saved correctly!]
+Achtung! Einige Änderungen zu der Baumansicht wurden nicht korrekt gespeichert!
+[Required modules]
+Benötigte Module
+[Optional modules]
+Erweiterte Module
+[The ini-file "%s"\nfor saving contact information could not be opened.]
+Die .ini-Datei "%s"\nfür das Speichern der Kontaktinformationen konnte nicht geöffnet werden.
+[None of the %d contacts, stored in the ini-file, match the selected contact!\nNothing will be imported]
+Keiner der %d Kontakte in der .ini-Datei passt zu dem gewählten Kontakt!\nNichts wird importiert
+[Import results]
+Importergebnis
+[Added %d of %d contacts stored in the ini-file.]
+%d von %d Kontakten in der .ini-Datei hinzugefügt.
+[The ini-file "%s"\nfor reading contact information could not be opened.]
+Die .ini-Datei "%s"\nfür das lesen der Kontaktinformationen konnte nicht geöffnet werden.
+[Can't create xml file!]
+XML-Datei kann nicht angelegt werden!
+[not imported!]
+nicht importiert!
+[The selected file is no valid XMLCard]
+Die gewählte Datei ist keine gültige XMLCard.
+[The version of the XMLCard is not supported by UserInfoEx]
+Die Version der XMLCard wird von UserInfoEx nicht unterstützt.
+[Owner contact successfully imported.]
+Inhaber erfolgreich importiert.
+[Selected XMLCard does not contain an owner contact!]
+Die gewählte XMLCard enthält keinen Inhaber!
+[%u of %u contacts in xmlCard with\n%u of %u settings and\n\n%u new events of %u events in file with %u duplicates\nsuccessfully imported!]
+%u von %u Kontakten in der xmlCard mit\n%u von den Einstellungen und\n\n%u neuen Ereignissen in der Datei mit %u Kopien\nerfolgreich importiert!
+[FATAL: An exception was thrown while importing contacts from xmlCard!]
+Schwerwiegender Fehler: Eine Ausnahme entstand beim Importieren der xmlCard!
+[IM Naming]
+IM-Benennung
+[Marital status]
+Familienstand
+[Export: Modules]
+Exportieren: Module
+[Export: Folder]
+Exportieren: Ordner
+[Details Infobar]
+Details-Infoleiste
+[Phone Infobar]
+Telefon-Infoleiste
+[E-Mail Infobar]
+E-Mail-Infoleiste
+[Export VCard]
+VCard exportieren
+[Import VCard]
+VCard importieren
+[Anniversary Infobar]
+Jahrestage-Infoleiste
+[Goto]
+Gehe zu
+[Cellular]
+Mobiltelefon
+[Custom Phone]
+Benutzerdef. Telefon
+[Down arrow]
+Pfeil runter
+[Ex-/Import]
+Ex-/Importieren
+[Backup Birthday]
+Geburtstag sichern
+[birthday today]
+Geburtstag heute
+[birthday tomorrow]
+Geburtstag morgen
+[birthday in 2 days]
+Geburtstag (in 2 Tagen)
+[birthday in 3 days]
+Geburtstag (in 3 Tagen)
+[birthday in 4 days]
+Geburtstag (in 4 Tagen)
+[birthday in 5 days]
+Geburtstag (in 5 Tagen)
+[birthday in 6 days]
+Geburtstag (in 6 Tagen)
+[birthday in 7 days]
+Geburtstag (in 7 Tagen)
+[birthday in 8 days]
+Geburtstag (in 8 Tagen)
+[birthday in 9 days]
+Geburtstag (in 9 Tagen)
+[birthday later]
+Geburtstag (später)
+[anniversary today]
+Jahrestag (heute)
+[anniversary tomorrow]
+Jahrestag (morgen)
+[anniversary in 2 days]
+Jahrestag (in 2 Tagen)
+[anniversary in 3 days]
+Jahrestag (in 3 Tagen)
+[anniversary in 4 days]
+Jahrestag (in 4 Tagen)
+[anniversary in 5 days]
+Jahrestag (in 5 Tagen)
+[anniversary in 6 days]
+Jahrestag (in 6 Tagen)
+[anniversary in 7 days]
+Jahrestag (in 7 Tagen)
+[anniversary in 8 days]
+Jahrestag (in 8 Tagen)
+[anniversary in 9 days]
+Jahrestag (in 9 Tagen)
+[anniversary later]
+Jahrestag (später)
+[Warning: Your current IconPack's version differs from the one UserInfoEx is designed for.\nSome icons may not be displayed correctly]
+Achtung! Die vorhandene Iconpack-Version unterscheidet sich von einer für UserInfoEx erstellten.\nEinige der Icons werden nicht korrekt angezeigt
+[Warning! The IconPack was not found!]
+Achtung! Das Iconpack wurde nicht gefunden!
+[Gives extended ability to edit information about your contacts locally. It does not matter what information your contact gives about himself. If you know more you can add more.]
+Gibt erweiterte Möglichkeiten zum Editieren der Informationen der Lokale Kontakte. Es spielt keine Rolle, welche Informationen Ihr Kontakt über sich selbst angegeben hat. Falls Sie mehr wissen, können Sie mehr hinzufügen.
+[Sorry, but UserInfoExW needs an Unicode supporting OS!]
+Entschuldigung, aber UserInfoEx benötigt ein Betriebssystem, das Unicode unterstützt.
+[UserInfoExW does not work with Miranda IM (ANSI)\nTry UserInfoEx instead!]
+UserInfoEx arbeitet nicht mit der ANSI-Version von Miranda IM zusammen. Versuchen Sie es stattdessen mit einer anderen UserInfoEx-Version!
+[Ex-/Import contact]
+Kontakt ex-/importieren
+[&Import User Details]
+Benutzerinfo &importieren
+[&Export User Details]
+Benutzerinfo &exportieren
+[Export all contacts]
+Alle Kontakte exportieren
+[Import all contacts]
+Alle Kontakte importieren
+[Backup birthdays]
+Sichere Geburtstage
+[Check anniversaries]
+Suche nach Jahrestagen
+[Refresh Contact Details]
+Kontaktdaten aktualisieren
+[Contacts remaning]
+Kontakte verbleibend
+[Open in Browser]
+Im Web-Browser öffnen
+[Details Dialog]
+Kontaktinfo-Dialog
+[This will delete all settings, you've made!\nAll TreeView settings, window positions and any other settings!\n\nAre you sure to procceed?]
+Dies löscht alle von Ihnen gemachte Einstellungen!\nAlle Baumansichtseinstellungen, Fensterpositionen und andere Einstellungen!\n\nFortsetzen: Sind Sie sich sicher?
+[All settings are reset to default values now!]
+Alle Einstellungen wurden zurückgesetzt
+[Select an IconPack]
+Iconpack auswählen
+
+; [Opening Selection dialog failed!]
+[The selected IconPack is not valid or could not be loaded!]
+Das gewählte Iconpack kann nicht geladen werden!
+[Disabled reminder]
+Deaktivierte Erinnerung
+[mBirthday (default)]
+mBirthday (standard)
+[Extended UserInfo]
+Erweiterte Benutzerinformationen
+[Add a new anniversary]
+Füge einen neuen Jahrestag hinzu
+[Delete an existing anniversary]
+Lösche einen Jahrestag
+[unknown]
+Unbekannt
+[Edit Anniversary]
+Jahrestag bearbeiten
+[Please enter a valid Description first!]
+Bitte geben Sie zuerst eine gültige Beschreibung ein!
+[No valid date selected for editing!]
+Es wurde kein gültiges Datum zum Bearbeiten gewählt
+[Do you really want to delete the %s?]
+Wollen Sie wirklich den %s löschen?
+[Affiliation]
+Mitgliedschaften
+[Interest]
+Interessen
+[Sorry, but there is a problem with adding a new item of type "%s"]
+Entschuldigung, aber es gibt ein Problem mit dem Erstellen des neuen Artikels vom Typ "%s"
+[Add Affliation]
+Mitgliedschaft hzfg.
+[Edit Category]
+Kategorie bearbeiten
+[Edit Value]
+Wert bearbeiten
+[Delete an entry]
+Einen Eintrag löschen
+[Do you really want to delete this entry?]
+Soll dieser Eintrag wirklich gelöscht werden?
+[No anniversaries to remind of]
+Es gibt keine Jahrestage in absehbarer Zeit.
+[%s has the following anniversaries:]
+%s hat die folgenden Jahrestage
+[%d. %s today]
+heute %d. %s
+[%d. %s tomorrow]
+morgen %d. %s
+[%d. %s after %d days]
+%d. %s in %d Tagen
+[%s has %s today.]
+%s hat heute %s.
+[%s has %s tomorrow.]
+%s hat morgen %s.
+[%s has %s after %d days.]
+%s hat %s in %d Tagen.
+[\n%s becomes %d years old.]
+\n%s wird %d Jahre alt.
+[Reminder can not load settings for contact: '%s']
+Erinnerer kann Einstellungen für Kontakt nicht laden: '%s'
+[%s has %s today]
+%s hat heute %s
+[an anniversary]
+ein Jahrestag
+[Backing up and syncing all birthdays complete!]
+Sicherung und Synchronisation\nder Geburtsdaten fertiggestellt!
+[Can't create hotkey handler\nError %d]
+Kann keinen Hotkey für den Anwender erstellen\nFehler %d
+[Anniversary Reminder]
+Jahrestagserinnerung
+
+;Hotkeys
+[Popup Anniversary list]
+Zeige Jahrestagsliste
+[Memory allocation error!]
+Speicher konnte nicht bereitgestellt werden!
+[User has no valid homepage]
+Der Kontakt hat keine gültige Homepage
+[all Contacts]
+alle Kontakte
+[Select a destination file...]
+Zieldatei auswählen...
+[The Save Dialog returned an error: %d!]
+Der Dialog zum Auswählen der Datei hat folgenden Fehler gemeldet: %d
+[Import User Details from VCard]
+Benutzerprofil aus vCard importieren
+[Contact (private)]
+Kontakt (Privat)
+[Origin]
+Herkunft
+[Contact (Work)]
+Kontakt (Arbeit)
+[Buttons]
+Schaltflächen
+[TreeView]
+Baumansicht
+[What do you want to export?]
+Was soll exportiert werden?
+[Contact Information]
+Kontaktinformationen
+[Contact History]
+Kontaktverlauf
+[%s has %s in %d days.]
+%s hat %s in %d Tagen. 
+[Could not find contact's protocol. Maybe it is not active!]
+Das Kontaktprotokoll konnte nicht gefunden werden. Vielleicht ist es nicht aktiv!
+[Check the Modules in the TreeView which you want to export for the contact. To add  the file as a new list entry later you need to export at least the protocol module.]
+Wählen Sie die Module in der Listenansicht aus, die Sie für die entsprechenden Kontakte exportieren möchten.
+
+; Icons
+[Birthday tomorrow]
+Geburtstag morgen
+[Birthday in 2 days]
+Geburtstag in 2 Tagen
+[Birthday in 3 days]
+Geburtstag in 3 Tagen
+[Birthday in 4 days]
+Geburtstag in 4 Tagen
+[Birthday in 5 days]
+Geburtstag in 5 Tagen
+[Birthday in 6 days]
+Geburtstag in 6 Tagen
+[Birthday in 7 days]
+Geburtstag in 7 Tagen
+[Birthday in 8 days]
+Geburtstag in 8 Tagen
+[Birthday in 9 days]
+Geburtstag in 9 Tagen
+[Birthday later]
+Geburtstag später
+[Anniversary tomorrow]
+Jahrestag morgen
+[Anniversary in 2 days]
+Jahrestag in 2 Tagen
+[Anniversary in 3 days]
+Jahrestag in 3 Tagen
+[Anniversary in 4 days]
+Jahrestag in 4 Tagen
+[Anniversary in 5 days]
+Jahrestag in 5 Tagen
+[Anniversary in 6 days]
+Jahrestag in 6 Tagen
+[Anniversary in 7 days]
+Jahrestag in 7 Tagen
+[Anniversary in 8 days]
+Jahrestag in 8 Tagen
+[Anniversary in 9 days]
+Jahrestag in 9 Tagen
+[Anniversary later]
+Jahrestag später
+[Language skills]
+Sprachkenntnisse
+[Upcomming anniversaries]
+Kommende Jubiläen
+[This list gives you some overview about all your contact's anniversaries.]
+Diese Liste gibt dir einen Überblick über alle kommenden Jubiläen Ihrer Kontakte.

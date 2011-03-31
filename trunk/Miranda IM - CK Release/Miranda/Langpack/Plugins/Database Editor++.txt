@@ -1,0 +1,366 @@
+; Pluginname: Database Editor++ 
+; Version: 3.2.0.0
+; Dateiname: dbeditorpp.dll, svc_dbepp.dll
+; Unique ID: {a8a417ef-07aa-4f37-869f-7bfd74886534}
+; Autor: JdGordon; Bio
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2957
+; Übersetzung: 06.05.05 von Lastwebpage
+; Besonderheiten: Entwicklung eingestellt!
+
+[Cannot Convert!]
+Kann nicht konvertieren!
+[Couldnt allocate enough memory!]
+Nicht genug freier Speicher!
+[Loading contacts...]
+Lade Kontakte...
+[Loading modules...]
+Lade Module...
+
+[(%s) %s (UNLOADED)]
+(%s) %s (Ungeladen)
+
+[Error Loading Module List]
+Fehler beim Laden der Modulliste
+[Couldn't open file for writing]
+Konnte nicht in Datei schreiben
+[Database Editor++ (unicode mode)]
+Profildatei-Editor++ (Unicode-Modus)
+[Database Editor++ (ansi mode)]
+Profildatei-Editor++  (ANSI-Modus)
+[Database Editor++]
+Profildatei-Editor++
+
+[Add module to contact "%s"]
+Modul zum Kontakt "%s" hinzufügen
+[Edit Setting]
+Einstellung ändern
+[Value Name:]
+Name:
+[Value Data:]
+Wert:
+[Base]
+Basis
+[Hexadecimal]
+Hexadezimal
+[Decimal]
+Dezimal
+[Save Value as:]
+Wert speichern als:
+[&Filters]
+&Filter
+[Item context]
+Eintragkontext
+[NEW]
+Neu
+[Dword]
+DWord
+[BYTE]
+Byte
+[WORD]
+Word
+[DWORD]
+DWord
+[STRING]
+String
+[UNICODE]
+Unicode
+[BLOB]
+Blob
+[&Dword]
+&DWord
+[Null Mod context]
+Null Mod Kontext
+[NULL contact menu]
+NULL-Kontaktmenü
+[Export Settings]
+Einstellungen exportieren
+[Contacts menu]
+Kontaktmenü
+[Contact Mod context]
+Kontaktmod Kontext
+[new item]
+Neuer Eintrag
+
+[Data]
+Wert
+[<unsupported>]
+<nicht unterstützt>
+[Add a module to contact]
+Modul zum Kontakt hinzufügen
+[Add a module named]
+Name des Moduls
+[Add to all contacts (Includes Settings)]
+Modul zu allen Kontakten hinzufügen (inkl. Einstell.)
+[Open user tree in DBE++]
+Benutzerzweig in DBE++ öffnen
+
+[Deleted]
+Gelöscht
+[Found]
+Gefunden
+[Export Contacts]
+Kontakte exportieren
+[Import Contacts]
+Kontakte importieren
+[From a file]
+Von einer Datei
+[From pasted text]
+Vom eingefügten Text
+
+[Confirm Module Deletion]
+Modullöschung bestätigen
+[Are you sure you want to delete module "%s"?]
+Soll Modul "%s" wirklich gelöscht werden?
+
+[Contact already exists]
+Kontakt existiert bereits
+[Do you want to overwrite it "%s"?]
+Soll "%s" wirklich überschrieben werden?
+
+[Confirm Contact Delete]
+Kontaktlöschung bestätigen
+[Are you sure you want to delete contact "%s"?]
+Soll Kontakt "%s" wirklich gelöscht werden?
+
+[New BYTE value]
+Neuer Byte-Wert
+[New WORD value]
+Neuer Word-Wert
+[New DWORD value]
+Neuer DWord-Wert
+[New STRING value]
+Neuer String-Wert
+[New UNICODE value]
+Neuer Unicode-Wert
+[New BLOB value]
+Neuer BLOB-Wert
+
+[Edit BYTE value]
+Byte-Wert bearbeiten
+[Edit WORD value]
+Word-Wert bearbeiten
+[Edit DWORD value]
+DWord-Wert bearbeiten
+[Edit STRING value]
+String-Wert bearbeiten
+[Edit UNICODE value]
+Unicode-Wert bearbeiten
+[Edit BLOB value]
+BLOB-Wert bearbeiten
+
+[Copy To Contact]
+Zu Kontakt kopieren
+;-
+[Export Module]
+Modul exportieren
+[Export Module from all contacts]
+Modul von allen Kontakten exportieren
+[Add To Known Modules]
+Zu bekannten Modulen hinzufügen
+
+[&Edit / Rename]
+B&earbeiten/Umbenennen
+[&Convert to]
+Umwandeln zu
+[Encyption]
+Verschlüsselung
+[View Decrypted String]
+Entschlüsselten String anzeigen
+[View Encrypted String]
+Verschlüsselten String anzeigen
+[Decrypt String]
+String entschlüsseln
+[Encrypt String]
+String verschlüsseln
+[&Watch]
+Beobachten
+
+[&Main]
+Allge&mein
+[&Refresh Modules]
+Module aktualisie&ren
+[Refresh &Settings]
+Einstellungen aktuali&sieren
+[&Actions]
+&Aktionen
+[&Search and Replace]
+&Suchen und Ersetzen
+[&Delete Module]
+Mo&dul löschen
+[&Watches]
+Beobachten
+[&View all]
+Alle anzeigen
+[&Delete all]
+Alle löschen
+
+[Entire &Database]
+Gesamte &Profildatei
+[All &Settings]
+Alle Ein&stellungen
+[All &Contacts]
+Alle Kontakte
+
+[From a &file]
+Von einer Datei
+[From pasted &text]
+Vom eingefügten &Text
+
+[&Sort by protocol]
+Nach Protokoll &sortieren
+[Show &All]
+&Alle anzeigen
+[Show only &Loaded]
+Nur ge&ladene anzeigen
+[Show only &Unloaded]
+Nur &ungeladene anzeigen
+[Edit &Bytes in Hex]
+&Bytes in Hex bearbeiten
+[Edit &Words in Hex]
+&Words in Hex bearbeiten
+[Edit &Dwords in Hex]
+&DWords in Hex bearbeiten
+[&Restore position]
+Position wiederhe&rstellen
+
+[Restore last opened position]
+Zuletzt geöffnete Position wiederherstellen
+[Automatically expand "settings" when Database Editor ++ starts]
+Einstellungszweig beim Starten automatisch öffnen
+[Use known modules list]
+Liste bekannter Module verwenden
+[Warn when deleting modules]
+Beim Löschen von Modulen warnen
+["Open user tree in DBE++" menu item]
+"Benutzerzweig in DBE++ öffnen"-Eintrag im Kontaktmenü
+[Use popups when watched settings change values]
+Popups verwenden, wenn beobachtete Einstellungen den Wert ändern
+[Popup timeout (0 for infinite)]
+Anzeigedauer (0 für endlos)
+[Modules to ALWAYS mark as known (e.g core modules)]
+Plugins, die IMMER als bekannt markiert werden, z. B. Core
+[Put a space or comma between each module name]
+Trennen Sie die einzelnen Einträge durch ein Leerzeichen oder Komma
+[If the module name has a space in it, put a \\ before the space. eg "aaa\\ bbb"]
+Wenn Modulname Leerzeichen enthält, vor das Leerzeichen ein \\ setzen, z. B. "aaa\\ bbb"
+[Changes to this list will take effect next time miranda starts]
+Hinweis: Bei Änderungen ist ein Neustart von Miranda IM erforderlich.
+
+[Closed Known Module]
+Geschlossenes bekanntes Modul
+[Open Known Module]
+Offenes bekanntes Modul
+[Closed Unknown Module]
+Geschlossenes unbekanntes Modul
+[Open Unknown Module]
+Offenes unbekanntes Modul
+[Contacts Group]
+Kontaktgruppe
+[Known Contact]
+Bekannter Kontakt
+
+[&Clone]
+Kopie erstellen
+[Export Contact]
+Kontakt exportieren
+[Import Settings]
+Einstellungen importieren
+[&Add Module]
+Modul hinzufügen
+
+[Find and Replace]
+Suchen und Ersetzen
+[Database Editor++ Search and Replace]
+Profildatei-Editor++ Suchen und Ersetzen
+[Database Editor++ Find Dialog]
+Profildatei-Editor++ Suche
+
+[Search For]
+Suchen nach
+[Case Sensitive]
+Groß-/Kleinschreibung
+[Exact Match]
+genaue Suche
+[Module Name]
+Modul Name
+[Setting Name]
+Einstell. Name
+[Setting Value]
+Einstell. Werte
+[&Search...]
+&Suchen...
+
+[Replace With]
+Ersetzen durch
+[Entirely]
+Komplett
+[&Replace]
+E&rsetzen
+
+[Finished. %d items found]
+Beendet. %d Einträge gefunden
+[Enter a string to search the DB for]
+Geben Sie einen Suchstring für die Profildatei ein
+[Found Module "%s" in contact "%s"]
+Modul "%s" gefunden im Kontakt "%s"
+[Found Setting "%s" in module "%s" in contact "%s"]
+Einstellung "%s" im Modul "%s" im Kontakt "%s" gefunden
+[Found in Setting "%s" in module "%s" in contact "%s"]
+In Einstellung "%s" im Modul "%s" im Kontakt "%s" gefunden
+[%s Setting "%s" in module "%s" in contact "%s" - "%s"]
+%s Einstellung "%s" in Modul "%s" in Kontakt "%s" - "%s"
+[Finished. %d items were found.]
+Beendet. %d Einträge wurden gefunden.
+[%s Module "%s" in contact "%s"]
+%s Modul "%s" in Kontakt "%s"
+[%s "%s" in Setting "%s" in module "%s" in contact "%s"]
+%s "%s" in Einstellung "%s" in Modul "%s" in Kontakt "%s"
+[Finished. %d items were found, %d items were deleted.]
+Beendet. %d Einträge wurden gefunden, %d Einträge wurden gelöscht.
+
+[Searching for: %s]
+Suche nach: %s
+[Error Loading Setting List]
+Fehler beim Laden der Einstellungsliste
+
+[Delete module from Database]
+Modul aus der Profildatei löschen
+[Delete module from all contacts (Includes Setting)]
+Modul von allen Kontakten löschen (inkl. Einstell.)
+[Delete module from Database... Loading]
+Modul aus der Profildatei löschen... Lade
+
+[Copy module to contact]
+Modul zu Kontakt kopieren
+[Contact to copy module and settings to]
+Modul und Einstellungen kopieren zu Kontakt:
+[Copy to all contacts (Includes Settings)]
+Zu allen Kontakten kopieren (inkl. Einstell.)
+
+[Import Module/Settings]
+Module/Einstellungen importieren
+[Paste the Settings to import here.]
+Zu importierende Einstellungen hier einfügen.
+[Insert &CR/LF]
+Zeilenumbru&ch
+
+[Watched Database Variables]
+Beobachtete Profildatei-Variablen
+[Watch Window]
+Beobachtungsliste
+[Reload Watch List]
+Beobachtungsliste aktualisieren
+
+[Database Setting Changed: \nModule: "%s" , Setting: "%s"\nNew Value: (BYTE) %d]
+Profildateieinstellung geändert:\nModul: "%s" , Einstellung: "%s"\nNeuer Wert: (Byte) %d
+[Database Setting Changed: \nModule: "%s" , Setting: "%s"\nNew Value: (WORD) %d]
+Profildateieinstellung geändert:\nModul: "%s" , Einstellung: "%s"\nNeuer Wert: (Word) %d
+[Database Setting Changed: \nModule: "%s" , Setting: "%s"\nNew Value: (DWORD) 0x%X]
+Profildateieinstellung geändert: \nModul: "%s" , Einstellung: "%s"\nNeuer Wert: (DWord) 0x%X
+[Database Setting Changed: \nModule: "%s" , Setting: "%s"\nNew Value: "%s"]
+Profildateieinstellung geändert: \nModul: "%s" , Einstellung: "%s"\nNeuer Wert: "%s"
+[Database Setting Changed: \nModule: "%s" , Setting: "%s"\nNew Value (UTF8): "%s"]
+Profildateieinstellung geändert: \nModul: "%s" , Einstellung: "%s"\nNeuer Wert (UTF8): "%s"
+
+[Advanced Database Editor. More advanced & bugfixed by Bio. [Jan 28 2008  19:04:36]]
+Erweiterte Datenbank-Editor. Mehr gefixt und erweitert von Bio. [28.01.2008  19:04:36]

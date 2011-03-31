@@ -1,0 +1,59 @@
+; Pluginname: StatusMessageChangeNotify
+; Version: 0.0.3.19
+; Dateiname: smcnotify.dll
+; Autor: pescuma
+; Link: http://www.torun.mm.pl/~slotwin/smcn/smcnotifytest.zip
+; Übersetzung: Foso am 28.3.07
+
+[Enable PopUps]
+Popups aktivieren
+[Only if status message has changed]
+Nur wenn sich die Statusnachricht geändert hat
+[Ignore empty status messages]
+Leere Statusnachrichten ignorieren
+[Open contact details]
+Kontaktdetails öffnen
+[View status message history]
+Statusnachrichtenverlauf zeigen
+[changed his/her status message to %n]
+ändert seine/ihre Statusnachricht zu %n
+[Disable status message change notification]
+Benachrichtigung bei Statusnachrichtenänderung deaktivieren
+[Enable status message change notification]
+Benachrichtigung bei Statusnachrichtenänderung aktivieren
+[List Contacts with Status Message]
+Kontaktliste mit Statusnachrichten
+[Clear history]
+Verlauf löschen
+[Do not log empty status messages]
+Leere Statusnachrichten nicht speichern
+[Disable protocols which you don't wish to be notified for]
+Deaktivieren Sie die Protokolle, über die Sie nicht benachrichtigt werden möchten:
+[Status Message Change Notify]
+Statusnachrichtenänderungsbenachrichtigung
+[Keep history of up to]
+Verlauf behalten bis zu
+[status messages]
+Statusnachrichten
+[You can use %c with log filename to append nicknames]
+Sie können %c mit Dateinamen benutzen um Nicknamen anzuhängen
+[Clear status messages history for all contacts]
+Statusnachrichtenverlauf für alle Kontakte löschen
+[Message removed]
+Nachricht entfernt
+[Message changed]
+Nachricht geändert
+[Enable/Disable history for this contact]
+Verlauf de-/aktivieren für diesen Kontakt
+[Enable/Disable logging to file for this contact]
+Speichern in Datei für diesen Kontakt de-/aktivieren
+[Keep History]
+Verlauf behalten
+[Show PopUps]
+Popups zeigen
+[Log To File]
+Loggen in Datei
+[Log template]
+Logvorlage
+[Show status message changes in message window]
+Statusnachrichtenänderung im Nachrichtenfenster anzeigen

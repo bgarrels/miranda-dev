@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{9513d054-a595-4841-9b86-83bf52aa6eb6}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ICONS.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\icos\xstatus01.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus02.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus03.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus04.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus05.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus06.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus07.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus08.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus09.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus10.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus11.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus12.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus13.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus14.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus15.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus16.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus17.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus18.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus19.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus20.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus21.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus22.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus23.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus24.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus25.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus26.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus27.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus28.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus29.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus30.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus31.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icos\xstatus32.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

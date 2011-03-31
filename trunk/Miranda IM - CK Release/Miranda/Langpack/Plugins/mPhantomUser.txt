@@ -1,0 +1,30 @@
+; Pluginnamme: mPhantomUser 
+; Version: 0.3.7.0
+; Dateiname: mPhantomUser.dll
+; Autor: ptonev
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=468
+; Übersetzung: 05.04.07 von Foso
+; Besonderheiten: Entwicklung eingestellt!
+
+[&Add Phantom User]
+Phantombenutzer hinzufügen
+[&Import Phantom Users]
+Phantombenutzer importieren
+[&Export Phantom Users]
+Phantombenutzer exportieren
+[Add Phantom User]
+Phantombenutzer hinzufügen
+[&Full Name]
+Vollständiger Name
+[Contact &Type]
+Kontakttyp
+[Cellular &Phone]
+Mobiltelefon
+[Export process has completed.]
+Exportprozess wurde abgeschlossen.
+[Import process has completed.]
+Importprozess wurde abgeschlossen.
+[&Edit Phantom User]
+Phantombenutzer bearbeiten
+[Edit Phantom User]
+Phantombenutzer bearbeiten

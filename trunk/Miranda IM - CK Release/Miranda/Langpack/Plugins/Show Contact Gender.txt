@@ -1,0 +1,21 @@
+; Pluginname: Show Contact Gender 
+; Version: 0.0.1.3
+; Dateiname: gender.dll
+; Autor: Thief
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3336
+; Übersetzung: 27.01.07 von Foso
+; Besonderheiten: Entwicklung eingestellt!
+
+[Draw an icon when gender info not found]
+Zeige ein Icon, wenn Geschlecht nicht spezifiziert
+[Enable menu items]
+Aktiviere Menüeintrag
+[Set Gender]
+Wähle Geschlecht
+
+[No info]
+Keine Information
+
+[Shows contacts gender as an icon in contact list]
+Zeigt das Geschlecht eines Kontaktes in der Kontaktliste an.
+ 

@@ -1,0 +1,448 @@
+; Pluginname: Popup Plus 
+; Version: 2.1.1.5c
+; Dateiname: popup.dll
+; Unique ID: {77223eb9-c613-4d83-8b8a-00f07ce82c50}
+; Autor: ©2010 MPK, Merlin_de (modifizierte Version)
+; SVN: http://svn.miranda.im/mainrepo/popup
+; Übersetzung: CHEF-KOCH 
+
+; Pluginname: Popup Plus 
+; Version: 2.1.0.8 (Final alt)
+; Dateiname: popup.dll
+; Autor: ©2002 Luca Santarelli, ©2004-2007 Victor Pavlychko 
+; Autor Homepage: http://nullbie.miranda-im.org.ua/
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3400
+; Übersetzung:  09.07.05 von Lastwebpage 
+
+[En&large PopUps by]
+Erweiterte PopUps von
+[Content && Style]
+Inhalt && Stil
+[Display time]
+Zeitanzeige
+[Infinite popup delay]
+Unendliche Anzeigedauer
+[Popup delay:]
+Anzeigedauer:
+[Distance between popups]
+Distanz zwischen Popups
+[Draw avatar borders]
+Rahmen um Avatare zeichnen
+[Draw borders for semitransparent avatars too]
+Auch um semi-transparente Avatare
+[Round corners by]
+Runde Ecken mit
+[Process Clist events]
+SysTray-Benarichtigungen
+
+[Disable popups in fullscreen mode]
+Popups im Vollbildmodus deaktivieren
+[Do not close hovered popups]
+Bei Mausberührung nicht schließen
+
+[Size && Position]
+Größe && Position
+[Dynamically resize the popups]
+Dynamische Popup-Größe
+[Minimum width]
+Minimale Breite
+[Maximum width]
+Maximale Breite
+[upper left corner]
+obere linke Ecke
+[lower left corner]
+untere linke Ecke
+[lower right corner]
+untere rechte Ecke
+[upper right corner]
+obere rechte Ecke
+[Layout:]
+Ausricht.:
+[vertical]
+vertikal
+[Popup Area]
+Popupbereich
+[Configure popup area]
+Popup-Bereiche konfigurieren
+[Whole Screen]
+Gesamter Bildschirm
+[pixel(s)]
+Pixel
+[Spacing:]
+Fensterabstand:
+
+[Use transparency (Windows 2000+)]
+Transparenz verwenden (Win2k+)
+[Go to Customize > Fonts && Colors for fonts and colors options]
+Gehe zu Customize > Schriften && Farben für Schrift- und Farboption.
+[Go to Customize > Fonts section for fonts and colors options]
+Unter 'Customize -> Schriftarten' Schriftart && Farbe festlegen.
+[opacity:]
+Deckkraft:
+[Opaque popups under cursor]
+Max. Deckkraft bei Mauskontakt
+[Window sliding]
+Gleitend einblenden
+[* Effect:]
+* Effekt:
+[Slide Popup]
+Popup gleitend einblenden
+[No effect]
+Kein Effekt
+[Fading]
+Ausblenden
+[Test effect]
+Testeffekt
+[Window fading (Windows 2000+)]
+Popups animiert einblenden (Win2k+)
+[Vanish time:]
+Ausblendedauer:
+[Reorder Popups]
+Popups neu anordnen
+[Fade in/out]
+Ein-/Ausblenden
+[Live Preview]
+Vorschau
+[Square fading]
+Quadratisch
+[CLASS Plugins]
+Plugin-Systeme
+
+[Refresh List]
+Liste aktualisieren
+[Skin preferences]
+Skin-Einstellungen
+[Draw gradient background]
+Verlaufseffekt für Hintergrund verwenden
+[Simple gradiend background]
+Einfacher Verlaufseffekt für Hintergrund
+[Show clock]
+Uhrzeit anzeigen
+[Simple clock (for configurable font)]
+Einfache Uhr (für konfigurierbare Fonts)
+[Avatar to the right(if enabled above)]
+Avatar auf der rechten Seite (falls oben aktiviert)
+[Customizable PopUp colors]
+Anpassbare Popup-Farben
+[Customizable font colors]
+Anpassbare Schriftfarben
+[Flat]
+Flach
+[Clock Button]
+Uhrzeit hinterlegen
+[Icon Button]
+Icon hinterlegen
+[Use background]
+Nachricht hinterlegen
+[non rectangular]
+Nicht rechteckig
+[Drop shadow effect (Windows XP+)]
+Schatten werfen (WinXP+)
+[* - built-in skins]
+* = Eingebaut
+
+;Allgemein
+[Enable popup actions]
+Popup-Aktionen aktivieren
+[Popup Actions are those tiny buttons below notification text.]
+Popup-Aktionen sind kleine Buttons unter der Textmeldung.
+
+;Allgemeine Aktionen
+[Common Actions]
+Allgemeine Aktionen
+[Please choose in what cases default actions should be added:]
+Bitte wähle, Sie, in welchen Fällen die Standardaktionen hinzugefügt werden sollen:
+[Add info && menu for IM contacts only]
+Info && Menü nur für IM-Kontakte
+[Add default actions for contacts only]
+Standardaktionen nur für Kontakte
+[Don't close popups on default actions]
+Nicht bei Standardaktionen schließen
+
+;Größe und Position
+[Use large icons]
+Große Icons verwenden
+[Popup actions will be displayed as:]
+Popup-Aktionen werden angezeigt als:
+[Icons and labels below text]
+Icons und Bez. unter dem Text
+[Icons on the left]
+Icons links
+[Icons aligned to the right]
+Icons rechts ausgerichtet
+
+;Zeige Aktionen: (Übernehmen nötig)
+[Show Actions: (requires apply)]
+Zeige Aktionen: (Übernehmen nötig)
+[Action]
+Aktion
+[Pin popup]
+Popup anheften
+[One more action]
+Eine Aktion mehr
+[Quick reply]
+Schnellantwort
+[Second test action]
+Zweite Testaktion
+[Test action]
+Testaktion
+[Add to contact list]
+Zur Kontaktliste hinzufügen
+[User details]
+Kontaktprofil
+
+;Maus Aktionen
+[Mouse Actions Overwrite]
+Maus Aktionen überschreiben
+[LeftButton]
+Linksklick:
+[MiddleButton]
+Mittelklick:
+[RightButton]
+Rechtsklick:
+[no overwrite]
+Standardaktion
+
+[Enable this notification]
+Diese Benachrichtigung aktivieren
+[Popup Timeout:]
+Popup-Anzeigedauer:
+[Infinite]
+Unendlich
+[1 second]
+1 Sekunde
+[2 seconds]
+2 Sekunden
+[3 seconds]
+3 Sekunden
+[5 seconds]
+5 Sekunden
+[7 seconds]
+7 Sekunden
+[10 seconds]
+10 Sekunden
+[15 seconds]
+15 Sekunden
+[Left click action:]
+Linksklick-Aktion:
+[Right click action:]
+Rechtsklick-Aktion:
+[Disable when global status is...]
+Deaktivieren, wenn globaler Status...
+[Disable when relevant protocol's status is...]
+Deaktivieren, wenn Protokollstatus...
+[Colors can be configured in Customize > Fonts section.]
+Farbkonfiguration unter 'Customize -> Schriftarten'
+[Colors can be configured in\nCustomize > Fonts && Colors]
+Farbkonfiguration unter 'Customize -> Schriftarten'
+[Colors can be configured in\r\nCustomize > Fonts && Colors]
+Farbkonfiguration unter 'Customize -> Schriftarten'
+
+[Performance && Tweaks]
+Performance && Optimieren
+[Use advanced text render]
+Erweitertes Text-Rendern
+[Enable popup history]
+Popup-Verlauf aktivieren
+[Store last]
+Speichere letzte
+[Use History++ to render log]
+History++ als Verlauf verw.
+[Limit window amount to:]
+Begrenze Popupanzahl auf:
+[Enable Win 9x/Me transparency]
+Win-9x/Me-Transparenz aktivieren
+[Enable freeform shadows (XP+)]
+Schatteneffekte aktivieren (XP+)
+[Enable Aero Glass (Vista+)]
+Aero-Glass-Effekte aktivieren (Vista+)
+[Process Miranda IM tray notifications]
+Benachrichtigungen darstellen
+[Enable avatar updates]
+Avatar-Updates aktivieren
+[Make action icons customizable*]
+Anpassbare Aktionsicons*
+[Make OK/Cancel icons customizable*]
+Anpassbare OK-/Abbrechenicons*
+[Options marked with asterisk will be applied after restart]
+*Änderungen werden erst nach einem Neustart wirksam
+[Time (in)..:]
+Einblendzeit:
+[Time (out):]
+Ausblenzeit:
+[Start the popups in the monitor with]
+Popup auf dem Monitor zeigen, der
+[Miranda's window]
+das Miranda-Fenster enthält
+[the active window]
+das aktive Fenster enthält
+[Disable when:]
+Deaktivieren, wenn:
+[Always (has priority)]
+Immer (hat Priorität)
+[Fullscreen mode]
+Vollbildschirm-Modus
+[Protocol Status]
+Protokollstatus
+
+;Optionsseite Kontakte
+[Per-contact settings]
+Einstellungen für einzelne Kontakte
+[Show default]
+Standard
+[Show always]
+Immer
+[Ignore fullscreen]
+Nicht bei Vollbild
+[Never show]
+Niemals
+
+; init.c
+[Provides popup  notification services for different plugins.]
+Ermöglicht die Anzeige von Popups für verschiedene Plugins.
+
+[Disable &popup module]
+&Popup-Modul deaktivieren
+[Enable &popup module]
+&Popup-Modul aktivieren
+
+[Popups are enabled]
+Popups aktiviert
+[Popups are disabled]
+Popups deaktiviert
+[Refresh skin list]
+Skin-Liste aktualisieren
+[Popup Placement]
+Popup-Platzierung
+[Popup Group]
+Popupgruppe
+[Add Contact Permanently]
+Kontakt hinzufügen
+[Pin Popup]
+Popup anheften
+[Pinned Popup]
+Angeheftetes Popup
+[With "favourite" overlay]
+Mit "bevorzugter" Überlagerung
+[With "fullscreen" overlay]
+Mit "Vollbild"-Überlagerung
+[Show Default]
+Zeige Vorgabe
+[Favorite Contact]
+Beliebter oder bevorzugter Kontakt
+[Blocked Contact]
+Blockierter Kontakt
+[Show in Fullscreen]
+Im Vollbild anzeigen
+
+[Hovered Action]
+Markierte Aktion
+[Backround]
+Hintergrund
+[Error (colors only)]
+Fehler (nur Farben)
+[Notification (colors only)]
+Benachrichtigung (nur Farben)
+[Warning (colors only)]
+Warnung (nur Farben)
+
+[Toggle Popups]
+Popups ein-/ausschalten
+
+[Skin preview]
+Skinvorschau
+[Just take a look at this skin... ;)]
+Werfen Sie einen Blick auf diesen Skin... ;)
+[This is an error message]
+Dies ist eine Fehlermeldung
+[This is a warning message]
+Dies ist eine Warnung
+[This is a notification message]
+Dies ist eine Benachrichtigung
+[Test preview for the popup plugin settings. This is supposed to be long enough not to fit in one line...]
+Testvorschau für die Popup-Einstellungen. Die Zeile sollte lang genug sein, um nicht in eine Zeile zu passen...
+[This is a special test preview for the popup plugin settings. The text and title are quite long so you can tweak your skin and plugin settings to best fit your needs :)]
+Dies ist eine spezielle Testvorschau für die Popup-Einstellungen. Der Text und der Titel sind recht lang, damit Sie die Skin- und Popup-Einstellungen optimal Ihrem Bedarf anpassen können :)
+[The Jabberwocky]
+Der Zipferlake
+[`Twas brillig, and the slithy toves\nDid gyre and gimble in the wabe:\nAll mimsy were the borogoves,\nAnd the mome raths outgrabe.\n\t[b][i]Lewis Carroll, 1855[/i][/b]]
+Verdaustig war's, und glaße Wieben\nrotterten gorkicht im Gemank.\nGar elump war der Pluckerwank,\nund die gabben Schweisel frieben.\n\t[b][i]Christian Enzensberger[/i][/b]
+[`Twas brillig, and the slithy toves\r\nDid gyre and gimble in the wabe:\r\nAll mimsy were the borogoves,\r\nAnd the mome raths outgrabe.\r\n\t[b][i]Lewis Carroll, 1855[/i][/b]]
+Verdaustig war's, und glaße Wieben\r\nrotterten gorkicht im Gemank.\r\nGar elump war der Pluckerwank,\r\nund die gabben Schweisel frieben.\r\n\t[b][i]Christian Enzensberger[/i][/b]
+[Hey, this is a multilined message!\nCool, isn't it? Also you can use:\n- BBCodes for [b]bold[/b], [i]italic[/i] & [u]underlined[/u] text;\n- emoticons from SmileyAdd or nConvers :-)\n- MathModule formulas like this: [Math]e^i\\pi=-1[Math]]]
+Hey, das hier ist eine mehrzeilige Nachricht!\nCool, oder nicht? Du kannst folgendes benutzen:\n- BBCodes für [b]fett[/b], [i]schräg[/i] & [u]unterstrichen[/u] Text;\n- Emotionen von SmileyAdd oder nConvers :-)\n- MathModule sehen zum Beispiel so aus: [Math]e^i\\pi=-1[Math]]
+
+[Failed to register preview box window class.]
+Fehler bei der Vorschau-Fenster-Klasse Registrierung.
+[Do you really want to reset Popup Plus settings?]
+Möchten Sie wirklich alle Popup-Plus-Optionen zurücksetzen?
+
+; BlackStone Skin
+[Display borders]
+Ränder anzeigen
+[Beveled windows (3d-look)]
+Abgehobene Fenster (3D)
+
+; butterfly Skin
+[Show colours]
+Farben anzeigen
+[Show shadow]
+Schatten anzeigen
+[Display sidebar]
+Seitenleiste anzeigen
+[Black text bg.]
+Schwarzer Texthintergrund
+
+;Gr Modern Skin
+[Show colours in text bloc]
+Farben im Textblock anzeigen
+[Show avatar border]
+Avatarrahmen anzeigen
+
+; Calipso Skin
+[Use different colors]
+Verschiedene Farben verwenden
+[Line under title]
+Linie unter Titel
+[Display icon]
+Icon anzeigen
+[Avatars to right]
+Avatare rechts
+[Show window colour at syn]
+Fensterfarbe als unteren Rand
+
+; DarkSide Skin
+[Simplified clock]
+Vereinfachte Uhr
+
+; modern Skin
+[Show headerbar]
+Kopfleiste anzeigen
+
+; simple Skin
+[Customizable text color]
+Durch Skin festgelegte Textfarbe
+
+; Taurin Skin
+[Use different colours]
+Benutze verschiedene Farben
+[Show avatar]
+Avatare anzeigen
+
+;Vista Aero Glass
+[Align avatar to the right]
+Avatar rechts anordnen
+
+; unbekannte Strings aus Skins
+[Flat borders]
+Flache Ränder
+[White background]
+Weißer Hintergrund
+[Avatars on right]
+Avatare rechts anordnen
+[Right-aligned avatars]
+Avatare rechts anordnen
+[Align avatar to right]
+Avatar rechts anordnen
+[Hide clock]
+Uhr verstecken

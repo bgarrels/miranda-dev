@@ -1,0 +1,50 @@
+; Pluginname: ClientChangeNotify 
+; Version: 0.1.1.0 Build #54
+; Dateiname: clientchangenotify.dll
+; Autor: Deathdemon
+; Link: http://deathdemon.int.ru/projects.php
+; Übersetzung: 21.04.06 von Dober
+
+[%s (was %s)]
+%s (war %s)
+[) changed client to ]
+) ändert Client zu 
+[changed client to %s]
+ändert Client zu %s
+[changed client to %s (was %s)]
+ändert Client zu %s (war %s)
+[ClientChangeNotify: Client changed]
+ClientChangeNotify: Client geändert
+[ClientChangeNotify error]
+ClientChangeNotify Fehler
+[Fingerprint plugin not found.] 
+Fingerprint Plugin wurde nicht gefunden.
+[ClientChangeNotify requires it to work properly.]
+ClientChangeNotify braucht dieses um korrekt arbeiten zu können.
+[Fingerprint plugin not found. Please make sure that you have the latest version installed. ClientChangeNotify requires it to work properly.]
+Fingerprint Plugin wurde nicht gefunden. Bitte stellen Sie sicher das Sie die letzte Version installiert haben. ClientChangeNotify braucht dieses um korrekt arbeiten zu können.
+[`[`!cdate()-!ctime()`]`  ?cinfo(%subject%,display) (?cinfo(%subject%,id)) changed client to %extratext%]
+`[`!cdate()-!ctime()`]`  ?cinfo(%subject%,display) (?cinfo(%subject%,id)) ändert Client zu %extratext%
+
+[Show previous client name]
+Vorherigen Client anzeigen
+[Notify also when just client version changes]
+Bei Clientversionsänderung benachrichtigen
+[Show client version]
+Clientversion anzeigen
+[Don't notify for contacts with disabled status notification]
+Nicht für Kontakte mit deaktivierter Statusbenachrichtigung benachrichtigen
+[Don't remind me anymore]
+Erinnere mich nicht noch einmal.
+
+[Ignore these clients (separated by semicolons):]
+Folgende Clients ignorieren (durch Semikolon trennen):
+[(you have to install pcre.dll or pcre3.dll to use regular expressions here)]
+(pcre.dll oder pcre3.dll müssen installiert werden um reguläre Ausdrücke zu verwenden)
+[(you can use regular expressions here)]
+(reguläre Ausdrücke können verwendet werden)
+
+[Disable c&lient change notification]
+C&lient Benachrichtigungen deaktivieren
+[Enable c&lient change notification]
+C&lient Benachrichtigungen aktivieren

@@ -1,0 +1,37 @@
+; Pluginname: HistoryEvents
+; Version: 0.0.0.8
+; Dateiname: historyevents.dll (Ansi), historyeventsW.dll (Unicode)
+; Autor: pescuma
+; Link: http://pescuma.mirandaim.ru/miranda/historyevents.zip
+; Link Unicode: http://pescuma.mirandaim.ru/miranda/historyeventsW.zip
+; Übersetzung: 17.09.07 von Foso
+
+[Event types:]
+Ereignistypen:
+[Keep in database:]
+Speicherungsdauer:
+[Forever]
+Für immer
+[For 1 year]
+Für 1 Jahr
+[For 6 months]
+Für 6 Monate
+[For 1 month]
+Für 1 Monat
+[For 1 week]
+Für 1 Woche
+[For 1 day]
+Für 1 Tag
+[Only to view in message window]
+Nur in Nachrichtenfenster anzeigen
+[Max 10 events]
+Max. 10 Ereignisse
+[Max 100 events]
+Max. 100 Ereignisse
+[Don't store]
+Nicht speichern
+[Only add if message window is open]
+Nur hinzufügen, wenn Nachrichtenfenster offen ist
+
+[A service plugin to handle custom history events]
+Ein Dienst, welcher diverse Ereignisse für Verläufe verarbeiten kann. 

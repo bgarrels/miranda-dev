@@ -1,0 +1,94 @@
+; Pluginname: GnuPG Plugin
+; Version: 0.0.0.4
+; Dateiname: gnupg.dll
+; Autor: Harald Treder
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=216
+; Übersetzung 19.07.05 von andydu
+
+[Please verify your settings in M->Options->Plugins->GnuPG and GnuPG Advanced.]
+Bitte die Einstellungen in den Optionen unter 'Plugins', 'GnuPG' und 'GnuPG erweitert' überprüfen.
+[The GnuPG Plugin requires the GnuPG executable \"gpg.exe\".]
+Das GnuPG-Plugin benötigt das GnuPG-Programm  \"gpg.exe\".
+[Could not obtain the GnuPG user id.]
+GnuPG-Kontakt-ID wurde nicht erhalten.
+[The export of your public key failed.]
+Fehler beim Export des öffentlichen Schlüssels.
+[The import of the key failed.]
+Fehler beim Import des Schlüssels.
+[Could not generate a list of the public GnuPG keys.]
+Liste der öffentlichen GnuPG-Schlüssel konnte nicht generiert werden.
+[Could not generate a list of the secret GnuPG keys.]
+Liste der privaten GnuPG-Schlüssel konnte nicht generiert werden.
+[Select GnuPG Executable]
+GnuPG-Programm wählen
+[GnuPG Plugin - Warning]
+GnuPG-Plugin - Warnung
+[GnuPG Plugin - Error]
+GnuPG-Plugin - Fehler
+[Use GnuPG Encryption]
+GnuPG-Verschl. benutzen
+[Send GnuPG Key]
+Sende GnuPG-Key
+[You received a public key.]
+Öffentlichen Schlüssel erhalten.
+[You received a public key. It was added to your keyring.]
+Öffentlichen Schlüssel erhalten und in den Schlüsselring eingefügt.
+[You received an encrypted message. Could not detect the user id of the public key, used to encrypt it.]
+Verschlüsselte Nachricht erhalten. User-ID des öffentlichen Schlüssels konnte nicht bestimmt werden.
+[Unknown User ID]
+Unbek. User-ID
+[Could not encrypt the message. It wasn't sent.]
+Nachricht konnte nicht verschlüsselt werden und wurde nicht versendet.
+[GnuPG Advanced]
+GnuPG erweitert
+[Key and User ID]
+Schlüssel und User-ID
+[User ID:]
+User-ID:
+[Key ID:]
+Schlüssel-ID:
+[Key received:]
+Schlüssel empfangen:
+;[GnuPG Plugin - Passphrase]
+[Enter passphrase for the secret key of user:]
+Passwort des geheimen Schlüssels des Users eingeben:
+[User ID]
+User-ID
+[Executable:]
+GnuPG-Programm:
+[Home Directory:]
+Benutzerverzeichnis:
+[Key Assignment]
+Schlüsselzuordnung
+[Your Key]
+Dein Schlüssel
+[Contact Key]
+Kontaktschlüssel
+[R&efresh]
+Aktualisieren
+[Store Passphrases Temporary]
+Passwort temporär speichern
+[Import Public Keys Automatically]
+Öff. Schlüssel automatisch importieren
+[Tags]
+Marken/Tags
+[Start Tag]
+Startmarke/Tag
+[End Tag]
+Endmarke/Tag
+[Commandline Arguments]
+Kommandozeilenargumente
+[List Public Keys:]
+Liste der öff. Schlüssel:
+[List Secret Keys:]
+Liste der geheimen Schlüssel:
+[Import Public Key:]
+Importiere öff. Schlüssel:
+[Export Public Key:]
+Exportiere öff. Schlüssel:
+[Detect User ID:]
+User-ID suchen:
+[Encrypt:]
+Verschlüsseln:
+[Decrypt:]
+Entschlüsseln:

@@ -1,0 +1,100 @@
+; Pluginname: ICQ S!N Mod 
+; Version: 0.5.0.92
+; Dateiname: ICQ.dll
+; Autor: [sin]
+; Link: http://sin69.si.funpic.de/downloads/IcqJSinMod.zip
+; Übersetzung: 05.05.08 von Killua
+; Besonderheiten: Entwicklung eingestellt!
+
+[IcqOscarJ S!N Protocol]
+IcqOscarJ S!N-Protokoll
+[Support for ICQ network, modded.]
+Unterstützung für das ICQ-Netzwerk, modifiziert.
+
+[Secure Connection (SSL) [experimental] (temporarily disabled)]
+Sichere Verbindung (SSL) [experimentell] (bis auf weiteres abgeschaltet)
+
+[ModFeatures]
+Erweiterte Funktionen
+[Notify contact, when you leave the conversation (like in icq6)]
+Kontakt benachrichtigen, wenn Sie das Nachrichtenfenster schließen (wie in ICQ6)
+[New Status Message Support]
+'Neue Statusnachrichten' Unterstützung
+[Enable new status message support]
+Aktiviere 'neue Statusnachrichten' Unterstützung
+[Don't show status message in profile]
+Statusnachricht nicht im Profil anzeigen
+
+[Enable Invisible Detection System 2.0 (IDS2)]
+Aktiviere Invisible Detection System 2.0 (IDS2)
+[IDS2 Options]
+IDS2-Optionen
+[Scan list on startup]
+Liste beim Start scannen
+[Enable IDS2 in invisible status]
+Im Unsichtbarkeitsmodus aktivieren
+[Show Icon for found contacts*]
+Zeige Icon für gefundene Kontakte*
+[*uses email-slot]
+*im E-Mail-Slot
+[Dim found contacts]
+Gefundene Kontakte abblenden
+[Scan methods]
+Scanmethoden
+[Invalid status-message request]
+Fehlerhafte Statusanfrage
+[(icq5,trillian,... etc)]
+(ICQ5, Trilian usw.)
+[Xtraz-notify request]
+XtraZ-Meldungsanfrage
+[(icq5,icq6,...  etc)]
+(ICQ5, ICQ6 usw.)
+[Malformed url-message]
+Anormale URL-Nachricht
+[(trillian, miranda 6.x && lower,...  etc)]
+(Trillian, Miranda 6.x && niedriger)
+[Manualcheck only]
+Nur manuelle Prüfung
+["you-were-added"-message]
+"Hinzugefügt"-Nachricht
+[(all clients,... unstealth)]
+(Alle Clients... auffällig!)
+[Malformed contacts-message]
+Anormale Kontaktnachricht
+[(latest miranda,... etc)]
+(Aktuelle Mirandaversionen usw.)
+[Scanlist]
+Scanliste
+[Scan contact]
+Kontakt scannen
+[Don't scan contact]
+Kontakt nicht scannen
+
+[current state:]
+Aktueller Status:
+[checkspeed:]
+Geschw.:
+[scanning...]
+prüfe...
+[stopped]
+angehalten
+[user/total]
+Kontakt/Insgesamt
+[finished]
+fertig
+
+[Please restart your Miranda to enable or disable the Invisible Detection System 2.0]
+Bitte starten Sie Ihr Miranda erneut, um das Invisible Detection System 2.0 (IDS2) ein- oder abzuschalten.
+[SSL connection will be temporarily disabled\n due to complications with the  mod\n\n [sin]"]
+Die SSL-Verbindung wird bis auf weiteres aufgrund von Komplikationen mit diesem Mod deaktiviert, \n\n S!N]
+[Reconnection required, to let changes take effect!]
+Sie müssen sich neu verbinden, damit diese Änderung wirksam wird!
+
+[was found invisible]
+wurde unsichtbar gefunden
+[is still invisible]
+ist immer noch unsichtbar
+[went into invisible mode]
+ist nun unsichtbar
+[Scanning "%s" failed, too much traffic, SLOW DOWN!]
+Die Prüfung von "%s" ist fehlgeschlagen, zu viel Traffic, MACH LANGSAMER!

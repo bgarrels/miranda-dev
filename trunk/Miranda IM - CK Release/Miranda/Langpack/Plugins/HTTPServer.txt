@@ -1,0 +1,92 @@
+; Pluginname: HTTPServer 
+; Version: 0.1.2.2
+; Dateiname: HTTPServer.dll
+; Autor: Kennet Nielsen, modified by Vampik and Houdini
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2304
+; Übersetzung: 01.07.05 von baphomet
+; Besonderheiten: Entwicklung eingestellt!
+
+[HTTP Server]
+HTTP-Server
+[Main menu items]
+Einträge im Hauptmenü
+[Enable / Disable HTTP server]
+Server aktivieren / deaktivieren
+[Show HTTP server statistics]
+HTTP-Server-Statistik anzeigen
+[You need to restart miranda to change the main menu]
+Um die Änderungen zu übernehmen, ist ein Neustart von Miranda IM erforderlich
+[Write log file]
+Logdatei schreib.
+[Open log]
+Log zeigen
+[External server name]
+Externer Servername
+[This is the link pasted to the message window]
+Füge folgenden Link im Nachrichtenfenster ein
+[Set to default]
+Standard setzen
+[%ExternalIP% variable]
+%ExternalIP%-Variable
+[URL address]
+URL-Adresse
+[Page keyword]
+Schlüsselwort
+[You external ip was detected as %d.%d.%d.%d\r\nby: %s]
+Deine externe IP wurde als %d.%d.%d.%d erkannt\r\nvon: %s
+[Connection control]
+Verbindungskontrolle
+[Default download limit]
+Standard-DL-Begrenzung
+[Transfer limit (kb/sec)]
+Verbindungsrate (kb/sec)
+[Total connection limit]
+max. Verbindungen gesamt
+[Connections per user limit]
+max. Verbindungen/Kontakt
+[No control when Away/NA]
+Keine Kontrolle, wenn abwesend
+[Index creation]
+Indexerstellung
+[Create HTML (compatibility)]
+HTML erstellen (Kompatibilität)
+[Create XML]
+XML erstellen
+[HTTP Share new file]
+HTTP Datei freigeben
+[Specify a file to share]
+Datei für Freigabe auswählen
+[HTTP Server statistics view]
+Statistik für HTTP-Server
+[Share name]
+Freigabename
+[Max Downloads]
+Max. Downloads
+[Allowed IP]
+Erlaubte IP
+[Allowed Mask]
+Erlaubte Maske
+[Real path]
+Lokaler Pfad
+[Completed]
+Abgeschlossen
+[New share]
+Neue Freigabe
+[Display hidden shares]
+Versteckte Freigaben anzeigen
+[Enable HTTP server]
+HTTP-Server aktivieren
+[Disable HTTP server]
+HTTP-Server deaktivieren
+[&Edit share]
+Freigabe b&earbeiten
+[&Remove share]
+Freigabe entfe&rnen
+[&Open in Browser]
+In Br&owser öffnen
+[Speed]
+Geschwindigkeit
+[Share Current Directory]
+aktuelles Verzeichnis freigeben
+[Share removed]
+Freigabe entfernt

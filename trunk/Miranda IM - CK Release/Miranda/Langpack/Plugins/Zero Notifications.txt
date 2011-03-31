@@ -1,0 +1,24 @@
+; Pluginname: Zero Notifications 
+; Version: 0.0.0.5
+; Dateiname: zeronotify.dll
+; Autor: bid
+; http://addons.miranda-im.org/details.php?action=viewfile&id=1664
+; Übersetzung: Michael83 am 04.02.2009
+
+[Zero Notifications]
+Keine Benachrichtigungen
+[Adds options to automatically disable notifications when a protocol is in a certain status.]
+Ermöglicht die Deaktivierung von Benachrichtigungen, wenn ein Protokoll in einem bestimmten Status ist.
+
+[Disable &Sounds]
+Klänge deaktivieren
+[Enable &Sounds]
+Klänge aktivieren
+[Hide the "toggle sound" menu item (requires restart of Miranda)]
+Menüpunkt verstecken (erfordert Neustart von Miranda)
+[No sounds when:]
+Keine Klänge, wenn:
+[No SysTray blink when:]
+Kein Blinken (Tray), wenn:
+[No CLIST blink when:]
+Kein Blinken (Liste), wenn:

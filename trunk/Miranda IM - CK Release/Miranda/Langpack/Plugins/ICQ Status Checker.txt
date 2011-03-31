@@ -1,0 +1,26 @@
+; Pluginname: ICQ Status Checker 
+; Version: 1.2.0.0
+; Dateiname: icqstatchk.dll
+; Autor: Forrest79
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3766
+; Übersetzung: Sebijk
+; Besonderheiten: Entwicklung eingestellt!
+
+[Display status messages]
+Statusnachrichten anzeigen
+[Invisible method check]
+Unsichtbar-Prüfmethoden
+[Anonymous, but only for ICQ 5, Miranda IM and Trillian]
+Anonym, aber nur für ICQ 5, Miranda IM und Trillian
+[Not anonymous, but for all clients]
+Nicht anonym, aber für alle Clients
+[ICQ [Check status]]
+ICQ [Status prüfen]
+[Check status ICQ users and detect invisible user for all IM clients. Used http://kanicq.ru/invisible/en.]
+Prüft den Status der ICQ-Benutzer und entdeckt unsichtbare Benutzer von allen IM-Clients. Benutzt http://kanicq.ru/invisible/en.
+[An error occured while checking status (service error), please try it again later...]
+Es ist ein Fehler während der Überprüfung des Status aufgetreten (Dienstfehler), bitte versuchen Sie es später nocheinmal...
+[An error occured while checking status (commucation with server), please try it again later...]
+Es ist ein Fehler während der Überprüfung des Status aufgetreten (Kommunikation mit dem Server), bitte versuchen Sie es später nocheinmal...
+[Sorry, this is not ICQ user. I can check status only ICQ users :(]
+Tut mir leid, aber das ist kein ICQ-Benutzer. Ich kann leider nur den Status der ICQ-Benutzer prüfen :(

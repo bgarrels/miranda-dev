@@ -1,0 +1,26 @@
+; Pluginname: Message Notify
+; Version: 0.3.0.0
+; Dateiname: messagenotify.dll
+; Autor: Scott Ellis
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2415
+; Übersetzung: mistaTT am 15.02.07
+; Besonderheiten: Entwicklung eingestellt!
+
+[MessageNotify]
+Nachrichtenbenachrichtigung
+[Notification Options]
+Benachrichtigungsoptionen
+[Set timeout (otherwise, infinite)]
+Timeout setzten (sonst, unendlich)
+[Timeout (seconds, 0 == default):]
+Timeout (Sekunden, 0 = Standard):
+[Notify if window not open]
+Popup wenn Fenster nicht offen ist
+[Notify if window isn't 'foreground']
+Popup wenn Fenster nicht im Vordergrund
+[Close window on right click]
+Popup bei Rechtsklick schließen
+[Consider tabs]
+Tabs berücksichtigen
+[Set popup colours]
+Popupfarben bestimmen

@@ -1,0 +1,1957 @@
+;============================================================
+;  Module: Строки из разных модулей.
+;  Plugin: Необходимо разнести по файлам или удалить 
+;============================================================
+['%s' is not a valid date]
+'%s' неверная дата
+['%s' is not a valid time]
+'%s' неверное время
+[-- Skip --]
+--Пропуск--
+[- Use Parent -]
+-Родительский-
+[ - ERROR: Unable to get page %s.. ]
+  - ОШИБКА: Невозможно получить страницу %s..
+[ - ERROR: Zero sized reply. You may try again ]
+  - ОШИБКА: Нет ответа. Попробуйте позже.
+[ - Possible problem: We have reached the maximum of cookies ]
+  - Возможная проблема: достигнут максимум cookie
+[ new/ ]
+ новый/ 
+[ unread thread(s)]
+ непрочитанных
+
+;yaRelay.dll  - Yet Another Relay plugin. v.0.0.0.3
+[!DON'T FORWARD!]
+!НЕ ПЕРЕСЫЛАТЬ!
+[!EVERYONE!]
+!ВСЕМ!
+[%u - user nick;   %i - uin;    %t - time;   \r%d - date;   %m - message]
+%u - ник;   %i - uin;    %t - время;   \r%d - дата;   %m - сообщение
+
+;Wikify v1.0.0.0
+["\t" to a tabulator character]
+"\t" - знак табуляции
+
+;MathSrmm
+[Close the message window on reply]
+Закрывать окно диалога после отправки ответа
+;end of MathSrmm
+
+[%0.f minutes]
+%0.f минут
+[%clname\nis reading your %status message]
+%clname\nчитает сообщение %status message
+
+;AutoReplier.rc
+[%currdate%, hello %username%, user has left auto reply message:]
+%currdate%, привет %username%, пользователь оставил сообщение:
+
+[%d Hours]
+%d Часов
+[%d message]
+%d сообщение
+[%d messages]
+%d сообщений
+[%s - connection error]
+%s  - ошибка соединения
+[%s  Status Scan Complete]
+%s Сканирование завершено
+[%s (%s) Change Details]
+%s (%s) Обновление инфо пользователей
+[%s (Originalname: %s)]
+%s (Настоящее имя: %s)
+[%s Features]
+%s Возможности
+[%s ident server]
+%s идентификационный сервер
+[%s in channel %s]
+%s на канале %s
+[%s joined %s]
+%s вошел %s
+[%s left %s]
+%s покинул %s
+[%s on %s]
+%s на %s
+[%s Other]
+%s Разное
+[%s quit %s]
+%s отключился от %s
+[%s sets mode %s for %s]
+%s выставил режим %s для %s
+[%s sets topic for %s]
+%s изменил тему на %s
+[%s should be %d]
+%s должен быть %d
+[%s wants your attention]
+%s требует вашего внимания
+[%s: Status Scan Complete]
+%s: Сканирование статуса завершено
+[&Add &User]
+&Добавить в &контакты
+[&Add To Known Modules]
+Добавить к известным модулям
+[&Change y&our &nickname]
+&Сменить &ник
+[&Change y&our nickname]
+&Сменить ник
+[&Change your &nickname]
+&Сменить &ник
+[&Console]
+Консоль
+[&Direct &Connection]
+&Прямое &соединение
+[&Disable popups]
+Отключить всплывающие окна
+[&Enable popups]
+Включить всплывающие окна
+[&Filter...]
+Фильтр
+[&Information]
+&Информация
+[&Language:]
+Язык:
+[&Priority Contact]
+Приоритетный контакт
+[&Quick c&onnect]
+&Быстрое с&оединение
+[&Request &Chat]
+Запрос &чата
+[&Request Chat]
+&Запрос чата
+[&Save Watch List]
+&Сохранить список наблюдаемых модулей
+[&Send &File]
+&Послать &файл
+[&Send File]
+&Послать файл
+[&Send SMS...]
+Отправить SMS...
+[&Show &these &events &only:]
+Показывать только &эти &события:
+[&Show all events]
+Все события
+[&Show these events only:]
+&Показывать только эти события:
+[&Type]
+&Тип
+[&View Alboom]
+Открыть альбом
+[&Visibility and ignore...]
+Видимость и игнорирование...
+[(0 - auto)]
+(0 - авто)
+[(built ]
+(построен 
+
+;msnaccountsetupse.txt
+[(leave nickname blank to retrieve from server)]
+(оставьте поле пустым для получения с сервера)
+
+;; => SpamReturner:SpamReturner (0.2.1.0) - deleted from FL
+[(MSG1)\n!!! SPAM !!! ALERT !!!\n**********************************\n\nHey %s!\nI don't like spam! Stop this stupid shit!\nStop it or I will call the police!!! ;-)\n\nHere is your message back! Please keep it there!\n%s\n\n**********************************\n(Automated message)]
+(MSG1)\n!!! СПАМ !!! ВНИМАНИЕ !!!\n**********************************\n\nЭй, %s!\nМне не нравится спам! Достаточно слать это дерьмо!\nОстановись или я вызову ментов!!! ;-)\n\nВот твое сообщение, подавись им!\n%s\n\n**********************************\n(Автоответ)
+[(MSG2)\n!!! SPAM !!! ALERT !!!\n**********************************\n\nHey %s!\nI don't like spam! Stop this stupid shit!\nStop it or I will call the police!!! ;-)\n\nHere is your message back! Please keep it there!\n%s\n\n**********************************\n(Automated message)]
+(MSG2)\n!!! СПАМ !!! ВНИМАНИЕ !!!\n**********************************\n\nЭй, %s!\nМне не нравится спам! Достаточно слать это дерьмо!\nОстановись или я вызову ментов!!! ;-)\n\nВот твое сообщение, подавись им!\n%s\n\n**********************************\n(Автоответ)
+[(MSG3)\n!!! SPAM !!! ALERT !!!\n**********************************\n\nHey %s!\nI don't like spam! Stop this stupid shit!\nStop it or I will call the police!!! ;-)\n\nHere is your message back! Please keep it there!\n%s\n\n**********************************\n(Automated message)]
+(MSG3)\n!!! СПАМ !!! ВНИМАНИЕ !!!\n**********************************\n\nЭй, %s!\nМне не нравится спам! Достаточно слать это дерьмо!\nОстановись или я вызову ментов!!! ;-)\n\nВот твое сообщение, подавись им!\n%s\n\n**********************************\n(Автоответ)
+
+;spinchat.dll
+[(MUST be a registered Login)]
+(Должен быть зарегистрированным)
+[Account Infomation]
+Информация аккаунта
+;eof spinchat.dll
+
+;WebView
+[(Not Recommended)]
+(Не рекомендуется)
+[(pastes strings)]
+(вставляет строки)
+[A site is already downloading, try again in a moment.]
+Сайт уже загружается, попробуйте позже.
+[Add As Prefix]
+Добавить как префикс
+[Add As Suffix]
+Добавить как суффикс
+[Add Time And Date Of Alert To Contact Name]
+Добавить время и дату к имени контакта
+[Add Webview Site]
+Добавить сайт
+;eof WebView
+
+[(Original Name: %s)]
+(Настоящее имя: %s)
+[(Original: %s)]
+(Оригинал: %s)
+
+;smsdriver (???)
+[(Use 0 if not sure)]
+(0 если не уверены)
+;eof smsdriver
+
+;Forward 1.4 DiALOG.rc:101
+[* To send back message when using this option, use the folowing protocol:\n\n <contact_name>:  <message_body>\n e.g.\n somenick: how are you?]
+* Для обратной отправки сообщения, используйте следующий протокол:\n\n <Имя_контакта>:  <Текст_сообщения>\n напр.\n Вася: как дела?
+;eof Forward 1.4 DiALOG.rc:101
+
+
+["You were added" events]
+События "Вас добавили"
+[\nIt is the %d. anniversary.]
+\nЭто %d-й праздник.
+[0 character(s)0 part(s)]
+0 знак(ов)0 часть(ей)
+[About "%s"]
+О "%s"
+[About the contact list...]
+О списке контактов...
+[Activate autlocale support]
+Автораскладка
+
+;ClistSwitcher
+[Active button background]
+Фон активной кнопки
+
+[Add "SMS via e-mail" Сontact...]
+Добавить контакт "SMS через e-mail"
+[Add &User]
+Добавить в &контакты
+[Add channels to contact list]
+Добавить каналы в список контактов
+[Add except]
+Добавить новый контакт
+
+;Contacts Notifier 0.0.1.4d
+[Add Sound Wizard]
+Добавить звук
+[Add tooltip notification]
+Оповещение подсказкой
+;eof Contacts Notifier 0.0.1.4d
+
+[Add to group]
+Добавить в группу
+[Add to ignore list]
+Добавить в игнор лист
+[Alert Beep]
+Сигнал
+[All protocols should be offline, no need to check connection]
+Все протоколы отключены, проверка не требуется
+[Allow Double Enter Sending on the new Tabsrmm]
+Добавляет возможность отсылать сообщения по двойному Enter в TabSRMM
+[Allow protocols to send "User is Typing" notifications to users in your contact list]
+Позволить отсылать оповещения о наборе текста пользователям вашего списка контактов
+[Allows you to receive EmailExpress messages.]
+Позволяет получать сообщения EmailExpress.
+[already exists]
+уже существует
+[Also retrieve on status change]
+Также получать при смене статуса
+[always (even if statuses differ)]
+всегда (даже если различны)
+[Always use cascaded menus]
+Каскадные меню
+[And changing status to]
+И меняется статус на
+[Animated]
+Анимация
+[Announce with]
+Извещать используя
+[Any message]
+Любое сообщение
+[Apply to:]
+Применить к:
+[Are you sure that the plugin "%s" should be removed?]
+Вы уверены, что хотите удалить модуль "%s"
+[Are you sure that the plugin"%s" should be removed?]
+Вы уверены, что хотите удалить модуль "%s"
+[Are you sure you want to remove yourself from the user's contact list ?]
+Вы уверены, что хотите удалить себя из его списка контактов?
+[Are you sure you want to revoke user's autorisation (this will remove you from hist list on some clients) ?]
+Вы уверены, что хотите отозвать авторизацию (это может удалить вас из чужого списка контактов для некоторых icq-клиентов)?
+[Attempt to find unloadable plugins (use with care, might crash your miranda)]
+Попробовать найти незагружаемые модули (возможен крах Miranda)
+[Attempt to fix \]
+Попытка исправить \
+[AUTHOR(S):]
+АВТОР(Ы):
+[Authorization requests]
+Запросы авторизации
+[Auto-retrieve MemoServ messages]
+Авто-загружать сообщения MemoServ
+[Auto-retrieve version details]
+Автоматически запрашивать версию клиента
+[Automatic add contacts to server list]
+Автоматически добавлять контакты к списку сервера
+[Automatic logging is activated for all windows and can can not be turned off]
+Автоматическое ведение истории активировано для всех окон и не может быть отключено
+[Automatically backs up the miranda database when Miranda exits]
+Автоматически сохраняет профиль, когда вы закрываете Miranda
+[Avatar server:]
+Сервер аватаров:
+[Avatarframe]
+Фрейм аватара
+[Back-ground]
+Заливка
+[Backgrnd]
+Фон
+[Birthday reminder it's coming]
+Скоро день рождения
+[Bitmap images (*.bmp)\0*.BMP\0JPEG images (*.jpg)\0*.JPG\0]
+Изображения (*.bmp)\0*.BMP\0JPEG (*.jpg)\0*.JPG\0
+[Buffer saved to]
+Буфер сохранен в
+[Can't get variable AUTH!]
+Не могу получить AUTH!
+[Can't load inbox page!]
+Не могу загрузить входящие!
+[Can't parse page!]
+Не могу разобрать!
+[Can't send account data!]
+Не могу послать данные!
+[Cannot create file %s]
+Ошибка создания %s
+[Cannot open file %s]
+Ошибка открытия %s
+[Cant register global hotkey\r\n]
+Не могу установить хоткей\r\n
+[Cant register local hotkey]
+Не могу установить хоткей\r\n
+[Caption]
+Заголовок
+[Cascade menu items (*)]
+Пункты меню каскадом (*)
+[Catch URL's]
+Захватывать URL'ы
+[Change ID:]
+Клиент:
+[changes his/her status message to:\n%n]
+поменял(а) свое статусное сообщение на:\n%n
+[changes his/her status message:\n[%n]]
+поменял(а) статусное сообщение:\n([%n)
+[Changes the font in the option window.]
+Меняет шрифт в окне настроек.
+[Channel settings]
+Настройки канала
+[characters count:]
+счётчик символов:
+[Chat integration is currently disabled. You can enable it using the check box below. Note that you NEED RESTART Miranda to make this change effective.]
+Интегрированный чат выключен. вы можете включить его поставив галочку ниже. Для включения поддержки чата необходим рестарт Miranda.
+[Check fileversion of default IconPack to prevent wrong icon display]
+Проверять версию файла со значками для их правильного отображения
+[China1]
+Лакомство
+[China2]
+Развлекаюсь
+[China3]
+Болтаю
+[China4]
+Сплю
+[China5]
+В туалете
+[Choose nickname]
+Выбрать ник
+[Choose server]
+Выберите сервер
+[Clear msgs history\nfor all contacts]
+Очистить историю\nу всех контактов
+[Click on images to select new bitmaps.Note: Bitmaps size must be 20x16 (w/h).]
+Нажмите на изображение, чтобы выбрать свое. Размеры: 20х16 (ш/в).
+[Client path:]
+Путь:
+[CList extra icon (*):]
+значок в списке (*):
+[Clist Groups]
+Группы
+[Close other tabs]
+Закрыть другие вкладки
+[Close the message window on clicking 'Reply']
+Закрывать окно по нажатию "Ответить"
+[Close the message window on clicking 'Send']
+Закрывать окно по нажатию "Отправить"
+[CloseButton]
+Кнопка "Закрыть"
+[Closed Groups]
+Закрытые группы
+[Closed]
+Закрытая
+[Collapsed Group]
+Свернутая группа
+[Connection was closed. It is likely your are trying to connect through HTTPS proxy. Try 443 port.]
+Соединение закрыто. Возможно, вы подключаетесь через HTTPS прокси. Попробуйте 443 порт.
+[Contact Left Channel History]
+История покидания канала
+[Contact List/Connection Icons %s]
+Список контактов/Значки соединения %s
+[Contact RTL mode]
+Режим RTL контакта
+[Contacts management disabled, no default group]
+Управление выключено, нет группы по умолчанию
+[Container has drop shadow]
+Контейнер отбрасывает тень
+[Container skin]
+Скин контейнера
+[Container transparency (not available in skinned mode)]
+Прозрачность (недоступно в режиме скинов)
+[Containers have no titlebar]
+Скрыть заголовок окна
+[Conversation log]
+Календарь
+[Conversation:]
+Разговор:
+[Convert smiles to tags in plain text part]
+Конвертировать смайлы в теги (простой текст)
+[Convert smiles to tags]
+Конвертировать смайлы в теги
+[Copy this message to Clipboard]
+Копировать сообщение
+[Couldnt realloc enough space for the mod list!]
+Недостаточно места для списка изменений!
+[Create new windows and tabs in the background]
+Создавать новые окна и вкладки в фоне
+[Create subfolders according to the sender's nick]
+CTCP информация
+[Create windows minimized and inactive on the taskbar]
+Создавать окна свернутыми и не активными в панели задач
+[CTCP Extra]
+Дополнительно (CTCP)
+[Culture &amp;amp; Literature]
+Культура и литература
+[Current protocol name]
+Текущее имя протокола
+[DataAsMessage test]
+Данные через сообщение тест
+[Dead]
+Мертв
+[Dec]
+Дек
+[Deleting %u contact(s)...]
+Удаляю %u контакт(а)...
+[Delivery failure:]
+Ошибка доставки:
+[Dem. Rep. of the Congo]
+КОНГО
+[Disable extended status support]
+Выключить Статус
+[Disable for contact]
+Выключить для контакта
+[Disable ICQ Menu Items]
+Отключить пункты меню ICQ
+[Disable MTN]
+Выкл MTN
+[Disable PopUps]
+Отключить всплывающие окна
+[Disable Processing]
+Выключить обработку
+[Disable user info rescan (using threshold) on login]
+Выкл. сканирование инфо пользователей при входе в сеть
+[Display contacts, event notifications, protocol status with MW modifications. Can expand/collaps metacontact subcontacts]
+Показывает контакты, события, статусы протоколов. Мультиоконная модификация. Может разворачивать субконтакты метаконтакта
+[Display contacts, event notifications, protocol status with MW modifications]
+Показывает контакты, события, статусы протоколов. МультиОконная модификация.
+[Display popup when user is offline]
+Вспл. окно когда пользователь отключён
+[Display Whois using popups]
+Показывать Whois запросы в вспл. окнах
+[Don't notify for hidden contacts and for contacts with disabled status notification]
+Не оповещать для скрытых контактов и для контактов с отключённым оповещением
+[Dont Use Tool Window Style]
+Не исп. стиль ToolWindow
+[DownButton]
+Кнопка "Вниз"
+[Drop shadow (XP only)]
+Тень (только WinХР)
+[E-Mail Support]
+E-mail поддержка
+[Eating..yummy..]
+Лакомство
+[Empty Group]
+Пустая группа
+[Enable BBCodes support]
+Включить BB коды
+[Enable extended search]
+Расширенный поиск
+[Enable for contact]
+Включить для контакта
+[Enable history]
+Включить историю
+[Enable idle time sending]
+Отправлять время простоя
+[Enable IEView as default message log]
+IEView как журнал по умолчанию
+[Enable menu items to export/import vCards (*)]
+Добавить пункты меню для экспорта/импорта vCards (*)
+[Enable menu items to export/import vCards]
+Пункты в меню - экспорт/импорт vCards
+[Enable MTN receiving only]
+Только прием MTN
+[Enable MTN]
+Вкл MTN
+[Enable multiple MSN / Yahoo accounts support]
+Поддержка нескольких учётных записей MSN/Yahoo 
+[Enable POP3 support even if POP3 Protocol is not found]
+Поддержка РОР3 даже если РОР3 протокол не найден
+[Enable popups if container is minimized]
+Включить вспл. окна (сообщение свернуто)
+[Enable Privacy Menu]
+Меню конфиденциальности
+[Enable Processing]
+Включить обработку
+[Enable RTL by default]
+Использовать RTL по умолчанию
+[Enable RTL]
+Включить RTL
+[Enable scripting support]
+Включить поддержку скриптов
+[Enable smiley support]
+Включить смайлики
+[Enable system tray support]
+Плавающий tabSRMM в трее
+[Enable Typing Notify support]
+Включить поддержку извещения о наборе текста
+[Engineering Education]
+Инженерное образование
+[Enter an authorization request:]
+Введите запрос авторизации:
+[Enter password!]
+Введите пароль!
+[Error creating variant array]
+Ошибка создания массива
+[Error. Received bad ack.]
+Ошибка. Получен неверный ответ.
+[Even Contact Positions]
+Чётные контакты
+[Event popups]
+Настройки оповещения
+[Expanded Group]
+Развернутая группа
+[Extras]
+Дополнения
+[FAILED!]
+ОШИБКА!
+[Fight!!!]
+Драка!!!
+[FileVersion]
+Версия_Файла
+[Filter: %s]
+Фильтр: %s
+[Financial]
+Финансы
+[Find A Message]
+Поиск сообщения
+[Find URLs in messages]
+Находить ссылки в сообщениях
+[Find/Add Contacts_dn]
+Найти/добавить контакт_dn
+[Find/Add Contacts_up]
+Найти/добавить контакт_up
+[First contact of a group]
+Первый контакт в группе
+[First contact of NON-group]
+Первый контакт вне групп
+[Flash label]
+Мигать названием
+[Flash on channel activity]
+Мигать при активности канала
+[Flash on private message]
+Мигать при частном сообщении
+[Flash window]
+Мигание трея
+[Flat tabs]
+Плоские закладки
+[Floating contact]
+Плавающий контакт
+[Font Group:]
+Группа шрифтов:
+[FontService]
+Служба шрифтов
+[Force skin refresh on draw (takes effect when reloading skin)]
+Обновлять скин при прорисовке (эффект будет после перезагрузки скина)
+[Frame border – no titlebar]
+Граница фрейма – без заголовка
+[Frame border – with titlebar]
+Граница фрейма – с заголовком
+[Frame titlebars]
+Заголовки фреймов
+[FrameTitle]
+Название окна
+[Freechat]
+Готов чатиться
+[From %s:]
+От %s:
+[from:]
+От:
+[Full History [%s]]
+Полная история (%s)
+[Function:]
+Функция:
+[Get capabilities]
+Совместимости
+[Gives the user a way to customize the icons of plugins which support such feature]
+Дает возможность изменять значки модулей, поддерживающих эту возможность
+[Global Options]
+Глобальные настройки
+[GreyAlternate]
+Фон в настройках
+[Groups On/Off_dn]
+Группы вкл/выкл_dn
+[Groups On/Off_up]
+Группы вкл/выкл_up
+[Handle .icq files and protocol URLs like: jid: ymsgr: gg:]
+Обрабатывает .icq фалы и ссылки jid: ymsgr: gg:
+[has %s after %d days]
+%s через %d дней
+[has %s tomorrow]
+завтра отмечает %s!
+[HH':'mm':'ss]
+ЧЧ':'мм':'сс
+[Hide my addresses]
+Прятать мои адреса
+[Hide PING? PONG!]
+Скрыть Пинг? Понг!
+[Hide quick settings from contact menu]
+Спрятать настройки из меню контакта
+[Hide server window on startup]
+Скрывать окно сервера при старте
+[Hide statusbar]
+Скрыть статусную строку
+[Hide tab bar when only one tab open]
+Скрывать закладки (если открыт один)
+[Hide topicbar]
+Скрыть строку заголовка
+[Histoy search]
+Поиск истории
+[Home Fax]
+Домашний факс
+[Home Mobile]
+Домашний мобильный
+[Home Phone]
+Домашний телефон
+[HOMEPAGE:]
+Сайт:
+[Hottracked Item]
+Контакт под курсором 
+[HotTracking]
+Под курсором
+[Hovered contact]
+Выделенный контакт
+[How to interact:]
+Взаимодействовать:
+[HTML file (*.htm*.html)|*.htm;*.html]
+Файл HTML (*.htm*.html)|*.htm;*.html
+[I could not open file '%s' for writing.]
+Не могу открыть файл %ы на запись.
+[IcoLib]
+Значки
+[Icons library manager]
+Менеджер значков
+[Identify you Miranda IM as:]
+Сообщать версию Miranda IM как:
+[If the message contains]
+Если сообщение содержит
+[If the message starts with]
+Если сообщение начинается с
+[Ignore per-contact settings]
+Общие настройки для всех
+[Illustration]
+Иллюстрация
+[In-place filter]
+Оперативный фильтр
+[In-place Search]
+Поиск
+[in 2 days]
+через 2 дня
+[in 3 days]
+через 3 дня
+[Incoming conn. port:]
+Порт входящих:
+[Incoming File...]
+Входящий файл...
+[Inf&ormation]
+Инф&ормацию
+[Initial delay (secs)]
+Задержка (сек)
+[Inner row padding]
+Отступ между строками
+[Installed]
+Установлено
+[invalid id or data]
+неверный id или данные
+[IRC Protocol]
+IRC протокол
+[ISee Tweaker]
+Настройки ISee
+[items limit exceeded]
+превышен лимит
+[Ivite to Group Chat...]
+Пригласить в чат...
+[Jan]
+Янв
+[Join channels minimized]
+Подключаться к каналам свернутым
+[Jul]
+Июль
+[Keep downloaded archives here:]
+Сохранять скаченные архивы тут:
+[Keyboard Flash: Start Blinking]
+Мигание светодиодов клавиатуры: Начинать мигать
+[Last contact of a group]
+Последний контакт в группе
+[Last contact of NON-group]
+Последний контакт вне групп
+[Last Seen]
+Последнее появление
+[Launch E-Mail Client]
+Запустить почтовый клиент
+[LegalCopyright]
+Авторское право
+[LegalTrademarks]
+Торговая марка
+[Limit Message preview]
+Лимит предпросмотра
+[Line Color]
+Цвет линии
+[List Background+]
+Фон списка
+[Listening music]
+Слушаю музыку
+[Load a local picture as avatar...]
+Размещение:
+[Load avatars automatically]
+Загружать аватары автоматически
+[Load from vCard]
+Загрузить из vCard
+[Local player: Dead]
+Игрок: мертв
+[Local player: Empty]
+Игрок: пусто
+[Local player: Fire]
+Игрок: стрельба
+[Local player: Miss]
+Игрок: мимо
+[Local Time]
+Локальное время
+[Log 'IDLE' state]
+Писать время простоя
+[Log (*.log)]
+Журнал (*.log)
+[Log in unicode]
+Записывать в юникод
+[Log own status]
+Писать свой статус
+[Log queries]
+Журнал запросов
+[Log this user's avatars to disk]
+Сохранять смену аватаров на диск
+[Log this user's avatars to history]
+Сохранять смену аватаров в истории
+[Log user status changes to file]
+Писать изменения статуса в файл
+[Logging is OFF for all channels and queries]
+Ведение истории выключено для всех каналов и запросов
+[Logging is OFF for all channels, but queries are still automatically logged]
+Ведение истории выключено для всех каналов, но запросы всё ещё записываются
+[Logging is OFF for all channels]
+Протоколирование выключено для всех каналов
+[Logging is OFF for all queries, but channels are still automatically logged]
+Ведение истории выключено для всех запросов, но каналы всё ещё записываются
+[Logging is OFF for]
+Ведение истории выключено для
+[Logging is ON for all channels and queries]
+Ведение истории включено для всех каналов и запросов
+[Logging is ON for all channels]
+Протоколирование включено для всех каналов
+[Logging is ON for]
+Ведение истории включено для
+[Login failed!]
+Авторизация не удалась!
+[Lost your ICQ number]
+Потерян номер ICQ
+[Loving]
+Любовь
+[Low case %type%]
+Нижн регистр %type%
+[MAIN contact]
+Главный контакт
+[Main Menu text]
+Текст главного меню
+[Main Window]
+Главное окно
+[Mar]
+Март
+[Mark Hide Messages]
+Отметить скрытые 
+[Mark Incoming Messages]
+Пометить входящие
+[Mark Outgoing Messages]
+Отметить исходящие
+[Mass Update]
+Массовое обновление
+[Max. connecting time]
+Макс. время подключения
+[Menu Bar]
+Панель меню
+[Menu Options]
+Настройка меню
+[Merge messages from one user]
+Объединять сообщения от одного пользователя
+[Merge popups "per user"]
+Объединять вспл. окна "поконтактно"
+[Message sessions]
+Беседы
+[Message typing notyfication (MTN)]
+Оповещения о наборе (MTN)
+[Meta stuff]
+Метаконтакты
+[Minimal]
+Минимально
+[Minimize Button_dn]
+Свернуть_dn
+[Minimize Button_up]
+Свернуть_up
+[Minimize containers to system tray]
+Сворачивать в трей
+[MinimizeButton]
+Кнопка "Свернуть"
+[Minimun row height:]
+Минимальная высота
+[Miranda database]
+База данных Miranda
+[Miranda did not exit - cannot install or restart.\nPress OK to kill the process, or press Cancel to abort.]
+Ошибка закрытия Miranda - невозможно перезагрузить.\nНажмите ОК чтобы терминировать процесс.
+[Miranda IM (default)]
+Miranda IM (стандартно)
+[Miranda: Incoming message]
+Miranda: Входящее сообщение
+[Miranda: Request Status Message]
+Miranda: Запрос статусного сообщения 
+[Missed]
+Мимо
+[Monitor all labels when using filters]
+Наблюдать использую фильтры
+[Moon Phase]
+Луна: фаза
+[Moonrise]
+Луна: восход
+[Moonset]
+Луна: закат
+
+;status scheduler.dll
+[Move Down]
+Вниз
+[Move Up]
+Вверх
+
+[MoveToGroup]
+В группу
+[Music Info_dn]
+Информация о треке_dn
+[Music Info_up]
+Информация о треке_up
+[My Alboom]
+Альбом
+[My Profiles on the Web]
+Мои профили в сети
+[need auth]
+нужна авторизация
+[Network Settings]
+Настройки сети
+[Network: Incoming UDP]
+Сеть: Входящее UDP
+[New messages (show nick)]
+Новые сообщения (ник)
+[next fortnight]
+след. две недели
+[next week]
+след неделя
+
+[Nick change]
+Смена ника
+[Nickname changes]
+Смена ника
+
+[No default group. Management unavaliable]
+Нет группы по умолчанию. Управление невозможно
+[No new messages!]
+Нет новых сообщений!
+[No popups for RSS]
+Выключить для RSS
+[No view modes]
+Отключено
+[Not Installed]
+Не установлено
+[Not loaded]
+Не загружено
+[not seen]
+не появлялся
+[NOTE: these settings have no effect if you are using the ""auto popup"" feature.]
+Будет работать, только если используется опция "auto popup"
+[Notice to %s]
+Объявление для %s
+[Notify me if any of my friends are using a newer version of Miranda IM than me]
+Напоминать мне, если кто либо из моих друзей использует Miranda IM новее, чем у меня.
+[Nov]
+Ноя
+[NULL]
+Нулевой
+[Odd Contact Positions]
+Нечётные контакты
+[Odd]
+Нечётные
+[OK, %d Cookies now in jar ]
+ОК, %d Cookie в jar
+[Online alert]
+Онлайновое оповещение
+[Only enable this when you get redrawing problems in skinned mode]
+Используйте это, только если у вас проблемы при перерисовке скина.
+[Open at this position]
+Открыть в этой позиции
+[Open ICQmail]
+Открыть ICQ почту
+[Operation not allowed on sorted string list]
+Недоступно для отсортированных
+[or password?]
+или пароль?
+[Organization]
+Организация
+[Others text]
+Другой текст
+[Out connections: ignory additional ports]
+Соединения: игнорируя дополнительные порты
+[P.S. Thanks to Bio for their great work!           ..:: Peace to all :..]
+P.S. Спасибо Bi0 за его работу!
+[Partial History [%s]]
+Неполная история (%s)
+[Place offline users out of grops]
+Показывать отключённых вне групп
+[Please choose the directory where your logfiles will be saved]
+Укажите папку для сохранения файлов журналов (логов)
+[Please read the readme file for help, there are instructions on how to use and how to configure the plugin.]
+Пожалуйста, прочите readme. В нем инструкции по использованию этого модуля.
+[Plugin try to restore connection automatically.]
+Модуль пытается автоматически восстановить подключение.
+[Pooldown Button]
+Выпадающее меню
+[Pressure Change]
+Давление: смена
+[Preview is not available]
+Просмотр не доступен
+[Priority Contact]
+Приоритетный контакт
+[PrivateBuild]
+Внутренняя сборка
+[Proceed Anyway?]
+Всё равно продолжить?
+[ProductVersion]
+Версия_Продукта
+[Property does not exist]
+Не существует
+[Protocol Support]
+Поддержка протокола
+[ProtoLink]
+Перехват ссылок
+[Provides chat rooms for protocols supporting it]
+Предоставляет поддержку чат-комнат для протоколов с поддержкой чатов
+[Quick help on Variables]
+Помощь по переменным
+[Quit]
+Выход
+[Recieved links]
+Полученные ссылки
+[Reconnecting... (Attempt %u, Port %u)]
+Переподключение... (Попытка %u, порт %u)
+[Register!]
+Регистрировать!
+[Registering... FAILED!]
+Регистрация не удалась!
+[Registering... OK!]
+Регистрация завершена!
+[Registering...]
+Регистрирую...
+[Remote player: Dead]
+Соперник: Мертв
+[Remote player: Empty]
+Соперник: Пусто
+[Remote player: Fire]
+Соперник: Огонь
+[Remote player: Miss]
+Соперник: Промах
+[Report idle corresponding to the settings of]
+Возвращать время ожидания, базируясь на:
+[Restart Miranda IM]
+Перезапустите Miranda IM
+[Retrieve IP]
+Получить IP
+[Revoke authorisation]
+Отозвать авторизацию
+[RichEdit line insertion error]
+Ошибка вставки линии RichEdit
+[Right-sided avatars]
+Аватары справа
+[Rounded window]
+Закруглённые углы
+[Sagitarius]
+Стрелец
+[Save All as &RTF...]
+Сохранить всё как &RTF
+[Save HTML Document]
+Сохранение HTML Документа
+[Scale all smileys to the same size]
+Масштабировать все в одинаковый размер
+[Scheduler]
+Планировщик
+[Scrollbar arrow down]
+Полоса прокрутки – стрелка вниз
+[Scrollbar arrow up]
+Полоса прокрутки – стрелка вверх
+[Scrollbar backgroundlower]
+Полоса прокрутки – фон вверху
+[Scrollbar backgroundupper]
+Полоса прокрутки – фон вверху
+[Scrollbar button hovered]
+Полоса прокрутки – кнопка под курсором
+[Scrollbar button pressed]
+Полоса прокрутки – кнопка нажатая
+[Scrollbar button]
+Полоса прокрутки – кнопка
+[Scrollbar thumb ]
+Полоса прокрутки – бегунок
+[Scrollbar thumb hovered]
+Полоса прокрутки – бегунок под курсором
+[Scrollbar thumb pressed]
+Полоса прокрутки – бегунок нажатый
+[Scrollbar thumb]
+Полоса прокрутки – бегунок
+[Search ICQ Member Directory]
+Найти ICQ пользователя
+[Search Infobar]
+Панель поиска
+[Secure Miranda database driver with Autobackup]
+Защищённая база Miranda с авто-резервированием
+[SecureDB]
+Защищённая БД
+[sek.]
+сек.
+[Select contacts to store/delete:]
+Контакты для сохранения/удаления:
+[Select country, enter area code and phone number]
+Выберите страну, введите код оператора и номер телефона
+[Select splash randomly]
+Выбирать заставку случайно
+[Sep]
+Сен
+[Select whether you want IEView for this contact. Default is enabled when IEView is installed]
+Выбор использования IEView для этого контакта. По умолчанию включено, если IEView установлен
+[Send on double enter]
+Посылать при двойном Enter
+[Send on enter]
+Посылать при Enter
+[Sender information]
+Инфо отправителя
+[Session header]
+Заголовок сессии
+[Set &nickname]
+Установить ник
+[Set as Default]
+По умолчанию
+[Set avatar options for]
+Настройки аватара для
+[Set description]
+Описание
+[Set to NULL]
+Установить в NULL
+[Setup status modes for automatic tab creation]
+Автосоздание вкладок, если статус...
+[Shake the clist window]
+Встряхнуть список контактов
+[Show 'User is Typing' notifications in the message window]
+Показывает "Пользователь печатает" в окне сообщений
+[Show &these events only:]
+Показывать &только эти события:
+[Show borders]
+Границы
+[Show character count in the statusbar]
+Количество символов в панели статуса
+[Show colors]
+Цвет
+[Show contact's status icon and username ]
+Значок статуса и имя пользователя
+[Show conversations (F4)]
+Показать диалоги (F4)
+[Show Dates]
+Показать дату
+[Show hardware info]
+Информация о системе
+[Show line below title]
+Линия ниже заголовка
+[Show Main Menu_dn]
+Основное меню_dn
+[Show Main Menu_up]
+Основное меню_up
+[Show menu items (*)]
+Пункты в главном меню (*)
+[Show Miranda IM path]
+Путь к Miranda IM
+[Show only Online Users_dn]
+Скрыть отключённых_dn
+[Show only Online Users_up]
+Скрыть отключённых_up
+[Show Options Page_dn]
+Настройки Miranda_dn
+[Show Options Page_up]
+Настройки Miranda_up
+[Show Preview of Event]
+Предпросмотр событий
+[Show Reminders messages as popup (if reminder is enabeled)]
+Показать напоминания как всплывающие окна (если они включены)
+[Show sidebar]
+Панель сбоку
+[Show the server window]
+Показать окно сервера
+[Show these &events only:]
+Показывать только эти &события:
+[Show these events &only:]
+Показывать &только эти события:
+[Show user's status icon]
+Значок статуса пользователя
+[Show userinfo]
+Данные пользователя
+[Show version number in bold]
+Номер версии жирным шрифтом
+[Show versions in bold]
+Версии жирным шрифтом
+[Single item in group]
+Единственный контакт в группе
+[Single item in NON-group]
+Единственный контакт вне групп
+[Smileys?]
+Смайлики?
+[sms Icon]
+Значок SMS
+[SMS Icon]
+Значок SMS
+[SMS via e-mail]
+SMS через e-mail
+[SMTP Server]
+SMTP сервер
+[Solid color]
+Цвет
+[Sorry \n\nNothing works here yet. \n\nExcept 'Browse' button - to load skin, \nand Frame titles text color.\n\nWork is on going.\n\nPlease be patient]
+Извините \nЗдесь пока ничего не работает,\nкроме кнопки "Просмотр" - для загрузки скина, \nи цвета текста заголовка окна.\nРаботы ведутся.\nПожалуйста, подождите
+[Sounds Enable/Disable_dn]
+Звуки вкл/выкл_dn
+[Sounds Enable/Disable_up]
+Звуки вкл/выкл_up
+[SpecialBuild]
+Спец_Сборка
+[Status Message Retriever]
+Запрос статусных сообщений
+[Status Messages (not supported)]
+Статусные сообщения (не поддерживается)
+[Status Msg Change Notify]
+Смена статусных сообщений
+[Status Msg History]
+История статусных сообщений
+[Stretch Both dir]
+Растянуть в обе стороны
+[Stretch Vert, Tile Horiz]
+Растянуть |, замостить --
+[Sub contact slot]
+Субконтакт
+[Subcontacts]
+Субконтакты
+[Suppress animate error notifications]
+Подавлять сообщения об ошибках
+[Symbol]
+Символ
+[Synchronize floater visibility with contact list]
+Синхронизировать видимость со списком контактов
+[T&ype]
+Т&ип
+[Tab Options]
+Опции закладок
+[Tabbed messaging options]
+Закладки
+[Take Halfop]
+Взять Halfof
+[Take OP]
+Взять ОР
+[Take Voice]
+Взять голос
+[Taking bath]
+Принимаю ванну
+[Text (*.txt)]
+Текст (*.txt)
+[The "Nick" field must contain at least four characters, and also match the default nickname (incl. wildcards) for this contact to be valid. The "Nick" field is not case-sensitive but "User" and "Address" are.\r\n\r\nThe default nickname for this contact is]
+Поле "Ник" должно содержать как минимум четыре символа и совпадать с ником по умолчанию (включая маски) для этого контакта. 
+The content of the clipboard will be not saved. (This warning appear only one time.)]
+Содержимое буфера обмена не сохранено. (Это сообщение появляется только раз)
+[The left mouse button is to take/drop ship.\nThe right button is to rotate [only in arrange-mode].\n\nSee readme.txt for more info...]
+Левая кнопка для выбора корабля.\nПравая кнопка для вращения (только в режиме расстановки).\n\nЧитайте readme.txt...
+[There is no default printer currently selected]
+Нет установленного принтера
+[These are online]
+В сети
+[This can happen for instance when you move your installation of Miranda IM. The log directory has been reset to the default.]
+Это могло произойти из-за того, что вы переместили директорию с Miranda IM в другое место. Директория для ведения истории была автоматически установлена в значение по умолчанию.
+[This is a preview]
+Это предпросмотр
+[This is a special test preview for the popup plugin settings. The text and title are quite long so you can tweak your skin and plugin settings to best fit your needs.]
+Это специальное тестовое всплывающее окно. Текст и заголовок достаточной длинны, так что вы можете точно подстроить свой скин.
+[This is the first time you use this version of the plugin. Please press the 'Update/Setup...' button to update/setup the configuration of the plugin. If you updated it is strongly recommended to check all settings for proper values. Things might have changed in this version.]
+Вы впервые используете этот модуль. Нажмите "Обновить/Настроить..." для настройки модуля. Если вы обновили модуль, рекомендуется внимательно проверить все настройки, они могут измениться в этой версии.
+[This plugin can sweep system history, history from all contacts or only from chosenalso it may sweep history older than certain timeand may do it at Miranda IM startup/shutdown.]
+Этот модуль может чистить системную историю, историю всех контактов или только выбранного, чистить историю более старую чем определённое время и может делать это при запуске/выключении Miranda IM. Перевод: Владимир Рожковский aka Voron (VoronSoft на email.ru), дополнения Radion
+[Threshold in DAYS for updating user info:]
+Период обновления деталей в днях
+[Thumb]
+Бегунок
+[Tile Both dir]
+Замостить в обе стороны
+[Tile Vert, Stretch Horiz]
+Замостить |, растянуть --
+[Time Counter]
+Счётчик времени
+[Title,Nickname,First Name,Middle Name,Last Name,Home Street,Home City,Home State,Home Postal Code,Home Country/Region,Company,Department,Job Title,Business Street,Business City,Business State,Business Postal Code,Business Country/Region,Home Phone,Home Fax,Home Mobile:,Work Phone,Work Fax,Work Mobile,Notes,Business Web Page,Personal Web Page,E-mail Address1,E-mail Address2,E-mail Address3\r\n\0"]
+Заголовок,Ник,Имя,Отчество,Фамилия,Улица,Город,Штат,Индекс,Страна,Компания,Отдел,Должность,Улица компании,Город компании,Штат компании,Индекс компании,Страна компании,Домашний телефон,Домашний факс,Домашний мобильный,Рабочий факс,Рабочий мобильный,Заметки,Web страница компании,Своя web страница,E-mail1,E-mail2,E-mail3\r\n\0"
+[TitleBar options]
+Настройки заголовка
+[Titlebar]
+Заголовок
+[To %s:]
+Для %s:
+[Toggle autoreply on/off_dn]
+Автоответчик вкл/выкл_dn
+[Toggle autoreply on/off_up]
+Автоответчик вкл/выкл_up
+[Toggle on doubleclick]
+Переключить при двойном клике
+[Toggle visibility on doubleclick]
+Переключить видимость при двойном нажатии
+[Toolbar button - mouseover]
+Кнопка на панели задач - под курсором
+[Toolbar button - not pressed]
+Кнопка на панели задач - не нажатая
+[Toolbar button - pressed]
+Кнопка на панели задач - нажатая
+[Top: ]
+Верх:
+[Traf-Time Counter]
+Счётчик трафика/времени
+[Treat nudge as message]
+Как сообщение
+[Try to detect UTF8 strings in ASCII database settings. (for troubleshooting)]
+Искать строки UTF8 в ASCII параметрах базы данных (для диагностики)
+[Try to press the button :-)]
+Попробуйте нажать кнопку :-)
+[Type the value from the following list into one of the boxes on the left.\r\nIf a value is used more than once the Last occurance will be used\r\n\r\nI wanted to use drop lists but it took nearly 10 seconds for the window to load and so could crash Miranda easily. If you can think of a better way to do this email me at jonathan.gordon@optusnet.com.au\0")]
+Впишите значения из списка в одно из полей слева.\r\nЕсли значение используется несколько раз, будет выбрано последнее\r\n\r\nЯ хотел использовать выпадающий список, но это требует около 10 секунд и вызывает крах Miranda. Если вы придумаете другой путь, напишите мне jonathan.gordon@optusnet.com.au
+[Typing area background]
+Фон строки ввода
+[Typing area text]
+Строка ввода
+[UI Button - mouseover]
+UI кнопка - под курсором
+[UI Button - not pressed]
+UI кнопка - не нажатая
+[UI Button - pressed]
+UI кнопка - нажатая
+[Underline URLs]
+Подчеркивать ссылки
+[Unignore]
+Снять игнор
+[unknown error]
+неизвестная ошибка
+[Unknown/Custom]
+Неизвестно/Вручную
+[UpButton]
+Кнопка "Вверх"
+[Update all users avatars]
+Обновить аватары всех пользователей
+[Updates check interval, min:]
+Интервал обновления (мин):
+[Updating %u contact(s)...]
+Обновляю %u контакт(а)...
+[Uploading %u contact(s)...]
+Загружаю %u контакт(а)...
+[Use alternative background]
+Альтернативная заливка
+[Use autorization]
+Использовать авторизацию
+[Use cascaded menus]
+Каскадные меню
+[Use different background colours per event]
+Отдельный цвет фона для каждого события
+[Use flat buttons for new layout]
+Плоские кнопки
+[Use ICQmail]
+ICQпочта
+[Use it when available]
+Использовать, если доступно
+[Use MemoServ to send offline messages]
+MemoServ для оффлайн сообщений
+[Use new layout for split mode]
+Использовать новый стиль
+[Use OSD Plugin instead]
+Использовать модуль OSD
+[Use relative temstamp]
+Относительное время
+[Use the options to set modes for this channel. You are usually required to be op. or higher to modify]
+Используйте настройки для выбора режимов для канала. Менять настройки могут только операторы канала
+[Use this command like]
+Использовать эту команду
+[User information - %s idle]
+Информация пользователя - %s простаивает
+[User list text]
+Текст списка пользователей
+[User tried to flood the gateway. I said to him: %s ]
+Пользователь хотел зафлудить шлюз. Я сказал ему: %s
+[Value must be between %d and %d]
+Значение должно быть между %d и %d
+[VarFileInfo]
+ВарФайлИнфо
+[Variables (case sensitive!)\n\n%N:\tNickname\n%M:\tMessage\n%S:\tMsg Symbol\n%I:\tMsg Icon\n%D:\tlong Date\n%h:\thour (24)\n%m\tMinute]
+Переменные (РеГиСтР Важен!!!)\n%N:\tНик\n%M:\tСообщение\n%S:\tСимвол сообщ.\n%I:\tЗначок сообщ.\n%D:\tПолная дата\n%h:\tЧасы (24)\n%m\tМинуты
+[Variables:  %n  %c  %t  %h  %l  %u  %d  %s 1 (see readme)]
+Варианты %n  %c  %t  %h  %l  %u  %d  %s  (см. readme)
+[Visibility and ignore...]
+Видимость и игнор
+[Visible Light Length]
+Свет виден:
+[Visible Mode]
+Режим видимости
+;Elizatalk Plugin for Miranda ICQ
+[Warn contacts Eliza is chatting]
+Оповещение - Элиза болтаетl
+[Warning: Log directory not valid!]
+Внимание: Директория для ведения истории не работает!
+;WebPager
+[WebPager message received]
+Получено сообщение WebPager
+[When changing status from]
+Когда меняется статус с
+[Work Mobile]
+Рабочий мобильный
+[XStatus Name]
+Имя xСтатус
+[XStatusName]
+Имя xСтатуса
+[Year(s)]
+Год(ы)
+[You have more than %d modules installed, dbExport needs an update!]
+У вас установлено больше, чем %d модулей, dbExport необходимо обновить!
+[Your status message (this variable can be used in log, popup and autoreply format strings)]
+Ваше статусное сообщение (эта переменная может быть использована в журнале, вспл. окне, и автоответчике)
+; x5
+[%s User was removed from server list]
+%s удалён из списка на сервере
+[mToolTip]
+Подсказки
+[Notify Anything]
+Уведомления на порт
+[These settings are global for all instances of this action. They are ment to give a general opportunity to set some basic settings for the automatic backup action. ]
+Эти установки актуальны для всех действий резервирования базы данных.
+;Updater
+[Enable XStatus notification]
+Сообщать о чтении xСтатуса
+[/music]
+/music
+[  test 1]
+  тест 1
+[  test 2   ]
+  тест 2
+[Janus]
+Янус
+; более корректно выглядит в меню контакта
+[Avatarservice]
+Аватары
+[HotContact ]
+Быстрый контакт
+
+; возможно из AdvancedAutoAway.txt
+[Set Msg]
+Сообщение
+
+;возможно startupstatus.txt
+[Show confirm dialog when loading this profile]
+Диалог подтверждения при загрузке профиля
+
+;====================TRASH FROM OLD CORE=====================;
+;============================================================
+;  Module: miranda32.exe
+;  Plugin: Miranda Core, also, here lot's of strings, repeated in many modules
+;  Versions: 0.3.4.0 - 0.8.0 alpha build 28
+;  Dates: 16.03.08 10:28
+;  Translators: Homeric, BasiL
+;  Template: langpack_english.txt
+;  Source: SVN, /dev/hands
+;============================================================
+[Check for new versions of Miranda IM periodically.]
+Периодически проверять наличие новых версий Miranda IM.
+[Status Icons/Global]
+Статус/Общие
+[Status Icons/]
+Статус/
+[Status Icons/ %s]
+Статус/ %s
+
+; database.c
+[No profile support installed!]
+Нет поддержки профилей!
+[Miranda was unable to open '%s', its in an unknown format.\nThis profile might also be damaged, please run DB-tool which should be installed.]
+Miranda не может открыть '%s', профиль в неизвестном формате.\nЭтот профиль также может быть повреждён, попробуйте исправить его с помощью dbtool.
+
+; urldialogs.c
+[URL from ]
+URL от
+
+; resource.rc
+[Configure your Miranda Instant Messenger options]
+Основной диалог настроек вашей Miranda IM
+[Send \]
+Отправить \
+[Send ]
+Отправить
+[Show/Hide:]
+Показать/Скрыть:
+[Read Msg:]
+Прочитать:
+[Net Search:]
+Поиск в Сети:
+[Open in new browser window]
+Открыть в новом окне
+[Show Options]
+Настройки
+[Transferred:]
+Передано:
+[Speed:]
+Скорость:
+[Proxy requires authorization]
+Прокси требует авторизации
+[Specify ports to be used for incoming connections]
+Указать порты для входящих подключений
+[Specify ports to be used for outgoing connections]
+Указать порты для исходящих подключений
+[Log Options...]
+Журнал...
+[Select and/or create your Miranda IM user profile]
+Выбор или создание профиля пользователя
+[Run programme when Miranda IM starts (eg tail -f, dbgview, etc):]
+Запустить программу при запуске (например, tail -f, dbgview, etc)
+[Suppress online notification]
+"В сети"
+[Suppress added notification]
+Сообщения "Вас добавили"
+[Use %time% for the current time, %date% for the current date,\n%mmsg% for Miranda's message]
+Используйте %time% чтобы вставить время, %date% - дату, \n%mmsg% - сообщение Miranda IM
+[Selected text:]
+Выделенный текст:
+[Hottrack text:]
+Текст под мышью:
+[Quicksearch text:]
+Быстрый поиск:
+[Colour:]
+Цвет:
+[Proxy type:]
+Тип прокси:
+[Proxy server:]
+Прокси-сервер:
+[Range:]
+Интервал:
+[Variables Allowed: %userid%, %nick%, %proto%]
+Переменные: %userid%, %nick%, %proto%
+
+[Running]
+Запущен
+[Current file]
+Текущий файл
+[Rows]
+Строки
+[Additional Colours]
+Дополнительные цвета
+[URL Recieved]
+URL получен
+
+;dbtool.exe
+[Enable sounds events]
+Включить все звуки
+[Out to Lunch]
+Обедаю
+
+
+
+; Common strings that belong to many files
+[Spin1]
+Вращение1
+[Spin2]
+Вращение2
+[Spin5]
+Вращение5
+[List Text]
+Текст списка
+; plugins/clist/clcopts.c
+[Read Message:]
+Прочитать сообщение
+
+; src/modules/clist/genmenu.c
+[Too many menu items registered, please restart your Miranda to avoid unpredictable behaviour]
+Зарегистрировано слишком много элементов меню, чтобы избежать ошибочного поведения перезапустите программу.
+
+; src/modules/options/options.c
+[<core settings>]
+<настройки ядра>
+
+; src/modules/plugins/newplugins.c
+[Can't find a contact list plugin! you need clist_classic or clist_mw.]
+Не найден модуль списка контактов! Вам нужен clist_*.dll модуль.
+
+
+[Show settings only for module:]
+Настройки для модуля:
+; from icolib two strings
+[Background Colors]
+Цвета фона
+[Background colors]
+Цвета фона
+[Text colours]
+Цвета текста
+[Text Colours]
+Цвета текста
+[Search in site]
+Поиск на сайте
+
+;просмотр кое-где не влезает.
+[ALL NETWORKS]
+ВСЕ СЕТИ
+[< About]
+< Об...
+[&Find next]
+Найти далее
+
+; init.c
+
+[Nick name]
+Ник
+[AaBbYyZz]
+АаБбВвГг
+[UTF-8]
+UTF-8
+[Urls]
+URL
+[Latest Release:]
+Последний релиз:
+[SMS]
+SMS
+[%d added you to their contact list]
+%d добавил вас в свой список
+[Current file (%d of %d)]
+Текущий файл (%d/%d)
+[Transfer completed]
+Передача завершена
+[The phone number should start with a + and consist of\nnumbers, spaces, brackets and hyphens only.]
+Номер телефона должен начинаться с + и состоять из\nцифр, пробелов, скобок и тире.
+[Tuesday]
+Вторник
+[Thursday]
+Четверг
+[Saturday]
+Суббота
+[Wednesday]
+Среда
+[Friday]
+Пятница
+[Monday]
+Понедельник
+[Sunday]
+Воскресенье
+[My Details]
+Мои детали
+[Menu Icons/%s]
+Меню/%s
+[Email]
+Почта
+[Web]
+Сайт
+;------dbtool.exe begin---------
+[Creating working database (aggressive mode)]
+Создание рабочей базы (агрессивный режим)
+[Can't create working file (%u)]
+Невозможно создать рабочий файл (%u)
+[Can't read from working file (%u)]
+Невозможно прочитать из рабочего файла (%u)
+[Unable to delete aggressive working file]
+Невозможно удалить агрессивный рабочий файл
+[Error writing file, probably disk full - try without aggressive mode (%u)]
+Ошибка записи файла, возможно диск переполнен - попытайтесь без агрессивного режима (%u)
+[Empty settings group at %08X: deleting]
+Группа пустых значений на %08X: удаляем
+[All Files (*)]
+Все файлы (*)
+[Can't write to working file, aggressive mode may be too aggressive now (%u)]
+Невозможно записать в рабочий файл, агрессивный режим сейчас может быть слишком агрессивен (%u)
+
+;------dbtool.exe end-----------
+
+
+[&Ok]
+ОК
+[Add secondary binding]
+Добавить второе сочетание
+[add secondary hotkey]
+добавить второе
+[Change binding]
+Изменить сочетание
+[copyright]
+копирайт
+[miranda hotkey (click to toggle)]
+в Miranda (щелчок для изменения)
+[Miranda local hotkey]
+Локальное сочетание клавиш
+[Receiving file]
+Прием файла
+[Remove binding]
+Удалить сочетание
+[remove hotkey]
+удалить сочетание
+[Revert change]
+Откатить изменения
+[revert change]
+откатить изменения
+[Sending file]
+Отправка файла
+[Sending files]
+Отправка файлов
+[System global hotkey]
+Системное сочетание клавиш
+[system global hotkey]
+сочетание в системе
+[window hotkey]
+в окне
+[days]
+дней
+[The profile '%s' already exists. Do you want to move it to the Recycle Bin? \n\nWARNING: The profile will be deleted if Recycle Bin is disabled.\nWARNING: A profile may contain confidential information and should be properly deleted.]
+Профиль '%s" уже существует. Хотите переместить его в Корзину?\n\nВНИМАНИЕ: Профиль будет удалён, если Корзина отключена\nВНИМАНИЕ: Профиль может содержать конфиденциальную информацию и должен быть правильно удалён.
+[CList]
+Контакт-лист
+[button]
+кнопка
+[Configure your IM accounts]
+Настройка ваших учётных записей
+[hyperlink]
+ссылка
+[Restart required]
+Требуется рестарт
+[This account uses legacy protocol. Use Miranda IM options dialogs to change login information for it.]
+Эта учётная запись использует старый протокол. Смена имени пользователя в основных настройках.
+[based on:]
+основан на:
+[%s is Offline]
+%s не в сети
+;Old core 0.3.4.0
+[ Auto Away ]
+ Auto Away
+[ Idle ]
+ Режим ожидания
+[&Enable Sounds]
+Включить звуки
+[Change status when Miranda becomes idle?]
+Сменить статус, если программа простаивает?
+[Create &New Profile...]
+Создать новый...
+[Determine how idle I am from:]
+Определять неактивность через:
+[Do not share my idle information with anyone on my contact list]
+Не давать информацию об ожидании пользователям в списке
+[e.g. 3.xx profile]
+например 3.х профиль
+[Enable idle support (needs a better name)]
+Включить режим ожидания
+[GNU General Public License]
+GNU General Public License
+[How should idle information be shared with others?]
+Оповещать об этом остальных?
+[How should Miranda discover that you are idle? ]
+Как определять, что вас нет на месте?
+[If the computer is locked (2000/XP+ only)]
+Блокирован компьютер (2000/NT/XP)
+[If the following is left unattended:]
+Если не активны:
+[If the screen saver is active]
+Запущена заставка
+[Load Miranda IM]
+Загрузить Miranda IM
+[More Plugins...]
+Взять из сети...
+[Plugin Conflict]
+Конфликт модулей
+[Select the &profile to use to run Miranda IM]
+Выберите &профиль для запуска Miranda IM
+[The feature that they all implement is %s]
+Функция, которую они выполняют: %s
+[The following plugins all report that they perform the same function. Only one can be active at any time. Please select which you wish to use and click OK. Click Cancel if you wish to use the functionality built in to Miranda IM.]
+Следующие модули выполняют одну и ту же функцию. Только один из них может быть включён. Выберите один и нажмите "ОК", чтобы его использовать, или нажмите "Отмена", чтобы использовать встроенные возможности программы.
+[Use 'long' idle time (needs a better name)]
+"Длинное" время ожидания
+[Use 'short' idle time (needs a better name)]
+"Короткое" время ожидания
+[Use GetLastInputInfo(), monitors keyboard and mouse <-- too nerdy]
+Использует GetLastInputInfo(), следит за клавиатурой и мышью <-- слишком круто
+[When I become idle for a long period of time:]
+Когда компьютер неактивен дольше:
+[When I become idle for a short period of time:]
+Когда компьютер неактивен недолго:
+[You can set how many minutes have to elapse for both short/long idle:]
+Вы можете выбрать короткий и длинный период неактивности
+[You may change your selection at a later time in the Plugins tab of the Options dialog box.]
+Позже вы сможете изменить настройки на странице 'Модули'
+[%d characters typed]
+%d знаков
+[: active %d/%d, size %dk/%dk]
+: активные %d/%d, размер %dкБ/%dкБ
+[About %s]
+О %s
+[Add e-mail Address]
+Добавить e-mail
+[Contributors]
+Участники проекта
+[Create subfolders according to the sender's username]
+Создавать каталог с именем отправителя
+[Credits]
+Кредиты
+[File Transfer: Complete]
+Передача файла (завершена)
+[File Transfer: Denied]
+Передача файла (отказ)
+[File Transfer: Error]
+Передача файла (ошибка)
+[File Transfer: Incoming]
+Передача файла (прием)
+[Filesize]
+Размер файла
+[GNU General Public Licence]
+Распространяется согласно GNU General Public Licence
+[Miranda has detected dubious values from the selected profile, using it may cause untold amount of profile damage, please visit http://www.miranda-im.org for various profile maintenance tools to fix the problems.]
+Miranda нашла странные значения для выбранного профиля. Использование данного профиля может привести к его повреждению. Посетите сайт http://www.miranda-im.org и загрузите инструменты для исправления ошибок в базе.
+[Miranda IM Profile Database]
+База данных профиля
+[Miranda IM Website]
+Официальный сайт Miranda IM
+[Please]
+Пожалуйста
+[read and accept]
+прочтите и согласитесь
+[Set Away mode when workstation is locked]
+"Отсутствую" при блокировке компьютера
+[Support]
+Поддержка
+[the Miranda IM license agreement:]
+с лицензионным соглашением:
+[Unable to open the selected profile, trying to gain exclusive access to it failed, it maybe already open by another Miranda IM]
+Невозможно открыть выбранный профиль, так как получить эксклюзивный доступ к нему невозможно. Может быть, он уже открыт другой копией Miranda IM.
+[Unable to open the selected profile.  Trying to gain exclusive access to it failed.  It maybe already open by another Miranda IM]
+Невозможно открыть выбранный профиль, так как получить эксклюзивный доступ к нему невозможно. Возможно, что он уже открыт другой копией Miranda IM.
+[Unable to use the selected profile.  The version information within the profile suggests it's newer than I currently support.]
+Невозможно использовать данный профиль. Информация о версии профиля показывает, что его версия новее, чем та, которая поддерживается в данный момент.
+[Unable to use the selected profile.  Various important parts of user data is missing.  You may be able to salvage your history and contacts.]
+Невозможно использовать выбранный профиль. Некоторые важные данные отсутствуют. Возможно, вам удастся спасти историю и контакты.
+[Unable to verify the selected profile.  You may wish to try and fix this profile via dbtool.  Visit http://www.miranda-im.org for more information.]
+Невозможно проверить выбранный профиль. Попытайтесь исправить этот профиль с помощью DBTool. Подробная информация есть на http://www.miranda-im.org/ .
+[Unable to verify the structure of the selected profile.  DBTool will not help!]
+Невозможно проверить структуру выбранного профиля. DBTool не поможет.
+[URL: Incoming]
+URL (входящий)
+[Very Very Bad]
+Очень, очень плохо...
+[Your profile database is subtlly but terminally corrupted. You will almost certainly have to delete it. Miranda IM will now kill itself.]
+База данных повреждена. Попробуйте починить её с помощью инструмента DBTool, а если не удастся, то создайте новую. Работа программы будет завершена аварийно.
+;findadd dialog, old miranda
+[None of the messaging protocols were able to initiate the search. Please correct the fault and try again.]
+Ни один из протоколов не смог запустить поиск. Исправьте ошибку и попробуйте снова.
+[One or more of the messaging protocols failed to initiate the search, however some were successful. Please correct the fault if you wish to search using the other protocols.]
+Один или несколько протоколов не смогли запустить поиск, тем не менее, поиск запущен. Исправьте ошибку, если вы желаете искать, используя другие протоколы.
+[The messaging protocol reported an error initiating the search. Please correct the fault and try again.]
+Протокол сообщил об ошибке при запуске поиска. Исправьте ошибку и попробуйте снова.
+
+
+;0.4.0.0
+[Status Change on Idle]
+Изменение статуса в режиме ожидания
+;0.7.x
+[Backgroundcolor]
+Цвет фона
+[Copyright]
+Права
+[Create New Profile]
+Создать новый профиль
+[Enter the &name for the new profile:]
+Введите имя нового профиля:
+[Font Color]
+Цвет текста
+[Foreground color]
+Цвет впереди
+[hide]
+скрыть
+[options]
+параметры
+[settings]
+настройки
+[show]
+показать
+[TopToolbar-Button]
+Кнопка TopToolbar
+;eof
+
+;repeated many times
+
+;0.4 core
+[3.xx profile]
+3.х профиль
+[GenMenu]
+Меню
+[Miranda Update Check connection]
+Подключения модуля обновления Miranda IM
+;0.4.0.1
+[RTL template]
+RTL шаблон
+[TLV-based search (ICQLite alike)]
+Поиск как в ICQLite
+
+;filter.cpp, options.cpp
+;build23
+[Error Creating Backup Folder]
+Ошибка создания папки резервных копий
+[This font will be used for each text chunk in "caption" context: be it group, nickname, title or anything else.]
+Этот шрифт будет использоваться в каждом тексте, являющимся заголовком: в названиях групп, ников и т.д.
+[Pick a default font to be used for most textual messages in all Miranda dialogs. This includes contact list, messaging, notifications and other.]
+Шрифт по умолчанию, использующийся в большинстве текстовых сообщений во всех диалогах программы (список контактов, окно сообщений, уведомления и другие)
+[Sometimes you see less important notes, like status messages or user mood in contact list. This font will be used to display such kind of information.]
+Иногда вы видите менее важные примечания, такие, как сообщения статуса или пользовательские настроения в списке контактов. Данный шрифт используется для показа подобной информации.
+[Miranda\nSelect or create your Miranda IM user profile]
+Miranda\nВыберите или создайте ваш профиль Miranda IM
+;=================EOF TRASH FROM OLD CORE=====================;
+
+
+;===================Strings from Scriver======================
+[Show close button on each tab]
+Кнопка закрытия на закладках
+[Show toolbar ]
+Показывать панель
+[Show tool bar ]
+Панель кнопок
+[Long data format]
+Длинный формат дат
+[User Menu - %u]
+Меню пользователя - %u
+[User list background]
+Фон списка
+[Use tabbed mode]
+Использовать вкладки
+[Navigate: Tab %d]
+Навигация: Вкладка %d
+[Scriver/Chat log]
+Scriver/Журнал чата
+[Scriver/Chat windows]
+Scriver/Окна чатов
+[Scriver/Group Chats]
+Scriver/Чаты
+[Scriver/Single Messaging]
+Scriver/Сообщения
+[Default codepage]
+Кодовая страница
+[URL received]
+URL получен
+[URL sent]
+Посылка URL'a
+[Scriver/Messaging]
+Scriver/Сообщения
+[Automatically switch to active tab]
+Переключаться на активную закладку
+[But be polite]
+Но делать это благовоспитанно
+[Draw lines between messages]
+Линии между сообщениями
+[Hide containers on close]
+Прятать контейнеры при закрытии
+[Hide tab bar if there is only one tab]
+Скрыть панель вкладок, если вкладка одна
+[Limit avatar height to min.]
+Высота аватара: от
+[Limit number of chats tabs per container to]
+Ограничить число чатов для контейнера
+[Limit number of tabs per container to]
+Ограничить число вкладок на контейнер
+[Look And Feel]
+Настройки внешнего вида
+[Save message draft when closing message window]
+Сохранять сообщение при закрытие окна
+[Save the splitter position individually for each contact]
+Сохранять позицию разделителя для каждого контакта
+[Show 'sending in progress' indicator]
+Показывать индикатор отправки
+[Use separate containers for chats]
+Отдельные контейнеры для чата
+[and max.]
+до:
+[Incoming background]
+Фон входящих
+[Outgoing background]
+Фон исходящих
+[Stay minimized]
+Оставаться свернутым
+[Show tool bar]
+Панель инструментов
+[Input area background:]
+Цвет фона поля ввода:
+[Do not bring new tabs to front]
+Создавать вкладки в фоне
+[Limit names on tabs to 20 characters]
+Имя на вкладке не больше 20 символов
+[Save message draft on close]
+Cохранять набранный текст при закрытии окна
+[Scriver]
+Беседы Scriver
+[and do not steal focus]
+и не перехватывать фокус
+[Save splitter position for each contact]
+Сохранять положение для каждого контакта
+[Limit height to min.]
+Ограничить высоту
+[Use original size]
+Использовать оригинальный размер
+[Show send button]
+Показывать кнопку отправки
+[Show chat control buttons]
+Показывать кнопки управления чатом
+[Show text formatting buttons]
+Показывать кнопки форматирования
+;================EOF Strings from Scriver===================
+
+;==============Start Of YAPP==================
+;  from =Dupes=
+;[Popup history]
+;История всплывающих окон
+;[Provides a common popup interface for different plugins.]
+;Поддержка всплывающих сообщений для различных модулей.
+;[Enable Popups]
+;Включить всплывающие окна
+
+;  =trash=
+;[Placement]
+;Положение
+;[Full-screen app running]
+;Полноэкранное приложение
+;[First Line]
+;Первая строка
+;[Set timeout]
+;Установить таймаут
+;[YAPP]
+;Всплывающие окна (YAPP)
+;[Copy message to clipboard]
+;Скопировать сообщение в буфер
+;[Copy title to clipboard]
+;Скопировать заголовок в буфер
+;[You cannot set a default timeout of 0.\nValue has been reset.]
+;Вы не можете установить стандартную длительность 0.\nЗначение отброшено.
+;[Copy timestamp to clipboard]
+;Скопировать время в буфер
+;=========================EOF YAPP==============

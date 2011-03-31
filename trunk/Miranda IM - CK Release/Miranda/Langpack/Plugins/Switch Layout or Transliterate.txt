@@ -1,0 +1,25 @@
+; Pluginname: Switch Layout or Transliterate
+; Version: 0.0.0.8
+; Dateiname: TranslitSwitcher.dll
+; Autor(en): Mataes, tico-tico, Tim
+; Unique ID: {0286947d-3140-4222-b5ad-2c92315e1c1e}
+; Link: http://mataes.googlecode.com/svn/Miranda/Plugins/TranslitSwitcher
+; Übersetzung: CHEF-KOCH 10.11.2010
+; Besonderheiten: Sonderzeichen und einzelne Buchstaben dürfen nicht übersetzt werden!
+
+;[TranslitSwitcher/TranslitLayout]
+;[TranslitSwitcher/SwitchTextLayout]
+;[TranslitSwitcher/SwitchLayout]
+
+[Convert All / Selected]
+Konvertiere alle / ausgewählte
+[Convert Last / Selected]
+Konvertiere letzte / ausgewählte
+[Translit All / Selected]
+Alle umschreiben / ausgewählte
+[Translit Last / Selected]
+Letzten umschreiben / ausgewählte
+[Invert Case All / Selected]
+Kehre um alle / ausgewählte
+[Invert Case Last / Selected]
+Kehre um letzte / ausgewählte

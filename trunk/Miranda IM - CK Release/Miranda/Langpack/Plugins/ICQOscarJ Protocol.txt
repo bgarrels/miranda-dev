@@ -1,0 +1,934 @@
+; Pluginname: ICQOscarJ Protocol
+; Version: 0.9.11.2
+; Dateiname: ICQ.dll
+; Unique ID: {73a9615c-7d4e-4555-badb-ee05dc928eff}
+; Autor: Joe Kucera, Bio, Martin Öberg, Richard Hughes, Jon Keating, etc
+; Link: Stable & Testing
+; Übersetzung: 30.03.06 von Dober
+; Besonderheiten: NetLog_Server, Netlib_Logf können nicht übersetzt werden.
+
+[ICQ number:]
+ICQ-Nummer:
+[ICQ Number:]
+ICQ-Nummer:
+[Hint: If you don't enter your password here, Miranda will ask for the password everytime you try to go online.]
+Tipp: Geben Sie hier kein Passwort ein, so wird immer beim Verbinden danach gefragt.
+[Create a new ICQ account]
+Ein neues ICQ-Konto erstellen ...
+[Create a new ICQ account using the ICQ website]
+Ein neues ICQ-Konto über die ICQ-Webseite erstellen ...
+[Retrieve a lost password or ICQ number]
+ICQ-Nummer oder Passwort vergessen? Hier klicken ...
+[Hint: Use port 0 to connect on a random port. Try port 80 or port 443 if you are having problems connecting through a http proxy server.]
+Tipp: Benutzen Sie Port 0 für eine zufällige Portwahl. Benutzen Sie Port 80 oder 443 bei Problemen mit einem HTTP-Proxyserver.
+[Secure Connection (SSL) [experimental]]
+Sichere Verbindung (SSL)
+[Secure Connection (SSL)]
+Sichere Verbindung (SSL)
+[Secure (MD5) login]
+Sichere Anmeldung (MD5)
+[Send 'Keep-alives' (enable this if you use a proxy server and frequently get disconnected)]
+Verbindung aufrecht erhalten (aktivieren Sie dies, wenn Sie einen Proxyserver benutzen und häufig getrennt werden)
+[Ignore concurrent error messages]
+Ignoriere gleichzeitige Störungen
+[Show connection error messages:]
+Zeige Verbindungsfehler-Meldungen:
+[Display all problems]
+Zeige alle Probleme
+[Display problems causing possible loss of data]
+Zeige Probleme, die möglichen Datenverlust verursachen
+[Display explanations for disconnection]
+Erklärung anzeigen für Trennung
+[Display problems requiring user intervention]
+Zeige Probleme, die einen Benutzereingriff erfordern
+[Do not display any problems (not recommended)]
+Gar keine Probleme anzeigen (nicht empfohlen)
+
+[ICQ contacts stored on server]
+Serverseitige Kontaktliste
+[Enable server-side contact lists *]
+Serverseitige Kontaktliste aktivieren (*)
+[Add contacts to the server's list when I add them to mine]
+Füge Kontakte zur Serverliste hinzu, wenn ich diese zu meiner hinzufüge
+[Update my contacts' details from the server *]
+Aktualisiere Kontaktdetails vom Server (*)
+[Update contacts' details on the server's list when I change them in mine]
+Aktualisiere Kontaktdetails der Serverliste, wenn ich diese in meiner ändere
+[Manage server's list...]
+Serverliste verwalten
+[ICQ avatars]
+Avatare
+[Enable avatar support]
+Avatarunterstützung aktivieren
+[Check avatar validity before saving *]
+Avatare vor dem Speichern auf Gültigkeit prüfen (*)
+[Load avatars automatically (like ICQ Lite)]
+Avatare automatisch laden (wie ICQ Lite)
+[Allow bigger owner avatars (up to 128x128) [experimental]]
+Eigene Avatare bis zu einer Größe von 128x128 erlauben (experimentell)
+[You cannot enable/disable the server-side contact list while you are connected to the ICQ network.]
+Aktivieren/Deaktivieren der Serverkontaktliste nur möglich, wenn keine ICQ-Netzwerkverbindung besteht. Bitte zuerst offline gehen!
+[Note: The options marked with an asterisk have important side-effects or caveats that may not be initially apparent documented in the help.]
+(*) Diese Einstellungen wirken sich auch auf bereits bestehende Kontakte und das Profil aus. Sie müssen aber aktiviert sein, um ein Avatar auf den Server zu laden.
+
+[Server list editor]
+Serverlistenmanager Editor
+[Manage ICQ Server Contacts]
+ICQ-Kontakte auf Server verwalten
+[Select contacts to store:]
+Kontakte für Upload wählen:
+[Select contacts you want to store on server.]
+Markiere Kontakte zum Speichern auf dem Server.
+[Synchronize]
+Synchronisiere
+[Ready...]
+Fertig...
+[FAILED]
+FEHLGESCHLAGEN
+[Uploading %s...]
+Upload von %s...
+[Uploading %u...]
+Upload von %u...
+[No upload group available]
+Keine Upload-Gruppen vorhanden
+[Deleting %s...]
+Lösche %s...
+[Deleting %u...]
+Lösche %u...
+[Moving %s to group "%s"...]
+Verschiebe %s in Gruppe "%s"...
+[Moving %u to group "%s"...]
+Verschiebe %u in Gruppe "%s"...
+[Adding %u to visible list...]
+Füge %u zur Sichtbarkeitsliste hinzu...
+[Adding %s to visible list...]
+Füge %s zur Sichtbarkeitsliste hinzu...
+[Adding %u to invisible list...]
+Füge %u zur Unsichtbarkeitsliste hinzu...
+[Adding %s to invisible list...]
+Füge %s zur Unsichtbarkeitsliste hinzu...
+[Deleting %u from visible list...]
+Lösche %u von der Sichtbarkeitsliste...
+[Deleting %s from visible list...]
+Lösche %s von der Sichtbarkeitsliste...
+[Deleting %u from invisible list...]
+Lösche %u von der Unsichtbarkeitsliste...
+[Deleting %s from invisible list...]
+Lösche %s von der Unsichtbarkeitsliste...
+[Sent acknowledgement thru direct connection]
+Sende Bestätigung über direkte Verbindung
+
+; fam_13servclist.cpp
+[Contact \"%s\" was authorized in the server list.]
+Kontakt \"%s\" wurde in der Serverliste autorisiert.
+[Contact \"%s\" lost its authorization in the server list.]
+Kontakt \"%s\" hat die Autorisierung in der Serverliste verloren.
+[User \"%s\" was removed from server list.]
+Nutzer \"s\" wurde aus der Serverliste entfernt.
+[Updating of server contact failed.]
+Update des Serverkontakt schlug fehl.
+[ALREADY EXISTS]
+Existiert bereits
+[INVALID DATA]
+Ungültige Daten
+[LIST FULL]
+Liste voll
+[Server contact list is unavailable, Miranda will use local contact list.]
+Server-Kontaktliste nicht erreichbar, Miranda benutzt die lokale Kontaktliste.
+[Renaming of server contact failed.]
+Umbenennen der Kontakts auf dem Server fehlgeschlagen.
+[Update of server contact's comment failed.]
+Aktualisierung des Kontaktkommentars auf dem Server ist fehlgeschlagen.
+[Adding of privacy item to server list failed.]
+Hinzufügen des privaten Teils auf dem Server fehlgeschlagen.
+[Removing of privacy item from server list failed.]
+Löschen des privaten Teils auf dem Server fehlgeschlagen.
+[Adding of contact to server list failed.]
+Hinzufügen des Kontakts auf dem Server fehlgeschlagen.
+[Adding of group to server list failed.]
+Hinzufügen der Gruppe auf dem Server fehlgeschlagen.
+[Removing of contact from server list failed.]
+Löschen des Kontakts auf dem Server fehlgeschlagen.
+[Updating of group on server list failed.]
+Aktualisierung der Gruppe auf dem Server ist fehlgeschlagen.
+[Removing of group from server list failed.]
+Löschen der Gruppe auf dem Server fehlgeschlagen.
+[Moving of user to another group on server list failed.]
+Verschieben des Kontakts zu einer anderen Gruppe auf dem Server fehlgeschlagen.
+[Renaming of server group failed.]
+Umbenennen der Gruppe auf dem Server fehlgeschlagen.
+[Cleaning groups]
+Säubere Gruppen
+[Adding group \"%s\"...]
+Füge Gruppe \"%s\" hinzu...
+[Updating group \"%s\"...]
+Aktualisiere Gruppe \"%s\"...
+[Deleting group \"%s\"...]
+Lösche Gruppe \"%s\"...
+[All operations complete]
+Alle Operationen beendet
+[You have to be online to sychronize the server-list !]
+Sie müssen für das Synchronisieren der Serverliste online sein!
+[Server rate warning -> slowing down the process.]
+Server sendet Warnung -> wir bremsen den Prozess.
+
+[Enable unicode messaging support]
+Unicode für Nachrichten aktivieren
+[Send all messages in unicode if possible]
+Alle Nachrichten in Unicode senden, wenn möglich
+[Use this codepage for Ansi <-> Unicode translation :]
+Verwende diese Codetabelle für ANSI <-> Unicode:
+[Make me temporarily visible to contacts I send message to]
+Temporär für Kontakte sichtbar machen beim Nachrichtenversand
+[Notify me when a message delivery has failed (recommended)]
+Teile mir mit, wenn eine Nachricht nicht gesendet werden konnte (empfohlen)
+[Use only server's acknowledgement (faster)]
+Nur Bestätigung des Servers einholen (schneller)
+[Peer-to-peer Messaging]
+Direktverbindung Nachrichten
+[Enable peer-to-peer message connections]
+Direktverbindungen für Nachrichtensitzungen
+[Passive mode, i.e. do not initiate new connections]
+Passiver Modus, d. h. keine neuen Verbindungen herstellen
+[Extra Features]
+Zusätzliche Funktionen
+[Enable Custom status support for xtraz]
+XStatus-Unterstützung für Xtraz aktivieren
+[Enable Custom status support for moods]
+XStatus-Unterstützung für "Moods" (Stimmungen) aktivieren
+[Reset Custom status on status change]
+XStatus bei Statusänderung zurücksetzen
+[Auto-retrieve Custom status details]
+XStatus-Details automatisch empfangen
+[Block known Spam Bots]
+Bekannte Spambots blockieren
+[Enable AIM contacts support]
+Unterstützung für AIM-Kontakte aktivieren
+
+[Privacy]
+Privatsphäre
+[Direct connections]
+Direktverbindungen
+[Allowing direct connections will expose your IP address but may be necessary for some ICQ features to work properly.]
+Bei direkten Verbindungen wird die eigene IP-Adresse bekanntgegeben. Für einige Funktionen des ICQ-Protokolls (z. B. Dateiübertragung) ist dies jedoch erforderlich.
+[Allow direct connections with any user]
+Direkte Verbindungen zu jedem Kontakt erlauben
+[Allow direct connections with users on my contact list]
+Direkte Verbindungen nur zu Kontakten meiner Kontaktliste erlauben
+[Allow direct connections only when I authorize or initiate them]
+Direkte Verbindungen nur, wenn von mir autorisiert oder selbst gestartet
+[Contact List Authorization]
+Kontaktlisten-Autorisierung
+[All users may add me to their Contact List]
+Jeder darf mich in seiner Kontaktliste aufnehmen
+[I want to be asked when someone wants to add me to their Contact List]
+Nachfragen, wenn jemand mich in seiner Kontaktliste aufnehmen möchte
+[Misc Settings]
+Sonstige Einstellungen
+[Allow others to view my Online / Offline status from the web (Web Aware)]
+Anzeigen des Online-/Offline-Status' im Internet (Web Aware) erlauben
+[Allow others to view my primary e-mail address]
+Erlaube anderen meine erste E-Mail-Adresse zu sehen
+[Only reply to status message requests from users on my contact list]
+Nur auf Statusanfragen von Kontakten aus meiner Kontaktliste antworten
+[Only reply to status message request from visible contacts]
+Nur auf Statusanfragen von sichtbaren Kontakten antworten
+[Some options are greyed out because they can only be changed when you are online.]
+Ausgegraute Einstellungen können nur geändert werden, wenn Sie online sind.
+
+[Enable popup support]
+Popup-Unterstützung aktivieren
+[Display popup when spambot is detected]
+Zeige Popup, wenn Spambot entdeckt wurde
+[Look && Feel]
+Aussehen && Verhalten
+[Timeout (*)]
+Zeitüberschreitung
+[Fatal]
+Fataler Fehler
+[Spam detected]
+Spam entdeckt
+[&Use Windows colors]
+Windowsfarben verwenden
+[Use system &icons]
+System&icons verwenden
+[Sample Note]
+Beispiel: Hinweis
+[Sample Warning]
+Beispiel: Warnung
+[Sample Error]
+Beispiel: Fehler
+[Sample Fatal]
+Beispiel: Fataler Fehler
+[Sample Spambot]
+Beispiel: Spambot
+[Spambot Detected]
+Spambot entdeckt
+[Contact deleted & further events blocked.]
+Kontakt gelöscht und weitere Ereignisse blockiert.
+[Contact "%s" has closed the message window.]
+"%s" hat das Nachrichtenfenster geschlossen.
+[User "%s" was removed from server list.]
+Nutzer "%s" wurde aus der Serverliste entfernt.
+[Are you sure you want to remove your avatar?]
+Sind Sie sich sicher, dass Sie Ihren Avatar entfernen wollen?
+
+[External IP:]
+Externe IP:
+[Internal IP:]
+Interne IP:
+[Protocol Version:]
+Protokollversion:
+[ (DC Established)]
+ (Direktverbindung)
+[User Client:]
+Benutzerclient:
+[Online since:]
+Online seit:
+[System up since:]
+System an seit:
+[Idle since:]
+Untätig seit:
+
+[Open relationship]
+Offene Beziehung
+[Primary e-mail]
+Erste E-Mail
+[Secondary e-mail]
+Zweite E-Mail
+[Tertiary e-mail]
+Dritte E-Mail
+[Street]
+Straße
+[City]
+Stadt
+[State]
+Region
+[ZIP/postcode]
+Postleitzahl
+[Phone number]
+Telefon
+[Fax number]
+Fax
+[Cellular number]
+Mobiltelefon
+[Personal Detail]
+Persönliches Profil
+[Year of birth]
+Geburtsjahr
+[Month of birth]
+Geburtsmonat
+[Day of birth]
+Geburtstag
+[Marital Status]
+Familienstand
+[Close relationships]
+Feste Beziehung
+[Engaged]
+Verlobt
+[Married]
+Verheiratet
+[Divorced]
+Geschieden
+[Separated]
+Getrennt
+[Widowed]
+Verwitwet
+[Spoken language 1]
+erste Sprache
+[Spoken language 2]
+zweite Sprache
+[Spoken language 3]
+dritte Sprache
+[Originally from]
+Herkunft
+[Company name]
+Firmenname
+[Company homepage]
+Firmenhomepage
+[Company street]
+Straße
+[Company city]
+Stadt
+[Company state]
+Region
+[Company phone]
+Telefon (geschäftl.)
+[Company fax]
+Fax (geschäftl.)
+[Company ZIP/postcode]
+Postleitzahl (geschäftl.)
+[Company country]
+Land
+[Company department]
+Abteilung
+[Company position]
+Position
+[Company industry]
+Geschäftszweig
+[Company occupation]
+Berufsverkehr
+[Academic]
+Akademisch
+[Administrative]
+Verwaltung
+[Art/Entertainment]
+Kunst/Unterhaltung
+[College Student]
+Schüler
+[Community & Social]
+Gemeinde & Soziales
+[Education]
+Schule und Studium
+[Level]
+Schulart
+[Institute]
+Name der Hochschule
+[Degree]
+Akademischer Grad
+[Graduation Year]
+Abschlussjahr
+[Engineering]
+Ingenieurwesen
+[Financial Services]
+Finanzservice
+[High School Student]
+Mittelschüler
+[Law]
+Gesetz
+[Managerial]
+geschäftsführend
+[Manufacturing]
+Fertigung
+[Medical/Health]
+Medizin/Gesundheit
+[Non-Government Organization]
+Nichtpolitische Organisation
+[Professional]
+Experte
+[Retail]
+Einzelhandel
+[Retired]
+pensioniert
+[Science & Research]
+Forschung & Entwicklung
+[Science]
+Forschung
+[Technical]
+technisch
+[University Student]
+Student (Universitär)
+[Web building]
+Webentwicklung
+[Other services]
+Anderes
+[Personal Interests]
+Persönliche Interessen
+[Interest category 1]
+Interessengebiete 1
+[Interest areas 1]
+Interessen Text 1
+[Interest category 2]
+Interessengebiete 2
+[Interest areas 2]
+Interessen Text 2
+[Interest category 3]
+Interessengebiete 3
+[Interest areas 3]
+Interessen Text 4
+[Interest category 4]
+Interessengebiete 4
+[Interest areas 4]
+Interessen Text 4
+[Art]
+Kunst
+[Cars]
+Autos
+[Celebrity Fans]
+Fans
+[Collections]
+Sammlungen
+[Computers]
+Computer
+[Ecology]
+Ökologie
+[Culture & Literature]
+Kultur & Literatur
+[Culture]
+Kultur
+[Hobbies]
+Hobbys
+[ICQ - Providing Help]
+ICQ - Helfer
+[Lifestyle]
+Lebensart 
+[Movies/TV]
+Film/Fernsehen
+[Music]
+Musik
+[Outdoor Activities]
+Freiluftaktivitäten
+[Parenting]
+Elternschaft
+[Pets/Animals]
+Haustiere/Tiere
+[Science/Technology]
+Wissen/Technik
+[Skills]
+Fähigkeiten
+[Sports]
+Sportarten
+[Web Design]
+Webdesign
+[Nature and Environment]
+Natur & Umwelt
+[News & Media]
+News & Medien
+[Government]
+Politik
+[Business & Economy]
+Wirtschaft
+[Mystics]
+Mystik
+[Travel]
+Reisen
+[Astronomy]
+Astronomie
+[Space]
+Raumfahrt
+[Clothing]
+Kleidung
+[Parties]
+Partys
+[Women]
+Frauen
+[Social science]
+Sozialwissenschaft
+[60's]
+60er Jahre
+[70's]
+70er Jahre
+[80's]
+80er Jahre
+[50's]
+50er Jahre
+[Finance and Corporate]
+Finanzen & Firmen
+[Entertainment]
+Unterhaltung
+[Consumer electronics]
+Unterhaltungselektronik
+[Retail Stores]
+Kaufhäuser
+[Health and Beauty]
+Gesundheit & Schönheit
+[Media]
+Medien
+[Household Products]
+Haushaltsprodukte
+[Mail Order Catalog]
+Versandhauskatalog
+[Business Services]
+Unternehmen
+[Audio and Visual]
+Bild & Ton
+[Sporting and Athletic]
+sportlich & athletisch
+[Publishing]
+Verlagswesen
+[ICQ - Help]
+ICQ - Hilfe
+[Outdoors]
+Im Freien
+[Pets and Animals]
+Haustiere und Tiere
+[Movies and TV]
+Filme und TV
+[News and Media]
+News und Medien
+[Home Automation]
+Heimautomatisierung
+[Past Background]
+Vergangenheit
+[Category 1]
+Kategorie 1
+[Past Background 1]
+Vergangenheit 1
+[Category 2]
+Kategorie 2
+[Past Background 2]
+Vergangenheit 2
+[Category 3]
+Kategorie 3
+[Past Background 3]
+Vergangenheit 3
+[Elementary School]
+Grundschule
+[High School]
+Mittelschule
+[College]
+Gymnasium
+[University]
+Universität
+[Military]
+Militär
+[Past Work Place]
+ehemaliger Arbeitsplatz
+[Past Organization]
+ehemalige Organisation
+[Affiliations]
+Mitgliedschaften, Organisationen, Verbände
+[Affiliation category 1]
+Mitgliedschaft Kategorie 1
+[Affiliation 1]
+Mitgliedschaft Text 1
+[Affiliation category 2]
+Mitgliedschaft Kategorie 2
+[Affiliation 2]
+Mitgliedschaft Text 2
+[Affiliation category 3]
+Mitgliedschaft Kategorie 3
+[Affiliation 3]
+Mitgliedschaft Text 3
+[Alumni Org.]
+Studentenvereinigung
+[Charity Org.]
+Wohltätigkeitsverein
+[Club/Social Org.]
+Verein/Soziale Org.
+[Community Org.]
+Gemeine-Org.
+[Cultural Org.]
+Kulturelle Org.
+[Fraternity/Sorority]
+Bruder-/Schwesternschaft
+[Hobbyists Org.]
+Hobby-Organisationen
+[International Org.]
+Internationale Org.
+[Nature and Environment Org.]
+Natur- & Umwelt-Organisationen
+[Scientific/Technical Org.]
+Wissenschaftliche/Technische Org.
+[Self Improvement Group]
+Selbsterfahrungsgruppen
+[Spiritual/Religious Org.]
+Spirituelle/Religiöse Org.
+[Sports Org.]
+Sportverein
+[Support Org.]
+Unterstützungs-Org.
+[Trade and Business Org.]
+Handels- & Geschäfts-Org.
+[Union]
+Gewerkschaft
+[Volunteer Org.]
+Freiwilligen-Org.
+[60-above]
+60 und älter
+
+; Custom Status
+[Custom Status]
+XStatus
+[%s Custom Status]
+%s XStatus
+[Show custom status details]
+XStatus-Details anzeigen
+[Custom Status "%s" Details]
+XStatus "%s" Details
+[Message:]
+Nachricht:
+[Retrieving custom status details...]
+Empfange XStatus-Details ...
+[ICQ accepts only up to 8 characters in password.]
+ICQ akzeptiert nur eine Passwortlänge von 8 Zeichen.
+
+; resources.rc:IDD_ICQADVANCEDSEARCH
+[Marital status:]
+Familienstand:
+[Keywords:]
+Schlüsselw.
+[Language:]
+Sprache:
+[Interests]
+Interessen
+[Category:]
+Kategorie:
+[Search online users only]
+Suche nur nach Onlinenutzern
+
+;netlog errors and chan_04close.c
+[(error 0)]
+(Fehler 0)
+[AOL screennames not accepted]
+AOL-Benutzername wurde nicht aktzeptiert
+[Avatars: %s hash: %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X]
+Avatar: %s Hash: %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X
+[Avatars: %s hash: %02X%02X%02X%02X%02X%02X%02X%02X%02X]
+Avatard: %s Hash: %02X%02X%02X%02X%02X%02X%02X%02X%02X
+[Avatars: %s hash: Unknown hash format.]
+Avatar: %s Hash: Unbekanntes Hash-Format.
+[Connection failed.\nYour ICQ number or password was rejected (%d).]
+Verbindung fehlgeschlagen.\nICQ-Nummer oder Passwort wurden abgelehnt (%d).
+[Connection failed.\nThe server is temporarily unavailable (%d).]
+Verbindung fehlgeschlagen.\nDer Server ist temporär nicht verfügbar (%d).
+[Connection failed.\nThe server is temporally unavailable (%d).]
+Verbindung fehlgeschlagen.\nDer Server ist derzeit nicht erreichbar (%d).
+[Connection failed.\nServer has too many connections from your IP (%d).]
+Verbindung fehlgeschlagen.\nServer hat zu viele Verbindungen von Ihrer IP (%d).
+[Connection failed.\nYou have connected too quickly,\nplease wait and retry 10 to 20 minutes later (%d).]
+Verbindung fehlgeschlagen.\nDer Verbindungsaufbau erfolgte zu schnell,\nbitte warten Sie mindestens 30 Minuten und versuchen Sie es dann erneut, versuchen Sie sich auf keinen Fall in dieser Zeit erneut zu verbinden (%d).
+[Connection failed.\nThe server did not accept this client version.]
+Verbindung fehlgeschlagen.\nDer Server akzeptiert diese Clientversion nicht.
+[Connection failed.\nThe server is temporally unavailable (%d).]
+Verbindung fehlgeschlagen.\nDer Server ist temporär nicht verfügbar (%d).
+[Connection failed.\nYou were rejected by the server for an unknown reason.\nThis can happen if the UIN is already connected.]
+Verbindung fehlgeschlagen.\nSie wurden vom Server abgewiesen.\nDas kann passieren, wenn die ICQ-Nummer bereits angemeldet ist.
+[Connection failed.\nUnknown error during sign on: 0x%02x]
+Verbindung fehlgeschlagen.\nUnbekannter Fehler beim Anmelden: 0x%02x
+[Connection failed.\nSecure (MD5) login is not supported on this account.]
+Verbindung fehlgeschlagen.\nVerschlüsseltes (MD5-)Anmelden wird von diesem Konto nicht unterstützt.
+[Error uploading avatar to server, server temporarily unavailable.]
+Fehler beim Upload des Avatars auf den Server, der Server ist vorübergehend nicht verfügbar.
+[Error: Failed to send packet (no connection)]
+Fehler: Erfolglos versucht, das Paket zu senden (keine Verbindung)
+[Received SNAC(x%02X,x%02X), version %u]
+SNAC empfangen (x%02X,x%02X), Version %u
+[ Received SNAC(x%02X,x%02X)]
+SNAC empfangen (x%02X,x%02X)
+[ *** Yeehah, login sequence complete]
+ Die Login-Sequenz ist komplett. 
+[Client identified as %s]
+Client als %s identifiziert.
+[No client identification, put default ICQ client for protocol.]
+Keine Client-Authentifizierung, setze Standard ICQ-Client für das Protokoll.
+[Adding contact to cache: %u%s%s]
+Füge Kontakt zum Cache hinzu %u%s%s
+[Removing contact from cache: %u%s%s, position: %u]
+Entferne Kontakt vom Cache %u%s%s, Position: %u
+[Error uploading avatar to server, #%d]
+Fehler beim Upload des Avatars auf den Server, #%d
+[Warning: Received unexpected Avatar Reply SNAC(x10,x07).]
+Warnung: Unerwartetes Avatar ist eingegangen, SNAC (x10,x07).
+[Warning: Received unexpected Upload Avatar Reply SNAC(x10,x03).]
+Warnung: Unerwartetes Avatar ist eingegangen, SNAC (x10,x03).
+[Error uploading avatar to server, server refused to accept the image.]
+Fehler beim Avatarupload zum Server, der Server akzeptiert das Bild nicht.
+[Received invalid upload avatar ack.]
+Ungültiges Avatar ist eingegangen, ack.
+[Received empty avatar, nothing written (error 0x%x).]
+Ein leeres Avatar ist eingegangen, es wurde nicht geschrieben (Fehler 0x%x).
+[Error: Avatar data does not match avatar hash, ignoring.]
+Fehler: Avatardaten passen nicht zum Avatarhash, es wird ignoriert.
+[Unable to connect to migrated ICQ communication server]
+Es konnte keine Verbindung zum ICQ-Loginserver migriert werden.
+[Unable to connect to ICQ communication server]
+Es konnte keine Verbindung zum ICQ-Loginserver hergestellt werden.
+[You could not sign on because the server returned invalid data. Try again.]
+Anmeldung war nicht möglich, da der Server ungültige Daten sendete. Versuchen Sie es später noch einmal.
+[You have been disconnected from the ICQ network because the current server shut down.]
+Verbindung zum ICQ-Netzwerk wurde getrennt, da der aktuelle Server nicht erreichbar ist.
+[The server sent warning, this version is getting old.\nTry to look for a new one.]
+Der Server sendete die Warnung, dass diese Version alt wird.\nSuche nach einer neuen.
+[You have been disconnected from the ICQ network because you logged on from another location using the same ICQ number.]
+Sie wurden vom ICQ-Netzwerk getrennt, da Sie bereits von einem anderen Ort mit derselben ICQ-Nummer eingeloggt sind.
+[Unknown runtime error: 0x%02x]
+Unbekannter Laufzeitfehler: 0x%02x
+[We have no avatar, requesting from server.]
+Wir haben kein Avatar, fordern eins vom Server an.
+[We have different avatar, requesting new from server.]
+Wir haben ein unterschiedliches Avatar, fordern ein neues vom Server an.
+[Uploading our avatar data.]
+Hochladen unserer Avatardaten.
+[We could not obtain hash, removing hash.]
+Wir haben keinen Hash erhalten, der Hash wird nun entfernt.
+[Our file is different, set our new hash.]
+Unsere Datei ist verschieden, setze nun unseren neuen Hash.
+[Received UNKNOWN Avatar Status.]
+Ein UNBEKANNTER Avatarstatus ist eingegangen.
+[%s has changed Avatar.]
+%s hat das Avatar geändert.
+[%s has published Avatar.]
+%s hat ein Avatar veröffentlicht.
+[%s has published Avatar. Image was found in the cache.]
+%s hat ein Avatar veröffentlicht. Das Image wurde im Cache gefunden.
+[%s thread ended.]
+%s hat das Thema beendet.
+[Your connection with the ICQ avatar server was abortively closed]
+Ihre Verbindung mit dem ICQ-Avatar Server wurde ohne Erfolg geschlossen.
+
+; fam_04message.c
+[You are sending too fast. Wait a while and try again.\r\nSNAC(4.1) Error x02]
+Senden erfolgte zu schnell. Eine Weile warten und neu versuchen.\nSNAC(4.1) Fehler x02
+[You are sending too fast. Wait a while and try again.\r\nSNAC(4.1) Error x03]
+Senden erfolgte zu schnell. Eine Weile warten und neu versuchen.\nSNAC(4.1) Fehler x03
+[The user has logged off. Select 'Retry' to send an offline message.\r\nSNAC(4.1) Error x04]
+Kontakt ist offline gegangen. Bitte erneut als Offlinenachricht senden.\nSNAC(4.1) Fehler x04
+[The messaging service is temporarily unavailable. Wait a while and try again.\r\nSNAC(4.1) Error x05]
+Der Nachrichtendienst ist temporär nicht verfügbar. Warten Sie ein bisschen und versuchen Sie es dann erneut.\r\nSNAC(4.1) Fehler x05
+[The receiving client does not support this type of message.\r\nSNAC(4.1) Error x09]
+Der Client des Kontakts unterstützt diese Art der Nachricht nicht.\nSNAC(4.1) Fehler x09
+[You sent too long message. The receiving client does not support it.\r\nSNAC(4.1) Error x0A]
+Der Client des Empfängers unterstützt keine Nachrichten dieser Länge.\nSNAC(4.1) Fehler x0A
+[The SNAC format was rejected by the server.\nSNAC(4.1) Error x0E]
+Das SNAC-Format wurde vom Server abgelehnt.\nSNAC(4.1) Fehler x0E
+[The user is temporarily unavailable. Wait a while and try again.\r\nSNAC(4.1) Error x13]
+Der Kontakt ist zzt. nicht erreichbar. Eine Weile warten und erneut versuchen.\nSNAC(4.1) Fehler x13
+[SNAC(4.1) SENDMSG Error (x%02x)]
+SNAC(4.1) SENDMSG-Fehler (x%02x)
+[** This message was blocked by the ICQ server ** The message was invalid.]
+** Diese Nachricht wurde vom Server blockiert ** Die Nachricht ist ungültig.
+[** This message was blocked by the ICQ server ** The message was too long.]
+** Diese Nachricht wurde vom Server blockiert ** Nachricht ist zu lang.
+[** This message was blocked by the ICQ server ** The sender has flooded the server.]
+** Diese Nachricht wurde vom Server blockiert ** Der Sender hat den Server gefloodet.
+[** This message was blocked by the ICQ server ** You are too evil.]
+** Diese Nachricht wurde vom Server blockiert ** Sie sind zu böse. 
+[%s has closed the message window.]
+%s hat das Nachrichtenfenster geschlossen.
+
+; icqosc_svcs.c
+[User-ID]
+Nutzer-ID
+[You have not entered a ICQ number.\nConfigure this in Options->Network->ICQ and try again.]
+Sie haben keine ICQ-Nummer angegeben.\nDiese bitte unter Einstellungen -> Protokolle -> ICQ eintragen und neu versuchen.
+[The receiver has an invalid user ID.]
+Der Empfänger hat eine ungültige Benutzer-ID.
+[You cannot send messages when you are offline.]
+Nachrichten senden ist nicht möglich, wenn Sie offline sind.
+[Messages to offline contacts must be shorter than 450 characters.]
+Nachrichten an Offlinekontakte dürfen maximal 450 Zeichen haben!
+[Bad data (internal error #1)]
+Ungültige Daten (interner Fehler #1)
+[Bad data (internal error #2)]
+Ungültige Daten (interner Fehler #2)
+
+; icq_filetransfer.c
+[Your file transfer has been aborted because one of the files that you selected to send is no longer readable from the disk. You may have deleted or moved it.]
+Dateiübertragung abgebrochen, da eine der ausgewählten Dateien nicht mehr vorhanden ist. Entweder wurde diese gelöscht oder verschoben.
+[Your file receive has been aborted because Miranda could not open the destination file in order to write to it. You may be trying to save to a read-only folder.]
+Dateiübertragung abgebrochen, da Miranda die Zieldatei nicht schreiben kann. Sie haben vielleicht einen schreibgeschützten Ordner angegeben.
+[File transfer negotiation failed for unknown reason.]
+Datenübertragung aus unbekannten Gründen fehlgeschlagen.
+[The files are too big to be sent at once. Files bigger than 4GB can be sent only separately.]
+Die Dateien sind zu groß zum Verschicken. Dateien größer als 4 GB können nur getrennt gesendet werden.
+[The file transfer was aborted by the other user.]
+Dateiübertragung wurde durch die Gegenseite abgebrochen.
+[The file transfer failed: Proxy error]
+Dateiübertragung fehlgeschlagen: Proxyfehler
+[The file transfer failed: Invalid request]
+Dateiübertragung fehlgeschlagen: ungültige Anfrage
+[The file transfer failed: Proxy unavailable]
+Dateiübertragung fehlgeschlagen: Proxy nicht erreichbar
+[Failed to Initialize File Transfer. Unable to bind local port and File proxy unavailable.]
+Dateiübertragung konnte nicht initialisiert werden, da lokaler Port nicht geöffnet werden konnte und der Dateiproxy nicht erreichbar ist.
+[Connection lost during file transfer.]
+Verbindung ist während der Dateiübertragung abgebrochen.
+[The checksum of file \"%s\" does not match, the file is probably damaged.]
+Prüfsumme der Datei \"%s\" stimmt nicht überein, die Datei ist vermutlich beschädigt.
+
+; oscar_filetransfer.c
+[Failed to Initialize File Transfer. No valid files were specified.]
+Fehler mein initialisieren des Dateitransfers. Keine gültigen Dateien wurden ausgewählt.
+
+; fam_01service.c
+[A server migration has failed because the server returned invalid data. You must reconnect manually.]
+Probleme beim Datenaustausch mit dem Server, es wurden ungültige Daten vom Server gesendet. Bitte manuell neu verbinden.
+[Failed to request offline messages. They may be received next time you log in.]
+Fehler beim anfordern der Offlinenachricht. Sie können diese beim nächsten Verbinden empfangen.
+
+; log.c
+[ICQ Note]
+ICQ-Hinweis
+[ICQ Warning]
+ICQ-Warnung
+[ICQ Error]
+ICQ-Fehler
+[ICQ Fatal]
+Fataler ICQ-Fehler
+[The server did not respond to the connection attempt within a reasonable time, it may be temporarily down. Try again later.]
+Der Server antwortete nicht innerhalb eines bestimmten Zeitraums, er könnte temporär nicht erreichbar sein. Später erneut versuchen.
+[The connection with the server was abortively closed during the connection attempt. You may have lost your local network connection.]
+Der Verbindungsversuch zum Server wurde vorzeitig abgebrochen. Es könnte die lokale Netzwerkverbindung verloren gegangen sein.
+[Miranda was unable to resolve the name of a server to its numeric address. This is most likely caused by a catastrophic loss of your network connection (for example, your modem has disconnected), but if you are behind a proxy, you may need to use the 'Resolve hostnames through proxy' option in M->Options->Network.]
+Miranda war nicht in der Lage, den Servernamen zu der nummerischen Adresse zu finden. Dies bedeutet, dass die Internetverbindung verloren ging (Beispiel: Modem wurde getrennt); wenn Sie einen Proxy verwenden, aktivieren Sie "Auflösung von Hostnamen via Proxy" in den Netzwerkeinstellungen.
+[Miranda was unable to make a connection with a server. It is likely that the server is down, in which case you should wait for a while and try again later.]
+Miranda konnte keine Verbindung mit einem Server herstellen. Der Server ist vermutlich offline. Bitte etwas warten und später noch einmal versuchen.
+[Your proxy rejected the user name and password that you provided. Please check them in M->Options->Network.]
+Ihr Proxy hat den Benutzernamen und das Passwort abgewiesen. Überprüfen Sie die Einstellungen zum Proxy in den Netzwerkeinstellungen.
+[The server to which you are trying to connect does not exist. Check your spelling in M->Options->Network->ICQ.]
+Der angegebene Server existiert nicht. Eintrag prüfen unter Einstellungen -> Protokolle -> ICQ.
+[Deleting Offline Messages from server failed.\nYou will probably receive them again.]
+Offlinenachrichten konnten vom Server nicht gelöscht werden.\nSie empfangen sie vermutlich erneut.
+
+; icq_server.cpp
+[Miranda was unable to allocate a port to listen for direct peer-to-peer connections between clients. You will be able to use most of the ICQ network without problems but you may be unable to send or receive files.\n\nIf you have a firewall this may be blocking Miranda, in which case you should configure your firewall to leave some ports open and tell Miranda which ports to use in M->Options->ICQ->Network.]
+Miranda IM konnte den Port für die direkte P2P-Verbindung zwischen den Clients nicht zuweisen. Sie können das ICQ-Netzwerk ohne Probleme benutzen (z.B. die Suche), allerdings können keine Daten empfangen oder gesendet werden..\n\nFalls Sie eine Firewall haben, blockt diese evtt. Miranda IM. Kontrollieren Sie alle Einstellungen und überprüfen Sie alle Ports die Miranda IM und ICQ benötigen unter Einstellungen - ICQ KOnto - Verbindungseinstellungen und Einstellungen - Protokolle.
+[Unable to connect to ICQ login server]
+Konnte sich nicht mit dem ICQ-Loginserver verbinden.
+[Connection failed.\nLogin sequence failed for unknown reason.\nTry again later.]
+Verbindungsversuch aus unbekannter Ursache fehlgeschlagen.\nBitte in 30 Minuten noch einmal versuchen.
+[Your connection with the ICQ server was abortively closed]
+Ihre Verbindung mit dem ICQ-Server wurde vorzeitig abgebrochen.
+[Unable to connect to ICQ login server, SSL could not be negotiated]
+Die Verbindung zum ICQ-Loginserver konnte nicht hergestellt werden, SSL konnte nicht ausgehandelt werden.
+
+; icq_servlist.cpp
+[The contact's information was too big and was truncated.]
+Die Kontaktinformationen sind zu groß und werden abgekürzt.
+
+; fam17_signon.cpp
+[Secure login failed.\nInvalid server response.]
+Sicherer Login schlug fehl.\nUngültige Serverantwort.
+[Secure login failed.\nInvalid key length.]
+Sicherer Login schlug fehl.\nFalsche Schlüssellänge.
+
+[Change ICQ Details]
+ICQ-Profil ändern
+[Confirm New Password]
+Neues Passwort bestätigen
+[Confirm Password Change]
+Passwortänderung bestätigen
+[Please re-type your new password:]
+Bitte neues Passwort hier eingeben:
+[Enter your current password:]
+Aktuelles Passwort hier eingeben:
+[The password does not match your current password. Check Caps Lock and try again.]
+Passwort stimmt nicht mit Ihrem aktuellen überein. Ist die Feststelltaste aktiviert?
+[This password does not match the password you originally entered. Check Caps Lock and try again.]
+Das Passwort stimmt nicht mit dem vorherigen Passwort überein. Bitte ändern und erneut versuchen.
+[The ICQ server does not support passwords longer than 8 characters. Please use a shorter password.]
+Der ICQ-Server unterstützt keine Passwörter, die länger als 8 Zeichen sind. Bitte ein kürzeres Passwort verwenden.
+
+; changeinfo/dlgproc.c
+[Unknown value]
+Unbekannter Wert
+[You've made some changes to your ICQ details but it has not been saved to the server. Are you sure you want to close this dialog?]
+Sie haben Änderungen an Ihren ICQ-Details vorgenommen, diese wurden aber noch nicht auf dem Server gespeichert. Trotzdem schließen und nicht speichern?
+[You are not currently connected to the ICQ network. You must be online in order to update your information on the server.]
+Sie sind nicht mit dem ICQ-Netzwerk verbunden.\nSie müssen online sein um das ICQ-Profil auf dem Server aktualisieren zu können.
+[&Save changes]
+Änderungen &speichern
+[Upload in progress...]
+Upload erfolgt...
+[Upload complete]
+Upload fertig
+[Upload FAILED]
+Upload FEHLGESCHLAGEN
+
+[Add to server list]
+Zur Serverliste hinzufügen
+[Revoke authorization]
+Autorisierung widerrufen
+
+[Confirmation]
+Bestätigung
+[Are you sure you want to revoke user's authorization (this will remove you from his/her list on some clients) ?]
+Sind Sie sich sicher, dass Sie diesem Kontakt Ihre Autorisierung entziehen wollen?\nDies entfernt Sie von dessen Kontaktliste in einigen Clients.
+
+[Enter ICQ Password]
+ICQ-Passwort eingeben
+[Enter a password for UIN %d:]
+Bitte Passwort für UIN %d eingeben:
+[Remember this session password]
+Dieses Sitzungspasswort merken

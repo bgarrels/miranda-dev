@@ -1,0 +1,304 @@
+; Pluginname: NewAwaySystem (Mod)
+; Version: 0.3.8.4
+; Dateiname: NewAwaySys.dll (Ansi), NewAwaySysW.dll (Unicode)
+; Unique ID: {b2dd9270-ce5e-11df-bd3d-0800200c9a66}
+; Autor(en): NightFox; Deathdemon; XF007; Goblineye Entertainment
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2626
+; Übersetzung: 19.08.05 von Dober
+
+[Statuses messages]
+Statusnachrichten
+
+; keine >>> - <<< zwischen den Variablen! 
+[Your most recent status messages are placed in this category. It's not recommended to put your messages manually here, as they'll be replaced by your recent messages.]
+Ihre letzten Statusnachrichten werden in diese Kategorie gelegt. Es wird nicht empfohlen, Ihre Nachrichten manuell hier zu setzen, da sie durch Ihre neuen Nachrichten ersetzt werden.
+[You may put your frequently used and favorite messages in this category.]
+Sie können Ihre häufig benutzten und bevorzugten Nachrichten in diese Kategorie setzen.
+[Edit status messages]
+Statusnachrichten bearbeiten
+[Autoreply]
+Autom. Antwort
+[Predefined messages]
+Vordefinierte Nachrichten
+[Recent messages]
+Letzte Nachrichten
+[Default messages]
+Standardnachrichten
+[Miranda IM autoreply >\r\n%nas_message%]
+Miranda-IM-Autoantwort >\r\n%nas_message%
+[`[`?cdate()-?ctime()`]`  ?cinfo(%subject%,display) (?cinfo(%subject%,id)) read your %nas_statdesc% message:\r\n%nas_message%\r\n\r\n]
+`[`?cdate() - ?ctime()`]`  ?cinfo(%subject%,display) (?cinfo(%subject%,id)) liest deine %nas_statdesc% Nachricht:\r\n%nas_message%\r\n\r\n
+[) read your ]
+) liest Ihre 
+[message:\r\n]
+Nachricht:\r\n
+[Set %s message for %s]
+Setze %s Nachricht für %s
+[Stranger]
+Unbekannter
+[%d hours]
+%d Stunden
+[%d minutes]
+%d Minuten
+[%d seconds]
+%d Sekunden
+[NewAwaySys: Incoming status message request]
+NewAwaySys: Eingehende Statusnachrichtenanfrage
+[Away since time in format x (x is optional)]
+Weg seit Zeit im Format x (x ist optional)
+[Away since date in format x (x is optional)]
+Weg seit Datum im Format x (x ist optional)
+[Status description]
+Statusbeschreibung
+[Your nick for current protocol]
+Ihr Alias für derzeitiges Protokoll
+[Number of status message requests from the contact]
+Anzahl der Statusnachrichtenanfragen eines Kontaktes
+[Number of messages from the contact]
+Anzahl der Nachrichten eines Kontaktes
+[Time passed until request]
+Vergangene Zeit seit einer Anfrage
+[Your status message (this variable is used in log and popup format strings only)]
+Ihre Statusnachricht (diese Variable wird nur im Verlauf und im Popuptext verwendet)
+[Returns one of your predefined messages by its title: ?nas_predefinedmessage(creepy)]
+Gibt eine der vordefinierten Nachrichten, benannt nach Titel, zurück: ?nas_predefinedmessage(Gruselig)
+[Current protocol name]
+Derzeitiger Protokollname
+[Toggle autoreply on/off]
+Autom. Antwort ein-/ausschalten
+[Toggle autoreply off]
+Autom. Antwort ausschalten
+[Toggle autoreply on]
+Autom. Antwort einschalten
+[extended status]
+erweiterter Status
+[contacts *]
+Kontakte *
+[Do you want to apply the message?]
+Möchten Sie diese Nachricht übernehmen?
+[New Away System]
+Neues Abwesenheitssystem
+[Away System]
+Abwesenheitssystem
+[Set ]
+Setze 
+[for ]
+für 
+[      Log status requests to a file]
+      Statusanfragen protokollieren
+[Path]
+Pfad
+[Append UIN to file name]
+UIN an Dateinamen anhängen
+[Variables plugin is not installed]
+Variables-Plugin ist nicht installiert.
+[Log requests only if popup notification for a contact is enabled]
+Anfragen nur bei aktivierter Popupbenachrichtigung f. einen Kontakt protokollieren
+[Write in unicode]
+In Unicode schreiben
+[      Popup notification]
+      Popupbenachrichtigung
+[Popup text format]
+Popuptextformatierung
+[Log to a file only when popup notification for a contact is enabled]
+Nur in Datei loggen, wenn Popupbenachrichtigung für Kontakt aktiviert
+[Only notify when:]
+Benachrichtigen bei:
+[&Away]
+&Abwesend
+[&NA]
+Außer Haus
+[Occ&upied]
+Beschäftigt
+[&DND]
+Bitte nicht stören
+[&Free for chat]
+&Für Chat bereit
+[&Other]
+Andere
+[Enable autoreply]
+Autoantwort aktivieren
+[On event...]
+Beim Ereignis
+[Don't reply to ICQ contacts]
+Nicht an ICQ-Kontakte senden
+[Don't reply when I'm invisible to the contact]
+Nicht senden, wenn ich unsichtbar bin
+[Send maximum]
+Maximal
+[times (-1=infinite)]
+-mal senden (-1=unendlich)
+[Reset this counter also when I just change my status text\n(when status icon remains the same)]
+Diesen Zähler auch zurücksetzen, wenn ich nur die Statusnachricht ändere (Statusicon verändert sich nicht)
+[Disable autoreply when...]
+Autoantwort deaktivieren bei:
+[Autoreply format:]
+Format der Autoantwort:
+[%extratext% is your status message]
+%extratext% = Ihre Statusnachricht
+[Save autoreply to the history]
+Autoantwort im Verlauf speichern
+[Reply only when Idle]
+Nur antworten, wenn abwesend
+[Reply only when contact's message window is closed]
+Nur antworten, wenn Kontakt Fenster geschlossen hat
+[Autoreply format]
+Autom. Antwort Format
+[Disable autoreply when]
+Autom. Antwort deaktivieren bei
+[&Invisible]
+Uns&ichtbar
+[On the &Phone]
+Am Telefon
+[Out to &Lunch]
+Zum Essen
+[      Autoreply]
+      Autom. Antwort
+[Se&ttings]
+Eins&tellungen
+[Ignore requests]
+Anfragen ignorieren
+[Send an autoreply]
+Autoantwort senden
+[New &Category]
+Neue Kategorie
+[Save As &New]
+Speichern u&nter
+[Use this message as default for]
+Diese Nachricht als Standard verwenden
+[New message]
+Neue Nachricht
+[New category]
+Neue Kategorie
+[seconds before closing the status message dialog (-1=don't close)]
+Sekunden, bevor sich das Fenster schließt (-1 = nie schließen)
+[Store]
+Speichere
+[most recent messages (0=disable)]
+letzte Nachrichten (0 = keine)
+[...for each status separately]
+... für jedes Protokoll separat
+[By default...]
+Als Standard...
+[Use the most recent message]
+Letzte Nachricht benutzen
+[Use the default message]
+Standardnachricht benutzen
+[Reset per-protocol messages when changing global status]
+Protokollnachrichten bei globaler Statusänderung zurücksetzen
+[Store protocol messages for each status separately]
+Protokollnachrichten für jeden Status separat speichern
+[Store protocol autoreply settings for each status separately]
+Protokollautoantworteinstellungen für jeden Status separat speichern
+[Remember last message used for a contact...]
+Letzte Nachricht für einen Kontakt verwenden...
+[Store contact autoreply/ignore settings for each status separately]
+Kontaktautoantwort/-ignoriereinstellungen für jeden Status separat speichern
+[Enable contact menu items]
+Eintrag im Kontaktmenü aktivieren (*)
+[Use protocol specific nick for %nas_mynick%]
+Protokollspezifischen Alias für %nas_mynick% verwenden
+[Update status messages for non-ICQ protocols every]
+Aktualisiere Statusnachricht für Nicht-ICQ-Kontakte alle
+[Don't show the message dialog for]
+Nachrichtenfenster nicht zeigen für
+[Set away message window options]
+Abwesenheitsnachrichtenfenstereinstellungen setzen
+[Show predefined &messages]
+Vordefinierte Nachrichten zeigen
+[Show &contacts]
+Kontakte zeigen
+[Save default window settings &automatically]
+Standardfenstereinstellung &automatisch speichern
+[&Save current window settings as default]
+Aktuelle Fenstereinstellung als Standard &speichern
+[Disable parsing of status messages by Variables plugin]
+Parsen der Statusnachricht vom Variablenplugin deaktivieren
+[Message tree menu]
+Nachrichten-Baumstruktur
+[Create new &message]
+Neue Nachricht erstellen
+[Create new &category]
+Neue Kategorie erstellen
+[Message tree category menu]
+Nachrichten-Baumstrukturmenü
+[Set as &default for]
+Als Stan&dard setzen für
+[Note: these settings are applied to all status modes at once.]
+Hinweis: Diese Einstellungen betreffen alle Statusmodi.
+[Means the setting is different for different status modes / contacts]
+bedeutet, dass die Einstellung für unterschiedl. Statusmodi/Kontakte verschieden ist
+[Notify of requests]
+Anfragen benachrichtigen
+[Don't notify of requests]
+Nicht benachrichtigen
+[Autoreply on]
+Autoantw. an
+[Autoreply off]
+Autoantw. aus
+[Don't send status message]
+Statusnachricht nicht senden
+[) is reading your ]
+) liest Ihre 
+[ message:\r\n]
+ Nachricht:\r\n
+[You've made changes to multiple Message trees at a time.\r\nDo you want to leave changes in "]
+Sie haben viele Einstellungen in der Nachrichtenbaumstruktur vorgenommen.\r\nMöchten Sie die Einstellungen beibehalten in "
+[" dialog?\r\nPress Yes to leave changes in this dialog, or No to discard its changes and save changes of the other Message tree instead.]
+"?\r\n\Drücken Sie Ja, um die Änderungen beizubehalten, oder Nein, um diese zu verwerfen und die Einstellungen in einer anderen Nachrichtenbaumstruktur zu speichern.
+[Do you really want to delete this ]
+Möchten Sie wirklich diese 
+[category with its messages?]
+Kategorie mit allen Nachrichten löschen?
+[message?]
+Nachricht löschen?
+[Create new message]
+Erstelle neue Nachricht
+
+[Create new category]
+Neue Kategorie erstellen
+[Save as a new message]
+Als neue Nachricht speichern
+[Save, replacing the selected message]
+Speichern und ausgewählte Nachricht ersetzen
+[Show settings menu]
+Einstellungsmenü zeigen
+[Use the default setting]
+Standardeinstellung verwenden
+[ message]
+ Nachricht
+[ for ]
+ für 
+[Set %s message for the contact]
+%s-Nachricht für diesen Kontakt
+[Store for each status separately]
+Für jeden Status separat speichern
+
+[Been gone since %nas_awaysince_time%, will be back later.]
+Ich bin seit ?nas_awaysince_time(HH:mm) nicht da. Ich bin später wieder da.
+[I've been on the phone since %nas_awaysince_time%, give me a sec!]
+Ich bin seit ?nas_awaysince_time(HH:mm) am Telefon. Bitte warte kurz!
+[Been having ?ifgreater(?ctime(H),2,?ifgreater(?ctime(H),10,?ifgreater(?ctime(H),16,supper,dinner),breakfast),supper) since %nas_awaysince_time%.]
+Ich bin seit ?nas_awaysince_time(HH:mm) beim ?ifgreater(?ctime(H),2,?ifgreater(?ctime(H),10,?ifgreater(?ctime(H),16,Abendessen,Mittagessen),Frühstück),Abendessen)
+[?cinfo(%subject%,display) (?cinfo(%subject%,id)) is reading your %nas_statdesc% message:\r\n%nas_message%]
+?cinfo(%subject%,display) (?cinfo(%subject%,id)) liest deine %nas_statdesc%-Nachricht:\r\n%nas_message%
+[Gone fragging]
+Zocken
+[Been fragging since %nas_awaysince_time%, I'll msg you later when the adrenaline wears off.]
+Ich zocke seit ?nas_awaysince_time(HH:mm). Ich antworte dir, sobald der Adrenalinschub nachgelassen hat.
+[Creepy]
+Gruselig
+[Your master, %nas_mynick%, has been %nas_statdesc% since the day that is only known as ?nas_awaysince_date(dddd)... When he gets back, I'll tell him you dropped by...]
+Euer Meister %nas_mynick% ist %nas_statdesc% seit dem Tag, der bekannt ist als ?translate(?nas_awaysince_date(dddd))... Sobald er zurückkommt, werde ich ihm von Euch berichten...
+
+[Gone since %nas_awaysince_time%, will be back later.]
+Weg seit ?nas_awaysince_time(HH:mm). Bin später wieder da.
+[Having my ?ifgreater(?ctime(H),2,?ifgreater(?ctime(H),10,?ifgreater(?ctime(H),16,supper,dinner),breakfast),supper) since %nas_awaysince_time%.]
+Ich bin seit ?nas_awaysince_time(HH:mm) beim ?ifgreater(?ctime(H),2,?ifgreater(?ctime(H),10,?ifgreater(?ctime(H),16,Abendessen,Mittagessen),Frühstück),Abendessen).
+[I'm on the phone since %nas_awaysince_time%, give me a sec!]
+Ich bin seit ?nas_awaysince_time(HH:mm) am Telefon. Bitte warte bitte kurz!
+[Your master, %nas_mynick%, is %nas_statdesc% since the day that is only known as ?nas_awaysince_date(dddd)... When he gets back, I'll tell him you dropped by...]
+Euer Meister %nas_mynick% ist %nas_statdesc% seit dem Tag, der bekannt ist als ?translate(?nas_awaysince_date(dddd))... Sobald er zurückkommt, werde ich ihm von Euch berichten...
+
+[New Away System plugin for Miranda IM.  Build #2628 [Oct 13 2007 14:55:05 Unicode]
+Das Plugin New Away System für Miranda IM bietet erweiterte Awaynachrichten. Build #2628 [Oct 13 2007 14:55:05 Unicode]

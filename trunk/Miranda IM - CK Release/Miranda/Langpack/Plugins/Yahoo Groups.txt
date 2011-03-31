@@ -1,0 +1,11 @@
+; Pluginname: Yahoo Groups
+; Version: 0.0.1.0
+; Dateiname: YahooGroups.dll
+; Author: eblis
+; Link (Alternative): http://addons.miranda-im.org/details.php?action=viewfile&id=3548 
+; Übersetzung: 04.01.08 von miroerr
+
+[Move yahoo contacts to groups now]
+Yahoo-Kontakte nun in Gruppen verschieben
+[Move Yahoo contacts automatically on startup]
+Yahoo-Kontakte automatisch beim Start verschieben

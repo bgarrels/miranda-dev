@@ -1,0 +1,59 @@
+; Pluginname: Twitter Protocol 
+; Version: 0.0.9.8
+; Dateiname: twitter.dll 
+; Unique ID: {bc09a71b-b86e-4d33-b18d-82d30451dd3c}
+; Autor: dentist
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4329
+; Website: http://github.com/dentist/miranda-twitter
+; SVN: http://twitmiranda.googlecode.com/svn/trunk/
+; Übersetzung: kaye_styles am 01.04.2009
+
+[Create a new Twitter account]
+Erstelle ein neues Twitter-Konto
+
+[Base URL:]
+Basis-URL:
+[Misc. Options]
+Div. Einstellungen
+[Once every]
+Einmal alle
+[Polling rate:]
+Abrufrate:
+[Use group chat for Twitter feed]
+Nutze Gruppenchat für Twitter-Feed
+[Send Tweet for %s]
+Sende Tweet für %s
+[The Twitter protocol plugin cannot be loaded. ]
+Das Twitter-Protokoll konnte nicht geladen werden. 
+[It requires Miranda IM 0.8.0.29 or later.]
+Es wird mindestens Miranda IM 0.8.0.29 benötigt.
+
+[Enable popup notifications for Tweets]
+Aktiviere Popupbenachrichtigungen
+[But not during sign-on]
+Aber nicht während der Anmeldung
+[Timeouts]
+Verzögerungen
+[Use Windows colors]
+Windowsfarben
+[Use Popup colors]
+Standardfarben
+[Use custom colors]
+Benutzerdefiniert
+[%s Protocol]
+%s-Protokoll
+[Your username/password combination was incorrect.]
+Ihre Benutzername/Kennwort-Eingaben sind falsch.
+[While adding a friend, an error occurred: ]
+Ein Fehler ist aufgetreten, während Sie versucht haben, einen Kontakt hinzuzufügen: 
+[Please enter a username.]
+Bitte geben Sie einen Benutzernamen ein.
+[Please enter a password.]
+Bitte geben Sie das Kennwort ein.
+
+[Send Tweet...]
+Tweet senden...
+[Reply...]
+Antworten...
+[Visit Homepage]
+Homepage besuchen

@@ -1,0 +1,16 @@
+; Pluginname: NoHistory
+; Version: 0.1.0.2
+; Dateiname: nohistory.dll
+; Autor: sje
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3197
+; Übersetzung: 19.10.06 von Weishaupt
+; Besonderheiten: Entwicklung eingestellt!
+
+[Keep history for this contact]
+Behalte Verlauf für diesen Kontakt
+[Disable history for this contact]
+Deaktiviere Verlauf für diesen Kontakt
+[Enable History]
+Verlauf aktivieren
+[Disable History]
+Verlauf deaktivieren

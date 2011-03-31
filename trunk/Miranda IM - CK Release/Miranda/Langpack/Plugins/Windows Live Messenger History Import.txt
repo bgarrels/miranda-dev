@@ -1,0 +1,38 @@
+; Pluginname: Windows Live Messenger History Import 
+; Version: 0.8.0.0
+; Dateiname: wlmHistoryImport.dll
+; Autor: VCD (Very Crazy Dog)
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3826
+; Übersetzung: 08.08.08 von Baschti
+
+[MessageLog.xsl missing. Is this a Windows Live Messenger database folder?]
+MessageLog.xsl nicht gefunden. Haben Sie den WLM-Datenbank-Ordner ausgewählt?
+[From Windows Live Messager database.]
+vom Windows Live Messenger
+[Please notice that only history of existing contacts in Miranda IM will be imported.]
+Bitte beachten: Es werden nur Nachrichten von existierenden Kontakten in Miranda IM importiert.
+[Warning:\nPlease make sure Windows Live Messenger is not running!]
+Warnung:\nBitte stellen Sie sicher, dass der WLM geschlossen ist!
+[WLM History Import]
+WLM-Verlaufs-Import
+[Your MSN plugin is not loaded...]
+MSN-Protokoll ist deaktiviert...
+[Please specify the directory that store the Windows Live Messager history. This is usually at\n\n%USERPROFILE%\My Documents\My Received Files\]
+Bitten geben Sie den Ordner an, in dem die WLM-Nachrichten gespeichert sind. Meistens:\n\nEigene Dateien\Meine empfangenen Dateien\%PROFILNAME%\Verlauf\
+[This wizard will help you import message history from Windows Live Messenger.]
+Dieser Assistent hilft Ihnen dabei, den Nachrichtenverlauf vom WLM zu importieren.
+[Please select the Windows Live Messenger database directory:]
+Bitte wählen Sie den WLM-Datenbank-Ordner aus:
+[It is recommended that you create a backup of your current Miranda IM profile before importing.]
+Es wird empfohlen, das aktuelle Miranda-Profil vor dem Importieren zu sichern.
+[WLM History Importer Wizard]
+WLM-Verlaufs-Import-Assistent
+[Please choose the account that the history will import to:]
+Bitte wählen Sie den Account, in den der Verlauf importiert wird:
+[There is no MSN account...]
+Kein MSN-Account vorhanden...
+[Click "Next" to choose the information you wish to import, or click "Cancel" to exit the wizard and continue using Miranda IM.]
+Klicken Sie auf "Weiter", um die gewünschten Informationen zu importieren, oder klicken Sie auf "Abbrechen", um die Importfunktion zu beenden.
+
+[Import history from Windows Live Messenger.]
+Importiert den Verlauf vom Windows Live Messenger.

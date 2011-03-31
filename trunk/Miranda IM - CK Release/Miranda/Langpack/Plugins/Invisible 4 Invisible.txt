@@ -1,0 +1,16 @@
+; Pluginname: Invisible 4 Invisible 
+; Version: 0.0.1.7
+; Dateiname: inv4inv.dll
+; Autor: remickk
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2981
+; Übersetzung: walla am 22.02.07
+; Besonderheiten: Entwicklung eingestellt!
+
+[Active Protocols:]
+Aktive Protokolle:
+[Stay Visible for ICQ contact who went Invisible but is Always Visible for us]
+Unsichtbare Kontakte die trotzdem sichtbar sind ausnehmen.
+[Enable Invisible 4 Invisible]
+Aktiviere Invisible 4 Invisible
+[Disable Invisible 4 Invisible]
+Deaktiviere Invisible 4 Invisible

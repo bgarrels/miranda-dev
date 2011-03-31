@@ -1,0 +1,37 @@
+; Pluginname: Stocks
+; Version: 0.0.0.1
+; Dateiname: stocks.dll
+; Autor: Angelo Luiz Tartari
+; Übersetzung: 12.08.05 von Dober
+
+[Stocks]
+Aktien
+
+[Stock]
+Aktie
+[Retrieve information at &startup]
+Informationen beim &Start empfangen
+
+[Adding new stock]
+Neue Aktie anlegen
+[Read the Stocks-symbols.txt file.]
+Bitte Stocks-symbols.txt lesen.
+[Display information using the following format:]
+Information in folgendem Format anzeigen:
+[Variables: #title#, #lasttrade#, #date#, #time#, #change#, #volume#, #open#, #high#, #low#]
+Variablen: #title#, #lasttrade#, #date#, #time#, #change#, #volume#, #open#, #high#, #low#
+[Enter a value greater than zero in Minutes field.]
+Bitte einen größeren Wert als Null im Feld "Minuten" eingeben.
+[Enter a value in Symbol field.]
+Bitte Text im Feld "Icon" eingeben.
+
+[Select a stock to manage.]
+Bitte Aktie zum Edieren auswählen.
+[Manage stock]
+Aktie bearbeiten
+
+[Select a stock to delete.]
+Bitte Aktie zum Löschen auswählen.
+
+[&Update all stocks]
+Alle Aktien akt&ualisieren

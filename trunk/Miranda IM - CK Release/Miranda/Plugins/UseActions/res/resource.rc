@@ -1,0 +1,2 @@
+#include "UseActions.rc"
+#include "version.rc"

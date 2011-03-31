@@ -1,0 +1,63 @@
+; Pluginname: File Association Manager 
+; Version: 0.1.1.0
+; Dateiname: assocmgr.dll 
+; Autor: hrathh
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3457
+; Link Unicode: http://addons.miranda-im.org/details.php?action=viewfile&id=3458
+; Übersetzung: hrathh
+
+[Handles file type associations and URLs like aim, ymsgr, xmpp, wpmsg, gg, tlen.]
+Verwaltet Verknüpfungen mit Dateien und URLs wie aim, ymsgr, xmpp, wpmsg, gg, tlen.
+[The File Association Manager Plugin can not be loaded. It requires Miranda IM %s or later.]
+Das "File Association Manager"-Plugin kann nicht geladen werden. Es benötigt Miranda IM %s oder höher.
+
+[Associations are available]
+Verknüpfungen sind verfügbar
+[Associations]
+Verknüpfungen
+[Associations for Miranda IM]
+Verknüpfungen, die mit Miranda IM assoziiert sind:
+[%hs files]
+%hs-Dateien
+[URLs on Websites]
+URLs auf Webseiten
+[File Types]
+Dateitypen
+[&Start Miranda IM automatically when the Computer starts (using current profile)]
+Miranda IM automatisch bei &Systemstart ausführen (mit dem aktuellen Profil)
+[Only associate with Miranda IM while it is &running]
+Verknüpfungen sind nur aktiv wenn Miranda ausgefüh&rt wird.
+[Miranda IM is not run automatically when the computer is started.]
+Miranda wird bei Systemstart nicht automatisch gestartet.
+[Miranda IM is run automatically when the computer is started.]
+Miranda wird bei Systemstart automatisch gestartet.
+
+[File Association Error]
+Verknüpfungsproblem
+[There was an error writing to the registry to modify the file/url associations.\nReason: %s]
+Es trat ein Fehler auf beim Schreiben in die Systemregistrierung. Die Datei- bzw. URL-Verknüpfungen konnten nicht verändert werden.\nGrund: %s
+[Autostart Error]
+Autostart-Fehler
+[There was an error writing to the registry to modify the autostart list.\n\nReason: %s]
+Es trat ein Fehler beim Schreiben in die Systemregistrierung auf. Der Autostarteintrag konnte nicht verändert werden.\n\nGrund: %s
+[Miranda IM could not open the file]
+Miranda IM konnte die angegebene Datei nicht öffnen
+[Miranda IM was not able to open "%s".\n\nThere is no registered handler for this file type.]
+Die Datei "%s" konnte von Miranda IM nicht geöffnet werden.\n\nFür den Dateityp ist kein Handler definiert.
+[Miranda IM was not able to open "%s".\n\nThe file could not be processed.]
+Die Datei "%s" konnte von Miranda IM nicht geöffnet werden.\n\nBeim Verarbeiten der Datei trat ein Fehler auf.
+[Miranda IM could not open the URL]
+Miranda IM konnte die angegebene URL nicht öffnen
+[Miranda IM was not able to open "%s".\n\nThere is no registered handler for this URL type.]
+Die URL "%s" konnte von Miranda IM nicht geöffnet werden.\n\nFür den URL-Typ ist kein Handler definiert.
+[Miranda IM was not able to open "%s".\n\nThe given URL is invalid and can not be parsed.]
+Die Datei "%s" konnte von Miranda IM nicht geöffnet werden.\n\nDie URL ist ungültig und kann nicht ausgewertet werden.
+[Miranda IM and its plugins are capable to handle the following\nfile types and website links:]
+Miranda IM und dessen Plugins sind fähig folgende Dateitypen und Weblinks zu öffnen:
+
+[The settings can be modified later on again in Options -> Services -> Associations]
+Die Einstellungen können später unter Einstellungen -> Dienste -> Verknüpfungen geändert werden.
+[File Association Manager]
+Verknüpfungen verwalten
+[Miranda IM Database]
+Miranda IM-Datenbank

@@ -1,0 +1,137 @@
+; Pluginname: HotKeys Plus 
+; Version: 0.1.6.0
+; Dateiname: HotkeysPlus.dll
+; Autor: lite
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2932
+; Übersetzung: 0123hallo/Foso
+
+[Associated key]
+Zugewiesene Taste
+[1st argument]
+1. Argument
+[2nd argument]
+2. Argument
+
+[Check]
+Überprüfung
+[Checking]
+Überprüfen
+[Disable items]
+Einträge deaktivieren
+[Drop repeated hotkeys]
+Mehrfache Hotkeys verwerfen
+[Consistency Checking]
+Übereinstimmung prüfen
+[Remove same items]
+Gleiche Einträge entfernen
+[Remove items with unexisting services]
+Einträge mit nicht existierenden Diensten löschen
+[Items associated with the same hotkey]
+Einträge mit dem selben Hotkey
+
+[Sounds of Typing]
+Geräusch beim Tippen
+[In private chat only]
+Nur im privaten Chat
+[Enable Contact Menu item]
+Kontaktmenüeintrag anzeigen
+[Variable name for selected text]
+Variablenname für den ausgewählten Text
+[Allow multiple services on single hotkey]
+Mehrere Dienste auf einem Hotkey ermöglichen
+
+[Fill]
+Füllen
+[<<-- Pass to List]
+Zur Liste hinzufügen
+[<< List]
+<< Liste
+[Scope]
+Wirkungsbereich
+
+[&Custom...]
+Eigener Eintrag...
+[&Add custom...]
+Eigener Eintrag...
+[Edit [Double Click]]
+Ändern [&Doppelklick]
+[Add hotkey]
+Hotkey hinzufügen
+[Add new hotkey]
+Neuen Hotkey hinzufügen
+[Edit selected item in the list]
+Ausgewählten Eintrag bearbeiten
+[Delete selected item in the list]
+Ausgewählten Eintrag löschen
+[Use \"Add hotkey\" item in Contact Menu]
+"Hotkey hinzufügen"-Eintrag im Kontaktmenü benutzen
+[Run selected item in the list]
+Ausgewählten Eintrag starten
+[Set hot key]
+Hotkey setzen
+[Show or hide]
+Anzeigen oder verstecken
+[Show or hide titlebar]
+Titelleiste anzeigen oder verstecken
+[Lock or unlock]
+Sperren oder entsperren
+[Collapse or uncollapse]
+Einklappen oder ausklappen
+[Show window 'About Miranda IM']
+'Über Miranda IM'-Fenster zeigen
+[Show Miranda Support page]
+Zeige Miranda-Supportseite
+[Go to Miranda web-site]
+Gehe zur Miranda-Webseite
+[Report a bug]
+Einen Fehler berichten
+[Show last closed conversation]
+Zeige letzte geschlossene Unterhaltung
+[Show last closed conversation window]
+Zeige letzte geschlossene Unterhaltung
+;[Paste text]
+[Open site]
+Öffne Seite
+[Show or hide Contact List]
+Zeige oder verstecke Kontaktliste
+[Show or hide offline contacts]
+Zeige oder verstecke Offlinekontakte
+[Activate Contact List]
+Kontaktliste aktivieren
+[Enable/disable sounds]
+Aktiviere/deaktivere Klänge
+[Enable/disable all popups]
+Aktiviere/deaktiviere Popups
+[Open Options]
+Öffne Einstellungen
+[Open 'Find User' dialog]
+'Kontakte suchen/hinzu&fügen'-Fenster öffnen
+;[Show user info window]
+[Open Global Search in History]
+Öffne die globale Suche im Verlauf
+[Show System History]
+Zeige Systemverlauf
+[Open DB Editor]
+Öffne den DB-Editor
+[Show info about current music]
+Zeige Informationen über derzeitige Musik
+;[Create report from log and run it]
+
+[The service line is empty!]
+Die Dienstzeile ist leer!
+[You can input text here...]
+Hier können Sie Text eingeben...
+[Service with such name is not registered within Miranda IM workspace!]
+Ein Dienst mit diesem Namen ist nicht in Miranda registriert!
+[You should select any item!]
+Sie sollten einen Eintrag auswählen!
+[So you can see what do the service\nShortcut: [Backspace]]
+So können Sie sehen, was der Dienst bewirkt. Abkürzung: [Rücktaste]
+[Show menu\nto select item from the list\nof predefined services\nor to enter custom data\nShortcut: [Menu], [Right Click]]
+Zeigt ein Menü zum Auswählen eines Eintrags aus einer Liste \nmit vordefinierten Diensten, oder Sie geben einen eigenen Dienst ein. \nAbkürzung: [Menü], [Rechtsklick] 
+[Invoke dialog with possibility to change\nservice name, hotkey description,\nkeys' combination and other data\nShortcut: [Double Click]]
+Öffnet einen Dialog zum Ändern des Dienstnamens, der Hotkeybeschreibung,\nHotkeys und anderen Daten.\nAbkürzung: [Doppelklick]
+[After the pressing 'Apply' button,\nthe hotkey will be removed\nfrom the processing procedure\nShortcut: [Del]]
+Nach Drücken des 'Löschen'-Buttons wird der Hotkey von der Liste gelöscht. Abkürzung: [Entf]
+[You're trying to add the item equal to already existed!]
+Sie versuchen einen Eintrag hinzuzufügen, der bereits existiert!

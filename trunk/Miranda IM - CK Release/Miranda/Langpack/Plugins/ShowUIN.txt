@@ -1,0 +1,34 @@
+; Pluginname: ShowUIN 
+; Version: 3.1.0.0
+; Dateiname: showuin.dll
+; Autor: Adriano
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2846
+; Übersetzung: 06.10.06 von Weishaupt
+
+[ShowUIN]
+Zeige ID
+
+[ShowUIN options]
+ShowUIN-Optionen
+[Display format:]
+Anzeigeformat:
+[Copy format:]
+Kopierformat:
+[Following macroses are available:]
+Folgende Variablen sind verfügbar:
+[Instant messaging protocol]
+IM-Protokoll
+[Protocol UIN]
+Protokoll-UIN
+[Protocol nickname]
+Protokollnickname
+[Contact-list nickname]
+Kontaktlistennickname
+[Protocol first name]
+Protokollvorname
+[Protocol last name]
+Protokollnachname
+[First + last name in one string]
+Vor- & Nachname in einem String
+[Protocol e-mail address]
+Protokoll-E-Mail-Adresse

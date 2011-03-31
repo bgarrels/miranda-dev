@@ -1,0 +1,38 @@
+; Pluginname: Messages Total Notify 
+; Version: 0.0.3.3
+; Dateiname: messagestotalnotify.dll
+; Autor: wombat
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2918
+; Übersetzung: 03.12.06 von Weishaupt
+; Besonderheiten: Entwicklung eingestellt!
+
+[Show popup notify every]
+Zeige Popupbenachrichtigung alle
+[Show message type "Incoming or Outgoing" in popup]
+Zeige Nachrichtentyp "Ein- oder Ausgehend" im Popup
+[Notify messages total]
+Benachrichtigung über Gesamtzahl der Nachricht
+[Send messages total every]
+Sende "ges. Nachrichten" alle
+[and show popup notify]
+und Popupbenachrichtigung zeigen
+[Send immediately]
+Sofort senden
+[Save to the history]
+Speichere zum Verlauf
+[Play sound at popup notify]
+Sound abspielen bei Popupbenachrichtigung 
+[Play sound at send messages action]
+Sound abspielen beim Senden der Nachricht
+[Send messages total to contact]
+"ges. Nachrichten" an Kontakt senden
+[messages total]
+Nachrichten gesamt
+[Auto send]
+Autom. Senden
+[Sent messages to]
+Sende Nachrichten an
+[Show information about send]
+Zeige Informationen übers Senden
+[Defaults]
+Standards

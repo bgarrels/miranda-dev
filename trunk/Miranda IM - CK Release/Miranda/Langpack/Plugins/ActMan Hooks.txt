@@ -1,0 +1,10 @@
+; Pluginname: ActMan Hooks
+; Version: 0.0.1.0
+; Dateiname: actmhook.dll
+; Autor: Awkward
+; Unique ID: {08b86253-ec6e-4d09-b7a9-64acdf0627b8}
+; Link: http://awkward.miranda.im/
+; Übersetzung: CHEF-KOCH 19.09.2010
+
+
+; todo ....

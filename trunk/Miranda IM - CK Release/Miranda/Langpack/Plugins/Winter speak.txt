@@ -1,0 +1,78 @@
+; Pluginname: Winter speak
+; Version: 0.9.7.0
+; Dateiname: speak.dll
+; Autor: Ryan Winter
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=371
+; Übersetzung: 31.05.06 von BlubbFish
+
+; Status changes
+[%u is now offline]
+%u ist Off
+[%u is now online]
+%u ist da
+[%u is away]
+%u ist nur mal kurz weg
+[%u is invisible]
+%u hat sich versteckt
+[%u is not available]
+%u ist nicht mehr da
+[%u does not want to be disturbed]
+%u will in Ruhe gelassen werden
+[%u is occupied]
+%u ist beschäftigt
+[%u is free for chat]
+%u will chatten 
+
+[incoming message from %u]
+Nachricht von %u
+[incoming U R L from %u]
+URL von %u
+[you have been added to %u's contact list]
+Sie wurden auf die Kontaktliste von %u hinzugefügt
+[%u requests your authorization]
+%u möchte Ihre Autorisierung
+[there is an incoming file from %u]
+Sie haben eine Datei von %u bekommen
+[%u says]
+%u meint:
+
+[Engine/Voice]
+Stimmparameter
+[Engine Settings]
+Programmeinstellungen
+[Engine]
+Sprachmodul
+[Voice]
+Stimme
+[Pitch]
+Höhe
+[testing testing 1 2 3]
+Das ist ein Test.
+[Welcome Message]
+Willkommensnachricht
+
+[Active Modes]
+Aktiver Status
+[Do not Disturb]
+Bitte nicht stören
+[Free for Chat]
+Frei zum Chat
+[Active Users]
+Aktive Benutzer
+
+[Status Changes]
+Statuswechsel
+[Occuring Events]
+Ereignisse
+[Added to Contact List]
+Zur Kontaktl. hinzugefügt
+[Message Events]
+Nachrichten
+[Read message if less characters than]
+Lese Nachricht, wenn weniger Zeichen als
+[Ignore event if message dialog is open]
+Ignoriere, wenn Nachrichtenfenster offen
+[Ignore event if message dialog is focused]
+Ignoriere, wenn Nachrichtenfenster fokussiert
+[Announce status changes on connect]
+Melde Statusänderungen nach Verbinden

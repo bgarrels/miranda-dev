@@ -1,0 +1,14 @@
+; Pluginname: Docking 
+; Version: 0.1.2.0
+; Dateiname: docking.dll
+; Autor: Karl Einholz
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2241
+; Übersetzung: Karl Einholz
+; Besonderheiten: Entwicklung eingestellt!
+
+[&Enable Docking]
+&Docking Aktivieren´
+[don't dock between &Monitors]
+nicht zwischen &Monitoren docken
+[Edge &sensitivity]
+&Empfindlichkeit

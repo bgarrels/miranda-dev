@@ -1,0 +1,101 @@
+; Pluginname: StartupStatus 
+; Version: 0.8.0.41
+; Dateiname: startupstatus.dll
+; Unique ID: {4b733944-5a70-4b52-ab2d-68b1ef38ffe8}
+; Autor: ghazan, P Boon
+; Übersetzung: 21.06.05 von Weishaupt
+
+[StartupStatus, allows you to define the status Miranda should set on startup, configurable per protocol.]
+StartupStatus erlaubt es Ihnen, die Status, in denen Miranda startet, zu definieren. Jedes Protokoll kann separat konfiguriert werden.
+[Startup requires Miranda IM of version 0.8, get it at www.miranda-im.org]
+StartupStatus benötigt Miranda IM Version 0.8+, Sie bekommen es unter www.miranda-im.org]
+
+; keine >>> - <<< zwisxchen den Variablen!!!
+[Set %s message for %s.]
+Setze %s Nachricht für %s.
+[Command Line]
+Befehlszeile
+[Command Line:]
+Befehlszeile:
+[Create Shortcut]
+Verknüpfung erstellen
+[Set Msg]
+Set MSG
+[Default profile]
+Standard-Profil
+[At least one profile must exist]
+Mindestens ein Profil muss angelegt sein
+[Status Profiles]
+Statusprofile
+[StatusProfiles]
+Statusprofile
+[Status on startup]
+Status beim Start
+[Activate status profile]
+Aktiviere Statusprofil
+[Set after]
+nach
+[Note: status profiles can be created in the 'Status Profiles' options screen]
+Hinweis: Statusprofile können im 'Statusprofile'-Dialog erstellt werden.
+[Allow override]
+Aufheben möglich
+[Show dialog]
+Dialog anzeigen
+[Window on startup]
+Kontaktliste beim Start
+[Set window state]
+Fensteranzeige
+[Set docked]
+Andocken
+[Set window location]
+Fensterposition
+[loc: %d x %d]
+Position: %d x %d
+[Set window size]
+Fenstergröße
+[size: %d x %d]
+Größe: %d x %d
+[Dial-up (experimental)]
+Verbindungsaufbau/-abbau (experimentell)
+[Automatically dial on startup]
+Verbindung beim Start herstellen
+[Automatically hang up on exit]
+Verbindung beim Beenden trennen
+[Set status to offline before exit]
+Vor Beenden Offlinemodus setzen
+[Ignore protocols not visible in the status bar]
+Ignoriere Protokolle, die nicht in der Statusleiste sichtbar sind
+[Show command line]
+Zeige Befehlszeile
+[Show CMDL]
+Befehlszeile
+[Show confirm dialog when loading]
+Bestätigungsdialog beim Profilaufruf
+[Create a TopToolBar button]
+TopToolbar-Button erstellen
+[Create a status menu item]
+Statusmenüeintrag erstellen
+[In submenu]
+In Untermenü
+[Use Miranda's message setting]
+Statusnachricht von Miranda IM beziehen
+[Some changes you made require a restart of Miranda-IM]
+Einige Änderungen erfordern einen Neustart.
+[StatusProfiles]
+Statusprofile
+[Your default profile will be changed]
+Ihre Profile wurden geändert
+
+[<from trigger>]
+vom Auslöser
+
+[idleeeeeeee]
+idle
+
+[There is a maximum of 6 menu items]
+Das Maximum an Menüeinträge beträgt 6
+
+[Pressed toolbar icon]
+Gedrücktes ToolBar Icon
+[Released toolbar icon]
+Veröffentlichtes ToolBar Icon

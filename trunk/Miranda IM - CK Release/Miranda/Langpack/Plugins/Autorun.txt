@@ -1,0 +1,16 @@
+; Pluginname: Autorun 
+; Version: 0.1.0.1
+; Dateiname: autorun.dll
+; Unique ID: {eb0465e2-ceee-11db-83ef-c1bf55d89593}
+; Autor: Wolfram3D
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4353
+; Übersetzung: flower am 06.06.05
+
+[Launch Miranda IM at system startup]
+Miranda IM beim Systemstart starten
+[Note: At startup Miranda IM will use current profile]
+Hinweis: Miranda IM startet dann mit dem aktuellen Profil.
+
+; Plugin Infos Autorun (autorun.dll)
+[This plugin is a simple way to enable/disable to launch Miranda IM with system startup.]
+Dieses Plugin ermöglicht ein automatisches Starten von Miranda IM beim Hochfahren des Systems.

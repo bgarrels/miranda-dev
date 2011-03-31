@@ -1,0 +1,46 @@
+; Pluginname: Simple Auto Replier (Simple AR)
+; Version: 2.0.2.1
+; Dateiname: simplear.dll
+; Unique ID: {46bf191f-8dfb-4656-88b2-4c20be4cfa44}
+; Autor(en): Stark Wong, Mikel-Ard-Ri
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4349
+; SVN: http://alfamar.googlecode.com/svn/plugins/SimpleAR_Unicode
+; Hinweis: 'Simple Auto Replier' darf nicht übersetzt werden, da sich auch der Pluginname mit übersetzt!
+
+[Dear %user%, the owner left the following message:]
+Hallo, %user%, der Besitzer hat dir folgende Nachricht hinterlassen:
+[Disable Auto&reply]
+Deaktiviere Autoantwo&rt
+[Enable Auto&reply]
+Aktiviere Autoantwo&rt
+[I am currently away. I will reply to you when I am back.]
+Ich bin aktuell abwesend. Ich werde antworten, sobald ich wieder da bin.
+[I am currently very busy and can't spare any time to talk with you. Sorry...]
+Ich bin aktuell sehr beschäftigt und habe keine Zeit, mit dir zu schreiben. Sorry...
+[I am not available right now.]
+Ich stehe nicht zur Verfügung.
+[I am now doing something, I will talk to you later.]
+Ich bin beschäftigt, ich werde später mit dir schreiben.
+[I am on the phone right now. I will get back to you very soon.]
+Ich bin am Telefon. Ich werde bald wiederkommen. 
+[I am having meal right now. I will get back to you very soon.]
+Ich bin gerade am essen. Ich werde bald wiederkommen.
+
+[Enable Auto Replier]
+Aktiviere Autoantworten
+[Reply Message Heading:]
+Antwort-Nachrichtenkopf:
+[No-repeat Interval:]
+Nicht wiederhol. in:
+[mins]
+Minuten
+[&Default]
+Stan&dard
+[Reply Message when]
+Antwortnachr. wenn
+
+[Turn off Autoanswer]
+Autom. Antwort ausschalten
+[Turn on Autoanswer]
+Autom. Antwort einschalten
+ 

@@ -1,0 +1,497 @@
+; Pluginname: nConvers++
+; Version: 0.0.0.51g
+; Dateiname: nConvers++.dll
+; UID: {dc228807-1337-4545-8181-a09278654343}
+; Autor: donatas
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1497
+; Übesetzung: 24.06.05 von Lastwebpage
+
+[nConvers]
+Nachrichtenfenster
+[Hide Buttons]
+Buttonleiste verstecken
+[User Menu (Alt+U)]
+Kontaktmenü (Strg + U oder Alt + U)
+[User Info]
+Kontaktprofil
+[Show History (Ctrl+H)]
+Verlauf anzeigen, nHistory++
+[Show Internal History (Ctrl+H)]
+Verlauf anzeigen, nHistory (Strg + H oder Alt + H)
+[Select Emotion]
+Smiley einfügen
+[Undock]
+Separates Fenster
+[Notepad]
+Notizbuch
+[Send Message (Ctrl+Enter)]
+Nachricht senden (Strg + Enter)
+[Close (Esc)]
+Fenster schließen, Tab dieses Kontaktes schließen (Esc)
+[There are Some Text in Notepad]
+Es befindet sich Text im Notizbuch
+
+;mnuHistoryItem
+[&As Memo]
+Editieren
+[&Quote to memo]
+Als Zitat in Antwortfenster
+[Quote Message for Editing]
+Editieren als Zitat
+[To &Memo]
+In Antwortfenster
+[&Bounce]
+Komplett
+[To &Clipboard]
+In Zwischenablage
+[&Quote]
+Als Zitat
+[&Delete Selected]
+markierte löschen
+[&Load 10 more recent]
+Lade die 10 aktuellsten
+[&Log]
+Verlauf
+[Clear Half]
+Zu Hälfte löschen
+;mnuMemoMenu
+[&Emotions]
+Smileys
+[Last 5 Messages]
+letzte 5 Nachrichten
+[&Undo]
+Rückgängig
+[Reverts the last action]
+Letzte Aktion rückgängig
+[Quote Selection]
+Auswahl zitieren
+[Cu&t]
+Ausschneiden
+[Cuts the selection and puts it on the Clipboard]
+Auswahl in die Zwischenablage verschieben
+[Copies the selection and puts it on the Clipboard]
+Auswahl in die Zwischenablage kopieren
+[Inserts Clipboard contents]
+Inhalt der Zwischenablage einfügen
+[&Settings]
+Schnelleinstellungen
+[Show Notepad]
+Notizbuch anzeigen
+;mnuQuickOptions
+[SendMode]
+Sende Modus
+[Direct]
+Direkt
+[through Server]
+über Server
+[Show Buttons]
+Buttonleiste anzeigen
+[Stay on top]
+Fenster im Vordergrund
+[Close on send]
+Schließen nach Senden
+[Use global setting]
+Benutze Einstellungen aus Optionen
+[YES: this contact]
+JA: für diesen Kontakt
+[NO: this contact]
+NEIN: für diesen Kontakt
+[Minimize on send]
+Minimieren nach Senden
+;nConvers++ Notepad
+[Close NotePad]
+Notizbuch schließen
+[Clear Memo]
+Notiz löschen
+[Save Memo]
+Notiz speichern
+[Take Text From Main Edit]
+Übernehme Text aus Antwortfenster
+[Send Text To Main Edit]
+kopiere Text in das Antwortfenster
+
+[is now]
+ist jetzt
+[is typing a message...]
+Schreibt gerade...
+[has stopped typing]
+Schreibt nicht mehr
+[Message from]
+Nachricht von
+[&Message...]
+Nachricht...
+[Message: Queued Incoming]
+Nachricht: Nicht gelesen
+[Message: Incoming]
+Nachricht: Empfangen
+[Message: Outgoing]
+Nachricht: Senden
+[Message: Outgoing failed]
+Nachricht: Fehler beim Senden
+
+[There is still a message in the message queue. This message wont be send if you close the message window.]
+Es befindet sich eine Nachricht im Nachrichtenbuffer, diese Nachricht wird beim Schließen des Fensters nicht gesendet.
+[Close message window nevertheless?]
+Trotzdem Fenster schließen ?
+[There are still %d messages in the message queue. These messages wont be send if you close the message window.]
+Es befinden sich %d Nachrichten im Nachrichtenbuffer, diese Nachrichten werden beim Schließen des Fensters nicht gesendet.
+[Unsent Messages]
+Nicht gesendete Nachricht
+[There are still unsent text in the message window.]
+Es befinden sich ungesendete Texte im Nachrichtenfenster
+[Close message window?]
+Nachrichtenfenster schließen?
+[Discard Message]
+Nachricht verwerfen
+[Sending Message ...]
+Nachricht senden...
+[nConvers++ Notepad]
+nConvers++-Notizbuch
+
+[Confirm]
+Bestätigen
+[Delete Message(s)?]
+Nachricht(en) löschen?
+[Open URL in New Window]
+URL in neuem Browserfenster öffnen
+[Open URL]
+URL in bestehendem Browserfenster öffnen
+[Copy URL to Clipboard]
+URL in Zwischenablage kopieren
+[wrote]
+schrieb
+
+[Store layout info]
+Anzeige speichern
+[Global: for all contacts]
+Für alle Kontakte gleich
+[Speciffic: for every contact]
+Für jeden Kontakt einzeln
+[Messaging window layout]
+Nachrichtenfenster
+[Straight: memo below history (messages added at bottom of log)]
+Nachrichtenverlauf über dem Eingabefeld, neue Nachrichten in Verlauf unten anfügen
+[Reverse: memo above history (messages added at top of log)]
+Eingabefeld über dem Nachrichtenverlauf, neue Nachrichten in Verlauf oben anfügen
+[Other UI elements]
+Andere UI-Elemente
+[Show message length metter (in splitter between memo and log)]
+Nachrichtenlänge grafisch anzeigen
+["Hide ToolBar" button]
+Keine Buttonleiste
+["Contact Menu" button]
+Kontaktmenü
+["User Info" button]
+Kontaktprofil
+["History" button]
+History erweitert
+["nHistory" button]
+nHistory
+["Select Emotion" button]
+Smileyauswahl
+["Undock" button]
+Separates Fenster
+["Notepad" button]
+Notizbuch
+[nConvers++ features]
+nConvers++-Features
+[Show lang. indicator]
+Sprache anzeigen
+["Fade" enabled]
+"Fade" aktivieren
+["Flat" enabled]
+"Flach" aktivieren
+["Dictionary" (Ctrl+Space)]
+"Wörterbuch" (STRG+Leer)
+["Joined Smilies" enabled]
+Smileys ohne Leerzeichen
+[Show spaces in history log]
+Leerraum in History anzeigen
+["Text Formatting" enabled]
+Textformatierung aktivieren
+["MS Spell Checking" enabled]
+Rechtschreibprüf. (Office)
+
+[Emotion Package]
+Smileysammlung
+[Emotion packages]
+Smileysammlungen
+[Package Info]
+Paketinformationen
+[NOTE! You need to restart miranda for changes on this page to take place!!!]
+Hinweis! Nach Änderung dieser Einstellung muss Miranda neu gestartet werden !
+
+[Fonts & Colors]
+Schrift und Farben
+[Select Font]
+Schriftart
+[History Background]
+Hintergrund Verlauf
+[http://www.blag.org]
+http://www.URL.de
+[Nick <<]
+Alias <<
+[Own nick >>]
+eigener Alias >>
+[Memo text]
+Text Antwortfenster
+
+[message Log display]
+Anzeige des Verlaufs
+[Messages Drop Shadow]
+3D-Rahmen um Verlaufseinträge
+[Notification in message log on contact Status Change]
+Verlaufseinträge, wenn Kontakt Status wechselt
+[Show Contact's "NICK" in log]
+Aliasnamen im Verlauf anzeigen
+[NICK >>]
+Alias >>
+[Window Caption Elements]
+Fenstertitelelemente
+[Substitute Emotions with Images]
+Ersetze Textsmileys durch Bilder
+[Hints on emotions]
+Tooltip bei Smileys
+[Quick / Cascaded Links in Context Menu]
+Schnellkontextmenü bei Links
+[URL Clicking]
+URL anklicken
+[Allways In New Browser]
+In neuem Browserfenster
+[Allways copy link]
+Immer Link kopieren
+[Load recent history]
+Verlauf laden, neueste 
+[Gray Recent Messages]
+graue neue Nachrichten
+[Max.]
+max.
+[messages shown (blank or 0 means no restriction)]
+Nachrichten anzeigen, leer oder 0 = keine Beschränkung
+
+[Aggressive: Bring to front steal focus from other apps]
+Aggressiv: Fenster in den Vordergrund bringen, mit Fokus
+[Flash taskbar tab (nonaggressive mode only)]
+Fenster in Taskbar blinken lassen (nur nichtaggressive Modi) 
+[Normal: Open Window Don't Steal Focus]
+Normal: Fenster öffnen, ohne Fokus
+[Timid: Show Minimized and Flash Taskbar]
+Minimiert: Fenster minimiert und blinkend
+[Discreet: Flash icon on contactlist only]
+Diskret: Icon in Kontaktliste blinken lassen
+[Popup messaging window when flashing tray clicked]
+Fenster anzeigen, wenn blinkendes Traysymbol angeklickt wird
+[Send Typing notification]
+Schreibhinweise senden
+;folgende Zeile hat in Original Sprachdatei einen anderen Text
+[Notification in message log on user Typing]
+Im Verlauf anzeigen
+
+[Split messages (RECOMENDED)]
+Nachricht aufteilen (EMPFOHLEN)
+[Longer than]
+länger als
+[when sending "default way"]
+bei Sendemodus "Standard"
+[when sending "Direct"]
+bei Sendemodus "direkt"
+[when sending "trough server"]
+bei Sendemodus "über Server"
+[When sending]
+Senden der Nachricht
+[Wait for confirmation]
+auf Bestätigung warten
+[Close window after send]
+Fenster nach Senden schließen
+[Send multiple messages interval]
+Zeitabstand mehrfacher Nachrichten
+[Memo customization]
+Eingabefenstereinstellungen
+[Vertical scrollbar]
+vertikale Scrollbar
+[Wordwrap]
+Zeilenumbruch
+[Horisontal scrollbar]
+horizontale Scrollbar
+[Special send shortcuts]
+Tasten für Nachrichten senden
+[Double Enter Sends]
+2-mal Enter sendet
+[Single Enter Sends Ctrl+Enter adds NewLine]
+1-mal Enter sendet, Strg+Enter erzeugt neue Zeile
+
+[Timestamp display]
+Verlauf Zeitanzeige
+[Message timestamp display]
+Nachrichtenverlauf-Zeitanzeige
+[Dynamic]
+Dynamisch
+[Show Hints On Hover]
+Tooltipanzeige
+[Show Time]
+Zeit anzeigen
+[Has border]
+Mit Rand
+[As text (nondigital)]
+Als Text (nicht digital)
+[Time color]
+Farbe Zeit
+[Show Date]
+Datum anzeigen
+[Fixed format]
+festes Format
+[Tiny]
+Nur Tag
+[Full date]
+Komplettes Datum
+[As text]
+Als Text
+[Text line1 color]
+Textzeile 1 Farbe
+[Text line2 color]
+Textzeile 2 Farbe
+[Use bigger font]
+Größere Schriftart
+
+[Window docking]
+Fenster verbinden
+[Enable Docking]
+Fensterverbinden aktivieren
+[Dock when dragging over another window if Ctrl is down]
+Verbinden, wenn Fenster über anderes bewegt wird und Strg gedrückt ist
+[Dock when dragging over another window if Ctrl is _NOT_ down]
+Verbinden, wenn Strg NICHT gedrückt ist
+[Allways Popup as Docked]
+Neue Fenster verbinden
+[Remember Docked Windows]
+verbundene Fenster merken
+[Max together]
+max. Kontakte zusammen
+
+[nHistory startup]
+nHistory starten
+ 
+[Reverse message order]
+Umgekehrte Verlaufsanzeige
+
+[selected it of]
+ausgewählt von insgesamt
+;mnuHistoryItem
+[To &Message Window]
+In Eingabefenster
+;Hints
+[Find (Ctrl+F)]
+Suchen (Strg + F)
+[Find Next (F3)]
+Weitersuchen (F3)
+
+;Optionsseite nConvers
+[Minimal Style]
+Kein Titel bei einzelnen Kontakten
+["Esc" Act as Minimize]
+Mit "Esc" minimieren
+[React on "/Music"]
+Auf "/Music" reagieren
+[Use Default Icons]
+Standardicons verwenden
+[Transparency (win2000/XP)]
+Transparenzoptionen (nur Windows 2000/XP) 
+;Optionsseite Fenster verbinden
+[Enable Sticking]
+Fenster nicht außerhalb des Bildschirms aktivieren
+[Check Top]
+Prüfe oben
+[Check Left]
+Prüfe links
+[Check Right]
+Prüfe rechts
+[Check Bottom]
+Prüfe unten
+[Stick At:]
+Abstand zum Bildschirmrand:
+
+[Global: Show avatars]
+Kontaktbild bei allen Kontakten
+[Avatars as contact photos (mToolTip)]
+wie die Kontaktfotos von mTooltip
+
+;Spezialmenü Nachrichtenfenster lässt sich nicht übersetzen
+;nHistory Texte die nicht in der Sprachdatei enthalten sind lassen sich ebenfalls nicht übersetzen (Filter)
+
+[NotePad]
+Notizbuch
+[Take Text]
+Text übernehmen
+[Put Text]
+Text setzen
+[On Top]
+Oben festhalten
+[Close Notepad]
+Notizbuch schließen
+
+[You Are Now Talking With Developer Of This Plugin]
+Sie sprechen nun mit dem Entwickler des Plugin.
+
+[Show Hot Stuff Panel]
+Zeige Hot-Stuff Schaltfläche
+[&Add Item]
+&Füge Item hinzu
+[&Delete Item]
+&Lösche Item
+[Add Hot Stuff String]
+Füge Hott-Stuff String hinz.
+[Enter text here]
+Text bitte hier eingeben
+[Delete Selected string]
+Lösche ausgewählten String
+
+; ===Avatars
+[Original size]
+Original Größe
+[Show Avatars]
+Zeige Avatare
+[Global: Show avatars]
+Global: Zeige Avatare
+[Avatars as contact photos (mTooltip)]
+Avatar als Kontaktfoto (mToolTip)
+
+; ===nConvers++ features
+[Show a multisend panel]
+Zeige eine Multi-send Schaltfläche
+;[Use a strict regular expressions]
+;[Remember a contact language]
+
+; ===Transparency
+[Transparency (win2000/XP)]
+Transprarenz (ab Win 2k/XP)
+
+; ===Caption Icon
+;[Window Caption Icon]
+
+; nHistory 0.0.0.45 (use only with nConvers++ translation)
+; Dateiname: nHistory.dll
+; Autor: donatas
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1497
+; Übersetzung: 14.08.06 von Weishaupt
+
+[Add "System history" Item to miranda menu]
+Füge "Systemverlauf"-Menüeintrag hinzu
+[Add "Global history" Item to miranda menu]
+Füge "Globaler Verlauf"-Menüeintrag hinzu
+[Apply last filter on startup]
+Verwende letzten Filter beim Start
+
+[nHistory Log display]
+nHistory-Verlauf anzeigen
+[Messages Drop Shadow]
+Nachrichten Abfallschatten
+
+;[selected ot of]
+;mnuHistoryItem
+;Hints
+;[Import]
+;[Export]
+[Remove Filter]
+Filter entfernen
+[Break Loading]
+Laden unterbrechen

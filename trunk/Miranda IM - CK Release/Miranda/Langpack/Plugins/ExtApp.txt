@@ -1,0 +1,22 @@
+; Pluginname: ExtApp 
+; Version: 0.0.0.4
+; Dateiname: ExtApp.dll
+; Autor: Birger Fricke
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=156
+; Übersetzung: 19.06.06 von Weishaupt
+; Besonderheiten: Entwicklung eingestellt!
+
+[External Apps.]
+Externes Programm
+[Application]
+Programm
+[Contact Menu Item]
+Menüpunkt
+[(&& for mnemonic)]
+(&& für Hotkey)
+[E&xternal App.]
+E&xternes Progr.
+[Select external application file]
+Externes Programm auswählen
+[This plugin allows you to call external applications from the contact list.]
+Dieses Plugin ermöglicht es, externe Programme über die Kontaktliste aufzurufen.

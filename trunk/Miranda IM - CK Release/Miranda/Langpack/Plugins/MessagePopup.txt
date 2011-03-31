@@ -1,0 +1,28 @@
+; Pluginname: MessagePopup 
+; Version: 0.0.0.1
+; Dateiname: msgbox.dll
+; Autor: Std
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1228
+; Übersetzung von Foso am 16.08.07
+
+[Foreground]
+Vordergrund
+[Emit a sound]
+Sound abspielen
+[ERROR style]
+Fehlerstyle
+[QUESTION style]
+Fragestyle
+[Special values of the "Timeout":\n -1 - infinity, 0 - use default timeout value]
+Spezielle Werte des "Timeout":\n -1 = unendlich, 0 = Standardtimeoutwert 
+
+[Message with error]
+Fehlernachricht
+[Message with asterisk]
+Asteriknachricht
+[Message with question]
+Fragenachricht
+[Message with exclamation]
+Exclamationnachricht
+[MessagePopup - demo]
+MessagePopup - Beispiel

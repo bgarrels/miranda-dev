@@ -1,0 +1,17 @@
+; Pluginname: AddContact+ 
+; Version: 0.9.8.6
+; Dateiname: addcontactplus.dll
+; Autor: Dezeath
+; Link: 
+; Übersetzung: 27.06.2008 von kaye_styles
+
+[Provides the ability to add contacts manually (without searching for them)]
+Erlaubt Kontakte manuell hinzuzufügen (ohne die Kontaktsuche dafür zu starten)
+[Add Contact Manually]
+Kontakt manuell hinzufügen
+[&Add Contact Manually...]
+Kontakt m&anuell hinzufügen...
+[Provides the ability to add contacts manually (without searching for them).]
+Stellt die Möglichkeit zur Verfügung, Kontakte ohne vorheriges Suchen zur Kontaktliste hinzuzufügen.
+[The contact cannot be added to your contact list. If you are not connected to that network, try to connect. Also, make sure the User ID is entered properly.]
+Dieser Kontakt konnte nicht hinzugefügt werden. Stellen Sie sicher, dass Sie mit dem entsprechenden Netzwerk verbunden sind. Überprüfen Sie ebenso, ob die Nutzer-ID korrekt eingegeben ist.

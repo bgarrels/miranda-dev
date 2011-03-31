@@ -1,0 +1,99 @@
+; Pluginname: Alarms 
+; Version: 0.4.0.3
+; Dateiname: alarms.dll
+; Autor: sje
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2163
+; Übersetzung: flower am 04.08.05
+
+[Set once-off, daily, weekly and weekday alarms.]
+Setzt einmalige, tägliche, wöchentliche und Wochentagsalarme.
+
+[Alarms/Background]
+Alarm/Hintergrund
+[Alarms]
+Alarm
+[Alarms/Selection Background]
+Alarm/Auswahl Hintergrund
+[Hide Reminders]
+Termine verstecken
+[Show Reminders]
+Termine zeigen
+[Alarm Reminders]
+Alarm
+
+; alarms.cpp
+[Set Alarm]
+Alarm stellen
+[Set a new alarm]
+Neuen Alarm setzen
+
+; alarmlis.cpp
+[Alert 1]
+Alarm 1
+[Alert 2]
+Alarm 2
+[Alert 3]
+Alarm 3
+
+[Menu: Set Alarm]
+Menü: Alarm setzen
+[Reminder: Soon]
+Termin: bald
+[Reminder: Very Soon]
+Termin: nächste
+[Alarm: System Tray]
+Alarme: SystemTray
+[Menu: Show/Hide Reminders]
+Menü: Termin zeigen/verst.
+
+[Occurrence]
+Ereignis
+[Yearly]
+Jährlich
+[Weekdays]
+Wochentags
+[Date and Time]
+Datum und Zeit
+[Sound:]
+Ton:
+[Disable next occurence]
+Nächstes Ereignis deaktivieren
+[No reminder]
+Keine Erinnerung
+[Don't trigger on startup]
+Beim Start nicht auslösen
+[Run command:]
+Befehl ausführen:
+[Period (hours):]
+Periode (Stunden):
+[Some example text. Example, example, example.]
+Ein Beispieltext. Beispiel, Beispiel, Beispiel.
+[Example Alarm]
+Beispielalarm
+[Use popup plugin]
+Popup-Plugin benutzen
+[Loop sound]
+Ton wiederholen
+[Default snooze:]
+erneut erinnern:
+[Reminder Frame]
+Alarmliste
+[Row Height:]
+Zeilenhöhe:
+[Auto hide/show]
+autom. ein/ausbl.
+[Hide/show with clist]
+Mit CList zeigen
+[Auto size vertically]
+automatische Breite
+[Transparency (%):]
+Transparenz (%):
+[Don't steal focus unless idle]
+Fokus nur stehlen, wenn IDLE
+[Alert Window]
+Alarmfenster
+
+[New Alarm...]
+Neuer Alarm...
+[Suspend]
+Anhalten

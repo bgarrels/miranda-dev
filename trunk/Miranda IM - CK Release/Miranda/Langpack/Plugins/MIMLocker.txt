@@ -1,0 +1,58 @@
+; Pluginname: MIMLocker 
+; Version: 0.0.4.1
+; Dateiname: MIMLocker.dll
+; Autor: messir
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3323
+; Übersetzung: 21.01.2007 von Dober
+
+[Lock]
+Sperren
+
+[Temporary back-door]
+Temporäre Hintertür
+[Failed to set hook]
+Hook setzen fehlgeschlagen
+[Failed to find any CList plugin]
+CList-Pluginsuche fehlgeschlagen
+[Failed to hook API. Some features shall be disabled.]
+API-Hook fehlgeschlagen. Einige Funktionen werden deaktiviert.
+[Password was not set]
+Passwort wurde nicht gesetzt
+
+[Unlock]
+Entsperren
+
+[Lock tray icons]
+Trayicons sperren
+[Change it back on unlock]
+Beim Entsperren Status zurücksetzen
+[Lock Miranda when system is locked (Win+L)]
+Sperre Miranda, wenn Windows gespeert wird (Win+L)
+[When locked]
+Wenn gesperrt
+[Set password...]
+Passwort setzen...
+
+[New password:]
+Neues Passwort:
+[Old password:]
+Altes Passwort:
+
+[You must enter your old password]
+Sie müssen Ihr altes Passwort eingeben
+[New password and its confirmation are different.\nTry once more.]
+Neues Passwort und Bestätigung sind verschieden.\nBitte nochmals versuchen.
+[This will reset your password. Continue?]
+Dies setzt Ihr Passwort zurück. Fortfahren?
+[Invalid password]
+Falsches Passwort
+[Your password has been changed]
+Ihr Passwort wurde geändert
+
+[Miranda IM is locked. Please enter password to unlock it.]
+Miranda IM ist gesperrt. Bitte zum Entsperren Passwort eingeben.
+[Password is incorrect.]
+Passwort ist falsch.
+
+[Locks Miranda IM interface until password is entered]
+Sperrt Miranda IM bis das Passwort eingegeben ist

@@ -1,0 +1,102 @@
+; Pluginname: mToolTip 
+; Version: 0.0.1.6
+; Dateiname: mtooltip.dll
+; Unique ID: {77223eb9-c613-4d83-8b8a-00f07ce82c50}
+; Autor: Krzysztof Przyby³a
+; Link: http://miranda.kom.pl/dev/bankrut/
+; Übersetzung: 24.06.05 von ANdyDU
+; Besonderheiten: Entwicklung eingestellt!
+
+[Show various contact infos as tooltip]
+Zeige Kontaktinfos als Tooltip an
+
+[User information]
+Benutzerinformationen
+[Choose image file]
+Bilddatei wählen
+[PNG Bitmaps]
+PNG-Bilder
+
+[Options]
+Optionen
+[mToolTip info]
+mToolTip-Darstellung
+[Show tooltip even if list is not focused]
+Zeige Tooltip auch, wenn die Kontaktliste nicht im Vordergrund/aktiv ist.
+[Show tooltip over groups]
+Tooltips über Gruppen anzeigen
+[Show tooltip over statusbar]
+Tooltips über Statusleiste anzeigen
+[Show: Retrieving mode message... (%smsg)]
+Zeige: Statusnachricht wird empfangen... (%smsg)
+[Retrieving mode message...]
+Empfange Statusnachricht...
+[Remove empty lines]
+Leere Zeilen entfernen
+[Tooltip message]
+Tooltip-Nachricht
+[Variable not available]
+Nicht verfügbar
+[Tooltip delay]
+Verzögerung
+[mToolTip look]
+Farben und Aussehen
+[Fixed width]
+Feste Breite
+[Tooltip delay:]
+Verzögerung:
+[Auto-resize tooltip photo]
+Foto autom. anpassen
+
+
+; Text, der standardmässig in den Einstellungen angezeigt wird. DARF MEHRZEILIG SEIN!!!
+; Mehrere Zeilen durch '\n' trennen, um Fehlermeldungen im LangPackCreator zu vermeiden!
+; Bitte NICHT entfernen!
+[DefaultToolTipTxt]
+%sicon%photo\n%#%logonsince|Online seit: %%%%|\n<b>%lname|%%%%|</b>\n%#%iname|%%%%|\n%#%first|%%%%|%tab%last|%%%%|\n%mail|E-MAIL: %%Keine vorhanden%%|\n%id|ID: %%Keine vorhanden%%|\n%#%notes|<b>Anmerkung: </b>%%%%|\n%line%\n<b>%status|%%%%|</b>\n%#%smsg|Statusnachricht: %%%%|\n%line%\n%#%logondate|zuletzt eingeloggt am: %%%%|%tab%logontime|um: %%%%|\n%#%idlesince|Inaktiv seit: %%%%|\n%#%lsday|Zuletzt gesehen am: %%%%|.%lsmonth|%%%%|.%lsyear|%%%%| %lshours|%%%%|:%lsminutes|%%%%|:%lsseconds|%%%%|\n%#%lastmsgdate|Letzte Nachricht: %%%%| %lastmsgtime|%%%%|\n%#%lastmsg|%%%%|\n%#%ver||%line%\n%#%realip|IP int: %%nicht verfügbar%%|%tab%ip|IP ext: %%nicht verfügbar%%|\n%#%ver|<b>Ver: </b>%%nicht verfügbar%%|%tab%nver|<b>nrVer: </b>%%nicht verfügbar%%|\n%#%mver|<b>Messenger: </b>%%nicht verfügbar%%|\n%#%inetwork||%line%\n%#%inetwork|%%%%|%tab%ichannel: |%%%%|%tab%icount|%%%%|\n%#%itopic|%%%%|\n%iuser|User: %%%%|%tab%ihost|%%%%|%tab%imode|%%%%|
+
+
+
+[%smsg timeout:]
+%smsg Pause:
+[Text to border space]
+Abstand zum Rand
+[mToolTip advanced]
+Tooltipeinstellungen, Anzeigetext und Protokolle
+[mToolTip protocol]
+Für Protokoll
+[mToolTip text]
+Anzeigetext
+[<Default>]
+<Standard>
+[mToolTip - variables]
+mToolTip - Variablen
+[mToolTip - Font & Text color selection]
+mToolTip - Schrift- & Textfarben-Auswahl
+[Font size]
+Schriftgröße
+
+[Photo selection]
+Fotoauswahl
+[ICQ web photo]
+ICQ-Webfoto
+[Bar color]
+Leistenfarbe
+[Border light color]
+Helle Randfarbe
+[Border dark color]
+Dunkle Randfarbe
+[Line color]
+Linienfarbe
+[Font & Text color]
+Textformatierung
+[Photo border (default)]
+Fotorand (Standard)
+[Drop shadow (WinXP+ only)]
+Schatten werfen (ab WinXP)
+[Birthday!]
+Geburtstag!
+[Max. X:]
+Breite:
+[Max. Y:]
+Höhe:

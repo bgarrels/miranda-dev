@@ -1,0 +1,10 @@
+;============================================================
+;  Module: Intellicast.ini
+;  Plugin: weather
+;  Versions:
+;  Translators: CHEF-KOCH
+;  Template:
+;  URL:
+;============================================================
+[Ceiling]
+Cell

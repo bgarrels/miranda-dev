@@ -1,0 +1,155 @@
+; Pluginname: mRadio 
+; Version: 0.0.1.4
+; Dateiname: mRadio.dll
+; Autor: Krzysztof Przyby³a
+; Link: http://miranda.kom.pl/dev/bankrut/
+; Übersetzung: 13.02.06 von Dober
+
+; Pluginname: mRadio Mod 
+; Version: 0.0.1.7
+; Dateiname: mRadio.dll
+; Autor: Awkward
+; Link: http://awkward.mirandaim.ru/
+; Übersetzung: 02.07.07
+
+[Simple pseudo protocol with live streaming audio]
+Einfaches Pseudoprotokoll mit Live-Musikstreams
+[Playing music from:]
+Spiele Musik von:
+[Can't play selected station]
+Kann gewählte Station nicht abspielen
+[mRadio protocol is disabled]
+mRadio-Protokoll ist deaktiviert
+[There was a problem loading BASS.DLL library]
+Es gab ein Problem beim Laden der Bass.dll-Bibliothek
+[Anything = station list]
+Irgendwas = Stationsliste
+[Can''t initialize device]
+Kann Gerät nicht aktivieren
+[Incorrect BASS.DLL]
+Falsche Bass.dll
+[BASS version 2.2 was not loaded]
+Bass Version 2.2 wurde nicht geladen
+[mRadio settings]
+mRadio-Einstellungen
+[BASS.DLL not found!]
+Bass.dll nicht gefunden!
+[Sorry!]
+Entschuldigung!
+[BASS.dll not found! Choose BASS.dll path manually]
+Bass.dll nicht gefunden! Wählen Sie das BASS.dll Verzeichnis manuell.
+[Choose BASS.dll path]
+Wählen Sie das Bass.dll Verzeichnis
+
+[Frequency:]
+Frequenz:
+[Now playing:]
+Es wird gespielt:
+[bits]
+Bits
+
+[This plugin plays and records Internet radio streams. Also local media files can be played.]
+Diese Plugin spielt Internetradiostreams ab und nimmt sie auf. Auch lokale Mediendateien können abgespielt werden.
+
+[Mute]
+stumm
+[Record]
+Aufnahme
+[Equalizer presets]
+Equalizer Voreinstellung
+[Tries to connect]
+Versuche zu verbinden
+[BASS library path (empty for default)]
+Bass.dll-Bibliothekverzeichnis (Standard leer)
+[Export All]
+Exportiere alle
+[Status message template]
+Statusnachrichtenvorlage
+[Parking Lot]
+Parkplatz
+[Stop broadcasting]
+Stoppe Stream
+[Add Station]
+Station hinzufügen
+[Station Name]
+Stationsname:
+[Station URL (required)]
+Stations-URL (erforderlich):
+[Add station]
+Station hinzufügen
+[Shuffle playlist]
+Mische Playliste
+[Play from first]
+Spiele von Anfang an
+[To list]
+Zur Liste
+[To INI]
+Zur INI
+[Record path]
+Aufnahmeverzeichnis
+[Start record]
+Aufnahme starten
+[Stop record]
+Aufnahme anhalten
+[Loop single media]
+Wiederhole einzelnes Lied
+[Continuous record]
+Durchgängige Aufnahme
+[Use EAX]
+Benutze EAX
+[OFF]
+Aus
+[Buffer, ms (5000)]
+Puffer, ms (5000)
+[Timeout, ms (5000)]
+Zeitüberschreitung (Timeout), ms (5000)
+[Autoconnect last station]
+Verbinde automatisch mit letztem Sender
+[Offline station as Offline]
+Unsichtbare Sender als offline anzeigen
+[Padded Cell]
+Gummizelle
+[Room]
+Raum
+[Bathroom]
+Badezimmer
+[Living Room]
+Wohnzimmer
+[Stone Room]
+Steinraum
+[Auditorium]
+Hörsaal
+[Concert Hall]
+Konzerthalle
+[Cave]
+Höhle
+[Arena]
+Bühne
+[Hangar]
+Flugzeughalle
+[Carpeted Hallway]
+Hausflur
+[Hallway]
+Flur
+[Stone Corridor]
+Steinkorridor
+[Alley]
+Gasse
+[Forrest]
+Wald
+[Mountains]
+Berge
+[Quarry]
+Steinbruch
+[Plain]
+Flugzeug
+[Sewer Pipe]
+Kanalisationsrohr
+[Under Water]
+Unter Wasser
+[Drugged]
+Unter Drogeneinfluss
+[Dizzy]
+Benommen
+[Psychotic]
+Psychotisch

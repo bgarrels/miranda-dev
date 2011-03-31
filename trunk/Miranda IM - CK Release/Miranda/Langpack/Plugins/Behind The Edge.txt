@@ -1,0 +1,34 @@
+; Pluginname: Behind The Edge
+; Version: 0.0.0.2
+; Dateiname: BehindEdge.dll
+; Autor: Std
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1545
+; Übersetzung: 19.10.06 von Foso
+; Besonderheiten: Entwicklung eingestellt!
+
+[Hide behind the edge]
+Hinter einer Ecke verstecken
+[Dock left edge]
+Linke Ecke
+[Dock right edge]
+Rechte Ecke
+[Dock up-left corner]
+Obere linke Ecke
+[Dock up-right corner]
+Obere rechte Ecke
+[Dock down-left corner]
+Untere linke Ecke
+[Dock down-right corner]
+Untere rechte Ecke
+;[Miranda's AutoHide and AutoSize options is not working properly with BehindEdge\nTurn it off to enable BehindEdge]
+;Abschalten der automatischen Funktionen Verstecken / Größenanpassung von Miranda (empfohlen)
+[Hides contact list behind the screen edge (like the Windows taskbar) with several variants of hot-spots]
+Verbirgt die Kontaktliste am Bildschirmrand (ähnlich Windows-Taskleiste)
+[Hide delay]
+Verstecken nach
+[Show delay]
+Zeigen nach
+[Screen position]
+Bildschirmposition
+[Delays]
+Anzeigedauer

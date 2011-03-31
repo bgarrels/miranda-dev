@@ -1,0 +1,72 @@
+; Pluginname: YAPP 
+; Version: 0.5.0.9a
+; Dateiname: yapp.dll
+; Unique ID: {563780ef-ac7e-40ba-a80a-0dcd4fd20f09}
+; Autor: Scott Ellis, sje, borkra
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2759
+; Übersetzung: 31.03.06 von Dober
+
+[Yet Another Popup Plugin - Provides popup notification window services (unicode and ansi) to other plugins]
+Stellt Popupbenachrichtigungsdienste (Unicode und ANSI) für andere Plugins bereit.
+
+[The quick brown fox jumped over the lazy dog.]
+Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.
+[Example With a Long Title]
+Beispiel mit langem Titel
+[Thequickbrownfoxjumpedoverthelazydog.]
+FranzjagtimkomplettverwahrlostenTaxiquerdurchBayern.
+[The quick brown fox jumps over the lazy dog.]
+Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.
+[An avatar.]
+Ein Avatar.
+[Placement]
+Position
+[Time above avatar]
+Zeit über Avatar
+[No time]
+Keine Zeit
+[Time on left]
+Zeit links
+[Time on right]
+Zeit rechts
+[You cannot set a default timeout of 0.\nValue has been reset.]
+Ein Timeout von 0 ist ungültig.\nWert wurde zurückgesetzt.
+
+[First line]
+Erste Zeile
+[Title underline]
+Trennlinie unter Titel
+[Default Timeout]
+Standard-Timeout
+[Never timeout]
+Kein Timeout
+[Set timeout:]
+Timeout setzen:
+[Width:]
+Breite:
+[Maximum height:]
+Maximale Höhe:
+[Padding:]
+Randabstand:
+[Global hover]
+Alle Popups bei Mausb. nicht ausbl.
+[Disable when]
+Deaktivieren bei
+[Full-screen app running]
+Vollbildanwendung aktiv
+[Popup history]
+Popupverlauf
+[Enable Popups]
+Popups aktivieren
+[Copy title to clipboard]
+Titel in Zwischenablage kopieren
+[Copy message to clipboard]
+Nachricht in Zwischenablage kopieren
+[Copy timestamp to clipboard]
+Zeitstempel in Zwischenablage kopieren
+[Classes]
+Kategorien
+[Set timeout]
+Anzeigedauer setzen
+[Timeout value (0 = default):]
+Anzeigedauer (0 = Standard):

@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6a87509a-1aa0-4a22-ae73-e77c41a43ca7}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{a19b9842-be31-435b-ba2e-6825ebe4d1d4}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="defs">
+      <UniqueIdentifier>{506a9143-2b00-4ab7-8008-cf7e0cea6bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{703348f3-ed96-43bd-a9cc-b7fda029e8f2}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{7120a8a4-3eb5-4623-8a8b-3cc1a7c38928}</UniqueIdentifier>
+      <Extensions>txt</Extensions>
+    </Filter>
+    <Filter Include="Deprecatet">
+      <UniqueIdentifier>{bfe757f4-9ec4-4c1d-b614-62890e40bdce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Option Pages">
+      <UniqueIdentifier>{3dd8f824-baba-46b3-9ade-2865d3b6bc2c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\actions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\avatars.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\avatars_flash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\avatars_gif.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\avatars_simple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bitmap_funcs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\effects.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\formula.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\headers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\history.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\icons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\notifications.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\popup_gdiplus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\popup_thread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\popup_wnd2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\services.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\srmm_menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Deprecated\notify_imp.cpp">
+      <Filter>Deprecatet</Filter>
+    </ClCompile>
+    <ClCompile Include="Deprecated\opt_notify.cpp">
+      <Filter>Deprecatet</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opt_adv.cpp">
+      <Filter>Option Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opt_class.cpp">
+      <Filter>Option Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opt_contacts.cpp">
+      <Filter>Option Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opt_gen.cpp">
+      <Filter>Option Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opt_old.cpp">
+      <Filter>Option Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opt_skins.cpp">
+      <Filter>Option Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opttree.cpp">
+      <Filter>Option Pages</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\actions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\avatars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\avatars_flash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\avatars_gif.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\avatars_simple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bitmap_funcs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\effects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\formula.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\history.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\icons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\notifications.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\popup_gdiplus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\popup_thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\popup_wnd2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\services.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\skin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\srmm_menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\config.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\def_settings.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\defs.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\headers.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\m_avatars.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include_API\m_folders.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\m_fontservice.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include_API\m_ieview.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="api\m_MathModule.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include_API\m_nconvers.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include_API\m_notify_popup.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\m_popup.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="api\m_popup2.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include_API\m_smileyadd.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include_API\m_text.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include_API\m_ticker.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include_API\m_toolbar.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include_API\m_toptoolbar.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include_API\m_updater.h">
+      <Filter>defs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\opt_adv.h">
+      <Filter>Option Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="src\opt_class.h">
+      <Filter>Option Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="src\opt_contacts.h">
+      <Filter>Option Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="src\opt_gen.h">
+      <Filter>Option Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="src\opt_old.h">
+      <Filter>Option Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="src\opt_skins.h">
+      <Filter>Option Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="src\opttree.h">
+      <Filter>Option Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="src\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\add.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\auto.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\avatar.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\block.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Check_off.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Check_on.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\classic.popupskin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\close.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\error.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\favorite.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\fullscreen.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\img.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\info.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\menu.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\message.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\notify.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ok.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\pin.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\pinned.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\popup.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\popup_fav.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\popup_fs.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\popup_group.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\popup_history.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\popup_no.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\popup_plus.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Radio_off.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Radio_on.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\reload.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\reply.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\resize.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\warning.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\Changelog.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\todo.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="res\whatsnew.txt">
+      <Filter>docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="version.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuildStep Include="..\..\include_API\m_notify.h">
+      <Filter>Deprecatet</Filter>
+    </CustomBuildStep>
+    <CustomBuildStep Include="Deprecated\notify_imp.h">
+      <Filter>Deprecatet</Filter>
+    </CustomBuildStep>
+    <CustomBuildStep Include="Deprecated\opt_notify.h">
+      <Filter>Deprecatet</Filter>
+    </CustomBuildStep>
+  </ItemGroup>
+</Project>

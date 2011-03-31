@@ -1,0 +1,10 @@
+; Pluginname: Miranda Image Services 
+; Version: 0.9.11.2 (Lib: 3.14.1)
+; Dateiname: advaimg.dll
+; Unique ID: {287f31d5-147c-48bb-b428-d7c260272535}
+; Autor: Nightwish, The FreeImage project
+; Link: Stable & Testing
+; Übersetzung: 16.08.2008 von Tuxman
+
+[Generic image services for Miranda IM]
+Allgemeine Bilddienste für Miranda IM
