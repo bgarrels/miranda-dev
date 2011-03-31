@@ -1,0 +1,87 @@
+; Pluginname: Sessions 
+; Version: 0.1.3.0
+; Dateiname: sessions.dll
+; Autor: MaD_CLuSTeR
+; Link: http://miranda.radicaled.ru/index.php?plugin=2
+; Übersetzung: 13.02.09 von kaye_styles
+
+[Action on Startup]
+Aktion beim Start
+[Action on Exit]
+Aktion beim Beenden
+[adv.]
+Erw.
+[Choose session to restore from the list:]
+Wiederherzustellende Sitzung auswählen
+[Crash Recovery mode]
+Wiederherstellung nach Absturz
+[&Don't Restore]
+Nicht wie&derherstellen
+[&Don't Save]
+Nicht speichern
+[Enter session name:]
+Sitzungsnamen eingeben:
+[Exclude hidden contacts from session on exit]
+Schließe versteckte Kontakte beim Beenden aus der Sitzung aus
+[Load last session]
+Letzte Sitzung laden
+[Load session...]
+Sitzung laden...
+[Only if last session present]
+Nur, wenn letzte Sitzung existiert
+[Open Sessions Manager]
+Öffne Sitzungsmanager
+[Open Sessions Manager dialog]
+Öffne Sitzungsmanager
+[Restore last Session]
+Letzte Sitzung wiederherstellen
+[Restore Last Session]
+Letzte Sitzung wiederherstellen
+[&Restore Session]
+Wiede&rherstellen
+[Restore Session]
+Sitzung wiederherstellen
+[Save and Close]
+Speichern und schließen
+[Save Current Session]
+Speichere aktuelle Sitzung
+[Save only last]
+Speichere nur die letzte
+[&Save Session]
+&Speichern
+[Save Session]
+Sitzung speichern
+[Save session...]
+Sitzung speichern...
+[Save your current session?]
+Aktuelle Sitzung speichern?
+[Sessions]
+Sitzungen
+[Session Before Last Crash]
+Sitzung vor dem letzten Absturz
+[Sessions Manager]
+Sitzungsmanager
+[Show Favorite Sessions Menu]
+Zeige Sitzungsfavoriten
+[Show other warnings ("session already opened" etc...)]
+Zeige Warnungen ("Sitzung bereits geöffnet" etc.)
+;[Silent restore]
+;Silent restore
+[Startup delay]
+Verzögerung
+[User Sessions Management]
+Eigene Sitzungen verwalten
+[Warn, when some of LastSession contacts are hidden]
+Warnung, wenn einige Kontakte der letzten Sitzung versteckt sind
+
+[Adds Sessions Management Support to Miranda-IM]
+Sitzungsmanagement für Miranda IM.
+
+[Favorite Session]
+Sitzungsfavorit
+[Not favorite Session]
+Kein Sitzungsfavorit
+[Load Session]
+Lade Sitzung
+[Load last Session]
+Lade letzte Sitzung

@@ -1,0 +1,38 @@
+; Pluginname: Authorization State 
+; Version: 0.0.1.6
+; Dateiname: authstate.dll
+; Autor: Thief
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3161
+; Übersetzung: Weishaupt am 27.09.06
+; Besonderheiten: Entwicklung eingestellt!
+
+[If contact didn't authorized you this plugin puts an icon in front of contacts name]
+Falls ein Kontakt Sie nicht autorisiert hat, zeigt dieses Plugin ein Icon vor seinem Namen an.
+[Grant]
+Kontakt ist nicht autorisiert
+[Auth & Grant]
+Ich und Kontakt sind nicht autorisiert
+[Disable AuthState Icons]
+Authstate-Icon deaktivieren
+[Disable AuthState icons]
+Authstate-Icon deaktivieren
+[Enable AuthState Icons]
+Authstate-Icon aktivieren
+[Enable AuthState icons]
+Authstate-Icon aktivieren
+[Show Auth icon]
+'Ich bin nicht autorisiert'-Icon anzeigen
+[Show Grant icon]
+'Kontakt ist nicht autorisiert'-Icon anzeigen
+[Enable Menu Item (*)]
+Hauptmenüeintrag anzeigen (*)
+[Show icons only for recently added contacts]
+Icons nur für kürzlich hinzugefügte Kontakte
+[* Restart of Miranda required]
+* Erfordert Neustart von Miranda
+[Hide contact]
+Verstecke Kontakt
+[Mark contact as ignored]
+Markiere Kontakt als ignoriert
+[Deny existing authorization request]
+Verweigere existierenden Autorisierungsanfrage

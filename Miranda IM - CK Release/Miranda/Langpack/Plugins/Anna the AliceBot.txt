@@ -1,0 +1,17 @@
+; Pluginname: Anna the AliceBot 
+; Version: 0.0.0.4
+; Dateiname: alicebot.dll
+; Autor: Jens Theeﬂ
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=326
+; ‹bersetzung: snoop am 29.06.05 / Rambo am 09.05.08
+
+[Autochat everybody]
+Mit jedem automatisch Chatten
+[Autochat anybody not in contact list]
+Autom. Chatten mit Kontakten, die nicht in der Kontaktliste sind
+[Autochat everybody while away]
+Mit jedem automatisch Chatten, wenn Abwesend.
+[Warn contacts Anna is chatting:]
+Kontate warnen, wenn Anna chattet:
+[Hi, I'm Anna the robot and I'll be chatting with you while my user is away.]
+Hi, ich bin Anna, der Alicebot, und ich werde mit Ihnen chatten, so lange Ihr Benutzer abwesend ist.

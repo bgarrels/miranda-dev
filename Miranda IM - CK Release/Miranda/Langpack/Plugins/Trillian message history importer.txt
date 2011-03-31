@@ -1,0 +1,71 @@
+; Pluginname: Trillian message history importer
+; Version: 0.2.1
+; Dateiname: importTrillian.dll
+; Autor: Spin
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1929
+; Übersetzung: Foso 20.10.06
+
+[Import settings]
+Importiere Einstellungen
+[Trillian logs directory]
+Trillian Log-Verzeichnis
+[Import ICQ history]
+Importiere ICQ-Verlauf
+[Import MSN history]
+Importiere MSN-Verlauf
+[Import AIM history]
+Importiere AIM-Verlauf
+[Import Yahoo! history]
+Importiere Yahoo!-Verlauf
+[Import IRC history]
+Importiere IRC-Verlauf
+[Import IRC channel history]
+Importiere IRC-Raum-Verlauf
+[Import history of existing contacts]
+Importiere Verlauf bestehender Kontakte
+[Add new contacts if a contact from the history is not on the list]
+Kontakte die im Verlauf aber nicht in der Liste sind hinzufügen
+[Skip duplicate messages]
+Überspringe doppelte Nachrichten
+[Import messages]
+Importiere Nachrichten
+[Import status reports (filetransfers, away msg, etc.)]
+Importiere Statusnachrichten
+[Fast mode (backup your db!)]
+Schnellmodus (Sichere deine Db!)
+[There's nothing to import, please\nselect a protocol.]
+Bitte wähle ein Protokoll zum Importieren aus.
+[Invalid settings]
+Ungültige Einstellungen
+;Progress dialog
+[Importing History]
+Importiere Verlauf
+[Import in progress...]
+Import in Arbeit...
+[Overall (current protocol)]
+Übergreifend (aktuelles Protokoll)
+[WARNING: If you cancel now and continue later you might\nget duplicate entries. Cancel anyways?]
+Achtung: Wenn du jetzt abbrichst und später weiter machst, \nkönntest du doppelte Einträge bekommen. Trotzdem abbrechen?
+[Please select the \'logs\' folder in your Trillian directory]
+Bitte wählen sie das Log-Verzeichnis in ihrem Trillian-Verzeichnis aus
+[No logs found for this protocol.]
+Es wurden keine Logs für dieses Protokoll gefunden
+[Done importing %d contact history files!]
+Importieren von %d Kontaktlisten-Dateien abgeschlossen
+[\nCheck your UIN and path settings. Path musst end with \\logs]
+\nÜberprüfe deine UIN und die Pfadangaben. Der Pfad muss mit \logs enden.
+[Import Trillian history/contacts...]
+Importiere Trillian Verlauf/Kontakte...
+[Replace duplicate messages]
+Ersetze doppelte Nachrichten
+[Delete entries before]
+Lösche Einträge vor
+[(Must match this format exactly: MMM DD HH:mm:ss YYYY)]
+(Muss exakt mit diesem Format übereinstimmen: MMM DD HH:mm:ss YYYY)
+[Try to auto-detect UTF8 strings (is slow, detects öäüßéàèç)]
+Versuche UTF8-Zeichen automatisch zu erkennen (langsam, erkennt öäüßéàèç)
+[Interpret logs as UTF8 files]
+Interpretiere Log-Dateien als UTF8-Dateien
+
+[Imports contacts and messages from Trillian.]
+Importiert die Konktate und Nachrichten von Trillian.

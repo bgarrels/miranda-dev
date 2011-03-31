@@ -1,0 +1,106 @@
+; Pluginname: History Linklist 
+; Version: 0.0.0.2
+; Dateiname: linklist.dll
+; Unique ID: {da0b09f5-9c66-488c-ae37-8a5f191c9079}
+; Autor: Thomas Wendel, gureedo
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4380
+; Link x64: http://addons.miranda-im.org/details.php?action=viewfile&id=4379
+; SVN: http://code.google.com/p/historylinklistplus/
+; Übersetzung: 25.07.05 von mdg-webmaster
+
+[Unable to load the Rich Edit control!]
+Rich Edit control konnte nicht geladen werden!
+[&Create Linklist]
+Linkliste erstellen
+[Linklist Plugin]
+Linklisten Plugin
+[History is empty!]
+Keine Nachrichten in der History!
+[Processing history...]
+History wird verarbeitet...
+[Processing list...]
+Liste wird verarbeitet...
+[Could not create window!]
+Fenster konnte nicht erzeugt werden!
+[Could not allocate memory!]
+Speicher konnte nicht belegt werden!
+[There are no links in history!]
+Die History enthält keine Links!
+[Matches for searchtext]
+Treffer für Suchtext 
+[No messages found!\nPlease change current filter options.]
+Keine Nachrichten gefunden!\nBitte Filterregeln ändern.
+[Miranda Linklist]
+Miranda Linkliste
+[mailaddresses]
+Mailadressen
+[incoming]
+eingehende
+[outgoing]
+ausgehende
+[search options]
+Suchoptionen
+
+[&Clear Search Results]
+Suchergebnisse löschen
+[Message &Direction]
+Nachrichtenrichtung
+[&Incoming Messages Only]
+Nur eingehende Nachrichten
+[&Outgoing Messages Only]
+Nur ausgehende Nachrichten
+[Message &Type]
+Nachrichtenart
+[&Webaddresses Only]
+Nur Internetadressen
+[&Mail-Addresses Only]
+Nur E-Mail-Adressen
+
+[Open]
+Öffnen
+[Open in new Window]
+In neuem Fenster öffnen
+[Show Message]
+Zeige Nachricht
+
+[Search for:]
+Suchen nach:
+[Message direction]
+Nachrichtenrichtung
+[Message types]
+Nachrichtenarten
+[All directions]
+alle Richtungen
+[Incoming only]
+nur eingehende
+[Outgoing only]
+nur ausgehende
+[All types]
+alle Arten
+[Mail addresses only]
+nur Mailadressen
+[Web addresses only]
+nur Web-Adressen
+[Deep search]
+Genaue Suche
+
+[Colour Select]
+Farbauswahl
+[Use Miranda Settings]
+Miranda Einstellungen verwenden
+[Plugin Default]
+Standard
+[No Miranda Settings specified!]
+Keine Miranda Standardeinstellungen vorhanden!
+[Open links always in a new window]
+Links immer in neuem Fenster öffnen
+[Update list on new events]
+Liste automatisch aktualisieren
+[Show whole Message on 'mouse over' event]
+Ganze Nachricht bei Mauskontakt anzeigen
+[Save window position individually for each contact]
+Fensterposition individuell für jeden Kontakt speichern
+[Show...]
+Zeige...
+[Parting line]
+Trennlinie

@@ -1,0 +1,55 @@
+; Pluginname: Historyviewer 
+; Version: 0.1.3.0
+; Dateiname: historyviewer.dll
+; Autor: Rein-Peter de Boer (peacow)
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=529
+; Übersetzung: 28.06.05 von flower 
+
+[Message history [%s]]
+Verlauf von %s
+[&Search... ]
+&Suchen...
+[Show:]
+Zeige:
+[last 100]
+100 letzte
+[last 200]
+200 letzte
+[last 500]
+500 letzte
+[Copy to msg]
+Ins Nachrichtenfenster kopieren
+[Find what:]
+Suc&hen nach:
+[Whole word]
+Ganzes Wort
+[Display items]
+Ergebnisse zeigen
+[Show date/time]
+Datum/Zeit zeigen
+[Format:]
+Format:
+[Scale:]
+Größe:
+[Display messages]
+Nachrichten zeigen
+[Reverse order (last event on top)]
+Umgekehrte Folge (letztes zu erst)
+[Limit number of messages at startup]
+Beim Start Nachrichtenanz. begrenzen
+[Use plain fonts and colors]
+Std.Schrift und Farben benutzen
+[Remember window position and size for each contact]
+Fensterposition und -größe speichern für jeden Kontakt
+[Show loading progress indicator]
+Ladebalken anzeigen
+[Left align message 'body']
+Nachrichten links ausrichten
+; not in lp
+[Use SmileyAdd to replace smileys]
+SmileyAdd für Smilies benutzen
+[Use Textformat to add formatting]
+Textformat benutzen für Formatierung
+; Plugin Infos history viewer
+[Replaces the standard history viewer]
+Mit diesem Plugin wird der Standardverlauf wird durch einen erweiterten Verlauf ersetzt.

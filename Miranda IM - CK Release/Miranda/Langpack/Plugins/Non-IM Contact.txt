@@ -1,0 +1,76 @@
+; Pluginname: Non-IM Contact 
+; Version: 0.5.0.1
+; Dateiname: nimcontact.dll
+; Autor: JdGordon
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1295
+; Übersetzung: 04.04.07 von Foso
+
+[Disable timer]
+Timer deaktivieren
+[&Add Non-IM Contact]
+Non-Im Kontakt hinzufügen
+[Ignore global status change]
+Globalen Statuswechsel ignorieren
+[&String Maker]
+Stringersteller
+[String Maker]
+Stringersteller
+[String to test]
+String zum Testen
+[&Test String]
+String testen
+[Away as another status]
+Abwesend als einen anderen Status
+[&View/Edit Files]
+Daten zeigen/bearbeiten
+[View/Edit Files]
+Daten zeigen/bearbeiten
+;[Add File]
+[Contact is always visible]
+Kontakt ist immer sichtbar
+[Use Timer]
+Timer benutzen
+[Program parameters:]
+Programmparameter:
+[Contacts display name]
+Kontakt Anzeigename
+[E&dit Contact Settings]
+Kontakteinstellungen bearbeiten
+[&Export Non-IM Contact]
+Non-IM Contact exportieren
+[Co&py Non-IM Contact]
+Non-IM Contact kopieren
+[EXAMPLE: %fn1,%fn2]
+BEISPIEL: %fn1,%fn2
+[Type one replace string per line in the format "origional text,new text"]
+Geben Sie einen String pro Zeile im Format "original text,neuer Text" ein
+[Remove Selected File]
+Eintrag löschen
+[Returns....]
+Ausgabe....
+[Update URL every]
+URL erneuern alle
+;[If the protocol timer is disabled web pages wont be updated]
+[Contacts Tooltip]
+Kontakt Tooltip
+[Help!!!]
+Hilfe!!!
+[Timer Settings]
+Timereinstellungen
+[Timer Options]
+Timer Optionen
+[CList Settings]
+Kontaktlisteneinstellungen
+[Group\\Sub-Group]
+Gruppe\\Sub-Gruppe
+;[Unless Non-IM Contacts protocol is OFFLINE]
+[O&pen Folder]
+Ordner öffnen
+[O&pen File]
+Datei öffnen
+[New Non-IM Contact]
+Neuer Non-IM Kontakt
+[Timer interval (in seconds)]
+Timer Intervall (Sekunden)
+[This will take affect after Non-IM Contacts' status is changed]
+Tritt dann in Kraft, wenn der Kontakt seinen Status ändert

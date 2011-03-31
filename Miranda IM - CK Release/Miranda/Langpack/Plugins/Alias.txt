@@ -1,0 +1,14 @@
+; Pluginname: Alias 
+; Version: 0.0.2.0
+; Dateiname: alias.dll
+; Autor: Peter Boon
+; Übersetzung: Foso am 10.4.07
+; Besonderheiten: Entwicklung eingestellt!
+
+[Meaning]
+Bedeutung
+[Parse the text in the message dialog directly]
+Text automatisch im Nachrichtenfenster umwandeln
+[Translate to]
+umwandeln zu
+ 

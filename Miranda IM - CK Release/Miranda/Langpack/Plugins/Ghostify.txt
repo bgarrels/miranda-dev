@@ -1,0 +1,43 @@
+; Pluginname: Ghostify 
+; Version: 1.2.1.0
+; Dateiname: ghostify.dll
+; Autor: Karl Einholz
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1557
+; Übersetzung: 13.01.05 von Karl Einholz
+
+[Note: You must have contact list transparency enabled to use this plugin]
+Hinweis: Sie müssen die Transparenz der Kontaktliste eingeschaltet haben
+[&Enable Ghostify]
+&Ghostify aktivieren
+[&Unghostify on mouse hover]
+Auf Maus&hover reagieren
+[Track mouse &actions]
+Mausereignisse &verfolgen
+[Pass &right mouse button to Miranda]
+&Rechtsklick an Miranda weiterleiten
+[Testfield]
+Testfeld
+[&Ghost delay]
+&Verzögerung
+[&Hover delay]
+Hover&zeit
+[&Sensitivity]
+&Empfindlichkeit
+[low]
+niedrig
+[high]
+hoch
+
+[second]
+Sekunde
+[pixel]
+Pixel
+[Ghostify Window]
+Fenster wird unanklickbar
+[Unghostify Window]
+Fenster wird anklickbar
+
+[Ghostify: Ghostify Window]
+Ghostify: Fenster wird unanklickbar
+[Ghostify: Unghostify Window]
+Ghostify: Fenster wird anklickbar

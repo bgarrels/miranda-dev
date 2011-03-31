@@ -1,0 +1,19 @@
+; Pluginname: Quick Replies
+; Version: 0.8.1.0
+; Author: Unsane
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4249
+
+[Quick Replies]
+Schnelle Antworten
+[- Add your replies, one per line.]
+- Fügen Sie in jede Zeile eine Antwort ein.
+[- Add "---" for separator.]
+- Fügen Sie "---" für eine Trennlinie ein.
+[- Press [v] button for variable's help.]
+- Drücken Sie auf [V] um Hilfe zu den Variablen zu erhalten
+[Send replies immediately]
+Antworten sofort senden
+[Plugin for quick insert (or sending) pre-defined messages in message input area.]
+Plugin, um schnell vordefinierte Nachrichten in den Eingabebereich einzufügen (oder zu senden).
+[Quick Replies\r\nLeft button - open menu\r\nRight button - options page]
+Schnelle Antworten\r\nLinksklick öffnet das Menü\r\nRechtsklick öffnet die Einstellungsseite

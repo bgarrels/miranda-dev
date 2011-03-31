@@ -1,0 +1,59 @@
+; Pluginname: StatusMessageRequestNotify 
+; Version: 0.2.0.0
+; Dateiname: smrn.dll
+; Unique ID: {70d8e0ca-d0a8-11db-9705-005056c00008}
+; Autor: d.zinic aka [sin]
+; Link: http://www.miranda-addons.com/393_StatusMessageRequestNotify/
+; Übersetzung: 23.09.07 von R(i)SK
+
+[Notifies, when somebody reads the status message]
+Benachrichtigt Sie, wenn jemand Ihre Statusnachricht liest
+
+[xStatus]
+XStatus
+[Away-Request]
+Away-Abruf
+[Status Message Request]
+Statusnachrichten-Abruf
+[Log, when...]
+Logge, wenn...
+[You must install "LogService" plugin to log status message requests]
+Um Statusnachrichtenabrufe zu loggen, muss das "LogService"-Plugin installiert sein!
+[Exclude potential auto-request clients in xStatus mode]
+Clients mit automatischer XStatus-Abfrage ausschließen
+[Show requests from contacts, who aren't in list]
+Zeige Abfragen von Kontakten, welche nicht in der Kontaktliste sind
+[Show xStatus titles, instead of "xStatus"]
+Zeige XStatus-Titel anstelle von "XStatus"
+
+[Enable Away Request Popup]
+Aktiviere Popup-Benachrichtigung
+[Disable Away Request Popup]
+Deaktiviere Popup-Benachrichtigung
+[Enable Away Request Logging]
+Aktiviere Loggen von Benachrichtigungen
+[Disable Away Request Logging]
+Deaktiviere Loggen von Benachrichtigungen
+
+[Disable &away request notification]
+StatusMessageRequestNotify-Popups deaktivieren
+[Enable &away request notification]
+StatusMessageRequestNotify-Popups aktivieren
+[Disable Status Message Request Popups]
+Popup bei Statusnachrichten-Abruf deaktivieren
+[Notify, when...]
+Benachrichtige, wenn...
+[is reading your Away-Message!]
+...liest Ihre Abwesenheitsnachricht!
+[is reading your xStatus-Message!]
+...liest Ihre XStatus-Nachricht!
+[is reading your N/A-Message!]
+...liest Ihre Außer-Haus-Nachricht!
+[is reading your Occupied-Message!]
+...liest Ihre Beschäftigt-Nachricht!
+[is reading your DND-Message!]
+...liest Ihre "Bitte nicht stören"-Nachricht!
+[is reading your FFC-Message!]
+...liest Ihre "Für Chat bereit"-Nachricht!
+[Custom:]
+Eigenen:

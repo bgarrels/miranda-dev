@@ -1,0 +1,23 @@
+; Pluginname: VyPressChat 
+; Version: 0.9.3.1
+; Dateiname: VyPressChat.dll
+; Autor: Saulius Menkevicius
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1786
+; Übersetzung: Sebijk
+
+[Adds support for Vypress Chat networks.]
+Unterstützung für das VyPress-Chatnetzwerk.
+[Vypress Chat Protocol]
+VyPress Chat-Protokoll
+[Vypress Chat Netzwerk]
+VyPress Chatnetzwerk
+[Set &nickname]
+Nickname setzen
+[Set nickname]
+Nickname setzen
+[Your nickname:]
+Ihr Nickname:
+[User Information]
+Benutzerinformationen
+[Other options]
+Andere Optionen

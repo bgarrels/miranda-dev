@@ -1,0 +1,215 @@
+; Pluginname: AIM Protocol
+; Version: 0.9.11.2
+; Dateiname: aim.dll
+; Unique ID: {3750a5a3-bf0d-490e-b65d-41ac4d29aeb3}
+; Autor(en): Boris Krasnovskiy, Aaron Myles Landwehr
+; Link: Stable & Testing
+; Übersetzung: Freak am 03.12.05
+
+[Create a new AIM account]
+Ein neues AIM-Konto erstellen...
+[AIM User Details]
+AIM-Benutzerangaben
+[AIM Options]
+AIM-Einstellungen
+[Message Delivery Confirmation]
+Empfangsbestätigungen anfordern
+[Do Not Autoreply When Away]
+Keine Autoantwort, wenn abwesend
+[Convert Incoming Messages to BBCode]
+Eingehende Nachrichten in BBCode
+[Convert Outgoing Messages to HTML]
+Ausgehende Nachrichten in HTML
+[Disable Account Type Icons]
+Kontentyp-Icons deaktivieren
+[Disable Extended Status Icons]
+Erweiterte Statusicons deaktivieren
+[Check Mail on Login]
+E-Mails beim Verbinden prüfen
+[Notify about new mail]
+Über neue Mails benachrichtigen
+[Manage Server Groups]
+Server-Gruppen verwalten
+[*Aim must be reconnected  for some option to take effect.]
+AIM muss zum Übernehmen einiger Einstellungen neu verbinden
+[Instant Idle on Login]
+Sofort als untätig anmelden
+[Force Proxy File Transfers]
+Dateien per Proxy versenden
+[Masquerade as a Sidekick/Hiptop User]
+Als Sidekick-/Hiptop-Nutzer ausgeben
+[Disable SSL]
+SSL deaktivieren
+[Force Single Client]
+Kein mehrfaches Einloggen erlauben
+[Users who can contact me:]
+Benutzer, die mich kontaktieren dürfen:
+[Allow all users]
+Alle Benutzer erlauben
+[Allow only users on contact list]
+Nur Benutzer auf meiner Kontaktliste erlauben
+[Allow only users below]
+Nur folgende Benutzer erlauben
+[Allow contacts to be notified of:]
+Kontakte dürfen informiert werden über:
+[Block all users]
+Alle Benutzer blockieren
+[Block only users below]
+Nur folgende Benutzer blockieren
+[Repeat]
+Wiederholen
+[Confirm Account]
+Account bestätigen
+[*Applied upon reconnect]
+*Bei Neuverb. gespeich.
+
+[Save Profile]
+Profil speichern
+
+[Proxy Server File Transfer Error]
+Dateitransfer über Proxy fehlgeschlagen.
+[Cannot start a file transfer with this contact while another file transfer with the same contact is pending.]
+So lange noch eine Dateiübertragung mit diesem Kontakt läuft, kann keine neue Datei versendet werden.
+[AimOSCAR allows only one file to be sent at a time.]
+Es kann in AIM nur eine Datei auf einmal gesendet werden.
+[Read &HTML Away Message]
+&HTML-Abwesenheitsnachricht lesen
+[Read Profile]
+Profil lesen
+
+[[Auto-Response]:]
+[Automatische Antwort]:
+[No information has been provided by the server.]
+Es wurden keine Informationen über den Server ermittelt.
+
+[A confirmation message has been sent to the new email address. Please follow its instructions.]
+Eine Bestätigungsnachricht wurde an die neue E-Mail-Adresse gesendet. Bitte befolgen Sie ihre Anweisungen.
+[A confirmation message has been sent to your email address. Please follow its instructions.]
+Eine Bestätigungsnachricht wurde an Ihre E-Mail-Adresse gesendet. Bitte befolgen Sie ihre Anweisungen.
+[Unable to confirm at this time. Please try again later.]
+Momentan keine Bestätigung möglich, bitte versuchen Sie es später noch einmal.
+[Your account has already been confirmed.]
+Ihr Account wurde bereits bestätigt.
+[Can't start the confirmation procedure.]
+Kann die Verbindungsprozedur nicht starten
+[Buddylist Error]
+Fehler Server-Kontaktliste
+[Recipient is not logged in.]
+Empfänger ist nicht verbunden.
+[Requested service is unavailable.]
+Dienst, den Sie angefragt haben, ist nicht verfügbar.
+[Requested service is not defined.]
+Dienst, den Sie angefragt haben, ist nicht definiert.
+[You sent obsolete SNAC.]
+Überflüssiges SNAC gesendet.
+[Not supported by server.]
+Vom Server nicht unterstützt.
+[Not supported by the client.]
+Vom Client nicht unterstützt.
+[Refused by client.]
+Vom Client abgelehnt.
+[Reply too big.]
+Antwort zu groß.
+[Response lost.]
+Antwort verloren.
+[Request denied.]
+Anfrage abgelehnt.
+[Incorrect SNAC format.]
+Inkorrektes SNAC-Format.
+[Insufficient rights.]
+Unzulängliche Rechte.
+[Recipient blocked.]
+Empfänger blockiert.
+[Sender too evil.]
+Sender zu 'teuflisch'.
+[Reciever too evil.]
+Empfänger zu 'teuflisch'.
+[User temporarily unavailable.]
+Benutzer vorübergehend nicht verfügbar.
+
+[AimOSCAR]
+AIM Oscar
+[Add To Server List]
+Zum Server hinzufügen
+[AIMOSCAR was unable to bind to a port. File transfers may not succeed in some cases.]
+AIMOSCAR konnte sich nicht an einen Port binden, Dateiübertragungen könnten in einigen Fällen scheitern.
+[Instant Idle]
+Sofort untätig
+[Manage Account]
+Account verwalten
+[Check Mail]
+Mails abrufen
+[AIM Instant Idler]
+AIM: Untätigkeit einstellen
+[Number of Hours:]
+Anzahl Stunden:
+[Number of Minutes:]
+Anzahl Minuten:
+[Set Idle]
+Setzen
+[Unset Idle]
+Aufheben
+[Create a new AIM Screen Name]
+Erstelle ein neues AIM-Konto
+[AIM Protocol]
+AIM-Protokoll
+[Aim Protocol]
+AIM-Protokoll
+[Please, enter a username in the options dialog.]
+Bitte einen Benutzernamen in den Einstellungen angeben.
+
+[Profile Editor]
+Profileditor
+[Confirmed]
+Bestätigt
+[Not Confirmed]
+Unbestätigt
+[Blocked list]
+Blockierliste
+[AIM Icon]
+AIM-Icon
+[Not Bold]
+Nicht fett
+[Not Italic]
+Nicht kursiv
+[Not Underline]
+Nicht unterstrichen
+[Subscript]
+Tiefgestellt
+[Not Subscript]
+Nicht tiefgestellt
+[Superscript]
+Hochgestellt
+[Not Superscript]
+Nicht hochgestellt
+[Normal Script]
+Normaler Stil
+[Not Normal Script]
+Nicht normaler Stil
+
+[AIM Link Protocol]
+AIM-Link-Protokoll
+
+[Chat Room]
+Chatraum
+[Join Chat Room]
+Chatraum betreten
+[&Leave Chat]
+Chat ver&lassen
+[&Join Chat]
+Chat betreten
+[Invite Buddy To Chat Room]
+Kontakt in Chatraum einladen
+[Invitation reason]
+Grund der Einlad.
+[Chat Room Invitation Request]
+Einladung in einen Chatraum
+[Join me in this buddy chat!]
+Bitte komm zu mir in diesen Chatraum!
+[This allows access to user defined chat rooms. To access predefined chat rooms use web links]
+Dies erlaubt Zugang zu benutzerdefinierten Chaträumen. Um vordefinierten Chaträumen beizutreten verwenden Sie Web-Links.
+
+[AIM Protocol]
+AIM-Protokoll
+[Mismatched Screen Name or password.]
+Falsches Anzeigename oder Passwort.

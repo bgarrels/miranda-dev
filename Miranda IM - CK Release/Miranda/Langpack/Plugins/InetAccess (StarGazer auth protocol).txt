@@ -1,0 +1,169 @@
+; Pluginname: InetAccess (StarGazer auth protocol) 
+; Version: 1.2.0.179
+; Dateiname: InetAccess.dll
+; Autor: nE0sIghT
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3280
+; Übersetzung Foso am 10.02.07
+; Besonderheiten: Entwicklung eingestellt!
+
+[The InetAccess plugin cannot be loaded. It requires Miranda IM 0.4.0.1 or later.]
+Das InetAccess-Plugin kann nicht geladen werden. Es benötigt Miranda IM 0.4.0.1 oder höher.
+
+;[Cash]
+;Crash
+;[Free internet]
+;Freies Internet
+[Free megabytes]
+Megabyte frei frei
+[Switch to mini-stat]
+Zur Ministatistik wechseln
+[Switch to full stat]
+Zur großen Statistik wechseln
+[Hide stat]
+Statistik verstecken
+[Show stat]
+Statistik anzeigen
+[Connect]
+Verbinden
+[Disconnect]
+Trennen
+[Switch stat]
+Statistik wechseln
+[Profile %s will be disconnected!]
+Profil %s wird getrennt!
+
+[Profile name can not be empty!]
+Profilname darf nicht leer bleiben!
+[No servers found in LAN]
+Keine Server gefunden
+
+[InetAccess plugin]
+InetAccess
+[Network error]
+Netzwerkfehler
+[Another copy of InetAccess is running!]
+Es läuft bereits eine Version von InetAccess!
+[Another copy of InetAccess is running or configured wrong local IP address!]
+Es läuft bereits eine Version von InetAccess oder ist falsch konfiguriert!
+[You must configure at least one profile first!]
+Sie müssen erst ein Profil erstellen
+[Can not resolve server name!]
+Kann Servernamen nicht auflösen!
+;[Free inet]
+[Free MBs]
+MB frei
+[Kb]
+KB
+[Mb]
+MB
+[Gb]
+GB
+;[Cash limit reached!]
+[Enter password for "%s"]
+Passwort für "%s" eingeben
+[Please enter password!]
+Bitte Passwort eingeben!
+
+[Enter new profile name]
+Neuen Profilenamen eingeben
+[Authorization]
+Autorisierung
+[                Life is a Dream...\nOne day we must all wakeup... [WoT]]
+                 Das Leben ist ein Traum...\nEines Tages werden wir alle aufwachen... [WoT]
+[Import settings from ini file...]
+Einstellungen aus einer ini-Datei importieren
+[Export settings to ini file...]
+Einstellungen in eine ini-Datei exportieren
+[Ed]
+Bearb.
+[Ask password on connect]
+Passwortabfrage beim Verbinden
+[Server IP/DNS name:]
+Server IP/DNS-Name:
+[Server port:]
+Serverport:
+[Find in LAN]
+Suche im LAN
+[Make this profile default]
+Dieses Profil als Standard
+[Bind password to HDD]
+Passwort an Festplatte binden
+[Full statistics]
+Große Statistik
+[Mini-stat]
+Ministatistik
+[Show full statistic]
+Zeige große Statistik
+[Show mini-stat]
+Zeige Ministatistik
+[Show stat for direction:]
+Zeige Statistik für Richtung:
+;[Show cash]
+[Show traffic count]
+Zähler für den Verkehr zeigen
+[Show free megabytes]
+Zeige freie MegaBytes
+[NOTE: mini-stat settings also affects\nstatus message of the profile contact!]
+Hinweis: Ministatistik-Einstellungen beeinflussen\nStatusnachrichten im Kontaktprofil!
+[Show statistics on Miranda`s start]
+Zeige Statistiken beim Start von Miranda
+[Traffic display:]
+Verkehrsanzeige:
+;[Bytes]
+;[Kilobytes]
+;[Megabytes]
+;[Float]
+;[Download ]
+;[Upload ]
+;[Upload + Download]
+[Upload and Download]
+Upload und Download
+[Use all network interfaces]
+Alle Netzwerkadapter benutzen
+[Bind specific IP:]
+An IP-Adresse binden:
+[Protocol version:]
+Protokollversion:
+[Use any free local port]
+Benutze irgendeinen freien lokalen Port
+[Manually specify local port:]
+Lokalen Port manuell bestimmen:
+[Status for offline profiles:]
+Status für Offline-Protokolle:
+[Mini-stat display]
+Ministatistikanzeige
+[Background color (Offline):]
+Hintergrundfarbe (offline):
+[Background color (Online):]
+Hintergrundfarbe (online):;
+[Background color (Blink):]
+Hintergrundfarbe (Blinken):;
+[Blink interval:]
+Blinkintervall:
+[msec]
+mSek.
+[Transparency:]
+Transparent:
+[min]
+Min
+[max]
+Max
+[Use limit:]
+Limitieren:
+[When limit reached:]
+Wenn das Limit erreicht ist:
+[Notify ]
+Benachrichtigen
+[Blink mini-stat]
+Ministatistik soll blinken
+[Session ]
+Sitzung
+[Month ]
+Monat
+[Safe disconnect (*)]
+Sicheres Trennen (*)
+[(*) Turning this option off will lead to fast disconnect/exit from Miranda, but doesn't give a guaranties that you are logout from server immediately.]
+Wenn Sie diese Option ausschalten, kann es zum schnellen Trennen/Beenden von Miranda kommen, aber es garantiert nicht das sofortige Abmelden vom Server.
+
+[Probably, settings of the previous version of InetAccess plugin which you used, are incompatible with the current version. OK to clear settings?]
+Möglicherweise sind die Einstellungen von InetAccess, die Sie benutzen, inkompatibel zu ihrer aktuellen Version. OK zum Löschen der Einstellungen,

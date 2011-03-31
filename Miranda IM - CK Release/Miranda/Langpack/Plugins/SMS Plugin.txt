@@ -1,0 +1,90 @@
+; Pluginname: SMS Plugin
+; Version: 2.5.1.2
+; Dateiname: sms.dll
+; Autor: NuKe007
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=589
+; Übersetzung: Sebijk
+
+[Send &SMS...]
+&SMS-Nachricht senden
+[&SMS Message]
+&SMS-Nachricht
+[Can't load SMS Plugin, ICQ protocol must be loaded.]
+Das SMS-Plugin konnte nicht geladen werden. Das ICQ-Protokoll (icq.dll) muss zuerst geladen werden.
+[SMS Plugin Error]
+SMS-Pluginfehler
+[From %s on ICQ:\r\n\r\n]
+Von %s über ICQ:\r\n\r\n
+[Multiple >>]
+Mehr >>
+[<< Single]
+<< Weniger
+[SMS message didn't send by ICQ to %s because:\r\n]
+SMS-Nachricht wurde nicht von ICQ zu %s gesendet. Grund:\r\n
+[SMS Confirmation from %s]
+SMS-Bestätigung von %s
+[SMS Message from %s]
+SMS-Nachricht von %s
+[Add Number To The Multiple List]
+Nummer zu der Mehrfache Liste hinzufügen
+[Save Number To The User's Details Phonebook]
+Nummer zu den Benutzerdetails im Telefonbuch speichern
+[Show/Hide Multiple List]
+Mehrfache Liste aus/einblenden
+[Shows How Much Chars You've Typed]
+Anzahl der geschriebenen Zeichen anzeigen
+[The SMS message send to %s timed out.]
+Die SMS-Nachricht zu %s konnte nicht zugestellt werden.
+;[The phone number should start with a + and consist of numbers, spaces, brackets and hyphens only.] 
+[Error - Message too long]
+Fehler - Nachricht zu lang
+[Message is too long, press OK to continue.]
+Die Nachricht ist zu lang. Klicken Sie auf OK, um fortzufahren.
+;[Valid phone numbers are of the form '+(country code)(phone number)'. The contents of the phone number portion is dependent on the national layout of phone numbers, but often omits the leading zero.]
+[No Numbers]
+Keine Nummern
+;[There must be numbers in the list first.]
+; SMS-Einstellungen
+[Signature:]
+Signatur:
+[Use Signature?]
+Signatur benutzen?
+[Put signature at the:]
+Signatur setzen am:
+[Begining]
+Anfang
+[End]
+Ende
+[Show server notifications:]
+Server-Benachrichtigung anzeigen:
+[Add number to list]
+Nummer zur Liste hinzufügen
+[Save number]
+Nummer speichern
+[Enter message:]
+Nachrichteingabe:
+[Chars:]
+Zeichen:
+
+[Defatult SMS Account:]
+Standard SMS-Account:
+[Save window position per contact:]
+Fensterposition pro Kontakt speichern:
+[Auto popup on new message:]
+Automatische Popup-Benachrichtigung:
+[Received SMS]
+SMS empfangen
+[Message received:]
+Nachricht erhalten:
+[Read Next]
+Nächste
+[The SMS message send timed out]
+Die SMS-Nachricht konnte nicht zugestellt werden.
+[SMS Message Didn't Send]
+SMS-Nachricht wurde nicht gesendet
+[&Try again]
+&Erneuert versuchen
+[Message ID:]
+Nachricht-ID:
+[Network:]
+Netzwerk:

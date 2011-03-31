@@ -1,0 +1,131 @@
+; Pluginname: GamerStatus 
+; Version: 1.0.0.4
+; Dateiname: gamerStatus.dll
+; Autor: mistag
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1173
+; Übersetzung: 01.10.05 von wallawalla
+; Besonderheiten: Entwicklung eingestellt!
+
+[[b]%s[/b] activated]
+ [b]%s[/b] aktiviert
+[[b]%s[/b] detected running]
+ [b]%s[/b] läuft gerade
+[[b]%s[/b] detected running, delay: %is]
+ [b]%s[/b] läuft gerade, Verzögerung: %is
+[[b]%s[/b] terminated]
+ [b]%s[/b] beendet
+[[b]%s[/b] terminated, delay: %is]
+ [b]%s[/b] beendet, Verzögerung: %is
+[Changed to [b]%s[/b]]
+Wechsel zu [b]%s[/b]
+[[b]%s[/b] disabled]
+ [b]%s[/b] deaktiviert
+[Disabled status-control for [b]%s[/b]]
+Statuskontrolle für [b]%s[/b] deaktiviert
+[[b]Back[/b] to normal]
+ [b]Zurück[/b] zu Normal
+[LaunchInfo.txt could [b]not[/b] be opened]
+LaunchInfo.txt konnte [b]nicht[/b] geöffnet werden
+
+[You must enter a process name!]
+Prozessname eingeben!
+[Modified setting]
+Modifizierte Einstellung
+[Delete?]
+Löschen?
+[Delete this entry?]
+Eintrag löschen?
+[Save changes to this entry?]
+Änderungen speichern?
+
+[Plugin enabled]
+Plugin aktiviert
+[Check process list every]
+Überprüfe Prozesse alle
+[seconds (1 - 30)]
+Sekunden (1-30)
+[Double-click for details:]
+Für Details doppelklicken:
+[LaunchInfo options]
+LaunchInfo Einstellungen
+
+[Always set global status (experimental)]
+Immer Globalen Status setzen (experimentell)
+[Are you sure that you want to delete this process-group?\n\nNOTE: The deletion will take effect immediately!]
+Sind Sie sicher dass Sie diese Prozess-Gruppe löschen wollen?\n\nNOTE: Das Löschen wird sofort aktiv!
+
+[Processes]
+Prozesse
+[editing: %s]
+Bearbeiten: %s
+
+[Groupname:]
+Gruppenname:
+[Set status on activation]
+Setze Status bei Aktivierung
+[only for online protocols]
+nur für Online-Protokolle
+[Set status back afterwards]
+Setze Status hinterher zurück
+[Notify through pop-up]
+Mit Popup hinweisen.
+[Disable miranda sounds]
+Miranda-Klänge deaktivieren
+[activation delay]
+Aktivierungs-Verzögerung
+[deactivation delay]
+Deaktivierungs-Verzögerung
+
+[Process name]
+Prozessname
+[Set back]
+Stelle zurück
+[Only online]
+Nur Online
+
+[LaunchInfo.txt location and filename:]
+Pfad zur Launchinfo.txt:
+[Select LaunchInfo.txt]
+Launchinfo.txt wählen
+[Replace %launchinfo% if file is found]
+%launchinfo% ersetzen
+[Data must be not older than]
+Daten nicht älter als
+[All data must be available]
+Verfügbarkeit aller Daten
+[Usage: Just use %launchinfo% in the status message of any process to get the text above (instead of %launchinfo%). Note: No linebrakes are added automatically]
+%launchinfo% in der Statusnachricht eines Prozesses benutzen um den oberen Text anstelle von %launchinfo% zu nehmen. Zeilenumbruch wird nicht hinzugefügt.
+[Current data]
+Momentane Daten
+[FILE NOT FOUND]
+DATEI NICHT GEFUNDEN
+[FILE FOUND, AGE: %i min]
+DATEI GEFUNDEN, %i min alt
+
+[The new gamerStatus plugin has found settings of a former version.\nThese settings are not compatible with the new version.\nDo you want to import these settings to further use them?]
+GamerStatus-Plugin hat Einstellungen einer früheren Version gefunden.\nDiese Einstellungen sind nicht kompatibel zu der neuen Version.\nEinstellungen importieren um sie weiter zu nutzen?
+[Import old gamerStatus settings?]
+Gamerstatus Einstellungen importieren?
+[gamerStatus settings are now structured in groups,\nwhich have the same settings and away-message for several games/processes.\nDo you want to import all games/processes into ONE group instead of several groups for each game/process?\n\nNOTE: All away-messages but one will be lost and you'll have to correct the settings in the options.]
+GamerStatus Einstellungen sind jetzt in Gruppen angeordnet,\nwelche die selben Einstellungen für verschiedene Spiele/Prozesse haben.\nAlle Spiele/Prozesse in eine Gruppe anstelle von verschiedenen Gruppen für jedes Spiel/Prozess importieren?\n\nACHTUNG: Alle Statusnachrichten außer einer werden verloren gehen und Einstellungen müssen in den Optionen korrigiert werden.
+[import gamerStatus settings into ONE group?]
+Importiere Einstellungen in eine Gruppe?
+[Do you want to delete the old settings?,\nyou won't be able to use them again if you go back to an older version of gamerStatus!\n\nNOTE: The old settings are totally independent from the new settings!]
+Wollen Sie die alten Einstellungen löschen?,\nSie werden nicht nochmal zu nutzen sein wenn Sie zu einer ältere Version wechseln!\n\nACHTUNG: Die alten Einstellungn sind Unabhängig von den neuen!
+[Delete old gamerStatus settings?]
+Alte GamerStatus Einstellungen löschen?
+[GamerStatus Plugin encountered a problem. Processlist stuff probably won't work.\nPlease contact the author at mistag@baze.de, if you want this problem to be fixed.\n\n(Error msg: enumProcs init failed! Return value: %i)]
+Das GamerStatus Plugin stellte ein Problem fest. Prozesslisten werden eventuell nicht funktionieren.\nBitte kontaktieren sie den Autor unter mistag@baze.de, wenn sie möchten dass dieses Problem behoben wird.\n\(Fehler Nachricht: enumProcs init failed! Return value: %i)
+
+[%exename%\tProcess name that's running (bla.exe)\n%appname%\tUser-defined name of the running process\n%statdesc%\tDescription of the status that is set (NA, DND, etc.)\n%clipboard%\tContent of the clipboard (if available as text)\n%launchinfo%\tUser-defined string from the LaunchInfo-options (if available)\n\nIf AwaySys plugin v0.2.7.8+ is installed, you can also use its variables.]
+%exename%\tProzessname der läuft (bla.exe)\n%appname%\tNutzer-definierter Name des laufenden Prozesses\n%statdesc%\tBeschreibung des Statuses der eingestellt ist (NA, DND, etc.)\n%clipboard%\tInhalt der Zwischenablage (falls als Text verfügbar)\n%launchinfo%\tNutzer-definierter String von den LaunchInfo-Optionen (falls verfügbar)\n\nFalls AwaySys Plugin v.0.2.7.8+ installiert ist können sie auch dessen Variablen benutzen.
+[GamerStatus variables]
+GamerStatus Variablen
+[LaunchInfo.txt is a file that's created by The All-Seeing Eye (www.udpsoft.com/eye)\nor GameSpy (www.gamespy.com) and contains information about the game server you connect on.\n\nThis data can be used in this dialog, once set a correct LaunchInfo.txt path,\nyou can see all the data it contains on the right side of the dialog and insert them\ninto your custom %launchinfo% variable, which can be used in every status-message of gamerStatus.]
+LaunchInfo.txt ist eine Datei die von The All-Seeing Eye (www.udpsoft.com/eye)\noder GameSpy (www.gamespy.com) erstellt wird und enthält Informationen über die Game Server mit der Sie verbunden sind.\n\nDiese Daten können in diesem Dialog genutz werden, wenn einmal ein korrekter Pfad zur LaunchInfo.txt angegeben wurde.Sie können alle Daten die sie enthält auf der rechten Seite des Dialoges sehen und sie in Ihre individuelle %launchinfo& Variable einfügen, welche in jeder GamerStatus-Statusnachricht genutzt werden kann.
+[LaunchInfo - What's this?]
+LaunchInfo - Was ist das?
+[Range: 0 (disabled) - 31\nIf a delay is activated (>0), gamerStatus waits before activating if a program is detected running.\nThis is helpful to avoid often status-changes if a program is only running for a short time.\nThe deactivation-delay is helpful if a program terminates and starts again after a short time.\n\nNOTE: The format is NOT in seconds, but in ticks:\nThe length of a tick is specified by the timer interval in the main options menu.]
+Bereich: 0 (deaktiviert) - 31\nFalls eine Verzögerung aktiviert ist (>0), wartet GamerStatus vor der Aktivierung, wenn ein Programm als laufend erkannt wird.\nDas ist hilfreich um viele Statuswechsel zu vermeiden falls ein Programm nur für eine kurze Zeit läuft. \nDie Deaktivierungs-Verzögerung ist hilfreich wenn ein sich ein Programm beendet und wieder in kurzer Zeit startet.\n\nAchtung: Das Format ist NICHT in Sekunden, aber in Ticks:\nDie Länge eines Ticks wird im Timer-Intervall in dem Hauptmenü-Optionen festgelegt.
+[Help on delays]
+Hilfe über Verzögerungen

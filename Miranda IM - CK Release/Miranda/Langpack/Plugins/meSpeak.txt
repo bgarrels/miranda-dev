@@ -1,0 +1,38 @@
+; Pluginname: meSpeak 
+; Version: 0.0.1.5
+; Dateiname: espeak.dll, espeakw.dll, mespeak.dll, mespeakw.dll
+; Autor: pescuma
+; Link: http://pescuma.mirandaim.ru/miranda/
+; Link Unicode: http://pescuma.mirandaim.ru/miranda/
+; Übersetzung: 01.11.07 von Wolf
+
+[Languages/Flags]
+Sprachen/Flaggen
+[Types]
+Arten
+[Pitch:]
+Tonhöhen:
+[Punctuation:]
+Unterbrechung:
+[Volume:]
+Lautstärke
+[Range:]
+Reichweite:
+[Variant:]
+Varianten:
+[Speak the following events:]
+Sprich folgende Ereignisse:
+[ Disable when global status is: ]
+ Deaktivieren, wenn Globaler Status: 
+[ System voice ]
+ Systemsprache 
+[ Enabled when ]
+ Aktiviert, wenn 
+[Truncate text if it is longer than]
+Text abschneiden, wenn Text länger als
+[Enable speak for this contact]
+Vorlesefunktion für diesen Kontakt aktivieren
+[Enable only if Miranda is idle]
+Nur aktivieren, wenn Miranda IM im Leerlauf ist
+[Respect SndVol mute]
+Aktzeptiere Soundstummschaltung

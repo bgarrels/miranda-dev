@@ -1,0 +1,135 @@
+; Pluginname: Simple Status Message 
+; Version: 1.9.0.3
+; Dateiname: simplestatusmsg.dll
+; Autor: Dezeath
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4321
+; SVN: http://code.google.com/p/dezeath/
+; Übersetzung: 29.06.06 von Weishaupt
+
+[Open Status Message Dialog]
+Öffnet Statusnachrichtenfenster
+[&Go to URL in Away Message]
+&Gehe zur URL in der Abwesenheitsnachricht
+[%s Message (%s)]
+%s Nachricht (%s)
+[Independent setting for each protocol]
+Unabhängige Einstellung für jedes Protokoll
+[miliseconds]
+Millisekunden
+[Pop up dialog asking for status message]
+Popup-Dialog zur Nachfrage nach Statusnachricht
+[Status on Startup]
+Status beim starten
+[Set status after]
+Setze Status nach:
+[<Last status>]
+<Letzter Status>
+[Buttons:]
+Schaltflächen
+[* This feature is available only when using StartupStatus plugin.]
+* Diese Funktion steht nur mit dem StartupStatus-Plugin zur Verfügung
+[Add to Predefined]
+Zu Vordefinierten hinzuf.
+[%s Status Message: %s]
+%s Statusnachricht: %s
+[Protocols *]
+Protokolle *
+[Pop up dialog asking for new message]
+Dialogfenster zur Eingabe neuer Nachrichten
+[Set an empty message]
+Leere Nachricht setzen
+[Use default message]
+Standardnachricht benutzen
+[Use last message]
+Letzte Nachricht benutzen
+[Use last message set for this status]
+Letzte Nachricht dieses Status benutzen
+[Set the following message:]
+Folgende Nachricht setzen:
+[Store up to]
+Speich. letzte
+[recent messages.]
+Nachrichten.
+[Automatically close dialog window after]
+Schließe Dialogfenster automatisch nach
+[Check for winamp song change every]
+Prüfe Winamp-Liedwechsel alle
+[seconds. (restart required)]
+Sekunden. (Neustart erforderlich)
+[Clear Predefined]
+Alles löschen
+[Do not set status message]
+Keine Statusnachricht setzen
+[Always set this message:]
+Immer diese Nachricht setzen:
+[Show status list]
+Zeige Statusliste
+[Show icons in status list]
+Icons in Statusliste anzeigen
+[Show icons in message list]
+Icons in Nachrichtenliste anzeigen
+[Co&py to Clipboard]
+Nachricht kopieren
+; Zur Zwischenablage kopieren
+[* These setting may not work with some plugins.]
+* Diese Einstellung funktioniert mit manchen Plugins vielleicht nicht.
+[Remove Carriage Return (CR = '\\r' = #0D) chars from status messages]
+Entferne Absätze (CR = '\\r' = #0D) aus Statusnachrichten
+[Recent Message]
+Letzte Nachricht
+[Predefined Message]
+Vordefinierte Nachricht
+[Copy Away Message]
+Abwesendnachricht kopieren
+[Retrieving status message for %s...]
+Statusnachricht für %s ermitteln...
+[Change Status Message]
+Statusnachricht wechseln
+[Pop up dialog box]
+Dialogfenster
+[Max length:]
+Max. Länge:
+[Put default message in message list]
+Standardnachricht setzen
+[Hide]
+Verstecken
+[Show next to cancel button]
+Zeige neben Abbr.-Button
+[Show in message list]
+Zeige in Nachrichtenliste
+[Flat, next to cancel button]
+Flach, neben Abbr.-Button
+[Apply to all]
+Übern. für alle
+[Always set the same message]
+Immer selbe Statusnachricht setzen
+[Show status profiles in status list]
+Zeige StartupStatus-Profile in Statusliste
+[recent messages (0 = disable)]
+verw. Nachrichten (0 = keine Speicherung)
+[Leave last played track's title after exiting the player]
+Letzten abgespielten Track beibehalten, wenn Player beendet wird.
+[Set random status message every]
+Setze zufällige Statusnachricht alle
+[Remember last dialog window position]
+Letzte Dialogposition merken
+[Show 'Copy Away Message' item in contact menu]
+Menüpunkt 'Kopiere Statusnachricht' im Kontaktmenü anzeigen
+[Show 'Status Message...' item in status menu]
+Menüpunkt 'Statusnachricht...' im Statusmenü anzeigen
+[Copy %s Message]
+%s Nachricht kopieren
+[Status Message...]
+Statusnachricht ...
+[Update variables in status messages every]
+Aktualisiere Variablen in Statusnachricht alle
+[Show 'Go to URL in Away Message' item in contact menu]
+Menüpunkt 'Gehe zu URL in Statusnachricht' im Kontaktmenü anzeigen
+[&Go to URL in %s Message]
+&Gehe zu URL in %s-Nachricht
+[Do not change status message]
+Statusnachricht nicht ändern
+[Advanced but simple to use away system.]
+Fortschrittliches, aber dennoch einfach zu bedienendes Abwesenheitssystem.
+[Go to URL in Away Message]
+Gehe zu URL in Statusnachricht

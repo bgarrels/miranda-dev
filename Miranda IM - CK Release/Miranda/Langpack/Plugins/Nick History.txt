@@ -1,0 +1,28 @@
+; Pluginname: Nick History 
+; Version: 0.0.0.7
+; Dateiname: nickhistory.dll (Ansi), nickhistoryw.dll (Unicode)
+; Autor: pescuma
+; Link: http://forums.miranda-im.org/showthread.php?t=9607
+; Übersetzung: 06.08.06 von Dober
+
+[Nick History]
+Nickverlauf
+[Don't save Unicode parts for 7bit ANSI history (saves db space)]
+Keine Unicode-Fragmente für 7Bit ANSI History speichern (spart Datenbankplatz) 
+[Track when contacts change their nicknames]
+Aufzeichnen wenn Kontakt Nickname ändert
+[Track when contacts remove their nicknames]
+Aufzeichnen wenn Kontakt Nickname entfernt
+[Enable nickname tracking for theese protocols:]
+Aufzeichnen der Änderungen für folgende Protokolle aktiveren:
+[On Right Click:]
+Bei Rechtsklick:
+[On Left Click:]
+Bei Linksklick:
+[Close Popup]
+Popup schließen
+
+[changed his/her nickname to %s]
+ändert sein/ihr Nickname zu %s
+[removed his/her nickname]
+entfernt sein/ihr Nickname

@@ -1,0 +1,72 @@
+; Pluginname: Web Detail (UMCP)
+; Version: 0.2.0.1
+; Dateiname: webdetail.dll
+; Autor: noname
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=407
+; Übersetzung: von flower
+; Aktualisierung: 05.07.05 Lastwebpage
+
+[Unified Messaging Center]
+Protokoll-Center
+[My Unified Messaging Center]
+Mein Protokoll-Center
+
+[Web Detail]
+Webprofile, Serverstaus
+; menu items
+[Contact Info on Web]
+Kontaktinfo im Web
+[Web Profiles and Directories]
+Webprofile, Serverstaus
+[My Detail on Web]
+Eigene Webdetails
+[Network Service Status]
+Serverstatus
+[More Links...]
+weitere Links..
+[My %s Detail (%s)]
+Meine %s Details (%s)
+[Network Status for %s (%s)]
+Serverstatus für %s (%s)
+
+[Enable main menu items]
+Hauptmenüeintrag aktivieren
+[Open new browser windows for browsing web information]
+Neues Browserfenster für Webinformationen öffnen
+; link options
+[Link Options]
+Protokollspezifische Optionen
+[For protocol:]
+Für Protokoll:
+[My Info]
+meine Infos
+[Service Status]
+Dienststatus
+[Contact Info]
+Kontaktinfos
+; defaults
+[Clear Settings]
+Einstell. löschen
+[ICQ Default]
+ICQ-Standard
+[MSN Default]
+MSN-Standard
+[Yahoo Detail]
+Yahoo-Details
+[Yahoo Directory Search]
+Yahoo-Verzeichnissuche
+[QQ - Chinese Server]
+QQ-Server (China)
+; default menu items
+[Change My ICQ Detail On Web]
+ICQ-Details im Web ändern
+[Search MSN Member Directory]
+Im MSN-Verzeichnis suchen
+[Search Yahoo Member Directory]
+Im Yahoo-Verzeichnis suchen
+[Search QQ Members]
+QQ-Kontakte suchen
+
+[Restart Miranda is required for change in menu item(s) to take effect.]
+Hinweis: Bei Änderungen ist ein Neustart von Miranda IM erforderlich.
+ 

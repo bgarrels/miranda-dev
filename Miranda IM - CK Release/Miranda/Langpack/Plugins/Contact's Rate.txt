@@ -1,0 +1,17 @@
+; Pluginname: Contact's Rate
+; Version: 0.0.2.1
+; Dateiname: rate.dll
+; Autor: Kildor
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4015
+; Übersetzung: kaye_styles am 23.04.09
+; Besonderheiten: Entwicklung eingestellt!
+
+[Rate low]
+Kontaktpriorität: Gering
+[Rate medium]
+Kontaktpriorität: Mittel
+[Rate high]
+Kontaktpriorität: Hoch
+
+[Show rating of contact in contact list (if presents).]
+Zeige, wenn vorhanden, die Kontaktpriorität in der Kontaktliste.

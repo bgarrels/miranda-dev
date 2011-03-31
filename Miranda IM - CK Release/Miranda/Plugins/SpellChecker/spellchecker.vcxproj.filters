@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{bfa2d339-26e3-481a-94b4-fc18512cc2e1}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Header Files\hunspell Header Files">
+      <UniqueIdentifier>{ed40222b-663b-4d9d-b7ff-9b3fa19a2d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{e007ef82-b232-4cc2-9220-09513be47f5c}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{73ebe10f-fdcf-4bc5-8099-5696b4fe4138}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\hunspell Source Files">
+      <UniqueIdentifier>{a6995451-1f6d-4a1e-9fb9-b3884702915d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{f3f9af70-cc8a-463c-9477-daf5cf4a092d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ardialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="autoreplace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="commons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dictionary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="m_spellchecker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utils\Pescuma\mir_icons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utils\Pescuma\mir_memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utils\Pescuma\mir_options.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="options.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RichEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\affentry.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\affixmgr.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\atypes.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\baseaffix.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\config.h">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\csutil.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\dictmgr.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\filemgr.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\hashmgr.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\htypes.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\hunspell.h">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\hunspell.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\hunzip.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\langnum.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\replist.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\suggestmgr.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hunspell\w_char.hxx">
+      <Filter>Header Files\hunspell Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\no_spellcheck.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\spellcheck.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\unknown.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Docs\langpack_spellchecker.txt">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="Docs\spellchecker_changelog.txt">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="Docs\spellchecker_readme.txt">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="Docs\spellchecker_version.txt">
+      <Filter>Docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="Version.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ardialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="autoreplace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dictionary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utils\Pescuma\mir_icons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utils\Pescuma\mir_options.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="options.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RichEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spellchecker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hunspell\affentry.cxx">
+      <Filter>Source Files\hunspell Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hunspell\affixmgr.cxx">
+      <Filter>Source Files\hunspell Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hunspell\csutil.cxx">
+      <Filter>Source Files\hunspell Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hunspell\dictmgr.cxx">
+      <Filter>Source Files\hunspell Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hunspell\filemgr.cxx">
+      <Filter>Source Files\hunspell Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hunspell\hashmgr.cxx">
+      <Filter>Source Files\hunspell Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hunspell\hunspell.cxx">
+      <Filter>Source Files\hunspell Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hunspell\hunzip.cxx">
+      <Filter>Source Files\hunspell Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hunspell\phonet.cxx">
+      <Filter>Source Files\hunspell Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hunspell\replist.cxx">
+      <Filter>Source Files\hunspell Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hunspell\suggestmgr.cxx">
+      <Filter>Source Files\hunspell Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hunspell\utf_info.cxx">
+      <Filter>Source Files\hunspell Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

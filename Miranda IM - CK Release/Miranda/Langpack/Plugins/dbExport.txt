@@ -1,0 +1,16 @@
+; Pluginname: dbExport 
+; Version: 1.0.0.1
+; Dateiname: dbexport.dll
+; Autor: Luca "Hrk" Santarelli
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=429
+; Übersetzung: 19.06.06 von Weishaupt
+; Besonderheiten: Entwicklung eingestellt!
+
+[I could not open file '%s' for writing.\nCheck disk space and your write privileges.]
+Fehler: In Datei '%s' konnte nicht geschrieben werden.\nSchreibschutz und freien Speicher prüfen!
+
+[&Export to autoexec.ini...]
+&Exportiere in autoexec.ini...
+
+[Exports your settings into an autoexec_<yourname>.ini file.]
+Exportiert alle Einstellungen in eine autoexec_<Profilname>.ini Datei.

@@ -1,0 +1,17 @@
+; Pluginname: Magnetic Windows
+; Version: 0.0.5.0
+; Dateiname: magneticwindows.dll
+; Autor: Protogenes
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2871
+; Übersetzung: 03.08.06 von Dober
+
+[%d pix]
+%d Pixel
+[Magnetic Windows]
+Magnetische Fenster
+[Snap windows]
+Fenster anziehen
+[Alternate behauvior of shift key: move windows together by default]
+Verhalten der SHIFT-Taste umkehren: Fenster normalerweise zusammen bewegen. SHIFT-Taste zum lösen benutzen.
+[For Scriver users: automatically hold down the CTRL key while moving/sizing. (make sure you use Scriver!)]
+Für Scriver-Benutzer: Automatisch STRG-Taste beim Bewegen des Fenster drücken. (Nur für Scriver!)

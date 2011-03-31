@@ -1,0 +1,52 @@
+; Pluginname: Message Converter
+; Version: 0.0.0.1
+; Dateiname: msgconv.dll
+; Unique ID: {bd95d966-c91e-4f02-bbf1-231aebc3d595}
+; Autor: l.inc
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4350
+; Übersetzung: CHEF-KOCH am 16.10.2010
+; Besonderheiten: Einige Header und Groupboxes aktuell noch unübersetzt
+; to wird hier vom Core mit an übersetzt, das ist nicht falsch, aber in diesem Fall passt zu besser ... keinerlei Lösung für das Übersetzungsproblem!
+
+[Converter options]
+Konvertierungsoptionen
+[Words delimiters:]
+Wörter Trennzeichen:
+[Word-by-word conversion]
+Wort-für-Wort Umwandlung
+[Full pre-send conversion]
+Volle Voraussendung Umwandlung
+
+;[msg&conv mode]
+
+[Cyrillic to Latin]
+Kyrillisch zu Latein
+[Latin to Cyrillic]
+Latein zu Kyrillisch
+[Custom 1]
+Benutzerdefiniert 1
+[Custom 2]
+Benutzerdefiniert 2
+[Option files (*.opt)\0*.opt\0\0]
+Option Dateien (*.opt)\0*.opt\0\0
+[Select destination]
+Ziel auswählen
+[Select source]
+Quelle auswählen
+[Reqeuest canceled or bad file format]
+Anfrage abgebrochen oder falsches Dateiformat
+[No data loaded]
+Keine Daten werden geladen
+[Reqeuest canceled or file access denied]
+Anfrage abgebrochen oder Dateizugriff verweigert
+[No data saved]
+Keine Daten werden gespeichert
+[Same hotkey is already used]
+Der gleiche Hotkey wird bereits benutzt
+[Duplicated hotkey]
+Doppelter Hotkey
+[Same mode name is already used]
+Gleicher Formname wird bereits benutzt
+[Duplicated mode name]
+Doppelter Formname
+ 

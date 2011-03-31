@@ -1,0 +1,740 @@
+; Pluginname: Modern Contact List Layered 
+; Version: 0.9.0.9
+; Dateiname: clist_modern.dll
+; Unique ID: {043909b6-aad8-4d82-8eb5-9f64cfe867cd}
+; Autor: FYR (Artem Shpynov, Ricardo Pescuma Domenecci and Anton Senko based on clist_mw by Bethoven)
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2103
+; Übersetzung: 18.04.06 von Dober
+
+[Display contacts, event notifications, protocol status with advantage visual modifications. Supported MW modifications, enchanced metacontact cooperation.]
+Zeigt Kontakte, Ereignisse und Protokollstatus mit erweiterten visuellen Änderungen an. Unterstützt Multiwindow-Modifikationen und erweiterte Metakontakt-Kooperation.
+
+[ms, delay between icon blinking]
+Blinkintervalle der Icons (in ms)
+[Hide vertical scrollbar]
+Vertikale Bildlaufleiste ausblenden
+[Contacts who are 'not on list']
+Temporäre Kontakte
+
+; clc.c
+[Contact List/Avatar Overlay]
+Kontaktliste/Avataroverlay
+[Contact List/Status Overlay]
+Kontaktliste/Statusoverlay
+[Contact List smileys]
+Smileys in Kontaktliste
+[Do You want contact '%s' to be converted to MetaContact and '%s' be added to it?]
+Soll Kontakt '%s' in Metakontakt konvertiert und '%s' hinzugefügt werden?
+[Converting to MetaContact]
+Konvertierung in Metakontakt
+[Do You want contact '%s' to be converted to MetaContact and '%s' be added to it (remove it from '%s')?]
+Soll Kontakt '%s' in Metakontakt konvertiert und '%s' hinzugefügt werden (wird von '%s' entfernt)?
+[Converting to MetaContact (Moving)]
+Konvertierung in Metakontakt (Verschiebe)
+[Do you want to contact '%s' be added to metacontact '%s'?]
+Soll Kontakt '%s' zu Metakontakt '%s' hinzugefügt werden?
+[Adding contact to MetaContact]
+Zu Metakontakt hinzufügen
+[Do You want contact '%s' to be default ?]
+Soll Kontakt '%s' als Standard gesetzt werden?
+[Set default contact]
+Standardkontakt setzen
+[Do You want contact '%s' to be removed from MetaContact '%s' and added to '%s'?]
+Soll Kontakt '%s' aus Metakontakt '%s' entfernt und zu '%s' hinzugefügt werden?
+[Changing MetaContacts (Moving)]
+Ändere Metakontakte (Verschiebe)
+[Do You want contact '%s' to be added to MetaContact '%s'?]
+Soll Kontakt '%s' vom Metakontakt '%s' hinzugefügt werden?
+
+; clcopts.c
+[3rd party frames transparent back colour]
+Transparente Hintergrundfarbe Kontaktl.-Elem. 
+[Account Name]
+Kontoname
+[Frame title text]
+Titelzeilentext
+[Hot text]
+Hervorgehobener Text
+[List Text]
+Schriftarten Kontaktliste
+[Menu text]
+Menütext
+[Not focused]
+nicht fokussiert
+[Quick search text]
+Schnellsuchetext
+[Selected menu text]
+Markierter Menütext
+[Statusbar text]
+Statuszeilentext
+
+[based on:]
+gleich in:
+[01:23 Sample - %s]
+01:23 Beispiel - %s
+
+; clistopts.c
+[Row items]
+Inhalte Kontaktanzeige
+[Hotkeys2]
+Tastaturkürzel
+[Contact time]
+Kontaktzeit
+
+; clisttray.c
+[TrayMenu]
+Systemtraymenü
+
+; clui.c
+[Show Contact &Avatar]
+Kontakt&avatar anzeigen
+[Hide Contact &Avatar]
+Kontakt&avatar verstecken
+
+; cluiopts.c
+[Behind left edge]
+Hinter linken Rand
+[Behind right edge]
+Hinter rechten Rand
+
+; groupmenu.c
+[&Show Offline Users in here]
+Offline-Kontakte hier anzeigen
+
+; groups.c
+[This group]
+Diese Gruppe
+
+; keyboard.c
+[Search in site]
+Webseite öffnen ('CList\SearchURL'-Eintrag in DB erforderlich)
+[Close Miranda]
+Miranda IM beenden
+[Restore last status]
+Letzten Status wiederherstellen
+
+; movetogroup.c
+[<Root Group>]
+Hauptgruppe
+
+; resource.rc:IDD_OPT_SKIN
+[Available skins]
+Verfügbare Skins
+[\n\n\nPlease select one of available skins. \n\nOr browse for skin not in list.]
+\n\n\nBitte eines der verfügbaren Skins auswählen. \n\nOder nach Skins außerhalb der Liste suchen.
+[Skin Preview]
+Skinvorschau
+[Frame Titles Color]
+Titelzeilenfarbe
+[WARNING: \tSkins can modify your current profile. Rollback is not possible. \n\t\tPlease BACKUP your database before applying skin.]
+WARNUNG: Skins können Ihre Einstellungen überschreiben. Es ist nicht möglich, dies rückgängig zu machen. Sichern Sie Ihre Profildatei vor dem Übernehmen des Skins!
+[* Restart may be required for all changes to take effect]
+* Evtl. Neustart erforderl. um alle Änderungen zu übernehmen
+
+; resource.rc:IDD_OPT_SKINEDITOR
+[Available objects]
+Verfügbare Objekte
+[Object properties]
+Objekteigenschaften
+[Alpha]
+Deckkraft
+[Image file and fitting mode]
+Bilddatei und Anpassungseinstellungen
+; [...]
+[Borders]
+Ränder
+[Fit mode]
+Anpassung
+[Fragment location]
+Objektlage
+[W x H: 0 x 0 pixels]
+B x H: 0 x 0 Pixel
+
+; resource.rc:IDD_OPT_CLIST
+[Dont move offline user to bottom]
+Offline-Kontakte nicht nach unten setzen
+[1st:]
+1.:
+;JA! Mit Leerzeichen davor!
+[2nd:]
+ 2.:
+[3rd:]
+3.:
+[Place offline users out of groups]
+Offline-Kontakte außerhalb der Gruppen
+[Use xStatus icon]
+XStatus-Icon verwenden
+[Show normal status as overlay]
+Norm. Status als Overlay zeigen
+[Status overlay opacity is 75% ]
+Overlayicon, Deckkraft: 75 %
+[System tray icon mode]
+Trayicon-Modus
+[only when statuses differ]
+Nur wenn Status unterschiedlich
+[Show unread emails (if supported)]
+Ungelesene E-Mails anzeigen
+
+; resource.rc:IDD_OPT_CLUI_2
+[Bring to front if covered]
+Nach vorne bringen, wenn verdeckt
+[Hide contact list after ]
+Fenster verstecken nach 
+[Lock manual resize]
+Manuelle Größenänderung deaktivieren
+[Drag to ]
+Mausziehen bewirkt: 
+[Easy Scroll]
+Einfaches Scrollen
+[x100 msec]
+x100 ms
+[show delay]
+Anzeigeverz.
+[hide delay]
+Ausblenden verz.
+[Hide method]
+Ausbl.-Methode:
+[keep on screen]
+Immer auf Bilds.
+[Snap to edges]
+An Rand einrasten (Snap)
+[Dock to sides]
+An Rand einrasten (Dock)
+[Event notify area]
+Ereignisbenachrichtigungsfeld
+[Show automaticaly]
+Automatisch zeigen
+[and minimum]
+und Minimum
+
+; resource.rc:IDD_OPT_CLC
+[Fade out entire list when:]
+Liste aus- bzw. abblenden, wenn:
+
+; resource.rc:IDD_OPT_CLCTEXT
+[Full selection]
+Ganze Zeile
+[Less selection]
+Teilweise Auswahl
+[No selection]
+Keine Auswahl
+[Selection Mode]
+Auswahlmodus
+[Effect]
+Effekt
+
+; resource.rc:IDD_OPT_CLCBKG2
+[Image]
+Bild
+[Selected backgnd:]
+Ausgewählter Hintergrund:
+; [Tile vertically according to Row Height]
+[Select object:]
+Objekt wählen:
+
+; resource.rc:IDD_OPT_META_CLC
+[Ignore Empty Extra icons places (arrange to right).]
+Leere Extraicons ignorieren (rechts anordnen)
+[Use 'Meta' protocol icons for Metacontacts]
+Eigene Icons für Metakontakte verwenden
+[Expand metacontacts]
+Metakontakte aufklappen
+[Avoid doubleclick expand]
+Bei Doppelklick nicht aufklappen
+[Hide all 'Extra icons' for subcontacts]
+Keine Extraicons für Unterkontakte
+[Hide offline subcontacts.]
+Offlineunterkontakte ausblenden
+[MetaContacts stuff]
+Einstellungen für Metakontakte
+[For other stuff MetaContacts plugin should be loaded.\n\nhttp://miranda-im.org/download]
+Für weitere Einstellungen wird MetaContacts benötigt:\n\nhttp://miranda-im.org/download
+[Allow internal requesting of away message text]
+Interne Abfrage der Texte der Abwesenheitsnachrichten
+[Subcontacts indent:]
+Unterkontakte einrücken um Pixel:
+[Remove away message if contact became offline]
+Abwesenheitsnachricht entfernen, wenn Kontakt offline
+
+; resource.rc:IDD_OPT_ITEM_CONTACT_TIME
+[Show time only if it is different from current time]
+Zeige Zeit nur, wenn Lokalzeit anders ist
+[Show contact time as row item]
+Kontaktzeit anzeigen
+
+[Nowhere]
+Nirgends
+
+; resource.rc:IDD_OPT_CLUI
+[Client area margins]
+Randabstände Inhalt zum Rand
+[Thin border main window]
+Nur schmalen Rand anzeigen
+[Borderless main window]
+Keinen Rand darstellen
+[Between frames:]
+Zwischen Elementen:
+[After captions:]
+Nach Titelzeilen:
+[Gaps]
+Abstände
+[Key color for owned frames]
+Transparente Farbe für Elemente
+[Disable Skin Engine]
+Skinengine deaktivieren
+[Use Non-Layered mode]
+Layerengine deaktivieren
+[Non-layered mode]
+Nichtlayermodus
+[Enable drop shadow (restart required)]
+Schatten aktivieren (Neustart nötig)
+[Enable Aero Glass (Vista)]
+Aktiviere Aero Glass (ab Windows Vista) 
+
+; resource.rc:IDD_OPT_ITEM_ROW
+[Order of items:]
+Reihenfolge der Elemente:
+[Min row height:]
+Min Zeilenhöhe:
+[Row border:]
+Randabstand:
+[Variable row height]
+Variable Zeilenhöhe
+[Align left items to left]
+Linke Elemente links ausrichten
+[Align right items to right]
+Rechte Elemente rechts ausrichten
+[Compact mode\n(Show avatars and additional text\non selected contacts only)]
+Kompaktmodus\n(Avatar und zusätzlichen Text nur\nbeim ausgewählten Kontakt anzeigen)
+[Right margin:]
+Rechter Rand:
+
+; resource.rc:IDD_OPT_SBAR
+[Use connecting Icon]
+Benutze Verbindungsicon
+;löst Probleme mit MultiWindow Contact List -> vorläufige Lösung!
+[Right click opens Miranda menu]
+Rechtsklick öffnet Hauptmenü
+[Left border]
+Linker Rand
+[Right border]
+Rechter Rand
+[Space between ]
+Iconabstand
+[Show xStatus icon]
+XStatus-Icon anzeigen
+[Show both icons]
+Beide Icons anzeigen
+[Show xStatus Name]
+XStatus-Namen anzeigen
+[Multiline status bar:]
+Mehrzeilige Statusleiste
+[Protocols per line]
+Protokolle je Zeile
+[* To increase Status Bar height:\nSet in Main menu: Frames->Status Bar->Show TitleBar then pull appeared title of status bar up or down.]
+* Änderung der Statusleistenhöhe:\nHauptmenü->Kontaktl. Elem.-> Statusl.->Titell. aktivieren, auf Titelleiste drücken und Höhe ändern.
+[Hold [Shift] to inverse [Right Click] behaviour]
+[Shift] gedrückt halten, um [Rechtsklick]-Verhalten umzukehren
+[[Ctrl]+[Left Click] to filter only  protocol. Click on empty space to show all]
+[Strg]+[Linksklick] filtert Protokolle. Auf freie Stelle klicken, um alle zu zeigen.
+; resource.rc:IDD_OPT_ITEM_AVATAR
+[Animate Avatars]
+Avatare animieren
+[Use old render method (Fast, but has artefacts)]
+Nutze alte Methode (Schnell, aber mit Artefakten)
+[Draw overlay icons]
+Avatare mit Statusicon überlagern
+[Ignore size for row height calcs]
+Höhe für Höhenanpassung ignorieren
+[Normal overlay icon]
+Overlayicon
+[Protocol status icon]
+Protokollstatusicon
+[Contact icon]
+Kontakticon
+[height]
+Höhe
+[Vertical Align]
+Vertikale Ausr.
+[Horizontal Align]
+Horizontale Ausr.
+[Accounts per line]
+Protokolle pro Zeile
+[Set options per account]
+Setze Einstellungen je Protokoll
+[Enable custom account settings]
+Aktiviere Einstellungen je Protokoll
+[Hide account completely]
+Protokoll nicht anzeigen
+; resource.rc:IDD_OPT_ITEM_ICON
+[Hide icon when showing avatar]
+Icon ausblenden bei Avatar
+[Draw icon in avatar space]
+Icon zentriert zum Avatar
+[Hide groups icon]
+Icon für Gruppen verstecken
+[Always show "Always visibile" icon]
+Dauerhaftes "Immer-sichtbar"-Icon
+[Use extra status icon instead protocol]
+Nutze spez. Statusicon anstatt Protokoll (Nur bei ICQ-XStatus)
+[Draw normal status as overlay]
+Normalen Status als Overlay
+
+; resource.rc:IDD_OPT_ITEM_TEXT
+[Right-To-Left reading mode (mirror template)]
+Rechts-nach-Links-Lesemodus
+[Replace smileys in clist]
+Textsmileys durch Grafik ersetzen
+[Draw smileys on first line]
+Grafiksmileys in der 1. Zeile
+[Resize smileys and 'Listining to' icon]
+Smiley- und ListeningTo-Icongröße anpassen
+[Resize smileys and 'Listening to' icon]
+Smiley- und ListeningTo-Icongröße anpassen
+[Align to right]
+Nach rechts ausrichten
+[Append nick if different from custom name]
+Nick anhängen, falls verschieden
+[Trim long text with ellipsis]
+Langen Text mit Punkten abkürzen
+
+; resource.rc:IDD_OPT_ITEM_SECOND_LINE
+[Top space:]
+Abstand oben:
+[Draw smileys on second line]
+Grafiksmileys in der 2. Zeile
+[Away Message]
+Abwesenheitsnachricht
+[Show second line]
+2. Zeile anzeigen
+[XStatus has priority]
+XStatus hat Priorität
+[(Variables will be replaced)]
+(Variablen werden ersetzt)
+[Use 'XStatus: XMessage']
+'XStatus: XMessage' nutzen
+[Show status if there isn't away message]
+Statusanzeige, wenn keine Abwesenheitsnachricht
+[Show listening to if there isn't away message]
+"Listening to", falls keine Abwesenheitsnachricht
+
+; resource.rc:IDD_OPT_ITEM_THIRD_LINE
+[Draw smileys on third line]
+Grafiksmileys in der 3. Zeile
+[Show third line]
+3. Zeile anzeigen
+
+; resource.rc:IDD_OPT_ITEM_EXTRAICONS
+[Contact List Extra Icons]
+Extraicons in Kontaktliste
+
+; resource.rc:IDD_OPT_ROWTMPL
+; [Row template]
+[Add container]
+Container hinzufügen
+[Remove container]
+Container entfernen
+[Vertical align:]
+Vert. Ausrichtung:
+[Horizontal align:]
+Horiz. Ausrichtung:
+[Container type:]
+Containertyp:
+[Container width:]
+Containerbreite:
+[Container height:]
+Containerhöhe:
+[OPTION PAGE IS UNDER CONSTRUCTION Please DO NOT notice about any issues here.\n Only high-level design comments are applicable.]
+EINSTELLUNGSSEITE IST IM BAU!
+
+; rowtemplateopt.c
+[Empty %s cell]
+Leere %s Zelle
+[column]
+Spalte
+[columns]
+Spalten
+[lines]
+Linien
+[%s, contain %s]
+%s, enthält %s
+[layered]
+Layered
+
+; SkinEditor.c
+; [%s %d x %d %s]
+[Image size is]
+Bildgröße ist
+[Skin - Modify objects]
+Skin - Objekte modifizieren
+
+; SkinEngine.c
+[You need the png2dib plugin v. 0.1.3.x or later to process PNG images]
+Das png2dib-Plugin 0.1.3.x oder höher wird benötigt, um PNG-Bilder anzuzeigen.
+
+; SkinOpt.c
+[Skin - Load]
+Skin - Laden
+[Skin]
+Skin (Theme)
+[Skin Information]
+Skin-Informationen
+[%s\n\n%s\n\nAuthor(s):\t %s\nContact:\t %s\nWeb:\t %s\n\nFile:\t %s]
+%s\n\n%s\n\nAutor(en):\t %s\nKontakt:\t %s\nWeb:\t %s\n\nDatei:\t %s
+[%s\n\n%s\n\nAuthor(s): %s\nContact:\t %s\nWeb:\t %s\n\nFile:\t %s]
+%s\n\n%s\n\nAutor(en): %s\nKontakt:\t %s\nWeb:\t %s\n\nDatei:\t %s
+; [Luna v0.4]
+[This is default Modern Contact list skin based on 'Luna' theme]
+Dies ist der Standardskin für Modern Contact List, basierend auf dem 'Luna'-Theme
+[Angeli-Ka (graphics), FYR (template)]
+Angeli-Ka (Grafiken), FYR (Vorlage)
+; [JID: fyr@jabber.ru]
+; [modern.saopp.info]
+[Inside library]
+Intern (in der DLL)
+[Skin editor contains not stored changes.\n\nAll changes will be lost.\n\n Continue to load new skin?]
+Skineditor enthält keine gespeicherten Änderungen.\n\nAlle Änderungen gehen verloren.\n\n Soll der neue Skin geladen werden?
+[Warning!]
+Warnung!
+[Current skin was not saved to file.\n\nAll changes will be lost.\n\n Continue to load new skin?]
+Aktueller Skin wurde nicht als Datei gespeichert.\n\Alle Änderungen gehen verloren.\n\n Soll der neue Skin geladen werden?
+[Miranda skin file]
+Miranda-Skindatei
+[Preview is not available\n\n%s\n----------------------\n\n%s\n\nAUTHOR(S):\n%s\n\nCONTACT:\n%s\n\nHOMEPAGE:\n%s]
+Vorschau nicht verfügbar\n\n%s\n----------------------\n\n%s\n\nAUTOR(EN):\n%s\n\nKONTAKT:\n%s\n\nHOMEPAGE:\n%s
+[%s\n\n%s\n\nAUTHORS:\n%s\n\nCONTACT:\n%s\n\nWEB:\n%s\n\n\n]
+%s\n\n%s\n\nAUTOREN:\n%s\n\nKONTAKT:\n%s\n\nWEB:\n%s\n\n\n
+[Select skin from list]
+Skin aus der Liste wählen
+[Please select skin to apply]
+Bitte einen Skin zum Übernehmen wählen
+[Default Skin]
+Standardskin
+[%Default Skin%]
+Standardskin
+[New Menu System not Found...]
+Neues Menüsystem nicht gefunden
+[Lock Frame]
+Keine Größenänderung
+[Visible]
+Sichtbar
+[Show TitleBar]
+Titelzeile anzeigen
+[Floating]
+Frei bewegend
+
+; CLUIFrames/extraimage.c
+[Email Icon]
+E-Mail-Icon
+[Sms Icon]
+SMS-Icon
+[Web Icon]
+Webicon
+[Always Visible]
+Immer sichtbar
+[Never Visible]
+Niemals sichtbar
+[Chat Activity]
+Chataktivität
+
+; CLUIFrames/framesmenu.c
+[FrameMenu]
+Kontaktlistenelementmenü
+
+; CLUIFrames/protocolorder.c
+[Protocol order]
+Reihenfolge
+
+; nicht im LP + Source zu finden
+
+[Load/Save]
+Laden/Speichern
+[Object Editor]
+Objekteditor
+
+[Row design]
+Zeilengestaltung
+
+[Hide to tray]
+In Systemtray
+
+[Name (use locale settings)]
+Name (lokale Spracheinstellungen)
+[Last message time]
+Zeitpunkt der letzten Nachricht
+[-Nothing-]
+-Keine-
+
+[Left align group names]
+Gruppennamen links anordnen
+[Center group names]
+Gruppennamen zentrieren
+[Right align group names]
+Gruppennamen rechts anordnen
+
+[Open groups]
+Offene Gruppen
+[Open group member counts]
+Offene Gruppen, Anzahl der Kontakte
+[Closed groups]
+Geschlossene Gruppen
+[Closed group member counts]
+Geschlossene Gruppen, Anzahl der Kontakte
+[Away contacts]
+Abwesende Kontakte
+[DND contacts]
+"Bitte nicht stören"-Kontakte
+[NA contacts]
+"Außer Haus"-Kontakte
+[Occupied contacts]
+Beschäftigte Kontakte
+[Free for chat contacts]
+"Für Chat bereit"-Kontakte
+[Invisible contacts]
+Unsichtbare Kontakte
+[On the phone contacts]
+"Am Telefon"-Kontakte
+[Out to lunch contacts]
+"Zum Essen"-Kontakte
+[Status bar text]
+Statuszeile
+[Event area text]
+Ereignisbereich
+[Current view mode text]
+Aktueller Kontaktfiltertext
+[Visibility/Chat activity]
+Sichtbarkeit/Chataktivität
+[Phone/SMS]
+Telefon/SMS
+[Web page]
+Webseite
+[Client (fingerprint.dll is required)]
+Client (fingerprint.dll wird benötigt)
+
+; andere Einträge
+[*** All contacts ***]
+*** Alle Kontakte ***
+[Status is Locked overlay]
+Status ist gesperrt Overlayicon
+[&Contact rate]
+Priorität des Kontakts
+[&Contact rate (Low)]
+Priorität des Kontakts (Gering)
+[&Contact rate (Medium)]
+Priorität des Kontakts (Mittel)
+[&Contact rate (High)]
+Priorität des Kontakts (Hoch)
+[Show even if offline]
+Zeige Kontakt auch, wenn offline
+[- Empty - (do not draw this object)]
+- Leer - (dieses Objekt nicht anzeigen)
+[Event Area]
+Ereignisbereich
+[Fragment (draw portion of image)]
+Fragment (zeige Teil des Bildes)
+[Image (draw image)]
+Bild (zeige Bild)
+[No Events]
+Keine Ereignisse
+[Stretch Both directions]
+Beide Richtungen strecken
+[Stretch Vertical, Tile Horizontal]
+Vertikal strecken, horizontal kacheln
+[Tile Both directions]
+Beide Richtungen kacheln
+[Tile Vertical, Stretch Horizontal]
+Vertikal kacheln, horizontal strecken
+
+;Schriftarten
+[Contact names]
+Kontakte und Gruppen
+[Frame texts]
+Kontaktlisten-Elemente
+[Row Items]
+Zeileninhalt
+[Special colours]
+Markierung und Suche
+
+;IcoLib
+[Contact rate High]
+Kontaktpriorität: Hoch
+[Contact rate Low]
+Kontaktpriorität: Gering
+[Contact rate Medium]
+Kontaktpriorität: Mittel
+[Contact rate None]
+Kontaktpriorität: Keine
+[Move to Group]
+In Gruppe verschieben
+
+;Toolbar
+[Toolbar settings]
+Toolbareinstellungen
+[Show Toolbar with next buttons:]
+Zeige Toolbar mit folgenden Buttons:
+[Button width]
+Buttonbreite
+[Multiline toolbar]
+Mehrzeilige Toolbar
+[Autosize toolbar]
+Autom. Größenanpassung
+
+[Show/Hide offline contacts]
+Zeige/Verstecke Offline-Kontakte
+[Find User]
+Kontakte suchen/hinzufügen
+[Use/Disable groups]
+Aktiviere/Deaktiviere Gruppen
+[Enable/Disable sounds]
+Aktiviere/Deaktiviere Klänge
+[Enable sounds]
+Klänge aktivieren
+[Minimize]
+Minimieren
+[CheckAnniv]
+Prüfe Jahrestage
+[AnnivList]
+Liste der Jahrestage
+[Join conference (Jabber)]
+Konferenz beitreten (Jabber)
+[Service discovery (Jabber)]
+Diensterkennung (Jabber)
+[Open bookmarks (Jabber)]
+Lesezeichen öffnen (Jabber)
+[Hints:]
+Bemerkungen:
+[Hints:\n* Use Drag&&Drop feature to change buttons order.\n* You can change button icons at Customize->Icons Toolbar section]
+Hinweise:\n* Drag&&Drop zum Ändern der Reihenfolge verwenden.\n* Die Icons können unter 'Customize -> Icons -> Toolbar' geändert werden.
+;[* Use Drag&Drop feature to change buttons order.]
+;* Benutzen Sie die Drag&Drop-Funktion, um die Reihenfolge der Buttons zu ändern.
+;[* You can change button icons at Customize -> Icons Toolbar section]
+;* Sie können die Icons in Customize -> Icons -> Toolbar ändern
+[Space between]
+Abstand
+
+;; View Modes
+[Filtering]
+Filtern
+[Using the contact list on the left side, you can select contacts which will be "sticky" for this view mode. These contacts will ignore the standard filter rules and only use the status mode filter below.]
+In der Kontaktliste auf der linken Seite können Sie Kontakte auswählen, die in diesem Kontaktfilter "fest" sind. Diese Kontakte werden die Standardfilterregeln ignorieren und nur den Statusfilter unten benutzen.
+[Editing view mode]
+Kontaktfilter bearbeiten
+[Ungrouped contacts]
+Nicht gruppierte Kontakte
+[Configuring view mode: %s]
+Diesen Kontaktfilter einrichten: %s
+[Show contacts in groups]
+Kontakte gruppiert anzeigen
+
+[Window behaviour:]
+Verhalten:
+[Status bar:]
+Statusleiste:
+[List content:]
+Inhalt:
+[List sorting:]
+Sortierung:
+[Compact mode]
+Kompaktmodus
+[Show contact time in list]
+Kontaktzeit anzeigen

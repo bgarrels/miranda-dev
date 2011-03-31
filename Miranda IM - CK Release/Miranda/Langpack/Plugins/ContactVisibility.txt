@@ -1,0 +1,12 @@
+; Pluginname: ContactVisibility 
+; Version: 0.1.0.0
+; Dateiname: contactvisibility.dll
+; Autor: Daniel Bergholm
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=663
+; Übersetzung: 22.07.05 von Dober
+; Besonderheiten: Entwicklung eingestellt!
+
+[&Always Online]
+&Immer sichtbar
+[&Always Offline]
+&Niemals sichtbar

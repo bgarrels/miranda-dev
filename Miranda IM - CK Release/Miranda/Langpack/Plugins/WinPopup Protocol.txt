@@ -1,0 +1,53 @@
+; Pluginname: WinPopup Protocol 
+; Version: 0.0.0.15
+; Dateiname: winpopup_proto.dll
+; Autor: ryo-oh-ki
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1202
+; Übersetzung: 22.06.05 von Snoop
+
+[Allows you to send and receive messages over Microsoft LAN. WinPopup and Net Send replacement powerd by Miranda IM.]
+Erlaubt Ihnen, Nachrichten über Microsoft-LAN zu senden und zu empfangen. WinPopup- und Net-Send-Ersatz für Miranda IM.
+[Add contact...]
+Kontakt hinzufügen...
+[Auto-reply to users with your status message while away]
+Autom. Antwort an Kontakte mit Ihrer Status-Nachricht, wenn abwesend
+[Cannot send message]
+Kann Nachricht nicht senden
+[Cannot create receiving mailslot]
+Kann keinen empfangendes Postfach erstellen
+[Cannot operate Messenger service]
+Kann Nachrichtendienst nicht betreiben
+[Cannot register NetBIOS name]
+Kann den NetBIOS-Namen nicht registrieren
+[Cannot resolve contacts IP-address. Add it anyway?]
+Kann IP-Adresse des Kontakts nicht herausfinden, trotzdem hinzufügen?
+[Cannot start Messenger service]
+Kann Nachrichtendienst nicht starten
+[Cannot stop Messenger service]
+Kann Nachrichtendienst nicht beenden
+[Computer,User,Group]
+Computer,Benutzer,Gruppe
+[Explore]
+Erkunden
+[Failed names]
+Keine Namen gefunden
+[LAN adapter]
+LAN-Adapter
+[NetBIOS names registration]
+NetBIOS-Namensregistrierung
+[No progress]
+Kein Vorgang
+[Other names]
+Andere Namen
+[Please shutdown any other IM applications and/or Messenger service]
+Bitte andere Instant-Messenger und/oder Dienste herunterfahren
+[Successful names]
+Erfolgreiche Namen
+[Unexpected service status change]
+Unerwarteter Service-Statuswechsel
+[Use Mailslot when sending (RECOMMENDED)]
+Benutze Mailslot beim Senden (EMPFOHLEN)
+[Use NetBIOS when sending]
+NetBIOS beim Senden benutzen
+[Use Messenger service when sending and receiving]
+Nachrichtendienst beim Senden und Empfangen nutzen

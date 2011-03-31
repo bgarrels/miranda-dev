@@ -1,0 +1,17 @@
+; Pluginname: Fetion 
+; Version: 0.0.0.16
+; Dateiname: fetion.dll
+; Autor: starkwong
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3816
+; Übersetzung: 13.04.09 von Sebijk
+; Zur Vervollständigung ist MirandaQQ2 als Sprachpaket erforderlich
+; Besonderheiten: Entwicklung eingestellt!
+
+[You did not enter your password in options.]
+Sie haben kein Kennwort in den Einstellungen eingegeben.
+[Fetion ID]
+Fetion-ID
+[Switch Send Mode to SMS]
+SMS als Sendungsmethode
+[Qun Messaging Font]
+Qun-Schriftnachricht

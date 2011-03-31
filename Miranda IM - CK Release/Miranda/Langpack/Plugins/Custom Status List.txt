@@ -1,0 +1,77 @@
+; Pluginname: Custom Status List
+; Version: 0.1.0.5
+; Dateiname: CSList.dll
+; Unique ID: {08b86253-ec6e-4d09-b7a9-64acdf0627b8
+; Autor(en): TomHANAX, jarvis, Mataes, CHEF-KOCH
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3626
+; Übersetzung: Foso am 02.02.07, Update: kaye_styles am 23.07.08
+; Besonderheiten: Einige Header sind unübersetzt!
+
+[Allow extra ICQ Custom status items (ICQ Plus only)]
+Erlaube ICQ-XStatus-Elemente (nur ICQ Plus)
+[Hide ""Custom status"" menu]
+Verstecke "XStatus-Menü"
+[Remember last window position]
+Letzte Fensterposition merken
+[Note: Menu items are only visible when at least one ICQ account is properly set. Check if you have at least one account with UIN filled in.]
+Hinweis: Menüpunkte sind nur sichtbar, wenn mindestens ein ICQ-Account richtig eingestellt ist. Prüfen Sie, ob mindestens ein Konto mit UIN ausgefüllt ist.
+
+[Add new item]
+Hinzufügen
+[Clear custom status (reset to None) and close]
+XStatus ausschalten (auf "keine" setzen) und schließen
+[Close without changing custom status]
+Schließen, ohne XStatus zu speichern
+[Delete selected item]
+Eintrag löschen
+[Favourites]
+Favoriten
+[Filter list]
+Liste filtern
+[Idle default]
+Abw. Standard
+[Import statuses from database]
+Status aus der Profildatei importieren
+[Modify selected item]
+Eintrag bearbeiten
+[Regular statuses]
+Reguläre Status
+[Set custom status to selected one and close]
+XStatus zu ausgewähltem setzen und schließen
+[Set on idle]
+Bei Abw. setzen
+[Set/unset current item as favorite]
+Ausgewählten Eintrag als Favorit setzen
+[Show Custom Status List]
+Zeige XStatus-Liste
+[Undo changes]
+Änderungen rückgängig machen
+[Whether or not watch custom status changes and add them into list]
+XStatus-Änderungen beobachten und zur Liste hinzufügen
+
+[Confirm deletion of items]
+Löschen bestätigen
+[Custom Status List]
+XStatus-Liste
+[Delete entries in ICQ Custom status menu after Import]
+Einträge im ICQ-XStatus-Menü nach Importieren entfernen
+[Global Status Menu at the bottom]
+Statusmenüeintrag am Ende positionieren
+[Global Status Menu at the top]
+Statusmenüeintrag am Anfang positionieren
+[List settings]
+Listeneinstellungen
+[Menu item placement]
+Menüeintragsplatzierung
+[No items available in the database.\nClick the Add button to define some.]
+Keine Einträge in der Datenbank.\nKlicken Sie auf das Pluszeichen, um welche hinzuzufügen.
+[Note: This option requires newest version of ICQ plugin to work properly. Check details at the plugin homepage.]
+Hinweis: Diese Einstellung benötigt die neuste Version des ICQ-Plugins. Beachten Sie die Informationen auf der Plugin-Homepage.
+
+[Favourite]
+Favorit
+[Main Icon]
+Haupticon
+
+[Keep your ICQ Custom statuses in an integrated, easy to use manager. This plugin offers simple management functions to keep your extra statuses on one place.]
+Verwalte deine ICQ-XStatus in einem integrierten und einfach zu nutzenden Manager. Dieses Plugin stellt einfache Managementfunktionalitäten zur Verfügung, welche Sie alle XStatus in einem Platz verwalten lassen.

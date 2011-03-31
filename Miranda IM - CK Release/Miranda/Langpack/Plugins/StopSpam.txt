@@ -1,0 +1,94 @@
+; Pluginname: StopSpam 
+; Version: 0.0.2.0
+; Dateiname: stopspam.dll 
+; Autor: Roman Miklashevsky, A. Petkevich, Koshechka, sss
+; SVN SSS Mod: http://sss.chaoslab.ru:81/tracker/mim_plugs/
+; SVN StopSpam+: http://svn.miranda.im/mainrepo/stopspam/.
+; Link: http://koshechka.miranda.im/category/stopspam/
+; Übersetzung: kaye_styles am 01.04.2009
+; Besonderheiten: Dialoge müssen geprüft werden - ToDo!
+
+[No more spam! Robots can't go! Only human beings invited!\r\n\r\nThis plugin works pretty simple:\r\nWhile messages from users on your contact list go as there is no any anti-spam software, messages from unknown users are not delivered to you. But also they are not ignored, this plugin replies with a simple question, and if user gives the right answer plugin adds him to your contact list so that he can contact you.]
+Nie wieder Spam! Spambots haben keine Chance! Nur Menschen sind eingeladen!\r\n\r\nDieses Plugin arbeitet sehr einfach:\r\nNachrichten von Ihren Kontakten werden behandelt, als gäbe es kein Anti-Spam-System. Auf der anderen Seite werden Nachrichten von unbekannten Kontakten nicht direkt an Sie weitergeleitet. Sie werden aber auch nicht ignoriert, sondern dieses Plugin stellt eine einfache Frage. Wird diese richtig beantwortet, wird der Kontakt ihrer Kontaktliste hinzugefügt und kann Sie nun kontaktieren.
+[Do not send more than ]
+Sende nicht mehr als
+[ questions to one contact (0 - for no limit)]
+Fragen an den Kontakt (0 = Kein Limit)
+[Enable StopSpam-StopSpam infinite talk protection]
+Aktiviere 'infinite talk'-Schutz
+[Add contact permanently]
+Kontakte dauerhaft zur Kontaktliste hinzufügen
+[Enable auth. requests blocking]
+Blockiere Autorisierungsanfragen
+[Log spam to file]
+Logge Spam in Datei
+[Available accounts:]
+Installierte Protokolle:
+
+;StopSpam (Original)
+[Answer is not case sensitive]
+Groß-/Kleinschreibung der Antwort nicht beachten
+[Hide unanswered contacts and spammers from contact list]
+Verstecke Kontakte und Spambots ohne Antwort in der Kontaktliste
+[Ignore spammers (do not write messages to history)]
+Ignoriere Spammer (Nachrichten werden nicht in den Verlauf geschrieben)
+
+[Answer:]
+Antwort:
+[Auth. request reply:]
+Rückmeldung bei Authorisierungsanfragen:
+[Congratulation:]
+Gratulation:
+[Question: (Ctrl-Enter for carriage return)]
+Frage: (Strg+Eingabe für Zeilenvorschub)
+[Restore defaults]
+Standard
+[Congratulations! You just passed human/robot test. Now you can write me a message.]
+Glückwunsch! Sie haben gerade den Mensch-/Robotertest bestanden. Nun können Sie eine Nachricht schreiben.
+[StopSpam: send a message and reply to a anti-spam bot question.]
+StopSpam: senden Sie eine Nachricht und antworten Sie auf die Frage des Anti-Spam-Bot's.
+[Spammers made me to install small anti-spam system you are now speaking with. Please reply "nospam" without quotes and spaces if you want to contact me.]
+Spammer zwingen mich dazu ein Anti-Spam-System zu installieren, mit dem Sie gerade schreiben. Bitte geben Sie "Nospam" ohne Anführungszeichen und Leerzeichen ein, falls Sie mich kontaktieren möchten.
+
+[Despammed protocols:]
+Spam-Schutz aktiviert für:
+[Disable protection for following protocols:]
+Deakt. Schutz für folgende Protokolle:
+[Installed protocols:]
+Installierte Protokolle:
+[Filtered accounts:]
+Spam-Schutz aktiviert für:
+[Remove all tempory contacts after restart]
+Entferne alle temporären Kontakte nach einem Neustart
+
+[Remove Temporary Contacts]
+Temporäre Kontakte entfernen
+
+[Add contacts to specified group:]
+Kontakte in dieser Gruppe speichern:
+[Exclude contacts which we sending something from spam check]
+Schließe Kontakte aus, welche Nachrichten vom Anti-Spam-System erhalten
+[Remove Excluded contacts after restart]
+Entferne ausgeschlossene Kontakte nach einem Neustart
+[Case insensitive answer checking]
+Groß-/Kleinschreibung bei der Antwort berücksichtigen
+[Disable question in invisible mode]
+Frage im Status 'Unsichtbar' deaktivieren
+[Enable integration with DOS plugin]
+Aktiviere Unterstützung für DOS-Plugin
+[Ignore Authorization requests with URL]
+Autorisierungsanfragen mit URLs ignorieren
+[Ignore URL in messages and auth requests]
+URLs in Nachrichten und Autorisierungsanfragen ignorieren
+[Use regex for answers checking]
+Benutze "Regulären Ausdruck (Regex)" zum Antworten prüfen
+[Log Spammers to system history]
+Trage Spammer in Systemverlauf ein
+[After congratulation (ICQ only)]
+Nach Erfolg (nur ICQ)
+[Add contact to server list]
+Kontakt der Serverliste hinzufügen
+[Automatically grant authorization]
+Automatisch Autorisierung gewähren
+[Request authorization from contacts which pass stopspam test]
+Autorisierung von "Nicht-Spam-Kontakten" anfordern

@@ -1,0 +1,13 @@
+; Pluginname: SecVirtDB 
+; Version: 0.5.1.0
+; Dateiname: dbx_3xs.dll
+; Autor: Miranda-IM project; Piotr Pawluczuk; Pescuma
+; Link: http://saaplugin.no-ip.info/sdb/dbx_3xS.dll
+; Übersetzung: CHEF-KOCH am 20.05.2010
+
+[Please type in your new password]
+Bitte tippen sie Ihr neues Passwort ein
+[Password]
+Passwort
+[Confirm]
+Bestätigen

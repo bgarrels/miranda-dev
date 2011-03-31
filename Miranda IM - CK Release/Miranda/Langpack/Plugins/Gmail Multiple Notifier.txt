@@ -1,0 +1,54 @@
+; Pluginname: Gmail Multiple Notifier 
+; Version: 0.4.0.11
+; Dateiname: gmailm.dll
+; Unique ID: {0465f65d-36fb-4fec-826e-26e86a33a3aa}
+; Autor(en): Mixwind, EgotisticalElf, borkra 
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1988
+; Übersetzung: 09.12.05 von Dober
+
+[GmailMNotifier]
+GMail
+[Gmail Account]
+GMail Account
+[Check Gmail Inbox every]
+Prüfe Posteingang alle
+[Notifier on:]
+Anzeige:
+[System Tray]
+Systemtray
+[Duration:]
+Länge:
+[TXT|BG:]
+TXT|HG:
+[On DBClick:]
+Bei Klick:
+[Login using default browser]
+Standard-Browser verwenden
+[Login using Internet Explorer]
+Internet Explorer verwenden
+[Run custom program]
+Eigenes Prog. verwenden
+[Use online contacts when no new mail]
+Online Kontakte bei keiner neuen Nachricht verwenden
+[Enable icon in status bar (restart required)]
+Icon in der Statusleiste aktivieren (Neustart benötigt)
+[This is a shared computer so disable Auto Login]
+Automatische Anmeldung deaktivieren
+[Log unread threads into database (enable history)]
+Ungelesene Nachrichten protokollieren
+[Mark database events as unread.]
+Ereignisse als ungelesen kennzeichnen
+
+[&Check All Gmail Inboxes]
+GMail Posteingänge prüfen
+[&Check Gmail Inbox]
+GMail Posteingang prüfen
+
+[Can't open Internet!]
+Keine Internetverbindung!
+[Can't reach server!]
+Kann Server nicht erreichen!
+[Can't get rss feed!]
+Kann RSS Feed nicht empfangen!
+[Wrong name or password!]
+Falscher Nutzername oder Passwort!

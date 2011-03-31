@@ -1,0 +1,65 @@
+; Pluginname: WhoIsReadingMyStatusMsgNotify 
+; Version: 0.0.1.4
+; Dateiname: whoisreadingmystatusmsg.dll
+; Autor: Corsario
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=360
+; Übersetzung: 17.05.06 von Weishaupt
+
+[Notifies you when someone is reading your ICQ status message.]
+Zeigt Ihnen an, wenn jemand Ihre ICQ-Statusnachricht liest.
+[Also notify if who read is]
+Auch benachrichtigen, wenn Kontakt
+[Not on contact list]
+nicht in der Kontaktliste ist
+[&Log to a file]
+In eine Datei speichern
+[Path :]
+Pfad:
+[&Append UIN to file name]
+UIN an D&ateinamen anhängen
+[Text to log :]
+Text im Log:
+[[%day/%month/%year - %hour:%minute] %clname read your %status message]
+(%day/%month/%year - %hour:%minute) %clname (%uin) liest deine %status-Nachricht
+
+[&Enable notification via popup]
+Popup-Benachrichtigung&en aktivieren
+[Click]
+Klick
+
+[Open history]
+Verlauf öffnen
+[Open user details window]
+Kontaktprofil öffnen
+[%clname\r\nis reading your %status message]
+%clname (%uin)\r\nliest deine %status-Nachricht
+
+[Status text]
+Statustext
+[Name like in contact list]
+Name wie in Kontaktliste
+[Day (dd)]
+Tag (TT)
+[Month (mm)]
+Monat (MM)
+[Year (yyyy)]
+Jahr (JJJJ)
+[Hour (hh)]
+Stunde (HH)
+[Minutes (mm)]
+Minuten (MM)
+[Internal IP]
+Interne IP
+[External IP]
+Externe IP
+
+[Incoming status message request]
+Abfrage der Statusnachricht
+
+[Log File]
+Logdatei
+
+[&Disable WhoIsReading popups]
+WhoIsReading-Popups &deaktivieren
+[&Enable WhoIsReading popups]
+WhoIsReading-Popups aktivi&eren

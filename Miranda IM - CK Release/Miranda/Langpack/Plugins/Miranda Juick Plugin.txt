@@ -1,0 +1,10 @@
+; Pluginname: Miranda Juick Plugin
+; Version: 0.2
+; Dateiname: mjplugin.dll
+; Autor: longedok
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4072
+; Übersetzung: Sebijk
+; Besonderheiten: Entwicklung eingestellt!
+
+[The plugin for more comfortable using juick (juick.com) in miranda im]
+Das Plugin für mehr Komfort bei der Verwendung von Juick (juick.com) im Miranda IM.

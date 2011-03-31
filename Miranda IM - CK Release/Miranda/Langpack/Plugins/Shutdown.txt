@@ -1,0 +1,41 @@
+; Pluginname: Shutdown 
+; Version: 0.4.0.0
+; Dateiname: shutdown.dll
+; Autor: corsario
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=304
+; Übersetzung: 10.08.06 von BlueYersey
+; Besonderheiten: Entwicklung eingestellt!
+
+[Start sh&utdown plugin]
+Sh&utdown Plugin starten
+[Stop sh&utdown plugin]
+Sh&utdown Plugin beenden
+
+[Shutdown Options]
+Shutdown Optionen
+[When]
+Wann
+[Shutdown now]
+Jetzt herunterfahren
+[Shutdown at]
+Herunterfahren um
+[Shutdown in]
+Herunterfahren in
+[minute(s).]
+Minute(n).
+[Shutdown means]
+Herunterfahren bedeutet
+[Shut down all processes running and log the user off.]
+Alle laufenden Prozesse beenden und User Abmelden.
+[Shut down the system and turn off the power.]
+Das System herunterfahren.
+[Shut down the system and then restart the system.]
+Das System herunterfahren und neu starten.
+[Shut down the system when all file buffers have been flushed to disk, and all running processes have stopped. Turn off the power.]
+Das System herunterfahren wenn alle Dateiübertragungen und Programme beendet sind.
+[Go to hibernate mode.]
+In den Ruhezustand versetzen.
+[Go to standby mode.]
+In den Standby Modus versetzen.
+[This plugin is started and will use old settings to shut down this time. If you want to use these new settings now, go to Miranda main menu and restart this plugin for changes to take effect.]
+Dieses Plugin ist gestarten und wird alte Einstellungen zum herunterfahren verwenden. Wenn du neue Einstellungen vornehmen willst dann beende das Plugin im Hauptmenü und starte es neu.

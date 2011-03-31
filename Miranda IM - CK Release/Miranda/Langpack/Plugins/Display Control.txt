@@ -1,0 +1,34 @@
+; Pluginname: Display Control 
+; Version: 0.1.1.28
+; Dateiname: DspControl.dll
+; Autor: FlexLabs
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3232
+; Übersetzung: 17.11.06 von Weishaupt
+; Besonderheiten: Entwicklung eingestellt!
+
+[Triggers]
+Auslöser
+[Display Control enabled]
+Display Control aktiviert
+[Status trigger]
+Status Auslöser
+[Event type trigger]
+Ereignistyp Auslöser
+[You were added]
+Du wurdest hinzugefügt
+[Auth. request]
+Autorisierungsanfrage
+[Time trigger]
+Zeit Auslöser
+[Enable plugin:]
+Aktiviere Plugin:
+[Protocol trigger]
+Protokoll Auslöser
+[Select when do you want the plugin to turn on your screen. Treat the following options as event triggers. Select only the options that you want to trigger the screen to turn on.]
+Wähle bei welchen Ereignissen, der Bildschirm wieder aktiviert werden soll.
+[Enter the range in time, when you want your screen turning on. Note that starting time can be higher then the ending time.]
+Gebe den Zeitraum ein indem dein Bildschirm wieder aktiviert werden soll. Die Startzeit kann höher sein als die Endzeit.
+[Show hidden]
+Zeige versteckte Kontakte
+[To enable or disable the plugin for an individual contact, click on the icon to the right of it. Clicking on the group's icon, enables/disables the plugin for all the contacts in that group.]
+Um das Plugin für bestimmte Kontakte zu de-/aktivieren, klicke auf der rechten Seite auf das Icon. Klickst du auf das Gruppen-Icon, de-/aktivierst du das Plugin für alle Kontakte der Gruppe.

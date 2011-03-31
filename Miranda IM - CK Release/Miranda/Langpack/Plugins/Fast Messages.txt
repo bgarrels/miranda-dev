@@ -1,0 +1,56 @@
+; Pluginname: Fast Messages 
+; Version: 0.0.0.3
+; Dateiname: fastmsg.dll
+; Autor: Timofey Bashkov aka TIMCAT
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3019
+; Übersetzung von Weishaupt am 08.08.06
+
+[Fast Messages...]
+Schnelle Nachricht...
+
+[Message List]
+Nachrichtenliste
+[Move]
+Verschieben
+[* Double click to edit message text]
+* Doppelklick um Nachricht zu bearbeiten
+[Send messages automatically]
+Nachricht automatisch senden
+[Old button position (Scriver)]
+Alte Button Position (Scriver)
+[Group List]
+Gruppenliste
+[* Double click to edit group name]
+* Doppelklick um Gruppennamen zu bearbeiten
+[Group Name]
+Gruppenname
+[Groups down]
+Gruppen runter
+
+[Add message to list]
+Nachricht der Liste hinzufügen
+[Delete message from list]
+Nachricht aus Liste löschen
+[Up message]
+Nachricht nach oben
+[Down message]
+Nachricht nach unten
+[Edit message]
+Nachricht bearbeiten
+[Add group]
+Gruppe hinzufügen
+[Delete group]
+Gruppe löschen
+[Up group]
+Gruppe rauf
+[Down group]
+Gruppe runter
+[Move message]
+Nachricht verschieben 
+[Edit group name]
+Gruppenname bearbeiten
+
+[Delete group with all messages?]
+Gruppe mit allen Nachrichten löschen?
+[No messages in list]
+Keine Nachrichten in der Liste

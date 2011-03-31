@@ -1,0 +1,9 @@
+;============================================================
+;  Module: wundergrnd_intl.ini
+;  Plugin: weather
+;  Versions:
+;  Translators: CHEF-KOCH
+;  Template:
+;  URL:
+;============================================================
+[Light Rain Showers]

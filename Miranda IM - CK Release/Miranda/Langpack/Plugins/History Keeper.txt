@@ -1,0 +1,193 @@
+; Pluginname: History Keeper 
+; Version: 0.2.0.0
+; Dateiname: historykeeper.dll (Ansi), historykeeperw.dll (Unicode)
+; Autor: pescuma
+; ANSI: http://pescuma.mirandaim.ru/miranda/historykeeper.zip
+; Unicode: http://pescuma.mirandaim.ru/miranda/historykeeperW.zip
+; Übersetzung: 17.09.07 von Foso
+
+[Log when contacts change their %s]
+Loggen, wenn Kontakte ihren %s ändern
+[Log when contacts remove their %s]
+Loggen, wenn Kontakte ihren %s entfernen
+[Show when contacts change their client]
+Zeige Popups, wenn Kontakte ihren Client wechseln
+[Show when contacts change their listening]
+Zeige Popups, wenn Kontakte ihr Listening wechseln
+[Show when contacts remove their listening]
+Zeige Popups, wenn Kontakte ihr Listening entfernen
+[Show when contacts change their nickname]
+Zeige Popups, wenn Kontakte ihren Nicknamen wechseln
+[Show when contacts change their status message]
+Zeige Popups, wenn Kontakte ihre Statusnachricht wechseln
+[Show when contacts remove their status message]
+Zeige Popups, wenn Kontakte ihre Statusnachricht entfernen
+[Show when contacts change their status]
+Zeige Popups, wenn Kontakte ihren Status wechseln
+[Show when contacts change their x-status]
+Zeige Popups, wenn Kontakte ihren XStatus wechseln
+[Show when contacts remove their x-status]
+Zeige Popups, wenn Kontakte ihren XStatus entfernen
+[Show when contacts change their x-status message]
+Zeige Popups, wenn Kontakte ihre XStatusnachricht wechseln
+[Show when contacts remove their x-status message]
+Zeige Popups, wenn Kontakte ihre XStatusnachricht entfernen
+[ Track ]
+Allgemein
+[s before notifying (to avoid duplications)]
+s vor dem Benachrichtigen (um Duplikate zu vermeiden)
+[Don't notify on protocol connection]
+Keine Benachrichtigungen beim Verbinden
+[ Log to file ]
+In Datei speichern
+[Ignore Client changes]
+Clientwechsel ignorieren
+[Ignore Nickname changes]
+Nicknamenswechsel ignorieren
+[Ignore Status changes]
+Statuswechsel ignorieren
+[Ignore Status Message changes]
+Statusnachrichtenwechsel ignorieren
+[Ignore XStatus changes]
+XStatuswechsel ignorieren
+[Log to History]
+Im Verlauf speichern
+[Notify using Popups]
+Benutze Popups zur Benachrichtigung
+[Notify using Sounds]
+Benutze Klänge zur Benachrichtigung
+[Notify using Speak plugin]
+Benutze meSpeak-Plugin zur Benachrichtigung
+[removed his/her nickname (was %old%)]
+%contact% entfernt Spitznamen (%old%)
+[[%date%] %contact% changed his/her client to %new% (was %old%)]
+[%date%] %contact% ändert Client von %old% zu %new%
+[[%date%] %contact% changed his/her x-status message to %new% (was %old%)]
+[%date%] %contact% ändert XStatusnachricht von %old% zu %new%
+[removed his/her client (was %old%)]
+%contact% entfernt Client %old%
+[[%date%] %contact% changed his/her x-status to %new% (was %old%)]
+[%date%] %contact% ändert XStatus von %old% zu %new%
+[removed his/her x-status message (was %old%)]
+%contact% entfernt XStatusnachricht %old%
+[changed his/her nickname to %new% (was %old%)]
+%contact% ändert Spitznamen von %old% zu %new%
+[[%date%] %contact% changed his/her status to %new% (was %old%)]
+[%date%] %contact% ändert Status von %old% zu %new%
+[removed his/her status message (was %old%)]
+%contact% entfernt Statusnachricht %old%
+[[%date%] %contact% removed his/her x-status message (was %old%)]
+[%date%] %contact% entfernt XStatusnachricht %old%
+[changed his/her status message to %new% (was %old%)]
+%contact% ändert Status Nachricht von %old% zu %new%
+[[%date%] %contact% removed his/her nickname (was %old%)]
+[%date%] %contact% entfernt Spitznamen %old%
+[changed his/her status to %new%: %msg% (was %old%)]
+%contact% ändert Status von %old% zu %new%: %msg%
+[[%date%] %contact% removed his/her status message (was %old%)]
+[%date%] %contact% entfernt Statusnachricht %old%
+[[%date%] %contact% removed his/her status (was %old%)]
+[%date%] %contact% entfernt Status %old%
+[[%date%] %contact% is now listening to %new%]
+[%date%] %contact% hört jetzt %new%
+[changed his/her x-status message to %new% (was %old%)]
+%contact% ändert XStatusnachricht von %old% zu %new%
+[changed his/her client to %new% (was %old%)]
+%contact% ändert Client von %old% zu %new%
+[[%date%] %contact% stopped listening to music]
+[%date%] %contact% hält Musik an
+[changed his/her x-status to %new%: %msg% (was %old%)]
+%contact% ändert XStatus von %old% zu %new%: %msg%
+[is now listening to %new%]
+%contact% hört jetzt %new%
+[removed his/her status (was %old%)]
+%contact% entfernt Status %old%
+[[%date%] %contact% removed his/her x-status (was %old%)]
+[%date%] %contact% entfernt XStatus %old%
+[removed his/her x-status (was %old%)]
+%contact% entfernt XStatus %old%
+[[%date%] %contact% changed his/her nickname to %new% (was %old%)]
+[%date%] %contact% ändert Spitznamen von %old% zu %new%
+[[%date%] %contact% removed his/her client (was %old%)]
+[%date%] %contact% entfernt Client %old%
+[stopped listening to music]
+%contact% stoppt Musik
+[[%date%] %contact% changed his/her status message to %new% (was %old%)]
+[%date%] %contact% ändert Statusnachricht von %old% zu %new%
+[%s Change]
+%s Wechsel
+
+[Client change]
+Clientwechsel
+[Idle Change]
+Inaktivitätswechsel
+[Listening change]
+Listeningwechsel
+[Listening removal]
+Listeningentfernung
+[Nickname change]
+Nicknamenswechsel
+[Status Message change]
+Statusnachrichtenwechsel
+[Status Message removal]
+Statusnachrichtenentfernung
+[X-Status change]
+XStatuswechsel
+[X-Status Message change]
+XStatusnachrichtenwechsel
+[X-Status Message removal]
+XStatusnachrichtenentfernung
+[X-Status removal]
+XStatusentfernung
+
+[Log Client changes]
+Speichere Clientwechsel
+[Log Listening changes]
+Speichere Listeningwechsel
+[Log Status changes]
+Speichere Statuswechsel
+[Log X-Status changes]
+Speichere XStatuswechsel
+[Log X-Status Message changes]
+Speichere XStatusnachrichtenwechsel
+[Don't log Client changes]
+Keine Speicherung von Clientwechsel
+[Don't log Listening changes]
+Keine Speicherung von Listeningwechsel
+[Don't log Status changes]
+Keine Speicherung von Statuswechsel
+[Don't log X-Status changes]
+Keine Speicherung von XStatuswechsel
+[Don't log X-Status Message changes]
+Keine Speicherung von XStatusnachrichtenwechsel
+[Notify Client changes]
+Benachrichtigung bei Clientwechsel
+[Notify Nickname changes]
+Benachrichtigung bei Nicknamenswechsel
+[Notify Listening changes]
+Benachrichtigung bei Listeningwechsel
+[Notify Status changes]
+Benachrichtigung bei Statuswechsel
+[Notify Status Message changes]
+Benachrichtigung bei Statusnachrichtenwechsel
+[Notify X-Status changes]
+Benachrichtigung bei XStatuswechsel
+[Notify X-Status Message changes]
+Benachrichtigung bei XStatusnachrichtenwechsel
+[Don't notify Client changes]
+Keine Benachrichtigung bei Clientwechsel
+[Don't notify Nickname changes]
+Keine Benachrichtigung bei Nicknamenswechsel
+[Don't notify Listening changes]
+Keine Benachrichtigung bei Listeningwechsel
+[Don't notify Status changes]
+Keine Benachrichtigung bei Statuswechsel
+[Don't notify Status Message changes]
+Keine Benachrichtigung bei Statusnachrichtenwechsel
+[Don't notify X-Status changes]
+Keine Benachrichtigung bei XStatuswechsel
+[Don't notify X-Status Message changes]
+Keine Benachrichtigung bei XStatusnachrichtenwechsel
+
+[Log various types of events to history]
+Speichert diverse Ereignisse im Verlauf.

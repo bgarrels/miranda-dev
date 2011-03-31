@@ -1,0 +1,41 @@
+; Pluginname: dbx_tree 
+; Version: 0.0.0.18
+; Dateiname: dbx_tree.dll
+; Unique ID: {28f45248-8c9c-4bee-9307-7bcf3e12bf99}
+; Autor: Michael "Protogenes" Kunz
+; Link: http://www-user.tu-chemnitz.de/~kunmi/?dbx_tree&lang=en
+; Übersetzung: CHEF-KOCH am 25.05.2010
+
+[Cannot set file position]
+Kann keine Dateiposition setzen
+[Cannot set end of file]
+Kann das Dateiende nicht setzen
+[Cannot write]
+Konnte nicht schreiben
+
+; keine >>> - <<< zwischen den Variablen!!!
+[Journal \"%s\" was found on start.\nBackup \"%s\"%s created and backup \"%s\"%s created.\nYou may delete these file(s) after successful start from \"%s\".]
+Journal \"%s\" wurde beim Start gefunden.\nDie Backups \"%s\"%s und \"%s\"%s wurden erstellt.\nSie können diese Datei(en) nach einem erfolgreichen Start von \"%s\" löschen.
+[ was successfully]
+ wurde erfolgreich
+[ could not be]
+ konnte nicht
+[Journal \"%s\" was found on start.\nBackups \"%s\"and \"%s\" could not be created in \"%s\".]
+Journal \"%s\" wurde beim Start gefunden.\nEin Backup \"%s\" und \"%s\"  konnte nicht in \"%s\" erstellt werden.
+
+[Header Block cannot be read! File damaged: \"%s\"]
+Header-Block konnte nicht gelesen werden! Datei ist beschädigt: \"%s\"
+[Header Block in \"%s\" damaged!]
+Header-Block in \"%s\" ist beschädigt!
+
+[Cannot Merge with global settings!\nSource %d Dest %d]
+Konnte sich nicht zusammen mit den globalen Einstellungen einigen!\nQuelle %d Ziel %d
+
+[Trying to write malformed UTF8 setting \"%hs\" in module \"%hs\"]
+Versuche fehlerhafte UTF-8-Einstellung \"%hs\" im Modul \"%hs\" zu schreiben.
+
+[The dbx_tree plugin cannot be loaded. It requires Miranda IM 0.8.0.0 or later.]
+Das dbx_tree-Plugin konnte nicht geladen werden. Es benötigt mindestens Miranda IM 0.8.0.0 oder höhere Versionen.
+
+[Provides extended Miranda database support - build Jul 19 2010 @ 12:51:53]
+Bietet erweiterte Miranda-IM-Datenbankunterstützung - Erstellt Jul 19 2010 @ 12:51:53

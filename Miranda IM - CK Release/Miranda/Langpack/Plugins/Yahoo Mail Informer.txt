@@ -1,0 +1,45 @@
+; Pluginname: Yahoo Mail Informer 
+; Version: 0.2.0.4
+; Dateiname: ymail.dll
+; Autor: Gennady Feldman
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1830
+; Übersetzung: CHEF-KOCH am 23.05.2010
+[Username:]
+Benutzername
+[Password:]
+Passwort
+[Check every minute(s)]
+Kontrolliere alle ... Minuten
+
+[Message Settings]
+Nachrichteneinstellungen
+[Number of Msg to show]
+Anzahl der angezeigten Nachr.
+[New mails only]
+Nur neue eMails
+[Show connection errors]
+Zeige Verbindungsfehler
+[Notifier on Contact List]
+Benachrichtige in Kontaktliste
+
+[Notify use:]
+Benachrichtigung über:
+[PopUp plugin:]
+Popup-Plugin
+[Preview]
+Vorschau
+[Use popup color]
+Benutze Popupfarbe
+[Use custome color]
+Benutze benutzerdefinierte Farbe
+[Use popup delay]
+Benutze Popupverzögerung
+[Use custom delay]
+Benutze eigene Verzögerung
+[sec.]
+Sek.
+[Background]
+Hintergrund
+
+[Logging into file]
+Logge in folgende Datei:

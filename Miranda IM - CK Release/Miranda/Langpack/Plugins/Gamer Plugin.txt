@@ -1,0 +1,132 @@
+; Pluginname: Gamer Plugin 
+; Version: 0.0.3.1
+; Dateiname: gamer.dll
+; Autor: eXiTus
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3091
+; Übersetzung: 01.09.06 von Striker53
+; Besonderheiten: Entwicklung eingestellt!
+
+[Provides some Variables especially for gamers and an automatic status chage feature.]
+Bietet einige zusätzliche Variablen speziell für Spieler und einen automatischen Statuswechsel.
+;main.cpp
+[Add empty profile]
+Leeres Profil hinzufügen
+[Copy this profile]
+Dieses Profil kopieren
+
+[Network interface used by games:]
+Netzwerkkarte die bei Spielen verwendet wird:
+[Check running processes every]
+Suche nach laufenden Anwendungen alle
+[Button6]
+Öffnen
+
+[Group name]
+Gruppen Name
+[Process count]
+Anzahl Anwendungen
+[Change status?]
+Status wechseln?
+[Use per-protocol settings?]
+Protokollbasierte Einstellungen?
+[Only message?]
+Nur Nachrichten?
+[Don't change when]
+Status nicht wechseln wenn
+[Set status back?]
+Status zurücksetzen
+
+[will be enabled]
+werden aktiviert sein
+[will be disabled]
+werden deaktiviert sein
+
+[Profile Name:]
+Profil Name:
+[Change Status]
+Status wechseln
+[       Use per-protocol settings]
+       Nutze protokollbasierte Einstellungen
+[You can use different settings for every protocol.]
+Man kann unterschiedliche Einstellungen für jedes Protokoll setzen
+[The status of "pushed-down" protocols won't be changed]
+Der Status von "gedrückten" Protokollen wird nicht geändert werden.
+[Popups should ... while process is running]
+PopUps sollten bei laufendem Prozess...
+[Sounds should ... while process is running]
+Klänge sollten bei laufendem Prozess...
+[be enabled]
+...aktiviert sein
+[be disabled]
+...deaktiviert sein
+[stay as they are]
+...bleiben wie sie sind
+
+[Process List]
+Prozess Liste
+[.exe name/path]
+Name/Pfad der Datei (.exe)
+[Application name]
+Anwendungsname
+[Add new process to list]
+Füge der Liste neuen Prozess hinzu
+[Hint: Enter complete path to make sure the correct process is recognized.]
+Hinweis: Geben Sie den vollständigen Pfad ein, um sicherzugehen, dass der korrekte Prozess erkannt wird
+
+[Restore old status and message when application is closed]
+Status und Nachricht zurücksetzen wenn Anwendung beendet wurde
+[Dont change status, only set new message]
+Status nicht wechseln, nur neue Nachricht setzen
+[Change status mode to:]
+Wechsel Status zu:
+[Dont change when]
+Nicht wechseln wenn:
+
+[       Enable process]
+       Aktiviere Anwendung
+[Change Status?]
+Status wechseln?
+[Only Message?]
+Nur Nachrichten?
+[sample.exe]
+Beispiel.exe
+[Sample Application]
+Beispiel Anwendung
+[New Status Message...]
+Neue Status Nachricht...
+
+[Edit Profile]
+Profil bearbeiten
+[Processlist]
+Anwendungsliste
+[.exe name]
+.exe Name
+[While process is running:]
+Während Anwendung läuft:
+[Popups should]
+Popups sollten
+[Profile name:]
+Profil Name:
+[       Change status when running process is found]
+       Wechsel Status wenn laufende Anwendung gefunden wurde
+[Variables Help]
+Hilfe zu Variablen
+
+[%game% - will be replaced with the associated 'Application' string\r\nInstall Variables.dll for more variables.]
+%game% - Wird ersetzt durch die dazugehörige 'Anwendung' string\r\nInstall Varibles.dll für mehr Variablen
+[Confirm Profile Delete]
+Bestätige Profil Löschung
+[Are you sure you want to delete the profile '%s' and all settings for this profile?]
+Bist du sicher das du das Profil '%s' und alle Einstellungen löschen möchtest?
+
+[I'm playing %game% now.\r\n?if(?query(%serverip%),At the moment I'm playing on this Server:\r\n?tab()%servername%\r\n?tab()IP: %serverip%\r\n?tab()Map: %map%`,` Players: %players%/%slots%,)]
+Ich spiele gerade %game%.\r\n?if(?query(%serverip%), Zurzeit spiele ich auf diesem Server:\r\n?tab()%servername%\r\n?tab()IP: %serverip%\r\n?tab()Map: %map%`,` Spieler: %players%/%slots%,)
+[I'm playing %game%, please dont't disturb.]
+Ich spiele %game%, bitte nicht stören.
+[Media Players]
+Medien Spieler
+[I'm listening to music...]
+Ich höre gerade Musik...
+
+[       Enable process checking]
+       Aktivier Prozess Suche

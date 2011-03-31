@@ -1,0 +1,10 @@
+; Pluginname: Elizatalk 
+; Version: 0.0.0.1
+; Dateiname: elizatalk.dll
+; Autor: Jens Theess (j.theess@tu-bs.de)
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=323
+; Übersetzung: 09.07.05 von baphomet
+; Besonderheiten: Entwicklung eingestellt! - Sie auch Anna the Alice Bot.
+
+[Warn contacts Eliza is chatting]
+Kontakte informieren, dass mit Eliza gechattet wird

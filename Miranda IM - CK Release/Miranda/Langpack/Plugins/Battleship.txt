@@ -1,0 +1,128 @@
+; Pluginname: Battleship 
+; Version: 0.0.1.2
+; Dateiname: battleship.dll
+; Autor: StDenis
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1100
+; Übersetzung: Weishaupt am 01.02.06
+; Besonderheiten: Entwicklung eingestellt!
+
+["Battleship" game]
+Schiffe versenken
+[Play "Battleship" game]
+Schiffe versenken spielen
+[&New game]
+Neues Spiel
+[&Ready!]
+Fertig!
+[Just start a new game...]
+Einfach ein neues Spiel starten...
+[Arrange your ships]
+Positionieren Sie Ihre Schiffe
+[Your opponent is tired of playing]
+Ihr Gegner hat keine Lust mehr
+[You win!]
+Sie haben gewonnen!
+[Sorry, You lose...]
+Sie haben leider verloren...
+[Your move!]
+Sie sind am Zug!
+[Opponent's move...]
+Gegner ist am Zug...
+[Wait for answer...]
+Warte auf Antwort...
+[Opponent is not ready. Waiting...]
+Gegner ist nicht fertig. Warte...
+[Hurry up! Opponent is ready to fight.]
+Schnell! Ihr Gegner ist bereit zu kämpfen!
+[Game in progress. Do you really want to terminate?]
+Spiel ist im Gange. Wirklich beenden?
+[Your opponent want to restart. Do you agree?]
+Ihr Gegner will neu beginnen. Sind Sie einverstanden?
+[Empty]
+Leer
+[Injured]
+Getroffen
+[Sunk]
+Versenkt
+[Miss]
+Verfehlt
+[Horiz. ship: Beginning]
+Horiz. Schiff: Anfang
+[Horiz. ship: Middle]
+Horiz. Schiff: Mitte
+[Horiz. ship: Ending]
+Horiz. Schiff: Ende
+[Horiz. ship: Alone]
+Horiz. Schiff: Einzeln
+[Vert. ship: Beginning]
+Vert. Schiff: Anfang
+[Vert. ship: Middle]
+Vert. Schiff: Mitte
+[Vert. ship: Ending]
+Vert. Schiff: Ende
+[Vert. ship: Alone]
+Vert. Schiff: Einzeln
+[Unknown command for "Battleship" game received]
+Unbekannten Befehl für das "Schiffe versenken"-Spiel empfangen
+[*Battleship* There's someone who wants to play the game with you!]
+*Spiel "Schiffe versenken"* Jemand möchte mit Ihnen spielen!
+[The cool game from my childhood]
+Das coole Spiel aus meiner Kindheit
+[Battleship: New game]
+Spiel "Schiffe versenken": Neues Spiel
+[Battleship: Defeat]
+Spiel "Schiffe versenken": Verteidigt
+[Battleship: Victory]
+Spiel "Schiffe versenken": Sieg
+[Battleship: Game is started]
+Spiel "Schiffe versenken": Spiel hat begonnen
+[Battleship: Your move]
+Spiel "Schiffe versenken": Ihr Zug
+[Battleship: You miss]
+Spiel "Schiffe versenken": Sie haben verfehlt
+[Battleship: You hit]
+Spiel "Schiffe versenken": Sie haben getroffen
+[Battleship: You destroyed enemy's ship]
+Spiel "Schiffe versenken": Sie haben das feindliche Schiff zerstört
+[Battleship: Opp. move]
+Spiel "Schiffe versenken": gegnerischer Zug
+[Battleship: Opp. miss]
+Spiel "Schiffe versenken": Gegner hat verfehlt
+[Battleship: Opp. hit]
+Spiel "Schiffe versenken": Gegner hat getroffen
+[Battleship: Opp. destroyed your ship]
+Spiel "Schiffe versenken": Gegner hat Ihr Schiff zerstört
+[Battleship: Take the ship]
+Spiel "Schiffe versenken": Kapern Sie das Schiff
+[Battleship: Drop the ship]
+Spiel "Schiffe versenken": Das Schiff sinkt
+[Select a skin file]
+Wählen Sie eine Skindatei aus
+[Timeout, ms]
+Wartezeit in ms
+[Shot speed, ms]
+Schussgeschw. in  ms
+[Response delay in ms]
+Zeit für die Antwort in ms
+[Show buttons in the top]
+Zeige Buttons oben
+[Here's a next sequence to play:]
+Hier, die nächste Szene zum Spielen:
+[1. You have to make the handshake. For this you have to press "New game" button. This one sends a request to your opponent. When you got his answer the game will start.\n2. The game will start with ship arrangement. You must move all available ships from a right side into a left. Use a left-click to take/drop a ship. A right mouse button is toggle a direction of a ship.\n3. When you will finish your arrangement you have to press the "Ready!" button. If your opponent isn't ready the appropriate message will shown in the status bar.\n4. Current state of the game is reflected in the status bar.\nGood luck and have fun!]
+1. Anfangs müssen Sie deinen Gegner zu einem neuen Spiel einladen. Dazu einfach auf "Neues Spiel" klicken. Dies sendet eine Anfrage an Ihren Gegner. Wenn dieser akzeptiert, startet das Spiel.\n2. Das Spiel startet mit der Schiffspositionierung. Sie müssen alle Schiffe ins Spielfeld ziehen, dazu benutzen Sie die linke Maustaste. Mit der rechten Maustaste drehen Sie das Schiff um 90 °.\n3. Wenn Sie mit dem Einrichten fertig sind, müssen Sie auf "Fertig" klicken. Falls Ihr Gegner noch nicht fertig sein sollte, wird eine Nachricht in der Statuszeile erscheinen.\n4. Aktueller Spielvorgang wird in der Statuszeile angezeigt.\nViel Glück und viel Spaß!
+[Score %d:%d]
+Spielstand %d:%d
+[Legend:]
+Legende
+[Quick Help]
+Schnellhilfe
+[Clear Score]
+Lösche Spielstand
+[An offer of new game]
+Angebot für ein neues Spiel
+[Arrangement is finished]
+Aufbau beendet
+[User Status Icon]
+Benutzer-Statusicon
+[Your pal must have a same version of the game as you. Check it up!]
+Ihr Freund muss die gleiche Version haben wie Sie. Prüfen Sie Ihre Versionen!

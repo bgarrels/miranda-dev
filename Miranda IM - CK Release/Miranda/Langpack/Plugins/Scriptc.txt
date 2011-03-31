@@ -1,0 +1,37 @@
+; Pluginname: Scriptc 
+; Version: 0.9.0.1
+; Dateiname: scriptc.dll
+; Autor: Sam Kothari (egoDust)
+; eMail: sam@miranda-im.org
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3737
+; SVN: http://mim-scriptc.googlecode.com/
+; Übersetzung: CHEF-KOCH am 21.05.2010
+
+[Script Console]
+Skript Konsole
+[Use script console]
+Benutze Script Konsole
+[Event source filter:]
+Eventfilter:
+[General Verbosity]
+Generell Wortreich
+[Compiler I/O]
+Compiler I/O
+[Core Abstraction Layer]
+Core Ablenkung
+[Object Cache]
+Objekt Cache
+[Script ODS]
+Skript OpenDocument Presentation (ODS)
+[Warnings]
+Warnungen
+[Fatal Errors]
+Fatale Fehler
+[Show Console]
+Zeige Konsole
+[Hide script console after output inactivity]
+Verstecke Skript Konsole nach Ausgabe inaktivität
+[Except when reporting important information]
+Ausgenommen wenn wichtige Informationen berichtet werden
+[Tip: Scripts have a right-click context menu]
+Tipp: Die Skripte haben ein Rechtsklick Kontextmenü

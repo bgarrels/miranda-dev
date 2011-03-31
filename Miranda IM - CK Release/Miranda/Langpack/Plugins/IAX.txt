@@ -1,0 +1,46 @@
+; Pluginname: IAX 
+; Version: 0.0.3.0
+; Dateiname: iax.dll
+; Autor: sje
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3198
+; Übersetzung Foso am 10.02.07
+
+[*Source port:]
+Port:
+[(*Changes will take effect after restart)]
+* benötigt Neustart
+[Caller ID]
+Anrufer-ID
+[Devices]
+Geräte
+[Input:]
+Eingehend:
+;[Mic boost]
+[Output:]
+Ausgehend:
+[Popup on incoming call]
+Popup bei eingehenden Anrufen
+[Popup on outgoing call]
+Popup bei ausgehenden Anrufen
+[Allowed]
+Erlaubt
+[Preferred]
+Bevorzugt
+[Changes will take effect after restart]
+Änderungen werden erst nach Neustart übernommen
+[Answer Call]
+Anruf annehmen
+[Dial Number]
+Nummer wählen
+[Keypad]
+Ziffernblock
+[Call]
+Anrufen
+[Hang Up]
+Auflegen
+[New IAX Contact]
+Neuer IAX-Kontakt
+[IAX Error]
+IAX-Fehler
+[Registration timeout]
+Zeitüberschreitung bei der Registrierung

@@ -1,0 +1,160 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1251)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_OPTIONS DIALOGEX 0, 0, 308, 233
+STYLE DS_SETFONT | DS_3DLOOK | DS_FIXEDSYS | DS_CENTER | WS_CHILD
+EXSTYLE WS_EX_CONTROLPARENT
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "The way actions could be called",IDC_GB,6,2,297,226
+    CONTROL         "",IDC_ACTIONSLIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,12,12,118,210
+    CONTROL         "CList_Modern",IDC_CHBMTBB,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,150,19,76,8
+    CONTROL         "Core Hotkey",IDC_CHBHOTKEY,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,150,214,146,8
+    CONTROL         "Enable",IDC_CHBMMENUITEM,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,150,49,65,8
+    CONTROL         "Enable",IDC_CHBCMENUITEM,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,150,118,65,8
+    CONTROL         "TopToolBar",IDC_CHBTTBB,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,150,28,68,8
+    EDITTEXT        IDC_EDMMENUPN,218,56,78,12,ES_AUTOHSCROLL | WS_GROUP
+    EDITTEXT        IDC_EDCMENUPN,218,125,78,12,ES_AUTOHSCROLL | WS_GROUP
+    RTEXT           "Root popup:",IDC_STMMIROOTPOPN,132,58,83,8
+    RTEXT           "Root popup:",IDC_STCMIROOTPOPN,132,127,83,8
+    CONTROL         "show only if variables return 1",IDC_CHBCMVARS,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_GROUP | WS_TABSTOP,162,152,134,8
+    EDITTEXT        IDC_EDCMENUVARSTR,162,161,120,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "",IDC_BTCMSVARSHELP,"MButtonClass",WS_TABSTOP,282,161,14,12
+    LTEXT           "Toolbar buttons",IDC_STTOOLBAR,140,10,145,8
+    LTEXT           "Main menu item",IDC_STMMI,140,39,156,8
+    LTEXT           "Contact menu item",IDC_STCMI,140,107,156,8
+    LTEXT           "Other",IDC_STOTHER,140,204,156,8
+    LTEXT           "Tray menu item",IDC_STTMI,140,176,156,8
+    EDITTEXT        IDC_EDTMENUPN,220,194,76,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Enable",IDC_CHBTMENUITEM,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,150,186,65,8
+    RTEXT           "Root popup:",IDC_STTMIROOTPOPN,150,195,65,8
+    EDITTEXT        IDC_EDMMENUN,218,69,64,12,ES_AUTOHSCROLL | WS_GROUP
+    RTEXT           "Name through vars:",IDC_STMMIVARNAME,132,72,83,8
+    CONTROL         "",IDC_BTMMNVARSHELP,"MButtonClass",WS_TABSTOP,282,69,14,12
+    EDITTEXT        IDC_EDCMENUN,218,138,64,12,ES_AUTOHSCROLL | WS_GROUP
+    RTEXT           "Name through vars:",IDC_STCMIVARNAME,132,139,83,8
+    CONTROL         "",IDC_BTCMNVARSHELP,"MButtonClass",WS_TABSTOP,282,138,14,12
+    CONTROL         "TabButtonBar",IDC_CHBTABBB,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,228,19,68,8
+    CONTROL         "separated",IDC_CHBMMENUSEP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,218,46,77,10
+    CONTROL         "separated",IDC_CHBCMENUSEP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,218,115,77,10
+    CONTROL         "show only if variables return 1",IDC_CHBMMVARS,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_GROUP | WS_TABSTOP,162,83,134,8
+    EDITTEXT        IDC_EDMMENUVARSTR,162,92,120,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "",IDC_BTMMSVARSHELP,"MButtonClass",WS_TABSTOP,282,92,14,12
+END
+
+IDD_ELEMOPTS DIALOGEX 0, 0, 316, 182
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,205,161,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,259,161,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ACTION              ICON                    ".\\action.ico"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_OPTIONS, DIALOG
+    BEGIN
+        VERTGUIDE, 140
+        VERTGUIDE, 150
+        VERTGUIDE, 162
+        VERTGUIDE, 200
+        VERTGUIDE, 215
+        VERTGUIDE, 228
+        VERTGUIDE, 268
+        VERTGUIDE, 296
+        VERTGUIDE, 304
+        HORZGUIDE, 27
+    END
+
+    IDD_ELEMOPTS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 309
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 175
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,112 @@
+; Pluginname: XStatus Notify 
+; Version: 0.3.1.5 Build #217
+; Dateiname: XStatusNotify.dll (Ansi), XStatusNotifyW.dll (Unicode)
+; Autor: Deathdemon
+; Link: http://deathdemon.int.ru/projects.php
+; Übersetzung: 09.12.05 von Dober
+
+[changes XStatus ]
+ändert XStatus 
+[to ]
+zu 
+[ (was ]
+ (war 
+[message]
+Nachricht
+[) changed XStatus ]
+) ändert XStatus 
+[message (]
+Nachricht (
+[XStatus Notify: XStatus changed]
+XStatus-Benachrichtigung: XStatus geändert
+
+[Enable logging to message window]
+Im Nachrichtenfenster speichern aktivieren
+[Log previous status too]
+Vorherigen Status ebenfalls speichern
+[Log new status message]
+Neue Statusnachricht speichern
+[Log on opening message window]
+Beim Öffnen des Nachrichtenfensters speichern
+[Filter settings for message log]
+Filtereinstellungen für Nachrichtenverlauf
+[Use heuristic algorithms to filter out flood]
+Heuristischen Algorithmus zum Filtern benutzen
+[Log only when icon changes]
+Nur bei Iconänderung speichern
+[Don't filter notifications]
+Keine Benachrichtigungen filtern
+[Heuristic algorithm settings]
+Einstellung der Heuristik
+[Filtering threshold:]
+Filterempfindlichkeit:
+[Technical info (log of filtered notifications)]
+Technische Informationen (gefilterte Benachrichtigungen)
+[Very aggressive filtering level. You won't ever see \"Listening to\" popups (perhaps with very rare exceptions), but the plugin will also filter a lot of usual xstatus notifications.]
+Sehr aggressives Filterniveau. Es werden nur in sehr seltenen Fällen \"ListeningTo\"-Popups auftauchen, allerdings können auch viele erwünschte XStatus-Benachrichtigungen gefiltert werden.
+[Aggressive filtering level. Filters more, sacrificing some of the most suspicious usual notifications that may turn out to be not a flood.]
+Aggressives Filterniveau. Filtert mehr, darunter auch einige der üblichen Benachrichtigungen, die sich als harmlos herausstellen könnten.
+[Normal filtering level. It's the recommended setting. It tries to leave most of usual xstatus notifications and at the same time it offers reasonable level of flood filtering, leaving only first "Listening to" notification for a contact and filtering any subsequent ones.]
+Normales Filterniveau (empfohlene Einstellung). Es versucht, die meisten gewöhnlichen XStatus-Benachrichtigungen zu zeigen. Gleichzeitig bietet es ein gutes Maß an Massenfilterung, z.B. zeigt es nur die ersten "Hört gerade"-Benachrichtigungen an, filtert die folgenden.
+[Weak filtering level. Leaves more notifications, so it may accidentally skip some flood. Advantage of this setting is that the plugin will be more tolerant to cases when contact changes his xstatus message several times but leaves the same icon.]
+Schwaches Filterniveau. Belässt mehr Benachrichtigungen, filtert weniger unerwünschte. Der Vorteil ist, dass der Filter in Situationen, in denen ein Kontakt mehrfach seine XStatus-Nachricht ändert, aber dasselbe Icon behält, toleranter ist.
+[Very weak filtering level. Usually still sufficient to filter a lot of flooding notifications, but fails to filter them if their "flood" features are indistinct.]
+Sehr schwaches Filterniveau. Meist ausreichend, um einige unerwünschte Benachrichtigungen zu filtern, aber mehrdeutige Benachrichtigungen werden belassen.
+[You have to enable heuristic filtering for popups and/or for message log to see results here.]
+Hier werden die Ergebnisse der heuristischen Analysen angezeigt, falls Sie dies für Popups oder zum Speichern aktiviert haben.
+[This log shows results of heuristic analysis of recent xstatus change events. Notifications\r\nare filtered out if their Warning value is more than filtering threshold. Using this info, you\r\ncan tune filtering threshold to suit your preferences.]
+Dieser Log zeigt die Ergebnisse der letzten heuristischen Analysen der XStatus-Änderungen.\r\nBenachrichtigungen, deren Warnungswert über der Filterempfindlichkeit liegt, werden gefiltert.\r\nDurch diese Informationen können Sie die Filterempfindlichkeit entsprechend Ihren eigenen Bedürfnissen anpassen.
+[<no recent events>]
+<keine neuen Ereignisse>
+[Warning=]
+Warnung=
+
+[Enable popup notification]
+Popup-Benachrichtigung aktivieren
+[Show previous status too]
+Vorherigen Status ebenfalls anzeigen
+[Show new status message]
+Neue Statusnachricht anzeigen
+[Filter settings for popups]
+Filtereinstellungen für Popups
+[Don't notify for contacts with disabled online notification]
+Nicht für Kontakte mit deaktivierten Statusbenachrichtigungen 
+[Don't notify on connect]
+Nicht beim Verbinden benachrichtigen
+[Notify only when icon changes]
+Nur bei Iconänderung benachrichtigen
+[Don't take any special measures to filter notifications]
+Keine besonderen Maßnahmen zum Filtern verwenden
+[changed XStatus message]
+ändert XStatus-Nachricht
+[changed XStatus to %s]
+ändert die XStatus-Nachricht zu %s
+[changed XStatus to %s (was %s)]
+ändert die XStatus-Nachricht zu %s (war %s)
+[has XStatus %s]
+hat XStatus %s
+[removed XStatus (was %s)]
+entfernt den XStatus %s
+;[`[`!cdate()-!ctime()`]`  %extratext%\r\n\r\n]
+[`[`!cdate()-!ctime()`]`  ?cinfo(%subject%,display) (?cinfo(%subject%,id)) changed XStatus %extratext%\r\n\r\n]
+(`[`!cdate()-!ctime()`)`  ?cinfo(%subject%,display) (?cinfo(%subject%,id)) ändert XStatus %extratext%\r\n\r\n]
+[Disable &XStatus notification]
+&XStatus-Benachrichtigungen deaktivieren
+
+; Resources.rc:IDD_POPUPOPTDLG
+[Logging to message log]
+im Nachrichtenverlauf speichern
+[Logging to message window]
+Im Nachrichtenfenster speichern
+[Notification setup]
+Benachrichtigungseinstellungen
+[Use NSN per contact popup setting]
+Popup-Einstellungen von NSN nutzen
+[Log on opening message log window]
+Beim Öffnen des Nachr.fensters speichern
+[changed XStatus to:%b%d]
+ändert den XStatus zu: %b%d
+[changed XStatus @ %d]
+ändert den XStatus @ %d
+[has XStatus @ %d]
+hat den XStatus @ %d

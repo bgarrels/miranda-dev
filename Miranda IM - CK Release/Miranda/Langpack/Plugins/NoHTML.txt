@@ -1,0 +1,24 @@
+; Pluginname: NoHTML 
+; Version: 0.0.2.0
+; Dateiname: nohtml.dll
+; Autor: sje
+; Link: http://www.scottellis.com.au/miranda_plugins/ver_nohtml.html
+; Übersetzung: Sebijk
+; Besonderheiten: Entwicklung eingestellt!
+
+[Replace HTML with BBCodes]
+Ersetze HTML durch BBCodes
+[Incoming Messages]
+Eingehende Nachrichten
+[Replace BBCodes with HTML]
+Ersetze BBCodes durch HTML
+[Outgoing Messages]
+Ausgehende Nachrichten
+[Apply To]
+Übernehmen für
+[Encode HTML]
+HTML enkodieren
+[OTR encrypted sessions]
+OTR-verschlüsselte Sitzungen
+[Remove HTML]
+HTML entfernen

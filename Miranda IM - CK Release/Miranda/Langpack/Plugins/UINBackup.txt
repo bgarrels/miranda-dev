@@ -1,0 +1,66 @@
+; Pluginname: UINBackup
+; Version: 0.4.0.2
+; Dateiname: UINBackup.dll
+; Autor: a-v-n
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=197
+; ungeprüft aus Sprachdatei übernommen 2005/06/29 17:41 von flower 
+; Besonderheiten: Entwicklung eingestellt!
+
+[Export contacts]
+Kontakte exportieren
+[Import contacts]
+Kontakte importieren
+[Show the export menuitem (requires restart of Miranda)]
+Export-Menüpunkt anzeigen (Neustart erforderlich)
+[Show the import menuitem (requires restart of Miranda)]
+Import-Menüpunkt anzeigen (Neustart erforderlich)
+[Autoimport a clb file on startup]
+Auto-Import beim Start
+[Error writing to the file. Is the disk full?]
+Fehler beim Schreiben. Kein Platz mehr?
+[One contact had too long nickname or groupname.\nThe contact was not saved.]
+Ein Kontakt hat einen zu langen Alias oder Gruppennamen.\nDieser Kontakt wurde nicht gesichert.
+;[No contacts found]
+[%d contact saved\nThere are %d contacts in the database]
+%d von %d Kontakten aus der Profildatei wurde gesichert.
+[%d contacts saved\nThere are %d contacts in the database]
+%d von %d Kontakten aus der Profildatei wurden gesichert.
+[Backup done]
+Backup fertig
+[No contacts found]
+Keine Kontakte gefunden
+[%s on line %d]
+%s in Zeile %d
+[Too many errors, no more error messages will be shown.]
+Zu viele Fehler, es werden keine weiteren Fehlermeldungen angezeigt.
+[Insufficient memory available]
+Zu wenig Speicher verfügbar
+[A critical error occured.\nTry to do the operation one more time.]
+Ein kritischer Fehler ist aufgetreten.\nVersuche es erneut.
+[Critical error]
+Kritischer Fehler
+[Warning, strange sequence]
+Warnung, seltsame Folge
+[Syntax error, early line break]
+Syntaxfehler, zu früher Zeilenwechsel
+[Syntax error, too many \";\" characters]
+Syntaxfehler, zu viele \";\" Zeichen
+[Warning, strange character sequence]
+Warnung, seltsame Zeichenfolge
+[Error, too many characters]
+Fehler, zu viele Zeichen
+[Too long UIN]
+ICQ-Nummer zu lang
+[%d contact imported\nThere are %d contacts in the database]
+%d von %d Kontakten in der Profildatei wurde importiert.
+[%d contacts imported\nThere are %d contacts in the database]
+%d von %d Kontakten in der Profildatei wurden importiert.
+[Import successfull]
+Import erfolgreich
+[No contacts imported]
+Keine Kontakte importiert
+[Use ICQ style linebreaks (CRCRLF, default is CRLF)]
+ICQ-kompatible Zeichentrennung (CRCRLF statt CRLF)
+
+[Imports and exports the ICQ contacts in the database from/to a clb file.]
+Import und Export der ICQ Kontakte der Profildatei von/in eine clb-Datei.

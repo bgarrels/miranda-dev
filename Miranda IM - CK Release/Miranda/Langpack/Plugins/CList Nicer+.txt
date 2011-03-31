@@ -1,0 +1,38 @@
+; Pluginname: CList Nicer+ 
+; Version: 0.9.0.0
+; Dateiname: clist_mw.dll
+; Autor: bethoven
+; Unique ID: {2a417ab9-16f2-472d-9ae3-415103c78a64}
+; Link: Testing
+; Übersetzung 22.06.2010 von CHEF-KOCH
+
+[Backgrounds]
+Hintergründe
+[Frames TitleBar BackGround]
+Frame Titelleisten Hintergrund
+[StatusBar Background]
+Statusbar Hintergrund
+[Tile vertically according to Row Height]
+Titel vertikal nach Zeilenhöhe anpassen
+
+[!!! Note: all client icons are made by Angeli-ka, and I have her permission to use them in clist_mw plugin.]
+!!! Hinweis: Alle Client-Icons sind von Angeli-ka gemacht worden, und ich habe Ihre Erlaubnis, sie in das clist_mw Plugin zu verwenden.
+
+[MetaContacts supporting]
+Metakontaktunterstützung
+[List MetaContacts]
+MetaContacts Liste
+
+[Group Closed]
+Gruppe geschlossen
+[Status messages]
+Statusnachrichten
+[Hover Contacts]
+Schwebende Kontakte
+
+[Show size grip]
+Zeige fixierte Größe
+[Show bevel effect on panels]
+Zeige Abschrägungseffekt auf Tafeln
+[Use New Drawer for StatusBar]
+Benutze neue Zeichnung für die Statusbar

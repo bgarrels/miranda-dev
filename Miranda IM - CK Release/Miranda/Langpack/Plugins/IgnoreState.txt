@@ -1,0 +1,25 @@
+; Pluginname: IgnoreState 
+; Version: 0.0.3.0
+; Dateiname: IgnoreState.dll
+; Autor: Kildor
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4016
+; Übersetzung: kaye_styles am 23.04.09
+
+[Extraicons plugin is used, use Contact list > Extraicons for customize.]
+Die Einstellungen befinden sich unter 'Kontaktliste -> Extraicons'.
+[Filtered events:]
+Gefiltere Ereignisse:
+[Use Miranda ignore settings for All Contacts]
+Verwende die Miranda-Einstellungen für alle Kontakte
+[Warning: classic contact list plugin doesn`t have ability to use extraicons]
+Warnung: clist_classic unterstützt nicht die Verwendung von Extraicons
+
+[Full Ignore]
+Vollständiges Ignorieren
+[Message Ignore]
+Nachrichten ignorieren
+[Partial Ignore]
+Teilweises Ignorieren
+
+[Show ignore state of contact in contacts list.]
+Zeigt den aktuellen Status der Ignoriereinstellungen eines Kontaktes in der Kontaktliste an.

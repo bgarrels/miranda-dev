@@ -1,0 +1,95 @@
+; Pluginname: Off the Record [OTR] 
+; Version: 0.7.0.0
+; Dateiname: otr.dll
+; Autor: SJE
+; http://www.scottellis.com.au/miranda_plugins/ver_otr.html
+; Übersetzung: 13.05.06 von HyperCriSiS
+; Besonderheiten: Entwicklung eingestellt!
+
+[OTR]
+OTR (Off-the-Record)
+
+[OTR (Off-the-Record) plugin for Miranda IM]
+OTR-(Off-the-Record-)Plugin für Miranda IM
+[Would you like to generate a new private key for this protocol?]
+Möchten Sie einen neuen privaten Schlüssel für dieses Protokoll generieren?
+[Generating new private key.]
+Neuen privaten Schlüssel generieren.
+[Please wait.]
+Bitte warten.
+[OTR New Fingerprint]
+OTR - neuer Fingerprint
+[A new fingerprint has been recieved from '%s'\n\n%s\n\nDo you trust it?]
+Ein neuer Fingerprint wurde von '%s'\n\n%s\n\n empfangen. Vertrauen Sie ihm?
+[Would you like to save the current fingerprint list?]
+Möchten Sie die aktuelle Fingerprintliste speichern?
+[Beginning OTR encrypted session with '%s']
+OTR-verschlüsselte Sitzung mit '%s' gestartet
+[Beginning OTR encrypted session with '%s' (NOT VERIFIED)]
+OTR-verschlüsselte Sitzung mit '%s' (NICHT VERIFIZIERT) gestartet
+[OTR Information]
+OTR-Informationen
+[OTR encrypted session with '%s'.\n\nFingerprint is UNVERIFIED.\n\n%s\n\nVerify?]
+OTR-verschlüsselte Sitzung mit '%s'.\n\nFingerprint ist NICHT BESTÄTIGT.\n\n%s\n\nBestätigen und fortfahren?
+[OTR encrypted session with '%s' has ended]
+OTR-verschlüsselte Sitzung mit '%s' wurde beendet
+[OTR encrypted session with '%s' is being continued]
+OTR-verschlüsselte Sitzung mit '%s' wird fortgesetzt
+[OTR Log Message]
+OTR-Nachrichtenlog
+[User '%s' ended encrypted session]
+Benutzer '%s' beendete verschlüsselte Sitzung
+[The receiver has not yet accepted or rejected your fingerprint.\nSend the message unencrypted?]
+Der Empfänger hat den Fingerprint noch nicht akzeptiert/abgelehnt.\nNachricht unverschlüsselt senden?
+[The encrypted message received from '%s'  is unreadable, as you are not currently communicating privately.]
+Die verschlüsselte Nachricht von '%s' is nicht lesbar, da Sie gerade nicht privat kommunizieren.
+['%s' has terminated the OTR session]
+Benutzer '%s' beendete verschlüsselte Sitzung
+[OTR session terminated]
+OTR-Sitzung beendet
+[OTR Warning]
+OTR-Warnung
+[User ended encrypted session]
+Benutzer beendete verschlüsselte Sitzung
+[OTR Encryption Status]
+OTR-Verschlüsselungsstatus
+
+[Stop OTR]
+OTR deaktivieren
+[Start OTR]
+OTR aktivieren
+
+[Policy]
+Methode
+[Generating new key...please wait]
+Generiere neuen Schlüssel... bitte warten
+[Opportunistic]
+Opportunistisch
+
+[Default Policy]
+Standardmethode
+[New Private Key]
+Neuer privater Schlüssel
+[Prefix secure messages]
+Präfix für sichere Nachrichten
+[OTR Generating Private Key]
+OTR generiert privaten Schlüssel
+[Generating new private key - please wait.]
+Generiere neuen privaten Schlüssel - bitte warten.
+[End Sessions on window close]
+Sitzung beend., wenn Fenster geschlossen wird
+[End sessions when contacts go offline]
+Sitzung beend., wenn Kontakt offline
+[Show OTR messages inline]
+OTR-Meldungen als Nachricht
+[Timeout FINISHED sessions back to PLAINTEXT (TAKE CARE!)]
+Bei beendeten Sitzungen zu Klartext springen (VORSICHT!)
+[OTR Message]
+OTR-Nachricht
+
+[Popups Icon]
+Popup-Icon
+[Secure]
+Sicher
+[Insecure]
+Unsicher

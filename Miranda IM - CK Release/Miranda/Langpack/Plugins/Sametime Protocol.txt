@@ -1,0 +1,47 @@
+; Pluginname: Sametime Protocol
+; Version: 0.5.3.2
+; Dateiname: sametime.dll
+; Autor: sje
+; Link: http://www.scottellis.com.au/miranda_plugins/ver_sametime.html
+; Übersetzung: 06.04.05 von Foso
+
+[No server connection!]
+Keine Verbindung zum Server
+[Send Announcement]
+Ansage senden
+[Send Announcement...]
+Ansage senden...
+[Get contacts from server]
+Kontakte vom Server laden
+[Upload Contacts]
+Kontakte hochladen
+[Import from file...]
+Aus Datei importieren...
+[Auto-add new contacts]
+Neue Kontakte automatisch hinzufügen
+[Error Display]
+Fehlerbenachrichtígung
+[Use message boxes]
+Nachrichtenboxen nutzen
+[Use system tray baloons]
+Systemtray-Popups nutzen
+[Failed to upload contacts - Storage service unavailable.]
+Kontakte hochladen fehlgeschlagen - Speicherdienst nicht verfügbar.
+[Message Text:]
+Nachrichtentext:
+[Recipients]
+Empfänger
+;[Treat 'idle' as 'away']
+[Implementation of Instant Messaging for the Lotus Sametime protocol.]
+Implementation von Instant Messaging für das Lotus Sametime-Protokoll.
+[Sametime Protocol]
+Sametime-Protokoll
+[Server name:]
+Server-Name:
+[Encryption]
+Verschlüsselung
+[40 or 128 bit]
+40 oder 128-Bit
+[Id:]
+ID:
+ 

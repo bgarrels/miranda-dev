@@ -1,0 +1,168 @@
+; Pluginname: NetAccessNotify 
+; Version: 2.7.1.0
+; Dateiname: NetAccessNotify.dll
+; Autor: Domo
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1490
+; Übersetzung von Dober (03.04.06) & KcDaRookie (05.01.07)
+; Besonderheiten: Entwicklung eingestellt!
+
+[Shares]
+Freigaben
+[Network connections]
+Netzwerkverbindungen
+[Current network connections]
+Aktuelle Netzwerkverbindungen
+[Established network sessions]
+Errichtete Netzwerksitzungen
+[Connections]
+Verbindungen
+[Log network activity to file:]
+Netzwerkaktivität speichern in Datei:
+[Log when network connections are established]
+Protokollieren bei errichteter Verbindung
+[Log when shared files are accessed]
+Protokollieren bei Zugriff auf gemeinsame Dateien
+[Log when shared folders are accessed]
+Protokollieren bei Zugriff auf gemeinsame Ordner
+[Log file format]
+Protokollformat
+[Title format:]
+Titelformat:
+[Line format:]
+Zeilenformat:
+[Available variables]
+Verfügbare Variablen
+[Defaults for HTML format]
+Standard für HTML-Format
+[Defaults for CSV format]
+Standard für CSV-Format
+[Popup notifications]
+Popup-Benachrichtigung
+[Notify when network connections are established]
+Benachrichtigung, wenn Netzwerkverbindung hergestellt ist
+[Notify of shared file access]
+Benachrichtigung bei Zugriff auf gemeinsame Dateien
+[Notify of shared folder access]
+Benachrichtigung bei Zugriff auf gemeinsame Ordner
+[Use default popup colors]
+Standardfarben benutzen
+[Choose colors:]
+Farben wählen:
+[Popup display and click options]
+Popup-Anzeige- und Klickoptionen
+[Separate popups for all events]
+Eigenes Popup für jedes Ereignis
+[One permanent popup per connection]
+Ein dauerhaftes Popup pro Verbindung
+[One popup per connection on user activity]
+Ein Popup pro Verbindung bei Benutzeraktivität
+[Popups stay shown for:]
+Popup bleibt angezeigt für:
+[Left-click:]
+Linksklick:
+[Right-click:]
+Rechtsklick:
+[Break the connection]
+Verbindung beenden
+[Disable all popups]
+Alle Popups abschalten
+[No popups for this connection]
+Keine Popups für diese Verbindung
+[Network session info]
+Netzwerksitzungsinformationen
+[In popup titles:]
+Popup-Titel:
+[In popup contents:]
+Popup-Inhalt:
+[In network window:]
+Netzwerkfenster-Inhalt:
+[Popup preview]
+Popup-Vorschau
+[Show network activity icon in system tray]
+Netzwerkaktivitätsicon im Systemtray anzeigen
+[Active network connections]
+Aktive Netzwerkverbindungen
+[Add "Network connections" item to main menu]
+"Netzwerkverbindungen" im Hauptmenü anzeigen
+[Use hot key to bring up network connections:]
+Hotkey benutzen um Netzwerkverbindungen anzuzeigen:
+["Network connections" window is always on top]
+"Netzwerkverbindungen"-Fenster ist immer im Vordergrund
+[Show network connections]
+Netzwerkverbindungen anzeigen
+[Update frequency]
+Aktualisierungsrate
+[Query network state every]
+Netzwerkstatus abfragen alle
+[Boost query interval on active connections:]
+Abfrageabstand bei aktiver Verbindung erhöhen:
+[These values define the frequency of queries to the File Sharing service. The use of boost frequency is recommended. Otherwise, access to small files will not be detected.]
+Diese Werte definieren die Häufigkeit der Anfragen zum Dateitausch-Dienst. Die Erhöhung der Häufigkeit wird empfohlen. Der Zugriff auf kleine Dateien wird nicht erkannt.
+[Specifying small intervals (50 ms or less) can be CPU-intensive on slow computers.\nOn a typical system, default values will do fine (they are 300 ms and 10 ms for boost).]
+Kurze Intervalle (50 ms oder weniger) können langsame Computer auslasten. Bei den meisten Systemen sind die Standardwerte in Ordnung (300 ms und 10 ms bei Erhöhen).
+[Startup]
+Start
+[ms  (this allows the Popups plugin to initialize)]
+ms  (erlaubt dem Popup-Plugin gestartet zu werden)
+[Startup delay:]
+Startverzögerung:
+[The following defines the delay before displaying popups. Default is 1000 ms.]
+Die folgende Einstellung definiert die Verzögerung, bevor Popups angezeigt werden (1000 ms sind Standard).
+[Shared resources]
+Freigaben
+[Resource name]
+Freigabename
+[Local path]
+Lokaler Pfad
+[Uses]
+Benutzungen
+[Comment]
+Kommentar
+[Show administrative shares]
+Administrative Freigaben anzeigen
+[Popup notification filters]
+Popup-Benachrichtungsfilter
+[Shared resource]
+Freigabe
+[Add filter...]
+Filter hinzufügen...
+[Filter settings]
+Filtereinstellungen
+[Computer name:]
+Computername:
+[User name:]
+Benutzername:
+[Shared resource:]
+Freigabe:
+[If values match:]
+Bei gleichen Werten:
+[Always notify with popups]
+Immer mit Popup benachrichtigen
+[Disable popup notifications]
+Popup-Benachrichtigung abstellen
+[Note: Use * and ? wildcard characters to specify multiple values]
+Hinweis: Benutze Platzhalter (* und ?) um mehrere Werte zu bestimmen
+[All popups are now disabled.\nEnable popups in the Popups section of the main menu]
+Alle Popups sind nun abgestellt.\nAktiviere Popups im Hauptmenü unter Popups.
+[All popups are now disabled.\nEnable popups on the NetAccessNotify/Popups page]
+Alle Popups sind nun abgestellt.\nAktiviere Popups unter NetAccessNotify/Popups
+[Are you sure you wish to remove\nthe shared resource '%s'?]
+Sind sie sicher das sie die Freigabe\n'%s' entfernen wollen?
+[Disable network access notifications]
+Netzwerkzugriffsbenachrichtigung abstellen
+[Enable network access notifications]
+Netzwerkzugriffsbenachrichtigung aktivieren
+[Error creating/opening specified log file]
+Fehler beim Erstellen/Öffnen der Protokolldatei
+[Popup plugin not found.\nPlease install and enable this plugin]
+Popup-Plugin nicht gefunden.\nBitte installieren und aktivieren.
+[Select a folder for sharing]
+Freigabeordner auswählen
+[Shared resource '%s' could not be removed\nNetwork error code: %d]
+Freigabe '%s' konnte nicht entfernt werden\nNetzwerk-Fehlercode: %d
+[This file has already been closed]
+Die Datei wurde schon geschlossen
+[This session has already terminated]
+Die Sitzung wurde schon beendet
+[Sorry, not supported in this version]
+Nicht unterstützt in dieser Version

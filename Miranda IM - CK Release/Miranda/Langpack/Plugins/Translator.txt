@@ -1,0 +1,63 @@
+; Pluginname: Translator 
+; Version: 0.1.1.1
+; Dateiname: translator.dll
+; Autor: eblis
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3144
+; Übersetzung: 04.07.2006 von Dober
+
+[Translator options]
+Translator-Einstellungen
+[Flush on exit]
+Beim Beenden speichern
+[Flush to disk now]
+In Datei speichern
+[Custom code page]
+Eigene Codepage
+[Strings in memory: %d / %d]
+Strings im Speicher: %d / %d
+[Normal mode]
+Normaler Modus
+[Number of strings to keep in memory before writing to disk:]
+Anzahl der Strings im Speicher aufbewahren, bevor gespeichert wird.
+[This value is used as a minimum, the actual number might be bigger.\nWarning: setting a big number will increase memory requirements considerably.]
+Dieser Wert wird als Minimum verwendet, die tatsächliche Anzahl kann größer sein.\nWarnung: Eine hohe Anzahl erhöht den Speicherbedarf beträchtlich!
+[Log the following strings:]
+Folgende Strings aufzeichnen:
+[All strings]
+Alle Strings
+[Only untranslated strings]
+Nur nichtübersetzte Strings
+[Only translated strings]
+Nur übersetzte Strings
+[Translation mode]
+Übersetzungsmodus
+[Enable dynamic translation]
+Dynamische Übersetzungen aktivieren
+[Ignore double translations]
+Doppelte Übersetzungen ignorieren
+[Ignore untranslated strings when building language pack]
+Unübersetzte Strings ignorieren, wenn Sprachdatei erstellt wird
+[Warning: Translation mode will increase memory requirements further.\nYou should only enable this mode if you plan to write Miranda translations.\nYou need to restart Miranda for the setting to take effect.]
+Warnung: Der Übersetzungsmodus wird mehr Speicheranforderungen benötigen. Sie sollten den Modus nur aktivieren, wenn Sie Übersetzungen erstellen wollen. (Miranda-Neustart erforderlich)
+[Translations window]
+Übersetzungsfenster
+[Translations manager]
+Übersetzungsmanager
+[Starting to read language pack file and previous translations.]
+Beginne Sprachdatei und vorherige Übersetzungen auszulesen.
+[Finished reading language pack file and previous translations.]
+Sprachdatei und vorherige Übersetzungen wurden vollständig ausgelesen.
+[Manage translations]
+Übersetzungen verwalten
+[Translation]
+Übersetzung
+[English text:]
+Englischer Text:
+[Autosave translation]
+Automatisch Übersetzung speichern
+[Create language pack]
+Sprachdatei erstellen
+[Filter translations:]
+Übersetzungen filtern:
+[Filter entries automatically after]
+Einträge automatisch filtern nach

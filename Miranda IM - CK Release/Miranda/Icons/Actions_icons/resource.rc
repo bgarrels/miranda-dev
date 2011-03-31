@@ -1,0 +1,44 @@
+//Microsoft Developer Studio generated resource script.
+//
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+1                     ICON    DISCARDABLE     "res/Hide.ico"
+2                     ICON    DISCARDABLE     "res/Received Files.ico"
+3                     ICON    DISCARDABLE     "res/Ignore.ico"
+4                     ICON    DISCARDABLE     "res/ChangeKeyboardLayout.ico"
+5                     ICON    DISCARDABLE     "res/Color schemes.ico"
+6                     ICON    DISCARDABLE     "res/Default scheme.ico"
+7                     ICON    DISCARDABLE     "res/Wolk scheme.ico"
+8                     ICON    DISCARDABLE     "res/Precise scheme.ico"
+9                     ICON    DISCARDABLE     "res/VistaBlack scheme.ico"
+10                    ICON    DISCARDABLE     "res/Silver scheme.ico"
+11                    ICON    DISCARDABLE     "res/Notepad scheme.ico"
+12                    ICON    DISCARDABLE     "res/Pack.ico"
+13                    ICON    DISCARDABLE     "res/CopyID.ico"
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////

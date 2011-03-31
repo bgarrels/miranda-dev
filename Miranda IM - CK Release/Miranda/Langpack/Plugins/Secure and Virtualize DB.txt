@@ -1,0 +1,19 @@
+; Sluginname: Secure and Virtualize DB 
+; Version: 0.8.11
+; Dateiname: dbx_3xSV.dll
+; Autor: y_b
+; Link: http://saaplugin.no-ip.info/db3xV/dbx_3xSV.dll
+; Übersetzung: Sebijk
+
+[DB extras]
+Datenbank-Extras
+[Remove Password]
+Passwort entfernen
+[Realize]
+Realisieren
+[Virtualize]
+Virtualisieren
+[Save DB...]
+Datenbank speichern...
+[Miranda IM Profile Virtual Database]
+Miranda IM Virtuelle Profildatei

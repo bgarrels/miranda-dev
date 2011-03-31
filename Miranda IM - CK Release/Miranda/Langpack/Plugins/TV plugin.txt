@@ -1,0 +1,147 @@
+; Pluginname: TV plugin 
+; Version: 0.1.0.2
+; Dateiname: tvplugin.dll
+; Autor: yaho
+; Link: http://miranda-easy.net
+; Übersetzung: 20.07.08 von Baschti
+; Überarbeitung: 11.08.09 von Baschti
+
+[TV plugin]
+TV-Plugin
+[Program ID]
+Sendernummer
+[Redownload TV guide]
+TV-Programm erneut laden
+[Re-download TV guide]
+TV-Programm erneut laden
+[Show TV overview]
+TV-Übersicht anzeigen
+[TV overview]
+TV-Übersicht
+[Show TV schedule]
+Vorgemerkte Sendungen anzeigen
+[TV schedule]
+Vorgemerkte Sendungen
+[Tv program for %s]
+TV-Programm für %s
+[No info available...]
+Keine Informationen verfügbar...
+[No program is available!]
+Kein Fernsehprogramm verfügbar!
+[Scheduled]
+Vorgemerkt
+[No scheduled programs today...]
+Keine vorgemerkten Sendungen für heute...
+[will start in %d minutes...]
+beginnt in %d Minuten...
+[TV plugin HTTP connections]
+HTTP-Verbindungen vom TV-Plugin
+[Failed to connect to \"%s\" - Invalid response, code %d]
+Verbindung zu \"%s\" nicht möglich - Ungültige Antwort, Code %d
+[Failed to connect to \"%s\" - Error code %d]
+Verbindung zu \"%s\" nicht möglich - Fehlercode %d
+
+[Window options]
+Fenstereinstellungen
+;[Use single window mode (one window for all channels)]
+;Einzelfenster benutzen (ein Fenster für alle Sender)
+;[Use multi window mode (separate window for each channel)]
+;Multifenster benutzen (ein Fenster für jeden Sender)
+[Save window size and position]
+Fenstergröße und -position speichern
+[Hide scrollbar]
+Bildlaufleiste ausblenden
+[Auto scroll to current program]
+Automatisch das momentane Programm zeigen
+
+[TV guide options]
+Einstellungen zur TV-Übersicht
+[Show original title]
+Originaltitel anzeigen
+[Show program info]
+Programminformationen anzeigen
+[Sort channels in alphabetical order (TV overview)]
+TV-Programme alphabetisch sortieren (TV-Übersicht)
+
+[Scheduled programs]
+Vorgemerkte Sendungen
+[Auto schedule programs by mean of keywords]
+Automatisch Sendungen anhand der Schlüsselwörter vormerken
+[Keywords]
+Schlüsselwörter
+[Add keyword]
+Schlüsselwort hinzufügen
+[Delete keyword]
+Schlüsselwort entfernen
+[Search in title]
+Im Titel suchen
+[Search in info]
+In Beschreibung suchen
+
+[Notify all programs by popups]
+An alle Sendungen mit Popup erinnern
+[Notify scheduled programs by:]
+An vorgemerkte Sendungen erinnern mit:
+[Dialog window]
+Benachrichtigungsfenster
+[Show notification]
+Erinnerung
+[min. before program start]
+Min. vor dem Start anzeigen
+
+[Dialog options]
+Einstellungen für Benachrichtigungsfenster
+[Drop shadow effect]
+Schatten anzeigen
+
+[TV tuner application]
+Anwendung zur Fernsehwiedergabe
+[Path to executable:]
+Pfad zur Programmdatei:
+[Select TV tuner application]
+Anwendung zur Fernsehwiedergabe auswählen
+
+[About plugin]
+Über TV-Plugin
+[Data for TV plugin are provided by]
+Programmdaten bereitgestellt von
+[Licence]
+Lizenz
+[TV plugin - Software licence]
+TV-Pugin - Lizenzbedingungen
+
+[Even items background]
+Hintergrund normaler Sendungen
+[Current program background]
+Hintergrund momentaner Sendungen
+[Scheduled program background]
+Hintergrund vorgemerkter Sendungen
+[Time label]
+Uhrzeit
+[Channel name]
+Sender
+[Original title]
+Original Titel
+[Subtitle]
+Untertitel
+[Program info]
+Programminformation
+
+[Shift time backward]
+Früher
+[Shift time forward]
+Später
+[Run TV application]
+TV-Anwendung starten
+[Quick guide]
+Schnellübersicht
+
+[Scheduled program (popup)]
+Vorgemerkte Sendungen (Popup)
+[Scheduled program (dialog)]
+Vorgemerkte Sendungen (Benachrichtigungsfenster)
+
+[TV guide data]
+Daten für TV-Guide
+[TV program images]
+Standbilder

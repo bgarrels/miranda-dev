@@ -1,0 +1,2090 @@
+; Pluginname: TabSRMM 
+; Version(en): 3.1.99.6
+; Dateiname: tabsrmm.dll
+; Unique ID: {6ca5f042-7a7f-47cc-a715-fc8c46fbf434}
+; Autor: Nightwish
+; Link: http://miranda.or.at oder Testing
+
+; Pluginname: tabSRMM eternity Mod 
+; Version: 2.2.1.15
+; Dateiname: tabsrmm.dll
+; Unique ID: {a4f2d0d4-2c38-439a-bdfb-0b3ef1062d7d}
+; Autor: jarvis
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3483
+
+; '''Warnung! + Hinweis!  Bitte vor dem editieren lesen!!!!''' 
+
+; 1) Die [http://msdn.microsoft.com/de-de/library/ms997646.aspx visuellen Stile] dienen dazu, das Übersetzer leichter den Einsprung in den zu übersetzenden Strings/Abschnitte bekommen, diese werden nicht übersetzt! Bitte stehen lassen! 
+; 2) Einige kritische Warnungen lassen sich NICHT übersetzten, das ist kein Bug --> siehe hier http://blog.miranda.or.at/tabsrmm/custom-warning-dialogs-in-tabsrmm-3
+; 3) Einige Texte der Boxen sind zu groß, dies ist halt nunmal so. Dazu müsste der Autor die Boxen größer machen.
+; Bitte nach Möglichkeit solange den Text entsprechend "passend machen", welche sind es denn nun genau? -Freak
+
+; resource.rc:IDD_TABCONFIG
+[IM and group chat module for Miranda IM.]
+Instant-Messaging- und Gruppenchat-Modul für Miranda IM.
+
+
+[Message window skin]
+Nachrichtenfensterskin
+[Skin root folder]
+Skinverzeichnis
+[Load and apply]
+Skin laden
+[Selected skin]
+Ausgewählter Skin
+[<no skin>]
+Kein Skin
+[Rescan]
+Erneut scannen
+[Reload active skin]
+Aktiven Skin nachladen
+[Load this skin on startup]
+Diesen Skin beim Start laden
+
+[Skin options]
+Skin-Einstellungen
+[Load fonts and colors provided by skin]
+Farben und Schriften des Skins übernehmen
+[Load templates provided by skin (use with care, will overwrite your templates)]
+Textformatierungen des Skins übernehmen (überschreibt eigene Formatierungen)
+
+[Theme support]
+Theme-Unterstützung
+[You can export and import all your color and font settings here. This allows you to create a Theme file which can be shared between different profiles or with your buddies.]
+Sie können alle Ihre Farben sowie die Schriftart-Einstellungen exportieren und importieren. Damit können Sie eine Theme-Datei erstellen, die mit mehreren Profilen oder mit Ihren Freunden geteilt werden kann.
+[Export to a file...]
+Exportiere in eine Datei ...
+[Import from a file...]
+Importiere aus einer Datei ...
+
+[Before you can load or unload a skin, you must close all message windows.]
+Bevor Sie Skins laden oder entladen können, MÜSSEN Sie alle Nachrichtenfenster schließen.
+[Close open message windows now]
+Schließe alle offenen Nachrichtenfenster
+
+[Window layout tweaks]
+Fenster-Anordnung
+[NOTE: some settings will not affect open containers.]
+HINWEIS: Einige Einstellungen haben keine Wirkung auf bereits offene Fenster.
+[Tab layout tweaks]
+Tab-Anordnung
+[Default width for fixed (single row) tabs]
+Standardgröße für fixierte (einzeilige) Tabs:
+[Tab text label padding vertical]
+Vertikaler Abstand zum Text:
+[horizontal]
+Horizontal
+[Tab page padding:]
+Abstand der Seite:
+[inner]
+innen
+[outer]
+außen
+[Bottom tabs vertical adjustment:]
+Vertikale Ausrichtung unterer Tabs:
+
+[* Message Input Area]
+* Nachrichteneingabefeld
+[Window caption (skinned mode)]
+Fenstertitel (wenn Skin verwendet)
+[Log background]
+Verlaufshintergrund
+[>> Outgoing messages]
+>> Ausgehende Nachrichten
+[>> Outgoing misc events]
+>> Ausgehende sonstige Ereignisse
+[<< Incoming messages]
+<< Eingehende Nachrichten
+[<< Incoming misc events]
+<< Eingehende sonstige Ereignisse
+[>> Outgoing name]
+>> Ausgehender Name
+[>> Outgoing timestamp]
+>> Ausgehende Zeit
+[<< Incoming name]
+<< Eingehender Name
+[<< Incoming timestamp]
+<< Eingehende Zeit
+[>> Outgoing messages (old)]
+>> Ausgehende Nachrichten (alt)
+[>> Outgoing misc events (old)]
+>> Ausgehende sonstige Ereignisse (alt)
+[<< Incoming messages (old)]
+<< Eingehende Nachrichten (alt)
+[<< Incoming misc events (old)]
+<< Eingehende sonstige Ereignisse (alt)
+[>> Outgoing name (old)]
+>> Ausgehender Name (alt)
+[>> Outgoing time (old)]
+>> Ausgehende Zeit (alt)
+[<< Incoming name (old)]
+<< Eingehender Name (alt)
+[<< Incoming time (old)]
+<< Eingehende Zeit (alt)
+[* Status changes]
+* Statusänderungen
+[* Dividers]
+* Trennlinien
+[* Error and warning Messages]
+* Fehler und Warnungen
+[* Symbols (incoming)]
+* Symbole (eingehend)
+[* Symbols (outgoing)]
+* Symbole (ausgehend)
+[Horizontal Grid Lines]
+Horizontale Gitterlinien
+[Info Panel]
+Infobereich
+[Contacts local time]
+Lokale Kontaktzeit
+[Chat log symbols (Webdings)]
+Chatverlaufssymbole (Webdings)
+[Channel operators]
+Channeloperatoren
+[Extended mode 1]
+Erweiterter Modus #1
+[Extended mode 2]
+Erweiterter Modus #2
+[Selection background]
+Markierter Hintergrund
+[Incremental search highlight]
+Inkrementelle Suche
+[Userlist background]
+Hintergrund Benutzerliste
+
+[Normal text]
+Normaler Text
+
+;Groupbox: Einstellungen für das Nachrichtenfenster
+[Message window options]
+Einstellungen für das Nachrichtenfenster
+[Message window behaviour]
+Verhalten des Nachrichtenfensters
+[Always flash contact list and tray icon for new messages]
+Neue Nachrichten immer auf der Kontaktliste und im Tray blinken lassen
+[Delete temporary contacts on close]
+Temporäre Kontakte beim Schließen löschen
+[Enable \"Paste and send\" feature]
+Aktiviere \"Einfügen und Senden\"-Funktion
+[Sending messages]
+Nachrichten senden
+[Send on SHIFT - Enter]
+'Shift+Enter' sendet Nachricht
+[Always keep the button bar at full width]
+Toolbar immer auf voller Breite halten
+[Enable "Paste and send" feature]
+'Einfügen und sofort senden'-Funktion aktivieren
+[Automatically split long messages (experimental, use with care)]
+Lange Nachrichten automatisch trennen (experimentell, Vorsicht)
+[Reset all hidden warnings]
+'Warnung nicht wieder zeigen' zurücksetzen
+
+;Groupbox: Avatareinstellungen
+[Avatar options (size and scaling only for bottom avatar display)]
+Avatareinstellungen (Größe und Skalierung nur, wenn Avatar unten)
+[Maximum display height (pixels)]
+Maximale Anzeigehöhe (Pixel)
+[(0 = no limit)]
+(0 = unbegrenzt)
+[Try to keep original size]
+Versuche Originalgröße beizubehalten
+[Border type]
+Randart
+[Automatic]
+Automatisch
+[1 pixel solid]
+1 Pixel stark
+
+;Groupbox: Tabs und Fenster automatisch schließen
+[Automatically close tabs and windows]
+Tabs und Fenster automatisch schließen
+[Automatically close tabs after]
+Schließe Tabs automatisch nach
+[minutes of inactivity (0 = disable)]
+Minuten Inaktivität (0 = niemals)
+[Also auto-close the last tab and its container]
+Auch den letzten Tab und damit das Fenster schließen
+
+;Groupbox: Diverse Einstellungen
+[Send text formatting:]
+Textformatierung senden:
+[Help on this]
+Hilfe hierzu
+
+;Muc
+[%s%s says:%s %s]
+%s%s sagt:%s %s
+[(set by %s on %s)]
+(gesetzt von %s am %s)
+[, %d %s, %d %s idle]
+, %d %s, %d %s untätig
+[, %d %s idle]
+, %d %s untätig
+[Topic is: %s]
+Thema ist: %s
+[no topic set.]
+Kein Thema gesetzt.
+[Information in %s]
+Informationen in %s
+
+;Groupbox: Tabeinstellungen
+[Tabs and layout]
+Tabs und Layout
+[Tab options]
+Tabeinstellungen
+[Show status text on tabs]
+Statustext auf den Tabs
+[Prefer xStatus icons when available]
+XStatus-Icon bevorzugen, wenn vorhanden
+[Warn when closing a tab or window]
+Vor dem Schließen eines Tabs oder Fensters warnen
+[Detailed tooltip on tabs (requires mToolTip or Tipper plugin)]
+Detaillierte Tooltips auf Tabs (erfordert mTooltip- oder Tipper-Plugin)
+[How to create tabs and windows for incoming messages]
+Erzeugen von Tabs und Fenstern für eintreffende Nachrichten
+[ALWAYS activate new message sessions (has PRIORITY over the options below)]
+Fenster IMMER automatisch öffnen und auf den Desktop bringen (hat HÖCHSTE Priorität!)
+[Automatically create new message sessions without activating them]
+Aktiviere automatisch neue Nachrichtensitzungen ohne vorherige Aktivierung
+[New windows are minimized (the option above MUST be active)]
+Neue Fenster minimiert erzeugen (die Option darüber MUSS aktiviert sein!)
+[Activate a minimized window when a new tab is created inside it]
+Minimierte Fenster in Vordergrund bringen, wenn ein neuer Tab erzeugt wird
+[Automatically activate existing tabs in minimized windows]
+Neue Tabs in minimierten Fenstern automatisch in den Vordergrund bringen
+[Automatically switch existing tabs in minimized windows on incoming messages (ignored when using Aero Peek task bar features)]
+Tabs in minimierten Fenstern bei eingehenden Nachrichten automatisch umschalten (ignoriert, wenn Aero Peek benutzt wird)
+[Miscellaneous options]
+Diverse Einstellungen
+[Remember and set keyboard layout per contact]
+Tastaturschema für jeden Kontakt speichern und wiederherstellen
+[Close button only hides message windows]
+"Schließen"-Schaltfläche versteckt nur das Nachrichtenfenster
+[Allow TAB key in typing area (this will disable focus selection by TAB key)]
+Erlaube die Tab-Taste im Eingabefeld (dies deakiviert Fokus-Auswahl durch Tab-Taste)
+[Add offline contacts to multisend list]
+Füge Offline-Kontakte zur Mehrfach-Senden-Liste hinzu
+
+;Groupbox: Diverse Einstellungen
+[ESC key behavior]
+Verhalten der ESC-Taste
+[Normal - close tab, if last tab is closed also close the window]
+Normal - Schließt Tabs; schließt das Fenster, wenn der letzte Tab geschlossen wird
+[Minimize the window to the task bar]
+Minimiert das Fenster in die Taskleiste
+[Close or hide window, depends on the close button setting above]
+Schließe oder verstecke Fenster, abhängig vom obigen Schließverhalten
+[Setup status modes for automatic tab creation...]
+Statusmodus für automatische Tab-/Fenstererzeugung
+[Limit nicknames on tabs to]
+Begrenze Nicks im Tab auf
+[All modes]
+Alle Modi
+[Choose status modes]
+Wähle Statusmodi
+
+[Chat room %s]
+Chatraum %s
+[Containers]
+Container
+[To set container options, please use the container settings dialog. It is available by:\n1. choosing "container settings" from the system menu of a container.\n2. right clicking the tab or the button bar in any message window.]
+Um Containereinstellungen festzulegen, bitte den entsprechenden Dialog benutzen. (Rechtsklick auf die Iconleiste eines Nachrichtenfensters oder über die Containereinstellungen in der Menüleiste.)
+[Windows Aero settings]
+Windows Aero Einstellungen
+[Use Aero UI elements(only when not using a custom skin)]
+Benutze Aero-Effekte (nur wenn kein benutzerdefinierter Skin benutzt wird)
+[Use Windows 7 task bar enhancements (restart required)]
+Benutze Windows 7 Taskleistenfunktion (benötigt Neustart)
+
+;Groupbox: Tabs sollten wie folgt genutzt werden
+[Tabs should be used in the following way]
+Tabs sollten wie folgt genutzt werden:
+[Use contact list groups for organizing tabs (one window per group)]
+Kontaktlistengruppen verwenden (ein Container pro Gruppe)
+[Tabbed interface, limit the maximum number of tabs per window to:]
+Getabbtes Fenster, begrenze die maximale Anzahl an Tabs pro Fenster auf:
+[No tabs at all, each session has its own top level window]
+Keine Tabs, jede Sitzung hat ihr eigenes (Top-Level-)Fenster
+[Default mode (tabbed interface, manual assignments)]
+Standardmodus (getabbtes Fenster, manuelle Tab-Zuweisung)
+
+;Groupbox: Blinken
+[Container flashing]
+Blinken
+[Flash containers]
+Blinken des Containers
+[times]
+mal
+[Flash interval]
+Blinkintervall
+
+;Groupbox: Aero-Effekt
+[Aero effect]
+Aero-Effekt
+[Semi transparent, custom colors]
+Halbtransparent, benutzerdefinierte Farben
+[Milky Glass]
+Milchglas
+[Silver shadow]
+Silberner Schatten
+[Custom (use own gradient colors)]
+Benutzerdefiniert (benutze eigenen Farbverl.)
+[Expand or collapse the side bar]
+Erweitern oder Reduzieren der Sidebar
+[Help on containers]
+Hilfe zu Containern
+
+;Groupbox: Einstellungen
+[Support BBCODE]
+Unterstütze BBCode
+[Message log appearance]
+Verlaufseinstellungen
+[Draw grid lines]
+Gitterlinien zeigen
+[Use Message Grouping]
+Nachrichten gruppieren
+[Indent message body]
+Nachricht einrücken
+[Simple text formatting (*bold* etc.)]
+Einfache Textformatierung (*fett* etc.)
+[Support BBCode formatting]
+BBCode-Formatierung verwenden
+[Place a separator in the log after a window lost its foreground status]
+Platziere einen Abstandshalter im Verlauf, wenn ein Fenster den Fokus verliert
+[RTL is default text direction]
+RTL ist Standardtextrichtung
+[Use normal templates (uncheck to use simple templates if your template set supports them)]
+Verwende normale Vorlagen (deaktivieren für einfache Vorlagen, falls unterstützt)
+[Support for external plugins]
+Unterstützung für externe Plugins
+[Show events at the new line (IEView Compatibility Mode)]
+Ereignisse in einer neuen Zeile anzeigen (IEView-Kompatibilitätsmodus)
+[Underline timestamp/nickname (IEView Compatibility Mode)]
+Zeitstempel/Nicknamen unterstreichen (IEView-Kompatibilitätsmodus)
+[Show timestamp after nickname (IEView Compatibility Mode)]
+Zeitstempel nach Nicknamen anzeigen (IEView-Kompatibilitätsmodus)
+[Log status changes]
+Statuswechsel aufzeichnen
+[Automatically copy selected text]
+Markierten Text automatisch kopieren
+[Additional events to show]
+Zusätzliche Ereignisse anzeigen
+[Show file events]
+Datei-Ereignisse anzeigen
+[Appearance and functionality of chat room windows]
+Aussehen und Funktionalität des Chat-Raum-Fenster
+[Timestamp settings (note: timstamps also depend on your templates)]
+Zeitstempel-Einstellungen (Hinweis: ist auch von der verwendeten Vorlage abhängig)
+[Show timestamps]
+Zeitstempel anzeigen
+[Show dates in timestamps]
+Datum  im Zeitstempel anzeigen
+[Show seconds in timestamps]
+Sekunden im Zeitstempel anzeigen
+[Use contacts local time (if timezone info available)]
+Lokale Kontaktzeit verwenden (falls Zeitzone bekannt)
+[Message log icons]
+Icons im Nachrichtenverlauf
+[Event type icons in the message log]
+Ereignistypicons im Nachrichtenverlauf
+[Text symbols as event markers]
+Textsymbole als 'Ereignis-Marker'
+[Use Incoming/Outgoing Icons]
+Verschiedene Icons für ein- und ausgehende Nachrichten
+[You have chosen to use an external plugin for displaying the message history in the chat window. Most of the settings on this page are for the standard message log viewer only and will have no effect. To change the appearance of the message log, you must configure either IEView or History++.]
+Sie haben sich entschieden, ein externes Plugin für die Darstellung des Nachrichtenverlaufs im Chatfenster zu nutzen. Die meisten Einstellungen auf dieser Seite sind für das interne Standardbenachrichtigungssystem gedacht und haben daher keine Auswirkungen. Um das Erscheinungsbild zu verändern, müssen Sie IEView oder History++ konfigurieren. 
+
+;Groupbox: Texteinrückung
+[Indent values]
+Texteinrückung
+[Left/Right]
+Links/Rechts
+[px]
+Px
+
+;Globale Nachrichtenverlauf-Darstellung
+[Global message log display]
+Globale Nachrichtenverlauf-Darstellung
+[IEView plugin]
+IEView-Plugin
+[History++ plugin]
+History++-Plugin
+
+;Groupbox: Formatvorlagen für Nachrichten
+[Template sets]
+Formatvorlagen für Nachrichten
+[Standard templates...]
+Normale Vorlagen
+[RTL templates...]
+RTL-Vorlagen
+
+;Groupbox: Vergangene Ereignisse laden
+[Always trim message log to]
+Neue Nachrichten begrenzen auf
+
+; templates.c  &  resource.rc:IDD_TEMPLATEEDIT
+[Template Set Editor]
+Bearbeiten des Nachrichtenverlaufs
+[Templates]
+Vorlagen
+[Edit template]
+Vorlage bearbeiten
+[Get more help on variables]
+Mehr Hilfe zu Variablen
+[Double click a template to edit it. Select a template from the list box and click "Update Preview" to show a preview message.]
+Doppelklick auf eine Vorlage, um sie zu bearbeiten. Auf "Vorschau aktualisieren" klicken, um eine Vorschau zu zeigen.
+[Define up to 5 colors which you can use with some variables]
+5 frei definierbare Farben, die mit manchen Variablen verwendet werden können
+[Update Preview]
+Vorschau aktualisieren
+[Save Template]
+Vorlage speichern
+[Forget]
+Verwerfen
+[Revert to Default]
+Zurücksetzen
+[Reset all templates...]
+Alle Vorlagen zurücksetzen
+[This will reset the template set to the default built-in templates. Are you sure you want to do this?]
+Dies wird alle Vorlagen auf die standardmäßig enthaltenen Vorlagen zurücksetzen, sind Sie sich sicher, dass Sie das tun wollen?
+[Template set was successfully reset, please close and reopen all message windows. This template editor window will now close.]
+Alle Vorlagen wurden erfolgreich zurückgesetzt, bitte schließen Sie alle offenen Nachrichtenfenster und öffnen Sie sie erneut. Dieser Dialog wird nun geschlossen.
+
+[Show in IM chats]
+Zeige Schaltfläche in Einzelchats
+[Show in chat rooms]
+Zeige Schaltfläche in Gruppenchats
+[Gap between buttons:]
+Schaltflächenabstand:
+[Insert Separator]
+Trennlinie einfügen
+[<Separator>]
+<Trennlinie>
+[Protocol Button]
+Protokoll-Schaltfläche
+[Info button]
+Info-Schaltfläche
+[Bold text]
+Fetter Text
+[Italic text]
+Kursiver Text
+[Underlined text]
+Unterstrichener Text
+[Strike-through text]
+Durchgestrichener Text
+[Select font color]
+Schriftfarbe auswählen
+[Change background color]
+Hintergrundfarbe ändern
+[Toggle nick list]
+Nickliste ein-/ausblenden
+
+[Advanced tweaks]
+Erw. Einstellungen
+[Message window tweaks]
+Nachrichtenfenster-Tweaks 
+[Show client icon in status bar (fingerprint plugin required)]
+Client-Icon in Statusleiste anzeigen (benötigt Fingerprint-Plugin)
+[Enable typing sounds]
+Tipp-Klänge aktivieren
+[Disable animated GIF avatars (will not affect already open message windows)]
+Animierte GIF-Avatare deaktivieren (hat keinen Effekt auf bereits geöffnete Fenster)
+[Close current tab on send]
+Aktuellen Tab nach dem Senden schließen
+[Use Aero Glass for the message window (Vista+)]
+Aero Glass für das Nachrichtenfenster nutzen (Vista+)
+[Use Windows 7 task bar features for tabbed windows (*)]
+Windows-7-Taskleistenfunktionen für Tab-Fenster nutzen (*)
+[Automatic keyboard layout: Do not load the system default for new contacts]
+Automatisches Tastaturlayout: Lade nicht das Systemstandard-Layout für neue Kontakte
+[Enable unattended send (experimental feature, required for multisend and send later) (*)]
+Unbeaufsichtigtes Senden aktivieren (experimentell, benötigt für multisend und 'später senden' (*)
+[Error feedback]
+Fehlermeldung
+[Disable error popups on sending failures]
+Deaktiviere Fehler-Popups bei Sendefehlern
+[Message send timeout]
+Zeitlimit für Versand
+[Input history size]
+letzte Nachrichten Eingabefeld
+[entries]
+Einträge
+[Options marked with an asterisk (*) will only take effect after Miranda has been restarted.]
+(*) Diese Einstellungen werden erst nach einem Neustart von Miranda IM aktiviert.
+[More about advanced tweaks]
+Hilfe zu den erweiterten Einstellungen
+[Revert to (safe) defaults]
+Zurücksetzen auf sichere Werte
+
+;Groupbox: Einstellungen für Ereignisbenachrichtigungen
+[Event notify options]
+Einstellungen für Ereignisbenachrichtigungen
+[Disable notifications]
+Deaktiviere Benachrichtigungen
+[Disable event notifications for instant messages]
+Deaktiviere Benachrichtigungen für Sofortnachrichten
+[Disable event notifications for group chats]
+Deaktiviere Benachrichtigungen für Gruppenchats
+[Disable notifications for non-message events]
+Deaktiviere Benachrichtigungen für 'Nicht-Nachrichten'-Ereignisse
+[Event notifications]
+Ereignisbenachrichtigungen
+[Show a preview of the event]
+Vorschau des Ereignisses zeigen
+[Don't announce event when message dialog is open]
+Keine Benachrichtigung, wenn bereits ein Nachrichtenfenster geöffnet ist
+[Don't announce events from RSS protocols]
+Keine Benachrichtigung für Ereignisse von RSS-Protokollen
+
+[System tray icon]
+Systemtray-Icon (unten, neben der Uhr)
+[Enable the system tray icon]
+Systemtray-Icon aktivieren
+
+[Left click actions (popups only)]
+Linksklick-Aktionen (nur für Popups)
+[Right click actions (popups only)]
+Rechtsklick-Aktionen (nur für Popups)
+[Timeout actions (popups only)]
+Zeitlimit-Aktionen (nur für Popups)
+[Open event]
+Ereignis öffnen
+[Dismiss event]
+Ereignis löschen
+[Combine notifications for the same contact]
+Kombiniere Benachrichtigungen für die gleichen Kontakte
+[Merge new events for the same contact into existing popup]
+Behandle neue Benachrichtigungen für den gleichen Kontakt in einem existierenden Popup
+
+[Remove popups under following conditions]
+Entferne Popups unter den folgenden Bedingungen
+[Remove popups for a contact when the message window is focused]
+Entferne Popups für einen Kontakt, wenn das Fenster fokusiert ist
+[Remove popups for a contact when I start typing a reply]
+Entferne Popups für einen Kontakt, wenn ich anfange, eine Nachricht zu tippen
+[Remove popups for a contact when I send a reply]
+Entferne Popups für einen Kontakt, wenn ich eine Antwort sende
+
+[Only show event notifications when my status is...]
+Zeige Ereignisbenachrichtigungen nur, wenn mein Status wie folgt ist ...
+
+;Groupbox: Einstellungen für Popups
+[Timeout (seconds, 0 = default, -1 = no timeout)]
+Zeitlimit (Sekunden, 0 = Standard, -1 = Kein Limit)
+[Use the message log color theme for group chat popups]
+Benutze das Farbschema des Nachrichtenverlaufs für Gruppenchat-Popups
+[Limit message preview to]
+Begrenze Nachrichtenvorschau auf
+[characters]
+Zeichen
+
+
+[tabSRMM Message]
+TabSRMM-Nachricht
+[You should now immediatly restart Miranda to make this change take effect.]
+Sie sollten Miranda IM jetzt sofort neu starten, damit die Änderung wirksam werden.
+[No compatible popup plugin was found. The event notification\nsystem is not available.]
+Kein kompatibles Popup-Plugin wurde gefunden. Das Ereignis-Benachrichtigungssystem ist dadurch nicht verfügbar.
+
+
+[Enable chat integration (changing this needs restart)]
+Gruppenchat-Unterstützung aktivieren (erfordert Neustart)
+[Chat integration is disabled. You can enable it here, and then you to NEED RESTART Miranda after making this change.\n\nYou MUST disable the standard chat plugin when you enable the group chat support here. Otherwise no group chat at all may work.]
+Unterstützung für Gruppenchats ist deaktiviert. Nachdem es aktiviert wurde, muss Miranda neu gestartet werden!\n\nDas Standard-Chat-Plugin (chat.dll) muss deaktiviert werden, anderenfalls funktioniert keinerlei Gruppenchat!
+
+[Open new chat rooms in the default container]
+Neue Chaträume im Standardcontainer öffnen
+[Create tabs or windows for highlight events]
+Erstelle Tabs oder Fenster bei "Highlight"-Hervorhebung
+[Activate chat window on highlight]
+Aktiviere Chatfenster bei "Highlight"
+[Colorize user names in member list]
+Färbe Nutzername in der Nickliste
+[Colorize user names in message log]
+Färbe Nutzername im Nachrichtenverlauf
+[Colorize nicknames in message log]
+Färbe Nicknamen im Nachrichtenverlauf
+[Colorize nicknames in member list]
+Färbe Nicknamen in der Nickliste
+[Show topic as status message on the contact list]
+Zeige 'Thema des Raumes' als Statusnachricht in der Kontaktliste
+[Hide or show the window by double click in the contact list]
+Zeige oder verstecke das Fenster bei Doppelklick in der Kontaktliste
+[Sync splitter position with standard IM sessions]
+Splitterposition mit Standard-Nachrichtensitzungen synchronisieren
+[Show contact's status modes if supported by the protocol]
+Zeige Kontaktstatus, falls das Protokoll dies beherrscht
+[Display contact's status icon before user role icon]
+Zeige Statusicon vor dem Rollen-/Rangicon des Kontakts
+[Use IRC style status indicators in the user list]
+Verwende IRC-ähnliche Statusanzeigen in der Nickliste
+[Use alternative sorting method in member list]
+Verwende alternative Sortierung in der Nickliste
+[Timestamp only when event time differs]
+Zeitstempel nur wenn Ereignis-Zeit abweicht
+[Timestamp has same color as the event]
+Zeitstempel hat die selbe Farbe wie ein Ereignis
+[Add a colon (:) to auto-completed user names]
+Füge einen Doppelpunkt (:) zu autom. vervollständigten Benutzernamen hinzu
+[Start private conversation on doubleclick in nick list (insert nick if unchecked)]
+Starte private Unterhaltung bei Doppelklick in Nickliste (fügt sonst Nick ein)
+[Use IRC style status indicators in the log]
+IRC-ähnliche Statusanzeigen im Verlauf verwenden
+[Allow clickable user names in the message log]
+Nicknamen im Nachrichtenverlauf in anklickbare Hyperlinks umwandeln
+[Scale down icons to 10x10 pixels in the chat log]
+Icons auf 10 x 10 Pixel im Verlauf verkleinern
+[Only place a separator when an incoming event is announced with a popup]
+Nur einen Abstandshalter für ein eingehendes Popup-Ereignis
+[Support the math module plugin]
+MathModule-Plugin unterstützen
+[Highlight messages containing my own nick name]
+Aktiviere "Highlight" für Nachrichten mit meinem Nick
+
+[Log formatting]
+Verlaufsformatierung
+[Log files]
+Logdateien
+[Maximum size for log files (in kB)]
+Maximale Größe der Logdateien (in kB)
+[Open log file base folder]
+Öffne Basisverzeichnis der Logdatei
+[Group chat log formatting]
+Gruppenchat-Verlaufsformatierung
+[Timestamp (window)]
+Zeitstempel (Fenster)
+[Timestamp (logfile)]
+Zeitstempel (Logdatei)
+[Maximum number of events in the message window]
+Maximale Anzahl der Ereignisse im Nachrichtenfenster
+[Highlighting]
+Hervorhebungen
+[Groupchat userlist row height (pixels)]
+Zeilenhöhe der Benutzerliste in Gruppenchats (in Pixel):
+
+[Events and filters]
+Ereignisse und Filter
+[Default settings for known event types]
+Standardeinstellungen für bekannte Ereignis-Typen
+[Show when filter is active]
+Zeige, wenn Filter aktiv ist
+[Show Popup]
+Zeige Popup
+[Notify in tray]
+Tray Ereignis
+[Suppress tray notifications for focused channel windows]
+Verberge Tray-Benachrichtigungen wenn Channelfenster fokusiert ist
+[Do not show popups when the channel window is not open]
+Zeige keine Popups, wenn das Channelfenster nicht geöffnet ist
+[Line markers in the message log]
+Markierungen im Nachrichtenverlauf:
+[No markers]
+Keine Markierungen
+[Show as icons]
+Zeige als Icons
+[Show as text symbols]
+Zeige als Textsymbole
+[Highlight event]
+Hebe Ereignis hervor
+
+[Highlight user names]
+Hervorherbung ("Highlight") für Nutzernamen
+[Highlight User...]
+"Highlighte" Benutzer ...
+[Enable highlighting for user names]
+Aktiviere "Highlight" für Benutzernamen
+[Also look in user ids]
+Berücksichtige auch Nutzer-IDs 
+[Highlight message text]
+Hervorherbung ("Highlight") für Nachrichtentext 
+[Names to highlight, wildcards like * and ? are allowed, separate multiple entries with spaces]
+Namen für das Highlight, Platzhalter wie * und ? sind erlaubt, mehrere Einträge durch Leerzeichen trennen
+[Enable highlighting for message text]
+Aktiviere "Highlight" für Nachrichtentexte
+[Words to highlight, wildcards like * and ? are allowed, separate multiple entries with spaces]
+Wörter, die hervorgehoben ("gehighlightet") werden sollen; Platzhalter wie * und ? sind erlaubt, mehrere Einträge durch Leerzeichen trennen
+[Words to highlight, wildcards like * and ? are allowed, separate multiple entries with spaces. Leave it empty if you only want to highlight your own nick name.]
+Wörter, die hervorgehoben ("gehighlightet") werden sollen; Platzhalter wie * und ? sind erlaubt, mehrere Einträge durch Leerzeichen trennen. Lassen Sie es leer, wenn Sie nur Ihren eigenen Nick-Namen hervorheben wollen.
+[Highlight messages containing my own nick name]
+Nachrichten, die meinen eigenen Nicknamen enthalten, hervorheben
+
+[Send typing notifications to the following users when you are typing a message to the them:]
+Sende eine Tippbenachrichtung an die folgenden Benutzer, wenn ich anfange zu schreiben:
+[          Show typing notifications in the message window]
+          Schreibhinweise im Nachrichtenfenster anzeigen
+[Flash window once on typing events (only if flashing enabled)]
+Fenster blinkt einmal bei Tippereignis (nur wenn Blinken aktiviert)
+[          Show typing notifications in the contact list and tray]
+          Schreibhinweise  in Kontaktliste und Tray anzeigen
+[Show typing notification when message dialog is open]
+Schreibhinweise anzeigen, wenn Nachrichtenfenster offen ist
+[Show balloon tooltip in the system tray]
+Ballon-Tooltip  im Systemtray anzeigen
+[          Show popups when a user is typing]
+          Zeige Popups, wenn ein Benutzer tippt
+[Always, but no popup when window is focused]
+Immer, außer wenn Nachrichtenfenster fokussiert ist
+[Only when no message window is open]
+Nur, wenn kein Nachrichtenfenster geöffnet ist
+[More about typing notifications]
+Hilfe zu Tippbenachrichtigungen
+[...is &typing]
+... tippt gerade
+[...stopped t&yping]
+... hat aufgehört zu tippen
+
+[Pending]
+Bevorstehend
+[Last received: %s at %s]
+Letzte Nachricht am %s um %s empfangen
+[There are %d pending send jobs. Message length: %d bytes, message length limit: %d bytes\n%d messages are queued for later delivery]
+Es warten noch %d Nachrichten darauf, gesendet zu werden. Nachrichtenlänge: %d von maximal %d Byte.\n%d Nachrichten wurden zum späteren Verand gespeichert
+[Secure IM is %s]
+SecureIM ist %s
+[Popup Mode: Auto]
+Popup-Modus: Auto
+[Popup Mode: Block contact]
+Popup-Modus: Blockiere Kontakt
+[Sounds are %s. Click to toggle status, hold SHIFT and click to set for all open containers]
+Klänge sind %s. Klick schaltet Status um, Shift-Klick überträgt Status auf alle Container
+[Sending typing notifications is %s.]
+Senden von Tippbenachrichtigungen ist %s.
+[Session list.\n Click left for a list of open sessions.\n Click right to access favorites and quickly configure message window behavior]
+Sitzungsliste.\n Linksklick für eine Liste der geöffneten Sitzungen.\n Rechtsklick zur Anzeige der Favoriten und Schnellkonfiguration des Nachrichtenfensterverhaltens.
+[There are %d pending send jobs. Message length: %d bytes, message length limit: %d bytes\n\n%d messages are queued for later delivery]
+Es stehen %d Nachrichten aus. Nachrichtenlänge: %d Bytes, Nachrichtenlänge begrenzt auf: %d Bytes\n\n%d Nachrichten werden für den späteren Versand in die Zwischenablage kopiert.
+[Session list.\nClick left for a list of open sessions.\nClick right to access favorites and quickly configure message window behavior]
+Sitzungsliste:\nKlicke links für eine Liste der offenen Sitzungen.\Klick rechts für den Zugang zu Favoriten und schnell konfigurieren Meldungsfenster & Verhalten.
+[\n(Sent delayed. Original timestamp %s)]
+\n(Senden verzögert. Original-Zeitstempel %s)
+[Original timestamp]
+Original-Zeitstempel
+[%s on %s%s]
+%s  in %s%s
+[UID: %s (SHIFT click -> copy to clipboard)\nClick for User's Details\nRight click for MetaContact control\nClick dropdown to add or remove user from your favorites.]
+UID: %s (Shift + Klick -> kopiert in Zwischenablage)\nKlick für Benutzerdetails\nRechtsklick für Einstellungen von Metakontakte\nKlick auf das Auswahlfeld, um Benutzer hinzuzufügen oder zu entfernen. 
+[UID: %s (SHIFT click -> copy to clipboard)\nClick for User's Details\nClick dropdown to change this contact's favorite status.]
+UID: %s (Shift + Klick -> kopiert in Zwischenablage)\nKlick für Benutzerdetails\nKlick auf das Auswahlfeld, um die Kontakteinstellung des Favoriten zu ändern.
+[UID: %s (SHIFT click -> copy to clipboard)\nClick for User's Details\nClick dropdown to this change contact's favorite status.]
+UID: %s (Shift-Klick kopiert in Zwischenablage)\nKlick für Benutzerdetails\nKlick auf Auswahlfeld, um den bevorzugten Status für diesen Kontakt festzulegen.
+[No UID]
+Keine UID
+
+[Save Message Log As...]
+Verlauf speichern als...
+[Close Message Session\tCtrl-W]
+Sitzung schließen\tStrg-W
+[Close Container\tAlt-F4]
+Container schließen\tAlt-F4
+[Message Session...]
+Nachrichtensitzung ...
+[&Send later job list...]
+&Später-senden-Aufgabenliste...
+[Filter by contact:]
+Nach Kontakt gefiltert:
+
+[&View]
+Anzeige
+[&Room]
+&Raum
+[Info Panel...]
+Infobereich...
+[Tabs at Bottom]
+Tabs am unteren Rand
+[Window Flashing]
+Fensterblinken
+[Use default Value]
+Standardwert verwenden
+[Disable Flashing]
+Blinken deaktivieren
+[Show Multisend Contact List]
+Kontaktliste einbetten
+
+[&User]
+Ben&utzer
+
+[Message &Log]
+Nachrichten&verlauf
+[&Message Log Settings]
+Nachrichtenverlaufseinstellungen
+[&Export Message Log Settings...]
+Nachrichtenverlaufseinstellungen &exportieren...
+[&Import Message Log Settings...]
+Nachrichtenverlaufseinstellungen &importieren...
+[&Global...]
+&Global...
+[&For this Contact...]
+&Für diesen Kontakt...
+
+[Event Popups]
+Ereignis-Popups
+[Disable all Event Popups]
+Alle Popups unterbinden
+[Show Popups if Window is minimized]
+Popups, wenn Fenster minimiert
+[Show Popups if Window is unfocused]
+Popups, wenn Fenster inaktiv
+[Show Popups for all inactive sessions]
+Popups für alle inaktiven Sitzungen
+[Save current Window Position as Default]
+Aktuelle Fensterposition als Standard
+[No extended status message available]
+Keine erweiterte Statusmeldung steht zur Verfügung
+
+[About tabSRMM...]
+Über TabSRMM...
+
+; buttonsbar.cpp BBBF_ISIMBUTTON | BBBF_ISRSIDEBUTTON | BBBF_CREATEBYID
+[Click for contact menu\nClick dropdown for window settings]
+Klicken Sie auf die Schaltfläche für Kontaktmenü\nKlicken Sie auf das Auswahlfeld für Fenstereinstellungen
+[Send Text Formatting]
+Textformatierung senden
+[This Contact]
+Für diesen Kontakt
+[Global Setting]
+Globale Einstellung
+[Force Off]
+Niemals senden
+[Add Contact to Favorites]
+Kontakt zu Favoriten hinzufügen
+[Remove Contact from Favorites]
+Kontakt aus Favoriten entfernen
+[Insert emoticon]
+Smiley einfügen
+[Message Log Options]
+Verlaufseinstellungen
+[Quote last message OR selected text]
+Letzte Nachricht oder Textmarkierung zitieren
+[Send message\nClick dropdown arrow for sending options]
+Nachricht senden\nDropdown für Sendeoptionen
+[Message Log Options]
+Verlaufseinstellungen
+[Quote last message OR selected text]
+Letzte Nachricht oder Textmarkierung zitieren
+[Save and close session]
+Speichern und schließen
+[Send &Default]
+Stan&dard
+[Send to &multiple Users]
+An &mehrere Kontakte senden
+[Send to &Container]
+An den &Container senden
+[Send &Later]
+Später senden
+[Force &ANSI]
+&ANSI erzwingen
+[Send unsafe (ignore Timeouts)]
+Unsicher senden, Zeitüberschreitungen ignorieren
+[Send Nudge]
+Nudge senden
+[Send later]
+Später senden
+[Event filter - right click to setup, left click to activate/deactivate]
+Ereignisfilter - Rechtsklick zum Einrichten, Linksklick zum Aktivieren/Deaktivieren
+[Set Your Avatar...]
+Setzen Sie Ihr Avatar...
+
+[Leave Chat Room]
+Chatraum verlassen
+[Save Tab Position]
+Tab-Position speichern
+[Clear saved Tab Position]
+Gespeicherte Tab-Position löschen
+[Attach to]
+Zuordnen zu
+[Attach to Container...]
+Zu Container zuordnen...
+[Container Options...]
+Containereinstellungen...
+[Container options...]
+Containereinstellungen...
+[Close Container]
+Container schließen
+
+[Configure container options for\n%s]
+Konfiguriere Containeroptionen für\n%s
+[Container options]
+Containereinstellungen
+[Default container]
+Standardcontainer
+[\tConfigure container options]
+\tContainereinstellungen festlegen
+[Container settings are private]
+Einstellungen für diesen Container sind lokal
+[Check if you don't want this container to use the global container options. Window position can always be private.]
+Aktivieren, wenn Sie für diesen Container nicht die globalen Container-\neinstellungen verwenden wollen. Fensterposition kann immer privat sein.
+[Options marked with an asterisk (*) may not take effect in open message windows or tabs.]
+Optionen mit einem Sternchen (*) haben keinen Effekt auf geöffenete Fenster oder Tabs.
+[The container is using private settings. The panel  height  will not be shared with other containers]
+Der Container läuft mit privaten Einstellungen. Die Wandhöhe wird nicht mit anderen Container geteilt werden.
+[Rounded (only for internal avatar drawing)]
+Abgerundete (nur für interne Avatarzeichnung)
+[1 pixel, solid]
+1 Pixel, fest
+[Edit Highlight List...]
+Editiere "Highlight" Liste ...
+[Use text symbols instead of icons in the chat log (faster)]
+Textsymbole anstelle von Icons im Verlauf zeigen (schneller)
+[Make nicknames clickable hyperlinks]
+Nicknamen in anklickbare Hyperlinks umwandeln
+
+;Allgemeine Einstellungen
+[Options marked with an asterisk (*) do not affect open message windows.]
+Optionen mit einem Sternchen (*) haben keinen Effekt auf bereits geöffnete Fenster.
+[When checked, this container will use private settings, otherwise settings are shared among containers.]
+Wenn aktiviert, wird der Container private Einstellungen verwenden, ansonsten wird die Standardeinstellung benutzt.
+[Close or hide inactive container after]
+Schließe oder verstecke Container nach
+[Only show tab bar when it's needed]
+Tableiste nur zeigen, wenn sie benötigt wird
+[Container stays on top]
+Container im Vordergrund
+[Vertical maximize]
+Vertikal maximieren
+[Automatically size input area (*)]
+Automatische Größe für das Eingabefeld (*)
+[sec. (0=never)]
+Sek. (0=niemals)
+[Close/hide inactive container after]
+Schließe/verst. inakt. Container nach:
+
+;Layout des Fensters
+[Window layout]
+Layout des Fensters
+[Hide the status bar]
+Statusleiste verbergen
+[Hide the menu bar]
+Menüleiste verbergen
+[User ID in status bar]
+Benutzer-ID in Statusleiste
+[Hide the tool bar]
+Toolbar verbergen
+[Place the tool bar at the bottom (*)]
+Toolbar unten anzeigen (*)
+
+;Tab- und Umschaltleiste
+[Close button on tabs]
+Schließen-Schaltfläche auf den Tabs 
+[Tabs and switch bar]
+Tab- und Umschaltleiste
+[Choose your options for the tabbed user interface. Not all options can be applied to open windows. You may need to close and re-open them.]
+Wählen Sie Ihre Optionen für das getabbte Interface. Nicht alle Optionen können für die geöffneten Fenster übernommen werden. Sie müssen das Fenster schließen und erneut öffnen.
+[Tab location]
+Tab-Position
+[Tabs at the top]
+Tabs oben anzeigen
+[Tabs at the bottom]
+Tabs unten anzeigen
+[Switch bar on the left side]
+Umschaltleiste auf der linken Seite
+[Switch bar on the right side]
+Umschaltleiste auf der rechten Seite
+[When using the switch bar, use the following layout]
+Falls die Umschaltleiste verwendet wird, nutze folgendes Layout
+[Like tabs, vertical text orientation]
+Wie Tabs, vertikale Textausrichtung
+[Compact layout, horizontal buttons]
+Kompaktes Layout, horizontale Schaltflächen
+[Advanced layout with avatars]
+Erweitertes Layout mit Avataren
+[Advanced with avatars, vertical orientation]
+Erweitert mit Avataren, vertikale Ausrichtung
+[Flash event icon on tab]
+Blinkende Ereignisicons auf den Tabs
+[Flash text label on tabs]
+Blinkender Aufschriftstext auf den Tabs
+[Single row tab control (*)]
+Einzeilige Tab-Anordnung (*)
+[Use button tabs (*)]
+Benutze Tab-Schaltflächen (*)
+
+;Benachrichtigung
+[Select, when you want to see event notifications (popups) for this window. The settings apply to all tabs within this window.]
+Wählen Sie, wenn Sie Ereignisbenachrichtigungen (Popups) für dieses Fenster sehen wollen. Die Einstellungen gelten für alle Registerkarten in diesem Fenster.
+[Enable popups if minimized]
+Popups, wenn Fenster minimiert
+[Enable popups if unfocused]
+Popups, wenn Fenster inaktiv
+[Show popups for inactive tabs in active containers]
+Popups für inaktive Tabs in aktiven Containern zeigen
+[You have chosen to disable all event notifications for open message windows.]
+Sie haben sich entschieden, alle Ereignisbenachrichtigungen für geöffnete Nachrichtenfenster zu deaktivieren.
+
+;Blinken
+[Use default setting]
+Standardwert verwenden
+[Flash until focused]
+Bis zur Aktivierung blinken
+[Disable flashing]
+Niemals blinken
+
+;Titelleiste
+[Hide title bar]
+Titelleiste verbergen
+[Title bar format]
+Titelleistenformat
+[Available formats]
+Verfügbare Formate
+
+;Größe und Theme des Fensters
+[You can select a private theme (.tabsrmm file) for this container which will then override the default message log theme. You will have to close and re-open all message windows after changing this option.]
+Sie können ein anderes Theme (.tabsrmm-Datei) für diesen Container auswählen. Dieses überschreibt das Standard-Theme. Nach dem Ändern des Themes müssen Sie alle Nachrichtenfenster schließen und erneut starten.
+[Use this to specify a private message log theme for this container. This will have no effect when using IEView or another message log viewer and should NOT be confused with skins.]
+Wählen Sie hier das Theme für den Nachrichtenverlauf in diesem Container aus. Dies hat KEINE Auswirkungen bei der Verwendung eines alternativen Nachrichtenverlauf-Viewers (z.B. IEView, History++) und sollte nicht mit Skins verwechselt werden!
+[Use global container size and position]
+Globale Containergröße und -position
+[Save current as global]
+Als global speichern
+
+;Kontaktavatare
+[Contact avatars]
+Kontaktavatare 
+[Show contact avatars]
+Avatar des Kontaktes anzeigen
+[Globally on]
+Immer anzeigen
+[On, if present]
+Anzeigen (falls vorhanden)
+[Globally OFF]
+Nie anzeigen
+[On, if present, always in bottom display]
+An, falls vorhanden, immer unten anzeigen
+[Show my own avatars]
+Meine eigenen Avatare anzeigen
+[Show them if present]
+Anzeigen (falls vorhanden)
+[Don't show them]
+Nicht anzeigen
+[Show avatars on task bar (Win 7, large task bar required)]
+Zeige Avatare in Taskleiste (Win 7, große Taskleisten-Icons erford.)
+
+;Klang-Benachrichtigung
+[Sound notifications]
+Klang-Benachrichtigungen
+[Enable sound effects]
+Aktiviere Klangeffekte 
+[Play sounds when minimized]
+Spiele Klänge wenn minimiert
+[Play sounds when not focused]
+Spiele Klänge wenn nicht fokusiert
+[Play sounds for inactive tabs in active containers]
+Klänge für inaktive Tabs in aktiven Containern spielen
+[Play sounds for the active tab / window]
+Klänge für den aktiven Tab / Fenster spielen
+
+[Display popups for failed jobs]
+Zeige Popups für fehlgeschlagene Nachrichten
+[Display popups for completed jobs]
+Zeige Popups für komplett gesendete Nachrichten
+[Last send info]
+Letzte gesendete Info
+[Queued jobs]
+Gespeicherte Aufgaben
+[Queued send jobs]
+Gespeicherte Sendenaufgaben
+[Queue manager]
+Queue-Manager
+[Deferred]
+Hinausgeschoben
+[Suspended]
+Schwebend
+[Customize the panel]
+Anpassung des Infobereichs
+[Set panel visibility for this %s]
+Setze Sichtbarkeit der Schaltfläche für diesen %s
+[contact]
+Kontakt
+[chat room]
+Chatraum
+[Add user to highlight list]
+Füge Benutzer zur "Highlight"-Liste hinzu
+[Do not synchronize the panel height with IM windows]
+Syncronisiere nicht die Schaltflächenhöhe mit den IM-Fenstern
+[Open History...]
+Öffne Verlauf... 
+[Room Settings...]
+Raumeinstellungen...
+[Messaging Settings...]
+Nachrichteneinstellungen...
+[Open User Details...]
+Öffne Benutzerdetails...
+[More To Come...]
+Mehr kommt noch...
+[Edit user highlight list]
+Editiere Benutzer-"Highlight"-Liste
+
+
+;Groupbox: Geltungsbereich der Einstellungen
+[Scope of settings]
+Geltungsbereich der Einstellungen
+[Inherit from container setting]
+Von den Containereinstellungen übernehmen
+[Always off]
+Immer aus
+[Always on]
+Immer an
+[Use global or private panel height]
+Globale oder individuelle Bereichshöhe:
+[Use default size]
+Standardgröße
+[Use private size]
+Individuelle Größe
+
+;Groupbox: Einstellen der Größe
+[Set size to]
+Einstellen der Größe
+[Compact (1 Line)]
+Kompakt (1 Zeile)
+[Normal (2 Lines)]
+Normal (2 Zeilen)
+[Large]
+Groß
+[Tip: To use a custom size you can always drag the bottom edge of the panel]
+Tipp: Zur Größenanpassung können Sie die untere Kante mit der Maus verschieben.
+
+;Groupbox: Andere Einstellungen
+[Do not synchronize the panel height with group chat windows]
+Die Bereichshöhe nicht mit der Höhe des Gruppenchatfensters synchronisieren
+[Show picture for this contact]
+Zeige Avatar des Kontaktes:
+[Note: All settings are applied immediately]
+Hinweis: Alle Einstellungen werden sofort aktiv!
+[%s has left (%s)]
+%s verlässt den Channel (%s)
+
+; template strings for the richedit - based infopanel tooltip.
+; Please DO NOT mess with the RTF formatting codes or you may destroy the layout of the
+; tooltips, just translate the strings inside
+
+; Vorlagen für die RichEdit basierten Infopanel-Tooltips
+; Bitte NICHT die Formatierungscodes ändern, nur den Text selbst !!!!!!!
+[\\tab \\ul\\b Status message:\\ul0\\b0 \\par %s]
+\\tab \\ul\\b Statusnachricht:\\ul0\\b0 \\par %s
+[\\par\\par\\tab \\ul\\b Extended status information:\\ul0\\b0 \\par ]
+\\par\\par\\tab \\ul\\b Erweiterte Status-Informationen:\\ul0\\b0 \\par 
+[\\par\\par\\tab \\ul\\b Listening to:\\ul0\\b0 \\par %s]
+\\par\\par\\tab \\ul\\b Hört gerade:\\ul0\\b0 \\par %s
+[Rich Edit file\0*.rtf\0\0]
+Rich Text Datei\0*.rtf\0\0
+[\\Saved message logs]
+\\Gespeicherte Nachrichtenmeldungen
+
+[Loading a theme|Loading a color and font theme can overwrite the settings defined by your skin.\n\nDo you want to continue?]
+Skin laden|Das Laden von Farben und Schriftarten kann Einstellungen Ihres Skins überschreiben.\n\nWollen Sie fortfahren?
+[The filter canoot be enabled, because there are no event types selected either global or for this chat room]
+Ihr Filter kann nicht aktiviert werden, weil keine Ereignistypen global oder für diesen Chatraum ausgewählt wurden
+[Closing Window|You are about to close a window with multiple tabs open.\n\nProceed?]
+Fenster schließen|Sie sind dabei ein Fenster mit mehreren Tabs zu schließen.\n\nFortsetzen?
+[Do not show this message again]
+Diese Nachricht nicht wieder zeigen
+[Important release notes|A test warning message]
+Wichtige Release Informationen|Eine Testnachricht
+[Icon pack version check|The installed icon pack is outdated and might be incompatible with TabSRMM version 3.\n\nMissing or misplaced icons are possible issues with the currently installed icon pack.]
+Iconpack-Versionsprüfung|Das installierte Icon-Pack ist nicht mehr aktuell und kann Inkompatibilitäten mit TabSRMM Version 3 verursachen.\n\nFehlende oder falsche Icons können mögliche Ursachen für das falsch installierte Icon-Pack sein.
+[Edit user notes|You are editing the user notes. Click the button again or use the hotkey (default: Alt-N) to save the notes and return to normal messaging mode]
+Editiere Benutzernachricht|Sie sind dabei, die Benutzernachricht zu editieren. Klicken Sie erneut auf den Button oder benutzen Sie den Hotkey (Standard: Alt+N), um die Nachrichten zu speichern und um zum normalen Nachrichtenmodus zurückzukehren.
+[Missing component|The icon pack is missing. Please install it to the default icons folder.\n\nNo icons will be available]
+Fehlende Komponenten|Das Icon-Pack fehlt. Bitte installieren Sie es in den Standard-"Icons"-Ordner.\n\nKeine Icons sind vorhanden.
+[Aero peek warning|Some Windows 7 Aero Peek features are disabled, because you have loaded a skin.\n\n\\b1Task bar thumbnails and previews will not work and default task bar behavior will be used.\\b0]
+Aero-Peek Warnung|Einige Windows-7-Aero-Peek Funktionen sind deaktiviert, weil Sie einen Skin geladen haben.\n\n\\b1Taskbar-Thumbnails sind Vorschaufunktionen und arbeiten nicht mit der Standard-Taskbar zusammen.\\b0
+[Event filter error]
+Ereignisfilter-Fehler
+[Do you want to also read message templates from the theme?\nCaution: This will overwrite the stored template set which may affect the look of your message window significantly.\nSelect cancel to not load anything at all.]
+Wollen Sie bereits gelesene Nachrichten-Vorlagen aus dem Theme laden?\nAchtung: Dies wird das gespeicherte Template-Set, das das Aussehen Ihres Meldungsfenster beeinflusst erheblich beeinträchtigen und könnte überschrieben werden.\nWählen Sie Abbrechen, um nichts zu laden.
+[The 'paste and send' feature is disabled. You can enable it on the 'General' options page in the 'Sending Messages' section]
+Die 'einfügen und senden'-Funktion ist deaktiviert. Sie können diese unter 'Allgemein' auf der Optionsseite 'Nachrichtenversand'-Sektion aktivieren.
+[Either the nudge plugin is not installed or the contact's protocol does not support sending a nudge event.]
+Entweder das Nudge-Plugin ist nicht installiert oder das Kontakt-Protokoll unterstützt die Zusendung nicht.
+[Message Window warning]
+Nachrichtenfenster-Warnung
+[There are unsent messages waiting for confirmation.\nWhen you close the window now, Miranda will try to send them but may be unable to inform you about possible delivery errors.\nDo you really want to close the Window(s)?]
+Ungesendete Nachrichten warten auf Bestätigung.\nWenn Sie das Fenster nun schließen, wird Miranda weiterhin versuchen, sie zu senden; es ist aber nicht immer möglich, Sie über mögliche Übertragungsfehler zu informieren.\n\Wollen Sie das Nachrichtenfenster wirklich schließen?
+[An application error has occurred]
+Ein Anwendungsfehler ist aufgetreten
+[Although the exception was caught and you may continue working with Mranda, you should restart the program as soon as possible. The exception may have damaged internal data structures and can have a serious impact on stability.]
+Da die Ausnahme gefangen wurde und Sie weiterhin mit Miranda IM arbeiten können, sollten Sie das Programm so bald wie möglich neu starten, weil die Ausnahme interne Datenstrukturen beschädigen und schwerwiegende Auswirkungen auf die Stabilität verursachen könnte.
+[Revert to (safe) defaults]
+Zurück zu den sicheren Einstellungen
+[A message delivery has failed after the contacts chat window was closed. You may want to resend the last message]
+Eine Nachrichtenübertragung schlug fehl, nachdem der Kontakt das Chatfenster geschlossen hatte. Sie möchten vielleicht die letzte Nachricht erneut senden.
+[Multisend: successfully sent to: %s]
+Multisend: Erfolgreich gesendet zu: %s
+[Message successfully queued for later delivery.\nIt will be sent as soon as possible and a popup will inform you about the result.]
+Nachricht erfolgreich in der Warteschlange für spätere Übertragung gesichert.\nSie wird so bald wie möglich gesendet werden, Sie werden über ein Popup über das Ergebnis informiert.
+[The send later feature is not available on this protocol.]
+Die Nachrichten-später-senden-Funktion steht für dieses Protokoll nicht zur Verfügung.
+[WARNING: The message you are trying to paste exceeds the message size limit for the active protocol. It will be sent in chunks of max %d characters]
+ACHTUNG: Die Nachricht, die Sie zum Einfügen ausgewählt haben, überschreitet die Größenbegrenzung für das aktive Protokoll. Sie wird abgeschnitten, es werden max. %d Zeichen gesendet werden.
+[The message you are trying to paste exceeds the message size limit for the active protocol. Only the first %d characters will be sent.]
+Die Nachricht, die Sie versuchten einzufügen, überschritt die maximale Größe des aktiven Protokolls. Nur die ersten %d Zeichen werden gesendet.
+[Autoscrolling is disabled (press F12 to enable it)]
+Autoscrolling ist deaktiviert (drücken Sie auf F12, um es zu aktivieren)
+[Warning: you have selected a subprotocol for sending the following messages which is currently offline]
+Achtung: Sie haben ein Unterprotokoll für die Zusendung der folgenden Meldungen ausgewählt, leider ist es derzeit offline.
+[Icon pack missing. Please install it in the /icons subfolder.]
+Iconpack fehlt. Bitte installieren Sie die Icons in den /Icons-Unterordner.
+[Warning: Popup plugin not found.]
+Achtung: Popup-Plugin wurde nicht gefunden.
+[Warning: Current Popup plugin version is not supported.]
+Achtung: Ihre Popup-Version wird nicht unterstützt.
+[TabSRMM group chat module]
+TabSRMM-Gruppenchatmodul
+[TabSRMM could not enable its group chat module. The most likely cause is that you have installed and enabled chat.dll or another plugin that provides groupchat services.\n\nShould I try to fix this now (a RESTART of Miranda is required to apply these changes)?]
+TabSRMM konnte sein Gruppenchatmodul nicht laden. Die wahrscheinlichste Ursache ist, dass die chat.dll oder ein anderes Plugin, das Gruppenchats zur Verfügung stellt, installiert und aktiviert ist.\n\nSoll nun versucht werden, den Fehler zu beheben? (Ein Neustart von Miranda IM ist dann erforderlich, um diese Änderungen wirksam zu machen.)
+[Contact not on list. You may add it...]
+Kontakt ist nicht in Ihrer Liste. Sie können ihn hinzufügen ...
+[A send later job completed successfully.\nThe original message: %s]
+Ein "später senden"-Auftrag wurde erfolgreich erledigt.\nDie Originalnachricht war: %s
+[Show balloon popup (unsupported system)]
+Zeige Popups (nicht unterstütztes System)
+[same as environment variable %APPDATA% for currently logged-on Windows user]
+wie Umgebungsvariable %APPDATA% für den aktuell angemeldeten Windows-Benutzer
+[username for currently logged-on Windows user]
+Benutzername für den aktuell angemeldeten Windows-Benutzer.
+[\"My Documents\" folder for currently logged-on Windows user]
+\"Dokumente\"-Order für den aktuell angemeldeten Windows-Benutzer
+[\"Desktop\" folder for currently logged-on Windows user]
+\"Desktop\"-Ordner für den aktuell angemeldeten Windows-Benutzer
+[any environment variable defined in current Windows session (like %systemroot%, %allusersprofile%, etc.)]
+Irgendeine Umgebungsvariable definiert die aktuelle Windows-Sitzung (z.B. %systemroot%, %allusersprofile% usw.)
+[The message cannot be sent delayed or to multiple contacts, because it exceeds the maximum allowed message length of %d bytes]
+Die Nachricht kann nicht verzögert gesendet werden oder an mehrere Kontakte weitergeleitet werden, denn sie überschreitet die maximale Länge der Nachricht, es sind nur %d Byte erlaubt.
+[A send later job failed to complete.\nThe original message: %s]
+Ein "später senden"-Auftrag schlug fehl.\nDie Originalnachricht war: %s
+[You are about to modify the state of one or more items in the\nunattended send queue. The requested action(s) will be executed at the next scheduled queue processing.\n\nThis action cannot be made undone.]
+Sie sind dabei, den Zustand eines oder mehrerer Elemente in der Sendewarteschlange\zu ändern. Die angeforderte Aktion(en) werden bei der nächsten geplanten Queue-Verarbeitung ausgeführt werden.\n\nDie Aktion kann nicht rückgängig gemacht werden.
+[Multisend is unavailable, because the unattended send feature has not been enabled]
+Multisend ist nicht verfügbar, weil die Funktion "Unbeaufsichtigtes Senden" nicht aktiviert wurde.
+[Wait ACK]
+Warte auf ACK
+[Sent OK]
+Senden OK
+[Failed]
+Fehlgeschlagen
+[Multisend: failed sending to: %s]
+Multisend: Senden gescheitert zu folgenden Kontakt: %s
+
+[Window:]
+Fenster:
+[Message sending:]
+Nachrichten senden:
+[History:]
+Verlauf:
+[Tabs:]
+Tabs:
+[Esc closes sessions (minimizes window, if disabled)]
+ESC schließt Sitzungen, anstatt sie zu minimieren
+[Always pop up and activate new windows]
+Neue Fenster immer öffnen und aktivieren
+[Send message on Ctrl+Enter (always enabled)]
+Strg+Enter sendet Nachricht (immer aktiviert)
+[Send on Shift+Enter]
+Shift+Enter sendet Nachricht
+[Send message on double Enter]
+2-mal Enter sendet Nachricht
+[Use tabbed interface]
+Chatfenster mit Tabs verwenden
+[Create new tabs without activating them]
+Neue Tabs erzeugen, ohne sie zu aktivieren
+[Pop up minimized window when a new tab is created]
+Minimierte Fenster öffnen, wenn neuer Tab erzeugt wird
+[Automatically switch tabs in minimized windows]
+Tabs in minimierten Fenstern automatisch wechseln
+[Don't announce when dialog is open]
+Keine Benachrichtigung, wenn Dialog offen
+
+[Time zone service is missing]
+Zeitzonendienst läuft nicht
+[Contact time zone]
+Kontakt Zeitzone
+[Message log view mode (does not affect open windows)]
+Nachrichtenverlauf ansehen (hat keinen Effekt auf geöffnete Fenster)
+[&Messaging settings...]
+Nachrichteneinstellungen...
+[Set messaging options for %s]
+Nachrichteneinstellungen für %s
+[Message log view mode]
+Darstellung des Verlaufs
+[Select how to display the message log. This setting can be ignored when one of the listed plugins is not installed.]
+Hier können Sie die Darstellungsart des Verlaufes festlegen, falls mehrere Plugins dazu zu Verfügung stehen.
+[Use Global Setting]
+Globale Einstellung verwenden
+[Force History++ (plugin missing)]
+History++ erzwingen (Plugin fehlt)
+[Force IEView (plugin missing)]
+IEView erzwingen (Plugin fehlt)
+[Force History++]
+History++ erzwingen
+[Force IEView]
+IEView erzwingen
+[Force Default Message Log]
+Standardverlauf erzwingen
+[Send text formatting method]
+Formatierungsinformationen senden
+[You can override the global setting for text formatting here. Use "Force Off" to never send formatting info for this contact.]
+Die globale Einstellung kann hier überschrieben werden. "Niemals" unterbindet Textformatierung.
+[Simple Tags (*/_)]
+Einfache Tags (*, / und _)
+[ANSI codepage]
+ANSI-Zeichenkonvertierung
+[Codepage for ANSI encoding/decoding when sending or receiving non-unicode messages.]
+Codetabelle zur ANSI-Kodierung gesendeter und empfangener Nicht-Unicode-Nachrichten.
+[Show avatar in message window]
+Avatar im Nachrichtenfenster anzeigen
+[Show always (if present)]
+Immer anzeigen (falls vorhanden)
+[Never show it at all]
+Niemals anzeigen
+[Use private splitter position]
+Private Splitterposition verwenden
+[Contact is a favorite contact]
+Kontakt in der Liste der Favoriten
+[Never close automatically]
+Niemals automatisch schließen
+[Force ANSI send / receive]
+Nur ANSI senden und empfangen
+[Ignore sending timeouts]
+Zeitüberschreitungen ignorieren
+[Load only actual history]
+Lade nur aktuellen Nachrichtenverlauf
+[Info panel mode]
+Infobereichsmodus
+[Always On]
+Immer an
+[Always Off]
+Immer aus
+[Timeone offset]
+Zeitverschiebung
+[<default, no change>]
+keine Zeitverschiebung
+[You can set private message log options for this contact here. Filled boxes are inherited from the global settings which can be found on Message Sessions->Message Log]
+Hier können Sie für diesen Kontakt die globalen Einstellungen von Nachrichtensitzungen => Nachrichtenverlauf überschreiben. Ausgefüllte Kästchen nutzen die globale Einstellung.
+[Show symbols]
+Symbole anzeigen
+[Use different icons to mark incoming and outgoing messages]
+Verwende unterschiedliche Icons für ein- und ausgehende Nachrichten
+[Date and time]
+Datum und Uhrzeit
+[Show date in timestamps]
+Datum im Zeitstempel anzeigen
+[Show seconds in timestamp]
+Sekunden im Zeitstempel anzeigen
+[Use contacts local time]
+lokale Kontaktzeit verwenden
+[Message grouping]
+Nachrichten gruppieren
+[Display grid lines]
+Trennlinien anzeigen
+[Use different background colors for incoming and outgoing messages]
+Verwende unterschiedliche Hintergrundfarben für ein- und ausgehende Nachrichten
+[Log status changes (in open message windows only)]
+Statusänderungen speichern (nur in offenen Nachrichtenfenstern)
+[Use normal templates (uncheck to use simple templates)]
+Verwende normale Vorlagen (anstelle von einfachen)
+
+[Revert to global options]
+Auf globale Einstellungen zurücksetzen
+
+[Select container]
+Container auswählen
+[Available containers]
+Verfügbare Container
+[Rename]
+Umbenennen
+[Create a new container]
+Einen neuen Container erstellen
+[Create new]
+Neu erstellen
+
+[User Id:]
+Nutzer-ID:
+[Extended status for %s: %s]
+Erweiterter Status für %s: %s
+[Status message for %s (%s)]
+Statusnachricht für %s (%s)
+[No status message available]
+Keine Statusnachricht verfügbar
+[%s is using]
+%s verwendet
+[Toggle notes display]
+Notizanzeige umschalten
+[Set your visibility for this contact]
+Sichtbarkeit konfigurieren
+[You appear always offline or have this contact blocked]
+Immer offline erscheinen bzw. Kontakt blockieren
+[You are always visible to this contact]
+Immer online (sichtbar) erscheinen
+[Your status determines visibility to this contact]
+Aktueller Status entscheidet über Sichtbarkeit
+
+[Recent Sessions]
+Zuletzt geöffnet
+[Show the Floater]
+Floater anzeigen
+[Disable All Event Notifications]
+Alle Ereignisbenachrichtigungen unterbinden
+[Don't create Windows automatically]
+Keine Nachrichtenfenster automatisch erzeugen
+[Hide all Message Containers]
+Alle Nachrichtenfenster verbergen
+[Restore all Message Containers]
+Verborgene Nachrichtenfenster zeigen
+[Don't play Sounds]
+Keine Sounds abspielen
+[Be "Super Quiet"]
+Alles unterdrücken
+
+[Size and scaling options for the bottom avatar display]
+Größe und Darstellungsoptionen für den Boden der Avatardarstellung
+[Allow BBCode formatting in outgoing messages]
+Erlaube BBCode-Formatierung in ausgehenden Nachrichten
+[<All contacts>]
+<Alle Kontakte>
+[You can add the user by user name or his id. Wildcards are allowed and recommended.]
+Sie können den Nutzer nach Benutzernamen oder seiner ID hinzufügen. Platzhalter sind erlaubt und empfohlen.
+[Use bold form for nickname (requires BBCode support)]
+Nicknamen fett darstellen (erfordert BBCode-Unterstützung)
+[Show Symbols]
+Zeige Symbole
+[Container mode]
+Containermodus
+[Use contact list group names for organizing containers]
+Benutze Kontaktlistengruppe
+[Maximum number of tabs per container]
+Maximale Anzahl von Tabs pro Container
+[Use single window mode (one container per session)]
+Jede Sitzung in einem eigenen Container öffnen (keine Verwendung von Tabs)
+[Use default container mode (manual contact assignments)]
+Standardmodus verwenden (manuelle Zuordnung von Kontakten)
+[Default window title format]
+Standardformat für den Fenstertitel
+[Don't draw visual styles on toolbar buttons]
+Keine "Visual Styles" für Toolbarbuttons
+[Flat toolbar buttons]
+Flache Schaltflächen
+[Splitters have static edges (uncheck this to make them invisible)]
+Splitter haben statische Kanten (deaktivieren, um sie unsichtbar zu machen)
+[No visible borders on text boxes]
+Keine sichtbaren Grenzen um Textfelder
+[Always use icon pack image on the smiley button]
+Immer Standardicon auf Smileybutton verwenden
+[ESC closes sessions (minimizes window, if disabled)]
+ESC schließt Sitzungen, anstatt sie zu minimieren
+[ESC closes whole container(uncheck for closing per-tab)]
+ESC schließt gesamten Container (deaktivieren, um nur Tab zu schließen)
+[Allow tabulation (uncheck for TAB focus-switching)]
+Tabulatoren im Eingabebereich erlauben (deaktivieren für automatische Tab-Fokus-Umschaltung)
+[Use global hotkeys (configure modifiers below)]
+Globale Hotkeys verwenden (Modifikatoren unten einstellen)
+[Info Panel field borders:]
+Infobereich Umrandungen:
+[Flat (no border at all)]
+Flach (keine Ränder)
+[Global hotkey modifiers]
+Globaler Hotkey-Modifikator
+[abbreviated weekday name]
+Abgekürzter Wochenname
+[full weekday name]
+Voller Wochenname
+[Draw dividers to mark inactivity]
+Inaktivität durch Trennlinien markieren
+[Icons to display in the tray and the message window tabs / title]
+Folgende Icons im Tray und im Titel / Tabs des Nachrichtenfensters zeigen
+[Skip all popups when no channel window is opened]
+Popups nur anzeigen, wenn ein Channelfenster geöffnet ist
+[Use the containers popup configuration to place dividers]
+Popup-Einstellungen des Containers für Trennlinien verwenden
+[Autoscrolling is disabled, %d message(s) queued (press F12 to enable it)]
+Autoscrolling ist deaktiviert, %d Nachricht(en) in der Warteschlange (F12 drücken um es zu aktivieren)
+[Incoming file (invalid format]
+Eingehende Datei (falsches Format)
+[% User(s)]
+% Benutzer
+[  Show these events]
+Zeige diese Ereignisse
+[&Do not show if msg window focused]
+Verberge, wenn Nachrichtenfenster fokussiert
+[Critical: cannot init IcoLib, no resource DLL found.]
+Kritisch: Es wurde kein Iconpack gefunden!
+[Character Encoding]
+Zeichenkodierung
+[%s: Chat Room (%u users%s)]
+%s: Chatraum (%u Benutzer%s)
+[%s: Chat Room (%u user%s)]
+%s: Chatraum (%u Benutzer%s)
+[, event filter active]
+, Ereignisfilter aktiv
+[Message Log Display]
+Verlaufsdarstellung
+[Use global Setting for this Contact]
+Globale Einstellung für diesen Kontakt
+[Use History++ Plugin]
+History++-Plugin erzwingen
+[Use IEView Plugin]
+IEView-Plugin erzwingen
+[Use Default Message Log]
+Standard-Nachrichtenverlauf verwenden
+[Autosave on Close]
+Automatisch beim Schließen speichern
+[Save Now]
+Jetzt speichern
+[Quick Toggle\tALT-I]
+Umschalten\tAlt-I
+[Container Setting]
+Einstellung für diesen Container
+
+; iconleiste
+[UIN: %s (SHIFT click -> copy to clipboard)\nClick for User's Details\nRight click for MetaContact control\nClick dropdown for infopanel settings]
+UIN: %s (Shift-Klick kopiert in Zwischenablage)\nKlick für Benutzerdetails\nRechtsklick für Metakontakte-Kontrolle\nKlick auf Auswahlfeld für Infobereichseinstellungen
+[UIN: %s (SHIFT click -> copy to clipboard)\nClick for User's Details\nClick dropdown for infopanel settings]
+UIN: %s (Shift-Klick kopiert in Zwischenablage)\nKlick für Benutzerdetails\nKlick auf Auswahlfeld für Infobereichseinstellungen
+[Insert [img] tag / surround selected text with [img][/img]]
+Füge [img]-Tag ein / Umschließe markierten Text mit [img][/img]
+
+; hotkeyhandler.c
+[tabSRMM Quick Menu]
+TabSRMM-Schnellmenü
+[Session List]
+Sitzungsliste
+[Avatar Options]
+Avatareinstellungen
+[Add this contact permanently to your contact list]
+Kontakt dauerhaft zur Kontaktliste hinzufügen
+[Do not add this contact permanently]
+Kontakt nicht zur Kontaktliste hinzufügen
+[A message failed to send successfully.]
+Nachricht konnte nicht gesendet werden.
+[Message Log is frozen]
+Verlaufsaktualisierung gestoppt
+[Contact is offline and this protocol does not support sending files to offline users.]
+Kontakt ist offline, und das Protokoll unterstützt keine Datenübertragung zu Leuten, die offline sind.
+[You cannot edit user notes when there are unsent messages]
+Sie können keine Benutzernachrichten editieren, wenn ungesendete Nachrichten ausstehen.
+[You are editing the user notes. Click the button again or use the hotkey (default: Alt-N) to save the notes and return to normal messaging mode]
+Sie editieren Benutzernotizen. Klicken Sie erneut auf die Taste oder verwenden Sie die Tastenkombination (Standard: Alt+N) zum Speichern der Notizen
+[No UIN]
+Keine UIN
+[Selection copied to clipboard]
+Auswahl in die Zwischenablage kopiert
+[changed status from %s to %s.]
+ändert den Status von %s zu %s.
+[signed on and is now %s.]
+meldet sich an und ist nun %s.
+[signed off.]
+ist nun offline.
+[Message Log is frozen (%d queued)]
+Verlaufsaktualisierung gestoppt (%d ungelesene)
+[Unknown client]
+Unbekannter Client
+[Delivery failure: %s]
+Zustellungsfehler: %s
+[The message send timed out]
+Zeitüberschreitung beim Versenden einer Nachricht
+[Message saved for later delivery]
+Nachricht für späteres Versenden gespeichert
+[Offline messages could not be sent to this contact]
+Offline-Nachrichten können an diesen Kontakt nicht geschickt werden
+
+[tabSRMM Information]
+TabSRMM-Informationen
+[MetaContact: The enforced protocol (%d) is now offline.\nReverting to default protocol selection.]
+Metakontakt: Das erzwungene Protokoll (%d) ist offline.\nStandardprotokoll ist nun wieder aktiv.
+[Message delivery in progress (%d unsent). You cannot close the session right now]
+Nachrichtenübermittlung dauert noch an (%d ungesendete), Sitzung kann so lange nicht geschlossen werden.
+
+; msgdialog.c
+[The input history is empty.]
+Keine letzten Nachrichten im Eingabefeld vorhanden.
+
+; msgdlgutils.c
+[Error creating destination directory]
+Fehler beim Erstellen des Zielverzeichnisses
+[Save contact picture]
+Kontaktbild speichern
+[The file exists. Do you want to overwrite it?]
+Diese Datei existiert bereits. Wollen Sie diese überschreiben?
+
+; msglog.c
+[Use default codepage]
+Standardkodierung verwenden
+
+; msgoptions.c
+[Analog clock symbol]
+Analoges Uhr-Icon
+
+; msgs.c
+[tabSRMM Session List]
+TabSRMM-Sitzungsliste
+[tabSRMM Tray Menu]
+TabSRMM-Traymenü
+[This plugin requires db3x plugin version 0.5.1.0 or later]
+TabSRMM benötigt das db3x-Plugin 0.5.1.0 oder neuer.
+[&tabSRMM settings]
+&TabSRMM-Einstellungen
+
+;Sounds
+[Contact started typing]
+Kontakt beginnt zu tippen
+[Contact stopped typing]
+Kontakt tippt nicht mehr
+
+; Multisend indicator]
+[Contact is typing]
+Kontakt tippt
+[Quote text]
+Text zitieren
+[Save and close]
+Speichern und schließen
+[Avatar menu]
+Avatarmenü
+[User menu]
+Benutzermenü
+[Format bold]
+Fett
+[Format italic]
+Kursiv
+[Format underline]
+Unterstrichen
+[Font face]
+Schriftart
+[Font color]
+Schriftfarbe
+[Message delivery error]
+Zustellungsfehler
+[Statuschange]
+Statusänderung
+
+; Static container icon
+[Message Log frozen]
+Verlauf eingefroren
+[Pulldown Arrow]
+Pfeil nach unten
+[Left Arrow]
+Pfeil nach links
+[Right Arrow]
+Pfeil nach rechts
+[Up Arrow]
+Pfeil nach oben
+[Contact Preferences]
+Kontakteinstellungen
+
+; nen.h
+; Requests your authorisation  &  ICQ Web pager
+[ICQ Email express]
+ICQ-E-Mail-Express
+
+; resource.rc:IDD_ABOUT
+[About tabSRMM]
+Über TabSRMM
+[Copyright © 2004-2005 by the Miranda IM project. More  \ndetailed copyright information can be found in the included README file.\n\nThis software is distributed and licensed under the terms of the GNU General Public License V2 or any later version.]
+Copyright © 2004-2005 vom Miranda IM Projekt. Mehr  \ndetailierte Copyrightinformationen können in der beinhalteten README nachgelesen werden.\n\nDiese Software ist lizenziert und wird vertrieben von der GNU General Public License V2 und höheren Versionen.
+[ This option is disabled, if IEView is not installed.]
+ Diese Einstellung ist deaktiviert, falls IEView nicht installiert ist.
+[Freeze Log]
+Verlauf einfrieren
+[Paste formatted Text]
+Formatierten Text einfügen
+[Paste and Send immediately]
+Einfügen und sofort senden
+[Show Message Length Indicator]
+Nachrichtenlänge grafisch anzeigen
+[Switch to next Tab]
+Zum nächsten Tab
+[Switch to previous Tab]
+Zum vorherigen Tab
+[Configure Tab Appearance...]
+Aussehen der Tabs festlegen
+[Toggle Avatar Display]
+Avatar an/aus
+[Show Contact Picture]
+Kontaktbild zeigen
+[Hidden for this Contact]
+Für diesen Kontakt verstecken
+[Visible for this Contact]
+Für diesen Kontakt sichtbar
+[Contact Picture Settings...]
+Kontaktbild-Einstellungen...
+[Choose Background Color...]
+Hintergrundfarbe wählen...
+[Save this Picture As...]
+Bild speichern unter...
+
+; Unread Menu
+[Default Color]
+Standardfarbe
+[Blue]
+Blau
+[Magenta]
+Violett
+[Cyan]
+Zyan
+[White]
+Weiß
+[Clear all Formatting]
+Formatierung entfernen
+[No Message Sessions opened]
+Keine offenen Nachrichtenfenster
+[Info panel]
+Infobereich
+
+; Splitter context
+[Set Position for this Session]
+Position für diese Sitzung speichern
+[Set and Save for all Sessions]
+Position für alle Sitzungen setzen und speichern
+[Set and Save for this Contact only]
+Position nur für diesen Kontakt setzen und speichern
+[Revert to old Position]
+Auf alte Position zurücksetzen
+
+; selectcontainer.c
+[Select container for %s]
+Container für %s auswählen
+[You cannot delete the default container]
+Der Standard-Container kann nicht gelöscht werden.
+[This name is already in use]
+Der gewählte Name wird bereits verwendet.
+[You cannot rename the default container]
+Der Standard-Container kann nicht umbenannt werden.
+
+; sendqueue.c
+[You haven't selected any contacts from the list. Click the checkbox box next to a name to send the message to that person.]
+Sie haben keine Kontakte in der Liste markiert. Markieren Sie Kontakte, indem Sie das nebenstehende Kästchen wählen.
+[A message delivery has failed.\nClick to open the message window.]
+Eine Nachricht konnte nicht zugestellt werden.\nKlicken Sie hier, um das Nachrichtenfenster zu öffnen.
+
+; srmm.c
+[tabSRMM Message (%s)]
+TabSRMM-Nachricht (%s)
+
+; tabctrl.c
+[Configure tab appearance]
+Aussehen der Tabs festlegen
+[Failed to open help file]
+Hilfedatei konnte nicht geöffnet werden
+
+; themes.c
+[All message containers need to close before the skin can be changed\nProceed?]
+Alle Nachrichtenfenster müssen geschlossen werden, damit der Skin geändert werden kann.\nFortsetzen?
+[Change skin]
+Skin ändern
+
+;Folders
+[TabSRMM data]
+Daten
+[TabSRMM Skins]
+Skins
+[TabSRMM Saved Avatars]
+Gespeicherte Kontaktbilder
+
+;IcoLib
+[Animated Tray]
+Animierter Tray
+[Favorite Contacts]
+Kontaktfavoriten
+[Format strike-through]
+Durchgestrichen
+[Group chat windows]
+Gruppenchat-Fenster
+[Group chat log]
+Gruppenchat-Verlauf
+[Hide nicklist]
+Verstecke Nickliste
+[Multisend indicator]
+An mehrere Kontakte senden
+[RESERVED (currently not in use)]
+Reserviert (aktuell nicht benutzt)
+[Sending typing notify is off]
+Sende Tippenhinweis ist aus
+[Setup Sidebar]
+Seitenleiste öffnen
+[Show nicklist]
+Zeige Nickliste
+[Sounds are On]
+Klänge sind an
+[Static container icon]
+Statisches Containericon
+[Change text color]
+Textfarbe ändern
+[Event filter]
+Ereignisfilter
+[Do you really want to close this session?]
+Wollen Sie diese Sitzung wirklich schließen?
+
+; container.c
+[Hide titlebar]
+Titelleiste verstecken
+[Show session list (right click to show quick menu)]
+Sitzungsliste anzeigen (Rechtsklick zeigt Schnellmenü)
+[Meta Contact]
+Metakontakt
+[(Forced)]
+(Erzwungen)
+[Autoselect]
+Automatisch auswählen
+[Use Protocol]
+Benutze Protokoll
+[Set Default Protocol]
+Standardprotokoll festlegen
+
+; containeroptions.c
+[Set Options for: %s]
+Einstellungen setzen für: %s
+
+; eventpopups.cpp
+[One of your popup actions is set to DISMISS EVENT.\nNote that this options may have unwanted side effects as it REMOVES the event from the unread queue.\nThis may lead to events not showing up as \"new\". If you don't want this behaviour, please review the Event Notifications settings page.]
+Eine Ihrer Popup-Aktionen wurde auf "Ereignis löschen" gestellt.\nDiese Option könnte ungewollte Nebenwirkungen haben, da sie dieses Ereignis als gelesen markiert.\nDadurch erscheint dieses Ereignis nicht als "neu". Wenn dieser Effekt nicht gewollt ist, kann er in den Ereignisbenachrichtigungen deaktiviert werden.
+[Unknown module or contact]
+Unbekanntes Modul oder Kontakt
+[TabSRMM warning message]
+TabSRMM-Warnmeldung
+[tabSRMM Warning Message]
+TabSRMM-Warnmeldung
+[Set your avatar...]
+Eigenen Avatar einstellen...
+[Show grid]
+Gitterlinien zeigen
+[Use simple Template]
+Einfache Vorlage verwenden
+[New messages: ]
+Neue Nachrichten: 
+
+[Typing Sounds On]
+Tippklänge sind eingeschaltet
+[Typing Sounds Off]
+Tippklänge sind ausgeschaltet
+[Typing Typing]
+Tippt und tippt
+[Typing Backspace]
+Drückt die Backspace-Taste
+
+;Containereinstellungen
+[Check if you don't want this container to use the global container options. Titlebar format and window position can always be private.]
+Aktivieren, wenn Sie für diesen Container eigene lokale Einstellungen setzen wollen (Fenstergröße und -position können immer lokal sein).
+[Place ToolBar at bottom]
+Toolbar unten anzeigen
+[Show the info panel]
+Infobereich anzeigen
+[Select, in which cases you want to see event notifications for this message container. These options are disabled when you are using one of the "simple" notifications modes]
+Wählen Sie, in welchem Fall Sie Benachrichtigungen für diesen Container sehen wollen. Diese Einstellungen sind deaktiviert, wenn Sie einen "einfachen" Benachrichtigungsmodus benutzen.
+[Sync sounds with popup mode]
+Soundeffekte wie Popups
+[Always enable popups for]
+Popups immer zeigen, wenn
+[inactive tabs]
+Tab inaktiv ist
+[Titlebar options]
+Titelleisteneinstellungen
+[Use static container Icon]
+Festes Icon verwenden
+[Use private title format]
+Eigenes Format für die Titelleiste
+[Window size and theme]
+Größe und Theme des Fensters
+[This feature requires Windows 2000 or later and is not available when custom container skins are in use]
+Diese Funktion benötigt mindestens Windows 2000 und ist nicht verfügbar, wenn eigene Containerskins benutzt werden.
+[This feature requires Windows 2000 or later and may be unavailable when using a container skin.]
+Diese Funktion benötigt mindestens Windows 2000 und ist nicht verfügbar, wenn eigene Containerskins benutzt werden.
+
+;Einstellungen
+;Nachrichtensitzungen -> Tab: Tabs und Container
+[Message dialog visual settings]
+Layout des Nachrichtenfensters
+[No borders for text areas (make them appear "flat")]
+Keine Ränder für Textzonen (lässt sie "flach" erscheinen)
+[Dim icons for idle contacts]
+Icons für inaktive Kontakte abblenden
+
+;Nachrichtensitzungen -> Tab: Nachrichtenverlauf
+[Place dividers in inactive sessions]
+Trennlinien in inaktiven Sitzungen
+[Use popup configuration for placing dividers]
+Verwende Popup-Konfiguration für Trennlinien
+[Use multiple background colors]
+Verwende unterschiedliche Hintergrundfarben
+[Support math module plugin]
+MathModule-Plugin unterstützen
+[Show url events]
+URL-Ereignisse anzeigen
+
+;Nachrichtensitzungen -> Gruppenchats -> Tab: Ereignisse und Filter
+[Log these events to the log file (when file logging is enabled)]
+Folgende Ereignisse in der Logdatei speichern (falls Loggen aktiviert ist)
+[Log topic changes]
+Titeländerungen speichern
+[Log users joining]
+Speichern, wenn Benutzer Channel betritt
+[Log users disconnecting]
+Speichern, wenn Benutzer Verbindung unterbricht
+[Log messages]
+Nachrichten speichern
+[Log actions]
+Aktionen speichern
+[Log highlights]
+Hervorhebungen speichern
+[Log users leaving]
+Speichern, wenn Benutzer Channel verlässt
+[Log users kicking other user]
+Speichern, wenn Benutzer gekickt wird
+[Log notices ]
+Notizen speichern
+[Log name changes]
+Namensänderungen speichern
+[Log information messages]
+Informationsnachrichten speichern
+
+[General tweaks]
+Allgemeine Tweaks
+[Show this button in regular window]
+Zeige Schaltfläche in Einzel-Chats
+[Show this button in chat window]
+Zeige Schaltfläche in Gruppenchats
+[Hide if there isn't enough space]
+Verstecke, wenn nicht genügend Platz
+[Buttons spacing:]
+Schaltflächenabstand:
+[Message tab and window creation options]
+Erzeugen von Tabs und Fenstern
+[ALWAYS pop up and activate new message windows (has PRIORITY!)]
+Fenster IMMER automatisch öffnen und auf den Desktop bringen (hat Priorität!)
+[Create new tabs in existing windows without activating them]
+Neue Tabs in existierenden Fenstern erzeugen, ohne sie zu aktivieren
+[Create new windows in minimized state]
+Neue Fenster minimiert erzeugen
+[Pop up a minimized window when a new tab is created]
+Minimierte Fenster in Vordergrund bringen, wenn ein neuer Tab erzeugt wird
+[New events will automatically switch tabs in minimized windows]
+In minimierten Fenstern Tabs bei neuen Ereignissen automatisch wechseln
+[Enable event API (support for third party plugins)]
+Event-API aktivieren (Unterstützung für externe Plugins)
+[Chat module for instant messaging and group chat, offering a tabbed interface and many advanced features.]
+Chatmodul für Sofortnachrichten und Gruppenunterhaltung, bietet Tabs und viele erweiterte Funktionen.
+[Use IRC style status indicators in the member list (@, %, + etc.)]
+Verwende IRC-ähnliche Statusanzeigen in der Nickliste (@, %, + usw.)
+[Create container/tab on highlight, if it's not available]
+Erstelle Container/Tab bei "Highlight", wenn noch nicht verfügbar
+[Disable animated GIF avatars (*)]
+Deaktiviere animierte GIF-Avatare (*)
+[Enable typing sounds (*)]
+Tipp-Klänge aktivieren (*)
+[Allow PASTE AND SEND feature (Ctrl-D)]
+'Einfügen und sofort senden'-Funktion aktivieren (Strg+D)
+[Events to show]
+Folgende Ereignisse anzeigen
+[You can select a private theme (.tabsrmm file) for this container which will then override the default message log theme.]
+Sie können ein anderes Theme (.tabsrmm-Datei) für diesen Container auswählen. Dieses überschreibt das Standard-Nachrichtenfenster-Theme.
+
+[Send later job list...]
+Später-Senden-Liste...
+
+; Unforce failed
+; The selected protocol cannot be forced at this time
+; will return parsed string %miranda_profile%\\Profiles\\%miranda_profilename%	 	
+; name of current miranda profile (filename, without extension)		
+; path to root miranda folder
+; path to current miranda profile	
+; nick of current contact (if defined)	 
+; protocol name of current contact (if defined). Account name is used when protocol supports multiaccounts		
+; UserID of current contact (if defined). It is like UIN Number for ICQ, JID for Jabber, etc.	
+; Send message on 'Enter'
+; Send message on double 'Enter'
+; Minimize the message window on send
+; Close the message window on send
+; Nick name
+; Unique Id --> Bleibt auch so
+; %s: Message Session (%u users)
+; Text color
+; &File
+; &Container ---> muss nicht uebersetzt werden, da Container ... weiterhin Container bleibt
+; >-------M-------<
+; Help
+; enabled
+; disabled
+; Contact
+; ...is typing a message.
+; ...has stopped typing.
+; Favorites
+; Notifications
+; Flashing
+; Title bar
+; Unknown event
+; No status message
+; %s is typing a message.
+; Typing Notification
+; %s has entered text.
+; Load theme
+; '(Unknown Contact)'
+; Today
+; Yesterday
+; Close session
+; Message from %s
+; Copy To Clipboard
+; Cancel
+; Other options
+; General options
+; General
+; File
+; Dismiss popup
+; Show headers
+; Settings
+; Tool bar
+; Message log
+; minutes
+; minute
+; &Message
+; Message
+; No word to look up
+; hours
+; hour
+; Select Folder
+; Variables
+; full month name
+; year with century, 1901-9999
+; year without century, 01-99
+; abbreviated month name
+; month number, 01-12
+; month number, 1-12
+; day of month, 01-31
+; day of month, 1-31
+; Always
+; ** Unknown contacts **
+; ** New contacts **
+; Default
+; Off
+; contact
+; No border
+; Server window
+; Incoming file
+; No description given
+; Removed
+; Last send info
+; Status
+; Transparency
+; Message text
+; Retry
+; %s    Idle: %dh,%02dm
+; Notice from %s: %s
+; %s kicked %s (%s)
+; %s has disconnected (%s)
+; %s has disconnected
+; %s has left
+; %s has joined
+; %s has joined %s
+; %s disables \'%s\' status for %s in %s
+; %s enables \'%s\' status for %s in %s
+; Topic change in %s
+; Notice from %s
+; %s kicked %s from %s
+; %s is now known as %s
+; %s speaks in %s
+; %s wants your attention in %s
+; The topic is \'%s\' (set by %s)
+; You are now known as %s
+; Look up \'%s\':
+; %s kicked %s
+; %s/SendNudge
+; Favorite Contacts
+; Setup Sidebar
+; Tahoma
+; TabSRMM Message log
+; TabSRMM - other

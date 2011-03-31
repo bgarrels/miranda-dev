@@ -1,0 +1,33 @@
+; Pluginname: SOMWO 
+; Version: 0.1.0.4
+; Dateiname: SOMWO.dll
+; Autor: Download123
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3083
+; Übersetzung: Download123 am 06.01.07
+
+[SOMWO]
+SOMWO
+[SOMWO Options]
+SOMWO Einstellungen
+[Url Event]
+URL
+[Message Event]
+Nachricht
+[Receive Status Message (ICQ)]
+Statusnachrichten eigenständig laden
+[Delete DB entries]
+Einträge wieder aus Verlauf löschen
+[Status Message Type:]
+Ereignistyp der Statusnachrichten:
+[Show X-Status-Symbol Tags (for Smileyadd)]
+Zeige XStatus-Icon Tags (benötigt SmileyAdd)
+[Show new Statusmsg on change]
+Zeige Statusnachricht beim Ändern erneut
+
+[X Status: ]
+XStatus: 
+[Statusmessage: ]
+Statusnachricht: 
+
+[Add the Satusmsg in a dialog if the window get opened/updated]
+Fügt die Statusnachricht in das Nachrichtenfesnster ein, wenn es geöffnet oder die Statusnachricht aktualisiert wird.

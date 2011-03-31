@@ -1,0 +1,33 @@
+; Pluginname: World Time
+; Version: 0.2.6.7
+; Dateiname: worldtime.dll, worldtimeproto.dll
+; Autor: sje
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1504
+; Übersetzung: Weishaupt am 28.09.06
+
+[Show/hide with contact list (*if set, show/hide menu item has no effect)]
+Zeige/Vers. mit Kontaktliste (*Wenn aktiviert hat Menüeintrag keinen Effekt)
+[Times]
+Zeitzonen
+[Format Date]
+Datumsformat,
+[and Time]
+Zeitformat
+[Hide main menu item (requires restart)]
+Menüeintrag verstecken (Neustart erforderlich)
+[Show Window]
+Fenster zeigen
+[Font size:]
+Schriftgröße:
+[Use the Customize/Fonts options to change text size and colour]
+Benutze die Option Customize/Schriftarten um Farbe und Größe zu ändern
+[Alphabetical]
+Alphabetisch
+[Geographical]
+Geographisch
+[Sunrise:]
+Sonnenaufgang
+[Sunset:]
+Sonnenuntergang
+[*Hide/Show World Time Window]
+*Zeige/Verstecke das World Time Fenster

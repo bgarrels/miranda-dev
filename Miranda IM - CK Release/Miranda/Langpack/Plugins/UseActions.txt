@@ -1,0 +1,40 @@
+; Pluginname: UseActions 
+; Version: 0.0.0.4
+; Dateiname: UseActions.dll 
+; Unique ID: {a63473f7-f8bf-46e7-9df0-042dbe4cf579}
+; Autor: vasilich (Igor Abakumov)
+; Link: http://vasilich.org/mim/UseActions.rar
+; Übersetzung: 0123hallo am 15 Juni 2008
+; Übersetzungen dürfen meistens nicht länger sein, als der englische Text!
+
+[This plugin makes use of actions, serviced by Actions Manager plugin (ActMan, by Awkward)]
+Diese Plugin ermöglicht es, Aktionen, die mit ActMan erstellt wurden, auszulösen.
+[TabButtonBar]
+TabSRMM-Button
+[The way actions could be called]
+Die Art, wie Aktionen ausgelöst werden
+[Main menu item]
+Hauptmenüeintrag
+[Root popup:]
+Unterpunkt:
+[Name through vars:]
+Dynamischer Name:
+[Contact menu item]
+Kontaktmenüeintrag
+[show only if variables return 1]
+Nur wenn Variable gleich 1
+[Tray menu item]
+Systemtraymenüeintrag
+[Core Hotkey]
+Core-Hotkey
+
+[Registered actions]
+Eingetragene Aktionen
+[Menu icons]
+Menüicons
+
+[No actions manager (ActMan) plugin found.\n\rYou can't use UseActions plugin without ActMan.\n\rUseActions will not be loaded.]
+Es wurde kein ActMan-Plugin gefunden.\n\rSie können UseActions-Plugin nicht ohne ActMan benutzen.\n\rUseActions wird nicht geladen.
+
+[separated]
+Trennlinie

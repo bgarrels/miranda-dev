@@ -1,0 +1,35 @@
+; Pluginname: Boltun 
+; Version: 0.0.2.0
+; Dateiname: boltun.dll
+; Autor: kasru
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=470
+; Übersetzung: 04.07.06 von Weishaupt
+; Besonderheiten: Entwicklung eingestellt!
+
+[Boltun/Auto Chat]
+Boltun/Automatisch Chatten
+[Boltun/Not to Chat]
+Boltun/Nicht Chatten
+
+[Boltun Autochat everybody]
+Boltun schreibt jeden an
+[Boltun Autochat anybody not in contact list]
+Boltun schreibt jeden der nicht in der Kontaktliste ist an
+[Boltun Autochat everybody while away]
+Boltun chattet solange du away bist
+[Warn contacts Boltun is chatting]
+Kontakte informieren, das Boltun chattet
+[Time of pauses before answer]
+Zeit der Pause bis zum antworten
+[Warning text]
+Boltun chattet Information
+[Base of remarks]
+Speicherort der Antworten
+
+[Boltun Error]
+Boltun Fehler
+[Can't load SmartBot.dll]
+Konnte SmartBot.dll nicht laden
+[Failed to load base of remarks from %s]
+Laden der Antworten aus %s fehlgeschlagen
+ 

@@ -1,0 +1,117 @@
+; Pluginname: New "Notes & Reminders"
+; Version: 0.0.4.5
+; Dateiname: newNR.dll
+; Autor: Joe@Whale
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2047
+; Übersetzung: 25.07.05 von mdg-webmaster
+; Besonderheiten: Entwicklung eingestellt!
+
+;Name In Options Page
+[Notes & Reminders]
+Notizen & Erinnerungen
+[Reminder Notify]
+Erinnerung anzeigen
+
+[Notes && Reminders]
+Notizen && Erinnerungen
+[&New Note]
+&Neue Notiz
+[&Show / Hide Notes]
+Zeige / Ver&stecke Notizen
+[&Delete All Notes]
+Alle Notizen löschen
+[&New Reminder]
+&Neue Erinnerung
+[&View Reminders]
+Zeige Erinnerungen
+[&Delete All Reminders]
+Alle Erinnerungen löschen
+
+[Sticky Notes]
+Wichtige Notiz
+[Remove Note]
+Lösche Notiz
+[Hide Note]
+Verstecke Notiz
+[Togle On Top]
+In den Vordergrund bringen
+[C&ut]
+A&usschneiden
+
+[&Add Reminder]
+Erinnerungen hinzufügen
+[Add Reminder]
+Erinnerung hinzufügen
+[Trigger On Time && Date:]
+Einstellen von Zeit && Datum:
+[Reminder Note:]
+Erinnerungsnotiz
+[Reoccurence]
+Wiederholung
+
+[Reminders List]
+Erinnerungsliste
+[Date of activation]
+Aktivierungsdatum
+[Reminder text]
+Erinnerungstext
+[Add New]
+Neue hinzufügen
+[Add New Reminder]
+Neue Erinnerung hinzufügen
+[Delete Reminder]
+Erinnerung löschen
+[Delete All Reminders]
+Ale Erinnerungen löschen
+
+[&Dismiss]
+verwerfen
+[Notify me Again in]
+Benachrichtige mich in
+[min.]
+Min.
+[After :]
+Nach :
+
+[Note Colors]
+Notizfarben
+[Note Caption Color]
+Notiz-Titelfarbe
+[Note Body Color]
+Notizfarbe
+[Note Fonts]
+Notizschriftart
+[Sample Text Caption]
+Beispiel Titeltext
+[Sample Text Body]
+Beispiel Notiztext
+[Pick Font for Caption]
+Titelschriftart wählen
+[Pick Font for Body]
+Notizschriftart wählen
+[Hot Keys]
+Hotkeys
+[New note Hot Key]
+Neuer Hotkey
+[Show/Hide Notes Hot Key]
+Verstecke/Zeige Notizkürzel
+[New Reminder Hot Key]
+Neues Erinnerungshotkey
+[Note Transparency (Windows 2K && XP)]
+Transparente Notiz (nur Windows 2k && XP)
+[Default Note Size]
+Standard-Notizgröße
+[Width (Pixels)]
+Breite (Pixel)
+[Height (Pixels)]
+Höhe (Pixel)
+[Startup options]
+Startoptionen
+[Show notes at startup]
+Zeige Notizen beim Start
+[Add Contact list menu items]
+Füge Kontaktlisteneintrag hinzu
+[Send Reminders through E-mail / SMS :]
+Erinnerungen durch E-Mail / SMS senden:
+[Show Scrollbars]
+Zeige Bildlaufleisten

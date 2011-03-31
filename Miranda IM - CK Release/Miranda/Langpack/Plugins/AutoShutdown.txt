@@ -1,0 +1,192 @@
+; Pluginname: AutoShutdown 
+; Version: 1.4.0.2
+; Dateiname: shutdown.dll
+; Autor: hrathh
+; http://addons.miranda-im.org/details.php?action=viewfile&id=1086
+; Übersetzung: hrathh
+; Besonderheiten: Entwicklung eingestellt!
+
+[AutoShutdown]
+Automatisches Beenden
+[Adds the possibility to shutdown the computer when a specified event occurs.]
+Dieses Plugin ermöglicht es den Computer, bei Eintreten festgelegter Ereignisse, zu Beenden.
+
+[Automatic &shutdown...]
+Automatisches &Beenden
+[Stop automatic &shutdown]
+Automatisches &Beenden abbrechen
+
+[Start/Stop automatic shutdown]
+Automatisches Beenden (de-)aktivieren
+[Start automatic shutdown]
+Automatisches Beenden aktivieren
+[Stop automatic shutdown]
+Automatisches Beenden deaktivieren
+
+[Automatic Shutdown Countdown]
+AutoBeenden-Countdown
+
+[Toggle Automatic Shutdown]
+Automatisches Beenden ein-/ausschalten
+
+[Automatic Shutdown]
+Automatisch beenden
+
+[Select the automatic shutdown event]
+Ein Ereignis zum automatischen Beenden wählen
+[Shutdown at &specific time]
+Beenden zur festgelegten &Zeit
+[Shutdown a&t:]
+Durchführen u&m:
+[Shutdown i&n:]
+Durchführen i&n:
+[Second(s)]
+Sekunden(n)
+[Minute(s)]
+Minute(n)
+[Hour(s)]
+Stunde(n)
+[Day(s)]
+Tage(n)
+[Week(s)]
+Woche(n)
+[Month(s)]
+Monat(en)
+[Shutdown when a &message is received containing the following text:]
+Beenden, wenn eine &Nachricht eingeht, die den folgenden Text enthält:
+[Shutdown when all &file transfers are finished]
+Beenden, wenn alle &Dateiübertragungen abgeschlossen sind
+[Shutdown when Miranda IM becomes &idle]
+Beenden, wenn Benutzer untätig w&ird
+[Shutdown when &prozessor usage is constantly less:]
+Beenden, wenn Prozessorauslastung konstant unter:
+[(current: %u%%)]
+(aktuell: %u%%)
+[Shutdown when all contacts are &offline]
+Beenden, wenn alle Kontakte &offline sind
+[&Action:]
+&Vorgang:
+[Close Miranda IM]
+Miranda IM schließen
+[Sets all Miranda IM protocols to offline and closes Miranda IM.]
+Setzt alle Netzwerkprotokolle auf "Offline" und beendet Miranda IM.
+[Set Miranda IM offline]
+Miranda IM offline schalten
+[Sets all Miranda IM protocols to offline.]
+Setzt alle Protokolle von Miranda IM auf offline.
+[Log off user]
+Benutzer abmelden
+[Logs the current Windows user off so that another user can log in.]
+Meldet den aktuellen Benutzer von Windows ab, so dass sich ein anderer Benutzer anmelden kann.
+[Restart computer]
+Computer neu starten
+[Shuts down Windows and then restarts Windows.]
+Beendet die Windowssitzung und Windows und startet dann Windows erneut.
+[Shutdown computer]
+Computer herunterfahren
+[Closes all running programs and shuts down Windows to a point at which it is safe to turn off the power.]
+Beendet die Windowssitzung und fährt den Computer herunter. Der Computer wird ausgeschaltet.
+[Standby mode]
+Standbymodus
+[Saves the current Windows session in memory and sets the system to suspend mode.]
+Behält die Windowssitzung bei, speichert die Daten im Arbeitsspeicher und schaltet den Computer in den Energiesparmodus.
+[Hibernate mode]
+Ruhezustand
+[Saves the current Windows session on harddisc, so that the power can be turned off.]
+Speichert die Windowssitzung auf der Festplatte, so dass der Computer ausgeschaltet werden kann.
+[Locks the computer. To unlock the computer, you must log in.]
+Verriegelt den Computer gegen Zugriff. Um den Computer wieder zu entriegeln müssen Sie sich erneut anmelden.
+[Hang up dialup connections]
+DFÜ-Verbindungen trennen
+[Sets all protocols to offline and closes all RAS connections.]
+Setzt alle Netzwerkprotokolle auf "offline" und trennt alle aktiven DFÜ-Netzwerkverbindungen.
+
+[Confirmation Dialog]
+Bestätigung
+[&Show confirmation dialog before shutdown]
+&Bestätigungsfenster vor dem Beenden anzeigen
+[&Countdown starts at:]
+Countdown beginnt bei:
+[Setting Remembering]
+Aktivierung merken
+[Shutdown Events]
+Ereignisse beim Herunterfahren
+[&Activate automatic shutdown with the same settings again if Miranda IM was closed with automatic shutdown enabled]
+&Automatisches Beenden mit den gleichen Einstellungen erneut aktivieren, wenn Miranda IM beendet wurde, während dieser aktiviert war
+[&Ignore hidden and temporary contacts when watching for all contacts being offline]
+&Ignoriere versteckte und temporäre Kontakte bei der Beobachtung, ob alle Kontakte offline sind
+[&Ignore hidden or temporary contacts when watching for all contacts being offline]
+&Ignoriere versteckte und temporäre Kontakte bei der Beobachtung, ob alle Kontakte offline sind
+[Critical Shutdown Events]
+Kritische Ereignisse
+[Automatically shutdown the computer and turn off the power when one of the following occurs:]
+Automatisch den PC herunterfahren und ausschalten, falls folgendes passiert:
+[&Thunderstorm warning is issued  (Weather)]
+&Gewitterwarnung ist aktiv (Wetterplugin)
+[&Harddrive overheats (HDD Info)]
+Festplatte überhitzt (HDD-Info)
+
+[Shutdown: Close Miranda IM]
+Herunterfahren: Miranda IM schließen
+[Shutdown: Set Miranda IM offline]
+Herunterfahren: Miranda IM offline schalten
+[Shutdown: Log off user]
+Herunterfahren: Abmelden
+[Shutdown: Restart computer]
+Herunterfahren: Neustart
+[Shutdown: Shutdown computer]
+Herunterfahren: Computer ausschalten
+[Shutdown: Standby mode]
+Herunterfahren: Standbymodus
+[Shutdown: Hibernate mode]
+Herunterfahren: Ruhezustand
+[Shutdown: Lock workstation]
+Herunterfahren: Arbeitsplatz verriegeln
+[Shutdown: Hang up dialup connections]
+Herunterfahren: DFÜ-Verbindungen trennen
+
+[Miranda IM is going to be automatically closed in %i second(s).]
+Miranda IM wird in %i Sekunde(n) automatisch geschlossen.
+[You will be logged off automatically in %i second(s).]
+Der Benutzer wird in %i Sekunde(n) automatisch abgemeldet.
+[The computer will automatically be restarted in %i second(s).]
+Der Computer wird in %i Sekunde(n) automatisch neu gestartet.
+[The computer will automatically be set to standby mode in %i second(s).]
+Der Computer wird in %i Sekunde(n) automatisch in den Standbymodus geschaltet.
+[The computer will automatically be set to hibernate mode in %i second(s).]
+Der Computer wird in %i Sekunde(n) automatisch in den Ruhezustand geschaltet.
+[The workstation will automatically get locked in %i second(s).]
+Der Arbeitsplatz wird in %i Sekunde(n) automatisch verriegelt.
+[The computer will automatically be shut down in %i second(s).]
+Der Computer wird in %i Sekunde(n) automatisch heruntergefahren.
+[All dialup connections will be closed in %i second(s).]
+Alle aktiven DFÜ-Netzwerkverbindungen werden in %i Sekunde(n) automatisch getrennt.
+[Unsaved data in open applications except Miranda IM might get lost.]
+Ungespeicherte Daten in geöffneten Anwendungen außer Miranda IM könnten verloren gehen.
+[Please click "Cancel" if you would like to abort the process.]
+Bitte auf "Abbrechen" klicken, wenn der Vorgang nicht durchgeführt werden soll. 
+[&Now!]
+&Sofort!
+
+[Time left:]
+Verbleibende Zeit:
+[Shutdown at:]
+Beenden um:
+[Paused]
+Pause
+[&Cancel Countdown]
+Countdown &abbrechen
+[&Pause Countdown]
+Countdown &pausieren
+[&Unpause Countdown]
+Countdown &fortsetzen
+
+[Automatic Shutdown Error]
+AutoBeenden-Fehler
+[Inititiating the shutdown process failed!]
+Das Beenden konnte nicht initiiert werden!
+
+[Countdown on Frame]
+Anzeige in der Kontaktliste
+[Progress Bar]
+Fortschrittsanzeige

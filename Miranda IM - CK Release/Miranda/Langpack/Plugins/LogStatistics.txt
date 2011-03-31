@@ -1,0 +1,113 @@
+; Pluginname: LogStatistics 
+; Version: 0.1.1.3
+; Dateiname: logstat.dll
+; Joel Johnsson a.k.a. superjoel
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=646
+; Übersetzung: 10.08.2005 von Arne
+
+[Log Statistics]
+Verlaufstatistik
+
+[How many "most common words" should be printed]
+Wie viele meist verwandter Wörter ausgegeben werden sollen
+[Your nickname (in the exported history)]
+Ihr Nickname (im exportierten Verlauf)
+[Time format (in the\nexported history)]
+Zeitformat (im \nexportierten Verlauf)
+[LETTERS]
+BUCHSTABEN
+[letters]
+buchstaben
+[E&xplanation]
+E&rklärung
+[Ignore these words in the wordlist]
+Ignoriere diese Wörter
+[A&dd]
+Zufügen
+[Ignore words with this lenght\nor less (0 to disable)]
+Ignoriere Wörter mit dieser Länge\noder weniger (0 zum Deaktivieren)
+[Ignore messages older than n days (0 to disable)]
+Ignoriere Nachrichten älter als n Tage (0 zum Deaktivieren)
+[Run Log Statistics on startup]
+Verlaufstatistik beim Start starten
+[Have Log Statistics in the Main Menu (Must restart Miranda to delete menus)]
+Verlaufstatistik im Hauptmenü (Miranda neu starten, damit Änderung wirksam wird)
+[Open output after run]
+Öffne Ausgabe nach Durchführung
+[Read history from database (recomnended)]
+Lese Verlauf aus der Profildatei (empfohlen)
+[Read exported history]
+Lese exportierten Verlauf
+[&Run Log Statistics]
+&Starte Verlaufstatistik
+[StyleSheet]
+Stylesheet
+
+[%Y: year (4 digits)\n%y: year (2 digits)\n%m: month\n%d: day\n%H: hours (24h)\n%M: minutes\n%S: seconds\n%p: AM/PM]
+%Y: Jahr (4 Ziffern)\n%y: Jahr (2 Ziffern)\n%m: Monat\n%d: Tag\n%H: Stunden (24h)\n%M: Minuten\n%S: Sekunden\n%p: AM/PM
+[Time Variables]
+Zeitvariablen
+[0 Nick\n1 # Bytes\n2 % Bytes sent\n3 % Bytes recieved\n4 # Chats\n5 % Chats started\n6 % Chats not started\n7 Most common words\n8 When]
+0 Nick\n1 # Bytes\n2 % Bytes gesendet\n3 % Bytes empfangen\n4 # Sitzungen\n5 % Sitzungen begonnen\n6 % Sitzungen nicht begonnen\n7 Meistbenutze Wörter\n8 Wann
+[Column Variables]
+Spaltenvariablen
+[All letters not in these two lines are considered as whitespaces.\nWrite uppercase letters in the LETTER-line and lowercase in the letter-line.\nIf the first character in the LETTER-line is A, then the first in the letter-line must be a, B->b, ...\nIf you type a number or any other character which doesn't exist as both upper- and lowercase type the same in both lines.]
+Alle nicht angegebenen Buchstaben werden als Leerzeichen angesehen.\nSchreiben Sie Großschrift in der BUCHSTABEN-Zeile und Kleinschrift in der Buchstaben-Zeile.\nFalls das erste Zeichen in der BUCHSTABEN-Linie A ist, dann muss das erste Zeichen in der Buchstaben-Linie a sein, B->b, ...\nFalls Sie eine Zahl oder einen Buchstaben, der nicht als Groß- und Kleinschrift existiert, verwenden wollen, dann schreiben Sie das gleiche in beiden Zeilen.
+[Letters]
+Buchstaben
+[Log Statistics is already running]
+Verlaufstatistik läuft bereits
+[You have unsaved settings\nDo you want to save before running Log Statistics?]
+Sie haben ungespeicherte Einstellungen.\nWollen Sie sie speichern, bevor Verlaufstatistik gestartet wird?
+[The timeformat can't end with a %-character]
+Das Zeitformat darf nicht mit einem %-Zeichen enden
+
+[&Log Statistics]
+Ver&laufstatistik
+[&Create Statistics]
+&Erstelle Statistik
+[&Show Statistics]
+&Zeige Statistik
+
+[Log Statistics - Working...]
+Verlaufstatistik - arbeitet...
+[Creating %s]
+Erstelle %s
+
+[Error in %s on line %d.\nCould not separate nickname and time.\nSkipping this file...]
+Fehler in %s in Zeile %d.\nKonnte Nickname und Zeit nicht trennen.\nÜberspringe diese Datei...
+[Error in %s on line %d.\nFound a message thas sent at this hour: %d\nMaybe you have wrong time format.\nSkipping this file...]
+Fehler in %s in Zeile %d.\nFand eine Nachricht, die zu dieser Stunde: %d gesendet wurde\nVielleicht haben Sie ein falsches Zeitformat.\nÜberspringe diese Datei...
+[Could not find MsgExportDir in database.]
+Konnte MsgExportDir in Profildatei nicht finden.
+[Could not find %s]
+Konnte %s nicht finden
+[big bug error :-(]
+Großer Fehler :-(
+
+[<html><head><title>Log Statistics for %s</title><style>%s</style></head><body><h1>Log Statistics for %s's %d friends</h1><hr>]
+<html><head><title>Statistik für %s</title><style>%s</style></head><body><h1>Statistik für %ss %d Freunde</h1><hr>
+[<th>Nick</th>]
+<th>Nickname</th>
+[<th width=55>Sent</th>]
+<th width=55>Gesendet</th>
+[<th width=55>Received</th>]
+<th width=55>Empfangen</th>
+[<th width=65># Chats</th>]
+<th width=65># Sitzungen</th>
+[<th width=55>Me started</th>]
+<th width=55>Ich begann</th>
+[<th width=55>Not me</th>]
+<th width=55>Nicht ich</th>
+[<th>Most common words</th>]
+<th>Meist verwandte Wörter</th>
+[<th>When</th>]
+<th>Wann</th>
+[<td><span title='First message: %sLast message: %s'>%s</span></td>]
+<td><span title='Erste Nachricht: %sLetzte Nachricht: %s'>%s</span></td>
+[<th><span title='First message: %s (%s)\nLast message: %s (%s)'>Total</span></th>]
+<th><span title='Erste Nachricht: %s (%s)\nLetzte Nachricht: %s (%s)'>Gesamt</span></th>
+[</table><br>Created %s</body></html>]
+</table><br>Erstellt %s</body></html>
+[<!This file was generated in %d seconds>]
+<!Diese Datei wurde in %d Sekunden erstellt>

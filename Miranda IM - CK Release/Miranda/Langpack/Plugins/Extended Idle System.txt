@@ -1,0 +1,31 @@
+; Pluginname: Extended Idle System 
+; Version: 0.5.0.0
+; Dateiname: ExtendedIdle.dll
+; Autor: Joe Kucera alias Joe@Whale
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1688
+; ‹bersetzung: 19.07.05 von andydu
+
+[Extended Idle]
+Erweiterte Inaktivit‰t
+[Go to Idle after]
+Inaktiv werden nach
+[Go to Idle when in Away or N/A mode.]
+Inaktiv werden, wenn Status 'Abwesend' oder 'Auﬂer Haus'
+[Idle-Status Messages]
+Inaktivit‰ts-Statusnachrichten
+[Keep Idle as private, i.e. do not let protocols report it.]
+Senden der Inaktivit‰t durch die Protokolle deaktivieren
+[Keep it]
+Beibehalten
+[Set Away mode after]
+'Abwesend'-Status nach
+[Set Away mode when a terminal session is disconnected]
+Inaktiv werden bei Trennung der Terminalsitzung
+[Set Away mode when screen saver engages]
+Inaktiv werden beim Start des Bildschirmschoners
+[Set Away mode when the computer is locked (2000/XP+ only)]
+Inaktiv werden bei Sperrung des Computers (nur 2000/XP+)
+[Set N/A mode after]
+'Auﬂer Haus'-Status nach
+[Use the same message as Away message]
+Benutze aktuelle Statusnachricht als Abwesenheitsnachricht

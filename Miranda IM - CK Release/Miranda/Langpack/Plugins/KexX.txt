@@ -1,0 +1,87 @@
+; Pluginname: KexX 
+; Version: 0.0.1.3
+; Dateiname: KexX.dll
+; Autor: Michael "Protogenes" Kunz
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3041
+; Übersetzung: 16.08.06 von Protogenes
+; Besonderheiten: Entwicklung eingestellt!
+
+[%s: Your version is newer than this of the opponent. He/She was advised to install the newest version. Try again after this.]
+%s: Ihre Version ist neuer als die des Gegners. Er/Sie wurde angewiesen die neueste Version zu installieren. Versuchen Sie es dann erneut.
+; Version is getting old: %s is the link
+[%0:s: Your version is older than this of the opponent. Please install newest version from %1:s]
+%0:s: Ihre Version ist älter als die des Gegners. Bitte installieren sie die neueste Version von %1:s
+
+[Play KexX]
+KexX spielen
+
+; Request Dialog
+;Title bar: %s game name "KexX"
+[%s - Game Request]
+%s - Einladung
+; Buttons
+[Playfield Size]
+Spielfeldgröße
+[Send Request]
+Einladung senden
+; Label %g Count
+[Field Count: %g]
+Felderzahl: %g
+
+[Sending game request...]
+Sende Einladung...
+[Request sent. waiting for answer...]
+Einladung gesendet. Warte auf Antwort...
+[game start]
+Spiel startet
+[game rejected]
+Spiel abgelehnt
+[Timeout. Trying again...]
+Zeitüberschreitung. Versuche es erneut...
+
+;hint on tray icon: %0:s user name, %1:s game name "KexX"
+[%0:s wants to play %1:s]
+%0:s lädt sie zu einer Runde %1:s ein
+;accept question: first param user name, 2nd game name "KexX", 3,4,5 Field sizes... may be swapped and accessed with %0:s, %1:s or %2:d
+[%0:s has invited you to play %1:s with him/her on a %2:dx%dx%d sized field.\nDo you want to accept?]
+%0:s hat Sie zu einer Runde %1:s auf einem Spielfeld der Größe %2:dx%dx%d eingeladen.\nMöchten Sie annehmen?
+;Titel: %s game name "KexX"
+[%s - Game request]
+%s - Einladung
+;second question
+[Do you want to do the first move?]
+Möchten Sie den ersten Zug machen?
+;titel: %s game name "KexX"
+[%s - starting Player]
+%s - beginnender Spieler
+[Sending the answer...]
+Sende die Antwort...
+[Sending move...]
+Sende Zug...
+[Recieved Move. Your turn.]
+Zug empfangen. Ihr Zug.
+[Move sent. opponents turn...]
+Zug gesendet. Zug des Gegners...
+;%d retry counter
+[Timeout - Trying again (%d)]
+Zeitüberschreitung - Versuche es erneut (%d)
+[Timeout - failed to send]
+Zeitüberschreitung - Senden fehlgeschlagen
+[Sending quit]
+Sende Ende
+[Game started. your turn]
+Spiel gestartet. Ihr Zug
+[Game started. opponents turn]
+Spiel gestartet. Zug des Gegners
+[Game end]
+Spielende
+[You have won!]
+Sie haben gewonnen!
+[You have lost!]
+Sie haben verloren!
+[Game end. You have won!]
+Spielende. Sie haben gewonnen!
+[Game end. You have lost!]
+Spielende. Sie haben verloren.
+[The opponent closed the game.]
+Der Gegner hat das Spiel geschlossen.

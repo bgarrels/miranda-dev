@@ -1,0 +1,12 @@
+; Pluginname: Roamie
+; Version: 0.6.3000.909
+; Dateiname(n): dbx_Roamie.dll, dbx_Roamie.master.dll
+; Autor: virtuoso
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3478
+; Eng. Forum: http://forums.miranda-im.org/showthread.php?t=8772
+; Homepage: http://virtuosity.aspone.cz/MirandaDev/Roamie
+; Unique ID: {f7a6b27c-9d9c-4a42-be86-a448ae109161}
+; Übersetzung: 13.09.2010 von CHEF-KOCH
+
+
+;Source muss ich mir noch schnorren ....

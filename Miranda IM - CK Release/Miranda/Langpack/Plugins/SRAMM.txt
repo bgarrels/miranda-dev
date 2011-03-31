@@ -1,0 +1,72 @@
+; Pluginname: SRAMM 
+; Version: 1.0.2.0
+; Dateiname: sramm.dll 
+; Autor: Bio
+; Link: http://etplanet.com/bio/miranda/
+; Übersetzung: 27.06.05 von ANdyDU
+
+; Pluginname: CactusSRAMM 
+; Version: 1.2
+; Autor: Vampyre
+; Link: http://miranda.cactus-world.net/
+
+[Pop up minimized]
+Minimiert aufpoppen
+[Don't steal focus on window pop up]
+Den Fensterfokus nicht bei Popups nehmen
+[Show status icon in caption]
+Statusicon im Titel anzeigen
+[Show 'Read Next' button]
+'Nächste'-Button anzeigen
+[Move some buttons to right]
+Einige Buttons nach rechts schieben
+[Save typed text on window close]
+Text beim Fensterschließen speichern
+[Save typed text on exit]
+Text beim Beenden speichern
+[Flash opened windows till activation]
+Blinke offenes Fenster bis zur Aktivierung
+[Flash only caption icon]
+Blinke nur Titelicon
+
+[Show direction marks]
+Richtungspfeile anzeigen
+[Show nicks before time]
+Nick vor Zeit anzeigen
+[Show events from new line]
+Ereignisse in neuer Zeile anzeigen
+[Always scroll to bottom]
+Immer nach unten blättern
+[Indent text by]
+Text einrücken um
+
+[Display Time in Message Log]
+Zeit im Nachrichtenverlauf anzeigen
+[Send Message to Multiple Users]
+Nachricht an mehrere Benutzern senden
+[Send BB Codes]
+BB-Codes senden
+[Send RTF Messages]
+RTF-Nachrichten senden
+[Color Correction]
+Farbkorrekturen
+[Log Color Correction]
+Log-Nachrichten
+[Message Color Correction]
+Nachrichten
+;[Split Mode]
+;[Single Mode]
+[Show userinfo]
+Benutzerinfo anzeigen
+[Send message on Enter]
+'Enter' sendet Nachricht
+[Use IEView (future use)]
+IEView benutzen (für die Zukunft)
+[Show 'Quote' button]
+'Zitat'-Button anzeigen
+[Minimize the window on clicking 'Send']
+Fenster minieren, wenn auf Senden geklickt
+[Close the window on clicking 'Send']
+Fenster schließen, wenn auf Senden geklickt
+[Message Mode]
+Nachricht-Modus

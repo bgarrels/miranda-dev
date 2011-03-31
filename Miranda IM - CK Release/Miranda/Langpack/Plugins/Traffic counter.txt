@@ -1,0 +1,200 @@
+; Pluginname: Traffic counter 
+; Version: 0.1.1.5
+; Dateiname: TrafficCounter.dll
+; Autor: ghost_by
+; Unique ID: {82181510-5dfa-49d7-b469-33871e2ae8b5}
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=844
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3803
+; Übersetzung: 24.06.05 von Lastwebpage
+
+[Toggle traffic counter]
+Traffic Counter zeigen
+[Total traffic]
+Insgesamter Traffic
+[Traffic Counter plugin]
+Traffic Counter Plugin
+[Contact list plugin do not support frames.]
+Ihr Kontaktlistenplugin unterstützt keine Frames.
+[Total online]
+Insgesamt Online
+[Current online]
+Aktuell Online
+[Current traffic]
+Aktueller Traffic
+[Hide now]
+Jetzt verstecken
+[Show now]
+Jetzt anzeigen
+[Now traffic will be cleared. Are you sure?]
+Trafficstatistik wird gelöscht. Sind Sie sich sicher?
+[Traffic counter]
+Traffic Counter
+[Show/Hide traffic window]
+zeige/verst. Trafficfenster
+[Hide traffic window]
+verstecke Trafficfenster
+[Clear the current (Now:) value]
+Lösche aktuellen Wert
+[Draw traffic in kilobytes]
+Zeige Traffic in Kilobytes
+[Draw last clear time]
+Zeige letzte Löschzeit
+[Traffic counter test]
+Trafficcounter-Testpopup
+[Draw frame as skin element]
+Zeichne Frame als Skin-Element
+[\"Toggle traffic counter\" in main menu]
+"Traffic Counter zeigen" im Hauptmenü
+[Summary traffic for visible accounts]
+Zusammenfassung für den Verkehr für sichtbar Konten
+[Overall traffic]
+Gesamter Verkehr
+[Account counters format string:]
+Konto Zähler Format-String:
+[Overall counter format string:]
+Insgesamter Zähler Format-String:
+[Tooltip format string:]
+Tooltip Format-String:
+[Display traffic for current]
+Zeige Traffic für aktuellen
+[Clear statistics]
+Lösche Statistiken
+[Selected totals]
+Ausgewä. Summen
+[Now traffic statistics for selected accounts will be cleared.\nContinue?]
+Der aktuelle Traffic für den ausgewählten Account wird gelöscht.\nWeitermachen?
+[Period]
+Periode
+[Sum]
+Summe
+[Couldn't read statistics file]
+Konnte die Statistikdatei nicht lesen
+[Hourly]
+Stündlich
+[%d bytes recv%c%d bytes send]
+%d Bytes empfangen%c%d Bytes gesendet
+[%dk bytes recv%c%dk bytes send]
+%dk Bytes empfangen%c%dk Bytes gesendet
+[%d bytes send]
+%d Bytes gesendet
+[%dk bytes send]
+%dk Bytes gesendet
+[%d bytes recv]
+%d Bytes empfangen
+[%dk bytes recv]
+%dk Bytes empfangen
+[Traffic counter options]
+Trafficcounter-Optionen
+[Show/Hide traffic window:]
+zeige/verst. Trafficfenster
+[Traffic statistics]
+Trafficstatistik
+[Last clear date:]
+letzt. Löschdatum:
+[Show on traffic window last clear date]
+Zeige letztes Löschdatum im Trafficfenster
+[Automaticaly clear traffic every:]
+Traffic autom. löschen jede(n):
+[Day]
+Tag
+[Week]
+Woche
+[Month]
+Monat
+[Don't show clear question]
+Keine Bestätigung
+[Traffic window background color:]
+Trafficfenster-Hintergrund:
+[Traffic window font color:]
+Trafficfenster-Textfarbe:
+[Draw border around window]
+Rahmen zeichnen
+[Transparent traffic window]
+Transparenz Trafficfenster
+[Show/hide traffic window together with contact list]
+zeige/verst. Trafficfenster zusammen mit der Kontaktliste 
+[Always on top (only if multiwindow is off)]
+Immer im Vordergrund (nur, wenn Kontaktlistenelemente aus)
+[Show traffic in kilobytes]
+Zeige Traffic in Kilobyte
+[Use multiwindow]
+Verwende Kontaktlistenelemente 
+[Minimize traffic window size (only if multiwindow is on)]
+Nur aktuellen Wert (Now) im Trafficfenster anzeigen
+[Select protocols]
+Protokoll Auswahl
+[You will need to restart miranda for the changes you have made to take effect.]
+Änderungen werden erst nach einem Neustart von Miranda übernommen.
+[Clear traffic now]
+Traffic jetzt löschen
+[Traffic counter expert options]
+Trafficcounter: erweiterte Optionen
+["Show/Hide traffic" in main menu]
+"zeige/verst. Trafficfenster" im Hauptmenü
+["Show/Hide time" in main menu]
+"zeige/verst. Zeitcounterfenster" im Hauptmenü
+[Show tooltip in traffic window]
+Zeige Tooltips im Trafficfenster
+[Notify me on every]
+Anzeige bei allen
+[kilobytes]
+Kilobyte
+[Popup timeout]
+Popup Anzeigedauer
+;time counter dialog page
+[Time counter]
+Zeitcounter
+[Options just as Traffic counter]
+Optionen wie Trafficcounter
+[Show/Hide time window]
+zeige/verst. Zeitcounter-Fenster
+[Show/Hide time window:]
+zeige/verst. Zeitcounter-Fenster:
+[Time window background color:]
+Zeitcounter-Hintergrundfarbe:
+[Time window font color:]
+Zeitcounter-Textfarbe:
+[Show ICQ x-status icon]
+ICQ-XStatus-Icon anzeigen
+[Show/hide time window together with contact list]
+zeige/verst. Zeitcounter-Fenster zusammen mit Kontaktliste
+[Hide time window]
+Verstecke Zeitcounter-Fenster
+[Reset time]
+Zeit zurücksetzen
+;traffic counter window and tooltip
+[Now:]
+Aktuell:
+[%d total bytes send, %d total bytes recv%c%d bytes send now, %d bytes recv now%cLast clear date: %s]
+%d Bytes insgesamt gesendet, %d Bytes insgesamt empfangen%c%d Bytes aktuell empfangen, %d Bytes aktuell gesendet%cLetztes Löschdatum: %s
+[Time counter options]
+Zeitcounter-Optionen
+[Transparent time window]
+Tranzparenz Zeitcounter
+[Show/hide traffic window together with contact list (only if multiwindow is off)]
+Zeige/Verstecke Trafficfenster zusammen mit der Kontaktliste (nur, wenn Kontaktlistenelemente aus)
+[Show/hide time window together with contact list (only if multiwindow is off)]
+Zeige/Verstecke Timefenster zusammen mit der Kontaktliste (nur, wenn Kontaktlistenelemente aus)
+[Last clear date format:]
+Formatangabe Löschdatum:
+[Last clear date format string:]
+Formatangabe Löschdatum:
+[Fixed line height]
+Feste Zeilenhöhe (Schriftartabhängig)
+[Line height:]
+Zeilenhöhe:
+[Space between lines:]
+Zeilenabstand:
+[Last clear date alignment:]
+Ausrichtung Löschdatum:
+[Draw line above last clear date]
+Linie über Löschdatum zeichnen
+[Show size in:]
+Zeige Größe in:
+[kbytes]
+Kilobytes
+[mbytes]
+Megabyte
+[dynamic]
+dynamisch
+

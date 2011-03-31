@@ -1,0 +1,64 @@
+; Pluginname: Quick Contacts 
+; Version: 1.0.0.0
+; Dateiname: quickcontacts.dll, quickcontactsw.dll
+; Autor: micron-x, Pescuma
+; Link ANSI: http://addons.miranda-im.org/details.php?action=viewfile&id=2903
+; Link Unicode: http://addons.miranda-im.org/details.php?action=viewfile&id=2904
+; Übersetzung: 09.07.06 von Dober
+
+[Quick Contacts]
+Schnellkontakte
+[Open contact-specific windows by hotkey]
+Öffnet kontaktspezifische Fenster per Hotkey
+
+[Open dialog]
+Dialog öffnen
+[Show dialog to select contact]
+Zeige Fenster zum Wählen von Kontakt
+[Make a voice call]
+Sprachanruf durchführen
+[Open userinfo]
+Benutzerprofil öffnen
+[Send URL]
+URL senden
+[Quick Contacts...]
+Schnellkontakte...
+
+[Enter username:]
+Namen eingeben:
+[Show all contacts (Ctrl+A)]
+Alle Kontakte anzeigen (Strg+A)
+
+[Send file (Ctrl+F)]
+Datei senden (Strg+F)
+[Send URL (Ctrl+U)]
+URL senden (Strg+U)
+[Open userinfo (Ctrl+I)]
+Kontaktprofil öffnen (Strg+I)
+[Open history (Ctrl+H)]
+Verlauf öffnen (Strg+H)
+[Open contact menu (Ctrl+M)]
+Kontaktmenü öffnen (Strg+M)
+
+[Last Sent]
+Zuletzt gesendet
+[Enable last-sent-to]
+"Zuletzt gesendet" aktivieren
+[recognize all messages sent]
+Berücksichtige alle gesendeten Nachrichten
+[recognize messages sent with hotkey only]
+Berücksichtige nur mit Hotkey gesendete Nachrichten
+[Show offline contacts on these protocols:]
+Zeige Offline-Kontakte von folgenden Protokollen an:
+[But hide them if protocol is offline]
+Aber blende sie aus, falls Protokoll offline
+[Append group name to contact name]
+Gruppennamen an Kontakt anhängen
+[But show it as a column ...]
+aber als Spalte anzeigen ...
+[... on left side of name]
+... auf der linken Seite des Namens
+[Hide subcontacts]
+Unterkontakte verstecken
+[But keep subcontacts of protocols in above list if meta is hidden]
+Aber Unterkont. des Prot. in Liste lassen, wenn Metakont. verst. ist

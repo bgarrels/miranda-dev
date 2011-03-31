@@ -1,0 +1,58 @@
+; Pluginname: Birthday reminder 
+; Version: 0.3.1.4
+; Dateiname: Birthday.dll
+; Autor: Alexander Abramets
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1194
+; Übersetzung: 28.06.05 von flower
+
+[not implemented yet]
+noch nicht implementiert
+[%s has birthday today]
+%s hat heute Geburtstag
+[today]
+heute
+[in %d days]
+in %d Tagen
+[has birthday %s.\n%s becomes %d years old.]
+hat %s Geburtstag.\n%s wird %d Jahre alt.
+[%s has birthday %s.\n%s becomes %d years old.]
+%s hat %s Geburtstag.\n%s wird %d Jahre alt.
+[No birthdays]
+Keine Geburtstage
+[to remind about]
+erinnern von
+[Custom colors]
+Eigene Farben
+[Notify me every]
+Erinnere alle
+[Hide popup]
+Popup verstecken
+[Leave popup]
+Popup halten
+[Message dialog]
+Nachrichtendialog
+[Choose contact to edit settings:]
+Kontakt wählen um Einst. zu editieren
+[Remind]
+Erinnere
+[days earlier]
+Tage früher
+[Show messagebox]
+Nachricht zeigen
+[Disable (do not notify)]
+deaktivieren (kein Hinweis)
+[Get from database]
+Aus Daten ermitteln
+[Source:]
+Quelle:
+[Show main menu item (restart needed)]
+Hauptmenüeintrag zeigen (Neustart nötig)
+[Remind once a day]
+Einmal am Tag erinnern
+;Contact options when empty
+[Contact options]
+Kontaktoptionen
+[Contact options (%s)]
+Kontaktoptionen (%s)
+[Notifies you when your buddy has a birthday. It is activated some days earlier]
+Erinnert an einen Geburtstag eines Kontaktes aus der Liste ein paar Tage vorher

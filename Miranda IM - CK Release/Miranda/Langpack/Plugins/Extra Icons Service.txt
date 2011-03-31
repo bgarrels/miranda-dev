@@ -1,0 +1,18 @@
+; Pluginname: Extra Icons Service 
+; Version(en): 0.2.5.0 (offiziell) & 0.2.5.1 (inoffiziell)
+; Dateiname: extraicons.dll
+; Unique ID: {112f7d30-cd19-4c74-a03b-bfbb76b75bc4}
+; Autor: Pescuma
+; Link: http://forums.miranda-im.org/showthread.php?t=21365
+; Übersetzung: 15.04.09 von Baschti
+; Besonderheiten: Entwicklung eingestellt!
+
+[Select the extra icons to be shown in the contact list:]
+Wählen Sie die Extraicons aus, welche in der Kontaktliste angezeigt werden sollen:
+[* only the first %d icons will be shown]
+Hinweis: Nur die ersten %d Icons werden angezeigt!
+[Ungroup]
+Gruppierung aufheben
+[You can group/ungroup icons by selecting then (CTRL+left click) and using the popup menu (right click)]
+Wählen Sie mehrere Elemente mit gedrückter SHIFT- oder STRG-Taste aus. Drücken Sie anschließend die rechte Maustaste, um die ausgewählten Elemente zu gruppieren.
+ 

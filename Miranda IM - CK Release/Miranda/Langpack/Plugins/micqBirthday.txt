@@ -1,0 +1,60 @@
+; Pluginname: micqBirthday 
+; Version: 0.3.4.0
+; Dateiname: micqbirthday.dll
+; Autor: Petio Tonev
+; http://addons.miranda-im.org/details.php?action=viewfile&id=201
+; Übersetzung: 21.07.05 von andydu
+; Besonderheiten: Entwicklung eingestellt!
+
+[&Birthday List]
+&Geburtstagsliste
+[UNI]
+UIN
+[Views]
+Anzeige
+[Show &all birthday dates]
+Alle Geburtstage &anzeigen
+[Show only d&isabled birthday dates]
+Nur deakt&ivierte Geburtstage anzeigen
+[Show &during the next]
+nur &die nächsten zeigen
+[&Never pops up automatically on startup]
+Beim Starten &nie automatisch anzeigen
+[Never pops up automatically on &midnight]
+Nie auto&matisch um Mitternacht anzeigen
+[&e-mail]
+&E-Mail
+[User &Birthday]
+&Geburstag
+[D&isable Birthday]
+Geburtstag deakt&ivieren
+[%s birthday]
+%s Geburtstag
+[Use &standard birthday (from contact list data)]
+&Geburtstag aus dem Kontaktprofil übernehmen
+[Set c&ustom birthday (if standard is not available)]
+Geburtstag selbst an&geben
+[D&isabled birthday (do not show it in birthday list)]
+Geburtstag deaktiv&iert (keine Anzeige in der Liste)
+[Notify &during the next]
+Mel&de innerhalb der nächsten
+[&Year]
+Jah&r
+[&Month]
+&Monat
+[&Day]
+&Tag
+;[&OK]
+[%s has birthday]
+%s hat Geburtstag
+[Birthday alert]
+Geburtstagsalarm
+[Birthday reminder...]
+Geburtstagserinnerung...
+[Disable &birthday notification]
+&Geburtstagserinnerung abschalten
+[Enable &birthday notification]
+&Geburtstagserinnerung einschalten
+
+[Notifies you few days earlier when someone from your contact list has a birthday.]
+Informiert dich ein paar Tage bevor jemand auf deiner Kontaktliste Geburtstag hat.

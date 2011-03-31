@@ -1,0 +1,9 @@
+; Pluginname: MessageNotify 
+; Version: 0.3.0.0
+; Dateiname: messagenotify.dll
+; Autor: Scott Ellis
+; Link: http://www.scottellis.com.au/
+; Übersetzung: CHEF-KOCH am 23.05.2010
+
+[Include message text]
+Inklusive Nachrichtentext

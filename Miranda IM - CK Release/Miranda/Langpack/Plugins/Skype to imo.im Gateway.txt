@@ -1,0 +1,23 @@
+; Pluginname: Skype to imo.im Gateway
+; Version: 1.0.0.10
+; Dateiname: imoproxy.dll, imo2sproxy.exe
+; Autor: leecher
+; Link: http://addons.miranda-im.org/download.php?dlfile=4146
+
+[Tunnelling Skype traffic via imo.im Web service]
+Tunnelt Skype-Datentransfer mit dem imo.im Webdienst
+
+[Bind to address:]
+An Adresse binden:
+[Account information]
+Kontoinformationen:
+[Support for Voicecalls via imoim Flash in Internet Explorer]
+Unterstützung für Sprachanrufe via imo.im Flash-Applikation im Internet Explorer
+[Ignore server timestamp and use current time for messages]
+Ignoriere Zeitstempel des Servers und verwende die aktuelle Zeit für Nachrichten
+[Log traffic to file:]
+Logge Datenverkehr in Datei:
+[Stopped]
+Gestoppt
+[Running]
+Läuft

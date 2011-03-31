@@ -1,0 +1,32 @@
+; Pluginname: mTextControl 
+; Version: 0.8.0.1
+; Dateiname: mtextcontrolA.dll (Ansi), mtextcontrolW.dll (Unicode)
+; Autor: Merlin_de, Victor Pavlychko
+; Unique ID: {69b9443b-dc58-4876-ad39-e3f418a133c5}
+; Übersetzung: 10.12.05 von freak
+
+[Text Display]
+Text Anzeigeart
+[Display technique]
+Darstellungsart
+[Simple text renderer (faster, RTL, no fancy stuff)]
+Einfache Testdarstellung (schneller, RTL, keine Smileys/BBcodes)
+[Advanced text renderer (smilies, bbcodes, no RTL)]
+Erweiterte Textdarstellung (Smileys, BBcodes, kein RTL)
+[Autodetect]
+Automatisch ermitteln
+[Left-To-Right]
+Links nach Rechts
+[Right-To-Left]
+Rechts nach Links
+[In-text objects]
+Objekte im Text
+[SmileyAdd Smilies]
+SmileyAdd-Smileys
+[BBCodes]
+BBCode
+[MathModule Formulas]
+MathModule-Formeln
+
+[Provides text render API for different plugins.]
+Stellt ein Textdarstellungs-API für andere Plugins zur Verfügung.

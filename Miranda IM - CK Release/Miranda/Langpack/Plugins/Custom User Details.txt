@@ -1,0 +1,51 @@
+; Pluginname: Custom User Details 
+; Version: 0.0.6.2
+; Dateiname: customuserdetails.dll
+; Autor: JdGordon
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=976
+; Übersetzung: 19.06.06 von Weishaupt
+
+[Contacts.csv]
+Kontakte.csv
+[Export CSV file]
+Exportiere CSV-Datei
+[Import CSV file]
+Importiere CSV-Datei
+[Export vCard file]
+Exportiere vCard
+[Import vCard file]
+Importiere vCard
+[Open Vcard file for: ]
+Öffne vCard für: 
+[Summary of Updates]
+Zusammenfassung des Updates
+[Timezone not set]
+Zeitzone nicht eingestellt
+[Protocol Email:]
+Protokoll-E-Mail:
+[Custom Email1:]
+zusätzl. E-Mail 1:
+[Custom Email2:]
+zusätzl. E-Mail 2:
+[Mobile:]
+Mobiltelefon:
+[Postal Code:]
+Postleitzahl:
+[Date Of Birth:]
+Geburtsdatum:
+[DD-MM-YYYY]
+TT-MM-JJJJ
+[Web Page]
+Homepage:
+[Personal:]
+Persönlich:
+[Go!]
+Los!
+[View/Change My &Details]
+Ansehen/Ändern meiner &Details
+[From Update:]
+Aus dem Update:
+[Current Info:]
+Aktuelle Informationen:
+[Mass &Update]
+Alles &updaten

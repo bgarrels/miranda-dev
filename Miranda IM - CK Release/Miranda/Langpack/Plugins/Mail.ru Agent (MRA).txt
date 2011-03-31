@@ -1,0 +1,262 @@
+; Pluginname: Mail.ru Agent (MRA)
+; Version: 1.21.0.1 (2010.11.19)
+; Dateiname: mra.dll
+; Autor: Rozhuk Ivan
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2544
+; Ausweichlink: http://www.rozhuk.org.ru/download/software/MirandaIM/Mra.dll
+; Übersetzung: 01.11.07 von Sebijk
+
+[Display &Inbox]
+Posteingang anzeigen
+[Display &Inbox status]
+Status vom Poste&ingang anzeigen
+[Edit &Profile]
+&Profil bearbeiten
+[My Album]
+Mein Album
+[My Blog]
+Mein Blog
+[My Videos]
+Meine Videos
+[My Answers]
+Meine Antworten
+[My World]
+Meine Welt
+[Web search]
+Web-Suche
+[Update all users info]
+Alle Benutzerinfos aktualisieren
+[Check updates users avatars]
+Alle Benutzerbilder aktualisieren
+[Request authorization for all]
+Autorisierung für alle anfragen
+[&Send postcard]
+Postkarte &senden
+[&View Album]
+Album ansehen
+[&Read Blog]
+Blog lesen
+[Mail box deleted]
+Mailbox gelöscht
+[Contact not on server]
+Kontakt ist nicht am Server
+[Not authorized]
+Nicht autorisiert
+[Phone/SMS only contact]
+Nur Telefon/SMS-Kontakt
+[plugin connections]
+Plugin-Verbindungen
+[From: %s\r\nSubject: %s\r\n%s]
+Von: %s\r\nBetreff: %s\r\n%s
+[Unread mail is available: %lu/%lu messages]
+Ungelesene E-Mails ist/sind verfügbar: %lu/%lu Nachrichten
+[No unread mail is available\r\nTotal messages: %lu]
+Keine ungelesene E-Mails\r\nNachrichten gesamt: %lu
+[Server error: cant get MPOP key for web authorize]
+Serverfehler: Konnte MPOP-Schlüssel für Web-Autorisierung nicht anfordern
+[Undefined message deliver error, time out]
+Undefinierte Nachrichten liefern Fehler, Timeout
+[Please, setup e-mail in options]
+Bitte E-Mail-Einstellungen unter Optionen einrichten
+[Please, setup password in options]
+Bitte richten Sie ein Kennwort unter Optionen ein.
+[Can't connect to MRIM server, error %lu: %s]
+Es konnte keine Verbindung zum MRIM-Server hergestellt werden. Fehler %lu: %s
+[NLB data corrupted]
+NLB-Daten zerstört
+[Can't get data for NLB, error %lu: %s]
+Es konnten keine Daten von NLB ermittelt werden. Fehler %lu: %s
+[Can't connect to NLB server, error %lu: %s]
+Es konnte keine Verbindung zum NLB hergestellt werden. Fehler %lu: %s
+[Disconnected, socket error %lu: %s]
+Getrennt, Socketfehler %lu: %s
+[Disconnected, socket read error %lu: %s]
+Getrennt, Socketlesefehler %lu: %s
+[Logon error: invalid login/password]
+Anmeldefehler: Falscher Benutzername/Kennwort
+[Another user connected with your login]
+Ein anderer Benutzer meldet sich mit Ihren Daten an.
+[Message rejected - no such user]
+Nachricht abgelehnt - Der Benutzer wurde nicht gefunden
+[Offline messages limit exceeded]
+Offline-Nachrichtenlimit überschritten
+[Message is too large]
+Nachricht ist zu lang
+[User does not accept offline messages]
+Dieser Benutzer akzeptiert keine Offline-Nachrichten
+[Undefined message deliver error, code: %lu]
+Undefinierte Nachrichten liefern Fehler. Code: %lu
+[MRIM_CS_MESSAGE_STATUS: not found in queue]
+MRIM_CS_MESSAGE_STATUS: Nicht in der Warteschlange gefunden
+[Sended data is invalid]
+Die gesendeten Daten sind ungültig
+[Invalid user name]
+Falscher Benutzername
+[User allready added]
+Dieser Benutzer wurde bereits hinzugefügt
+[Group limit is 20]
+Maximaler Gruppenlimit ist 20.
+[MRIM_CS_*_CONTACT_ACK: not found in queue]
+MRIM_CS_*_CONTACT_ACK: Nicht in der Warteschlange gefunden
+[MRIM_ANKETA_INFO: not found in queue]
+MRIM_ANKETA_INFO: Nicht in der Warteschlange gefunden
+[MRIM_CS_SMS_ACK: not found in queue]
+MRIM_CS_SMS_ACK: Nicht in der Warteschlange gefunden
+[File transfer: error]
+Datentransfer: Fehler
+[File transfer: incompatible versions]
+Datentransfer: Inkompatible Versionen
+[MRIM_CS_FILE_TRANSFER_ACK: unknown error, code: %lu]
+MRIM_CS_FILE_TRANSFER_ACK: Unbekannter Fehler. Code: %lu
+[MRIM_CS_*_CONTACT_ACK: unknown server error, code: %lu]
+MRIM_CS_*_CONTACT_ACK: Unbekannter Serverfehler. Code: %lu
+[MRIM_CS_GME: unknown internal game message code: %lu]
+MRIM_CS_GAME: Unbekannter Interne Spiel-Nachricht. Code: %lu
+[MRIM_CS_CONTACT_LIST2: unknown server error, code: %lu]
+MRIM_CS_CONTACT_LIST2: Unbekannter Serverfehler. Code : %lu
+[MRIM_CS_CONTACT_LIST2: bad contact list]
+MRIM_CS_CONTACT_LIST2: Ungültige Kontaktliste
+[MRIM_CS_CONTACT_LIST2: internal server error]
+MRIM_CS_CONTACT_LIST2: Interner Serverfehler
+[Mail.ru System notify]
+Mail.ru-Systembenachrichtigung
+[Avatars: can't add request to queue, error %lu: %s]
+Avatare: Die Anfrage konnte nicht zur Warteschlange hinzugefügt werden. Fehler %lu: %s
+[Avatars: can't connect to server, error %lu: %s]
+Avatare: Es konnte keine Verbindung zum Server hergestellt werden. Fehler %lu: %s
+[Avatars: error %lu on send HTTP request: %s]
+Avatare: Fehler %lu am gesendeten HTTP-Anfrage erhalten: %s
+[Avatars: error %lu on receive HTTP answer: %s]
+Avatare: Fehler %lu am dem empfangenden HTTP-Antwort erhalten: %s
+[Avatars: cant open file %s, error %lu: %s]
+Avatare: Konnte Datei %s nicht öffnen. Fehler %lu: %s
+[Avatars: error %lu on receive file data: %s]
+Avatare: Fehler %lu der empfangende Datei: %s
+[Avatars: cant write file data, error %lu: %s]
+Avatare: Konnte Datei nicht schreiben. Fehler %lu: %s
+[Avatars: server return HTTP code: %lu]
+Avatare: Server gibt HTTP-Code %lu zurück.
+[You cannot send when you are offline.]
+Sie können keine Nachricht versenden, so lange Sie offline sind.
+[Select e-mail]
+E-Mail auswählen
+[Your contact wakes you]
+Dein Kontakt weckt dich
+[invisible status changed]
+Unsichtbarer Status geändert
+[MraFilesQueueConnectionReceived: connection accepted, but pExtra=NULL, this is miranda bug.]
+MraFilesQueueConnectionReceived: Verbindung akzeptiert, aber pExtra=NULL. Dies ist ein Bug in Miranda IM.
+[Receive files: error %lu on receive file data: %s]
+Empfangende Dateien: Fehler %lu der empfangende Datei: %s
+[Receive files: cant write file data, error %lu: %s]
+Empfangende Dateien: Konnte Datei nicht schreiben. Fehler %lu: %s
+[Receive files: cant allocate disk space for file, size %lu bytes, error %lu: %s]
+Empfangende Dateien: Es konnte keine Zuteilung für die Datei in der Festplatte, Größe %lu Byte, ermittelt werden. Fehler %lu: %s
+[Receive files: cant open file %s, error %lu: %s]
+Empfangende Dateien: Konnte Datei %s nicht öffnen. Fehler %lu: %s
+[Receive files: request for file %s not sended, error %lu: %s]
+Empfangende Dateien: Die Anfrage für Datei %s wurde nicht gesendet. Fehler %lu: %s
+[Send files: file send request not received, error %lu: %s]
+Empfangende Dateien: Die Anfrage für die Datei wurde nicht empfangen. Fehler %lu: %s
+[Send files: error %lu on send file data: %s]
+Empfangende Dateien: Fehler %lu der gesendeten Datei: %s
+[Send files: cant read file data, error %lu: %s]
+Empfangende Dateien: Die Datei konnte nicht gelesen werden. Fehler %lu: %s
+[Send files: requested file: %s - not found in send files list.]
+Empfangende Dateien: Die angefragte Datei %s wurde nicht in der Liste der gesendeten Datei gefunden.
+[Send files: bad file send request - invalid header]
+Empfangende Dateien: Ungültige Dateianfrage erhalten - Ungültiger Header
+[Send files: bad file send request - to small packet]
+Empfangende Dateien: Ungültige Dateianfrage erhalten - Dateipaket zu klein
+[Create a new Mail.ru account using the Mail.ru website]
+Ein neues Mail.ru-Konto über die Mail.ru Website erstellen
+[Retrieve a lost password]
+Vergessenes Kennwort anfordern
+[Example: Petrov_Ivan@mail.ru]
+Beispiel: Petrov_Ivan@mail.ru
+[Enable avatars support (loading)]
+Avatar-Unterstützung aktivieren (lädt)
+[Use keep-alive connections]
+Keep-Alive-Verbindungen verwenden (keep-alive)
+[Updates check interval, min]
+Überprüfe Updates alle (in Min.)
+[Return absolute path]
+Absoluten Pfad eingeben
+[Delete avatar file with contact]
+Benutzerbild-Datei mit Kontakt löschen
+[Automatic request authorization on logon]
+Autorisierungsanfrage automatisch beim Anmelden anfragen
+[Automatic add contacts to server list on logon]
+Kontakte automatisch, bei der Anmeldung zur Serverliste hinzufügen
+[Automatic grand authorization to users in contact list]
+Alle Kontakte in der Kontaktliste die Autorisierung gewähren
+[Automatic grand authorization to new users]
+Alle neuen Benutzer automatisch die Autorisierung gewähren
+[Disable spam check]
+Spam-Überprüfung deaktivieren
+[Hide menu items for non MRA contacts]
+Menüpunkte für Nicht-MRA-Kontakte verstecken
+[Convert smiles to tags on send]
+Konvertiere Smileys in Tags, wenn gesendet.
+[Notify about new mail if increment]
+Über neue E-Mails benachrichtigen, falls vorhanden
+[Notify about new mail tray icon]
+Über neue E-Mail im Tray-Icon benachrichtigen
+[Click to Inbox]
+Klicke hier, um zum Posteingang zu gelangen
+[Show received Formated text (RTF receive)]
+Formatierte Texte anzeigen (wenn RTF-Text empfangen)
+[Send Formated text (send RTF)]
+Texte in RTF-Format senden
+[Smart send (only if client support RTF)]
+Schnelles Senden (falls der Client RTF unterstützt)
+[Anti spam]
+Spamschutz
+[Enable Anti Spam]
+Spamschutz aktivieren
+[Check temp contacts]
+Überprüfe auf Temporäre Kontakte
+[Delete spam bot contacts]
+Spambot-Kontakte löschen
+[Send spam report to server]
+Spam-Report zum Server senden
+[Show pop up]
+Popup anzeigen
+[Write to system history]
+In den Systemverlauf schreiben
+[Bad words list]
+Zensurliste
+[Spam bot blocked]
+Spambot blockiert
+[Spam bot contact deleted]
+Spambotkontakt gelöscht
+[Files exchange]
+Dateien austauschen
+[Enable direct connections]
+Direkte Verbindungen aktivieren
+[Ignory non AlphaNumeric characters]
+Ignoriere nicht Alphanumerische Zeichen
+[Max. language changes in message (0 - disabled)]
+Max. Sprachänderungen in Nachrichten (0 - deaktiviert)
+[No out connection on send]
+Keine ausgehende Verbindung beim Senden
+[No out connection on receive]
+Keine ausgehende Verbindung beim Empfangen
+[Out connections: ignory additional ports (443, 2041)]
+Ausgehende Verbindungen: Zusätzliche Ports (443, 2041) ignorieren
+[Hide my IP addresses]
+Meine IP-Adresse verstecken
+[Add extra address]
+Extra-Adressen hinzufügen
+[Enable MRIM proxy connections]
+MRIM-Proxyverbindungen aktivieren
+[File send block size:]
+Block-Größe der gesendeten Datei:
+[512 - 65536 bytes]
+512 - 65536 Bytes
+[PopUp type]
+Popup-Typ
+[Popup settings]
+Popup-Einstellungen
+[NewMail]
+Neue E-Mail

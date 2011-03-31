@@ -1,0 +1,236 @@
+; Pluginname: DBTool 
+; Version: 0.9.2.0
+; Dateiname: dbtool.exe
+; Link: http://www.miranda-im.org/development/
+; Übersetzung: Latwebpage am 18.01.07
+; Besonderheiten: Funktioniert nicht mit allen Datenbanktreibern!
+
+[Performing aggressive pass]
+Ausführen: Gründliche Fehlersuche
+[Aggressive: random junk at %08X: skipping]
+Gründliche Suche: unnützer Verweis an %08X: Übersprungen 
+[Aggressive: unlinked data at %08X: can't automatically place]
+Gründliche Suche: Daten ohne Verweis an %08X: konnte nicht autom. platziert werden.
+
+[Contact count marked wrongly: correcting]
+Fehler in der Kontaktanzahl: Korrigiert
+[Processing contact chain]
+Verarbeite Kontaktstrukturen
+[Contact chain corrupted, further entries ignored]
+Kontaktstrukturen beschädigt, nachfolgende Einträge wurden ignoriert
+
+[Invalid offset found]
+Ungültiger Offset gefunden
+[Error reading, database truncated? (%u)]
+Fehler beim Einlesen, Profil unvollständig (%u)
+[Can't write to working file, aggressive mode may be too aggressive now (%u)]
+Kann nicht in Arbeitskopie schreiben, gründlicher Modus evtl. jetzt zu gründlich (%u)
+[Can't write to output file - disk full? (%u)]
+Kann Ausgabedatei nicht erzeugen, Festplatte voll? (%u)
+
+[Event count marked wrongly: correcting]
+Fehler in der Ereignisanzahl: Korrigiert
+[Event chain corrupted, trying to recover...]
+Ereignisstrukturen beschädigt, versuche wiederherzustellen...
+[Event chain corrupted, further entries ignored]
+Ereignisstrukturen beschädigt, nachfolgende Einträge wurden ignoriert
+[First event not marked as such: correcting]
+Erstes Ereignis nicht als solches markiert: Korrigiert
+[Event marked as first which is not: correcting]
+Ereignis fälschlicherweise als erstes markiert: Korrigiert 
+[Extra flags found in event: removing]
+Überflüssige Ereigniseigenschaften gefunden: Entfernt 
+[First unread event marked wrong: fixing]
+Erstes ungelesenes Ereignis falsch markiert: Korrigiert
+[Infeasibly large event blob: skipping]
+Nicht überprüfbarer Ereignisblob: Übersprungen
+[Event not backlinked correctly: fixing]
+Ereignis enthält ungültigen Verweis auf Vorgänger: Korrigiert
+[Duplicate event was found: skipping]
+Doppeltes Ereignis wurde gefunden: übersprungen
+[Event position in chain is not correct]
+Ereignisposition in der Struktur ist nicht korrekt
+[Event position in chain is not correct: fixing]
+Ereignisposition in der Struktur ist nicht korrekt: behoben
+[Event position in chain is not correct: unable to fix]
+Ereignisposition in der Struktur ist nicht korrekt: beheben nicht möglich
+
+[Processing final tasks]
+Verarbeite: Abschließende Arbeitsschritte
+[Unable to delete aggressive working file]
+Arbeitskopie für gründliche Suche kann nicht gelöscht werden.
+[Errors were encountered, however you selected not to backup the original database. It is strongly recommended that you do so in case important data was omitted. Do you wish to keep a backup of the original database?]
+Es wurden Fehler gefunden, und Sie haben ausgewählt, keine Sicherungskopie der Originaldatei zu machen. Diese Fehler können zu Datenverlust führen! Wollen Sie eine Sicherheitskopie der Originaldatei beibehalten? 
+[Miranda Database Tool]
+Miranda-Profildateitool
+[%s\\Backup of %s]
+%s\\Sicherheitskopie von %s
+[%s\\Backup (%d) of %s]
+%s\\Sicherheitskopie (%d) von %s
+[Unable to rename original file]
+Originaldatei konnte nicht umbenannt werden
+[Unable to delete original file]
+Originaldatei konnte nicht gelöscht werden
+[Unable to rename output file]
+Ausgabedatei konnte nicht umbenannt werden
+
+[&Finish]
+&Fertig
+
+[Database is newly created and has no data to process]
+Profildatei wurde neu erstellt und hat keine Daten zum Verarbeiten
+[Processing completed successfully]
+Verarbeitung wurde erfolgreich beendet
+[Database is corrupted and too small to contain any recoverable data]
+Profildatei ist beschädigt und zu klein um irgendwelche Daten wiederherzustellen
+[Database signature is corrupted, automatic repair is impossible]
+Profildateisignatur ist beschädigt, automatische Reparatur nicht möglich
+[Database is marked as belonging to an unknown version of Miranda]
+Profildatei gehört zu einer unbekannten Mirandaversion
+[(Working Copy).dat]
+(Arbeitskopie).dat
+[Creating working database (aggressive mode)]
+Erstelle Arbeitskopie (Gründliche Suche)
+[Can't create working file (%u)]
+Kann keine Arbeitskopie erstellen (%u)
+[Error writing file, probably disk full - try without aggressive mode (%u)]
+Kann nicht in Datei schreiben, evtl. Festplatte voll - probieren Sie es ohne gründliche Suche (%u)
+[Can't read from working file (%u)]
+Kann nicht von Arbeitskopie lesen (%u)
+[<check only>]
+<Nur prüfen>
+[(Output).dat]
+(Ausgabe).dat
+[Can't create output file (%u)]
+Kann Ausgabedatei nicht erstellen (%u)
+
+[Processing module name chain]
+Verarbeite Pluginstrukturen 
+[Module chain corrupted, further entries ignored]
+Pluginstrukturen beschädigt, nachfolgende Einträge wurden ignoriert
+[Unreasonably long module name, skipping]
+Ungewöhnlich langer Pluginname: Übersprungen
+[Module name '%s' is not unique: %d duplicates found)]
+Pluginname '%s' ist mehrmals vorhanden, %d Duplikate gefunden.
+[Invalid module name offset, skipping data]
+Ungültiger Pluginnamenoffset: Übersprungen
+
+[Click Next to continue]
+Drücken Sie "Weiter" zum Fortfahren
+[Processing has not yet completed, if you cancel now then the changes that have currently been made will be rolled back and the original database will be restored. Do you still want to cancel?]
+Die Verarbeitung wurde noch nicht beendet. Wenn Sie den Vorgang jetzt abbrechen, wird die Originaldatei wiederhergestellt, und die Änderungen gehen verloren. Wollen Sie den Vorgang abbrechen?
+[Processing has not yet completed, if you go back now then the changes that have currently been made will be rolled back and the original database will be restored. Do you still want to go back?]
+Die Verarbeitung wurde noch nicht beendet. Wenn Sie jetzt zurückgehen, wird die Originaldatei wiederhergestellt, und die Änderungen gehen verloren. Wollen Sie jetzt zurückgehen?
+
+[Welcome to the Miranda Database Wizard]
+Willkommen zum Miranda-Profildateireparaturtool
+[Using this Wizard you can compact your Miranda profile database to remove dead space created during normal usage, as well as repair a large number of issues that could affect the database.]
+Die Verwendung dieses Tools löscht unnütze Einträge, die beim normalen Gebrauch entstehen können, untersucht die Profildatei auf mögliche Fehler und versucht diese zu beheben.
+[To continue, click Next.]
+Um fortzufahren, drücken Sie "Weiter".
+[This programme is licenced under the terms of the GNU General Public License.]
+Dieses Programm wurde unter der GNU General Public License lizenziert.
+
+[Select Miranda Profile]
+Miranda-Profildatei auswählen
+[You can choose the Miranda profile database to compact or repair.]
+Profildatei zum Komprimieren oder zur Fehlersuche auswählen
+[Select the &profile database from the list below. If the database you wish to use is not listed here then click Other to browse your computer.]
+&Profildatei aus unten stehender Liste auswählen, oder klicken Sie auf "Andere..." für einen anderen Ordner.
+[&File:]
+&Datei:
+[&Other...]
+&Andere...
+
+[Error Opening Database]
+Fehler beim Öffnen der Profildatei
+[There was an error opening the profile database given.]
+Es ist ein Fehler beim Öffnen der Profildatei aufgetreten
+[Click Next to try opening the file again, or click Back to select a new profile database to manipulate.]
+Klicken Sie auf "Weiter", um es erneut zu versuchen, oder auf "Zurück", um eine andere Datei auszuwählen.
+[The file may be in use by a currently running copy of Miranda. Exit any running Mirandas and click Next to retry.]
+Evtl. wird das Profil im Moment von Miranda verwendet. Beenden Sie Miranda und klicken Sie auf "Weiter" für einen neuen Versuch.
+
+[File Access Options]
+Dateizugriffseinstellungen
+[You can select low level options to determine how the database is processed.]
+Hier können Sie die Einstellungen für die Arbeitsweise des Profildateitools festlegen.
+[Create backup]
+Sicherheitskopie erstellen
+[Creates a backup copy of the database before any of the requested changes are made.]
+Erstellt eine Sicherheitskopie, bevor irgendwelche Änderungen vorgenommen werden.
+[Aggressively find corruption]
+Gründliche Fehlersuche
+[Scans the database for data that is not linked to any other data. This requires more disk space and more time, so is only required if you suspect corruption.]
+Untersucht die Profildatei auf Einträge, auf die keine Verweise existieren. Diese Option ist nur erforderlich, wenn Sie den Verdacht haben, Ihr Profil könnte beschädigt sein.
+[Check consistency only]
+Nur Konsistenz prüfen
+[Just checks that the database is valid, without writing anything to the disk.]
+Schnelle Überprüfung der Profildatei, schreibt keine Daten auf die Festplatte.
+
+[Cleaning Options]
+Säuberungseinstellungen
+[You can choose to remove information from the database while it is being processed.]
+Sie können auswählen, welche evtl. überflüssigen Einträge entfernt werden.
+[Erase all histories]
+Verlauf löschen
+[Removes all the saved history for all contacts in the database.]
+Entfernt die Verläufe sämtlicher Kontakte aus der Profildatei.
+[Mark all events read]
+Alle Ereignisse als gelesen markieren
+[Marks all the history events as read. This will rectify any problems with old messages always appearing in the message window log box.]
+Markiert alle Ereignisse im Verlauf als gelesen. Dies behebt u. a. das Problem, dass alte Nachrichten im Nachrichtenverlauf angezeigt werden.
+[Convert old Unicode messages to UTF8]
+Altes Unicode-Format nach UTF-8 konvertieren
+[Converts history messages in pre-0.7 format (ANSI+UCS2) to the new UTF8 format supported by 0.7. Saves the database space in most cases (recommended).]
+Konvertiert alte Nachrichten im ANSI-UCS2-Format aus Versionen vor 0.7 in das neue UTF-8-Format (ab Version 0.7). Wird dringend empfohlen!
+
+[Working...]
+Vorgang läuft...
+[Please wait while the requested operations are being performed.]
+Bitte warten Sie, bis die notwendigen Arbeitsgänge beendet wurden.
+
+[Finished!]
+Ich bin fix und fertig!
+[All tasks have been completed.]
+Alle Arbeitsschritte wurden beendet.
+[Launch Miranda with this profile]
+Starte Miranda mit diesem Profil
+[Launches Miranda with the profile that was just worked on.]
+Starte Miranda mit der verarbeiteten Profildatei.
+[Backup:]
+Sicherheitskopie:
+[The processing of the database has been completed. Click Next to return to the start of the wizard to select another database to check, or click Finish to exit the wizard.]
+Die Verarbeitung der Profildatei wurde beendet. Klicken Sie auf "Weiter", um das Tool mit einer anderen Profildatei neu zu starten, oder auf "Fertig", um das Profildateitool zu beenden.
+
+[Total size]
+Gesamtgröße
+[Wasted]
+Überflüssig
+
+[Settings chain corrupted, further entries ignored]
+Einstellungsstrukturen beschädigt, nachfolgende Einträge wurden ignoriert 
+[Infeasibly large settings blob: skipping]
+Nicht überprüfbarer Einstellungsblob: Übersprungen
+[Empty settings group at %08X: deleting]
+Leere Einstellungsgruppe an %08X: Gelöscht
+[Empty settings group at %08X: skipping]
+Leere Einstellungsgruppe an %08X: Übersprungen
+
+[Processing user data]
+Verarbeite Benutzerdaten
+[User corrupted, this could cause major problems]
+Benutzerdaten beschädigt, dies kann größere Probleme verursachen
+[More than one user contact: keeping only first]
+Mehr als ein Benutzerkontakt: Nur den ersten beibehalten.
+
+[Database worker thread activated]
+Profildateiverarbeitungsfunktion gestartet
+[Processing aborted by user]
+Verarbeitung von Benutzer abgebrochen
+[All tasks completed but with %d error%s]
+Alle Arbeitsschritte beendet, aber mit %d Fehlern %s
+[All tasks completed successfully]
+Alle Arbeitsschritte erfolgreich beendet
+[Elapsed time: %d sec]
+Benötigte Zeit: %d Sekunden

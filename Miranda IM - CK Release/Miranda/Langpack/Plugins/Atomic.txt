@@ -1,0 +1,53 @@
+; Pluginname: Atomic 
+; Version: 0.6.0.0
+; Dateiname: atomic.dll
+; Autor: mernil
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=194
+; Übersetzung: mdg-webmaster am 25.07.05
+; Besonderheiten: Entwicklung eingestellt!
+
+[The addressfield is empty!]
+Das Adressfeld ist leer!
+[Failed to load Winsock!]
+Winsock konnte nicht geladen werden!
+[Atomic requires another version of Winsock!]
+Atomic braucht eine andere Winsockversion!
+[Time was successfully synchronised!]
+Zeit wurde erfolgreich synchronisiert!
+[Failed to set the local time!]
+Lokale Zeit konnte nicht gestellt werden!
+[Time difference was greater was 1 hour, not synchronizing clock!]
+Zeitdifferenz ist größer als 1h, Zeit wurde nicht synchronisiert!
+[Could not connect to any of the servers in the database!]
+Konnte keine Verbindung zu einem Server aufbauen!
+[Could not find any address in the database!]
+Konnte keine Adresse in der Profildatei finden!
+[Synchronization statistics]
+Synchronisationsstatistik
+[Client originate date and time:]
+Clientdatum/-zeit (ursprünglich):
+[Server receive date and time:]
+Serverdatum/-zeit (erhalten):
+[Server transmit date and time:]
+Serverdatum/-zeit (übertragen):
+[Client destination date and time:]
+Clientdatum/-zeit:
+[Round trip delay:]
+Übertragungsverzögerung:
+[Local clock offset was:]
+Unterschied zur lokalen Zeit war:
+[Options for automatic retrievel]
+Optionen für automatisches Update
+[Retrive time automatically at startup]
+Synchronisation beim Start
+[Wait 25 seconds before connecting]
+25 s vor Aufbau der Verbindung warten
+[Show a message when time has been set]
+Nachricht zeigen, wenn Zeit gestellt wurde
+[Play a soundfile when time has been set]
+Klang abspielen, wenn Zeit gestellt wurde
+[Update frequency (hours)]
+Updateintervall (Stunden)
+; Plugin Infos Atomic (atomic.dll)
+[This plugin retrieves the exact time from a timeserver and sets the clock on your system]
+Dieses Plugin empfängt die genaue Uhrzeit von einem Zeitserver und aktualisiert die Uhr im System.

@@ -1,0 +1,386 @@
+; Pluginname: Webi - Miranda for Mobile 
+; Version: 2.28
+; Autor: MPK
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3893
+; Besonderheiten: Erweiterungen -> http://legoking.le.funpic.de/webi/extensions.rar)
+
+[Write the following characters]
+Trage folgende Zeichen ein
+[try to fix constant width]
+Versuche konstante Breite zu beheben
+
+[keep current status]
+aktuellen Status beibehalten
+[X-Status Title]
+XStatus-Titel
+[X-Status message]
+XStatus-Nachricht
+
+[Delete uploaded files]
+Lösche hochgeladene Daten
+
+[Failed to send message!]
+Senden fehlgeschlagen
+[Send File]
+Datei senden
+[You've added this user to your contact list]
+Sie haben diesen Kontakt hinzugefügt
+[You've been added to the user contacts list]
+Sie wurden hinzugefügt
+[Outgoing Authorization Request]
+Ausgehende Autorisierungsanfrage
+[Incoming Authorization Request]
+Eigehende Autorisierungsanfrage
+[Back in History]
+frühere Nachrichten
+[Latest Message]
+letzte Nachricht
+[was not found in history]
+wurde nicht im Verlauf gefunden
+[%s is missing. Create a new one under quickreply settings.]
+%s fehlt. Beheben Sie den Fehler über Einstellungen -> Schnelles Antworten -> Editor
+
+[Lock Webi Host when loging in to Webi (lock like win+L)]
+Sperre Computer, wenn sich jemand bei Webi einloggt (wie Win/Start+L)
+[Do not lock when using localhost]
+Nicht sperren, wenn localhost benutzt wird
+[captcha enabeled]
+Captcha abfragen
+[Clear Session completly]
+PHP-Sitzung komplett löschen
+[Logout after %s Minutes]
+Nach %s Minuten automatisch abmelden
+[%s to disable]
+zum Deaktivieren %s
+[Charset to be used:]
+genutzter Buchstabensatz:
+[notify on new updates]
+Benachrichtige bei Updates
+[auto-install updates]
+Updates automatisch installieren
+[Play %s when new message arrives]
+Spiele %s ab, wenn neue Nachricht ankommt
+[When new messages arrived and window is unfocused, notify with:]
+Benachrichtige mich über neue Nachrichten mit:
+[nothing]
+nichts
+[Popup (recomended)]
+einem Popup (empfohlen)
+[Window Focus]
+Fensterfokus
+[Javascript alert]
+Javascript-Nachricht
+[needs Javascript]
+benötigt Javascript
+[show Birthday when %s days left]
+zeige Geburtstagsinfo, wenn weniger als %s Tage übrig sind
+[mark events as read]
+markiere Nachrichten als gelesen (wenn angezeigt)
+[mark all events read now]
+jetzt alle Nachrichten als gelesen markieren
+
+[My Status Settings]
+Mein Status
+[X-Status support]
+XStatus-Unterstützung
+[ask for nick-name]
+Nickname abfragen
+
+[Clist Settings]
+Kontaktliste
+[set ignored groups]
+ignorierte Gruppen einstellen
+[set ignored protocols]
+ignorierte Protokolle einstellen
+[refresh Clist after %s secounds]
+Kontaktliste alle %s Sekunden neu laden
+[Show last %s Contacts over Clist:]
+zeige letzte %s Kontakte über der Liste:
+[Devide Clist after %s entrys]
+Beginne neue Spalte nach %s Kontakten
+[Devide Clist into %s colums]
+Teile Liste auf %s Spalten
+[Sort groups by]
+Sortiere Gruppen nach
+[Sort contacts by]
+Sortiere Kontakte
+[Do not sort]
+nicht sortieren
+[Name]
+Namen
+[like in Clist]
+wie in Miranda
+[Time since last message]
+nach Zeit seit letzter Nachricht
+[use X-Status Icons]
+nutze XStatus-Icons
+[Show X-Status instead of usual]
+Überschribe Standardicon mit XStatus-Icon
+[Shorten Group names longer than %s chars]
+Kürze Gruppennamen länger als %s Zeichen
+[Shorten Contact names longer than %s chars]
+Kürze Kontaktnamen länger als %s Zeichen
+[show Metacontacts Subcontacts]
+zeige MetaContact-Unterkontakte
+[show new messages in hidden groups]
+zeige neue Nachrichten in geschlossenen Gruppen
+
+[Chat Settings]
+Chat
+[refresh Messagewindow after %s secounds]
+lade das Chatfenster alle %s Sekunden neu
+[show %s messages per page]
+zeige %s Nachrichten pro Seite
+[Notify about new messages from other contacts while chatting]
+benachrichtige über Nachrichten anderer Kontakte
+[Use Tabs to chat]
+nutze Tabs
+[Close Tabs when logging out]
+schließe alle Tabs beim Abmelden
+[Show Users Away message]
+Zeige die Abwesenheitsnachricht des Kontaktes
+[Show Users X-Status]
+Zeige den XStatus des Kontaktes
+[format of timestamp]
+Format für Zeitanzeige
+[prefix shown in front of incoming messages]
+Zeichenfolge vor eingehenden Nachrichten
+[prefix shown in front of outgoing messages]
+Zeichenfolge vor ausgehenden Nachrichten
+[%s for icons]
+Um Bilder zu zeigen, nutze %s
+[Show input over chat]
+platziere Eingabefeld über dem Chat
+[Show quickreply over chat]
+platziere Schnellantworten über dem Chat
+[Single line reply (Enter=send)]
+einzeilige Eingabe (Enter=senden)
+
+[Smileys Settings]
+Smileys
+[use smileys]
+aktiviere Smileys
+[get Smileypack from %s unpac it to inc/smileys/ or use the editorsmiley]
+laden Sie sich ein Smileypack von %s herunter und speichern Sie es in inc/smileys/, oder nutzen Sie den Smileyeditor
+[use protocol specific smileys]
+benutze protokollspezifische Smileys
+[smileys have to be surrounded with whitespaces]
+nur Smileys, die von Leerzeichen umgeben sind, umwandeln
+[maximum size of smileys]
+maximale Größe der Smileys
+
+[Quickreply Settings]
+Schnelles Antworten
+[open QuickReplyEditor]
+öffne den Schnelles-Antworten-Editor
+[Turn on Quickreply]
+schalte Schnelles Antworten ein
+[Show input and quickreply at the same time]
+zeige Eingabefeld und Schnelles Antworten gleichzeitig
+[background color for buttons]
+Hintergrundfarbe für Buttons
+[other values]
+andere Werte
+
+[File Settings]
+Dateien
+[enable Filesupport]
+aktiviere Dateiunterstützung
+[To make this field editable change the settings in Miranda -> Mainmenu -> Webi Settings]
+Um das Feld editierbar zu machen, öffnen Sie Miranda -> Hauptmenü -> (mBot) -> Webi-Einstellungen
+[To make this field uneditable change the settings in Miranda -> Mainmenu -> Webi Settings]
+Um das Feld nicht editierbar zu machen, öffnen Sie Miranda -> Hauptmenü -> (mBot) -> Webi-Einstellungen
+[autoaccept files]
+eingehende Dateien automatisch akzeptieren
+[To enable this function change the settings in Miranda -> Mainmenu -> Webi Settings]
+Um diese Funktion zu aktivieren, öffnen Sie Miranda -> Hauptmenü -> (mBot) -> Webi-Einstellungen
+[To disable this function change the settings in Miranda -> Mainmenu -> Webi Settings]
+Um diese Funktion zu deaktivieren, öffnen Sie Miranda -> Hauptmenü -> (mBot) -> Webi-Einstellungen
+[make it possible to send files located on Webi host]
+Ermögliche es, Dateien vom Webi-Computer zu senden
+
+[Avatar Settings]
+Avatar
+[enable avatars]
+aktiviere Avatarunterstützung
+[refresh avatars every time (can cause huge serverload/errors)]
+erneuere Avatar jedes Mal (kann Fehler verursachen)
+[maximum size of avatar]
+maximale Größe eines Avatars
+[quality of avatar]
+Qualität, mit der gespeichert wird
+[avatar file if no contact/protocol specific one]
+Standard-Bilddatei
+[Input invalid]
+aktueller Wert ist fehlerhaft
+
+[You have the current Version]
+Ihre Version ist aktuell.
+[New Updates are available!!!]
+Ein Update ist verfügbar!
+[Yours is]
+Sie haben
+[update]
+aktualisieren
+[Your Version has to be updated manually!!!]
+Sie müssen Ihre Version manuell aktualisieren!
+[go to Updatepage]
+gehe zur Updateseite
+[Ignore this Version]
+Ignoriere diese Version immer
+[for updates]
+für Updates
+[You need to visit the]
+Besuchen Sie die
+[actions will be executed]
+Aktionen werden durchgeführt
+[already existed]
+war bereits vorhanden
+[created]
+erstellt
+[An error occured. It will not be continued to keep webi working.]
+Ein Fehler ist aufgetreten. Um Webi funktionsfähig zu halten, wird abgebrochen.
+[ERROR creating Foler]
+Konnte den Ordner nicht erstellen
+[Update engin was updatet]
+Updater wurde aktualisiert
+[Next Version reached. Reload needed to ensure working]
+Nächste Version erreicht. Lade neu, um Funktionieren zu sichern
+[no action necessary]
+keine Aktion notwendig
+[failed to update]
+wurde nicht aktualisiert
+[Cleaned up]
+aufgeräumt
+[was updated]
+wurde aktualisiert
+[Sucessfully updated]
+Erfolgreich aktualisiert
+[An error occured]
+Ein Fehler ist aufgetreten
+
+[Tooltip Settings]
+Tooltips
+[Tooltips]
+Tooltips
+[No Message]
+Keine Nachricht
+[enable Tooltips]
+aktiviere Tooltips
+[Use IE compatibility]
+benutze IE-Kompatibilität
+[Tooltip width:]
+Tooltip-Breite:
+[background color:]
+Hintergrundfarbe:
+[border color:]
+Randfarbe:
+[text color:]
+Textfarbe
+[color codes]
+verschiedene Werte
+
+[This function has been disabeled.]
+Diese Funktion wurde deaktiviert
+[To enable it, change the settings in Miranda -> Mainmenu -> Webi Settings]
+Um sie zu aktivieren, öffnen Sie Miranda -> Hauptmenü -> (mBot) -> Webi-Einstellungen
+[Save as Shortcut]
+Speichere als Hotkey
+[change drive]
+wechsle das Laufwerk
+[select drive]
+wähle ein Laufwerk
+[Sorry, the given folder does not exist or acces was denied]
+Der gewählte Ordner kann nicht angezeigt werden
+[No destination for incomed files specified in Miranda DB]
+Kein Ziel für eingehende Dateien in der Datenbank gespeichert
+[This file does not exist!!!]
+Diese Datei existiert nicht!
+[< back]
+< zurück
+[Upper direcory]
+übergeordneter Ordner
+[The given folder does not exist.]
+Dieser Ordner existiert nicht.
+[No or invalid Contact specified.]
+Kein/ungültiger Kontakt angegeben.
+[This file could not be send.]
+Die Datei konte nicht gesendet werden.
+[there is a problem]
+es gibt ein Problem
+[File is redy to be send]
+Datei ist zum Senden bereit
+[Current location]
+aktueller Ordner
+[If you continue, the people who did not download a file you sent to them yet, will not be able to download the file]
+Wenn Sie fortfahren, werden Leute, die die von Ihnen hochgeladenen Dateien noch nicht geladen haben, sie nicht herunterladen können
+[Error: No file uploaded]
+Fehler: Keine Datei hochgeladen
+[Choose a file you want to send]
+Wähle eine Datei zum Senden
+[Send files located on the Webi Host]
+Sende Dateien vom Webi-Computer
+
+[Mark all protocols you want to hide in Clist and my Status]
+Markieren Sie alle Protokolle, die versteckt werden sollen
+[Modification saved]
+Ändeungen gespeichert
+[Mark all groups you want to hide in Clist]
+Markieren Sie alle Gruppen, die versteckt werden sollen
+[Now it looks the following]
+Jetzt sieht es wie folgt aus:
+[Every line is one Quickreply button]
+Jede Zeile stellt einen Button dar
+[will end a line, no matter how many bottens it has]
+wird eine neue Zeile beginnen
+[change]
+ändern
+[Searche for]
+Suche nach
+[Replace with image]
+Ersetze mit folgendem Bild
+[located in]
+liegt in
+[Which Portocoll Smileypack do you want to modify?]
+Für welches Protokoll möchten Sie die Smileys ändern?
+[continue]
+fortsetzen
+
+[Use Mobile Settings]
+Benutze Handy-Einstellungen
+[Leave mobile settings]
+Verlasse Handy-Einstellungen
+[Swich to mobile settings]
+Wechsle zu Handy-Einstellungen
+
+[Webi Settings]
+Webi-Einstellungen
+[Protected Webi Settings]
+geschützte Webi-Einstellungen
+[enable login]
+aktiviere Passwortabfrage
+[repeat Password]
+wiederhole Passwort
+[enable remotesend]
+aktiviere Senden vom Webi-Computer
+[autoaccept setting editable]
+deaktiviere Einstellung zum automatischen Annehmen
+[place settings in MBot submenu]
+platziere Einstellungen im mBot-Untermenü
+[Do you want to visit Webi now?]
+Wollen Sie Webi öffnen?
+[No empty username or password allowed!]
+leere Benutzernamen oder Passwörter sind nicht erlaubt!
+[Passwords don't match!]
+Passwörter stimmen nicht überein!
+[You have to set a password!]
+Sie müssen ein Passwort setzen!
+
+[ERROR: Could not redirect because headers were already sent]
+FEHLER: Konnte nicht weiterleiten, weil Kopfzeilen bereits gesendet wurden
+[You first have to set the protected settings over Mirnad -> Mainmenu -> Webi settings]
+Sie müssen zuerst die geschützten Einstellungen in Miranda -> Hauptmenü -> (mBot) -> Webi einrichten
+[define a valid charset in your settings]
+Definieren Sie einen gültigen Zeichensatz
+[wrong argument]
+ungültiges Argument

@@ -1,0 +1,142 @@
+; Pluginname: 4x4x4 
+; Version: 0.1.0.3a
+; Dateiname: 4x4x4.dll
+; Autor: gosu
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1210
+; Übersetzung: Weishaupt am 28.03.06
+; Besonderheiten: Entwicklung eingestellt!
+
+[play 4x4x4 with other miranda users]
+Spiele 4x4x4 mit anderen Mirandanutzern
+[4x4x4 for miranda]
+4x4x4 für Miranda IM
+[play 4x4x4]
+Spiele 4x4x4
+[waiting for move...]
+Warte auf Zug...
+[waiting for answer...]
+Warte auf Antwort...
+[%s wants undo last move]
+%s will letzten Zug widerrufen
+[undo last move?]
+Letzten Zug widerrufen?
+[not allowed :(]
+Nicht erlaubt :(
+[allowed :)]
+Erlaubt :)
+[send new game request?]
+Sende Spielanfrage
+[send restart round request?]
+Anfrage auf Neustart der Runde
+[new game]
+Neues Spiel
+[game restarted]
+Spiel neu gestartet
+[%s doesn't want to restart]
+%s will nicht neu starten
+[%s doesn't want to play again]
+%s will keine Revanche
+[you are the winner!]
+Du hast gewonnen!
+[you have lost :|]
+Du hast verloren :|
+[connection closed]
+Verbindung beendet
+[%s requests a round of 4x4x4]
+%s will eine Runde 4x4x4 spielen
+[%s: play again?]
+%s: Nochmal spielen?
+[%s: restart round?]
+%s: Runde neu starten?
+[your move]
+Dein Zug
+[timeout - sending again...]
+Timeout - erneuter Sendeversuch...
+[4x4x4 request from %s]
+4x4x4 Anfrage von %s
+[send a 4x4x4 request to %s]
+Sende eine 4x4x4 Anfrage an %s
+[sending request...]
+Sende Anfrage...
+[canceled :(]
+Abgebrochen :(
+[ERROR]
+FEHLER
+[ERROR: required gameversion]
+FEHLER: Falsche Spielversion
+[%s is Offline]
+%s ist Offline
+[you are Offline]
+Du bist Offline
+[connecting...]
+Verbinde...
+[4x4x4: Incoming Request]
+4x4x4: Eingehende Anfrage
+[4x4x4: Incoming Move]
+4x4x4: Eingehender Zug
+[4x4x4: Incoming Undo]
+4x4x4: Eingehender Wiederruf
+[4x4x4: Incoming Restart]
+4x4x4: Eingehender Neustart
+[4x4x4: Game Started]
+4x4x4: Spiel gestartet
+[4x4x4: Winner]
+4x4x4: Gewonnen
+[4x4x4: Loser]
+4x4x4: Verloren
+[4x4x4: Connection closed]
+4x4x4: Verbindung unterbrochen
+[4x4x4: Reply: yes]
+4x4x4: Antwort: Ja
+[4x4x4: Reply: no]
+4x4x4: Antwort: Nein
+[yes]
+Ja
+[no]
+Nein
+[ok]
+OK
+[cancel]
+Abbrechen
+[close]
+Schließen
+[send]
+Senden
+[Stats]
+Statistik
+[won]
+Gewonnen
+[lost]
+Verloren
+[moves]
+Züge
+[time per move]
+Zeit pro Zug
+[my time]
+Meine Zeit
+[opponent time]
+Zeit des Gegners
+[play time]
+Spielzeit
+[last move]
+Letzter Zug
+[winner]
+Gewinner
+[current move]
+Aktueller Zug
+[Opponent]
+Gegner
+[name]
+Name
+[game version]
+Spielversion
+[restart]
+Neu starten
+[undo]
+Widerrufen
+[exit]
+Schließen
+[clear stats]
+Statistik löschen
+[clear history]
+Verlauf löschen

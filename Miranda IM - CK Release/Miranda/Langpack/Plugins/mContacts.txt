@@ -1,0 +1,96 @@
+; Pluginname: mContacts 
+; Version: 0.0.1.1
+; Dateiname: mcontacts.dll
+; Autor: bankrut
+; Link: http://miranda.kom.pl/dev/bankrut/
+; Übersetzung: 27.06.05 von Lastwebpage
+
+[&Export contact list]
+Kontaktliste &exportieren
+[&Import contact list]
+&Kontaktliste &importieren
+[Export contact list]
+Export Kontaktliste
+[While exporting MIM will be completely blocked until finished.]
+Während des Exports ist die Kontaktliste blockiert.
+[Select export file name]
+Dateiname Exportdatei
+[INI Files]
+INI-Dateien
+[All files]
+Alle Dateien
+[Export history (if available)?]
+Verlauf exportieren, wenn verfügbar?
+[Contact list is empty.\nNothing to export.]
+Kontaktliste ist leer.\nEs wurde Nichts exportiert.
+[Nothing was exported.]
+Es wurde nichts exportiert.
+[Exported:]
+Exportiert:
+[contact(s).]
+Kontakt(e)
+['Export contact list' is busy.]
+Exportieren Kontaktliste läuft gerade.
+[Import contact list]
+Kontaktliste importieren
+[While importing MIM will be completely blocked until finished.]
+Während des Imports ist die Kontaktliste blockiert.
+[Select import file name]
+Importdatei auswählen
+[Import history (if available, can take a while)?]
+Verlauf importieren? Dauert evtl. einige Zeit.
+[To import:]
+Zu importieren:
+[Nothing was imported.]
+Es wurde Nichts importiert.
+[Imported:]
+Importiert:
+['Import contact list' is busy.]
+Importieren Kontaktliste läuft gerade
+
+[DAT Files]
+DAT Dateien
+[&Export contact history]
+Verlauf &exportieren
+[There was an error during contact history export.]
+Fehler aufgetreten beim Exportieren des Kontaktverlaufes.
+[history event(s).]
+Verlaufsereignisse
+['Export contact history' is busy.]
+Exportieren Kontaktverlauf läuft gerade
+[&Import contact history]
+Verlauf &importieren
+[There was an error during contact history import.]
+Fehler aufgetreten beim Import des Kontaktverlaufs.
+
+[Delete whole history from selected contact, are you realy sure?]
+Lösche gesamten Verlauf des gewählten Kontaktes, sind Sie sicher?
+[&Delete contact history]
+Verlauf löschen
+[Whole history from selected contact has been deleted.]
+Gesamter Verlauf des gewählten Kontaktes wurde gelöscht.
+[Protocol independent contact list/history import/export.]
+Protokoll abhängiger Kontaktliste/Verlauf Import/Export.
+
+[&Delete whole history from all contacts]
+Gesamten Verlauf aller Kontakte löschen
+[Delete whole history from all contacts (including system history), are you realy sure?]
+Löschen des gesamten Verlaufes aller Kontakte, inkl. Systemverlauf, sind Sie sicher?
+[Delete whole history]
+Gesamten Verlauf löschen
+[Whole history from all contacts has been deleted.]
+Gesamter Verlauf aller Kontakte wurde gelöscht.
+
+[Only merge history (don't add new contacts)?]
+Nur Verlauf zusammenführen (Keine neuen Kontakte hinzufügen)?
+[Merge history if contact already on list?]
+Verlauf zusammen führen wenn Kontakt bereits vorhanden?
+
+[Check for history events duplicates?]
+Überprüfung auf Duplikate im Verlauf?
+[mContacts]
+Kontaktlisten Im-/Export
+[Export contact history]
+Kontaktverlauf exportieren
+[Import contact history]
+Kontaktverlauf importieren

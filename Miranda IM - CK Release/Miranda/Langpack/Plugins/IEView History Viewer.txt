@@ -1,0 +1,49 @@
+; Pluginname: IEView History Viewer
+; Version: 0.0.1.6
+; Dateiname: iehistory.dll
+; Autor: elbis
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2553
+; Übersetzung: Dober 02.07.06
+; Besonderheiten: Entwicklung eingestellt!
+
+[First event shown in page]
+Erstes Ereignis wird auf der Seite angezeigt
+[Last event shown in page]
+Letztes Ereignis wird auf der Seite angezeigt
+[Out of a total of]
+Aus einer Gesamtmenge von
+; [You can't close the window now, wait for all events to load.]
+[Text search]
+Textsuche
+[Time search]
+Zeitsuche
+[Search finished. No more entries ...]
+Suche beendet. Keine weiteren Einträge...
+
+[&Prev]
+Zurück
+[&Next]
+Weiter
+
+[Number of events to load]
+Anzahl der Ereignisse zum Laden
+[Load all events]
+Alle Ereignisse laden
+[Load only ]
+Lade nur 
+[events per page.]
+Ereignisse pro Seite
+[Show last page first]
+Letzte Seite zuerst anzeigen
+[RTL is default text direction.]
+RTL ist Standardtextrichtung
+[Load items in background]
+Einträge im Hintergrund laden
+
+[&Find next]
+Weitersuchen
+[Text :]
+Text:
+
+[View contact's history]
+Verlauf

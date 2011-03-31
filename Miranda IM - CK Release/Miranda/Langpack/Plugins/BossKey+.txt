@@ -1,0 +1,54 @@
+; Pluginname: BossKey+ 
+; Version: 0.5.0.3
+; Dateiname: bosskey.dll
+; Autor(en): Goblineye Entertainment, +Mod by Billy_Bons
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3694
+; SVN: https://db3xs.svn.sourceforge.net/svnroot/db3xs/trunk/BossKeyPlus
+; Unique ID: {4fac353d-0a36-44a4-9064-6759c53ae782}
+; Übersetzung: 30.06.05 von baphomet
+
+[Go to Customize -> Hotkeys to change the hotkey]
+Unter 'Customize -> Hotkeys' können Sie den Hotkey ändern
+[Use built in to Miranda hotkey module]
+Verwende eingebautes Hotkeymodul
+[When I press the hotkey:]
+Wenn ich den Hotkey drücke:
+[Change only if current status is Online]
+Nur wechseln, wenn aktueller Status online
+[When I return:]
+Wenn ich zurückkehre:
+[Request password:]
+Passwort abfragen:
+[Change status back]
+Ändere Status zurück
+ 
+[Hide Miranda when:]
+Verstecke Miranda IM, wenn:
+[Workstation is Locked (2000/XP+)]
+Arbeitsstation gesperrt ist (Win 2000/XP+)
+[Windows is inactive]
+Windows inaktiv ist, für
+[Miranda is inactive]
+Miranda IM inaktiv ist, für
+[Miranda is started]
+Miranda IM gestartet ist
+
+[Create a main menu item]
+Erzeuge einen Hauptmenüeintrag
+[Restore hiding on startup after failure]
+Verstecke Miranda IM bei Neustart nach einem Fehler
+
+[Miranda IM is locked. Enter password to unlock it.]
+Miranda IM ist gesperrt. Zum Entsperren Passwort eingeben.
+
+[Hide/Show Miranda]
+Verstecke/zeige Miranda IM
+
+[Hide Miranda if the computer is locked]
+Miranda verstecken, wenn Computer verriegelt wird
+[BossKey: Key pressed]
+BossKey: Key gedrückt
+[BossKey: Miranda is hidden]
+BossKey: Miranda ist versteckt
+[BossKey: Hide/Show Miranda]
+BossKey: Zeige/Verstecke Miranda

@@ -1,0 +1,102 @@
+; Pluginname: HotKeyEngine 
+; Version: 0.1.3.0
+; Dateiname: HddInfo.dll
+; Autor: [w]Lite
+; http://addons.miranda-im.org/details.php?action=viewfile&id=2570
+; translated by miroerr 2006/06/03
+; Besonderheiten: Entwicklung eingestellt!
+
+[Disk Drives]
+Laufwerke
+[Data window]
+Ausgabefenster
+[Key Combination]
+Hotkey
+[Show Miranda About Box]
+Über Miranda IM Box anzeigen
+[Show popup with HDD temperature]
+Popup mit HDD Temperatur zeigen
+[Show popup with various HDD info]
+Popup mit verschiedenen HDD Infos
+[Sta.]
+Vorschau
+[Now plug-in is only for support of "HDD Info".]
+Plugin nur zur Unterstützung von "HDD Info".
+[Current temperature is %d °C]
+Aktuelle Temperatur: %d °C
+[HDD &Temperature]
+HDD &Temperatur
+[sec(s)]
+Sek.
+[min(s)]
+Min.
+[hour(s)]
+Std.
+[Show standard popup]
+Standardpopup anzeigen
+[for all drives]
+für alle Laufwerke
+[only for]
+nur für
+[Show warning popup if temperature is higher than]
+Popup anzeigen wenn Temperatur höher ist als
+[Show item in the Main menu]
+Eintrag im Hauptmenü anzeigen
+[Print temperature data to log-file]
+Temperatur-Daten in Log-Datei schreiben
+[Add hot key ('Hotkeys+' plugin)]
+Hotkey hinzufügen ('Hotkey+' benötigt)
+[HDD Temperature Tracking]
+HDD Temperatur Überwachung
+[Create debug log]
+Debug-log anlegen
+[Debugging]
+Fehlersuche
+[HDD Tracking]
+HDD Überwachung
+[Restore]
+Wiederherstellung
+[Default text]
+Vorgabe Text
+[You have to install plugin "Hotkeys+" for this feature!]
+Hierfür müssen Sie die "Hotkeys+" Erweiterung installieren!
+[New line]
+Neue Zeile
+[Popup border]
+Popup Rand
+[Track drives]
+Festplatten
+[all]
+alle
+[only]
+nur
+[Time-out (in seconds)]
+Anzeigedauer (in Sek.)
+[Default || Warning || Custom]
+Standard||Warnung||Benu.def.
+[Enter 0 for default popup time-outs]
+0 für Standardanzeigedauer der Popups
+[or]
+oder
+[Enter custom value in seconds]
+Anzeigedauer in Sekunden
+[Popup should not be closed automatically]
+Popup sollen nicht automatisch geschlossen werden
+[Disable popups, use MsgBox]
+MsgBox statt Popups benutzen
+[Disk Mounting Notification]
+Festplattenerkennungsbenachrichtigung
+[Notify about current temperature]
+Benachrichtige über aktuelle Temp.
+[Warn if device's temperature exceeds... (in degree centigrade)]
+Warne falls Gerät Temperatur übersteigt... (in Grad Celsius)
+[Time-out (in seconds)]
+Zeitüberschreitung in Sek.
+[Print data to log]
+Logge Daten 
+[Put data to Contact List caption]
+Versehe Kontaktliste mit Untertitel
+[Popup customizable by variables]
+Anpassbare Popups  mit Variablen
+[Add to variable postfix of unit]
+Aktiviere Postfix Variable für Gerät

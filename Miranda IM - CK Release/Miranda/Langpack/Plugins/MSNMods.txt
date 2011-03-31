@@ -1,0 +1,19 @@
+; Pluginname: MSNMods 
+; Version: 0.1.1.0
+; Dateiname: MSNMods.dll
+; Autor: P Boon
+; Übersetzung: 15.10.05 von freak
+; Besonderheiten: Entwicklung eingestellt!
+
+[This plugin requires Variables.DLL]
+Dieses Plugin erfordert das Variables Plugin.
+[Service %s not found in module %s. Plugin disabled.]
+Plugin wurde deaktiviert. Der Service %s aus Modul %s wurde nicht gefunden.
+[Set Avatar]
+Avatar setzen
+[Use default avatar file]
+Standardavatar benutzen
+[Minimum delay between updates]
+Verzögerung zw. Aktualisierungen
+[Warning: delays below 7 seconds are not recommended.]
+WARNUNG: Werte unter 7 Sekunden werden nicht empfohlen!

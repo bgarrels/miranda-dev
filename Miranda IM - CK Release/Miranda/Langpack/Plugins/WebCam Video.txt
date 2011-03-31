@@ -1,0 +1,64 @@
+; Pluginname: WebCam Video 
+; Version: 0.0.1.8
+; Dateiname: webcam.dll
+; Autor: softcab
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2868
+; Übersetzung: Dober 02.07.06
+
+[Web Camera]
+Webcam
+[<< Use any available camera >>]
+<< Verfügbare Kamera verwenden >>
+[Show Camera]
+Kamera anzeigen
+[JPEG Image Quality]
+JPEG-Bild Qualität
+[Quality:]
+Qualität:
+[Video Chat]
+Videochat
+[Completely disable video chat. (Requires Miranda restart)]
+Videochat komplett deaktivieren. (Miranda-Neustart nötig)
+[Data Transfer]
+Datentransfer
+[Video Chat Storage]
+Videochat Archivierung
+[Save video chat as]
+Videochat speichern als
+[JPG images]
+JPG-Bilder
+[AVI files]
+AVI-Dateien
+[Storage folder:]
+Archivordner:
+[Show "Video Chat" menu item. (Requires Miranda restart)]
+Videochat-Menüeintrag anzeigen. (Miranda-Neustart nötig)
+
+[Sending: ]
+Sende: 
+[  Receiving: ]
+  Empfange: 
+[%u of %u bytes [%u%%]]
+%u von %u Bytes [%u%%]
+[Wrong image checksum!]
+Falsche Bilder-Checksumme!
+[Remote host closed connection]
+Dein Freund hat die Verbindung beendet
+[Remote party does not want to have video-chat with you]
+Dein Freund will kein Videochat mit dir haben
+[Initializing transfer...]
+Initialisiere Transfer...
+[Snapshot size is zero]
+Fotogröße ist Null
+[Getting snapshot]
+Erhalte Foto
+[Could not get snapshot]
+Konnte Foto nicht erhalten
+[Stopped]
+Gestoppt
+[Remote party does not have WebCam Video plugin installed.]
+Dein Freund hat das 'WebCam Video' Plugin nicht installiert.
+[&Video Chat]
+&Videochat
+[My Camera]
+Meine Kamera

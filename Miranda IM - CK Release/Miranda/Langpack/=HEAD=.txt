@@ -1,0 +1,11 @@
+Miranda Language Pack Version 1
+Language: German (DE)
+Locale: 0407
+Last-Modified-Using: Miranda IM 0.9.3
+Authors: miranda-im.de Projekt Sprachdatei - diverse Autoren
+Author-email: sprachdatei@miranda-im.de
+; Deutsche Miranda IM Webseite: http://miranda-im.de
+; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
+X-Langpack-Creator-Version: 0.5.0
+X-Langpack-creation-date: 26 Dec 2010 20:12:59
+; FLID: Deutsche Sprachdatei-GermanLanguagePack 0.10.12.26

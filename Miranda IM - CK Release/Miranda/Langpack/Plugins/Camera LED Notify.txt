@@ -1,0 +1,30 @@
+; Pluginname: Camera LED Notify 
+; Version: 1.8.2.0
+; Dateiname: CameraLEDNotify.dll
+; Autor: vivian
+; Unique ID: <keine>
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4313
+; Übersetzung: 19.08.2010 von CHEF-KOCH
+
+[Flash when my status is]
+Blinke falls Status
+[Flash on]
+Blinke bei
+[Keyboard LEDs]
+Tastatur LED's
+[Flash timings]
+Blinkintervall
+[Interval, more = slower]
+Intervall, mehr = langsamer
+[Stop after, 0 until = focused]
+Stoppe nach, 0 bis = fokusiert
+[Troubleshooting]
+Fehlerbehebung
+[Force newer Windows version (only try if flashing doesn't work]
+Für neuere Windows Versionen (nur falls Blinken nicht funktioniert!)
+[Camera LED]
+Kamera LED
+[Auth requests]
+Auth. anfragen
+[Added notifications]
+Hinfzugefügte Benachrichtigungen

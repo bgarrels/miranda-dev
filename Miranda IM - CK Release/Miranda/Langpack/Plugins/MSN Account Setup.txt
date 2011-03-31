@@ -1,0 +1,18 @@
+; Pluginname: MSN Account Setup 
+; Version: 0.0.1.2
+; Dateiname: msn_accountsetup.dll
+; Autor: souFrag
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1705
+; Übersetzung: Sebijk
+; Besonderheiten: Entwicklung eingestellt!
+
+[Always show this window on start]
+Dieses Fenster bei jedem Start anzeigen
+[Remember e-mail]
+E-Mail-Adresse speichern
+[Remember password]
+Kennwort speichern
+[Disable MSN Plugn]
+MSN-Plugin deaktivieren
+[(leave nickname blank to retrieve from server)]
+(Nickname leerlassen, damit es vom Server empfangen wird)

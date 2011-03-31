@@ -1,0 +1,19 @@
+; Pluginname: WebPager
+; Version: 0.0.0.7
+; Dateiname: WebPager.dll
+; Autor: Angelo Luiz Tartari
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=345
+; Übersetzung: 11.08.05 von Arne
+
+[EMail:]
+E-Mail:
+[ICQ # :]
+ICQ #:
+
+[WebPager message received]
+WebPager Nachricht empfangen
+
+[Incoming WebPager]
+Eingehender WebPager
+[Frontend for ICQ web pager messages.]
+Ermöglicht es, ICQ-WebPager-Nachrichten zu empfangen.

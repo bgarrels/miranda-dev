@@ -1,0 +1,572 @@
+; Pluginname: ICQ Plus Mod 
+; Version: ICQJ Plus Mod Version 0.3.10.68 [Build 2010.12.04]
+; Dateiname: ICQ.dll
+; Autor: SSS, persei
+; Link: http://sss.chaoslab.ru/tracker/icqjplus/downloads/109
+; Übersetzung: CHEF-KOCH, Freak & Lastwebpage
+
+; Pluginname: ICQ Plus Mod 
+; Version: ICQJ Plus Mod Version 0.5.1.1 [Build 2010.12.04]
+; Dateiname: ICQ.dll
+; Autor: SSS, persei
+; Link: http://sss.chaoslab.ru:81/tracker/icqjplus/downloads/106
+; Übersetzung: Invalid
+; Besonderheiten: Miranda IM Benutzer die 0.9 und höher Benutzen müssen 0.5.1.1 benutzen.
+
+[IcqOscarJ Plus Mod Protocol]
+IcqOscarJ Plus Mod-Protokoll
+[Manage ICQ Servers List]
+ICQ-Serverliste verwalten
+[Servers List]
+Serverliste
+[HTTP User Agent for proxy]
+HTTP-Useragent für Proxy
+[Register new UIN]
+Neue UIN
+[Register &new UIN]
+&Neue UIN
+[Register new ICQ account]
+Ein neues ICQ-Konto erstellen
+[Try to connect to next server in list if connection error occured (Server AutoChange)]
+Bei Verbindungsfehler nächsten Server testen
+[SSL encryption]
+SSL-Verschlüsselung
+[Use HTTP Gateway mode for HTTP proxy]
+Benutze HTTP-Gateway-Modus für HTTP-Proxy
+[Create new UIN]
+Erstelle neue UIN
+[UIN registration options]
+UIN-Registrierungsoptionen
+[1. New UIN password:]
+1. Passwort:
+[3. Picture code:]
+3. Bildinhalt:
+[2. Show Picture]
+2. Zeige Bild
+[4. Register]
+4. Registrieren
+[5. New UIN info]
+5. Neue UIN-Info
+[Connecting to server...]
+Verbinde zu Server...
+[Requesting image...]
+Frage Bild an...
+[Image arrived!\nEnter image code and password, then press "Register"]
+Bild angekommen!\nGeben Sie den Bildinhalt und das Passwort ein, drücken Sie dann "Registrieren"
+[Requesting UIN...]
+Frage UIN an...
+[Create a new ICQ account using the ICQ website (https://www.icq.com/register/)]
+ICQ-Konto über die ICQ-Webseite erstellen (http://lite.icq.com/register)
+[Create new account via ICQ website]
+ICQ-Konto über die ICQ-Webseite erstellen
+[Retrieve a lost password or ICQ number (https://icq.com/password/)]
+Vergessenes Passwort oder ICQ-Nummer zuschicken lassen (https://icq.com/password/)
+[Retrieve a lost password or ICQ number (https://www.icq.com/password/)]
+Vergessenes Passwort oder ICQ-Nummer zuschicken lassen (https://www.icq.com/password/)
+[Create a new AIM account using the AOL website]
+Neuen AIM-Account über die AOL-Webseite erstellen
+[If you continue, you will lose current connection with a server,\nContinue?]
+Wenn Sie fortfahren, werden Sie die Verbindung zum Server verlieren.\nFortfahren?
+
+[Add contacts from server list to clist permanently]
+Kontakte von Serverliste dauerhaft hinzufügen
+[Force update of list from server at next connect]
+Liste bei der nächsten Verbindung vom Server laden
+[Not on list contacts]
+Kontakte, die nicht in der Liste sind
+[Do not add contacts that request info]
+Kontakte bei Ereignisanfragen nicht hinzufügen
+[Add contacts that request info to special group:]
+Kontakte bei Ereignisanfragen in diese Gruppe hzfg.:
+[add temporarily]
+Vorübergehend hzfg.
+[send "you added"]
+Sende "hinzugefügt"
+[request authorisation]
+Auth. anfragen
+[Remove temp. && "Not In List" contacts]
+Temporäre Kontakte entfernen
+[Enable server-side contact lists]
+Serverseitige Kontaktliste aktivieren (*)
+
+[Enable AIM support]
+AIM Unterstützung aktivieren
+[Enable Custom status support]
+XStatus-Unterstützung aktivieren
+[Enable RTF text receive(if ID Miranda)]
+RTF-Text empfangen (falls ID Miranda)
+[Accept RTF (if ID Miranda)]
+RTF-Text empfangen (falls ID Miranda)
+[Block unknown clients]
+Unbekannte Clients blockieren
+[Show DC icon in contact list]
+Zeige DC-Icon in Kontaktliste
+[DC icon slot:]
+DC-Iconslot:
+[xStatus options]
+XStatus-Einstellungen
+[Display Custom status icon in contact list]
+XStatus-Icon in Kontaktliste anzeigen
+[Custom status icon slot:]
+XStatus-Iconslot:
+[Replace Custom status name in menu*]
+XStatus-Namen im Menü ersetzen*
+[Force to reread xstatus]
+Erneutes Auslesen des XStatus' erzwingen
+[Enable non-standart statuses*]
+Nicht standardisierte XStatus aktivieren*
+[Update contacts xStatuses every]
+Update des XStatus' der Kontakte alle
+[*need restart]
+*benötigt Neustart
+
+[Enable tZer support (receiving) *]
+Empfang von tZers aktivieren*
+[Enable tZer support]
+Empfang von tZers aktivieren
+[tZer received: %s\r\n%s]
+tZer empfangen: %s\r\n%s
+[Send tZer]
+tZer senden
+[Send T-Zer]
+tZer senden
+[Other features]
+Invisible-Statuserkennung
+[Enable Active Status Discovery]
+Aktive Statuserkennung
+[Enable Passive Status Discovery]
+Passive Statuserkennung
+[Always show auth items in menu]
+Autorisierungsmenüeinträge immer anzeigen
+[Protocol status menu]
+Protokollstatusmenü
+[Advanced Features && Users Status Scan Placement]
+Platzierung der erw. Funktionen und des Statusscans
+[Stealth away message request]
+Versteckte Statusnachrichtenabfrage
+[Global (affects every plugin)]
+Global (betrifft alle Protokolle)
+[Usermenu entry]
+Benutzermenüeintrag
+
+;ASD Funktion
+;Aktive Statuserkennung
+[Show privacy tools in user's menu]
+Privatsphäretools im Kontaktmenü anzeigen
+[Show visibility tools in user's menu]
+Sichtbarkeitstools im Kontaktmenü anzeigen
+[ASD Options]
+Aktive Statuserkennung
+[Methods]
+Methoden
+[Detect via status message (some old clients)]
+Erkennen per Statusnachricht (einige alte Clients)
+[Detect via malformed xtraz (icq6) (by [sin])]
+Erkennen per fehlerhafter Xtraz (ICQ6)
+[Detect via malformed url (old miranda, some other clients)]
+Erkennen per fehlerhafter URL (altes Miranda, einige andere Clients)
+[Detect unauthorized contacts' status (reported by D@rkNeo)]
+Erkenne Status unautorisierter Kontakte
+[Detect via Auth server bug]
+Erkennen per Authserverfehler
+[Detect via server authorization bug]
+Erkennen per Authserverfehler
+[Note: Status Discovery feature is experimental only :) Use it at your own risk. If you have some issues with it, disable it, or try different configuration, not all methods and options are 100% reliable.]
+Hinweis: Die Statuserkennung ist experimentell. Verwenden Sie sie auf eigenes Risiko. Wenn Sie Probleme mit ihr haben, deaktivieren Sie es oder ändern Sie die Einstellungen, nicht alle Methoden & Optionen sind zu 100% zuverlässig.
+
+;QIP-Status
+[Add. Status Settings]
+QIP-Status
+[Enable Add. Statuses*]
+Unterstütze QIP-Status*
+[Display Icon]
+Zeige Icon
+
+[Ignore authorization requests]
+Autorisierungsanfragen ignorieren
+[Don't send Status Message Reply (no away-message)]
+Statusanfragen unbeantwortet lassen (keine Statusnachricht)
+
+[Show my real Client ID for ICQJ Mod users]
+Echte Client-ID anderen ICQJ-Mod-Nutzern zeigen
+[Client ID]
+Client-ID
+[Client ID:]
+Client-ID:
+[ICQ plugin release:]
+ICQ-Pluginversion:
+[Send custom protocol version:]
+Eigene Protokollversion senden:
+[(range 0-255)]
+(0 bis 255)
+[(range 0-65535)]
+(0 bis 65535)
+[Capabilities]
+Fähigkeiten
+[Your client ID is changed!\nChanging client id can result in serious messaging problems!\n\nIf you experience such problems, set your client ID back to "Miranda"]
+Sie verwenden eine GEÄNDERTE CLIENT-ID!\nDies kann ERNSTHAFTE Probleme beim Nachrichtenversand hervorrufen\n(SCHRIFTFORMATIERUNGEN etc.)\nSollten IRGENDWELCHE Probleme mit DIESER Client-ID auftreten,\ndann setzen Sie Ihren Client auf MIRANDA zurück,\nBEVOR Sie IRGENDWELCHE Probleme im Forum posten!
+[Changing client ID can result in serious messaging problems!]
+Eine geänderte Client-ID kann ERNSTHAFTE Probleme beim Nachrichtenversand hervorrufen (SCHRIFTFORMATIERUNGEN etc.)\n\n\nBEVOR Sie IRGENDWELCHE Probleme im Forum berichten, setzen Sie Ihre Client-ID auf "Miranda" zurück!
+[Send custom capabilities]
+Übermittle eigene Fähigkeiten
+[Edit capabilities]
+Fähigkeiten ändern
+[..and if MirandaIM, use this ICQ mod:]
+und falls ID MirandaIM, diese ICQ-Mod benutzen:
+[Custom capability:]
+Eigene Fähigkeiten senden:
+[Send capabilities from other plugins]
+Übermittle Fähigkeiten anderer Plugins
+[Manage ICQ Capabilities List]
+ICQ-Fähigkeiten verwalten
+[Manage capabilities...]
+Fähigkeiten verwalten...
+[Capabilities List]
+Fähigkeiten
+[Capability]
+Fähigkeit
+[Capability text:]
+Fähigkeitstext:
+[Capabilities are simply said protocol markers, which identify what specific protocol features is your client capable to provide you.\n\nExample: MIM/lamepack\n\nFor more capabilities, you have to know yourselves where to look :)]
+Fähigkeiten sind, einfach gesagt, Markierungen, die anzeigen, welche speziellen Protokollfunktionen Ihr Client Ihnen bieten kann.\n\nBeispiel: MIM/lamepack\n\nFür weitere Fähigkeiten müssen Sie selbst herausfinden, wo Sie nachsehen müssen. :)
+
+[%s Log]
+%s Loggen
+[Events log]
+Ereignis-Log
+[Removes himself from my Serverlist:]
+Jemand löscht sich von meiner Serverliste:
+[Removed himself from my Serverlist:]
+Jemand löschte sich von meiner Serverliste:
+[Checking ignore state:]
+Jemand überprüft Ignorieren:
+[Checking real status:]
+Jemand überprüft Unsichtbarkeit:
+[Auth grant/denied:]
+Jemand gewährt/verweigert Autor.:
+[Client change:]
+Jemand ändert den Client:
+[Request your info]
+Jemand fragt meine Info ab:
+[Reading your x-status message]
+Jemand liest meine X-Statusnachricht:
+[Detected via ASD]
+Aktive Statuserkennung
+[Detected via ASD/PSD]
+Jemand wurde gefunden via ASD/PSD:
+[Write events to contact history (if not set writing to system history)]
+Zeige Ereignisse im Kontaktverlauf (wenn nicht Systemverlauf aktiviert)
+
+[To enable Active Status Discovery you must restart your Miranda after option is enabled]
+Um die aktive Statuserkennung zu (de-)aktivieren, müssen Sie Miranda neu starten.
+[Invisible Status Detection]
+Statuserkennung
+[Status Discovery System]
+Statuserkennung
+[Active Status Discovery Options...]
+Optionen für akt. Statuserkennung...
+[ICQ Plus Active Status Discovery]
+ICQ Plus - Aktive Statuserkennung
+[Configure your ASD options]
+Konfigurieren Sie die Statuserkennung
+[Check entire list on startup]
+Komplette Liste beim Start prüfen
+[Enable only for offline and invisible contacts\n(can fix some ASD problems)]
+Nur für Offline- und unsichtbare Kontakte akt.\n(beseitigt einige Probleme)
+[Disable status check in invisible status]
+Aktive Statuserkennung im Unsichtbar-Modus deakt.
+[Disable Passive Status Discovery for hidden contacts]
+Passive Statuserkennung für ausgeblendete Kontakte deaktivieren
+[Show status check item in user menu]
+"Status prüfen" im Kontaktmenü anzeigen
+[Place Users Status Scan inside Advanced Features menu]
+Zeige Benutzerstatusscan in Erweiterte Funktionen
+[Show visibility items in user menu]
+Zeige Sichtbarkeitseinträge auch im Kontaktmenü
+[invisible for invisible contacts (sorry, maybe later)]
+Unsichtbar für unsichtbare Kontakte (Funktion noch nicht vorhanden)
+
+[&Users Status Scan]
+Ben&utzerstatus scannen
+[Allow all users to see you]
+Alle Benutzer dürfen mich sehen
+[Block all users from seeing you]
+Kein Benutzer darf mich sehen
+[Allow only users in the Visible list to see you]
+Alle Benutzer in der Sichtbarkeitsliste dürfen mich sehen
+[Block only users in the Invisible list from seeing you]
+Alle Benutzer in der Unsichtbarkeitsliste dürfen mich nicht sehen
+[Allow only users in the Contact list to see you]
+Alle Benutzer auf der Kontaktliste dürfen mich sehen
+[Allow only users in the Contact list to see you, except Invisible list users]
+Alle Benutzer auf der Kontaktliste dürfen mich sehen, außer Benutzern auf der Unsichtbarkeitsliste
+[Send global authorization request to all users, who haven't authorized you yet]
+Autorisierungsanfrage an alle Kontakte senden, die mich noch nicht autorisiert haben 
+[Server ignore]
+Auf dem Server ignorieren
+
+[Active Status Scan]
+Statuserkennung
+[Users Status Scan Complete]
+Benutzerstatus-Scan abgeschlossen
+[detected via ASD]
+gefunden via ASD
+[...was found!]
+... wurde gefunden!
+[... is checking your ignore list]
+... überprüft, ob er ignoriert wird
+[... is checking your real status]
+... überprüft Ihren wirklichen Status
+[... is checking your real status (contact which you invisible for request status message)]
+... überprüft Ihren wirklichen Status (Kontakt befindet sich auf der Unsichtbarkeitsliste)
+[... is checking your real status contact which you are invisible for requests your status message]
+... überprüft Ihren wirklichen Status (Kontakt befindet sich auf der Unsichtbarkeitsliste)
+[... is checking your real status (xtraz request)]
+... überprüft Ihren wirklichen Status (Xtraz-Anfrage)
+[... is checking your real status Authorization requested]
+... überprüft Ihren wirklichen Status (Autorisierungsanfrage)
+[... is checking your real status (auth denied, server bug, 95% you detected)]
+... überprüft Ihren wirklichen Status (Autorisierung abgelehnt, Server-Bug, zu 95 % wurden Sie gefunden)
+[... is checking your real status ...probably detected your invisibility (auth granted)]
+... überprüft Ihren wirklichen Status ...wahrscheinlich wurde Ihre Unsichtbarkeit erkannt (Authorisierung gewährt)
+[has checked your ignore list]
+... hat Ihre Ignorierliste überprüft.
+[User "%s" was authorized in the server list.]
+%s wurde in der Serverliste autorisiert.
+[Contact "%s" was authorized in the server list.]
+%s wurde in der Serverliste autorisiert.
+[User "%s" was denied your authorization request.]
+%s hat Ihre Autorisierungsanfrage abgelehnt.
+[User "%s" was denied your authorization request.(may be checking for invisible status)]
+%s hat Ihre Autorisierungsanfrage abgelehnt (und überprüft, ob Sie unsichtbar sind).
+[User "%s" was granted your authorization request.(may be checking for invisible status)]
+%s hat Ihre Autorisierungsanfrage akzeptiert (und überprüft, ob Sie unsichtbar sind).
+[User was removed from server list.]
+Kontakt hat sich aus Serverliste entfernt
+[removed himself from your Serverlist!]
+hat sich selbst aus Ihrer Serverliste entfernt
+[has removed himself from your Serverlist!]
+hat sich selbst aus Ihrer Serverliste entfernt
+[...was found! (Passive)]
+... wurde gefunden! (Passiv)
+[...was found! (Active)]
+... wurde gefunden! (Aktiv)
+[Entire List Check]
+Kompletter Statuscheck
+[Users Status Scan Started]
+Benutzerstatusscan gestartet
+[User Found]
+Nutzer gefunden
+[Change Client]
+Client gewechselt
+[ICQ XStatus Updater]
+Anfragen an alle Kontakte gesendet
+[Info Request]
+Inform.-Anfr.
+[Check Ignore State]
+Ignorierliste prüfen
+[Show Popup if someone removes himself from my Serverlist]
+Zeige Popup, wenn sich jemand von meiner Serverliste löscht
+[Show popup if someone checks ignore state]
+Zeige Popup, wenn jemand auf Ignorieren prüft
+[Show popup if not on list contact request info]
+Zeige Popup, wenn unbekannte Nutzer Status prüfen
+[Show contact's UIN in Popups]
+Zeige UIN des Kontakts in Popups
+[Show popups for hidden/notonlist users]
+Zeige Popups für versteckte und unbekannte Kontakte
+[Show popups for notonlist users]
+Zeige Popups für unbekannte Kontakte
+[Show popups for ignored users]
+Zeige Popups für ignorierte Kontakte
+[Show popups for hidden users]
+Zeige Popups für versteckte Kontakte
+[Show popups when someone change client]
+Zeige Popups, wenn jemand seinen Client ändert
+[Show popups about close window (ICQ6)]
+Zeige Popups, wenn das Fenster geschlossen wird (ICQ6)
+[Show reading XStatus notify]
+Zeige Popups, wenn jemand den XStatus liest
+
+[QIP Status]
+QIP-Status
+[qip status settings]
+QIP-Status
+[Enable qip statuses*]
+Aktiviere QIP-Status*
+
+[Depress]
+Deprimiert
+[At Home]
+Zu Hause
+[At Work]
+Bei der Arbeit
+
+[Send global authorization request to all users who haven't authorized you yet]
+Autorisierungsanfrage an alle Kontakte senden, die mich noch nicht autorisiert haben 
+
+[Servers Manager]
+Servermanager
+[Server address:]
+Serveradresse:
+
+[Start Scan]
+Scan starten
+[Stop Scan]
+Scan beenden
+[Pause Scan]
+Scan pausieren
+[Server List]
+Serverliste
+[Unchecked item]
+Inaktives Element
+[Checked item]
+Aktives Element
+
+[Register new account...]
+Neues Konto registrieren...
+
+[HTTP User Agent for proxy:]
+HTTP-Useragent für Proxy:
+[Try to connect to next server in list if connection error occured]
+Bei Verbindungsfehler nächsten Server testen
+
+[Force update of list from server on next login]
+Liste bei der nächsten Anmeldung vom Server laden
+
+[Contacts not on the list]
+Unbekannte Kontakte
+[Don't add contacts that request my profile]
+Keine Kontakte hinzufügen, die mein Profil abfragen
+[Add contacts that request my profile to group:]
+Versch. Kont., die mein Pr. abfragen, in Gruppe:
+[Add temporarily only]
+Nur temporär hinzufügen
+[Remove temporary contacts at startup]
+Temporäre Kontakte beim Start entfernen
+[Allow bigger owner avatars (up to 128x128)]
+Größere Besitzeravatare erlauben (bis zu 128x128 Pixel)
+
+[Enable Unicode messaging support]
+Aktiviere Unicode-Unterstützung
+[Send all messages in Unicode if possible]
+Alle Nachr. als Unicode senden, wenn möglich
+[Use this codepage for ANSI <-> Unicode translation:]
+Diese Codepage für Umwandlung ANSI <-> Unicode nutzen:
+
+[Icon slot:]
+Iconslot:
+
+[Custom status options]
+XStatus-Optionen
+[Replace Custom status name in menu *]
+XStatus-Namen im Menü ersetzen *
+[Enable non-standart statuses *]
+Nicht-Standard-XStatus erlauben *
+[Update contacts' Custom status every]
+Aktualisiere XStatus der Kontakte alle
+
+[Note: Options marked with asterisk (*) require restart of Miranda.]
+Hinweis: Optionen mit einem * benötigen einen Neustart von Miranda IM.
+
+[Incognito away message request]
+Versteckte Statusnachrichtenabfrage
+[Contact menu entry]
+Kontaktmenüeintrag
+
+[Additional status settings]
+QIP-Status
+[Enable Additional status support]
+QIP-Statusunterstützung aktivieren
+[Display Additional status icon]
+QIP-Statusicon zeigen
+
+[Enable tZers support]
+tZers-Unterstützung aktivieren
+[Always show authorization items in menu]
+Immer Autorisierungseinträge im Menü zeigen
+
+[Detect unauthorized contacts' status (reported by D@rkNeo) (broken at this moment)]
+Erkenne Status unautorisierter Kontakte (derzeit defekt)
+
+[Don't reply to any Status Message request]
+Nicht auf Statusanfragen antworten
+
+[Events Log]
+Ereignisverlauf
+
+[Removed himself from my server-list:]
+Jemand löscht sich von meiner Serverliste:
+[Client changed:]
+Jemand änderte seinen Client:
+[Authorization granted/denied:]
+Autorisierung gewährt/verweigert:
+[Requesting my profile:]
+Jemand fragt mein Profil ab:
+[Detected via ASD/PSD:]
+Erkannt via ASD/PSD:
+
+[Log events to contacts' history (logging to system history if not set)]
+Logge Ereignisse im Kontaktverlauf (Systemverlauf, falls nicht vorhanden)
+
+[Log File:]
+Verlaufsdatei:
+
+[Because of stability reasons, be aware before changing your Client ID.\nSome configurations are not healthy and may lead to the messaging problems.\n\nDo NOT touch it before you know what you are doing :)]
+Aus Stabilitätsgründen sollten Sie Vorsicht walten lassen, bevor Sie Ihre Client-ID ändern. Einige Konfigurationen könnten zu Problemen beim Übermitteln von Nachrichten führen.\n\nFassen Sie sie NICHT an, bevor Sie wissen, was Sie tun. :)
+
+[Basic Popups]
+Standard-Popups
+[Additional Popups]
+Weitere Popups
+
+[Display contact's UIN in popups]
+Zeige UIN des Kontakts in Popups
+[Show popups for hidden contacts]
+Zeige Popups für versteckte Kontakte
+[Show popups for ignored contacts]
+Zeige Popups für ignorierte Kontakte
+[Show popups for users not on list]
+Zeige Popups für unbekannte Kontakte
+
+[Client changed]
+Client geändert
+[Info request]
+Info-Anfrage
+[Check ignore]
+Ignorieren prüfen
+[Self removal]
+Hat sich entfernt
+[Custom Status Updater]
+XStatus aktualisiert
+
+[Support for ICQ network, enhanced.]
+Unterstützung für das ICQ-Netzwerk, erweitert.
+[Remove temporary contacts after login]
+Temp. Kontakte nach Anmeldung entf.
+[Show my real ClientID for ICQJ Mod users]
+Echte Client-ID anderen ICQJ-Mod-Nutzern zeigen
+[X-Status icon slot:]
+XStatus-Iconslot:
+[Enable only for offline and invisible contacts (can fix some ASD problems)]
+Nur für Offline- und unsichtbare Kontakte akt. (beseitigt einige Probleme)
+[Detect unauthorized contacts status (reported by D@rkNeo)]
+Erkenne Status unautorisierter Kontakte
+[Detect via malformed URL (old miranda, some other clients)]
+Erkennen per fehlerhafter URL (altes Miranda, einige andere Clients)
+[Detect via malformed Xtraz (ICQ6)]
+Erkennen per fehlerhafter Xtraz (ICQ6)
+[Detect via Auth server bug (not implemented yet)]
+Erkennen per Authserverfehler (noch nicht implementiert)
+[Additional status:]
+QIP-Status:
+[Add. Status]
+QIP-Status
+[qip Status]
+QIP-Status
+[qip status]
+QIP-Status
+[Enable qip Statuses*]
+Aktiviere QIP-Status*
+[qip Status Settings]
+QIP-Status

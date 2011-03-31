@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{bd3b4a72-d649-48a5-8820-532e8cd3dd7b}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2e48ef15-afa7-40aa-9ced-a74d0c267fca}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{ad72be7a-11b8-4bd0-9544-b59dc218927f}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Documentation">
+      <UniqueIdentifier>{a3bd590a-6b96-47b6-871c-162145ec3d0e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="encryption.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ICQserver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mirabilis.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="miranda.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="progress.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wizard.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ICQserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="import.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mirabilis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mirandadb0700.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="import.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\import-ICQ_Db_Specs.txt">
+      <Filter>Documentation</Filter>
+    </None>
+    <None Include="docs\import-license.txt">
+      <Filter>Documentation</Filter>
+    </None>
+    <None Include="docs\import-readme.txt">
+      <Filter>Documentation</Filter>
+    </None>
+    <None Include="docs\import-translation.txt">
+      <Filter>Documentation</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

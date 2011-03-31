@@ -1,0 +1,247 @@
+; Pluginname: MSN Protocol 
+; Version: 0.9.11.2
+; Dateiname: MSN.dll
+; Unique ID: {97724af9-f3fb-47d3-a3bf-eaa935c74e6d}
+; Autor(en): Boris Krasnovskiy, George Hazan, Richard Hughes
+; Übersetzung: 28.06.05 von Lastwebpage
+
+[Adds support for communicating with users of the MSN Messenger network]
+Fügt Unterstützung für die Kommunikation mit Benutzern des MSN-Netzwerks hinzu
+
+[Display &Hotmail Inbox]
+&Hotmail-Posteingang anzeigen
+[My Live &Space]
+Mein Live-&Space
+[Setup Live &Alerts]
+Live-&Alerts einstellen
+
+[&Block]
+&Blockieren
+[&Unblock]
+Blockieren a&ufheben
+[&Invite to chat]
+Zum Chat e&inladen
+[&Start Netmeeting]
+NetMeeting &starten
+[View Live &Space]
+Live-&Space/WordPress ansehen
+[Send &Hotmail E-mail]
+&Hotmail-E-Mail senden
+[Open &Hotmail Inbox]
+&Hotmail-Posteingang öffnen
+[Edit Live &Space]
+Live-&Space/WordPress bearbeiten
+
+[Create a new Windows Live account]
+Ein neues Windows-Live-Konto erstellen ...
+
+[Send message font color/size info inside messages]
+Farbe und Größe der Nachrichtenschrift senden
+[Disable all contacts not included into my contact list]
+Alle Kontakte blockieren, die nicht in meiner Kontaktliste sind
+[Treat Away status as 'Be Right Back']
+Status 'Abwesend' als 'Bin gleich zurück' verarbeiten
+[Manage server groups]
+Serverseitige Gruppen verwalten
+[Allow people on my contact list send messages to mobile device]
+Kontakte auf meiner Kontaktliste dürfen Nachrichten auf mein mobiles Gerät senden
+[Run the following application when new Hotmail arrives]
+Führe folgendes Programm aus, sobald eine neue Hotmail eintrifft:
+
+[Direct:]
+Direkt:
+[Notify me when a message delivery has failed]
+Teile mir mit, wenn eine Nachricht nicht gesendet werden konnte
+
+[Automatically obtain host/port]
+Host/Port automatisch ermitteln
+[Manually specify host/port]
+Host/Port manuell angeben
+[Your host (or router):]
+Ihr Host (oder Router):
+[IP info available only after login]
+IP-Info ist nur nach Login verfügbar
+
+[Server list]
+Serverliste
+;[Server Lists]
+;Serverlisten
+[Server List Manager]
+Serverliste verwalten
+[Contact is on your local list]
+Kontakt ist in der lokalen Liste
+[Contact is included into your server list]
+Kontakt ist in Ihrer Serverliste enthalten
+[Somebody included you in his/her server list]
+Jemand führt Sie in seiner Serverliste
+[Allowed (active) contact]
+Zugelassener Kontakt
+[Blocked contact]
+Blockierter Kontakt
+
+[Disable Popup notifications]
+Popup-Benachrichtigungen deaktivieren
+[Disable Contact List notifications]
+Kontaktlisten-Benachrichtigungen deaktivieren
+[Disable Tray notifications]
+Tray-Benachrichtigungen deaktivieren
+[Ignore new messages not in Inbox folder]
+Neue Nachrichten außerhalb des Posteingangs ignorieren
+
+[Enable 'Chat Session Established' popup]
+Popup 'Chatsitzung eingeleitet' aktivieren
+[Enable 'Contact left channel' popup]
+Popup 'Benutzer hat Channel verlassen' aktivieren
+
+[Server groups import may change your contact list layout after next login. Do you want to upload your groups to the server?]
+Der Import von serverseitigen Gruppen wird Ihre Kontaktliste verändern. Wollen Sie Ihre Gruppen an den Server übermitteln?
+[The changes you have made require you to reconnect to the MSN Messenger network before they take effect]
+Sie müssen sich neu ins MSN-Netzwerk einwählen, bevor die Änderungen wirksam werden.
+[MSN Protocol requires message timeout to be not less then 60 sec. Correct the timeout value.]
+Das MSN-Protokoll benötigt ein Nachrichtentimeout kleiner als 60 Sek. Korrigieren Sie das Timeout.
+
+;Kontakt löschen Dialog
+[MSN Delete Contact]
+MSN-Kontakt löschen
+[Block Contact]
+Kontakt blockieren
+[Remove from Hotmail Address book]
+Aus Hotmail-Adressbuch entfernen
+[Contact %s has been removed from the server.\nWould you like to keep it as \"Local Only\" contact to preserve history?]
+Kontakt %s wurde von der Server-Kontaktliste gelöscht.\nWollen Sie diesen Kontakt als lokalen Kontakt behalten, um den Verlauf zu erhalten?
+
+; Unicode Miranda
+[Subject: %s]
+Betreff: %s
+[Hotmail from %s (%S)]
+Hotmail von %s (%S)
+[Hotmail from %s]
+Hotmail von %s
+
+; Ansi Miranda
+[Subject: %S]
+Betreff: %S
+[Hotmail from %S (%s)]
+Hotmail von %S (%s)
+[Hotmail from %S]
+Hotmail von %S
+
+; msn_proto.cpp
+[You are not allowed to send offline messages to this user]
+Es ist Ihnen nicht erlaubt Offline-Nachrichten zu diesem Benutzer zu senden
+[You sent too many offline messages and have been locked out]
+Sie haben zu viele Offline-Nachrichten versucht zu senden, diese wurden nun gesperrt
+[Contact already in your contact list]
+Der Kontakt ist bereits in Ihrer Kontaktliste
+[Offline messaging is not allowed for LCS contacts]
+Offline-Nachrichten sind nicht für LCS-Kontakte erlaubt!
+[Message is too long: SMS page limited to 133 UTF8 chars]
+Die Nachricht ist zu lang: Die SMS-Seite ist begrenzt auf 133 UTF8-Zeichen!
+[You cannot send message to yourself]
+Sie können keine Nachricht zu sich selbst schicken!
+[Unread mail is available: %d in Inbox and %d in other folders).]
+Ungelesene E-Mails sind verfügbar: %d im Posteingang und %d in anderen Verzeichnissen.
+[A new mail has come from %s (title: %s).]
+Neue Mail empfangen von %s (Titel: %s).
+[A new mail has come from %s (%s) (title: %s).]
+Neue Mail empfangen von %s (%s) (Titel: %s).
+[Unread mail is available: %d messages (%d junk e-mails).]
+Ungelesene Mails sind verfügbar: %d Mails (%d Spam-E-Mails).
+[MSN Protocol]
+MSN-Protokoll
+[Hotmail Notify]
+Hotmail-Hinweis
+[Test: Arrival Hotmail]
+Popup-Test: Hotmail-Empfang
+[A New Hotmail has come!]
+Eine neue Hotmail empfangen!
+[Chat session established]
+Die Chatsitzung wurde eingeleitet
+[Chat session established by my request]
+Die Chatsitzung wurde durch mich eingeleitet
+[Chat session established by contact request]
+Die Chatsitzung wurde durch dem Gegenüber eingeleitet
+[Chat session dropped due to inactivity]
+Die Chatsitzung wurde wegen Inaktivität beendet
+[Contact left channel]
+Die Chatsitzung wurde beendet
+[Unable to contact MS Passport servers check proxy/firewall settings]
+Verbindung zum MSN-Netzwerk nicht möglich (Bitte Proxy/Firewall-Einstellungen überprüfen!)
+
+; Messages
+[%s (%s) has joined the chat with %s]
+%s (%s) hat den Chat mit %s betreten
+
+; msn_errors.cpp
+[MSN Services are temporarily unavailable, please try to connect later]
+MSN-Dienst ist im Moment nicht erreichbar, bitte versuchen Sie es später noch einmal.
+[MSN Services are too busy, please try to connect later]
+MSN-Dienst ist überlastet, bitte versuchen Sie es später noch einmal.
+[MSN protocol does not allow you to communicate with others when you are invisible]
+Das MSN-Protokoll erlaubt es Ihnen nicht, im "Unsichtbar"-Modus mit Anderen zu kommunizieren
+[MSN plugin cannot add a new contact because the contact list is full]
+Das MSN-Plugin kann keinen neuen Kontakt hinzufügen, da die Kontaktliste voll ist
+[User is already in your contact list]
+Benutzer ist bereits in Ihrer Kontaktliste
+[Your MSN account e-mail is unverified. Goto http://www.passport.com and verify the primary e-mail first]
+Ihr MSN-Account ist unbestätigt. Besuchen Sie http://passport.com und lassen Sie erst Ihre E-Mail-Adresse bestätigen oder beachten Sie die erhaltene Antwortmail von Passport/MSN.
+[Your username or password is incorrect]
+Ihre Live-ID (E-Mail-Adresse) oder das Passwort ist nicht korrekt
+[Unrecognised error %d. The server has closed our connection]
+Unbekannter Fehler %d. Der Server hat die Verbindung geschlossen.
+
+; Errors + weiterleitung von msn_proto.cpp
+[Your avatar not set correctly. Avatar should be set in View/Change My Details | Avatar]
+Ihr Avatar wurde nicht korrekt gesetzt. Ändern Sie Ihr Avatar ausschließlich über Hauptmenü=>"Mein Profil ändern" | Avatar
+[Attempt to make the SSL connection resulted to error %d: %s.]
+Beim Versuch eine SSL-Verbindung aufzubauen, gab es einen Fehler %d: %s.
+[Cannot start the file transfer: no free sockets. Error %d: %s.]
+Der Dateitransfer konnte nicht gestartet werden: keine freien Sockets. Fehler %d: %s.
+[Cannot start the file transfer due to the lack of free sockets.]
+Der Dateitransfer konnte aufgrund fehlender freier Sockets nicht gestartet werden.
+[Cannot start the file transfer: cannot listen on a socket. Error %d: %s.]
+Der Dateitransfer konnte nicht gestartet werden: Kein Socket antwortet: Fehler %d: %s.
+[Contact tried to send its webcam data (currently not supported)]
+Kontakt versucht Informationen über die von ihm verwendete Webcam zu senden (zzt. nicht unterstützt)
+[Contact tried to view our webcam data (currently not supported)]
+Kontakt versucht Informationen über Ihre verwendete Webcam abzufragen (zzt. nicht unterstützt)
+[Contact tried to open an audio conference (currently not supported)]
+Kontakt versucht eine Audiokonferenz zu starten (zzt. nicht unterstützt)
+[file transfer is canceled by remote host]
+Dateitransfer vom Remote-Host unterbrochen
+[file transfer: time out occurred]
+Dateitransfer: Zeitlimit erreicht
+[Internet Explorer is in the 'Offline' mode. Switch IE to the 'Online' mode and then try to relogin]
+Der Internet Explorer ist im "Offline"-Modus. Schalten Sie den Modus auf "Online" und versuchen Sie es erneut.
+[MSN protocol allows only one file to be sent at a time]
+Das MSN-Protokoll erlaubt nur einen Dateitransfer gleichzeitig!
+[MSN protocol does not support offline messages]
+Das MSN-Protokoll unterstützt keine Offlinenachrichten
+[Message is too long: MSN messages are limited by 1202 UTF8 chars]
+Nachricht ist zu lang: MSN-Nachrichten dürfen maximal 1202 UTF8-Zeichen lang sein.
+[Server has requested an unknown protocol set (%s)]
+Der Server hat eine unbekannte Protokoll-Einstellung abgefragt (%s)
+[Unknown or invalid host name was specified (%s). Error %d: %s]
+Der Hostname ist unbekannt oder ungültig (%s). Fehler %d: %s
+[You must be talking to start Netmeeting]
+Sie müssen reden, um NetMeeting zu starten, beachten Sie die Hilfedatei zu NetMeeting.
+[You must specify your e-mail in Options/Network/MSN]
+Sie müssen Ihre E-Mail-Adresse in 'Einstellungen->Protokolle->MSN' angeben.
+
+; chat log message
+[This conversation has been inactive, participants will be removed.]
+Diese Konversation war inaktiv, Teilnehmer werden entfernt.
+[To resume the conversation, please quit this session and start a new chat session.]
+Um die Konversation fortzusetzen, beenden Sie diese Sitzung und starten Sie eine neue.
+
+; contact list and chat title
+[MSN Chat #]
+MSN-Multi-Chat #
+
+; message box
+[There is only 1 person left in the chat, do you want to switch back to standard message window?]
+Es befindet sich nur noch eine Person im Multi-Chat, wollen Sie wieder zum normalen Nachrichtenfenster wechseln?
+[User is already in the chat session.]
+Kontakt befindet sich bereits in der Chatsitzung.
+[No active chat session is found.]
+Keine aktive Chatsitzung gefunden.

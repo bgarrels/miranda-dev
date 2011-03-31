@@ -1,0 +1,129 @@
+; Pluginname: Import contacts and messages
+; Version: 0.9.11.2
+; Dateiname: import.dll
+; Unique ID: {2d77a746-00a6-4343-bfc5-f808cdd772ea}
+; Autor: Martin Öberg; Bio
+; Link: Stable & Testing
+; Übersetzung: 19.07.05 von andydu
+
+[Imports contacts and messages from Mirabilis ICQ and Miranda IM.]
+Importiert Kontakte und Nachrichten aus ICQ und Miranda IM.
+[This wizard will help you import contacts and message history from Mirabilis ICQ, as well as letting you import from other Miranda IM profiles.]
+Dieses Programm soll helfen Kontakte und Nachrichten aus ICQ oder anderen Miranda-IM-Profilen zu importieren.
+[Click "Next" to choose the information you wish to import, or click "Cancel" to exit the wizard and continue using Miranda.]
+Klicken Sie auf "Weiter", um die gewünschten Informationen zu importieren, oder klicken Sie auf "Abbrechen", um die Importfunktion zu beenden.
+[It is recommended that you create a backup of your current Miranda profile before importing.]
+Es wird empfohlen das aktuelle Miranda-Profil vor dem Importieren zu sichern.
+[Choose how you would like to import:]
+Art des Imports auswählen
+[From a Miranda IM database.]
+Eine Miranda IM-Profildatei.
+[From a Mirabilis ICQ (99a or later) database.]
+Eine ICQ-Profildatei (99a o. höher, NICHT ICQLite!).
+[From a Mirabilis ICQ (99a - 2003a) database.]
+Eine ICQ-Profildatei (99a - 2003a).
+[Use the Find/Add contacts tool to populate my contact list.]
+'Kontakte suchen/hinzufügen'-Dialog benutzen.
+[Miranda has found Mirabilis ICQ databases corresponding to the following ICQ numbers. Please select the one you wish to import, or click "Other Database" if your database is not listed.]
+Miranda hat ICQ-Datenbanken gefunden, die zu folgenden Nummern gehören. Bitte wählen Sie die, die Sie importieren wollen, aus, oder klicken Sie auf "Andere Datenbank", wenn Ihre dort nicht auftaucht.
+[Miranda has found Miranda profiles with the following names. Please select the one you wish to import, or click "Other Profile" if your profile is not listed, or if the list is empty.]
+Miranda IM fand IM-Profile mit folgenden Namen. Wählen Sie jenes, welches importiert werden soll aus, oder klicken Sie auf "Andere Profile", falls das gewünschte Profil nicht aufgelistet ist.
+[Import all contacts and all messages]
+Alle Kontakte und Nachrichten importieren
+[Select this if you want to import as much data as possible. This is the recommended option.]
+Diese Option wählen, um alle möglichen Daten zu importieren. (empfohlen)
+[Only import contacts]
+Nur Kontakte importieren
+[Select this if you want to import contacts but don't want to import any message history.]
+Diese Option wählen, wenn nur die Kontakte und keine Nachrichten importiert werden sollen.
+[Custom import]
+Eigene Auswahl
+[Select this if you want to cutomize what to import.]
+Wählen Sie dies, wenn Sie selbst auswählen wollen, was importiert werden soll.
+[Import additional modules settings (for new contacts only)]
+Zusätzliche Moduleinstellungen für neue Kontakte importieren
+[Let me choose which contacts and messages to import]
+Kontakte und Nachrichten für Import auswählen
+[This option lets you specify exactly what to import. Recommended for expert users.]
+Diese Option ermöglicht erweiterte Importeinstellungen (nur für Experten!).
+[Select items to import:]
+Elemente zum Importieren auswählen:
+[New contacts && groups]
+Neue Kontakte && Gruppen
+[FileTrasfers]
+Dateiübertragungen
+[System history]
+Systemverlauf
+[Only since:]
+Nur seit:
+
+[The given file does not exist. Please check that you have entered the name correctly.]
+Die angegebene Datei existiert nicht. Bitte eingegebenen Dateinamen überprüfen.
+[Mirabilis Import]
+ICQ Import
+[Mirabilis ICQ database indexes (*.idx)\0*.IDX\0All Files (*)\0*\0]
+ICQ-Datenbankindizes (*.idx)\0*.IDX\0Alle Dateien (*)\0*\0
+[Mirabilis ICQ database indexes (*.idx)]
+ICQ-Datenbanken (*.idx)
+
+[Miranda Import]
+Miranda-IM-Import
+[Miranda IM database (*.dat)\0*.DAT\0All Files (*)\0*\0]
+Miranda-IM-Profildatei (*.dat)\0*.DAT\0All Files (*)\0*\0
+
+[Download ICQ contacts from my server contact list.]
+Download der serverseitigen Kontakte vom ICQ-Server.
+[Add that user to your contact list]
+Diesen Kontakt zur Liste hinzufügen
+[Do not import the event]
+Dieses Ereignis nicht importieren
+[Messages sent]
+Nachrichten gesendet
+[Messages received]
+Nachrichten erhalten
+[URLs sent]
+URLs gesendet
+[URLs received]
+URLs erhalten
+[&Other Database...]
+Andere &Profildatei...
+[&Other Profile...]
+Anderes &Profil
+[Import completed]
+Import vollständig
+[If you wish to import more information, click "Next" to return to the start of the wizard, otherwise click "Finish" to start using Miranda.]
+Wenn Sie weitere Informationen importieren wollen, so klicken Sie bitte auf "Weiter", um an den Anfang dieses Assistenten zu gelangen, anderenfalls klicken Sie auf "Ende", um Miranda zu nutzen.
+[You will probably never need to use this wizard again, so you can save memory by not loading it every time you start Miranda. This will mean that the import menu item will no longer be available.]
+Wahrscheinlich wird dieses Programm kein weiteres Mal benötigt, daher wird es beim nächsten Start nicht wieder geladen.
+[If at a future date you wish to use the wizard again, you can make it load again by going to the Plugins section of the Options dialog box.]
+Zum Reaktivieren des Plugins bitte die Pluginseite nutzen und dort das Plugin 'Import' aktivieren.
+[Do not load the import plugin at startup again]
+Importplugin nicht wieder beim Starten laden
+[Added %d contacts, %d groups and %d events.]
+%d Kontakte, %d Gruppen und %d Ereignisse wurden hinzugefügt
+[Warning: Mirabilis ICQ running. Import may not be reliable.]
+Warnung: ICQ läuft gerade, Import könnte fehlerhaft werden.
+[Skipping system history import.]
+Überspringe Systemverlauf
+[Skipped %d contacts.]
+%d Kontakte übersprungen
+[Import completed in %d seconds.]
+Import abgeschlossen nach %d Sekunden.
+[Skipped %d duplicates and %d filtered events.]
+%d Duplikate und %d gefilterte Ereignisse übersprungen
+[Could not open file.]
+Datei konnte nicht geöffnet werden.
+[Now importing...]
+Importiere...
+[If a history event is found for a user who is not on your contact list:]
+Bei einer Nachricht eines Kontakts, der nicht in der Kontaktliste ist:
+[Select the events you would like to import:]
+Ereignisse zum Import auswählen:
+[Miranda has now been configured to automatically download the contacts in your server-side contact list the next time you connect to ICQ.]
+Miranda IM ist konfiguriert, dass serverseitige Kontakte vom Server bei einer Verbindung ins ICQ-Netzwerk lokal eingefügt werden.
+[If you want to change the way Miranda handles server-side contacts at a later time, you can do this in the ]
+Wenn die Einstellungen der serverseitigen Kontakte später geändert werden sollen, dann unter
+[&Filename:]
+&Dateiname:
+[Import Information Wizard]
+Import-Informations-Plugin

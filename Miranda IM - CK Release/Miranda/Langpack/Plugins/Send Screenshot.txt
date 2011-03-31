@@ -1,0 +1,181 @@
+; Pluginname: Send Screenshot 
+; Version: 0.8.0.0
+; Dateiname: SENDSS.dll
+; Unique ID: {ed39af7c-becd-404e-9499-4d04f711b9cb}
+; Autor: chronon
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1428
+; Übersetzung: 25.06.05 von Lastwebpage
+
+[Starting upload!]
+Starte Upload!
+[Not a supported file type.]
+Kein unterstützter Dateityp.
+[Could not create main dialog.]
+Kann Hauptfenster nicht öffnen.
+[Miranda is exiting]
+Miranda wird gerade beendet
+[Take a screenshot]
+Screenshot machen
+[Send desktop screenshot]
+Desktop-Screenshot senden
+[Could not register miranda service MS_SEND_SCREENSHOT.]
+Kann den Miranda-Dienst MS_SEND_SCREENSHOT nicht registrieren.
+[Could not register miranda service MS_SENDSS_SENDDESKTOP.]
+Kann den Miranda-Dienst MS_SENDSS_SENDDESKTOP nicht registrieren.
+[Could not add a share to the FTP File plugin.]
+Kann keine gemeinsam benutzte Datei zum FTP-File-Plugin hinzufügen.
+[Could not start the HTTP Server plugin.]
+Kann HTTP-Server-Plugin nicht starten.
+[ould not add a share to the HTTP Server plugin.]
+Kann keine gemeinsam benutzte Datei zum HTTP-Server-Plugin hinzufügen.
+[HTTP Server is not loaded!]
+HTTP-Server ist nicht geladen!
+[FTP File is not loaded!]
+FTP File ist nicht geladen!
+[Close all capture dialogs and edit windows now, after that press OK.]
+Nun bitte alle Aufnahmedialoge und Bearbeitungsfenster schließen, danach OK klicken
+[Take a screenshot and send it to a contact.]
+Erstellt einen Screenshot und sendet ihn einem Kontakt
+[Send screenshot to\n<unknown>]
+Sende Screenshot an\n unbekannt
+
+[<Only save>]
+Nur speichern
+[<entire desktop>]
+Gesamten Desktop
+[Send screenshot to <unknown> - Capture Options]
+Sende Screenshot an <unknown> - Parameter
+[Send screenshot to <Unknow Contact> - Capture Options]
+Sende Screenshot an <Unbekannter Kontakt> - Parameter
+[Send screenshot to\n]
+Sende Screenshot an\n
+[Delete &after send]
+N&ach dem Senden löschen
+[Delete after send]
+Nach dem Senden löschen
+[Fill description textbox.]
+Fülle Beschreibungstextbox
+[Target Tool]
+Zielscheibe
+[JPG &Quality :]
+JPG-&Qualität:
+[&Emulate Send button click.]
+ohne w&eiteren Dateitransfer-Dialog senden
+[&Fill description textbox.]
+Beschreibungs Textbox ausfüllen
+[Print&Screen Emulation]
+Druckta&sten-Emulation
+[Ti&med capture]
+Verzögerte Aufnahme
+[Time (secs) :]
+Zeit (Sek.) :
+[&Desktop]
+Ganzer Bildschirm
+[Single &Window]
+Einzelnes Fenster
+[C&lient Area]
+Fensterinha&lt
+[Drag&&Drop the target on the desired window.]
+Quellfenster mit Drag&Drop auswählen
+[Caption :]
+Fenstertitel:
+[Size (HxW) :]
+Größe (HxB):
+[&Format :]
+&Format:
+[Send B&y :]
+Senden per:
+[Des&tination Folder :]
+Speicherordner
+[E&xplore]
+Öffnen
+[C&hoose]
+Auswa&hl
+[Open again]
+Erneut öffnen
+[A&bout]
+Ü&ber
+[Use Edit&or]
+Edit&or
+[&Just save it]
+Nur speichern
+[&Capture]
+Starten
+[Capture]
+Einfangen
+[Send Screenshot]
+Screenshot senden
+
+[overlay on]
+Overlay ein
+[overlay off]
+Overlay aus
+[delete off]
+Löschen aus
+[delete on]
+Löschen ein
+[description off]
+Beschreibung aus
+[description on]
+Beschreibung ein
+
+[Destination for the image file(s):]
+Speicherort für Bilddateie(n):
+[Select a target window.]
+Bitte gewünschtes Fenster auswählen.
+[The content of the clipboard will be not saved. (This warning appear only one time.)]
+Der Inhalt der Zwischenablage wird nicht gespeichert (Diese Meldung wird nur einmal angezeigt)]
+
+;Action Menu
+[&Action]
+&Aktion
+[Clo&se]
+&Schließen
+[Close&&S&end]
+Schließen&&Senden
+[Close&&Sa&ve]
+Schließen&&Speichern
+;Tool Menu
+[&Tools]
+Werkzeuge
+[&Crop tool]
+Auss&chneiden
+[&Pen tool]
+Stift
+[&Line tool]
+&Linie
+[Transparent &Background]
+Transparenter Hintergrund
+[&Text tool]
+&Text
+[Fille&d]
+Ausgefüllt
+[&Rectangle tool]
+&Rechteck
+[&Ellipse tool]
+&Ellipse
+[Set &Width]
+Stiftbreite setzen
+[C&olor]
+Farbe setzen
+; Messages
+[&Set Width]
+&Stiftbreite eingeben
+[Set C&olor]
+Farbauswahl
+[Area]
+Bereich
+[New width?]
+Neue Stiftbreite?
+[Type the text to be draw:]
+Geben Sie den Text ein:
+[Send the screenshot?]
+Screenshot senden?
+
+[SendSS HTTP connections]
+SendSS-Plugin-HTTPS-Verbindungen
+
+[Warning: Your current IconPack's version differs from the one UserInfoEx is designed for.\nSome icons may not be displayed correctly]
+Achtung: Ihre aktuelle Icon-Paket-Version ist unterschiedlich zu der des UserInfoEx-Pakets, das hierfür erstellt wurde.\nEinige Icons werden eventuell nicht korrekt dargestellt.]
+[Warning: No IconPack found in one of the following directories: 'customize\\icons', 'icons' or 'plugins'!]
+Achtung: Kein Iconpack wurde in folgendem Ordner gefunden: 'customize\\Icons', 'Icons' oder 'Plugins'!

@@ -1,0 +1,107 @@
+; Pluginname: Avatar service 
+; Version: 0.9.11.2
+; Dateiname: avs.dll
+; Unique ID: {e00f1643-263c-4599-b84b-053e5c511d29}
+; Autor: Nightwish, pescuma
+; Link: Stable & Testing
+; Übersetzung: Dober am 10.11.05
+; Update: FREAK am 16.10.05
+
+[Load and manage contact pictures for other plugins]
+Lädt und verwaltet Kontaktbilder für andere Plugins.
+[Fatal error, image services not found. Avatar services will be disabled.]
+Schwerwiegender Fehler, Image-Services-Plugin wurde nicht gefunden. Der Dienst wird nun deaktiviert.
+
+; Mein Profil ändern
+[Set My Avatar]
+Meinen Avatar einstellen
+
+; Kontaktprofil
+[ Options ]
+Einstellungen
+[ Background ]
+Hintergrund
+[Points:]
+Punkte:
+[Color diff:]
+Differenz:
+
+[Set default picture]
+Setze Standardbild
+[Delete default picture]
+Lösche Standardbild
+[The pictures you can set here are used as default avatars\nfor contacts that don't have their own.\nUse the checkboxes to enable/disable showing avatars for the protocols.]
+Die hier eingestellten Bilder werden als Standard-Avatare für Kontakte\n genutzt, die keinen eigenen Avatar gesetzt haben. Mit den entsprechenden\nAuswahlfeldern können diese für einzelne Protokolle ein- und ausgeschaltet werden.
+[CAUTION: These pictures are NOT your own avatars.\nTo set your own Avatar goto Main Menu | View/Change My Details | Avatars]
+ACHTUNG: Bei diesen Bildern handelt es sich NICHT um die eigenen Avatare!\nDiese werden über das Hauptmenü unter 'Mein Profil ändern -> Avatar' festgelegt.
+
+[Contact Avatars]
+Kontaktavatare
+[Try to draw avatar background transparent (for images without transparency)]
+Versuche Avatarhintergr. transparent darzust. (für Bilder ohne Transparenz)
+[Num of points to define bkg:]
+Anzahl der Pkt. um Hg zu definieren:
+[Color difference allowed:]
+Erlaubter Farbunterschied:
+[Make transparency proportional to color diff]
+Transparenz proportional zum Farbunterschied machen
+[Draw avatars grayscale]
+Avatare grau färben
+[Show warning messages]
+Warnmeldungen anzeigen
+
+[Own Avatars]
+Eigene Avatare
+[When setting avatars, always make them square]
+Avatare beim Setzen quadratisch machen
+[Try to draw own avatar background transparent (for images without transparency)]
+Versuche Avatarhintergrund transparent darzustellen (für Bilder ohne Transparenz)
+[This uses the same additional options as in "Contact Avatars" tab]
+Diese Einstellung wird durch die Einstellungen im Tab "Kontaktavatare" ergänzt!
+
+; avatars.rc:IDD_OPENSUBCLASS
+[Protect the picture and prevent automatic avatars from overwriting it]
+Bild vor dem Überschreiben durch automatische Avatare schützen.
+
+; avatars.rc:IDD_AVATAROPTIONS
+[Set avatar options for %s]
+Avatar-Einstellungen für %s
+[Contact picture]
+Kontaktbild
+[Protect the picture]
+Bild schreibschützen
+[Set as hidden]
+Als versteckt setzen
+[Try to make picture background transparent]
+Versuche Hintergrund transparent darzustellen 
+[Use defaults]
+Standardwerte
+
+; main.c
+[Contact picture...]
+Kontaktbild...
+[Contact pictures]
+Kontaktbilder
+
+[Reset contact picture]
+Avatar zurücksetzen
+[Delete picture file from disk (may be necessary to force a reload, but will delete local pictures)?]
+Alten Avatar von der Festplatte löschen? (u. U. notwendig, um neues Bild zu setzen)
+
+[Contact Picture]
+Kontaktbild
+[Contact has no avatar]
+Kontakt hat kein Avatar
+
+[Protocol has no avatar]
+Protokoll hat keinen Avatar
+[Use per protocol avatars]
+Avatare je Protokoll setzen
+[Protocols have different avatars]
+Protokolle haben unterschiedliche Avatare
+[Make the avatar square]
+Avatar quadrieren
+[Grow avatar to fit max allowed protocol size]
+Avatargröße an maximale Protokollgröße anpassen
+[Resize the avatar to fit max allowed protocol size]
+Avatar auf maximal erlaubte Größe bringen

@@ -1,0 +1,22 @@
+; Pluginname: dbRW Database Driver 
+; Version: 1.5.0.0
+; Dateiname: dbx_rw.dll
+; Autor: Robert Rainwater
+; Unique ID: {f3ca0e5e-249a-40f0-8d74-80a80ef0c83d}
+; Link: Stable
+; Übersetzung: CHEF-KOCH am 22.07.2010
+
+[Loading dbRW v%s alpha #%s (SQLite v%s)]
+Lade dbRW v%s alpha #%s (SQLite v%s)
+[Loading dbRW v%s (SQLite v%s)]
+Lade dbRW v%s (SQLite v%s)
+[dbRW unloaded sucessfully]
+dbRW vollständig entladen
+
+[Attempt to add invalid event for contact(%d)]
+Versuch, ein ungültige Ereignis für Kontakt (% d) hinzuzufügen
+[Error adding event(#%d,%s)]
+Fehler beim Hinzufügen eines Ereignisses (#%d,%s)
+
+[Miranda IM database driver engine powered by SQLite v]
+Miranda-IM-Datenbanktreiber, basierend auf der SQLite Engine v

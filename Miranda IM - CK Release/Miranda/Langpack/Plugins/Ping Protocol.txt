@@ -1,0 +1,60 @@
+; Pluginname: Ping Protocol 
+; Version: 0.5.0.2
+; Dateiname: pingproto.dll
+; Autor: sje
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1826
+; Übersetzung: Foso am 12.02.07
+; Besonderheiten: Entwicklung eingestellt!
+
+[Enable All Pings]
+Alle Pings aktivieren
+[Disable All Pings]
+Alle Pings deaktivieren
+[Delay between pings (secs):]
+Verzögerung zwischen den Pings (Sek):
+[Ping timeout (secs):]
+Ping timeout (Sek):
+[Repeats for success/failure:]
+Wiederholung bis Erfolg/Fehler:
+[Block Repetitions]
+Wiederhol. blocken
+;[Responding Status:]
+;[Not Responding Status:]
+;[Testing Status]
+[Disabled Status:]
+Deaktivierter Status
+[Do not change status when testing]
+Nicht ändern beim Testen
+[Put details in status message]
+Details über das Ziel in der Statusnachricht zeigen
+;[Hide in status bar and status menu (requires restart - uncheck to set icons)]
+[Log Filename:]
+Log Dateiname:
+[Ping Destination]
+Ping Ziel
+[Address:]
+Adresse:
+[Label:]
+Titel:
+[TCP Connect]
+TCP Verbindung
+[Add to contact list group:]
+Zu Gruppe hinzufügen:
+[Control Protocol:]
+Kontrollprotokoll:
+[On success, if my status is:]
+Bei Erfolg, wenn mein Status ist:
+[Set my status to:]
+Wechsel meinen Status zu:
+[Execute the following command on double-klick:]
+Folgenden Befehl bei Doppelklick ausführen:
+[(Optional) Command Parameters:]
+(Optional) Befehl Parameter:
+[Creating contact]
+Kontakt erstellen
+[Deleting contact]
+Kontakt löschen
+[Graph]
+Graph
+[PING Destinations]
+PING ZIELE

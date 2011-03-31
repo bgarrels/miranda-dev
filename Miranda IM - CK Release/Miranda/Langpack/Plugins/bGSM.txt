@@ -1,0 +1,45 @@
+; Pluginname: bGSM 
+; Version: 0.0.0.4
+; Dateiname: bGSM.dll
+; Autor: nE0sIghT
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3254
+; Übersetzung: 16.11.06 von Weishaupt
+; Besonderheiten: Entwicklung eingestellt!
+
+[Game: ]
+Spiel: 
+[Server IP: %s\n]
+Server-IP: %s\n
+[Gamename: %s\n]
+Spielname: %s\n
+[Map: %s\n]
+Karte: %s\n
+[Type: %s\n]
+Typ: %s\n
+[Protocol: %s\n]
+Protokoll: %s\n
+[Players: %i/%i\n]
+Spieler: %i/%i\n
+
+[The Truth cann't be overwritten!]
+Die Warheit kann nicht überschrieben werden!
+[Do not show servers with ping more than]
+Keine Server zeigen mit höherem Ping als
+[Scan every]
+Suche jede
+[Choose a game:]
+Wähle ein Spiel:
+[Allow check this game]
+Dieses Spiel überprüfen
+[Game info]
+Spiel Info
+[Server IP]
+Server-IP
+[Game/protocol version]
+Spiel/Protokoll Version
+[Players count]
+Spieleranzahl
+[Map name]
+Kartenname
+[Game type]
+Spieltyp

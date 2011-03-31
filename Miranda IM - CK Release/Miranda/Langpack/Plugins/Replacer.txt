@@ -1,0 +1,21 @@
+; Pluginname: Replacer
+; Version: 0.0.0.1
+; Dateiname: replacer.dll
+; Autor: SSS
+; Link: http://sss.chaoslab.ru/tracker/mim_plugs/downloads
+; Unique ID: {06587ce2-3bf8-4e74-a187-1ea8596a6b5f}
+; Übersetzung: CHEF-KOCH am 05.12.2010
+; Besonderheiten: Einige Header lassen sich aktuell nicht übersetzen, teilweise noch in russisch.
+
+[List fo words for replace:]
+Liste der zu ersetzenden Wörter:
+[Replace with:]
+Ersetze durch:
+[Source word:]
+Quellwort:
+[Add text]
+Text hzfg.
+[<Click here for add word>]
+<Hier klicken zum Wort hzfg.>
+[Add target word or phrase]
+Füge Wort oder Satz hinzu

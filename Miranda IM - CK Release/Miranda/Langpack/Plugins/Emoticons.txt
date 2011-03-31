@@ -1,0 +1,25 @@
+; Pluginname: Emoticons 
+; Version: 0.3.0.0 
+; Dateiname: emoticons.dll (Ansi), emoticonsW.dll (Unicode)
+; Autor: pescuma
+; Link: http://pescuma.mirandaim.ru/miranda/
+; Übersetzung: 29.01.08 von Tuxman
+
+[Embed videos]
+Videos einbetten
+[Enable custom smileys]
+Benutzerdefinierte Smileys aktivieren
+[by %s]
+von %s
+[Replace emoticons in text input area too]
+Emoticons auch im Texteingabefeld ersetzen
+[Use default emoticon pack for unknown protocols]
+Normales Emoticon-Paket für unbekannte Protokolle nutzen
+[Only replace emoticons surrounded by spaces]
+Nur Emoticons innerhalb von Leerzeichen ersetzen
+[Download more emoticon packs]
+Weitere Emoticon-Pakete herunterladen
+[Protocols Configuration]
+Protokollkonfiguration
+[Emoticon Packs]
+Emoticon-Pakete

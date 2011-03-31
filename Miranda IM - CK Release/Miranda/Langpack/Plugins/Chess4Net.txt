@@ -1,0 +1,206 @@
+; Pluginname: Chess4Net 
+; Version: 201.0.0.1
+; Dateiname:  chess4net_mi.dll
+; Autor: Pavel Perminov
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3362
+; Übersetzung: CHEF-KOCH 29.05.2010
+; Besonderheiten: Entwicklung eingestellt!
+
+[Look & Feel Options]
+Aussehen & Feeling
+[Animate Move]
+Animierte Bewegung
+[No]
+Nein
+[Slowly]
+Langsamer
+[Quickly]
+Schneller
+[Highlight Last Move]
+Hightlighte den letzten Zug
+[Flash on incoming move]
+Blinke bei neuer Bewegung
+[Show Coordinates]
+Zeige Koordinaten
+[Stay Always on Top]
+Immer im Vordergrund bleiben
+[Extra Exit on ESC]
+Beende bei Esc
+[GUI Language:]
+Benutzeroberflächensprache:
+[OK]
+OK
+[&Cancel]
+&Abbrechen
+
+[White   |]
+Weiß
+[White |]
+Weiß
+[W |]
+W |
+[Black   |]
+Schwarz
+[Black |]
+Schwarz
+[B |]
+B |
+[Connecting...]
+Verbinde ...
+[Wait until the connection is completed.]
+Warten Sie bis die Verbindung bereit ist.
+[&Abort]
+&Über
+[Press button to continue the game.]
+Drücke taste zum weiterspielen.
+[&Continue]
+Fortsetzen
+[Game Options]
+Spieloptionen
+[Time Control]
+Zeitkontrolle
+[Equal time for both players]
+Gleiche Zeit für beide Spieler
+[Your time]
+Ihre Zeit
+[Opponent's time]
+Gegnerische Zeit
+[Unlimited]
+Kein Zeitlimit
+[Minutes per game:]
+Minuten pro Spiel:
+[Increment in seconds:]
+Zuwach in Sekunden:
+[Training Mode]
+Trainings Spiel
+[Enabled]
+Aktiviert
+[External base:]
+Anderen Boden:
+[Use user base]
+Benutzer gegnerischen Boden
+[Game can be paused]
+Spiel kann pausiert werden
+[Game can be adjourned]
+Spiel kann unterbrochen werden
+[Allow takebacks to your partner]
+Erlaube deinem Gegner Rückzüge 
+[Auto Flag]
+Automatische Figur
+[&Yes]
+Ja
+[&No]
+Nein
+[to go]
+zu gehen
+[Start Adjourned Game]
+Starte unterbrochenes Spiel
+[Start Standart Game]
+Starte Standard Spiel
+[Start PP Random Game]
+Starte zufälliges Spiel]
+[Change Color]
+Ändere Farbe
+[Game Options...]
+Spieleinstellungen
+[Look && Feel Options...]
+Aussehen & Feeling-Optionen
+[About...]
+Über
+[Abort]
+Abbrechen
+[Draw]
+Remis
+[Resign]
+Aufgeben
+[Adjourn]
+Aussetzen
+[Pause]
+Pause
+[Takeback]
+Zurück nehmen
+[If you liked plying Chess4Net give your credits at]
+Falls du das Spiel mags geb deinen Dank an
+[&Close]
+Schliessen
+[Don't show again]
+Nicht wieder zeigen
+[Transmit Game]
+Übertrage Spiel
+
+[White is checkmated. You win.]
+Weiß ist schachmatt. Du gewinnst!
+[White is checkmated. You loose.]
+Weiß ist schachmatt. Du verlieerst!
+[Black is checkmated. You win.]
+Scharz ist schachmatt. Du gewinnst!
+[Black is checkmated. You loose.]
+Schwarz ist schachmatt. Du verlierst!
+[It's stalemate. No one wins.]
+Ein Remis. Keiner gewinnt!
+[Your opponent leaves.]
+Ihr Gegner verlässt das Spiel.
+[Your opponent leaves. The game is aborted.]
+Ihr Gegner ist weg. Das Spiel wird abgebrochen.
+[An error during connection occured.]
+Ein Fehler während der Verbindung trat auf.
+[Your opponent is using an older version of Chess4Net./nMost of functionality will be not available./nPlease, ask him/her to update the client.]
+Dein Gegner benutzt eine veraltete Chess4Net Version./nDie meisten Funktionen stehen nicht zur Verfügung./nBitte fordern Sie ihn zu einem Update auf.
+[The current version of Chess4Net is incompatible with the one of your partner./nPlease check the versions.]
+Die aktuelle Version von Chess4Net ist inkompatibel mit der Ihres Gegners./Bitte überprüfen Sie ihre Version.
+[Draw?]
+Remis?
+[Can we abort the game?]
+Können wir das Spiel abbrechen?
+[I resign. You win this game. Congratulations!]
+Ich gebe das Spiel auf. Du, gewinnst, herzlichen Glückwunsch!
+[The game is aborted.]
+Das Spiel wurde abgebrochen
+[Sorry, but we have to finish this game.]
+Entschuldige, aber wir sollten das Spiel fertig spielen.
+[The game is drawn.]
+Das Spiel ist unentschieden.
+[No draw, sorry.]
+Kein Remis, sorry.
+[You forfeited on time.]
+Deine Zeit ist abgelaufen.
+[Your opponent forfeited on time.]
+Die Gegnerische Zeit ist abgelaufen.
+[Can we pause the game?]
+Können wir das Spiel pausieren?
+[No pause, sorry.]
+Nein, keine Pause, sorry.
+[May I take back last move?]
+Kann ich den letzten Zug zurück ziehen?
+[Can we adjourn this game?]
+Können wir das Spiel aussetzen?
+[No adjourns, sorry.]
+Nein, kein aussetzen, sorry.
+[Sorry, no takebacks!]
+Sorry, keine Rückzüge!
+[Do you really want to resign?]
+Wollen Sie wirklich aufgeben?
+[Do you want to exit?]
+Wollen Sie wirklich das Spiel verlassen?
+[The game is adjourned.]
+Das Spiel ist unterbrochen.
+[You are currently playing some games. Do you want to start broadcasting?]
+Sie spielen aktuell schon Spiele. Wollen Sie die Übertragung trotzdem starten?
+[Black forfeits on time.]
+Schwarz verliert dieses mal.
+[White forfeits on time.]
+Weiß verliert dieses mal.
+[White resigns.]
+Weiß gibt auf.
+[Black resigns.]
+Schwarz gibt auf.
+[Game transmition is not supported by this client!]
+Die Spielübertragung wird von diesem Client nicht unterstützt!
+[Broadcaster leaves. Transmition will be closed.]
+Übertragung geschlossen. Die Transmition wird nun geschlossen.
+[Stalemate.]
+Remis.
+[White is checkmated.]
+Weiß ist schachmatt.
+[Black is checkmated.]
+Schwarz ist schachmatt.

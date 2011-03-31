@@ -1,0 +1,45 @@
+; Pluginname: Battle.net-Protokoll
+; Version: 0.2.2.0
+; Dateiname: bnet.dll
+; Autor: Isometric God, Joe77, Mackila
+; Link: http://bnetmessenger.sourceforge.net/ oder http://addons.miranda-im.org/details.php?action=viewfile&id=2448
+; Informationen: http://miranda-im.de/mediawiki/index.php?title=Plugin:Battle.net
+; Übersetzung: 21.10.08 von Sebijk
+; Besonderheiten: Entwicklung eingestellt!
+
+[Forwarding]
+Weiterleiten
+[Enable Forwarding]
+Weiterleitung aktivieren
+[Master]
+Meister
+[Forward Messages]
+Nachrichten weiterleiten
+[Forward Status changes]
+Statusänderungen weiterleiten
+[Show protocol name in every message]
+Protokollnamen in jeder Nachricht zeigen
+[Forward only to master if online ( no popup message )]
+Nur weiterleiten, wenn der Meister online ist
+[Set Miranda to \"Occupied\" if master is in a game]
+Setze auf \"Beschäftigt\", wenn der Meister am Spielen ist
+[Please enter your battle.net® account details]
+Bitte geben Sie Ihre battle.net®-Kontodaten ein
+[battle.net® account details]
+battle.net®-Kontodaten
+[Server Data]
+Serverdaten
+[Tell friends list not to add bot]
+Bot nicht in Freundeslisten hinzufügen
+[Enable UTF-8 transcoding]
+UTF-8-Kodierung aktivieren
+[Note : Channel name must start with \"public chat\" ( see FAQ )]
+Hinweis: Der Channelname muss mit \"Public Chat\" anfangen (s. FAQ)
+[Verbose logfile]
+Ausf. Logdatei
+[Note : You have to reconnect before changes take effect]
+Hinweis: Sie müssen sich neu verbinden, damit die Änderungen wirksam werden.
+[Battle.net Forward]
+Battle.net-Weiterleitung
+[Use Miranda IM to talk to your friends in battle.net.]
+Benutzt Miranda IM um zu Ihren Freunden von battle.net zu sprechen.

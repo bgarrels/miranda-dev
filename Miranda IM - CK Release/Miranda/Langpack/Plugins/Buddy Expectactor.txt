@@ -1,0 +1,77 @@
+; Pluginname: Buddy Expectactor 
+; Version: 0.1.2.3
+; Dateiname: buddexpectator.dll
+; Autor: Thief
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3356
+; Übersetzung: 24.06.05 by ANdyDU + überarbeitet: 12.02.07 von Weishaupt
+
+[has gone online for the first time.]
+ist zum ersten Mal online.
+[has returned after a long absence.]
+ist nach einer langen Zeit zurückgekehrt.
+[has returned after being absent since %#x]
+ist wiedergekommen nach einer Abwesenheit seit %#x
+[has not returned after being absent since %#x]
+ist nicht wiedergekommen nach einer Abwesenheit seit %#x
+[has not returned after a long absence.]
+ist nach einer langen Zeit noch immer nicht zurückgekehrt.
+[not detected]
+nicht ermittelt
+[not found]
+nicht gefunden
+[This contact has been absent for an extended period of time.]
+Dieser Kontakt war für eine sehr, sehr lange Zeit abwesend.
+[BuddyExpectator: contact returned]
+BuddyExpectator: Kontakt zurückgekehrt
+[BuddyExpectator: contact still absent]
+BuddyExpectator: Kontakt weiterhin abwesend
+
+[Last seen online]
+Zuletzt online gesehen
+[Last input message]
+Letzte Nachricht
+[Return notification]
+Rückkehr-Benachrichtigung
+[When a contact returns after ]
+Wenn ein Kontakt erscheint nach
+[or comes online for the first time]
+oder zum ersten Mal online geht
+[Show a popup]
+Zeige Popup
+[Add an event (flashing icon) to the contact]
+Ein Ereignis (blinkendes Icon) zum Kontakt hinzufügen
+[On event action (double click) or popup click:]
+Bei Doppelklick auf Ereignis oder Popup:
+[Open User Details]
+Kontaktdetails öffnen
+[Long time no see]
+Lange Zeit nicht gesehen
+[When a contact is absent for]
+Falls Kontakt länger abwesend als
+[Delete the contact]
+Kontakt löschen
+[Enable "Miss you" feature]
+'Vermisst'-Funktion nutzen
+
+[Miss you event]
+'Vermisst'-Ereignis
+[Contact returned]
+Kontakt ist zurückgekommen
+[Contact still absent]
+Kontakt weiterhin vermisst
+[Hide contact event]
+Ereignis eines versteckten Kontaktes
+
+[weeks]
+Wochen
+[months]
+Monate
+[years]
+Jahre
+
+[Hide when no messages for]
+Verstecken bei keiner Nachr. seit
+[Use Popups colors]
+Nutze Popup-Farben
+[Use Windows colors]
+Nutze Windows-Farben

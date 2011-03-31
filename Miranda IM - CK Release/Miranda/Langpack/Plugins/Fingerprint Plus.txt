@@ -1,0 +1,94 @@
+; Pluginname: Fingerprint Plus 
+; Version: 1.1.15.0
+; Dateiname: fingerprint.dll
+; Unique ID: {3b37d28d-369b-4d2e-a11d-75f3133e7d73}
+; Autor: Angeli-Ka
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3526
+; Übersetzung: 27.06.2006 von Dober
+; Wichtig: Einige Strings können unübersetzt sein -> ToDo.
+
+[Icon packages]
+Iconpakete
+
+[Unknown for fingerprint]
+Unbekannt für Fingerprint
+[Unknown for protocol]
+Unbekannt für Protokoll
+[Client Icons]
+Clienticons
+
+[Jabber transport]
+Jabber-Transport
+[on Java]
+Java-basiert
+[on Flash]
+Flash-basiert
+[on Windows]
+unter Windows
+[on Vista]
+unter Vista
+[on MacOS]
+unter MacOS
+[on Linux]
+unter Linux
+
+[Fingerprint Plus (client version) icons module set extra icon of your buddies according to their client version]
+Fingerprint Plus zeigt zusätzliche Icons für Ihre Kontakte an, abhängig von deren Chatclient.
+[Fingerprint icons]
+Fingerprinticons 
+[Base Icon]
+Basisicon
+[Show unknown]
+Unbekannte Clients anzeigen
+[Show unicode flag]
+Verwendung von Unicode anzeigen
+[Show one icon]
+Gleiches Icon für alle Versionen anzeigen
+
+[Overlay Icon #1]
+Overlayicon *1
+[Show pack icon (if available)]
+Paketversion anzeigen (falls verfügbar)
+[Show jabber transport]
+Jabbertransport anzeigen
+[Show protocol]
+Protokoll anzeigen
+[Show version]
+Version anzeigen
+
+[Overlay Icon #2]
+Overlayicon *2
+[Show Jabber resource]
+Jabberstandort anzeigen
+[Show Miranda version]
+Mirandaversion anzeigen
+
+[Overlay Icon #3]
+Overlayicon *3
+[Show +secure]
+SecureIM anzeigen
+
+[Show in options icon group:]
+Icons in den Einstellungen anzeigen für:
+[Multi-Protocol]
+Multiprotokoll
+[Web-based]
+Webbasiert
+[Extra icon slot (restart required):]
+Iconslot in CL (Neustart nötig):
+[Icon group options will be fully applied after restart]
+Die Iconeinstellungen werden nach einem Neustart von Miranda vollständig übernommen.
+
+[bots]
+Bots
+[services]
+Dienste
+[Mail.ru Agent]
+Mail.ru-Agent
+[pack overlays]
+Paket-Overlays
+[Pack overlays]
+Paket-Overlays
+
+[Fingerprint Plus plugin was designed to be used with Miranda IM only. For use with any other application, please contact author.]
+Das Fingerprint-Plus-Plugin wurde nur für Miranda IM erstellt.\nFalls Sie es für andere Anwendungen benutzen wollen, kontaktieren Sie den Autor.

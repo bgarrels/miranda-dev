@@ -1,0 +1,92 @@
+; Pluginname: Last seen Plugin 
+; Version: 5.0.4.7
+; Dateiname: seenplugin.dll 
+; Autor: micron-x, y_b
+; Link: http://saaplugin.no-ip.info/seen/
+; Übersetzung: 13.05.06 von miroerr 
+
+[-- Date --]
+-- Datum --
+[-- Format --]
+-- Formatierung --
+[-- Time --]
+-- Zeit --
+[-- User --]
+-- Kontakt --
+[<never seen>]
+<Noch niemals gesehen>
+[Alert when user status changes]
+Melden, wenn Benutzerstatus sich ändert
+[Changed to Offline]
+Statusänderung zu Offline
+[Changed to Online]
+Statusänderung zu Online
+[Client info]
+Client
+[Count times]
+Mitzählen
+[Disable CList Notifications]
+Deaktiviere Kontaktlistenbenachrichtigungen für:
+[Enable Idle support]
+/Idle zu Kontakt hinzuf. bei Untätigkeit
+[Enable 'Missed Ones' feature]
+"Verpasst"-Funktion aktivieren
+[external IP]
+Externe IP
+[for empty string]
+für leeren String
+[For non-watched protocols]
+Nicht überwachte Protokolle
+[For watched protocols]
+Überwachte Protokolle
+[internal IP]
+Interne IP
+[Ignore contacts going offline]
+Ignorieren, wenn Kontakt offline geht
+[instead of]
+anstatt
+[Last seen]
+Zuletzt gesehen
+[last seen history]
+Zuletzt gesehen-Verlauf
+[Last seen menuitem]
+Erzeuge Menüeintrag
+[Last seen options]
+Einstellungen
+[Log to history]
+In Verlauf schreiben
+[Maximum size]
+Maximale Dateigröße
+[Note:]
+Hinweis:
+[Old status]
+Alter Status
+[PopUp Colors]
+Farben
+[Popup interoperability missing or disabled. You need Popups plugin]
+Popupfunktionalität fehlt oder ist deaktiviert. Sie benötigen ein Popup-Plugin.
+[Protocols to watch:]
+Zu überwachende Protokolle:
+[Reset colors]
+Stand. Farben
+[UIN/handle]
+UIN
+[Userinfo tab]
+In Kontaktprofil anzeigen
+[username]
+Benutzername
+[Use popups]
+Popups nutzen
+[User Logged In]
+Kontakt hat sich angemeldet
+[User Logged Off]
+Kontakt hat sich abgemeldet
+[User status change]
+Statusänderung (beliebige)
+[You missed following contacts:]
+Du hast folgende Kontakte verpasst:
+[Name:%t%N%bStatus:%t%s%bDay:%t%d.%m.%Y%bTime:%t%H:%M:%S%bPrevious Status:%t%o%b%b%P ID:%t%u%bExternal IP:%t%i%bInternal IP:%t%r%bClientID: %t%C%b%bStatus Message:%t%T]
+Name:%t%N%bStatus:%t%s%bTag:%t%d.%m.%Y%bZeit:%t%H:%M:%S%bVorheriger Status:%t%o%b%b%P ID:%t%u%bExterne IP:%t%i%bInterne IP:%t%r%bClientID: %t%C%b%bStatusnachricht:%t%T
+
+[Log when a user was last seen online and which users were online while you were away]
+Speichert wann ein Kontakt zuletzt Online war, sowie welche Kontakte in ihrer Abwesenheit Online waren.

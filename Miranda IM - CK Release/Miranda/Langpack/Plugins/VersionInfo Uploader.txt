@@ -1,0 +1,35 @@
+; Pluginname: VersionInfo Uploader 
+; Version: 0.0.1.4
+; Dateiname: VIUploader.dll  
+; Autor: eblis
+; Link: http://www.eblis.tla.ro/index.php?option=com_content&task=view&id=12&Itemid=26
+; Übersetzung: 6.04.06 von schubat
+; Besonderheiten: Entwicklung eingestellt!
+
+[This plugin lets you upload your Version Info report to miranda-vi.org]
+Mit diesem Plugin können Sie Ihre Versionsinfo zu miranda-vi.org hochladen.
+
+[Upload Version Info report]
+Versionsinfo hochladen
+
+[Uploading Version Info report to server]
+Versionsinfo auf den Server laden
+[Failed to upload version info report]
+Fehler beim Hochladen der Versionsinfo
+[Successfully uploaded version info report]
+Versionsinfo erfolgreich hochgeladen
+[Please provide a user and a password before]
+Bitte geben Sie einen Benutzernamen und ein Passwort an.
+[This plugin requires Version Info plugin to be present.\nIt cannot work without it.]
+Dieses Plugin benötigt das Plugin Version Information. Es funktioniert ohne dieses nicht!
+[newer plugins available]
+Neue Plugins vorhanden
+[There are %d newer plugins available]
+Es gibt %d neuere Plugins
+
+[User name]
+Benutzername
+[Upload report on Miranda startup]
+Beim Start Versionsinfo hochladen
+[Check for updated plugins on a successful upload]
+Nach erfolgreichem Hochladen nach neuen Plugins prüfen

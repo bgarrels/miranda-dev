@@ -1,0 +1,47 @@
+; Pluginname: Help 
+; Version: 0.2.1.0
+; Dateiname: help.dll
+; Autor: hrathh
+; Eingetragen: 29.08.06 von Lastwebpage
+; Besonderheiten: Entwicklung eingestellt!
+
+[Provides context sensitive help in the Miranda IM dialog boxes.]
+Bietet kontextsensitive Hilfe in den Dialogen von Miranda IM an.
+
+[Help Plugin]
+Hilfeplugin
+[The Help Plugin can not be loaded. It requires Miranda IM %s or later.]
+Das Hilfeplugin kann nicht geladen werden. Es benötigt Miranda IM %s oder neuer.
+[This version of the Help Plugin is incompatible with your Miranda IM version. Install the ANSI version of the plugin instead.]
+Diese Version des Hilfeplugins ist inkompatibel mit der installierten Version von Miranda IM. Statt der aktuellen Version muss die ANSI-Version verwendet werden.  
+
+[&What's this?]
+Direkt&hilfe
+[&What's this Dialog?]
+Direkt&hilfe zum Dialog
+
+[No readable Help Pack installed!]
+Keine lesbare Hilfedatei installiert!
+[No help available for this item.]
+Diesem Eintrag ist kein Hilfethema zugeordnet.
+
+[&Language]
+Sprachen
+[&Advanced]
+Erweitert
+[&Automatically show help when hovered]
+&Automatisch Hilfe anbieten bei Stillstand der Maus
+[&Delay:]
+Verzögerung:
+[Help is available in different languages.\nHere is a list of all available languages of the file listing, please select your native &language:]
+Hilfe ist in vielen Sprachen verfügbar.\nHier ist eine Liste aller verfügbaren Sprachen in der Dateiauflistung, bitte wählen Sie Ihre &Muttersprache aus:
+[Note: This will download and install the newest help pack available for the selected language. There might be help packs from other authors available on the file listing.]
+Achtung: Dies wird die neueste Version der gewählten Hilfe herunterladen und installieren. Vielleicht gibt es Hilfepakete von anderen Autoren in der Dateiauflistung. 
+[Download more Help Packs]
+Weitere Hilfedateien herunterladen
+[Check for new &versions of Help Packs periodically]
+Regelmäßig auf neue &Versionen der Hilfedateien prüfen
+[The download failed!\n\nThe help pack could not be downloaded or extracted.]
+Download fehlgeschlagen!\n\nDie Hilfedatei konnte nicht heruntergeladen oder extrahiert werden.
+[Help Pack Download finished]
+Hilfedateiendownload beendet

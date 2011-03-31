@@ -1,0 +1,247 @@
+; Pluginname: MirandaQQ2
+; Version: 0.2.0.70b 
+; Pluginname: Miranda Helper 
+; Version: 0.2.0.63
+; Dateiname: mirandaqq.dll, mirandaqq_helper.dll
+; Autor: Stark Wong (starkwong@hotmail.com)
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3348
+; Autorlink: http://www.brsbox.com/filebox/down/fc/5c6be828e6e630c33f557bed93d6f3a6
+; SVN: http://studiokuma.googlecode.com/svn/trunk/
+; Übersetzung: 01.11.07 von Sebijk & CHEF-KOCH am 29.05.2010
+; Übersetzung unvollständig!!!
+
+[This copy of MirandaQQ is based on EVA 0.4.2 (Rev 56), Module: MIRANDAQQ_1]
+Diese Kopie von MirandaQQ basiert auf EVA 0.4.2 (Rev. 56), Modul: MirandaQQ_1
+ 
+[&Document root:]
+Dokumentenverzeichnis:
+[Select Document Root]
+Wähle Dokumentenverzeichnis
+[The changes you have made to helper require you to restart Miranda IM before they take effect]
+Die von Ihnen vorgenommenen Änderungen am QQHelfer werden erst aktiv nachdem Sie Miranda IM neugestartet haben.
+ 
+[Reply Mode Message]
+Antwortmodus für Nachrichten
+[Login &Server:]
+Login-&Server:
+[&Conversion:]
+Umwandlung:
+[No Message Conversion]
+Keine Nachrichtenumwandlung
+[Receive: No Change, Send: Convert to Simplified]
+Empfangen: Unverändert, Senden: In vereinfacht umwandeln
+[Receive: Convert to Traditional, Send: No Change]
+Empfangen: In traditionell umwandeln, Senden: Unverändert
+[Receive: Convert to Traditional, Send: Convert to Simplified]
+Empfangen: In traditionell umwandeln, Senden: In vereinfacht umwandeln
+[Force &Unicode]
+&Unicode erzwing.
+[Force &Invisible]
+Uns&ichtbark. erzwingen
+[&Auto Select]
+&Automatisch auswählen
+[Show QQ Mai&l Notification]
+QQ-Mai&l-Benachrichtigung anzeigen
+[Use S&tatus Message as Personal Signature]
+S&tatusnachricht als Persönliche Signatur benutzen
+[Don't use &Personal Signature support (Requires Reconnect)]
+&Persönliche Signatur deaktivieren (Neueinwahl erforderlich)
+[Re&move invalid characters in Nicknames (Requires Reconnect)]
+Ungültige Zeichen in Nickna&men löschen (Neueinwahl erforderlich)
+[Filter A&ll Add Request]
+A&lle Autorisierungsfragen filtern
+[Don't show &Progress Popups]
+Fortschrittsbalken-&Popups ausblenden
+[Show &News Broadcast]
+Broadcast-&News anzeigen
+[Use avatar support for:]
+Benutze Avatar-Unterstütz. für:
+[&Select Font for Messaging]
+&Schrift für Nachrichten ausw.
+[Select &Color for Messaging]
+Farbe für Nachrichten ausw.
+[Font and Color selection is now placed in FontService page.]
+Schrift und Farbeneeinstellungen sind nun auf dem Schriftarten-Seite verlagert.
+[Need &Acknowledgement on sending messages]
+Bestätigung für Nachrichten senden einholen
+[Account/Messaging]
+Konto/Nachrichten
+[Settings in this page affect all copies of MirandaQQ. All settings here will take effect after restarting Miranda IM.]
+Einstellungen auf dieser Seite wirken sich auf alle MirandaQQ-Konten aus. Alle Einstellungen hier werden beim nächsten Neustart von Miranda IM wirksam.
+[Copyright Notice]
+Copyrighthinweis
+[Unicode Messaging Support(UTF-8) is Enabled.]
+Unicode-Nachrichtenunterstützung (UTF-8) ist eingeschaltet.
+[&Allow non-local connections]
+Nicht-lokale Verbindungen erl&auben
+[Completely disable Qun &Image support (and built-in web server)]
+Qun-Grafikunterstützung (und den Webserver) deaktivieren
+[Web Server]
+Webserver
+[Binds to port:]
+Port:
+ 
+[Qun Settings]
+Qun-Einstellungen
+[Don't Add &Identity to contacts when multiple accounts (Requires Reconnect)]
+Keine &Identitäten zu Kontakten hinzufügen, wenn mehrere Konten benutzt werden (Neueinwahl erforderlich)
+[Suppress Qun Messa&ges by default (Requires Reconnect)]
+Qun-Nachrichten standardmäßig unterdrücken (Neueinwahl erforderlich)
+[Don't &load qun images (Requires Reconnect)]
+Keine Qun-Bilder &laden (Neueinwahl erforderlich)
+[Don't &remove qun image on exit]
+Qun-Bilder beim Beenden nicht entfernen
+[Add QQ &Number to member list (Requires Reconnect)]
+QQ-&Nummer zur Mitgliederliste hinzufügen (Neueinwahl erforderlich)
+[Don't add history items for &ignored qun]
+Keine Verlaufsliste für &ignorierte Qun-Benutzer speichern
+ 
+[Change Signature]
+Signatur ändern
+[Your QQ Number requires graphical code verification. \nPlease enter the code as shown in following picture:]
+Ihre QQ-Nummer benötigt eine grafische Code-Verifizierung. \nBitte geben Sie den Code, den Sie im Bild sehen, ein:
+[&Enter a new name for the image:]
+Geben Sie einen neuen Namen für dieses Bild an:
+[Post &Image]
+Bild schreiben
+[Enter new Personal Signature:]
+Geben Sie hier eine neue persönliche Signatur an:
+[Enter new Nickname:]
+Geben Sie einen neuen Nicknamen an:
+[Rename Image]
+Bild umbenennen
+[Select Image to Post]
+Bild zum Posten wählen
+[You are not connected to QQ Network!]
+Sie sind nicht mit dem QQ-Netzwerk verbunden!
+[You must be connected to use this function.]
+Sie müssen verbunden sein, um diese Funktion nutzen zu können.
+[My IP Address]
+Meine IP-Adresse
+[Head Image]
+Kopfbild
+[QQ Show]
+Zeige QQ
+[Head Image und User Header]
+Benutzerkopf und Kopfbild
+
+[Change &Nickname]
+Be&nutzernamen ändern
+[&Modify Personal Signature]
+Persönliche Signatur ändern
+[Change Head Image]
+Kopfbild ändern
+[Show and copy my Public &IP]
+Meine öffentliche &IP-Adresse anzeigen und kopieren
+[&Download Group]
+Gruppe herunterla&den
+[&Upload Group]
+Gr&uppe hochladen
+[&Remove contacts not in Server]
+Kontakte löschen, die nicht auf dem Se&rver sind
+[&Add a member to Qun]
+Benutzer zu Qun hinzufügen
+[Re&download User Head]
+Benutzer-Kopf&daten erneuert herunterladen
+;[&Toggle Qun List]
+[&QQ Mail]
+&QQ-Mail
+[Change my Qun &Card Name]
+Meinen Qun-Kartennamen ändern
+[Select &Image]
+B&ild auswählen
+[MIRANDAQQ plugin connections]
+MIRANDAQQ Plugin-Verbindungen
+[Qun &Space]
+Qun-&Speicher
+[&Suppress Qun Message Receive]
+Qun-Nachrichten unterdrücken
+[&Remove me from his/her list]
+Mich von seine&r/ihrer Liste entfernen
+[&Ignore any Add Requests]
+Autorisierungsanfragen &ignorieren/erlauben
+[Get &Weather Information]
+&Wetter-Informationen holen
+[Resend &authorization request]
+&Autorisierungsanfrage erneut senden
+[Reauthorize]
+Erneuerte Autorisierung
+[The user needs authorization, please enter your]
+Der Benutzer benötigt eine erneuerte Autorisierung, bitte geben Sie Ihre
+[Please switch server. If it doesn't help, then your QQ number can only be used in QQ2007/TM2007. No unofficial client can be used]
+Bitte wechseln Sie den Server. Wenn das nicht helfen sollte, dann können Sie ihre QQ-Nummer nur in QQ2007/TM2007 verwenden. Keine inoffiziellen Clienten können benutzt werden.
+[Kick Member]
+Benutzer kicken
+[Choose the account for sending QQ message:]
+Konto auswählen, um QQ-Nachrichten zu senden:
+[Maintenance Operation Completed.]
+Wartungsarbeiten abgeschlossen.
+[Add Requests are now Blocked.]
+Autorisierungsanfragen werden nun blockiert.
+[Add Requests are now Allowed.]
+Autorisierungsanfragen sind nun wieder erlaubt.
+[QQ Overview]
+QQ-Übersicht
+[QQ Contact]
+QQ-Kontakt
+[QQ Details]
+QQ-Details
+[Qun Members]
+Qun-Mitgliedern
+[Qun Details]
+Qun-Details
+[QQ ID]
+QQ-ID
+[Real Name:]
+Realer Name:
+[Blood:]
+Blut:
+[Horoscope:]
+Horoskop:
+[Home Page:]
+Homepage:
+[Zip Code:]
+Postleizahl:
+[Sex:]
+Geschlecht:
+[Province:]
+Provinz:
+[Personal Sig:]
+Pers. Signatur:
+[Face:]
+Gesicht:
+[You will be removed from his/her contact list, are you sure?]
+Sie werden von seiner/ihrer Kontaktliste entfernt. Sind Sie sicher, dass Sie das tun wollen?
+[This MirandaQQ2 build does not support file transfer.]
+Diese MirandaQQ2-Version unterstützt keine Dateitransfers.
+[Connection to QQ Server lost]
+Verbindung zum QQ-Server verloren
+[Warning: Failed to bind port for image web server. Qun image for IEView not available.]
+Warnung: Der Bilderwebserver konnte den Port nicht einbinden, da eine Anwendung diesen Port wohl bereits nutzt. Qun-Bilder für IEView werden nicht verfügbar sein.
+[MirandaQQ Link Protocol]
+MirandaQQ Link-Protokoll
+
+[%d custom emoticons imported.]
+%d eigene Smileys importiert.
+[Selected file is corrupted.]
+Ausgewählte Datei ist kaputt.
+[Failed to launch PHP executable. Check path.]
+PHP-Anwendung konnte nicht gestartet werden. Bitte prüfen Sie den Pfad.
+[Chatroom Support (TabSRMM only)]
+Chatraum-Unterstützung (TabSRMM)
+[Qun Member List (TabSRMM only)]
+Qun-Mitgliederliste (nur TabSRMM)
+[Qun List is now Enabled. It will be shown when you switch tab or open new chat window.]
+Qun-Liste ist nun eingeschaltet. Die Liste wird angezeigt, wenn Sie den Tab wechseln oder ein neues Nachrichtenfenster aufmachen.
+[Qun List is now Disabled.]
+Qun-Liste ist nun ausgeschaltet.
+[Helper]
+Helfer
+[E&xtended Qun Support:]
+Erw. Qun-Unterstütz.:
+[Failed to connect to server]
+Verbindung zum Server fehlgeschlagen
+[Retrieved %u users, %q quns from %g groups]
+Wiederholte %u Benutzer, %q Qun von %g Gruppen 
+[Your public IP-Address is %ip. This Address has been copied to your clipboard]
+Deine interne IP-Adresse ist %ip. Diese Adresse wurde in deine Zwischenablage kopiert.

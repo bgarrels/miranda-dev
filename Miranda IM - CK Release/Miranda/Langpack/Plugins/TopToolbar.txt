@@ -1,0 +1,83 @@
+; Pluginname: TopToolbar 
+; Version: 0.7.3.0
+; Dateiname: toptoolbar.dll
+; Autor: bethoven
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=466
+; Übersetzung: 07.07.05 von Lastwebpage
+
+[Hide Offline Users]
+Offline-Kontakte ausblenden
+[Show All Users]
+Alle Kontakte anzeigen
+[Show Groups]
+Gruppen anzeigen
+[Hide Groups]
+Gruppen ausblenden
+[Enable Sounds]
+Klänge aktivieren
+[Show only Online Users]
+Nur Online Kontakte anzeigen
+[Groups On/Off]
+Gruppenfunktion Ein/Aus
+[Sounds Enable/Disable]
+Klänge Ein/Aus
+[Show Options Page]
+Einstellungen anzeigen
+[Minimize Button]
+Minimieren-Button
+[Show Main Menu]
+Hauptmenü anzeigen
+
+[Buttons Order && Visibility]
+Button Reihenfolge && Anzeige
+[Buttons order:]
+Reihenfolge:
+[Up:]
+Oben
+[Down:]
+Unten
+[Click on images to select new bitmaps.]
+Auf die Bilder klicken für Auswahl
+[Add Separator]
+Einfügen
+[Del Separator]
+Löschen
+[Add Launch]
+Ausführung hinzufügen
+[Del Launch]
+Ausführung löschen
+[Name: ]
+Name:
+[Separator Button]
+Separator
+[Launch Button]
+Schalter Programmausführung
+[Image Directory:]
+Bilder Verzeichnis:
+[Button Height:]
+Höhe:
+[Button Width: ]
+Breite:
+[Use Miranda Button Class]
+Miranda spez. But. verw.
+[Use Flat Mode]
+Flache Anzeige
+[Use IcoLib (need restart!)]
+IconLib verw. (Neustart)
+
+[TopToolBar Background]
+Hintergrund
+
+; [ImgDir]
+[Select Directory]
+Verzeichnis wählen
+[Bitmap/Icon files]
+Bild/Icon-Dateien
+[Select Up Bitmap]
+Auf-Bild wählen
+[Select Down Bitmap]
+Ab-Bild wählen
+[TopToolBar]
+Iconleiste
+[TTBBackground]
+Hintergrund

@@ -1,0 +1,37 @@
+; Pluginname: WUMF: Who uses my files? 
+; Version: 0.1.0.2
+; Dateiname: wumfplug.dll
+; Autor: Nike
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=831
+; Übersetzung: 13.05.06 von miroerr 
+
+[Wumf]
+WUMF
+[Popup delay settings]
+Popup Verzögerung
+[Choose delay time]
+Verzögerung wählen
+[Show infinitely]
+Ewig zeigen
+[Default PopUp delay]
+Standard Popup Verzögerung
+[Popup color settings]
+Popup Farben
+[Choose colors]
+Farben wählen
+[Use default PopUp colors]
+Standard Popup Farben
+[File access filter & logging settings ] 
+Dateizugriffsfilter & Aufzeichnungseinstellungen
+[Log into text file]
+Textdatei speichern
+[Log folders access]
+Ordnerzugriff speichern
+[Alerts on folders access]
+Alarm bei Ordnerzugriff
+[Disabled options will be available in the next version]
+Deaktivierte Optionen in nächster Version verfügbar
+[Show current connections]
+Aktuelle Verbindungen zeigen
+[Enable WUMF popups]
+WUMF Popups aktivieren

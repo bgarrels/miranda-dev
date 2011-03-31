@@ -1,0 +1,408 @@
+; Pluginname: Tipper 
+; Version: 0.4.1.8
+; Dateiname: tipper.dll
+; Unique ID: {785c25e3-c906-434b-9723-e244e1beca02}
+; Autor: Scott Ellis
+; Link: http://forums.miranda-im.org/showthread.php?t=7930
+; Übersetzung: 08.04.06 von freak
+
+; Pluginname: Tipper YM 
+; Version: 2.1.0.4
+; Dateiname: tipper.dll
+; Unique ID: {8392df1d-9090-4f8e-9df6-2fe058edd800}
+; Autor: Scott Ellis, yaho
+; Link: http://miranda-easy.net/mods.php
+
+; Zeitangaben
+; Bitte die DIN 8601 beachten! Bei Smileyproblemen bitte Leerzeichen benutzen!
+
+[Tool Tip notification windows]
+Tooltip-Anzeige
+
+[No title]
+Kein Titel
+[Centre]
+Mitte
+[Top right]
+Oben rechts
+[Top left]
+Oben links
+[Bottom left]
+Unten links
+[Bottom right]
+Unten rechts
+[Icon on left]
+Icon links
+[Icon on right]
+Icon rechts
+[Sidebar]
+Seitenleiste
+[Dimensions]
+Abmessungen
+[Min width:]
+Minimale Breite:
+[Max height:]
+Maximale Höhe:
+[Min height:]
+Minimale Höhe:
+[Status bar tips]
+Tooltips Statuszeile
+[Round corners (window)]
+Runde Ecken (Fenster)
+[Round corners (avatar)]
+Runde Ecken (Avatar)
+[Show if list not focused]
+Zeigen, wenn Liste unfokussiert
+[Hover time:]
+Verzögerung:
+[XP+]
+WinXP+
+[Value indent:]
+Werteinzug:
+[General padding:]
+Allg. Abstand:
+[Text padding:]
+Textabstand:
+[Avatar padding:]
+Avatarabstand:
+[Inner avatar padding:]
+Avatarabstand innen:
+[Outer avatar padding:]
+Avatarabstand außen:
+[Max avatar size:]
+Max. Avatargröße:
+[Background image:]
+Hintergrundbild:
+[Stretch]
+Strecken
+
+;Tab:Content
+[Draw a line above]
+Linie darüber ziehen
+[Value on a new line]
+Wert in neue Zeile schreiben
+[Value:]
+Wert:
+[Substitutions]
+Ersetzungen
+[Substitution]
+Ersetzung
+[Item]
+Objekt
+[Add item]
+Objekt hinzufügen
+[Add separator]
+Trennline hinzufügen
+[[No translation]]
+<Keine Umwandung>
+[<prefix>Day|Month|Year to age]
+<prefix>Day|Month|Year in Alter
+[<prefix>Day|Month|Year to date]
+<prefix>Day|Month|Year in Datum
+[<prefix>Day|Month|Year|Hours|Minutes|Seconds to time difference]
+<prefix>Day|Month|Year|Hours|Minutes|Seconds in Zeitverschiebung
+[<prefix>Hours|Minutes to time]
+<prefix>Hours|Minutes in Zeit
+[<prefix>Hours|Minutes|Seconds to time]
+<prefix>Hours|Minutes|Seconds in Zeit
+[BYTE to Male/Female (ICQ)]
+BYTE in Geschlecht (ICQ)
+[BYTE to Yes/No]
+BYTE in Ja/Nein
+[BYTE timezone to time]
+BYTE Zeitzone in Zeit
+[DWORD to ip address]
+DWORD in IP-Adresse
+[DWORD seconds to time difference]
+DWORD Sekunden in Zeitunterschied
+[DWORD timestamp to date (short)]
+DWORD Zeitstempel in Datum (kurzes Format)
+[DWORD timestamp to date (long)]
+DWORD Zeitstempel in Datum (langes Format)
+[DWORD timestamp to time]
+DWORD Zeitstempel in Zeit
+[DWORD timestamp to time (no seconds)]
+DWORD Zeitstempel in Zeit (ohne Sekunden)
+[DWORD timestamp to time difference]
+DWORD Zeitstempel in Zeitunterschied
+[WORD to country name]
+WORD in Landesname
+[WORD to status description]
+WORD in Statusbeschreibung
+[xStatus: empty xStatus name to default name]
+XStatus: leerer XStatus-Titel in Standardtitel
+[Contact protocol module]
+Kontaktprotokollmodul
+[Setting or prefix:]
+Einstellung/Präfix:
+[Values]
+Werte
+[Cannot obtain required interfaces!\nTooltips will not be available until you upgrade Miranda IM to the newest version.]
+Konnte erforderliche Schnittstellen nicht laden!\nTooltips sind nicht verfügbar, bis Sie Miranda IM zur neusten Version geupdated haben.
+
+;Zeitangaben
+[%dd]
+%d D
+[%dm]
+%d m
+[%dh %dm]
+%d h %d m
+[%dd %dh %dm]
+%d D %d h %d m
+
+[Parse Tipper variables first]
+Analysiere Tippervariablen als erstes
+[Labels:]
+Titel:
+[Values:]
+Werte:
+[Extra status]
+XStatus
+[Country flag]
+Länderflagge
+[Keep original avatar size]
+Originalavatargröße erhalten
+[Avatar border]
+Rahmen um Avatar
+[Tray title]
+Traytitel
+[Labels]
+Beschriftungen
+[Title indent:]
+Titeleinzug:
+
+;Tab: Extra
+[Extra]
+Extras
+[Jabber activity]
+Jabber-Aktivität
+
+;Tab: Tooltip-Skin
+[Tooltip skin]
+Tooltip-Skin
+[# Solid color fill]
+# Farbfüllung
+[Reload skin list]
+Skin-Liste aktualisieren
+[Apply skin]
+Skin anwenden
+[Get more skins]
+Weitere Skins herunterladen
+[No preview]
+Keine Vorschau
+
+;Effekte
+[Animation speed:]
+Animationsgeschwindigkeit:
+[Fade]
+Einblenden
+
+;Skin-Einstellungen
+[Skin option]
+Skin-Einstellungen
+[Enable skin coloring]
+Skin-Farben aktivieren
+[Load tooltip proportions]
+Größenverhältnisse laden
+[Load fonts and colors]
+Schriften und Farben laden
+
+;Smileys support
+[Tipper smileys]
+Smileys in Tooltips
+[Smileys support]
+Smiley-Unterstützung
+[Resize smileys]
+Smiley-Größenanpassung
+[Replace only isolated smileys]
+Nur isolierte Smileys ersetzen
+
+;Advanced options
+[Show tooltip after all content is ready (avatar && status message)]
+Zeige Tooltip erst, wenn Inhalt verfügbar (Avatar && Statusnachricht)
+[Disable status message retrieving in all statuses]
+Deaktiviere Statusnachrichtenempfang in allen Status
+[Disable status message retrieving in invisible status]
+Deaktiviere Statusnachrichtenempfang im Status 'Unsichtbar'
+[Retrieve XStatus details if auto-retrieve is disabled]
+XStatus-Details abrufen, auch wenn automatischer Empfang deaktiviert
+[Status bar and tray tooltip]
+Statusleisten- und Tray-Tooltips
+[Limit status messages in status bar and tray tooltips to:]
+Maximale Länge von Statusnachrichten in Statusleisten- und Tray-Tooltips:
+
+;Copy menu
+[Copy all items with labels]
+Alle Einträge mit Titeln kopieren
+[Copy all items]
+Alle Einträge kopieren
+[Copy avatar]
+Avatar kopieren
+
+;Tray tooltip
+[Tray tooltip]
+Tray-Tooltip
+[Enable tray tooltips]
+Tray-Tooltips aktivieren
+[Handle tray tooltips by Tipper]
+Tray-Tooltips durch Tipper anzeigen
+[Hide offline protocols]
+Offline-Protokolle verstecken
+[Displayed protocols]
+Angezeigte Protokolle
+[Expand to second level after:]
+Erweiterte Anzeige nach:
+[Number of contacts]
+Anzahl der Kontakte
+[Favourite contacts]
+Favorisierte Kontakte
+[Logon time]
+Angemeldet seit
+[Log on:]
+Anmeldung ist
+[ ago]
+ her
+[Miranda uptime:]
+Miranda-Laufzeit:
+[Miranda uptime]
+Miranda-Laufzeit
+[Clist event]
+CList-Ereignis
+[Protocol lock status]
+Protokoll ist gesperrt
+[Use status bar setting]
+Selbe Protokolle wie Statusleiste
+
+[First level tooltip]
+Einfache Tooltip-Anzeige
+[Second level tooltip]
+Erweiterte Tooltip-Anzeige
+
+; Favourite contacts
+[Hide offline]
+Offline verstecken
+[Append protocol name]
+Protokollnamen anhängen
+
+[Unread emails]
+Ungelesene E-Mails
+[Unread emails:]
+Ungelesene E-Mails:
+
+[<prefix>Day|Month to days to next birthday]
+<prefix>Day|Month in Tagen zum nächsten Geburtstag
+[Any to /Idle or empty]
+Beliebiges zu /Idle oder leer
+[Any to Idle/Not Idle/Unknown]
+Beliebiges zu Inaktiv/Nicht inaktiv/Unbekannt
+[BYTE to language (ICQ)]
+BYTE in Sprache (ICQ)
+[WORD to name of a month (1..12, 1 is January)]
+WORD in Monatsnamen (1..12, 1 ist Januar)
+[WORD to name of a day (0..6, 0 is Sunday)]
+WORD in Tagesnamen (0..6, 0 ist Sonntag)
+[You must enter a label]
+Sie müssen einen Titel eingeben!
+
+;preset items
+[Preset items:]
+Vordefinierte Einträge:
+
+[%idle% (%idle_diff% ago)]
+%idle% (%idle_diff% her)
+[%birthday_date% (%birthday_age%) - Next: %birthday_next%]
+%birthday_date% (%birthday_age%) - Nächster: %birthday_next%
+[\[jabber.dll\] Activity title]
+\[jabber.dll\] Aktivitätstitel
+[\[jabber.dll\] Activity text]
+\[jabber.dll\] Aktivitätsnachricht
+[\[seenplugin.dll\] Last seen time]
+\[seenplugin.dll\] 'Zuletzt gesehen'-Zeit
+[\[seenplugin.dll\] Last seen status]
+\[seenplugin.dll\] 'Zuletzt gesehen'-Status
+[\[weather.dll\] Condition]
+\[weather.dll\] Wetterlage
+[\[weather.dll\] Max/Min temperature]
+\[weather.dll\] Max./min. Temperatur
+[\[weather.dll\] Moon]
+\[weather.dll\] Mond
+[\[weather.dll\] Pressure]
+\[weather.dll\] Luftdruck
+[\[weather.dll\] Humidity]
+\[weather.dll\] Luftfeuchtigkeit
+[\[weather.dll\] Sunrise]
+\[weather.dll\] Sonnenaufgang
+[\[weather.dll\] Sunset]
+\[weather.dll\] Sonnenuntergang
+[\[weather.dll\] Temperature]
+\[weather.dll\] Temperatur
+[\[weather.dll\] UV Index]
+\[weather.dll\] UV-Index
+[\[weather.dll\] Visibility]
+\[weather.dll\] Sichtweite
+[\[weather.dll\] Wind]
+\[weather.dll\] Wind
+[\[weather.dll\] Update time]
+\[weather.dll\] Aktualisierungszeitpunkt
+[Activity text:]
+Aktivitätsnachricht:
+[Activity title:]
+Aktivitätstitel:
+[Condition:]
+Wetterlage:
+[Humidity:]
+Luftfeuchtigkeit:
+[Identifier]
+Nutzer-ID
+[IP internal:]
+IP intern:
+[IP internal]
+IP intern
+[Last message]
+Letzte Nachricht
+[Last message: (%sys:last_msg_reltime% ago)]
+Letzte Nachricht: (vor %sys:last_msg_reltime%)
+[Last seen status:]
+Letzter Status:
+[Last seen time:]
+Zuletzt gesehen:
+[Max/Min:]
+Max./min.:
+[Moon:]
+Mond:
+[Number of received messages]
+Anzahl empfangener Nachrichten
+[Number of msg [IN]:]
+Anzahl eingehender Nachrichten:
+[Number of sended messages]
+Anzahl gesendeter Nachrichten
+[Number of msg [OUT]:]
+Anzahl ausgehender Nachrichten:
+[Pressure:]
+Luftdruck:
+[Sunrise:]
+Sonnenaufgang:
+[Sunset:]
+Sonnenuntergang:
+[Temperature:]
+Temperatur:
+[Update time:]
+Aktualisierungszeitpunkt:
+[UV Index:]
+UV-Index:
+[Visibility:]
+Sichtweite:
+[Wind:]
+Wind:
+[XStatus title]
+XStatustitel
+[XStatus text]
+XStatusnachricht
+[XStatus text:]
+XStatusnachricht:
+[XStatus title:]
+XStatustitel:
+
+;Folders
+[Tipper skins]
+Tipper-Skins

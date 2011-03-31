@@ -1,0 +1,141 @@
+; Pluginname: My Details 
+; Version: 0.0.2.6
+; Dateiname: mydetails.dll
+; Autor: pescuma
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2814
+; SVN: svn://svn.berlios.de/mgoodies/trunk/mydetails
+; SVN alternativ: http://pescuma.googlecode.com/svn/trunk/
+; Übersetzung: 08.12.05 von Dober
+
+[Show and allows you to edit your details for all protocols.]
+Zeigt und erlaubt Ihnen das Ändern Ihrer Protokolldetails. 
+
+[Unread Email Count]
+Anzahl ungelesener Mails
+
+[My Details]
+Meine Details
+[Show My Details]
+Meine Details anzeigen
+[Hide My Details]
+Meine Details verstecken
+[Set My Avatar for %s...]
+Avatar für %s setzen
+[Set My Nickname for %s...]
+Nickname für %s setzen
+[Set My Status Message for %s...]
+Statusnachricht für %s setzen
+[Set My Avatar...]
+Mein Avatar setzen
+[Set My Nickname...]
+Mein Nicknamen setzen
+[Set My Status Message...]
+Meine Statusnachicht setzen
+[Enable Listening To]
+Musikinformationen senden
+[Show next protocol]
+Nächstes Protokoll anzeigen
+[Show previous protocol]
+Vorheriges Protokoll anzeigen
+[Cycle through protocols]
+Wechsel der Protokolle
+[Don't cycle through protocols]
+Kein Wechsel der Protokolle
+[Set My Nickname for %s]
+Nickname für %s setzen
+[Set My Status Message for %s]
+Statusnachricht für %s setzen
+[Enable Listening To for %s]
+Musikinformationen für %s senden
+
+[Set My Nickname]
+Mein Nicknamen setzen
+
+[ General ]
+Allgemein
+[Cycle through protocols every:]
+Wechsel des Protokolls alle
+[Global on avatar]
+Avatar global setzen
+[Align text to right]
+Rechtsbündig
+[Global on nickname]
+Nicknamen global setzen
+[Auto-resize frame]
+Autom. Höhe anpassen
+[Use contact list smileys]
+Kontaktlistensmileys nutzen
+[Global on status]
+Status global setzen
+[Replace Smileys]
+Smileys ersetzen
+[Resize Smileys]
+Smileygröße anpassen
+[Global on status message]
+Statusnachr. global setzen
+[ Frame Options ]
+ Rand 
+[Top:]
+Oben:
+[Bottom:]
+Unten:
+[Left:]
+Links:
+[Right:]
+Rechts:
+[Custom size:]
+Eigene Größe:
+[Allow it to grow]
+Bei Bedarf vergrößern
+[Use free space (under avatar) to other texts]
+Freien Platz unter Avataren für andere Texte nutzen
+[ Protocol ]
+ Protokoll 
+[Show protocol cycle button]
+Zeige Protokollwechselbuttons
+[Set My Status Message for All Status]
+Meine Statusnachricht für jeden Status setzen
+[Status popup]
+Statuspopup
+[Context popup]
+Kontextpopup
+[Nick popup]
+Nickpopup
+[Status message popup]
+Statusnachrichtenpopup
+[Avatar popup]
+Avatarpopup
+[<no status name>]
+<kein Statusname>
+[<nothing playing>]
+<es spielt nichts>
+
+[Previous protocol]
+Vorheriges Protokoll
+[Next protocol]
+Nächstes Protokoll
+
+[Skin options:]
+Skineinstellungen:
+[Bottom border:]
+Unterer Rand:
+[Left border:]
+Linker Rand:
+[Right border:]
+Rechter Rand:
+[Top border:]
+Oberer Rand:
+[Allow avatar to grow (be bigger than original image)]
+Erlaube Avatar zu wachsen (größer als Originalbild)
+[Show protocol cycle buttons]
+Zeige Protokollwechselbuttons
+[Show listening to]
+Zeige 'Was ich höre' Info 
+[Show status message]
+Zeige Statusnachricht
+[Show status]
+Zeige Status
+[Show unread mail count]
+Zeige Anzahl ungelesener E-Mails
+[Use fixed size avatar]
+Nutze feste Avatargröße

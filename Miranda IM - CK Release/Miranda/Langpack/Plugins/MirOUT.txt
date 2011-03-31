@@ -1,0 +1,43 @@
+; Pluginname: MirOUT 
+; Version: 2.2.0.5
+; Dateiname: mirout.dll 
+; Autor: MirOUT
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3270
+; Übersetzung: CHEF-KOCH am 23.05.2010
+; Besonderheiten: Entwicklung eingestellt!
+
+[Account]
+Konto
+[Password:]
+Passwort:
+[Save password]
+Speicher Passwort
+[Hint: If you don't enter your password here, Miranda will ask for the password everytime you try to log in.]
+Achtung: Wenn Sie das Passwort nicht hier eingeben, werden sie bei jedem Miranda Im start nach dem Passwort erneut gefragt.
+[Create MirOUT PIN]
+Erstelle ein MirOUT PIN
+[Forgot Password?]
+Haben Sie Ihr Passwort vergessen?
+[Finance]
+Finanzielles 
+[Add $]
+Füge $ hinz.
+[Balance]
+Ausgleichen
+[View Call History]
+Zeige Anrufverlauf
+[Tell a Friend]
+Rufe einen Freund an
+[Hint: You must be logged in to add money or view call history]
+Achtung: Sie müssen sich einloggen um Geld hinzu zu fügen, oder um den Anrufverlauf zu sehen.
+[MirOUT Interface]
+MirOUT Aussehen
+[Show icon in tray]
+Zeige Icon im Systemtray
+[Always on top]
+Immer im Vordergrund zeigen
+[Show on run]
+Zeige vom Startbeginn an
+[phone number]
+Tel. Nummer
+ 

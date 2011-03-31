@@ -1,0 +1,40 @@
+; Pluginname: Miranda Scripting Plugin 
+; Version: 0.0.3.3
+; Dateiname: mBot.dll
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1584
+; Übersetzung: 08.07.05 von Lastwebpage
+; Besonderheiten: Entwicklung eingestellt!
+; Wichtiges: mBot-Fenster sind nicht übersetzbar!
+
+[Enable MBot]
+MBot aktivieren (Hinweis: Bei einigen Plugins muss mBot zusätzlich aktiviert werden)
+[Disable all events]
+Alle Ereignisse deaktivieren
+[Disable file caching (overwrites script settings)]
+Script Cache deaktivieren (deaktiviert entsprechende Einstellungen im Script)
+[Disable scheduler]
+Zeitsteuerung für Scripts deaktivieren
+[Show MBot console on startup]
+MBot-Konsole beim Start von Miranda anzeigen
+[Show MBot console on error]
+MBot-Konsole bei einem Fehler anzeigen
+[Wrap console output]
+Zeilenumbruch in MBot-Konsole aktivieren
+[Enable WWW Server]
+WWW-Server aktivieren
+[Enable WWW Log]
+WWW-Log Ausgabe aktivieren
+[Show advanced script configuration (requires options restart);]
+Erweiterte Script Einstellungen anzeigen aktivieren (Neustart erforderlich)
+[Command Tags]
+Zeichenfolge für Ausführung von Befehlen
+[Script tag (default: "?>")]
+Script (Standard: "?>")
+[Command tag (default: "m>")]
+Befehle (Standard: "m>")
+[Registered handlers]
+Registrierte Routinen
+[Installed scripts (double click to configure)]
+Installierte Scripts (Doppelklick zum Bearbeiten)
+[Show MBot Console]
+MBot Console anzeigen

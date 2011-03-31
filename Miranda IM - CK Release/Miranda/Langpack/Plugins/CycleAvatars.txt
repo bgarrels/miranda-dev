@@ -1,0 +1,14 @@
+; Pluginname: CycleAvatars 
+; Version: 0.0.0.2
+; Dateiname: CycleAvatars.dll
+; Autor: pitris
+; Link: http://pitris.me.cz/scripts/redir.php?application=CAvatars&url=/programs/cycleavatars.zip
+; Übersetzung: 09.11.07 von Foso
+; Besonderheiten: Entwicklung eingestellt!
+
+[Note: Timer changes and enabling/disabling need restart of the plugin.]
+Achtung: Timeränderugen und de-/aktivieren benötigt einen Neustart.
+[Avatars Directory:]
+Avatarverzeichnis:
+[Enable CycleAvatars for this protocol]
+CycleAvatars für dieses Protokoll aktivieren

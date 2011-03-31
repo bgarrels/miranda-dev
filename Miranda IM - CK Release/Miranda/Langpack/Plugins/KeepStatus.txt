@@ -1,0 +1,123 @@
+; Pluginname: KeepStatus 
+; Version: 0.8.0.96
+; Dateiname: keepstatus.dll
+; Unique ID: {a5bb1b7a-b7cd-4cbb-a7db-ceb4eb71da49}
+; Autor: P Boon
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4258
+; Übersetzung: 22.12.2005 von Dober
+
+[KeepStatus, A connection checker, for use with (or without) StartupStatus and/or AdvancedAutoAway.]
+Überprüft die Verbindung zur Benutzung mit (oder ohne) StartupStatus und/oder AdvancedAutoAway.
+
+[Check connection]
+Verbindung prüfen
+[Max. retries]
+Max. Versuche
+[Protocol Connection]
+Protokollverbindung
+[Delay between retries (secs)]
+Verzögerung der Versuche (Sek.)
+[Dial-Up]
+Internetverbindung
+[Don't reconnect if no internet connection seems available]
+Nicht wiederverbinden, wenn keine Internetverbindung
+[Continuously check for internet connection]
+Fortlaufend Internetverbindung prüfen
+[Do so by pinging host]
+Ping senden an Host:
+
+[Cancel reconnecting]
+Wiederverb. stoppen
+[Show when connection is lost]
+Wenn Verbindung verloren
+[Show when a connection attempt is made]
+Bei Versuch des Neuverbindens
+[Show when reconnection has finished]
+Wenn Wiederverbinden beendet
+[Show other messages]
+Andere Meldungen
+[Show additional information in popups]
+Erweiterte Informationen anzeigen
+
+[Enable checking]
+Prüfung aktivieren
+[Disable checking]
+Prüfung deaktivieren
+[Trigger if...]
+Auslösen, wenn...
+
+[Max. delay (secs)]
+Max. Verzögerung (Sek.)
+[Increase delay exponential]
+Verzögerung exp. erhöhen
+[Cancel all if a protocol connects from another location]
+Alles abbrechen, wenn Protokoll bereits eingeloggt ist
+[Reconnect on APM resume]
+Wiederverbinden nach Energiesparmodus (APM)
+[Stop trying to reconnect]
+Wiederverbinden abbrechen
+[Set delay to]
+Verzögerung
+[React on login errors]
+Reaktion bei Einwahlfehlern:
+[Set protocol offline before a connection attempt]
+Protokoll vor dem Wiederverbinden offline setzen
+[Max. protocol connecting time (secs)]
+Max. Protokollverbindungszeit (Sek.)
+[Timers]
+Zeitplan
+[Reconnecting]
+Wiederverbindung
+[Ignore locked status of protocols]
+Festgesetzten Status des Protokolls ignorieren
+[Consider connection lost after]
+Verbindung ist verloren nach
+[failed pings]
+Versuchen
+[Continuously check interval (secs)]
+Prüfintervall(e) (in Sek.)
+
+[<from trigger>]
+<vom Auslöser>
+[%s Connected from another location]
+%s Verbunden von einem anderen Ort
+[%s Login error, cancel reconnecting]
+%s Loginfehler, Wiederverbindungsabbruch
+[%s Login error (next retry (%d) in %ds)]
+%s Loginfehler (nächster Versuch (%d) in %ds)
+[%s Status error (next retry (%d) in %ds)]
+%s Statusfehler (nächster Versuch (%d) in %ds)
+[Status error (next retry (%d) in %ds)]
+Statusfehler (nächster Versuch (%d) in %ds)
+[will be set to]
+wird gesetzt zu
+[%s\t(will be set to %s)\n]
+%s\t(wird gesetzt zu %s)\n
+[Resetting status... (last try (%d))%s]
+Status zurücksetzen... (letzer Versuch (%d))%s
+[Resetting status... (next retry (%d) in %ds)%s]
+Status zurücksetzen... (nächster Versuch (%d) in %ds)%s
+[No internet connection seems available... (last try (%d))]
+Keine Internetverbindung verfügbar... (letzer Versuch (%d))
+[No internet connection seems available... (next retry (%d) in %ds)]
+Keine Internetverbindung verfügbar... (nächster Versuch (%d) in %ds)
+[Status was set ok]
+Status setzen erfolgreich
+[Giving up]
+Kein Wiederverbinden möglich, Aufgabe!\nBitte Verbindungsdaten prüfen!
+[KeepStatus requires at least v0.3.1 (final) of Miranda IM, get it at www.miranda-im.org]
+KeepStatus benötigt mindestens Miranda IM Version 0.8.0 - http://miranda-im.org
+
+[connection lost]
+Verbindung verloren
+[success]
+erfolgreich
+[, success]
+, erfolgreich
+[giving up]
+gebe auf
+[, giving up]
+, gebe auf
+
+[You broke the Internet!]
+Internetverbindung verloren

@@ -1,0 +1,18 @@
+; Pluginname: StatusChange 
+; Version: 1.4
+; Dateiname: StatusChange.dll
+; Autor: Corsario
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=297
+; Übersetzung: 21.10.06 Foso
+
+[StatusChange]
+Statusänderung
+
+[On events...]
+Bei Ereignis
+[Receive]
+Empfangen
+[...change status to...]
+...wechsel Status zu...
+[... if status is...]
+...wenn Status ist...

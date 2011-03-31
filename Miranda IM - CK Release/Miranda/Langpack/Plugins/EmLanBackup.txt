@@ -1,0 +1,12 @@
+; Pluginname: EmLanBackup - (modification of Anders Nilsson's UINBackup plugin)
+; Version: 0.0.0.7 
+; Dateiname: EmLanBackup.dll
+; Autor: gaid
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=513
+; Übersetzung: 09.07.05 von Baphomet
+; Besonderheiten: Entwicklung eingestellt!
+
+[Export EmLan contacts]
+EmLan Kontakte exportieren
+[Import EmLan contacts]
+EmLan Kontakte importieren

@@ -1,0 +1,303 @@
+; Pluginname: SecureIM - modified by baloo 
+; Version: 1.0.12.3
+; Dateiname: SecureIM.dll
+; Autor: Johell, Ghost, Nightwish, __alex, Baloo
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2445
+; Übersetzung: 06.07.05 von derula
+
+[Set key]
+Schlüssel setzen
+[Delete key]
+Schlüssel löschen
+[Always Try to Establish Secure IM]
+SecureIM-Verbindung immer versuchen
+[Secure IM Enabled]
+SecureIM aktiviert
+[Secure IM Disabled]
+SecureIM deaktiviert
+[UIN/Email/Jid/...]
+Benutzer-ID
+[Native]
+Nativ
+[Send/Receive encrypted colors]
+Sichere Nachrichten
+[key Popup]
+Schlüssel-Popup
+[Key Popup]
+Schlüssel-Popup
+[Secure Popup]
+Sicherheits-Popup
+[Message Popup]
+Nachrichten-Popup
+[User List]
+Benutzerliste
+[Enable Secure Offline messages]
+Verschlüsselte Offline-Nachrichten
+[Always try]
+Immer versuchen
+[Key Exchange Timeout :]
+Schlüsseltausch-Timeout:
+[Offline Key Timeout :]
+Offlineschl.-Timeout:
+[Enable Secure File Transfer]
+Verschlüsselter Dateiversand
+[Always show status icons in contact list]
+Status immer in der Kontaktliste anzeigen
+[Contact List Icon slot]
+Kontaktlistenicon-Slot
+[Context Menu only for "Miranda" clients]
+Kontaktmenü nur für Miranda-Clients anz.
+[Status in Context Menu]
+Zeige Status im Kontaktmenü
+[Disable encryption for game plugins]
+Keine Verschl. für Spiele-Plugins
+[Always secured if possible]
+Immer verschlüsseln, falls möglich
+[Not secured for NotOnList]
+Unverschlüsselt für unbekannte Kontakte
+[Auto accept RSA key (NOT SECURED)]
+Autom. RSA-Schlüssel akzept. (UNSICHER!)
+[Mode in Context Menu]
+Zeige Modus im Kontaktmenü
+[You should select the value that identify each user of the protocol you choose as unique.\nFor exemple ICQ unique value is UIN and MSN unique value is e-mail ...\n\nYou  must restart miranda to apply the changes.]
+Sie sollten den Wert auswählen, der für jeden Benutzer des Protokolls einmalig ist.\nZum Beispiel ist das bei ICQ die UIN oder bei MSN die E-Mail-Adresse...\n\nMiranda IM muss neu gestartet werden, um diese Änderungen zu übernehmen.
+[Add Protocol/Value]
+Protokoll hinzufügen
+[Delete enabled Protocol]
+Protokoll löschen
+[Native SecureIM]
+AES SecureIM (Nativ)
+[Pre-shared key]
+Pre-Shared Key
+[RSA Key]
+RSA-Schlüssel
+[Public key]
+Öffentl. Schlüssel (PUB)
+[View SHA1 of key]
+Zeige SHA1 des Schlüssels
+[Export key]
+Schlüssel exportieren
+[Import key]
+Schlüssel importieren
+[Export public key]
+Öffentlichen Schlüssel exportieren
+[Import public key]
+Öffentlichen Schlüssel importieren
+[Delete public key]
+Öffentlichen Schlüssel löschen
+[Set pre-shared key]
+Pre-Shared Key setzen
+[Delete pre-shared key]
+Pre-Shared Key löschen
+
+[Split Messages]
+Trenne Nachrichten
+[Public]
+Öffentlich
+[&Copy SHA1]
+SHA1 &kopieren
+
+[Disable SecureIM connection]
+SecureIM-Verbindung deaktivieren
+[Create SecureIM connection]
+SecureIM-Verbindung aktivieren
+[SecureIM mode (Native)]
+SecureIM-Modus (Nativ)
+[SecureIM mode (RSA/AES)]
+SecureIM-Modus (RSA/AES)
+[SecureIM mode (PGP)]
+SecureIM-Modus (PGP)
+[SecureIM mode (GPG)]
+SecureIM-Modus (GPG)
+[The new settings will become valid when you restart MirandaIM!]
+Die neuen Einstellungen werden beim Neustart von Miranda IM wirksam!
+[General SecureIM won't be loaded because cryptopp.dll is missing or wrong version !]
+SecureIM kann nicht geladen werden, da cryptopp.dll fehlt oder in einer falschen Version vorliegt!
+
+[Disable PGP]
+Deakt. PGP
+[SecureIM received encryped message:]
+SecureIM-verschlüsselte Nachricht erhalten:
+[SecureIM received unencryped message:]
+SecureIM-unverschlüsselte Nachricht erhalten:
+[SecureIM: Sorry, unable to decrypt this message due you have no PGP installed. Visit www.pgp.com for more info.]
+SecureIM: Da PGP nicht installiert ist, kann diese Nachricht nicht entschlüsselt werden. Siehe www.pgp.com für weitere Infos.
+[Unload PGP Key]
+PGP-Schlüssel entladen
+[Load PGP Key]
+PGP-Schlüssel laden
+[Load GPG Key]
+GPG-Schlüssel laden
+[Unload GPG Key]
+GPG-Schlüssel entladen
+[Keyrings disabled!]
+Schlüsselringe deaktiviert!
+[Private key not loaded!]
+Privater Schlüssel nicht geladen!
+[Private key loaded.]
+Privater Schlüssel geladen.
+[This version not supported!]
+Diese Version wird nicht unterstützt!
+[PGP SDK not found!]
+PGP-SDK nicht gefunden!
+[PGP SDK v%i.%i.%i found.]
+PGP-SDK v%i.%i.%i gefunden.
+[Keyrings not loaded!]
+Schlüsselringe nicht geladen!
+[Keyrings loaded.]
+Schlüsselringe geladen.
+[Key ID]
+Schlüssel-ID
+[ON]
+Ein
+[Password is too short!]
+Passwort ist zu kurz!
+[Disable keyrings use]
+Schlüsselringe deakt.
+
+[Incoming Secure Message]
+Sichere Nachricht (eingehend)
+[Outgoing Secure Message]
+Sichere Nachricht (ausgehend)
+
+[SecureIM PopUp Colors]
+Farben der Popups
+[Key agreement colors]
+Schlüsselaustausch
+[Secure connection colors]
+Sichere Verbindung
+
+[PopUp Timeout]
+Anzeigedauer
+[Time in Seconds]
+Zeit in Sekunden
+[0 = Default PopUp Timeout Value]
+0 = Standard
+
+[Show a popup on each secure receive]
+Popup bei sicherem Nachrichtenempfang zeigen
+[Show a popup on each secure send]
+Popup bei sicherem Nachrichtenversand zeigen
+[Show a popup on key send]
+Popup beim Versand eines Schlüssels zeigen
+[Show a popup on key received]
+Popup beim Empfang eines Schlüssels zeigen
+[Show a popup on established connection]
+Popup beim Aufbau einer Verbindung zeigen
+[Show a popup on disabled connection]
+Popup beim Abbau einer Verbindung zeigen
+
+;popup Message
+[SecureIM established...]
+Sichere Verbindung aufgebaut...
+[SecureIM status (enabled)]
+SecureIM-Status (aktiviert)
+[SecureIM status (disabled)]
+SecureIM-Status (deaktiviert)
+[SecureIM status (always try)]
+SecureIM-Status (immer versuchen)
+[Key exchange failed...]
+Austausch der Schlüssel fehlgeschlagen.
+[Key from disabled...]
+Schlüssel deaktiviert...
+[Sended back message received...]
+Zurückgesendete Nachricht erhalten.
+[Sending back secure message...]
+Sende sichere Nachricht zurück...
+[SecureIM disabled...]
+SecureIM deaktiviert.
+[SecureIM is disabled...]
+SecureIM ist deaktiviert.
+[Message Received...]
+Nachricht erhalten.
+[Sending Message...]
+Sende Nachricht...
+[Decrypting File...]
+Entschlüssele Datei...
+[Encrypting File...]
+Verschlüssele Datei...
+[SecureIM Disabled...]
+SecureIM deaktiviert.
+[Sending Key...]
+Sende Schlüssel...
+[Key Received...]
+Schlüssel erhalten...
+[Session closed on timeout]
+Sitzung aufgrund eines Timeouts unterbrochen.
+[Session closed by other side on error]
+Sitzung aufgrund eines Fehlers unterbrochen.
+[Session closed by receiving incorrect message type]
+Sitzung aufgrund des Empfangs eines falschen Nachrichtentyps unterbrochen
+
+[Bad key received...]
+Falschen Schlüssel erhalten...
+[Due to encryption by block and hexadecimal conversion you are limited to 3700 characters.\r\n Message is canceled !]
+Durch die blockweise und hexadezimale Verschlüsselung sind Nachrichten auf 3700 Zeichen begrenzt.\r\nNachricht wird nicht gesendet!
+[Your message is too long !]
+Die Nachricht ist zu lang!
+[User is now Offline, Do you want to send your message ?\r\nIt will be unencrypted !]
+Benutzer ist offline, möchten Sie die Nachricht senden?\r\nSie wird nicht verschlüsselt!
+[Can't Send Encrypted Message !]
+Kann verschlüsselte Nachricht nicht senden!
+[You Must Enable SecureIm with this user...]
+Sie müssen SecureIM für diesen Benutzer aktivieren.
+[SecureIM not enabled !]
+SecureIM ist nicht aktiv!
+[Establishe Secure Connection]
+Sichere Verbindung herstellen
+[Could not established SecureIM !]
+Konnte keine sichere Verbindung aufbauen!
+[Error while decrypting the message.]
+Fehler beim Entschlüsseln der Nachricht.
+[User has not answered to key exchange !\n\nYour messages are still in SecureIm queue, do you want to send them Unencrypted now ?]
+Benutzer hat auf den Austausch der Schlüssel nicht geantwortet.\r\nMöchten Sie die Nachrichten jetzt unverschlüsselt senden?
+[SecureIM received RSA Public Key from "%s"\n\nSHA1: %s\n\nDo you Accept this Key ?]
+SecureIM hat den öffentlichen RSA-Schlüssel von "%s" erhalten.\n\nSHA1: %s\n\nMöchten Sie diesen akzeptieren?
+[Please type in your password]
+Bitte vergeben Sie ein Passwort!
+[SecureIM plugin Passphrase of private key]
+SecureIM: Passphrase des privaten Schlüssels
+[Enter passphrase for the secret key:]
+'Passphrase' für den geheimen Schlüssel eingeben:
+[Save Public Key File]
+Öffentlichen Schlüssel in Datei speichern
+[Save Private Key File]
+Privaten Schlüssel in Datei speichern
+[Load Private Key File]
+Privaten Schlüssel aus Datei laden
+[Can't export RSA private key!]
+Kann privaten RSA-Schlüssel nicht exportieren!
+[Can't export RSA public key!]
+Kann öffentl. RSA-Schlüssel nicht exportieren!
+
+[Always Try]
+Immer versuchen
+[Connection Disabled]
+Verbindung getrennt
+[Connection Established]
+Verbindung hergestellt
+[Disable Secure Connection]
+Sichere Verbindung trennen
+[Menu State]
+Status im Kontaktmenü
+[Native mode]
+Nativer Modus
+[Secure Connection Disabled]
+Sichere Verbindung getrennt
+[Secure Connection Established]
+Sichere Verbindung hergestellt
+[Secure Connection In Process]
+Sichere Verbindung wird hergestellt
+[Recv Secured Message]
+Verschlüsselte Nachricht erhalten
+[Sent Secured Message]
+Verschlüsselte Nachricht gesendet
+[GPG mode]
+GPG-Modus
+[PGP mode]
+PGP-Modus
+[RSA/AES mode]
+RSA/AES-Modus
+
+[SecureIM status]
+SecureIM-Status

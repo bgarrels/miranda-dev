@@ -1,0 +1,285 @@
+; Pluginname: Trigger Plugin 
+; Version: 0.2.0.35
+; Dateiname: TriggerPlugin.dll
+; Autor: pboon
+; Übersetzung: 24.03.06 von FREAK_THEMIGHTY
+
+[Triggers can only be edited when the module is disabled. Changes made cannot be undone or canceled.]
+Triggers können nur bearbeitet werden wenn dieses Modul deaktiviert ist. Erfolgte Änderungen können nicht rückgängig gemacht oder abgebrochen werden.
+[Add Condition (AND)]
+neue UND-Bedingung
+[Add Condition (OR)]
+neue ODER-Bedingung
+[Add Group (AND)]
+neue UND-Gruppe
+[Add Group (OR)]
+neue ODER-Gruppe
+[Conditions]
+Bedingungen
+[New Condition]
+neue Bedingung
+[New Action]
+Neue Aktion
+[New Trigger]
+Neuer Auslöser
+[Chain]
+Ablauf
+[Add Group to Chain]
+Gruppe zu Ablauf hinzufügen
+[Add Group to Action]
+Gruppe zu Aktion hinzufügen
+[Add Condition]
+Bedingung hinzufügen
+[Add Action]
+Aktion hinzufügen
+[Add Group]
+Gruppe hinzufügen
+[Add Trigger]
+Auslöser erstellen
+[Edit Condition]
+Bedingung bearbeiten
+[Edit Trigger]
+Auslöser bearbeiten
+[Contact-specific settings are not exported.]
+kontaktspezifische Einstellungen werden nicht exportiert.
+[The status of one of these protocol]
+Eines der folgenden Protokolle
+[Must be one of these]
+muss einen der folgenden Status haben
+[This condition cannot be used with the associated trigger]
+Diese Bedingung kann nicht mit einem der folgenden Schalter verwendet werden.
+[The contact associated to the trigger must be:]
+Diesem Schalter muss folgender Kontakt zugeordnet werden:
+[NULL (none)]
+Keiner (NULL)
+[One of the following]
+Einer der folgenden
+[The protocol associated to this trigger must be one of the following]
+Diesem Trigger muss eines der folgenden Protokolle zugeordnet werden
+[The status associated to the trigger must be one of the following]
+Diesem Trigger muss einem der folgenden Status zugeordnet werden
+[The following string must be parsed without any errors]
+Die folgenden Strings müssen ohne Fehler umgewandelt werden
+[The text associated to the trigger must]
+Der diesem Trigger zugeordnete Text muss
+[Be equal to the following text]
+mit folgendem Text identisch sein
+[Start with the following text]
+mit folgendem Text beginnen
+[Contain the following text]
+folgenden Text enthalten
+[Check case insensitive]
+Gross/Kleinschreibung nicht berücksichtigen
+
+[Edit Action]
+Aktion bearbeiten
+[Miranda: Send file]
+Miranda: Datei versenden
+[Send a file to the following contacts]
+Eine Datei an folgende Kontakte senden
+[File to send]
+Datei zum Versenden
+[The above string is parsed by the Variables plugin, if available]
+Dieser Text wird vom Variables Plugin umgewandelt (falls verfügbar).
+[Simulate a mouse click to immediately start sending the file]
+Mausklick simulieren um Datei sofort zu senden
+
+[Miranda: Send message]
+Miranda: Nachricht senden
+[Send a message to the following contacts]
+Eine Nachricht an folgende Kontakte senden
+[Message to send]
+Zu sendende Nachricht
+[Add to history]
+Zum Gesprächsverlauf hinzufügen
+[Automatically split messages that are too long]
+Zu lange Nachrichten automatisch aufteilen
+
+[Show a PopUp]
+PopUp zeigen
+[Use default text colour]
+Standard Textfarbe nutzen
+[Use default background colour]
+Standard Hintergrundfarbe nutzen
+[First Line]
+1. Zeile
+
+[Miranda: Sounds]
+Miranda: Klänge
+[Disable all sounds]
+alle Klänge deaktivieren
+[Enable all sounds]
+alle Klänge aktivieren
+[Play a sound]
+einen Klang abspielen
+[Speaker]
+Lautsprecher
+
+[Miranda: Store DB Setting]
+Miranda: Datenbankeintrag speichern
+[Store at NULL Contact]
+keinem Kontakt zuordnen
+[Store at the following contact]
+folgendem Kontakt zuordnen
+[Store value as]
+Wert speichern als
+[Please do only use this action if you know what you are doing!]
+Diese Aktion bitte nur benutzen wenn Du weißt was Du machst!
+[Trigger]
+Auslöser
+[Add new trigger]
+Neuen Schalter hinzufügen
+[There are no options to configure]
+Es gibt hier keine Einstellungsmöglichkeiten.
+[Trigger at the following time]
+Zu folgender Zeit auslösen
+[Monthly on day]
+monatlich am Tag
+[Write a file]
+Eine Datei schreiben
+[File to write to]
+Datei zum Speichern
+[Append text to file]
+Text an Datei anhängen
+[Write unicode text]
+Unicode Text schreiben
+[The above strings are parsed by the Variables plugin, if available]
+Diese Texte werden vom Variables Plugin umgewandelt (falls verfügbar).
+
+[Miranda: Change status]
+Miranda Statusänderung
+[Change status of the following protocols]
+Setze folgende Protokolle
+[Set status to]
+auf folgenden Status
+[Set custom status message]
+Verwende folgende Statusnachricht
+
+[Miranda: My Status]
+Miranda: Mein Status
+[The status of one of these protocols:]
+Folgende Protokolle
+[Must be one of these:]
+müssen folgenden Status haben
+
+[Miranda: Make a service call]
+Miranda: Programmfunktion aufrufen
+[Process this parameter as]
+Parameter behandeln als
+[Use the following]
+folgenden Parameter verwenden
+
+[Miranda: Contact status change]
+Miranda: Kontakt ändert Status
+[Pre-conditions]
+Vorbedingungen
+[Trigger when a contact changes from]
+Auslösen wenn Kontakt Status ändert von
+[And changes status to]
+auf folgenden Status
+[Contact: The contact changing status\r\nStatus: The status the contact changes to\r\nProtocol: The contact's protocol]
+Kontakt: Der Kontakt der seinen Status ändert\r\nStatus: Der neue Status des Kontaktes\r\nProtokoll: Protokoll des Kontaktes
+
+[Miranda: Protocol status change]
+Miranda: Protokoll ändert Status
+[Trigger when a protocol changes from]
+Auslösen wenn Protokoll Status ändert von
+[Status: The status the protocol changes to\r\nProtocol: The protocol changing status]
+Status: Der neue Status des Protokolls\r\nProtokoll: Das Protokoll welches seinen Status ändert
+
+[Please do only use this trigger if you know what you are doing!]
+Bitte diesen Auslöser nur verwenden wenn du weißt was du machst!
+
+[Miranda: DB contact setting change]
+Miranda: Datenbankeintrag eines Kontaktes ändert sich
+[The contact for which a setting changes must be]
+Der Kontakt dessen Einstellung sich ändert ist
+[Module name (parsed by the Variables plugin, if available)]
+Modulname (von Variables Plugin umgewandelt falls vorhanden)
+[Setting name]
+Einstellungsname
+
+[Miranda: Message window]
+Miranda: Nachrichtenfenster
+[Trigger when window is about to be opened]
+Auslösen wenn Fenster geöffnet werden soll
+[Trigger when window has been opened]
+Auslösen wenn Fenster geöffnet wurde
+[Trigger when window is about to be closed]
+Auslösen wenn Fenster geschlossen werden soll
+[Trigger when window has been closed]
+Auslösen wenn Fenster geschlossen wurde
+[Contact: The contact associated to the window\r\nStatus: The contact's status\r\nProtocol: The contact's protocol]
+Kontakt: Der dem Nachrichtenfenster zugeordnete Kontakt\r\nStatus: Status des Kontaktes\r\nProtokoll: Protokoll des Kontaktes
+
+
+[Miranda: Event]
+Miranda: Ereignis
+[Trigger when the event is a message]
+Auslösen bei Nachricht
+[Trigger when the event is a file]
+Auslösen bei Datei
+[Trigger when the event is sent]
+Auslösen wenn Ereignis gesendet wurde
+[Trigger when the event is received]
+Auslösen wenn Ereignis empfangen wurde
+[Mark the event as read]
+Ereignis als gelesen markieren
+[Delete the event]
+Ereignis löschen
+[Contact: The contact associated to the message\r\nStatus: The contact's status\r\nProtocol: The contact's protocol\r\nText: The message text]
+Kontakt: Der der Nachricht zugeordnete Kontakt\r\nStatus: Status des Kontaktes\r\nProtokoll: Protokoll des Kontaktes\r\nText: Inhalt der Nachricht
+
+
+[Miranda: Status message request]
+Miranda: Statusnachricht wird abgefragt
+[Ignore requests after a status change]
+Abfragen nach Statusänderungen ignorieren
+[Contact: The contact requesting the message\r\nStatus: The contact's status\r\nProtocol: The contact's protocol]
+Kontakt: Der Kontakt der die Statusnachricht abfragt\r\nStatus: Status des Kontaktes\r\nProtokoll: Protokoll des Kontaktes
+
+[Use this Parameter as TriggerData]
+Parameter als TriggerData verwenden
+[Parameter is a contact]
+Parameter ist Kontakt
+[Parameter is a status code]
+Parameter ist Status
+[Parameter is a protocol]
+Parameter ist Protokoll
+[Parameter is a string]
+Parameter ist Text
+
+[Miranda: Message Window]
+Miranda: Nachrichtenfenster
+[A message window must exist for one of the following contacts]
+Ein Nachrichtenfenster muss für einen der folgenden Kontakte existieren
+[WARNING: Selecting a lot of contacts may be slow]
+WARNUNG: Viele Kontakte zu markieren verlangsamt Miranda
+[The window must be visible]
+Nachrichtenfenster muss sichtbar sein
+[The window must have focus]
+Nachrichtenfenster muss fokussiert sein
+[The window must be minimized]
+Nachrichtenfenster muss minimiert sein
+
+[Execute a program]
+Ein Programm ausführen
+[Program to execute]
+Auswählen
+
+[Miranda: Exit]
+Miranda beenden
+[Variables: Parse string]
+Variables: Text umwandeln
+[Variables: string changed]
+Variables: Text ändert sich
+[Ignore "supress online notification" settings]
+"Statusbenachrichtigung unterdrücken" ignorieren
+
+[Text to write]
+Text zum Speichern
+
+[Parse the following string]
+Folgenden String umwandeln:
+[Execute parsing in a seperate thread (unstable!)]
+Umwandeln in einem seperaten Thread ausführen (Unstabil!)

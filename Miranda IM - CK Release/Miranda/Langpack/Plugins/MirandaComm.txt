@@ -1,0 +1,120 @@
+; Pluginname: MirandaComm 
+; Version: 0.2.0.0
+; Dateiname: mirandacomm.dll
+; Autor: _hermes
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3316
+; Besonderheiten: Entwicklung eingestellt!
+
+[Decline]
+Ablehnen
+[%s wants to talk with you.]
+%s möchte mit Ihnen sprechen.
+[Waiting for %s to accept your request.]
+Warte, bis %s Ihre Anfrage annimmt.
+[%s canceled his request to talk with you.]
+%s hat seine Anfrage zurückgenommen.
+[%s declined the request.]
+%s hat abgelehnt.
+[Auto-Accept contact]
+Künftig immer annehmen
+[Could not establish a connection: Timeout during Instant Message negotiation. Make sure the contact is online and has MirandaComm. Please try again.]
+Konnte keine Verbindung aufbauen: Zeitüberschreitung beim Nachrichtenaustausch. Ist der Teilnehmer online? Ist dort MC installiert? Bitte nochmals versuchen.
+[Could not establish a connection. Are both you and your peer firewalled or behind a NAT? See MirandaComm's FAQ for solutions.]
+Konnte keine Verbindung aufbauen. Sind Sie und Ihr gewünschter Gesprächspartner direkt mit dem Internet verbunden? Bitte lesen Sie die häufig gestellen Fragen.
+[The connection with %s timed out.]
+Die Verbindung mit %s wurde wegen einer Zeitüberschreitung beendet.
+[Timeout for %s. Check connection.]
+Zeitüberschreitung für %s. Überprüfen Sie die Verbindung.
+[Could not bind to port %i. MirandaComm disabled for this session. Change the port in the options and restart miranda.]
+Der Anschluss %i konnte nicht belegt werden. MirandaComm ist deaktiviert. Ändern Sie die Anschlussnummer in den Optionen und starten Sie Miranda neu.
+[MirandaComm -- Error]
+MirandaComm - Fehler
+[&Audio Session]
+&Sprechen
+[&Video Session]
+&Sehen
+[You need a sound card which supports recording for MirandaComm.]
+MirandaComm benötigt eine Soundkarte, die Aufnahme unterstützt.
+[Can not open the sound device for playback. With certain drivers only one instance can be opened. This is especially with NT 4.0 the case.]
+Die Tonausgabe konnte nicht geöffnet werden. Mit manchen Treibern kann nur ein Programm zur selben Zeit wiedergeben, besonders bei NT 4.0.]
+[Length of Recording Buffers]
+Länge der Aufnahmepuffer
+[Audio Format...]
+Audioformat...
+[Playback Buffers]
+Wiedergabepuffer
+[64 bytes]
+64 Bytes
+[256 bytes]
+256 Bytes
+[Suggested Audio Format: GSM 6.10, 8-12 KHz. The Audio Format must support recording. The called party needs the Codec too. Buffer Length and Audio Format will be used for this client only. For playing back other clients, their audio settings will be used.]
+Empfohlenes Audioformat: GSM 6.10, 8 - 12 KHz. Das Format muss Aufnahme unterstützen. Die gerufene Seite braucht denselben Codec. Pufferlänge und Audioformat werden nur auf diesem Computer angewendet. Für andere Teilnehmer gelten deren Toneinstellungen.
+[Push-to-Talk Key]
+Sprechtaste
+[Ctrl]
+Strg
+[Shift]
+Shift
+[Audio Source]
+Tonquelle
+[Recording Device]
+Aufnahmegerät
+[Playback device]
+Wiedergabegerät
+[Disable recording]
+Aufnahme ausschalten
+[Auto-select device]
+Gerät automatisch auswählen
+[Disable playback]
+Wiedergabe ausschalten
+[Interface]
+Bedienung
+[Disable Video Chat completely]
+Bildübertragung komplett aus
+[Disable "Stream Desktop"]
+"Arbeitsplatz übertragen" aus
+[Quality]
+Qualität
+[Limit frames per second to]
+Max. Bilder pro Sekunde
+[Video Driver]
+Videotreiber
+[Note: The first connected camera will be used. Windows does not support choosing the camera by software.]
+Hinweis: Die erste angeschlossene Kamera wird benutzt. Windows erlaubt keine Auswahl der Kamera.
+[Disable logfile]
+Deaktiviere Logdatei
+;[Do not hide the session dialog together with the contact list]
+[Do not blink icon on request (immediately show request dialog)]
+Anfrage nicht über Systembereich, sondern direkt anzeigen.
+[Timeout (default 4000 ms). Change only if you know what you are doing.]
+Zeitüberschreitung (Standard 4000 ms). Mit Bedacht ändern!
+[Get IP From Site]
+IP von Seite holen
+[Unless you select "Force", Get IP From Site will only be used if the IP address cannot be retrieved with the standard method.]
+Die IP wird nur dann von dieser Seite geholt, falls die Standardmethode fehlschlägt, außer Sie erzwingen diese Option.
+[Unless you are using MC in a LAN network, do not set the frame rate limit too high, as bandwith problems will occur, even with the lowest quality.]
+Wenn Sie MC nicht in einem lokalen Netzwerk benutzen, setzen Sie die Bilder/s nicht zu hoch, da sonst Probleme mit der Bandbreite auftreten.
+[Force]
+Erzwingen
+[Site]
+Seite
+[Look after]
+Schlüsseltext
+[IP Override]
+Feste IP erzwingen
+[Note: Your own IP]
+Hinweis: Nur Ihre
+[will be overridden.]
+IP wird geändert.
+[You can not override the IPs of other clients. Use with caution!]
+Es ist nicht möglich, die IPs von anderen Teilnehmern einzugeben.
+[Default Port: 20909]
+Standard ist 20909
+[Auto-Accept]
+Automatisch durchstellen
+[WebCam&Voice-Over-Ip for Miranda.]
+Bild- und Tonübertragung für Miranda
+[Could not connect to video capture driver. Is your webcam connected?]
+Fehler: Konnte keine Verbindung zur Kamera herstellen. Ist sie angeschlossen?
+[Show &Video Preview]
+&Vorschau anzeigen

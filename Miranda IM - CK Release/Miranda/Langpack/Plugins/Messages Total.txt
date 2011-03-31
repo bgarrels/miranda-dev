@@ -1,0 +1,32 @@
+; Pluginname: Messages Total 
+; Version: 0.0.5.3
+; Dateiname: messagestotal.dll
+; Autor: Wombat
+; Übersetzung: 18.04.06 von [miroerr]
+; Besonderheiten: Entwicklung eingestellt!
+
+[Send Messages total]
+Nachrichten-Gesamtzahl senden
+[Show Messages total]
+Nachrichten-Gesamtzahl zeigen
+
+[Show avatar in popup]
+Avatar im Popup zeigen
+['Show Messages Total' menu item (*)]
+'Nachrichten-Gesamtzahl' im Menü (*)
+[(*) Required restart]
+(*) Benötigt Neustart
+[At send message]
+Bei Anzahl senden
+[Show Popups]
+Popups zeigen
+[Send only if number > 0]
+Nur falls Anzahl > 0
+[At show message]
+Bei Anzahl zeigen
+[Show MessageBox]
+Meldung zeigen
+[%c = Contact Name; %n = Messages Total]
+%c = Kontaktname; %n = Nachrichten gesamt
+[MessageBox]
+Meldung

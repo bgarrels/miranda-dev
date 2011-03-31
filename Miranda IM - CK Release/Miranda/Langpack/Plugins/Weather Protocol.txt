@@ -1,0 +1,894 @@
+; Pluginname: Weather Protocol 
+; Version: 0.3.8.19
+; Dateiname: weather.dll 
+; Autor(en): borkra
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2322
+; SVN: http://mirandaimplugins.googlecode.com/svn/trunk/weather
+; Übersetzung: 11.09.2005 von Dober - überarbeitet bei CHEF-KOCH am 29.05.2010
+
+; Pluginname: Weather Underground Support for Weather 
+; Version: 2010.05.09
+; Dateiname: wundergrnd.ini, wundergrnd_ca.ini, wundergrnd_intl.ini
+; Autor(en): borkra
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2408
+; SVN: http://mirandaimplugins.googlecode.com/svn/trunk/weather%20underground
+; Übersetzung: CHEF-KOCH am 29.05.2010
+
+[Update Disabled]
+Aktualisieren deakt.
+[Update with Clear]
+Daten entf. und aktualisieren
+[View Brief]
+Kurz-Information
+[View Complete]
+Komplette Vorhersage
+[Weather Update]
+Wetter-Update
+[No Popup]
+Kein Popup
+
+[Retrieve weather information and display them in your contact list]
+Empfängt Wetterinformationen und zeigt diese in Ihrer Kontaktliste an
+
+[Brief Info]
+Kurzinfo
+[Webpage]
+Webseite
+
+[Update weather information on startup]
+Wetter-Informationen beim Start aktualisieren
+[Update weather information every]
+Aktualisiere die Wetter-Informationen alle
+[minutes.]
+Minuten.
+[Consider weather info updated only when condition and temperature are changed]
+Nur bei Wetteränderung aktualisieren
+[Remove old data when updating]
+Beim Aktualisieren alte Daten löschen
+[Make the contact italic when weather alert is issued]
+Kontakt kursiv darstellen, wenn ein Wetteralarm auftritt
+[Open URLs in new browser window]
+URLs in neuem Browser-Fenster öffnen
+[Use weather condition as protocol status]
+Wetterlage als Protokollstatus verwenden
+[Units]
+Einheiten
+[Temperature]
+Temperatur
+[Degree sign:]
+Gradzeichen:
+[knots]
+Knoten
+[miles]
+Meilen
+[Pressure]
+Druck
+[inches]
+Zoll
+[Day/Month]
+Tag/Monat
+[Do not append units to values]
+Keine Einheiten an Werte anhängen
+[Do not display fractional values]
+Keine Nachkommastellen anzeigen 
+[Frame]
+Rahmen
+[Avatar size]
+Avatargröße
+[No change]
+Keine Änder.
+[2 chars]
+2 Zeichen
+[3 chars]
+3 Zeichen
+[Avatar only mode]
+Nur Avatarmodus
+[Modes]
+Modi
+
+[Edit Weather Station]
+Wetterstation bearbeiten
+[Weather Station]
+Wetterstation
+[City name]
+Stadt-Name
+[Log Information]
+Log-Informationen
+[Use internal history]
+Internen Verlauf verwenden
+[Use external file]
+Externe Datei verwenden
+[Overwrite file upon update]
+Bei Aktualis. Datei überschreib.
+[Link Settings]
+Link-Einstellungen
+[More Info URL]
+Mehr-Infos-URL
+[Weather Map]
+Wetter-Karte
+[Other Options]
+Andere Einstellungen
+[Set as default station]
+Zur Standard-Station machen
+[Disable automatic update for this station]
+Automatische Aktualisierung für diese Station deaktivieren
+[Disable PopUp for this station]
+Popups für diese Station deaktivieren
+
+[PopUp Options]
+Popup-Einstellungen
+[Popup only when condition changes]
+Popups nur bei Wetteränderung
+[Popup Actions]
+Popup-Aktionen
+[Left Click]
+Linksklick
+[Right Click]
+Rechtsklick
+[Popup Delay]
+Popup-Verzögerung
+[Popup Text]
+Popup-Text
+[Errors]
+Fehler
+
+[Brief Info Title]
+Kurzinfo-Titel
+[Note Text]
+Notiztext
+[Extra Text]
+Extratext
+[External Log]
+Externes Log
+[History Log]
+Logverlauf
+[Variable List]
+Variablenliste
+[More Variables]
+Weitere Variablen
+
+[Sunset]
+Sonnenuntergang
+[Feel-like]
+Gefühlt wie
+[Today's Low]
+Tiefsttemperatur
+[Today's High]
+Höchsttemperatur
+[Sunrise]
+Sonnenaufgang
+[Dewpoint]
+Taupunkt
+[Humidity]
+Luftfeuchtigkeit
+[Night]
+Nachts
+[Feel]
+gefühlt
+[Heat Index]
+gefühlte Temperatur
+[Moon]
+Mondphase
+[Observatory]
+Station
+[Pressure Tendency]
+Luftdrucktendenz
+[Wind Direction]
+Windrichtung
+[Wind Direction DEG]
+Windrichtung (Grad)
+[Wind Speed]
+Windgeschwindigkeit
+[WindDir]
+Windrichtung
+
+[5 Days Forecast]
+5 Tage Vorhersage
+[Forecast Day 1]
+Vorhersage Tag 1
+[Forecast Day 2]
+Vorhersage Tag 2
+[Forecast Day 3]
+Vorhersage Tag 3
+[Forecast Day 4]
+Vorhersage Tag 4
+[Forecast Day 5]
+Vorhersage Tag 5
+[Forecast Day 6]
+Vorhersage Tag 6
+[Forecast Day 7]
+Vorhersage Tag 7
+[Forecast Day 8]
+Vorhersage Tag 8
+[Forecast Day 9]
+Vorhersage Tag 9
+[Forecast Day 0]
+Vorhersage Tag 10
+[Forcast Update]
+Vorhersage aktualisiert
+
+[Weather Protocol INI Setup]
+Wetter-Protokoll-INI-Einrichtung
+[Install and load your weather ini file here]
+Installieren und laden Sie hier die Wetter-INI-Dateien
+[Weather Protocol cannot find any weather INI file stored in your computer.  To setup weather INI and add weather stations, please follow the steps:]
+Das Wetter-Protokoll kann keine INI-Datei auf dem Rechner finden. Um eine INI-Datei und eine Wetterstation einzustellen, befolgen Sie diese Schritte:
+[Click here to download a weather ini file from Miranda file listing]
+Klicken Sie hier, um eine INI-Datei aus der Miranda-Dateiliste zu laden
+[Extract the weather ini file from archive to this directory]
+Extrahieren Sie die Datei vom Archiv in dieses Verzeichnis
+[Click here to load the data from the new ini file into memory]
+Klicken Sie hier, um die Daten aus der neuen INI-Datei in den Speicher zu laden
+[Add new weather station and close this dialog]
+Füge neue Wetterstation hinzu und schließe Dialog
+
+[Total INI files]
+Alle INI-Dateien
+[Total memory used]
+Gesamte Speichernutzung
+[Reload INI]
+INI neu laden
+[Menu]
+Menü
+[Open brief information]
+Kurzinformationen öffnen
+[Open complete forecast]
+Komplette Vorhersage öffnen
+[Open weather map]
+Wetterkarte öffnen
+[View history]
+Verlauf anzeigen
+[To old setting]
+Alte Einstellungen
+[To default]
+Standard
+
+[Weather Condition Changed]
+Wetterlage hat sich geändert
+[Weather Alert Issued]
+Wetteralarm zugeteilt
+
+[Invalid ID format, missing "/" (10)]
+Ungültiges ID-Format, fehlendes "/" (10)
+[Invalid service (11)]
+Ungültiger Dienst (11)
+[Invalid station (12)]
+Ungültige Station (12)
+[Weather service ini for this station is not found (20)]
+Die Wetter-INI wurde für diese Station nicht gefunden (20)
+[Netlib error - check your internet connection (30)]
+Netlib-Fehler - Überprüfen Sie Ihre Internetverbindung (30)
+[Empty data is retrieved (40)]
+Leerdaten empfangen (40)
+[Document not found (42)]
+Dokument nicht gefunden (42)
+[Document too short to contain any weather data (43)]
+Dokument ist zu kurz um Wetterdaten zu enthalten (43)
+[Unknown error (99)]
+Unbekannter Fehler (99)
+[HTTP Error: No content (204)]
+HTTP-Fehler: Kein Inhalt (204)
+[HTTP Error: Data moved (301)]
+HTTP-Fehler: Daten verschoben (301)
+[HTTP Error: Use proxy (305)]
+HTTP-Fehler: Benutze Proxy (305)
+[HTTP Error: Temporary redirect (307)]
+HTTP-Fehler: Befristet umgeleitet (307)
+[HTTP Error: Bad request (400)]
+HTTP-Fehler: Ungültige Anfrage (400)
+[HTTP Error: Unauthorized (401)]
+HTTP-Fehler: Unberechtigt (401)
+[HTTP Error: Payment required (402)]
+HTTP-Fehler: Bezahlung erforderlich (402)
+[HTTP Error: Forbidden (403)]
+HTTP-Fehler: Verboten (403)
+[HTTP Error: Not found (404)]
+HTTP-Fehler: Nicht gefunden (404)
+[HTTP Error: Method not allowed (405)]
+HTTP-Fehler: Methode nicht erlaubt (405)
+[HTTP Error: Proxy authentication required (407)]
+HTTP-Fehler: Proxy-Authentifizierung erforderlich (407)
+[HTTP Error: Gone (410)]
+HTTP-Fehler: Verloren (410)
+[HTTP Error: Internal server error (500)]
+HTTP-Fehler: Interner Serverfehler (500)
+[HTTP Error: Bad gateway (502)]
+HTTP-Fehler: Falsches Gateway (502)
+[HTTP Error: Service unavailable (503)]
+HTTP-Fehler: Dienst nicht verfügbar (503)
+[HTTP Error: Gateway timeout (504)]
+HTTP-Fehler: Gateway-Zeitüberschreitung (504)
+[%c\nTemperature: %t\nFeel-Like: %f\nPressure: %p\nWind: %i  %w\nHumidity: %m\nDew Point: %e\nVisibility: %v\n\nSun Rise: %r\nSun Set: %y\n\n5 Days Forecast:\n%[Forecast Day 1]\n%[Forecast Day 2]\n%[Forecast Day 3]\n%[Forecast Day 4]\n%[Forecast Day 5]]
+%c\nTemperatur: %t\ngefühlt wie: %f\nLuftdruck: %p\nWind: %i  %w\nLuftfeuchtigkeit: %m\nTaupunkt: %e\nSichtweite: %v\n\nSonnenaufgang: %r\nSonnenuntergang: %y\n\n5 Tage-Vorhersage:\n%[Forecast Day 1]\n%[Forecast Day 2]\n%[Forecast Day 3]\n%[Forecast Day 4]\n%[Forecast Day 5]
+[Feel-Like: %f\nPressure: %p\nWind: %i  %w\nHumidity: %m\nDew Point: %e\nVisibility: %v\n\nSun Rise: %r\nSun Set: %y\n\n5 Days Forecast:\n%[Forecast Day 1]\n%[Forecast Day 2]\n%[Forecast Day 3]\n%[Forecast Day 4]\n%[Forecast Day 5]]
+gefühlt wie: %f\nLuftdruck: %p\nWind: %i  %w\nLuftfeuchtigkeit: %m\nTaupunkt: %e\nVisibility: %v\n\nSonnenaufgang: %r\nSonnenuntergang: %y\n\n5 Days Forecast:\n%[Forecast Day 1]\n%[Forecast Day 2]\n%[Forecast Day 3]\n%[Forecast Day 4]\n%[Forecast Day 5]
+[Weather Condition for %n as of %u]
+Wetterlage für %n von %u
+[%c, %t (feel-like %f)\tWind: %i %w\tHumidity: %m]
+%c, %t (gefühlt wie %f)\tWind: %i %w\tLuftfeuchtigkeit: %m
+[%n at %u:\t%c, %t (feel-like %f)\tWind: %i %w\tHumidity: %m]
+%n von %u:\t%c, %t (gefühlt wie %f)\tWind: %i %w\tLuftfeuchtigkeit: %m
+[%c, %t\nToday:  High %h, Low %l]
+%c, %t\nHeute:  max. %h, min. %l
+
+[Current weather information for %s.]
+Momentane Wetter-Informationen für %s.
+[%s is now the default weather station]
+%s ist jetzt die Standard-Wetterstation
+[Weather Protocol]
+Wetter-Protokoll
+[Please try again after weather update is completed.]
+Bitte versuchen Sie es erneut nachdem die Aktualisierung beendet ist.
+[<Enter station name here>]
+<Stations-Name hier eintragen>
+[<Enter station ID here>]
+<Stations-ID hier eintragen>
+
+[Weather condition was not logged.]
+Wetterlage wurde nicht aufgezeichnet.
+[The URL for complete forcast have not been set. You can set it from the Edit Settings dialog.]
+Für die komplette Vorhersage ist keine URL angegeben. Sie können unter "Einstellungen bearbeiten" eine URL setzen.
+[The URL for weather map have not been set.  You can set it from the Edit Settings dialog.]
+Für die Wetterkarte ist keine URL angegeben. Sie können unter "Einstellungen bearbeiten" eine URL setzen.
+[Get city name from ID]
+Stadt-Namen aus ID beziehen
+[Weather INI information]
+Wetter-INI-Informationen
+[View webpage]
+Webseite anzeigen
+[Text Files]
+Textdateien
+
+[<unknown time>]
+<unbekannte Zeit>
+[<Error>]
+<Fehler>
+[HTTP Error %i]
+HTTP-Fehler %i
+
+[<Enter city name here>]
+<Stadt-Name hier eingeben>
+[Error when obtaining data: %s]
+Fehler beim Datenerhalt: %s
+
+[Weather HTTP connections]
+Weather-HTTP-Verbindungen
+
+[The corresponding INI file for "%s" is not found.]
+Die dazugehörige INI-Datei für "%s" wurde nicht gefunden.
+[Weather INI information for "%s":]
+Wetter-INI-Information für "%s":
+[Internal Name:]
+Interner Name:
+[INI Version:]
+INI-Version:
+[File Name:]
+Dateiname:
+[Item Count:]
+Item-Anzahl:
+[Memory Used:]
+Genutzter Speicher:
+[Here is a list of custom variables that are currently available]
+Hier ist eine Liste von Variablen, die momentan verfügbar sind
+
+[No update data file is found.  Please check your Plugins\\Weather directory.]
+Keine Aktualisierungs-Datei gefunden. Prüfen Sie bitte Ihr "plugins\\weather" Verzeichnis.
+[Invalid ini format for: %s]
+Falsches INI-Format für: %s
+[All update data has been reloaded.]
+Alle aktualisierten Daten wurden geladen.
+
+[Frame Font]
+Text des Kontaktlistenelements
+[Frame Title Font]
+Titel des Kontaktlistenelements
+
+[Weather Text]
+Wettertext
+;Einstellungen=>Protokolle=>Wetter
+[%c\tcurrent condition\n%d\tcurrent date\n%e\tdewpoint\n%f\tfeel-like temp\n%h\ttoday's high\n%i\twind direction\n%l\ttoday's low\n%m\thumidity\n%n\tstation name\n%p\tpressure\n%r\tsunrise time\n%s\tstation ID\n%t\ttemperature\n%u\tupdate time\n%v\tvisibility\n%w\twind speed\n%y\tsun set]
+%c\tmomentane Lage\n%d\taktuelles Datum\n%e\tTaupunkt\n%f\tgefühlte Temp.\n%h\tHöchsttemperatur\n%i\tWindrichtung\n%l\tgeringste Temp.\n%m\tLuftfeuchtigkeit\n%n\tStations-Name\n%p\tDruck\n%r\tSonnenaufgang\n%s\tStations-ID\n%t\tTemperatur\n%u\tAktualis.-Zeit\n%v\tSicht\n%w\tWind-Geschwind.\n%y\tSonnenuntergang
+; Einstellungen=> Popups=>Wetter (dies ist ein anderer String als oben!!!)
+[%c\tcurrent condition\n%d\tcurrent date\n%e\tdewpoint\n%f\tfeel-like temperature\n%h\ttoday's high\n%i\twind direction\n%l\ttoday's low\n%m\thumidity\n%n\tstation name\n%p\tpressure\n%r\tsunrise time\n%s\tstation ID\n%t\ttemperature\n%u\tupdate time\n%v\tvisibility\n%w\twind speed\n%y\tsun set]
+%c\tmomentane Lage\n%d\taktuelles Datum\n%e\tTaupunkt\n%f\tgefühlte Temperatur\n%h\tHöchsttemperatur\n%i\tWindrichtung\n%l\tgeringste Temperatur\n%m\tLuftfeuchtigkeit\n%n\tStations-Name\n%p\tDruck\n%r\tSonnenaufgang\n%s\tStations-ID\n%t\tTemperatur\n%u\tAktualisierungs-Zeit\n%v\tSicht\n%w\tWind-Geschwindigkeit\n%y\tSonnenuntergang
+[Weather Protocol Text Preview]
+Wetter-Protokoll Textvorschau
+
+[This is the name of the city]
+Dies ist der Name der Stadt
+[Here is a short weather description]
+Hier ist eine kurze Wetterbeschreibung
+[%[..]\tcustom variables]
+%[..]\tBenutzerdefinierte Variablen
+
+[Station ID]
+Stations-ID
+[Auto Update Enabled]
+Autom. Aktualisierung aktiviert
+[Auto Update Disabled]
+Autom. Aktualisierung deaktiviert
+[Disable &weather notification]
+&Wetter-Hinweis deaktivieren
+[Enable &weather notification]
+&Wetter-Hinweis aktivieren
+[Update Weather]
+Wetterdaten aktualisieren
+[Remove Old Data then Update]
+Alte Daten entfernen und aktualisieren
+[Brief Information]
+Kurz-Information
+[Read Complete Forecast]
+Komplette Vorhersage lesen
+[Edit Settings]
+Einstellungen bearbeiten
+[Weather]
+Wetter
+[Enable/Disable Weather Update]
+Wetteraktualisierung (de-)aktivieren
+[Update All Weather]
+Wetter komplett aktualisieren
+[Remove Old Data then Update All]
+Alte Daten entfernen und alle aktualisieren
+[Weather Notification]
+Wetter-Hinweis
+
+[Unable to retrieve weather information for %s]
+Wetter-Informationen können für %s nicht empfangen werden.
+[Alert for %s%c%s]
+Hinweis für %s%c%s
+
+[Current condition for %n]
+Momentane Lage für %n
+[Last update on:   %u]
+Letzte Aktualisierung am:   %u
+[Retrieving new data, please wait...]
+Empfange neue Daten, bitte warten...
+[No information available.\nPlease update weather condition first.]
+Keine Informationen verfügbar.\nBitte erst Wetterlage aktualisieren.
+[Display in a frame]
+Als Kontaktlisten-Element anzeigen
+
+; FORMAT:
+; [#condition Weather]
+; Kondition
+; So wird zum Beispiel "condition" in "Kondition" übersetzt
+; BENÖTIGT Weather Protocol 0.3.8.17 oder höher!!
+
+[#Fair Weather]
+heiter
+
+;clear
+[#Mostly Clear Weather]
+überwiegend klar
+[#Mostly Sunny/Windy Weather]
+überwiegend sonnig/windig
+[#Mostly Sunny Weather]
+überwiegend sonnig
+[#Partly Sunny/Windy Weather]
+teils sonnig/windig
+[#Mostly Clear/Windy Weather]
+überwiegend klar/windig
+
+; cloudy
+[#Cloudy Weather]
+bewölkt
+[#Overcast Weather]
+trüb
+[#Cloudy/Windy Weather]
+bewölkt/windig
+[#Cloudy / Wind Weather]
+bewölkt/windig
+[#Overcast/Windy Weather]
+bewölkt/windig
+[#Partly Cloudy Weather]
+teils bewölkt
+[#Mostly Cloudy Weather]
+überwiegend bewölkt
+[#Mostly Cloudy/Windy Weather]
+überwiegend bewölkt/windig
+[#Partly Cloudy/Windy Weather]
+teils bewölkt/windig
+
+; rain
+[#Chance Of Rain Weather]
+Regen möglich
+[#Light Drizzle Weather]
+leichter Niesel
+[#Drizzle Weather]
+Niesel
+[#Light Rain Weather]
+leichter Regen
+[#Light Rain Early Weather]
+anfangs leichter Regen
+[#Light Rain Late Weather]
+später leichter Regen
+[#Am Light Rain Weather]
+vormittags leichter Regen
+[#Pm Rain Weather]
+nachmittags Regen
+[#Pm Light Rain Weather]
+nachmittags leichter Regen
+[#Pm Rain / Wind Weather]
+nachmittags Regen/Wind
+[#Rain / Wind Early Weather]
+anfangs Regen/Wind
+[#Rain Weather]
+Regen
+[#Heavy Rain Weather]
+Regengüsse
+[#Light Drizzle/Windy Weather]
+leicht nieselig/windig
+[#Drizzle/Windy Weather]
+nieselig/windig
+[#Light Rain/Windy Weather]
+leichter Regen/windig
+[#Light Rain And Windy Weather]
+leicher Regen und windig
+[#Rain/Windy Weather]
+regnerisch/windig
+[#Rain / Wind Weather]
+regnerisch/windig
+[#Heavy Rain/Windy Weather]
+Regengüsse/windig
+[#Light Rain / Wind Weather]
+leichter Regen/windig
+[#Light Rain / Fog Weather]
+leichter Regen/Nebel
+
+; showers
+[#Rain Shower Weather]
+Regenschauer
+[#Rain Shower and Windy Weather]
+Regenschauer/windig
+[#Shower Weather]
+Schauer
+[#Showers Weather]
+Schauer
+[#Showers / Wind Weather]
+Schauer/windig
+[#Showers Late Weather]
+später Schauer
+[#Showers Early Weather]
+anfangs Schauer
+[#Light Rain Shower Weather]
+leichter Schauer
+[#AM Shower Weather]
+vormittags Schauer
+[#Am Showers Weather]
+vormittags Schauer
+[#PM Shower Weather]
+nachmittags Schauer
+[#Pm Showers Weather]
+nachmittags Schauer
+[#Scattered Showers Weather]
+vereinzelt Schauer
+[#Few Showers Weather]
+geringe Schauer
+[#Rain Shower/Windy Weather]
+starker Schauer/windig
+[#Shower/Windy Weather]
+Schauer/windig
+[#Light Rain Shower/Windy Weather]
+leichter Schauer/windig
+[#AM Shower/Windy Weather]
+vormittags Schauer/windig
+[#PM Shower/Windy Weather]
+nachmittags Schauer/windig
+[#Scattered Shower/Windy Weather]
+vereinzelt Schauer/windig
+[#Light Rain With Thunder Weather]
+Leichter Regen mit Donner
+
+; snow
+[#Flurries Weather]
+Schneeböen
+[#Light Flurries Weather]
+leichte Schneeböen
+[#Light Snow Weather]
+leichter Schneefall
+[#Light Freezing Drizzle Weather]
+Leichter, überfrierender Niesel
+[#Snow Weather]
+Schnee
+[#Heavy Snow Weather]
+starker Schneefall
+[#Light Snow Pellets Weather]
+leichte Reifgraupel
+[#Light Snow Grains Weather]
+leichte Schneekörner
+[#Snow Pellets Weather]
+Reifgraupel
+[#Light Ice Pellets Weather]
+leichte Eisgraupel
+[#Ice Crystals Weather]
+Eiskristalle
+[#Ice Pellets Weather]
+Eisgraupel
+[#Wintery Weather Weather]
+winterlich
+[#Light Freezing Rain Weather]
+leichter Frostregen
+[#Freezing Rain Weather]
+überfrierender Regen
+[#Snow/Freezing Rain Weather]
+Schnee/Überfrierender Regen
+[#Flurries/Windy Weather]
+Böen/windig
+[#Light Flurries/Windy Weather]
+leichte Böen/windig
+[#Light Snow/Windy Weather]
+leichter Schnee/windig
+[#Snow/Windy Weather]
+Schnee/windig
+[#Heavy Snow/Windy Weather]
+starker Schneefall/windig
+[#Drifting Snow Weather]
+Schneetreiben
+[#Light Snow Pellets/Windy Weather]
+leichte Reifgraupel/windig
+[#Snow Pellets/Windy Weather]
+Reifgraupel/windig
+[#Light Ice Pellets/Windy Weather]
+leichte Eisgraupel/windig
+[#Ice Pellets/Windy Weather]
+Eisgraupel/windig
+[#Light Freezing Rain/Windy Weather]
+leichter überfrierender Regen/windig
+[#Freezing Rain/Windy Weather]
+überfrierender Regen/windig
+[#Rain and Snow Weather]
+Schneeregen
+[#Rain And Snow Weather]
+Schneeregen
+[#Rain / Snow Weather]
+Schneeregen
+[#Light Snow / Fog Weather]
+leichter Schnee/neblig
+
+; snow showers
+[#Snow Showers Weather]
+Schneeschauer
+[#Snow Shower Weather]
+Schneeschauer
+[#Light Snow Shower Weather]
+leichte Schneeschauer
+[#Few Snow Showers Weather]
+wenige Schneeschauer
+[#Scattered Snow Showers Weather]
+vereinzelt Schneeschauer
+[#PM Snow Showers Weather]
+nachmittags Schneeschauer
+[#Pm Snow Showers Weather]
+nachmittags Schneeschauer
+[#AM Snow Showers Weather]
+vormittags Schneeschauer
+[#Am Snow Showers Weather]
+vormittags Schneeschauer
+[#Snow Showers Late Weather]
+später Schneeschauer
+[#Snow Showers Early Weather]
+anfangs Schneeschauer
+[#Rain/Snow Showers Weather]
+Regen-/Schneeschauer
+[#Rain / Snow Showers Weather]
+Regen-/Schneeschauer
+[#Rain / Snow Showers Early Weather]
+anfangs Regen-/Schneeschauer
+[#Rain / Snow Showers Late Weather]
+später Regen-/Schneeschauer
+[#Rain To Snow Weather]
+in Schnee übergehender Regen
+[#Snow Showers/Windy Weather]
+Schneeschauer/windig
+[#Snow Shower / Wind Weather]
+Schneeschauer/Wind
+[#PM Snow Showers/Windy Weather]
+nachmittags Schneeschauer/windig
+[#AM Snow Showers/Windy Weather]
+vormittags Schneeschauer/windig
+[#Am Rain /Snow Showers Weather]
+vormittags Regen/Schneeschauer
+[#Rain/Snow Showers/Windy Weather]
+Regen-/Schneeschauer/windig
+[#Freezing Rain and Windy Weather]
+überfrierender Regen/windig
+
+; thunder
+[#T-Storms Weather]
+Gewitter
+[#T-Storm Weather]
+Gewitter
+[#T-Showers Weather]
+Gewitterregen
+[#T-Storms Early Weather]
+anfangs Gewitter
+[#Scattered T-Storms Weather]
+vereinzelt Gewitter
+[#Isolated T-Storms Weather]
+örtlich Gewitter
+[#T-Storms/Windy Weather]
+Gewitter/windig
+[#Scattered T-Storms/Windy Weather]
+vereinzelt Gewitter/windig
+[#Am T-Storms Weather]
+vormittags Gewitter
+[#Pm T-Storms Weather]
+nachmittags Gewitter
+[#Heavy T-Storm Weather]
+schweres Gewitter
+[#Rain/Thunder Weather]
+Regen/Donner
+[#Rain / Thunder Weather]
+Regen/Donner
+[#Thunder Weather]
+Donner
+
+; dust
+[#Dust Weather]
+Staub
+[#Blowing Dust Weather]
+Staubverwehungen
+[#Blowing Dust and Windy Weather]
+Staubverwehungen/Wind
+[#Widespread Dust Weather]
+Verbreitet Staub
+[#Widespread Dust and Windy Weather]
+Verbreitet Staub und Wind
+[#Blowing Sand and Windy Weather]
+Sandwehen und Wind
+[#Blowing Sand Weather]
+Sandwehen
+[#Low Drifting Sand Weather]
+leichter Flugsand
+
+
+; fog
+[#Fog Weather]
+Nebel
+[#Foggy Weather]
+nebelig
+[#Haze Weather]
+Dunst
+[#Mist Weather]
+Nebelschleier
+[#Fog/Windy Weather]
+Nebel/windig
+[#Haze/Windy Weather]
+Dunst/windig
+[#Mist/Windy Weather]
+Nebelschleier/windig
+[#Light Fog Weather]
+Leichter Nebel
+[#Shallow Fog Weather]
+Seichter Nebel
+
+; n/a
+[#Data Not Available Weather]
+Daten nicht verfügbar
+
+; missing weather conditions
+[#Sleet Weather]
+Graupel
+[#Sprinkles Weather]
+Sprühregen
+[#Clear Weather]
+klar
+[#clear Weather]
+klar
+[#Sunny Weather]
+sonnig
+[#Sunny and Windy Weather]
+sonnig/windig
+[#Cloudy And Windy Weather]
+wolkig/windig
+[#Cloudy and Windy Weather]
+wolkig/windig
+[#Mostly Cloudy And Windy Weather]
+überwiegend wolkig/windig
+[#Partly Cloudy And Windy Weather]
+teils wolkig/windig
+[#Clouds Early / Clearing Late Weather]
+anfangs bewölkt, später aufklarend
+[#Showers in the Vicinity Weather]
+Schauer in der Umgebung
+[#Showers In The Vicinity Weather]
+Schauer in der Umgebung
+[#Thunder in the Vicinity Weather]
+Gewitter in der Umgebung
+[#Thunder In The Vicinity Weather]
+Gewitter in der Umgebung
+[#Light Rain with Thunder Weather]
+Leichter Regen mit Donner
+[#Sand And Windy Weather]
+Sand/windig
+[#Fair And Windy Weather]
+heiter/windig
+[#Fair and Windy Weather]
+heiter/windig
+[#Partly Cloudy and Windy Weather]
+teils wolkig/windig
+[#Partly Cloudy / Wind Weather]
+teils bewölkt / Wind
+[#Mostly Cloudy and Windy Weather]
+überwiegend wolkig/windig
+[#Sunny And Windy Weather]
+sonnig/windig
+[#Clear And Windy Weather]
+klar/windig
+[#CALM Weather]
+windstill
+[#Am Fog / Pm Clouds Weather]
+vormittags Nebel / nachmittags Wolken
+[#Am Fog / Pm Sun Weather]
+vormittags Nebel / nachmittags Sonne
+[#Am Clouds / Pm Sun Weather]
+vormittags wolkig, nachmittags Sonne
+[#Freezing Fog Weather]
+Gefrierender Nebel
+[#Heavy Fog Weather]
+Dichter Nebel
+[#Scattered Clouds Weather]
+Vereinzelte Wolken
+[#Light Showers Rain Weather]
+Leichte Regenschauer
+[#Light Rain Showers Weather]
+Leichte Regenschauer
+
+; uv intensity
+[#Moderate Weather]
+mäßig
+[#Very High Weather]
+sehr hoch
+
+; pressure
+[#steady Weather]
+gleichbleibend
+[#rising Weather]
+steigend
+[#rising rapidly Weather]
+schnell steigend
+[#falling Weather]
+fallend
+[#falling rapidly Weather]
+schnell fallend
+
+; moon phases
+[#Waxing Crescent Weather]
+zunehmend
+[#First Quarter Weather]
+erstes Viertel
+[#Waxing Gibbous Weather]
+zunehmender Mond
+[#Full Weather]
+Vollmond
+[#Waning Gibbous Weather]
+abnehmender Mond
+[#Last Quarter Weather]
+letztes Viertel
+[#Waning Crescent Weather]
+abnehmend
+[#New Moon Weather]
+Neumond
+
+;END Weather Conditions
+
+
+;   Die speziellen Variablen (Nur für US-Städte, benötigt mindestens Weather Protokoll v0.3.2.0+) 
+
+[Other Variables  (required Weather Protocol v0.3.2.0+)]
+Andere Variablen (benötigt Weather-Protokoll v0.3.2.0+)
+
+[%[Pressure Change]  The change in pressure (ie. rising, falling, steady)]
+%[Druckänderung]  Druckänderung (z. B. fällt, steigt, konstant)
+[%[Day Length]   The length of day]
+%Tageslänge   Tageslänge
+[%[Visible Light Length] The length of visible light]
+%Sichtbares Licht] Die Zeit des sichtbaren Lichtes
+[%[Moonrise]   The time for moon rise]
+%[Mondaufgang] Die Zeit, bevor der Mond aufgeht
+[%[Moonset]    The time for moon set]
+%[Mond]       Die Zeit für Vollmond 
+[%[Moon Phase]]
+%[Mondphase]
+[%[UVI]      UV index for today]
+%[UVI]      UV-Index für den heutigen Tag

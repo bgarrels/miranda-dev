@@ -1,0 +1,160 @@
+﻿CPU: Intel(R) Core(TM)2 Quad CPU Q6600 @ 2.40GHz [Intel64 Family 6 Model 15 Stepping 11] [DEP Enabled] [4 CPUs]
+Installed RAM: 4096 MBytes
+Operating System: Microsoft Windows 7 Ultimate Edition, 64-bit (build 7600)
+Internet Explorer: 9.0.7930.16406 (build 97930)
+Administrator privileges: Yes
+OS Languages: (UI | Locale (User/System)) : German/German | German/German
+Free disk space on Miranda partition: 92076 MBytes
+
+Miranda IM Version: 0.10.0 alpha build #1 Unicode [running inside WOW64]
+Build time: 2010-12-18 10:13:39+0100
+Profile: C:\Program Files (x86)\Miranda IM\Profiles\Profil\Profil.dat
+Profile size: 720896 Bytes
+Profile creation date: 2010-09-04 19:48:22+0100
+Language pack: German (DE) [0407],  Deutsche Sprachdatei-GermanLanguagePack 0.10.12.24, modified: 2010-12-24 19:51:03+0100
+Nightly: Yes
+Unicode: Yes
+Service Mode: No
+
+Active Plugins (47):
+¤ actman.dll v.0.1.1.10 [2010-09-12 08:42:34+0100] - Action manager |Unicode aware|
+¤ actmhook.dll v.0.0.1.0 [2010-09-12 08:45:17+0100] - ActMan Hooks |Unicode aware|
+¤ advaimg.dll v.0.10.0.1 [2010-09-21 21:56:55+0100] - Miranda Image services 
+¤ AuthState.dll v.0.0.2.0 [2010-12-19 14:41:20+0100] - Authorization State (Unicode) |Unicode aware|
+¤ avs.dll v.0.10.0.1 [2010-09-28 06:24:44+0100] - Avatar service (Unicode) |Unicode aware|
+¤ Clist_modern.dll v.0.9.0.9 [2010-12-25 21:48:50+0100] - Modern Contact List (Unicode) Mataes Release |Unicode aware|
+¤ dbx_tree.dll v.0.0.0.18 [2010-11-23 19:10:06+0100] - Miranda dbx_tree database driver |Unicode aware|
+¤ dos.dll v.0.0.0.7 [2010-12-20 08:58:11+0100] - DOS Service [2009.04.13 01:12:32] |Unicode aware|
+¤ extraicons.dll v.0.2.5.1 [2010-12-12 13:54:38+0100] - Extra Icons Service 
+¤ Fingerprint.dll v.0.2.2.3 [2010-12-26 03:02:03+0100] - Fingerprint Mod+ (Unicode) |Unicode aware|
+¤ FlashAvatars.dll v.0.0.1.14 [2010-02-28 19:26:46+0100] - Flash avatars service [build #251] |Unicode aware|
+¤ Folders.dll v.0.1.5.3 [2010-11-01 19:23:54+0100] - Custom profile folders (Unicode) |Unicode aware|
+¤ historypp.dll v.1.5.1.4 [2010-02-23 17:16:46+0100] - History++ (2in1) |Unicode aware|
+¤ historystats.dll v.0.1.5.3 [2008-04-15 22:44:00+0100] - HistoryStats (Unicode) |Unicode aware|
+¤ ICQ.dll v.0.10.0.1 [2010-12-25 15:18:39+0100] - IcqOscarJ Protocol |Unicode aware|
+¤ IEView.dll v.1.3.0.2 [2010-12-04 20:13:07+0100] - IEView |Unicode aware|
+¤ IgnoreState.dll v.0.0.3.0 [2010-12-19 14:49:46+0100] - IgnoreState (Unicode) |Unicode aware|
+¤ import.dll v.0.10.0.1 [2010-09-20 00:49:38+0100] - Import contacts and messages |Unicode aware|
+¤ IRC.dll v.0.10.0.1 [2010-12-24 12:37:13+0100] - IRC protocol |Unicode aware|
+¤ jabber.dll v.0.10.0.1 [2010-12-21 11:30:54+0100] - Jabber Protocol |Unicode aware|
+¤ KeepStatus.dll v.0.8.0.96 [2010-11-13 14:15:22+0100] - KeepStatus (Unicode) |Unicode aware|
+¤ MathModulePP.dll v.0.1.2.0 [2007-11-23 23:00:30+0100] - MathModule++ |Unicode aware|
+¤ MenuEx.dll v.1.3.0.8 [2010-09-16 05:05:34+0100] - MenuItemEx |Unicode aware|
+¤ MetaContacts.dll v.0.14.0.13 [2010-12-03 14:55:33+0100] - MetaContacts 
+¤ MirOTR.dll v.0.10.3.1 [2010-09-17 16:54:48+0100] - Miranda OTR |Unicode aware|
+¤ msn.dll v.0.10.0.1 [2010-12-03 14:55:35+0100] - MSN Protocol |Unicode aware|
+¤ mTextControlW.dll v.0.8.0.1 [2010-10-02 13:15:56+0100] - Miranda Text Control (Unicode) CHEF-KOCH Release |Unicode aware|
+¤ new_gpg.dll v.0.0.0.9 [2010-11-01 22:50:28+0100] - GPG [2010.11.01 22:50:15] |Unicode aware|
+¤ newxstatusnotify.dll v.1.4.0.7 [2010-12-07 20:15:26+0100] - NewXstatusNotify YM |Unicode aware|
+¤ PopUpW.dll v.2.1.1.5 [2010-11-28 10:54:08+0100] - PopUp Plus (Unicode) Mataes Release |Unicode aware|
+¤ SendSS.dll v.0.8.0.0 [2010-05-18 11:57:17+0100] - Send Screenshot+ (Unicode) |Unicode aware|
+¤ simplestatusmsgw.dll v.1.9.0.3 [2010-12-22 17:45:35+0100] - Simple Status Message (Unicode) |Unicode aware|
+¤ smileyaddw.dll v.0.2.3.16 [2010-12-05 12:55:42+0100] - SmileyAdd Unicode |Unicode aware|
+¤ smr.dll v.1.0.0.7 [2008-02-07 00:19:06+0100] - Status Message Retriever 
+¤ spamotron.dll v.0.0.4.4 [2010-10-27 11:29:16+0100] - Spam-o-tron |Unicode aware|
+¤ spellcheckerW.dll v.0.2.5.0 [2010-11-13 14:48:16+0100] - Spell Checker |Unicode aware|
+¤ StartupStatus.dll v.0.8.0.41 [2010-11-13 14:15:09+0100] - StartupStatus (Unicode) |Unicode aware|
+¤ svc_crshdmp.dll v.0.0.4.18 [2010-09-20 00:48:51+0100] - Crash Dumper Unicode |Unicode aware|
+¤ Svc_dbepp.dll v.3.2.0.0 [2010-09-20 00:48:06+0100] - Database Editor++ 
+¤ tabsrmm.dll v.3.1.99.6 [2010-12-19 12:15:46+0100] - TabSRMM (Unicode) |Unicode aware|
+¤ tipper.dll v.2.1.0.4 [2010-11-06 19:34:16+0100] - Tipper YM |Unicode aware|
+¤ uinfoexW.dll v.0.8.4.2 [2010-10-17 23:03:24+0100] - UserInfoEx (Unicode) |Unicode aware|
+¤ updater.dll v.0.6.1.3 [2010-12-05 17:57:13+0100] - Updater (Unicode) |Unicode aware|
+¤ UseActions.dll v.0.0.0.4 [2010-09-20 00:48:19+0100] - UseActions (Unicode) |Unicode aware|
+¤ Variables.dll v.0.2.3.8 [2010-09-20 00:49:22+0100] - Variables (Unicode) |Unicode aware|
+¤ watrack.dll v.0.0.6.12 [2010-09-14 08:19:11+0100] - Winamp Track |Unicode aware|
+¤ XFire.dll v.0.1.7.10 [2010-07-19 16:04:56+0100] - XFire Protocol 
+
+Protocols and Accounts:
+-------------------------------------------------------------------------------
+ICQ                      1 - Enabled 0 - Disabled  Loaded
+IRC                      2 - Enabled 0 - Disabled  Loaded
+JABBER                   1 - Enabled 0 - Disabled  Loaded
+MSN                      1 - Enabled 0 - Disabled  Loaded
+MetaContacts             1 - Enabled 0 - Disabled  Loaded
+XFire                    1 - Enabled 0 - Disabled  Loaded
+
+Icon Packs:
+-------------------------------------------------------------------------------
+ Actions_icons.dll [2010-11-10 20:30:20+0100]
+ Flags.dll [2010-10-11 20:17:50+0100]
+ fusion_globe.dll [2010-06-16 09:20:20+0100]
+ fusion_icons.dll [2008-11-10 19:39:24+0100]
+ GlobalMirandaOrig_by_bengo.dll [2008-08-11 18:56:08+0100]
+ Gruppenchat.dll [2008-09-19 16:21:50+0100]
+ historypp_icons.dll [2010-02-23 18:16:46+0100]
+ ICQ6Icons.dll [2007-07-02 11:50:54+0100]
+ icq_icons.dll [2009-11-28 16:43:12+0100]
+ ICQ_misc_icons.dll [2009-11-28 22:43:12+0100]
+ irc.dll [2006-06-23 06:05:52+0100]
+ ISee_Icons.dll [2005-02-27 14:29:08+0100]
+ leer.ico [2009-06-11 23:20:15+0100]
+ Main.dll [2005-02-04 14:36:36+0100]
+ meta_icons.dll [2007-10-05 14:52:28+0100]
+ Miranda-Icons-PSI-Jabber.dll [2010-11-05 12:26:54+0100]
+ miranda32_icons.dll [2009-05-18 00:48:42+0100]
+ mRadio.dll [2006-02-18 15:50:20+0100]
+ msg.dll [2008-09-19 16:20:24+0100]
+ MSN Butterfly Aqua Icons.dll [2004-05-10 20:56:42+0100]
+ mugzLESS_32bit.dll [2001-05-27 06:13:46+0100]
+ myfolder.dll [2008-08-22 10:49:50+0100]
+ proto_AIM.dll [2010-06-29 04:11:33+0100]
+ proto_conn_facebook.dll [2010-07-25 15:52:08+0100]
+ proto_conn_ICQ.dll [2006-03-17 12:43:14+0100]
+ proto_conn_IRC.dll [2006-03-17 12:43:14+0100]
+ proto_conn_irc_1.dll [2006-03-17 12:43:14+0100]
+ proto_conn_irc_2.dll [2006-03-17 12:43:14+0100]
+ proto_conn_Jabber.dll [2010-05-21 15:14:28+0100]
+ proto_conn_MetaContacts.dll [2006-03-17 12:43:14+0100]
+ proto_conn_miranda-dev.dll [2006-03-17 12:43:14+0100]
+ proto_conn_MSN.dll [2006-03-17 12:43:14+0100]
+ proto_conn_MySpace.dll [2006-03-17 13:43:14+0100]
+ proto_conn_Skype.dll [2006-03-17 13:43:14+0100]
+ proto_conn_Xfire.dll [2006-03-17 13:43:14+0100]
+ proto_ExchangeRates.dll [2009-02-10 22:47:24+0100]
+ proto_facebook.dll [2010-07-25 15:52:10+0100]
+ proto_GG.dll [2010-06-29 04:11:33+0100]
+ proto_ICQ.dll [2010-06-29 04:11:33+0100]
+ proto_IRC.dll [2010-06-29 04:11:33+0100]
+ proto_IRC1.dll [2006-03-17 13:43:14+0100]
+ proto_IRC2.dll [2005-02-04 13:51:34+0100]
+ proto_JABBER.dll [2010-06-29 04:11:33+0100]
+ proto_MeinVZ-Jabber.dll [2010-07-12 12:56:58+0100]
+ proto_MeinVZ.dll [2010-07-14 18:30:58+0100]
+ Proto_MetaContacts.dll [2010-10-11 20:17:47+0100]
+ proto_mIRC.dll [2007-01-03 12:19:04+0100]
+ proto_MSN.dll [2010-06-29 04:11:33+0100]
+ proto_MySpace.dll [2007-07-01 23:04:58+0100]
+ proto_SchülerVZ-Jabber.dll [2010-07-12 12:59:32+0100]
+ proto_SchülerVZ.dll [2010-07-14 18:30:58+0100]
+ proto_skype.dll [2006-11-19 16:24:10+0100]
+ proto_StudiVZ-Jabber.dll [2010-07-12 13:01:10+0100]
+ proto_StudiVZ.dll [2010-07-14 18:30:58+0100]
+ proto_Twitter.dll [2009-06-08 06:54:20+0100]
+ Proto_Weather.dll [2010-10-11 20:17:53+0100]
+ proto_YAHOO.dll [2010-06-29 04:11:33+0100]
+ proto_YAMN.dll [2009-06-19 17:03:20+0100]
+ qipstatus_icons.dll [2009-04-29 20:53:34+0100]
+ QIPxStatus.dll [2007-08-17 12:21:50+0100]
+ secureim_icons.dll [2010-07-25 15:49:06+0100]
+ tabsrmm_icons.dll [2010-11-14 01:12:00+0100]
+ toggle-mydetails.dll [2008-08-08 19:16:34+0100]
+ toolbar_icons.dll [2010-09-07 14:15:55+0100]
+ tzers_icons.dll [2009-03-21 21:42:22+0100]
+ uinfoex_icons.dll [2010-11-14 01:12:00+0100]
+ uinfoex_icons_ice.dll [2008-08-13 11:58:24+0100]
+ verschiedene.dll [2008-09-19 16:23:54+0100]
+ Vista_ICQ.dll [2008-12-25 01:08:56+0100]
+ Vista_IRC.dll [2008-12-17 22:47:36+0100]
+ watrack_buttons.dll [2008-09-21 15:49:12+0100]
+ watrack_main.dll [2008-09-21 15:49:12+0100]
+ Watrack_main.icl [2008-09-21 20:11:20+0100]
+ xFire.dll [2008-06-14 20:21:16+0100]
+ xpk_jabber.dll [2005-12-06 21:42:16+0100]
+ xpk_tabsrmm_icons.dll [2007-10-05 14:52:28+0100]
+ xstatus_icons.dll [2009-03-21 21:41:13+0100]
+ xstatus_ICQ.dll [2010-09-07 14:15:55+0100]
+ xStatus_ICQplus.dll [2009-06-04 06:14:12+0100]
+ xstatus_ICQ_icons.dll [2007-07-23 19:59:30+0100]
+ xStatus_ICQ_merlin.dll [2009-06-03 18:27:26+0100]
+ xstatus_jabber.dll [2010-09-07 14:16:04+0100]

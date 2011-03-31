@@ -1,0 +1,26 @@
+; Pluginname: NetConfig 
+; Version: 0.0.0.4
+; Dateiname: NetConfig.dll
+; Autor: MadMobile
+; Link: 
+; Übersetzung: 21.10.07 von Foso
+; Besonderheiten: Entwicklung eingestellt!
+
+[Network Configuration]
+Netzwerkeinstellung
+[Save Current NetConfig]
+Aktuelle Netzwerkeinstellung speichern
+[Load active profile at startup]
+Aktives Profil beim Starten laden
+[Select profile for delete.]
+Profil zum Löschen auswählen.
+[Failed to connect]
+Verbinden fehlgeschlagen
+[Select profile for edit.]
+Profil zum Bearbeiten auswählen.
+[Automatic detection of place]
+Platz automatisch erkennen
+[Keep actual network settings in active profile at exit]
+Aktuelle Netzwerkeinstellungen im aktiven Profil beim Schließen behalten
+[Change status to online after replacing profile]
+Status zu "Online" wechseln nach ersetzen des Profils

@@ -1,0 +1,34 @@
+; Pluginname: Contacts+
+; Version: 1.6.0.0
+; Dateiname: contacts.dll 
+; Autor: Todor Totev, Joe Kucera
+; Link: http://jokusoftware.wz.cz/miranda
+; Übersetzung: 19.07.05 von andydu
+
+[Allows you to send and receive contacts]
+Über das Kontextmenü der Kontakte können Kontakte versendet und empfangen werden. Die Kontakte werden dann in die Kontaktliste des Empfängers eingetragen.***
+
+[Contacts from]
+Kontakte von
+[Contacts received from %s]
+Kontakte empfangen von %s
+[Mailformed Receive Contacts Packet.]
+Fehler beim Empfang von Kontakten.
+[Add to &group:]
+Zur &Gruppe hinzufü&gen
+
+[Send Contacts to]
+Sende Kontakte zu
+[Send contacts to %s]
+Kontakte senden an %s
+[The contacts send timed out.]
+Zeitüberschr. beim Senden der Kontakte.
+[Contacts transfer failed!]
+Kontakte-Transfer fehlgeschlagen!
+[Choose contacts to be send:]
+Kontakte zum Senden auswählen:
+
+[Send contacts...]
+Kontakte senden...
+[&Add selected]
+&Ausgewählte hinzufügen

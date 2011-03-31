@@ -1,0 +1,101 @@
+; Pluginname: RSSNews 
+; Version: 0.0.3.25
+; Dateiname: rssnews.dll
+; Autor: Angelo Luiz Tartari
+; Link: http://angelo-t.sites.uol.com.br/miranda/
+; Übersetzung: 23.06.05 von flower
+
+[Adding new feed]
+Neuen Newsfeed-Eintrag anlegen
+[Manage feed]
+Newsfeed-Eintrag bearbeiten
+[Feed options]
+Feed-Einstellungen
+[Authentication]
+Authentifizierung
+[Maximum news displayed]
+maximal anzuzeigende Feeds
+[Maximum items displayed]
+maximal anzuzeigende Feeds
+[&Store only unread news]
+&Nur ungelesene speichern
+[Store news using the following format:]
+News in folgendem Format speichern:
+[Display news using the following format:]
+News in folgendem Format anzeigen:
+[All item's tags are valid. Put them between #.]
+Alle Elemente sind gültig, zwischen # ... # setzen
+[Examples: #<author>#, #<pubDate>#, etc.]
+z. B.: #<author>#, #<pubDate>#, usw.
+[Example: #<author>#, #<pubDate>#, etc.]
+z. B.: #<author>#, #<pubDate>#, usw.
+[&Add new feed...]
+&Neuer Feed...
+[&Manage feed...]
+Feed b&earbeiten...
+[&Delete feed]
+Feed &löschen
+[Retrieve news at &startup]
+Newsfeed beim &Start anzeigen
+[Do not show warning and &error messages]
+Keine &Warnungen und Fehler anzeigen
+[RSSNews plugin did not find any feed.]
+RSSNews-Plugin hat keinen Feed gefunden
+[Wait...]
+Warten... 
+
+[Enter a value in URL field.]
+Bitte Text im Feld "URL" eingeben
+[Select a feed to manage.]
+Bitte Newsfeed zum Bearbeiten auswählen
+[Select a feed to delete.]
+Bitte Newsfeed zum Löschen auswählen
+[Enter a value in Username field.]
+Bitte geben Sie einen gültigen Benutzernamen ein.
+
+; Menu item
+[Retrieve &news]
+&News empfangen
+[Check all feeds]
+Alle Feeds aktualisieren
+
+; Error and warnings
+[RSS plugin can't connect to the server %s, it may be temporarily down. Please try again later.]
+RSS-Plugin kann sich nicht mit Server %s verbinden, evtl. ist dieser kurzzeitig außer Betrieb. Versuchen Sie es später erneut.
+[RSS plugin is unable to resolve the name of the server %s.]
+RSS-Plugin kann den Namen des Servers %s nicht auflösen.
+
+; Others
+[Feed ID]
+Feed-ID
+
+[E&xport...]
+Exportieren
+[Maximum displayed items]
+maximal anzuzeigende Feeds
+[All item's tags are valid. Put them between #. Example: #<author>#]
+Alle Elemente sind gültig, diese zwischen # setzen; z. B: #<author>#
+[Auto &discovery]
+Auto-Erkennung
+[Use &authentication]
+Anmeldung erforderlich
+[RSSNews - Export]
+Newsfeeds exportieren
+[Available feeds:]
+Verfügbare Newsfeeds:
+[Feeds to be exported:]
+zu exportierende Newsfeeds:
+[Export to file:]
+Exportieren in Datei:
+[RSSNews - Import]
+Newsfeeds importieren
+[Import from:]
+Importieren aus Datei:
+[&Go]
+Start
+[Feeds to be imported:]
+zu importierende Newsfeeds:
+[&Check all feeds]
+Alle Feeds &prüfen
+[Feed protocol]
+Feed-Protokoll

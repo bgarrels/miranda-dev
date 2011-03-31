@@ -1,0 +1,24 @@
+; Pluginname: ShellFileSend 
+; Version: 0.1.1.6
+; Dateiname: shellfilesend.dll
+; Author: migel
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=710
+; Übersetzung: 21.07.05 von andydu
+
+[Shell file send]
+Dateien senden/Shellerweiterung
+[Contact`s menu]
+Kontaktmenü
+[Don`t show &groups]
+Keine &Gruppen anzeigen
+[Show most recent recipients]
+Häufigste Empfänger anzeigen
+[&Up to:]
+Bis z&u:
+[Zip files before send]
+Dateien packen
+[Name of the archive:]
+Name des Archivs:
+
+[Allow send file to the Miranda contact through Shell "Send to" menu]
+Ermöglicht über das "Senden an"-Menü Dateien an Kontakte zu schicken

@@ -1,0 +1,27 @@
+; Pluginname: mSecure 
+; Version: 1.0.2.0
+; Dateiname: mSecure.dll
+; Autor: oxygen
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=848
+; Übersetzung: 19.06.06 von Weishaupt
+; Besonderheiten: Entwicklung eingestellt!
+
+[Miranda mSecure Protection]
+Miranda mSecure Schutz
+[Enter password to load Miranda]
+Passwort eingeben um Miranda zu starten
+[Wrong password. Try again.]
+Falsches Passwort. Nochmal.
+[Protection]
+Schutz-Einstellungen
+[Enter password to enable profile protection]
+Passwort eingeben um Profilschutz zu aktivieren
+[To disable profile protection leave password field blank]
+Zum Deaktivieren des Profilschutzes Passwortfeld leer lassen
+[Currently protected:]
+z.Zt geschützt:
+[Miranda startup]
+Miranda Start
+
+[Protects your miranda profile]
+Schützt das Mirandaprofil

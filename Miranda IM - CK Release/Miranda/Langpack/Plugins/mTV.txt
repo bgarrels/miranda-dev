@@ -1,0 +1,117 @@
+; Pluginname: mTV 
+; Version: 0.1.0.0
+; Dateiname: mTV.dll
+; Autor: Bankrut
+; Link: http://miranda.kom.pl/dev/bankrut/get.php
+; Übersetzung: 03.08.05 von HERODOMI
+
+[Anything = channel list]
+Beliebige Zahl = Senderliste
+[TV review]
+TV-Überblick
+[mTV protocol is disabled]
+mTV-Protokoll ist deaktiviert
+[Can't find any active mTV contact]
+Es konnte kein Sender gefunden werden
+[TV program for]
+TV-Programm für
+[No program available for selected contact]
+Kein Programm für den ausgewählten Sender vorhanden
+[There was an error reading progID value!]
+Fehler beim Lesen der Programm-ID
+
+[Program not available!]
+Programm nicht verfügbar
+[Nothing scheduled!]
+Keine Einträge vorhanden
+[program info]
+Programminformationen
+[Program length]
+Sendungsdauer
+[Time left]
+Verbleibende Zeit
+[End of program]
+Ende der Sendung
+[Channel list]
+Senderliste
+[Now in TV]
+Jetzt im TV
+[Scheduled shows]
+Vorgemerkte Sendungen
+
+[Proxy server]
+Proxyserver
+[Pass:]
+Passwort:
+[Download program for newly added stations from:]
+Downloadquelle für neu hinzugefügte Sender:
+[Update check every:]
+Prüfe auf Update alle:
+[Download timeout:]
+Downloadtimeout:
+[Download data for:]
+Lade Daten für:
+[day(s) ahead]
+Tag(e) im Voraus
+[Use one mouse click in TV Review to change station]
+Einfacher Mausklick im TV-Überblick wechselt Sender
+[Keywords (words separated with '|' char)]
+Schlüsselwörter (Wörter mit '|' trennen)
+[Mark favorites with different color]
+Makiere Favoriten mit unterschiedlicher Farbe
+[Auto add favorites to schedule (works only for newly downloaded)]
+Favoriten automatisch vorgemerkten Sendungen hinzufügen (nur für neues Programm möglich)
+[Rules: word=word, *word=xxxword, word*=wordxxx, *word*=xxxwordxxx]
+Regeln: Wort=Wort, *Wort=xxxWort, Wort*=Wortxxx, *Wort*=xxxWortxxx
+[Show additional program info in TV review]
+Zeige zusätzliche Programminfos in TV-Rückschau
+[Look && feel]
+Aussehen
+[TV Program list]
+TV-Programmliste
+[Light Gray]
+Hellgrau
+[Dark Gray]
+Dunkelgrau
+[Light Blue]
+Hellblau
+[Dark Blue]
+Dunkelblau
+[Fav mark color]
+Favoritenfarbe
+[List sel. color]
+Auswahlfarbe
+[Stat. name color]
+Senderfarbe
+[Time left green]
+Verbl. Zeit grün
+[Time left red]
+Verg. Zeit rot
+[Colorize titles]
+Farbige Titel
+[Tooltip timeout:]
+Tooltiptimeout:
+[Show popup/Launch event]
+Zeige Popup/Starte Ereignis
+[min. before program start (0 = disable)]
+Min. vor Sendungsbeginn (0 = deaktiviert)
+[sek. (0 = stay forever)]
+Sek. (0 = nicht ausblenden)
+[Re-download guide for all days]
+Downloade Programm für alle Tage neu
+[Re-download guide for current day]
+Downloade Programm für aktuellen Tag neu
+[Show mTV icon in status bar (need MIM restart)]
+Zeige mTV-Icon in Statusleiste (Neustart notwendig)
+[Show popup/Launch events]
+Zeige Popup/Starte Ereignis
+[Launch list]
+Ereignisliste
+[Command line]
+Befehlszeile
+[Parameters]
+Parameter
+[Use events]
+Benutze Ereignisse
+[Show current TV program as status msg]
+Zeige aktuelles TV-Programm als Statusnachricht

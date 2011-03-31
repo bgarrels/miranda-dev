@@ -1,0 +1,37 @@
+; Pluginname: Attache
+; Version: 0.2.0.0
+; Dateiname: attache.dll
+; Autor: sje
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3210
+; Übersetzung: 21.10.06 von freak
+
+[Generate MiniDump debugging information on crash]
+Erstellt MiniDump-Debuginformationen bei Abstürzen.
+[Confirm uploads]
+Hochladen bestätigen
+[Remove uploaded files]
+Hochgel. Dateien löschen
+[Reporter ID:]
+Reporter-ID:
+[The uploaded file exceeds the upload_max_filesize directive in php.ini. ]
+Die hochgeladene Datei überschreitet die upload_max_filesize-Bestimmung in der php.ini.
+[The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.]
+Die hochgeladene Datei überschreitet die MAX_FILE_SIZE-Bestimmung im HTML-Formular.
+[The uploaded file was only partially uploaded.]
+Datei wurde nur teilweise hochgeladen.
+[No file was uploaded.]
+Keine Datei wurde hochgeladen.
+[Server specific error.]
+Fehler im Server.
+[Missing a temporary folder.]
+Temporärer Ordner fehlt.
+[Failed to write file to disk.]
+Datei konnte nicht erstellt werden.
+[Unknown PHP error.]
+Unbekannter PHP-Fehler.
+[Crash in module: %s\nMiniDumpWriteDump failed. Error: %u]
+Absturz in Modul %s\nMiniDumpWriteDump fehlgeschlagen: Fehler %u
+[Crash in module: %s\nMiniDumpWriteDump failed. Failed to create dump file.]
+Absturz in Modul %s\nMiniDumpWriteDump fehlgeschlagen: Dumpdatei konnte nicht erstellt werden.
+[Crash in module: %s\nDump file: %s]
+Absturz in Modul %s\nDumpdatei: %s

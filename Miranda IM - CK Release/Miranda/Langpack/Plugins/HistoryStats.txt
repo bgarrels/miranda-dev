@@ -1,0 +1,884 @@
+; Pluginname: HistoryStats 
+; Version: 0.1.5.3 (Final)
+; Version 0.1.5.4 (Beta)
+; Dateiname: historystats.dll
+; Autor: Martin Afanasjew
+; Link Unicode: http://addons.miranda-im.org/details.php?action=viewfile&id=2535
+; Übersetzung: CHEF-KOCH am 29.05.2010
+; Besonderheiten: Entwicklung eingestellt!
+
+[ (in)]
+ (ein)
+[ (out)]
+ (aus)
+[ bytes]
+ Bytes
+[ chats]
+ Gespräche
+[ messages]
+ Nachrichten
+["Split" timeline]
+"Split"-Zeitleiste
+["Split" type]
+"Split"-Typ
+
+[Don't hide menu items for pseudo protocols]
+Menüeinträge für Pseudo-Protokolle nicht verstecken
+[Don't merge events]
+Keine Ereignisse verschmelzen
+
+[(default filename).html]
+(Standarddateiname).html
+[(default nick)]
+(Standardspitzname)
+[(multiple)]
+(mehrere)
+[(nothing)]
+(nichts)
+
+[...after date (none=no limit)]
+...nach Datum (Leer=keine Beschränkung)
+[...before date (none=no limit)]
+...vor Datum (Leer=keine Beschränkung)
+[...can be output as: ]
+...kann sie ausgegeben werden als: 
+[...is less than]
+...weniger sind als
+[...older than (days, 0=no limit)]
+...älter als (Tage, 0=keine Beschränkung)
+[...on Miranda IM's startup]
+...beim Start von Miranda IM erstellt wurde
+[...via button "Create statistics" in options]
+...über die Schaltfläche "Statistik erstellen" in den Einstellungen erstellt wurde
+[...via Miranda IM's main menu]
+...über das Hauptmenü von Miranda IM erstellt wurde
+[...will be output as: ]
+...wird sie ausgegeben als: 
+[/Options tree]
+/Auswahl Verzeichnis
+
+[\[First\] #{first_time} / \[Last\] #{last_time}]
+\[Erste Nachricht\] #{first_time} / \[Letzte Nachricht\] #{last_time}
+[#{count} contacts / \[First\] #{first_time} / \[Last\] #{last_time}]
+#{count} contacts / \[Erste Nachricht\] #{first_time} / \[Letzte Nachricht\] #{last_time}
+[#{data} per #{unit}]
+#{data} pro #{unit}
+[#{distict_words} distinct]
+#{distict_words} eindeutige Wörter
+[#{type} for #{data}]
+#{type} für #{data}
+[#{words} total]
+#{words} Wörter insgesamt
+[#{words} total / #{distict_words} distinct]
+#{words} Wörter insgesamt / #{distict_words} eindeutige Wörter
+[\[#{date}\] #{out_amount} (out) / #{in_amount} (in)]
+\[#{date}\] #{out_amount} (Ausgehend) / #{in_amount} (Eingehend)
+[\[#{start_date}-#{end_date}\] #{out_amount} (out) / #{in_amount} (in)]
+\[#{start_date}-#{end_date}\] #{out_amount} (Ausgehend) / #{in_amount} (Eingehend)
+[\[Avg\] #{amount}]
+\[Durchschn.\] #{amount}
+[\[Max\] #{amount}]
+\[Max.\] #{amount}
+[\[Min\] #{amount}]
+\[Min.\] #{amount}
+[\[Out\] #{out_amount} (#{out_ratio}) / \[In\] #{in_amount} (#{in_ratio})]
+\[Ausgehend\] #{out_amount} (#{out_ratio}) / \[Eingehend\] #{in_amount} (#{in_ratio})
+[\[Out\] #{out_amount} / \[In\] #{in_amount}]
+\[Ausgehend\] #{out_amount} / \[Eingehend\] #{in_amount}
+[\[Out\] #{out_words} / \[In\] #{in_words}]
+\[Ausgehend\] #{out_words} / \[Eingehend\] #{in_words}
+[\[Sum\] #{amount}]
+\[Summe\] #{amount}
+
+[About sets]
+Über die Regeln
+[Absolute]
+Absolut
+[Absolute in tooltip if average selected and vice versa]
+Absoluter Wert im Tooltip, falls Durchschnitt ausgewählt ist, und umgekehrt
+[Add column...]
+Spalte ... hinzufügen
+[Add menu items to contact menu]
+Erstelle Menüeintrag im Kontaktmenü
+[Add menu items to main menu]
+Erstelle Menüeintrag im Hauptmenü
+[Add set]
+Regel hinzufügen
+[Additional info in tooltip (depends on type)]
+Erweiterte Info in Tooltip (hängt vom Typ ab)
+[Align on day boundary]
+Am Tagesanfang ausrichten
+[Align on week boundary]
+Am Wochenanfang ausrichten
+[all characters]
+alle Zeichen
+[all chats]
+alle Chats
+[All messages]
+Alle Nachrichten
+[all messages]
+alle Nachrichten
+[The statistics can't be found. Either you never created them or the last created statistics were moved to a different location and can't be found anymore.]
+Die Statistik konnte nicht gefunden werden. Entweder wurde sie nie erstellt oder sie wurde in ein anderes Verzeichnis verschoben und kann nicht mehr gefunden werden.
+[Ascending]
+Aufsteigend
+[Auto open statistics after being generated...]
+Öffne Statistik automatisch, nachdem sie...
+[Automatically get updates of HistoryStats]
+Bekommt automatisch Updates von HistoryStats
+[Available column types:]
+Verfügbare Spaltentypen:
+[Average]
+Durchschnitt
+[Average chat duration]
+Durchschnittliche Chatdauer
+[Bar graph for in/out]
+Streifendiagramm für Ein-/Ausgehend
+[Bar graph for total chat duration]
+Streifendiagramm für Gesamtchatdauer
+[Bar unit]
+Balkeneinheit
+[Bars per graph]
+Balken pro Graph
+[Block unit]
+Blockeinheit
+[Blocks per column]
+Blöcke pro Spalte
+[Both]
+Beides
+[Bytes (in/out ratio)]
+Bytes (Verhältnis Ein-/Ausgehend)
+[Bytes (incoming)]
+Bytes (eingehend)
+[Bytes (outgoing)]
+Bytes (ausgehend)
+[Bytes (total)]
+Bytes (gesamt)
+[Calculate maximum per column (not per graph)]
+Berechne Max. durch Spalte (nicht durch Graph)
+[Calculating totals]
+Berechne Summen
+[Characters]
+Zeichen
+[Characters (all)]
+Zeichen (alle)
+[Characters (all, absolute)]
+Zeichen (alle, absolut)
+[Characters (all, average per week)]
+Zeichen (alle, Durchschnitt pro Woche)
+[Characters (all, average)]
+Zeichen (alle, Durchschnitt)
+[Characters (in/out ratio)]
+Zeichen (Verhältnis Ein-/Ausgehend)
+[Characters (incoming)]
+Zeichen (eingehend)
+[Characters (incoming, absolute)]
+Zeichen (eingehend, absolut)
+[Characters (incoming, average per week)]
+Zeichen (eingehend, Durchschnitt pro Woche)
+[Characters (incoming, average)]
+Zeichen (eingehend, Durchschnitt)
+[Characters (outgoing)]
+Zeichen (ausgehend)
+[Characters (outgoing, absolute)]
+Zeichen (ausgehend, absolut)
+[Characters (outgoing, average per week)]
+Zeichen (ausgehend, Durchschnitt pro Woche)
+[Characters (outgoing, average)]
+Zeichen (ausgehend, Durchschnitt)
+[Chat duration]
+Chatdauer
+[Chat duration (average)]
+Chatdauer (Durchschnitt)
+[Chat duration (maximum)]
+Chatdauer (Maximum)
+[Chat duration (minimum)]
+Chatdauer (Minimum)
+[Chat duration (total)]
+Chatdauer (gesamt)
+[Chat duration (total, hours)]
+Chatdauer (gesamt, Stunden)
+[Chat duration type]
+Bemessung der Chatdauer
+
+[Chats (all)]
+Chats (alle)
+[Chats (all, absolute)]
+Chats (alle, absolut)
+[Chats (all, average per week)]
+Chats (alle, Durchschnitt pro Woche)
+[Chats (all, average)]
+Chats (alle, Durchschnitt)
+[Chats (in/out ratio)]
+Chats (Verhältnis Ein-/Ausgehend)
+[Chats (incoming)]
+Chats (eingehend)
+[Chats (incoming, absolute)]
+Chats (eingehend, absolut)
+[Chats (incoming, average per week)]
+Chats (eingehend, Durchschnitt pro Woche)
+[Chats (incoming, average)]
+Chats (eingehend, Durchschnitt)
+[Chats (outgoing)]
+Chats (ausgehend)
+[Chats (outgoing, absolute)]
+Chats (ausgehend, absolut)
+[Chats (outgoing, average per week)]
+Chats (ausgehend, Durchschnitt pro Woche)
+[Chats (outgoing, average)]
+Chats (ausgehend, Durchschnitt)
+[Chats (total)]
+Chats (gesamt)
+
+[Color words according to in/out ratio]
+Wörter nach Verhältnis zwischen Ein- und Ausgehend färben
+[Column holding a graphical overview of your chatting amount split by day of week or by hour of day. Different chatting amount measures are available.]
+Spalte mit einer grafischen Darstellung des Chataufkommens, aufgespalten nach Wochentagen oder Stunden des Tages. Es stehen verschiedene Maße für das Chataufkommen zur Verfügung.
+[Column holding a graphical overview of your chatting behaviour (out, in, total, in/out ratio) from the first to the last day of your history on an daily basis. Multiple days can be grouped. Different chatting behaviour measures are available.]
+Spalte mit einer grafischen Darstellung des Chatverhaltens (eingehend, ausgehend, gesamt, Verhältnis zwischen ein-/ausgehend) vom ersten bis zum letzten Tag des Verlaufs. Es stehen verschiedene Maße für das Chataufkommen zur Verfügung.
+[Column holding a graphical overview of your chatting behaviour (out, in, total, in/out ratio) from the first to the last day of your history. The information is spread along x- and y-axis and the values are encoded as color values. Different chatting behaviour measures are available.]
+Spalte mit einer grafischen Darstellung des Chatverhaltens (eingehend, ausgehend, gesamt, Verhältnis zwischen ein-/ausgehend) vom ersten bis zum letzten Tag des Veralufs. Die Informationen sind über x- und y-Achse verteilt und die Werte sind als Farbwerte kodiert. Es stehen verschiedene Maße für das Chataufkommen zur Verfügung.
+[Column holding a list of a specified number of most common words used by you, by your contact, or by both of you.]
+Spalte mit einer bestimmbaren Anzahl von meistgenutzten Wörtern aus den eigenen Nachrichten, den Nachrichten des Kontakts oder beides.
+[Column holding a list of a specified number of most/least common words or longest words used by you, by your contact, or by both of you.]
+Spalte, die eine Liste mit eine festgelegten Anzahl an am meisten/wenigsten benutzten Wörtern oder längste Wörter anzeigt. Benutzt von Ihnen, dem Kontakt oder beiden.
+[Column holding counts for incoming, outgoing or total characters, messages or chats. This column can display absolute and average values.]
+Spalte, die die Anzahl für eingehende, ausgehende oder gesamte Zeichen, Nachrichten oder Chats anzeigt. Diese Spalte kann den Absoluten Wert oder einen Durchschnitt anzeigen.
+[Column holding event counts for incoming, outgoing or total number of files or URLs.]
+Spalte, die die Anzahl der eingehenden, ausgehenden oder gesamten Dateien bzw. URLs anzeigt.
+[Column holding in/out bar graphs for characters, messages or chats.]
+Spalte, die grafische Balken für ein-/ausgehende Zeichen, Nachrichten oder Chats.
+[Column holding in/out statistics for bytes, messages or chats. Allows textual or graphical representation.]
+Spalte mit einer Statistik für Bytes, Nachrichten oder Chats (eingehend, ausgehend oder gesamt). Darstellung ist als Grafik oder Text möglich.
+[Column holding the amount of time you have chatted with the given contact.]
+Spalte mit der Zeit, die man durchgängig mit einem Kontakt gechattet hat.
+[Column holding the contact list's group name the contact is in.]
+Spalte mit dem Namen der Gruppe, zu der der Kontakt in der Kontaktliste gehört.
+[Column holding the contact's nick and first/last message time if selected.]
+Spalte mit dem Namen des Kontakts und Zeit der ersten/letzten Nachricht, falls aktiviert.
+[Column holding the contact's placing according to your sorting criteria.]
+Spalte mit der Platzierung der jeweiligen Kontakts, abhängig vom gewählten Sortierkriterium.
+[Column holding the contact's protocol.]
+Spalte mit dem vom jeweiligen Kontakt verwendeten Protokoll.
+[Column holding the number of (distinct) words used by you, by your contact, or by both of you.]
+Spalte mit der Anzeige der Anzahl der (eindeutig) benutzten Wörter von Ihnen, dem Kontakt oder beiden.
+[Show separate counts for incoming/outgoing]
+Zeige separate Anzahl für ein-/ausgehend
+
+[Column settings]
+Spalteneinstellungen
+[Column setup]
+Spalteneinrichtung
+[Column specific settings]
+Spaltenspezifische Einstellungen
+[Combo box]
+Dropdown
+[Combo box (disabled)]
+Dropdown (inaktiv)
+[Configure HistoryStats]
+HistoryStats konfigurieren
+[Configure statistics...]
+Statistik konfigurieren...
+[Configure... (main menu)]
+Konfigurieren... (Hauptmenü)
+[Contact filtering]
+Kontaktfilter
+[Contact filtering and totals]
+Kontaktfilterung und Summen
+[Create statistics]
+Statistik erstellen
+[Create statistics (main menu)]
+Statistik erstellen (Hauptmenü)
+[Create statistics (there are warnings)]
+Statistik erstellen (es gibt Warnungen)
+[Create statistics for meta-contacts and their subcontacts]
+Erstellt Statistik für Metakontakte und ihre Unterkontakte
+[Create statistics on Miranda IM's startup]
+Statistik beim Start von Miranda IM erstellen
+[Created with #{plugin} #{version} on #{date} at #{time}]
+Erstellt mit #{plugin} #{version} am #{date} um #{time}
+[Creating HTML]
+Erstelle HTML
+[Criteria]
+Kriterien
+[Custom (for experts only)]
+Benutzerdefiniert (nur für Experten)
+[Data source]
+Datenquelle
+[Days of week]
+Wochentage
+[Days of week timeline]
+Zeitleiste der Wochentage
+[Define...]
+Festlegen...
+[Delete column]
+Lösche Spalte
+[Delete set]
+Lösche Einstellung
+[Descending]
+Absteigend
+[Detailed description:]
+Detaillierte Beschreibung:
+[Details for every bar (tooltip)]
+Details für jede Säule (Tooltip)
+[Details for every bar (tooltip) are only available with HTML output.]
+Details für jede Säule (Tooltip) sind nur für HTML-Ausgabe verfügbar.
+[Discard generated]
+Erstellte verwerfen
+[Display as]
+Anzeigen als
+[Distinct word count]
+Anzahl eindeutiger Wörter
+[Distinct words]
+Eindeutige Wörter
+[Drop everything older than (days, 0=no limit)]
+Alles ignorieren, was älter ist als (Tage, 0=unbegrenzt)
+[Duplicate detection when reading merged contacts]
+Erkennung von Duplikaten beim Einlesen verschmolzener Kontakte
+[Easily exchange icons in HistoryStats' user interface]
+Ermöglicht es die Icons der HistoryStats-Benutzeroberfläche zu verändern
+[Show countact count for omitted/totals (tooltip)]
+Zeige Kontaktzähler für weggelassene/Summen  (Tooltip)
+[Enforce PNG output, possibly ignoring some column options]
+Erzwinge PNG-Ausgabe, auch wenn Spalteneinstellungen dadurch ignoriert werden
+[Error while searching for meta-contact's subcontacts. Please contact the author of this plugin.]
+Fehler beim Suchen nach den Unterkontakten des Metakontakt. Bitte kontaktieren Sie den Autor dieses Plugins.
+[Events to count]
+Zu zählende Ereignisse
+[Exclude]
+Ignorieren
+[Exclude contacts]
+Kontakte ignorieren
+[Exclude from statistics]
+Aus Statistik ausschließen
+[Extract words from]
+Worte entnehmen aus
+[Fall back to HTML output, if column options require HTML output]
+Auf HTML-Ausgabe zurückfallen, wenn Spalteneinstellungen HTML-Ausgabe erfordern
+[Files (all)]
+Dateien (alle)
+[Files (incoming)]
+Dateien (eingehend)
+[Files (outgoing)]
+Dateien (ausgehend)
+[Files (total)]
+Dateien (gesamt)
+[Filter messages containing]
+Filtere Nachrichten beinhaltend
+[Filter messages ending with]
+Filtere Nachrichten endend mit
+[Filter messages matching]
+Filtere Nachrichten übereinstimmend mit
+[Filter messages starting with]
+Filtere Nachrichten beginnend mit
+[Filter URLs/e-mail addresses]
+Filtere URLs/E-Mail-Adressen
+[Filter words containing]
+Filtere Wörter beinhaltend
+[Filter words ending with]
+Filtere Wörter endend mit
+[Filter words matching]
+Filtere Wörter übereinstimmend mit
+[Filter words starting with]
+Filtere Wörter beginnend mit
+[Filter words/messages]
+Filtere Wörter/Nachrichten
+[Finally sort by]
+Sortiere schließlich nach
+[First sort by]
+Sortiere zuerst nach
+[First/last message time (tooltip)]
+Zeit der ersten/letzten Nachricht (Tooltip)
+[Folder]
+Ordner
+[Folder (disabled)]
+Ordner (deaktiviert)
+[For this config the selected column...]
+Mit dieser Einstellung für die ausgewählte Spalte...
+[General column settings]
+Allgemeine Spalteneinstellungen
+[Generate PNG files to represent graphics]
+Erstelle PNG-Dateien, um Grafiken zu repräsentieren
+[Generate statistics in background thread with low priority]
+Erstelle Statistik in einem niedrig priorisierten Hintergrundthread
+
+[Global settings]
+Allgemeine Einstellungen
+[Graph alignment]
+Diagrammausrichtung
+[Graphics]
+Grafiken
+
+[Hide additional column info...]
+Verstecke zusätzliche Spalteninfo...
+[Hide menu items for protocol...]
+Blende Menüeinträge für Protokoll aus...
+
+[History filtering]
+Verlaufs Filter
+[History interpretation]
+Interpretation des Verlaufs
+[History read mode for MetaContacts]
+Verlaufslesemodus für Metakontakte
+[HistoryStats - Add column]
+HistoryStats - Spalte hinzufügen
+[HistoryStats - Conflicting files]
+HistoryStats - Dateien im Konflikt
+[HistoryStats - Error]
+HistoryStats - Fehler
+[HistoryStats - Warning]
+HistoryStats - Hinweis
+[HistoryStats - Working...]
+HistoryStats - Arbeite...
+[HistoryStats is already generating statistics. Please wait for the already running process to be finished or cancel it and try again.]
+HistoryStats erstellt gerade eine Statistik. Bitte warten sie, bis diese fertig erstellt ist, oder brechen Sie die Erstellung ab und versuchen Sie es erneut.
+[HistoryStats supports several plugins. Click to hide info...]
+Klicke hier um die Informationen zu verbergen... 
+[HistoryStats supports several plugins. Click to learn more...]
+HistoryStats unterstützt folgende Plugins. Klicke hier für mehr Informationen... 
+[Supported plugins (double-click to learn more):]
+Unterstützte Plugins (Doppelklick für mehr Informationen):
+[Hours of day]
+Stunden des Tages
+[HTML as fallback]
+HTML als Fallback
+[HTML file generation]
+Erstellung der HTML-Datei
+[HTML output unsupported.]
+HTML-Ausgabe nicht unterstützt.
+
+[Ignore all contacts with protocol...]
+Ignoriere alle Kontakte mit dem Protokoll...
+[Ignore logged status changes from tabSRMM/Scriver]
+Ignoriere protokollierte Statusänderungen von tabSRMM/Scriver
+
+[Ignore messages...]
+Ignoriere Nachrichten...
+[Ignore words longer than (chars, 0=no limit)]
+Ignoriere Worte länger als (Zeichen, 0=unbegrenzt)
+[Ignore words shorter than (chars)]
+Ignoriere Worte kürzer als (Zeichen)
+[Ignored protocols]
+Ignorierte Protokolle
+[IMPORTANT NOTICE\n\n...]
+WICHTIGER HINWEIS\n\n...
+
+[IMPORTANT NOTICE\r\n\r\nThis is the first time you use this version of the plugin. Please press the 'Update/Setup...' button to update/setup the configuration of the plugin. If you updated it is strongly recommended to check all settings for proper values. Things might have changed in this version.]
+WICHTIGER HINWEIS\r\n\r\nDies ist das erste Mal, dass Sie diese Version des Plugins benutzen. Bitte klicken Sie auf 'Aktualisieren/Initialisieren...', um die Konfiguration des Plugins zu aktualisieren/initialisieren. Nach einer Aktualisierung des Plugins ist es empfehlenswert alle Einstellungen auf korrekte Werte zu prüfen. Einige Dinge könnten sich in dieser Version geändert haben.
+
+[In/out]
+Ein-/Ausgehend
+[In/out details (tooltip)]
+Details für Ein-/Ausgehend (Tooltip)
+[In/out graph]
+Ein-/Ausgehend-Balken
+[in/out ratio of characters]
+Ein-/Ausgehend-Verhältnis der Zeichen
+[in/out ratio of chats]
+Ein-/Ausgehend-Verhältnis der Chats
+[in/out ratio of messages]
+Ein-/Ausgehend-Verhältnis der Nachrichten
+[Include omitted contacts in totals]
+Weggelassene Kontakte in Summen einbeziehen
+[Include totals in statistics]
+Summen in Statistik aufnehmen
+[Include totals of omitted contacts in additional row]
+Summen weggelassener Kontakte in zusätzlicher Zeile aufnehmen
+[Incoming files]
+Eingehende Dateien
+[Incoming URLs]
+Eingehende URLs
+[Initializing]
+Initialisiere
+[Input settings]
+Ausleseeinstellungen
+
+[Least common words]
+Am wenigsten benutzte Wörter
+[Limit number of contacts in statistics]
+Begrenze die Kontaktanzahl in der Statistik
+[Limiting number of contacts]
+Begrenzung der Kontaktanzahl
+[Longest words]
+Längste Worte
+[Make column titles more verbose]
+Spaltentitel länger und verständlicher machen
+;[Maximum]
+[Maximum chat duration]
+Maximale Chatdauer
+[Maximum inactivity time (days)]
+Maximale inaktive Zeit (Tage)
+[Merge contacts with same name]
+Kontakte mit gleichem Namen verschmelzen
+[Merge events (tolerant)]
+Ereignisse verschmelzen (tolerant)
+[Merge events (strict)]
+Ereignisse verschmelzen (intolerant)
+[Message filtering]
+Nachrichtenfilter
+[Merging similar contacts]
+Verschmelzung ähnlicher Kontakte
+[Messages (all)]
+Nachrichten (alle)
+[Messages (all, absolute)]
+Nachrichten (alle, absolut)
+[Messages (all, average per week)]
+Nachrichten (alle, Durchschnitt pro Woche)
+[Messages (all, average)]
+Nachrichten (alle, Durchschnitt)
+[Messages (in/out ratio)]
+Nachrichten (Verhältnis ein-/ausgehend)
+[Messages (incoming)]
+Nachrichten (eingehend)
+[Messages (incoming, absolute)]
+Nachrichten (eingehend, absolut)
+[Messages (incoming, average per week)]
+Nachrichten (eingehend, Durchschnitt pro Woche)
+[Messages (incoming, average)]
+Nachrichten (eingehend, Durchschnitt)
+[Messages (outgoing)]
+Nachrichten (ausgehend)
+[Messages (outgoing, absolute)]
+Nachrichten (ausgehend, absolut)
+[Messages (outgoing, average per week)]
+Nachrichten (ausgehend, Durchschnitt pro Woche)
+[Messages (outgoing, average)]
+Nachrichten (ausgehend, Durchschnitt)
+[Messages (total)]
+Nachrichten (gesamt)
+[Minimum/average/maximum (tooltip)]
+Minimum/Durchschnitt/Maximum (Tooltip)
+[Minimum time to assume when calculating average (days)]
+Minimaler Bemessungszeitraum beim Berechnen der Durchschnitte (Tage)
+[Mon]
+Mo
+[Most common words]
+Am meisten benutzte Wörter
+[Nothing (column will be skipped)]
+Nichts (Spalte wird übersprungen)
+[Number of columns to group]
+Anzahl zu gruppierender Spalten
+[Number of common words]
+Anzahl der meistbenutzen Wörter
+[Number of contacts in "Top n"]
+Anzahl Kontakte in "Top n"
+[Number of days to group]
+Anzahl zu gruppierender Tage
+[Number of weeks to group]
+Anzahl zu gruppierender Wochen
+[Number of words]
+Anzahl der Wörter
+[Number of words to skip in output]
+Anzahl der zu überspringenden Wörter der Ausgabe
+[Omit all contacts not in "Top n"]
+Kontakte weglassen, die nicht in "Top n" sind
+[Omit contacts that didn't produce a certain amount of data]
+Kontakte ausschließen, wenn sie eine gewisse Menge an Daten nicht überschreiten
+[Omit contacts that were inactive for some time]
+Kontakte ausschließen, die eine gewisse Zeit nicht aktiv waren
+[Omit if]
+Ausschließen, wenn
+[Omitted]
+Weggelassen
+[Omitted contacts]
+Weggelassene Kontakte
+[Only merge if contacts are in the same group]
+Nur Kontakte aus der selben Gruppe verschmelzen
+[Only show if a custom title was entered or if titles are not verbose]
+Nur zeigen, wenn ein eigener Titel verwendet wird oder die Spaltentitel nicht verständlicher sind
+[Only use HTML to simulate graphics]
+Benutze nur HTML um Grafiken zu simulieren
+[Other information in tooltip]
+Andere Informationen im tooltip zeigen
+[Outgoing files]
+Ausgehende Dateien
+[Outgoing URLs]
+Ausgehende URLs
+[Output additional files to subfolder]
+Ausgabe der zusätzlichen Dateien in Unterordner
+[Output file]
+Ausgabedatei
+[Output files and folders]
+Ausgabe der Dateien und Ordner
+[Output graphical columns as PNG files instead of HTML]
+Ausgabe von grafischen Spalten mit PNG anstatt HTML
+[Output header]
+Kopfzeile ausgeben
+[Output settings]
+Ausgabeeinstellungen
+[Overwrite existing]
+Existierende überschreiben
+[Own nick for statistics]
+Eigener Nickname in Statistik
+[Path to browser (leave blank for system default)]
+Pfad zum Speichern (leer lassen für Systemstandard)
+[Percentage in bar graph]
+Prozentsatz im Balkendiagramm
+[Percentage in tooltip]
+Prozentsatz im Tooltip
+[Plugin/extension name:]
+Plugin/Erweiterungsname:
+[PNG (partial)]
+PNG (teilweise)
+[PNG, ignoring some sttings]
+PNG, ignoriert manche Einstellungen
+[Postcollecting column data]
+Sammle Spaltendaten (Nachbearbeitung)
+[Precollecting column data]
+Sammle Spaltendaten (Vorverarbeitung)
+[Prefer HTML output over PNG output, if available]
+Bevorzuge HTML-Ausgabe vor PNG-Ausgabe, falls verfügbar
+[Presentation]
+Darstellung
+[Provided features:]
+Unterstütztes Feature:
+[Put in Miranda IM's main menu]
+Füge ins Hauptmenü von Miranda IM ein
+[Put menu items into submenu]
+Menüeinträge in Submenü 'Statistik' führen
+[Radio button]
+Radiobutton
+[Radio button (checked & disabled)]
+Radiobutton (ausgewählt & deaktiviert)
+[Radio button (checked)]
+Radiobutton (ausgewählt)
+[Radio button (disabled)]
+Radiobutton (deaktiviert)
+[Rank]
+Platz
+[Ratio total/distinct words]
+Verhältnis alle/eindeutige Wörter
+[Reading database]
+Lese Verlauf
+[Remove contacts with empty history]
+Entferne Kontakte mit leerem Verlauf
+[Remove contacts with only incoming chats]
+Entferne Kontakte mit nur eingehenden Chats
+[Remove contacts with only outgoing chats]
+Entferne Kontakte mit nur ausgehenden Chats
+[Remove only if contact never answered]
+Entferne nur, falls Kontakt nie geantwortet hat
+[Remove only if you never answered]
+Entferne nur, falls Kontakt nie eine Antwort bekam
+[Removing contacts]
+Entferne Kontakte
+[Repeat header every n contacts (0=don't repeat)]
+Wiederhole Kopf alle n Kontakte (0=nicht wiederholen)
+[Set mode:]
+Regelmethode:
+[Set name:]
+Regelname:
+[Sets:]
+Regeln:
+[Setting ignored due to PNG output.]
+Einstellung ignoriert durch PNG-Ausgabe.
+[Show additional column info...]
+Zeige zusätzliche Spalteninfo...
+[Show bar graph for chat duration type]
+Zeige Balkendiagramm für die Bemessung der Chatdauer
+[Show statistics]
+Statistik anzeigen
+[Show sum of incoming and outgoing]
+Zeige Summen für Eingehend und Ausgehend
+[Show tooltips with detailed information in column titles]
+Zeige Tooltips mit detaillierten Informationen zum Tabellenkopf
+[Show warnings...]
+Zeige Warnungen...
+[Sorting]
+Sortieren
+[Sorting contacts]
+Sortiere Kontakte
+[Statistics for #{nick}]
+Statistik für #{nick}
+[Statistics for #{nick} - HistoryStats]
+Statistik für #{nick} - HistoryStats
+[Strip raw RTF control sequences from message]
+Isoliere unverarbeitete RTF-Kontrollsequenzen von Nachrichten
+[Strip BBCode tags from messages]
+Isoliere BBCode-Tags von Nachrichten
+[Subfolder for additional files]
+Unterordner für zusätzliche Dateien
+[Substitute variables in output file name and subfolder for additional files]
+Ersetze Variablen des ausgegebenen Dateinamens und des Unterordners für zusätzliche Dateien
+[Statistics generation]
+Erstellen der Statistik
+[Table header]
+Tabellenkopf
+[Textual sum for in/out]
+Summe ein-/ausgehend als Text
+[Then sort by]
+Sortiere dann nach
+
+[Some files were temporarily stored in another location to avoid overwriting already existing files. If you always want to overwrite existing files there is an option for this.]
+Einige Dateien wurden temporär an einer anderen Stelle gespeichert, um bereits existierende Dateien nicht zu überschreiben. Sollten Sie die Dateien immer überschreiben wollen, so gibt es dafür eine Option.
+[Some of your settings can't be honored due to PNG output. The output may differ somewhat from what you configured. However, this is only a warning and can in general be ignored.\r\n\r\nFuture versions of this plugin will output more detailed information about this problem.]
+Einige Ihrer Einstellungen können bei der Ausgabe als PNG nicht berücksichtigt werden. Die Ausgabe kann etwas von der von Ihnen konfigurierten abweichen. Dies ist allerdings nur ein Hinweis und kann normalerweise ignoriert werden.\r\n\r\nZukünftige Versionen dieses Plugins werden detailliertere Informationen zu diesem Problem ausgeben.
+[The file couldn't be opened for write access. Please check the filename you have chosen and whether the file and/or disk is writable and whether the specified folder exists.]
+Die Datei konnte nicht zum Schreiben geöffnet werden. Bitte überprüfen Sie den von Ihnen gewählten Dateinamen, ob die Datei/das Medium beschreibbar ist und ob der angegebene Ordner existiert.
+[The following files could not be written because files with the same names already existed. Please decide whether to overwrite the existing or to discard the generated files.]
+Die folgenden Dateien konnten nicht geschrieben werden, weil Dateien mit gleichem Namen bereits existieren. Bitte entscheiden Sie, ob Sie die existierenden Dateien überschreiben oder die erstellten Dateien verwerfen wollen.
+[The following information are only relevant if your already use MetaContacts. In case you do please use version 0.9.10.6 or above.\r\n\r\nHistoryStats perfectly integrates with MetaContacts and is able to collect the data from the meta-contact as well as from the subcontacts. It is able to intelligently merge all subcontacts histories and more. You can configure MetContacts integration in the "Input" options.]
+Folgende Informationen müssen Sie nur lesen, falls Sie bereits MetaContacts benutzen. In dem Fall verwenden Sie bitte Version 0.9.10.6 oder höher.\r\n\r\nHistoryStats funktioniert perfekt mit MetaContacts. Es ist in der Lage Daten sowohl von den Metakontakten als auch von den Unterkontakten zu sammeln. Ebenfalls kann es intelligent den Verlauf jedes Unterkontakts verschieben und vieles mehr. Sie finden die Einstellungen für Metakontakte in den Ausleseinstellungen.
+[The generated file couldn't be found. Are you sure you generated the statistics already?]
+Die erstellte Datei konnte nicht gefunden werden. Sind Sie sich sicher, dass Sie die Statistik bereits erstellt haben?
+[There are some potential conflicts in your settings. However, this is only a warning and can in general be ignored. The details:]
+Es gibt ein paar mögliche Konflikte in Ihren Einstellungen. Dennoch ist es nur eine Warnung und kann meistens ignoriert werden. Details:
+[This will update the configuration of this plugin and remove settings not longer used by this version. In general, this should be safe. However, please check your settings after successfully finishing this step!\n\nContinue the update/setup procedure?]
+Hiermit wird die Konfiguration des Plugins aktualisiert und Einstellungen entfernt, die von dieser Version nicht mehr unterstützt werden. Normalerweise sollte das ungefährlich sein. Dennoch sollten Sie Ihre Einstellungen nach erfolgreichem Abschluss dieses Schrittes überprüfen!\n\nMit der Aktualisierung/Initialisierung fortfahren?
+[Use this plugin if you'd like to customize most of the icons HistoryStats' user interface. Please be sure to use version 0.0.1.0 or above. Otherwise HistoryStats won't show up in IcoLib's options. If you're running Miranda IM 0.7.0 alpha #3 or above you don't need a separate plugin for this.]
+Nutzen Sie dieses Plugin, um die meisten Icons der HistoryStats-Benutzeroberfläche verändern zu können. Es sollte mindestens Version 0.0.1.0 eingesetzt werden, andernfalls taucht HistoryStats nicht in den IcoLib-Einstellungen auf. Wenn Sie Miranda 0.7 oder höher benutzen, ist dieses Plugin bereits in den Core integriert. Somit ist keine weitere Installation notwendig! 
+
+[Time a chat session must last to be counted (seconds)]
+Minimaldauer einer Chatsitzung, um gezählt zu werden (Sekunden)
+[Time of first message to/from contact]
+Zeit der ersten Nachricht zum/vom Kontakt
+[Time of last message to/from contact]
+Zeit der letzten Nachricht zum/vom Kontakt
+
+[Timeline]
+Zeitleiste
+[Timeline for #{data}]
+Zeitleiste für #{data}
+[Total (sum of all chats)]
+Gesamt (Summe aller Chats)
+[Total chat duration]
+Gesamte Chatdauer
+[Total word count]
+Alle gezählten Wörter
+[Total words]
+Summe aller Wörter
+[Title (default if empty)]
+Titel (Standard, wenn leer)
+[Totals]
+Summen
+[Transforming data]
+Transformiere Daten
+[Treat meta-contacts and subcontacts as normal contacts]
+Behandle Metakontakte und Unterkontakte wie normale Kontakte
+[Unexcluded contacts]
+Unausgeschlossene Kontakte
+[Units per bar]
+Einheiten pro Balken
+[Units per block]
+Einheiten pro Block
+[Units per day]
+Einheiten pro Tag
+[Units per month (30 days)]
+Einheiten pro Monat (30 Tage)
+[Units per week]
+Einheiten pro Woche
+[Update/Setup...]
+Aktualisieren/Initialisieren...
+
+[URLs (all)]
+URLs (alle)
+[URLs (incoming)]
+URLs (eingehend)
+[URLs (outgoing)]
+URLs (ausgehend)
+[URLs (total)]
+URLs (gesamt)
+
+[Use meta-contact's history and its subcontacts' histories]
+Benutze den Verlauf des Metakontakts und der Unterkontakte
+[Use only meta-contact's history]
+Benutze nur den Verlauf des Metakontakts
+[Use only subcontacts' histories (for one meta-contact)]
+Benutze nur den Verlauf der Unterkontakte (eines Metakontakts)
+[Use this plugin if you'd like to be automatically notified when a new version of HistoryStats is published. This plugin can install the updated version, too. As always, be sure to use a recent version though this shouldn't be a big problem with this plugin.]
+Benutzen Sie dieses Plugin, wenn Sie automatisch informiert werden wollen, falls eine neue Version von HistoryStats erscheint. Dieses Plugin kann die neue Version ebenfalls direkt installieren. Sich immer sicher zu sein, die neueste Version eines Plugins zu benutzen, sollte mit dem Updater kein Problem mehr darstellen.
+[Installing libpng on your system has the benefit of being able to let HistoryStats write PNG files for the graphs it generates. This can reduce the size of the generated file and improve the rendering speed when viewing your statistics. Additionally, there are columns that are only available with PNG output.\r\n\r\nMost recent systems already have an installation of libpng. Just check if you can enable the PNG output. If not, download and place "libpng13.dll" (see link below, then Current binaries: GnuWin32, download "libpng-x.x.x-bin.zip") and "zlib1.dll" (see links below) in your Miranda IM folder or in its Plugins folder. Having done so and having restarted Miranda IM, you should be able to enable the PNG output option.]
+libpng auf Ihrem System zu installieren hat den großen Vorteil, dass es HistoryStats ermöglicht PNG-Dateien für die Balken zu erstellen. Dies kann den benötigten Speicherplatz reduzieren und die Rechenzeit bei der Ansicht deiner Statistik verkürzen. Zudem können manche Spalten nur im PNG-Format ausgegeben werden.\r\n\r\nDie meisten Systeme haben libpng bereits vorinstalliert. Versuchen Sie einfach die PNG-Ausgabe zu aktivieren. Falls es nicht klappen sollte, müssen Sie "libpng13.dll" (klicken Sie auf unten stehende Links, dann 'Current binaries: GnuWin32', und laden Sie sich "libpng-x.x.x-bin.zip" herunter) und "zlib1" (klicken Sie auf unten stehende Links) in Ihren 'Miranda IM/Plugins'- oder 'Miranda IM'-Ordner installieren. Wenn Sie das getan und Miranda neu gestartet haben, sollte die Aktivierung der PNG-Ausgabe funktionieren.
+[All sets are shared between columns. However, only the checked ones will be applied to the current column. Use the right field to specify words putting every word on a separate line.]
+Alle Regeln werden zwischen allen Spalten geteilt. Nur diejenigen, die aktiviert sind, werden auf ausgewählte Spalten angewendet. Benutzen Sie das rechte Feld um Wörter festzulegen. Schreiben Sie jedes Wort in eine neue Zeile.
+[Already existing file]
+Bereits existierende Datei
+[Always overwrite already existing files (dangerous!)]
+Bereits existierende Dateien ohne Nachfrage überschreiben (gefährlich!)
+[An error occured while trying to update/setup the configuration. Please report this error to the author of this plugin.]
+Beim Aktualisieren/Initialisieren der Konfiguration ist ein Fehler aufgetreten. Bitte melden Sie diesen Fehler an den Autor dieses Plugins.
+
+[wday2:Su]
+wday2:So
+[wday2:Th]
+wday2:Do
+[wday2:Tu]
+wday2:Di
+[wday2:We]
+wday2:Mi
+[wday3:Fri]
+wday3:Fr
+[wday3:Mon]
+wday3:Mo
+[wday3:Sat]
+wday3:Sa
+[wday3:Sun]
+wday3:So
+[wday3:Thu]
+wday3:Do
+[wday3:Tue]
+wday3:Di
+[wday3:Wed]
+wday3:Mi
+[wdayF:Friday]
+wdayF:Freitag
+[wdayF:Monday]
+wdayF:Montag
+[wdayF:Saturday]
+wdayF:Samstag
+[wdayF:Sunday]
+wdayF:Sonntag
+[wdayF:Thursday]
+wdayF:Donnerstag
+[wdayF:Tuesday]
+wdayF:Dienstag
+[wdayF:Wednesday]
+wdayF:Mittwoch
+[Weeks]
+Wochen
+[Word Count]
+Gezählte Wörter
+[Word count for each word (tooltip)]
+Wortzahl für jedes Wort (Tooltip)
+[Word count type]
+Wörter zählen Methode
+[Word delimiting characters]
+Wort trennende Zeichen
+[Words]
+Wörter
+[Words type]
+Wörtertyp
+[Writing omitted contacts]
+Schreibe weggelassene Kontakte
+[Writing totals]
+Schreibe summen
+[You have unsaved settings. Do you want to save before running HistoryStats?]
+Sie haben ungespeicherte Einstellungen. Möchten Sie sie speichern, bevor Sie HistoryStats aufrufen?
+[Your settings are problematic. Click to learn more...]
+Ihre Einstellungen sind problematisch. Klicken Sie hier für mehr Informationen...
+
+[Button (disabled)]
+Schaltfläche (deaktiviert)
+[Checkbox (checked)]
+Checkbox (ausgewählt)
+[Checkbox (disabled)]
+Checkbox (deaktiviert)
+[Checkbox (checked & disabled)]
+Checkbox (ausgewählt & deaktiviert)
+[Date/time picker]
+Datums-/Zeitauswahl
+[Date/time picker (disabled)]
+Datums-/Zeitauswahl (deaktiviert)
+[Edit control]
+Eingabefeld
+[Edit control (disabled)]
+Eingabefeld (deaktiviert)
+[Show statistics (main menu)]
+Statistik anzeigen (Hauptmenü)
+[Excluded contacts]
+Ausgeschlossene Kontakte
+[Options tree]
+Einstellungen
+
+[Creates nice statistics using your message history.\r\n(Requires Miranda IM 0.6.7 Unicode or above.)]
+Erstellt nützliche Statistiken aus ihren Verläufen. (Benötigt Miranda IM 0.6.7 Unicode oder höher.)

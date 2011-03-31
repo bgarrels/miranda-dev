@@ -1,0 +1,10 @@
+; Pluginname: Miranda mmap database driver
+; Version: 0.9.11.2
+; Dateiname: dbx_mmap.dll
+; Unique ID: {f7a6b27c-9d9c-4a42-be86-a448ae109161}
+; Link: Stable & Testing
+; Autor: Miranda-IM project
+; Übersetzung: 08.08.08 von Tuxman
+
+[Provides Miranda database support: global settings, contacts, history, settings per contact.]
+Stellt Unterstützung für die Miranda-Profildatei bereit: Globale Einstellungen, Kontakte, Verlauf, Einstellungen pro Kontakt.

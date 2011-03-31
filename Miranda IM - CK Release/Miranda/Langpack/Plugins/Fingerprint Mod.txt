@@ -1,0 +1,17 @@
+; Pluginname: Fingerprint Mod 
+; Version: 0.2.2.3
+; Dateiname: fingerprint.dll
+; Autor(en): Artem Shpynov aka FYR, Bio, Faith Healer, HierOS
+; Unique ID: {687364af-58b0-4af2-a4ee-20f40a8d9afb}
+; http://addons.miranda-im.org/details.php?action=viewfile&id=4300
+; SVN: http://code.google.com/p/fingerprintmod/source/browse/
+; Übersetzung: 09.08.2010 von FREAK_THEMIGHTY
+
+[Showing groups]
+Gruppen anzeigen
+[icon slot]
+Icon-Slot
+[Official]
+Offizielle
+[Undetected client]
+Unerkannter Client

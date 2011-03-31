@@ -1,0 +1,71 @@
+; Pluginname: Facebook Protokoll (Robyer mod)
+; Version: 0.1.2.1
+; Dateiname: facebook.dll
+; Unique ID: {dde897ad-e40a-4e2c-98d8-d20b575e96bc}
+; Autor: Jarvis (Michal Zelinka)
+; Link: http://dev.miranda.im/~jarvis/
+; Übersetzung: 0123hallo
+; Besonderheiten: Hier werden auch alle Mods unterstützt!
+
+[Use balloon notifications in systray instead of Popups]
+Benutze Balloongereignisse im Systemtray anstatt Popups
+[Post Miranda statuses to Wall]
+Setze Miranda IM Status auf die Wand
+[Force secure (HTTPS) connection]
+Sichere (HTTPS)-Verbindung erzwingen
+[Use a secure connection (HTTPS)]
+Benutze eine sichere Verbindung (HTTPS)
+[Automatically close chat windows (on website)]
+Automatisch Chatfenster schliessen (auf Webseiten)
+[Miranda IM (default)]
+Miranda IM (Standard)
+[Facebook Protocol]
+Facebook-Protokoll
+[Default group for newly added contacts:]
+Standardgruppe für neue hinzugefügte Kontakte:
+[User-Agent:]
+User-Agent:
+[Create a new Facebook account]
+Ein neues Facebook-Konto erstellen...
+[%s avatar connection]
+%s Avatarverbindung
+[Mind]
+Pinnwand
+[Mind...]
+Was machst du gerade?
+[What's on your mind?]
+Was machst du gerade? (Pinnwand)
+[Share]
+Mitteilen
+[Show cookies]
+Cookies zeigen
+[Info Dialog]
+Infodialog
+[Enable logging for debugging purposes]
+Debug-Loggen aktivieren
+[Set Facebook "What's on my mind" status through Miranda status]
+Setze "Was machst du gerade?" via Miranda-Status
+[Enable notifications]
+Benachrichtigungen aktivieren
+[Enable feeds]
+Feeds aktivieren
+[Sample notification]
+Beispiel Benachrichtigung
+[Sample newsfeed]
+Beispiel Newsfeed
+[Sample request]
+Beispielanfrage
+[Sample event]
+Beispielereignis
+[(0 = default, -1 = infinity)]
+(0 = Standard, -1 = unendlich)
+[Timeout (sec.)]
+Timeout (Sek.)
+[Notify events]
+Benachrichtigungsereignisse
+[Probably wrong password entered, please try again.]
+Möglicherweise wurde das falsche Passwort eingegeben, bitte versuchen Sie es erneut.
+[Something happened to Facebook. Maybe there was some major update or you have Facebook Lite set as default.]
+Etwas passierte mit Facebook. Vielleicht gab es ein großes Update oder Sie haben Facebook Lite als Standard gesetzt.
+[Set Facebook status through Miranda status]
+Miranda-Statustext als Mindtext verwenden.

@@ -1,0 +1,145 @@
+; Pluginname: Quotes
+; Version: 0.0.19.0 #2504
+; Dateiname: Quotes.dll
+; Autor: Dioksin
+; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4021
+; Übersetzung: CHEF-KOCH am 20.06.2010
+
+[Currency Converter]
+Aktueller Konverter
+[Quote/Rate up]
+Quote/Rate nach oben
+[Quote/Rate down]
+Quote/Rate nach unten
+
+[Text Files (*.txt)\0*.txt;*.log\0All files (*.*)\0*.*\0\0]
+Textdatei (*.txt)\0*.txt;*.log\0Alle Dateien (*.*)\0*.*\0\0
+
+[We should never get here!]
+Wir sollten das niemals erhalten!
+[Error occurred during html parsing.]
+Fehler während des HTML-Parsens.
+[Error occurred during site access.]
+Fehler während des Seitenzugriffs.
+
+[Miranda could not load Quotes plugin. XML parser is missing.]
+Miranda IM konnte das Quotes-Plugin nicht laden. Der XML-Parser fehlt.
+[Miranda could not load Quotes plugin. Microsoft HTML parser is missing.]
+Miranda IM konnte das Quotes-Plugin nicht laden. Der Microsoft-HTML-Parser fehlt.
+
+[Xml File (*.xml)]
+XML-Datei (*.xml)
+[All files (*.*)]
+Alle Dateien (*.*)
+
+[Do not add to popup's history]
+Nicht zum Popup-Verlauf hinzufügen
+[Use user-defined colours]
+Benutzerdefinierte Farben
+[Popup Window Settings]
+Popup-Fenstereinstellungen
+[Popup settings...]
+Popup-Einstellungen...
+[Show Popup Window Only if Value &Changed]
+Zeige Popup-Fenster nur, falls Wert sich ändert
+[&Advanced Settings...]
+Erweiterte Einstellungen
+[&Select File:]
+Wähle Datei au&s:
+[Use &External File]
+Benutze &externe Datei
+[Use &Internal History]
+Benutze &internen Verlauf
+[Show &Popup Window]
+Zeige Popupfenster
+[Add to &Log only if Value Changed]
+Nur dem &Log hinzufügen, falls der Wert sich ändert
+[&Add to History only if Value Changed]
+Zum Verl&auf nur hinzufügen, falls Wert sich ändert
+[Show Popup Window Only if Value &Change]
+Zeige Popupfenster nur, falls Wert si&ch ändert
+[&Swap]
+Tau&sche
+[Variables Allowed: %miranda_userdata%,%quotename%]
+Erlaubte Variablen: %miranda_userdata%,%quotename%
+[Info provided by <a href=""http://www.dukascopy.com"">Dukascopy Swiss Forex Group</a>]
+Informationen von <a href=""http://www.dukascopy.com"">Dukascopy Swiss Forex Group</a>
+[&Refresh Rates Every:]
+Aktualisiere &Raten alle:
+[&Watched currency rates:]
+Beobachte aktuelle Raten:
+[&Convert:]
+Konvertiere:
+[&to:]
+zu:
+[Refresh All Quotes\\Rates]
+Erneuer Alle Quotes\\Raten
+[Currency Converter...]
+Aktueller Konverter
+[Import All Quotes]
+Importiere alle Quotes
+[Edit Settings...]
+Ändere Einstellungen ...
+[Failed to reset event]
+Das Zurücksetzen aller Ereignisse schlug fehl
+[Quotes plugin requires Miranda IM 0.8.0.0 or later]
+Quotes-Plugin benötigt mindestens Miranda IM 0.8.0.0
+[&Choose Quotes to watch in contact list:]
+Wählen Sie Quotes aus, die in der Kontaktliste beobachtet werden sollen:
+[&Refresh Quotes Every:]
+Aktualisie&re Quotes alle:
+[&Display in Contact List as:]
+Zeige in Kontaktliste als:
+[&Status Message:]
+&Statusnachricht:
+[&Variables...]
+&Variablen...
+[V&ariables...]
+V&ariablen....
+[&Google Finance:]
+&Google Finanzen:
+[&Watched Quotes:]
+Beobachte folgende Quotes:
+
+[Enter positive number.]
+Geben Sie eine positive Zahl ein.
+[Info provided by]
+Informationen bereitgestellt von
+
+[Enter integer value between 1 and 60.]
+Geben Sie einen ganzzahligen Wert zwischen 1 und 60 ein.
+[Enter integer value between 1 and 24.]
+Geben Sie einen ganzzahligen Wert zwischen 1 und 24 ein.
+[Enter text to display in contact list.]
+Geben sie einen Text für die Kontaktliste ein.
+
+[From Currency Full Name]
+Vom aktuellen vollen Namen
+[From Currency Short Name]
+Vom aktuellen kurzen Namen
+[Into Currency Full Name]
+In aktuellen vollen Namen
+[Into Currency Short Name]
+In aktuellen kurzen Namen
+[Short notation for \"%f/%i\]
+Kurzschreibweise für \"%f/%i\
+[Source of Information]
+Quelle der Informationen
+[Rate Value]
+Ratenwerte
+[Previous Rate Value]
+Vorherige Ratenwerte
+[Fetch Time]
+Zeit holen
+[Fetch Date]
+Datum holen
+[Fetch Time and Date]
+Zeit und Datum holen
+[Percentage Character (%)]
+Prozentzeichen (%)
+[Left slash (\\)]
+Linker Schrägstrich (\\)
+[Percent Change to After Hours]
+Prozentual nach Stunden geändert
+[Percent Change to Yesterday Close]
+Prozentual nach den gestrigen Schließen geändert
