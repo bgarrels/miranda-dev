@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9,00"
 	Name="ClientIcons_RSS"
-	ProjectGUID="{652D6FB7-6E8B-4A62-9DB4-0002C46D13D2}"
+	ProjectGUID="{47204E10-B438-4DFD-B115-E0F5A3F8A05E}"
 	RootNamespace="ICONS"
 	TargetFrameworkVersion="131072"
 	>

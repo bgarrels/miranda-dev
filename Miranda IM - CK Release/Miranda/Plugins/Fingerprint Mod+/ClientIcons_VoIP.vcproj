@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9,00"
 	Name="ClientIcons_VoIP"
-	ProjectGUID="{D8F13A0D-7405-4CD5-ADE2-548DE7881138}"
+	ProjectGUID="{47204E10-B438-4DFD-B115-E0F5A3F8A05E}"
 	RootNamespace="ICONS"
 	TargetFrameworkVersion="131072"
 	>

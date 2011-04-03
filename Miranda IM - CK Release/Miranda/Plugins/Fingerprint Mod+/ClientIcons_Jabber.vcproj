@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9,00"
 	Name="ClientIcons_Jabber"
-	ProjectGUID="{201704F0-183B-4A9A-B934-C0C795D0A2E9}"
+	ProjectGUID="{47204E10-B438-4DFD-B115-E0F5A3F8A05E}"
 	RootNamespace="ICONS"
 	TargetFrameworkVersion="131072"
 	>

@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9,00"
 	Name="ClientIcons_IRC"
-	ProjectGUID="{8EE60199-C357-4531-BBB8-D1D4607B77D1}"
+	ProjectGUID="{47204E10-B438-4DFD-B115-E0F5A3F8A05E}"
 	RootNamespace="ICONS"
 	TargetFrameworkVersion="131072"
 	>

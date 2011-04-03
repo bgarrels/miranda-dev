@@ -749,13 +749,22 @@ int OnButtonPressed(WPARAM wParam, LPARAM lParam)
 			}
 			else
 			{
-				int FinalLen = slen + SIZEOF(dbv.ptszVal) + 1;
-				TCHAR* FinalString = (TCHAR*)mir_alloc((FinalLen+1)*sizeof(TCHAR));
-				mir_sntprintf(FinalString, FinalLen, _T("%s %s"), dbv.ptszVal, sel);
-				SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)FinalString);
-				SendMessage(hEdit, EM_SETSEL, 0, FinalLen);
-				SendMessage(cbcd->hwndFrom, WM_COMMAND, IDOK, 0);
-				mir_free(FinalString);
+				if (_tcsncmp(sel, dbv.ptszVal, _tcslen(dbv.ptszVal)) == 0)
+				{
+					SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sel);
+					SendMessage(hEdit, EM_SETSEL, 0, slen);
+					SendMessage(cbcd->hwndFrom, WM_COMMAND, IDOK, 0);
+				}
+				else
+				{
+					int FinalLen = slen + SIZEOF(dbv.ptszVal) + 1;
+					TCHAR* FinalString = (TCHAR*)mir_alloc((FinalLen+1)*sizeof(TCHAR));
+					mir_sntprintf(FinalString, FinalLen, _T("%s %s"), dbv.ptszVal, sel);
+					SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)FinalString);
+					SendMessage(hEdit, EM_SETSEL, 0, FinalLen);
+					SendMessage(cbcd->hwndFrom, WM_COMMAND, IDOK, 0);
+					mir_free(FinalString);
+				}
 			}
 		}
 		mir_free(sel);
@@ -789,13 +798,22 @@ int OnButtonPressed(WPARAM wParam, LPARAM lParam)
 		}
 		else
 		{
-			int FinalLen = slen + SIZEOF(dbv.ptszVal) + 1;
-			TCHAR* FinalString = (TCHAR*)mir_alloc((FinalLen+1)*sizeof(TCHAR));
-			mir_sntprintf(FinalString, FinalLen, _T("%s %s"), dbv.ptszVal, sel);
-			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)FinalString);
-			SendMessage(hEdit, EM_SETSEL, 0, FinalLen);
-			SendMessage(cbcd->hwndFrom, WM_COMMAND, IDOK, 0);
-			mir_free(FinalString);
+			if (_tcsncmp(sel, dbv.ptszVal, _tcslen(dbv.ptszVal)) == 0)
+			{
+				SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sel);
+				SendMessage(hEdit, EM_SETSEL, 0, slen);
+				SendMessage(cbcd->hwndFrom, WM_COMMAND, IDOK, 0);
+			}
+			else
+			{
+				int FinalLen = slen + SIZEOF(dbv.ptszVal) + 1;
+				TCHAR* FinalString = (TCHAR*)mir_alloc((FinalLen+1)*sizeof(TCHAR));
+				mir_sntprintf(FinalString, FinalLen, _T("%s %s"), dbv.ptszVal, sel);
+				SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)FinalString);
+				SendMessage(hEdit, EM_SETSEL, 0, FinalLen);
+				SendMessage(cbcd->hwndFrom, WM_COMMAND, IDOK, 0);
+				mir_free(FinalString);
+			}
 		}
 		mir_free(sel);
 		return 1;
@@ -828,13 +846,22 @@ int OnButtonPressed(WPARAM wParam, LPARAM lParam)
 		}
 		else
 		{
-			int FinalLen = slen + SIZEOF(dbv.ptszVal) + 1;
-			TCHAR* FinalString = (TCHAR*)mir_alloc((FinalLen+1)*sizeof(TCHAR));
-			mir_sntprintf(FinalString, FinalLen, _T("%s %s"), dbv.ptszVal, sel);
-			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)FinalString);
-			SendMessage(hEdit, EM_SETSEL, 0, FinalLen);
-			SendMessage(cbcd->hwndFrom, WM_COMMAND, IDOK, 0);
-			mir_free(FinalString);
+			if (_tcsncmp(sel, dbv.ptszVal, _tcslen(dbv.ptszVal)) == 0)
+			{
+				SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sel);
+				SendMessage(hEdit, EM_SETSEL, 0, slen);
+				SendMessage(cbcd->hwndFrom, WM_COMMAND, IDOK, 0);
+			}
+			else
+			{
+				int FinalLen = slen + SIZEOF(dbv.ptszVal) + 1;
+				TCHAR* FinalString = (TCHAR*)mir_alloc((FinalLen+1)*sizeof(TCHAR));
+				mir_sntprintf(FinalString, FinalLen, _T("%s %s"), dbv.ptszVal, sel);
+				SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)FinalString);
+				SendMessage(hEdit, EM_SETSEL, 0, FinalLen);
+				SendMessage(cbcd->hwndFrom, WM_COMMAND, IDOK, 0);
+				mir_free(FinalString);
+			}
 		}
 		mir_free(sel);
 		return 1;

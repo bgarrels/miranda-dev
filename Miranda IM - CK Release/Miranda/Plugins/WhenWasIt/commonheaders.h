@@ -42,7 +42,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "icons.h"
 #include "notifiers.h"
 //#include "birthdays.h"
-
 #include "win2k.h"
 #include "newpluginapi.h"
 #include "m_database.h"
@@ -54,16 +53,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "m_history.h"
 #include "m_contacts.h"
 #include "m_popup.h"
-//#include "../../../include/m_popupw.h"
 #include "m_fontservice.h"
 #include "m_utils.h"
 #include "m_icolib.h"
 #include "m_cluiframes.h"
 #include "m_clui.h"
 #include "m_protosvc.h"
+#include "m_message.h"
+
 #include "m_toptoolbar.h"
 #include "m_metacontacts.h"
-#include "m_message.h"
 #include "m_updater.h"
 #include "m_extraicons.h"
 

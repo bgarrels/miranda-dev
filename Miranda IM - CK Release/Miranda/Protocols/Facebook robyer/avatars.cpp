@@ -39,10 +39,11 @@ void FacebookProto::UpdateAvatarWorker(void *p)
 	{
 		std::string new_url = data->url;
 		std::string ext = new_url.substr(new_url.rfind('.'));
-		if ( new_url == FACEBOOK_DEFAULT_AVATAR_URL )
-			new_url = new_url.replace( new_url.rfind( "/q" ), 2, "/d" );
-		else
-			new_url = new_url.replace( new_url.rfind( "_q." ), 3, "_s." );
+
+		std::string::size_type pos = new_url.rfind( "_q." );
+		if (pos != std::string::npos)
+			new_url = new_url.replace( pos, 3, "_s." );
+
 		std::string filename = GetAvatarFolder() + '\\' + dbv.pszVal + ext;
 		DBFreeVariant(&dbv);
 
@@ -97,13 +98,10 @@ int FacebookProto::GetAvatarInfo(WPARAM wParam, LPARAM lParam)
 
 			AI->format = ext_to_format(ext);
 
-			if ( file_name.length() )
-			{
-				strncpy((char*)AI->filename, file_name.c_str(), (int)AI->cbSize);
+			strncpy((char*)AI->filename, file_name.c_str(), (int)AI->cbSize);
 
-				if (!_access((char*)AI->filename, 0))
-					return GAIR_SUCCESS;
-			}
+			if (!_access((char*)AI->filename, 0))
+				return GAIR_SUCCESS;
 		}
 	}
 	return GAIR_NOAVATAR;
@@ -133,8 +131,7 @@ int FacebookProto::GetMyAvatar(WPARAM wParam, LPARAM lParam)
 			std::string file_name = GetAvatarFolder() + '\\' + dbv.pszVal + ext;
 			DBFreeVariant(&dbv);
 
-			if ( file_name.length() )
-				strncpy((char*)wParam, file_name.c_str(), (int)lParam);
+			strncpy((char*)wParam, file_name.c_str(), (int)lParam);
 
 			if (!_access((char*)wParam, 0))
 				return 0; // Avatar file exists
@@ -145,17 +142,15 @@ int FacebookProto::GetMyAvatar(WPARAM wParam, LPARAM lParam)
 	return -2; // No avatar set
 }
 
-bool FacebookProto::AvatarExists(std::string user_id)
+bool FacebookProto::AvatarExists(facebook_user* fbu)
 {
-	std::string base = GetAvatarFolder() + '\\' + user_id;
-
-	for ( BYTE i = 0; i < SIZEOF(extensions); i++ )
+	if (!fbu->image_url.empty())
 	{
-		std::string file_name = base + extensions[i];
-		int ret = _access(file_name.c_str(), 0);
-		if (!ret)
-			return true; // Avatar file exists, we doesn't need refresh
-	} 
+		std::string ext = fbu->image_url.substr(fbu->image_url.rfind('.'));
+		std::string file_name = GetAvatarFolder() + '\\' + fbu->user_id + ext;
 
-	return false; // Avatar file doesn't exist, we need refresh
+		if (!_access(file_name.c_str(), 0))
+			return true;
+	}
+	return false;
 }

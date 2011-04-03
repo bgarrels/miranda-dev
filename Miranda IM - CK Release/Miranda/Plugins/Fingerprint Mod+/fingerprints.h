@@ -216,7 +216,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_orkut",					_T("orkut*"),									_T("orkut"),							_T("ClientIcons_Jabber"),	IDI_ORKUT, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_iGoogle",					_T("iGoogle*"),									_T("iGoogle"),							_T("ClientIcons_Jabber"),	IDI_IGOOGLE, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_GMail",					_T("|*gmail.*|GMail*"),							_T("GMail"),							_T("ClientIcons_Jabber"),	IDI_GMAIL, INVALID_HANDLE_VALUE, JABBER_CASE },
-	{ "client_GTalk",					_T("|*Talk.v*|*Google*Talk*|*Gtalk*"),			_T("GoogleTalk aka GTalk"),				_T("ClientIcons_Jabber"),	IDI_GTALK, INVALID_HANDLE_VALUE, JABBER_CASE },
+	{ "client_GTalk",					_T("|*Talk.v*|*Google*Talk*|*Gtalk*|*-iPhon*"),	_T("GoogleTalk aka GTalk"),				_T("ClientIcons_Jabber"),	IDI_GTALK, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Talkonaut",				_T("*Talkonaut*"),								_T("Talkonaut"),						_T("ClientIcons_Jabber"),	IDI_TALKONAUT, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Jajc",					_T("|*Jajc*|Just Another Jabber Client"),		_T("JAJC"),								_T("ClientIcons_Jabber"),	IDI_JAJC, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Tkabber",					_T("|*Tkabber*|http://tkabber*"),				_T("Tkabber"),							_T("ClientIcons_Jabber"),	IDI_TKABBER, INVALID_HANDLE_VALUE, JABBER_CASE },

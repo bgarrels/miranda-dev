@@ -21,8 +21,9 @@ Boston, MA 02111-1307, USA.
 
 HINSTANCE hInst = NULL;
 PLUGINLINK *pluginLink;
-HANDLE hOptHook = NULL,  hLoadHook = NULL, hPackUpdaterFolder = NULL;
+HANDLE hOptHook = NULL,  hLoadHook = NULL, hPackUpdaterFolder = NULL, hCheckUpdates = NULL, hEmptyFolder = NULL;
 TCHAR tszRoot[MAX_PATH] = {0};
+int hLangpack;
 struct MM_INTERFACE mmi;
 
 PLUGININFOEX pluginInfoEx = {
@@ -62,6 +63,7 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 {
 	CLISTMENUITEM mi;
 	pluginLink = link;
+	mir_getLP(&pluginInfoEx);
 	mir_getMMI(&mmi);
 	TCHAR* tszFolder = Utils_ReplaceVarsT(_T("%miranda_userdata%\\"DEFAULT_UPDATES_FOLDER));
 	lstrcpyn(tszRoot, tszFolder, SIZEOF(tszRoot));
@@ -77,7 +79,7 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	IcoLibInit();
 
 	// Add cheking update menu item
-	CreateServiceFunction(MODNAME"/CheckUpdates", MenuCommand);
+	hCheckUpdates = CreateServiceFunction(MODNAME"/CheckUpdates", MenuCommand);
 	ZeroMemory(&mi, sizeof(mi));
 	mi.cbSize = sizeof(mi);
 	mi.position = -0x7FFFFFFF;
@@ -87,7 +89,7 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	mi.pszService = MODNAME"/CheckUpdates";
 	CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM)&mi);
 	// Add empty updates folder menu item
-	CreateServiceFunction(MODNAME"/EmptyFolder", EmptyFolder);
+	hEmptyFolder = CreateServiceFunction(MODNAME"/EmptyFolder", EmptyFolder);
 	ZeroMemory(&mi, sizeof(mi));
 	mi.cbSize = sizeof(mi);
 	mi.position = -0x7FFFFFFF;
@@ -111,5 +113,7 @@ extern "C" __declspec(dllexport) int Unload(void)
 	NetlibUnInit();
 	UnhookEvent(hOptHook);
 	UnhookEvent(hLoadHook);
+	DestroyServiceFunction(hCheckUpdates);
+	DestroyServiceFunction(hEmptyFolder);
 	return 0;
 }

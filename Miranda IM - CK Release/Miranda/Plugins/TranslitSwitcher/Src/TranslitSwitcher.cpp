@@ -219,6 +219,8 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 extern "C" __declspec(dllexport) int Unload(void)
 {
 	DestroyServiceFunction(hService);
+	DestroyServiceFunction(hService2);
+	DestroyServiceFunction(hService3);
 	UnhookEvent(hHook);
 	UnhookEvent(hOnButtonPressed);
 

@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9,00"
 	Name="ClientIcons_MRA"
-	ProjectGUID="{25356544-D575-4D3B-A001-69AF5A299B6B}"
+	ProjectGUID="{47204E10-B438-4DFD-B115-E0F5A3F8A05E}"
 	RootNamespace="ICONS"
 	TargetFrameworkVersion="131072"
 	>

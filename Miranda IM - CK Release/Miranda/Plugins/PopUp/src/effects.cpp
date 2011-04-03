@@ -33,6 +33,7 @@ Last change by : $Author: Merlin_de $
 #include "headers.h"
 
 class MyTestEffect;
+HANDLE hSquareFad;
 
 class MyTestEffect: public IPopupPlusEffect
 {
@@ -88,6 +89,6 @@ static INT_PTR svcCreateEffect_MyTestEffect(WPARAM, LPARAM) { return (INT_PTR)(n
 
 void PopupEfectsInitialize()
 {
-	CreateServiceFunction(MS_POPUP_CREATEVFX "Square fading", svcCreateEffect_MyTestEffect);
+	hSquareFad = CreateServiceFunction(MS_POPUP_CREATEVFX "Square fading", svcCreateEffect_MyTestEffect);
 	CallService(MS_POPUP_REGISTERVFX, 0, (LPARAM)"Square fading");
 }

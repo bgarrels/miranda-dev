@@ -72,6 +72,12 @@ HANDLE hMenuRoot			= NULL;
 HANDLE hMenuItem			= NULL;
 HANDLE hMenuItemHistory		= NULL;
 
+//==== ServiceFunctions Handles ====
+HANDLE hShowHistory			= NULL;
+HANDLE hTogglePopup			= NULL;
+HANDLE hGetStatus			= NULL;
+HANDLE hGetVersion			= NULL;
+
 //===== Event Handles =====
 HANDLE hOptionsInitialize;
 //HANDLE hNotifyOptionsInitialize;		deprecatet
@@ -320,13 +326,13 @@ void InitMenuItems(void) {
 	// Add item to main menu
 	mi.hParentMenu		= (HGENMENU)hMenuRoot;
 
-	CreateServiceFunction(MENUCOMMAND_SVC, svcEnableDisableMenuCommand);
+	hTogglePopup = CreateServiceFunction(MENUCOMMAND_SVC, svcEnableDisableMenuCommand);
 	mi.ptszName			= PopUpOptions.ModuleIsEnabled ? LPGENT("Disable &popup module") : LPGENT("Enable &popup module");
 	mi.pszService		= MENUCOMMAND_SVC;
 	hMenuItem			= (HANDLE)CallService(MS_CLIST_ADDMAINMENUITEM, (WPARAM)0, (LPARAM)&mi);
 
 	// Popup History
-	CreateServiceFunction(MENUCOMMAND_HISTORY, svcShowHistory);
+	hShowHistory = CreateServiceFunction(MENUCOMMAND_HISTORY, svcShowHistory);
 	mi.position			= 1000000000;
 	mi.popupPosition	= 1999990000;
 	mi.ptszName			= LPGENT("Popup History");
@@ -543,8 +549,8 @@ MIRAPI int Load(PLUGINLINK *link)
 	CallService(MS_SYSTEM_GETVERSIONTEXT, (WPARAM) sizeof(ver), (LPARAM) ver);
 	g_popup.isMirUnicode = strstr(ver, "Unicode") != NULL;
 
-	CreateServiceFunction("PopupPlus/GetVersion", svcGetVersion);
-	CreateServiceFunction(MS_POPUP_GETSTATUS, GetStatus);
+	hGetVersion = CreateServiceFunction("PopupPlus/GetVersion", svcGetVersion);
+	hGetStatus = CreateServiceFunction(MS_POPUP_GETSTATUS, GetStatus);
 
 	DuplicateHandle(GetCurrentProcess(), GetCurrentThread(), GetCurrentProcess(), &hMainThread, THREAD_SET_CONTEXT, FALSE, 0);
 
@@ -707,6 +713,12 @@ MIRAPI int Unload(void)
 	UnhookEvent(hIconsChanged);
 	UnhookEvent(hFontsChanged);
 
+	DestroyServiceFunction(hShowHistory);
+	DestroyServiceFunction(hTogglePopup);
+	DestroyServiceFunction(hGetStatus);
+	DestroyServiceFunction(hGetVersion);
+	DestroyServiceFunction(hSquareFad);
+	
 	DeleteObject(fonts.title);
 	DeleteObject(fonts.clock);
 	DeleteObject(fonts.text);
