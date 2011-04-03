@@ -106,13 +106,13 @@ INT_PTR CALLBACK DlgProcOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPara
 					size=SendDlgItemMessage(hwndDlg,IDC_MESSAGE,WM_GETTEXTLENGTH,0,0)+1;
 					GetDlgItemText(hwndDlg,IDC_MESSAGE,ptszMessage[lastIndex],size);
 
-					for (int c=ID_STATUS_ONLINE; c<ID_STATUS_IDLE-ID_STATUS_ONLINE; c++)
+					for (int c=ID_STATUS_ONLINE; c<ID_STATUS_IDLE; c++)
 					{
 						if (c == 40072 || c == 40077 || c == 40078)
 							continue;
 						else
 						{
-						mir_snprintf(szStatus,SIZEOF(szStatus),"%d",ID_STATUS_ONLINE+c);
+						mir_snprintf(szStatus,SIZEOF(szStatus),"%d",c);
 
 						if (c<40077 && ptszMessage[c-ID_STATUS_ONLINE-1])
 							DBWriteContactSettingTString(NULL,protocolname,szStatus,ptszMessage[c-ID_STATUS_ONLINE-1]);
@@ -127,7 +127,7 @@ INT_PTR CALLBACK DlgProcOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPara
 			}
 			break;
 		case WM_DESTROY:
-			for (int c=ID_STATUS_ONLINE; c<ID_STATUS_IDLE-ID_STATUS_ONLINE; c++)
+			for (int c=ID_STATUS_ONLINE; c<ID_STATUS_IDLE; c++)
 			{
 				if (c == 40072 || c == 40077 || c == 40078)
 					continue;
