@@ -74,7 +74,7 @@ BEGIN
             VALUE "FileDescription", "AddContact+ plugin for Miranda IM\0"
             VALUE "FileVersion", "0.9.8.6\0"
             VALUE "InternalName", "addcontactplus\0"
-            VALUE "LegalCopyright", "© 2007-2010 Bartosz 'Dezeath' Bia³ek\0"
+            VALUE "LegalCopyright", "© 2007-2011 Bartosz 'Dezeath' Bia³ek\0"
             VALUE "OriginalFilename", "addcontactplus.dll\0"
             VALUE "ProductName", "AddContact+\0"
             VALUE "ProductVersion", "0.9.8.6\0"
@@ -115,27 +115,28 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // Dialog
 //
 
-IDD_ADDCONTACT DIALOGEX 0, 0, 230, 180
+IDD_ADDCONTACT DIALOGEX 0, 0, 230, 205
 STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_3DLOOK | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_CONTROLPARENT
 CAPTION "Add Contact"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    LTEXT           "User ID:",IDC_IDLABEL,6,4,89,10
-    EDITTEXT        IDC_USERID,6,16,90,12,ES_AUTOHSCROLL
-    LTEXT           "Account:",IDC_STATIC,112,4,108,10
-    CONTROL         "",IDC_PROTO,"ComboBoxEx32",CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP,112,16,110,80
-    LTEXT           "Custom name:",IDC_STATIC,6,33,89,10
-    EDITTEXT        IDC_MYHANDLE,6,45,90,12,ES_AUTOHSCROLL
-    LTEXT           "Group:",IDC_STATIC,112,33,108,10
-    COMBOBOX        IDC_GROUP,112,45,110,60,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    GROUPBOX        "Options",IDC_STATIC,7,62,216,43
-    CONTROL         "Send ""You were added""",IDC_ADDED,"Button", BS_AUTOCHECKBOX | WS_TABSTOP,11,75,204,10
-    CONTROL         "Send authorization request",IDC_AUTH,"Button", BS_AUTOCHECKBOX | WS_TABSTOP,11,89,204,10
-    GROUPBOX        "Authorization Request",IDC_AUTHGB,7,108,216,45
-    EDITTEXT        IDC_AUTHREQ,13,118,204,29,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
-    DEFPUSHBUTTON   "&Add",IDOK,20,159,72,14
-    PUSHBUTTON      "&Cancel",IDCANCEL,139,159,71,14
+    CONTROL         "Add Contact\nAdd a contact to your contact list",IDC_HEADERBAR,"MHeaderbarCtrl",0x0,0,0,230,25
+    LTEXT           "Account:",IDC_STATIC,6,29,89,10
+    CONTROL         "",IDC_PROTO,"ComboBoxEx32",CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP,6,41,90,80
+    LTEXT           "Contact ID:",IDC_IDLABEL,112,29,108,10
+    EDITTEXT        IDC_USERID,112,41,110,12,ES_AUTOHSCROLL
+    LTEXT           "Custom name:",IDC_STATIC,6,58,89,10
+    EDITTEXT        IDC_MYHANDLE,6,70,90,12,ES_AUTOHSCROLL
+    LTEXT           "Group:",IDC_STATIC,112,58,108,10
+    COMBOBOX        IDC_GROUP,112,70,110,60,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Options",IDC_STATIC,7,87,216,43
+    CONTROL         "Send ""You were added""",IDC_ADDED,"Button", BS_AUTOCHECKBOX | WS_TABSTOP,11,100,204,10
+    CONTROL         "Send authorization request",IDC_AUTH,"Button", BS_AUTOCHECKBOX | WS_TABSTOP,11,114,204,10
+    GROUPBOX        "Authorization Request",IDC_AUTHGB,7,133,216,45
+    EDITTEXT        IDC_AUTHREQ,13,143,204,29,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
+    DEFPUSHBUTTON   "&Add",IDOK,20,184,72,14
+    PUSHBUTTON      "&Cancel",IDCANCEL,139,184,71,14
 END
 
 
