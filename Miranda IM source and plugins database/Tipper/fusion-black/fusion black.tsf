@@ -1,0 +1,50 @@
+[About]
+Author = Puttee 2010
+Preview = preview.jpg
+
+[Background]
+Image = tipperbg_black.png
+TM = TM_STRECH_ALL 
+Left = 16
+Top = 16
+Right = 16
+Bottom = 16
+
+[Sidebar]
+;Image = tippersidebar_black.png
+;TM = TM_STRECH_ALL 
+;Left = 16
+;Top = 16
+;Right = 4
+;Bottom = 16
+
+[Fonts]
+Title-color = 255 255 255
+Title-size = 16
+Title-effect = FONT_BOLD
+
+Label-color = 255 255 255
+Label-size = 10
+Label-effect = FONT_BOLD
+
+Value-color = 240 240 240
+Value-size = 10
+
+
+TrayTitle-face = Comic Sans MS
+TrayTitle-color = 255 255 255
+TrayTitle-size = 14
+TrayTitle-effect = FONT_BOLD
+
+Divider-color = 100 100 100
+
+[Appearance]
+General-padding = 9
+Title-indent = 30
+Text-indent = 30
+Value-indent = 8 
+Text-padding = 2
+Outer-avatar-padding = 18
+Inner-Avatar-padding = 10
+Sidebar-width = 34 
+Opacity = 100

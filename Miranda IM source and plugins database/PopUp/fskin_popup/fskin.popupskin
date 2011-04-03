@@ -1,0 +1,269 @@
+### Описание скина, контактная информация и т.д.
+# Название: fskin
+# Описание: Popup Plus Skin For Miranda IM
+# Автор: my.EXpr
+# Контакты: my.expr.notgarbage@gmail.com, ICQ 251-404-482
+# URL: N/A
+
+
+
+### Опции скина
+
+options
+   option 1 1 Отображать аватары (Show Avatars)
+   option 2 0 Выравнить аватары справа (Align Avatar To Right)
+   option 3 0 Размер аватара из настроек (Custom Avatar Size)
+   option 4 1 Отображать иконку (Show Icon)
+   option 5 1 Отображать время (Show Time)
+end
+
+
+
+### Описание элементов, свойств и условий скина
+
+# глобальные свойства ширины (w) и высоты (h)
+
+w ((16+icon.width+2+title.width+15+clock.width)>(11+text.width+12+avatar.width+10))>250
+h ((10+title.height+15+avatar.height+14)>(10+title.height+15+text.height+7))>60
+
+
+
+# верхний левый угол
+
+object
+   type bitmap
+   source fskin_popup_images/pwindow-01.top-left-corner.png
+   x 0
+   y 0
+end
+
+
+
+# верхняя средняя часть
+
+object
+   type bitmap
+   source fskin_popup_images/pwindow-02.top-middle-part.png
+   x 12
+   y 0
+   w window.width-24
+end
+
+
+
+# верхний правый угол
+
+object
+   type bitmap
+   source fskin_popup_images/pwindow-03.top-right-corner.png
+   x window.width-12
+   y 0
+end
+
+
+
+# средняя левая часть
+
+object
+   type bitmap
+   source fskin_popup_images/pwindow-04.middle-left-part.png
+   x 0
+   y 26
+   h window.height-37
+end
+
+
+
+# фон для содержимого окна
+
+object
+   type bitmap
+   source fskin_popup_images/pwindow-05.background.png
+   x 12
+   y 26
+   w window.width-24
+   h window.height-37
+end
+
+
+
+# средняя правая часть
+
+object
+   type bitmap
+   source fskin_popup_images/pwindow-06.middle-right-part.png
+   x window.width-12
+   y 26
+   h window.height-37
+end
+
+
+
+# нижний левый угол
+
+object
+   type bitmap
+   source fskin_popup_images/pwindow-07.bottom-left-corner.png
+   x 0
+   y window.height-11
+end
+
+
+
+# нижняя средняя часть
+
+object
+   type bitmap
+   source fskin_popup_images/pwindow-08.bottom-middle-part.png
+   x 12
+   y window.height-11
+   w window.width-24
+end
+
+
+
+# нижний правый угол
+
+object
+   type bitmap
+   source fskin_popup_images/pwindow-09.bottom-right-corner.png
+   x window.width-12
+   y window.height-11
+end
+
+
+
+# разделитель
+
+object
+   type bitmap
+   source fskin_popup_images/divider.png
+   layer
+   x 6
+   y 10+title.height+4
+end
+
+
+
+# часы
+
+object
+   ifset 5
+   type clock
+   source fskin_popup_images/clock.png
+   clocksize 0 4 8 4 6 7 7 6 7 6 7 7 0 0 0
+   x window.width-clock.width-8
+   y 9
+end
+
+
+
+# иконка
+
+object
+   ifset 4
+   type icon
+   x 16
+   y (4+10+title.height+4)/2-(icon.height/2)+3
+end
+
+
+
+# заголовок
+
+object
+   ifset 4
+   type title
+   color 0 0 0
+   x 16+icon.width+2
+   y 10
+end
+
+object
+   ifnotset 4
+   type title
+   color 0 0 0
+   x 15
+   y 10
+end
+
+
+
+# текст окна
+
+object
+   ifset 1
+   ifnotset 2
+   type text
+   color 0 0 0
+   x 11+avatar.width+((avatar.width/avatar.width)*6)
+   y 10+title.height+12
+   w window.width-avatar.width-((avatar.width/avatar.width)*6)-19
+end
+
+object
+   ifset 1
+   ifset 2
+   type text
+   color 0 0 0
+   x 11
+   y 10+title.height+12
+   w window.width-avatar.width-((avatar.width/avatar.width)*7)-19
+end
+
+object
+   ifnotset 1
+   type text
+   color 0 0 0
+   x 11
+   y 10+title.height+12
+   w window.width-19
+end
+
+
+
+# аватар
+
+object
+   ifset 1
+   ifnotset 2
+   ifnotset 3
+   type avatar
+   proportional 1
+   x 14
+   y 10+title.height+15
+   w 32
+end
+
+object
+   ifset 1
+   ifnotset 2
+   ifset 3
+   type avatar
+   proportional 1
+   x 14
+   y 10+title.height+15
+   w options.avatarsize
+end
+
+object
+   ifset 1
+   ifset 2
+   ifnotset 3
+   type avatar
+   proportional 1
+   x window.width-avatar.width-12
+   y 10+title.height+15
+   w 32
+end
+
+object
+   ifset 1
+   ifset 2
+   ifset 3
+   type avatar
+   proportional 1
+   x window.width-avatar.width-12
+   y 10+title.height+15
+   w options.avatarsize
+end
