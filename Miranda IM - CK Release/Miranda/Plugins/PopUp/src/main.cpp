@@ -712,6 +712,7 @@ MIRAPI int Unload(void)
 	UnhookEvent(hEventStatusChanged);
 	UnhookEvent(hIconsChanged);
 	UnhookEvent(hFontsChanged);
+	UnhookEvent(hTBLoaded);
 
 	DestroyServiceFunction(hShowHistory);
 	DestroyServiceFunction(hTogglePopup);

@@ -21,7 +21,7 @@ Boston, MA 02111-1307, USA.
 
 HINSTANCE hInst = NULL;
 PLUGINLINK *pluginLink;
-HANDLE hOptHook = NULL,  hLoadHook = NULL, hPackUpdaterFolder = NULL, hCheckUpdates = NULL, hEmptyFolder = NULL;
+HANDLE hOptHook = NULL,  hLoadHook = NULL, hPackUpdaterFolder = NULL, hCheckUpdates = NULL, hEmptyFolder = NULL, hOnPreShutdown = NULL;
 TCHAR tszRoot[MAX_PATH] = {0};
 int hLangpack;
 struct MM_INTERFACE mmi;
@@ -102,6 +102,7 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	// Add options hook
 	hOptHook = HookEvent(ME_OPT_INITIALISE, OptInit);
 	hLoadHook = HookEvent(ME_SYSTEM_MODULESLOADED, ModulesLoaded);
+	hOnPreShutdown = HookEvent(ME_SYSTEM_PRESHUTDOWN, OnPreShutdown);
 
 	return 0;
 }
@@ -111,8 +112,6 @@ extern "C" __declspec(dllexport) int Unload(void)
 	if (CheckThread)
 		CheckThread = NULL;
 	NetlibUnInit();
-	UnhookEvent(hOptHook);
-	UnhookEvent(hLoadHook);
 	DestroyServiceFunction(hCheckUpdates);
 	DestroyServiceFunction(hEmptyFolder);
 	return 0;

@@ -92,11 +92,6 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK* link)
 
 extern "C" __declspec(dllexport) int Unload(void)
 {
-	UnhookEvent(hOnButtonPressed);
-	UnhookEvent(hOnModulesLoaded);
-	UnhookEvent(hOnOptInitialized);
-	UnhookEvent(hOnPreShutdown);
 	DestroyServiceFunction(hQuickRepliesService);
-
 	return 0;
 }

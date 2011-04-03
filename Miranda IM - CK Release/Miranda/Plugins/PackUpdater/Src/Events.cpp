@@ -23,6 +23,7 @@ BOOL Silent;
 
 int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 {
+	UnhookEvent(hLoadHook);
 	Silent = true;
 	HOTKEYDESC hkd = {0};
 	hkd.cbSize = sizeof(hkd);
@@ -59,5 +60,12 @@ INT_PTR EmptyFolder(WPARAM wParam,LPARAM lParam)
         0,
         _T("") };
     SHFileOperation(&file_op);
+	return 0;
+}
+
+INT_PTR OnPreShutdown(WPARAM wParam, LPARAM lParam)
+{
+	UnhookEvent(hOptHook);
+	UnhookEvent(hOnPreShutdown);
 	return 0;
 }
