@@ -18,7 +18,7 @@ Copyright (C) 2000-2  Richard Hughes, Roland Rabien & Tristan Van de Vreede
 
 HINSTANCE hinstance;
 PLUGINLINK *pluginLink;
-HANDLE hPreBuildHook = NULL, hAddEventHook = NULL, hOptHook = NULL, hCheckDefHook = NULL;
+HANDLE hPreBuildHook = NULL, hAddEventHook = NULL, hOptHook = NULL, hCheckDefHook = NULL, hOnPreShutdown = NULL, hToggleEnable = NULL, hToggleAutoanswer = NULL;
 HANDLE hToggle = NULL, hEnableMenu = NULL;
 CLISTMENUITEM mi;
 BOOL fEnabled, gbVarsServiceExist = FALSE;
@@ -119,6 +119,8 @@ INT CheckDefaults(WPARAM, LPARAM)
 	DBVARIANT dbv;
 	TCHAR* ptszDefault;
 	char szStatus[6]={0};
+
+	UnhookEvent(hCheckDefHook);
 
 	fEnabled=!DBGetContactSettingByte(NULL,protocolname,KEY_ENABLED,1)==1;
 	interval=DBGetContactSettingWord(NULL,protocolname,KEY_REPEATINTERVAL,300);
@@ -246,6 +248,11 @@ INT addEvent(WPARAM wParam, LPARAM lParam)
 						TCHAR *ptszTemp, *ptszTemp2;
 
 						DBGetContactSettingTString(hContact,pszProto,"Nick",&dbvNick);
+						if (lstrcmp(dbvNick.ptszVal, NULL) == 0)
+						{
+							DBFreeVariant(&dbvNick);
+							return FALSE;
+						}
 
 						msgLen += (int)_tcslen(dbv.ptszVal);
 						if (!DBGetContactSettingTString(NULL,protocolname,KEY_HEADING,&dbvHead))
@@ -290,13 +297,22 @@ INT addEvent(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+INT OnPreShutdown(WPARAM wParam, LPARAM lParam)
+{
+	UnhookEvent(hAddEventHook);
+	UnhookEvent(hPreBuildHook);
+	UnhookEvent(hOptHook);
+	UnhookEvent(hOnPreShutdown);
+	return 0;
+}
+
 extern "C" int __declspec(dllexport)Load(PLUGINLINK *link)
 {
 	pluginLink=link;
 	mir_getMMI(&mmi);
 	mir_getUTFI(&utfi);
 
-	CreateServiceFunction(protocolname"/ToggleEnable", ToggleEnable);
+	hToggleEnable = CreateServiceFunction(protocolname"/ToggleEnable", ToggleEnable);
 	ZeroMemory(&mi, sizeof(mi));
 	mi.cbSize = sizeof(mi);
 	mi.position = 500090000;
@@ -304,7 +320,7 @@ extern "C" int __declspec(dllexport)Load(PLUGINLINK *link)
 	mi.pszService = protocolname"/ToggleEnable";
 	hEnableMenu = (HANDLE)CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM)&mi);
 
-	CreateServiceFunction(protocolname"/ToggleAutoanswer",Toggle);
+	hToggleAutoanswer = CreateServiceFunction(protocolname"/ToggleAutoanswer",Toggle);
 	ZeroMemory(&mi, sizeof(mi));
 	mi.cbSize=sizeof(mi);
 	mi.position=-0x7FFFFFFF;
@@ -314,17 +330,16 @@ extern "C" int __declspec(dllexport)Load(PLUGINLINK *link)
 
 	//add hook
 	hOptHook = HookEvent(ME_OPT_INITIALISE, OptInit);
-	hAddEventHook = HookEvent(ME_DB_EVENT_ADDED,addEvent);
-	hCheckDefHook = HookEvent(ME_SYSTEM_MODULESLOADED,CheckDefaults);
+	hAddEventHook = HookEvent(ME_DB_EVENT_ADDED, addEvent);
+	hCheckDefHook = HookEvent(ME_SYSTEM_MODULESLOADED, CheckDefaults);
+	hOnPreShutdown = HookEvent(ME_SYSTEM_PRESHUTDOWN, OnPreShutdown);
 
 	return 0;
 }
 
 extern "C" __declspec(dllexport)int Unload(void)
 {
-	UnhookEvent(hAddEventHook);
-	UnhookEvent(hPreBuildHook);
-	UnhookEvent(hOptHook);
-	UnhookEvent(hCheckDefHook);
+	DestroyServiceFunction(hToggleEnable);
+	DestroyServiceFunction(hToggleAutoanswer);
 	return 0;
 }
