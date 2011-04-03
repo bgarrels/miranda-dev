@@ -56,6 +56,8 @@ extern BYTE iNumber;
 extern HANDLE hOnOptInitialized;
 extern HANDLE hOnButtonPressed;
 extern HANDLE hQuickRepliesService;
+extern HANDLE hOnModulesLoaded;
+extern HANDLE hOnPreShutdown;
 
 #ifdef _UNICODE
 	typedef std::wstring tString;
