@@ -94,7 +94,7 @@ void AddContactDlgOpts(HWND hdlg, const char* szProto)
 			#endif
 		}
 		else
-			SetDlgItemText(hdlg, IDC_IDLABEL, TranslateT("User ID:"));
+			SetDlgItemText(hdlg, IDC_IDLABEL, TranslateT("Contact ID:"));
 	}*/
 	if (flags & PF1_NUMERICUSERID)
 	{
@@ -142,7 +142,7 @@ void AddContactDlgAccounts(HWND hdlg, ADDCONTACTSTRUCT* acs)
 		RECT rc;
 		int iIndex = 0, cbWidth = 0;
 
-		HIMAGELIST hIml = ImageList_Create(GetSystemMetrics(SM_CXSMICON), GetSystemMetrics(SM_CYSMICON), (IsWinVerXPPlus() ? ILC_COLOR32 : ILC_COLOR16) | ILC_MASK, iAccCount + 1, 0);
+		HIMAGELIST hIml = ImageList_Create(GetSystemMetrics(SM_CXSMICON), GetSystemMetrics(SM_CYSMICON), (IsWinVerXPPlus() ? ILC_COLOR32 : ILC_COLOR16) | ILC_MASK, iAccCount, 0);
 		ImageList_Destroy((HIMAGELIST)SendDlgItemMessage(hdlg, IDC_PROTO, CBEM_SETIMAGELIST, 0, (LPARAM)hIml));
 		SendDlgItemMessage(hdlg, IDC_PROTO, CB_RESETCONTENT, 0, 0);
 
@@ -175,6 +175,8 @@ void AddContactDlgAccounts(HWND hdlg, ADDCONTACTSTRUCT* acs)
 			SendDlgItemMessage(hdlg, IDC_PROTO, CB_SETDROPPEDWIDTH, cbWidth, 0);
 		SendDlgItemMessage(hdlg, IDC_PROTO, CB_SETCURSEL, iIndex, 0);
 		SendMessage(hdlg, WM_COMMAND, MAKEWPARAM(IDC_PROTO, CBN_SELCHANGE), (LPARAM)GetDlgItem(hdlg, IDC_PROTO));
+		if (iAccCount == 1)
+			SetFocus(GetDlgItem(hdlg, IDC_USERID));
 }
 
 #define DM_ADDCONTACT_CHANGEICONS WM_USER + 11
@@ -192,10 +194,10 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 
 			Utils_RestoreWindowPositionNoSize(hdlg, NULL, "AddContact", "");
 			TranslateDialogDefault(hdlg);
+			SendMessage(hdlg, WM_SETICON, ICON_BIG, (LPARAM)CallService(MS_SKIN2_GETICON, 1, (LPARAM)ICON_ADD));
+			SendMessage(hdlg, WM_SETICON, ICON_SMALL, (LPARAM)CallService(MS_SKIN2_GETICON, 0, (LPARAM)ICON_ADD));
 			HookEventMessage(ME_SKIN2_ICONSCHANGED, hdlg, DM_ADDCONTACT_CHANGEICONS);
 			HookEventMessage(ME_PROTO_ACCLISTCHANGED, hdlg, DM_ADDCONTACT_CHANGEACCLIST);
-			SendMessage(hdlg, WM_SETICON, ICON_BIG, (LPARAM)CallService(MS_SKIN2_GETICON, 0, (LPARAM)ICON_ADD));
-			SendMessage(hdlg, WM_SETICON, ICON_SMALL, (LPARAM)CallService(MS_SKIN2_GETICON, 0, (LPARAM)ICON_ADD));
 			
 			{
 				for (int groupId = 0; groupId < 999; groupId++)
@@ -243,6 +245,8 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 						// TODO remember last setting for each proto?
 						AddContactDlgOpts(hdlg, acs->szProto);
 					}
+					if (HIWORD(wparam) == CBN_CLOSEUP)
+						SetFocus(GetDlgItem(hdlg, IDC_USERID));
 					break;
 
 				case IDC_AUTH:
@@ -274,7 +278,7 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 						((CallProtoService(acs->szProto, PS_GETCAPS, PFLAGNUM_1, 0) & PF1_NUMERICUSERID) && !_tcstoul(szUserId, NULL, 10)))
 					{
 						MessageBox(NULL,
-							TranslateT("The contact cannot be added to your contact list. Make sure the User ID is entered properly."),
+							TranslateT("The contact cannot be added to your contact list. Please make sure the contact ID is entered correctly."),
 							TranslateT("Add Contact"), MB_OK | MB_ICONWARNING | MB_SETFOREGROUND | MB_TOPMOST);
 						break;
 					}
@@ -289,7 +293,7 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 						if (_tcstoul(szUserId, NULL, 10) > INT_MAX)
 						{
 							MessageBox(NULL,
-								TranslateT("The contact cannot be added to your contact list. Make sure the User ID is entered properly."),
+								TranslateT("The contact cannot be added to your contact list. Please make sure the contact ID is entered correctly."),
 								TranslateT("Add Contact"), MB_OK | MB_ICONWARNING | MB_SETFOREGROUND | MB_TOPMOST);
 							break;
 						}
@@ -302,7 +306,7 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 						if (_tcschr(szUserId, '@') == NULL)
 						{
 							MessageBox(NULL,
-								TranslateT("The contact cannot be added to your contact list. Make sure the User ID is entered properly."),
+								TranslateT("The contact cannot be added to your contact list. Please make sure the contact ID is entered correctly."),
 								TranslateT("Add Contact"), MB_OK | MB_ICONWARNING | MB_SETFOREGROUND | MB_TOPMOST);
 							break;
 						}
@@ -325,7 +329,7 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 					if (hContact == NULL)
 					{
 						MessageBox(NULL,
-							TranslateT("The contact cannot be added to your contact list. If you are not connected to that network, try to connect. Also, make sure the User ID is entered properly."),
+							TranslateT("The contact cannot be added to your contact list. If you are not logged into the selected account, please try to do so. Also, make sure the contact ID is entered correctly."),
 							TranslateT("Add Contact"), MB_OK | MB_ICONWARNING | MB_SETFOREGROUND | MB_TOPMOST);
 						break;
 					}
@@ -378,7 +382,7 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 			break;
 
 		case DM_ADDCONTACT_CHANGEICONS:
-			CallService(MS_SKIN2_RELEASEICON, (WPARAM)SendMessage(hdlg, WM_SETICON, ICON_BIG, (LPARAM)CallService(MS_SKIN2_GETICON, 0, (LPARAM)ICON_ADD)), 0);
+			CallService(MS_SKIN2_RELEASEICONBIG, (WPARAM)SendMessage(hdlg, WM_SETICON, ICON_BIG, (LPARAM)CallService(MS_SKIN2_GETICON, 1, (LPARAM)ICON_ADD)), 0);
 			CallService(MS_SKIN2_RELEASEICON, (WPARAM)SendMessage(hdlg, WM_SETICON, ICON_SMALL, (LPARAM)CallService(MS_SKIN2_GETICON, 0, (LPARAM)ICON_ADD)), 0);
 			break;
 
@@ -390,7 +394,7 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 		}
 
 		case WM_DESTROY:
-			CallService(MS_SKIN2_RELEASEICON, (WPARAM)SendMessage(hdlg, WM_SETICON, ICON_BIG, (LPARAM)NULL), 0);
+			CallService(MS_SKIN2_RELEASEICONBIG, (WPARAM)SendMessage(hdlg, WM_SETICON, ICON_BIG, (LPARAM)NULL), 0);
 			CallService(MS_SKIN2_RELEASEICON, (WPARAM)SendMessage(hdlg, WM_SETICON, ICON_SMALL, (LPARAM)NULL), 0);
 			ImageList_Destroy((HIMAGELIST)SendDlgItemMessage(hdlg, IDC_PROTO, CBEM_GETIMAGELIST, 0, 0));
 			acs = (ADDCONTACTSTRUCT*)GetWindowLongPtr(hdlg, GWLP_USERDATA);

@@ -37,7 +37,7 @@ PLUGININFOEX pluginInfo = {
 	"AddContact+",
 #endif
 	PLUGIN_MAKE_VERSION(0, 9, 8, 6),
-	"Provides the ability to add contacts manually (without searching for them)",
+	"Provides the ability to quickly add new contacts",
 	"Bartosz 'Dezeath' Bia³ek",
 	"dezred"/*antispam*/"@"/*antispam*/"gmail"/*antispam*/"."/*antispam*/"com",
 	"© 2007-2011 Bartosz 'Dezeath' Bia³ek",
@@ -123,7 +123,7 @@ static int OnAccListChanged(WPARAM, LPARAM)
 		mi.position = 500020001;
 		mi.flags = CMIF_ICONFROMICOLIB;
 		mi.icolibItem = hIconLibItem;
-		mi.pszName = LPGEN("&Add Contact Manually...");
+		mi.pszName = LPGEN("&Add Contact...");
 		mi.pszService = MS_ADDCONTACTPLUS_SHOW;
 		hMainMenuItem = (HANDLE)CallService(MS_CLIST_ADDMAINMENUITEM, 0,(LPARAM)&mi);
 
@@ -134,9 +134,9 @@ static int OnAccListChanged(WPARAM, LPARAM)
 			tbb.cbSize = sizeof(TBButton);
 			tbb.tbbFlags = TBBF_VISIBLE | TBBF_SHOWTOOLTIP;
 			tbb.pszButtonID = "acplus_btn";
-			tbb.pszButtonName = Translate("Add Contact Manually");
+			tbb.pszButtonName = Translate("Add Contact");
 			tbb.pszServiceName = MS_ADDCONTACTPLUS_SHOW;
-			tbb.pszTooltipUp = Translate("Add Contact Manually");
+			tbb.pszTooltipUp = Translate("Add Contact");
 			tbb.hPrimaryIconHandle = hIconLibItem;
 			tbb.defPos = 10100;
 			hToolBarItem = (HANDLE)CallService(MS_TB_ADDBUTTON, 0, (LPARAM)&tbb);
@@ -166,7 +166,7 @@ static int OnModulesLoaded(WPARAM, LPARAM)
 	sid.pszDefaultFile = szFile;
 	sid.ptszSection = _T("AddContact+");
 	sid.iDefaultIndex = -IDI_ADDCONTACT;
-	sid.ptszDescription = LPGENT("Add Contact Manually");
+	sid.ptszDescription = LPGENT("Add Contact");
 	sid.pszName = ICON_ADD;
 	hIconLibItem = (HANDLE)CallService(MS_SKIN2_ADDICON, (WPARAM)0, (LPARAM)&sid);
 	hChangedIcons = HookEvent(ME_SKIN2_ICONSCHANGED, OnIconsChanged);
@@ -175,8 +175,8 @@ static int OnModulesLoaded(WPARAM, LPARAM)
 	hkd.cbSize = sizeof(hkd);
 	hkd.dwFlags = HKD_TCHAR;
 	hkd.pszName = "AddContactPlus_OpenDialog";
-	hkd.ptszDescription = _T("Open Add Contact Dialog");
-	hkd.ptszSection = _T("Main");
+	hkd.ptszDescription = LPGENT("Open Add Contact Dialog");
+	hkd.ptszSection = LPGENT("Main");
 	hkd.pszService = MS_ADDCONTACTPLUS_SHOW;
 	hkd.DefHotKey = HOTKEYCODE(HOTKEYF_CONTROL | HOTKEYF_SHIFT, 'D') | HKF_MIRANDA_LOCAL;
 	CallService(MS_HOTKEY_REGISTER, 0, (LPARAM)&hkd);
