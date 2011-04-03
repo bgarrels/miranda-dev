@@ -1,0 +1,147 @@
+#GrayStyle for PopUp
+#author: [Lelic]
+#http://miranda-planet.com/
+#
+#вы можете изменять и/или использовать данный скин для любых целей без моего письменного или устного разрешения.
+
+w 4+icon.width+4+title.width+9+clock.width+4 > 7+avatar.width+4+text.width+7
+h 4+title.height+6+(avatar.height>text.height)+11
+
+# bakground
+object
+	ifnoset 3
+    type bitmap
+    source back.png
+	x 5
+    y 5
+    w window.width-5
+    h window.height-5
+end
+object
+	ifset 3
+    type bitmap
+    source back.png
+	mono
+	x 5
+    y 5
+    w window.width-5
+    h window.height-5
+end
+# titlebar lines
+	#top left corner
+object
+    type bitmap
+    source tl.png
+    x 0
+    y 0
+end
+	#top horizontal line
+object
+    type bitmap
+    source t.png
+    x 5
+    y 0
+    w window.width-10
+end
+	#top right corner
+object
+    type bitmap
+    source tr.png
+    x window.width-5
+    y 0
+end
+	#right vertical line
+object
+    type bitmap
+    source r.png
+    x window.width-5
+    y 5
+    h window.height-10
+end
+	#bottom right corner
+object
+    type bitmap
+    source br.png
+    x window.width-5
+    y window.height-5
+end
+	#bottom horizontal line
+object
+    type bitmap
+    source b.png
+    x 5
+    y window.height-5
+    w window.width-10
+end
+	#bottom left corner
+object
+    type bitmap
+    source bl.png
+    x 0
+    y window.height-5
+end
+	#left vertical line
+object
+    type bitmap
+    source l.png
+    x 0
+    y 5
+    h window.height-10
+end
+#divider line
+object
+    type bitmap
+    source line.png
+    x 7
+    y 7+title.height
+    w window.width-14
+end
+#icon
+object
+	ifset 1
+    type icon
+    x 8
+    y 6+(title.height-icon.height)/2
+end
+# clock
+object 
+	type clock
+	x window.width-clock.width-4
+	y 6
+end
+# avatar
+object
+	ifset 2	
+	type avatar
+	x 6
+	y 12+title.height
+	w 40
+	proportional 1
+end
+#titlebar text
+object 
+	ifset 1
+	type title
+	mono
+	x 4+icon.width+4
+	y 5
+	w window.width-12-clock.width-4
+end
+end
+object  
+	ifnotset 1
+	type title
+	mono
+	x 8
+	y 5
+	w window.width-icon.width-12-clock.width-4
+end
+# text area 
+object 
+	ifset 2
+	type text
+	color 42 43 44
+	x 9+avatar.width
+	y 10+title.height
+	w window.width-avatar.width-19
+end
