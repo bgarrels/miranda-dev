@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: commonheaders.h 13100 2010-11-05 04:22:43Z silvercircle $
+ * $Id: commonheaders.h 13534 2011-03-31 18:40:23Z george.hazan $
  *
  * global include file, used to build the precompiled header.
  *
@@ -284,6 +284,7 @@ typedef std::basic_string<TCHAR> tstring;
 extern	HINSTANCE g_hInst;
 extern CSkinItem SkinItems[];
 extern TContainerData *pFirstContainer, *pLastActiveContainer;
+extern HANDLE hTypingNotify;
 
 #define IS_EXTKEY(a) (a & (1 << 24))
 

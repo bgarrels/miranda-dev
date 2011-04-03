@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13512 $
-Last change on : $Date: 2011-03-26 23:50:25 +0100 (Sa, 26. Mrz 2011) $
+Revision       : $Revision: 13535 $
+Last change on : $Date: 2011-04-02 05:10:52 +0200 (Sa, 02. Apr 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -134,6 +134,8 @@ typedef unsigned __int64 JabberCapsBits;
 #define JABBER_CAPS_JINGLE                      ((JabberCapsBits)1<<39)
 #define JABBER_FEAT_ROSTER_EXCHANGE             "http://jabber.org/protocol/rosterx"
 #define JABBER_CAPS_ROSTER_EXCHANGE             ((JabberCapsBits)1<<40)
+#define JABBER_FEAT_GTALK_PMUC                  "http://www.google.com/xmpp/protocol/pmuc/v1"
+#define JABBER_CAPS_GTALK_PMUC                  ((JabberCapsBits)1<<41)
 
 #define JABBER_FEAT_PUBSUB_EVENT                "http://jabber.org/protocol/pubsub#event"
 #define JABBER_FEAT_PUBSUB_NODE_CONFIG          "http://jabber.org/protocol/pubsub#node_config"
@@ -151,6 +153,7 @@ typedef unsigned __int64 JabberCapsBits;
 #define JABBER_EXT_USER_MOOD                    "mood"
 #define JABBER_EXT_USER_TUNE                    "tune"
 #define JABBER_EXT_USER_ACTIVITY                "activity"
+#define JABBER_EXT_GTALK_PMUC                   "pmuc-v1"
 #define JABBER_EXT_MIR_NOTES                    "mir_notes"
 
 #define JABBER_FEAT_EXT_ADDRESSING              "http://jabber.org/protocol/address"

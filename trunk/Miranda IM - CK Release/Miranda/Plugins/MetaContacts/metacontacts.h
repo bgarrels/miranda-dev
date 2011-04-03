@@ -116,8 +116,6 @@ extern HANDLE hMenuOnOff;
 extern DWORD nextMetaID;
 extern int mcStatus;
 
-extern HANDLE metaMainThread;
-
 INT_PTR Meta_Convert(WPARAM wParam,LPARAM lParam);
 INT_PTR Meta_AddTo(WPARAM wParam,LPARAM lParam);
 INT_PTR Meta_Edit(WPARAM wParam,LPARAM lParam);

@@ -96,6 +96,7 @@ extern "C" __declspec(dllexport) int Unload(void)
 	UnhookEvent(hOnModulesLoaded);
 	UnhookEvent(hOnOptInitialized);
 	UnhookEvent(hOnPreShutdown);
+	DestroyServiceFunction(hQuickRepliesService);
 
 	return 0;
 }

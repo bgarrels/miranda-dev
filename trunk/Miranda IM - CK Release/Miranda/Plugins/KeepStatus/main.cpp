@@ -27,6 +27,7 @@ unsigned long mainThreadId = 0;
 HANDLE hCSModuleLoadedHook = NULL;
 
 HANDLE hConnectionEvent = NULL;
+HANDLE hStopRecon = NULL, hEnableProto = NULL, hIsProtoEnabled = NULL, hAnnounceStat = NULL;
 
 MM_INTERFACE mmi;
 LIST_INTERFACE li;
@@ -104,10 +105,10 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 
 	hConnectionEvent = CreateHookableEvent(ME_KS_CONNECTIONEVENT);
 
-	CreateServiceFunction(MS_KS_STOPRECONNECTING, StopReconnectingService);
-	CreateServiceFunction(MS_KS_ENABLEPROTOCOL, EnableProtocolService);
-	CreateServiceFunction(MS_KS_ISPROTOCOLENABLED, IsProtocolEnabledService);
-	CreateServiceFunction(MS_KS_ANNOUNCESTATUSCHANGE, AnnounceStatusChangeService);
+	hStopRecon = CreateServiceFunction(MS_KS_STOPRECONNECTING, StopReconnectingService);
+	hEnableProto = CreateServiceFunction(MS_KS_ENABLEPROTOCOL, EnableProtocolService);
+	hIsProtoEnabled = CreateServiceFunction(MS_KS_ISPROTOCOLENABLED, IsProtocolEnabledService);
+	hAnnounceStat = CreateServiceFunction(MS_KS_ANNOUNCESTATUSCHANGE, AnnounceStatusChangeService);
 
 	DuplicateHandle(GetCurrentProcess(), GetCurrentThread(), GetCurrentProcess(), &hMainThread, THREAD_SET_CONTEXT, FALSE, 0);
 	mainThreadId = GetCurrentThreadId();
@@ -126,6 +127,10 @@ extern "C" int __declspec(dllexport) Unload(void)
 
 	if (hMainThread)
 		CloseHandle(hMainThread);
+	DestroyServiceFunction(hStopRecon);
+	DestroyServiceFunction(hEnableProto);
+	DestroyServiceFunction(hIsProtoEnabled);
+	DestroyServiceFunction(hAnnounceStat);
 
 	return 0;
 }

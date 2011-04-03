@@ -25,6 +25,7 @@ BYTE iNumber;
 
 HANDLE hOnOptInitialized;
 HANDLE hOnButtonPressed;
+HANDLE hQuickRepliesService;
 
 INT_PTR QuickRepliesService(WPARAM, LPARAM)
 {
@@ -39,7 +40,7 @@ INT_PTR OnModulesLoaded(WPARAM wParam, LPARAM lParam)
 	if (!ServiceExists(MS_QUICKREPLIES_SERVICE))
 	{
 		iNumber = 0;
-		CreateServiceFunction(MS_QUICKREPLIES_SERVICE, QuickRepliesService);
+		hQuickRepliesService = CreateServiceFunction(MS_QUICKREPLIES_SERVICE, QuickRepliesService);
 	}
 	else
 		iNumber = DBGetContactSettingByte(NULL, MODULE_NAME, "InstancesCount", 0);

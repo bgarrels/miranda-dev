@@ -108,8 +108,6 @@ PLUGININFOEX pluginInfo={
 HINSTANCE hInstance;	//!< Global reference to the application
 PLUGINLINK *pluginLink;	//!< Link between Miranda and this plugin
 
-HANDLE metaMainThread;	//!< Duplicate of thread handle
-
 /** Called by Miranda to get the information associated to this plugin.
 * It only returns the PLUGININFO structure, without any test on the version
 * @param mirandaVersion The version of the application calling this function
@@ -147,7 +145,6 @@ __declspec(dllexport)int Unload(void)
 {
 	// see also meta_services.c, Meta_PreShutdown
 	Meta_CloseHandles();
-	CloseHandle( metaMainThread );
 	//MessageBox(0, "Unload complete", "MC", MB_OK);
 	return 0;
 }
@@ -169,7 +166,6 @@ int __declspec(dllexport)Load(PLUGINLINK *link)
 	DBVARIANT dbv;
 	
 	pluginLink=link;
-	DuplicateHandle( GetCurrentProcess(), GetCurrentThread(), GetCurrentProcess(), &metaMainThread, 0, FALSE, DUPLICATE_SAME_ACCESS );
 
     mir_getMMI(&mmi);
 

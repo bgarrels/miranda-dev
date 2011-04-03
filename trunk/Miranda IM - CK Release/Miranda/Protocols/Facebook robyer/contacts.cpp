@@ -188,7 +188,7 @@ void FacebookProto::UpdateContactWorker(void *p)
 				update_required = strcmp( dbv.pszVal, fbu->image_url.c_str() ) != 0;
 				DBFreeVariant(&dbv);
 			}
-			if ( update_required || !AvatarExists(fbu->user_id) )
+			if ( update_required || !AvatarExists(fbu) )
 			{
 				DBWriteContactSettingString(fbu->handle,m_szModuleName,FACEBOOK_KEY_AV_URL,fbu->image_url.c_str());
 				ProcessAvatar(fbu->handle,&fbu->image_url);

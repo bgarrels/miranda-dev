@@ -83,8 +83,6 @@ Last change on : $Date$
 #define DEFAULT_SYSTRAY_NOTIFY          0
 #define DEFAULT_SHOW_OLD_FEEDS          0
 
-#define FACEBOOK_DEFAULT_AVATAR_URL     "http://static.ak.fbcdn.net/pics/q_silhouette.gif"
-
 // Event flags
 #define FACEBOOK_EVENT_CLIENT          0x10000000 // Facebook error or info message
 #define FACEBOOK_EVENT_NEWSFEED        0x20000000 // Facebook newsfeed (wall) message

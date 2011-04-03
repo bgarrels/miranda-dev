@@ -176,7 +176,7 @@ public:
 
 	// Helpers
 	std::string GetAvatarFolder();
-	bool AvatarExists( std::string user_id );
+	bool AvatarExists( facebook_user *fu);
 	void ToggleStatusMenuItems( BOOL bEnable );
 
 	// Handles, Locks

@@ -80,10 +80,11 @@ bool facebook_client::validate_response( http::response* resp )
 		return false;
 	}
 
-	if ( resp->data.find( "{\"error\":" ) != std::string::npos )
+	std::string::size_type pos = resp->data.find( "{\"error\":" );
+	if ( pos != std::string::npos )
     try
   	{
-		std::string error = resp->data.substr( resp->data.find( "{\"error\":" ) + 9, 128 );
+		std::string error = resp->data.substr( pos + 9, 128 );
 	    int error_num = atoi( error.substr( 0, error.find( "," ) ).c_str() );
 	    if ( error_num != 0 )
 	    {

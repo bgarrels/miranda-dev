@@ -26,7 +26,7 @@ Last change by : $Author: y_b $
 
 
 HINSTANCE hInstance;
-HANDLE ehdb=NULL,ehproto=NULL,ehmissed=NULL,ehuserinfo=NULL,ehmissed_proto=NULL;
+HANDLE ehdb = NULL, ehproto = NULL, ehmissed = NULL, ehuserinfo = NULL, ehmissed_proto = NULL, hOptInit = NULL, hMainInit = NULL;
 PLUGINLINK *pluginLink;
 struct MM_INTERFACE mmi;
 char authemail[] = "fscking@spammer.oip.info";//the correct e-mail shall be constructed in DllMain
@@ -84,14 +84,14 @@ int MainInit(WPARAM wparam,LPARAM lparam)
 	memset(&contactQueue[0], 0, contactQueueSize);
 	contactQueueSize = 16;
 	includeIdle = (BOOL )DBGetContactSettingByte(NULL,S_MOD,"IdleSupport",1);
-	HookEvent(ME_OPT_INITIALISE,OptionsInit);
+	hOptInit = HookEvent(ME_OPT_INITIALISE, OptionsInit);
 	
 	if(DBGetContactSettingByte(NULL,S_MOD,"MenuItem",1)) {
 		InitMenuitem();
 	}
 	
 	if(DBGetContactSettingByte(NULL,S_MOD,"UserinfoTab",1))
-		ehuserinfo=HookEvent(ME_USERINFO_INITIALISE,UserinfoInit);
+		ehuserinfo = HookEvent(ME_USERINFO_INITIALISE,UserinfoInit);
 
 	if(DBGetContactSettingByte(NULL,S_MOD,"FileOutput",0))
 		InitFileOutput();
@@ -156,9 +156,13 @@ __declspec(dllexport) const MUUID * MirandaPluginInterfaces(void)
 __declspec(dllexport)int Unload(void)
 {
 	UnhookEvent(ehdb);
-	if(ehmissed!=NULL) UnhookEvent(ehmissed);
+	if(ehmissed) UnhookEvent(ehmissed);
 	UnhookEvent(ehproto);
-	if(ehmissed_proto)UnhookEvent(ehmissed_proto);
+	if(ehmissed_proto) UnhookEvent(ehmissed_proto);
+	UnhookEvent(hOptInit);
+	UnhookEvent(hMainInit);
+	if (ehuserinfo) UnhookEvent(ehuserinfo);
+	UninitMenuitem();
 //	free(contactQueue);
 	return 0;
 }
@@ -183,7 +187,7 @@ int __declspec(dllexport)Load(PLUGINLINK *link)
 	// I decided to hook all events after
 	// everything is loaded because it seems
 	// to be safer in my opinion
-	HookEvent(ME_SYSTEM_MODULESLOADED,MainInit);
+	hMainInit = HookEvent(ME_SYSTEM_MODULESLOADED,MainInit);
 	return 0;
 }
 

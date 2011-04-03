@@ -503,6 +503,7 @@ static int Exit(WPARAM wParam, LPARAM lParam) {
 		DestroyHookableEvent(hCSStatusChangedExEvent);
 		DestroyServiceFunction(hCSSetStatusExService);
 		DestroyServiceFunction(hCSShowConfirmDlgExService);
+		DestroyServiceFunction(hCSGetProtoCountService);
 	}
 
 	return 0;

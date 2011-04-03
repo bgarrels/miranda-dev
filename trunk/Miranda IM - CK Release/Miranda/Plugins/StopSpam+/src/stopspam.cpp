@@ -4,7 +4,7 @@ struct MM_INTERFACE mmi;
 
 UTF8_INTERFACE utfi;
 
-HANDLE hFunc;
+HANDLE hFunc, hTempRemove;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	HookEvent(ME_SYSTEM_MODULESLOADED, OnSystemModulesLoaded);
 
 	// Add deliting temporary contacts
-	CreateServiceFunction(pluginName"/RemoveTempContacts", RemoveTempContacts);
+	hTempRemove = CreateServiceFunction(pluginName"/RemoveTempContacts", RemoveTempContacts);
 	ZeroMemory(&mi, sizeof(mi));
 	mi.cbSize = sizeof(mi);
 	mi.position = -0x7FFFFFFF;
@@ -95,6 +95,11 @@ extern "C" int __declspec(dllexport) Unload(void)
 	if(hFunc)
 	{
 		DestroyServiceFunction(hFunc);
+		hFunc = 0;
+	}
+	if(hTempRemove)
+	{
+		DestroyServiceFunction(hTempRemove);
 		hFunc = 0;
 	}
 	delete plSets;

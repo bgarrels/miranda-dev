@@ -55,6 +55,7 @@ extern BYTE iNumber;
 
 extern HANDLE hOnOptInitialized;
 extern HANDLE hOnButtonPressed;
+extern HANDLE hQuickRepliesService;
 
 #ifdef _UNICODE
 	typedef std::wstring tString;

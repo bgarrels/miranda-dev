@@ -184,5 +184,6 @@ Last change by : $Author: Merlin_de $
 	#include "popup_gdiplus.h"
 
 INT_PTR svcEnableDisableMenuCommand(WPARAM, LPARAM);
+extern HANDLE hSquareFad;
 
 #endif //HEADERS_H

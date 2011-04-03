@@ -24,7 +24,7 @@ Last change by : $Author: y_b $
 */
 #include "seen.h"
 
-HANDLE hmenuitem=NULL;
+HANDLE hmenuitem=NULL, hLSUserDet = NULL, hBuildMenu = NULL;
 
 void ShowHistory(HANDLE hContact, BYTE isAlert);
 void InitHistoryDialog(void);
@@ -38,8 +38,6 @@ int MenuitemClicked(WPARAM wparam,LPARAM lparam)
 	return 0;
 }
 
-
-
 int BuildContactMenu(WPARAM wparam,LPARAM lparam)
 {
 	CLISTMENUITEM cmi;
@@ -50,7 +48,6 @@ int BuildContactMenu(WPARAM wparam,LPARAM lparam)
 
 	hContact = (HANDLE)wparam;
 	szProto=(char*)CallService(MS_PROTO_GETCONTACTBASEPROTO,(WPARAM)hContact,0);
-
 
 	ZeroMemory(&cmi,sizeof(cmi));
 	cmi.cbSize=sizeof(cmi);
@@ -82,17 +79,16 @@ int BuildContactMenu(WPARAM wparam,LPARAM lparam)
 	CallService(MS_CLIST_MODIFYMENUITEM,(WPARAM)hmenuitem,(LPARAM)&cmi);
 	DBFreeVariant(&dbv);
 
-
 	return 0;
 }
 
 
 
-void InitMenuitem(void)
+void InitMenuitem()
 {
 	CLISTMENUITEM cmi;
 
-	CreateServiceFunction("LastSeenUserDetails",MenuitemClicked);
+	hLSUserDet = CreateServiceFunction("LastSeenUserDetails", MenuitemClicked);
 
 	ZeroMemory(&cmi,sizeof(cmi));
 	cmi.cbSize=sizeof(cmi);
@@ -106,7 +102,13 @@ void InitMenuitem(void)
 	
 	hmenuitem=(HANDLE)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&cmi);
 	
-	HookEvent(ME_CLIST_PREBUILDCONTACTMENU,BuildContactMenu);
+	hBuildMenu = HookEvent(ME_CLIST_PREBUILDCONTACTMENU,BuildContactMenu);
 
 	InitHistoryDialog();
+}
+
+void UninitMenuitem()
+{
+	DestroyServiceFunction(hLSUserDet);
+	UnhookEvent(hBuildMenu);
 }

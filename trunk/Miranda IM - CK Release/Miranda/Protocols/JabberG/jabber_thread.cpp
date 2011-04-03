@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13527 $
-Last change on : $Date: 2011-03-29 19:23:42 +0200 (Di, 29. Mrz 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13535 $
+Last change on : $Date: 2011-04-02 05:10:52 +0200 (Sa, 02. Apr 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -1417,8 +1417,8 @@ void CJabberProto::OnProcessMessage( HXML node, ThreadData* info )
 		// temporary disabled due to security holes (roster modification), infinite loops and invalid _tcscmp() usage
  		else if ( !_tcscmp( ptszXmlns, _T(JABBER_FEAT_ROSTER_EXCHANGE)) && 
  			item != NULL && (item->subscription == SUB_BOTH || item->subscription == SUB_TO)) {
-			TCHAR chkJID[512];
-			mir_sntprintf( chkJID, SIZEOF( chkJID ), _T("@%s"), from );
+			TCHAR chkJID[512] = _T("@");
+			JabberStripJid( from, chkJID + 1, SIZEOF(chkJID) - 1 ); 
  			for ( int i = 1; ; ++i ) { 
  				HXML iNode = xmlGetNthChild( xNode , _T("item"), i );
 				if ( iNode == NULL ) break;

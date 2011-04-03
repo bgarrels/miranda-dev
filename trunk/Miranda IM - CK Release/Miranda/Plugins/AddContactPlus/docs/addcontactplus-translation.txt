@@ -1,0 +1,9 @@
+; This is a template for translation of AddContact+ plugin
+
+;[Add Contact Manually]
+;[&Add Contact Manually...]
+;[Provides the ability to add contacts manually (without searching for them).]
+;[User ID:]
+;[Account:]
+;[The contact cannot be added to your contact list. If you are not connected to that network, try to connect. Also, make sure the User ID is entered properly.]
+;[The contact cannot be added to your contact list. Make sure the User ID is entered properly.]

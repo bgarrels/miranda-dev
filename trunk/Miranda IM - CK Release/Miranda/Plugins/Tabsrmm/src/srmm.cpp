@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: srmm.cpp 13090 2010-11-01 11:40:13Z silvercircle $
+ * $Id: srmm.cpp 13534 2011-03-31 18:40:23Z george.hazan $
  *
  * plugin loading functions and global exports.
  *
@@ -138,6 +138,7 @@ extern "C" int __declspec(dllexport) Unload(void)
 		Skin->UnloadAeroTabs();
 		CleanTempFiles();
 		delete Skin;
+		DestroyServiceFunction(hTypingNotify);
 		delete sendLater;
 		delete sendQueue;
 		delete M;

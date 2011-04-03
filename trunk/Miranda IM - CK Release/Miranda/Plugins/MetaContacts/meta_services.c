@@ -676,7 +676,7 @@ int Meta_HandleACK(WPARAM wParam, LPARAM lParam)
 }
 
 // hiding contacts on "CList/UseGroups" setting changed can cause a crash - do it in a seperate thread during idle time
-static DWORD CALLBACK sttHideContacts( LPVOID param )
+static DWORD sttHideContacts( BOOL param )
 {
 	Meta_HideMetaContacts((int)param);
 	return 0;
@@ -700,7 +700,7 @@ int Meta_SettingChanged(WPARAM wParam, LPARAM lParam)
 		&& ((strcmp(dcws->szModule, "CList") == 0 && strcmp(dcws->szSetting, "UseGroups") == 0)
 			|| (strcmp(dcws->szModule, META_PROTO) == 0 && strcmp(dcws->szSetting, "Enabled") == 0)))
 	{
-		QueueUserAPC((PAPCFUNC)sttHideContacts, metaMainThread, (ULONG)(!Meta_IsEnabled()));
+		sttHideContacts(!Meta_IsEnabled());
 		return 0;
 	}
 
@@ -1311,35 +1311,35 @@ int Meta_ModulesLoaded(WPARAM wParam, LPARAM lParam)
 	menu.flags = CMIM_ALL;
 
 	// main menu item
-	menu.pszName = (char *)Translate("Toggle MetaContacts Off");
-	menu.pszService="MetaContacts/OnOff";
+	menu.pszName = "Toggle MetaContacts Off";
+	menu.pszService = "MetaContacts/OnOff";
 	menu.position = 500010000;
 	hMenuOnOff = (HANDLE)CallService(MS_CLIST_ADDMAINMENUITEM,0,(LPARAM)&menu);
 
 	// contact menu items
 	menu.position = -200010;
-	menu.pszName = (char *)Translate("Convert to MetaContact");
-	menu.pszService="MetaContacts/Convert";
+	menu.pszName = "Convert to MetaContact";
+	menu.pszService = "MetaContacts/Convert";
 	hMenuConvert = (HANDLE)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&menu);
 	menu.position = -200009;
-	menu.pszName = (char *)Translate("Add to existing MetaContact...");
-	menu.pszService="MetaContacts/AddTo";
+	menu.pszName = "Add to existing MetaContact...";
+	menu.pszService = "MetaContacts/AddTo";
 	hMenuAdd = (HANDLE)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&menu);
 
 	menu.position = -200010;
-	menu.pszName = (char *)Translate("Edit MetaContact...");
-	menu.pszService="MetaContacts/Edit";
+	menu.pszName = "Edit MetaContact...";
+	menu.pszService = "MetaContacts/Edit";
 	hMenuEdit = (HANDLE)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&menu);
 	menu.position = -200009;
-	menu.pszName = (char *)Translate("Set as MetaContact default");
-	menu.pszService="MetaContacts/Default";
+	menu.pszName = "Set as MetaContact default";
+	menu.pszService = "MetaContacts/Default";
 	hMenuDefault = (HANDLE)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&menu);
 	menu.position = -200008;
-	menu.pszName = (char *)Translate("Delete MetaContact");
-	menu.pszService="MetaContacts/Delete";
+	menu.pszName = "Delete MetaContact";
+	menu.pszService = "MetaContacts/Delete";
 	hMenuDelete = (HANDLE)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&menu);
-	//menu.pszName = (char *)Translate("Force Default");
-	//menu.pszService="MetaContacts/ForceDefault";
+	//menu.pszName = "Force Default";
+	//menu.pszService = "MetaContacts/ForceDefault";
 	//hMenuForceDefault = (HANDLE)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&menu);
 
 	menu.flags |= CMIF_HIDDEN;
@@ -1384,7 +1384,7 @@ int Meta_ModulesLoaded(WPARAM wParam, LPARAM lParam)
 	{
 		// modify main menu item
 		menu.flags = CMIM_NAME;
-		menu.pszName = (char *)Translate("Toggle MetaContacts On");
+		menu.pszName = "Toggle MetaContacts On";
 		CallService(MS_CLIST_MODIFYMENUITEM, (WPARAM)hMenuOnOff, (LPARAM)&menu);
 
 		Meta_HideMetaContacts(TRUE);
@@ -1427,7 +1427,7 @@ int Meta_ModulesLoaded(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-static DWORD CALLBACK sttMenuThread( DWORD_PTR param )
+static VOID CALLBACK sttMenuThread( PVOID param )
 {
 	HMENU hMenu;
 	TPMPARAMS tpmp;
@@ -1443,8 +1443,6 @@ static DWORD CALLBACK sttMenuThread( DWORD_PTR param )
 	CallService(MS_CLIST_MENUPROCESSCOMMAND, MAKEWPARAM(LOWORD(menuRet), MPCF_CONTACTMENU), (LPARAM)param);
 
 	DestroyMenu(hMenu);		
-
-	return 0;
 }
 
 INT_PTR Meta_ContactMenuFunc(WPARAM wParam, LPARAM lParam) {
@@ -1480,7 +1478,7 @@ INT_PTR Meta_ContactMenuFunc(WPARAM wParam, LPARAM lParam) {
 
 	} else if(options.menu_function == FT_MENU) {
 		// show contact's context menu
-		QueueUserAPC(sttMenuThread, metaMainThread, (ULONG_PTR)hContact);
+		CallFunctionAsync(sttMenuThread, hContact);
 	} else if(options.menu_function == FT_INFO) {
 		// show user info for subcontact
 		CallService(MS_USERINFO_SHOWDIALOG, (WPARAM)hContact, 0);
@@ -1855,23 +1853,23 @@ int Meta_OptInit(WPARAM wParam, LPARAM lParam) {
 	odp.flags						= ODPF_BOLDGROUPS;
 
 	odp.pszTemplate					= MAKEINTRESOURCE(IDD_OPTIONS);
-	odp.pszTitle					= Translate("MetaContacts");
-	odp.pszGroup					= Translate("Contact List");
-	odp.pszTab						= Translate("General");
+	odp.pszTitle					= "MetaContacts";
+	odp.pszGroup					= "Contact List";
+	odp.pszTab						= "General";
 	odp.pfnDlgProc					= DlgProcOpts;
 	CallService( MS_OPT_ADDPAGE, wParam,( LPARAM )&odp );	
 
 	odp.pszTemplate					= MAKEINTRESOURCE(IDD_PRIORITIES);
-	odp.pszTitle					= Translate("MetaContacts");
-	odp.pszGroup					= Translate("Contact List");
-	odp.pszTab						= Translate("Priorities");
+	odp.pszTitle					= "MetaContacts";
+	odp.pszGroup					= "Contact List";
+	odp.pszTab						= "Priorities";
 	odp.pfnDlgProc					= DlgProcOptsPriorities;
 	CallService( MS_OPT_ADDPAGE, wParam,( LPARAM )&odp );	
 
 	odp.pszTemplate					= MAKEINTRESOURCE(IDD_HISTORY);
-	odp.pszTitle					= Translate("MetaContacts");
-	odp.pszGroup					= Translate("Contact List");
-	odp.pszTab						= Translate("History");
+	odp.pszTitle					= "MetaContacts";
+	odp.pszGroup					= "Contact List";
+	odp.pszTab						= "History";
 	odp.pfnDlgProc					= DlgProcOpts;
 	CallService( MS_OPT_ADDPAGE, wParam,( LPARAM )&odp );	
 	return 0;
@@ -1902,14 +1900,14 @@ INT_PTR Meta_OnOff(WPARAM wParam, LPARAM lParam) {
 		// modify main menu item
 		menu.flags = CMIM_NAME | CMIM_ICON;
 		menu.hIcon = LoadIconEx(I_MENU);
-		menu.pszName = (char *)Translate("Toggle MetaContacts On");
+		menu.pszName = "Toggle MetaContacts On";
 		CallService(MS_CLIST_MODIFYMENUITEM, (WPARAM)hMenuOnOff, (LPARAM)&menu);
 	} else {
 		DBWriteContactSettingByte(0, META_PROTO, "Enabled", 1);
 		// modify main menu item
 		menu.flags = CMIM_NAME | CMIM_ICON;
 		menu.hIcon = LoadIconEx(I_MENUOFF);
-		menu.pszName = (char *)Translate("Toggle MetaContacts Off");
+		menu.pszName = "Toggle MetaContacts Off";
 		CallService(MS_CLIST_MODIFYMENUITEM, (WPARAM)hMenuOnOff, (LPARAM)&menu);
 	}
 	ReleaseIconEx(menu.hIcon);

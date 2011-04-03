@@ -112,6 +112,8 @@ extern DWORD StatusColors15bits[];
 void GetColorsFromDWord(LPCOLORREF First, LPCOLORREF Second, DWORD colDword);
 DWORD GetDWordFromColors(COLORREF First, COLORREF Second);
 
+void UninitMenuitem();
+
 BOOL includeIdle;
 typedef struct logthread_info {
   char sProtoName[MAXMODULELABELLENGTH];
