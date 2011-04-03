@@ -34,6 +34,7 @@ INT_PTR QuickRepliesService(WPARAM, LPARAM)
 
 INT_PTR OnModulesLoaded(WPARAM wParam, LPARAM lParam)
 {
+	UnhookEvent(hOnModulesLoaded);
 	HICON hIcon = NULL;
 	char buttonName[32];
 
@@ -188,6 +189,8 @@ INT_PTR OnPreShutdown(WPARAM wParam, LPARAM lParam)
 
 		CallService(MS_BB_REMOVEBUTTON, 0, (LPARAM)&bbd);
 	}
-
+	UnhookEvent(hOnButtonPressed);
+	UnhookEvent(hOnOptInitialized);
+	UnhookEvent(hOnPreShutdown);
 	return 0;
 }
