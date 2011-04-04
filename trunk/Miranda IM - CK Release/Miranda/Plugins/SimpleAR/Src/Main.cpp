@@ -134,16 +134,16 @@ INT CheckDefaults(WPARAM, LPARAM)
 	for (int c=ID_STATUS_ONLINE; c<ID_STATUS_IDLE; c++)
 	{
 		mir_snprintf(szStatus,SIZEOF(szStatus),"%d",c);
-		if (strcmp(szStatus, "40072") == 0 || strcmp(szStatus, "40077") == 0 || strcmp(szStatus, "40078") == 0)
+		if (c == 40072 || c == 40077 || c == 40078)
 			continue;
 		else
 		{
 			if (DBGetContactSettingTString(NULL,protocolname,szStatus,&dbv))
 			{
-				if (c<40077)
+				if (c < 40077)
 					// This mode does not have a preset message
 					ptszDefault=TranslateTS(ptszDefaultMsg[c-ID_STATUS_ONLINE-1]);
-				else if(40078)
+				else if(c > 40078)
 					ptszDefault=TranslateTS(ptszDefaultMsg[c-ID_STATUS_ONLINE-3]);
 				if (ptszDefault)
 					DBWriteContactSettingTString(NULL,protocolname,szStatus,ptszDefault);
@@ -196,9 +196,9 @@ TCHAR* StrReplace (TCHAR* Search, TCHAR* Replace, TCHAR* Resource)
 
 INT addEvent(WPARAM wParam, LPARAM lParam)
 {
-	HANDLE hContact=(HANDLE)wParam;
-	HANDLE hDBEvent=(HANDLE)lParam;
-	DBEVENTINFO dbei={sizeof(dbei)};
+	HANDLE hContact = (HANDLE)wParam;
+	HANDLE hDBEvent = (HANDLE)lParam;
+	DBEVENTINFO dbei = {sizeof(dbei)};
 
 	if (!fEnabled || !hContact || !hDBEvent)
 		return FALSE;	/// unspecifyed error 
@@ -268,7 +268,6 @@ INT addEvent(WPARAM wParam, LPARAM lParam)
 						char* pszUtf = mir_utf8encodeT(ptszTemp);
 						CallContactService(hContact, PSS_MESSAGE, PREF_UTF, (LPARAM)pszUtf);
 
-						DBEVENTINFO dbei = {0};
 						dbei.cbSize = sizeof(dbei);
 						dbei.eventType = EVENTTYPE_MESSAGE;
 						dbei.flags = DBEF_UTF | DBEF_SENT; //DBEF_READ;
