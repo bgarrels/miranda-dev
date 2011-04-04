@@ -23,11 +23,11 @@ INT_PTR CALLBACK DlgProcOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPara
 				DBFreeVariant(&dbv);
 			}
 
-			for (INT c=ID_STATUS_ONLINE; c<ID_STATUS_IDLE; c++)
+			for (INT c = ID_STATUS_ONLINE; c < ID_STATUS_IDLE; c++)
 			{
 				mir_snprintf(tszStatus, SIZEOF(tszStatus), "%d", c);
 				pszStatus=(TCHAR*)CallService(MS_CLIST_GETSTATUSMODEDESCRIPTION,(WPARAM)c,GSMDF_TCHAR);
-				if (strcmp(tszStatus, "40072") == 0 || strcmp(tszStatus, "40077") == 0 || strcmp(tszStatus, "40078") == 0)
+				if (c == 40072 || c == 40077 || c == 40078)
 					continue;
 				else
 				{
@@ -35,10 +35,10 @@ INT_PTR CALLBACK DlgProcOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPara
 
 					if (!DBGetContactSettingTString(NULL, protocolname, tszStatus, &dbv))
 					{
-						if (c<40077)
-							ptszMessage[c-ID_STATUS_ONLINE-1]=_tcsdup(dbv.ptszVal);
-						else if (c>40078)
-							ptszMessage[c-ID_STATUS_ONLINE-3]=_tcsdup(dbv.ptszVal);
+						if (c < 40077)
+							ptszMessage[c-ID_STATUS_ONLINE-1] = _tcsdup(dbv.ptszVal);
+						else if (c > 40078)
+							ptszMessage[c-ID_STATUS_ONLINE-3] = _tcsdup(dbv.ptszVal);
 						DBFreeVariant(&dbv);
 					}
 				}
