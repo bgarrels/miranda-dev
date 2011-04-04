@@ -79,7 +79,7 @@ function MirandaPluginInfoEx(mirandaVersion:DWORD):PPLUGININFOEX; cdecl;
 begin
   result:=@PluginInfo;
   PluginInfo.cbSize     :=SizeOf(TPLUGININFOEX);
-  PluginInfo.shortName  :='mRadio Mod (Unicode)';
+  PluginInfo.shortName  :='mRadio Mod';
   PluginInfo.version    :=$00000107;
   PluginInfo.description:='This plugin plays and records Internet radio streams.'+
                           ' Also local media files can be played.';
@@ -173,7 +173,7 @@ begin
   isEQ_OFF  :=DBReadByte(0,PluginName,optEQ_OFF);
   asOffline :=DBReadByte(0,PluginName,optOffline);
   AuConnect :=DBReadByte(0,PluginName,optConnect);
-  gVolume   :=DBReadByte(0,PluginName,optVolume,100);
+  gVolume   :=DBReadByte(0,PluginName,optVolume,50);
   NumTries  :=DBReadByte(0,PluginName,optNumTries,1);
   ForcedMono:=DBReadByte(0,PluginName,optForcedMono);
   if NumTries<1 then NumTries:=1;
@@ -200,6 +200,7 @@ end;
 
 function PreShutdown(wParam:WPARAM;lParam:LPARAM):int;cdecl;
 begin
+  CallService(MS_RADIO_COMMAND,MRC_STOP,1);
   UnRegisterHotKey;
 
   DestroyProtoServices;
@@ -262,7 +263,7 @@ begin
   inc(pc);
   pc^:=#0;
 
-  custom:=DBReadUnicode(0,PluginName,optBASSpath,'Plugins\Bass');
+  custom:=DBReadUnicode(0,PluginName,optBASSpath,nil);
 
   if MyLoadBASS(szTemp,custom) then
   begin

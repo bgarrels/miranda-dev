@@ -175,6 +175,7 @@
       <PrecompiledHeaderFile>commonstatus.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <OptimizeReferences>true</OptimizeReferences>
@@ -183,6 +184,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <AdditionalDependencies>comctl32.lib;wsock32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>wininet.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">

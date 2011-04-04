@@ -7,5 +7,6 @@
 ;[Add Contact\nAdd a contact to your contact list]
 ;[Contact ID:]
 ;[Account:]
+;[Add temporarily]
 ;[The contact cannot be added to your contact list. Please make sure the contact ID is entered correctly.]
 ;[The contact cannot be added to your contact list. If you are not logged into the selected account, please try to do so. Also, make sure the contact ID is entered correctly.]
