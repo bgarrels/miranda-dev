@@ -62,17 +62,27 @@ typedef struct				// Tlen protocol
 	char jid[256];
 } TLEN_SEARCH_RESULT;
 
-void AddContactDlgOpts(HWND hdlg, const char* szProto)
+void AddContactDlgOpts(HWND hdlg, const char* szProto, BOOL bAuthOptsOnly = FALSE)
 {
-	// By default check both checkboxes
-	CheckDlgButton(hdlg, IDC_ADDED, BST_CHECKED);
-	CheckDlgButton(hdlg, IDC_AUTH, BST_CHECKED);
-
 	DWORD flags = (szProto) ? CallProtoService(szProto, PS_GETCAPS, PFLAGNUM_4, 0) : 0;
-	EnableWindow(GetDlgItem(hdlg, IDC_ADDED), !(flags & PF4_FORCEADDED));
-	EnableWindow(GetDlgItem(hdlg, IDC_AUTH), !(flags & PF4_FORCEAUTH));
-	EnableWindow(GetDlgItem(hdlg, IDC_AUTHREQ), (flags & PF4_NOCUSTOMAUTH) ? FALSE : IsDlgButtonChecked(hdlg, IDC_AUTH));
-	EnableWindow(GetDlgItem(hdlg, IDC_AUTHGB), (flags & PF4_NOCUSTOMAUTH) ? FALSE : IsDlgButtonChecked(hdlg, IDC_AUTH));
+	if (IsDlgButtonChecked(hdlg, IDC_ADDTEMP))
+	{
+		EnableWindow(GetDlgItem(hdlg, IDC_ADDED), FALSE);
+		EnableWindow(GetDlgItem(hdlg, IDC_AUTH), FALSE);
+		EnableWindow(GetDlgItem(hdlg, IDC_AUTHREQ), FALSE);
+		EnableWindow(GetDlgItem(hdlg, IDC_AUTHGB), FALSE);
+	}
+	else
+	{
+		EnableWindow(GetDlgItem(hdlg, IDC_ADDED), !(flags & PF4_FORCEADDED));
+		EnableWindow(GetDlgItem(hdlg, IDC_AUTH), !(flags & PF4_FORCEAUTH));
+		EnableWindow(GetDlgItem(hdlg, IDC_AUTHREQ), (flags & PF4_NOCUSTOMAUTH) ? FALSE : IsDlgButtonChecked(hdlg, IDC_AUTH));
+		EnableWindow(GetDlgItem(hdlg, IDC_AUTHGB), (flags & PF4_NOCUSTOMAUTH) ? FALSE : IsDlgButtonChecked(hdlg, IDC_AUTH));
+	}
+
+	if (bAuthOptsOnly)
+		return;
+
 	SetDlgItemText(hdlg, IDC_AUTHREQ, (flags & PF4_NOCUSTOMAUTH) ? _T("") : TranslateT("Please authorize my request and add me to your contact list."));
 
 	flags = (szProto) ? CallProtoService(szProto, PS_GETCAPS, PFLAGNUM_1, 0) : 0;
@@ -216,6 +226,9 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 			SendDlgItemMessage(hdlg, IDC_GROUP, CB_SETCURSEL, 0, 0);
 
 			AddContactDlgAccounts(hdlg, acs);
+			// By default check these checkboxes
+			CheckDlgButton(hdlg, IDC_ADDED, BST_CHECKED);
+			CheckDlgButton(hdlg, IDC_AUTH, BST_CHECKED);
 			AddContactDlgOpts(hdlg, acs->szProto);
 			EnableWindow(GetDlgItem(hdlg, IDOK), FALSE);
 			break;
@@ -231,10 +244,10 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 						if (GetDlgItemText(hdlg, IDC_USERID, szUserId, SIZEOF(szUserId)))
 						{
 							if (!IsWindowEnabled(GetDlgItem(hdlg, IDOK)))
-								EnableWindow(GetDlgItem(hdlg,IDOK),TRUE);
+								EnableWindow(GetDlgItem(hdlg, IDOK), TRUE);
 						}
 						else if (IsWindowEnabled(GetDlgItem(hdlg, IDOK)))
-							EnableWindow(GetDlgItem(hdlg,IDOK),FALSE);
+							EnableWindow(GetDlgItem(hdlg, IDOK), FALSE);
 					}
 					break;
 
@@ -247,6 +260,10 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 					}
 					if (HIWORD(wparam) == CBN_CLOSEUP)
 						SetFocus(GetDlgItem(hdlg, IDC_USERID));
+					break;
+
+				case IDC_ADDTEMP:
+					AddContactDlgOpts(hdlg, acs->szProto, TRUE);
 					break;
 
 				case IDC_AUTH:
@@ -324,7 +341,7 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 					psr->id = mir_tstrdup(szUserId);
 					acs->psr = psr;
 
-					hContact = (HANDLE)CallProtoService(acs->szProto, PS_ADDTOLIST, 0, (LPARAM)acs->psr);
+					hContact = (HANDLE)CallProtoService(acs->szProto, PS_ADDTOLIST, IsDlgButtonChecked(hdlg, IDC_ADDTEMP) ? PALF_TEMPORARY : 0, (LPARAM)acs->psr);
 
 					if (hContact == NULL)
 					{
@@ -339,29 +356,35 @@ INT_PTR CALLBACK AddContactDlgProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lp
 						DBWriteContactSettingTString(hContact, "CList", "MyHandle", szHandle);
 
 					int item = SendDlgItemMessage(hdlg, IDC_GROUP, CB_GETCURSEL, 0, 0);
-					if (item > 0) 
+					if (item > 0)
 					{
 						item = SendDlgItemMessage(hdlg, IDC_GROUP, CB_GETITEMDATA, item, 0);
 						CallService(MS_CLIST_CONTACTCHANGEGROUP, (WPARAM)hContact, item);
 					}
 
-					DBDeleteContactSetting(hContact, "CList", "NotOnList");
-
-					if (IsDlgButtonChecked(hdlg, IDC_ADDED))
-						CallContactService(hContact, PSS_ADDED, 0, 0);
-
-					if (IsDlgButtonChecked(hdlg, IDC_AUTH)) 
+					if (!IsDlgButtonChecked(hdlg, IDC_ADDTEMP))
 					{
-						DWORD flags = CallProtoService(acs->szProto, PS_GETCAPS, PFLAGNUM_4, 0);
-						if (flags & PF4_NOCUSTOMAUTH)
-							CallContactService(hContact, PSS_AUTHREQUESTT, 0, 0);
-						else 
+						DBDeleteContactSetting(hContact, "CList", "NotOnList");
+
+						if (IsDlgButtonChecked(hdlg, IDC_ADDED))
+							CallContactService(hContact, PSS_ADDED, 0, 0);
+
+						if (IsDlgButtonChecked(hdlg, IDC_AUTH)) 
 						{
-							TCHAR szReason[512];
-							GetDlgItemText(hdlg, IDC_AUTHREQ, szReason, SIZEOF(szReason));
-							CallContactService(hContact, PSS_AUTHREQUESTT, 0, (LPARAM)szReason);
-						}	
+							DWORD flags = CallProtoService(acs->szProto, PS_GETCAPS, PFLAGNUM_4, 0);
+							if (flags & PF4_NOCUSTOMAUTH)
+								CallContactService(hContact, PSS_AUTHREQUESTT, 0, 0);
+							else
+							{
+								TCHAR szReason[512];
+								GetDlgItemText(hdlg, IDC_AUTHREQ, szReason, SIZEOF(szReason));
+								CallContactService(hContact, PSS_AUTHREQUESTT, 0, (LPARAM)szReason);
+							}
+						}
 					}
+
+					if (GetAsyncKeyState(VK_CONTROL))
+						CallService(MS_MSG_SENDMESSAGE, (WPARAM)hContact, (LPARAM)(const char*)NULL);
 				}
 				// fall through
 				case IDCANCEL:
