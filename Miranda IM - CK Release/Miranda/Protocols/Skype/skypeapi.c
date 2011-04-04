@@ -1156,9 +1156,9 @@ INT_PTR SkypeSetAvatar(WPARAM wParam, LPARAM lParam) {
 		return -1;
 
 	ext = &filename[len-4];
-	if (_stricmp(ext, ".jpg")==0 || stricmp(ext-1, ".jpeg")==0)
+	if (stricmp(ext, ".jpg")==0 || stricmp(ext-1, ".jpeg")==0)
 		ext = "jpg";
-	else if (_stricmp(ext, ".png")==0)
+	else if (stricmp(ext, ".png")==0)
 		ext = "png";
 	else
 		return -2;
