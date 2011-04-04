@@ -85,27 +85,19 @@ void AddContactDlgOpts(HWND hdlg, const char* szProto, BOOL bAuthOptsOnly = FALS
 
 	SetDlgItemText(hdlg, IDC_AUTHREQ, (flags & PF4_NOCUSTOMAUTH) ? _T("") : TranslateT("Please authorize my request and add me to your contact list."));
 
-	flags = (szProto) ? CallProtoService(szProto, PS_GETCAPS, PFLAGNUM_1, 0) : 0;
-/*	if (flags & PF1_BASICSEARCH)
+	char* szUniqueId = (char*)CallProtoService(szProto, PS_GETCAPS, PFLAG_UNIQUEIDTEXT, 0);
+	if (szUniqueId)
 	{
-		char* szUniqueId = (char*)CallProtoService(szProto, PS_GETCAPS, PFLAG_UNIQUEIDTEXT, 0);
-		if (szUniqueId)
-		{
-//			if (szUniqueId[strlen(szUniqueId)-1] != ':')
-//				strcat(szUniqueId, ":");
-			#ifdef _UNICODE
-			{
-				TCHAR* p = mir_a2u(szUniqueId);
-				SetDlgItemText(hdlg, IDC_IDLABEL, p);
-				mir_free(p);
-			}
-			#else
-				SetDlgItemTextA(hdlg, IDC_IDLABEL, szUniqueId);
-			#endif
-		}
-		else
-			SetDlgItemText(hdlg, IDC_IDLABEL, TranslateT("Contact ID:"));
-	}*/
+		int cbLen = strlen(szUniqueId) + 2;
+		TCHAR* pszUniqueId = (TCHAR*)mir_alloc(cbLen * sizeof(TCHAR));
+		mir_sntprintf(pszUniqueId, cbLen, _T(TCHAR_STR_PARAM) _T(":"), szUniqueId);
+		SetDlgItemText(hdlg, IDC_IDLABEL, pszUniqueId);
+		mir_free(pszUniqueId);
+	}
+	else
+		SetDlgItemText(hdlg, IDC_IDLABEL, TranslateT("Contact ID:"));
+
+	flags = (szProto) ? CallProtoService(szProto, PS_GETCAPS, PFLAGNUM_1, 0) : 0;
 	if (flags & PF1_NUMERICUSERID)
 	{
 		char buffer[65];
