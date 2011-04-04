@@ -188,7 +188,7 @@
     </Link>
     <ClCompile>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>../../include;../../ExternalAPI</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include;../../ExternalAPI;$(ProjectDir)\regexp</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
