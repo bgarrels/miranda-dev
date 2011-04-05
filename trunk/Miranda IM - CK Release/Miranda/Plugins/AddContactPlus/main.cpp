@@ -63,8 +63,9 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {
-	if (mirandaVersion < PLUGIN_MAKE_VERSION(0,8,0,0)) {
-		MessageBox(NULL, _T("The AddContact+ plugin cannot be loaded. It requires Miranda IM 0.8 or later."), _T("AddContact+ Plugin"), MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST);
+	if (mirandaVersion < PLUGIN_MAKE_VERSION(0, 9, 0, 0))
+	{
+		MessageBox(NULL, _T("The AddContact+ plugin cannot be loaded. It requires Miranda IM 0.9 or later."), _T("AddContact+ Plugin"), MB_OK | MB_ICONWARNING | MB_SETFOREGROUND | MB_TOPMOST);
 		return NULL;
 	}
 	return &pluginInfo;
@@ -98,21 +99,20 @@ static int OnIconsChanged(WPARAM, LPARAM)
 
 static int OnAccListChanged(WPARAM, LPARAM)
 {
-	PROTOACCOUNT** accounts;
-	int proto_count, ProtoCount = 0;
-	DWORD caps;
+	PROTOACCOUNT** pAccounts;
+	int iRealAccCount, iAccCount = 0;
+	DWORD dwCaps;
 
-	ProtoEnumAccounts(&proto_count, &accounts);
-	for (int i = 0; i < proto_count; i++)
+	ProtoEnumAccounts(&iRealAccCount, &pAccounts);
+	for (int i = 0; i < iRealAccCount; i++)
 	{
-		if (!IsAccountEnabled(accounts[i])) continue;
-		caps = (DWORD)CallProtoService(accounts[i]->szModuleName, PS_GETCAPS,PFLAGNUM_1, 0);
-		if (!(caps & PF1_BASICSEARCH) && !(caps & PF1_EXTSEARCH) && !(caps & PF1_SEARCHBYEMAIL)	&& !(caps & PF1_SEARCHBYNAME))
-			continue;
-		ProtoCount++;
+		if (!IsAccountEnabled(pAccounts[i])) continue;
+		dwCaps = (DWORD)CallProtoService(pAccounts[i]->szModuleName, PS_GETCAPS, PFLAGNUM_1, 0);
+		if (dwCaps & PF1_BASICSEARCH || dwCaps & PF1_EXTSEARCH || dwCaps & PF1_SEARCHBYEMAIL || dwCaps & PF1_SEARCHBYNAME)
+			iAccCount++;
 	}
 
-	if (ProtoCount)
+	if (iAccCount)
 	{
 		CLISTMENUITEM mi = {0};
 
@@ -125,7 +125,7 @@ static int OnAccListChanged(WPARAM, LPARAM)
 		mi.icolibItem = hIconLibItem;
 		mi.pszName = LPGEN("&Add Contact...");
 		mi.pszService = MS_ADDCONTACTPLUS_SHOW;
-		hMainMenuItem = (HANDLE)CallService(MS_CLIST_ADDMAINMENUITEM, 0,(LPARAM)&mi);
+		hMainMenuItem = (HANDLE)CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM)&mi);
 
 		if (ServiceExists(MS_TB_ADDBUTTON))
 		{
@@ -158,6 +158,15 @@ static int OnAccListChanged(WPARAM, LPARAM)
 
 static int OnModulesLoaded(WPARAM, LPARAM)
 {
+	if (ServiceExists(MS_UPDATE_REGISTERFL))
+#if defined(_WIN64)
+		CallService(MS_UPDATE_REGISTERFL, 4414, (LPARAM)&pluginInfo);
+#elif defined(_UNICODE)
+		CallService(MS_UPDATE_REGISTERFL, 3842, (LPARAM)&pluginInfo);
+#else
+		CallService(MS_UPDATE_REGISTERFL, 3843, (LPARAM)&pluginInfo);
+#endif
+
 	SKINICONDESC sid = {0};
 	char szFile[MAX_PATH];
 	GetModuleFileNameA(hInst, szFile, MAX_PATH);
