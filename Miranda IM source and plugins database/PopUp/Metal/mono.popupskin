@@ -1,0 +1,391 @@
+#Metal skin for PopUp
+#Author: Angeli-Ka,(script based on Popup Plus default skin by Nullbie), 2005
+#you can't use any of images included in archive, for others than personal use, without permission.  
+
+w 4+icon.width+4+title.width+1+4+clock.width+4 > 1+2+avatar.width+4+text.width+2+1
+h 4+title.height+4+2+(avatar.height>text.height)+2+1
+
+# bakground
+object  
+	ifset 3
+	type bitmap
+	source back.png
+	mono
+	x 0
+	y 0
+	w window.width
+	h window.height
+end
+
+object 
+	ifnotset 3
+	type bitmap
+	source back.png
+	x 0
+	y 0
+	w window.width
+	h window.height
+end
+
+# titlebar lines
+object  
+	ifset 3
+	type bitmap
+	source title_lt.png
+	mono
+	x 0
+	y 0
+end
+
+object  
+	ifnotset 3
+	type bitmap
+	source title_lt.png
+	x 0
+	y 0
+end
+
+object  
+	ifset 3
+	type bitmap
+	source title_ct.png
+	mono
+	x 8
+	y 0
+	w window.width-1-8
+end
+
+object  
+	ifnotset 3
+	type bitmap
+	source title_ct.png
+	x 8
+	y 0
+	w window.width-1-8
+end
+
+object  
+	ifset 3
+	type bitmap
+	source title_rt.png
+	mono
+	x window.width-8
+	y 0
+end
+
+object  
+	ifnotset 3
+	type bitmap
+	source title_rt.png
+	x window.width-8
+	y 0
+end
+
+object  
+	ifset 3 
+	type bitmap
+	source title_lc.png
+	mono
+	x 0
+	y 8
+	h title.height
+end
+
+object  
+	ifnotset 3 
+	type bitmap
+	source title_lc.png
+	x 0
+	y 8
+	h title.height
+end
+
+object  
+	ifset 3
+	type bitmap
+	source title_cc.png
+	mono
+	x 8
+	y 8
+	w window.width-8-8
+	h title.height
+end
+
+object  
+	ifnotset 3
+	type bitmap
+	source title_cc.png
+	x 8
+	y 8
+	w window.width-8-8
+	h title.height
+end
+
+object  
+	ifset 3 
+	type bitmap
+	source title_rc.png
+	mono
+	x window.width-8
+	y 8
+	h title.height
+end
+
+object  
+	ifnotset 3
+	type bitmap
+	source title_rc.png
+	x window.width-8
+	y 8
+	h title.height
+end
+
+object  
+	ifset 3
+	type bitmap
+	source title_lb.png
+	mono
+	x 0
+	y 4+title.height
+end
+
+object  
+	ifnotset 3
+	type bitmap
+	source title_lb.png
+	x 0
+	y 4+title.height
+end
+
+object  
+	ifset 3
+	type bitmap
+	source title_cb.png
+	mono
+	x 8
+	y 4+title.height
+	w window.width-8-8
+end
+
+object  
+	ifnotset 3
+	type bitmap
+	source title_cb.png
+	x 8
+	y 4+title.height
+	w window.width-8-8
+end
+
+object  
+	ifset 3
+	type bitmap
+	source title_rb.png
+	mono
+	x window.width-8
+	y 4+title.height
+end
+object  
+	ifnotset 3
+	type bitmap
+	source title_rb.png
+	x window.width-8
+	y 4+title.height
+end
+
+# text area lines
+object  
+	ifset 3
+	type bitmap
+	source left.png
+	mono
+	x 0
+	y 4+title.height+4
+	h window.height-(4+title.height+4)-1
+end
+
+object   
+	ifnotset 3
+	type bitmap
+	source left.png
+	x 0
+	y 4+title.height+4
+	h window.height-(4+title.height+4)-1
+end
+
+object  
+	ifset 3
+	type bitmap
+	source right.png
+	mono
+	x window.width-1
+	y 4+title.height+4
+	h window.height-(4+title.height+4)-1
+end
+
+object	
+	ifnotset 3
+	type bitmap
+	source right.png
+	x window.width-1
+	y 4+title.height+4
+	h window.height-(4+title.height+4)-1
+end
+
+object  
+	ifset 3
+	type bitmap
+	source bottom_left.png
+	mono
+	x 0
+	y window.height-1
+end
+
+object  
+	ifnotset 3
+	type bitmap
+	source bottom_left.png
+	x 0
+	y window.height-1
+end
+
+object  
+	ifset 3
+	type bitmap
+	source bottom.png
+	mono
+	x 1
+	y window.height-1
+	w window.width-1-1
+end
+
+object  
+	ifnotset 3
+	type bitmap
+	source bottom.png
+	x 1
+	y window.height-1
+	w window.width-1-1
+end
+
+object  
+	ifset 3
+	type bitmap
+	source bottom_right.png
+	mono
+	x window.width-1
+	y window.height-1
+end
+
+object  
+	ifnotset 3
+	type bitmap
+	source bottom_right.png
+	x window.width-1
+	y window.height-1
+end
+
+# clock
+object
+	ifset 3 
+	type clock
+	source clock.png
+	mono
+	clocksize 4 4 8 6 8 7 8 8 8 7 8 8 0 0 2
+	x window.width-clock.width-6
+	y 5
+end
+object
+	ifnotset 3 
+	type clock
+	source clock.png
+	clocksize 4 4 8 6 8 7 8 8 8 7 8 8 0 0 2
+	x window.width-clock.width-6
+	y 5
+end
+
+#icon
+object  ifset 1
+	type icon
+	x 4
+	y 4+(title.height-icon.height)/2
+end
+# avatar
+object
+	ifset 2	
+	type avatar
+	x 4
+	y  4+title.height+6
+	w 32
+	proportional 1
+end
+
+#titlebar text
+object 
+	ifset 1
+	type title
+	color 255 255 255
+	x 4+icon.width+4+1
+	y 4
+	w window.width-(4+icon.width+4)-4-clock.width-4
+end
+object  
+	ifset 1
+	type title
+	color 255 255 255
+	x 4+icon.width+4
+	y 4+1
+	w window.width-(4+icon.width+4)-4-clock.width-4
+end
+object  
+	ifset 1
+	type title
+	color 20 20 20
+	x 4+icon.width+4
+	y 4
+	w window.width-(4+icon.width+4)-4-clock.width-4
+end
+object  
+	ifnotset 1
+	type title
+	color 255 255 255
+	x 4+4+1
+	y 4
+	w window.width-(4+icon.width+4)-4-clock.width-4
+end
+object  
+	ifnotset 1
+	type title
+	color 255 255 255
+	x 4+4
+	y 4+1
+	w window.width-(4+icon.width+4)-4-clock.width-4
+end
+object  
+	ifnotset 1
+	type title
+	color 20 20 20
+	x 4+4
+	y 4
+	w window.width-(4+icon.width+4)-4-clock.width-4
+end
+
+
+#text area
+object 
+
+	type text
+	color 210 210 210
+	x 1+2+avatar.width+4
+	y 4+title.height+4+2+1
+	w window.width-(1+2+avatar.width+4)-2-1
+end
+object 
+
+	type text
+	color 20 20 20
+	x 1+2+avatar.width+4
+	y 4+title.height+4+2
+	w window.width-(1+2+avatar.width+4)-2-1
+end
+
+
