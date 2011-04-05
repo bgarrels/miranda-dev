@@ -1,0 +1,151 @@
+#X-Byte (mod) skin v0.0.2 for PopUp 2.0.3.96 RC1 or above
+#Author: LEM, based on original X-Byte skin for PU+ 1.0.0.0 by zazoo
+
+w 32+icon.width+4+title.width+1+4+clock.width+4 > 32+2+4+text.width+2+32+5
+h 4+title.height+4+2+(avatar.height > text.height)+2+4
+
+# background
+object
+	type bitmap
+	source mono_back.png
+	mono
+	x 31
+	y 0
+	w -1
+	h -1
+end
+
+# side
+object
+	type bitmap
+	source mono_side.png
+	mono
+	x 0
+	y 0
+	h -1
+        w 31
+end
+
+# top and bottom lines
+object
+	type bitmap
+	source frame_ct.bmp
+	ifset 1
+	x 0
+	y 0
+	w -1
+end
+
+object
+	type bitmap
+	source frame_cb.bmp
+	ifset 1
+	x 0
+	y -5
+	w -1
+end
+
+# left and right lines
+object
+	type bitmap
+	source frame_lc.bmp
+	ifset 1
+	x 0
+	y 0
+	h -1
+end
+
+object
+	type bitmap
+	source frame_rc.bmp
+	ifset 1
+	x -4
+	y 0
+	h -1
+end
+
+# corners
+object
+	type bitmap
+	source frame_lt.bmp
+	ifset 1
+	x 0
+	y 0
+end
+
+object
+	type bitmap
+	source frame_lb.bmp
+	ifset 1
+	x 0
+	y -5
+end
+
+object
+	type bitmap
+	source frame_rt.bmp
+	ifset 1
+	x -4
+	y 0
+end
+
+object
+	type bitmap
+	source frame_rb.bmp
+	ifset 1
+	x -4
+	y -5
+end
+
+# popup icon
+object
+	type icon
+	x 6
+	y 4
+end
+
+# clock
+object
+	type clock
+	source clock.png
+	mono
+	clocksize 5 6 9 9 9 9 9 9 9 9 9 9 0 0 5
+	x window.width-clock.width-5
+	y 1
+end
+
+# popup title
+object
+	type title
+	x 32
+	y 4
+	w window.width-(4+icon.width+4)-4-clock.width-4
+end
+
+# popup text
+object
+	ifset 2	
+	type text
+	x 32
+	y 4+title.height
+	w window.width-32-(6+2+32+4)
+end
+
+# popup text
+object
+	ifnotset 2	
+	type text
+	x 32
+	y 4+title.height
+	w window.width-32-5
+end
+
+# avatar
+object
+	ifset 2	
+	type avatar
+	x window.width-32-7
+	y 4+title.height+4
+	w 32
+	proportional 1
+end
