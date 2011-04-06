@@ -1096,7 +1096,7 @@ HICON CLUI_LoadIconFromExternalFile(char *filename,int i,boolean UseLibrary,bool
 			sid.cx=16;
 			sid.cy=16;
 			sid.hDefaultIcon = (has_proto_icon||!(UseLibrary&2))?NULL:(HICON)CallService(MS_SKIN_LOADPROTOICON,(WPARAM)NULL,(LPARAM)(-internalidx));
-			sid.pszSection = Translate(SectName);				
+			sid.pszSection=SectName;
 			sid.pszName=IconName;
 			sid.pszDescription=Description;
 			sid.pszDefaultFile=internalidx<0?szMyPath:szPath;
@@ -1848,7 +1848,7 @@ HANDLE RegisterIcolibIconHandle(char * szIcoID, char *szSectionName,  char * szD
 	sid.cbSize = sizeof(sid);
 	sid.cx = 16;
 	sid.cy = 16;
-	sid.pszSection = Translate(szSectionName);
+	sid.pszSection = szSectionName;
 	sid.pszName = szIcoID;
 	sid.flags|=SIDF_PATH_TCHAR;
 	sid.pszDescription = szDescription;
@@ -2970,19 +2970,18 @@ LRESULT CLUI::OnDrawItem( UINT msg, WPARAM wParam, LPARAM lParam )
 		if (dis->itemData==MENU_MIRANDAMENU) {
 			if (!g_CluiData.fLayered)
 			{	
-				char buf[255]={0};	
-
+				char buf[255];	
 				short offset = 1 + ( dis->itemState&ODS_SELECTED ? 1 : 0 ) 
 								 - ( dis->itemState&ODS_HOTLIGHT ? 1 : 0 );
 				
-				HICON hIcon=LoadSkinnedIcon(SKINICON_OTHER_MIRANDA);
+				HICON hIcon=LoadSkinnedIcon(SKINICON_OTHER_MAINMENU);
 				
 				CLUI_DrawMenuBackGround(m_hWnd, dis->hDC, 1, dis->itemState);
 				mir_snprintf(buf,SIZEOF(buf),"Main,ID=MainMenu,Selected=%s,Hot=%s",(dis->itemState&ODS_SELECTED)?"True":"False",(dis->itemState&ODS_HOTLIGHT)?"True":"False");
 				SkinDrawGlyph(dis->hDC,&dis->rcItem,&dis->rcItem,buf);
 
-				int x = dis->rcItem.right  + dis->rcItem.left - GetSystemMetrics( SM_CXSMICON ) / 2 + offset;
-				int y = dis->rcItem.bottom + dis->rcItem.top  - GetSystemMetrics( SM_CYSMICON ) / 2 + offset;
+				int x = (dis->rcItem.right  + dis->rcItem.left - GetSystemMetrics(SM_CXSMICON)) / 2 + offset;
+				int y = (dis->rcItem.bottom + dis->rcItem.top  - GetSystemMetrics(SM_CYSMICON)) / 2 + offset;
 
 				DrawState( dis->hDC, NULL, NULL, (LPARAM)hIcon, 0, x, y , 0 , 0 , 
 					DST_ICON | ( dis->itemState & ODS_INACTIVE  && (((FALSE))) ? DSS_DISABLED : DSS_NORMAL ) );
