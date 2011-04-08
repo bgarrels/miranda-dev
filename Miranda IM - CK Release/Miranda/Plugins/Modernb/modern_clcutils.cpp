@@ -517,7 +517,7 @@ void LoadCLCOptions(HWND hwnd, struct ClcData *dat )
 	g_CluiData.fSortNoOfflineBottom=ModernGetSettingByte(NULL,"CList","NoOfflineBottom",SETTING_NOOFFLINEBOTTOM_DEFAULT);
 
 	// Row
-	dat->row_min_heigh = ModernGetSettingWord(NULL,"CList","MinRowHeight",CLCDEFAULT_ROWHEIGHT);
+	dat->row_min_heigh = ModernGetSettingWord(NULL,"CList","MinRowHeight",26);
 	dat->row_border = ModernGetSettingWord(NULL,"CList","RowBorder",SETTING_ROWBORDER_DEFAULT);
 	dat->row_before_group_space =((hwnd!=pcli->hwndContactTree&&pcli->hwndContactTree!=NULL) 
 		|| !ModernGetSettingByte(NULL,"ModernData","UseAdvancedRowLayout",SETTING_ROW_ADVANCEDLAYOUT_DEFAULT))?0:ModernGetSettingWord(NULL,"ModernSkin","SpaceBeforeGroup",SKIN_SPACEBEFOREGROUP_DEFAULT);
@@ -540,7 +540,7 @@ void LoadCLCOptions(HWND hwnd, struct ClcData *dat )
 	}
 	else
 	{
-		int defItems[]= {ITEM_ICON, ITEM_TEXT, ITEM_EXTRA_ICONS,};
+		int defItems[]= {ITEM_AVATAR, ITEM_TEXT, ITEM_CONTACT_TIME, ITEM_EXTRA_ICONS, ITEM_ICON};
 		for (i = 0 ; i < NUM_ITEM_TYPE; i++)
 			dat->row_items[i]=(i<SIZEOF(defItems)) ? defItems[i] : -1;
 	}
