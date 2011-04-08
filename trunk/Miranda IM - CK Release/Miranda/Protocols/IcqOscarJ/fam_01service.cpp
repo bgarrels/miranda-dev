@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/fam_01service.cpp $
-// Revision       : $Revision: 13522 $
-// Last change on : $Date: 2011-03-28 22:37:52 +0200 (Mo, 28. Mrz 2011) $
-// Last change by : $Author: george.hazan $
+// Revision       : $Revision: 13553 $
+// Last change on : $Date: 2011-04-08 03:25:55 +0200 (Fr, 08. Apr 2011) $
+// Last change by : $Author: borkra $
 //
 // DESCRIPTION:
 //
@@ -710,7 +710,7 @@ void CIcqProto::setUserInfo()
 	}
 #endif
 	{
-		packShortCapability(&packet, 0x1349);  // AIM_CAPS_ICQSERVERRELAY
+//		packShortCapability(&packet, 0x1349);  // AIM_CAPS_ICQSERVERRELAY
 	}
 	if (m_bUtfEnabled)
 	{

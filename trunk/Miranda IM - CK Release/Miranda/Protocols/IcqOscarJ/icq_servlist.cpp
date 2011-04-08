@@ -24,8 +24,8 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_servlist.cpp $
-// Revision       : $Revision: 13335 $
-// Last change on : $Date: 2011-01-27 07:19:19 +0100 (Do, 27. Jan 2011) $
+// Revision       : $Revision: 13553 $
+// Last change on : $Date: 2011-04-08 03:25:55 +0200 (Fr, 08. Apr 2011) $
 // Last change by : $Author: borkra $
 //
 // DESCRIPTION:
@@ -2678,13 +2678,6 @@ int CIcqProto::ServListDbSettingChanged(WPARAM wParam, LPARAM lParam)
 	if (!icqOnline() || !m_bSsiEnabled || bIsSyncingCL)
 		return 0;
 
-	{ // only our contacts will be handled
-		if (IsICQContact((HANDLE)wParam))
-			;// our contact, fine; otherwise return
-		else 
-			return 0;
-	}
-
 #ifdef _DEBUG
 	if (cws->value.type == DBVT_DELETED)
 		NetLog_Server("DB-Events: Module \"%s\", setting \"%s\" deleted.", cws->szModule, cws->szSetting);
@@ -2738,8 +2731,6 @@ int CIcqProto::ServListDbSettingChanged(WPARAM wParam, LPARAM lParam)
 
 int CIcqProto::ServListDbContactDeleted(WPARAM wParam, LPARAM lParam)
 {
-	if (!IsICQContact((HANDLE)wParam)) return 0;
-
 #ifdef _DEBUG
 	NetLog_Server("DB-Events: Contact %x deleted.", wParam);
 #endif
