@@ -2,7 +2,7 @@
 UserinfoEx plugin for Miranda IM
 
 Copyright:
-� 2006-2010 DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol
+� 2006-2010 DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -21,9 +21,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 ===============================================================================
 
 File name      : $HeadURL: http://userinfoex.googlecode.com/svn/trunk/psp_options.h $
-Revision       : $Revision: 187 $
-Last change on : $Date: 2010-09-08 16:05:54 +0400 (Ср, 08 сен 2010) $
-Last change by : $Author: ing.u.horn $
+Revision       : $Revision: 211 $
+Last change on : $Date: 2011-04-04 21:10:59 +0400 (Пн, 04 апр 2011) $
+Last change by : $Author: kreol13@gmail.com $
 
 ===============================================================================
 */
@@ -40,4 +40,5 @@ struct MenuOptionsList {
 };
 
 VOID OptionsLoadModule();
+VOID OptionsUnloadModule();
 #endif /* _UINFOEX_OPTIONS_H_INCLUDED_ */

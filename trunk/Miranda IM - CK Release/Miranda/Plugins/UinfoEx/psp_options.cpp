@@ -2,7 +2,7 @@
 UserinfoEx plugin for Miranda IM
 
 Copyright:
-� 2006-2010 DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol
+� 2006-2010 DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -21,9 +21,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 ===============================================================================
 
 File name      : $HeadURL: http://userinfoex.googlecode.com/svn/trunk/psp_options.cpp $
-Revision       : $Revision: 194 $
-Last change on : $Date: 2010-09-20 15:57:18 +0400 (Пн, 20 сен 2010) $
-Last change by : $Author: ing.u.horn $
+Revision       : $Revision: 211 $
+Last change on : $Date: 2011-04-04 21:10:59 +0400 (Пн, 04 апр 2011) $
+Last change by : $Author: kreol13@gmail.com $
 
 ===============================================================================
 */
@@ -46,6 +46,7 @@ Last change by : $Author: ing.u.horn $
 #include "psp_options.h"
 
 #define		PSM_ENABLE_TABITEM	(WM_USER+106)
+HANDLE hInitOpt = NULL;
 
 static MenuOptionsList ctrl_Menu[]= 
 {
@@ -1572,5 +1573,10 @@ static INT OnInitOptions(WPARAM wParam, LPARAM lParam)
  **/
 VOID OptionsLoadModule()
 {
-	HookEvent(ME_OPT_INITIALISE, OnInitOptions);
+	hInitOpt = HookEvent(ME_OPT_INITIALISE, OnInitOptions);
+}
+
+VOID OptionsUnloadModule()
+{
+	UnhookEvent(hInitOpt);
 }

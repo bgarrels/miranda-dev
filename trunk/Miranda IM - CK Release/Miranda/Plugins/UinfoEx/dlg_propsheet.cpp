@@ -2,7 +2,7 @@
 UserinfoEx plugin for Miranda IM
 
 Copyright:
-� 2006-2010 DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol
+� 2006-2010 DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -21,9 +21,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 ===============================================================================
 
 File name      : $HeadURL: http://userinfoex.googlecode.com/svn/trunk/dlg_propsheet.cpp $
-Revision       : $Revision: 210 $
-Last change on : $Date: 2010-10-02 22:27:36 +0400 (Сб, 02 окт 2010) $
-Last change by : $Author: ing.u.horn $
+Revision       : $Revision: 211 $
+Last change on : $Date: 2011-04-04 21:10:59 +0400 (Пн, 04 апр 2011) $
+Last change by : $Author: kreol13@gmail.com $
 
 ===============================================================================
 */
@@ -74,6 +74,7 @@ Last change by : $Author: ing.u.horn $
 static BOOLEAN bInitIcons			= INIT_ICONS_NONE;
 static HANDLE ghWindowList			= NULL;
 static HANDLE ghDetailsInitEvent	= NULL;
+HANDLE hContactDel, hUserInfo;
 
 static INT_PTR CALLBACK DlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -468,8 +469,11 @@ static INT OnDeleteContact(WPARAM wParam, LPARAM lParam)
  **/
 static INT OnShutdown(WPARAM wParam, LPARAM lParam)
 {
-	 WindowList_BroadcastAsync(ghWindowList, WM_DESTROY, 0, 0);
-	 return 0;
+	UnhookEvent(hContactDel);
+	UnhookEvent(hPreShutDown);
+	UnhookEvent(hUserInfo);
+	WindowList_BroadcastAsync(ghWindowList, WM_DESTROY, 0, 0);
+	return 0;
 }
 
 /**
@@ -717,9 +721,9 @@ VOID DlgContactInfoLoadModule()
 	myCreateServiceFunction(MS_USERINFO_SHOWDIALOG, ShowDialog);
 	myCreateServiceFunction(MS_USERINFO_ADDPAGE, AddPage);
 
-	HookEvent(ME_DB_CONTACT_DELETED, OnDeleteContact);
-	HookEvent(ME_SYSTEM_PRESHUTDOWN, OnShutdown);
-	HookEvent(ME_USERINFO_INITIALISE, InitDetails);
+	hContactDel = HookEvent(ME_DB_CONTACT_DELETED, OnDeleteContact);
+	hPreShutDown = HookEvent(ME_SYSTEM_PRESHUTDOWN, OnShutdown);
+	hUserInfo = HookEvent(ME_USERINFO_INITIALISE, InitDetails);
 	ghWindowList = (HANDLE)CallService(MS_UTILS_ALLOCWINDOWLIST, 0, 0);
 
 	// check whether changing my details via UserInfoEx is basically possible
