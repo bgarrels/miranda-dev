@@ -1,110 +1,51 @@
 // Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
-#include "version.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
 //
 // Generated from the TEXTINCLUDE 2 resource.
 //
-#include <windows.h>
+#include "afxres.h"
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// ??????? resources
+// Русский (Россия) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
-#ifdef _WIN32
 LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 #pragma code_page(1251)
-#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_IMPORT              ICON                    "res/import.ico"
+IDI_PASS                ICON                    "res/pass.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Dialog
 //
 
-IDD_LOGIN DIALOGEX 0, 0, 182, 78
+IDD_LOGIN DIALOGEX 0, 0, 190, 86
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOPMOST | WS_EX_TOOLWINDOW
 CAPTION "Miranda MMAP Secured Database"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,33,59,54,14
-    PUSHBUTTON      "Cancel",IDCANCEL,91,59,54,14
-    CTEXT           "Please enter password for",IDC_LOGININFO,6,3,169,8
-    CTEXT           "",IDC_DBNAME,5,14,169,8
-    EDITTEXT        IDC_USERPASS,15,33,132,14,ES_PASSWORD | ES_AUTOHSCROLL
-    CTEXT           "EN",IDC_LANG,155,32,16,14,SS_CENTERIMAGE
-    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDFRAME,0,26,181,1
-    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDFRAME,0,53,181,1
+    CONTROL         "",IDC_HEADERBAR,"MHeaderbarCtrl",0x0,0,0,190,26
+    CTEXT           "EN",IDC_LANG,158,34,13,13,SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_USERPASS,21,34,128,14,ES_PASSWORD | ES_AUTOHSCROLL | WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,36,71,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,102,71,50,14
 END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// DESIGNINFO
-//
-
-#ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
-BEGIN
-    IDD_LOGIN, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 175
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 71
-    END
-END
-#endif    // APSTUDIO_INVOKED
-
-#endif    // ??????? resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// ?????????? (??????????????) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
-#ifdef _WIN32
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
-#pragma code_page(1252)
-#endif //_WIN32
-
-#ifdef APSTUDIO_INVOKED
-/////////////////////////////////////////////////////////////////////////////
-//
-// TEXTINCLUDE
-//
-
-1 TEXTINCLUDE 
-BEGIN
-    "resource.h\0"
-END
-
-2 TEXTINCLUDE 
-BEGIN
-    "#include <windows.h>\r\n"
-    "\0"
-END
-
-3 TEXTINCLUDE 
-BEGIN
-    "\r\n"
-    "\0"
-END
-
-#endif    // APSTUDIO_INVOKED
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Dialog
-//
 
 IDD_IMPORTTYPE DIALOGEX 0, 0, 220, 114
 STYLE DS_SETFONT | DS_3DLOOK | DS_FIXEDSYS | DS_CONTROL | WS_CHILD
@@ -234,14 +175,48 @@ BEGIN
 END
 
 
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // DESIGNINFO
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
+    IDD_LOGIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 175
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 78
+    END
+
     IDD_IMPORTTYPE, DIALOG
     BEGIN
         LEFTMARGIN, 5
@@ -329,27 +304,6 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // ?????????? (??????????????) resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// ?????????? (?????????) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENA)
-#ifdef _WIN32
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_AUS
-#pragma code_page(1252)
-#endif //_WIN32
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Icon
-//
-
-// Icon with lowest ID value placed first to ensure application icon
-// remains consistent on all systems.
-IDI_IMPORT              ICON                    "import.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -357,8 +311,8 @@ IDI_IMPORT              ICON                    "import.ico"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION __FILEVERSION_STRING
- PRODUCTVERSION __FILEVERSION_STRING
+ FILEVERSION 0,10,0,1
+ PRODUCTVERSION 0,10,0,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -376,12 +330,12 @@ BEGIN
             VALUE "Comments", "Licensed under the terms of the GNU General Public License"
             VALUE "CompanyName", " "
             VALUE "FileDescription", "Miranda IM Secured Import Plugin"
-            VALUE "FileVersion", __VERSION_STRING
+            VALUE "FileVersion", "0.10.0.1"
             VALUE "InternalName", "import_sa"
             VALUE "LegalCopyright", "Copyright © 2000-2010,  Martin Цberg, Richard Hughes, Dmitry Kuzkin, George Hazan"
             VALUE "OriginalFilename", "import_sa.dll"
             VALUE "ProductName", "Miranda IM"
-            VALUE "ProductVersion", __VERSION_STRING
+            VALUE "ProductVersion", "0.10.0.1"
         END
     END
     BLOCK "VarFileInfo"
@@ -390,7 +344,7 @@ BEGIN
     END
 END
 
-#endif    // ?????????? (?????????) resources
+#endif    // Русский (Россия) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
