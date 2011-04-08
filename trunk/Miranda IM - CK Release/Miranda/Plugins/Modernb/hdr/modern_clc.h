@@ -157,10 +157,10 @@ struct ClcGroup;
 #define DRAGSTAGEF_SKIPRENAME   0x2000
 
 #define ITEM_AVATAR 0
-#define ITEM_ICON 1
-#define ITEM_TEXT 2
+#define ITEM_ICON 4
+#define ITEM_TEXT 1
 #define ITEM_EXTRA_ICONS 3
-#define ITEM_CONTACT_TIME 4
+#define ITEM_CONTACT_TIME 2
 #define NUM_ITEM_TYPE 5
 
 #define TEXT_EMPTY -1

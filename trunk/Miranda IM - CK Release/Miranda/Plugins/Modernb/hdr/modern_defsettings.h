@@ -62,32 +62,32 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define SETTING_SHOWSBAR_DEFAULT                1 //! "CLUI","ShowSBar"
 #define SETTING_SBARPERPROTO_DEFAULT            0 //! "CLUI","SBarPerProto"
 #define SETTING_USECONNECTINGICON_DEFAULT       1 //! "CLUI","UseConnectingIcon"
-#define SETTING_SHOWXSTATUS_DEFAULT             6 //! "CLUI","ShowXStatus"
+#define SETTING_SHOWXSTATUS_DEFAULT             7 //! "CLUI","ShowXStatus"
 #define SETTING_SHOWUNREADEMAILS_DEFAULT        0 //! "CLUI","ShowUnreadEmails"
-#define SETTING_SBARSHOW_DEFAULT                3 //! "CLUI","SBarShow"
+#define SETTING_SBARSHOW_DEFAULT                1 //! "CLUI","SBarShow"
 #define SETTING_SBARACCOUNTISCUSTOM_DEFAULT     0 //! "CLUI","AccountIsCustom"
 #define SETTING_SBARHIDEACCOUNT_DEFAULT         0 //! "CLUI","HideAccount"
 #define SETTING_SBARRIGHTCLK_DEFAULT            0 //! "CLUI","SBarRightClk"
-#define SETTING_EQUALSECTIONS_DEFAULT           0 //! "CLUI","EqualSections"
-#define SETTING_LEFTOFFSET_DEFAULT              0 //! "CLUI","LeftOffset"
-#define SETTING_RIGHTOFFSET_DEFAULT             0 //! "CLUI","RightOffset
+#define SETTING_EQUALSECTIONS_DEFAULT           1 //! "CLUI","EqualSections"
+#define SETTING_LEFTOFFSET_DEFAULT              6 //! "CLUI","LeftOffset"
+#define SETTING_RIGHTOFFSET_DEFAULT             5 //! "CLUI","RightOffset
 #define SETTING_TOPOFFSET_DEFAULT               0 //! "CLUI","TopOffset"
 #define SETTING_BOTTOMOFFSET_DEFAULT            0 //! "CLUI","BottomOffset
-#define SETTING_SPACEBETWEEN_DEFAULT            0 //! "CLUI","SpaceBetween"
-#define SETTING_ALIGN_DEFAULT                   0 //! "CLUI","Align"
+#define SETTING_SPACEBETWEEN_DEFAULT            1 //! "CLUI","SpaceBetween"
+#define SETTING_ALIGN_DEFAULT                   1 //! "CLUI","Align"
 #define SETTING_VALIGN_DEFAULT                  1 //! "CLUI","VAlign"
 #define SETTING_PADDINGLEFT_DEFAULT				0 //! "CLUI","PaddingLeft_*"
 #define SETTING_PADDINGRIGHT_DEFAULT			0 //! "CLUI","PaddingRight_*"
 #define SETTING_DRAGTOSCROLL_DEFAULT            0 //! "CLUI","DragToScroll"
-#define SETTING_AUTOSIZE_DEFAULT                0 //! "CLUI","AutoSize"
+#define SETTING_AUTOSIZE_DEFAULT                1 //! "CLUI","AutoSize"
 #define SETTING_LOCKSIZE_DEFAULT                0 //! "CLUI","LockSize"
 #define SETTING_MINHEIGTH_DEFAULT               0 //! "CLUI","MinHeight"
 #define SETTING_MINWIDTH_DEFAULT               18 //! "CLUI","MinWidth"
-#define SETTING_MAXSIZEHEIGHT_DEFAULT          75 //! "CLUI","MaxSizeHeight"
-#define SETTING_MINSIZEHEIGHT_DEFAULT          10 //! "CLUI","MinSizeHeight"
-#define SETTING_AUTOSIZEUPWARD_DEFAULT          0 //! "CLUI","AutoSizeUpward"
+#define SETTING_MAXSIZEHEIGHT_DEFAULT         100 //! "CLUI","MaxSizeHeight"
+#define SETTING_MINSIZEHEIGHT_DEFAULT          40 //! "CLUI","MinSizeHeight"
+#define SETTING_AUTOSIZEUPWARD_DEFAULT          1 //! "CLUI","AutoSizeUpward"
 #define SETTING_SNAPTOEDGES_DEFAULT             1 //! "CLUI","SnapToEdges"
-#define SETTING_DOCKTOSIDES_DEFAULT				1 //! "CLUI","DockToSides",
+#define SETTING_DOCKTOSIDES_DEFAULT				0 //! "CLUI","DockToSides",
 
 #define SETTING_PROTOSPERLINE_DEFAULT           0 //! "CLUI","StatusBarProtosPerLine"
 #define SETTING_TEXTEFFECTID_DEFAULT         0xFF //! "StatusBar","TextEffectID"
@@ -126,72 +126,70 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define SETTING_KEYCOLOR_DEFAULT   RGB(255,0,255) //! "ModernSettings","KeyColor"
 #define SETTING_LINEUNDERMENU_DEFAULT           0 //! "CLUI","LineUnderMenu"
 #define SETTING_SHOWONSTART_DEFAULT             0 //! "CList","ShowOnStart"
-#define SETTING_AUTOSIZE_DEFAULT                0 //! "CLUI","AutoSize"
 
 #define SETTING_INTERNALAWAYMSGREQUEST_DEFAULT   1 //"ModernData","InternalAwayMsgDiscovery"
 #define SETTING_REMOVEAWAYMSGFOROFFLINE_DEFAULT  1 //"ModernData","RemoveAwayMessageForOffline"
-#define SETTING_METAAVOIDDBLCLICK_DEFAULT        1 //"CLC","MetaDoubleClick"
 #define SETTING_METAIGNOREEMPTYEXTRA_DEFAULT     1 //"CLC","MetaIgnoreEmptyExtra"
 #define SETTING_METAHIDEEXTRA_DEFAULT            0 //"CLC","MetaHideExtra"
 #define SETTING_METAEXPANDING_DEFAULT            1 //"CLC","MetaExpanding"
 #define SETTING_METAAVOIDDBLCLICK_DEFAULT        1 //"CLC","MetaDoubleClick"
 #define SETTING_METAHIDEOFFLINESUB_DEFAULT       1 //"CLC","MetaHideOfflineSub"
-#define SETTING_USEMETAICON_DEFAULT              0 //"CLC","Meta"
-#define SETTING_DRAWOVERLAYEDSTATUS_DEFAULT      3 //todo replace by contstants
+#define SETTING_USEMETAICON_DEFAULT              1 //"CLC","Meta"
+#define SETTING_DRAWOVERLAYEDSTATUS_DEFAULT      0 //todo replace by contstants
 
 
-#define SETTING_SORTBY1_DEFAULT        SORTBY_RATE //"CList","SortBy1"
-#define SETTING_SORTBY2_DEFAULT        SORTBY_NAME //"CList","SortBy2"
-#define SETTING_SORTBY3_DEFAULT      SORTBY_STATUS //"CList","SortBy3"
+#define SETTING_SORTBY1_DEFAULT SORTBY_NAME_LOCALE //"CList","SortBy1"
+#define SETTING_SORTBY2_DEFAULT      SORTBY_STATUS //"CList","SortBy2"
+#define SETTING_SORTBY3_DEFAULT     SORTBY_LASTMSG //"CList","SortBy3"
 
 #define SETTING_PLACEOOFLINETOROOT_DEFAULT       0 //"CList","PlaceOfflineToRoot"
 #define SETTING_NOOFFLINEBOTTOM_DEFAULT          0 //"CList","NoOfflineBottom"
 #define SETTING_HIDEOFFLINEATROOT_DEFAULT        0 //"CLC","HideOfflineRoot"
-#define SETTING_HILIGHTMODE_DEFAULT              0 //todo replace by constant //"CLC","HiLightMode"
+#define SETTING_HILIGHTMODE_DEFAULT              1 //todo replace by constant //"CLC","HiLightMode"
 
 #define SETTING_DISABLESKIN_DEFAULT              0 //"ModernData","DisableEngine"
 #define SETTING_ENABLELAYERING_DEFAULT           1 //! "ModernData","EnableLayering"
 #define SETTING_COMPACTMODE_DEFAULT              0 //"CLC","CompactMode"
 
-#define SETTING_EVENTAREAMODE_DEFAULT            1 //autohide todo replace by const //"CLUI","EventArea"
+#define SETTING_EVENTAREAMODE_DEFAULT            0 //autohide todo replace by const //"CLUI","EventArea"
 #define SETTING_SHOWEVENTAREAFRAME_DEFAULT       1 //"CLUI","ShowEventArea"
 
-#define SETTING_TRAYOPTION_DEFAULT              15 //show combined icon
+#define SETTING_TRAYOPTION_DEFAULT               0 //show combined icon
 #define SETTING_FADEIN_DEFAULT                   0 //"CLUI","FadeInOut"
 
 #define SETTINGS_SHOWBUTTONBAR_DEFAULT           1 //"CLUI","ShowButtonBar"
 //////////////////////////////////////////////////////////////////////////
 // ROW SETTINGS
-#define SETTING_ROWBORDER_DEFAULT                1 //"CList","RowBorder"
+#define SETTING_ROWBORDER_DEFAULT                2 //"CList","RowBorder"
 #define SETTING_ROW_ADVANCEDLAYOUT_DEFAULT       0 //"ModernData","UseAdvancedRowLayout"
 #define SETTING_ROW_ROWBORDER_DEFAULT            1 //"CList","RowBorder"
 #define SETTING_VARIABLEROWHEIGHT_DEFAULT        1 //"CList","VariableRowHeight"
 #define SETTING_ALIGNLEFTTOLEFT_DEFAULT          0 //"CList","AlignLeftItemsToLeft"
 #define SETTING_ALIGNRIGHTORIGHT_DEFAULT         1 //"CList","AlignRightItemsToRight"
 #define SETTING_HIDEGROUPSICON_DEFAULT           0 //"CList","HideGroupsIcon"
-#define SETTING_ALIGNGROPCAPTION_DEFAULT         0 //left todo replace by const //"CList","AlignGroupCaptions"
-#define SETTINS_ROWITEMORDER_DEFAULT              {ITEM_AVATAR, ITEM_ICON, ITEM_TEXT, ITEM_EXTRA_ICONS, ITEM_CONTACT_TIME}
+#define SETTING_ALIGNGROPCAPTION_DEFAULT         1 //left todo replace by const //"CList","AlignGroupCaptions"
+#define SETTINS_ROWITEMORDER_DEFAULT              {ITEM_AVATAR, ITEM_TEXT, ITEM_CONTACT_TIME, ITEM_EXTRA_ICONS, ITEM_ICON}
 
 #define SETTINGS_SHOWAVATARS_DEFAULT             1 //"CList","AvatarsShow"
 #define SETTINGS_AVATARDRAWBORDER_DEFAULT        0 //"CList","AvatarsDrawBorders"
 #define SETTINGS_AVATARBORDERCOLOR_DEFAULT       RGB(0,0,0) //"CList","AvatarsBorderColor"
-#define SETTINGS_AVATARROUNDCORNERS_DEFAULT      0 //"CList","AvatarsRoundCorners"
-#define SETTINGS_AVATARUSECUTOMCORNERSIZE_DEFAULT   0 //"CList","AvatarsUseCustomCornerSize"
-#define SETTINGS_AVATARCORNERSIZE_DEFAULT           4 //"CList","AvatarsCustomCornerSize"
+#define SETTINGS_AVATARROUNDCORNERS_DEFAULT      1 //"CList","AvatarsRoundCorners"
+#define SETTINGS_AVATARUSECUTOMCORNERSIZE_DEFAULT   1 //"CList","AvatarsUseCustomCornerSize"
+#define SETTINGS_AVATARCORNERSIZE_DEFAULT           2 //"CList","AvatarsCustomCornerSize"
 #define SETTINGS_AVATARIGNORESIZEFORROW_DEFAULT  0 //"CList","AvatarsIgnoreSizeForRow"
 #define SETTINGS_AVATARDRAWOVERLAY_DEFAULT       0 //"CList","AvatarsDrawOverlay"
 #define SETTINGS_AVATAROVERLAYTYPE_DEFAULT       SETTING_AVATAR_OVERLAY_TYPE_NORMAL
-#define SETTING_AVATARHEIGHT_DEFAULT            24 //"CList","AvatarsSize"
-#define SETTING_AVATARWIDTH_DEFAULT             24 //"CList","AvatarsWidth"
+#define SETTING_AVATARHEIGHT_DEFAULT            32 //"CList","AvatarsSize"
+#define SETTING_AVATARWIDTH_DEFAULT             32 //"CList","AvatarsWidth"
 #define SETTINGS_AVATARINSEPARATE_DEFAULT		0 //"CList","AvatarsInSeparateWnd",
 
 
 
 #define SETTING_HIDEICONONAVATAR_DEFAULT            0 //"CList","IconHideOnAvatar"
 #define SETTING_ICONONAVATARPLACE_DEFAULT               0 //"CList","IconDrawOnAvatarSpace"
-#define SETTING_ICONIGNORESIZE_DEFAULT            0 //"CList","IconIgnoreSizeForRownHeight"
+#define SETTING_ICONIGNORESIZE_DEFAULT            1 //"CList","IconIgnoreSizeForRownHeight"
 #define SETTING_SHOWTIME_DEFAULT                          0 //"CList","ContactTimeShow"
-#define SETTING_SHOWTIMEIFDIFF_DEFAULT            1 //"CList","ContactTimeShowOnlyIfDifferent"
+#define SETTING_SHOWTIMEIFDIFF_DEFAULT            0 //"CList","ContactTimeShowOnlyIfDifferent"
 
 #define SETTING_TEXT_RTL_DEFAULT                          0 //"CList","TextRTL"
 #define SETTING_TEXT_RIGHTALIGN_DEFAULT               0 //"CList","TextAlignToRight"
@@ -209,9 +207,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define SETTING_SECONDLINE_SMILEYS_DEFAULT              1 //"CList","SecondLineDrawSmileys"
 #define SETTING_SECONDLINE_TYPE_DEFAULT                   TEXT_STATUS_MESSAGE //"CList","SecondLineType"
 #define SETTING_SECONDLINE_XSTATUS_DEFAULT              1 //"CList","SecondLineXStatusHasPriority"
-#define SETTING_SECONDLINE_XSTATUSNAMETEXT_DEFAULT    0 //"CList","SecondLineUseNameAndMessageForXStatus"
-#define SETTING_SECONDLINE_STATUSIFNOAWAY_DEFAULT         1 //"CList","SecondLineShowStatusIfNoAway"
-#define SETTING_SECONDLINE_LISTENINGIFNOAWAY_DEFAULT    1 //"CList","SecondLineShowListeningIfNoAway"
+#define SETTING_SECONDLINE_XSTATUSNAMETEXT_DEFAULT    1 //"CList","SecondLineUseNameAndMessageForXStatus"
+#define SETTING_SECONDLINE_STATUSIFNOAWAY_DEFAULT         0 //"CList","SecondLineShowStatusIfNoAway"
+#define SETTING_SECONDLINE_LISTENINGIFNOAWAY_DEFAULT    0 //"CList","SecondLineShowListeningIfNoAway"
 
 #define SETTING_THIRDLINE_SHOW_DEFAULT                    0 //"CList","ThirdLineShow"
 #define SETTING_THIRDLINE_TOPSPACE_DEFAULT            2 //"CList","ThirdLineTopSpace"
@@ -236,9 +234,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define SETTING_BLENDINACTIVESTATE_DEFAULT  0 //"CLC","BlendInActiveState"
 #define SETTING_BLEND25_DEFAULT                     1 //NOT USED
 
-#define CLCDEFAULT_EXSTYLE           (CLS_EX_EDITLABELS|CLS_EX_TRACKSELECT|CLS_EX_SHOWGROUPCOUNTS|CLS_EX_HIDECOUNTSWHENEMPTY|CLS_EX_TRACKSELECT|CLS_EX_NOTRANSLUCENTSEL)  //plus CLS_EX_NOSMOOTHSCROLL is got from the system
 #define CLCDEFAULT_SCROLLTIME        150 //"CLC","ScrollTime"
-#define CLCDEFAULT_GROUPINDENT       20 //"CLC","SubIndent"
+#define CLCDEFAULT_GROUPINDENT       5 //"CLC","GroupIndent"
 #define CLCDEFAULT_BKCOLOUR          GetSysColor(COLOR_3DFACE)
 #define CLCDEFAULT_USEBITMAP         0 //"StatusBar","UseBitmap"
 #define CLCDEFAULT_BKBMPUSE          CLB_STRETCH //"StatusBar","BkBmpUse"
@@ -252,10 +249,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define CLCDEFAULT_MODERN_SELTEXTCOLOUR     (g_CluiData.fDisableSkinEngine?GetSysColor(COLOR_HIGHLIGHTTEXT):RGB(0,0,128))
 #define CLCDEFAULT_MODERN_HOTTEXTCOLOUR     (g_CluiData.fDisableSkinEngine?(IsWinVer98Plus()?CLCDEFAULT_MODERN_SELTEXTCOLOUR:GetSysColor(COLOR_HOTLIGHT)):RGB(0,0,255))
 #define CLCDEFAULT_MODERN_QUICKSEARCHCOLOUR RGB(255,255,0)
-#define CLCDEFAULT_LEFTMARGIN        0 //"CLC","LeftMargin"
 #define CLCDEFAULT_RIGHTMARGIN       2 //"CLC","RightMargin"
 #define CLCDEFAULT_GAMMACORRECT      1 //"CLC","GammaCorrect"
-#define CLCDEFAULT_SHOWIDLE          1 //"CLC","ShowIdle"
+#define CLCDEFAULT_SHOWIDLE          0 //"CLC","ShowIdle"
 #define CLCDEFAULT_NOVSCROLL         0 //"CLC","NoVScrollBar"
 #define CLCDEFAULT_INFOTIPTIME       750 //"! "CLC","InfoTipHoverTime"
 #define CLCDEFAULT_COLLICONTOLEFT    0 //"! "FrameTitleBar","AlignCOLLIconToLeft"

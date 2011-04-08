@@ -1,6 +1,6 @@
-"%ProgramFiles%\Microsoft Visual Studio .NET 2003\Common7\IDE\devenv.exe" /REBUILD "Release" BossKey.sln
-"%ProgramFiles%\Microsoft Visual Studio .NET 2003\Common7\IDE\devenv.exe" /REBUILD "Release_Unicode" BossKey.sln
-"%ProgramFiles%\Microsoft Visual Studio 9.0\Common7\IDE\devenv.exe" /REBUILD "Release_Unicode|x64" BossKey_9.sln
+"%ProgramFiles%\Microsoft Visual Studio 10.0\Common7\IDE\devenv.exe" /REBUILD "Release" BossKey_10.vcxproj
+"%ProgramFiles%\Microsoft Visual Studio 10.0\Common7\IDE\devenv.exe" /REBUILD "Release_Unicode" BossKey_10.vcxproj
+"%ProgramFiles%\Microsoft Visual Studio 10.0\Common7\IDE\devenv.exe" /REBUILD "Release_Unicode|x64" BossKey_10.vcxproj
 if not exist plugins md plugins
 copy /Y Release\Plugins\BossKey.dll plugins\BossKey.dll
 if exist bosskeyplus.zip del bosskeyplus.zip
