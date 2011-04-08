@@ -26,7 +26,7 @@ $Id: viewmodes.c 2998 2006-06-01 07:11:52Z nightwish2004 $
 */
 
 #include "hdr/modern_commonheaders.h"
-#include "m_api/m_variables.h"
+#include "m_variables.h"
 #include "hdr/modern_cluiframes.h"
 #include "m_api/m_skinbutton.h"
 
@@ -1469,7 +1469,7 @@ void CreateViewModeFrame()
     frame.hIcon = LoadSkinnedIcon(SKINICON_OTHER_MIRANDA);/*0;*/
     frame.height = 18;
     frame.TBtname = TranslateT("View Modes");
-    frame.Flags=F_VISIBLE|F_SHOWTBTIP|F_NOBORDER|F_NO_SUBCONTAINER|F_TCHAR;
+    frame.Flags=F_SHOWTBTIP|F_NOBORDER|F_NO_SUBCONTAINER|F_TCHAR;
     frame.align = alBottom;
     frame.hWnd = CreateWindowEx(0, _T("CLVMFrameWindow"), _T(CLVM_MODULE), WS_VISIBLE | WS_CHILD | WS_TABSTOP | WS_CLIPCHILDREN, 0, 0, 20, 20, pcli->hwndContactList, (HMENU) 0, g_hInst, NULL);
     g_hwndViewModeFrame = frame.hWnd;	

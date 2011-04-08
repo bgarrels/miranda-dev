@@ -27,6 +27,7 @@ typedef struct _ProtoItemData
 {
     HICON icon;
     HICON extraIcon;
+    HICON extraIcon2;
     int iconIndex;
     char * ProtoName;
     char * AccountName;
@@ -415,6 +416,7 @@ int ModernDrawStatusBarWorker(HWND hWnd, HDC hDC)
 								w += GetSystemMetrics(SM_CXSMICON)+1;
 
 								ProtosData[i].extraIcon=NULL;
+								ProtosData[i].extraIcon2=NULL;
 								if ((ProtosData[i].xStatusMode&8) && ProtosData[i].ProtoStatus>ID_STATUS_OFFLINE) 
 								{
 									char str[MAXMODULELABELLENGTH];
@@ -441,12 +443,20 @@ int ModernDrawStatusBarWorker(HWND hWnd, HDC hDC)
 									if (ProtosData[i].ProtoStatus>ID_STATUS_OFFLINE)
 									{
 										char str[MAXMODULELABELLENGTH];
+										DBVARIANT dbv;
 										mir_snprintf(str, SIZEOF(str), "%s/GetXStatusIcon", ProtosData[i].AccountName);
 										if (ServiceExists(str))
 											ProtosData[i].extraIcon=(HICON)CallService(str,0,0);
 										if (ProtosData[i].extraIcon && (ProtosData[i].xStatusMode&3)==3)
 											w+=GetSystemMetrics(SM_CXSMICON)+1;
-
+										mir_snprintf(str, SIZEOF(str), "%s/%s/%s", ProtosData[i].AccountName, "activity", "icon");
+										if (!ModernGetSettingString(NULL, "AdvStatus", str, &dbv)) 
+										{
+											ProtosData[i].extraIcon2 = (HICON)CallService(MS_SKIN2_GETICON, 0, (LPARAM)dbv.pszVal);
+											ModernDBFreeVariant(&dbv);
+										}
+										if (ProtosData[i].extraIcon2 && (ProtosData[i].xStatusMode&3)==3)
+											w+=GetSystemMetrics(SM_CXSMICON)+1;
 									}
 								}
 							}
@@ -537,6 +547,7 @@ int ModernDrawStatusBarWorker(HWND hWnd, HDC hDC)
 							int x = r.left;
 							HICON hIcon=NULL;
 							HICON hxIcon=NULL;
+							HICON hxIcon2=NULL;
 							BOOL NeedDestroy=FALSE;
 							x = r.left; 
 							x += ProtosData[i].PaddingLeft;
@@ -567,6 +578,7 @@ int ModernDrawStatusBarWorker(HWND hWnd, HDC hDC)
 
 										}
 									}
+									hxIcon2=ProtosData[i].extraIcon2;
 								}
 								if (hIcon==NULL && (hxIcon==NULL || (((ProtosData[i].xStatusMode)&3)==3)))
 								{
@@ -613,10 +625,17 @@ int ModernDrawStatusBarWorker(HWND hWnd, HDC hDC)
 										mod_DrawIconEx_helper(hDC,x+GetSystemMetrics(SM_CXSMICON)+1,iconY,hxIcon,GetSystemMetrics(SM_CXSMICON),GetSystemMetrics(SM_CYSMICON),0,NULL,DI_NORMAL|dim);
 										x+=GetSystemMetrics(SM_CXSMICON)+1;
 									}
+									if (hxIcon2) 
+									{
+										mod_DrawIconEx_helper(hDC,x+GetSystemMetrics(SM_CXSMICON)+1,iconY,hxIcon2,GetSystemMetrics(SM_CXSMICON),GetSystemMetrics(SM_CYSMICON),0,NULL,DI_NORMAL|dim);
+										x+=GetSystemMetrics(SM_CXSMICON)+1;
+									}
+
 									ProtosData[i].DoubleIcons=hIcon&&hxIcon;
 								}
 								else
 								{
+									if (hxIcon2) mod_DrawIconEx_helper(hDC,x,iconY,hxIcon2,GetSystemMetrics(SM_CXSMICON),GetSystemMetrics(SM_CYSMICON),0,NULL,DI_NORMAL|dim);
 									if (hxIcon) mod_DrawIconEx_helper(hDC,x,iconY,hxIcon,GetSystemMetrics(SM_CXSMICON),GetSystemMetrics(SM_CYSMICON),0,NULL,DI_NORMAL|dim);
 									if (hIcon) mod_DrawIconEx_helper(hDC,x,iconY,hIcon,GetSystemMetrics(SM_CXSMICON),GetSystemMetrics(SM_CYSMICON),0,NULL,DI_NORMAL| ((hxIcon&&(ProtosData[i].xStatusMode&4))?(192<<24):0 ) | dim );
 								}
