@@ -234,10 +234,15 @@ INT_PTR MessageWindowOpened(WPARAM wParam, LPARAM lParam)
 					return 0;
 			}
 			if (pContainer->dwFlags & CNT_ALWAYSREPORTINACTIVE) {
-				if (pContainer->hwndActive == hwnd)
-					return 1;
-				else
+				if (pContainer->dwFlags & CNT_DONTREPORTFOCUSED)
 					return 0;
+				else
+				{
+					if (pContainer->hwndActive == hwnd)
+						return 1;
+					else
+						return 0;
+				}
 			}
 		}
 		return 1;
@@ -567,7 +572,7 @@ int LoadSendRecvMessageModule(void)
 	INITCOMMONCONTROLSEX 	icex;
 
 	if(FIF == 0) {
-		MessageBox(0, _T("The image service plugin (advaimg.dll) is not properly installed.\n\nTabSRMM is disabled."), _T("TabSRMM fatal error"), MB_OK | MB_ICONERROR);
+		MessageBox(0, TranslateT("The image service plugin (advaimg.dll) is not properly installed.\n\nTabSRMM is disabled."), TranslateT("TabSRMM fatal error"), MB_OK | MB_ICONERROR);
 		return(1);
 	}
 	icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
@@ -733,7 +738,7 @@ HWND TSAPI CreateNewTabForContact(struct TContainerData *pContainer, HANDLE hCon
 	wStatus = szProto == NULL ? ID_STATUS_OFFLINE : DBGetContactSettingWord((HANDLE) newData.hContact, szProto, "Status", ID_STATUS_OFFLINE);
 	szStatus = (TCHAR *) CallService(MS_CLIST_GETSTATUSMODEDESCRIPTION, szProto == NULL ? ID_STATUS_OFFLINE : DBGetContactSettingWord((HANDLE)newData.hContact, szProto, "Status", ID_STATUS_OFFLINE), GSMDF_TCHAR);
 
-	if (M->GetByte("tabstatus", 1))
+	if (M->GetByte("tabstatus", 0))
 		mir_sntprintf(tabtitle, safe_sizeof(tabtitle), _T("%s (%s)  "), newcontactname, szStatus);
 	else
 		mir_sntprintf(tabtitle, safe_sizeof(tabtitle), _T("%s   "), newcontactname);
@@ -1033,7 +1038,7 @@ static int GetIconPackVersion(HMODULE hDLL)
 	}
 
 	if (version < 5)
-		CWarning::show(CWarning::WARN_ICONPACK_VERSION, CWarning::CWF_UNTRANSLATED|MB_OK|MB_ICONERROR);
+		CWarning::show(CWarning::WARN_ICONPACK_VERSION, MB_OK|MB_ICONERROR);
 	return version;
 }
 /*
@@ -1050,7 +1055,7 @@ static int TSAPI SetupIconLibConfig()
 	strncpy(szFilename, "icons\\tabsrmm_icons.dll", MAX_PATH);
 	g_hIconDLL = LoadLibraryA(szFilename);
 	if (g_hIconDLL == 0) {
-		CWarning::show(CWarning::WARN_ICONPACKMISSING, CWarning::CWF_NOALLOWHIDE|CWarning::CWF_UNTRANSLATED|MB_ICONERROR|MB_OK);
+		CWarning::show(CWarning::WARN_ICONPACKMISSING, CWarning::CWF_NOALLOWHIDE|MB_ICONERROR|MB_OK);
 		return 0;
 	}
 

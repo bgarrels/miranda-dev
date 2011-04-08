@@ -46,9 +46,9 @@ static TContainerSettings _cnt_default = {
 		255,
 		CInfoPanel::DEGRADE_THRESHOLD,
 		60,
-		_T("%n (%s)"),
-		1,
-		0
+		_T("%n - %s  %x"),
+		2,
+		1
 };
 
 HANDLE		CGlobals::m_event_ModulesLoaded = 0, CGlobals::m_event_PrebuildMenu = 0, CGlobals::m_event_SettingChanged = 0;
@@ -281,7 +281,7 @@ void CGlobals::reloadSettings(bool fReloadSkins)
 	m_AutoSwitchTabs = 					(int)M->GetByte("autoswitchtabs", 1);
 	m_CutContactNameTo = 				(int) DBGetContactSettingWord(NULL, SRMSGMOD_T, "cut_at", 15);
 	m_CutContactNameOnTabs = 			(int)M->GetByte("cuttitle", 0);
-	m_StatusOnTabs = 					(int)M->GetByte("tabstatus", 1);
+	m_StatusOnTabs = 					(int)M->GetByte("tabstatus", 0);
 	m_LogStatusChanges = 				(int)dwFlags & MWF_LOG_STATUSCHANGES;
 	m_UseDividers = 					(int)M->GetByte("usedividers", 0);
 	m_DividersUsePopupConfig = 			(int)M->GetByte("div_popupconfig", 0);
@@ -292,13 +292,13 @@ void CGlobals::reloadSettings(bool fReloadSkins)
 
 	m_EscapeCloses = 					(int)M->GetByte("escmode", 0);
 
-	m_HideOnClose =						(int) M->GetByte("hideonclose", 0);
+	m_HideOnClose =						(int) M->GetByte("hideonclose", 1);
 	m_AllowTab =						(int) M->GetByte("tabmode", 0);
 
-	m_FlashOnClist = 					(int)M->GetByte("flashcl", 0);
+	m_FlashOnClist = 					(int)M->GetByte("flashcl", 1);
 	m_AlwaysFullToolbarWidth = 			(int)M->GetByte("alwaysfulltoolbar", 1);
-	m_LimitStaticAvatarHeight = 		(int)M->GetDword("avatarheight", 96);
-	m_SendFormat = 						(int)M->GetByte("sendformat", 0);
+	m_LimitStaticAvatarHeight = 		(int)M->GetDword("avatarheight", 128);
+	m_SendFormat = 						(int)M->GetByte("sendformat", 1);
 	m_FormatWholeWordsOnly = 1;
 	m_RTLDefault = 						(int)M->GetByte("rtldefault", 0);
 	m_TabAppearance = 					(int)M->GetDword("tabconfig", TCF_FLASHICON | TCF_SINGLEROWTABCONTROL);
@@ -310,8 +310,8 @@ void CGlobals::reloadSettings(bool fReloadSkins)
 	m_PasteAndSend = 					(int)M->GetByte("pasteandsend", 1);
 	m_szNoStatus = 						const_cast<TCHAR *>(CTranslator::get(CTranslator::GEN_NO_STATUS));
 	m_LangPackCP = 						ServiceExists(MS_LANGPACK_GETCODEPAGE) ? CallService(MS_LANGPACK_GETCODEPAGE, 0, 0) : CP_ACP;
-	m_visualMessageSizeIndicator = 		M->GetByte("msgsizebar", 0);
-	m_autoSplit = 						M->GetByte("autosplit", 0);
+	m_visualMessageSizeIndicator = 		M->GetByte("msgsizebar", 1);
+	m_autoSplit = 						M->GetByte("autosplit", 1);
 	m_FlashOnMTN = 						M->GetByte(SRMSGMOD, SRMSGSET_SHOWTYPINGWINFLASH, SRMSGDEFSET_SHOWTYPINGWINFLASH);
 	if(m_MenuBar == 0) {
 		m_MenuBar = ::LoadMenu(g_hInst, MAKEINTRESOURCE(IDR_MENUBAR));
@@ -349,7 +349,7 @@ void CGlobals::reloadSettings(bool fReloadSkins)
 void CGlobals::reloadAdv()
 {
 	g_bDisableAniAvatars=				M->GetByte("adv_DisableAniAvatars", 0);
-	g_bSoundOnTyping = 					M->GetByte("adv_soundontyping", 0);
+	g_bSoundOnTyping = 					M->GetByte("adv_soundontyping", 1);
 	m_dontUseDefaultKbd=				M->GetByte("adv_leaveKeyboardAlone", 1);
 	g_bClientInStatusBar = 				M->GetByte("adv_ClientIconInStatusBar", 0);
 
@@ -357,7 +357,7 @@ void CGlobals::reloadAdv()
 		SkinAddNewSoundEx("SoundOnTyping", "Other", "TABSRMM: Typing");
 		m_TypingSoundAdded = true;
 	}
-	m_AllowOfflineMultisend =			M->GetByte("AllowOfflineMultisend", 0);
+	m_AllowOfflineMultisend =			M->GetByte("AllowOfflineMultisend", 1);
 }
 
 const HMENU CGlobals::getMenuBar()

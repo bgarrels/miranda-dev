@@ -59,8 +59,8 @@ static struct _tagExtSettings {
 	"Message Log", "HgridColor", FONTMODULE, "hgrid", SRMSGDEFSET_BKGCOLOUR,
 	"Message Log", "DWFlags", SRMSGMOD_T, "mwflags", MWF_LOG_DEFAULT,
 	"Chat", "UserListBG", "Chat", "ColorNicklistBG", SRMSGDEFSET_BKGCOLOUR,
-	"Message Log", "LeftIndent", SRMSGMOD_T, "IndentAmount", 20,
-	"Message Log", "RightIndent", SRMSGMOD_T, "RightIndent", 20,
+	"Message Log", "LeftIndent", SRMSGMOD_T, "IndentAmount", 0,
+	"Message Log", "RightIndent", SRMSGMOD_T, "RightIndent", 0,
 };
 
 /**

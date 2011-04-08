@@ -715,7 +715,7 @@ static LRESULT CALLBACK MessageEditSubclassProc(HWND hwnd, UINT msg, WPARAM wPar
 				if(hClip = GetClipboardData(CF_TEXT)) {
 					if (lstrlenA((char *)hClip) > mwdat->nMax) {
 						TCHAR szBuffer[512];
-						if (M->GetByte("autosplit", 0))
+						if (M->GetByte("autosplit", 1))
 							_sntprintf(szBuffer, 512, CTranslator::get(CTranslator::GEN_MSG_TOO_LONG_SPLIT), mwdat->nMax - 10);
 						else
 							_sntprintf(szBuffer, 512, CTranslator::get(CTranslator::GEN_MSG_TOO_LONG_NOSPLIT), mwdat->nMax);
@@ -2247,7 +2247,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 										SendMessage(GetDlgItem(hwndDlg, IDC_LOG), EM_EXGETSEL, 0, (LPARAM)&cr);
 										if (cr.cpMax != cr.cpMin) {
 											cr.cpMin = cr.cpMax;
-											if (isCtrl && M->GetByte("autocopy", 0)) {
+											if (isCtrl && M->GetByte("autocopy", 1)) {
 												SETTEXTEX stx = {ST_KEEPUNDO | ST_SELECTION, CP_UTF8};
 												char *streamOut = NULL;
 												if (isAlt)
@@ -2260,7 +2260,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 													free(streamOut);
 												}
 												SetFocus(GetDlgItem(hwndDlg, IDC_MESSAGE));
-											} else if (M->GetByte("autocopy", 0) && !isShift) {
+											} else if (M->GetByte("autocopy", 1) && !isShift) {
 												SendMessage(GetDlgItem(hwndDlg, IDC_LOG), WM_COPY, 0, 0);
 												SetFocus(GetDlgItem(hwndDlg, IDC_MESSAGE));
 												if (m_pContainer->hwndStatus)
@@ -3880,7 +3880,7 @@ quote_from_last:
 				if(m_pContainer->dwFlags & CNT_SIDEBAR)
 					m_pContainer->SideBar->removeSession(dat);
 				dat->cache->setWindowData();
-				if (dat->cache->isValid() && !dat->fIsReattach && dat->hContact && M->GetByte("deletetemp", 0)) {
+				if (dat->cache->isValid() && !dat->fIsReattach && dat->hContact && M->GetByte("deletetemp", 1)) {
 					if (M->GetByte(dat->hContact, "CList", "NotOnList", 0)) {
 						CallService(MS_DB_CONTACT_DELETE, (WPARAM)dat->hContact, 0);
 					}

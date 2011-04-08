@@ -637,7 +637,7 @@ int CContactCache::getMaxMessageLength()
 
 		m_nMax = CallProtoService(szProto, PS_GETCAPS, PFLAG_MAXLENOFMESSAGE, reinterpret_cast<LPARAM>(hContact));
 		if (m_nMax) {
-			if (M->GetByte("autosplit", 0)) {
+			if (M->GetByte("autosplit", 1)) {
 				if(m_hwnd)
 					::SendDlgItemMessage(m_hwnd, IDC_MESSAGE, EM_EXLIMITTEXT, 0, 20000);
 			}

@@ -1075,7 +1075,7 @@ void CSkin::setFileName()
 	else
 		m_tszFileName[0] = 0;
 
-	m_fLoadOnStartup = M->GetByte("useskin", 0) ? true : false;
+	m_fLoadOnStartup = M->GetByte("useskin", 1) ? true : false;
 }
 /**
  * initialize the skin object

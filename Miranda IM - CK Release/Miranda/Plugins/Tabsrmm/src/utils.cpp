@@ -1208,7 +1208,7 @@ __int64 CWarning::getMask()
 {
 	__int64 mask = 0;
 
-	DWORD	dwLow = M->GetDword("cWarningsL", 0);
+	DWORD	dwLow = M->GetDword("cWarningsL", 16);
 	DWORD	dwHigh = M->GetDword("cWarningsH", 0);
 
 	mask = ((((__int64)dwHigh) << 32) & 0xffffffff00000000) | dwLow;

@@ -179,7 +179,7 @@ CSendLater::CSendLater()
 {
 	m_sendLaterContactList.clear();
 	m_sendLaterJobList.clear();
-	m_fAvail = M->GetByte("sendLaterAvail", 0) ? true : false;
+	m_fAvail = M->GetByte("sendLaterAvail", 1) ? true : false;
 	m_last_sendlater_processed = time(0);
 	m_hwndDlg = 0;
 	m_fIsInteractive = false;

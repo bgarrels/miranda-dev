@@ -58,7 +58,7 @@ struct FontOptionsList {
 }
 
 static fontOptionsList[] = {
-	{RGB(0, 0, 0), "Tahoma", 0, -10}
+	{RGB(0, 0, 0), "Verdana", 0, -13}
 };
 
 
@@ -249,7 +249,7 @@ static INT_PTR CALLBACK DlgProcSkinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, L
 			BYTE loadMode = M->GetByte("skin_loadmode", 0);
 			TranslateDialogDefault(hwndDlg);
 
-			CheckDlgButton(hwndDlg, IDC_USESKIN, M->GetByte("useskin", 0) ? BST_CHECKED : BST_UNCHECKED);
+			CheckDlgButton(hwndDlg, IDC_USESKIN, M->GetByte("useskin", 1) ? BST_CHECKED : BST_UNCHECKED);
 			CheckDlgButton(hwndDlg, IDC_SKIN_LOADFONTS, loadMode & THEME_READ_FONTS);
 			CheckDlgButton(hwndDlg, IDC_SKIN_LOADTEMPLATES, loadMode & THEME_READ_TEMPLATES);
 
@@ -477,8 +477,8 @@ static INT_PTR CALLBACK DlgProcOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 				i++;
 			}
 
-			SetDlgItemInt(hwndDlg, IDC_MAXAVATARHEIGHT, M->GetDword("avatarheight", 100), FALSE);
-			CheckDlgButton(hwndDlg, IDC_PRESERVEAVATARSIZE, M->GetByte("dontscaleavatars", 0) ? BST_CHECKED : BST_UNCHECKED);
+			SetDlgItemInt(hwndDlg, IDC_MAXAVATARHEIGHT, M->GetDword("avatarheight", 128), FALSE);
+			CheckDlgButton(hwndDlg, IDC_PRESERVEAVATARSIZE, M->GetByte("dontscaleavatars", 1) ? BST_CHECKED : BST_UNCHECKED);
 			SendDlgItemMessage(hwndDlg, IDC_AVATARSPIN, UDM_SETRANGE, 0, MAKELONG(150, 0));
 			SendDlgItemMessage(hwndDlg, IDC_AVATARSPIN, UDM_SETPOS, 0, GetDlgItemInt(hwndDlg, IDC_MAXAVATARHEIGHT, &translated, FALSE));
 			return TRUE;
@@ -653,11 +653,11 @@ static INT_PTR CALLBACK DlgProcLogOptions(HWND hwndDlg, UINT msg, WPARAM wParam,
 			SendDlgItemMessage(hwndDlg, IDC_LOADTIMESPIN, UDM_SETRANGE, 0, MAKELONG(24 * 60, 0));
 			SendDlgItemMessage(hwndDlg, IDC_LOADTIMESPIN, UDM_SETPOS, 0, DBGetContactSettingWord(NULL, SRMSGMOD, SRMSGSET_LOADTIME, SRMSGDEFSET_LOADTIME));
 
-			SetDlgItemInt(hwndDlg, IDC_INDENTAMOUNT, M->GetDword("IndentAmount", 20), FALSE);
+			SetDlgItemInt(hwndDlg, IDC_INDENTAMOUNT, M->GetDword("IndentAmount", 0), FALSE);
 			SendDlgItemMessage(hwndDlg, IDC_INDENTSPIN, UDM_SETRANGE, 0, MAKELONG(1000, 0));
 			SendDlgItemMessage(hwndDlg, IDC_INDENTSPIN, UDM_SETPOS, 0, GetDlgItemInt(hwndDlg, IDC_INDENTAMOUNT, &translated, FALSE));
 
-			SetDlgItemInt(hwndDlg, IDC_RIGHTINDENT, M->GetDword("RightIndent", 20), FALSE);
+			SetDlgItemInt(hwndDlg, IDC_RIGHTINDENT, M->GetDword("RightIndent", 0), FALSE);
 			SendDlgItemMessage(hwndDlg, IDC_RINDENTSPIN, UDM_SETRANGE, 0, MAKELONG(1000, 0));
 			SendDlgItemMessage(hwndDlg, IDC_RINDENTSPIN, UDM_SETPOS, 0, GetDlgItemInt(hwndDlg, IDC_RIGHTINDENT, &translated, FALSE));
 			SendMessage(hwndDlg, WM_COMMAND, MAKELONG(IDC_INDENT, 0), 0);
@@ -935,7 +935,7 @@ static INT_PTR CALLBACK DlgProcTypeOptions(HWND hwndDlg, UINT msg, WPARAM wParam
 			CheckDlgButton(hwndDlg, IDC_NOTIFYTRAY, M->GetByte(SRMSGMOD, SRMSGSET_SHOWTYPINGCLIST, SRMSGDEFSET_SHOWTYPINGCLIST));
 			CheckDlgButton(hwndDlg, IDC_NOTIFYBALLOON, M->GetByte(SRMSGMOD, "ShowTypingBalloon", 0));
 
-			CheckDlgButton(hwndDlg, IDC_NOTIFYPOPUP, M->GetByte(SRMSGMOD, "ShowTypingPopup", 0));
+			CheckDlgButton(hwndDlg, IDC_NOTIFYPOPUP, M->GetByte(SRMSGMOD, "ShowTypingPopup", 1));
 
 			Utils::enableDlgControl(hwndDlg, IDC_TYPEWIN, IsDlgButtonChecked(hwndDlg, IDC_NOTIFYTRAY));
 			Utils::enableDlgControl(hwndDlg, IDC_TYPENOWIN, IsDlgButtonChecked(hwndDlg, IDC_NOTIFYTRAY));
@@ -1353,11 +1353,11 @@ static int OptInitialise(WPARAM wParam, LPARAM lParam)
 
 
 	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_SKIN);
-	odp.ptszTitle = LPGENT("Message window skin");
+	odp.ptszTitle = LPGENT("Message window");
 	odp.ptszTab = 	const_cast<TCHAR *>(CTranslator::getOpt(CTranslator::OPT_TAB_SKINLOAD));
 	odp.pfnDlgProc = DlgProcSkinOpts;
 	odp.nIDBottomSimpleControl = 0;
-	odp.ptszGroup = LPGENT("Customize");
+	odp.ptszGroup = LPGENT("Skins");
 	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM) &odp);
 
 	odp.pszTemplate = MAKEINTRESOURCEA(IDD_TABCONFIG);

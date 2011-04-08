@@ -92,7 +92,7 @@ static void PU_CleanUp()
 
 static void CheckForRemoveMask()
 {
-	if (!M->GetByte(MODULE, "firsttime", 0) && (nen_options.maskActL & MASK_REMOVE || nen_options.maskActR & MASK_REMOVE || nen_options.maskActTE & MASK_REMOVE)) {
+	if (!M->GetByte(MODULE, "firsttime", 1) && (nen_options.maskActL & MASK_REMOVE || nen_options.maskActR & MASK_REMOVE || nen_options.maskActTE & MASK_REMOVE)) {
 		MessageBoxA(0, Translate("One of your popup actions is set to DISMISS EVENT.\nNote that this options may have unwanted side effects as it REMOVES the event from the unread queue.\nThis may lead to events not showing up as \"new\". If you don't want this behaviour, please review the Event Notifications settings page."), "tabSRMM Warning Message", MB_OK | MB_ICONSTOP);
 		M->WriteByte(MODULE, "firsttime", 1);
 	}
@@ -102,8 +102,8 @@ static void CheckForRemoveMask()
 int TSAPI NEN_ReadOptions(NEN_OPTIONS *options)
 {
 	options->bPreview = (BOOL)M->GetByte(MODULE, OPT_PREVIEW, TRUE);
-	options->bDefaultColorMsg = (BOOL)M->GetByte(MODULE, OPT_COLDEFAULT_MESSAGE, FALSE);
-	options->bDefaultColorOthers = (BOOL)M->GetByte(MODULE, OPT_COLDEFAULT_OTHERS, FALSE);
+	options->bDefaultColorMsg = (BOOL)M->GetByte(MODULE, OPT_COLDEFAULT_MESSAGE, TRUE);
+	options->bDefaultColorOthers = (BOOL)M->GetByte(MODULE, OPT_COLDEFAULT_OTHERS, TRUE);
 	options->colBackMsg = (COLORREF)M->GetDword(MODULE, OPT_COLBACK_MESSAGE, DEFAULT_COLBACK);
 	options->colTextMsg = (COLORREF)M->GetDword(MODULE, OPT_COLTEXT_MESSAGE, DEFAULT_COLTEXT);
 	options->colBackOthers = (COLORREF)M->GetDword(MODULE, OPT_COLBACK_OTHERS, DEFAULT_COLBACK);
@@ -111,7 +111,7 @@ int TSAPI NEN_ReadOptions(NEN_OPTIONS *options)
 	options->maskActL = (UINT)M->GetByte(MODULE, OPT_MASKACTL, DEFAULT_MASKACTL);
 	options->maskActR = (UINT)M->GetByte(MODULE, OPT_MASKACTR, DEFAULT_MASKACTR);
 	options->maskActTE = (UINT)M->GetByte(MODULE, OPT_MASKACTTE, DEFAULT_MASKACTR) & (MASK_OPEN | MASK_DISMISS);
-	options->bMergePopup = (BOOL)M->GetByte(MODULE, OPT_MERGEPOPUP, 1);
+	options->bMergePopup = (BOOL)M->GetByte(MODULE, OPT_MERGEPOPUP, 0);
 	options->iDelayMsg = (int)M->GetDword(MODULE, OPT_DELAY_MESSAGE, (DWORD)DEFAULT_DELAY);
 	options->iDelayOthers = (int)M->GetDword(MODULE, OPT_DELAY_OTHERS, (DWORD)DEFAULT_DELAY);
 	options->iDelayDefault = (int)DBGetContactSettingRangedWord(NULL, "PopUp", "Seconds", SETTING_LIFETIME_DEFAULT, SETTING_LIFETIME_MIN, SETTING_LIFETIME_MAX);
@@ -123,7 +123,7 @@ int TSAPI NEN_ReadOptions(NEN_OPTIONS *options)
 	options->bTraySupport = (BOOL)M->GetByte(MODULE, "traysupport", 0);
 	options->bWindowCheck = (BOOL)M->GetByte(MODULE, OPT_WINDOWCHECK, 0);
 	options->bNoRSS = (BOOL)M->GetByte(MODULE, OPT_NORSS, 0);
-	options->iLimitPreview = (int)M->GetDword(MODULE, OPT_LIMITPREVIEW, 0);
+	options->iLimitPreview = (int)M->GetDword(MODULE, OPT_LIMITPREVIEW, 500);
 	options->wMaxFavorites = 15;
 	options->wMaxRecent = 15;
 	options->dwRemoveMask = M->GetDword(MODULE, OPT_REMOVEMASK, 0);
@@ -919,10 +919,15 @@ int tabSRMM_ShowPopup(WPARAM wParam, LPARAM lParam, WORD eventType, int windowOp
 				goto passed;
 		}
 		if (pContainer->dwFlags & CNT_ALWAYSREPORTINACTIVE) {
-			if (pContainer->hwndActive == hwndChild)
-				return 0;
-			else
+			if (pContainer->dwFlags & CNT_DONTREPORTFOCUSED)
 				goto passed;
+			else
+			{
+				if (pContainer->hwndActive == hwndChild)
+					return 0;
+				else
+					goto passed;
+			}
 		}
 		return 0;
 	}
