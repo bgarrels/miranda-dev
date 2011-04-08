@@ -63,7 +63,7 @@ INT_PTR EmptyFolder(WPARAM wParam,LPARAM lParam)
 	return 0;
 }
 
-INT_PTR OnPreShutdown(WPARAM wParam, LPARAM lParam)
+INT OnPreShutdown(WPARAM wParam, LPARAM lParam)
 {
 	UnhookEvent(hOptHook);
 	UnhookEvent(hOnPreShutdown);

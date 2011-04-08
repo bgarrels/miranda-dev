@@ -295,11 +295,14 @@ static void CheckUpdates(void *)
 		Files[CurrentFile].FileType = _tstoi(tszBuff);
 		Files[CurrentFile].FileNum = CurrentFile+1;
 
-		TCHAR pluginFolgerName[MAX_PATH];
-		mir_sntprintf(tszBuff, SIZEOF(tszBuff), _T("Plugins\\%s"), Files[CurrentFile].File.tszDiskPath);
-		CallService(MS_UTILS_PATHTOABSOLUTET, (WPARAM)tszBuff, (LPARAM)pluginFolgerName);
-		if((Files[CurrentFile].FileType == 2) && (IsPluginDisabled(Files[CurrentFile].File.tszDiskPath) || !Exists(pluginFolgerName))) //check if plugin disabled or not exists
-			continue;
+		if (Files[CurrentFile].FileType == 2)
+		{
+			TCHAR pluginFolgerName[MAX_PATH];
+			mir_sntprintf(tszBuff, SIZEOF(tszBuff), _T("Plugins\\%s"), Files[CurrentFile].File.tszDiskPath);
+			CallService(MS_UTILS_PATHTOABSOLUTET, (WPARAM)tszBuff, (LPARAM)pluginFolgerName);
+			if ((IsPluginDisabled(Files[CurrentFile].File.tszDiskPath) || !Exists(pluginFolgerName))) //check if plugin disabled or not exists
+				continue;
+		}
 		// Compare versions
 		if (getVer(Files[CurrentFile].tszCurVer) < getVer(Files[CurrentFile].tszNewVer)) // Yeah, we've got new version.
 		{
