@@ -501,12 +501,13 @@ struct DBHeader* GetHeader(HANDLE hDbFile)
 // Unsane: database crypted status
 BOOL bEncrypted;
 // Unsane: crypted database work fuction
-int CheckPassword(WORD version, WORD cryptorUID, char * szDBName);
+int CheckPassword(WORD version, WORD cryptorUID, TCHAR * szDBName);
 void InitSecurity();
 
 int CheckFileFormat(HANDLE hDbFile)
 {
 	struct DBHeader* pdbHeader;
+	TCHAR* tszDbName;
 
 	// Read header
 	if (( pdbHeader = GetHeader(hDbFile)) == NULL )
@@ -523,7 +524,8 @@ int CheckFileFormat(HANDLE hDbFile)
 		AddMessage(LPGEN("Database is Secured MMAP database"));
 		// Unsane: check password
 		InitSecurity();
-		if (CheckPassword(pdbHeader->checkWord, pdbHeader->cryptorUID, (char*)LPGEN("your database"))){
+		tszDbName = _tcsrchr(importFile, _T('\\')) + 1;
+		if (CheckPassword(pdbHeader->checkWord, pdbHeader->cryptorUID, tszDbName)){
 			AddMessage(LPGEN("Secured MMAP: authorization successful"));
 			bEncrypted = TRUE;
 		}

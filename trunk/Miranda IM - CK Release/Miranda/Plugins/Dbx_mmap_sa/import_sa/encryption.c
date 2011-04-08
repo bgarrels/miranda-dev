@@ -162,7 +162,7 @@ void DecodeMemory(BYTE * mem, size_t size)
 
 int bCheckingPass = 0;
 
-int CheckPassword(WORD checkWord, WORD cryptorUID, char * szDBName)
+int CheckPassword(WORD checkWord, WORD cryptorUID, TCHAR * szDBName)
 {
 	WORD ver;
 	int res;
@@ -233,16 +233,24 @@ void LanguageChanged(HWND hDlg)
 
 BOOL CALLBACK DlgStdInProc(HWND hDlg, UINT uMsg,WPARAM wParam,LPARAM lParam)
 {
+	HICON hIcon = 0;
+	TCHAR tszHeaderTxt[256];
 	switch(uMsg)
 	{
 	case WM_INITDIALOG:
 		{
 			HWND hwndCtrl;
-//			if(pluginLink && ServiceExists(MS_LANGPACK_TRANSLATEDIALOG))
 			TranslateDialogDefault(hDlg);
 
-			if(lParam && !wrongPass) SetDlgItemTextA(hDlg, IDC_DBNAME, (LPCSTR)lParam);
-			if(wrongPass) 
+			hIcon = LoadIcon(hInst, MAKEINTRESOURCE(IDI_PASS));
+			SendMessage(GetDlgItem(hDlg, IDC_HEADERBAR), WM_SETICON, 0, (LPARAM)hIcon);
+
+			if(!wrongPass)
+			{
+				mir_sntprintf(tszHeaderTxt, SIZEOF(tszHeaderTxt), _T("%s\n%s"), TranslateT("Please type in your password for"), lParam);
+				SetWindowText(GetDlgItem(hDlg, IDC_HEADERBAR), tszHeaderTxt);
+			}
+			else
 			{
 				if (wrongPass > 2)
 				{
@@ -251,13 +259,10 @@ BOOL CALLBACK DlgStdInProc(HWND hDlg, UINT uMsg,WPARAM wParam,LPARAM lParam)
 					hwndCtrl = GetDlgItem(hDlg, IDOK);
 					EnableWindow(hwndCtrl, FALSE);
 					
-					SetDlgItemText(hDlg, IDC_LOGININFO, TranslateT("Too many errors!"));
-
+					SetWindowText(GetDlgItem(hDlg, IDC_HEADERBAR), TranslateT("Too many errors!"));
 				}
 				else
-				{
-					SetDlgItemText(hDlg, IDC_LOGININFO, TranslateT("Password is not correct!"));
-				}
+					SetWindowText(GetDlgItem(hDlg, IDC_HEADERBAR), TranslateT("Password is not correct!"));
 			}
 			oldLangID = 0;
 			SetTimer(hDlg,1,200,NULL);
@@ -301,6 +306,7 @@ BOOL CALLBACK DlgStdInProc(HWND hDlg, UINT uMsg,WPARAM wParam,LPARAM lParam)
 	case WM_DESTROY:
 		{
 			KillTimer(hDlg, 1);
+			DestroyIcon(hIcon);
 			return FALSE;
 		}
 	}
