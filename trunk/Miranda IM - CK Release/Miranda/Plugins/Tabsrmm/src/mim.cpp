@@ -424,10 +424,15 @@ INT_PTR CMimAPI::foldersPathChanged()
 const TCHAR* CMimAPI::getUserDir()
 {
 	if(m_userDir[0] == 0) {
-		wchar_t*	userdata = ::Utils_ReplaceVarsT(L"%miranda_userdata%");
+		wchar_t*	userdata;
+		if (ServiceExists(MS_FOLDERS_REGISTER_PATH))
+			userdata = L"%%miranda_userdata%%";
+		else
+			userdata = ::Utils_ReplaceVarsT(L"%miranda_userdata%");
 		mir_sntprintf(m_userDir, MAX_PATH, userdata);
 		Utils::ensureTralingBackslash(m_userDir);
-		mir_free(userdata); 
+		if (!ServiceExists(MS_FOLDERS_REGISTER_PATH))
+			mir_free(userdata);
 	}
 	return(m_userDir);
 }
@@ -440,11 +445,18 @@ void CMimAPI::InitPaths()
 
 	const TCHAR *szUserdataDir = getUserDir();
 
-	mir_sntprintf(m_szProfilePath, MAX_PATH, _T("%stabSRMM"), szUserdataDir);
-	mir_sntprintf(m_szChatLogsPath, MAX_PATH, _T("%sLogs\\"), szUserdataDir);
-
-	mir_sntprintf(m_szSkinsPath, MAX_PATH, _T("%s\\skins\\"), m_szProfilePath);
-	mir_sntprintf(m_szSavedAvatarsPath, MAX_PATH, _T("%s\\Saved Contact Pictures"), m_szProfilePath);
+	mir_sntprintf(m_szProfilePath, MAX_PATH, _T("%sAvatars\\TabSRMM"), szUserdataDir);
+	if (ServiceExists(MS_FOLDERS_REGISTER_PATH))
+	{
+		mir_sntprintf(m_szChatLogsPath, MAX_PATH, _T("%%miranda_logpath%%"));
+		mir_sntprintf(m_szSkinsPath, MAX_PATH, _T("%%miranda_path%%\\Skins\\TabSRMM"));
+	}
+	else
+	{
+		mir_sntprintf(m_szChatLogsPath, MAX_PATH, Utils_ReplaceVarsT(_T("%%miranda_logpath%%")));
+		mir_sntprintf(m_szSkinsPath, MAX_PATH, Utils_ReplaceVarsT(_T("%%miranda_path%%\\Skins\\TabSRMM")));
+	}
+	mir_sntprintf(m_szSavedAvatarsPath, MAX_PATH, _T("%s"), m_szProfilePath);
 }
 
 bool CMimAPI::getAeroState()
@@ -589,7 +601,7 @@ int CMimAPI::TypingMessage(WPARAM wParam, LPARAM lParam)
 				SkinPlaySound("TNStop");
 		}
 
-		if(M->GetByte(SRMSGMOD, "ShowTypingPopup", 0)) {
+		if(M->GetByte(SRMSGMOD, "ShowTypingPopup", 1)) {
 			BOOL	fShow = FALSE;
 			int		iMode = M->GetByte("MTN_PopupMode", 0);
 
@@ -783,8 +795,8 @@ int CMimAPI::MessageEventAdded(WPARAM wParam, LPARAM lParam)
 			GetContainerNameForContact((HANDLE) wParam, szName, CONTAINER_NAMELEN);
 
 			bAutoPopup = M->GetByte(SRMSGSET_AUTOPOPUP, SRMSGDEFSET_AUTOPOPUP);
-			bAutoCreate = M->GetByte("autotabs", 1);
-			bAutoContainer = M->GetByte("autocontainer", 1);
+			bAutoCreate = M->GetByte("autotabs", 0);
+			bAutoContainer = M->GetByte("autocontainer", 0);
 			dwStatusMask = M->GetDword("autopopupmask", -1);
 
 			bAllowAutoCreate = FALSE;
@@ -841,8 +853,8 @@ int CMimAPI::MessageEventAdded(WPARAM wParam, LPARAM lParam)
 	GetContainerNameForContact((HANDLE) wParam, szName, CONTAINER_NAMELEN);
 
 	bAutoPopup = M->GetByte(SRMSGSET_AUTOPOPUP, SRMSGDEFSET_AUTOPOPUP);
-	bAutoCreate = M->GetByte("autotabs", 1);
-	bAutoContainer = M->GetByte("autocontainer", 1);
+	bAutoCreate = M->GetByte("autotabs", 0);
+	bAutoContainer = M->GetByte("autocontainer", 0);
 	dwStatusMask = M->GetDword("autopopupmask", -1);
 
 	bAllowAutoCreate = FALSE;

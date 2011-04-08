@@ -284,7 +284,7 @@ void TSAPI CalcDynamicAvatarSize(TWindowData *dat, BITMAP *bminfo)
 	if (PluginConfig.m_LimitStaticAvatarHeight > 0)
 		dat->iRealAvatarHeight = min(dat->iRealAvatarHeight, PluginConfig.m_LimitStaticAvatarHeight);
 
-	if (M->GetByte(dat->hContact, "dontscaleavatars", M->GetByte("dontscaleavatars", 0)))
+	if (M->GetByte(dat->hContact, "dontscaleavatars", M->GetByte("dontscaleavatars", 1)))
 		dat->iRealAvatarHeight = min(bminfo->bmHeight, dat->iRealAvatarHeight);
 
 	if (bminfo->bmHeight != 0)
@@ -2107,8 +2107,8 @@ void TSAPI LoadThemeDefaults(TContainerData *pContainer)
 	pContainer->theme.inbg = PluginConfig.crIncoming;
 	pContainer->theme.outbg = PluginConfig.crOutgoing;
 	pContainer->theme.hgrid = M->GetDword(FONTMODULE, "hgrid", RGB(224, 224, 224));
-	pContainer->theme.left_indent = M->GetDword("IndentAmount", 20) * 15;
-	pContainer->theme.right_indent = M->GetDword("RightIndent", 20) * 15;
+	pContainer->theme.left_indent = M->GetDword("IndentAmount", 0) * 15;
+	pContainer->theme.right_indent = M->GetDword("RightIndent", 0) * 15;
 	pContainer->theme.inputbg = M->GetDword(FONTMODULE, "inputbg", SRMSGDEFSET_BKGCOLOUR);
 
 	for (i = 1; i <= 5; i++) {

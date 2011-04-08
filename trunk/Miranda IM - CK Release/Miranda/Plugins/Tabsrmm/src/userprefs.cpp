@@ -77,7 +77,7 @@ static INT_PTR CALLBACK DlgProcUserPrefs(HWND hwndDlg, UINT msg, WPARAM wParam, 
 			DWORD maxhist = M->GetDword((HANDLE)lParam, "maxhist", 0);
 			BYTE bIEView = M->GetByte((HANDLE)lParam, "ieview", 0);
 			BYTE bHPP = M->GetByte((HANDLE)lParam, "hpplog", 0);
-			int iLocalFormat = M->GetDword((HANDLE)lParam, "sendformat", 0);
+			int iLocalFormat = M->GetDword((HANDLE)lParam, "sendformat", 1);
 			BYTE bRTL = M->GetByte((HANDLE)lParam, "RTL", 0);
 			BYTE bLTR = M->GetByte((HANDLE)lParam, "RTL", 1);
 			BYTE bSplit = M->GetByte((HANDLE)lParam, "splitoverride", 0);

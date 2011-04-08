@@ -90,8 +90,8 @@ static ColorOptionsList _clrs[] = {
 	3, LPGENT("TabSRMM/Single Messaging"), LPGENT("Incoming background(old)"), "oldinbg", SRMSGDEFSET_BKGINCOLOUR,
 	4, LPGENT("TabSRMM/Single Messaging"), LPGENT("Outgoing background(old)"), "oldoutbg", SRMSGDEFSET_BKGOUTCOLOUR,
 	5, LPGENT("TabSRMM/Single Messaging"), LPGENT("Horizontal Grid Lines"), "hgrid", RGB(224, 224, 224),
-	0, LPGENT("TabSRMM/Info Panel"), LPGENT("Panel background low"), "ipfieldsbg", 0x62caff,
-	1, LPGENT("TabSRMM/Info Panel"), LPGENT("Panel background high"), "ipfieldsbgHigh", 0xf0f0f0,
+	0, LPGENT("TabSRMM/Info Panel"), LPGENT("Panel background low"), "ipfieldsbg", RGB(255, 202, 98),
+	1, LPGENT("TabSRMM/Info Panel"), LPGENT("Panel background high"), "ipfieldsbgHigh", 0xff000000 | COLOR_3DFACE,
 	0, LPGENT("TabSRMM/Common colors"), LPGENT("Toolbar background high"), "tbBgHigh", 0,
 	1, LPGENT("TabSRMM/Common colors"), LPGENT("Toolbar background low"), "tbBgLow", 0,
 	2, LPGENT("TabSRMM/Common colors"), LPGENT("Window fill color"), "fillColor", 0,
@@ -116,62 +116,62 @@ extern LOGFONT lfDefault;
 
 //remember to put these in the Translate( ) template file too
 static FontOptionsList CHAT_fontOptionsList[] = {
-	{LPGENT("Timestamp"), RGB(50, 50, 240), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("Others nicknames"), RGB(0, 0, 192), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -12},
-	{LPGENT("Your nickname"), RGB(0, 0, 192), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -12},
-	{LPGENT("User has joined"), RGB(90, 160, 90), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("User has left"), RGB(160, 160, 90), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("User has disconnected"), RGB(160, 90, 90), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("User kicked ..."), RGB(100, 100, 100), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("User is now known as ..."), RGB(90, 90, 160), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("Notice from user"), RGB(160, 130, 60), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("Incoming message"), RGB(90, 90, 90), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("Outgoing message"), RGB(90, 90, 90), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("The topic is ..."), RGB(70, 70, 160), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("Information messages"), RGB(130, 130, 195), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("User enables status for ..."), RGB(70, 150, 70), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("User disables status for ..."), RGB(150, 70, 70), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("Action message"), RGB(160, 90, 160), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("Highlighted message"), RGB(180, 150, 80), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("Chat log symbols (Webdings)"), RGB(170, 170, 170), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("User list members (Online)"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("User list members (away)"), RGB(170, 170, 170), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
+	{LPGENT("Timestamp"), RGB(50, 50, 240), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("Others nicknames"), RGB(0, 0, 192), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -13},
+	{LPGENT("Your nickname"), RGB(0, 0, 192), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -13},
+	{LPGENT("User has joined"), RGB(90, 160, 90), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("User has left"), RGB(160, 160, 90), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("User has disconnected"), RGB(160, 90, 90), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("User kicked ..."), RGB(100, 100, 100), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("User is now known as ..."), RGB(90, 90, 160), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("Notice from user"), RGB(160, 130, 60), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("Incoming message"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("Outgoing message"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("The topic is ..."), RGB(70, 70, 160), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("Information messages"), RGB(130, 130, 195), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("User enables status for ..."), RGB(70, 150, 70), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("User disables status for ..."), RGB(150, 70, 70), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("Action message"), RGB(160, 90, 160), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("Highlighted message"), RGB(180, 150, 80), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("Chat log symbols (Webdings)"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("User list members (Online)"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("User list members (away)"), RGB(170, 170, 170), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
 };
 
 const int msgDlgFontCount = SIZEOF(CHAT_fontOptionsList);
 
 static FontOptionsList IM_fontOptionsList[] = {
-	{LPGENT(">> Outgoing messages"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT(">> Outgoing misc events"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("<< Incoming messages"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("<< Incoming misc events"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT(">> Outgoing name"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -12},
-	{LPGENT(">> Outgoing timestamp"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -12},
-	{LPGENT("<< Incoming name"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -12},
-	{LPGENT("<< Incoming timestamp"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -12},
-	{LPGENT(">> Outgoing messages (old)"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT(">> Outgoing misc events (old)"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("<< Incoming messages (old)"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("<< Incoming misc events (old)"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT(">> Outgoing name (old)"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -12},
-	{LPGENT(">> Outgoing timestamp (old)"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -12},
-	{LPGENT("<< Incoming name (old)"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -12},
-	{LPGENT("<< Incoming timestamp (old)"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -12},
-	{LPGENT("* Message Input Area"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("* Status changes"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("* Dividers"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("* Error and warning Messages"), RGB(50, 50, 50), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("* Symbols (incoming)"), RGB(50, 50, 50), _T("Webdings"), SYMBOL_CHARSET, 0, -12},
-	{LPGENT("* Symbols (outgoing)"), RGB(50, 50, 50), _T("Webdings"), SYMBOL_CHARSET, 0, -12},
+	{LPGENT(">> Outgoing messages"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT(">> Outgoing misc events"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("<< Incoming messages"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("<< Incoming misc events"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT(">> Outgoing name"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -13},
+	{LPGENT(">> Outgoing timestamp"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -13},
+	{LPGENT("<< Incoming name"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -13},
+	{LPGENT("<< Incoming timestamp"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -13},
+	{LPGENT(">> Outgoing messages (old)"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT(">> Outgoing misc events (old)"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("<< Incoming messages (old)"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("<< Incoming misc events (old)"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT(">> Outgoing name (old)"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -13},
+	{LPGENT(">> Outgoing timestamp (old)"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -13},
+	{LPGENT("<< Incoming name (old)"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -13},
+	{LPGENT("<< Incoming timestamp (old)"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, FONTF_BOLD, -13},
+	{LPGENT("* Message Input Area"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("* Status changes"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("* Dividers"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("* Error and warning Messages"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("* Symbols (incoming)"), RGB(0, 0, 0), _T("Webdings"), SYMBOL_CHARSET, 0, -13},
+	{LPGENT("* Symbols (outgoing)"), RGB(0, 0, 0), _T("Webdings"), SYMBOL_CHARSET, 0, -13},
 };
 
 static FontOptionsList IP_fontOptionsList[] = {
-	{LPGENT("Nickname"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("UIN"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("Status"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("Protocol"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("Contacts local time"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
-	{LPGENT("Window caption (skinned mode)"), RGB(255, 255, 255), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -12},
+	{LPGENT("Nickname"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("UIN"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("Status"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("Protocol"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("Contacts local time"), RGB(0, 0, 0), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
+	{LPGENT("Window caption (skinned mode)"), RGB(255, 255, 255), lfDefault.lfFaceName, DEFAULT_CHARSET, 0, -13},
 };
 
 static FontOptionsList *fontOptionsList = IM_fontOptionsList;
@@ -218,7 +218,7 @@ static struct branch_t branch2[] = {
 	{LPGENT("Add a colon (:) to auto-completed user names"), "AddColonToAutoComplete", 0, 1, NULL},
 	{LPGENT("Start private conversation on doubleclick in nick list (insert nick if unchecked)"), "DoubleClick4Privat", 0, 0, NULL},
 	{LPGENT("Strip colors from messages in the log"), "StripFormatting", 0, 0, NULL},
-	{LPGENT("Enable the \'event filter\' for new rooms"), "FilterEnabled", 0, 0, NULL},
+	{LPGENT("Enable the \'event filter\' for new rooms"), "FilterEnabled", 0, 1, NULL},
 //MAD: simple customization improvement
 	{LPGENT("Use IRC style status indicators in the log"), "LogClassicIndicators", 0,0, NULL},
 //
@@ -569,7 +569,7 @@ INT_PTR CALLBACK DlgProcOptions1(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM 
 
 				{
 					TCHAR* pszGroup = NULL;
-					InitSetting(&pszGroup, "AddToGroup", _T("Chat rooms"));
+					InitSetting(&pszGroup, "AddToGroup", _T(""));
 					SetWindowText(GetDlgItem(hwndDlg, IDC_GROUP), pszGroup);
 					mir_free(pszGroup);
 					Utils::showDlgControl(hwndDlg, IDC_STATIC_MESSAGE, SW_HIDE);
@@ -945,7 +945,7 @@ INT_PTR CALLBACK DlgProcOptions2(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM 
 				Utils::enableDlgControl(hwndDlg, IDC_LOGDIRECTORY, g_Settings.LoggingEnabled ? TRUE : FALSE);
 				Utils::enableDlgControl(hwndDlg, IDC_FONTCHOOSE, g_Settings.LoggingEnabled ? TRUE : FALSE);
 				SendDlgItemMessage(hwndDlg, IDC_CHAT_SPIN4, UDM_SETRANGE, 0, MAKELONG(10000, 0));
-				SendDlgItemMessage(hwndDlg, IDC_CHAT_SPIN4, UDM_SETPOS, 0, MAKELONG(DBGetContactSettingWord(NULL, "Chat", "LoggingLimit", 100), 0));
+				SendDlgItemMessage(hwndDlg, IDC_CHAT_SPIN4, UDM_SETPOS, 0, MAKELONG(DBGetContactSettingWord(NULL, "Chat", "LoggingLimit", 0), 0));
 				Utils::enableDlgControl(hwndDlg, IDC_LIMIT, g_Settings.LoggingEnabled ? TRUE : FALSE);
 
 				if (ServiceExists(MS_UTILS_REPLACEVARS)) {
@@ -1245,9 +1245,9 @@ INT_PTR CALLBACK DlgProcOptions3(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM 
 			TranslateDialogDefault(hwndDlg);
 
 			if (PluginConfig.m_chat_enabled) {
-				DWORD dwFilterFlags = M->GetDword("Chat", "FilterFlags", GC_EVENT_ALL);
-				DWORD dwTrayFlags = M->GetDword("Chat", "TrayIconFlags", GC_EVENT_ALL);
-				DWORD dwPopupFlags = M->GetDword("Chat", "PopupFlags", GC_EVENT_ALL);
+				DWORD dwFilterFlags = M->GetDword("Chat", "FilterFlags", GC_EVENT_ACTION | GC_EVENT_MESSAGE | GC_EVENT_NICK | GC_EVENT_TOPIC | GC_EVENT_ADDSTATUS | GC_EVENT_INFORMATION | GC_EVENT_QUIT | GC_EVENT_KICK | GC_EVENT_NOTICE);
+				DWORD dwTrayFlags = M->GetDword("Chat", "TrayIconFlags", GC_EVENT_KICK | GC_EVENT_HIGHLIGHT);
+				DWORD dwPopupFlags = M->GetDword("Chat", "PopupFlags", GC_EVENT_KICK | GC_EVENT_HIGHLIGHT);
 				DWORD dwLogFlags = M->GetDword("Chat", "DiskLogFlags", GC_EVENT_ALL);
 
 				for(int i = 0; _eventorder[i]; i++) {
@@ -1333,12 +1333,12 @@ void LoadGlobalSettings(void)
 	g_Settings.iEventLimit = DBGetContactSettingWord(NULL, "Chat", "LogLimit", 100);
 	g_Settings.iEventLimitThreshold = DBGetContactSettingWord(NULL, "Chat", "LogLimitThreshold", 20);
 	g_Settings.dwIconFlags = M->GetDword("Chat", "IconFlags", 0x0000);
-	g_Settings.LoggingLimit = (size_t)DBGetContactSettingWord(NULL, "Chat", "LoggingLimit", 100);
-	g_Settings.LoggingEnabled = (BOOL)M->GetByte("Chat", "LoggingEnabled", 0);
+	g_Settings.LoggingLimit = (size_t)DBGetContactSettingWord(NULL, "Chat", "LoggingLimit", 0);
+	g_Settings.LoggingEnabled = (BOOL)M->GetByte("Chat", "LoggingEnabled", 1);
 	g_Settings.OpenInDefault = (BOOL)M->GetByte("Chat", "DefaultContainer", 1);
 	g_Settings.FlashWindow = (BOOL)M->GetByte("Chat", "FlashWindow", 0);
 	g_Settings.FlashWindowHightlight = (BOOL)M->GetByte("Chat", "FlashWindowHighlight", 0);
-	g_Settings.HighlightEnabled = (BOOL)M->GetByte("Chat", "HighlightEnabled", 1);
+	g_Settings.HighlightEnabled = (BOOL)M->GetByte("Chat", "HighlightEnabled", 7);
 	g_Settings.crUserListColor = (BOOL)M->GetDword(CHAT_FONTMODULE, "Font18Col", RGB(0, 0, 0));
 	g_Settings.crUserListBGColor = (BOOL)M->GetDword("Chat", "ColorNicklistBG", SRMSGDEFSET_BKGCOLOUR);
 	g_Settings.crUserListHeadingsColor = (BOOL)M->GetDword(CHAT_FONTMODULE, "Font19Col", RGB(170, 170, 170));
@@ -1346,8 +1346,8 @@ void LoadGlobalSettings(void)
 	g_Settings.TrayIconInactiveOnly = (BOOL)M->GetByte("Chat", "TrayIconInactiveOnly", 1);
 	g_Settings.BBCodeInPopups = (BOOL)M->GetByte("Chat", "BBCodeInPopups", 0);
 	g_Settings.AddColonToAutoComplete = (BOOL)M->GetByte("Chat", "AddColonToAutoComplete", 1);
-	g_Settings.iPopupStyle = M->GetByte("Chat", "PopupStyle", 1);
-	g_Settings.iPopupTimeout = DBGetContactSettingWord(NULL, "Chat", "PopupTimeout", 3);
+	g_Settings.iPopupStyle = M->GetByte("Chat", "PopupStyle", 2);
+	g_Settings.iPopupTimeout = DBGetContactSettingWord(NULL, "Chat", "PopupTimeout", 0);
 	g_Settings.crPUBkgColour = M->GetDword("Chat", "PopupColorBG", GetSysColor(COLOR_WINDOW));
 	g_Settings.crPUTextColour = M->GetDword("Chat", "PopupColorText", 0);
 	g_Settings.ClassicIndicators = M->GetByte("Chat", "ClassicIndicators", 0);
@@ -1357,7 +1357,7 @@ void LoadGlobalSettings(void)
 	g_Settings.AnnoyingHighlight	= M->GetByte("Chat", "AnnoyingHighlight", 0);
 	g_Settings.CreateWindowOnHighlight = M->GetByte("Chat", "CreateWindowOnHighlight", 1);
 	//MAD_
-	g_Settings.LogSymbols = M->GetByte("Chat", "LogSymbols", 1);
+	g_Settings.LogSymbols = M->GetByte("Chat", "LogSymbols", 0);
 	g_Settings.ClickableNicks = M->GetByte("Chat", "ClickableNicks", 1);
 	g_Settings.ColorizeNicks = M->GetByte("Chat", "ColorizeNicks", 1);
 	g_Settings.ColorizeNicksInLog = M->GetByte("Chat", "ColorizeNicksInLog", 1);

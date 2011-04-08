@@ -1195,13 +1195,13 @@ static INT_PTR CALLBACK FilterWndProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LP
 
 			si = (SESSION_INFO *)lParam;
 			DWORD dwMask = M->GetDword(si->hContact, "Chat", "FilterMask", 0);
-			DWORD dwFlags = M->GetDword(si->hContact, "Chat", "FilterFlags", 0);
+			DWORD dwFlags = M->GetDword(si->hContact, "Chat", "FilterFlags", GC_EVENT_ACTION | GC_EVENT_MESSAGE | GC_EVENT_NICK | GC_EVENT_TOPIC | GC_EVENT_ADDSTATUS | GC_EVENT_INFORMATION | GC_EVENT_QUIT | GC_EVENT_KICK | GC_EVENT_NOTICE);
 
 			DWORD dwPopupMask = M->GetDword(si->hContact, "Chat", "PopupMask", 0);
-			DWORD dwPopupFlags = M->GetDword(si->hContact, "Chat", "PopupFlags", 0);
+			DWORD dwPopupFlags = M->GetDword(si->hContact, "Chat", "PopupFlags", GC_EVENT_KICK | GC_EVENT_HIGHLIGHT);
 
 			DWORD dwTrayMask = M->GetDword(si->hContact, "Chat", "TrayIconMask", 0);
-			DWORD dwTrayFlags = M->GetDword(si->hContact, "Chat", "TrayIconFlags", 0);
+			DWORD dwTrayFlags = M->GetDword(si->hContact, "Chat", "TrayIconFlags", GC_EVENT_KICK | GC_EVENT_HIGHLIGHT);
 
 			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)si);
 
@@ -1516,6 +1516,9 @@ static LRESULT CALLBACK NicklistSubclassProc(HWND hwnd, UINT msg, WPARAM wParam,
 {
 	HWND hwndParent = GetParent(hwnd);
 	struct TWindowData *mwdat = (struct TWindowData *)GetWindowLongPtr(hwndParent, GWLP_USERDATA);
+	// Unsane: global vars
+	static BOOL isToolTip = NULL;
+	static int currentHovered = -1;
 
 	switch (msg) {
 		//MAD: attemp to fix weird bug, when combobox with hidden vscroll
@@ -1623,6 +1626,8 @@ static LRESULT CALLBACK NicklistSubclassProc(HWND hwnd, UINT msg, WPARAM wParam,
 				si->iSearchItem = -1;
 			}
 			break;
+			// Unsane: lost comment
+			KillTimer(hwnd, 1);			
 		case WM_CHAR:
 		case WM_UNICHAR: {
 			/*
@@ -1804,12 +1809,14 @@ static LRESULT CALLBACK NicklistSubclassProc(HWND hwnd, UINT msg, WPARAM wParam,
 		case WM_MOUSEMOVE: {
 			POINT pt;
 			RECT clientRect;
-			BOOL bInClient;
+//			BOOL bInClient;
 			pt.x = LOWORD(lParam);
 			pt.y = HIWORD(lParam);
 			GetClientRect(hwnd, &clientRect);
-			bInClient = PtInRect(&clientRect, pt);
- 			if (bInClient) {
+//			bInClient = PtInRect(&clientRect, pt);
+// 			if (bInClient) {
+			if (PtInRect(&clientRect, pt))
+			{
 				//hit test item under mouse
 				struct TWindowData *dat = (struct TWindowData *)GetWindowLongPtr(hwndParent, GWLP_USERDATA);
 				SESSION_INFO *parentdat = (SESSION_INFO *)dat->si;
@@ -1820,9 +1827,99 @@ static LRESULT CALLBACK NicklistSubclassProc(HWND hwnd, UINT msg, WPARAM wParam,
 				else
 					nItemUnderMouse &= 0xFFFF;
 
-				ProcessNickListHovering(hwnd, (int)nItemUnderMouse, &pt, parentdat);
-			} else
-				ProcessNickListHovering(hwnd, -1, &pt, NULL);
+//				ProcessNickListHovering(hwnd, (int)nItemUnderMouse, &pt, parentdat);
+//			} else
+//				ProcessNickListHovering(hwnd, -1, &pt, NULL);
+				if ((int)nItemUnderMouse == currentHovered) break;
+				currentHovered = (int)nItemUnderMouse;
+
+				KillTimer(hwnd, 1);
+
+				if (isToolTip)
+				{
+					CallService("mToolTip/HideTip", 0, 0);
+					isToolTip = FALSE;
+				}
+				
+				if (nItemUnderMouse != -1)
+					SetTimer(hwnd, 1, 450, 0);
+
+				//ProcessNickListHovering(hwnd, (int)nItemUnderMouse, &pt, parentdat);
+			}
+			else
+			{
+				KillTimer(hwnd, 1);
+
+				if (isToolTip)
+				{
+					CallService("mToolTip/HideTip", 0, 0);
+					isToolTip = FALSE;
+				}
+			}
+			/* else
+				ProcessNickListHovering(hwnd, -1, &pt, NULL);*/
+		}
+		break;
+		case WM_TIMER:
+		{
+			CLCINFOTIP ti = {0};
+			USERINFO *ui1 = NULL;
+			TCHAR ptszBuf[1024];
+			char serviceName[256];
+			POINT pt;
+
+			{
+				//struct MessageWindowData *dat = (struct MessageWindowData *)GetWindowLongPtr(hwndParent, GWLP_USERDATA);
+				struct TWindowData *dat = (struct TWindowData *)GetWindowLongPtr(hwndParent, GWLP_USERDATA);
+
+
+				SESSION_INFO * parentdat = dat->si;
+
+				GetCursorPos(&pt);
+				ScreenToClient(hwnd, &pt);
+
+				{
+					DWORD nItemUnderMouse = (DWORD)SendMessage(GetDlgItem(dat->hwnd, IDC_LIST), LB_ITEMFROMPOINT, 0, MAKELPARAM(pt.x, pt.y));
+					if (HIWORD(nItemUnderMouse) == 1)
+						nItemUnderMouse = (DWORD)(-1);
+					else
+						nItemUnderMouse &= 0xFFFF;
+					if (((int)nItemUnderMouse != currentHovered) || (nItemUnderMouse == -1)) 
+					{
+						KillTimer(hwnd, 1);
+						break;
+					}
+				}
+				
+				ui1 = SM_GetUserFromIndex(parentdat->ptszID, parentdat->pszModule, currentHovered);
+
+				if (ui1)
+				{
+					ti.cbSize = sizeof(ti);
+					//ti.hItem = parentdat->hContact;
+					//ti.isTreeFocused = GetFocus() == hwnd ? 1 : 0;
+					//ti.ptCursor = pt;
+					//SendMessage(hwnd, LB_ITEMFROMPOINT, nItemUnderMouse, (LPARAM)&ti.rcItem);
+
+					_snprintf(serviceName, SIZEOF(serviceName), "%s"MS_GC_PROTO_GETTOOLTIPTEXT, parentdat->pszModule);
+
+					if (ServiceExists(serviceName))
+						mir_sntprintf(ptszBuf, SIZEOF(ptszBuf), _T("%s"), (TCHAR*)CallService(serviceName, (WPARAM)parentdat->ptszID, (LPARAM)ui1->pszUID));
+					else
+					{
+						mir_sntprintf(ptszBuf, SIZEOF(ptszBuf), _T("<b>%s:</b>\t%s\n<b>%s:</b>\t%s\n<b>%s:</b>\t%s"),
+							TranslateT("Nick"), ui1->pszNick,
+							TranslateT("Unique id"), ui1->pszUID,
+							TranslateT("Status"), TM_WordToString(parentdat->pStatuses, ui1->Status));
+					}
+
+					if (ptszBuf != NULL)
+						if (CallService("mToolTip/ShowTipW", (WPARAM)mir_tstrdup(ptszBuf), (LPARAM)&ti))
+							isToolTip = TRUE;
+				}
+			}
+
+			KillTimer(hwnd, 1);
 		}
 		break;
 	}

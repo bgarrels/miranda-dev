@@ -1361,7 +1361,7 @@ skip_tabs:
 			return 0;
 		}
 		case WM_TIMER: {
-			if (wParam == TIMERID_HOVER_T &&  M->GetByte("d_tooltips", 0)) {
+			if (wParam == TIMERID_HOVER_T &&  M->GetByte("d_tooltips", 1)) {
 				POINT pt;
 				CLCINFOTIP ti = {0};
 				ti.cbSize = sizeof(ti);

@@ -436,7 +436,7 @@ int SendQueue::sendQueued(TWindowData *dat, const int iEntry)
 		else if (!(dat->sendMode & SMODE_FORCEANSI) && !M->GetByte(dat->cache->getActiveContact(), dat->cache->getActiveProto(), "UnicodeSend", 0))
 			M->WriteByte(dat->cache->getActiveContact(), dat->cache->getActiveProto(), "UnicodeSend", 1);
 
-		if (M->GetByte("autosplit", 0) && !(dat->sendMode & SMODE_SENDLATER)) {
+		if (M->GetByte("autosplit", 1) && !(dat->sendMode & SMODE_SENDLATER)) {
 			BOOL    fSplit = FALSE;
 			DWORD   dwOldFlags;
 
