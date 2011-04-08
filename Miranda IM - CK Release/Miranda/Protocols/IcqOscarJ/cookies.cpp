@@ -24,8 +24,8 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/cookies.cpp $
-// Revision       : $Revision: 13324 $
-// Last change on : $Date: 2011-01-23 16:58:59 +0100 (So, 23. Jan 2011) $
+// Revision       : $Revision: 13553 $
+// Last change on : $Date: 2011-04-08 03:25:55 +0200 (Fr, 08. Apr 2011) $
 // Last change by : $Author: borkra $
 //
 // DESCRIPTION:
@@ -290,6 +290,9 @@ cookie_message_data* CIcqProto::CreateMessageCookieData(BYTE bMsgType, HANDLE hC
 	BYTE bAckType;
 	WORD wStatus = getContactStatus(hContact);
 
+	bAckType = getSettingByte(NULL, "SlowSend", DEFAULT_SLOWSEND) && (dwUin || wStatus != ID_STATUS_OFFLINE) ? ACKTYPE_SERVER : ACKTYPE_NONE;
+
+/*
 	if (!getSettingByte(hContact, "SlowSend", DEFAULT_SLOWSEND) || !getSettingByte(NULL, "SlowSend", DEFAULT_SLOWSEND) ||
 		(!dwUin && wStatus == ID_STATUS_OFFLINE))
 		bAckType = ACKTYPE_NONE;
@@ -299,6 +302,7 @@ cookie_message_data* CIcqProto::CreateMessageCookieData(BYTE bMsgType, HANDLE hC
 		bAckType = ACKTYPE_SERVER;
 	else
 		bAckType = ACKTYPE_CLIENT;
+*/
 
 	return CreateMessageCookie(bMsgType, bAckType);
 }
