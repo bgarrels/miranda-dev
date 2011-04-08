@@ -42,6 +42,9 @@ You should also check out the options (Events->BossKey), they are somewhat usefu
 
 Changelog:
 =========
+v. 0.5.0.3
+- Fixed occurrence of the second password window, when double-clicking hotkey
+
 v. 0.5.0.2
 - Increased the space for translation in some controls
 - Changed the archive's structure to make updater happy

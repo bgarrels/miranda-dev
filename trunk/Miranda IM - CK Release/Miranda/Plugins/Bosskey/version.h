@@ -1,6 +1,6 @@
 #define __FILE_VERSION 0,5,0,3
 #define __FILE_VERSION_STR "0, 5, 0, 3"
-#define __VERSION_DWORD 0x00050002
+#define __VERSION_DWORD 0x00050003
 
 #if defined ( _WIN64 )
 #define __MODULE_NAME "BossKey+ (x64)"

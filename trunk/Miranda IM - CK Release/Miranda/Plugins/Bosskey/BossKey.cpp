@@ -151,7 +151,7 @@ INT_PTR CALLBACK DlgStdInProc(HWND hDlg, UINT uMsg,WPARAM wParam,LPARAM lParam)
 			{
 				SetTextColor((HDC)wParam, GetSysColor(COLOR_HIGHLIGHTTEXT));
 				SetBkMode((HDC)wParam, TRANSPARENT);
-				return (BOOL)GetSysColorBrush(COLOR_HIGHLIGHT);
+				return (INT_PTR)GetSysColorBrush(COLOR_HIGHLIGHT);
 			}
 			return FALSE;
 		}
@@ -469,9 +469,6 @@ LRESULT CALLBACK ListenWndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 			if (!g_bWindowHidden || g_fPassRequested) 
 				break;
 
-			if (ServiceExists(MS_TRIGGER_REGISTERTRIGGER))
-				BossKeyEvent(g_bWindowHidden, 0);
-
 			if (g_wMask & OPT_REQPASS){  //password request
 				DBVARIANT dbVar = {0};
 				if(!DBGetContactSettingString(NULL,MOD_NAME,"password",&dbVar))
@@ -488,6 +485,9 @@ LRESULT CALLBACK ListenWndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 					if(res != IDOK) return 0;
 				}
 			}
+
+			if (ServiceExists(MS_TRIGGER_REGISTERTRIGGER))
+				BossKeyEvent(g_bWindowHidden, 0);
 
 			if (g_wMask & OPT_CHANGESTATUS && g_wMask & OPT_SETONLINEBACK) // set back to some status
 			{
