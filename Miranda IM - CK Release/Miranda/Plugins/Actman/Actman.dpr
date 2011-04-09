@@ -66,7 +66,7 @@ function MirandaPluginInfoEx(mirandaVersion:DWORD):PPLUGININFOEX; cdecl;
 begin
   result:=@PluginInfo;
   PluginInfo.cbSize     :=SizeOf(TPLUGININFOEX);
-  PluginInfo.shortName  :='Action manager (Unicode)';
+  PluginInfo.shortName  :='Action manager';
   PluginInfo.version    :=$0001010A;
   PluginInfo.description:='Plugin for manage hotkeys to open contact window, insert text, '+
                           'run program and call services';
