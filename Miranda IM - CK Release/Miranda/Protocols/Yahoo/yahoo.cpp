@@ -1,5 +1,5 @@
 /*
- * $Id: yahoo.cpp 12759 2010-09-19 23:46:58Z borkra $
+ * $Id: yahoo.cpp 13557 2011-04-09 02:26:58Z borkra $
  *
  * myYahoo Miranda Plugin 
  *
@@ -293,7 +293,7 @@ HANDLE CYahooProto::add_buddy( const char *yahoo_id, const char *yahoo_name, int
 	
 	hContact = getbuddyH(yid);
 	if (hContact != NULL) {
-		LOG(("[add_buddy] Found buddy id: %s, handle: %lu", yid, (DWORD)hContact));
+		LOG(("[add_buddy] Found buddy id: %s, handle: %p", yid, hContact));
 		if ( !( flags & PALF_TEMPORARY ) && DBGetContactSettingByte( hContact, "CList", "NotOnList", 1 )) 
 		{
 			LOG(("[add_buddy] Making Perm id: %s, flags: %lu", yahoo_id, flags));
