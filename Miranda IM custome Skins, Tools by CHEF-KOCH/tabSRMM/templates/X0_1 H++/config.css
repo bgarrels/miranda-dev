@@ -1,0 +1,18 @@
+.Link-Text                           {color:#bfbfbf; position:relative; padding-left: 10px;}
+.Link-Text2                          {color:#0099ff; position:relative; font-weight: bold; padding-left: 10px;}
+.tzerlink                             {color:#bfbfbf; position:relative; padding-left: 10px;}
+.tzerlink2                           {color:#bfbfbf; position:relative; padding-left: 10px;}
+
+.imagebox                             {text-align:center; filter: alpha(Opacity=70,  Finish0pacity=70);  border : none; 	padding: 10px 0 10px 0;}
+.imagebox2                           {text-align:center; filter: alpha(Opacity=100, FinishOpacity=100); border : none; 	padding: 10px 0 10px 0;}
+.swfbox                                {text-align:center; border : none;}
+.videobox                             {text-align:center; border : none;}
+.imagebox_filetransfer      {display:inline; vertical-align:middle; text-align:center; filter: alpha(Opacity=70,  Finish0pacity=70);  border : none; 	padding: 10px 0 10px 0;}
+.imagebox2_filetransfer    {display:none; text-align:center; filter: alpha(Opacity=100,  Finish0pacity=100); border : none; 	padding: 10px 0 10px 0;}
+.otherbox                             {display:none; text-align:center; border : none; 	padding: 10px 0 10px 0; }
+.tzerbildbereich                {text-align: center; margin-left: -60px;}
+
+.bildvorschau                     {height:140px; border-style:solid; border-width:1px; margin:0px;}
+.icons                                 {height:18px; margin-bottom: -4px; margin:0px;}
+.tzerbild                            {text-align: left; height:20px; filter:Chroma(color=#FFFFFF); margin:0px;}
+.icons_filetypes                {height:18px; margin: 0 5px 0 5px;}

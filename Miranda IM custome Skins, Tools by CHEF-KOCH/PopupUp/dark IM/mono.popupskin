@@ -1,0 +1,131 @@
+w 1+icon.width+1+title.width+1+4+clock.width+14 > 11+avatar.width+0+text.width+14
+h 14+title.height+4+(avatar.height>text.height)+10
+
+object
+	type bitmap
+	source topleft.png
+	x 0
+	y 0
+	w 14
+	h 14
+end
+
+object
+	type bitmap
+	source top.png
+	x 14
+	y 0
+	w window.width-14-14
+	h 14
+end
+
+object
+	type bitmap
+	source topright.png
+	x window.width-14
+	y 0
+	w 14
+	h 14
+end
+
+object
+	type bitmap
+	source tile_left.png
+	x 0
+	y 14
+	w 14
+	h window.height-14-14
+end
+
+object
+	type bitmap
+	source tile_center.png
+	x 14
+	y 14
+	w window.width-14
+	h window.height-14-14
+end
+
+object
+	type bitmap
+	source tile_right.png
+	x window.width-14
+	y 14
+	w 14
+	h window.height-14-14
+end
+
+object
+	type bitmap
+	source bottomleft.png
+	x 0
+	y window.height-14
+	w 14
+	h 14
+end
+
+object
+	type bitmap
+	source bottom.png
+	x 14
+	y window.height-14
+	w window.width-14-14
+	h 14
+end
+
+object
+	type bitmap
+	source bottomright.png
+	x window.width-14
+	y window.height-14
+	w 14
+	h 14
+end
+
+object
+	ifset 1
+	type bitmap
+	source line.png
+	layer
+	y title.height+4
+	x 8
+  w window.width-22
+end
+
+object
+	type icon
+	x 4
+	y 6
+end
+
+object
+	type clock
+	x window.width-clock.width-6
+	y 6
+end
+
+object
+	type avatar
+	x 10
+	y 14+title.height+2
+	w 48
+	proportional 1
+end
+
+object
+	type title
+	color 255 255 255
+	x icon.width+7
+	y 6
+	w window.width-(14+icon.width+3)-clock.width-4
+	h 10
+end
+
+object
+	type text
+  color 170 170 170
+	x avatar.width+14
+	y 14+title.height
+	w window.width-(avatar.width)-14
+	h window.height
+end
