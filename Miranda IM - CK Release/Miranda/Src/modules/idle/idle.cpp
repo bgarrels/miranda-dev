@@ -276,11 +276,15 @@ bool IsFullScreen(void)
 		GetClassName(hWnd, tszClassName, SIZEOF(tszClassName));
 		if (_tcscmp(tszClassName, _T("WorkerW")))
 		{
-			RECT rect;
+			RECT rect, rectw, recti;
+			GetWindowRect(hWnd, &rectw);
+
 			GetClientRect(hWnd, &rect);
 			ClientToScreen(hWnd, (LPPOINT)&rect);
 			ClientToScreen(hWnd, (LPPOINT)&rect.right);
-			if (EqualRect(&rect, &rcScreen))
+			
+			if (EqualRect(&rect, &rectw) && IntersectRect(&recti, &rect, &rcScreen) && 
+				EqualRect(&recti, &rcScreen))
 				return true;
 		}
 	}
@@ -290,23 +294,23 @@ bool IsFullScreen(void)
 
 static void IdleObject_Tick(IdleObject * obj)
 {
-	BOOL idle = FALSE;
+	bool idle = false;
 	int  idleType = 0, flags = 0;
 
 	if ( obj->useridlecheck && IdleObject_IsUserIdle(obj)) {
-		idleType = 1; idle = TRUE; 
+		idleType = 1; idle = true; 
 	}
 	else if ( IdleObject_IdleCheckSaver(obj) && IsScreenSaverRunning()) {
-		idleType = 2; idle = TRUE; 
+		idleType = 2; idle = true; 
 	}
 	else if ( IdleObject_IdleCheckFullScr(obj) && IsFullScreen()) {
-		idleType = 5; idle = TRUE; 
+		idleType = 5; idle = true; 
 	}
 	else if ( IdleObject_IdleCheckWorkstation(obj) && IsWorkstationLocked()) {
-		idleType = 3; idle = TRUE; 
+		idleType = 3; idle = true; 
 	}
 	else if ( IdleObject_IdleCheckTerminal(obj) && IsTerminalDisconnected()) {
-		idleType = 4; idle = TRUE; 
+		idleType = 4; idle = true; 
 	}
 
 	if ( IdleObject_IsPrivacy(obj))
