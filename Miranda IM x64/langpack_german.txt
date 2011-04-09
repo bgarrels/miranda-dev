@@ -7,8 +7,8 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 X-Langpack-Creator-Version: 0.5.0
-X-Langpack-creation-date: 06 Apr 2011 21:04:24
-; FLID: Deutsche Sprachdatei-GermanLanguagePack 0.11.04.06
+X-Langpack-creation-date: 10 Apr 2011 01:04:57
+; FLID: Deutsche Sprachdatei-GermanLanguagePack 0.11.04.10
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirOTR,MirOUT,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
 ; Start of langpack: Core (Letzte Änderung: 13:59, 20. MÃ¤r. 2011 )
@@ -27135,7 +27135,7 @@ Das Plugin New Away System für Miranda IM bietet erweiterte Awaynachrichten. Bui
 ; ##############################################
 ; End of langpack: New_Away_System
 ; ############################################## 
-; Start of langpack: New_GPG_encryption (Letzte Änderung: 18:50, 22. MÃ¤r. 2011 )
+; Start of langpack: New_GPG_encryption (Letzte Änderung: 00:34, 10. Apr. 2011 )
 
 ; Pluginname: New GPG encryption 
 ; Version: 0.0.0.11
@@ -27166,11 +27166,14 @@ Das Plugin New Away System für Miranda IM bietet erweiterte Awaynachrichten. Bui
 ; Wählen Sie einen existierenden Schlüssel aus der Liste
 ; [we have secret key for this public key, do not removing from GPG keyring]
 ; Wir haben den geheimen Schlüssel für diesen öffentlichen Schlüssel, nicht vom GPG-Schlüsselbund entfernen
-; [Set own key]
 
 [LANGUAGE=en@quot\0LC_ALL=English\0]
 Sprache=en@quot\0LC_Alle=Englisch\0
 
+[Key Generation dialog]
+Schlüsselgenerierungsdialog
+[Set own key]
+Setze eigenen Schlüssel
 [gpg binary found in miranda folder, but english locale does not exists.\nit's highly recommended to place \\gnupg.nls\\en@quot.mo in gnupg folder under miranda root.\nwithout this file you may expirense many problem with gpg output on non english systems.\nand plugin may completely do not work.\nyou have beed warned.]
 Das GPG-Verzeichnis wurde gefunden, allerdings der Englische Ort davon existiert nicht.\nEs ist sehr wichtig die \\gnupg.nls\\en@quot.mo im GnuPG-Ordner im Miranda IM Verzeichnis zu legen.\nOhne diese Datei haben Sie viele Probleme mit der GPG-Ausgabe auf englischen Systemen.\nEs kann evtl. nicht richtig funktionieren.\nSeien Sie gewarnt!
 [Automatic key exchange]
@@ -27237,6 +27240,20 @@ Sie versuchen, mit nicht vertrauenswürdigem Schlüssel zu verschlüsseln, wollen S
 [We received encrypted message from contact with encryption turned off.\nDo you want turn on encryption for this contact ?]
 Sie haben eine verschlüsselte Nachricht von einem Kontakt empfangen der die Verschlüsselung deaktiviert hat.\nWollen Sie die Verschlüsselung für diesen Kontakt deaktivieren?
 
+[Accept and enable encryption]
+Aktzeptiere und aktiv. Verschlüsselung
+[The new public key was recieved]
+Der neue öffentl. Schlüssel wurde empfangen
+[From 1024 to 4096]
+Von 1024 bis 4096
+[Real name:]
+Richtiger Name:
+[Expire date:]
+Ablaufdatum:
+[Key length:]
+Schlüssellänge:
+[Key type:]
+Schlüsseltyp:
 [Import key from keyserver]
 Importiere Schlüssel vom Schlüsselserver
 [Select existing]
@@ -27323,6 +27340,8 @@ GPG_Schlüssel_Auto_Austausch:0
 GPG_Schlüssel_Auto_Austausch:0\0\0
 [Indicates that gpg installed and configured to public key auto exchange (currently implemented in new_gpg Miranda IM plugin)]
 Zeigt an das GPG installiert und bereit ist die Schlüssel automatisch auszutauschen (aktuell im New GPG encryption Miranda IM Plugin)
+[Public key sent]
+Öffentlicher Schlüssel wurde gesendet
 
 [already in secret keyring]
 bereits im geheimen Schlüsselring
@@ -27337,7 +27356,7 @@ Verschlüsselung deaktivieren
 [Turn on encryption]
 Verschlüsselung aktivieren
 [Load Public GPG Key for ]
-Lade öffentlichen GPG-Schlüssel für 
+Lade öffentlichen GPG-Schlüssel für  
 [GnuPG Variables]
 GnuPG Variablen
 [Set home diractory]
@@ -31123,7 +31142,7 @@ Gehe zu URL in Statusnachricht
 ; ##############################################
 ; End of langpack: Simple_Status_Message
 ; ############################################## 
-; Start of langpack: Skype (Letzte Änderung: 20:06, 6. Apr. 2011 )
+; Start of langpack: Skype (Letzte Änderung: 20:49, 6. Apr. 2011 )
 
 ; Pluginname: Skype
 ; Version: 0.0.0.50
@@ -31269,7 +31288,7 @@ Männlich
 [FEMALE]
 Weiblich
 [ERROR: Skype not running / too old / working!]
-Fehler: Skype läuft nicht / ist zu alt / arbeitet!
+Achtung: Skype läuft eventuell (nicht) oder ist veraltet!
 
 [Incoming Calls]
 Eingehende Anrufe
