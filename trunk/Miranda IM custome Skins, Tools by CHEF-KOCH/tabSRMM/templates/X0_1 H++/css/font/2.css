@@ -1,0 +1,35 @@
+.name { font-size: 15px; }
+
+.text{ font-size: 14px; }
+
+.time { font-size:  12px; }
+
+.history  { font-size:  12px; }
+
+a:hover { font-size: 13px; }
+
+a { font-size: 13px; }
+
+.in .head {	height:18px; }
+
+.in .content { line-height: 16px; }
+
+.in .gcontent {	line-height: 16px; }
+
+.out .head {	height:18px; }
+
+.out .content { line-height: 16px; }
+
+.out .gcontent {	line-height: 16px; }
+
+.status  { font-size: 11px; }
+
+.status .inhalt { font-size: 11px; }
+
+.file .fileinhalt { font-size: 11px; }
+
+.file .Link-Text { font-size: 11px; }
+
+.file .Link-Text2 { font-size: 11px; }
+
+.file .fileinhalt { line-height: 15px; }

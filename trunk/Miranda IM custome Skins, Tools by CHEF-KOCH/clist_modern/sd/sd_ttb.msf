@@ -1,0 +1,258 @@
+[Skin_Description_Section]
+   Name=simple dark [ttb]
+   Author=cy6p
+   Contact=icq #235535535
+   Preview=Preview_ttb.png
+   Description=Skin for Modern Contact List 
+   SkinFolder=sd 
+[ModernSkin]
+;----------------------------------------------------------
+;Objects
+
+;Main back
+;----------------------------------------------------------
+  $window=sGlyph,Image,back.png,StretchBoth,30,40,30,25,255
+
+;Rows
+;----------------------------------------------------------
+  $hotopengroup=sGlyph,Image,groupOpen.png,StretchBoth,5,6,5,6,55
+  $normalopengroup=sGlyph,Image,groupOpen.png,StretchBoth,5,6,5,6,55
+  $hotclosedgroup=sGlyph,Image,groupClosed.png,StretchBoth,5,6,5,6,55
+  $normalclosedgroup=sGlyph,Image,groupClosed.png,StretchBoth,5,6,5,6,55
+
+  $hotcontact=sGlyph,Image,contactOver.png,StretchBoth,5,6,5,6,50
+    
+;Scrollbar
+;----------------------------------------------------------
+  $scrollBtnUp=sGlyph,Image,scrollUp.png,StretchBoth,0,0,0,0,255
+  $scrollBtnDn=sGlyph,Image,scrollDn.png,StretchBoth,0,0,0,0,255
+  $scrollThumb=sGlyph,Image,scrollThumb.png,StretchBoth,0,5,0,5,255
+  
+;Select
+;----------------------------------------------------------
+  $select=sGlyph,Image,contactDown.png,StretchBoth,7,6,7,5,55
+
+;----------------------------------------------------------
+;Buttons
+
+;Minimize
+;----------------------------------------------------------
+  $BTNclosenorm=sGlyph,Image,minNorm.png,StretchBoth,0,0,0,0,155
+  $BTNclosehov=sGlyph,Image,minOver.png,StretchBoth,0,0,0,0,155
+  $BTNcloseDn=sGlyph,Image,minDown.png,StretchBoth,0,0,0,0,155
+;----------------------------------------------------------
+
+;mm
+;----------------------------------------------------------
+  $BTNmmNormal=sGlyph,Image,mainNorm.png,StretchBoth,0,0,0,0,155
+  $BTNmmHovered=sGlyph,Image,mainHov.png,StretchBoth,0,0,0,0,155
+  $BTNmmDown=sGlyph,Image,mainDown.png,StretchBoth,0,0,0,0,155
+;----------------------------------------------------------
+
+;Options
+;----------------------------------------------------------
+  $BTNoptionsnorm=sGlyph,Image,setNorm.png,StretchBoth,0,0,0,0,150
+  $BTNoptionshov=sGlyph,Image,setOver.png,StretchBoth,0,0,0,0,155
+  $BTNoptionsDn=sGlyph,Image,setDown.png,StretchBoth,0,0,0,0,155
+;----------------------------------------------------------
+
+;Show Online and Offline Users
+;----------------------------------------------------------
+  $BTNonlineofflinenorm=sGlyph,Image,onlineofflineNorm.png,StretchBoth,0,0,0,0,150
+  $BTNonlineofflinehov=sGlyph,Image,onlineofflineOver.png,StretchBoth,0,0,0,0,155
+  $BTNonlineofflineDn=sGlyph,Image,onlineofflineDown.png,StretchBoth,0,0,0,0,155
+;----------------------------------------------------------
+
+;Show only Online Users
+;----------------------------------------------------------
+  $BTNonlinenorm=sGlyph,Image,onlineNorm.png,StretchBoth,0,0,0,0,150
+  $BTNonlinehov=sGlyph,Image,onlineOver.png,StretchBoth,0,0,0,0,155
+  $BTNonlineDn=sGlyph,Image,onlineDown.png,StretchBoth,0,0,0,0,155
+;----------------------------------------------------------
+
+;Hide Groups
+;----------------------------------------------------------
+  $BTNgroupsOffnorm=sGlyph,Image,groupsonNorm.png,StretchBoth,0,0,0,0,150
+  $BTNgroupsOffhov=sGlyph,Image,groupsonOver.png,StretchBoth,0,0,0,0,155
+  $BTNgroupsOffDn=sGlyph,Image,groupsonDown.png,StretchBoth,0,0,0,0,155
+;----------------------------------------------------------
+
+;Show Groups
+;----------------------------------------------------------
+  $BTNgroupsOnnorm=sGlyph,Image,groupsoffNorm.png,StretchBoth,0,0,0,0,150
+  $BTNgroupsOnhov=sGlyph,Image,groupsoffOver.png,StretchBoth,0,0,0,0,155
+  $BTNgroupsOnDn=sGlyph,Image,groupsoffDown.png,StretchBoth,0,0,0,0,155
+;----------------------------------------------------------
+
+;Turn OFF Sounds
+;----------------------------------------------------------
+  $BTNsoundOffnorm=sGlyph,Image,soundonNorm.png,StretchBoth,0,0,0,0,150
+  $BTNsoundOffhov=sGlyph,Image,soundonOver.png,StretchBoth,0,0,0,0,155
+  $BTNsoundOffDn=sGlyph,Image,soundonDown.png,StretchBoth,0,0,0,0,155
+;----------------------------------------------------------
+
+;Turn On Sounds
+;----------------------------------------------------------
+  $BTNsoundOnnorm=sGlyph,Image,soundoffNorm.png,StretchBoth,0,0,0,0,150
+  $BTNsoundOnhov=sGlyph,Image,soundoffOver.png,StretchBoth,0,0,0,0,155
+  $BTNsoundOnDn=sGlyph,Image,soundoffDown.png,StretchBoth,0,0,0,0,155
+;----------------------------------------------------------
+
+;FindAdd
+;----------------------------------------------------------
+  $BTNfindaddnorm=sGlyph,Image,findaddNorm.png,StetchBoth,0,0,0,0,150
+  $BTNfindaddhov=sGlyph,Image,findaddOver.png,StretchBoth,0,0,0,0,155
+  $BTNfindaddDn=sGlyph,Image,findaddDown.png,StretchBoth,0,0,0,0,155
+;----------------------------------------------------------
+
+;PopUps Enable
+;----------------------------------------------------------
+  $BTNpopOffnorm=sGlyph,Image,poponNorm.png,StretchBoth,0,0,0,0,150
+  $BTNpopOffhov=sGlyph,Image,poponOver.png,StretchBoth,0,0,0,0,155
+  $BTNpopOffDn=sGlyph,Image,poponDown.png,StretchBoth,0,0,0,0,155  
+;----------------------------------------------------------
+
+;PopUps Disable
+;----------------------------------------------------------
+  $BTNpopOnnorm=sGlyph,Image,popoffNorm.png,StretchBoth,0,0,0,0,150
+  $BTNpopOnhov=sGlyph,Image,popoffOver.png,StretchBoth,0,0,0,0,155
+  $BTNpopOnDn=sGlyph,Image,popoffDown.png,StretchBoth,0,0,0,0,155  
+;----------------------------------------------------------
+ 
+; Status
+      $statusnorm=sGlyph,Image,statusNorm.png,StretchBoth,0,0,0,0,255
+      $statushov=sGlyph,Image,statusOver.png,StretchBoth,0,0,0,0,255
+      $statusDn=sGlyph,Image,statusNorm.png,StretchBoth,0,0,0,0,255
+
+;----------------------------------------------------------
+;Rules
+;----------------------------------------------------------
+  @0=s$window:Main,ID=Background
+  @1=s$normalclosedgroup:CL,ID=Row,Type=Group,Open=False
+  @2=s$hotopengroup:CL,ID=Row,Type=Group,Open=True
+  @3=s$normalopengroup:CL,ID=Row,Type=Group,Open=True
+  @4=s$hotcontact:CL,ID=Row,Type=*Contact,Hot=True
+  @5=s$singlecontact:CL,ID=Row,Type=*Contact
+  @6=s$select:CL,ID=Selection
+  @7=s$scrollBtnUp:Main,ID=ScrollBar,Part=UpLineButton
+  @8=s$scrollBtnDn:Main,ID=ScrollBar,Part=DownLineButton
+  @9=s$scrollThumb:Main,ID=ScrollBar,Part=Thumb
+  @10=s$BTNcloseDn:MButton,ID=close,Down=1
+  @11=s$BTNclosehov:MButton,ID=close,Hovered=1
+  @12=s$BTNclosenorm:MButton,ID=close
+  @13=s$BTNmenuDn:MButton,ID=mainmenu,Down=1
+  @14=s$BTNmenuhov:MButton,ID=mainmenu,Hovered=1
+  @15=s$BTNmenunorm:MButton,ID=mainmenu
+  @16=s$statusDn:MButton,ID=statusmenu,Down=1
+  @17=s$statushov:MButton,ID=statusmenu,Hovered=1
+  @18=s$statusnorm:MButton,ID=statusmenu
+
+;Options
+;----------------------------------------------------------
+  @19=s$BTNoptionsDn:MButton,ID=optionsmenu,Down=1
+  @20=s$BTNoptionshov:MButton,ID=optionsmenu,Hovered=1
+  @21=s$BTNoptionsnorm:MButton,ID=optionsmenu
+;----------------------------------------------------------
+
+;Show Online and Offline Users
+;----------------------------------------------------------
+  @22=s$BTNonlineofflineDn:MButton,ID=onoffline,Down=1,Value=0
+  @23=s$BTNonlineofflinehov:MButton,ID=onoffline,Hovered=1,Value=0
+  @24=s$BTNonlineofflinenorm:MButton,ID=onoffline,Value=0
+;----------------------------------------------------------
+
+;Show only Online Users
+;----------------------------------------------------------
+  @25=s$BTNonlineDn:MButton,ID=onoffline,Down=1,Value=1
+  @26=s$BTNonlinehov:MButton,ID=onoffline,Hovered=1,Value=1
+  @27=s$BTNonlinenorm:MButton,ID=onoffline,Value=1
+;----------------------------------------------------------
+
+;Hide Groups
+;----------------------------------------------------------
+  @28=s$BTNgroupsOffDn:MButton,ID=groupsonoff,Down=1,Value=1
+  @29=s$BTNgroupsOffhov:MButton,ID=groupsonoff,Hovered=1,Value=1
+  @30=s$BTNgroupsOffnorm:MButton,ID=groupsonoff,Value=1
+;----------------------------------------------------------
+
+;Show Groups
+;----------------------------------------------------------
+  @31=s$BTNgroupsOnDn:MButton,ID=groupsonoff,Down=1,Value=0
+  @32=s$BTNgroupsOnhov:MButton,ID=groupsonoff,Hovered=1,Value=0
+  @33=s$BTNgroupsOnnorm:MButton,ID=groupsonoff,Value=0
+;----------------------------------------------------------
+
+;Sound ON
+;----------------------------------------------------------
+  @34=s$BTNsoundOnDn:MButton,ID=soundonoff,Down=1,Value=0
+  @35=s$BTNsoundOnhov:MButton,ID=soundonoff,Hovered=1,Value=0
+  @36=s$BTNsoundOnnorm:MButton,ID=soundonoff,Value=0
+;----------------------------------------------------------
+
+;Sound OFF
+;----------------------------------------------------------
+  @37=s$BTNsoundOffDn:MButton,ID=soundonoff,Down=1,Value=1
+  @38=s$BTNsoundOffhov:MButton,ID=soundonoff,Hovered=1,Value=1
+  @39=s$BTNsoundOffnorm:MButton,ID=soundonoff,Value=1
+;----------------------------------------------------------
+
+;FindAdd
+;----------------------------------------------------------
+  @40=s$BTNfindaddDn:MButton,ID=findaddmenu,Down=1
+  @41=s$BTNfindaddhov:MButton,ID=findaddmenu,Hovered=1
+  @42=s$BTNfindaddnorm:MButton,ID=findaddmenu
+;----------------------------------------------------------
+
+;PopUps Enable
+;----------------------------------------------------------
+  @43=s$BTNpopOnDn:MButton,ID=popup,Down=1,Value=0
+  @44=s$BTNpopOnhov:MButton,ID=popup,Hovered=1,Value=0
+  @45=s$BTNpopOnnorm:MButton,ID=popup,Value=0
+;----------------------------------------------------------
+
+;PopUps Disable
+;----------------------------------------------------------
+  @46=s$BTNpopOffDn:MButton,ID=popup,Down=1,Value=1
+  @47=s$BTNpopOffhov:MButton,ID=popup,Hovered=1,Value=1
+  @48=s$BTNpopOffnorm:MButton,ID=popup,Value=1
+;----------------------------------------------------------
+
+;mm
+;----------------------------------------------------------
+  @49=s$BTNmmDown:MButton,ID=mm,Down=1
+  @50=s$BTNmmHovered:MButton,ID=mm,Hovered=1
+  @51=s$BTNmmNormal:MButton,ID=mm
+;----------------------------------------------------------
+
+;Other(+)
+;----------------------------------------------------------
+  @52=s$normalcontact:CL,ID=Row,Type=*Contact
+  @53=s$scrollBack:Main,ID=ScrollBar
+  
+
+
+;Buttons description
+;----------------------------------------------------------  
+
+ #mm=sPush,CList/ShowMainMenu,13,10,80,42,-----,0,0,Show Main Menu
+ #statusmenu=sPush,CList/ShowStatusMenu,-122,10,-12,28,R-R--,55,0,Status
+ #onoffline=sSwitch,CList/ToggleHideOffline,CList/HideOffline,b1,-121,29,-105,45,R-R--,55,0,Show/Hide offline Users
+ #groupsonoff=sSwitch,CLISTMENUSGroup/UseGroupsHelper,CList/UseGroups,b1,-105,29,-89,45,R-R--,73,0,Show/Hide Groups
+ #soundonoff=sSwitch,CList/ToggleSound,Skin/UseSound,b1,-88,29,-72,45,R-R--,91,0,Enable/Disable sounds
+ #optionsmenu=sPush,Options/OptionsCommand,-74,29,-58,45,R-R--,109,0,Miranda IM Options
+ #findaddmenu=sPush,FindAdd/FindAddCommand,-58,29,-42,45,R-R--,125,0,Find/Add Contacts
+ #popup=sSwitch,PopUp/EnableDisableMenuCommand,PopUp/ModuleIsEnabled,b1,-42,29,-26,45,R-R--,143,0,Popups On/Off
+ #close=sPush,CList/ShowHide,-26,29,-10,45,R-R--,0,0,Minimize Miranda 
+ ;----------------------------------------------------------
+
+[CLUI]
+;Another setting for CLUI section
+  LeftClientMargin=b12
+  TopClientMargin=b50
+  RightClientMargin=b12
+  BottomClientMargin=b8
+
+
+;insert here any exported from DB section, font and other
+[CLC]
+  HiLightMode=b1

@@ -1,0 +1,254 @@
+<!--HTMLStart-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<base href="%base%" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/style_X1_HPP_L.css" />
+	<link rel="stylesheet" media="screen" href="config.css" />
+	<link rel="alternate stylesheet" type="text/css" href="css/font/-1.css" title="A++">
+	<link rel="alternate stylesheet" type="text/css" href="css/font/0.css" title="A+">
+	<link rel="alternate stylesheet" type="text/css" href="css/font/1.css" title="A">
+	<link rel="alternate stylesheet" type="text/css" href="css/font/2.css" title="A-">
+	<link rel="alternate stylesheet" type="text/css" href="css/font/3.css" title="A--">
+	<script src="config.js"></script>
+	
+</head>
+<body>
+<!--MessageIn-->
+	<div class="MessageIn">
+		<div class="head">
+			<span class="name">%name%:</span> <span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+		</div>
+		<div class="content">
+			<span class="text">
+				<script>getitall('%\text%','%\name%','%\uin%','%\base%',meldungsart[0]);</script>
+				<script>mp3('%\text%');</script>
+				<script>mailru('%\text%');</script>
+			</span>
+		</div>
+	</div>
+	<script type="text/javascript">ProcessGroup(MessageIn);</script>
+	
+<!--MessageInGroupStart-->
+	<div class="MessageInGroup">
+		<div class="MessageInGroupStart">
+			<div class="head">
+				<span class="name">%name%:</span> <span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+			</div>
+			<div class="content">
+				<span class="text">
+						<script>getitall('%\text%','%\name%','%\uin%','%\base%',meldungsart[0]);</script>
+						<script>mailru('%\text%');</script>
+						<script>mp3('%\text%');</script>
+				</span>
+			</div>
+		</div>
+			<script type="text/javascript">ProcessGroup(MessageInGroupStart);</script>
+		
+<!--MessageInGroupInner-->
+		<div class="MessageInGroupInner Message">
+			<span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+			<div class="content">
+				<span class="text">
+					<script>getitall('%\text%','%\name%','%\uin%','%\base%',meldungsart[0]);</script>
+					<script>mailru('%\text%');</script>
+					<script>mp3('%\text%');</script>
+				</span>
+		    </div>
+	    </div>
+			<script type="text/javascript">ProcessGroup(MessageInGroupInner);</script>
+		
+<!--MessageInGroupEnd-->
+	</div>
+
+
+<!--hMessageIn-->
+	<div class="MessageIn">
+		<div class="head">
+			<span class="name">%name%:</span> <span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+		</div>
+		<div class="content">
+			<span class="text">
+				<script>getitall('%\text%','%\name%','%\uin%','%\base%',meldungsart[4]);</script>
+				<script>mailru('%\text%');</script>
+				<script>mp3('%\text%');</script>
+			</span>
+		</div>
+	</div>
+
+<!--hMessageInGroupStart-->
+	<div class="MessageInGroup">
+		<div class="head">
+			<span class="name">%name%:</span> <span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+		</div>
+		<div class="content">
+			<span class="text">
+				<script>getitall('%\text%','%\name%','%\uin%','%\base%',meldungsart[4]);</script>
+				<script>mailru('%\text%');</script>
+				<script>mp3('%\text%');</script>
+			</span>
+		</div>
+
+<!--hMessageInGroupInner-->
+		<div class="Message">
+			<span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+			<div class="content">
+				<span class="text">
+					<script>getitall('%\text%','%\name%','%\uin%','%\base%',meldungsart[4]);</script>
+					<script>mailru('%\text%');</script>
+					<script>mp3('%\text%');</script>
+				</span>
+		    </div>
+		</div>
+
+<!--hMessageInGroupEnd-->
+	</div>
+
+
+<!--MessageOut-->
+	<div class="MessageOut">
+		<div class="head">
+			<span class="name">%name%:</span> <span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+		</div>
+		<div class="content">
+			<span class="text">
+				<script>getitall('%\text%','%\name%','%\uin%','%\base%',meldungsart[1]);</script>
+				<script>mailru2('%\text%');</script>
+				<script>mp3('%\text%');</script>
+			</span>
+		</div>
+	</div>
+		<script type="text/javascript">ProcessGroup(MessageOut);</script>
+		
+<!--MessageOutGroupStart-->
+	<div class="MessageOutGroup">
+		<div class="MessageOutGroupStart">
+			<div class="head">
+				<span class="name">%name%:</span> <span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+			</div>
+			<div class="content">
+				<span class="text">
+					<script>getitall('%\text%','%\name%','%\uin%','%\base%',meldungsart[3]);</script>
+					<script>mailru2('%\text%');</script>
+					<script>mp3('%\text%');</script>
+				</span>
+			</div>
+		</div>
+		<script type="text/javascript">ProcessGroup(MessageOutGroupStart);</script>
+
+<!--MessageOutGroupInner-->
+		<div class="MessageOutGroupInner Message">
+			<span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+			<div class="content">
+				<span class="text">
+					<script>getitall('%\text%','%\name%','%\uin%','%\base%',meldungsart[3]);</script>
+					<script>mailru2('%\text%');</script>
+					<script>mp3('%\text%');</script>
+				</span>
+		    </div>
+		</div>
+			<script type="text/javascript">ProcessGroup(MessageOutGroupInner);</script>
+			
+<!--MessageOutGroupEnd-->
+	</div>
+
+
+<!--hMessageOut-->
+	<div class="MessageOut">
+		<div class="head">
+			<span class="name">%name%:</span> <span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+		</div>
+		<div class="content">
+			<span class="text">
+				<script>getitall('%\text%','%\name%','%\uin%','%\base%',meldungsart[4]);</script>
+				<script>mailru2('%\text%');</script>
+				<script>mp3('%\text%');</script>
+			</span>
+		</div>
+	</div>
+
+<!--hMessageOutGroupStart-->
+	<div class="MessageOutGroup">
+		<div class="head">
+			<span class="name">%name%:</span> <span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+		</div>
+		<div class="content">
+			<span class="text">
+				<script>getitall('%\text%','%\name%','%\uin%','%\base%',meldungsart[6]);</script>
+				<script>mailru2('%\text%');</script>
+				<script>mp3('%\text%');</script>
+			</span>
+		</div>
+
+<!--hMessageOutGroupInner-->
+		<div class="Message">
+			<span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+			<div class="content">
+				<span class="text">
+					<script>getitall('%\text%','%\name%','%\uin%','%\base%',meldungsart[6]);</script>
+					<script>mailru2('%\text%');</script>
+					<script>mp3('%\text%');</script>
+				</span>
+		    </div>
+		</div>
+
+<!--hMessageOutGroupEnd-->
+	</div>
+
+
+<!--File-->
+	<div class="file">
+		<div class="head">
+			<span class="name">%name%:</span>
+			<span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+		</div>
+			<div class="text">
+			File: <script>getandsenddata('%\text%','%\nameIn%','%base%','%\uinIn%','%\cid%')</script>
+			</div>
+	</div>
+		<script type="text/javascript">ProcessGroup(File);</script>
+
+<!--hFile-->
+	<div class="file">
+		<div class="head">
+			<span class="name">%name%:</span>
+			<span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+		</div>
+			<div class="text">
+			File: <script>getandsenddata('%\text%','%\nameIn%','%base%','%\uinIn%','%\cid%')</script>
+			</div>
+	</div>
+
+
+
+<!--Status-->
+	<div class="status">
+		<h6>Status:</h6> <span class="name">%name%:</span>
+		<span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+			%text%
+	</div>
+		<script type="text/javascript">ProcessGroup(Status);</script>
+	
+<!--hStatus-->
+	<div class="status">
+		<h6>Status:</h6> <span class="name">%name%:</span>
+		<span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+			%text%
+	</div>
+	
+<!--URL-->
+	<div class="status">
+		<h6>URL:</h6> <span class="name">%name%:</span>
+		<span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+			%text%
+	</div>
+		<script type="text/javascript">ProcessGroup(URL);</script>
+	
+<!--hURL-->
+	<div class="status">
+		<h6>URL:</h6> <span class="name">%name%:</span>
+		<span class="time">%date%&nbsp;&nbsp;&nbsp;%time%</span>
+			%text%
+	</div>
+		<script type="text/javascript">ProcessGroup(hURL);</script>
