@@ -5,17 +5,13 @@
 
 Description
 -----------
-Provides the ability to add contacts manually (without searching for them).
-Known supported protocols: AIM, Gadu-Gadu, ICQ, IRC, Jabber/JGMail, MSN,
-MySpace, Tlen, Yahoo and probably several other, which I haven't tested.
-On some networks, a contact can be added only when connected. If the network
-protocol you are often using is still unsupported, let me know.
+Provides the ability to quickly add new contacts (without searching for them).
+All Miranda IM 0.9 compatible protocols are supported. Please remember that on
+some protocols you can add a contact only when connected.
 
-Please use the appropriate (ANSI/Unicode) version of the plugin for your
-Miranda IM version.
+Hold down the CTRL key while adding a contact to open the message window immediately.
 
-Miranda IM 0.8 or later is required. If you are still running 0.6.x or 0.7.x,
-you should download and use AddContact+ 0.9.5.0.
+Miranda IM 0.9 or later is required.
 
 Latest development version, source code and older releases can be found here:
 http://code.google.com/p/dezeath
@@ -28,6 +24,17 @@ Copy addcontactplus.dll to your Miranda IM plugins directory.
 
 Change Log
 ----------
+v 0.9.9.0 (09/04/2011):
++ Added a hotkey for opening Add Contact dialog
++ Added ability to add a contact temporarily
++ Added ability to quickly open the message window by holding CTRL when adding a contact
++ Miranda 0.9 compatibility (Unicode auth requests and contact search, core ability to add contacts without searching)
++ Updater plugin support
+* Slightly redesigned Add Contact dialog
+* x64 portability
+! Rewritten contact adding - fixed crashes and some other problems
+! Some general fixes and improvements
+
 v 0.9.8.6 (10/04/2010):
 ! Prevent adding contacts with improper (too large) UINs
 ! Fixed removing toolbar button when no accounts are available
@@ -62,19 +69,21 @@ Base Address: 0x3ae00000
 Copyright and License
 ---------------------
 
-Copyright (C) 2007-2010 Bartosz 'Dezeath' Bia³ek
+Copyright (C) 2007-2011 Bartosz 'Dezeath' Bia³ek
 mailto: dezred(at)gmail(dot)com
+http://code.google.com/p/dezeath
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
