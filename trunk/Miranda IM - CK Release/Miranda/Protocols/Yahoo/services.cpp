@@ -1,5 +1,5 @@
 /*
- * $Id: services.cpp 13497 2011-03-25 04:55:36Z borkra $
+ * $Id: services.cpp 13557 2011-04-09 02:26:58Z borkra $
  *
  * myYahoo Miranda Plugin 
  *
@@ -89,7 +89,6 @@ void CYahooProto::BroadcastStatus(int s)
 //=======================================================
 INT_PTR __cdecl CYahooProto::OnContactDeleted( WPARAM wParam, LPARAM lParam )
 {
-	char* szProto;
 	DBVARIANT dbv;
 	HANDLE hContact = (HANDLE) wParam;
 	

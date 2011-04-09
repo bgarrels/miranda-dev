@@ -33,13 +33,13 @@ LIST_INTERFACE li;
 
 PLUGININFOEX pluginInfo={
 		sizeof(PLUGININFOEX),
-#if defined (_UNICODE)
-		"Yahoo Protocol (Unicode)",
+#ifdef YAHOO_CVSBUILD
+		"Yahoo Protocol Beta/Nightly",
 #else
 		"Yahoo Protocol",
 #endif
 		__VERSION_DWORD,
-		"Yahoo Protocol support via libyahoo2 library.",
+		"Yahoo Protocol support via libyahoo2 library. [Built: "__DATE__" "__TIME__"]",
 		"Gennady Feldman",
 		"gena01@miranda-im.org",
 		"© 2003-2010 Gennady Feldman, Laurent Marechal",
