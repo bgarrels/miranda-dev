@@ -113,3 +113,6 @@ int SetAvatarAttribute(HANDLE hContact, DWORD attrib, int mode);
 #define GAIR_FAILED 1000
 
 #define AVS_IGNORENOTIFY 0x1000
+
+// Unsane: default protocol pictures
+#define AVS_DEFAULT "Global avatar"

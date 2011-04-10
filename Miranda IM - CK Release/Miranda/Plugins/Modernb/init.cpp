@@ -57,9 +57,9 @@ int EventArea_UnloadModule();
 
 PLUGININFOEX pluginInfo = {
 	sizeof(PLUGININFOEX),
-	DEBUG_AWARE_STR "Modern Contact List " UNICODE_AWARE_STR " Mataes Release",
+	DEBUG_AWARE_STR "Modern Contact List " UNICODE_AWARE_STR " CK Release",
 	0,                              //will initialized later in MirandaPluginInfoEx
-	"Display contacts, event notifications, protocol status with advantage visual modifications. Supported MW modifications, enchanced metacontact cooperation. Mod for Mataes Pack.",
+	"Display contacts, event notifications, protocol status with advantage visual modifications. Supported MW modifications, enchanced metacontact cooperation. Mod for CKs Pack.",
 	"Artem Shpynov, Ricardo Pescuma Domenecci and Anton Senko based on clist_mw by Bethoven",
 	"ashpynov@gmail.com" ,
 	"Copyright 2000-2010 Miranda-IM project",

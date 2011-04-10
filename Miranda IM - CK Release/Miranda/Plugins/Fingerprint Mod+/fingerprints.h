@@ -205,7 +205,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_whoisbot",				_T("whoisbot"),									_T("Swissjabber Whois Bot"),			_T("ClientIcons_Jabber"),	IDI_WHOISBOT, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_pjc",						_T("|*PJC*|http://pjc.googlecode.com/*"),		_T("PHP Jabber Client"), 			    _T("ClientIcons_Jabber"),	IDI_PJC, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_jdisk",					_T("|*jdisk*|JabberDisk*"),						_T("Jabber disk"),						_T("ClientIcons_Jabber"),	IDI_JDISK, INVALID_HANDLE_VALUE, JABBER_CASE },
-	{ "client_Teabot",					_T("|*teabot*|http://teabot.org/bot*"),			_T("Teabot"),							_T("ClientIcons_Jabber"),	IDI_TEABOT, INVALID_HANDLE_VALUE, JABBER_CASE },
+	{ "client_Teabot",					_T("|*teabot*|http://teabot.org/bot*|bot"),		_T("Teabot"),							_T("ClientIcons_Jabber"),	IDI_TEABOT, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Psto",					_T("*Psto*"),									_T("Psto.net"),							_T("ClientIcons_Jabber"),	IDI_PSTO, INVALID_HANDLE_VALUE, JABBER_CASE },
 
 //#########################################################################################################################################
