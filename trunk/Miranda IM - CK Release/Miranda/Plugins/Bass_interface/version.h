@@ -12,16 +12,16 @@
 
 #ifdef _UNICODE
 #if defined(WIN64) || defined(_WIN64)
-	#define __PLUGIN_NAME "Bass_interface (Unicode x64) Mataes Release"
+	#define __PLUGIN_NAME "Bass_interface (Unicode x64) CK Release"
 #else
-	#define __PLUGIN_NAME "Bass_interface (Unicode) Mataes Release"
+	#define __PLUGIN_NAME "Bass_interface (Unicode) CK Release"
 #endif
 #else
-	#define __PLUGIN_NAME "Bass_interface Mataes Release"
+	#define __PLUGIN_NAME "Bass_interface CK Release"
 #endif
 #define __INTERNAL_NAME				"Bass_interface"
 #define __FILENAME					"Bass_interface.dll"
-#define __DESCRIPTION 				"un4seen's bass interface Miranda IM plugin. Mod for Mataes Pack."
+#define __DESCRIPTION 				"un4seen's bass interface Miranda IM plugin. Mod for CKs Pack."
 #define __AUTHOR					"tico-tico"
 #define __AUTHOREMAIL				""
 #define __AUTHORWEB					""

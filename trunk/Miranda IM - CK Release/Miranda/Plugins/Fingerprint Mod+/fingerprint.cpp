@@ -659,7 +659,7 @@ HICON FASTCALL LoadIconFromExternalFile(LPTSTR filename, int nLibrary, LPSTR Ico
 
 		switch(flag)
 		{
-			#include "finger_groups.h";
+			#include "finger_groups.h"
 		}
 
 		if(SectName == NULL)

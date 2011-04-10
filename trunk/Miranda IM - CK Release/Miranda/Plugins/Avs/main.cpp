@@ -59,7 +59,12 @@ static CRITICAL_SECTION cachecs, alloccs;
 
 static int ComparePicture( const protoPicCacheEntry* p1, const protoPicCacheEntry* p2 )
 {
-	return lstrcmpA( p1->szProtoname, p2->szProtoname );
+	if ((lstrcmpA(p1->szProtoname, "Global avatar") == 0) || strstr(p1->szProtoname, "Global avatar"))
+		return -1;
+	else if ((lstrcmpA(p2->szProtoname, "Global avatar") == 0) || strstr(p1->szProtoname, "Global avatar"))
+		return 1;
+	else
+		return lstrcmpA( p1->szProtoname, p2->szProtoname );
 }
 
 OBJLIST<protoPicCacheEntry>
@@ -98,15 +103,15 @@ FI_INTERFACE *fei = 0;
 PLUGININFO pluginInfo = {
     sizeof(PLUGININFO),
 #if defined(_UNICODE)
-	"Avatar service (Unicode) CHEF-KOCH Release",
+	"Avatar service (Unicode) Mataes Release",
 #else
-	"Avatar service CHEF-KOCH Release",
+	"Avatar service Mataes Release",
 #endif
 	__VERSION_DWORD,
-	"Load and manage contact pictures for other plugins. Mod for CHEF-KOCH Pack.",
+	"Load and manage contact pictures for other plugins. Mod for Mataes Pack.",
 	"Nightwish, Pescuma",
 	"",
-	"Copyright 2000-2005 Miranda-IM project",
+	"Copyright 2000-2011 Miranda-IM project",
 	"http://www.miranda-im.org",
 	UNICODE_AWARE,
 	0
@@ -115,15 +120,15 @@ PLUGININFO pluginInfo = {
 PLUGININFOEX pluginInfoEx = {
     sizeof(PLUGININFOEX),
 #if defined(_UNICODE)
-	"Avatar service (Unicode) CHEF-KOCH Release",
+	"Avatar service (Unicode) Mataes Release",
 #else
-	"Avatar service CHEF-KOCH Release",
+	"Avatar service Mataes Release",
 #endif
 	__VERSION_DWORD,
-	"Load and manage contact pictures for other plugins. Mod for CHEF-KOCH Pack.",
+	"Load and manage contact pictures for other plugins. Mod for Mataes Pack.",
 	"Nightwish, Pescuma",
 	"",
-	"Copyright 2000-2005 Miranda-IM project",
+	"Copyright 2000-2011 Miranda-IM project",
 	"http://www.miranda-im.org",
 	UNICODE_AWARE,
 	0,
@@ -574,6 +579,31 @@ int CreateAvatarInCache(HANDLE hContact, avatarCacheEntry *ace, char *szProto)
 			if(!DBGetContactSettingString(NULL, PPICT_MODULE, szProto, &dbv)) {
 				AVS_pathToAbsolute(dbv.pszVal, szFilename);
 				DBFreeVariant(&dbv);
+			}
+			// Unsane: try to load default avatar
+			else
+			{
+				if (lstrcmpA(szProto, AVS_DEFAULT))
+				{
+					if (!DBGetContactSettingString(NULL, PPICT_MODULE, AVS_DEFAULT, &dbv))
+					{
+						AVS_pathToAbsolute(dbv.pszVal, szFilename);
+						DBFreeVariant(&dbv);
+					}
+					if (!strstr(szProto, "Global avatar for"))
+					{
+						PROTOACCOUNT* pdescr = (PROTOACCOUNT*)CallService(MS_PROTO_GETACCOUNT, 0, (LPARAM)szProto);
+						if (pdescr == NULL)
+							return -1;
+						char key[MAX_PATH];
+						mir_snprintf(key, SIZEOF(key), "Global avatar for %s accounts", pdescr->szProtoName);
+						if (!DBGetContactSettingString(NULL, PPICT_MODULE, key, &dbv))
+						{
+							AVS_pathToAbsolute(dbv.pszVal, szFilename);
+							DBFreeVariant(&dbv);
+						}
+					}
+				}
 			}
 		}
 		else if(hContact == (HANDLE)-1) {	// create own picture - note, own avatars are not on demand, they are loaded once at
@@ -2028,6 +2058,36 @@ static int DestroyServicesAndEvents()
 	return 0;
 }
 
+// Unsane: load default avatar func
+static void LoadDefaultInfo()
+{
+	protoPicCacheEntry* pce = new protoPicCacheEntry;
+	if (CreateAvatarInCache(0, pce, AVS_DEFAULT) != 1)
+		DBDeleteContactSetting(0, PPICT_MODULE, AVS_DEFAULT);
+
+	pce->szProtoname = mir_strdup(AVS_DEFAULT);
+	pce->tszAccName = mir_tstrdup(_T(AVS_DEFAULT));
+	g_ProtoPictures.insert(pce);
+}
+
+static void LoadProtoInfo( PROTOCOLDESCRIPTOR* proto )
+{
+	if ( proto->type == PROTOTYPE_PROTOCOL && proto->cbSize == sizeof( *proto ))
+	{
+		char protoName[MAX_PATH];
+		mir_snprintf(protoName, SIZEOF(protoName), Translate("Global avatar for %s accounts"), proto->szName);
+		TCHAR *protoNameTmp = mir_a2t(protoName);
+		protoPicCacheEntry* pce = new protoPicCacheEntry;
+		if (CreateAvatarInCache(0, pce, protoName) != 1)
+			DBDeleteContactSetting(0, PPICT_MODULE, protoName);
+
+		pce->szProtoname = mir_strdup(protoName);
+		pce->tszAccName = mir_tstrdup(protoNameTmp);
+		g_ProtoPictures.insert(pce);
+		mir_free(protoNameTmp);
+	}
+}
+
 static void LoadAccountInfo( PROTOACCOUNT* acc )
 {
 	protoPicCacheEntry* pce = new protoPicCacheEntry;
@@ -2108,8 +2168,17 @@ static int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 	ProtoEnumAccounts( &accCount, &accs );
 
 	if ( fei != NULL )
+	{
+		// Unsane: load default avatar
+		LoadDefaultInfo();
+		PROTOCOLDESCRIPTOR** proto;
+		int protoCount;
+		CallService(MS_PROTO_ENUMPROTOS, ( WPARAM )&protoCount, ( LPARAM )&proto);
+		for ( i=0; i < protoCount; i++ )
+			LoadProtoInfo( proto[i] );
 		for(i = 0; i < accCount; i++)
 			LoadAccountInfo( accs[i] );
+	}
 
 	// Load global avatar
 	protoPicCacheEntry* pce = new protoPicCacheEntry;
@@ -2251,7 +2320,6 @@ static int OkToExitProc(WPARAM wParam, LPARAM lParam)
 	LeaveCriticalSection(&cachecs);
 
 	SetEvent(hLoaderEvent);
-	CloseHandle(hLoaderEvent);
 	FreePolls();
 	return 0;
 }
@@ -2496,7 +2564,6 @@ static int LoadAvatarModule()
 	if (AvsAlphaBlend == NULL && (hDll = LoadLibraryA("msimg32.dll")))
 		AvsAlphaBlend = (BOOL (WINAPI *)(HDC, int, int, int, int, HDC, int, int, int, int, BLENDFUNCTION)) GetProcAddress(hDll, "AlphaBlend");
 
-	//char* tmpPath = Utils_ReplaceVars("%miranda_userdata%");
  	// Unsane: change relative path from profile folder, to programm folder
  	char* tmpPath = Utils_ReplaceVars("%miranda_path%");
 
@@ -2568,6 +2635,7 @@ extern "C" int __declspec(dllexport) Unload(void)
 	g_ProtoPictures.destroy();
 	g_MyAvatars.destroy();
 
+	CloseHandle(hLoaderEvent);
 	DeleteCriticalSection(&alloccs);
 	DeleteCriticalSection(&cachecs);
 	return 0;
