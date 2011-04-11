@@ -203,6 +203,11 @@ INT addEvent(WPARAM wParam, LPARAM lParam)
 	if (!fEnabled || !hContact || !hDBEvent)
 		return FALSE;	/// unspecifyed error 
 
+	char* pszProto = (char*)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)hContact, 0);
+	int status = CallProtoService(pszProto, PS_GETSTATUS, 0, 0);
+	if (status == 40072 || status == 40077 || status == 40078)
+		return FALSE;
+
 	CallService(MS_DB_EVENT_GET, (WPARAM)hDBEvent, (LPARAM)&dbei); /// detect size of msg
 
 	if ((dbei.eventType != EVENTTYPE_MESSAGE) || (dbei.flags == DBEF_READ)) 
@@ -210,8 +215,6 @@ INT addEvent(WPARAM wParam, LPARAM lParam)
 	else
 	{	/// needed event has occured..
 		DBVARIANT dbv;
-		char* pszProto=(char*)CallService(MS_PROTO_GETCONTACTBASEPROTO,(WPARAM)hContact,0);
-		int status=CallProtoService(pszProto,PS_GETSTATUS,0,0);
 
 		if (!dbei.cbBlob)	/// invalid size
 			return FALSE;
