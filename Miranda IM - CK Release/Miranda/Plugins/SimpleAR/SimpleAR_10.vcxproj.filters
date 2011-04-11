@@ -21,9 +21,6 @@
     <ClCompile Include="Src\Options.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Services.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Common.h">
