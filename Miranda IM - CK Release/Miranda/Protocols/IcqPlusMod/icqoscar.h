@@ -43,7 +43,7 @@
 #pragma warning(disable: 4996)
 #endif
 
-#define MIRANDA_VER 0x0800
+#define MIRANDA_VER 0x0700
 #define ICQ_MODNAME "Plus"
 #define _WIN32_IE 0x0500
 
@@ -69,6 +69,9 @@
 
 #include <process.h>
 #include <malloc.h>
+
+#include <list>
+#include <string>
 
 #include "changeinfo/changeinfo.h"
 // Miranda IM SDK includes
@@ -173,3 +176,9 @@ __inline static int Netlib_MyCloseHandle(HANDLE h)
     FreeGatewayIndex(h);
     return CallService(MS_NETLIB_CLOSEHANDLE,(WPARAM)h,0);
 }
+
+//////////////////////////////////////////////////////////////////////////
+#include "IcqCore.h"
+
+extern std::list<CIcqProto*> g_Instances;
+extern CIcqProto gProtocol;

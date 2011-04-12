@@ -702,7 +702,7 @@ int parseUserInfoRecord(HANDLE hContact, oscar_tlv *pData, UserInfoRecordItem pR
 
                 null_snprintf(szItemKey, MAX_PATH, pRecordDef[j].szDbSetting, i);
 
-                ICQDeleteContactSetting(hContact, szItemKey);
+                deleteSetting(hContact, szItemKey);
             }
     }
 
@@ -1015,21 +1015,21 @@ void parseDirectoryUserDetailsData(HANDLE hContact, oscar_tlv_chain *cDetails, D
         else
         {
             // Remove old data when phones not available
-            ICQDeleteContactSetting(hContact, "Phone");
-            ICQDeleteContactSetting(hContact, "CompanyPhone");
-            ICQDeleteContactSetting(hContact, "Cellular");
-            ICQDeleteContactSetting(hContact, "Fax");
-            ICQDeleteContactSetting(hContact, "CompanyFax");
+            deleteSetting(hContact, "Phone");
+            deleteSetting(hContact, "CompanyPhone");
+            deleteSetting(hContact, "Cellular");
+            deleteSetting(hContact, "Fax");
+            deleteSetting(hContact, "CompanyFax");
         }
     }
     else
     {
         // Remove old data when phones not available
-        ICQDeleteContactSetting(hContact, "Phone");
-        ICQDeleteContactSetting(hContact, "CompanyPhone");
-        ICQDeleteContactSetting(hContact, "Cellular");
-        ICQDeleteContactSetting(hContact, "Fax");
-        ICQDeleteContactSetting(hContact, "CompanyFax");
+        deleteSetting(hContact, "Phone");
+        deleteSetting(hContact, "CompanyPhone");
+        deleteSetting(hContact, "Cellular");
+        deleteSetting(hContact, "Fax");
+        deleteSetting(hContact, "CompanyFax");
     }
     // Emails
     parseUserInfoRecord(hContact, getTLV(cDetails, 0x8C, 1), rEmail, SIZEOF(rEmail), 4);
@@ -1043,13 +1043,13 @@ void parseDirectoryUserDetailsData(HANDLE hContact, oscar_tlv_chain *cDetails, D
     switch (getNumberFromChain(cDetails, 0x82, 1))
     {
     case 1:
-        ICQGetContactSettingByte(hContact, "Gender", 'F');
+        getSettingByte(hContact, "Gender", 'F');
         break;
     case 2:
-        ICQGetContactSettingByte(hContact, "Gender", 'M');
+        getSettingByte(hContact, "Gender", 'M');
         break;
     default:
-        ICQDeleteContactSetting(hContact, "Gender");
+        deleteSetting(hContact, "Gender");
     }
 
     writeDbInfoSettingTLVString(hContact, "Homepage", cDetails, 0xFA);
@@ -1088,7 +1088,7 @@ void parseDirectoryUserDetailsData(HANDLE hContact, oscar_tlv_chain *cDetails, D
 
     if (!hContact)
     {
-        ICQWriteContactSettingByte(hContact, "Auth", !getByteFromChain(cDetails, 0x19A, 1));
+        setSettingByte(hContact, "Auth", !getByteFromChain(cDetails, 0x19A, 1));
         writeDbInfoSettingTLVByte(hContact, "WebAware", cDetails, 0x212);
         writeDbInfoSettingTLVByte(hContact, "AllowSpam", cDetails, 0x1EA);
     }
@@ -1101,12 +1101,12 @@ void parseDirectoryUserDetailsData(HANDLE hContact, oscar_tlv_chain *cDetails, D
         int nAge = calcAgeFromBirthDate(getDoubleFromChain(cDetails, 0x1A4, 1));
 
         if (nAge)
-            ICQWriteContactSettingWord(hContact, "Age", nAge);
+            setSettingWord(hContact, "Age", nAge);
         else
-            ICQDeleteContactSetting(hContact, "Age");
+            deleteSetting(hContact, "Age");
     }
     else // we do not need to calculate age for owner
-        ICQDeleteContactSetting(hContact, "Age");
+        deleteSetting(hContact, "Age");
 
     {
         // Save user info last update time and privacy token
@@ -1119,12 +1119,12 @@ void parseDirectoryUserDetailsData(HANDLE hContact, oscar_tlv_chain *cDetails, D
             bHasMetaToken = TRUE;
 
         // !Important, we need to save the MDir server-item time - it can be newer than the one from the directory
-        if ((dInfoTime = ICQGetContactSettingDouble(hContact, DBSETTING_METAINFO_TIME, 0)) > 0)
-            ICQWriteContactSettingDouble(hContact, DBSETTING_METAINFO_SAVED, dInfoTime);
+        if ((dInfoTime = getSettingDouble(hContact, DBSETTING_METAINFO_TIME, 0)) > 0)
+            setSettingDouble(hContact, DBSETTING_METAINFO_SAVED, dInfoTime);
         else if (bHasMetaToken || !hContact)
             writeDbInfoSettingTLVDouble(hContact, DBSETTING_METAINFO_SAVED, cDetails, 0x1CC);
         else
-            ICQWriteContactSettingDword(hContact, DBSETTING_METAINFO_SAVED, time(NULL));
+            setSettingDword(hContact, DBSETTING_METAINFO_SAVED, time(NULL));
     }
 
     if (wReplySubType == META_DIRECTORY_RESPONSE)
@@ -1134,7 +1134,7 @@ void parseDirectoryUserDetailsData(HANDLE hContact, oscar_tlv_chain *cDetails, D
     // Remove user from info update queue. Removing is fast so we always call this
     // even if it is likely that the user is not queued at all.
     if (hContact)
-        icq_DequeueUser(ICQGetContactSettingUIN(hContact));
+        icq_DequeueUser(getContactUin(hContact));
 }
 
 
@@ -1293,10 +1293,10 @@ void handleDirectoryUpdateResponse(BYTE *databuf, WORD wPacketLen, WORD wCookie,
         BYTE pbEmptyMetaToken[0x10] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
         unpackQWord(&databuf, &qwMetaTime);
-        ICQWriteContactSettingBlob(NULL, DBSETTING_METAINFO_TIME, (BYTE*)&qwMetaTime, 8);
+        setSettingBlob(NULL, DBSETTING_METAINFO_TIME, (BYTE*)&qwMetaTime, 8);
 
         if (memcmp(databuf, pbEmptyMetaToken, 0x10))
-            ICQWriteContactSettingBlob(NULL, DBSETTING_METAINFO_TOKEN, databuf, 0x10);
+            setSettingBlob(NULL, DBSETTING_METAINFO_TOKEN, databuf, 0x10);
     }
     ReleaseCookie(wCookie);
 }

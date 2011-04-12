@@ -39,7 +39,6 @@
 
 
 extern HANDLE hsmsgrequest;
-extern CRITICAL_SECTION modeMsgsMutex;
 extern WORD wListenPort;
 
 
@@ -93,7 +92,7 @@ DWORD icq_sendGetAwayMsgDirect(HANDLE hContact, int type)
     DWORD dwCookie;
     message_cookie_data *pCookieData;
 
-    if (ICQGetContactSettingWord(hContact, "Version", 0) == 9)
+    if (getSettingWord(hContact, "Version", 0) == 9)
         return 0; // v9 DC protocol does not support this message
 
     pCookieData = CreateMessageCookie(MTYPE_AUTOAWAY, (BYTE)type);
@@ -118,7 +117,7 @@ void icq_sendAwayMsgReplyDirect(directconnect* dc, WORD wCookie, BYTE msgType, c
     {
         NotifyEventHooks(hsmsgrequest, (WPARAM)msgType, (LPARAM)dc->dwRemoteUin);
 
-        EnterCriticalSection(&modeMsgsMutex);
+        EnterCriticalSection(&gProtocol.m_modeMsgsMutex);
 
         if (szMsg && *szMsg)
         {
@@ -136,7 +135,7 @@ void icq_sendAwayMsgReplyDirect(directconnect* dc, WORD wCookie, BYTE msgType, c
             sendDirectPacket(dc, &packet);
         }
 
-        LeaveCriticalSection(&modeMsgsMutex);
+        LeaveCriticalSection(&gProtocol.m_modeMsgsMutex);
     }
 }
 

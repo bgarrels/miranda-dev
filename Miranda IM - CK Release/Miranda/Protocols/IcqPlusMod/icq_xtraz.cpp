@@ -116,10 +116,10 @@ void handleXtrazNotify(DWORD dwUin, DWORD dwMID, DWORD dwMID2, WORD wCookie, cha
                                     CheckContact(chk);
                                 }
                             }
-                            tmp = ICQGetContactSettingUtf(NULL, DBSETTING_XSTATUSNAME, "");
+                            tmp = getSettingStringUtf(NULL, DBSETTING_XSTATUSNAME, "");
                             szXName = MangleXml(tmp, strlennull(tmp));
                             mir_free(tmp);
-                            tmp = ICQGetContactSettingUtf(NULL, DBSETTING_XSTATUSMSG, "");
+                            tmp = getSettingStringUtf(NULL, DBSETTING_XSTATUSMSG, "");
                             szXMsg = MangleXml(tmp, strlennull(tmp));
                             mir_free(tmp);
 
@@ -306,11 +306,11 @@ NextVal:
                             *szEnd = '\0';
                             szXName = DemangleXml(szNode, strlennull(szNode));
                             // check if the name changed
-                            szOldXName = ICQGetContactSettingUtf(hContact, DBSETTING_XSTATUSNAME, NULL);
+                            szOldXName = getSettingStringUtf(hContact, DBSETTING_XSTATUSNAME, NULL);
                             if (strcmpnull(szOldXName, szXName))
                                 bChanged = TRUE;
                             mir_free(szOldXName);
-                            ICQWriteContactSettingUtf(hContact, DBSETTING_XSTATUSNAME, szXName);
+                            setSettingStringUtf(hContact, DBSETTING_XSTATUSNAME, szXName);
                             mir_free(szXName);
                             *szEnd = ' ';
                         }
@@ -326,11 +326,11 @@ NextVal:
                             *szEnd = '\0';
                             szXMsg = DemangleXml(szNode, strlennull(szNode));
                             // check if the decription changed
-                            szOldXMsg = ICQGetContactSettingUtf(hContact, DBSETTING_XSTATUSNAME, NULL);
+                            szOldXMsg = getSettingStringUtf(hContact, DBSETTING_XSTATUSNAME, NULL);
                             if (strcmpnull(szOldXMsg, szXMsg))
                                 bChanged = TRUE;
                             mir_free(szOldXMsg);
-                            ICQWriteContactSettingUtf(hContact, DBSETTING_XSTATUSMSG, szXMsg);
+                            setSettingStringUtf(hContact, DBSETTING_XSTATUSMSG, szXMsg);
                             mir_free(szXMsg);
                         }
                         ICQBroadcastAck(hContact, ICQACKTYPE_XSTATUS_RESPONSE, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
@@ -498,7 +498,7 @@ DWORD SendXtrazNotifyRequest(HANDLE hContact, char* szQuery, char* szNotify, int
     DWORD dwCookie;
     message_cookie_data* pCookieData;
 
-    if (ICQGetContactSettingUID(hContact, &dwUin, NULL))
+    if (getContactUid(hContact, &dwUin, NULL))
         return 0; // Invalid contact
 
     if (invis_for(dwUin,hContact))

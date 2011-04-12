@@ -35,12 +35,53 @@
 //
 // -----------------------------------------------------------------------------
 
+#pragma once
 
+BOOL __stdcall IsUSASCII(const char *pBuffer, int nSize);
+BOOL __stdcall IsUnicodeAscii(const WCHAR *pBuffer, int nSize);
+int __stdcall UTF8_IsValid(const char* pszInput);
 
-BOOL IsUSASCII(const unsigned char *pBuffer, int nSize);
-BOOL IsUnicodeAscii(const WCHAR *pBuffer, int nSize);
-int UTF8_IsValid(const unsigned char* pszInput);
+int __stdcall get_utf8_size(const WCHAR *unicode);
 
-char* detect_decode_utf8(const char *from);
+char* __stdcall detect_decode_utf8(const char *from);
+
+WCHAR* __stdcall make_unicode_string(const char *utf8);
+WCHAR* __stdcall make_unicode_string_static(const char *utf8, WCHAR *unicode, size_t unicode_size);
+
+char*  __stdcall make_utf8_string(const WCHAR *unicode);
+char*  __stdcall make_utf8_string_static(const WCHAR *unicode, char *utf8, size_t utf_size);
+
+char*  __stdcall ansi_to_utf8(const char *ansi);
+char*  __stdcall ansi_to_utf8_codepage(const char *ansi, WORD wCp);
+
+WCHAR* __stdcall ansi_to_unicode(const char *ansi);
+char* __stdcall unicode_to_ansi(const WCHAR *unicode);
+char* __stdcall unicode_to_ansi_static(const WCHAR *unicode, char *ansi, int ansi_size);
+
+int   __stdcall utf8_encode(const char *from, char **to);
+int   __stdcall utf8_decode(const char *from, char **to);
+int   __stdcall utf8_decode_codepage(const char *from, char **to, WORD wCp);
+int   __stdcall utf8_decode_static(const char *from, char *to, int to_size);
+
+#ifdef _UNICODE
+#define tchar_to_utf8 make_utf8_string
+#define utf8_to_tchar_static make_unicode_string_static
+#define utf8_to_tchar make_unicode_string
+#define ansi_to_tchar ansi_to_unicode
+#define tchar_to_ansi unicode_to_ansi
+#else
+__inline char* utf8_decode_func(const char *utf8)
+{
+    char *ansi = NULL;
+    utf8_decode(utf8, &ansi);
+    return ansi;
+};
+
+#define tchar_to_utf8 ansi_to_utf8
+#define utf8_to_tchar_static utf8_decode_static
+#define utf8_to_tchar utf8_decode_func
+#define ansi_to_tchar null_strdup
+#define tchar_to_ansi null_strdup
+#endif
 
 void InitI18N(void);

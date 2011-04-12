@@ -58,6 +58,8 @@ typedef char uid_str[MAX_PATH];
 
 // from init.c
 extern HINSTANCE hInst;
+//extern IcqIconHandle hStaticIcons[];
+
 //extern char gpszICQProtoName[MAX_PATH];
 //extern char* ICQ_PROTOCOL_NAME;
 
@@ -132,9 +134,6 @@ typedef struct icq_mode_messages_s
     char* szOccupied;
     char* szFfc;
 } icq_mode_messages;
-
-extern icq_mode_messages modeMsgs;
-extern CRITICAL_SECTION modeMsgsMutex;
 
 extern struct LIST_INTERFACE li;
 extern SortedList *lstCustomCaps;

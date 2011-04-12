@@ -68,7 +68,7 @@ INT_PTR IcqGetCaps(WPARAM wParam, LPARAM lParam)
                   PF1_ADDED | PF1_CONTACT;
         if (!gbAimEnabled)
             nReturn |= PF1_NUMERICUSERID;
-        if (gbSsiEnabled && ICQGetContactSettingByte(NULL, "ServerAddRemove", DEFAULT_SS_ADDSERVER))
+        if (gbSsiEnabled && getSettingByte(NULL, "ServerAddRemove", DEFAULT_SS_ADDSERVER))
             nReturn |= PF1_SERVERCLIST;
         break;
 
@@ -110,11 +110,11 @@ INT_PTR IcqGetCaps(WPARAM wParam, LPARAM lParam)
         if (lParam)
         {
             // determine per contact
-            BYTE bClientId = ICQGetContactSettingByte((HANDLE)lParam, "ClientID", CLID_GENERIC);
+            BYTE bClientId = getSettingByte((HANDLE)lParam, "ClientID", CLID_GENERIC);
 
             if (bClientId == CLID_MIRANDA)
             {
-                if (CheckContactCapabilities((HANDLE)lParam, CAPF_CONTACTS) && ICQGetContactStatus((HANDLE)lParam) != ID_STATUS_OFFLINE)
+                if (CheckContactCapabilities((HANDLE)lParam, CAPF_CONTACTS) && getContactStatus((HANDLE)lParam) != ID_STATUS_OFFLINE)
                     nReturn = 0x100; // limited only by packet size
                 else
                     nReturn = MAX_CONTACTSSEND;
@@ -208,7 +208,7 @@ int IcqIdleChanged(WPARAM wParam, LPARAM lParam)
 
     if (bPrivacy) return 0;
 
-    ICQWriteContactSettingDword(NULL, "IdleTS", bIdle ? time(0) : 0);
+    setSettingDword(NULL, "IdleTS", bIdle ? time(0) : 0);
 
     if (gbTempVisListEnabled) // remove temporary visible users
         clearTemporaryVisibleList();
@@ -230,17 +230,17 @@ INT_PTR IcqGetAvatarInfo(WPARAM wParam, LPARAM lParam)
 
     if (!gbAvatarsEnabled) return GAIR_NOAVATAR;
 
-    if (ICQGetContactSetting(pai->hContact, "AvatarHash", &dbv) || dbv.type != DBVT_BLOB || (dbv.cpbVal != 0x14 && dbv.cpbVal != 0x09))
+    if (getSetting(pai->hContact, "AvatarHash", &dbv) || dbv.type != DBVT_BLOB || (dbv.cpbVal != 0x14 && dbv.cpbVal != 0x09))
         return GAIR_NOAVATAR; // we did not found avatar hash or hash invalid - no avatar available
 
-    if (ICQGetContactSettingUID(pai->hContact, &dwUIN, &szUID))
+    if (getContactUid(pai->hContact, &dwUIN, &szUID))
     {
         ICQFreeVariant(&dbv);
 
         return GAIR_NOAVATAR; // we do not support avatars for invalid contacts
     }
 
-    dwPaFormat = ICQGetContactSettingByte(pai->hContact, "AvatarType", PA_FORMAT_UNKNOWN);
+    dwPaFormat = getSettingByte(pai->hContact, "AvatarType", PA_FORMAT_UNKNOWN);
     if (dwPaFormat != PA_FORMAT_UNKNOWN)
     {
         // we know the format, test file
@@ -288,7 +288,7 @@ INT_PTR IcqGetAvatarCaps(WPARAM wParam, LPARAM lParam)
 
         if (size)
         {
-            if (ICQGetContactSettingByte(NULL, "AvatarsAllowBigger", DEFAULT_BIGGER_AVATARS))
+            if (getSettingByte(NULL, "AvatarsAllowBigger", DEFAULT_BIGGER_AVATARS))
             {
                 // experimental server limits
                 size->x = 128;
@@ -400,7 +400,7 @@ INT_PTR IcqSetMyAvatar(WPARAM wParam, LPARAM lParam)
             memcpy(ihash+4, hash, 0x10);
             updateServAvatarHash(ihash, 0x14);
 
-            if (ICQWriteContactSettingBlob(NULL, "AvatarHash", (BYTE*)ihash, 0x14))
+            if (setSettingBlob(NULL, "AvatarHash", (BYTE*)ihash, 0x14))
             {
                 NetLog_Server("Failed to save avatar hash.");
             }
@@ -414,8 +414,8 @@ INT_PTR IcqSetMyAvatar(WPARAM wParam, LPARAM lParam)
     else
     {
         // delete user avatar
-        ICQDeleteContactSetting(NULL, "AvatarFile");
-        ICQWriteContactSettingBlob(NULL, "AvatarHash", hashEmptyAvatar, 9);
+        deleteSetting(NULL, "AvatarFile");
+        setSettingBlob(NULL, "AvatarHash", hashEmptyAvatar, 9);
         updateServAvatarHash((char*)&hashEmptyAvatar, 9); // set blank avatar
         iRet = 0;
     }
@@ -427,12 +427,12 @@ INT_PTR IcqSetMyAvatar(WPARAM wParam, LPARAM lParam)
 
 void updateAimAwayMsg()
 {
-    char** szMsg = MirandaStatusToAwayMsg(gnCurrentStatus);
+    char** szMsg = gProtocol.MirandaStatusToAwayMsg(gnCurrentStatus);
 
-    EnterCriticalSection(&modeMsgsMutex);
+    EnterCriticalSection(&gProtocol.m_modeMsgsMutex);
     if (szMsg && !bNoStatusReply)
         icq_sendSetAimAwayMsgServ(*szMsg);
-    LeaveCriticalSection(&modeMsgsMutex);
+    LeaveCriticalSection(&gProtocol.m_modeMsgsMutex);
 }
 
 
@@ -451,7 +451,7 @@ INT_PTR IcqSetStatus(WPARAM wParam, LPARAM lParam)
 
     //if (nNewStatus != gnCurrentStatus)
     {
-        if (ICQGetContactSettingByte(NULL, "XStatusReset", DEFAULT_XSTATUS_RESET))
+        if (getSettingByte(NULL, "XStatusReset", DEFAULT_XSTATUS_RESET))
         {
             // clear custom status on status change
             IcqSetXStatus(0, 0);
@@ -486,7 +486,7 @@ INT_PTR IcqSetStatus(WPARAM wParam, LPARAM lParam)
                 UpdateGlobalSettings();
 
                 // Read UIN from database
-                dwLocalUIN = ICQGetContactSettingUIN(NULL);
+                dwLocalUIN = getContactUin(NULL);
                 if (dwLocalUIN == 0)
                 {
                     SetCurrentStatus(ID_STATUS_OFFLINE);
@@ -522,11 +522,11 @@ INT_PTR IcqSetStatus(WPARAM wParam, LPARAM lParam)
             {
                 if( nNewStatus!=ID_STATUS_ONLINE )   // סבנמסטל QIPStatus
                 {
-                    ICQDeleteContactSetting(NULL, "QIPStatus");
+                    deleteSetting(NULL, "QIPStatus");
                 }
                 else
                 {
-                    ICQWriteContactSettingWord(NULL, "ICQStatus", ICQGetContactSettingWord(NULL, "QIPStatus", 0));
+                    setSettingWord(NULL, "ICQStatus", getSettingWord(NULL, "QIPStatus", 0));
                 }
                 SetCurrentStatus(nNewStatus);
 
@@ -558,7 +558,7 @@ INT_PTR IcqSetStatus(WPARAM wParam, LPARAM lParam)
     if(gbQipStatusEnabled)
     {
         CLISTMENUITEM mi = {0};
-        int nQIPStatus = ICQGetContactSettingWord(NULL, "QIPStatus", ICQ_STATUS_ONLINE);
+        int nQIPStatus = getSettingWord(NULL, "QIPStatus", ICQ_STATUS_ONLINE);
         int i;
         mi.cbSize = sizeof(mi);
         if( nQIPStatus==ICQ_STATUS_ONLINE )
@@ -603,18 +603,17 @@ INT_PTR IcqGetStatus(WPARAM wParam, LPARAM lParam)
 
 
 
-INT_PTR IcqSetAwayMsg(WPARAM wParam, LPARAM lParam)
+INT_PTR CIcqProto::IcqSetAwayMsg(WPARAM wParam, LPARAM lParam)
 {
     char** ppszMsg = NULL;
     char* szNewUtf = NULL;
 
+    EnterCriticalSection(&gProtocol.m_modeMsgsMutex);
 
-    EnterCriticalSection(&modeMsgsMutex);
-
-    ppszMsg = MirandaStatusToAwayMsg(wParam);
+    ppszMsg = gProtocol.MirandaStatusToAwayMsg(wParam);
     if (!ppszMsg)
     {
-        LeaveCriticalSection(&modeMsgsMutex);
+        LeaveCriticalSection(&gProtocol.m_modeMsgsMutex);
         return 1; // Failure
     }
 
@@ -635,7 +634,7 @@ INT_PTR IcqSetAwayMsg(WPARAM wParam, LPARAM lParam)
     }
     mir_free(szNewUtf);
 
-    LeaveCriticalSection(&modeMsgsMutex);
+    LeaveCriticalSection(&gProtocol.m_modeMsgsMutex);
 
     return 0; // Success
 }
@@ -678,13 +677,13 @@ INT_PTR IcqAuthAllow(WPARAM wParam, LPARAM lParam)
         if (hContact == INVALID_HANDLE_VALUE)
             return 1;
 
-        if (ICQGetContactSettingUID(hContact, &uin, &uid))
+        if (getContactUid(hContact, &uin, &uid))
             return 1;
 
         icq_sendAuthResponseServ(uin, uid, 1, "");
 
         // auth granted, remove contact menu item
-        ICQDeleteContactSetting((HANDLE)wParam, "Grant");
+        deleteSetting((HANDLE)wParam, "Grant");
 
         return 0; // Success
     }
@@ -707,7 +706,7 @@ INT_PTR IcqAuthDeny(WPARAM wParam, LPARAM lParam)
         if (hContact == INVALID_HANDLE_VALUE)
             return 1;
 
-        if (ICQGetContactSettingUID(hContact, &uin, &uid))
+        if (getContactUid(hContact, &uin, &uid))
             return 1;
 
         icq_sendAuthResponseServ(uin, uid, 0, (char *)lParam);
@@ -1191,7 +1190,7 @@ INT_PTR IcqAddToListByEvent(WPARAM wParam, LPARAM lParam)
     {
         HANDLE hContact = ((HANDLE*)dbei.pBlob)[1]; // this sucks - awaiting new auth system
 
-        if (ICQGetContactSettingUID(hContact, &uin, &uid))
+        if (getContactUid(hContact, &uin, &uid))
             return 0;
     }
 
@@ -1214,7 +1213,7 @@ INT_PTR IcqSetNickName(WPARAM wParam, LPARAM lParam)
 {
     if (icqOnline)
     {
-        ICQWriteContactSettingString(NULL, "Nick", (char*)lParam);
+        setSettingString(NULL, "Nick", (char*)lParam);
 
         return IcqChangeInfoEx(CIXT_BASIC, 0);
     }
@@ -1256,7 +1255,7 @@ INT_PTR IcqChangeInfoEx(WPARAM wParam, LPARAM lParam)
             nItems += ppackTLVWordStringItemFromDB(&pBlock, &cbBlock, "CompanyFax", 0x6E, 0x64, 0x05);
             ppackTLVBlockItems(&buf, &buflen, 0xC8, &nItems, &pBlock, (WORD*)&cbBlock, FALSE);
 
-            ppackTLVByte(&buf, &buflen, ICQGetContactSettingByte(NULL, "AllowSpam", 0),0x1EA ,1);
+            ppackTLVByte(&buf, &buflen, getSettingByte(NULL, "AllowSpam", 0),0x1EA ,1);
 
         }
 
@@ -1271,16 +1270,16 @@ INT_PTR IcqChangeInfoEx(WPARAM wParam, LPARAM lParam)
 
         if (wParam & CIXT_MORE)
         {
-            b = ICQGetContactSettingByte(NULL, "Gender", 0);
+            b = getSettingByte(NULL, "Gender", 0);
             ppackTLVByte(&buf, &buflen, (BYTE)(b ? (b == 'M' ? 2 : 1) : 0), 0x82, 1);
 
             ppackTLVDateFromDB(&buf, &buflen, "BirthYear", "BirthMonth", "BirthDay", 0x1A4);
 
-            ppackTLVWord(&buf, &buflen, ICQGetContactSettingByte(NULL, "Language1", 0), 0xAA, 1);
-            ppackTLVWord(&buf, &buflen, ICQGetContactSettingByte(NULL, "Language2", 0), 0xB4, 1);
-            ppackTLVWord(&buf, &buflen, ICQGetContactSettingByte(NULL, "Language3", 0), 0xBE, 1);
+            ppackTLVWord(&buf, &buflen, getSettingByte(NULL, "Language1", 0), 0xAA, 1);
+            ppackTLVWord(&buf, &buflen, getSettingByte(NULL, "Language2", 0), 0xB4, 1);
+            ppackTLVWord(&buf, &buflen, getSettingByte(NULL, "Language3", 0), 0xBE, 1);
 
-            ppackTLVWord(&buf, &buflen, ICQGetContactSettingByte(NULL, "MaritalStatus", 0), 0x12C, 1);
+            ppackTLVWord(&buf, &buflen, getSettingByte(NULL, "MaritalStatus", 0), 0x12C, 1);
 
         }
 
@@ -1295,12 +1294,12 @@ INT_PTR IcqChangeInfoEx(WPARAM wParam, LPARAM lParam)
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "Company", 0x6E);
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "CompanyDepartment", 0x7D);
             ppackTLVStringFromDB(&pBlock, &cbBlock, "CompanyHomepage", 0x78);
-            ppackTLVWord(&pBlock, &cbBlock, ICQGetContactSettingWord(NULL, "CompanyIndustry", 0), 0x82, 1);
+            ppackTLVWord(&pBlock, &cbBlock, getSettingWord(NULL, "CompanyIndustry", 0), 0x82, 1);
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "CompanyStreet", 0xAA);
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "CompanyCity", 0xB4);
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "CompanyState", 0xBE);
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "CompanyZIP", 0xC8);
-            ppackTLVDWord(&pBlock, &cbBlock, ICQGetContactSettingWord(NULL, "CompanyCountry", 0), 0xD2, 1);
+            ppackTLVDWord(&pBlock, &cbBlock, getSettingWord(NULL, "CompanyCountry", 0), 0xD2, 1);
             /// TODO: pack unknown data (need to preserve them in Block Items)
             ppackTLVBlockItems(&buf, &buflen, 0x118, &nItems, &pBlock, (WORD*)&cbBlock, TRUE);
 
@@ -1313,10 +1312,10 @@ INT_PTR IcqChangeInfoEx(WPARAM wParam, LPARAM lParam)
             int nItems = 1;
 
             // Studies
-            ppackTLVWord(&pBlock, &cbBlock, ICQGetContactSettingWord(NULL, "StudyLevel", 0), 0x64, 1);
+            ppackTLVWord(&pBlock, &cbBlock, getSettingWord(NULL, "StudyLevel", 0), 0x64, 1);
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "StudyInstitute", 0x6E);
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "StudyDegree", 0x78);
-            ppackTLVWord(&pBlock, &cbBlock, ICQGetContactSettingWord(NULL, "StudyYear", 0), 0x8C, 1);
+            ppackTLVWord(&pBlock, &cbBlock, getSettingWord(NULL, "StudyYear", 0), 0x8C, 1);
             ppackTLVBlockItems(&buf, &buflen, 0x10E, &nItems, &pBlock, (WORD*)&cbBlock, TRUE);
         }
 
@@ -1326,14 +1325,14 @@ INT_PTR IcqChangeInfoEx(WPARAM wParam, LPARAM lParam)
             BYTE *pBlock = NULL;
             int cbBlock = 0;
             int nItems = 1;
-            WORD wTimezone = ICQGetContactSettingByte(NULL, "Timezone", 0);
+            WORD wTimezone = getSettingByte(NULL, "Timezone", 0);
 
             // Home Address
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "Street", 0x64);
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "City", 0x6E);
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "State", 0x78);
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "ZIP", 0x82);
-            ppackTLVDWord(&pBlock, &cbBlock, ICQGetContactSettingWord(NULL, "Country", 0), 0x8C, 1);
+            ppackTLVDWord(&pBlock, &cbBlock, getSettingWord(NULL, "Country", 0), 0x8C, 1);
             ppackTLVBlockItems(&buf, &buflen, 0x96, &nItems, &pBlock, (WORD*)&cbBlock, TRUE);
 
             nItems = 1;
@@ -1341,7 +1340,7 @@ INT_PTR IcqChangeInfoEx(WPARAM wParam, LPARAM lParam)
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "OriginStreet", 0x64);
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "OriginCity", 0x6E);
             ppackTLVStringUtfFromDB(&pBlock, &cbBlock, "OriginState", 0x78);
-            ppackTLVDWord(&pBlock, &cbBlock, ICQGetContactSettingWord(NULL, "OriginCountry", 0), 0x8C, 1);
+            ppackTLVDWord(&pBlock, &cbBlock, getSettingWord(NULL, "OriginCountry", 0), 0x8C, 1);
             ppackTLVBlockItems(&buf, &buflen, 0xA0, &nItems, &pBlock, (WORD*)&cbBlock, TRUE);
 
             ppackTLVStringFromDB(&buf, &buflen, "Homepage", 0xFA);
@@ -1360,10 +1359,10 @@ INT_PTR IcqChangeInfoEx(WPARAM wParam, LPARAM lParam)
             int nItems = 0;
 
             // Interests
-            nItems += ppackTLVWordStringUtfItemFromDB(&pBlock, &cbBlock, "Interest0Text", 0x6E, 0x64, ICQGetContactSettingWord(NULL, "Interest0Cat", 0));
-            nItems += ppackTLVWordStringUtfItemFromDB(&pBlock, &cbBlock, "Interest1Text", 0x6E, 0x64, ICQGetContactSettingWord(NULL, "Interest1Cat", 0));
-            nItems += ppackTLVWordStringUtfItemFromDB(&pBlock, &cbBlock, "Interest2Text", 0x6E, 0x64, ICQGetContactSettingWord(NULL, "Interest2Cat", 0));
-            nItems += ppackTLVWordStringUtfItemFromDB(&pBlock, &cbBlock, "Interest3Text", 0x6E, 0x64, ICQGetContactSettingWord(NULL, "Interest3Cat", 0));
+            nItems += ppackTLVWordStringUtfItemFromDB(&pBlock, &cbBlock, "Interest0Text", 0x6E, 0x64, getSettingWord(NULL, "Interest0Cat", 0));
+            nItems += ppackTLVWordStringUtfItemFromDB(&pBlock, &cbBlock, "Interest1Text", 0x6E, 0x64, getSettingWord(NULL, "Interest1Cat", 0));
+            nItems += ppackTLVWordStringUtfItemFromDB(&pBlock, &cbBlock, "Interest2Text", 0x6E, 0x64, getSettingWord(NULL, "Interest2Cat", 0));
+            nItems += ppackTLVWordStringUtfItemFromDB(&pBlock, &cbBlock, "Interest3Text", 0x6E, 0x64, getSettingWord(NULL, "Interest3Cat", 0));
             ppackTLVBlockItems(&buf, &buflen, 0x122, &nItems, &pBlock, (WORD*)&cbBlock, FALSE);
 
             /*		WORD w;
@@ -1409,7 +1408,7 @@ INT_PTR IcqGetInfo(WPARAM wParam, LPARAM lParam)
         uid_str szUid;
         DWORD dwCookie;
 
-        if (ICQGetContactSettingUID(ccs->hContact, &dwUin, &szUid))
+        if (getContactUid(ccs->hContact, &dwUin, &szUid))
         {
             return 1; // Invalid contact
         }
@@ -1438,7 +1437,7 @@ INT_PTR IcqFileAllow(WPARAM wParam, LPARAM lParam)
         DWORD dwUin;
         uid_str szUid;
 
-        if (ICQGetContactSettingUID(ccs->hContact, &dwUin, &szUid))
+        if (getContactUid(ccs->hContact, &dwUin, &szUid))
             return 0; // Invalid contact
 
         if (icqOnline && ccs->hContact && ccs->lParam && ccs->wParam)
@@ -1485,7 +1484,7 @@ INT_PTR IcqFileDeny(WPARAM wParam, LPARAM lParam)
         uid_str szUid;
         basic_filetransfer *ft = (basic_filetransfer*)ccs->wParam;
 
-        if (ICQGetContactSettingUID(ccs->hContact, &dwUin, &szUid))
+        if (getContactUid(ccs->hContact, &dwUin, &szUid))
             return 1; // Invalid contact
 
         if (icqOnline && ccs->wParam && ccs->hContact)
@@ -1525,7 +1524,7 @@ INT_PTR IcqFileCancel(WPARAM wParam, LPARAM lParam)
         DWORD dwUin;
         uid_str szUid;
 
-        if (ICQGetContactSettingUID(ccs->hContact, &dwUin, &szUid))
+        if (getContactUid(ccs->hContact, &dwUin, &szUid))
             return 1; // Invalid contact
 
         if (ccs->hContact && ccs->wParam)
@@ -1599,7 +1598,7 @@ INT_PTR IcqSetApparentMode(WPARAM wParam, LPARAM lParam)
         DWORD uin;
         uid_str uid;
 
-        if (ICQGetContactSettingUID(ccs->hContact, &uin, &uid))
+        if (getContactUid(ccs->hContact, &uin, &uid))
             return 1; // Invalid contact
 
         if (ccs->hContact)
@@ -1607,12 +1606,12 @@ INT_PTR IcqSetApparentMode(WPARAM wParam, LPARAM lParam)
             // Only 3 modes are supported
             if (ccs->wParam == 0 || ccs->wParam == ID_STATUS_ONLINE || ccs->wParam == ID_STATUS_OFFLINE)
             {
-                int oldMode = ICQGetContactSettingWord(ccs->hContact, "ApparentMode", 0);
+                int oldMode = getSettingWord(ccs->hContact, "ApparentMode", 0);
 
                 // Don't send redundant updates
                 if ((int)ccs->wParam != oldMode)
                 {
-                    ICQWriteContactSettingWord(ccs->hContact, "ApparentMode", (WORD)ccs->wParam);
+                    setSettingWord(ccs->hContact, "ApparentMode", (WORD)ccs->wParam);
 
                     // Not being online is only an error when in SS mode. This is not handled
                     // yet so we just ignore this for now.
@@ -1621,19 +1620,19 @@ INT_PTR IcqSetApparentMode(WPARAM wParam, LPARAM lParam)
                         if (oldMode != 0)
                         {
                             // Remove from old list
-                            if (oldMode == ID_STATUS_OFFLINE && ICQGetContactSettingWord(ccs->hContact, "SrvIgnoreID", 0))
+                            if (oldMode == ID_STATUS_OFFLINE && getSettingWord(ccs->hContact, "SrvIgnoreID", 0))
                             {
                                 // Need to remove Ignore item as well
-                                icq_removeServerPrivacyItem(ccs->hContact, uin, uid, ICQGetContactSettingWord(ccs->hContact, "SrvIgnoreID", 0), SSI_ITEM_IGNORE);
+                                icq_removeServerPrivacyItem(ccs->hContact, uin, uid, getSettingWord(ccs->hContact, "SrvIgnoreID", 0), SSI_ITEM_IGNORE);
 
-                                ICQWriteContactSettingWord(ccs->hContact, "SrvIgnoreID", 0);
+                                setSettingWord(ccs->hContact, "SrvIgnoreID", 0);
                             }
                             icq_sendChangeVisInvis(ccs->hContact, uin, uid, oldMode==ID_STATUS_OFFLINE, 0);
                         }
                         if (ccs->wParam != 0)
                         {
                             // Add to new list
-                            if (ccs->wParam==ID_STATUS_OFFLINE && ICQGetContactSettingWord(ccs->hContact, "SrvIgnoreID", 0))
+                            if (ccs->wParam==ID_STATUS_OFFLINE && getSettingWord(ccs->hContact, "SrvIgnoreID", 0))
                                 return 0; // Success: offline by ignore item
 
                             icq_sendChangeVisInvis(ccs->hContact, uin, uid, ccs->wParam==ID_STATUS_OFFLINE, 1);
@@ -1660,10 +1659,10 @@ INT_PTR IcqGetAwayMsg(WPARAM wParam,LPARAM lParam)
         uid_str szUID;
         WORD wStatus;
 
-        if (ICQGetContactSettingUID(ccs->hContact, &dwUin, &szUID))
+        if (getContactUid(ccs->hContact, &dwUin, &szUID))
             return 0; // Invalid contact
 
-        wStatus = ICQGetContactStatus(ccs->hContact);
+        wStatus = getContactStatus(ccs->hContact);
 
         if (dwUin)
         {
@@ -1718,16 +1717,16 @@ INT_PTR IcqGetAwayMsg(WPARAM wParam,LPARAM lParam)
                 {
                     bIncognitoRequest = FALSE;
                     return icq_sendGetStealthAwayMsgServ(ccs->hContact, dwUin, wMessageType,
-                                                         (WORD)(ICQGetContactSettingWord(ccs->hContact, "Version", 0)==9?9:ICQ_VERSION)); // Success
+                                                         (WORD)(getSettingWord(ccs->hContact, "Version", 0)==9?9:ICQ_VERSION)); // Success
                 }
                 else if(CheckContactCapabilities(ccs->hContact, CAPF_STATUSMSGEXT)&& !invis_for(0,ccs->hContact))
                 {
                     return icq_sendGetAwayMsgServExt(ccs->hContact, dwUin, wMessageType,
-                                                     (WORD)(ICQGetContactSettingWord(ccs->hContact, "Version", 0)==9?9:ICQ_VERSION)); // Success
+                                                     (WORD)(getSettingWord(ccs->hContact, "Version", 0)==9?9:ICQ_VERSION)); // Success
                 }
                 else if(!invis_for(0,ccs->hContact))
                 {
-                    return icq_sendGetAwayMsgServ(ccs->hContact, dwUin, wMessageType, (WORD)(ICQGetContactSettingWord(ccs->hContact, "Version", 0)==9?9:ICQ_VERSION)); // Success
+                    return icq_sendGetAwayMsgServ(ccs->hContact, dwUin, wMessageType, (WORD)(getSettingWord(ccs->hContact, "Version", 0)==9?9:ICQ_VERSION)); // Success
                 }
             }
         }
@@ -1748,12 +1747,12 @@ INT_PTR IcqGetAwayMsg(WPARAM wParam,LPARAM lParam)
 static message_cookie_data* CreateMsgCookieData(BYTE bMsgType, HANDLE hContact, DWORD dwUin, int bUseSrvRelay)
 {
     BYTE bAckType;
-    WORD wStatus = ICQGetContactStatus(hContact);
+    WORD wStatus = getContactStatus(hContact);
 
-    if (!ICQGetContactSettingByte(NULL, "SlowSend", DEFAULT_SLOWSEND))
+    if (!getSettingByte(NULL, "SlowSend", DEFAULT_SLOWSEND))
         bAckType = ACKTYPE_NONE;
     else if ((bUseSrvRelay && ((!dwUin) || (!CheckContactCapabilities(hContact, CAPF_SRV_RELAY)) ||
-                               (wStatus == ID_STATUS_OFFLINE))) || ICQGetContactSettingByte(NULL, "OnlyServerAcks", DEFAULT_ONLYSERVERACKS))
+                               (wStatus == ID_STATUS_OFFLINE))) || getSettingByte(NULL, "OnlyServerAcks", DEFAULT_ONLYSERVERACKS))
         bAckType = ACKTYPE_SERVER;
     else
         bAckType = ACKTYPE_CLIENT;
@@ -1775,10 +1774,10 @@ static DWORD reportGenericSendError(HANDLE hContact, int nType, const char* szEr
 
 
 
-static char* convertMsgToUserSpecificAnsi(HANDLE hContact, const unsigned char* szMsg)
+static char* convertMsgToUserSpecificAnsi(HANDLE hContact, const char* szMsg)
 {
     // this takes utf-8 encoded message
-    WORD wCP = ICQGetContactSettingWord(hContact, "CodePage", gwAnsiCodepage);
+    WORD wCP = getSettingWord(hContact, "CodePage", gwAnsiCodepage);
     char* szAnsi = NULL;
 
     if (wCP != CP_ACP)
@@ -1805,27 +1804,27 @@ INT_PTR IcqSendMessage(WPARAM wParam, LPARAM lParam)
             DWORD dwUin;
             uid_str szUID;
             char* pszText = NULL;
-            unsigned char* puszText = NULL;
+            char* puszText = NULL;
             int bNeedFreeA = 0, bNeedFreeU = 0;
 
-            if (ICQGetContactSettingUID(ccs->hContact, &dwUin, &szUID))
+            if (getContactUid(ccs->hContact, &dwUin, &szUID))
             {
                 // Invalid contact
                 return reportGenericSendError(ccs->hContact, ACKTYPE_MESSAGE, "The receiver has an invalid user ID.");
             }
 
             if ((ccs->wParam & PREF_UTF) == PREF_UTF)
-                puszText = (unsigned char*)ccs->lParam;
+                puszText = (char*)ccs->lParam;
             else
                 pszText = (char*)ccs->lParam;
 
             if ((ccs->wParam & PREF_UNICODE) == PREF_UNICODE)
             {
-                puszText = (BYTE*)mir_utf8encodeW((WCHAR*)((char*)ccs->lParam+strlennull(pszText)+1)); // get the UTF-16 part FIXME
+                puszText = mir_utf8encodeW((WCHAR*)((char*)ccs->lParam+strlennull(pszText)+1)); // get the UTF-16 part FIXME
                 bNeedFreeU = 1;
             }
 
-            wRecipientStatus = ICQGetContactStatus(ccs->hContact);
+            wRecipientStatus = getContactStatus(ccs->hContact);
 
             if (puszText)
             {
@@ -1833,7 +1832,7 @@ INT_PTR IcqSendMessage(WPARAM wParam, LPARAM lParam)
                 BOOL plain_ascii = IsUSASCII(puszText, strlennull((char*)puszText));	// FIXME
 
                 if (plain_ascii || !gbUtfEnabled || !CheckContactCapabilities(ccs->hContact, CAPF_UTF) ||
-                        !ICQGetContactSettingByte(ccs->hContact, "UnicodeSend", 1))
+                        !getSettingByte(ccs->hContact, "UnicodeSend", 1))
                 {
                     // unicode is not available for target contact, convert to good codepage
                     if (!plain_ascii)
@@ -1886,11 +1885,11 @@ INT_PTR IcqSendMessage(WPARAM wParam, LPARAM lParam)
             {
                 message_cookie_data* pCookieData;
 
-                if (!puszText && gbUtfEnabled == 2 && !IsUSASCII((BYTE*)pszText, strlennull(pszText))
-                        && CheckContactCapabilities(ccs->hContact, CAPF_UTF) && ICQGetContactSettingByte(ccs->hContact, "UnicodeSend", 1))
+                if (!puszText && gbUtfEnabled == 2 && !IsUSASCII(pszText, strlennull(pszText))
+                        && CheckContactCapabilities(ccs->hContact, CAPF_UTF) && getSettingByte(ccs->hContact, "UnicodeSend", 1))
                 {
                     // text is not unicode and contains national chars and we should send all this as Unicode, so do it
-                    puszText = (BYTE*)mir_utf8encode(pszText);
+                    puszText = mir_utf8encode(pszText);
                     bNeedFreeU = 1;
                 }
 
@@ -1913,7 +1912,7 @@ INT_PTR IcqSendMessage(WPARAM wParam, LPARAM lParam)
                     {
                         // convert to UCS-2
                         if (bNeedFreeU) mir_free(puszText);
-                        puszText = (BYTE*)src;
+                        puszText = src;
                         bNeedFreeU = 1;
                     }
                     else
@@ -2042,7 +2041,7 @@ INT_PTR IcqSendMessage(WPARAM wParam, LPARAM lParam)
                     // WORKAROUND!!
                     // Nasty workaround for ICQ6 client's bug - it does not send acknowledgement when in temporary visible mode
                     // - This uses only server ack, but also for visible invisible contact!
-                    if (wRecipientStatus == ID_STATUS_INVISIBLE && pCookieData->nAckType == ACKTYPE_CLIENT && ICQGetContactSettingByte(ccs->hContact, "ClientID", CLID_GENERIC) == CLID_ICQ6)
+                    if (wRecipientStatus == ID_STATUS_INVISIBLE && pCookieData->nAckType == ACKTYPE_CLIENT && getSettingByte(ccs->hContact, "ClientID", CLID_GENERIC) == CLID_ICQ6)
                         pCookieData->nAckType = ACKTYPE_SERVER;
 
                     dwCookie = icq_SendChannel2Message(dwUin, ccs->hContact, srv_msg, strlennull(srv_msg), wPriority, pCookieData, srv_cap);
@@ -2081,13 +2080,13 @@ INT_PTR IcqSendUrl(WPARAM wParam, LPARAM lParam)
             WORD wRecipientStatus;
             DWORD dwUin;
 
-            if (ICQGetContactSettingUID(ccs->hContact, &dwUin, NULL))
+            if (getContactUid(ccs->hContact, &dwUin, NULL))
             {
                 // Invalid contact
                 return reportGenericSendError(ccs->hContact, ACKTYPE_URL, "The receiver has an invalid user ID.");
             }
 
-            wRecipientStatus = ICQGetContactStatus(ccs->hContact);
+            wRecipientStatus = getContactStatus(ccs->hContact);
 
             // Failure
             if (!icqOnline)
@@ -2189,13 +2188,13 @@ INT_PTR IcqSendContacts(WPARAM wParam, LPARAM lParam)
             WORD wRecipientStatus;
             DWORD dwCookie;
 
-            if (ICQGetContactSettingUID(ccs->hContact, &dwUin, &szUid))
+            if (getContactUid(ccs->hContact, &dwUin, &szUid))
             {
                 // Invalid contact
                 return reportGenericSendError(ccs->hContact, ACKTYPE_CONTACTS, "The receiver has an invalid user ID.");
             }
 
-            wRecipientStatus = ICQGetContactStatus(ccs->hContact);
+            wRecipientStatus = getContactStatus(ccs->hContact);
             nContacts = HIWORD(ccs->wParam);
 
             // Failures
@@ -2229,7 +2228,7 @@ INT_PTR IcqSendContacts(WPARAM wParam, LPARAM lParam)
 
                             if (!IsICQContact(hContactsList[i]))
                                 break; // Abort if a non icq contact is found
-                            if (ICQGetContactSettingUID(hContactsList[i], &contacts[i].uin, &szContactUid))
+                            if (getContactUid(hContactsList[i], &contacts[i].uin, &szContactUid))
                                 break; // Abort if invalid contact
                             contacts[i].uid = contacts[i].uin?NULL:null_strdup(szContactUid);
                             contacts[i].szNick = NickFromHandleUtf(hContactsList[i]);
@@ -2359,7 +2358,7 @@ INT_PTR IcqSendContacts(WPARAM wParam, LPARAM lParam)
                         {
                             if (!IsICQContact(hContactsList[i]))
                                 break; // Abort if a non icq contact is found
-                            if (ICQGetContactSettingUID(hContactsList[i], &contacts[i].uin, &szContactUid))
+                            if (getContactUid(hContactsList[i], &contacts[i].uin, &szContactUid))
                                 break; // Abort if invalid contact
                             contacts[i].uid = contacts[i].uin?NULL:null_strdup(szContactUid);
                             contacts[i].szNick = NickFromHandle(hContactsList[i]);
@@ -2509,10 +2508,10 @@ INT_PTR IcqSendFile(WPARAM wParam, LPARAM lParam)
                 pszDesc = (char*)mir_u2a(desc_w);
             }
 
-            if (ICQGetContactSettingUID(hContact, &dwUin, &szUid))
+            if (getContactUid(hContact, &dwUin, &szUid))
                 return 0; // Invalid contact
 
-            if (ICQGetContactStatus(hContact) != ID_STATUS_OFFLINE)
+            if (getContactStatus(hContact) != ID_STATUS_OFFLINE)
             {
                 if (CheckContactCapabilities(hContact, CAPF_AIM_FILE))
                 {
@@ -2522,7 +2521,7 @@ INT_PTR IcqSendFile(WPARAM wParam, LPARAM lParam)
                 {
                     WORD wClientVersion;
 
-                    wClientVersion = ICQGetContactSettingWord(ccs->hContact, "Version", 7);
+                    wClientVersion = getSettingWord(ccs->hContact, "Version", 7);
                     if (wClientVersion < 7)
                     {
                         NetLog_Server("IcqSendFile() can't send to version %u", wClientVersion);
@@ -2624,7 +2623,7 @@ INT_PTR IcqSendAuthRequest(WPARAM wParam, LPARAM lParam)
 
         if (ccs->hContact)
         {
-            if (ICQGetContactSettingUID(ccs->hContact, &dwUin, &szUid))
+            if (getContactUid(ccs->hContact, &dwUin, &szUid))
                 return 1; // Invalid contact
 
             if (dwUin && ccs->lParam)
@@ -2658,10 +2657,10 @@ INT_PTR IcqSendYouWereAdded(WPARAM wParam, LPARAM lParam)
         {
             DWORD dwUin, dwMyUin;
 
-            if (ICQGetContactSettingUID(ccs->hContact, &dwUin, NULL))
+            if (getContactUid(ccs->hContact, &dwUin, NULL))
                 return 1; // Invalid contact
 
-            dwMyUin = ICQGetContactSettingUIN(NULL);
+            dwMyUin = getContactUin(NULL);
 
             if (dwUin)
             {
@@ -2684,13 +2683,13 @@ INT_PTR IcqGrantAuthorization(WPARAM wParam, LPARAM lParam)
         DWORD dwUin;
         uid_str szUid;
 
-        if (ICQGetContactSettingUID((HANDLE)wParam, &dwUin, &szUid))
+        if (getContactUid((HANDLE)wParam, &dwUin, &szUid))
             return 0; // Invalid contact
 
         // send without reason, do we need any ?
         icq_sendGrantAuthServ(dwUin, szUid, NULL);
         // auth granted, remove contact menu item
-        ICQDeleteContactSetting((HANDLE)wParam, "Grant");
+        deleteSetting((HANDLE)wParam, "Grant");
     }
 
     return 0;
@@ -2705,7 +2704,7 @@ INT_PTR IcqRevokeAuthorization(WPARAM wParam, LPARAM lParam)
         DWORD dwUin;
         uid_str szUid;
 
-        if (ICQGetContactSettingUID((HANDLE)wParam, &dwUin, &szUid))
+        if (getContactUid((HANDLE)wParam, &dwUin, &szUid))
             return 0; // Invalid contact
 
         if (MessageBoxUtf(NULL, LPGEN("Are you sure you want to revoke user's authorization (this will remove you from his/her list on some clients) ?"), LPGEN("Confirmation"), MB_ICONQUESTION | MB_YESNO) != IDYES)
@@ -2713,7 +2712,7 @@ INT_PTR IcqRevokeAuthorization(WPARAM wParam, LPARAM lParam)
 
         icq_sendRevokeAuthServ(dwUin, szUid);
         // auth revoked, add contact menu item
-        ICQWriteContactSettingByte((HANDLE)wParam, "Grant", 1);
+        setSettingByte((HANDLE)wParam, "Grant", 1);
     }
 
     return 0;
@@ -2761,18 +2760,18 @@ INT_PTR IcqAddServerContact(WPARAM wParam, LPARAM lParam)
     if (!gbSsiEnabled) return 0;
 
     // Does this contact have a UID?
-    if (!ICQGetContactSettingUID((HANDLE)wParam, &dwUin, &szUid) && !ICQGetContactSettingWord((HANDLE)wParam, "ServerId", 0) && !ICQGetContactSettingWord((HANDLE)wParam, "SrvIgnoreId", 0))
+    if (!getContactUid((HANDLE)wParam, &dwUin, &szUid) && !getSettingWord((HANDLE)wParam, "ServerId", 0) && !getSettingWord((HANDLE)wParam, "SrvIgnoreId", 0))
     {
         char *pszGroup;
 
         // Read group from DB
-        pszGroup = ICQGetContactCListGroup((HANDLE)wParam);
+        pszGroup = getContactCListGroup((HANDLE)wParam);
 
         addServContact((HANDLE)wParam, pszGroup);
 
         mir_free(pszGroup);
-        if(ICQGetContactSettingByte((HANDLE)wParam,"CheckSelfRemove", 0))
-            ICQWriteContactSettingByte((HANDLE)wParam,"CheckSelfRemove", 0);
+        if(getSettingByte((HANDLE)wParam,"CheckSelfRemove", 0))
+            setSettingByte((HANDLE)wParam,"CheckSelfRemove", 0);
     }
     return 0;
 }
@@ -2781,7 +2780,7 @@ INT_PTR IcqSendtZer(WPARAM wParam, LPARAM lParam)
 {
     if (wParam && wParam)
     {
-        DWORD dwUin = ICQGetContactSettingDword((HANDLE)wParam, "UIN", 0);
+        DWORD dwUin = getSettingDword((HANDLE)wParam, "UIN", 0);
         if (!dwUin)
             return 0;
         SendtZer((HANDLE)wParam, dwUin, tZers[(int)lParam].szId, tZers[(int)lParam].szTxt, tZers[(int)lParam].szUrl);
@@ -2814,14 +2813,14 @@ static void ICQAddRecvEvent(HANDLE hContact, WORD wType, PROTORECVEVENT* pre, DW
 
         SetContactHidden(hContact, 0);
         // if the contact was hidden, add to client-list if not in server-list authed
-        if (!ICQGetContactSettingWord(hContact, "ServerId", 0) || ICQGetContactSettingByte(hContact, "Auth", 0))
+        if (!getSettingWord(hContact, "ServerId", 0) || getSettingByte(hContact, "Auth", 0))
         {
-            ICQGetContactSettingUID(hContact, &dwUin, &szUid);
+            getContactUid(hContact, &dwUin, &szUid);
             icq_sendNewContact(dwUin, szUid);
         }
     }
 
-    ICQAddEvent(hContact, wType, pre->timestamp, flags, cbBlob, pBlob);
+    AddEvent(hContact, wType, pre->timestamp, flags, cbBlob, pBlob);
 }
 
 
@@ -2849,7 +2848,7 @@ INT_PTR IcqRecvMessage(WPARAM wParam, LPARAM lParam)
 
     cbBlob = strlennull(pre->szMessage) + 1;
     // process utf-8 encoded messages
-    if ((pre->flags & PREF_UTF) && !IsUSASCII((BYTE*)pre->szMessage, strlennull(pre->szMessage)))
+    if ((pre->flags & PREF_UTF) && !IsUSASCII(pre->szMessage, strlennull(pre->szMessage)))
         flags |= DBEF_UTF;
     // process unicode ucs-2 messages
     if ((pre->flags & PREF_UNICODE) && !IsUnicodeAscii((WCHAR*)(pre->szMessage+cbBlob), wcslen((WCHAR*)(pre->szMessage+cbBlob))))
@@ -2977,9 +2976,61 @@ INT_PTR IcqCheckCapability(WPARAM wParam, LPARAM lParam)
 extern void setContactIgnore(HANDLE hContact, BOOL bIgnore);
 INT_PTR IcqServerIgnore(WPARAM wParam, LPARAM lParam)
 {
-    setContactIgnore((HANDLE)wParam, !ICQGetContactSettingByte((HANDLE)wParam, "SrvIgnore", 0));
+    setContactIgnore((HANDLE)wParam, !getSettingByte((HANDLE)wParam, "SrvIgnore", 0));
 
     return 0;
 }
 
 BYTE gbRememberPwd;
+
+//////////////////////////////////////////////////////////////////////////
+
+INT_PTR icq_getEventTextMissedMessage(WPARAM wParam, LPARAM lParam)
+{
+	DBEVENTGETTEXT *pEvent = (DBEVENTGETTEXT *)lParam;
+
+	INT_PTR nRetVal = 0;
+	char *pszText = NULL;
+
+	if (pEvent->dbei->cbBlob > 1)
+	{
+		switch (((WORD*)pEvent->dbei->pBlob)[0])
+		{
+		case 0:
+			pszText = LPGEN("** This message was blocked by the ICQ server ** The message was invalid.");
+			break;
+
+		case 1:
+			pszText = LPGEN("** This message was blocked by the ICQ server ** The message was too long.");
+			break;
+
+		case 2:
+			pszText = LPGEN("** This message was blocked by the ICQ server ** The sender has flooded the server.");
+			break;
+
+		case 4:
+			pszText = LPGEN("** This message was blocked by the ICQ server ** You are too evil.");
+			break;
+
+		default:
+			pszText = LPGEN("** Unknown missed message event.");
+			break;
+		}
+		if (pEvent->datatype == DBVT_WCHAR)
+		{
+			WCHAR *pwszText;
+			int wchars = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pszText, strlennull(pszText), NULL, 0);
+
+			pwszText = (WCHAR*)_alloca((wchars + 1) * sizeof(WCHAR));
+			pwszText[wchars] = 0;
+
+			MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pszText, strlennull(pszText), pwszText, wchars);
+
+			nRetVal = (INT_PTR)mir_wstrdup(TranslateW(pwszText));
+		}
+		else if (pEvent->datatype == DBVT_ASCIIZ)
+			nRetVal = (INT_PTR)mir_strdup(Translate(pszText));
+	}
+
+	return nRetVal;
+}

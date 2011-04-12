@@ -75,7 +75,7 @@ DWORD dwLastXUpdateTime;
 
 BYTE fXstatusIcons()
 {
-    if(ICQGetContactSettingByte(NULL, "NonStandartXstatus", 1))
+    if(getSettingByte(NULL, "NonStandartXstatus", 1))
         return 37;
     else
         return 32;
@@ -83,7 +83,7 @@ BYTE fXstatusIcons()
 
 BYTE fXstatusItems()
 {
-    if(ICQGetContactSettingByte(NULL, "NonStandartXstatus", 1))
+    if(getSettingByte(NULL, "NonStandartXstatus", 1))
         return 38;
     else
         return 33;
@@ -95,7 +95,7 @@ BYTE fXstatusItems()
 
 BYTE __stdcall ICQGetContactXStatus(HANDLE hContact)
 {
-    BYTE bXStatus = ICQGetContactSettingByte(hContact, DBSETTING_XSTATUSID, 0);
+    BYTE bXStatus = getSettingByte(hContact, DBSETTING_XSTATUSID, 0);
 
     if (!gbXStatusEnabled || bXStatus < 1 || bXStatus > XstatusIcons) return 0;
 
@@ -109,7 +109,7 @@ DWORD sendXStatusDetailsRequest(HANDLE hContact, int bForced)
         return 0;
     {
         DWORD dwCookie = 0;
-        if (ICQGetContactSettingByte(hContact, DBSETTING_XSTATUSID, -1) != -1)
+        if (getSettingByte(hContact, DBSETTING_XSTATUSID, -1) != -1)
         {
             // only request custom status detail when the contact has one
             char *szNotify;
@@ -159,15 +159,15 @@ void UpdateXStatuses()
     if(!gbXStatusEnabled)
         return;
 
-    hContact = ICQFindFirstContact();
+    hContact = FindFirstContact();
     if(hContact)
     {
         do
         {
-            if (ICQGetContactStatus(hContact) != ID_STATUS_OFFLINE && (CheckContactCapabilities(hContact, CAPF_XTRAZ) && !invis_for(ICQGetContactSettingUIN(hContact), hContact) && ICQGetContactSettingByte(hContact, DBSETTING_XSTATUSID, 0) != 0))
+            if (getContactStatus(hContact) != ID_STATUS_OFFLINE && (CheckContactCapabilities(hContact, CAPF_XTRAZ) && !invis_for(getContactUin(hContact), hContact) && getSettingByte(hContact, DBSETTING_XSTATUSID, 0) != 0))
                 requestXStatusDetails(hContact, 1);
         }
-        while(hContact = ICQFindNextContact(hContact));
+        while(hContact = FindNextContact(hContact));
     }
     if(bXUpdaterPopUp)
     {
@@ -266,7 +266,7 @@ static void setContactExtraIcon(HANDLE hContact, int xstatus)
     HANDLE hIcon = INVALID_HANDLE_VALUE;
     if(!hExtraXStatus)
     {
-        WORD icon_pos = ICQGetContactSettingWord(NULL, "xstatus_icon_pos", 9);
+        WORD icon_pos = getSettingWord(NULL, "xstatus_icon_pos", 9);
         hIcon = (xstatus <= 0 ? (HANDLE)-1 : hXStatusIcons[xstatus-1]);
         if (xstatus > 0)
             CListMW_ExtraIconsRebuild(0, 0);
@@ -522,14 +522,14 @@ void handleXStatusCaps(HANDLE hContact, char* caps, int capsize, char* moods, in
                 if (ICQGetContactXStatus(hContact) != bXStatusId)
                 {
                     // only write default name when it is really needed, i.e. on Custom Status change
-                    ICQWriteContactSettingByte(hContact, DBSETTING_XSTATUSID, bXStatusId);
-                    ICQWriteContactSettingUtf(hContact, DBSETTING_XSTATUSNAME, ICQTranslateUtfStatic(nameXStatus[i], str, MAX_PATH));
-                    ICQDeleteContactSetting(hContact, DBSETTING_XSTATUSMSG);
+                    setSettingByte(hContact, DBSETTING_XSTATUSID, bXStatusId);
+                    setSettingStringUtf(hContact, DBSETTING_XSTATUSNAME, ICQTranslateUtfStatic(nameXStatus[i], str, MAX_PATH));
+                    deleteSetting(hContact, DBSETTING_XSTATUSMSG);
 
                     bChanged = TRUE;
                 }
 
-                if (ICQGetContactSettingByte(NULL, "XStatusAuto", DEFAULT_XSTATUS_AUTO))
+                if (getSettingByte(NULL, "XStatusAuto", DEFAULT_XSTATUS_AUTO))
                     requestXStatusDetails(hContact, TRUE);
 
                 xstatus = bXStatusId;
@@ -560,9 +560,9 @@ void handleXStatusCaps(HANDLE hContact, char* caps, int capsize, char* moods, in
                 if (ICQGetContactXStatus(hContact) != bXStatusId)
                 {
                     // only write default name when it is really needed, i.e. on Custom Status change
-                    ICQWriteContactSettingByte(hContact, DBSETTING_XSTATUSID, bXStatusId);
-                    ICQWriteContactSettingUtf(hContact, DBSETTING_XSTATUSNAME, ICQTranslateUtfStatic(nameXStatus[i], str, MAX_PATH));
-                    ICQDeleteContactSetting(hContact, DBSETTING_XSTATUSMSG);
+                    setSettingByte(hContact, DBSETTING_XSTATUSID, bXStatusId);
+                    setSettingStringUtf(hContact, DBSETTING_XSTATUSNAME, ICQTranslateUtfStatic(nameXStatus[i], str, MAX_PATH));
+                    deleteSetting(hContact, DBSETTING_XSTATUSMSG);
 
                     bChanged = TRUE;
                 }
@@ -575,11 +575,11 @@ void handleXStatusCaps(HANDLE hContact, char* caps, int capsize, char* moods, in
     }
     if (!xstatus)
     {
-        if (ICQGetContactSettingByte(hContact, DBSETTING_XSTATUSID, -1) != -1)
+        if (getSettingByte(hContact, DBSETTING_XSTATUSID, -1) != -1)
             bChanged = TRUE;
-        ICQDeleteContactSetting(hContact, DBSETTING_XSTATUSID);
-        ICQDeleteContactSetting(hContact, DBSETTING_XSTATUSNAME);
-        ICQDeleteContactSetting(hContact, DBSETTING_XSTATUSMSG);
+        deleteSetting(hContact, DBSETTING_XSTATUSID);
+        deleteSetting(hContact, DBSETTING_XSTATUSNAME);
+        deleteSetting(hContact, DBSETTING_XSTATUSMSG);
     }
 
     if (gbXStatusEnabled != 10)
@@ -693,10 +693,10 @@ static INT_PTR CALLBACK SetXStatusDlgProc(HWND hwndDlg,UINT message,WPARAM wPara
         SetDlgItemTextUtf(hwndDlg,IDOK,ICQTranslateUtfStatic("Close", str, MAX_PATH));
         UnhookEvent(dat->hEvent);
         dat->hEvent = NULL;
-        szText = ICQGetContactSettingUtf(dat->hContact, DBSETTING_XSTATUSNAME, "");
+        szText = getSettingStringUtf(dat->hContact, DBSETTING_XSTATUSNAME, "");
         SetDlgItemTextUtf(hwndDlg, IDC_XTITLE, szText);
         mir_free(szText);
-        szText = ICQGetContactSettingUtf(dat->hContact, DBSETTING_XSTATUSMSG, "");
+        szText = getSettingStringUtf(dat->hContact, DBSETTING_XSTATUSMSG, "");
         SetDlgItemTextUtf(hwndDlg, IDC_XMSG, szText);
         mir_free(szText);
 
@@ -737,7 +737,7 @@ static INT_PTR CALLBACK SetXStatusDlgProc(HWND hwndDlg,UINT message,WPARAM wPara
             ShowWindow(GetDlgItem(hwndDlg, IDCANCEL), SW_HIDE);
             SendMessage(GetDlgItem(hwndDlg, IDC_XTITLE), EM_SETREADONLY, 1, 0);
             SendMessage(GetDlgItem(hwndDlg, IDC_XMSG), EM_SETREADONLY, 1, 0);
-            if (!ICQGetContactSettingByte(NULL, "XStatusAuto", DEFAULT_XSTATUS_AUTO))
+            if (!getSettingByte(NULL, "XStatusAuto", DEFAULT_XSTATUS_AUTO))
             {
                 SetDlgItemTextUtf(hwndDlg,IDOK,ICQTranslateUtfStatic("Cancel", str, MAX_PATH));
                 dat->hEvent = HookEventMessage(ME_PROTO_ACK, hwndDlg, HM_PROTOACK);
@@ -753,10 +753,10 @@ static INT_PTR CALLBACK SetXStatusDlgProc(HWND hwndDlg,UINT message,WPARAM wPara
                 SetDlgItemTextUtf(hwndDlg,IDOK,ICQTranslateUtfStatic("Close", str, MAX_PATH));
                 ShowWindow(GetDlgItem(hwndDlg, IDCANCEL), SW_HIDE);
                 dat->hEvent = NULL;
-                szText = ICQGetContactSettingUtf(dat->hContact, DBSETTING_XSTATUSNAME, "");
+                szText = getSettingStringUtf(dat->hContact, DBSETTING_XSTATUSNAME, "");
                 SetDlgItemTextUtf(hwndDlg, IDC_XTITLE, szText);
                 mir_free(szText);
-                szText = ICQGetContactSettingUtf(dat->hContact, DBSETTING_XSTATUSMSG, "");
+                szText = getSettingStringUtf(dat->hContact, DBSETTING_XSTATUSMSG, "");
                 SetDlgItemTextUtf(hwndDlg, IDC_XMSG, szText);
                 mir_free(szText);
             }
@@ -822,16 +822,16 @@ static INT_PTR CALLBACK SetXStatusDlgProc(HWND hwndDlg,UINT message,WPARAM wPara
             char *ansi = NULL;
             CLISTMENUITEM mi = {0};
 
-            ICQWriteContactSettingByte(NULL, DBSETTING_XSTATUSID, dat->bXStatus);
+            setSettingByte(NULL, DBSETTING_XSTATUSID, dat->bXStatus);
             szValue = GetDlgItemTextUtf(hwndDlg,IDC_XMSG);
             sprintf(szSetting, "XStatus%dMsg", dat->bXStatus);
-            ICQWriteContactSettingUtf(NULL, szSetting, szValue);
-            ICQWriteContactSettingUtf(NULL, DBSETTING_XSTATUSMSG, szValue);
+            setSettingStringUtf(NULL, szSetting, szValue);
+            setSettingStringUtf(NULL, DBSETTING_XSTATUSMSG, szValue);
             mir_free(szValue);
             szValue = GetDlgItemTextUtf(hwndDlg,IDC_XTITLE);
             sprintf(szSetting, "XStatus%dName", dat->bXStatus);
-            ICQWriteContactSettingUtf(NULL, szSetting, szValue);
-            ICQWriteContactSettingUtf(NULL, DBSETTING_XSTATUSNAME, szValue);
+            setSettingStringUtf(NULL, szSetting, szValue);
+            setSettingStringUtf(NULL, DBSETTING_XSTATUSNAME, szValue);
             mi.cbSize = sizeof(mi);
             ansi = mir_utf8decodeA(szValue);
             mi.pszName = ((strlen(ansi) > 0) && DBGetContactSettingByte(NULL, ICQ_PROTOCOL_NAME, "ShowMyXText", 1)) ? ansi : ICQTranslate(nameXStatus[dat->bXStatus-1]);
@@ -862,7 +862,7 @@ static INT_PTR CALLBACK SetXStatusDlgProc(HWND hwndDlg,UINT message,WPARAM wPara
 static void setXStatusEx(BYTE bXStatus, BYTE bQuiet)
 {
     CLISTMENUITEM mi = {0};
-    BYTE bOldXStatus = ICQGetContactSettingByte(NULL, DBSETTING_XSTATUSID, 0);
+    BYTE bOldXStatus = getSettingByte(NULL, DBSETTING_XSTATUSID, 0);
 
     mi.cbSize = sizeof(mi);
 
@@ -882,12 +882,12 @@ static void setXStatusEx(BYTE bXStatus, BYTE bQuiet)
         char *szName, *szMsg;
 
         sprintf(szSetting, "XStatus%dName", bXStatus);
-        szName = ICQGetContactSettingUtf(NULL, szSetting, ICQTranslateUtfStatic(nameXStatus[bXStatus-1], str, MAX_PATH));
+        szName = getSettingStringUtf(NULL, szSetting, ICQTranslateUtfStatic(nameXStatus[bXStatus-1], str, MAX_PATH));
         sprintf(szSetting, "XStatus%dMsg", bXStatus);
-        szMsg = ICQGetContactSettingUtf(NULL, szSetting, "");
+        szMsg = getSettingStringUtf(NULL, szSetting, "");
 
         sprintf(szSetting, "XStatus%dStat", bXStatus);
-        if (!bQuiet && !ICQGetContactSettingByte(NULL, szSetting, 0))
+        if (!bQuiet && !getSettingByte(NULL, szSetting, 0))
         {
             InitXStatusData init;
 
@@ -903,7 +903,7 @@ static void setXStatusEx(BYTE bXStatus, BYTE bQuiet)
         else
         {
             //by [sin]
-            if(ICQGetContactSettingByte(NULL, "ForceXstatus", 0))
+            if(getSettingByte(NULL, "ForceXstatus", 0))
             {
                 if(bXStatus != 0 && icqOnline)
                 {
@@ -912,9 +912,9 @@ static void setXStatusEx(BYTE bXStatus, BYTE bQuiet)
                 }
             }
 
-            ICQWriteContactSettingByte(NULL, DBSETTING_XSTATUSID, bXStatus);
-            ICQWriteContactSettingUtf(NULL, DBSETTING_XSTATUSNAME, szName);
-            ICQWriteContactSettingUtf(NULL, DBSETTING_XSTATUSMSG, szMsg);
+            setSettingByte(NULL, DBSETTING_XSTATUSID, bXStatus);
+            setSettingStringUtf(NULL, DBSETTING_XSTATUSNAME, szName);
+            setSettingStringUtf(NULL, DBSETTING_XSTATUSMSG, szMsg);
 
             updateServerCustomStatus();
         }
@@ -923,9 +923,9 @@ static void setXStatusEx(BYTE bXStatus, BYTE bQuiet)
     }
     else
     {
-        ICQWriteContactSettingByte(NULL, DBSETTING_XSTATUSID, bXStatus);
-        ICQDeleteContactSetting(NULL, DBSETTING_XSTATUSNAME);
-        ICQDeleteContactSetting(NULL, DBSETTING_XSTATUSMSG);
+        setSettingByte(NULL, DBSETTING_XSTATUSID, bXStatus);
+        deleteSetting(NULL, DBSETTING_XSTATUSNAME);
+        deleteSetting(NULL, DBSETTING_XSTATUSMSG);
 
         updateServerCustomStatus();
     }
@@ -992,7 +992,7 @@ void InitXStatusItems(BOOL bAllowStatus)
 
         mi.pszName = j ? (char*)nameXStatus[j-1] : LPGEN("None");
         sprintf(szTemp, "XStatus%dName", j);
-        szValue = ICQGetContactSettingUtf(NULL, szTemp, "");
+        szValue = getSettingStringUtf(NULL, szTemp, "");
         ansi = mir_utf8decodeA(szValue);
 
         mi.pszName = ((ansi && strlen(ansi) == 0) || !DBGetContactSettingByte(NULL, ICQ_PROTOCOL_NAME, "ShowMyXText", 1)) ? ICQTranslate(j?nameXStatus[j-1]:"None") : ansi;
@@ -1141,11 +1141,11 @@ INT_PTR IcqSetXStatusEx(WPARAM wParam, LPARAM lParam)
             {
                 char* utf = mir_utf8encodeW(pData->pwszName);
 
-                ICQWriteContactSettingUtf(NULL, DBSETTING_XSTATUSNAME, utf);
+                setSettingStringUtf(NULL, DBSETTING_XSTATUSNAME, utf);
                 mir_free(utf);
             }
             else
-                ICQWriteContactSettingString(NULL, DBSETTING_XSTATUSNAME, pData->pszName);
+                setSettingString(NULL, DBSETTING_XSTATUSNAME, pData->pszName);
         }
         if (pData->flags & CSSF_MASK_MESSAGE)
         {
@@ -1154,11 +1154,11 @@ INT_PTR IcqSetXStatusEx(WPARAM wParam, LPARAM lParam)
             {
                 char* utf = mir_utf8encodeW(pData->pwszMessage);
 
-                ICQWriteContactSettingUtf(NULL, DBSETTING_XSTATUSMSG, utf);
+                setSettingStringUtf(NULL, DBSETTING_XSTATUSMSG, utf);
                 mir_free(utf);
             }
             else
-                ICQWriteContactSettingString(NULL, DBSETTING_XSTATUSMSG, pData->pszMessage);
+                setSettingString(NULL, DBSETTING_XSTATUSMSG, pData->pszMessage);
         }
     }
 
@@ -1222,7 +1222,7 @@ INT_PTR IcqGetXStatusEx(WPARAM wParam, LPARAM lParam)
         {
             if (pData->flags & CSSF_UNICODE)
             {
-                char* str = ICQGetContactSettingUtf(hContact, DBSETTING_XSTATUSNAME, "");
+                char* str = getSettingStringUtf(hContact, DBSETTING_XSTATUSNAME, "");
                 wchar_t* wstr = mir_utf8decodeW(str);
 
                 wcscpy(pData->pwszName, wstr);
@@ -1233,7 +1233,7 @@ INT_PTR IcqGetXStatusEx(WPARAM wParam, LPARAM lParam)
             {
                 DBVARIANT dbv = {0};
 
-                if (!ICQGetContactSettingString(hContact, DBSETTING_XSTATUSNAME, &dbv) && dbv.pszVal)
+                if (!getSettingString(hContact, DBSETTING_XSTATUSNAME, &dbv) && dbv.pszVal)
                     strcpy(pData->pszName, dbv.pszVal);
                 else
                     strcpy(pData->pszName, "");
@@ -1248,7 +1248,7 @@ INT_PTR IcqGetXStatusEx(WPARAM wParam, LPARAM lParam)
         // fill status message member
         if (pData->flags & CSSF_UNICODE)
         {
-            char* str = ICQGetContactSettingUtf(hContact, DBSETTING_XSTATUSMSG, "");
+            char* str = getSettingStringUtf(hContact, DBSETTING_XSTATUSMSG, "");
             wchar_t* wstr = mir_utf8decodeW(str);
 
             wcscpy(pData->pwszMessage, wstr);
@@ -1259,7 +1259,7 @@ INT_PTR IcqGetXStatusEx(WPARAM wParam, LPARAM lParam)
         {
             DBVARIANT dbv = {0};
 
-            if (!ICQGetContactSettingString(hContact, DBSETTING_XSTATUSMSG, &dbv) && dbv.pszVal)
+            if (!getSettingString(hContact, DBSETTING_XSTATUSMSG, &dbv) && dbv.pszVal)
                 strcpy(pData->pszMessage, dbv.pszVal);
             else
                 strcpy(pData->pszMessage, "");
@@ -1289,7 +1289,7 @@ INT_PTR IcqGetXStatusEx(WPARAM wParam, LPARAM lParam)
 
         if (pData->wParam)
         {
-            if (!ICQGetContactSettingString(hContact, DBSETTING_XSTATUSNAME, &dbv))
+            if (!getSettingString(hContact, DBSETTING_XSTATUSNAME, &dbv))
             {
                 *pData->wParam = strlennull(dbv.pszVal);
                 ICQFreeVariant(&dbv);
@@ -1299,7 +1299,7 @@ INT_PTR IcqGetXStatusEx(WPARAM wParam, LPARAM lParam)
         }
         if (pData->lParam)
         {
-            if (!ICQGetContactSettingString(hContact, DBSETTING_XSTATUSMSG, &dbv))
+            if (!getSettingString(hContact, DBSETTING_XSTATUSMSG, &dbv))
             {
                 *pData->lParam = strlennull(dbv.pszVal);
                 ICQFreeVariant(&dbv);
@@ -1339,7 +1339,7 @@ INT_PTR IcqRequestXStatusDetails(WPARAM wParam, LPARAM lParam)
 
     if (!gbXStatusEnabled)
         return 0;
-    if (hContact && !ICQGetContactSettingByte(NULL, "XStatusAuto", DEFAULT_XSTATUS_AUTO) &&
+    if (hContact && !getSettingByte(NULL, "XStatusAuto", DEFAULT_XSTATUS_AUTO) &&
             ICQGetContactXStatus(hContact))
     {
         // user has xstatus, no auto-retrieve details, valid contact, request details

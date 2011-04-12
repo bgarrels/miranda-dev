@@ -77,7 +77,7 @@ static INT_PTR CALLBACK DlgProcCapsList( HWND hwndDlg, UINT message, WPARAM wPar
 //        DBVARIANT dbv = { 0 };
 //        strcpy( dbv.pszVal, "" );
             mir_snprintf( buf2, 64, "cap%luname", i );
-            UniGetContactSettingUtf(NULL, DBModule, buf2, 0);
+            getSettingStringUtf(NULL, DBModule, buf2, 0);
 //        DBGetContactSettingString( NULL, DBModule, buf2, &dbv );
             if ( buf2 ) break;
             else

@@ -38,6 +38,10 @@
 #ifndef __ICQOSC_SVCS_H
 #define __ICQOSC_SVCS_H
 
+#define ICQ_DB_GETEVENTTEXT_MISSEDMESSAGE "ICQ/GetEventTextMissedMessage"
+
+INT_PTR icq_getEventTextMissedMessage(WPARAM wParam, LPARAM lParam);
+
 /*---------* Functions *---------------*/
 
 INT_PTR IcqGetCaps(WPARAM wParam, LPARAM lParam);
@@ -45,7 +49,7 @@ INT_PTR IcqGetName(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqLoadIcon(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqSetStatus(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqGetStatus(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqSetAwayMsg(WPARAM wParam, LPARAM lParam);
+//INT_PTR IcqSetAwayMsg(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqGetAwayMsg(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqRecvAwayMsg(WPARAM wParam,LPARAM lParam);
 INT_PTR IcqAuthAllow(WPARAM wParam, LPARAM lParam);

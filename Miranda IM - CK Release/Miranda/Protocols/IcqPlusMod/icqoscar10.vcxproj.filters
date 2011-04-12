@@ -196,7 +196,7 @@
     <ClCompile Include="utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IcqProto.cpp" />
+    <ClCompile Include="IcqCore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\askauthentication.h">
@@ -337,7 +337,7 @@
     <ClInclude Include="UI\userinfotab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IcqProto.h" />
+    <ClInclude Include="IcqCore.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\icq-readme.txt" />

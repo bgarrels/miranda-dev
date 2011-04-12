@@ -44,12 +44,12 @@ static INT_PTR CALLBACK DlgProcIcqPopupOpts(HWND hwndDlg, UINT msg, WPARAM wPara
 
 static void LoadDBCheckState(HWND hwndDlg, int idCtrl, const char* szSetting, BYTE bDef)
 {
-    CheckDlgButton(hwndDlg, idCtrl, ICQGetContactSettingByte(NULL, szSetting, bDef));
+    CheckDlgButton(hwndDlg, idCtrl, getSettingByte(NULL, szSetting, bDef));
 }
 
 static void StoreDBCheckState(HWND hwndDlg, int idCtrl, const char* szSetting)
 {
-    ICQWriteContactSettingByte(NULL, szSetting, (BYTE)IsDlgButtonChecked(hwndDlg, idCtrl));
+    setSettingByte(NULL, szSetting, (BYTE)IsDlgButtonChecked(hwndDlg, idCtrl));
 }
 
 
@@ -206,13 +206,13 @@ int ShowPopUpMsg(HANDLE hContact, DWORD dwUin, const char* szTitle, const char* 
         default:
             return -1;
         }
-        if (!ICQGetContactSettingByte(NULL, "PopupsSysIcons", 1))
+        if (!getSettingByte(NULL, "PopupsSysIcons", 1))
         {
             hIcons = hInst;
             rsIcon = MAKEINTRESOURCE(IDI_ICQ);
         }
         ppd.lchIcon = (HICON)LoadImage(hIcons, rsIcon, IMAGE_ICON, GetSystemMetrics(SM_CXSMICON), GetSystemMetrics(SM_CYSMICON), LR_SHARED);
-        if (ICQGetContactSettingByte(NULL, "PopupsWinColors", 0))
+        if (getSettingByte(NULL, "PopupsWinColors", 0))
         {
             ppd.colorText = GetSysColor(COLOR_WINDOWTEXT);
             ppd.colorBack = GetSysColor(COLOR_WINDOW);
@@ -221,14 +221,14 @@ int ShowPopUpMsg(HANDLE hContact, DWORD dwUin, const char* szTitle, const char* 
         {
             strcpy(szSetting, szPrefix);
             strcat(szSetting, "TextColor");
-            ppd.colorText = ICQGetContactSettingDword(NULL, szSetting, ppd.colorText);
+            ppd.colorText = getSettingDword(NULL, szSetting, ppd.colorText);
             strcpy(szSetting, szPrefix);
             strcat(szSetting, "BackColor");
-            ppd.colorBack = ICQGetContactSettingDword(NULL, szSetting, ppd.colorBack);
+            ppd.colorBack = getSettingDword(NULL, szSetting, ppd.colorBack);
         }
         strcpy(szSetting, szPrefix);
         strcat(szSetting, "Timeout");
-        ppd.iSeconds = ICQGetContactSettingDword(NULL, szSetting, ppd.iSeconds);
+        ppd.iSeconds = getSettingDword(NULL, szSetting, ppd.iSeconds);
 
         //by chaos.persei @ 9.12.2006 15:25
         //bug - unhiding popups - fix
