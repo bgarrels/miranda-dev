@@ -91,6 +91,7 @@
       <OutputFile>F:\miranda09_src\miranda\bin\debug\Plugins\imoproxy.dll</OutputFile>
       <ImportLibrary>.\Debug\imoproxy.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">

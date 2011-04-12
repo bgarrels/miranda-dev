@@ -218,7 +218,7 @@
       <OutputFile>$(OutDir)$(ProjectName)W.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <GenerateMapFile>true</GenerateMapFile>
+      <GenerateMapFile>false</GenerateMapFile>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
       <BaseAddress>0x25a20000</BaseAddress>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>

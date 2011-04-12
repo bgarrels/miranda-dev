@@ -194,9 +194,9 @@
       <OutputFile>$(Configuration)\quickmessages.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\release/quickmessages.pdb</ProgramDatabaseFile>
-      <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>.\debug/quickmessages.map</MapFileName>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>false</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
       <BaseAddress>0x67100000</BaseAddress>
       <ImportLibrary>.\release/quickmessages.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
