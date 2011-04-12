@@ -117,6 +117,7 @@
       <CompileAsManaged>false</CompileAsManaged>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>

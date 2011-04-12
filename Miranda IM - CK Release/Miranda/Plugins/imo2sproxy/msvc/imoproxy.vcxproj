@@ -106,11 +106,11 @@
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
       <AdditionalIncludeDirectories>..\src\common;..\src\imolib;..\src\imo2skype;../../include;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;imoproxy_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
       <PrecompiledHeaderOutputFile>.\Release\imoproxy.pch</PrecompiledHeaderOutputFile>
-      <ObjectFileName>.\Release\</ObjectFileName>
-      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
     </ClCompile>

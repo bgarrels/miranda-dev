@@ -156,9 +156,9 @@
       <FloatingPointModel>Precise</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeaderOutputFile>.\Unicode_Release/spellchecker.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Unicode_Release/</AssemblerListingLocation>
-      <ObjectFileName>.\Unicode_Release/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Unicode_Release/</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>

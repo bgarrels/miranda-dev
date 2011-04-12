@@ -458,8 +458,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <FloatingPointModel>Precise</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <AssemblerListingLocation>
-      </AssemblerListingLocation>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>

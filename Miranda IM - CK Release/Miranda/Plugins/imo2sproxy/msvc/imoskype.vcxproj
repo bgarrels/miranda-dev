@@ -109,11 +109,11 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>../src/common;../src/imo2skype;../src/imolib;../../include;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
       <PrecompiledHeaderOutputFile>.\Release\imoskype.pch</PrecompiledHeaderOutputFile>
-      <ObjectFileName>.\Release\</ObjectFileName>
-      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
     </ClCompile>

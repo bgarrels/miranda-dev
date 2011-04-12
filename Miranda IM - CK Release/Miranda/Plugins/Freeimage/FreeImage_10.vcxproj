@@ -162,8 +162,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeaderOutputFile>
       </PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>
-      </AssemblerListingLocation>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BrowseInformation>
       </BrowseInformation>
       <WarningLevel>Level3</WarningLevel>

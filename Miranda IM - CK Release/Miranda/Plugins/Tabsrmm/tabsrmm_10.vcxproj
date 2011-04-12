@@ -201,8 +201,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>commonheaders.h</PrecompiledHeaderFile>
-      <AssemblerListingLocation>
-      </AssemblerListingLocation>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BrowseInformation>
       </BrowseInformation>
       <WarningLevel>Level3</WarningLevel>
