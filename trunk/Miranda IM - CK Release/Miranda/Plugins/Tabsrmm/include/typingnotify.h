@@ -15,7 +15,7 @@
 #define SET_WO               "NotWhenFocused"
 #define DEF_WO               0
 #define SET_DISABLED         "Disabled"
-#define DEF_DISABLED         4
+#define DEF_DISABLED         0
 #define SET_TIMEOUT          "Timeout"
 #define DEF_TIMEOUT          7
 #define SET_TIMEOUT2         "Timeout2"
@@ -25,13 +25,13 @@
 #define SET_TIMEOUT_MODE2    "TimeoutMode2"
 #define DEF_TIMEOUT_MODE2    TIMEOUT_POPUP
 #define SET_COLOR_MODE       "ColorMode"
-#define DEF_COLOR_MODE       COLOR_POPUP
+#define DEF_COLOR_MODE       COLOR_OWN
 #define SET_ICON_SETID       "IconSet"
 #define DEF_ICON_SETID       0
 #define SET_SHOWDISABLEMENU  "ShowDisableMenu"
 #define DEF_SHOWDISABLEMENU  1
 #define SET_ONEPOPUP         "OnePopUp"
-#define DEF_ONEPOPUP         0
+#define DEF_ONEPOPUP         1
 
 
 static HANDLE hDisableMenu = NULL;

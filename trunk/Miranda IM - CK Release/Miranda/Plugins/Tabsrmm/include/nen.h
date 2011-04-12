@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: nen.h 12080 2010-06-28 11:06:19Z Michael.Kunz@s2005.TU-Chemnitz.de $
+ * $Id: nen.h 13589 2011-04-12 14:51:27Z george.hazan $
  *
  * This implements the event notification module for tabSRMM. The code
  * is largely based on the NewEventNotify plugin for Miranda IM. See
@@ -55,8 +55,8 @@ int tabSRMM_ShowPopup(WPARAM wParam, LPARAM lParam, WORD eventType, int windowOp
 #define DEFAULT_COLTEXT RGB(0,0,0)
 #define DEFAULT_MASKNOTIFY (MASK_MESSAGE|MASK_URL|MASK_FILE|MASK_OTHER)
 #define DEFAULT_MASKACTL (MASK_OPEN|MASK_DISMISS)
-#define DEFAULT_MASKACTR (MASK_DISMISS|MASK_REMOVE)
-#define DEFAULT_DELAY 0
+#define DEFAULT_MASKACTR (MASK_DISMISS)
+#define DEFAULT_DELAY -1
 
 #define MASK_MESSAGE    0x0001
 #define MASK_URL        0x0002
@@ -99,16 +99,16 @@ int tabSRMM_ShowPopup(WPARAM wParam, LPARAM lParam, WORD eventType, int windowOp
 #define OPT_REMOVEMASK "removemask"
 
 struct NEN_OPTIONS {
-    BOOL bPreview;
-    BOOL bDefaultColorMsg;
+	BOOL bPreview;
+	BOOL bDefaultColorMsg;
 	BOOL bDefaultColorOthers;
 	BOOL bDisableNonMessage;
-    COLORREF colBackMsg;
-    COLORREF colTextMsg;
+	COLORREF colBackMsg;
+	COLORREF colTextMsg;
 	COLORREF colBackOthers;
-    COLORREF colTextOthers;
-    UINT maskActL;
-    UINT maskActR;
+	COLORREF colTextOthers;
+	UINT maskActL;
+	UINT maskActR;
 	UINT maskActTE;
 	int iDelayMsg;
 	int iDelayOthers;
@@ -116,38 +116,39 @@ struct NEN_OPTIONS {
 	BOOL bMergePopup;
 	BOOL bShowHeaders;
 	BOOL bNoRSS;
-    int  iDisable;
+	int  iDisable;
 	int	 iMUCDisable;
-    int  dwStatusMask;
-    BOOL bTraySupport;
-    BOOL bTrayExist;
-    BOOL iNoSounds;
-    BOOL iNoAutoPopup;
-    BOOL bWindowCheck;
-    int  iLimitPreview;
-    WORD wMaxRecent;
-    WORD wMaxFavorites;
-    DWORD dwRemoveMask;
+	int  dwStatusMask;
+	BOOL bTraySupport;
+	BOOL bTrayExist;
+	BOOL iNoSounds;
+	BOOL iNoAutoPopup;
+	BOOL bWindowCheck;
+	int  iLimitPreview;
+	WORD wMaxRecent;
+	WORD wMaxFavorites;
+	DWORD dwRemoveMask;
 };
 
 typedef struct {
 	HANDLE hEvent;
-    TCHAR szText[MAX_SECONDLINE + 2];
-    DWORD timestamp;
+	TCHAR szText[MAX_SECONDLINE + 2];
+	DWORD timestamp;
 } EVENT_DATAT;
 
 typedef struct {
-    UINT 		eventType;
-    HANDLE 		hContact;
-    NEN_OPTIONS *pluginOptions;
+	UINT 		eventType;
+	HANDLE 		hContact;
+	NEN_OPTIONS *pluginOptions;
 	POPUPDATAT_V2* pud;
 	HWND 		hWnd;
 	long 		iSeconds;
-    TCHAR 		szHeader[256];
-    int  		nrMerged;
-    EVENT_DATAT *eventData;
-    int  		nrEventsAlloced;
-    int  		iActionTaken;
+	TCHAR 		szHeader[256];
+	int  		nrMerged;
+	EVENT_DATAT *eventData;
+	int  		nrEventsAlloced;
+	int  		iActionTaken;
+	HWND     hContainer;
 } PLUGIN_DATAT;
 
 #define NR_MERGED 5
