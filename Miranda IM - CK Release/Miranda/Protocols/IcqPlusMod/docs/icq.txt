@@ -1,0 +1,178 @@
+icq 0.3.8.105
+
+TODO:
+
+1. keep this log .... )))
+2. fix errors, code optimisations e.t.c......
+3. invisible status optimisations (i mean dont ask status message's and other information for contacts witch you invisible for) (in progress(testing))
+4. add more events to history
+5. add basic rtf\xml parsing feature //i think it need to be in core, or srmm module, but no one do not want to do it %)
+6. create gui for convenient viewing icq network log, option for write events to file
+7. create gui for managing visible/invisible/ignore lists 
+8. add muc rooms support
+9. add more privacy statusses
+10. add invisible users detection
+11. fix last item in privacy menu: "Allow only users in the Contact list to see you, except Invisible list users"
+12. add new statuses support //currently only one client support it, not needed now....
+
+>>> ??.04.2007
+fixed crash on calulating md5checksumm for big files //patch by Nullbie
+added option for show xstatus icon in clist
+added miranda invivsible detection (like isee from Bio), need optimization //path by [sin]
+other small fixes, optimizations
+merged with latest svn
+added assocmgr support (in progress)
+added unicode version send\detect
+used new core api for creating UI
+changed first run dialog
+added icqj sin mod detection
+enhanced icolib support
+added new MIP client detection
+function for automaticaly reconnect to best servers if have errors..
+>>> 20.03.2007
+merged with latest icqj svn
+added muuid, used new pugininfoex core function, require core 0.7.0.19 or higher
+invisible status optimisations (i mean dont ask status message's and other information for contacts witch you invisible for)
+added popup events when someone checking your real status //thx Bio
+fixed own userinfo tab (in progres) //thx Baloo
+added some new clients detection
+some code fixes\optimizations
+added more popup's options
+
+
+>>> 22.02.2007
+merged with latest svn
+some new options //persei
+>>> 16.02.2007
+fixed DC status icon //persei
+merged with latest svn
+
+>>> 12.02.2007
+fixed AIM detection, added some AIM versions //report by [sin]
+added some capability flag descriptions //hints by Joe
+fixed wrong userinfo packet at login siquence
+added new uin registration feature //many thx. Persei, Bio, Joe
+
+>>> 31.01.07
+modified clients detection
+
+>>> 30.01.07
+merged with icqj sources
+some changes in optins dialog
+fixed crash on exit
+some optimization for sending capabilities
+some optimization for miranda id detection //need to better realization
+
+>>> 28.01.07
+merged with icqj sources
+fixed bug in x-status slot changing
+
+>>> 27.01.07
+merged with icqj sources //thx Joe
+added some cpabilities description //thx Joe
+added change custom status and DC icon slot's option (on features tab)
+added some fake id's
+fixed miranda version detection on non miranda id //thx me :D
+version up to 0.3.8.9
+core 0.7.0.12 or higher needed, or you can use core from my site, who do not want to use nightly builds, use old version....
+
+>>> 26.01.07
+merged with icqj sources
+core 0.7.0.12 or higher needed, or you can use core from my site, who do not want to use nightly builds, use old version....
+
+>>> ??.01.07
+fixed member since detection //thx Jazzy$
+
+>>> 18.01.07
+fixed another bug in client's detection
+
+>>> 17.01.07
+added Miranda IM and ICQ version detection for not Miranda IM id, need to optimization //thx Bio
+added icon on Direct Connection //by Persei
+small fixes\optimizations
+
+>>> 12.01.07
+renamed again.... %)
+
+>>> 11.01.07
+nothing
+
+>>> 09.01.07
+added own caps dispaying... (not completed....)
+
+>>> 09.01.07
+more modifications to userinfo dialog
+modifications to capabilities processing
+some changes to services (look at m_icq.h)
+you can use ctrl+c in "ICQ client info" tab to copy one or more capabilities to buffer (HEX + string)
+now you can send custom capabilities, just create group ICQCaps and put strings in... (use DBE), you can add postfix to your client ID by adding "MIM/MyCoolPack" capabiliti to custom cap list, this add string "MyCoolPack" to end of you client id
+thx Nullbie !
+
+>>> 08.01.07
+some code optimization
+fixed small bugs
+rewriten capabilities.....
+modifed userinfo dialog
+created service witch allow to send\check cutom capabilities to other plugins (look at m_icq.h)
+many help by Nullbie
+
+>>> 31.12.2006
+fixed bug in sending capabilities....
+
+>>> 30.12.2006
+merged with icqj sources
+some changes in clients detection
+
+>>> 26.12.2006
+(again) fixed my own stupid bug  (now in clients detection)
+
+>>> 25.12.2006
+maybe random crash fixed....
+aded ICQ 6 id
+
+>>> 20.12.2006
+merged with icqj sources
+
+>>> 03.12.2006
+changed headers for more compatibility with clist_modern
+
+>>> 03.12.2006
+merged with icqj sources
+
+>>> 01.12.2006
+merged with icqj sources
+(sorry to all, i have no time to moding now...)
+
+>>> 30.11.2006
+merged with icqj sources
+
+>>> 28.11.2006
+merged with icqj sources
+
+>>> 26.11.2006
+finished updater configuration and testing.
+
+>>> 25.11.2006
+fixed Miranda IM as Unknown detection (if set send real ID)
+
+>>> 21.11.2006
+merged with icqj sources
+
+>>> 19.11.2006
+finaly fixed bug in privacy menu after source merging   (thanks for testing and bug report to Inko)
+changes in db settings for version change (maybe bug fix)
+
+>>> 15.11.2006
+fixed bug in privacy menu after source merging
+
+>>> 13.11.2006
+merged with icqj sources, changed version to 0.3.8.6
+
+>>> 12.11.2006
+fixed crash in Miranda666 id (my own stupid bug ))) )
+merged with official icqj sources
+
+>>> 10.11.2006
+created this file :)
+fixed crash in some client's id
+some code cleaning
