@@ -105,6 +105,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalManifestDependencies>
       </AdditionalManifestDependencies>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
     <PostBuildEvent>
       <Command>
