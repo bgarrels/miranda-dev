@@ -176,6 +176,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <ManifestFile>
       </ManifestFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">

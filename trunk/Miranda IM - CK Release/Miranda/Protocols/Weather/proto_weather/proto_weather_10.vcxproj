@@ -108,8 +108,7 @@
     </ProjectReference>
     <Link>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
-      <ProgramDatabaseFile>
-      </ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
       <NoEntryPoint>true</NoEntryPoint>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>

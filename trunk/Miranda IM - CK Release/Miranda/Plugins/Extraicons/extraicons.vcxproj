@@ -111,6 +111,7 @@
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
       <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
     <Bscmake />
   </ItemDefinitionGroup>

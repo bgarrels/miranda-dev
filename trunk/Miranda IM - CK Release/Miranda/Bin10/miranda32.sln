@@ -1895,7 +1895,8 @@ Global
 		{395CCE23-22B6-492C-8535-61C49A23D8E8}.Debug Unicode Static|x64.ActiveCfg = Debug Unicode|Win32
 		{395CCE23-22B6-492C-8535-61C49A23D8E8}.Debug Unicode|Win32.ActiveCfg = Debug Unicode|Win32
 		{395CCE23-22B6-492C-8535-61C49A23D8E8}.Debug Unicode|Win32.Build.0 = Debug Unicode|Win32
-		{395CCE23-22B6-492C-8535-61C49A23D8E8}.Debug Unicode|x64.ActiveCfg = Debug Unicode|Win32
+		{395CCE23-22B6-492C-8535-61C49A23D8E8}.Debug Unicode|x64.ActiveCfg = Debug Unicode|x64
+		{395CCE23-22B6-492C-8535-61C49A23D8E8}.Debug Unicode|x64.Build.0 = Debug Unicode|x64
 		{395CCE23-22B6-492C-8535-61C49A23D8E8}.Debug|Win32.ActiveCfg = Release Unicode|Win32
 		{395CCE23-22B6-492C-8535-61C49A23D8E8}.Debug|Win32.Build.0 = Release Unicode|Win32
 		{395CCE23-22B6-492C-8535-61C49A23D8E8}.Debug|x64.ActiveCfg = Debug Unicode|Win32

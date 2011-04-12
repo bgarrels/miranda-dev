@@ -126,8 +126,7 @@
     <Link>
       <AdditionalDependencies>comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <MapFileName>
-      </MapFileName>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
       <BaseAddress>0x22000000</BaseAddress>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
