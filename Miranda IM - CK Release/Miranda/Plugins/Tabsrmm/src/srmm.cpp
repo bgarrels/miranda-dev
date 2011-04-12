@@ -55,20 +55,20 @@ TIME_API tmi = {0};
 PLUGININFOEX pluginInfo = {
 	sizeof(PLUGININFOEX),
 #ifdef __GNUWIN32__
-	"TabSRMM (MINGW32) CK Release",
+	"TabSRMM (MINGW32) Mataes Release",
 #else
 #ifdef _WIN64
-	"TabSRMM (x64, Unicode) CK Release",
+	"TabSRMM (x64, Unicode) Mataes Release",
 #else
 #ifdef _UNICODE
-	"TabSRMM (Unicode) CK Release",
+	"TabSRMM (Unicode) Mataes Release",
 #else
-	"TabSRMM CK Release",
+	"TabSRMM Mataes Release",
 #endif
 #endif
 #endif
 	PLUGIN_MAKE_VERSION(_VER_MAJOR, _VER_MINOR, _VER_REVISION, _VER_BUILD),
-	"IM and group chat module for Miranda IM. Mod for CKs Pack.",
+	"IM and group chat module for Miranda IM. Mod for Mataes Pack.",
 	"The Miranda developers team and contributors",
 	"silvercircle _at_ gmail _dot_ com",
 	"2000-2010 Miranda Project and contributors. See readme.txt for more.",
