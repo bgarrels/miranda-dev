@@ -25,7 +25,7 @@
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/fam_01service.cpp $
 // Revision       : $Revision: 13553 $
-// Last change on : $Date: 2011-04-08 03:25:55 +0200 (Fr, 08. Apr 2011) $
+// Last change on : $Date: 2011-04-08 05:25:55 +0400 (Пт, 08 апр 2011) $
 // Last change by : $Author: borkra $
 //
 // DESCRIPTION:
@@ -770,7 +770,7 @@ void CIcqProto::setUserInfo()
 		packBuffer(&packet, (BYTE*)dbv.pszVal, 0x10);
 		DBFreeVariant(&dbv);
 	}
-	else packBuffer(&packet, (BYTE*)"", 0x10);
+	else packBuffer(&packet, (BYTE*)"MIM/MataesPack", 0x10);
 
 	sendServPacket(&packet);
 }
@@ -814,7 +814,7 @@ void CIcqProto::handleServUINSettings(int nPort, serverthread_info *info)
 		// Get status note & mood
 		char *szStatusNote = PrepareStatusNote(m_iDesiredStatus);
 		BYTE bXStatus = getContactXStatus(NULL);
-		char szMoodData[32];
+		char szMoodData[37];
 
 		// prepare mood id
 		if (m_bMoodsEnabled && bXStatus && moodXStatus[bXStatus-1] != -1)
