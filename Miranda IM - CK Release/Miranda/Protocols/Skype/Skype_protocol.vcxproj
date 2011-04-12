@@ -172,6 +172,8 @@
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
       <TreatLinkerWarningAsErrors>
       </TreatLinkerWarningAsErrors>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>false</SuppressStartupBanner>
