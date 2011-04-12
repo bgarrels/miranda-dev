@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: containeroptions.cpp 13034 2010-10-24 20:39:04Z silvercircle $
+ * $Id: containeroptions.cpp 13587 2011-04-12 13:54:26Z george.hazan $
  *
  * The dialog to customize per container options
  *

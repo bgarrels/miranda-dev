@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
-Last change on : $Date: 2011-03-17 20:12:56 +0100 (Do, 17. Mrz 2011) $
+Revision       : $Revision: 13588 $
+Last change on : $Date: 2011-04-12 16:40:04 +0200 (Di, 12. Apr 2011) $
 Last change by : $Author: george.hazan $
 
 */
@@ -597,6 +597,9 @@ extern BOOL (WINAPI *JabberIsThemeActive)();
 extern HRESULT (WINAPI *JabberDrawThemeParentBackground)(HWND, HDC, RECT *);
 
 extern const TCHAR xmlnsOwner[];
+
+extern int g_cbCountries;
+extern struct CountryListEntry* g_countries;
 
 /*******************************************************************
  * Function declarations

@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: eventpopups.cpp 13447 2011-03-14 19:55:07Z george.hazan $
+ * $Id: eventpopups.cpp 13587 2011-04-12 13:54:26Z george.hazan $
  *
  * This implements the event notification module for tabSRMM. The code
  * is largely based on the NewEventNotify plugin for Miranda IM. See
@@ -934,13 +934,11 @@ int tabSRMM_ShowPopup(WPARAM wParam, LPARAM lParam, WORD eventType, int windowOp
 		if (pContainer->dwFlags & CNT_ALWAYSREPORTINACTIVE) {
 			if (pContainer->dwFlags & CNT_DONTREPORTFOCUSED)
 				goto passed;
+
+			if (pContainer->hwndActive == hwndChild)
+				return 0;
 			else
-			{
-				if (pContainer->hwndActive == hwndChild)
-					return 0;
-				else
-					goto passed;
-			}
+				goto passed;
 		}
 		return 0;
 	}

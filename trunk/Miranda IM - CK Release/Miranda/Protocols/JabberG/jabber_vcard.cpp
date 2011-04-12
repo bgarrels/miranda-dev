@@ -18,9 +18,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13518 $
-Last change on : $Date: 2011-03-28 19:54:19 +0400 (Пн, 28 мар 2011) $
-Last change by : $Author: maxim.mluhov $
+Revision       : $Revision: 13588 $
+Last change on : $Date: 2011-04-12 16:40:04 +0200 (Di, 12. Apr 2011) $
+Last change by : $Author: george.hazan $
 
 */
 
@@ -68,17 +68,18 @@ static INT_PTR CALLBACK PersonalDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, 
 
 	switch ( msg ) {
 	case WM_INITDIALOG:
-		if (!lParam) break; // Launched from userinfo
-		ppro = ( CJabberProto* )lParam;
-		TranslateDialogDefault( hwndDlg );
-		SendMessage( GetDlgItem( hwndDlg, IDC_GENDER ), CB_ADDSTRING, 0, ( LPARAM )TranslateT( "Male" ));
-		SendMessage( GetDlgItem( hwndDlg, IDC_GENDER ), CB_ADDSTRING, 0, ( LPARAM )TranslateT( "Female" ));
-		SetWindowLongPtr( hwndDlg, GWLP_USERDATA, lParam );
-		SendMessage( hwndDlg, WM_JABBER_REFRESH_VCARD, 0, 0 );
-		ppro->WindowSubscribe(hwndDlg);
+		if ( lParam ) {
+			ppro = ( CJabberProto* )lParam;
+			TranslateDialogDefault( hwndDlg );
+			SendMessage( GetDlgItem( hwndDlg, IDC_GENDER ), CB_ADDSTRING, 0, ( LPARAM )TranslateT( "Male" ));
+			SendMessage( GetDlgItem( hwndDlg, IDC_GENDER ), CB_ADDSTRING, 0, ( LPARAM )TranslateT( "Female" ));
+			SetWindowLongPtr( hwndDlg, GWLP_USERDATA, lParam );
+			SendMessage( hwndDlg, WM_JABBER_REFRESH_VCARD, 0, 0 );
+			ppro->WindowSubscribe(hwndDlg);
+		}
 		break;
+
 	case WM_JABBER_REFRESH_VCARD:
-	{
 		SetDialogField( ppro, hwndDlg, IDC_FULLNAME, "FullName" );
 		SetDialogField( ppro, hwndDlg, IDC_NICKNAME, "Nick" );
 		SetDialogField( ppro, hwndDlg, IDC_FIRSTNAME, "FirstName" );
@@ -89,7 +90,7 @@ static INT_PTR CALLBACK PersonalDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, 
 		SetDialogField( ppro, hwndDlg, IDC_OCCUPATION, "Role" );
 		SetDialogField( ppro, hwndDlg, IDC_HOMEPAGE, "Homepage" );
 		break;
-	}
+
 	case WM_COMMAND:
 		if (( ( HWND )lParam==GetFocus() && HIWORD( wParam )==EN_CHANGE ) ||
 			(( HWND )lParam==GetDlgItem( hwndDlg, IDC_GENDER ) && ( HIWORD( wParam )==CBN_EDITCHANGE||HIWORD( wParam )==CBN_SELCHANGE )) )
@@ -98,6 +99,7 @@ static INT_PTR CALLBACK PersonalDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, 
 			SendMessage( GetParent( hwndDlg ), PSM_CHANGED, 0, 0 );
 		}
 		break;
+
 	case WM_NOTIFY:
 		if (((LPNMHDR)lParam)->idFrom == 0) {
 			switch (((LPNMHDR)lParam)->code) {
@@ -112,6 +114,7 @@ static INT_PTR CALLBACK PersonalDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, 
 				break;
 		}	}
 		break;
+
 	case WM_DESTROY:
 		ppro->WindowUnsubscribe(hwndDlg);
 		break;
@@ -126,26 +129,23 @@ static INT_PTR CALLBACK HomeDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 
 	switch ( msg ) {
 	case WM_INITDIALOG:
-		if (!lParam) break; // Launched from userinfo
-		ppro = ( CJabberProto* )lParam;
-		TranslateDialogDefault( hwndDlg );
-		int ctryCount;
-		struct CountryListEntry *countries;
-		CallService( MS_UTILS_GETCOUNTRYLIST, ( WPARAM )&ctryCount, ( LPARAM )&countries );
-		for (int i = 0; i < ctryCount; i++)	{
-			if (countries[i].id != 0xFFFF && countries[i].id != 0)
-			{
-				TCHAR *country = mir_a2t(countries[i].szName);
-				SendMessage( GetDlgItem( hwndDlg, IDC_COUNTRY ), CB_ADDSTRING, 0, ( LPARAM )TranslateTS(country));
-				mir_free(country);
+		if ( lParam ) {
+			ppro = ( CJabberProto* )lParam;
+			TranslateDialogDefault( hwndDlg );
+			for (int i = 0; i < g_cbCountries; i++)	{
+				if ( g_countries[i].id != 0xFFFF && g_countries[i].id != 0) {
+					TCHAR *country = mir_a2t(g_countries[i].szName);
+					SendMessage( GetDlgItem( hwndDlg, IDC_COUNTRY ), CB_ADDSTRING, 0, ( LPARAM )TranslateTS(country));
+					mir_free(country);
+				}
 			}
+			SetWindowLongPtr( hwndDlg, GWLP_USERDATA, lParam );
+			SendMessage( hwndDlg, WM_JABBER_REFRESH_VCARD, 0, 0 );
+			ppro->WindowSubscribe(hwndDlg);
 		}
-		SetWindowLongPtr( hwndDlg, GWLP_USERDATA, lParam );
-		SendMessage( hwndDlg, WM_JABBER_REFRESH_VCARD, 0, 0 );
-		ppro->WindowSubscribe(hwndDlg);
 		break;
+
 	case WM_JABBER_REFRESH_VCARD:
-	{
 		SetDialogField( ppro, hwndDlg, IDC_ADDRESS1, "Street" );
 		SetDialogField( ppro, hwndDlg, IDC_ADDRESS2, "Street2" );
 		SetDialogField( ppro, hwndDlg, IDC_CITY, "City" );
@@ -153,7 +153,7 @@ static INT_PTR CALLBACK HomeDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 		SetDialogField( ppro, hwndDlg, IDC_ZIP, "ZIP" );
 		SetDialogField( ppro, hwndDlg, IDC_COUNTRY, "Country", true );
 		break;
-	}
+
 	case WM_COMMAND:
 		if ((( HWND )lParam==GetFocus() && HIWORD( wParam )==EN_CHANGE) ||
 			(( HWND )lParam==GetDlgItem( hwndDlg, IDC_COUNTRY ) && ( HIWORD( wParam )==CBN_EDITCHANGE||HIWORD( wParam )==CBN_SELCHANGE )) )
@@ -162,6 +162,7 @@ static INT_PTR CALLBACK HomeDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 			SendMessage( GetParent( hwndDlg ), PSM_CHANGED, 0, 0 );
 		}
 		break;
+
 	case WM_NOTIFY:
 		if (((LPNMHDR)lParam)->idFrom == 0) {
 			switch (((LPNMHDR)lParam)->code) {
@@ -176,6 +177,7 @@ static INT_PTR CALLBACK HomeDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 				break;
 		}	}
 		break;
+
 	case WM_DESTROY:
 		ppro->WindowUnsubscribe(hwndDlg);
 		break;
@@ -190,26 +192,23 @@ static INT_PTR CALLBACK WorkDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 
 	switch ( msg ) {
 	case WM_INITDIALOG:
-		if (!lParam) break; // Launched from userinfo
-		ppro = ( CJabberProto* )lParam;
-		TranslateDialogDefault( hwndDlg );
-		int ctryCount;
-		struct CountryListEntry *countries;
-		CallService( MS_UTILS_GETCOUNTRYLIST, ( WPARAM )&ctryCount, ( LPARAM )&countries );
-		for (int i = 0; i < ctryCount; i++)	{
-			if (countries[i].id != 0xFFFF && countries[i].id != 0)
-			{
-				TCHAR *country = mir_a2t(countries[i].szName);
-				SendMessage( GetDlgItem( hwndDlg, IDC_COUNTRY ), CB_ADDSTRING, 0, ( LPARAM )TranslateTS(country));
-				mir_free(country);
+		if ( lParam ) { // proto info is available
+			ppro = ( CJabberProto* )lParam;
+			TranslateDialogDefault( hwndDlg );
+			for (int i = 0; i < g_cbCountries; i++)	{
+				if ( g_countries[i].id != 0xFFFF && g_countries[i].id != 0 ) {
+					TCHAR *country = mir_a2t( g_countries[i].szName );
+					SendMessage( GetDlgItem( hwndDlg, IDC_COUNTRY ), CB_ADDSTRING, 0, ( LPARAM )TranslateTS(country));
+					mir_free(country);
+				}
 			}
+			SetWindowLongPtr( hwndDlg, GWLP_USERDATA, lParam );
+			SendMessage( hwndDlg, WM_JABBER_REFRESH_VCARD, 0, 0 );
+			ppro->WindowSubscribe(hwndDlg);
 		}
-		SetWindowLongPtr( hwndDlg, GWLP_USERDATA, lParam );
-		SendMessage( hwndDlg, WM_JABBER_REFRESH_VCARD, 0, 0 );
-		ppro->WindowSubscribe(hwndDlg);
 		break;
+
 	case WM_JABBER_REFRESH_VCARD:
-	{
 		SetDialogField( ppro, hwndDlg, IDC_COMPANY, "Company" );
 		SetDialogField( ppro, hwndDlg, IDC_DEPARTMENT, "CompanyDepartment" );
 		SetDialogField( ppro, hwndDlg, IDC_TITLE, "CompanyPosition" );
@@ -220,7 +219,7 @@ static INT_PTR CALLBACK WorkDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 		SetDialogField( ppro, hwndDlg, IDC_ZIP, "CompanyZIP" );
 		SetDialogField( ppro, hwndDlg, IDC_COUNTRY, "CompanyCountry", true );
 		break;
-	}
+
 	case WM_COMMAND:
 		if ((( HWND )lParam==GetFocus() && HIWORD( wParam )==EN_CHANGE) ||
 			(( HWND )lParam==GetDlgItem( hwndDlg, IDC_COUNTRY ) && ( HIWORD( wParam )==CBN_EDITCHANGE||HIWORD( wParam )==CBN_SELCHANGE )) )
@@ -229,6 +228,7 @@ static INT_PTR CALLBACK WorkDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 			SendMessage( GetParent( hwndDlg ), PSM_CHANGED, 0, 0 );
 		}
 		break;
+
 	case WM_NOTIFY:
 		if (((LPNMHDR)lParam)->idFrom == 0) {
 			switch (((LPNMHDR)lParam)->code) {
@@ -243,6 +243,7 @@ static INT_PTR CALLBACK WorkDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 				break;
 		}	}
 		break;
+
 	case WM_DESTROY:
 		ppro->WindowUnsubscribe(hwndDlg);
 		break;
@@ -969,63 +970,49 @@ void CJabberProto::SaveVcardToDB( HWND hwndPage, int iPage )
 
 	// Page 1: Home
 	case 1:
+		GetDlgItemText( hwndPage, IDC_ADDRESS1, text, SIZEOF( text ));
+		JSetStringT( NULL, "Street", text );
+		GetDlgItemText( hwndPage, IDC_ADDRESS2, text, SIZEOF( text ));
+		JSetStringT( NULL, "Street2", text );
+		GetDlgItemText( hwndPage, IDC_CITY, text, SIZEOF( text ));
+		JSetStringT( NULL, "City", text );
+		GetDlgItemText( hwndPage, IDC_STATE, text, SIZEOF( text ));
+		JSetStringT( NULL, "State", text );
+		GetDlgItemText( hwndPage, IDC_ZIP, text, SIZEOF( text ));
+		JSetStringT( NULL, "ZIP", text );
 		{
-			GetDlgItemText( hwndPage, IDC_ADDRESS1, text, SIZEOF( text ));
-			JSetStringT( NULL, "Street", text );
-			GetDlgItemText( hwndPage, IDC_ADDRESS2, text, SIZEOF( text ));
-			JSetStringT( NULL, "Street2", text );
-			GetDlgItemText( hwndPage, IDC_CITY, text, SIZEOF( text ));
-			JSetStringT( NULL, "City", text );
-			GetDlgItemText( hwndPage, IDC_STATE, text, SIZEOF( text ));
-			JSetStringT( NULL, "State", text );
-			GetDlgItemText( hwndPage, IDC_ZIP, text, SIZEOF( text ));
-			JSetStringT( NULL, "ZIP", text );
 			int i = SendMessage( GetDlgItem( hwndPage, IDC_COUNTRY ), CB_GETCURSEL, 0, 0 );
-			int ctryCount;
-			struct CountryListEntry *countries;
-			CallService( MS_UTILS_GETCOUNTRYLIST, ( WPARAM )&ctryCount, ( LPARAM )&countries );
-			TCHAR *country;
-			if (i)
-				country = mir_a2t(countries[i+2].szName);
-			else
-				country = mir_a2t(countries[i+1].szName);
+			TCHAR *country = mir_a2t((i) ? g_countries[i+2].szName : g_countries[1].szName);
 			JSetStringT( NULL, "Country", country );
 			mir_free(country);
-			break;
 		}
+		break;
 
 	// Page 2: Work
 	case 2:
+		GetDlgItemText( hwndPage, IDC_COMPANY, text, SIZEOF( text ));
+		JSetStringT( NULL, "Company", text );
+		GetDlgItemText( hwndPage, IDC_DEPARTMENT, text, SIZEOF( text ));
+		JSetStringT( NULL, "CompanyDepartment", text );
+		GetDlgItemText( hwndPage, IDC_TITLE, text, SIZEOF( text ));
+		JSetStringT( NULL, "CompanyPosition", text );
+		GetDlgItemText( hwndPage, IDC_ADDRESS1, text, SIZEOF( text ));
+		JSetStringT( NULL, "CompanyStreet", text );
+		GetDlgItemText( hwndPage, IDC_ADDRESS2, text, SIZEOF( text ));
+		JSetStringT( NULL, "CompanyStreet2", text );
+		GetDlgItemText( hwndPage, IDC_CITY, text, SIZEOF( text ));
+		JSetStringT( NULL, "CompanyCity", text );
+		GetDlgItemText( hwndPage, IDC_STATE, text, SIZEOF( text ));
+		JSetStringT( NULL, "CompanyState", text );
+		GetDlgItemText( hwndPage, IDC_ZIP, text, SIZEOF( text ));
+		JSetStringT( NULL, "CompanyZIP", text );
 		{
-			GetDlgItemText( hwndPage, IDC_COMPANY, text, SIZEOF( text ));
-			JSetStringT( NULL, "Company", text );
-			GetDlgItemText( hwndPage, IDC_DEPARTMENT, text, SIZEOF( text ));
-			JSetStringT( NULL, "CompanyDepartment", text );
-			GetDlgItemText( hwndPage, IDC_TITLE, text, SIZEOF( text ));
-			JSetStringT( NULL, "CompanyPosition", text );
-			GetDlgItemText( hwndPage, IDC_ADDRESS1, text, SIZEOF( text ));
-			JSetStringT( NULL, "CompanyStreet", text );
-			GetDlgItemText( hwndPage, IDC_ADDRESS2, text, SIZEOF( text ));
-			JSetStringT( NULL, "CompanyStreet2", text );
-			GetDlgItemText( hwndPage, IDC_CITY, text, SIZEOF( text ));
-			JSetStringT( NULL, "CompanyCity", text );
-			GetDlgItemText( hwndPage, IDC_STATE, text, SIZEOF( text ));
-			JSetStringT( NULL, "CompanyState", text );
-			GetDlgItemText( hwndPage, IDC_ZIP, text, SIZEOF( text ));
-			JSetStringT( NULL, "CompanyZIP", text );
 			int i = SendMessage( GetDlgItem( hwndPage, IDC_COUNTRY ), CB_GETCURSEL, 0, 0 );
-			int ctryCount;
-			struct CountryListEntry *countries;
-			CallService( MS_UTILS_GETCOUNTRYLIST, ( WPARAM )&ctryCount, ( LPARAM )&countries );
-			TCHAR *country;
-			if (i)
-				country = mir_a2t(countries[i+2].szName);
-			else
-				country = mir_a2t(countries[i+1].szName);
+			TCHAR *country = mir_a2t((i) ? g_countries[i+2].szName : g_countries[1].szName);
 			JSetStringT( NULL, "CompanyCountry", country );
 			mir_free(country);
-			break;
 		}
+		break;
 
 	// Page 3: Photo
 	// not needed to be saved into db

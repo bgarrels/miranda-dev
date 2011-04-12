@@ -1,5 +1,5 @@
 /* coding: UTF-8 */
-/* $Id: libgadu.h 13504 2011-03-25 16:25:43Z dezred $ */
+/* $Id: libgadu.h 13583 2011-04-12 12:51:18Z dezred $ */
 
 /*
  *  (C) Copyright 2001-2009 Wojtek Kaniewski <wojtekka@irc.pl>
@@ -340,7 +340,6 @@ struct gg_session {
 
 	int protocol_features;	/**< Opcje protokołu */
 	int status_flags;	/**< Flagi statusu */
-	int recv_msg_count;	/**< Liczba odebranych wiadomości */
 };
 
 /**
