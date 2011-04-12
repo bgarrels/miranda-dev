@@ -74,7 +74,7 @@ void handleLocationFam(unsigned char *pBuffer, WORD wBufferLength, snac_header* 
             if (FindCookie(pSnacHeader->dwRef, &hCookieContact, (void**)&pCookieData))
                 if(hCookieContact && (hCookieContact != INVALID_HANDLE_VALUE))
                     if(pCookieData)
-                        if(!ICQGetContactSettingUIN(hCookieContact) && pCookieData->bRequestType == REQUESTTYPE_PROFILE)
+                        if(!getContactUin(hCookieContact) && pCookieData->bRequestType == REQUESTTYPE_PROFILE)
                         {
                             ICQBroadcastAck(hCookieContact, ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
 
@@ -160,7 +160,7 @@ void handleLocationUserInfoReply(BYTE* buf, WORD wLen, DWORD dwCookie)
         return;
     }
 
-    ICQWriteContactSettingWord(hContact, "AOLWarningLevel", wWarningLevel); //maybe we display it somewhere later
+    setSettingWord(hContact, "AOLWarningLevel", wWarningLevel); //maybe we display it somewhere later
 
     if (!FindCookie(dwCookie, &hCookieContact, (void**)&pCookieData))
     {
@@ -230,7 +230,7 @@ void handleLocationUserInfoReply(BYTE* buf, WORD wLen, DWORD dwCookie)
                 disposeChain(&pChain);
             }
 
-            ICQWriteContactSettingString(hContact, "About", szMsg);
+            setSettingString(hContact, "About", szMsg);
             ICQBroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_SUCCESS, (HANDLE)1 ,0);
 
             mir_free(szMsg);
@@ -336,7 +336,7 @@ void handleLocationUserInfoReply(BYTE* buf, WORD wLen, DWORD dwCookie)
             {
                 if (szClient == cliSpamBot||szClient == "Virus")
                 {
-                    if (DBGetContactSettingByte(hContact, "CList", "NotOnList", 0)&& ICQGetContactSettingByte(NULL, "KillSpambots", DEFAULT_KILLSPAM_ENABLED))
+                    if (DBGetContactSettingByte(hContact, "CList", "NotOnList", 0)&& getSettingByte(NULL, "KillSpambots", DEFAULT_KILLSPAM_ENABLED))
                     {
                         // kill spammer
                         icq_DequeueUser(dwUIN);
@@ -351,7 +351,7 @@ void handleLocationUserInfoReply(BYTE* buf, WORD wLen, DWORD dwCookie)
                 }
                 else if (!strcmp(szClient, "Unknown"))
                 {
-                    if (ICQGetContactSettingByte(NULL, "KillUnknown", 0) && DBGetContactSettingByte(hContact, "CList", "NotOnList", 0))
+                    if (getSettingByte(NULL, "KillUnknown", 0) && DBGetContactSettingByte(hContact, "CList", "NotOnList", 0))
                     {
                         icq_DequeueUser(dwUIN);
                         AddToSpammerList(dwUIN);
@@ -398,11 +398,11 @@ void handleLocationUserInfoReply(BYTE* buf, WORD wLen, DWORD dwCookie)
             }
 
             if(dwFT1)
-                ICQWriteContactSettingDword(hContact,  "dwFT1",   dwFT1);
+                setSettingDword(hContact,  "dwFT1",   dwFT1);
             if(dwFT2)
-                ICQWriteContactSettingDword(hContact,  "dwFT2",   dwFT2);
+                setSettingDword(hContact,  "dwFT2",   dwFT2);
             if(dwFT3)
-                ICQWriteContactSettingDword(hContact,  "dwFT3",   dwFT3);
+                setSettingDword(hContact,  "dwFT3",   dwFT3);
             if(capBuf)
             {
                 // store client capabilities
@@ -415,7 +415,7 @@ void handleLocationUserInfoReply(BYTE* buf, WORD wLen, DWORD dwCookie)
                 CallService(MS_DB_CONTACT_WRITESETTING, (WPARAM)hContact, (LPARAM)&dbcws);
             }
             else
-                ICQDeleteContactSetting(hContact, "CapBuf"); //workaround bug in detecting clients without caps
+                deleteSetting(hContact, "CapBuf"); //workaround bug in detecting clients without caps
             if (pTLV && (pTLV->wLen >= 16))
             {
                 // handle Xtraz status
@@ -425,31 +425,31 @@ void handleLocationUserInfoReply(BYTE* buf, WORD wLen, DWORD dwCookie)
                 extractMoodData(pChain, &moodData, &moodSize);
                 handleXStatusCaps(hContact, (char*)(pTLV->pData), pTLV->wLen, moodData, moodSize);
             }
-            ICQWriteContactSettingDword(hContact, "LogonTS",      dwOnlineSince);
+            setSettingDword(hContact, "LogonTS",      dwOnlineSince);
             if (dwMemberSince)
-                ICQWriteContactSettingDword(hContact, "MemberTS",     dwMemberSince);
+                setSettingDword(hContact, "MemberTS",     dwMemberSince);
             if(dwUIN)
             {
-                ICQWriteContactSettingDword(hContact, "DirectCookie", dwDirectConnCookie);
-                ICQWriteContactSettingByte(hContact,  "DCType",       (BYTE)nTCPFlag);
-                ICQWriteContactSettingWord(hContact,  "UserPort",     (WORD)(dwPort & 0xffff));
+                setSettingDword(hContact, "DirectCookie", dwDirectConnCookie);
+                setSettingByte(hContact,  "DCType",       (BYTE)nTCPFlag);
+                setSettingWord(hContact,  "UserPort",     (WORD)(dwPort & 0xffff));
                 if(wVersion)
-                    ICQWriteContactSettingWord(hContact,  "Version",      wVersion);
+                    setSettingWord(hContact,  "Version",      wVersion);
             }
             if (szClient != (char*)-1)
             {
                 if(szClient != "Pocket Web 1&1")
-                    ICQWriteContactSettingUtf(hContact,   "MirVer",  szClient);
-                ICQWriteContactSettingByte(hContact,  "ClientID",     bClientId);
-                ICQWriteContactSettingDword(hContact, "IP",           dwIP);
-                ICQWriteContactSettingDword(hContact, "RealIP",       dwRealIP);
+                    setSettingStringUtf(hContact,   "MirVer",  szClient);
+                setSettingByte(hContact,  "ClientID",     bClientId);
+                setSettingDword(hContact, "IP",           dwIP);
+                setSettingDword(hContact, "RealIP",       dwRealIP);
             }
-            if((status && szClient) && ICQGetContactSettingWord(hContact, "Status", 0) == ID_STATUS_OFFLINE)
+            if((status && szClient) && getSettingWord(hContact, "Status", 0) == ID_STATUS_OFFLINE)
             {
-                ICQWriteContactSettingWord(hContact,  "Status", (WORD)IcqStatusToMiranda(status));
+                setSettingWord(hContact,  "Status", (WORD)IcqStatusToMiranda(status));
                 NetLog_Server("%s changed status to %s (v%d).", strUID(dwUIN, szUID),
                               MirandaStatusToString(IcqStatusToMiranda(status)), wVersion);
-                ICQWriteContactSettingWord(hContact, "ICQStatus", status);
+                setSettingWord(hContact, "ICQStatus", status);
                 {
                     CHECKCONTACT chk = {0};
                     chk.dbeventflag=DBEF_READ;
@@ -464,10 +464,10 @@ void handleLocationUserInfoReply(BYTE* buf, WORD wLen, DWORD dwCookie)
             }
             if (!wIdleTimer)
             {
-                DWORD dw = ICQGetContactSettingDword(hContact, "IdleTS", 0);
-                ICQWriteContactSettingDword(hContact, "OldIdleTS", dw);
+                DWORD dw = getSettingDword(hContact, "IdleTS", 0);
+                setSettingDword(hContact, "OldIdleTS", dw);
             }
-            ICQWriteContactSettingDword(hContact, "IdleTS", tIdleTS);
+            setSettingDword(hContact, "IdleTS", tIdleTS);
 
 
             // Free TLV chain

@@ -157,7 +157,7 @@ static void __fastcall setQIPstatus(BYTE bStatus)
     WORD nStatus;
 
 //  ICQWriteContactSettingWord(NULL, "ICQStatus", wQIPStatusCap[bStatus]);
-    ICQWriteContactSettingWord(NULL, "QIPStatus", wQIPStatusCap[bStatus]);
+    setSettingWord(NULL, "QIPStatus", wQIPStatusCap[bStatus]);
     nStatus=(wQIPStatusCap[bStatus]==ICQ_STATUS_LUNCH)?ID_STATUS_AWAY:ID_STATUS_ONLINE;
     DBWriteContactSettingWord(NULL, "CList", "Status", nStatus);
     IcqSetStatus(nStatus,0);
@@ -248,7 +248,7 @@ void InitQipStatusIcons()
 int GetQipStatusID(HANDLE hContact)
 {
     int i = 0;
-    switch (ICQGetContactSettingWord(hContact, "ICQStatus", 0))
+    switch (getSettingWord(hContact, "ICQStatus", 0))
     {
     case ICQ_STATUS_DEPRESS:
         i=1;

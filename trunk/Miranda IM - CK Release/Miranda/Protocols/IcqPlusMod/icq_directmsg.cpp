@@ -144,7 +144,7 @@ void handleDirectMessage(directconnect* dc, PBYTE buf, WORD wLen)
         case MTYPE_AUTODND:
         case MTYPE_AUTOFFC:
         {
-            char** szMsg = MirandaStatusToAwayMsg(AwayMsgTypeToStatus(bMsgType));
+            char** szMsg = gProtocol.MirandaStatusToAwayMsg(AwayMsgTypeToStatus(bMsgType));
 
             if (szMsg)
                 icq_sendAwayMsgReplyDirect(dc, wCookie, bMsgType, (const char**)szMsg);

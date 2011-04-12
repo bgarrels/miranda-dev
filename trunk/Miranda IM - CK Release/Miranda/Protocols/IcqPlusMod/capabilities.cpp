@@ -178,7 +178,7 @@ static icq_capability CapabilityRecord[] =
 // Deletes all oscar capabilities for a given contact
 void ClearAllContactCapabilities(HANDLE hContact)
 {
-    ICQWriteContactSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
+    setSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
 }
 
 
@@ -186,17 +186,14 @@ void ClearAllContactCapabilities(HANDLE hContact)
 // Deletes one or many oscar capabilities for a given contact
 void ClearContactCapabilities(HANDLE hContact, DWORD fdwCapabilities)
 {
-    DWORD fdwContactCaps;
-
-
-    // Get current capability flags
-    fdwContactCaps =  ICQGetContactSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
+	// Get current capability flags
+    DWORD fdwContactCaps = getSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
 
     // Clear unwanted capabilities
     fdwContactCaps &= ~fdwCapabilities;
 
     // And write it back to disk
-    ICQWriteContactSettingDword(hContact, DBSETTING_CAPABILITIES, fdwContactCaps);
+    setSettingDword(hContact, DBSETTING_CAPABILITIES, fdwContactCaps);
 }
 
 
@@ -208,13 +205,13 @@ void SetContactCapabilities(HANDLE hContact, DWORD fdwCapabilities)
 
 
     // Get current capability flags
-    fdwContactCaps =  ICQGetContactSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
+    fdwContactCaps =  getSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
 
     // Update them
     fdwContactCaps |= fdwCapabilities;
 
     // And write it back to disk
-    ICQWriteContactSettingDword(hContact, DBSETTING_CAPABILITIES, fdwContactCaps);
+    setSettingDword(hContact, DBSETTING_CAPABILITIES, fdwContactCaps);
 }
 
 
@@ -226,7 +223,7 @@ BOOL CheckContactCapabilities(HANDLE hContact, DWORD fdwCapabilities)
 
 
     // Get current capability flags
-    fdwContactCaps =  ICQGetContactSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
+    fdwContactCaps =  getSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
 
     // Check if all requested capabilities are supported
     if ((fdwContactCaps & fdwCapabilities) == fdwCapabilities)
@@ -255,7 +252,7 @@ void AddCapabilitiesFromBuffer(HANDLE hContact, BYTE* pbyBuffer, int nLength)
     nRecordSize = sizeof(CapabilityRecord)/sizeof(icq_capability);
 
     // Get current capability flags
-    fdwContactCaps =  ICQGetContactSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
+    fdwContactCaps =  getSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
 
     // Loop over all capabilities in the buffer and
     // compare them to our own record of capabilities
@@ -283,7 +280,7 @@ void AddCapabilitiesFromBuffer(HANDLE hContact, BYTE* pbyBuffer, int nLength)
     }
 
     // And write it back to disk
-    ICQWriteContactSettingDword(hContact, DBSETTING_CAPABILITIES, fdwContactCaps);
+    setSettingDword(hContact, DBSETTING_CAPABILITIES, fdwContactCaps);
 }
 
 // Pack binary caps to output buffer

@@ -73,7 +73,7 @@ INT_PTR CALLBACK tZersWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
             return FALSE;
         }
 
-        if (!(dwUin = ICQGetContactSettingUIN(hContact)))
+        if (!(dwUin = getContactUin(hContact)))
         {
             EndDialog(hWnd, 0);
             return FALSE;

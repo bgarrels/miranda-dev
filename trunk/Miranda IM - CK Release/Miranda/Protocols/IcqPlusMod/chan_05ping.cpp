@@ -53,7 +53,7 @@ static unsigned __stdcall icq_keepAliveThread(void* arg)
 {
     serverthread_info* info = (serverthread_info*)arg;
     icq_packet packet;
-    DWORD dwInterval = ICQGetContactSettingDword(NULL, "KeepAliveInterval", KEEPALIVE_INTERVAL);
+    DWORD dwInterval = getSettingDword(NULL, "KeepAliveInterval", KEEPALIVE_INTERVAL);
 
     NetLog_Server("Keep alive thread starting.");
 
@@ -98,7 +98,7 @@ void StartKeepAlive(serverthread_info* info)
     if (info->hKeepAliveEvent) // start only once
         return;
 
-    if (ICQGetContactSettingByte(NULL, "KeepAlive", 0))
+    if (getSettingByte(NULL, "KeepAlive", 0))
     {
         info->hKeepAliveThread = ICQCreateThreadEx(icq_keepAliveThread, info, NULL);
     }

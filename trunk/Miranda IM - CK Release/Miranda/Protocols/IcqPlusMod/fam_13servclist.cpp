@@ -214,7 +214,7 @@ void handleServClistFam(unsigned char *pBuffer, WORD wBufferLength, snac_header*
                         if (pChain)
                         {
                             oscar_tlv* pAuth = getTLV(pChain, SSI_TLV_AWAITING_AUTH, 1);
-                            BYTE bAuth = ICQGetContactSettingByte(hContact, "Auth", 0);
+                            BYTE bAuth = getSettingByte(hContact, "Auth", 0);
 
                             if (bAuth && !pAuth)
                             {
@@ -223,7 +223,7 @@ void handleServClistFam(unsigned char *pBuffer, WORD wBufferLength, snac_header*
                                 char msg[MAX_PATH];
                                 char *nick = NickFromHandleUtf(hContact);
 
-                                ICQWriteContactSettingByte(hContact, "Auth", 0);
+                                setSettingByte(hContact, "Auth", 0);
                                 null_snprintf(str, MAX_PATH, ICQTranslateUtfStatic("Contact \"%s\" was authorized in the server list.", msg, MAX_PATH), nick);
                                 icq_LogMessage(LOG_WARNING, str);
                                 mir_free(nick);
@@ -235,7 +235,7 @@ void handleServClistFam(unsigned char *pBuffer, WORD wBufferLength, snac_header*
                                 char msg[MAX_PATH];
                                 char *nick = NickFromHandleUtf(hContact);
 
-                                ICQWriteContactSettingByte(hContact, "Auth", 1);
+                                setSettingByte(hContact, "Auth", 1);
                                 null_snprintf(str, MAX_PATH, ICQTranslateUtfStatic("Contact \"%s\" lost its authorization in the server list.", msg, MAX_PATH), nick);
                                 icq_LogMessage(LOG_WARNING, str);
                                 mir_free(nick);
@@ -247,9 +247,9 @@ void handleServClistFam(unsigned char *pBuffer, WORD wBufferLength, snac_header*
                                 int datalen = getServerDataFromItemTLV(pChain, data);
 
                                 if (datalen > 0)
-                                    ICQWriteContactSettingBlob(hContact, "ServerData", data, datalen);
+                                    setSettingBlob(hContact, "ServerData", data, datalen);
                                 else
-                                    ICQDeleteContactSetting(hContact, "ServerData");
+                                    deleteSetting(hContact, "ServerData");
                             }
 
                             disposeChain(&pChain);
@@ -276,9 +276,9 @@ void handleServClistFam(unsigned char *pBuffer, WORD wBufferLength, snac_header*
                 if (hContact != INVALID_HANDLE_VALUE && wItemType == SSI_ITEM_BUDDY)
                 {
                     // a contact was removed from our list
-                    ICQDeleteContactSetting(hContact, "ServerId");
-                    ICQDeleteContactSetting(hContact, "SrvGroupId");
-                    ICQDeleteContactSetting(hContact, "Auth");
+                    deleteSetting(hContact, "ServerId");
+                    deleteSetting(hContact, "SrvGroupId");
+                    deleteSetting(hContact, "Auth");
                     icq_sendNewContact(0, szUID); // add to CS to see him
                     {
                         CHECKCONTACT chk = {0};
@@ -312,8 +312,8 @@ void handleServClistFam(unsigned char *pBuffer, WORD wBufferLength, snac_header*
 
                         if (pChain)
                         {
-                            ICQWriteContactSettingDword(NULL, "ImportTS", getDWordFromChain(pChain, SSI_TLV_TIMESTAMP, 1));
-                            ICQWriteContactSettingWord(NULL, "SrvImportID", wItemId);
+                            setSettingDword(NULL, "ImportTS", getDWordFromChain(pChain, SSI_TLV_TIMESTAMP, 1));
+                            setSettingWord(NULL, "SrvImportID", wItemId);
                             disposeChain(&pChain);
 
                             NetLog_Server("Server added Import timestamp to list");
@@ -471,8 +471,8 @@ static void handleServerCListAck(servlistcookie* sc, WORD wError)
         else
         {
             // Set contact server-ignore bit
-            ICQWriteContactSettingByte(sc->hContact, "SrvIgnore", 1);
-            ICQWriteContactSettingDword(sc->hContact, "SrvIgnoreTS", (DWORD)sc->lParam);
+            setSettingByte(sc->hContact, "SrvIgnore", 1);
+            setSettingDword(sc->hContact, "SrvIgnoreTS", (DWORD)sc->lParam);
         }
         break;
     }
@@ -486,12 +486,12 @@ static void handleServerCListAck(servlistcookie* sc, WORD wError)
         else
         {
             // set contact server-ignore bit
-            ICQWriteContactSettingByte (sc->hContact, "SrvIgnore", 0);
-            ICQDeleteContactSetting(sc->hContact, "SrvIgnoreTS");
+            setSettingByte (sc->hContact, "SrvIgnore", 0);
+            deleteSetting(sc->hContact, "SrvIgnoreTS");
             // releasing unused server id
             FreeServerID(sc->wContactId, SSIT_ITEM);
             // and forgiving him
-            ICQDeleteContactSetting(sc->hContact, "SrvIgnoreId");
+            deleteSetting(sc->hContact, "SrvIgnoreId");
         }
         break;
     }
@@ -524,7 +524,7 @@ static void handleServerCListAck(servlistcookie* sc, WORD wError)
 
                 NetLog_Server("Contact could not be added without authorization, add with await auth flag.");
 
-                ICQWriteContactSettingByte(sc->hContact, "Auth", 1); // we need auth
+                setSettingByte(sc->hContact, "Auth", 1); // we need auth
                 dwCookie = AllocateCookie(CKT_SERVERLIST, ICQ_LISTS_ADDTOLIST, sc->hContact, sc);
                 icq_sendServerContact(sc->hContact, dwCookie, ICQ_LISTS_ADDTOLIST, sc->wGroupId, sc->wContactId);
 
@@ -544,8 +544,8 @@ static void handleServerCListAck(servlistcookie* sc, WORD wError)
             int groupSize;
             HANDLE hPend = sc->hContact;
 
-            ICQWriteContactSettingWord(sc->hContact, "ServerId", sc->wContactId);
-            ICQWriteContactSettingWord(sc->hContact, "SrvGroupId", sc->wGroupId);
+            setSettingWord(sc->hContact, "ServerId", sc->wContactId);
+            setSettingWord(sc->hContact, "SrvGroupId", sc->wGroupId);
 
             if (groupData = collectBuddyGroup(sc->wGroupId, &groupSize))
             {
@@ -615,8 +615,8 @@ static void handleServerCListAck(servlistcookie* sc, WORD wError)
             void* groupData;
             int groupSize;
 
-            ICQWriteContactSettingWord(sc->hContact, "ServerId", 0); // clear the values
-            ICQWriteContactSettingWord(sc->hContact, "SrvGroupId", 0);
+            setSettingWord(sc->hContact, "ServerId", 0); // clear the values
+            setSettingWord(sc->hContact, "SrvGroupId", 0);
 
             FreeServerID(sc->wContactId, SSIT_ITEM);
 
@@ -713,19 +713,19 @@ static void handleServerCListAck(servlistcookie* sc, WORD wError)
                 // second ack - adding failed with error 0x0E, try to add with AVAIT_AUTH flag
                 DWORD dwCookie;
 
-                if (!ICQGetContactSettingByte(sc->hContact, "Auth", 0))
+                if (!getSettingByte(sc->hContact, "Auth", 0))
                 {
                     // we tried without AWAIT_AUTH, try again with it
                     NetLog_Server("Contact could not be added without authorization, add with await auth flag.");
 
-                    ICQWriteContactSettingByte(sc->hContact, "Auth", 1); // we need auth
+                    setSettingByte(sc->hContact, "Auth", 1); // we need auth
                 }
                 else
                 {
                     // we tried with AWAIT_AUTH, try again without
                     NetLog_Server("Contact count not be added awaiting authorization, try authorized.");
 
-                    ICQWriteContactSettingByte(sc->hContact, "Auth", 0);
+                    setSettingByte(sc->hContact, "Auth", 0);
                 }
                 dwCookie = AllocateCookie(CKT_SERVERLIST, ICQ_LISTS_ADDTOLIST, sc->hContact, sc);
                 icq_sendServerContact(sc->hContact, dwCookie, ICQ_LISTS_ADDTOLIST, sc->wNewGroupId, sc->wNewContactId);
@@ -750,8 +750,8 @@ static void handleServerCListAck(servlistcookie* sc, WORD wError)
             int groupSize;
             int bEnd = 1; // shall we end the sever modifications
 
-            ICQWriteContactSettingWord(sc->hContact, "ServerId", sc->wNewContactId);
-            ICQWriteContactSettingWord(sc->hContact, "SrvGroupId", sc->wNewGroupId);
+            setSettingWord(sc->hContact, "ServerId", sc->wNewContactId);
+            setSettingWord(sc->hContact, "SrvGroupId", sc->wNewGroupId);
             FreeServerID(sc->wContactId, SSIT_ITEM); // release old contact id
 
             if (groupData = collectBuddyGroup(sc->wGroupId, &groupSize)) // update the group we moved from
@@ -790,8 +790,8 @@ static void handleServerCListAck(servlistcookie* sc, WORD wError)
         }
         else // contact was deleted from server-list
         {
-            ICQDeleteContactSetting(sc->hContact, "ServerId");
-            ICQDeleteContactSetting(sc->hContact, "SrvGroupId");
+            deleteSetting(sc->hContact, "ServerId");
+            deleteSetting(sc->hContact, "SrvGroupId");
             sc->lParam = 1;
             sc = NULL; // wait for second ack
         }
@@ -830,12 +830,12 @@ static void handleServerCListAck(servlistcookie* sc, WORD wError)
             if (sc->wGroupId) // is avatar added or updated?
             {
                 FreeServerID(sc->wContactId, SSIT_ITEM);
-                ICQDeleteContactSetting(NULL, "SrvAvatarID"); // to fix old versions
+                deleteSetting(NULL, "SrvAvatarID"); // to fix old versions
             }
         }
         else
         {
-            ICQWriteContactSettingWord(NULL, "SrvAvatarID", sc->wContactId);
+            setSettingWord(NULL, "SrvAvatarID", sc->wContactId);
         }
         break;
     }
@@ -845,7 +845,7 @@ static void handleServerCListAck(servlistcookie* sc, WORD wError)
             NetLog_Server("Removing of avatar hash failed.");
         else
         {
-            ICQDeleteContactSetting(NULL, "SrvAvatarID");
+            deleteSetting(NULL, "SrvAvatarID");
             FreeServerID(sc->wContactId, SSIT_ITEM);
         }
         break;
@@ -861,8 +861,8 @@ static void handleServerCListAck(servlistcookie* sc, WORD wError)
             NetLog_Server("Re-starting import sequence failed, error %d", wError);
         else
         {
-            ICQWriteContactSettingWord(NULL, "SrvImportID", 0);
-            ICQDeleteContactSetting(NULL, "ImportTS");
+            setSettingWord(NULL, "SrvImportID", 0);
+            deleteSetting(NULL, "ImportTS");
         }
         break;
     }
@@ -940,7 +940,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
     uid_str szRecordName;
     oscar_tlv_chain* pChain = NULL;
     oscar_tlv* pTLV = NULL;
-    BOOL AddClist = (BOOL)ICQGetContactSettingByte(NULL, "ServerAddClist", 0);
+    BOOL AddClist = (BOOL)getSettingByte(NULL, "ServerAddClist", 0);
 
 
     // If flag bit 1 is set, this is not the last
@@ -1035,7 +1035,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                     if (szGroup = makeGroupPathUtf(wGroupId))
                     {
                         // try to get Miranda Group path from groupid, if succeeded save to db
-                        UniWriteContactSettingUtf(hContact, "CList", "Group", szGroup);
+                        setSettingStringUtf(hContact, "CList", "Group", szGroup);
 
                         mir_free(szGroup);
                     }
@@ -1056,13 +1056,13 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                         DBWriteContactSettingByte(hContact, "CList", "NotOnList", 0);
                 }
 
-                wOldGroupId = ICQGetContactSettingWord(hContact, "SrvGroupId", 0);
+                wOldGroupId = getSettingWord(hContact, "SrvGroupId", 0);
                 // Save group and item ID
-                ICQWriteContactSettingWord(hContact, "ServerId", wItemId);
-                ICQWriteContactSettingWord(hContact, "SrvGroupId", wGroupId);
+                setSettingWord(hContact, "ServerId", wItemId);
+                setSettingWord(hContact, "SrvGroupId", wGroupId);
                 ReserveServerID(wItemId, SSIT_ITEM, 0);
 
-                if (!bAdded && (wOldGroupId != wGroupId) && ICQGetContactSettingByte(NULL, "LoadServerDetails", DEFAULT_SS_LOAD))
+                if (!bAdded && (wOldGroupId != wGroupId) && getSettingByte(NULL, "LoadServerDetails", DEFAULT_SS_LOAD))
                 {
                     // contact has been moved on the server
                     char* szOldGroup = getServerGroupNameUtf(wOldGroupId);
@@ -1071,7 +1071,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                     if (!szOldGroup)
                     {
                         // old group is not known, most probably not created subgroup
-                        char* szTmp = UniGetContactSettingUtf(hContact, "CList", "Group", "");
+                        char* szTmp = getSettingStringUtf(hContact, "CList", "Group", "");
 
                         if (strlennull(szTmp))
                         {
@@ -1107,7 +1107,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                     if (szGroup = makeGroupPathUtf(wGroupId))
                     {
                         // try to get Miranda Group path from groupid, if succeeded save to db
-                        UniWriteContactSettingUtf(hContact, "CList", "Group", szGroup);
+                        setSettingStringUtf(hContact, "CList", "Group", szGroup);
 
                         mir_free(szGroup);
                     }
@@ -1135,12 +1135,12 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                             bNicked = 1;
 
                             // Write nickname to database
-                            if (ICQGetContactSettingByte(NULL, "LoadServerDetails", DEFAULT_SS_LOAD) || bAdded)
+                            if (getSettingByte(NULL, "LoadServerDetails", DEFAULT_SS_LOAD) || bAdded)
                             {
                                 // if just added contact, save details always - does no harm
                                 char *szOldNick;
 
-                                if (szOldNick = UniGetContactSettingUtf(hContact,"CList","MyHandle",""))
+                                if (szOldNick = getSettingStringUtf(hContact,"CList","MyHandle",""))
                                 {
                                     if ((strcmpnull(szOldNick, pszNick)) && (strlennull(pszNick) > 0))
                                     {
@@ -1150,7 +1150,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                                             // Yes, we really do need to delete it first. Otherwise the CLUI nick
                                             // cache isn't updated (I'll look into it)
                                             DBDeleteContactSetting(hContact,"CList","MyHandle");
-                                            UniWriteContactSettingUtf(hContact, "CList", "MyHandle", pszNick);
+                                            setSettingStringUtf(hContact, "CList", "MyHandle", pszNick);
                                         }
                                     }
                                     mir_free(szOldNick);
@@ -1158,7 +1158,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                                 else if (strlennull(pszNick) > 0)
                                 {
                                     DBDeleteContactSetting(hContact,"CList","MyHandle");
-                                    UniWriteContactSettingUtf(hContact, "CList", "MyHandle", pszNick);
+                                    setSettingStringUtf(hContact, "CList", "MyHandle", pszNick);
                                 }
                             }
                             mir_free(pszNick);
@@ -1190,26 +1190,26 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                             NetLog_Server("Comment is '%s'", pszComment);
 
                             // Write comment to database
-                            if (ICQGetContactSettingByte(NULL, "LoadServerDetails", DEFAULT_SS_LOAD) || bAdded)
+                            if (getSettingByte(NULL, "LoadServerDetails", DEFAULT_SS_LOAD) || bAdded)
                             {
                                 // if just added contact, save details always - does no harm
                                 char *szOldComment;
 
-                                if (szOldComment = UniGetContactSettingUtf(hContact,"UserInfo","MyNotes",""))
+                                if (szOldComment = getSettingStringUtf(hContact,"UserInfo","MyNotes",""))
                                 {
                                     if ((strcmpnull(szOldComment, pszComment)) && (strlennull(pszComment) > 0))
                                     {
                                         // check if the truncated comment changed, i.e. do not overwrite locally stored longer comment
                                         if (strlennull(szOldComment) <= strlennull(pszComment) || strncmp(szOldComment, pszComment, null_strcut(szOldComment, MAX_SSI_TLV_COMMENT_SIZE)))
                                         {
-                                            UniWriteContactSettingUtf(hContact, "UserInfo", "MyNotes", pszComment);
+                                            setSettingStringUtf(hContact, "UserInfo", "MyNotes", pszComment);
                                         }
                                     }
                                     mir_free(szOldComment);
                                 }
                                 else if (strlennull(pszComment) > 0)
                                 {
-                                    UniWriteContactSettingUtf(hContact, "UserInfo", "MyNotes", pszComment);
+                                    setSettingStringUtf(hContact, "UserInfo", "MyNotes", pszComment);
                                 }
                             }
                             mir_free(pszComment);
@@ -1223,12 +1223,12 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                     // Look for need-authorization TLV
                     if (getTLV(pChain, SSI_TLV_AWAITING_AUTH, 1))
                     {
-                        ICQWriteContactSettingByte(hContact, "Auth", 1);
+                        setSettingByte(hContact, "Auth", 1);
                         NetLog_Server("SSI contact need authorization");
                     }
                     else
                     {
-                        ICQWriteContactSettingByte(hContact, "Auth", 0);
+                        setSettingByte(hContact, "Auth", 0);
                     }
 
                     {
@@ -1237,9 +1237,9 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                         int datalen = getServerDataFromItemTLV(pChain, data);
 
                         if (datalen > 0)
-                            ICQWriteContactSettingBlob(hContact, "ServerData", data, datalen);
+                            setSettingBlob(hContact, "ServerData", data, datalen);
                         else
-                            ICQDeleteContactSetting(hContact, "ServerData");
+                            deleteSetting(hContact, "ServerData");
 
                         mir_free(data);
                     }
@@ -1319,10 +1319,10 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                     NetLog_Server("SSI %s contact already exists '%s'", "Permit", szRecordName);
 
                 // Save permit ID
-                ICQWriteContactSettingWord(hContact, "SrvPermitId", wItemId);
+                setSettingWord(hContact, "SrvPermitId", wItemId);
                 ReserveServerID(wItemId, SSIT_ITEM, 0);
                 // Set apparent mode
-                ICQWriteContactSettingWord(hContact, "ApparentMode", ID_STATUS_ONLINE);
+                setSettingWord(hContact, "ApparentMode", ID_STATUS_ONLINE);
                 NetLog_Server("Visible-contact (%s)", szRecordName);
             }
             else
@@ -1360,11 +1360,11 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                     NetLog_Server("SSI %s contact already exists '%s'", "Deny", szRecordName);
 
                 // Save Deny ID
-                ICQWriteContactSettingWord(hContact, "SrvDenyId", wItemId);
+                setSettingWord(hContact, "SrvDenyId", wItemId);
                 ReserveServerID(wItemId, SSIT_ITEM, 0);
 
                 // Set apparent mode
-                ICQWriteContactSettingWord(hContact, "ApparentMode", ID_STATUS_OFFLINE);
+                setSettingWord(hContact, "ApparentMode", ID_STATUS_OFFLINE);
                 NetLog_Server("Invisible-contact (%s)", szRecordName);
             }
             else
@@ -1384,7 +1384,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
             {
                 // found it, store the id, we do not need current visibility - we do not rely on it
                 ReserveServerID(wItemId, SSIT_ITEM, 0);
-                ICQWriteContactSettingWord(NULL, "SrvVisibilityID", wItemId);
+                setSettingWord(NULL, "SrvVisibilityID", wItemId);
                 NetLog_Server("Visibility is %u", bVisibility);
             }
             else
@@ -1421,14 +1421,14 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                     NetLog_Server("SSI %s contact already exists '%s'", "Ignore", szRecordName);
 
                 // Save Ignore ID
-                ICQWriteContactSettingWord(hContact, "SrvIgnoreId", wItemId);
+                setSettingWord(hContact, "SrvIgnoreId", wItemId);
                 ReserveServerID(wItemId, SSIT_ITEM, 0);
 
 //          // Set apparent mode & ignore
 //          ICQWriteContactSettingWord(hContact, "ApparentMode", ID_STATUS_OFFLINE);
 //          // set ignore all events
 //          CallService(MS_IGNORE_IGNORE, (WPARAM)hContact, IGNOREEVENT_ALL);
-                ICQWriteContactSettingByte(hContact, "SrvIgnore", 1);
+                setSettingByte(hContact, "SrvIgnore", 1);
 
                 if(tschain != NULL && tschain->wLen == 4)
                 {
@@ -1436,7 +1436,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                     DBTIMETOSTRING tts;
                     unpackDWord(&(tschain->pData), &dwIgnoreTS);
                     tschain->pData -= 4;
-                    ICQWriteContactSettingDword(hContact, "SrvIgnoreTS", dwIgnoreTS);
+                    setSettingDword(hContact, "SrvIgnoreTS", dwIgnoreTS);
 
                     tts.szDest = szIgnoreDate;
                     tts.cbDest = 254;
@@ -1465,8 +1465,8 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                 /* time our list was first imported */
                 /* pszRecordName is "Import Time" */
                 /* data is TLV(13) {TLV(D4) {time_t importTime}} */
-                ICQWriteContactSettingDword(NULL, "ImportTS", getDWordFromChain(pChain, SSI_TLV_TIMESTAMP, 1));
-                ICQWriteContactSettingWord(NULL, "SrvImportID", wItemId);
+                setSettingDword(NULL, "ImportTS", getDWordFromChain(pChain, SSI_TLV_TIMESTAMP, 1));
+                setSettingWord(NULL, "SrvImportID", wItemId);
                 ReserveServerID(wItemId, SSIT_ITEM, 0);
                 NetLog_Server("SSI %s item recognized", "first import");
             }
@@ -1483,12 +1483,12 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                 if (!strcmpnull(szRecordName, "12"))
                 {
                     // need to handle Photo Item separately
-                    ICQWriteContactSettingWord(NULL, "SrvPhotoID", wItemId);
+                    setSettingWord(NULL, "SrvPhotoID", wItemId);
                     NetLog_Server("SSI %s item recognized", "Photo");
                 }
                 else
                 {
-                    ICQWriteContactSettingWord(NULL, "SrvAvatarID", wItemId);
+                    setSettingWord(NULL, "SrvAvatarID", wItemId);
                     NetLog_Server("SSI %s item recognized", "Avatar");
                 }
                 ReserveServerID(wItemId, SSIT_ITEM, 0);
@@ -1518,7 +1518,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
 
     NetLog_Server("Bytes left: %u", wLen);
 
-    ICQWriteContactSettingWord(NULL, "SrvRecordCount", (WORD)(wRecord + ICQGetContactSettingWord(NULL, "SrvRecordCount", 0)));
+    setSettingWord(NULL, "SrvRecordCount", (WORD)(wRecord + getSettingWord(NULL, "SrvRecordCount", 0)));
 
     if (bIsLastPacket)
     {
@@ -1535,7 +1535,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
 
             /* finally we get a time_t of the last update time */
             unpackDWord(&buf, &dwLastUpdateTime);
-            ICQWriteContactSettingDword(NULL, "SrvLastUpdate", dwLastUpdateTime);
+            setSettingDword(NULL, "SrvLastUpdate", dwLastUpdateTime);
             NetLog_Server("Last update of server list was (%u) %s", dwLastUpdateTime, time2text(dwLastUpdateTime));
             ReserveServerID(wItemId, SSIT_ITEM, 0);
 
@@ -1546,7 +1546,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
         {
             NetLog_Server("Last packet missed update time...");
         }
-        if (ICQGetContactSettingWord(NULL, "SrvRecordCount", 0) == 0)
+        if (getSettingWord(NULL, "SrvRecordCount", 0) == 0)
         {
             // we got empty serv-list, create master group
             servlistcookie* ack = NULL;
@@ -1623,7 +1623,7 @@ static void handleRecvAuthRequest(unsigned char *buf, WORD wLen)
     // Read nick name from DB
     if (dwUin)
     {
-        if (ICQGetContactSettingString(hcontact, "Nick", &dbv))
+        if (getSettingString(hcontact, "Nick", &dbv))
             nNickLen = 0;
         else
         {
@@ -1635,7 +1635,7 @@ static void handleRecvAuthRequest(unsigned char *buf, WORD wLen)
         nNickLen = strlennull(szUid);
     pre.lParam += nNickLen + nReasonLen;
 
-    ICQWriteContactSettingByte(ccs.hContact, "Grant", 1);
+    setSettingByte(ccs.hContact, "Grant", 1);
 
     /*blob is: uin(DWORD), hcontact(HANDLE), nick(ASCIIZ), first(ASCIIZ), last(ASCIIZ), email(ASCIIZ), reason(ASCIIZ)*/
     pCurBlob=szBlob=(char *)icq_alloc_zero(pre.lParam);
@@ -1748,13 +1748,13 @@ static void handleRecvAdded(unsigned char *buf, WORD wLen)
     }
 
 
-    ICQDeleteContactSetting(hContact, "Grant");
+    deleteSetting(hContact, "Grant");
 
     cbBlob=sizeof(DWORD)+sizeof(HANDLE)+4;
 
     if (dwUin)
     {
-        if (ICQGetContactSettingString(hContact, "Nick", &dbv))
+        if (getSettingString(hContact, "Nick", &dbv))
             nNickLen = 0;
         else
         {
@@ -1793,7 +1793,7 @@ static void handleRecvAdded(unsigned char *buf, WORD wLen)
     *(char *)pCurBlob = 0;
 // TODO: Change for new auth system
 
-    ICQAddEvent(NULL, EVENTTYPE_ADDED, time(NULL), 0, cbBlob, pBlob);
+    AddEvent(NULL, EVENTTYPE_ADDED, time(NULL), 0, cbBlob, pBlob);
     if(bLogAuthHistory)
         HistoryLog(hContact,dwUin, "you added",0,DBEF_READ);
 // logtofile(hContact, DWORD dwUin, char *string, int event_type);
@@ -1886,7 +1886,7 @@ static void handleRecvAuthResponse(unsigned char *buf, WORD wLen)
 
     case 1:
         SkinPlaySound("AuthGranted"); // Added by BM
-        ICQWriteContactSettingByte(hContact, "Auth", 0);
+        setSettingByte(hContact, "Auth", 0);
 #ifdef _DEBUG
         NetLog_Server("Authorization request %s by %s", "granted", strUID(dwUin, szUid));
 #endif
@@ -1962,9 +1962,9 @@ static void handleRecvRemoved(unsigned char *buf, WORD wLen)
                 ResetUserSSISettings(hContact);
             {
                 // a contact was removed from our list
-                ICQDeleteContactSetting(hContact, "ServerId");
-                ICQDeleteContactSetting(hContact, "SrvGroupId");
-                ICQDeleteContactSetting(hContact, "Auth");
+                deleteSetting(hContact, "ServerId");
+                deleteSetting(hContact, "SrvGroupId");
+                deleteSetting(hContact, "Auth");
                 icq_sendNewContact(0, szUid); // add to CS to see him
                 {
                     CHECKCONTACT chk = {0};
@@ -2027,15 +2027,15 @@ void updateServVisibilityCode(BYTE bCode)
 //
         if (bVisibility == bCode) // if no change was made, not necescary to update that
             return;
-        ICQWriteContactSettingByte(NULL, "SrvVisibility", bCode);
+        setSettingByte(NULL, "SrvVisibility", bCode);
         bVisibility = bCode;
 
         // Do we have a known server visibility ID? We should, unless we just subscribed to the serv-list for the first time
-        if ((wVisibilityID = ICQGetContactSettingWord(NULL, "SrvVisibilityID", 0)) == 0)
+        if ((wVisibilityID = getSettingWord(NULL, "SrvVisibilityID", 0)) == 0)
         {
             // No, create a new random ID
             wVisibilityID = GenerateServerID(SSIT_ITEM, 0, 0);
-            ICQWriteContactSettingWord(NULL, "SrvVisibilityID", wVisibilityID);
+            setSettingWord(NULL, "SrvVisibilityID", wVisibilityID);
             wCommand = ICQ_LISTS_ADDTOLIST;
             NetLog_Server("Made new srvVisibilityID, id is %u, code is %u", wVisibilityID, bCode);
         }
@@ -2104,12 +2104,12 @@ void setContactIgnore(HANDLE hContact, BOOL bIgnore)
     ack->lParam = (LPARAM)dwTimestamp;
     dwCookie = AllocateCookie(CKT_SERVERLIST, wCommand, hContact, ack); // take cookie
 
-    _ltoa( ICQGetContactSettingUIN(hContact), szUin, 10);
+    _ltoa( getContactUin(hContact), szUin, 10);
 
-    if ((wIgnoreId = ICQGetContactSettingWord(hContact, "SrvIgnoreId", 0)) == 0)
+    if ((wIgnoreId = getSettingWord(hContact, "SrvIgnoreId", 0)) == 0)
     {
         wIgnoreId = GenerateServerID(SSIT_ITEM, 0, 0);
-        ICQWriteContactSettingWord(hContact, "SrvIgnoreId", wIgnoreId);
+        setSettingWord(hContact, "SrvIgnoreId", wIgnoreId);
     }
 
     // Build and send packet
@@ -2141,7 +2141,7 @@ void updateServAvatarHash(char* pHash, int size)
     int bResetHash = 0;
     BYTE bName = 0;
 
-    if (!ICQGetContactSetting(NULL, "AvatarHash", &dbvHash))
+    if (!getSetting(NULL, "AvatarHash", &dbvHash))
     {
         bName = 0x30 + dbvHash.pbVal[1];
 
@@ -2162,7 +2162,7 @@ void updateServAvatarHash(char* pHash, int size)
         DWORD dwCookie;
 
         // Do we have a known server avatar ID?
-        if (wAvatarID = ICQGetContactSettingWord(NULL, "SrvAvatarID", 0))
+        if (wAvatarID = getSettingWord(NULL, "SrvAvatarID", 0))
         {
             ack = (servlistcookie*)icq_alloc_zero(sizeof(servlistcookie));
             if (!ack)
@@ -2200,7 +2200,7 @@ void updateServAvatarHash(char* pHash, int size)
         WORD hashsize = size - 2;
 
         // Do we have a known server avatar ID? We should, unless we just subscribed to the serv-list for the first time
-        if (bResetHash || (wAvatarID = ICQGetContactSettingWord(NULL, "SrvAvatarID", 0)) == 0)
+        if (bResetHash || (wAvatarID = getSettingWord(NULL, "SrvAvatarID", 0)) == 0)
         {
             // No, create a new random ID
             wAvatarID = GenerateServerID(SSIT_ITEM, 0, 0);
@@ -2250,12 +2250,12 @@ void updateServAvatarHash(char* pHash, int size)
 void sendAddStart(int bImport)
 {
     icq_packet packet;
-    WORD wImportID = ICQGetContactSettingWord(NULL, "SrvImportID", 0);
+    WORD wImportID = getSettingWord(NULL, "SrvImportID", 0);
 
     if (bImport && wImportID)
     {
         // we should be importing, check if already have import item
-        if (ICQGetContactSettingDword(NULL, "ImportTS", 0) + 604800 < ICQGetContactSettingDword(NULL, "LogonTS", 0))
+        if (getSettingDword(NULL, "ImportTS", 0) + 604800 < getSettingDword(NULL, "LogonTS", 0))
         {
             // is the timestamp week older, clear it and begin new import
             DWORD dwCookie;

@@ -107,7 +107,7 @@ static unsigned __stdcall icq_TryNextServerThread(LPVOID lp)
 
 
     DBWriteContactSettingWord(0, ICQ_PROTOCOL_NAME, "OscarPort", Port);
-    ICQWriteContactSettingString(NULL, "OscarServer", UniGetContactSettingUtf(NULL, DBModule, buf1, 0));
+    setSettingString(NULL, "OscarServer", getSettingStringUtf(NULL, DBModule, buf1, 0));
 
     icq_LogMessage(LOG_NOTE, "Server AutoChange: connection problems with current server, switching to next");
 
@@ -187,21 +187,21 @@ static unsigned __stdcall icq_serverThread(void* p)
     // Initialize direct connection ports
     {
         DWORD dwInternalIP;
-        BYTE bConstInternalIP = ICQGetContactSettingByte(NULL, "ConstRealIP", 0);
+        BYTE bConstInternalIP = getSettingByte(NULL, "ConstRealIP", 0);
 
         info.hDirectBoundPort = NetLib_BindPort(icq_newConnectionReceived, NULL, &wListenPort, &dwInternalIP);
         if (!info.hDirectBoundPort)
         {
             icq_LogUsingErrorCode(LOG_WARNING, GetLastError(), "Miranda was unable to allocate a port to listen for direct peer-to-peer connections between clients. You will be able to use most of the ICQ network without problems but you may be unable to send or receive files.\n\nIf you have a firewall this may be blocking Miranda, in which case you should configure your firewall to leave some ports open and tell Miranda which ports to use in M->Options->ICQ->Network.");
             wListenPort = 0;
-            if (!bConstInternalIP) ICQDeleteContactSetting(NULL, "RealIP");
+            if (!bConstInternalIP) deleteSetting(NULL, "RealIP");
         }
         else if (!bConstInternalIP)
-            ICQWriteContactSettingDword(NULL, "RealIP", dwInternalIP);
+            setSettingDword(NULL, "RealIP", dwInternalIP);
 
 //	ICQWriteContactSettingDword(NULL, "OldRealIP", nlb.dwInternalIP);
-        ICQWriteContactSettingWord(NULL, "UserPort", wListenPort);
-        ICQWriteContactSettingWord(NULL, "OldUserPort", wListenPort);
+        setSettingWord(NULL, "UserPort", wListenPort);
+        setSettingWord(NULL, "OldUserPort", wListenPort);
     }
 
 
@@ -281,27 +281,27 @@ static unsigned __stdcall icq_serverThread(void* p)
     {
         HANDLE hContact;
 
-        hContact= ICQFindFirstContact();
+        hContact= FindFirstContact();
 
         while (hContact)
         {
             DWORD dwUIN;
             uid_str szUID;
 
-            if (!ICQGetContactSettingUID(hContact, &dwUIN, &szUID))
+            if (!getContactUid(hContact, &dwUIN, &szUID))
             {
-                if (ICQGetContactStatus(hContact) != ID_STATUS_OFFLINE)
+                if (getContactStatus(hContact) != ID_STATUS_OFFLINE)
                 {
-                    ICQWriteContactSettingWord(hContact, "Status", ID_STATUS_OFFLINE);
+                    setSettingWord(hContact, "Status", ID_STATUS_OFFLINE);
 
                     handleXStatusCaps(hContact, NULL, 0, NULL, 0);
                 }
             }
 
-            hContact = ICQFindNextContact(hContact);
+            hContact = FindNextContact(hContact);
         }
     }
-    ICQWriteContactSettingDword(NULL, "LogonTS", 0); // clear logon time
+    setSettingDword(NULL, "LogonTS", 0); // clear logon time
 
     FlushServerIDs();         // clear server IDs list
     FlushPendingOperations(); // clear pending operations list
@@ -538,17 +538,17 @@ void icq_login(const char* szPassword)
         EnableWindow(GetDlgItem(hwndRegImageDialog, IDC_REGISTER), FALSE);
     }
 
-    dwUin = ICQGetContactSettingUIN(NULL);
+    dwUin = getContactUin(NULL);
     stsi = (serverthread_start_info*)icq_alloc_zero(sizeof(serverthread_start_info));
 
     // Server host name
-    if (ICQGetContactStaticString(NULL, "OscarServer", szServer, MAX_PATH))
+    if (getSettingStringStatic(NULL, "OscarServer", szServer, MAX_PATH))
         stsi->nloc.szHost = null_strdup(DEFAULT_SERVER_HOST);
     else
         stsi->nloc.szHost = null_strdup(szServer);
 
     // Server port
-    stsi->nloc.wPort = (WORD)ICQGetContactSettingWord(NULL, "OscarPort", DEFAULT_SERVER_PORT);
+    stsi->nloc.wPort = (WORD)getSettingWord(NULL, "OscarPort", DEFAULT_SERVER_PORT);
     if (stsi->nloc.wPort == 0)
         stsi->nloc.wPort = RandRange(1024, 65535);
 

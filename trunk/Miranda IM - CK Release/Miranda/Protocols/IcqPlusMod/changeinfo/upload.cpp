@@ -54,7 +54,7 @@ int StringToListItemId(const char *szSetting,int def)
     list=(ListTypeDataItem*)setting[i].pList;
     listCount=setting[i].listCount;
 
-    if(ICQGetContactStaticString(NULL, szSetting, szTmp, sizeof(szTmp)))
+    if(getSettingStringStatic(NULL, szSetting, szTmp, sizeof(szTmp)))
         return def;
 
     for(i=0; i<listCount; i++)
@@ -100,7 +100,7 @@ int UploadSettings(HWND hwndParent)
                 {
                     char szPwd[9] = {0};
 
-                    if (!ICQGetContactStaticString(NULL, "Password", szPwd, 9) && strlennull(szPwd))
+                    if (!getSettingStringStatic(NULL, "Password", szPwd, 9) && strlennull(szPwd))
                     {
                         // password is stored in DB, update
                         char ptmp[9];
@@ -109,7 +109,7 @@ int UploadSettings(HWND hwndParent)
 
                         CallService(MS_DB_CRYPT_ENCODESTRING, sizeof(ptmp), (LPARAM)ptmp);
 
-                        ICQWriteContactSettingString(NULL, "Password", ptmp);
+                        setSettingString(NULL, "Password", ptmp);
                     }
                 }
             }

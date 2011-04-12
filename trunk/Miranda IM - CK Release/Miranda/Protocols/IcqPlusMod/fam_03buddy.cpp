@@ -234,7 +234,7 @@ static void setContactQipExtraIcon(HANDLE hContact, int qipstatus)
     extern HANDLE hqipstatusiconchanged;
     if(!hExtraqipstatus)
     {
-        WORD icon_pos = ICQGetContactSettingWord(NULL, "qip_status_icon_pos", 8);
+        WORD icon_pos = getSettingWord(NULL, "qip_status_icon_pos", 8);
         hIcon = (qipstatus <= 0 ? (HANDLE)-1 : hQIPStatusIcons[qipstatus-1]);
         if (qipstatus > 0)
             CListMW_QipExtraIconsRebuild(0, 0);
@@ -460,7 +460,7 @@ static void handleUserOnline(BYTE* buf, WORD wLen, serverthread_info* info)
             WORD capLen = 0;
 //	  oscar_tlv *pFullTLV, *pShortTLV;
 
-            wOldStatus = ICQGetContactStatus(hContact);
+            wOldStatus = getContactStatus(hContact);
 
             // Get Avatar Hash TLV
             pTLV = getTLV(pChain, 0x1D, 1);
@@ -566,9 +566,9 @@ static void handleUserOnline(BYTE* buf, WORD wLen, serverthread_info* info)
 
 
 
-                    ICQWriteContactSettingDword(hContact,  "dwFT1",   dwFT1);
-                    ICQWriteContactSettingDword(hContact,  "dwFT2",   dwFT2);
-                    ICQWriteContactSettingDword(hContact,  "dwFT3",   dwFT3);
+                    setSettingDword(hContact,  "dwFT1",   dwFT1);
+                    setSettingDword(hContact,  "dwFT2",   dwFT2);
+                    setSettingDword(hContact,  "dwFT3",   dwFT3);
 
                     if(capBuf)
                     {
@@ -582,7 +582,7 @@ static void handleUserOnline(BYTE* buf, WORD wLen, serverthread_info* info)
                         CallService(MS_DB_CONTACT_WRITESETTING, (WPARAM)hContact, (LPARAM)&dbcws);
                     }
                     else
-                        ICQDeleteContactSetting(hContact, "CapBuf"); //wokaround bug in detecting clients without caps
+                        deleteSetting(hContact, "CapBuf"); //wokaround bug in detecting clients without caps
                     szClient = detectUserClient(hContact, nIsICQ, dwUIN, wClass, wVersion, dwFT1, dwFT2, dwFT3, dwOnlineSince, nTCPFlag, dwDirectConnCookie, dwWebPort, capBuf, capLen, &bClientId, szStrBuf);
 
                 }
@@ -634,7 +634,7 @@ static void handleUserOnline(BYTE* buf, WORD wLen, serverthread_info* info)
             LPSTR oldMirVer = {0};
             char string[256];
             BOOL changed = FALSE;
-            oldMirVer = (LPSTR)UniGetContactSettingUtf(hContact, ICQ_PROTOCOL_NAME, "MirVer", "");
+            oldMirVer = (LPSTR)getSettingStringUtf(hContact, ICQ_PROTOCOL_NAME, "MirVer", "");
             if (!oldMirVer || strcmp(oldMirVer, szClient))
                 changed = TRUE;
             if(changed)
@@ -661,74 +661,74 @@ static void handleUserOnline(BYTE* buf, WORD wLen, serverthread_info* info)
                 }
             }
         }
-        ICQWriteContactSettingDword(hContact, "LogonTS",      dwOnlineSince);
+        setSettingDword(hContact, "LogonTS",      dwOnlineSince);
         if (dwMemberSince)
-            ICQWriteContactSettingDword(hContact, "MemberTS",     dwMemberSince);
+            setSettingDword(hContact, "MemberTS",     dwMemberSince);
         if (nIsICQ)
         {
             // on AIM these are not used
-            ICQWriteContactSettingDword(hContact, "DirectCookie", dwDirectConnCookie);
-            ICQWriteContactSettingByte(hContact,  "DCType",       (BYTE)nTCPFlag);
-            ICQWriteContactSettingWord(hContact,  "UserPort",     (WORD)(dwPort & 0xffff));
-            ICQWriteContactSettingWord(hContact,  "Version",      wVersion);
+            setSettingDword(hContact, "DirectCookie", dwDirectConnCookie);
+            setSettingByte(hContact,  "DCType",       (BYTE)nTCPFlag);
+            setSettingWord(hContact,  "UserPort",     (WORD)(dwPort & 0xffff));
+            setSettingWord(hContact,  "Version",      wVersion);
         }
         else
         {
-            ICQDeleteContactSetting(hContact,   "DirectCookie");
-            ICQDeleteContactSetting(hContact,   "DCType");
-            ICQDeleteContactSetting(hContact,   "UserPort");
-            ICQDeleteContactSetting(hContact,   "Version");
+            deleteSetting(hContact,   "DirectCookie");
+            deleteSetting(hContact,   "DCType");
+            deleteSetting(hContact,   "UserPort");
+            deleteSetting(hContact,   "Version");
         }
         if (szClient != (char*)-1)
         {
-            ICQWriteContactSettingUtf(hContact,   "MirVer",       szClient);
-            ICQWriteContactSettingByte(hContact,  "ClientID",     bClientId);
-            ICQWriteContactSettingDword(hContact, "IP",           dwIP);
-            ICQWriteContactSettingDword(hContact, "RealIP",       dwRealIP);
+            setSettingStringUtf(hContact,   "MirVer",       szClient);
+            setSettingByte(hContact,  "ClientID",     bClientId);
+            setSettingDword(hContact, "IP",           dwIP);
+            setSettingDword(hContact, "RealIP",       dwRealIP);
         }
         else
         {
             // if not first notification only write significant information
             if (dwIP)
-                ICQWriteContactSettingDword(hContact, "IP",         dwIP);
+                setSettingDword(hContact, "IP",         dwIP);
             if (dwRealIP)
-                ICQWriteContactSettingDword(hContact, "RealIP",     dwRealIP);
+                setSettingDword(hContact, "RealIP",     dwRealIP);
 
         }
-        ICQWriteContactSettingWord(hContact,  "Status", (WORD)IcqStatusToMiranda(wStatus));
-        ICQWriteContactSettingWord(hContact, "ICQStatus", wStatus);
+        setSettingWord(hContact,  "Status", (WORD)IcqStatusToMiranda(wStatus));
+        setSettingWord(hContact, "ICQStatus", wStatus);
         if( gbQipStatusEnabled )
         {
             if(wStatus)
             {
-                ICQWriteContactSettingString(hContact,  "QIPStatusName", QIPStatusToString(wStatus));
+                setSettingString(hContact,  "QIPStatusName", QIPStatusToString(wStatus));
             }
             else
             {
-                ICQDeleteContactSetting(hContact, "QIPStatusName");
+                deleteSetting(hContact, "QIPStatusName");
             }
             setContactQipExtraIcon(hContact, GetQipStatusID(hContact));
         }
         if (!wIdleTimer)
         {
-            DWORD dw = ICQGetContactSettingDword(hContact, "IdleTS", 0);
-            ICQWriteContactSettingDword(hContact, "OldIdleTS", dw);
+            DWORD dw = getSettingDword(hContact, "IdleTS", 0);
+            setSettingDword(hContact, "OldIdleTS", dw);
         }
-        ICQWriteContactSettingDword(hContact, "IdleTS", tIdleTS);
+        setSettingDword(hContact, "IdleTS", tIdleTS);
 
         // Update info?
         if (dwUIN)
         {
-            DWORD dwUpdateThreshold = ICQGetContactSettingByte(NULL, "InfoUpdate", UPDATE_THRESHOLD)*3600*24;
+            DWORD dwUpdateThreshold = getSettingByte(NULL, "InfoUpdate", UPDATE_THRESHOLD)*3600*24;
 
-            if ((time(NULL) - ICQGetContactSettingDword(hContact, "InfoTS", 0)) > dwUpdateThreshold)
+            if ((time(NULL) - getSettingDword(hContact, "InfoTS", 0)) > dwUpdateThreshold)
                 icq_QueueUser(hContact);
         }
     }
     if (hContact == NULL)
     {
         if (szClient != (char*)-1)
-            ICQWriteContactSettingUtf(NULL,   "MirVer",  szClient);
+            setSettingStringUtf(NULL,   "MirVer",  szClient);
     }
 
     // And a small log notice...
@@ -745,7 +745,7 @@ static void handleUserOnline(BYTE* buf, WORD wLen, serverthread_info* info)
     {
         if (szClient == cliSpamBot||szClient == "Virus")
         {
-            if (ICQGetContactSettingByte(NULL, "KillSpambots", DEFAULT_KILLSPAM_ENABLED) && DBGetContactSettingByte(hContact, "CList", "NotOnList", 0))
+            if (getSettingByte(NULL, "KillSpambots", DEFAULT_KILLSPAM_ENABLED) && DBGetContactSettingByte(hContact, "CList", "NotOnList", 0))
             {
                 // kill spammer
                 icq_DequeueUser(dwUIN);
@@ -759,7 +759,7 @@ static void handleUserOnline(BYTE* buf, WORD wLen, serverthread_info* info)
         }
         else if (!strcmp(szClient, "Unknown"))
         {
-            if (ICQGetContactSettingByte(NULL, "KillUnknown", 0) && DBGetContactSettingByte(hContact, "CList", "NotOnList", 0))
+            if (getSettingByte(NULL, "KillUnknown", 0) && DBGetContactSettingByte(hContact, "CList", "NotOnList", 0))
             {
                 icq_DequeueUser(dwUIN);
                 AddToSpammerList(dwUIN);
@@ -819,17 +819,17 @@ static void handleUserOffline(BYTE *buf, WORD wLen)
         hContact = HContactFromUID(dwUIN, szUID, NULL);
 
         // Skip contacts that are not already on our list or are already offline
-        if (hContact != INVALID_HANDLE_VALUE && (ICQGetContactStatus(hContact) != ID_STATUS_OFFLINE||CheckContactCapabilities(hContact, WAS_FOUND)))
+        if (hContact != INVALID_HANDLE_VALUE && (getContactStatus(hContact) != ID_STATUS_OFFLINE||CheckContactCapabilities(hContact, WAS_FOUND)))
         {
             NetLog_Server("%s went offline.", strUID(dwUIN, szUID));
 
-            ICQWriteContactSettingWord(hContact, "Status", ID_STATUS_OFFLINE);
-            ICQWriteContactSettingDword(hContact, "IdleTS", 0);
-            ICQDeleteContactSetting(hContact, "ICQStatus");
+            setSettingWord(hContact, "Status", ID_STATUS_OFFLINE);
+            setSettingDword(hContact, "IdleTS", 0);
+            deleteSetting(hContact, "ICQStatus");
             // close Direct Connections to that user
             CloseContactDirectConns(hContact);
             // Reset DC status
-            ICQWriteContactSettingByte(hContact, "DCStatus", 0);
+            setSettingByte(hContact, "DCStatus", 0);
             // clear Xtraz status
             handleXStatusCaps(hContact, NULL, 0, NULL, 0);
             icq_GetUserStatus(hContact,2);
@@ -991,11 +991,11 @@ void CheckSelfRemove()
         return;
     {
         HANDLE hContact;
-        hContact = ICQFindFirstContact();
+        hContact = FindFirstContact();
 
         while(hContact)
         {
-            if (gbSsiEnabled && !ICQGetContactSettingWord(hContact, "ServerId", 0) && !ICQGetContactSettingWord(hContact, "SrvIgnoreId", 0)&&
+            if (gbSsiEnabled && !getSettingWord(hContact, "ServerId", 0) && !getSettingWord(hContact, "SrvIgnoreId", 0)&&
                     !DBGetContactSettingByte(hContact, ICQ_PROTOCOL_NAME, "CheckSelfRemove", 0))
             {
                 CHECKCONTACT chk = {0};
@@ -1010,7 +1010,7 @@ void CheckSelfRemove()
                 DBWriteContactSettingByte(hContact, ICQ_PROTOCOL_NAME, "CheckSelfRemove", 1);
             }
 
-            hContact = ICQFindNextContact(hContact);
+            hContact = FindNextContact(hContact);
         }
         NetLog_Server("Finished CheckSelfRemove thread");
         // MessageBox(0,"Finished CheckSelfRemove thread!","Warning",MB_OK);
@@ -1025,15 +1025,15 @@ void CheckSelfRemoveShutdown()//exclude currently added contacts (not serverside
         return;
     {
         HANDLE hContact;
-        hContact = ICQFindFirstContact();
+        hContact = FindFirstContact();
 
         while(hContact)
         {
-            if (gbSsiEnabled && !ICQGetContactSettingWord(hContact, "ServerId", 0) && !ICQGetContactSettingWord(hContact, "SrvIgnoreId", 0)&&
+            if (gbSsiEnabled && !getSettingWord(hContact, "ServerId", 0) && !getSettingWord(hContact, "SrvIgnoreId", 0)&&
                     !DBGetContactSettingByte(hContact, ICQ_PROTOCOL_NAME, "CheckSelfRemove", 0))
                 DBWriteContactSettingByte(hContact, ICQ_PROTOCOL_NAME, "CheckSelfRemove", 1);
 
-            hContact = ICQFindNextContact(hContact);
+            hContact = FindNextContact(hContact);
         }
         NetLog_Server("Finished CheckSelfRemoveShutdown thread");
         // MessageBox(0,"Finished CheckSelfRemove thread!","Warning",MB_OK);

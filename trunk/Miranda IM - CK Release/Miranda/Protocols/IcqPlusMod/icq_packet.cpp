@@ -389,7 +389,7 @@ void ppackLELNTSfromDB(PBYTE *buf, int *buflen, const char *szSetting)
 {
     DBVARIANT dbv;
 
-    if (ICQGetContactSettingString(NULL, szSetting, &dbv))
+    if (getSettingString(NULL, szSetting, &dbv))
     {
         ppackLEWord(buf, buflen, 0);
     }
@@ -576,7 +576,7 @@ void ppackTLVLNTSfromDB(PBYTE *buf, int *buflen, const char *szSetting, WORD wTy
     char szTmp[1024];
     char *str = "";
 
-    if (!ICQGetContactStaticString(NULL, szSetting, szTmp, sizeof(szTmp)))
+    if (!getSettingStringStatic(NULL, szSetting, szTmp, sizeof(szTmp)))
         str = szTmp;
 
     ppackTLVLNTS(buf, buflen, str, wType, 1);
@@ -589,7 +589,7 @@ void ppackTLVWordLNTSfromDB(PBYTE *buf, int *buflen, WORD w, const char *szSetti
     char szTmp[1024];
     char *str = "";
 
-    if (!ICQGetContactStaticString(NULL, szSetting, szTmp, sizeof(szTmp)))
+    if (!getSettingStringStatic(NULL, szSetting, szTmp, sizeof(szTmp)))
         str = szTmp;
 
     ppackTLVWordLNTS(buf, buflen, w, str, wType, 1);
@@ -602,7 +602,7 @@ void ppackTLVLNTSBytefromDB(PBYTE *buf, int *buflen, const char *szSetting, BYTE
     char szTmp[1024];
     char *str = "";
 
-    if (!ICQGetContactStaticString(NULL, szSetting, szTmp, sizeof(szTmp)))
+    if (!getSettingStringStatic(NULL, szSetting, szTmp, sizeof(szTmp)))
         str = szTmp;
 
     ppackTLVLNTSByte(buf, buflen, str, b, wType);
@@ -613,7 +613,7 @@ int ppackTLVWordStringItemFromDB(PBYTE *buf, int *buflen, const char *szSetting,
     char szTmp[1024];
     char *str = NULL;
 
-    if (!ICQGetContactStaticString(NULL, szSetting, szTmp, sizeof(szTmp)))
+    if (!getSettingStringStatic(NULL, szSetting, szTmp, sizeof(szTmp)))
         str = szTmp;
 
     if (str)
@@ -632,7 +632,7 @@ int ppackTLVWordStringItemFromDB(PBYTE *buf, int *buflen, const char *szSetting,
 
 void ppackTLVStringUtfFromDB(PBYTE *buf, int *buflen, const char *szSetting, WORD wType)
 {
-    char *str = ICQGetContactSettingUtf(NULL, szSetting, NULL);
+    char *str = getSettingStringUtf(NULL, szSetting, NULL);
 
     ppackTLV(buf, buflen, wType, strlennull(str), (PBYTE)str);
 
@@ -643,7 +643,7 @@ void ppackTLVStringFromDB(PBYTE *buf, int *buflen, const char *szSetting, WORD w
     char szTmp[1024];
     char *str = "";
 
-    if (!ICQGetContactStaticString(NULL, szSetting, szTmp, sizeof(szTmp)))
+    if (!getSettingStringStatic(NULL, szSetting, szTmp, sizeof(szTmp)))
         str = szTmp;
 
     ppackTLV(buf, buflen, wType, strlennull(str), (PBYTE)str);
@@ -654,9 +654,9 @@ void ppackTLVDateFromDB(PBYTE *buf, int *buflen, const char *szSettingYear, cons
 {
     SYSTEMTIME sTime = {0};
     double time = 0;
-    sTime.wYear = ICQGetContactSettingWord(NULL, szSettingYear, 0);
-    sTime.wMonth = ICQGetContactSettingByte(NULL, szSettingMonth, 0);
-    sTime.wDay = ICQGetContactSettingByte(NULL, szSettingDay, 0);
+    sTime.wYear = getSettingWord(NULL, szSettingYear, 0);
+    sTime.wMonth = getSettingByte(NULL, szSettingMonth, 0);
+    sTime.wDay = getSettingByte(NULL, szSettingDay, 0);
     if (sTime.wYear || sTime.wMonth || sTime.wDay)
     {
         SystemTimeToVariantTime(&sTime, &time);
@@ -687,7 +687,7 @@ void ppackTLVBlockItems(PBYTE *buf, int *buflen, WORD wType, int *nItems, PBYTE 
 
 int ppackTLVWordStringUtfItemFromDB(PBYTE *buf, int *buflen, const char *szSetting, WORD wTypeID, WORD wTypeData, WORD wID)
 {
-    char *str = ICQGetContactSettingUtf(NULL, szSetting, NULL);
+    char *str = getSettingStringUtf(NULL, szSetting, NULL);
 
     if (str)
     {

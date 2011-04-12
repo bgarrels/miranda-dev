@@ -51,6 +51,7 @@
 #define GWL_ID              (-12)
 #endif
 
+#define F_TEMPVIS  1
 
 // Extern
 extern HANDLE hUserMenuStatus;
@@ -128,10 +129,10 @@ void detectViaAuth(HANDLE hContact, DWORD dwCookie)
     DWORD dwID1;
     DWORD dwID2;
 
-    if (ICQGetContactSettingUID(hContact, &dwUin, &szUid))
+    if (getContactUid(hContact, &dwUin, &szUid))
         return; // Invalid contact
 
-    ICQGetContactSettingUID(NULL, &dwMyUin, &szMyUid);
+    getContactUid(NULL, &dwMyUin, &szMyUid);
 
     dwID1 = time(NULL);
     dwID2 = RandRange(0, 0x00FF);
@@ -155,19 +156,19 @@ void SendAuthRequestToAllUnauthorized()
     uid_str szUid;
     if(!icqOnline)
         return;
-    hContact = ICQFindFirstContact();
+    hContact = FindFirstContact();
     if(hContact)
     {
         do
         {
 
-            ICQGetContactSettingUID(hContact, &dwUin, &szUid);
+            getContactUid(hContact, &dwUin, &szUid);
             if(!(dwUin && szUid))
                 break;
-            if (ICQGetContactSettingByte(hContact, "Auth", 1))
+            if (getSettingByte(hContact, "Auth", 1))
                 icq_sendAuthReqServ(dwUin, szUid, Translate("Automated authorization request\nCalled from Privacy menu\n////isee.c:154"));
         }
-        while(hContact = ICQFindNextContact(hContact));
+        while(hContact = FindNextContact(hContact));
     }
 }
 
@@ -230,7 +231,7 @@ void icq_GetUserStatus(HANDLE hContact, WORD wEvent)
         DWORD dwUin = 0;
 
         if (hContact && hContact != INVALID_HANDLE_VALUE)
-            dwUin = ICQGetContactSettingDword(hContact, UNIQUEIDSETTING, 0);
+            dwUin = getSettingDword(hContact, UNIQUEIDSETTING, 0);
 
         if (!gbASD || !dwUin) return;
 
@@ -240,7 +241,7 @@ void icq_GetUserStatus(HANDLE hContact, WORD wEvent)
             return;
 
         if ((wEvent == 3) &&
-                ICQGetContactStatus(hContact) != ID_STATUS_OFFLINE)
+                getContactStatus(hContact) != ID_STATUS_OFFLINE)
             return;
 
         if (nCount < LISTSIZE)
@@ -322,10 +323,10 @@ static void icq_GetNextUserStatus()
 
         while (GetFromCacheByID(LastContactID++, &hContact, NULL))
         {
-            if (ICQGetContactSettingWord(hContact, "Scan", 0x100) &&
+            if (getSettingWord(hContact, "Scan", 0x100) &&
                     !DBGetContactSettingByte(hContact, "CList", "Hidden", 0) &&
                     !DBGetContactSettingByte(hContact, "CList", "NotOnList", 0) &&
-                    (ICQGetContactSettingWord(hContact, "Status", 0) == ID_STATUS_OFFLINE ||
+                    (getSettingWord(hContact, "Status", 0) == ID_STATUS_OFFLINE ||
                      CheckContactCapabilities(hContact, WAS_FOUND)))
             {
                 icq_GetUserStatus(hContact, 0);
@@ -442,7 +443,7 @@ void icq_SetUserStatus(DWORD dwUin, DWORD dwCookie, signed nStatus, HANDLE hCont
 
             if (nStatus <= 5) Netlib_Logf(ghServerNetlibUser, "%s (%d) is here 8-)", name, dwUin);
 
-            if (ICQGetContactSettingWord(hContact, "Status", ID_STATUS_OFFLINE) == ID_STATUS_OFFLINE)
+            if (getSettingWord(hContact, "Status", ID_STATUS_OFFLINE) == ID_STATUS_OFFLINE)
             {
 
                 time_t TimeStamp = time(NULL);
@@ -458,8 +459,8 @@ void icq_SetUserStatus(DWORD dwUin, DWORD dwCookie, signed nStatus, HANDLE hCont
 
                 if (nStatus != 5)
                 {
-                    ICQWriteContactSettingWord(hContact, "Status", ID_STATUS_INVISIBLE);
-                    ICQWriteContactSettingDword(hContact, "OldLogonTS", (DWORD)TimeStamp);
+                    setSettingWord(hContact, "Status", ID_STATUS_INVISIBLE);
+                    setSettingDword(hContact, "OldLogonTS", (DWORD)TimeStamp);
                     ClearAllContactCapabilities(hContact);
                 }
                 {
@@ -482,8 +483,8 @@ void icq_SetUserStatus(DWORD dwUin, DWORD dwCookie, signed nStatus, HANDLE hCont
                 ClearContactCapabilities(hContact, CAPF_SRV_RELAY); // for compability
 
                 // dim icon
-                if (!ICQGetContactSettingDword(hContact, "IdleTS", 0))
-                    ICQWriteContactSettingDword(hContact, "IdleTS", (DWORD)TimeStamp);
+                if (!getSettingDword(hContact, "IdleTS", 0))
+                    setSettingDword(hContact, "IdleTS", (DWORD)TimeStamp);
 
             }
         }
@@ -504,7 +505,7 @@ static DWORD SendDetectionPacket2(HANDLE hContact, char* szQuery, char* szNotify
     message_cookie_data* pCookieData;
 
 
-    ICQGetContactSettingUID(hContact, &dwUin, NULL);
+    getContactUid(hContact, &dwUin, NULL);
 
     //if (!CheckContactCapabilities(hContact, CAPF_XTRAZ) && !bForced)
 //   return 0; // Contact does not support xtraz, do not send anything
@@ -597,7 +598,7 @@ static unsigned __stdcall icq_StatusCheckThread(void* arg)
                 Netlib_Logf(ghServerNetlibUser, "Users statuses %u", nCount);
 #endif
                 hContact = HContactFromUIN(StatusList[nPointer].dwUin, 0);
-                if (nCount > 0 && !(gnCurrentStatus == ID_STATUS_INVISIBLE && bNoASDInInvisible) && !ICQGetContactSettingByte(hContact, "NoASD", 0))
+                if (nCount > 0 && !(gnCurrentStatus == ID_STATUS_INVISIBLE && bNoASDInInvisible) && !getSettingByte(hContact, "NoASD", 0))
                 {
                     //icq_packet p;
                     //int iRes = FALSE;
@@ -616,17 +617,17 @@ static unsigned __stdcall icq_StatusCheckThread(void* arg)
                         makeUserOffline(hContact); // ensure that contact was made offline, before beeing checked
 
 
-                    if(!bASDForOffline || bASDForOffline && (ICQGetContactStatus(hContact) == ID_STATUS_INVISIBLE || ICQGetContactStatus(hContact) == ID_STATUS_OFFLINE))
+                    if(!bASDForOffline || bASDForOffline && (getContactStatus(hContact) == ID_STATUS_INVISIBLE || getContactStatus(hContact) == ID_STATUS_OFFLINE))
                     {
                         // getting invisibility via status message
                         if(bASDViaAwayMsg)
-                            icq_sendGetAwayMsgServ(hContact, StatusList[nPointer].dwUin, MTYPE_AUTOAWAY, (WORD)(ICQGetContactSettingWord(hContact, "Version", 0)==9?9:ICQ_VERSION)); // Success
+                            icq_sendGetAwayMsgServ(hContact, StatusList[nPointer].dwUin, MTYPE_AUTOAWAY, (WORD)(getSettingWord(hContact, "Version", 0)==9?9:ICQ_VERSION)); // Success
                         // getting invisibility via xtraz notify request
                         if(bASDViaXtraz)
                             sendDetectionPacket(hContact); //detect icq6 invisibility (added by [sin])
                         // getting invisibility via malformed url message
                         if(bASDViaURL)
-                            icq_sendGetAwayMsgServ(hContact, StatusList[nPointer].dwUin, MTYPE_URL, (WORD)(ICQGetContactSettingWord(hContact, "Version", 0)==9?9:ICQ_VERSION)); //detect miranda invisibility (added by [sin])
+                            icq_sendGetAwayMsgServ(hContact, StatusList[nPointer].dwUin, MTYPE_URL, (WORD)(getSettingWord(hContact, "Version", 0)==9?9:ICQ_VERSION)); //detect miranda invisibility (added by [sin])
                         if(bASDUnauthorized)
                             icq_sendGetLocationInfo(hContact ,StatusList[nPointer].dwUin, 0); //method reported by D@rkNeo
                         if(bASDViaAuth && StatusList[nPointer].bManualCheck) //
@@ -689,7 +690,7 @@ static void CALLBACK TimeToCheckHidden(HWND hwnd, UINT message, UINT_PTR idTimer
         while (GetFromCacheByID(LastHidContactID++, &hContact, NULL))
         {
             // check found users but skip VIPs & hidden from contact list
-            DWORD Scan = ICQGetContactSettingByte(hContact, "Scan", (BYTE)0x100);
+            DWORD Scan = getSettingByte(hContact, "Scan", (BYTE)0x100);
 
             if (CheckContactCapabilities(hContact, WAS_FOUND) &&
 //				(DBGetContactSettingWord(hContact, gpszICQProtoName, "Status", 0) == ID_STATUS_INVISIBLE) &&
@@ -698,7 +699,7 @@ static void CALLBACK TimeToCheckHidden(HWND hwnd, UINT message, UINT_PTR idTimer
 //				!DBGetContactSettingByte(hContact, "CList", "NotOnList", 0)
             {
                 icq_GetUserStatus(hContact, 4);
-                if (ICQGetContactSettingWord(hContact, "Status", ID_STATUS_OFFLINE) == ID_STATUS_OFFLINE)
+                if (getSettingWord(hContact, "Status", ID_STATUS_OFFLINE) == ID_STATUS_OFFLINE)
                     ClearAllContactCapabilities(hContact);
 #ifdef _DEBUG
                 Netlib_Logf(ghServerNetlibUser, "Checking found user... (%u)", DBGetContactSettingDword(hContact,ICQ_PROTOCOL_NAME, UNIQUEIDSETTING,0));
@@ -729,8 +730,8 @@ static void CALLBACK TimeToCheckFav(HWND hwnd, UINT message, UINT_PTR idTimer, D
         while (GetFromCacheByID(LastFavContactID++, &hContact, NULL))
         {
             // check favorite users
-            if ((ICQGetContactSettingByte(hContact, "Scan", (BYTE)0x100) == 1)
-                    && ICQGetContactSettingWord(hContact, "Status", ID_STATUS_OFFLINE) == ID_STATUS_OFFLINE)
+            if ((getSettingByte(hContact, "Scan", (BYTE)0x100) == 1)
+                    && getSettingWord(hContact, "Status", ID_STATUS_OFFLINE) == ID_STATUS_OFFLINE)
             {
                 icq_GetUserStatus(hContact, 5);
 #ifdef _DEBUG
@@ -761,8 +762,8 @@ static void CALLBACK TimeToCheckVIP(HWND hwnd, UINT message, UINT_PTR idTimer, D
         while (GetFromCacheByID(LastVIPContactID++, &hContact, NULL))
         {
             // check favorite users
-            if ((ICQGetContactSettingByte(hContact, "Scan", (BYTE)0x100) == 2) &&
-                    (ICQGetContactSettingWord(hContact, "Status", ID_STATUS_OFFLINE) == ID_STATUS_OFFLINE
+            if ((getSettingByte(hContact, "Scan", (BYTE)0x100) == 2) &&
+                    (getSettingWord(hContact, "Status", ID_STATUS_OFFLINE) == ID_STATUS_OFFLINE
                      || CheckContactCapabilities(hContact, WAS_FOUND)))
             {
                 icq_GetUserStatus(hContact, 6);
@@ -1127,7 +1128,7 @@ static void icq_sendGrantAuth(DWORD dwUin)
 INT_PTR icq_GrantAuth(WPARAM wParam,LPARAM lParam)
 {
     if (icqOnline && wParam)
-        icq_sendGrantAuth(ICQGetContactSettingDword((HANDLE)wParam, UNIQUEIDSETTING, 0));
+        icq_sendGrantAuth(getSettingDword((HANDLE)wParam, UNIQUEIDSETTING, 0));
 
     return 0;
 }
@@ -1136,7 +1137,7 @@ INT_PTR icq_GrantAuth(WPARAM wParam,LPARAM lParam)
 // popups stuff
 static void PopUpMsg(HANDLE hContact, BYTE bType)
 {
-    DWORD uin = ICQGetContactSettingDword(hContact, "UIN", 0);
+    DWORD uin = getSettingDword(hContact, "UIN", 0);
     switch(bType)
     {
     case 3: // User was found (PSD)
@@ -1388,7 +1389,7 @@ int icq_PrivacyMenu(WPARAM wParam, LPARAM lParam)
     {
         char pszName[290];
         BOOL bUsrScanPos = 0;
-        bUsrScanPos = ICQGetContactSettingByte( NULL, "UsrScanPos", 0 );
+        bUsrScanPos = getSettingByte( NULL, "UsrScanPos", 0 );
         mir_snprintf(pszName, sizeof(pszName), "%s", Translate("&Users Status Scan"));
         mi.pszName = pszName;
         strcpy(pszServiceName, ICQ_PROTOCOL_NAME);
@@ -1500,7 +1501,7 @@ void icq_InitISee()
             _snprintf(szName, sizeof(szName), "%s: %s", ICQ_PROTOCOL_NAME, Translate("Status Scan Complete"));
         }
 
-        defSpeed = ICQGetContactSettingWord(NULL, "_defSpeed", 3000);
+        defSpeed = getSettingWord(NULL, "_defSpeed", 3000);
         nSpeed = defSpeed;
 
         if (hQueueEventS && hDummyEventS)
@@ -1521,7 +1522,7 @@ void icq_InitISee()
         if (TRUE) hFavTimer = SetTimer(NULL, 1, 450000, TimeToCheckFav);
         if (TRUE) hVIPTimer = SetTimer(NULL, 1, 300000, TimeToCheckVIP);
 
-        if(ICQGetContactSettingByte(NULL, "ASDStartup", 0))
+        if(getSettingByte(NULL, "ASDStartup", 0))
             if (TRUE) hCAUSTimer = SetTimer(NULL, 1, 15000, TimeToCheckAll);
         {
             strcpy(pszServiceName, ICQ_PROTOCOL_NAME);
@@ -1608,7 +1609,7 @@ static INT_PTR icq_ASD(WPARAM wParam,LPARAM lParam)
     mi.cbSize = sizeof(mi);
     mi.flags = CMIM_ICON;
     gbASD?(gbASD=0):(gbASD=1);
-    ICQWriteContactSettingByte(NULL,"ASD",gbASD);
+    setSettingByte(NULL,"ASD",gbASD);
     gbASD?icq_InitISee():icq_ISeeCleanup();
     mi.hIcon = IconLibGetIcon(gbASD?"check":"dot");
     CallService(MS_CLIST_MODIFYMENUITEM, (WPARAM)hASD, (LPARAM)&mi);

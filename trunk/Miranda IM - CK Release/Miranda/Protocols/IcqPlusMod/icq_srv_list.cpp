@@ -98,7 +98,7 @@ static INT_PTR CALLBACK DlgProcSrvList(HWND hwndDlg,UINT message,WPARAM wParam,L
             iRow = ListView_InsertItem(hwndList, &item);
             ListView_SetItemText(hwndList, iRow, 0, NULL);
 //				mir_freetmp);
-            tmp = mir_a2t(UniGetContactSettingUtf(NULL, DBModule, buf2, 0));
+            tmp = mir_a2t(getSettingStringUtf(NULL, DBModule, buf2, 0));
             ListView_SetItemText(hwndList, iRow, 1, tmp);
             mir_snprintf(buf, 64, "%d", DBGetContactSettingWord(NULL, DBModule, buf3, 0));
 //				mir_freetmp);
@@ -142,7 +142,7 @@ static INT_PTR CALLBACK DlgProcSrvList(HWND hwndDlg,UINT message,WPARAM wParam,L
 
             iRow = ListView_InsertItem(hwndList, &item);
 //				mir_freetmp);
-            tmp = mir_a2t(UniGetContactSettingUtf(NULL, DBModule, buf2, 0));
+            tmp = mir_a2t(getSettingStringUtf(NULL, DBModule, buf2, 0));
             ListView_SetItemText(hwndList, iRow, 1, tmp);
 //				mir_freetmp);
 
@@ -167,7 +167,7 @@ static INT_PTR CALLBACK DlgProcSrvList(HWND hwndDlg,UINT message,WPARAM wParam,L
             DBWriteContactSettingString(NULL, DBModule, buf, buf3);
 
             ListView_SetItemText(hwndList, iIndex, 0, NULL);
-            tmp = mir_a2t(UniGetContactSettingUtf(NULL, DBModule, buf, 0));
+            tmp = mir_a2t(getSettingStringUtf(NULL, DBModule, buf, 0));
             ListView_SetItemText(hwndList, iIndex, 1, tmp);
 //				mir_freetmp);
             mir_snprintf(buf, 64, "%d", DBGetContactSettingWord(NULL, DBModule, buf2, 0));
@@ -204,7 +204,7 @@ static INT_PTR CALLBACK DlgProcSrvList(HWND hwndDlg,UINT message,WPARAM wParam,L
 
                 mir_snprintf(buf2, 64, "server%luhost", i);
                 mir_snprintf(buf3, 64, "server%luhost", i - 1);
-                DBWriteContactSettingString(NULL, DBModule, buf3, UniGetContactSettingUtf(NULL, DBModule, buf2, 0));
+                DBWriteContactSettingString(NULL, DBModule, buf3, getSettingStringUtf(NULL, DBModule, buf2, 0));
                 dbgcs.szSetting = buf2;
                 CallService(MS_DB_CONTACT_DELETESETTING, (WPARAM)0, (LPARAM)&dbgcs);
 
@@ -231,7 +231,7 @@ static INT_PTR CALLBACK DlgProcSrvList(HWND hwndDlg,UINT message,WPARAM wParam,L
             if(iIndex < 0) return FALSE;
             mir_snprintf(buf, 64, "server%luhost", iIndex + 1);
             mir_snprintf(buf2, 64, "server%luport", iIndex + 1);
-            SetDlgItemTextA(hwndDlg, IDC_EDIT_SERVER, UniGetContactSettingUtf(NULL, DBModule, buf, 0));
+            SetDlgItemTextA(hwndDlg, IDC_EDIT_SERVER, getSettingStringUtf(NULL, DBModule, buf, 0));
             SetDlgItemInt(hwndDlg, IDC_EDIT_PORT, (UINT)DBGetContactSettingWord(0, DBModule, buf2, 5190), 0);
             break;
         }

@@ -123,7 +123,7 @@ BOOL icq_QueueUser(HANDLE hContact)
         // Add to list
         if (!bFound)
         {
-            DWORD dwUin = ICQGetContactSettingUIN(hContact);
+            DWORD dwUin = getContactUin(hContact);
 
             if (dwUin)
             {
@@ -192,7 +192,7 @@ void icq_RescanInfoUpdate()
       fill queue, and let thread deal with it */
     bInfoUpdateEnabled = 0; // freeze thread
     // Queue all outdated users
-    hContact = ICQFindFirstContact();
+    hContact = FindFirstContact();
 
     while (hContact != NULL)
     {
@@ -206,7 +206,7 @@ void icq_RescanInfoUpdate()
                 break;
             }
         }
-        hContact = ICQFindNextContact(hContact);
+        hContact = FindNextContact(hContact);
     }
     icq_EnableUserLookup(bOldEnable); // wake up thread
 }
@@ -375,14 +375,14 @@ unsigned __stdcall icq_InfoUpdateThread(void* arg)
                                 int nItemSize = 0;
                                 DBVARIANT dbv = {DBVT_DELETED};
 
-                                if (!ICQGetContactSetting(m_infoUpdateList[i].hContact, DBSETTING_METAINFO_TOKEN, &dbv))
+                                if (!getSetting(m_infoUpdateList[i].hContact, DBSETTING_METAINFO_TOKEN, &dbv))
                                 {
                                     // retrieve user details using privacy token
                                     ppackTLV(&pItem, &nItemSize, 0x96, dbv.cpbVal, dbv.pbVal);
                                     ICQFreeVariant(&dbv);
                                 }
                                 // last updated time
-                                ppackTLVDouble(&pItem, &nItemSize, 0x64, ICQGetContactSettingDouble(m_infoUpdateList[i].hContact, DBSETTING_METAINFO_TIME, 0));
+                                ppackTLVDouble(&pItem, &nItemSize, 0x64, getSettingDouble(m_infoUpdateList[i].hContact, DBSETTING_METAINFO_TIME, 0));
 
                                 ppackTLVUID(&pItem, &nItemSize, 0x32, m_infoUpdateList[i].dwUin, NULL);
                                 ppackWord(&pRequestData, &nRequestSize, (WORD)nItemSize);

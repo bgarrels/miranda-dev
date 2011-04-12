@@ -180,7 +180,7 @@ static INT_PTR CALLBACK IcqDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
         dat->hEventDbSettingChange=HookEventMessage(ME_DB_CONTACT_SETTINGCHANGED,hwndDlg,HM_DBCHANGE);
         dat->hContact=(HANDLE)lParam;
         dat->nTimer=0;
-        dat->dwUin=ICQGetContactSettingDword(dat->hContact, UNIQUEIDSETTING, 0);
+        dat->dwUin=getSettingDword(dat->hContact, UNIQUEIDSETTING, 0);
         dat->hProtoAck=NULL;
         dat->dwCookie=0;
         if ((HANDLE)lParam == NULL)
@@ -303,7 +303,7 @@ static INT_PTR CALLBACK IcqDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
             if (icqOnline && dat->dwUin &&(!invis_for(0,dat->hContact))) //not on invisible status, we don't want to be detected
             {
                 int wMessageType = 0;
-                switch(ICQGetContactSettingWord(dat->hContact, "Status",ID_STATUS_OFFLINE))
+                switch(getSettingWord(dat->hContact, "Status",ID_STATUS_OFFLINE))
                 {
                 case ID_STATUS_OFFLINE:
                     break;
@@ -324,13 +324,13 @@ static INT_PTR CALLBACK IcqDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
                     wMessageType = MTYPE_AUTOAWAY;
                     break;
                 }
-                icq_sendGetAwayMsgServ(NULL, dat->dwUin, wMessageType, (WORD)(ICQGetContactSettingWord(dat->hContact, "Version", 0)==9?9:ICQ_VERSION));
+                icq_sendGetAwayMsgServ(NULL, dat->dwUin, wMessageType, (WORD)(getSettingWord(dat->hContact, "Version", 0)==9?9:ICQ_VERSION));
                 EnableWindow(GetDlgItem(hwndDlg, IDC_RETRIEVE), FALSE);
                 SetTimer(hwndDlg, TIMEOUT_IP, 10000, NULL);
             }
             break;
         case IDC_IGNORECHECK:
-            if ((icqOnline &&ICQGetContactSettingWord(dat->hContact,  "Status", 0) != ID_STATUS_OFFLINE) && (!invis_for(0,dat->hContact)))   //we do not want to be detected
+            if ((icqOnline &&getSettingWord(dat->hContact,  "Status", 0) != ID_STATUS_OFFLINE) && (!invis_for(0,dat->hContact)))   //we do not want to be detected
 
             {
                 message_cookie_data* pCookieData;
@@ -453,7 +453,7 @@ static INT_PTR CALLBACK IcqDlgProcClient(HWND hwndDlg, UINT msg, WPARAM wParam, 
         dat->hEventDbSettingChange=HookEventMessage(ME_DB_CONTACT_SETTINGCHANGED,hwndDlg,HM_DBCHANGE);
         dat->hContact=(HANDLE)lParam;
         dat->nTimer=0;
-        dat->dwUin=ICQGetContactSettingDword(dat->hContact, UNIQUEIDSETTING, 0);
+        dat->dwUin=getSettingDword(dat->hContact, UNIQUEIDSETTING, 0);
         dat->hProtoAck=NULL;
         dat->dwCookie=0;
         return TRUE;
@@ -877,7 +877,7 @@ static BYTE SetValue(HWND hwndDlg, int idCtrl, HANDLE hContact, char* szModule, 
                 pszStatus = MirandaStatusToStringUtf(dbv.wVal);
                 if (bXStatus)
                 {
-                    pXName = ICQGetContactSettingUtf(hContact, DBSETTING_XSTATUSNAME, "");
+                    pXName = getSettingStringUtf(hContact, DBSETTING_XSTATUSNAME, "");
                     if (!strlennull(pXName))
                     {
                         // give default name
@@ -952,7 +952,7 @@ static BYTE SetValue(HWND hwndDlg, int idCtrl, HANDLE hContact, char* szModule, 
             unspecified = (special == SVS_ZEROISUNSPEC && dbv.pszVal[0] == '\0');
             if (!unspecified && pstr != szSetting)
             {
-                pstr = UniGetContactSettingUtf(hContact, szModule, szSetting, NULL);
+                pstr = getSettingStringUtf(hContact, szModule, szSetting, NULL);
                 bUtf = 1;
                 bAlloc = 1;
             }

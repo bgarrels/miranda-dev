@@ -238,7 +238,7 @@ static void handleRecvServMsg(unsigned char *buf, WORD wLen, WORD wFlags, DWORD 
 
 static char* convertMsgToUserSpecificUtf(HANDLE hContact, const char* szMsg)
 {
-    WORD wCP = ICQGetContactSettingWord(hContact, "CodePage", gwAnsiCodepage);
+    WORD wCP = getSettingWord(hContact, "CodePage", gwAnsiCodepage);
     char* usMsg = NULL;
 
     if (wCP != CP_ACP)
@@ -385,7 +385,7 @@ static void handleRecvServMsgType1(unsigned char *buf, WORD wLen, DWORD dwUin, c
                             if (szMsg)
                             {
                                 // not necessary to convert - appending first part, only set flags
-                                char* szUtfMsg = mir_utf8encodecp(szMsg, ICQGetContactSettingWord(hContact, "CodePage", gwAnsiCodepage));
+                                char* szUtfMsg = mir_utf8encodecp(szMsg, getSettingWord(hContact, "CodePage", gwAnsiCodepage));
 
                                 mir_free(szMsg);
                                 szMsg = szUtfMsg;
@@ -395,7 +395,7 @@ static void handleRecvServMsgType1(unsigned char *buf, WORD wLen, DWORD dwUin, c
                         if (!bMsgPartUnicode && pre.flags == PREF_UTF)
                         {
                             // convert message part to utf-8 and append
-                            char* szUtfPart = mir_utf8encodecp(szMsgPart, ICQGetContactSettingWord(hContact, "CodePage", gwAnsiCodepage));
+                            char* szUtfPart = mir_utf8encodecp(szMsgPart, getSettingWord(hContact, "CodePage", gwAnsiCodepage));
 
                             mir_free(szMsgPart);
                             szMsgPart = szUtfPart;
@@ -424,7 +424,7 @@ static void handleRecvServMsgType1(unsigned char *buf, WORD wLen, DWORD dwUin, c
                         szMsg = EliminateHtml(szMsg, strlennull(szMsg));
                     }
 
-                    if (!pre.flags && !IsUSASCII((BYTE*)szMsg, strlennull(szMsg)))
+                    if (!pre.flags && !IsUSASCII(szMsg, strlennull(szMsg)))
                     {
                         // message is Ansi and contains national characters, create Unicode part by codepage
                         char* usMsg = convertMsgToUserSpecificUtf(hContact, szMsg);
@@ -473,7 +473,7 @@ static void handleRecvServMsgType1(unsigned char *buf, WORD wLen, DWORD dwUin, c
                     NetLog_Server("Message (format 1) received");
 
                     // Save tick value
-                    ICQWriteContactSettingDword(ccs.hContact, "TickTS", time(NULL) - (dwMsgID1/1000));
+                    setSettingDword(ccs.hContact, "TickTS", time(NULL) - (dwMsgID1/1000));
                 }
                 else
                 {
@@ -625,14 +625,14 @@ static void handleRecvServMsgType2(unsigned char *buf, WORD wLen, DWORD dwUin, c
             if (hContact != INVALID_HANDLE_VALUE)
             {
                 if (dwExternalIP = getDWordFromChain(chain, 0x03, 1))
-                    ICQWriteContactSettingDword(hContact, "RealIP", dwExternalIP);
+                    setSettingDword(hContact, "RealIP", dwExternalIP);
                 if (dwIP = getDWordFromChain(chain, 0x04, 1))
-                    ICQWriteContactSettingDword(hContact, "IP", dwIP);
+                    setSettingDword(hContact, "IP", dwIP);
                 if (wPort = getWordFromChain(chain, 0x05, 1))
-                    ICQWriteContactSettingWord(hContact, "UserPort", wPort);
+                    setSettingWord(hContact, "UserPort", wPort);
 
                 // Save tick value
-                ICQWriteContactSettingDword(hContact, "TickTS", time(NULL) - (dwID1/1000));
+                setSettingDword(hContact, "TickTS", time(NULL) - (dwID1/1000));
             }
 
             // Parse the next message level
@@ -714,10 +714,10 @@ static void handleRecvServMsgType2(unsigned char *buf, WORD wLen, DWORD dwUin, c
                             unpackLEDWord((BYTE**)&buf, &dwPort);
                         unpackLEWord((BYTE**)&buf, &wVersion);
 
-                        ICQWriteContactSettingDword(hContact, "IP", dwIp);
-                        ICQWriteContactSettingWord(hContact,  "UserPort", (WORD)dwPort);
-                        ICQWriteContactSettingByte(hContact,  "DCType", bMode);
-                        ICQWriteContactSettingWord(hContact,  "Version", wVersion);
+                        setSettingDword(hContact, "IP", dwIp);
+                        setSettingWord(hContact,  "UserPort", (WORD)dwPort);
+                        setSettingByte(hContact,  "DCType", bMode);
+                        setSettingWord(hContact,  "Version", wVersion);
                         if (wVersion>6)
                         {
                             reverse_cookie *pCookie = NULL;
@@ -826,7 +826,7 @@ static void parseTLV2711(DWORD dwUin, HANDLE hContact, DWORD dwID1, DWORD dwID2,
         wLen -= 2;
 
         if (hContact != INVALID_HANDLE_VALUE)
-            ICQWriteContactSettingWord(hContact, "Version", wVersion);
+            setSettingWord(hContact, "Version", wVersion);
 
         unpackDWord(&pDataBuf, &dwGuid1); // plugin type GUID
         unpackDWord(&pDataBuf, &dwGuid2);
@@ -2219,7 +2219,7 @@ BOOL handleMessageTypes(DWORD dwUin, DWORD dwTimestamp, DWORD dwMsgID, DWORD dwM
         hContact = HContactFromUIN(dwUin, &bAdded);
         sendMessageTypesAck(hContact, pre.flags & PREF_UTF, pAckParams);
 
-        if (!pre.flags && !IsUSASCII((BYTE*)szMsg, strlennull(szMsg)))
+        if (!pre.flags && !IsUSASCII(szMsg, strlennull(szMsg)))
         {
             // message is Ansi and contains national characters, create Unicode part by codepage
             char* usMsg = convertMsgToUserSpecificUtf(hContact, szMsg);
@@ -2378,7 +2378,7 @@ BOOL handleMessageTypes(DWORD dwUin, DWORD dwTimestamp, DWORD dwMsgID, DWORD dwM
         pCurBlob+=strlennull((char *)pCurBlob)+1;
         strcpy((char *)pCurBlob,pszMsgField[3]);
 
-        ICQAddEvent(NULL, EVENTTYPE_ADDED, dwTimestamp, 0, cbBlob, pBlob);
+        AddEvent(NULL, EVENTTYPE_ADDED, dwTimestamp, 0, cbBlob, pBlob);
     }
     break;
 
@@ -2526,7 +2526,7 @@ BOOL handleMessageTypes(DWORD dwUin, DWORD dwTimestamp, DWORD dwMsgID, DWORD dwM
         pCurBlob+=strlennull((char *)pCurBlob)+1;
         strcpy((char *)pCurBlob,pszMsgField[3]);
 
-        ICQAddEvent(NULL, ICQEVENTTYPE_WEBPAGER, dwTimestamp, 0, cbBlob, pBlob);
+        AddEvent(NULL, ICQEVENTTYPE_WEBPAGER, dwTimestamp, 0, cbBlob, pBlob);
     }
     break;
 
@@ -2557,7 +2557,7 @@ BOOL handleMessageTypes(DWORD dwUin, DWORD dwTimestamp, DWORD dwMsgID, DWORD dwM
         pCurBlob+=strlennull((char *)pCurBlob)+1;
         strcpy((char *)pCurBlob,pszMsgField[3]);
 
-        ICQAddEvent(NULL, ICQEVENTTYPE_EMAILEXPRESS, dwTimestamp, 0, cbBlob, pBlob);
+        AddEvent(NULL, ICQEVENTTYPE_EMAILEXPRESS, dwTimestamp, 0, cbBlob, pBlob);
     }
     break;
 
@@ -2596,7 +2596,7 @@ BOOL handleMessageTypes(DWORD dwUin, DWORD dwTimestamp, DWORD dwMsgID, DWORD dwM
     case MTYPE_AUTODND:
     case MTYPE_AUTOFFC:
     {
-        char** szMsg = MirandaStatusToAwayMsg(AwayMsgTypeToStatus(type));
+        char** szMsg = gProtocol.MirandaStatusToAwayMsg(AwayMsgTypeToStatus(type));
 
         if (szMsg)
         {
@@ -3033,7 +3033,7 @@ static void handleRecvMsgResponse(unsigned char *buf, WORD wLen, WORD wFlags, DW
             }
             NetLog_Server("Reverse Connect request failed");
             // Set DC status to failed
-            ICQWriteContactSettingByte(hContact, "DCStatus", 2);
+            setSettingByte(hContact, "DCStatus", 2);
         }
         break;
 
@@ -3080,7 +3080,7 @@ static void handleRecvServMsgError(unsigned char *buf, WORD wLen, WORD wFlags, D
         DWORD dwUin;
         uid_str szUid;
 
-        ICQGetContactSettingUID(hContact, &dwUin, &szUid);
+        getContactUid(hContact, &dwUin, &szUid);
 
         // Error code
         unpackWord(&buf, &wError);
@@ -3125,7 +3125,7 @@ static void handleRecvServMsgError(unsigned char *buf, WORD wLen, WORD wFlags, D
                     break;
                 }
                 // TODO: this needs better solution
-                ICQWriteContactSettingWord(hContact, "Status", ID_STATUS_OFFLINE);
+                setSettingWord(hContact, "Status", ID_STATUS_OFFLINE);
             }
             pszErrorMessage = ICQTranslate("The user has logged off. Select 'Retry' to send an offline message.\r\nSNAC(4.1) Error x04");
             break;
@@ -3566,7 +3566,7 @@ void sendTypingNotification(HANDLE hContact, WORD wMTNCode)
     _ASSERTE((wMTNCode == MTN_FINISHED) || (wMTNCode == MTN_TYPED) || (wMTNCode == MTN_BEGUN));
 #endif
 
-    if (ICQGetContactSettingUID(hContact, &dwUin, &szUID))
+    if (getContactUid(hContact, &dwUin, &szUID))
         return; // Invalid contact
 
     byUinlen = getUIDLen(dwUin, szUID);

@@ -43,7 +43,6 @@ extern int gbIdleAllow;
 extern int icqGoingOnlineStatus;
 extern int pendingAvatarsStart;
 extern WORD wListenPort;
-extern CRITICAL_SECTION modeMsgsMutex;
 extern const capstr capXStatus[];
 
 extern char* detectUserClient(HANDLE hContact, int nIsICQ, DWORD dwUin, WORD wUserClass, WORD wVersion, DWORD dwFT1, DWORD dwFT2, DWORD dwFT3, DWORD dwOnlineSince, BYTE bDirectFlag, DWORD dwDirectCookie, DWORD dwWebPort, BYTE* caps, WORD wLen, BYTE* bClientId, char* szClientBuf);
@@ -131,8 +130,8 @@ void handleServiceFam(unsigned char* pBuffer, WORD wBufferLength, snac_header* p
             servlistcookie* ack = NULL;
             DWORD dwCookie;
 
-            dwLastUpdate = ICQGetContactSettingDword(NULL, "SrvLastUpdate", 0);
-            wRecordCount = ICQGetContactSettingWord(NULL, "SrvRecordCount", 0);
+            dwLastUpdate = getSettingDword(NULL, "SrvLastUpdate", 0);
+            wRecordCount = getSettingWord(NULL, "SrvRecordCount", 0);
 
             // CLI_REQLISTS - we want to use SSI
 #ifdef _DEBUG
@@ -323,15 +322,15 @@ void handleServiceFam(unsigned char* pBuffer, WORD wBufferLength, snac_header* p
 
             // Save external IP
             dwValue = getDWordFromChain(chain, 10, 1);
-            ICQWriteContactSettingDword(NULL, "IP", dwValue);
-            ICQWriteContactSettingDword(NULL, "OldIP", dwValue);
+            setSettingDword(NULL, "IP", dwValue);
+            setSettingDword(NULL, "OldIP", dwValue);
 
             // Save member since timestamp
             dwValue = getDWordFromChain(chain, 5, 1);
-            if (dwValue) ICQWriteContactSettingDword(NULL, "MemberTS", dwValue);
+            if (dwValue) setSettingDword(NULL, "MemberTS", dwValue);
 
             dwValue = getDWordFromChain(chain, 3, 1);
-            ICQWriteContactSettingDword(NULL, "LogonTS", dwValue ? dwValue : time(NULL));
+            setSettingDword(NULL, "LogonTS", dwValue ? dwValue : time(NULL));
 
             disposeChain(&chain);
 
@@ -487,7 +486,7 @@ void handleServiceFam(unsigned char* pBuffer, WORD wBufferLength, snac_header* p
             if (!info->bMyAvatarInited) // signal the server after login
             {
                 // this refreshes avatar state - it used to work automatically, but now it does not
-                if (ICQGetContactSettingByte(NULL, "ForceOurAvatar", 0))
+                if (getSettingByte(NULL, "ForceOurAvatar", 0))
                 {
                     // keep our avatar
                     char* file = loadMyAvatarFileName();
@@ -514,7 +513,7 @@ void handleServiceFam(unsigned char* pBuffer, WORD wBufferLength, snac_header* p
                 char* file;
                 char* hash;
 
-                ICQWriteContactSettingBlob(NULL, "AvatarHash", pBuffer, 0x14);
+                setSettingBlob(NULL, "AvatarHash", pBuffer, 0x14);
 
                 setUserInfo();
                 // here we need to find a file, check its hash, if invalid get avatar from server
@@ -546,7 +545,7 @@ void handleServiceFam(unsigned char* pBuffer, WORD wBufferLength, snac_header* p
                     else if (memcmp(hash, pBuffer+4, 0x10))
                     {
                         // we have different avatar, sync that
-                        if (ICQGetContactSettingByte(NULL, "ForceOurAvatar", 1))
+                        if (getSettingByte(NULL, "ForceOurAvatar", 1))
                         {
                             // we want our avatar, update hash
                             DWORD dwPaFormat = DetectAvatarFormat(file);
@@ -746,11 +745,11 @@ static char* buildUinList(int subtype, WORD wMaxLen, HANDLE* hContactResume)
     if (*hContactResume)
         hContact = *hContactResume;
     else
-        hContact = ICQFindFirstContact();
+        hContact = FindFirstContact();
 
     while (hContact != NULL)
     {
-        if (!ICQGetContactSettingUID(hContact, &dwUIN, &szUID))
+        if (!getContactUid(hContact, &dwUIN, &szUID))
         {
             szLen[0] = strlennull(strUID(dwUIN, szUID));
 
@@ -758,18 +757,18 @@ static char* buildUinList(int subtype, WORD wMaxLen, HANDLE* hContactResume)
             {
 
             case BUL_VISIBLE:
-                add = ID_STATUS_ONLINE == ICQGetContactSettingWord(hContact, "ApparentMode", 0);
+                add = ID_STATUS_ONLINE == getSettingWord(hContact, "ApparentMode", 0);
                 break;
 
             case BUL_INVISIBLE:
-                add = ID_STATUS_OFFLINE == ICQGetContactSettingWord(hContact, "ApparentMode", 0);
+                add = ID_STATUS_OFFLINE == getSettingWord(hContact, "ApparentMode", 0);
                 break;
 
             case BUL_TEMPVISIBLE:
-                add = ICQGetContactSettingByte(hContact, "TemporaryVisible", 0);
+                add = getSettingByte(hContact, "TemporaryVisible", 0);
                 // clear temporary flag
                 // Here we assume that all temporary contacts will be in one packet
-                ICQWriteContactSettingByte(hContact, "TemporaryVisible", 0);
+                setSettingByte(hContact, "TemporaryVisible", 0);
                 break;
 
             default:
@@ -778,8 +777,8 @@ static char* buildUinList(int subtype, WORD wMaxLen, HANDLE* hContactResume)
                 // If we are in SS mode, we only add those contacts that are
                 // not in our SS list, or are awaiting authorization, to our
                 // client side list
-                if (gbSsiEnabled && ICQGetContactSettingWord(hContact, "ServerId", 0) &&
-                        !ICQGetContactSettingByte(hContact, "Auth", 0))
+                if (gbSsiEnabled && getSettingWord(hContact, "ServerId", 0) &&
+                        !getSettingByte(hContact, "Auth", 0))
                     add = 0;
 
                 // Never add hidden contacts to CS list
@@ -803,7 +802,7 @@ static char* buildUinList(int subtype, WORD wMaxLen, HANDLE* hContactResume)
             }
         }
 
-        hContact = ICQFindNextContact(hContact);
+        hContact = FindNextContact(hContact);
     }
     *hContactResume = NULL;
 
@@ -1295,7 +1294,7 @@ void handleServUINSettings(int nPort, serverthread_info *info)
         DWORD dwFT1, dwFT2, dwFT3;
 
         // Get status
-        wStatus = MirandaStatusToIcq(icqGoingOnlineStatus)|ICQGetContactSettingWord(NULL, "ICQStatus", 0); // modify
+        wStatus = MirandaStatusToIcq(icqGoingOnlineStatus)|getSettingWord(NULL, "ICQStatus", 0); // modify
 
         if (bXStatus && moodXStatus[bXStatus-1] != -1)
         {
@@ -1312,7 +1311,7 @@ void handleServUINSettings(int nPort, serverthread_info *info)
         packWord(&packet, wStatus);                 // Status
         packTLVWord(&packet, 0x0008, 0x0A06);       // TLV 8: Independent Status Messages
         packDWord(&packet, 0x000c0025);             // TLV C: Direct connection info
-        packDWord(&packet, ICQGetContactSettingDword(NULL, "RealIP", 0));
+        packDWord(&packet, getSettingDword(NULL, "RealIP", 0));
         packDWord(&packet, nPort);
         packByte(&packet, DC_TYPE);                 // TCP/FLAG firewall settings
         packWord(&packet, (WORD)GetProtoVersion());
@@ -1357,7 +1356,7 @@ void handleServUINSettings(int nPort, serverthread_info *info)
             szClient = detectUserClient(NULL, TRUE, 0, wClass, GetProtoVersion(), dwFT1, dwFT2, dwFT3, 0, 0, 0, 0, buf, bufsize, (BYTE*)&bClient, szStrBuf);
             if (!szClient||szClient<0)
                 szClient = "Unknown";
-            ICQWriteContactSettingUtf(NULL,   "MirVer",       szClient);
+            setSettingStringUtf(NULL,   "MirVer",       szClient);
         }
     }
 
@@ -1450,14 +1449,14 @@ void handleServUINSettings(int nPort, serverthread_info *info)
 
     if (gbAimEnabled)
     {
-        char** szMsg = MirandaStatusToAwayMsg(gnCurrentStatus);
+        char** szMsg = gProtocol.MirandaStatusToAwayMsg(gnCurrentStatus);
 
-        EnterCriticalSection(&modeMsgsMutex);
+        EnterCriticalSection(&gProtocol.m_modeMsgsMutex);
         if (szMsg && !bNoStatusReply)
             icq_sendSetAimAwayMsgServ(*szMsg);
-        LeaveCriticalSection(&modeMsgsMutex);
+        LeaveCriticalSection(&gProtocol.m_modeMsgsMutex);
     }
     CheckSelfRemove();
-    if(ICQGetContactSettingByte(NULL, "RemoveTmpContacts", 0))
+    if(getSettingByte(NULL, "RemoveTmpContacts", 0))
         RemoveTempUsers();
 }

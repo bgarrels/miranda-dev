@@ -100,7 +100,7 @@ static INT_PTR CALLBACK AskAuthProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
             if (!icqOnline)
                 return TRUE;
 
-            if (ICQGetContactSettingUID(hContact, &dwUin, &szUid))
+            if (getContactUid(hContact, &dwUin, &szUid))
                 return TRUE; // Invalid contact
 
             szReason = GetDlgItemTextUtf(hwndDlg, IDC_EDITAUTH);

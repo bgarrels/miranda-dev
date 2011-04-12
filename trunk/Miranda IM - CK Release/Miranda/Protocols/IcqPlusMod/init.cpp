@@ -36,6 +36,7 @@
 // -----------------------------------------------------------------------------
 
 #include "icqoscar.h"
+#include "IcqCore.h"
 #include "isee.h"
 
 #include "m_updater.h"
@@ -135,6 +136,11 @@ HANDLE hqipstatusiconchanged;
 HANDLE hIconFolder = NULL;
 HANDLE hHookIconsChanged = NULL;
 
+// New
+HANDLE hStaticServices[1];
+//IcqIconHandle hStaticIcons[4];
+HANDLE hStaticHooks[1];
+
 // Declarations
 void InitVars();
 static HANDLE ICQCreateServiceFunction(const char* szService, MIRANDASERVICE serviceProc);
@@ -146,6 +152,8 @@ extern void InitTzersIcons();
 extern void InitQipStatusEvents();
 extern void icq_BuildPrivacyMenu();
 static int IconLibIconsChanged(WPARAM wParam, LPARAM lParam);
+static PROTO_INTERFACE* icqProtoInit(const char* pszProtoName, const TCHAR* tszUserName);
+static int icqProtoUninit(PROTO_INTERFACE* ppro);
 
 extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 {
@@ -219,16 +227,40 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	pd.type   = PROTOTYPE_PROTOCOL;
 	//pd.fnInit   = icqProtoInit;
 	//pd.fnUninit = icqProtoUninit;
-	//pd.fnDestroy = icqProtoDestroy;
 	CallService(MS_PROTO_REGISTERMODULE, 0, (LPARAM)&pd);
 
-    HookEvent(ME_SYSTEM_MODULESLOADED, OnSystemModulesLoaded);
+	// Initialize charset conversion routines
+	InitI18N();
+
+	// Register static services
+	hStaticServices[0] = CreateServiceFunction(ICQ_DB_GETEVENTTEXT_MISSEDMESSAGE, icq_getEventTextMissedMessage);
+
+	/*
+	{
+		// Define global icons
+		char szSectionName[MAX_PATH];
+		null_snprintf(szSectionName, sizeof(szSectionName), "Protocols/%s", ICQ_PROTOCOL_NAME);
+
+		TCHAR lib[MAX_PATH];
+		GetModuleFileName(hInst, lib, MAX_PATH);
+		hStaticIcons[ISI_AUTH_REQUEST] = IconLibDefine(LPGEN("Request authorization"), szSectionName, NULL, "req_auth", lib, -IDI_AUTH_ASK);
+		hStaticIcons[ISI_AUTH_GRANT] = IconLibDefine(LPGEN("Grant authorization"), szSectionName, NULL, "grant_auth", lib, -IDI_AUTH_GRANT);
+		hStaticIcons[ISI_AUTH_REVOKE] = IconLibDefine(LPGEN("Revoke authorization"), szSectionName, NULL, "revoke_auth", lib, -IDI_AUTH_REVOKE);
+		hStaticIcons[ISI_ADD_TO_SERVLIST] = IconLibDefine(LPGEN("Add to server list"), szSectionName, NULL, "add_to_server", lib, -IDI_SERVLIST_ADD);
+	}
+	*/
+
+	//hStaticHooks[0] = HookEvent(ME_SYSTEM_MODULESLOADED, OnSystemModulesLoaded);
+
+	//g_MenuInit();
+
+	HookEvent(ME_SYSTEM_MODULESLOADED, OnSystemModulesLoaded);
     HookEvent(ME_SYSTEM_PRESHUTDOWN, OnSystemPreShutdown);
     HookEvent(ME_DB_CONTACT_SETTINGCHANGED, OnContactSettingChanged);
 
     InitializeCriticalSection(&connectionHandleMutex);
     InitializeCriticalSection(&localSeqMutex);
-    InitializeCriticalSection(&modeMsgsMutex);
+    InitializeCriticalSection(&gProtocol.m_modeMsgsMutex);
 
     // Initialize core modules
     InitDB();       // DB interface
@@ -243,18 +275,18 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
     InitRates();    // rate management
 
     // Initialize status message struct
-    ZeroMemory(&modeMsgs, sizeof(icq_mode_messages));
+    ZeroMemory(&gProtocol.m_modeMsgs, sizeof(icq_mode_messages));
 
     // Initialize temporary DB settings
-    ICQCreateResidentSetting("Status"); // NOTE: XStatus cannot be temporary
-    ICQCreateResidentSetting("ICQStatus");
-    ICQCreateResidentSetting("TemporaryVisible");
-    ICQCreateResidentSetting("TickTS");
-    ICQCreateResidentSetting("IdleTS");
-    ICQCreateResidentSetting("LogonTS");
-    ICQCreateResidentSetting("CapBuf");
-    ICQCreateResidentSetting("DCStatus");
-    ICQCreateResidentSetting("TmpContact");
+    CreateResidentSetting("Status"); // NOTE: XStatus cannot be temporary
+    CreateResidentSetting("ICQStatus");
+    CreateResidentSetting("TemporaryVisible");
+    CreateResidentSetting("TickTS");
+    CreateResidentSetting("IdleTS");
+    CreateResidentSetting("LogonTS");
+    CreateResidentSetting("CapBuf");
+    CreateResidentSetting("DCStatus");
+    CreateResidentSetting("TmpContact");
 
     // Setup services
     ICQCreateServiceFunction(PS_ICQP_SERVER_IGNORE, IcqServerIgnore);
@@ -263,7 +295,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
     ICQCreateServiceFunction(PS_LOADICON, IcqLoadIcon);
     ICQCreateServiceFunction(PS_SETSTATUS, IcqSetStatus);
     ICQCreateServiceFunction(PS_GETSTATUS, IcqGetStatus);
-    ICQCreateServiceFunction(PS_SETAWAYMSG, IcqSetAwayMsg);
+    ICQCreateServiceFunction(PS_SETAWAYMSG, CIcqProto::IcqSetAwayMsg);
     ICQCreateServiceFunction(PS_AUTHALLOW, IcqAuthAllow);
     ICQCreateServiceFunction(PS_AUTHDENY, IcqAuthDeny);
 
@@ -363,9 +395,6 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 
     icq_InitISee();
 
-    // Initialize charset conversion routines
-    InitI18N();
-
     UpdateGlobalSettings();
 
     gnCurrentStatus = ID_STATUS_OFFLINE;
@@ -416,13 +445,11 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
         CallService(MS_DB_CONTACT_ENUMSETTINGS, 0, (LPARAM)&dbces);
     }
 
-    /*
       {
-        ICQ_CUSTOMCAP icqCustomCap;
-    	IcqBuildMirandaCap(&icqCustomCap, "Miranda ICQ Capability Test", NULL, "TestTest");
-        CallProtoService(gpszICQProtoName, PS_ICQ_ADDCAPABILITY, 0, (LPARAM)&icqCustomCap);
+        //ICQ_CUSTOMCAP icqCustomCap;
+    	//IcqBuildMirandaCap(&icqCustomCap, "Miranda ICQ Capability Test", NULL, "TestTest");
+        //CallProtoService(gpszICQProtoName, PS_ICQ_ADDCAPABILITY, 0, (LPARAM)&icqCustomCap);
       }
-    */
 
     // Reset a bunch of session specific settings
     ResetSettingsOnLoad();
@@ -603,73 +630,73 @@ void RegEventType(int EventType, char* EventDescription)
 
 void InitVars()
 {
-    bSpamPopUp = ICQGetContactSettingByte(NULL,"SpamPopUpEnabled",1);
-    bUnknownPopUp = ICQGetContactSettingByte(NULL,"UnknownPopUpEnabled",1);
-    bFoundPopUp = ICQGetContactSettingByte(NULL,"FoundPopUpEnabled",1);
-    bScanPopUp = ICQGetContactSettingByte(NULL,"ScanPopUpEnabled",1);
-    bVisPopUp = ICQGetContactSettingByte(NULL,"VisPopUpEnabled",1);
-    bClientChangePopUp = ICQGetContactSettingByte(NULL,"ClientChangePopup",0);
-    bPopUpForNotOnList = ICQGetContactSettingByte(NULL,"PopUpForNotOnList",0);
-    bPopUpsEnabled = ICQGetContactSettingByte(NULL, "PopupsEnabled", 1);
-    bXstatusIconShow = ICQGetContactSettingByte(NULL, "XStatusIconShow", 1);
-    bQipstatusIconShow = ICQGetContactSettingByte(NULL, "QipStatusShow", 0);
-    bAuthIgnore = ICQGetContactSettingByte(NULL, "AuthIgnore", 0);
-    bIgnoreCheckPop = ICQGetContactSettingByte(NULL, "IgnoreCheckPop", 1);
-    bPopSelfRem = ICQGetContactSettingByte(NULL, "PopSelfRem", 1);
-    bInfoRequestPopUp = ICQGetContactSettingByte(NULL, "InfoRequestPopUp", 0);
-    bAuthPopUp = ICQGetContactSettingByte(NULL, "AuthPopUp", 0);
-    bPopupsForIgnored = ICQGetContactSettingByte(NULL, "PopUpForIgnored", 0);
-    bPopupsForHidden = ICQGetContactSettingByte(NULL, "PopUpForHidden", 0);
-    bXUpdaterPopUp = ICQGetContactSettingByte(NULL, "XUpdaterPopUp", 0);
-    bCloseWindowPopUp = ICQGetContactSettingByte(NULL, "CloseWindow", 1);
-    bPSD = ICQGetContactSettingByte(NULL, "PSD", 1);
-    bNoASDInInvisible = ICQGetContactSettingByte(NULL, "NoASDInInvisible", 1);
-    bASDForOffline = ICQGetContactSettingByte(NULL, "ASDForOffline", 1);
-    bLogSelfRemoveFile = ICQGetContactSettingByte(NULL, "LogSelfRemoveFile", 0);
-    bLogIgnoreCheckFile = ICQGetContactSettingByte(NULL, "LogIgnoreCheckFile", 0);
-    bLogStatusCheckFile = ICQGetContactSettingByte(NULL, "LogStatusCheckFile", 0);
-    bLogASDFile = ICQGetContactSettingByte(NULL, "LogASDFile", 0);
-    bLogClientChangeFile = ICQGetContactSettingByte(NULL, "LogClientChangeFile", 0);
-    bLogAuthFile = ICQGetContactSettingByte(NULL, "LogAuthFile", 0);
-    bLogInfoRequestFile = ICQGetContactSettingByte(NULL, "LogRequestFile", 0);
-    bLogReadXStatusFile = ICQGetContactSettingByte(NULL, "LogReadXStatusFile", 0);
-    bLogSelfRemoveHistory = ICQGetContactSettingByte(NULL, "LogSelfRemoveHistory", 0);
-    bLogIgnoreCheckHistory = ICQGetContactSettingByte(NULL, "LogIgnoreCheckHistory", 0);
-    bLogStatusCheckHistory = ICQGetContactSettingByte(NULL, "LogStatusCheckHistory", 0);
-    bLogASDHistory = ICQGetContactSettingByte(NULL, "LogASDHistory", 0);
-    bLogClientChangeHistory = ICQGetContactSettingByte(NULL, "LogClientChangeHistory", 0);
-    bLogAuthHistory = ICQGetContactSettingByte(NULL, "LogAuthHistory", 0);
-    bLogInfoRequestHistory = ICQGetContactSettingByte(NULL, "LogRequestHistory", 0);
-    bLogReadXStatusHistory = ICQGetContactSettingByte(NULL, "LogReadXStatusHistory", 0);
-    bHcontactHistory = ICQGetContactSettingByte(NULL,"LogToHcontact",0);
-    bTmpContacts = ICQGetContactSettingByte(NULL, "TempContacts", 0);
-    TmpGroupName = UniGetContactSettingUtf(NULL,ICQ_PROTOCOL_NAME,"TmpContactsGroup", Translate("General"));
-    bAddTemp = ICQGetContactSettingByte(NULL, "AddTemp", 0);
-    bTmpAuthRequet = ICQGetContactSettingByte(NULL, "TmpReqAuth", 1);
-    bTmpSendAdded = ICQGetContactSettingByte(NULL, "TmpSndAdded", 1);
-    bNoStatusReply = ICQGetContactSettingByte(NULL,"NoStatusReply", 0);
-    bServerAutoChange = ICQGetContactSettingByte(NULL,"ServerAutoChange", 1);
-    bIncognitoGlobal = ICQGetContactSettingByte(NULL, "IncognitoGlobal", 0);
-    bPrivacyMenuPlacement = ICQGetContactSettingByte(NULL,"PrivacyPlacement", 1);
-    bShowAuth = ICQGetContactSettingByte(NULL, "ShowAuth", 0);
-    bUinPopup = ICQGetContactSettingByte(NULL, "UinPopup", 0);
-    bReadXStatusPopUp = ICQGetContactSettingByte(NULL, "ReadXStatusPopUp", 0);
-    bNoPSDForHidden = ICQGetContactSettingByte(NULL, "NoPSDForHidden", 1);
-    gbASD = ICQGetContactSettingByte(NULL, "ASD", 0);
-    bASDViaAwayMsg = ICQGetContactSettingByte(NULL, "bASDViaAwayMsg", 0);
-    bASDViaXtraz = ICQGetContactSettingByte(NULL, "bASDViaXtraz", 0);
-    bASDViaURL = ICQGetContactSettingByte(NULL, "bASDViaURL", 0);
-    bASDUnauthorized = ICQGetContactSettingByte(NULL, "bASDUnauthorized", 0);
-    bASDViaAuth = ICQGetContactSettingByte(NULL, "bASDViaAuth", 0);
-    gbWebAware = ICQGetContactSettingByte(NULL, "WebAware", 0);
-    strcpy(szHttpUserAgent, ICQGetContactSettingUtf(NULL, "HttpUserAgent", "Mozilla/4.08 [en] (WinNT; U ;Nav)"));
-    m_bSecureConnection = ICQGetContactSettingByte(NULL, "SecureConnection", DEFAULT_SECURE_CONNECTION);
-    gbCustomCapEnabled = ICQGetContactSettingByte(NULL, "customcap", 1);
-    gbHideIdEnabled = ICQGetContactSettingByte(NULL, "Hide ID", 1);
-    gbRTFEnabled = ICQGetContactSettingByte(NULL, "RTF", 0);
-    gbVerEnabled = ICQGetContactSettingByte(NULL, "CurrentVer", 0);
-    gbTzerEnabled = ICQGetContactSettingByte(NULL, "tZer", 0);
-    gbQipStatusEnabled = ICQGetContactSettingByte(NULL, "QipStatusEnable", 0);
+    bSpamPopUp = getSettingByte(NULL,"SpamPopUpEnabled",1);
+    bUnknownPopUp = getSettingByte(NULL,"UnknownPopUpEnabled",1);
+    bFoundPopUp = getSettingByte(NULL,"FoundPopUpEnabled",1);
+    bScanPopUp = getSettingByte(NULL,"ScanPopUpEnabled",1);
+    bVisPopUp = getSettingByte(NULL,"VisPopUpEnabled",1);
+    bClientChangePopUp = getSettingByte(NULL,"ClientChangePopup",0);
+    bPopUpForNotOnList = getSettingByte(NULL,"PopUpForNotOnList",0);
+    bPopUpsEnabled = getSettingByte(NULL, "PopupsEnabled", 1);
+    bXstatusIconShow = getSettingByte(NULL, "XStatusIconShow", 1);
+    bQipstatusIconShow = getSettingByte(NULL, "QipStatusShow", 0);
+    bAuthIgnore = getSettingByte(NULL, "AuthIgnore", 0);
+    bIgnoreCheckPop = getSettingByte(NULL, "IgnoreCheckPop", 1);
+    bPopSelfRem = getSettingByte(NULL, "PopSelfRem", 1);
+    bInfoRequestPopUp = getSettingByte(NULL, "InfoRequestPopUp", 0);
+    bAuthPopUp = getSettingByte(NULL, "AuthPopUp", 0);
+    bPopupsForIgnored = getSettingByte(NULL, "PopUpForIgnored", 0);
+    bPopupsForHidden = getSettingByte(NULL, "PopUpForHidden", 0);
+    bXUpdaterPopUp = getSettingByte(NULL, "XUpdaterPopUp", 0);
+    bCloseWindowPopUp = getSettingByte(NULL, "CloseWindow", 1);
+    bPSD = getSettingByte(NULL, "PSD", 1);
+    bNoASDInInvisible = getSettingByte(NULL, "NoASDInInvisible", 1);
+    bASDForOffline = getSettingByte(NULL, "ASDForOffline", 1);
+    bLogSelfRemoveFile = getSettingByte(NULL, "LogSelfRemoveFile", 0);
+    bLogIgnoreCheckFile = getSettingByte(NULL, "LogIgnoreCheckFile", 0);
+    bLogStatusCheckFile = getSettingByte(NULL, "LogStatusCheckFile", 0);
+    bLogASDFile = getSettingByte(NULL, "LogASDFile", 0);
+    bLogClientChangeFile = getSettingByte(NULL, "LogClientChangeFile", 0);
+    bLogAuthFile = getSettingByte(NULL, "LogAuthFile", 0);
+    bLogInfoRequestFile = getSettingByte(NULL, "LogRequestFile", 0);
+    bLogReadXStatusFile = getSettingByte(NULL, "LogReadXStatusFile", 0);
+    bLogSelfRemoveHistory = getSettingByte(NULL, "LogSelfRemoveHistory", 0);
+    bLogIgnoreCheckHistory = getSettingByte(NULL, "LogIgnoreCheckHistory", 0);
+    bLogStatusCheckHistory = getSettingByte(NULL, "LogStatusCheckHistory", 0);
+    bLogASDHistory = getSettingByte(NULL, "LogASDHistory", 0);
+    bLogClientChangeHistory = getSettingByte(NULL, "LogClientChangeHistory", 0);
+    bLogAuthHistory = getSettingByte(NULL, "LogAuthHistory", 0);
+    bLogInfoRequestHistory = getSettingByte(NULL, "LogRequestHistory", 0);
+    bLogReadXStatusHistory = getSettingByte(NULL, "LogReadXStatusHistory", 0);
+    bHcontactHistory = getSettingByte(NULL,"LogToHcontact",0);
+    bTmpContacts = getSettingByte(NULL, "TempContacts", 0);
+    TmpGroupName = getSettingStringUtf(NULL,ICQ_PROTOCOL_NAME,"TmpContactsGroup", Translate("General"));
+    bAddTemp = getSettingByte(NULL, "AddTemp", 0);
+    bTmpAuthRequet = getSettingByte(NULL, "TmpReqAuth", 1);
+    bTmpSendAdded = getSettingByte(NULL, "TmpSndAdded", 1);
+    bNoStatusReply = getSettingByte(NULL,"NoStatusReply", 0);
+    bServerAutoChange = getSettingByte(NULL,"ServerAutoChange", 1);
+    bIncognitoGlobal = getSettingByte(NULL, "IncognitoGlobal", 0);
+    bPrivacyMenuPlacement = getSettingByte(NULL,"PrivacyPlacement", 1);
+    bShowAuth = getSettingByte(NULL, "ShowAuth", 0);
+    bUinPopup = getSettingByte(NULL, "UinPopup", 0);
+    bReadXStatusPopUp = getSettingByte(NULL, "ReadXStatusPopUp", 0);
+    bNoPSDForHidden = getSettingByte(NULL, "NoPSDForHidden", 1);
+    gbASD = getSettingByte(NULL, "ASD", 0);
+    bASDViaAwayMsg = getSettingByte(NULL, "bASDViaAwayMsg", 0);
+    bASDViaXtraz = getSettingByte(NULL, "bASDViaXtraz", 0);
+    bASDViaURL = getSettingByte(NULL, "bASDViaURL", 0);
+    bASDUnauthorized = getSettingByte(NULL, "bASDUnauthorized", 0);
+    bASDViaAuth = getSettingByte(NULL, "bASDViaAuth", 0);
+    gbWebAware = getSettingByte(NULL, "WebAware", 0);
+    strcpy(szHttpUserAgent, getSettingStringUtf(NULL, "HttpUserAgent", "Mozilla/4.08 [en] (WinNT; U ;Nav)"));
+    m_bSecureConnection = getSettingByte(NULL, "SecureConnection", DEFAULT_SECURE_CONNECTION);
+    gbCustomCapEnabled = getSettingByte(NULL, "customcap", 1);
+    gbHideIdEnabled = getSettingByte(NULL, "Hide ID", 1);
+    gbRTFEnabled = getSettingByte(NULL, "RTF", 0);
+    gbVerEnabled = getSettingByte(NULL, "CurrentVer", 0);
+    gbTzerEnabled = getSettingByte(NULL, "tZer", 0);
+    gbQipStatusEnabled = getSettingByte(NULL, "QipStatusEnable", 0);
 //  if(ICQGetContactSettingByte(NULL, "StealthRequest", 0) == 1)
 //	  bStealthRequest = TRUE;
 }
@@ -703,16 +730,16 @@ extern "C" int __declspec(dllexport) Unload(void)
     UninitRates();
     UninitCookies();
     UninitCache();
-    DeleteCriticalSection(&modeMsgsMutex);
+    DeleteCriticalSection(&gProtocol.m_modeMsgsMutex);
     DeleteCriticalSection(&localSeqMutex);
     DeleteCriticalSection(&connectionHandleMutex);
-    mir_free(modeMsgs.szOffline);
-    mir_free(modeMsgs.szOnline);
-    mir_free(modeMsgs.szAway);
-    mir_free(modeMsgs.szNa);
-    mir_free(modeMsgs.szOccupied);
-    mir_free(modeMsgs.szDnd);
-    mir_free(modeMsgs.szFfc);
+    mir_free(gProtocol.m_modeMsgs.szOffline);
+    mir_free(gProtocol.m_modeMsgs.szOnline);
+    mir_free(gProtocol.m_modeMsgs.szAway);
+    mir_free(gProtocol.m_modeMsgs.szNa);
+    mir_free(gProtocol.m_modeMsgs.szOccupied);
+    mir_free(gProtocol.m_modeMsgs.szDnd);
+    mir_free(gProtocol.m_modeMsgs.szFfc);
 
     if (hHookIconsChanged)
         UnhookEvent(hHookIconsChanged);
@@ -742,15 +769,10 @@ extern "C" int __declspec(dllexport) Unload(void)
     if (hHookIdleEvent)
         UnhookEvent(hHookIdleEvent);
 
-    bVisibility = ICQGetContactSettingByte(NULL, "SrvVisibility", 0);
+    bVisibility = getSettingByte(NULL, "SrvVisibility", 0);
 
     return 0;
 }
-
-
-
-
-
 
 static int OnSystemModulesLoaded(WPARAM wParam,LPARAM lParam)
 {
@@ -856,7 +878,7 @@ static int OnSystemModulesLoaded(WPARAM wParam,LPARAM lParam)
 
     {
         // userinfo
-        ICQWriteContactSettingUtf(NULL, "MirVer", Translate("You need to be connected"));
+        setSettingStringUtf(NULL, "MirVer", Translate("You need to be connected"));
         DBWriteContactSettingDword(NULL, ICQ_PROTOCOL_NAME, "IP", 0);
         if(!DBGetContactSettingByte(NULL, ICQ_PROTOCOL_NAME, "ConstRealIP", 0))
             DBWriteContactSettingDword(NULL, ICQ_PROTOCOL_NAME, "RealIP", 0);
@@ -1128,16 +1150,16 @@ static int icq_PrebuildContactMenu(WPARAM wParam, LPARAM lParam)
     CLISTMENUITEM cli= {0};
     extern HANDLE hStatusMenu;
 
-    CListShowMenuItem(hUserMenuAuth, bShowAuth?1:ICQGetContactSettingByte((HANDLE)wParam, "Auth", 0) && icqOnline);
-    CListShowMenuItem(hUserMenuGrant, bShowAuth?1:ICQGetContactSettingByte((HANDLE)wParam, "Grant", 0) && icqOnline);
-    CListShowMenuItem(hUserMenuRevoke, bShowAuth?1:!ICQGetContactSettingByte((HANDLE)wParam, "Grant", 0) && icqOnline);
+    CListShowMenuItem(hUserMenuAuth, bShowAuth?1:getSettingByte((HANDLE)wParam, "Auth", 0) && icqOnline);
+    CListShowMenuItem(hUserMenuGrant, bShowAuth?1:getSettingByte((HANDLE)wParam, "Grant", 0) && icqOnline);
+    CListShowMenuItem(hUserMenuRevoke, bShowAuth?1:!getSettingByte((HANDLE)wParam, "Grant", 0) && icqOnline);
     CListShowMenuItem(hUserMenuSetVis, icqOnline);
     CListShowMenuItem(hUserMenuSetInvis, icqOnline);
     CListShowMenuItem(hUserMenuStatus, icqOnline && gbASD);
 //  CListShowMenuItem(hStatusMenu, icqOnline && gbASD); //not woking ? %), looks like we need other method
     CListShowMenuItem(hUserMenuIncognito, (/*bStealthRequest && */!bIncognitoGlobal &&
-                      (ICQGetContactSettingWord((HANDLE)wParam, "Status", 0)!= ID_STATUS_OFFLINE) &&
-                      (ICQGetContactSettingWord((HANDLE)wParam, "Status", 0)!= ID_STATUS_INVISIBLE)  && icqOnline)); //now away messages for online supported
+                      (getSettingWord((HANDLE)wParam, "Status", 0)!= ID_STATUS_OFFLINE) &&
+                      (getSettingWord((HANDLE)wParam, "Status", 0)!= ID_STATUS_INVISIBLE)  && icqOnline)); //now away messages for online supported
     CListShowMenuItem(hUserMenuSendtZer, icqOnline && gbTzerEnabled);
 
     cli.cbSize=sizeof(CLISTMENUITEM);
@@ -1145,7 +1167,7 @@ static int icq_PrebuildContactMenu(WPARAM wParam, LPARAM lParam)
     cli.hIcon=NULL;
     cli.pszContactOwner=NULL;
 
-    switch(ICQGetContactSettingWord((HANDLE)wParam, "ApparentMode",0))
+    switch(getSettingWord((HANDLE)wParam, "ApparentMode",0))
     {
     case ID_STATUS_ONLINE:
         cli.flags|=CMIF_CHECKED;
@@ -1162,7 +1184,7 @@ static int icq_PrebuildContactMenu(WPARAM wParam, LPARAM lParam)
     }
 
 
-    if (gbSsiEnabled && !ICQGetContactSettingWord((HANDLE)wParam, "ServerId", 0) && !ICQGetContactSettingWord((HANDLE)wParam, "SrvIgnoreId", 0))
+    if (gbSsiEnabled && !getSettingWord((HANDLE)wParam, "ServerId", 0) && !getSettingWord((HANDLE)wParam, "SrvIgnoreId", 0))
         CListShowMenuItem(hUserMenuAddServ, 1);
     else
         CListShowMenuItem(hUserMenuAddServ, 0);
@@ -1199,8 +1221,6 @@ static int IconLibIconsChanged(WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
-
-
 void UpdateGlobalSettings()
 {
     if (ghServerNetlibUser)
@@ -1219,15 +1239,15 @@ void UpdateGlobalSettings()
             gbGatewayMode = 0;
     }
 
-    gbSecureLogin = ICQGetContactSettingByte(NULL, "SecureLogin", DEFAULT_SECURE_LOGIN);
-    gbAimEnabled = ICQGetContactSettingByte(NULL, "AimEnabled", DEFAULT_AIM_ENABLED);
-    gbUtfEnabled = ICQGetContactSettingByte(NULL, "UtfEnabled", DEFAULT_UTF_ENABLED);
-    gwAnsiCodepage = ICQGetContactSettingWord(NULL, "AnsiCodePage", DEFAULT_ANSI_CODEPAGE);
-    gbDCMsgEnabled = ICQGetContactSettingByte(NULL, "DirectMessaging", DEFAULT_DCMSG_ENABLED);
-    gbTempVisListEnabled = ICQGetContactSettingByte(NULL, "TempVisListEnabled", DEFAULT_TEMPVIS_ENABLED);
-    gbSsiEnabled = ICQGetContactSettingByte(NULL, "UseServerCList", DEFAULT_SS_ENABLED);
-    gbAvatarsEnabled = ICQGetContactSettingByte(NULL, "AvatarsEnabled", DEFAULT_AVATARS_ENABLED);
-    gbXStatusEnabled = ICQGetContactSettingByte(NULL, "XStatusEnabled", DEFAULT_XSTATUS_ENABLED);
+    gbSecureLogin = getSettingByte(NULL, "SecureLogin", DEFAULT_SECURE_LOGIN);
+    gbAimEnabled = getSettingByte(NULL, "AimEnabled", DEFAULT_AIM_ENABLED);
+    gbUtfEnabled = getSettingByte(NULL, "UtfEnabled", DEFAULT_UTF_ENABLED);
+    gwAnsiCodepage = getSettingWord(NULL, "AnsiCodePage", DEFAULT_ANSI_CODEPAGE);
+    gbDCMsgEnabled = getSettingByte(NULL, "DirectMessaging", DEFAULT_DCMSG_ENABLED);
+    gbTempVisListEnabled = getSettingByte(NULL, "TempVisListEnabled", DEFAULT_TEMPVIS_ENABLED);
+    gbSsiEnabled = getSettingByte(NULL, "UseServerCList", DEFAULT_SS_ENABLED);
+    gbAvatarsEnabled = getSettingByte(NULL, "AvatarsEnabled", DEFAULT_AVATARS_ENABLED);
+    gbXStatusEnabled = getSettingByte(NULL, "XStatusEnabled", DEFAULT_XSTATUS_ENABLED);
 }
 
 WORD gwAnsiCodepage;
@@ -1236,7 +1256,6 @@ BYTE gbSecureLogin;
 BYTE gbXStatusEnabled;
 BYTE gbUnicodeCore_dep;	// FIXME: deprecated
 BYTE gbWebAware;
-icq_mode_messages modeMsgs;
 BOOL m_bSecureConnection;
 BYTE gbCustomCapEnabled;
 BYTE gbHideIdEnabled;
@@ -1253,23 +1272,21 @@ BYTE gbAvatarsEnabled;
 BYTE gbAimEnabled;
 BYTE gbDCMsgEnabled;
 //char gpszICQProtoName[MAX_PATH];
-CRITICAL_SECTION modeMsgsMutex;
 HANDLE ghDirectNetlibUser;
 HANDLE ghServerNetlibUser;
 
 // New methods ///////////////////////////////////////////////////////////
-/*
-static PROTO_INTERFACE* icqProtoInit( const char* pszProtoName, const TCHAR* tszUserName )
+
+static PROTO_INTERFACE* icqProtoInit(const char* pszProtoName, const TCHAR* tszUserName)
 {
-	CIcqProto *ppro = new CIcqProto(pszProtoName, tszUserName);
-	g_Instances.insert(ppro);
+	CIcqProto* ppro = new CIcqProto(pszProtoName, tszUserName);
+	g_Instances.push_back(ppro);
 	return ppro;
 }
 
-static int icqProtoUninit( PROTO_INTERFACE* ppro )
+static int icqProtoUninit(PROTO_INTERFACE* ppro)
 {
-	g_Instances.remove(( CIcqProto* )ppro);
-	delete ( CIcqProto* )ppro;
+	g_Instances.remove((CIcqProto* )ppro);
+	delete (CIcqProto*)ppro;
 	return 0;
 }
-*/

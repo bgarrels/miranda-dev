@@ -43,7 +43,7 @@ extern DWORD _mirandaVersion;
 
 void icq_FirstRunCheck()
 {
-    if (ICQGetContactSettingByte(NULL, "FirstRun", 0))
+    if (getSettingByte(NULL, "FirstRun", 0))
         return;
     DialogBoxUtf(TRUE, hInst, MAKEINTRESOURCEA(IDD_ICQACCOUNT), NULL, icq_FirstRunDlgProc, 0);
     return;
@@ -65,7 +65,7 @@ INT_PTR CALLBACK icq_FirstRunDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
         ICQTranslateDialog(hwndDlg);
         SendMessage(hwndDlg, WM_SETICON, ICON_BIG, (LPARAM) IconLibGetIcon("proto"));
 
-        dwUIN = ICQGetContactSettingUIN(NULL);
+        dwUIN = getContactUin(NULL);
 
         if (dwUIN)
         {
@@ -104,18 +104,18 @@ INT_PTR CALLBACK icq_FirstRunDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 
             GetDlgItemTextA(hwndDlg, IDC_UIN, str, sizeof(str));
             dwUIN = atoi(str);
-            ICQWriteContactSettingDword(NULL, UNIQUEIDSETTING, dwUIN);
+            setSettingDword(NULL, UNIQUEIDSETTING, dwUIN);
             GetDlgItemTextA(hwndDlg, IDC_PW, str, 9);
             strcpy(gpszPassword, str);
             CallService(MS_DB_CRYPT_ENCODESTRING, sizeof(gpszPassword), (LPARAM) str);
-            ICQWriteContactSettingString(NULL, "Password", str);
+            setSettingString(NULL, "Password", str);
         }
         // fall through
 
         case IDCANCEL:
         {
             // Mark first run as completed
-            ICQWriteContactSettingByte(NULL, "FirstRun", 1);
+            setSettingByte(NULL, "FirstRun", 1);
             EndDialog(hwndDlg, IDCANCEL);
         }
         break;
@@ -145,7 +145,7 @@ INT_PTR CALLBACK DlgProcAccMgrUI(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM l
 
         ICQTranslateDialog(hwndDlg);
 
-        dwUIN = ICQGetContactSettingUIN(NULL);
+        dwUIN = getContactUin(NULL);
 
         if (dwUIN)
         {
@@ -189,11 +189,11 @@ INT_PTR CALLBACK DlgProcAccMgrUI(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM l
             DWORD dwUIN;
             GetDlgItemTextA(hwndDlg, IDC_UIN, str, sizeof(str));
             dwUIN = atoi(str);
-            ICQWriteContactSettingDword(NULL, UNIQUEIDSETTING, dwUIN);
+            setSettingDword(NULL, UNIQUEIDSETTING, dwUIN);
             GetDlgItemTextA(hwndDlg, IDC_PW, str, 9);
             strcpy(gpszPassword, str);
             CallService(MS_DB_CRYPT_ENCODESTRING, sizeof(gpszPassword), (LPARAM)str);
-            ICQWriteContactSettingString(NULL, "Password", str);
+            setSettingString(NULL, "Password", str);
             return TRUE;
         }
         }

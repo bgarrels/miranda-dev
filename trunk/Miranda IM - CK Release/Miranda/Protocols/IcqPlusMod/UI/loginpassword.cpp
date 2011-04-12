@@ -61,13 +61,13 @@ INT_PTR CALLBACK LoginPasswdDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 
         ICQTranslateDialog(hwndDlg);
         SendMessage(hwndDlg, WM_SETICON, ICON_BIG, (LPARAM)IconLibGetIcon("proto"));
-        dwUin = ICQGetContactSettingUIN(NULL);
+        dwUin = getContactUin(NULL);
         null_snprintf(pszUIN, 128, ICQTranslateUtfStatic("Enter a password for UIN %u:", str, MAX_PATH), dwUin);
         SetDlgItemTextUtf(hwndDlg, IDC_INSTRUCTION, pszUIN);
 
         SendDlgItemMessage(hwndDlg, IDC_LOGINPW, EM_LIMITTEXT, 10, 0);
 
-        CheckDlgButton(hwndDlg, IDC_SAVEPASS, ICQGetContactSettingByte(NULL, "RememberPass", 0));
+        CheckDlgButton(hwndDlg, IDC_SAVEPASS, getSettingByte(NULL, "RememberPass", 0));
     }
     break;
 
@@ -83,7 +83,7 @@ INT_PTR CALLBACK LoginPasswdDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
         case IDOK:
         {
             gbRememberPwd = (BYTE)IsDlgButtonChecked(hwndDlg, IDC_SAVEPASS);
-            ICQWriteContactSettingByte(NULL, "RememberPass", gbRememberPwd);
+            setSettingByte(NULL, "RememberPass", gbRememberPwd);
 
             GetDlgItemTextA(hwndDlg, IDC_LOGINPW, gpszPassword, sizeof(gpszPassword));
 

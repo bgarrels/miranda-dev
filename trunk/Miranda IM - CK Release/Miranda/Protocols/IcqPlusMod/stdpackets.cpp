@@ -136,7 +136,7 @@ static void packServTLV2711Header(icq_packet *packet, WORD wCookie, WORD wVersio
 
 static void packServDCInfo(icq_packet *p, BOOL bEmpty)
 {
-    packTLVDWord(p, 0x03, bEmpty ? 0 : ICQGetContactSettingDword(NULL, "RealIP", 0)); // TLV: 0x03 DWORD IP
+    packTLVDWord(p, 0x03, bEmpty ? 0 : getSettingDword(NULL, "RealIP", 0)); // TLV: 0x03 DWORD IP
     packTLVWord(p, 0x05, (WORD)(bEmpty ? 0 : wListenPort));                           // TLV: 0x05 Listen port
 }
 
@@ -289,7 +289,7 @@ void icq_setstatus(WORD wStatus, int bSetMood)
         }
     }
 
-    wStatus |= ICQGetContactSettingWord(NULL, "ICQStatus", 0);
+    wStatus |= getSettingWord(NULL, "ICQStatus", 0);
     // Pack data in packet
     serverPacketInit(&packet, (WORD)(18 + cbMoodId + cbMoodData));
     packFNACHeader(&packet, ICQ_SERVICE_FAMILY, ICQ_CLIENT_SET_STATUS);
@@ -594,7 +594,7 @@ DWORD icq_sendGetInfoServ(HANDLE hContact, DWORD dwUin, int bManual)
         return dwCookie;
 
 
-    if (!ICQGetContactSetting(hContact, DBSETTING_METAINFO_TOKEN, &infoToken))
+    if (!getSetting(hContact, DBSETTING_METAINFO_TOKEN, &infoToken))
     {
         // retrieve user details using privacy token
         cbToken = infoToken.cpbVal;
@@ -1025,7 +1025,7 @@ void icq_sendAwayMsgReplyServ(DWORD dwUin, DWORD dwMsgID1, DWORD dwMsgID2, WORD 
     {
         NotifyEventHooks(hsmsgrequest, (WPARAM)msgType, (LPARAM)dwUin);
 
-        EnterCriticalSection(&modeMsgsMutex);
+        EnterCriticalSection(&gProtocol.m_modeMsgsMutex);
 
         if (szMsg && *szMsg)
         {
@@ -1058,7 +1058,7 @@ void icq_sendAwayMsgReplyServ(DWORD dwUin, DWORD dwMsgID1, DWORD dwMsgID2, WORD 
             sendServPacket(&packet);
         }
 
-        LeaveCriticalSection(&modeMsgsMutex);
+        LeaveCriticalSection(&gProtocol.m_modeMsgsMutex);
     }
 }
 
@@ -1533,7 +1533,7 @@ void icq_sendChangeVisInvis(HANDLE hContact, DWORD dwUin, char* szUID, int list,
         if (add)
         {
             // check if we should make the changes, this is 2nd level check
-            if (ICQGetContactSettingWord(hContact, szSetting, 0) != 0)
+            if (getSettingWord(hContact, szSetting, 0) != 0)
                 return;
 
             // Add
@@ -1541,18 +1541,18 @@ void icq_sendChangeVisInvis(HANDLE hContact, DWORD dwUin, char* szUID, int list,
 
             icq_addServerPrivacyItem(hContact, dwUin, szUID, wContactId, wType);
 
-            ICQWriteContactSettingWord(hContact, szSetting, wContactId);
+            setSettingWord(hContact, szSetting, wContactId);
         }
         else
         {
             // Remove
-            wContactId = ICQGetContactSettingWord(hContact, szSetting, 0);
+            wContactId = getSettingWord(hContact, szSetting, 0);
 
             if (wContactId)
             {
                 icq_removeServerPrivacyItem(hContact, dwUin, szUID, wContactId, wType);
 
-                ICQDeleteContactSetting(hContact, szSetting);
+                deleteSetting(hContact, szSetting);
             }
         }
     }

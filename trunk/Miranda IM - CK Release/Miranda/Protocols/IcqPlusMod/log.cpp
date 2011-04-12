@@ -70,17 +70,17 @@ void icq_LogMessage(int level, const char *szMsg)
 
     NetLog_Server("%s", szMsg);
 
-    displayLevel = ICQGetContactSettingByte(NULL, "ShowLogLevel", LOG_WARNING);
+    displayLevel = getSettingByte(NULL, "ShowLogLevel", LOG_WARNING);
     if (level >= displayLevel)
     {
         LogMessageInfo *lmi;
 
-        if (ICQGetContactSettingByte(NULL, "PopupsLogEnabled", 1))
+        if (getSettingByte(NULL, "PopupsLogEnabled", 1))
         {
             ShowPopUpMsg(NULL, 0, szLevelDescr[level], szMsg, (BYTE)level);
             return; // Popup showed successfuly
         }
-        if (!bErrorBoxVisible || !ICQGetContactSettingByte(NULL, "IgnoreMultiErrorBox", 0))
+        if (!bErrorBoxVisible || !getSettingByte(NULL, "IgnoreMultiErrorBox", 0))
         {
             // error not shown or allowed multi - show messagebox
             lmi = (LogMessageInfo*)icq_alloc_zero(sizeof(LogMessageInfo));

@@ -350,12 +350,12 @@ BOOL IsDirectConnectionOpen(HANDLE hContact, int type, int bPassive)
     if (!bPassive && !bIsCreated && !bIsOpen && type == DIRECTCONN_STANDARD && gbDCMsgEnabled == 2)
     {
         // do not try to open DC to offline contact
-        if (ICQGetContactStatus(hContact) == ID_STATUS_OFFLINE) return FALSE;
+        if (getContactStatus(hContact) == ID_STATUS_OFFLINE) return FALSE;
         // do not try to open DC if previous attempt was not successfull
-        if (ICQGetContactSettingByte(hContact, "DCStatus", 0)) return FALSE;
+        if (getSettingByte(hContact, "DCStatus", 0)) return FALSE;
 
         // Set DC status as tried
-        ICQWriteContactSettingByte(hContact, "DCStatus", 1);
+        setSettingByte(hContact, "DCStatus", 1);
         // Create a new connection
         OpenDirectConnection(hContact, DIRECTCONN_STANDARD, NULL);
     }
@@ -439,7 +439,7 @@ static void setContactDcExtraIcon(HANDLE hContact, BOOL bFunc, BOOL bRem)
     extern HANDLE hExtraDC;
     if(!hExtraDC)
     {
-        WORD icon_pos = ICQGetContactSettingWord(NULL, "dc_icon_pos", 5);
+        WORD icon_pos = getSettingWord(NULL, "dc_icon_pos", 5);
         if( DBGetContactSettingByte(NULL, "ICQ", "ShowDCIcon", 1)==0 ) return;
         if(icon_pos<=0||icon_pos>9)
         {
@@ -593,12 +593,12 @@ static unsigned __stdcall icq_directThread(void* p)
     if (!dc.incoming)
     {
         dc.type = dtsi->type;
-        dc.dwRemoteExternalIP = ICQGetContactSettingDword(dtsi->hContact, "IP", 0);
-        dc.dwRemoteInternalIP = ICQGetContactSettingDword(dtsi->hContact, "RealIP", 0);
-        dc.dwRemotePort = ICQGetContactSettingWord(dtsi->hContact, "UserPort", 0);
-        dc.dwRemoteUin = ICQGetContactSettingUIN(dtsi->hContact);
-        dc.dwConnectionCookie = ICQGetContactSettingDword(dtsi->hContact, "DirectCookie", 0);
-        dc.wVersion = ICQGetContactSettingWord(dtsi->hContact, "Version", 0);
+        dc.dwRemoteExternalIP = getSettingDword(dtsi->hContact, "IP", 0);
+        dc.dwRemoteInternalIP = getSettingDword(dtsi->hContact, "RealIP", 0);
+        dc.dwRemotePort = getSettingWord(dtsi->hContact, "UserPort", 0);
+        dc.dwRemoteUin = getContactUin(dtsi->hContact);
+        dc.dwConnectionCookie = getSettingDword(dtsi->hContact, "DirectCookie", 0);
+        dc.wVersion = getSettingWord(dtsi->hContact, "Version", 0);
 
         if (!dc.dwRemoteExternalIP && !dc.dwRemoteInternalIP)
         {
@@ -642,8 +642,8 @@ static unsigned __stdcall icq_directThread(void* p)
     mir_free(dtsi);
 
     // Load local IP information
-    dc.dwLocalExternalIP = ICQGetContactSettingDword(NULL, "IP", 0);
-    dc.dwLocalInternalIP = ICQGetContactSettingDword(NULL, "RealIP", 0);
+    dc.dwLocalExternalIP = getSettingDword(NULL, "IP", 0);
+    dc.dwLocalInternalIP = getSettingDword(NULL, "RealIP", 0);
 
     // Create outgoing DC
     if (!dc.incoming)
@@ -712,7 +712,7 @@ static unsigned __stdcall icq_directThread(void* p)
                 }
             }
             else // Set DC status to failed
-                ICQWriteContactSettingByte(dc.hContact, "DCStatus", 2);
+                setSettingByte(dc.hContact, "DCStatus", 2);
 
             if (dc.type == DIRECTCONN_REVERSE) // failed reverse connection
             {
@@ -1038,7 +1038,7 @@ static void handleDirectPacket(directconnect* dc, PBYTE buf, WORD wLen)
                 if (dc->incoming)
                 {
                     // this is the first PEER_INIT with our cookie
-                    if (dwCookie != ICQGetContactSettingDword(hContact, "DirectCookie", 0))
+                    if (dwCookie != getSettingDword(hContact, "DirectCookie", 0))
                     {
                         NetLog_Direct("Error: Received PEER_INIT with broken cookie");
                         CloseDirectConnection(dc);
@@ -1088,8 +1088,8 @@ static void handleDirectPacket(directconnect* dc, PBYTE buf, WORD wLen)
                 // store good IP info
                 dc->hContact = hContact;
                 dc->dwConnectionCookie = dwCookie;
-                ICQWriteContactSettingDword(dc->hContact, "IP", dc->dwRemoteExternalIP);
-                ICQWriteContactSettingDword(dc->hContact, "RealIP", dc->dwRemoteInternalIP);
+                setSettingDword(dc->hContact, "IP", dc->dwRemoteExternalIP);
+                setSettingDword(dc->hContact, "RealIP", dc->dwRemoteInternalIP);
                 sendPeerInit_v78(dc); // reply with our PEER_INIT
             }
             else // outgoing
@@ -1113,7 +1113,7 @@ static void handleDirectPacket(directconnect* dc, PBYTE buf, WORD wLen)
                 }
             }
             // Set DC Status to successful
-            ICQWriteContactSettingByte(dc->hContact, "DCStatus", 0);
+            setSettingByte(dc->hContact, "DCStatus", 0);
         }
         else
         {
@@ -1528,7 +1528,7 @@ static void sendPeerFileInit(directconnect* dc)
     int nNickLen;
 
     dbv.type = DBVT_DELETED;
-    if (ICQGetContactSettingString(NULL, "Nick", &dbv))
+    if (getSettingString(NULL, "Nick", &dbv))
         szNick = "";
     else
         szNick = dbv.pszVal;

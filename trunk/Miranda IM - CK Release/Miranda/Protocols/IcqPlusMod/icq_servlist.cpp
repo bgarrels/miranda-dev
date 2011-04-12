@@ -469,45 +469,45 @@ void LoadServerIDs()
     int nGroups = 0, nContacts = 0, nPermits = 0, nDenys = 0, nIgnores = 0, nUnhandled = 0;
 
     EnterCriticalSection(&servlistMutex);
-    if (wSrvID = ICQGetContactSettingWord(NULL, "SrvAvatarID", 0))
+    if (wSrvID = getSettingWord(NULL, "SrvAvatarID", 0))
         ReserveServerID(wSrvID, SSIT_ITEM, 0);
-    if (wSrvID = ICQGetContactSettingWord(NULL, "SrvPhotoID", 0))
+    if (wSrvID = getSettingWord(NULL, "SrvPhotoID", 0))
         ReserveServerID(wSrvID, SSIT_ITEM, 0);
-    if (wSrvID = ICQGetContactSettingWord(NULL, "SrvVisibilityID", 0))
+    if (wSrvID = getSettingWord(NULL, "SrvVisibilityID", 0))
         ReserveServerID(wSrvID, SSIT_ITEM, 0);
-    if (wSrvID = ICQGetContactSettingWord(NULL, "SrvImportID", 0))
+    if (wSrvID = getSettingWord(NULL, "SrvImportID", 0))
         ReserveServerID(wSrvID, SSIT_ITEM, 0);
 
 
     nGroups = ReserveServerGroups();
 
-    hContact = ICQFindFirstContact();
+    hContact = FindFirstContact();
 
     while (hContact)
     {
         // search all our contacts, reserve their server IDs
-        if (wSrvID = ICQGetContactSettingWord(hContact, "ServerId", 0))
+        if (wSrvID = getSettingWord(hContact, "ServerId", 0))
         {
             ReserveServerID(wSrvID, SSIT_ITEM, 0);
             nContacts++;
         }
-        if (wSrvID = ICQGetContactSettingWord(hContact, "SrvDenyId", 0))
+        if (wSrvID = getSettingWord(hContact, "SrvDenyId", 0))
         {
             ReserveServerID(wSrvID, SSIT_ITEM, 0);
             nDenys++;
         }
-        if (wSrvID = ICQGetContactSettingWord(hContact, "SrvPermitId", 0))
+        if (wSrvID = getSettingWord(hContact, "SrvPermitId", 0))
         {
             ReserveServerID(wSrvID, SSIT_ITEM, 0);
             nPermits++;
         }
-        if (wSrvID = ICQGetContactSettingWord(hContact, "SrvIgnoreId", 0))
+        if (wSrvID = getSettingWord(hContact, "SrvIgnoreId", 0))
         {
             ReserveServerID(wSrvID, SSIT_ITEM, 0);
             nIgnores++;
         }
 
-        hContact = ICQFindNextContact(hContact);
+        hContact = FindNextContact(hContact);
     }
     LeaveCriticalSection(&servlistMutex);
     {
@@ -556,7 +556,7 @@ void StoreServerIDs()
             }
     LeaveCriticalSection(&servlistMutex);
     if (pUnhandled)
-        ICQWriteContactSettingBlob(NULL, "SrvUnhandledIDList", pUnhandled, cbUnhandled);
+        setSettingBlob(NULL, "SrvUnhandledIDList", pUnhandled, cbUnhandled);
     else
         DBDeleteContactSetting(NULL, ICQ_PROTOCOL_NAME, "SrvUnhandledIDList");
 }
@@ -652,7 +652,7 @@ static DWORD icq_sendServerItem(DWORD dwCookie, WORD wAction, WORD wGroupId, WOR
     sendServPacket(&packet);
 
     // Force reload of server-list after change
-    ICQWriteContactSettingWord(NULL, "SrvRecordCount", 0);
+    setSettingWord(NULL, "SrvRecordCount", 0);
 
     return dwCookie;
 }
@@ -672,20 +672,20 @@ DWORD icq_sendServerContact(HANDLE hContact, DWORD dwCookie, WORD wAction, WORD 
     int bDataTooLong = FALSE;
 
     // Prepare UID
-    if (ICQGetContactSettingUID(hContact, &dwUin, &szUid))
+    if (getContactUid(hContact, &dwUin, &szUid))
     {
         NetLog_Server("Buddy upload failed (UID missing).");
         return 0;
     }
 
-    bAuth = ICQGetContactSettingByte(hContact, "Auth", 0);
-    szNick = UniGetContactSettingUtf(hContact, "CList", "MyHandle", NULL);
-    szNote = UniGetContactSettingUtf(hContact, "UserInfo", "MyNotes", NULL);
+    bAuth = getSettingByte(hContact, "Auth", 0);
+    szNick = getSettingStringUtf(hContact, "CList", "MyHandle", NULL);
+    szNote = getSettingStringUtf(hContact, "UserInfo", "MyNotes", NULL);
 
     {
         DBVARIANT dbv;
 
-        if (!ICQGetContactSetting(hContact, "ServerData", &dbv))
+        if (!getSetting(hContact, "ServerData", &dbv))
         {
             // read additional server item data
             nDataLen = dbv.cpbVal;
@@ -874,7 +874,7 @@ int IsServerGroupsDefined()
 {
     int iRes = 1;
 
-    if (ICQGetContactSettingDword(NULL, "Version", 0) < 0x00030608)
+    if (getSettingDword(NULL, "Version", 0) < 0x00030608)
     {
         // group cache & linking data too old, flush, reload from server
         char szModule[MAX_PATH+9];
@@ -886,7 +886,7 @@ int IsServerGroupsDefined()
         iRes = 0; // no groups defined, or older version
     }
     // store our current version
-    ICQWriteContactSettingDword(NULL, "Version", ICQ_PLUG_VERSION & 0x00FFFFFF);
+    setSettingDword(NULL, "Version", ICQ_PLUG_VERSION & 0x00FFFFFF);
 
     return iRes;
 }
@@ -912,15 +912,15 @@ void* collectBuddyGroup(WORD wGroupID, int *count)
     HANDLE hContact;
     WORD wItemID;
 
-    hContact = ICQFindFirstContact();
+    hContact = FindFirstContact();
 
     while (hContact)
     {
         // search all contacts
-        if (wGroupID == ICQGetContactSettingWord(hContact, "SrvGroupId", 0))
+        if (wGroupID == getSettingWord(hContact, "SrvGroupId", 0))
         {
             // add only buddys from specified group
-            wItemID = ICQGetContactSettingWord(hContact, "ServerId", 0);
+            wItemID = getSettingWord(hContact, "ServerId", 0);
 
             if (wItemID)
             {
@@ -931,7 +931,7 @@ void* collectBuddyGroup(WORD wGroupID, int *count)
             }
         }
 
-        hContact = ICQFindNextContact(hContact);
+        hContact = FindNextContact(hContact);
     }
 
     *count = cnt<<1; // we return size in bytes
@@ -949,12 +949,12 @@ void* collectGroups(int *count)
     HANDLE hContact;
     WORD wGroupID;
 
-    hContact = ICQFindFirstContact();
+    hContact = FindFirstContact();
 
     while (hContact)
     {
         // search all contacts
-        if (wGroupID = ICQGetContactSettingWord(hContact, "SrvGroupId", 0))
+        if (wGroupID = getSettingWord(hContact, "SrvGroupId", 0))
         {
             // add only valid IDs
             for (i = 0; i<cnt; i++)
@@ -972,7 +972,7 @@ void* collectGroups(int *count)
             }
         }
 
-        hContact = ICQFindNextContact(hContact);
+        hContact = FindNextContact(hContact);
     }
 
     *count = cnt<<1;
@@ -1051,7 +1051,7 @@ char* getServerGroupNameUtf(WORD wGroupID)
         return NULL;
     }
 
-    return UniGetContactSettingUtf(NULL, szModule, szGroup, NULL);
+    return getSettingStringUtf(NULL, szModule, szGroup, NULL);
 }
 
 
@@ -1066,7 +1066,7 @@ void setServerGroupNameUtf(WORD wGroupID, const char* szGroupNameUtf)
     _itoa(wGroupID, szGroup, 0x10);
 
     if (szGroupNameUtf)
-        UniWriteContactSettingUtf(NULL, szModule, szGroup, (char*)szGroupNameUtf);
+        setSettingStringUtf(NULL, szModule, szGroup, (char*)szGroupNameUtf);
     else
     {
         DBDeleteContactSetting(NULL, szModule, szGroup);
@@ -1129,7 +1129,7 @@ int GroupNameExistsUtf(const char *name,int skipGroup)
     {
         if(i==skipGroup) continue;
         itoa(i,idstr,10);
-        szGroup = UniGetContactSettingUtf(NULL, "CListGroups", idstr, "");
+        szGroup = getSettingStringUtf(NULL, "CListGroups", idstr, "");
         if (!strlennull(szGroup)) break;
         if (!strcmpnull(szGroup+1, name))
         {
@@ -1517,7 +1517,7 @@ void addServContactReady(WORD wGroupID, LPARAM lParam)
         return;
     }
 
-    wItemID = ICQGetContactSettingWord(ack->hContact, "ServerId", 0);
+    wItemID = getSettingWord(ack->hContact, "ServerId", 0);
 
     if (wItemID)
     {
@@ -1528,7 +1528,7 @@ void addServContactReady(WORD wGroupID, LPARAM lParam)
     }
 
     // Get UID
-    if (ICQGetContactSettingUID(ack->hContact, &dwUin, &szUid))
+    if (getContactUid(ack->hContact, &dwUin, &szUid))
     {
         // Could not do anything without uid
         RemovePendingOperation(ack->hContact, 0);
@@ -1547,7 +1547,7 @@ void addServContactReady(WORD wGroupID, LPARAM lParam)
 
     sendAddStart(0);
     icq_sendServerContact(ack->hContact, dwCookie, ICQ_LISTS_ADDTOLIST, wGroupID, wItemID);
-    ICQWriteContactSettingByte(ack->hContact,"CheckSelfRemove", 0);//checkselfremove
+    setSettingByte(ack->hContact,"CheckSelfRemove", 0);//checkselfremove
 }
 
 
@@ -1587,7 +1587,7 @@ DWORD removeServContact(HANDLE hContact)
     DWORD dwCookie;
 
     // Get the contact's group ID
-    if (!(wGroupID = ICQGetContactSettingWord(hContact, "SrvGroupId", 0)))
+    if (!(wGroupID = getSettingWord(hContact, "SrvGroupId", 0)))
     {
         // Could not find a usable group ID
         NetLog_Server("Failed to remove contact from server side list (%s)", "no group ID");
@@ -1595,7 +1595,7 @@ DWORD removeServContact(HANDLE hContact)
     }
 
     // Get the contact's item ID
-    if (!(wItemID = ICQGetContactSettingWord(hContact, "ServerId", 0)))
+    if (!(wItemID = getSettingWord(hContact, "ServerId", 0)))
     {
         // Could not find usable item ID
         NetLog_Server("Failed to remove contact from server side list (%s)", "no item ID");
@@ -1603,7 +1603,7 @@ DWORD removeServContact(HANDLE hContact)
     }
 
     // Get UID
-    if (ICQGetContactSettingUID(hContact, &dwUin, &szUid))
+    if (getContactUid(hContact, &dwUin, &szUid))
     {
         // Could not do anything without uid
         NetLog_Server("Failed to remove contact from server side list (%s)", "no UID");
@@ -1654,8 +1654,8 @@ void moveServContactReady(WORD wNewGroupID, LPARAM lParam)
 
     if (!ack->hContact) return; // we do not move us, caused our uin was wrongly added to list
 
-    wItemID = ICQGetContactSettingWord(ack->hContact, "ServerId", 0);
-    wGroupID = ICQGetContactSettingWord(ack->hContact, "SrvGroupId", 0);
+    wItemID = getSettingWord(ack->hContact, "ServerId", 0);
+    wGroupID = getSettingWord(ack->hContact, "SrvGroupId", 0);
 
     if (!wItemID)
     {
@@ -1683,7 +1683,7 @@ void moveServContactReady(WORD wNewGroupID, LPARAM lParam)
     }
 
     // Get UID
-    if (ICQGetContactSettingUID(ack->hContact, &dwUin, &szUid))
+    if (getContactUid(ack->hContact, &dwUin, &szUid))
     {
         // Could not do anything without uin
         RemovePendingOperation(ack->hContact, 0);
@@ -1723,10 +1723,10 @@ DWORD moveServContactGroup(HANDLE hContact, const char *pszNewGroup)
         return 0;
     }
 
-    if (!ICQGetContactSettingWord(hContact, "ServerId", 0))
+    if (!getSettingWord(hContact, "ServerId", 0))
     {
         // the contact is not stored on the server, check if we should try to add
-        if (!ICQGetContactSettingByte(NULL, "ServerAddRemove", DEFAULT_SS_ADDSERVER) ||
+        if (!getSettingByte(NULL, "ServerAddRemove", DEFAULT_SS_ADDSERVER) ||
                 DBGetContactSettingByte(hContact, "CList", "Hidden", 0))
             return 0;
     }
@@ -1761,7 +1761,7 @@ static DWORD updateServContact(HANDLE hContact)
     DWORD dwCookie;
 
     // Get the contact's group ID
-    if (!(wGroupID = ICQGetContactSettingWord(hContact, "SrvGroupId", 0)))
+    if (!(wGroupID = getSettingWord(hContact, "SrvGroupId", 0)))
     {
         // Could not find a usable group ID
         NetLog_Server("Failed to update contact's details on server side list (%s)", "no group ID");
@@ -1770,7 +1770,7 @@ static DWORD updateServContact(HANDLE hContact)
     }
 
     // Get the contact's item ID
-    if (!(wItemID = ICQGetContactSettingWord(hContact, "ServerId", 0)))
+    if (!(wItemID = getSettingWord(hContact, "ServerId", 0)))
     {
         // Could not find usable item ID
         NetLog_Server("Failed to update contact's details on server side list (%s)", "no item ID");
@@ -1779,7 +1779,7 @@ static DWORD updateServContact(HANDLE hContact)
     }
 
     // Get UID
-    if (ICQGetContactSettingUID(hContact, &dwUin, &szUid))
+    if (getContactUid(hContact, &dwUin, &szUid))
     {
         // Could not set nickname on server without uid
         NetLog_Server("Failed to update contact's details on server side list (%s)", "no UID");
@@ -1873,8 +1873,8 @@ void renameServGroup(WORD wGroupId, char* szGroupName)
 
 void resetServContactAuthState(HANDLE hContact, DWORD dwUin)
 {
-    WORD wContactId = ICQGetContactSettingWord(hContact, "ServerId", 0);
-    WORD wGroupId = ICQGetContactSettingWord(hContact, "SrvGroupId", 0);
+    WORD wContactId = getSettingWord(hContact, "ServerId", 0);
+    WORD wGroupId = getSettingWord(hContact, "SrvGroupId", 0);
 
     if (wContactId && wGroupId)
     {
@@ -1893,7 +1893,7 @@ void resetServContactAuthState(HANDLE hContact, DWORD dwUin)
 
             sendAddStart(0);
             icq_sendServerContact(hContact, dwCookie, ICQ_LISTS_REMOVEFROMLIST, wGroupId, wContactId);
-            ICQDeleteContactSetting(hContact, "ServerData");
+            deleteSetting(hContact, "ServerData");
             icq_sendServerContact(hContact, dwCookie, ICQ_LISTS_ADDTOLIST, wGroupId, wContactId);
             sendAddEnd();
         }
@@ -1938,7 +1938,7 @@ static int ServListDbSettingChanged(WPARAM wParam, LPARAM lParam)
             ;
         else if (!strcmpnull(cws->szSetting, "NotOnList") &&
                  (cws->value.type == DBVT_DELETED || (cws->value.type == DBVT_BYTE && cws->value.bVal == 0)) &&
-                 ICQGetContactSettingByte(NULL, "ServerAddRemove", DEFAULT_SS_ADDSERVER) &&
+                 getSettingByte(NULL, "ServerAddRemove", DEFAULT_SS_ADDSERVER) &&
                  !DBGetContactSettingByte((HANDLE)wParam, "CList", "Hidden", 0))
         {
             // Add to server-list
@@ -1947,7 +1947,7 @@ static int ServListDbSettingChanged(WPARAM wParam, LPARAM lParam)
 
         // Has contact been renamed?
         if (!strcmpnull(cws->szSetting, "MyHandle") &&
-                ICQGetContactSettingByte(NULL, "StoreServerDetails", DEFAULT_SS_STORE))
+                getSettingByte(NULL, "StoreServerDetails", DEFAULT_SS_STORE))
         {
             if (AddPendingOperation((HANDLE)wParam, NULL, (servlistcookie*)1, NULL))
                 updateServContact((HANDLE)wParam);
@@ -1955,17 +1955,17 @@ static int ServListDbSettingChanged(WPARAM wParam, LPARAM lParam)
 
         // Has contact been moved to another group?
         if (!strcmpnull(cws->szSetting, "Group") &&
-                ICQGetContactSettingByte(NULL, "StoreServerDetails", DEFAULT_SS_STORE))
+                getSettingByte(NULL, "StoreServerDetails", DEFAULT_SS_STORE))
         {
             // Test if group was not renamed...
-            WORD wGroupId = ICQGetContactSettingWord((HANDLE)wParam, "SrvGroupId", 0);
+            WORD wGroupId = getSettingWord((HANDLE)wParam, "SrvGroupId", 0);
             char* szGroup = makeGroupPathUtf(wGroupId);
             char* szNewGroup;
             int bRenamed = 0;
             int bMoved = 1;
 
             // Read group from DB
-            szNewGroup = UniGetContactSettingUtf((HANDLE)wParam, "CList", "Group", NULL);
+            szNewGroup = getSettingStringUtf((HANDLE)wParam, "CList", "Group", NULL);
 
             if (szNewGroup && wGroupId && !GroupNameExistsUtf(szGroup, -1))
             {
@@ -2003,7 +2003,7 @@ static int ServListDbSettingChanged(WPARAM wParam, LPARAM lParam)
     if (!strcmpnull(cws->szModule, "UserInfo"))
     {
         if (!strcmpnull(cws->szSetting, "MyNotes") &&
-                ICQGetContactSettingByte(NULL, "StoreServerDetails", DEFAULT_SS_STORE))
+                getSettingByte(NULL, "StoreServerDetails", DEFAULT_SS_STORE))
         {
             if (AddPendingOperation((HANDLE)wParam, NULL, (servlistcookie*)1, NULL))
                 updateServContact((HANDLE)wParam);
@@ -2021,7 +2021,7 @@ static int ServListDbContactDeleted(WPARAM wParam, LPARAM lParam)
     if (!icqOnline && gbSsiEnabled)
     {
         // contact was deleted only locally - retrieve full list on next connect
-        ICQWriteContactSettingWord((HANDLE)wParam, "SrvRecordCount", 0);
+        setSettingWord((HANDLE)wParam, "SrvRecordCount", 0);
     }
 
     if (!icqOnline || !gbSsiEnabled)
@@ -2037,12 +2037,12 @@ static int ServListDbContactDeleted(WPARAM wParam, LPARAM lParam)
         DWORD dwUIN;
         uid_str szUID;
 
-        wContactID = ICQGetContactSettingWord((HANDLE)wParam, "ServerId", 0);
-        wGroupID = ICQGetContactSettingWord((HANDLE)wParam, "SrvGroupId", 0);
-        wVisibleID = ICQGetContactSettingWord((HANDLE)wParam, "SrvPermitId", 0);
-        wInvisibleID = ICQGetContactSettingWord((HANDLE)wParam, "SrvDenyId", 0);
-        wIgnoreID = ICQGetContactSettingWord((HANDLE)wParam, "SrvIgnoreId", 0);
-        if (ICQGetContactSettingUID((HANDLE)wParam, &dwUIN, &szUID))
+        wContactID = getSettingWord((HANDLE)wParam, "ServerId", 0);
+        wGroupID = getSettingWord((HANDLE)wParam, "SrvGroupId", 0);
+        wVisibleID = getSettingWord((HANDLE)wParam, "SrvPermitId", 0);
+        wInvisibleID = getSettingWord((HANDLE)wParam, "SrvDenyId", 0);
+        wIgnoreID = getSettingWord((HANDLE)wParam, "SrvIgnoreId", 0);
+        if (getContactUid((HANDLE)wParam, &dwUIN, &szUID))
             return 0;
 
         // Close all opened peer connections

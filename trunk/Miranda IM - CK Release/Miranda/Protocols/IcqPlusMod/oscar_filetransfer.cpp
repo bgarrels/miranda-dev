@@ -958,7 +958,7 @@ int oftInitTransfer(HANDLE hContact, DWORD dwUin, char* szUid, char** files, cha
             if (!(statbuf.st_mode&_S_IFDIR))
             {
                 // take only files
-                ft->files[ft->wFilesCount].szFile = FileNameToUtf(files[i]);
+                ft->files[ft->wFilesCount].szFile = FileNameToUtf_old(files[i]);
                 ft->files[ft->wFilesCount].szContainer = oftGetFileContainer(ft, (const char**)files, i);	// FIXME: 2
                 ft->files_ansi[ft->wFilesCount] = null_strdup(files[i]);
 
@@ -1066,7 +1066,7 @@ int oftInitTransfer(HANDLE hContact, DWORD dwUin, char* szUid, char** files, cha
         // Send packet
         if (ft->listener)
         {
-            oft_sendFileRequest(dwUin, szUid, ft, pszFiles, ICQGetContactSettingDword(NULL, "RealIP", 0));
+            oft_sendFileRequest(dwUin, szUid, ft, pszFiles, getSettingDword(NULL, "RealIP", 0));
         }
         else
         {
@@ -1087,7 +1087,7 @@ DWORD oftFileAllow(HANDLE hContact, WPARAM wParam, LPARAM lParam)
     DWORD dwUin;
     uid_str szUid;
 
-    if (ICQGetContactSettingUID(hContact, &dwUin, &szUid))
+    if (getContactUid(hContact, &dwUin, &szUid))
         return 0; // Invalid contact
 
     if((_mirandaVersion < PLUGIN_MAKE_VERSION(0, 9, 0, 1)) || (_mirandaVersion > PLUGIN_MAKE_VERSION(0, 9, 0, 6))) //this will be removed in near future, if miranda api do not change again
@@ -1128,7 +1128,7 @@ DWORD oftFileDeny(HANDLE hContact, WPARAM wParam, LPARAM lParam)
 
     if (IsValidOscarTransfer(ft))
     {
-        if (ICQGetContactSettingUID(hContact, &dwUin, &szUid))
+        if (getContactUid(hContact, &dwUin, &szUid))
             return 1; // Invalid contact
 
 #ifdef _DEBUG
@@ -1158,7 +1158,7 @@ DWORD oftFileCancel(HANDLE hContact, WPARAM wParam, LPARAM lParam)
         if (ft->hContact != hContact)
             return 1; // Bad contact or hTransfer
 
-        if (ICQGetContactSettingUID(hContact, &dwUin, &szUid))
+        if (getContactUid(hContact, &dwUin, &szUid))
             return 1; // Invalid contact
 
 #ifdef _DEBUG
@@ -1373,7 +1373,7 @@ static int CreateOscarProxyConnection(oscar_connection *oc)
     ICQBroadcastAck(oc->ft->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTPROXY, oc->ft, 0);
 
     nloc.szHost = OSCAR_PROXY_HOST;
-    nloc.wPort = ICQGetContactSettingWord(NULL, "OscarPort", DEFAULT_SERVER_PORT);
+    nloc.wPort = getSettingWord(NULL, "OscarPort", DEFAULT_SERVER_PORT);
     if (nloc.wPort == 0)
         nloc.wPort = RandRange(1024, 65535);
 
@@ -1457,12 +1457,12 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
     if (oc.hContact)
     {
         // Load contact information
-        ICQGetContactSettingUID(oc.hContact, &oc.dwUin, &oc.szUid);
+        getContactUid(oc.hContact, &oc.dwUin, &oc.szUid);
     }
 
     // Load local IP information
-    oc.dwLocalExternalIP = ICQGetContactSettingDword(NULL, "IP", 0);
-    oc.dwLocalInternalIP = ICQGetContactSettingDword(NULL, "RealIP", 0);
+    oc.dwLocalExternalIP = getSettingDword(NULL, "IP", 0);
+    oc.dwLocalInternalIP = getSettingDword(NULL, "RealIP", 0);
 
     if (!oc.incoming)
     {
@@ -1586,7 +1586,7 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
 
                 addr.S_un.S_addr = htonl(oc.ft->dwProxyIP);
                 nloc.szHost = inet_ntoa(addr);
-                nloc.wPort = ICQGetContactSettingWord(NULL, "OscarPort", DEFAULT_SERVER_PORT);
+                nloc.wPort = getSettingWord(NULL, "OscarPort", DEFAULT_SERVER_PORT);
                 if (nloc.wPort == 0)
                     nloc.wPort = RandRange(1024, 65535);
                 oc.hConnection = NetLib_OpenConnection(ghServerNetlibUser, "Proxy ", &nloc);
@@ -2648,7 +2648,7 @@ static void oft_sendPeerInit(oscar_connection *oc)
     ft->dwRecvFileCheck = 0xFFFF0000;
     mir_free(ft->rawFileName);
 
-    if (IsUSASCII((BYTE*)pszThisFileName, strlennull(pszThisFileName)))
+    if (IsUSASCII(pszThisFileName, strlennull(pszThisFileName)))
     {
         ft->wEncoding = 0; // ascii
         ft->cbRawFileName = strlennull(pszThisFileName) + 1;

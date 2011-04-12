@@ -110,15 +110,15 @@ void makeContactTemporaryVisible(HANDLE hContact)
     DWORD dwUin;
     uid_str szUid;
 
-    if (ICQGetContactSettingByte(hContact, "TemporaryVisible", 0))
+    if (getSettingByte(hContact, "TemporaryVisible", 0))
         return; // already there
 
-    if (ICQGetContactSettingUID(hContact, &dwUin, &szUid))
+    if (getContactUid(hContact, &dwUin, &szUid))
         return; // Invalid contact
 
     icq_sendGenericContact(dwUin, szUid, ICQ_BOS_FAMILY, ICQ_CLI_ADDTEMPVISIBLE);
 
-    ICQWriteContactSettingByte(hContact, "TemporaryVisible", 1);
+    setSettingByte(hContact, "TemporaryVisible", 1);
 
 #ifdef _DEBUG
     NetLog_Server("Added contact %s to temporary visible list", strUID(dwUin, szUid));

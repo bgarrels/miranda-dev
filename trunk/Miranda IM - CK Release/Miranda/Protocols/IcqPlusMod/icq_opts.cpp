@@ -209,14 +209,14 @@ int IcqOptInit(WPARAM wParam,LPARAM lParam)
 
 static void LoadDBCheckState(HWND hwndDlg, int idCtrl, const char* szSetting, BYTE bDef)
 {
-    CheckDlgButton(hwndDlg, idCtrl, ICQGetContactSettingByte(NULL, szSetting, bDef));
+    CheckDlgButton(hwndDlg, idCtrl, getSettingByte(NULL, szSetting, bDef));
 }
 
 
 
 static void StoreDBCheckState(HWND hwndDlg, int idCtrl, const char* szSetting)
 {
-    ICQWriteContactSettingByte(NULL, szSetting, (BYTE)IsDlgButtonChecked(hwndDlg, idCtrl));
+    setSettingByte(NULL, szSetting, (BYTE)IsDlgButtonChecked(hwndDlg, idCtrl));
 }
 
 
@@ -258,9 +258,9 @@ static INT_PTR CALLBACK DlgProcIcqOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 
         ICQTranslateDialog(hwndDlg);
 
-        SetDlgItemInt(hwndDlg, IDC_ICQNUM, ICQGetContactSettingUIN(NULL), FALSE);
+        SetDlgItemInt(hwndDlg, IDC_ICQNUM, getContactUin(NULL), FALSE);
 
-        if (!ICQGetContactStaticString(NULL, "Password", pszPwd, sizeof(pszPwd)))
+        if (!getSettingStringStatic(NULL, "Password", pszPwd, sizeof(pszPwd)))
         {
             CallService(MS_DB_CRYPT_DECODESTRING, strlennull(pszPwd) + 1, (LPARAM)pszPwd);
 
@@ -275,7 +275,7 @@ static INT_PTR CALLBACK DlgProcIcqOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
         for(i = 1; i <= SrvCount; i++)
         {
             mir_snprintf(buf, 64, "server%luhost", i);
-            SendDlgItemMessageA(hwndDlg, IDC_ICQSERVER, CB_ADDSTRING, 0, (LPARAM)UniGetContactSettingUtf(NULL, DBModule, buf, 0));
+            SendDlgItemMessageA(hwndDlg, IDC_ICQSERVER, CB_ADDSTRING, 0, (LPARAM)getSettingStringUtf(NULL, DBModule, buf, 0));
         }
 
         SendDlgItemMessageA(hwndDlg, IDC_HTTPUSERAGENT, CB_RESETCONTENT, 0, 0);
@@ -284,7 +284,7 @@ static INT_PTR CALLBACK DlgProcIcqOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
             SendDlgItemMessageA(hwndDlg, IDC_HTTPUSERAGENT, CB_ADDSTRING, 0, (LPARAM)HttpUserAgents[i]);
         }
 
-        if (!ICQGetContactStaticString(NULL, "OscarServer", szServer, MAX_PATH))
+        if (!getSettingStringStatic(NULL, "OscarServer", szServer, MAX_PATH))
         {
             SetDlgItemTextA(hwndDlg, IDC_ICQSERVER, szServer);
         }
@@ -299,12 +299,12 @@ static INT_PTR CALLBACK DlgProcIcqOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 
         SetDlgItemTextA(hwndDlg, IDC_HTTPUSERAGENT, szHttpUserAgent);
 
-        SetDlgItemInt(hwndDlg, IDC_ICQPORT, ICQGetContactSettingWord(NULL, "OscarPort", DEFAULT_SERVER_PORT), FALSE);
+        SetDlgItemInt(hwndDlg, IDC_ICQPORT, getSettingWord(NULL, "OscarPort", DEFAULT_SERVER_PORT), FALSE);
         LoadDBCheckState(hwndDlg, IDC_KEEPALIVE, "KeepAlive", 1);
         LoadDBCheckState(hwndDlg, IDC_SECURE, "SecureLogin", DEFAULT_SECURE_LOGIN);
         LoadDBCheckState(hwndDlg, IDC_SSL, "SecureConnection", DEFAULT_SECURE_CONNECTION);
         SendDlgItemMessage(hwndDlg, IDC_LOGLEVEL, TBM_SETRANGE, FALSE, MAKELONG(0, 4));
-        SendDlgItemMessage(hwndDlg, IDC_LOGLEVEL, TBM_SETPOS, TRUE, 4-ICQGetContactSettingByte(NULL, "ShowLogLevel", LOG_WARNING));
+        SendDlgItemMessage(hwndDlg, IDC_LOGLEVEL, TBM_SETPOS, TRUE, 4-getSettingByte(NULL, "ShowLogLevel", LOG_WARNING));
         SetDlgItemTextUtf(hwndDlg, IDC_LEVELDESCR, ICQTranslateUtfStatic(szLogLevelDescr[4-SendDlgItemMessage(hwndDlg, IDC_LOGLEVEL, TBM_GETPOS, 0, 0)], szServer, MAX_PATH));
         ShowWindow(GetDlgItem(hwndDlg, IDC_RECONNECTREQD), SW_HIDE);
         LoadDBCheckState(hwndDlg, IDC_NOERRMULTI, "IgnoreMultiErrorBox", 0);
@@ -410,7 +410,7 @@ static INT_PTR CALLBACK DlgProcIcqOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
         {
             char str[64];
 
-            ICQWriteContactSettingDword(NULL, UNIQUEIDSETTING, (DWORD)GetDlgItemInt(hwndDlg, IDC_ICQNUM, NULL, FALSE));
+            setSettingDword(NULL, UNIQUEIDSETTING, (DWORD)GetDlgItemInt(hwndDlg, IDC_ICQNUM, NULL, FALSE));
             GetDlgItemTextA(hwndDlg, IDC_PASSWORD, str, 9);
             if (strlennull(str))
             {
@@ -419,23 +419,23 @@ static INT_PTR CALLBACK DlgProcIcqOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
             }
             else
             {
-                gbRememberPwd = ICQGetContactSettingByte(NULL, "RememberPass", 0);
+                gbRememberPwd = getSettingByte(NULL, "RememberPass", 0);
             }
             CallService(MS_DB_CRYPT_ENCODESTRING, sizeof(gpszPassword), (LPARAM)str);
-            ICQWriteContactSettingString(NULL, "Password", str);
+            setSettingString(NULL, "Password", str);
             GetDlgItemTextA(hwndDlg,IDC_ICQSERVER, str, sizeof(str));
-            ICQWriteContactSettingString(NULL, "OscarServer", str);
-            ICQWriteContactSettingWord(NULL, "OscarPort", (WORD)GetDlgItemInt(hwndDlg, IDC_ICQPORT, NULL, FALSE));
+            setSettingString(NULL, "OscarServer", str);
+            setSettingWord(NULL, "OscarPort", (WORD)GetDlgItemInt(hwndDlg, IDC_ICQPORT, NULL, FALSE));
             StoreDBCheckState(hwndDlg, IDC_KEEPALIVE, "KeepAlive");
             StoreDBCheckState(hwndDlg, IDC_SECURE, "SecureLogin");
             StoreDBCheckState(hwndDlg, IDC_SSL, "SecureConnection");
-            m_bSecureConnection = ICQGetContactSettingByte(NULL, "SecureConnection", 0);
+            m_bSecureConnection = getSettingByte(NULL, "SecureConnection", 0);
             StoreDBCheckState(hwndDlg, IDC_NOERRMULTI, "IgnoreMultiErrorBox");
             StoreDBCheckState(hwndDlg, IDC_AUTOCHANGE, "ServerAutoChange");
-            bServerAutoChange = ICQGetContactSettingByte(NULL,"ServerAutoChange",1);
-            ICQWriteContactSettingByte(NULL, "ShowLogLevel", (BYTE)(4-SendDlgItemMessage(hwndDlg, IDC_LOGLEVEL, TBM_GETPOS, 0, 0)));
+            bServerAutoChange = getSettingByte(NULL,"ServerAutoChange",1);
+            setSettingByte(NULL, "ShowLogLevel", (BYTE)(4-SendDlgItemMessage(hwndDlg, IDC_LOGLEVEL, TBM_GETPOS, 0, 0)));
             GetDlgItemTextA(hwndDlg, IDC_HTTPUSERAGENT, szHttpUserAgent, sizeof(szHttpUserAgent));
-            ICQWriteContactSettingString(NULL, "HttpUserAgent", szHttpUserAgent);
+            setSettingString(NULL, "HttpUserAgent", szHttpUserAgent);
             return TRUE;
         }
         }
@@ -460,8 +460,8 @@ static INT_PTR CALLBACK DlgProcIcqPrivacyOpts(HWND hwndDlg, UINT msg, WPARAM wPa
         int nAddAuth;
         BYTE bData;
 
-        nDcType = ICQGetContactSettingByte(NULL, "DCType", 0);
-        nAddAuth = ICQGetContactSettingByte(NULL, "Auth", 1);
+        nDcType = getSettingByte(NULL, "DCType", 0);
+        nAddAuth = getSettingByte(NULL, "Auth", 1);
 
         ICQTranslateDialog(hwndDlg);
         if (!icqOnline)
@@ -484,7 +484,7 @@ static INT_PTR CALLBACK DlgProcIcqPrivacyOpts(HWND hwndDlg, UINT msg, WPARAM wPa
         LoadDBCheckState(hwndDlg, IDC_NOSTATUSREPLY, "NoStatusReply", 0);
         LoadDBCheckState(hwndDlg, IDC_STATUSMSG_CLIST, "StatusMsgReplyCList", 0);
         LoadDBCheckState(hwndDlg, IDC_STATUSMSG_VISIBLE, "StatusMsgReplyVisible", 0);
-        if (!ICQGetContactSettingByte(NULL, "StatusMsgReplyCList", 0))
+        if (!getSettingByte(NULL, "StatusMsgReplyCList", 0))
             EnableDlgItem(hwndDlg, IDC_STATUSMSG_VISIBLE, FALSE);
         bData = DBGetContactSettingByte(NULL,ICQ_PROTOCOL_NAME,"NoStatusReply", 0);
         CheckDlgButton(hwndDlg, IDC_NOSTATUSREPLY, bData);
@@ -538,27 +538,27 @@ static INT_PTR CALLBACK DlgProcIcqPrivacyOpts(HWND hwndDlg, UINT msg, WPARAM wPa
             StoreDBCheckState(hwndDlg, IDC_STATUSMSG_CLIST, "StatusMsgReplyCList");
             StoreDBCheckState(hwndDlg, IDC_STATUSMSG_VISIBLE, "StatusMsgReplyVisible");
             if (IsDlgButtonChecked(hwndDlg, IDC_DCALLOW_AUTH))
-                ICQWriteContactSettingByte(NULL, "DCType", 2);
+                setSettingByte(NULL, "DCType", 2);
             else if (IsDlgButtonChecked(hwndDlg, IDC_DCALLOW_CLIST))
-                ICQWriteContactSettingByte(NULL, "DCType", 1);
+                setSettingByte(NULL, "DCType", 1);
             else
-                ICQWriteContactSettingByte(NULL, "DCType", 0);
+                setSettingByte(NULL, "DCType", 0);
             StoreDBCheckState(hwndDlg, IDC_ADD_AUTH, "Auth");
             StoreDBCheckState(hwndDlg, IDC_AUTH_IGNORE, "AuthIgnore");
-            bAuthIgnore = ICQGetContactSettingByte(NULL, "AuthIgnore", 0);
-            bNoStatusReply = ICQGetContactSettingByte(NULL, "NoStatusReply", 0);
+            bAuthIgnore = getSettingByte(NULL, "AuthIgnore", 0);
+            bNoStatusReply = getSettingByte(NULL, "NoStatusReply", 0);
             if (icqOnline)
             {
                 PBYTE buf=NULL;
                 int buflen=0;
 
-                ppackTLVLNTSBytefromDB(&buf, &buflen, "e-mail", (BYTE)!ICQGetContactSettingByte(NULL, "PublishPrimaryEmail", 0), TLV_EMAIL);
+                ppackTLVLNTSBytefromDB(&buf, &buflen, "e-mail", (BYTE)!getSettingByte(NULL, "PublishPrimaryEmail", 0), TLV_EMAIL);
                 ppackTLVLNTSBytefromDB(&buf, &buflen, "e-mail0", 0, TLV_EMAIL);
                 ppackTLVLNTSBytefromDB(&buf, &buflen, "e-mail1", 0, TLV_EMAIL);
 
-                ppackTLVByte(&buf, &buflen, (BYTE)!ICQGetContactSettingByte(NULL, "Auth", 1), TLV_AUTH, 1);
+                ppackTLVByte(&buf, &buflen, (BYTE)!getSettingByte(NULL, "Auth", 1), TLV_AUTH, 1);
 
-                ppackTLVByte(&buf, &buflen, (BYTE)ICQGetContactSettingByte(NULL, "WebAware", 0), TLV_WEBAWARE, 1);
+                ppackTLVByte(&buf, &buflen, (BYTE)getSettingByte(NULL, "WebAware", 0), TLV_WEBAWARE, 1);
 
                 icq_changeUserDirectoryInfoServ(buf, (WORD)buflen, DIRECTORYREQUEST_UPDATEPRIVACY);
 
@@ -617,11 +617,11 @@ static INT_PTR CALLBACK DlgProcIcqPopupOpts(HWND hwndDlg, UINT msg, WPARAM wPara
         LoadDBCheckState(hwndDlg, IDC_POPCLOSEWND, "CloseWindow", 0);
         LoadDBCheckState(hwndDlg, IDC_UINPOPUP, "UinPopup", 0);
         LoadDBCheckState(hwndDlg, IDC_READXSTPOPUP, "ReadXStatusPopUp", 0);
-        CheckDlgButton(hwndDlg, IDC_POPUPS_LOG_ENABLED, ICQGetContactSettingByte(NULL,"PopupsLogEnabled",1));
-        bEnabled = ICQGetContactSettingByte(NULL,"PopupsWinColors",0);
+        CheckDlgButton(hwndDlg, IDC_POPUPS_LOG_ENABLED, getSettingByte(NULL,"PopupsLogEnabled",1));
+        bEnabled = getSettingByte(NULL,"PopupsWinColors",0);
         CheckDlgButton(hwndDlg, IDC_USEWINCOLORS, bEnabled);
-        CheckDlgButton(hwndDlg, IDC_USESYSICONS, ICQGetContactSettingByte(NULL,"PopupsSysIcons",0));
-        bEnabled = ICQGetContactSettingByte(NULL,"PopupsEnabled",1);
+        CheckDlgButton(hwndDlg, IDC_USESYSICONS, getSettingByte(NULL,"PopupsSysIcons",0));
+        bEnabled = getSettingByte(NULL,"PopupsEnabled",1);
         CheckDlgButton(hwndDlg, IDC_POPUPS_ENABLED, bEnabled);
         icq_EnableMultipleControls(hwndDlg, icqPopupsControls, SIZEOF(icqPopupsControls), bEnabled);
         return TRUE;
@@ -631,7 +631,7 @@ static INT_PTR CALLBACK DlgProcIcqPopupOpts(HWND hwndDlg, UINT msg, WPARAM wPara
         case IDC_PREVIEW:
         {
             extern BOOL bXUpdaterPopUp;
-            if (ICQGetContactSettingByte(NULL,"PopupsLogEnabled",1))
+            if (getSettingByte(NULL,"PopupsLogEnabled",1))
             {
                 ShowPopUpMsg(NULL, 0, "Popup Title", "Sample Note",    LOG_NOTE);
                 ShowPopUpMsg(NULL, 0, "Popup Title", "Sample Warning", LOG_WARNING);
@@ -687,22 +687,22 @@ static INT_PTR CALLBACK DlgProcIcqPopupOpts(HWND hwndDlg, UINT msg, WPARAM wPara
         switch (((LPNMHDR)lParam)->code)
         {
         case PSN_APPLY:
-            ICQWriteContactSettingByte(NULL,"PopupsEnabled",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_POPUPS_ENABLED));
-            ICQWriteContactSettingByte(NULL,"PopupsLogEnabled",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_POPUPS_LOG_ENABLED));
-            ICQWriteContactSettingByte(NULL,"PopupsWinColors",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_USEWINCOLORS));
-            ICQWriteContactSettingByte(NULL,"PopupsSysIcons",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_USESYSICONS));
+            setSettingByte(NULL,"PopupsEnabled",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_POPUPS_ENABLED));
+            setSettingByte(NULL,"PopupsLogEnabled",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_POPUPS_LOG_ENABLED));
+            setSettingByte(NULL,"PopupsWinColors",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_USEWINCOLORS));
+            setSettingByte(NULL,"PopupsSysIcons",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_USESYSICONS));
             StoreDBCheckState(hwndDlg, IDC_POPUP_FOR_NOTONLIST , "PopUpForNotOnList");
-            bPopUpForNotOnList = ICQGetContactSettingByte(NULL, "PopUpForNotOnList", 0);
+            bPopUpForNotOnList = getSettingByte(NULL, "PopUpForNotOnList", 0);
             StoreDBCheckState(hwndDlg, IDC_POPUP_FOR_IGNORED, "PopUpForIgnored");
-            bPopupsForIgnored = ICQGetContactSettingByte(NULL, "PopUpForIgnored", 0);
+            bPopupsForIgnored = getSettingByte(NULL, "PopUpForIgnored", 0);
             StoreDBCheckState(hwndDlg, IDC_POPUP_FOR_HIDDEN, "PopUpForHidden");
-            bPopupsForHidden = ICQGetContactSettingByte(NULL, "PopUpForHidden", 0);
+            bPopupsForHidden = getSettingByte(NULL, "PopUpForHidden", 0);
             StoreDBCheckState(hwndDlg, IDC_POPCLOSEWND, "CloseWindow");
-            bCloseWindowPopUp = ICQGetContactSettingByte(NULL, "CloseWindow", 0);
+            bCloseWindowPopUp = getSettingByte(NULL, "CloseWindow", 0);
             StoreDBCheckState(hwndDlg, IDC_UINPOPUP , "UinPopup");
-            bUinPopup = ICQGetContactSettingByte(NULL, "UinPopup", 0);
+            bUinPopup = getSettingByte(NULL, "UinPopup", 0);
             StoreDBCheckState(hwndDlg, IDC_READXSTPOPUP, "ReadXStatusPopUp");
-            bReadXStatusPopUp = ICQGetContactSettingByte(NULL, "ReadXStatusPopUp", 0);
+            bReadXStatusPopUp = getSettingByte(NULL, "ReadXStatusPopUp", 0);
             return TRUE;
         }
         break;
@@ -731,124 +731,124 @@ static INT_PTR CALLBACK DlgProcIcqPopupOpts2(HWND hwndDlg, UINT msg, WPARAM wPar
         LoadDBCheckState(hwndDlg, IDC_INFO_REQUEST_POPUP, "InfoRequestPopUp", 0);
         LoadDBCheckState(hwndDlg, IDC_POPAUTH, "AuthPopUp", 0);
         LoadDBCheckState(hwndDlg, IDC_POPXUPDATER, "XUpdaterPopUp", 0);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG0_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"Popups0TextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG0_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"Popups0BackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG0_TIMEOUT, ICQGetContactSettingDword(NULL,"Popups0Timeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG1_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"Popups1TextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG1_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"Popups1BackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG1_TIMEOUT, ICQGetContactSettingDword(NULL,"Popups1Timeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG2_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"Popups2TextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG2_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"Popups2BackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG2_TIMEOUT, ICQGetContactSettingDword(NULL,"Popups2Timeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG3_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"Popups3TextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG3_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"Popups3BackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG3_TIMEOUT, ICQGetContactSettingDword(NULL,"Popups3Timeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG4_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsFoundTextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG4_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsFoundBackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG4_TIMEOUT, ICQGetContactSettingDword(NULL,"PopupsFoundTimeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG5_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsFinishedTextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG5_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsFinishedBackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG5_TIMEOUT, ICQGetContactSettingDword(NULL,"PopupsFinishedTimeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_SPAM_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsSpamTextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_SPAM_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsSpamBackColor",RGB(0,0,255)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_SPAM_TIMEOUT, ICQGetContactSettingDword(NULL,"PopupsSpamTimeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_UNKNOWN_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsUnknownTextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_UNKNOWN_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsUnknownBackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_UNKNOWN_TIMEOUT, ICQGetContactSettingDword(NULL,"PopupsUnknownTimeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG6_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsVisTextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG6_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsVisBackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG6_TIMEOUT, ICQGetContactSettingDword(NULL,"PopupsVisTimeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_CLIENT_CHANGE_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsClientChangeTextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_CLIENT_CHANGE_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsClientChangeBackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_CLIENT_CHANGE_TIMEOUT, ICQGetContactSettingDword(NULL,"PopupsClientChangeTimeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_INFO_REQUEST_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsInfoRequestTextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_INFO_REQUEST_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsInfoRequestBackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_INFO_REQUEST_TIMEOUT, ICQGetContactSettingDword(NULL,"PopupsInfoRequestTimeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_IGNORECHECK_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsIgnoreCheckTextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_IGNORECHECK_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsIgnoreCheckBackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_IGNORECHECK_TIMEOUT, ICQGetContactSettingDword(NULL,"PopupsIgnoreCheckTimeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_REMOVE_HIMSELF_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsRemoveHimselfTextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_REMOVE_HIMSELF_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsRemoveHimselfBackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_REMOVE_HIMSELF_TIMEOUT, ICQGetContactSettingDword(NULL,"PopupsRemoveHimselfTimeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_AUTH_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsAuthTextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_AUTH_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsAuthBackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_AUTH_TIMEOUT, ICQGetContactSettingDword(NULL,"PopupsAuthTimeout",0),FALSE);
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_XUPDATER_TEXTCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsXUpdaterTextColor",RGB(255,255,255)));
-        SendDlgItemMessage(hwndDlg, IDC_POPUP_XUPDATER_BACKCOLOR, CPM_SETCOLOUR, 0, ICQGetContactSettingDword(NULL,"PopupsXUpdaterBackColor",RGB(0,0,0)));
-        SetDlgItemInt(hwndDlg, IDC_POPUP_XUPDATER_TIMEOUT, ICQGetContactSettingDword(NULL,"PopupsXUpdaterTimeout",0),FALSE);
-        icq_EnableMultipleControls(hwndDlg, icqPopupColorControls, SIZEOF(icqPopupColorControls), ICQGetContactSettingByte(NULL, "PopupsWinColors", 0)-1);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG0_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"Popups0TextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG0_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"Popups0BackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG0_TIMEOUT, getSettingDword(NULL,"Popups0Timeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG1_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"Popups1TextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG1_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"Popups1BackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG1_TIMEOUT, getSettingDword(NULL,"Popups1Timeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG2_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"Popups2TextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG2_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"Popups2BackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG2_TIMEOUT, getSettingDword(NULL,"Popups2Timeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG3_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"Popups3TextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG3_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"Popups3BackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG3_TIMEOUT, getSettingDword(NULL,"Popups3Timeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG4_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsFoundTextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG4_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsFoundBackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG4_TIMEOUT, getSettingDword(NULL,"PopupsFoundTimeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG5_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsFinishedTextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG5_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsFinishedBackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG5_TIMEOUT, getSettingDword(NULL,"PopupsFinishedTimeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_SPAM_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsSpamTextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_SPAM_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsSpamBackColor",RGB(0,0,255)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_SPAM_TIMEOUT, getSettingDword(NULL,"PopupsSpamTimeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_UNKNOWN_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsUnknownTextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_UNKNOWN_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsUnknownBackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_UNKNOWN_TIMEOUT, getSettingDword(NULL,"PopupsUnknownTimeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG6_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsVisTextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_LOG6_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsVisBackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_LOG6_TIMEOUT, getSettingDword(NULL,"PopupsVisTimeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_CLIENT_CHANGE_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsClientChangeTextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_CLIENT_CHANGE_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsClientChangeBackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_CLIENT_CHANGE_TIMEOUT, getSettingDword(NULL,"PopupsClientChangeTimeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_INFO_REQUEST_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsInfoRequestTextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_INFO_REQUEST_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsInfoRequestBackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_INFO_REQUEST_TIMEOUT, getSettingDword(NULL,"PopupsInfoRequestTimeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_IGNORECHECK_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsIgnoreCheckTextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_IGNORECHECK_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsIgnoreCheckBackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_IGNORECHECK_TIMEOUT, getSettingDword(NULL,"PopupsIgnoreCheckTimeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_REMOVE_HIMSELF_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsRemoveHimselfTextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_REMOVE_HIMSELF_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsRemoveHimselfBackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_REMOVE_HIMSELF_TIMEOUT, getSettingDword(NULL,"PopupsRemoveHimselfTimeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_AUTH_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsAuthTextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_AUTH_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsAuthBackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_AUTH_TIMEOUT, getSettingDword(NULL,"PopupsAuthTimeout",0),FALSE);
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_XUPDATER_TEXTCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsXUpdaterTextColor",RGB(255,255,255)));
+        SendDlgItemMessage(hwndDlg, IDC_POPUP_XUPDATER_BACKCOLOR, CPM_SETCOLOUR, 0, getSettingDword(NULL,"PopupsXUpdaterBackColor",RGB(0,0,0)));
+        SetDlgItemInt(hwndDlg, IDC_POPUP_XUPDATER_TIMEOUT, getSettingDword(NULL,"PopupsXUpdaterTimeout",0),FALSE);
+        icq_EnableMultipleControls(hwndDlg, icqPopupColorControls, SIZEOF(icqPopupColorControls), getSettingByte(NULL, "PopupsWinColors", 0)-1);
         break;
     case WM_COMMAND:
         switch (LOWORD(wParam))
         {
         case IDC_OK:
-            ICQWriteContactSettingDword(NULL,"Popups0TextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG0_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"Popups0BackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG0_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"Popups0Timeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG0_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"Popups1TextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG1_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"Popups1BackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG1_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"Popups1Timeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG1_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"Popups2TextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG2_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"Popups2BackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG2_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"Popups2Timeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG2_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"Popups3TextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG3_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"Popups3BackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG3_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"Popups3Timeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG3_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"PopupsFoundTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG4_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsFoundBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG4_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsFoundTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG4_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"PopupsFinishedTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG5_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsFinishedBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG5_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsFinishedTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG5_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"PopupsSpamTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_SPAM_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsSpamBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_SPAM_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsSpamTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_SPAM_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"PopupsUnknownTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_UNKNOWN_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsUnknownBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_UNKNOWN_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsUnknownTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_UNKNOWN_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"PopupsVisTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG6_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsVisBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG6_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsVisTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG6_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"PopupsClientChangeTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_CLIENT_CHANGE_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsClientChangeBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_CLIENT_CHANGE_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsClientChangeTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_CLIENT_CHANGE_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"PopupsInfoRequestTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_INFO_REQUEST_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsInfoRequestBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_INFO_REQUEST_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsInfoRequestTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_INFO_REQUEST_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"PopupsIgnoreCheckTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_IGNORECHECK_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsIgnoreCheckBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_IGNORECHECK_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsIgnoreCheckTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_IGNORECHECK_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"PopupsRemoveHimselfTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_REMOVE_HIMSELF_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsRemoveHimselfBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_REMOVE_HIMSELF_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsRemoveHimselfTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_REMOVE_HIMSELF_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"PopupsAuthTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_AUTH_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsAuthBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_AUTH_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsAuthTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_AUTH_TIMEOUT, NULL, FALSE));
-            ICQWriteContactSettingDword(NULL,"PopupsXUpdaterTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_XUPDATER_TEXTCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsXUpdaterBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_XUPDATER_BACKCOLOR,CPM_GETCOLOUR,0,0));
-            ICQWriteContactSettingDword(NULL,"PopupsXUpdaterTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_XUPDATER_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"Popups0TextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG0_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"Popups0BackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG0_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"Popups0Timeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG0_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"Popups1TextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG1_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"Popups1BackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG1_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"Popups1Timeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG1_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"Popups2TextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG2_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"Popups2BackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG2_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"Popups2Timeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG2_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"Popups3TextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG3_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"Popups3BackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG3_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"Popups3Timeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG3_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"PopupsFoundTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG4_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsFoundBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG4_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsFoundTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG4_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"PopupsFinishedTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG5_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsFinishedBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG5_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsFinishedTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG5_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"PopupsSpamTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_SPAM_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsSpamBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_SPAM_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsSpamTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_SPAM_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"PopupsUnknownTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_UNKNOWN_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsUnknownBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_UNKNOWN_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsUnknownTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_UNKNOWN_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"PopupsVisTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG6_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsVisBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_LOG6_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsVisTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_LOG6_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"PopupsClientChangeTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_CLIENT_CHANGE_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsClientChangeBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_CLIENT_CHANGE_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsClientChangeTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_CLIENT_CHANGE_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"PopupsInfoRequestTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_INFO_REQUEST_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsInfoRequestBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_INFO_REQUEST_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsInfoRequestTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_INFO_REQUEST_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"PopupsIgnoreCheckTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_IGNORECHECK_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsIgnoreCheckBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_IGNORECHECK_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsIgnoreCheckTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_IGNORECHECK_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"PopupsRemoveHimselfTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_REMOVE_HIMSELF_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsRemoveHimselfBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_REMOVE_HIMSELF_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsRemoveHimselfTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_REMOVE_HIMSELF_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"PopupsAuthTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_AUTH_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsAuthBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_AUTH_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsAuthTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_AUTH_TIMEOUT, NULL, FALSE));
+            setSettingDword(NULL,"PopupsXUpdaterTextColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_XUPDATER_TEXTCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsXUpdaterBackColor",SendDlgItemMessage(hwndDlg,IDC_POPUP_XUPDATER_BACKCOLOR,CPM_GETCOLOUR,0,0));
+            setSettingDword(NULL,"PopupsXUpdaterTimeout",GetDlgItemInt(hwndDlg, IDC_POPUP_XUPDATER_TIMEOUT, NULL, FALSE));
             StoreDBCheckState(hwndDlg, IDC_SPAM_POPUP_ENABLE , "SpamPopUpEnabled");
-            bSpamPopUp = ICQGetContactSettingByte(NULL, "SpamPopUpEnabled", 0);
+            bSpamPopUp = getSettingByte(NULL, "SpamPopUpEnabled", 0);
             StoreDBCheckState(hwndDlg, IDC_UNKNOWN_POPUP_ENABLE , "UnknownPopUpEnabled");
-            bUnknownPopUp = ICQGetContactSettingByte(NULL, "UnknownPopUpEnabled", 0);
+            bUnknownPopUp = getSettingByte(NULL, "UnknownPopUpEnabled", 0);
             StoreDBCheckState(hwndDlg, IDC_WAS_FOUND_POPUP_ENABLE , "FoundPopUpEnabled");
-            bFoundPopUp = ICQGetContactSettingByte(NULL, "FoundPopUpEnabled", 1);
+            bFoundPopUp = getSettingByte(NULL, "FoundPopUpEnabled", 1);
             StoreDBCheckState(hwndDlg, IDC_SCAN_POPUP_ENABLE , "ScanPopUpEnabled");
-            bScanPopUp = ICQGetContactSettingByte(NULL, "ScanPopUpEnabled", 1);
+            bScanPopUp = getSettingByte(NULL, "ScanPopUpEnabled", 1);
             StoreDBCheckState(hwndDlg, IDC_VIS_POPUP_ENABLE , "VisPopUpEnabled");
-            bVisPopUp = ICQGetContactSettingByte(NULL, "VisPopUpEnabled", 1);
+            bVisPopUp = getSettingByte(NULL, "VisPopUpEnabled", 1);
             StoreDBCheckState(hwndDlg, IDC_CLIENT_CHANGE_POPUP , "ClientChangePopup");
-            bClientChangePopUp = ICQGetContactSettingByte(NULL, "ClientChangePopup", 0);
+            bClientChangePopUp = getSettingByte(NULL, "ClientChangePopup", 0);
             StoreDBCheckState(hwndDlg, IDC_IGNCHECKPOP , "IgnoreCheckPop");
-            bIgnoreCheckPop = ICQGetContactSettingByte(NULL, "IgnoreCheckPop", 1);
+            bIgnoreCheckPop = getSettingByte(NULL, "IgnoreCheckPop", 1);
             StoreDBCheckState(hwndDlg, IDC_POPSELFREM , "PopSelfRem");
-            bPopSelfRem = ICQGetContactSettingByte(NULL, "PopSelfRem", 1);
+            bPopSelfRem = getSettingByte(NULL, "PopSelfRem", 1);
             StoreDBCheckState(hwndDlg, IDC_INFO_REQUEST_POPUP , "InfoRequestPopUp");
-            bInfoRequestPopUp = ICQGetContactSettingByte(NULL, "InfoRequestPopUp", 0);
+            bInfoRequestPopUp = getSettingByte(NULL, "InfoRequestPopUp", 0);
             StoreDBCheckState(hwndDlg, IDC_POPAUTH , "AuthPopUp");
-            bAuthPopUp = ICQGetContactSettingByte(NULL, "AuthPopUp", 0);
+            bAuthPopUp = getSettingByte(NULL, "AuthPopUp", 0);
             StoreDBCheckState(hwndDlg, IDC_POPXUPDATER , "XUpdaterPopUp");
-            bXUpdaterPopUp = ICQGetContactSettingByte(NULL, "XUpdaterPopUp", 0);
+            bXUpdaterPopUp = getSettingByte(NULL, "XUpdaterPopUp", 0);
             DestroyWindow(hwndDlg);
         }
         break;
@@ -888,20 +888,20 @@ static INT_PTR CALLBACK DlgProcIcqASDOpts(HWND hwndDlg, UINT msg, WPARAM wParam,
         {
         case IDC_OK:
             StoreDBCheckState(hwndDlg, IDC_NOASD , "NoASDInInvisible");
-            bNoASDInInvisible = ICQGetContactSettingByte(NULL, "NoASDInInvisible", 1);
+            bNoASDInInvisible = getSettingByte(NULL, "NoASDInInvisible", 1);
             StoreDBCheckState(hwndDlg, IDC_ASD_FOR_OFFLINE , "ASDForOffline");
-            bASDForOffline = ICQGetContactSettingByte(NULL, "ASDForOffline", 1);
+            bASDForOffline = getSettingByte(NULL, "ASDForOffline", 1);
             StoreDBCheckState(hwndDlg, IDC_ASDSTARTUP , "ASDStartup");
             StoreDBCheckState(hwndDlg, IDC_DETECT_VIA_STATUS_MESSAGE, "bASDViaAwayMsg");
-            bASDViaAwayMsg = ICQGetContactSettingByte(NULL, "bASDViaAwayMsg", 0);
+            bASDViaAwayMsg = getSettingByte(NULL, "bASDViaAwayMsg", 0);
             StoreDBCheckState(hwndDlg, IDC_DETECT_VIA_XTRAZ, "bASDViaXtraz");
-            bASDViaXtraz = ICQGetContactSettingByte(NULL, "bASDViaXtraz", 0);
+            bASDViaXtraz = getSettingByte(NULL, "bASDViaXtraz", 0);
             StoreDBCheckState(hwndDlg, IDC_DETECT_VIA_URL, "bASDViaURL");
-            bASDViaURL = ICQGetContactSettingByte(NULL, "bASDViaURL", 0);
+            bASDViaURL = getSettingByte(NULL, "bASDViaURL", 0);
             StoreDBCheckState(hwndDlg, IDC_DETECT_UNAUTHORIZED, "bASDUnauthorized");
-            bASDUnauthorized = ICQGetContactSettingByte(NULL, "bASDUnauthorized", 0);
+            bASDUnauthorized = getSettingByte(NULL, "bASDUnauthorized", 0);
             StoreDBCheckState(hwndDlg, IDC_DETECT_VIA_AUTH, "bASDViaAuth");
-            bASDViaAuth = ICQGetContactSettingByte(NULL, "bASDViaAuth", 0);
+            bASDViaAuth = getSettingByte(NULL, "bASDViaAuth", 0);
             DestroyWindow(hwndDlg);
             break;
         }
@@ -983,22 +983,22 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
         int i;
 
         ICQTranslateDialog(hwndDlg);
-        bData = ICQGetContactSettingByte(NULL, "UtfEnabled", DEFAULT_UTF_ENABLED);
+        bData = getSettingByte(NULL, "UtfEnabled", DEFAULT_UTF_ENABLED);
         CheckDlgButton(hwndDlg, IDC_UTFENABLE, bData?TRUE:FALSE);
         CheckDlgButton(hwndDlg, IDC_UTFALL, bData==2?TRUE:FALSE);
         icq_EnableMultipleControls(hwndDlg, icqUnicodeControls, sizeof(icqUnicodeControls)/sizeof(icqUnicodeControls[0]), bData?TRUE:FALSE);
         LoadDBCheckState(hwndDlg, IDC_XSTUPDATE, "UpdateXStatus", 1);
-        SetDlgItemInt(hwndDlg, IDC_XSTUPDATERATE, ICQGetContactSettingDword(NULL, "XStatusUpdatePeriod", 15), 0);
+        SetDlgItemInt(hwndDlg, IDC_XSTUPDATERATE, getSettingDword(NULL, "XStatusUpdatePeriod", 15), 0);
         EnableDlgItem(hwndDlg, IDC_XSTUPDATERATE, IsDlgButtonChecked(hwndDlg, IDC_XSTUPDATE));
         LoadDBCheckState(hwndDlg, IDC_TEMPVISIBLE, "TempVisListEnabled",DEFAULT_TEMPVIS_ENABLED);
         LoadDBCheckState(hwndDlg, IDC_SLOWSEND, "SlowSend", DEFAULT_SLOWSEND);
         LoadDBCheckState(hwndDlg, IDC_ONLYSERVERACKS, "OnlyServerAcks", DEFAULT_ONLYSERVERACKS);
-        bData = ICQGetContactSettingByte(NULL, "DirectMessaging", DEFAULT_DCMSG_ENABLED);
+        bData = getSettingByte(NULL, "DirectMessaging", DEFAULT_DCMSG_ENABLED);
         LoadDBCheckState(hwndDlg, IDC_DCICON, "ShowDCIcon", 1);
         CheckDlgButton(hwndDlg, IDC_DCENABLE, bData?TRUE:FALSE);
         CheckDlgButton(hwndDlg, IDC_DCPASSIVE, bData==1?TRUE:FALSE);
         icq_EnableMultipleControls(hwndDlg, icqDCMsgControls, sizeof(icqDCMsgControls)/sizeof(icqDCMsgControls[0]), bData?TRUE:FALSE);
-        bData = ICQGetContactSettingByte(NULL, "XStatusEnabled", DEFAULT_XSTATUS_ENABLED);
+        bData = getSettingByte(NULL, "XStatusEnabled", DEFAULT_XSTATUS_ENABLED);
         CheckDlgButton(hwndDlg, IDC_XSTATUSENABLE, bData);
         icq_EnableMultipleControls(hwndDlg, icqXStatusControls, sizeof(icqXStatusControls)/sizeof(icqXStatusControls[0]), bData);
         LoadDBCheckState(hwndDlg, IDC_XSTATUSAUTO, "XStatusAuto", DEFAULT_XSTATUS_AUTO);
@@ -1040,7 +1040,7 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
         SendDlgItemMessage(hwndDlg, IDC_XSTATUS_ICON_POS, CB_SETCURSEL, (DBGetContactSettingWord(NULL,ICQ_PROTOCOL_NAME,"xstatus_icon_pos", 4))-1, 0);
         SendDlgItemMessage(hwndDlg, IDC_QIP_STATUS_ICON_POS, CB_SETCURSEL, (DBGetContactSettingWord(NULL,ICQ_PROTOCOL_NAME,"qip_status_icon_pos", 9))-1, 0);//added
         hCpCombo = GetDlgItem(hwndDlg, IDC_UTFCODEPAGE);
-        sCodePage = ICQGetContactSettingWord(NULL, "AnsiCodePage", CP_ACP);
+        sCodePage = getSettingWord(NULL, "AnsiCodePage", CP_ACP);
         ComboBoxAddStringUtf(GetDlgItem(hwndDlg, IDC_UTFCODEPAGE), "System default codepage", 0);
         EnumSystemCodePagesA(FillCpCombo, CP_INSTALLED);
         if(sCodePage == 0)
@@ -1107,7 +1107,7 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
             OptDlgChanged(hwndDlg);
             break;
         case IDC_XSTUPDATERATE:
-            if(GetDlgItemInt(hwndDlg, IDC_XSTUPDATERATE, 0, 0)!=ICQGetContactSettingDword(NULL, "XStatusUpdatePeriod", 0))
+            if(GetDlgItemInt(hwndDlg, IDC_XSTUPDATERATE, 0, 0)!=getSettingDword(NULL, "XStatusUpdatePeriod", 0))
                 OptDlgChanged(hwndDlg);
             break;
         default:
@@ -1133,7 +1133,7 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
         if( DBGetContactSettingByte(NULL,ICQ_PROTOCOL_NAME,"RTF", 0) != (BYTE)IsDlgButtonChecked(hwndDlg,IDC_RTF))
         {
             MessageBox(0,TranslateW("To enable RTF text reciving you must reconnect your Miranda after option is enabled"),TranslateW("Warning"),MB_OK);
-            ICQWriteContactSettingByte(NULL,"RTF",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_RTF));
+            setSettingByte(NULL,"RTF",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_RTF));
         }
         if (IsDlgButtonChecked(hwndDlg, IDC_UTFENABLE))
             gbUtfEnabled = IsDlgButtonChecked(hwndDlg, IDC_UTFALL)?2:1;
@@ -1142,26 +1142,26 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
         {
             int i = SendDlgItemMessage(hwndDlg, IDC_UTFCODEPAGE, CB_GETCURSEL, 0, 0);
             gwAnsiCodepage = (WORD)SendDlgItemMessage(hwndDlg, IDC_UTFCODEPAGE, CB_GETITEMDATA, (WPARAM)i, 0);
-            ICQWriteContactSettingWord(NULL, "AnsiCodePage", gwAnsiCodepage);
+            setSettingWord(NULL, "AnsiCodePage", gwAnsiCodepage);
         }
-        ICQWriteContactSettingByte(NULL, "UtfEnabled", gbUtfEnabled);
+        setSettingByte(NULL, "UtfEnabled", gbUtfEnabled);
         gbTempVisListEnabled = (BYTE)IsDlgButtonChecked(hwndDlg, IDC_TEMPVISIBLE);
-        ICQWriteContactSettingByte(NULL, "TempVisListEnabled", gbTempVisListEnabled);
+        setSettingByte(NULL, "TempVisListEnabled", gbTempVisListEnabled);
         StoreDBCheckState(hwndDlg, IDC_SLOWSEND, "SlowSend");
         StoreDBCheckState(hwndDlg, IDC_ONLYSERVERACKS, "OnlyServerAcks");
         if (IsDlgButtonChecked(hwndDlg, IDC_DCENABLE))
             gbDCMsgEnabled = IsDlgButtonChecked(hwndDlg, IDC_DCPASSIVE)?1:2;
         else
             gbDCMsgEnabled = 0;
-        ICQWriteContactSettingByte(NULL, "DirectMessaging", gbDCMsgEnabled);
+        setSettingByte(NULL, "DirectMessaging", gbDCMsgEnabled);
         gbXStatusEnabled = (BYTE)IsDlgButtonChecked(hwndDlg, IDC_XSTATUSENABLE);
-        ICQWriteContactSettingByte(NULL, "XStatusEnabled", gbXStatusEnabled);
+        setSettingByte(NULL, "XStatusEnabled", gbXStatusEnabled);
         StoreDBCheckState(hwndDlg, IDC_DCICON, "ShowDCIcon");
         StoreDBCheckState(hwndDlg, IDC_XSTATUSAUTO, "XStatusAuto");
         StoreDBCheckState(hwndDlg, IDC_XSTATUSRESET, "XStatusReset");
         StoreDBCheckState(hwndDlg, IDC_FORCEXSTATUS , "ForceXstatus");
         StoreDBCheckState(hwndDlg, IDC_XSTATUS_SHOW, "XStatusIconShow");
-        bXstatusIconShow = ICQGetContactSettingByte(NULL, "XStatusIconShow", 1);
+        bXstatusIconShow = getSettingByte(NULL, "XStatusIconShow", 1);
         StoreDBCheckState(hwndDlg, IDC_KILLSPAMBOTS , "KillSpambots");
         StoreDBCheckState(hwndDlg, IDC_KILLUNKNOWN , "KillUnknown");
         StoreDBCheckState(hwndDlg, IDC_AIMENABLE, "AimEnabled");
@@ -1174,13 +1174,13 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
             if(dwRate < 1 || dwRate > 60)
                 dwRate = 15;
             SetDlgItemInt(hwndDlg, IDC_XSTUPDATERATE, dwRate, 0);
-            ICQWriteContactSettingDword(NULL, "XStatusUpdatePeriod", dwRate);
+            setSettingDword(NULL, "XStatusUpdatePeriod", dwRate);
         }
         StoreDBCheckState(hwndDlg, IDC_XSTNONSTD, "NonStandartXstatus");
         StoreDBCheckState(hwndDlg, IDC_QIP_STATUS, "QipStatusEnable");
-        gbQipStatusEnabled = ICQGetContactSettingByte(NULL, "QipStatusEnable", 0);
+        gbQipStatusEnabled = getSettingByte(NULL, "QipStatusEnable", 0);
         StoreDBCheckState(hwndDlg, IDC_QIPSTATUS_SHOW, "QipStatusShow");
-        bQipstatusIconShow = ICQGetContactSettingByte(NULL, "QipStatusShow", 0);
+        bQipstatusIconShow = getSettingByte(NULL, "QipStatusShow", 0);
         return TRUE;
         }
         break;
@@ -1268,7 +1268,7 @@ static INT_PTR CALLBACK DlgProcIcqFeatures2Opts(HWND hwndDlg, UINT msg, WPARAM w
         case PSN_APPLY:
             if( gbASD != (BYTE)IsDlgButtonChecked(hwndDlg,IDC_ASD))
             {
-                ICQWriteContactSettingByte(NULL,"ASD",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_ASD));
+                setSettingByte(NULL,"ASD",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_ASD));
                 gbASD = (BYTE)IsDlgButtonChecked(hwndDlg,IDC_ASD);
                 gbASD?icq_InitISee():icq_ISeeCleanup();
                 //here we need remove menu item from ASD
@@ -1284,19 +1284,19 @@ static INT_PTR CALLBACK DlgProcIcqFeatures2Opts(HWND hwndDlg, UINT msg, WPARAM w
 //			else
 //				bStealthRequest = FALSE;
             StoreDBCheckState(hwndDlg, IDC_SHOW_AUTH, "ShowAuth");
-            bShowAuth = ICQGetContactSettingByte(NULL, "ShowAuth", 0);
+            bShowAuth = getSettingByte(NULL, "ShowAuth", 0);
             StoreDBCheckState(hwndDlg, IDC_PSD , "PSD");
-            bPSD = ICQGetContactSettingByte(NULL, "PSD", 1);
+            bPSD = getSettingByte(NULL, "PSD", 1);
             StoreDBCheckState(hwndDlg, IDC_NOPSD_FOR_HIDDEN, "NoPSDForHidden");
-            bNoPSDForHidden = ICQGetContactSettingByte(NULL, "NoPSDForHidden", 1);
+            bNoPSDForHidden = getSettingByte(NULL, "NoPSDForHidden", 1);
 //			StoreDBCheckState(hwndDlg, IDC_INV4INV , "Inv4Inv");
             StoreDBCheckState(hwndDlg, IDC_INCGLOBAL , "IncognitoGlobal");
             StoreDBCheckState(hwndDlg, IDC_INSTATUSMENU , "PrivacyPlacement");
             StoreDBCheckState( hwndDlg, IDC_USRCHKPOS , "UsrScanPos" );
-            bIncognitoGlobal = ICQGetContactSettingByte(NULL, "IncognitoGlobal", 0);
-            bPrivacyMenuPlacement = ICQGetContactSettingByte(NULL, "PrivacyPlacement", 1);
+            bIncognitoGlobal = getSettingByte(NULL, "IncognitoGlobal", 0);
+            bPrivacyMenuPlacement = getSettingByte(NULL, "PrivacyPlacement", 1);
             StoreDBCheckState(hwndDlg, IDC_TZER, "tZer");
-            gbTzerEnabled = ICQGetContactSettingByte(NULL,"tZer",0);
+            gbTzerEnabled = getSettingByte(NULL,"tZer",0);
             return TRUE;
         }
         break;
@@ -1333,7 +1333,7 @@ static INT_PTR CALLBACK DlgProcIcqEventLogOpts(HWND hwndDlg, UINT msg, WPARAM wP
         LoadDBCheckState(hwndDlg, IDC_LOG_TO_HCONTACT_HISTORY, "LogToHcontact", 0);
 
 
-        SetDlgItemTextA(hwndDlg, IDC_FILEPATH, UniGetContactSettingUtf(NULL, ICQ_PROTOCOL_NAME, "EventsLog", "EventsLog.txt"));
+        SetDlgItemTextA(hwndDlg, IDC_FILEPATH, getSettingStringUtf(NULL, ICQ_PROTOCOL_NAME, "EventsLog", "EventsLog.txt"));
 
         SendMessage(GetDlgItem(hwndDlg, IDC_BROWSE), BUTTONSETASFLATBTN, 0, 0);
         SendMessage(GetDlgItem(hwndDlg, IDC_BROWSE), BM_SETIMAGE, IMAGE_ICON, (LPARAM)LoadSkinnedIcon(SKINICON_EVENT_FILE));
@@ -1406,7 +1406,7 @@ static INT_PTR CALLBACK DlgProcIcqEventLogOpts(HWND hwndDlg, UINT msg, WPARAM wP
         {
             char i[1024];
             GetDlgItemTextA(hwndDlg, IDC_FILEPATH, i, sizeof(i));
-            if(strstr(UniGetContactSettingUtf(NULL, ICQ_PROTOCOL_NAME, "EventsLog", "EventsLog.txt"),i))
+            if(strstr(getSettingStringUtf(NULL, ICQ_PROTOCOL_NAME, "EventsLog", "EventsLog.txt"),i))
                 OptDlgChanged(hwndDlg);
         }
         break;
@@ -1419,43 +1419,43 @@ static INT_PTR CALLBACK DlgProcIcqEventLogOpts(HWND hwndDlg, UINT msg, WPARAM wP
         {
         case PSN_APPLY:
             StoreDBCheckState(hwndDlg, IDC_LOG_REMOVE_FILE, "LogSelfRemoveFile");
-            bLogSelfRemoveFile = ICQGetContactSettingByte(NULL, "LogSelfRemoveFile", 0);
+            bLogSelfRemoveFile = getSettingByte(NULL, "LogSelfRemoveFile", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_IGNORECHECK_FILE, "LogIgnoreCheckFile");
-            bLogIgnoreCheckFile= ICQGetContactSettingByte(NULL, "LogIgnoreCheckFile", 0);
+            bLogIgnoreCheckFile= getSettingByte(NULL, "LogIgnoreCheckFile", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_CHECKSTATUS_FILE, "LogStatusCheckFile");
-            bLogStatusCheckFile = ICQGetContactSettingByte(NULL, "LogStatusCheckFile", 0);
+            bLogStatusCheckFile = getSettingByte(NULL, "LogStatusCheckFile", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_ASD_FILE, "LogASDFile");
-            bLogASDFile = ICQGetContactSettingByte(NULL, "LogASDFile", 0);
+            bLogASDFile = getSettingByte(NULL, "LogASDFile", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_CLIENTCHANGE_FILE, "LogClientChangeFile");
-            bLogClientChangeFile = ICQGetContactSettingByte(NULL, "LogClientChangeFile", 0);
+            bLogClientChangeFile = getSettingByte(NULL, "LogClientChangeFile", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_AUTH_FILE, "LogAuthFile");
-            bLogAuthFile = ICQGetContactSettingByte(NULL, "LogAuthFile", 0);
+            bLogAuthFile = getSettingByte(NULL, "LogAuthFile", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_REQUEST_FILE, "LogRequestFile");
-            bLogInfoRequestFile = ICQGetContactSettingByte(NULL, "LogRequestFile", 0);
+            bLogInfoRequestFile = getSettingByte(NULL, "LogRequestFile", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_READXSTATUS_FILE, "LogReadXStatusFile");
-            bLogReadXStatusFile = ICQGetContactSettingByte(NULL, "LogReadXStatusFile", 0);
+            bLogReadXStatusFile = getSettingByte(NULL, "LogReadXStatusFile", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_REMOVE_HISTORY, "LogSelfRemoveHistory");
-            bLogSelfRemoveHistory = ICQGetContactSettingByte(NULL, "LogSelfRemoveHistory", 0);
+            bLogSelfRemoveHistory = getSettingByte(NULL, "LogSelfRemoveHistory", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_IGNORECHECK_HISTORY, "LogIgnoreCheckHistory");
-            bLogIgnoreCheckHistory= ICQGetContactSettingByte(NULL, "LogIgnoreCheckHistory", 0);
+            bLogIgnoreCheckHistory= getSettingByte(NULL, "LogIgnoreCheckHistory", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_CHECKSTATUS_HISTORY, "LogStatusCheckHistory");
-            bLogStatusCheckHistory = ICQGetContactSettingByte(NULL, "LogStatusCheckHistory", 0);
+            bLogStatusCheckHistory = getSettingByte(NULL, "LogStatusCheckHistory", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_ASD_HISTORY, "LogASDHistory");
-            bLogASDHistory = ICQGetContactSettingByte(NULL, "LogASDHistory", 0);
+            bLogASDHistory = getSettingByte(NULL, "LogASDHistory", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_CLIENTCHANGE_HISTORY, "LogClientChangeHistory");
-            bLogClientChangeHistory = ICQGetContactSettingByte(NULL, "LogClientChangeHistory", 0);
+            bLogClientChangeHistory = getSettingByte(NULL, "LogClientChangeHistory", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_AUTH_HISTORY, "LogAuthHistory");
-            bLogAuthHistory = ICQGetContactSettingByte(NULL, "LogAuthHistory", 0);
+            bLogAuthHistory = getSettingByte(NULL, "LogAuthHistory", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_REQUEST_HISTORY, "LogRequestHistory");
-            bLogInfoRequestHistory = ICQGetContactSettingByte(NULL, "LogRequestHistory", 0);
+            bLogInfoRequestHistory = getSettingByte(NULL, "LogRequestHistory", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_READXSTATUS_HISTORY, "LogReadXStatusHistory");
-            bLogReadXStatusHistory = ICQGetContactSettingByte(NULL, "LogReadXStatusHistory", 0);
+            bLogReadXStatusHistory = getSettingByte(NULL, "LogReadXStatusHistory", 0);
             StoreDBCheckState(hwndDlg, IDC_LOG_TO_HCONTACT_HISTORY, "LogToHcontact");
-            bHcontactHistory = ICQGetContactSettingByte(NULL, "LogToHcontact", 0);
+            bHcontactHistory = getSettingByte(NULL, "LogToHcontact", 0);
             {
                 char i[1024];
                 GetDlgItemTextA(hwndDlg, IDC_FILEPATH, i, sizeof(i) );
-                UniWriteContactSettingUtf(NULL, ICQ_PROTOCOL_NAME, "EventsLog", i);
+                setSettingStringUtf(NULL, ICQ_PROTOCOL_NAME, "EventsLog", i);
             }
             return TRUE;
         }
@@ -1523,7 +1523,7 @@ static INT_PTR CALLBACK DlgProcIcqClientIDOpts(HWND hwndDlg, UINT msg, WPARAM wP
         {
             char tmp[MAXMODULELABELLENGTH];
             mir_snprintf(tmp, MAXMODULELABELLENGTH, "%sCaps", ICQ_PROTOCOL_NAME);
-            SetDlgItemTextA(hwndDlg, IDC_CUSTCAPEDIT, UniGetContactSettingUtf(NULL,tmp,"capability", 0));
+            SetDlgItemTextA(hwndDlg, IDC_CUSTCAPEDIT, getSettingStringUtf(NULL,tmp,"capability", 0));
         }
         return TRUE;
     }
@@ -1620,7 +1620,7 @@ static INT_PTR CALLBACK DlgProcIcqClientIDOpts(HWND hwndDlg, UINT msg, WPARAM wP
                     DWORD dwFT1;
                     DWORD dwFT2;
                     DWORD dwFT3;
-                    int nPort = ICQGetContactSettingWord(NULL, "UserPort", 0);
+                    int nPort = getSettingWord(NULL, "UserPort", 0);
                     DWORD dwDirectCookie = rand() ^ (rand() << 16);
                     // Get status
                     wStatus = MirandaStatusToIcq(icqGoingOnlineStatus);
@@ -1632,7 +1632,7 @@ static INT_PTR CALLBACK DlgProcIcqClientIDOpts(HWND hwndDlg, UINT msg, WPARAM wP
                     packWord(&packet, wStatus);                 // Status
                     packTLVWord(&packet, 0x0008, 0x0000);       // TLV 8: Error code
                     packDWord(&packet, 0x000c0025);             // TLV C: Direct connection info
-                    packDWord(&packet, ICQGetContactSettingDword(NULL, "RealIP", 0));
+                    packDWord(&packet, getSettingDword(NULL, "RealIP", 0));
                     packDWord(&packet, nPort);
                     packByte(&packet, DC_TYPE);                 // TCP/FLAG firewall settings
                     packWord(&packet, (WORD)GetProtoVersion());
@@ -1695,12 +1695,12 @@ static INT_PTR CALLBACK DlgProcIcqContactsOpts(HWND hwndDlg, UINT msg, WPARAM wP
         LoadDBCheckState(hwndDlg, IDC_STRICTAVATARCHECK, "StrictAvatarCheck", DEFAULT_AVATARS_CHECK);
 
         icq_EnableMultipleControls(hwndDlg, icqContactsControls, sizeof(icqContactsControls)/sizeof(icqContactsControls[0]),
-                                   ICQGetContactSettingByte(NULL, "UseServerCList", DEFAULT_SS_ENABLED)?TRUE:FALSE);
+                                   getSettingByte(NULL, "UseServerCList", DEFAULT_SS_ENABLED)?TRUE:FALSE);
         icq_EnableMultipleControls(hwndDlg, icqAvatarControls, sizeof(icqAvatarControls)/sizeof(icqAvatarControls[0]),
-                                   ICQGetContactSettingByte(NULL, "AvatarsEnabled", DEFAULT_AVATARS_ENABLED)?TRUE:FALSE);
+                                   getSettingByte(NULL, "AvatarsEnabled", DEFAULT_AVATARS_ENABLED)?TRUE:FALSE);
         CheckDlgButton(hwndDlg, IDC_DELETE_TMP_CONTACTS, (bTmpContacts == 0));
         CheckDlgButton(hwndDlg, IDC_ADD_TMP_CONTACTS, (bTmpContacts == 1));
-        SetDlgItemTextA(hwndDlg, IDC_TMP_CONTACTS_GROUP, UniGetContactSettingUtf(NULL,ICQ_PROTOCOL_NAME,"TmpContactsGroup", ""));
+        SetDlgItemTextA(hwndDlg, IDC_TMP_CONTACTS_GROUP, getSettingStringUtf(NULL,ICQ_PROTOCOL_NAME,"TmpContactsGroup", ""));
         LoadDBCheckState(hwndDlg, IDC_ADDTEMP, "AddTemp", 0);
         LoadDBCheckState(hwndDlg, IDC_TMPREQAUTH, "TmpReqAuth", 1);
         LoadDBCheckState(hwndDlg, IDC_TMPSNDADDED, "TmpSndAdded", 1);
@@ -1788,19 +1788,19 @@ static INT_PTR CALLBACK DlgProcIcqContactsOpts(HWND hwndDlg, UINT msg, WPARAM wP
             StoreDBCheckState(hwndDlg, IDC_REMOVE_TEMP, "RemoveTmpContacts");
             if (IsDlgButtonChecked(hwndDlg, IDC_DELETE_TMP_CONTACTS))
             {
-                ICQWriteContactSettingByte(NULL, "TempContacts", 0);
+                setSettingByte(NULL, "TempContacts", 0);
                 bTmpContacts = 0;
             }
             else if (IsDlgButtonChecked(hwndDlg, IDC_ADD_TMP_CONTACTS))
             {
-                ICQWriteContactSettingByte(NULL, "TempContacts", 1);
+                setSettingByte(NULL, "TempContacts", 1);
                 bTmpContacts = 1;
             }
             {
                 static char NewTmpGroupName[128] = {0},
                                                    CurrentTmpGroupName[128] = {0};
                 GetDlgItemTextA(hwndDlg, IDC_TMP_CONTACTS_GROUP, NewTmpGroupName, sizeof(NewTmpGroupName));
-                strcpy(CurrentTmpGroupName, UniGetContactSettingUtf(NULL, ICQ_PROTOCOL_NAME, "TmpContactsGroup", "0"));
+                strcpy(CurrentTmpGroupName, getSettingStringUtf(NULL, ICQ_PROTOCOL_NAME, "TmpContactsGroup", "0"));
                 if(strcmp(CurrentTmpGroupName, NewTmpGroupName) != 0)
                 {
                     int GroupNumber = 0;
@@ -1808,14 +1808,14 @@ static INT_PTR CALLBACK DlgProcIcqContactsOpts(HWND hwndDlg, UINT msg, WPARAM wP
                     char szNumber[32] = {0}, szValue[96] = {0};
                     extern int CreateCListGroup(const char* szGroupName);
                     strcpy(szNumber, "0");
-                    while(strcmp(UniGetContactSettingUtf(NULL, "CListGroups", szNumber, "0"), "0") != 0)
+                    while(strcmp(getSettingStringUtf(NULL, "CListGroups", szNumber, "0"), "0") != 0)
                     {
 #if defined(_MSC_VER) && _MSC_VER >= 1300
                         _itoa_s(GroupNumber, szNumber, sizeof(szNumber), 10);
 #else
                         _itoa(GroupNumber, szNumber, 10);
 #endif
-                        strcpy(szValue, UniGetContactSettingUtf(NULL, "CListGroups", szNumber, "0"));
+                        strcpy(szValue, getSettingStringUtf(NULL, "CListGroups", szNumber, "0"));
                         if(strcmp(NewTmpGroupName, szValue + 1) == 0)
                         {
                             GroupExist = 1;
@@ -1823,18 +1823,18 @@ static INT_PTR CALLBACK DlgProcIcqContactsOpts(HWND hwndDlg, UINT msg, WPARAM wP
                         }
                         GroupNumber++;
                     }
-                    UniWriteContactSettingUtf(NULL,ICQ_PROTOCOL_NAME, "TmpContactsGroup", NewTmpGroupName);
-                    TmpGroupName = UniGetContactSettingUtf(NULL,ICQ_PROTOCOL_NAME,"TmpContactsGroup", Translate("General"));
+                    setSettingStringUtf(NULL,ICQ_PROTOCOL_NAME, "TmpContactsGroup", NewTmpGroupName);
+                    TmpGroupName = getSettingStringUtf(NULL,ICQ_PROTOCOL_NAME,"TmpContactsGroup", Translate("General"));
                     if(!GroupExist)
                         CreateCListGroup(TmpGroupName);
                 }
             }
             StoreDBCheckState(hwndDlg, IDC_ADDTEMP, "AddTemp");
-            bAddTemp = ICQGetContactSettingByte(NULL, "AddTemp", 0);
+            bAddTemp = getSettingByte(NULL, "AddTemp", 0);
             StoreDBCheckState(hwndDlg, IDC_TMPREQAUTH, "TmpReqAuth");
-            bTmpAuthRequet = ICQGetContactSettingByte(NULL, "TmpReqAuth", 1);
+            bTmpAuthRequet = getSettingByte(NULL, "TmpReqAuth", 1);
             StoreDBCheckState(hwndDlg, IDC_TMPSNDADDED, "TmpSndAdded");
-            bTmpSendAdded = ICQGetContactSettingByte(NULL, "TmpSndAdded", 1);
+            bTmpSendAdded = getSettingByte(NULL, "TmpSndAdded", 1);
             return TRUE;
         }
         break;
