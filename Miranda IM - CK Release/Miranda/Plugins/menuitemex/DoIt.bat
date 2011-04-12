@@ -1,6 +1,6 @@
-"%ProgramFiles%\Microsoft Visual Studio .NET 2003\Common7\IDE\devenv.exe" /REBUILD "Release" menuex.sln
-"%ProgramFiles%\Microsoft Visual Studio .NET 2003\Common7\IDE\devenv.exe" /REBUILD "Release Unicode" menuex.sln
-"%ProgramFiles%\Microsoft Visual Studio 9.0\Common7\IDE\devenv.exe" /REBUILD "Release Unicode|x64" menuex_9.sln
+"%ProgramFiles%\Microsoft Visual Studio 10.0\Common7\IDE\devenv.exe" /REBUILD "Release" menuex.sln
+"%ProgramFiles%\Microsoft Visual Studio 10.0\Common7\IDE\devenv.exe" /REBUILD "Release Unicode" menuex.sln
+"%ProgramFiles%\Microsoft Visual Studio 10.0\Common7\IDE\devenv.exe" /REBUILD "Release Unicode|x64" menuex_9.sln
 if not exist plugins md plugins
 copy /Y Release\plugins\MenuEx.dll plugins\MenuEx.dll
 if exist menuitemex.zip del menuitemex.zip
