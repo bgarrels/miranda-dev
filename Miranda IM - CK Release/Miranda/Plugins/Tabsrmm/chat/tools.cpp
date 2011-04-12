@@ -30,7 +30,7 @@
  *
  * (C) 2005-2009 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: tools.cpp 13501 2011-03-25 14:21:53Z Michael.Kunz@s2005.TU-Chemnitz.de $
+ * $Id: tools.cpp 13587 2011-04-12 13:54:26Z george.hazan $
  *
  * Helper functions for the group chat module.
  *
@@ -352,13 +352,11 @@ static BOOL DoPopup(SESSION_INFO* si, GCEVENT* gce, struct TWindowData* dat)
 			if (pContainer->dwFlags & CNT_ALWAYSREPORTINACTIVE) {
 				if (pContainer->dwFlags & CNT_DONTREPORTFOCUSED)
 					goto passed;
-				else
-				{
-					if (pContainer->hwndActive == si->hWnd)
-						return 0;
-					else
-						goto passed;
-				}
+
+				if (pContainer->hwndActive == si->hWnd)
+					return 0;
+
+				goto passed;
 			}
 			return 0;
 		}

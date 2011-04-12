@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: msgs.cpp 13447 2011-03-14 19:55:07Z george.hazan $
+ * $Id: msgs.cpp 13587 2011-04-12 13:54:26Z george.hazan $
  *
  * Load, setup and shutdown the plugin
  * core plugin messaging services (single IM chats only).
@@ -236,13 +236,11 @@ INT_PTR MessageWindowOpened(WPARAM wParam, LPARAM lParam)
 			if (pContainer->dwFlags & CNT_ALWAYSREPORTINACTIVE) {
 				if (pContainer->dwFlags & CNT_DONTREPORTFOCUSED)
 					return 0;
+
+				if (pContainer->hwndActive == hwnd)
+					return 1;
 				else
-				{
-					if (pContainer->hwndActive == hwnd)
-						return 1;
-					else
-						return 0;
-				}
+					return 0;
 			}
 		}
 		return 1;

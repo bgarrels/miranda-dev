@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: controls.cpp 12065 2010-06-25 17:30:24Z silvercircle $
+ * $Id: controls.cpp 13587 2011-04-12 13:54:26Z george.hazan $
  *
  * Menu and status bar control(s) for the container window.
  *

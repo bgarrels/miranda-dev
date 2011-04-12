@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: generic_msghandlers.cpp 13447 2011-03-14 19:55:07Z george.hazan $
+ * $Id: generic_msghandlers.cpp 13587 2011-04-12 13:54:26Z george.hazan $
  *
  * these are generic message handlers which are used by the message dialog window procedure.
  * calling them directly instead of using SendMessage() is faster.

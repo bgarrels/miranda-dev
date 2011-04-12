@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13462 $
-Last change on : $Date: 2011-03-19 18:34:54 +0100 (Sa, 19. Mrz 2011) $
-Last change by : $Author: borkra $
+Revision       : $Revision: 13588 $
+Last change on : $Date: 2011-04-12 16:40:04 +0200 (Di, 12. Apr 2011) $
+Last change by : $Author: george.hazan $
 
 */
 
@@ -43,6 +43,9 @@ Last change by : $Author: borkra $
 
 HINSTANCE hInst;
 PLUGINLINK *pluginLink;
+
+int g_cbCountries;
+struct CountryListEntry* g_countries;
 
 static char szVersion[200] = "";
 
@@ -246,6 +249,8 @@ extern "C" int __declspec( dllexport ) Load( PLUGINLINK *link )
 	mir_getXI( &xi );
 	mir_getTMI( &tmi );
 
+	CallService( MS_UTILS_GETCOUNTRYLIST, ( WPARAM )&g_cbCountries, ( LPARAM )&g_countries );
+	
 	setlocale(LC_ALL, "");
 	mir_snprintf( szVersion, sizeof( szVersion ), Translate("Jabber protocol plugin for Miranda IM (%s)"), __DATE__ );
 
