@@ -1,0 +1,130 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "../winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_XSTATUS1            ICON                    "icos\\xstatus01.ico"
+IDI_XSTATUS2            ICON                    "icos\\xstatus02.ico"
+IDI_XSTATUS3            ICON                    "icos\\xstatus03.ico"
+IDI_XSTATUS4            ICON                    "icos\\xstatus04.ico"
+IDI_XSTATUS5            ICON                    "icos\\xstatus05.ico"
+IDI_XSTATUS6            ICON                    "icos\\xstatus06.ico"
+IDI_XSTATUS7            ICON                    "icos\\xstatus07.ico"
+IDI_XSTATUS8            ICON                    "icos\\xstatus08.ico"
+IDI_XSTATUS9            ICON                    "icos\\xstatus09.ico"
+IDI_XSTATUS10           ICON                    "icos\\xstatus10.ico"
+IDI_XSTATUS11           ICON                    "icos\\xstatus11.ico"
+IDI_XSTATUS12           ICON                    "icos\\xstatus12.ico"
+IDI_XSTATUS13           ICON                    "icos\\xstatus13.ico"
+IDI_XSTATUS14           ICON                    "icos\\xstatus14.ico"
+IDI_XSTATUS15           ICON                    "icos\\xstatus15.ico"
+IDI_XSTATUS16           ICON                    "icos\\xstatus16.ico"
+IDI_XSTATUS17           ICON                    "icos\\xstatus17.ico"
+IDI_XSTATUS18           ICON                    "icos\\xstatus18.ico"
+IDI_XSTATUS19           ICON                    "icos\\xstatus19.ico"
+IDI_XSTATUS20           ICON                    "icos\\xstatus20.ico"
+IDI_XSTATUS21           ICON                    "icos\\xstatus21.ico"
+IDI_XSTATUS22           ICON                    "icos\\xstatus22.ico"
+IDI_XSTATUS23           ICON                    "icos\\xstatus23.ico"
+IDI_XSTATUS24           ICON                    "icos\\xstatus24.ico"
+IDI_XSTATUS25           ICON                    "icos\\xstatus25.ico"
+IDI_XSTATUS26           ICON                    "icos\\xstatus26.ico"
+IDI_XSTATUS27           ICON                    "icos\\xstatus27.ico"
+IDI_XSTATUS28           ICON                    "icos\\xstatus28.ico"
+IDI_XSTATUS29           ICON                    "icos\\xstatus29.ico"
+IDI_XSTATUS30           ICON                    "icos\\xstatus30.ico"
+IDI_XSTATUS31           ICON                    "icos\\xstatus31.ico"
+IDI_XSTATUS32           ICON                    "icos\\xstatus32.ico"
+//Add by BeteTest
+IDI_XSTATUS33           ICON                    "icos\\xstatus33.ico"
+IDI_XSTATUS34           ICON                    "icos\\xstatus34.ico"
+IDI_XSTATUS35           ICON                    "icos\\xstatus35.ico"
+IDI_XSTATUS36           ICON                    "icos\\xstatus36.ico"
+IDI_XSTATUS37           ICON                    "icos\\xstatus37.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_IDENTIFY            "# Custom Status Icons #"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
