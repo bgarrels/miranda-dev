@@ -75,6 +75,10 @@ public:
 	virtual	int       __cdecl OnEvent( PROTOEVENTTYPE iEventType, WPARAM wParam, LPARAM lParam );
 
 	//////////////////////////////////////////////////////////////////////////
+	HANDLE CreateProtoEvent(const char* szEvent);
+	HANDLE CreateProtoService(const char* szService, MIRANDASERVICE serviceProc);
+	static int ServListDbSettingChanged(WPARAM wParam,LPARAM lParam);
+
 	icq_mode_messages _m_modeMsgs;
 	CRITICAL_SECTION _m_modeMsgsMutex;
 	char** _MirandaStatusToAwayMsg(int nStatus);
@@ -124,6 +128,7 @@ private:
 	char* ConvertMsgToUserSpecificAnsi(HANDLE hContact, const char* szMsg);
 	void ForkThread( IcqThreadFunc pFunc, void* arg );
 	void   __cdecl CheekySearchThread( void* );
+	int OnSystemPreShutdown(WPARAM wParam,LPARAM lParam);
 
 	int cheekySearchId;
 	DWORD cheekySearchUin;
