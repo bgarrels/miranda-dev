@@ -1130,11 +1130,11 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
             int i = SendDlgItemMessage(hwndDlg, IDC_QIP_STATUS_ICON_POS, CB_GETCURSEL, 0, 0)+1;
             DBWriteContactSettingWord(NULL, ICQ_PROTOCOL_NAME, "qip_status_icon_pos", (WORD)i);
         }
-        if( DBGetContactSettingByte(NULL,ICQ_PROTOCOL_NAME,"RTF", 0) != (BYTE)IsDlgButtonChecked(hwndDlg,IDC_RTF))
-        {
-            MessageBox(0,TranslateW("To enable RTF text receiving you must reconnect your Miranda after option is enabled"),TranslateW("Warning"),MB_OK);
-            setSettingByte(NULL,"RTF",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_RTF));
-        }
+       // if( DBGetContactSettingByte(NULL,ICQ_PROTOCOL_NAME,"RTF", 0) != (BYTE)IsDlgButtonChecked(hwndDlg,IDC_RTF))
+       // {
+           // MessageBox(0,TranslateW("To enable RTF text receiving you must reconnect your Miranda after option is enabled"),TranslateW("Warning"),MB_OK);
+         //   setSettingByte(NULL,"RTF",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_RTF));
+       // }
         if (IsDlgButtonChecked(hwndDlg, IDC_UTFENABLE))
             m_bUtfEnabled = IsDlgButtonChecked(hwndDlg, IDC_UTFALL)?2:1;
         else
