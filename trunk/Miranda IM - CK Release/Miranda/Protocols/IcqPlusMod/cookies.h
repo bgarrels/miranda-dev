@@ -80,7 +80,7 @@ typedef struct message_cookie_data_s
     DWORD dwMsgID2;
     WORD bMessageType;
     BYTE nAckType;
-} message_cookie_data;
+} cookie_message_data;
 
 #define ACKTYPE_NONE   0
 #define ACKTYPE_SERVER 1
@@ -88,9 +88,9 @@ typedef struct message_cookie_data_s
 
 typedef struct message_cookie_data_ex_s
 {
-    message_cookie_data msg;
+    cookie_message_data msg;
     BYTE isOffline;
-} message_cookie_data_ex;
+} cookie_message_data_ext;
 
 typedef struct fam15_cookie_data_s
 {
@@ -138,7 +138,7 @@ typedef struct avatarcookie_t
 
 typedef struct
 {
-    message_cookie_data pMessage;
+    cookie_message_data pMessage;
     HANDLE hContact;
     DWORD dwUin;
     int type;
@@ -159,9 +159,9 @@ int GetCookieType(DWORD dwCookie);
 int FindCookie(DWORD wCookie, HANDLE *phContact, void **ppvExtra);
 int FindCookieByData(void *pvExtra, DWORD *pdwCookie, HANDLE *phContact);
 int FindCookieByType(BYTE bType, DWORD *pdwCookie, HANDLE *phContact, void** ppvExtra);
-int FindMessageCookie(DWORD dwMsgID1, DWORD dwMsgID2, DWORD *pdwCookie, HANDLE *phContact, message_cookie_data **ppvExtra);
+int FindMessageCookie(DWORD dwMsgID1, DWORD dwMsgID2, DWORD *pdwCookie, HANDLE *phContact, cookie_message_data **ppvExtra);
 
-void InitMessageCookie(message_cookie_data *pCookie);
-message_cookie_data *CreateMessageCookie(WORD bMsgType, BYTE bAckType);
+void InitMessageCookie(cookie_message_data *pCookie);
+cookie_message_data *CreateMessageCookie(WORD bMsgType, BYTE bAckType);
 
 #endif /* __COOKIES_H */

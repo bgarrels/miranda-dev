@@ -40,7 +40,7 @@
 
 typedef struct
 {
-    message_cookie_data pMessage;
+    cookie_message_data pMessage;
     BYTE ft_magic;
     int status;
     int sending;

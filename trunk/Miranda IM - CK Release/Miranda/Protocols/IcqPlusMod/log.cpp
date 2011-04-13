@@ -78,7 +78,7 @@ void icq_LogMessage(int level, const char *szMsg)
         if (getSettingByte(NULL, "PopupsLogEnabled", 1))
         {
             ShowPopUpMsg(NULL, 0, szLevelDescr[level], szMsg, (BYTE)level);
-            return; // Popup showed successfuly
+            return; // Popup showed successfully
         }
         if (!bErrorBoxVisible || !getSettingByte(NULL, "IgnoreMultiErrorBox", 0))
         {

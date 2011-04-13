@@ -70,7 +70,7 @@ void handleFileAck(PBYTE buf, WORD wLen, DWORD dwUin, DWORD dwCookie, WORD wStat
     if (wStatus != 0)
     {
         NetLog_Direct("File transfer denied by %u.", dwUin);
-        ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_DENIED, (HANDLE)ft, 0);
+        BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_DENIED, (HANDLE)ft, 0);
 
         FreeCookie(dwCookie);
 
@@ -116,7 +116,7 @@ void handleFileAck(PBYTE buf, WORD wLen, DWORD dwUin, DWORD dwCookie, WORD wStat
 
     NetLog_Direct("File transfer ack from %u, port %u, name %s, size %u", dwUin, ft->dwRemotePort, pszFileName, dwFileSize);
 
-    ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTING, (HANDLE)ft, 0);
+    BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTING, (HANDLE)ft, 0);
 
     OpenDirectConnection(ft->hContact, DIRECTCONN_FILE, ft);
 }
@@ -239,7 +239,7 @@ void icq_CancelFileTransfer(HANDLE hContact, filetransfer* ft)
         // Transfer still out there, end it
         NetLib_CloseConnection(&ft->hConnection, FALSE);
 
-        ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, ft, 0);
+        BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, ft, 0);
 
         if (!FindFileTransferDC(ft))
         {

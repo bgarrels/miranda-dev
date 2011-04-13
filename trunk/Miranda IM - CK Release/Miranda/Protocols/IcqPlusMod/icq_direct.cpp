@@ -347,7 +347,7 @@ BOOL IsDirectConnectionOpen(HANDLE hContact, int type, int bPassive)
 
     LeaveCriticalSection(&directConnListMutex);
 
-    if (!bPassive && !bIsCreated && !bIsOpen && type == DIRECTCONN_STANDARD && gbDCMsgEnabled == 2)
+    if (!bPassive && !bIsCreated && !bIsOpen && type == DIRECTCONN_STANDARD && m_bDCMsgEnabled == 2)
     {
         // do not try to open DC to offline contact
         if (getContactStatus(hContact) == ID_STATUS_OFFLINE) return FALSE;
@@ -702,7 +702,7 @@ static unsigned __stdcall icq_directThread(void* p)
                         pCookie->type = dc.type;
                         pCookie->ft = dc.ft;
                         dwCookie = AllocateCookie(CKT_REVERSEDIRECT, 0, dc.hContact, pCookie);
-                        icq_sendReverseReq(&dc, dwCookie, (message_cookie_data*)pCookie);
+                        icq_sendReverseReq(&dc, dwCookie, (cookie_message_data*)pCookie);
                         RemoveDirectConnFromList(&dc);
 
                         return 0;
@@ -723,7 +723,7 @@ static unsigned __stdcall icq_directThread(void* p)
             RemoveDirectConnFromList(&dc);
             if (dc.type == DIRECTCONN_FILE)
             {
-                ICQBroadcastAck(dc.ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, dc.ft, 0);
+                BroadcastAck(dc.ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, dc.ft, 0);
                 // Release transfer
                 SafeReleaseFileTransfer((void**)&dc.ft);
             }
@@ -873,10 +873,10 @@ static unsigned __stdcall icq_directThread(void* p)
         if (dc.ft->fileId != -1)
         {
             _close(dc.ft->fileId);
-            ICQBroadcastAck(dc.ft->hContact, ACKTYPE_FILE, dc.ft->dwBytesDone==dc.ft->dwTotalSize ? ACKRESULT_SUCCESS : ACKRESULT_FAILED, dc.ft, 0);
+            BroadcastAck(dc.ft->hContact, ACKTYPE_FILE, dc.ft->dwBytesDone==dc.ft->dwTotalSize ? ACKRESULT_SUCCESS : ACKRESULT_FAILED, dc.ft, 0);
         }
         else if (dc.ft->hConnection)
-            ICQBroadcastAck(dc.ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, dc.ft, 0);
+            BroadcastAck(dc.ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, dc.ft, 0);
 
         SafeReleaseFileTransfer((void**)&dc.ft);
         _chdir("\\");    /* so we don't leave a subdir handle open so it can't be deleted */
@@ -1138,7 +1138,7 @@ static void handleDirectPacket(directconnect* dc, PBYTE buf, WORD wLen)
         // it is sent by both contains GUID of message channel
         DWORD q1,q2,q3,q4;
 
-        if (!gbDCMsgEnabled)
+        if (!m_bDCMsgEnabled)
         {
             // DC messaging disabled, close connection
             NetLog_Direct("Messaging DC requested, denied");

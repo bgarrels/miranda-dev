@@ -44,4 +44,3 @@
 #include "icqoscar.h"
 
 std::list<CIcqProto*> g_Instances;
-CIcqProto gProtocol;

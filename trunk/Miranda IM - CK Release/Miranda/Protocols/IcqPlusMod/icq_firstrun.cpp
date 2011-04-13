@@ -73,7 +73,7 @@ INT_PTR CALLBACK icq_FirstRunDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
             SetDlgItemTextA(hwndDlg, IDC_UIN, pszUIN);
         }
 
-        SendDlgItemMessage(hwndDlg, IDC_PW, EM_LIMITTEXT, 8, 0);
+        SendDlgItemMessage(hwndDlg, IDC_PW, EM_LIMITTEXT, MAX_PATH, 0);
         pszPwd = GetUserPassword(FALSE);
         if (pszPwd)
         {
@@ -105,7 +105,7 @@ INT_PTR CALLBACK icq_FirstRunDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
             GetDlgItemTextA(hwndDlg, IDC_UIN, str, sizeof(str));
             dwUIN = atoi(str);
             setSettingDword(NULL, UNIQUEIDSETTING, dwUIN);
-            GetDlgItemTextA(hwndDlg, IDC_PW, str, 9);
+            GetDlgItemTextA(hwndDlg, IDC_PW, str, MAX_PATH);
             strcpy(gpszPassword, str);
             CallService(MS_DB_CRYPT_ENCODESTRING, sizeof(gpszPassword), (LPARAM) str);
             setSettingString(NULL, "Password", str);
@@ -152,7 +152,7 @@ INT_PTR CALLBACK DlgProcAccMgrUI(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM l
             null_snprintf(pszUIN, 20, "%u", dwUIN);
             SetDlgItemTextA(hwndDlg, IDC_UIN, pszUIN);
         }
-        SendDlgItemMessage(hwndDlg, IDC_PW, EM_LIMITTEXT, 8, 0);
+        SendDlgItemMessage(hwndDlg, IDC_PW, EM_LIMITTEXT, MAX_PATH, 0);
         pszPwd = GetUserPassword(FALSE);
         if (pszPwd)
         {
@@ -190,7 +190,7 @@ INT_PTR CALLBACK DlgProcAccMgrUI(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM l
             GetDlgItemTextA(hwndDlg, IDC_UIN, str, sizeof(str));
             dwUIN = atoi(str);
             setSettingDword(NULL, UNIQUEIDSETTING, dwUIN);
-            GetDlgItemTextA(hwndDlg, IDC_PW, str, 9);
+            GetDlgItemTextA(hwndDlg, IDC_PW, str, MAX_PATH);
             strcpy(gpszPassword, str);
             CallService(MS_DB_CRYPT_ENCODESTRING, sizeof(gpszPassword), (LPARAM)str);
             setSettingString(NULL, "Password", str);

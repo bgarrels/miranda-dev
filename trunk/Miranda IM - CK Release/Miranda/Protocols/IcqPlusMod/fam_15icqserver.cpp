@@ -119,7 +119,7 @@ static void handleExtensionError(unsigned char *buf, WORD wPackLen)
                             foundCookie = FindCookie(wCookie, &hContact, (void**)&pCookieData);
                             if (foundCookie && pCookieData)
                             {
-                                ICQBroadcastAck(hContact,  ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
+                                BroadcastAck(hContact,  ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
 
                                 ReleaseCookie(wCookie);  // we do not leak cookie and memory
                             }
@@ -129,7 +129,7 @@ static void handleExtensionError(unsigned char *buf, WORD wPackLen)
                         else if (wSubType == META_SET_PASSWORD_REQ)
                         {
                             // failed to change user password, report to UI
-                            ICQBroadcastAck(NULL, ACKTYPE_SETINFO, ACKRESULT_FAILED, (HANDLE)wCookie, 0);
+                            BroadcastAck(NULL, ACKTYPE_SETINFO, ACKRESULT_FAILED, (HANDLE)wCookie, 0);
 
                             NetLog_Server("Meta change password request failed, error 0x%02x", wErrorCode);
                         }
@@ -265,7 +265,7 @@ static void handleExtensionMetaResponse(unsigned char *databuf, WORD wPacketLen,
                 memcpy(pszInfo, databuf, wPacketLen);
             pszInfo[wPacketLen] = 0;
 
-            ICQBroadcastAck(NULL, ICQACKTYPE_SMS, ACKRESULT_FAILED, (HANDLE)wCookie, (LPARAM)pszInfo);
+            BroadcastAck(NULL, ICQACKTYPE_SMS, ACKRESULT_FAILED, (HANDLE)wCookie, (LPARAM)pszInfo);
             FreeCookie(wCookie);
             break;
         }
@@ -298,7 +298,7 @@ static void handleExtensionMetaResponse(unsigned char *databuf, WORD wPacketLen,
                             memcpy(pszInfo, databuf, wAckLen);
                         pszInfo[wAckLen] = 0;
 
-                        ICQBroadcastAck(NULL, ICQACKTYPE_SMS, ACKRESULT_SENTREQUEST, (HANDLE)wCookie, (LPARAM)pszInfo);
+                        BroadcastAck(NULL, ICQACKTYPE_SMS, ACKRESULT_SENTREQUEST, (HANDLE)wCookie, (LPARAM)pszInfo);
                         FreeCookie(wCookie);
 
                         // Parsing success
@@ -352,7 +352,7 @@ static void ReleaseSearchCookie(DWORD dwCookie, search_cookie *pCookie)
             if (pCookie->dwStatus)
             {
                 mir_free(pCookie);
-                ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)dwCookie, 0);
+                BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)dwCookie, 0);
             }
             else
                 pCookie->dwStatus = 1;
@@ -360,11 +360,11 @@ static void ReleaseSearchCookie(DWORD dwCookie, search_cookie *pCookie)
         else
         {
             mir_free(pCookie);
-            ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)dwCookie, 0);
+            BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)dwCookie, 0);
         }
     }
     else
-        ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)dwCookie, 0);
+        BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)dwCookie, 0);
 }
 
 extern DWORD _mirandaVersion;
@@ -523,9 +523,9 @@ static void parseSearchReplies(unsigned char *databuf, WORD wPacketLen, WORD wCo
 
             // Finally, broadcast the result
             if(_mirandaVersion > PLUGIN_MAKE_VERSION(0,9,0,7))
-                ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_DATA, (HANDLE)wCookie, (LPARAM)&srn);
+                BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_DATA, (HANDLE)wCookie, (LPARAM)&srn);
             else
-                ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_DATA, (HANDLE)wCookie, (LPARAM)&sr);
+                BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_DATA, (HANDLE)wCookie, (LPARAM)&sr);
 
             // Broadcast "Last result" ack if this was the last user found
             if (wReplySubtype == SRV_LAST_USER_FOUND)
@@ -582,9 +582,9 @@ static void parseUserInfoUpdateAck(unsigned char *databuf, WORD wPacketLen, WORD
     case META_SET_PASSWORD_ACK:  // Set user password server ack
 
         if (bResultCode == 0xA)
-            ICQBroadcastAck(NULL, ACKTYPE_SETINFO, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
+            BroadcastAck(NULL, ACKTYPE_SETINFO, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
         else
-            ICQBroadcastAck(NULL, ACKTYPE_SETINFO, ACKRESULT_FAILED, (HANDLE)wCookie, 0);
+            BroadcastAck(NULL, ACKTYPE_SETINFO, ACKRESULT_FAILED, (HANDLE)wCookie, 0);
 
         FreeCookie(wCookie);
         break;
@@ -764,9 +764,9 @@ void handleDirectoryQueryResponse(BYTE *databuf, WORD wPacketLen, WORD wCookie, 
         if (!bMoreDataFollows)
         {
             if (pCookieData->bRequestType == DIRECTORYREQUEST_INFOUSER)
-                ICQBroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
+                BroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
             else if (pCookieData->bRequestType == DIRECTORYREQUEST_SEARCH)
-                ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0); // should report error here, but Find/Add module does not support that
+                BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0); // should report error here, but Find/Add module does not support that
             ReleaseCookie(wCookie);
         }
         return;
@@ -785,9 +785,9 @@ void handleDirectoryQueryResponse(BYTE *databuf, WORD wPacketLen, WORD wCookie, 
         if (!bMoreDataFollows)
         {
             if (pCookieData->bRequestType == DIRECTORYREQUEST_INFOUSER)
-                ICQBroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
+                BroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
             else if (pCookieData->bRequestType == DIRECTORYREQUEST_SEARCH)
-                ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0); // should report error here, but Find/Add module does not support that
+                BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0); // should report error here, but Find/Add module does not support that
             ReleaseCookie(wCookie);
         }
         return;
@@ -813,9 +813,9 @@ void handleDirectoryQueryResponse(BYTE *databuf, WORD wPacketLen, WORD wCookie, 
         if (!bMoreDataFollows)
         {
             if (pCookieData->bRequestType == DIRECTORYREQUEST_INFOUSER)
-                ICQBroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
+                BroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
             else if (pCookieData->bRequestType == DIRECTORYREQUEST_SEARCH)
-                ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0); // should report error here, but Find/Add module does not support that
+                BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0); // should report error here, but Find/Add module does not support that
             ReleaseCookie(wCookie);
         }
         return;
@@ -832,7 +832,7 @@ void handleDirectoryQueryResponse(BYTE *databuf, WORD wPacketLen, WORD wCookie, 
     if (wData == 0 && pCookieData->bRequestType == DIRECTORYREQUEST_SEARCH)
     {
         NetLog_Server("Directory Search: No contacts found");
-        ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
+        BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
         ReleaseCookie(wCookie);
         return;
     }
@@ -844,9 +844,9 @@ void handleDirectoryQueryResponse(BYTE *databuf, WORD wPacketLen, WORD wCookie, 
         if (!bMoreDataFollows)
         {
             if (pCookieData->bRequestType == DIRECTORYREQUEST_INFOUSER)
-                ICQBroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
+                BroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
             else if (pCookieData->bRequestType == DIRECTORYREQUEST_SEARCH)
-                ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0); // should report error here, but Find/Add module does not support that
+                BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0); // should report error here, but Find/Add module does not support that
             ReleaseCookie(wCookie);
         }
         return;
@@ -1129,7 +1129,7 @@ void parseDirectoryUserDetailsData(HANDLE hContact, oscar_tlv_chain *cDetails, D
 
     if (wReplySubType == META_DIRECTORY_RESPONSE)
         if (pCookieData->bRequestType == DIRECTORYREQUEST_INFOUSER)
-            ICQBroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_SUCCESS, (HANDLE)1 ,0);
+            BroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_SUCCESS, (HANDLE)1 ,0);
 
     // Remove user from info update queue. Removing is fast so we always call this
     // even if it is likely that the user is not queued at all.
@@ -1215,7 +1215,7 @@ void parseDirectorySearchData(oscar_tlv_chain *cDetails, DWORD dwCookie, fam15_c
     isr.age = calcAgeFromBirthDate(getDoubleFromChain(cDetails, 0x1A4, 1));
 
     // Finally, broadcast the result
-    ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_DATA, (HANDLE)dwCookie, (LPARAM)&isr);
+    BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_DATA, (HANDLE)dwCookie, (LPARAM)&isr);
 
     // Release memory
 #ifndef _08CORE
@@ -1228,7 +1228,7 @@ void parseDirectorySearchData(oscar_tlv_chain *cDetails, DWORD dwCookie, fam15_c
 
     // Search is over, broadcast final ack
     if (wReplySubType == META_DIRECTORY_RESPONSE)
-        ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)dwCookie, 0);
+        BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)dwCookie, 0);
 }
 
 
@@ -1274,7 +1274,7 @@ void handleDirectoryUpdateResponse(BYTE *databuf, WORD wPacketLen, WORD wCookie,
         NetLog_Server("Error: Directory request failed, status %u", requestResult);
 
         if (pCookieData->bRequestType == DIRECTORYREQUEST_UPDATEOWNER)
-            ICQBroadcastAck(NULL, ACKTYPE_SETINFO, ACKRESULT_FAILED, (HANDLE)wCookie, 0);
+            BroadcastAck(NULL, ACKTYPE_SETINFO, ACKRESULT_FAILED, (HANDLE)wCookie, 0);
 
         ReleaseCookie(wCookie);
         return;
@@ -1286,7 +1286,7 @@ void handleDirectoryUpdateResponse(BYTE *databuf, WORD wPacketLen, WORD wCookie,
         NetLog_Server("Warning: Data in error message present!");
 
     if (pCookieData->bRequestType == DIRECTORYREQUEST_UPDATEOWNER)
-        ICQBroadcastAck(NULL, ACKTYPE_SETINFO, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
+        BroadcastAck(NULL, ACKTYPE_SETINFO, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
     if (wPacketLen == 0x18)
     {
         DWORD64 qwMetaTime;

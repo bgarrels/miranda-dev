@@ -86,31 +86,31 @@ void icq_sendMessageCapsServ(DWORD dwUin);
 void icq_sendRevokeAuthServ(DWORD dwUin, char *szUid);
 void icq_sendGrantAuthServ(DWORD dwUin, char* szUid, char *szMsg);
 void icq_sendAuthReqServ(DWORD dwUin, char* szUid, char *szMsg);
-void icq_sendAuthResponseServ(DWORD dwUin, char* szUid,int auth,char *szReason);
+void icq_sendAuthResponseServ(DWORD dwUin, char* szUid, int auth, const TCHAR *szReason);
 void icq_sendYouWereAddedServ(DWORD,DWORD);
 
 void sendOwnerInfoRequest(void);
 DWORD sendUserInfoMultiRequest(BYTE *pRequestData, WORD wDataLen, int nItems);
 
-DWORD icq_SendChannel1Message(DWORD dwUin, char *szUID, HANDLE hContact, char *pszText, message_cookie_data *pCookieData);
-DWORD icq_SendChannel1MessageW(DWORD dwUin, char *szUID, HANDLE hContact, wchar_t *pszText, message_cookie_data *pCookieData); // UTF-16
-DWORD icq_SendChannel2Message(DWORD dwUin, HANDLE hContact, const char *szMessage, int nBodyLength, WORD wPriority, message_cookie_data *pCookieData, char *szCap);
-DWORD icq_SendChannel2Contacts(DWORD dwUin, char *szUid, HANDLE hContact, const char *pData, WORD wDataLen, const char *pNames, WORD wNamesLen, message_cookie_data *pCookieData);
-DWORD icq_SendChannel4Message(DWORD dwUin, HANDLE hContact, BYTE bMsgType, WORD wMsgLen, const char *szMsg, message_cookie_data *pCookieData);
+DWORD icq_SendChannel1Message(DWORD dwUin, char *szUID, HANDLE hContact, char *pszText, cookie_message_data *pCookieData);
+DWORD icq_SendChannel1MessageW(DWORD dwUin, char *szUID, HANDLE hContact, wchar_t *pszText, cookie_message_data *pCookieData); // UTF-16
+DWORD icq_SendChannel2Message(DWORD dwUin, HANDLE hContact, const char *szMessage, int nBodyLength, WORD wPriority, cookie_message_data *pCookieData, char *szCap);
+DWORD icq_SendChannel2Contacts(DWORD dwUin, char *szUid, HANDLE hContact, const char *pData, WORD wDataLen, const char *pNames, WORD wNamesLen, cookie_message_data *pCookieData);
+DWORD icq_SendChannel4Message(DWORD dwUin, HANDLE hContact, BYTE bMsgType, WORD wMsgLen, const char *szMsg, cookie_message_data *pCookieData);
 
 void icq_sendAdvancedMsgAck(DWORD, DWORD, DWORD, WORD, BYTE, BYTE);
 void icq_sendContactsAck(DWORD dwUin, char *szUid, DWORD dwMsgID1, DWORD dwMsgID2);
 
-void icq_sendReverseReq(directconnect *dc, DWORD dwCookie, message_cookie_data *pCookie);
+void icq_sendReverseReq(directconnect *dc, DWORD dwCookie, cookie_message_data *pCookie);
 void icq_sendReverseFailed(directconnect* dc, DWORD dwMsgID1, DWORD dwMsgID2, DWORD dwCookie);
 
-void icq_sendXtrazRequestServ(DWORD dwUin, DWORD dwCookie, char* szBody, int nBodyLen, message_cookie_data *pCookieData);
+void icq_sendXtrazRequestServ(DWORD dwUin, DWORD dwCookie, char* szBody, int nBodyLen, cookie_message_data *pCookieData);
 void icq_sendXtrazResponseServ(DWORD dwUin, DWORD dwMID, DWORD dwMID2, WORD wCookie, char* szBody, int nBodyLen, int nType);
 
 DWORD SearchByUin(DWORD dwUin);
 DWORD SearchByNames(const char *pszNick, const char *pszFirstName, const char *pszLastName, WORD wPage);
 DWORD SearchByNames_v9(const TCHAR *nick, const TCHAR *firstName, const TCHAR *lastName);
-DWORD SearchByEmail(char *pszEmail);
+DWORD SearchByMail(char *pszEmail);
 DWORD SearchByEmail_v9( const TCHAR *email );
 
 DWORD icq_searchAimByEmail(char* pszEmail, DWORD dwSearchId);

@@ -712,7 +712,7 @@ void handleRecvServMsgOFT(unsigned char *buf, WORD wLen, DWORD dwUin, char *szUI
                     else
                     {
                         // Just sanity
-                        ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)ft, 0);
+                        BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)ft, 0);
                         // Release transfer
                         SafeReleaseFileTransfer((void**)&ft);
                     }
@@ -793,7 +793,7 @@ void handleRecvServMsgOFT(unsigned char *buf, WORD wLen, DWORD dwUin, char *szUI
         {
             NetLog_Server("OFT: File transfer cancelled by %s", strUID(dwUin, szUID));
 
-            ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)ft, 0);
+            BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)ft, 0);
             // Notify user, that the FT was cancelled // TODO: new ACKRESULT_?
             icq_LogMessage(LOG_ERROR, "The file transfer was aborted by the other user.");
             // Release transfer
@@ -854,7 +854,7 @@ void handleRecvServResponseOFT(unsigned char *buf, WORD wLen, DWORD dwUin, char 
             // FT denied (icq5)
             NetLog_Server("OFT: File transfer denied by %s", strUID(dwUin, szUID));
 
-            ICQBroadcastAck(oft->hContact, ACKTYPE_FILE, ACKRESULT_DENIED, (HANDLE)oft, 0);
+            BroadcastAck(oft->hContact, ACKTYPE_FILE, ACKRESULT_DENIED, (HANDLE)oft, 0);
             // Release transfer
             SafeReleaseFileTransfer((void**)&oft);
         }
@@ -864,7 +864,7 @@ void handleRecvServResponseOFT(unsigned char *buf, WORD wLen, DWORD dwUin, char 
         {
             icq_LogMessage(LOG_ERROR, "The file transfer failed: Proxy error");
 
-            ICQBroadcastAck(oft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)oft, 0);
+            BroadcastAck(oft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)oft, 0);
             // Release transfer
             SafeReleaseFileTransfer((void**)&oft);
         }
@@ -874,7 +874,7 @@ void handleRecvServResponseOFT(unsigned char *buf, WORD wLen, DWORD dwUin, char 
         {
             icq_LogMessage(LOG_ERROR, "The file transfer failed: Invalid request");
 
-            ICQBroadcastAck(oft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)oft, 0);
+            BroadcastAck(oft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)oft, 0);
             // Release transfer
             SafeReleaseFileTransfer((void**)&oft);
         }
@@ -884,7 +884,7 @@ void handleRecvServResponseOFT(unsigned char *buf, WORD wLen, DWORD dwUin, char 
         {
             icq_LogMessage(LOG_ERROR, "The file transfer failed: Proxy unavailable");
 
-            ICQBroadcastAck(oft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)oft, 0);
+            BroadcastAck(oft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)oft, 0);
             // Release transfer
             SafeReleaseFileTransfer((void**)&oft);
         }
@@ -894,7 +894,7 @@ void handleRecvServResponseOFT(unsigned char *buf, WORD wLen, DWORD dwUin, char 
         {
             NetLog_Server("OFT: Uknown request response code 0x%x", wStatus);
 
-            ICQBroadcastAck(oft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)oft, 0);
+            BroadcastAck(oft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)oft, 0);
             // Release transfer
             SafeReleaseFileTransfer((void**)&oft);
         }
@@ -972,7 +972,7 @@ int oftInitTransfer(HANDLE hContact, DWORD dwUin, char* szUid, char** files, cha
         // found no valid files to send
         icq_LogMessage(LOG_ERROR, LPGEN("Failed to Initialize File Transfer. No valid files were specified."));
         // Notify UI
-        ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)ft, 0);
+        BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)ft, 0);
         // Release transfer
         SafeReleaseFileTransfer((void**)&ft);
 
@@ -983,7 +983,7 @@ int oftInitTransfer(HANDLE hContact, DWORD dwUin, char* szUid, char** files, cha
         // file larger than 4GB can be send only as single
         icq_LogMessage(LOG_ERROR, "The files are too big to be sent at once. Files bigger than 4GB can be sent only separately.");
         // Notify UI
-        ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)ft, 0);
+        BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, (HANDLE)ft, 0);
         // Release transfer
         SafeReleaseFileTransfer((void**)&ft);
 
@@ -1167,7 +1167,7 @@ DWORD oftFileCancel(HANDLE hContact, WPARAM wParam, LPARAM lParam)
 
         oft_sendFileCancel(dwUin, szUid, ft);
 
-        ICQBroadcastAck(hContact, ACKTYPE_FILE, ACKRESULT_FAILED, ft, 0);
+        BroadcastAck(hContact, ACKTYPE_FILE, ACKRESULT_FAILED, ft, 0);
 
         // Release structure
         SafeReleaseFileTransfer((void**)&ft);
@@ -1239,7 +1239,7 @@ void oftFileResume(oscar_filetransfer *ft, int action, const char *szFilename)
 #endif
         icq_LogMessage(LOG_ERROR, "Your file receive has been aborted because Miranda could not open the destination file in order to write to it. You may be trying to save to a read-only folder.");
 
-        ICQBroadcastAck(oc->ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc->ft, 0);
+        BroadcastAck(oc->ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc->ft, 0);
         // Release transfer
         SafeReleaseFileTransfer((void**)&oc->ft);
         return;
@@ -1279,7 +1279,7 @@ void oftFileResume(oscar_filetransfer *ft, int action, const char *szFilename)
 
         sendOFT2FramePacket(oc, OFT_TYPE_READY);
     }
-    ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, ft, 0);
+    BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, ft, 0);
 
     if (!ft->qwThisFileSize || action == FILERESUME_SKIP)
     {
@@ -1370,7 +1370,7 @@ static int CreateOscarProxyConnection(oscar_connection *oc)
     NETLIBOPENCONNECTION nloc = {0};
 
     // inform UI
-    ICQBroadcastAck(oc->ft->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTPROXY, oc->ft, 0);
+    BroadcastAck(oc->ft->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTPROXY, oc->ft, 0);
 
     nloc.szHost = OSCAR_PROXY_HOST;
     nloc.wPort = getSettingWord(NULL, "OscarPort", DEFAULT_SERVER_PORT);
@@ -1484,7 +1484,7 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
             }
 
             // Inform UI that we will attempt to connect
-            ICQBroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTING, oc.ft, 0);
+            BroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTING, oc.ft, 0);
 
             if (!addr.S_un.S_addr && oc.type == OCT_NORMAL)
             {
@@ -1496,7 +1496,7 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
                     // we got listening port, fine send request
                     oc.ft->listener = listener;
                     // notify UI
-                    ICQBroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_LISTENING, oc.ft, 0);
+                    BroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_LISTENING, oc.ft, 0);
 
                     oft_sendFileRedirect(oc.dwUin, oc.szUid, oc.ft, oc.dwLocalInternalIP, listener->wPort, FALSE);
 
@@ -1534,7 +1534,7 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
                             // we got listening port, fine send request
                             oc.ft->listener = listener;
                             // notify UI that we await connection
-                            ICQBroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_LISTENING, oc.ft, 0);
+                            BroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_LISTENING, oc.ft, 0);
 
                             oft_sendFileRedirect(oc.dwUin, oc.szUid, oc.ft, oc.dwLocalInternalIP, listener->wPort, FALSE);
 
@@ -1557,7 +1557,7 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
                     // acknowledge OFT - connection is ready
                     oft_sendFileAccept(oc.dwUin, oc.szUid, oc.ft);
                     // signal UI
-                    ICQBroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTED, oc.ft, 0);
+                    BroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTED, oc.ft, 0);
                 }
             }
             else
@@ -1582,7 +1582,7 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
                 IN_ADDR addr = {0};
 
                 // inform UI that we will connect to file proxy
-                ICQBroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTPROXY, oc.ft, 0);
+                BroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTPROXY, oc.ft, 0);
 
                 addr.S_un.S_addr = htonl(oc.ft->dwProxyIP);
                 nloc.szHost = inet_ntoa(addr);
@@ -1593,7 +1593,7 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
                 if (!oc.hConnection)
                 {
                     // proxy connection failed, we are out of possibilities
-                    ICQBroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc.ft, 0);
+                    BroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc.ft, 0);
                     // notify the other side, that we failed
                     oft_sendFileResponse(oc.dwUin, oc.szUid, oc.ft, 0x04);
                     // Release structure
@@ -1613,7 +1613,7 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
                 {
                     oft_sendFileResponse(oc.dwUin, oc.szUid, oc.ft, 0x06);
                     // notify UI
-                    ICQBroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc.ft, 0);
+                    BroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc.ft, 0);
                     // Release structure
                     SafeReleaseFileTransfer((void**)&oc.ft);
 
@@ -1627,7 +1627,7 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
             if (!CreateOscarProxyConnection(&oc))
             {
                 // proxy connection failed, we are out of possibilities
-                ICQBroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc.ft, 0);
+                BroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc.ft, 0);
                 // notify the other side, that we failed
                 oft_sendFileResponse(oc.dwUin, oc.szUid, oc.ft, 0x06);
                 // Release structure
@@ -1661,7 +1661,7 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
     if (oc.status != OCS_PROXY)
     {
         // Connected, notify FT UI
-        ICQBroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_INITIALISING, oc.ft, 0);
+        BroadcastAck(oc.ft->hContact, ACKTYPE_FILE, ACKRESULT_INITIALISING, oc.ft, 0);
 
         // send init OFT frame - just for different order of packets (just like Trillian)
         if (oc.status == OCS_CONNECTED && oc.ft->sending && (oc.ft->initialized || oc.type == OCT_REVERSE))
@@ -1735,7 +1735,7 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
     {
         if (oc.status == OCS_DATA)
         {
-            ICQBroadcastAck(oc.hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc.ft, 0);
+            BroadcastAck(oc.hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc.ft, 0);
 
             icq_LogMessage(LOG_ERROR, "Connection lost during file transfer.");
             // Release structure
@@ -1743,7 +1743,7 @@ static unsigned __stdcall oft_connectionThread(void *pParam)
         }
         else if (oc.status == OCS_NEGOTIATION)
         {
-            ICQBroadcastAck(oc.hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc.ft, 0);
+            BroadcastAck(oc.hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc.ft, 0);
 
             icq_LogMessage(LOG_ERROR, "File transfer negotiation failed for unknown reason.");
             // Release structure
@@ -1893,7 +1893,7 @@ static int oft_handleProxyData(oscar_connection *oc, unsigned char *buf, int len
 
             NetLog_Server("Proxy Error: %s (0x%x)", szError, wError);
             // Notify UI
-            ICQBroadcastAck(oc->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc->ft, 0);
+            BroadcastAck(oc->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, oc->ft, 0);
             // Release structure
             SafeReleaseFileTransfer((void**)&oc->ft);
         }
@@ -1916,7 +1916,7 @@ static int oft_handleProxyData(oscar_connection *oc, unsigned char *buf, int len
                 oft_sendFileRequest(oc->dwUin, oc->szUid, ft, ft->szThisFile, 0);
                 mir_free(ft->szThisFile);
                 // Notify UI
-                ICQBroadcastAck(oc->hContact, ACKTYPE_FILE, ACKRESULT_INITIALISING, oc->ft, 0);
+                BroadcastAck(oc->hContact, ACKTYPE_FILE, ACKRESULT_INITIALISING, oc->ft, 0);
             }
             else
             {
@@ -1929,7 +1929,7 @@ static int oft_handleProxyData(oscar_connection *oc, unsigned char *buf, int len
         case 0x05: // Connection ready
             oc->status = OCS_CONNECTED; // connection ready to send packets
             // Notify UI
-            ICQBroadcastAck(oc->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTED, oc->ft, 0);
+            BroadcastAck(oc->hContact, ACKTYPE_FILE, ACKRESULT_CONNECTED, oc->ft, 0);
             // signal we are ready
             if (oc->type == OCT_PROXY_RECV)
             {
@@ -1991,7 +1991,7 @@ static int oft_handleFileData(oscar_connection *oc, unsigned char *buf, int len)
         {
             PROTOFILETRANSFERSTATUS pfts;
             oft_buildProtoFileTransferStatus(ft, &pfts);
-            ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, ft, (LPARAM)&pfts);
+            BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, ft, (LPARAM)&pfts);
             mir_free(pfts.currentFile);
             mir_free(pfts.workingDir);
         }
@@ -2003,7 +2003,7 @@ static int oft_handleFileData(oscar_connection *oc, unsigned char *buf, int len)
             CallService(MS_FILE_GETRECEIVEDFILESFOLDER, (WPARAM)ft->hContact, (LPARAM)path);
             pfts.szWorkingDir = mir_utf8encode(path);
             oft_buildProtoFileTransferStatus_w(ft, &pfts);
-            ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, ft, (LPARAM)&pfts);
+            BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, ft, (LPARAM)&pfts);
             mir_free(pfts.szWorkingDir);
         }
 #endif
@@ -2044,7 +2044,7 @@ static int oft_handleFileData(oscar_connection *oc, unsigned char *buf, int len)
             sendOFT2FramePacket(oc, OFT_TYPE_DONE);
             oc->type = OCT_CLOSING;
             NetLog_Direct("File Transfer completed successfully.");
-            ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_SUCCESS, ft, 0);
+            BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_SUCCESS, ft, 0);
             // Release transfer
             SafeReleaseFileTransfer((void**)&ft);
         }
@@ -2256,7 +2256,7 @@ static void handleOFT2FramePacket(oscar_connection *oc, WORD datatype, BYTE *pBu
             {
                 PROTOFILETRANSFERSTATUS pfts;
                 oft_buildProtoFileTransferStatus(ft, &pfts);
-                if (ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FILERESUME, ft, (LPARAM)&pfts))
+                if (BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FILERESUME, ft, (LPARAM)&pfts))
                 {
                     mir_free(pfts.currentFile);
                     mir_free(pfts.workingDir);
@@ -2277,7 +2277,7 @@ static void handleOFT2FramePacket(oscar_connection *oc, WORD datatype, BYTE *pBu
                 CallService(MS_FILE_GETRECEIVEDFILESFOLDER, (WPARAM)ft->hContact, (LPARAM)path);
                 pfts.szWorkingDir = mir_utf8encode(path);
                 oft_buildProtoFileTransferStatus_w(ft, &pfts);
-                if (ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FILERESUME, ft, (LPARAM)&pfts))
+                if (BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FILERESUME, ft, (LPARAM)&pfts))
                 {
                     mir_free(pfts.szWorkingDir);
                     oc->status = OCS_WAITING;
@@ -2299,7 +2299,7 @@ static void handleOFT2FramePacket(oscar_connection *oc, WORD datatype, BYTE *pBu
 #endif
                 icq_LogMessage(LOG_ERROR, "Your file receive has been aborted because Miranda could not open the destination file in order to write to it. You may be trying to save to a read-only folder.");
 
-                ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, ft, 0);
+                BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, ft, 0);
                 // Release transfer
                 SafeReleaseFileTransfer((void**)&oc->ft);
                 return;
@@ -2309,7 +2309,7 @@ static void handleOFT2FramePacket(oscar_connection *oc, WORD datatype, BYTE *pBu
         oc->status = OCS_DATA;
 
         sendOFT2FramePacket(oc, OFT_TYPE_READY);
-        ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, ft, 0);
+        BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, ft, 0);
         if (!ft->qwThisFileSize)
         {
             // if the file is empty we will not receive any data
@@ -2407,7 +2407,7 @@ static void handleOFT2FramePacket(oscar_connection *oc, WORD datatype, BYTE *pBu
         // Prepare to receive data
         oc->status = OCS_DATA;
 
-        ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, ft, 0);
+        BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, ft, 0);
 
         // Ready for receive
         sendOFT2FramePacket(oc, OFT_TYPE_RESUMEACK);
@@ -2549,7 +2549,7 @@ static void oft_sendFileData(oscar_connection *oc)
         {
             PROTOFILETRANSFERSTATUS pfts;
             oft_buildProtoFileTransferStatus(ft, &pfts);
-            ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, ft, (LPARAM)&pfts);
+            BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, ft, (LPARAM)&pfts);
             mir_free(pfts.currentFile);
             mir_free(pfts.workingDir);
         }
@@ -2561,7 +2561,7 @@ static void oft_sendFileData(oscar_connection *oc)
             CallService(MS_FILE_GETRECEIVEDFILESFOLDER, (WPARAM)ft->hContact, (LPARAM)path);
             pfts.szWorkingDir = mir_utf8encode(path);
             oft_buildProtoFileTransferStatus_w(ft, &pfts);
-            ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, ft, (LPARAM)&pfts);
+            BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, ft, (LPARAM)&pfts);
             mir_free(pfts.szWorkingDir);
         }
 #endif
@@ -2583,7 +2583,7 @@ static void oft_sendPeerInit(oscar_connection *oc)
     if (ft->iCurrentFile >= (int)ft->wFilesCount)
     {
         // All files done, great!
-        ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_SUCCESS, ft, 0);
+        BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_SUCCESS, ft, 0);
         // Release transfer
         SafeReleaseFileTransfer((void**)&oc->ft);
         return;
@@ -2595,7 +2595,7 @@ static void oft_sendPeerInit(oscar_connection *oc)
     {
         icq_LogMessage(LOG_ERROR, "Your file transfer has been aborted because one of the files that you selected to send is no longer readable from the disk. You may have deleted or moved it.");
 
-        ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, ft, 0);
+        BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, ft, 0);
         // Release transfer
         SafeReleaseFileTransfer((void**)&oc->ft);
         return;
@@ -2620,7 +2620,7 @@ static void oft_sendPeerInit(oscar_connection *oc)
         }
     }
 
-    ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, ft, 0);
+    BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, ft, 0);
 
     ft->fileId = OpenFileUtf(ft->szThisFile, _O_BINARY | _O_RDONLY, 0);
 #ifdef _DEBUG
@@ -2634,7 +2634,7 @@ static void oft_sendPeerInit(oscar_connection *oc)
         mir_free(pszThisFileName);
         icq_LogMessage(LOG_ERROR, "Your file transfer has been aborted because one of the files that you selected to send is no longer readable from the disk. You may have deleted or moved it.");
         //
-        ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, ft, 0);
+        BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, ft, 0);
         // Release transfer
         SafeReleaseFileTransfer((void**)&oc->ft);
         return;

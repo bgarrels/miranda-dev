@@ -160,7 +160,7 @@ static void __fastcall setQIPstatus(BYTE bStatus)
     setSettingWord(NULL, "QIPStatus", wQIPStatusCap[bStatus]);
     nStatus=(wQIPStatusCap[bStatus]==ICQ_STATUS_LUNCH)?ID_STATUS_AWAY:ID_STATUS_ONLINE;
     DBWriteContactSettingWord(NULL, "CList", "Status", nStatus);
-    IcqSetStatus(nStatus,0);
+    CIcqProto::IcqSetStatus(nStatus,0);
 }
 
 

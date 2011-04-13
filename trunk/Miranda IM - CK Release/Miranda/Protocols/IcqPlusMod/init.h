@@ -47,3 +47,7 @@ void UpdateGlobalSettings(void);
 #define DBG_NEWCAPS
 #define DBG_OSCARFT
 #define DBG_AIMCONTACTSEND
+
+int Load2();
+
+int OnSystemModulesLoaded(WPARAM wParam, LPARAM lParam);

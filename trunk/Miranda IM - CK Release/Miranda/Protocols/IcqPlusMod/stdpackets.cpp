@@ -312,7 +312,7 @@ void icq_setstatus(WORD wStatus, int bSetMood)
     sendServPacket(&packet);
 }
 
-DWORD icq_SendChannel1Message(DWORD dwUin, char *szUID, HANDLE hContact, char *pszText, message_cookie_data *pCookieData)
+DWORD icq_SendChannel1Message(DWORD dwUin, char *szUID, HANDLE hContact, char *pszText, cookie_message_data *pCookieData)
 {
     icq_packet packet;
     WORD wMessageLen;
@@ -363,7 +363,7 @@ DWORD icq_SendChannel1Message(DWORD dwUin, char *szUID, HANDLE hContact, char *p
 
 
 
-DWORD icq_SendChannel1MessageW(DWORD dwUin, char *szUID, HANDLE hContact, wchar_t *pszText, message_cookie_data *pCookieData)
+DWORD icq_SendChannel1MessageW(DWORD dwUin, char *szUID, HANDLE hContact, wchar_t *pszText, cookie_message_data *pCookieData)
 {
     icq_packet packet;
     WORD wMessageLen;
@@ -420,7 +420,7 @@ DWORD icq_SendChannel1MessageW(DWORD dwUin, char *szUID, HANDLE hContact, wchar_
 
 
 
-DWORD icq_SendChannel2Message(DWORD dwUin, HANDLE hContact, const char *szMessage, int nBodyLen, WORD wPriority, message_cookie_data *pCookieData, char *szCap)
+DWORD icq_SendChannel2Message(DWORD dwUin, HANDLE hContact, const char *szMessage, int nBodyLen, WORD wPriority, cookie_message_data *pCookieData, char *szCap)
 {
     icq_packet packet;
     DWORD dwCookie;
@@ -455,7 +455,7 @@ DWORD icq_SendChannel2Message(DWORD dwUin, HANDLE hContact, const char *szMessag
 
 
 
-DWORD icq_SendChannel2Contacts(DWORD dwUin, char *szUid, HANDLE hContact, const char *pData, WORD wDataLen, const char *pNames, WORD wNamesLen, message_cookie_data *pCookieData)
+DWORD icq_SendChannel2Contacts(DWORD dwUin, char *szUid, HANDLE hContact, const char *pData, WORD wDataLen, const char *pNames, WORD wNamesLen, cookie_message_data *pCookieData)
 {
     icq_packet packet;
     WORD wPacketLength;
@@ -488,7 +488,7 @@ DWORD icq_SendChannel2Contacts(DWORD dwUin, char *szUid, HANDLE hContact, const 
 
 
 
-DWORD icq_SendChannel4Message(DWORD dwUin, HANDLE hContact, BYTE bMsgType, WORD wMsgLen, const char *szMsg, message_cookie_data *pCookieData)
+DWORD icq_SendChannel4Message(DWORD dwUin, HANDLE hContact, BYTE bMsgType, WORD wMsgLen, const char *szMsg, cookie_message_data *pCookieData)
 {
     icq_packet packet;
     WORD wPacketLength;
@@ -657,7 +657,7 @@ DWORD icq_sendGetAwayMsgServ(HANDLE hContact, DWORD dwUin, int type, WORD wVersi
 {
     icq_packet packet;
     DWORD dwCookie;
-    message_cookie_data *pCookieData = NULL;
+    cookie_message_data *pCookieData = NULL;
 
     if (IsServerOverRate(ICQ_MSG_FAMILY, ICQ_MSG_SRV_SEND, RML_IDLE_30))
         return 0;
@@ -678,7 +678,7 @@ DWORD icq_sendGetAwayMsgServExt(HANDLE hContact, DWORD dwUin, int type, WORD wVe
 {
     icq_packet packet;
     DWORD dwCookie;
-    message_cookie_data *pCookieData = NULL;
+    cookie_message_data *pCookieData = NULL;
 
     if (IsServerOverRate(ICQ_MSG_FAMILY, ICQ_MSG_SRV_SEND, RML_IDLE_30))
         return 0;
@@ -718,7 +718,7 @@ DWORD icq_sendGetStealthAwayMsgServ(HANDLE hContact, DWORD dwUin, int type, WORD
 {
     icq_packet packet;
     DWORD dwCookie;
-    message_cookie_data *pCookieData = NULL;
+    cookie_message_data *pCookieData = NULL;
 
     if (IsServerOverRate(ICQ_MSG_FAMILY, ICQ_MSG_SRV_SEND, RML_IDLE_30))
         return 0;
@@ -741,7 +741,7 @@ DWORD icq_sendGetAimAwayMsgServ(HANDLE hContact, char *szUID, int type)
 {
     icq_packet packet;
     DWORD dwCookie;
-    message_cookie_data *pCookieData = NULL;
+    cookie_message_data *pCookieData = NULL;
     BYTE bUIDlen = strlennull(szUID);
 
     pCookieData = CreateMessageCookie(MTYPE_AUTOAWAY, (byte)type);
@@ -1025,7 +1025,7 @@ void icq_sendAwayMsgReplyServ(DWORD dwUin, DWORD dwMsgID1, DWORD dwMsgID2, WORD 
     {
         NotifyEventHooks(hsmsgrequest, (WPARAM)msgType, (LPARAM)dwUin);
 
-        EnterCriticalSection(&gProtocol.m_modeMsgsMutex);
+        EnterCriticalSection(&m_modeMsgsMutex);
 
         if (szMsg && *szMsg)
         {
@@ -1058,7 +1058,7 @@ void icq_sendAwayMsgReplyServ(DWORD dwUin, DWORD dwMsgID1, DWORD dwMsgID2, WORD 
             sendServPacket(&packet);
         }
 
-        LeaveCriticalSection(&gProtocol.m_modeMsgsMutex);
+        LeaveCriticalSection(&m_modeMsgsMutex);
     }
 }
 
@@ -1193,7 +1193,7 @@ DWORD SearchByNames(const char *pszNick, const char *pszFirstName, const char *p
 
 
 
-DWORD SearchByEmail(char* pszEmail)
+DWORD SearchByMail(char* pszEmail)
 {
     DWORD dwCookie;
     WORD wInfoLen = 0;
@@ -1513,7 +1513,7 @@ void icq_sendChangeVisInvis(HANDLE hContact, DWORD dwUin, char* szUID, int list,
 {
     // TODO: This needs grouping & rate management
     // Tell server to change our server-side contact visbility list
-    if (gbSsiEnabled)
+    if (m_bSsiEnabled)
     {
         WORD wContactId;
         char* szSetting;
@@ -1657,30 +1657,26 @@ void icq_sendAuthReqServ(DWORD dwUin, char *szUid, char *szMsg)
 
 
 
-void icq_sendAuthResponseServ(DWORD dwUin, char* szUid, int auth, char *szReason)
+void icq_sendAuthResponseServ(DWORD dwUin, char* szUid, int auth, const TCHAR *szReason)
 {
-    icq_packet p;
-    WORD nReasonlen;
-    unsigned char nUinlen;
-    char* szUtfReason = NULL;
+	icq_packet packet;
+	BYTE nUinLen = getUIDLen(dwUin, szUid);
 
-    nUinlen = getUIDLen(dwUin, szUid);
+	// Prepare custom utf-8 reason
+	char *szUtfReason = tchar_to_utf8(szReason);
+	WORD nReasonLen = strlennull(szUtfReason);
 
-    // Prepare custom utf-8 reason
-    szUtfReason = mir_utf8encode(szReason);
-    nReasonlen = strlennull(szUtfReason);
+	serverPacketInit(&packet, (WORD)(16 + nUinLen + nReasonLen));
+	packFNACHeader(&packet, ICQ_LISTS_FAMILY, ICQ_LISTS_CLI_AUTHRESPONSE);
+	packUID(&packet, dwUin, szUid);
+	packByte(&packet, (BYTE)auth);
+	packWord(&packet, nReasonLen);
+	packBuffer(&packet, szUtfReason, nReasonLen);
+	packWord(&packet, 0);
 
-    serverPacketInit(&p, (WORD)(16 + nUinlen + nReasonlen));
-    packFNACHeader(&p, ICQ_LISTS_FAMILY, ICQ_LISTS_CLI_AUTHRESPONSE);
-    packUID(&p, dwUin, szUid);
-    packByte(&p, (BYTE)auth);
-    packWord(&p, nReasonlen);
-    packBuffer(&p, szUtfReason, nReasonlen);
-    packWord(&p, 0);
+	SAFE_FREE(&szUtfReason);
 
-    mir_free(szUtfReason);
-
-    sendServPacket(&p);
+	sendServPacket(&packet);
 }
 
 
@@ -1708,7 +1704,7 @@ void icq_sendYouWereAddedServ(DWORD dwUin, DWORD dwMyUin)
 
 
 
-void icq_sendXtrazRequestServ(DWORD dwUin, DWORD dwCookie, char* szBody, int nBodyLen, message_cookie_data *pCookieData)
+void icq_sendXtrazRequestServ(DWORD dwUin, DWORD dwCookie, char* szBody, int nBodyLen, cookie_message_data *pCookieData)
 {
     icq_packet packet;
     WORD wCoreLen;
@@ -1759,7 +1755,7 @@ void icq_sendXtrazResponseServ(DWORD dwUin, DWORD dwMID, DWORD dwMID2, WORD wCoo
 
 
 
-void icq_sendReverseReq(directconnect *dc, DWORD dwCookie, message_cookie_data *pCookie)
+void icq_sendReverseReq(directconnect *dc, DWORD dwCookie, cookie_message_data *pCookie)
 {
     icq_packet packet;
 
@@ -1957,7 +1953,7 @@ void SendtZer(HANDLE hContact, DWORD dwUin, char * sztZId, char * sztZName, char
     DWORD dwCookie;
 
     int nBodyLen;
-    message_cookie_data* pCookieData;
+    cookie_message_data* pCookieData;
 
     char * szBody = (char *) malloc(66 + strlen(sztZId) + strlen(sztZName) + strlen(sztZUrl) + getUINLen(dwUin) + 1);
     sprintf(szBody, "<tzer id=\"%s\" name=\"%s\" url=\"%s\" preview=\"0\" freeData=\"preview=0;uin=%lu\"/>", sztZId, sztZName, sztZUrl, dwUin);

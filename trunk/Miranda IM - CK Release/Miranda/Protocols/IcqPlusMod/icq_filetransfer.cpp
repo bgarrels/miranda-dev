@@ -131,7 +131,7 @@ static void file_sendNextFile(directconnect* dc)
 
     if (dc->ft->iCurrentFile >= (int)dc->ft->dwFileCount)
     {
-        ICQBroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_SUCCESS, dc->ft, 0);
+        BroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_SUCCESS, dc->ft, 0);
         CloseDirectConnection(dc);
         dc->ft->hConnection = NULL;
         return;
@@ -194,7 +194,7 @@ static void file_sendNextFile(directconnect* dc)
 
     sendDirectPacket(dc, &packet);
 
-    ICQBroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, dc->ft, 0);
+    BroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, dc->ft, 0);
 }
 
 
@@ -244,14 +244,14 @@ static void file_sendData(directconnect* dc)
         {
             PROTOFILETRANSFERSTATUS pfts;
             file_buildProtoFileTransferStatus(dc->ft, &pfts);
-            ICQBroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, dc->ft, (LPARAM)&pfts);
+            BroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, dc->ft, (LPARAM)&pfts);
         }
 #ifndef _08CORE
         else
         {
             PROTOFILETRANSFERSTATUS_W pfts;
             file_buildProtoFileTransferStatus_w(dc->ft, &pfts);
-            ICQBroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, dc->ft, (LPARAM)&pfts);
+            BroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, dc->ft, (LPARAM)&pfts);
         }
 #endif
 
@@ -330,7 +330,7 @@ void icq_sendFileResume(filetransfer* ft, int action, const char* szFilename)
 
     file_sendResume(dc);
 
-    ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, ft, 0);
+    BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, ft, 0);
 }
 
 
@@ -403,7 +403,7 @@ void handleFileTransferPacket(directconnect* dc, PBYTE buf, WORD wLen)
             file_sendTransferSpeed(dc);
             file_sendNick(dc);
         }
-        ICQBroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_INITIALISING, dc->ft, 0);
+        BroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_INITIALISING, dc->ft, 0);
         break;
 
     case PEER_FILE_INIT_ACK:
@@ -483,7 +483,7 @@ void handleFileTransferPacket(directconnect* dc, PBYTE buf, WORD wLen)
                 {
                     PROTOFILETRANSFERSTATUS pfts = {0};
                     file_buildProtoFileTransferStatus(dc->ft, &pfts);
-                    if (ICQBroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_FILERESUME, dc->ft, (LPARAM)&pfts))
+                    if (BroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_FILERESUME, dc->ft, (LPARAM)&pfts))
                         break;   /* UI supports resume: it will call PS_FILERESUME */
                     dc->ft->fileId = OpenFileUtf(dc->ft->szThisFile, _O_BINARY | _O_CREAT | _O_TRUNC | _O_WRONLY, _S_IREAD | _S_IWRITE);
                 }
@@ -492,7 +492,7 @@ void handleFileTransferPacket(directconnect* dc, PBYTE buf, WORD wLen)
                 {
                     PROTOFILETRANSFERSTATUS_W pfts = {0};
                     file_buildProtoFileTransferStatus_w(dc->ft, &pfts);
-                    if (ICQBroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_FILERESUME, dc->ft, (LPARAM)&pfts))
+                    if (BroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_FILERESUME, dc->ft, (LPARAM)&pfts))
                         break;   /* UI supports resume: it will call PS_FILERESUME */
                     dc->ft->fileId = OpenFileUtf(dc->ft->szThisFile, _O_BINARY | _O_CREAT | _O_TRUNC | _O_WRONLY, _S_IREAD | _S_IWRITE);
                 }
@@ -508,7 +508,7 @@ void handleFileTransferPacket(directconnect* dc, PBYTE buf, WORD wLen)
             }
         }
         file_sendResume(dc);
-        ICQBroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, dc->ft, 0);
+        BroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_NEXTFILE, dc->ft, 0);
         break;
 
     case PEER_FILE_RESUME:
@@ -563,14 +563,14 @@ void handleFileTransferPacket(directconnect* dc, PBYTE buf, WORD wLen)
             {
                 PROTOFILETRANSFERSTATUS pfts;
                 file_buildProtoFileTransferStatus(dc->ft, &pfts);
-                ICQBroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, dc->ft, (LPARAM)&pfts);
+                BroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, dc->ft, (LPARAM)&pfts);
             }
 #ifndef _08CORE
             else
             {
                 PROTOFILETRANSFERSTATUS_W pfts;
                 file_buildProtoFileTransferStatus_w(dc->ft, &pfts);
-                ICQBroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, dc->ft, (LPARAM)&pfts);
+                BroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_DATA, dc->ft, (LPARAM)&pfts);
             }
 #endif
             dc->ft->dwLastNotify = GetTickCount();
@@ -584,7 +584,7 @@ void handleFileTransferPacket(directconnect* dc, PBYTE buf, WORD wLen)
             if ((DWORD)dc->ft->iCurrentFile == dc->ft->dwFileCount - 1)
             {
                 dc->type = DIRECTCONN_CLOSING;     /* this guarantees that we won't accept any more data but that the sender is still free to closesocket() neatly */
-                ICQBroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_SUCCESS, dc->ft, 0);
+                BroadcastAck(dc->ft->hContact, ACKTYPE_FILE, ACKRESULT_SUCCESS, dc->ft, 0);
             }
         }
         break;

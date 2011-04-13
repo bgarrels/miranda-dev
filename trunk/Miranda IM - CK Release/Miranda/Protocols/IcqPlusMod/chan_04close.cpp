@@ -257,7 +257,7 @@ static void handleSignonError(WORD wError)
     case 0x05: // Mismatch uin or password
     case 0x06: // Internal Client error (bad input to authorizer)
     case 0x07: // Invalid account
-        ICQBroadcastAck(NULL, ACKTYPE_LOGIN, ACKRESULT_FAILED, NULL, LOGINERR_WRONGPASSWORD);
+        BroadcastAck(NULL, ACKTYPE_LOGIN, ACKRESULT_FAILED, NULL, LOGINERR_WRONGPASSWORD);
         ZeroMemory(gpszPassword, sizeof(gpszPassword));
         icq_LogFatalParam("Connection failed.\nYour ICQ number or password was rejected (%d).", wError);
         break;
@@ -353,7 +353,7 @@ static void handleRuntimeError(WORD wError)
 
     case 0x01:
     {
-        ICQBroadcastAck(NULL, ACKTYPE_LOGIN, ACKRESULT_FAILED, NULL, LOGINERR_OTHERLOCATION);
+        BroadcastAck(NULL, ACKTYPE_LOGIN, ACKRESULT_FAILED, NULL, LOGINERR_OTHERLOCATION);
         icq_LogMessage(LOG_FATAL, "You have been disconnected from the ICQ network because you logged on from another location using the same ICQ number.");
         break;
     }

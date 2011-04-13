@@ -37,47 +37,18 @@
 
 #ifndef __ICQ_DB_H
 #define __ICQ_DB_H
+/*
+#ifdef _UNICODE
+	#define getSettingStringT getSettingStringW
+	#define setSettingStringT setSettingStringW
+#else
+	#define getSettingStringT getSettingString
+	#define setSettingStringT setSettingString
+#endif
+*/
 
 void InitDB();
 
-HANDLE	AddEvent(HANDLE hContact, WORD wType, DWORD dwTime, DWORD flags, DWORD cbBlob, PBYTE pBlob);
-void	CreateResidentSetting(const char* szSetting);
-HANDLE	FindFirstContact();
-HANDLE	FindNextContact(HANDLE hContact);
-int		IsICQContact(HANDLE hContact);
-
-int		getSetting(HANDLE hContact, const char* szSetting, DBVARIANT *dbv);
-BYTE	getSettingByte(HANDLE hContact, const char* szSetting, BYTE bDef);
-WORD	getSettingWord(HANDLE hContact, const char* szSetting, WORD wDef);
-DWORD	getSettingDword(HANDLE hContact, const char* szSetting, DWORD dwDef);
-double	getSettingDouble(HANDLE hContact, const char *szSetting, double dDef);
-int		getSettingString(HANDLE hContact, const char* szSetting, DBVARIANT *dbv);
-//int		getSettingStringW(HANDLE hContact, const char *szSetting, DBVARIANT *dbv);
-int		getSettingStringStatic(HANDLE hContact, const char* valueName, char* dest, int dest_len);
-char*	getSettingStringUtf(HANDLE hContact, const char* szSetting, char* szDef);
-char*	getSettingStringUtf(HANDLE hContact, const char *szModule,const char* szSetting, char* szDef);
-int		getContactUid(HANDLE hContact, DWORD *pdwUin, uid_str* ppszUid);
-DWORD	getContactUin(HANDLE hContact);
-WORD	getContactStatus(HANDLE hContact);
-char*	getContactCListGroup(HANDLE hContact);
-
-int		deleteSetting(HANDLE hContact, const char* szSetting);
-
-int		setSettingByte(HANDLE hContact, const char* szSetting, BYTE bValue);
-int		setSettingWord(HANDLE hContact, const char* szSetting, WORD wValue);
-int		setSettingDword(HANDLE hContact, const char* szSetting, DWORD dwValue);
-int		setSettingDouble(HANDLE hContact, const char *szSetting, double dValue);
-int		setSettingString(HANDLE hContact, const char* szSetting, char* szValue);
-//int		setSettingStringW(HANDLE hContact, const char *szSetting, const WCHAR *wszValue);
-int		setSettingStringUtf(HANDLE hContact, const char* szSetting, char* szValue);
-int		setSettingStringUtf(HANDLE hContact, const char *szModule,const char* szSetting, char* szValue);
-int		setSettingBlob(HANDLE hContact,const char *szSetting, BYTE *val, const int cbVal);
-
-int		setContactHidden(HANDLE hContact, BYTE bHidden);
-void	setStatusMsgVar(HANDLE hContact, char* szStatusMsg, bool isAnsi);
-
 int ICQFreeVariant(DBVARIANT* dbv);
-int ICQSetContactCListGroup(HANDLE hContact, const char *szGroup);
-
 
 #endif /* __ICQ_DB_H */

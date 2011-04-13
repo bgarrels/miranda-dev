@@ -123,7 +123,7 @@ void handleServiceFam(unsigned char* pBuffer, WORD wBufferLength, snac_header* p
         packFNACHeader(&packet, ICQ_SERVICE_FAMILY, ICQ_CLIENT_REQINFO);
         sendServPacket(&packet);
 
-        if (gbSsiEnabled)
+        if (m_bSsiEnabled)
         {
             DWORD dwLastUpdate;
             WORD wRecordCount;
@@ -336,7 +336,7 @@ void handleServiceFam(unsigned char* pBuffer, WORD wBufferLength, snac_header* p
 
             // If we are in SSI mode, this is sent after the list is acked instead
             // to make sure that we don't set status before seing the visibility code
-            if (!gbSsiEnabled || info->isMigrating)
+            if (!m_bSsiEnabled || info->isMigrating)
                 handleServUINSettings(wListenPort, info);
         }
     }
@@ -363,7 +363,7 @@ void handleServiceFam(unsigned char* pBuffer, WORD wBufferLength, snac_header* p
             if (wStatus == 2 || wStatus == 3)
             {
                 // this is only the simplest solution, needs rate management to every section
-                ICQBroadcastAck(NULL, ICQACKTYPE_RATEWARNING, ACKRESULT_STATUS, (HANDLE)wClass, wStatus);
+                BroadcastAck(NULL, ICQACKTYPE_RATEWARNING, ACKRESULT_STATUS, (HANDLE)wClass, wStatus);
                 if (wStatus == 2)
                     NetLog_Server("Rates #%u: Alert", wClass);
                 else
@@ -371,7 +371,7 @@ void handleServiceFam(unsigned char* pBuffer, WORD wBufferLength, snac_header* p
             }
             else if (wStatus == 4)
             {
-                ICQBroadcastAck(NULL, ICQACKTYPE_RATEWARNING, ACKRESULT_STATUS, (HANDLE)wClass, wStatus);
+                BroadcastAck(NULL, ICQACKTYPE_RATEWARNING, ACKRESULT_STATUS, (HANDLE)wClass, wStatus);
                 NetLog_Server("Rates #%u: Clear", wClass);
             }
             icq_CheckSpeed(wStatus);
@@ -481,7 +481,7 @@ void handleServiceFam(unsigned char* pBuffer, WORD wBufferLength, snac_header* p
             }
         }
 
-        if ((wBufferLength >= 0x14) && gbAvatarsEnabled)
+        if ((wBufferLength >= 0x14) && m_bAvatarsEnabled)
         {
             if (!info->bMyAvatarInited) // signal the server after login
             {
@@ -584,7 +584,7 @@ void handleServiceFam(unsigned char* pBuffer, WORD wBufferLength, snac_header* p
                 char* hash;
                 DWORD dwPaFormat;
 
-                if (!gbSsiEnabled) break; // we could not change serv-list if it is disabled...
+                if (!m_bSsiEnabled) break; // we could not change serv-list if it is disabled...
 
                 file = loadMyAvatarFileName();
                 if (!file)
@@ -777,7 +777,7 @@ static char* buildUinList(int subtype, WORD wMaxLen, HANDLE* hContactResume)
                 // If we are in SS mode, we only add those contacts that are
                 // not in our SS list, or are awaiting authorization, to our
                 // client side list
-                if (gbSsiEnabled && getSettingWord(hContact, "ServerId", 0) &&
+                if (m_bSsiEnabled && getSettingWord(hContact, "ServerId", 0) &&
                         !getSettingByte(hContact, "Auth", 0))
                     add = 0;
 
@@ -896,11 +896,11 @@ void setUserInfo()
 #ifdef DBG_XTRAZ_MUC
         wAdditionalData += 16;
 #endif
-        if(gbAimEnabled)
+        if(m_bAimEnabled)
             wAdditionalData += 16;
-        if(gbAvatarsEnabled)
+        if(m_bAvatarsEnabled)
             wAdditionalData += 16;
-        if(gbUtfEnabled)
+        if(m_bUtfEnabled)
             wAdditionalData += 16;
         if(gbRTFEnabled)
             wAdditionalData += 16;
@@ -1018,10 +1018,10 @@ void setUserInfo()
             }
         }
         AddCapabilitiesToBuffer((BYTE*)&packet, CAPF_TYPING|CAPF_SRV_RELAY|(gbRTFEnabled?CAPF_RTF:0)|(gbXStatusEnabled?CAPF_XTRAZ:0)
-                                |(gbUtfEnabled?CAPF_UTF:0)|(gbAvatarsEnabled?CAPF_ICQ_DEVIL:0)|CAPF_AIM_FILE|CAPF_DIRECT);
+                                |(m_bUtfEnabled?CAPF_UTF:0)|(m_bAvatarsEnabled?CAPF_ICQ_DEVIL:0)|CAPF_AIM_FILE|CAPF_DIRECT);
         if (bXStatus)
             packBuffer(&packet, (char*)(capXStatus[bXStatus-1]), 0x10);
-        if (gbAimEnabled)
+        if (m_bAimEnabled)
             packBuffer(&packet, (char*)capAimIcq, 0x10);
 #ifdef DBG_AIMCONTACTSEND
         {
@@ -1268,7 +1268,7 @@ void handleServUINSettings(int nPort, serverthread_info *info)
     if (icqGoingOnlineStatus == ID_STATUS_INVISIBLE)
     {
         /* Tell server who's on our visible list */
-        if (!gbSsiEnabled)
+        if (!m_bSsiEnabled)
             sendEntireListServ(ICQ_BOS_FAMILY, ICQ_CLI_ADDVISIBLE, BUL_VISIBLE);
         else
             updateServVisibilityCode(3);
@@ -1277,7 +1277,7 @@ void handleServUINSettings(int nPort, serverthread_info *info)
     if (icqGoingOnlineStatus != ID_STATUS_INVISIBLE)
     {
         /* Tell server who's on our invisible list */
-        if (!gbSsiEnabled)
+        if (!m_bSsiEnabled)
             sendEntireListServ(ICQ_BOS_FAMILY, ICQ_CLI_ADDINVISIBLE, BUL_INVISIBLE);
         else
             updateServVisibilityCode(4);
@@ -1436,7 +1436,7 @@ void handleServUINSettings(int nPort, serverthread_info *info)
         // Start sending Keep-Alive packets
         StartKeepAlive(info);
 
-        if (gbAvatarsEnabled)
+        if (m_bAvatarsEnabled)
         {
             // Send SNAC 1,4 - request avatar family 0x10 connection
             icq_requestnewfamily(ICQ_AVATAR_FAMILY, StartAvatarThread);
@@ -1447,14 +1447,14 @@ void handleServUINSettings(int nPort, serverthread_info *info)
     }
     info->isMigrating = 0;
 
-    if (gbAimEnabled)
+    if (m_bAimEnabled)
     {
-        char** szMsg = gProtocol.MirandaStatusToAwayMsg(gnCurrentStatus);
+        char** szMsg = MirandaStatusToAwayMsg(gnCurrentStatus);
 
-        EnterCriticalSection(&gProtocol.m_modeMsgsMutex);
+        EnterCriticalSection(&m_modeMsgsMutex);
         if (szMsg && !bNoStatusReply)
             icq_sendSetAimAwayMsgServ(*szMsg);
-        LeaveCriticalSection(&gProtocol.m_modeMsgsMutex);
+        LeaveCriticalSection(&m_modeMsgsMutex);
     }
     CheckSelfRemove();
     if(getSettingByte(NULL, "RemoveTmpContacts", 0))

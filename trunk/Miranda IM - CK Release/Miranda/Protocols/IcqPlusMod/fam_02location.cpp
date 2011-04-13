@@ -76,7 +76,7 @@ void handleLocationFam(unsigned char *pBuffer, WORD wBufferLength, snac_header* 
                     if(pCookieData)
                         if(!getContactUin(hCookieContact) && pCookieData->bRequestType == REQUESTTYPE_PROFILE)
                         {
-                            ICQBroadcastAck(hCookieContact, ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
+                            BroadcastAck(hCookieContact, ACKTYPE_GETINFO, ACKRESULT_FAILED, (HANDLE)1 ,0);
 
                             ReleaseCookie(pSnacHeader->dwRef);
                         }
@@ -131,7 +131,7 @@ void handleLocationUserInfoReply(BYTE* buf, WORD wLen, DWORD dwCookie)
     WORD status;
     WORD wStatusFlags;
 
-    message_cookie_data *pCookieData;
+    cookie_message_data *pCookieData;
 
     // Unpack the sender's user ID
     if (!unpackUID(&buf, &wLen, &dwUIN, &szUID)) return;
@@ -231,7 +231,7 @@ void handleLocationUserInfoReply(BYTE* buf, WORD wLen, DWORD dwCookie)
             }
 
             setSettingString(hContact, "About", szMsg);
-            ICQBroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_SUCCESS, (HANDLE)1 ,0);
+            BroadcastAck(hContact, ACKTYPE_GETINFO, ACKRESULT_SUCCESS, (HANDLE)1 ,0);
 
             mir_free(szMsg);
         }

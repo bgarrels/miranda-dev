@@ -493,7 +493,7 @@ void handleAvatarContactHash(DWORD dwUIN, char* szUID, HANDLE hContact, unsigned
     int cbAvatarHash;
     BYTE emptyItem[0x10] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-    if (!gbAvatarsEnabled) return; // only if enabled
+    if (!m_bAvatarsEnabled) return; // only if enabled
 
     if (nHashLen < 4) return; // nothing to work with
 
@@ -547,14 +547,14 @@ void handleAvatarContactHash(DWORD dwUIN, char* szUID, HANDLE hContact, unsigned
 
     if (avatarType != -1)
     {
-        // check settings, should we request avatar immediatelly
+        // check settings, should we request avatar immediately
         BYTE bAutoLoad = getSettingByte(NULL, "AvatarsAutoLoad", DEFAULT_LOAD_AVATARS);
 
         if (avatarType == AVATAR_HASH_STATIC && cbAvatarHash == 0x09 && !memcmp(pAvatarHash + 4, hashEmptyAvatar + 4, 0x05))
         {
             // empty avatar - unlink image, clear hash
             deleteSetting(hContact, "AvatarHash");
-            ICQBroadcastAck(hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, (LPARAM)NULL);
+            BroadcastAck(hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, (LPARAM)NULL);
             return;
         }
 
@@ -576,7 +576,7 @@ void handleAvatarContactHash(DWORD dwUIN, char* szUID, HANDLE hContact, unsigned
                     NetLog_Server("Avatar is known, hash stored, linked to file.");
 
                     setSettingBlob(hContact, "AvatarHash", pAvatarHash, cbAvatarHash);
-                    ICQBroadcastAck(hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, (LPARAM)NULL);
+                    BroadcastAck(hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, (LPARAM)NULL);
                 }
                 else // the file is lost, request avatar again
                     bJob = TRUE;
@@ -659,7 +659,7 @@ void handleAvatarContactHash(DWORD dwUIN, char* szUID, HANDLE hContact, unsigned
 
             setSettingBlob(hContact, "AvatarHash", pAvatarHash, cbAvatarHash);
 
-            ICQBroadcastAck(hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, (LPARAM)NULL);
+            BroadcastAck(hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, (LPARAM)NULL);
 
             if (bAutoLoad)
             {
@@ -1435,7 +1435,7 @@ void handleAvatarFam(BYTE *pBuffer, WORD wBufferLength, snac_header* pSnacHeader
             {
                 NetLog_Server("Received invalid avatar reply.");
 
-                ICQBroadcastAck(ac->hContact, ACKTYPE_AVATAR, ACKRESULT_FAILED, (HANDLE)&ai, 0);
+                BroadcastAck(ac->hContact, ACKTYPE_AVATAR, ACKRESULT_FAILED, (HANDLE)&ai, 0);
 
                 mir_free(ac->szFile);
                 mir_free(ac->hash);
@@ -1518,7 +1518,7 @@ void handleAvatarFam(BYTE *pBuffer, WORD wBufferLength, snac_header* pSnacHeader
                             }
                         }
 
-                        ICQBroadcastAck(ac->hContact, ACKTYPE_AVATAR, ACKRESULT_SUCCESS, (HANDLE)&ai, 0);
+                        BroadcastAck(ac->hContact, ACKTYPE_AVATAR, ACKRESULT_SUCCESS, (HANDLE)&ai, 0);
                     }
                 }
                 else
@@ -1549,7 +1549,7 @@ void handleAvatarFam(BYTE *pBuffer, WORD wBufferLength, snac_header* pSnacHeader
                         }
                         LeaveCriticalSection(&cookieMutex);
                     }
-                    ICQBroadcastAck(ac->hContact, ACKTYPE_AVATAR, ACKRESULT_FAILED, (HANDLE)&ai, 0);
+                    BroadcastAck(ac->hContact, ACKTYPE_AVATAR, ACKRESULT_FAILED, (HANDLE)&ai, 0);
                 }
             }
             else
@@ -1557,7 +1557,7 @@ void handleAvatarFam(BYTE *pBuffer, WORD wBufferLength, snac_header* pSnacHeader
                 // the avatar is empty
                 NetLog_Server("Received empty avatar, nothing written (error 0x%x).", bResult);
 
-                ICQBroadcastAck(ac->hContact, ACKTYPE_AVATAR, ACKRESULT_FAILED, (HANDLE)&ai, 0);
+                BroadcastAck(ac->hContact, ACKTYPE_AVATAR, ACKRESULT_FAILED, (HANDLE)&ai, 0);
             }
             mir_free(ac->szFile);
             mir_free(ac->hash);

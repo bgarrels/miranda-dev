@@ -161,7 +161,6 @@ void SendAuthRequestToAllUnauthorized()
     {
         do
         {
-
             getContactUid(hContact, &dwUin, &szUid);
             if(!(dwUin && szUid))
                 break;
@@ -502,7 +501,7 @@ static DWORD SendDetectionPacket2(HANDLE hContact, char* szQuery, char* szNotify
     int nBodyLen;
     char *szBody;
     DWORD dwCookie;
-    message_cookie_data* pCookieData;
+    cookie_message_data* pCookieData;
 
 
     getContactUid(hContact, &dwUin, NULL);
@@ -614,7 +613,7 @@ static unsigned __stdcall icq_StatusCheckThread(void* arg)
                     StatusList[nPointer].dwCookie = GenerateCookie(0);
 
                     if(CheckContactCapabilities(hContact, WAS_FOUND))
-                        makeUserOffline(hContact); // ensure that contact was made offline, before beeing checked
+                        makeUserOffline(hContact); // ensure that contact was made offline, before being checked
 
 
                     if(!bASDForOffline || bASDForOffline && (getContactStatus(hContact) == ID_STATUS_INVISIBLE || getContactStatus(hContact) == ID_STATUS_OFFLINE))
@@ -899,7 +898,7 @@ static void SetPrivacy(BYTE newVisibility)
 {
     CLISTMENUITEM mi = {0};
 
-    if (!gbSsiEnabled || gbVisibility == newVisibility) return;
+    if (!m_bSsiEnabled || gbVisibility == newVisibility) return;
 
     gbVisibility = newVisibility;
     mi.cbSize = sizeof(mi);
@@ -975,7 +974,7 @@ static INT_PTR icq_Privacy6(WPARAM wParam,LPARAM lParam)
 
 static INT_PTR icq_SList(WPARAM wParam, LPARAM lParam)
 {
-    if (gbSsiEnabled)
+    if (m_bSsiEnabled)
         ShowUploadContactsDialog();
 
     return 0;
@@ -1189,8 +1188,7 @@ void icq_ISeeCleanup()
 
 int icq_PrivacyMenu(WPARAM wParam, LPARAM lParam)
 {
-
-    HANDLE hPrivacyRoot;
+    HANDLE hPrivacyRoot = 0;
     char pszServiceName[MAX_PATH+30], pszAFName[MAX_PATH+30];
     CLISTMENUITEM mi= {0};
     mi.cbSize = sizeof(mi);
@@ -1642,7 +1640,7 @@ void sendVisContactServ(DWORD dwUin, int mode)
     icq_contacts_cache icc;
     WORD type = (mode)?CLI_ADDTEMPVISIBLE:CLI_REMOVETEMPVISIBLE;
 
-    if (!icqOnline || !gbSsiEnabled || gbVisibility != 6) return;
+    if (!icqOnline || !m_bSsiEnabled || gbVisibility != 6) return;
 
     ID = IDFromCacheByUin(dwUin);
     GetCacheByID(ID, &icc);

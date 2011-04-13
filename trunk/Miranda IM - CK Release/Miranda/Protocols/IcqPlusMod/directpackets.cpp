@@ -90,7 +90,7 @@ DWORD icq_sendGetAwayMsgDirect(HANDLE hContact, int type)
 {
     icq_packet packet;
     DWORD dwCookie;
-    message_cookie_data *pCookieData;
+    cookie_message_data *pCookieData;
 
     if (getSettingWord(hContact, "Version", 0) == 9)
         return 0; // v9 DC protocol does not support this message
@@ -117,7 +117,7 @@ void icq_sendAwayMsgReplyDirect(directconnect* dc, WORD wCookie, BYTE msgType, c
     {
         NotifyEventHooks(hsmsgrequest, (WPARAM)msgType, (LPARAM)dc->dwRemoteUin);
 
-        EnterCriticalSection(&gProtocol.m_modeMsgsMutex);
+        EnterCriticalSection(&m_modeMsgsMutex);
 
         if (szMsg && *szMsg)
         {
@@ -135,7 +135,7 @@ void icq_sendAwayMsgReplyDirect(directconnect* dc, WORD wCookie, BYTE msgType, c
             sendDirectPacket(dc, &packet);
         }
 
-        LeaveCriticalSection(&gProtocol.m_modeMsgsMutex);
+        LeaveCriticalSection(&m_modeMsgsMutex);
     }
 }
 
@@ -255,7 +255,7 @@ int icq_sendFileSendDirectv8(filetransfer *ft, const char *pszFiles)
 
 
 
-DWORD icq_SendDirectMessage(HANDLE hContact, const char *szMessage, int nBodyLength, WORD wPriority, message_cookie_data *pCookieData, char *szCap)
+DWORD icq_SendDirectMessage(HANDLE hContact, const char *szMessage, int nBodyLength, WORD wPriority, cookie_message_data *pCookieData, char *szCap)
 {
     icq_packet packet;
     DWORD dwCookie;
