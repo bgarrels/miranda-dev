@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<VisualStudioProject
+	ProjectType="Intel C++ Project"
+	Version="11.1"
+	Name="new_gpg"
+	ProjectGUID="{9AD3350E-D58E-4128-A90D-6DC4C3775198}"
+	VCNestedProjectGUID="{F29D0C8D-141A-43CF-86B2-34A04653F8D4}"
+	VCNestedProjectFileName="new_gpg.vcproj">
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32">
+			<Tool
+				Name="GeneralTool"
+				InterproceduralOptimization="true"/>
+		</Configuration>
+		<Configuration
+			Name="Release Unicode (static)|Win32">
+			<Tool
+				Name="CppCmplrTool"
+				Optimization="1000"
+				GlobalOptimizations="true"
+				OptimizeForWindowsApplication="true"
+				FloatingPointModel="1000"
+				UseProcessorExtensions="1"/>
+		</Configuration>
+	</Configurations>
+	<Files/>
+</VisualStudioProject>
