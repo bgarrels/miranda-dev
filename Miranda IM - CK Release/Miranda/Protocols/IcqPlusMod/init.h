@@ -51,3 +51,27 @@ void UpdateGlobalSettings(void);
 int Load2();
 
 int OnSystemModulesLoaded(WPARAM wParam, LPARAM lParam);
+
+//////////////////////////////////////////////////////////////////////////
+extern void RegEventType(int EventType, char* EventDescription);
+
+extern CRITICAL_SECTION connectionHandleMutex;
+extern CRITICAL_SECTION localSeqMutex;
+
+extern void InitVars();
+
+extern HANDLE hsmsgrequest;
+extern HANDLE hxstatuschanged;
+extern HANDLE hxstatusiconchanged;
+extern HANDLE hqipstatuschanged;
+extern HANDLE hqipstatusiconchanged;
+
+extern HANDLE hIconFolder;
+extern HANDLE hHookIconsChanged;
+
+extern int IconLibIconsChanged(WPARAM wParam, LPARAM lParam);
+extern void icq_BuildPrivacyMenu();
+extern void InitXStatusIcons();
+extern void InitQipStatusIcons();
+extern void InitTzersIcons();
+extern void InitQipStatusEvents();

@@ -4,7 +4,10 @@
 #include "icq_opts.h"
 #include "icq_constants.h"
 
-CIcqProto::CIcqProto(const char* cszProtoName, const TCHAR* ctszUsername)
+#include "m_folders.h"
+
+CIcqProto::CIcqProto(const char* cszProtoName, const TCHAR* ctszUsername) :
+cheekySearchId( -1 )
 {
 	m_sProtoName = cszProtoName;
 	m_sUsername = ctszUsername;
@@ -12,7 +15,159 @@ CIcqProto::CIcqProto(const char* cszProtoName, const TCHAR* ctszUsername)
 
 void CIcqProto::Initialize()
 {
-	Load2();
+	// FIXME: Do I need to fix this ?
+	//HookEvent(ME_DB_CONTACT_SETTINGCHANGED, &CIcqProto::ServListDbSettingChanged);
+
+	InitializeCriticalSection(&connectionHandleMutex);
+	InitializeCriticalSection(&localSeqMutex);
+	InitializeCriticalSection(&m_modeMsgsMutex);
+
+	// Initialize core modules
+	InitDB();       // DB interface
+	InitVars(); // global variables
+	InitCookies();  // cookie utils
+	InitCache();    // contacts cache
+	InitReguin();   // reguin module
+
+	DBWriteContactSettingDword(NULL, ICQ_PROTOCOL_NAME, "SrvLastUpdate", 0);
+	DBWriteContactSettingWord(NULL, ICQ_PROTOCOL_NAME, "SrvRecordCount", 0);
+
+	InitRates();    // rate management
+
+	// Initialize status message struct
+	ZeroMemory(&m_modeMsgs, sizeof(icq_mode_messages));
+
+	// Initialize temporary DB settings
+	CreateResidentSetting("Status"); // NOTE: XStatus cannot be temporary
+	CreateResidentSetting("ICQStatus");
+	CreateResidentSetting("TemporaryVisible");
+	CreateResidentSetting("TickTS");
+	CreateResidentSetting("IdleTS");
+	CreateResidentSetting("LogonTS");
+	CreateResidentSetting("CapBuf");
+	CreateResidentSetting("DCStatus");
+	CreateResidentSetting("TmpContact");
+
+	// Setup services
+	CreateProtoService(PS_ICQP_SERVER_IGNORE, IcqServerIgnore);
+	CreateProtoService(PS_GETNAME, IcqGetName);
+	CreateProtoService(PS_LOADICON, IcqLoadIcon);
+	CreateProtoService(PS_GETSTATUS, IcqGetStatus);
+	CreateProtoService(MS_ICQ_SENDSMS, IcqSendSms);
+	CreateProtoService(PS_FILERESUME, IcqFileResume);
+	CreateProtoService(PS_SET_NICKNAME, IcqSetNickName);
+	CreateProtoService(PSS_FILEALLOW, IcqFileAllow);
+	CreateProtoService(PSS_FILEDENY, IcqFileDeny);
+	CreateProtoService(PSS_FILECANCEL, IcqFileCancel);
+	CreateProtoService(PSS_FILE, IcqSendFile);
+	CreateProtoService(PSR_FILE, IcqRecvFile);
+	CreateProtoService(PSS_ADDED, IcqSendYouWereAdded);
+	CreateProtoService(PS_CREATEACCMGRUI, SvcCreateAccMgrUI);
+	// Session password API
+	CreateProtoService(PS_ICQ_SETPASSWORD, IcqSetPassword);
+	// ChangeInfo API
+	CreateProtoService(PS_CHANGEINFOEX, IcqChangeInfoEx);
+	// Avatar API
+	CreateProtoService(PS_GETAVATARINFO, IcqGetAvatarInfo);
+	CreateProtoService(PS_GETAVATARCAPS, IcqGetAvatarCaps);
+	CreateProtoService(PS_GETMYAVATAR, IcqGetMyAvatar);
+	CreateProtoService(PS_SETMYAVATAR, IcqSetMyAvatar);
+	// Custom Status API
+	CreateProtoService(PS_ICQ_SETCUSTOMSTATUS, IcqSetXStatus); // obsolete (remove in next version)
+	CreateProtoService(PS_ICQ_GETCUSTOMSTATUS, IcqGetXStatus); // obsolete
+	CreateProtoService(PS_ICQ_SETCUSTOMSTATUSEX, IcqSetXStatusEx);
+	CreateProtoService(PS_ICQ_GETCUSTOMSTATUSEX, IcqGetXStatusEx);
+	CreateProtoService(PS_ICQ_GETCUSTOMSTATUSICON, IcqGetXStatusIcon);
+	CreateProtoService(PS_ICQ_REQUESTCUSTOMSTATUS, IcqRequestXStatusDetails);
+	CreateProtoService(PS_ICQ_GETADVANCEDSTATUSICON, IcqRequestAdvStatusIconIdx);
+	// Custom caps
+	CreateProtoService(PS_ICQ_ADDCAPABILITY, IcqAddCapability);
+	CreateProtoService(PS_ICQ_CHECKCAPABILITY, IcqCheckCapability);
+
+
+
+	hsmsgrequest = CreateProtoEvent(ME_ICQ_STATUSMSGREQ);
+	hxstatuschanged = CreateProtoEvent(ME_ICQ_CUSTOMSTATUS_CHANGED);
+	hxstatusiconchanged = CreateProtoEvent(ME_ICQ_CUSTOMSTATUS_EXTRAICON_CHANGED);
+	hqipstatuschanged = CreateProtoEvent(ME_ICQ_CUSTOMSTATUS_CHANGED);//added
+	hqipstatusiconchanged = CreateProtoEvent(ME_ICQ_CUSTOMSTATUS_EXTRAICON_CHANGED);//added
+
+	InitDirectConns();
+	InitOscarFileTransfer();
+	InitServerLists();
+	icq_InitInfoUpdate();
+	RegEventType(ICQEVENTTYPE_IGNORECHECK_STATUS, "Check ICQ Ignore State");
+	RegEventType(ICQEVENTTYPE_CHECK_STATUS, "Check ICQ Status");
+	RegEventType(ICQEVENTTYPE_CLIENT_CHANGE, "Chenge ICQ Client");
+	RegEventType(ICQEVENTTYPE_SELF_REMOVE, "ICQ Contact SelfRemove");
+	RegEventType(ICQEVENTTYPE_AUTH_DENIED, "ICQ Auth Denied");
+	RegEventType(ICQEVENTTYPE_AUTH_GRANTED, "ICQ Auth Granted");
+	RegEventType(ICQEVENTTYPE_AUTH_REQUESTED, "ICQ Auth Requested");
+	RegEventType(ICQEVENTTYPE_YOU_ADDED, "ICQ You Added");
+	RegEventType(ICQEVENTTYPE_WAS_FOUND, "Detected via ASD\\PSD");
+	RegEventType(ICQEVENTTYPE_CHECK_XSTATUS, "Read X-Status");
+
+
+	icq_InitISee();
+
+	UpdateGlobalSettings();
+
+	gnCurrentStatus = ID_STATUS_OFFLINE;
+
+	hIconFolder = FoldersRegisterCustomPath(ICQ_PROTOCOL_NAME, "Icons", MIRANDA_PATH"\\icons");
+	if( hIconFolder==(HANDLE)CALLSERVICE_NOTFOUND ) hIconFolder = 0;
+
+	CreateProtoService(MS_ICQ_ADDSERVCONTACT, IcqAddServerContact);
+
+	CreateProtoService(MS_REQ_AUTH, icq_RequestAuthorization);
+	CreateProtoService(MS_GRANT_AUTH, IcqGrantAuthorization);
+	CreateProtoService(MS_REVOKE_AUTH, IcqRevokeAuthorization);
+	CreateProtoService(MS_SETINVIS, IcqSetInvis);
+	CreateProtoService(MS_SETVIS, IcqSetVis);
+	CreateProtoService(MS_INCOGNITO_REQUEST, IncognitoAwayRequest);
+	CreateProtoService(MS_SEND_TZER, IcqSendtZer);
+	CreateProtoService(MS_TZER_DIALOG, IcqTzerDlg);
+	CreateProtoService(MS_ICQ_GET_USER_STATUS, IcqGetUserStatus_service);
+
+	CreateProtoService(MS_XSTATUS_SHOWDETAILS, IcqShowXStatusDetails);
+
+	hHookIconsChanged = IconLibHookIconsChanged(::IconLibIconsChanged);
+
+	InitXStatusIcons();
+	InitQipStatusIcons();
+	InitTzersIcons();
+
+	// This must be here - the events are called too early, WTF?
+	InitXStatusEvents();
+	InitQipStatusEvents();
+
+	if (DBGetContactSettingByte(NULL, ICQ_PROTOCOL_NAME, "PrivacyMenu", DEFAULT_PRIVACY_ENABLED))
+		icq_BuildPrivacyMenu();
+
+
+
+	//Custom caps
+	lstCustomCaps = li.List_Create(0,1);
+	lstCustomCaps->sortFunc = NULL;
+
+	{
+		char tmp[MAXMODULELABELLENGTH];
+		DBCONTACTENUMSETTINGS dbces;
+		mir_snprintf(tmp, MAXMODULELABELLENGTH, "%sCaps", ICQ_PROTOCOL_NAME);
+		dbces.pfnEnumProc = EnumCustomCapsProc;
+		dbces.lParam = (LPARAM)tmp;
+		dbces.szModule = tmp;
+		CallService(MS_DB_CONTACT_ENUMSETTINGS, 0, (LPARAM)&dbces);
+	}
+
+	{
+		//ICQ_CUSTOMCAP icqCustomCap;
+		//IcqBuildMirandaCap(&icqCustomCap, "Miranda ICQ Capability Test", NULL, "TestTest");
+		//CallProtoService(gpszICQProtoName, PS_ICQ_ADDCAPABILITY, 0, (LPARAM)&icqCustomCap);
+	}
+
+	// Reset a bunch of session specific settings
+	ResetSettingsOnLoad();
 }
 
 CIcqProto::~CIcqProto(void)
@@ -1378,9 +1533,9 @@ int CIcqProto::OnEvent( PROTOEVENTTYPE iEventType, WPARAM wParam, LPARAM lParam 
 		break;
 
 	case EV_PROTO_ONEXIT:
+		// OnSystemPreShutdown(0, 0);	// It's not called in IcqJ
 		icq_InfoUpdateCleanup();
 		return 0;
-		//return OnPreShutdown(0, 0);
 		break;
 
 	case EV_PROTO_ONRENAME:
@@ -1447,6 +1602,55 @@ void CIcqProto::CheekySearchThread( void* )
 	BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_DATA, (HANDLE)cheekySearchId, (LPARAM)&isr);
 	BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)cheekySearchId, 0);
 	cheekySearchId = -1;
+}
+
+extern HANDLE hServerConn;
+
+int CIcqProto::OnSystemPreShutdown(WPARAM wParam,LPARAM lParam)
+{
+	// all threads should be terminated here
+	if (hServerConn)
+	{
+		icq_sendCloseConnection();
+		icq_serverDisconnect(TRUE);
+	}
+	CheckSelfRemoveShutdown();
+
+	return 0;
+}
+
+HANDLE CIcqProto::CreateProtoEvent(const char* szEvent)
+{
+	char str[MAX_PATH + 32];
+	strcpy(str, ICQ_PROTOCOL_NAME);
+	strcat(str, szEvent);
+	return CreateHookableEvent(str);
+}
+
+HANDLE CIcqProto::CreateProtoService(const char* szService, MIRANDASERVICE serviceProc)
+{
+	char str[MAX_PATH + 32];
+	strcpy(str, ICQ_PROTOCOL_NAME);
+	strcat(str, szService);
+	return CreateServiceFunction(str, serviceProc);
+}
+
+// FIXME: Sync this with IcqJ
+int CIcqProto::ServListDbSettingChanged(WPARAM wParam,LPARAM lParam)
+{
+	DBCONTACTWRITESETTING *cws = ( DBCONTACTWRITESETTING* )lParam;
+	HANDLE hCSCContact = ( HANDLE )wParam;
+
+	if( hCSCContact == NULL || lstrcmpA( cws->szSetting, "Status" ) )
+		return 0;
+	if ( cws->value.wVal == ID_STATUS_OFFLINE )
+	{
+		// if contact goes offline, delete xstatus details
+		DBDeleteContactSetting( hCSCContact, ICQ_PROTOCOL_NAME, "XStatusId" );
+		DBDeleteContactSetting( hCSCContact, ICQ_PROTOCOL_NAME, "XStatusMsg" );
+		DBDeleteContactSetting( hCSCContact, ICQ_PROTOCOL_NAME, "XStatusName" );
+	}
+	return 0;
 }
 
 CIcqProto* pProtocol = NULL;
