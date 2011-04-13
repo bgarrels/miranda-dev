@@ -1920,7 +1920,7 @@ static int ServListDbSettingChanged(WPARAM wParam, LPARAM lParam)
         return 0;
 
     // TODO: Queue changes that occur while offline
-    if (!icqOnline || !gbSsiEnabled || bIsSyncingCL)
+    if (!icqOnline || !m_bSsiEnabled || bIsSyncingCL)
         return 0;
 
     {
@@ -2018,13 +2018,13 @@ static int ServListDbContactDeleted(WPARAM wParam, LPARAM lParam)
 {
     DeleteFromCache((HANDLE)wParam);
 
-    if (!icqOnline && gbSsiEnabled)
+    if (!icqOnline && m_bSsiEnabled)
     {
         // contact was deleted only locally - retrieve full list on next connect
         setSettingWord((HANDLE)wParam, "SrvRecordCount", 0);
     }
 
-    if (!icqOnline || !gbSsiEnabled)
+    if (!icqOnline || !m_bSsiEnabled)
         return 0;
 
     {

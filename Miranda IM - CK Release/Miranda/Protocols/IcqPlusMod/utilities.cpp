@@ -72,9 +72,6 @@ void ShowDlgItem(HWND hwndDlg, UINT control, int state)
     ShowWindow(GetDlgItem(hwndDlg, control), state);
 }
 
-
-
-
 void icq_EnableMultipleControls(HWND hwndDlg, const UINT *controls, int cControls, int state)
 {
     int i;
@@ -82,8 +79,6 @@ void icq_EnableMultipleControls(HWND hwndDlg, const UINT *controls, int cControl
     for (i = 0; i < cControls; i++)
         EnableDlgItem(hwndDlg, controls[i], state);
 }
-
-
 
 void icq_ShowMultipleControls(HWND hwndDlg, const UINT *controls, int cControls, int state)
 {
@@ -101,7 +96,7 @@ int IcqStatusToMiranda(WORD nIcqStatus)
     int nMirandaStatus;
 
     // :NOTE: The order in which the flags are compared are important!
-    // I dont like this method but it works.
+    // I don't like this method but it works.
 
     if (nIcqStatus & ICQ_STATUSF_INVISIBLE)
         nMirandaStatus = ID_STATUS_INVISIBLE;
@@ -115,7 +110,6 @@ int IcqStatusToMiranda(WORD nIcqStatus)
         nMirandaStatus = ID_STATUS_AWAY;
     else if (nIcqStatus & ICQ_STATUSF_FFC)
         nMirandaStatus = ID_STATUS_FREECHAT;
-
     else
         // Can be discussed, but I think 'online' is the most generic ICQ status
         nMirandaStatus = ID_STATUS_ONLINE;
@@ -177,15 +171,13 @@ WORD MirandaStatusToIcq(int nMirandaStatus)
     return nIcqStatus;
 }
 
-
 int MirandaStatusToSupported(int nMirandaStatus)
 {
     int nSupportedStatus;
 
     switch (nMirandaStatus)
     {
-
-        // These status mode does not need any mapping
+	// These status mode does not need any mapping
     case ID_STATUS_ONLINE:
     case ID_STATUS_AWAY:
     case ID_STATUS_NA:
@@ -220,14 +212,10 @@ int MirandaStatusToSupported(int nMirandaStatus)
     return nSupportedStatus;
 }
 
-
-
 char* MirandaStatusToString(int mirandaStatus)
 {
     return (char *)CallService(MS_CLIST_GETSTATUSMODEDESCRIPTION, mirandaStatus, 0);
 }
-
-
 
 char* MirandaStatusToStringUtf(int mirandaStatus)
 {
@@ -237,7 +225,7 @@ char* MirandaStatusToStringUtf(int mirandaStatus)
 
 
 
-char** CIcqProto::MirandaStatusToAwayMsg(int nStatus)
+char** CIcqProto::_MirandaStatusToAwayMsg(int nStatus)
 {
     switch (nStatus)
     {
@@ -605,7 +593,7 @@ HANDLE HContactFromUIN(DWORD uin, int *Added)
         if (!bIsSyncingCL)
         {
             DBWriteContactSettingByte(hContact, "CList", "NotOnList", 1);
-            SetContactHidden(hContact, 1);
+            setContactHidden(hContact, 1);
 
             setSettingWord(hContact, "Status", ID_STATUS_OFFLINE);
 
@@ -646,7 +634,7 @@ HANDLE HContactFromUID(DWORD dwUIN, char* pszUID, int *Added)
 
     if (Added) *Added = 0;
 
-    if (!gbAimEnabled) return INVALID_HANDLE_VALUE;
+    if (!m_bAimEnabled) return INVALID_HANDLE_VALUE;
 
     hContact = FindFirstContact();
     while (hContact != NULL)
@@ -677,7 +665,7 @@ HANDLE HContactFromUID(DWORD dwUIN, char* pszUID, int *Added)
         if (!bIsSyncingCL)
         {
             DBWriteContactSettingByte(hContact, "CList", "NotOnList", 1);
-            SetContactHidden(hContact, 1);
+            setContactHidden(hContact, 1);
 
             setSettingWord(hContact, "Status", ID_STATUS_OFFLINE);
 
@@ -739,7 +727,7 @@ char *strUID(DWORD dwUIN, char *pszUID)
 
 
 
-void SetContactHidden(HANDLE hContact, BYTE bHidden)
+void setContactHidden(HANDLE hContact, BYTE bHidden)
 {
     DBWriteContactSettingByte(hContact, "CList", "Hidden", bHidden);
 
@@ -1249,7 +1237,7 @@ static unsigned __stdcall icq_ProtocolAckThread(void* pParam)
 {
     icq_ack_args* pArguments = (icq_ack_args*)pParam;
 
-    ICQBroadcastAck(pArguments->hContact, pArguments->nAckType, pArguments->nAckResult, pArguments->hSequence, pArguments->pszMessage);
+    BroadcastAck(pArguments->hContact, pArguments->nAckType, pArguments->nAckResult, pArguments->hSequence, pArguments->pszMessage);
 
     if (pArguments->nAckResult == ACKRESULT_SUCCESS)
         NetLog_Server("Sent fake message ack");
@@ -1264,7 +1252,7 @@ static unsigned __stdcall icq_ProtocolAckThread(void* pParam)
 
 
 
-void icq_SendProtoAck(HANDLE hContact, DWORD dwCookie, int nAckResult, int nAckType, char* pszMessage)
+void SendProtoAck(HANDLE hContact, DWORD dwCookie, int nAckResult, int nAckType, char* pszMessage)
 {
     icq_ack_args* pArgs;
 
@@ -1287,7 +1275,7 @@ void SetCurrentStatus(int nStatus)
     int nOldStatus = gnCurrentStatus;
 
     gnCurrentStatus = nStatus;
-    ICQBroadcastAck(NULL, ACKTYPE_STATUS, ACKRESULT_SUCCESS, (HANDLE)nOldStatus, nStatus);
+    BroadcastAck(NULL, ACKTYPE_STATUS, ACKRESULT_SUCCESS, (HANDLE)nOldStatus, nStatus);
 }
 
 int IsMetaInfoChanged(HANDLE hContact)
@@ -1348,8 +1336,7 @@ int IsMetaInfoChanged(HANDLE hContact)
 BOOL writeDbInfoSettingString(HANDLE hContact, const char* szSetting, char** buf, WORD* pwLength)
 {
     WORD wLen;
-
-
+	
     if (*pwLength < 2)
         return FALSE;
 
@@ -1489,6 +1476,7 @@ void writeDbInfoSettingTLVStringUtf(HANDLE hContact, const char *szSetting, osca
     else
         deleteSetting(hContact, szSetting);
 }
+
 void writeDbInfoSettingTLVString(HANDLE hContact, const char *szSetting, oscar_tlv_chain *chain, WORD wTlv)
 {
     oscar_tlv *pTLV = getTLV(chain, wTlv, 1);
@@ -1504,6 +1492,7 @@ void writeDbInfoSettingTLVString(HANDLE hContact, const char *szSetting, oscar_t
     else
         deleteSetting(hContact, szSetting);
 }
+
 void writeDbInfoSettingTLVWord(HANDLE hContact, const char *szSetting, oscar_tlv_chain *chain, WORD wTlv)
 {
     int num = getNumberFromChain(chain, wTlv, 1);
@@ -1513,6 +1502,7 @@ void writeDbInfoSettingTLVWord(HANDLE hContact, const char *szSetting, oscar_tlv
     else
         deleteSetting(hContact, szSetting);
 }
+
 void writeDbInfoSettingTLVByte(HANDLE hContact, const char *szSetting, oscar_tlv_chain *chain, WORD wTlv)
 {
     int num = getNumberFromChain(chain, wTlv, 1);
@@ -1523,6 +1513,7 @@ void writeDbInfoSettingTLVByte(HANDLE hContact, const char *szSetting, oscar_tlv
     else
         deleteSetting(hContact, szSetting);
 }
+
 void writeDbInfoSettingTLVDate(HANDLE hContact, const char* szSettingYear, const char* szSettingMonth, const char* szSettingDay, oscar_tlv_chain* chain, WORD wTlv)
 {
     double time = getDoubleFromChain(chain, wTlv, 1);
@@ -1554,17 +1545,12 @@ void writeDbInfoSettingTLVDate(HANDLE hContact, const char* szSettingYear, const
 void writeDbInfoSettingTLVDouble(HANDLE hContact, const char *szSetting, oscar_tlv_chain *chain, WORD wTlv)
 {
     double num = getDoubleFromChain(chain, wTlv, 1);
-
-
+	
     if (num > 0)
         setSettingDouble(hContact, szSetting, num);
     else
         deleteSetting(hContact, szSetting);
 }
-
-
-
-
 
 // Returns the current GMT offset in seconds
 int GetGMTOffset(void)
@@ -1867,7 +1853,7 @@ int NetLog_Uni(BOOL bDC, const char *fmt,...)
 
 
 
-int ICQBroadcastAck(HANDLE hContact,int type,int result,HANDLE hProcess,LPARAM lParam)
+int BroadcastAck(HANDLE hContact,int type,int result,HANDLE hProcess,LPARAM lParam)
 {
     ACKDATA ack= {0};
 

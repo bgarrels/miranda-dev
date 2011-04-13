@@ -238,7 +238,7 @@ static void handleRecvServMsg(unsigned char *buf, WORD wLen, WORD wFlags, DWORD 
 
 static char* convertMsgToUserSpecificUtf(HANDLE hContact, const char* szMsg)
 {
-    WORD wCP = getSettingWord(hContact, "CodePage", gwAnsiCodepage);
+    WORD wCP = getSettingWord(hContact, "CodePage", m_wAnsiCodepage);
     char* usMsg = NULL;
 
     if (wCP != CP_ACP)
@@ -385,7 +385,7 @@ static void handleRecvServMsgType1(unsigned char *buf, WORD wLen, DWORD dwUin, c
                             if (szMsg)
                             {
                                 // not necessary to convert - appending first part, only set flags
-                                char* szUtfMsg = mir_utf8encodecp(szMsg, getSettingWord(hContact, "CodePage", gwAnsiCodepage));
+                                char* szUtfMsg = mir_utf8encodecp(szMsg, getSettingWord(hContact, "CodePage", m_wAnsiCodepage));
 
                                 mir_free(szMsg);
                                 szMsg = szUtfMsg;
@@ -395,7 +395,7 @@ static void handleRecvServMsgType1(unsigned char *buf, WORD wLen, DWORD dwUin, c
                         if (!bMsgPartUnicode && pre.flags == PREF_UTF)
                         {
                             // convert message part to utf-8 and append
-                            char* szUtfPart = mir_utf8encodecp(szMsgPart, getSettingWord(hContact, "CodePage", gwAnsiCodepage));
+                            char* szUtfPart = mir_utf8encodecp(szMsgPart, getSettingWord(hContact, "CodePage", m_wAnsiCodepage));
 
                             mir_free(szMsgPart);
                             szMsgPart = szUtfPart;
@@ -417,7 +417,7 @@ static void handleRecvServMsgType1(unsigned char *buf, WORD wLen, DWORD dwUin, c
                 }
                 if (strlennull(szMsg))
                 {
-                    /// TODO: Add inteligent HTML detection & stripping - support for CAPF_HTML
+                    /// TODO: Add intelligent HTML detection & stripping - support for CAPF_HTML
                     if (!dwUin)
                     {
                         // strip HTML formating from AIM message
@@ -1389,7 +1389,7 @@ static void handleRecvServMsgContacts(unsigned char *buf, WORD wLen, DWORD dwUin
             if (hCookieContact != hContact)
                 NetLog_Server("Warning: Ack Contact does not match Cookie Contact(0x%x != 0x%x)", hContact, hCookieContact);
 
-            ICQBroadcastAck(hContact, ACKTYPE_CONTACTS, ACKRESULT_SUCCESS, (HANDLE)dwCookie, 0);
+            BroadcastAck(hContact, ACKTYPE_CONTACTS, ACKRESULT_SUCCESS, (HANDLE)dwCookie, 0);
 
             ReleaseCookie(dwCookie);
         }
@@ -1891,7 +1891,7 @@ static HANDLE handleMessageAck(DWORD dwUin, WORD wCookie, WORD wVersion, int typ
     {
         HANDLE hContact;
         HANDLE hCookieContact;
-        message_cookie_data* pCookieData = NULL;
+        cookie_message_data* pCookieData = NULL;
 
         hContact = HContactFromUIN(dwUin, NULL);
 
@@ -2488,7 +2488,7 @@ BOOL handleMessageTypes(DWORD dwUin, DWORD dwTimestamp, DWORD dwMsgID, DWORD dwM
         }
         NetLog_Server("Received SMS Mobile message");
 
-        ICQBroadcastAck(NULL, ICQACKTYPE_SMS, ACKRESULT_SUCCESS, NULL, (LPARAM)szMsg);
+        BroadcastAck(NULL, ICQACKTYPE_SMS, ACKRESULT_SUCCESS, NULL, (LPARAM)szMsg);
         break;
 
     case MTYPE_STATUSMSGEXT:
@@ -2596,7 +2596,7 @@ BOOL handleMessageTypes(DWORD dwUin, DWORD dwTimestamp, DWORD dwMsgID, DWORD dwM
     case MTYPE_AUTODND:
     case MTYPE_AUTOFFC:
     {
-        char** szMsg = gProtocol.MirandaStatusToAwayMsg(AwayMsgTypeToStatus(type));
+        char** szMsg = MirandaStatusToAwayMsg(AwayMsgTypeToStatus(type));
 
         if (szMsg)
         {
@@ -2679,7 +2679,7 @@ static void handleRecvMsgResponse(unsigned char *buf, WORD wLen, WORD wFlags, DW
     HANDLE hCookieContact;
     DWORD dwMsgID1, dwMsgID2;
     WORD wVersion = 0;
-    message_cookie_data* pCookieData = NULL;
+    cookie_message_data* pCookieData = NULL;
 
 
     unpackLEDWord(&buf, &dwMsgID1);  // Message ID
@@ -3029,7 +3029,7 @@ static void handleRecvMsgResponse(unsigned char *buf, WORD wLen, WORD wFlags, DW
             {
                 filetransfer *ft = (filetransfer*)pReverse->ft;
 
-                ICQBroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, ft, 0);
+                BroadcastAck(ft->hContact, ACKTYPE_FILE, ACKRESULT_FAILED, ft, 0);
             }
             NetLog_Server("Reverse Connect request failed");
             // Set DC status to failed
@@ -3046,7 +3046,7 @@ static void handleRecvMsgResponse(unsigned char *buf, WORD wLen, WORD wFlags, DW
         if (bMsgType != MTYPE_REVERSE_REQUEST && ((ackType == MTYPE_PLAIN && pCookieData && (pCookieData->nAckType == ACKTYPE_CLIENT)) ||
                 ackType != MTYPE_PLAIN))
         {
-            ICQBroadcastAck(hContact, ackType, ACKRESULT_SUCCESS, (HANDLE)(WORD)dwCookie, 0);
+            BroadcastAck(hContact, ackType, ACKRESULT_SUCCESS, (HANDLE)(WORD)dwCookie, 0);
         }
     }
 
@@ -3067,7 +3067,7 @@ static void handleRecvServMsgError(unsigned char *buf, WORD wLen, WORD wFlags, D
     WORD wError;
     char* pszErrorMessage;
     HANDLE hContact;
-    message_cookie_data* pCookieData = NULL;
+    cookie_message_data* pCookieData = NULL;
     int nMessageType;
 // BOOL isHidden;
 
@@ -3118,7 +3118,7 @@ static void handleRecvServMsgError(unsigned char *buf, WORD wLen, WORD wFlags, D
         case 0x0004:     // Recipient is not logged in (resend in a offline message)
             if (/*isHidden || */pCookieData->bMessageType == MTYPE_PLAIN)
             {
-                if (((message_cookie_data_ex*)pCookieData)->isOffline)
+                if (((cookie_message_data_ext*)pCookieData)->isOffline)
                 {
                     // offline failed - most probably to AIM contact
                     pszErrorMessage = ICQTranslate("The contact does not support receiving offline messages.");
@@ -3203,7 +3203,7 @@ static void handleRecvServMsgError(unsigned char *buf, WORD wLen, WORD wFlags, D
 
         if (nMessageType != -1)
         {
-            ICQBroadcastAck(hContact, nMessageType, ACKRESULT_FAILED, (HANDLE)(WORD)dwSequence, (LPARAM)pszErrorMessage);
+            BroadcastAck(hContact, nMessageType, ACKRESULT_FAILED, (HANDLE)(WORD)dwSequence, (LPARAM)pszErrorMessage);
         }
         else
         {
@@ -3232,7 +3232,7 @@ static void handleServerAck(unsigned char *buf, WORD wLen, WORD wFlags, DWORD dw
     uid_str szUID;
     WORD wChannel;
     HANDLE hContact;
-    message_cookie_data* pCookieData;
+    cookie_message_data* pCookieData;
 
 
     if (wLen < 13)
@@ -3293,7 +3293,7 @@ static void handleServerAck(unsigned char *buf, WORD wLen, WORD wFlags, DWORD dw
                     break;
                 }
                 if (ackType != -1)
-                    ICQBroadcastAck(hContact, ackType, ackRes, (HANDLE)(WORD)dwSequence, 0);
+                    BroadcastAck(hContact, ackType, ackRes, (HANDLE)(WORD)dwSequence, 0);
 
                 if (pCookieData->bMessageType != MTYPE_FILEREQ)
                     mir_free(pCookieData); // this could be a bad idea, but I think it is safe

@@ -234,14 +234,14 @@ void DeleteFromCache(HANDLE hContact);
 HANDLE HContactFromUIN(DWORD dwUin, int *Added);
 HANDLE HContactFromUID(DWORD dwUIN, char *pszUID, int *Added);
 void NickFromHandleStatic(HANDLE hContact, char *szNick, WORD wLen);
-void SetContactHidden(HANDLE hContact, BYTE bHidden);
+void setContactHidden(HANDLE hContact, BYTE bHidden);
 void makeUserOffline(HANDLE hContact);
 
 void ResetSettingsOnListReload(void);
 void ResetSettingsOnConnect(void);
 void ResetSettingsOnLoad(void);
 
-void icq_SendProtoAck(HANDLE hContact, DWORD dwCookie, int nAckResult, int nAckType, char* pszMessage);
+void SendProtoAck(HANDLE hContact, DWORD dwCookie, int nAckResult, int nAckType, char* pszMessage);
 
 void SetCurrentStatus(int nStatus);
 
@@ -269,7 +269,7 @@ int NetLog_Server(const char *fmt,...);
 int NetLog_Direct(const char *fmt,...);
 int NetLog_Uni(BOOL bDC, const char *fmt,...);
 
-int ICQBroadcastAck(HANDLE hContact,int type,int result,HANDLE hProcess,LPARAM lParam);
+int BroadcastAck(HANDLE hContact,int type,int result,HANDLE hProcess,LPARAM lParam);
 
 HANDLE ICQCreateThreadEx(pThreadFuncEx AFunc, void* arg, DWORD* pThreadID);
 void ICQCreateThread(pThreadFuncEx AFunc, void* arg);

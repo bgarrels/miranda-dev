@@ -44,32 +44,12 @@ INT_PTR icq_getEventTextMissedMessage(WPARAM wParam, LPARAM lParam);
 
 /*---------* Functions *---------------*/
 
-INT_PTR IcqGetCaps(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqGetName(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqLoadIcon(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqSetStatus(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqGetStatus(WPARAM wParam, LPARAM lParam);
-//INT_PTR IcqSetAwayMsg(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqGetAwayMsg(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqRecvAwayMsg(WPARAM wParam,LPARAM lParam);
-INT_PTR IcqAuthAllow(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqAuthDeny(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqBasicSearch(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqBasicSearch_v9(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqSearchByEmail(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqSearchByDetails(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqCreateAdvSearchUI(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqSearchByAdvanced(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqAddToList(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqAddToListByEvent(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqSetNickName(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqChangeInfoEx(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqGetInfo(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqSendSms(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqSetApparentMode(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqSendMessage(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqSendUrl(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqSendContacts(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqSendFile(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqFileAllow(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqFileDeny(WPARAM wParam, LPARAM lParam);
@@ -79,17 +59,11 @@ INT_PTR IcqGrantAuthorization(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqRevokeAuthorization(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqSendtZer(WPARAM,LPARAM);
 INT_PTR IcqTzerDlg(WPARAM,LPARAM);
-INT_PTR IcqSendAuthRequest(WPARAM,LPARAM);
 INT_PTR IcqSendYouWereAdded(WPARAM,LPARAM);
-INT_PTR IcqSendUserIsTyping(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqAddServerContact(WPARAM wParam, LPARAM lParam);
 INT_PTR SvcCreateAccMgrUI(WPARAM wParam, LPARAM lParam);
 
-
-INT_PTR IcqRecvMessage(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqRecvContacts(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqRecvFile(WPARAM wParam, LPARAM lParam);
-INT_PTR IcqRecvAuth(WPARAM wParam, LPARAM lParam);
 
 int IcqIdleChanged(WPARAM wParam, LPARAM lParam);
 
@@ -105,5 +79,14 @@ INT_PTR IcqCheckCapability(WPARAM wParam, LPARAM lParam);
 INT_PTR IcqServerIgnore(WPARAM wParam, LPARAM lParam);
 
 extern int iIcqNewStatus;
+
+// FIXME: Move to another place //////////////////////////////////////////
+extern DWORD ReportGenericSendError(HANDLE hContact, int nType, const char* szErrorMsg);
+extern cookie_message_data* CreateMessageCookieData(BYTE bMsgType, HANDLE hContact, DWORD dwUin, int bUseSrvRelay);
+extern void ICQAddRecvEvent(HANDLE hContact, WORD wType, PROTORECVEVENT* pre, DWORD cbBlob, PBYTE pBlob, DWORD flags);
+extern HANDLE HContactFromAuthEvent(HANDLE hEvent);
+extern HANDLE AddToListByUIN(DWORD dwUin, DWORD dwFlags);
+extern HANDLE AddToListByUID(char *szUID, DWORD dwFlags);
+
 
 #endif /* __ICQOSC_SVCS_H */

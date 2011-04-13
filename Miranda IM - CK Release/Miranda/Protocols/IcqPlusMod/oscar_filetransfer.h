@@ -58,13 +58,13 @@ const char* FindFilePathContainer(const char** files, int iFile, char* szContain
 
 typedef struct
 {
-    message_cookie_data pMessage;
+    cookie_message_data pMessage;
     BYTE ft_magic;
 } basic_filetransfer;
 
 typedef struct
 {
-    message_cookie_data pMessage;
+    cookie_message_data pMessage;
     BYTE ft_magic;
     HANDLE hContact;
     int initialized;

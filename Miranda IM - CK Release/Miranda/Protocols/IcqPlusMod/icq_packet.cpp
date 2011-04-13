@@ -212,6 +212,7 @@ void packTLVDWord(icq_packet* pPacket, WORD wType, DWORD dwValue)
 // Pack a preformatted buffer.
 // This can be used to pack strings or any type of raw data.
 
+// FIXME: Switch buffer to BYTE*
 void packBuffer(icq_packet* pPacket, const char* pbyBuffer, WORD wLength)
 {
     while (wLength)
@@ -934,7 +935,7 @@ BOOL unpackUID(unsigned char** ppBuf, WORD* pwLen, DWORD *pdwUIN, uid_str* ppszU
             *pdwUIN = atoi(szUIN);
             return TRUE;
         }
-        else if (!ppszUID || !gbAimEnabled)
+        else if (!ppszUID || !m_bAimEnabled)
         {
             NetLog_Server("Malformed UIN in packet");
             return FALSE;
@@ -946,7 +947,7 @@ BOOL unpackUID(unsigned char** ppBuf, WORD* pwLen, DWORD *pdwUIN, uid_str* ppszU
             *pwLen += nUIDLen;
         }
     }
-    else if (!ppszUID || ! gbAimEnabled)
+    else if (!ppszUID || ! m_bAimEnabled)
     {
         NetLog_Server("Malformed UIN in packet");
         return FALSE;

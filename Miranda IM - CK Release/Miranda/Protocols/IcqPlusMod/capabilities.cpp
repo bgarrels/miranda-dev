@@ -205,7 +205,7 @@ void SetContactCapabilities(HANDLE hContact, DWORD fdwCapabilities)
 
 
     // Get current capability flags
-    fdwContactCaps =  getSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
+    fdwContactCaps = getSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
 
     // Update them
     fdwContactCaps |= fdwCapabilities;
@@ -216,14 +216,14 @@ void SetContactCapabilities(HANDLE hContact, DWORD fdwCapabilities)
 
 
 
-// Returns true if the given contact supports the requested capabilites
+// Returns true if the given contact supports the requested capabilities
 BOOL CheckContactCapabilities(HANDLE hContact, DWORD fdwCapabilities)
 {
     DWORD fdwContactCaps;
 
 
     // Get current capability flags
-    fdwContactCaps =  getSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
+    fdwContactCaps = getSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
 
     // Check if all requested capabilities are supported
     if ((fdwContactCaps & fdwCapabilities) == fdwCapabilities)
@@ -252,7 +252,7 @@ void AddCapabilitiesFromBuffer(HANDLE hContact, BYTE* pbyBuffer, int nLength)
     nRecordSize = sizeof(CapabilityRecord)/sizeof(icq_capability);
 
     // Get current capability flags
-    fdwContactCaps =  getSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
+    fdwContactCaps = getSettingDword(hContact, DBSETTING_CAPABILITIES, 0);
 
     // Loop over all capabilities in the buffer and
     // compare them to our own record of capabilities

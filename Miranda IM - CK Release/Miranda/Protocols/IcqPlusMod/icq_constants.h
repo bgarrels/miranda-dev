@@ -200,6 +200,7 @@
 #define CAPF_ICQ_DEVIL				0x00001000
 #define CAPF_DIRECT					0x00002000
 #define CAPF_STATUSMSGEXT           0x01000000
+#define CAPF_STATUS_MESSAGES        0x10000000	// FIXME: From official client
 
 
 // Message Capability IDs

@@ -48,7 +48,7 @@ int icq_sendFileSendDirectv7(filetransfer *ft, const char *pszFiles);
 int icq_sendFileSendDirectv8(filetransfer *ft, const char *pszFiles);
 void icq_sendFileAcceptDirect(HANDLE hContact, filetransfer *ft);
 void icq_sendFileDenyDirect(HANDLE hContact, filetransfer* ft, char *szReason);
-DWORD icq_SendDirectMessage(HANDLE hContact, const char *szMessage, int nBodyLength, WORD wPriority, message_cookie_data *pCookieData, char *szCap);
+DWORD icq_SendDirectMessage(HANDLE hContact, const char *szMessage, int nBodyLength, WORD wPriority, cookie_message_data *pCookieData, char *szCap);
 
 void icq_sendXtrazRequestDirect(HANDLE hContact, DWORD dwCookie, char* szBody, int nBodyLen, WORD wType);
 void icq_sendXtrazResponseDirect(HANDLE hContact, WORD wCookie, char* szBody, int nBodyLen, WORD wType);

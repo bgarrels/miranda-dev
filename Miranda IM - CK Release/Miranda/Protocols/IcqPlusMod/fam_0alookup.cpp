@@ -98,9 +98,9 @@ static void ReleaseLookupCookie(DWORD dwCookie, search_cookie* pCookie)
     {
         // finish everything
         if (pCookie->dwMainId)
-            ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)pCookie->dwMainId, 0);
+            BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)pCookie->dwMainId, 0);
         else // we are single
-            ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)dwCookie, 0);
+            BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)dwCookie, 0);
 
         mir_free(pCookie);
     }
@@ -138,9 +138,9 @@ void handleLookupEmailReply(BYTE* buf, WORD wLen, DWORD dwCookie)
 
             // broadcast the result
             if (pCookie->dwMainId)
-                ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_DATA, (HANDLE)pCookie->dwMainId, (LPARAM)&sr);
+                BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_DATA, (HANDLE)pCookie->dwMainId, (LPARAM)&sr);
             else
-                ICQBroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_DATA, (HANDLE)dwCookie, (LPARAM)&sr);
+                BroadcastAck(NULL, ACKTYPE_SEARCH, ACKRESULT_DATA, (HANDLE)dwCookie, (LPARAM)&sr);
             mir_free(sr.hdr.nick);
         }
         disposeChain(&pChain);

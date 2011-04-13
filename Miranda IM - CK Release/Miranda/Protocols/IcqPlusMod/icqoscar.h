@@ -43,7 +43,7 @@
 #pragma warning(disable: 4996)
 #endif
 
-#define MIRANDA_VER 0x0700
+#define MIRANDA_VER 0x0800
 #define ICQ_MODNAME "Plus"
 #define _WIN32_IE 0x0500
 
@@ -181,4 +181,3 @@ __inline static int Netlib_MyCloseHandle(HANDLE h)
 #include "IcqCore.h"
 
 extern std::list<CIcqProto*> g_Instances;
-extern CIcqProto gProtocol;

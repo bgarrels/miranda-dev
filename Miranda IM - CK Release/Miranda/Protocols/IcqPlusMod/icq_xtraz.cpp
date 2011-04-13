@@ -252,7 +252,7 @@ void handleXtrazNotifyResponse(DWORD dwUin, HANDLE hContact, WORD wCookie, char*
         NetLog_Server("Response: %s", szRes);
 #endif
 
-        ICQBroadcastAck(hContact, ICQACKTYPE_XTRAZNOTIFY_RESPONSE, ACKRESULT_SUCCESS, (HANDLE)wCookie, (LPARAM)szRes);
+        BroadcastAck(hContact, ICQACKTYPE_XTRAZNOTIFY_RESPONSE, ACKRESULT_SUCCESS, (HANDLE)wCookie, (LPARAM)szRes);
 
 NextVal:
         szNode = strstr(szRes, "<val srv_id='");
@@ -325,7 +325,7 @@ NextVal:
                             szNode += 6;
                             *szEnd = '\0';
                             szXMsg = DemangleXml(szNode, strlennull(szNode));
-                            // check if the decription changed
+                            // check if the description changed
                             szOldXMsg = getSettingStringUtf(hContact, DBSETTING_XSTATUSNAME, NULL);
                             if (strcmpnull(szOldXMsg, szXMsg))
                                 bChanged = TRUE;
@@ -333,7 +333,7 @@ NextVal:
                             setSettingStringUtf(hContact, DBSETTING_XSTATUSMSG, szXMsg);
                             mir_free(szXMsg);
                         }
-                        ICQBroadcastAck(hContact, ICQACKTYPE_XSTATUS_RESPONSE, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
+                        BroadcastAck(hContact, ICQACKTYPE_XSTATUS_RESPONSE, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
 
                         if (bChanged)
                             NotifyEventHooks(hxstatuschanged, (WPARAM)hContact, 0);
@@ -496,7 +496,7 @@ DWORD SendXtrazNotifyRequest(HANDLE hContact, char* szQuery, char* szNotify, int
     int nBodyLen;
     char *szBody;
     DWORD dwCookie;
-    message_cookie_data* pCookieData;
+    cookie_message_data* pCookieData;
 
     if (getContactUid(hContact, &dwUin, NULL))
         return 0; // Invalid contact
@@ -520,7 +520,7 @@ DWORD SendXtrazNotifyRequest(HANDLE hContact, char* szQuery, char* szNotify, int
     dwCookie = AllocateCookie(CKT_MESSAGE, 0, hContact, (void*)pCookieData);
 
     // have we a open DC, send through that
-    if (gbDCMsgEnabled && IsDirectConnectionOpen(hContact, DIRECTCONN_STANDARD, 0))
+    if (m_bDCMsgEnabled && IsDirectConnectionOpen(hContact, DIRECTCONN_STANDARD, 0))
         icq_sendXtrazRequestDirect(hContact, dwCookie, szBody, nBodyLen, MTYPE_SCRIPT_NOTIFY);
     else
         icq_sendXtrazRequestServ(dwUin, dwCookie, szBody, nBodyLen, pCookieData);

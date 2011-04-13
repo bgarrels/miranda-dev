@@ -111,7 +111,7 @@ static unsigned __stdcall icq_TryNextServerThread(LPVOID lp)
 
     icq_LogMessage(LOG_NOTE, "Server AutoChange: connection problems with current server, switching to next");
 
-    IcqSetStatus((WPARAM)iIcqNewStatus, 0);
+    CIcqProto::IcqSetStatus((WPARAM)iIcqNewStatus, 0);
 
     TryNextWorking = 0;
 

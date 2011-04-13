@@ -995,7 +995,7 @@ void CheckSelfRemove()
 
         while(hContact)
         {
-            if (gbSsiEnabled && !getSettingWord(hContact, "ServerId", 0) && !getSettingWord(hContact, "SrvIgnoreId", 0)&&
+            if (m_bSsiEnabled && !getSettingWord(hContact, "ServerId", 0) && !getSettingWord(hContact, "SrvIgnoreId", 0)&&
                     !DBGetContactSettingByte(hContact, ICQ_PROTOCOL_NAME, "CheckSelfRemove", 0))
             {
                 CHECKCONTACT chk = {0};
@@ -1019,7 +1019,7 @@ void CheckSelfRemove()
 
 }
 
-void CheckSelfRemoveShutdown()//exclude currently added contacts (not serverside) from beeing detected
+void CheckSelfRemoveShutdown()//exclude currently added contacts (not serverside) from being detected
 {
     if(!DBGetContactSettingByte(NULL,ICQ_PROTOCOL_NAME,"PopSelfRem", 0)&&!DBGetContactSettingByte(NULL,ICQ_PROTOCOL_NAME,"LogSelfRem", 0))
         return;
@@ -1029,7 +1029,7 @@ void CheckSelfRemoveShutdown()//exclude currently added contacts (not serverside
 
         while(hContact)
         {
-            if (gbSsiEnabled && !getSettingWord(hContact, "ServerId", 0) && !getSettingWord(hContact, "SrvIgnoreId", 0)&&
+            if (m_bSsiEnabled && !getSettingWord(hContact, "ServerId", 0) && !getSettingWord(hContact, "SrvIgnoreId", 0)&&
                     !DBGetContactSettingByte(hContact, ICQ_PROTOCOL_NAME, "CheckSelfRemove", 0))
                 DBWriteContactSettingByte(hContact, ICQ_PROTOCOL_NAME, "CheckSelfRemove", 1);
 

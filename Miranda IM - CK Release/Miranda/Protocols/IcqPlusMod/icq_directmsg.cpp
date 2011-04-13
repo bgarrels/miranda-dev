@@ -144,7 +144,7 @@ void handleDirectMessage(directconnect* dc, PBYTE buf, WORD wLen)
         case MTYPE_AUTODND:
         case MTYPE_AUTOFFC:
         {
-            char** szMsg = gProtocol.MirandaStatusToAwayMsg(AwayMsgTypeToStatus(bMsgType));
+            char** szMsg = MirandaStatusToAwayMsg(AwayMsgTypeToStatus(bMsgType));
 
             if (szMsg)
                 icq_sendAwayMsgReplyDirect(dc, wCookie, bMsgType, (const char**)szMsg);
@@ -184,7 +184,7 @@ void handleDirectMessage(directconnect* dc, PBYTE buf, WORD wLen)
         else
         {
             HANDLE hCookieContact;
-            message_cookie_data* pCookieData = NULL;
+            cookie_message_data* pCookieData = NULL;
 
             if (!FindCookie(wCookie, &hCookieContact, (void**)&pCookieData))
             {
@@ -227,7 +227,7 @@ void handleDirectMessage(directconnect* dc, PBYTE buf, WORD wLen)
                 if (ackType != -1)
                 {
                     // was a good ack to broadcast ?
-                    ICQBroadcastAck(dc->hContact, ackType, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
+                    BroadcastAck(dc->hContact, ackType, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
                     ReleaseCookie(wCookie);
                 }
             }
@@ -326,7 +326,7 @@ void handleDirectGreetingMessage(directconnect* dc, PBYTE buf, WORD wLen, WORD w
     else if (typeId && wCommand == DIRECT_ACK)
     {
         HANDLE hCookieContact;
-        message_cookie_data* pCookieData = NULL;
+        cookie_message_data* pCookieData = NULL;
 
         if (!FindCookie(wCookie, &hCookieContact, (void**)&pCookieData))
         {
@@ -373,7 +373,7 @@ void handleDirectGreetingMessage(directconnect* dc, PBYTE buf, WORD wLen, WORD w
             if (ackType != -1)
             {
                 // was a good ack to broadcast ?
-                ICQBroadcastAck(dc->hContact, ackType, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
+                BroadcastAck(dc->hContact, ackType, ACKRESULT_SUCCESS, (HANDLE)wCookie, 0);
             }
             // Release cookie
             ReleaseCookie(wCookie);

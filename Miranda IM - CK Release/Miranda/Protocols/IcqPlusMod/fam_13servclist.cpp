@@ -363,7 +363,7 @@ void handleServClistFam(unsigned char *pBuffer, WORD wBufferLength, snac_header*
                 {
                     // the serv-list is unavailable turn it off
                     icq_LogMessage(LOG_ERROR, "Server contact list is unavailable, Miranda will use local contact list.");
-                    gbSsiEnabled = 0;
+                    m_bSsiEnabled = 0;
                     handleServUINSettings(wListenPort, info);
                 }
                 mir_free(sc);
@@ -852,7 +852,7 @@ static void handleServerCListAck(servlistcookie* sc, WORD wError)
     }
     case SSA_SERVLIST_ACK:
     {
-        ICQBroadcastAck(sc->hContact, ICQACKTYPE_SERVERCLIST, wError?ACKRESULT_FAILED:ACKRESULT_SUCCESS, (HANDLE)sc->lParam, wError);
+        BroadcastAck(sc->hContact, ICQACKTYPE_SERVERCLIST, wError?ACKRESULT_FAILED:ACKRESULT_SUCCESS, (HANDLE)sc->lParam, wError);
         break;
     }
     case SSA_IMPORT:
@@ -1046,7 +1046,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                     // we should add new contacts and this contact was just added, show it
                     if (IsContactJustAdded(hContact))
                     {
-                        SetContactHidden(hContact, 0);
+                        setContactHidden(hContact, 0);
                         bAdded = 1; // we want details for new contacts
                     }
                     else
@@ -1311,7 +1311,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                 {
                     NetLog_Server("SSI added new %s contact '%s'", "Permit", szRecordName);
                     // It wasn't previously in the list, we hide it so it only appears in the visible list
-                    SetContactHidden(hContact, 1);
+                    setContactHidden(hContact, 1);
                     // Add it to the list, so it can be added properly if proper contact
                     AddJustAddedContact(hContact);
                 }
@@ -1352,7 +1352,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                     NetLog_Server("SSI added new %s contact '%s'", "Deny", szRecordName);
                     ReserveServerID(wItemId, SSIT_ITEM, SSIF_UNHANDLED);
                     // It wasn't previously in the list, we hide it so it only appears in the visible list
-                    SetContactHidden(hContact, 1);
+                    setContactHidden(hContact, 1);
                     // Add it to the list, so it can be added properly if proper contact
                     AddJustAddedContact(hContact);
                 }
@@ -1413,7 +1413,7 @@ static void handleServerCList(unsigned char *buf, WORD wLen, WORD wFlags, server
                     /* not already on list: add */
                     NetLog_Server("SSI added new %s contact '%s'", "Ignore", szRecordName);
                     // It wasn't previously in the list, we hide it
-                    SetContactHidden(hContact, 1);
+                    setContactHidden(hContact, 1);
                     // Add it to the list, so it can be added properly if proper contact
                     AddJustAddedContact(hContact);
                 }

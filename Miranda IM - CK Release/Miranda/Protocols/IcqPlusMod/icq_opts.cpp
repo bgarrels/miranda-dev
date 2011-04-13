@@ -304,7 +304,7 @@ static INT_PTR CALLBACK DlgProcIcqOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
         LoadDBCheckState(hwndDlg, IDC_SECURE, "SecureLogin", DEFAULT_SECURE_LOGIN);
         LoadDBCheckState(hwndDlg, IDC_SSL, "SecureConnection", DEFAULT_SECURE_CONNECTION);
         SendDlgItemMessage(hwndDlg, IDC_LOGLEVEL, TBM_SETRANGE, FALSE, MAKELONG(0, 4));
-        SendDlgItemMessage(hwndDlg, IDC_LOGLEVEL, TBM_SETPOS, TRUE, 4-getSettingByte(NULL, "ShowLogLevel", LOG_WARNING));
+        SendDlgItemMessage(hwndDlg, IDC_LOGLEVEL, TBM_SETPOS, TRUE, 4 - getSettingByte(NULL, "ShowLogLevel", LOG_WARNING));
         SetDlgItemTextUtf(hwndDlg, IDC_LEVELDESCR, ICQTranslateUtfStatic(szLogLevelDescr[4-SendDlgItemMessage(hwndDlg, IDC_LOGLEVEL, TBM_GETPOS, 0, 0)], szServer, MAX_PATH));
         ShowWindow(GetDlgItem(hwndDlg, IDC_RECONNECTREQD), SW_HIDE);
         LoadDBCheckState(hwndDlg, IDC_NOERRMULTI, "IgnoreMultiErrorBox", 0);
@@ -411,7 +411,7 @@ static INT_PTR CALLBACK DlgProcIcqOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
             char str[64];
 
             setSettingDword(NULL, UNIQUEIDSETTING, (DWORD)GetDlgItemInt(hwndDlg, IDC_ICQNUM, NULL, FALSE));
-            GetDlgItemTextA(hwndDlg, IDC_PASSWORD, str, 9);
+            GetDlgItemTextA(hwndDlg, IDC_PASSWORD, str, MAX_PATH);
             if (strlennull(str))
             {
                 strcpy(gpszPassword, str);
@@ -572,7 +572,7 @@ static INT_PTR CALLBACK DlgProcIcqPrivacyOpts(HWND hwndDlg, UINT msg, WPARAM wPa
 
                     if (gnCurrentStatus == ID_STATUS_INVISIBLE)
                     {
-                        if (gbSsiEnabled)
+                        if (m_bSsiEnabled)
                             updateServVisibilityCode(3);
                         icq_setstatus(wStatus, FALSE);
                         // Tell who is on our visible list
@@ -581,7 +581,7 @@ static INT_PTR CALLBACK DlgProcIcqPrivacyOpts(HWND hwndDlg, UINT msg, WPARAM wPa
                     else
                     {
                         icq_setstatus(wStatus, FALSE);
-                        if (gbSsiEnabled)
+                        if (m_bSsiEnabled)
                             updateServVisibilityCode(4);
                         // Tell who is on our invisible list
                         icq_sendEntireVisInvisList(1);
@@ -1107,7 +1107,7 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
             OptDlgChanged(hwndDlg);
             break;
         case IDC_XSTUPDATERATE:
-            if(GetDlgItemInt(hwndDlg, IDC_XSTUPDATERATE, 0, 0)!=getSettingDword(NULL, "XStatusUpdatePeriod", 0))
+            if(GetDlgItemInt(hwndDlg, IDC_XSTUPDATERATE, 0, 0) != getSettingDword(NULL, "XStatusUpdatePeriod", 0))
                 OptDlgChanged(hwndDlg);
             break;
         default:
@@ -1132,28 +1132,28 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
         }
         if( DBGetContactSettingByte(NULL,ICQ_PROTOCOL_NAME,"RTF", 0) != (BYTE)IsDlgButtonChecked(hwndDlg,IDC_RTF))
         {
-            MessageBox(0,TranslateW("To enable RTF text reciving you must reconnect your Miranda after option is enabled"),TranslateW("Warning"),MB_OK);
+            MessageBox(0,TranslateW("To enable RTF text receiving you must reconnect your Miranda after option is enabled"),TranslateW("Warning"),MB_OK);
             setSettingByte(NULL,"RTF",(BYTE)IsDlgButtonChecked(hwndDlg,IDC_RTF));
         }
         if (IsDlgButtonChecked(hwndDlg, IDC_UTFENABLE))
-            gbUtfEnabled = IsDlgButtonChecked(hwndDlg, IDC_UTFALL)?2:1;
+            m_bUtfEnabled = IsDlgButtonChecked(hwndDlg, IDC_UTFALL)?2:1;
         else
-            gbUtfEnabled = 0;
+            m_bUtfEnabled = 0;
         {
             int i = SendDlgItemMessage(hwndDlg, IDC_UTFCODEPAGE, CB_GETCURSEL, 0, 0);
-            gwAnsiCodepage = (WORD)SendDlgItemMessage(hwndDlg, IDC_UTFCODEPAGE, CB_GETITEMDATA, (WPARAM)i, 0);
-            setSettingWord(NULL, "AnsiCodePage", gwAnsiCodepage);
+            m_wAnsiCodepage = (WORD)SendDlgItemMessage(hwndDlg, IDC_UTFCODEPAGE, CB_GETITEMDATA, (WPARAM)i, 0);
+            setSettingWord(NULL, "AnsiCodePage", m_wAnsiCodepage);
         }
-        setSettingByte(NULL, "UtfEnabled", gbUtfEnabled);
-        gbTempVisListEnabled = (BYTE)IsDlgButtonChecked(hwndDlg, IDC_TEMPVISIBLE);
-        setSettingByte(NULL, "TempVisListEnabled", gbTempVisListEnabled);
+        setSettingByte(NULL, "UtfEnabled", m_bUtfEnabled);
+        m_bTempVisListEnabled = (BYTE)IsDlgButtonChecked(hwndDlg, IDC_TEMPVISIBLE);
+        setSettingByte(NULL, "TempVisListEnabled", m_bTempVisListEnabled);
         StoreDBCheckState(hwndDlg, IDC_SLOWSEND, "SlowSend");
         StoreDBCheckState(hwndDlg, IDC_ONLYSERVERACKS, "OnlyServerAcks");
         if (IsDlgButtonChecked(hwndDlg, IDC_DCENABLE))
-            gbDCMsgEnabled = IsDlgButtonChecked(hwndDlg, IDC_DCPASSIVE)?1:2;
+            m_bDCMsgEnabled = IsDlgButtonChecked(hwndDlg, IDC_DCPASSIVE)?1:2;
         else
-            gbDCMsgEnabled = 0;
-        setSettingByte(NULL, "DirectMessaging", gbDCMsgEnabled);
+            m_bDCMsgEnabled = 0;
+        setSettingByte(NULL, "DirectMessaging", m_bDCMsgEnabled);
         gbXStatusEnabled = (BYTE)IsDlgButtonChecked(hwndDlg, IDC_XSTATUSENABLE);
         setSettingByte(NULL, "XStatusEnabled", gbXStatusEnabled);
         StoreDBCheckState(hwndDlg, IDC_DCICON, "ShowDCIcon");

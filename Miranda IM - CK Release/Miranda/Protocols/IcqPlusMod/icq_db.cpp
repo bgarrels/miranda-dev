@@ -37,17 +37,14 @@
 
 #include "icqoscar.h"
 
-
-static BOOL bUtfReadyDB = FALSE;
-
 void InitDB()
 {
-    bUtfReadyDB = ServiceExists(MS_DB_CONTACT_GETSETTING_STR);
-    if (!bUtfReadyDB)
-        NetLog_Server("Warning: DB module does not support Unicode.");
+    //gProtocol.bUtfReadyDB = ServiceExists(MS_DB_CONTACT_GETSETTING_STR);
+    //if (!gProtocol.bUtfReadyDB)
+    //    NetLog_Server("Warning: DB module does not support Unicode.");
 }
 
-void CreateResidentSetting(const char* szSetting)
+void CIcqProto::_CreateResidentSetting(const char* szSetting)
 {
     char pszSetting[2*MAX_PATH];
 
@@ -57,23 +54,17 @@ void CreateResidentSetting(const char* szSetting)
     CallService(MS_DB_SETSETTINGRESIDENT, 1, (WPARAM)pszSetting);
 }
 
-
-
-BYTE getSettingByte(HANDLE hContact, const char* szSetting, BYTE bDef)
+BYTE CIcqProto::_getSettingByte(HANDLE hContact, const char* szSetting, BYTE bDef)
 {
     return DBGetContactSettingByte(hContact, ICQ_PROTOCOL_NAME, szSetting, bDef);
 }
 
-
-
-WORD getSettingWord(HANDLE hContact, const char* szSetting, WORD wDef)
+WORD CIcqProto::_getSettingWord(HANDLE hContact, const char* szSetting, WORD wDef)
 {
     return DBGetContactSettingWord(hContact, ICQ_PROTOCOL_NAME, szSetting, wDef);
 }
 
-
-
-DWORD getSettingDword(HANDLE hContact, const char* szSetting, DWORD dwDef)
+DWORD CIcqProto::_getSettingDword(HANDLE hContact, const char* szSetting, DWORD dwDef)
 {
     DBVARIANT dbv;
     DBCONTACTGETSETTING cgs;
@@ -94,12 +85,12 @@ DWORD getSettingDword(HANDLE hContact, const char* szSetting, DWORD dwDef)
     return dwRes;
 }
 
-double getSettingDouble(HANDLE hContact, const char *szSetting, double dDef)
+double CIcqProto::_getSettingDouble(HANDLE hContact, const char *szSetting, double dDef)
 {
     DBVARIANT dbv = {DBVT_DELETED};
     double dRes;
 
-    if (getSetting(hContact, szSetting, &dbv))
+    if (_getSetting(hContact, szSetting, &dbv))
         return dDef; // not found, give default
 
     if (dbv.type != DBVT_BLOB || dbv.cpbVal != sizeof(double))
@@ -111,16 +102,12 @@ double getSettingDouble(HANDLE hContact, const char *szSetting, double dDef)
     return dRes;
 }
 
-
-
-DWORD getContactUin(HANDLE hContact)
+DWORD CIcqProto::_getContactUin(HANDLE hContact)
 {
-    return getSettingDword(hContact, UNIQUEIDSETTING, 0);
+    return _getSettingDword(hContact, UNIQUEIDSETTING, 0);
 }
 
-
-
-int getContactUid(HANDLE hContact, DWORD *pdwUin, uid_str* ppszUid)
+int CIcqProto::_getContactUid(HANDLE hContact, DWORD *pdwUin, uid_str* ppszUid)
 {
     DBVARIANT dbv;
     int iRes = 1;
@@ -128,7 +115,7 @@ int getContactUid(HANDLE hContact, DWORD *pdwUin, uid_str* ppszUid)
     *pdwUin = 0;
     if (ppszUid) *ppszUid[0] = '\0';
 
-    if (!getSetting(hContact, UNIQUEIDSETTING, &dbv))
+    if (!_getSetting(hContact, UNIQUEIDSETTING, &dbv))
     {
         if (dbv.type == DBVT_DWORD)
         {
@@ -137,7 +124,7 @@ int getContactUid(HANDLE hContact, DWORD *pdwUin, uid_str* ppszUid)
         }
         else if (dbv.type == DBVT_ASCIIZ)
         {
-            if (ppszUid && gbAimEnabled)
+            if (ppszUid && m_bAimEnabled)
             {
                 strcpy(*ppszUid, dbv.pszVal);
                 iRes = 0;
@@ -150,72 +137,60 @@ int getContactUid(HANDLE hContact, DWORD *pdwUin, uid_str* ppszUid)
     return iRes;
 }
 
-
-
-int getSetting(HANDLE hContact, const char* szSetting, DBVARIANT *dbv)
+int CIcqProto::_getSetting(HANDLE hContact, const char* szSetting, DBVARIANT *dbv)
 {
-    if (bUtfReadyDB)
+    //if (bUtfReadyDB)	// FIXME
         return DBGetContactSettingW(hContact, ICQ_PROTOCOL_NAME, szSetting, dbv);
-    else
-        return DBGetContactSetting(hContact, ICQ_PROTOCOL_NAME, szSetting, dbv);
+    //else
+    //    return DBGetContactSetting(hContact, ICQ_PROTOCOL_NAME, szSetting, dbv);
 }
 
-
-
-int getSettingString(HANDLE hContact, const char* szSetting, DBVARIANT *dbv)
+int CIcqProto::_getSettingString(HANDLE hContact, const char* szSetting, DBVARIANT *dbv)
 {
-    if (bUtfReadyDB)
+    //if (bUtfReadyDB)	// FIXME
         return DBGetContactSettingString(hContact, ICQ_PROTOCOL_NAME, szSetting, dbv);
-    else
-        return getSetting(hContact, szSetting, dbv);
+    //else
+    //    return _getSetting(hContact, szSetting, dbv);
 }
 
-
-
-char* getSettingStringUtf(HANDLE hContact, const char *szModule,const char* szSetting, char* szDef)
+char* CIcqProto::_getSettingStringUtf(HANDLE hContact, const char *szModule,const char* szSetting, char* szDef)
 {
     DBVARIANT dbv = {DBVT_DELETED};
     char* szRes;
 
-    if (bUtfReadyDB)
-    {
+    //if (bUtfReadyDB)	// FIXME
+    //{
         if (DBGetContactSettingTString(hContact, szModule, szSetting, &dbv))
             return null_strdup(szDef);
 
         szRes = mir_utf8encodeW(dbv.ptszVal);
         ICQFreeVariant(&dbv);
-    }
-    else
-    {
-        // old DB, we need to convert the string to UTF-8
-        if (DBGetContactSetting(hContact, szModule, szSetting, &dbv))
-            return null_strdup(szDef);
+    //}
+    //else
+    //{
+    //    // old DB, we need to convert the string to UTF-8
+    //    if (DBGetContactSetting(hContact, szModule, szSetting, &dbv))
+    //        return null_strdup(szDef);
 
-        szRes = mir_utf8encode(dbv.pszVal);
+    //    szRes = mir_utf8encode(dbv.pszVal);
 
-        ICQFreeVariant(&dbv);
-    }
+    //    ICQFreeVariant(&dbv);
+    //}
     return szRes;
 }
 
-
-
-char* getSettingStringUtf(HANDLE hContact, const char* szSetting, char* szDef)
+char* CIcqProto::_getSettingStringUtf(HANDLE hContact, const char* szSetting, char* szDef)
 {
-    return getSettingStringUtf(hContact, ICQ_PROTOCOL_NAME, szSetting, szDef);
+    return _getSettingStringUtf(hContact, ICQ_PROTOCOL_NAME, szSetting, szDef);
 }
 
-
-
-WORD getContactStatus(HANDLE hContact)
+WORD CIcqProto::_getContactStatus(HANDLE hContact)
 {
-    return getSettingWord(hContact, "Status", ID_STATUS_OFFLINE);
+    return _getSettingWord(hContact, "Status", ID_STATUS_OFFLINE);
 }
-
-
 
 // (c) by George Hazan
-int getSettingStringStatic(HANDLE hContact, const char* valueName, char* dest, int dest_len)
+int CIcqProto::_getSettingStringStatic(HANDLE hContact, const char* valueName, char* dest, int dest_len)
 {
     DBVARIANT dbv;
     DBCONTACTGETSETTING sVal;
@@ -241,59 +216,49 @@ int getSettingStringStatic(HANDLE hContact, const char* valueName, char* dest, i
     return (dbv.type != DBVT_ASCIIZ);
 }
 
-
-
-int deleteSetting(HANDLE hContact, const char* szSetting)
+int CIcqProto::_deleteSetting(HANDLE hContact, const char* szSetting)
 {
     return DBDeleteContactSetting(hContact, ICQ_PROTOCOL_NAME, szSetting);
 }
 
-
-
-int setSettingByte(HANDLE hContact, const char* szSetting, BYTE bValue)
+int CIcqProto::_setSettingByte(HANDLE hContact, const char* szSetting, BYTE bValue)
 {
     return DBWriteContactSettingByte(hContact, ICQ_PROTOCOL_NAME, szSetting, bValue);
 }
 
-
-
-int setSettingWord(HANDLE hContact, const char* szSetting, WORD wValue)
+int CIcqProto::_setSettingWord(HANDLE hContact, const char* szSetting, WORD wValue)
 {
     return DBWriteContactSettingWord(hContact, ICQ_PROTOCOL_NAME, szSetting, wValue);
 }
 
-
-
-int setSettingDword(HANDLE hContact, const char* szSetting, DWORD dwValue)
+int CIcqProto::_setSettingDword(HANDLE hContact, const char* szSetting, DWORD dwValue)
 {
     return DBWriteContactSettingDword(hContact, ICQ_PROTOCOL_NAME, szSetting, dwValue);
 }
 
-int setSettingDouble(HANDLE hContact, const char *szSetting, double dValue)
+int CIcqProto::_setSettingDouble(HANDLE hContact, const char *szSetting, double dValue)
 {
-    return setSettingBlob(hContact, szSetting, (BYTE*)&dValue, sizeof(double));
+    return _setSettingBlob(hContact, szSetting, (BYTE*)&dValue, sizeof(double));
 }
 
-
-
-int setSettingString(HANDLE hContact, const char* szSetting, char* szValue)
+int CIcqProto::_setSettingString(HANDLE hContact, const char* szSetting, char* szValue)
 {
     return DBWriteContactSettingString(hContact, ICQ_PROTOCOL_NAME, szSetting, szValue);
 }
 
-int setSettingStringUtf(HANDLE hContact, const char *szModule,const char* szSetting, char* szValue)
+int CIcqProto::_setSettingStringUtf(HANDLE hContact, const char *szModule,const char* szSetting, char* szValue)
 {
     TCHAR *tmp = mir_utf8decodeW(szValue);
     return DBWriteContactSettingTString(hContact, szModule, szSetting, tmp);
     mir_free(tmp);
 }
 
-int setSettingStringUtf(HANDLE hContact, const char* szSetting, char* szValue)
+int CIcqProto::_setSettingStringUtf(HANDLE hContact, const char* szSetting, char* szValue)
 {
-    return setSettingStringUtf(hContact, ICQ_PROTOCOL_NAME, szSetting, szValue);
+    return _setSettingStringUtf(hContact, ICQ_PROTOCOL_NAME, szSetting, szValue);
 }
 
-int setSettingBlob(HANDLE hContact,const char *szSetting, BYTE *val, const int cbVal)
+int CIcqProto::_setSettingBlob(HANDLE hContact,const char *szSetting, BYTE *val, const int cbVal)
 {
     DBCONTACTWRITESETTING cws;
 
@@ -305,7 +270,7 @@ int setSettingBlob(HANDLE hContact,const char *szSetting, BYTE *val, const int c
     return CallService(MS_DB_CONTACT_WRITESETTING, (WPARAM)hContact,(LPARAM)&cws);
 }
 
-int setContactHidden(HANDLE hContact, BYTE bHidden)
+int CIcqProto::_setContactHidden(HANDLE hContact, BYTE bHidden)
 {
 	int nResult = DBWriteContactSettingByte(hContact, "CList", "Hidden", bHidden);
 
@@ -315,13 +280,13 @@ int setContactHidden(HANDLE hContact, BYTE bHidden)
 	return nResult;
 }
 
-void setStatusMsgVar(HANDLE hContact, char* szStatusMsg, bool isAnsi)
+void CIcqProto::_setStatusMsgVar(HANDLE hContact, char* szStatusMsg, bool isAnsi)
 {
 	if (szStatusMsg && szStatusMsg[0])
 	{
 		if (isAnsi)
 		{
-			char* szStatusNote = getSettingStringUtf(hContact, DBSETTING_STATUS_NOTE, "");
+			char* szStatusNote = _getSettingStringUtf(hContact, DBSETTING_STATUS_NOTE, "");
 			wchar_t* szStatusNoteW = make_unicode_string(szStatusNote);
 			int len = (int)wcslen(szStatusNoteW) * 3 + 1;
 			char* szStatusNoteAnsi = (char*)alloca(len);
@@ -360,7 +325,7 @@ void setStatusMsgVar(HANDLE hContact, char* szStatusMsg, bool isAnsi)
 		}
 
 		if (!oldStatusMsg || strcmp(oldStatusMsg, szStatusMsg))
-			setSettingStringUtf(hContact, "CList", "StatusMsg", szStatusMsg);
+			_setSettingStringUtf(hContact, "CList", "StatusMsg", szStatusMsg);
 		SAFE_FREE(&oldStatusMsg);
 		if (isAnsi) SAFE_FREE(&szStatusMsg);
 	}
@@ -368,23 +333,14 @@ void setStatusMsgVar(HANDLE hContact, char* szStatusMsg, bool isAnsi)
 		DBDeleteContactSetting(hContact, "CList", "StatusMsg");
 }
 
-int ICQFreeVariant(DBVARIANT* dbv)
-{
-    return DBFreeVariant(dbv);
-}
-
-
-
-int IsICQContact(HANDLE hContact)
+int CIcqProto::_IsICQContact(HANDLE hContact)
 {
     char* szProto = (char*)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)hContact, 0);
 
     return !strcmpnull(szProto, ICQ_PROTOCOL_NAME);
 }
 
-
-
-HANDLE AddEvent(HANDLE hContact, WORD wType, DWORD dwTime, DWORD flags, DWORD cbBlob, PBYTE pBlob)
+HANDLE CIcqProto::_AddEvent(HANDLE hContact, WORD wType, DWORD dwTime, DWORD flags, DWORD cbBlob, PBYTE pBlob)
 {
     DBEVENTINFO dbei = {0};
 
@@ -399,28 +355,23 @@ HANDLE AddEvent(HANDLE hContact, WORD wType, DWORD dwTime, DWORD flags, DWORD cb
     return (HANDLE)CallService(MS_DB_EVENT_ADD, (WPARAM)hContact, (LPARAM)&dbei);
 }
 
-
-
-HANDLE FindFirstContact()
+HANDLE CIcqProto::_FindFirstContact()
 {
     HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, (LPARAM)ICQ_PROTOCOL_NAME);
 
-    if (IsICQContact(hContact))
-    {
+    if (_IsICQContact(hContact))
         return hContact;
-    }
-    return FindNextContact(hContact);
+
+	return _FindNextContact(hContact);
 }
 
-
-
-HANDLE FindNextContact(HANDLE hContact)
+HANDLE CIcqProto::_FindNextContact(HANDLE hContact)
 {
     hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT,(WPARAM)hContact,(LPARAM)ICQ_PROTOCOL_NAME);
 
     while (hContact != NULL)
     {
-        if (IsICQContact(hContact))
+        if (_IsICQContact(hContact))
         {
             return hContact;
         }
@@ -429,17 +380,12 @@ HANDLE FindNextContact(HANDLE hContact)
     return hContact;
 }
 
-
-
-char* getContactCListGroup(HANDLE hContact)
+char* CIcqProto::_getContactCListGroup(HANDLE hContact)
 {
-    return getSettingStringUtf(hContact, "CList", "Group", NULL);
+    return _getSettingStringUtf(hContact, "CList", "Group", NULL);
 }
 
-
-
-int ICQSetContactCListGroup(HANDLE hContact, const char *szGroup)
+int ICQFreeVariant(DBVARIANT* dbv)
 {
-    /// TODO
-    return 0;
+	return DBFreeVariant(dbv);
 }

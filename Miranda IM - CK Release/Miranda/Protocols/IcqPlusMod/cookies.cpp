@@ -300,7 +300,7 @@ int FindCookieByType(BYTE bType, DWORD *pdwCookie, HANDLE *phContact, void** ppv
 
 
 
-int FindMessageCookie(DWORD dwMsgID1, DWORD dwMsgID2, DWORD *pdwCookie, HANDLE *phContact, message_cookie_data **ppvExtra)
+int FindMessageCookie(DWORD dwMsgID1, DWORD dwMsgID2, DWORD *pdwCookie, HANDLE *phContact, cookie_message_data **ppvExtra)
 {
     int i;
     int nFound = 0;
@@ -313,7 +313,7 @@ int FindMessageCookie(DWORD dwMsgID1, DWORD dwMsgID2, DWORD *pdwCookie, HANDLE *
         if (cookie[i].bType == CKT_MESSAGE || cookie[i].bType == CKT_FILE || cookie[i].bType == CKT_REVERSEDIRECT)
         {
             // message cookie found
-            message_cookie_data *pCookie = (message_cookie_data*)cookie[i].pvExtra;
+            cookie_message_data *pCookie = (cookie_message_data*)cookie[i].pvExtra;
 
             if (pCookie->dwMsgID1 == dwMsgID1 && pCookie->dwMsgID2 == dwMsgID2)
             {
@@ -379,7 +379,7 @@ void ReleaseCookie(DWORD dwCookie)
 
 
 
-void InitMessageCookie(message_cookie_data *pCookie)
+void InitMessageCookie(cookie_message_data *pCookie)
 {
     DWORD dwMsgID1;
     DWORD dwMsgID2;
@@ -401,11 +401,11 @@ void InitMessageCookie(message_cookie_data *pCookie)
 
 
 
-message_cookie_data *CreateMessageCookie(WORD bMsgType, BYTE bAckType)
+cookie_message_data *CreateMessageCookie(WORD bMsgType, BYTE bAckType)
 {
-    message_cookie_data *pCookie = NULL;
+    cookie_message_data *pCookie = NULL;
 
-    pCookie = (message_cookie_data*)icq_alloc_zero(bMsgType == MTYPE_PLAIN ? sizeof(message_cookie_data_ex) : sizeof(message_cookie_data));
+    pCookie = (cookie_message_data*)icq_alloc_zero(bMsgType == MTYPE_PLAIN ? sizeof(cookie_message_data_ext) : sizeof(cookie_message_data));
     if (pCookie)
     {
         pCookie->bMessageType = bMsgType;
