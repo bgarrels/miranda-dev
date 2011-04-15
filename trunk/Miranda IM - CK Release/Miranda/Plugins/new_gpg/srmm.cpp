@@ -34,11 +34,13 @@ int __cdecl onWindowEvent(WPARAM wParam, LPARAM lParam) {
 
 int __cdecl onIconPressed(WPARAM wParam, LPARAM lParam) {
 	HANDLE hContact = (HANDLE)wParam;
+	HANDLE hMeta = hContact;
 	if(metaIsProtoMetaContacts(hContact))
 		hContact = metaGetMostOnline(hContact); // возьмем тот, через который пойдет сообщение
-
+	else if(metaIsSubcontact(hContact))
+		hMeta = metaGetContact(hContact);
 	StatusIconClickData *sicd = (StatusIconClickData *)lParam;
-	if(strcmp(sicd->szModule, szGPGModuleName) !=  0) 
+	if(strcmp(sicd->szModule, szGPGModuleName)) 
 		return 0; // not our event
 	
 	void setSrmmIcon(HANDLE);
@@ -48,6 +50,7 @@ int __cdecl onIconPressed(WPARAM wParam, LPARAM lParam) {
 	if(enc)
 	{
 		DBWriteContactSettingByte(hContact, szGPGModuleName, "GPGEncryption", 0);
+		DBWriteContactSettingByte(hMeta, szGPGModuleName, "GPGEncryption", 0);
 		setSrmmIcon(hContact);
 		setClistIcon(hContact);
 	}
@@ -65,6 +68,7 @@ int __cdecl onIconPressed(WPARAM wParam, LPARAM lParam) {
 		else
 		{
 			DBWriteContactSettingByte(hContact, szGPGModuleName, "GPGEncryption", 1);
+			DBWriteContactSettingByte(hMeta, szGPGModuleName, "GPGEncryption", 1);
 			setSrmmIcon(hContact);
 			setClistIcon(hContact);
 			return 0;
@@ -72,6 +76,7 @@ int __cdecl onIconPressed(WPARAM wParam, LPARAM lParam) {
 		if(isContactHaveKey(hContact))
 		{
 			DBWriteContactSettingByte(hContact, szGPGModuleName, "GPGEncryption", 1);
+			DBWriteContactSettingByte(hMeta, szGPGModuleName, "GPGEncryption", 1);
 			setSrmmIcon(hContact);
 			setClistIcon(hContact);
 		}
