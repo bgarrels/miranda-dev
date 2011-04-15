@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: srmm.cpp 13534 2011-03-31 18:40:23Z george.hazan $
+ * $Id: srmm.cpp 13596 2011-04-15 19:07:23Z george.hazan $
  *
  * plugin loading functions and global exports.
  *
@@ -50,25 +50,26 @@ LOGFONT lfDefault = {0};
 
 struct LIST_INTERFACE li;
 struct MM_INTERFACE mmi;
+int    hLangpack;
 TIME_API tmi = {0};
 
 PLUGININFOEX pluginInfo = {
 	sizeof(PLUGININFOEX),
 #ifdef __GNUWIN32__
-	"TabSRMM (MINGW32) CK Release",
+	"TabSRMM (MINGW32)",
 #else
 #ifdef _WIN64
-	"TabSRMM (x64, Unicode) CK Release",
+	"TabSRMM (x64, Unicode)",
 #else
 #ifdef _UNICODE
-	"TabSRMM (Unicode) CK Release",
+	"TabSRMM (Unicode)",
 #else
-	"TabSRMM CK Release",
+	"TabSRMM",
 #endif
 #endif
 #endif
 	PLUGIN_MAKE_VERSION(_VER_MAJOR, _VER_MINOR, _VER_REVISION, _VER_BUILD),
-	"IM and group chat module for Miranda IM. Mod for CK Pack.",
+	"IM and group chat module for Miranda IM.",
 	"The Miranda developers team and contributors",
 	"silvercircle _at_ gmail _dot_ com",
 	"2000-2010 Miranda Project and contributors. See readme.txt for more.",
@@ -113,13 +114,13 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK * link)
 	mir_getMMI(&mmi);
 	mir_getLI(&li);
 	mir_getTMI(&tmi);
+	mir_getLP(&pluginInfo);
 
 	CTranslator::preTranslateAll();
 
 	M = new CMimAPI();
 
 	SystemParametersInfo(SPI_GETICONTITLELOGFONT, sizeof(lfDefault), &lfDefault, FALSE);
-	lstrcpy(lfDefault.lfFaceName, _T("Verdana"));
 
 	Chat_Load(pluginLink);
 

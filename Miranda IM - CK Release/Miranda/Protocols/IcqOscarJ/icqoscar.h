@@ -24,8 +24,8 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icqoscar.h $
-// Revision       : $Revision: 12915 $
-// Last change on : $Date: 2010-10-07 23:03:05 +0200 (Do, 07. Okt 2010) $
+// Revision       : $Revision: 13596 $
+// Last change on : $Date: 2011-04-15 21:07:23 +0200 (Fr, 15. Apr 2011) $
 // Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
@@ -34,7 +34,7 @@
 //
 // -----------------------------------------------------------------------------
 
-#define MIRANDA_VER 0x0900
+#define MIRANDA_VER 0x1000
 
 #define _WIN32_WINNT 0x0501
 #define _WIN32_IE 0x0501

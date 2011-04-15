@@ -28,6 +28,7 @@ HINSTANCE g_hInst = 0;
 PLUGINLINK  *pluginLink;
 MM_INTERFACE mmi;
 LIST_INTERFACE li;
+int hLangpack;
 
 static char     g_szDataPath[MAX_PATH];		// user datae path (read at startup only)
 #if defined(_UNICODE)
@@ -59,12 +60,7 @@ static CRITICAL_SECTION cachecs, alloccs;
 
 static int ComparePicture( const protoPicCacheEntry* p1, const protoPicCacheEntry* p2 )
 {
-	if ((lstrcmpA(p1->szProtoname, "Global avatar") == 0) || strstr(p1->szProtoname, "Global avatar"))
-		return -1;
-	else if ((lstrcmpA(p2->szProtoname, "Global avatar") == 0) || strstr(p1->szProtoname, "Global avatar"))
-		return 1;
-	else
-		return lstrcmpA( p1->szProtoname, p2->szProtoname );
+	return lstrcmpA( p1->szProtoname, p2->szProtoname );
 }
 
 OBJLIST<protoPicCacheEntry>
@@ -100,35 +96,18 @@ int Proto_GetDelayAfterFail(const char *proto);
 
 FI_INTERFACE *fei = 0;
 
-PLUGININFO pluginInfo = {
-    sizeof(PLUGININFO),
-#if defined(_UNICODE)
-	"Avatar service (Unicode) Mataes Release",
-#else
-	"Avatar service Mataes Release",
-#endif
-	__VERSION_DWORD,
-	"Load and manage contact pictures for other plugins. Mod for Mataes Pack.",
-	"Nightwish, Pescuma",
-	"",
-	"Copyright 2000-2011 Miranda-IM project",
-	"http://www.miranda-im.org",
-	UNICODE_AWARE,
-	0
-};
-
 PLUGININFOEX pluginInfoEx = {
     sizeof(PLUGININFOEX),
 #if defined(_UNICODE)
-	"Avatar service (Unicode) Mataes Release",
+	"Avatar service (Unicode)",
 #else
-	"Avatar service Mataes Release",
+	"Avatar service",
 #endif
 	__VERSION_DWORD,
-	"Load and manage contact pictures for other plugins. Mod for Mataes Pack.",
+	"Load and manage contact pictures for other plugins",
 	"Nightwish, Pescuma",
 	"",
-	"Copyright 2000-2011 Miranda-IM project",
+	"Copyright 2000-2005 Miranda-IM project",
 	"http://www.miranda-im.org",
 	UNICODE_AWARE,
 	0,
@@ -580,31 +559,6 @@ int CreateAvatarInCache(HANDLE hContact, avatarCacheEntry *ace, char *szProto)
 				AVS_pathToAbsolute(dbv.pszVal, szFilename);
 				DBFreeVariant(&dbv);
 			}
-			// Unsane: try to load default avatar
-			else
-			{
-				if (lstrcmpA(szProto, AVS_DEFAULT))
-				{
-					if (!DBGetContactSettingString(NULL, PPICT_MODULE, AVS_DEFAULT, &dbv))
-					{
-						AVS_pathToAbsolute(dbv.pszVal, szFilename);
-						DBFreeVariant(&dbv);
-					}
-					if (!strstr(szProto, "Global avatar for"))
-					{
-						PROTOACCOUNT* pdescr = (PROTOACCOUNT*)CallService(MS_PROTO_GETACCOUNT, 0, (LPARAM)szProto);
-						if (pdescr == NULL)
-							return -1;
-						char key[MAX_PATH];
-						mir_snprintf(key, SIZEOF(key), "Global avatar for %s accounts", pdescr->szProtoName);
-						if (!DBGetContactSettingString(NULL, PPICT_MODULE, key, &dbv))
-						{
-							AVS_pathToAbsolute(dbv.pszVal, szFilename);
-							DBFreeVariant(&dbv);
-						}
-					}
-				}
-			}
 		}
 		else if(hContact == (HANDLE)-1) {	// create own picture - note, own avatars are not on demand, they are loaded once at
 			// startup and everytime they are changed.
@@ -631,11 +585,6 @@ int CreateAvatarInCache(HANDLE hContact, avatarCacheEntry *ace, char *szProto)
 	}
 	if(lstrlenA(szFilename) < 4)
 		return -1;
-
- 	// Unsane: core vars support
- 	char* tmpPath = Utils_ReplaceVars(szFilename);
- 	mir_snprintf(szFilename, sizeof(szFilename), "%s", tmpPath);
- 	mir_free(tmpPath);
 
 	if((hFile = CreateFileA(szFilename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL)) == INVALID_HANDLE_VALUE) {
 		return -2;
@@ -2058,36 +2007,6 @@ static int DestroyServicesAndEvents()
 	return 0;
 }
 
-// Unsane: load default avatar func
-static void LoadDefaultInfo()
-{
-	protoPicCacheEntry* pce = new protoPicCacheEntry;
-	if (CreateAvatarInCache(0, pce, AVS_DEFAULT) != 1)
-		DBDeleteContactSetting(0, PPICT_MODULE, AVS_DEFAULT);
-
-	pce->szProtoname = mir_strdup(AVS_DEFAULT);
-	pce->tszAccName = mir_tstrdup(_T(AVS_DEFAULT));
-	g_ProtoPictures.insert(pce);
-}
-
-static void LoadProtoInfo( PROTOCOLDESCRIPTOR* proto )
-{
-	if ( proto->type == PROTOTYPE_PROTOCOL && proto->cbSize == sizeof( *proto ))
-	{
-		char protoName[MAX_PATH];
-		mir_snprintf(protoName, SIZEOF(protoName), Translate("Global avatar for %s accounts"), proto->szName);
-		TCHAR *protoNameTmp = mir_a2t(protoName);
-		protoPicCacheEntry* pce = new protoPicCacheEntry;
-		if (CreateAvatarInCache(0, pce, protoName) != 1)
-			DBDeleteContactSetting(0, PPICT_MODULE, protoName);
-
-		pce->szProtoname = mir_strdup(protoName);
-		pce->tszAccName = mir_tstrdup(protoNameTmp);
-		g_ProtoPictures.insert(pce);
-		mir_free(protoNameTmp);
-	}
-}
-
 static void LoadAccountInfo( PROTOACCOUNT* acc )
 {
 	protoPicCacheEntry* pce = new protoPicCacheEntry;
@@ -2148,10 +2067,10 @@ static int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 	if (ServiceExists(MS_FOLDERS_REGISTER_PATH))
 	{
 		hMyAvatarsFolder = (HANDLE) FoldersRegisterCustomPath("Avatars", "My Avatars",
-			MIRANDA_USERDATA "\\Avatars");
+			PROFILE_PATH "\\" CURRENT_PROFILE "\\MyAvatars");
 
 		hGlobalAvatarFolder = (HANDLE) FoldersRegisterCustomPath("Avatars", "My Global Avatar Cache",
-			MIRANDA_USERDATA "\\Avatars");
+			FOLDER_AVATARS "\\GlobalAvatar");
 	}
 
 	g_AvatarHistoryAvail = ServiceExists(MS_AVATARHISTORY_ENABLED);
@@ -2168,17 +2087,8 @@ static int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 	ProtoEnumAccounts( &accCount, &accs );
 
 	if ( fei != NULL )
-	{
-		// Unsane: load default avatar
-		LoadDefaultInfo();
-		PROTOCOLDESCRIPTOR** proto;
-		int protoCount;
-		CallService(MS_PROTO_ENUMPROTOS, ( WPARAM )&protoCount, ( LPARAM )&proto);
-		for ( i=0; i < protoCount; i++ )
-			LoadProtoInfo( proto[i] );
 		for(i = 0; i < accCount; i++)
 			LoadAccountInfo( accs[i] );
-	}
 
 	// Load global avatar
 	protoPicCacheEntry* pce = new protoPicCacheEntry;
@@ -2564,9 +2474,7 @@ static int LoadAvatarModule()
 	if (AvsAlphaBlend == NULL && (hDll = LoadLibraryA("msimg32.dll")))
 		AvsAlphaBlend = (BOOL (WINAPI *)(HDC, int, int, int, int, HDC, int, int, int, int, BLENDFUNCTION)) GetProcAddress(hDll, "AlphaBlend");
 
- 	// Unsane: change relative path from profile folder, to programm folder
- 	char* tmpPath = Utils_ReplaceVars("%miranda_path%");
-
+	char* tmpPath = Utils_ReplaceVars("%miranda_userdata%");
 	lstrcpynA(g_szDataPath, tmpPath, sizeof(g_szDataPath)-1);
 	mir_free(tmpPath);
 	g_szDataPath[MAX_PATH - 1] = 0;
@@ -2589,7 +2497,7 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hInstDLL, DWORD dwReason, LPVOID reserv
 
 extern "C" __declspec(dllexport) PLUGININFOEX * MirandaPluginInfoEx(DWORD mirandaVersion)
 {
-	if (mirandaVersion < PLUGIN_MAKE_VERSION(0, 8, 0, 9))
+	if (mirandaVersion < MIRANDA_VERSION_CORE)
 		return NULL;
 	return &pluginInfoEx;
 }
@@ -2605,6 +2513,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK * link)
 	INT_PTR result = CALLSERVICE_NOTFOUND;
 
 	pluginLink = link;
+	mir_getLP( &pluginInfoEx );
 
 	if(ServiceExists(MS_IMG_GETINTERFACE))
 		result = CallService(MS_IMG_GETINTERFACE, FI_IF_VERSION, (LPARAM)&fei);

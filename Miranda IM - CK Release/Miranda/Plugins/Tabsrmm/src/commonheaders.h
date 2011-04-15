@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: commonheaders.h 13534 2011-03-31 18:40:23Z george.hazan $
+ * $Id: commonheaders.h 13596 2011-04-15 19:07:23Z george.hazan $
  *
  * global include file, used to build the precompiled header.
  *
@@ -54,7 +54,7 @@
 #define _WIN32_IE 0x0501
 #define WIN32_LEAN_AND_MEAN
 
-#define MIRANDA_VER 0x0900
+#define MIRANDA_VER 0x1000
 
 #include <m_stdhdr.h>
 
