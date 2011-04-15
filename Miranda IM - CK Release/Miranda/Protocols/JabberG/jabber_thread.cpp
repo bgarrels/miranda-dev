@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13535 $
-Last change on : $Date: 2011-04-02 05:10:52 +0200 (Sa, 02. Apr 2011) $
+Revision       : $Revision: 13594 $
+Last change on : $Date: 2011-04-14 05:52:36 +0200 (Do, 14. Apr 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -477,7 +477,7 @@ LBL_FatalError:
 				if ( nSelRes == -1 ) // error
 					break;
 				else if ( nSelRes == 0 ) {
-					if ( m_options.EnableServerXMPPPing && ( m_ThreadInfo->jabberServerCaps & JABBER_CAPS_PING ))
+					if ( m_ThreadInfo->jabberServerCaps & JABBER_CAPS_PING )
 						info->send( 
 							XmlNodeIq( m_iqManager.AddHandler( &CJabberProto::OnPingReply, JABBER_IQ_TYPE_GET, NULL, 0, -1, this, 0, m_options.ConnectionKeepAliveTimeout ))
 								<< XCHILDNS( _T("ping"), _T(JABBER_FEAT_PING)));

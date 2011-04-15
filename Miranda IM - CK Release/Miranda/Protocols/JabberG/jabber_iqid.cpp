@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13518 $
-Last change on : $Date: 2011-03-28 17:54:19 +0200 (Mo, 28. Mrz 2011) $
-Last change by : $Author: maxim.mluhov $
+Revision       : $Revision: 13592 $
+Last change on : $Date: 2011-04-14 05:27:35 +0200 (Do, 14. Apr 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -51,12 +51,18 @@ void CJabberProto::OnIqResultServerDiscoInfo( HXML iqNode )
 		for ( i = 1; ( identity = xmlGetNthChild( query, _T("identity"), i )) != NULL; i++ ) {
 			const TCHAR *identityCategory = xmlGetAttrValue( identity, _T("category"));
 			const TCHAR *identityType = xmlGetAttrValue( identity, _T("type"));
+			const TCHAR *identityName = xmlGetAttrValue( identity, _T("name"));
 			if ( identityCategory && identityType && !_tcscmp( identityCategory, _T("pubsub") ) && !_tcscmp( identityType, _T("pep")) ) {
 				m_bPepSupported = TRUE;
 
 				EnableMenuItems( TRUE );
 				RebuildInfoFrame();
-				break;
+			}
+			else if ( identityCategory && identityType && identityName &&
+				!_tcscmp( identityCategory, _T("server")) && 
+				!_tcscmp( identityType, _T("im")) && 
+				!_tcscmp( identityName, _T("Google Talk"))) {
+					m_ThreadInfo->jabberServerCaps |= JABBER_CAPS_PING;
 			}
 		}
 		if ( m_ThreadInfo ) {
