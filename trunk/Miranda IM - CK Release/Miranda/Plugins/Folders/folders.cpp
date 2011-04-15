@@ -156,6 +156,8 @@ INT_PTR TestPlugin(WPARAM wParam, LPARAM lParam)
 
 	return 0;
 }
+
+HANDLE hTestPlugin;
 #endif
 
 extern "C" __declspec(dllexport) PLUGININFOEX *MirandaPluginInfoEx(DWORD mirandaVersion) 
@@ -190,7 +192,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	InitEvents();
 	
 #ifdef _DEBUG	
-	CreateServiceFunction(MS_FOLDERS_TEST_PLUGIN, TestPlugin);
+	hTestPlugin = CreateServiceFunction(MS_FOLDERS_TEST_PLUGIN, TestPlugin);
 	CLISTMENUITEM mi = {0};
 	
 	mi.cbSize=sizeof(mi);
@@ -223,7 +225,10 @@ extern "C" int __declspec(dllexport) Unload()
 	DestroyServices();
 	DestroyEvents();
 	UnhookEvents();
-	
+#ifdef _DEBUG	
+	DestroyServiceFunction(hTestPlugin);
+#endif
+
 #if _MSC_VER >= 1300
 	Log("%s", "Leaving function " __FUNCTION__);
 #endif
