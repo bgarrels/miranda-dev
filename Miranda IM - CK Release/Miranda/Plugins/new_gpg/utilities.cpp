@@ -218,25 +218,23 @@ int ToggleEncryption(WPARAM w, LPARAM l)
 		enc = DBGetContactSettingByte(metaGetMostOnline(hContact), szGPGModuleName, "GPGEncryption", 0);
 	else
 		enc = DBGetContactSettingByte(hContact, szGPGModuleName, "GPGEncryption", 0);
+	if(metaIsProtoMetaContacts(hContact))
 	{
-		if(metaIsProtoMetaContacts(hContact))
+		HANDLE hcnt = NULL;
+		if(MessageBox(0, _T("Do you want to toggle encryption for all subcontacts ?"), _T("Metacontact detected"), MB_YESNO) == IDYES)
 		{
-			HANDLE hcnt = NULL;
-			if(MessageBox(0, _T("Do you want to toggle encryption for all subcontacts ?"), _T("Metacontact detected"), MB_YESNO) == IDYES)
+			int count = metaGetContactsNum(hContact);
+			for(int i = 0; i < count; i++)
 			{
-				int count = metaGetContactsNum(hContact);
-				for(int i = 0; i < count; i++)
-				{
-					hcnt = metaGetSubcontact(hContact, i);
-					if(hcnt)
-						DBWriteContactSettingByte(hcnt, szGPGModuleName, "GPGEncryption", enc?0:1);
-				}
-				DBWriteContactSettingByte(hContact, szGPGModuleName, "GPGEncryption", enc?0:1);
+				hcnt = metaGetSubcontact(hContact, i);
+				if(hcnt)
+					DBWriteContactSettingByte(hcnt, szGPGModuleName, "GPGEncryption", enc?0:1);
 			}
+			DBWriteContactSettingByte(hContact, szGPGModuleName, "GPGEncryption", enc?0:1);
 		}
-		else
-			DBWriteContactSettingByte(metaGetMostOnline(hContact), szGPGModuleName, "GPGEncryption", enc?0:1);
 	}
+	else
+		DBWriteContactSettingByte(metaGetMostOnline(hContact), szGPGModuleName, "GPGEncryption", enc?0:1);
 	void setSrmmIcon(HANDLE hContact);
 	void setClistIcon(HANDLE hContact);
 	setSrmmIcon(hContact);
@@ -984,7 +982,7 @@ bool isContactSecured(HANDLE hContact)
 	BYTE gpg_enc = DBGetContactSettingByte(hContact, szGPGModuleName, "GPGEncryption", 0);
 	if(!gpg_enc)
 	{
-		debuglog<<time_str()<<": encryption is turned of for "<<(TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)hContact, GCDNF_TCHAR)<<"\n";
+		debuglog<<time_str()<<": encryption is turned off for "<<(TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)hContact, GCDNF_TCHAR)<<"\n";
 		return false;
 	}
 	if(!metaIsProtoMetaContacts(hContact))
@@ -993,10 +991,12 @@ bool isContactSecured(HANDLE hContact)
 		if(!key[0])
 		{
 			mir_free(key);
+			debuglog<<time_str()<<": encryption is turned off for "<<(TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)hContact, GCDNF_TCHAR)<<"\n";
 			return false;
 		}
 		mir_free(key);
 	}
+	debuglog<<time_str()<<": encryption is turned on for "<<(TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)hContact, GCDNF_TCHAR)<<"\n";
 	return true;
 }
 

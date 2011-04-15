@@ -37,7 +37,7 @@ const
 {$IFNDEF MIRANDA_VER}
 {$DEFINE MIRANDA_VER}
 const
-  MIRANDA_VER = $0900;
+  MIRANDA_VER = $0400;
 {$ENDIF}
 
   { miranda/system/modulesloaded
