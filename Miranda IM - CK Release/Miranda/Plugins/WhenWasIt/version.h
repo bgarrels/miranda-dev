@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define __MAJOR_VERSION   0
 #define __MINOR_VERSION   3
 #define __RELEASE_NUM     2
-#define __BUILD_NUM       7
+#define __BUILD_NUM       8
 
 #define VERSION PLUGIN_MAKE_VERSION(__MAJOR_VERSION, __MINOR_VERSION, __RELEASE_NUM, __BUILD_NUM)
 
@@ -37,7 +37,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define __DESC                  "Notifies you of upcoming birthdays."
 #define __AUTHOR                "Cristian Libotean"
 #define __AUTHOREMAIL           "eblis102@yahoo.com"
-#define __COPYRIGHT             "© 2006-2010 Cristian Libotean"
+#define __COPYRIGHT             "© 2006-2011 Cristian Libotean"
 #define __AUTHORWEB             "http://www.miranda-im.org/"
 
 #ifdef _UNICODE
