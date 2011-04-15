@@ -69,6 +69,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F29D0C8D-141A-43CF-86B2-34A04653F8D4}</ProjectGuid>
     <RootNamespace>new_gpg</RootNamespace>
+    <ProjectName>new_gpg</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug(service)|x64'" Label="Configuration">

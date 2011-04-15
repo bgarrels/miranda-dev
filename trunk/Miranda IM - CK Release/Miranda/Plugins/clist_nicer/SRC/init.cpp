@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: init.cpp 12968 2010-10-16 20:10:55Z Michael.Kunz@s2005.TU-Chemnitz.de $
+ * $Id: init.cpp 13596 2011-04-15 19:07:23Z george.hazan $
  *
  */
 
@@ -36,6 +36,7 @@
 HINSTANCE g_hInst = 0;
 PLUGINLINK *pluginLink;
 CLIST_INTERFACE* pcli = NULL;
+int hLangpack;
 
 #define DEFAULT_TB_VISIBILITY (1 | 2 | 4 | 8 | 16 | 32 | 64 | 8192)
 TCHAR *szNoevents = _T("No events...");
@@ -237,6 +238,7 @@ extern "C" int __declspec(dllexport) CListInitialise(PLUGINLINK * link)
 	mir_getMMI(&mmi);
 	mir_getLI(&li);
 	mir_getTMI(&tmi);
+	mir_getLP( &pluginInfo );
 
 	API::onInit();
 	LoadCLCButtonModule();

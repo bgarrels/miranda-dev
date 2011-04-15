@@ -38,6 +38,7 @@ PLUGINLINK * pluginLink=NULL;
 CLIST_INTERFACE *pcli=NULL;
 CLIST_INTERFACE corecli={0};
 CLUIDATA g_CluiData={0};
+int hLangpack;
 
 MM_INTERFACE   mmi;
 LIST_INTERFACE li;
@@ -57,12 +58,12 @@ int EventArea_UnloadModule();
 
 PLUGININFOEX pluginInfo = {
 	sizeof(PLUGININFOEX),
-	DEBUG_AWARE_STR "Modern Contact List " UNICODE_AWARE_STR " CK Release",
+	DEBUG_AWARE_STR "Modern Contact List '09",
 	0,                              //will initialized later in MirandaPluginInfoEx
-	"Display contacts, event notifications, protocol status with advantage visual modifications. Supported MW modifications, enchanced metacontact cooperation. Mod for CKs Pack.",
+	"Display contacts, event notifications, protocol status with advantage visual modifications. Supported MW modifications, enchanced metacontact cooperation.",
 	"Artem Shpynov, Ricardo Pescuma Domenecci and Anton Senko based on clist_mw by Bethoven",
 	"ashpynov@gmail.com" ,
-	"Copyright 2000-2010 Miranda-IM project",
+	"Copyright 2000-2010 Miranda-IM project ["__DATE__" "__TIME__"]",
 	"http://miranda-im.org/development",
 	UNICODE_AWARE,
 	DEFMOD_CLISTALL,
@@ -125,6 +126,7 @@ PLUGININTERFACE int CListInitialise(PLUGINLINK * link)
 	mir_getUTFI(&utfi);
 	mir_getLI(&li);
 	mir_getTMI(&tmi);
+	mir_getLP( &pluginInfo );
 
 	CHECKRES ( PreLoadContactListModule ( )	);
 	CHECKRES ( SubclassClistInterface ( )	);
@@ -142,13 +144,13 @@ PLUGININTERFACE int CListInitialise(PLUGINLINK * link)
 	return S_OK;
 }
 
-
 // never called by a newer plugin loader.
 PLUGININTERFACE int Load(PLUGINLINK * link)
 {
 	MessageBoxA(0,"You Running Old Miranda, use " MINIMAL_COREVERSION_STR " version!","Modern Clist",0);
 	return 1;
 }
+
 PLUGININTERFACE int Unload(void)
 {
 	TRACE("Unloading Clist Modern\r\n");

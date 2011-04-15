@@ -63,53 +63,15 @@ static void RemoveProtoPic(const char *szProto)
 	DBDeleteContactSetting(NULL, PPICT_MODULE, szProto);
 
 	if ( szProto ) {
-		// Unsane: remove defaut avatar
-		if (!lstrcmpA(AVS_DEFAULT,szProto))
-		{
-			for (int i = 0; i < g_ProtoPictures.getCount(); i++)
-			{
-				if(g_ProtoPictures[i].szProtoname != NULL)
-				{
-					protoPicCacheEntry& p = g_ProtoPictures[i];
-					if(p.hbmPic != 0) 
-						DeleteObject(p.hbmPic);
-					ZeroMemory(&p, sizeof(avatarCacheEntry));
-					CreateAvatarInCache(0, &p, (char *)p.szProtoname);
-					NotifyEventHooks(hEventChanged, 0, (LPARAM)&p);
-				}
-			}
-		}
-		else if (strstr(szProto, "Global avatar for"))
-		{
-			char szProtoname[MAX_PATH] = {0};
-			lstrcpynA(szProtoname, szProto, lstrlenA(szProto)- lstrlenA("accounts"));
-			lstrcpyA(szProtoname, strrchr(szProtoname, ' ') + 1);
-			for (int i = 0; i < g_ProtoPictures.getCount(); i++)
-			{
-				PROTOACCOUNT* pdescr = (PROTOACCOUNT*)CallService(MS_PROTO_GETACCOUNT, 0, (LPARAM)g_ProtoPictures[i].szProtoname);
-				if (pdescr == NULL && lstrcmpA(g_ProtoPictures[i].szProtoname, szProto))
-					continue;
-				else if (!lstrcmpA(g_ProtoPictures[i].szProtoname, szProto) || !lstrcmpA(pdescr->szProtoName, szProtoname))
-				{
-					if(g_ProtoPictures[i].szProtoname != NULL)
-					{
-						protoPicCacheEntry& p = g_ProtoPictures[i];
-						if(p.hbmPic != 0) 
-							DeleteObject(p.hbmPic);
-						ZeroMemory(&p, sizeof(avatarCacheEntry));
-						CreateAvatarInCache(0, &p, (char *)p.szProtoname);
-						NotifyEventHooks(hEventChanged, 0, (LPARAM)&p);
-					}
-				}
-			}
-		}
-		else
-			for(int i = 0; i < g_ProtoPictures.getCount(); i++){
-				if(g_ProtoPictures[i].szProtoname != NULL && !strcmp(g_ProtoPictures[i].szProtoname, szProto)) {
-					if(g_ProtoPictures[i].hbmPic != 0)
-						DeleteObject(g_ProtoPictures[i].hbmPic);
-					ZeroMemory((void *)&g_ProtoPictures[i], sizeof(struct avatarCacheEntry));
-					NotifyEventHooks(hEventChanged, 0, (LPARAM)&g_ProtoPictures[i]);
+		PROTOACCOUNT **accs;
+		int count;
+		ProtoEnumAccounts( &count, &accs );
+		for(int i = 0; i < count; i++) {
+			if(g_ProtoPictures[i].szProtoname != NULL && !strcmp(g_ProtoPictures[i].szProtoname, szProto)) {
+				if(g_ProtoPictures[i].hbmPic != 0)
+					DeleteObject(g_ProtoPictures[i].hbmPic);
+				ZeroMemory((void *)&g_ProtoPictures[i], sizeof(struct avatarCacheEntry));
+				NotifyEventHooks(hEventChanged, 0, (LPARAM)&g_ProtoPictures[i]);
 			}
 		}
 	}
@@ -147,58 +109,20 @@ static void SetProtoPic(char *szProto)
 		AVS_pathToRelative(FileName, szNewPath);
 		DBWriteContactSettingString(NULL, PPICT_MODULE, szProto, szNewPath);
 
-		// Unsane: set defaut avatar
-		if (!lstrcmpA(AVS_DEFAULT, szProto))
-		{
-			for (i = 0; i < g_ProtoPictures.getCount(); i++)
-			{
-				protoPicCacheEntry& p = g_ProtoPictures[i];
-				if (lstrlenA(p.szProtoname) != 0)
-				{
-					if(p.hbmPic == 0) 
-					{
-						CreateAvatarInCache(0, &p, (char *)szProto);
-						NotifyEventHooks(hEventChanged, 0, (LPARAM)&p);
-					}
-				}
-			}
-		}
-		else if (strstr(szProto, "Global avatar for"))
-		{
-			char szProtoname[MAX_PATH] = {0};
-			lstrcpynA(szProtoname, szProto, lstrlenA(szProto)- lstrlenA("accounts"));
-			lstrcpyA(szProtoname, strrchr(szProtoname, ' ') + 1);
-			for (i = 0; i < g_ProtoPictures.getCount(); i++)
-			{
-				PROTOACCOUNT* pdescr = (PROTOACCOUNT*)CallService(MS_PROTO_GETACCOUNT, 0, (LPARAM)g_ProtoPictures[i].szProtoname);
-				if (pdescr == NULL && lstrcmpA(g_ProtoPictures[i].szProtoname, szProto))
-					continue;
-				else if (!lstrcmpA(g_ProtoPictures[i].szProtoname, szProto) || !lstrcmpA(pdescr->szProtoName, szProtoname))
-				{
-					protoPicCacheEntry& p = g_ProtoPictures[i];
-					if (lstrlenA(p.szProtoname) != 0)
-					{
-						if(p.hbmPic == 0) 
-						{
-							CreateAvatarInCache(0, &p, (char *)szProto);
-							NotifyEventHooks(hEventChanged, 0, (LPARAM)&p);
-						}
-					}
-				}
-			}
-		}
-		else
-			for(i = 0; i < g_ProtoPictures.getCount(); i++) {
-				protoPicCacheEntry& p = g_ProtoPictures[i];
-				if ( lstrlenA(p.szProtoname) == 0)
-					break;
-				if(!strcmp(p.szProtoname, szProto) && lstrlenA(p.szProtoname) == lstrlenA(szProto)) {
-					if(p.hbmPic != 0) 
-						DeleteObject(p.hbmPic);
-					ZeroMemory(&p, sizeof(avatarCacheEntry));
-					CreateAvatarInCache(0, &p, (char *)szProto);
-					NotifyEventHooks(hEventChanged, 0, (LPARAM)&p );
-					break;
+		PROTOACCOUNT **accs;
+		int count;
+		ProtoEnumAccounts( &count, &accs );
+		for(i = 0; i < count; i++) {
+			protoPicCacheEntry& p = g_ProtoPictures[i];
+			if ( lstrlenA(p.szProtoname) == 0)
+				break;
+			if(!strcmp(p.szProtoname, szProto) && lstrlenA(p.szProtoname) == lstrlenA(szProto)) {
+				if(p.hbmPic != 0) 
+					DeleteObject(p.hbmPic);
+				ZeroMemory(&p, sizeof(avatarCacheEntry));
+				CreateAvatarInCache(0, &p, (char *)szProto);
+				NotifyEventHooks(hEventChanged, 0, (LPARAM)&p );
+				break;
 			}
 		}
 	}
@@ -422,9 +346,7 @@ INT_PTR CALLBACK DlgProcOptionsProtos(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 							if (!AVS_pathIsAbsolute(dbv.pszVal))
                             {
 							    char szFinalPath[MAX_PATH];
-                                // Unsane: change relative path from profile folder, to programm folder
-								mir_snprintf(szFinalPath, SIZEOF(szFinalPath), "%%miranda_path%%\\%s", dbv.pszVal);
-
+                                mir_snprintf(szFinalPath, SIZEOF(szFinalPath), "%%miranda_userdata%%\\%s", dbv.pszVal);
 							    SetDlgItemTextA(hwndDlg, IDC_PROTOAVATARNAME, szFinalPath);
                             }
                             else
