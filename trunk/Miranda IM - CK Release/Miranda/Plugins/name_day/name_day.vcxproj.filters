@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{296da9be-4a56-41fd-8f57-4b0b0444ae7e}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\calendar">
+      <UniqueIdentifier>{394390b1-b235-4884-a369-f8433805971f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{e0bd61df-b5b5-4804-9667-a47e6782cc89}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="name_day.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="name_day_core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="calendar\calendar.cpp">
+      <Filter>Source Files\calendar</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="name_day_core.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="static_database.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calendar\calendar.h">
+      <Filter>Source Files\calendar</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\string_tokenizer.h">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="namedayplug.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\baloons.ico" />
+    <None Include="resources\icon1.ico" />
+    <None Include="icon1.ico" />
+    <None Include="resources\icon2.ico" />
+    <None Include="resources\icon3.ico" />
+  </ItemGroup>
+</Project>
