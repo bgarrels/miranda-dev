@@ -22,15 +22,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-// C++ bool type
-#define UTILS_CONV_BOOLEAN              0x0001 // true | false
-// signed regular numbers
-#define UTILS_CONV_SIGNED_NUMBER        0x0010 // 1234 | -1234
-// unsigned regular numbers
-#define UTILS_CONV_UNSIGNED_NUMBER      0x0020 // 1234
-// miscellaneous
-#define UTILS_CONV_TIME_T               0x0040 // 1234567890
-
 template<typename T>
 void CreateProtoService(const char *module,const char *service,
 	int (__cdecl T::*serviceProc)(WPARAM,LPARAM),T *self)
@@ -71,15 +62,9 @@ namespace utils
 	{
 		void replace_first( std::string* data, std::string from, std::string to );
 		void replace_all( std::string* data, std::string from, std::string to );
-		unsigned int count_all( std::string* data, std::string term );
 		std::string special_expressions_decode( std::string data );
 		std::string slashu_to_utf8( std::string data );
 		std::string trim( std::string data );
-	};
-
-	namespace conversion
-	{
-		std::string to_string( void*, WORD type );
 	};
 
 	namespace debug

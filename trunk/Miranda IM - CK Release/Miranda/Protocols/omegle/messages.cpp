@@ -36,12 +36,24 @@ void OmegleProto::SendMsgWorker(void *p)
 
 	std::string *data = static_cast<std::string*>(p);
 
+	*data = utils::text::trim(*data);
+
 	if (data->length() && facy.send_message( *data ))
 	{
-		UpdateChat("You", data->c_str());
+		UpdateChat(facy.nick_.c_str(), data->c_str());
 	}
 
 	delete data;
+}
+
+void OmegleProto::NewChatWorker(void*p)
+{
+	NewChat();
+}
+
+void OmegleProto::StopChatWorker(void*p)
+{
+	StopChat();
 }
 
 int OmegleProto::SendMsg(HANDLE hContact, int flags, const char *msg)

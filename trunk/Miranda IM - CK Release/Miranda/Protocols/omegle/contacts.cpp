@@ -45,8 +45,7 @@ int OmegleProto::OnContactDeleted(WPARAM wparam,LPARAM)
 
 	if (IsMyContact(hContact, true))
 	{
-		StopChat();
-		// TODO: ^ odpojit pri smazani chatu?		
+		ForkThread(&OmegleProto::StopChatWorker, this, NULL);
 	}
 
 	return 0;

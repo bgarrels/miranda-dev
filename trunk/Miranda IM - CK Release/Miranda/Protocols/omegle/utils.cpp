@@ -32,31 +32,6 @@ std::string utils::url::encode(const std::string &s)
 	return ret;
 }
 
-std::string utils::conversion::to_string( void* data, WORD type )
-{
-	std::stringstream out;
-
-	switch ( type )
-	{
-  	case UTILS_CONV_BOOLEAN:
-		out << (*( bool* )data) ? "true" : "false";
-
-    case UTILS_CONV_TIME_T:
-		out << (*( time_t* )data);
-		break;
-
-	case UTILS_CONV_SIGNED_NUMBER:
-  		out << (*( signed int* )data);
-		break;
-
-	case UTILS_CONV_UNSIGNED_NUMBER:
-		out << (*( unsigned int* )data);
-		break;
-	}
-
-	return out.str( );
-}
-
 void utils::text::replace_first( std::string* data, std::string from, std::string to )
 {
 	std::string::size_type position = 0;
@@ -77,20 +52,6 @@ void utils::text::replace_all( std::string* data, std::string from, std::string 
 		data->replace( position, from.size(), to );
 		position++;
 	}
-}
-
-unsigned int utils::text::count_all( std::string* data, std::string term )
-{
-	unsigned int count = 0;
-	std::string::size_type position = 0;
-
-	while ( ( position = data->find( term, position ) ) != std::string::npos )
-	{
-		count++;
-		position++;
-	}
-
-	return count;
 }
 
 std::string utils::text::special_expressions_decode( std::string data )

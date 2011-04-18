@@ -24,10 +24,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // Version management
 #include "build.h"
-#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0,0,0,3)
-#define __VERSION_VS_FILE           0,0,0,3
-#define __VERSION_STRING            "0.0.0.3"
-#define __VERSION_VS_FILE_STRING    "0, 0, 0, 3"
+#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0,0,0,4)
+#define __VERSION_VS_FILE           0,0,0,4
+#define __VERSION_STRING            "0.0.0.4"
+#define __VERSION_VS_FILE_STRING    "0, 0, 0, 4"
 
 #define __PRODUCT_DWORD             PLUGIN_MAKE_VERSION(0,9,14,0)
 #define __VERSION_VS_PROD           0,9,14,0
@@ -40,9 +40,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define OMEGLE_SERVER_CHAT        "http://%s.omegle.com"
 
 // Limits
-#define OMEGLE_MESSAGE_LIMIT      1024
-#define OMEGLE_MESSAGE_LIMIT_TEXT "1024"
 #define OMEGLE_TIMEOUTS_LIMIT     5
+// There is "no limit" on Omegle, but we should set some wise limit
+#define OMEGLE_MESSAGE_LIMIT      4096
+#define OMEGLE_MESSAGE_LIMIT_TEXT "4096"
 
 // Omegle request types
 #define OMEGLE_REQUEST_HOME						100 // getting server name

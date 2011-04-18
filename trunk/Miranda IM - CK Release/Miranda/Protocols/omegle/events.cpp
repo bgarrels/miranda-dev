@@ -24,9 +24,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 int OmegleProto::Log(const char *fmt,...)
 {
-#ifndef _DEBUG
-	return EXIT_SUCCESS;
-#endif
+	if (!getByte("EnableLogging", 0))
+		return EXIT_SUCCESS;
+
 	va_list va;
 	char text[65535];
 	ScopedLock s(log_lock_);

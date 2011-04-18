@@ -472,7 +472,7 @@ bool Omegle_client::home( )
 
 bool Omegle_client::events( )
 {
-	handle_entry( "channel" );
+	handle_entry( "events" );
 
 	std::string data = "id=";
 	data += this->chat_id_;
@@ -490,55 +490,64 @@ bool Omegle_client::events( )
 	{
 		if ( resp.data == "null" ) {
 			// Everything is OK, no new message received
+			return handle_success( "events" );
 		}
 		else if ( resp.data == "fail" ) {
 			// Something went wrong
-			return handle_error( "channel" );
+			return handle_error( "events" );
 		}
 		
-		if ( resp.data.find( "[\"strangerDisconnected\"]" ) != std::string::npos ) {
-			parent->StopChat(false);
+		if ( resp.data.find( "[\"waiting\"]" ) != std::string::npos ) {
+			// We are just waiting for new Stranger
 		}
 		if ( resp.data.find( "[\"connected\"]" ) != std::string::npos ) {
-
-		}
-		if ( resp.data.find( "[\"waiting\"]" ) != std::string::npos ) {
-
+			// Stranger connected
+			parent->AddChatContact(Translate("Stranger"));
 		}
 		if ( resp.data.find( "[\"typing\"]" ) != std::string::npos ) {
-
+			// Stranger is typing
+			// TODO: not supported by Group chats right now
 		}
 		if ( resp.data.find( "[\"stoppedtyping\"]" ) != std::string::npos ) {
-
+			// Stranger stopped typing
+			// TODO: not supported by Group chats right now
 		}
 		if ( resp.data.find( "[\"recaptchaRequired\"]" ) != std::string::npos ) {
+			// TODO: somehow process captcha
 			parent->UpdateChat(NULL, "This is the end,... recaptcha is required!");
 		}
 		if ( resp.data.find( "[\"recaptchaRejected\"]" ) != std::string::npos ) {
-
+			// TODO: somehow process captcha
 		}
 		
 		std::string::size_type pos = 0;
 		while ( (pos = resp.data.find( "[\"gotMessage\",", pos )) != std::string::npos ) {
 			pos += 16;
 
-			std::string message = utils::text::special_expressions_decode(
-				utils::text::slashu_to_utf8(
-					resp.data.substr(pos, resp.data.find("\"]", pos) - pos)	) );
+			std::string message = utils::text::trim(
+				utils::text::special_expressions_decode(
+					utils::text::slashu_to_utf8(
+						resp.data.substr(pos, resp.data.find("\"]", pos) - pos)	) ) );
 			
-			parent->UpdateChat("Stranger", message.c_str());
+			parent->UpdateChat(Translate("Stranger"), message.c_str());
 		}
 
-		return handle_success( "channel" );
+		if ( resp.data.find( "[\"strangerDisconnected\"]" ) != std::string::npos ) {
+			// Stranger disconnected
+
+			parent->StopChat(false);
+		}
+
+		return handle_success( "events" );
 	}
 
 	case HTTP_CODE_FAKE_DISCONNECTED:
-		if ( !parent->isOnline() )
-			return handle_success( "channel" );
+		// timeout
+		return handle_success( "events" );
 
 	case HTTP_CODE_FAKE_ERROR:
 	default:
-		return handle_error( "channel" );
+		return handle_error( "events" );
 	}
 }
 
