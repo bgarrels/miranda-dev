@@ -120,10 +120,7 @@ public:
 
 	// Loops
 	void __cdecl EventsLoop(void*);
-	void    KillThreads(bool log=false);
-
-	// Processing threads
-	void __cdecl ProcessEvents(void*);
+	void    KillThreads(bool log = true);
 
 	// Worker threads
 	void __cdecl SignOn(void*);
@@ -131,9 +128,10 @@ public:
 
 	void __cdecl SendMsgWorker(void*);
 	void __cdecl SendTypingWorker(void*);
+	
+	void __cdecl NewChatWorker(void*);
+	void __cdecl StopChatWorker(void*);
 
-
-	void StartChat();
 	void StopChat(bool disconnect = true);
 	void NewChat();
 
@@ -142,7 +140,7 @@ public:
 
 	// Chat handling
  	void AddChat(const char *id,const char *name);
-	void UpdateChat(const char *name, const char *message, bool addtochat = false);
+	void UpdateChat(const char *name, const char *message, bool addtochat = true);
 	void AddChatContact(const char *nick);
 	void DeleteChatContact(const char *name);
 	void SetChatStatus(int);

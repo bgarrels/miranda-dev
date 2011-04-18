@@ -30,17 +30,28 @@ OmegleProto::OmegleProto(const char* proto_name, const TCHAR* username)
 	m_tszUserName  = mir_tstrdup( username );
 
 	this->facy.parent = this;
+	this->facy.nick_ = Translate("You");
+
+	DBVARIANT dbv;
+	if ( !DBGetContactSettingUTF8String(NULL,m_szModuleName,"Nick",&dbv) )
+	{
+		this->facy.nick_ = dbv.pszVal;
+		DBFreeVariant(&dbv);
+	} else {
+		DBWriteContactSettingUTF8String(NULL,m_szModuleName,"Nick",this->facy.nick_.c_str());
+	}
 
 	this->signon_lock_ = CreateMutex( NULL, FALSE, NULL );
 	this->log_lock_ = CreateMutex( NULL, FALSE, NULL );
 	this->facy.send_message_lock_ = CreateMutex( NULL, FALSE, NULL );
 	this->facy.connection_lock_ = CreateMutex( NULL, FALSE, NULL );
 
-	//CreateProtoService(m_szModuleName, PS_CREATEACCMGRUI, &OmegleProto::SvcCreateAccMgrUI, this);
-
 	// Group chats
 	CreateProtoService(m_szModuleName,PS_JOINCHAT,&OmegleProto::OnJoinChat,this);
 	CreateProtoService(m_szModuleName,PS_LEAVECHAT,&OmegleProto::OnLeaveChat,this);
+
+	//CreateProtoService(m_szModuleName, PS_CREATEACCMGRUI, &OmegleProto::SvcCreateAccMgrUI, this);
+	CreateProtoService(m_szModuleName,PS_GETNAME, &OmegleProto::GetName,this);
 
 	HookProtoEvent(ME_DB_CONTACT_DELETED,&OmegleProto::OnContactDeleted,this);
 	HookProtoEvent(ME_OPT_INITIALISE,&OmegleProto::OnOptionsInit,this);
@@ -89,6 +100,8 @@ DWORD_PTR OmegleProto::GetCaps( int type, HANDLE hContact )
 {
 	switch(type)
 	{
+	case PFLAGNUM_1:
+		return PF1_IM | PF1_CHAT; // TODO: Why we need PF1_IM to activate smileys? Shouldnt be PF1_CHAT enough?
 	case PFLAGNUM_2:
 		return PF2_ONLINE;
 	case PFLAGNUM_4:

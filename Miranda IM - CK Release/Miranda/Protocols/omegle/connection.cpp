@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "common.h"
 
-void OmegleProto::KillThreads( bool log )
+void OmegleProto::KillThreads( bool log)
 {
 	// Kill the old threads if they are still around
 	if(m_hMsgLoop != NULL)
@@ -86,78 +86,66 @@ void OmegleProto::SignOff(void*)
 	LOG("##### SignOff complete");
 }
 
-void OmegleProto::StartChat()
-{
-	// tohle se bude nejak volat kdyz uzivatel bude chtit zacit chatovat...
-
-/*musi byt connected == false
-  - zapne se messages thread, musi byt server_ definovany
-  - stranger se do chatu prida az podle eventu... nebo ne?
-  */
-	KillThreads( );
-
-	if (facy.connected_)
-		return;
-
-	ScopedLock s(events_loop_lock_);
-
-	ClearChat();
-	AddChatContact("Stranger");
-
-	if (facy.start())
-	{
-		facy.connected_ = true;
-		LOG("***** Connected to stranger %s", facy.chat_id_.c_str());
-
-		m_hMsgLoop = ForkThreadEx( &OmegleProto::EventsLoop, this );
-		LOG("***** Started messageloop thread handle %d", m_hMsgLoop);
-	}
-}
-
 void OmegleProto::StopChat(bool disconnect)
-{
-	// tohle se bude nejak volat kdyz uzivatel bude chtit prestat
-
-	//musi byt connected == true u vsech nize
-	//- vypne se messages thread
-	// odpoji se stranger z mistnosti
-
-	KillThreads( );
-	
-	// If we are chatting with some stranger, disconnect
+{		
 	if (!facy.connected_)
 		return;
 
-	facy.connected_ = false;
+	DeleteChatContact(Translate("Stranger"));
 
-	ScopedLock s(events_loop_lock_);
-	DeleteChatContact("Stranger");	
+	if (disconnect)
+	{
+		UpdateChat(NULL, Translate("You have disconnected."), true);
 
-	if (disconnect && facy.stop()) {
-		LOG("***** Disconnected from stranger %s", facy.chat_id_.c_str());
-		UpdateChat(NULL, "You have disconnected.", true);
+		if (facy.stop())
+			LOG("***** Disconnected from stranger %s", facy.chat_id_.c_str());
+		else
+			LOG("***** Error in disconnecting from stranger %s", facy.chat_id_.c_str());
 	}
 
+	facy.connected_ = false;
 	facy.chat_id_ = "";
+
+	// Just for case
+	KillThreads( );
 }
 
 void OmegleProto::NewChat()
 {
 	if (facy.connected_)
 	{
-		DeleteChatContact("Stranger");
+		DeleteChatContact(Translate("Stranger"));
+		UpdateChat(NULL, Translate("You have disconnected."), true);
 		ClearChat();
-		AddChatContact("Stranger");
+		UpdateChat(NULL, Translate("Waiting for Stranger..."), true);
 
-		if (facy.stop()) {
+		if (facy.stop())
 			LOG("***** Disconnected from stranger %s", facy.chat_id_.c_str());
-		}
+		else
+			LOG("***** Error in disconnecting from stranger %s", facy.chat_id_.c_str());
+		
+		if (facy.start())
+			LOG("***** Waiting for stranger %s", facy.chat_id_.c_str());
+		else
+			LOG("***** Error in starting connection to stranger %s", facy.chat_id_.c_str());
+	
+	} else {
+		KillThreads( );
+
+		ScopedLock s(events_loop_lock_);
+
+		ClearChat();
+		UpdateChat(NULL, Translate("Waiting for Stranger..."), true);
+		
 		if (facy.start())
 		{
-			LOG("***** Connected to stranger %s", facy.chat_id_.c_str());
+			facy.connected_ = true;
+			LOG("***** Waiting for stranger %s", facy.chat_id_.c_str());
+
+			m_hMsgLoop = ForkThreadEx( &OmegleProto::EventsLoop, this );
+			LOG("***** Started messageloop thread handle %d", m_hMsgLoop);
 		}
-	} else {
-		StartChat();
+
 	}
 }
 
