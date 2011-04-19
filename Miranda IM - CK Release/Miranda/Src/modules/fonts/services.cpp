@@ -113,7 +113,6 @@ static void GetDefaultFontSetting(LOGFONT* lf, COLORREF* colour)
 		*colour = GetSysColor(COLOR_WINDOWTEXT);
 
 	lf->lfHeight = 10;
-	_tcscpy(lf->lfFaceName, _T("Verdana"));
 	
 	HDC hdc = GetDC(0);
 	lf->lfHeight = -MulDiv(lf->lfHeight,GetDeviceCaps(hdc, LOGPIXELSY), 72);
