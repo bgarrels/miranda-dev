@@ -24,6 +24,7 @@ PLUGINLINK *pluginLink;
 struct MM_INTERFACE mmi;
 struct UTF8_INTERFACE utfi;
 HANDLE hOnButtonPressed;
+int hLangpack;
 
 PLUGININFOEX pluginInfoEx = {
 	sizeof(PLUGININFOEX),
@@ -210,6 +211,7 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	pluginLink = link;
 	mir_getMMI(&mmi);
 	mir_getUTFI(&utfi);
+	mir_getLP(&pluginInfoEx);
 
 	hHook = HookEvent(ME_SYSTEM_MODULESLOADED, OnModulesLoaded);
 
