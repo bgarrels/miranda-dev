@@ -31,6 +31,7 @@ BOOL IsDuplicateEvent(HANDLE hContact, DBEVENTINFO dbei);
 
 int nImportOption;
 int nCustomOptions;
+int hLangpack;
 
 int      cICQAccounts = 0;
 char  ** szICQModuleName = NULL;
@@ -51,11 +52,11 @@ PLUGININFOEX pluginInfo = {
 	sizeof(PLUGININFOEX),
 	__PLUGIN_NAME,
 	__VERSION_DWORD,
-	"Imports contacts and messages from Mirabilis ICQ and Miranda IM. Enhanced modification with encrypted database support.",
-	"Miranda team",
-	"info@miranda-im.org",
-	"© 2000-2010 Martin Öberg, Richard Hughes, Dmitry Kuzkin, George Hazan",
-	"http://www.miranda-im.org",
+	__DESCRIPTION,
+	__AUTHOR,
+	__AUTHOREMAIL,
+	__COPYRIGHT,
+	__AUTHORWEB,
 	UNICODE_AWARE,
 	0,	//{2D77A746-00A6-4343-BFC5-F808CDD772EA}
       {0x2d77a746, 0xa6, 0x4343, { 0xbf, 0xc5, 0xf8, 0x8, 0xcd, 0xd7, 0x72, 0xea }}
@@ -83,7 +84,7 @@ static INT_PTR ImportCommand(WPARAM wParam,LPARAM lParam)
 
 __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {
-	if (mirandaVersion < PLUGIN_MAKE_VERSION(0, 7, 0, 0))
+	if (mirandaVersion < PLUGIN_MAKE_VERSION(0, 8, 0, 0))
 		return NULL;
 
 	return &pluginInfo;
@@ -134,6 +135,7 @@ int __declspec(dllexport) Load(PLUGINLINK *link)
 	pluginLink = link;
 	mir_getMMI( &mmi );
 	mir_getUTFI( &utfi );
+	mir_getLP( &pluginInfo );
 
 	hImportService = CreateServiceFunction(IMPORT_SERVICE, ImportCommand);
 	{

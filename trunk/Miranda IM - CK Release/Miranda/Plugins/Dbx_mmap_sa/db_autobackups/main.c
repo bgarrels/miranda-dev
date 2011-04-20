@@ -5,6 +5,7 @@
 struct MM_INTERFACE mmi;
 HINSTANCE hInst;
 PLUGINLINK *pluginLink;
+int hLangpack;
 
 HANDLE hFolder;
 HANDLE hHooks[4];
@@ -147,6 +148,7 @@ int PreShutdown(WPARAM wParam, LPARAM lParam) {
 void SysInit()
 {
 	mir_getMMI( &mmi );
+	mir_getLP( &pluginInfo );
 	OleInitialize(0);
 	
 	hServices[0] = CreateServiceFunction(MS_AB_BACKUP, ABService);
