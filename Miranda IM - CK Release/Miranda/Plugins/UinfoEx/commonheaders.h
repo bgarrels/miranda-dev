@@ -21,9 +21,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 ===============================================================================
 
 File name      : $HeadURL: http://userinfoex.googlecode.com/svn/trunk/commonheaders.h $
-Revision       : $Revision: 211 $
-Last change on : $Date: 2011-04-04 21:10:59 +0400 (Пн, 04 апр 2011) $
-Last change by : $Author: kreol13@gmail.com $
+Revision       : $Revision: 212 $
+Last change on : $Date: 2011-04-20 15:02:24 +0400 (Ср, 20 апр 2011) $
+Last change by : $Author: kreol13 $
 
 ===============================================================================
 */
@@ -32,6 +32,8 @@ Last change by : $Author: kreol13@gmail.com $
 /***********************************************************************************************************
  * some compiler definitions
  ***********************************************************************************************************/
+
+#define MIRANDA_CUSTOM_LP
 
 #define _WIN32_WINNT	0x0501
 #define _WIN32_IE			0x0500
