@@ -29,6 +29,7 @@ Last change on : $Date: 2011-01-25 20:50:51 +0100 (út, 25 1 2011) $
 
 FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 {
+	m_iVersion = 2;
 	m_szProtoName  = mir_strdup( proto_name );
 	m_szModuleName = mir_strdup( proto_name );
 	m_tszUserName  = mir_tstrdup( username );
@@ -36,11 +37,12 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 	this->facy.parent = this;
 	this->facy.last_feeds_update_ = getDword( "LastNotificationsUpdate", 0 ); // RM TODO: is it useful?
 
-	this->signon_lock_ = CreateMutex( NULL, FALSE, TEXT("signon_lock_") );
-	this->avatar_lock_ = CreateMutex( NULL, FALSE, TEXT("avatar_lock_") );
-	this->log_lock_ = CreateMutex( NULL, FALSE, TEXT("log_lock_") );
-	this->facy.buddies_lock_ = CreateMutex( NULL, FALSE, TEXT("facy.buddies_lock_") );
-	this->facy.send_message_lock_ = CreateMutex( NULL, FALSE, TEXT("facy.send_message_lock_") );
+	this->signon_lock_ = CreateMutex( NULL, FALSE, NULL );
+	this->avatar_lock_ = CreateMutex( NULL, FALSE, NULL );
+	this->log_lock_ = CreateMutex( NULL, FALSE, NULL );
+	this->facy.buddies_lock_ = CreateMutex( NULL, FALSE, NULL );
+	this->facy.send_message_lock_ = CreateMutex( NULL, FALSE, NULL );
+	this->facy.fcb_conn_lock_ = CreateMutex( NULL, FALSE, NULL );
 
 	CreateProtoService(m_szModuleName, PS_CREATEACCMGRUI, &FacebookProto::SvcCreateAccMgrUI, this);
 	CreateProtoService(m_szModuleName, PS_GETNAME,        &FacebookProto::GetName,           this);
@@ -53,8 +55,10 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
   // RM TODO: group chats
 /*  CreateProtoService(m_szModuleName,PS_JOINCHAT, &FacebookProto::OnJoinChat, this);
 	CreateProtoService(m_szModuleName,PS_LEAVECHAT,&FacebookProto::OnLeaveChat,this);*/
-
-	HookProtoEvent(ME_DB_CONTACT_DELETED,        &FacebookProto::OnContactDeleted,   this);
+	if(g_mirandaVersion < PLUGIN_MAKE_VERSION(0, 10, 0, 2))
+	{
+		HookProtoEvent(ME_DB_CONTACT_DELETED,        &FacebookProto::OnContactDeleted,   this);
+	}
 	HookProtoEvent(ME_CLIST_PREBUILDSTATUSMENU,  &FacebookProto::OnBuildStatusMenu,  this);
 	HookProtoEvent(ME_OPT_INITIALISE,            &FacebookProto::OnOptionsInit,      this);
 
@@ -109,6 +113,7 @@ FacebookProto::~FacebookProto( )
 	CloseHandle( this->log_lock_ );
 	CloseHandle( this->facy.buddies_lock_ );
 	CloseHandle( this->facy.send_message_lock_ );
+	CloseHandle( this->facy.fcb_conn_lock_ );
 	CloseHandle( this->update_loop_lock_ );
 	CloseHandle( this->message_loop_lock_ );
 
@@ -162,10 +167,13 @@ HICON FacebookProto::GetIcon(int index)
 
 int FacebookProto::SetStatus( int new_status )
 {
+	LOG("***** Beginning SetStatus process");
+	
 	// Routing statuses not supported by Facebook
 	switch ( new_status )
 	{
 	case ID_STATUS_FREECHAT:
+		LOG("===== Wanted status: Free For Chat");
 		new_status = ID_STATUS_ONLINE;
 		break;
 
@@ -174,10 +182,12 @@ int FacebookProto::SetStatus( int new_status )
 	case ID_STATUS_OCCUPIED:
 	case ID_STATUS_ONTHEPHONE:
 	case ID_STATUS_OUTTOLUNCH:
+		LOG("===== Wanted status: Some Away");
 		new_status = ID_STATUS_AWAY;
 		break;
 
 	case ID_STATUS_CONNECTING:
+		LOG("===== Wanted status: Connecting");
 		new_status = ID_STATUS_OFFLINE;
 		break;
 	}
@@ -186,16 +196,24 @@ int FacebookProto::SetStatus( int new_status )
 	m_iDesiredStatus = new_status;
 
 	if ( new_status == old_status)
+	{
+		LOG("===== Statuses are same, no change");
 		return 0;
+	}
 
 	if ( old_status == ID_STATUS_CONNECTING && new_status != ID_STATUS_OFFLINE )
-		return 0;
+	{
+		LOG("===== Status is connecting, no change");
+		return 0;		
+	}
 
 	facy.idle_ = ( new_status != ID_STATUS_ONLINE && new_status != ID_STATUS_OFFLINE );
 	facy.invisible_ = ( new_status == ID_STATUS_INVISIBLE );
 
 	if ( new_status == ID_STATUS_OFFLINE )
 	{
+		LOG("===== New status: Offline");
+		
 		m_iStatus = facy.self_.status_id = ID_STATUS_CONNECTING;
 		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
 			(HANDLE)old_status,m_iStatus);
@@ -204,6 +222,8 @@ int FacebookProto::SetStatus( int new_status )
 	}
 	else if ( old_status == ID_STATUS_OFFLINE )
 	{
+		LOG("===== Old status: Offline");
+		
 		m_iStatus = facy.self_.status_id = ID_STATUS_CONNECTING;
 		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
 			(HANDLE)old_status,m_iStatus);
@@ -212,6 +232,8 @@ int FacebookProto::SetStatus( int new_status )
 	}
 	else if ( old_status == ID_STATUS_INVISIBLE )
 	{
+		LOG("===== Old status: Invisible");
+		
 		m_iStatus = facy.self_.status_id = ID_STATUS_CONNECTING;
 		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
 			(HANDLE)old_status,m_iStatus);
@@ -220,6 +242,8 @@ int FacebookProto::SetStatus( int new_status )
 	}
 	else if ( new_status == ID_STATUS_INVISIBLE )
 	{
+		LOG("===== New status: Invisible");
+
 		m_iStatus = facy.self_.status_id = ID_STATUS_INVISIBLE;
 		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
 			(HANDLE)old_status,m_iStatus);
@@ -230,17 +254,22 @@ int FacebookProto::SetStatus( int new_status )
 	}
 	else if ( old_status == ID_STATUS_AWAY )
 	{
+		LOG("===== Old status: Away");
+
 		facy.chat_first_touch_ = true;
 
 		m_iStatus = facy.self_.status_id = new_status;
 		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
 			(HANDLE)old_status,m_iStatus);
 	} else { 
+		LOG("===== New status: Else");
+
 		m_iStatus = facy.self_.status_id = new_status;
 		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
 			(HANDLE)old_status,m_iStatus);
 	}
   
+	LOG("***** SetStatus complete");
 	return 0;
 }
 
@@ -248,9 +277,7 @@ int FacebookProto::SetAwayMsg( int status, const PROTOCHAR *msg )
 {
 	if ( isOnline() && msg != NULL && getByte( FACEBOOK_KEY_SET_MIRANDA_STATUS, DEFAULT_SET_MIRANDA_STATUS ) )
 	{
-		TCHAR *wide  = mir_a2t((const char*)msg); // TODO: Why?
-		char *narrow = mir_t2a_cp((const TCHAR*)wide,CP_UTF8);
-		utils::mem::detract((void**)&wide);
+		char *narrow = mir_utf8encodeT(msg);
 		ForkThread(&FacebookProto::SetAwayMsgWorker, this, narrow);
 	}
 	return 0;
@@ -308,6 +335,9 @@ int FacebookProto::OnEvent(PROTOEVENTTYPE event,WPARAM wParam,LPARAM lParam)
 	
 	case EV_PROTO_ONOPTIONS:
 		return OnOptionsInit  (wParam,lParam);
+
+	case EV_PROTO_ONCONTACTDELETED:
+ 		return OnContactDeleted(wParam,lParam);
 	}
 
 	return 1;
@@ -364,7 +394,7 @@ int FacebookProto::OnOptionsInit(WPARAM wParam,LPARAM lParam)
 	odp.hInstance   = g_hInstance;
 	odp.ptszTitle   = m_tszUserName;
 	odp.dwInitParam = LPARAM(this);
-	odp.flags       = ODPF_BOLDGROUPS | ODPF_TCHAR;
+	odp.flags       = ODPF_BOLDGROUPS | ODPF_TCHAR | ODPF_DONTTRANSLATE;
 
 	odp.position    = 271828;
 	odp.ptszGroup   = LPGENT("Network");

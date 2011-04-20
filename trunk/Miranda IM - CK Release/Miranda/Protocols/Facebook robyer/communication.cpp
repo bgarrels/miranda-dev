@@ -50,9 +50,46 @@ http::response facebook_client::flap( const int request_type, std::string* reque
 
 	parent->Log("@@@@@ Sending request to '%s'", nlhr.szUrl);
 
+	switch ( request_type )
+	{
+	case FACEBOOK_REQUEST_API_CHECK:
+	case FACEBOOK_REQUEST_LOGIN:
+	case FACEBOOK_REQUEST_SETUP_MACHINE:
+		nlhr.nlc = NULL;
+		break;
+
+	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
+		nlhr.nlc = hMsgCon;
+		nlhr.flags |= NLHRF_PERSISTENT;
+		break;
+
+	default:
+		WaitForSingleObject(fcb_conn_lock_, INFINITE);
+		nlhr.nlc = hFcbCon;
+		nlhr.flags |= NLHRF_PERSISTENT;
+		break;
+	}
+
 	NETLIBHTTPREQUEST* pnlhr = ( NETLIBHTTPREQUEST* )CallService( MS_NETLIB_HTTPTRANSACTION, (WPARAM)handle_, (LPARAM)&nlhr );
 
 	http::response resp;
+
+	switch ( request_type )
+	{
+	case FACEBOOK_REQUEST_API_CHECK:
+	case FACEBOOK_REQUEST_LOGIN:
+	case FACEBOOK_REQUEST_SETUP_MACHINE:
+		break;
+
+	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
+		hMsgCon = pnlhr ? pnlhr->nlc : NULL;
+		break;
+
+	default:
+		ReleaseMutex(fcb_conn_lock_);
+		hFcbCon = pnlhr ? pnlhr->nlc : NULL;
+		break;
+	}
 
 	if ( pnlhr != NULL )
 	{
@@ -389,7 +426,7 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
 	case FACEBOOK_REQUEST_SETTINGS:
 	case FACEBOOK_REQUEST_TYPING_SEND:
-		*headers_count = 7;
+		*headers_count = 5;
 		break;
 
 	case FACEBOOK_REQUEST_HOME:
@@ -397,11 +434,11 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_RECONNECT:
 	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 	default:
-		*headers_count = 6;
+		*headers_count = 4;
 		break;
 
 	case FACEBOOK_REQUEST_API_CHECK:
-		*headers_count = 5;
+		*headers_count = 3;
 		break;
 	}
 
@@ -419,19 +456,17 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
 	case FACEBOOK_REQUEST_SETTINGS:
 	case FACEBOOK_REQUEST_TYPING_SEND:
-		set_header( &headers[6], "Content-Type" );
+		set_header( &headers[4], "Content-Type" );
 
 	case FACEBOOK_REQUEST_HOME:
 	case FACEBOOK_REQUEST_RECONNECT:
 	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 	default:
-		set_header( &headers[5], "Cookie" );
+		set_header( &headers[3], "Cookie" );
 
 	case FACEBOOK_REQUEST_API_CHECK:
-		set_header( &headers[4], "Connection" );
-		set_header( &headers[3], "User-Agent" );
-		set_header( &headers[2], "Accept" );
-		set_header( &headers[1], "Accept-Encoding" );
+		set_header( &headers[2], "User-Agent" );
+		set_header( &headers[1], "Accept" );
 		set_header( &headers[0], "Accept-Language" );
 		break;
 	}
@@ -451,13 +486,7 @@ void facebook_client::refresh_headers( )
 
 	if ( headers.size() < 5 )
 	{
-		this->headers["Connection"] = "close";
 		this->headers["Accept"] = "*/*";
-#ifdef _DEBUG
-		this->headers["Accept-Encoding"] = "none";
-#else
-		this->headers["Accept-Encoding"] = "deflate, gzip, x-gzip, identity, *;q=0";
-#endif
 		this->headers["Accept-Language"] = "en,en-US;q=0.9";
 		this->headers["Content-Type"] = "application/x-www-form-urlencoded";
 	}
@@ -700,6 +729,14 @@ bool facebook_client::logout( )
 	data += this->logout_hash_;
 
 	http::response resp = flap( FACEBOOK_REQUEST_LOGOUT, &data );
+
+	if (hMsgCon)
+		Netlib_CloseHandle(hMsgCon);
+	hMsgCon = NULL;
+
+	if (hFcbCon)
+		Netlib_CloseHandle(hFcbCon);
+	hFcbCon = NULL;
 
 	// Process result
 	username_ = password_ = self_.user_id = "";

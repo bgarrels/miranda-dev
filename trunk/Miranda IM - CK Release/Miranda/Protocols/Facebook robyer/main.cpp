@@ -34,6 +34,7 @@ LIST_INTERFACE li;
 CLIST_INTERFACE* pcli;
 UTF8_INTERFACE utfi;
 MD5_INTERFACE md5i;
+int hLangpack;
 
 HINSTANCE g_hInstance;
 std::string g_strUserAgent;
@@ -48,7 +49,7 @@ PLUGININFOEX pluginInfo = {
   #endif    	
 	__VERSION_DWORD,
 	"Provides basic support for Facebook Chat protocol. [Built: "__DATE__" "__TIME__"]",
-	"Robert Posel",
+	"Michal Zelinka, Robert Posel",
 	"robyer@seznam.cz",
 	"(c) 2009-11 Michal Zelinka, 2011 Robert Posel",
 	"http://code.google.com/p/robyer/",
@@ -148,8 +149,7 @@ int OnModulesLoaded(WPARAM,LPARAM)
 		#else
 			upd.szBetaUpdateURL      = "http://robyer.info/stahni/facebookRM.zip";  
 		#endif    
-		upd.pbVersion = reinterpret_cast<BYTE*>( CreateVersionStringPlugin(
-			reinterpret_cast<PLUGININFO*>(&pluginInfo),curr_version) );
+		upd.pbVersion = reinterpret_cast<BYTE*>(CreateVersionStringPluginEx(&pluginInfo,curr_version) );
 		upd.cpbVersion = (int)strlen(reinterpret_cast<char*>(upd.pbVersion));
 		CallService(MS_UPDATE_REGISTER,0,(LPARAM)&upd);
 	}
@@ -169,6 +169,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	mir_getLI(&li);
 	mir_getUTFI(&utfi);
 	mir_getMD5I(&md5i);
+	mir_getLP(&pluginInfo);
 
 	pcli = reinterpret_cast<CLIST_INTERFACE*>( CallService(
 	    MS_CLIST_RETRIEVE_INTERFACE,0,reinterpret_cast<LPARAM>(g_hInstance)) );

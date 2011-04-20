@@ -35,6 +35,9 @@ void FacebookProto::UpdateAvatarWorker(void *p)
 	std::auto_ptr<update_avatar> data( static_cast<update_avatar*>(p) );
 	DBVARIANT dbv;
 
+	if (data->url.empty())
+		return;
+	
 	if( !DBGetContactSettingString(data->hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
 	{
 		std::string new_url = data->url;
@@ -59,10 +62,15 @@ void FacebookProto::UpdateAvatarWorker(void *p)
 			LOG("***** Terminating avatar update early: %s",data->url.c_str());
 		} else {
 			if(facy.save_url(new_url,filename))
+			{
+				LOG("***** Done avatar: %s to %s",data->url.c_str(), filename.c_str());
 				ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_AVATAR, ACKRESULT_SUCCESS,&ai,0);
+			}
 			else
+			{
+				LOG("***** Failed avatar: %s to %s",data->url.c_str(), filename.c_str());
 				ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_AVATAR, ACKRESULT_FAILED, &ai,0);
-			LOG("***** Done avatar: %s",data->url.c_str());
+			}		
 		}
 	}
 }
@@ -78,9 +86,11 @@ std::string FacebookProto::GetAvatarFolder()
 
 int FacebookProto::GetAvatarInfo(WPARAM wParam, LPARAM lParam)
 {
+	if (!lParam)
+		return -3;
+
 	PROTO_AVATAR_INFORMATION* AI = ( PROTO_AVATAR_INFORMATION* )lParam;
 	DBVARIANT dbv;
-	std::string avatar_url;
 
 	if ( !DBGetContactSettingString( AI->hContact,m_szModuleName,FACEBOOK_KEY_AV_URL,&dbv ) )
 	{
@@ -96,12 +106,13 @@ int FacebookProto::GetAvatarInfo(WPARAM wParam, LPARAM lParam)
 			std::string file_name = GetAvatarFolder() + '\\' + dbv.pszVal + ext;
 			DBFreeVariant(&dbv);
 
-			AI->format = ext_to_format(ext);
-
-			strncpy((char*)AI->filename, file_name.c_str(), (int)AI->cbSize);
-
-			if (!_access((char*)AI->filename, 0))
+			if (!_access((char*)file_name.c_str(), 0))
+			{
+				LOG("***** Giving AvatarInfo: %s",file_name.c_str());
+				AI->format = ext_to_format(ext);
+				strncpy((char*)AI->filename, file_name.c_str(), (int)AI->cbSize);
 				return GAIR_SUCCESS;
+			}
 		}
 	}
 	return GAIR_NOAVATAR;
@@ -109,7 +120,8 @@ int FacebookProto::GetAvatarInfo(WPARAM wParam, LPARAM lParam)
 
 int FacebookProto::GetMyAvatar(WPARAM wParam, LPARAM lParam)
 {
-	if (!wParam) return -3;
+	if (!wParam)
+		return -3;
 
 	char* buf = ( char* )wParam;
 	int  size = ( int )lParam;
@@ -131,10 +143,12 @@ int FacebookProto::GetMyAvatar(WPARAM wParam, LPARAM lParam)
 			std::string file_name = GetAvatarFolder() + '\\' + dbv.pszVal + ext;
 			DBFreeVariant(&dbv);
 
-			strncpy((char*)wParam, file_name.c_str(), (int)lParam);
-
-			if (!_access((char*)wParam, 0))
+			if (!_access((char*)file_name.c_str(), 0))
+			{
+				LOG("***** Giving MyAvatar: %s",file_name.c_str());
+				strncpy((char*)wParam, file_name.c_str(), (int)lParam);
 				return 0; // Avatar file exists
+			}
 			
 			return -1; // Avatar file doesn't exist
 		}
