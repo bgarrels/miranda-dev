@@ -51,7 +51,14 @@ public:
 		chat_first_touch_ = invisible_ = idle_ = is_typing_ = false;
 
 		buddies_lock_ = send_message_lock_ = NULL;
+		hMsgCon = NULL;
+		hFcbCon = NULL;
+		fcb_conn_lock_ = NULL;
 	}
+
+	HANDLE hMsgCon;
+	HANDLE hFcbCon;
+	HANDLE fcb_conn_lock_;
 
 	// Parent handle
 

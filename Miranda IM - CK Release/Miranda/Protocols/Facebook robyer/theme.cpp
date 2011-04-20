@@ -131,9 +131,10 @@ static int PrebuildContactMenu(WPARAM wParam,LPARAM lParam)
 	return proto ? proto->OnPrebuildContactMenu(wParam,lParam) : 0;
 }
 
+HANDLE hHookPreBuildMenu,sVisitProfile;
 void InitContactMenus()
 {
-	HookEvent(ME_CLIST_PREBUILDCONTACTMENU,PrebuildContactMenu);
+	hHookPreBuildMenu = HookEvent(ME_CLIST_PREBUILDCONTACTMENU,PrebuildContactMenu);
 
 	CLISTMENUITEM mi = {sizeof(mi)};
 	mi.flags = CMIF_ICONFROMICOLIB;
@@ -142,7 +143,7 @@ void InitContactMenus()
 	mi.icolibItem = GetIconHandle("homepage");
 	mi.pszName = LPGEN("Visit Profile");
 	mi.pszService = "FacebookProto/VisitProfile";
-	CreateServiceFunction(mi.pszService,GlobalService<&FacebookProto::VisitProfile>);
+	sVisitProfile = CreateServiceFunction(mi.pszService,GlobalService<&FacebookProto::VisitProfile>);
 	g_hMenuItems[1] = reinterpret_cast<HANDLE>(
 		CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&mi) );
 }
@@ -151,6 +152,8 @@ void UninitContactMenus()
 {
 	for(size_t i=0; i<SIZEOF(g_hMenuItems); i++)
 		CallService(MS_CLIST_REMOVECONTACTMENUITEM,(WPARAM)g_hMenuItems[i],0);
+	UnhookEvent(hHookPreBuildMenu);
+	DestroyServiceFunction(sVisitProfile);
 }
 
 void ShowContactMenus(bool show)

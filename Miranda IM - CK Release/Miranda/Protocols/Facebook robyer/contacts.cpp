@@ -139,6 +139,8 @@ void FacebookProto::UpdateContactWorker(void *p)
 	if ( this->isOffline( ) )
 		goto exit;
 
+	LOG("***** Updating contact: %s",fbu->real_name.c_str());
+
 	if ( fbu->status_id == ID_STATUS_OFFLINE )
 	{
 		DBWriteContactSettingWord(fbu->handle,m_szModuleName,"Status",ID_STATUS_OFFLINE );
@@ -190,11 +192,15 @@ void FacebookProto::UpdateContactWorker(void *p)
 			}
 			if ( update_required || !AvatarExists(fbu) )
 			{
+				LOG("***** Saving new avatar url: %s",fbu->image_url.c_str());
 				DBWriteContactSettingString(fbu->handle,m_szModuleName,FACEBOOK_KEY_AV_URL,fbu->image_url.c_str());
 				ProcessAvatar(fbu->handle,&fbu->image_url);
 
 				if ( fbu->user_id == facy.self_.user_id )
+				{
+					LOG("***** Reporting MyAvatar changed");
 					CallService(MS_AV_REPORTMYAVATARCHANGED, (WPARAM)this->m_szModuleName, 0);
+				}
 			}
 
 			// Update update timestamp

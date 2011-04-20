@@ -512,13 +512,6 @@ bool Omegle_client::events( )
 			// Stranger stopped typing
 			// TODO: not supported by Group chats right now
 		}
-		if ( resp.data.find( "[\"recaptchaRequired\"]" ) != std::string::npos ) {
-			// TODO: somehow process captcha
-			parent->UpdateChat(NULL, "This is the end,... recaptcha is required!");
-		}
-		if ( resp.data.find( "[\"recaptchaRejected\"]" ) != std::string::npos ) {
-			// TODO: somehow process captcha
-		}
 		
 		std::string::size_type pos = 0;
 		while ( (pos = resp.data.find( "[\"gotMessage\",", pos )) != std::string::npos ) {
@@ -534,7 +527,15 @@ bool Omegle_client::events( )
 
 		if ( resp.data.find( "[\"strangerDisconnected\"]" ) != std::string::npos ) {
 			// Stranger disconnected
-
+			parent->StopChat(false);
+		}
+		if ( resp.data.find( "[\"recaptchaRequired\"" ) != std::string::npos ) {
+			// Nothing to do with recaptcha
+			parent->UpdateChat(NULL, Translate("Recaptcha is required.\nOpen Omegle chat in webbrowser, solve Recaptcha and try again."));
+			parent->StopChat(false);
+		}
+		if ( resp.data.find( "[\"recaptchaRejected\"]" ) != std::string::npos ) {
+			// Nothing to do with recaptcha
 			parent->StopChat(false);
 		}
 
