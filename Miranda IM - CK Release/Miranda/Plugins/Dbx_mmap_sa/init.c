@@ -26,12 +26,29 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 struct MM_INTERFACE   mmi;
 struct LIST_INTERFACE li;
 struct UTF8_INTERFACE utfi;
+int hLangpack;
 
 extern char szDbPath[MAX_PATH];
 
 HINSTANCE g_hInst=NULL;
 PLUGINLINK *pluginLink;
 BOOL gl_bUnicodeAwareCore=FALSE;
+
+PLUGININFOEX pluginInfo = {
+	sizeof(PLUGININFOEX),
+	__PLUGIN_NAME,
+	__VERSION_DWORD,
+	"Provides Miranda database support: global settings, contacts, history, settings per contact. Enhanced modification with Encoding.",
+	"Miranda-IM project, modification by FYR and chaos.persei, nullbie, Billy_Bons",
+	"chaos.persei@gmail.com; ashpynov@gmail.com; bio@msx.ru; ghazan@miranda-im.org",
+	"Copyright 2000-2011 Miranda IM project, FYR, chaos.persei, induction, nullbie",
+	"http://dbmmapmod.googlecode.com/",
+	0,
+	DEFMOD_DB,
+    // {28FF9B91-3E4D-4f1c-B47C-C641B037FF40}
+	{ 0x28ff9b91, 0x3e4d, 0x4f1c, { 0xb4, 0x7c, 0xc6, 0x41, 0xb0, 0x37, 0xff, 0x40 } }
+
+};
 
 static int getCapability( int flag )
 {
@@ -120,6 +137,7 @@ static int LoadDatabase( char * profile, void * plink )
 	mir_getLI( &li );
 	mir_getMMI( &mmi );
 	mir_getUTFI( &utfi );
+	mir_getLP( &pluginInfo );
 
 	{ // Are we running under unicode Miranda core ?
 		char szVer[MAX_PATH];
@@ -168,23 +186,6 @@ static DATABASELINK dblink = {
 	UnloadDatabase,
 };
 
-static PLUGININFOEX pluginInfo = {
-	sizeof(PLUGININFOEX),
-	__PLUGIN_NAME,
-	__VERSION_DWORD,
-	"Provides Miranda database support: global settings, contacts, history, settings per contact. Enhanced modification with Encoding.",
-	"Miranda-IM project, modification by FYR and chaos.persei, nullbie, Billy_Bons",
-	"chaos.persei@gmail.com; ashpynov@gmail.com; bio@msx.ru; ghazan@miranda-im.org",
-	"Copyright 2000-2011 Miranda IM project, FYR, chaos.persei, induction, nullbie",
-	"http://dbmmapmod.googlecode.com/",
-	0,
-	DEFMOD_DB,
-    // {28FF9B91-3E4D-4f1c-B47C-C641B037FF40}
-	{ 0x28ff9b91, 0x3e4d, 0x4f1c, { 0xb4, 0x7c, 0xc6, 0x41, 0xb0, 0x37, 0xff, 0x40 } }
-
-};
-
-
 BOOL WINAPI DllMain(HINSTANCE hInstDLL, DWORD dwReason, LPVOID reserved)
 {
 	g_hInst=hInstDLL;
@@ -201,12 +202,6 @@ __declspec(dllexport) PLUGININFOEX * MirandaPluginInfoEx(DWORD mirandaVersion)
 	if ( mirandaVersion < PLUGIN_MAKE_VERSION(0,7,0,0)) {
 		MessageBox( NULL, TranslateT("The dbx_mmap_sa plugin cannot be loaded. It requires Miranda IM 0.7.0.0 or later."), TranslateT("dbx_mmap_sa Plugin"), MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST );
 		return NULL;
-	}
-    
-	if ((GetVersion() & 0x80000000) == 0)
-	{
-		//Unicode Os - Unicode Aware
-		pluginInfo.flags = 1;
 	}
 	return &pluginInfo;
 }
