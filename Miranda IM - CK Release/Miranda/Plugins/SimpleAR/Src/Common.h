@@ -1,4 +1,5 @@
 #define MIRANDA_VER    0x0900
+#define MIRANDA_CUSTOM_LP
 
 // Windows Header Files
 #include <windows.h>
