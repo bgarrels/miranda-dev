@@ -76,6 +76,7 @@ BOOL __inline WildCompareProcW(LPWSTR name, LPWSTR mask);
 HINSTANCE		g_hInst;
 PLUGINLINK*		pluginLink;
 MM_INTERFACE	mmi;					// miranda memory interface
+int hLangpack;
 
 BOOL g_bExtraIcon_Register_ServiceExist		= FALSE;
 BOOL g_bCList_Extra_Set_Icon_ServiceExist	= FALSE;
@@ -152,8 +153,8 @@ extern "C"		__declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirand
 {// Tell Miranda IM about plugin
 	if(mirandaVersion < 0x8000)
 	{
-		MessageBox(NULL,TranslateT("Fingerprint Mod+ plugin requires Miranda IM 0.8.0.0 or later"),TranslateT("Fatal error"), MB_OK );
-		return 0;
+		MessageBox(NULL, TranslateT("Fingerprint Mod+ plugin requires Miranda IM 0.8.0.0 or later"), TranslateT("Fatal error"), MB_OK);
+		return NULL;
 	}
 	return &pluginInfoEx;
 }
@@ -168,6 +169,7 @@ extern "C" int	__declspec(dllexport) Load(PLUGINLINK* link)
 {
 	pluginLink = link;
 	mir_getMMI(&mmi);
+	mir_getLP(&pluginInfoEx);
 
 	hStaticHooks[0] = HookEvent(ME_SYSTEM_MODULESLOADED, OnModulesLoaded);
 	hPreShutdown = HookEvent(ME_SYSTEM_PRESHUTDOWN, OnPreShutdown);
