@@ -34,6 +34,7 @@
 PLUGINLINK* pluginLink = NULL;
 struct MM_INTERFACE mmi;
 struct UTF8_INTERFACE utfi;
+int hLangpack;
 
 HANDLE g_hEventWorkThreadStop;
 int g_nStatus = ID_STATUS_OFFLINE;
@@ -420,14 +421,13 @@ extern "C"
 {
 	__declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 	{
-		Global_pluginInfo.cbSize = sizeof(PLUGININFOEX);
-		return &Global_pluginInfo;
-	}
+		if ( mirandaVersion < PLUGIN_MAKE_VERSION(0,8,0,0) )
+		{
+			MessageBox(NULL, TranslateT("Quotes plugin requires Miranda IM 0.8.0.0 or later"), TranslateT("Fatal error"), MB_OK);
+			return NULL;
+		}
 
-	__declspec(dllexport) PLUGININFO* MirandaPluginInfo(DWORD mirandaVersion)
-	{
-		Global_pluginInfo.cbSize = sizeof(PLUGININFO);
-		return reinterpret_cast<PLUGININFO*>(&Global_pluginInfo);
+		return &Global_pluginInfo;
 	}
 
 
@@ -444,14 +444,7 @@ extern "C"
 		pluginLink = link;
 		mir_getMMI(&mmi);
 		mir_getUTFI(&utfi);
-
-		DWORD mirandaVersion = (DWORD)CallService(MS_SYSTEM_GETVERSION, 0, 0);
-		if(mirandaVersion < 0x8000)
-		{
-			::MessageBox(NULL,TranslateT("Quotes plugin requires Miranda IM 0.8.0.0 or later"),TranslateT("Fatal error"), MB_OK );
-			return 1;
-		}
-
+		mir_getLP(&Global_pluginInfo);
 // 		if((mirandaVersion >= 0x0800) && (1 == mir_getXI(&xi)))
 // 		{
 // 			CModuleInfo::SetXMLEnginePtr(CModuleInfo::TXMLEnginePtr(new CXMLEngineMI));
