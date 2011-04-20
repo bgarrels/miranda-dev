@@ -25,6 +25,7 @@ BOOL fEnabled, gbVarsServiceExist = FALSE;
 INT interval;
 struct MM_INTERFACE mmi;
 struct UTF8_INTERFACE utfi;
+int hLangpack;
 
 TCHAR* ptszDefaultMsg[]={
 	_T("I am currently away. I will reply to you when I am back."),
@@ -313,6 +314,7 @@ extern "C" int __declspec(dllexport)Load(PLUGINLINK *link)
 	pluginLink=link;
 	mir_getMMI(&mmi);
 	mir_getUTFI(&utfi);
+	mir_getLP(&pluginInfoEx);
 
 	hToggleEnable = CreateServiceFunction(protocolname"/ToggleEnable", ToggleEnable);
 	ZeroMemory(&mi, sizeof(mi));
