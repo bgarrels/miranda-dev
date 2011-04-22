@@ -18,8 +18,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13618 $
-Last change on : $Date: 2011-04-22 16:09:42 +0200 (Fr, 22. Apr 2011) $
+Revision       : $Revision: 13620 $
+Last change on : $Date: 2011-04-22 17:21:52 +0200 (Fr, 22. Apr 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -279,12 +279,14 @@ void CJabberProto::GcLogShowInformation( JABBER_LIST_ITEM *item, JABBER_RESOURCE
 		gce.cbSize = sizeof(GCEVENT);
 		gce.ptszNick = user->resourceName;
 		gce.ptszUID = user->resourceName;
-		gce.ptszText = buf;
-		gce.dwFlags = GC_TCHAR|GCEF_ADDTOLOG;
+		gce.ptszText = EscapeChatTags( buf );
+		gce.dwFlags = GC_TCHAR | GCEF_ADDTOLOG;
 		gce.pDest = &gcd;
 		gce.time = time(0);
 		gcd.iType = GC_EVENT_INFORMATION;
 		CallServiceSync( MS_GC_EVENT, NULL, ( LPARAM )&gce );
+
+		mir_free( (void*)gce.ptszText ); // Since we processed msgText and created a new string
 	}
 }
 
