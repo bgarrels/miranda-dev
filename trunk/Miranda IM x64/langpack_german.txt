@@ -7,11 +7,11 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 16 Apr 2011 20:04:47
-; FLID: Deutsche Sprachdatei-GermanLanguagePack 0.11.04.16
+X-Langpack-creation-date: 22 Apr 2011 09:04:52
+; FLID: Deutsche Sprachdatei 0.11.04.22
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirOTR,MirOUT,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
-; Start of langpack: Core (Letzte Änderung: 13:59, 20. MÃ¤r. 2011 )
+; Start of langpack: Core (Letzte Änderung: 22:09, 21. Apr. 2011 )
 
 [0 = Default]
 0 = Standard
@@ -209,7 +209,7 @@ wie:
 [Ask]
 Fragen
 [Auto]
-Automatisch
+Auto
 [Auto Reply]
 Automatische Antwort
 [Automatically delete contacts not in my roster]
@@ -8504,7 +8504,7 @@ Avatar-Unterstützung aktivieren (*)
 ; ##############################################
 ; End of langpack: C6
 ; ############################################## 
-; Start of langpack: CList_Nicer (Letzte Änderung: 13:53, 22. Jan. 2011 )
+; Start of langpack: CList_Nicer (Letzte Änderung: 17:03, 21. Apr. 2011 )
 
 ; Pluginname: CList Nicer+ aka Clist_nicer
 ; Version: 0.9.13.0
@@ -8999,6 +8999,14 @@ Hauptmenü öffnen
 Fensternamen
 [Contact list local time]
 Lokale Kontaktzeit
+
+; Icons
+[%s Connecting]
+%s Verbindung
+[Connecting Icons]
+Verbindungs-Icons
+[Overlay Icons]
+Overlay-Icons
 
 [Item ignored]
 Element ignorieren
@@ -10852,14 +10860,14 @@ Stellt Unterstützung für die Miranda-Profildatei bereit: Globale Einstellungen, 
 ; ##############################################
 ; End of langpack: Dbx_mmap
 ; ############################################## 
-; Start of langpack: Dbx_rw (Letzte Änderung: 23:09, 27. Aug. 2010 )
+; Start of langpack: Dbx_rw (Letzte Änderung: 07:29, 18. Apr. 2011 )
 
 ; Pluginname: dbRW Database Driver 
-; Version: 1.5.0.0
+; Version: 1.4.0.0
+; SQLite: 3.7.6.2 Alpha #1
 ; Dateiname: dbx_rw.dll
 ; Autor: Robert Rainwater
 ; Unique ID: {f3ca0e5e-249a-40f0-8d74-80a80ef0c83d}
-; Link: Stable
 ; Übersetzung: CHEF-KOCH am 22.07.2010
 
 [Loading dbRW v%s alpha #%s (SQLite v%s)]
@@ -11339,10 +11347,10 @@ Keine Dateien...
 ; ##############################################
 ; End of langpack: FTP_File_YM
 ; ############################################## 
-; Start of langpack: Facebook (Letzte Änderung: 16:32, 6. MÃ¤r. 2011 )
+; Start of langpack: Facebook (Letzte Änderung: 19:42, 20. Apr. 2011 )
 
 ; Pluginname: Facebook Protokoll
-; Version: 0.1.3.8 + RM 0.0.2.4 vom 6.3.2011
+; Version: 0.1.3.9 + RM 0.0.2.4 vom 6.3.2011
 ; Dateiname: facebook.dll
 ; Unique ID: {dde897ad-e40a-4e2c-98d8-d20b575e96bc}
 ; Autor(en) jarvis, robyer
@@ -18344,7 +18352,7 @@ Deaktiviere Invisible 4 Invisible
 ; ##############################################
 ; End of langpack: Invisible4Invisible
 ; ############################################## 
-; Start of langpack: Jabber (Letzte Änderung: 19:21, 10. Apr. 2011 )
+; Start of langpack: Jabber (Letzte Änderung: 22:00, 21. Apr. 2011 )
 
 ; Pluginname: Jabber Protocol 
 ; Version: 0.9.15.0
@@ -18378,10 +18386,8 @@ sende unbekannten Anwesenheitstyp
 Nutze SSL
 [UseTLS]
 Nutze TLS
-[Enable XMPP link processing (requires Association Manager)]
-Aktiviere XMPP Linkverarbeitung (benötigt File Association Manager)
 [XML for MS Excel (UTF-8 encoded)]
-XML für MS Excel (UTF-8 Verschlüsselung)
+XML für MS Excel (UTF-8 Kodierung)
 [Jabber Protocol Option]
 Jabber Protkolloption
 
@@ -18395,6 +18401,8 @@ Jabber( XMPP)(SSL, veraltet)
 Jabber-Protokollunterstützung für Miranda IM (%s)
 
 ; [JABBER] Option -> Jabber
+[Use Domain Login]
+Domain-Login verwenden
 [Resource:]
 Standort:
 [Priority:]
@@ -18512,8 +18520,6 @@ Servereinstellungen
 SASL-Authentifizierung deaktivieren (für ältere Server)
 [Enable stream compression (if possible)]
 Datenstromkompression aktivieren (falls möglich)
-[Enable XMPP server ping (XEP-0199)]
-XMPP-Server-Ping aktivieren (XEP-0199, Trennung, wenn Server nicht antwortet)
 
 ;Sonstiges
 [Enable remote controlling (from another resource of same JID only)]
@@ -18521,13 +18527,15 @@ Fernsteuerung aktivieren (nur von einer anderen Jabberressource derselben JID)
 [Show transport agents on contact list]
 Zeige Transportagenten in der Kontaktliste
 [Automatically add contact when accept authorization]
-Kontakt bei akzeptierter Autorisierung automat. hinzufügen
+Kontakt bei akzeptierter Autorisierung automatisch hinzufügen
 [Automatically accept authorization requests]
 Autorisierungsanfragen automatisch akzeptieren
 [Fix incorrect timestamps in incoming messages]
 Korrigiere falsche Zeitangaben in empfangenen Nachrichten
 [Disable frame]
 Deaktiviere Kontaktlisten-Element (erfordert Neustart)
+[Enable XMPP link processing (requires Association Manager)]
+Aktiviere XMPP Linkverarbeitung (benötigt File Association Manager)
 
 [Security]
 Sicherheit
@@ -20056,20 +20064,6 @@ Stelle XStatus Liste ein
  
 ; ##############################################
 ; End of langpack: Keyboard_Notify_Ext
-; ############################################## 
-; Start of langpack: Kopfzeile (Letzte Änderung: 15:04, 10. Apr. 2011 )
-Miranda Language Pack Version 1
-Language: German (DE)
-Locale: 0407
-Last-Modified-Using: Miranda IM 0.9.19
-Authors: miranda-im.de Projekt Sprachdatei - diverse Autoren
-Author-email: sprachdatei@miranda-im.de
-; Deutsche Miranda IM Webseite: http://miranda-im.de
-; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
-
- 
-; ##############################################
-; End of langpack: Kopfzeile
 ; ############################################## 
 ; Start of langpack: Language_Pack_Manager (Letzte Änderung: 01:25, 18. Sep. 2010 )
 
@@ -33082,7 +33076,7 @@ Standbilder
 ; ##############################################
 ; End of langpack: TV_plugin_YM
 ; ############################################## 
-; Start of langpack: TabSRMM (Letzte Änderung: 20:38, 8. MÃ¤r. 2011 )
+; Start of langpack: TabSRMM (Letzte Änderung: 19:57, 21. Apr. 2011 )
 
 ; Pluginname: TabSRMM 
 ; Version(en): 3.0.13.0 & 3.1.99.6
@@ -33905,11 +33899,13 @@ Nachrichtenverlaufseinstellungen &importieren...
 [Event Popups]
 Ereignis-Popups
 [Disable all Event Popups]
-Alle Popups unterbinden
+Alle Ereignis-Popups deaktivieren
 [Show Popups if Window is minimized]
-Popups, wenn Fenster minimiert
+Popups anzeigen, wenn Fenster minimiert
 [Show Popups if Window is unfocused]
-Popups, wenn Fenster inaktiv
+Popups anzeigen, wenn Fenster inaktiv
+[Show Popups if Window is focused]
+Popups anzeigen, wenn Fenster aktiv
 [Show Popups for all inactive sessions]
 Popups für alle inaktiven Sitzungen
 [Save current Window Position as Default]
@@ -34086,11 +34082,13 @@ Benutze Tab-Schaltflächen (*)
 
 ;Benachrichtigung
 [Select, when you want to see event notifications (popups) for this window. The settings apply to all tabs within this window.]
-Wählen Sie, wenn Sie Ereignisbenachrichtigungen (Popups) für dieses Fenster sehen wollen. Die Einstellungen gelten für alle Registerkarten in diesem Fenster.
+Wählen Sie, wann Sie Ereignisbenachrichtigungen (Popups) für dieses Fenster sehen wollen. Die Einstellungen gelten für alle Registerkarten in diesem Fenster.
 [Enable popups if minimized]
-Popups, wenn Fenster minimiert
+Popups aktivieren, wenn Fenster minimiert
 [Enable popups if unfocused]
-Popups, wenn Fenster inaktiv
+Popups aktivieren, wenn Fenster inaktiv
+[Enable popups if focused]
+Popups aktivieren, wenn Fenster aktiv
 [Show popups for inactive tabs in active containers]
 Popups für inaktive Tabs in aktiven Containern zeigen
 [You have chosen to disable all event notifications for open message windows.]
@@ -36791,7 +36789,7 @@ Ausgabegerät:
 ; ##############################################
 ; End of langpack: Un4seens_bass_interface
 ; ############################################## 
-; Start of langpack: Updater (Letzte Änderung: 13:57, 20. MÃ¤r. 2011 )
+; Start of langpack: Updater (Letzte Änderung: 21:48, 21. Apr. 2011 )
 
 ; Pluginname: Updater 
 ; Version: 0.6.1.4
@@ -36963,9 +36961,9 @@ WARNUNG: Updater löscht bei Installation alles im 'Updates'-Ordner - bitte kein 
 [Restart Miranda IM]
 Miranda IM neustarten
 [Check for Updates of Plugins]
-Suche nach updatebaren Plugins
+Suche nach aktualisierten Plugins
 [Update and Exit Miranda IM]
-Update und beende Miranda IM
+Aktualisiere und beende Miranda IM
 
 [BZ2 Decompression, configuration error]
 BZ2-Dekompression, Konfigurationsfehler
@@ -41023,7 +41021,7 @@ ungültiges Argument
 ; ##############################################
 ; End of langpack: Webi
 ; ############################################## 
-; Start of langpack: WhenWasIt_birthday_reminder (Letzte Änderung: 17:13, 15. Apr. 2011 )
+; Start of langpack: WhenWasIt_birthday_reminder (Letzte Änderung: 17:49, 21. Apr. 2011 )
 
 ; Pluginname: WhenWasIt Birthday Reminder 
 ; Version: 0.3.2.8
@@ -41169,6 +41167,10 @@ UserInfo-Modul
 Protokollmodul
 [mBirthday module]
 mBirthday-Modul
+
+
+[Birthdays files]
+Geburtstags-Dateien
 
 [1 day to birthday]
 1 Tag bis zum Geburtstag
