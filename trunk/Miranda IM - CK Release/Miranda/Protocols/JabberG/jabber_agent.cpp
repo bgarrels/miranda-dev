@@ -18,9 +18,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
-Last change on : $Date: 2011-03-17 20:12:56 +0100 (Do, 17. Mrz 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13618 $
+Last change on : $Date: 2011-04-22 16:09:42 +0200 (Fr, 22. Apr 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -245,7 +245,9 @@ public:
 
 		if (( xNode = xmlGetChild( queryNode , "x" )) != NULL ) {
 			// use new jabber:x:data form
-			xmlAddChild( query, JabberFormGetData( hFrame, xNode ));
+			HXML n = JabberFormGetData( hFrame, xNode );
+			xmlAddChild( query, n );
+			xi.destroyNode( n );
 		}
 		else {
 			// use old registration information form
