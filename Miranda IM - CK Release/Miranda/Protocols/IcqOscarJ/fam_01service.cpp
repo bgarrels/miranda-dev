@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/fam_01service.cpp $
-// Revision       : $Revision: 13553 $
-// Last change on : $Date: 2011-04-08 05:25:55 +0400 (Пт, 08 апр 2011) $
-// Last change by : $Author: borkra $
+// Revision       : $Revision: 13608 $
+// Last change on : $Date: 2011-04-21 21:18:19 +0200 (Do, 21. Apr 2011) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -692,7 +692,13 @@ void CIcqProto::setUserInfo()
 #endif
 
 	//MIM/PackName
-	wAdditionalData += 16;
+	bool bHasPackName = false;
+	DBVARIANT dbv;
+	if ( !DBGetContactSettingString(NULL, "ICQCaps", "PackName", &dbv )) {
+		//MIM/PackName
+		bHasPackName = true;
+		wAdditionalData += 16;
+	}
 
 	serverPacketInit(&packet, (WORD)(62 + wAdditionalData));
 	packFNACHeader(&packet, ICQ_LOCATION_FAMILY, ICQ_LOCATION_SET_USER_INFO);
@@ -710,7 +716,7 @@ void CIcqProto::setUserInfo()
 	}
 #endif
 	{
-//		packShortCapability(&packet, 0x1349);  // AIM_CAPS_ICQSERVERRELAY
+		packShortCapability(&packet, 0x1349);  // AIM_CAPS_ICQSERVERRELAY
 	}
 	if (m_bUtfEnabled)
 	{
@@ -764,13 +770,10 @@ void CIcqProto::setUserInfo()
 	packDWord(&packet, ICQ_PLUG_VERSION);
 
 	//MIM/PackName
-	DBVARIANT dbv;
-	if ( !DBGetContactSettingString(NULL, "ICQCaps", "PackName", &dbv ))
-	{
+	if ( bHasPackName ) {
 		packBuffer(&packet, (BYTE*)dbv.pszVal, 0x10);
-		DBFreeVariant(&dbv);
+		ICQFreeVariant(&dbv);
 	}
-	else packBuffer(&packet, (BYTE*)"MIM/MataesPack", 0x10);
 
 	sendServPacket(&packet);
 }
@@ -814,7 +817,7 @@ void CIcqProto::handleServUINSettings(int nPort, serverthread_info *info)
 		// Get status note & mood
 		char *szStatusNote = PrepareStatusNote(m_iDesiredStatus);
 		BYTE bXStatus = getContactXStatus(NULL);
-		char szMoodData[37];
+		char szMoodData[32];
 
 		// prepare mood id
 		if (m_bMoodsEnabled && bXStatus && moodXStatus[bXStatus-1] != -1)
