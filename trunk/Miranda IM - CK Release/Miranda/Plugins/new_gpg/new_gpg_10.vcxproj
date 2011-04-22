@@ -403,6 +403,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0809</Culture>
+      <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>libgpgme-11.lib;libgcrypt-11.lib;libksba-8.lib;%(AdditionalDependencies)</AdditionalDependencies>
