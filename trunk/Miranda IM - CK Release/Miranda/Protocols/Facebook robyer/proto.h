@@ -117,6 +117,7 @@ public:
 	int  __cdecl SvcCreateAccMgrUI( WPARAM, LPARAM );
 	int  __cdecl GetMyAvatar(WPARAM, LPARAM );
 	int  __cdecl GetAvatarInfo(WPARAM, LPARAM );
+	int  __cdecl GetAvatarCaps(WPARAM, LPARAM );
 	int  __cdecl VisitProfile(WPARAM, LPARAM );
 
 	// Events

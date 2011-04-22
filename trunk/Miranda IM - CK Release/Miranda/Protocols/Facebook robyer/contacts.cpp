@@ -154,9 +154,20 @@ void FacebookProto::UpdateContactWorker(void *p)
 			if (!fbu->handle) // just been added
 				fbu->handle = AddToContactList(fbu);
 
-			if (!fbu->last_update) // just come online
+			if (!fbu->last_update) { // just come online
 				update_required = true;
-			else // is in database non-actual status?
+
+				// RM TODO: remove this
+				DBVARIANT dbv;
+				if ( !DBGetContactSettingString(fbu->handle,m_szModuleName,"Homepage",&dbv) )
+				{
+					DBFreeVariant(&dbv);
+				} else {
+					std::string url = FACEBOOK_URL_PROFILE + fbu->user_id;
+					DBWriteContactSettingString(fbu->handle,m_szModuleName,"Homepage",url.c_str());
+				}
+
+			} else // is in database non-actual status?
 				update_required = DBGetContactSettingWord(fbu->handle,m_szModuleName,"Status", 0) != (fbu->is_idle ? ID_STATUS_AWAY : ID_STATUS_ONLINE);
 
 			if (update_required)
@@ -196,11 +207,11 @@ void FacebookProto::UpdateContactWorker(void *p)
 				DBWriteContactSettingString(fbu->handle,m_szModuleName,FACEBOOK_KEY_AV_URL,fbu->image_url.c_str());
 				ProcessAvatar(fbu->handle,&fbu->image_url);
 
-				if ( fbu->user_id == facy.self_.user_id )
+/*				if ( fbu->user_id == facy.self_.user_id )
 				{
 					LOG("***** Reporting MyAvatar changed");
 					CallService(MS_AV_REPORTMYAVATARCHANGED, (WPARAM)this->m_szModuleName, 0);
-				}
+				}*/
 			}
 
 			// Update update timestamp

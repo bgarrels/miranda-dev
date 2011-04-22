@@ -64,12 +64,16 @@ void FacebookProto::UpdateAvatarWorker(void *p)
 			if(facy.save_url(new_url,filename))
 			{
 				LOG("***** Done avatar: %s to %s",data->url.c_str(), filename.c_str());
-				ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_AVATAR, ACKRESULT_SUCCESS,&ai,0);
+				if (data->hContact != NULL)
+					ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_AVATAR, ACKRESULT_SUCCESS,&ai,0);
+				else
+					CallService(MS_AV_REPORTMYAVATARCHANGED, (WPARAM)this->m_szModuleName, 0);
 			}
 			else
 			{
 				LOG("***** Failed avatar: %s to %s",data->url.c_str(), filename.c_str());
-				ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_AVATAR, ACKRESULT_FAILED, &ai,0);
+				if (data->hContact != NULL)
+					ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_AVATAR, ACKRESULT_FAILED, &ai,0);
 			}		
 		}
 	}
@@ -82,6 +86,11 @@ std::string FacebookProto::GetAvatarFolder()
 		return path;
 	else
 		return def_avatar_folder_;
+}
+
+int FacebookProto::GetAvatarCaps(WPARAM wParam, LPARAM lParam)
+{
+	return 0;
 }
 
 int FacebookProto::GetAvatarInfo(WPARAM wParam, LPARAM lParam)
@@ -161,7 +170,8 @@ bool FacebookProto::AvatarExists(facebook_user* fbu)
 	if (!fbu->image_url.empty())
 	{
 		std::string ext = fbu->image_url.substr(fbu->image_url.rfind('.'));
-		std::string file_name = GetAvatarFolder() + '\\' + fbu->user_id + ext;
+		std::string file_name = GetAvatarFolder();
+		file_name += '\\' + fbu->user_id + ext;
 
 		if (!_access(file_name.c_str(), 0))
 			return true;
