@@ -79,12 +79,10 @@ std::string utils::conversion::to_string( void* data, WORD type )
 
 void utils::text::replace_first( std::string* data, std::string from, std::string to )
 {
-	std::string::size_type position = 0;
-
-	if ( ( position = data->find(from, position) ) != std::string::npos )
+	std::string::size_type position = data->find(from);
+	if ( position != std::string::npos )
 	{
 		data->replace( position, from.size(), to );
-		position++;
 	}
 }
 

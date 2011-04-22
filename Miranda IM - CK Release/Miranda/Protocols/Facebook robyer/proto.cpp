@@ -52,6 +52,8 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 	CreateProtoService(m_szModuleName, PS_SETAWAYMSG,     &FacebookProto::SetMyAwayMsg,      this);
 	CreateProtoService(m_szModuleName, PS_GETMYAVATAR,    &FacebookProto::GetMyAvatar,       this);
 	CreateProtoService(m_szModuleName, PS_GETAVATARINFO,  &FacebookProto::GetAvatarInfo,     this);
+	CreateProtoService(m_szModuleName, PS_GETAVATARCAPS,  &FacebookProto::GetAvatarCaps,     this);
+
   // RM TODO: group chats
 /*  CreateProtoService(m_szModuleName,PS_JOINCHAT, &FacebookProto::OnJoinChat, this);
 	CreateProtoService(m_szModuleName,PS_LEAVECHAT,&FacebookProto::OnLeaveChat,this);*/
@@ -486,7 +488,7 @@ int FacebookProto::VisitProfile(WPARAM wParam,LPARAM lParam)
 	{
 		CallService(MS_UTILS_OPENURL,1,reinterpret_cast<LPARAM>(dbv.pszVal));
 		DBFreeVariant(&dbv);
-	} else {
+	}/* else {
 		// RM TODO: remove this
 		std::string key, url;
 		if (DBGetContactSettingByte(hContact,m_szModuleName,"ChatRoom",0) == 0)
@@ -506,7 +508,7 @@ int FacebookProto::VisitProfile(WPARAM wParam,LPARAM lParam)
 			CallService(MS_UTILS_OPENURL,1,reinterpret_cast<LPARAM>(url.c_str()));
 			DBFreeVariant(&dbv);
 		}
-	}
+	}*/
 
 	return 0;
 }
