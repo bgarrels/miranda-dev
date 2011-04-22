@@ -216,6 +216,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0809</Culture>
+      <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>MSImg32.Lib;comctl32.lib;shlwapi.lib;gdiplus.lib;Delayimp.lib;%(AdditionalDependencies)</AdditionalDependencies>

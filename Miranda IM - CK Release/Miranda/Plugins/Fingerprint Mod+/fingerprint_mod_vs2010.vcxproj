@@ -125,6 +125,7 @@
     </Link>
     <ResourceCompile>
       <PreprocessorDefinitions>FULL;_FULL;WIN32;NDEBUG;_WINDOWS;_USRDLL;FINGERPRINT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">

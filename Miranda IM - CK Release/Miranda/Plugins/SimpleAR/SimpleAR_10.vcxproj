@@ -151,6 +151,9 @@
     <Bscmake>
       <OutputFile>$(IntDir)$(ProjectName).bsc</OutputFile>
     </Bscmake>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
     <Midl>
