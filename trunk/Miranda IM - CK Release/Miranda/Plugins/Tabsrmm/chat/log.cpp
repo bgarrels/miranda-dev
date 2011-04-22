@@ -30,7 +30,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: log.cpp 13046 2010-10-28 10:02:50Z silvercircle $
+ * $Id: log.cpp 13614 2011-04-22 13:16:21Z borkra $
  *
  * Implements the richedit-based message history display for the group
  * chat window.
@@ -543,8 +543,7 @@ static int Log_AppendRTF(LOGSTREAMDATA* streamData, BOOL simpleMode, char **buff
 
 	va_start(va, fmt);
 	lineLen = _vsntprintf(line, 8000, fmt, va);
-	if (lineLen < 0)
-		return 0;
+	if (lineLen < 0) lineLen = 8000;
 	line[lineLen] = 0;
 	va_end(va);
 
