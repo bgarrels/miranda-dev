@@ -439,7 +439,7 @@ INT_PTR CALLBACK OptionsAdvancedDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, 
 			for(i=0;i<sizeof(statusModes)/sizeof(statusModes[0]);i++) {
 				int k;
 
-				k=SendDlgItemMessage(hwndDlg,IDC_SKYPEOUTSTAT,CB_ADDSTRING,0,(LPARAM)CallService(MS_CLIST_GETSTATUSMODEDESCRIPTION,statusModes[i],GSMDF_TCHAR));
+				k=SendDlgItemMessage(hwndDlg,IDC_SKYPEOUTSTAT,CB_ADDSTRING,0,(LPARAM)CallService(MS_CLIST_GETSTATUSMODEDESCRIPTION,statusModes[i],GCMDF_TCHAR));
 				SendDlgItemMessage(hwndDlg,IDC_SKYPEOUTSTAT,CB_SETITEMDATA,k,statusModes[i]);
 				if (statusModes[i]==j) SendDlgItemMessage(hwndDlg,IDC_SKYPEOUTSTAT,CB_SETCURSEL,i,0);
 			}
@@ -476,6 +476,20 @@ INT_PTR CALLBACK OptionsAdvancedDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, 
 					break;
 			}
 			if (!initDlg) SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+		}
+	}
+	return 0;
+}
+
+static int CALLBACK BrowseCallbackProc(HWND hWnd, UINT uMsg, LPARAM lParam,	LPARAM lpData)
+{
+	switch (uMsg)
+	{
+		case BFFM_INITIALIZED:
+		{
+			// set initial directory
+			SendMessage(hWnd, BFFM_SETSELECTION, TRUE, lpData);
+			break;
 		}
 	}
 	return 0;
@@ -586,6 +600,44 @@ INT_PTR CALLBACK OptionsDefaultDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 				case IDC_CUSTOMCOMMAND:
 					EnableWindow(GetDlgItem(hwndDlg, IDC_COMMANDLINE), SendMessage(GetDlgItem(hwndDlg, IDC_CUSTOMCOMMAND), BM_GETCHECK,0,0));
 					break;
+				case IDC_BROWSECMDL:
+				{
+					OPENFILENAMEA ofn={0};
+					char szFileName[MAX_PATH]={0};
+						
+					ofn.lStructSize=sizeof(ofn);
+					ofn.hwndOwner=hwndDlg;
+					ofn.lpstrFilter="Executable files (*.exe)\0*.exe\0All files (*.*)\0*.*\0";
+					ofn.nMaxFile=sizeof(szFileName);
+					ofn.lpstrDefExt="exe";
+					ofn.lpstrFile=szFileName;
+					ofn.Flags=OFN_NOCHANGEDIR;
+					if (!GetDlgItemTextA(hwndDlg,IDC_COMMANDLINE,szFileName,sizeof(szFileName)))
+						strcpy (szFileName, "Skype.exe");
+					if (GetOpenFileNameA(&ofn)) 
+						SetWindowTextA(GetDlgItem(hwndDlg, IDC_COMMANDLINE), szFileName);
+					break;
+				}
+				case IDC_BROWSEDP:
+				{
+					BROWSEINFOA bi={0};
+					LPITEMIDLIST pidl;
+					char szFileName[MAX_PATH];
+
+					GetDlgItemTextA (hwndDlg, IDC_DATAPATH, szFileName, MAX_PATH);
+					bi.hwndOwner = hwndDlg;
+					bi.ulFlags   = BIF_RETURNONLYFSDIRS;
+					bi.lpfn      = BrowseCallbackProc;
+					bi.lParam    = (LPARAM)szFileName;
+         
+					if ( (pidl = SHBrowseForFolderA (&bi)) ) {
+						if (SHGetPathFromIDListA (pidl, szFileName))
+							SetDlgItemTextA (hwndDlg, IDC_DATAPATH, szFileName);
+						CoTaskMemFree (pidl);
+					}
+					break;
+				}
+
 #ifdef SKYPE_AUTO_DETECTION
 				case IDC_AUTODETECTION:
 					DoAutoDetect(hwndDlg);
