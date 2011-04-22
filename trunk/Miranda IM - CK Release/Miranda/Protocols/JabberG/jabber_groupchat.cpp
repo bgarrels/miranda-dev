@@ -18,8 +18,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13512 $
-Last change on : $Date: 2011-03-26 23:50:25 +0100 (Sa, 26. Mrz 2011) $
+Revision       : $Revision: 13625 $
+Last change on : $Date: 2011-04-22 21:45:29 +0200 (Fr, 22. Apr 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -203,14 +203,21 @@ private:
 	}
 };
 
-JABBER_RESOURCE_STATUS* GcFindResource(JABBER_LIST_ITEM *item, const TCHAR *resource)
+JABBER_RESOURCE_STATUS* CJabberProto::GcFindResource(JABBER_LIST_ITEM *item, const TCHAR *resource)
 {
+	JABBER_RESOURCE_STATUS *res = NULL;
+	
+	EnterCriticalSection( &m_csLists );
 	JABBER_RESOURCE_STATUS *r = item->resource;
-	for ( int i=0; i<item->resourceCount; i++ )
-		if ( !_tcscmp( r[i].resourceName, resource )) 
-			return &r[i];
+	for ( int i=0; i<item->resourceCount; i++ ) {
+		if ( !_tcscmp( r[i].resourceName, resource )) {
+			res = &r[i];
+			break;
+		}
+	}
+	LeaveCriticalSection( &m_csLists );
 
-	return NULL;
+	return res;
 }
 
 INT_PTR __cdecl CJabberProto::OnMenuHandleJoinGroupchat( WPARAM, LPARAM )
