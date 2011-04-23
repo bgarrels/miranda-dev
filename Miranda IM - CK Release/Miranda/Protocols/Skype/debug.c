@@ -66,7 +66,7 @@ void do_log(const char *pszFormat, ...) {
 		  m_iBufSize*=2;
 		}
 	} while (iLen == -1);
-	fprintf (m_fpLogFile, "%s (%ld) [%08X]   %s\n", ct, lt, GetCurrentThreadId(), m_szLogBuf);
+	fprintf (m_fpLogFile, sizeof(time_t) == sizeof(int) ? "%s (%ld) [%08X]   %s\n" : "%s (%lld) [%08X]   %s\n", ct, lt, GetCurrentThreadId(), m_szLogBuf);
 	fflush (m_fpLogFile);
 	LeaveCriticalSection(&m_WriteFileMutex);
 }
