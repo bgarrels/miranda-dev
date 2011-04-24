@@ -106,7 +106,6 @@ begin
     TranslateDialogDefault(Dialog);
     tempwstr:=ANSIToWide(PChar(GetContactDisplayName(lParam)),tempwstr,cp);
     s:=WideFormat(TranslateWideString('Import history to %s (%s)'),[tempwstr,GetContactID(lParam)]);
-
     SetWindowTextW(Dialog,PWideChar(s));
     SendMessage(Dialog,WM_SETICON,ICON_SMALL,LoadIcon(hInstance,MAKEINTRESOURCE(IDI_DEFAULT)));
     FillChar(ITDD,SizeOf(TImpTxtDlgData),0);
