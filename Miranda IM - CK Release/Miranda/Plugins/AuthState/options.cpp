@@ -18,7 +18,7 @@
 
    File name      : $URL: http://svn.miranda.im/mainrepo/authstate/trunk/options.cpp $
    Revision       : $Rev: 1686 $
-   Last change on : $Date: 2010-10-06 10:26:58 +0400 (Ср, 06 окт 2010) $
+   Last change on : $Date: 2010-10-06 08:26:58 +0200 (Ср, 06 окт 2010) $
    Last change by : $Author: ghazan $
 
 */
