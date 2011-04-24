@@ -1,9 +1,9 @@
 /*
 Popup Plus plugin for Miranda IM
 
-Copyright	� 2002 Luca Santarelli,
-			� 2004-2007 Victor Pavlychko
-			� 2010 MPK
+Copyright	� 2002 Luca Santarelli,
+			� 2004-2007 Victor Pavlychko
+			� 2010 MPK
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 File name      : $HeadURL: http://svn.miranda.im/mainrepo/popup/trunk/src/main.cpp $
 Revision       : $Revision: 1652 $
-Last change on : $Date: 2010-07-15 21:48:21 +0400 (Чт, 15 июл 2010) $
+Last change on : $Date: 2010-07-15 20:48:21 +0300 (Чт, 15 июл 2010) $
 Last change by : $Author: Merlin_de $
 
 ===============================================================================
@@ -375,14 +375,14 @@ void registerUpdate(){
 
 //register Hotkey
 void LoadHotkey(){	
-    HOTKEYDESC hk        = {0};
-    hk.cbSize            = sizeof(hk);
+	HOTKEYDESC hk        = {0};
+	hk.cbSize            = sizeof(hk);
 	hk.dwFlags			 = HKD_TCHAR;
-    hk.pszName            = "Toggle Popups";
-    hk.ptszDescription    = LPGENT("Toggle Popups");
-    hk.ptszSection        = LPGENT(MODULNAME_PLU);
-    hk.pszService        = MENUCOMMAND_SVC;
-    CallService(MS_HOTKEY_REGISTER, 0, (LPARAM) &hk);
+	hk.pszName            = "Toggle Popups";
+	hk.ptszDescription    = LPGENT("Toggle Popups");
+	hk.ptszSection        = LPGENT(MODULNAME_PLU);
+	hk.pszService        = MENUCOMMAND_SVC;
+	CallService(MS_HOTKEY_REGISTER, 0, (LPARAM) &hk);
 }
 
 //menu
@@ -698,14 +698,11 @@ MIRAPI int Unload(void)
 {
 	int i;
 
-//	UnloadNotifyImp(); //deprecatet stuff
-
 	for (i = SIZEOF(popupServices); i--; )
 		DestroyServiceFunction(popupServices[i].handle);
 
 	SrmmMenu_Unload();
 
-//	UnhookEvent(hNotifyOptionsInitialize);		deprecatet
 	UnhookEvent(hOptionsInitialize);
 	UnhookEvent(hModulesLoaded);
 	UnhookEvent(hOkToExit);
@@ -719,7 +716,7 @@ MIRAPI int Unload(void)
 	DestroyServiceFunction(hGetStatus);
 	DestroyServiceFunction(hGetVersion);
 	DestroyServiceFunction(hSquareFad);
-	
+
 	DeleteObject(fonts.title);
 	DeleteObject(fonts.clock);
 	DeleteObject(fonts.text);

@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 File name      : $HeadURL: http://svn.miranda.im/mainrepo/popup/trunk/src/popup_gdiplus.cpp $
 Revision       : $Revision: 1622 $
-Last change on : $Date: 2010-06-24 00:32:21 +0400 (Чт, 24 июн 2010) $
+Last change on : $Date: 2010-06-23 23:32:21 +0300 (Ср, 23 июн 2010) $
 Last change by : $Author: Merlin_de $
 
 ===============================================================================
