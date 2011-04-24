@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 File name      : $HeadURL: http://svn.miranda.im/mainrepo/popup/trunk/src/bitmap_funcs.cpp $
 Revision       : $Revision: 1627 $
-Last change on : $Date: 2010-06-29 11:34:46 +0400 (Вт, 29 июн 2010) $
+Last change on : $Date: 2010-06-29 10:34:46 +0300 (Вт, 29 июн 2010) $
 Last change by : $Author: Merlin_de $
 
 ===============================================================================

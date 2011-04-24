@@ -46,7 +46,7 @@ http://addons.miranda-im.org/
 
 File name      : $HeadURL: http://svn.miranda.im/mainrepo/popup/trunk/src/headers.h $
 Revision       : $Revision: 1651 $
-Last change on : $Date: 2010-07-15 21:31:06 +0400 (Чт, 15 июл 2010) $
+Last change on : $Date: 2010-07-15 20:31:06 +0300 (Чт, 15 июл 2010) $
 Last change by : $Author: Merlin_de $
 
 ===============================================================================

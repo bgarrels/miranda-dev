@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 File name      : $HeadURL: http://svn.miranda.im/mainrepo/popup/trunk/src/avatars_gif.cpp $
 Revision       : $Revision: 1624 $
-Last change on : $Date: 2010-06-24 20:39:34 +0400 (Чт, 24 июн 2010) $
+Last change on : $Date: 2010-06-24 19:39:34 +0300 (Чт, 24 июн 2010) $
 Last change by : $Author: Merlin_de $
 
 ===============================================================================
