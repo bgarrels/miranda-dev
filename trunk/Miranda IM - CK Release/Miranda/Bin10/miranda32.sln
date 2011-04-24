@@ -32,8 +32,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{A974
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xStatus_Jabber", "..\Protocols\JabberG\jabber_xstatus\JABBER_XSTATUS_10.vcxproj", "{78004D9C-4706-4759-ACED-1BFEE900BC75}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdvSplashScreen", "..\Plugins\AdvSplashScreen\splashscreen10.vcxproj", "{5A6095F4-B037-4DA8-8410-8004A90C961A}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AuthState", "..\Plugins\AuthState\authstate_10.vcxproj", "{DB315D7D-00BB-43B2-93A6-0430CA2B9F28}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Db_autobackups", "..\Plugins\Dbx_mmap_sa\db_autobackups\db_autobackups_10.vcxproj", "{751ED05D-AD3E-4EC6-A485-4ECDF1FE6068}"
@@ -257,6 +255,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dbrw", "..\Plugins\dbrw\dbrw_10.vcxproj", "{92C557BB-6C8F-F359-C18F-883F3C88277B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GTalkExt", "..\Plugins\GtalkExt\GTalkExt.vcxproj", "{2A737817-2443-48FF-A2E8-CA8D69E450F3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SplashScreen", "..\Plugins\SplashScreen\splashscreen10.vcxproj", "{5A6095F4-B037-4DA8-8410-8004A90C961A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -848,46 +848,6 @@ Global
 		{78004D9C-4706-4759-ACED-1BFEE900BC75}.Release|Win32.ActiveCfg = Release Unicode|x64
 		{78004D9C-4706-4759-ACED-1BFEE900BC75}.Release|x64.ActiveCfg = Release Unicode|x64
 		{78004D9C-4706-4759-ACED-1BFEE900BC75}.Release|x64.Build.0 = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode Static|Win32.ActiveCfg = Debug Unicode|Win32
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode Static|Win32.Build.0 = Debug Unicode|Win32
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode Static|x64.ActiveCfg = Debug Unicode|Win32
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode|Win32.ActiveCfg = Debug Unicode|Win32
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode|Win32.Build.0 = Debug Unicode|Win32
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode|x64.ActiveCfg = Debug Unicode|Win32
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug x64|Win32.ActiveCfg = Debug Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug x64|x64.ActiveCfg = Debug Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug x64|x64.Build.0 = Debug Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug(service)|Win32.ActiveCfg = Debug Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug(service)|x64.ActiveCfg = Debug Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug(service)|x64.Build.0 = Debug Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug|Win32.ActiveCfg = Debug Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug|x64.ActiveCfg = Debug Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug|x64.Build.0 = Debug Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (service only)(static)|Win32.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (service only)(static)|x64.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (service only)(static)|x64.Build.0 = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (service only)|Win32.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (service only)|x64.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (service only)|x64.Build.0 = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (static) x64|Win32.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (static) x64|x64.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (static) x64|x64.Build.0 = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (static)|Win32.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (static)|x64.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (static)|x64.Build.0 = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode Static|Win32.ActiveCfg = Release Unicode|Win32
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode Static|Win32.Build.0 = Release Unicode|Win32
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode Static|x64.ActiveCfg = Release Unicode|Win32
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode|Win32.ActiveCfg = Release Unicode|Win32
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode|x64.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode|x64.Build.0 = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release(static)|Win32.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release(static)|x64.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release(static)|x64.Build.0 = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release|Win32.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release|x64.ActiveCfg = Release Unicode|x64
-		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release|x64.Build.0 = Release Unicode|x64
 		{DB315D7D-00BB-43B2-93A6-0430CA2B9F28}.Debug Unicode Static|Win32.ActiveCfg = Debug Unicode|x64
 		{DB315D7D-00BB-43B2-93A6-0430CA2B9F28}.Debug Unicode Static|x64.ActiveCfg = Debug Unicode|x64
 		{DB315D7D-00BB-43B2-93A6-0430CA2B9F28}.Debug Unicode Static|x64.Build.0 = Debug Unicode|x64
@@ -5422,6 +5382,47 @@ Global
 		{2A737817-2443-48FF-A2E8-CA8D69E450F3}.Release|Win32.ActiveCfg = Release Unicode|Win32
 		{2A737817-2443-48FF-A2E8-CA8D69E450F3}.Release|Win32.Build.0 = Release Unicode|Win32
 		{2A737817-2443-48FF-A2E8-CA8D69E450F3}.Release|x64.ActiveCfg = Release Unicode|Win32
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode Static|Win32.ActiveCfg = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode Static|x64.ActiveCfg = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode Static|x64.Build.0 = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode|Win32.ActiveCfg = Debug Unicode|Win32
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode|Win32.Build.0 = Debug Unicode|Win32
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode|x64.ActiveCfg = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug Unicode|x64.Build.0 = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug x64|Win32.ActiveCfg = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug x64|x64.ActiveCfg = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug x64|x64.Build.0 = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug(service)|Win32.ActiveCfg = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug(service)|x64.ActiveCfg = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug(service)|x64.Build.0 = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug|Win32.ActiveCfg = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug|x64.ActiveCfg = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Debug|x64.Build.0 = Debug Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (service only)(static)|Win32.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (service only)(static)|x64.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (service only)(static)|x64.Build.0 = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (service only)|Win32.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (service only)|x64.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (service only)|x64.Build.0 = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (static) x64|Win32.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (static) x64|x64.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (static) x64|x64.Build.0 = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (static)|Win32.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (static)|x64.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode (static)|x64.Build.0 = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode Static|Win32.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode Static|x64.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode Static|x64.Build.0 = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode|Win32.ActiveCfg = Release Unicode|Win32
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode|x64.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release Unicode|x64.Build.0 = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release(static)|Win32.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release(static)|x64.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release(static)|x64.Build.0 = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release|Win32.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release|x64.ActiveCfg = Release Unicode|x64
+		{5A6095F4-B037-4DA8-8410-8004A90C961A}.Release|x64.Build.0 = Release Unicode|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -5465,7 +5466,6 @@ Global
 		{7D81F099-33CC-4FF3-A465-3943CB3F70C6} = {F91F1F43-41B9-4738-B548-97E708CB1BDC}
 		{1AECFEF4-A575-4823-B2DE-A26AA8C1E77E} = {F91F1F43-41B9-4738-B548-97E708CB1BDC}
 		{C5AB34D2-15F5-4CBA-8F42-DB48A4E52910} = {F91F1F43-41B9-4738-B548-97E708CB1BDC}
-		{5A6095F4-B037-4DA8-8410-8004A90C961A} = {A9745BFF-148D-4FDF-A4E1-507E579BFC9F}
 		{DB315D7D-00BB-43B2-93A6-0430CA2B9F28} = {A9745BFF-148D-4FDF-A4E1-507E579BFC9F}
 		{751ED05D-AD3E-4EC6-A485-4ECDF1FE6068} = {A9745BFF-148D-4FDF-A4E1-507E579BFC9F}
 		{9299B507-1AF9-4C93-9560-5F637D1E0C9E} = {A9745BFF-148D-4FDF-A4E1-507E579BFC9F}
@@ -5533,6 +5533,7 @@ Global
 		{761CA00A-CC9E-E1FC-6F28-756C3F4D4EF9} = {A9745BFF-148D-4FDF-A4E1-507E579BFC9F}
 		{92C557BB-6C8F-F359-C18F-883F3C88277B} = {A9745BFF-148D-4FDF-A4E1-507E579BFC9F}
 		{2A737817-2443-48FF-A2E8-CA8D69E450F3} = {A9745BFF-148D-4FDF-A4E1-507E579BFC9F}
+		{5A6095F4-B037-4DA8-8410-8004A90C961A} = {A9745BFF-148D-4FDF-A4E1-507E579BFC9F}
 		{33276462-8313-4192-8306-13717ECCA60A} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
 		{7B0F213E-C15E-4219-8AE5-49DD3D3D553D} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
 		{E42870DB-9FED-44E7-9C93-4E64D0C87F51} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
