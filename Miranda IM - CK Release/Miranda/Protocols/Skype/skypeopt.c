@@ -356,7 +356,7 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 }
 
 INT_PTR CALLBACK OptionsProxyDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-	const int Skype2SocketControls[]={ IDC_STATIC_HOST, IDC_HOST, IDC_STATIC_PORT, IDC_PORT, IDC_REQPASS, IDC_PASSWORD };
+	const int Skype2SocketControls[]={ IDC_STATIC_HOST, IDC_HOST, IDC_STATIC_PORT, IDC_PORT, IDC_REQPASS, IDC_PASSWORD, IDC_STATIC_RESTART };
 	static BOOL initDlg=FALSE;
 	DBVARIANT dbv;
 	int i;
@@ -460,7 +460,7 @@ INT_PTR CALLBACK OptionsAdvancedDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, 
 			for(i=0;i<sizeof(statusModes)/sizeof(statusModes[0]);i++) {
 				int k;
 
-				k=SendDlgItemMessage(hwndDlg,IDC_SKYPEOUTSTAT,CB_ADDSTRING,0,(LPARAM)CallService(MS_CLIST_GETSTATUSMODEDESCRIPTION,statusModes[i],GSMDF_TCHAR));
+				k=SendDlgItemMessage(hwndDlg,IDC_SKYPEOUTSTAT,CB_ADDSTRING,0,(LPARAM)CallService(MS_CLIST_GETSTATUSMODEDESCRIPTION,statusModes[i],GCMDF_TCHAR));
 				SendDlgItemMessage(hwndDlg,IDC_SKYPEOUTSTAT,CB_SETITEMDATA,k,statusModes[i]);
 				if (statusModes[i]==j) SendDlgItemMessage(hwndDlg,IDC_SKYPEOUTSTAT,CB_SETCURSEL,i,0);
 			}
