@@ -7,8 +7,8 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 25 Apr 2011 13:04:49
-; FLID: Deutsche Sprachdatei 0.11.04.25
+X-Langpack-creation-date: 27 Apr 2011 03:04:19
+; FLID: Deutsche Sprachdatei 0.11.04.27
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirOTR,MirOUT,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
 ; Start of langpack: Core (Letzte Änderung: 22:09, 21. Apr. 2011 )
@@ -31185,14 +31185,65 @@ Gehe zu URL in Statusnachricht
 ; ##############################################
 ; End of langpack: Simple_Status_Message
 ; ############################################## 
-; Start of langpack: Skype (Letzte Änderung: 20:49, 6. Apr. 2011 )
+; Start of langpack: Skype (Letzte Änderung: 02:52, 27. Apr. 2011 )
 
 ; Pluginname: Skype
-; Version: 0.0.0.50
+; Version: 0.0.0.51
 ; Dateiname: skype.dll
 ; Autor(en): leecher, tweety, jls17
 ; Unique ID: {a71f8335-7b87-4432-b8a3-81479431c6f5}
 ; Übersetzung: 16.10.05 von HERODOMI
+
+
+;Popups
+[Show incoming calls]
+Zeige eingehende Anrufe
+[Use Windows colors]
+Windowsfarben verwenden
+[Error Messages]
+Fehlermeldungen
+[Display error messages]
+Zeige Fehlermeldungen
+
+;Grundeinstellungen
+[/NOSPLASH - Don't show splash screen on startup]
+/NOSPLASH - Unterdrückt den Splash Screen beim Starten
+[/DATAPATH - Specify Skype data folder*]
+/DATAPATH - Skypeordner auswählen*
+[Use custom Skype executable*]
+Nutze eigene Skype Anwendung*
+[* Relative path root is Miranda IM folder]
+* Relativpfad ist der Miranda IM Ordner
+[Shutdown Skype when you close Miranda IM]
+Schließe Skype wenn Miranda IM beendet wird
+[Unload Skype when you change to Offline status]
+Skype beenden wenn Status zu 'Offline' geändert wurde
+
+;Skype Erweitert
+[Enable Skype menu options (currently: Find/Add user)]
+Aktiviere Skype Menüeinträge (Benutzer finden/hinzufügen)
+[Use popup plugin for displaying messages ]
+Benutze Popup-Plugin für die Nachrichtendarstellung
+[Suppress all error messages (not recommended, but if it annoys you... ;)]
+Unterdrücke alle Fehlermeldungen (nicht empfohlen)
+[Use group chat interface for conversations (requires group chat module)]
+Gruppenchatinterface für Konversationen verwenden (benötigt Gruppenchatmodule)
+[Mark group chat message as read to avoid notification]
+Markiert Gruppenchatnachrichten als gelesen um die Anmeldung zu vermeiden
+[Disable support for N/A and SkypeMe status (for Skype 4+)]
+Deaktiviere die N/A und SkypeMe Status Unterstützung (für Skype4+)
+[Show full name in contact list instead of nickname]
+Zeige den vollen Namen anstatt den Nicknamen 
+[SkypeOut contacts are in status:]
+SkypeOut Kontakte haben als Status:
+
+;Proxy-Einstellungen
+[Use Skype proxy connection over network instead of local Skype API]
+Skype Proxy-Verbindung anstelle der lokalen Skype-API benutzen
+[* You must restart Miranda IM in order to let the settings take effect]
+* Sie müssen Miranda IM neu starten damit die Einstellungen wirksam werden!
+[This Skype proxy requires password authentication:]
+Dieser Skype Proxy benötigt eine Passwort-Auth.:
 
 [SKYPE]
 Skype
@@ -31202,7 +31253,6 @@ Skype-Protokoll
 Verlauf-Import abgeschlossen!
 [Support for Skype network]
 Unterstützung für das Skype-Netzwerk. Benötigt das Original Skype-Programm.
-
 [Call (Skype)]
 Anrufen (Skype)
 [Call using SkypeOut]
@@ -31219,12 +31269,10 @@ Anruf wiederaufnehmen
 Skype-Verlauf importieren
 [Add Skype contact]
 Skype-Kontakt hinzufügen
-
 [No Topic]
 Kein Thema
 [Use groupchat interface for conversations (requires group chat module)]
 Benutze Gruppenchatinterface für Konversationen (benötigt Gruppenchat-Module)
-
 [Start Skype with miranda, if it is not running using the following cmdline options:]
 Starte Skype mit Miranda IM, wenn es nicht läuft; verwende folgende cmd-Befehlsoptionen:
 [/NOTRAY - Skype tray icon becomes grey and is therefore "invisible"]
@@ -31234,7 +31282,7 @@ Starte Skype mit Miranda IM, wenn es nicht läuft; verwende folgende cmd-Befehlso
 [/MINIMIZED - Start Skype minimized]
 /MINIMIZED - Starte Skype minimiert
 [/REMOVEABLE - For running portable skype]
-/REMOVEABLE - Um portables Skype zu starten
+/REMOVEABLE - Startet portables Skype
 [/DATAPATH - Specify the path for portable skype]
 /DATAPATH - Pfad des portablen Skype festlegen
 [Use your custom path]
@@ -31260,7 +31308,7 @@ Mal vor Abbruch versuchen, zu Skype zu verbinden
 [SkypeOut contacts are in status]
 SkypeOut-Kontakte haben Status
 [Keep requested online status on startup under every circumstance]
-Behalte erforderlichen Online-Status beim Starten unter allen Umständen bei
+Behalte Online-Status beim Starten unter allen Umständen bei
 [Cleanup Nicknames]
 Nicknamen säubern
 [Skype advanced]
@@ -31281,7 +31329,6 @@ Konferenz mit %s beitreten
 Anruf annehmen, Gespräch mit %s halten
 [Hang up]
 auflegen
-
 [Skypeproxy]
 Proxy-Einstellungen
 [Use Skypeproxy connection over network instead of local Skype API]
@@ -31290,7 +31337,6 @@ Verwende Skype-Proxy-Verbindung übers Netzwerk anstelle lokaler Skype-API
 Es ist ein Miranda IM Neustart nötig, um die Änderungen wirksam zu machen
 [This Skypeproxy requires password authentication:]
 Dieser Skype-Proxy benötigt eine Passwort-Identifizierung
-
 [Name :]
 Name: 
 [Birthday :]
@@ -31307,7 +31353,6 @@ Tel. (privat):
 Tel (geschäftlich):
 [Homepage :]
 Homepage: 
-
 [Do a SkypeOut-call]
 Einen SkypeOut-Anruf tätigen
 [Phonecall]
@@ -31318,10 +31363,8 @@ Eingehender Anruf von %s
 Willkommen!
 [This seems to be the first time that you're running the Skype protocol plugin. Do you want to enable the protocol for this Miranda-Profile? (If you chose NO, you can always enable it in the plugin options later.]
 Es scheint, als ob Sie das Skype-Protokoll zum ersten mal verwenden. Möchten Sie es für dieses Miranda-Profil verwenden? (Wenn Sie sich für NEIN entscheiden, können Sie es immer noch später in den Plugin-Optionen aktivieren.)
-
 [Protocol Avatars Cache]
 Protokoll Avatar-Cache
-
 [Skype default]
 Grundeinstellungen
 [Skype proxy]
@@ -31332,7 +31375,6 @@ Männlich
 Weiblich
 [ERROR: Skype not running / too old / working!]
 Achtung: Skype läuft eventuell (nicht) oder ist veraltet!
-
 [Incoming Calls]
 Eingehende Anrufe
 [Show incoming calls popup]
