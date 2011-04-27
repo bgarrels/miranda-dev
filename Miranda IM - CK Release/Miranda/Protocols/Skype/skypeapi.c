@@ -12,8 +12,8 @@
 #include "gchat.h"
 #pragma warning (push)
 #pragma warning (disable: 4100) // unreferenced formal parameter
-#include "../../include/m_utils.h"
-#include "../../include/m_langpack.h"
+#include "m_utils.h"
+#include "m_langpack.h"
 #pragma warning (push)
 #include "m_toptoolbar.h"
 

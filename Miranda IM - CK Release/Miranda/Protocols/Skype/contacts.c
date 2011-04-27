@@ -11,7 +11,7 @@
 
 #pragma warning (push)
 #pragma warning (disable: 4100) // unreferenced formal parameter
-#include "../../include/m_langpack.h"
+#include "m_langpack.h"
 #pragma warning (pop)
 
 #pragma warning (disable: 4706) // assignment within conditional expression
