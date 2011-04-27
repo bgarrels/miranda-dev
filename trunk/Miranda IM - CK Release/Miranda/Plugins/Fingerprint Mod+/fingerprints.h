@@ -243,7 +243,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_GoTalkMobile",			_T("*Go*Talk*Mobile*"),							_T("GoTalkMobile"),						_T("ClientIcons_Jabber"),	IDI_GOTALKMOBILE, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_MGTalk",					_T("Mobile?\?\?\?\?\?\?\?"),					_T("MGTalk"),							_T("ClientIcons_Jabber"),	IDI_MGTALK, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Colloquy",				_T("Colloquy*"),								_T("Colloquy"),							_T("ClientIcons_Jabber"),	IDI_COLLOQUY, INVALID_HANDLE_VALUE, JABBER_CASE },
-	{ "client_WTW",						_T("|Smok MK2*@ WTW*|*wtw*"),					_T("WTW"),								_T("ClientIcons_Jabber"),	IDI_WTW, INVALID_HANDLE_VALUE, JABBER_CASE },
+	{ "client_WTW",						_T("|http://wtw.k2t.eu*|wtw*"),					_T("WTW"),								_T("ClientIcons_Jabber"),	IDI_WTW, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Spik",					_T("Spik*"),									_T("Spik"),								_T("ClientIcons_Jabber"),	IDI_SPIK, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Konnekt",					_T("Konnekt*"),									_T("Konnekt"),							_T("ClientIcons_Jabber"),	IDI_KONNEKT, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Vacuum",					_T("*Vacuum*"),									_T("Vacuum IM"),						_T("ClientIcons_Jabber"),	IDI_VACUUM, INVALID_HANDLE_VALUE, JABBER_CASE },
@@ -371,6 +371,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_AnothRSSBot",				_T("|*Anothrbot*|*Anothr Rss Bot*"),			_T("Anothr Rss Bot"),					_T("ClientIcons_Jabber"),	IDI_ANOTHRSSBOT, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Imified",					_T("*someresource*"),							_T("Imified"),							_T("ClientIcons_Jabber"),	IDI_IMIFIED, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_RenRen",					_T("|*WTalkProxy0_0*|*http://talk.xiaonei.com*"),	_T("RenRen"),						_T("ClientIcons_Jabber"),	IDI_RENREN, INVALID_HANDLE_VALUE, JABBER_CASE },
+	{ "client_Aqq",						_T("|http://aqq.eu*|aqq*"),						_T("Aqq"),								_T("ClientIcons_Jabber"),	IDI_AQQ, INVALID_HANDLE_VALUE, JABBER_CASE },
 	
 //#########################################################################################################################################
 //############################################################### VoIP ####################################################################
@@ -382,7 +383,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 //#########################################################################################################################################
 //################################################################## Tlen ##################################################################
 //#########################################################################################################################################
-	{ "client_Tlen",					_T("Smok MK2*@ tlen.pl*"),						_T("Tlen.pl"),							_T("ClientIcons_Tlen"),	IDI_TLEN, INVALID_HANDLE_VALUE, TLEN_CASE },
+	{ "client_Tlen",					_T("*Tlen*"),									_T("Tlen.pl"),							_T("ClientIcons_Tlen"),	IDI_TLEN, INVALID_HANDLE_VALUE, TLEN_CASE },
 
 //#########################################################################################################################################
 //################################################################## IRC ##################################################################
@@ -684,6 +685,10 @@ KN_FP_MASK def_kn_fp_overlays_mask[] =
 	{ "client_TM_QQ 2009",				_T("|QQ2009*|TM2009*"),								_T("TM/QQ 2009"),						_T("ClientIcons_QQ"),	IDI_CLIENT_TM_QQ2009, INVALID_HANDLE_VALUE, QQ_CASE },
 	{ "client_TM_QQ 2010",				_T("|QQ2010*|TM2010*"),								_T("TM/QQ 2010"),						_T("ClientIcons_QQ"),	IDI_CLIENT_TM_QQ2010, INVALID_HANDLE_VALUE, QQ_CASE },
 	{ "client_TM_QQ 2011",				_T("|QQ2011*|TM2011*"),								_T("TM/QQ 2011"),						_T("ClientIcons_QQ"),	IDI_CLIENT_TM_QQ2011, INVALID_HANDLE_VALUE, QQ_CASE },
+
+	{ "client_Tlen 5",					_T("Tlen Protocol 7"),								_T("Tlen 5.x"),							_T("ClientIcons_Tlen"),	IDI_CLIENT_TLEN5, INVALID_HANDLE_VALUE, TLEN_CASE },
+	{ "client_Tlen 6",					_T("Tlen Protocol 10"),								_T("Tlen 6.x"),							_T("ClientIcons_Tlen"),	IDI_CLIENT_TLEN6, INVALID_HANDLE_VALUE, TLEN_CASE },
+	{ "client_Tlen 7",					_T("Tlen Protocol 16"),								_T("Tlen 7.x"),							_T("ClientIcons_Tlen"),	IDI_CLIENT_TLEN7, INVALID_HANDLE_VALUE, TLEN_CASE },
 
 	{ "client_weather_over",			_T("*Weather*"),									_T("Weather"),							_T("ClientIcons_Weather"),	IDI_CLIENT_WEATHER, INVALID_HANDLE_VALUE, WEATHER_CASE },
 	
