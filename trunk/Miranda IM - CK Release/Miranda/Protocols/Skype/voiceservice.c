@@ -6,7 +6,7 @@
 
 #pragma warning (push)
 #pragma warning (disable: 4100) // unreferenced formal parameter
-#include "../../include/m_utils.h"
+#include "m_utils.h"
 #pragma warning (pop)
 
 HANDLE hVoiceNotify = NULL;

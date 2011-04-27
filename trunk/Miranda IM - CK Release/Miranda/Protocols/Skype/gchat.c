@@ -8,10 +8,10 @@
 
 #pragma warning (push)
 #pragma warning (disable: 4100) // unreferenced formal parameter
-#include "../../include/m_langpack.h"
-#include "../../include/m_userinfo.h"
-#include "../../include/m_history.h"
-#include "../../include/m_contacts.h"
+#include "m_langpack.h"
+#include "m_userinfo.h"
+#include "m_history.h"
+#include "m_contacts.h"
 #pragma warning (pop)
 
 #ifndef DWLP_USER
