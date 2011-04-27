@@ -14,7 +14,7 @@
 #if defined(WIN64) || defined(_WIN64)
 	#define __PLUGIN_NAME "SimpleAR (Unicode x64)"
 #else
-	#define __PLUGIN_NAME "SimpleAR (Unicode)"
+	#define __PLUGIN_NAME "SimpleAR (AlfaMaR)"
 #endif
 #else
 	#define __PLUGIN_NAME "SimpleAR"
