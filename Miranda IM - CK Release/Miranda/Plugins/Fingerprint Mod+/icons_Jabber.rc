@@ -45,6 +45,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
    IDI_AKENI               ICON    ".\\res\\Jabber\\Akeni.ico"
    IDI_ANDROID             ICON    ".\\res\\Jabber\\Android.ico"
    IDI_ANOTHRSSBOT         ICON    ".\\res\\Jabber\\Anothr Rss Bot.ico"
+   IDI_AQQ			       ICON    ".\\res\\Jabber\\Aqq.ico"
    IDI_BEEJIVE             ICON    ".\\res\\Jabber\\beejive.ico"
    IDI_BELLSOUTH           ICON    ".\\res\\Jabber\\BellSouth.ico"
    IDI_BITWISE             ICON    ".\\res\\Jabber\\BitWise.ico"

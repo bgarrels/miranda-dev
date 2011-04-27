@@ -43,27 +43,23 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //############################################QQ###############################################################
 //##############################################################################################################
    IDI_MOBILEQQ			  ICON    ".\\res\\QQ\\Mobile QQ.ico"
-   IDI_QQ			  ICON    ".\\res\\QQ\\QQ.ico"
+   IDI_QQ				  ICON    ".\\res\\QQ\\QQ.ico"
    IDI_QQCONCEPT		  ICON    ".\\res\\QQ\\QQ Concept.ico"
    IDI_QQCRM			  ICON    ".\\res\\QQ\\QQ CRM.ico"
    IDI_QQINT			  ICON    ".\\res\\QQ\\QQ International.ico"
    IDI_QQSILVER			  ICON    ".\\res\\QQ\\QQ Silverlight.ico"
-   IDI_TM			  ICON    ".\\res\\QQ\\TM.ico"
+   IDI_TM				  ICON    ".\\res\\QQ\\TM.ico"
    IDI_TM2008			  ICON    ".\\res\\QQ\\TM 2008.ico"
    IDI_WEBQQ			  ICON    ".\\res\\QQ\\WebQQ.ico"
    IDI_YAMQQ			  ICON    ".\\res\\QQ\\Yam QQ.ico"
-
-//##############################################################################################################
-//################################################## Overlays ##################################################
-//##############################################################################################################
 
 //##############################################################################################################
 //########################################### QQ overlays ######################################################
 //##############################################################################################################
    IDI_CLIENT_QQ2000              ICON    ".\\res\\QQ\\QQ 2000.ico"
    IDI_CLIENT_QQ2004	          ICON    ".\\res\\QQ\\QQ 2004.ico"
-   IDI_CLIENT_TM1		  ICON    ".\\res\\QQ\\TM 1.ico"
-   IDI_CLIENT_TM2		  ICON    ".\\res\\QQ\\TM 2.ico"
+   IDI_CLIENT_TM1				  ICON    ".\\res\\QQ\\TM 1.ico"
+   IDI_CLIENT_TM2				  ICON    ".\\res\\QQ\\TM 2.ico"
    IDI_CLIENT_TM_QQ2003           ICON    ".\\res\\QQ\\TM 3 QQ 2003.ico"
    IDI_CLIENT_TM_QQ2005           ICON    ".\\res\\QQ\\TM QQ 2005.ico"
    IDI_CLIENT_TM_QQ2006           ICON    ".\\res\\QQ\\TM QQ 2006.ico"
