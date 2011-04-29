@@ -7,8 +7,8 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 28 Apr 2011 01:04:53
-; FLID: Deutsche Sprachdatei 0.11.04.28
+X-Langpack-creation-date: 29 Apr 2011 03:04:47
+; FLID: Deutsche Sprachdatei 0.11.04.29
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirOTR,MirOUT,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
 ; Start of langpack: Core (Letzte Änderung: 11:32, 27. Apr. 2011 )
@@ -26165,7 +26165,7 @@ Laden unterbrechen
 ; ##############################################
 ; End of langpack: NConvers
 ; ############################################## 
-; Start of langpack: Name_Day (Letzte Änderung: 19:19, 16. Apr. 2011 )
+; Start of langpack: Name_Day (Letzte Änderung: 00:12, 28. Apr. 2011 )
 
 ; Pluginname: Name Day Plugin
 ; Version: 0.0.0.7
@@ -26173,7 +26173,7 @@ Laden unterbrechen
 ; Unique ID: <keine>
 ; Autor(en): Tibor Szabo, Robyer
 ; Übersetzung: 16.04.2011 von CHEF-KOCH
-; Besonderheiten: Name Day darf nicht übersetzt werden!
+; Besonderheiten: Der Name selbst "Name Day" darf nicht übersetzt werden!
 
 [Happy Name Day to]
 Herzlichen Glückwunsch zum Namenstag an:
@@ -31043,7 +31043,7 @@ Autom. Antwort einschalten
 ; ##############################################
 ; End of langpack: Simple_Auto_Replier
 ; ############################################## 
-; Start of langpack: Simple_Status_Message (Letzte Änderung: 00:35, 9. Jan. 2011 )
+; Start of langpack: Simple_Status_Message (Letzte Änderung: 02:07, 29. Apr. 2011 )
 
 ; Pluginname: Simple Status Message 
 ; Version: 1.9.0.3
@@ -31059,6 +31059,19 @@ Autom. Antwort einschalten
 [&Go to URL in Away Message]
 &Gehe zur URL in der Abwesenheitsnachricht
 
+;Variablen
+[Update variables in status messages every]
+Aktualisiere Variablen in Statusnachricht alle
+[Do not update variables during idle]
+Variablen nicht im 'Idle' erneuern
+[Do not update variables on ICQ status message requests]
+Variablen nicht bei ICQ Statusnachrichtenanfragen erneuern
+[Leave last played track's title after exiting the player]
+Letzten abgespielten Track beibehalten, wenn Player beendet wird.
+[Enable status messages parsing by Variables plugin]
+Aktiviere Statusnachrichtenparsing vom Variables-Plugin
+
+;Allgemein + Erweitert
 [%s Message (%s)]
 %s Nachricht (%s)
 [Independent setting for each protocol]
@@ -31156,8 +31169,6 @@ Immer selbe Statusnachricht setzen
 Zeige StartupStatus-Profile in Statusliste
 [recent messages (0 = disable)]
 verw. Nachrichten (0 = keine Speicherung)
-[Leave last played track's title after exiting the player]
-Letzten abgespielten Track beibehalten, wenn Player beendet wird.
 [Set random status message every]
 Setze zufällige Statusnachricht alle
 [Remember last dialog window position]
@@ -31170,8 +31181,6 @@ Menüpunkt 'Statusnachricht...' im Statusmenü anzeigen
 %s Nachricht kopieren
 [Status Message...]
 Statusnachricht ...
-[Update variables in status messages every]
-Aktualisiere Variablen in Statusnachricht alle
 [Show 'Go to URL in Away Message' item in contact menu]
 Menüpunkt 'Gehe zu URL in Statusnachricht' im Kontaktmenü anzeigen
 [&Go to URL in %s Message]
