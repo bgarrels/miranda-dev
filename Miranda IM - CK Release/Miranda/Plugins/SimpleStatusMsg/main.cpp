@@ -40,7 +40,7 @@ PLUGININFOEX pluginInfo = {
 #elif defined(_UNICODE)
 	"Simple Status Message (Unicode)",
 #else
-	"Simple Status Message",
+	"Simple Status Message (ANSI)",
 #endif
 	PLUGIN_MAKE_VERSION(1, 9, 0, 3),
 	"Provides a simple way to set status and away messages",
@@ -320,15 +320,19 @@ TCHAR *InsertBuiltinVarsIntoMsg(TCHAR *in, const char *szProto, int status)
 			mii.cbSize = sizeof(mii);
 			CallService(MS_IDLE_GETIDLEINFO, 0, (LPARAM)&mii);
 
-			if (mii.idleType == 1)
+			if (mii.idleType)
 			{
 				int mm;
 				SYSTEMTIME t;
 				GetLocalTime(&t);
 				if ((mm = g_iIdleTime) == -1)
 				{
-					mm = t.wMinute + t.wHour * 60 - mii.idleTime;
-					if (mm < 0) mm += 60 * 24;
+					mm = t.wMinute + t.wHour * 60;
+					if (mii.idleType == 1)
+					{
+						mm -= mii.idleTime;
+						if (mm < 0) mm += 60 * 24;
+					}
 					g_iIdleTime = mm;
 				}
 				t.wMinute = mm % 60;
@@ -494,7 +498,7 @@ TCHAR *InsertBuiltinVarsIntoMsg(TCHAR *in, const char *szProto, int status)
 
 TCHAR *InsertVarsIntoMsg(TCHAR *tszMsg, const char *szProto, int iStatus, HANDLE hContact)
 {
-	if (ServiceExists(MS_VARS_FORMATSTRING))
+	if (ServiceExists(MS_VARS_FORMATSTRING) && DBGetContactSettingByte(NULL, "SimpleStatusMsg", "EnableVariables", 1))
 	{
 		FORMATINFO fInfo = {0};
 		fInfo.cbSize = sizeof(fInfo);
@@ -1579,6 +1583,12 @@ void CALLBACK SetStartupStatusProc(HWND timerhwnd, UINT uMsg, UINT_PTR idEvent, 
 
 VOID CALLBACK SAUpdateMsgTimerProc(HWND timerhwnd, UINT uMsg, UINT_PTR idEvent, DWORD  dwTime)
 {
+	MIRANDA_IDLE_INFO mii = {0};
+	mii.cbSize = sizeof(mii);
+	CallService(MS_IDLE_GETIDLEINFO, 0, (LPARAM)&mii);
+	if (DBGetContactSettingByte(NULL, "SimpleStatusMsg", "NoUpdateOnIdle", 1) && mii.idleType)
+		return;
+
 	if (!hwndSAMsgDialog)
 	{
 		char szBuffer[64];
@@ -1955,6 +1965,9 @@ static int OnICQStatusMsgRequest(WPARAM wParam, LPARAM lParam, LPARAM lMirParam)
 	log2file("OnICQStatusMsgRequest(): UIN: %d on %s", (int)lParam, (char *)lMirParam);
 #endif
 
+	if (DBGetContactSettingByte(NULL, "SimpleStatusMsg", "NoUpdateOnICQReq", 1))
+		return 0;
+
 	HANDLE hContact;
 	char *szProto;
 	BOOL bContactFound = FALSE;
@@ -2233,8 +2246,8 @@ extern "C" int __declspec(dllexport) Unload(void)
 {
 	UnhookEvents();
 	UnhookEvent(h_statusmodechange);
+	UnhookProtoEvents();
 	DestroyServiceFunctionsEx();
-
 	mir_free(accounts);
 
 #ifdef _DEBUG

@@ -458,15 +458,15 @@ VOID APIENTRY HandlePopupMenu(HWND hwnd, POINT pt, HWND edit_control)
 	if (SendMessage(edit_control, WM_GETTEXTLENGTH, 0, 0) == 0)
 		EnableMenuItem(hmenuTrackPopup, IDM_DELETE, MF_BYCOMMAND | MF_GRAYED);
 
-	if (!ServiceExists(MS_VARS_FORMATSTRING))
-		DeleteMenu(hmenuTrackPopup, 8, MF_BYPOSITION);
-	else
+	if (ServiceExists(MS_VARS_FORMATSTRING))
 		DeleteMenu(hmenuTrackPopup, ID__VARIABLES, MF_BYCOMMAND);
-	
-	if (!ServiceExists(MS_FORTUNEMSG_GETSTATUSMSG))
-		DeleteMenu(hmenuTrackPopup, 7, MF_BYPOSITION);
 	else
+		DeleteMenu(hmenuTrackPopup, 8, MF_BYPOSITION);
+	
+	if (ServiceExists(MS_FORTUNEMSG_GETSTATUSMSG))
 		DeleteMenu(hmenuTrackPopup, ID__FORTUNEAWAYMSG, MF_BYCOMMAND);
+	else
+		DeleteMenu(hmenuTrackPopup, 7, MF_BYPOSITION);
 
 	int m_selection = TrackPopupMenu(hmenuTrackPopup, TPM_LEFTALIGN | TPM_RETURNCMD, pt.x, pt.y, 0, hwnd, NULL);
  	switch (m_selection)
