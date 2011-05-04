@@ -60,6 +60,7 @@ Last change by : $Author: Merlin_de $
 #define ICO_ACT_PIN			MODULNAME"_act_pin"
 #define ICO_ACT_PINNED		MODULNAME"_act_pinned"
 #define ICO_ACT_CLOSE		MODULNAME"_act_close"
+#define ICO_ACT_COPY		MODULNAME"_act_copy"
 
 #define ICO_OPT_RELOAD		MODULNAME"_opt_reload"
 #define ICO_OPT_RESIZE		MODULNAME"_opt_resize"

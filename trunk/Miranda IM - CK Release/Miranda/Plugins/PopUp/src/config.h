@@ -137,6 +137,7 @@ extern GLOBAL_WND_CLASSES g_wndClass;
 #define ACT_DEF_DISMISS		0x00100000
 #define ACT_DEF_PIN			0x00200000
 #define ACT_DEF_REPLY		0x00400000
+#define ACT_DEF_COPY		0x00800000
 
 void LoadOptions();
 
@@ -170,7 +171,6 @@ extern bool OptionLoaded;
 //extern SKINELEMENT *n_skin;
 
 //===== Plugin informations struct =====
-extern PLUGININFO pluginInfo;
 extern PLUGININFOEX pluginInfoEx;
 
 //===== Transparency & APIs which are not supported by every OS =====

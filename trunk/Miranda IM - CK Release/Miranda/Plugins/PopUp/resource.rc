@@ -53,6 +53,7 @@ IDI_OPT_FULLSCREEN      ICON                    "res\\fullscreen.ico"
 IDI_OPT_BLOCK           ICON                    "res\\block.ico"
 IDI_OPT_FAVORITE        ICON                    "res\\favorite.ico"
 IDI_ACT_REPLY           ICON                    "res\\reply.ico"
+IDI_ACT_COPY            ICON                    "res\\copy.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //

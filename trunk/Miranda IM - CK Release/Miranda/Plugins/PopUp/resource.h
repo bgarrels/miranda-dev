@@ -35,6 +35,7 @@
 #define IDI_ACT_CLOSE                   208
 #define IDI_ACT_PINNED                  209
 #define IDI_ACT_PIN                     210
+#define IDI_ACT_COPY                    211
 #define IDI_OPT_GROUP                   213
 #define IDI_OPT_FULLSCREEN              215
 #define IDI_OPT_BLOCK                   216

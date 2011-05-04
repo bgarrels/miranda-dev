@@ -75,20 +75,6 @@ PLUGININFOEX pluginInfoEx =
 	POPUP_UUID
 };
 
-PLUGININFO pluginInfo =
-{
-	sizeof(PLUGININFO),
-	pluginInfoEx.shortName,
-	pluginInfoEx.version,
-	pluginInfoEx.description,
-	pluginInfoEx.author,
-	pluginInfoEx.authorEmail,
-	pluginInfoEx.copyright,
-	pluginInfoEx.homepage,
-	pluginInfoEx.flags,
-	pluginInfoEx.replacesDefaultModule
-};
-
 // MLU layer for ansi release
 #if !defined(_UNICODE)
 BOOL		(WINAPI *MySetLayeredWindowAttributes)(HWND,COLORREF,BYTE,DWORD);
@@ -196,8 +182,8 @@ void LoadOptions() {
 	#if defined(_DEBUG)
 		PopUpOptions.debug = DBGetContactSettingByte(NULL, MODULNAME, "debug", FALSE);
 	#endif
-	DWORD prevVersion = DBGetContactSettingDword(NULL, MODULNAME, "PopupPlusVersion", pluginInfo.version);
-	if (	(prevVersion < pluginInfo.version) &&
+	DWORD prevVersion = DBGetContactSettingDword(NULL, MODULNAME, "PopupPlusVersion", pluginInfoEx.version);
+	if (	(prevVersion < pluginInfoEx.version) &&
 			!PopUpOptions.debug &&
 			!DBGetContactSettingByte(NULL, MODULNAME, "NeverShowNews", 1)
 			) {
@@ -213,7 +199,7 @@ void LoadOptions() {
 			SWP_SHOWWINDOW);
 		ShowWindow(hwnd, SW_SHOWNORMAL);
 	}
-	DBWriteContactSettingDword(NULL, MODULNAME, "PopupPlusVersion", pluginInfo.version);
+	DBWriteContactSettingDword(NULL, MODULNAME, "PopupPlusVersion", pluginInfoEx.version);
 
 	//Load PopUp Options
 	if(!OptionLoaded){
@@ -350,7 +336,7 @@ static int NukePopupSettings(const char* szModul)
 		mir_free(setting_items);
 		setting_items = next;
 	}
-	DBWriteContactSettingDword(NULL, MODULNAME, "PopupPlusVersion", pluginInfo.version);
+	DBWriteContactSettingDword(NULL, MODULNAME, "PopupPlusVersion", pluginInfoEx.version);
 
 	return 0;
 }

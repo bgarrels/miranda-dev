@@ -90,6 +90,7 @@ Last change by : $Author: Merlin_de $
 
 	#define NOWIN2K
 	#define MIRANDA_VER 0x0900
+	#define MIRANDA_CUSTOM_LP
 
 	//Miranda API (see Miranda svn)
 	#include <newpluginapi.h>
@@ -142,8 +143,8 @@ Last change by : $Author: Merlin_de $
 
 	// API for 3rd party plugins (.\api folder)
 	// this folder contain spetial edition API (not latest API !!!)
-	#include "../api/m_mathmodule.h"
-	#include "../api/m_popup2.h"
+	#include "m_mathmodule.h"
+	#include "m_popup2.h"
 
 	//PopUp common handlers
 	#include "defs.h"

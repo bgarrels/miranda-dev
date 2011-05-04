@@ -51,6 +51,7 @@ static int OptionsInitialize(WPARAM,LPARAM);
 //===== Initializations =====
 static int OkToExit(WPARAM,LPARAM);
 bool OptionLoaded = false;
+int hLangpack = 0;
 
 //===== Global variables =====
 //===== DLLs =====
@@ -353,7 +354,7 @@ void registerUpdate(){
 	Update update = {0};
 	char szVersion[16];
 	update.cbSize				= sizeof(Update);
-	update.szComponentName		= pluginInfo.shortName;
+	update.szComponentName		= pluginInfoEx.shortName;
 	update.pbVersion			= (BYTE *)CreateVersionStringPluginEx(&pluginInfoEx, szVersion);
 	update.cpbVersion			= (int)strlen((char *)update.pbVersion);
 
@@ -382,6 +383,12 @@ void LoadHotkey(){
 	hk.ptszDescription    = LPGENT("Toggle Popups");
 	hk.ptszSection        = LPGENT(MODULNAME_PLU);
 	hk.pszService        = MENUCOMMAND_SVC;
+	CallService(MS_HOTKEY_REGISTER, 0, (LPARAM) &hk);
+
+	// 'Popup History' Hotkey
+	hk.pszName			= "Popup History";
+	hk.ptszDescription	= LPGENT("Popup History");
+	hk.pszService		= MENUCOMMAND_HISTORY;
 	CallService(MS_HOTKEY_REGISTER, 0, (LPARAM) &hk);
 }
 
@@ -486,21 +493,8 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 
 //===== MirandaPluginInfo =====
 //Called by Miranda to get the information associated to this plugin.
-//It only returns the PLUGININFO structure, without any test on the version
+//It only returns the PLUGININFOEX structure, without any test on the version
 //@param mirandaVersion - The version of the application calling this function
-MIRAPI PLUGININFO* MirandaPluginInfo(DWORD mirandaVersion)
-{
-	g_popup.MirVer = mirandaVersion;
-
-#if defined(_UNICODE)
-	pluginInfo.flags = UNICODE_AWARE;
-#else
-	if (GetProcAddress(GetModuleHandle(_T("user32")), "DrawTextExW"))
-		pluginInfo.flags = 1; // dynamic UNICODE_AWARE
-#endif
-	return &pluginInfo;
-}
-
 MIRAPI PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {
 	g_popup.MirVer = mirandaVersion;
@@ -533,7 +527,7 @@ static int OkToExit(WPARAM wParam, LPARAM lParam)
 
 static INT_PTR svcGetVersion(WPARAM, LPARAM)
 {
-	return pluginInfo.version;
+	return pluginInfoEx.version;
 }
 
 //===== Load =====
@@ -558,6 +552,7 @@ MIRAPI int Load(PLUGINLINK *link)
 	mir_getMMI	(&mmi);
 	mir_getUTFI	(&utfi);
 	mir_getMTI	(&MText);
+	mir_getLP(&pluginInfoEx);
 
 	#if defined(_DEBUG)
 		PopUpOptions.debug = DBGetContactSettingByte(NULL, MODULNAME, "debug", FALSE);
@@ -649,7 +644,7 @@ MIRAPI int Load(PLUGINLINK *link)
 
 	PopupHistoryLoad();
 	LoadPopupThread();
-	if (!(LoadPopupWnd2()))
+	if (!LoadPopupWnd2())
 	{
 		MessageBox(0, TranslateTS(
 			_T("Error: I could not register the PopUp Window class.\r\n")
@@ -663,7 +658,7 @@ MIRAPI int Load(PLUGINLINK *link)
 	// Register in DBEditor++
 	DBVARIANT dbv;
 	if (DBGetContactSetting(NULL, "KnownModules", MODULNAME, &dbv))
-		DBWriteContactSettingString(NULL, "KnownModules", pluginInfo.shortName, MODULNAME);
+		DBWriteContactSettingString(NULL, "KnownModules", pluginInfoEx.shortName, MODULNAME);
 	DBFreeVariant(&dbv);
 	
 	hModulesLoaded = HookEvent(ME_SYSTEM_MODULESLOADED, ModulesLoaded);
