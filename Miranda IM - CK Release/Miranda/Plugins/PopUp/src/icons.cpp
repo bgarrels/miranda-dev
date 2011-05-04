@@ -76,7 +76,8 @@ static ICODESC icoDesc[] =
 	{ ICO_ACT_INFO,			_T("User Details"),					_T(SECT_POPUP) _T(SECT_POPUP_ACT),	0,	IDI_ACT_INFO,		NULL,			-1	},
 	{ ICO_ACT_MENU,			_T("Contact Menu"),					_T(SECT_POPUP) _T(SECT_POPUP_ACT),	0,	IDI_ACT_MENU,		NULL,			-1	},
 	{ ICO_ACT_ADD,			_T("Add Contact Permanently"),		_T(SECT_POPUP) _T(SECT_POPUP_ACT),	0,	IDI_ACT_ADD,		NULL,			-1	},
-	{ ICO_ACT_CLOSE,		_T("Dismiss Popup"),				_T(SECT_POPUP) _T(SECT_POPUP_ACT),	0,	IDI_ACT_CLOSE,		NULL,			-1	}
+	{ ICO_ACT_CLOSE,		_T("Dismiss Popup"),				_T(SECT_POPUP) _T(SECT_POPUP_ACT),	0,	IDI_ACT_CLOSE,		NULL,			-1	},
+	{ ICO_ACT_COPY,			_T("Copy to clipboard"),			_T(SECT_POPUP) _T(SECT_POPUP_ACT),	0,	IDI_ACT_COPY,		NULL,			-1	}
 
 };
 

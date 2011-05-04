@@ -43,37 +43,39 @@ void InitFonts() {
 	fid.flags = FIDF_DEFAULTVALID;
 	fid.deffontsettings.charset = DEFAULT_CHARSET;
 	fid.deffontsettings.size = -11;
+	lstrcpy(fid.backgroundGroup,_T(PU_FNT_AND_COLOR));
+	lstrcpy(fid.backgroundName,_T(PU_COL_BACK_NAME));
 	lstrcpy(fid.deffontsettings.szFace, _T("Verdana"));
 
 	lstrcpy(fid.name, _T(PU_FNT_NAME_TITLE));
 	mir_snprintf(fid.prefix, sizeof(fid.prefix), PU_FNT_PREFIX, PU_FNT_NAME_TITLE);
 	fid.deffontsettings.style  = DBFONTF_BOLD;
 	fid.deffontsettings.colour = RGB(0,0,0);
-	CallService(MS_FONT_REGISTERT, (WPARAM)&fid, 0);
+	FontRegisterT(&fid);
 
 	lstrcpy(fid.name, _T(PU_FNT_NAME_CLOCK));
 	mir_snprintf(fid.prefix, sizeof(fid.prefix), PU_FNT_PREFIX, PU_FNT_NAME_CLOCK);
 	//fid.deffontsettings.style  = DBFONTF_BOLD;
 	//fid.deffontsettings.colour = RGB(0,0,0);
-	CallService(MS_FONT_REGISTERT, (WPARAM)&fid, 0);
+	FontRegisterT(&fid);
 
 	lstrcpy(fid.name, _T(PU_FNT_NAME_TEXT));
 	mir_snprintf(fid.prefix, sizeof(fid.prefix), PU_FNT_PREFIX, PU_FNT_NAME_TEXT);
 	fid.deffontsettings.style  = 0;
 	//fid.deffontsettings.colour = RGB(0,0,0);
-	CallService(MS_FONT_REGISTERT, (WPARAM)&fid, 0);
+	FontRegisterT(&fid);
 
 	lstrcpy(fid.name, _T("Action"));
 	mir_snprintf(fid.prefix, sizeof(fid.prefix), PU_FNT_PREFIX, "Action");
 	//fid.deffontsettings.style  = 0;
 	fid.deffontsettings.colour = RGB(0,0,255);
-	CallService(MS_FONT_REGISTERT, (WPARAM)&fid, 0);
+	FontRegisterT(&fid);
 
 	lstrcpy(fid.name, _T("Hovered Action"));
 	mir_snprintf(fid.prefix, sizeof(fid.prefix), PU_FNT_PREFIX, "Hovered Action");
 	fid.deffontsettings.style  = DBFONTF_UNDERLINE;
 	//fid.deffontsettings.colour = RGB(0,0,255);
-	CallService(MS_FONT_REGISTERT, (WPARAM)&fid, 0);
+	FontRegisterT(&fid);
 
 	ColourIDT cid = {0};
 	cid.cbSize = sizeof(ColourIDT);

@@ -31,7 +31,7 @@
 #include "res/resource.h"
 #include "m_stopspam.h"
 
-#include <m_variables.h>
+#include "m_variables.h"
 
 #define pluginName "StopSpam"
 
@@ -69,17 +69,3 @@ INT_PTR IsContactPassed(WPARAM wParam, LPARAM /*lParam*/);
 INT_PTR RemoveTempContacts(WPARAM wParam,LPARAM lParam);
 int OnSystemModulesLoaded(WPARAM wParam, LPARAM lParam);
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-

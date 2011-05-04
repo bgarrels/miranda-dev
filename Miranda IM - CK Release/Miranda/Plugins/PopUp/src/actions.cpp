@@ -44,13 +44,14 @@ void LoadActions()
 {
 	POPUPACTION actions[] =
 	{
-		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_REPLY,0),		"General/Quick reply",		0},
-		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_MESS,0),		"General/Send message",		0},
-		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_INFO,0),		"General/User details",		0},
-		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_MENU,0),		"General/Contact menu",		0},
-		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_ADD,0),		"General/Add permanently",	0},
-		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_PIN,0),		"General/Pin popup",		0},
-		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_CLOSE,0),		"General/Dismiss popup",	0},
+		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_REPLY,0),		"General/Quick reply",			0},
+		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_MESS,0),		"General/Send message",			0},
+		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_INFO,0),		"General/User details",			0},
+		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_MENU,0),		"General/Contact menu",			0},
+		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_ADD,0),		"General/Add permanently",		0},
+		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_PIN,0),		"General/Pin popup",			0},
+		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_CLOSE,0),		"General/Dismiss popup",		0},
+		{ sizeof(POPUPACTION), IcoLib_GetIcon(ICO_ACT_COPY,0),		"General/Copy to clipboard",	0},
 
 //remove popup action
 	#if defined(_DEBUG)
@@ -116,7 +117,7 @@ DWORD MouseOverride(HWND hCombo, int number)
 {
 	DWORD dwItem = 0;
 	DWORD ItemActive = 0;
-	if(number<0 || number >6)
+	if(number<0 || number >7)
 		number = 0;
 	dwItem = SendMessage(hCombo, CB_ADDSTRING, 0, (LPARAM)TranslateT("no overwrite"));
 	SendMessage(hCombo, CB_SETITEMDATA, dwItem, 0);
@@ -145,6 +146,10 @@ DWORD MouseOverride(HWND hCombo, int number)
 	dwItem = SendMessage(hCombo, CB_ADDSTRING, 0, (LPARAM)TranslateT("Pin popup"));
 	SendMessage(hCombo, CB_SETITEMDATA, dwItem, 6);
 	if(number == 6)
+		ItemActive = dwItem;
+	dwItem = SendMessage(hCombo, CB_ADDSTRING, 0, (LPARAM)TranslateT("Copy to clipboard"));
+	SendMessage(hCombo, CB_SETITEMDATA, dwItem, 7);
+	if(number == 7)
 		ItemActive = dwItem;
 	return ItemActive;
 }

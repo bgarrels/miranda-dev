@@ -704,6 +704,7 @@ int		PopupWnd2::fixActions(POPUPACTION *theActions, int count)
 		if (enableDefaultUsr && DBGetContactSettingByte(m_hContact, "CList", "NotOnList", 0) && IsActionEnabled("General/Add permanently")) ++m_actionCount;
 		if (enableDefaultGen && (m_iTimeout != -1) && IsActionEnabled("General/Pin popup")) ++m_actionCount;
 		if (enableDefaultGen && IsActionEnabled("General/Dismiss popup")) ++m_actionCount;
+		if (enableDefaultGen && IsActionEnabled("General/Copy to clipboard")) ++m_actionCount;
 		
 		int iAction = fixActions(theActions, count, m_actionCount);
 
@@ -716,7 +717,6 @@ int		PopupWnd2::fixActions(POPUPACTION *theActions, int count)
 			m_actions[iAction].actionA.lParam = ACT_DEF_REPLY;
 			++iAction;
 		}
-
 		if (enableDefaultUsr && isIm && IsActionEnabled("General/Send message"))
 		{
 			m_actions[iAction].actionA.cbSize = sizeof(POPUPACTION);
@@ -769,6 +769,15 @@ int		PopupWnd2::fixActions(POPUPACTION *theActions, int count)
 			lstrcpyA(m_actions[iAction].actionA.lpzTitle, "General/Dismiss popup");
 			m_actions[iAction].actionA.wParam = 0;
 			m_actions[iAction].actionA.lParam = ACT_DEF_DISMISS;
+			++iAction;
+		}
+		if (enableDefaultGen && IsActionEnabled("General/Copy to clipboard"))
+		{
+			m_actions[iAction].actionA.cbSize = sizeof(POPUPACTION);
+			m_actions[iAction].actionA.lchIcon = IcoLib_GetIcon(ICO_ACT_COPY,iconSize);
+			lstrcpyA(m_actions[iAction].actionA.lpzTitle, "General/Copy to clipboard");
+			m_actions[iAction].actionA.wParam = 0;
+			m_actions[iAction].actionA.lParam = ACT_DEF_COPY;
 			++iAction;
 		}
 	}
@@ -1371,6 +1380,35 @@ LRESULT CALLBACK PopupWnd2::WindowProc(UINT message, WPARAM wParam, LPARAM lPara
 				case ACT_DEF_DISMISS:
 					PUDeletePopUp(m_hwnd);
 					break;
+				case ACT_DEF_COPY:
+				{
+					#ifdef UNICODE 
+						#define CF_TCHAR CF_UNICODETEXT 
+					#else 
+						#define CF_TCHAR CF_TEXT
+					#endif
+					HGLOBAL clipbuffer;
+					static TCHAR * buffer, *text;
+					char* sztext = NULL;
+					text = this->m_lpwzText;
+					if (!text)
+					{
+						sztext = this->m_lpzText;
+						text = mir_a2t(sztext);
+					}
+					OpenClipboard(m_hwnd);
+					EmptyClipboard();
+					clipbuffer = GlobalAlloc(GMEM_MOVEABLE | GMEM_SHARE, (lstrlen(text)+1) * sizeof(TCHAR));
+					buffer = (TCHAR *)GlobalLock(clipbuffer);
+					lstrcpy(buffer, text);
+					GlobalUnlock(clipbuffer);
+					SetClipboardData(CF_TCHAR, clipbuffer);
+					CloseClipboard();
+					if (sztext)
+						mir_free(text);
+					PUDeletePopUp(m_hwnd);
+					break;
+				}
 			}
 			break;
 		}
@@ -1436,6 +1474,7 @@ LRESULT CALLBACK PopupWnd2::WindowProc(UINT message, WPARAM wParam, LPARAM lPara
 						case 4:SendMessage(m_hwnd, UM_POPUPACTION,0, ACT_DEF_MENU); break;
 						case 5:SendMessage(m_hwnd, UM_POPUPACTION,0, ACT_DEF_DISMISS); break;
 						case 6:SendMessage(m_hwnd, UM_POPUPACTION,0, ACT_DEF_PIN); break;
+						case 7:SendMessage(m_hwnd, UM_POPUPACTION,0, ACT_DEF_COPY); break;
 					}
 				}else{
 					lock();
@@ -1458,6 +1497,7 @@ LRESULT CALLBACK PopupWnd2::WindowProc(UINT message, WPARAM wParam, LPARAM lPara
 					case 4:SendMessage(m_hwnd, UM_POPUPACTION,0, ACT_DEF_MENU); break;
 					case 5:SendMessage(m_hwnd, UM_POPUPACTION,0, ACT_DEF_DISMISS); break;
 					case 6:SendMessage(m_hwnd, UM_POPUPACTION,0, ACT_DEF_PIN); break;
+					case 7:SendMessage(m_hwnd, UM_POPUPACTION,0, ACT_DEF_COPY); break;
 				}
 			}
 			break;
@@ -1474,6 +1514,7 @@ LRESULT CALLBACK PopupWnd2::WindowProc(UINT message, WPARAM wParam, LPARAM lPara
 					case 4:SendMessage(m_hwnd, UM_POPUPACTION,0, ACT_DEF_MENU); break;
 					case 5:SendMessage(m_hwnd, UM_POPUPACTION,0, ACT_DEF_DISMISS); break;
 					case 6:SendMessage(m_hwnd, UM_POPUPACTION,0, ACT_DEF_PIN); break;
+					case 7:SendMessage(m_hwnd, UM_POPUPACTION,0, ACT_DEF_COPY); break;
 				}
 				return TRUE;
 			}else{

@@ -186,8 +186,8 @@ begin
       cbSize  :=SizeOf(Frame);
       hWnd    :=FrameWnd;
       hIcon   :=0;
-      align   :=alTop;
-      height  :=tr.bottom-tr.top+2;
+      align   :=alBottom;
+      height  :=20;
       if IsAnsi then
       begin
         Flags   :=F_VISIBLE or F_NOBORDER;
@@ -214,7 +214,7 @@ begin
 
       StrCopy(cid.name   ,frm_back);
       StrCopy(cid.setting,'frame_back');
-      cid.defcolour:=COLOR_3DFACE;
+      cid.defcolour:=RGB(255,0,255);
       cid.order    :=0;
       CallService(MS_COLOUR_REGISTERA,dword(@cid),0);
 
