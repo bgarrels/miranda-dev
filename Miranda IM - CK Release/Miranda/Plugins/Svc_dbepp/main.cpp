@@ -369,7 +369,7 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	ZeroMemory(&mi,sizeof(mi));
 	mi.cbSize=sizeof(mi);
 	mi.position=1900000001;
-	mi.flags=DBGetContactSettingByte(NULL,modname,"UserMenuItem",0);
+	mi.flags=DBGetContactSettingByte(NULL,modname,"UserMenuItem",0)?0:CMIF_HIDDEN;
 	mi.hIcon=LoadIcon(hInst,MAKEINTRESOURCE(ICO_REGUSER));
 	mi.pszName=Translate("Open user tree in DBE++");
 	mi.pszService="DBEditorpp/MenuCommand";
@@ -432,7 +432,7 @@ int WriteBlobFromString(HANDLE hContact,const char *szModule,const char *szSetti
 	BYTE b;
 	int tmp;
 
-	if (!(data = (BYTE *)mir_alloc((2+len/2)*sizeof(BYTE))))
+	if (!(data = (BYTE *)_alloca(2+len/2)))
 	{
 		msg(Translate("Couldnt allocate enough memory!"), modFullname);
 		return 0;
@@ -496,8 +496,8 @@ int GetValue(HANDLE hContact, const char* szModule, const char* szSetting, char*
 			if (UOS)
 			{
 				int len = (int)strlen(dbv.pszVal)+1;
-				char *sz = (char*)mir_alloc(len*3*sizeof(char));
-				WCHAR *wc = (WCHAR*)mir_alloc(len*sizeof(WCHAR));
+				char *sz = (char*)_alloca(len*3);
+				WCHAR *wc = (WCHAR*)_alloca(len*sizeof(WCHAR));
 				MultiByteToWideChar(CP_UTF8, 0, dbv.pszVal, -1, wc, len);
 				WideCharToMultiByte(CP_ACP, 0, wc, -1, sz, len, NULL, NULL);
 				strncpy(Value, sz, length);
@@ -540,7 +540,7 @@ int GetValueW(HANDLE hContact, const char* szModule, const char* szSetting, WCHA
 		case DBVT_UTF8:
 			{
 				int len = (int)strlen(dbv.pszVal) + 1;
-				WCHAR *wc = (WCHAR*)mir_alloc(length*sizeof(WCHAR));
+				WCHAR *wc = (WCHAR*)_alloca(length*sizeof(WCHAR));
 				MultiByteToWideChar(CP_UTF8, 0, dbv.pszVal, -1, wc, len);
 				wcsncpy((WCHAR*)Value, wc, length);
 			}
@@ -548,7 +548,7 @@ int GetValueW(HANDLE hContact, const char* szModule, const char* szSetting, WCHA
 		case DBVT_ASCIIZ:
 			{
 				int len = (int)strlen(dbv.pszVal) + 1;
-				WCHAR *wc = (WCHAR*)mir_alloc(len*sizeof(WCHAR));
+				WCHAR *wc = (WCHAR*)_alloca(len*sizeof(WCHAR));
 				MultiByteToWideChar(CP_ACP, 0, dbv.pszVal, -1, wc, len);
 				wcsncpy((WCHAR*)Value, wc, length);
 			}

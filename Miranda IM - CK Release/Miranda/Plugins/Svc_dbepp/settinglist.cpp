@@ -201,7 +201,7 @@ void additem(HWND hwnd2Settings,HANDLE hContact, char* module, char* setting, in
 
 				if (UOS)
 				{
-					WCHAR *wc = (WCHAR*)mir_alloc(length*sizeof(WCHAR));
+					WCHAR *wc = (WCHAR*)_alloca(length*sizeof(WCHAR));
 					MultiByteToWideChar(CP_UTF8, 0, dbv.pszVal, -1, wc, length);
 					ListView_SetItemTextW(hwnd2Settings,index,1,wc);
 				}
@@ -376,7 +376,7 @@ static LRESULT CALLBACK SettingLabelEditSubClassProc(HWND hwnd,UINT msg,WPARAM w
 				case IDOK:
 				{
 					int len = GetWindowTextLength(hwnd)+1;
-					char *value = (char *)mir_alloc(len*sizeof(char));
+					char *value = (char*)_alloca(len);
 					WCHAR *wc = NULL;
 					DBVARIANT dbv = {0};
 
@@ -384,7 +384,7 @@ static LRESULT CALLBACK SettingLabelEditSubClassProc(HWND hwnd,UINT msg,WPARAM w
 
 					if (info->unicode)
 					{
-						wc = (WCHAR*)mir_alloc(len*sizeof(WCHAR));
+						wc = (WCHAR*)_alloca(len * sizeof(WCHAR));
 						MultiByteToWideChar(CP_UTF8, 0, value, -1, wc, len);
 					}
 
@@ -659,7 +659,7 @@ void EditLabel(HWND hwnd2List, int item, int subitem)
 			if (subitem && UOS)
 			{
 				int len = mir_strlen(dbv.pszVal)+1;
-				WCHAR *wc = (WCHAR*)mir_alloc(len*sizeof(WCHAR));
+				WCHAR *wc = (WCHAR*)_alloca(len*sizeof(WCHAR));
 				MultiByteToWideChar(CP_UTF8, 0, dbv.pszVal, -1, wc, len);
 				data->unicode = 1;
 				info->hwnd2Edit = CreateWindowW(L"EDIT",wc,WS_BORDER|WS_VISIBLE|WS_CHILD|WS_VSCROLL|ES_MULTILINE|ES_AUTOHSCROLL, rc.left,rc.top,(int)((rc.right - rc.left)*1.5),(rc.bottom - rc.top)*3,hwnd2List, 0,hInst,0);
@@ -702,7 +702,7 @@ void EditLabel(HWND hwnd2List, int item, int subitem)
 		{
 			int j;
 			char tmp[16];
-			char *data = (char*)mir_alloc((3*(dbv.cpbVal+1)+10)*sizeof(char));
+			char *data = (char*)_alloca(3*(dbv.cpbVal+1)+10);
 
 			if (!data) {msg(Translate("Couldnt allocate enough memory!"), modFullname); return;}
 			data[0] = '\0';

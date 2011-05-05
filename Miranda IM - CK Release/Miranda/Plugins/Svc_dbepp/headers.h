@@ -17,6 +17,7 @@
 #include <process.h>
 #include <string.h>
 #include <win2k.h>
+#include <malloc.h>
 
 #include <newpluginapi.h>
 #include <m_utils.h>
