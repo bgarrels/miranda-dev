@@ -128,7 +128,7 @@ void addwatchtolist(HWND hwnd2list, struct DBsetting *lParam)
 				if (UOS)
 				{
 					int length = (int)strlen(dbv->pszVal) + 1;
-					WCHAR *wc = (WCHAR*)mir_alloc(length*sizeof(WCHAR));
+					WCHAR *wc = (WCHAR*)_alloca(length*sizeof(WCHAR));
 					MultiByteToWideChar(CP_UTF8, 0, dbv->pszVal, -1, wc, length);
 					ListView_SetItemTextW(hwnd2list,index,4,wc);
 				}

@@ -57,7 +57,7 @@ BOOL convertSetting(HANDLE hContact, char* module, char* setting, int toType) //
 				if (toType == 4) // convert to UNICODE
 				{
 					int len = (int)strlen(dbv.pszVal) + 1;
-					WCHAR *wc = (WCHAR*)mir_alloc(len*sizeof(WCHAR));
+					WCHAR *wc = (WCHAR*)_alloca(len*sizeof(WCHAR));
 					MultiByteToWideChar(CP_ACP, 0, dbv.pszVal, -1, wc, len);
 					Result = !DBWriteContactSettingWString(hContact, module, setting, wc);
 				}
@@ -75,8 +75,8 @@ BOOL convertSetting(HANDLE hContact, char* module, char* setting, int toType) //
 				if (toType == 3 && UOS) // convert to ANSI
 				{
 					int len = (int)strlen(dbv.pszVal) + 1;
-					char *sz = (char*)mir_alloc(len*3*sizeof(char));
-					WCHAR *wc = (WCHAR*)mir_alloc(len*sizeof(WCHAR));
+					char *sz = (char*)_alloca(len*3);
+					WCHAR *wc = (WCHAR*)_alloca(len*sizeof(WCHAR));
 					MultiByteToWideChar(CP_UTF8, 0, dbv.pszVal, -1, wc, len);
 					WideCharToMultiByte(CP_ACP, 0, wc, -1, sz, len, NULL, NULL);
 					Result = !DBWriteContactSettingString(hContact, module, setting, sz);
@@ -208,7 +208,7 @@ INT_PTR CALLBACK EditSettingDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
 						if (UOS)
 						{
 							int length = (int)strlen(tmp) + 1;
-							WCHAR *wc = (WCHAR*)mir_alloc(length*sizeof(WCHAR));
+							WCHAR *wc = (WCHAR*)_alloca(length*sizeof(WCHAR));
 							MultiByteToWideChar(CP_UTF8, 0, tmp, -1, wc, length);
 							SendMessageW(GetDlgItem(hwnd, IDC_STRING), WM_SETTEXT, 0, (LPARAM)wc);
 						}
@@ -235,7 +235,7 @@ INT_PTR CALLBACK EditSettingDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
 						int j;
 						char tmp[16];
 						int len = ((struct DBsetting*)lParam)->dbv.cpbVal;
-						char *data = (char*)mir_alloc((3*(len+1)+10)*sizeof(char));
+						char *data = (char*)_alloca(3*(len+1)+10);
 						BYTE *p = ((struct DBsetting*)lParam)->dbv.pbVal;
 
 						if (!data) return TRUE;
@@ -291,7 +291,7 @@ INT_PTR CALLBACK EditSettingDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
 						settingLength = GetWindowTextLength(GetDlgItem(hwnd, IDC_SETTINGVALUE));
 						if (settingLength)
 						{
-							setting = (char*)mir_alloc((settingLength + 1)*sizeof(char));
+							setting = (char*)_alloca(settingLength + 1);
 							if (setting)
 							{
 								// havta convert it with sprintf()
@@ -337,12 +337,12 @@ INT_PTR CALLBACK EditSettingDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
 					if (settingLength)
 					{
 						int settingValue;
-						setting = (char*)mir_alloc((settingLength + 1)*sizeof(char));
+						setting = (char*)_alloca(settingLength + 1);
 
 						if (valueLength)
-							value = (char*)mir_alloc((valueLength + 2)*sizeof(char));
+							value = (char*)_alloca(valueLength + 2);
 						else
-							value = (char*)mir_alloc(2*sizeof(char));
+							value = (char*)_alloca(2);
 
 						if (!setting || !value)
 						{

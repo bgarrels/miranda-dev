@@ -590,7 +590,7 @@ INT_PTR CALLBACK ImportDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
 			case IDC_CRLF:
 			{
 				int length = GetWindowTextLength(GetDlgItem(hwnd, IDC_TEXT));
-				char *string = (char*)mir_alloc((length+3)*sizeof(char));
+				char *string = (char*)_alloca(length+3);
 				int Pos = 2;
 
     			if (length)
@@ -636,7 +636,7 @@ INT_PTR CALLBACK ImportDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
 				char *string;
 				if (length)
 				{
-					string = (char*)mir_alloc((length+1)*sizeof(char));
+					string = (char*)_alloca(length+1);
 					if (!string) {msg(Translate("Couldnt allocate enough memory!"), modFullname); DestroyWindow(hwnd); }
 					GetDlgItemText(hwnd, IDC_TEXT, string, length+1);
 					importSettings(hContact, string);

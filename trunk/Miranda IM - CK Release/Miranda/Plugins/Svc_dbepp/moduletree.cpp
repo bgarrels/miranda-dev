@@ -1018,7 +1018,7 @@ void moduleListRightClick(HWND hwnd, WPARAM wParam,LPARAM lParam) // hwnd here i
 							case MENU_ADDKNOWN:
 							{
 								DBVARIANT dbv;
-								char *moduletemp = (char*)mir_alloc(strlen(module)*3*sizeof(char));
+								char *moduletemp = (char*)_alloca(strlen(module)*3);
 								unsigned int i;
 								moduletemp[0] = '\0';
 								for(i=0;i<strlen(module);i++)
@@ -1030,7 +1030,7 @@ void moduleListRightClick(HWND hwnd, WPARAM wParam,LPARAM lParam) // hwnd here i
 								if (!DBGetContactSetting(NULL,modname,"CoreModules",&dbv) && dbv.type == DBVT_ASCIIZ)
 								{
 									int len = (int)strlen(dbv.pszVal) + 10 + (int)strlen(moduletemp);
-									char* temp = (char*)mir_alloc(len*sizeof(char));
+									char* temp = (char*)_alloca(len);
 									mir_snprintf(temp, len, "%s, %s", dbv.pszVal, moduletemp);
 									DBWriteContactSettingString(NULL,modname,"CoreModules",temp);
 									DBFreeVariant(&dbv);
