@@ -5457,7 +5457,8 @@ Global
 		{8190CFAA-3B73-43D8-9101-8368E21F1864}.Release Unicode Static|x64.ActiveCfg = Release Unicode|Win32
 		{8190CFAA-3B73-43D8-9101-8368E21F1864}.Release Unicode|Win32.ActiveCfg = Release Unicode|Win32
 		{8190CFAA-3B73-43D8-9101-8368E21F1864}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
-		{8190CFAA-3B73-43D8-9101-8368E21F1864}.Release Unicode|x64.ActiveCfg = Release Unicode|Win32
+		{8190CFAA-3B73-43D8-9101-8368E21F1864}.Release Unicode|x64.ActiveCfg = Release Unicode|x64
+		{8190CFAA-3B73-43D8-9101-8368E21F1864}.Release Unicode|x64.Build.0 = Release Unicode|x64
 		{8190CFAA-3B73-43D8-9101-8368E21F1864}.Release(static)|Win32.ActiveCfg = Release Unicode|Win32
 		{8190CFAA-3B73-43D8-9101-8368E21F1864}.Release(static)|Win32.Build.0 = Release Unicode|Win32
 		{8190CFAA-3B73-43D8-9101-8368E21F1864}.Release(static)|x64.ActiveCfg = Release Unicode|Win32
