@@ -307,6 +307,9 @@
       <CLRThreadAttribute>DefaultThreadingAttribute</CLRThreadAttribute>
       <CLRImageType>Default</CLRImageType>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Mra.cpp" />

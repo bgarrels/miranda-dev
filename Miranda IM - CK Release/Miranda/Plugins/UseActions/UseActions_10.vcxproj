@@ -202,6 +202,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MapFileName>$(IntDir)$(TargetName).map</MapFileName>
     </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>./../../include/msapi/</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="UseActions.c" />
