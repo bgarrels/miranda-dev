@@ -1,0 +1,3 @@
+Some plugins use the Boost libaries, download it here:
+
+http://www.boost.org/
