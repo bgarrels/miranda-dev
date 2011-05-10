@@ -29,7 +29,7 @@ Last change by : $Author: kreol13 $
 */
 #include "commonheaders.h"
 #include "res/version.h"
-#include "SDK\m_updater.h"
+#include "m_updater.h"
 
 #include "mir_menuitems.h"
 #include "ctrl_base.h"
