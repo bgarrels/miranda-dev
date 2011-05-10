@@ -667,8 +667,6 @@ INT_PTR CALLBACK OptionsDefaultDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 					break;
 				case IDC_BROWSECMDL:
 				{
-					const char* skypeExe = "Skype.exe";
-
 					OPENFILENAMEA ofn={0};
 					BOOL gofnResult;
 					char szFileName[MAX_PATH];
@@ -685,11 +683,11 @@ INT_PTR CALLBACK OptionsDefaultDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 					GetDlgItemTextA(hwndDlg,IDC_COMMANDLINE,szFileName,sizeof(szFileName));
 					TranslateMirandaRelativePathToAbsolute(szFileName, szAbsolutePath, FALSE);
 					strcpy (szFileName, szAbsolutePath);
-					if(!*szFileName)
-						strcpy(szFileName, skypeExe);
 
 					if (!(gofnResult = GetOpenFileNameA(&ofn)) && CommDlgExtendedError() == FNERR_INVALIDFILENAME){
-						strcpy(szFileName, skypeExe);
+						strcpy(szFileName, ".\\Skype.exe");
+						TranslateMirandaRelativePathToAbsolute(szFileName, szAbsolutePath, FALSE);
+						strcpy (szFileName, szAbsolutePath);
 						gofnResult = GetOpenFileNameA(&ofn);
 					}
 
@@ -710,7 +708,7 @@ INT_PTR CALLBACK OptionsDefaultDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 					TranslateMirandaRelativePathToAbsolute(szFileName, szAbsolutePath, FALSE);
 
 					bi.hwndOwner = hwndDlg;
-					bi.ulFlags   = BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE | BIF_NONEWFOLDERBUTTON;
+					bi.ulFlags   = BIF_RETURNONLYFSDIRS | BIF_SHAREABLE | BIF_NEWDIALOGSTYLE | BIF_NONEWFOLDERBUTTON;
 					bi.lpfn      = BrowseCallbackProc;
 					bi.lParam    = (LPARAM)szAbsolutePath;
 
