@@ -30,7 +30,7 @@
  *
  * (C) 2005-2009 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: tools.cpp 13587 2011-04-12 13:54:26Z george.hazan $
+ * $Id: tools.cpp 13638 2011-05-10 18:12:25Z silvercircle $
  *
  * Helper functions for the group chat module.
  *
@@ -352,10 +352,10 @@ static BOOL DoPopup(SESSION_INFO* si, GCEVENT* gce, struct TWindowData* dat)
 			if (pContainer->dwFlags & CNT_ALWAYSREPORTINACTIVE) {
 				if (pContainer->dwFlags & CNT_DONTREPORTFOCUSED)
 					goto passed;
-
+				
 				if (pContainer->hwndActive == si->hWnd)
 					return 0;
-
+				
 				goto passed;
 			}
 			return 0;
@@ -469,10 +469,9 @@ void TSAPI DoFlashAndSoundWorker(FLASH_PARAMS* p)
 					if (dat->iFlashIcon != hIcons[ICON_HIGHLIGHT] && dat->iFlashIcon != hIcons[ICON_MESSAGE])
 						dat->iFlashIcon = p->hNotifyIcon;
 				}
-				if (p->bMustFlash) {
+				dat->mayFlashTab = TRUE;
+				if (p->bMustFlash)
 					SetTimer(si->hWnd, TIMERID_FLASHWND, TIMEOUT_FLASHWND, NULL);
-					dat->mayFlashTab = TRUE;
-				}
 			}
 		}
 		if(dat->pWnd) {
@@ -1226,8 +1225,8 @@ void Chat_SetFilters(SESSION_INFO *si)
 	if (si == NULL)
 		return;
 
-	dwFlags_default = M->GetDword("Chat", "FilterFlags", GC_EVENT_ACTION | GC_EVENT_MESSAGE | GC_EVENT_NICK | GC_EVENT_TOPIC | GC_EVENT_ADDSTATUS | GC_EVENT_INFORMATION | GC_EVENT_QUIT | GC_EVENT_KICK | GC_EVENT_NOTICE);
-	dwFlags_local = M->GetDword(si->hContact, "Chat", "FilterFlags", GC_EVENT_ACTION | GC_EVENT_MESSAGE | GC_EVENT_NICK | GC_EVENT_TOPIC | GC_EVENT_ADDSTATUS | GC_EVENT_INFORMATION | GC_EVENT_QUIT | GC_EVENT_KICK | GC_EVENT_NOTICE);
+	dwFlags_default = M->GetDword("Chat", "FilterFlags", 0x03E0);
+	dwFlags_local = M->GetDword(si->hContact, "Chat", "FilterFlags", 0x03E0);
 	dwMask = M->GetDword(si->hContact, "Chat", "FilterMask", 0);
 
 	si->iLogFilterFlags = dwFlags_default;
@@ -1236,8 +1235,8 @@ void Chat_SetFilters(SESSION_INFO *si)
 			si->iLogFilterFlags = (dwFlags_local & (1 << i) ? si->iLogFilterFlags | (1 << i) : si->iLogFilterFlags & ~(1 << i));
 	}
 
-	dwFlags_default = M->GetDword("Chat", "PopupFlags", GC_EVENT_KICK | GC_EVENT_HIGHLIGHT);
-	dwFlags_local = M->GetDword(si->hContact, "Chat", "PopupFlags", GC_EVENT_KICK | GC_EVENT_HIGHLIGHT);
+	dwFlags_default = M->GetDword("Chat", "PopupFlags", 0x03E0);
+	dwFlags_local = M->GetDword(si->hContact, "Chat", "PopupFlags", 0x03E0);
 	dwMask = M->GetDword(si->hContact, "Chat", "PopupMask", 0);
 
 	si->iLogPopupFlags = dwFlags_default;
@@ -1246,8 +1245,8 @@ void Chat_SetFilters(SESSION_INFO *si)
 			si->iLogPopupFlags = (dwFlags_local & (1 << i) ? si->iLogPopupFlags | (1 << i) : si->iLogPopupFlags & ~(1 << i));
 	}
 
-	dwFlags_default = M->GetDword("Chat", "TrayIconFlags", GC_EVENT_KICK | GC_EVENT_HIGHLIGHT);
-	dwFlags_local = M->GetDword(si->hContact, "Chat", "TrayIconFlags", GC_EVENT_KICK | GC_EVENT_HIGHLIGHT);
+	dwFlags_default = M->GetDword("Chat", "TrayIconFlags", 0x03E0);
+	dwFlags_local = M->GetDword(si->hContact, "Chat", "TrayIconFlags", 0x03E0);
 	dwMask = M->GetDword(si->hContact, "Chat", "TrayIconMask", 0);
 
 	si->iLogTrayFlags = dwFlags_default;
