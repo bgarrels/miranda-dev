@@ -460,7 +460,7 @@ INT_PTR CALLBACK OptionsAdvancedDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, 
 			for(i=0;i<sizeof(statusModes)/sizeof(statusModes[0]);i++) {
 				int k;
 
-				k=SendDlgItemMessage(hwndDlg,IDC_SKYPEOUTSTAT,CB_ADDSTRING,0,(LPARAM)CallService(MS_CLIST_GETSTATUSMODEDESCRIPTION,statusModes[i],GSMDF_TCHAR));
+				k=SendDlgItemMessage(hwndDlg,IDC_SKYPEOUTSTAT,CB_ADDSTRING,0,(LPARAM)CallService(MS_CLIST_GETSTATUSMODEDESCRIPTION,statusModes[i],GCMDF_TCHAR));
 				SendDlgItemMessage(hwndDlg,IDC_SKYPEOUTSTAT,CB_SETITEMDATA,k,statusModes[i]);
 				if (statusModes[i]==j) SendDlgItemMessage(hwndDlg,IDC_SKYPEOUTSTAT,CB_SETCURSEL,i,0);
 			}
@@ -667,6 +667,8 @@ INT_PTR CALLBACK OptionsDefaultDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 					break;
 				case IDC_BROWSECMDL:
 				{
+					const char* skypeExe = "Skype.exe";
+
 					OPENFILENAMEA ofn={0};
 					BOOL gofnResult;
 					char szFileName[MAX_PATH];
@@ -683,9 +685,11 @@ INT_PTR CALLBACK OptionsDefaultDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 					GetDlgItemTextA(hwndDlg,IDC_COMMANDLINE,szFileName,sizeof(szFileName));
 					TranslateMirandaRelativePathToAbsolute(szFileName, szAbsolutePath, FALSE);
 					strcpy (szFileName, szAbsolutePath);
+					if(!*szFileName)
+						strcpy(szFileName, skypeExe);
 
 					if (!(gofnResult = GetOpenFileNameA(&ofn)) && CommDlgExtendedError() == FNERR_INVALIDFILENAME){
-						strcpy(szFileName, "Skype.exe");
+						strcpy(szFileName, skypeExe);
 						gofnResult = GetOpenFileNameA(&ofn);
 					}
 
