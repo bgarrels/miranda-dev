@@ -800,43 +800,31 @@ bool facebook_client::home( )
 				std::string str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"jewelRequestCount\">", "</span>" );
 				if ( str_count.length() && str_count != std::string( "0" ) )
 				{
-					TCHAR* message = TranslateT( "Got new friend requests: " );
-					TCHAR* count = mir_a2t_cp( str_count.c_str( ), CP_UTF8 );
-					TCHAR* info = ( TCHAR* )malloc( ( lstrlen( message ) + lstrlen( count ) ) * sizeof( TCHAR ) );
-					lstrcpy( info, message );
-					lstrcat( info, count );
-					parent->NotifyEvent( parent->m_tszUserName, info, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_REQUESTS) );
-					mir_free( message );
-					mir_free( count );
-					mir_free( info );
+					std::string message = Translate("Got new friend requests: ") + str_count;
+
+					TCHAR* tmessage = mir_a2t(message.c_str());
+					parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_REQUESTS) );
+					mir_free( tmessage );
 				}
 
 				str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"jewelInnerUnseenCount\">", "</span>" );
 				if ( str_count.length() && str_count != std::string( "0" ) )
 				{
-					TCHAR* message = TranslateT( "Got new messages: " );
-					TCHAR* count = mir_a2t_cp( str_count.c_str( ), CP_UTF8 );
-					TCHAR* info = ( TCHAR* )malloc( ( lstrlen( message ) + lstrlen( count ) ) * sizeof( TCHAR ) );
-					lstrcpy( info, message );
-					lstrcat( info, count );
-					parent->NotifyEvent( parent->m_tszUserName, info, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_MESSAGES) );
-					mir_free( message );
-					mir_free( count );
-					mir_free( info );
+					std::string message = Translate("Got new messages: ") + str_count;
+
+					TCHAR* tmessage = mir_a2t(message.c_str());
+					parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_MESSAGES) );
+					mir_free( tmessage );
 				}
 
 				str_count = utils::text::source_get_value( &resp.data, 4, "id=\"notificationsWrapper", "<span class=\"jewelCount\">", "<span>", "</span>" );
 				if ( str_count.length() && str_count != std::string( "0" ) )
 				{
-					TCHAR* message = TranslateT( "Got new notifications: " );
-					TCHAR* count = mir_a2t_cp( str_count.c_str( ), CP_UTF8 );
-					TCHAR* info = ( TCHAR* )malloc( ( lstrlen( message ) + lstrlen( count ) ) * sizeof( TCHAR ) );
-					lstrcpy( info, message );
-					lstrcat( info, count );
-					parent->NotifyEvent( parent->m_tszUserName, info, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_NOTIFICATIONS) );
-					mir_free( message );
-					mir_free( count );
-					mir_free( info );
+					std::string message = Translate("Got new notifications: ") + str_count;
+
+					TCHAR* tmessage = mir_a2t(message.c_str());
+					parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_NOTIFICATIONS) );
+					mir_free( tmessage );
 				}
 			}
 
