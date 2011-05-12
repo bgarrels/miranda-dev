@@ -76,8 +76,7 @@ BOOL CALLBACK DlgProcOptStatistics(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 			{
 				LVCOLUMN lvc ={0};
 
-				SendDlgItemMessage(hwndDlg, IDC_LIST_DATA, LVM_SETEXTENDEDLISTVIEWSTYLE, 0,
-					LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
+				SendDlgItemMessage(hwndDlg, IDC_LIST_DATA, LVM_SETEXTENDEDLISTVIEWSTYLE, 0,	LVS_EX_FULLROWSELECT);
 #ifdef UNICODE
 				SendDlgItemMessage(hwndDlg, IDC_LIST_DATA, LVM_SETUNICODEFORMAT, 1, 0);
 #else
@@ -172,6 +171,7 @@ BOOL CALLBACK DlgProcOptStatistics(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 		case WM_NOTIFY:
 			{
 				LPNMHDR lpnmhdr = (LPNMHDR)lParam;
+
 				switch(lpnmhdr->idFrom)
 				{
 					case IDC_TAB_STATS:
@@ -180,89 +180,127 @@ BOOL CALLBACK DlgProcOptStatistics(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 						Stat_Show(hwndDlg);
 						break;
 					case IDC_LIST_DATA:
-						if (lpnmhdr->code == LVN_GETDISPINFO)
+						switch (lpnmhdr->code)
 						{
-							NMLVDISPINFO* pdi = (NMLVDISPINFO*)lParam;
-							SYSTEMTIME st = {0};
-							DWORD Index, Value;
-							double vartime;
-							TCHAR szBufW[64];
-							BYTE EldestAcc;
-
-							if (!(pdi->item.mask & LVIF_TEXT)) return 0;
-
-							// Если нужна надпись.
-							if (!pdi->item.iSubItem)
-							{
-								EldestAcc = Stat_GetEldestAcc(Stat_SelAcc);
-								// Индекс применим только для самого старого аккаунта!
-								Index = Stat_GetStartIndex(EldestAcc, unOptions.Stat_Tab, pdi->item.iItem, &st);
-								switch (unOptions.Stat_Tab)
+							case LVN_GETDISPINFO:
 								{
-									case 0: // Hourly
-										GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, &st, NULL, szBufW, 32);
-										mir_sntprintf(pdi->item.pszText, 32, _T("%s %02d:00 - %02d:59"),
-											szBufW,
-											ProtoList[EldestAcc].AllStatistics[Index].Hour,
-											ProtoList[EldestAcc].AllStatistics[Index].Hour);
-										break;
-									case 1: // Dayly
-										GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, &st, NULL, pdi->item.pszText, 32);
-										break;
-									case 2: // Weekly
-										// Уходим к первому понедельнику слева.
-										SystemTimeToVariantTime(&st, &vartime);
-										vartime -= DayOfWeek(st.wDay, st.wMonth, st.wYear) - 1;
-										VariantTimeToSystemTime(vartime, &st);
-										GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, &st, NULL, pdi->item.pszText, 32);
-										// Теперь к воскресенью.
-										SystemTimeToVariantTime(&st, &vartime);
-										vartime += 6;
-										VariantTimeToSystemTime(vartime, &st);
-										GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, &st, NULL, szBufW, 32);
-										mir_sntprintf(pdi->item.pszText, 32, _T("%s - %s"), pdi->item.pszText, szBufW);
-										break;
-									case 3: // Monthly
-										GetDateFormat(LOCALE_USER_DEFAULT, DATE_YEARMONTH, &st, NULL, pdi->item.pszText, 32);
-										break;
-									case 4:	// Yearly
-										mir_sntprintf(pdi->item.pszText, 32, _T("%d"), st.wYear);
-										break;
-								}
-								return 0;
-							}
+									NMLVDISPINFO* pdi = (NMLVDISPINFO*)lParam;
+									SYSTEMTIME st = {0};
+									DWORD Index, Value;
+									double vartime;
+									TCHAR szBufW[64];
+									BYTE EldestAcc;
 
-							Value = Stat_GetItemValue(Stat_SelAcc, unOptions.Stat_Tab, pdi->item.iItem, pdi->item.iSubItem);
+									if (!(pdi->item.mask & LVIF_TEXT)) return 0;
 
-							// Теперь можно записать в ListView циферки.
-							switch (pdi->item.iSubItem)
-							{
-								case 1: // Входящий
-								case 2: // Исходящий
-								case 3: // Сумма
-									GetFormattedTraffic(Value, unOptions.Stat_Units, pdi->item.pszText);
-									break;
-								case 4: // Время
+									// Если нужна надпись.
+									if (!pdi->item.iSubItem)
 									{
-										TCHAR *Fmt[5] = {_T("m:ss"), _T("h:mm:ss"), _T("h:mm:ss"), _T("d hh:mm:ss"), _T("d hh:mm:ss")};
-										GetDurationFormatM(Value, Fmt[unOptions.Stat_Tab], pdi->item.pszText, 64);
+										EldestAcc = Stat_GetEldestAcc(Stat_SelAcc);
+										// Индекс применим только для самого старого аккаунта!
+										Index = Stat_GetStartIndex(EldestAcc, unOptions.Stat_Tab, pdi->item.iItem, &st);
+										switch (unOptions.Stat_Tab)
+										{
+											case 0: // Hourly
+												GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, &st, NULL, szBufW, 32);
+												mir_sntprintf(pdi->item.pszText, 32, _T("%s %02d:00 - %02d:59"),
+													szBufW,
+													ProtoList[EldestAcc].AllStatistics[Index].Hour,
+													ProtoList[EldestAcc].AllStatistics[Index].Hour);
+												break;
+											case 1: // Dayly
+												GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, &st, NULL, pdi->item.pszText, 32);
+												break;
+											case 2: // Weekly
+												// Уходим к первому понедельнику слева.
+												SystemTimeToVariantTime(&st, &vartime);
+												vartime -= DayOfWeek(st.wDay, st.wMonth, st.wYear) - 1;
+												VariantTimeToSystemTime(vartime, &st);
+												GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, &st, NULL, pdi->item.pszText, 32);
+												// Теперь к воскресенью.
+												SystemTimeToVariantTime(&st, &vartime);
+												vartime += 6;
+												VariantTimeToSystemTime(vartime, &st);
+												GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, &st, NULL, szBufW, 32);
+												mir_sntprintf(pdi->item.pszText, 32, _T("%s - %s"), pdi->item.pszText, szBufW);
+												break;
+											case 3: // Monthly
+												GetDateFormat(LOCALE_USER_DEFAULT, DATE_YEARMONTH, &st, NULL, pdi->item.pszText, 32);
+												break;
+											case 4:	// Yearly
+												mir_sntprintf(pdi->item.pszText, 32, _T("%d"), st.wYear);
+												break;
+										}
+										return 0;
 									}
-									break;
-							}
-						}
 
-						if (lpnmhdr->code == NM_CLICK || lpnmhdr->code == LVN_ITEMCHANGED)
-						{
-							DWORD i, j = -1, dwTotalIncoming = 0, dwTotalOutgoing = 0;
+									Value = Stat_GetItemValue(Stat_SelAcc, unOptions.Stat_Tab, pdi->item.iItem, pdi->item.iSubItem);
+
+									// Теперь можно записать в ListView циферки.
+									switch (pdi->item.iSubItem)
+									{
+										case 1: // Входящий
+										case 2: // Исходящий
+										case 3: // Сумма
+											GetFormattedTraffic(Value, unOptions.Stat_Units, pdi->item.pszText);
+											break;
+										case 4: // Время
+											{
+												TCHAR *Fmt[5] = {_T("m:ss"), _T("h:mm:ss"), _T("h:mm:ss"), _T("d hh:mm:ss"), _T("d hh:mm:ss")};
+												GetDurationFormatM(Value, Fmt[unOptions.Stat_Tab], pdi->item.pszText, 64);
+											}
+											break;
+									}
+								}
+								break;
+							
+							case NM_CLICK:
+							case LVN_ITEMCHANGED:
+								{
+									DWORD i, j = -1, dwTotalIncoming = 0, dwTotalOutgoing = 0;
 														
-							i = SendDlgItemMessage(hwndDlg, IDC_LIST_DATA, LVM_GETSELECTEDCOUNT, 0, 0);
-							for ( ; i--;)
-							{
-								j = SendDlgItemMessage(hwndDlg, IDC_LIST_DATA, LVM_GETNEXTITEM, j, LVNI_SELECTED);
-								dwTotalIncoming += Stat_GetItemValue(Stat_SelAcc, unOptions.Stat_Tab, j, 1);
-								dwTotalOutgoing += Stat_GetItemValue(Stat_SelAcc, unOptions.Stat_Tab, j, 2);
-							}
-							Stat_UpdateTotalTraffic(hwndDlg, dwTotalIncoming, dwTotalOutgoing);
+									i = SendDlgItemMessage(hwndDlg, IDC_LIST_DATA, LVM_GETSELECTEDCOUNT, 0, 0);
+									for ( ; i--;)
+									{
+										j = SendDlgItemMessage(hwndDlg, IDC_LIST_DATA, LVM_GETNEXTITEM, j, LVNI_SELECTED);
+										dwTotalIncoming += Stat_GetItemValue(Stat_SelAcc, unOptions.Stat_Tab, j, 1);
+										dwTotalOutgoing += Stat_GetItemValue(Stat_SelAcc, unOptions.Stat_Tab, j, 2);
+									}
+									Stat_UpdateTotalTraffic(hwndDlg, dwTotalIncoming, dwTotalOutgoing);
+								}
+								break;
+
+							case NM_CUSTOMDRAW:
+								{
+									LPNMLVCUSTOMDRAW lplvcd = (LPNMLVCUSTOMDRAW)lParam;
+
+									switch (lplvcd->nmcd.dwDrawStage)
+									{
+										case CDDS_PREPAINT: // Перед началом рисования всего ListView.
+											SetWindowLong(hwndDlg, DWL_MSGRESULT, CDRF_NOTIFYITEMDRAW);
+											return TRUE;
+										case CDDS_ITEMPREPAINT: // Перед началом рисования строки.
+											{
+												COLORREF Color;
+												BYTE r, g, b;
+												
+												if (lplvcd->nmcd.dwItemSpec & 0x01)
+												{
+													Color = SendDlgItemMessage(hwndDlg, IDC_LIST_DATA, LVM_GETBKCOLOR, 0, 0);
+													r = GetRValue(Color);
+													g = GetGValue(Color);
+													b = GetBValue(Color);
+													r += r > 0x80 ? -40 : 40;
+													g += g > 0x80 ? -40 : 40;
+													b += b > 0x80 ? -40 : 40;
+													lplvcd->clrTextBk = RGB(r, g, b);;
+												}
+												SetWindowLong(hwndDlg, DWL_MSGRESULT, CDRF_NEWFONT);
+												return TRUE;
+											}
+									}
+								}
+								break;
 						}
 						break;
 				}
