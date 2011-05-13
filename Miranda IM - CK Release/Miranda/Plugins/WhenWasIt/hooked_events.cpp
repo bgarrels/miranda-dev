@@ -125,31 +125,31 @@ int OnModulesLoaded(WPARAM wParam, LPARAM lParam)
 	hmCheckBirthdays = (HANDLE) CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM) &cl);
 	
 	cl.pszService = MS_WWI_LIST_SHOW;
-	cl.pszName = Translate("Birthday list");
+	cl.pszName = "Birthday list";
 	cl.hIcon = hiListMenu;
 	hmBirthdayList = (HANDLE) CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM) &cl);
 	
 	cl.pszService = MS_WWI_REFRESH_USERDETAILS;
 	cl.position = 10100000;
-	cl.pszName = Translate("Refresh user details");
+	cl.pszName = "Refresh user details";
 	cl.hIcon = hiRefreshUserDetails;
 	hmRefreshDetails = (HANDLE) CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM) &cl);
 	
 	cl.pszService = MS_WWI_IMPORT_BIRTHDAYS;
 	cl.position = 10200000;
-	cl.pszName = Translate("Import birthdays");
+	cl.pszName = "Import birthdays";
 	cl.hIcon = hiImportBirthdays;
 	hmImportBirthdays = (HANDLE) CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM) &cl);
 	
 	cl.pszService = MS_WWI_EXPORT_BIRTHDAYS;
-	cl.pszName = Translate("Export birthdays");
+	cl.pszName = "Export birthdays";
 	cl.hIcon = hiExportBirthdays;
 	hmExportBirthdays = (HANDLE) CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM) &cl);
 	
 	cl.pszService = MS_WWI_ADD_BIRTHDAY;
 	cl.position = 10000000;
 	cl.hIcon = hiAddBirthdayContact;
-	cl.pszName = Translate("Add/change user &birthday");
+	cl.pszName = "Add/change user &birthday";
 	hmAddChangeBirthday = (HANDLE) CallService(MS_CLIST_ADDCONTACTMENUITEM, 0, (LPARAM) &cl);
 	
 	return 0;

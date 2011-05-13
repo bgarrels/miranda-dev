@@ -24,7 +24,7 @@ Boston, MA 02111-1307, USA.
 #endif
 
 //TODO: change to non-ATL code
-#define _ATL_DLL
+#define _ATL_STATIC_REGISTRY
 #define _ATL_APARTMENT_THREADED
 #include <atlbase.h>
 #include <atlcom.h>
