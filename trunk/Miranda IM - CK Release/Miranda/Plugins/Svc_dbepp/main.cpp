@@ -371,7 +371,7 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	mi.position=1900000001;
 	mi.flags=DBGetContactSettingByte(NULL,modname,"UserMenuItem",0)?0:CMIF_HIDDEN;
 	mi.hIcon=LoadIcon(hInst,MAKEINTRESOURCE(ICO_REGUSER));
-	mi.pszName=Translate("Open user tree in DBE++");
+	mi.pszName="Open user tree in DBE++";
 	mi.pszService="DBEditorpp/MenuCommand";
 	mi.pszContactOwner=NULL;
 	hUserMenu = (HANDLE) CallService(MS_CLIST_ADDCONTACTMENUITEM, 0, (LPARAM) & mi);
