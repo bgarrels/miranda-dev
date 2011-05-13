@@ -1,0 +1,113 @@
+#miniaero skin
+#Author: CHEF-KOCH
+#Version: 1.0
+
+############## Options
+
+options
+	#option	id	val	title
+	option	1	1	Show icons
+	option	2	1	Show clock
+	option	3	1	Enable avatars
+end
+
+############## Graphic
+
+w 8+icon.width+4+((title.width+4+clock.width)>text.width)+7+avatar.width+8
+h (8+(icon.height>title.height)+4+text.height+11)>(avatar.height+8+9+3)
+
+object 
+	type bitmap
+	source bg.png
+	mono
+	x 5
+	y 5
+	w window.width-10
+	h window.height-10
+end
+object 
+	type bitmap
+	source top-left.png
+	x 0
+	y 0
+end
+object
+	type bitmap
+	source left.png
+	x 0
+	y 5
+	h window.height-10
+end
+object 
+	type bitmap
+	source bottom-left.png
+	x 0
+	y window.height-5
+end
+object 
+	type bitmap
+	source top-right.png
+	x window.width-5
+	y 0
+end
+object
+	type bitmap
+	source right.png
+	x window.width-5
+	y 5
+	h window.height-10
+end
+object
+	type bitmap
+	source bottom-right.png
+	x window.width-5
+	y window.height-5
+end
+object
+	type bitmap
+	source top.png
+	x 5
+	y 0
+	w window.width-10
+end
+object 
+	type bitmap
+	source bottom.png
+	x 5
+	y window.height-5
+	w window.width-10
+end
+
+############## Information
+object 
+	ifset 1
+	type icon
+	x 11
+	y 11
+end
+object
+	ifset 2
+	type clock
+	x window.width-(5+avatar.width>0)-clock.width-5
+	y 11
+end
+object
+	ifset 3
+	type avatar
+	x window.width-avatar.width-11
+	y 11
+	w options.avatarsize
+	proportional 1
+end
+object
+	type title
+	x 11+icon.width+5
+	y 11
+	w window.width-(icon.width+11)-(5+avatar.width>0)-11
+end
+object
+	type text
+	x 11+icon.width+5
+	y 11+title.height+3
+	w window.width-(icon.width+11)-(5+avatar.width>0)-11
+end
