@@ -186,7 +186,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wbOSD", "..\Plugins\wbOSD\w
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StartupStatus", "..\Plugins\StartupStatus\StartupStatus_10.vcxproj", "{1BD5E5B9-A750-4CF8-A370-0FBD40A92CB2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gender_10", "..\Plugins\gender\gender_10.vcxproj", "{9DF8913A-99A3-40D2-86FE-585EBDDCABB2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gender", "..\Plugins\gender\gender_10.vcxproj", "{9DF8913A-99A3-40D2-86FE-585EBDDCABB2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "listeningto", "..\Plugins\listeningto\listeningto_10.vcxproj", "{149F4AAD-43A8-484E-B734-E16CD79A2D6D}"
 EndProject
@@ -4972,7 +4972,8 @@ Global
 		{43CCE193-624F-4285-B5C9-657579C4E916}.Release Unicode Static|x64.ActiveCfg = Release Unicode|Win32
 		{43CCE193-624F-4285-B5C9-657579C4E916}.Release Unicode|Win32.ActiveCfg = Release Unicode|Win32
 		{43CCE193-624F-4285-B5C9-657579C4E916}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
-		{43CCE193-624F-4285-B5C9-657579C4E916}.Release Unicode|x64.ActiveCfg = Release Unicode|Win32
+		{43CCE193-624F-4285-B5C9-657579C4E916}.Release Unicode|x64.ActiveCfg = Release Unicode|x64
+		{43CCE193-624F-4285-B5C9-657579C4E916}.Release Unicode|x64.Build.0 = Release Unicode|x64
 		{43CCE193-624F-4285-B5C9-657579C4E916}.Release(static)|Win32.ActiveCfg = Release Unicode|Win32
 		{43CCE193-624F-4285-B5C9-657579C4E916}.Release(static)|Win32.Build.0 = Release Unicode|Win32
 		{43CCE193-624F-4285-B5C9-657579C4E916}.Release(static)|x64.ActiveCfg = Release Unicode|Win32

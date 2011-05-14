@@ -131,6 +131,8 @@
       <BrowseInformationFile>
       </BrowseInformationFile>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>unicows.lib;%(AdditionalDependencies)</AdditionalDependencies>
