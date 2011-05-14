@@ -62,6 +62,9 @@
     <ClInclude Include="src\m_updater.h">
       <Filter>API</Filter>
     </ClInclude>
+    <ClInclude Include="src\splash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\splash.rc">
