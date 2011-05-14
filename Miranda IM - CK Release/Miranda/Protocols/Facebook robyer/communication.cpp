@@ -203,6 +203,7 @@ DWORD facebook_client::choose_security_level( int request_type )
 //	case FACEBOOK_REQUEST_MESSAGE_SEND:
 //	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 //	case FACEBOOK_REQUEST_SETTINGS:
+//	case FACEBOOK_REQUEST_TABS:
 //	case FACEBOOK_REQUEST_TYPING_SEND:
 	default:
 		return ( DWORD )0;
@@ -220,6 +221,7 @@ int facebook_client::choose_method( int request_type )
 	case FACEBOOK_REQUEST_STATUS_SET:
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
 	case FACEBOOK_REQUEST_SETTINGS:
+	case FACEBOOK_REQUEST_TABS:
 	case FACEBOOK_REQUEST_TYPING_SEND:
 	case FACEBOOK_REQUEST_LOGOUT:
 		return REQUEST_POST;
@@ -255,6 +257,7 @@ std::string facebook_client::choose_proto( int request_type )
 //	case FACEBOOK_REQUEST_MESSAGE_SEND:
 //	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 //	case FACEBOOK_REQUEST_SETTINGS:
+//	case FACEBOOK_REQUEST_TABS:
 //	case FACEBOOK_REQUEST_TYPING_SEND:
 	default:
 		return HTTP_PROTO_REGULAR;
@@ -297,6 +300,7 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 //	case FACEBOOK_REQUEST_STATUS_SET:
 //	case FACEBOOK_REQUEST_MESSAGE_SEND:
 //	case FACEBOOK_REQUEST_SETTINGS:
+//	case FACEBOOK_REQUEST_TABS:
 //	case FACEBOOK_REQUEST_TYPING_SEND:
 	default:
 		return FACEBOOK_SERVER_REGULAR;
@@ -323,7 +327,7 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 		return "/ajax/presence/update.php?__a=1";
 
 	case FACEBOOK_REQUEST_HOME:
-		return "/home.php?";
+		return "/home.php";
 
 	case FACEBOOK_REQUEST_BUDDY_LIST:
 		return "/ajax/chat/buddy_list.php?__a=1";
@@ -396,8 +400,11 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 	case FACEBOOK_REQUEST_SETTINGS:
 		return "/ajax/chat/settings.php?__a=1";
 
+	case FACEBOOK_REQUEST_TABS:
+		return "/ajax/chat/tabs.php?__a=1";
+
 	case FACEBOOK_REQUEST_TYPING_SEND:
-		return "/ajax/chat/typ.php?__a=1";
+		return "/ajax/messaging/typ.php?__a=1";
 
 	default:
 		return "/";
@@ -425,6 +432,7 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_STATUS_SET:
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
 	case FACEBOOK_REQUEST_SETTINGS:
+	case FACEBOOK_REQUEST_TABS:
 	case FACEBOOK_REQUEST_TYPING_SEND:
 		*headers_count = 5;
 		break;
@@ -455,6 +463,7 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_STATUS_SET:
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
 	case FACEBOOK_REQUEST_SETTINGS:
+	case FACEBOOK_REQUEST_TABS:
 	case FACEBOOK_REQUEST_TYPING_SEND:
 		set_header( &headers[4], "Content-Type" );
 
@@ -680,16 +689,10 @@ bool facebook_client::login(const std::string &username,const std::string &passw
 			error_str = Translate("Unknown login error");
 		parent->Log(" ! !  Login error: %s", error_str.c_str());
 
-		TCHAR* message = TranslateT( "Login error: " );
-		TCHAR* error = mir_a2t_cp( error_str.c_str( ), CP_UTF8 );
-		TCHAR* info = ( TCHAR* )malloc( ( lstrlen( message ) + lstrlen( error ) ) * sizeof( TCHAR ) );
-		lstrcpy( info, message );
-		lstrcat( info, error );
-		
-		client_notify( info );
-		mir_free( message );
-		mir_free( error );
-		mir_free( info );
+		std::string message = Translate("Login error: ") + error_str;
+		TCHAR* tmessage = mir_a2t(message.c_str());
+		client_notify( tmessage );
+		mir_free( tmessage );
 	}
 	case HTTP_CODE_FORBIDDEN: // Forbidden
 	case HTTP_CODE_NOT_FOUND: // Not Found
@@ -1144,8 +1147,8 @@ void facebook_client::close_chat( std::string message_recipient )
 {
 	// RM TODO: better optimalization for close_chat
 	// add items to list and then checking every x seconds
-	if ( (::time(NULL) - parent->facy.last_close_chat_time_) < 8 )
-		return;
+/*	if ( (::time(NULL) - parent->facy.last_close_chat_time_) < 8 )
+		return;*/
 
 	parent->facy.last_close_chat_time_ = ::time(NULL);
 
@@ -1158,7 +1161,7 @@ void facebook_client::close_chat( std::string message_recipient )
 	data += "&fb_dtsg=";
 	data += ( this->dtsg_.length( ) ) ? this->dtsg_ : "0";
 	
-	http::response resp = flap( FACEBOOK_REQUEST_SETTINGS, &data );
+	http::response resp = flap( FACEBOOK_REQUEST_TABS, &data );
 }
 
 /*bool facebook_client::get_profile(facebook_user* fbu)
