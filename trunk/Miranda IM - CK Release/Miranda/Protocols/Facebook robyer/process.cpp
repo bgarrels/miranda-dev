@@ -190,8 +190,8 @@ void FacebookProto::ProcessFeeds( void* data )
 		std::string post_content = resp->substr( pos, pos2 - pos );
 		std::string rest_content;
 
-		if ( (pos2 = resp->find( "class=\\\"uiStreamSource\\\"" ), pos) != std::string::npos )
-			rest_content = resp->substr( pos2, resp->find( "<abbr title=", pos2 ) - pos2 );
+		if ( (pos2 = post_content.find( "class=\\\"uiStreamSource\\\"" ), pos) != std::string::npos )
+			rest_content = post_content.substr( pos2, post_content.find( "<abbr title=", pos2 ) - pos2 );
 
 		pos += 4;
 		facebook_newsfeed* nf = new facebook_newsfeed;

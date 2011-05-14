@@ -104,7 +104,8 @@ Last change on : $Date$
 #define FACEBOOK_REQUEST_MESSAGE_SEND           300 // sending message
 #define FACEBOOK_REQUEST_MESSAGES_RECEIVE       301 // receiving messages
 #define FACEBOOK_REQUEST_TYPING_SEND            304 // sending typing notification
-#define FACEBOOK_REQUEST_SETTINGS               305 // closing message window, setting chat visibility
+#define FACEBOOK_REQUEST_SETTINGS               305 // setting chat visibility
+#define FACEBOOK_REQUEST_TABS					306 // closing message window, setting chat visibility
 
 // Reconnect flags
 #define FACEBOOK_RECONNECT_LOGIN        "6" // When logging in

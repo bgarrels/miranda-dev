@@ -74,7 +74,7 @@ void FacebookProto::SendMsgWorker(void *p)
 	{
 		ProtoBroadcastAck(m_szModuleName, data->hContact, ACKTYPE_MESSAGE, ACKRESULT_FAILED, data->msgid, (LPARAM)Translate("You cannot send messages when you are offline."));
 	}
-	else if ( DBGetContactSettingWord( data->hContact, m_szModuleName, "Status", ID_STATUS_OFFLINE ) == ID_STATUS_OFFLINE )
+/*	else if ( DBGetContactSettingWord( data->hContact, m_szModuleName, "Status", ID_STATUS_OFFLINE ) == ID_STATUS_OFFLINE )
 	{
 		ProtoBroadcastAck(m_szModuleName, data->hContact, ACKTYPE_MESSAGE, ACKRESULT_FAILED, data->msgid, (LPARAM)Translate("Facebook protocol don't support offline messages."));
 
@@ -87,7 +87,7 @@ void FacebookProto::SendMsgWorker(void *p)
 			DBFreeVariant(&dbv);
 		}
 	}
-	else if( !DBGetContactSettingString(data->hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
+*/	else if( !DBGetContactSettingString(data->hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
 	{
 		if ( facy.send_message(dbv.pszVal, data->msg) )
 			ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_MESSAGE,ACKRESULT_SUCCESS, data->msgid,0);
@@ -149,7 +149,7 @@ void FacebookProto::SendTypingWorker(void *p)
 		data += "&fb_dtsg=" + facy.dtsg_;
 		data += "&post_form_id=";
 		data += ( facy.post_form_id_.length( ) ) ? facy.post_form_id_ : "0";
-		data += "&post_form_id_source=AsyncRequest";
+		data += "&post_form_id_source=AsyncRequest&lsd=";
 
 		http::response resp = facy.flap( FACEBOOK_REQUEST_TYPING_SEND, &data );
 
