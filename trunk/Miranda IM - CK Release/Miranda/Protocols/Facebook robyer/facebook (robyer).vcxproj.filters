@@ -6,7 +6,7 @@
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Source Files\JSON_CAJUN">
-      <UniqueIdentifier>{2aad8cb8-8562-49b8-800d-b8a9b3084b27}</UniqueIdentifier>
+      <UniqueIdentifier>{1aa94a4b-c50c-4c3c-a952-40e7c1dde765}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>

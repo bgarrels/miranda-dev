@@ -209,7 +209,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
     <PreBuildEvent>
-      <Command>$(SolutionDir)incrementbuild.exe</Command>
+      <Command>"$(ProjectDir)incrementbuild.exe"</Command>
     </PreBuildEvent>
     <ClCompile>
       <AdditionalIncludeDirectories>../../include;../../ExternalAPI</AdditionalIncludeDirectories>
