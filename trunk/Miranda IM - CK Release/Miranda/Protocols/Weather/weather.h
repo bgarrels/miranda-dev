@@ -187,6 +187,7 @@ typedef struct {
 	WORD vUnit;
 	WORD pUnit;
 	WORD dUnit;
+	WORD eUnit;
 	char DegreeSign[4];
 	BOOL DoNotAppendUnit;
     BOOL NoFrac;
@@ -408,6 +409,7 @@ void GetTemp(char *tempchar, char *unit, char *str);
 void GetSpeed(char *tempchar, char *unit, char *str);
 void GetPressure(char *tempchar, char *unit, char *str);
 void GetDist(char *tempchar, char *unit, char *str);
+void GetElev(char *tempchar, char *unit, char *str);
 
 WORD GetIcon(const char* cond, WIDATA *Data);
 void CaseConv(char *str);

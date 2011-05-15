@@ -18,7 +18,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define MIRANDA_VER 0x1000
+#define MIRANDA_VER 0x0900
+#define MIRANDA_CUSTOM_LP
 
 #include <m_stdhdr.h>
 
@@ -62,9 +63,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <m_chat.h>
 #include <m_avatars.h>
 
-#include "sdk/m_proto_listeningto.h"
-#include "sdk/m_folders.h"
-#include "sdk/m_metacontacts.h"
+#include "m_proto_listeningto.h"
+#include "m_folders.h"
+#include "m_metacontacts.h"
 
 #include "ezxml.h"
 

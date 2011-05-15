@@ -122,6 +122,7 @@ void LoadOptions(void)
 	opt.vUnit = (WORD)DBGetContactSettingWord(NULL, WEATHERPROTONAME, "vUnit", 1);
 	opt.pUnit = (WORD)DBGetContactSettingWord(NULL, WEATHERPROTONAME, "pUnit", 4);
 	opt.dUnit = (WORD)DBGetContactSettingWord(NULL, WEATHERPROTONAME, "dUnit", 1);
+	opt.eUnit = (WORD)DBGetContactSettingWord(NULL, WEATHERPROTONAME, "eUnit", 2);
 	if (DBGetContactSettingString(NULL,WEATHERPROTONAME,"DegreeSign",&dbv))
 		strcpy(opt.DegreeSign, "");
 	else
@@ -250,6 +251,7 @@ void SaveOptions(void)
 	DBWriteContactSettingWord(NULL, WEATHERPROTONAME, "vUnit", opt.vUnit);
 	DBWriteContactSettingWord(NULL, WEATHERPROTONAME, "pUnit", opt.pUnit);
 	DBWriteContactSettingWord(NULL, WEATHERPROTONAME, "dUnit", opt.dUnit);
+	DBWriteContactSettingWord(NULL, WEATHERPROTONAME, "eUnit", opt.eUnit);
 	DBWriteContactSettingString(NULL, WEATHERPROTONAME, "DegreeSign", opt.DegreeSign);
 	DBWriteContactSettingByte(NULL, WEATHERPROTONAME, "DoNotAppendUnit", (BYTE)opt.DoNotAppendUnit);
 	DBWriteContactSettingByte(NULL, WEATHERPROTONAME, "NoFractions", (BYTE)opt.NoFrac);
@@ -383,6 +385,10 @@ INT_PTR CALLBACK OptionsProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lparam)
 				case 2: CheckRadioButton(hdlg, IDC_D1, IDC_D3, IDC_D2); break;
 				case 3: CheckRadioButton(hdlg, IDC_D1, IDC_D3, IDC_D3); break;
 			}
+			switch (opt.eUnit) {	// elev
+				case 1: CheckRadioButton(hdlg, IDC_E1, IDC_E2, IDC_E1); break;
+				case 2: CheckRadioButton(hdlg, IDC_E1, IDC_E2, IDC_E2); break;
+			}
 
 			opt_startup = FALSE;
 			return 0;
@@ -442,6 +448,8 @@ INT_PTR CALLBACK OptionsProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM lparam)
 					if (IsDlgButtonChecked(hdlg, IDC_D1)) opt.dUnit = 1;
 					if (IsDlgButtonChecked(hdlg, IDC_D2)) opt.dUnit = 2;
 					if (IsDlgButtonChecked(hdlg, IDC_D3)) opt.dUnit = 3;
+					if (IsDlgButtonChecked(hdlg, IDC_E1)) opt.eUnit = 1;
+					if (IsDlgButtonChecked(hdlg, IDC_E2)) opt.eUnit = 2;
 					
 					// save the new weather options
 					SaveOptions();

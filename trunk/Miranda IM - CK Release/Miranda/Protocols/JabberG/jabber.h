@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13588 $
-Last change on : $Date: 2011-04-12 16:40:04 +0200 (Di, 12. Apr 2011) $
+Revision       : $Revision: 13596 $
+Last change on : $Date: 2011-04-15 23:07:23 +0400 (Пт, 15 апр 2011) $
 Last change by : $Author: george.hazan $
 
 */
@@ -32,8 +32,8 @@ Last change by : $Author: george.hazan $
 	#pragma warning(disable:4706 4121 4127)
 #endif
 
-// this plugin is for Miranda 0.9 only
 #define MIRANDA_VER 0x0900
+#define MIRANDA_CUSTOM_LP
 
 #include "m_stdhdr.h"
 

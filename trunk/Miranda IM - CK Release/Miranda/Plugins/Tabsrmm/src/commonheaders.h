@@ -54,7 +54,8 @@
 #define _WIN32_IE 0x0501
 #define WIN32_LEAN_AND_MEAN
 
-#define MIRANDA_VER 0x1000
+#define MIRANDA_VER 0x0900
+#define MIRANDA_CUSTOM_LP
 
 #include <m_stdhdr.h>
 
@@ -213,19 +214,19 @@ extern struct LIST_INTERFACE li;
 #define safe_sizeof(a) (unsigned int)((sizeof((a)) / sizeof((a)[0])))
 
 #include "../include/version.h"
-#include "../API/m_ieview.h"
+#include "m_ieview.h"
 #include "m_popup2.h"
 #include "m_metacontacts.h"
 #include "m_fingerprint.h"
-#include "../API/m_nudge.h"
+#include "m_nudge.h"
 #include "m_folders.h"
-#include "../API/m_msg_buttonsbar.h"
-#include "../API/m_cln_skinedit.h"
-#include "../API/m_flash.h"
-#include "../API/m_spellchecker.h"
+#include "m_msg_buttonsbar.h"
+#include "m_cln_skinedit.h"
+#include "m_flash.h"
+#include "m_spellchecker.h"
 #include "m_mathmodule.h"
-#include "../API/m_historyevents.h"
-#include "../API/m_buttonbar.h"
+#include "m_historyevents.h"
+#include "m_buttonbar.h"
 #include "m_updater.h"
 #include "m_smileyadd.h"
 

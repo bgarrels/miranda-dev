@@ -20,7 +20,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Revision       : $Revision: 13594 $
-Last change on : $Date: 2011-04-14 05:52:36 +0200 (Do, 14. Apr 2011) $
+Last change on : $Date: 2011-04-14 07:52:36 +0400 (Чт, 14 апр 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -30,8 +30,8 @@ Last change by : $Author: borkra $
 
 #include "jabber_caps.h"
 #include "jabber_opttree.h"
-#include "sdk/m_wizard.h"
-#include "sdk/m_modernopt.h"
+#include "m_wizard.h"
+#include "m_modernopt.h"
 
 static BOOL (WINAPI *pfnEnableThemeDialogTexture)(HANDLE, DWORD) = 0;
 
@@ -417,10 +417,10 @@ public:
 		CreateLink(m_txtUsername, "LoginName", _T(""));
 		CreateLink(m_txtPriority, "Priority", DBVT_WORD, 0, true);
 		CreateLink(m_chkSavePassword, proto->m_options.SavePassword);
-		CreateLink(m_cbResource, "Resource", _T("Miranda"));
+		CreateLink(m_cbResource, "Resource", _T("MataesPack"));
 		CreateLink(m_chkUseHostnameAsResource, proto->m_options.HostNameAsResource);
 		CreateLink(m_chkUseDomainLogin, proto->m_options.UseDomainLogin);
-		CreateLink(m_cbServer, "LoginServer", _T("jabber.org"));
+		CreateLink(m_cbServer, "LoginServer", _T("jabber.ru"));
 		CreateLink(m_txtPort, "Port", DBVT_WORD, 5222);
 		CreateLink(m_chkUseSsl, proto->m_options.UseSSL);
 		CreateLink(m_chkUseTls, proto->m_options.UseTLS);
@@ -468,7 +468,7 @@ protected:
 		m_cbServer.AddString(TranslateT("Loading..."));
 
 		// fill predefined resources
-		TCHAR* szResources[] = { _T("Home"), _T("Work"), _T("Office"), _T("Miranda") };
+		TCHAR* szResources[] = { _T("Home"), _T("Work"), _T("Office"), _T("MataesPack") };
 		for (i = 0; i < SIZEOF(szResources); ++i)
 			m_cbResource.AddString(szResources[i]);
 
@@ -486,7 +486,7 @@ protected:
 			m_cbResource.SetText(dbv.ptszVal);
 			JFreeVariant(&dbv);
 		}
-		else m_cbResource.SetText(_T("Miranda"));
+		else m_cbResource.SetText(_T("MataesPack"));
 
 		for (i = 0; g_LanguageCodes[i].szCode; ++i)
 		{
@@ -1679,8 +1679,8 @@ public:
 	{
 		CreateLink(m_txtUsername, "LoginName", _T(""));
 		CreateLink(m_chkSavePassword, proto->m_options.SavePassword);
-		CreateLink(m_cbResource, "Resource", _T("Miranda"));
-		CreateLink(m_cbServer, "LoginServer", _T("jabber.org"));
+		CreateLink(m_cbResource, "Resource", _T("MataesPack"));
+		CreateLink(m_cbServer, "LoginServer", _T("jabber.ru"));
 		CreateLink(m_txtPort, "Port", DBVT_WORD, 5222);
 		CreateLink(m_chkUseDomainLogin, proto->m_options.UseDomainLogin);
 
@@ -1694,7 +1694,7 @@ public:
 	}
 
 protected:
-	enum { ACC_PUBLIC, ACC_TLS, ACC_SSL, ACC_GTALK, ACC_LJTALK, ACC_FBOOK, ACC_SMS };
+	enum { ACC_PUBLIC, ACC_TLS, ACC_SSL, ACC_GTALK, ACC_LJTALK, ACC_FBOOK, ACC_VK, ACC_SMS };
 
 	void OnInitDialog()
 	{
@@ -1716,7 +1716,7 @@ protected:
 		m_cbServer.AddString(TranslateT("Loading..."));
 
 		// fill predefined resources
-		TCHAR* szResources[] = { _T("Home"), _T("Work"), _T("Office"), _T("Miranda") };
+		TCHAR* szResources[] = { _T("Home"), _T("Work"), _T("Office"), _T("MataesPack") };
 		for (i = 0; i < SIZEOF(szResources); ++i)
 			m_cbResource.AddString(szResources[i]);
 
@@ -1735,7 +1735,7 @@ protected:
 			JFreeVariant(&dbv);
 		} else
 		{
-			m_cbResource.SetText(_T("Miranda"));
+			m_cbResource.SetText(_T("MataesPack"));
 		}
 
 		m_cbType.AddString(TranslateT("Public XMPP Network"), ACC_PUBLIC);
@@ -1744,6 +1744,7 @@ protected:
 		m_cbType.AddString(TranslateT("Google Talk!"), ACC_GTALK);
 		m_cbType.AddString(TranslateT("LiveJournal Talk"), ACC_LJTALK);
 		m_cbType.AddString(TranslateT("Facebook Chat"), ACC_FBOOK);
+		m_cbType.AddString(TranslateT("Vkontakte"), ACC_VK);
 		m_cbType.AddString(TranslateT("S.ms"), ACC_SMS);
 
 		m_cbServer.GetTextA(server, SIZEOF(server));
@@ -1767,6 +1768,11 @@ protected:
 		else if (!lstrcmpA(server, "chat.facebook.com"))
 		{
 			m_cbType.SetCurSel(ACC_FBOOK);
+			m_canregister = false;
+		}
+		else if (!lstrcmpA(server, "vk.com"))
+		{
+			m_cbType.SetCurSel(ACC_VK);
 			m_canregister = false;
 		}
 		else if (!lstrcmpA(server, "S.ms"))
@@ -1855,6 +1861,7 @@ protected:
 
 		switch (m_cbType.GetItemData(m_cbType.GetCurSel())) {
 		case ACC_FBOOK:
+		case ACC_VK:
 		case ACC_PUBLIC:
 			m_proto->m_options.UseSSL = m_proto->m_options.UseTLS = FALSE;
 			break;
@@ -2035,7 +2042,8 @@ private:
 	void setupGoogle();
 	void setupLJ();
 	void setupFB();
-	void setupSMS();
+	void setupVK();
+		void setupSMS();
 	void RefreshServers( HXML node);
 	static void QueryServerListThread(void *arg);
 };
@@ -2073,6 +2081,7 @@ void CJabberDlgAccMgrUI::setupConnection(int type)
 		case ACC_GTALK: setupGoogle(); break;
 		case ACC_LJTALK: setupLJ(); break;
 		case ACC_FBOOK: setupFB(); break;
+		case ACC_VK: setupVK(); break;
 		case ACC_SMS: setupSMS(); break;
 	}
 }
@@ -2169,6 +2178,25 @@ void CJabberDlgAccMgrUI::setupFB()
 	m_chkManualHost.SetState(BST_UNCHECKED);
 	m_txtManualHost.SetTextA("");
 	m_txtPort.SetInt(443);
+
+	m_cbServer.Disable();
+	m_chkManualHost.Disable();
+	m_txtManualHost.Disable();
+	m_txtPort.Disable();
+	m_btnRegister.Disable();
+//	m_cbResource.Disable();
+}
+
+void CJabberDlgAccMgrUI::setupVK()
+{
+	m_canregister = false;
+	m_gotservers = true;
+	m_cbServer.ResetContent();
+	m_cbServer.SetTextA("VK.com");
+	m_cbServer.AddStringA("VK.com");
+	m_chkManualHost.SetState(BST_UNCHECKED);
+	m_txtManualHost.SetTextA("");
+	m_txtPort.SetInt(5222);
 
 	m_cbServer.Disable();
 	m_chkManualHost.Disable();
