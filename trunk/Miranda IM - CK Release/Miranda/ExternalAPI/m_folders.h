@@ -29,24 +29,31 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define PLUGINS_PATH "%miranda_path%" "\\plugins"
 #define MIRANDA_USERDATA "%miranda_userdata%"
 
-#define TO_WIDE(x)     L ## x
-
 #define PROFILE_PATHW    L"%profile_path%"
 #define CURRENT_PROFILEW L"%current_profile%"
 #define MIRANDA_PATHW    L"%miranda_path%"
 #define MIRANDA_USERDATAW L"%miranda_userdata%"
 
-#define FOLDER_AVATARS                 PROFILE_PATH "\\" CURRENT_PROFILE "\\avatars"
-#define FOLDER_VCARDS                  PROFILE_PATH "\\" CURRENT_PROFILE "\\vcards"
-#define FOLDER_LOGS                    PROFILE_PATH "\\" CURRENT_PROFILE "\\logs"
-#define FOLDER_RECEIVED_FILES          PROFILE_PATH "\\" CURRENT_PROFILE "\\received files"
-#define FOLDER_DOCS                    MIRANDA_PATH "\\" "docs"
+#ifdef _UNICODE	
+	#define PROFILE_PATHT		PROFILE_PATHW
+	#define CURRENT_PROFILET	CURRENT_PROFILEW
+	#define MIRANDA_PATHT		MIRANDA_PATHW
+	#define MIRANDA_USERDATAT	MIRANDA_USERDATAW
+#else
+	#define PROFILE_PATHT		PROFILE_PATH
+	#define CURRENT_PROFILET	CURRENT_PROFILE
+	#define MIRANDA_PATHT		MIRANDA_PATH
+	#define MIRANDA_USERDATAT	MIRANDA_USERDATA
+#endif
 
-#define FOLDER_CONFIG                  PLUGINS_PATH "\\" "config"
-
-#define FOLDER_SCRIPTS                 MIRANDA_PATH "\\" "scripts"
-
-#define FOLDER_UPDATES                 MIRANDA_PATH "\\" "updates"
+#define FOLDER_AVATARS                 PROFILE_PATHT "\\" CURRENT_PROFILET "\\avatars"
+#define FOLDER_VCARDS                  PROFILE_PATHT "\\" CURRENT_PROFILET "\\vcards"
+#define FOLDER_LOGS                    PROFILE_PATHT "\\" CURRENT_PROFILET "\\logs"
+#define FOLDER_RECEIVED_FILES          PROFILE_PATHT "\\" CURRENT_PROFILET "\\received files"
+#define FOLDER_DOCS                    MIRANDA_PATHT "\\" "docs"
+#define FOLDER_CONFIG                  PLUGINS_PATHT "\\" "config"
+#define FOLDER_SCRIPTS                 MIRANDA_PATHT "\\" "scripts"
+#define FOLDER_UPDATES                 MIRANDA_PATHT "\\" "updates"
 
 #define FOLDER_CUSTOMIZE               MIRANDA_PATH "\\" "customize"
 #define FOLDER_CUSTOMIZE_SOUNDS        FOLDER_CUSTOMIZE "\\sounds"
@@ -55,6 +62,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define FOLDER_CUSTOMIZE_SKINS         FOLDER_CUSTOMIZE "\\skins"
 #define FOLDER_CUSTOMIZE_THEMES        FOLDER_CUSTOMIZE "\\themes"
 
+#define TO_WIDE(x)     L ## x
 
 #define FOLDERS_NAME_MAX_SIZE 64  //maximum name and section size
 
@@ -145,7 +153,6 @@ typedef struct{
 #ifndef M_UTILS_H__
 #error The helper functions require that m_utils.h be included in the project. Please include that file if you want to use the helper functions. If you don''t want to use the functions just define FOLDERS_NO_HELPER_FUNCTIONS.
 #endif
-//#include "../../../include/newpluginapi.h"
 
 __inline static HANDLE FoldersRegisterCustomPath(const char *section, const char *name, const char *defaultPath)
 {
@@ -275,7 +282,7 @@ __inline static INT_PTR FoldersGetCustomPathExW(HANDLE hFolderEntry, wchar_t *pa
 #  define FoldersRegisterCustomPathT FoldersRegisterCustomPathW
 #else
 #  define FoldersGetCustomPathT FoldersGetCustomPath
-#  define FoldersGetCustomPathExT FoldersGetCustomPath
+#  define FoldersGetCustomPathExT FoldersGetCustomPathEx
 #  define FoldersRegisterCustomPathT FoldersRegisterCustomPath
 #endif
 
