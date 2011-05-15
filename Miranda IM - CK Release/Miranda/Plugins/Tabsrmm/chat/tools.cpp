@@ -469,9 +469,10 @@ void TSAPI DoFlashAndSoundWorker(FLASH_PARAMS* p)
 					if (dat->iFlashIcon != hIcons[ICON_HIGHLIGHT] && dat->iFlashIcon != hIcons[ICON_MESSAGE])
 						dat->iFlashIcon = p->hNotifyIcon;
 				}
-				dat->mayFlashTab = TRUE;
-				if (p->bMustFlash)
+			if (p->bMustFlash) {
 					SetTimer(si->hWnd, TIMERID_FLASHWND, TIMEOUT_FLASHWND, NULL);
+					dat->mayFlashTab = TRUE;
+				}
 			}
 		}
 		if(dat->pWnd) {
@@ -1256,7 +1257,7 @@ void Chat_SetFilters(SESSION_INFO *si)
 	}
 
 	dwFlags_default = M->GetDword("Chat", "DiskLogFlags", 0xFFFF);
-    si->iDiskLogFlags = dwFlags_default;
+	si->iDiskLogFlags = dwFlags_default;
 
 
 	if (si->iLogFilterFlags == 0)
@@ -1274,7 +1275,7 @@ TCHAR* GetChatLogsFilename(SESSION_INFO *si, time_t tTime)
 	bool				fReparse = false;
 
 	if(!tTime)
-	  time(&tTime);
+		time(&tTime);
 
 	/*
 	 * check whether relevant parts of the timestamp have changed and
@@ -1346,7 +1347,7 @@ TCHAR* GetChatLogsFilename(SESSION_INFO *si, time_t tTime)
 			if (*p == ':' || *p == '*' || *p == '?' || *p == '"' || *p == '<' || *p == '>' || *p == '|' )
 				*p = _T('_');
 		}
-    }
+	}
 
 	return si->pszLogFileName;
 }

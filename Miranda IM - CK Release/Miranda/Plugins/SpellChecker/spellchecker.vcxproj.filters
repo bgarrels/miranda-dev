@@ -2,25 +2,25 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{bfa2d339-26e3-481a-94b4-fc18512cc2e1}</UniqueIdentifier>
+      <UniqueIdentifier>{1e567d1e-0703-4ad7-8be9-0bf36e6d903e}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Header Files\hunspell Header Files">
-      <UniqueIdentifier>{ed40222b-663b-4d9d-b7ff-9b3fa19a2d3c}</UniqueIdentifier>
+      <UniqueIdentifier>{6ac01ae1-9db3-41f9-abaa-4e05175e9502}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{e007ef82-b232-4cc2-9220-09513be47f5c}</UniqueIdentifier>
+      <UniqueIdentifier>{7168cb7a-2d93-454f-a2e8-d3697486751a}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{73ebe10f-fdcf-4bc5-8099-5696b4fe4138}</UniqueIdentifier>
+      <UniqueIdentifier>{f6737d81-ea60-4b9d-b7d7-76da94729a18}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Source Files\hunspell Source Files">
-      <UniqueIdentifier>{a6995451-1f6d-4a1e-9fb9-b3884702915d}</UniqueIdentifier>
+      <UniqueIdentifier>{a28a5de0-489b-4a0c-8e4b-87848ecfc338}</UniqueIdentifier>
     </Filter>
     <Filter Include="Docs">
-      <UniqueIdentifier>{f3f9af70-cc8a-463c-9477-daf5cf4a092d}</UniqueIdentifier>
+      <UniqueIdentifier>{437a04fa-5422-4a59-bf81-a7a42e195870}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -37,15 +37,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="m_spellchecker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Utils\Pescuma\mir_icons.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Utils\Pescuma\mir_memory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Utils\Pescuma\mir_options.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="options.h">
@@ -108,7 +99,13 @@
     <ClInclude Include="hunspell\w_char.hxx">
       <Filter>Header Files\hunspell Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Version.h">
+    <ClInclude Include="..\Utils\Pescuma\mir_icons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utils\Pescuma\mir_options.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utils\Pescuma\mir_memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -139,9 +136,6 @@
     <ResourceCompile Include="resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="Version.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ardialog.cpp">
@@ -151,12 +145,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dictionary.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utils\Pescuma\mir_icons.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utils\Pescuma\mir_options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="options.cpp">
@@ -201,8 +189,11 @@
     <ClCompile Include="hunspell\suggestmgr.cxx">
       <Filter>Source Files\hunspell Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hunspell\utf_info.cxx">
-      <Filter>Source Files\hunspell Source Files</Filter>
+    <ClCompile Include="..\..\..\..\..\berlios\trunk\utils\mir_icons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\berlios\trunk\utils\mir_options.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

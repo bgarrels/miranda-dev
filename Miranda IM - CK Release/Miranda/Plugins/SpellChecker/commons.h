@@ -1,5 +1,5 @@
 /* 
-Copyright (C) 2006 Ricardo Pescuma Domenecci
+Copyright (C) 2006-2010 Ricardo Pescuma Domenecci
 
 This is free software; you can redistribute it and/or
 modify it under the terms of the GNU Library General Public
@@ -54,25 +54,27 @@ using namespace std;
 #include <m_database.h>
 #include <m_options.h>
 #include <m_utils.h>
-#include <m_updater.h>
-#include <m_metacontacts.h>
 #include <m_popup.h>
 #include <m_history.h>
 #include <m_message.h>
-#include <m_folders.h>
 #include <m_icolib.h>
-#include <m_variables.h>
 #include <m_hotkeys.h>
 
-#include "mir_memory.h"
-#include "mir_options.h"
-#include "mir_icons.h"
-#include "tstring.h"
-#include "utf8_helpers.h"
-#include "scope.h"
+//own includes
+#include "m_folders.h"
+#include "m_updater.h"
+#include "m_metacontacts.h"
+#include "m_variables.h"
+#include "m_userinfoex.h"
+
+#include "../utils/Pescuma/mir_memory.h"
+#include "../utils/Pescuma/mir_options.h"
+#include "../utils/Pescuma/mir_icons.h"
+#include "../utils/Pescuma/tstring.h"
+#include "../utils/Pescuma/utf8_helpers.h"
+#include "../utils/Pescuma/scope.h"
 
 #include "resource.h"
-#include "Version.h"
 #include "m_spellchecker.h"
 #include "options.h"
 #include "autoreplace.h"
@@ -82,6 +84,10 @@ using namespace std;
 
 
 #define MODULE_NAME		"SpellChecker"
+
+#define FLAGS_DLL_FOLDER _T("%miranda_path%\\Icons")
+#define CUSTOM_DICTIONARIES_FOLDER _T("%miranda_userdata%\\Dictionaries")
+#define DICTIONARIES_FOLDER _T("%miranda_path%\\Dictionaries")
 
 // Global Variables
 extern HINSTANCE hInst;

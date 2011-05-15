@@ -108,7 +108,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tipper", "..\Plugins\Tipper
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Extraicons", "..\Plugins\Extraicons\extraicons.vcxproj", "{778D0DEB-C798-45D3-98E0-ABAB242573C8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SpellChecker", "..\Plugins\SpellChecker\spellchecker.vcxproj", "{5D5564DD-A900-4686-B78B-CAC6909A7FC7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "spellchecker", "..\Plugins\SpellChecker\spellchecker.vcxproj", "{5D5564DD-A900-4686-B78B-CAC6909A7FC7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IEView", "..\Plugins\Ieview\ieview.vcxproj", "{B988F96C-F87A-484C-AB15-D0674B22F291}"
 EndProject

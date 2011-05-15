@@ -1,5 +1,5 @@
 /* 
-Copyright (C) 2006-2009 Ricardo Pescuma Domenecci
+Copyright (C) 2006-2010 Ricardo Pescuma Domenecci
 
 This is free software; you can redistribute it and/or
 modify it under the terms of the GNU Library General Public
@@ -35,7 +35,7 @@ static INT_PTR CALLBACK AutoreplaceDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam
 
 static OptPageControl optionsControls[] = { 
 	{ &opts.auto_replace_dict,				CONTROL_CHECKBOX,		IDC_AUTO_DICT,				"AutoReplaceDict", FALSE },
-	{ &opts.ignore_with_numbers,			CONTROL_CHECKBOX,		IDC_IGNORE_NUMBERS,			"IgnoreWithNumbers", TRUE },
+	{ &opts.ignore_with_numbers,			CONTROL_CHECKBOX,		IDC_IGNORE_NUMBERS,			"IgnoreWithNumbers", FALSE },
 	{ &opts.ignore_uppercase,				CONTROL_CHECKBOX,		IDC_IGNORE_UPPERCASE,		"IgnoreUppercase", FALSE },
 	{ &opts.ask_when_sending_with_error,	CONTROL_CHECKBOX,		IDC_ASK_ON_ERROR,			"AskWhenSendingWithError", FALSE },
 	{ &opts.underline_type,					CONTROL_COMBO,			IDC_UNDERLINE_TYPE,			"UnderlineType", CFU_UNDERLINEWAVE - CFU_UNDERLINEDOUBLE },
@@ -70,8 +70,8 @@ int InitOptionsCallback(WPARAM wParam,LPARAM lParam)
     odp.cbSize=sizeof(odp);
     odp.position=0;
 	odp.hInstance=hInst;
-	odp.ptszGroup = _T("Message Sessions");
-	odp.ptszTitle = _T("Spell Checker");
+	odp.ptszGroup = LPGENT("Message Sessions");
+	odp.ptszTitle = LPGENT("Spell Checker");
 	odp.pfnDlgProc = OptionsDlgProc;
 	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPTIONS);
     odp.flags = ODPF_BOLDGROUPS | ODPF_TCHAR;
@@ -84,8 +84,8 @@ int InitOptionsCallback(WPARAM wParam,LPARAM lParam)
     odp.cbSize=sizeof(odp);
     odp.position=0;
 	odp.hInstance=hInst;
-	odp.ptszGroup = _T("Message Sessions");
-	odp.ptszTitle = _T("Auto-replacements");
+	odp.ptszGroup = LPGENT("Message Sessions");
+	odp.ptszTitle = LPGENT("Auto-replacements");
 	odp.pfnDlgProc = AutoreplaceDlgProc;
 	odp.pszTemplate = MAKEINTRESOURCEA(IDD_REPLACEMENTS);
     odp.flags = ODPF_BOLDGROUPS | ODPF_TCHAR;
