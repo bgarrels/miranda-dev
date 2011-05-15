@@ -20,7 +20,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Revision       : $Revision: 13533 $
-Last change on : $Date: 2011-03-31 20:32:14 +0200 (Do, 31. Mrz 2011) $
+Last change on : $Date: 2011-03-31 22:32:14 +0400 (Чт, 31 мар 2011) $
 Last change by : $Author: george.hazan $
 
 */
@@ -36,7 +36,7 @@ Last change by : $Author: george.hazan $
 #include <m_hotkeys.h>
 #include <m_icolib.h>
 
-#include "sdk/m_toolbar.h"
+#include "m_toolbar.h"
 
 #define MENUITEM_LASTSEEN	1
 #define MENUITEM_SERVER		2

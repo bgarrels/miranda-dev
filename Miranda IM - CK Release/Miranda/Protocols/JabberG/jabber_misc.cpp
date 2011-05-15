@@ -30,7 +30,7 @@ Last change by : $Author: borkra $
 #include "jabber_caps.h"
 
 #include <m_popup.h>
-#include "sdk/m_folders.h"
+#include "m_folders.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // JabberAddContactToRoster() - adds a contact to the roster
@@ -261,9 +261,9 @@ void CJabberProto::InitCustomFolders( void )
 	bInitDone = true;
 	if ( ServiceExists( MS_FOLDERS_REGISTER_PATH )) {
 		TCHAR AvatarsFolder[MAX_PATH];
-		TCHAR* tmpPath = Utils_ReplaceVarsT( _T("%miranda_avatarcache%"));
-		mir_sntprintf( AvatarsFolder, SIZEOF( AvatarsFolder ), _T("%s\\Jabber"), tmpPath );
-		mir_free(tmpPath);
+		TCHAR* tmpPath = _T("%miranda_userdata%");
+		mir_sntprintf( AvatarsFolder, SIZEOF( AvatarsFolder ), _T("%s\\Avatars\\") _T(TCHAR_STR_PARAM), tmpPath, m_szModuleName );
+		//mir_free(tmpPath);
 		hJabberAvatarsFolder = FoldersRegisterCustomPathT( m_szModuleName, "Avatars", AvatarsFolder );	// title!!!!!!!!!!!
 }	}
 
@@ -275,8 +275,8 @@ void CJabberProto::GetAvatarFileName( HANDLE hContact, TCHAR* pszDest, size_t cb
 	InitCustomFolders();
 
 	if ( hJabberAvatarsFolder == NULL || FoldersGetCustomPathT( hJabberAvatarsFolder, path, (int)cbLen, _T(""))) {
-		TCHAR *tmpPath = Utils_ReplaceVarsT( _T("%miranda_avatarcache%"));
-		tPathLen = mir_sntprintf( pszDest, cbLen, _T("%s\\Jabber"), tmpPath );
+		TCHAR *tmpPath = Utils_ReplaceVarsT( _T("%miranda_userdata%"));
+		tPathLen = mir_sntprintf( pszDest, cbLen, _T("%s\\Avatars\\") _T(TCHAR_STR_PARAM), tmpPath, m_szModuleName );
 		mir_free(tmpPath);
 	}
 	else tPathLen = mir_sntprintf( pszDest, cbLen, _T("%s"), path );

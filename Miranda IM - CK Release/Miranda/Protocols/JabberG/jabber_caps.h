@@ -20,7 +20,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Revision       : $Revision: 13535 $
-Last change on : $Date: 2011-04-02 05:10:52 +0200 (Sa, 02. Apr 2011) $
+Last change on : $Date: 2011-04-02 07:10:52 +0400 (Сб, 02 апр 2011) $
 Last change by : $Author: borkra $
 
 */

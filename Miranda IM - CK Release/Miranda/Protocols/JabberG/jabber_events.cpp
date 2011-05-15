@@ -20,7 +20,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Revision       : $Revision: 13497 $
-Last change on : $Date: 2011-03-25 05:55:36 +0100 (Fr, 25. Mrz 2011) $
+Last change on : $Date: 2011-03-25 07:55:36 +0300 (Пт, 25 мар 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -38,7 +38,7 @@ Last change by : $Author: borkra $
 #include "m_file.h"
 #include "m_addcontact.h"
 #include "jabber_disco.h"
-#include "sdk/m_proto_listeningto.h"
+#include "m_proto_listeningto.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // OnContactDeleted - processes a contact deletion

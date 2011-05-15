@@ -42,8 +42,8 @@ Last change by : $Author: m_mluhov $
 #include "jabber_caps.h"
 #include "jabber_disco.h"
 
-#include "sdk/m_proto_listeningto.h"
-#include "sdk/m_modernopt.h"
+#include "m_proto_listeningto.h"
+#include "m_modernopt.h"
 
 #pragma warning(disable:4355)
 
@@ -204,7 +204,7 @@ CJabberProto::CJabberProto( const char* aProtoName, const TCHAR* aUserName ) :
 		m_tszSelectedLang = mir_tstrdup( dbv.ptszVal );
 		JFreeVariant( &dbv );
 	}
-	else m_tszSelectedLang = mir_tstrdup( _T( "en" ));
+	else m_tszSelectedLang = mir_tstrdup( _T( "ru" ));
 
 	if (!DBGetContactSettingString(NULL, m_szModuleName, "Password", &dbv))
 	{
@@ -701,7 +701,7 @@ DWORD_PTR __cdecl CJabberProto::GetCaps( int type, HANDLE /*hContact*/ )
 {
 	switch( type ) {
 	case PFLAGNUM_1:
-		return PF1_IM | PF1_AUTHREQ | PF1_CHAT | PF1_SERVERCLIST | PF1_MODEMSG | PF1_BASICSEARCH | PF1_EXTSEARCH | PF1_FILE | PF1_CONTACT;
+		return PF1_IM | PF1_AUTHREQ | PF1_CHAT | PF1_SERVERCLIST | PF1_MODEMSG | PF1_BASICSEARCH | PF1_EXTSEARCH | PF1_FILE | PF1_CONTACT | PF1_VISLIST | PF1_INVISLIST;
 	case PFLAGNUM_2:
 		return PF2_ONLINE | PF2_INVISIBLE | PF2_SHORTAWAY | PF2_LONGAWAY | PF2_HEAVYDND | PF2_FREECHAT;
 	case PFLAGNUM_3:
