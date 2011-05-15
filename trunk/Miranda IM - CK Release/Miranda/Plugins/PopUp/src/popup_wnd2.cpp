@@ -1389,11 +1389,16 @@ LRESULT CALLBACK PopupWnd2::WindowProc(UINT message, WPARAM wParam, LPARAM lPara
 					#endif
 					HGLOBAL clipbuffer;
 					static TCHAR * buffer, *text;
-					char* sztext = NULL;
-					text = this->m_lpwzText;
-					if (!text)
+					char* sztext;
+					if ((this->m_lpwzText) || (this->m_lpwzTitle))
 					{
-						sztext = this->m_lpzText;
+						text = (TCHAR*)mir_alloc((_tcslen(this->m_lpwzText) + _tcslen(this->m_lpwzTitle)+3)*sizeof(TCHAR));
+						mir_sntprintf(text, _tcslen(this->m_lpwzText) + _tcslen(this->m_lpwzTitle)+3, _T("%s\n\n%s"), this->m_lpwzTitle, this->m_lpwzText);
+					}
+					else if ((this->m_lpzText) || (this->m_lpzTitle))
+					{
+						sztext = (char*)mir_alloc((lstrlenA(this->m_lpzText) + lstrlenA(this->m_lpzTitle)+3)*sizeof(char));
+						mir_snprintf(sztext, lstrlenA(this->m_lpzText) + lstrlenA(this->m_lpzTitle)+3, "%s\n\n%s", this->m_lpzTitle, this->m_lpzText);
 						text = mir_a2t(sztext);
 					}
 					OpenClipboard(m_hwnd);

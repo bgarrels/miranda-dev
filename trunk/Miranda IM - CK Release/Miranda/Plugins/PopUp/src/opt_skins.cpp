@@ -235,12 +235,12 @@ int  SkinOptionList_AddSkin(OPTTREE_OPTION* &options, int *OptionsCount, int pos
 int  SkinOptionList_AddMain(OPTTREE_OPTION* &options, int *OptionsCount, int pos, DWORD *dwGlobalOptions) {
 	BOOL bCheck;
 	LPTSTR mainOption [] = {
-		_T("Show clock"),
-		_T("Drop shadow effect (Windows XP+)"),
-		_T("Drop shadow effect (Windows XP+)/non rectangular"),
-		_T("Enable Aero Glass (Vista+)"),
-		_T("Use Windows colours"),
-		_T("Use advanced text render")};
+		LPGENT("Show clock"),
+		LPGENT("Drop shadow effect (Windows XP+)"),
+		LPGENT("Drop shadow effect (Windows XP+)/non rectangular"),
+		LPGENT("Enable Aero Glass (Vista+)"),
+		LPGENT("Use Windows colours"),
+		LPGENT("Use advanced text render")};
 	for (int i = 0; i < SIZEOF(mainOption); i++) {
 		bCheck = 0;
 		switch (i) {
@@ -476,6 +476,9 @@ INT_PTR CALLBACK DlgProcPopSkinsOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 
 							SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
 							}//end IDC_BTN_RELOAD:
+							break;
+						case IDC_GETSKINS:
+							CallService(MS_UTILS_OPENURL,0,(LPARAM)"http://addons.miranda-im.org/index.php?action=display&id=72");
 							break;
 						default:
 							break;

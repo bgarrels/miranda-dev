@@ -77,7 +77,6 @@ HANDLE hMenuItemHistory		= NULL;
 HANDLE hShowHistory			= NULL;
 HANDLE hTogglePopup			= NULL;
 HANDLE hGetStatus			= NULL;
-HANDLE hGetVersion			= NULL;
 
 //===== Event Handles =====
 HANDLE hOptionsInitialize;
@@ -144,7 +143,7 @@ static int OptionsInitialize(WPARAM wParam,LPARAM lParam)
 
 	odp.ptszTab			= LPGENT("General");
 	odp.pfnDlgProc		= DlgProcPopUpGeneral;
-	odp.pszTemplate		= MAKEINTRESOURCEA(IDD_OPT_POPUP_PAGE1);
+	odp.pszTemplate		= MAKEINTRESOURCEA(IDD_OPT_POPUP_GENERAL);
 	CallService(MS_OPT_ADDPAGE,wParam,(LPARAM)&odp);
 
 	odp.ptszTab			= LPGENT("Classes");
@@ -525,11 +524,6 @@ static int OkToExit(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-static INT_PTR svcGetVersion(WPARAM, LPARAM)
-{
-	return pluginInfoEx.version;
-}
-
 //===== Load =====
 //Initializes the services provided and the link to those needed
 //Called when the plugin is loaded into Miranda
@@ -543,7 +537,6 @@ MIRAPI int Load(PLUGINLINK *link)
 	CallService(MS_SYSTEM_GETVERSIONTEXT, (WPARAM) sizeof(ver), (LPARAM) ver);
 	g_popup.isMirUnicode = strstr(ver, "Unicode") != NULL;
 
-	hGetVersion = CreateServiceFunction("PopupPlus/GetVersion", svcGetVersion);
 	hGetStatus = CreateServiceFunction(MS_POPUP_GETSTATUS, GetStatus);
 
 	DuplicateHandle(GetCurrentProcess(), GetCurrentThread(), GetCurrentProcess(), &hMainThread, THREAD_SET_CONTEXT, FALSE, 0);
@@ -709,7 +702,6 @@ MIRAPI int Unload(void)
 	DestroyServiceFunction(hShowHistory);
 	DestroyServiceFunction(hTogglePopup);
 	DestroyServiceFunction(hGetStatus);
-	DestroyServiceFunction(hGetVersion);
 	DestroyServiceFunction(hSquareFad);
 
 	DeleteObject(fonts.title);

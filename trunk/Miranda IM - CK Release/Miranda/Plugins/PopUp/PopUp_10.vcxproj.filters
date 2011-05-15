@@ -109,14 +109,14 @@
     <ClCompile Include="src\opt_gen.cpp">
       <Filter>Option Pages</Filter>
     </ClCompile>
-    <ClCompile Include="src\opt_old.cpp">
-      <Filter>Option Pages</Filter>
-    </ClCompile>
     <ClCompile Include="src\opt_skins.cpp">
       <Filter>Option Pages</Filter>
     </ClCompile>
     <ClCompile Include="src\opttree.cpp">
       <Filter>Option Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opt_old.cpp">
+      <Filter>Deprecatet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -246,9 +246,6 @@
     <ClInclude Include="src\opt_gen.h">
       <Filter>Option Pages</Filter>
     </ClInclude>
-    <ClInclude Include="src\opt_old.h">
-      <Filter>Option Pages</Filter>
-    </ClInclude>
     <ClInclude Include="src\opt_skins.h">
       <Filter>Option Pages</Filter>
     </ClInclude>
@@ -260,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="version.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\opt_old.h">
+      <Filter>Deprecatet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

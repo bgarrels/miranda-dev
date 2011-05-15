@@ -154,7 +154,7 @@ Last change by : $Author: Merlin_de $
 	#include "def_settings.h"
 //	#include "notify_imp.h"		//deprecatet
 	#include "opttree.h"
-	#include "opt_old.h"
+//	#include "opt_old.h"		//deprecatet
 	#include "opt_gen.h"
 //	#include "opt_notify.h"		//deprecatet
 	#include "opt_skins.h"

@@ -28,7 +28,6 @@ HINSTANCE g_hInst = 0;
 PLUGINLINK  *pluginLink;
 MM_INTERFACE mmi;
 LIST_INTERFACE li;
-int hLangpack;
 
 static char     g_szDataPath[MAX_PATH];		// user datae path (read at startup only)
 #if defined(_UNICODE)
@@ -96,15 +95,32 @@ int Proto_GetDelayAfterFail(const char *proto);
 
 FI_INTERFACE *fei = 0;
 
+PLUGININFO pluginInfo = {
+    sizeof(PLUGININFO),
+#if defined(_UNICODE)
+	"Avatar service (Unicode) CK Release",
+#else
+	"Avatar service CK Release",
+#endif
+	__VERSION_DWORD,
+	"Load and manage contact pictures for other plugins. Mod for CK Pack.",
+	"Nightwish, Pescuma",
+	"",
+	"Copyright 2000-2005 Miranda-IM project",
+	"http://www.miranda-im.org",
+	UNICODE_AWARE,
+	0
+};
+
 PLUGININFOEX pluginInfoEx = {
     sizeof(PLUGININFOEX),
 #if defined(_UNICODE)
-	"Avatar service (Unicode)",
+	"Avatar service (Unicode) Mataes Release",
 #else
-	"Avatar service",
+	"Avatar service Mataes Release",
 #endif
 	__VERSION_DWORD,
-	"Load and manage contact pictures for other plugins",
+	"Load and manage contact pictures for other plugins. Mod for Mataes Pack.",
 	"Nightwish, Pescuma",
 	"",
 	"Copyright 2000-2005 Miranda-IM project",
@@ -585,6 +601,11 @@ int CreateAvatarInCache(HANDLE hContact, avatarCacheEntry *ace, char *szProto)
 	}
 	if(lstrlenA(szFilename) < 4)
 		return -1;
+
+ 	// Unsane: core vars support
+ 	char* tmpPath = Utils_ReplaceVars(szFilename);
+ 	mir_snprintf(szFilename, sizeof(szFilename), "%s", tmpPath);
+ 	mir_free(tmpPath);
 
 	if((hFile = CreateFileA(szFilename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL)) == INVALID_HANDLE_VALUE) {
 		return -2;
@@ -2067,10 +2088,10 @@ static int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 	if (ServiceExists(MS_FOLDERS_REGISTER_PATH))
 	{
 		hMyAvatarsFolder = (HANDLE) FoldersRegisterCustomPath("Avatars", "My Avatars",
-			PROFILE_PATH "\\" CURRENT_PROFILE "\\MyAvatars");
+			MIRANDA_USERDATA "\\Avatars");
 
 		hGlobalAvatarFolder = (HANDLE) FoldersRegisterCustomPath("Avatars", "My Global Avatar Cache",
-			FOLDER_AVATARS "\\GlobalAvatar");
+			MIRANDA_USERDATA "\\Avatars");
 	}
 
 	g_AvatarHistoryAvail = ServiceExists(MS_AVATARHISTORY_ENABLED);
@@ -2474,7 +2495,10 @@ static int LoadAvatarModule()
 	if (AvsAlphaBlend == NULL && (hDll = LoadLibraryA("msimg32.dll")))
 		AvsAlphaBlend = (BOOL (WINAPI *)(HDC, int, int, int, int, HDC, int, int, int, int, BLENDFUNCTION)) GetProcAddress(hDll, "AlphaBlend");
 
-	char* tmpPath = Utils_ReplaceVars("%miranda_userdata%");
+	//char* tmpPath = Utils_ReplaceVars("%miranda_userdata%");
+ 	// Unsane: change relative path from profile folder, to programm folder
+ 	char* tmpPath = Utils_ReplaceVars("%miranda_path%");
+
 	lstrcpynA(g_szDataPath, tmpPath, sizeof(g_szDataPath)-1);
 	mir_free(tmpPath);
 	g_szDataPath[MAX_PATH - 1] = 0;
@@ -2497,7 +2521,7 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hInstDLL, DWORD dwReason, LPVOID reserv
 
 extern "C" __declspec(dllexport) PLUGININFOEX * MirandaPluginInfoEx(DWORD mirandaVersion)
 {
-	if (mirandaVersion < MIRANDA_VERSION_CORE)
+	if (mirandaVersion < PLUGIN_MAKE_VERSION(0, 8, 0, 9))
 		return NULL;
 	return &pluginInfoEx;
 }
@@ -2513,7 +2537,6 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK * link)
 	INT_PTR result = CALLSERVICE_NOTFOUND;
 
 	pluginLink = link;
-	mir_getLP( &pluginInfoEx );
 
 	if(ServiceExists(MS_IMG_GETINTERFACE))
 		result = CallService(MS_IMG_GETINTERFACE, FI_IF_VERSION, (LPARAM)&fei);

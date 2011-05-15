@@ -39,8 +39,8 @@ Last change by : $Author: Merlin_de $
 *************************************************************************************/
 
 static HANDLE hDialogsList = NULL;
+static HANDLE hIconPressed=0,hWindowEvent=0;
 
-static void SrmmMenu_UpdateIcon(HANDLE hContact);
 static int SrmmMenu_ProcessEvent(WPARAM wParam, LPARAM lParam);
 static int SrmmMenu_ProcessIconClick(WPARAM wParam, LPARAM lParam);
 
@@ -60,7 +60,7 @@ void SrmmMenu_Load()
 		CallService(MS_MSG_ADDICON, 0, (LPARAM)&sid);
 
 		sid.dwId = 1;
-		sid.szTooltip = Translate("Popup Mode: Favourtite");
+		sid.szTooltip = Translate("Popup Mode: Favourite");
 		sid.hIcon = sid.hIconDisabled = IcoLib_GetIcon(ICO_FAV,0);
 		CallService(MS_MSG_ADDICON, 0, (LPARAM)&sid);
 
@@ -74,8 +74,8 @@ void SrmmMenu_Load()
 		sid.hIcon = sid.hIconDisabled = IcoLib_GetIcon(ICO_POPUP_OFF,0);
 		CallService(MS_MSG_ADDICON, 0, (LPARAM)&sid);
 	
-		HookEvent(ME_MSG_ICONPRESSED, SrmmMenu_ProcessIconClick);
-		HookEvent(ME_MSG_WINDOWEVENT, SrmmMenu_ProcessEvent);
+		hIconPressed = HookEvent(ME_MSG_ICONPRESSED, SrmmMenu_ProcessIconClick);
+		hWindowEvent = HookEvent(ME_MSG_WINDOWEVENT, SrmmMenu_ProcessEvent);
 /*
 		HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
 		while (hContact)
@@ -89,6 +89,8 @@ void SrmmMenu_Load()
 
 void SrmmMenu_Unload()
 {
+	UnhookEvent(hIconPressed);
+	UnhookEvent(hWindowEvent);
 }
 
 static void SrmmMenu_UpdateIcon(HANDLE hContact)

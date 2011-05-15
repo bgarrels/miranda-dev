@@ -34,161 +34,63 @@ Last change by : $Author: Merlin_de $
 
 int num_classes = 0;			//for core class api support
 
-// isWorkstationLocked() code from YAPP plugin
+// isWorkstationLocked() code from core
 bool isWorkstationLocked()
 {
 	bool rc = false;
-	HDESK hDesk = OpenDesktop(_T("default"), 0, FALSE, DESKTOP_SWITCHDESKTOP);
-	if(hDesk != 0) {
-		HDESK hDeskInput = OpenInputDesktop(0, FALSE, DESKTOP_SWITCHDESKTOP);
-		if(hDeskInput == 0) {
+
+	if (OpenInputDesktop != NULL) {
+		HDESK hDesk = OpenInputDesktop(0, FALSE, DESKTOP_SWITCHDESKTOP);
+		if (hDesk == NULL)
 			rc = true;
-		} else
-			CloseDesktop(hDeskInput);
-
-		CloseDesktop(hDesk);
-	} 
-
+		else if (CloseDesktop != NULL)
+			CloseDesktop(hDesk);
+	}
 	return rc;
 }
 
-struct TFullScreenCheckData
-{
-	int w, h;
-	HWND ForegroundWindow, hwndDesktop, hwndShell;
-	bool isFullScreen;
-};
- 
-static BOOL CALLBACK isFullScreenEnumProc(HWND hwnd, LPARAM lParam)
-{
-	TFullScreenCheckData *dat = (TFullScreenCheckData *)lParam;
-	dat->isFullScreen = false;
-	if (	hwnd &&
-			hwnd != dat->hwndDesktop &&
-			hwnd != dat->hwndShell &&
-			IsWindowVisible(hwnd) ){
-		RECT rcClient;
-		GetClientRect(hwnd, &rcClient);
-
-		if	((rcClient.right - rcClient.left) >= dat->w && (rcClient.bottom - rcClient.top) >= dat->h) {
-			dat->isFullScreen = true;
-			return FALSE;
-		}
-		//check for eg cmd.exe (must be rework coz == 0 is not best way)
-		if (rcClient.right == 0 && rcClient.left == 0 && rcClient.bottom == 0 && rcClient.top == 0) {
-			dat->isFullScreen = true;
-			return FALSE;
-		}
-	}
-	return TRUE;
-}
-
+// isFullScreen() code from core
 static bool isFullScreen()
 {
-	TFullScreenCheckData dat = {0};
-//	dat.w = GetSystemMetrics(SM_CXFULLSCREEN);
-//	dat.h = GetSystemMetrics(SM_CYFULLSCREEN);
-	dat.ForegroundWindow = GetForegroundWindow();
-	dat.hwndDesktop = GetDesktopWindow();
-	dat.hwndShell = GetShellWindow();
+	RECT rcScreen = {0};
 
-#if !defined(_UNICODE)
-	//Win95 or NT don't have the support for multi monitor.
-	if (!MyGetMonitorInfo) {
-		dat.w = GetSystemMetrics(SM_CXSCREEN);
-		dat.h = GetSystemMetrics(SM_CYSCREEN);
-	}
-	//Windows 98/ME/2000/XP do have it.
-	else 
-#endif
-	if (GetSystemMetrics(SM_CMONITORS)==1) { //we have only one monitor (cant check it together with 1.if)
-		dat.w = GetSystemMetrics(SM_CXSCREEN);
-		dat.h = GetSystemMetrics(SM_CYSCREEN);
-	}
-	else { //Multimonitor stuff (we have more then 1)
-		HWND hWnd = NULL;
-		MONITORINFOEX mnti; // = { 0 };
-#if defined(_UNICODE)
-		HMONITOR hMonitor = MonitorFromWindow(dat.ForegroundWindow, MONITOR_DEFAULTTOPRIMARY);
-		HMONITOR hMonMir  = MonitorFromWindow((HWND)CallService(MS_CLUI_GETHWND,0,0), MONITOR_DEFAULTTOPRIMARY);
-#else
-		HMONITOR hMonitor = MyMonitorFromWindow(dat.ForegroundWindow, MONITOR_DEFAULTTOPRIMARY);
-		HMONITOR hMonMir  = MyMonitorFromWindow((HWND)CallService(MS_CLUI_GETHWND,0,0), MONITOR_DEFAULTTOPRIMARY);
-#endif
-		if	(	(PopUpOptions.Monitor == MN_MIRANDA) && 
-				(hMonitor != hMonMir)
-			) return false;		//popup monitor is diffrent from fullscreen monitor
+	rcScreen.right = GetSystemMetrics(SM_CXSCREEN);
+	rcScreen.bottom = GetSystemMetrics(SM_CYSCREEN);
 
-		mnti.cbSize = sizeof(MONITORINFOEX);
-
-#if defined(_UNICODE)
-		if (GetMonitorInfo(hMonitor, (LPMONITORINFO)&mnti) != 0) {
-			dat.w = mnti.rcMonitor.right - mnti.rcMonitor.left;
-			dat.h = mnti.rcMonitor.bottom - mnti.rcMonitor.top;
-		}
-#else
-		if (MyGetMonitorInfo(hMonitor, (LPMONITORINFO)&mnti) != 0) {
-			dat.w = mnti.rcMonitor.right - mnti.rcMonitor.left;
-			dat.h = mnti.rcMonitor.bottom - mnti.rcMonitor.top;
-		}
-#endif
+	if (MonitorFromWindow != NULL)
+	{
+		HMONITOR hMon = MonitorFromWindow(GetForegroundWindow(), MONITOR_DEFAULTTONEAREST);
+		MONITORINFO mi;
+		mi.cbSize = sizeof(mi);
+		if (GetMonitorInfo(hMon, &mi))
+			rcScreen = mi.rcMonitor;
 	}
+
+	HWND hWndDesktop = GetDesktopWindow();
+	HWND hWndShell = GetShellWindow();
 
 	// check foregroundwindow
-	isFullScreenEnumProc(dat.ForegroundWindow, (LPARAM)&dat);
-	if(dat.isFullScreen)
-		return true;
-
-	// check other top level windows (EnumChildWindows works for now)
-	EnumChildWindows(dat.ForegroundWindow,isFullScreenEnumProc, (LPARAM)&dat);
-	return dat.isFullScreen;
-}
-
-//===== Hook clist services
-static LRESULT CALLBACK ClistEventPopupWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-static LRESULT CALLBACK ClistEventPopupWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	switch (msg)
+	HWND hWnd = GetForegroundWindow();
+	if (hWnd && hWnd != hWndDesktop && hWnd != hWndShell) 
 	{
-	case WM_COMMAND:
-	{
-		CLISTEVENT *pCle = (CLISTEVENT *)CallService(MS_POPUP_GETPLUGINDATA, (WPARAM)hwnd, 0);
-		if (pCle && pCle->pszService)
+		TCHAR tszClassName[128] = _T("");
+		GetClassName(hWnd, tszClassName, SIZEOF(tszClassName));
+		if (_tcscmp(tszClassName, _T("WorkerW")))
 		{
-			CallServiceSync(pCle->pszService, 0, (LPARAM)pCle);
-			CallService(MS_CLIST_REMOVEEVENT, (WPARAM)pCle->hContact, (LPARAM)pCle->hDbEvent);
+			RECT rect, rectw, recti;
+			GetWindowRect(hWnd, &rectw);
+
+			GetClientRect(hWnd, &rect);
+			ClientToScreen(hWnd, (LPPOINT)&rect);
+			ClientToScreen(hWnd, (LPPOINT)&rect.right);
+			
+			if (EqualRect(&rect, &rectw) && IntersectRect(&recti, &rect, &rcScreen) && 
+				EqualRect(&recti, &rcScreen))
+				return true;
 		}
-		PUDeletePopUp(hwnd);
-		return TRUE;
 	}
 
-	case WM_CONTEXTMENU:
-	{
-		CLISTEVENT *pCle = (CLISTEVENT *)CallService(MS_POPUP_GETPLUGINDATA, (WPARAM)hwnd, 0);
-		if (pCle)
-			CallService(MS_CLIST_REMOVEEVENT, (WPARAM)pCle->hContact, (LPARAM)pCle->hDbEvent);
-		PUDeletePopUp(hwnd);
-		return TRUE;
-	}
-
-	case UM_INITPOPUP:
-		return TRUE;
-
-	case UM_FREEPLUGINDATA:
-	{
-		CLISTEVENT *pCle = (CLISTEVENT *)CallService(MS_POPUP_GETPLUGINDATA, (WPARAM)hwnd, 0);
-		if (pCle)
-		{
-			mir_free(pCle->pszTooltip);
-			mir_free(pCle->pszService);
-			mir_free(pCle);
-		}
-		return TRUE;
-	}
-	}
-
-	return DefWindowProc(hwnd, msg, wParam, lParam);
+	return false;
 }
 
 //===== PopUp/AddPopUp
