@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="windows-1251"?>
+<?xml version="1.0" encoding="windows-1250"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
-	Name="SpellChecker"
-	ProjectGUID="{5D5564DD-A900-4686-B78B-CAC6909A7FC7}"
+	Version="8,00"
+	Name="spellchecker"
+	ProjectGUID="{5DB86086-10E9-42E7-AC90-503D2678C2A2}"
 	RootNamespace="spellchecker"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -19,15 +18,14 @@
 	</ToolFiles>
 	<Configurations>
 		<Configuration
-			Name="Release Unicode|Win32"
-			OutputDirectory="../../../Files/Release/Plugins"
-			IntermediateDirectory="$(SolutionDir)$(ConfigurationName)/Obj/$(ProjectName)"
+			Name="Unicode Release|Win32"
+			OutputDirectory=".\Unicode_Release"
+			IntermediateDirectory=".\Unicode_Release"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="1"
-			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -52,109 +50,19 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="3"
-				FavorSizeOrSpeed="2"
-				WholeProgramOptimization="true"
-				AdditionalIncludeDirectories="../Utils/Pescuma;../../include;../../ExternalAPI"
-				PreprocessorDefinitions="WIN32;W32;NDEBUG;_WINDOWS;UNICODE;_USRDLL;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+				Optimization="2"
+				InlineFunctionExpansion="0"
+				AdditionalIncludeDirectories="../../include,sdk"
+				PreprocessorDefinitions="WIN32;W32;NDEBUG;_WINDOWS;UNICODE;_USRDLL"
 				StringPooling="true"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
-				PrecompiledHeaderFile=""
-				WarningLevel="3"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="NDEBUG"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalOptions="/ALIGN:4096 /filealign:0x200 /ignore:4108 "
-				OutputFile="$(OutDir)\$(ProjectName)W.dll"
-				BaseAddress="0x3EC20000"
-				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
-				ImportLibrary="$(IntDir)/$(TargetName).lib"
-				TargetMachine="1"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Release Unicode|x64"
-			OutputDirectory="$(ConfigurationName)64"
-			IntermediateDirectory="$(ConfigurationName)64"
-			ConfigurationType="2"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
-			CharacterSet="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				PreprocessorDefinitions="NDEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
-				TargetEnvironment="3"
-				TypeLibraryName=".\Unicode_Release/spellchecker.tlb"
-				HeaderFileName=""
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="1"
-				InlineFunctionExpansion="0"
-				EnableIntrinsicFunctions="true"
-				FavorSizeOrSpeed="2"
-				AdditionalIncludeDirectories="../../include,sdk"
-				PreprocessorDefinitions="WIN32;W32;NDEBUG;_WINDOWS;UNICODE;_USRDLL;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
-				StringPooling="true"
-				RuntimeLibrary="2"
-				BufferSecurityCheck="false"
-				EnableFunctionLevelLinking="true"
-				FloatingPointModel="2"
-				RuntimeTypeInfo="false"
 				PrecompiledHeaderFile=".\Unicode_Release/spellchecker.pch"
 				AssemblerListingLocation=".\Unicode_Release/"
 				ObjectFile=".\Unicode_Release/"
 				ProgramDataBaseFileName=".\Unicode_Release/"
+				BrowseInformation="2"
+				BrowseInformationFile=".\Unicode_Release/"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
 			/>
@@ -171,19 +79,17 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="..\..\bin\release x64\Plugins\spellcheckerW.dll"
+				AdditionalOptions="/ALIGN:4096 /filealign:0x200 /ignore:4108 "
+				OutputFile="..\..\bin\release\Plugins\spellcheckerW.dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Unicode_Release/spellcheckerW.pdb"
 				GenerateMapFile="true"
 				MapFileName=".\Unicode_Release/spellcheckerW.map"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
-				ImportLibrary=""
-				TargetMachine="17"
+				BaseAddress="0x3EC20000"
+				ImportLibrary=".\Unicode_Release/spellcheckerW.lib"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -206,13 +112,117 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
 		<Configuration
-			Name="Debug Unicode|Win32"
-			OutputDirectory="../../../Files/Debug/Plugins"
-			IntermediateDirectory="$(SolutionDir)$(ConfigurationName)/Obj/$(ProjectName)"
+			Name="Unicode Release|x64"
+			OutputDirectory=".\Release64"
+			IntermediateDirectory=".\Release64"
+			ConfigurationType="2"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="3"
+				TypeLibraryName=".\Unicode_Release/spellchecker.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				InlineFunctionExpansion="0"
+				AdditionalIncludeDirectories="../../include,sdk"
+				PreprocessorDefinitions="WIN64;WIN32;W32;NDEBUG;_WINDOWS;UNICODE;_USRDLL"
+				StringPooling="true"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
+				PrecompiledHeaderFile=".\Release64/spellchecker.pch"
+				AssemblerListingLocation=".\Release64/"
+				ObjectFile=".\Release64/"
+				ProgramDataBaseFileName=".\Release64/"
+				BrowseInformation="2"
+				BrowseInformationFile=".\Release64/"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1047"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/ALIGN:4096 /filealign:0x200 /ignore:4108 "
+				OutputFile="..\..\bin\release\Plugins\spellchecker64.dll"
+				LinkIncremental="1"
+				SuppressStartupBanner="true"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile=".\Release64/spellchecker64.pdb"
+				GenerateMapFile="true"
+				MapFileName=".\Release64/spellchecker64.map"
+				BaseAddress="0x3EC20000"
+				ImportLibrary=".\Release64/spellchecker64.lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile=".\Release64/spellchecker.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Unicode Debug|Win32"
+			OutputDirectory=".\Unicode_Debug"
+			IntermediateDirectory=".\Unicode_Debug"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -243,11 +253,16 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../Utils/Pescuma;../../include;../../ExternalAPI"
-				PreprocessorDefinitions="WIN32;W32;_DEBUG;_WINDOWS;UNICODE;_USRDLL;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+				AdditionalIncludeDirectories="../../include,sdk"
+				PreprocessorDefinitions="WIN32;W32;_DEBUG;_WINDOWS;UNICODE;_USRDLL"
 				RuntimeLibrary="1"
-				PrecompiledHeaderFile=""
+				PrecompiledHeaderFile=".\Unicode_Debug/spellchecker.pch"
+				AssemblerListingLocation=".\Unicode_Debug/"
+				ObjectFile=".\Unicode_Debug/"
+				ProgramDataBaseFileName=".\Unicode_Debug/"
+				BrowseInformation="1"
 				WarningLevel="3"
+				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
 			/>
 			<Tool
@@ -256,6 +271,7 @@
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="NDEBUG"
+				Culture="1047"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -263,12 +279,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/ALIGN:4096 /filealign:0x200 /ignore:4108 "
-				OutputFile="$(OutDir)\$(ProjectName)W.dll"
+				OutputFile="..\..\bin\debug unicode\Plugins\spellcheckerW.dll"
+				LinkIncremental="2"
+				SuppressStartupBanner="true"
 				GenerateDebugInformation="true"
+				ProgramDatabaseFile=".\Unicode_Debug/spellcheckerW.pdb"
 				BaseAddress="0x3EC20000"
-				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
-				ImportLibrary="$(IntDir)/$(TargetName).lib"
+				ImportLibrary=".\Unicode_Debug/spellcheckerW.lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -282,6 +299,8 @@
 			/>
 			<Tool
 				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile=".\Unicode_Debug/spellchecker.bsc"
 			/>
 			<Tool
 				Name="VCFxCopTool"
@@ -290,13 +309,16 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
 		<Configuration
-			Name="Debug Unicode|x64"
-			OutputDirectory="$(ConfigurationName)64"
-			IntermediateDirectory="$(ConfigurationName)64"
+			Name="Unicode Debug|x64"
+			OutputDirectory=".\Debug64"
+			IntermediateDirectory=".\Debug64"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -328,12 +350,12 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../../include,sdk"
-				PreprocessorDefinitions="WIN32;W32;_DEBUG;_WINDOWS;UNICODE;_USRDLL;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+				PreprocessorDefinitions="WIN64;WIN32;W32;_DEBUG;_WINDOWS;UNICODE;_USRDLL"
 				RuntimeLibrary="1"
-				PrecompiledHeaderFile=".\Unicode_Debug/spellchecker.pch"
-				AssemblerListingLocation=".\Unicode_Debug/"
-				ObjectFile=".\Unicode_Debug/"
-				ProgramDataBaseFileName=".\Unicode_Debug/"
+				PrecompiledHeaderFile=".\Debug64/spellchecker.pch"
+				AssemblerListingLocation=".\Debug64/"
+				ObjectFile=".\Debug64/"
+				ProgramDataBaseFileName=".\Debug64/"
 				BrowseInformation="1"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
@@ -353,15 +375,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/ALIGN:4096 /filealign:0x200 /ignore:4108 "
-				OutputFile="..\..\bin\debug unicode\Plugins\spellcheckerW.dll"
+				OutputFile="..\..\bin\debug unicode\Plugins\spellchecker64.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile=".\Unicode_Debug/spellcheckerW.pdb"
+				ProgramDatabaseFile=".\Debug64/spellchecker64.pdb"
 				BaseAddress="0x3EC20000"
-				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
-				ImportLibrary=".\Unicode_Debug/spellcheckerW.lib"
+				ImportLibrary=".\Debug64/spellchecker64.lib"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -376,13 +396,410 @@
 			<Tool
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
-				OutputFile=".\Unicode_Debug/spellchecker.bsc"
+				OutputFile=".\Debug64/spellchecker.bsc"
 			/>
 			<Tool
 				Name="VCFxCopTool"
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory=".\Debug"
+			IntermediateDirectory=".\Debug"
+			ConfigurationType="2"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="1"
+				TypeLibraryName=".\Debug/spellchecker.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="../../include,sdk"
+				PreprocessorDefinitions="WIN32;W32;_DEBUG;_WINDOWS;_USRDLL"
+				RuntimeLibrary="1"
+				PrecompiledHeaderFile=".\Debug/spellchecker.pch"
+				AssemblerListingLocation=".\Debug/"
+				ObjectFile=".\Debug/"
+				ProgramDataBaseFileName=".\Debug/"
+				BrowseInformation="1"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="4"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1047"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/ALIGN:4096 /filealign:0x200 /ignore:4108 "
+				OutputFile="..\..\bin\debug\Plugins\spellchecker.dll"
+				LinkIncremental="2"
+				SuppressStartupBanner="true"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile=".\Debug/spellchecker.pdb"
+				BaseAddress="0x3EC20000"
+				ImportLibrary=".\Debug/spellchecker.lib"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile=".\Debug/spellchecker.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="3"
+				TypeLibraryName=".\Debug/spellchecker.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="../../include,sdk"
+				PreprocessorDefinitions="WIN32;W32;_DEBUG;_WINDOWS;_USRDLL"
+				RuntimeLibrary="1"
+				PrecompiledHeaderFile=".\Debug/spellchecker.pch"
+				AssemblerListingLocation=".\Debug/"
+				ObjectFile=".\Debug/"
+				ProgramDataBaseFileName=".\Debug/"
+				BrowseInformation="1"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1047"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/ALIGN:4096 /filealign:0x200 /ignore:4108 "
+				OutputFile="..\..\bin\debug\Plugins\spellchecker.dll"
+				LinkIncremental="2"
+				SuppressStartupBanner="true"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile=".\Debug/spellchecker.pdb"
+				BaseAddress="0x3EC20000"
+				ImportLibrary=".\Debug/spellchecker.lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile=".\Debug/spellchecker.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory=".\Release"
+			IntermediateDirectory=".\Release"
+			ConfigurationType="2"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="1"
+				TypeLibraryName=".\Release/spellchecker.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				InlineFunctionExpansion="0"
+				AdditionalIncludeDirectories="../../include,sdk"
+				PreprocessorDefinitions="WIN32;W32;NDEBUG;_WINDOWS;_USRDLL"
+				StringPooling="true"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
+				PrecompiledHeaderFile=".\Release/spellchecker.pch"
+				AssemblerListingLocation=".\Release/"
+				ObjectFile=".\Release/"
+				ProgramDataBaseFileName=".\Release/"
+				BrowseInformation="2"
+				BrowseInformationFile=".\Release/"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1047"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/ALIGN:4096 /filealign:0x200 /ignore:4108 "
+				OutputFile="..\..\bin\release\Plugins\spellchecker.dll"
+				LinkIncremental="1"
+				SuppressStartupBanner="true"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile=".\Release/spellchecker.pdb"
+				GenerateMapFile="true"
+				MapFileName=".\Release/spellchecker.map"
+				BaseAddress="0x3EC20000"
+				ImportLibrary=".\Release/spellchecker.lib"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile=".\Release/spellchecker.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="3"
+				TypeLibraryName=".\Release/spellchecker.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				InlineFunctionExpansion="0"
+				AdditionalIncludeDirectories="../../include,sdk"
+				PreprocessorDefinitions="WIN32;W32;NDEBUG;_WINDOWS;_USRDLL"
+				StringPooling="true"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
+				PrecompiledHeaderFile=".\Release/spellchecker.pch"
+				AssemblerListingLocation=".\Release/"
+				ObjectFile=".\Release/"
+				ProgramDataBaseFileName=".\Release/"
+				BrowseInformation="2"
+				BrowseInformationFile=".\Release/"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1047"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/ALIGN:4096 /filealign:0x200 /ignore:4108 "
+				OutputFile="..\..\bin\release\Plugins\spellchecker.dll"
+				LinkIncremental="1"
+				SuppressStartupBanner="true"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile=".\Release/spellchecker.pdb"
+				GenerateMapFile="true"
+				MapFileName=".\Release/spellchecker.map"
+				BaseAddress="0x3EC20000"
+				ImportLibrary=".\Release/spellchecker.lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile=".\Release/spellchecker.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -417,15 +834,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Utils\Pescuma\mir_icons.h"
+				RelativePath="..\utils\mir_icons.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Utils\Pescuma\mir_memory.h"
+				RelativePath="..\utils\mir_memory.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Utils\Pescuma\mir_options.h"
+				RelativePath="..\utils\mir_options.h"
 				>
 			</File>
 			<File
@@ -438,10 +855,6 @@
 			</File>
 			<File
 				RelativePath="RichEdit.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Version.h"
 				>
 			</File>
 			<Filter
@@ -529,7 +942,7 @@
 				RelativePath="resource.rc"
 				>
 				<FileConfiguration
-					Name="Release Unicode|Win32"
+					Name="Unicode Release|Win32"
 					>
 					<Tool
 						Name="VCResourceCompilerTool"
@@ -537,7 +950,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Unicode|x64"
+					Name="Unicode Release|x64"
 					>
 					<Tool
 						Name="VCResourceCompilerTool"
@@ -545,7 +958,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|Win32"
+					Name="Unicode Debug|Win32"
 					>
 					<Tool
 						Name="VCResourceCompilerTool"
@@ -553,7 +966,39 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|x64"
+					Name="Unicode Debug|x64"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCResourceCompilerTool"
@@ -569,10 +1014,6 @@
 				RelativePath="res\unknown.ico"
 				>
 			</File>
-			<File
-				RelativePath=".\Version.rc"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Source Files"
@@ -582,7 +1023,7 @@
 				RelativePath="ardialog.cpp"
 				>
 				<FileConfiguration
-					Name="Release Unicode|Win32"
+					Name="Unicode Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -591,7 +1032,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Unicode|x64"
+					Name="Unicode Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -600,7 +1041,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|Win32"
+					Name="Unicode Debug|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -609,7 +1050,43 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|x64"
+					Name="Unicode Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -622,7 +1099,7 @@
 				RelativePath="autoreplace.cpp"
 				>
 				<FileConfiguration
-					Name="Release Unicode|Win32"
+					Name="Unicode Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -631,7 +1108,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Unicode|x64"
+					Name="Unicode Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -640,7 +1117,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|Win32"
+					Name="Unicode Debug|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -649,7 +1126,43 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|x64"
+					Name="Unicode Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -662,7 +1175,7 @@
 				RelativePath="dictionary.cpp"
 				>
 				<FileConfiguration
-					Name="Release Unicode|Win32"
+					Name="Unicode Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -671,7 +1184,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Unicode|x64"
+					Name="Unicode Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -680,7 +1193,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|Win32"
+					Name="Unicode Debug|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -689,7 +1202,43 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|x64"
+					Name="Unicode Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -699,10 +1248,10 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Utils\Pescuma\mir_icons.cpp"
+				RelativePath="..\utils\mir_icons.cpp"
 				>
 				<FileConfiguration
-					Name="Release Unicode|Win32"
+					Name="Unicode Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -711,7 +1260,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Unicode|x64"
+					Name="Unicode Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -720,7 +1269,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|Win32"
+					Name="Unicode Debug|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -729,7 +1278,43 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|x64"
+					Name="Unicode Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -739,10 +1324,10 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Utils\Pescuma\mir_options.cpp"
+				RelativePath="..\utils\mir_options.cpp"
 				>
 				<FileConfiguration
-					Name="Release Unicode|Win32"
+					Name="Unicode Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -751,7 +1336,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Unicode|x64"
+					Name="Unicode Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -760,7 +1345,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|Win32"
+					Name="Unicode Debug|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -769,7 +1354,43 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|x64"
+					Name="Unicode Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -782,7 +1403,7 @@
 				RelativePath="options.cpp"
 				>
 				<FileConfiguration
-					Name="Release Unicode|Win32"
+					Name="Unicode Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -791,7 +1412,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Unicode|x64"
+					Name="Unicode Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -800,7 +1421,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|Win32"
+					Name="Unicode Debug|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -809,7 +1430,43 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|x64"
+					Name="Unicode Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -822,7 +1479,7 @@
 				RelativePath="RichEdit.cpp"
 				>
 				<FileConfiguration
-					Name="Release Unicode|Win32"
+					Name="Unicode Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -831,7 +1488,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Unicode|x64"
+					Name="Unicode Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -840,7 +1497,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|Win32"
+					Name="Unicode Debug|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -849,7 +1506,43 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|x64"
+					Name="Unicode Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -862,7 +1555,7 @@
 				RelativePath="spellchecker.cpp"
 				>
 				<FileConfiguration
-					Name="Release Unicode|Win32"
+					Name="Unicode Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -871,7 +1564,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Unicode|x64"
+					Name="Unicode Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -880,7 +1573,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|Win32"
+					Name="Unicode Debug|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -889,7 +1582,43 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug Unicode|x64"
+					Name="Unicode Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -905,7 +1634,7 @@
 					RelativePath="hunspell\affentry.cxx"
 					>
 					<FileConfiguration
-						Name="Release Unicode|Win32"
+						Name="Unicode Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -914,7 +1643,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release Unicode|x64"
+						Name="Unicode Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -923,7 +1652,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|Win32"
+						Name="Unicode Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -932,7 +1661,43 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|x64"
+						Name="Unicode Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -945,7 +1710,7 @@
 					RelativePath="hunspell\affixmgr.cxx"
 					>
 					<FileConfiguration
-						Name="Release Unicode|Win32"
+						Name="Unicode Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -954,7 +1719,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release Unicode|x64"
+						Name="Unicode Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -963,7 +1728,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|Win32"
+						Name="Unicode Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -972,7 +1737,43 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|x64"
+						Name="Unicode Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -985,7 +1786,7 @@
 					RelativePath="hunspell\csutil.cxx"
 					>
 					<FileConfiguration
-						Name="Release Unicode|Win32"
+						Name="Unicode Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -994,7 +1795,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release Unicode|x64"
+						Name="Unicode Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1003,7 +1804,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|Win32"
+						Name="Unicode Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1012,7 +1813,43 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|x64"
+						Name="Unicode Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1025,7 +1862,7 @@
 					RelativePath="hunspell\dictmgr.cxx"
 					>
 					<FileConfiguration
-						Name="Release Unicode|Win32"
+						Name="Unicode Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1034,7 +1871,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release Unicode|x64"
+						Name="Unicode Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1043,7 +1880,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|Win32"
+						Name="Unicode Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1052,7 +1889,43 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|x64"
+						Name="Unicode Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1065,7 +1938,7 @@
 					RelativePath="hunspell\filemgr.cxx"
 					>
 					<FileConfiguration
-						Name="Release Unicode|Win32"
+						Name="Unicode Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1074,7 +1947,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release Unicode|x64"
+						Name="Unicode Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1083,7 +1956,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|Win32"
+						Name="Unicode Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1092,7 +1965,43 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|x64"
+						Name="Unicode Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1105,7 +2014,7 @@
 					RelativePath="hunspell\hashmgr.cxx"
 					>
 					<FileConfiguration
-						Name="Release Unicode|Win32"
+						Name="Unicode Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1114,7 +2023,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release Unicode|x64"
+						Name="Unicode Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1123,7 +2032,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|Win32"
+						Name="Unicode Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1132,7 +2041,43 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|x64"
+						Name="Unicode Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1145,7 +2090,7 @@
 					RelativePath="hunspell\hunspell.cxx"
 					>
 					<FileConfiguration
-						Name="Release Unicode|Win32"
+						Name="Unicode Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1154,7 +2099,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release Unicode|x64"
+						Name="Unicode Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1163,7 +2108,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|Win32"
+						Name="Unicode Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1172,7 +2117,43 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|x64"
+						Name="Unicode Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1185,7 +2166,7 @@
 					RelativePath="hunspell\hunzip.cxx"
 					>
 					<FileConfiguration
-						Name="Release Unicode|Win32"
+						Name="Unicode Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1194,7 +2175,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release Unicode|x64"
+						Name="Unicode Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1203,7 +2184,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|Win32"
+						Name="Unicode Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1212,7 +2193,43 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|x64"
+						Name="Unicode Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1225,7 +2242,7 @@
 					RelativePath="hunspell\phonet.cxx"
 					>
 					<FileConfiguration
-						Name="Release Unicode|Win32"
+						Name="Unicode Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1234,7 +2251,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release Unicode|x64"
+						Name="Unicode Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1243,7 +2260,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|Win32"
+						Name="Unicode Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1252,7 +2269,43 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|x64"
+						Name="Unicode Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1265,7 +2318,7 @@
 					RelativePath="hunspell\replist.cxx"
 					>
 					<FileConfiguration
-						Name="Release Unicode|Win32"
+						Name="Unicode Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1274,7 +2327,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release Unicode|x64"
+						Name="Unicode Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1283,7 +2336,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|Win32"
+						Name="Unicode Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1292,7 +2345,43 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|x64"
+						Name="Unicode Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1305,7 +2394,7 @@
 					RelativePath="hunspell\suggestmgr.cxx"
 					>
 					<FileConfiguration
-						Name="Release Unicode|Win32"
+						Name="Unicode Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1314,7 +2403,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release Unicode|x64"
+						Name="Unicode Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1323,7 +2412,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|Win32"
+						Name="Unicode Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1332,7 +2421,43 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|x64"
+						Name="Unicode Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1345,7 +2470,7 @@
 					RelativePath="hunspell\utf_info.cxx"
 					>
 					<FileConfiguration
-						Name="Release Unicode|Win32"
+						Name="Unicode Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1354,7 +2479,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release Unicode|x64"
+						Name="Unicode Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1363,7 +2488,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|Win32"
+						Name="Unicode Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1372,7 +2497,43 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug Unicode|x64"
+						Name="Unicode Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
