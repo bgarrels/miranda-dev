@@ -20,7 +20,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Revision       : $Revision: 13518 $
-Last change on : $Date: 2011-03-28 17:54:19 +0200 (Mo, 28. Mrz 2011) $
+Last change on : $Date: 2011-03-28 19:54:19 +0400 (Пн, 28 мар 2011) $
 Last change by : $Author: maxim.mluhov $
 
 */
@@ -38,7 +38,7 @@ Last change by : $Author: maxim.mluhov $
 #include "m_file.h"
 #include "m_addcontact.h"
 #include "jabber_disco.h"
-#include "sdk/m_proto_listeningto.h"
+#include "m_proto_listeningto.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // GetMyAwayMsg - obtain the current away message
@@ -409,7 +409,8 @@ INT_PTR __cdecl CJabberProto::JabberGCGetToolTipText( WPARAM wParam, LPARAM lPar
 	TCHAR outBuf[2048];
 	outBuf[0]=_T('\0');
 
-	const TCHAR * szSeparator= (IsWinVerMEPlus()) ? _T("\r\n") : _T(" | ");
+	// Unsane: format tooltip from Tipper
+	const TCHAR * szSeparator= _T("\n");
 
 	static const TCHAR * JabberEnum2AffilationStr[]={ _T("None"), _T("Outcast"), _T("Member"), _T("Admin"), _T("Owner") };
 
@@ -424,45 +425,59 @@ INT_PTR __cdecl CJabberProto::JabberGCGetToolTipText( WPARAM wParam, LPARAM lPar
 
 	//JID:
 	if ( _tcschr(info->resourceName, _T('@') ) != NULL ) {
-		_tcsncat( outBuf, TranslateT("JID:\t\t"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, _T("<b>"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, TranslateT("JID:"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, _T("</b>\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, info->resourceName, SIZEOF(outBuf) );
 	} else if (lParam) { //or simple nick
-		_tcsncat( outBuf, TranslateT("Nick:\t\t"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, TranslateT("<b>"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, TranslateT("Nick:"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, TranslateT("</b>\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, (TCHAR*) lParam, SIZEOF(outBuf) );
 	}
 
 	// status
 	if ( info->status >= ID_STATUS_OFFLINE && info->status <= ID_STATUS_IDLE  ) {
 		_tcsncat( outBuf, szSeparator, SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("Status:\t\t"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, _T("<b>"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, TranslateT("Status:"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, _T("</b>\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, TranslateTS( JabberEnum2StatusStr [ info->status-ID_STATUS_OFFLINE ]), SIZEOF(outBuf) );
 	}
 
 	// status text
 	if ( info->statusMessage ) {
 		_tcsncat( outBuf, szSeparator, SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("Status text:\t"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, _T("<b>"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, TranslateT("Status text:"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, _T("</b>\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, info->statusMessage, SIZEOF(outBuf) );
 	}
 
 	// Role???
 	//if ( TRUE || info->role ) {
 		_tcsncat( outBuf, szSeparator, SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("Role:\t\t"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, _T("<b>"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, TranslateT("Role:"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, _T("</b>\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, TranslateTS( JabberEnum2RoleStr[info->role] ), SIZEOF(outBuf) );
 	//}
 
 	// Affiliation
 	//if ( TRUE || info->affiliation ) {
 		_tcsncat( outBuf, szSeparator, SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("Affiliation:\t"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, _T("<b>"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, TranslateT("Affiliation:"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, _T("</b>\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, TranslateTS( JabberEnum2AffilationStr[info->affiliation] ), SIZEOF(outBuf) );
 	//}
 
 	// real jid
 	if ( info->szRealJid ) {
 		_tcsncat( outBuf, szSeparator, SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("Real JID:\t"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, _T("<b>"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, TranslateT("Real JID:"), SIZEOF(outBuf) );
+		_tcsncat( outBuf, _T("</b>\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, info->szRealJid, SIZEOF(outBuf) );
 	}
 
