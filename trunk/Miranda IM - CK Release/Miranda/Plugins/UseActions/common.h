@@ -25,9 +25,8 @@
 #define _UNICODE
 #endif
 
-#ifndef MIRANDA_VER
-	#define MIRANDA_VER 0x0900
-#endif
+#define MIRANDA_VER    0x0900
+#define MIRANDA_CUSTOM_LP
 
 #include <tchar.h>
 

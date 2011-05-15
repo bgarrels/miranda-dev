@@ -9,6 +9,7 @@
 
 struct LIST_INTERFACE li = { 0 };
 struct MM_INTERFACE mmi;
+int hLangpack;
 
 SortedList ActionItemsList = {0};
 TCHAR tszMyPath[MAX_PATH];
@@ -112,6 +113,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved) {
 
 __declspec (dllexport) int Load(PLUGINLINK *link) {
 	pluginLink = link;
+	mir_getLP(&pluginInfo);
 	mir_getLI(&li);
 	mir_getMMI( &mmi );
 	ActionItemsList = *(li.List_Create( 0, 1));

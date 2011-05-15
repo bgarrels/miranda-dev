@@ -26,6 +26,7 @@ HANDLE hHookModulesLoaded = NULL, hSystemOKToExit = NULL, hOptInitialise = NULL,
 HANDLE hHookExtraIconsRebuild = NULL, hHookExtraIconsApply = NULL, hContactSettingChanged = NULL;
 HANDLE hPrebuildContactMenu = NULL;
 HANDLE hExtraIcon = NULL;
+int hLangpack;
 struct MM_INTERFACE mmi;
 
 INT currentFilter = 0;
@@ -306,23 +307,24 @@ int onContactSettingChanged(WPARAM wParam,LPARAM lParam)
 
 extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 {
-   pluginLink=link;
-   mir_getMMI(&mmi);
+	pluginLink=link;
+	mir_getLP(&pluginInfo);
+	mir_getMMI(&mmi);
 
-   hHookModulesLoaded = HookEvent(ME_SYSTEM_MODULESLOADED, onModulesLoaded);
-   hSystemOKToExit = HookEvent(ME_SYSTEM_OKTOEXIT,onSystemOKToExit);
-   hContactSettingChanged = HookEvent(ME_DB_CONTACT_SETTINGCHANGED, onContactSettingChanged);
+	hHookModulesLoaded = HookEvent(ME_SYSTEM_MODULESLOADED, onModulesLoaded);
+	hSystemOKToExit = HookEvent(ME_SYSTEM_OKTOEXIT,onSystemOKToExit);
+	hContactSettingChanged = HookEvent(ME_DB_CONTACT_SETTINGCHANGED, onContactSettingChanged);
 
-   clistIcon = DBGetContactSettingByte(NULL, MODULENAME, "AdvancedIcon", DefaultSlot);
+	clistIcon = DBGetContactSettingByte(NULL, MODULENAME, "AdvancedIcon", DefaultSlot);
 
-   g_IECClear.cbSize = sizeof(IconExtraColumn);
-   g_IECClear.ColumnType = clistIcon;
-   g_IECClear.hImage = (HANDLE) -1;
+	g_IECClear.cbSize = sizeof(IconExtraColumn);
+	g_IECClear.ColumnType = clistIcon;
+	g_IECClear.hImage = (HANDLE) -1;
 
-   return 0;
+	return 0;
 }
 
 extern "C" int __declspec(dllexport) Unload(void)
 {
-   return 0;
+	return 0;
 }

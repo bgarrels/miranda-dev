@@ -5,9 +5,8 @@ Copyright (C) 2010, 2011 tico-tico
 #ifndef __BASS_INTERFACE_H__
 #define __BASS_INTERFACE_H__
 
-#ifdef MIR8
-#define MIRANDA_VER 0x0800
-#endif
+#define MIRANDA_VER    0x0900
+#define MIRANDA_CUSTOM_LP
 
 #include <windows.h>
 #include <newpluginapi.h>

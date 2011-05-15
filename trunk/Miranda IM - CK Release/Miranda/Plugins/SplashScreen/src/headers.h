@@ -25,6 +25,9 @@
 #ifndef HEADERS_H
 #define HEADERS_H
 
+#define MIRANDA_VER    0x0900
+#define MIRANDA_CUSTOM_LP
+
 #define _WIN32_WINNT 0x0500
 #define WINVER 0x0400
 #define AC_SRC_ALPHA  0x01

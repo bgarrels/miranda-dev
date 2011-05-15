@@ -33,6 +33,7 @@ static HANDLE hPrebuildContactMenu = NULL, hAuthMenuSelected = NULL;
 static HANDLE hUserMenu = NULL;
 HANDLE hExtraIcon = NULL;
 struct MM_INTERFACE mmi;
+int hLangpack;
 
 IconExtraColumn g_IECAuth = {0};
 IconExtraColumn g_IECGrant = {0};
@@ -63,19 +64,6 @@ PLUGININFOEX pluginInfo={
 /* DACE7D41-DFA9-4772-89AE-A59A6153E6B2 */
 };
 
-PLUGININFO oldpluginInfo={
-	sizeof(PLUGININFO),
-	pluginInfo.shortName,
-	pluginInfo.version,
-	pluginInfo.description,
-	pluginInfo.author,
-	pluginInfo.authorEmail,
-	pluginInfo.copyright,
-	pluginInfo.homepage,
-	pluginInfo.flags,
-	pluginInfo.replacesDefaultModule
-};
-
 extern "C" BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 {
 	g_hInst = hinstDLL;
@@ -94,11 +82,6 @@ extern "C" __declspec(dllexport) const MUUID* MirandaPluginInterfaces(void)
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {
 	return &pluginInfo;
-}
-
-extern "C" __declspec(dllexport) PLUGININFO* MirandaPluginInfo(DWORD mirandaVersion)
-{
-	return &oldpluginInfo;
 }
 
 INT_PTR getIconToUse(HANDLE hContact, LPARAM lParam)
@@ -361,6 +344,7 @@ int onSystemOKToExit(WPARAM wParam,LPARAM lParam)
 extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 {
 	pluginLink = link;
+	mir_getLP(&pluginInfo);
 	mir_getMMI(&mmi);
 
 	hHookModulesLoaded = HookEvent(ME_SYSTEM_MODULESLOADED, onModulesLoaded);

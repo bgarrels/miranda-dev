@@ -27,6 +27,7 @@
 #define COMMHEADERS_H
 
 #define MIRANDA_VER    0x0900
+#define MIRANDA_CUSTOM_LP
 
 #include <windows.h>
 #include <stdio.h> // needed by m_utils.h

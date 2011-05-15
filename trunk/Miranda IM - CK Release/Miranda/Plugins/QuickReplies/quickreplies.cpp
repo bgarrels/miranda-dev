@@ -22,23 +22,10 @@ Boston, MA 02111-1307, USA.
 HINSTANCE hInstance = NULL;
 PLUGINLINK  *pluginLink;
 struct MM_INTERFACE mmi;
+int hLangpack;
 
 HANDLE hOnModulesLoaded;
 HANDLE hOnPreShutdown;
-
-PLUGININFO pluginInfo = 
-{
-    sizeof(PLUGININFO),
-	__PLUGIN_NAME,
-	PLUGIN_MAKE_VERSION(__MAJOR_VERSION, __MINOR_VERSION, __RELEASE_NUM, __BUILD_NUM),
-	__DESCRIPTION,
-	__AUTHOR,
-	__AUTHOREMAIL,
-	__COPYRIGHT,
-	__AUTHORWEB,
-	UNICODE_AWARE,
-	0
-};
 
 PLUGININFOEX pluginInfoEx = {
     sizeof(PLUGININFOEX),
@@ -62,11 +49,6 @@ BOOL WINAPI DllMain(HINSTANCE hInstanceDLL, DWORD fdwReason, LPVOID lpvReserved)
 	return TRUE;
 }
 
-extern "C" __declspec(dllexport) PLUGININFO* MirandaPluginInfo(DWORD mirandaVersion)
-{
-	return &pluginInfo;
-}
-
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {
 	return &pluginInfoEx;
@@ -82,6 +64,7 @@ extern "C" __declspec(dllexport) const MUUID* MirandaPluginInterfaces(void)
 extern "C" __declspec(dllexport) int Load(PLUGINLINK* link)
 {
 	pluginLink = link;
+	mir_getLP(&pluginInfoEx);
 	mir_getMMI(&mmi);
 
 	hOnModulesLoaded = HookEvent(ME_SYSTEM_MODULESLOADED, OnModulesLoaded);
