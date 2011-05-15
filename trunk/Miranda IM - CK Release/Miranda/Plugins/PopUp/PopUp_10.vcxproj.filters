@@ -91,12 +91,6 @@
     <ClCompile Include="src\srmm_menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Deprecated\notify_imp.cpp">
-      <Filter>Deprecatet</Filter>
-    </ClCompile>
-    <ClCompile Include="Deprecated\opt_notify.cpp">
-      <Filter>Deprecatet</Filter>
-    </ClCompile>
     <ClCompile Include="src\opt_adv.cpp">
       <Filter>Option Pages</Filter>
     </ClCompile>
@@ -114,9 +108,6 @@
     </ClCompile>
     <ClCompile Include="src\opttree.cpp">
       <Filter>Option Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="src\opt_old.cpp">
-      <Filter>Deprecatet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,51 +180,6 @@
     <ClInclude Include="src\headers.h">
       <Filter>defs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\m_avatars.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include_API\m_folders.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_fontservice.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include_API\m_ieview.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="api\m_MathModule.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include_API\m_nconvers.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include_API\m_notify_popup.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_popup.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="api\m_popup2.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include_API\m_smileyadd.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include_API\m_text.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include_API\m_ticker.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include_API\m_toolbar.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include_API\m_toptoolbar.h">
-      <Filter>defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include_API\m_updater.h">
-      <Filter>defs</Filter>
-    </ClInclude>
     <ClInclude Include="src\opt_adv.h">
       <Filter>Option Pages</Filter>
     </ClInclude>
@@ -257,9 +203,6 @@
     </ClInclude>
     <ClInclude Include="version.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\opt_old.h">
-      <Filter>Deprecatet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -376,16 +319,5 @@
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuildStep Include="..\..\include_API\m_notify.h">
-      <Filter>Deprecatet</Filter>
-    </CustomBuildStep>
-    <CustomBuildStep Include="Deprecated\notify_imp.h">
-      <Filter>Deprecatet</Filter>
-    </CustomBuildStep>
-    <CustomBuildStep Include="Deprecated\opt_notify.h">
-      <Filter>Deprecatet</Filter>
-    </CustomBuildStep>
   </ItemGroup>
 </Project>
