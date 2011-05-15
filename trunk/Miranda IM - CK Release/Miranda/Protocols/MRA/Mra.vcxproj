@@ -92,6 +92,7 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'" />
     <RunCodeAnalysis Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">false</RunCodeAnalysis>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">MRA.dll</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <CustomBuildStep>
