@@ -1,11 +1,9 @@
 #include "../headers.h"
 
 struct MM_INTERFACE mmi;
-
 UTF8_INTERFACE utfi;
-
 HANDLE hFunc, hTempRemove;
-
+int hLangpack;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // returns plugin's extended information
@@ -64,6 +62,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 {
 	CLISTMENUITEM mi;
 	pluginLink = link;
+	mir_getLP(&pluginInfoEx);
 	mir_getMMI(&mmi);
 	mir_getUTFI(&utfi);
 

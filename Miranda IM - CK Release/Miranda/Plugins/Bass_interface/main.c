@@ -6,6 +6,7 @@ Copyright (C) 2010, 2011 tico-tico
 
 HINSTANCE hInst;
 PLUGINLINK *pluginLink;
+int hLangpack;
 
 PLUGININFOEX pluginInfo={
     sizeof(PLUGININFOEX),
@@ -448,6 +449,7 @@ int OnShutdown(WPARAM wParam, LPARAM lParam)
 int __declspec(dllexport) Load(PLUGINLINK *link)
 {
 	pluginLink = link;
+	mir_getLP(&pluginInfo);
 	mir_getMMI(&mmi);
 
 	hHooks[0] = HookEvent(ME_SYSTEM_MODULESLOADED, OnModulesLoaded);

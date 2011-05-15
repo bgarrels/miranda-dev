@@ -7,7 +7,8 @@
 // disable warnings about underscore in stdc functions
 #pragma warning(disable: 4996)
 
-#define MIRANDA_VER 0x0900
+#define MIRANDA_VER    0x0900
+#define MIRANDA_CUSTOM_LP
 
 #include <windows.h>
 #include <stdio.h>
