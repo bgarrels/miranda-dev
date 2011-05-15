@@ -403,8 +403,7 @@ extern "C" __declspec(naked) void __cdecl _allshl()
 PLUGINLINK *pluginLink;
 MM_INTERFACE mmi;
 MRA_SETTINGS masMraSettings;
-
-
+int hLangpack;
 
 PLUGININFOEX pluginInfoEx={
 	sizeof(PLUGININFOEX),
@@ -530,6 +529,7 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	PROTOCOLDESCRIPTOR pd={0};
 
 	pluginLink=link;
+	mir_getLP(&pluginInfoEx);
 	mir_getMMI(&mmi);
 
 

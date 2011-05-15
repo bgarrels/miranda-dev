@@ -66,12 +66,12 @@ PLUGINLINK *pluginLink;
 PLUGININFOEX pluginInfoEx = {
 	sizeof(PLUGININFOEX),
 #ifdef _WIN64
-	"Weather Protocol x64 CHEF-KOCH Release",
+	"Weather Protocol x64 Mataes Release",
 #else
-	"Weather Protocol CHEF-KOCH Release",
+	"Weather Protocol Mataes Release",
 #endif
 	__VERSION_DWORD,
-	"Retrieve weather information and display them in your contact list. Mod for CHEF-KOCH Pack.",
+	"Retrieve weather information and display them in your contact list. Mod for Mataes Pack.",
 	AUTH,
 	"borkra@miranda-im.org",
 	"(c) 2002-2005 NoName, 2005-2010 Boris Krasnovskiy",

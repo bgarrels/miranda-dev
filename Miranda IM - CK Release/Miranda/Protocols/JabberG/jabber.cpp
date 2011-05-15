@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13588 $
-Last change on : $Date: 2011-04-12 16:40:04 +0200 (Di, 12. Apr 2011) $
+Revision       : $Revision: 13596 $
+Last change on : $Date: 2011-04-15 23:07:23 +0400 (Пт, 15 апр 2011) $
 Last change by : $Author: george.hazan $
 
 */
@@ -35,14 +35,15 @@ Last change by : $Author: george.hazan $
 #include <m_fontservice.h>
 #include <m_icolib.h>
 
-#include "sdk/m_assocmgr.h"
-#include "sdk/m_folders.h"
-#include "sdk/m_wizard.h"
-#include "sdk/m_toolbar.h"
-#include "sdk/m_extraicons.h"
+#include "m_assocmgr.h"
+#include "m_folders.h"
+#include "m_wizard.h"
+#include "m_toolbar.h"
+#include "m_extraicons.h"
 
 HINSTANCE hInst;
 PLUGINLINK *pluginLink;
+int hLangpack;
 
 int g_cbCountries;
 struct CountryListEntry* g_countries;
@@ -51,7 +52,7 @@ static char szVersion[200] = "";
 
 PLUGININFOEX pluginInfo = {
 	sizeof( PLUGININFOEX ),
-	"Jabber Protocol",
+	__PLUGIN_NAME,
 	__VERSION_DWORD,
 	szVersion,
 	"George Hazan, Maxim Mluhov, Victor Pavlychko, Artem Shpynov, Michael Stepura",
@@ -113,8 +114,10 @@ extern "C" BOOL WINAPI DllMain( HINSTANCE hModule, DWORD, LPVOID )
 
 extern "C" __declspec( dllexport ) PLUGININFOEX *MirandaPluginInfoEx( DWORD mirandaVersion )
 {
-	if ( mirandaVersion < PLUGIN_MAKE_VERSION( 0,9,0,4 )) {
-		MessageBoxA( NULL, "The Jabber protocol plugin cannot be loaded. It requires Miranda IM 0.9.0.4 or later.", "Jabber Protocol Plugin", MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST );
+	if ( mirandaVersion < MIRANDA_VERSION_CORE ) {
+		MessageBoxA( NULL, 
+			"The Jabber protocol plugin cannot be loaded. It requires Miranda IM " MIRANDA_VERSION_CORE_STRING " or later.", 
+			"Jabber Protocol Plugin", MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST );
 		return NULL;
 	}
 
@@ -188,8 +191,8 @@ static int OnModulesLoaded( WPARAM, LPARAM )
 
 	fontid.deffontsettings.charset = DEFAULT_CHARSET;
 	fontid.deffontsettings.colour = GetSysColor(COLOR_WINDOWTEXT);
-	fontid.deffontsettings.size = -11;
-	lstrcpyA(fontid.deffontsettings.szFace, "MS Shell Dlg");
+	fontid.deffontsettings.size = -13;
+	lstrcpyA(fontid.deffontsettings.szFace, "Verdana");
 	fontid.deffontsettings.style = 0;
 
 	lstrcpyA(fontid.name, "Frame title");
@@ -248,11 +251,12 @@ extern "C" int __declspec( dllexport ) Load( PLUGINLINK *link )
 	mir_getSHA1I( &sha1i );
 	mir_getXI( &xi );
 	mir_getTMI( &tmi );
+	mir_getLP( &pluginInfo );
 
 	CallService( MS_UTILS_GETCOUNTRYLIST, ( WPARAM )&g_cbCountries, ( LPARAM )&g_countries );
 	
 	setlocale(LC_ALL, "");
-	mir_snprintf( szVersion, sizeof( szVersion ), Translate("Jabber protocol plugin for Miranda IM (%s)"), __DATE__ );
+	mir_snprintf( szVersion, SIZEOF( szVersion ), Translate("Jabber protocol plugin for Miranda IM. Mod for Mataes Pack."));
 
 	pcli = ( CLIST_INTERFACE* )CallService(MS_CLIST_RETRIEVE_INTERFACE, 0, (LPARAM)hInst);
 

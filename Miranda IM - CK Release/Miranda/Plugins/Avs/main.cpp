@@ -28,6 +28,7 @@ HINSTANCE g_hInst = 0;
 PLUGINLINK  *pluginLink;
 MM_INTERFACE mmi;
 LIST_INTERFACE li;
+int hLangpack;
 
 static char     g_szDataPath[MAX_PATH];		// user datae path (read at startup only)
 #if defined(_UNICODE)
@@ -95,25 +96,8 @@ int Proto_GetDelayAfterFail(const char *proto);
 
 FI_INTERFACE *fei = 0;
 
-PLUGININFO pluginInfo = {
-    sizeof(PLUGININFO),
-#if defined(_UNICODE)
-	"Avatar service (Unicode) CK Release",
-#else
-	"Avatar service CK Release",
-#endif
-	__VERSION_DWORD,
-	"Load and manage contact pictures for other plugins. Mod for CK Pack.",
-	"Nightwish, Pescuma",
-	"",
-	"Copyright 2000-2005 Miranda-IM project",
-	"http://www.miranda-im.org",
-	UNICODE_AWARE,
-	0
-};
-
 PLUGININFOEX pluginInfoEx = {
-    sizeof(PLUGININFOEX),
+	sizeof(PLUGININFOEX),
 #if defined(_UNICODE)
 	"Avatar service (Unicode) Mataes Release",
 #else
@@ -2521,7 +2505,7 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hInstDLL, DWORD dwReason, LPVOID reserv
 
 extern "C" __declspec(dllexport) PLUGININFOEX * MirandaPluginInfoEx(DWORD mirandaVersion)
 {
-	if (mirandaVersion < PLUGIN_MAKE_VERSION(0, 8, 0, 9))
+	if (mirandaVersion < MIRANDA_VERSION_CORE)
 		return NULL;
 	return &pluginInfoEx;
 }
@@ -2537,6 +2521,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK * link)
 	INT_PTR result = CALLSERVICE_NOTFOUND;
 
 	pluginLink = link;
+	mir_getLP( &pluginInfoEx );
 
 	if(ServiceExists(MS_IMG_GETINTERFACE))
 		result = CallService(MS_IMG_GETINTERFACE, FI_IF_VERSION, (LPARAM)&fei);

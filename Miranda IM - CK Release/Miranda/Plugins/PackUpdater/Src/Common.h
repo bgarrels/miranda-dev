@@ -45,7 +45,7 @@ Boston, MA 02111-1307, USA.
 #include <m_folders.h>
 #include <m_popup.h>
 #include <m_hotkeys.h>
-#include "..\Sdk\m_popup2.h"
+#include "m_popup2.h"
 #include <m_netlib.h>
 #include <m_icolib.h>
 
@@ -58,12 +58,10 @@ Boston, MA 02111-1307, USA.
 #define MODULEW					L"Pack Updater"
 #ifdef _UNICODE
 	#define DEFAULT_UPDATES_FOLDER	L"Pack Updates"
-	#define MIRANDA_USERDATAT MIRANDA_USERDATAW
 	typedef std::wstring tString;
 	#define MODULE	MODULEW
 #else
 	#define DEFAULT_UPDATES_FOLDER	"Pack Updates"
-	#define MIRANDA_USERDATAT MIRANDA_USERDATA
 	typedef std::string tString;
 	#define MODULE	MODULEA
 #endif
