@@ -1,7 +1,7 @@
 /*
 
 IEView Plugin for Miranda IM
-Copyright (C) 2005-2008  Piotr Piastucki
+Copyright (C) 2005  Piotr Piastucki
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -18,16 +18,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
+
 #ifndef M_IEVIEW_INCLUDED
 #define M_IEVIEW_INCLUDED
 
 #define MS_IEVIEW_WINDOW   "IEVIEW/NewWindow"
 #define MS_IEVIEW_EVENT    "IEVIEW/Event"
-#define MS_IEVIEW_UTILS   "IEVIEW/Utils"
 #define MS_IEVIEW_NAVIGATE "IEVIEW/Navigate"
-#define MS_IEVIEW_SHOWSMILEYSELECTION  "IEVIEW/ShowSmileySelection"
+
 #define ME_IEVIEW_OPTIONSCHANGED  "IEVIEW/OptionsChanged"
-#define ME_IEVIEW_NOTIFICATION  "IEVIEW/Notification"
 
 /* IEView window commands */
 #define IEW_CREATE  1               // create new window (control)
@@ -36,9 +35,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define IEW_SCROLLBOTTOM 4          // scroll text to bottom
 
 /* IEView window type/mode */
-#define IEWM_SRMM     0             // regular SRMM
 #define IEWM_TABSRMM  1             // TabSRMM-compatible HTML builder
-#define IEWM_HTML     2             // HTML
 #define IEWM_SCRIVER  3             // Scriver-compatible HTML builder
 #define IEWM_MUCC     4             // MUCC group chats GUI
 #define IEWM_CHAT     5             // chat.dll group chats GUI
@@ -56,6 +53,7 @@ typedef struct {
 	int			y;                  // IE control vertical position
 	int			cx;                 // IE control horizontal size
 	int			cy;                 // IE control vertical size
+
 } IEVIEWWINDOW;
 
 #define IEEDF_UNICODE 			0x00000001          // if set pszText is a pointer to wchar_t string instead of char string

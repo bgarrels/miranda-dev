@@ -49,7 +49,7 @@ typedef struct TAct_Param
 	{
     DWORD flags; // 0 - ID, 1 - Name
     DWORD ID; // Id or name
-	WPARAM wParam;
+    WPARAM wParam;
     LPARAM lParam;
 	} TAct_Param, *PAct_Param;
 
