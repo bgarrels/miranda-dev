@@ -346,7 +346,10 @@ INT_PTR CALLBACK DlgProcOptionsProtos(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 							if (!AVS_pathIsAbsolute(dbv.pszVal))
                             {
 							    char szFinalPath[MAX_PATH];
-                                mir_snprintf(szFinalPath, SIZEOF(szFinalPath), "%%miranda_userdata%%\\%s", dbv.pszVal);
+                                //mir_snprintf(szFinalPath, SIZEOF(szFinalPath), "%%miranda_userdata%%\\%s", dbv.pszVal);
+                                // Unsane: change relative path from profile folder, to programm folder
+				mir_snprintf(szFinalPath, SIZEOF(szFinalPath), "%%miranda_path%%\\%s", dbv.pszVal);
+
 							    SetDlgItemTextA(hwndDlg, IDC_PROTOAVATARNAME, szFinalPath);
                             }
                             else

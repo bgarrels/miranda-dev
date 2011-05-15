@@ -352,10 +352,10 @@ static BOOL DoPopup(SESSION_INFO* si, GCEVENT* gce, struct TWindowData* dat)
 			if (pContainer->dwFlags & CNT_ALWAYSREPORTINACTIVE) {
 				if (pContainer->dwFlags & CNT_DONTREPORTFOCUSED)
 					goto passed;
-				
+
 				if (pContainer->hwndActive == si->hWnd)
 					return 0;
-				
+
 				goto passed;
 			}
 			return 0;
@@ -1225,8 +1225,8 @@ void Chat_SetFilters(SESSION_INFO *si)
 	if (si == NULL)
 		return;
 
-	dwFlags_default = M->GetDword("Chat", "FilterFlags", 0x03E0);
-	dwFlags_local = M->GetDword(si->hContact, "Chat", "FilterFlags", 0x03E0);
+	dwFlags_default = M->GetDword("Chat", "FilterFlags", GC_EVENT_ACTION | GC_EVENT_MESSAGE | GC_EVENT_NICK | GC_EVENT_TOPIC | GC_EVENT_ADDSTATUS | GC_EVENT_INFORMATION | GC_EVENT_QUIT | GC_EVENT_KICK | GC_EVENT_NOTICE);
+	dwFlags_local = M->GetDword(si->hContact, "Chat", "FilterFlags", GC_EVENT_ACTION | GC_EVENT_MESSAGE | GC_EVENT_NICK | GC_EVENT_TOPIC | GC_EVENT_ADDSTATUS | GC_EVENT_INFORMATION | GC_EVENT_QUIT | GC_EVENT_KICK | GC_EVENT_NOTICE);
 	dwMask = M->GetDword(si->hContact, "Chat", "FilterMask", 0);
 
 	si->iLogFilterFlags = dwFlags_default;
@@ -1235,8 +1235,8 @@ void Chat_SetFilters(SESSION_INFO *si)
 			si->iLogFilterFlags = (dwFlags_local & (1 << i) ? si->iLogFilterFlags | (1 << i) : si->iLogFilterFlags & ~(1 << i));
 	}
 
-	dwFlags_default = M->GetDword("Chat", "PopupFlags", 0x03E0);
-	dwFlags_local = M->GetDword(si->hContact, "Chat", "PopupFlags", 0x03E0);
+	dwFlags_default = M->GetDword("Chat", "PopupFlags", GC_EVENT_KICK | GC_EVENT_HIGHLIGHT);
+	dwFlags_local = M->GetDword(si->hContact, "Chat", "PopupFlags", GC_EVENT_KICK | GC_EVENT_HIGHLIGHT);
 	dwMask = M->GetDword(si->hContact, "Chat", "PopupMask", 0);
 
 	si->iLogPopupFlags = dwFlags_default;
@@ -1245,8 +1245,8 @@ void Chat_SetFilters(SESSION_INFO *si)
 			si->iLogPopupFlags = (dwFlags_local & (1 << i) ? si->iLogPopupFlags | (1 << i) : si->iLogPopupFlags & ~(1 << i));
 	}
 
-	dwFlags_default = M->GetDword("Chat", "TrayIconFlags", 0x03E0);
-	dwFlags_local = M->GetDword(si->hContact, "Chat", "TrayIconFlags", 0x03E0);
+	dwFlags_default = M->GetDword("Chat", "TrayIconFlags", GC_EVENT_KICK | GC_EVENT_HIGHLIGHT);
+	dwFlags_local = M->GetDword(si->hContact, "Chat", "TrayIconFlags", GC_EVENT_KICK | GC_EVENT_HIGHLIGHT);
 	dwMask = M->GetDword(si->hContact, "Chat", "TrayIconMask", 0);
 
 	si->iLogTrayFlags = dwFlags_default;

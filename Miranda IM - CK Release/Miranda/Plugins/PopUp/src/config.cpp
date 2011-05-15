@@ -104,102 +104,12 @@ HRESULT		(WINAPI *MyDwmEnableBlurBehindWindow)(HWND hWnd, DWM_BLURBEHIND *pBlurB
 
 //====== Common Vars ========================
 
-static int NukePopupSettings(const char* szModul);
-static INT_PTR __stdcall DlgProcPopupWelcome(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	switch (msg)
-	{
-		case WM_INITDIALOG:
-		{
-			TranslateDialogDefault(hwnd);
-
-			LOGFONT lf;
-			GetObject((HFONT)SendMessage(GetDlgItem(hwnd, IDC_TITLE), WM_GETFONT, 0, 0), sizeof(lf), &lf);
-			lf.lfWeight = FW_BOLD;
-			lf.lfHeight *= 1.8;
-			SendMessage(GetDlgItem(hwnd, IDC_TITLE), WM_SETFONT, (WPARAM)CreateFontIndirect(&lf), TRUE);
-
-			GetObject((HFONT)SendMessage(GetDlgItem(hwnd, IDC_VERSION), WM_GETFONT, 0, 0), sizeof(lf), &lf);
-			lf.lfHeight *= 1.3;
-			SendMessage(GetDlgItem(hwnd, IDC_VERSION), WM_SETFONT, (WPARAM)CreateFontIndirect(&lf), TRUE);
-			SetWindowText(GetDlgItem(hwnd, IDC_VERSION), _T(__VERSION_STRING_DOT));
-
-			HRSRC hRes = FindResource(hInst, MAKEINTRESOURCE(IDR_WHATSNEW), _T("TEXT"));
-			DWORD ResSize  = SizeofResource(hInst,hRes); 
-			HRSRC hResLoad = (HRSRC)LoadResource(hInst, hRes);
-			char *lpResLock = (char *)LockResource(hResLoad);
-//			lpResLock [ResSize] = 0;
-			TCHAR* ptszMsg = mir_a2t(lpResLock);
-			SetWindowText(GetDlgItem(hwnd, IDC_WHATSNEW), ptszMsg);
-			mir_free(ptszMsg);
-			UnlockResource(lpResLock);
-			FreeResource(hRes);
-			CheckDlgButton(hwnd, IDC_NONEWS, DBGetContactSettingByte(NULL, MODULNAME, "NeverShowNews", 1));
-
-			return TRUE;
-		}
-		case WM_CTLCOLORSTATIC:
-		{
-			if (GetWindowLongPtr((HWND)lParam, GWLP_ID) != IDC_NONEWS)
-				return (INT_PTR)GetStockObject(WHITE_BRUSH);
-			break;
-		}
-		case WM_COMMAND:
-		{
-			switch (LOWORD(wParam)) // control id
-			{
-				case ID_OK:
-				{
-					DBWriteContactSettingByte(NULL, MODULNAME, "NeverShowNews", IsDlgButtonChecked(hwnd, IDC_NONEWS)?1:0);
-					SendMessage(hwnd, WM_CLOSE, 0, 0);
-					return TRUE;
-				}
-				case IDC_RESET:
-				{
-					if (MessageBox(hwnd, TranslateT("Do you really want to reset Popup Plus settings?"), _T(MODULNAME_LONG), MB_ICONWARNING|MB_YESNO) == IDYES)
-					{
-						NukePopupSettings(MODULNAME);
-						OptionLoaded = false;
-						LoadOptions();
-					}
-					return TRUE;
-				}
-			}
-			break;
-		}
-		case WM_CLOSE:
-		{
-			DestroyWindow(hwnd);
-			return TRUE;
-		}
-	}
-	return FALSE;
-}
-
 // common funcs
 void LoadOptions() {
 	ZeroMemory(&PopUpOptions, sizeof(PopUpOptions));
 	#if defined(_DEBUG)
 		PopUpOptions.debug = DBGetContactSettingByte(NULL, MODULNAME, "debug", FALSE);
 	#endif
-	DWORD prevVersion = DBGetContactSettingDword(NULL, MODULNAME, "PopupPlusVersion", pluginInfoEx.version);
-	if (	(prevVersion < pluginInfoEx.version) &&
-			!PopUpOptions.debug &&
-			!DBGetContactSettingByte(NULL, MODULNAME, "NeverShowNews", 1)
-			) {
-		HWND hwnd = CreateDialogParam(hInst, MAKEINTRESOURCE(IDD_WELCOME), NULL, DlgProcPopupWelcome, prevVersion);
-		RECT rc, rcDesk;
-		GetWindowRect(hwnd, &rc);
-		SystemParametersInfo(SPI_GETWORKAREA, 0, &rcDesk, 0);
-		SetWindowPos(hwnd, HWND_TOP,
-			rcDesk.left + (rcDesk.right - rcDesk.left - (rc.right - rc.left)) / 2,
-			rcDesk.top + (rcDesk.bottom - rcDesk.top - (rc.bottom - rc.top)) / 2,
-			rc.right - rc.left,
-			rc.bottom - rc.top,
-			SWP_SHOWWINDOW);
-		ShowWindow(hwnd, SW_SHOWNORMAL);
-	}
-	DBWriteContactSettingDword(NULL, MODULNAME, "PopupPlusVersion", pluginInfoEx.version);
 
 	//Load PopUp Options
 	if(!OptionLoaded){
@@ -207,7 +117,6 @@ void LoadOptions() {
 		LoadOption_Skins();
 		LoadOption_Actions();
 		LoadOption_AdvOpts();
-		LoadOption_OldOpts();
 	}
 	Check_ReorderPopUps();
 	OptionLoaded = true;
@@ -298,45 +207,4 @@ void PopUpPreview()
 	if (PopUpOptions.UseAnimations || PopUpOptions.UseEffect) Sleep((ANIM_TIME*2)/3); //Pause
 
 	PUShowMessageT(TranslateT("This is an error message"),			(DWORD)SM_ERROR|0x80000000);
-}
-
-// nuke settings:
-struct NukeSettingsList
-{
-	char *name;
-	NukeSettingsList *next;
-} *setting_items = NULL;
-
-int SettingsEnumProc(const char *szSetting, LPARAM lParam)
-{
-	NukeSettingsList *newItem =  (NukeSettingsList *)mir_alloc(sizeof(NukeSettingsList));
-	newItem->name = mir_strdup(szSetting);
-	newItem->next = setting_items;
-	setting_items = newItem;
-	return 0;
-}
-
-static int NukePopupSettings(const char* szModul)
-{
-	DBCONTACTENUMSETTINGS dbces;
-	setting_items = 0;
-	dbces.pfnEnumProc = SettingsEnumProc;
-	dbces.szModule = szModul;
-	CallService(MS_DB_CONTACT_ENUMSETTINGS, 0, (LPARAM)(DBCONTACTENUMSETTINGS*)&dbces);
-	while (setting_items)
-	{
-		NukeSettingsList *next = setting_items->next;
-
-		DBCONTACTGETSETTING dbcgs;
-		dbcgs.szModule = szModul;
-		dbcgs.szSetting = setting_items->name;
-		CallService(MS_DB_CONTACT_DELETESETTING, 0, (LPARAM)&dbcgs);
-
-		mir_free(setting_items->name);
-		mir_free(setting_items);
-		setting_items = next;
-	}
-	DBWriteContactSettingDword(NULL, MODULNAME, "PopupPlusVersion", pluginInfoEx.version);
-
-	return 0;
 }

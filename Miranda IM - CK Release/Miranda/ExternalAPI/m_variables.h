@@ -25,11 +25,11 @@
 #endif
 
 #ifndef VARIABLES_NOHELPER
-#include "m_button.h"
+#include <m_button.h>
 #endif
 
 #ifndef SIZEOF
-#include "win2k.h"
+#include <win2k.h>
 #endif
 
 // --------------------------------------------------------------------------
@@ -172,32 +172,6 @@ __inline static TCHAR *variables_parse(TCHAR *tszFormat, TCHAR *tszExtraText, HA
 
   return (TCHAR *)CallService(MS_VARS_FORMATSTRING, (WPARAM)&fi, 0);
 }
-
-__inline static char *variables_parse_char(char *szFormat, char *szExtraText, HANDLE hContact)
-{
-  FORMATINFO fi = {0};
-
-  fi.cbSize = sizeof(fi);
-  fi.szFormat = szFormat;
-  fi.szExtraText = szExtraText;
-  fi.hContact = hContact;
-  fi.flags = 0;
-
-  return (char *) CallService(MS_VARS_FORMATSTRING, (WPARAM)&fi, 0);
-}
-__inline static wchar_t *variables_parse_wchar(wchar_t *wszFormat, wchar_t *wszExtraText, HANDLE hContact)
-{
-  FORMATINFO fi = {0};
-
-  fi.cbSize = sizeof(fi);
-  fi.wszFormat = wszFormat;
-  fi.wszExtraText = wszExtraText;
-  fi.hContact = hContact;
-  fi.flags = FIF_UNICODE;
-
-  return (wchar_t *) CallService(MS_VARS_FORMATSTRING, (WPARAM)&fi, 0);
-}
-
 #endif
 
 __inline static TCHAR *variables_parse_ex(TCHAR *tszFormat, TCHAR *tszExtraText, HANDLE hContact,

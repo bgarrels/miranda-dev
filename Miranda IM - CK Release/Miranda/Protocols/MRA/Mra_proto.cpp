@@ -2354,7 +2354,7 @@ DWORD MraRecvCommand_Message(DWORD dwTime,DWORD dwFlags,MRA_LPS *plpsFrom,MRA_LP
 							NotifyEventHooks(masMraSettings.heNudgeReceived,(WPARAM)ccs.hContact,NULL);
 						}else{
 							pre.flags=0;
-							pre.szMessage=(LPSTR)Translate(MRA_ALARM_MESSAGE);
+							pre.szMessage=(LPSTR)TranslateTS(MRA_ALARM_MESSAGE);
 							//pre.lParam=lstrlenA(pre.szMessage);
 							ccs.szProtoService=PSR_MESSAGE;
 							CallService(MS_PROTO_CHAINRECV,0,(LPARAM)&ccs);

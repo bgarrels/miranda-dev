@@ -16,49 +16,42 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#ifndef _KBDNOTIFY_
-#define _KBDNOTIFY_
+#ifndef _FDDNOTIFY_
+#define _FDDNOTIFY_
 
 //Enables all notifications (for use by BossKey)
 //wParam=0
 //lParam=0
 //returns 0
-#define MS_KBDNOTIFY_ENABLE         "KeyboardNotify/Enable"
+#define MS_FDDNOTIFY_ENABLE         "FddNotify/NotifyEnable"
 
 
 //Disables all notifications (for use by BossKey)
 //wParam=0
 //lParam=0
 //returns 0
-#define MS_KBDNOTIFY_DISABLE        "KeyboardNotify/Disable"
+#define MS_FDDNOTIFY_DISABLE        "FddNotify/NotifyDisable"
 
 
 //Makes the flashing begin
 //wParam=(unsigned int)eventCount
-//lParam=(char *)szFlashingSequence or NULL if you want the plugin to use current settings
+//lParam=0
 //returns 0
-#define MS_KBDNOTIFY_STARTBLINK     "KeyboardNotify/StartBlinking"
+#define MS_FDDNOTIFY_STARTBLINK     "FddNotify/StartBlinking"
 
 
 //Receives the number of events that were opened (usuful for the 'until events opened' setting)
 //wParam=(unsigned int)eventCount
 //lParam=0
 //returns 0
-#define MS_KBDNOTIFY_EVENTSOPENED   "KeyboardNotify/EventsWereOpened"
+#define MS_FDDNOTIFY_EVENTSOPENED   "FddNotify/EventsWereOpened"
 
 
 //Informs if the flashing is active
 //wParam=0
 //lParam=0
-//returns 0 if the flashing is inactive or a pointer to the string representing the sequence being used 
-#define MS_KBDNOTIFY_FLASHINGACTIVE "KeyboardNotify/IsFlashingActive"
-
-
-//Normalizes the flashing sequence informed
-//wParam=0
-//lParam=(char *)szFlashingSequence <- it is rewritten
-//returns a pointer to the string representing the sequence normalized (which is in fact lParam)
-#define MS_KBDNOTIFY_NORMALSEQUENCE "KeyboardNotify/NormalizeSequence"
+//returns 0 if the flashing is inactive or 1 if it is active 
+#define MS_FDDNOTIFY_FLASHINGACTIVE "FddNotify/IsFlashingActive"
 
 
 #endif

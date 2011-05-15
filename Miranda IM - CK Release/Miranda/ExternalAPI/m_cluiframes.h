@@ -17,64 +17,28 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/************************************************************************/
-/*               Extra Image Column Support +0.5.0.0                    */
-/************************************************************************/
-/*
-	HINT: Common usage of Extra icons by modules
-	Usage sequence is next:
-	The Plugin have to be subscribed to ME_CLIST_EXTRA_LIST_REBUILD and
-	ME_CLIST_EXTRA_IMAGE_APPLY notifications.
-	
-	During .._REBUILD Notification handle plugin should register required 
-	icons in CList internal list via MS_CLIST_EXTRA_ADD_ICON servise 
-	and should to keep returned icon indexes.
-	
-	Note: _REBUILD notification means that list was rebuilded and
-	all previously registered icon indexes became invalid and can not be used.
-
-	Note: After calling _ADD_ICON services the icon handle you provided is not 
-	need for extra images porpouses and have to be released by you in order
-	to reduce GDI resources consumptions. 
-
-	Note: Don't forget that icon handle loaded by LoadIcon GDI function is
-	shared and will be kept in memory till plugin unloading. So it is not 
-	better way to load icon. Please use appropriate Iconlib services.
-
-	Note: The icon can be registered in Clist at any time.
-	
-	During .._ME_CLIST_EXTRA_IMAGE_APPLY the plugin has to call 
-	MS_CLIST_EXTRA_SET_ICON passing appropriate icon index for contact. This 
-	service can be called any time in order to change current extra image.
-
-	ATTENTION: Currently Module support only 254 registered extra icons. The returned
-	value 0xFF internally means 'No extra icon' so thry t register only realy required 
-	icons. The best solution - register not registered/invalidated icon just before 
-	setting of extra image.
-
-	ATTENTION: Due to different module may use same extra icons slot - they will be conflicted. 
-	Please provide ability to end-user to change extra image slot to be used to show
-	your plugin information.
-
-*/
-
 //Extra columns type.
 //column arranged in this way
 //
 //	[statusicon] ContactName	[WEB][ADV1][ADV2][SMS][EMAIL][PROTO][CLIENT]
 //
+#define  EXTRA_ICON_RES0	0	// only used by nicer
 #define  EXTRA_ICON_EMAIL	1
-#define  EXTRA_ICON_PROTO	2
+#define  EXTRA_ICON_PROTO	2	// used by mwclist and modern
+#define  EXTRA_ICON_RES1	2	// only used by nicer
 #define  EXTRA_ICON_SMS		3
 #define  EXTRA_ICON_ADV1	4
 #define  EXTRA_ICON_ADV2	5
-#define  EXTRA_ICON_WEB	    6
-#define  EXTRA_ICON_CLIENT  7
-#define  EXTRA_ICON_VISMODE 8
+#define  EXTRA_ICON_WEB		6
+#define  EXTRA_ICON_CLIENT	7
+#define  EXTRA_ICON_VISMODE	8	// only used by modern
+#define  EXTRA_ICON_RES2	8	// only used by nicer
 #define  EXTRA_ICON_ADV3	9
 #define  EXTRA_ICON_ADV4	10
 
-#define  EXTRA_ICON_COUNT	10
+#ifndef EXTRA_ICON_COUNT
+#define  EXTRA_ICON_COUNT	10	// define this inside clist-plugin depending on used icon slots
+#endif
 
 typedef struct
 {
@@ -104,6 +68,9 @@ typedef struct
 //called with wparam=hContact
 #define ME_CLIST_EXTRA_IMAGE_APPLY			"CListFrames/OnExtraImageApply"
 
+//called with wparam=hContact lparam=extra
+#define ME_CLIST_EXTRA_CLICK				"CListFrames/OnExtraClick"
+
 //End of extra images header. TODO move it to separate m_extraimages.h file
 //Cause it has not any relationship to cluiframes engine
 
@@ -112,15 +79,14 @@ typedef struct
 /*               CLUI Frames Support				                    */
 /************************************************************************/
 
-// NOTE: Clui frames engine is in to be reconsructed..
 
-// Constants used bellow
+// Constants used below
 typedef struct tagCLISTFrame {
 	DWORD cbSize;
 	HWND hWnd ;
 	HICON hIcon;
 	int align;	//al flags below
-	union _tagMinSize{
+	union {
 		int height;
 		int minSize;   //the actual meaning depends from type of frame
 	};
@@ -146,6 +112,7 @@ typedef struct tagCLISTFrame {
 #define F_CANBEVERTICAL		64 //frames can be vertical
 #define F_CANNOTBEHORIZONTAL 128 //frames can NOT be horizontal	F_CANBEVERTICAL have to be set 
 #define F_NO_SUBCONTAINER   1024   //Support skining no subcontainer needed
+#define F_SKINNED           2048    // skinned frame (for owned subframe only)
 #define F_UNICODE			32768 //Use unicode text
 #ifdef _UNICODE
 # define F_TCHAR			F_UNICODE
@@ -169,7 +136,7 @@ typedef struct tagCLISTFrame {
 #define FU_FMPOS			4 //update Frame position
 
 #define FO_FLAGS		0x0001 //return set of F_VISIBLE,F_SHOWTB,F_UNCOLLAPSED,F_LOCKED,F_NOBORDER,F_SHOWTBTIP
-#define FO_NAME			0x0002 //Change name
+#define FO_NAME			0x0002 //Change m_cacheTName
 #define FO_TBNAME		0x0003 //Change TB caption
 #define FO_TBSTYLE		0x0004 //Change TB style
 #define FO_TBEXSTYLE	0x0005 //Change TB exstyle
@@ -231,40 +198,52 @@ typedef struct tagCLISTFrame {
 //////////////////////////////////////////////////////////////////////////
 //shows the frame if it is hidden,
 //hides the frame if it is shown
-//wParam=FrameId
-//lParam=0
+//wParam = FrameId
+//lParam = Frame number (can be shown in profile in CLUIFrames key)
 //returns 0 on success, -1 on failure
+//note that Frame number will be taken only if wParam == 0 
 #define MS_CLIST_FRAMES_SHFRAME				"CListFrames/SHFrame"
 
 //////////////////////////////////////////////////////////////////////////
 //shows the frame titlebar if it is hidden,
 //hides the frame titlebar if it is shown
 //wParam=FrameId
-//lParam=0
+//lParam = Frame number (can be shown in profile in CLUIFrames key)
 //returns 0 on success, -1 on failure
+//note that Frame number will be taken only if wParam == 0 
 #define MS_CLIST_FRAMES_SHFRAMETITLEBAR		"CListFrame/SHFrameTitleBar"
 
 //////////////////////////////////////////////////////////////////////////
 //locks the frame if it is unlocked,
 //unlock the frame if it is locked
 //wParam=FrameId
-//lParam=0
+//lParam = Frame number (can be shown in profile in CLUIFrames key)
 //returns 0 on success, -1 on failure
+//note that Frame number will be taken only if wParam == 0 
 #define MS_CLIST_FRAMES_ULFRAME				"CListFrame/ULFrame"
 
 //////////////////////////////////////////////////////////////////////////
 //collapses the frame if it is uncollapsed,
 //uncollapses the frame if it is collapsed
 //wParam=FrameId
-//lParam=0
+//lParam = Frame number (can be shown in profile in CLUIFrames key)
 //returns 0 on success, -1 on failure
+//note that Frame number will be taken only if wParam == 0 
 #define MS_CLIST_FRAMES_UCOLLFRAME			"CListFrame/UCOLLFrame"
 
 //////////////////////////////////////////////////////////////////////////
 //trigger border flags
 //wparam=frameid
-//lparam=0
+//lParam = Frame number (can be shown in profile in CLUIFrames key)
+//returns 0 on success, -1 on failure
+//note that Frame number will be taken only if wParam == 0 
 #define MS_CLIST_FRAMES_SETUNBORDER			"CListFrame/SetUnBorder"
+
+//////////////////////////////////////////////////////////////////////////
+//trigger skinned flags
+//wparam=frameid
+//lparam=0
+#define MS_CLIST_FRAMES_SETSKINNED			"CListFrame/SetSkinnedFrame"
 
 //////////////////////////////////////////////////////////////////////////
 //redraws the frame
@@ -336,3 +315,4 @@ typedef struct tagCLISTFrame {
 //needed by cluiframes module to add frames menu to main menu.
 //it just calls NotifyEventHooks(hPreBuildFrameMenuEvent,wParam,lParam);
 #define MS_CLIST_FRAMEMENUNOTIFY					"CList/ContextFrameMenuNotify"
+

@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2005 - 2009 Boris Krasnovskiy
+Copyright (C) 2005 - 2010 Boris Krasnovskiy
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
 This program is free software; you can redistribute it and/or
@@ -240,10 +240,10 @@ typedef struct
 
 typedef struct 
 {
-    unsigned cbSize;            // size of the structure
+	unsigned cbSize;            // size of the structure
 	HANDLE hContact;
-	int type;					// 0 - directory, 1 - file;
-    TCHAR* path;                // smiley category name for reference
+	int type;                   // 0 - directory, 1 - file;
+	TCHAR* path;                // smiley category name for reference
 } SMADD_CONT;
 
 //Loads all smileys for the contact

@@ -1,6 +1,6 @@
 /*
    Show Contact Gender plugin for Miranda-IM (www.miranda-im.org)
-   (c) 2006-2011 by Thief
+   (c) 2006-2007 by Thief
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
    File name      : $URL: http://svn.miranda.im/mainrepo/gender/trunk/m_gender.h $
    Revision       : $Rev: 957 $
-   Last change on : $Date: 2007-10-19 13:46:08 +0300 (??, 19 ??? 2007) $
+   Last change on : $Date: 2007-10-19 13:46:08 +0300 (Пт, 19 окт 2007) $
    Last change by : $Author: Thief $
 
 */
