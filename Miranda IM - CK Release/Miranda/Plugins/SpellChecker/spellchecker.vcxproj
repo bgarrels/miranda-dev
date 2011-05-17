@@ -190,6 +190,8 @@
       <TargetMachine>MachineX64</TargetMachine>
       <OutputFile>$(OutDir)$(TargetName)64$(TargetExt)</OutputFile>
       <ProgramDatabaseFile>$(TargetDir)$(TargetName)W.pdb</ProgramDatabaseFile>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
