@@ -4,7 +4,7 @@
 #define __VERSION_STRING            MIRANDA_VERSION_STRING
 #define __VERSION_DWORD             MIRANDA_VERSION_DWORD
 #if defined (_UNICODE)
-	#define __PLUGIN_NAME		    "Jabber Protocol (Unicode) Mataes Release"
+	#define __PLUGIN_NAME		    "Jabber Protocol (Unicode) CK Release"
 #else
-	#define __PLUGIN_NAME		    "Jabber Protocol Mataes Release"
+	#define __PLUGIN_NAME		    "Jabber Protocol CK Release"
 #endif
