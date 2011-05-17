@@ -160,8 +160,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <ExceptionHandling>
       </ExceptionHandling>
-      <CompileAsManaged>
-      </CompileAsManaged>
+      <CompileAsManaged>false</CompileAsManaged>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
     </ClCompile>
     <ResourceCompile>
