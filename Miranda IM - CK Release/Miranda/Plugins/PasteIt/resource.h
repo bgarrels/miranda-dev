@@ -1,4 +1,7 @@
-
+//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ generated include file.
+// Used by PasteIt.rc
+//
 #define IDD_OPT_MAIN                    101
 #define IDD_DLG_FROM_CLIPBOARD          102
 #define IDD_DLG_FROM_FILE               103
@@ -37,6 +40,7 @@
 #define IDC_PASTEBIN_USER               1031
 #define IDC_PASTEBIN_PASSWORD           1032
 #define IDI_MENU                        20000
+#define IDC_STATIC                      -1
 
 // Next default values for new objects
 // 
