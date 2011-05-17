@@ -19,15 +19,11 @@ BEGIN
     BEGIN
         BLOCK "000004b0"
         BEGIN
-            VALUE "Author", "Krzysztof Kral"
-			VALUE "CompanyName", "Krzysztof Kral"
-            VALUE "FileDescription", "Uploads the text to web page and sends the URL to your friend"
-            VALUE "FileVersion", __VERSION_STRING
-            VALUE "InternalName", "PasteIt"
-            VALUE "LegalCopyright", "Copyright (c) 2011 KrzysztofKral"
-			VALUE "OriginalFilename", "PasteIt.dll"
-            VALUE "ProductName", "PasteIt"
-            VALUE "ProductVersion", __VERSION_STRING
+            VALUE "FileDescription", __DESCRIPTION
+            VALUE "InternalName", __PLUGIN_NAME
+            VALUE "LegalCopyright", __COPYRIGHT
+            VALUE "OriginalFilename", __FILENAME
+            VALUE "ProductName", __PLUGIN_NAME
         END
     END
     BLOCK "VarFileInfo"

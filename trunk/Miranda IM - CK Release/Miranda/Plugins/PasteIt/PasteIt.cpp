@@ -47,13 +47,13 @@ HANDLE hOptionsInit;
 
 PLUGININFOEX pluginInfo={
 	sizeof(PLUGININFOEX),
-	"Paste It",
-	__VERSION_DWORD,
-	"Uploads the text to web page and sends the URL to your friend",
-	"Krzysztof Kral",
-	"programista@poczta.of.pl",
-	"Copyright © 2011 Krzysztof Kral",
-	"http://programista.free.of.pl/miranda/",
+	__PLUGIN_NAME,
+	PLUGIN_MAKE_VERSION(__MAJOR_VERSION, __MINOR_VERSION, __RELEASE_NUM, __BUILD_NUM),
+	__DESCRIPTION,
+	__AUTHOR,
+	__AUTHOREMAIL,
+	__COPYRIGHT,
+	__AUTHORWEB,
 	UNICODE_AWARE, 
 	0,
 	MIID_PASTEIT
@@ -162,7 +162,7 @@ int TabsrmmButtonPressed(WPARAM wParam, LPARAM lParam)
 			HMENU hMenu = CreatePopupMenu();
 			if (hMenu) 
 			{
-				AppendMenu(hMenu, MF_STRING, FROM_CLIPBOARD, TranslateT("Paste from clopboard"));
+				AppendMenu(hMenu, MF_STRING, FROM_CLIPBOARD, TranslateT("Paste from clipboard"));
 				AppendMenu(hMenu, MF_STRING, FROM_FILE, TranslateT("Paste from file"));
 				HMENU hDefMenu = CreatePopupMenu();
 				for(int i = 0 ; i < PasteToWeb::pages; ++i)
@@ -271,7 +271,7 @@ void InitMenuItems()
 	mi.flags = CMIF_ROOTPOPUP | CMIF_ICONFROMICOLIB | CMIF_TCHAR;
 	mi.icolibItem = hMainIcon;
 	mi.position = 3000090005;
-	mi.ptszName = TranslateT("Paste It");
+	mi.ptszName = _T("Paste It");
 
 	hContactMenu = (HGENMENU)CallService(MS_CLIST_ADDCONTACTMENUITEM, 0, (LPARAM)&mi);
 
@@ -281,15 +281,15 @@ void InitMenuItems()
 	mi.pszService = MS_PASTEIT_CONTACTMENU;
 	mi.hParentMenu = hContactMenu;
 	mi.popupPosition = FROM_CLIPBOARD;	
-	mi.ptszName =TranslateT("Paste from clopboard");
+	mi.ptszName = _T("Paste from clipboard");
 	CallService(MS_CLIST_ADDCONTACTMENUITEM, 0, (LPARAM)&mi);
 
 	mi.popupPosition = FROM_FILE;
-	mi.ptszName =TranslateT("Paste from file");
+	mi.ptszName = _T("Paste from file");
 	CallService(MS_CLIST_ADDCONTACTMENUITEM, 0, (LPARAM)&mi);
 
 	mi.popupPosition = DEF_PAGES_START - 1;
-	mi.ptszName =TranslateT("Default web page");
+	mi.ptszName = _T("Default web page");
 	HGENMENU hDefWebMenu = (HGENMENU)CallService(MS_CLIST_ADDCONTACTMENUITEM, 0, (LPARAM)&mi);
 	
 	mi2.cbSize = sizeof(mi2);
