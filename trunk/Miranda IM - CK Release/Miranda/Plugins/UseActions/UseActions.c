@@ -1171,21 +1171,11 @@ INT_PTR CALLBACK DlgProcOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPara
 			GetObject((HFONT)SendMessage(GetDlgItem(hwndDlg, IDC_STTOOLBAR), WM_GETFONT, 0, 0), sizeof(lf), &lf);
 			lf.lfWeight = FW_BOLD;
 			hf = CreateFontIndirect(&lf);
-			
-			// For Old GUI 
 			SendMessage(GetDlgItem(hwndDlg, IDC_STTOOLBAR),	WM_SETFONT, (WPARAM)hf, TRUE);
 			SendMessage(GetDlgItem(hwndDlg, IDC_STMMI),		WM_SETFONT, (WPARAM)hf, TRUE);
 			SendMessage(GetDlgItem(hwndDlg, IDC_STCMI),		WM_SETFONT, (WPARAM)hf, TRUE);
 			SendMessage(GetDlgItem(hwndDlg, IDC_STTMI),		WM_SETFONT, (WPARAM)hf, TRUE);
 			SendMessage(GetDlgItem(hwndDlg, IDC_STOTHER),	WM_SETFONT, (WPARAM)hf, TRUE);
-
-			// For New GUI
-			// SendMessage(GetDlgItem(hwndDlg, IDC_STTOOLBAR),	WM_SETFONT, (WPARAM)hf, TRUE);
-			// SendMessage(GetDlgItem(hwndDlg, IDC_CHBMMENUITEM),		WM_SETFONT, (WPARAM)hf, TRUE);
-			// SendMessage(GetDlgItem(hwndDlg, IDC_CHBCMENUITEM),		WM_SETFONT, (WPARAM)hf, TRUE);
-			// SendMessage(GetDlgItem(hwndDlg, IDC_CHBTMENUITEM),		WM_SETFONT, (WPARAM)hf, TRUE);
-			// SendMessage(GetDlgItem(hwndDlg, IDC_STOTHER),	WM_SETFONT, (WPARAM)hf, TRUE);
-			
 			//DeleteObject(hf);
 
 			TranslateDialogDefault( hwndDlg );
