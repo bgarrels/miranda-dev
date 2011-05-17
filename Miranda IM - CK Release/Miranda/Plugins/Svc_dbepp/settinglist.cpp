@@ -334,7 +334,10 @@ void writeStandardTextfromLabel(EditLabelInfoStruct* info, char* value, WCHAR *w
 	if (type != DBVT_ASCIIZ && type != DBVT_UTF8)
 		DBDeleteContactSetting(info->hContact,info->module,info->setting);
 	if (type == DBVT_UTF8 && wc)
+	{
 		DBWriteContactSettingWString(info->hContact,info->module,info->setting,wc);
+		mir_free(wc);
+	}
 	else
 		DBWriteContactSettingString(info->hContact,info->module,info->setting,value);
 
@@ -383,10 +386,7 @@ static LRESULT CALLBACK SettingLabelEditSubClassProc(HWND hwnd,UINT msg,WPARAM w
 					GetWindowText(hwnd,value,len);
 
 					if (info->unicode)
-					{
-						wc = (WCHAR*)_alloca(len * sizeof(WCHAR));
-						MultiByteToWideChar(CP_UTF8, 0, value, -1, wc, len);
-					}
+						wc = mir_a2u(value);
 
 					if (len <= 1 || GetSetting(info->hContact,info->module,info->setting,&dbv))
 					{
