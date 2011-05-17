@@ -7,8 +7,8 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 15 May 2011 14:05:06
-; FLID: Deutsche Sprachdatei 0.11.05.15
+X-Langpack-creation-date: 17 May 2011 13:05:02
+; FLID: Deutsche Sprachdatei 0.11.05.17
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirOTR,MirOUT,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
 ; Start of langpack: Core (Letzte Änderung: 11:32, 27. Apr. 2011 )
@@ -7508,7 +7508,7 @@ Dieses Plugin speichert alle Avataränderungen ihrer Kontakte und/oder zeigt ents
 ; ##############################################
 ; End of langpack: Avatar_History
 ; ############################################## 
-; Start of langpack: Avatar_service (Letzte Änderung: 13:40, 22. Jan. 2011 )
+; Start of langpack: Avatar_service (Letzte Änderung: 12:05, 17. Mai 2011 )
 
 ; Pluginname: Avatar service 
 ; Version: 0.9.15.0
@@ -7518,6 +7518,11 @@ Dieses Plugin speichert alle Avataränderungen ihrer Kontakte und/oder zeigt ents
 ; Link: Stable & Testing
 ; Übersetzung: Dober am 10.11.05
 ; Update: FREAK am 16.10.05
+
+[Global avatar for]
+Globaler Avatar für
+[Global avatar for %s accounts]
+Globaler Avatar für %s Konten
 
 [Load and manage contact pictures for other plugins]
 Lädt und verwaltet Kontaktbilder für andere Plugins.
@@ -32370,10 +32375,10 @@ Bekannte harte Nüsse
 ; ##############################################
 ; End of langpack: Spam_Filter_(beta)
 ; ############################################## 
-; Start of langpack: Spell_Checker (Letzte Änderung: 21:57, 5. Okt. 2010 )
+; Start of langpack: Spell_Checker (Letzte Änderung: 18:34, 16. Mai 2011 )
 
 ; Pluginname: Spell Checker 
-; Version: 0.2.5.0
+; Version: 0.2.6.0
 ; Dateiname: spellchecker.dll
 ; Author: Pescuma
 ; Unique ID: {36753ae3-840b-4797-94a5-fd9f5852b942}
@@ -32451,10 +32456,10 @@ Korrekturen
 [Wrong words]
 Falsche Wörter
 
-[Could not find the message dialog. This usually means one of two things:\n- In tabSRMM the checkbox 'Enable event API' is disabled or\n- You are using SRMM (which don't support Spell Checker)]
-Das SpellChecker Plugin konnte das Nachrichtenfenster nicht finden. Dies kann eine von folgenden Ursachen haben:\n- Die Einstellung "Event API für externe Plugins" (unter Einstellungen=>Nachrichtensitzung) in TABsrmm ist deaktiviert oder\n- Es wird SRMM verwendet welches keine Rechtschreibüberprüfung ermöglicht.
-[There are spelling errors. Are you sure you want to send this message?]
-Es sind Rechtschreibfehler vorhanden. Möchten Sie dennoch die Nachricht senden?
+[Your message window does not support SpellChecker Plugin.\nIf you use SRMM, tabSRMM or Scriver, please update them to the latest version,\notherwise ask the author of your message window plugin to add support for Spell Checker.]
+Ihr Nachrichtenfenster unterstützt keine Rechtschreibprüfung.\nWenn Sie SRMM, tabSRMM oder Scriver nutzen dann aktualisieren sie dieses bitte auf die neuste Version,\nanderenfalls fragen Sie den Autor Ihres Plugins nach Unterstützung für Rechtschreibprüfung.
+[There are %d spelling errors. Are you sure you want to send this message?]
+Es sind %d Rechtschreibfehler vorhanden. Möchten Sie dennoch die Nachricht senden?
 
 [Auto-replacements]
 Automatische Ersetzungen
