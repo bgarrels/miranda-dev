@@ -134,6 +134,9 @@
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CompileAsManaged>false</CompileAsManaged>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CreateHotpatchableImage>false</CreateHotpatchableImage>
     </ClCompile>
     <Link>
       <AdditionalDependencies>unicows.lib;%(AdditionalDependencies)</AdditionalDependencies>
