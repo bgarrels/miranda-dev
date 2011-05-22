@@ -162,7 +162,7 @@ public:
 	// Messages handling
 
 	bool    channel( );
-	bool    send_message( std::string message_recipient, std::string message_text );
+	bool    send_message( std::string message_recipient, std::string message_text, std::string *error_text );
 	void    close_chat( std::string message_recipient );
 
 	////////////////////////////////////////////////////////////

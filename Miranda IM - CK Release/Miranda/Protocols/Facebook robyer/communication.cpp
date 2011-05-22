@@ -117,16 +117,25 @@ bool facebook_client::validate_response( http::response* resp )
 		return false;
 	}
 
-	std::string::size_type pos = resp->data.find( "{\"error\":" );
+	std::string::size_type pos = resp->data.find( "\"error\":" );
 	if ( pos != std::string::npos )
     try
   	{
-		std::string error = resp->data.substr( pos + 9, 128 );
-	    int error_num = atoi( error.substr( 0, error.find( "," ) ).c_str() );
+		pos += 8;
+	    int error_num = atoi( resp->data.substr( pos, resp->data.find( ",", pos ) - pos ).c_str() );
 	    if ( error_num != 0 )
 	    {
-		    error = error.substr( error.find( "\"errorDescription\":\"" ) + 40 );
-		    error = error.substr( 0, error.find( "\"," ) );
+			std::string error = "";
+			pos = resp->data.find( "\"errorDescription\":\"", pos );
+			if (pos != std::string::npos ) {
+				pos += 20;
+				error = resp->data.substr( pos, resp->data.find( "\"", pos ) - pos );
+				error = utils::text::trim(
+					utils::text::special_expressions_decode( 
+						utils::text::slashu_to_utf8( error ) ) );
+
+			}
+
 		    resp->error_number = error_num;
 		    resp->error_text = error;
 		    parent->Log(" ! !  Received Facebook error: %d -- %s", error_num, error.c_str());
@@ -1074,7 +1083,7 @@ bool facebook_client::channel( )
 	}
 }
 
-bool facebook_client::send_message( std::string message_recipient, std::string message_text )
+bool facebook_client::send_message( std::string message_recipient, std::string message_text, std::string *error_text )
 {
 	handle_entry( "send_message" );
 
@@ -1090,27 +1099,31 @@ bool facebook_client::send_message( std::string message_recipient, std::string m
 	data += utils::time::mili_timestamp( );
 	data += "&fb_dtsg=";
 	data += ( this->dtsg_.length( ) ) ? this->dtsg_ : "0";
-	data += "&to_offline=false&lsd=&post_form_id_source=AsyncRequest&num_tabs=1";
+	data += "&to_offline=false&to_idle=false&lsd=&post_form_id_source=AsyncRequest&num_tabs=1";
 	data += "&post_form_id=";
-	data += ( post_form_id_.length( ) ) ? post_form_id_ : "0";
+	data += ( post_form_id_.length( ) ) ? post_form_id_ : "0&";
 
 	http::response resp = flap( FACEBOOK_REQUEST_MESSAGE_SEND, &data );
 
 	validate_response(&resp);
+	*error_text = resp.error_text;
 
 	switch ( resp.error_number )
 	{
   	case 0: // Everything is OK
 		break;
 
-    case 1356003:
-    { // Contact is offline
+    //case 1356002: // You are offline - wtf??
+
+	case 1356003: // Contact is offline
+	{
 		HANDLE hContact = parent->ContactIDToHContact( message_recipient );
   		DBWriteContactSettingWord(hContact,parent->m_szModuleName,"Status",ID_STATUS_OFFLINE);
 		return false;
 	} break;
 
   	case 1356026: // Contact has alternative client
+	{
 		client_notify(TranslateT("Need confirmation for sending messages to other clients.\nOpen facebook website and try to send message to this contact again!"));
       /*
           post na url http://www.facebook.com/ajax/chat/post_application_settings.php?__a=1
@@ -1124,11 +1137,10 @@ bool facebook_client::send_message( std::string message_recipient, std::string m
           post_form_id_source  AsyncRequest                                                                                                                                                                                                                                                                                                                                                                                                                                    
           */
 		return false;
-		break;
-  
-    default:
+	} break;
+ 
+    default: // Other error
 		return false;
-		break;
  	}
 
 	switch ( resp.code )
