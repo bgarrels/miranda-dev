@@ -89,13 +89,22 @@ void FacebookProto::SendMsgWorker(void *p)
 	}
 */	else if( !DBGetContactSettingString(data->hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
 	{
-		if ( facy.send_message(dbv.pszVal, data->msg) )
+		int retries = 5;
+		std::string error_text = "";
+		bool result = false;
+		while (!result && retries > 0) {
+			result = facy.send_message(dbv.pszVal, data->msg, &error_text);
+			retries--;
+		}
+		if (result) {
 			ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_MESSAGE,ACKRESULT_SUCCESS, data->msgid,0);
-		else
-			ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_MESSAGE,ACKRESULT_FAILED, data->msgid,(LPARAM)Translate("Error with sending message."));
 
-		std::string* data = new std::string( dbv.pszVal );
-		CloseChatWorker( (void*)data );
+			std::string* data = new std::string( dbv.pszVal );
+			CloseChatWorker( (void*)data );
+		} else {
+			// RM TODO: somehow fix error_text codepage
+			ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_MESSAGE,ACKRESULT_FAILED, data->msgid,(LPARAM)error_text.c_str()/*Translate("Error with sending message.")*/);
+		}
 		DBFreeVariant(&dbv);
 	}
 
