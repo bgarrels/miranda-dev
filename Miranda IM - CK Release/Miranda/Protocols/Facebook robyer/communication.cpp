@@ -1151,7 +1151,9 @@ bool facebook_client::send_message( std::string message_recipient, std::string m
 	case HTTP_CODE_FAKE_ERROR:
 	case HTTP_CODE_FAKE_DISCONNECTED:
 	default:
-		return handle_error( "send_message" );
+		*error_text = Translate("Timeout when sending message.");
+		handle_error( "send_message" );
+		return false;
 	}
 }
 
