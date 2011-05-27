@@ -181,12 +181,12 @@ void CreateFromBitmaps(bool bServiceTip)
 		if (i == SKIN_ITEM_SIDEBAR && (!opt.iSidebarWidth || bServiceTip))
 			continue;
 
-		if (opt.szImgFile[i] && strlen(opt.szImgFile[i]) != 0) 
+		if (opt.szImgFile[i] && _tcslen(opt.szImgFile[i]) != 0) 
 		{
 			FIBITMAP *fib = NULL;
 			if (!skin.bCached) 
 			{
-				FIBITMAP *fibLoad = (FIBITMAP *)CallService(MS_IMG_LOAD, (WPARAM)opt.szImgFile[i], (LPARAM)IMGL_RETURNDIB);
+				FIBITMAP *fibLoad = (FIBITMAP *)CallService(MS_IMG_LOAD, (WPARAM)opt.szImgFile[i], (LPARAM)IMGL_RETURNDIB | IMGL_TCHAR);
 				if (!fibLoad) continue;
 
 				if (fii->FI_GetBPP(fibLoad) != 32) 
