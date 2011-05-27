@@ -45,7 +45,7 @@ struct FontOptionsList
 	TCHAR*   szDefFace;
 	BYTE     defCharset, defStyle;
 	char     defSize;
-    FONTEFFECT  defeffect;
+	FONTEFFECT  defeffect;
 
 	COLORREF colour;
 	TCHAR    szFace[LF_FACESIZE];
@@ -62,13 +62,13 @@ struct FontOptionsList
 #define DEFAULT_GREYCOLOUR	RGB(128, 128, 128)
 #define DEFAULT_BACKCOLOUR	RGB(255, 255, 255)
 
-#define DEFAULT_FAMILY		_T("Verdana")
+#define DEFAULT_FAMILY		_T("Arial")
 #define DEFAULT_EFFECT		{ 0, 0x00000000, 0x00000000 }
 
 
 
-#define DEFAULT_SIZE		-13
-#define DEFAULT_SMALLSIZE	-11
+#define DEFAULT_SIZE		-11
+#define DEFAULT_SMALLSIZE	-8
 
 static struct FontOptionsList fontOptionsList[] = {
 
@@ -81,21 +81,21 @@ static struct FontOptionsList fontOptionsList[] = {
 		{ FIDF_CLASSGENERAL, FONTID_INVISIBLE,             CLCGROUP,       LPGENT( "Invisible contacts"),                                          DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
 		{ FIDF_CLASSGENERAL, FONTID_PHONE,                 CLCGROUP,       LPGENT( "On the phone contacts"),                                       DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
 		{ FIDF_CLASSGENERAL, FONTID_LUNCH,                 CLCGROUP,       LPGENT( "Out to lunch contacts"),                                       DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
-		{ FIDF_CLASSGENERAL, FONTID_OFFLINE,               CLCGROUP,       LPGENT( "Offline contacts"),                                            DEFAULT_COLOUR,	   DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
-		{ FIDF_CLASSGENERAL, FONTID_INVIS,                 CLCGROUP,       LPGENT( "Online contacts to whom you have a different visibility"),     DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_ITALIC, DEFAULT_SIZE, DEFAULT_EFFECT },		
-		{ FIDF_CLASSGENERAL, FONTID_OFFINVIS,              CLCGROUP,       LPGENT( "Offline contacts to whom you have a different visibility"),    DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_ITALIC, DEFAULT_SIZE, DEFAULT_EFFECT },
-		{ FIDF_CLASSGENERAL, FONTID_NOTONLIST,             CLCGROUP,       LPGENT( "Contacts who are 'not on list'"),                              DEFAULT_GREYCOLOUR, DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
+		{ FIDF_CLASSGENERAL, FONTID_OFFLINE,               CLCGROUP,       LPGENT( "Offline contacts"),                                            DEFAULT_GREYCOLOUR, DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
+		{ FIDF_CLASSGENERAL, FONTID_INVIS,                 CLCGROUP,       LPGENT( "Online contacts to whom you have a different visibility"),     DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },		
+		{ FIDF_CLASSGENERAL, FONTID_OFFINVIS,              CLCGROUP,       LPGENT( "Offline contacts to whom you have a different visibility"),    DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
+		{ FIDF_CLASSGENERAL, FONTID_NOTONLIST,             CLCGROUP,       LPGENT( "Contacts who are 'not on list'"),                              DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
 		{ FIDF_CLASSHEADER,  FONTID_OPENGROUPS,            CLCGROUP,       LPGENT( "Open groups"),                                                 DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_BOLD, DEFAULT_SIZE, DEFAULT_EFFECT },
 		{ FIDF_CLASSHEADER,  FONTID_OPENGROUPCOUNTS,       CLCGROUP,       LPGENT( "Open group member counts"),                                    DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
 		{ FIDF_CLASSHEADER,  FONTID_CLOSEDGROUPS,          CLCGROUP,       LPGENT( "Closed groups"),                                               DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_BOLD, DEFAULT_SIZE, DEFAULT_EFFECT },
 		{ FIDF_CLASSHEADER,  FONTID_CLOSEDGROUPCOUNTS,     CLCGROUP,       LPGENT( "Closed group member counts"),                                  DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
 		{ FIDF_CLASSSMALL,   FONTID_DIVIDERS,              CLCGROUP,       LPGENT( "Dividers"),                                                    DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
 		
-        { FIDF_CLASSSMALL,   FONTID_SECONDLINE,            CLCLINESGROUP,  LPGENT( "Second line"),                                                 DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
-		{ FIDF_CLASSSMALL,   FONTID_THIRDLINE,             CLCLINESGROUP,  LPGENT( "Third line"),                                                  DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
-		{ FIDF_CLASSSMALL,   FONTID_CONTACT_TIME,          CLCLINESGROUP,  LPGENT( "Contact time"),                                                DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
+        { FIDF_CLASSSMALL,   FONTID_SECONDLINE,            CLCLINESGROUP,  LPGENT( "Second line"),                                                 DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SMALLSIZE, DEFAULT_EFFECT },
+		{ FIDF_CLASSSMALL,   FONTID_THIRDLINE,             CLCLINESGROUP,  LPGENT( "Third line"),                                                  DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SMALLSIZE, DEFAULT_EFFECT },
+		{ FIDF_CLASSSMALL,   FONTID_CONTACT_TIME,          CLCLINESGROUP,  LPGENT( "Contact time"),                                                DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SMALLSIZE, DEFAULT_EFFECT },
 		
-        { FIDF_CLASSGENERAL, FONTID_STATUSBAR_PROTONAME,   CLCFRAMESGROUP, LPGENT( "Status bar text"),                                             DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SMALLSIZE, DEFAULT_EFFECT },
+        { FIDF_CLASSGENERAL, FONTID_STATUSBAR_PROTONAME,   CLCFRAMESGROUP, LPGENT( "Status bar text"),                                             DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
 		{ FIDF_CLASSGENERAL, FONTID_EVENTAREA,             CLCFRAMESGROUP, LPGENT( "Event area text"),                                             DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
 		{ FIDF_CLASSGENERAL, FONTID_VIEMODES,              CLCFRAMESGROUP, LPGENT( "Current view mode text"),                                      DEFAULT_COLOUR,     DEFAULT_FAMILY, DEFAULT_CHARSET, FONTF_NORMAL, DEFAULT_SIZE, DEFAULT_EFFECT },
 };
@@ -103,10 +103,10 @@ static struct FontOptionsList fontOptionsList[] = {
 struct ColourOptionsList
 {
 	char *   chGroup;
-    char *   chName;
-    TCHAR*   szGroup;
-    TCHAR*   szDescr;    
-    COLORREF defColour;
+	char *   chName;
+	TCHAR*   szGroup;
+	TCHAR*   szDescr;
+	COLORREF defColour;
 };
 
 static struct ColourOptionsList colourOptionsList[] = {
@@ -115,9 +115,9 @@ static struct ColourOptionsList colourOptionsList[] = {
 	{ "CLC",			"Rows_BkColour",      CLCLINESGROUP,		LPGENT( "Background"),									DEFAULT_BACKCOLOUR },
 	{ "CLC",			"Frames_BkColour",    CLCFRAMESGROUP,		LPGENT( "Background"),									DEFAULT_BACKCOLOUR},
 
-    { "CLC",			"HotTextColour",      CLCCOLOURSGROUP,      LPGENT( "Hot text"),									CLCDEFAULT_MODERN_HOTTEXTCOLOUR },
-    { "CLC",			"SelTextColour",      CLCCOLOURSGROUP,      LPGENT( "Selected text"),								CLCDEFAULT_MODERN_SELTEXTCOLOUR },
-    { "CLC",			"QuickSearchColour",  CLCCOLOURSGROUP,      LPGENT( "Quick search text"),							CLCDEFAULT_MODERN_QUICKSEARCHCOLOUR},
+	{ "CLC",			"HotTextColour",      CLCCOLOURSGROUP,      LPGENT( "Hot text"),									CLCDEFAULT_MODERN_HOTTEXTCOLOUR },
+	{ "CLC",			"SelTextColour",      CLCCOLOURSGROUP,      LPGENT( "Selected text"),								CLCDEFAULT_MODERN_SELTEXTCOLOUR },
+	{ "CLC",			"QuickSearchColour",  CLCCOLOURSGROUP,      LPGENT( "Quick search text"),							CLCDEFAULT_MODERN_QUICKSEARCHCOLOUR},
 
 	{ "Menu",			"TextColour",		  CLCCOLOURSGROUP,      LPGENT( "Menu text"),									CLCDEFAULT_TEXTCOLOUR},
 	{ "Menu",			"SelTextColour",	  CLCCOLOURSGROUP,      LPGENT( "Selected menu text"),							CLCDEFAULT_MODERN_SELTEXTCOLOUR},
@@ -129,23 +129,23 @@ static struct ColourOptionsList colourOptionsList[] = {
 
 void RegisterCLUIFonts( void )
 {
-    static bool registered = false;
+	static bool registered = false;
 
-    if ( registered ) return;
+	if ( registered ) return;
 
 	FontIDT fontid = {0};
 	ColourIDT colourid = {0};
-    EffectIDT effectid = {0};
+	EffectIDT effectid = {0};
 	char idstr[10];
 	int i, index = 0;
-    
-	fontid.cbSize = FontID_SIZEOF_V2;
-    strncpy(fontid.dbSettingsGroup, "CLC", SIZEOF(fontid.dbSettingsGroup));
 
-    effectid.cbSize = sizeof( EffectIDT );
-    strncpy(effectid.dbSettingsGroup, "CLC", SIZEOF(effectid.dbSettingsGroup));
-   
-	for ( i = 0; i < SIZEOF(fontOptionsList); i++, index++ ) 
+	fontid.cbSize = FontID_SIZEOF_V2;
+	strncpy(fontid.dbSettingsGroup, "CLC", SIZEOF(fontid.dbSettingsGroup));
+
+	effectid.cbSize = sizeof( EffectIDT );
+	strncpy(effectid.dbSettingsGroup, "CLC", SIZEOF(effectid.dbSettingsGroup));
+
+	for ( i = 0; i < SIZEOF(fontOptionsList); i++, index++ )
 	{
 		fontid.flags =  FIDF_DEFAULTVALID | FIDF_APPENDNAME | FIDF_SAVEPOINTSIZE | FIDF_ALLOWEFFECTS | FIDF_ALLOWREREGISTER | FIDF_NOAS;
 		fontid.flags |= fontOptionsList[i].dwFlags;
@@ -162,35 +162,34 @@ void RegisterCLUIFonts( void )
 		fontid.deffontsettings.style = fontOptionsList[i].defStyle;
 		_tcsncpy(fontid.deffontsettings.szFace, fontOptionsList[i].szDefFace, SIZEOF(fontid.deffontsettings.szFace));
 
-        CallService(MS_FONT_REGISTERT, (WPARAM)&fontid, 0);
+		CallService(MS_FONT_REGISTERT, (WPARAM)&fontid, 0);
 
-        _tcsncpy(effectid.group, fontOptionsList[i].szGroup, SIZEOF(effectid.group));
-        _tcsncpy(effectid.name, fontOptionsList[i].szDescr, SIZEOF(effectid.name));
-        sprintf(idstr, "Font%d", fontOptionsList[i].fontID);
-        strncpy(effectid.setting, idstr, SIZEOF(effectid.setting));
-        effectid.order = i + 1;
+		_tcsncpy(effectid.group, fontOptionsList[i].szGroup, SIZEOF(effectid.group));
+		_tcsncpy(effectid.name, fontOptionsList[i].szDescr, SIZEOF(effectid.name));
+		sprintf(idstr, "Font%d", fontOptionsList[i].fontID);
+		strncpy(effectid.setting, idstr, SIZEOF(effectid.setting));
+		effectid.order = i + 1;
 
-        effectid.defeffect.effectIndex = fontOptionsList[i].defeffect.effectIndex;
-        effectid.defeffect.baseColour = fontOptionsList[i].defeffect.baseColour;
-        effectid.defeffect.secondaryColour = fontOptionsList[i].defeffect.secondaryColour;
-		
-        CallService(MS_EFFECT_REGISTERT, (WPARAM)&effectid, 0);
+		effectid.defeffect.effectIndex = fontOptionsList[i].defeffect.effectIndex;
+		effectid.defeffect.baseColour = fontOptionsList[i].defeffect.baseColour;
+		effectid.defeffect.secondaryColour = fontOptionsList[i].defeffect.secondaryColour;
+
+		CallService(MS_EFFECT_REGISTERT, (WPARAM)&effectid, 0);
 
 	}
-    colourid.cbSize = sizeof( ColourIDT );
-    
+	colourid.cbSize = sizeof( ColourIDT );
 
-    for ( i = 0; i < SIZEOF( colourOptionsList); i++ )
-    {
-        _tcsncpy(colourid.group,          colourOptionsList[i].szGroup, SIZEOF(colourid.group));
-        _tcsncpy(colourid.name,           colourOptionsList[i].szDescr, SIZEOF(colourid.group));
-        strncpy(colourid.setting,         colourOptionsList[i].chName,  SIZEOF(colourid.setting));
-        strncpy(colourid.dbSettingsGroup, colourOptionsList[i].chGroup, SIZEOF(colourid.dbSettingsGroup));
-        colourid.defcolour =  colourOptionsList[i].defColour;
-        colourid.order = i + 1;
-        CallService(MS_COLOUR_REGISTERT, (WPARAM)&colourid, 0);
-    }
-    registered = true;
+	for ( i = 0; i < SIZEOF( colourOptionsList); i++ )
+	{
+		_tcsncpy(colourid.group,          colourOptionsList[i].szGroup, SIZEOF(colourid.group));
+		_tcsncpy(colourid.name,           colourOptionsList[i].szDescr, SIZEOF(colourid.group));
+		strncpy(colourid.setting,         colourOptionsList[i].chName,  SIZEOF(colourid.setting));
+		strncpy(colourid.dbSettingsGroup, colourOptionsList[i].chGroup, SIZEOF(colourid.dbSettingsGroup));
+		colourid.defcolour =  colourOptionsList[i].defColour;
+		colourid.order = i + 1;
+		CallService(MS_COLOUR_REGISTERT, (WPARAM)&colourid, 0);
+	}
+	registered = true;
 }
 
 static INT_PTR CALLBACK DlgProcClistListOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -215,24 +214,23 @@ void GetFontSetting(int i,LOGFONT *lf,COLORREF *colour,BYTE *effect, COLORREF *e
 	DBVARIANT dbv={0};
 	char idstr[32];
 
+	int index = 0;
+	for ( index = 0; index < SIZEOF(fontOptionsList); index++ )
+	{
+		if ( fontOptionsList[index].fontID == i )
+			break;
+	}
+	if ( index == SIZEOF(fontOptionsList) )
+		return;
 
-    int index = 0;
-    for ( index = 0; index < SIZEOF(fontOptionsList); index++ )
-    {
-        if ( fontOptionsList[index].fontID == i )
-            break;
-    }
-    if ( index == SIZEOF(fontOptionsList) ) 
-        return;
+	FontIDT fontid = {0};
+	fontid.cbSize = FontID_SIZEOF_V2;
+	_tcsncpy( fontid.group, fontOptionsList[index].szGroup, SIZEOF( fontid.group ) );
+	_tcsncpy( fontid.name, fontOptionsList[index].szDescr, SIZEOF( fontid.name ) );
 
-    FontIDT fontid = {0};
-    fontid.cbSize = FontID_SIZEOF_V2;
-    _tcsncpy( fontid.group, fontOptionsList[index].szGroup, SIZEOF( fontid.group ) );
-    _tcsncpy( fontid.name, fontOptionsList[index].szDescr, SIZEOF( fontid.name ) );
+	COLORREF col = CallService( MS_FONT_GETT, (WPARAM)&fontid, (LPARAM)lf );
 
-    COLORREF col = CallService( MS_FONT_GETT, (WPARAM)&fontid, (LPARAM)lf );
-
-    if ( colour ) *colour = col;
+	if ( colour ) *colour = col;
 
 	if (effect)
 	{
@@ -513,15 +511,16 @@ static INT_PTR CALLBACK DlgProcClistListOpts(HWND hwndDlg, UINT msg, WPARAM wPar
 			TreeView_SetImageList(GetDlgItem(hwndDlg,IDC_GREYOUTOPTS),himlCheckBoxes,TVSIL_NORMAL);
 			TreeView_SetImageList(GetDlgItem(hwndDlg,IDC_HIDEOFFLINEOPTS),himlCheckBoxes,TVSIL_NORMAL);
 		}			
-		{	int i;
-		DWORD exStyle=ModernGetSettingDword(NULL,"CLC","ExStyle",GetDefaultExStyle());
-		for(i=0;i<SIZEOF(checkBoxToStyleEx);i++)
-			CheckDlgButton(hwndDlg,checkBoxToStyleEx[i].id,(exStyle&checkBoxToStyleEx[i].flag)^(checkBoxToStyleEx[i].flag*checkBoxToStyleEx[i].neg)?BST_CHECKED:BST_UNCHECKED);
+		{
+			DWORD exStyle=ModernGetSettingDword(NULL,"CLC","ExStyle",GetDefaultExStyle());
+			for(int i=0;i<SIZEOF(checkBoxToStyleEx);i++)
+				CheckDlgButton(hwndDlg,checkBoxToStyleEx[i].id,(exStyle&checkBoxToStyleEx[i].flag)^(checkBoxToStyleEx[i].flag*checkBoxToStyleEx[i].neg)?BST_CHECKED:BST_UNCHECKED);
 		}
-		{	UDACCEL accel[2]={{0,10},{2,50}};
-		SendDlgItemMessage(hwndDlg,IDC_SMOOTHTIMESPIN,UDM_SETRANGE,0,MAKELONG(999,0));
-		SendDlgItemMessage(hwndDlg,IDC_SMOOTHTIMESPIN,UDM_SETACCEL,SIZEOF(accel),(LPARAM)&accel);
-		SendDlgItemMessage(hwndDlg,IDC_SMOOTHTIMESPIN,UDM_SETPOS,0,MAKELONG(ModernGetSettingWord(NULL,"CLC","ScrollTime",CLCDEFAULT_SCROLLTIME),0));
+		{
+			UDACCEL accel[2]={{0,10},{2,50}};
+			SendDlgItemMessage(hwndDlg,IDC_SMOOTHTIMESPIN,UDM_SETRANGE,0,MAKELONG(999,0));
+			SendDlgItemMessage(hwndDlg,IDC_SMOOTHTIMESPIN,UDM_SETACCEL,SIZEOF(accel),(LPARAM)&accel);
+			SendDlgItemMessage(hwndDlg,IDC_SMOOTHTIMESPIN,UDM_SETPOS,0,MAKELONG(ModernGetSettingWord(NULL,"CLC","ScrollTime",CLCDEFAULT_SCROLLTIME),0));
 		}
 		CheckDlgButton(hwndDlg,IDC_IDLE,ModernGetSettingByte(NULL,"CLC","ShowIdle",CLCDEFAULT_SHOWIDLE)?BST_CHECKED:BST_UNCHECKED);
 
@@ -572,12 +571,12 @@ static INT_PTR CALLBACK DlgProcClistListOpts(HWND hwndDlg, UINT msg, WPARAM wPar
 		switch (((LPNMHDR)lParam)->code)
 		{
 		case PSN_APPLY:
-			{	int i;
-			DWORD exStyle=0;
-			for(i=0;i<SIZEOF(checkBoxToStyleEx);i++)
-				if((IsDlgButtonChecked(hwndDlg,checkBoxToStyleEx[i].id)==0)==checkBoxToStyleEx[i].neg)
-					exStyle|=checkBoxToStyleEx[i].flag;
-			ModernWriteSettingDword(NULL,"CLC","ExStyle",exStyle);
+			{
+				DWORD exStyle=0;
+				for(int i=0;i<SIZEOF(checkBoxToStyleEx);i++)
+					if((IsDlgButtonChecked(hwndDlg,checkBoxToStyleEx[i].id)==0)==checkBoxToStyleEx[i].neg)
+						exStyle|=checkBoxToStyleEx[i].flag;
+				ModernWriteSettingDword(NULL,"CLC","ExStyle",exStyle);
 			}
 			{	DWORD fullGreyoutFlags=MakeCheckBoxTreeFlags(GetDlgItem(hwndDlg,IDC_GREYOUTOPTS));
 			ModernWriteSettingDword(NULL,"CLC","FullGreyoutFlags",fullGreyoutFlags);
