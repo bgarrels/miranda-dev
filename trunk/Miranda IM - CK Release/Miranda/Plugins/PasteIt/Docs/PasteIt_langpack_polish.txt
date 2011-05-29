@@ -8,8 +8,8 @@
 ;------
 [Paste It]
 Wklej To
-[Uploads the text to web page and sends the URL to your friend]
-Umieszcza tekst na stronie www i wysy³a link do twoich przyjació³
+[Uploads the text to web page and sends the URL to your friends.]
+Umieszcza tekst na stronie www i wysy³a link do twoich przyjació³.
 [Paste It - Select file]
 Wklej To - Wybierz plik
 [Paste It HTTP connections]
@@ -44,7 +44,7 @@ B³¹d podczas pobierania klucza u¿ytkownika ze strony www: %s
 
 ;Options and Menus
 ;-------------------
-[Paste from clopboard]
+[Paste from clipboard]
 Wklej ze schowka
 [Paste from file]
 Wklej z pliku

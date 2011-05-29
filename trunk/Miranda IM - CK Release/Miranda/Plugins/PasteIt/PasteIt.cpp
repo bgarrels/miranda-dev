@@ -28,6 +28,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 PLUGINLINK *pluginLink;
 PasteToWeb* pasteToWebs[PasteToWeb::pages];
+std::map<HANDLE, HWND>* contactWindows;
+DWORD gMirandaVersion;
 
 extern HINSTANCE hInst;
 HANDLE hModulesLoaded, hTabsrmmButtonPressed;
@@ -38,6 +40,7 @@ HGENMENU hContactMenu;
 HGENMENU hWebPageMenus[PasteToWeb::pages];
 HANDLE hMainIcon;
 HANDLE hOptionsInit;
+HANDLE hWindowEvent = NULL;
 
 #define MODULE				"PasteIt"
 #define FROM_CLIPBOARD 10
@@ -64,6 +67,7 @@ XML_API xi = {0};
 
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {
+	gMirandaVersion = mirandaVersion;
 	if (mirandaVersion < PLUGIN_MAKE_VERSION(0, 8, 0, 0))
 		return NULL;
 
@@ -125,27 +129,149 @@ void PasteIt(HANDLE hContact, int mode)
 	}
 	else if(hContact != NULL && pasteToWeb->szFileLink[0] != 0)
 	{
-		if(Options::instance->autoSend)
+		char *szProto = (char *)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)hContact, 0);
+		if (szProto && (INT_PTR)szProto != CALLSERVICE_NOTFOUND)
 		{
-			char *szProto = (char *)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)hContact, 0);
-			if (szProto && (INT_PTR)szProto != CALLSERVICE_NOTFOUND)
+			BOOL isChat = DBGetContactSettingByte(hContact, szProto, "ChatRoom", 0); 
+			if(Options::instance->autoSend)
 			{
-				DBEVENTINFO dbei = {0};
-				dbei.cbSize = sizeof(dbei);
-				dbei.eventType = EVENTTYPE_MESSAGE;
-				dbei.flags = DBEF_SENT;
-				dbei.szModule = szProto;
-				dbei.timestamp = (DWORD)time(NULL);
-				dbei.cbBlob = (DWORD)strlen(pasteToWeb->szFileLink) + 1;
-				dbei.pBlob = (PBYTE)pasteToWeb->szFileLink;
-				CallService(MS_DB_EVENT_ADD, (WPARAM)hContact, (LPARAM)&dbei);
-				CallContactService(hContact, PSS_MESSAGE, 0, (LPARAM)pasteToWeb->szFileLink);
+				if(!isChat)
+				{
+					DBEVENTINFO dbei = {0};
+					dbei.cbSize = sizeof(dbei);
+					dbei.eventType = EVENTTYPE_MESSAGE;
+					dbei.flags = DBEF_SENT;
+					dbei.szModule = szProto;
+					dbei.timestamp = (DWORD)time(NULL);
+					dbei.cbBlob = (DWORD)strlen(pasteToWeb->szFileLink) + 1;
+					dbei.pBlob = (PBYTE)pasteToWeb->szFileLink;
+					CallService(MS_DB_EVENT_ADD, (WPARAM)hContact, (LPARAM)&dbei);
+					CallContactService(hContact, PSS_MESSAGE, 0, (LPARAM)pasteToWeb->szFileLink);
+				}
+				else
+				{
+					// PSS_MESSAGE is not compatible with chat rooms
+					// there are no simple method to send text to all users
+					// in chat room. 
+					// First I check if protocol is unicode or ascii.
+					BOOL isUnicodePlugin = TRUE;
+					PROTOACCOUNT* protoAc = ProtoGetAccount(szProto);
+					if(protoAc != NULL)
+					{
+						// protoAc->ppro is abstract class, that contains
+						// methods implemented in protocol ddl`s segment.
+						// Method address in vptr table must be converted
+						// to hInstance of protocol dll.
+						PROTO_INTERFACE* protoInt = protoAc->ppro;
+						MEMORY_BASIC_INFORMATION mb;
+						INT_PTR *vptr = *(INT_PTR**)&protoAc->ppro;  
+						INT_PTR *vtable = (INT_PTR *)*vptr;   
+						if(VirtualQuery((void*)vtable[0], &mb, sizeof(MEMORY_BASIC_INFORMATION)))
+						{
+							typedef PLUGININFO * (__cdecl * Miranda_Plugin_Info) ( DWORD mirandaVersion );
+							typedef PLUGININFOEX * (__cdecl * Miranda_Plugin_InfoEx) ( DWORD mirandaVersion );
+							HINSTANCE hInst = (HINSTANCE)mb.AllocationBase;
+							// Now I can get PLUGININFOEX from protocol
+							Miranda_Plugin_Info info = (Miranda_Plugin_Info) GetProcAddress(hInst, "MirandaPluginInfo");
+							Miranda_Plugin_InfoEx infoEx = (Miranda_Plugin_InfoEx) GetProcAddress(hInst, "MirandaPluginInfoEx");
+							PLUGININFOEX* pi = NULL;
+							if(infoEx != NULL)
+							{
+								pi = infoEx(gMirandaVersion);
+							}
+							else if(info != NULL)
+							{
+								pi = (PLUGININFOEX*)info(gMirandaVersion);
+							}
+
+							// If PLUGININFOEX flags contains UNICODE_AWARE,
+							// this mean that protocol is unicode.
+							if(pi != NULL && pi->cbSize >= sizeof(PLUGININFO))
+							{
+								isUnicodePlugin = pi->flags & UNICODE_AWARE;
+							}
+						}
+					}
+
+					// Next step is to get all protocol sessions and find
+					// one with correct hContact 
+					GC_INFO gci = {0};    
+					GCDEST  gcd = {0};    
+					GCEVENT gce = {0};
+					int cnt = (int)CallService(MS_GC_GETSESSIONCOUNT, 0, (LPARAM)szProto);  
+					for (int i = 0; i < cnt ; i++ ) 
+					{
+						gci.iItem = i;
+						gci.pszModule = szProto;
+						gci.Flags = BYINDEX | HCONTACT | ID;
+						CallService(MS_GC_GETINFO, 0, (LPARAM)(GC_INFO *) &gci);
+						if (gci.hContact == hContact) 
+						{
+							// In this place session was finded, gci.pszID contains
+							// session ID, but it is in unicode or ascii format,
+							// depends on protocol wersion
+							gcd.pszModule = szProto;
+							gcd.iType = GC_EVENT_SENDMESSAGE;
+							gcd.ptszID = gci.pszID;
+							gce.cbSize = sizeof(GCEVENT);                     
+							gce.pDest = &gcd;                 
+							gce.bIsMe = TRUE;             
+							gce.dwFlags = isUnicodePlugin ? (GCEF_ADDTOLOG | GC_UNICODE) : GCEF_ADDTOLOG;  
+							wchar_t* s = NULL;
+							if(isUnicodePlugin)
+							{
+								// If session ID is in unicode, text must be too in unicode
+								s = mir_a2u_cp(pasteToWeb->szFileLink, CP_ACP);
+								gce.ptszText = s;             
+							}
+							else
+							{
+								// If session ID is in ascii, text must be too in ascii
+								gce.pszText = pasteToWeb->szFileLink;            
+							}
+							gce.time = time(NULL);                                            
+							CallService(MS_GC_EVENT, 0, (LPARAM)(GCEVENT *) &gce); 
+							if(s != NULL)
+								mir_free(s);                       
+							break;  
+						}
+					}
+				}
+				
+				// Send message to focus window
 				CallServiceSync(MS_MSG_SENDMESSAGE, (WPARAM)hContact, 0);
 			}
-		}
-		else
-		{
-			CallServiceSync(MS_MSG_SENDMESSAGE, (WPARAM)hContact, (LPARAM)pasteToWeb->szFileLink);
+			else
+			{
+				if(isChat)
+				{
+					// MS_MSG_SENDMESSAGE in incompatible with chat rooms,
+					// because it sends text to IDC_MESSAGE window,
+					// but in chat rooms is only IDC_CHAT_MESSAGE window.
+					// contactWindows map contains all opened hContact
+					// with assaigned to them chat windows. 
+					// This map is prepared in ME_MSG_WINDOWEVENT event. 
+					std::map<HANDLE, HWND>::iterator it = contactWindows->find(hContact);
+					if(it != contactWindows->end())
+					{
+						// it->second is imput window, so now I can send to them 
+						// new text. Afterr all is sended MS_MSG_SENDMESSAGE 
+						// to focus window.
+						SendMessage(it->second, EM_SETSEL, -1, SendMessage(it->second, WM_GETTEXTLENGTH, 0, 0));
+						SendMessageA(it->second, EM_REPLACESEL, FALSE, (LPARAM)pasteToWeb->szFileLink);
+						CallServiceSync(MS_MSG_SENDMESSAGE, (WPARAM)hContact, NULL);
+					}
+					else
+					{
+						// If window do not exist, maybe it is not chat
+						CallServiceSync(MS_MSG_SENDMESSAGE, (WPARAM)hContact, (LPARAM)pasteToWeb->szFileLink);
+					}
+				}
+				else
+				{
+					CallServiceSync(MS_MSG_SENDMESSAGE, (WPARAM)hContact, (LPARAM)pasteToWeb->szFileLink);
+				}
+			}
 		}
 	}
 }
@@ -335,7 +461,7 @@ void InitTabsrmmButton()
 		btn.pszModuleName = MODULE;
 		btn.dwDefPos = 110;
 		btn.hIcon = hMainIcon;
-		btn.bbbFlags = BBBF_ISARROWBUTTON | BBBF_ISIMBUTTON | BBBF_ISLSIDEBUTTON | BBBF_CANBEHIDDEN;
+		btn.bbbFlags = BBBF_ISARROWBUTTON | BBBF_ISIMBUTTON | BBBF_ISLSIDEBUTTON | BBBF_CANBEHIDDEN | BBBF_ISCHATBUTTON;
 		btn.ptszTooltip = TranslateT("Paste It");
 		CallService(MS_BB_ADDBUTTON, 0, (LPARAM)&btn);
 		if(hTabsrmmButtonPressed != NULL)
@@ -370,12 +496,38 @@ void InitUpdater()
 	}
 }
 
+int WindowEvent(WPARAM wParam, MessageWindowEventData* lParam)
+{
+	if(lParam->uType == MSG_WINDOW_EVT_OPEN)
+	{
+		char *szProto = (char *)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)lParam->hContact, 0);
+		if (szProto && (INT_PTR)szProto != CALLSERVICE_NOTFOUND)
+		{
+			if(DBGetContactSettingByte(lParam->hContact, szProto, "ChatRoom", 0))
+			{
+				(*contactWindows)[lParam->hContact] = lParam->hwndInput;
+			}
+		}
+	}
+	else if(lParam->uType == MSG_WINDOW_EVT_CLOSE)
+	{
+		std::map<HANDLE, HWND>::iterator it = contactWindows->find(lParam->hContact);
+		if(it != contactWindows->end())
+		{
+			contactWindows->erase(it);
+		}
+	}
+
+	return 0;
+}
+
 int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 {
 	InitIcolib();
 	InitMenuItems();
 	InitTabsrmmButton();
 	InitUpdater();
+	hWindowEvent = HookEvent(ME_MSG_WINDOWEVENT, (MIRANDAHOOK)WindowEvent);
 
 	return 0;
 }
@@ -404,6 +556,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	hOptionsInit = HookEvent(ME_OPT_INITIALISE, Options::InitOptions);
 	hTabsrmmButtonPressed = NULL;
 	hServiceContactMenu = CreateServiceFunction(MS_PASTEIT_CONTACTMENU, ContactMenuService);
+	contactWindows = new std::map<HANDLE, HWND>();
 	return 0;
 }
 
@@ -412,6 +565,10 @@ extern "C" int __declspec(dllexport) Unload(void)
 	UnhookEvent(hModulesLoaded);
 	UnhookEvent(hPrebuildContactMenu);
 	UnhookEvent(hOptionsInit);
+	if(hWindowEvent != NULL)
+	{
+		UnhookEvent(hWindowEvent);
+	}
 	DestroyServiceFunction(hServiceContactMenu);
 	Netlib_CloseHandle(g_hNetlibUser);
 	if(hTabsrmmButtonPressed != NULL)
@@ -431,5 +588,7 @@ extern "C" int __declspec(dllexport) Unload(void)
 		delete Options::instance;
 		Options::instance = NULL;
 	}
+
+	delete contactWindows;
 	return 0;
 }

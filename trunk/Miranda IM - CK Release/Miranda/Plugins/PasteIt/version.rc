@@ -19,11 +19,15 @@ BEGIN
     BEGIN
         BLOCK "000004b0"
         BEGIN
+            VALUE "Author", "Krzysztof Kral"
+			VALUE "CompanyName", "Krzysztof Kral"
             VALUE "FileDescription", __DESCRIPTION
-            VALUE "InternalName", __PLUGIN_NAME
+            VALUE "FileVersion", __VERSION_STRING
+            VALUE "InternalName", __INTERNAL_NAME
             VALUE "LegalCopyright", __COPYRIGHT
-            VALUE "OriginalFilename", __FILENAME
+			VALUE "OriginalFilename", __FILENAME
             VALUE "ProductName", __PLUGIN_NAME
+            VALUE "ProductVersion", __VERSION_STRING
         END
     END
     BLOCK "VarFileInfo"
