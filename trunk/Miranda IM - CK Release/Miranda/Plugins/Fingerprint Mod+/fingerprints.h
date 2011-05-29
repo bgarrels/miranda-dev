@@ -107,7 +107,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 
 	{ "client_AgileMessenger",			_T("*Agile Messenger*"),						_T("Agile Messenger"),					_T("ClientIcons_Multiprotocols"),	IDI_AGILE, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_Prelude",					_T("Prelude*"),									_T("Prelude"),							_T("ClientIcons_Multiprotocols"),	IDI_PRELUDE, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
-	{ "client_IMPlus",					_T("|IM+*|IMPLUS*"),							_T("IM+"),								_T("ClientIcons_Multiprotocols"),	IDI_IMPLUS, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
+	{ "client_IMPlus",					_T("|IM+*|IMPLUS*|IM *"),						_T("IM+"),								_T("ClientIcons_Multiprotocols"),	IDI_IMPLUS, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_uIM",						_T("uIM*"),										_T("uIM"),								_T("ClientIcons_Multiprotocols"),	IDI_UIM, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_Inlux",					_T("*Inlux*"),									_T("Inlux Messenger"),					_T("ClientIcons_Multiprotocols"),	IDI_INLUX, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_Qnext",					_T("QNext*"),									_T("Qnext"),							_T("ClientIcons_Multiprotocols"),	IDI_QNEXT, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
