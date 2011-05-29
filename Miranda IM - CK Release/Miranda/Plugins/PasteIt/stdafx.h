@@ -39,5 +39,5 @@
 #include <m_chat.h>
 #include <m_protoint.h>
 
-#include "sdk/m_msg_buttonsbar.h"
-#include "sdk/m_updater.h"
+#include "m_msg_buttonsbar.h"
+#include "m_updater.h"
