@@ -4,7 +4,7 @@
 ;Main
 ;------
 [Paste It]
-[Uploads the text to web page and sends the URL to your friend]
+[Uploads the text to web page and sends the URL to your friends.]
 [All Files (*.*)]
 [Paste It - Select file]
 [Paste It HTTP connections]
@@ -52,7 +52,7 @@
 
 ;Options and Menus
 ;-------------------
-[Paste from clopboard]
+[Paste from clipboard]
 [Paste from file]
 [Default web page]
 [Services]

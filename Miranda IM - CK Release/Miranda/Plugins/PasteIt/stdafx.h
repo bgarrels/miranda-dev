@@ -36,6 +36,8 @@
 #include <m_icolib.h>
 #include <m_options.h>
 #include <m_database.h>
+#include <m_chat.h>
+#include <m_protoint.h>
 
 #include "sdk/m_msg_buttonsbar.h"
-#include "m_updater.h"
+#include "sdk/m_updater.h"

@@ -278,6 +278,21 @@ void PasteToWeb::FromClipboard()
 		{
 			LPCWSTR wStr = (LPCWSTR)obj; 
 			str.append(wStr, wStr + wcslen(wStr));
+			// Sometimes clipboard CF_UNICODETEXT format returns only 2 characters,
+			// to fix this I check if CF_TEXT contains more characters,
+			// if this is true, this mean that CF_UNICODETEXT is invalid.
+			obj = GetClipboardData(CF_TEXT);
+			if(obj != NULL)
+			{
+				LPCSTR cStr = (LPCSTR)obj; 
+				if(strlen(cStr) > str.length())
+				{
+					str = L"";
+					LPWSTR wStr = mir_a2u_cp(cStr, CP_ACP);
+					str.append(wStr, wStr + wcslen(wStr));
+					mir_free(wStr);
+				}
+			}
 		}
 		else 
 		{
@@ -285,7 +300,7 @@ void PasteToWeb::FromClipboard()
 			if(obj != NULL)
 			{
 				LPCSTR cStr = (LPCSTR)obj; 
-				LPWSTR wStr = mir_a2u(cStr);
+				LPWSTR wStr = mir_a2u_cp(cStr, CP_ACP);
 				str.append(wStr, wStr + wcslen(wStr));
 				mir_free(wStr);
 			}
