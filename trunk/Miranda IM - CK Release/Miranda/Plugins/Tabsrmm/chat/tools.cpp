@@ -30,7 +30,7 @@
  *
  * (C) 2005-2009 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: tools.cpp 13643 2011-05-27 12:32:40Z george.hazan $
+ * $Id: tools.cpp 13650 2011-05-30 11:53:13Z silvercircle@gmail.com $
  *
  * Helper functions for the group chat module.
  *
@@ -469,10 +469,8 @@ void TSAPI DoFlashAndSoundWorker(FLASH_PARAMS* p)
 					if (dat->iFlashIcon != hIcons[ICON_HIGHLIGHT] && dat->iFlashIcon != hIcons[ICON_MESSAGE])
 						dat->iFlashIcon = p->hNotifyIcon;
 				}
-				if (p->bMustFlash) {
-					SetTimer(si->hWnd, TIMERID_FLASHWND, TIMEOUT_FLASHWND, NULL);
-					dat->mayFlashTab = TRUE;
-				}
+				dat->mayFlashTab = TRUE;
+				SetTimer(si->hWnd, TIMERID_FLASHWND, TIMEOUT_FLASHWND, NULL);
 			}
 		}
 		if(dat->pWnd) {
