@@ -1,20 +1,25 @@
 /* 
-Copyright (C) 2005-2009 Ricardo Pescuma Domenecci
+ListeningTo plugin for Miranda IM
+==========================================================================
+Copyright	(C) 2005-2011 Ricardo Pescuma Domenecci
+			(C) 2010-2011 Merlin_de
+==========================================================================
 
-This is free software; you can redistribute it and/or
-modify it under the terms of the GNU Library General Public
-License as published by the Free Software Foundation; either
-version 2 of the License, or (at your option) any later version.
+in case you accept the pre-condition,
+this is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
 This is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Library General Public License for more details.
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
 
-You should have received a copy of the GNU Library General Public
-License along with this file; see the file license.txt.  If
-not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-Boston, MA 02111-1307, USA.  
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the
+Free Software Foundation, Inc.,
+59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 
@@ -30,17 +35,17 @@ int
 m_log(const TCHAR *function, const TCHAR *fmt, ...)
 {
 #if 0
-    va_list va;
-    TCHAR text[1024];
+	va_list va;
+	TCHAR text[1024];
 	size_t len;
 
 	mir_sntprintf(text, MAX_REGS(text) - 10, _T("[%08u - %08u] [%s] "), 
 				 GetCurrentThreadId(), GetTickCount(), function);
 	len = lstrlen(text);
 
-    va_start(va, fmt);
-    mir_vsntprintf(&text[len], MAX_REGS(text) - len, fmt, va);
-    va_end(va);
+	va_start(va, fmt);
+	mir_vsntprintf(&text[len], MAX_REGS(text) - len, fmt, va);
+	va_end(va);
 
 	BOOL writeBOM = (GetFileAttributes(_T("c:\\miranda_listeningto.log.txt")) == INVALID_FILE_ATTRIBUTES);
 

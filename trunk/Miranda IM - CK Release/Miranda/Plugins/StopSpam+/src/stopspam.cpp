@@ -30,7 +30,7 @@ HINSTANCE hInst;
 
 _inline unsigned int MakeVer(int a,int b,int c,int d)
 {
-    return PLUGIN_MAKE_VERSION(a,b,c,d);
+	return PLUGIN_MAKE_VERSION(a,b,c,d);
 }
 
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
@@ -73,7 +73,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	HookEvent(ME_SYSTEM_MODULESLOADED, OnSystemModulesLoaded);
 
 	// Add deliting temporary contacts
-	hTempRemove = CreateServiceFunction(pluginName"/RemoveTempContacts", RemoveTempContacts);
+	hTempRemove = CreateServiceFunction(MS_STOPSPAM_REMTEMPCONTACTS, RemoveTempContacts);
 	ZeroMemory(&mi, sizeof(mi));
 	mi.cbSize = sizeof(mi);
 	mi.position = -0x7FFFFFFF;

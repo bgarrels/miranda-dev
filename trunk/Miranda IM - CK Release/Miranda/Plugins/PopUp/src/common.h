@@ -137,7 +137,8 @@ inline INT_PTR DBGetContactSettingStringX(HANDLE hContact, const char *ModuleNam
 		default:
 			break;
 	}
-	CallService(MS_DB_CONTACT_FREEVARIANT, 0, (LPARAM)&dbv);
+	if(!result)
+		CallService(MS_DB_CONTACT_FREEVARIANT, 0, (LPARAM)&dbv);
 	return ret;
 }
 

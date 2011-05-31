@@ -63,10 +63,10 @@
     <ClInclude Include="players\winamp.h">
       <Filter>Players</Filter>
     </ClInclude>
-    <ClInclude Include="..\Utils\Pescuma\mir_buffer.h">
+    <ClInclude Include="..\Utils\Pescuma\mir_icons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Utils\Pescuma\mir_icons.h">
+    <ClInclude Include="..\Utils\Pescuma\mir_buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Utils\Pescuma\mir_memory.h">
@@ -141,10 +141,10 @@
     <ClCompile Include="players\winamp.cpp">
       <Filter>Players</Filter>
     </ClCompile>
-    <ClCompile Include="..\Utils\Pescuma\mir_icons.cpp">
+    <ClCompile Include="..\Utils\Pescuma\mir_options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Utils\Pescuma\mir_options.cpp">
+    <ClCompile Include="..\Utils\Pescuma\mir_icons.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

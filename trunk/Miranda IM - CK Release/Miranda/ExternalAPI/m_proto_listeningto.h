@@ -43,7 +43,7 @@ typedef struct {
 		TCHAR* ptszArtist;
 	};
 	union {
-		char* pszAlbum;			// Algum name
+		char* pszAlbum;			// Album name
 		TCHAR* ptszAlbum;
 	};
 	union {
@@ -140,5 +140,4 @@ typedef struct {
 
 
 #endif  // M_PROTO_LISTENINGTO_H__
-
 

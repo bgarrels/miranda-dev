@@ -86,7 +86,7 @@ int DBSettingChanged(WPARAM wParam,LPARAM lParam)
 		{
 			if ((hContact == info->hContact) && !mir_strcmp(info->module, cws->szModule))
 			{
-				setting = mir_tstrdup(cws->szSetting);
+				setting = mir_strdup(cws->szSetting);
 				if (cws->value.type == DBVT_DELETED)
 				{
 					LVFINDINFO lvfi;

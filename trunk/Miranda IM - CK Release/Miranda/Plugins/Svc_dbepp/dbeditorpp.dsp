@@ -44,7 +44,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "DBEDITORPP_EXPORTS" /YX /FD /c
-# ADD CPP /nologo /MD /W3 /GX /O1 /I "../../include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "DBEDITORPP_EXPORTS" /FR /YX /FD /c
+# ADD CPP /nologo /MD /W3 /GX- /O1 /I "../../include" /I "../ExternalAPI" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "DBEDITORPP_EXPORTS" /FR /Yu"headers.h" /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x409 /d "NDEBUG"
@@ -54,7 +54,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /machine:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /machine:I386 /out:"../../bin/release/plugins/dbeditorpp.dll"
+# ADD LINK32 gdi32.lib winspool.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib comdlg32.lib advapi32.lib shell32.lib shlwapi.lib comctl32.lib /nologo /dll /machine:I386 /out:"../../bin/release/plugins/svc_dbepp.dll"
 
 !ELSEIF  "$(CFG)" == "dbeditorpp - Win32 Debug"
 
@@ -70,7 +70,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "DBEDITORPP_EXPORTS" /YX /FD /GZ /c
-# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /I "../../include" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "DBEDITORPP_EXPORTS" /YX /FD /GZ /c
+# ADD CPP /nologo /MDd /W3 /Gm /GX- /ZI /Od /I "../../include" /I "../ExternalAPI" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "DBEDITORPP_EXPORTS" /Yu"headers.h" /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x409 /d "_DEBUG"
@@ -80,7 +80,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /debug /machine:I386 /out:"../../bin/debug/plugins/dbeditorpp.dll" /pdbtype:sept
+# ADD LINK32 gdi32.lib winspool.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib comdlg32.lib advapi32.lib shell32.lib shlwapi.lib comctl32.lib /nologo /dll /debug /machine:I386 /out:"../../bin/debug/plugins/svc_dbepp.dll" /pdbtype:sept
 
 !ELSEIF  "$(CFG)" == "dbeditorpp - Win32 Release Unicode"
 
@@ -92,12 +92,12 @@ LINK32=link.exe
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "Release Unicode"
-# PROP Intermediate_Dir "Release Unicode"
+# PROP Output_Dir ".\Release_Unicode"
+# PROP Intermediate_Dir ".\Release_Unicode"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MD /W3 /GX /O1 /I "../../include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "DBEDITORPP_EXPORTS" /FR /YX /FD /c
-# ADD CPP /nologo /MD /W3 /GX /Ox /Ot /Og /Os /I "../../include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_UNICODE" /D "UNICODE" /D "_USRDLL" /D "DBEDITORPP_EXPORTS" /FR /YX /FD /c
+# ADD CPP /nologo /MD /W3 /GX- /Ox /Ot /Og /Os /I "../../include" /I "../ExternalAPI" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "DBEDITORPP_EXPORTS" /FR /Yu"headers.h" /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x409 /d "NDEBUG"
@@ -107,7 +107,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /machine:I386 /out:"../../bin/release/plugins/dbeditorpp.dll"
-# ADD LINK32 kernel32.lib user32.lib comdlg32.lib advapi32.lib shell32.lib /nologo /dll /machine:I386 /out:"../../bin/release unicode/plugins/svc_dbepp.dll"
+# ADD LINK32 kernel32.lib user32.lib comdlg32.lib advapi32.lib shell32.lib shlwapi.lib comctl32.lib /nologo /dll /debug /machine:I386 /out:"../../bin/release unicode/plugins/svc_dbepp.dll"
 
 !ENDIF 
 
@@ -124,7 +124,7 @@ LINK32=link.exe
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\modsettingenum.c
+SOURCE=.\modsettingenum.cpp
 # End Source File
 # Begin Source File
 
@@ -136,64 +136,65 @@ SOURCE=.\modsettingenum.h
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\addeditsettingsdlg.c
+SOURCE=.\addeditsettingsdlg.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\copymodule.c
+SOURCE=.\copymodule.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\deletemodule.c
+SOURCE=.\deletemodule.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\findwindow.c
+SOURCE=.\findwindow.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\main_window.c
+SOURCE=.\main_window.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\moduletree.c
+SOURCE=.\moduletree.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\options.c
+SOURCE=.\options.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\settinglist.c
+SOURCE=.\settinglist.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\watchedvars.c
+SOURCE=.\watchedvars.cpp
 # End Source File
 # End Group
 # Begin Source File
 
-SOURCE=.\exportimport.c
+SOURCE=.\exportimport.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\icons.c
+SOURCE=.\icons.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\knownmodules.c
+SOURCE=.\knownmodules.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\main.c
+SOURCE=.\main.cpp
+# ADD CPP /Yc"headers.h"
 # End Source File
 # Begin Source File
 
-SOURCE=.\modules.c
+SOURCE=.\modules.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\threads.c
+SOURCE=.\threads.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"

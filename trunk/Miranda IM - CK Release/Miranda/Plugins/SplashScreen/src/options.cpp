@@ -438,7 +438,7 @@ int OptInit(WPARAM wParam, LPARAM lParam)
 	odp.cbSize = sizeof(odp);
 	odp.position = 0;
 	odp.hInstance = hInst;
-	odp.ptszGroup = _T("Customize");
+	odp.ptszGroup = _T("Skins");
 	odp.pszTemplate = MAKEINTRESOURCEA(IDD_SPLASH_OPT);
 	odp.ptszTitle = _T("Splash Screen");
 	odp.pfnDlgProc = DlgProcOptions;
