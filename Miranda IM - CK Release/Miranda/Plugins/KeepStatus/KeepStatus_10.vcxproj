@@ -184,6 +184,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CompileAsManaged>false</CompileAsManaged>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
+      <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
       <OptimizeReferences>true</OptimizeReferences>

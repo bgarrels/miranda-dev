@@ -1,20 +1,25 @@
 /* 
-Copyright (C) 2005-2009 Ricardo Pescuma Domenecci
+ListeningTo plugin for Miranda IM
+==========================================================================
+Copyright	(C) 2005-2011 Ricardo Pescuma Domenecci
+			(C) 2010-2011 Merlin_de
+==========================================================================
 
-This is free software; you can redistribute it and/or
-modify it under the terms of the GNU Library General Public
-License as published by the Free Software Foundation; either
-version 2 of the License, or (at your option) any later version.
+in case you accept the pre-condition,
+this is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
 This is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Library General Public License for more details.
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
 
-You should have received a copy of the GNU Library General Public
-License along with this file; see the file license.txt.  If
-not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-Boston, MA 02111-1307, USA.  
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the
+Free Software Foundation, Inc.,
+59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #pragma once
@@ -43,8 +48,9 @@ protected:
 	CRITICAL_SECTION	cs;
 	HWND	m_hwnd;
 
-	void NotifyInfoChanged(int ID = -1);
-	virtual HRESULT ObjGet(CLSID clsid, REFIID riid, void** pDispatch);
+	void	NotifyInfoChanged(int ID = -1);
+	virtual HRESULT ObjGet(REFCLSID rclsid, REFIID riid, void** pDispatch);
+	void	EVT_Unhook(HANDLE *h){if(*h) {UnhookEvent(*h); *h = NULL;}}
 
 private:
 
@@ -77,7 +83,6 @@ class ExternalPlayer : public Player
 protected:
 	TCHAR **m_window_classes;
 	int		m_window_classes_num;
-//	BOOL found_window;
 
 	virtual HWND FindWindow();
 

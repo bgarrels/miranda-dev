@@ -2,21 +2,21 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{ce2047fb-8c28-4b9b-af6a-65041edcc749}</UniqueIdentifier>
+      <UniqueIdentifier>{bc4414ca-bfab-4385-a016-6239272b67ab}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Source Files\ModSetting Enuming">
-      <UniqueIdentifier>{2f7092ac-7a73-49e0-babd-9cc14180241b}</UniqueIdentifier>
+      <UniqueIdentifier>{8ba4deb9-307a-4c99-9c87-2243a0ef802e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\dialogs">
-      <UniqueIdentifier>{0ede89c5-794c-4843-b883-0fc6b937a7d3}</UniqueIdentifier>
+      <UniqueIdentifier>{b1b3b1b6-9fe0-435d-b8ab-1715cc5e7430}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{95b16514-8040-442c-bf97-f33b6b7d8d4c}</UniqueIdentifier>
+      <UniqueIdentifier>{adcc58df-dacb-48fe-a36b-59f8221cb71e}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{dc1f1af3-3605-492d-b153-d7ed1482eb6f}</UniqueIdentifier>
+      <UniqueIdentifier>{fb09bf3d-d973-466d-b87b-0b785885753b}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
   </ItemGroup>
@@ -77,16 +77,13 @@
     <ClInclude Include="headers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IcoLib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="icons.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_svc_dbepp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -133,22 +130,22 @@
     <None Include="res\Red_open.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Res\unicode.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\Yellow.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\Yellow_open.ico">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Res\unicode.ico">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="res\dbepp.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\usermenu.ico">
+    <None Include="res\handle.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\handle.ico">
+    <None Include="res\usermenu.ico">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -157,7 +154,7 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
     <ResourceCompile Include="Version.rc">
-      <Filter>Resource Files</Filter>
+      <Filter>Source Files</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>
