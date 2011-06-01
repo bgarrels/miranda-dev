@@ -135,7 +135,7 @@ function StrPosW(const aStr, aSubStr: PWideChar): PWideChar;
 function StrIndex (const aStr, aSubStr: PAnsiChar):integer;
 function StrIndexW(const aStr, aSubStr: PWideChar):integer;
 
-//procedure FillWord(var buf;count:cardinal;value:word); register;
+procedure FillWord(var buf;count:cardinal;value:word); register;
 function CompareMem(P1, P2: Pointer; Length: Integer): Boolean;
 function Min(a,b:integer):integer;
 function Max(a,b:integer):integer;
@@ -752,11 +752,19 @@ procedure FillWord(var buf;count:cardinal;value:word); register; assembler;
 }
 asm
   push edi
+  mov  edi,buf // destination
+  mov  ax,value   // value
+  mov  ecx,count // count
+  rep  stosw
+  pop  edi
+{
+  push edi
   mov  edi,eax // destination
   mov  ax,cx   // value
   mov  ecx,edx // count
   rep  stosw
   pop  edi
+}
 end;
 
 // from SysUtils
@@ -1457,15 +1465,17 @@ end;
 function StrCatE(Dest: PAnsiChar; const Source: PAnsiChar): PAnsiChar;
 begin
   if dest<>nil then
-    StrCopyE(StrEnd(Dest), Source);
-  Result := Dest;
+    result:=StrCopyE(StrEnd(Dest), Source)
+  else
+    result:=nil;
 end;
 
 function StrCatEW(Dest: PWideChar; const Source: PWideChar): PWideChar;
 begin
   if dest<>nil then
-    StrCopyEW(StrEndW(Dest), Source);
-  Result := Dest;
+    result:=StrCopyEW(StrEndW(Dest), Source)
+  else
+    result:=nil;
 end;
 
 function StrPos(const aStr, aSubStr: PAnsiChar): PAnsiChar;
