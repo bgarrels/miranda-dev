@@ -88,7 +88,7 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 	def_avatar_folder_ = std::string(profile)+"\\"+m_szModuleName;
 	mir_free(profile);
 	hAvatarFolder_ = FoldersRegisterCustomPath(m_szModuleName,"Avatars",
-	    def_avatar_folder_.c_str());
+		def_avatar_folder_.c_str());
 
 	// Set all contacts offline -- in case we crashed
 	SetAllContactStatuses( ID_STATUS_OFFLINE );
@@ -339,7 +339,7 @@ int FacebookProto::OnEvent(PROTOEVENTTYPE event,WPARAM wParam,LPARAM lParam)
 		return OnOptionsInit  (wParam,lParam);
 
 	case EV_PROTO_ONCONTACTDELETED:
- 		return OnContactDeleted(wParam,lParam);
+		return OnContactDeleted(wParam,lParam);
 	}
 
 	return 1;
