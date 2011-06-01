@@ -58,15 +58,15 @@ std::string utils::conversion::to_string( void* data, WORD type )
 
 	switch ( type )
 	{
-  	case UTILS_CONV_BOOLEAN:
+	case UTILS_CONV_BOOLEAN:
 		out << (*( bool* )data) ? "true" : "false";
 
-    case UTILS_CONV_TIME_T:
+	case UTILS_CONV_TIME_T:
 		out << (*( time_t* )data);
 		break;
 
 	case UTILS_CONV_SIGNED_NUMBER:
-  		out << (*( signed int* )data);
+		out << (*( signed int* )data);
 		break;
 
 	case UTILS_CONV_UNSIGNED_NUMBER:

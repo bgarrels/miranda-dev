@@ -93,9 +93,9 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 			const String& imageUrl = objMember["thumbSrc"];
 
 			current->real_name = utils::text::slashu_to_utf8(
-			    utils::text::special_expressions_decode( realName.Value( ) ) );
+				utils::text::special_expressions_decode( realName.Value( ) ) );
 			current->image_url = utils::text::slashu_to_utf8(
-			    utils::text::special_expressions_decode( imageUrl.Value( ) ) );
+				utils::text::special_expressions_decode( imageUrl.Value( ) ) );
 		}
 	}
 	catch (Reader::ParseException& e)
@@ -144,13 +144,13 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				
 				const Object& messageContent = objMember["msg"];
 				const String& text = messageContent["text"];
-        
+		
 				const Number& time_sent = messageContent["time"];
 				if (time_sent.Value() > proto->facy.last_message_time_) // Check agains duplicit messages
 				{
 					proto->facy.last_message_time_ = time_sent.Value();
 
-  					facebook_message* message = new facebook_message( );
+					facebook_message* message = new facebook_message( );
 					message->message_text= utils::text::special_expressions_decode(
 						utils::text::slashu_to_utf8( text.Value( ) ) );
 					message->time = ::time( NULL );
@@ -165,7 +165,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 					continue;
 
 				proto->facy.last_grpmessage_time_ = ::time(NULL);
-        
+		
 				const String& from_name = objMember["from_name"];
 				const String& group_name = objMember["to_name"];
 
@@ -181,7 +181,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				if (was_id == proto->facy.self_.user_id) continue;
 
 				const Object& messageContent = objMember["msg"];
-  				const String& text = messageContent["text"];
+				const String& text = messageContent["text"];
 
 				std::string popup_text = utils::text::remove_html(
 					utils::text::special_expressions_decode(
@@ -201,7 +201,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				url += group_id;
 
 				proto->Log("      Got groupchat message");
-		    
+			
 				TCHAR* szTitle = mir_a2t_cp(title.c_str(), CP_UTF8);
 				TCHAR* szText = mir_a2t_cp(popup_text.c_str(), CP_UTF8);
 				TCHAR* szUrl = mir_a2t_cp(url.c_str(), CP_UTF8);
@@ -223,10 +223,10 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 
 					facebook_notification* notification = new facebook_notification( );
 					notification->text = utils::text::remove_html(
-  						utils::text::special_expressions_decode(
+						utils::text::special_expressions_decode(
 							utils::text::slashu_to_utf8( text.Value( ) ) ) );
 
-  					notification->link = utils::text::special_expressions_decode( link.Value( ) );
+					notification->link = utils::text::special_expressions_decode( link.Value( ) );
 
 					notifications->push_back( notification );
 				}

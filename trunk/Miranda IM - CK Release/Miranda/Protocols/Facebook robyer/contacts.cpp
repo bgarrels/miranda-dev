@@ -46,8 +46,8 @@ bool FacebookProto::IsMyContact(HANDLE hContact, bool include_chat)
 HANDLE FacebookProto::ContactIDToHContact(std::string user_id)
 {
 	for(HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST,0,0);
-	    hContact;
-	    hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT,(WPARAM)hContact,0) )
+		hContact;
+		hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT,(WPARAM)hContact,0) )
 	{
 		if(!IsMyContact(hContact))
 			continue;
@@ -82,7 +82,7 @@ HANDLE FacebookProto::AddToContactList(facebook_user* fbu)
 		if( CallService(MS_PROTO_ADDTOCONTACT,(WPARAM)hContact,(LPARAM)m_szModuleName) == 0 )
 		{
 			DBWriteContactSettingString(hContact,m_szModuleName,FACEBOOK_KEY_ID,fbu->user_id.c_str());
-      
+	  
 			std::string homepage = FACEBOOK_URL_PROFILE;
 			homepage += fbu->user_id;
 			DBWriteContactSettingString(hContact,m_szModuleName,"Homepage",homepage.c_str());
@@ -113,8 +113,8 @@ bool FacebookProto::ContactNeedsUpdate(facebook_user* fbu)
 void FacebookProto::SetAllContactStatuses(int status)
 {
 	for (HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST,0,0);
-	    hContact;
-	    hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT,(WPARAM)hContact,0))
+		hContact;
+		hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT,(WPARAM)hContact,0))
 	{
 		if (!IsMyContact(hContact))
 			continue;
@@ -227,7 +227,7 @@ exit:
 void FacebookProto::GetAwayMsgWorker(void *hContact)
 {
 /*	if(hContact == 0)
-    return;
+	return;
 
 	DBVARIANT dbv;
 	if( !DBGetContactSettingString(hContact,"CList","StatusMsg",&dbv) )

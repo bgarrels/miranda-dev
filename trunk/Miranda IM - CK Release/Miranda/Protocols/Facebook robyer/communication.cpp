@@ -103,7 +103,7 @@ http::response facebook_client::flap( const int request_type, std::string* reque
 		parent->Log("!!!!! No response from server (time-out)");
 		resp.code = HTTP_CODE_FAKE_DISCONNECTED;
 		// Better to have something set explicitely as this value
-	    // is compaired in all communication requests
+		// is compaired in all communication requests
 	}
 
 	return resp;
@@ -119,12 +119,12 @@ bool facebook_client::validate_response( http::response* resp )
 
 	std::string::size_type pos = resp->data.find( "\"error\":" );
 	if ( pos != std::string::npos )
-    try
-  	{
+	try
+	{
 		pos += 8;
-	    int error_num = atoi( resp->data.substr( pos, resp->data.find( ",", pos ) - pos ).c_str() );
-	    if ( error_num != 0 )
-	    {
+		int error_num = atoi( resp->data.substr( pos, resp->data.find( ",", pos ) - pos ).c_str() );
+		if ( error_num != 0 )
+		{
 			std::string error = "";
 			pos = resp->data.find( "\"errorDescription\":\"", pos );
 			if (pos != std::string::npos ) {
@@ -136,17 +136,17 @@ bool facebook_client::validate_response( http::response* resp )
 
 			}
 
-		    resp->error_number = error_num;
-		    resp->error_text = error;
-		    parent->Log(" ! !  Received Facebook error: %d -- %s", error_num, error.c_str());
+			resp->error_number = error_num;
+			resp->error_text = error;
+			parent->Log(" ! !  Received Facebook error: %d -- %s", error_num, error.c_str());
 			// client_notify( ... );
-		    resp->code = HTTP_CODE_FAKE_ERROR;
-		    return false;
-	    }
-    } catch (const std::exception &e) {
-	    parent->Log(" @ @  validate_response: Exception: %s",e.what());
+			resp->code = HTTP_CODE_FAKE_ERROR;
+			return false;
+		}
+	} catch (const std::exception &e) {
+		parent->Log(" @ @  validate_response: Exception: %s",e.what());
 		return false;
-    }
+	}
 
 	return true;
 }
@@ -840,35 +840,35 @@ bool facebook_client::home( )
 				}
 			}
 
-      // RM TODO: if enabled groupchats support
-      // Get group chats
+	  // RM TODO: if enabled groupchats support
+	  // Get group chats
 /*      std::string chat_ids = utils::text::source_get_value( &resp.data, 2, "HomeNavController.initGroupCounts([","]" );
 			if ( chat_ids.length() )
-      {
-        // RM TODO:
-        // split by comma to ids, find names in source, inicialize groups in contactlist
-        // maybe check which groupchats user wants
-        // add to list? start worker for parse and add contacts to groupchat
+	  {
+		// RM TODO:
+		// split by comma to ids, find names in source, inicialize groups in contactlist
+		// maybe check which groupchats user wants
+		// add to list? start worker for parse and add contacts to groupchat
 
-        // add "," to end for better parsing
-        chat_ids += ",";
-        std::string::size_type oldpos = 0, pos = 0;
-        
-        while ( ( pos = chat_ids.find(",", oldpos) ) != std::string::npos )
-	      {
-          std::string id = chat_ids.substr(oldpos, pos-oldpos);
-          std::string name = utils::text::trim(
-            utils::text::special_expressions_decode(
-              utils::text::remove_html( 
-                utils::text::edit_html(
-                  utils::text::source_get_value( &resp.data, 5, "HomeNavController.initGroupCounts", "home.php?sk=group_", id.c_str(), "input title=\\\"", "\\\" " ) ) ) ) );
+		// add "," to end for better parsing
+		chat_ids += ",";
+		std::string::size_type oldpos = 0, pos = 0;
+		
+		while ( ( pos = chat_ids.find(",", oldpos) ) != std::string::npos )
+		  {
+		  std::string id = chat_ids.substr(oldpos, pos-oldpos);
+		  std::string name = utils::text::trim(
+			utils::text::special_expressions_decode(
+			  utils::text::remove_html( 
+				utils::text::edit_html(
+				  utils::text::source_get_value( &resp.data, 5, "HomeNavController.initGroupCounts", "home.php?sk=group_", id.c_str(), "input title=\\\"", "\\\" " ) ) ) ) );
 
-          parent->Log("      Got groupchat id: %s, name: %s", id.c_str(), name.c_str());
-		      oldpos = pos+1;
+		  parent->Log("      Got groupchat id: %s, name: %s", id.c_str(), name.c_str());
+			  oldpos = pos+1;
 
-          parent->AddChat(id.c_str(), name.c_str());
-	      }        
-      }*/
+		  parent->AddChat(id.c_str(), name.c_str());
+		  }        
+	  }*/
 
 			// Set first touch flag
 			this->chat_first_touch_ = true;
@@ -930,7 +930,7 @@ bool facebook_client::reconnect( )
 
 		this->chat_sequence_num_ = utils::text::source_get_value( &resp.data, 2, "\"seq\":", "," );
 		parent->Log("      Got self sequence number: %s", this->chat_sequence_num_.c_str());
-  		
+		
 		return handle_success( "reconnect" );
 	}
 	 
@@ -1001,7 +1001,7 @@ bool facebook_client::feeds( )
 			if (resp.data.substr( pos + 13, 1 ) != "0")
 			{
 				std::string* response_data = new std::string( resp.data );
-			    ForkThread( &FacebookProto::ProcessFeeds, this->parent, ( void* )response_data );
+				ForkThread( &FacebookProto::ProcessFeeds, this->parent, ( void* )response_data );
 			}
 		}
 		return handle_success( "feeds" );
@@ -1036,7 +1036,7 @@ bool facebook_client::channel( )
 		// Something went wrong (server flooding?)
 
 		parent->Log("___need fullreload___");
-    
+	
 		this->chat_sequence_num_ = utils::text::source_get_value( &resp.data, 2, "\"seq\":", "," );
 		parent->Log("      Got self sequence number: %s", this->chat_sequence_num_.c_str());
 
@@ -1051,7 +1051,7 @@ bool facebook_client::channel( )
 	{
 		// Something went wrong (server flooding?)
 		parent->Log("___need refresh___");
-    
+	
 		this->chat_reconnect_reason_ = utils::text::source_get_value( &resp.data, 2, "\"reason\":", "}" );
 		parent->Log("      Reconnect reason: %s", this->chat_reconnect_reason_.c_str());
 
@@ -1110,38 +1110,38 @@ bool facebook_client::send_message( std::string message_recipient, std::string m
 
 	switch ( resp.error_number )
 	{
-  	case 0: // Everything is OK
+	case 0: // Everything is OK
 		break;
 
-    //case 1356002: // You are offline - wtf??
+	//case 1356002: // You are offline - wtf??
 
 	case 1356003: // Contact is offline
 	{
 		HANDLE hContact = parent->ContactIDToHContact( message_recipient );
-  		DBWriteContactSettingWord(hContact,parent->m_szModuleName,"Status",ID_STATUS_OFFLINE);
+		DBWriteContactSettingWord(hContact,parent->m_szModuleName,"Status",ID_STATUS_OFFLINE);
 		return false;
 	} break;
 
-  	case 1356026: // Contact has alternative client
+	case 1356026: // Contact has alternative client
 	{
 		client_notify(TranslateT("Need confirmation for sending messages to other clients.\nOpen facebook website and try to send message to this contact again!"));
-      /*
-          post na url http://www.facebook.com/ajax/chat/post_application_settings.php?__a=1
+	  /*
+		  post na url http://www.facebook.com/ajax/chat/post_application_settings.php?__a=1
 
-          enable_and_send      Povolit a odeslat                                                                                                                                                                                                                                                                                                                                                                                                                               
-          to_send              AQCoweMPeszBoKpd4iahcOyhmh0kiTYIhv1b5wCtuBiD0AaPVZIdEp3Pf5JMBmQ-9wf0ju-xdi-VRuk0ERk_I7XzI5dVJCs6-B0FExTZhspD-4-kTZLmZI-_M6fIuF2328yMyT3R3UEUmMV8P9MHcZwu-_pS3mOhsaHf6rIVcQ2rocSqLKi03wLKCfg0m8VsptPADWpOI-UNcIo-xl1PAoC1yVnL2wEXEtnF1qI_xFcmlJZ40AOONfIF_LS_lBrGYA-oCWLUK-GLHtQAHjO8aDeNXDU8Jk7Z_ES-_oAHee2PVLHcG_ACHXpasE7Iu3XFLMrdN2hjM96AjPRIf0Vk8gBZzfW_lUspakZmXxMI7iSNQE8lourK_6B3Z1s4UHxDZCNXYuc9gh70nm_xnaxnF9K1bR00s4MltnFjUT_3ypThzA  
-          __d                  1                                                                                                                                                                                                                                                                                                                                                                                                                                               
-          post_form_id         c73ebd9d94b7449c40e6965410fcdcf6                                                                                                                                                                                                                                                                                                                                                                                                                
-          fb_dtsg              Tb-T9                                                                                                                                                                                                                                                                                                                                                                                                                                           
-          lsd                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-          post_form_id_source  AsyncRequest                                                                                                                                                                                                                                                                                                                                                                                                                                    
-          */
+		  enable_and_send      Povolit a odeslat                                                                                                                                                                                                                                                                                                                                                                                                                               
+		  to_send              AQCoweMPeszBoKpd4iahcOyhmh0kiTYIhv1b5wCtuBiD0AaPVZIdEp3Pf5JMBmQ-9wf0ju-xdi-VRuk0ERk_I7XzI5dVJCs6-B0FExTZhspD-4-kTZLmZI-_M6fIuF2328yMyT3R3UEUmMV8P9MHcZwu-_pS3mOhsaHf6rIVcQ2rocSqLKi03wLKCfg0m8VsptPADWpOI-UNcIo-xl1PAoC1yVnL2wEXEtnF1qI_xFcmlJZ40AOONfIF_LS_lBrGYA-oCWLUK-GLHtQAHjO8aDeNXDU8Jk7Z_ES-_oAHee2PVLHcG_ACHXpasE7Iu3XFLMrdN2hjM96AjPRIf0Vk8gBZzfW_lUspakZmXxMI7iSNQE8lourK_6B3Z1s4UHxDZCNXYuc9gh70nm_xnaxnF9K1bR00s4MltnFjUT_3ypThzA  
+		  __d                  1                                                                                                                                                                                                                                                                                                                                                                                                                                               
+		  post_form_id         c73ebd9d94b7449c40e6965410fcdcf6                                                                                                                                                                                                                                                                                                                                                                                                                
+		  fb_dtsg              Tb-T9                                                                                                                                                                                                                                                                                                                                                                                                                                           
+		  lsd                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+		  post_form_id_source  AsyncRequest                                                                                                                                                                                                                                                                                                                                                                                                                                    
+		  */
 		return false;
 	} break;
  
-    default: // Other error
+	default: // Other error
 		return false;
- 	}
+	}
 
 	switch ( resp.code )
 	{
@@ -1189,7 +1189,7 @@ void facebook_client::close_chat( std::string message_recipient )
 	switch ( resp.code )
 	{
 	case HTTP_CODE_OK:
-    {
+	{
 		// TODO: More items?
 		fbu->status = "";			
 
@@ -1200,13 +1200,13 @@ void facebook_client::close_chat( std::string message_recipient )
 			fbu->image_url = FACEBOOK_DEFAULT_AVATAR_URL;
 	}
 
-    case HTTP_CODE_FOUND:
+	case HTTP_CODE_FOUND:
 		return handle_success( "get_profile" );
 
 	case HTTP_CODE_FAKE_ERROR:
 	case HTTP_CODE_FAKE_DISCONNECTED:
 	default:
-  		return handle_error( "get_profile" );
+		return handle_error( "get_profile" );
 	}
 }*/
 
@@ -1238,12 +1238,12 @@ bool facebook_client::set_status(const std::string &status_text)
 	switch ( resp.code )
 	{
 	case HTTP_CODE_OK:
-  		return handle_success( "set_status" );
+		return handle_success( "set_status" );
 
-  	case HTTP_CODE_FAKE_ERROR:
+	case HTTP_CODE_FAKE_ERROR:
 	case HTTP_CODE_FAKE_DISCONNECTED:
 	default:
-  		return handle_error( "set_status" );
+		return handle_error( "set_status" );
 	}
 }
 
