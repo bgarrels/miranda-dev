@@ -147,14 +147,14 @@ LRESULT CALLBACK SplashWindowProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM
 		case WM_PAINT:
 		{
 			if (!MyUpdateLayeredWindow) // Win 9x
-			{   
+			{
 				#ifdef _DEBUG
 					logMessage(_T("WM_PAINT"), _T("painting.."));
 				#endif
 				PAINTSTRUCT ps;
 				BeginPaint(hwndSplash, &ps);
 				BitBlt(ps.hdc, 0, 0, SplashBmp->getWidth(), SplashBmp->getHeight(), tmpBmp->getDC(), 0, 0, SRCCOPY);
-				EndPaint(hwndSplash, &ps);   
+				EndPaint(hwndSplash, &ps);
 			}
 			break;
 		}
@@ -174,10 +174,9 @@ int SplashThread(void *arg)
 	if (options.playsnd)
 	{
 		TCHAR cmd[MAX_PATH];
-		mir_sntprintf(cmd, SIZEOF(cmd), _T("open \"%s\" type mpegvideo alias %s"), szSoundFile, szSoundFile);
+		mir_sntprintf(cmd, SIZEOF(cmd), _T("open \"%s\" type mpegvideo alias song1"), szSoundFile);
 		mciSendString(cmd, NULL, 0, 0);
-		mir_sntprintf(cmd, SIZEOF(cmd), _T("play %s from 0"), szSoundFile);
-		mciSendString(cmd, NULL, 0, 0);
+		mciSendString(_T("play song1"), NULL, 0, 0);
 	}
 
 	WNDCLASSEX wcl;
@@ -243,55 +242,55 @@ int SplashThread(void *arg)
 		int splashWidth = SplashBmp->getWidth();
 		for (i = 0; i < splashWidth; ++i)
 			if (SplashBmp->getRow(0)[i] & 0xFF000000)
-		 {
-			 if (x < 0)
-			 {
-				 x = i-1; // 1 pixel for marker line
-				 splashWithMarkers = true;
-			 } else
-			 {
-				 x = -1;
-				 splashWithMarkers = false;
-				 break;
-			 }
-		 }
-		 int splashHeight = SplashBmp->getHeight();
-		 for (i = 0; splashWithMarkers && (i < splashHeight); ++i)
-			 if (SplashBmp->getRow(i)[0] & 0xFF000000)
-			 {
-				 if (y < 0)
-				 {
-					 y = i-1; // 1 pixel for marker line
-					 splashWithMarkers = true;
-				 } else
-				 {
-					 y = -1;
-					 splashWithMarkers = false;
-					 break;
-				 }
-			 }
+		{
+			if (x < 0)
+			{
+				x = i-1; // 1 pixel for marker line
+				splashWithMarkers = true;
+			} else
+			{
+				x = -1;
+				splashWithMarkers = false;
+				break;
+			}
+		}
+		int splashHeight = SplashBmp->getHeight();
+		for (i = 0; splashWithMarkers && (i < splashHeight); ++i)
+			if(SplashBmp->getRow(i)[0] & 0xFF000000)
+			{
+				if (y < 0)
+				{
+					y = i-1; // 1 pixel for marker line
+					splashWithMarkers = true;
+				} else
+				{
+					y = -1;
+					splashWithMarkers = false;
+					break;
+				}
+			}
 
-			 TCHAR verString[256] = {0};
-			 TCHAR* mirandaVerString = mir_a2t(szVersion);
-			 mir_sntprintf(verString, SIZEOF(verString), _T("%s%s"), szPrefix, mirandaVerString);
-			 mir_free(mirandaVerString);
-			 LOGFONT lf = {0};
-			 lf.lfHeight = 14;
-			 _tcscpy_s(lf.lfFaceName, _T("Verdana"));
-			 SelectObject(SplashBmp->getDC(), CreateFontIndirect(&lf));
-			 if (!splashWithMarkers)
-			 {
-				 SIZE v_sz = {0,0};
-				 GetTextExtentPoint32(SplashBmp->getDC(), verString, (int)_tcslen(verString), &v_sz);
-				 x = SplashBmp->getWidth()/2-(v_sz.cx/2);
-				 y = SplashBmp->getHeight()-(SplashBmp->getHeight()*(100-90)/100);
-			 }
-			 
-  		     SetTextColor(SplashBmp->getDC(), (0xFFFFFFFFUL-SplashBmp->getRow(y)[x])&0x00FFFFFFUL);
-			 //SplashBmp->DrawText(verString,SplashBmp->getWidth()/2-(v_sz.cx/2),SplashBmp->getHeight()-30);	 
-			 SetBkMode(SplashBmp->getDC(), TRANSPARENT);
-			 SplashBmp->DrawText(verString, x, y);
-			 //free (ptr_verString);
+			TCHAR verString[256] = {0};
+			TCHAR* mirandaVerString = mir_a2t(szVersion);
+			mir_sntprintf(verString, SIZEOF(verString), _T("%s%s"), szPrefix, mirandaVerString);
+			mir_free(mirandaVerString);
+			LOGFONT lf = {0};
+			lf.lfHeight = 14;
+			_tcscpy_s(lf.lfFaceName, _T("Verdana"));
+			SelectObject(SplashBmp->getDC(), CreateFontIndirect(&lf));
+			if (!splashWithMarkers)
+			{
+				SIZE v_sz = {0,0};
+				GetTextExtentPoint32(SplashBmp->getDC(), verString, (int)_tcslen(verString), &v_sz);
+				x = SplashBmp->getWidth()/2-(v_sz.cx/2);
+				y = SplashBmp->getHeight()-(SplashBmp->getHeight()*(100-90)/100);
+			}
+
+			SetTextColor(SplashBmp->getDC(), (0xFFFFFFFFUL-SplashBmp->getRow(y)[x])&0x00FFFFFFUL);
+			//SplashBmp->DrawText(verString,SplashBmp->getWidth()/2-(v_sz.cx/2),SplashBmp->getHeight()-30);	 
+			SetBkMode(SplashBmp->getDC(), TRANSPARENT);
+			SplashBmp->DrawText(verString, x, y);
+			//free (ptr_verString);
 	}
 
 	if (MyUpdateLayeredWindow) // Win 2000+
@@ -309,7 +308,7 @@ int SplashThread(void *arg)
 		ShowWindow(hwndSplash, SW_SHOWNORMAL);
 	}
 	else // Win 9x
-	{   
+	{
 		tmpBmp = new MyBitmap(SplashBmp->getWidth(),SplashBmp->getHeight());
 		HDC dtDC = GetDC(GetDesktopWindow());
 
@@ -340,7 +339,7 @@ int SplashThread(void *arg)
 				blend.SourceConstantAlpha = i;
 				MyUpdateLayeredWindow(hwndSplash, NULL, &ptDst, &sz, SplashBmp->getDC(), &ptSrc, 0xffffffff, &blend, LWA_ALPHA);
 				Sleep(1);
-			}      
+			}
 		}
 		blend.SourceConstantAlpha = 255;
 		MyUpdateLayeredWindow(hwndSplash, NULL, &ptDst, &sz, SplashBmp->getDC(), &ptSrc, 0xffffffff, &blend, LWA_ALPHA);
@@ -366,26 +365,23 @@ int SplashThread(void *arg)
 			}
 		}
 
-		// The Message Pump
-		MSG msg;
-		while (GetMessage(&msg, NULL, 0, 0) == TRUE) //NULL means every window in the thread; == TRUE means a safe pump.
-		{ 
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
+	// The Message Pump
+	MSG msg;
+	while (GetMessage(&msg, NULL, 0, 0) == TRUE) //NULL means every window in the thread; == TRUE means a safe pump.
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
 
 	if (options.playsnd)
-	{
-		TCHAR cmd[MAX_PATH];
-		mir_sntprintf(cmd, SIZEOF(cmd), _T("close %s"), szSoundFile);
-		mciSendString(cmd, NULL, 0, 0);
-	}
-		ExitThread(0);
-		return 1;
+		mciSendString(_T("close song1"), NULL, 0, 0);
+
+	ExitThread(0);
+	return 1;
 }
 
 BOOL ShowSplash(BOOL bpreview)
-{      
+{
 	if (bpreview && bpreviewruns) return 0;
 
 	if (bpreview) bpreviewruns = true;
@@ -416,8 +412,8 @@ BOOL ShowSplash(BOOL bpreview)
 		#endif
 	}
 	else
-	{  
-		timeout = options.showtime;   
+	{
+		timeout = options.showtime;
 		#ifdef _DEBUG
 			TCHAR b [40];
 			mir_sntprintf(b, SIZEOF(b), _T("%d"), options.showtime);

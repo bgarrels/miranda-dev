@@ -203,7 +203,7 @@ bool MyBitmap::loadFromFile(TCHAR *fn, TCHAR *fnAlpha)
 		if (!png2dibConvertor) {
 			return false;
 		}
-		
+
 		if ((hFile = CreateFile(fn, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL)) != INVALID_HANDLE_VALUE)
 			if ((hMap = CreateFileMapping(hFile, NULL, PAGE_READONLY, 0, 0, NULL)) != NULL)
 					if ((ppMap = (BYTE*)MapViewOfFile( hMap, FILE_MAP_READ, 0, 0, 0 )) != NULL)
@@ -214,7 +214,7 @@ bool MyBitmap::loadFromFile(TCHAR *fn, TCHAR *fnAlpha)
 			param.pSource = ppMap;
 			param.cbSourceSize = cbFileSize;
 			param.pResult = &pDib;
-	
+
 			if (png2dibConvertor((char*)param.pSource, param.cbSourceSize, param.pResult))
 				pDibBits = (BYTE*)(pDib+1);
 			else
@@ -303,7 +303,7 @@ bool MyBitmap::loadFromFile(TCHAR *fn, TCHAR *fnAlpha)
 
 		MyBitmap alpha;
 		if (fnAlpha && alpha.loadFromFile(fnAlpha) &&
-		    (alpha.getWidth() == width) &&
+			(alpha.getWidth() == width) &&
 			(alpha.getHeight() == height) )
 		{
 			for (int i = 0; i < width*height; i++)
@@ -326,12 +326,12 @@ void MyBitmap::allocate(int w, int h)
 
 	BITMAPINFO bi;
 
-    bi.bmiHeader.biSize = sizeof(bi.bmiHeader);
-    bi.bmiHeader.biWidth = w;
-    bi.bmiHeader.biHeight = -h;
-    bi.bmiHeader.biPlanes = 1;
-    bi.bmiHeader.biBitCount = 32;
-    bi.bmiHeader.biCompression = BI_RGB;
+	bi.bmiHeader.biSize = sizeof(bi.bmiHeader);
+	bi.bmiHeader.biWidth = w;
+	bi.bmiHeader.biHeight = -h;
+	bi.bmiHeader.biPlanes = 1;
+	bi.bmiHeader.biBitCount = 32;
+	bi.bmiHeader.biCompression = BI_RGB;
 
 	if (dcBmp)
 	{
@@ -339,9 +339,9 @@ void MyBitmap::allocate(int w, int h)
 		DeleteDC(dcBmp);
 	}
 
-    hBmp = (HBITMAP)CreateDIBSection(0, &bi, DIB_RGB_COLORS, (void **)&bits, 0, 0);
-    dcBmp = CreateCompatibleDC(0);
-    hBmpSave = (HBITMAP)SelectObject(dcBmp, hBmp);
+	hBmp = (HBITMAP)CreateDIBSection(0, &bi, DIB_RGB_COLORS, (void **)&bits, 0, 0);
+	dcBmp = CreateCompatibleDC(0);
+	hBmpSave = (HBITMAP)SelectObject(dcBmp, hBmp);
 }
 
 void MyBitmap::free()

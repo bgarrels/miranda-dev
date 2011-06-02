@@ -69,6 +69,12 @@
 #define MODNAME "SplashScreen"
 #define WM_LOADED (WM_USER + 10)
 
+#ifdef _UNICODE
+	#define tmemcpy wmemcpy
+#else
+	#define tmemcpy memcpy
+#endif
+
 struct SPLASHOPTS
 {
 	byte active;

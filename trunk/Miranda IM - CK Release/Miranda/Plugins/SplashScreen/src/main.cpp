@@ -56,7 +56,7 @@ BOOL (WINAPI *MyUpdateLayeredWindow)
 HANDLE hSplashThread, hModulesLoaded, hPlugDisableHook, hOptInit, hSystemOKToExit;
 
 PLUGININFOEX pluginInfo={
-    sizeof(PLUGININFOEX),
+	sizeof(PLUGININFOEX),
 	__PLUGIN_NAME,
 	PLUGIN_MAKE_VERSION(__MAJOR_VERSION, __MINOR_VERSION, __RELEASE_NUM, __BUILD_NUM),
 	__DESCRIPTION,
@@ -66,7 +66,7 @@ PLUGININFOEX pluginInfo={
 	__AUTHORWEB,
 	UNICODE_AWARE,
 	0,
-   MIID_SPLASHSCREEN
+	MIID_SPLASHSCREEN
 };
 
 extern "C" __declspec(dllexport) const MUUID* MirandaPluginInterfaces(void)
@@ -83,7 +83,7 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvRe
 
 void SplashMain()
 {
-	if (bstartup) 
+	if (bstartup)
 	{
 		// Retrive path to exe of current running Miranda is located
 		szMirDir = Utils_ReplaceVarsT(_T("%miranda_path%"));
@@ -123,7 +123,7 @@ void SplashMain()
 		{
 			hAdvaimg = LoadLibrary(szhAdvaimgPath);
 			if (hAdvaimg == NULL)
-			{         
+			{
 				png2dibavail = false;
 				bstartup = false;
 			}
@@ -206,10 +206,10 @@ void SplashMain()
 		TCHAR szOldPath[MAX_PATH] = {0};
 
 		if(options.random) // randomly select a splash file
-		{ 
+		{
 			int filescount = 0;
 			TCHAR szSplashDir[MAX_PATH] = {0}, szSearch[MAX_PATH] = {0};
-			TCHAR* p = 0;   
+			TCHAR* p = 0;
 			TCHAR files [255][50]; //TODO: make memory allocation dynamic
 
 			lstrcpy(szSplashDir, szSplashFile);
@@ -221,21 +221,21 @@ void SplashMain()
 			mir_sntprintf(szSearch, SIZEOF(szSearch), _T("%s\\*.*"), szSplashDir);
 			// FFFN will return filenames
 			HANDLE hFind = INVALID_HANDLE_VALUE;
-			WIN32_FIND_DATA ffd;      
+			WIN32_FIND_DATA ffd;
 			hFind = FindFirstFile(szSearch, &ffd);
 			if ( hFind != INVALID_HANDLE_VALUE )
 			{
 				do
 				{
 					if (!(ffd.dwFileAttributes&FILE_ATTRIBUTE_DIRECTORY)) 
-					{ 
+					{
 						#ifdef _DEBUG
 							logMessage(_T("Found file"), ffd.cFileName);
 						#endif
 						//files = new char[strlen(ffd.cFileName)];
 						//files[filescount] = new char[strlen(ffd.cFileName)];
 						TCHAR ext[5];
-						memcpy(ext, ffd.cFileName + (_tcslen(ffd.cFileName)-4), 5);
+						tmemcpy(ext, ffd.cFileName + (_tcslen(ffd.cFileName)-4), 5);
 
 						#ifdef _DEBUG
 							logMessage(_T("Extention"), ext);
@@ -261,14 +261,11 @@ void SplashMain()
 					logMessage(_T("final file"), szSplashFile);
 				#endif
 				FindClose(hFind);
-			} //if   
+			} //if
 		}
 
 		// Call splash display routine
 		ShowSplash(false);
-
-		if (options.random)
-			lstrcpy(szSplashFile, szOldPath);
 	}
 	bstartup = false;
 }
@@ -276,7 +273,7 @@ void SplashMain()
 int onSystemOKToExit(WPARAM wParam,LPARAM lParam)
 {
 	// Hooked events need to be unhooked
-	UnhookEvent(hModulesLoaded); 
+	UnhookEvent(hModulesLoaded);
 	UnhookEvent(hSystemOKToExit);
 	UnhookEvent(hPlugDisableHook);
 	UnhookEvent(hOptInit);
@@ -339,7 +336,7 @@ int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 			#endif
 		}
 	}
-   
+
 	// Options initialize hook
 	hOptInit = HookEvent(ME_OPT_INITIALISE, OptInit);
 
@@ -376,7 +373,7 @@ int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 		update.cpbVersion = (int)strlen((char *)update.pbVersion);
 
 		update.szUpdateURL = UPDATER_AUTOREGISTER;
-      
+
 		// these are the three lines that matter - the archive, the page containing the version string, and the text (or data) 
 		// before the version that we use to locate it on the page
 		// (note that if the update URL and the version URL point to standard file listing entries, the backend xml
@@ -427,7 +424,7 @@ extern "C" int __declspec(dllexport) Unload(void)
 	// Freeing loaded libraries
 	if (hUserDll) FreeLibrary(hUserDll);
 	if (hAdvaimg) FreeLibrary(hAdvaimg);
-  
+
 	#ifdef _DEBUG
 		logMessage(_T("Unload"), _T("Job done"));
 	#endif
