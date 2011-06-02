@@ -46,8 +46,8 @@ void ReadIniConfig()
 }
 
 BOOL Exists(LPCTSTR strName)
-{   
-    return GetFileAttributes(strName) != INVALID_FILE_ATTRIBUTES;   
+{
+	return GetFileAttributes(strName) != INVALID_FILE_ATTRIBUTES;
 }
 
 INT_PTR CALLBACK DlgProcOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -55,9 +55,9 @@ INT_PTR CALLBACK DlgProcOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 	switch (msg)
 	{
 		case WM_INITDIALOG:
-		{             
+		{
 			TranslateDialogDefault(hwndDlg);
-			if (!png2dibavail) 
+			if (!png2dibavail)
 			{
 				ShowWindow(GetDlgItem(hwndDlg, IDC_PNG2DIBWARN), SW_SHOW);
 				EnableWindow(GetDlgItem(hwndDlg, IDC_ACTIVE), false);
@@ -223,7 +223,7 @@ INT_PTR CALLBACK DlgProcOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 								TCHAR *pos;
 								pos = _tcsrchr(szPath2Spash, _T('\\'));
 								if (pos != NULL) 
-								{ 
+								{
 									*pos = 0;
 									lstrcat(szPath2Spash, _T("\\"));
 								}
@@ -315,7 +315,7 @@ INT_PTR CALLBACK DlgProcOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 
 						GetWindowText(GetDlgItem(hwndDlg, IDC_SNDPATH), tmp, MAX_PATH);
 						DBWriteContactSettingTString(NULL, MODNAME, "Sound", tmp);
-	
+
 						GetWindowText(GetDlgItem(hwndDlg, IDC_VERSIONPREFIX), tmp, MAX_PATH);
 						DBWriteContactSettingTString(NULL, MODNAME, "VersionPrefix", tmp);
 						lstrcpy(szPrefix, tmp);
