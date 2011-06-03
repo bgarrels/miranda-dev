@@ -143,6 +143,7 @@
       <CompileAsManaged>false</CompileAsManaged>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
+      <CreateHotpatchableImage>false</CreateHotpatchableImage>
     </ClCompile>
     <Link>
       <AdditionalDependencies>Delayimp.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>

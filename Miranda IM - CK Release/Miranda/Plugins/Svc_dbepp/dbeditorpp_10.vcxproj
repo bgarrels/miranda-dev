@@ -244,7 +244,7 @@
       </DataExecutionPrevention>
       <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <MapFileName>$(TargetDir)$(TargetName).pdb</MapFileName>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

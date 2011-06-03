@@ -145,6 +145,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
     <ClCompile>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
@@ -154,6 +155,9 @@
       <CompileAsManaged>false</CompileAsManaged>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <AdditionalIncludeDirectories>../../include;../../include_API;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CreateHotpatchableImage>false</CreateHotpatchableImage>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>./../../include/msapi/</AdditionalIncludeDirectories>
