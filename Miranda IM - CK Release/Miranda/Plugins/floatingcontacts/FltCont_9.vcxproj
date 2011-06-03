@@ -180,6 +180,9 @@
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <CompileAsManaged>false</CompileAsManaged>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CreateHotpatchableImage>false</CreateHotpatchableImage>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -197,6 +200,7 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">

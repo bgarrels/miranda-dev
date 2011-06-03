@@ -103,6 +103,9 @@
       <CompileAsManaged>false</CompileAsManaged>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CreateHotpatchableImage>false</CreateHotpatchableImage>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
