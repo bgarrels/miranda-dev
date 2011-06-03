@@ -18,9 +18,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
-Last change on : $Date: 2011-03-17 22:12:56 +0300 (Чт, 17 мар 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13651 $
+Last change on : $Date: 2011-06-03 02:50:37 +0200 (Fr, 03. Jun 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -416,10 +416,11 @@ bool TScramAuth::validateLogin( const TCHAR* challenge )
 /////////////////////////////////////////////////////////////////////////////////////////
 // plain auth - the most simple one
 
-TPlainAuth::TPlainAuth( ThreadData* info ) :
+TPlainAuth::TPlainAuth( ThreadData* info, bool old ) :
 	TJabberAuth( info )
 {
 	szName = "PLAIN";
+	bOld = old;
 }
 
 TPlainAuth::~TPlainAuth()
@@ -431,14 +432,17 @@ char* TPlainAuth::getInitialRequest()
 	char *uname = mir_utf8encodeT( info->username ), 
 		 *passw = mir_utf8encodeT( info->password ); 
 
-	const size_t size = strlen(uname) + strlen(passw) + 3;
+	int size = 2 * strlen( uname ) + strlen( passw ) + strlen( info->server ) + 4;
 	char *toEncode = ( char* )alloca( size );
-	mir_snprintf( toEncode, size, "%c%s%c%s", 0, uname, 0, passw );
+	if ( bOld )
+		size = mir_snprintf( toEncode, size, "%s@%s%c%s%c%s", uname, info->server, 0, uname, 0, passw );
+	else
+		size = mir_snprintf( toEncode, size, "%c%s%c%s", 0, uname, 0, passw );
 	
 	mir_free( uname );
 	mir_free( passw );
 
-	return JabberBase64Encode( toEncode, (int)size - 1 );
+	return JabberBase64Encode( toEncode, size );
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
