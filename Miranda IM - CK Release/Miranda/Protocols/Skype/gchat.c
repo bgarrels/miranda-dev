@@ -8,10 +8,10 @@
 
 #pragma warning (push)
 #pragma warning (disable: 4100) // unreferenced formal parameter
-#include "m_langpack.h"
-#include "m_userinfo.h"
-#include "m_history.h"
-#include "m_contacts.h"
+#include "../../include/m_langpack.h"
+#include "../../include/m_userinfo.h"
+#include "../../include/m_history.h"
+#include "../../include/m_contacts.h"
 #pragma warning (pop)
 
 #ifndef DWLP_USER
@@ -486,6 +486,7 @@ int  __cdecl ChatStart(char *szChatId, BOOL bJustCreate) {
 void KillChatSession(GCDEST *gcd) {
 	GCEVENT gce = {0};
 
+	EnterCriticalSection(&m_GCMutex);
 	LOG(("KillChatSession: Groupchatsession terminated."));
 	gce.cbSize = sizeof(GCEVENT);
 	gce.dwFlags = GC_TCHAR;
@@ -496,6 +497,7 @@ void KillChatSession(GCDEST *gcd) {
 		CallService(MS_GC_EVENT, SESSION_OFFLINE, (LPARAM)&gce);
 		CallService(MS_GC_EVENT, SESSION_TERMINATE, (LPARAM)&gce);
 	}
+	LeaveCriticalSection(&m_GCMutex);
 }
 
 void InviteUser(TCHAR *szChatId) {
