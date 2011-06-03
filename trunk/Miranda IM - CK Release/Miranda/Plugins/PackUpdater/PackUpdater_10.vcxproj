@@ -155,6 +155,9 @@
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <CompileAsManaged>false</CompileAsManaged>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CreateHotpatchableImage>false</CreateHotpatchableImage>
     </ClCompile>
     <Link>
       <AdditionalDependencies>Wininet.lib;urlmon.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -169,6 +172,7 @@
       <AdditionalManifestDependencies>
       </AdditionalManifestDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <MapFileName>$(TargetDir)$(TargetName).pdb</MapFileName>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>

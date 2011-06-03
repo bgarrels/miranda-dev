@@ -96,6 +96,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
