@@ -26,10 +26,10 @@
 #include "m_genmenu.h"
 #include "m_popup.h"
 #include "m_message.h"
-#include "sdk/m_updater.h"
-#include "sdk/m_fingerprint.h"
-#include "sdk/m_metacontacts.h"
-#include "sdk/m_msg_buttonsbar.h"
+#include "m_updater.h"
+#include "m_fingerprint.h"
+#include "m_metacontacts.h"
+#include "m_msg_buttonsbar.h"
 
 #pragma optimize("gsy",on)
 

@@ -271,6 +271,7 @@
       <MapExports>false</MapExports>
       <SubSystem>Windows</SubSystem>
       <LinkStatus>false</LinkStatus>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

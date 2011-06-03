@@ -34,7 +34,7 @@ Last change by : $Author: ing.u.horn $
  #include <dlgs.h>
 #endif
 
-#include "..\SDK\m_db3xSA.h"
+#include "m_db3xSA.h"
 #include "dlg_ExImOpenSaveFile.h"
 
 #ifdef _UNICODE
