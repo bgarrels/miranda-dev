@@ -253,6 +253,7 @@
       <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
       <ProgramDatabaseFile>$(TargetDir)$(TargetName)W.pdb</ProgramDatabaseFile>
+      <MapFileName>$(TargetDir)$(TargetName)W.map</MapFileName>
     </Link>
     <PostBuildEvent>
       <Command>
