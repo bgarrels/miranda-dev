@@ -33,8 +33,8 @@
 #include "../../include/m_database.h"
 #include "../../include/m_clist.h"
 #include "../../include/m_system.h"
-#include "m_updater.h"
-#include "m_folders.h"
+#include "sdk/m_updater.h"
+#include "sdk/m_folders.h"
 #include "../../include/m_options.h"
 #include "../../include/m_langpack.h"
 #include "../../include/m_userinfo.h"
@@ -168,6 +168,7 @@ int __stdcall EnterBitmapFileName( char* szDest );
 void CleanupNicknames(char *dummy);
 int InitVSApi();
 int FreeVSApi();
+HANDLE GetMetaHandle(DWORD dwId);
 
 // Write contact setting as UTF-8 for convenience, if possible. Older Miranda IM versions will store it as ANSI
 INT_PTR SkypeDBWriteContactSettingUTF8String(HANDLE hContact,const char *szModule,const char *szSetting,const char *val);
