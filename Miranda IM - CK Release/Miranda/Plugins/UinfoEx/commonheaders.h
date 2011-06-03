@@ -106,12 +106,12 @@ typedef std::basic_string<TCHAR>	tstring;
 
 #include <m_popup.h>
 #include "m_popup2.h"
-#include "SDK\m_flags.h"
+#include "m_flags.h"
 #include "m_metacontacts.h"
-#include "SDK\m_magneticwindows.h"
+#include "m_magneticwindows.h"
 #include "m_toolbar.h"
 #include "m_toptoolbar.h"
-#include "SDK\m_userinfoex.h"
+#include "m_userinfoex.h"
 
 #include <m_extraicons.h>	//change this to match extraicons header location
 
