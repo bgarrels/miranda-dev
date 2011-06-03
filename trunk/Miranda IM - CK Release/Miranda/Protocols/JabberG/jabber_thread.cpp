@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13629 $
-Last change on : $Date: 2011-04-23 01:47:36 +0400 (Сб, 23 апр 2011) $
+Revision       : $Revision: 13651 $
+Last change on : $Date: 2011-06-03 02:50:37 +0200 (Fr, 03. Jun 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -739,7 +739,12 @@ void CJabberProto::PerformAuthentication( ThreadData* info )
 
 	if ( auth == NULL && m_AuthMechs.isPlainAvailable ) {
 		m_AuthMechs.isPlainAvailable = false;
-		auth = new TPlainAuth( info );
+		auth = new TPlainAuth( info, false );
+	}
+
+	if ( auth == NULL && m_AuthMechs.isPlainOldAvailable ) {
+		m_AuthMechs.isPlainOldAvailable = false;
+		auth = new TPlainAuth( info, true );
 	}
 
 	if ( auth == NULL ) {
@@ -802,6 +807,7 @@ void CJabberProto::OnProcessFeatures( HXML node, ThreadData* info )
 
 		if ( !_tcscmp( xmlGetName( n ), _T("mechanisms"))) {
 			m_AuthMechs.isPlainAvailable = false;
+			m_AuthMechs.isPlainOldAvailable = false;
 			m_AuthMechs.isMd5Available = false;
 			m_AuthMechs.isScramAvailable = false;
 			m_AuthMechs.isNtlmAvailable = false;
@@ -818,7 +824,7 @@ void CJabberProto::OnProcessFeatures( HXML node, ThreadData* info )
 
 				if ( !_tcscmp( xmlGetName( c ), _T("mechanism"))) {
 					//JabberLog("Mechanism: %s",xmlGetText( c ));
-					     if ( !_tcscmp( xmlGetText( c ), _T("PLAIN")))          m_AuthMechs.isPlainAvailable = true;
+					     if ( !_tcscmp( xmlGetText( c ), _T("PLAIN")))          m_AuthMechs.isPlainOldAvailable = m_AuthMechs.isPlainAvailable = true;
 					else if ( !_tcscmp( xmlGetText( c ), _T("DIGEST-MD5")))     m_AuthMechs.isMd5Available = true;
 					else if ( !_tcscmp( xmlGetText( c ), _T("SCRAM-SHA-1")))    m_AuthMechs.isScramAvailable = true;
 					else if ( !_tcscmp( xmlGetText( c ), _T("NTLM")))           m_AuthMechs.isNtlmAvailable = true;
