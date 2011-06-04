@@ -276,11 +276,11 @@
     <ClCompile Include="voiceservice.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Include\m_chat.h" />
     <ClInclude Include="contacts.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="ezxml\ezxml.h" />
     <ClInclude Include="gchat.h" />
-    <ClInclude Include="m_chat.h" />
     <ClInclude Include="m_popup.h" />
     <ClInclude Include="m_toptoolbar.h" />
     <ClInclude Include="pthread.h" />
