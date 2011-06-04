@@ -83,7 +83,7 @@ int RotateBackups(HWND progress_dialog, DWORD start_time)
 	{
 		if (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 			continue;
-		else
+		else if (_tcsicmp(&FindFileData.cFileName[_tcslen(FindFileData.cFileName)-4], _T(".bak")) == 0)
 		{
 			if (_tcsicmp(FileNameFound.Name, _T("")) == 0)
 			{

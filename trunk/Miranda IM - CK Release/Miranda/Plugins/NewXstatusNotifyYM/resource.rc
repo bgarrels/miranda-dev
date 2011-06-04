@@ -79,6 +79,13 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 179
     END
+
+    IDD_OPT_SMPOPUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 296
+        TOPMARGIN, 7
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -123,6 +130,7 @@ BEGIN
     EDITTEXT        IDC_LOGFILE,72,175,154,14,ES_AUTOHSCROLL | ES_READONLY
     PUSHBUTTON      "...",IDC_BT_CHOOSELOGFILE,229,175,18,14
     PUSHBUTTON      "Open",IDC_BT_VIEWLOG,249,175,42,14
+    CONTROL         "Status message",IDC_CHK_STATUS_MESSAGE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,208,50,87,10
 END
 
 IDD_INFO_SOUNDS DIALOGEX 0, 0, 222, 152
@@ -315,6 +323,21 @@ BEGIN
     CONTROL         "Reset",IDC_BT_RESET,"MButtonClass",WS_TABSTOP,29,180,16,14
 END
 
+IDD_OPT_SMPOPUP DIALOGEX 0, 0, 305, 194
+STYLE DS_SETFONT | DS_SETFOREGROUND | DS_FIXEDSYS | DS_CONTROL | DS_CENTER | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "General",IDC_STATIC,0,0,296,39
+    CONTROL         "Show PopUps when I connect",IDC_ONCONNECT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,11,202,8
+    CONTROL         "Ignore empty status messages",IDC_PUIGNOREREMOVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,25,202,8
+    GROUPBOX        "Protocols",IDC_STATIC,0,41,296,94
+    CTEXT           "Disable protocols which you don't wish to be notified for:",IDC_STATIC,10,52,280,10
+    CONTROL         "",IDC_PROTOCOLLIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,100,66,110,64
+    GROUPBOX        "Text",IDC_STATIC,0,135,152,34
+    EDITTEXT        IDC_POPUPTEXT,6,145,140,20,ES_MULTILINE | ES_AUTOHSCROLL | NOT WS_BORDER,WS_EX_STATICEDGE
+    CONTROL         "Variables",IDC_BT_VARIABLES,"MButtonClass",WS_TABSTOP,11,174,16,14
+    CONTROL         "Reset",IDC_BT_RESET,"MButtonClass",WS_TABSTOP,29,174,16,14
+END
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -333,7 +356,8 @@ IDI_XSTATUS             ICON                    "res\\xstatus.ico"
 IDI_DISABLEALL          ICON                    "res\\disable_all.ico"
 IDI_ENABLEALL           ICON                    "res\\enable_all.ico"
 IDI_VARIABLES           ICON                    "res\\variables.ico"
-#endif    // Neutral resources
+IDI_STATUS_MESSAGE      ICON                    "res\\status_message.ico"
+#endif    // Нейтральный resources
 /////////////////////////////////////////////////////////////////////////////
 
 

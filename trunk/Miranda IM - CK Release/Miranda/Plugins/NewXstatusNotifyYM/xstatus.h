@@ -51,6 +51,7 @@
 #define DEFAULT_POPUP_NEW			TranslateT("changed %N to: %T%D%I") 
 #define DEFAULT_POPUP_CHANGEMSG		TranslateT("changed %N message to:%D%I") 
 #define DEFAULT_POPUP_REMOVE		TranslateT("removed %N") 
+#define DEFAULT_POPUP_STATUSMESSAGE	TranslateT("changed his/her status message to %n") 
 
 #define DEFAULT_LOG_DELIMITER		_T(": ")
 #define DEFAULT_LOG_NEW				TranslateT("changed %N @ %T%D%I") 
@@ -65,6 +66,13 @@
 %I\textra status text\r\n\
 %D\tdelimiter\r\n\
 %B\tline break (can be used as delimiter)")
+
+#define VARIABLES_SM_HELP_TEXT TranslateT("These variables are available:\r\n\r\n\
+%n\tNew Status Message\r\n\
+%o\tOld Status Message\r\n\
+%c\tCustom Nickname\r\n\
+\\n\tline break\r\n\
+\\t\ttab stop")
 
 typedef struct tagXSTATUSCHANGE 
 {

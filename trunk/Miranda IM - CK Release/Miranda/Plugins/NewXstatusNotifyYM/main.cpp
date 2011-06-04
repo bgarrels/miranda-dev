@@ -4,19 +4,19 @@
 	Copyright (c) 2005-2007 Vasilich
 	Copyright (c) 2007-2011 yaho
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 #include "common.h"
@@ -46,7 +46,7 @@ char szMetaModuleName[256] = {0};
 UINT_PTR uintXstatusTimerId = 0;
 STATUS StatusList[STATUS_COUNT];
 HWND SecretWnd;
-DWORD dwTimerTick = 0;
+DWORD dwTimerTick = 0, LoadTime = 0;
 
 extern OPTIONS opt;
 
@@ -54,15 +54,15 @@ PLUGININFOEX pluginInfoEx = {
 	sizeof(PLUGININFOEX),
 #ifdef _UNICODE
 	#ifdef _WIN64
-		"NewXstatusNotify YM (Unicode x64)",
+		"NewXstatusNotify YM (Unicode x64) CK Release",
 	#else
-		"NewXstatusNotify YM (Unicode)",
+		"NewXstatusNotify YM (Unicode) CK Release",
 	#endif
 #else
-	"NewXstatusNotify YM",
+	"NewXstatusNotify YM Mataes Release",
 #endif
 	__VERSION_DWORD,
-	"Notifies you when a contact changes his/her (X)status.",
+	"Notifies you when a contact changes his/her (X)status or status message.",
 	"Luca Santarelli, Vasilich, yaho",
 	"yaho@miranda-easy.net",
 	"© 2001-2004 Luca Santarelli, 2005-2007 Vasilich, 2007-2011 yaho",
@@ -320,6 +320,278 @@ int ProcessExtraStatus(DBCONTACTWRITESETTING *cws, HANDLE hContact)
 	return 0;
 }
 
+static int __inline CheckStr(char *str, int not_empty, int empty) {
+	if (str == NULL || str[0] == '\0')
+		return empty;
+	else
+		return not_empty;
+}
+
+#ifdef UNICODE
+
+static int __inline CheckStrW(WCHAR *str, int not_empty, int empty) {
+	if (str == NULL || str[0] == L'\0')
+		return empty;
+	else
+		return not_empty;
+}
+
+#endif
+
+WCHAR *mir_dupToUnicodeEx(char *ptr, UINT CodePage)
+{
+	size_t size;
+	WCHAR *tmp;
+
+	if (ptr == NULL)
+		return NULL;
+
+	size = strlen(ptr) + 1;
+	tmp = (WCHAR *) mir_alloc(size * sizeof(WCHAR));
+
+	MultiByteToWideChar(CodePage, 0, ptr, -1, tmp, size * sizeof(WCHAR));
+
+	return tmp;
+}
+
+static int CompareStatusMsg(STATUSMSGINFO *smi, DBCONTACTWRITESETTING *cws_new) {
+	DBVARIANT dbv_old;
+	int ret;
+
+	switch (cws_new->value.type)
+	{
+		case DBVT_DELETED:
+			smi->newstatusmsg = NULL;
+			break;
+		case DBVT_ASCIIZ:
+#ifdef UNICODE
+			smi->newstatusmsg = (CheckStr(cws_new->value.pszVal, 0, 1) ? NULL : mir_dupToUnicodeEx(cws_new->value.pszVal, CP_ACP));
+			break;
+		case DBVT_UTF8:
+			smi->newstatusmsg = (CheckStr(cws_new->value.pszVal, 0, 1) ? NULL : mir_dupToUnicodeEx(cws_new->value.pszVal, CP_UTF8));
+			break;
+		case DBVT_WCHAR:
+			smi->newstatusmsg = (CheckStrW(cws_new->value.pwszVal, 0, 1) ? NULL : mir_wstrdup(cws_new->value.pwszVal));
+#else
+			smi->newstatusmsg = (CheckStr(cws_new->value.pszVal, 0, 1) ? NULL : mir_strdup(cws_new->value.pszVal));
+#endif
+			break;
+		default:
+			smi->newstatusmsg = NULL;
+			break;
+	}
+
+	if (!
+#ifdef UNICODE
+	DBGetContactSettingW(smi->hContact, "UserOnline", "OldStatusMsg", &dbv_old)
+#else
+	DBGetContactSetting(smi->hContact, "UserOnline", "OldStatusMsg", &dbv_old)
+#endif
+	)
+	{
+		switch (dbv_old.type)
+		{
+			case DBVT_ASCIIZ:
+#ifdef UNICODE
+				smi->oldstatusmsg = (CheckStr(dbv_old.pszVal, 0, 1) ? NULL : mir_dupToUnicodeEx(dbv_old.pszVal, CP_ACP));
+				break;
+			case DBVT_UTF8:
+				smi->oldstatusmsg = (CheckStr(dbv_old.pszVal, 0, 1) ? NULL : mir_dupToUnicodeEx(dbv_old.pszVal, CP_UTF8));
+				break;
+			case DBVT_WCHAR:
+				smi->oldstatusmsg = (CheckStrW(dbv_old.pwszVal, 0, 1) ? NULL : mir_wstrdup(dbv_old.pwszVal));
+#else
+				smi->oldstatusmsg = (CheckStr(dbv_old.pszVal, 0, 1) ? NULL : mir_strdup(dbv_old.pszVal));
+#endif
+				break;
+			default:
+				smi->oldstatusmsg = NULL;
+				break;
+		}
+
+		if (cws_new->value.type == DBVT_DELETED)
+			if (
+#ifdef UNICODE
+				dbv_old.type == DBVT_WCHAR)
+				ret = CheckStrW(dbv_old.pwszVal, 2, 0);
+			else if (dbv_old.type == DBVT_UTF8 ||
+#endif
+				dbv_old.type == DBVT_ASCIIZ)
+				ret = CheckStr(dbv_old.pszVal, 2, 0);
+			else
+				ret = 2;
+		else if (dbv_old.type != cws_new->value.type)
+#ifdef UNICODE
+			ret = (lstrcmpW(smi->newstatusmsg, smi->oldstatusmsg) ? CheckStrW(smi->newstatusmsg, 1, 2) : 0);
+#else
+			ret = 1;
+#endif;
+		else if (dbv_old.type == DBVT_ASCIIZ)
+			ret = (lstrcmpA(cws_new->value.pszVal, dbv_old.pszVal) ? CheckStr(cws_new->value.pszVal, 1, 2) : 0);
+#ifdef UNICODE
+		else if (dbv_old.type == DBVT_UTF8)
+			ret = (lstrcmpA(cws_new->value.pszVal, dbv_old.pszVal) ? CheckStr(cws_new->value.pszVal, 1, 2) : 0);
+		else if (dbv_old.type == DBVT_WCHAR)
+			ret = (lstrcmpW(cws_new->value.pwszVal, dbv_old.pwszVal) ? CheckStrW(cws_new->value.pwszVal, 1, 2) : 0);
+#endif
+		DBFreeVariant(&dbv_old);
+	}
+	else
+	{
+		if (cws_new->value.type == DBVT_DELETED)
+			ret = 0;
+		else if (
+#ifdef UNICODE
+			cws_new->value.type == DBVT_WCHAR)
+			ret = CheckStrW(cws_new->value.pwszVal, 1, 0);
+		else if (cws_new->value.type == DBVT_UTF8 ||
+#endif
+			cws_new->value.type == DBVT_ASCIIZ)
+			ret = CheckStr(cws_new->value.pszVal, 1, 0);
+		else
+			ret = 1;
+
+		smi->oldstatusmsg = NULL;
+	}
+
+	return ret;
+}
+
+BOOL FreeSmiStr(STATUSMSGINFO *smi) 
+{
+	mir_free(smi->newstatusmsg);
+	mir_free(smi->oldstatusmsg);
+	return 0;
+}
+
+// return TRUE if timeout is over
+static BOOL TimeoutCheck()
+{
+	if (GetTickCount() - LoadTime > TMR_CONNECTIONTIMEOUT)
+		return TRUE;
+	return FALSE;
+}
+
+TCHAR* AddCR(const TCHAR *statusmsg) {
+	TCHAR *tmp;
+	const TCHAR *found;
+	int i = 0, len = lstrlen(statusmsg), j;
+	tmp = (TCHAR*)mir_alloc(1024 * sizeof(TCHAR));
+	*tmp = _T('\0');
+	while((found = _tcsstr((statusmsg + i), _T("\n"))) != NULL && _tcslen(tmp) + 1 < 1024){
+		j = (int)(found - statusmsg);
+		if(lstrlen(tmp) + j - i + 2 < 1024){
+			tmp = _tcsncat(tmp, statusmsg + i, j - i);
+		}
+		else {
+			break;
+		}
+		if(j == 0 || *(statusmsg + j - 1) != _T('\r')){
+			tmp = lstrcat(tmp, _T("\r"));
+		}
+		tmp = lstrcat(tmp, _T("\n"));
+		i = j + 1;
+	}
+	if(lstrlen(tmp) + len - i + 1 < 1024){
+		tmp = lstrcat(tmp, statusmsg + i);
+	}
+	
+	return tmp;
+}
+
+TCHAR* GetStr(STATUSMSGINFO *n, const TCHAR *tmplt) {
+	TCHAR tmp[1024];
+	TCHAR *str;
+	int i;
+	int len;
+
+	if (tmplt == NULL || tmplt[0] == _T('\0'))
+		return NULL;
+
+	str = (TCHAR*)mir_alloc(2048 * sizeof(TCHAR));
+	str[0] = _T('\0');
+	len = lstrlen(tmplt);
+
+	for (i = 0; i < len; i++)
+	{
+		tmp[0] = _T('\0');
+
+		if (tmplt[i] == _T('%'))
+		{
+			i++;
+			switch (tmplt[i])
+			{
+				case 'n':
+					if (n->compare == 2 || _tcscmp(n->newstatusmsg, TranslateT("<no status message>")) == 0) 
+						lstrcpyn(tmp, TranslateT("<no status message>"), SIZEOF(tmp));
+					else {
+						TCHAR *_tmp = AddCR(n->newstatusmsg);
+						lstrcpyn(tmp, _tmp, SIZEOF(tmp));
+						mir_free(_tmp);
+					}
+					break;
+				case 'o':
+					if (n->oldstatusmsg == NULL || n->oldstatusmsg[0] == _T('\0') || _tcscmp(n->oldstatusmsg, TranslateT("<no status message>")) == 0) 
+						lstrcpyn(tmp, TranslateT("<no status message>"), SIZEOF(tmp));
+					else {
+						TCHAR *_tmp = AddCR(n->oldstatusmsg);
+						lstrcpyn(tmp, _tmp, SIZEOF(tmp));
+						mir_free(_tmp);
+					}
+					break;
+				case 'c':
+					if (n->cust == NULL || n->cust[0] == _T('\0')) lstrcpyn(tmp, TranslateT("Contact"), SIZEOF(tmp));
+					else lstrcpyn(tmp, n->cust, SIZEOF(tmp));
+					break;
+				default:
+					//lstrcpyn(tmp, _T("%"), TMPMAX);
+					i--;
+					tmp[0] = tmplt[i]; tmp[1] = _T('\0');
+					break;
+			}
+		}
+		else if (tmplt[i] == _T('\\'))
+		{
+			i++;
+			switch (tmplt[i])
+			{
+				case 'n':
+					//_tcscat_s(tmp, TMPMAX, _T("\r\n"));
+					tmp[0] = _T('\r'); tmp[1] = _T('\n'); tmp[2] = _T('\0');
+					break;
+				case 't':
+					//_tcscat_s(tmp, TMPMAX, _T("\t"));
+					tmp[0] = _T('\t'); tmp[1] = _T('\0');
+					break;
+				default:
+					//lstrcpyn(tmp, _T("\\"), TMPMAX);
+					i--;
+					tmp[0] = tmplt[i]; tmp[1] = _T('\0');
+					break;
+			}
+		}
+		else
+		{
+			tmp[0] = tmplt[i]; tmp[1] = _T('\0');
+		}
+
+		if (tmp[0] != _T('\0'))
+		{
+			if (lstrlen(tmp) + lstrlen(str) < 2044)
+			{
+				lstrcat(str, tmp);
+			}
+			else
+			{
+				lstrcat(str, _T("..."));
+				break;
+			}
+		}
+	}
+	
+	return str;
+}
+
 int ProcessStatus(DBCONTACTWRITESETTING *cws, HANDLE hContact)
 {
 	if (strcmp(cws->szSetting, "Status") == 0) 
@@ -340,6 +612,9 @@ int ProcessStatus(DBCONTACTWRITESETTING *cws, HANDLE hContact)
 		if (oldStatus == newStatus) 
 			return 0;
 
+		if (oldStatus == ID_STATUS_OFFLINE)
+				LoadTime = GetTickCount();
+
 		//If we get here, the two stauses differ, so we can proceed.
 		DBWriteContactSettingWord(hContact, "UserOnline", "OldStatus", newStatus);
 
@@ -352,6 +627,99 @@ int ProcessStatus(DBCONTACTWRITESETTING *cws, HANDLE hContact)
 		return 1;
 	}
 
+	if (!lstrcmpA(cws->szModule, "CList") && !lstrcmpA(cws->szSetting, "StatusMsg"))
+	{
+		STATUSMSGINFO smi;
+		BOOL retem = TRUE, rettime = TRUE;
+
+		DBVARIANT dbv;
+		if (!DBGetContactSettingString(hContact, "Protocol", "p", &dbv))
+		{
+			char dbSetting[128];
+			mir_snprintf(dbSetting, SIZEOF(dbSetting), "%s_enabled", dbv.pszVal);
+			if (!DBGetContactSettingByte(NULL, MODULE, dbSetting, 1))
+				return 0;
+		}
+		smi.proto = (char*)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)hContact, 0);
+
+		//don't show popup when mradio connecting and disconnecting
+		if (_stricmp(smi.proto, "mRadio") == 0 && !cws->value.type == DBVT_DELETED)
+		{
+			TCHAR buf[MAX_PATH];
+			mir_sntprintf(buf, SIZEOF(buf), _T(" (%s)"), TranslateT("connecting"));
+			char* pszUtf = mir_utf8encodeT(buf);
+			mir_sntprintf(buf, SIZEOF(buf), _T(" (%s)"), TranslateT("aborting"));
+			char* pszUtf2 = mir_utf8encodeT(buf);
+			if (_stricmp(cws->value.pszVal, pszUtf) == 0 || _stricmp(cws->value.pszVal, pszUtf2) == 0)
+				return 0;
+		}
+
+		if (smi.proto != NULL && CallProtoService(smi.proto, PS_GETSTATUS, 0, 0) != ID_STATUS_OFFLINE)
+		{
+			smi.hContact = hContact;
+			smi.compare = CompareStatusMsg(&smi, cws);
+			if ((smi.compare == 0) || (opt.IgnoreEmpty && (smi.compare == 2)))
+				return FreeSmiStr(&smi);
+
+			if (cws->value.type == DBVT_DELETED)
+			{
+				DBDeleteContactSetting(smi.hContact, "UserOnline", "OldStatusMsg");
+			}
+			else
+			{
+				DBCONTACTWRITESETTING cws_old;
+				cws_old.szModule = "UserOnline";
+				cws_old.szSetting = "OldStatusMsg";
+				cws_old.value = cws->value;
+				CallService(MS_DB_CONTACT_WRITESETTING, (WPARAM)smi.hContact, (LPARAM)&cws_old);
+			}
+			smi.cust = (TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)smi.hContact, GCDNF_TCHAR);
+
+			if (opt.IgnoreEmpty && (smi.compare == 2))
+				retem = FALSE;
+			else if (!TimeoutCheck() && !opt.PopupOnConnect)
+				rettime = FALSE;
+
+			char status[8];
+			mir_snprintf(status, SIZEOF(status), "%d", IDC_CHK_STATUS_MESSAGE);
+			if (DBGetContactSettingByte(hContact, MODULE, "EnablePopups", 1) && DBGetContactSettingByte(0, MODULE, status, 1) && retem && rettime)
+			{
+				POPUPDATAT ppd = {0};
+				DBVARIANT dbv;
+				TCHAR *str;
+				if(!DBGetContactSettingTString(0, MODULE, "TSMChange", &dbv))
+					str = GetStr(&smi, dbv.ptszVal);
+				else
+					str = GetStr(&smi, DEFAULT_POPUP_STATUSMESSAGE);
+				ppd.lchContact = smi.hContact;
+				ppd.lchIcon = LoadSkinnedProtoIcon(smi.proto, DBGetContactSettingWord(smi.hContact, smi.proto, "Status", ID_STATUS_ONLINE));
+				lstrcpyn(ppd.lptzContactName, smi.cust, MAX_CONTACTNAME);
+				lstrcpyn(ppd.lptzText, str, MAX_SECONDLINE);
+				switch (opt.Colors)
+				{
+					case POPUP_COLOR_OWN:
+						ppd.colorBack = StatusList[DBGetContactSettingWord(smi.hContact, smi.proto, "Status", ID_STATUS_ONLINE)].colorBack;
+						ppd.colorText = StatusList[DBGetContactSettingWord(smi.hContact, smi.proto, "Status", ID_STATUS_ONLINE)].colorText;
+						break;
+					case POPUP_COLOR_WINDOWS:
+						ppd.colorBack = GetSysColor(COLOR_BTNFACE);
+						ppd.colorText = GetSysColor(COLOR_WINDOWTEXT);
+						break;
+					case POPUP_COLOR_POPUP:
+						ppd.colorBack = ppd.colorText = 0;
+						break;
+				}
+				ppd.PluginWindowProc = (WNDPROC)PopupDlgProc;
+				ppd.PluginData = NULL;
+				ppd.iSeconds = opt.PopupTimeout; 
+				PUAddPopUpT(&ppd);
+				mir_free(str);
+			}
+			mir_free(smi.newstatusmsg);
+			mir_free(smi.oldstatusmsg);
+			return 1;
+		}
+	}
 	return 0;
 }
 
@@ -602,7 +970,7 @@ int ContactStatusChanged(WPARAM wParam, LPARAM lParam)
 	WORD newStatus = HIWORD(lParam);
 	HANDLE hContact = (HANDLE)wParam;
 	char buff[8], szProto[64], szSubProto[64]; 
-	bool bEnablePopup = true, bEnableSound = true;
+	BYTE bEnablePopup = true, bEnableSound = true;
 
 	char *hlpProto = (char *)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)wParam, 0);
 	if (hlpProto == NULL || opt.TempDisabled) 
@@ -621,9 +989,9 @@ int ContactStatusChanged(WPARAM wParam, LPARAM lParam)
 			// read last online proto for metaconatct if exists, 
 			// to avoid notifying when meta went offline but default contact's proto still online
 			DBVARIANT dbv; 
-		    if (!DBGetContactSettingString(hContact, szProto, "LastOnline", &dbv))
+			if (!DBGetContactSettingString(hContact, szProto, "LastOnline", &dbv))
 			{
-	            strcpy(szSubProto, dbv.pszVal);
+				strcpy(szSubProto, dbv.pszVal);
 				DBFreeVariant(&dbv);
 			}				
 		}
@@ -661,8 +1029,8 @@ int ContactStatusChanged(WPARAM wParam, LPARAM lParam)
 	{
 		wsprintfA(statusIDs, "s%d", myStatus);
 		wsprintfA(statusIDp, "p%d", myStatus);
-		bEnableSound = DBGetContactSettingByte(0, MODULE, statusIDs, 1) ? FALSE : TRUE;
-		bEnablePopup = DBGetContactSettingByte(0, MODULE, statusIDp, 1) ? FALSE : TRUE;
+		bEnableSound = DBGetContactSettingByte(0, MODULE, statusIDs, 1);
+		bEnablePopup = DBGetContactSettingByte(0, MODULE, statusIDp, 1);
 	}
 
 	if (bEnablePopup && DBGetContactSettingByte(hContact, MODULE, "EnablePopups", 1)) 
