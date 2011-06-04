@@ -127,7 +127,7 @@ void rcvThread(char *dummy) {
  */
 const TCHAR* getClassName(HWND wnd)
 {
-    static TCHAR className[256];
+	static TCHAR className[256];
 	
 	*className=0;
 	GetClassName(wnd, &className[0], sizeof(className)/sizeof(className[0]));
@@ -142,13 +142,13 @@ const TCHAR* getClassName(HWND wnd)
  */
 HWND findWindow(HWND parent, const TCHAR* childClassName)
 {
-    // Get child window
-    // This window is not combo box or edit box
+	// Get child window
+	// This window is not combo box or edit box
 	HWND wnd = GetWindow(parent, GW_CHILD);
 	while(wnd != NULL && _tcscmp(getClassName(wnd), childClassName) != 0)
 		wnd = GetWindow(wnd, GW_HWNDNEXT);
-    
-    return wnd;
+	
+	return wnd;
 }
 
 DWORD WINAPI setUserNamePasswordThread(LPVOID lpDummy)
@@ -254,7 +254,7 @@ int SkypeMsgInit(void) {
 	SkypeMsgs->tAdded=SkypeMsgs->tReceived=0;
 	SkypeMsgs->next=NULL;
 	InitializeCriticalSection(&MsgQueueMutex);
-    InitializeCriticalSection(&ConnectMutex);
+	InitializeCriticalSection(&ConnectMutex);
 	InitializeCriticalSection(&SendMutex);
 	m_szSendBuf = malloc(m_iBufSize=512);
 	return 0;
@@ -383,25 +383,25 @@ static int __sendMsgProc(char *szMsg) {
 	   CopyData.lpData=szMsg; 
 	   CopyData.cbData=(DWORD)strlen(szMsg)+1;
 
-       // Internal comm channel
+	   // Internal comm channel
 	   if (pszProxyCallout)
 		   return CallService (pszProxyCallout, 0, (LPARAM)&CopyData);
 
 	   // If this didn't work, proceed with normal Skype API
-       if (!hSkypeWnd) 
+	   if (!hSkypeWnd) 
 	   {
 		   LOG(("SkypeSend: DAMN! No Skype window handle! :("));
 	   }
 	   SendResult=SendMessage(hSkypeWnd, WM_COPYDATA, (WPARAM)g_hWnd, (LPARAM)&CopyData);
-       LOG(("SkypeSend: SendMessage returned %d", SendResult));
+	   LOG(("SkypeSend: SendMessage returned %d", SendResult));
    }
    if (!SendResult) 
    {
 	  SkypeInitialized=FALSE;
-      AttachStatus=-1;
+	  AttachStatus=-1;
 	  ResetEvent(SkypeReady);
 	  if (g_hWnd) KillTimer (g_hWnd, 1);
-  	  if (SkypeStatus!=ID_STATUS_OFFLINE) 
+	  if (SkypeStatus!=ID_STATUS_OFFLINE) 
 	  {
 		// Go offline
 		logoff_contacts(FALSE);
@@ -414,7 +414,7 @@ static int __sendMsgProc(char *szMsg) {
 	  if (ConnectToSkypeAPI(NULL,FALSE)!=-1) 
 	  {
 		  if (UseSockets) {
-		  	   if (send(ClientSocket, (char *)&length, sizeof(length), 0)==SOCKET_ERROR ||
+			   if (send(ClientSocket, (char *)&length, sizeof(length), 0)==SOCKET_ERROR ||
 			   send(ClientSocket, szMsg, length, 0)==SOCKET_ERROR) return -1;
 		  } else
 			if (!SendMessage(hSkypeWnd, WM_COPYDATA, (WPARAM)g_hWnd, (LPARAM)&CopyData)) return -1;
@@ -497,7 +497,7 @@ int SkypeSend(char *szFmt, ...) {
  * Warning: Don't forget to free() return value!
  */
 char *SkypeRcvTime(char *what, time_t st, DWORD maxwait) {
-    char *msg, *token=NULL;
+	char *msg, *token=NULL;
 	struct MsgQueue *ptr, *ptr_;
 	int j;
 	DWORD dwWaitStat;
@@ -567,7 +567,7 @@ char *SkypeRcv(char *what, DWORD maxwait) {
 }
 
 char *SkypeRcvMsg(char *what, time_t st, HANDLE hContact, DWORD maxwait) {
-    char *msg, msgid[32]={0}, *pMsg, *pCurMsg;
+	char *msg, msgid[32]={0}, *pMsg, *pCurMsg;
 	struct MsgQueue *ptr, *ptr_;
 	int iLenWhat = strlen(what);
 	DWORD dwWaitStat;
@@ -1036,7 +1036,7 @@ static BOOL CALLBACK CallstatDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPA
 
 				// No other call in progress, no need for this Dlg., just answer the call
 				SkypeSend("SET %s STATUS INPROGRESS", dbv.pszVal);
-                testfor ("ERROR", 200);
+				testfor ("ERROR", 200);
 				DBFreeVariant(&dbv);
 			}
 			DestroyWindow(hwndDlg);
@@ -1356,7 +1356,7 @@ INT_PTR SkypeChatCreate(WPARAM wParam, LPARAM lParam) {
 		return -1;
 	}
 	DBFreeVariant(&dbv);
-    if (ptr2=strstr (ptr, "STATUS")) {
+	if (ptr2=strstr (ptr, "STATUS")) {
 		*(ptr2-1)=0;
 		ChatStart (ptr+5, FALSE);
 	}
@@ -1431,7 +1431,7 @@ char *MirandaStatusToSkype(int id) {
 char *GetSkypeErrorMsg(char *str) {
 	char *pos, *reason, *msg;
 
-    LOG (("GetSkypeErrorMsg received error: %s", str));
+	LOG (("GetSkypeErrorMsg received error: %s", str));
 	if (!strncmp(str, "ERROR", 5)) {
 		reason=_strdup(str);
 		return reason;
@@ -1538,7 +1538,7 @@ static int _ConnectToSkypeAPI(char *path, BOOL bStart) {
 		struct hostent *hp;
 
 		LOG(("ConnectToSkypeAPI: Connecting to Skype2socket socket..."));
-        if ((ClientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP))==INVALID_SOCKET) return -1;
+		if ((ClientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP))==INVALID_SOCKET) return -1;
 
 		if (!DBGetContactSettingString(NULL, SKYPE_PROTONAME, "Host", &dbv)) {
 			if ((inet=inet_addr(dbv.pszVal))==-1) {
@@ -1561,7 +1561,7 @@ static int _ConnectToSkypeAPI(char *path, BOOL bStart) {
 		service.sin_port = htons((unsigned short)DBGetContactSettingWord(NULL, SKYPE_PROTONAME, "Port", 1401));
 	
 		if ( connect( ClientSocket, (SOCKADDR*) &service, sizeof(service) ) == SOCKET_ERROR) return -1;
-            
+			
 		if (DBGetContactSettingByte(NULL, SKYPE_PROTONAME, "RequiresPassword", 0) && !DBGetContactSettingString(NULL, SKYPE_PROTONAME, "Password", &dbv)) 
 		{
 				char reply=0;
@@ -1607,7 +1607,7 @@ static int _ConnectToSkypeAPI(char *path, BOOL bStart) {
 
 		if (!rcvThreadRunning)
 			if(_beginthread(( pThreadFunc )rcvThread, 0, NULL)==-1) return -1;
-                
+				
 		AttachStatus=SKYPECONTROLAPI_ATTACH_SUCCESS;
 		return 0;
 	}
@@ -1635,7 +1635,7 @@ static int _ConnectToSkypeAPI(char *path, BOOL bStart) {
 
 	do 
 	{
-        int retval;
+		int retval;
 		/*	To initiate communication, Client should broadcast windows message
 			('SkypeControlAPIDiscover') to all windows in the system, specifying its own
 			window handle in wParam parameter.
@@ -1726,7 +1726,7 @@ static int _ConnectToSkypeAPI(char *path, BOOL bStart) {
 						}
 						_spawnv(_P_NOWAIT, path, args);
 
-                        setUserNamePassword();
+						setUserNamePassword();
 					}
 					if (pFree) free(pFree);
 				}
