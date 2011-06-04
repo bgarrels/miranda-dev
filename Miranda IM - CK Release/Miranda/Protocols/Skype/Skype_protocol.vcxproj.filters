@@ -59,9 +59,6 @@
     <ClInclude Include="gchat.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="m_chat.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="m_popup.h">
       <Filter>Header</Filter>
     </ClInclude>
@@ -96,6 +93,9 @@
       <Filter>Ressource</Filter>
     </ClInclude>
     <ClInclude Include="ezxml\ezxml.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\m_chat.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
