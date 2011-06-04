@@ -274,95 +274,95 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
    
    switch(msg)
    {
-      case WM_INITDIALOG:
-      {
-         TCITEM tci;
-         RECT rcClient;
-         GetClientRect(hwnd, &rcClient);
+	  case WM_INITDIALOG:
+	  {
+		 TCITEM tci;
+		 RECT rcClient;
+		 GetClientRect(hwnd, &rcClient);
 
 		 iInit = TRUE;
-         tci.mask = TCIF_PARAM|TCIF_TEXT;
-         tci.lParam = (LPARAM)CreateDialog(hInst,MAKEINTRESOURCE(IDD_OPT_DEFAULT), hwnd, OptionsDefaultDlgProc);
-         tci.pszText = TranslateT("Skype default");
+		 tci.mask = TCIF_PARAM|TCIF_TEXT;
+		 tci.lParam = (LPARAM)CreateDialog(hInst,MAKEINTRESOURCE(IDD_OPT_DEFAULT), hwnd, OptionsDefaultDlgProc);
+		 tci.pszText = TranslateT("Skype default");
 		 TabCtrl_InsertItem(GetDlgItem(hwnd, IDC_OPTIONSTAB), 0, &tci);
-         MoveWindow((HWND)tci.lParam,1,28,rcClient.right-5,rcClient.bottom-31,1);
+		 MoveWindow((HWND)tci.lParam,1,28,rcClient.right-5,rcClient.bottom-31,1);
 #ifdef HAVE_UXTHEMES
 		 if(MyEnableThemeDialogTexture)
-             MyEnableThemeDialogTexture((HWND)tci.lParam, ETDT_ENABLETAB);
+			 MyEnableThemeDialogTexture((HWND)tci.lParam, ETDT_ENABLETAB);
 #endif
 
-         tci.lParam = (LPARAM)CreateDialog(hInst,MAKEINTRESOURCE(IDD_OPT_ADVANCED),hwnd,OptionsAdvancedDlgProc);
-         tci.pszText = TranslateT("Skype advanced");
-         TabCtrl_InsertItem(GetDlgItem(hwnd, IDC_OPTIONSTAB), 1, &tci);
-         MoveWindow((HWND)tci.lParam,1,28,rcClient.right-5,rcClient.bottom-31,1);
-         ShowWindow((HWND)tci.lParam, SW_HIDE);
+		 tci.lParam = (LPARAM)CreateDialog(hInst,MAKEINTRESOURCE(IDD_OPT_ADVANCED),hwnd,OptionsAdvancedDlgProc);
+		 tci.pszText = TranslateT("Skype advanced");
+		 TabCtrl_InsertItem(GetDlgItem(hwnd, IDC_OPTIONSTAB), 1, &tci);
+		 MoveWindow((HWND)tci.lParam,1,28,rcClient.right-5,rcClient.bottom-31,1);
+		 ShowWindow((HWND)tci.lParam, SW_HIDE);
 #ifdef HAVE_UXTHEMES
 		 if(MyEnableThemeDialogTexture)
-             MyEnableThemeDialogTexture((HWND)tci.lParam, ETDT_ENABLETAB);
+			 MyEnableThemeDialogTexture((HWND)tci.lParam, ETDT_ENABLETAB);
 #endif
 
 		 tci.lParam = (LPARAM)CreateDialog(hInst,MAKEINTRESOURCE(IDD_OPT_PROXY),hwnd,OptionsProxyDlgProc);
-         tci.pszText = TranslateT("Skype proxy");
-         TabCtrl_InsertItem(GetDlgItem(hwnd, IDC_OPTIONSTAB), 2, &tci);
-         MoveWindow((HWND)tci.lParam,1,28,rcClient.right-5,rcClient.bottom-31,1);
-         ShowWindow((HWND)tci.lParam, SW_HIDE);
+		 tci.pszText = TranslateT("Skype proxy");
+		 TabCtrl_InsertItem(GetDlgItem(hwnd, IDC_OPTIONSTAB), 2, &tci);
+		 MoveWindow((HWND)tci.lParam,1,28,rcClient.right-5,rcClient.bottom-31,1);
+		 ShowWindow((HWND)tci.lParam, SW_HIDE);
 #ifdef HAVE_UXTHEMES
 		 if(MyEnableThemeDialogTexture)
-             MyEnableThemeDialogTexture((HWND)tci.lParam, ETDT_ENABLETAB);
+			 MyEnableThemeDialogTexture((HWND)tci.lParam, ETDT_ENABLETAB);
 #endif
 
-         iInit = FALSE;
-         return FALSE;
-      }
+		 iInit = FALSE;
+		 return FALSE;
+	  }
 
-      case PSM_CHANGED: // used so tabs dont have to call SendMessage(GetParent(GetParent(hwnd)), PSM_CHANGED, 0, 0);
-         if(!iInit)
-             SendMessage(GetParent(hwnd), PSM_CHANGED, 0, 0);
-         break;
-      case WM_NOTIFY:
-         switch(((LPNMHDR)lParam)->idFrom) {
-            case 0:
-               switch (((LPNMHDR)lParam)->code)
-               {
-                  case PSN_APPLY:
-                     {
-                        TCITEM tci;
-                        int i,count;
-                        tci.mask = TCIF_PARAM;
-                        count = TabCtrl_GetItemCount(GetDlgItem(hwnd,IDC_OPTIONSTAB));
-                        for (i=0;i<count;i++)
-                        {
-                           TabCtrl_GetItem(GetDlgItem(hwnd,IDC_OPTIONSTAB),i,&tci);
-                           SendMessage((HWND)tci.lParam,WM_NOTIFY,0,lParam);
-                        }						
-                     }
-                  break;
-               }
-            break;
-            case IDC_OPTIONSTAB:
-               switch (((LPNMHDR)lParam)->code)
-               {
-                  case TCN_SELCHANGING:
-                     {
-                        TCITEM tci;
-                        tci.mask = TCIF_PARAM;
-                        TabCtrl_GetItem(GetDlgItem(hwnd,IDC_OPTIONSTAB),TabCtrl_GetCurSel(GetDlgItem(hwnd,IDC_OPTIONSTAB)),&tci);
-                        ShowWindow((HWND)tci.lParam,SW_HIDE);                     
-                     }
-                  break;
-                  case TCN_SELCHANGE:
-                     {
-                        TCITEM tci;
-                        tci.mask = TCIF_PARAM;
-                        TabCtrl_GetItem(GetDlgItem(hwnd,IDC_OPTIONSTAB),TabCtrl_GetCurSel(GetDlgItem(hwnd,IDC_OPTIONSTAB)),&tci);
-                        ShowWindow((HWND)tci.lParam,SW_SHOW);                     
-                     }
-                  break;
-               }
-            break;
+	  case PSM_CHANGED: // used so tabs dont have to call SendMessage(GetParent(GetParent(hwnd)), PSM_CHANGED, 0, 0);
+		 if(!iInit)
+			 SendMessage(GetParent(hwnd), PSM_CHANGED, 0, 0);
+		 break;
+	  case WM_NOTIFY:
+		 switch(((LPNMHDR)lParam)->idFrom) {
+			case 0:
+			   switch (((LPNMHDR)lParam)->code)
+			   {
+				  case PSN_APPLY:
+					 {
+						TCITEM tci;
+						int i,count;
+						tci.mask = TCIF_PARAM;
+						count = TabCtrl_GetItemCount(GetDlgItem(hwnd,IDC_OPTIONSTAB));
+						for (i=0;i<count;i++)
+						{
+						   TabCtrl_GetItem(GetDlgItem(hwnd,IDC_OPTIONSTAB),i,&tci);
+						   SendMessage((HWND)tci.lParam,WM_NOTIFY,0,lParam);
+						}						
+					 }
+				  break;
+			   }
+			break;
+			case IDC_OPTIONSTAB:
+			   switch (((LPNMHDR)lParam)->code)
+			   {
+				  case TCN_SELCHANGING:
+					 {
+						TCITEM tci;
+						tci.mask = TCIF_PARAM;
+						TabCtrl_GetItem(GetDlgItem(hwnd,IDC_OPTIONSTAB),TabCtrl_GetCurSel(GetDlgItem(hwnd,IDC_OPTIONSTAB)),&tci);
+						ShowWindow((HWND)tci.lParam,SW_HIDE);                     
+					 }
+				  break;
+				  case TCN_SELCHANGE:
+					 {
+						TCITEM tci;
+						tci.mask = TCIF_PARAM;
+						TabCtrl_GetItem(GetDlgItem(hwnd,IDC_OPTIONSTAB),TabCtrl_GetCurSel(GetDlgItem(hwnd,IDC_OPTIONSTAB)),&tci);
+						ShowWindow((HWND)tci.lParam,SW_SHOW);                     
+					 }
+				  break;
+			   }
+			break;
 
-         }
-      break;
+		 }
+	  break;
    }
    return FALSE;
 }
@@ -585,15 +585,15 @@ INT_PTR CALLBACK OptionsDefaultDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 			EnableWindow(GetDlgItem(hwndDlg, IDC_BROWSEDP), startSkype && SendMessage(GetDlgItem(hwndDlg, IDC_DATAPATHO), BM_GETCHECK,0,0));
 			EnableWindow(GetDlgItem(hwndDlg, IDC_DATAPATH), startSkype && SendMessage(GetDlgItem(hwndDlg, IDC_DATAPATHO), BM_GETCHECK,0,0));
 
-            // LoginUserName
-            if(!DBGetContactSettingWString(NULL,SKYPE_PROTONAME,"LoginUserName",&dbv)) 
+			// LoginUserName
+			if(!DBGetContactSettingWString(NULL,SKYPE_PROTONAME,"LoginUserName",&dbv)) 
 			{
 				SetWindowTextW(GetDlgItem(hwndDlg, IDC_USERNAME), dbv.pwszVal);
 				DBFreeVariant(&dbv);
 			}
 
-            // LoginPassword
-            if(!DBGetContactSettingWString(NULL,SKYPE_PROTONAME,"LoginPassword",&dbv)) 
+			// LoginPassword
+			if(!DBGetContactSettingWString(NULL,SKYPE_PROTONAME,"LoginPassword",&dbv)) 
 			{
 				SetWindowTextW(GetDlgItem(hwndDlg, IDC_PASSWORD), dbv.pwszVal);
 				DBFreeVariant(&dbv);
@@ -613,7 +613,7 @@ INT_PTR CALLBACK OptionsDefaultDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 				case PSN_KILLACTIVE:
 				{
 					char text[500];
-                    WCHAR wtext[500];
+					WCHAR wtext[500];
 					char szRelativePath[MAX_PATH];
 
 					DBWriteContactSettingByte (NULL, SKYPE_PROTONAME, "StartSkype", (BYTE)(SendMessage(GetDlgItem(hwndDlg, IDC_STARTSKYPE), BM_GETCHECK,0,0)));
@@ -636,13 +636,13 @@ INT_PTR CALLBACK OptionsDefaultDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 					strncpy(szRelativePath, text, sizeof(szRelativePath)-1);
 					CallService (MS_UTILS_PATHTORELATIVE, (WPARAM)text, (LPARAM)szRelativePath);
 					DBWriteContactSettingString(NULL, SKYPE_PROTONAME, "datapath", szRelativePath);
-                   
-                    // LoginUserName
-                    GetDlgItemTextW(hwndDlg,IDC_USERNAME,wtext,sizeof(wtext)/sizeof(WCHAR));
+				   
+					// LoginUserName
+					GetDlgItemTextW(hwndDlg,IDC_USERNAME,wtext,sizeof(wtext)/sizeof(WCHAR));
 					DBWriteContactSettingWString(NULL, SKYPE_PROTONAME, "LoginUserName", wtext);
 
-                    // LoginPassword
-                    GetDlgItemTextW(hwndDlg,IDC_PASSWORD,wtext,sizeof(wtext)/sizeof(WCHAR));
+					// LoginPassword
+					GetDlgItemTextW(hwndDlg,IDC_PASSWORD,wtext,sizeof(wtext)/sizeof(WCHAR));
 					DBWriteContactSettingWString(NULL, SKYPE_PROTONAME, "LoginPassword", wtext);
 
 					return TRUE;
@@ -943,7 +943,7 @@ void DoAutoDetect(HWND dlg)
 
 	if (f1 = ezxml_parse_file(fileName))
 	{
- 		if (acc = ezxml_get(f1, "Lib", 0, "Account", 0, "Default", -1))
+		if (acc = ezxml_get(f1, "Lib", 0, "Account", 0, "Default", -1))
 		{
 			if (GetWindowTextA(GetDlgItem(dlg,IDC_USERNAME),tmpUser,sizeof(tmpUser)))
 				SetWindowTextA(GetDlgItem(dlg,IDC_USERNAME),acc->txt);
