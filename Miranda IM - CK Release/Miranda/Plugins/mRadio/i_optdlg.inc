@@ -126,7 +126,7 @@ begin
       AnsiToWide(group,p,MirandaCP);
       CreateGroupW(p,result);
       mFreeMem(p);
-      CallService(MS_IGNORE_IGNORE,result,IGNOREEVENT_ALL);
+      CallService(MS_IGNORE_IGNORE,result,IGNOREEVENT_USERONLINE);
     end;
   end;
 end;

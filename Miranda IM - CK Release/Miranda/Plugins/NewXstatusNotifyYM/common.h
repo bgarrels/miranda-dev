@@ -96,7 +96,7 @@
 #define NOTIFY_INTERVAL_ICQ		5000
 
 #define ID_STATUS_FROMOFFLINE	1
-#define ID_STATUS_EXTRASTATUS   40081
+#define ID_STATUS_EXTRASTATUS   40082
 #define ID_STATUS_MIN			ID_STATUS_OFFLINE
 #define ID_STATUS_MAX			ID_STATUS_OUTTOLUNCH
 #define ID_STATUS_MAX2			ID_STATUS_EXTRASTATUS
@@ -137,6 +137,15 @@ typedef struct tagPLUGINDATA
 	HANDLE hAwayMsgHook;
 } PLUGINDATA;
 
+typedef struct {
+	HANDLE hContact;
+	TCHAR *cust;
+	TCHAR *oldstatusmsg;
+	TCHAR *newstatusmsg;
+	char *proto;
+	int compare;
+} STATUSMSGINFO;
+
 /*
 HANDLE hContact = (HANDLE)wParam;
 WORD oldStatus = LOWORD(lParam);
@@ -148,5 +157,7 @@ Cast them to (int) if you need them that way.
 #define ME_STATUSCHANGE_CONTACTSTATUSCHANGED "Miranda/StatusChange/ContactStatusChanged"
 
 #define MS_STATUSCHANGE_MENUCOMMAND "NewStatusNotify/EnableDisableMenuCommand"
+
+#define TMR_CONNECTIONTIMEOUT		10000
 
 #endif //COMMON_H

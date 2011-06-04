@@ -12,6 +12,7 @@
 #define IDD_OPT_POPUP                   115
 #define IDD_OPT_XLOG                    116
 #define IDI_POPUP                       117
+#define IDD_OPT_SMPOPUP                 117
 #define IDI_SOUND                       118
 #define IDI_LOGGING                     119
 #define IDI_XSTATUS                     120
@@ -19,6 +20,7 @@
 #define IDI_ENABLEALL                   122
 #define IDI_NOTIFICATION_OFF            123
 #define IDI_NOTIFICATION_ON             124
+#define IDI_STATUS_MESSAGE              125
 #define IDC_STATUS_STATIC_INFINITE      1002
 #define IDC_STATUS_STATIC_DEFAULT       1003
 #define IDC_TIMEOUT_VALUE_SPIN          1004
@@ -75,6 +77,11 @@
 #define IDC_DISABLEALLICON              1080
 #define IDC_ENABLEALLICON               1081
 #define IDC_SHOWGROUP                   1082
+#define IDC_STATUSMESSAGEICON           1082
+#define IDC_ONCONNECT                   1101
+#define IDC_PUIGNOREREMOVE              1102
+#define IDC_POPUPTEXT                   1115
+#define IDC_PROTOCOLLIST                1207
 #define IDC_LOGFILE                     2029
 #define IDC_BT_CHOOSELOGFILE            2030
 #define IDC_BT_VIEWLOG                  2031
@@ -92,6 +99,7 @@
 #define IDC_CHK_ONTHEPHONE              40079
 #define IDC_CHK_OUTTOLUNCH              40080
 #define IDC_CHK_XSTATUS                 40081
+#define IDC_CHK_STATUS_MESSAGE          40082
 #define IDC_CHK_FROMOFFLINE             40083
 #define IDC_OFFLINE_TX                  41071
 #define IDC_ONLINE_TX                   41072
@@ -104,6 +112,7 @@
 #define IDC_ONTHEPHONE_TX               41079
 #define IDC_OUTTOLUNCH_TX               41080
 #define IDC_XSTATUS_TX                  41081
+#define IDC_STATUSMESSAGE_TX            41082
 #define IDC_OFFLINE_BG                  42071
 #define IDC_ONLINE_BG                   42072
 #define IDC_CHK_ONLINE2                 42072
@@ -124,6 +133,7 @@
 #define IDC_OUTTOLUNCH_BG               42080
 #define IDC_CHK_OUTTOLUNCH2             42080
 #define IDC_XSTATUS_BG                  42081
+#define IDC_STATUSMESSAGE_BG            42082
 
 // Next default values for new objects
 // 

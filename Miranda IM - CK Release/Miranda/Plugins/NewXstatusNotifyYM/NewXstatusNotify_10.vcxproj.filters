@@ -106,6 +106,9 @@
     <None Include="res\variables.ico">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\status_message.ico">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
