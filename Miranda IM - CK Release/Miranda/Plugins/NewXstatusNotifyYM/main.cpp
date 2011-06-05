@@ -4,19 +4,19 @@
 	Copyright (c) 2005-2007 Vasilich
 	Copyright (c) 2007-2011 yaho
 
-	This program is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
-	(at your option) any later version.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 #include "common.h"
@@ -54,9 +54,9 @@ PLUGININFOEX pluginInfoEx = {
 	sizeof(PLUGININFOEX),
 #ifdef _UNICODE
 	#ifdef _WIN64
-		"NewXstatusNotify YM (Unicode x64) CK Release",
+		"NewXstatusNotify YM (Unicode x64) Mataes Release",
 	#else
-		"NewXstatusNotify YM (Unicode) CK Release",
+		"NewXstatusNotify YM (Unicode) Mataes Release",
 	#endif
 #else
 	"NewXstatusNotify YM Mataes Release",
@@ -698,8 +698,8 @@ int ProcessStatus(DBCONTACTWRITESETTING *cws, HANDLE hContact)
 				switch (opt.Colors)
 				{
 					case POPUP_COLOR_OWN:
-						ppd.colorBack = StatusList[DBGetContactSettingWord(smi.hContact, smi.proto, "Status", ID_STATUS_ONLINE)].colorBack;
-						ppd.colorText = StatusList[DBGetContactSettingWord(smi.hContact, smi.proto, "Status", ID_STATUS_ONLINE)].colorText;
+						ppd.colorBack = StatusList[Index(DBGetContactSettingWord(smi.hContact, smi.proto, "Status", ID_STATUS_ONLINE))].colorBack;
+						ppd.colorText = StatusList[Index(DBGetContactSettingWord(smi.hContact, smi.proto, "Status", ID_STATUS_ONLINE))].colorText;
 						break;
 					case POPUP_COLOR_WINDOWS:
 						ppd.colorBack = GetSysColor(COLOR_BTNFACE);
@@ -989,9 +989,9 @@ int ContactStatusChanged(WPARAM wParam, LPARAM lParam)
 			// read last online proto for metaconatct if exists, 
 			// to avoid notifying when meta went offline but default contact's proto still online
 			DBVARIANT dbv; 
-			if (!DBGetContactSettingString(hContact, szProto, "LastOnline", &dbv))
+		    if (!DBGetContactSettingString(hContact, szProto, "LastOnline", &dbv))
 			{
-				strcpy(szSubProto, dbv.pszVal);
+	            strcpy(szSubProto, dbv.pszVal);
 				DBFreeVariant(&dbv);
 			}				
 		}
