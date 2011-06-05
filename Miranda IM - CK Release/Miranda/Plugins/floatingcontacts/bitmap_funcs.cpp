@@ -689,9 +689,9 @@ void MyBitmap::Blur(int w, int h)
 			for (int k = 0; k < 4; ++k)
 			{
 				int tot = ReadP(tmp,width,height,x+w,y+h,k) +
-				          ReadP(tmp,width,height,x-w,y-h,k) -
-				          ReadP(tmp,width,height,x-w,y+h,k) -
-				          ReadP(tmp,width,height,x+w,y-h,k);
+						  ReadP(tmp,width,height,x-w,y-h,k) -
+						  ReadP(tmp,width,height,x-w,y+h,k) -
+						  ReadP(tmp,width,height,x+w,y-h,k);
 
 				*dst = BYTE(tot*mul);
 
@@ -1197,12 +1197,12 @@ void MyBitmap::allocate(int w, int h)
 
 	BITMAPINFO bi;
 
-    bi.bmiHeader.biSize = sizeof(bi.bmiHeader);
-    bi.bmiHeader.biWidth = w;
-    bi.bmiHeader.biHeight = -h;
-    bi.bmiHeader.biPlanes = 1;
-    bi.bmiHeader.biBitCount = 32;
-    bi.bmiHeader.biCompression = BI_RGB;
+	bi.bmiHeader.biSize = sizeof(bi.bmiHeader);
+	bi.bmiHeader.biWidth = w;
+	bi.bmiHeader.biHeight = -h;
+	bi.bmiHeader.biPlanes = 1;
+	bi.bmiHeader.biBitCount = 32;
+	bi.bmiHeader.biCompression = BI_RGB;
 
 	if (dcBmp)
 	{
@@ -1210,9 +1210,9 @@ void MyBitmap::allocate(int w, int h)
 		DeleteDC(dcBmp);
 	}
 
-    hBmp = (HBITMAP)CreateDIBSection(0, &bi, DIB_RGB_COLORS, (void **)&bits, 0, 0);
-    dcBmp = CreateCompatibleDC(0);
-    hBmpSave = (HBITMAP)SelectObject(dcBmp, hBmp);
+	hBmp = (HBITMAP)CreateDIBSection(0, &bi, DIB_RGB_COLORS, (void **)&bits, 0, 0);
+	dcBmp = CreateCompatibleDC(0);
+	hBmpSave = (HBITMAP)SelectObject(dcBmp, hBmp);
 
 	GdiFlush();
 }
