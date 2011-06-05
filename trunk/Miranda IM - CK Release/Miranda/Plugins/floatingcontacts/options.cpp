@@ -28,7 +28,7 @@ static SFontSettings s_rgFontSettingsMiranda[FLT_FONTIDS];
 #define FLT_SAME_AS_NONE	((BYTE)0xFF)
 #define FLT_SAME_AS_MIRANDA	((BYTE)0xFE)
 
-static char* s_rgszFontSizes[]={"8","10","14","16","18","20","24","28"};
+static char* s_rgszFontSizes[]={"4","6","8","10","14","16","18","20","24","28"};
 
 static const TCHAR* s_rgszFontIdDescr[FLT_FONTIDS] =
 {
@@ -930,13 +930,13 @@ OptSknWndProc
 											);
 
 				if (!lstrcmpA(s_rgFontSettings[wParam].szFace, pSameAs->szFace) && s_rgFontSettings[wParam].charset == pSameAs->charset)
-    				s_rgFontSettings[wParam].sameAsFlags |= SAMEASF_FACE;
+					s_rgFontSettings[wParam].sameAsFlags |= SAMEASF_FACE;
 				if (s_rgFontSettings[wParam].size == pSameAs->size)
-    				s_rgFontSettings[wParam].sameAsFlags |= SAMEASF_SIZE;
+					s_rgFontSettings[wParam].sameAsFlags |= SAMEASF_SIZE;
 				if (s_rgFontSettings[wParam].style == pSameAs->style)
-    				s_rgFontSettings[wParam].sameAsFlags |= SAMEASF_STYLE;
+					s_rgFontSettings[wParam].sameAsFlags |= SAMEASF_STYLE;
 				if (s_rgFontSettings[wParam].colour == pSameAs->colour)
-    				s_rgFontSettings[wParam].sameAsFlags |= SAMEASF_COLOUR;
+					s_rgFontSettings[wParam].sameAsFlags |= SAMEASF_COLOUR;
 				SendMessage(hwndDlg,M_SETSAMEASBOXES,wParam,0);
 			}
 			break;

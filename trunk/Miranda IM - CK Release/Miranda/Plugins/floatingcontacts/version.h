@@ -1,6 +1,6 @@
 #define BUILD_NUM 2
-#define BUILD_NUM_STR  "2"
-#define REVISION  "$Revision: 2222 $"
+#define BUILD_NUM_STR  "3"
+#define REVISION  "$Revision: 2223 $"
 
 #define COREVERSION_NUM 1, 0, 3,
 #define COREVERSION_NUM_STR  "1, 0, 3"

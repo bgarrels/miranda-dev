@@ -18,7 +18,7 @@ No warranty for any misbehaviour.
 #include "shlwapi.h"
 
 #include "version.h"
-#include "..\..\..\Miranda IM Trunk\miranda\include\newpluginapi.h"
+#include "newpluginapi.h"
 
 #pragma comment ( lib, "comctl32.lib" )
 #pragma comment ( lib, "shlwapi.lib" )
@@ -186,13 +186,13 @@ PLUGININFOEX pluginInfoEx ={
 
 _inline unsigned int MakeVer(int a,int b,int c,int d)
 {
-    return PLUGIN_MAKE_VERSION(a,b,c,d);
+	return PLUGIN_MAKE_VERSION(a,b,c,d);
 }
 
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion) {
 
 	if( mirandaVersion < MakeVer(MINIMAL_COREVERSION) ) return NULL;
-    pluginInfoEx.version=MakeVer(PRODUCT_VERSION);
+	pluginInfoEx.version=MakeVer(PRODUCT_VERSION);
 	return &pluginInfoEx;
 }
 
@@ -220,7 +220,7 @@ BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
 extern "C" __declspec(dllexport) PLUGININFO* MirandaPluginInfo( DWORD mirandaVersion )
 {
 	if( mirandaVersion < MakeVer(MINIMAL_COREVERSION) ) return NULL;
-    pluginInfo.version=MakeVer(PRODUCT_VERSION);
+	pluginInfo.version=MakeVer(PRODUCT_VERSION);
 	return &pluginInfo;
 }
 
@@ -1077,7 +1077,7 @@ void RegHotkey( HANDLE hContact, HWND hwnd )
 
 
 ///////////////////////////////////////////////////////
-// Contact sttings
+// Contact settings
 
 void SaveContactsPos()
 {	

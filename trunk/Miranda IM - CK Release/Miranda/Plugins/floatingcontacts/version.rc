@@ -1,10 +1,21 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
 
-#include <windows.h>
-#include "version.h"
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION FILE_VERSION
- PRODUCTVERSION PRODUCT_VERSION
+ FILEVERSION 1,0,3,2
+ PRODUCTVERSION 1,0,3,2
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -19,14 +30,14 @@ BEGIN
     BEGIN
         BLOCK "000004b0"
         BEGIN
-            VALUE "Author", __AUTHOR
-            VALUE "FileDescription", __DESC
-            VALUE "FileVersion", FILE_VERSION_STR
-            VALUE "InternalName", __PLUGIN_NAME
-            VALUE "LegalCopyright", __COPYRIGHT
-            VALUE "OriginalFilename", __FILENAME
-            VALUE "ProductName", __PLUGIN_NAME
-            VALUE "ProductVersion", PRODUCT_VERSION_STR
+            VALUE "Author", "Iavor Vajarov, Kosh&chka, Victor Pavlychko, CHEF-KOCH"
+            VALUE "FileDescription", "Floating Contacts plugin for Miranda IM rewritten by CHEF-KOCH"
+            VALUE "FileVersion", "1, 0, 3 (Unicode) build 3 $Revision: 2223 $"
+            VALUE "InternalName", "Floating Contacts (Unicode)"
+            VALUE "LegalCopyright", "© 2002-2004 I. Vajarov (ivajarov@code.bg), © 2008 Kosh&chka, V. Pavlychko, © 2011 CHEF-KOCH"
+            VALUE "OriginalFilename", "FltContacts.dll"
+            VALUE "ProductName", "Floating Contacts (Unicode)"
+            VALUE "ProductVersion", "1, 0, 3 (Unicode) build 3 $Revision: 2223 $"
         END
     END
     BLOCK "VarFileInfo"
@@ -34,3 +45,44 @@ BEGIN
         VALUE "Translation", 0x0, 1200
     END
 END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
