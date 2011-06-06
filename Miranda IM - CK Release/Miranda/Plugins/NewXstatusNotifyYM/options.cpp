@@ -4,19 +4,19 @@
 	Copyright (c) 2005-2007 Vasilich
 	Copyright (c) 2007-2011 yaho
 
-	This program is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
-	(at your option) any later version.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 #include "common.h"
@@ -300,7 +300,7 @@ INT_PTR CALLBACK DlgProcPopUpOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM 
 			CheckDlgButton(hwndDlg, IDC_USEPOPUPCOLORS, (opt.Colors == POPUP_COLOR_POPUP) ? 1 : 0);
 			CheckDlgButton(hwndDlg, IDC_USEWINCOLORS, (opt.Colors == POPUP_COLOR_WINDOWS) ? 1 : 0);
 
-			for (int i = ID_STATUS_MIN; i <= ID_STATUS_MAX2; i++) 
+			for (int i = ID_STATUS_MIN; i <= ID_STATUS_MAX2 - 1; i++) 
 			{
 				SendDlgItemMessage(hwndDlg, (i+2000), CPM_SETCOLOUR, 0, StatusList[Index(i)].colorBack);
 				SendDlgItemMessage(hwndDlg, (i+1000), CPM_SETCOLOUR, 0, StatusList[Index(i)].colorText);
@@ -357,7 +357,7 @@ INT_PTR CALLBACK DlgProcPopUpOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM 
 					case IDC_USEWINCOLORS:
 					case IDC_USEPOPUPCOLORS:
 					{
-						for (int i = ID_STATUS_MIN; i <= ID_STATUS_MAX2; i++)
+						for (int i = ID_STATUS_MIN; i <= ID_STATUS_MAX2 - 1; i++)
 						{
 							EnableWindow(GetDlgItem(hwndDlg, (i+2000)), idCtrl == IDC_USEOWNCOLORS); //Background
 							EnableWindow(GetDlgItem(hwndDlg, (i+1000)), idCtrl == IDC_USEOWNCOLORS); //Text
@@ -438,7 +438,7 @@ INT_PTR CALLBACK DlgProcPopUpOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM 
 			{
 				char str[8];
 				DWORD ctlColour = 0;
-				for (int i = ID_STATUS_MIN; i <= ID_STATUS_MAX2; i++) 
+				for (int i = ID_STATUS_MIN; i <= ID_STATUS_MAX2 - 1; i++) 
 				{
 					ctlColour = SendDlgItemMessage(hwndDlg, (i+2000), CPM_GETCOLOUR, 0, 0);
 					StatusList[Index(i)].colorBack = SendDlgItemMessage(hwndDlg, (i+2000), CPM_GETCOLOUR, 0, 0);
