@@ -129,7 +129,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_QIP_2010",				_T("|QIP 2010*|http://qip* 3???")
 										_T("|http://2010.qip.ru*"),						_T("QIP 2010"),							_T("ClientIcons_Multiprotocols"),	IDI_QIP_2010, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_QIP_PDA",					_T("|QIP PDA*|http://pda.qip.ru/caps*")
-										_T("|QIP Mobile*"),								_T("QIP Mobile"),						_T("ClientIcons_Multiprotocols"),	IDI_QIP_PDA, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
+										_T("|*QIP Mobile*"),								_T("QIP Mobile"),						_T("ClientIcons_Multiprotocols"),	IDI_QIP_PDA, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_CitronIM",				_T("*Citron IM*"),								_T("Citron IM"),						_T("ClientIcons_Multiprotocols"),	IDI_CITRON, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_Palringo",				_T("|*Palringo*|http://palringo.com/caps*"),	_T("Palringo"),							_T("ClientIcons_Multiprotocols"),	IDI_PALRINGO, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_ImoIm",					_T("|*imo.im*"),								_T("Imo.im"),							_T("ClientIcons_Multiprotocols"),	IDI_IMOIM, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
