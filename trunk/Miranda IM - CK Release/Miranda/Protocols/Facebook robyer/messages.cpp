@@ -29,7 +29,7 @@ Last change on : $Date: 2011-02-07 18:19:39 +0100 (po, 07 2 2011) $
 
 struct send_direct
 {
-	send_direct(HANDLE hContact,const std::string &msg, HANDLE msgid) : hContact(hContact),msg(msg),msgid(msgid) {}
+	send_direct(HANDLE hContact,const std::string &msg, HANDLE msgid) : hContact(hContact), msg(msg), msgid(msgid) {}
 	HANDLE hContact;
 	std::string msg;
 	HANDLE msgid;
@@ -37,9 +37,16 @@ struct send_direct
 
 struct send_typing
 {
-	send_typing(HANDLE hContact,const int status) : hContact(hContact),status(status) {}
+	send_typing(HANDLE hContact,const int status) : hContact(hContact), status(status) {}
 	HANDLE hContact;
 	int status;
+};
+
+struct send_messaging
+{
+	send_messaging(const std::string &user_id, const int type) : user_id(user_id), type(type) {}
+	std::string user_id;
+	int type;
 };
 
 int FacebookProto::RecvMsg(HANDLE hContact, PROTORECVEVENT *pre)
@@ -48,8 +55,7 @@ int FacebookProto::RecvMsg(HANDLE hContact, PROTORECVEVENT *pre)
 
 	if( !DBGetContactSettingString(hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
 	{
-		std::string* data = new std::string( dbv.pszVal );
-		ForkThread( &FacebookProto::CloseChatWorker, this, (void*)data );
+		ForkThread( &FacebookProto::MessagingWorker, this, new send_messaging(dbv.pszVal, FACEBOOK_RECV_MESSAGE ) );
 		DBFreeVariant(&dbv);
 	}
 
@@ -98,9 +104,7 @@ void FacebookProto::SendMsgWorker(void *p)
 		}
 		if (result) {
 			ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_MESSAGE,ACKRESULT_SUCCESS, data->msgid,0);
-
-			std::string* data = new std::string( dbv.pszVal );
-			CloseChatWorker( (void*)data );
+			MessagingWorker( new send_messaging(dbv.pszVal, FACEBOOK_SEND_MESSAGE ) );
 		} else {
 			// RM TODO: somehow fix error_text codepage
 			ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_MESSAGE,ACKRESULT_FAILED, data->msgid,(LPARAM)error_text.c_str()/*Translate("Error with sending message.")*/);
@@ -168,13 +172,18 @@ void FacebookProto::SendTypingWorker(void *p)
 	delete typing;
 }
 
-void FacebookProto::CloseChatWorker(void *p)
+void FacebookProto::MessagingWorker(void *p)
 {
 	if (p == NULL)
 		return;
 
-	if ( DBGetContactSettingByte(NULL, m_szModuleName, FACEBOOK_KEY_CLOSE_WINDOWS_ENABLE, DEFAULT_CLOSE_WINDOWS_ENABLE ) )
-    facy.close_chat( *(std::string*)p );
+	send_messaging *data = static_cast<send_messaging*>(p);
 
-	delete p;
+	if (data->type == FACEBOOK_RECV_MESSAGE)
+		facy.chat_mark_read( data->user_id );
+
+	if ( DBGetContactSettingByte(NULL, m_szModuleName, FACEBOOK_KEY_CLOSE_WINDOWS_ENABLE, DEFAULT_CLOSE_WINDOWS_ENABLE ) )
+		facy.close_chat( data->user_id );
+
+	delete data;
 }

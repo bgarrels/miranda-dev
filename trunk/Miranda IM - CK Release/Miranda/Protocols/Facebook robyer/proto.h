@@ -155,8 +155,8 @@ public:
 	void __cdecl UpdateContactWorker(void*);
 	void __cdecl UpdateAvatarWorker(void*);
 	void __cdecl SendMsgWorker(void*);
-	void __cdecl SendTypingWorker(void*); // TODO: Thread required?
-	void __cdecl CloseChatWorker(void*); // TODO: Thread required?
+	void __cdecl SendTypingWorker(void*);
+	void __cdecl MessagingWorker(void*);
 
 	// Contacts handling
 	bool    IsMyContact(HANDLE, bool include_chat = false);
