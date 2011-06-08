@@ -29,13 +29,13 @@ Last change on : $Date$
 
 // Version management
 #include "build.h"
-#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 3, 0)
+#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 3, 2)
 #define __PRODUCT_DWORD             PLUGIN_MAKE_VERSION(0, 9, 14, 0)
-#define __VERSION_STRING            "0.0.3.0"
+#define __VERSION_STRING            "0.0.3.2"
 #define __PRODUCT_STRING            "0.9.14.0"
-#define __VERSION_VS_FILE           0,0,3,0
+#define __VERSION_VS_FILE           0,0,3,2
 #define __VERSION_VS_PROD           0,9,14,0
-#define __VERSION_VS_FILE_STRING    "0, 0, 3, 0"
+#define __VERSION_VS_FILE_STRING    "0, 0, 3, 2"
 #define __VERSION_VS_PROD_STRING    "0, 9, 14, 0"
 
 // Product management
@@ -106,10 +106,14 @@ Last change on : $Date$
 #define FACEBOOK_REQUEST_TYPING_SEND            304 // sending typing notification
 #define FACEBOOK_REQUEST_SETTINGS               305 // setting chat visibility
 #define FACEBOOK_REQUEST_TABS					306 // closing message window, setting chat visibility
+#define	FACEBOOK_REQUEST_ASYNC					307 // marking messages read
 
 // Reconnect flags
 #define FACEBOOK_RECONNECT_LOGIN        "6" // When logging in
 #define FACEBOOK_RECONNECT_KEEP_ALIVE   "0" // After a period, used to keep session alive
+
+#define FACEBOOK_RECV_MESSAGE	1
+#define FACEBOOK_SEND_MESSAGE	2
 
 // News Feed types
 static const struct
