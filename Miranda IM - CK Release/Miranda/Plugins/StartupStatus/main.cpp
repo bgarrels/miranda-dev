@@ -16,7 +16,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-#include "commonstatus.h"
+#include "../commonstatus.h"
 #include "startupstatus.h"
 
 // {4B733944-5A70-4b52-AB2D-68B1EF38FFE8}
@@ -33,6 +33,7 @@ PLUGINLINK *pluginLink;
 
 MM_INTERFACE mmi;
 LIST_INTERFACE li;
+int hLangpack = 0;
 
 int CSModuleLoaded( WPARAM, LPARAM );
 
@@ -98,6 +99,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	pluginLink = link;
 	mir_getMMI(&mmi);
 	mir_getLI(&li);
+	mir_getLP( &pluginInfoEx );
 
 	if ( DBGetContactSettingByte(NULL, MODULENAME, SETTING_SETPROFILE, 1) ||
 		  DBGetContactSettingByte(NULL, MODULENAME, SETTING_OFFLINECLOSE, 0))

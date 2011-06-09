@@ -26,6 +26,7 @@
 #endif
 
 #define MIRANDA_VER 0x0900
+#define MIRANDA_CUSTOM_LP
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -60,7 +61,7 @@
 	#define __PLATFORM_NAME  ""
 #endif
 
-#include "helpers/gen_helpers.h"
+#include "../helpers/gen_helpers.h"
 
 typedef struct {
 	int cbSize;

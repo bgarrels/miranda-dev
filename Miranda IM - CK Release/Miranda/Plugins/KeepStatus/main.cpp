@@ -17,12 +17,13 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include "commonstatus.h"
+#include "../commonstatus.h"
 #include "keepstatus.h"
-#include "resource.h"
+#include "../resource.h"
 
 HANDLE hMainThread = 0;
 unsigned long mainThreadId = 0;
+int hLangpack = 0;
 
 HANDLE hCSModuleLoadedHook = NULL;
 
@@ -53,7 +54,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 PLUGININFOEX pluginInfoEx={
 	sizeof(PLUGININFOEX),
 	#if defined( _UNICODE )
-		__PLUGIN_NAME __PLATFORM_NAME,
+		__PLUGIN_NAME __PLATFORM_NAME " (Unicode)",
 	#else
 		__PLUGIN_NAME,
 	#endif
@@ -98,6 +99,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	pluginLink = link;
 	mir_getMMI( &mmi );
 	mir_getLI( &li );
+	mir_getLP( &pluginInfoEx );
 
 	InitCommonStatus();
 
