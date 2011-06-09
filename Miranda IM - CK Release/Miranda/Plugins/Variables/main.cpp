@@ -24,6 +24,7 @@ struct MM_INTERFACE mmi;
 struct LIST_INTERFACE li;
 PLUGINLINK *pluginLink;
 DWORD g_mirandaVersion;
+int hLangpack = 0;
 
 #ifdef UNICODE
 	// {59B0036E-5403-422e-883B-C9AAF425682B}
@@ -73,7 +74,7 @@ PLUGININFO pluginInfo = {
 #endif
 #endif
 	__VERSION_DWORD,
-	"Adds support for dynamic variables in strings for plugins.",
+	"Adds support for dynamic variables in strings for plugins",
 	"P Boon",
 	"unregistered@users.sourceforge.net",
 	"© 2003-2008 P. Boon, Ricardo Pescuma, George Hazan",
@@ -103,7 +104,7 @@ PLUGININFOEX pluginInfoEx = {
 #endif
 #endif
 	__VERSION_DWORD,
-	"Adds support for dynamic variables in strings for plugins.",
+	"Adds support for dynamic variables in strings for plugins",
 	"P Boon",
 	"unregistered@users.sourceforge.net",
 	"© 2003-2008 P. Boon, Ricardo Pescuma, George Hazan",
@@ -139,6 +140,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 
 	mir_getMMI( &mmi );
 	mir_getLI( &li );
+	mir_getLP( &pluginInfoEx );
 
 	hExitHook = HookEvent(ME_SYSTEM_OKTOEXIT, Exit);
 	hModulesLoadedHook = HookEvent(ME_SYSTEM_MODULESLOADED, ModulesLoaded);

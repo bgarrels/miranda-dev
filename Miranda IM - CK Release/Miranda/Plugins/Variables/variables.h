@@ -20,7 +20,8 @@
 #  define _UNICODE
 #endif
 
-#define MIRANDA_VER 0x0900
+#define MIRANDA_VER 0x0800
+#define MIRANDA_CUSTOM_LP
 
 #include <tchar.h> 
 
@@ -48,11 +49,8 @@
 //#include "dbhelpers.h"
 #define MODULENAME				"Variables"
 //#define LOGLEVEL	__LOGLEVEL_DEBUG
-#include "helpers/gen_helpers.h"
-#include "helpers/db_helpers.h"
-
-// Unsane: metacontacts api
-#include "m_metacontacts.h"
+#include "../helpers/gen_helpers.h"
+#include "../helpers/db_helpers.h"
 
 #define SETTING_STARTUPTEXT		"StartupText"
 #define SETTING_STRIPCRLF		"StripCRLF"
