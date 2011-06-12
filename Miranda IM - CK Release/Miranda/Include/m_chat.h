@@ -129,14 +129,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // Flags
 #define GC_BOLD            0x0001		//enable the 'bold' button
 #define GC_ITALICS         0x0002		//enable the 'italics' button
-#define GC_UNDERLINE	      0x0004		//enable the 'underline' button
+#define GC_UNDERLINE	   0x0004		//enable the 'underline' button
 #define GC_COLOR           0x0008		//enable the 'foreground color' button
 #define GC_BKGCOLOR        0x0010		//enable the 'background color' button
 #define GC_ACKMSG          0x0020		//the protocol must acknowlege messages sent
 #define GC_TYPNOTIF        0x0040		//NOT SUPPORTED YET! Enable typing notifications.
 #define GC_CHANMGR         0x0080		//enable the 'channel settings' button
-#define GC_SINGLEFORMAT 0x0100		//the protocol supports only 1 formatting per message
-#define GC_FONTSIZE	0x0200		//enable font size selection
+#define GC_SINGLEFORMAT	   0x0100		//the protocol supports only 1 formatting per message
+#define GC_FONTSIZE		   0x0200		//enable font size selection
 
 #define GC_UNICODE        0x01000		//NOT SUPPORTED YET! Enable unicode (if chat supports it),
 													//Pass UNICODE instead of ASCII. Note that
@@ -151,7 +151,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define GC_REGISTER_WRONGVER	1		//You appear to be using the wrong version of this API. Registration failed.
 #define GC_REGISTER_ERROR		2		//An internal error occurred. Registration failed.
 #define GC_REGISTER_NOUNICODE	3		//MS_GC_REGISTER returns this error if the Unicode version of chat
-                                    //is not installed and GC_UNICODE is set. Registration failed
+									//is not installed and GC_UNICODE is set. Registration failed
 
 // GCREGISTER struct
 typedef struct {
@@ -165,9 +165,9 @@ typedef struct {
 	int         iMaxText;          //Max message length the protocol supports. Will limit the typing area input. 0 = no limit
 	int         nColors;           //Number of colors in the colorchooser menu for the color buttons. Max = 100
 	COLORREF*   pColors;           //pointer to the first item in a static COLORREF array containing the colors
-	                               //that should be showed in the colorchooser menu.
-	                               //ie:	COLORREF crCols[nColors];
-	                               //		pColors = &crCols[0];
+								   //that should be showed in the colorchooser menu.
+								   //ie:	COLORREF crCols[nColors];
+								   //		pColors = &crCols[0];
 }
 	GCREGISTER;
 
@@ -497,11 +497,11 @@ typedef struct {
 		const char*  pszUserInfo;   // Additional user information that is displayed after the nickname.
 		const TCHAR* ptszUserInfo;
 	};
-                                    // IRC use it to display a hostmask for JOIN, PART (and more) events.
+									// IRC use it to display a hostmask for JOIN, PART (and more) events.
 	BOOL  bIsMe;                    // Is this event from the Miranda user?
 	DWORD dwFlags;						// event flags: GCEF_ADDTOLOG, GC_UNICODE
 
-                                    // FALSE any other time than when initializing the window (before sending SESSION_INITDONE)
+									// FALSE any other time than when initializing the window (before sending SESSION_INITDONE)
 	DWORD_PTR dwItemData;           // User specified data.
 	DWORD   time;                   // Timestamp of the event
 }
@@ -614,7 +614,7 @@ typedef struct {
 	* wParam=0
 	* lParam=(LPARAM)(GCMENUITEM *)gcmi
 
-  	Returning nonzero from your hook will stop other hooks from being called.
+	Returning nonzero from your hook will stop other hooks from being called.
 
 */
 
@@ -661,7 +661,7 @@ typedef struct {
 	* Example of how to add 2 items to the popup menu for the userlist *
 
 	GCMENUITEMS *gcmi= (GCMENUITEMS*) lParam;
-  	if (gcmi->Type == MENU_ON_NICKLIST)
+	if (gcmi->Type == MENU_ON_NICKLIST)
 	{
 		static struct gc_item Item[] = {
 				{Translate("User &details"), 1, MENU_ITEM, FALSE},

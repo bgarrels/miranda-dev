@@ -6,7 +6,7 @@
 
 #ifdef _DEBUG
 	void init_debug(void);
-    void end_debug (void);
+	void end_debug (void);
 	void do_log(const char *pszFormat, ...);
 	#define DEBUG_OUT(a) OUTPUT(a)
 	#define TRACE(a) OutputDebugString(a)
