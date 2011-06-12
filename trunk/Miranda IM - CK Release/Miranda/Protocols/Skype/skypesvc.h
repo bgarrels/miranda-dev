@@ -13,6 +13,7 @@ void CreateServices(void);
 INT_PTR SkypeLoadIcon(WPARAM wParam, LPARAM lParam);
 INT_PTR SkypeGetName(WPARAM wParam, LPARAM lParam);
 INT_PTR SkypeGetCaps(WPARAM wParam, LPARAM lParam);
+
 /* SkypeGetAvatar
  * 
  * Purpose: Return the avatar file name
@@ -21,4 +22,5 @@ INT_PTR SkypeGetCaps(WPARAM wParam, LPARAM lParam);
  * Returns: 0 - Success
  *		   -1 - Failure
  */
+
 INT_PTR SkypeGetAvatar(WPARAM wParam,LPARAM lParam);
