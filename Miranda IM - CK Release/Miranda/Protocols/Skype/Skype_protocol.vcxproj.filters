@@ -59,12 +59,6 @@
     <ClInclude Include="gchat.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="m_popup.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="m_toptoolbar.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="pthread.h">
       <Filter>Header</Filter>
     </ClInclude>
@@ -96,6 +90,12 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\m_chat.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_toptoolbar.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_popup2.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
