@@ -58,6 +58,7 @@ BOOL ModuleLoaded;
 struct MM_INTERFACE   mmi;
 struct UTF8_INTERFACE utfi;
 
+int hLangpack;
 
 PLUGINLINK *pluginLink;
 
@@ -231,6 +232,7 @@ int __declspec(dllexport) Load(PLUGINLINK *link)
 
 	pluginLink = link;
 
+	mir_getLP(&pluginInfoEx);
 	mir_getMMI(&mmi);
 	mir_getUTFI(&utfi);
 

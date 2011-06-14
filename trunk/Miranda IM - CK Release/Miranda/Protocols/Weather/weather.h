@@ -38,6 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <win2k.h>
 
 #define MIRANDA_VER 0x0700
+#define MIRANDA_CUSTOM_LP
 
 #include <newpluginapi.h>
 #include <m_system.h>
