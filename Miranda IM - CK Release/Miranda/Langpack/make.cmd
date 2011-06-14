@@ -1,11 +1,13 @@
 @echo off
 rem This is Miranda IM language pack generator from bunch of text files
-rem It can be used (probably) with any localisation but tested only with german locale.
+rem It can be used (probably) with any localisation but tested only with russian locale.
+rem Положить рядом с make.cmd файл VersionInfo.txt - получите лангпак под вашу сборку.
+rem ПЕРЕВОДЫ ПЛАГИНОВ ДОЛЖНЫ НАХОДИТЬСЯ В ПАПКЕ \Plugins (не стоит складывать все в папку с мирандой)
 setlocal ENABLEDELAYEDEXPANSION
-title Deu-Langpack Generator v1.0 by CHEF-KOCH
+title DE-Langpack Generator v1.2 by CK
 
 rem set variables
-set lp=Langpack_russian.txt
+set lp=langpack_german.txt
 set vi=VersionInfo.txt
 set PluginsDir=.\Plugins
 set WeatherDir=.\Weather
@@ -23,7 +25,7 @@ rem Generate "Plugins-included:"
 echo.>>%lp%
 if exist %vi% (
 rem Generate plugin list from VI
-for /f "tokens=1,2 delims=���. " %%a in ('more %vi% ^| find "dll v"') do if exist %PluginsDir%\%%a.txt (
+for /f "tokens=1,2 delims=Вэ¤. " %%a in ('more %vi% ^| find "dll v"') do if exist %PluginsDir%\%%a.txt (
 		for %%b in (%PluginsDir%\%%a.txt) do set PluginsInc=!PluginsInc!, %%~nb
 		) else (
 			rem add to pluginlist module names, which names end with "W"
@@ -43,10 +45,10 @@ echo Plugins-included: %PluginsInc:~2%.>>%lp%
 rem add "FLID" for full langpack. Updater support. But if VI exist, so this is vi-based langpack and FLID are useless
 if not exist %vi% type "=VERSION=.txt">>%lp%
 	
-rem  Add Miranda IM Core, dbtool and dupes and My Strings.
+rem  Add MirandaIM Core, dbtool, dupes and My Strings.
 call :newline
 type "My Strings.txt">>%lp%
-echo.>>%lp%&echo.>>%lp%
+call :newline
 type "=CORE=.txt">>%lp%
 call :newline
 type "=dbtool=.txt">>%lp%
@@ -57,9 +59,9 @@ call :newline
 rem Adding module translations one-by-one form VI.
 if exist %vi% (
 	rem Making langpack with VI-only modules:
-	for /f "tokens=1,2 delims=����. " %%a in ('find "dll v" %vi%') do (
+	for /f "tokens=1,2 delims=Вдэ¤. " %%a in ('find "dll v" %vi%') do (
 		rem if next module are weather.dll, than add weather ini file next to weather module itself
-		if %%a == weather (
+		if /I %%a == weather (
 			call :weather
 			rem try to add weather ini file translation from .\weather folder
 			for /f "tokens=1,2 delims=. " %%c in ('more %vi% ^| find /i ".ini"') do (
@@ -74,7 +76,7 @@ rem No VI found, so generate full langpack
 	rem Generate langpack from *.txt
 	for %%a in (%PluginsDir%\*.txt) do (
 		rem if next module are Weather.txt, than add weather ini file next to weather module itself
-		if %%a == %PluginsDir%\Weather.txt (
+		if /I %%a == %PluginsDir%\weather.txt (
 			call :weather
 			rem adding weather ini file translation from .\weather folder
 			for %%c in (%WeatherDir%\*.txt) do (type %%c>>%lp% && call :newline)
@@ -88,7 +90,7 @@ rem No VI found, so generate full langpack
 rem if parameter "fast" specified for make.cmd, do additional subrutine
 if /i "%1"=="fast" (call :restart) else (echo Done!)
 rem The End.
-exit
+goto :EOF
 
 rem Subrutines
 
@@ -100,8 +102,8 @@ goto :EOF
 
 :restart
 rem init variables. DO NOT PUT .dat to profile name!
-set MirandaPath=C:\CHEF-KOCH\Miranda IM\
-set profile=tst
+set MirandaPath=C:\Program Files (x86)\Miranda IM\
+set profile=CHEF-KOCH
 rem replace langpack in miranda path
 copy /y %lp% %MirandaPath%
 rem quit miranda using mimcmd command, so mimcmd.exe must exist in plugins dir.
@@ -122,7 +124,7 @@ goto :EOF
 
 :w_plug
 rem add plugins translations with names ending *W.dll
-for /f "tokens=1,2 delims=����. " %%b in ('more %vi% ^| find /i "w.dll"') do (
+for /f "tokens=1,2 delims=Вдэ¤. " %%b in ('more %vi% ^| find /i "w.dll"') do (
 	if not exist %PluginsDir%\%%b.txt (
 		set nameW=%%b
 		set name=!nameW:~0,-1!
@@ -143,7 +145,7 @@ if not exist %PluginsDir%\!name!.txt (
 	rem if name are not versioninfo, dbeditorpp or import_sa, so translation not found
 	if /I !nameW!==versioninfo (set PluginsInc=!PluginsInc!, Svc_VI) else (
 		if /I !nameW!==dbeditorpp (set PluginsInc=!PluginsInc!, Svc_DBEPP) else (
-			if /I !nameW!==Import_sa (set PluginsInc=!PluginsInc!, Import) else (echo Translation for "%%a.dll" not found :()
+			if /I !nameW!==Import_sa (set PluginsInc=!PluginsInc!, Import) else (echo Translation for "!nameW!.dll" not found :()
 			)
 		)	
 	)

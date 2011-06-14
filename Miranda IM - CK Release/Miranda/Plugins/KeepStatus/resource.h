@@ -2,30 +2,20 @@
 // Microsoft Developer Studio generated include file.
 // Used by resource.rc
 //
-#define IDD_OPT_KEEPSTATUS              101
 #define IDD_OPT_KS_BASIC                101
 #define IDD_CONFIRMDIALOG               102
-#define IDD_OPT_AUTOAWAY                104
-#define IDD_CMDLOPTIONS                 106
-#define IDD_ADDPROFILE                  109
-#define IDD_OPT_STARTUPSTATUS           110
-#define IDB_TTBDOWN                     111
-#define IDB_TTBUP                       112
-#define IDD_PUOPT_KEEPSTATUS            113
-#define IDD_OPT_AUTOAWAYMSG             114
-#define IDI_TICK                        117
-#define IDI_NOTICK                      118
-#define IDD_OPT_GENAUTOAWAY             119
-#define IDD_OPT_KS_ACTION               120
-#define IDD_SETSTSMSGDIALOG             121
-#define IDD_OPT_KS_TRIGGER              122
-#define IDD_OPT_STATUSPROFILES          123
-#define IDD_OPT_AAATABS                 126
-#define IDD_OPT_TABS                    126
-#define IDD_OPT_KS_ADV                  127
-#define IDD_TRG_AAASTATECHANGE          128
-#define IDI_TTBDOWN                     129
-#define IDI_TTBUP                       130
+#define IDD_PUOPT_KEEPSTATUS            103
+#define IDD_OPT_KS_ACTION               104
+#define IDD_SETSTSMSGDIALOG             105
+#define IDD_OPT_KS_TRIGGER              106
+#define IDD_OPT_TABS                    107
+#define IDD_OPT_KS_ADV                  108
+#define IDB_TTBDOWN                     109
+#define IDB_TTBUP                       110
+#define IDI_TICK                        111
+#define IDI_NOTICK                      112
+#define IDI_TTBDOWN                     113
+#define IDI_TTBUP                       114
 #define IDC_PROTOCOL                    1000
 #define IDC_STATUS                      1001
 #define IDC_PROFILE                     1002
@@ -167,7 +157,7 @@
 //
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        129
+#define _APS_NEXT_RESOURCE_VALUE        115
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1141
 #define _APS_NEXT_SYMED_VALUE           101
