@@ -61,7 +61,7 @@
 	#define __PLATFORM_NAME  ""
 #endif
 
-#include "../helpers/gen_helpers.h"
+#include "helpers/gen_helpers.h"
 
 typedef struct {
 	int cbSize;

@@ -17,9 +17,9 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include "../commonstatus.h"
+#include "commonstatus.h"
 #include "keepstatus.h"
-#include "../resource.h"
+#include "resource.h"
 
 HANDLE hMainThread = 0;
 unsigned long mainThreadId = 0;
@@ -54,7 +54,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 PLUGININFOEX pluginInfoEx={
 	sizeof(PLUGININFOEX),
 	#if defined( _UNICODE )
-		__PLUGIN_NAME __PLATFORM_NAME " (Unicode)",
+		__PLUGIN_NAME __PLATFORM_NAME,
 	#else
 		__PLUGIN_NAME,
 	#endif
