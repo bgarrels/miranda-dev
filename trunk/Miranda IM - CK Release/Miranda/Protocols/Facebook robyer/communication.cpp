@@ -818,7 +818,7 @@ bool facebook_client::home( )
 			// Get friend requests count and messages count and notify it
 			if ( DBGetContactSettingByte( NULL, parent->m_szModuleName, FACEBOOK_KEY_EVENT_OTHER_ENABLE, DEFAULT_EVENT_OTHER_ENABLE ) )
 			{
-				std::string str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"jewelRequestCount\">", "</span>" );
+				std::string str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"requestsCountValue\">", "</span>" );
 				if ( str_count.length() && str_count != std::string( "0" ) )
 				{
 					std::string message = Translate("Got new friend requests: ") + str_count;
@@ -828,7 +828,7 @@ bool facebook_client::home( )
 					mir_free( tmessage );
 				}
 
-				str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"jewelInnerUnseenCount\">", "</span>" );
+				str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"messagesCountValue\">", "</span>" );
 				if ( str_count.length() && str_count != std::string( "0" ) )
 				{
 					std::string message = Translate("Got new messages: ") + str_count;
@@ -838,7 +838,7 @@ bool facebook_client::home( )
 					mir_free( tmessage );
 				}
 
-				str_count = utils::text::source_get_value( &resp.data, 4, "id=\"notificationsWrapper", "<span class=\"jewelCount\">", "<span>", "</span>" );
+				str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"notificationsCountValue\">", "</span>" );
 				if ( str_count.length() && str_count != std::string( "0" ) )
 				{
 					std::string message = Translate("Got new notifications: ") + str_count;
@@ -1072,7 +1072,7 @@ bool facebook_client::channel( )
 		ForkThread( &FacebookProto::ProcessMessages, this->parent, ( void* )response_data );
 
 		// Increment sequence number
-		this->chat_sequence_num_ = utils::text::source_get_value( &resp.data, 2, "\"s\":", "," );
+		this->chat_sequence_num_ = utils::text::source_get_value( &resp.data, 2, "\"seq\":", "," );
 		parent->Log("      Got self sequence number: %s", this->chat_sequence_num_.c_str());
 	}
 
