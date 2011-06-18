@@ -1,17 +1,17 @@
 Miranda Language Pack Version 1
 Language: German (DE)
 Locale: 0407
-Last-Modified-Using: Miranda IM 0.9.22
+Last-Modified-Using: Miranda IM 0.9.23
 Authors: miranda-im.de Projekt Sprachdatei - diverse Autoren
 Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 06 Jun 2011 18:06:08
-; FLID: Deutsche Sprachdatei 0.11.06.06
+X-Langpack-creation-date: 18 Jun 2011 14:06:07
+; FLID: Deutsche Sprachdatei 0.11.06.18
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirOTR,MirOUT,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
-; Start of langpack: Core (Letzte Änderung: 11:32, 27. Apr. 2011 )
+; Start of langpack: Core (Letzte Änderung: 13:21, 18. Jun. 2011 )
 
 [0 = Default]
 0 = Standard
@@ -1398,6 +1398,8 @@ In bestehendem Fenster öffnen
 Nachrichtenfenster öffnen
 [Open log file]
 Logdatei öffnen
+[Open Logging Options]
+Öffne Logeinstellungen
 [Open user menu]
 Kontaktmenü öffnen
 [Open Variables help dialog]
@@ -6619,7 +6621,7 @@ Wiederholen, Abbrechen
 ; ##############################################
 ; End of langpack: ActMan_Hooks
 ; ############################################## 
-; Start of langpack: AddContact (Letzte Änderung: 18:30, 10. Apr. 2011 )
+; Start of langpack: AddContact (Letzte Änderung: 01:34, 16. Jun. 2011 )
 
 ; Pluginname: AddContact+ 
 ; Version: 0.9.9.0
@@ -6630,6 +6632,8 @@ Wiederholen, Abbrechen
 ; Übersetzung: 27.06.2008 von kaye_styles
 ; Besonderheiten: Eine Strings lassen sich aktuell nicht übersetzen!
 
+[Open Add Contact Dialog]
+Öffne 'Kontakt hinzufügen' Dialog
 [&Add Contact...]
 &Kontakt hinzufügen...
 [Provides the ability to add contacts manually (without searching for them)]
@@ -11364,10 +11368,10 @@ Keine Dateien...
 ; ##############################################
 ; End of langpack: FTP_File_YM
 ; ############################################## 
-; Start of langpack: Facebook (Letzte Änderung: 17:06, 1. Jun. 2011 )
+; Start of langpack: Facebook (Letzte Änderung: 14:07, 17. Jun. 2011 )
 
 ; Pluginname: Facebook Protokoll
-; Version: 0.1.3.10 + RM 0.0.3.1
+; Version: 0.1.3.10 + RM 0.0.3.3
 ; Dateiname: facebook.dll
 ; Unique ID: {dde897ad-e40a-4e2c-98d8-d20b575e96bc}
 ; Autor(en) jarvis, robyer
@@ -14684,7 +14688,7 @@ Speichert diverse Ereignisse im Verlauf.
 ; ##############################################
 ; End of langpack: History_Keeper
 ; ############################################## 
-; Start of langpack: History_Linklist_Plus (Letzte Änderung: 02:52, 6. Feb. 2011 )
+; Start of langpack: History_Linklist_Plus (Letzte Änderung: 13:38, 18. Jun. 2011 )
 
 ; Pluginname: History Linklist 
 ; Version: 0.0.0.2
@@ -14751,6 +14755,12 @@ In neuem Fenster öffnen
 [Show Message]
 Zeige Nachricht
 
+[Change History Policy]
+Ändere Verlaufsregel
+[&Change History Policy]
+Ändere Verlaufsregel
+[Area Show/Hide]
+Gebiet zeigen/verstecken
 [Search for:]
 Suchen nach:
 [Message direction]
@@ -14792,6 +14802,13 @@ Fensterposition individuell für jeden Kontakt speichern
 Zeige...
 [Parting line]
 Trennlinie
+
+[History Enabled]
+Verlauf aktiviert
+[History Disabled]
+Verlauf deaktiviert
+[Custom Action]
+Benutzerdef. Aktion
  
 ; ##############################################
 ; End of langpack: History_Linklist_Plus
@@ -36135,7 +36152,7 @@ Hintergrund
 ; ##############################################
 ; End of langpack: TopToolBar
 ; ############################################## 
-; Start of langpack: Traffic_counter (Letzte Änderung: 21:01, 12. Mai 2011 )
+; Start of langpack: Traffic_counter (Letzte Änderung: 13:21, 7. Jun. 2011 )
 
 ; Pluginname: Traffic counter 
 ; Version: 0.1.1.6
@@ -36180,6 +36197,8 @@ Trafficstatistik wird gelöscht. Sind Sie sich sicher?
 Traffic Counter
 [Show/Hide traffic window]
 zeige/verst. Trafficfenster
+[Show/Hide frame]
+Zeige/verstecke Frame
 [Hide traffic window]
 verstecke Trafficfenster
 [Clear the current (Now:) value]
@@ -37016,14 +37035,13 @@ Ausgabegerät:
 ; ##############################################
 ; End of langpack: Un4seens_bass_interface
 ; ############################################## 
-; Start of langpack: Updater (Letzte Änderung: 21:48, 21. Apr. 2011 )
+; Start of langpack: Updater (Letzte Änderung: 17:15, 14. Jun. 2011 )
 
 ; Pluginname: Updater 
 ; Version: 0.6.1.4
 ; Dateiname: updater.dll
 ; Unique ID: {66dceb80-0384-4507-9774-cc20a7ef1d6d}
 ; Autor: Scott Ellis
-; SVN: https://server.scottellis.com.au/svn/mim_plugs/updater
 ; Übersetzung: 08.12.05 von Dober
 
 [Automatic Updater for Miranda]
@@ -37168,7 +37186,7 @@ Herunterladen ohne Installation
 [Updates Found]
 Updates gefunden
 [Updater has detected updated versions\nof the following Miranda components:]
-Updater hat aktualisierte Versionen folgender Miranda-Komponenten gefunden:
+Es wurden folgende aktualisierte Miranda IM Komponenten gefunden:
 
 [LastUpdateDay]
 Letzte Update Tag:
@@ -37268,7 +37286,7 @@ Trennlinie
 ; ##############################################
 ; End of langpack: UseActions
 ; ############################################## 
-; Start of langpack: UserInfoEx (Letzte Änderung: 21:32, 25. Okt. 2010 )
+; Start of langpack: UserInfoEx (Letzte Änderung: 13:29, 18. Jun. 2011 )
 
 ; Pluginname: UserInfoEx 
 ; Version: 0.8.4.2
@@ -37729,7 +37747,7 @@ Geburtstag sichern
 [birthday today]
 Geburtstag heute
 [birthday tomorrow]
-Geburtstag morgen
+Geburtstag Morgen
 [birthday in 2 days]
 Geburtstag (in 2 Tagen)
 [birthday in 3 days]
@@ -37918,6 +37936,8 @@ Das Kontaktprotokoll konnte nicht gefunden werden. Vielleicht ist es nicht aktiv
 Wählen Sie die Module in der Listenansicht aus, die Sie für die entsprechenden Kontakte exportieren möchten.
 
 ; Icons
+[Anniversary today]
+Jahrestag Heute]
 [Birthday tomorrow]
 Geburtstag morgen
 [Birthday in 2 days]
