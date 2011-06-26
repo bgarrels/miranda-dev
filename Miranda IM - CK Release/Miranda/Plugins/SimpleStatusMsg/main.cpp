@@ -27,9 +27,9 @@ struct MM_INTERFACE mmi;
 PROTOACCOUNTS *accounts;
 
 static int g_iIdleTime = -1;
-UINT SAUpdateMsgTimer = 0, *SASetStatusTimer;
-static TCHAR *winampsong;
-HANDLE TopButton = 0, h_statusmodechange;
+UINT_PTR g_uUpdateMsgTimer = 0, *g_uSetStatusTimer;
+static TCHAR *g_ptszWinampSong;
+HANDLE hTTBButton = 0, h_statusmodechange;
 HWND hwndSAMsgDialog;
 static HANDLE *hProtoStatusMenuItem;
 
@@ -201,28 +201,28 @@ TCHAR *InsertBuiltinVarsIntoMsg(TCHAR *in, const char *szProto, int status)
 
 		if (!_tcsnicmp(msg+i, _T("%winampsong%"), 12))
 		{
-			TCHAR *winamp_title = GetWinampSong();
+			TCHAR *ptszWinampTitle = GetWinampSong();
 
-			if (winamp_title != NULL)
+			if (ptszWinampTitle != NULL)
 			{
-				mir_free(winampsong);
-				winampsong = mir_tstrdup(winamp_title);
+				mir_free(g_ptszWinampSong);
+				g_ptszWinampSong = mir_tstrdup(ptszWinampTitle);
 			}
-			else if (winampsong && lstrcmp(winampsong, _T("SimpleStatusMsg"))
+			else if (g_ptszWinampSong && lstrcmp(g_ptszWinampSong, _T("SimpleStatusMsg"))
 				&& DBGetContactSettingByte(NULL, "SimpleStatusMsg", "AmpLeaveTitle", 1))
 			{
-				winamp_title = mir_tstrdup(winampsong);
+				ptszWinampTitle = mir_tstrdup(g_ptszWinampSong);
 			}
 			else
 				continue;
 
-			if (lstrlen(winamp_title) > 12)
-				msg = (TCHAR *)mir_realloc(msg, (lstrlen(msg) + 1 + lstrlen(winamp_title) - 12) * sizeof(TCHAR));
+			if (lstrlen(ptszWinampTitle) > 12)
+				msg = (TCHAR *)mir_realloc(msg, (lstrlen(msg) + 1 + lstrlen(ptszWinampTitle) - 12) * sizeof(TCHAR));
 
-			MoveMemory(msg + i + lstrlen(winamp_title), msg + i + 12, (lstrlen(msg) - i - 11) * sizeof(TCHAR));
-			CopyMemory(msg + i, winamp_title, lstrlen(winamp_title) * sizeof(TCHAR));
+			MoveMemory(msg + i + lstrlen(ptszWinampTitle), msg + i + 12, (lstrlen(msg) - i - 11) * sizeof(TCHAR));
+			CopyMemory(msg + i, ptszWinampTitle, lstrlen(ptszWinampTitle) * sizeof(TCHAR));
 
-			mir_free(winamp_title);
+			mir_free(ptszWinampTitle);
 		}
 		else if (!_tcsnicmp(msg+i, _T("%fortunemsg%"), 12))
 		{
@@ -1011,10 +1011,10 @@ INT_PTR ShowStatusMessageDialogInternal(WPARAM wParam, LPARAM lParam)
 	
 	if (Miranda_Terminated()) return 0;
 		
-	if (TopButton)
+	if (hTTBButton)
 	{
-		CallService(MS_TTB_SETBUTTONSTATE, (WPARAM)TopButton, (LPARAM)TTBST_RELEASED);
-		CallService(MS_TTB_SETBUTTONOPTIONS, MAKEWPARAM((WORD)TTBO_TIPNAME, (WORD)TopButton), (LPARAM)Translate("Change Status Message"));
+		CallService(MS_TTB_SETBUTTONSTATE, (WPARAM)hTTBButton, (LPARAM)TTBST_RELEASED);
+		CallService(MS_TTB_SETBUTTONOPTIONS, MAKEWPARAM((WORD)TTBO_TIPNAME, (WORD)hTTBButton), (LPARAM)Translate("Change Status Message"));
 	}
 
 	box_data = (struct MsgBoxInitData *)mir_alloc(sizeof(struct MsgBoxInitData));
@@ -1490,12 +1490,12 @@ int SetStartupStatus(int i)
 	return 0;
 }
 
-void CALLBACK SetStartupStatusGlobal(HWND timerhwnd, UINT uMsg, UINT_PTR idEvent, DWORD  dwTime)
+VOID CALLBACK SetStartupStatusGlobal(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 {
 	int prev_status_mode = -1, status_mode, temp_status_mode = ID_STATUS_OFFLINE, i;
 	BOOL globalstatus = TRUE;
 
-	KillTimer(timerhwnd, idEvent);
+	KillTimer(hwnd, idEvent);
 
 	// is global status mode going to be set?
 	for (i = 0; i < accounts->count; ++i)
@@ -1551,7 +1551,7 @@ void CALLBACK SetStartupStatusGlobal(HWND timerhwnd, UINT uMsg, UINT_PTR idEvent
 	}
 }
 
-void CALLBACK SetStartupStatusProc(HWND timerhwnd, UINT uMsg, UINT_PTR idEvent, DWORD  dwTime)
+VOID CALLBACK SetStartupStatusProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 {
 	BOOL found = FALSE;
 	int i;
@@ -1564,9 +1564,9 @@ void CALLBACK SetStartupStatusProc(HWND timerhwnd, UINT uMsg, UINT_PTR idEvent, 
 		if (!(CallProtoService(accounts->pa[i]->szModuleName, PS_GETCAPS, PFLAGNUM_2, 0)&~CallProtoService(accounts->pa[i]->szModuleName, PS_GETCAPS, PFLAGNUM_5, 0)))
 			continue;
 
-		if (SASetStatusTimer[i] == idEvent)
+		if (g_uSetStatusTimer[i] == idEvent)
 		{
-			KillTimer(NULL, SASetStatusTimer[i]);
+			KillTimer(NULL, g_uSetStatusTimer[i]);
 			found = TRUE;
 			break;
 		}
@@ -1574,14 +1574,14 @@ void CALLBACK SetStartupStatusProc(HWND timerhwnd, UINT uMsg, UINT_PTR idEvent, 
 
 	if (!found)
 	{
-		KillTimer(timerhwnd, idEvent);
+		KillTimer(hwnd, idEvent);
 		return;
 	}
 
 	SetStartupStatus(i);
 }
 
-VOID CALLBACK SAUpdateMsgTimerProc(HWND timerhwnd, UINT uMsg, UINT_PTR idEvent, DWORD  dwTime)
+VOID CALLBACK UpdateMsgTimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 {
 	MIRANDA_IDLE_INFO mii = {0};
 	mii.cbSize = sizeof(mii);
@@ -1633,7 +1633,7 @@ VOID CALLBACK SAUpdateMsgTimerProc(HWND timerhwnd, UINT uMsg, UINT_PTR idEvent, 
 			if (tszMsg && lstrlen(tszMsg))
 			{
 #ifdef _DEBUG
-				log2file("SAUpdateMsgTimerProc(): Set %s status and \"" TCHAR_STR_PARAM "\" status message for %s.", StatusModeToDbSetting(iCurrentStatus, ""), tszMsg, accounts->pa[i]->szModuleName);
+				log2file("UpdateMsgTimerProc(): Set %s status and \"" TCHAR_STR_PARAM "\" status message for %s.", StatusModeToDbSetting(iCurrentStatus, ""), tszMsg, accounts->pa[i]->szModuleName);
 #endif
 				Proto_SetStatus(accounts->pa[i]->szModuleName, iCurrentStatus, iCurrentStatus, tszMsg);
 				SaveMessageToDB(accounts->pa[i]->szModuleName, tszMsg, FALSE);
@@ -1652,10 +1652,10 @@ static int AddTopToolbarButton(WPARAM wParam, LPARAM lParam)
 	ttbb.pszServiceUp = ttbb.pszServiceDown = MS_SIMPLESTATUSMSG_SHOWDIALOGINT;
 	ttbb.dwFlags = TTBBF_VISIBLE | TTBBF_SHOWTOOLTIP;
 	ttbb.name = Translate("Change Status Message");
-	TopButton = (HANDLE)CallService(MS_TTB_ADDBUTTON, (WPARAM)&ttbb, 0);
+	hTTBButton = (HANDLE)CallService(MS_TTB_ADDBUTTON, (WPARAM)&ttbb, 0);
 
-	if (TopButton != (HANDLE)-1)
-		CallService(MS_TTB_SETBUTTONOPTIONS, MAKEWPARAM((WORD)TTBO_TIPNAME, (WORD)TopButton), (LPARAM)Translate("Change Status Message"));
+	if (hTTBButton != (HANDLE)-1)
+		CallService(MS_TTB_SETBUTTONOPTIONS, MAKEWPARAM((WORD)TTBO_TIPNAME, (WORD)hTTBButton), (LPARAM)Translate("Change Status Message"));
 	ReleaseIconEx("csmsg");
 
 	return 0;
@@ -1692,9 +1692,9 @@ void RegisterHotkey(void)
 
 static int OnIconsChanged(WPARAM wParam, LPARAM lParam)
 {
-	if (TopButton)
+	if (hTTBButton)
 	{
-		CallService(MS_TTB_REMOVEBUTTON, (WPARAM)TopButton, (LPARAM)0);
+		CallService(MS_TTB_REMOVEBUTTON, (WPARAM)hTTBButton, (LPARAM)0);
 		AddTopToolbarButton(0, 0);
 	}
 	return 0;
@@ -1925,24 +1925,23 @@ static int CSStatusChange(WPARAM wParam, LPARAM lParam)
 
 static TCHAR *ParseWinampSong(ARGUMENTSINFO *ai)
 {
-	TCHAR *winamp_title;
+	TCHAR *ptszWinampTitle;
 
 	if (ai->argc != 1)
 		return NULL;
 
 	ai->flags |= AIF_DONTPARSE;
+	ptszWinampTitle = GetWinampSong();
 
-	winamp_title = GetWinampSong();
-
-	if (winamp_title != NULL)
+	if (ptszWinampTitle != NULL)
 	{
-		mir_free(winampsong);
-		winampsong = mir_tstrdup(winamp_title);
+		mir_free(g_ptszWinampSong);
+		g_ptszWinampSong = mir_tstrdup(ptszWinampTitle);
 	}
-	else if (winampsong && lstrcmp(winampsong, _T("SimpleStatusMsg")) && DBGetContactSettingByte(NULL, "SimpleStatusMsg", "AmpLeaveTitle", 1))
-		winamp_title = mir_tstrdup(winampsong);
+	else if (g_ptszWinampSong && lstrcmp(g_ptszWinampSong, _T("SimpleStatusMsg")) && DBGetContactSettingByte(NULL, "SimpleStatusMsg", "AmpLeaveTitle", 1))
+		ptszWinampTitle = mir_tstrdup(g_ptszWinampSong);
 
-	return winamp_title;
+	return ptszWinampTitle;
 }
 
 int ICQMsgTypeToStatus(int iMsgType)
@@ -2088,17 +2087,17 @@ static int OnModulesLoaded(WPARAM wParam, LPARAM lParam)
 
 		if (!DBGetContactSettingTString(NULL, "SimpleStatusMsg", "AmpLastTitle", &dbv))
 		{
-			winampsong = mir_tstrdup(dbv.ptszVal);
+			g_ptszWinampSong = mir_tstrdup(dbv.ptszVal);
 			DBFreeVariant(&dbv);
 		}
 		else
-			winampsong = mir_tstrdup(_T("SimpleStatusMsg"));
+			g_ptszWinampSong = mir_tstrdup(_T("SimpleStatusMsg"));
 	}
 /*	else
-		winampsong = mir_tstrdup(_T("SimpleStatusMsg"));*/
+		g_ptszWinampSong = mir_tstrdup(_T("SimpleStatusMsg"));*/
 
 	if (DBGetContactSettingByte(NULL, "SimpleStatusMsg", "UpdateMsgOn", 1))
-		SAUpdateMsgTimer = SetTimer(NULL, 0, DBGetContactSettingWord(NULL, "SimpleStatusMsg", "UpdateMsgInt", 10) * 1000, (TIMERPROC)SAUpdateMsgTimerProc);
+		g_uUpdateMsgTimer = SetTimer(NULL, 0, DBGetContactSettingWord(NULL, "SimpleStatusMsg", "UpdateMsgInt", 10) * 1000, (TIMERPROC)UpdateMsgTimerProc);
 
 	if (ServiceExists(MS_CS_SETSTATUSEX))
 		HookEventEx(ME_CS_STATUSCHANGEEX, CSStatusChange);
@@ -2116,17 +2115,17 @@ static int OnModulesLoaded(WPARAM wParam, LPARAM lParam)
 		{
 			char szSetting[80];
 
-			SASetStatusTimer = (UINT *)mir_alloc(sizeof(UINT) * accounts->count);
+			g_uSetStatusTimer = (UINT_PTR*)mir_alloc(sizeof(UINT_PTR) * accounts->count);
 			for (int i = 0; i < accounts->count; ++i)
 			{
 				if (!IsAccountEnabled(accounts->pa[i]))
 					continue;
 
-				if (!(CallProtoService(accounts->pa[i]->szModuleName, PS_GETCAPS, PFLAGNUM_2, 0)&~CallProtoService(accounts->pa[i]->szModuleName, PS_GETCAPS, PFLAGNUM_5, 0)))
+				if (!(CallProtoService(accounts->pa[i]->szModuleName, PS_GETCAPS, PFLAGNUM_2, 0) &~ CallProtoService(accounts->pa[i]->szModuleName, PS_GETCAPS, PFLAGNUM_5, 0)))
 					continue;
 
 				mir_snprintf(szSetting, SIZEOF(szSetting), "Set%sStatusDelay", accounts->pa[i]->szModuleName);
-				SASetStatusTimer[i] = SetTimer(NULL, 0, DBGetContactSettingWord(NULL, "SimpleStatusMsg", szSetting, 300), (TIMERPROC)SetStartupStatusProc);
+				g_uSetStatusTimer[i] = SetTimer(NULL, 0, DBGetContactSettingWord(NULL, "SimpleStatusMsg", szSetting, 300), (TIMERPROC)SetStartupStatusProc);
 			}
 		}
 	}
@@ -2152,8 +2151,8 @@ static int OnOkToExit(WPARAM wParam, LPARAM lParam)
 			DBWriteContactSettingWord(NULL, "SimpleStatusMsg", szSetting, (WORD)CallProtoService(accounts->pa[i]->szModuleName, PS_GETSTATUS, 0, 0));
 		}
 
-		if (winampsong && lstrcmp(winampsong, _T("SimpleStatusMsg")) /*&& DBGetContactSettingByte(NULL, "SimpleStatusMsg", "AmpLeaveTitle", 1)*/)
-			DBWriteMessage("AmpLastTitle", winampsong);
+		if (g_ptszWinampSong && lstrcmp(g_ptszWinampSong, _T("SimpleStatusMsg")) /*&& DBGetContactSettingByte(NULL, "SimpleStatusMsg", "AmpLeaveTitle", 1)*/)
+			DBWriteMessage("AmpLastTitle", g_ptszWinampSong);
 	}
 
 	return 0;
@@ -2167,9 +2166,9 @@ static int OnPreShutdown(WPARAM wParam, LPARAM lParam)
 	AwayMsgPreShutdown();
 	if (hwndSAMsgDialog) DestroyWindow(hwndSAMsgDialog);
 	if (hProtoStatusMenuItem) mir_free(hProtoStatusMenuItem);
-	if (SASetStatusTimer) mir_free(SASetStatusTimer);
-	if (winampsong) mir_free(winampsong);
-	if (SAUpdateMsgTimer) KillTimer(NULL, SAUpdateMsgTimer);
+	if (g_uSetStatusTimer) mir_free(g_uSetStatusTimer);
+	if (g_ptszWinampSong) mir_free(g_ptszWinampSong);
+	if (g_uUpdateMsgTimer) KillTimer(NULL, g_uUpdateMsgTimer);
 
 	return 0;
 }
