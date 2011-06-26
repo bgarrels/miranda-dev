@@ -20,8 +20,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "commonheaders.h"
 #include "simplestatusmsg.h"
 
-extern UINT SAUpdateMsgTimer;
-extern void CALLBACK SAUpdateMsgTimerProc(HWND, UINT, UINT_PTR, DWORD);
+extern UINT_PTR g_uUpdateMsgTimer;
+extern VOID CALLBACK UpdateMsgTimerProc(HWND, UINT, UINT_PTR, DWORD);
 extern VOID APIENTRY HandlePopupMenu(HWND hwnd, POINT pt, HWND edit_control);
 
 static WNDPROC OldDlgProc;
@@ -39,51 +39,52 @@ static LRESULT CALLBACK OptEditBoxSubProc(HWND hwndDlg, UINT uMsg, WPARAM wParam
 	{
 		case WM_CONTEXTMENU:
 		{
-			POINT pt = {(signed short)LOWORD(lParam), (signed short)HIWORD(lParam)};
+			POINT pt = {(LONG)LOWORD(lParam), (LONG)HIWORD(lParam)};
 			RECT rc;
-			GetClientRect(hwndDlg, (LPRECT) &rc);
+			GetClientRect(hwndDlg, &rc);
  
 			if (pt.x == -1 && pt.y == -1)
 			{
 				GetCursorPos(&pt);
-				if (!PtInRect((LPRECT) &rc, pt))
+				if (!PtInRect(&rc, pt))
 				{
-	                pt.x = rc.left + (rc.right - rc.left) / 2;
-		            pt.y = rc.top + (rc.bottom - rc.top) / 2;
+					pt.x = rc.left + (rc.right - rc.left) / 2;
+					pt.y = rc.top + (rc.bottom - rc.top) / 2;
 				}
-            }
+			}
 			else
 				ScreenToClient(hwndDlg, &pt);
 
-			if (PtInRect((LPRECT) &rc, pt)) 
+			if (PtInRect(&rc, pt)) 
 				HandlePopupMenu(hwndDlg, pt, GetDlgItem(GetParent(hwndDlg), IDC_OPTEDIT1));
                 
 			return 0;
 		}
+
 		case WM_CHAR:
-			if (wParam == 1 && GetKeyState(VK_CONTROL) & 0x8000)	//ctrl-a
+			if (wParam == 1 && GetKeyState(VK_CONTROL) & 0x8000)	// Ctrl + A
 			{
 				SendMessage(hwndDlg, EM_SETSEL, 0, -1);
 				return 0;
 			}
-			if (wParam == 127 && GetKeyState(VK_CONTROL) & 0x8000)	//ctrl-backspace
+			if (wParam == 127 && GetKeyState(VK_CONTROL) & 0x8000)	// Ctrl + Backspace
 			{
-                DWORD start, end;
-                TCHAR *text;
-                int textLen;
-                SendMessage(hwndDlg, EM_GETSEL, (WPARAM)&end, (LPARAM)(PDWORD)NULL);
-                SendMessage(hwndDlg, WM_KEYDOWN, VK_LEFT, 0);
-                SendMessage(hwndDlg, EM_GETSEL, (WPARAM)&start, (LPARAM)(PDWORD)NULL);
-                textLen = GetWindowTextLength(hwndDlg);
-                text = (TCHAR *)mir_alloc(sizeof(TCHAR) * (textLen + 1));
-                GetWindowText(hwndDlg, text, textLen + 1);
-                MoveMemory(text + start, text + end, sizeof(TCHAR) * (textLen + 1 - end));
-                SetWindowText(hwndDlg, text);
-                mir_free(text);
-                SendMessage(hwndDlg, EM_SETSEL, start, start);
-                SendMessage(GetParent(hwndDlg), WM_COMMAND, MAKEWPARAM(GetDlgCtrlID(hwndDlg), EN_CHANGE), (LPARAM)hwndDlg);
-                return 0;
-            }
+				DWORD start, end;
+				TCHAR *text;
+				int textLen;
+				SendMessage(hwndDlg, EM_GETSEL, (WPARAM)&end, (LPARAM)(PDWORD)NULL);
+				SendMessage(hwndDlg, WM_KEYDOWN, VK_LEFT, 0);
+				SendMessage(hwndDlg, EM_GETSEL, (WPARAM)&start, (LPARAM)(PDWORD)NULL);
+				textLen = GetWindowTextLength(hwndDlg);
+				text = (TCHAR *)mir_alloc(sizeof(TCHAR) * (textLen + 1));
+				GetWindowText(hwndDlg, text, textLen + 1);
+				MoveMemory(text + start, text + end, sizeof(TCHAR) * (textLen + 1 - end));
+				SetWindowText(hwndDlg, text);
+				mir_free(text);
+				SendMessage(hwndDlg, EM_SETSEL, start, start);
+				SendMessage(GetParent(hwndDlg), WM_COMMAND, MAKEWPARAM(GetDlgCtrlID(hwndDlg), EN_CHANGE), (LPARAM)hwndDlg);
+				return 0;
+			}
 			break;
 	}
 
@@ -1183,8 +1184,8 @@ static INT_PTR CALLBACK DlgVariablesOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM 
 				if (ServiceExists(MS_VARS_FORMATSTRING))
 					DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "EnableVariables", (BYTE)(IsDlgButtonChecked(hwndDlg, IDC_CVARIABLES) == BST_CHECKED));
 
-				if (SAUpdateMsgTimer)
-					KillTimer(NULL, SAUpdateMsgTimer);
+				if (g_uUpdateMsgTimer)
+					KillTimer(NULL, g_uUpdateMsgTimer);
 
 				int val = SendDlgItemMessage(hwndDlg, IDC_SSECUPDTMSG, UDM_GETPOS, 0, 0);
 				DBWriteContactSettingWord(NULL, "SimpleStatusMsg", "UpdateMsgInt", (WORD)val);
@@ -1192,7 +1193,7 @@ static INT_PTR CALLBACK DlgVariablesOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM 
 				if (IsDlgButtonChecked(hwndDlg, IDC_CUPDATEMSG) == BST_CHECKED && val)
 				{
 					DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "UpdateMsgOn", (BYTE)1);
-					SAUpdateMsgTimer = SetTimer(NULL, 0, val * 1000, (TIMERPROC)SAUpdateMsgTimerProc);
+					g_uUpdateMsgTimer = SetTimer(NULL, 0, val * 1000, (TIMERPROC)UpdateMsgTimerProc);
 				}
 				else
 					DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "UpdateMsgOn", (BYTE)0);

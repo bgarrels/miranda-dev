@@ -48,6 +48,13 @@ struct MsgBoxData
 	BOOL	m_bOnStartup;
 };
 
+typedef struct
+{
+	clock_t ctLastDblClk;
+	UINT uClocksPerDblClk;
+}
+MsgEditCtrl;
+
 HIMAGELIST AddOtherIconsToImageList(struct MsgBoxData *data)
 {
 	HIMAGELIST himlIcons = ImageList_Create(16, 16, (IsWinVerXPPlus() ? ILC_COLOR32 : ILC_COLOR16) | ILC_MASK, 4, 0);
@@ -552,62 +559,102 @@ static LRESULT CALLBACK EditBoxSubProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 	{
 		case WM_CONTEXTMENU:
 		{
-			POINT pt = {(signed short)LOWORD(lParam), (signed short)HIWORD(lParam)};
+			POINT pt = {(LONG)LOWORD(lParam), (LONG)HIWORD(lParam)};
 			RECT rc;
-			GetClientRect(hwndDlg, (LPRECT) &rc);
+			GetClientRect(hwndDlg, &rc);
  
 			if (pt.x == -1 && pt.y == -1)
 			{
 				GetCursorPos(&pt);
-				if (!PtInRect((LPRECT) &rc, pt))
+				if (!PtInRect(&rc, pt))
 				{
-	                pt.x = rc.left + (rc.right - rc.left) / 2;
-		            pt.y = rc.top + (rc.bottom - rc.top) / 2;
+					pt.x = rc.left + (rc.right - rc.left) / 2;
+					pt.y = rc.top + (rc.bottom - rc.top) / 2;
 				}
-            }
+			}
 			else
 				ScreenToClient(hwndDlg, &pt);
 
-			if (PtInRect((LPRECT) &rc, pt)) 
+			if (PtInRect(&rc, pt)) 
 				HandlePopupMenu(hwndDlg, pt, GetDlgItem(GetParent(hwndDlg), IDC_EDIT1));
                 
 			return 0;
 		}
+
 		case WM_CHAR:
-			if (wParam=='\n' && GetKeyState(VK_CONTROL)&0x8000)
+			if (wParam=='\n' && GetKeyState(VK_CONTROL) & 0x8000)
 			{
 				PostMessage(GetParent(hwndDlg), WM_COMMAND, IDC_OK, 0);
 				return 0;
 			}
-			if (wParam == 1 && GetKeyState(VK_CONTROL) & 0x8000)	//ctrl-a
+			if (wParam == 1 && GetKeyState(VK_CONTROL) & 0x8000)	// Ctrl + A
 			{
 				SendMessage(hwndDlg, EM_SETSEL, 0, -1);
 				return 0;
 			}
-			if (wParam == 23 && GetKeyState(VK_CONTROL) & 0x8000)	//ctrl-w
+			if (wParam == 23 && GetKeyState(VK_CONTROL) & 0x8000)	// Ctrl + W
 			{
 				SendMessage(GetParent(hwndDlg), WM_COMMAND, IDC_CANCEL, 0);
 				return 0;
 			}
-			if (wParam == 127 && GetKeyState(VK_CONTROL) & 0x8000)	//ctrl-backspace
+			if (wParam == 127 && GetKeyState(VK_CONTROL) & 0x8000)	// Ctrl + Backspace
 			{
-                DWORD start, end;
-                TCHAR *text;
-                int textLen;
-                SendMessage(hwndDlg, EM_GETSEL, (WPARAM)&end, (LPARAM)(PDWORD)NULL);
-                SendMessage(hwndDlg, WM_KEYDOWN, VK_LEFT, 0);
-                SendMessage(hwndDlg, EM_GETSEL, (WPARAM)&start, (LPARAM)(PDWORD)NULL);
-                textLen = GetWindowTextLength(hwndDlg);
-                text = (TCHAR *)mir_alloc(sizeof(TCHAR) * (textLen + 1));
-                GetWindowText(hwndDlg, text, textLen + 1);
-                MoveMemory(text + start, text + end, sizeof(TCHAR) * (textLen + 1 - end));
-                SetWindowText(hwndDlg, text);
-                mir_free(text);
-                SendMessage(hwndDlg, EM_SETSEL, start, start);
-                SendMessage(GetParent(hwndDlg), WM_COMMAND, MAKEWPARAM(GetDlgCtrlID(hwndDlg), EN_CHANGE), (LPARAM)hwndDlg);
-                return 0;
-            }
+				DWORD start, end;
+				TCHAR *text;
+				int textLen;
+				SendMessage(hwndDlg, EM_GETSEL, (WPARAM)&end, (LPARAM)(PDWORD)NULL);
+				SendMessage(hwndDlg, WM_KEYDOWN, VK_LEFT, 0);
+				SendMessage(hwndDlg, EM_GETSEL, (WPARAM)&start, (LPARAM)(PDWORD)NULL);
+				textLen = GetWindowTextLength(hwndDlg);
+				text = (TCHAR *)mir_alloc(sizeof(TCHAR) * (textLen + 1));
+				GetWindowText(hwndDlg, text, textLen + 1);
+				MoveMemory(text + start, text + end, sizeof(TCHAR) * (textLen + 1 - end));
+				SetWindowText(hwndDlg, text);
+				mir_free(text);
+				SendMessage(hwndDlg, EM_SETSEL, start, start);
+				SendMessage(GetParent(hwndDlg), WM_COMMAND, MAKEWPARAM(GetDlgCtrlID(hwndDlg), EN_CHANGE), (LPARAM)hwndDlg);
+				return 0;
+			}
 			break;
+
+		case WM_LBUTTONDBLCLK:
+		{
+			MsgEditCtrl* mec = (MsgEditCtrl*)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+			if (mec != NULL)
+			{
+				mec->ctLastDblClk = clock();
+				mec->uClocksPerDblClk = GetDoubleClickTime() * CLOCKS_PER_SEC / 1000;
+				SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)mec);
+			}
+			break;
+		}
+
+		case WM_LBUTTONDOWN:
+		{
+			MsgEditCtrl* mec = (MsgEditCtrl*)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+			if (mec != NULL && UINT(clock() - mec->ctLastDblClk) < mec->uClocksPerDblClk)
+			{
+				SendMessage(hwndDlg, EM_SETSEL, 0, -1);
+				return 0;
+			}
+			break;
+		}
+
+		case WM_SETFOCUS:
+		{
+			MsgEditCtrl* mec = (MsgEditCtrl*)mir_calloc(sizeof(MsgEditCtrl));
+			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)mec);
+			break;
+		}
+
+		case WM_KILLFOCUS:
+		{
+			MsgEditCtrl* mec = (MsgEditCtrl*)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+			mir_free(mec);
+			mec = NULL;
+			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)mec);
+			break;
+		}
 	}
 
 	return CallWindowProc(MainDlgProc, hwndDlg, uMsg, wParam, lParam);
