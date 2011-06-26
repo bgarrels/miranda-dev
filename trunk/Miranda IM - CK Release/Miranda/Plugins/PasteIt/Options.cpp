@@ -254,6 +254,13 @@ INT_PTR CALLBACK Options::DlgProcOptsPages(HWND hwndDlg, UINT msg, WPARAM wParam
 			TranslateDialogDefault(hwndDlg);
 			OptsPagesData* optsPagesData = new OptsPagesData();
 			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)optsPagesData);
+			
+			HWND btnhwnd = GetDlgItem(hwndDlg, IDC_PASTEBIN_LOGIN);
+			int btSize = Button_GetTextLength(btnhwnd);
+			if(btSize > 20)
+			{
+				SetWindowPos(btnhwnd, NULL, 0, 0, 115, 34, SWP_NOZORDER | SWP_NOMOVE | SWP_NOREPOSITION | SWP_NOACTIVATE | SWP_NOREDRAW);
+			}
 
 			for(int i = 0; i < PasteToWeb::pages; ++i)
 			{
