@@ -39,7 +39,7 @@ IDI_OPT_RADIO_ON        ICON                    "res\\Radio_on.ico"
 IDI_ACT_INFO            ICON                    "res\\info.ico"
 IDI_ACT_MENU            ICON                    "res\\menu.ico"
 IDI_ACT_MESSAGE         ICON                    "res\\message.ico"
-IDI_OPT_SHOWDEF         ICON                    "res\\ok.ico"
+IDI_ACT_OK              ICON                    "res\\ok.ico"
 IDI_ACT_ADD             ICON                    "res\\add.ico"
 IDI_ACT_CLOSE           ICON                    "res\\close.ico"
 IDI_ACT_PINNED          ICON                    "res\\pinned.ico"
@@ -277,7 +277,7 @@ BEGIN
     LTEXT           "Ignore fullscreen",IDC_STATIC,172,198,57,20,SS_CENTERIMAGE
     ICON            IDI_OPT_BLOCK,IDC_ICO_BLOCK,229,198,20,20,SS_CENTERIMAGE | SS_REALSIZEIMAGE
     LTEXT           "Never show",IDC_STATIC,251,198,41,20,SS_CENTERIMAGE
-    ICON            IDI_OPT_SHOWDEF,IDC_ICO_OK,8,198,20,20,SS_CENTERIMAGE | SS_REALSIZEIMAGE
+    ICON            IDI_ACT_OK,IDC_ICO_OK,8,198,20,20,SS_CENTERIMAGE | SS_REALSIZEIMAGE
     LTEXT           "Show default",IDC_STATIC,30,198,49,20,SS_CENTERIMAGE
 END
 
@@ -355,7 +355,7 @@ IDB_NOAVATAR            BITMAP                  "res\\avatar.bmp"
 // TEXT
 //
 
-IDR_WHATSNEW            TEXT                    "res\\whatsnew.txt"
+//IDR_WHATSNEW            TEXT                    "res\\whatsnew.txt"
 
 /////////////////////////////////////////////////////////////////////////////
 //
