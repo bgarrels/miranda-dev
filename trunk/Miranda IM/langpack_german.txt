@@ -7,7 +7,7 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 06 Jul 2011 12:07:54
+X-Langpack-creation-date: 06 Jul 2011 17:07:46
 ; FLID: Deutsche Sprachdatei 0.11.07.06
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirOTR,MirOUT,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
@@ -6172,15 +6172,69 @@ Verlauf löschen
 ; ##############################################
 ; End of langpack: 4x4x4
 ; ############################################## 
-; Start of langpack: AIM (Letzte Änderung: 13:41, 22. Jan. 2011 )
+; Start of langpack: AIM (Letzte Änderung: 14:57, 6. Jul. 2011 )
 
 ; Pluginname: AIM Protocol
-; Version: 0.9.15.0
+; Version: 0.9.10.2
 ; Dateiname: aim.dll
 ; Unique ID: {3750a5a3-bf0d-490e-b65d-41ac4d29aeb3}
 ; Autor(en): Boris Krasnovskiy, Aaron Myles Landwehr
 ; Link: Stable & Testing
 ; Übersetzung: Freak am 03.12.05
+
+[Successfully removed buddy from list.]
+Der Kontakt wurde erfolgreich von der Liste entfernt.
+[Item you want to delete not found in list.]
+Das Artikel zum löschen wurde in der Liste nicht gefunden.
+[Failed to add buddy to list: Item already exist.]
+Fehler mein Kontakt hinzufügen: Dieser existiert bereits in Ihrer Liste!
+[Error adding buddy(invalid id?, already in list?)]
+Fehler beim Kontakt hinzufügen (falsche ID?, existiert bereits in Ihrer Liste?)
+[Cannot add buddy. Limit for this type of item exceeded.]
+Kann den Kontakt nicht hinzufügen. Das Limit für diese Art wurde bereits überschritten.
+[Error? Attempting to add ICQ contact to an AIM list.]
+Fehler beim Versuch den ICQ Kontakt in die AIM-Liste aufzunehmen!
+[Cannot add this buddy because it requires authorization.]
+Konnte den Kontakt nicht hinzufügen, da eine Autorisation benötigt wird.
+[Unknown error when adding buddy to list. Error code %#x]
+Unbekannter Fehler beim hinzufügen eines Kontaktes in Ihre Liste. Fehlercode %#x
+[Item you want to modify not found in list.]
+Der Kontakt den Sie modifizieren möchten wurde in ihrer Liste nicht gefunden.
+[You've got mail! Checked at]
+Sie haben eine neu eMail! Geprüft um:
+[Error uploading avatar. (Too big)]
+Fehler beim Avatarupload. Zu Groß!
+[Error uploading avatar. (Wrong type)]
+Fehler beim Avatarupload. Falscher Dateityp!
+[Error uploading avatar. (Is banned)]
+Fehler beim Avatarupload. Es wurde verbannt (nicht erlaubt)!
+[Error uploading avatar. (Unknown error)]
+Fehler beim Avatarupload. Unbekannter Fehler!
+[A confirmation message has been sent to the new email address. Please follow its instructions.]
+Eine Bestätigungsnachricht wurde an die neue E-Mail-Adresse gesendet. Bitte befolgen Sie ihre Anweisungen.
+[A confirmation message has been sent to your email address. Please follow its instructions.]
+Eine Bestätigungsnachricht wurde an Ihre E-Mail-Adresse gesendet. Bitte befolgen Sie ihre Anweisungen.
+[Unable to confirm at this time. Please try again later.]
+Momentan keine Bestätigung möglich, bitte versuchen Sie es später noch einmal.
+[Your account has already been confirmed.]
+Ihr Account wurde bereits bestätigt.
+[Can't start the confirmation procedure.]
+Kann die Verbindungsprozedur nicht starten.
+
+[gochat?]
+Chatten?
+[roomname=]
+Raumname
+[exchange=]
+Austausch
+
+[Miranda AIM, version %s]
+Miranda IM AIM Version %s
+[Aim was unable to bind to a port. File transfers may not succeed in some cases.]
+AIM konnte sich zu keinem Port verbinden. Der Dateitransfer kann möglicherweise unter Umständen nicht gelingen.
+
+[Failed to open file: %s : %s]
+Konnte die Datei nicht öffnen: %s : %s
 
 [Create a new AIM account]
 Ein neues AIM-Konto erstellen...
@@ -6258,16 +6312,6 @@ Profil lesen
 [No information has been provided by the server.]
 Es wurden keine Informationen über den Server ermittelt.
 
-[A confirmation message has been sent to the new email address. Please follow its instructions.]
-Eine Bestätigungsnachricht wurde an die neue E-Mail-Adresse gesendet. Bitte befolgen Sie ihre Anweisungen.
-[A confirmation message has been sent to your email address. Please follow its instructions.]
-Eine Bestätigungsnachricht wurde an Ihre E-Mail-Adresse gesendet. Bitte befolgen Sie ihre Anweisungen.
-[Unable to confirm at this time. Please try again later.]
-Momentan keine Bestätigung möglich, bitte versuchen Sie es später noch einmal.
-[Your account has already been confirmed.]
-Ihr Account wurde bereits bestätigt.
-[Can't start the confirmation procedure.]
-Kann die Verbindungsprozedur nicht starten
 [Buddylist Error]
 Fehler Server-Kontaktliste
 [Recipient is not logged in.]
@@ -11985,15 +12029,90 @@ HTML
 ; ##############################################
 ; End of langpack: GTalkExt
 ; ############################################## 
-; Start of langpack: Gadu-Gadu (Letzte Änderung: 13:40, 22. Jan. 2011 )
+; Start of langpack: Gadu-Gadu (Letzte Änderung: 15:52, 6. Jul. 2011 )
 
 ; Pluginname: Gadu-Gadu Protocol
-; Version: 0.9.15.0
+; Version: 0.9.10.2
 ; Dateiname: gg.dll
 ; Unique ID: {f3ff65f3-250e-416a-bee9-58c93f85ab33}
 ; Autor(en): OnO, Bartosz Bia³ek, Adam Strzelecki
 ; Link: Stable & Testing
 ; Übersetzung: 12.01.07 von xero
+
+[Cannot register new account because of error:\n\t%s]
+Es konnte kein neuer Account registriert werden, Fehler:\n\t%s
+[Registration rejected]
+Registration abgewiesen
+[You have registered new account.\nPlease fill up your personal details in \"M->Change my details...\"]
+Sie müssen einen neuen Account anlegen.\nBitte füllen sie alle wichtigen Informationen unter "Meine Details ändern" aus.
+[Your account cannot be removed because of error:\n\t%s]
+Ihr Account konnte nicht entfernt werden, Fehler:\n\t%s
+[Bad number or password]
+Falsche Nummer oder Passwort
+[Your account has been removed.]
+Ihr Account wurde entfernt.
+[Your password cannot be changed because of error:\n\t%s]
+Ihr Passwort konnte nicht geändert werden, Fehler:\n\t%s
+[Invalid data entered]
+Falsche Daten eingegeben?
+[Bad old e-mail or password]
+Falsche eMail-Adresse oder Passwort.
+[Your e-mail cannot be changed because of error:\n\t%s]
+Ihre eMail-Adresse konnte nicht geändert werden, Fehler:\n\t%s
+
+[Token retrieval failed because of error:\n\t%s]
+Zeichenabruf ist ggfs. fehlgeschlagen, Fehler:\n\t%s
+[Could not load token image.]
+Konnte kein 'Token'-Bild laden.
+
+[To remove your Gadu-Gadu avatar, you must use the MojaGeneracja.pl website.]
+Um Ihr Gadu-Gadu Avatar zu entfernen, müssen sie auf die MojaGeneracja.pl-Homepage gehen. 
+
+[Password could not be reminded because of error:\n\t%s]
+Das Passwort konnte zurückgesetzt werden, Fehler:\n\t%s 
+[Password was sent to your e-mail.]
+Das Passwort wurde zu Ihrer eMail gesendet.
+
+[List cannot be imported because of error:\n\t%s]
+Die Liste konnte nicht importiert werden, Fehler:\n\t%s
+[List cannot be exported to file \"%s\" because of error:\n\t%s]
+Die Liste konnte nicht exportiert werden, Fehler:\n\t%s
+
+[Image cannot be written to disk.]
+Das Bild konnte nicht auf die Festplatte geschrieben werden.
+[Image from %s]
+Bild von %s
+[Image for %s]
+Bild für %s
+[Select picture to send]
+Wählen Sie ein Bild zum übersenden
+[Image exceeds maximum allowed size of 255 KB.]
+Das Bild überschreitet eine max. Größe von 255 KB.
+[Image files (*.bmp,*.jpg,*.gif,*.png)]
+Bilddatei (*.bmp,*.jpg,*.gif,*.png)
+
+[%s has initiated conference with %d participants (%d unknowns).\nDo you want do participate ?]
+%s hinitiierte eine Konferenz mit %d Teilnehmer (%d Unbekannten).\ nMöchten Sie teilnehmen?
+[%s initiated the conference.]
+%s hinitiierte eine Konferenz.
+[This is my own conference.]
+Dies ist meine eigene Konferenz.
+[All ignored conferences are now unignored and the conference policy will act again.]
+Alle ignorierten Konzerenzen sind nun nicht mehr ignoriert und die Konzerenzregeln werden wieder behandelt.
+
+[You need to specify your registration e-mail first.]
+Für die Anmeldung müssen Sie ihre registrierte eMail erst angeben. 
+[Your password will be sent to your registration e-mail.\nDo you want to continue ?]
+Ihr Passwort wird zur Ihrer Registrierungsemail gesendet.\nMöchten Sie fortfahren?
+[You should disconnect before making any permanent changes with your account.\nDo you want to disconnect now ?]
+Sie sollten die Verbindung trennen bevor sie permanente Änderungen mit ihrem Account vornehmen.\nWollen sie nun die Verbindung trennen? 
+
+[Connection cannot be established because of error:\n\t%s]
+Eine Verbindung konnte nicht hergestellt werden, Fehler:\n\t%s
+[External direct connections hostname %s is invalid. Disabling external host forwarding.]
+Externe Direktverbindung vom Hostname %s ist falsch. Deaktivieren Sie bitte die externe Host-Weiterleitung.
+[Server hostname %s is invalid. Using default hostname provided by the network.]
+Serverhostname %s ist falsch. Benutzen Sie bitte den vorausgesetzten Standard Hostname aus ihrem Netzwerk. 
 
 [Delete image from the list]
 Lösche Bild(er) von der Liste
@@ -12001,8 +12120,6 @@ Lösche Bild(er) von der Liste
 Speichere Bild auf die Festplatte
 [Image received]
 Bild empfangen
-[Could not load token image.]
-Konnte kein 'Token'-Bild laden.
 [Message with [img] BBCode]
 Nachrichten mit [img] BBCode
 [Provides support for Gadu-Gadu protocol]
@@ -18424,7 +18541,7 @@ Deaktiviere Invisible 4 Invisible
 ; ##############################################
 ; End of langpack: Invisible4Invisible
 ; ############################################## 
-; Start of langpack: Jabber (Letzte Änderung: 11:17, 6. Jul. 2011 )
+; Start of langpack: Jabber (Letzte Änderung: 14:29, 6. Jul. 2011 )
 
 ; Pluginname: Jabber Protocol 
 ; Version: 0.10.0.2
@@ -21415,7 +21532,7 @@ Neue E-Mail
 ; ##############################################
 ; End of langpack: MRA
 ; ############################################## 
-; Start of langpack: MRadio (Letzte Änderung: 11:25, 6. Jul. 2011 )
+; Start of langpack: MRadio (Letzte Änderung: 11:29, 6. Jul. 2011 )
 
 ; Pluginname: mRadio 
 ; Version: 0.0.1.4
@@ -21520,7 +21637,7 @@ Aus
 [Buffer, ms (5000)]
 Puffer, ms (5000)
 [Timeout, ms (5000)]
-Zeitüb. (Timeout), ms (5000)
+Zeiüber., ms (5000)
 [Autoconnect last station]
 Verbinde automatisch mit letztem Sender
 [Offline station as Offline]
@@ -42807,15 +42924,21 @@ Anzeigedauer (0 = Standard):
 ; ##############################################
 ; End of langpack: YAPP
 ; ############################################## 
-; Start of langpack: Yahoo (Letzte Änderung: 11:16, 6. Jul. 2011 )
+; Start of langpack: Yahoo (Letzte Änderung: 16:13, 6. Jul. 2011 )
 
-; Pluginname: YAHOO (libyahoo2 library)
+; Pluginname: Yahoo (libyahoo2 library)
 ; Version: 0.10.0.2
 ; Dateiname: yahoo.dll
 ; Unique ID: {6ca5f042-7a7f-47cc-a715-fc8c46fbf434}
 ; Autor: Gennady Feldmann
 ; Link: Stable & Testing
 ; Übersetzung: 23.06.05 von ANdyDU
+
+[[miranda] Got webcam invite. (not currently supported)]
+[Miranda IM] Webcameinladung. Diese wird nicht unterstützt.
+
+[Could not connect to Yahoo server.  Please verify that you are connected to the net and the pager host and port are correctly entered.]
+Konnte sich nicht zum Yahoo-Server verbinden. Bitte überprüfen sie ob eine Internetverbindung besteht und der Hostname und Port korrekt ist.
 
 [Your png2dib.dll is either obsolete or damaged. ]
 Die Datei png2dib.dll ist veraltet oder defekt.
@@ -42825,10 +42948,14 @@ Neue E-Mail im Posteingang
 [Yahoo Protocol]
 Yahoo-Protokoll
 [YAHOO plugin HTTP connections]
-YAHOO-Plugin HTTP-Verbindungen
+Yahoo-Plugin HTTP-Verbindungen
 
-[Yahoo plugin cannot be loaded. It requires Miranda IM " MIRANDA_VERSION_CORE_STRING " or later.]	 
-Das Yahoo-Plugin kann nicht geladen werden. Es benötigt Miranda IM " MIRANDA_VERSION_CORE_STRING " oder höher.	
+[Yahoo plugin cannot be loaded. It requires Miranda IM 0.9.0.2 or later.]	 
+Das Yahoo-Plugin kann nicht geladen werden. Es benötigt Miranda IM 0.9.0.2 oder höher.
+[Can not retrieve the core List Interface.]
+Konnte das Core-Interface nicht laden.
+[Yahoo Plugin Load Failed]
+Yahoo-Plugin konnte nicht geladen werden!
 
 [YAHOO Options]
 Yahoo-Einstellungen
@@ -42866,7 +42993,7 @@ Profil zeigen
 [[miranda] Got conference invite to room: %s with msg: %s]
 [Miranda] Chateinladung in Raum: %s mit Nachricht: %s
 [I am sorry, but i can't join your conference since this feature is not currently implemented in my client.]
-Entschuldigung, aber wir können den Chatraum nicht betreten, da dieses Feature derzeit in diesem Client noch nicht vorhanden ist.
+Entschuldigung, aber ich kann den Chatraum nicht betreten, da dieses Feature in diesem Client nicht vorhanden ist.
 [Calendar Reminder]
 Kalendererinnerung
 [%s has rejected your request and sent the following message:]
@@ -42877,8 +43004,6 @@ Sie haben %i ungelesene Nachr.
 Neue E-Mail (%i Nachr.)
 [From: %s\nSubject: %s]
 Von: %s\nBetreff: %s
-[[miranda] Got webcam invite. (not currently supported)]
-[Miranda] Webcameinladung. (derzeit nicht unterstützt)
 [Yahoo Ping Error]
 Yahoo-Pingfehler
 [Could not log into Yahoo service - username not recognised.  Please verify that your username is correctly typed.]
