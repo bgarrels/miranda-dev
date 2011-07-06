@@ -18,8 +18,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13651 $
-Last change on : $Date: 2011-06-03 02:50:37 +0200 (Fr, 03. Jun 2011) $
+Revision       : $Revision: 13680 $
+Last change on : $Date: 2011-07-04 01:36:24 +0200 (Mo, 04. Jul 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -432,7 +432,7 @@ char* TPlainAuth::getInitialRequest()
 	char *uname = mir_utf8encodeT( info->username ), 
 		 *passw = mir_utf8encodeT( info->password ); 
 
-	int size = 2 * strlen( uname ) + strlen( passw ) + strlen( info->server ) + 4;
+	size_t size = 2 * strlen( uname ) + strlen( passw ) + strlen( info->server ) + 4;
 	char *toEncode = ( char* )alloca( size );
 	if ( bOld )
 		size = mir_snprintf( toEncode, size, "%s@%s%c%s%c%s", uname, info->server, 0, uname, 0, passw );
@@ -442,7 +442,7 @@ char* TPlainAuth::getInitialRequest()
 	mir_free( uname );
 	mir_free( passw );
 
-	return JabberBase64Encode( toEncode, size );
+	return JabberBase64Encode( toEncode, (int)size );
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
