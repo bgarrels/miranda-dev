@@ -7,8 +7,8 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 22 Jun 2011 13:06:12
-; FLID: Deutsche Sprachdatei 0.11.06.22
+X-Langpack-creation-date: 06 Jul 2011 12:07:54
+; FLID: Deutsche Sprachdatei 0.11.07.06
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirOTR,MirOUT,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
 ; Start of langpack: Core (Letzte Änderung: 13:21, 18. Jun. 2011 )
@@ -18424,15 +18424,18 @@ Deaktiviere Invisible 4 Invisible
 ; ##############################################
 ; End of langpack: Invisible4Invisible
 ; ############################################## 
-; Start of langpack: Jabber (Letzte Änderung: 22:00, 21. Apr. 2011 )
+; Start of langpack: Jabber (Letzte Änderung: 11:17, 6. Jul. 2011 )
 
 ; Pluginname: Jabber Protocol 
-; Version: 0.9.15.0
+; Version: 0.10.0.2
 ; Dateiname: jabber.dll
 ; Unique ID: {144e80a2-d198-428b-acbe-9d55dacc7fde}
 ; Autor(en): George Hazan, Maxim Mluhov, Victor Pavlychko, Artem Shpynov, Michael Stepura
 ; Link: Stable & Testing
 ; Übersetzung: 26.02.07 von Lastwebpage
+
+[The Jabber protocol plugin cannot be loaded. It requires Miranda IM " MIRANDA_VERSION_CORE_STRING " or later.]
+Das Jabber-Plugin konnte nicht geladen werden. Es benötigt Miranda IM " MIRANDA_VERSION_CORE_STRING " oder höher.
 
 [User %s changed status to %s with message: %s]
 Benutzer %s änderte den Status zu '%s' mit der Nachricht: %s
@@ -21412,20 +21415,19 @@ Neue E-Mail
 ; ##############################################
 ; End of langpack: MRA
 ; ############################################## 
-; Start of langpack: MRadio (Letzte Änderung: 22:37, 20. Nov. 2010 )
+; Start of langpack: MRadio (Letzte Änderung: 11:25, 6. Jul. 2011 )
 
 ; Pluginname: mRadio 
 ; Version: 0.0.1.4
 ; Dateiname: mRadio.dll
 ; Autor: Krzysztof Przyby³a
-; Link: http://miranda.kom.pl/dev/bankrut/
 ; Übersetzung: 13.02.06 von Dober
 
 ; Pluginname: mRadio Mod 
-; Version: 0.0.1.7
+; Version: 0.0.2.1
 ; Dateiname: mRadio.dll
+; Unique ID: {eebc474c-b0ad-470f-99a8-9dd9210ce233}
 ; Autor: Awkward
-; Link: http://awkward.mirandaim.ru/
 ; Übersetzung: 02.07.07
 
 [Simple pseudo protocol with live streaming audio]
@@ -21518,7 +21520,7 @@ Aus
 [Buffer, ms (5000)]
 Puffer, ms (5000)
 [Timeout, ms (5000)]
-Zeitüberschreitung (Timeout), ms (5000)
+Zeitüb. (Timeout), ms (5000)
 [Autoconnect last station]
 Verbinde automatisch mit letztem Sender
 [Offline station as Offline]
@@ -21569,6 +21571,10 @@ Unter Drogeneinfluss
 Benommen
 [Psychotic]
 Psychotisch
+[Protocol depending status]
+Protokoll abhängig vom Status
+[Forced Mono]
+Mono fokusieren
  
 ; ##############################################
 ; End of langpack: MRadio
@@ -23500,10 +23506,10 @@ Informiert dich ein paar Tage bevor jemand auf deiner Kontaktliste Geburtstag ha
 ; ##############################################
 ; End of langpack: MicqBirthday
 ; ############################################## 
-; Start of langpack: MirOTR (Letzte Änderung: 00:24, 30. Mai 2011 )
+; Start of langpack: MirOTR (Letzte Änderung: 22:48, 4. Jul. 2011 )
 
 ; Pluginname: MirOTR 
-; Version:  0.12.0.1 Beta
+; Version: 0.11.0.2
 ; Dateiname: mirotra (Ansi - alt), mirotr.dll (Unicode & x64)
 ; Autor: ProgAndy, CHEF-KOCH
 ; http://forum.miranda-im.de/index.php?topic=13574.0
@@ -23640,8 +23646,8 @@ OTR: SecureIM ist installiert
 [You are using SecureIM. MirOTR will only work for contacts with SecureIM disabled]
 Sie benutzen SecureIM. MirOTR funktioniert nur mit deaktiviertem SecureIM.
 
-[Your SRMM plugin does not support status icons. Not all OTR-functions are available!]
-Ihr SRMM-Plugin unterstützt keine Statusicons. Nicht alle OTR-Funktionen stehen zur Verfügung!
+[Your SRMM plugin does not support status icons. Not all MirOTR-functions are available!]
+Ihr SRMM-Plugin unterstützt keine Statusicons. Nicht alle MirOTR-Funktionen stehen zur Verfügung!
 
 [Private Data]
 Private Daten
@@ -28200,10 +28206,10 @@ Die Prüfung auf Aktualisierungen wurde bereits gestartet!
 ; ##############################################
 ; End of langpack: PackUpdater
 ; ############################################## 
-; Start of langpack: Paste_It (Letzte Änderung: 15:21, 18. Jun. 2011 )
+; Start of langpack: Paste_It (Letzte Änderung: 02:31, 4. Jul. 2011 )
 
 ; Pluginname: Paste It
-; Version: 1.0.0.2
+; Version: 1.0.0.3
 ; Dateiname: pasteit.dll
 ; Unique ID: {1aac15e8-dcec-4050-b66f-2aa0e6120c22}
 ; Autor: Krzysztof Kral
@@ -31205,14 +31211,13 @@ Autom. Antwort einschalten
 ; ##############################################
 ; End of langpack: Simple_Auto_Replier
 ; ############################################## 
-; Start of langpack: Simple_Status_Message (Letzte Änderung: 02:07, 29. Apr. 2011 )
+; Start of langpack: Simple_Status_Message (Letzte Änderung: 16:38, 26. Jun. 2011 )
 
 ; Pluginname: Simple Status Message 
 ; Version: 1.9.0.3
 ; Dateiname: simplestatusmsg.dll
 ; Autor: Dezeath
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4321
-; SVN: http://code.google.com/p/dezeath/
+; Unique ID: {768ce156-34ac-45a3-b53b-0083c47615c4}
 ; Übersetzung: 29.06.06 von Weishaupt
 
 [Open Status Message Dialog]
@@ -33122,14 +33127,13 @@ Autorisierung von "Nicht-Spam-Kontakten" anfordern
 ; ##############################################
 ; End of langpack: StopSpam
 ; ############################################## 
-; Start of langpack: Switch_Layout_or_Transliterate (Letzte Änderung: 10:33, 26. Feb. 2011 )
+; Start of langpack: Switch_Layout_or_Transliterate (Letzte Änderung: 17:14, 4. Jul. 2011 )
 
-; Pluginname: Switch Layout or Transliterate
-; Version: 0.0.0.8
+; Pluginname: 'Switch Layout' oder auch 'Transliterate'
+; Version: 0.0.1.0
 ; Dateiname: TranslitSwitcher.dll
 ; Autor(en): Mataes, tico-tico, Tim
 ; Unique ID: {0286947d-3140-4222-b5ad-2c92315e1c1e}
-; Link: http://mataes.googlecode.com/svn/Miranda/Plugins/TranslitSwitcher
 ; Übersetzung: CHEF-KOCH 10.11.2010
 ; Besonderheiten: Sonderzeichen und einzelne Buchstaben dürfen nicht übersetzt werden! Außerdem stehen hier alle Übersetzungen von den Translitswitcher, Switch Layout Light und dem original Switch Layout!
 
@@ -42803,10 +42807,10 @@ Anzeigedauer (0 = Standard):
 ; ##############################################
 ; End of langpack: YAPP
 ; ############################################## 
-; Start of langpack: Yahoo (Letzte Änderung: 13:44, 22. Jan. 2011 )
+; Start of langpack: Yahoo (Letzte Änderung: 11:16, 6. Jul. 2011 )
 
 ; Pluginname: YAHOO (libyahoo2 library)
-; Version: 0.9.15.0
+; Version: 0.10.0.2
 ; Dateiname: yahoo.dll
 ; Unique ID: {6ca5f042-7a7f-47cc-a715-fc8c46fbf434}
 ; Autor: Gennady Feldmann
@@ -42816,10 +42820,6 @@ Anzeigedauer (0 = Standard):
 [Your png2dib.dll is either obsolete or damaged. ]
 Die Datei png2dib.dll ist veraltet oder defekt.
 
-[Yahoo plugin cannot be loaded. It requires Miranda IM 0.9.0.1 or later.]
-Das Yahoo-Plugin konnte nicht geladen werden. Es benötigt Miranda IM 0.9.0.1 oder höher.
-[Yahoo plugin cannot be loaded. It requires Miranda IM 0.8.10 or later.]
-Das Yahoo-Plugin konnte nicht geladen werden. Es benötigt Miranda IM 0.8.10 oder höher.
 [New E-mail available in Inbox]
 Neue E-Mail im Posteingang
 [Yahoo Protocol]
@@ -42827,6 +42827,8 @@ Yahoo-Protokoll
 [YAHOO plugin HTTP connections]
 YAHOO-Plugin HTTP-Verbindungen
 
+[Yahoo plugin cannot be loaded. It requires Miranda IM " MIRANDA_VERSION_CORE_STRING " or later.]	 
+Das Yahoo-Plugin kann nicht geladen werden. Es benötigt Miranda IM " MIRANDA_VERSION_CORE_STRING " oder höher.	
 
 [YAHOO Options]
 Yahoo-Einstellungen
