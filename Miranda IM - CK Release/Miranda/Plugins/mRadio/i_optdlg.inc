@@ -126,7 +126,7 @@ begin
       AnsiToWide(group,p,MirandaCP);
       CreateGroupW(p,result);
       mFreeMem(p);
-      CallService(MS_IGNORE_IGNORE,result,IGNOREEVENT_USERONLINE);
+      CallService(MS_IGNORE_IGNORE,result,IGNOREEVENT_ALL);
     end;
   end;
 end;
@@ -351,7 +351,7 @@ begin
       else
         ShowWindow(wnd,SW_HIDE);
 
-      if recpath<>nil then
+//!!      if recpath<>nil then
         SetDlgItemTextW(Dialog,IDC_ED_RECPATH,recpath);
 
       CheckDlgButton(Dialog,IDC_LOOP     ,doLoop);
