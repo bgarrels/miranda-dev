@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13497 $
-Last change on : $Date: 2011-03-25 07:55:36 +0300 (Пт, 25 мар 2011) $
+Revision       : $Revision: 13665 $
+Last change on : $Date: 2011-07-03 04:29:28 +0200 (So, 03. Jul 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -76,21 +76,13 @@ static TCHAR* sttSettingToTchar( DBCONTACTWRITESETTING* cws )
 {
 	switch( cws->value.type ) {
 	case DBVT_ASCIIZ:
-		#if defined( _UNICODE )
-			return mir_a2u( cws->value.pszVal );
-		#else
-			return mir_strdup( cws->value.pszVal );
-		#endif
+		return mir_a2t( cws->value.pszVal );
 
 	case DBVT_UTF8:
-		#if defined( _UNICODE )
-		{	TCHAR* result;
-			mir_utf8decode( NEWSTR_ALLOCA(cws->value.pszVal), &result );
-			return result;
-		}
-		#else
-			return mir_strdup( mir_utf8decode( NEWSTR_ALLOCA(cws->value.pszVal), NULL ));
-		#endif
+		return mir_utf8decodeT( cws->value.pszVal );
+
+	case DBVT_WCHAR:
+		return mir_u2t( cws->value.pwszVal );
 	}
 	return NULL;
 }
