@@ -1,6 +1,7 @@
 {}
 var
   OldTableProc:pointer;
+  onactchanged:THANDLE;
 
 const
   ACI_NEW    :PAnsiChar = 'ACI_New';
@@ -114,6 +115,13 @@ begin
   end;
 end;
 
+function ActListChange(wParam:WPARAM;lParam:LPARAM):integer; cdecl;
+begin
+  result:=0;
+  if settings<>0 then
+    FillActionList(GetDlgItem(settings,IDC_ACTIONLIST));
+end;
+
 procedure ShowHookData(Dialog:HWND; item:integer=-1);
 var
   li:LV_ITEM;
@@ -221,12 +229,6 @@ begin
   result:=CallWindowProc(OldTableProc,Dialog,hMessage,wParam,lParam);
 end;
 
-function SetIcon(btn:HWND;name:PAnsiChar):HICON;
-begin
-  result:=PluginLink^.CallService(MS_SKIN2_GETICON,0,LPARAM(name));
-  SendMessage(btn,BM_SETIMAGE,IMAGE_ICON,result);
-end;
-
 procedure SetIcons(Dialog:HWND);
 var
   ti:TTOOLINFOW;
@@ -251,11 +253,11 @@ begin
   
   ti.uId     :=GetDlgItem(Dialog,IDC_HOOK_NEW);
   ti.lpszText:=TranslateW('New');
-  SetIcon(ti.uId,ACI_NEW);
+  SetButtonIcon(ti.uId,ACI_NEW);
   SendMessageW(hwndTooltip,TTM_ADDTOOLW,0,LPARAM(@ti));
   ti.uId     :=GetDlgItem(Dialog,IDC_HOOK_DELETE);
   ti.lpszText:=TranslateW('Delete');
-  SetIcon(ti.uId,ACI_DELETE);
+  SetButtonIcon(ti.uId,ACI_DELETE);
   SendMessageW(hwndTooltip,TTM_ADDTOOLW,0,LPARAM(@ti));
 end;
 
@@ -269,7 +271,8 @@ var
 begin
   result:=0;
   case hMessage of
-    WM_DESTROY: begin
+    WM_CLOSE: begin
+      PluginLink^.UnhookEvent(onactchanged);
       settings:=0;
     end;
 
@@ -299,6 +302,7 @@ begin
       FillHookList(wnd);
       ShowHookData(Dialog);
 
+      onactchanged:=PluginLink^.HookEvent(ME_ACT_CHANGED,@ActListChange);
       settings:=Dialog;
     end;
 
@@ -390,11 +394,4 @@ begin
       end;
     end;
   end;
-end;
-
-function ActListChange(wParam:WPARAM;lParam:LPARAM):integer; cdecl;
-begin
-  result:=0;
-  if settings<>0 then
-    FillActionList(GetDlgItem(settings,IDC_ACTIONLIST));
 end;
