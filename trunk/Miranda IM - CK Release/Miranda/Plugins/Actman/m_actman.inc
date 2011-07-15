@@ -5,6 +5,8 @@
 //const MIID_ACTMANAGER:MUUID='{9584DA04-FB4F-40c1-9325-E4F9CAAFCB5D}';
 
 const
+  AutoStartName:PWideChar = '#Autostart';
+const
   ACCF_DISABLED = $10000000;  // action disabled
   ACCF_EXPORT   = $08000000;  // action to export
   ACCF_VOLATILE = $04000000;  // don't save in DB
@@ -111,5 +113,31 @@ const
     lParam - action id
   }
   ME_ACT_ACTION:PAnsiChar = 'Actions/Action';
+
+//----- Scheduling part services -----
+
+const
+  {
+    Enable or disable tasks
+    wParam - 1/0 (enable/disable)
+    lParam - unicode task name
+    Note - works for all tasks with same started name
+  }
+  MS_ACT_TASKENABLE:PAnsiChar = 'Actions/TaskEnable';
+
+  {
+    Delete task
+    wParam - 0
+    lParam - unicode task name
+    Note - works for all tasks with same started name
+  }
+  MS_ACT_TASKDELETE:PAnsiChar = 'Actions/TaskDelete';
+
+  {
+    Event for task start
+    wParam - counter of call (from 0 to repeat count)
+    lParam - unicode task name
+  }
+  ME_ACT_BELL:PAnsiChar = 'Actions/Bell';
 
 {$ENDIF}
