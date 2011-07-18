@@ -39161,7 +39161,7 @@ Andere Optionen
 ; ##############################################
 ; End of langpack: VyPressChat
 ; ############################################## 
-; Start of langpack: WATrack (Letzte Änderung: 12:01, 18. Jul. 2011 )
+; Start of langpack: WATrack (Letzte Änderung: 12:20, 18. Jul. 2011 )
 
 ; Pluginname: WATrack 
 ; Version: 0.0.6.12
@@ -39180,7 +39180,7 @@ Last.FM
 [Don't forget to enter Login and Password to use Last.fm service]
 Bitte vergessen Sie nicht, Ihren Last.fm-Nutzernamen und Passwort anzugeben!
 
-[Timeout (msec] for separate thread handles checking.]
+[Timeout (msec) for separate thread handles checking.]
 Timeout (in msec) für separate Thread Verarbeitungsprüfung.
 [Players list\n(F1 for note)]
 Liste der Player\n(F1 für Hilfe drücken)
