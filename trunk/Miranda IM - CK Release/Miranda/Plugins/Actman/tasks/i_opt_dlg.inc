@@ -1,4 +1,7 @@
 {}
+const
+  settings:HWND = 0;
+
 var
   OldTableProc:pointer;
   onactchanged:THANDLE;
@@ -18,8 +21,9 @@ begin
   EnableWindow(GetDlgItem(Dialog,IDC_TASK_TIME       ),enable);
   EnableWindow(GetDlgItem(Dialog,IDC_TASK_REPEAT     ),enable);
   EnableWindow(GetDlgItem(Dialog,IDC_TASK_INTERVAL   ),enable);
-//  EnableWindow(GetDlgItem(Dialog,IDC_TASK_IMMEDIATELY),enable);
   EnableWindow(GetDlgItem(Dialog,IDC_TASK_BREAK      ),enable);
+  EnableWindow(GetDlgItem(Dialog,IDC_TASK_EVENT      ),enable);
+  EnableWindow(GetDlgItem(Dialog,IDC_TASK_ONCE       ),enable);
   if not enable then
   begin
     ShowWindow(GetDlgItem(Dialog,IDC_TASK_DAYST),SW_HIDE);
@@ -59,7 +63,6 @@ var
   st:TSystemTime;
 begin
   CheckDlgButton(Dialog,IDC_TASK_ABSOLUTE   ,BST_UNCHECKED);
-//  CheckDlgButton(Dialog,IDC_TASK_IMMEDIATELY,BST_UNCHECKED);
   CheckDlgButton(Dialog,IDC_TASK_BREAK      ,BST_UNCHECKED);
   CheckDlgButton(Dialog,IDC_TASK_EVENT      ,BST_UNCHECKED);
   CheckDlgButton(Dialog,IDC_TASK_ONCE       ,BST_UNCHECKED);
@@ -103,31 +106,16 @@ end;
 
 procedure ShowTaskData(Dialog:HWND; item:integer=-1);
 var
-  li:LV_ITEM;
-  wnd:HWND;
   st:TSystemTime;
 begin
   ClearTaskData(Dialog);
 
-  wnd:=GetDlgItem(Dialog,IDC_TASK_NAME);
-
-  if item<0 then
-    li.iItem:=SendMessage(wnd,LVM_GETNEXTITEM,-1,LVNI_FOCUSED)
-  else
-    li.iItem:=item;
-
-  li.mask      :=LVIF_PARAM;
-  li.iSubItem  :=0;
-  SendMessageW(wnd,LVM_GETITEMW,0,LPARAM(@li));
-
-  with TaskList[li.lParam] do
+  with TaskList[LV_GetLParam(GetDlgItem(Dialog,IDC_TASK_NAME),item)] do
   begin
     // flags
 
     if (flags and TCF_ABSOLUTE)<>0 then
       CheckDlgButton(Dialog,IDC_TASK_ABSOLUTE,BST_CHECKED);
-//    if (flags and TCF_IMMEDIATELY)<>0 then
-//      CheckDlgButton(Dialog,IDC_TASK_IMMEDIATELY,BST_CHECKED);
     if (flags and TCF_NONZEROBREAK)<>0 then
       CheckDlgButton(Dialog,IDC_TASK_BREAK,BST_CHECKED);
     if (flags and TCF_MAKEEVENT)<>0 then
@@ -150,7 +138,7 @@ begin
     end;
     SendDlgItemMessage(Dialog,IDC_TASK_TIME,DTM_SETSYSTEMTIME,GDT_VALID,lParam(@st));
 
-    SetDlgItemInt(Dialog,IDC_TASK_REPEAT,count,false);
+    SetDlgItemInt(Dialog,IDC_TASK_REPEAT,count,true);
 
     FileTimeToSystemTime(interval,st);
     SendDlgItemMessage(Dialog,IDC_TASK_INTERVAL,DTM_SETSYSTEMTIME,GDT_VALID,lParam(@st));
@@ -190,8 +178,6 @@ begin
 
         if IsDlgButtonChecked(Dialog,IDC_TASK_ABSOLUTE)<>BST_UNCHECKED then
           flags:=flags or TCF_ABSOLUTE;
-//        if IsDlgButtonChecked(Dialog,IDC_TASK_IMMEDIATELY)<>BST_UNCHECKED then
-//          flags:=flags or TCF_IMMEDIATELY;
         if IsDlgButtonChecked(Dialog,IDC_TASK_BREAK)<>BST_UNCHECKED then
           flags:=flags or TCF_NONZEROBREAK;
         if IsDlgButtonChecked(Dialog,IDC_TASK_EVENT)<>BST_UNCHECKED then
@@ -216,6 +202,8 @@ begin
         else
           dayoffset:=GetDlgItemInt(Dialog,IDC_TASK_DAYSV,tmp,false);
         SystemTimeToFileTime(st,starttime);
+
+        count:=GetDlgItemInt(Dialog,IDC_TASK_REPEAT,tmp,true);
 
         SendDlgItemMessage(Dialog,IDC_TASK_INTERVAL,DTM_GETSYSTEMTIME,0,lParam(@st));
         SystemTimeToFileTime(st,interval);
@@ -385,6 +373,7 @@ begin
   case hMessage of
     WM_CLOSE: begin
       PluginLink^.UnhookEvent(onactchanged);
+      settings:=0;
     end;
 
     WM_INITDIALOG: begin
@@ -397,6 +386,12 @@ begin
       SendMessageW(wnd,LVM_INSERTCOLUMNW ,0,tlparam(@lv));
       SendMessageW(wnd,LVM_SETCOLUMNWIDTH,0,LVSCW_AUTOSIZE_USEHEADER);
 
+      CreateUpDownControl(
+        WS_CHILD+WS_BORDER+WS_VISIBLE+UDS_ARROWKEYS+UDS_SETBUDDYINT+UDS_ALIGNRIGHT,
+        190,112,14,18,
+        Dialog, IDC_TASK_UPDOWN, hInstance, GetDlgItem(Dialog,IDC_TASK_REPEAT),
+        10000, -1, 0);
+
       OldTableProc:=pointer(SetWindowLongPtrW(wnd,GWL_WNDPROC,LONG_PTR(@NewHKTableProc)));
       TranslateDialogDefault(Dialog);
 
@@ -406,6 +401,7 @@ begin
       FillTaskList(wnd);
       CheckTaskList(Dialog,false);
       onactchanged:=PluginLink^.HookEvent(ME_ACT_CHANGED,@ActListChange);
+      settings:=Dialog;
     end;
 
     WM_COMMAND: begin
