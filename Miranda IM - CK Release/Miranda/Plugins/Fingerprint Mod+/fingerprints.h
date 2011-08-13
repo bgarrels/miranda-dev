@@ -372,6 +372,9 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_Imified",					_T("*someresource*"),							_T("Imified"),							_T("ClientIcons_Jabber"),	IDI_IMIFIED, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_RenRen",					_T("|*WTalkProxy0_0*|*http://talk.xiaonei.com*"),	_T("RenRen"),						_T("ClientIcons_Jabber"),	IDI_RENREN, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Aqq",						_T("|http://aqq.eu*|aqq*"),						_T("Aqq"),								_T("ClientIcons_Jabber"),	IDI_AQQ, INVALID_HANDLE_VALUE, JABBER_CASE },
+	{ "client_LeechCraft",				_T("|http://leechcraft.org*|LeechCraft*"),		_T("LeechCraft"),						_T("ClientIcons_Jabber"),	IDI_LEECHCRAFT, INVALID_HANDLE_VALUE, JABBER_CASE },
+	{ "client_Emas",					_T("*.el*"),									_T("Emacs"),							_T("ClientIcons_Jabber"),	IDI_EMACS, INVALID_HANDLE_VALUE, JABBER_CASE },
+	{ "client_jTalk",					_T("|http://jtalk*|jTalk*"),					_T("jTalk"),							_T("ClientIcons_Jabber"),	IDI_JTALK, INVALID_HANDLE_VALUE, JABBER_CASE },
 	
 //#########################################################################################################################################
 //############################################################### VoIP ####################################################################
@@ -577,7 +580,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_QQ",						_T("QQ*"),										_T("QQ"),								_T("ClientIcons_QQ"),	IDI_QQ, INVALID_HANDLE_VALUE, QQ_CASE },
 
 	{ "client_Notfound",				_T("Notfound"),									_T("Not founded icon"),					_T(""),	IDI_NOTFOUND, INVALID_HANDLE_VALUE, OTHER_CASE },
-	{ "client_Unknown",					_T("*Unknown*"),								_T("Unknown client"),					_T(""),	IDI_UNKNOWN, INVALID_HANDLE_VALUE, OTHER_CASE },
+	{ "client_Unknown",					_T("|*Unknown*|..."),							_T("Unknown client"),					_T(""),	IDI_UNKNOWN, INVALID_HANDLE_VALUE, OTHER_CASE },
 	{ "client_Undetected",				_T("?*"),										_T("Undetected client"),				_T(""),	IDI_UNDETECTED, INVALID_HANDLE_VALUE, OTHER_CASE },
 };
 
