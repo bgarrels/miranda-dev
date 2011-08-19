@@ -7,11 +7,15 @@
 const
   AutoStartName:PWideChar = '#Autostart';
 const
+  DBBranch = 'ActMan';
+const
   ACCF_DISABLED = $10000000;  // action disabled
   ACCF_EXPORT   = $08000000;  // action to export
   ACCF_VOLATILE = $04000000;  // don't save in DB
   ACCF_IMPORTED = ACCF_EXPORT;
   ACCF_FLAGS    = ACCF_DISABLED or ACCF_EXPORT or ACCF_IMPORTED or ACCF_VOLATILE;
+  ACCF_OVERLOAD = $01000000;  // imported action overwrite old
+
   ACCF_ID       = $02000000;  // for MS_ACT_SELECT, lParam is ID (else name)
   ACCF_CLEAR    = $01000000;  // clear other flags, else - set
 type
@@ -26,6 +30,7 @@ const
   {
     wParam - 0
     lParam - address of destination list variable (address of pointer to tChain)
+             if lParam=0, return just count of elements
     Return - count of elements
     Notes: first 4 bytes = size of TChain structure (to add new fields in future)
   }
