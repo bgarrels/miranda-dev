@@ -20,14 +20,18 @@ const
      SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW),
     (SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,
      SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW),
-    (SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,
-     SW_SHOW,SW_SHOW,SW_SHOW,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE),
-    (SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,
-     SW_SHOW,SW_SHOW,SW_SHOW,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE),
-    (SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,
-     SW_SHOW,SW_SHOW,SW_SHOW,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE),
     (SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,
-     SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE)
+     SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE),
+    (SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,
+     SW_SHOW,SW_SHOW,SW_SHOW,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE),
+    (SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,
+     SW_SHOW,SW_SHOW,SW_SHOW,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE),
+    (SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,
+     SW_SHOW,SW_SHOW,SW_SHOW,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE),
+    (SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,
+     SW_SHOW,SW_SHOW,SW_SHOW,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE),
+    (SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,SW_SHOW,
+     SW_SHOW,SW_SHOW,SW_SHOW,SW_HIDE,SW_HIDE,SW_HIDE,SW_HIDE)
     );
   // additional show/hide controls check by Variables installings (1 - need to check)
   SHVarArray:array [0..NumControls-1] of byte = (
@@ -83,7 +87,7 @@ begin
 
     for i:=0 to NumControls-1 do
     begin
-      typ:=SHArray[atype][i];
+      typ:=SHArray[LoByte(atype)][i];
       if typ=SW_SHOW then
         if (SHVarArray[i]<>0) and (not IsVarsInstalled) then
           typ:=SW_HIDE;
@@ -97,7 +101,7 @@ begin
         IsDlgButtonChecked(Dialog,IDC_UA_TWOSTATE)<>BST_UNCHECKED);
 
     // personal settings
-    case atype of
+    case LoByte(atype) of
       uaMTB, uaTAB: begin
         enable:=false;
         if IsDlgButtonChecked(Dialog,IDC_UA_TWOSTATE)<>BST_UNCHECKED then
@@ -128,83 +132,42 @@ end;
 
 procedure ShowSubAction(Dialog:HWND;aType:integer;item:integer=-1);
 var
-  enable:boolean;
+  UA:pMyActionItem;
 begin
   ClearControls(Dialog);
-  SetupControls(Dialog,aType,item);
 
   // get UAction number
   item:=LV_GetLParam(GetDlgItem(Dialog,IDC_UA_ACTIONLIST),item);
 
+  UA:=@UActionList[item];
+
   // common settings
-  if (UActionList[item].flags and UAF_2STATE)<>0 then
-  begin
-    enable:=true;
+  if (UA.flags and UAF_2STATE)<>0 then
     CheckDlgButton(Dialog,IDC_UA_TWOSTATE,BST_CHECKED);
-  end
-  else
-    enable:=false;
-  if (UActionList[item].flags and UAF_SAVESTATE)<>0 then
+
+  if (UA.flags and UAF_SAVESTATE)<>0 then
     CheckDlgButton(Dialog,IDC_UA_SAVSTATE,BST_CHECKED);
-  EnableWindow(GetDlgItem(Dialog,IDC_UA_SAVSTATE),enable);
 
   // Show real UA settings
-  case aType of
+  case LoByte(aType) of
     uaMTB: begin // CList modern toolbar
-      with UActionList[item] do
-      begin
-        SetDlgItemTextA(Dialog,IDC_UA_TTNORMALV ,szMTBTooltip);
-        SetDlgItemTextA(Dialog,IDC_UA_TTPRESSEDV,szMTBTooltipPressed);
-      end;
+      SetDlgItemTextA(Dialog,IDC_UA_TTNORMALV ,UA.szMTBTooltip);
+      SetDlgItemTextA(Dialog,IDC_UA_TTPRESSEDV,UA.szMTBTooltipPressed);
     end;
 
     uaTAB: begin // TabSRMM toolbar
-      with UActionList[item] do
-      begin
-        SetDlgItemTextW(Dialog,IDC_UA_TTNORMALV ,szTabBTooltip);
-        SetDlgItemTextW(Dialog,IDC_UA_TTPRESSEDV,szTabBTooltipPressed);
-      end;
+      SetDlgItemTextW(Dialog,IDC_UA_TTNORMALV ,UA.szTabBTooltip);
+      SetDlgItemTextW(Dialog,IDC_UA_TTPRESSEDV,UA.szTabBTooltipPressed);
     end;
 
-    uaMain: begin // Main menu
-      with UActionList[item] do
+    uaMenu: begin
+      with UA.UAMenuItem[tMenuType(HiByte(aType))] do
       begin
-        if (flags and UAF_MMENUSEP)<>0 then
+        if (menu_opt and UAF_MENUSEP)<>0 then
           CheckDlgButton(Dialog,IDC_UA_SEPARATE,BST_CHECKED);
-        with UAMenuItem[main_menu] do
-        begin
-          SetDlgItemTextW(Dialog,IDC_UA_POPUPV   ,szMenuPopup);
-          SetDlgItemTextW(Dialog,IDC_UA_VARNAMESV,szMenuNameVars);
-          SetDlgItemTextW(Dialog,IDC_UA_SHOWVARV ,szMenuShowWhenVars);
-        end;
-      end;
-    end;
-
-    uaContact: begin // Contact menu
-      with UActionList[item] do
-      begin
-        if (flags and UAF_CMENUSEP)<>0 then
-          CheckDlgButton(Dialog,IDC_UA_SEPARATE,BST_CHECKED);
-        with UAMenuItem[contact_menu] do
-        begin
-          SetDlgItemTextW(Dialog,IDC_UA_POPUPV   ,szMenuPopup);
-          SetDlgItemTextW(Dialog,IDC_UA_VARNAMESV,szMenuNameVars);
-          SetDlgItemTextW(Dialog,IDC_UA_SHOWVARV ,szMenuShowWhenVars);
-        end;
-      end;
-    end;
-
-    uaTray: begin // Tray menu
-      with UActionList[item] do
-      begin
-        if (flags and UAF_TMENUSEP)<>0 then
-          CheckDlgButton(Dialog,IDC_UA_SEPARATE,BST_CHECKED);
-        with UAMenuItem[tray_menu] do
-        begin
-          SetDlgItemTextW(Dialog,IDC_UA_POPUPV   ,szMenuPopup);
-          SetDlgItemTextW(Dialog,IDC_UA_VARNAMESV,szMenuNameVars);
-          SetDlgItemTextW(Dialog,IDC_UA_SHOWVARV ,szMenuShowWhenVars);
-        end;
+        SetDlgItemTextW(Dialog,IDC_UA_POPUPV   ,szMenuPopup);
+        SetDlgItemTextW(Dialog,IDC_UA_VARNAMESV,szMenuNameVars);
+        SetDlgItemTextW(Dialog,IDC_UA_SHOWVARV ,szMenuShowWhenVars);
       end;
     end;
 
@@ -212,6 +175,21 @@ begin
       // Settings in Customize/Hotkeys
     end;
   end;
+  SetupControls(Dialog,aType,-1);
+end;
+
+function isPlaceActive(idx,place:integer):boolean;
+begin
+  result:=false;
+  with UActionList[idx] do
+    case LoByte(place) of
+      uaMTB    : result:=(flags and UAF_REGMTBB)<>0;
+      uaTAB    : result:=(flags and UAF_REGTABB)<>0;
+      uaHotkey : result:=(flags and UAF_REGHOTKEY)<>0;
+      uaMenu: begin
+        result:=(UAMenuItem[tMenuType(HiByte(place))].menu_opt and UAF_MENUUSE)<>0
+      end;
+    end;
 end;
 
 procedure ShowAction(Dialog:HWND;item:integer=-1);
@@ -241,10 +219,11 @@ begin
             li.mask    :=LVIF_TEXT+LVIF_PARAM;
             li.iSubItem:=0;
             li.iItem   :=i;
-            li.lParam  :=i;
+            li.lParam  :=atype; //!!!!!! need to add subtype
             li.pszText :=TranslateW(FastAnsiToWideBuf(name,buf));
             li.iItem   :=SendMessageW(wnd,LVM_INSERTITEMW,0,LPARAM(@li));
-            ListView_SetCheckState(wnd,li.iItem,(flags and mask)<>0);
+
+            ListView_SetCheckState(wnd,li.iItem,isPlaceActive(j,atype));
           end;
         end;
       end;
@@ -266,22 +245,42 @@ end;
 procedure SetChangedFlag(Dialog:HWND);
 var
   num,atype:integer;
-  mtype:tMenuType;
 begin
   num  :=LV_GetLParam(GetDlgItem(Dialog,IDC_UA_ACTIONLIST),-1);
   atype:=LV_GetLParam(GetDlgItem(Dialog,IDC_UA_PLACELIST ),-1);
-  case atype of
-    uaContact: mtype:=contact_menu;
-    uaTray   : mtype:=tray_menu;
-  else
-    mtype:=main_menu;
+  UActionList[num].UAMenuItem[tMenuType(HiByte(atype))].changed:=true;
+end;
+
+procedure SaveMenuSubAction(Dialog:HWND;var MenuItem:tUAMenuItem);
+begin
+  with MenuItem do
+  begin
+    mFreeMem(szMenuPopup       ); szMenuPopup       :=GetDlgText(Dialog,IDC_UA_POPUPV);
+    mFreeMem(szMenuNameVars    ); szMenuNameVars    :=GetDlgText(Dialog,IDC_UA_VARNAMESV);
+    mFreeMem(szMenuShowWhenVars); szMenuShowWhenVars:=GetDlgText(Dialog,IDC_UA_SHOWVARV);
+    menu_opt:=0;
+    if IsDlgButtonchecked(Dialog,IDC_UA_SEPARATE)<>BST_UNCHECKED then
+      menu_opt:=menu_opt or UAF_MENUSEP;
   end;
-  UActionList[num].UAMenuItem[mtype].changed:=true;
+end;
+
+procedure SetPlaceActive(idx,place:integer;active:boolean);
+begin
+  with UActionList[idx] do
+    case LoByte(place) of
+      uaMTB   : if active then flags:=flags or UAF_REGMTBB   else flags:=flags and not UAF_REGMTBB;
+      uaTAB   : if active then flags:=flags or UAF_REGTABB   else flags:=flags and not UAF_REGTABB;
+      uaHotkey: if active then flags:=flags or UAF_REGHOTKEY else flags:=flags and not UAF_REGHOTKEY;
+      uaMenu  :
+        with UAMenuItem[tMenuType(HiByte(place))] do
+         if active then menu_opt:=menu_opt or UAF_MENUUSE
+                   else menu_opt:=menu_opt and not UAF_MENUUSE;
+    end;
 end;
 
 procedure SaveAction(Dialog:HWND;item:integer=-1;atype:integer=-1);
 var
-  i,j,num:integer;
+  i,num:integer;
   wnd:HWND;
 begin
   num:=LV_GetLParam(GetDlgItem(Dialog,IDC_UA_ACTIONLIST),item);
@@ -293,14 +292,6 @@ begin
   begin
     // main flags
     flags:=flags and not UAF_USING;
-    for i:=0 to SendMessage(wnd,LVM_GETITEMCOUNT,0,0)-1 do
-    begin
-      if ListView_GetCheckState(wnd,i)<>0 then
-      begin
-        j:=LV_GetLParam(wnd,i);
-        flags:=flags or NamesArray[j].mask;
-      end;
-    end;
     // common section
     if IsDlgButtonChecked(Dialog,IDC_UA_TWOSTATE)<>BST_UNCHECKED then
       flags:=flags or UAF_2STATE
@@ -313,7 +304,7 @@ begin
       flags:=flags and not UAF_SAVESTATE;
 
     // custom data
-    case atype of
+    case LoByte(atype) of
       uaMTB: begin // CList modern toolbar
         mFreeMem(szMTBTooltip       ); szMTBTooltip       :=GetDlgText(Dialog,IDC_UA_TTNORMALV ,true);
         mFreeMem(szMTBTooltipPressed); szMTBTooltipPressed:=GetDlgText(Dialog,IDC_UA_TTPRESSEDV,true);
@@ -324,51 +315,15 @@ begin
         mFreeMem(szTabBTooltipPressed); szTabBTooltipPressed:=GetDlgText(Dialog,IDC_UA_TTPRESSEDV);
       end;
 
-      uaMain: begin // Main menu
-        if IsDlgButtonchecked(Dialog,IDC_UA_SEPARATE)<>BST_UNCHECKED then
-          flags:=flags or UAF_MMENUSEP
-        else
-          flags:=flags and not UAF_MMENUSEP;
-
-        with UAMenuItem[main_menu] do
-        begin
-          mFreeMem(szMenuPopup       ); szMenuPopup       :=GetDlgText(Dialog,IDC_UA_POPUPV);
-          mFreeMem(szMenuNameVars    ); szMenuNameVars    :=GetDlgText(Dialog,IDC_UA_VARNAMESV);
-          mFreeMem(szMenuShowWhenVars); szMenuShowWhenVars:=GetDlgText(Dialog,IDC_UA_SHOWVARV);
-        end;
-      end;
-
-      uaContact: begin // Contact menu
-        if IsDlgButtonchecked(Dialog,IDC_UA_SEPARATE)<>BST_UNCHECKED then
-          flags:=flags or UAF_CMENUSEP
-        else
-          flags:=flags and not UAF_CMENUSEP;
-
-        with UAMenuItem[contact_menu] do
-        begin
-          mFreeMem(szMenuPopup       ); szMenuPopup       :=GetDlgText(Dialog,IDC_UA_POPUPV);
-          mFreeMem(szMenuNameVars    ); szMenuNameVars    :=GetDlgText(Dialog,IDC_UA_VARNAMESV);
-          mFreeMem(szMenuShowWhenVars); szMenuShowWhenVars:=GetDlgText(Dialog,IDC_UA_SHOWVARV);
-        end;
-      end;
-
-      uaTray: begin // Tray menu
-        if IsDlgButtonchecked(Dialog,IDC_UA_SEPARATE)<>BST_UNCHECKED then
-          flags:=flags or UAF_TMENUSEP
-        else
-          flags:=flags and not UAF_TMENUSEP;
-
-        with UAMenuItem[tray_menu] do
-        begin
-          mFreeMem(szMenuPopup       ); szMenuPopup       :=GetDlgText(Dialog,IDC_UA_POPUPV);
-          mFreeMem(szMenuNameVars    ); szMenuNameVars    :=GetDlgText(Dialog,IDC_UA_VARNAMESV);
-          mFreeMem(szMenuShowWhenVars); szMenuShowWhenVars:=GetDlgText(Dialog,IDC_UA_SHOWVARV);
-        end;
-      end;
+      uaMenu: SaveMenuSubAction(Dialog,UAMenuItem[tMenuType(HiByte(atype))]);
 
       uaHotkey: begin // Hotkey
         // Settings in Customize/Hotkeys
       end;
+    end;
+    for i:=0 to SendMessage(wnd,LVM_GETITEMCOUNT,0,0)-1 do
+    begin
+      SetPlaceActive(num,LV_GetLParam(wnd,i),ListView_GetCheckState(wnd,i)<>0);
     end;
   //just after Action (not place) changes
   if item<0 then
@@ -381,6 +336,7 @@ var
   i:integer;
   li:LV_ITEMW;
   il:HIMAGELIST;
+  lmenu:tMenuType;
 begin
   wnd:=GetDlgItem(wnd,IDC_UA_ACTIONLIST);
   SendMessage(wnd,LVM_DELETEALLITEMS,0,0);
@@ -397,9 +353,8 @@ begin
         HICON(CallService(MS_SKIN2_GETICONBYHANDLE,0,LPARAM(UActionList[i].hIcolibIcon))));
     li.iItem   :=SendMessageW(wnd,LVM_INSERTITEMW,0,LPARAM(@li));
 
-    UActionList[i].UAMenuItem[main_menu   ].changed:=false;
-    UActionList[i].UAMenuItem[contact_menu].changed:=false;
-    UActionList[i].UAMenuItem[tray_menu   ].changed:=false;
+    for lmenu:=main_menu to HIGH(tMenuType) do
+      UActionList[i].UAMenuItem[lmenu].changed:=false;
   end;
   ImageList_Destroy(SendMessage(wnd,LVM_SETIMAGELIST,LVSIL_SMALL,il));
 

@@ -22,6 +22,7 @@ library actman;
 {%File 'hooks\i_hook.inc'}
 {%File 'hooks\i_opt_dlg.inc'}
 {%File 'ua\i_opt_dlg.inc'}
+{%File 'ua\i_inoutxm.inc'}
 {%File 'ua\i_options.inc'}
 {%File 'ua\i_ua.inc'}
 {%File 'ua\i_uaplaces.inc'}
@@ -78,7 +79,7 @@ begin
   result:=@PluginInfo;
   PluginInfo.cbSize     :=SizeOf(TPLUGININFOEX);
   PluginInfo.shortName  :='Action manager';
-  PluginInfo.version    :=$0001010A;
+  PluginInfo.version    :=$00020001;
   PluginInfo.description:='Plugin for manage hotkeys to open contact window, insert text, '+
                           'run program and call services';
   PluginInfo.author     :='Awkward';
@@ -122,6 +123,7 @@ begin
     inc(p);
   end;
   result:=cnt;
+  if lParam=0 then exit;
   if cnt>0 then
   begin
     mGetMem(pc,cnt*SizeOf(tChain)+4);
