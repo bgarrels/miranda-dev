@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2005 - 2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005 - 2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
 This program is free software; you can redistribute it and/or
@@ -78,25 +78,25 @@ public:
 
 LRESULT CALLBACK DlgProcSmileyToolWindow(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    SmileyToolWindowType* pOD;
-    LRESULT Result;
+	SmileyToolWindowType* pOD;
+	LRESULT Result;
 
-    pOD = (SmileyToolWindowType*) GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
-    if (pOD == NULL) {
-        pOD = new SmileyToolWindowType(hwndDlg);
-        SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR) pOD);
-    }
+	pOD = (SmileyToolWindowType*) GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+	if (pOD == NULL) {
+		pOD = new SmileyToolWindowType(hwndDlg);
+		SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR) pOD);
+	}
 
-    Result =  pOD->DialogProcedure(msg, wParam, lParam);
-//	SetWindowLongPtr(hwndDlg, DWLP_MSGRESULT, Result); 
+	Result =  pOD->DialogProcedure(msg, wParam, lParam);
+	//	SetWindowLongPtr(hwndDlg, DWLP_MSGRESULT, Result); 
 
-    if (msg == WM_NCDESTROY)
+	if (msg == WM_NCDESTROY)
 	{
-        delete pOD;
+		delete pOD;
 		Result = FALSE;
 	}
 
-    return Result;
+	return Result;
 }
 
 
@@ -119,18 +119,18 @@ SmileyToolWindowType::SmileyToolWindowType(HWND hWnd)
 
 LRESULT SmileyToolWindowType::DialogProcedure(UINT msg, WPARAM wParam, LPARAM lParam)
 {
-  LRESULT Result = FALSE;
+	LRESULT Result = FALSE;
 
-  switch (msg) 
-  {
-    case WM_ACTIVATE:
-        if (wParam == WA_INACTIVE) 
+	switch (msg) 
+	{
+	case WM_ACTIVATE:
+		if (wParam == WA_INACTIVE) 
 			DestroyWindow(m_hwndDialog);
-        break;
+		break;
 
 	case WM_PAINT:
-        PaintWindow();
-        break;
+		PaintWindow();
+		break;
 
 	case WM_TIMER:
 		if (m_AniPack) m_AniPack->ProcessTimerTick(m_hwndDialog);
@@ -142,8 +142,8 @@ LRESULT SmileyToolWindowType::DialogProcedure(UINT msg, WPARAM wParam, LPARAM lP
 		m_AniPack = NULL;
 		DestroyWindow(m_hToolTip);
 		PostQuitMessage(0);
-        if (m_Choosing) 
-            SetFocus(m_hWndTarget);
+		if (m_Choosing) 
+			SetFocus(m_hWndTarget);
 		break;
 
 	case WM_KEYUP:
@@ -151,16 +151,16 @@ LRESULT SmileyToolWindowType::DialogProcedure(UINT msg, WPARAM wParam, LPARAM lP
 		break;
 
 	case WM_CREATE:
-        InitDialog(lParam);
-        break;
+		InitDialog(lParam);
+		break;
 
 	case WM_VSCROLL:
 		ScrollV(LOWORD(wParam));
 		break;
 
-    case WM_MOUSEMOVE:
-        MouseMove(LOWORD(lParam), HIWORD(lParam));
-        break;
+	case WM_MOUSEMOVE:
+		MouseMove(LOWORD(lParam), HIWORD(lParam));
+		break;
 
 	case WM_LBUTTONUP:
 		InsertSmiley();
@@ -168,15 +168,15 @@ LRESULT SmileyToolWindowType::DialogProcedure(UINT msg, WPARAM wParam, LPARAM lP
 
 	case WM_MOUSEWHEEL:
 		ScrollV(SB_MYMOVE, ((short)HIWORD(wParam))/-120);
-        MouseMove(LOWORD(lParam), HIWORD(lParam));
+		MouseMove(LOWORD(lParam), HIWORD(lParam));
 		break;
 
-    default:
+	default:
 		Result = DefWindowProc(m_hwndDialog, msg, wParam, lParam);
 		break;
-    }
+	}
 
-    return Result;
+	return Result;
 }
 
 struct smlsrvstruct
@@ -196,10 +196,10 @@ void CALLBACK smileyServiceCallback(void* arg)
 
 void SmileyToolWindowType::InsertSmiley(void)
 {
-    if (m_CurrentHotTrack >= 0 && m_hWndTarget != NULL) 
+	if (m_CurrentHotTrack >= 0 && m_hWndTarget != NULL) 
 	{
 		SmileyType *sml = m_pSmileyPack->GetSmiley(m_CurrentHotTrack);
-		
+
 		if (sml->IsService())
 		{
 			smlsrvstruct* p = new smlsrvstruct(sml, m_hContact);
@@ -208,23 +208,23 @@ void SmileyToolWindowType::InsertSmiley(void)
 		else
 		{
 			bkstring insertText;
-		
+
 			if (opt.SurroundSmileyWithSpaces) insertText = ' ';
 			insertText += sml->GetInsertText();
 			if (opt.SurroundSmileyWithSpaces) insertText += ' ';
 
 			SendMessage(m_hWndTarget, m_TargetMessage, m_TargetWParam, (LPARAM) insertText.c_str());
 		}
-        m_Choosing = true;
+		m_Choosing = true;
 		DestroyWindow(m_hwndDialog);
-    }
+	}
 	else if (m_hWndTarget == NULL)
 		DestroyWindow(m_hwndDialog);
 }
 
 void SmileyToolWindowType::SmileySel(int but)
 {
-    if (but != m_CurrentHotTrack) 
+	if (but != m_CurrentHotTrack) 
 	{
 		SCROLLINFO si; 
 		si.cbSize = sizeof (si);
@@ -233,86 +233,86 @@ void SmileyToolWindowType::SmileySel(int but)
 		GetScrollInfo (m_hwndDialog, SB_VERT, &si);
 
 		HDC hdc = GetDC(m_hwndDialog);
-        if (m_CurrentHotTrack >= 0) 
+		if (m_CurrentHotTrack >= 0) 
 		{
-            RECT rect = CalculateButtonToCoordinates(m_CurrentHotTrack, si.nPos);
-            DrawFocusRect(hdc, &rect);
-            m_CurrentHotTrack = -1;
-            SendMessage(m_hToolTip, TTM_ACTIVATE, FALSE, 0);
-        }
-        m_CurrentHotTrack = but;
-        if (m_CurrentHotTrack >= 0) 
+			RECT rect = CalculateButtonToCoordinates(m_CurrentHotTrack, si.nPos);
+			DrawFocusRect(hdc, &rect);
+			m_CurrentHotTrack = -1;
+			SendMessage(m_hToolTip, TTM_ACTIVATE, FALSE, 0);
+		}
+		m_CurrentHotTrack = but;
+		if (m_CurrentHotTrack >= 0) 
 		{
 			TOOLINFO ti = {0};
-            ti.cbSize = sizeof(ti);
-            ti.uFlags = TTF_IDISHWND | TTF_SUBCLASS;
-            ti.hwnd = m_hwndDialog;
-            ti.uId = (UINT_PTR)m_hwndDialog;
+			ti.cbSize = sizeof(ti);
+			ti.uFlags = TTF_IDISHWND | TTF_SUBCLASS;
+			ti.hwnd = m_hwndDialog;
+			ti.uId = (UINT_PTR)m_hwndDialog;
 
-            const bkstring& toolText = m_pSmileyPack->GetSmiley(m_CurrentHotTrack)->GetToolText();
-            ti.lpszText = const_cast<TCHAR*>(toolText.c_str()); 
-            SendMessage(m_hToolTip, TTM_UPDATETIPTEXT, 0, (LPARAM)&ti);
-            SendMessage(m_hToolTip, TTM_ACTIVATE, TRUE, 0);
+			const bkstring& toolText = m_pSmileyPack->GetSmiley(m_CurrentHotTrack)->GetToolText();
+			ti.lpszText = const_cast<TCHAR*>(toolText.c_str()); 
+			SendMessage(m_hToolTip, TTM_UPDATETIPTEXT, 0, (LPARAM)&ti);
+			SendMessage(m_hToolTip, TTM_ACTIVATE, TRUE, 0);
 
-            RECT rect = CalculateButtonToCoordinates(m_CurrentHotTrack, si.nPos);
-            DrawFocusRect(hdc, &rect);
+			RECT rect = CalculateButtonToCoordinates(m_CurrentHotTrack, si.nPos);
+			DrawFocusRect(hdc, &rect);
 			if (m_AniPack) m_AniPack->SetSel(rect);
-        }
+		}
 		ReleaseDC(m_hwndDialog, hdc);
-    }
+	}
 }
 
 
 void SmileyToolWindowType::ScrollV(int action, int dist)
 { 
 	SCROLLINFO si; 
-    si.cbSize = sizeof (si);
-    si.fMask  = SIF_ALL;
-    GetScrollInfo (m_hwndDialog, SB_VERT, &si);
+	si.cbSize = sizeof (si);
+	si.fMask  = SIF_ALL;
+	GetScrollInfo (m_hwndDialog, SB_VERT, &si);
 
 	// Save the position for comparison later on
 	int yPos = si.nPos;
 	switch (action)
 	{
 		// user clicked the HOME keyboard key
-		case SB_TOP:
-			si.nPos = si.nMin;
-			break;
-			    
+	case SB_TOP:
+		si.nPos = si.nMin;
+		break;
+
 		// user clicked the END keyboard key
-		case SB_BOTTOM:
-			si.nPos = si.nMax;
-			break;
-			    
+	case SB_BOTTOM:
+		si.nPos = si.nMax;
+		break;
+
 		// user clicked the top arrow
-		case SB_LINEUP:
-			si.nPos -= 1;
-			break;
-			    
+	case SB_LINEUP:
+		si.nPos -= 1;
+		break;
+
 		// user clicked the bottom arrow
-		case SB_LINEDOWN:
-			si.nPos += 1;
-			break;
-			    
+	case SB_LINEDOWN:
+		si.nPos += 1;
+		break;
+
 		// user clicked the scroll bar shaft above the scroll box
-		case SB_PAGEUP:
-			si.nPos -= si.nPage;
-			break;
-			    
+	case SB_PAGEUP:
+		si.nPos -= si.nPage;
+		break;
+
 		// user clicked the scroll bar shaft below the scroll box
-		case SB_PAGEDOWN:
-			si.nPos += si.nPage;
-			break;
-			    
+	case SB_PAGEDOWN:
+		si.nPos += si.nPage;
+		break;
+
 		// user dragged the scroll box
-		case SB_THUMBTRACK:
-			si.nPos = si.nTrackPos;
-			break;
-			    
+	case SB_THUMBTRACK:
+		si.nPos = si.nTrackPos;
+		break;
+
 		// user dragged the scroll box
-		case SB_MYMOVE:
-			si.nPos += dist;
-			break;
+	case SB_MYMOVE:
+		si.nPos += dist;
+		break;
 	}
 	// Set the position and then retrieve it.  Due to adjustments
 	//   by Windows it may not be the same as the value set.
@@ -334,15 +334,15 @@ void SmileyToolWindowType::ScrollV(int action, int dist)
 
 void SmileyToolWindowType::MouseMove(int xposition, int yposition)
 {
-    if (m_CurrentHotTrack == -2) return; //prevent focussing when not drawn yet!
-//    SetFocus(m_hwndDialog);
+	if (m_CurrentHotTrack == -2) return; //prevent focussing when not drawn yet!
+	//    SetFocus(m_hwndDialog);
 
 
 	SCROLLINFO si; 
-    si.cbSize = sizeof (si);
-    si.fMask  = SIF_POS;
+	si.cbSize = sizeof (si);
+	si.fMask  = SIF_POS;
 	si.nPos = 0;
-    GetScrollInfo (m_hwndDialog, SB_VERT, &si);
+	GetScrollInfo (m_hwndDialog, SB_VERT, &si);
 
 	POINT pt = { xposition, yposition };  
 	int but = CalculateCoordinatesToButton(pt, si.nPos);
@@ -358,72 +358,72 @@ void SmileyToolWindowType::KeyUp(WPARAM wParam, LPARAM lParam)
 
 	switch(wParam)
 	{
-		case VK_END:
-			but = m_NumberOfButtons-1;
-			break;
+	case VK_END:
+		but = m_NumberOfButtons-1;
+		break;
 
-		case VK_HOME:
-			but = 0;
-			break;
+	case VK_HOME:
+		but = 0;
+		break;
 
-		case VK_LEFT:
-			but -= (opt.IEViewStyle ? 1 : m_NumberOfVerticalButtons) * LOWORD(lParam);
-			break;
+	case VK_LEFT:
+		but -= (opt.IEViewStyle ? 1 : m_NumberOfVerticalButtons) * LOWORD(lParam);
+		break;
 
-		case VK_UP:
-			but -= (opt.IEViewStyle ? m_NumberOfHorizontalButtons : 1) * LOWORD(lParam);
-			break;
+	case VK_UP:
+		but -= (opt.IEViewStyle ? m_NumberOfHorizontalButtons : 1) * LOWORD(lParam);
+		break;
 
-		case VK_RIGHT:
-			but += (opt.IEViewStyle ? 1 : m_NumberOfVerticalButtons) * LOWORD(lParam);
-			break;
+	case VK_RIGHT:
+		but += (opt.IEViewStyle ? 1 : m_NumberOfVerticalButtons) * LOWORD(lParam);
+		break;
 
-		case VK_DOWN:
-			but += (opt.IEViewStyle ? m_NumberOfHorizontalButtons : 1) * LOWORD(lParam);
-			break;
+	case VK_DOWN:
+		but += (opt.IEViewStyle ? m_NumberOfHorizontalButtons : 1) * LOWORD(lParam);
+		break;
 
-		case VK_SPACE:
-		case VK_RETURN:
-			if (but != -1) InsertSmiley();
-			return;
-		
-		case VK_ESCAPE:
-			DestroyWindow(m_hwndDialog);
-			return;
+	case VK_SPACE:
+	case VK_RETURN:
+		if (but != -1) InsertSmiley();
+		return;
 
-		case VK_NUMPAD1:
-		case VK_NUMPAD2:
-		case VK_NUMPAD3:
-		case VK_NUMPAD4:
-		case VK_NUMPAD5:
-		case VK_NUMPAD6:
-		case VK_NUMPAD7:
-		case VK_NUMPAD8:
-		case VK_NUMPAD9:
-			if ((GetKeyState(VK_NUMLOCK) & 1) != 0)  
-				numKey = (int)wParam - VK_NUMPAD1;
-			else 
-			{
-				rowSel = -1;
-				return;
-			}
-			break;
+	case VK_ESCAPE:
+		DestroyWindow(m_hwndDialog);
+		return;
 
-		case '1':
-		case '2':
-		case '3':
-		case '4':
-		case '5':
-		case '6':
-		case '7':
-		case '8':
-		case '9':
-			numKey = (int)wParam - '1';
-			break;
-		
-		default:
+	case VK_NUMPAD1:
+	case VK_NUMPAD2:
+	case VK_NUMPAD3:
+	case VK_NUMPAD4:
+	case VK_NUMPAD5:
+	case VK_NUMPAD6:
+	case VK_NUMPAD7:
+	case VK_NUMPAD8:
+	case VK_NUMPAD9:
+		if ((GetKeyState(VK_NUMLOCK) & 1) != 0)  
+			numKey = (int)wParam - VK_NUMPAD1;
+		else 
+		{
 			rowSel = -1;
 			return;
+		}
+		break;
+
+	case '1':
+	case '2':
+	case '3':
+	case '4':
+	case '5':
+	case '6':
+	case '7':
+	case '8':
+	case '9':
+		numKey = (int)wParam - '1';
+		break;
+
+	default:
+		rowSel = -1;
+		return;
 	}
 
 	if (numKey != -1)
@@ -488,7 +488,7 @@ void SmileyToolWindowType::InitDialog(LPARAM lParam)
 
 	if (GetWindowLong(m_hwndDialog, GWL_STYLE) & WS_VSCROLL)
 		width += GetSystemMetrics(SM_CXVSCROLL);
-	
+
 	RECT rc = { 0, 0, width, heightn };
 	AdjustWindowRectEx(&rc, GetWindowLong(m_hwndDialog, GWL_STYLE), 
 		FALSE, GetWindowLong(m_hwndDialog, GWL_EXSTYLE));
@@ -498,16 +498,16 @@ void SmileyToolWindowType::InitDialog(LPARAM lParam)
 
 	switch (m_Direction) 
 	{
-		case 1: 
-			m_XPosition-=width;
-			break;
-		case 2:
-			m_XPosition-=width;
-			m_YPosition-=height;
-			break;
-		case 3:
-			m_YPosition-=height;
-			break;
+	case 1: 
+		m_XPosition-=width;
+		break;
+	case 2:
+		m_XPosition-=width;
+		m_YPosition-=height;
+		break;
+	case 3:
+		m_YPosition-=height;
+		break;
 	}
 
 	// Get screen dimentions
@@ -528,10 +528,10 @@ void SmileyToolWindowType::InitDialog(LPARAM lParam)
 	if (m_XPosition + width  > xScreen) m_XPosition = xScreen - width;
 	if (m_YPosition < yoScreen) m_YPosition = yoScreen;
 	if (m_XPosition < xoScreen) m_XPosition = xoScreen;
-	  
+
 	// Move window to desired location
 	SetWindowPos(m_hwndDialog, NULL, m_XPosition, m_YPosition, 
-					width, height, SWP_NOZORDER);
+		width, height, SWP_NOZORDER);
 
 	m_AniPack = new AnimatedPack(m_hwndDialog, height, m_ButtonSize, opt.SelWndBkgClr);
 
@@ -549,7 +549,7 @@ void SmileyToolWindowType::InitDialog(LPARAM lParam)
 
 	//add tooltips
 	m_hToolTip = CreateWindowEx(WS_EX_TOPMOST, TOOLTIPS_CLASS, _T(""), 
-								TTS_NOPREFIX | WS_POPUP, 0, 0, 0, 0, m_hwndDialog, NULL, g_hInst, NULL);
+		TTS_NOPREFIX | WS_POPUP, 0, 0, 0, 0, m_hwndDialog, NULL, g_hInst, NULL);
 	TOOLINFO ti = {0};
 	ti.cbSize = sizeof(ti);
 	ti.uFlags = TTF_IDISHWND | TTF_SUBCLASS;
@@ -576,7 +576,7 @@ void SmileyToolWindowType::PaintWindow(void)
 	HANDLE hOld = SelectObject(hdcMem, hBmp);
 
 	CreateSmileyBitmap(hdcMem);
-	
+
 	if (m_AniPack) m_AniPack->Draw(hdcMem);
 
 	BitBlt(hdc, 0, 0, m_BitmapWidth.cx, m_WindowSizeY, hdcMem, 0, 0, SRCCOPY);
@@ -664,7 +664,7 @@ void SmileyToolWindowType::CreateSmileyWinDim(void)
 
 	if (m_pSmileyPack->win.x != 0 && m_pSmileyPack->win.y != 0)
 		wndsz = min(wndsz, m_pSmileyPack->win.y * (m_ButtonSize.cy + (int)m_ButtonSpace) + (int)m_ButtonSpace);
-	
+
 	m_WindowSizeY = wndsz - (wndsz % colsz) + m_ButtonSpace;
 }
 
@@ -721,19 +721,19 @@ RECT SmileyToolWindowType::CalculateButtonToCoordinates(int buttonPosition, int 
 	}
 
 	RECT pt;
-    pt.left = rowpos * (m_ButtonSize.cx + m_ButtonSpace) + m_ButtonSpace;
-    pt.top  = (row - scroll) * (m_ButtonSize.cy + m_ButtonSpace) + m_ButtonSpace;
-    pt.right = pt.left + m_ButtonSize.cx;
-    pt.bottom = pt.top + m_ButtonSize.cy;
+	pt.left = rowpos * (m_ButtonSize.cx + m_ButtonSpace) + m_ButtonSpace;
+	pt.top  = (row - scroll) * (m_ButtonSize.cy + m_ButtonSpace) + m_ButtonSpace;
+	pt.right = pt.left + m_ButtonSize.cx;
+	pt.bottom = pt.top + m_ButtonSize.cy;
 
-    return pt;
+	return pt;
 }
 
 
 int SmileyToolWindowType::CalculateCoordinatesToButton(POINT pt, int scroll)
 {
-    const int rowpos = (pt.x - m_ButtonSpace) / (m_ButtonSize.cx + m_ButtonSpace);
-    const int row = (pt.y - m_ButtonSpace) / (m_ButtonSize.cy + m_ButtonSpace) + scroll;
+	const int rowpos = (pt.x - m_ButtonSpace) / (m_ButtonSize.cx + m_ButtonSpace);
+	const int row = (pt.y - m_ButtonSpace) / (m_ButtonSize.cy + m_ButtonSpace) + scroll;
 
 	int pos;
 	if (opt.IEViewStyle)
@@ -741,45 +741,45 @@ int SmileyToolWindowType::CalculateCoordinatesToButton(POINT pt, int scroll)
 	else
 		pos = m_NumberOfVerticalButtons * rowpos + row;
 
-    if (pos >= (int)m_NumberOfButtons) pos = -1;
+	if (pos >= (int)m_NumberOfButtons) pos = -1;
 
-    return pos;
+	return pos;
 }
 
 void __cdecl SmileyToolThread(void *arg)
 {
 	SmileyToolWindowParam* stwp = (SmileyToolWindowParam*)arg;
-    if (stwp->pSmileyPack && stwp->pSmileyPack->VisibleSmileyCount())
-    {
-	    WNDCLASSEX wndclass;
-	    wndclass.cbSize        = sizeof(wndclass);
-	    wndclass.style         = CS_SAVEBITS;
-	    wndclass.lpfnWndProc   = DlgProcSmileyToolWindow;
-	    wndclass.cbClsExtra    = 0;
-	    wndclass.cbWndExtra    = 4;
-	    wndclass.hInstance     = g_hInst;
-	    wndclass.hIcon         = NULL;
-	    wndclass.hCursor       = LoadCursor (NULL, IDC_ARROW);
-	    wndclass.hbrBackground = CreateSolidBrush(opt.SelWndBkgClr);
-	    wndclass.lpszMenuName  = NULL;
-	    wndclass.lpszClassName = _T("SmileyTool");
-	    wndclass.hIconSm       = NULL;
-	    RegisterClassEx(&wndclass);
+	if (stwp->pSmileyPack && stwp->pSmileyPack->VisibleSmileyCount())
+	{
+		WNDCLASSEX wndclass;
+		wndclass.cbSize        = sizeof(wndclass);
+		wndclass.style         = CS_SAVEBITS;
+		wndclass.lpfnWndProc   = DlgProcSmileyToolWindow;
+		wndclass.cbClsExtra    = 0;
+		wndclass.cbWndExtra    = 4;
+		wndclass.hInstance     = g_hInst;
+		wndclass.hIcon         = NULL;
+		wndclass.hCursor       = LoadCursor (NULL, IDC_ARROW);
+		wndclass.hbrBackground = CreateSolidBrush(opt.SelWndBkgClr);
+		wndclass.lpszMenuName  = NULL;
+		wndclass.lpszClassName = _T("SmileyTool");
+		wndclass.hIconSm       = NULL;
+		RegisterClassEx(&wndclass);
 
-	    CreateWindowEx(WS_EX_TOPMOST | WS_EX_NOPARENTNOTIFY, _T("SmileyTool"), NULL, 
-		    WS_BORDER | WS_POPUP | WS_VISIBLE, 
-		    CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
-		    ((SmileyToolWindowParam*)arg)->hWndParent, NULL, g_hInst, arg);
+		CreateWindowEx(WS_EX_TOPMOST | WS_EX_NOPARENTNOTIFY, _T("SmileyTool"), NULL, 
+			WS_BORDER | WS_POPUP | WS_VISIBLE, 
+			CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+			((SmileyToolWindowParam*)arg)->hWndParent, NULL, g_hInst, arg);
 
-	    SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);
+		SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);
 
-	    MSG msg;
-	    while (GetMessage(&msg, NULL, 0, 0))
-	    {
-		    TranslateMessage(&msg);
-		    DispatchMessage(&msg);
-	    }
-	    UnregisterClass(_T("SmileyTool"), g_hInst);
-    }
+		MSG msg;
+		while (GetMessage(&msg, NULL, 0, 0))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		UnregisterClass(_T("SmileyTool"), g_hInst);
+	}
 	delete stwp;
 }

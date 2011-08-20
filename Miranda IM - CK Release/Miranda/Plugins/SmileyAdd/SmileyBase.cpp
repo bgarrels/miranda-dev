@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2008 - 2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2008 - 2011 Boris Krasnovskiy All Rights Reserved
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ ISmileyBase::ISmileyBase(void)
 	m_smltxt = NULL;
 	m_hwnd = NULL;
 	m_visible = false;
-    m_dirAniAllow = false;
+	m_dirAniAllow = false;
 
 	memset(&m_sizeExtent, 0, sizeof(m_sizeExtent));
 	memset(&m_sizeExtentHiM, 0, sizeof(m_sizeExtentHiM));
@@ -70,7 +70,7 @@ ISmileyBase::~ISmileyBase(void)
 {
 	free(m_smltxt);
 
-    Close(OLECLOSE_NOSAVE);
+	Close(OLECLOSE_NOSAVE);
 
 	if (m_spClientSite) 
 	{
@@ -128,7 +128,7 @@ void ISmileyBase::SetPosition(HWND hwnd, LPCRECT lpRect)
 	else
 	{
 		m_visible = true;
-        m_dirAniAllow = true;
+		m_dirAniAllow = true;
 		m_orect.left = lpRect->left;
 		m_orect.right = lpRect->left + m_sizeExtent.cx;
 		if (lpRect->top == -1)
@@ -203,7 +203,7 @@ HRESULT ISmileyBase::SetClientSite(IOleClientSite *pClientSite)
 
 HRESULT ISmileyBase::GetClientSite(IOleClientSite **ppClientSite)
 {
-    if (ppClientSite == NULL) return E_POINTER;
+	if (ppClientSite == NULL) return E_POINTER;
 	*ppClientSite = m_spClientSite;
 	if (m_spClientSite != NULL) m_spClientSite->AddRef();
 	return S_OK;
@@ -235,7 +235,7 @@ HRESULT ISmileyBase::GetClipboardData(DWORD /* dwReserved */, IDataObject** /* p
 { return E_NOTIMPL; }
 
 HRESULT ISmileyBase::DoVerb(LONG /* iVerb */, LPMSG /* pMsg */, IOleClientSite* /* pActiveSite */, LONG /* lindex */,
-				 HWND /* hwndParent */, LPCRECT /* lprcPosRect */)
+	HWND /* hwndParent */, LPCRECT /* lprcPosRect */)
 {
 	return E_NOTIMPL;
 }
@@ -280,8 +280,8 @@ HRESULT ISmileyBase::Advise(IAdviseSink *pAdvSink, DWORD *pdwConnection)
 		hr = CreateOleAdviseHolder(&m_spAdviseHolder);
 	if (SUCCEEDED(hr))
 		hr = m_spAdviseHolder->Advise(pAdvSink, pdwConnection);
-    else
-        m_spAdviseHolder = NULL;
+	else
+		m_spAdviseHolder = NULL;
 	return hr;
 }
 
@@ -320,16 +320,16 @@ HRESULT ISmileyBase::SetColorScheme(LOGPALETTE* /* pLogpal */)
 //
 HRESULT ISmileyBase::SetAdvise(DWORD aspect, DWORD advf, IAdviseSink* pAdvSink) 
 {
-    if (aspect != DVASPECT_CONTENT) return DV_E_DVASPECT;
-    m_advf = advf;
+	if (aspect != DVASPECT_CONTENT) return DV_E_DVASPECT;
+	m_advf = advf;
 	if (m_spAdviseSink) m_spAdviseSink->Release();
-    m_spAdviseSink = pAdvSink;
-    if (advf & ADVF_PRIMEFIRST) SendOnViewChange();
-    return S_OK;
+	m_spAdviseSink = pAdvSink;
+	if (advf & ADVF_PRIMEFIRST) SendOnViewChange();
+	return S_OK;
 }
 HRESULT ISmileyBase::GetAdvise(DWORD* /*pAspects*/, DWORD* /*pAdvf*/, IAdviseSink** ppAdvSink) 
 {
-    if (!ppAdvSink) return E_POINTER;
+	if (!ppAdvSink) return E_POINTER;
 	*ppAdvSink = m_spAdviseSink;
 	if (m_spAdviseSink) m_spAdviseSink->AddRef();
 	return S_OK;
@@ -337,7 +337,7 @@ HRESULT ISmileyBase::GetAdvise(DWORD* /*pAspects*/, DWORD* /*pAdvf*/, IAdviseSin
 HRESULT ISmileyBase::Freeze(DWORD, long, void*, DWORD*) { return E_NOTIMPL; }
 HRESULT ISmileyBase::Unfreeze(DWORD) { return E_NOTIMPL; }
 HRESULT ISmileyBase::GetColorSet(DWORD, long, void*, DVTARGETDEVICE*, HDC, 
-    LOGPALETTE**) { return E_NOTIMPL; }
+	LOGPALETTE**) { return E_NOTIMPL; }
 
 //
 // IViewObject2 members

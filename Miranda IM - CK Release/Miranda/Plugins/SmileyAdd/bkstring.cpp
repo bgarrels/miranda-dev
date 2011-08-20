@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2008 - 2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2008 - 2011 Boris Krasnovskiy All Rights Reserved
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -38,9 +38,9 @@ void bkstring::reserve(size_type len)
 {
 	if (len >= sizeAlloced || sizeAlloced == 0)
 	{
-        if (sizeAlloced == 0) buf = NULL;
+		if (sizeAlloced == 0) buf = NULL;
 		buf = (value_type*)realloc(buf, (len+1) * sizeof(value_type));
-        if (sizeAlloced == 0) buf[0] = 0;
+		if (sizeAlloced == 0) buf[0] = 0;
 		sizeAlloced = len+1;
 	}
 }
@@ -117,34 +117,34 @@ bkstring& bkstring::append(size_type _Count, value_type _Ch)
 
 bkstring& bkstring::assign(const value_type* _Ptr, size_type _Count)
 {
-    if (_Count == 0 && sizeAlloced == 0)
-    {
-        buf = (TCHAR*)_T("");
-    }
-    else
-    {
-	    reserve(_Count);
-	    memcpy(buf, _Ptr, _Count*sizeof(value_type));
-	    buf[_Count] = 0;
-	    lenBuf = _Count;
-    }
+	if (_Count == 0 && sizeAlloced == 0)
+	{
+		buf = (TCHAR*)_T("");
+	}
+	else
+	{
+		reserve(_Count);
+		memcpy(buf, _Ptr, _Count*sizeof(value_type));
+		buf[_Count] = 0;
+		lenBuf = _Count;
+	}
 	return *this;
 }
 
 bkstring& bkstring::assign(const bkstring& _Str, size_type _Off, size_type _Count)
 {
 	size_type len = min(_Count, _Str.size() - _Off);
-    if (len == 0 && sizeAlloced == 0)
-    {
-        buf = (TCHAR*)_T("");
-    }
-    else
-    {
-        reserve(len);
-	    memcpy(buf, _Str.c_str() + _Off, len*sizeof(value_type));
-	    lenBuf = len;
-	    buf[len] = 0;
-    }
+	if (len == 0 && sizeAlloced == 0)
+	{
+		buf = (TCHAR*)_T("");
+	}
+	else
+	{
+		reserve(len);
+		memcpy(buf, _Str.c_str() + _Off, len*sizeof(value_type));
+		lenBuf = len;
+		buf[len] = 0;
+	}
 	return *this;
 }
 

@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2005 - 2009 Boris Krasnovskiy
+Copyright (C) 2005 - 2011 Boris Krasnovskiy
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
 This program is free software; you can redistribute it and/or
@@ -24,15 +24,15 @@ class SmileyPackType;
 
 struct SmileyToolWindowParam
 {
-  SmileyPackType* pSmileyPack;
-  int xPosition;
-  int yPosition;
-  int direction;
-  HWND hWndTarget;
-  HWND hWndParent;
-  UINT targetMessage;
-  WPARAM targetWParam;
-  HANDLE hContact;
+	SmileyPackType* pSmileyPack;
+	int xPosition;
+	int yPosition;
+	int direction;
+	HWND hWndTarget;
+	HWND hWndParent;
+	UINT targetMessage;
+	WPARAM targetWParam;
+	HANDLE hContact;
 };
 
 

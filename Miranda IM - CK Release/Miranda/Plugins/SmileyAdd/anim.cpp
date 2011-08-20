@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2006 - 2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2006 - 2011 Boris Krasnovskiy All Rights Reserved
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,9 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Animate::Animate(SmileyType *sml, RECT& rect, HDC hdcMem, HBRUSH hbr, bool clip)
 	: m_sml(sml), m_img(NULL),
-	  m_nFramePosition(0), m_sel(false), m_clip(clip),
-	  m_offset(0), m_running(false),
-	  m_hdcMem(hdcMem), m_hbr(hbr)
+	m_nFramePosition(0), m_sel(false), m_clip(clip),
+	m_offset(0), m_running(false),
+	m_hdcMem(hdcMem), m_hbr(hbr)
 {
 	m_cliprect = rect;
 }
@@ -43,7 +43,7 @@ void Animate::StartAnimation(void)
 
 	if (m_img && m_img->IsAnimated())
 	{
-        m_img->SelectFrame(m_nFramePosition);
+		m_img->SelectFrame(m_nFramePosition);
 		long frtm = m_img->GetFrameDelay();
 		m_counter = frtm / 10 + ((frtm % 10) >= 5);
 	}
@@ -75,10 +75,10 @@ void Animate::DrawFrame(HDC hdc)
 	FillRect(m_hdcMem, &frc, m_hbr);
 
 	m_img->Draw(m_hdcMem, frc, m_clip);
-	
+
 	BitBlt(hdc, m_cliprect.left, m_cliprect.top, width, height, m_hdcMem, 0, 0, SRCCOPY);
 
-    if (m_sel)
+	if (m_sel)
 		DrawFocusRect(hdc, &m_cliprect);
 }
 
@@ -88,7 +88,7 @@ void Animate::Draw(HDC hdc)
 	if (m_running)
 	{
 		m_img->Draw(hdc, m_cliprect, m_clip);
-		
+
 		if (m_sel)
 			DrawFocusRect(hdc, &m_cliprect);
 	}
@@ -98,26 +98,26 @@ void Animate::Draw(HDC hdc)
 void Animate::SetOffset(int off, int wsize) 
 { 
 	const int dy = m_offset - off;
-	
+
 	m_cliprect.top += dy;
 	m_cliprect.bottom += dy;
-	
+
 	m_offset = off; 
 
 	m_running = m_cliprect.top >= 0 && m_cliprect.top < wsize;
-    if (m_running)
-    {
-	    if (m_img == NULL) 
-        {
-            StartAnimation();
-            if (m_img == NULL) m_running = false;
-        }
-    }
-    else
-    {
-        if (m_img) m_img->Release();
-        m_img = NULL;
-    }
+	if (m_running)
+	{
+		if (m_img == NULL) 
+		{
+			StartAnimation();
+			if (m_img == NULL) m_running = false;
+		}
+	}
+	else
+	{
+		if (m_img) m_img->Release();
+		m_img = NULL;
+	}
 }
 
 
@@ -153,7 +153,7 @@ AnimatedPack::~AnimatedPack()
 
 void AnimatedPack::Add(SmileyType *sml, RECT rect, bool clip)
 {
-   m_AniList.insert(new Animate(sml, rect, m_hdcMem, m_hbr, clip));
+	m_AniList.insert(new Animate(sml, rect, m_hdcMem, m_hbr, clip));
 }
 
 

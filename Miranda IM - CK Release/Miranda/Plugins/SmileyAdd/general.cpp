@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2005 - 2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005 - 2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
 This program is free software; you can redistribute it and/or
@@ -40,21 +40,21 @@ int CalculateTextHeight(HDC hdc, CHARFORMAT2* chf)
 {
 	HDC hcdc = CreateCompatibleDC(hdc);
 
-    int logPixelsY = GetDeviceCaps(hdc, LOGPIXELSY);
-    HFONT hFont = CreateFont(-(chf->yHeight * logPixelsY / 1440), 0, 0, 0, 
-                       chf->wWeight, chf->dwEffects & CFE_ITALIC ? 1 : 0, 0, 0,
-                       chf->bCharSet, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
-                       DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-                       chf->szFaceName);
-    SelectObject(hcdc, hFont);
+	int logPixelsY = GetDeviceCaps(hdc, LOGPIXELSY);
+	HFONT hFont = CreateFont(-(chf->yHeight * logPixelsY / 1440), 0, 0, 0, 
+		chf->wWeight, chf->dwEffects & CFE_ITALIC ? 1 : 0, 0, 0,
+		chf->bCharSet, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
+		DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		chf->szFaceName);
+	SelectObject(hcdc, hFont);
 
-    SIZE fontSize;
-    GetTextExtentPoint32(hcdc, _T(")"), 1, &fontSize);
-    
-    DeleteObject(hFont);
+	SIZE fontSize;
+	GetTextExtentPoint32(hcdc, _T(")"), 1, &fontSize);
+
+	DeleteObject(hFont);
 	DeleteDC(hcdc);
 
-    return fontSize.cy;
+	return fontSize.cy;
 }
 
 
@@ -107,7 +107,7 @@ const TCHAR* GetImageExt(bkstring &fname)
 
 
 
- HICON ImageList_GetIconFixed (HIMAGELIST himl, INT i, UINT fStyle)
+HICON ImageList_GetIconFixed (HIMAGELIST himl, INT i, UINT fStyle)
 {
 	ICONINFO ii;
 	HICON hIcon;
@@ -117,18 +117,18 @@ const TCHAR* GetImageExt(bkstring &fname)
 	int cx, cy;
 	ImageList_GetIconSize(himl, &cx, &cy);
 
-    hdcDst = CreateCompatibleDC(NULL);
+	hdcDst = CreateCompatibleDC(NULL);
 
-    ii.fIcon = TRUE;
-    ii.xHotspot = 0;
-    ii.yHotspot = 0;
- 
+	ii.fIcon = TRUE;
+	ii.xHotspot = 0;
+	ii.yHotspot = 0;
+
 	/* draw mask*/
 	ii.hbmMask = CreateBitmap (cx, cy, 1, 1, NULL);
 	hOldDstBitmap = (HBITMAP)SelectObject (hdcDst, ii.hbmMask);
 	PatBlt(hdcDst, 0, 0, cx, cy, WHITENESS);
 	ImageList_Draw(himl, i, hdcDst, 0, 0, fStyle | ILD_MASK);
- 
+
 	/* draw image*/
 	ii.hbmColor = CreateBitmap (cx, cy, 1, 32, NULL);
 	SelectObject (hdcDst, ii.hbmColor);
@@ -136,9 +136,9 @@ const TCHAR* GetImageExt(bkstring &fname)
 	ImageList_Draw(himl, i, hdcDst, 0, 0, fStyle | ILD_TRANSPARENT);
 
 	/*
-	 * CreateIconIndirect requires us to deselect the bitmaps from
-	 * the DCs before calling
-	 */
+	* CreateIconIndirect requires us to deselect the bitmaps from
+	* the DCs before calling
+	*/
 	SelectObject(hdcDst, hOldDstBitmap);
 
 	hIcon = CreateIconIndirect (&ii);
@@ -154,7 +154,7 @@ void pathToRelative(const bkstring& pSrc, bkstring& pOut)
 {
 	TCHAR szOutPath[MAX_PATH];
 	CallService(MS_UTILS_PATHTORELATIVET, (WPARAM)pSrc.c_str(), (LPARAM)szOutPath);
-    pOut = szOutPath;
+	pOut = szOutPath;
 }
 
 void pathToAbsolute(const bkstring& pSrc, bkstring& pOut) 
@@ -180,29 +180,34 @@ void pathToAbsolute(const bkstring& pSrc, bkstring& pOut)
 /////////////////////////////////////////////////////////////////////////////////////////
 // UrlDecode - converts URL chars like %20 into printable characters
 
-static int SingleHexToDecimal(char c)
+static int __fastcall SingleHexToDecimal(char c)
 {
-	if ( c >= '0' && c <= '9' ) return c-'0';
-	if ( c >= 'a' && c <= 'f' ) return c-'a'+10;
-	if ( c >= 'A' && c <= 'F' ) return c-'A'+10;
+	if (c >= '0' && c <= '9') return c-'0';
+	if (c >= 'a' && c <= 'f') return c-'a'+10;
+	if (c >= 'A' && c <= 'F') return c-'A'+10;
 	return -1;
 }
 
-void  UrlDecode( char* str )
+void  UrlDecode(char* str)
 {
 	char* s = str, *d = str;
 
-	while( *s )
+	while(*s)
 	{
-		if ( *s == '%' ) {
-			int digit1 = SingleHexToDecimal( s[1] );
-			if ( digit1 != -1 ) {
-				int digit2 = SingleHexToDecimal( s[2] );
-				if ( digit2 != -1 ) {
+		if (*s == '%') 
+		{
+			int digit1 = SingleHexToDecimal(s[1]);
+			if ( digit1 != -1 ) 
+			{
+				int digit2 = SingleHexToDecimal(s[2]);
+				if ( digit2 != -1 ) 
+				{
 					s += 3;
-					*d++ = (char)(( digit1 << 4 ) | digit2);
+					*d++ = (char)((digit1 << 4) | digit2);
 					continue;
-		}	}	}
+				}	
+			}	
+		}
 		*d++ = *s++;
 	}
 
@@ -255,7 +260,7 @@ void DestroyGdiPlus(void)
 
 HANDLE DecodeMetaContact(HANDLE hContact)
 {
-    if (hContact == NULL) return NULL;
+	if (hContact == NULL) return NULL;
 	HANDLE hReal = (HANDLE) CallService(MS_MC_GETMOSTONLINECONTACT, (WPARAM) hContact, 0);
 	if (hReal == NULL || hReal == (HANDLE)CALLSERVICE_NOTFOUND)
 		hReal = hContact;
@@ -290,7 +295,8 @@ void ReportError(const TCHAR* errmsg)
 	bool popupFail = PUAddPopUpEx(&pd) != CALLSERVICE_NOTFOUND;
 #endif
 	if (popupFail)
-*/		MessageBox(NULL, errmsg, title, MB_OK | MB_ICONWARNING | MB_TOPMOST);
+*/		
+		MessageBox(NULL, errmsg, title, MB_OK | MB_ICONWARNING | MB_TOPMOST);
 }
 
 #pragma warning( disable : 4786 )

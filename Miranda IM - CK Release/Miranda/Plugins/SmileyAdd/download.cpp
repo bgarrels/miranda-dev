@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2007 - 2009 Boris Krasnovskiy
+Copyright (C) 2007 - 2011 Boris Krasnovskiy
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -117,7 +117,7 @@ bool InternetDownloadFile(const char *szUrl, char* szDest, HANDLE &hHttpDwnl)
 
 						strncpy(szRedirUrl, szUrl, rlen);
 						strcpy(szRedirUrl+rlen, nlhrReply->headers[i].szValue); 
-						
+
 						nlhr.szUrl = szRedirUrl;
 						break;
 					}
@@ -160,7 +160,7 @@ void __cdecl SmileyDownloadThread(void*)
 		}
 		else
 			WaitForSingleObject(g_hDlMutex, 3000);
-		
+
 		dlQueue.remove(0);
 	}
 	dlQueue.destroy();
@@ -186,7 +186,7 @@ bool GetSmileyFile(bkstring& url, const bkstring& packstr)
 	m0->findFirstMatch();
 
 	bkstring filename;
-    filename.appendfmt(_T("%s\\%s\\"), cachepath, packstr.c_str());
+	filename.appendfmt(_T("%s\\%s\\"), cachepath, packstr.c_str());
 	size_t pathpos = filename.size();
 	filename += m0->getGroup(1);
 
@@ -224,51 +224,51 @@ bool GetSmileyFile(bkstring& url, const bkstring& packstr)
 
 void GetDefaultSmileyCacheFolder(TCHAR* szPath, size_t cbLen)
 {
-    TCHAR *tmpPath = _T("%miranda_userdata%");
-    if ((INT_PTR)tmpPath != CALLSERVICE_NOTFOUND)
-    {
-        mir_sntprintf(szPath, cbLen, _T("%s"), tmpPath);
-        //mir_free(tmpPath);
-    }
-    else
-    {
-        char dbPath[MAX_PATH];
-        CallService(MS_DB_GETPROFILEPATH, SIZEOF(dbPath), (LPARAM)dbPath);
-        mir_sntprintf(szPath, cbLen, _T("%s"), A2T_SM(dbPath));
-    }
+	TCHAR *tmpPath = _T("%miranda_userdata%");
+	if ((INT_PTR)tmpPath != CALLSERVICE_NOTFOUND)
+	{
+		mir_sntprintf(szPath, cbLen, _T("%s"), tmpPath);
+		//mir_free(tmpPath);
+	}
+	else
+	{
+		char dbPath[MAX_PATH];
+		CallService(MS_DB_GETPROFILEPATH, SIZEOF(dbPath), (LPARAM)dbPath);
+		mir_sntprintf(szPath, cbLen, _T("%s"), A2T_SM(dbPath));
+	}
 }
 
 int FolderChanged(WPARAM, LPARAM)
 {
-    FOLDERSGETDATA fgd = {0};
+	FOLDERSGETDATA fgd = {0};
 	fgd.cbSize = sizeof(FOLDERSGETDATA);
 	fgd.nMaxPathSize = SIZEOF(cachepath);
 	fgd.szPathT = cachepath;
 	if (CallService(MS_FOLDERS_GET_PATH, (WPARAM) hFolder, (LPARAM) &fgd))
-    {
-        GetDefaultSmileyCacheFolder(cachepath, SIZEOF(cachepath));
-    }
+	{
+		GetDefaultSmileyCacheFolder(cachepath, SIZEOF(cachepath));
+	}
 
-    return 0;
+	return 0;
 }
 
 void GetSmileyCacheFolder(void)
 {
-    TCHAR defaultPath[MAX_PATH];
+	TCHAR defaultPath[MAX_PATH];
 
-    GetDefaultSmileyCacheFolder(defaultPath, SIZEOF(defaultPath));
+	GetDefaultSmileyCacheFolder(defaultPath, SIZEOF(defaultPath));
 
 	FOLDERSDATA fd = {0};
 	fd.cbSize = sizeof(FOLDERSDATA);
 	strcpy(fd.szSection, "SmileyAdd");
 	strcpy(fd.szName,"Smiley Cache");
 	fd.szFormatT = defaultPath;
-    fd.flags = FF_TCHAR;
+	fd.flags = FF_TCHAR;
 	hFolder = (HANDLE)CallService(MS_FOLDERS_REGISTER_PATH, 0, (LPARAM) &fd);
 
-    FolderChanged(0, 0);
+	FolderChanged(0, 0);
 
-    hFolderHook = HookEvent(ME_FOLDERS_PATH_CHANGED, FolderChanged);
+	hFolderHook = HookEvent(ME_FOLDERS_PATH_CHANGED, FolderChanged);
 }
 
 void DownloadInit(void) 
@@ -280,13 +280,13 @@ void DownloadInit(void)
 	nlu.szDescriptiveName = Translate("SmileyAdd HTTP connections");
 	hNetlibUser = (HANDLE)CallService(MS_NETLIB_REGISTERUSER, 0, (LPARAM)&nlu);
 
-    GetSmileyCacheFolder();
+	GetSmileyCacheFolder();
 	g_hDlMutex = CreateMutex(NULL, FALSE, NULL);
 }
 
 void DownloadClose(void) 
 {
-    UnhookEvent(hFolderHook);
+	UnhookEvent(hFolderHook);
 	CloseHandle(g_hDlMutex);
 	Netlib_CloseHandle(hNetlibUser);
 }

@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2008 - 2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2008 - 2011 Boris Krasnovskiy All Rights Reserved
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -76,7 +76,7 @@ bool SmileyCType::CreateTriggerText(char* text)
 	UrlDecode(text);
 
 	int len = (int)strlen(text);
-    if (len == 0) return false;
+	if (len == 0) return false;
 
 	int reslen = Netlib_GetBase64DecodedBufferSize(len)+1;
 	char* res = (char*)alloca(reslen);
@@ -87,7 +87,7 @@ bool SmileyCType::CreateTriggerText(char* text)
 
 	TCHAR *txt = mir_utf8decodeT(res);
 
-    if (txt == NULL) return false;
+	if (txt == NULL) return false;
 
 	m_TriggerText = txt;
 	mir_free(txt);
@@ -118,11 +118,11 @@ bool SmileyPackCType::LoadSmileyDir(TCHAR* dir)
 				if (div)
 				{
 					*div = 0;
-                    SmileyCType *smlc = new SmileyCType(fullpath, c_file.name);
-                    if (smlc->GetTriggerText().empty())
-                        delete smlc;
-                    else
-					    m_SmileyList.insert(smlc);
+					SmileyCType *smlc = new SmileyCType(fullpath, c_file.name);
+					if (smlc->GetTriggerText().empty())
+						delete smlc;
+					else
+						m_SmileyList.insert(smlc);
 				}
 			}
 		} while( _tfindnext( hFile, &c_file ) == 0 );
@@ -139,7 +139,7 @@ bool SmileyPackCType::LoadSmiley(TCHAR* path)
 	bkstring dirs = path;
 	bkstring::size_type slash = dirs.find_last_of('\\');
 	bkstring::size_type dot = dirs.find_last_of('.');
-	
+
 	bkstring name = dirs.substr(slash+1, dot - slash - 1); 
 
 	for (int i=0; i < m_SmileyList.getCount(); i++)
@@ -152,7 +152,7 @@ bool SmileyPackCType::LoadSmiley(TCHAR* path)
 	}
 
 	m_SmileyList.insert(new SmileyCType(dirs, (TCHAR*)name.c_str()));
-	
+
 	bkstring empty;
 	m_SmileyLookup.insert(new SmileyLookup(
 		m_SmileyList[m_SmileyList.getCount()-1].GetTriggerText(), false, m_SmileyList.getCount()-1, empty));

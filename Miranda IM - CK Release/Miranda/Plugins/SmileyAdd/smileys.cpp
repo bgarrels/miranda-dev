@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2005 - 2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005 - 2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
 This program is free software; you can redistribute it and/or
@@ -43,7 +43,7 @@ SmileyType::SmileyType(void)
 	m_size.cy = 0;  
 }
 
- SmileyType::~SmileyType() 
+SmileyType::~SmileyType() 
 {
 	if (m_xepimg) m_xepimg->Release();
 	m_xepimg = NULL;
@@ -55,22 +55,22 @@ SmileyType::SmileyType(void)
 
 HICON SmileyType::GetIcon(void)
 { 
-    if (m_SmileyIcon == NULL)
-    {
-        ImageBase* img = CreateCachedImage();
+	if (m_SmileyIcon == NULL)
+	{
+		ImageBase* img = CreateCachedImage();
 		if (!img) return NULL;
-        img->SelectFrame(m_index);
-        m_SmileyIcon = img->GetIcon();
-        img->Release();
-    }
-    return m_SmileyIcon;
+		img->SelectFrame(m_index);
+		m_SmileyIcon = img->GetIcon();
+		img->Release();
+	}
+	return m_SmileyIcon;
 }
 
 
 HICON SmileyType::GetIconDup(void) 
 { 
 	ImageBase* img = CreateCachedImage();
-    img->SelectFrame(m_index);
+	img->SelectFrame(m_index);
 	HICON hIcon = img->GetIcon();
 	img->Release();
 	return hIcon;
@@ -134,7 +134,7 @@ HBITMAP SmileyType::GetBitmap(COLORREF bkgClr, int sizeX, int sizeY)
 {
 	ImageBase* img = CreateCachedImage();
 	if (!img) return NULL;
-    img->SelectFrame(m_index);
+	img->SelectFrame(m_index);
 	HBITMAP hBmp = img->GetBitmap(bkgClr, sizeX, sizeY);
 	img->Release();
 
@@ -186,7 +186,7 @@ void SmileyType::CallSmileyService(HANDLE hContact)
 
 	delete m0;
 	delete srvsplit;
-	
+
 	char str[MAXMODULELABELLENGTH];
 	const char *proto = "";
 
@@ -197,8 +197,8 @@ void SmileyType::CallSmileyService(HANDLE hContact)
 	}
 	mir_snprintf(str, sizeof(str), "%s%s", proto, T2A_SM(name.c_str()));
 	CallService(str,
-				ConvertServiceParam(hContact, par1.c_str()), 
-				ConvertServiceParam(hContact, par2.c_str()));
+		ConvertServiceParam(hContact, par1.c_str()), 
+		ConvertServiceParam(hContact, par2.c_str()));
 }
 
 
@@ -209,7 +209,7 @@ SmileyPackType::~SmileyPackType()
 }
 
 static const TCHAR urlRegEx[] = 
-_T("(?:ftp|https|http|file|aim|webcal|irc|msnim|xmpp|gopher|mailto|news|nntp|telnet|wais|prospero)://?[\\w.?%:/$+;]*");
+	_T("(?:ftp|https|http|file|aim|webcal|irc|msnim|xmpp|gopher|mailto|news|nntp|telnet|wais|prospero)://?[\\w.?%:/$+;]*");
 static const TCHAR pathRegEx[] = _T("[\\s\"][a-zA-Z]:[\\\\/][\\w.\\-\\\\/]*");
 static const TCHAR timeRegEx[] = _T("\\d{1,2}:\\d{2}:\\d{2}|\\d{1,2}:\\d{2}");
 
@@ -280,7 +280,7 @@ void SmileyPackType::AddTriggersToSmileyLookup(void)
 			delete m0;
 		}
 	}
-    delete p;
+	delete p;
 }
 
 
@@ -352,7 +352,7 @@ bool SmileyPackType::LoadSmileyFile(const bkstring& filename, bool onlyInfo, boo
 	_close(fh);
 
 	bkstring tbuf;
-	
+
 	if (len>2 && *(wchar_t*)buf == 0xfeff)
 	{
 		tbuf = W2T_SM((wchar_t*)buf+1);
@@ -435,13 +435,13 @@ bool SmileyPackType::LoadSmileyFileMSL(bkstring& tbuf, bool onlyInfo, bkstring& 
 		}
 
 		_TPattern * smiley = _TPattern::compile(
-				_T("^\\s*Smiley(\\*)?\\s*=")				// Is Hidden
-				_T("(?:\\s*\"(.*)\")")						// Smiley file name
-				_T("(?:[\\s,]+(\\-?\\d+))")					// Icon resource id
-				_T("(?:[\\s,]+(R|S)?\"(.*?)\")")			// Trigger text
-				_T("(?:[\\s,]+\"(.*?)\")?")					// Tooltip or insert text
-				_T("(?:[\\s,]+\"(.*?)\")?"),				// Tooltip text
-				_TPattern::MULTILINE_MATCHING);
+			_T("^\\s*Smiley(\\*)?\\s*=")				// Is Hidden
+			_T("(?:\\s*\"(.*)\")")						// Smiley file name
+			_T("(?:[\\s,]+(\\-?\\d+))")					// Icon resource id
+			_T("(?:[\\s,]+(R|S)?\"(.*?)\")")			// Trigger text
+			_T("(?:[\\s,]+\"(.*?)\")?")					// Tooltip or insert text
+			_T("(?:[\\s,]+\"(.*?)\")?"),				// Tooltip text
+			_TPattern::MULTILINE_MATCHING);
 
 		_TMatcher * m0 = smiley->createTMatcher(tbuf);
 
@@ -498,7 +498,7 @@ bool SmileyPackType::LoadSmileyFileMSL(bkstring& tbuf, bool onlyInfo, bkstring& 
 			}
 			else
 				noerr = dat->LoadFromResource(resname, iconIndex);
-			
+
 			if (dat->IsHidden())
 				hiddenSmileys.insert(dat);
 			else
@@ -619,7 +619,7 @@ bool SmileyPackType::LoadSmileyFileXEP(bkstring& tbuf, bool onlyInfo, bkstring& 
 		if (m0->findFirstMatch())
 		{
 			bkstring images = m0->getGroup(1);
-		
+
 			m1 = imagedt_re->createTMatcher(images);
 			if (m1->findFirstMatch())
 			{
@@ -644,7 +644,7 @@ bool SmileyPackType::LoadSmileyFileXEP(bkstring& tbuf, bool onlyInfo, bkstring& 
 			dat->SetImList(m_hSmList, _ttol(m0->getGroup(1).c_str()));
 			dat->m_ToolText = m0->getGroup(2);
 			DecodeHTML(dat->m_ToolText);
-			
+
 			bkstring rec = m0->getGroup(3);
 
 			m1 = expression_re->createTMatcher(rec);
@@ -668,7 +668,7 @@ bool SmileyPackType::LoadSmileyFileXEP(bkstring& tbuf, bool onlyInfo, bkstring& 
 			if (m1->findFirstMatch())
 			{
 				bkstring images = m1->getGroup(1);
-		
+
 				m2 = imagedt_re->createTMatcher(images);
 				if (m2->findFirstMatch())
 				{
@@ -719,7 +719,7 @@ bool SmileyPackListType::AddSmileyPack(bkstring& filename)
 	if (GetSmileyPack(filename) == NULL)
 	{  //not exist yet, so add
 		SmileyPackType *smileyPack = new SmileyPackType;
-		
+
 		res = smileyPack->LoadSmileyFile(filename, FALSE);
 		if (res)
 			m_SmileyPacks.insert(smileyPack);
@@ -756,8 +756,8 @@ void SmileyPackListType::ClearAndFreeAll()
 
 
 SmileyCategoryType::SmileyCategoryType(SmileyPackListType* pSPS, const bkstring& name, 
-									   const bkstring& displayName, 
-									   const bkstring& defaultFilename, SmcType typ)
+	const bkstring& displayName, 
+	const bkstring& defaultFilename, SmcType typ)
 { 
 	m_pSmileyPackStore = pSPS; 
 	type = typ; 
@@ -805,7 +805,7 @@ SmileyCategoryType* SmileyCategoryListType::GetSmileyCategory(const bkstring& na
 {
 	for (int i = 0; i < m_SmileyCategories.getCount(); i++)
 	{
-        if (name.comparei(m_SmileyCategories[i].GetName()) == 0) return &m_SmileyCategories[i];
+		if (name.comparei(m_SmileyCategories[i].GetName()) == 0) return &m_SmileyCategories[i];
 	}
 	return NULL;
 }
@@ -854,11 +854,11 @@ void SmileyCategoryListType::AddAndLoad(const bkstring& name, const bkstring& di
 
 
 void SmileyCategoryListType::AddCategory(const bkstring& name, const bkstring& displayName, 
-										 SmcType typ, const bkstring& defaultFilename)
+	SmcType typ, const bkstring& defaultFilename)
 {
 	if (GetSmileyCategory(name) == NULL)
 		m_SmileyCategories.insert(new SmileyCategoryType(m_pSmileyPackStore, name, 
-			displayName, defaultFilename, typ));
+		displayName, defaultFilename, typ));
 }
 
 
@@ -905,7 +905,7 @@ void SmileyCategoryListType::AddAccountAsCategory(PROTOACCOUNT *acc, const bkstr
 void SmileyCategoryListType::DeleteAccountAsCategory(PROTOACCOUNT *acc)
 {
 	bkstring tname(A2T_SM(acc->szModuleName));
-	
+
 	HANDLE hContact = (HANDLE)CallService( MS_DB_CONTACT_FINDFIRST, 0, 0);
 	while (hContact != NULL) 
 	{
@@ -925,7 +925,7 @@ void SmileyCategoryListType::DeleteAccountAsCategory(PROTOACCOUNT *acc)
 
 	for (int i = 0; i < m_SmileyCategories.getCount(); i++)
 	{
-        if (tname.comparei(m_SmileyCategories[i].GetName()) == 0)
+		if (tname.comparei(m_SmileyCategories[i].GetName()) == 0)
 		{
 			m_SmileyCategories.remove(i);
 			break;
@@ -937,7 +937,7 @@ void SmileyCategoryListType::AddContactTransportAsCategory(HANDLE hContact, cons
 {
 	char* proto = (char*)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)hContact, 0);
 	if (proto == NULL) return;
-	
+
 	DBVARIANT dbv;
 	if (DBGetContactSettingTString(hContact, proto, "Transport", &dbv) == 0)
 	{
@@ -974,7 +974,7 @@ void SmileyCategoryListType::AddContactTransportAsCategory(HANDLE hContact, cons
 
 			if (_taccess(patha.c_str(), 0) != 0) 
 				paths = defaultFile;
-			
+
 			AddCategory(displayName, displayName, smcProto, paths); 
 		}
 		else

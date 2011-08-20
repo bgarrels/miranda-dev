@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2008 - 2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2008 - 2011 Boris Krasnovskiy All Rights Reserved
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -90,7 +90,7 @@ static void SetPosition(HWND hwnd)
 
 		HRESULT hr = RichEditOle->GetObject(i, &reObj, REO_GETOBJ_POLEOBJ);
 		if (FAILED(hr)) continue;
-		
+
 		ISmileyBase *igsc = NULL;
 		if (reObj.clsid == CLSID_NULL) 
 			reObj.poleobj->QueryInterface(IID_ISmileyAddSmiley, (void**) &igsc);
@@ -147,10 +147,10 @@ static void SetTooltip(long x, long y, HWND hwnd, RichEditData* rdt)
 			if (rdt->tipActive == -1)
 			{
 				rdt->hToolTip = CreateWindowEx(WS_EX_TOPMOST, TOOLTIPS_CLASS, _T(""), 
-				TTS_NOPREFIX | WS_POPUP, 
-				CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 
-				hwnd, NULL, g_hInst, NULL);
-		
+					TTS_NOPREFIX | WS_POPUP, 
+					CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 
+					hwnd, NULL, g_hInst, NULL);
+
 				SendMessage(rdt->hToolTip, TTM_ADDTOOL, 0, (LPARAM)&ti);
 			}
 
@@ -192,7 +192,7 @@ static void SmileyToTextCutPrep(RichEditData* rdt)
 {
 	if ((rdt->inputarea && !opt.InputSmileys) || rdt->dontReplace) return;
 
-    SendMessage(rdt->hwnd, WM_SETREDRAW, FALSE, 0);
+	SendMessage(rdt->hwnd, WM_SETREDRAW, FALSE, 0);
 	CHARRANGE sel;
 	SendMessage(rdt->hwnd, EM_EXGETSEL, 0, (LPARAM)&sel);
 	ReplaceContactSmileysWithText(rdt, sel, true);
@@ -202,7 +202,7 @@ static void SmileyToTextCutRest(RichEditData* rdt)
 {
 	if ((rdt->inputarea && !opt.InputSmileys) || rdt->dontReplace) return;
 
-    CHARRANGE sel;
+	CHARRANGE sel;
 	SendMessage(rdt->hwnd, EM_EXGETSEL, 0, (LPARAM)&sel);
 	ReplaceContactSmileys(rdt, sel, false, true);
 	SendMessage(rdt->hwnd, WM_SETREDRAW, TRUE, 0);
@@ -221,147 +221,147 @@ static LRESULT CALLBACK RichEditSubclass(HWND hwnd, UINT uMsg, WPARAM wParam, LP
 
 	switch(uMsg) 
 	{
-		case WM_DESTROY:
-			CloseRichCallback(hwnd, false);
-			break;
+	case WM_DESTROY:
+		CloseRichCallback(hwnd, false);
+		break;
 
-		case WM_COPY:
-		case WM_CUT:
+	case WM_COPY:
+	case WM_CUT:
+		SmileyToTextCutPrep(rdt);
+		break;
+
+	case WM_PAINT:
+		SetPosition(hwnd);
+		break;
+
+	case EM_STREAMOUT:
+		if (wParam & SFF_SELECTION)
 			SmileyToTextCutPrep(rdt);
-			break;
+		else
+		{
+			sel = allsel;
+			ReplaceContactSmileysWithText(rdt, sel, true);
+		}
+		break;
 
-		case WM_PAINT:
-			SetPosition(hwnd);
-            break;
+	case WM_KEYDOWN:
+		if ((wParam == 'C' || wParam == VK_INSERT) && (GetKeyState(VK_CONTROL) & 0x8000))
+		{
+			SmileyToTextCutPrep(rdt);
+		}
+		else if ((wParam == 'X' && (GetKeyState(VK_CONTROL) & 0x8000)) ||
+			(wParam == VK_DELETE && (GetKeyState(VK_SHIFT) & 0x8000)))
+		{
+			SmileyToTextCutPrep(rdt);
+		}
+		else if (wParam == VK_TAB && ((GetKeyState(VK_CONTROL) | GetKeyState(VK_SHIFT)) & 0x8000) == 0)
+		{
+			SendMessage(hwnd, EM_EXGETSEL, 0, (LPARAM)&sel);
+			sel.cpMin = max(sel.cpMin - 20, 0);
 
-        case EM_STREAMOUT:
-			if (wParam & SFF_SELECTION)
-				SmileyToTextCutPrep(rdt);
-			else
-			{
-				sel = allsel;
-				ReplaceContactSmileysWithText(rdt, sel, true);
-			}
-			break;
-
-		case WM_KEYDOWN:
-			if ((wParam == 'C' || wParam == VK_INSERT) && (GetKeyState(VK_CONTROL) & 0x8000))
-			{
-				SmileyToTextCutPrep(rdt);
-			}
-			else if ((wParam == 'X' && (GetKeyState(VK_CONTROL) & 0x8000)) ||
-				(wParam == VK_DELETE && (GetKeyState(VK_SHIFT) & 0x8000)))
-			{
-				SmileyToTextCutPrep(rdt);
-			}
-			else if (wParam == VK_TAB && ((GetKeyState(VK_CONTROL) | GetKeyState(VK_SHIFT)) & 0x8000) == 0)
-			{
-				SendMessage(hwnd, EM_EXGETSEL, 0, (LPARAM)&sel);
-				sel.cpMin = max(sel.cpMin - 20, 0);
-
-				ReplaceContactSmileysWithText(rdt, sel, true);
-			}
-			break;
+			ReplaceContactSmileysWithText(rdt, sel, true);
+		}
+		break;
 	}
 
 	LRESULT result = CallWindowProc(wpOrigWndProc, hwnd, uMsg, wParam, lParam); 
 
 	switch(uMsg) 
 	{
-		case WM_DESTROY:
-			CloseRichCallback(hwnd, true);
-			break;
+	case WM_DESTROY:
+		CloseRichCallback(hwnd, true);
+		break;
 
-		case WM_MOUSEMOVE:
-			SetTooltip(LOWORD(lParam), HIWORD(lParam), hwnd, rdt);
-			break;
+	case WM_MOUSEMOVE:
+		SetTooltip(LOWORD(lParam), HIWORD(lParam), hwnd, rdt);
+		break;
 
-		case WM_PAINT:
-		case WM_HSCROLL:
-		case WM_VSCROLL:
-			SetPosition(hwnd);
-			break;
+	case WM_PAINT:
+	case WM_HSCROLL:
+	case WM_VSCROLL:
+		SetPosition(hwnd);
+		break;
 
-		case WM_COPY:
-		case WM_CUT:
+	case WM_COPY:
+	case WM_CUT:
+		SmileyToTextCutRest(rdt);
+		break;
+
+	case EM_STREAMOUT:
+		if (wParam & SFF_SELECTION)
 			SmileyToTextCutRest(rdt);
+		else
+			ReplaceContactSmileys(rdt, allsel, false, true);
+		break;
+
+	case WM_KEYDOWN:
+		if ((wParam == 'C' || wParam == VK_INSERT) && (GetKeyState(VK_CONTROL) & 0x8000))
+		{
+			SmileyToTextCutRest(rdt);
+		}
+		else if ((wParam == 'X' && (GetKeyState(VK_CONTROL) & 0x8000)) || 
+			(wParam == VK_DELETE && (GetKeyState(VK_SHIFT) & 0x8000)))
+		{
+			SmileyToTextCutRest(rdt);
+		}
+		else if (wParam == VK_TAB && ((GetKeyState(VK_CONTROL) | GetKeyState(VK_SHIFT)) & 0x8000) == 0)
+		{
+			sel.cpMax = LONG_MAX;
+			bool hascont = rdt->hContact != NULL; 
+			ReplaceContactSmileys(rdt, sel, false, hascont);
+		}
+		break;
+
+	case WM_CHAR:
+		if (!rdt->inputarea || (rdt->inputarea && !opt.InputSmileys)) 
 			break;
 
-		case EM_STREAMOUT:
-			if (wParam & SFF_SELECTION)
-				SmileyToTextCutRest(rdt);
-			else
-				ReplaceContactSmileys(rdt, allsel, false, true);
+		if (lParam & (1 << 28))	// ALT key
 			break;
 
-		case WM_KEYDOWN:
-			if ((wParam == 'C' || wParam == VK_INSERT) && (GetKeyState(VK_CONTROL) & 0x8000))
-			{
-				SmileyToTextCutRest(rdt);
-			}
-			else if ((wParam == 'X' && (GetKeyState(VK_CONTROL) & 0x8000)) || 
-				(wParam == VK_DELETE && (GetKeyState(VK_SHIFT) & 0x8000)))
-			{
-				SmileyToTextCutRest(rdt);
-			}
-			else if (wParam == VK_TAB && ((GetKeyState(VK_CONTROL) | GetKeyState(VK_SHIFT)) & 0x8000) == 0)
-			{
-				sel.cpMax = LONG_MAX;
-				bool hascont = rdt->hContact != NULL; 
-				ReplaceContactSmileys(rdt, sel, false, hascont);
-			}
+		if ((lParam & 0xFF) > 2)	// Repeat rate
 			break;
 
-		case WM_CHAR:
-			if (!rdt->inputarea || (rdt->inputarea && !opt.InputSmileys)) 
-				break;
-
-			if (lParam & (1 << 28))	// ALT key
-				break;
-
-			if ((lParam & 0xFF) > 2)	// Repeat rate
-				break;
-
-			if (wParam > ' ' && opt.EnforceSpaces)
-				break;
-
-			if (wParam == 0x16)
-			{
-				ReplaceContactSmileys(rdt, allsel, false, false);
-				break;
-			}
-
-			if (opt.DCursorSmiley)
-			{
-				ReplaceContactSmileys(rdt, allsel, true, true);
-			}
-			else
-			{
-				if (wParam >= ' ' || wParam == '\n' || wParam == '\r')
- 				{
-					SendMessage(hwnd, EM_EXGETSEL, 0, (LPARAM)&sel);
-					sel.cpMin = max(sel.cpMin - 20, 0);
-					sel.cpMax += 20;
-
-					ReplaceContactSmileysWithText(rdt, sel, true);
-					ReplaceContactSmileys(rdt, sel, false, true);
-				}
-			}
+		if (wParam > ' ' && opt.EnforceSpaces)
 			break;
 
-		case EM_PASTESPECIAL:
-		case WM_PASTE:
-		case EM_REPLACESEL:
-		case WM_SETTEXT:
-		case EM_SETTEXTEX:
-			if (rdt->inputarea)
-				ReplaceContactSmileys(rdt, allsel, false, false);
-			break;
-
-		case WM_REMAKERICH:
+		if (wParam == 0x16)
+		{
 			ReplaceContactSmileys(rdt, allsel, false, false);
 			break;
- 	}
+		}
+
+		if (opt.DCursorSmiley)
+		{
+			ReplaceContactSmileys(rdt, allsel, true, true);
+		}
+		else
+		{
+			if (wParam >= ' ' || wParam == '\n' || wParam == '\r')
+			{
+				SendMessage(hwnd, EM_EXGETSEL, 0, (LPARAM)&sel);
+				sel.cpMin = max(sel.cpMin - 20, 0);
+				sel.cpMax += 20;
+
+				ReplaceContactSmileysWithText(rdt, sel, true);
+				ReplaceContactSmileys(rdt, sel, false, true);
+			}
+		}
+		break;
+
+	case EM_PASTESPECIAL:
+	case WM_PASTE:
+	case EM_REPLACESEL:
+	case WM_SETTEXT:
+	case EM_SETTEXTEX:
+		if (rdt->inputarea)
+			ReplaceContactSmileys(rdt, allsel, false, false);
+		break;
+
+	case WM_REMAKERICH:
+		ReplaceContactSmileys(rdt, allsel, false, false);
+		break;
+	}
 
 	return result;
 }
@@ -425,55 +425,55 @@ static LRESULT CALLBACK RichEditOwnerSubclass(HWND hwnd, UINT uMsg, WPARAM wPara
 
 	switch(uMsg) 
 	{
-		case WM_DESTROY:
+	case WM_DESTROY:
+		{
+			RichEditData* rdt = g_RichEditList.find((RichEditData*)&rdto->hwndInput);
+			if (rdt && (!rdt->inputarea || opt.InputSmileys))
 			{
-				RichEditData* rdt = g_RichEditList.find((RichEditData*)&rdto->hwndInput);
-				if (rdt && (!rdt->inputarea || opt.InputSmileys))
-				{
-					CHARRANGE sel = allsel;
-					rdt->dontReplace = true;
-					ReplaceSmileysWithText(rdt->hwnd, sel, false);
-				}
+				CHARRANGE sel = allsel;
+				rdt->dontReplace = true;
+				ReplaceSmileysWithText(rdt->hwnd, sel, false);
 			}
-			CloseRichOwnerCallback(hwnd, false);
-			break;
+		}
+		CloseRichOwnerCallback(hwnd, false);
+		break;
 
 
-		case WM_COMMAND:
-			if (LOWORD(wParam) == IDOK || LOWORD(wParam) == 1624)
+	case WM_COMMAND:
+		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == 1624)
+		{
+			RichEditData* rdt = g_RichEditList.find((RichEditData*)&rdto->hwndInput);
+			if (rdt && (!rdt->inputarea || opt.InputSmileys))
 			{
-				RichEditData* rdt = g_RichEditList.find((RichEditData*)&rdto->hwndInput);
-				if (rdt && (!rdt->inputarea || opt.InputSmileys))
-				{
-					rdt->dontReplace = true;
-					CHARRANGE sel = allsel;
-					ReplaceSmileysWithText(rdt->hwnd, sel, false);
-				}
+				rdt->dontReplace = true;
+				CHARRANGE sel = allsel;
+				ReplaceSmileysWithText(rdt->hwnd, sel, false);
 			}
-			break;
+		}
+		break;
 	}
 
 	LRESULT result = CallWindowProc(wpOrigWndProc, hwnd, uMsg, wParam, lParam); 
 
 	switch(uMsg) 
 	{
-		case WM_DESTROY:
-			CloseRichOwnerCallback(hwnd, true);
-			break;
+	case WM_DESTROY:
+		CloseRichOwnerCallback(hwnd, true);
+		break;
 
-		case WM_COMMAND:
-			if (LOWORD(wParam) == IDOK || LOWORD(wParam) == 1624) // && lParam == 0)
+	case WM_COMMAND:
+		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == 1624) // && lParam == 0)
+		{
+			RichEditData* rdt = g_RichEditList.find((RichEditData*)&rdto->hwndInput);
+			if (rdt)
 			{
-				RichEditData* rdt = g_RichEditList.find((RichEditData*)&rdto->hwndInput);
-				if (rdt)
-				{
-					CHARRANGE sel = allsel;
-					if (!result) ReplaceContactSmileys(rdt, sel, false, false);
-					rdt->dontReplace = false;
-				}
+				CHARRANGE sel = allsel;
+				if (!result) ReplaceContactSmileys(rdt, sel, false, false);
+				rdt->dontReplace = false;
 			}
-			break;
- 	}
+		}
+		break;
+	}
 	return result;
 }
 
@@ -534,7 +534,7 @@ void ProcessAllInputAreas(bool restoreText)
 			}
 			else
 			{
-                ReplaceContactSmileys(rdt, allsel, false, false);
+				ReplaceContactSmileys(rdt, allsel, false, false);
 			}
 		}
 	}

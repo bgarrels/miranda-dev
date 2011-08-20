@@ -1,6 +1,6 @@
- /*
+/*
 Miranda SmileyAdd Plugin
-Copyright (C) 2005 - 2009 Boris Krasnovskiy
+Copyright (C) 2005 - 2011 Boris Krasnovskiy
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
 This program is free software; you can redistribute it and/or
@@ -35,63 +35,63 @@ const unsigned SoundSmiley   = 16;
 class SmileyType
 {
 protected:
-  unsigned m_flags;
-  int m_index;
+	unsigned m_flags;
+	int m_index;
 
-  SIZE m_size;
+	SIZE m_size;
 
-  HICON m_SmileyIcon;
-  ImageBase* m_xepimg;
+	HICON m_SmileyIcon;
+	ImageBase* m_xepimg;
 
-  bkstring m_filepath;
+	bkstring m_filepath;
 
-  void SetFlagsBit(unsigned flag, bool set)
-  { if (set) m_flags |= flag; else m_flags &= ~flag; } 
+	void SetFlagsBit(unsigned flag, bool set)
+	{ if (set) m_flags |= flag; else m_flags &= ~flag; } 
 
 public:
 
-  bkstring m_TriggerText;
-  bkstring m_ToolText;
-  bkstring m_InsertText;
+	bkstring m_TriggerText;
+	bkstring m_ToolText;
+	bkstring m_InsertText;
 
-  SmileyType(void);
-  ~SmileyType();
+	SmileyType(void);
+	~SmileyType();
 
-  const bkstring& GetTriggerText(void) const { return m_TriggerText; }
-  const bkstring& GetToolText(void) const { return m_ToolText; }
-  const bkstring& GetInsertText(void) const { return m_InsertText; }
-  const bkstring& GetFilePath(void) const { return m_filepath; }
-  
-  bool IsHidden(void) const { return (m_flags & HiddenSmiley) != 0; }
-  bool IsRegEx(void) const { return (m_flags & RegExSmiley) != 0; }
-  bool IsService(void) const { return (m_flags & ServiceSmiley) != 0; }
-  bool IsSound(void) const { return (m_flags & SoundSmiley) != 0; }
-  bool IsText(void) const { return (m_flags & TextSmiley) != 0; }
-  
-  bool IsFileFound(void) { return _taccess(m_filepath.c_str(), 0) == 0; }
-  bool IsValid(void) { return m_size.cx != 0; }
+	const bkstring& GetTriggerText(void) const { return m_TriggerText; }
+	const bkstring& GetToolText(void) const { return m_ToolText; }
+	const bkstring& GetInsertText(void) const { return m_InsertText; }
+	const bkstring& GetFilePath(void) const { return m_filepath; }
 
-  ImageBase* CreateCachedImage(void);
+	bool IsHidden(void) const { return (m_flags & HiddenSmiley) != 0; }
+	bool IsRegEx(void) const { return (m_flags & RegExSmiley) != 0; }
+	bool IsService(void) const { return (m_flags & ServiceSmiley) != 0; }
+	bool IsSound(void) const { return (m_flags & SoundSmiley) != 0; }
+	bool IsText(void) const { return (m_flags & TextSmiley) != 0; }
 
-  void GetSize(SIZE& size);
-  int GetStaticFrame(void) const { return m_index; }
-  
-  HICON GetIcon(void);
-  HICON GetIconDup(void);
-  HBITMAP GetBitmap(COLORREF bkgClr, int sizeX, int sizeY);
-  
-  void CallSmileyService(HANDLE hContact);
+	bool IsFileFound(void) { return _taccess(m_filepath.c_str(), 0) == 0; }
+	bool IsValid(void) { return m_size.cx != 0; }
 
-  void SetHidden(bool hid) { SetFlagsBit(HiddenSmiley, hid); }
-  void SetRegEx(bool regex) { SetFlagsBit(RegExSmiley, regex); }
-  void SetService(bool service) { SetFlagsBit(ServiceSmiley, service); }
-  void SetSound(bool sound) { SetFlagsBit(SoundSmiley, sound); }
-  void SetText(bool text) { SetFlagsBit(TextSmiley, text); }
+	ImageBase* CreateCachedImage(void);
 
-  void SetImList(HIMAGELIST hImLst, long i);
-  
-  bool LoadFromResource(const bkstring& file, const int index);
-  bool LoadFromImage(IStream* pStream);
+	void GetSize(SIZE& size);
+	int GetStaticFrame(void) const { return m_index; }
+
+	HICON GetIcon(void);
+	HICON GetIconDup(void);
+	HBITMAP GetBitmap(COLORREF bkgClr, int sizeX, int sizeY);
+
+	void CallSmileyService(HANDLE hContact);
+
+	void SetHidden(bool hid) { SetFlagsBit(HiddenSmiley, hid); }
+	void SetRegEx(bool regex) { SetFlagsBit(RegExSmiley, regex); }
+	void SetService(bool service) { SetFlagsBit(ServiceSmiley, service); }
+	void SetSound(bool sound) { SetFlagsBit(SoundSmiley, sound); }
+	void SetText(bool text) { SetFlagsBit(TextSmiley, text); }
+
+	void SetImList(HIMAGELIST hImLst, long i);
+
+	bool LoadFromResource(const bkstring& file, const int index);
+	bool LoadFromImage(IStream* pStream);
 };
 
 
@@ -126,84 +126,84 @@ public:
 class SmileyPackType
 {
 public:
-  typedef SMOBJLIST<SmileyType> SmileyVectorType;
-  typedef SMOBJLIST<SmileyLookup> SmileyLookupType;
+	typedef SMOBJLIST<SmileyType> SmileyVectorType;
+	typedef SMOBJLIST<SmileyLookup> SmileyLookupType;
 
-  POINT selec, win;
+	POINT selec, win;
 
 private:
-  bkstring m_Filename;  //used as identification
-  bkstring m_Name;
-  bkstring m_Author;
-  bkstring m_Date;
-  bkstring m_Version;
-  bkstring m_ButtonSmiley;
+	bkstring m_Filename;  //used as identification
+	bkstring m_Name;
+	bkstring m_Author;
+	bkstring m_Date;
+	bkstring m_Version;
+	bkstring m_ButtonSmiley;
 
-  HIMAGELIST m_hSmList;
+	HIMAGELIST m_hSmList;
 
-  int m_VisibleCount; 
+	int m_VisibleCount; 
 
-  SmileyVectorType m_SmileyList;
-  SmileyLookupType m_SmileyLookup;
+	SmileyVectorType m_SmileyList;
+	SmileyLookupType m_SmileyLookup;
 
-  bool errorFound;
+	bool errorFound;
 
-  void InsertLookup(SmileyType& sml, bkstring& lk, bool first);
-  void AddTriggersToSmileyLookup(void);
-  void ReplaceAllSpecials(const bkstring& Input, bkstring& Output);
-  bool LoadSmileyFileMSL(bkstring& tbuf, bool onlyInfo, bkstring& modpath);
-  bool LoadSmileyFileXEP(bkstring& tbuf, bool onlyInfo, bkstring& modpath);
+	void InsertLookup(SmileyType& sml, bkstring& lk, bool first);
+	void AddTriggersToSmileyLookup(void);
+	void ReplaceAllSpecials(const bkstring& Input, bkstring& Output);
+	bool LoadSmileyFileMSL(bkstring& tbuf, bool onlyInfo, bkstring& modpath);
+	bool LoadSmileyFileXEP(bkstring& tbuf, bool onlyInfo, bkstring& modpath);
 
 public:
-  SmileyPackType();
-  ~SmileyPackType();
+	SmileyPackType();
+	~SmileyPackType();
 
-  SmileyVectorType& GetSmileyList(void) { return m_SmileyList; }
-  SmileyLookupType* GetSmileyLookup(void) { return &m_SmileyLookup; }
-  
-  const bkstring& GetFilename(void) const { return m_Filename; }
-  const bkstring& GetName(void) const { return m_Name; }
-  const bkstring& GetAuthor(void) const { return m_Author; }
-  const bkstring& GetDate(void) const { return m_Date; }
-  const bkstring& GetVersion(void) const { return m_Version; }
+	SmileyVectorType& GetSmileyList(void) { return m_SmileyList; }
+	SmileyLookupType* GetSmileyLookup(void) { return &m_SmileyLookup; }
 
-  int SmileyCount(void) const { return m_SmileyList.getCount(); }
-  int VisibleSmileyCount(void) const { return m_VisibleCount; }
+	const bkstring& GetFilename(void) const { return m_Filename; }
+	const bkstring& GetName(void) const { return m_Name; }
+	const bkstring& GetAuthor(void) const { return m_Author; }
+	const bkstring& GetDate(void) const { return m_Date; }
+	const bkstring& GetVersion(void) const { return m_Version; }
 
-  SmileyType* GetSmiley(unsigned index);
+	int SmileyCount(void) const { return m_SmileyList.getCount(); }
+	int VisibleSmileyCount(void) const { return m_VisibleCount; }
 
-  const TCHAR* GetButtonSmiley(void) const { return m_ButtonSmiley.c_str(); }
+	SmileyType* GetSmiley(unsigned index);
 
-  bool LoadSmileyFile(const bkstring& filename, bool onlyInfo, bool noerr = false);
-    
-  void Clear(void);
+	const TCHAR* GetButtonSmiley(void) const { return m_ButtonSmiley.c_str(); }
+
+	bool LoadSmileyFile(const bkstring& filename, bool onlyInfo, bool noerr = false);
+
+	void Clear(void);
 };
 
 
 class SmileyPackListType 
 {
 public:
-  typedef SMOBJLIST<SmileyPackType> SmileyPackVectorType;
+	typedef SMOBJLIST<SmileyPackType> SmileyPackVectorType;
 
 private:
-  SmileyPackVectorType m_SmileyPacks;
+	SmileyPackVectorType m_SmileyPacks;
 
 public:
-  int NumberOfSmileyPacks(void) { return m_SmileyPacks.getCount(); }
+	int NumberOfSmileyPacks(void) { return m_SmileyPacks.getCount(); }
 
-  bool AddSmileyPack(bkstring& filename);
-  void ClearAndFreeAll(void);
-  SmileyPackType* GetSmileyPack(bkstring& filename);
+	bool AddSmileyPack(bkstring& filename);
+	void ClearAndFreeAll(void);
+	SmileyPackType* GetSmileyPack(bkstring& filename);
 };
 
 
 typedef enum
 {
-    smcNone,
-    smcStd,
-    smcProto,
-    smcCustom,
-    smcExt
+	smcNone,
+	smcStd,
+	smcProto,
+	smcCustom,
+	smcExt
 } SmcType;
 
 
@@ -222,16 +222,16 @@ public:
 	SmileyCategoryType() { type = smcNone; m_pSmileyPackStore = NULL; };
 	SmileyCategoryType(SmileyPackListType* pSPS, const bkstring& name, 
 		const bkstring& displayName, const bkstring& defaultFilename, SmcType typ);
-	  
+
 	const bkstring& GetDisplayName(void) const { return m_DisplayName; }
 	const bkstring& GetName(void) const { return m_Name; }
 	const bkstring& GetFilename(void) const { return m_Filename; }
 
-    bool IsCustom(void) { return type == smcCustom; }
-    bool IsProto(void)  { return type == smcProto;  }
-    bool IsExt(void)    { return type == smcExt;  }
+	bool IsCustom(void) { return type == smcCustom; }
+	bool IsProto(void)  { return type == smcProto;  }
+	bool IsExt(void)    { return type == smcExt;  }
 
-    SmcType GetType(void) { return type; }
+	SmcType GetType(void) { return type; }
 
 	SmileyPackType* GetSmileyPack(void);
 
@@ -248,37 +248,37 @@ public:
 class SmileyCategoryListType
 {
 public:
-  typedef SMOBJLIST<SmileyCategoryType> SmileyCategoryVectorType;
+	typedef SMOBJLIST<SmileyCategoryType> SmileyCategoryVectorType;
 
 private:
-  SmileyCategoryVectorType m_SmileyCategories;
-  SmileyPackListType* m_pSmileyPackStore;
+	SmileyCategoryVectorType m_SmileyCategories;
+	SmileyPackListType* m_pSmileyPackStore;
 
 public:  
-  void SetSmileyPackStore(SmileyPackListType* pSPS)  { m_pSmileyPackStore = pSPS; }
+	void SetSmileyPackStore(SmileyPackListType* pSPS)  { m_pSmileyPackStore = pSPS; }
 
-  SmileyCategoryType* GetSmileyCategory(const bkstring& name);
-  SmileyCategoryType* GetSmileyCategory(unsigned index);
-  SmileyPackType* GetSmileyPack(bkstring& name);
-  SmileyCategoryVectorType* GetSmileyCategoryList(void) { return &m_SmileyCategories; };
+	SmileyCategoryType* GetSmileyCategory(const bkstring& name);
+	SmileyCategoryType* GetSmileyCategory(unsigned index);
+	SmileyPackType* GetSmileyPack(bkstring& name);
+	SmileyCategoryVectorType* GetSmileyCategoryList(void) { return &m_SmileyCategories; };
 
-  int NumberOfSmileyCategories(void) { return m_SmileyCategories.getCount(); }
+	int NumberOfSmileyCategories(void) { return m_SmileyCategories.getCount(); }
 
-  void AddCategory(const bkstring& name, const bkstring& displayName, SmcType typ,
-	  const bkstring& defaultFilename = bkstring(_T("Smileys\\AnimSmiley.asl")));
-  void AddAndLoad(const bkstring& name, const bkstring& displayName);
-  void AddAllProtocolsAsCategory(void); 
-  void AddAccountAsCategory(PROTOACCOUNT *acc, const bkstring& defaultFile);
-  void AddContactTransportAsCategory(HANDLE hContact, const bkstring& defaultFile);
+	void AddCategory(const bkstring& name, const bkstring& displayName, SmcType typ,
+		const bkstring& defaultFilename = bkstring(_T("Smileys\\nova\\default.msl")));
+	void AddAndLoad(const bkstring& name, const bkstring& displayName);
+	void AddAllProtocolsAsCategory(void); 
+	void AddAccountAsCategory(PROTOACCOUNT *acc, const bkstring& defaultFile);
+	void AddContactTransportAsCategory(HANDLE hContact, const bkstring& defaultFile);
 
-  void ClearAndLoadAll(void);
-  void ClearAll(void) 
-  { m_pSmileyPackStore->ClearAndFreeAll(); m_SmileyCategories.destroy(); }
+	void ClearAndLoadAll(void);
+	void ClearAll(void) 
+	{ m_pSmileyPackStore->ClearAndFreeAll(); m_SmileyCategories.destroy(); }
 
-  bool DeleteCustomCategory(int index);
-  void DeleteAccountAsCategory(PROTOACCOUNT *acc);
+	bool DeleteCustomCategory(int index);
+	void DeleteAccountAsCategory(PROTOACCOUNT *acc);
 
-  void SaveSettings(void);
+	void SaveSettings(void);
 };
 
 extern SmileyPackListType g_SmileyPacks;
