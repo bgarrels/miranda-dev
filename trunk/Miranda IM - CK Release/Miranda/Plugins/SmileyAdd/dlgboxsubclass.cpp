@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2005 - 2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005 - 2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
 This program is free software; you can redistribute it and/or
@@ -25,11 +25,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //***************************************************//
 //              DISCLAIMER!!!
 // we are not supposed to use this object, so be aware
-typedef struct NewMessageWindowLParam {
-    HANDLE hContact;
-    int isSend;
-    const char *szInitialText;
-} msgData;
+typedef struct NewMessageWindowLParam 
+{
+	HANDLE hContact;
+	int isSend;
+	const char *szInitialText;
+} 
+msgData;
 // this is an undocumented object!!!!!!!
 // subject to change in miranda versions...!!!!!!
 //              DISCLAIMER!!!
@@ -49,22 +51,22 @@ class MsgWndData
 {
 public:
 	HWND hwnd;
-    char ProtocolName[52];
-    HWND REdit;
-    HWND QuoteB;
-    HWND MEdit;
-    HWND MOK;
-    HWND LButton;
-    mutable HWND hSmlButton;
+	char ProtocolName[52];
+	HWND REdit;
+	HWND QuoteB;
+	HWND MEdit;
+	HWND MOK;
+	HWND LButton;
+	mutable HWND hSmlButton;
 	mutable HBITMAP hSmlBmp;
 	mutable HICON hSmlIco;
-    int idxLastChar;
+	int idxLastChar;
 	WNDPROC wpOrigWndProc;
 	HANDLE hContact;
-    bool doSmileyReplace;
-    bool doSmileyButton;
-    bool OldButtonPlace;
-    bool isSplit;
+	bool doSmileyReplace;
+	bool doSmileyButton;
+	bool OldButtonPlace;
+	bool isSplit;
 	bool isSend;
 
 	MsgWndData()
@@ -163,20 +165,20 @@ public:
 
 		if ((REdit = GetDlgItem(hwnd, MI_IDC_LOG)) != NULL) 
 		{
- 			GetClassName(REdit, szClassName, SIZEOF(szClassName));
+			GetClassName(REdit, szClassName, SIZEOF(szClassName));
 			if (_tcscmp(szClassName, _T("RichEdit20A")) != 0 && 
-			    _tcscmp(szClassName, _T("RichEdit20W")) != 0 &&
-			    _tcscmp(szClassName, _T("RICHEDIT50W")) != 0)  return false; 
+				_tcscmp(szClassName, _T("RichEdit20W")) != 0 &&
+				_tcscmp(szClassName, _T("RICHEDIT50W")) != 0)  return false; 
 		}
 		else return false; 
 
 		if ((MEdit = GetDlgItem(hwnd, MI_IDC_MESSAGE)) != NULL) 
 		{
- 			GetClassName(MEdit, szClassName, SIZEOF(szClassName));
+			GetClassName(MEdit, szClassName, SIZEOF(szClassName));
 			if (_tcscmp(szClassName, _T("Edit")) != 0 &&  
 				_tcscmp(szClassName, _T("RichEdit20A")) != 0 && 
-			    _tcscmp(szClassName, _T("RichEdit20W")) != 0 &&
-			    _tcscmp(szClassName, _T("RICHEDIT50W")) != 0)  return false; 
+				_tcscmp(szClassName, _T("RichEdit20W")) != 0 &&
+				_tcscmp(szClassName, _T("RICHEDIT50W")) != 0)  return false; 
 		}
 		else return false;
 
@@ -219,7 +221,8 @@ public:
 
 		doSmileyButton &= OldButtonPlace || showButtonLine;
 
-		if (ProtocolName[0] != 0)		{
+		if (ProtocolName[0] != 0)
+		{
 			INT_PTR cap = CallProtoService(ProtocolName, PS_GETCAPS, PFLAGNUM_1, 0);
 			doSmileyButton  &= ((cap & PF1_IMSEND) != 0);
 			doSmileyReplace &= ((cap & PF1_IMRECV) != 0);
@@ -230,18 +233,19 @@ public:
 			//create smiley button
 			RECT rect = CalcSmileyButtonPos();
 
-			hSmlButton = CreateWindowEx( WS_EX_LEFT|WS_EX_NOPARENTNOTIFY|WS_EX_TOPMOST,
-							MIRANDABUTTONCLASS,
-							_T("S"),
-							WS_CHILD|WS_VISIBLE|WS_TABSTOP, // window style
-							rect.left,                      // horizontal position of window
-							rect.top,                       // vertical position of window
-							rect.bottom - rect.top + 1,     // window width
-							rect.bottom - rect.top + 1,     // window height
-							GetParent(LButton),             // handle to parent or owner window
-							(HMENU) IDC_SMLBUTTON,          // menu handle or child identifier
-							NULL,                           // handle to application instance
-							NULL);                          // window-creation data
+			hSmlButton = CreateWindowEx(
+				WS_EX_LEFT | WS_EX_NOPARENTNOTIFY | WS_EX_TOPMOST,
+				MIRANDABUTTONCLASS,
+				_T("S"),
+				WS_CHILD|WS_VISIBLE|WS_TABSTOP, // window style
+				rect.left,                      // horizontal position of window
+				rect.top,                       // vertical position of window
+				rect.bottom - rect.top + 1,     // window width
+				rect.bottom - rect.top + 1,     // window height
+				GetParent(LButton),             // handle to parent or owner window
+				(HMENU) IDC_SMLBUTTON,          // menu handle or child identifier
+				NULL,                           // handle to application instance
+				NULL);                          // window-creation data
 
 			// Conversion to bitmap done to prevent Miranda from scaling the image
 			SmileyType* sml = FindButtonSmiley(SmileyPack);
@@ -321,7 +325,7 @@ static void MsgWndDetect(HWND hwndDlg, HANDLE hContact, msgData* datm)
 
 		// Get the protocol for this contact to display correct smileys.
 		char *protonam = (char*) CallService(MS_PROTO_GETCONTACTBASEPROTO, 
-										(WPARAM)DecodeMetaContact(dat.hContact), 0);
+			(WPARAM)DecodeMetaContact(dat.hContact), 0);
 
 		if (protonam)
 		{
@@ -340,7 +344,7 @@ static void MsgWndDetect(HWND hwndDlg, HANDLE hContact, msgData* datm)
 		else 
 			msgwnd = NULL;
 		ReleaseMutex(g_hMutex);
-		
+
 		if (msgwnd != NULL)
 		{
 			msgwnd->wpOrigWndProc = (WNDPROC)SetWindowLongPtr(hwndDlg, GWLP_WNDPROC, (LONG_PTR)MessageDlgSubclas);
@@ -359,21 +363,21 @@ static LRESULT CALLBACK MessageDlgSubclas(HWND hwnd, UINT uMsg, WPARAM wParam, L
 
 	switch(uMsg) 
 	{
-		case DM_OPTIONSAPPLIED:
-			dat->clear();
-			dat->CreateSmileyButton();
-			break;
+	case DM_OPTIONSAPPLIED:
+		dat->clear();
+		dat->CreateSmileyButton();
+		break;
 
-		case DM_APPENDTOLOG:
-			if (opt.PluginSupportEnabled)
-			{
-				//get length of text now before things can get added...
-				GETTEXTLENGTHEX gtl;
-				gtl.codepage = 1200;
-				gtl.flags = GTL_PRECISE | GTL_NUMCHARS;
-				dat->idxLastChar = (int)SendMessage(dat->REdit, EM_GETTEXTLENGTHEX, (WPARAM) &gtl, 0);
-			}
-			break;
+	case DM_APPENDTOLOG:
+		if (opt.PluginSupportEnabled)
+		{
+			//get length of text now before things can get added...
+			GETTEXTLENGTHEX gtl;
+			gtl.codepage = 1200;
+			gtl.flags = GTL_PRECISE | GTL_NUMCHARS;
+			dat->idxLastChar = (int)SendMessage(dat->REdit, EM_GETTEXTLENGTHEX, (WPARAM) &gtl, 0);
+		}
+		break;
 	}
 
 	LRESULT result = CallWindowProc(dat->wpOrigWndProc, hwnd, uMsg, wParam, lParam); 
@@ -382,95 +386,95 @@ static LRESULT CALLBACK MessageDlgSubclas(HWND hwnd, UINT uMsg, WPARAM wParam, L
 
 	switch(uMsg) 
 	{
-		case WM_DESTROY:
-			WaitForSingleObject(g_hMutex, 2000);
-            SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)dat->wpOrigWndProc);
+	case WM_DESTROY:
+		WaitForSingleObject(g_hMutex, 2000);
+		SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)dat->wpOrigWndProc);
+		{
+			int ind = g_MsgWndList.getIndex((MsgWndData*)&hwnd);
+			if ( ind != -1 ) 
 			{
-				int ind = g_MsgWndList.getIndex((MsgWndData*)&hwnd);
-				if ( ind != -1 ) 
-				{
-					delete g_MsgWndList[ind];
-					g_MsgWndList.remove(ind);
-				}
+				delete g_MsgWndList[ind];
+				g_MsgWndList.remove(ind);
 			}
-			ReleaseMutex(g_hMutex);
-			break;
+		}
+		ReleaseMutex(g_hMutex);
+		break;
 
-		case WM_SIZE:
-			if (dat->doSmileyButton)
+	case WM_SIZE:
+		if (dat->doSmileyButton)
+		{
+			RECT rect = dat->CalcSmileyButtonPos();
+			SetWindowPos(dat->hSmlButton, NULL, rect.left, rect.top, 
+				0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_NOACTIVATE);
+		}
+		break;
+
+	case DM_APPENDTOLOG:
+		if (dat->doSmileyReplace) 
+		{
+			SmileyPackCType* smcp;
+			SmileyPackType* SmileyPack = GetSmileyPack(dat->ProtocolName, dat->hContact, &smcp);
+			if (SmileyPack != NULL)
 			{
-				RECT rect = dat->CalcSmileyButtonPos();
-				SetWindowPos(dat->hSmlButton, NULL, rect.left, rect.top, 
-					0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_NOACTIVATE);
+				const CHARRANGE sel = { dat->idxLastChar, LONG_MAX };
+				ReplaceSmileys(dat->REdit, SmileyPack, smcp, sel, false, false, false);
 			}
-			break;
+		}
+		break;
 
-		case DM_APPENDTOLOG:
-			if (dat->doSmileyReplace) 
+	case DM_REMAKELOG:
+		if (dat->doSmileyReplace) 
+		{
+			SmileyPackCType* smcp;
+			SmileyPackType* SmileyPack = GetSmileyPack(dat->ProtocolName, dat->hContact, &smcp);
+			if (SmileyPack != NULL)
 			{
-				SmileyPackCType* smcp;
-				SmileyPackType* SmileyPack = GetSmileyPack(dat->ProtocolName, dat->hContact, &smcp);
-				if (SmileyPack != NULL)
-				{
-					const CHARRANGE sel = { dat->idxLastChar, LONG_MAX };
-					ReplaceSmileys(dat->REdit, SmileyPack, smcp, sel, false, false, false);
-				}
+				static const CHARRANGE sel = { 0, LONG_MAX };
+				ReplaceSmileys(dat->REdit, SmileyPack, smcp, sel, false, false, false);
 			}
-			break;
+		}
+		break;
 
-		case DM_REMAKELOG:
-			if (dat->doSmileyReplace) 
+	case WM_COMMAND:
+		if (LOWORD(wParam) == IDC_SMLBUTTON && 
+			HIWORD(wParam) == BN_CLICKED)
+		{
+			SmileyToolWindowParam *stwp = new SmileyToolWindowParam;
+			stwp->pSmileyPack = GetSmileyPack(dat->ProtocolName, dat->hContact);
+
+			stwp->hWndParent = hwnd;
+			stwp->hWndTarget = dat->MEdit;
+			stwp->targetMessage = EM_REPLACESEL;
+			stwp->targetWParam = TRUE;
+
+			RECT rect;
+			GetWindowRect(dat->hSmlButton, &rect);
+
+			if (dat->OldButtonPlace)
 			{
-				SmileyPackCType* smcp;
-				SmileyPackType* SmileyPack = GetSmileyPack(dat->ProtocolName, dat->hContact, &smcp);
-				if (SmileyPack != NULL)
-				{
-					static const CHARRANGE sel = { 0, LONG_MAX };
-					ReplaceSmileys(dat->REdit, SmileyPack, smcp, sel, false, false, false);
-				}
+				stwp->direction = 3;
+				stwp->xPosition = rect.left;
+				stwp->yPosition = rect.top + 4;
 			}
-			break;
-
-		case WM_COMMAND:
-			if (LOWORD(wParam) == IDC_SMLBUTTON && 
-				HIWORD(wParam) == BN_CLICKED)
+			else
 			{
-				SmileyToolWindowParam *stwp = new SmileyToolWindowParam;
-				stwp->pSmileyPack = GetSmileyPack(dat->ProtocolName, dat->hContact);
-
-                stwp->hWndParent = hwnd;
-				stwp->hWndTarget = dat->MEdit;
-				stwp->targetMessage = EM_REPLACESEL;
-				stwp->targetWParam = TRUE;
-
-				RECT rect;
-				GetWindowRect(dat->hSmlButton, &rect);
-
-				if (dat->OldButtonPlace)
-				{
-					stwp->direction = 3;
-					stwp->xPosition = rect.left;
-					stwp->yPosition = rect.top + 4;
-				}
-				else
-				{
-					stwp->direction = 0;
-					stwp->xPosition = rect.left;
-					stwp->yPosition = rect.top + 24;
-				}
-
-				mir_forkthread(SmileyToolThread, stwp);
+				stwp->direction = 0;
+				stwp->xPosition = rect.left;
+				stwp->yPosition = rect.top + 24;
 			}
 
-			if (LOWORD(wParam) == MI_IDC_ADD && 
-				HIWORD(wParam) == BN_CLICKED &&
-				dat->doSmileyButton)
-			{
-				RECT rect = dat->CalcSmileyButtonPos();
-				SetWindowPos(dat->hSmlButton, NULL, rect.left, rect.top, 
-					0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_NOACTIVATE);
-			}
-			break;
+			mir_forkthread(SmileyToolThread, stwp);
+		}
+
+		if (LOWORD(wParam) == MI_IDC_ADD && 
+			HIWORD(wParam) == BN_CLICKED &&
+			dat->doSmileyButton)
+		{
+			RECT rect = dat->CalcSmileyButtonPos();
+			SetWindowPos(dat->hSmlButton, NULL, rect.left, rect.top, 
+				0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_NOACTIVATE);
+		}
+		break;
 	}
 
 	return result;
@@ -549,7 +553,7 @@ void RemoveDialogBoxHook(void)
 {
 	if (g_hHookMsgWnd) UnhookEvent(g_hHookMsgWnd);
 	if (g_hMessageHookPre) UnhookWindowsHookEx(g_hMessageHookPre);
-	
+
 	WaitForSingleObject(g_hMutex, 2000);
 	for (int i=0; i<g_MsgWndList.getCount(); ++i) 
 		delete g_MsgWndList[i];

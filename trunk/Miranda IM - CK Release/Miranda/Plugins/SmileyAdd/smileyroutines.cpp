@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2005 - 2009 Boris Krasnovskiy
+Copyright (C) 2005 - 2011 Boris Krasnovskiy
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
 This program is free software; you can redistribute it and/or
@@ -41,7 +41,7 @@ const GUID IID_ITextDocument =
 { 0x8CC497C0, 0xA1DF, 0x11CE, { 0x80,0x98,0x00,0xAA,0x00,0x47,0xBE,0x5D } };
 
 void LookupAllSmileys(SmileyPackType* smileyPack, SmileyPackCType* smileyCPack, const TCHAR* lpstrText,
- 					  SmileysQueueType& smllist, const bool firstOnly)
+	SmileysQueueType& smllist, const bool firstOnly)
 {
 	if (lpstrText == NULL || *lpstrText == 0) return;
 
@@ -53,11 +53,11 @@ void LookupAllSmileys(SmileyPackType* smileyPack, SmileyPackCType* smileyCPack, 
 	int smlszc = smlc ? smlc->getCount() : 0;
 	int smlsz = smlszo + smlszc;
 
-  	if (smlsz == 0) return;
+	if (smlsz == 0) return;
 
 	// All possible smileys
 	SmileyLookup::SmileyLocVecType* smileys = new SmileyLookup::SmileyLocVecType [smlsz];
-	
+
 	// Find all possible smileys
 	bkstring tmpstr(lpstrText);
 	int i = 0;
@@ -70,7 +70,7 @@ void LookupAllSmileys(SmileyPackType* smileyPack, SmileyPackCType* smileyCPack, 
 			i++;
 		}
 	}
-	
+
 	if (smlc)
 	{
 		for (int j=0; j<smlc->getCount(); j++) 
@@ -96,7 +96,7 @@ void LookupAllSmileys(SmileyPackType* smileyPack, SmileyPackCType* smileyCPack, 
 		for (int csml=0; csml<smlsz; csml++)
 		{
 			SmileyLookup::SmileyLocVecType& smlv = smileys[csml];
-			
+
 			int tsml;
 			for (tsml = csmlit[csml]; tsml < smlv.getCount(); tsml++)
 			{
@@ -127,7 +127,7 @@ void LookupAllSmileys(SmileyPackType* smileyPack, SmileyPackCType* smileyCPack, 
 			// check if leading space exist
 			const TCHAR* prech = _tcsdec(textToSearch, textSmlStart);
 			dat->ldspace = prech != NULL ? _istspace(*prech) != 0 : smloff == 0;
-			 
+
 			// check if trailing space exist
 			dat->trspace = *textSmlEnd == 0 || _istspace(*textSmlEnd);
 
@@ -176,7 +176,7 @@ void LookupAllSmileys(SmileyPackType* smileyPack, SmileyPackCType* smileyCPack, 
 
 
 void FindSmileyInText(SmileyPackType* smp, const TCHAR* str, 
-					  unsigned& first, unsigned& size, SmileyType** sml)
+	unsigned& first, unsigned& size, SmileyType** sml)
 {
 	SmileysQueueType smllist;
 	LookupAllSmileys(smp, NULL, str, smllist, true);
@@ -222,7 +222,7 @@ void UpdateSelection(CHARRANGE& sel, int pos, int dif)
 }
 
 void ReplaceSmileys(HWND hwnd, SmileyPackType* smp, SmileyPackCType* smcp, const CHARRANGE& sel, 
-					bool useHidden, bool ignoreLast, bool unFreeze)
+	bool useHidden, bool ignoreLast, bool unFreeze)
 {
 /*
 	LARGE_INTEGER freq, strt, end;
@@ -269,7 +269,7 @@ void ReplaceSmileys(HWND hwnd, SmileyPackType* smp, SmileyPackCType* smcp, const
 	}
 
 	TextRange->Release();
- 
+
 	SmileysQueueType smllist;
 
 #if !defined(_UNICODE) && !defined(UNICODE)
@@ -330,7 +330,7 @@ void ReplaceSmileys(HWND hwnd, SmileyPackType* smp, SmileyPackCType* smcp, const
 		int sclY = GetDeviceCaps(hdc, LOGPIXELSY); 
 
 		unsigned numBTBSm = 0;
-		
+
 		BSTR spaceb = SysAllocString(L" ");
 
 		// Replace smileys specified in the list in RichEdit 
@@ -391,21 +391,21 @@ void ReplaceSmileys(HWND hwnd, SmileyPackType* smp, SmileyPackCType* smcp, const
 
 				SIZE osize;
 				if (sml) 
-                    sml->GetSize(osize); 
-                else 
-                    smlc->GetSize(osize);
+					sml->GetSize(osize); 
+				else 
+					smlc->GetSize(osize);
 
-                if (osize.cx == 0 || osize.cy == 0) continue;
+				if (osize.cx == 0 || osize.cy == 0) continue;
 
 				int sizeX, sizeY;
 				if (opt.ScaleToTextheight)
 				{
 					sizeY = CalculateTextHeight(hdc, &chf);
 					sizeX = osize.cx * sizeY / osize.cy;
-					
+
 					int dx = osize.cx - sizeX;
 					sizeX += dx & 1;
-					
+
 					int dy = osize.cy - sizeY;
 					sizeY += dy & 1;
 				}
@@ -419,10 +419,10 @@ void ReplaceSmileys(HWND hwnd, SmileyPackType* smp, SmileyPackCType* smcp, const
 				{
 					sizeY = opt.MaxCustomSmileySize;
 					sizeX = osize.cx * sizeY / osize.cy;
-					
+
 					int dx = osize.cx - sizeX;
 					sizeX += dx & 1;
-					
+
 					int dy = osize.cy - opt.MaxCustomSmileySize;
 					sizeY += dy & 1;
 				}
@@ -431,15 +431,15 @@ void ReplaceSmileys(HWND hwnd, SmileyPackType* smp, SmileyPackCType* smcp, const
 				{
 					sizeY = opt.MinSmileySize;
 					sizeX = osize.cx * sizeY / osize.cy;
-					
+
 					int dx = osize.cx - sizeX;
 					sizeX += dx & 1;
-					
+
 					int dy = osize.cy - opt.MinSmileySize;
 					sizeY += dy & 1;
 				}
 
-                // Convert pixel to HIMETRIC
+				// Convert pixel to HIMETRIC
 				SIZEL sizehm;
 				sizehm.cx = (2540 * (sizeX+1) + (sclX >> 1)) / sclX;
 				sizehm.cy = (2540 * (sizeY+1) + (sclY >> 1)) / sclY;
@@ -520,7 +520,7 @@ void ReplaceSmileys(HWND hwnd, SmileyPackType* smp, SmileyPackCType* smcp, const
 		TextDocument->Unfreeze(&cnt);
 		if (cnt == 0) UpdateWindow(hwnd);
 	}
-	
+
 	if (unFreeze)
 	{
 		TextDocument->Unfreeze(&cnt);
@@ -579,7 +579,7 @@ void ReplaceSmileysWithText(HWND hwnd, CHARRANGE& sel, bool keepFrozen)
 
 		HRESULT hr = RichEditOle->GetObject(i, &reObj, REO_GETOBJ_POLEOBJ);
 		if (FAILED(hr)) continue;
-		
+
 		if (reObj.cp < sel.cpMin)
 		{
 			reObj.poleobj->Release();
@@ -647,7 +647,7 @@ int RichEditVersion(void)
 			FreeResource(hGlobal);  
 		}
 	}
-    return ret;
+	return ret;
 }
 #endif
 

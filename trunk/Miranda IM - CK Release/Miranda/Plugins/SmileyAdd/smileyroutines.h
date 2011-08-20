@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2005 - 2009 Boris Krasnovskiy
+Copyright (C) 2005 - 2011 Boris Krasnovskiy
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
 This program is free software; you can redistribute it and/or
@@ -38,12 +38,12 @@ typedef SMOBJLIST<ReplaceSmileyType> SmileysQueueType;
 
 
 void LookupAllSmileys(SmileyPackType* smileyPack, SmileyPackCType* smileyCPack, const TCHAR* lpstrText,
- 					  SmileysQueueType& smllist, const bool firstOnly);
+	SmileysQueueType& smllist, const bool firstOnly);
 void ReplaceSmileys(HWND hwnd, SmileyPackType* smp, SmileyPackCType* smcp, const CHARRANGE& sel,
-					bool useHidden, bool ignoreLast, bool unFreeze);
+	bool useHidden, bool ignoreLast, bool unFreeze);
 void ReplaceSmileysWithText(HWND hwnd, CHARRANGE& sel, bool keepFrozen);
 void FindSmileyInText(SmileyPackType* smp, const TCHAR* str, 
-					  unsigned& first, unsigned& size, SmileyType** index);
+	unsigned& first, unsigned& size, SmileyType** index);
 SmileyType* FindButtonSmiley(SmileyPackType* smp);
 
 #endif

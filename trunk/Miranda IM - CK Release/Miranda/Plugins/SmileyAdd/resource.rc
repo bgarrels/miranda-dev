@@ -137,7 +137,7 @@ BEGIN
             VALUE "FileDescription", "SmileyAdd Miranda Plugin"
             VALUE "FileVersion", __VERSION_STRING
             VALUE "InternalName", "SmileyAdd"
-            VALUE "LegalCopyright", "Copyright (C) 2005 - 2009 Boris Krasnovskiy All Rights Reserved"
+            VALUE "LegalCopyright", "Copyright (C) 2005 - 2011 Boris Krasnovskiy All Rights Reserved"
             VALUE "OriginalFilename", "SmileyAdd.dll"
             VALUE "ProductName", " SmileyAdd Miranda Plugin"
             VALUE "ProductVersion", __VERSION_STRING

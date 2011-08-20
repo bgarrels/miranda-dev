@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2005 - 2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005 - 2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
 This program is free software; you can redistribute it and/or
@@ -39,6 +39,7 @@ PLUGINLINK *pluginLink;
 //static globals
 static HANDLE hHooks[7];
 static HANDLE hService[13];
+int hLangpack;
 
 MM_INTERFACE   mmi;
 LIST_INTERFACE li;
@@ -58,9 +59,9 @@ static const PLUGININFOEX pluginInfoEx =
 	"Smiley support for Miranda Instant Messanger.",
 	"Peacow, nightwish, bid, borkra",
 	"borkra@miranda-im.org",
-	"Copyright© 2004 - 2010 Boris Krasnovskiy, portions by Rein-Peter de Boer",
+	"Copyright© 2004 - 2011 Boris Krasnovskiy, portions by Rein-Peter de Boer",
 	"http://code.google.com/p/mirandaimplugins/downloads/list",
-//	"http://addons.miranda-im.org/index.php?action=display&id=2152",
+	//	"http://addons.miranda-im.org/index.php?action=display&id=2152",
 #if defined(UNICODE) | defined(_UNICODE)
 	UNICODE_AWARE,		//not transient
 #else
@@ -86,7 +87,7 @@ static SKINICONDESC skinDesc =
 
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD /* mirandaVersion */) 
 {
-    return (PLUGININFOEX*)&pluginInfoEx;
+	return (PLUGININFOEX*)&pluginInfoEx;
 }
 
 // MirandaPluginInterfaces - returns the protocol interface to the core
@@ -140,9 +141,10 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 {
 	pluginLink = link;
 
-	mir_getLI( &li );
-	mir_getMMI( &mmi );
-	mir_getUTFI( &utfi );
+	mir_getLI(&li);
+	mir_getMMI(&mmi);
+	mir_getUTFI(&utfi);
+	mir_getLP(&pluginInfoEx);
 
 	if (ServiceExists(MS_SMILEYADD_REPLACESMILEYS))
 	{
@@ -157,20 +159,20 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	CallService(MS_SYSTEM_GETVERSIONTEXT, (WPARAM)SIZEOF(temp), (LPARAM)temp);
 
 #ifdef _UNICODE
-    if (strstr(temp, "Unicode") == NULL)
-    {
+	if (strstr(temp, "Unicode") == NULL)
+	{
 		ReportError(TranslateT("Please update SmileyAdd to ANSI Version"));
-        return 1;
-    }
+		return 1;
+	}
 #else
-    if (strstr(temp, "Unicode") != NULL)
-    {
+	if (strstr(temp, "Unicode") != NULL)
+	{
 		ReportError(Translate("Please update SmileyAdd to Unicode Version"));
-        return 1;
-    }
+		return 1;
+	}
 #endif
 
-    InitImageCache();
+	InitImageCache();
 
 	g_SmileyCategories.SetSmileyPackStore(&g_SmileyPacks);
 
@@ -228,7 +230,7 @@ extern "C" __declspec(dllexport) int Unload(void)
 	DestroySmileyBase();
 
 	g_SmileyCategories.ClearAll();
-    g_SmileyPackCStore.ClearAndFreeAll();
+	g_SmileyPackCStore.ClearAndFreeAll();
 
 	DestroyImageCache();
 	DestroyGdiPlus();
@@ -246,13 +248,13 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID /*lpv
 {
 	switch(fdwReason)
 	{
-		case DLL_PROCESS_ATTACH:
-			g_hInst = hinstDLL;
-			DisableThreadLibraryCalls(hinstDLL);
-			break;
+	case DLL_PROCESS_ATTACH:
+		g_hInst = hinstDLL;
+		DisableThreadLibraryCalls(hinstDLL);
+		break;
 
-		case DLL_PROCESS_DETACH:
-			break;
+	case DLL_PROCESS_DETACH:
+		break;
 	}
 
 	return TRUE;

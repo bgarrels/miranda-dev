@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2008 - 2009 Boris Krasnovskiy
+Copyright (C) 2008 - 2011 Boris Krasnovskiy
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -107,7 +107,7 @@ long ImageBase::AddRef(void)
 long ImageBase::Release(void)
 {
 	WaitForSingleObject(g_hMutexIm, 3000);
-	
+
 	long cnt = m_lRefCount;
 	if (cnt) m_lRefCount = --cnt;
 	if (cnt == 0) m_timestamp = time(NULL);
@@ -144,7 +144,7 @@ void ImageBase::Draw(HDC hdc, RECT& rc, bool clip)
 		hrgn = CreateRectRgn(rc.left, rc.top, rc.right, rc.bottom);
 		SelectClipRgn(hdc, hrgn);
 	}
- 
+
 	SIZE iSize;
 	GetSize(iSize);
 
@@ -153,7 +153,7 @@ void ImageBase::Draw(HDC hdc, RECT& rc, bool clip)
 
 	const int x = rc.left + (sizeX > iSize.cx || clip ? (sizeX - iSize.cx) / 2 : 0);
 	const int y = rc.top  + (sizeY > iSize.cy || clip ? (sizeY - iSize.cy) / 2 : 0);
-	
+
 	const int scaleX = sizeX > iSize.cx || clip ? iSize.cx : sizeX;
 	const int scaleY = sizeY > iSize.cy || clip ? iSize.cy : sizeY;
 
@@ -310,7 +310,7 @@ ImageType::ImageType(const unsigned id, const bkstring& file, IStream* pStream)
 		m_bmp = new Gdiplus::Bitmap(pStream);
 	else
 		m_bmp = new Gdiplus::Bitmap(T2W_SM(file.c_str()));
-	
+
 	if (m_bmp->GetLastStatus() != Gdiplus::Ok)
 	{
 		delete m_bmp;
@@ -399,7 +399,7 @@ void ImageType::DrawInternal(HDC hdc, int x, int y, int sizeX, int sizeY)
 	WaitForSingleObject(g_hMutexIm, 3000);
 	{
 		Gdiplus::Graphics grp(hdc);
-//        if (opt.HQScaling) grp.SetInterpolationMode(Gdiplus::InterpolationModeBicubic);
+//		if (opt.HQScaling) grp.SetInterpolationMode(Gdiplus::InterpolationModeBicubic);
 		grp.DrawImage(m_bmp, x, y, sizeX, sizeY);
 	}
 	ReleaseMutex(g_hMutexIm);
@@ -526,7 +526,7 @@ HICON ImageFType::GetIcon(void)
 	ii.fIcon = TRUE;
 	ii.xHotspot = 0;
 	ii.yHotspot = 0;
-	
+
 	if (bm.bmBitsPixel == 32 && GetWinVer() < 0x0501)
 	{
 		int slen = bm.bmWidth * 4;
@@ -535,7 +535,7 @@ HICON ImageFType::GetIcon(void)
 		BYTE* p         = (BYTE*)mir_alloc(len);
 		BYTE* maskBits  = (BYTE*)mir_calloc(len);
 		BYTE* colorBits = (BYTE*)mir_calloc(len);
-		
+
 		GetBitmapBits(m_bmp, len, p);
 
 		for (int y = 0; y < bm.bmHeight; ++y) 
@@ -598,7 +598,7 @@ void ImageFType::GetSize(SIZE& size)
 }
 /*
 ImageFAniType::ImageFAniType(const unsigned id, const bkstring& file)
-	: ImageFType(id)
+: ImageFType(id)
 {
 	m_fmbmp = NULL;
 	m_nCurrentFrame = -1;
@@ -680,21 +680,21 @@ unsigned int __fastcall hash( const void * key, unsigned int len )
 		k *= m; 
 		k ^= k >> r; 
 		k *= m; 
-		
+
 		h *= m; 
 		h ^= k;
 
 		data += 4;
 		len -= 4;
 	}
-	
+
 	// Handle the last few bytes of the input array
 	switch(len)
 	{
 	case 3: h ^= data[2] << 16;
 	case 2: h ^= data[1] << 8;
 	case 1: h ^= data[0];
-			h *= m;
+		h *= m;
 	};
 
 	// Do a few final mixes of the hash to ensure the last few
@@ -726,7 +726,7 @@ void DestroyImageCache(void)
 	if (lastmodule) FreeLibrary(lastmodule);
 
 	g_imagecache.destroy();
-	
+
 	ReleaseMutex(g_hMutexIm);
 	CloseHandle(g_hMutexIm);
 }
@@ -759,7 +759,7 @@ ImageBase* AddCacheImage(const bkstring& file, int index)
 			img = new ImageType(id, file, NULL);
 		else
 			img = opt.HQScaling ? (ImageBase*)new ImageType(id, file, NULL) : (ImageBase*)new ImageFType(id, file);
-		
+
 		g_imagecache.insert(img);
 
 		if (timerId == 0) 

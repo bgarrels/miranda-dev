@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2005 - 2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005 - 2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
 This program is free software; you can redistribute it and/or
@@ -71,19 +71,19 @@ SmileyPackType* GetSmileyPack(const char* proto, HANDLE hContact, SmileyPackCTyp
 
 	if (categoryName.empty())
 	{
-        if (proto == NULL || proto[0] == 0)
-        {
-            categoryName = _T("Standard");
-        }
-        else 
-        {
-            categoryName = A2T_SM(proto);
-            if (opt.UseOneForAll) 
-            {
-                SmileyCategoryType *smc = g_SmileyCategories.GetSmileyCategory(categoryName);
-                if (smc == NULL || smc->IsProto()) categoryName = _T("Standard");
-            }
-        }
+		if (proto == NULL || proto[0] == 0)
+		{
+			categoryName = _T("Standard");
+		}
+		else 
+		{
+			categoryName = A2T_SM(proto);
+			if (opt.UseOneForAll) 
+			{
+				SmileyCategoryType *smc = g_SmileyCategories.GetSmileyCategory(categoryName);
+				if (smc == NULL || smc->IsProto()) categoryName = _T("Standard");
+			}
+		}
 	}
 
 	return g_SmileyCategories.GetSmileyPack(categoryName);
@@ -92,14 +92,14 @@ SmileyPackType* GetSmileyPack(const char* proto, HANDLE hContact, SmileyPackCTyp
 
 INT_PTR ReplaceSmileysCommand(WPARAM, LPARAM lParam)
 {
-    SMADD_RICHEDIT3* smre = (SMADD_RICHEDIT3*) lParam;
+	SMADD_RICHEDIT3* smre = (SMADD_RICHEDIT3*) lParam;
 	if (smre == NULL || smre->cbSize < SMADD_RICHEDIT_SIZE_V1) return FALSE;
 
 	SMADD_RICHEDIT3 smrec = {0};
 	memcpy(&smrec, smre, min(smre->cbSize, sizeof(smrec)));
 
 	static const CHARRANGE selection = { 0, LONG_MAX };
-    if (smre->rangeToReplace == NULL) smrec.rangeToReplace = (CHARRANGE*)&selection;
+	if (smre->rangeToReplace == NULL) smrec.rangeToReplace = (CHARRANGE*)&selection;
 	else if (smrec.rangeToReplace->cpMax < 0) smrec.rangeToReplace->cpMax = LONG_MAX; 
 
 	SmileyPackCType* smcp = NULL;
@@ -109,33 +109,33 @@ INT_PTR ReplaceSmileysCommand(WPARAM, LPARAM lParam)
 	ReplaceSmileys(smre->hwndRichEditControl, SmileyPack, smcp, *smrec.rangeToReplace, 
 		smrec.hContact == NULL, false, false);
 
-    return TRUE;
+	return TRUE;
 }
 
 
 INT_PTR ShowSmileySelectionCommand(WPARAM, LPARAM lParam)
 {
-    SMADD_SHOWSEL3* smaddInfo = (SMADD_SHOWSEL3*) lParam;
+	SMADD_SHOWSEL3* smaddInfo = (SMADD_SHOWSEL3*) lParam;
 
 	if (smaddInfo == NULL || smaddInfo->cbSize < SMADD_SHOWSEL_SIZE_V1) return FALSE;
 	HWND parent = smaddInfo->cbSize > SMADD_SHOWSEL_SIZE_V1 ? smaddInfo->hwndParent : NULL;
 	HANDLE hContact = smaddInfo->cbSize > SMADD_SHOWSEL_SIZE_V2 ? smaddInfo->hContact : NULL;
 
-    SmileyToolWindowParam *stwp = new SmileyToolWindowParam;
-    stwp->pSmileyPack = GetSmileyPack(smaddInfo->Protocolname, hContact);
+	SmileyToolWindowParam *stwp = new SmileyToolWindowParam;
+	stwp->pSmileyPack = GetSmileyPack(smaddInfo->Protocolname, hContact);
 	stwp->hContact = hContact;
 
 	stwp->hWndParent = parent;
-    stwp->hWndTarget = smaddInfo->hwndTarget;
-    stwp->targetMessage = smaddInfo->targetMessage;
-    stwp->targetWParam = smaddInfo->targetWParam;
-    stwp->xPosition = smaddInfo->xPosition;
-    stwp->yPosition = smaddInfo->yPosition;
-    stwp->direction = smaddInfo->Direction;
+	stwp->hWndTarget = smaddInfo->hwndTarget;
+	stwp->targetMessage = smaddInfo->targetMessage;
+	stwp->targetWParam = smaddInfo->targetWParam;
+	stwp->xPosition = smaddInfo->xPosition;
+	stwp->yPosition = smaddInfo->yPosition;
+	stwp->direction = smaddInfo->Direction;
 
 	mir_forkthread(SmileyToolThread, stwp);
 
-    return TRUE;
+	return TRUE;
 }
 
 INT_PTR GetSmileyIconCommand(WPARAM, LPARAM lParam)
@@ -144,7 +144,7 @@ INT_PTR GetSmileyIconCommand(WPARAM, LPARAM lParam)
 
 	if (smre == NULL || smre->cbSize < sizeof(SMADD_GETICON)) return FALSE;
 
-    SmileyPackType* SmileyPack = GetSmileyPack(smre->Protocolname);
+	SmileyPackType* SmileyPack = GetSmileyPack(smre->Protocolname);
 
 	if (SmileyPack == NULL || IsBadStringPtrA(smre->SmileySequence, MAX_SMILEY_LENGTH))
 	{
@@ -177,7 +177,7 @@ static int GetInfoCommandE(SMADD_INFO2* smre, bool retDup)
 	if (smre == NULL || smre->cbSize < SMADD_INFO_SIZE_V1) return FALSE;
 	HANDLE hContact = smre->cbSize > SMADD_INFO_SIZE_V1 ? smre->hContact : NULL;
 
-    SmileyPackType* SmileyPack = GetSmileyPack(smre->Protocolname, hContact);
+	SmileyPackType* SmileyPack = GetSmileyPack(smre->Protocolname, hContact);
 
 	if (SmileyPack == NULL || SmileyPack->SmileyCount() == 0)
 	{
@@ -194,22 +194,22 @@ static int GetInfoCommandE(SMADD_INFO2* smre, bool retDup)
 	else
 		smre->ButtonIcon = GetDefaultIcon(retDup);
 
-    smre->NumberOfSmileys = SmileyPack->SmileyCount();
-    smre->NumberOfVisibleSmileys = SmileyPack->VisibleSmileyCount();
+	smre->NumberOfSmileys = SmileyPack->SmileyCount();
+	smre->NumberOfVisibleSmileys = SmileyPack->VisibleSmileyCount();
 
-    return TRUE;
+	return TRUE;
 }
 
 
 INT_PTR GetInfoCommand(WPARAM, LPARAM lParam)
 {
-    return GetInfoCommandE((SMADD_INFO2*) lParam, false);
+	return GetInfoCommandE((SMADD_INFO2*) lParam, false);
 }
 
 
 INT_PTR GetInfoCommand2(WPARAM, LPARAM lParam)
 {
-    return GetInfoCommandE((SMADD_INFO2*) lParam, true);
+	return GetInfoCommandE((SMADD_INFO2*) lParam, true);
 }
 
 
@@ -219,7 +219,7 @@ INT_PTR ParseText(WPARAM, LPARAM lParam)
 
 	if (smre == NULL || smre->cbSize < sizeof(SMADD_PARSE)) return FALSE;
 
-    SmileyPackType* SmileyPack = GetSmileyPack(smre->Protocolname);
+	SmileyPackType* SmileyPack = GetSmileyPack(smre->Protocolname);
 
 	if (SmileyPack == NULL)
 	{
@@ -251,7 +251,7 @@ INT_PTR ParseText(WPARAM, LPARAM lParam)
 		smre->startChar += strtChrOff;
 	}
 
-    return TRUE;
+	return TRUE;
 }
 
 #if defined(UNICODE) | defined(_UNICODE)
@@ -261,7 +261,7 @@ INT_PTR ParseTextW(WPARAM, LPARAM lParam)
 
 	if (smre == NULL || smre->cbSize < sizeof(SMADD_PARSEW)) return FALSE;
 
-    SmileyPackType* SmileyPack = GetSmileyPack(smre->Protocolname);
+	SmileyPackType* SmileyPack = GetSmileyPack(smre->Protocolname);
 
 	if (SmileyPack == NULL)
 	{
@@ -272,7 +272,7 @@ INT_PTR ParseTextW(WPARAM, LPARAM lParam)
 
 	unsigned strtChrOff = smre->startChar + smre->size;
 	wchar_t* workstr = smre->str + strtChrOff;
- 
+
 	if (strtChrOff > 1024 || IsBadStringPtrW(workstr, 10))
 	{
 		smre->SmileyIcon = NULL;
@@ -293,7 +293,7 @@ INT_PTR ParseTextW(WPARAM, LPARAM lParam)
 		smre->startChar += strtChrOff;
 	}
 
-    return TRUE;
+	return TRUE;
 }
 #endif
 
@@ -337,7 +337,7 @@ INT_PTR ParseTextBatch(WPARAM, LPARAM lParam)
 			else
 				cres->hIcon = smllist[j].smlc->GetIcon();
 		}
-		
+
 		cres++;
 	}
 
@@ -378,7 +378,7 @@ INT_PTR RegisterPack(WPARAM, LPARAM lParam)
 	bkstring nm(A2T_SM(smre->name));
 	g_SmileyCategories.AddAndLoad(nm, nmd);
 
-    return TRUE;
+	return TRUE;
 }
 
 INT_PTR CustomCatMenu(WPARAM wParam, LPARAM lParam)
@@ -408,7 +408,7 @@ INT_PTR CustomCatMenu(WPARAM wParam, LPARAM lParam)
 
 int RebuildContactMenu(WPARAM wParam, LPARAM)
 {
-    int i;
+	int i;
 	CLISTMENUITEM mi = {0};
 
 	mi.cbSize = sizeof(mi);
@@ -416,15 +416,15 @@ int RebuildContactMenu(WPARAM wParam, LPARAM)
 
 	SmileyCategoryListType::SmileyCategoryVectorType& smc = *g_SmileyCategories.GetSmileyCategoryList();
 
-    char* protnam = (char*) CallService(MS_PROTO_GETCONTACTBASEPROTO, wParam, 0);
-    bool haveMenu = IsSmileyProto(protnam);
-    if (haveMenu && opt.UseOneForAll)
-    {
-        unsigned cnt = 0;
-        for (i = 0; i < smc.getCount(); ++i)
-            cnt += smc[i].IsCustom();
-        haveMenu = cnt != 0;
-    }
+	char* protnam = (char*) CallService(MS_PROTO_GETCONTACTBASEPROTO, wParam, 0);
+	bool haveMenu = IsSmileyProto(protnam);
+	if (haveMenu && opt.UseOneForAll)
+	{
+		unsigned cnt = 0;
+		for (i = 0; i < smc.getCount(); ++i)
+			cnt += smc[i].IsCustom();
+		haveMenu = cnt != 0;
+	}
 
 	if (!haveMenu) mi.flags |= CMIF_HIDDEN;
 
@@ -448,14 +448,14 @@ int RebuildContactMenu(WPARAM wParam, LPARAM)
 
 		for (i = 0; i < smc.getCount(); i++)
 		{
-            if (smc[i].IsExt() || (smc[i].IsProto() && opt.UseOneForAll)) continue;
+			if (smc[i].IsExt() || (smc[i].IsProto() && opt.UseOneForAll)) continue;
 
 			const int ind = i + 3;
 
 			mi.position      = ind;
 			mi.popupPosition = ind;
 			mi.ptszName      = (TCHAR*)smc[i].GetDisplayName().c_str();
-			
+
 			if (cat == smc[i].GetName())
 			{
 				mi.flags |= CMIF_CHECKED; 
@@ -530,7 +530,7 @@ INT_PTR LoadContactSmileys(WPARAM, LPARAM lParam)
 int AccountListChanged(WPARAM wParam, LPARAM lParam)
 {
 	PROTOACCOUNT* acc = (PROTOACCOUNT*)lParam;
-	
+
 	switch (wParam)
 	{
 	case PRAC_ADDED:

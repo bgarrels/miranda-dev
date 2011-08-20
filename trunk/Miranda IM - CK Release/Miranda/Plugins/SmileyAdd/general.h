@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2005 - 2009 Boris Krasnovskiy
+Copyright (C) 2005 - 2011 Boris Krasnovskiy
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
 This program is free software; you can redistribute it and/or
@@ -80,7 +80,9 @@ typedef Matcher _TMatcher;
 #pragma warning( push )
 #pragma warning( disable : 4100 )
 #define MIRANDA_VER 0x0900
+#define MIRANDA_CUSTOM_LP
 #define NETLIB_NOLOGGING
+#define MIRANDA_CUSTOM_LP
 
 #include <win2k.h>
 #include <newpluginapi.h>
@@ -106,7 +108,7 @@ extern char* metaProtoName;
 
 //some system and NT stuff...
 #ifndef OPENFILENAME_SIZE_VERSION_400
-	#define OPENFILENAME_SIZE_VERSION_400 sizeof(OPENFILENAME)
+#define OPENFILENAME_SIZE_VERSION_400 sizeof(OPENFILENAME)
 #endif
 
 
@@ -131,17 +133,17 @@ extern char* metaProtoName;
 /////////////////////////////////////////////////////
 
 #define MAX_SMILEY_LENGTH    96
- 
+
 class A2W_SM
 {
 public:
 	wchar_t* m_psz;
 
-	A2W_SM( const char* psz, unsigned nCodePage = CP_ACP )
+	A2W_SM(const char* psz, unsigned nCodePage = CP_ACP)
 	{
-		const int nLength = MultiByteToWideChar( nCodePage, 0, psz, -1, NULL, 0 );
+		const int nLength = MultiByteToWideChar(nCodePage, 0, psz, -1, NULL, 0);
 		m_psz = new wchar_t[nLength];
-		MultiByteToWideChar( nCodePage, 0, psz, -1, m_psz, nLength );
+		MultiByteToWideChar(nCodePage, 0, psz, -1, m_psz, nLength);
 	}
 	~A2W_SM() { delete [] m_psz; }
 	operator wchar_t*() const { return m_psz; }
@@ -153,11 +155,11 @@ class W2A_SM
 public:
 	char* m_psz;
 
-	W2A_SM( const wchar_t* psz, unsigned nCodePage  = CP_ACP )
+	W2A_SM(const wchar_t* psz, unsigned nCodePage = CP_ACP)
 	{
-		const int nLength = WideCharToMultiByte( nCodePage, 0, psz, -1, NULL, 0, NULL, NULL );
+		const int nLength = WideCharToMultiByte(nCodePage, 0, psz, -1, NULL, 0, NULL, NULL);
 		m_psz = new char[nLength];
-		WideCharToMultiByte( nCodePage, 0, psz, -1, m_psz, nLength, NULL, NULL );
+		WideCharToMultiByte(nCodePage, 0, psz, -1, m_psz, nLength, NULL, NULL);
 	}
 	~W2A_SM() { delete [] m_psz; }
 	operator char*() const { return m_psz; }
@@ -182,7 +184,7 @@ template<class T> struct SMOBJLIST : public OBJLIST<T>
 
 	SMOBJLIST<T>& operator = (const SMOBJLIST<T>& lst)
 	{ 
-        OBJLIST<T>::destroy();
+		OBJLIST<T>::destroy();
 		return operator += (lst); 
 	}
 
@@ -206,9 +208,9 @@ template<class T> struct SMOBJLIST : public OBJLIST<T>
 
 inline unsigned short GetWinVer(void)
 {
-  	unsigned short ver = LOWORD(GetVersion());
+	unsigned short ver = LOWORD(GetVersion());
 	ver = (ver & 0xFF) << 8 | (ver >> 8);
-    return ver;
+	return ver;
 }
 
 

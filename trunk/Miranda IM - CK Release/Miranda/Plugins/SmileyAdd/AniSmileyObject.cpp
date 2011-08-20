@@ -1,6 +1,6 @@
 /*
 Miranda SmileyAdd Plugin
-Copyright (C) 2008 - 2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2008 - 2011 Boris Krasnovskiy All Rights Reserved
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -49,15 +49,15 @@ class CAniSmileyObject : public ISmileyBase
 private:
 	typedef enum { animStdOle, animDrctRichEd, animHpp } AnimType; 
 
-    POINTL          m_rectOrig;
-    SIZEL           m_rectExt;
+	POINTL          m_rectOrig;
+	SIZEL           m_rectExt;
 
 	COLORREF		m_bkg;
 
 	SmileyType*		m_sml;
 	ImageBase*		m_img;
 	unsigned	    m_nFramePosition;
-	
+
 	long			m_counter;
 	unsigned		m_richFlags;
 	long			m_lastObjNum; 
@@ -72,10 +72,10 @@ public:
 		m_animtype = ishpp ? animHpp : animStdOle;
 		m_bkg      = clr;
 
-        m_rectOrig.x = 0;
-        m_rectOrig.y = 0;
-        m_rectExt.cx = 0;
-        m_rectExt.cy = 0;
+		m_rectOrig.x = 0;
+		m_rectOrig.y = 0;
+		m_rectExt.cx = 0;
+		m_rectExt.cy = 0;
 
 		m_richFlags = 0;
 		m_lastObjNum = 0;
@@ -83,12 +83,12 @@ public:
 		m_sml = sml;
 		m_img = NULL;
 		m_nFramePosition = 0;
-        m_counter = 0;
+		m_counter = 0;
 	}
 
 	~CAniSmileyObject(void)
 	{
-        UnloadSmiley();
+		UnloadSmiley();
 	}
 
 	void LoadSmiley(void)
@@ -99,7 +99,7 @@ public:
 		if (m_img && m_img->IsAnimated() && opt.AnimateDlg)
 		{
 			m_nFramePosition = 0;
-            m_img->SelectFrame(m_nFramePosition);
+			m_img->SelectFrame(m_nFramePosition);
 			long frtm = m_img->GetFrameDelay();
 			m_counter = frtm / 10 + ((frtm % 10) >= 5);
 
@@ -114,8 +114,8 @@ public:
 			m_nFramePosition = m_sml->GetStaticFrame();
 	}
 
-    void UnloadSmiley(void)
-    {
+	void UnloadSmiley(void)
+	{
 		regAniSmileys.remove(this);
 
 		if (timerId && (timerId+1) && regAniSmileys.getCount() == 0) 
@@ -125,7 +125,7 @@ public:
 		}
 		if (m_img) m_img->Release();
 		m_img = NULL;
-    }
+	}
 
 	void GetDrawingProp(void)
 	{
@@ -150,7 +150,7 @@ public:
 			{
 				HRESULT hr = RichEditOle->GetObject(i, &reObj, REO_GETOBJ_NO_INTERFACES);
 				if (FAILED(hr)) continue;
-				
+
 				if (reObj.dwUser == (DWORD)(ISmileyBase*)this && reObj.clsid == CLSID_NULL) 
 				{
 					m_lastObjNum = i;
@@ -184,7 +184,7 @@ public:
 		rc.top    = m_rectExt.cy - m_sizeExtent.cy;
 		rc.right  = rc.left + m_sizeExtent.cx;
 		rc.bottom = rc.top + m_sizeExtent.cy;
- 
+
 		HBRUSH hbr = CreateSolidBrush(m_bkg); 
 		RECT frc = { 0, 0, m_rectExt.cx, m_rectExt.cy };
 		FillRect(hdcMem, &frc, hbr);
@@ -233,7 +233,7 @@ public:
 		{
 			m_visible = false;
 			m_allowAni = false;
-            UnloadSmiley();
+			UnloadSmiley();
 		}
 		ReleaseDC(m_hwnd, hdc);
 	}
@@ -251,10 +251,10 @@ public:
 		SendMessage(GetParent(m_hwnd), WM_NOTIFY, (WPARAM)m_hwnd, (LPARAM)&nmh);
 
 		switch (nmh.bAction)
- 		{
-        case FVCA_DRAW:
+		{
+		case FVCA_DRAW:
 			// support for pseudo-edit mode and event details
-            m_animtype = m_dirAniAllow ? animDrctRichEd : animStdOle;
+			m_animtype = m_dirAniAllow ? animDrctRichEd : animStdOle;
 			GetDrawingProp();
 			DrawOnRichEdit();
 			break;
@@ -272,7 +272,7 @@ public:
 			nmh.bEvent = FVCN_POSTFIRE;
 			SendMessage(GetParent(m_hwnd), WM_NOTIFY, (WPARAM)m_hwnd, (LPARAM)&nmh);
 			break;
-		
+
 		case FVCA_SKIPDRAW:
 			break;
 
@@ -287,43 +287,43 @@ public:
 
 	void ProcessTimerTick(void)
 	{
-	    if (m_visible && m_img && --m_counter <= 0)
-	    {
-		    m_nFramePosition = m_img->SelectNextFrame(m_nFramePosition);
-		    long frtm = m_img->GetFrameDelay();
-		    m_counter = frtm / 10 + ((frtm % 10) >= 5);
+		if (m_visible && m_img && --m_counter <= 0)
+		{
+			m_nFramePosition = m_img->SelectNextFrame(m_nFramePosition);
+			long frtm = m_img->GetFrameDelay();
+			m_counter = frtm / 10 + ((frtm % 10) >= 5);
 
-		    switch (m_animtype)
-		    {
-		    case animStdOle:
-			    if (m_allowAni) SendOnViewChange();
-                else 
-                {
-                    m_visible = false;
-                    UnloadSmiley();
-                }
-			    m_allowAni = false;
-			    break;
+			switch (m_animtype)
+			{
+			case animStdOle:
+				if (m_allowAni) SendOnViewChange();
+				else 
+				{
+					m_visible = false;
+					UnloadSmiley();
+				}
+				m_allowAni = false;
+				break;
 
-		    case animDrctRichEd:
-			    DrawOnRichEdit();
-			    break;
+			case animDrctRichEd:
+				DrawOnRichEdit();
+				break;
 
-		    case animHpp:
-			    DrawOnHPP();
-			    break;
-		    }
-	    }
-    }
+			case animHpp:
+				DrawOnHPP();
+				break;
+			}
+		}
+	}
 
 	void SetPosition(HWND hwnd, LPCRECT lpRect)
-    {
+	{
 		ISmileyBase::SetPosition(hwnd, lpRect);
 
-        m_allowAni = m_visible;
+		m_allowAni = m_visible;
 
 		if (m_visible) LoadSmiley();
-        else UnloadSmiley();
+		else UnloadSmiley();
 
 		if (lpRect == NULL) return;
 		if (m_animtype == animStdOle) 
@@ -347,14 +347,14 @@ public:
 		{
 			m_rectOrig.x = lpRect->left;
 			m_rectOrig.y = lpRect->top;
-            m_rectExt.cy = lpRect->bottom - lpRect->top;
+			m_rectExt.cy = lpRect->bottom - lpRect->top;
 		}
 	}
 
-    STDMETHOD(Close)(DWORD dwSaveOption)
+	STDMETHOD(Close)(DWORD dwSaveOption)
 	{
 		m_visible = false;
-        UnloadSmiley();
+		UnloadSmiley();
 
 		return ISmileyBase::Close(dwSaveOption);
 	}
@@ -363,23 +363,23 @@ public:
 		HDC hdc, LPCRECTL pRectBounds, LPCRECTL /* pRectWBounds */,
 		BOOL (__stdcall *)(ULONG_PTR), ULONG_PTR) 
 	{
- 		if (dwAspect != DVASPECT_CONTENT) return DV_E_DVASPECT;
+		if (dwAspect != DVASPECT_CONTENT) return DV_E_DVASPECT;
 		if (pRectBounds == NULL) return E_INVALIDARG;
 
 		LoadSmiley();
 
 		if (m_img == NULL) return E_FAIL;
 
-        m_sizeExtent.cx = pRectBounds->right  - pRectBounds->left;
-        m_sizeExtent.cy = pRectBounds->bottom - pRectBounds->top;
+		m_sizeExtent.cx = pRectBounds->right  - pRectBounds->left;
+		m_sizeExtent.cy = pRectBounds->bottom - pRectBounds->top;
 
-        m_rectExt = m_sizeExtent;
+		m_rectExt = m_sizeExtent;
 
 		switch (m_animtype)
 		{
 		case animDrctRichEd: 
 			{
-                m_rectExt.cy = pRectBounds->bottom - m_rectOrig.y;
+				m_rectExt.cy = pRectBounds->bottom - m_rectOrig.y;
 				RECT frc = { 0, 0, m_sizeExtent.cx - 1, m_sizeExtent.cy - 1 };
 
 				HBITMAP hBmp = CreateCompatibleBitmap(hdc, frc.right, frc.bottom);
@@ -412,7 +412,7 @@ public:
 
 		m_allowAni  = true;
 		m_visible = true;
-		
+
 		return S_OK;
 	}
 
