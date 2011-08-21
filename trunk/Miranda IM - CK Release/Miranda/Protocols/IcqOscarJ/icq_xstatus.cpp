@@ -24,8 +24,8 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_xstatus.cpp $
-// Revision       : $Revision: 12493 $
-// Last change on : $Date: 2010-08-28 05:57:14 +0200 (Sa, 28. Aug 2010) $
+// Revision       : $Revision: 13793 $
+// Last change on : $Date: 2011-08-20 19:10:01 +0200 (Sa, 20. Aug 2011) $
 // Last change by : $Author: borkra $
 //
 // DESCRIPTION:
@@ -268,6 +268,7 @@ int CIcqProto::CListMW_ExtraIconsApply(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+#define NULLCAP {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 
 capstr capXStatus[XSTATUS_COUNT] = {
 	{0x01, 0xD8, 0xD7, 0xEE, 0xAC, 0x3B, 0x49, 0x2A, 0xA5, 0x8D, 0xD3, 0xD8, 0x77, 0xE6, 0x6B, 0x92},
@@ -301,16 +302,22 @@ capstr capXStatus[XSTATUS_COUNT] = {
 	{0x16, 0xF5, 0xB7, 0x6F, 0xA9, 0xD2, 0x40, 0x35, 0x8C, 0xC5, 0xC0, 0x84, 0x70, 0x3C, 0x98, 0xFA},
 	{0x63, 0x14, 0x36, 0xff, 0x3f, 0x8a, 0x40, 0xd0, 0xa5, 0xcb, 0x7b, 0x66, 0xe0, 0x51, 0xb3, 0x64}, 
 	{0xb7, 0x08, 0x67, 0xf5, 0x38, 0x25, 0x43, 0x27, 0xa1, 0xff, 0xcf, 0x4c, 0xc1, 0x93, 0x97, 0x97},
-	{0xdd, 0xcf, 0x0e, 0xa9, 0x71, 0x95, 0x40, 0x48, 0xa9, 0xc6, 0x41, 0x32, 0x06, 0xd6, 0xf2, 0x80}};
+	{0xdd, 0xcf, 0x0e, 0xa9, 0x71, 0x95, 0x40, 0x48, 0xa9, 0xc6, 0x41, 0x32, 0x06, 0xd6, 0xf2, 0x80},
+	NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP,
+	NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP,
+	NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP,
+	NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP,
+	NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP, NULLCAP,
+	NULLCAP, NULLCAP, NULLCAP, NULLCAP};
 
-char *nameXStatus[XSTATUS_COUNT] = {
+const char *nameXStatus[XSTATUS_COUNT] = {
 	LPGEN("Angry"),         // 23
 	LPGEN("Taking a bath"), // 1
 	LPGEN("Tired"),         // 2
-	LPGEN("Party"),         // 3
+	LPGEN("Birthday"),      // 3
 	LPGEN("Drinking beer"), // 4
 	LPGEN("Thinking"),      // 5
-	LPGEN("Eating"),        // 6
+	LPGEN("Eating"),        // 80
 	LPGEN("Watching TV"),   // 7
 	LPGEN("Meeting"),       // 8
 	LPGEN("Coffee"),        // 9
@@ -325,17 +332,72 @@ char *nameXStatus[XSTATUS_COUNT] = {
 	LPGEN("Feeling sick"),  // 17
 	LPGEN("Sleeping"),      // 18
 	LPGEN("Surfing"),       // 19
-	LPGEN("Browsing"),      // 20
+	LPGEN("Internet"),      // 20
 	LPGEN("Working"),       // 21
 	LPGEN("Typing"),        // 22
-	LPGEN("Picnic"),
+	LPGEN("Picnic"),        // 66
 	LPGEN("Cooking"),
 	LPGEN("Smoking"),
 	LPGEN("I'm high"),
-	LPGEN("On WC"),
-	LPGEN("To be or not to be"),
+	LPGEN("On WC"),         // 68
+	LPGEN("To be or not to be"),// 77
 	LPGEN("Watching pro7 on TV"),
-	LPGEN("Love")};
+	LPGEN("Love"),          // 61
+	LPGEN("Hot Dog"),       //6
+	LPGEN("Rough"),         //24
+	LPGEN("Rock On"),       //25
+	LPGEN("Baby"),          //26
+	LPGEN("Soccer"),        //27
+	LPGEN("Pirate"),        //28
+	LPGEN("Cyclop"),        //29
+	LPGEN("Monkey"),        //30
+	LPGEN("Birdie"),        //31
+	LPGEN("Cool"),          //32
+	LPGEN("Evil"),          //33
+	LPGEN("Alien"),         //34
+	LPGEN("Scooter"),       //35
+	LPGEN("Mask"),          //36
+	LPGEN("Money"),         //37
+	LPGEN("Pilot"),         //38
+	LPGEN("Afro"),          //39
+	LPGEN("St. Patrick"),   //40
+	LPGEN("Headmaster"),    //41
+	LPGEN("Lips"),          //42
+	LPGEN("Ice-Cream"),     //43
+	LPGEN("Pink Lady"),     //44
+	LPGEN("Up yours"),      //45
+	LPGEN("Laughing"),      //46
+	LPGEN("Dog"),           //47
+	LPGEN("Candy"),         //48
+	LPGEN("Crazy Professor"),//50
+	LPGEN("Ninja"),         //51
+	LPGEN("Cocktail"),      //52
+	LPGEN("Punch"),         //53
+	LPGEN("Donut"),         //54
+	LPGEN("Feeling Good"),  //55
+	LPGEN("Lollypop"),      //56
+	LPGEN("Oink Oink"),     //57
+	LPGEN("Kitty"),         //58
+	LPGEN("Sumo"),          //59
+	LPGEN("Broken hearted"),//60
+	LPGEN("Free for Chat"), //62
+	LPGEN("@home"),         //63
+	LPGEN("@work"),         //64
+	LPGEN("Strawberry"),    //65
+	LPGEN("Angel"),         //67
+	LPGEN("Pizza"),         //69
+	LPGEN("Snoring"),       //70
+	LPGEN("On my mobile"),  //71
+	LPGEN("Depressed"),     //72
+	LPGEN("Beetle"),        //73
+	LPGEN("Double Rainbow"),//74
+	LPGEN("Basketball"),    //75
+	LPGEN("Cupid shot me"), //76
+	LPGEN("Celebrating"),   //78
+	LPGEN("Sushi"),         //79
+	LPGEN("Playing"),       //81
+	LPGEN("Writing")        //84
+	};
 
 const int moodXStatus[XSTATUS_COUNT] = {
 	23,
@@ -344,7 +406,7 @@ const int moodXStatus[XSTATUS_COUNT] = {
 	3,
 	4,
 	5,
-	6,
+	80,
 	7,
 	8,
 	9,
@@ -362,14 +424,68 @@ const int moodXStatus[XSTATUS_COUNT] = {
 	20,
 	21,
 	22,
+	66,
 	-1,
 	-1,
 	-1,
+	68,
+	77,
 	-1,
-	-1,
-	-1,
-	-1,
-	-1};
+	61,
+	6,
+	24,
+	25,
+	26,
+	27,
+	28,
+	29,
+	30,
+	31,
+	32,
+	33,
+	34,
+	35,
+	36,
+	37,
+	38,
+	39,
+	40,
+	41,
+	42,
+	43,
+	44,
+	45,
+	46,
+	47,
+	48,
+	50,
+	51,
+	52,
+	53,
+	54,
+	55,
+	56,
+	57,
+	58,
+	59,
+	60,
+	62,
+	63,
+	64,
+	65,
+	67,
+	69,
+	70,
+	71,
+	72,
+	73,
+	74,
+	75,
+	76,
+	78,
+	79,
+	81,
+	84};
 
 void CIcqProto::handleXStatusCaps(DWORD dwUIN, char *szUID, HANDLE hContact, BYTE *caps, int capsize, char *moods, int moodsize)
 {
@@ -449,8 +565,8 @@ void CIcqProto::handleXStatusCaps(DWORD dwUIN, char *szUID, HANDLE hContact, BYT
   			  null_strcpy(szMoodData, moods, moodsize);
 
     			if (moodXStatus[i] == -1) continue;
-	    		null_snprintf(szMoodId, SIZEOF(szMoodId), "icqmood%d", moodXStatus[i]);
-		    	if (!strcmpnull(szMoodId, szMoodData))
+	    		null_snprintf(szMoodId, SIZEOF(szMoodId), "0icqmood%d", moodXStatus[i]);
+				if (!strcmpnull(szMoodId, szMoodData))
 			    {
 				    BYTE bXStatusId = (BYTE)(i+1);
   				  char str[MAX_PATH];
@@ -532,7 +648,7 @@ void CIcqProto::updateServerCustomStatus(int fullUpdate)
 
 	  // prepare mood id
 	  if (m_bMoodsEnabled && bXStatus && moodXStatus[bXStatus-1] != -1)
-  		null_snprintf(szMoodData, SIZEOF(szMoodData), "icqmood%d", moodXStatus[bXStatus-1]);
+  		null_snprintf(szMoodData, SIZEOF(szMoodData), "0icqmood%d", moodXStatus[bXStatus-1]);
 	  else
       szMoodData[0] = '\0';
 

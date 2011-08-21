@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/fam_13servclist.cpp $
-// Revision       : $Revision: 13330 $
-// Last change on : $Date: 2011-01-23 22:11:45 +0100 (So, 23. Jan 2011) $
-// Last change by : $Author: borkra $
+// Revision       : $Revision: 13699 $
+// Last change on : $Date: 2011-07-09 23:15:09 +0200 (Sa, 09. Jul 2011) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -1383,6 +1383,10 @@ void CIcqProto::handleServerCListReply(BYTE *buf, WORD wLen, WORD wFlags, server
 				if (wItemId)
 					ReserveServerID(wItemId, SSIT_ITEM, SSIF_UNHANDLED);
 			}
+
+		case SSI_ITEM_SAVED:
+		case SSI_ITEM_PREAUTH:
+			break;
 
 		default:
 			NetLog_Server("SSI unhandled item %2x", wTlvType);
