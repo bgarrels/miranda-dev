@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13592 $
-Last change on : $Date: 2011-04-14 07:27:35 +0400 (Чт, 14 апр 2011) $
-Last change by : $Author: borkra $
+Revision       : $Revision: 13774 $
+Last change on : $Date: 2011-08-15 12:42:54 +0200 (Mo, 15. Aug 2011) $
+Last change by : $Author: Michael.Kunz@s2005.TU-Chemnitz.de $
 
 */
 
@@ -386,6 +386,7 @@ void CJabberProto::OnIqResultGetRoster( HXML iqNode, CJabberIqInfo* pInfo )
 	int i;
 	SortedList chatRooms = {0};
 	chatRooms.increment = 10;
+	JABBER_HTTP_AVATARS * httpavatars = 0;
 
 	for ( i=0; ; i++ ) {
 		BOOL bIsTransport=FALSE;
@@ -485,7 +486,7 @@ void CJabberProto::OnIqResultGetRoster( HXML iqNode, CJabberIqInfo* pInfo )
 		{
 			UpdateSubscriptionInfo(hContact, item);
 		}
-
+		
 		if ( item->group != NULL ) {
 			JabberContactListCreateGroup( item->group );
 
@@ -498,14 +499,28 @@ void CJabberProto::OnIqResultGetRoster( HXML iqNode, CJabberIqInfo* pInfo )
 			}
 			else DBWriteContactSettingTString( hContact, "CList", "Group", item->group );
 		}
-		else DBDeleteContactSetting( hContact, "CList", "Group" );
+		else if (m_options.IgnoreRosterGroups == FALSE)
+			DBDeleteContactSetting( hContact, "CList", "Group" );
 		if ( hContact != NULL ) {
 			if ( bIsTransport)
 				JSetByte( hContact, "IsTransport", TRUE );
 			else
 				JSetByte( hContact, "IsTransport", FALSE );
 		}
+
+		const TCHAR* imagepath = xmlGetAttrValue(itemNode, _T("vz:img"));
+		if (imagepath)
+		{
+			JABBER_HTTP_AVATARS * ha = (JABBER_HTTP_AVATARS*)mir_alloc(sizeof(JABBER_HTTP_AVATARS));
+			ha->Next = httpavatars;
+			httpavatars = ha;
+			ha->hContact = hContact;
+			ha->Url = mir_tstrdup(imagepath);
+		}
 	}
+
+	if (httpavatars)
+		JForkThread((JThreadFunc)&CJabberProto::LoadHttpAvatars, httpavatars);
 
 	// Delete orphaned contacts ( if roster sync is enabled )
 	if ( m_options.RosterSync == TRUE ) {

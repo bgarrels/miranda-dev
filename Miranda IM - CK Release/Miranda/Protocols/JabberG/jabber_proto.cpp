@@ -42,8 +42,8 @@ Last change by : $Author: m_mluhov $
 #include "jabber_caps.h"
 #include "jabber_disco.h"
 
-#include "m_proto_listeningto.h"
-#include "m_modernopt.h"
+#include "sdk/m_proto_listeningto.h"
+#include "sdk/m_modernopt.h"
 
 #pragma warning(disable:4355)
 
@@ -204,7 +204,7 @@ CJabberProto::CJabberProto( const char* aProtoName, const TCHAR* aUserName ) :
 		m_tszSelectedLang = mir_tstrdup( dbv.ptszVal );
 		JFreeVariant( &dbv );
 	}
-	else m_tszSelectedLang = mir_tstrdup( _T( "ru" ));
+	else m_tszSelectedLang = mir_tstrdup( _T( "en" ));
 
 	if (!DBGetContactSettingString(NULL, m_szModuleName, "Password", &dbv))
 	{
@@ -701,7 +701,7 @@ DWORD_PTR __cdecl CJabberProto::GetCaps( int type, HANDLE /*hContact*/ )
 {
 	switch( type ) {
 	case PFLAGNUM_1:
-		return PF1_IM | PF1_AUTHREQ | PF1_CHAT | PF1_SERVERCLIST | PF1_MODEMSG | PF1_BASICSEARCH | PF1_EXTSEARCH | PF1_FILE | PF1_CONTACT | PF1_VISLIST | PF1_INVISLIST;
+		return PF1_IM | PF1_AUTHREQ | PF1_CHAT | PF1_SERVERCLIST | PF1_MODEMSG | PF1_BASICSEARCH | PF1_EXTSEARCH | PF1_FILE | PF1_CONTACT;
 	case PFLAGNUM_2:
 		return PF2_ONLINE | PF2_INVISIBLE | PF2_SHORTAWAY | PF2_LONGAWAY | PF2_HEAVYDND | PF2_FREECHAT;
 	case PFLAGNUM_3:
@@ -1152,12 +1152,25 @@ HANDLE __cdecl CJabberProto::SendFile( HANDLE hContact, const TCHAR* szDescripti
 ////////////////////////////////////////////////////////////////////////////////////////
 // JabberSendMessage - sends a message
 
-void __cdecl CJabberProto::SendMessageAckThread( void* hContact )
+struct TFakeAckParams
 {
+	inline TFakeAckParams( HANDLE p1, const char* p2 ) 
+		: hContact( p1 ), msg( p2 ) {}
+
+	HANDLE	hContact;
+	const char*	msg;
+};
+
+void __cdecl CJabberProto::SendMessageAckThread( void* param )
+{
+	TFakeAckParams *par = ( TFakeAckParams* )param;
 	Sleep( 100 );
 	Log( "Broadcast ACK" );
-	JSendBroadcast( hContact, ACKTYPE_MESSAGE, ACKRESULT_SUCCESS, ( HANDLE ) 1, 0 );
+	JSendBroadcast( par->hContact, ACKTYPE_MESSAGE, 
+		par->msg ? ACKRESULT_FAILED : ACKRESULT_SUCCESS, 
+		( HANDLE ) 1, ( LPARAM ) par->msg );
 	Log( "Returning from thread" );
+	delete par;
 }
 
 static char PGP_PROLOG[] = "-----BEGIN PGP MESSAGE-----\r\n\r\n";
@@ -1169,7 +1182,8 @@ int __cdecl CJabberProto::SendMsg( HANDLE hContact, int flags, const char* pszSr
 
 	DBVARIANT dbv;
 	if ( !m_bJabberOnline || JGetStringT( hContact, "jid", &dbv )) {
-		JForkThread( &CJabberProto::SendMessageAckThread, hContact );
+		TFakeAckParams *param = new TFakeAckParams( hContact, Translate( "Protocol is offline or no jid" ));
+		JForkThread( &CJabberProto::SendMessageAckThread, param );
 		return 1;
 	}
 
@@ -1250,7 +1264,7 @@ int __cdecl CJabberProto::SendMsg( HANDLE hContact, int flags, const char* pszSr
 			}
 			m_ThreadInfo->send( m );
 
-			JForkThread( &CJabberProto::SendMessageAckThread, hContact );
+			JForkThread( &CJabberProto::SendMessageAckThread, new TFakeAckParams( hContact, 0 ));
 
 			nSentMsgId = 1;
 		}

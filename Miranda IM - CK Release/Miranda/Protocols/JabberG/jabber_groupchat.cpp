@@ -18,9 +18,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13625 $
-Last change on : $Date: 2011-04-22 23:45:29 +0400 (Пт, 22 апр 2011) $
-Last change by : $Author: borkra $
+Revision       : $Revision: 13697 $
+Last change on : $Date: 2011-07-09 22:24:40 +0200 (Sa, 09. Jul 2011) $
+Last change by : $Author: george.hazan $
 
 */
 
@@ -1137,13 +1137,15 @@ void CJabberProto::GroupchatProcessPresence( HXML node )
 		TCHAR* str = JabberErrorMsg( errorNode, &errorCode );
 
 		if ( errorCode == JABBER_ERROR_CONFLICT ) {
-			// try to use our resource first
-			if ( ++item->iChatState == 1 ) {
-				replaceStr( item->nick, m_ThreadInfo->resource );
-
-				TCHAR text[ 1024 ];
-				mir_sntprintf( text, SIZEOF( text ), _T("%s/%s_%s"), item->jid, m_ThreadInfo->username, m_ThreadInfo->resource );
-				SendPresenceTo( m_iStatus, text, NULL );
+			TCHAR newNick[256] = { 0 };
+			if (++item->iChatState == 1 &&
+				JGetStringT(NULL, "GcAltNick", newNick, SIZEOF(newNick)) != NULL &&
+				newNick[0] != _T('\0'))
+			{
+				replaceStr(item->nick, newNick);
+				TCHAR text[1024] = { 0 };
+				mir_sntprintf(text, SIZEOF(text), _T("%s/%s"), item->jid, newNick);
+				SendPresenceTo(m_iStatus, text, NULL);
 			}
 			else {
 				CallFunctionAsync( JabberGroupchatChangeNickname, new JabberGroupchatChangeNicknameParam( this, from ));
