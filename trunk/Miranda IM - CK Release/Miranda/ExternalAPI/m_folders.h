@@ -55,7 +55,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define FOLDER_SCRIPTS                 MIRANDA_PATHT "\\" "scripts"
 #define FOLDER_UPDATES                 MIRANDA_PATHT "\\" "updates"
 
-#define FOLDER_CUSTOMIZE               MIRANDA_PATH "\\" "customize"
+#define FOLDER_CUSTOMIZE               MIRANDA_PATHT "\\" "customize"
 #define FOLDER_CUSTOMIZE_SOUNDS        FOLDER_CUSTOMIZE "\\sounds"
 #define FOLDER_CUSTOMIZE_ICONS         FOLDER_CUSTOMIZE "\\icons"
 #define FOLDER_CUSTOMIZE_SMILEYS       FOLDER_CUSTOMIZE "\\smileys"
@@ -153,6 +153,7 @@ typedef struct{
 #ifndef M_UTILS_H__
 #error The helper functions require that m_utils.h be included in the project. Please include that file if you want to use the helper functions. If you don''t want to use the functions just define FOLDERS_NO_HELPER_FUNCTIONS.
 #endif
+//#include "../../../include/newpluginapi.h"
 
 __inline static HANDLE FoldersRegisterCustomPath(const char *section, const char *name, const char *defaultPath)
 {
@@ -282,7 +283,7 @@ __inline static INT_PTR FoldersGetCustomPathExW(HANDLE hFolderEntry, wchar_t *pa
 #  define FoldersRegisterCustomPathT FoldersRegisterCustomPathW
 #else
 #  define FoldersGetCustomPathT FoldersGetCustomPath
-#  define FoldersGetCustomPathExT FoldersGetCustomPathEx
+#  define FoldersGetCustomPathExT FoldersGetCustomPath
 #  define FoldersRegisterCustomPathT FoldersRegisterCustomPath
 #endif
 
