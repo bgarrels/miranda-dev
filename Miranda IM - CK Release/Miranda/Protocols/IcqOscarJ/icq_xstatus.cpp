@@ -25,7 +25,7 @@
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_xstatus.cpp $
 // Revision       : $Revision: 13793 $
-// Last change on : $Date: 2011-08-20 19:10:01 +0200 (Sa, 20. Aug 2011) $
+// Last change on : $Date: 2011-08-20 21:10:01 +0400 (Сб, 20 авг 2011) $
 // Last change by : $Author: borkra $
 //
 // DESCRIPTION:
