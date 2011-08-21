@@ -24,8 +24,8 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_proto.h $
-// Revision       : $Revision: 13553 $
-// Last change on : $Date: 2011-04-08 03:25:55 +0200 (Fr, 08. Apr 2011) $
+// Revision       : $Revision: 13678 $
+// Last change on : $Date: 2011-07-03 23:53:23 +0200 (So, 03. Jul 2011) $
 // Last change by : $Author: borkra $
 //
 // DESCRIPTION:
@@ -42,7 +42,7 @@
 
 #define LISTSIZE 100
 
-#define XSTATUS_COUNT 32
+#define XSTATUS_COUNT 86
 
 struct CIcqProto;
 typedef void    ( __cdecl CIcqProto::*IcqThreadFunc )( void* );
