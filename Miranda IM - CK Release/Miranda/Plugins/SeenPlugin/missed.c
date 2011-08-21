@@ -104,7 +104,7 @@ int CheckIfOnline(void)
 
 
 
-BOOL CALLBACK MissedDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
+INT_PTR CALLBACK MissedDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
 {
 	POINT pt;
 	RECT rcinit,rcresized,rcb,rcd;

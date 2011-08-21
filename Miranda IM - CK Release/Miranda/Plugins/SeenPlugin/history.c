@@ -167,7 +167,7 @@ void MyResizeGetOffset (HWND hwndDlg, HWND hwndControl,
 	*nDy = nHeight - (rcinit.bottom - rcinit.top);
 }
 
-BOOL CALLBACK HistoryDlgProc(HWND hwndDlg, UINT Message, WPARAM wparam, LPARAM lparam)
+INT_PTR CALLBACK HistoryDlgProc(HWND hwndDlg, UINT Message, WPARAM wparam, LPARAM lparam)
 {
 	HANDLE hContact;
 	char sztemp[1024]="";
@@ -178,7 +178,7 @@ BOOL CALLBACK HistoryDlgProc(HWND hwndDlg, UINT Message, WPARAM wparam, LPARAM l
 		case WM_INITDIALOG:
 			TranslateDialogDefault(hwndDlg);
 			hContact = (HANDLE)lparam;
-			SetWindowLong(hwndDlg,GWL_USERDATA,lparam);
+			SetWindowLongPtr(hwndDlg,GWLP_USERDATA,lparam);
 			strcpy(sztemp,(char *)CallService(MS_CLIST_GETCONTACTDISPLAYNAME,(WPARAM)hContact,0));
 			strcat(sztemp, ": ");
 			strcat(sztemp, Translate("last seen history"));
@@ -230,7 +230,7 @@ BOOL CALLBACK HistoryDlgProc(HWND hwndDlg, UINT Message, WPARAM wparam, LPARAM l
 		case WM_DRAWITEM:
 			return CallService(MS_CLIST_MENUDRAWITEM,wparam,lparam);
         case WM_COMMAND:
-			hContact=(HANDLE)GetWindowLong(hwndDlg,GWL_USERDATA);
+			hContact=(HANDLE)GetWindowLongPtr(hwndDlg,GWLP_USERDATA);
 			if(CallService(MS_CLIST_MENUPROCESSCOMMAND,MAKEWPARAM(LOWORD(wparam),MPCF_CONTACTMENU),(LPARAM)hContact))
 				break;
             switch(LOWORD(wparam))

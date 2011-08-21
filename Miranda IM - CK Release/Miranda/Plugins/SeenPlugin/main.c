@@ -29,6 +29,7 @@ HINSTANCE hInstance;
 HANDLE ehdb = NULL, ehproto = NULL, ehmissed = NULL, ehuserinfo = NULL, ehmissed_proto = NULL, hOptInit = NULL, hMainInit = NULL;
 PLUGINLINK *pluginLink;
 struct MM_INTERFACE mmi;
+int hLangpack;
 char authemail[] = "fscking@spammer.oip.info";//the correct e-mail shall be constructed in DllMain
 PLUGININFOEX pluginInfo={
 		sizeof(PLUGININFOEX),
@@ -55,8 +56,8 @@ PLUGININFOEX pluginInfo={
 
 #define TRANSNUMBER 2
 DBVTranslation idleTr[TRANSNUMBER]={
-	{(TranslateFunc*)any_to_IdleNotidleUnknown, L"Any to Idle/Not Idle/Unknown",0},
-	{(TranslateFunc*)any_to_Idle, L"Any to /Idle or empty",0}
+	{(TranslateFunc*)any_to_IdleNotidleUnknown, _T("Any to Idle/Not Idle/Unknown"),0},
+	{(TranslateFunc*)any_to_Idle, _T("Any to /Idle or empty"),0}
 };
 
 
@@ -126,16 +127,6 @@ int MainInit(WPARAM wparam,LPARAM lparam)
 	return 0;
 }
 
-__declspec(dllexport) PLUGININFOEX * MirandaPluginInfo(DWORD mirandaVersion)
-{
-	if ( mirandaVersion < PLUGIN_MAKE_VERSION(0,5,2,0)) {
-		MessageBox( NULL, _T("The LastSeen-mod plugin cannot be loaded. Your Miranda is too old."), _T("SeenPlugin"), MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST );
-		return NULL;
-	}
-	if ( mirandaVersion < PLUGIN_MAKE_VERSION( 0,7,0,17 )) pluginInfo.cbSize = sizeof( PLUGININFO );
-	return &pluginInfo;
-}
-
 __declspec(dllexport) PLUGININFOEX * MirandaPluginInfoEx(DWORD mirandaVersion)
 {
 	pluginInfo.cbSize = sizeof( PLUGININFOEX );
@@ -182,6 +173,7 @@ int __declspec(dllexport)Load(PLUGINLINK *link)
 {
 	pluginLink=link;
 	mir_getMMI(&mmi);
+	mir_getLP(&pluginInfo);
 	// this isn't required for most events
 	// but the ME_USERINFO_INITIALISE
 	// I decided to hook all events after
