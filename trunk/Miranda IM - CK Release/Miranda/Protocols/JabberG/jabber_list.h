@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
-Last change on : $Date: 2011-03-17 22:12:56 +0300 (Чт, 17 мар 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13774 $
+Last change on : $Date: 2011-08-15 12:42:54 +0200 (Mo, 15. Aug 2011) $
+Last change by : $Author: Michael.Kunz@s2005.TU-Chemnitz.de $
 
 */
 
@@ -187,6 +187,13 @@ struct JABBER_LIST_ITEM
 	BOOL bAutoJoin;
 
 	BOOL bUseResource;
+};
+
+struct JABBER_HTTP_AVATARS
+{
+	JABBER_HTTP_AVATARS * Next;
+	HANDLE hContact;
+	TCHAR * Url;
 };
 
 #endif

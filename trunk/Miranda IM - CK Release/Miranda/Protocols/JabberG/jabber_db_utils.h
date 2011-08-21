@@ -220,6 +220,7 @@ struct CJabberOptions
 	CMOption<DWORD> ConnectionKeepAliveInterval;
 	CMOption<DWORD> ConnectionKeepAliveTimeout;
 	CMOption<BYTE> ProcessXMPPLinks;
+	CMOption<BYTE> IgnoreRosterGroups;
 
 	CJabberOptions(PROTO_INTERFACE *proto):
 		BsDirect(proto, "BsDirect", TRUE),
@@ -242,7 +243,7 @@ struct CJabberOptions
 		EnableRemoteControl(proto, "EnableRemoteControl", FALSE),
 		EnableUserActivity(proto, "EnableUserActivity", TRUE),
 		EnableUserMood(proto, "EnableUserMood", TRUE),
-		EnableUserTune(proto, "EnableUserTune", TRUE),
+		EnableUserTune(proto, "EnableUserTune", FALSE),
 		EnableZlib(proto, "EnableZlib", TRUE),
 		ExtendedSearch(proto, "ExtendedSearch", TRUE),
 		FixIncorrectTimestamps(proto, "FixIncorrectTimestamps", TRUE),
@@ -258,8 +259,8 @@ struct CJabberOptions
 		LogPresence(proto, "LogPresence", TRUE),
 		LogPresenceErrors(proto, "LogPresenceErrors", FALSE),
 		ManualConnect(proto, "ManualConnect", FALSE),
-		MsgAck(proto, "MsgAck", TRUE),
-		RosterSync(proto, "RosterSync", TRUE),
+		MsgAck(proto, "MsgAck", FALSE),
+		RosterSync(proto, "RosterSync", FALSE),
 		SavePassword(proto, "SavePassword", TRUE),
 		ShowForeignResourceInMirVer(proto, "ShowForeignResourceInMirVer", FALSE),
 		ShowOSVersion(proto, "ShowOSVersion", TRUE),
@@ -272,7 +273,8 @@ struct CJabberOptions
 		RcMarkMessagesAsRead(proto, "RcMarkMessagesAsRead", 1),
 		ConnectionKeepAliveInterval(proto, "ConnectionKeepAliveInterval", 60000),
 		ConnectionKeepAliveTimeout(proto, "ConnectionKeepAliveTimeout", 50000),
-		ProcessXMPPLinks(proto, "ProcessXMPPLinks", FALSE)
+		ProcessXMPPLinks(proto, "ProcessXMPPLinks", FALSE),
+		IgnoreRosterGroups(proto, "IgnoreRosterGroups", FALSE)
 		{}
 };
 

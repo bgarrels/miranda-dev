@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13640 $
-Last change on : $Date: 2011-05-26 19:52:49 +0200 (Do, 26. Mai 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13772 $
+Last change on : $Date: 2011-08-14 23:41:15 +0200 (So, 14. Aug 2011) $
+Last change by : $Author: Michael.Kunz@s2005.TU-Chemnitz.de $
 
 */
 
@@ -30,8 +30,8 @@ Last change by : $Author: george.hazan $
 
 #include "jabber_caps.h"
 #include "jabber_opttree.h"
-#include "m_wizard.h"
-#include "m_modernopt.h"
+#include "sdk/m_wizard.h"
+#include "sdk/m_modernopt.h"
 
 static BOOL (WINAPI *pfnEnableThemeDialogTexture)(HANDLE, DWORD) = 0;
 
@@ -855,6 +855,7 @@ public:
 		m_otvOptions.AddOption(LPGENT("Other") _T("/") LPGENT("Fix incorrect timestamps in incoming messages"), m_proto->m_options.FixIncorrectTimestamps);
 		m_otvOptions.AddOption(LPGENT("Other") _T("/") LPGENT("Disable frame"), m_proto->m_options.DisableFrame);
 		m_otvOptions.AddOption(LPGENT("Other") _T("/") LPGENT("Enable XMPP link processing (requires Association Manager)"), m_proto->m_options.ProcessXMPPLinks);
+		m_otvOptions.AddOption(LPGENT("Other") _T("/") LPGENT("Keep contacts assigned to local groups (ignore roster group)"), m_proto->m_options.IgnoreRosterGroups);
 
 		m_otvOptions.AddOption(LPGENT("Security") _T("/") LPGENT("Allow servers to request version (XEP-0092)"), m_proto->m_options.AllowVersionRequests);
 		m_otvOptions.AddOption(LPGENT("Security") _T("/") LPGENT("Show information about operating system in version replies"), m_proto->m_options.ShowOSVersion);
@@ -927,6 +928,7 @@ class CDlgOptGc: public CJabberDlgBase
 {
 	typedef CJabberDlgBase CSuper;
 
+	CCtrlEdit		m_txtAltNick;
 	CCtrlEdit		m_txtSlap;
 	CCtrlEdit		m_txtQuit;
 	CCtrlTreeOpts	m_otvOptions;
@@ -934,10 +936,12 @@ class CDlgOptGc: public CJabberDlgBase
 public:
 	CDlgOptGc(CJabberProto *proto):
 		CJabberDlgBase(proto, IDD_OPT_JABBER4, NULL, false),
+		m_txtAltNick(this, IDC_TXT_ALTNICK),
 		m_txtSlap(this, IDC_TXT_SLAP),
 		m_txtQuit(this, IDC_TXT_QUIT),
 		m_otvOptions(this, IDC_OPTTREE)
 	{
+		CreateLink(m_txtAltNick, "GcAltNick", _T(""));
 		CreateLink(m_txtSlap, "GcMsgSlap", TranslateTS(JABBER_GC_MSG_SLAP));
 		CreateLink(m_txtQuit, "GcMsgQuit", TranslateTS(JABBER_GC_MSG_QUIT));
 
