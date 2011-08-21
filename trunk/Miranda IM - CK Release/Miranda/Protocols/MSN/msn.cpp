@@ -1,6 +1,6 @@
 /*
 Plugin of Miranda IM for communicating with users of the MSN Messenger protocol.
-Copyright (c) 2006-2010 Boris Krasnovskiy.
+Copyright (c) 2006-2011 Boris Krasnovskiy.
 Copyright (c) 2003-2005 George Hazan.
 Copyright (c) 2002-2003 Richard Hughes (original version).
 
@@ -31,6 +31,7 @@ LIST_INTERFACE li;
 UTF8_INTERFACE utfi;
 MD5_INTERFACE  md5i;
 SHA1_INTERFACE sha1i;
+TIME_API       tmi;
 
 HANDLE hMooduleLoaded;
 
@@ -43,10 +44,10 @@ void MsnLinks_Destroy(void);
 /////////////////////////////////////////////////////////////////////////////////////////
 // Global variables
 
-bool	msnHaveChatDll = false;
+bool	msnHaveChatDll;
 int		avsPresent = -1;
 
-PLUGININFOEX pluginInfo =
+static const PLUGININFOEX pluginInfo =
 {
 	sizeof(PLUGININFOEX),
 	"MSN Protocol",
@@ -54,7 +55,7 @@ PLUGININFOEX pluginInfo =
 	"Adds support for communicating with users of the MSN Messenger network",
 	"Boris Krasnovskiy, George Hazan, Richard Hughes",
 	"borkra@miranda-im.org",
-	"© 2001-2010 Richard Hughes, George Hazan, Boris Krasnovskiy",
+	"© 2001-2011 Richard Hughes, George Hazan, Boris Krasnovskiy",
 	"http://miranda-im.org",
 	UNICODE_AWARE,	
 	0,
@@ -81,7 +82,7 @@ OBJLIST<CMsnProto> g_Instances(1, sttCompareProtocols);
 /////////////////////////////////////////////////////////////////////////////////////////
 //	Main DLL function
 
-extern "C" BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
+extern "C" BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason,LPVOID lpvReserved)
 {
 	if (fdwReason == DLL_PROCESS_ATTACH)
 	{
@@ -130,6 +131,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK* link)
 	mir_getUTFI(&utfi);
 	mir_getMD5I(&md5i);
 	mir_getSHA1I(&sha1i);
+	mir_getTMI(&tmi);
 	mir_getLP(&pluginInfo);
 
 	hMooduleLoaded = HookEvent(ME_SYSTEM_MODULESLOADED, OnModulesLoaded);
@@ -161,11 +163,11 @@ extern "C" int __declspec(dllexport) Unload(void)
 /////////////////////////////////////////////////////////////////////////////////////////
 // MirandaPluginInfoEx - returns an information about a plugin
 
-extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
+extern "C" __declspec(dllexport) const PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {
-	if (mirandaVersion < PLUGIN_MAKE_VERSION(0, 9, 0, 0)) 
+	if (mirandaVersion < PLUGIN_MAKE_VERSION(0, 10, 0, 2)) 
 	{
-		MessageBox(NULL, _T("The MSN protocol plugin cannot be loaded. It requires Miranda IM 0.9.0.0 or later."), 
+		MessageBox(NULL, _T("The MSN protocol plugin cannot be loaded. It requires Miranda IM 0.10.0.2 or later."), 
 			_T("MSN Protocol"), MB_OK | MB_ICONWARNING | MB_SETFOREGROUND | MB_TOPMOST);
 		return NULL;
 	}
