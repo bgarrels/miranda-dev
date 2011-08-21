@@ -59,12 +59,12 @@ int IsWatchedProtocol(const char* szProto)
 	if (pd==NULL || pd->type!=PROTOTYPE_PROTOCOL || CallProtoService(pd->szName,PS_GETCAPS,PFLAGNUM_2,0)==0)
 		return 0;
 
-	iProtoLen = strlen(szProto);
+	iProtoLen = (int)_tcslen(szProto);
 	if(DBGetContactSetting(NULL, S_MOD, "WatchedProtocols", &dbv))
 		szWatched = DEFAULT_WATCHEDPROTOCOLS;
 	else
 		szWatched = dbv.pszVal;
-	iWatchedLen = strlen(szWatched);
+	iWatchedLen = (int)_tcslen(szWatched);
 
 	if (*szWatched == '\0') 
 	{

@@ -110,8 +110,8 @@ void FileWrite(HANDLE hcontact)
 	strcpy(szout,ParseString(!DBGetContactSetting(NULL,S_MOD,"FileStamp",&dbv)?dbv.pszVal:DEFAULT_FILESTAMP,hcontact,1));
 	DBFreeVariant(&dbv);
 	
-	WriteFile(fhout,szout,strlen(szout),&byteswritten,NULL);
-	WriteFile(fhout,sznl,strlen(sznl),&byteswritten,NULL);
+	WriteFile(fhout,szout, (DWORD)_tcslen(szout),&byteswritten,NULL);
+	WriteFile(fhout,sznl, (DWORD)_tcslen(sznl),&byteswritten,NULL);
 
 	CloseHandle(fhout);
 

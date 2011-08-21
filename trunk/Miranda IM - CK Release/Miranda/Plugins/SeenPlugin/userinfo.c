@@ -50,7 +50,7 @@ BOOL CALLBACK EditProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
 
 
 
-BOOL CALLBACK UserinfoDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
+INT_PTR CALLBACK UserinfoDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
 {
 	char *szout;
 	DBVARIANT dbv;
@@ -58,7 +58,7 @@ BOOL CALLBACK UserinfoDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
 	switch(msg){
 
 		case WM_INITDIALOG:
-			MainProc=(WNDPROC)SetWindowLong(GetDlgItem(hdlg,IDC_INFOTEXT),GWL_WNDPROC,(LONG)EditProc);
+			MainProc=(WNDPROC)SetWindowLongPtr(GetDlgItem(hdlg,IDC_INFOTEXT),GWLP_WNDPROC,(LONG)EditProc);
 			szout=strdup(ParseString((!DBGetContactSetting(NULL,S_MOD,"UserStamp",&dbv)?dbv.pszVal:DEFAULT_USERSTAMP),(HANDLE)lparam,0));
 			SetDlgItemText(hdlg,IDC_INFOTEXT,szout);
 			if(!strcmp(szout,Translate("<unknown>")))

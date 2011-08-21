@@ -39,7 +39,7 @@ int CheckIfOnline(void);
 int ResetMissed(void);
 static BOOL (WINAPI *pfnEnableThemeDialogTexture)(HANDLE, DWORD) = 0;
 
-BOOL CALLBACK OptsPopUpsDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
+INT_PTR CALLBACK OptsPopUpsDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
 {
 	DBVARIANT dbv;
 	int i;
@@ -184,7 +184,7 @@ BOOL CALLBACK OptsPopUpsDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
 	return 0;
 }
 
-BOOL CALLBACK OptsSettingsDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
+INT_PTR CALLBACK OptsSettingsDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
 {
 	DBVARIANT dbv;
 	char szstamp[256];
@@ -406,7 +406,7 @@ BOOL CALLBACK OptsSettingsDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam
 									TreeView_GetItem(hwndTreeView, &tvItem);
 									protocol = (char*)tvItem.lParam;
 									if ((BOOL)(tvItem.state >> 12) -1) {
-										size = (size + strlen(protocol)+2) * sizeof(char);
+										size = (size + (int)_tcslen(protocol)+2) * sizeof(char);
 										watchedProtocols = (char *)realloc(watchedProtocols, size);
 										strcat(watchedProtocols, protocol); 
 										strcat(watchedProtocols, " "); 

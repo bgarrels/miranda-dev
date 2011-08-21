@@ -32,7 +32,7 @@ void InitHistoryDialog(void);
 /*
 Handles the messages sent by clicking the contact's menu item
 */
-int MenuitemClicked(WPARAM wparam,LPARAM lparam)
+INT_PTR MenuitemClicked(WPARAM wparam,LPARAM lparam)
 {
 	ShowHistory((HANDLE)wparam, 0);
 	return 0;
