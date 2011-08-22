@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: nen.h 13589 2011-04-12 14:51:27Z george.hazan $
+ * $Id: nen.h 13750 2011-08-03 20:10:43Z george.hazan $
  *
  * This implements the event notification module for tabSRMM. The code
  * is largely based on the NewEventNotify plugin for Miranda IM. See
@@ -55,8 +55,8 @@ int tabSRMM_ShowPopup(WPARAM wParam, LPARAM lParam, WORD eventType, int windowOp
 #define DEFAULT_COLTEXT RGB(0,0,0)
 #define DEFAULT_MASKNOTIFY (MASK_MESSAGE|MASK_URL|MASK_FILE|MASK_OTHER)
 #define DEFAULT_MASKACTL (MASK_OPEN|MASK_DISMISS)
-#define DEFAULT_MASKACTR (MASK_DISMISS)
-#define DEFAULT_DELAY -1
+#define DEFAULT_MASKACTR (MASK_DISMISS|MASK_REMOVE)
+#define DEFAULT_DELAY 0
 
 #define MASK_MESSAGE    0x0001
 #define MASK_URL        0x0002
@@ -81,8 +81,11 @@ int tabSRMM_ShowPopup(WPARAM wParam, LPARAM lParam, WORD eventType, int windowOp
 #define OPT_COLBACK_MESSAGE "ColorBackMsg"
 #define OPT_COLTEXT_MESSAGE "ColorTextMsg"
 #define OPT_COLDEFAULT_OTHERS "DefaultColorOthers"
+#define OPT_COLDEFAULT_ERR "DefaultColorErr"
 #define OPT_COLBACK_OTHERS "ColorBackOthers"
 #define OPT_COLTEXT_OTHERS "ColorTextOthers"
+#define OPT_COLBACK_ERR "ColorBackErr"
+#define OPT_COLTEXT_ERR "ColorTextErr"
 #define OPT_MASKNOTIFY "Notify"
 #define OPT_MASKACTL "ActionLeft"
 #define OPT_MASKACTR "ActionRight"
@@ -90,6 +93,7 @@ int tabSRMM_ShowPopup(WPARAM wParam, LPARAM lParam, WORD eventType, int windowOp
 #define OPT_MERGEPOPUP "MergePopup"
 #define OPT_DELAY_MESSAGE "DelayMessage"
 #define OPT_DELAY_OTHERS "DelayOthers"
+#define OPT_DELAY_ERR "DelayErr"
 #define OPT_SHOW_HEADERS "ShowHeaders"
 #define OPT_NORSS "NoRSSAnnounces"
 #define OPT_DISABLE "Disabled"
@@ -102,16 +106,20 @@ struct NEN_OPTIONS {
 	BOOL bPreview;
 	BOOL bDefaultColorMsg;
 	BOOL bDefaultColorOthers;
+	BOOL bDefaultColorErr;
 	BOOL bDisableNonMessage;
 	COLORREF colBackMsg;
 	COLORREF colTextMsg;
 	COLORREF colBackOthers;
 	COLORREF colTextOthers;
+	COLORREF colBackErr;
+	COLORREF colTextErr;
 	UINT maskActL;
 	UINT maskActR;
 	UINT maskActTE;
 	int iDelayMsg;
 	int iDelayOthers;
+	int iDelayErr;
 	int iDelayDefault;
 	BOOL bMergePopup;
 	BOOL bShowHeaders;
