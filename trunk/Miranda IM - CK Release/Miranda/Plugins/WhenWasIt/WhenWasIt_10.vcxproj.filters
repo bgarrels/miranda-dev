@@ -33,9 +33,6 @@
     <ClCompile Include="icons.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mirandaMem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="notifiers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -69,9 +66,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="icons.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mirandaMem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="notifiers.h">

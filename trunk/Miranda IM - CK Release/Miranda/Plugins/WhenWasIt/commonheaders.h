@@ -1,7 +1,7 @@
 /*
 WhenWasIt (birthday reminder) plugin for Miranda IM
 
-Copyright © 2006 Cristian Libotean
+Copyright © 2006-2011 Cristian Libotean
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define M_WWI_COMMONHEADERS_H
 
 #define MIRANDA_VER    0x0900
+#define MIRANDA_CUSTOM_LP
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,7 +39,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "services.h"
 //#include "events.h"
 #include "hooked_events.h"
-#include "mirandaMem.h"
 #include "icons.h"
 #include "notifiers.h"
 //#include "birthdays.h"
@@ -71,24 +71,6 @@ extern HINSTANCE hInstance;
 extern HWND hBirthdaysDlg;
 extern HWND hUpcomingDlg;
 extern HANDLE hAddBirthdayWndsList;
-
-#define OLD_MIRANDAPLUGININFO_SUPPORT PLUGININFO oldPluginInfo = { \
-	sizeof(PLUGININFO), \
-	pluginInfo.shortName, \
-	pluginInfo.version, \
-	pluginInfo.description, \
-	pluginInfo.author, \
-	pluginInfo.authorEmail, \
-	pluginInfo.copyright, \
-	pluginInfo.homepage, \
-	pluginInfo.flags, \
-	pluginInfo.replacesDefaultModule \
-}; \
-\
-extern "C" __declspec(dllexport) PLUGININFO *MirandaPluginInfo(DWORD mirandaVersion) \
-{ \
-	return &oldPluginInfo; \
-}
 
 struct CommonData{
 	DWORD foreground;
