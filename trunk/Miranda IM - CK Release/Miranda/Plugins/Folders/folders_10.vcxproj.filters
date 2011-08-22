@@ -33,9 +33,6 @@
     <ClCompile Include="hooked_events.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mirandaMem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="services.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,9 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="m_folders.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mirandaMem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">

@@ -307,7 +307,7 @@ int GetStringFromDatabase(char *szSettingName, const char *szError, char *szResu
 			len = (tmp < size - 1) ? tmp : size - 1;
 			strncpy(szResult, dbv.pszVal, len);
 			szResult[len] = '\0';
-			MirandaFree(dbv.pszVal);
+			mir_free(dbv.pszVal);
 		}
 		else{
 			res = 1;
@@ -333,7 +333,7 @@ int GetStringFromDatabase(char *szSettingName, const wchar_t *szError, wchar_t *
 			len = (tmp < size - 1) ? tmp : size - 1;
 			wcsncpy(szResult, dbv.pwszVal, len);
 			szResult[len] = '\0';
-			MirandaFree(dbv.pwszVal);
+			mir_free(dbv.pwszVal);
 		}
 		else{
 			res = 1;

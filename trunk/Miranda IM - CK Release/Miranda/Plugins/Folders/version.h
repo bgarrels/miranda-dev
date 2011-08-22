@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define __MAJOR_VERSION   0
 #define __MINOR_VERSION   1
 #define __RELEASE_NUM     5
-#define __BUILD_NUM       4
+#define __BUILD_NUM       6
 
 #define VERSION PLUGIN_MAKE_VERSION(__MAJOR_VERSION, __MINOR_VERSION, __RELEASE_NUM, __BUILD_NUM)
 
@@ -40,14 +40,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define __COPYRIGHT             "© 2005-2010 Cristian Libotean"
 #define __AUTHORWEB             "http://www.miranda-im.org/"
 
-#if defined (FF_UNICODE)
-	#if defined(WIN64) || defined(_WIN64)
-		#define __PLUGIN_DISPLAY_NAME   "Custom profile folders (Unicode x64)"
-	#else
-		#define __PLUGIN_DISPLAY_NAME   "Custom profile folders (Unicode)"
-	#endif
+#if defined(WIN64) || defined(_WIN64)
+#define __PLUGIN_DISPLAY_NAME   "Custom profile folders (x64)"
 #else
-	#define __PLUGIN_DISPLAY_NAME   "Custom profile folders"
+#define __PLUGIN_DISPLAY_NAME   "Custom profile folders"
 #endif
 
 #endif //M_FOLDERS_VERSION_H
