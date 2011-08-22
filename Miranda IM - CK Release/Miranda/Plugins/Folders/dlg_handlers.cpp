@@ -85,41 +85,34 @@ int ContainsSection(HWND hWnd, const WCHAR *section)
 
 void LoadRegisteredFolderSections(HWND hWnd)
 {
-	int i;
-	PFolderItem tmp;
-	WCHAR wide[MAX_FOLDER_SIZE];
-	WCHAR *translated;
-	UINT codepage = CallService(MS_LANGPACK_GETCODEPAGE, 0, 0);
-	for (i = 0; i < lstRegisteredFolders.Count(); i++)
+	for (int i = 0; i < lstRegisteredFolders.Count(); i++)
 		{
-			tmp = lstRegisteredFolders.Get(i + 1);
-			MultiByteToWideChar(codepage, 0, tmp->GetSection(), -1, wide, MAX_FOLDER_SIZE);
-			translated = TranslateW(wide);
+			PFolderItem tmp = lstRegisteredFolders.Get(i + 1);
+			WCHAR *translated = mir_a2u(Translate(tmp->GetSection()));
 			if (!ContainsSection(hWnd, translated))
 				{
 					SendDlgItemMessageW(hWnd, IDC_FOLDERS_SECTIONS_LIST, LB_ADDSTRING, 0, (LPARAM) translated);
 				}
+			mir_free(translated);
 		}
 }
 
 void LoadRegisteredFolderItems(HWND hWnd)
 {
 	WCHAR buffer[MAX_FOLDER_SIZE];
-	WCHAR wide[MAX_FOLDER_SIZE];
-	UINT codepage = CallService(MS_LANGPACK_GETCODEPAGE, 0, 0);
-	PFolderItem item;
-	int i;
 	GetCurrentSectionText(hWnd, buffer, MAX_FOLDER_SIZE);
 	SendDlgItemMessageW(hWnd, IDC_FOLDERS_ITEMS_LIST, LB_RESETCONTENT, 0, 0);
-	for (i = 0; i < lstRegisteredFolders.Count(); i++)
+	for (int i = 0; i < lstRegisteredFolders.Count(); i++)
 		{
-			item = lstRegisteredFolders.Get(i + 1);
-			MultiByteToWideChar(codepage, 0, item->GetSection(), -1, wide, MAX_FOLDER_SIZE);
-			if (wcscmp(buffer, TranslateW(wide)) == 0)
+			PFolderItem item = lstRegisteredFolders.Get(i + 1);
+			WCHAR *wide = mir_a2u(Translate(item->GetSection()));
+			if (wcscmp(buffer, wide) == 0)
 				{
-					MultiByteToWideChar(codepage, 0, item->GetName(), -1, wide, MAX_FOLDER_SIZE);
-					SendDlgItemMessageW(hWnd, IDC_FOLDERS_ITEMS_LIST, LB_ADDSTRING, 0, (LPARAM) TranslateW(wide));
+					mir_free(wide);
+					wide = mir_a2u(Translate(item->GetName()));
+					SendDlgItemMessageW(hWnd, IDC_FOLDERS_ITEMS_LIST, LB_ADDSTRING, 0, (LPARAM) wide);
 				}
+			mir_free(wide);
 		}
 	SendDlgItemMessageW(hWnd, IDC_FOLDERS_ITEMS_LIST, LB_SETCURSEL, 0, 0); //select the first item
 	PostMessage(hWnd, WM_COMMAND, MAKEWPARAM(IDC_FOLDERS_ITEMS_LIST, LBN_SELCHANGE), 0); //tell the dialog to refresh the preview
@@ -134,9 +127,9 @@ void LoadItem(HWND hWnd, PFolderItem item)
 					SetEditTextW(hWnd, item->GetFormatW());
 				}
 				else{
-					WCHAR buffer[4096];
-					MultiByteToWideChar(CallService(MS_LANGPACK_GETCODEPAGE, 0, 0), 0, item->GetFormat(), -1, buffer, 4096);
+					WCHAR *buffer = mir_a2u(item->GetFormat());
 					SetEditTextW(hWnd, buffer);
+					mir_free(buffer);
 				}
 			RefreshPreview(hWnd);
 		}
@@ -179,11 +172,11 @@ int ChangesNotSaved(HWND hWnd, PFolderItem item)
 				}
 				else{
 					WCHAR buffer[MAX_FOLDER_SIZE];
-					char ansi[MAX_FOLDER_SIZE];
 					GetEditTextW(hWnd, buffer, MAX_FOLDER_SIZE);
-					WideCharToMultiByte(CallService(MS_LANGPACK_GETCODEPAGE, 0, 0), 0, buffer, -1, ansi, MAX_FOLDER_SIZE, NULL, NULL);
+					char *ansi = mir_u2a(buffer);
 
 					res = (strcmp(item->GetFormat(), ansi) != 0);
+					mir_free(ansi);
 				}
 		}
 

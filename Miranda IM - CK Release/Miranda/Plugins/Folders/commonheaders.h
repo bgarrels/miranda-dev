@@ -21,6 +21,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef M_FOLDERS_COMMONHEADERS_H
 #define M_FOLDERS_COMMONHEADERS_H
 
+#define MIRANDA_CUSTOM_LP
+
 #define MAX_FOLDER_SIZE 2048
 
 #include <stdio.h>
@@ -36,7 +38,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "utils.h"
 #include "resource.h"
 #include "foldersList.h"
-#include "mirandaMem.h"
 #include "dlg_handlers.h"
 
 #include "m_database.h"
@@ -59,23 +60,5 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 extern char ModuleName[];
 extern HINSTANCE hInstance;
 extern CFoldersList &lstRegisteredFolders;
-
-#define OLD_MIRANDAPLUGININFO_SUPPORT PLUGININFO oldPluginInfo = { \
-	sizeof(PLUGININFO), \
-	pluginInfo.shortName, \
-	pluginInfo.version, \
-	pluginInfo.description, \
-	pluginInfo.author, \
-	pluginInfo.authorEmail, \
-	pluginInfo.copyright, \
-	pluginInfo.homepage, \
-	pluginInfo.flags, \
-	pluginInfo.replacesDefaultModule \
-}; \
-\
-extern "C" __declspec(dllexport) PLUGININFO *MirandaPluginInfo(DWORD mirandaVersion) \
-{ \
-	return &oldPluginInfo; \
-}
 
 #endif //FOLDERS_COMMONHEADERS_H

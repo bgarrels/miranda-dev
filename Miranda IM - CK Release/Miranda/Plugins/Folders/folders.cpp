@@ -29,6 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 char ModuleName[] = "Folders";
 HINSTANCE hInstance;
+int hLangpack;
 struct MM_INTERFACE mmi;
 
 CFoldersList &lstRegisteredFolders = CFoldersList(10); //the list
@@ -48,8 +49,6 @@ PLUGININFOEX pluginInfo = {
 	0,
   {0x2f129563, 0x2c7d, 0x4a9a, {0xb9, 0x48, 0x97, 0xdf, 0xcc, 0x0a, 0xfd, 0xd7}} //{2f129563-2c7d-4a9a-b948-97dfcc0afdd7}
 }; //not used
-
-OLD_MIRANDAPLUGININFO_SUPPORT;
 
 #ifdef _DEBUG
 
@@ -183,9 +182,8 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	Log("%s", "Entering function " __FUNCTION__);
 #endif
 	pluginLink = link;
+	mir_getLP(&pluginInfo);
 	mir_getMMI(&mmi);
-	//all initialization here
-	InitializeMirandaMemFunctions();
 	
 	Log("%s", "Creating service functions ...");
 	InitServices();
