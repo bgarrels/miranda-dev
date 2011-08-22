@@ -131,7 +131,7 @@ int GetStringFromDatabase(HANDLE hContact, char *szModule, char *szSettingName, 
 			len = (tmp < size - 1) ? tmp : size - 1;
 			strncpy(szResult, dbv.pszVal, len);
 			szResult[len] = '\0';
-			MirandaFree(dbv.pszVal);
+			mir_free(dbv.pszVal);
 		}
 		else{
 			res = 1;
@@ -185,7 +185,7 @@ TCHAR *GetContactName(HANDLE hContact, char *szProto)
 	{
 		buffer = _tcsdup(ctInfo.pszVal);
 	}
-	MirandaFree(ctInfo.pszVal);
+	mir_free(ctInfo.pszVal);
 	if (ret)
 	{
 		return NULL;
@@ -266,7 +266,7 @@ TCHAR *GetContactID(HANDLE hContact, char *szProto)
 				
 
 		}
-	MirandaFree(ctInfo.pszVal);
+	mir_free(ctInfo.pszVal);
 	if (!ret)
 		{
 			return buffer;

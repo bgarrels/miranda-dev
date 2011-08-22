@@ -26,6 +26,7 @@ HWND hBirthdaysDlg = NULL;
 HWND hUpcomingDlg = NULL;
 extern HANDLE hAddBirthdayWndsList = NULL;
 struct MM_INTERFACE mmi;
+int hLangpack;
 
 CommonData commonData = {0};
 
@@ -49,8 +50,6 @@ PLUGININFOEX pluginInfo = {
 #endif
 }; //not used
 
-OLD_MIRANDAPLUGININFO_SUPPORT;
-
 extern "C" __declspec(dllexport) PLUGININFOEX *MirandaPluginInfoEx(DWORD mirandaVersion) 
 {
 //	Log("%s", "Entering function " __FUNCTION__);
@@ -72,6 +71,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	Log("%s", "Entering function " __FUNCTION__);
 	pluginLink = link;
 	mir_getMMI(&mmi);
+	mir_getLP(&pluginInfo);
 
 	INITCOMMONCONTROLSEX icex;
 
@@ -81,7 +81,6 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	InitCommonControlsEx(&icex);
 	
 	Log("%s", "Initialising miranda memory functions");
-	InitializeMirandaMemFunctions();
 	
 	LoadIcons();
 	//hBirthdaysDlg = CreateDialog(hInstance, MAKEINTRESOURCE(IDD_BIRTHDAYS), NULL, DlgProcBirthdays);
