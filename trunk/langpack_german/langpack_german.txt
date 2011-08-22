@@ -7,11 +7,11 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 22 Aug 2011 19:08:29
+X-Langpack-creation-date: 22 Aug 2011 23:08:30
 ; FLID: Deutsche Sprachdatei 0.11.08.22
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,AsSingleWindow,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirFox,MirOTR,MirOUT,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
-; Start of langpack: Core (Letzte Änderung: 03:05, 22. Jul. 2011 )
+; Start of langpack: Core (Letzte Änderung: 04:05, 22. Jul. 2011 )
 
 [0 = Default]
 0 = Standard
@@ -6100,7 +6100,7 @@ Tipphinweis: tippt nicht mehr
 ; ##############################################
 ; End of langpack: Core
 ; ############################################## 
-; Start of langpack: 4x4x4 (Letzte Änderung: 02:51, 18. Sep. 2010 )
+; Start of langpack: 4x4x4 (Letzte Änderung: 03:51, 18. Sep. 2010 )
 
 ; Pluginname: 4x4x4 
 ; Version: 0.1.0.3a
@@ -6248,7 +6248,7 @@ Verlauf löschen
 ; ##############################################
 ; End of langpack: 4x4x4
 ; ############################################## 
-; Start of langpack: AIM (Letzte Änderung: 14:57, 6. Jul. 2011 )
+; Start of langpack: AIM (Letzte Änderung: 15:57, 6. Jul. 2011 )
 
 ; Pluginname: AIM Protocol
 ; Version: 0.9.10.2
@@ -6513,7 +6513,7 @@ Falsches Anzeigename oder Passwort.
 ; ##############################################
 ; End of langpack: AIM
 ; ############################################## 
-; Start of langpack: ActMan (Letzte Änderung: 21:04, 13. Aug. 2011 )
+; Start of langpack: ActMan (Letzte Änderung: 22:04, 13. Aug. 2011 )
 
 ; Pluginname: ActMan
 ; Version: 0.1.1.10
@@ -6761,7 +6761,7 @@ Wiederholen, Abbrechen
 ; ##############################################
 ; End of langpack: ActMan
 ; ############################################## 
-; Start of langpack: ActMan_Hooks (Letzte Änderung: 14:06, 19. Sep. 2010 )
+; Start of langpack: ActMan_Hooks (Letzte Änderung: 15:06, 19. Sep. 2010 )
 
 ; Pluginname: ActMan Hooks
 ; Version: 0.0.1.0
@@ -6778,7 +6778,7 @@ Wiederholen, Abbrechen
 ; ##############################################
 ; End of langpack: ActMan_Hooks
 ; ############################################## 
-; Start of langpack: AddContact (Letzte Änderung: 01:34, 16. Jun. 2011 )
+; Start of langpack: AddContact (Letzte Änderung: 02:34, 16. Jun. 2011 )
 
 ; Pluginname: AddContact+ 
 ; Version: 0.9.9.0
@@ -6898,7 +6898,7 @@ Sie benutzen die Unicode-Version von Miranda IM. Es wird empfohlen, Unicode-Plug
 ; ##############################################
 ; End of langpack: AdvancedAutoAway
 ; ############################################## 
-; Start of langpack: Alarms (Letzte Änderung: 02:49, 18. Sep. 2010 )
+; Start of langpack: Alarms (Letzte Änderung: 03:49, 18. Sep. 2010 )
 
 ; Pluginname: Alarms 
 ; Version: 0.4.0.3
@@ -7003,7 +7003,7 @@ Anhalten
 ; ##############################################
 ; End of langpack: Alarms
 ; ############################################## 
-; Start of langpack: Alias (Letzte Änderung: 22:39, 12. Okt. 2010 )
+; Start of langpack: Alias (Letzte Änderung: 23:39, 12. Okt. 2010 )
 
 ; Pluginname: Alias 
 ; Version: 0.0.2.0
@@ -7022,7 +7022,7 @@ umwandeln zu
 ; ##############################################
 ; End of langpack: Alias
 ; ############################################## 
-; Start of langpack: Anna_the_Alicebot (Letzte Änderung: 23:15, 27. Aug. 2010 )
+; Start of langpack: Anna_the_Alicebot (Letzte Änderung: 00:15, 28. Aug. 2010 )
 
 ; Pluginname: Anna the AliceBot 
 ; Version: 0.0.0.4
@@ -7045,7 +7045,7 @@ Hi, ich bin Anna, der Alicebot, und ich werde mit Ihnen chatten, so lange Ihr Be
 ; ##############################################
 ; End of langpack: Anna_the_Alicebot
 ; ############################################## 
-; Start of langpack: AsSingleWindow (Letzte Änderung: 22:24, 19. Aug. 2011 )
+; Start of langpack: AsSingleWindow (Letzte Änderung: 23:24, 19. Aug. 2011 )
 
 ; Pluginname: AsSingleWindow
 ; Version: 0.1.0.2
@@ -7060,7 +7060,7 @@ Hi, ich bin Anna, der Alicebot, und ich werde mit Ihnen chatten, so lange Ihr Be
 ; ##############################################
 ; End of langpack: AsSingleWindow
 ; ############################################## 
-; Start of langpack: Atomic (Letzte Änderung: 02:49, 18. Sep. 2010 )
+; Start of langpack: Atomic (Letzte Änderung: 03:49, 18. Sep. 2010 )
 
 ; Pluginname: Atomic 
 ; Version: 0.6.0.0
@@ -7119,7 +7119,7 @@ Dieses Plugin empfängt die genaue Uhrzeit von einem Zeitserver und aktualisiert 
 ; ##############################################
 ; End of langpack: Atomic
 ; ############################################## 
-; Start of langpack: Attache (Letzte Änderung: 02:48, 18. Sep. 2010 )
+; Start of langpack: Attache (Letzte Änderung: 03:48, 18. Sep. 2010 )
 
 ; Pluginname: Attache
 ; Version: 0.2.0.0
@@ -7162,7 +7162,7 @@ Absturz in Modul %s\nDumpdatei: %s
 ; ##############################################
 ; End of langpack: Attache
 ; ############################################## 
-; Start of langpack: Authorization_State (Letzte Änderung: 16:35, 10. Okt. 2010 )
+; Start of langpack: Authorization_State (Letzte Änderung: 17:35, 10. Okt. 2010 )
 
 ; Pluginname: Authorization State 
 ; Version: 0.0.1.6
@@ -7303,7 +7303,7 @@ Eigennamen groß schreiben
 ; ##############################################
 ; End of langpack: AutoReplacer
 ; ############################################## 
-; Start of langpack: AutoRespond (Letzte Änderung: 02:48, 18. Sep. 2010 )
+; Start of langpack: AutoRespond (Letzte Änderung: 03:48, 18. Sep. 2010 )
 
 ; Pluginname: AutoRespond 
 ; Version: 0.0.0.3
@@ -7325,7 +7325,7 @@ Antwort setzen
 ; ##############################################
 ; End of langpack: AutoRespond
 ; ############################################## 
-; Start of langpack: AutoShutdown (Letzte Änderung: 02:47, 18. Sep. 2010 )
+; Start of langpack: AutoShutdown (Letzte Änderung: 03:47, 18. Sep. 2010 )
 
 ; Pluginname: AutoShutdown 
 ; Version: 1.4.0.2
@@ -7523,7 +7523,7 @@ Fortschrittsanzeige
 ; ##############################################
 ; End of langpack: AutoShutdown
 ; ############################################## 
-; Start of langpack: Autorun (Letzte Änderung: 13:23, 20. Okt. 2010 )
+; Start of langpack: Autorun (Letzte Änderung: 14:23, 20. Okt. 2010 )
 
 ; Pluginname: Autorun 
 ; Version: 0.1.0.1
@@ -7545,7 +7545,7 @@ Dieses Plugin ermöglicht ein automatisches Starten von Miranda IM beim Hochfahre
 ; ##############################################
 ; End of langpack: Autorun
 ; ############################################## 
-; Start of langpack: Avatar_History (Letzte Änderung: 23:00, 27. Aug. 2010 )
+; Start of langpack: Avatar_History (Letzte Änderung: 00:00, 28. Aug. 2010 )
 
 ; Pluginname: Avatar History 
 ; Version: 0.0.2.10
@@ -7684,7 +7684,7 @@ Dieses Plugin speichert alle Avataränderungen ihrer Kontakte und/oder zeigt ents
 ; ##############################################
 ; End of langpack: Avatar_History
 ; ############################################## 
-; Start of langpack: Avatar_service (Letzte Änderung: 12:05, 17. Mai 2011 )
+; Start of langpack: Avatar_service (Letzte Änderung: 13:05, 17. Mai 2011 )
 
 ; Pluginname: Avatar service 
 ; Version: 0.9.15.0
@@ -7802,7 +7802,7 @@ Avatar auf maximal erlaubte Größe bringen
 ; ##############################################
 ; End of langpack: Avatar_service
 ; ############################################## 
-; Start of langpack: BGSM (Letzte Änderung: 02:46, 18. Sep. 2010 )
+; Start of langpack: BGSM (Letzte Änderung: 03:46, 18. Sep. 2010 )
 
 ; Pluginname: bGSM 
 ; Version: 0.0.0.4
@@ -7853,7 +7853,7 @@ Spieltyp
 ; ##############################################
 ; End of langpack: BGSM
 ; ############################################## 
-; Start of langpack: BNET_Messenger (Letzte Änderung: 02:46, 18. Sep. 2010 )
+; Start of langpack: BNET_Messenger (Letzte Änderung: 03:46, 18. Sep. 2010 )
 
 ; Pluginname: Battle.net-Protokoll
 ; Version: 0.2.2.0
@@ -8040,7 +8040,7 @@ Ihr Freund muss die gleiche Version haben wie Sie. Prüfen Sie Ihre Versionen!
 ; ##############################################
 ; End of langpack: Battleship
 ; ############################################## 
-; Start of langpack: Behind_The_Edge (Letzte Änderung: 02:45, 18. Sep. 2010 )
+; Start of langpack: Behind_The_Edge (Letzte Änderung: 03:45, 18. Sep. 2010 )
 
 ; Pluginname: Behind The Edge
 ; Version: 0.0.0.2
@@ -8080,7 +8080,7 @@ Anzeigedauer
 ; ##############################################
 ; End of langpack: Behind_The_Edge
 ; ############################################## 
-; Start of langpack: Birthday_reminder (Letzte Änderung: 02:45, 18. Sep. 2010 )
+; Start of langpack: Birthday_reminder (Letzte Änderung: 03:45, 18. Sep. 2010 )
 
 ; Pluginname: Birthday reminder 
 ; Version: 0.3.1.4
@@ -8152,7 +8152,7 @@ Erinnert an einen Geburtstag eines Kontaktes aus der Liste ein paar Tage vorher
 ; ##############################################
 ; End of langpack: Birthday_reminder
 ; ############################################## 
-; Start of langpack: Boltun (Letzte Änderung: 02:45, 18. Sep. 2010 )
+; Start of langpack: Boltun (Letzte Änderung: 03:45, 18. Sep. 2010 )
 
 ; Pluginname: Boltun 
 ; Version: 0.0.2.0
@@ -8192,7 +8192,7 @@ Laden der Antworten aus %s fehlgeschlagen
 ; ##############################################
 ; End of langpack: Boltun
 ; ############################################## 
-; Start of langpack: Bonsai (Letzte Änderung: 21:15, 5. Apr. 2011 )
+; Start of langpack: Bonsai (Letzte Änderung: 22:15, 5. Apr. 2011 )
 
 ; Pluginname: Bonsai 
 ; Version: 0.0.2.4
@@ -8279,7 +8279,7 @@ BossKey: Zeige/Verstecke Miranda
 ; ##############################################
 ; End of langpack: BossKey
 ; ############################################## 
-; Start of langpack: Buddy_Expectator (Letzte Änderung: 19:34, 21. Jun. 2011 )
+; Start of langpack: Buddy_Expectator (Letzte Änderung: 20:34, 21. Jun. 2011 )
 
 ; Pluginname: Buddy Expectactor 
 ; Version: 0.1.2.3
@@ -8370,7 +8370,7 @@ Nutze Popup-Farben
 ; ##############################################
 ; End of langpack: Buddy_Expectator
 ; ############################################## 
-; Start of langpack: C6 (Letzte Änderung: 14:26, 29. Apr. 2011 )
+; Start of langpack: C6 (Letzte Änderung: 15:26, 29. Apr. 2011 )
 
 ; Pluginname: C6 Protocol 
 ; Version: 0.3.0.0
@@ -8697,7 +8697,7 @@ Avatar-Unterstützung aktivieren (*)
 ; ##############################################
 ; End of langpack: C6
 ; ############################################## 
-; Start of langpack: CList_Nicer (Letzte Änderung: 17:03, 21. Apr. 2011 )
+; Start of langpack: CList_Nicer (Letzte Änderung: 18:03, 21. Apr. 2011 )
 
 ; Pluginname: CList Nicer+ aka Clist_nicer
 ; Version: 0.9.13.0
@@ -9259,7 +9259,7 @@ TabSRMM-Menü
 ; ##############################################
 ; End of langpack: CList_Nicer
 ; ############################################## 
-; Start of langpack: Call_Netmeeting (Letzte Änderung: 02:43, 18. Sep. 2010 )
+; Start of langpack: Call_Netmeeting (Letzte Änderung: 03:43, 18. Sep. 2010 )
 
 ; Pluginname: Call Netmeeting 
 ; Version: 1.0.0.96
@@ -9285,7 +9285,7 @@ Externe IP nutzen?
 ; ##############################################
 ; End of langpack: Call_Netmeeting
 ; ############################################## 
-; Start of langpack: Camera_LED_Notify (Letzte Änderung: 23:02, 27. Aug. 2010 )
+; Start of langpack: Camera_LED_Notify (Letzte Änderung: 00:02, 28. Aug. 2010 )
 
 ; Pluginname: Camera LED Notify 
 ; Version: 1.8.2.0
@@ -9321,7 +9321,7 @@ Hinfzugefügte Benachrichtigungen
 ; ##############################################
 ; End of langpack: Camera_LED_Notify
 ; ############################################## 
-; Start of langpack: ChangeKeyboardLayout (Letzte Änderung: 02:43, 18. Sep. 2010 )
+; Start of langpack: ChangeKeyboardLayout (Letzte Änderung: 03:43, 18. Sep. 2010 )
 
 ; Pluginname: ChangeKeyboardLayout 
 ; Version: 0.0.1.2
@@ -9578,7 +9578,7 @@ Schwarz ist schachmatt.
 ; ##############################################
 ; End of langpack: Chess4Net
 ; ############################################## 
-; Start of langpack: ClientChangeNotify (Letzte Änderung: 23:03, 27. Aug. 2010 )
+; Start of langpack: ClientChangeNotify (Letzte Änderung: 00:03, 28. Aug. 2010 )
 
 ; Pluginname: ClientChangeNotify 
 ; Version: 0.1.1.0 Build #54
@@ -9634,7 +9634,7 @@ C&lient Benachrichtigungen aktivieren
 ; ##############################################
 ; End of langpack: ClientChangeNotify
 ; ############################################## 
-; Start of langpack: ContactVisibility (Letzte Änderung: 02:41, 18. Sep. 2010 )
+; Start of langpack: ContactVisibility (Letzte Änderung: 03:41, 18. Sep. 2010 )
 
 ; Pluginname: ContactVisibility 
 ; Version: 0.1.0.0
@@ -9652,7 +9652,7 @@ C&lient Benachrichtigungen aktivieren
 ; ##############################################
 ; End of langpack: ContactVisibility
 ; ############################################## 
-; Start of langpack: Contact_merge_plugin_cleaner (Letzte Änderung: 02:41, 18. Sep. 2010 )
+; Start of langpack: Contact_merge_plugin_cleaner (Letzte Änderung: 03:41, 18. Sep. 2010 )
 
 ; Pluginname: Contact merge plugin cleaner 
 ; Version: 0.0.1.0
@@ -9674,7 +9674,7 @@ Erledigt. Bitte Miranda neustarten.
 ; ##############################################
 ; End of langpack: Contact_merge_plugin_cleaner
 ; ############################################## 
-; Start of langpack: Contacts (Letzte Änderung: 22:21, 27. Aug. 2010 )
+; Start of langpack: Contacts (Letzte Änderung: 23:21, 27. Aug. 2010 )
 
 ; Pluginname: Contacts+
 ; Version: 1.6.0.0
@@ -9714,7 +9714,7 @@ Kontakte senden...
 ; ##############################################
 ; End of langpack: Contacts
 ; ############################################## 
-; Start of langpack: ContactsMenuItemEx (Letzte Änderung: 21:10, 26. Okt. 2010 )
+; Start of langpack: ContactsMenuItemEx (Letzte Änderung: 22:10, 26. Okt. 2010 )
 
 ; Pluginname: ContactsMenuItemEx 
 ; Version: 1.3.0.3
@@ -9914,7 +9914,7 @@ Setzen Sie diverse Kontakteinstellungen über das Kontaktmenü.
 ; ##############################################
 ; End of langpack: ContactsMenuItemEx
 ; ############################################## 
-; Start of langpack: Contacts_Rate (Letzte Änderung: 23:47, 27. Apr. 2011 )
+; Start of langpack: Contacts_Rate (Letzte Änderung: 00:47, 28. Apr. 2011 )
 
 ; Pluginname: Contact's Rate
 ; Version: 0.0.2.1
@@ -9937,7 +9937,7 @@ Zeigt falls vorhanden, die Kontaktpriorität in Ihrer Kontaktliste.
 ; ##############################################
 ; End of langpack: Contacts_Rate
 ; ############################################## 
-; Start of langpack: Contacts_Status_Notification (Letzte Änderung: 02:40, 18. Sep. 2010 )
+; Start of langpack: Contacts_Status_Notification (Letzte Änderung: 03:40, 18. Sep. 2010 )
 
 ; Pluginname: Contacts Status Notification
 ; Version: 0.1.2.2
@@ -10049,7 +10049,7 @@ Eigene Farben:
 ; ##############################################
 ; End of langpack: Contacts_Status_Notification
 ; ############################################## 
-; Start of langpack: CopyIP (Letzte Änderung: 02:39, 18. Sep. 2010 )
+; Start of langpack: CopyIP (Letzte Änderung: 03:39, 18. Sep. 2010 )
 
 ; Pluginname: CopyIP 
 ; Version: 0.0.0.4
@@ -10065,7 +10065,7 @@ Eigene Farben:
 ; ##############################################
 ; End of langpack: CopyIP
 ; ############################################## 
-; Start of langpack: Country_Flags (Letzte Änderung: 02:39, 18. Sep. 2010 )
+; Start of langpack: Country_Flags (Letzte Änderung: 03:39, 18. Sep. 2010 )
 
 ; Pluginname: Country Flags 
 ; Version: 0.1.0.3
@@ -10259,7 +10259,7 @@ Verwalte deine ICQ-XStatus in einem integrierten und einfach zu nutzenden Manage
 ; ##############################################
 ; End of langpack: Custom_Status_List
 ; ############################################## 
-; Start of langpack: Custom_User_Details (Letzte Änderung: 02:38, 18. Sep. 2010 )
+; Start of langpack: Custom_User_Details (Letzte Änderung: 03:38, 18. Sep. 2010 )
 
 ; Pluginname: Custom User Details 
 ; Version: 0.0.6.2
@@ -10316,10 +10316,10 @@ Alles &updaten
 ; ##############################################
 ; End of langpack: Custom_User_Details
 ; ############################################## 
-; Start of langpack: Custom_profile_folders (Letzte Änderung: 17:14, 15. Apr. 2011 )
+; Start of langpack: Custom_profile_folders (Letzte Änderung: 22:46, 22. Aug. 2011 )
 
 ; Pluginname: Custom profile folders 
-; Version: 0.1.5.4
+; Version: 0.1.5.6
 ; Dateiname: folders.dll
 ; Unique ID: {2f129563-2c7d-4a9a-b948-97dfcc0afdd7}
 ; Autor: eblis
@@ -10381,7 +10381,7 @@ Dienst, welcher es Plugins erlaubt Daten in vom Nutzer gewählten Verzeichnissen 
 ; ##############################################
 ; End of langpack: Custom_profile_folders
 ; ############################################## 
-; Start of langpack: CycleAvatars (Letzte Änderung: 02:37, 18. Sep. 2010 )
+; Start of langpack: CycleAvatars (Letzte Änderung: 03:37, 18. Sep. 2010 )
 
 ; Pluginname: CycleAvatars 
 ; Version: 0.0.0.2
@@ -10401,7 +10401,7 @@ CycleAvatars für dieses Protokoll aktivieren
 ; ##############################################
 ; End of langpack: CycleAvatars
 ; ############################################## 
-; Start of langpack: DBEditor (Letzte Änderung: 19:48, 7. Jul. 2011 )
+; Start of langpack: DBEditor (Letzte Änderung: 20:48, 7. Jul. 2011 )
 
 ; Pluginname: Database Editor ++ 
 ; Version: 3.2.0.0
@@ -10773,7 +10773,7 @@ Erweiterte Datenbank-Editor. Mehr gefixt und erweitert von Bio. [28.01.2008  19:
 ; ##############################################
 ; End of langpack: DBEditor
 ; ############################################## 
-; Start of langpack: DBTool (Letzte Änderung: 02:37, 18. Sep. 2010 )
+; Start of langpack: DBTool (Letzte Änderung: 03:37, 18. Sep. 2010 )
 
 ; Pluginname: DBTool 
 ; Version: 0.9.2.0
@@ -11015,7 +11015,7 @@ Benötigte Zeit: %d Sekunden
 ; ##############################################
 ; End of langpack: DBTool
 ; ############################################## 
-; Start of langpack: DbExport (Letzte Änderung: 02:36, 18. Sep. 2010 )
+; Start of langpack: DbExport (Letzte Änderung: 03:36, 18. Sep. 2010 )
 
 ; Pluginname: dbExport 
 ; Version: 1.0.0.1
@@ -11053,7 +11053,7 @@ Stellt Unterstützung für die Miranda-Profildatei bereit: Globale Einstellungen, 
 ; ##############################################
 ; End of langpack: Dbx_mmap
 ; ############################################## 
-; Start of langpack: Dbx_rw (Letzte Änderung: 07:29, 18. Apr. 2011 )
+; Start of langpack: Dbx_rw (Letzte Änderung: 08:29, 18. Apr. 2011 )
 
 ; Pluginname: dbRW Database Driver 
 ; Version: 1.4.0.0
@@ -11128,7 +11128,7 @@ Bietet erweiterte Miranda-IM-Datenbankunterstützung - Erstellt Jul 19 2010 @ 12:
 ; ##############################################
 ; End of langpack: Dbx_tree
 ; ############################################## 
-; Start of langpack: Display_Control (Letzte Änderung: 19:50, 7. Jul. 2011 )
+; Start of langpack: Display_Control (Letzte Änderung: 20:50, 7. Jul. 2011 )
 
 ; Pluginname: Display Control 
 ; Version: 0.1.1.30
@@ -11168,7 +11168,7 @@ Um das Plugin für bestimmte Kontakte zu de-/aktivieren, klicke auf der rechten S
 ; ##############################################
 ; End of langpack: Display_Control
 ; ############################################## 
-; Start of langpack: Docking (Letzte Änderung: 02:35, 18. Sep. 2010 )
+; Start of langpack: Docking (Letzte Änderung: 03:35, 18. Sep. 2010 )
 
 ; Pluginname: Docking 
 ; Version: 0.1.2.0
@@ -11188,7 +11188,7 @@ nicht zwischen &Monitoren docken
 ; ##############################################
 ; End of langpack: Docking
 ; ############################################## 
-; Start of langpack: Elizatalk (Letzte Änderung: 02:34, 18. Sep. 2010 )
+; Start of langpack: Elizatalk (Letzte Änderung: 03:34, 18. Sep. 2010 )
 
 ; Pluginname: Elizatalk 
 ; Version: 0.0.0.1
@@ -11204,7 +11204,7 @@ Kontakte informieren, dass mit Eliza gechattet wird
 ; ##############################################
 ; End of langpack: Elizatalk
 ; ############################################## 
-; Start of langpack: EmLanBackup (Letzte Änderung: 02:34, 18. Sep. 2010 )
+; Start of langpack: EmLanBackup (Letzte Änderung: 03:34, 18. Sep. 2010 )
 
 ; Pluginname: EmLanBackup - (modification of Anders Nilsson's UINBackup plugin)
 ; Version: 0.0.0.7 
@@ -11222,7 +11222,7 @@ EmLan Kontakte importieren
 ; ##############################################
 ; End of langpack: EmLanBackup
 ; ############################################## 
-; Start of langpack: Emoticons (Letzte Änderung: 20:05, 13. Okt. 2010 )
+; Start of langpack: Emoticons (Letzte Änderung: 21:05, 13. Okt. 2010 )
 
 ; Pluginname: Emoticons 
 ; Version: 0.3.0.0 
@@ -11253,7 +11253,7 @@ Emoticon-Pakete
 ; ##############################################
 ; End of langpack: Emoticons
 ; ############################################## 
-; Start of langpack: ExtApp (Letzte Änderung: 02:33, 18. Sep. 2010 )
+; Start of langpack: ExtApp (Letzte Änderung: 03:33, 18. Sep. 2010 )
 
 ; Pluginname: ExtApp 
 ; Version: 0.0.0.4
@@ -11319,7 +11319,7 @@ Benutze aktuelle Statusnachricht als Abwesenheitsnachricht
 ; ##############################################
 ; End of langpack: Extended_Idle_System
 ; ############################################## 
-; Start of langpack: Extra_Icons_Service (Letzte Änderung: 02:32, 18. Sep. 2010 )
+; Start of langpack: Extra_Icons_Service (Letzte Änderung: 03:32, 18. Sep. 2010 )
 
 ; Pluginname: Extra Icons Service 
 ; Version(en): 0.2.5.0 (offiziell) & 0.2.5.1 (inoffiziell)
@@ -11342,7 +11342,7 @@ Wählen Sie mehrere Elemente mit gedrückter SHIFT- oder STRG-Taste aus. Drücken S
 ; ##############################################
 ; End of langpack: Extra_Icons_Service
 ; ############################################## 
-; Start of langpack: FTP_File_YM (Letzte Änderung: 16:37, 29. Sep. 2010 )
+; Start of langpack: FTP_File_YM (Letzte Änderung: 17:37, 29. Sep. 2010 )
 
 ; Pluginname: FTP File 
 ; Version: 0.0.1.1 (alt)
@@ -11540,7 +11540,7 @@ Keine Dateien...
 ; ##############################################
 ; End of langpack: FTP_File_YM
 ; ############################################## 
-; Start of langpack: Facebook (Letzte Änderung: 14:07, 17. Jun. 2011 )
+; Start of langpack: Facebook (Letzte Änderung: 15:07, 17. Jun. 2011 )
 
 ; Pluginname: Facebook Protokoll
 ; Version: 0.1.3.10 + RM 0.0.3.3
@@ -11750,7 +11750,7 @@ Keine Nachrichten in der Liste
 ; ##############################################
 ; End of langpack: Fast_Messages
 ; ############################################## 
-; Start of langpack: Fetion (Letzte Änderung: 02:32, 18. Sep. 2010 )
+; Start of langpack: Fetion (Letzte Änderung: 03:32, 18. Sep. 2010 )
 
 ; Pluginname: Fetion 
 ; Version: 0.0.0.16
@@ -11917,7 +11917,7 @@ Zeige Version als Overlay#2
 ; ##############################################
 ; End of langpack: Fingerprint_Mod
 ; ############################################## 
-; Start of langpack: Fingerprint_Plus (Letzte Änderung: 19:05, 20. Sep. 2010 )
+; Start of langpack: Fingerprint_Plus (Letzte Änderung: 20:05, 20. Sep. 2010 )
 
 ; Pluginname: Fingerprint Plus 
 ; Version: 1.1.15.0
@@ -12017,7 +12017,7 @@ Das Fingerprint-Plus-Plugin wurde nur für Miranda IM erstellt.\nFalls Sie es für
 ; ##############################################
 ; End of langpack: Fingerprint_Plus
 ; ############################################## 
-; Start of langpack: FlashAvatars (Letzte Änderung: 19:22, 20. Okt. 2010 )
+; Start of langpack: FlashAvatars (Letzte Änderung: 20:22, 20. Okt. 2010 )
 
 ; Pluginname: Flash Avatars Service 
 ; Versionen: 0.0.1.14
@@ -12038,7 +12038,7 @@ Sie haben Adobe Flash in Version 8.x installiert.\r\nDiese Version besitzt viele
 ; ##############################################
 ; End of langpack: FlashAvatars
 ; ############################################## 
-; Start of langpack: Fltcontacts (Letzte Änderung: 21:11, 5. Apr. 2011 )
+; Start of langpack: Fltcontacts (Letzte Änderung: 22:11, 5. Apr. 2011 )
 
 ; Pluginname: Fltcontacts
 ; Version: 1.0.0.10
@@ -12157,7 +12157,7 @@ HTML
 ; ##############################################
 ; End of langpack: GTalkExt
 ; ############################################## 
-; Start of langpack: Gadu-Gadu (Letzte Änderung: 15:52, 6. Jul. 2011 )
+; Start of langpack: Gadu-Gadu (Letzte Änderung: 16:52, 6. Jul. 2011 )
 
 ; Pluginname: Gadu-Gadu Protocol
 ; Version: 0.9.10.2
@@ -12343,7 +12343,7 @@ Gadu-Gadu Nummer:
 ; ##############################################
 ; End of langpack: Gadu-Gadu
 ; ############################################## 
-; Start of langpack: Gamer (Letzte Änderung: 02:29, 18. Sep. 2010 )
+; Start of langpack: Gamer (Letzte Änderung: 03:29, 18. Sep. 2010 )
 
 ; Pluginname: Gamer Plugin 
 ; Version: 0.0.3.1
@@ -12618,7 +12618,7 @@ Hilfe über Verzögerungen
 ; ##############################################
 ; End of langpack: GamerStatus_beta
 ; ############################################## 
-; Start of langpack: Ghostify (Letzte Änderung: 02:29, 18. Sep. 2010 )
+; Start of langpack: Ghostify (Letzte Änderung: 03:29, 18. Sep. 2010 )
 
 ; Pluginname: Ghostify 
 ; Version: 1.2.1.0
@@ -12667,7 +12667,7 @@ Ghostify: Fenster wird anklickbar
 ; ##############################################
 ; End of langpack: Ghostify
 ; ############################################## 
-; Start of langpack: Gmail_Multiple_Notifier (Letzte Änderung: 12:17, 14. Aug. 2011 )
+; Start of langpack: Gmail_Multiple_Notifier (Letzte Änderung: 13:17, 14. Aug. 2011 )
 
 ; Pluginname: Gmail Multiple Notifier 
 ; Version: 0.4.0.14
@@ -12727,7 +12727,7 @@ Falscher Nutzername oder Passwort!
 ; ##############################################
 ; End of langpack: Gmail_Multiple_Notifier
 ; ############################################## 
-; Start of langpack: GnuPG (Letzte Änderung: 23:38, 27. Aug. 2010 )
+; Start of langpack: GnuPG (Letzte Änderung: 00:38, 28. Aug. 2010 )
 
 ; Pluginname: GnuPG Plugin
 ; Version: 0.0.0.4
@@ -12926,7 +12926,7 @@ Hier gibt's ein unbeendetes Spiel. Willst Du es Fortsetzen?
 ; ##############################################
 ; End of langpack: GoMoku
 ; ############################################## 
-; Start of langpack: HDD_Info (Letzte Änderung: 02:27, 18. Sep. 2010 )
+; Start of langpack: HDD_Info (Letzte Änderung: 03:27, 18. Sep. 2010 )
 
 ; Pluginname: HotKeyEngine 
 ; Version: 0.1.3.0
@@ -13034,7 +13034,7 @@ Aktiviere Postfix Variable für Gerät
 ; ##############################################
 ; End of langpack: HDD_Info
 ; ############################################## 
-; Start of langpack: HTTPServer (Letzte Änderung: 22:39, 1. Okt. 2010 )
+; Start of langpack: HTTPServer (Letzte Änderung: 23:39, 1. Okt. 2010 )
 
 ; Pluginname: HTTPServer 
 ; Version: 0.1.2.2
@@ -13132,7 +13132,7 @@ Freigabe entfernt
 ; ##############################################
 ; End of langpack: HTTPServer
 ; ############################################## 
-; Start of langpack: Help (Letzte Änderung: 22:10, 28. Okt. 2010 )
+; Start of langpack: Help (Letzte Änderung: 23:10, 28. Okt. 2010 )
 
 ; Pluginname: Help 
 ; Version: 0.2.1.0
@@ -13801,7 +13801,7 @@ Auch Verlauf aller Unterkontakte löschen
 ; ##############################################
 ; End of langpack: History
 ; ############################################## 
-; Start of langpack: HistoryStats (Letzte Änderung: 00:07, 3. Okt. 2010 )
+; Start of langpack: HistoryStats (Letzte Änderung: 01:07, 3. Okt. 2010 )
 
 ; Pluginname: HistoryStats 
 ; Version: 0.1.5.3 (Final)
@@ -14691,7 +14691,7 @@ Erstellt nützliche Statistiken aus ihren Verläufen. (Benötigt Miranda IM 0.6.7 U
 ; ##############################################
 ; End of langpack: HistoryStats
 ; ############################################## 
-; Start of langpack: History_Events (Letzte Änderung: 02:26, 18. Sep. 2010 )
+; Start of langpack: History_Events (Letzte Änderung: 03:26, 18. Sep. 2010 )
 
 ; Pluginname: HistoryEvents
 ; Version: 0.0.0.8
@@ -14734,7 +14734,7 @@ Ein Dienst, welcher diverse Ereignisse für Verläufe verarbeiten kann.
 ; ##############################################
 ; End of langpack: History_Events
 ; ############################################## 
-; Start of langpack: History_Keeper (Letzte Änderung: 02:26, 18. Sep. 2010 )
+; Start of langpack: History_Keeper (Letzte Änderung: 03:26, 18. Sep. 2010 )
 
 ; Pluginname: History Keeper 
 ; Version: 0.2.0.0
@@ -14933,7 +14933,7 @@ Speichert diverse Ereignisse im Verlauf.
 ; ##############################################
 ; End of langpack: History_Keeper
 ; ############################################## 
-; Start of langpack: History_Linklist_Plus (Letzte Änderung: 13:38, 18. Jun. 2011 )
+; Start of langpack: History_Linklist_Plus (Letzte Änderung: 14:38, 18. Jun. 2011 )
 
 ; Pluginname: History Linklist 
 ; Version: 0.0.0.2
@@ -15058,7 +15058,7 @@ Benutzerdef. Aktion
 ; ##############################################
 ; End of langpack: History_Linklist_Plus
 ; ############################################## 
-; Start of langpack: History_Sweeper (Letzte Änderung: 22:50, 5. Apr. 2011 )
+; Start of langpack: History_Sweeper (Letzte Änderung: 23:50, 5. Apr. 2011 )
 
 ; Pluginname: History Sweeper 
 ; Version: 0.2.0.2
@@ -15142,7 +15142,7 @@ Keinen Verlauf aufbewahren
 ; ##############################################
 ; End of langpack: History_Sweeper
 ; ############################################## 
-; Start of langpack: History_Sweeper_Light (Letzte Änderung: 12:04, 27. Apr. 2011 )
+; Start of langpack: History_Sweeper_Light (Letzte Änderung: 13:04, 27. Apr. 2011 )
 
 ; Pluginname: History Sweeper Light
 ; Version: 0.0.0.7
@@ -15161,7 +15161,7 @@ Behalte alle Ereignisse
 ; ##############################################
 ; End of langpack: History_Sweeper_Light
 ; ############################################## 
-; Start of langpack: History_Viewer (Letzte Änderung: 02:25, 18. Sep. 2010 )
+; Start of langpack: History_Viewer (Letzte Änderung: 03:25, 18. Sep. 2010 )
 
 ; Pluginname: Historyviewer 
 ; Version: 0.1.3.0
@@ -15222,7 +15222,7 @@ Mit diesem Plugin wird der Standardverlauf wird durch einen erweiterten Verlauf 
 ; ##############################################
 ; End of langpack: History_Viewer
 ; ############################################## 
-; Start of langpack: HotContact (Letzte Änderung: 02:25, 18. Sep. 2010 )
+; Start of langpack: HotContact (Letzte Änderung: 03:25, 18. Sep. 2010 )
 
 ; Pluginname: HotContact 
 ; Version: 0.0.0.5
@@ -15240,7 +15240,7 @@ Doppelklick simulieren anstatt das Nachrichtenfenster zu starten
 ; ##############################################
 ; End of langpack: HotContact
 ; ############################################## 
-; Start of langpack: Hotkeys_Plus (Letzte Änderung: 22:41, 26. Okt. 2010 )
+; Start of langpack: Hotkeys_Plus (Letzte Änderung: 23:41, 26. Okt. 2010 )
 
 ; Pluginname: HotKeys Plus 
 ; Version: 0.1.6.0
@@ -15396,7 +15396,7 @@ Sie versuchen einen Eintrag hinzuzufügen, der bereits existiert!
 ; ##############################################
 ; End of langpack: HwHotKey
 ; ############################################## 
-; Start of langpack: IAX (Letzte Änderung: 02:24, 18. Sep. 2010 )
+; Start of langpack: IAX (Letzte Änderung: 03:24, 18. Sep. 2010 )
 
 ; Pluginname: IAX 
 ; Version: 0.0.3.0
@@ -15448,7 +15448,7 @@ Zeitüberschreitung bei der Registrierung
 ; ##############################################
 ; End of langpack: IAX
 ; ############################################## 
-; Start of langpack: ICQCorp (Letzte Änderung: 02:23, 18. Sep. 2010 )
+; Start of langpack: ICQCorp (Letzte Änderung: 03:23, 18. Sep. 2010 )
 
 ; Pluginname: ICQ Corp2 
 ; Version: 0.0.1.1
@@ -15466,7 +15466,7 @@ Verbindungs-Timeout (P2P-Modus):
 ; ##############################################
 ; End of langpack: ICQCorp
 ; ############################################## 
-; Start of langpack: ICQOscarJ (Letzte Änderung: 18:00, 5. Mai 2011 )
+; Start of langpack: ICQOscarJ (Letzte Änderung: 19:00, 5. Mai 2011 )
 
 ; Pluginname: ICQOscarJ Protocol
 ; Version: 0.9.15.0
@@ -16411,7 +16411,7 @@ Deaktiviere Statusprüfung im 'Unsichtbar' Status
 ; ##############################################
 ; End of langpack: ICQOscarJ
 ; ############################################## 
-; Start of langpack: ICQOscarJ_(BM_Mod) (Letzte Änderung: 02:23, 18. Sep. 2010 )
+; Start of langpack: ICQOscarJ_(BM_Mod) (Letzte Änderung: 03:23, 18. Sep. 2010 )
 
 ; Pluginname: ISee 
 ; Version: 0.4.0.32 
@@ -16666,7 +16666,7 @@ Menüpunkt aktiviert
 ; ##############################################
 ; End of langpack: ICQOscarJ_(BM_Mod)
 ; ############################################## 
-; Start of langpack: ICQOscarJ_(Plus_Mod) (Letzte Änderung: 10:21, 13. Apr. 2011 )
+; Start of langpack: ICQOscarJ_(Plus_Mod) (Letzte Änderung: 11:21, 13. Apr. 2011 )
 
 ; Pluginname: ICQ Plus Mod 
 ; Version: ICQJ Plus Mod Version 0.3.10.68 [Build 2011.06.04]
@@ -17248,7 +17248,7 @@ QIP-Status
 ; ##############################################
 ; End of langpack: ICQOscarJ_(Plus_Mod)
 ; ############################################## 
-; Start of langpack: ICQOscarJ_(S!N_Mod) (Letzte Änderung: 02:23, 18. Sep. 2010 )
+; Start of langpack: ICQOscarJ_(S!N_Mod) (Letzte Änderung: 03:23, 18. Sep. 2010 )
 
 ; Pluginname: ICQ S!N Mod 
 ; Version: 0.5.0.92
@@ -17354,7 +17354,7 @@ Die Prüfung von "%s" ist fehlgeschlagen, zu viel Traffic, MACH LANGSAMER!
 ; ##############################################
 ; End of langpack: ICQOscarJ_(S!N_Mod)
 ; ############################################## 
-; Start of langpack: ICQ_Status_Checker (Letzte Änderung: 02:22, 18. Sep. 2010 )
+; Start of langpack: ICQ_Status_Checker (Letzte Änderung: 03:22, 18. Sep. 2010 )
 
 ; Pluginname: ICQ Status Checker 
 ; Version: 1.2.0.0
@@ -17386,7 +17386,7 @@ Tut mir leid, aber das ist kein ICQ-Benutzer. Ich kann leider nur den Status der
 ; ##############################################
 ; End of langpack: ICQ_Status_Checker
 ; ############################################## 
-; Start of langpack: IEView (Letzte Änderung: 17:25, 28. MÃ¤r. 2011 )
+; Start of langpack: IEView (Letzte Änderung: 18:25, 28. MÃ¤r. 2011 )
 
 ; Pluginname: IEView
 ; Version: 1.3.0.4
@@ -17460,7 +17460,7 @@ Internet-Explorer-basierter Chatlog (1.2.0.1 März 23 2009)
 ; ##############################################
 ; End of langpack: IEView
 ; ############################################## 
-; Start of langpack: IEView_History_Viewer (Letzte Änderung: 21:59, 27. Okt. 2010 )
+; Start of langpack: IEView_History_Viewer (Letzte Änderung: 22:59, 27. Okt. 2010 )
 
 ; Pluginname: IEView History Viewer
 ; Version: 0.0.1.6
@@ -17515,7 +17515,7 @@ Verlauf
 ; ##############################################
 ; End of langpack: IEView_History_Viewer
 ; ############################################## 
-; Start of langpack: IM2SMS (Letzte Änderung: 02:22, 18. Sep. 2010 )
+; Start of langpack: IM2SMS (Letzte Änderung: 03:22, 18. Sep. 2010 )
 
 ; Pluginname: IM2SMS 
 ; Version: 0.2.0.0
@@ -18388,7 +18388,7 @@ Import-Informations-Plugin
 ; ##############################################
 ; End of langpack: Import
 ; ############################################## 
-; Start of langpack: ImportTXT (Letzte Änderung: 20:11, 7. Jul. 2011 )
+; Start of langpack: ImportTXT (Letzte Änderung: 21:11, 7. Jul. 2011 )
 
 ; Pluginname: ImportTXT
 ; Version: 0.0.1.10
@@ -18472,7 +18472,7 @@ Importiert Nachrichten aus Textdateien von anderen Clients.
 ; ##############################################
 ; End of langpack: ImportTXT
 ; ############################################## 
-; Start of langpack: InetAccess (Letzte Änderung: 02:21, 18. Sep. 2010 )
+; Start of langpack: InetAccess (Letzte Änderung: 03:21, 18. Sep. 2010 )
 
 ; Pluginname: InetAccess (StarGazer auth protocol) 
 ; Version: 1.2.0.179
@@ -18647,7 +18647,7 @@ Möglicherweise sind die Einstellungen von InetAccess, die Sie benutzen, inkompat
 ; ##############################################
 ; End of langpack: InetAccess
 ; ############################################## 
-; Start of langpack: Invisible4Invisible (Letzte Änderung: 02:20, 18. Sep. 2010 )
+; Start of langpack: Invisible4Invisible (Letzte Änderung: 03:20, 18. Sep. 2010 )
 
 ; Pluginname: Invisible 4 Invisible 
 ; Version: 0.0.1.7
@@ -18669,7 +18669,7 @@ Deaktiviere Invisible 4 Invisible
 ; ##############################################
 ; End of langpack: Invisible4Invisible
 ; ############################################## 
-; Start of langpack: Jabber (Letzte Änderung: 09:37, 10. Jul. 2011 )
+; Start of langpack: Jabber (Letzte Änderung: 10:37, 10. Jul. 2011 )
 
 ; Pluginname: Jabber Protocol 
 ; Version: 0.10.0.2
@@ -20277,7 +20277,7 @@ Der Gegner hat das Spiel geschlossen.
 ; ##############################################
 ; End of langpack: KexX
 ; ############################################## 
-; Start of langpack: Keyboard_Notify_Ext (Letzte Änderung: 20:14, 7. Jul. 2011 )
+; Start of langpack: Keyboard_Notify_Ext (Letzte Änderung: 21:14, 7. Jul. 2011 )
 
 ; Pluginname: Keyboard Notify Ext. 
 ; Version: 1.5.7.6
@@ -20387,7 +20387,7 @@ Stelle XStatus Liste ein
 ; ##############################################
 ; End of langpack: Keyboard_Notify_Ext
 ; ############################################## 
-; Start of langpack: Language_Pack_Manager (Letzte Änderung: 23:39, 27. Apr. 2011 )
+; Start of langpack: Language_Pack_Manager (Letzte Änderung: 00:39, 28. Apr. 2011 )
 
 ; Pluginname: Language Pack Manager
 ; Version 1.0.2.3
@@ -20456,7 +20456,7 @@ Englisch (Standard)
 ; ##############################################
 ; End of langpack: Language_Pack_Manager
 ; ############################################## 
-; Start of langpack: Last_seen (Letzte Änderung: 11:53, 22. Aug. 2011 )
+; Start of langpack: Last_seen (Letzte Änderung: 12:53, 22. Aug. 2011 )
 
 ; Pluginname: Last seen Plugin 
 ; Version: 5.0.4.7
@@ -20555,7 +20555,7 @@ Speichert wann ein Kontakt zuletzt Online war, sowie welche Kontakte in ihrer Ab
 ; ##############################################
 ; End of langpack: Last_seen
 ; ############################################## 
-; Start of langpack: ListeningTo (Letzte Änderung: 14:06, 31. Mai 2011 )
+; Start of langpack: ListeningTo (Letzte Änderung: 15:06, 31. Mai 2011 )
 
 ; Pluginname: ListeningTo
 ; Dateiname: listeningto.dll (Ansi), listeningtow.dll (Unicode)
@@ -20693,7 +20693,7 @@ Listening-To-Informationen aktivieren/deaktivieren (für alle Protokolle)
 ; ##############################################
 ; End of langpack: ListeningTo
 ; ############################################## 
-; Start of langpack: LogService (Letzte Änderung: 02:18, 18. Sep. 2010 )
+; Start of langpack: LogService (Letzte Änderung: 03:18, 18. Sep. 2010 )
 
 ; Pluginname: LogService 
 ; Version: 0.1.0.1
@@ -20725,7 +20725,7 @@ KB (0 = unbegrenzt)
 ; ##############################################
 ; End of langpack: LogService
 ; ############################################## 
-; Start of langpack: Log_Statistics (Letzte Änderung: 22:36, 27. Aug. 2010 )
+; Start of langpack: Log_Statistics (Letzte Änderung: 23:36, 27. Aug. 2010 )
 
 ; Pluginname: LogStatistics 
 ; Version: 0.1.1.3
@@ -20890,7 +20890,7 @@ Schliesse nach:
 ; ##############################################
 ; End of langpack: LotusNotify
 ; ############################################## 
-; Start of langpack: MBirthday (Letzte Änderung: 17:53, 28. Okt. 2010 )
+; Start of langpack: MBirthday (Letzte Änderung: 18:53, 28. Okt. 2010 )
 
 ; Pluginname: mBirthday 
 ; Version: 0.0.0.6
@@ -20953,7 +20953,7 @@ hat Geburtstag
 ; ##############################################
 ; End of langpack: MBirthday
 ; ############################################## 
-; Start of langpack: MContacts (Letzte Änderung: 22:36, 27. Aug. 2010 )
+; Start of langpack: MContacts (Letzte Änderung: 23:36, 27. Aug. 2010 )
 
 ; Pluginname: mContacts 
 ; Version: 0.0.1.1
@@ -21055,7 +21055,7 @@ Kontaktverlauf importieren
 ; ##############################################
 ; End of langpack: MContacts
 ; ############################################## 
-; Start of langpack: MDynDNS (Letzte Änderung: 22:24, 27. Aug. 2010 )
+; Start of langpack: MDynDNS (Letzte Änderung: 23:24, 27. Aug. 2010 )
 
 ; Pluginname: mDynDNS 
 ; Version: 0.8.1.2
@@ -21087,7 +21087,7 @@ Ihre Kontodaten sind unvollständig. Bitte prüfen Sie diese!
 ; ##############################################
 ; End of langpack: MDynDNS
 ; ############################################## 
-; Start of langpack: MIMLocker (Letzte Änderung: 17:07, 25. Okt. 2010 )
+; Start of langpack: MIMLocker (Letzte Änderung: 18:07, 25. Okt. 2010 )
 
 ; Pluginname: MIMLocker 
 ; Version: 0.0.4.1
@@ -21151,7 +21151,7 @@ Sperrt Miranda IM bis das Passwort eingegeben ist
 ; ##############################################
 ; End of langpack: MIMLocker
 ; ############################################## 
-; Start of langpack: MIpper (Letzte Änderung: 02:16, 18. Sep. 2010 )
+; Start of langpack: MIpper (Letzte Änderung: 03:16, 18. Sep. 2010 )
 
 ; Pluginname: Ipper Maniac
 ; Version: 0.0.1.23
@@ -21213,7 +21213,7 @@ Dieses Plugin sendet Ihre IP-Adressen an Leute in Ihrer Kontakliste.
 ; ##############################################
 ; End of langpack: MIpper
 ; ############################################## 
-; Start of langpack: MNetSend (Letzte Änderung: 02:16, 18. Sep. 2010 )
+; Start of langpack: MNetSend (Letzte Änderung: 03:16, 18. Sep. 2010 )
 
 ; Pluginname: mNetSend 
 ; Version: 0.0.1.11
@@ -21359,7 +21359,7 @@ Versand-Optionen für
 ; ##############################################
 ; End of langpack: MNetSend
 ; ############################################## 
-; Start of langpack: MPhantomUser (Letzte Änderung: 02:15, 18. Sep. 2010 )
+; Start of langpack: MPhantomUser (Letzte Änderung: 03:15, 18. Sep. 2010 )
 
 ; Pluginnamme: mPhantomUser 
 ; Version: 0.3.7.0
@@ -21395,7 +21395,7 @@ Phantombenutzer bearbeiten
 ; ##############################################
 ; End of langpack: MPhantomUser
 ; ############################################## 
-; Start of langpack: MRA (Letzte Änderung: 18:05, 10. Mai 2011 )
+; Start of langpack: MRA (Letzte Änderung: 19:05, 10. Mai 2011 )
 
 ; Pluginname: Mail.ru Agent (MRA)
 ; Version: 1.21.0.1 (2011.05.08)
@@ -21663,7 +21663,7 @@ Neue E-Mail
 ; ##############################################
 ; End of langpack: MRA
 ; ############################################## 
-; Start of langpack: MRadio (Letzte Änderung: 11:29, 6. Jul. 2011 )
+; Start of langpack: MRadio (Letzte Änderung: 12:29, 6. Jul. 2011 )
 
 ; Pluginname: mRadio 
 ; Version: 0.0.1.4
@@ -21827,7 +21827,7 @@ Mono fokusieren
 ; ##############################################
 ; End of langpack: MRadio
 ; ############################################## 
-; Start of langpack: MSN (Letzte Änderung: 01:54, 25. Jul. 2011 )
+; Start of langpack: MSN (Letzte Änderung: 02:54, 25. Jul. 2011 )
 
 ; Pluginname: MSN Protocol 
 ; Version: 0.10.0.2
@@ -22085,7 +22085,7 @@ Ort:
 ; ##############################################
 ; End of langpack: MSN
 ; ############################################## 
-; Start of langpack: MSN_Account_Setup (Letzte Änderung: 02:12, 18. Sep. 2010 )
+; Start of langpack: MSN_Account_Setup (Letzte Änderung: 03:12, 18. Sep. 2010 )
 
 ; Pluginname: MSN Account Setup 
 ; Version: 0.0.1.2
@@ -22109,7 +22109,7 @@ MSN-Plugin deaktivieren
 ; ##############################################
 ; End of langpack: MSN_Account_Setup
 ; ############################################## 
-; Start of langpack: MSecure (Letzte Änderung: 02:12, 18. Sep. 2010 )
+; Start of langpack: MSecure (Letzte Änderung: 03:12, 18. Sep. 2010 )
 
 ; Pluginname: mSecure 
 ; Version: 1.0.2.0
@@ -22142,7 +22142,7 @@ Schützt das Mirandaprofil
 ; ##############################################
 ; End of langpack: MSecure
 ; ############################################## 
-; Start of langpack: MTV (Letzte Änderung: 22:24, 27. Aug. 2010 )
+; Start of langpack: MTV (Letzte Änderung: 23:24, 27. Aug. 2010 )
 
 ; Pluginname: mTV 
 ; Version: 0.1.0.0
@@ -22265,7 +22265,7 @@ Zeige aktuelles TV-Programm als Statusnachricht
 ; ##############################################
 ; End of langpack: MTV
 ; ############################################## 
-; Start of langpack: MToolTip (Letzte Änderung: 02:11, 18. Sep. 2010 )
+; Start of langpack: MToolTip (Letzte Änderung: 03:11, 18. Sep. 2010 )
 
 ; Pluginname: mToolTip 
 ; Version: 0.0.1.6
@@ -22373,7 +22373,7 @@ Höhe:
 ; ##############################################
 ; End of langpack: MToolTip
 ; ############################################## 
-; Start of langpack: Magnetic_Windows (Letzte Änderung: 21:48, 27. Okt. 2010 )
+; Start of langpack: Magnetic_Windows (Letzte Änderung: 22:48, 27. Okt. 2010 )
 
 ; Pluginname: Magnetic Windows
 ; Version: 0.0.5.0
@@ -22396,7 +22396,7 @@ Für Scriver-Benutzer: Automatisch STRG-Taste beim Bewegen des Fenster drücken. (
 ; ##############################################
 ; End of langpack: Magnetic_Windows
 ; ############################################## 
-; Start of langpack: MathModule (Letzte Änderung: 22:01, 27. Aug. 2010 )
+; Start of langpack: MathModule (Letzte Änderung: 23:01, 27. Aug. 2010 )
 
 ; Pluginname: MathModule++
 ; Version: 0.1.2.0
@@ -22926,7 +22926,7 @@ Deckkraft
 ; ##############################################
 ; End of langpack: MathModule
 ; ############################################## 
-; Start of langpack: MeBeam (Letzte Änderung: 22:34, 26. Okt. 2010 )
+; Start of langpack: MeBeam (Letzte Änderung: 23:34, 26. Okt. 2010 )
 
 ; Pluginname: MeBeam
 ; Version: 0.2.0.0
@@ -22945,7 +22945,7 @@ Stellt die Video & Audio-Chatunterstützung über MeBeam.com bereit.
 ; ##############################################
 ; End of langpack: MeBeam
 ; ############################################## 
-; Start of langpack: MeSpeak (Letzte Änderung: 23:05, 27. Aug. 2010 )
+; Start of langpack: MeSpeak (Letzte Änderung: 00:05, 28. Aug. 2010 )
 
 ; Pluginname: meSpeak 
 ; Version: 0.0.1.5
@@ -22989,7 +22989,7 @@ Aktzeptiere Soundstummschaltung
 ; ##############################################
 ; End of langpack: MeSpeak
 ; ############################################## 
-; Start of langpack: MenuItemEx (Letzte Änderung: 20:20, 7. Jul. 2011 )
+; Start of langpack: MenuItemEx (Letzte Änderung: 21:20, 7. Jul. 2011 )
 
 ; Pluginname: MenuItemEx 
 ; Version: 1.3.0.8a
@@ -23009,7 +23009,7 @@ Wollen Sie eine Autorisierungsanfrage an \neinen neuen Kontakt senden?
 ; ##############################################
 ; End of langpack: MenuItemEx
 ; ############################################## 
-; Start of langpack: MessageNotify (Letzte Änderung: 23:06, 27. Aug. 2010 )
+; Start of langpack: MessageNotify (Letzte Änderung: 00:06, 28. Aug. 2010 )
 
 ; Pluginname: MessageNotify 
 ; Version: 0.3.0.0
@@ -23024,7 +23024,7 @@ Inklusive Nachrichtentext
 ; ##############################################
 ; End of langpack: MessageNotify
 ; ############################################## 
-; Start of langpack: MessagePopup (Letzte Änderung: 23:06, 27. Aug. 2010 )
+; Start of langpack: MessagePopup (Letzte Änderung: 00:06, 28. Aug. 2010 )
 
 ; Pluginname: MessagePopup 
 ; Version: 0.0.0.1
@@ -23058,7 +23058,7 @@ MessagePopup - Beispiel
 ; ##############################################
 ; End of langpack: MessagePopup
 ; ############################################## 
-; Start of langpack: Message_Converter (Letzte Änderung: 15:39, 16. Okt. 2010 )
+; Start of langpack: Message_Converter (Letzte Änderung: 16:39, 16. Okt. 2010 )
 
 ; Pluginname: Message Converter
 ; Version: 0.0.0.1
@@ -23115,7 +23115,7 @@ Doppelter Formname
 ; ##############################################
 ; End of langpack: Message_Converter
 ; ############################################## 
-; Start of langpack: Message_Export (Letzte Änderung: 22:36, 27. Aug. 2010 )
+; Start of langpack: Message_Export (Letzte Änderung: 23:36, 27. Aug. 2010 )
 
 ; Pluginname: Message Export 
 ; Version: 3.00.00
@@ -23294,7 +23294,7 @@ Benutze UTF8 in neuen Dateien
 ; ##############################################
 ; End of langpack: Message_Export
 ; ############################################## 
-; Start of langpack: Message_Notify (Letzte Änderung: 02:09, 18. Sep. 2010 )
+; Start of langpack: Message_Notify (Letzte Änderung: 03:09, 18. Sep. 2010 )
 
 ; Pluginname:Message Notify
 ; Version: 0.3.0.0
@@ -23326,7 +23326,7 @@ Popupfarben bestimmen
 ; ##############################################
 ; End of langpack: Message_Notify
 ; ############################################## 
-; Start of langpack: Messages_Total (Letzte Änderung: 21:41, 27. Okt. 2010 )
+; Start of langpack: Messages_Total (Letzte Änderung: 22:41, 27. Okt. 2010 )
 
 ; Pluginname: Messages Total 
 ; Version: 0.0.5.3
@@ -23364,7 +23364,7 @@ Meldung
 ; ##############################################
 ; End of langpack: Messages_Total
 ; ############################################## 
-; Start of langpack: Messages_Total_Notify (Letzte Änderung: 02:08, 18. Sep. 2010 )
+; Start of langpack: Messages_Total_Notify (Letzte Änderung: 03:08, 18. Sep. 2010 )
 
 ; Pluginname: Messages Total Notify 
 ; Version: 0.0.3.3
@@ -23408,7 +23408,7 @@ Standards
 ; ##############################################
 ; End of langpack: Messages_Total_Notify
 ; ############################################## 
-; Start of langpack: MetaContacts (Letzte Änderung: 15:52, 12. Sep. 2010 )
+; Start of langpack: MetaContacts (Letzte Änderung: 16:52, 12. Sep. 2010 )
 
 ; Pluginname: MetaContacts
 ; Version: 0.14.0.13
@@ -23638,7 +23638,7 @@ Als Standard setzen
 ; ##############################################
 ; End of langpack: MetaContacts
 ; ############################################## 
-; Start of langpack: MiOverlay (Letzte Änderung: 18:14, 28. Aug. 2010 )
+; Start of langpack: MiOverlay (Letzte Änderung: 19:14, 28. Aug. 2010 )
 
 ; Pluginname: miOverlay 
 ; Version: 0.0.0.8
@@ -23692,7 +23692,7 @@ Overlay aktivi&eren
 ; ##############################################
 ; End of langpack: MiOverlay
 ; ############################################## 
-; Start of langpack: MicqBirthday (Letzte Änderung: 02:07, 18. Sep. 2010 )
+; Start of langpack: MicqBirthday (Letzte Änderung: 03:07, 18. Sep. 2010 )
 
 ; Pluginname: micqBirthday 
 ; Version: 0.3.4.0
@@ -23758,7 +23758,7 @@ Informiert dich ein paar Tage bevor jemand auf deiner Kontaktliste Geburtstag ha
 ; ##############################################
 ; End of langpack: MicqBirthday
 ; ############################################## 
-; Start of langpack: MirFox (Letzte Änderung: 22:43, 19. Aug. 2011 )
+; Start of langpack: MirFox (Letzte Änderung: 23:43, 19. Aug. 2011 )
 
 ; Pluginname: MirFox 
 ; Version: 0.4.0.0
@@ -23821,7 +23821,7 @@ MirFox (Miranda IM) - ein Stück Miranda IM - Firefox Integration
 ; ##############################################
 ; End of langpack: MirFox
 ; ############################################## 
-; Start of langpack: MirOTR (Letzte Änderung: 18:22, 17. Jul. 2011 )
+; Start of langpack: MirOTR (Letzte Änderung: 19:22, 17. Jul. 2011 )
 
 ; Pluginname: MirOTR 
 ; Version: 0.11.0.3
@@ -24015,7 +24015,7 @@ Sitzung beend., wenn Fenster geschlossen wird
 ; ##############################################
 ; End of langpack: MirOTR
 ; ############################################## 
-; Start of langpack: MirOUT (Letzte Änderung: 02:07, 18. Sep. 2010 )
+; Start of langpack: MirOUT (Letzte Änderung: 03:07, 18. Sep. 2010 )
 
 ; Pluginname: MirOUT 
 ; Version: 2.2.0.5
@@ -24063,7 +24063,7 @@ Tel. Nummer
 ; ##############################################
 ; End of langpack: MirOUT
 ; ############################################## 
-; Start of langpack: MirandaComm (Letzte Änderung: 02:07, 18. Sep. 2010 )
+; Start of langpack: MirandaComm (Letzte Änderung: 03:07, 18. Sep. 2010 )
 
 ; Pluginname: MirandaComm 
 ; Version: 0.2.0.0
@@ -24189,7 +24189,7 @@ Fehler: Konnte keine Verbindung zur Kamera herstellen. Ist sie angeschlossen?
 ; ##############################################
 ; End of langpack: MirandaComm
 ; ############################################## 
-; Start of langpack: MirandaG15 (Letzte Änderung: 12:52, 3. Apr. 2011 )
+; Start of langpack: MirandaG15 (Letzte Änderung: 13:52, 3. Apr. 2011 )
 
 ; Pluginname: MirandaG15 
 ; Version: 0.1.2.12
@@ -24420,7 +24420,7 @@ Unterstützt die Miranda IM Benutzung von der G15-LCD-Tastatur
 ; ##############################################
 ; End of langpack: MirandaG15
 ; ############################################## 
-; Start of langpack: MirandaQQ (Letzte Änderung: 18:19, 30. Jul. 2011 )
+; Start of langpack: MirandaQQ (Letzte Änderung: 19:19, 30. Jul. 2011 )
 
 ; Pluginname: MirandaQQ2
 ; Version: 0.2.0.75
@@ -24689,7 +24689,7 @@ Allgemeine Bilddienste für Miranda IM
 ; ##############################################
 ; End of langpack: Miranda_Image_services
 ; ############################################## 
-; Start of langpack: Miranda_Juick_Plugin (Letzte Änderung: 02:06, 18. Sep. 2010 )
+; Start of langpack: Miranda_Juick_Plugin (Letzte Änderung: 03:06, 18. Sep. 2010 )
 
 ; Pluginname: Miranda Juick Plugin
 ; Version: 0.2
@@ -24705,7 +24705,7 @@ Das Plugin für mehr Komfort bei der Verwendung von Juick (juick.com) im Miranda 
 ; ##############################################
 ; End of langpack: Miranda_Juick_Plugin
 ; ############################################## 
-; Start of langpack: Miranda_Scripting_Plugin_(mBot) (Letzte Änderung: 23:08, 21. Okt. 2010 )
+; Start of langpack: Miranda_Scripting_Plugin_(mBot) (Letzte Änderung: 00:08, 22. Okt. 2010 )
 
 ; Pluginname: Miranda Scripting Plugin 
 ; Version: 0.0.3.3
@@ -24876,7 +24876,7 @@ Datenbank ist bereits sicher!
 ; ##############################################
 ; End of langpack: Miranda_Secure_database_with_AutoBackups
 ; ############################################## 
-; Start of langpack: Miranda_Text_Control (Letzte Änderung: 22:27, 5. Okt. 2010 )
+; Start of langpack: Miranda_Text_Control (Letzte Änderung: 23:27, 5. Okt. 2010 )
 
 ; Pluginname: mTextControl 
 ; Version: 0.8.0.1
@@ -25704,7 +25704,7 @@ Benutze neue Zeichnung für die Statusbar
 ; ##############################################
 ; End of langpack: MultiWindow_Contact_List
 ; ############################################## 
-; Start of langpack: Multiprotocol_contact_merge_plugin (Letzte Änderung: 02:03, 18. Sep. 2010 )
+; Start of langpack: Multiprotocol_contact_merge_plugin (Letzte Änderung: 03:03, 18. Sep. 2010 )
 
 ; Pluginname: Multiprotocol contact merge plugin 
 ; Version: 0.2.5.0
@@ -25806,7 +25806,7 @@ HAUPT
 ; ##############################################
 ; End of langpack: Multiprotocol_contact_merge_plugin
 ; ############################################## 
-; Start of langpack: MySpace (Letzte Änderung: 21:53, 27. Okt. 2010 )
+; Start of langpack: MySpace (Letzte Änderung: 22:53, 27. Okt. 2010 )
 
 ; Pluginname: MySpace Protokoll 
 ; Version: 0.0.7.1
@@ -25884,7 +25884,7 @@ Ein Fehler ist bei der Kontaktliste in der Datenbank aufgetreten
 ; ##############################################
 ; End of langpack: MySpace
 ; ############################################## 
-; Start of langpack: My_Details (Letzte Änderung: 12:49, 1. Okt. 2010 )
+; Start of langpack: My_Details (Letzte Änderung: 13:49, 1. Okt. 2010 )
 
 ; Pluginname: My Details 
 ; Version: 0.0.2.6
@@ -26031,7 +26031,7 @@ Nutze feste Avatargröße
 ; ##############################################
 ; End of langpack: My_Details
 ; ############################################## 
-; Start of langpack: NConvers (Letzte Änderung: 21:56, 27. Aug. 2010 )
+; Start of langpack: NConvers (Letzte Änderung: 22:56, 27. Aug. 2010 )
 
 ; Pluginname: nConvers++
 ; Version: 0.0.0.51g
@@ -26534,7 +26534,7 @@ Laden unterbrechen
 ; ##############################################
 ; End of langpack: NConvers
 ; ############################################## 
-; Start of langpack: Name_Day (Letzte Änderung: 00:12, 28. Apr. 2011 )
+; Start of langpack: Name_Day (Letzte Änderung: 01:12, 28. Apr. 2011 )
 
 ; Pluginname: Name Day Plugin
 ; Version: 0.0.0.7
@@ -26550,7 +26550,7 @@ Herzlichen Glückwunsch zum Namenstag an:
 ; ##############################################
 ; End of langpack: Name_Day
 ; ############################################## 
-; Start of langpack: NetAccessNotify (Letzte Änderung: 02:02, 18. Sep. 2010 )
+; Start of langpack: NetAccessNotify (Letzte Änderung: 03:02, 18. Sep. 2010 )
 
 ; Pluginname: NetAccessNotify 
 ; Version: 2.7.1.0
@@ -26724,7 +26724,7 @@ Nicht unterstützt in dieser Version
 ; ##############################################
 ; End of langpack: NetAccessNotify
 ; ############################################## 
-; Start of langpack: NetConfig (Letzte Änderung: 20:48, 26. Okt. 2010 )
+; Start of langpack: NetConfig (Letzte Änderung: 21:48, 26. Okt. 2010 )
 
 ; Pluginname: NetConfig 
 ; Version: 0.0.0.4
@@ -26827,7 +26827,7 @@ Dieses ist ein Beispiel-Popup für Nachrichten
 ; ##############################################
 ; End of langpack: NewEventNotify
 ; ############################################## 
-; Start of langpack: NewStatusNotify (Letzte Änderung: 20:26, 7. Jul. 2011 )
+; Start of langpack: NewStatusNotify (Letzte Änderung: 21:26, 7. Jul. 2011 )
 
 ; Pluginname: NewStatusNotify 
 ; Version: 1.1.3.0
@@ -27244,7 +27244,7 @@ Diese Variablen stehen zur Verfügung:\r\n\r\n\%n\tNeue Statusnachricht\r\n\%o\tA
 ; ##############################################
 ; End of langpack: NewStatusNotify
 ; ############################################## 
-; Start of langpack: New_Away_System (Letzte Änderung: 16:23, 4. Okt. 2010 )
+; Start of langpack: New_Away_System (Letzte Änderung: 17:23, 4. Okt. 2010 )
 
 ; Pluginname: NewAwaySystem (Mod)
 ; Version: 0.3.8.4
@@ -27554,7 +27554,7 @@ Das Plugin New Away System für Miranda IM bietet erweiterte Awaynachrichten. Bui
 ; ##############################################
 ; End of langpack: New_Away_System
 ; ############################################## 
-; Start of langpack: New_GPG_encryption (Letzte Änderung: 01:25, 10. Apr. 2011 )
+; Start of langpack: New_GPG_encryption (Letzte Änderung: 02:25, 10. Apr. 2011 )
 
 ; Pluginname: New GPG encryption 
 ; Version: 0.0.0.11
@@ -27845,7 +27845,7 @@ Unsicher
 ; ##############################################
 ; End of langpack: New_GPG_encryption
 ; ############################################## 
-; Start of langpack: New_Notes_and_Reminders (Letzte Änderung: 02:00, 18. Sep. 2010 )
+; Start of langpack: New_Notes_and_Reminders (Letzte Änderung: 03:00, 18. Sep. 2010 )
 
 ; Pluginname: New "Notes & Reminders"
 ; Version: 0.0.4.5
@@ -28000,7 +28000,7 @@ In den Root
 ; ##############################################
 ; End of langpack: New_Trilimport
 ; ############################################## 
-; Start of langpack: NickChangeNotify (Letzte Änderung: 01:59, 18. Sep. 2010 )
+; Start of langpack: NickChangeNotify (Letzte Änderung: 02:59, 18. Sep. 2010 )
 
 ; Pluginname: NickChangeNotify 
 ; Version: 0.0.2.9
@@ -28105,7 +28105,7 @@ entfernt sein/ihr Nickname
 ; ##############################################
 ; End of langpack: Nick_History
 ; ############################################## 
-; Start of langpack: Nim-Contact (Letzte Änderung: 23:33, 27. Aug. 2010 )
+; Start of langpack: Nim-Contact (Letzte Änderung: 00:33, 28. Aug. 2010 )
 
 ; Pluginname: Non-IM Contact 
 ; Version: 0.5.0.1
@@ -28217,7 +28217,7 @@ HTML entfernen
 ; ##############################################
 ; End of langpack: NoHTML
 ; ############################################## 
-; Start of langpack: NoHistory (Letzte Änderung: 01:57, 18. Sep. 2010 )
+; Start of langpack: NoHistory (Letzte Änderung: 02:57, 18. Sep. 2010 )
 
 ; Pluginname: NoHistory
 ; Version: 0.1.0.2
@@ -28239,7 +28239,7 @@ Verlauf deaktivieren
 ; ##############################################
 ; End of langpack: NoHistory
 ; ############################################## 
-; Start of langpack: Nudge (Letzte Änderung: 19:46, 9. Mai 2011 )
+; Start of langpack: Nudge (Letzte Änderung: 20:46, 9. Mai 2011 )
 
 ; Pluginname: Nudge 
 ; Version: 0.0.1.22
@@ -28315,7 +28315,7 @@ Plugin zum Schütteln der Kontaktliste und des Nachrichtenfenster.
 ; ##############################################
 ; End of langpack: Nudge
 ; ############################################## 
-; Start of langpack: OTR (Letzte Änderung: 01:58, 18. Sep. 2010 )
+; Start of langpack: OTR (Letzte Änderung: 02:58, 18. Sep. 2010 )
 
 ; Pluginname: Off the Record [OTR] 
 ; Version: 0.7.0.0
@@ -28416,7 +28416,7 @@ Unsicher
 ; ##############################################
 ; End of langpack: OTR
 ; ############################################## 
-; Start of langpack: OptionFont (Letzte Änderung: 23:21, 27. Aug. 2010 )
+; Start of langpack: OptionFont (Letzte Änderung: 00:21, 28. Aug. 2010 )
 
 ; Pluginname: OptionFont 
 ; Version: 0.0.0.2
@@ -28437,7 +28437,7 @@ Die Schriftart sämtlicher Fenster ändern.\n(Neustart von Miranda IM erforderlich
 ; ##############################################
 ; End of langpack: OptionFont
 ; ############################################## 
-; Start of langpack: PackUpdater (Letzte Änderung: 09:43, 7. Aug. 2011 )
+; Start of langpack: PackUpdater (Letzte Änderung: 10:43, 7. Aug. 2011 )
 
 ; Pluginname: PackUpdater aka ZeroUpdate
 ; Version: 0.0.0.9
@@ -28523,7 +28523,7 @@ Sie haben sich entschieden das Paket nicht direkt zu installieren.\nSie können e
 ; ##############################################
 ; End of langpack: PackUpdater
 ; ############################################## 
-; Start of langpack: Paste_It (Letzte Änderung: 02:31, 4. Jul. 2011 )
+; Start of langpack: Paste_It (Letzte Änderung: 03:31, 4. Jul. 2011 )
 
 ; Pluginname: Paste It
 ; Version: 1.0.0.3
@@ -28621,7 +28621,7 @@ Fehler beim Benutzer-Schlüssel holen auf der Webseite: %s.
 ; ##############################################
 ; End of langpack: Paste_It
 ; ############################################## 
-; Start of langpack: Ping (Letzte Änderung: 21:47, 27. Okt. 2010 )
+; Start of langpack: Ping (Letzte Änderung: 22:47, 27. Okt. 2010 )
 
 ; Pluginname: Ping Protocol 
 ; Version: 0.5.0.2
@@ -28687,7 +28687,7 @@ PING ZIELE
 ; ##############################################
 ; End of langpack: Ping
 ; ############################################## 
-; Start of langpack: Popup (Letzte Änderung: 22:38, 16. Aug. 2011 )
+; Start of langpack: Popup (Letzte Änderung: 23:12, 22. Aug. 2011 )
 
 ; Pluginname: Popup Plus 
 ; Version: 2.1.1.6
@@ -28715,13 +28715,11 @@ Rahmen auch um semi-transparente Avatare
 [Round corners by]
 Runde Ecken um
 [Process Clist events]
-SysTray-Benarichtigungen
-
+SysTray-Ereignisse
 [Disable popups in fullscreen mode]
 Popups im Vollbildmodus deaktivieren
 [Do not close hovered popups]
 Bei Mausberührung nicht schließen
-
 [Size && Position]
 Größe && Position
 [Dynamically resize the popups]
@@ -28752,7 +28750,6 @@ Gesamter Bildschirm
 Pixel
 [Spacing:]
 Fensterabstand:
-
 [Use transparency (Windows 2000+)]
 Transparenz verwenden (Win2k+)
 [Go to Customize > Fonts && Colors for fonts and colors options]
@@ -29158,7 +29155,7 @@ Popup Plus Warnung
 ; ##############################################
 ; End of langpack: Popup
 ; ############################################## 
-; Start of langpack: ProtoLink (Letzte Änderung: 18:08, 28. Aug. 2010 )
+; Start of langpack: ProtoLink (Letzte Änderung: 19:08, 28. Aug. 2010 )
 
 ; Pluginname: ProtoLink 
 ; Version: 0.2.1.0
@@ -29185,7 +29182,7 @@ Registrierte Dateitypen/Links
 ; ##############################################
 ; End of langpack: ProtoLink
 ; ############################################## 
-; Start of langpack: QuickSearch_Mod (Letzte Änderung: 19:20, 31. Jul. 2011 )
+; Start of langpack: QuickSearch_Mod (Letzte Änderung: 20:20, 31. Jul. 2011 )
 
 ; Pluginname: QuickSearch Mod 
 ; Version: 1.4.0.18
@@ -29388,7 +29385,7 @@ Sub-Metakontakt-Vordergrund
 ; ##############################################
 ; End of langpack: QuickSearch_Mod
 ; ############################################## 
-; Start of langpack: Quick_Contacts (Letzte Änderung: 18:04, 28. Aug. 2010 )
+; Start of langpack: Quick_Contacts (Letzte Änderung: 19:04, 28. Aug. 2010 )
  
 ; Pluginname: Quick Contacts 
 ; Version: 1.0.0.0
@@ -29458,7 +29455,7 @@ Aber Unterkont. des Prot. in Liste lassen, wenn Metakont. verst. ist
 ; ##############################################
 ; End of langpack: Quick_Contacts
 ; ############################################## 
-; Start of langpack: Quick_Messages (Letzte Änderung: 11:04, 22. Okt. 2010 )
+; Start of langpack: Quick_Messages (Letzte Änderung: 12:04, 22. Okt. 2010 )
 
 ; Pluginname: Quick Messages
 ; Version: 0.0.4.2
@@ -29517,7 +29514,7 @@ Tipps:
 ; ##############################################
 ; End of langpack: Quick_Messages
 ; ############################################## 
-; Start of langpack: Quick_Replies (Letzte Änderung: 01:55, 18. Sep. 2010 )
+; Start of langpack: Quick_Replies (Letzte Änderung: 02:55, 18. Sep. 2010 )
 
 ; Pluginname: Quick Replies
 ; Version: 0.8.1.0
@@ -29542,7 +29539,7 @@ Schnelle Antworten\r\nLinksklick öffnet das Menü\r\nRechtsklick öffnet die Einst
 ; ##############################################
 ; End of langpack: Quick_Replies
 ; ############################################## 
-; Start of langpack: Quotes (Letzte Änderung: 22:50, 19. Aug. 2011 )
+; Start of langpack: Quotes (Letzte Änderung: 23:50, 19. Aug. 2011 )
 
 ; Pluginname: Quotes
 ; Version: 0.0.21.0
@@ -29697,7 +29694,7 @@ Prozentual nach den gestrigen Schließen geändert
 ; ##############################################
 ; End of langpack: Quotes
 ; ############################################## 
-; Start of langpack: RSSNews (Letzte Änderung: 21:48, 27. Okt. 2010 )
+; Start of langpack: RSSNews (Letzte Änderung: 22:48, 27. Okt. 2010 )
 
 ; Pluginname: RSSNews 
 ; Version: 0.0.3.25
@@ -29804,7 +29801,7 @@ Feed-Protokoll
 ; ##############################################
 ; End of langpack: RSSNews
 ; ############################################## 
-; Start of langpack: Realreconnect (Letzte Änderung: 18:19, 24. Okt. 2010 )
+; Start of langpack: Realreconnect (Letzte Änderung: 19:19, 24. Okt. 2010 )
 
 ; Pluginname: RealReconnect
 ; Version: 0.0.1.2
@@ -29830,7 +29827,7 @@ Wiederverbinden
 ; ##############################################
 ; End of langpack: Realreconnect
 ; ############################################## 
-; Start of langpack: Received_Files_Folders (Letzte Änderung: 23:33, 27. Aug. 2010 )
+; Start of langpack: Received_Files_Folders (Letzte Änderung: 00:33, 28. Aug. 2010 )
 
 ; Pluginname: Received Files Folders 
 ; Version: 0.1.1.0a
@@ -29909,7 +29906,7 @@ Füge Wort oder Satz hinzu
 ; ##############################################
 ; End of langpack: Replacer
 ; ############################################## 
-; Start of langpack: Roamie (Letzte Änderung: 21:18, 13. Sep. 2010 )
+; Start of langpack: Roamie (Letzte Änderung: 22:18, 13. Sep. 2010 )
 
 ; Pluginname: Roamie
 ; Version: 0.6.3000.909
@@ -30065,7 +30062,7 @@ Netzwerk:
 ; ##############################################
 ; End of langpack: SMS
 ; ############################################## 
-; Start of langpack: SOMWO (Letzte Änderung: 01:52, 18. Sep. 2010 )
+; Start of langpack: SOMWO (Letzte Änderung: 02:52, 18. Sep. 2010 )
 
 ; Pluginname: SOMWO 
 ; Version: 0.1.0.4
@@ -30255,7 +30252,7 @@ ID:
 ; ##############################################
 ; End of langpack: Sametime
 ; ############################################## 
-; Start of langpack: Scriptc (Letzte Änderung: 23:34, 27. Aug. 2010 )
+; Start of langpack: Scriptc (Letzte Änderung: 00:34, 28. Aug. 2010 )
 
 ; Pluginname: Scriptc 
 ; Version: 0.9.0.1
@@ -30298,7 +30295,7 @@ Tipp: Die Skripte haben ein Rechtsklick Kontextmenü
 ; ##############################################
 ; End of langpack: Scriptc
 ; ############################################## 
-; Start of langpack: Scriver (Letzte Änderung: 22:50, 24. Mai 2011 )
+; Start of langpack: Scriver (Letzte Änderung: 23:50, 24. Mai 2011 )
 
 ; Pluginname: Scriver 
 ; Version: 2.9.0.6
@@ -30605,7 +30602,7 @@ Benutzerliste, Linie
 ; ##############################################
 ; End of langpack: Scriver
 ; ############################################## 
-; Start of langpack: Search_Bar (Letzte Änderung: 20:32, 26. Okt. 2010 )
+; Start of langpack: Search_Bar (Letzte Änderung: 21:32, 26. Okt. 2010 )
 
 ; Pluginname: SearchBar 
 ; Version: 0.0.0.2
@@ -30632,7 +30629,7 @@ Ident
 ; ##############################################
 ; End of langpack: Search_Bar
 ; ############################################## 
-; Start of langpack: SecVirtDB (Letzte Änderung: 22:56, 27. Aug. 2010 )
+; Start of langpack: SecVirtDB (Letzte Änderung: 23:56, 27. Aug. 2010 )
 
 ; Pluginname: SecVirtDB 
 ; Version: 0.5.1.0
@@ -30651,7 +30648,7 @@ Bestätigen
 ; ##############################################
 ; End of langpack: SecVirtDB
 ; ############################################## 
-; Start of langpack: SecureIM (Letzte Änderung: 23:41, 27. Aug. 2010 )
+; Start of langpack: SecureIM (Letzte Änderung: 00:41, 28. Aug. 2010 )
 
 ; Pluginname: SecureIM - modified by baloo 
 ; Version: 1.0.12.3
@@ -30960,7 +30957,7 @@ SecureIM-Status
 ; ##############################################
 ; End of langpack: SecureIM
 ; ############################################## 
-; Start of langpack: Send_Screenshot (Letzte Änderung: 23:27, 27. Aug. 2010 )
+; Start of langpack: Send_Screenshot (Letzte Änderung: 00:27, 28. Aug. 2010 )
 
 ; Pluginname: Send Screenshot 
 ; Version: 0.8.0.0
@@ -31147,7 +31144,7 @@ Achtung: Kein Iconpack wurde in folgendem Ordner gefunden: 'customize\\Icons', '
 ; ##############################################
 ; End of langpack: Send_Screenshot
 ; ############################################## 
-; Start of langpack: Services_list (Letzte Änderung: 23:22, 27. Aug. 2010 )
+; Start of langpack: Services_list (Letzte Änderung: 00:22, 28. Aug. 2010 )
 
 ; Pluginname: Services list 
 ; Version: 0.0.2.6
@@ -31211,7 +31208,7 @@ Verfügbare Dienste:
 ; ##############################################
 ; End of langpack: Services_list
 ; ############################################## 
-; Start of langpack: Sessions_Manager (Letzte Änderung: 23:38, 15. Jul. 2011 )
+; Start of langpack: Sessions_Manager (Letzte Änderung: 00:38, 16. Jul. 2011 )
 
 ; Pluginname: Sessions 
 ; Version: 0.1.3.0
@@ -31305,7 +31302,7 @@ Lade letzte Sitzung
 ; ##############################################
 ; End of langpack: Sessions_Manager
 ; ############################################## 
-; Start of langpack: ShellFileSend (Letzte Änderung: 23:30, 27. Aug. 2010 )
+; Start of langpack: ShellFileSend (Letzte Änderung: 00:30, 28. Aug. 2010 )
 
 ; Pluginname: ShellFileSend 
 ; Version: 0.1.1.6
@@ -31386,7 +31383,7 @@ Zuletzt
 ; ##############################################
 ; End of langpack: Shlext
 ; ############################################## 
-; Start of langpack: ShowUIN (Letzte Änderung: 01:49, 18. Sep. 2010 )
+; Start of langpack: ShowUIN (Letzte Änderung: 02:49, 18. Sep. 2010 )
 
 ; Pluginname: ShowUIN 
 ; Version: 3.1.0.0
@@ -31452,7 +31449,7 @@ Zeigt das Geschlecht eines Kontaktes in der Kontaktliste an.
 ; ##############################################
 ; End of langpack: Show_Contact_Gender
 ; ############################################## 
-; Start of langpack: Shutdown (Letzte Änderung: 01:48, 18. Sep. 2010 )
+; Start of langpack: Shutdown (Letzte Änderung: 02:48, 18. Sep. 2010 )
 
 ; Pluginname: Shutdown 
 ; Version: 0.4.0.0
@@ -31499,7 +31496,7 @@ Dieses Plugin ist gestarten und wird alte Einstellungen zum herunterfahren verwe
 ; ##############################################
 ; End of langpack: Shutdown
 ; ############################################## 
-; Start of langpack: Simple_Auto_Replier (Letzte Änderung: 13:35, 12. Apr. 2011 )
+; Start of langpack: Simple_Auto_Replier (Letzte Änderung: 14:35, 12. Apr. 2011 )
 
 ; Pluginname: Simple Auto Replier (Simple AR)
 ; Version: 2.0.2.4
@@ -31548,7 +31545,7 @@ Autom. Antwort einschalten
 ; ##############################################
 ; End of langpack: Simple_Auto_Replier
 ; ############################################## 
-; Start of langpack: Simple_Status_Message (Letzte Änderung: 16:38, 26. Jun. 2011 )
+; Start of langpack: Simple_Status_Message (Letzte Änderung: 17:38, 26. Jun. 2011 )
 
 ; Pluginname: Simple Status Message 
 ; Version: 1.9.0.3
@@ -31701,7 +31698,7 @@ Gehe zu URL in Statusnachricht
 ; ##############################################
 ; End of langpack: Simple_Status_Message
 ; ############################################## 
-; Start of langpack: Skype (Letzte Änderung: 21:07, 27. Apr. 2011 )
+; Start of langpack: Skype (Letzte Änderung: 22:07, 27. Apr. 2011 )
 
 ; Pluginname: Skype
 ; Version: 0.0.0.51
@@ -31909,7 +31906,7 @@ Vorschau Fehlermeldung
 ; ##############################################
 ; End of langpack: Skype
 ; ############################################## 
-; Start of langpack: Skype_Status_Change (Letzte Änderung: 10:10, 22. Apr. 2011 )
+; Start of langpack: Skype_Status_Change (Letzte Änderung: 11:10, 22. Apr. 2011 )
 
 ; Pluginname: Skype Status Change 
 ; Version: 0.0.0.17
@@ -32180,7 +32177,7 @@ Smiley-Cache
 ; ##############################################
 ; End of langpack: SmileyAdd
 ; ############################################## 
-; Start of langpack: Sound_Volume (Letzte Änderung: 23:28, 27. Aug. 2010 )
+; Start of langpack: Sound_Volume (Letzte Änderung: 00:28, 28. Aug. 2010 )
 
 ; Pluginname: Sounds Volume 
 ; Version: 0.0.1.1
@@ -32354,7 +32351,7 @@ Spam-o-tron hat Ihre Autorisierungsanfrage zurückgestellt. Bitte antworten Sie z
 ; ##############################################
 ; End of langpack: Spam-o-tron
 ; ############################################## 
-; Start of langpack: Spam_Filter_(beta) (Letzte Änderung: 23:40, 27. Aug. 2010 )
+; Start of langpack: Spam_Filter_(beta) (Letzte Änderung: 00:40, 28. Aug. 2010 )
 
 ; Pluginname: Spam Filter (Beta) 
 ; Version: 2.5.2.4
@@ -32739,7 +32736,7 @@ Bekannte harte Nüsse
 ; ##############################################
 ; End of langpack: Spam_Filter_(beta)
 ; ############################################## 
-; Start of langpack: Spell_Checker (Letzte Änderung: 18:34, 16. Mai 2011 )
+; Start of langpack: Spell_Checker (Letzte Änderung: 19:34, 16. Mai 2011 )
 
 ; Pluginname: Spell Checker 
 ; Version: 0.2.6.0
@@ -32860,7 +32857,7 @@ Das falsche Wort vom Benutzer getippt
 ; ##############################################
 ; End of langpack: Spell_Checker
 ; ############################################## 
-; Start of langpack: SpinChat (Letzte Änderung: 01:44, 18. Sep. 2010 )
+; Start of langpack: SpinChat (Letzte Änderung: 02:44, 18. Sep. 2010 )
 
 ; Pluginname: SpinChat
 ; Version: 0.1.4b
@@ -32888,7 +32885,7 @@ Verbindung aufrechterhalten (Jede Minute einen Ping-Paket senden)
 ; ##############################################
 ; End of langpack: SpinChat
 ; ############################################## 
-; Start of langpack: Splash_Screen (Letzte Änderung: 22:27, 7. Jul. 2011 )
+; Start of langpack: Splash_Screen (Letzte Änderung: 23:27, 7. Jul. 2011 )
 
 ; Pluginname: Advanced Splash Screen
 ; Version: 0.1.2.3
@@ -32929,7 +32926,7 @@ Advaimg.dll nicht gefunden. Bitte entnehmen Sie die Datei aus der aktuellen Stab
 ; ##############################################
 ; End of langpack: Splash_Screen
 ; ############################################## 
-; Start of langpack: StartupStatus (Letzte Änderung: 21:31, 11. Okt. 2010 )
+; Start of langpack: StartupStatus (Letzte Änderung: 22:31, 11. Okt. 2010 )
 
 ; Pluginname: StartupStatus 
 ; Version: 0.8.0.41
@@ -33036,7 +33033,7 @@ Veröffentlichtes ToolBar Icon
 ; ##############################################
 ; End of langpack: StartupStatus
 ; ############################################## 
-; Start of langpack: StatusChange (Letzte Änderung: 23:13, 27. Aug. 2010 )
+; Start of langpack: StatusChange (Letzte Änderung: 00:13, 28. Aug. 2010 )
 
 ; Pluginname: StatusChange 
 ; Version: 1.4
@@ -33060,7 +33057,7 @@ Empfangen
 ; ##############################################
 ; End of langpack: StatusChange
 ; ############################################## 
-; Start of langpack: StatusMessageChangeNotify (Letzte Änderung: 23:09, 27. Aug. 2010 )
+; Start of langpack: StatusMessageChangeNotify (Letzte Änderung: 00:09, 28. Aug. 2010 )
 
 ; Pluginname: StatusMessageChangeNotify
 ; Version: 0.0.3.19
@@ -33125,7 +33122,7 @@ Statusnachrichtenänderung im Nachrichtenfenster anzeigen
 ; ##############################################
 ; End of langpack: StatusMessageChangeNotify
 ; ############################################## 
-; Start of langpack: StatusMessageRequestNotify (Letzte Änderung: 20:21, 27. Okt. 2010 )
+; Start of langpack: StatusMessageRequestNotify (Letzte Änderung: 21:21, 27. Okt. 2010 )
 
 ; Pluginname: StatusMessageRequestNotify 
 ; Version: 0.2.0.0
@@ -33190,7 +33187,7 @@ Eigenen:
 ; ##############################################
 ; End of langpack: StatusMessageRequestNotify
 ; ############################################## 
-; Start of langpack: Status_Message_History (Letzte Änderung: 18:01, 28. Aug. 2010 )
+; Start of langpack: Status_Message_History (Letzte Änderung: 19:01, 28. Aug. 2010 )
 
 ; Pluginname: Status Message History 
 ; Version: 0.1.0.2
@@ -33275,7 +33272,7 @@ Diese Funktion ist hauptsächlich für Protokolle geeignet, welche die Statusnachr
 ; ##############################################
 ; End of langpack: Status_Message_Retriever
 ; ############################################## 
-; Start of langpack: Status_Statistics (Letzte Änderung: 01:42, 18. Sep. 2010 )
+; Start of langpack: Status_Statistics (Letzte Änderung: 02:42, 18. Sep. 2010 )
 
 ; Pluginname: Status Statistics
 ; Version: 0.0.1.41
@@ -33306,7 +33303,7 @@ Samstags
 ; ##############################################
 ; End of langpack: Status_Statistics
 ; ############################################## 
-; Start of langpack: Stocks (Letzte Änderung: 18:01, 28. Okt. 2010 )
+; Start of langpack: Stocks (Letzte Änderung: 19:01, 28. Okt. 2010 )
 
 ; Pluginname: Stocks
 ; Version: 0.0.0.1
@@ -33349,7 +33346,7 @@ Alle Aktien akt&ualisieren
 ; ##############################################
 ; End of langpack: Stocks
 ; ############################################## 
-; Start of langpack: StopSpam (Letzte Änderung: 22:29, 7. Jul. 2011 )
+; Start of langpack: StopSpam (Letzte Änderung: 23:29, 7. Jul. 2011 )
 
 ; Pluginname: StopSpam 
 ; Version: 0.0.2.0
@@ -33462,7 +33459,7 @@ Autorisierung von "Nicht-Spam-Kontakten" anfordern
 ; ##############################################
 ; End of langpack: StopSpam
 ; ############################################## 
-; Start of langpack: Switch_Layout_or_Transliterate (Letzte Änderung: 17:14, 4. Jul. 2011 )
+; Start of langpack: Switch_Layout_or_Transliterate (Letzte Änderung: 18:14, 4. Jul. 2011 )
 
 ; Pluginname: 'Switch Layout' oder auch 'Transliterate'
 ; Version: 0.0.1.0
@@ -33497,7 +33494,7 @@ Konvertiere letzte / ausgewählte (Rev.)
 ; ##############################################
 ; End of langpack: Switch_Layout_or_Transliterate
 ; ############################################## 
-; Start of langpack: TV_plugin_YM (Letzte Änderung: 17:41, 28. Aug. 2010 )
+; Start of langpack: TV_plugin_YM (Letzte Änderung: 18:41, 28. Aug. 2010 )
 
 ; Pluginname: TV plugin 
 ; Version: 0.1.0.2
@@ -33650,7 +33647,7 @@ Standbilder
 ; ##############################################
 ; End of langpack: TV_plugin_YM
 ; ############################################## 
-; Start of langpack: TabSRMM (Letzte Änderung: 18:05, 22. Aug. 2011 )
+; Start of langpack: TabSRMM (Letzte Änderung: 19:05, 22. Aug. 2011 )
 
 ; Pluginname: TabSRMM 
 ; Version: 3.1.99.8
@@ -36186,7 +36183,7 @@ Tipper-Skins
 ; ##############################################
 ; End of langpack: Tipper
 ; ############################################## 
-; Start of langpack: Tlen (Letzte Änderung: 19:14, 21. Aug. 2011 )
+; Start of langpack: Tlen (Letzte Änderung: 20:14, 21. Aug. 2011 )
 
 ; Pluginname: Tlen Protocol 
 ; Version: 2.0.3.2
@@ -36364,7 +36361,7 @@ P2P-Verbindungen
 ; ##############################################
 ; End of langpack: Tlen
 ; ############################################## 
-; Start of langpack: Tooltip_Notify (Letzte Änderung: 23:49, 27. Apr. 2011 )
+; Start of langpack: Tooltip_Notify (Letzte Änderung: 00:49, 28. Apr. 2011 )
 
 ; Pluginname: Tooltip Notify 
 ; Version: Tooltip Notify 0.6.0.47
@@ -36426,7 +36423,7 @@ Andere Status
 ; ##############################################
 ; End of langpack: Tooltip_Notify
 ; ############################################## 
-; Start of langpack: TopToolBar (Letzte Änderung: 22:49, 27. Aug. 2010 )
+; Start of langpack: TopToolBar (Letzte Änderung: 23:49, 27. Aug. 2010 )
 
 ; Pluginname: TopToolbar 
 ; Version: 0.7.3.0
@@ -36515,7 +36512,7 @@ Hintergrund
 ; ##############################################
 ; End of langpack: TopToolBar
 ; ############################################## 
-; Start of langpack: Traffic_counter (Letzte Änderung: 14:31, 14. Aug. 2011 )
+; Start of langpack: Traffic_counter (Letzte Änderung: 15:31, 14. Aug. 2011 )
 
 ; Pluginname: Traffic counter 
 ; Version: 0.1.1.6
@@ -36749,7 +36746,7 @@ dynamisch
 ; ##############################################
 ; End of langpack: Traffic_counter
 ; ############################################## 
-; Start of langpack: Translator (Letzte Änderung: 01:39, 18. Sep. 2010 )
+; Start of langpack: Translator (Letzte Änderung: 02:39, 18. Sep. 2010 )
 
 ; Pluginname: Translator 
 ; Version: 0.1.1.1
@@ -36818,7 +36815,7 @@ Einträge automatisch filtern nach
 ; ##############################################
 ; End of langpack: Translator
 ; ############################################## 
-; Start of langpack: Trigger (Letzte Änderung: 22:45, 26. Okt. 2010 )
+; Start of langpack: Trigger (Letzte Änderung: 23:45, 26. Okt. 2010 )
 
 ; Pluginname: Trigger Plugin 
 ; Version: 0.2.0.35
@@ -37109,7 +37106,7 @@ Umwandeln in einem seperaten Thread ausführen (Unstabil!)
 ; ##############################################
 ; End of langpack: Trigger
 ; ############################################## 
-; Start of langpack: Trillian_message_history_importer (Letzte Änderung: 23:13, 11. Okt. 2010 )
+; Start of langpack: Trillian_message_history_importer (Letzte Änderung: 00:13, 12. Okt. 2010 )
 
 ; Pluginname: Trillian message history importer
 ; Version: 0.2.1
@@ -37186,7 +37183,7 @@ Importiert die Konktate und Nachrichten von Trillian.
 ; ##############################################
 ; End of langpack: Trillian_message_history_importer
 ; ############################################## 
-; Start of langpack: TweakUI (Letzte Änderung: 01:39, 18. Sep. 2010 )
+; Start of langpack: TweakUI (Letzte Änderung: 02:39, 18. Sep. 2010 )
 
 ; Pluginname: TweakUI 
 ; Version: 0.0.0.45Beta
@@ -37284,7 +37281,7 @@ Homepage besuchen
 ; ##############################################
 ; End of langpack: Twitter
 ; ############################################## 
-; Start of langpack: UINBackup (Letzte Änderung: 01:39, 18. Sep. 2010 )
+; Start of langpack: UINBackup (Letzte Änderung: 02:39, 18. Sep. 2010 )
 
 ; Pluginname: UINBackup
 ; Version: 0.4.0.2
@@ -37404,7 +37401,7 @@ Ausgabegerät:
 ; ##############################################
 ; End of langpack: Un4seens_bass_interface
 ; ############################################## 
-; Start of langpack: Updater (Letzte Änderung: 17:15, 14. Jun. 2011 )
+; Start of langpack: Updater (Letzte Änderung: 18:15, 14. Jun. 2011 )
 
 ; Pluginname: Updater 
 ; Version: 0.6.1.4
@@ -37609,7 +37606,7 @@ Prüfe Update-Dienst
 ; ##############################################
 ; End of langpack: Updater
 ; ############################################## 
-; Start of langpack: UseActions (Letzte Änderung: 03:01, 19. Jul. 2011 )
+; Start of langpack: UseActions (Letzte Änderung: 04:01, 19. Jul. 2011 )
 
 ; Pluginname: UseActions 
 ; Version: 0.0.0.4
@@ -37654,7 +37651,7 @@ Trennlinie
 ; ##############################################
 ; End of langpack: UseActions
 ; ############################################## 
-; Start of langpack: UserInfoEx (Letzte Änderung: 22:38, 7. Jul. 2011 )
+; Start of langpack: UserInfoEx (Letzte Änderung: 23:38, 7. Jul. 2011 )
 
 ; Pluginname: UserInfoEx 
 ; Version: 0.8.4.3
@@ -38574,7 +38571,7 @@ Keine Sitzungsdetails wurden empfangen. Einige Funktionen werden nicht richtig f
 ; ##############################################
 ; End of langpack: VKontakte
 ; ############################################## 
-; Start of langpack: Var-Toys (Letzte Änderung: 23:05, 26. Okt. 2010 )
+; Start of langpack: Var-Toys (Letzte Änderung: 00:05, 27. Okt. 2010 )
 
 ; Pluginname: MSNMods 
 ; Version: 0.1.1.0
@@ -38599,7 +38596,7 @@ WARNUNG: Werte unter 7 Sekunden werden nicht empfohlen!
 ; ##############################################
 ; End of langpack: Var-Toys
 ; ############################################## 
-; Start of langpack: Variables (Letzte Änderung: 02:16, 20. Jul. 2011 )
+; Start of langpack: Variables (Letzte Änderung: 03:16, 20. Jul. 2011 )
 
 ; Pluginname: Variables 
 ; Version: 0.2.3.8
@@ -38936,7 +38933,7 @@ Die Variable %extratext% wird - je nach der Situation, in der sie verwendet wird
 ; ##############################################
 ; End of langpack: Variables
 ; ############################################## 
-; Start of langpack: VersionInfo_Uploader (Letzte Änderung: 01:37, 18. Sep. 2010 )
+; Start of langpack: VersionInfo_Uploader (Letzte Änderung: 02:37, 18. Sep. 2010 )
 
 ; Pluginname: VersionInfo Uploader 
 ; Version: 0.0.1.4
@@ -38977,7 +38974,7 @@ Nach erfolgreichem Hochladen nach neuen Plugins prüfen
 ; ##############################################
 ; End of langpack: VersionInfo_Uploader
 ; ############################################## 
-; Start of langpack: Version_Information (Letzte Änderung: 23:35, 27. Aug. 2010 )
+; Start of langpack: Version_Information (Letzte Änderung: 00:35, 28. Aug. 2010 )
 
 ; Pluginname: Version Information 
 ; Version: 1.4.3.2
@@ -39059,7 +39056,7 @@ Etwas in den "%s"-Einstellungen ist falsch. Melde diesen Fehlerwert zurück: %d\n
 ; ##############################################
 ; End of langpack: Version_Information
 ; ############################################## 
-; Start of langpack: Virtualizable_SecureDB (Letzte Änderung: 01:36, 18. Sep. 2010 )
+; Start of langpack: Virtualizable_SecureDB (Letzte Änderung: 02:36, 18. Sep. 2010 )
 
 ; Sluginname: Secure and Virtualize DB 
 ; Version: 0.8.11
@@ -39084,7 +39081,7 @@ Miranda IM Virtuelle Profildatei
 ; ##############################################
 ; End of langpack: Virtualizable_SecureDB
 ; ############################################## 
-; Start of langpack: Voice_Service (Letzte Änderung: 01:36, 18. Sep. 2010 )
+; Start of langpack: Voice_Service (Letzte Änderung: 02:36, 18. Sep. 2010 )
 
 ; Pluginname: Voice Service 
 ; Version: 0.0.0.8
@@ -39180,7 +39177,7 @@ Automatische Aktionen
 ; ##############################################
 ; End of langpack: Voice_Service
 ; ############################################## 
-; Start of langpack: VyChat (Letzte Änderung: 22:19, 27. Aug. 2010 )
+; Start of langpack: VyChat (Letzte Änderung: 23:19, 27. Aug. 2010 )
 
 ; Pluginname: VyChat 
 ; Version: 0.2.0.0
@@ -39225,7 +39222,7 @@ Alle Privatnachrichten als Popupnachrichten anzeigen
 ; ##############################################
 ; End of langpack: VyChat
 ; ############################################## 
-; Start of langpack: VyPressChat (Letzte Änderung: 01:35, 18. Sep. 2010 )
+; Start of langpack: VyPressChat (Letzte Änderung: 02:35, 18. Sep. 2010 )
 
 ; Pluginname: VyPressChat 
 ; Version: 0.9.3.1
@@ -39254,7 +39251,7 @@ Andere Optionen
 ; ##############################################
 ; End of langpack: VyPressChat
 ; ############################################## 
-; Start of langpack: WATrack (Letzte Änderung: 23:37, 23. Jul. 2011 )
+; Start of langpack: WATrack (Letzte Änderung: 00:37, 24. Jul. 2011 )
 
 ; Pluginname: WATrack 
 ; Version: 0.0.6.12
@@ -39800,7 +39797,7 @@ Farbtabelle
 ; ##############################################
 ; End of langpack: WATrack
 ; ############################################## 
-; Start of langpack: WUMF:_Who_uses_my_files (Letzte Änderung: 17:20, 28. Aug. 2010 )
+; Start of langpack: WUMF:_Who_uses_my_files (Letzte Änderung: 18:20, 28. Aug. 2010 )
 
 ; Pluginname: WUMF: Who uses my files? 
 ; Version: 0.1.0.2
@@ -39903,7 +39900,7 @@ Miranda IM ist cool und das ist eine lange Nachricht! ;-)
 ; ##############################################
 ; End of langpack: WannaBe_OSD
 ; ############################################## 
-; Start of langpack: Wassup (Letzte Änderung: 01:34, 18. Sep. 2010 )
+; Start of langpack: Wassup (Letzte Änderung: 02:34, 18. Sep. 2010 )
 
 ; Pluginname: Wassup 
 ; Version: 0.3.1.2
@@ -41047,7 +41044,7 @@ Andere Variablen (benötigt Weather-Protokoll v0.3.2.0+)
 ; ##############################################
 ; End of langpack: Weather
 ; ############################################## 
-; Start of langpack: WebCam_Video (Letzte Änderung: 23:29, 27. Aug. 2010 )
+; Start of langpack: WebCam_Video (Letzte Änderung: 00:29, 28. Aug. 2010 )
 
 ; Pluginname: WebCam Video 
 ; Version: 0.0.1.8
@@ -41117,7 +41114,7 @@ Meine Kamera
 ; ##############################################
 ; End of langpack: WebCam_Video
 ; ############################################## 
-; Start of langpack: WebPager_(ICQ) (Letzte Änderung: 01:27, 18. Sep. 2010 )
+; Start of langpack: WebPager_(ICQ) (Letzte Änderung: 02:27, 18. Sep. 2010 )
 
 ; Pluginname: WebPager
 ; Version: 0.0.0.7
@@ -41142,7 +41139,7 @@ Ermöglicht es, ICQ-WebPager-Nachrichten zu empfangen.
 ; ##############################################
 ; End of langpack: WebPager_(ICQ)
 ; ############################################## 
-; Start of langpack: WebView (Letzte Änderung: 22:35, 20. Aug. 2011 )
+; Start of langpack: WebView (Letzte Änderung: 23:35, 20. Aug. 2011 )
 
 ; Pluginname: WebView Protocol
 ; Version: 0.1.3.3
@@ -41237,7 +41234,7 @@ Alle Webview-Seiten updaten
 ; ##############################################
 ; End of langpack: WebView
 ; ############################################## 
-; Start of langpack: Web_Detail_(UMCP) (Letzte Änderung: 22:27, 27. Aug. 2010 )
+; Start of langpack: Web_Detail_(UMCP) (Letzte Änderung: 23:27, 27. Aug. 2010 )
 
 ; Pluginname: Web Detail (UMCP)
 ; Version: 0.2.0.1
@@ -41314,7 +41311,7 @@ Hinweis: Bei Änderungen ist ein Neustart von Miranda IM erforderlich.
 ; ##############################################
 ; End of langpack: Web_Detail_(UMCP)
 ; ############################################## 
-; Start of langpack: Webi (Letzte Änderung: 21:36, 11. Jul. 2011 )
+; Start of langpack: Webi (Letzte Änderung: 22:36, 11. Jul. 2011 )
 
 ; Pluginname: Webi - Miranda for Mobile 
 ; Version: 2.28
@@ -41706,10 +41703,10 @@ ungültiges Argument
 ; ##############################################
 ; End of langpack: Webi
 ; ############################################## 
-; Start of langpack: WhenWasIt_birthday_reminder (Letzte Änderung: 13:52, 17. Mai 2011 )
+; Start of langpack: WhenWasIt_birthday_reminder (Letzte Änderung: 22:47, 22. Aug. 2011 )
 
 ; Pluginname: WhenWasIt Birthday Reminder 
-; Version: 0.3.2.9
+; Version: 0.3.3.0
 ; Dateiname: WhenWasIt.dll
 ; Unique ID: {2ff96c84-b0b5-470e-bbf9-907b9f3f5d2f}
 ; Autor: eblis
@@ -41887,7 +41884,7 @@ Geburtstag ändern/hinzufügen
 ; ##############################################
 ; End of langpack: WhenWasIt_birthday_reminder
 ; ############################################## 
-; Start of langpack: WhoIsReadingMyStatusMsgNotify (Letzte Änderung: 19:58, 30. MÃ¤r. 2011 )
+; Start of langpack: WhoIsReadingMyStatusMsgNotify (Letzte Änderung: 20:58, 30. MÃ¤r. 2011 )
 
 ; Pluginname: WhoIsReadingMyStatusMsgNotify 
 ; Version: 0.0.1.4
@@ -41959,7 +41956,7 @@ WhoIsReading-Popups aktivi&eren
 ; ##############################################
 ; End of langpack: WhoIsReadingMyStatusMsgNotify
 ; ############################################## 
-; Start of langpack: WinPopup (Letzte Änderung: 01:32, 18. Sep. 2010 )
+; Start of langpack: WinPopup (Letzte Änderung: 02:32, 18. Sep. 2010 )
 
 ; Pluginname: WinPopup Protocol 
 ; Version: 0.0.0.15
@@ -42018,7 +42015,7 @@ Nachrichtendienst beim Senden und Empfangen nutzen
 ; ##############################################
 ; End of langpack: WinPopup
 ; ############################################## 
-; Start of langpack: WinampNotify (Letzte Änderung: 01:32, 18. Sep. 2010 )
+; Start of langpack: WinampNotify (Letzte Änderung: 02:32, 18. Sep. 2010 )
 
 ; Pluginname: WinAmpNotify
 ; Version: 1.7.5.0
@@ -42094,7 +42091,7 @@ PopUp nach Rechtsklick schließen
 ; ##############################################
 ; End of langpack: WinampNotify
 ; ############################################## 
-; Start of langpack: Window_Start_Position (Letzte Änderung: 21:44, 27. Okt. 2010 )
+; Start of langpack: Window_Start_Position (Letzte Änderung: 22:44, 27. Okt. 2010 )
 
 ; Pluginname: Window Start Position 
 ; Version: 0.2.0.2
@@ -42124,7 +42121,7 @@ Pixel von unten
 ; ##############################################
 ; End of langpack: Window_Start_Position
 ; ############################################## 
-; Start of langpack: Windows_Live_Messenger_History_Import (Letzte Änderung: 23:10, 11. Okt. 2010 )
+; Start of langpack: Windows_Live_Messenger_History_Import (Letzte Änderung: 00:10, 12. Okt. 2010 )
 
 ; Pluginname: Windows Live Messenger History Import 
 ; Version: 0.8.0.0
@@ -42168,7 +42165,7 @@ Importiert den Verlauf vom Windows Live Messenger.
 ; ##############################################
 ; End of langpack: Windows_Live_Messenger_History_Import
 ; ############################################## 
-; Start of langpack: Winter_speak (Letzte Änderung: 01:29, 18. Sep. 2010 )
+; Start of langpack: Winter_speak (Letzte Änderung: 02:29, 18. Sep. 2010 )
 
 ; Pluginname: Winter speak
 ; Version: 0.9.7.0
@@ -42252,7 +42249,7 @@ Melde Statusänderungen nach Verbinden
 ; ##############################################
 ; End of langpack: Winter_speak
 ; ############################################## 
-; Start of langpack: WordLookUp (Letzte Änderung: 01:28, 18. Sep. 2010 )
+; Start of langpack: WordLookUp (Letzte Änderung: 02:28, 18. Sep. 2010 )
 
 ; Pluginname: WordLookUp Plugin 
 ; Version: 0.0.0.3
@@ -42281,7 +42278,7 @@ Ungültiges Suchkommando. Fehlendes %s in dem Suchstring.\nPrüfen Sie die Suchstr
 ; ##############################################
 ; End of langpack: WordLookUp
 ; ############################################## 
-; Start of langpack: World_Time (Letzte Änderung: 22:52, 27. Aug. 2010 )
+; Start of langpack: World_Time (Letzte Änderung: 23:52, 27. Aug. 2010 )
 
 ; Pluginname: World Time
 ; Version: 0.2.6.7
@@ -42739,7 +42736,7 @@ XFire-Protokoll-Plugin von dufte [Built: "__DATE__" "__TIME__"]
 ; ##############################################
 ; End of langpack: XFire
 ; ############################################## 
-; Start of langpack: XStatus_Notify (Letzte Änderung: 01:28, 18. Sep. 2010 )
+; Start of langpack: XStatus_Notify (Letzte Änderung: 02:28, 18. Sep. 2010 )
 
 ; Pluginname: XStatus Notify 
 ; Version: 0.3.1.5 Build #217
@@ -43241,7 +43238,7 @@ Anzeigedauer (0 = Standard):
 ; ##############################################
 ; End of langpack: YAPP
 ; ############################################## 
-; Start of langpack: Yahoo (Letzte Änderung: 16:13, 6. Jul. 2011 )
+; Start of langpack: Yahoo (Letzte Änderung: 17:13, 6. Jul. 2011 )
 
 ; Pluginname: Yahoo (libyahoo2 library)
 ; Version: 0.10.0.2
@@ -43431,7 +43428,7 @@ Yahoo-Kontakte automatisch beim Start verschieben
 ; ##############################################
 ; End of langpack: Yahoo_Groups
 ; ############################################## 
-; Start of langpack: Yahoo_Mail_Informer (Letzte Änderung: 23:12, 27. Aug. 2010 )
+; Start of langpack: Yahoo_Mail_Informer (Letzte Änderung: 00:12, 28. Aug. 2010 )
 
 ; Pluginname: Yahoo Mail Informer 
 ; Version: 0.2.0.4
@@ -43482,7 +43479,7 @@ Logge in folgende Datei:
 ; ##############################################
 ; End of langpack: Yahoo_Mail_Informer
 ; ############################################## 
-; Start of langpack: Zero_Notifications (Letzte Änderung: 00:00, 28. Apr. 2011 )
+; Start of langpack: Zero_Notifications (Letzte Änderung: 01:00, 28. Apr. 2011 )
 
 ; Pluginname: Zero Notifications 
 ; Version: 0.0.0.5
