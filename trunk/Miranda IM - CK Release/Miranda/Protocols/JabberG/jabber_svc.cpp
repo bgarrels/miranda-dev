@@ -409,8 +409,11 @@ INT_PTR __cdecl CJabberProto::JabberGCGetToolTipText( WPARAM wParam, LPARAM lPar
 	TCHAR outBuf[2048];
 	outBuf[0]=_T('\0');
 
-	// Unsane: format tooltip from Tipper
-	const TCHAR * szSeparator= _T("\n");
+	const TCHAR * szSeparator = NULL;
+	if (DBGetContactSettingByte(NULL, "Tab_SRMsg", "adv_TipperTooltip", 1) && ServiceExists("mToolTip/HideTip"))
+		szSeparator= _T("\n");
+	else
+		szSeparator= (IsWinVerMEPlus()) ? _T("\r\n") : _T(" | ");
 
 	static const TCHAR * JabberEnum2AffilationStr[]={ _T("None"), _T("Outcast"), _T("Member"), _T("Admin"), _T("Owner") };
 
@@ -425,59 +428,66 @@ INT_PTR __cdecl CJabberProto::JabberGCGetToolTipText( WPARAM wParam, LPARAM lPar
 
 	//JID:
 	if ( _tcschr(info->resourceName, _T('@') ) != NULL ) {
-		_tcsncat( outBuf, _T("<b>"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("JID:"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, _T("</b>\t"), SIZEOF(outBuf) );
+		if (DBGetContactSettingByte(NULL, "Tab_SRMsg", "adv_TipperTooltip", 1) && ServiceExists("mToolTip/HideTip"))
+			mir_sntprintf(outBuf, SIZEOF(outBuf), _T("%s%s%s"), _T("<b>"), TranslateT("JID:"), _T("</b>\t"));
+		else
+			_tcsncat( outBuf, TranslateT("JID:\t\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, info->resourceName, SIZEOF(outBuf) );
 	} else if (lParam) { //or simple nick
-		_tcsncat( outBuf, TranslateT("<b>"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("Nick:"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("</b>\t"), SIZEOF(outBuf) );
+		if (DBGetContactSettingByte(NULL, "Tab_SRMsg", "adv_TipperTooltip", 1) && ServiceExists("mToolTip/HideTip"))
+			mir_sntprintf(outBuf, SIZEOF(outBuf), _T("%s%s%s"), _T("<b>"), TranslateT("Nick:"), _T("</b>\t"));
+		else
+			_tcsncat( outBuf, TranslateT("Nick:\t\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, (TCHAR*) lParam, SIZEOF(outBuf) );
 	}
 
 	// status
 	if ( info->status >= ID_STATUS_OFFLINE && info->status <= ID_STATUS_IDLE  ) {
 		_tcsncat( outBuf, szSeparator, SIZEOF(outBuf) );
-		_tcsncat( outBuf, _T("<b>"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("Status:"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, _T("</b>\t"), SIZEOF(outBuf) );
+		if (DBGetContactSettingByte(NULL, "Tab_SRMsg", "adv_TipperTooltip", 1) && ServiceExists("mToolTip/HideTip"))
+			mir_sntprintf(outBuf, SIZEOF(outBuf), _T("%s%s%s%s"), outBuf, _T("<b>"), TranslateT("Status:"), _T("</b>\t"));
+		else
+			_tcsncat( outBuf, TranslateT("Status:\t\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, TranslateTS( JabberEnum2StatusStr [ info->status-ID_STATUS_OFFLINE ]), SIZEOF(outBuf) );
 	}
 
 	// status text
 	if ( info->statusMessage ) {
 		_tcsncat( outBuf, szSeparator, SIZEOF(outBuf) );
-		_tcsncat( outBuf, _T("<b>"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("Status text:"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, _T("</b>\t"), SIZEOF(outBuf) );
+		if (DBGetContactSettingByte(NULL, "Tab_SRMsg", "adv_TipperTooltip", 1) && ServiceExists("mToolTip/HideTip"))
+			mir_sntprintf(outBuf, SIZEOF(outBuf), _T("%s%s%s%s"), outBuf, _T("<b>"), TranslateT("Status text:"), _T("</b>\t"));
+		else
+			_tcsncat( outBuf, TranslateT("Status text:\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, info->statusMessage, SIZEOF(outBuf) );
 	}
 
 	// Role???
 	//if ( TRUE || info->role ) {
 		_tcsncat( outBuf, szSeparator, SIZEOF(outBuf) );
-		_tcsncat( outBuf, _T("<b>"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("Role:"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, _T("</b>\t"), SIZEOF(outBuf) );
+		if (DBGetContactSettingByte(NULL, "Tab_SRMsg", "adv_TipperTooltip", 1) && ServiceExists("mToolTip/HideTip"))
+			mir_sntprintf(outBuf, SIZEOF(outBuf), _T("%s%s%s%s"), outBuf, _T("<b>"), TranslateT("Role:"), _T("</b>\t"));
+		else
+			_tcsncat( outBuf, TranslateT("Role:\t\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, TranslateTS( JabberEnum2RoleStr[info->role] ), SIZEOF(outBuf) );
 	//}
 
 	// Affiliation
 	//if ( TRUE || info->affiliation ) {
 		_tcsncat( outBuf, szSeparator, SIZEOF(outBuf) );
-		_tcsncat( outBuf, _T("<b>"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("Affiliation:"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, _T("</b>\t"), SIZEOF(outBuf) );
+		if (DBGetContactSettingByte(NULL, "Tab_SRMsg", "adv_TipperTooltip", 1) && ServiceExists("mToolTip/HideTip"))
+			mir_sntprintf(outBuf, SIZEOF(outBuf), _T("%s%s%s%s"), outBuf, _T("<b>"), TranslateT("Affiliation:"), _T("</b>\t"));
+		else
+			_tcsncat( outBuf, TranslateT("Affiliation:\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, TranslateTS( JabberEnum2AffilationStr[info->affiliation] ), SIZEOF(outBuf) );
 	//}
 
 	// real jid
 	if ( info->szRealJid ) {
 		_tcsncat( outBuf, szSeparator, SIZEOF(outBuf) );
-		_tcsncat( outBuf, _T("<b>"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, TranslateT("Real JID:"), SIZEOF(outBuf) );
-		_tcsncat( outBuf, _T("</b>\t"), SIZEOF(outBuf) );
+		if (DBGetContactSettingByte(NULL, "Tab_SRMsg", "adv_TipperTooltip", 1) && ServiceExists("mToolTip/HideTip"))
+			mir_sntprintf(outBuf, SIZEOF(outBuf), _T("%s%s%s%s"), outBuf, _T("<b>"), TranslateT("Real JID:"), _T("</b>\t"));
+		else
+			_tcsncat( outBuf, TranslateT("Real JID:\t"), SIZEOF(outBuf) );
 		_tcsncat( outBuf, info->szRealJid, SIZEOF(outBuf) );
 	}
 
