@@ -9,9 +9,7 @@
 $src = _INetGetSource("http://www.miranda-im.org/download/")
 $newv = _StringBetween($src,"title=""Download v",'" class="active"')
 $newv = $newv[0]
-$atmv = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Miranda IM","DisplayName")
-$atmv = _StringBetween($atmv & "<","IM ","<")
-$atmv = $atmv[0]
+$atmv = FileGetVersion("miranda32.exe","ProductVersion")
  
 If $atmv <> $newv Then
         TrayTip("Miranda Auto-Update","Update from " & $atmv & " to " & $newv & " running",2000)
