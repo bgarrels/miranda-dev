@@ -1,0 +1,11 @@
+Die "MirandaUpdater.exe" in den Ordner "Apps" (parallel zur "miranda32.exe") kopieren.
+
+Die "mirandaportable.ini" wie folgt ändern:
+
+[MirandaPortable]
+MirandaDirectory=App
+ProfilesDirectory=Data
+MirandaExecutable=mirandaupdater.exe
+AdditionalParameters=
+RunLocally=false
+DisableSplashScreen=true
