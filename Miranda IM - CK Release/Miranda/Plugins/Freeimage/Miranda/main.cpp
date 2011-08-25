@@ -51,7 +51,7 @@ PLUGININFO pluginInfo = {
 	sizeof(PLUGININFO),
 	"Miranda Image services",
 	__VERSION_DWORD,
-	"Generic image services for Miranda IM.",
+	"Generic image services for Miranda IM",
 	"Nightwish, The FreeImage project (http://freeimage.sourceforge.net/)",
 	"",
 	"Copyright 2000-2008 Miranda-IM project, uses the FreeImage distribution",
@@ -64,7 +64,7 @@ PLUGININFOEX pluginInfoEx = {
 	sizeof(PLUGININFOEX),
 	"Miranda Image services",
 	__VERSION_DWORD,
-	"Generic image services for Miranda IM.",
+	"Generic image services for Miranda IM",
 	"Nightwish, The FreeImage project (http://freeimage.sourceforge.net/)",
 	"",
 	"Copyright 2000-2008 Miranda-IM project, uses the FreeImage distribution",
@@ -874,6 +874,7 @@ static INT_PTR serviceGetInterface(WPARAM wParam, LPARAM lParam)
 static INT_PTR serviceLoad(WPARAM wParam, LPARAM lParam)
 {
 	char *lpszFilename = (char *)wParam;
+	if(lpszFilename==NULL) return 0;
 	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 
 	if(lParam & IMGL_WCHAR)
