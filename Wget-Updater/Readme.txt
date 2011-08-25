@@ -13,4 +13,4 @@ Die Installationen für die USB-Sticks (auf dem für das Script benutzten Rechner 
 Solttet Ihr andere Parameter und Pfade nutzen wollen muss eine Editierung im Script erfolgen.
 
 
--- All Credits goes to madmax25 -- 
+-- All credits goes to madmax25 -- 

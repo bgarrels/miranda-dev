@@ -6,4 +6,4 @@ Bei Klick auf den Updater werden die Versionen überprüft, wenn notwendig geupdat
 und danach Miranda gestartet.
 
 
-Credits goes to James_Kullen 
+-- All credits goes to James_Kullen -- 

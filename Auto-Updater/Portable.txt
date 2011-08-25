@@ -1,6 +1,6 @@
 Die "MirandaUpdater.exe" in den Ordner "Apps" (parallel zur "miranda32.exe") kopieren.
 
-Die "mirandaportable.ini" wie folgt ändern:
+Die "mirandaportable.ini" wie folgt abändern:
 
 [MirandaPortable]
 MirandaDirectory=App
