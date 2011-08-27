@@ -23,8 +23,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #define HOST "http://eblis.tla.ro/projects"
 
+#if defined(WIN64) || defined(_WIN64)
+#define FOLDERS_VERSION_URL HOST "/miranda/Folders/updater/x64/Folders.html"
+#define FOLDERS_UPDATE_URL HOST "/miranda/Folders/updater/x64/Folders.zip"
+#else
 #define FOLDERS_VERSION_URL HOST "/miranda/Folders/updater/Folders.html"
 #define FOLDERS_UPDATE_URL HOST "/miranda/Folders/updater/Folders.zip"
+#endif
 #define FOLDERS_VERSION_PREFIX "Custom profile folders version "
 
 HANDLE hModulesLoaded;
