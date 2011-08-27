@@ -49,14 +49,14 @@ static const PLUGININFOEX pluginInfoEx =
 {
 	sizeof(PLUGININFOEX), 
 #if defined(_WIN64)
-	"SmileyAdd (x64)",
+	"SmileyAdd x64",
 #elif defined(UNICODE) | defined(_UNICODE)
-	"SmileyAdd (Unicode)",
+	"SmileyAdd Unicode",
 #else
 	"SmileyAdd",
 #endif
 	__VERSION_DWORD,
-	"Smiley support for Miranda Instant Messanger.",
+	"Smiley support for Miranda Instant Messanger",
 	"Peacow, nightwish, bid, borkra",
 	"borkra@miranda-im.org",
 	"Copyright© 2004 - 2011 Boris Krasnovskiy, portions by Rein-Peter de Boer",

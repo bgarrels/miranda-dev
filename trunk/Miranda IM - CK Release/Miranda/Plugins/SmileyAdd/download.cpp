@@ -224,17 +224,17 @@ bool GetSmileyFile(bkstring& url, const bkstring& packstr)
 
 void GetDefaultSmileyCacheFolder(TCHAR* szPath, size_t cbLen)
 {
-	TCHAR *tmpPath = _T("%miranda_userdata%");
+	TCHAR *tmpPath = Utils_ReplaceVarsT(_T("%miranda_userdata%\\SmileyCache"));
 	if ((INT_PTR)tmpPath != CALLSERVICE_NOTFOUND)
 	{
 		mir_sntprintf(szPath, cbLen, _T("%s"), tmpPath);
-		//mir_free(tmpPath);
+		mir_free(tmpPath);
 	}
 	else
 	{
 		char dbPath[MAX_PATH];
 		CallService(MS_DB_GETPROFILEPATH, SIZEOF(dbPath), (LPARAM)dbPath);
-		mir_sntprintf(szPath, cbLen, _T("%s"), A2T_SM(dbPath));
+		mir_sntprintf(szPath, cbLen, _T("%s\\SmileyCache"), A2T_SM(dbPath));
 	}
 }
 

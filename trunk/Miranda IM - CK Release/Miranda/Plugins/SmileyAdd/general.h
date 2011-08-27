@@ -79,8 +79,7 @@ typedef Matcher _TMatcher;
 
 #pragma warning( push )
 #pragma warning( disable : 4100 )
-#define MIRANDA_VER 0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER 0x0600
 #define NETLIB_NOLOGGING
 #define MIRANDA_CUSTOM_LP
 
