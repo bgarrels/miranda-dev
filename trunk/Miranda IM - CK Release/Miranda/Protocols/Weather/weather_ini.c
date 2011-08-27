@@ -541,97 +541,68 @@ INT_PTR CALLBACK DlgProcSetup(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPar
 {
 	switch (msg) 
 	{
-		case WM_INITDIALOG:
-			TranslateDialogDefault(hwndDlg);
+	case WM_INITDIALOG:
+		TranslateDialogDefault(hwndDlg);
 
-			// make the buttons flat
-			SendMessage(GetDlgItem(hwndDlg,IDC_STEP1), BUTTONSETASFLATBTN, 0, 0);
-			SendMessage(GetDlgItem(hwndDlg,IDC_STEP2), BUTTONSETASFLATBTN, 0, 0);
-			SendMessage(GetDlgItem(hwndDlg,IDC_STEP3), BUTTONSETASFLATBTN, 0, 0);
-			SendMessage(GetDlgItem(hwndDlg,IDC_STEP4), BUTTONSETASFLATBTN, 0, 0);
+		// make the buttons flat
+		SendMessage(GetDlgItem(hwndDlg,IDC_STEP1), BUTTONSETASFLATBTN, 0, 0);
+		SendMessage(GetDlgItem(hwndDlg,IDC_STEP2), BUTTONSETASFLATBTN, 0, 0);
+		SendMessage(GetDlgItem(hwndDlg,IDC_STEP3), BUTTONSETASFLATBTN, 0, 0);
+		SendMessage(GetDlgItem(hwndDlg,IDC_STEP4), BUTTONSETASFLATBTN, 0, 0);
 
-			// set icons
-			SendMessage(hwndDlg, WM_SETICON, ICON_BIG,   (LPARAM)LoadIconEx("main", TRUE));
-			SendMessage(hwndDlg, WM_SETICON, ICON_SMALL, (LPARAM)LoadIconEx("main", FALSE));
+		// set icons
+		SendMessage(hwndDlg, WM_SETICON, ICON_BIG,   (LPARAM)LoadIconEx("main", TRUE));
+		SendMessage(hwndDlg, WM_SETICON, ICON_SMALL, (LPARAM)LoadIconEx("main", FALSE));
 
-			// make the name bold
-			{	LOGFONT lf;
-				HFONT hNormalFont=(HFONT)SendDlgItemMessage(hwndDlg, IDC_SNAME, WM_GETFONT, 0, 0);
-				GetObject(hNormalFont,sizeof(lf),&lf);
-				lf.lfWeight=FW_BOLD;
-				SendDlgItemMessage(hwndDlg, IDC_SNAME, WM_SETFONT, (WPARAM)CreateFontIndirect(&lf), 0);
-			}
-			WindowList_Add(hWindowList, hwndDlg, NULL);
-			ShowWindow(hwndDlg, SW_SHOW);
-			break;
+		WindowList_Add(hWindowList, hwndDlg, NULL);
+		ShowWindow(hwndDlg, SW_SHOW);
+		break;
 
-		case WM_CTLCOLORSTATIC:
-			// make the rectangle on the top white
-			if ((GetWindowLongPtr((HWND)lParam,GWL_STYLE)&0xFFFF) == 0 || 
-				(HWND)lParam == GetDlgItem(hwndDlg, IDC_SICON)) 
+	case WM_COMMAND:
+		switch(LOWORD(wParam)) 
+		{
+			case IDC_STEP1:
+				// update current data
+				CallService(MS_UTILS_OPENURL, opt.NewBrowserWin, 
+					(WPARAM)"http://addons.miranda-im.org/index.php?action=display&id=78");
+				break;
+
+			case IDC_STEP2: 
 			{
-				if ((HWND)lParam == GetDlgItem(hwndDlg, IDC_SWHITERECT) || 
-					(HWND)lParam == GetDlgItem(hwndDlg, IDC_SNAME) || 
-					(HWND)lParam == GetDlgItem(hwndDlg, IDC_SLINE2) || 
-					(HWND)lParam == GetDlgItem(hwndDlg, IDC_SICON)) 
-				{
-					SetBkColor((HDC)wParam,GetSysColor(COLOR_WINDOW));
-					SetTextColor((HDC)wParam,GetSysColor(COLOR_WINDOWTEXT));
-					SetBkMode((HDC)wParam,OPAQUE);
-					return (INT_PTR)GetSysColorBrush(COLOR_WINDOW);
-				}
-				SetBkMode((HDC)wParam,TRANSPARENT);
-				return (INT_PTR)GetStockObject(NULL_BRUSH);
+				char szPath[1024], *chop;
+				GetModuleFileName(GetModuleHandle(NULL), szPath, sizeof(szPath));
+				chop = strrchr(szPath, '\\');
+				*chop = '\0';
+				strcat(szPath,"\\Plugins\\weather\\");
+				_mkdir(szPath);
+				ShellExecute((HWND)lParam, "open", szPath, "", "", SW_SHOW);
+				break;
 			}
-			return FALSE;
 
-		case WM_COMMAND:
-			switch(LOWORD(wParam)) 
-			{
-				case IDC_STEP1:
-					// update current data
-					CallService(MS_UTILS_OPENURL, opt.NewBrowserWin, 
-						(WPARAM)"http://addons.miranda-im.org/index.php?action=display&id=78");
-					break;
+			case IDC_STEP3:
+				if (LoadWIData(FALSE))
+					MessageBox(NULL, Translate("All update data has been reloaded."), 
+						Translate("Weather Protocol"), MB_OK|MB_ICONINFORMATION);
+				break;
 
-				case IDC_STEP2: 
-				{
-					char szPath[1024], *chop;
-					GetModuleFileName(GetModuleHandle(NULL), szPath, sizeof(szPath));
-					chop = strrchr(szPath, '\\');
-					*chop = '\0';
-					strcat(szPath,"\\Plugins\\weather\\");
-					_mkdir(szPath);
-					ShellExecute((HWND)lParam, "open", szPath, "", "", SW_SHOW);
-					break;
-				}
+			case IDC_STEP4:
+				WeatherAdd(0, 0);
 
-				case IDC_STEP3:
-					if (LoadWIData(FALSE))
-						MessageBox(NULL, Translate("All update data has been reloaded."), 
-							Translate("Weather Protocol"), MB_OK|MB_ICONINFORMATION);
-					break;
+			case IDCANCEL:
+				// close the info window
+				DestroyWindow(hwndDlg);
+				break;
+		}
+		break;
 
-				case IDC_STEP4:
-					WeatherAdd(0, 0);
-
-				case IDCANCEL:
-					// close the info window
-					DestroyWindow(hwndDlg);
-					break;
-			}
-			break;
-
-		case WM_CLOSE:
-			DestroyWindow(hwndDlg);
-			break;
+	case WM_CLOSE:
+		DestroyWindow(hwndDlg);
+		break;
 		
-		case WM_DESTROY:
-			ReleaseIconEx((HICON)SendMessage(hwndDlg, WM_SETICON, ICON_BIG, 0));
-			ReleaseIconEx((HICON)SendMessage(hwndDlg, WM_SETICON, ICON_SMALL, 0));
-			DeleteObject((HFONT)SendDlgItemMessage(hwndDlg, IDC_SNAME, WM_GETFONT, 0, 0));
-			break;
-
+	case WM_DESTROY:
+		ReleaseIconEx((HICON)SendMessage(hwndDlg, WM_SETICON, ICON_BIG, 0));
+		ReleaseIconEx((HICON)SendMessage(hwndDlg, WM_SETICON, ICON_SMALL, 0));
+		break;
 	}
 	return FALSE;
 }

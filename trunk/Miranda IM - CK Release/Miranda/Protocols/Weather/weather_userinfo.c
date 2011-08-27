@@ -1,6 +1,6 @@
 /*
 Weather Protocol plugin for Miranda IM
-Copyright (C) 2005-2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005-2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2002-2005 Calvin Che
 
 This program is free software; you can redistribute it and/or
@@ -186,14 +186,6 @@ INT_PTR CALLBACK DlgProcMoreData(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM l
 			SendDlgItemMessage(hwndDlg, IDC_MTEXT, EM_SETMARGINS, EC_LEFTMARGIN, 5);
 			SendDlgItemMessage(hwndDlg, IDC_MTEXT, EM_SETTABSTOPS, 1, (LPARAM)&tabstops);
 
-			// set icons
-			{
-				WORD statusIcon = DBGetContactSettingWord(hContact, WEATHERPROTONAME, "StatusIcon",0);
-
-				SendMessage(hwndDlg, WM_SETICON, ICON_BIG, (LPARAM)LoadSkinnedProtoIconBig(WEATHERPROTONAME, statusIcon));
-				SendMessage(hwndDlg, WM_SETICON, ICON_SMALL, (LPARAM)LoadSkinnedProtoIcon(WEATHERPROTONAME, statusIcon));
-			}
-
 			// get the list to display
 			{
 				LV_COLUMN lvc = { 0 };
@@ -232,6 +224,15 @@ INT_PTR CALLBACK DlgProcMoreData(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM l
 			ListView_DeleteAllItems(GetDlgItem(hwndDlg, IDC_DATALIST));
 			LoadBriefInfoText(hwndDlg, hContact);
 			DBDataManage(hContact, WDBM_DETAILDISPLAY, (WPARAM)hwndDlg, 0);
+
+			// set icons
+			{
+				WORD statusIcon = DBGetContactSettingWord(hContact, WEATHERPROTONAME, "StatusIcon",0);
+
+				ReleaseIconEx((HICON)SendMessage(hwndDlg, WM_SETICON, ICON_BIG, (LPARAM)LoadSkinnedProtoIconBig(WEATHERPROTONAME, statusIcon)));
+				ReleaseIconEx((HICON)SendMessage(hwndDlg, WM_SETICON, ICON_SMALL, (LPARAM)LoadSkinnedProtoIcon(WEATHERPROTONAME, statusIcon)));
+			}
+			RedrawWindow(GetDlgItem(hwndDlg, IDC_HEADERBAR), NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW);
 			break;
 
 		case WM_SIZE: 
@@ -356,7 +357,7 @@ void LoadBriefInfoText(HWND hwndDlg, HANDLE hContact)
 	// check if data exist.  If not, display error message box
 	if (!(BOOL)DBGetContactSettingByte(hContact, WEATHERPROTONAME, "IsUpdated", FALSE))
 	{
-		strcpy(str, Translate("No information available.\r\nPlease update weather condition first."));
+		FixStr(Translate("No information available.\nPlease update weather condition first."), str);
 	}
 	else
 		// set the display text and show the message box

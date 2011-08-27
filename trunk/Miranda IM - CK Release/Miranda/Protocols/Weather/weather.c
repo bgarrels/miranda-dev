@@ -1,6 +1,6 @@
 /*
 Weather Protocol plugin for Miranda IM
-Copyright (C) 2005-2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005-2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2002-2005 Calvin Che
 
 This program is free software; you can redistribute it and/or
@@ -32,9 +32,6 @@ WIDATALIST *WITail;
 HINSTANCE hInst;
 HWND hPopupWindow;
 
-unsigned status;
-unsigned old_status;
-
 HANDLE hHookWeatherUpdated;
 HANDLE hHookWeatherError;
 
@@ -45,7 +42,11 @@ HANDLE hWindowList;
 
 HANDLE hUpdateMutex;
 
+unsigned status;
+unsigned old_status;
+
 UINT_PTR timerId;
+int hLangpack;
 
 MYOPTIONS opt;
 
@@ -58,21 +59,21 @@ BOOL ModuleLoaded;
 struct MM_INTERFACE   mmi;
 struct UTF8_INTERFACE utfi;
 
-int hLangpack;
 
 PLUGINLINK *pluginLink;
 
 // plugin info
 // VER = version, AUTH = author, defined in weather.h
-PLUGININFOEX pluginInfoEx = {
+static const PLUGININFOEX pluginInfoEx =
+{
 	sizeof(PLUGININFOEX),
 #ifdef _WIN64
-	"Weather Protocol x64 Mataes Release",
+	"Weather Protocol x64",
 #else
-	"Weather Protocol Mataes Release",
+	"Weather Protocol",
 #endif
 	__VERSION_DWORD,
-	"Retrieve weather information and display them in your contact list. Mod for Mataes Pack.",
+	"Retrieve weather information and display them in your contact list",
 	AUTH,
 	"borkra@miranda-im.org",
 	"(c) 2002-2005 NoName, 2005-2010 Boris Krasnovskiy",
@@ -82,7 +83,7 @@ PLUGININFOEX pluginInfoEx = {
 	MIID_WEATHER
 };
 
-__declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion) 
+__declspec(dllexport) const PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion) 
 {
 	if (mirandaVersion < PLUGIN_MAKE_VERSION(0,8,0,0)) {
 		MessageBox(NULL, "Weather Protocol requires Miranda 0.8.0.0 or later to run.", "Weather Protocol", MB_OK|MB_ICONERROR|MB_APPLMODAL);
@@ -232,9 +233,9 @@ int __declspec(dllexport) Load(PLUGINLINK *link)
 
 	pluginLink = link;
 
-	mir_getLP(&pluginInfoEx);
 	mir_getMMI(&mmi);
 	mir_getUTFI(&utfi);
+	mir_getLP(&pluginInfoEx);
 
 	// initialize global variables
 	InitVar();
