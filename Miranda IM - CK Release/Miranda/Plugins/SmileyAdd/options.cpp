@@ -645,10 +645,10 @@ void OptionsType::Load(void)
 	SurroundSmileyWithSpaces = 
 		DBGetContactSettingByte(NULL, "SmileyAdd", "SurroundSmileyWithSpaces", FALSE) != 0;
 	ScaleAllSmileys = DBGetContactSettingByte(NULL, "SmileyAdd", "ScaleAllSmileys", FALSE) != 0;
-	IEViewStyle = DBGetContactSettingByte(NULL, "SmileyAdd", "IEViewStyle", TRUE) != 0;
+	IEViewStyle = DBGetContactSettingByte(NULL, "SmileyAdd", "IEViewStyle", FALSE) != 0;
 	AnimateSel = DBGetContactSettingByte(NULL, "SmileyAdd", "AnimateSel", TRUE) != 0;
 	AnimateDlg = DBGetContactSettingByte(NULL, "SmileyAdd", "AnimateDlg", TRUE) != 0;
-	InputSmileys = DBGetContactSettingByte(NULL, "SmileyAdd", "InputSmileys", FALSE) != 0;
+	InputSmileys = DBGetContactSettingByte(NULL, "SmileyAdd", "InputSmileys", TRUE) != 0;
 	DCursorSmiley = DBGetContactSettingByte(NULL, "SmileyAdd", "DCursorSmiley", FALSE) != 0;
 	DisableCustom = DBGetContactSettingByte(NULL, "SmileyAdd", "DisableCustom", FALSE) != 0;
 	HQScaling = DBGetContactSettingByte(NULL, "SmileyAdd", "HQScaling", FALSE) != 0;
