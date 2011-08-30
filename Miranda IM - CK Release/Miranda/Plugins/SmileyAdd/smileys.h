@@ -265,7 +265,7 @@ public:
 	int NumberOfSmileyCategories(void) { return m_SmileyCategories.getCount(); }
 
 	void AddCategory(const bkstring& name, const bkstring& displayName, SmcType typ,
-		const bkstring& defaultFilename = bkstring(_T("Smileys\\nova\\default.msl")));
+		const bkstring& defaultFilename = bkstring(_T("Smileys\\AnimSmiley.asl")));
 	void AddAndLoad(const bkstring& name, const bkstring& displayName);
 	void AddAllProtocolsAsCategory(void); 
 	void AddAccountAsCategory(PROTOACCOUNT *acc, const bkstring& defaultFile);
