@@ -149,7 +149,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 	return TRUE;
 }
 
-extern "C"		__declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
+extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {// Tell Miranda IM about plugin
 	if(mirandaVersion < 0x8000)
 	{
@@ -159,13 +159,13 @@ extern "C"		__declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirand
 	return &pluginInfoEx;
 }
 
-extern "C"		__declspec(dllexport) const MUUID* MirandaPluginInterfaces()
+extern "C" __declspec(dllexport) const MUUID* MirandaPluginInterfaces()
 {
 	static const MUUID interfaces[] = {MIID_THIS_PLUGIN, MIID_FINGERPRINT, MIID_LAST };
 	return interfaces;
 }
 
-extern "C" int	__declspec(dllexport) Load(PLUGINLINK* link)
+extern "C" int __declspec(dllexport) Load(PLUGINLINK* link)
 {
 	pluginLink = link;
 	mir_getMMI(&mmi);
@@ -184,7 +184,7 @@ extern "C" int	__declspec(dllexport) Load(PLUGINLINK* link)
 	return 0;
 }
 
-extern "C" int	__declspec(dllexport) Unload()
+extern "C" int __declspec(dllexport) Unload()
 {
 	size_t i;
 #ifdef UNICODE

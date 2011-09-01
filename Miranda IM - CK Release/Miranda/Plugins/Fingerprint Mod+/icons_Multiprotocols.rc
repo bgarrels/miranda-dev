@@ -49,6 +49,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
    IDI_BITLBEE             ICON    ".\\res\\multi-protocol\\BitlBee.ico"
    IDI_CENTERICQ           ICON    ".\\res\\multi-protocol\\Centericq.ico"
    IDI_CITRON   		   ICON    ".\\res\\multi-protocol\\Citronim.ico"
+   IDI_DIGSBY   		   ICON    ".\\res\\multi-protocol\\Digsby.ico"
    IDI_EASYMESSAGE         ICON    ".\\res\\multi-protocol\\EasyMessage.ico"
    IDI_EBUDDY              ICON    ".\\res\\multi-protocol\\eBuddy.ico"
    IDI_EKG2                ICON    ".\\res\\multi-protocol\\EKG2.ico"
