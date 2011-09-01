@@ -26,7 +26,7 @@
  *
  * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
  *
- * $Id: clui.cpp 13551 2011-04-07 01:29:11Z borkra $
+ * $Id: clui.cpp 13813 2011-08-31 21:49:46Z borkra $
  *
  */
 
@@ -927,6 +927,15 @@ static void sttProcessResize(HWND hwnd, NMCLISTCONTROL *nmc)
 	winstyle = GetWindowLong(pcli->hwndContactTree, GWL_STYLE);
 
 	SystemParametersInfo(SPI_GETWORKAREA, 0, &rcWorkArea, FALSE);
+	if (API::pfnMonitorFromWindow)
+	{
+ 		HMONITOR hMon = API::pfnMonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+		MONITORINFO mi;
+		mi.cbSize = sizeof(mi);
+		if (API::pfnGetMonitorInfo(hMon, &mi))
+ 			rcWorkArea = mi.rcWork;
+	}
+
 	if (nmc->pt.y > (rcWorkArea.bottom - rcWorkArea.top)) {
 		nmc->pt.y = (rcWorkArea.bottom - rcWorkArea.top);
 	}
@@ -1234,6 +1243,15 @@ LRESULT CALLBACK ContactListWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
 				RECT rcWorkArea;
 
 				SystemParametersInfo(SPI_GETWORKAREA, 0, &rcWorkArea, FALSE);
+				if (API::pfnMonitorFromWindow)
+				{
+ 					HMONITOR hMon = API::pfnMonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+					MONITORINFO mi;
+					mi.cbSize = sizeof(mi);
+					if (API::pfnGetMonitorInfo(hMon, &mi))
+ 						rcWorkArea = mi.rcWork;
+				}
+
 				cfg::dat.dcSize.cy = max(rc.bottom + cfg::dat.statusBarHeight, rcWorkArea.bottom - rcWorkArea.top);
 				cfg::dat.dcSize.cx = max(rc.right, (rcWorkArea.right - rcWorkArea.left) / 2);
 
