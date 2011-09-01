@@ -137,6 +137,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_Python",					_T("Py*t"),										_T("Python transport clients"),			_T("ClientIcons_Multiprotocols"),	IDI_PYTHON, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_Instantbird",				_T("*Instantbird*"),							_T("Instantbird"),						_T("ClientIcons_Multiprotocols"),	IDI_INSTANTBIRD, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_Jimm",					_T("|*Jimm*|mobicq*"),							_T("Jimm"),								_T("ClientIcons_Multiprotocols"),	IDI_JIMM, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
+	{ "client_Digsby",					_T("*Digsby*"),									_T("Digsby"),							_T("ClientIcons_Multiprotocols"),	IDI_DIGSBY, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 
 //#########################################################################################################################################
 //########################################################### Other ICQ clients ###########################################################
