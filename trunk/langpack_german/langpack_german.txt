@@ -7,11 +7,11 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 23 Aug 2011 13:08:22
-; FLID: Deutsche Sprachdatei 0.11.08.23
-Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,AsSingleWindow,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirFox,MirOTR,MirOUT,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
+X-Langpack-creation-date: 04 Sep 2011 23:09:23
+; FLID: Deutsche Sprachdatei 0.11.09.04
+Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,AsSingleWindow,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirFox,MirOTR,MirOUT,MirPy_Scripting,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
-; Start of langpack: Core (Letzte Änderung: 04:05, 22. Jul. 2011 )
+; Start of langpack: Core (Letzte Änderung: 10:41, 25. Aug. 2011 )
 
 [0 = Default]
 0 = Standard
@@ -4845,6 +4845,11 @@ Copyright
 %s fragt nach Autorisierung
 [%u added you to their contact list]
 %u fügte Sie zu seiner Kontaktliste hinzu
+[%u added you to the contact list]
+%u fügte Sie zu seiner Kontaktliste hinzu
+[%s on %p]
+%s vom %p-Protokoll
+
 
 ; email.c
 [User has not registered an e-mail address]
@@ -8193,16 +8198,15 @@ Laden der Antworten aus %s fehlgeschlagen
 ; ##############################################
 ; End of langpack: Boltun
 ; ############################################## 
-; Start of langpack: Bonsai (Letzte Änderung: 22:15, 5. Apr. 2011 )
+; Start of langpack: Bonsai (Letzte Änderung: 13:43, 23. Aug. 2011 )
 
 ; Pluginname: Bonsai 
-; Version: 0.0.2.4
+; Version: 0.0.2.5
 ; Dateiname: bonsai.dll
 ; Unique ID: {2fe47261-7f38-45f4-8fac-b87e974a1350}
 ; Autor(en): eblis
 ; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3218
 ; Übersetzung: 21.12.06 von HyperCriSiS
-; Besonderheiten: Entwicklung eingestellt!
 
 [Arrange Options]
 Optionen gliedern
@@ -18670,7 +18674,7 @@ Deaktiviere Invisible 4 Invisible
 ; ##############################################
 ; End of langpack: Invisible4Invisible
 ; ############################################## 
-; Start of langpack: Jabber (Letzte Änderung: 10:37, 10. Jul. 2011 )
+; Start of langpack: Jabber (Letzte Änderung: 21:08, 4. Sep. 2011 )
 
 ; Pluginname: Jabber Protocol 
 ; Version: 0.10.0.2
@@ -18846,7 +18850,7 @@ Datenstromkompression aktivieren (falls möglich)
 
 ;Sonstiges
 [Enable remote controlling (from another resource of same JID only)]
-Fernsteuerung aktivieren (nur von einer anderen Jabberressource derselben JID)
+Fernsteuerung aktivieren (nur von einem anderen Standort derselben JID)
 [Show transport agents on contact list]
 Zeige Transportagenten in der Kontaktliste
 [Automatically add contact when accept authorization]
@@ -18859,6 +18863,8 @@ Korrigiere falsche Zeitangaben in empfangenen Nachrichten
 Deaktiviere Kontaktlisten-Element (erfordert Neustart)
 [Enable XMPP link processing (requires Association Manager)]
 Aktiviere XMPP Linkverarbeitung (benötigt File Association Manager)
+[Keep contacts assigned to local groups (ignore roster group)]
+Kontakte in ihren lokalen Gruppen belassen (Gruppen auf Server ignorieren)
 
 [Security]
 Sicherheit
@@ -23822,7 +23828,7 @@ MirFox (Miranda IM) - ein Stück Miranda IM - Firefox Integration
 ; ##############################################
 ; End of langpack: MirFox
 ; ############################################## 
-; Start of langpack: MirOTR (Letzte Änderung: 19:22, 17. Jul. 2011 )
+; Start of langpack: MirOTR (Letzte Änderung: 12:16, 25. Aug. 2011 )
 
 ; Pluginname: MirOTR 
 ; Version: 0.11.0.3
@@ -24063,6 +24069,23 @@ Tel. Nummer
  
 ; ##############################################
 ; End of langpack: MirOUT
+; ############################################## 
+; Start of langpack: MirPy_Scripting (Letzte Änderung: 19:01, 27. Aug. 2011 )
+
+; Pluginname: MirPy Scripting 
+; Version: 3.1.99.8
+; Dateiname: mirpy.dll
+; Unique ID: {2fafc8da-0b05-40e9-a1b4-3b91fb19b748}
+; Autor: eblis
+
+[MirPy console]
+MirPy Konsole
+
+[Allows you to create python scripts to run in miranda that can take advantage of miranda's services and events.]
+Erlaubt es Python-Skripte in Miranda IM laufen zu lassen so das die Events und Dienste genutzt werden können. 
+ 
+; ##############################################
+; End of langpack: MirPy_Scripting
 ; ############################################## 
 ; Start of langpack: MirandaComm (Letzte Änderung: 03:07, 18. Sep. 2010 )
 
@@ -28318,7 +28341,7 @@ Plugin zum Schütteln der Kontaktliste und des Nachrichtenfenster.
 ; ##############################################
 ; End of langpack: Nudge
 ; ############################################## 
-; Start of langpack: OTR (Letzte Änderung: 02:58, 18. Sep. 2010 )
+; Start of langpack: OTR (Letzte Änderung: 10:43, 25. Aug. 2011 )
 
 ; Pluginname: Off the Record [OTR] 
 ; Version: 0.7.0.0
@@ -28375,6 +28398,8 @@ OTR-Warnung
 Benutzer beendete verschlüsselte Sitzung
 [OTR Encryption Status]
 OTR-Verschlüsselungsstatus
+[Disable encryption]
+Deaktiviere Verschlüsselung
 
 [Stop OTR]
 OTR deaktivieren
@@ -31147,12 +31172,13 @@ Achtung: Kein Iconpack wurde in folgendem Ordner gefunden: 'customize\\Icons', '
 ; ##############################################
 ; End of langpack: Send_Screenshot
 ; ############################################## 
-; Start of langpack: Services_list (Letzte Änderung: 00:22, 28. Aug. 2010 )
+; Start of langpack: Services_list (Letzte Änderung: 13:58, 23. Aug. 2011 )
 
 ; Pluginname: Services list 
-; Version: 0.0.2.6
+; Version: 0.0.2.8
 ; Dateiname: aaaaServicesList.dll
 ; Autor: eblis
+; Unique ID: {2f30f130-9749-4523-91c9-28b7e9779dcd}
 ; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3085
 ; Übersetzung: 23.3.07 von Foso
 
@@ -31909,11 +31935,12 @@ Vorschau Fehlermeldung
 ; ##############################################
 ; End of langpack: Skype
 ; ############################################## 
-; Start of langpack: Skype_Status_Change (Letzte Änderung: 11:10, 22. Apr. 2011 )
+; Start of langpack: Skype_Status_Change (Letzte Änderung: 19:14, 27. Aug. 2011 )
 
 ; Pluginname: Skype Status Change 
-; Version: 0.0.0.17
+; Version: 0.0.0.18
 ; Dateiname: skypestatuschange.dll
+; Unique ID: {2ec6238e-b08f-449b-9c96-cb5136029efc}
 ; Autor: Dioksin
 ; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4003
 ; Übersetzung: FREAK_THEMIGHTY am 17.06.2010
@@ -36750,11 +36777,12 @@ dynamisch
 ; ##############################################
 ; End of langpack: Traffic_counter
 ; ############################################## 
-; Start of langpack: Translator (Letzte Änderung: 02:39, 18. Sep. 2010 )
+; Start of langpack: Translator (Letzte Änderung: 18:34, 27. Aug. 2011 )
 
 ; Pluginname: Translator 
-; Version: 0.1.1.1
+; Version: 0.1.2.4
 ; Dateiname: translator.dll
+; Unique ID: {2fb94425-14a7-4af7-b3d9-43fdf6cf287d}
 ; Autor: eblis
 ; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3144
 ; Übersetzung: 04.07.2006 von Dober
@@ -36815,6 +36843,9 @@ Sprachdatei erstellen
 Übersetzungen filtern:
 [Filter entries automatically after]
 Einträge automatisch filtern nach
+
+[Tries to retrieve all translatable strings in Miranda.]
+Versucht alle übersetzbaren Strings in Miranda IM ausfindig zu machen.
  
 ; ##############################################
 ; End of langpack: Translator
@@ -41183,10 +41214,10 @@ Ermöglicht es, ICQ-WebPager-Nachrichten zu empfangen.
 ; ##############################################
 ; End of langpack: WebPager_(ICQ)
 ; ############################################## 
-; Start of langpack: WebView (Letzte Änderung: 23:35, 20. Aug. 2011 )
+; Start of langpack: WebView (Letzte Änderung: 18:25, 27. Aug. 2011 )
 
 ; Pluginname: WebView Protocol
-; Version: 0.1.3.3
+; Version: 0.1.3.4
 ; Dateiname: webview.dll
 ; Unique ID: {c2d83ff6-6d38-4a69-810e-a894fac647a1}
 ; Autor: Bumper1 aka Vincent Joyce
@@ -41268,12 +41299,52 @@ Zwischen Start- und Ende-Strings
 [End:]
 Ende:
 
+[Stick to the front]
+Zum Vordergrund anheften
+[Stick to the Front]
+Zum Vordergrund anheften
+[Disable Stick to the Front]
+Deaktiviere das zum Vordergrund anheften
+
+[Always Log To File]
+Immer in Datei loggen
+[Use OSD Plugin]
+OSD-Plugin nutzen
+[Open Data Display Window]
+Öffne Datenfenster 
+[The Web Page Changes]
+Die Webseite sich verändert
+[A String Is Present]
+Ein neuer String vorhanden ist
+
 [Open Cache Folder]
 Öffne Cache-Ordner
 [Mark All Webview Sites Read]
 Markiere alle Webview-Seiten als gelesen
 [Update All Webview Sites]
 Alle Webview-Seiten updaten
+[Add As Prefix]
+Als Prefix einfügen
+[Add As Suffix]
+Als Suffix einfügen
+[Test Conditions]
+Testbedingungen
+[Alert When String Is Present On Web Page]
+Alarmiere bei neuem String auf der Webseite
+[Log To file]
+In Datei loggen
+[Append data to file]
+Daten zu Datei hinzufügen
+[Save as raw data]
+Als Rohdaten speichern
+[Stop Processing]
+Verarbeitung stoppen
+[Stop Data Processing]
+Datenverarbeitung stoppen
+[Ping Web Site]
+Webseite anpingen
+[Contact Alert Options]
+Kontakt Alarmoptionen
  
 ; ##############################################
 ; End of langpack: WebView
@@ -41747,10 +41818,10 @@ ungültiges Argument
 ; ##############################################
 ; End of langpack: Webi
 ; ############################################## 
-; Start of langpack: WhenWasIt_birthday_reminder (Letzte Änderung: 22:47, 22. Aug. 2011 )
+; Start of langpack: WhenWasIt_birthday_reminder (Letzte Änderung: 14:02, 23. Aug. 2011 )
 
 ; Pluginname: WhenWasIt Birthday Reminder 
-; Version: 0.3.3.0
+; Version: 0.3.3.1
 ; Dateiname: WhenWasIt.dll
 ; Unique ID: {2ff96c84-b0b5-470e-bbf9-907b9f3f5d2f}
 ; Autor: eblis
@@ -43472,7 +43543,7 @@ Yahoo-Kontakte automatisch beim Start verschieben
 ; ##############################################
 ; End of langpack: Yahoo_Groups
 ; ############################################## 
-; Start of langpack: Yahoo_Mail_Informer (Letzte Änderung: 00:12, 28. Aug. 2010 )
+; Start of langpack: Yahoo_Mail_Informer (Letzte Änderung: 11:11, 27. Aug. 2011 )
 
 ; Pluginname: Yahoo Mail Informer 
 ; Version: 0.2.0.4
@@ -43481,9 +43552,9 @@ Yahoo-Kontakte automatisch beim Start verschieben
 ; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1830
 ; Übersetzung: CHEF-KOCH am 23.05.2010
 [Username:]
-Benutzername
+Benutzername:
 [Password:]
-Passwort
+Passwort:
 [Check every minute(s)]
 Kontrolliere alle ... Minuten
 
