@@ -35,13 +35,13 @@
 #include "m_trigger.h"
 #include "m_folders.h"
 
-//#define TESTING		// causes version to be 0.0.0.1
-//#define USE_MY_SERVER	// uses URLS for scottellis.com.au test site for non-beta
-#define REGISTER_BETA	// register beta urls for beta site
-//#define DEBUG_POPUPS	// define to show some popups (restoring status, etc)
+//#define TESTING			// causes version to be 0.0.0.1
+//#define USE_MY_SERVER		// uses URLS for scottellis.com.au test site for non-beta
+#define REGISTER_BETA		// register beta urls for beta site
+//#define DEBUG_POPUPS		// define to show some popups (restoring status, etc)
 //#define _UD_LOGGING		// define to log some stuff, from inside the external process, overwriting the data file
 //#define DEBUG_HTTP_POPUPS	// define to show popups re http
-#define REGISTER_AUTO	// get updater to automatically collect file listing URL's from backend xml data
+#define REGISTER_AUTO		// get updater to automatically collect file listing URL's from backend xml data
 
 #define BETA_HOST_URL_PREFIX	"http://www.scottellis.com.au/miranda_plugins" //(thanks Omniwolf for old twosx webspace, thx Koobs for hosting my domain)
 
@@ -89,20 +89,20 @@ struct UpdateList : OBJLIST<UpdateInternal>
 
 struct StrList : LIST<TCHAR>
 {
-    StrList() : LIST<TCHAR>(5) {}
-    ~StrList() 
-    { 
-        for (int i=0; i<getCount(); ++i) mir_free(getArray()[i]); 
-        destroy();
-    }
+	StrList() : LIST<TCHAR>(5) {}
+	~StrList() 
+	{ 
+		for (int i=0; i<getCount(); ++i) mir_free(getArray()[i]); 
+		destroy();
+	}
 };
 
 struct FileNameStruct
 {
-    int file_id;
-    StrList list;
+	int file_id;
+	StrList list;
 
-    FileNameStruct(int id) : file_id(id) {}
+	FileNameStruct(int id) : file_id(id) {}
 };
 
 typedef OBJLIST<FileNameStruct> FilenameMap;
