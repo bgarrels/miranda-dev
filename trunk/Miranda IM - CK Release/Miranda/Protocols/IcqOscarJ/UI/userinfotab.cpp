@@ -24,8 +24,8 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/UI/userinfotab.cpp $
-// Revision       : $Revision: 11710 $
-// Last change on : $Date: 2010-05-07 15:05:48 +0200 (Fr, 07. Mai 2010) $
+// Revision       : $Revision: 13692 $
+// Last change on : $Date: 2011-07-09 19:34:05 +0200 (Sa, 09. Jul 2011) $
 // Last change by : $Author: borkra $
 //
 // DESCRIPTION:
@@ -46,7 +46,7 @@
 
 char* MirandaVersionToString(char* szStr, int bUnicode, int v, int m);
 
-extern char *nameXStatus[];
+extern const char *nameXStatus[];
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
