@@ -505,7 +505,7 @@ int StatusIconPressed(WPARAM wParam, LPARAM lParam) {
 	}
 	if (hwnd != NULL) {
 		if (!strcmp(SRMMMOD, sicd->szModule)) {
-			if (sicd->dwId == 0) {
+			if (sicd->dwId == 0 && g_dat->hMenuANSIEncoding) {
 				if (sicd->flags & MBCF_RIGHTBUTTON) {
 					int codePage = (int) SendMessage(hwnd, DM_GETCODEPAGE, 0, 0);
 					if (codePage != 1200) {
@@ -632,7 +632,7 @@ int OnLoadModule(void) {
 
 	CreateServiceFunction_Ex(MS_MSG_SENDMESSAGE, SendMessageCommand);
  #if defined(_UNICODE)
-	CreateServiceFunction_Ex(MS_MSG_SENDMESSAGE "W", SendMessageCommandW);
+	CreateServiceFunction_Ex(MS_MSG_SENDMESSAGEW, SendMessageCommandW);
  #endif
 	CreateServiceFunction_Ex(MS_MSG_GETWINDOWAPI, GetWindowAPI);
 	CreateServiceFunction_Ex(MS_MSG_GETWINDOWCLASS, GetWindowClass);
