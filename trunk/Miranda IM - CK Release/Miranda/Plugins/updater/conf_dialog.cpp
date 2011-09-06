@@ -201,10 +201,10 @@ INT_PTR CALLBACK DlgProcConfirm(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 						MessageBox(0, _T("LVN_GETDISPINFO (0)"), _T("msg"), MB_OK);
 						break;
 					case 1:
-						((NMLVDISPINFO *)lParam)->item.pszText = TranslateTS(((UpdateInternal *)lvi.lParam)->newVersion);
+						((NMLVDISPINFO *)lParam)->item.pszText = TranslateTS((const TCHAR*)((UpdateInternal *)lvi.lParam)->newVersion);
 						break;
 					case 2:
-						((NMLVDISPINFO *)lParam)->item.pszText = TranslateTS((char *)((UpdateInternal *)lvi.lParam)->update.pbVersion);
+						((NMLVDISPINFO *)lParam)->item.pszText = TranslateTS((const TCHAR *)((UpdateInternal *)lvi.lParam)->update.pbVersion);
 						break;
 					}
 				}

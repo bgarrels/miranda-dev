@@ -12,7 +12,7 @@
 #define __STRINGIFY(x)				#x
 #define __VERSION_STRING			__STRINGIFY(__FILEVERSION_STRING_DOTS)
 
-#define __DESC						"Automatic Updater for Miranda"
+#define __DESC						"Automatic Updater for Miranda IM"
 #define __AUTHOR					"Scott Ellis, Boris Krasnovskiy"
 #define __AUTHOREMAIL				"mail@scottellis.com.au"
 #define __COPYRIGHT					"© 2005,2006 Scott Ellis, 2009-2011 Boris Krasnovskiy"
