@@ -46,7 +46,7 @@ typedef struct {
 	char *homepage;
 	BYTE flags;	   // right now the only flag, UNICODE_AWARE, is recognized here
 	int replacesDefaultModule;		   //one of the DEFMOD_ constants in m_plugins.h or zero
-	         //if non-zero, this will supress the loading of the specified built-in module
+			 //if non-zero, this will supress the loading of the specified built-in module
 			 //with the implication that this plugin provides back-end-compatible features
 } PLUGININFO;
 
@@ -129,10 +129,10 @@ typedef struct {
 	char *homepage;
 	BYTE flags;	   // right now the only flag, UNICODE_AWARE, is recognized here
 	int replacesDefaultModule;		   //one of the DEFMOD_ constants in m_plugins.h or zero
-	         //if non-zero, this will supress the loading of the specified built-in module
+			 //if non-zero, this will supress the loading of the specified built-in module
 			 //with the implication that this plugin provides back-end-compatible features
-             /***********  WILL BE DEPRECATED in 0.8 * *************/
-    MUUID uuid; // Not required until 0.8.
+			 /***********  WILL BE DEPRECATED in 0.8 * *************/
+	MUUID uuid; // Not required until 0.8.
 } PLUGININFOEX;
 
 #ifndef MODULES_H_
@@ -147,9 +147,9 @@ typedef struct {
 	typedef INT_PTR (*MIRANDASERVICEOBJPARAM)(void*,WPARAM,LPARAM,LPARAM);
 
 #ifdef _WIN64
-    #define CALLSERVICE_NOTFOUND      ((INT_PTR)0x8000000000000000)
+	#define CALLSERVICE_NOTFOUND      ((INT_PTR)0x8000000000000000)
 #else
-    #define CALLSERVICE_NOTFOUND      ((int)0x80000000)
+	#define CALLSERVICE_NOTFOUND      ((int)0x80000000)
 #endif
 
 #endif
