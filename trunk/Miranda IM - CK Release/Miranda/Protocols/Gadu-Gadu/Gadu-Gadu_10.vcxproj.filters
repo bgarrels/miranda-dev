@@ -108,6 +108,9 @@
     <ClCompile Include="libgadu\win32.c">
       <Filter>Source Files\libgadu</Filter>
     </ClCompile>
+    <ClCompile Include="popups.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libgadu\compat.h">
