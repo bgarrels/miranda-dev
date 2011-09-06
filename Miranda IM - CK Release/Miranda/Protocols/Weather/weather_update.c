@@ -1,6 +1,6 @@
 /*
 Weather Protocol plugin for Miranda IM
-Copyright (C) 2005-2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005-2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2002-2005 Calvin Che
 
 This program is free software; you can redistribute it and/or
@@ -17,9 +17,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* This file contain the source related to updating new weather
-   information, both automatic (by timer) and manually (by selecting
-   menu items).
+/*
+This file contain the source related to updating new weather
+information, both automatic (by timer) and manually (by selecting
+menu items).
 */
 
 #include "weather.h"
@@ -51,7 +52,7 @@ int UpdateWeather(HANDLE hContact)
 	// log to netlib log for debug purpose
 	Netlib_Logf(hNetlibUser, "************************************************************************");
 	dbres = DBGetContactSettingString(hContact, WEATHERPROTONAME, "Nick", &dbv);
-	
+
 	Netlib_Logf(hNetlibUser, "<-- Start update for station: %s -->", dbv.pszVal);
 	mir_snprintf(logstr, sizeof(logstr), "<-- Update successful for station: %s -->", dbv.pszVal);
 
@@ -165,7 +166,7 @@ int UpdateWeather(HANDLE hContact)
 	}
 	else
 		DBDeleteContactSetting(hContact, "CList", "StatusMsg");
-	
+
 	ProtoBroadcastAck(WEATHERPROTONAME, hContact, ACKTYPE_AWAYMSG, ACKRESULT_SUCCESS, NULL, (LPARAM)(str2[0] ? str2 : 0));
 
 	// save descriptions in MyNotes
@@ -202,13 +203,13 @@ int UpdateWeather(HANDLE hContact)
 				if (DBGetContactSettingByte(hContact,WEATHERPROTONAME,"Overwrite",0))
 					DeleteFile(dbv.pszVal);
 				// open the file and set point to the end of file
-                file = fopen( dbv.pszVal, "a");
+				file = fopen( dbv.pszVal, "a");
 				DBFreeVariant(&dbv);
 				if (file != NULL)
 				{
 					// write data to the file and close
 					GetDisplay(&winfo, opt.eText, str2);
-                    fputs(str2, file);
+					fputs(str2, file);
 					fclose(file);
 				}
 			}
@@ -338,7 +339,7 @@ void UpdateAll(BOOL AutoUpdate, BOOL RemoveData)
 		}
 		hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
 	}
-	
+
 	// if it is not updating, then start the update thread process
 	// if it is updating, the stations just added to the queue will get updated by the already-running process
 	if (!ThreadRunning)
@@ -395,7 +396,7 @@ void UpdateThreadProc(LPVOID hWnd)
 	}
 	ThreadRunning = TRUE;	// prevent 2 instance of this thread running
 	ReleaseMutex(hUpdateMutex);
-	
+
 	// update weather by getting the first station from the queue until the queue is empty
 	while (UpdateListHead != NULL && !Miranda_Terminated())	
 		UpdateWeather(UpdateGetFirst());
@@ -470,7 +471,7 @@ int GetWeatherData(HANDLE hContact)
 			wsprintf(loc, Data->UpdateURL3, id);
 			break;
 
-        case 3:
+		case 3:
 			loc = (char*)mir_alloc(strlen(Data->UpdateURL4)+128);
 			wsprintf(loc, Data->UpdateURL4, id);
 			break;
@@ -511,15 +512,15 @@ int GetWeatherData(HANDLE hContact)
 
 			switch (Item->Item.Type) 
 			{
-				case WID_NORMAL:
-					// if it is a normal item with start= and end=, then parse through the downloaded string
-					// to get a data value.
-					GetDataValue(&Item->Item, DataValue, &szInfo);
-					if (strcmp(Item->Item.Name, "Condition") && _stricmp(Item->Item.Unit, "Cond"))
-						strcpy(DataValue, Translate(DataValue));
-					break;
+			case WID_NORMAL:
+				// if it is a normal item with start= and end=, then parse through the downloaded string
+				// to get a data value.
+				GetDataValue(&Item->Item, DataValue, &szInfo);
+				if (strcmp(Item->Item.Name, "Condition") && _stricmp(Item->Item.Unit, "Cond"))
+					strcpy(DataValue, Translate(DataValue));
+				break;
 
-				case WID_SET: 
+			case WID_SET: 
 				{
 					// for the "Set Data=" operation
 					DBVARIANT dbv;
@@ -533,39 +534,40 @@ int GetWeatherData(HANDLE hContact)
 					// go through each part of the operation string seperated by the & operator
 					do {
 						chop = strstr(str, " & ");
-                        // the end of the string, last item
+						// the end of the string, last item
 						if (chop == NULL) chop = strchr(str, '\0');   
 
 						stl = min(sizeof(str2)-1, (unsigned)(chop-str-2));
 						strncpy(str2, str+1, stl);
 						str2[stl] = 0;
 
-                        switch(str[0])
-                        {
-                        case '[':  // variable, add the value to the result string
+						switch(str[0])
+						{
+						case '[':  // variable, add the value to the result string
 							hasvar = TRUE;
 							if (!DBGetData(hContact, str2, &dbv))
 							{
 								strncat(DataValue, dbv.pszVal, sizeof(DataValue)-strlen(DataValue));
-                                DataValue[sizeof(DataValue)-1]=0;
+								DataValue[sizeof(DataValue)-1]=0;
 								DBFreeVariant(&dbv);
 							}
-                            break;
+							break;
 
-                        case'\"': // constant, add it to the result string
+						case'\"': // constant, add it to the result string
 							strncat(DataValue, Translate(str2), sizeof(DataValue)-strlen(DataValue));
-                            DataValue[sizeof(DataValue)-1]=0;
-                            break;
-                        }
-						
-                        // remove the front part of the string that is done and continue parsing
+							DataValue[sizeof(DataValue)-1]=0;
+							break;
+						}
+
+						// remove the front part of the string that is done and continue parsing
 						str = chop + 3;
 					} while (chop[0] && str[0]);
-					
+
 					if (!hasvar) ConvertDataValue(&Item->Item, DataValue);
 					break;
 				}
-				case WID_BREAK: {
+			case WID_BREAK: 
+				{
 					// for the "Break Data=" operation
 					char *end;
 					DBVARIANT dbv;
@@ -591,7 +593,7 @@ int GetWeatherData(HANDLE hContact)
 					*end = '\0';
 					end+=strlen(Item->Item.Break);
 					while (end[0] == ' ')	end++;		// remove extra space
-					
+
 					ConvertDataValue(&Item->Item, DataValue);
 
 					// write the 2 strings created from the break operation
@@ -601,7 +603,7 @@ int GetWeatherData(HANDLE hContact)
 					break;
 				}
 			}
-		
+
 			// don't store data if it is not available
 			if ((DataValue[0] != 0 && strcmp(DataValue, NODATA) && 
 				strcmp(DataValue, Translate(NODATA)) && strcmp(Item->Item.Name, "Ignore")) ||
@@ -651,7 +653,8 @@ int GetWeatherData(HANDLE hContact)
 //============  UPDATE TIMERS  ============
 
 // main auto-update timer
-void CALLBACK timerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime) {
+void CALLBACK timerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime) 
+{
 	// only run if it is not current updating and the auto update option is enabled
 	if (!ThreadRunning && opt.CAutoUpdate && !Miranda_Terminated() && 
 		(!opt.NoProtoCondition || status == ID_STATUS_ONLINE))	
@@ -660,7 +663,8 @@ void CALLBACK timerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime) {
 
 // temporary timer for first run
 // when this is run, it kill the old startup timer and create the permenant one above
-void CALLBACK timerProc2(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime) {
+void CALLBACK timerProc2(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime) 
+{
 	KillTimer(NULL, timerId);
 	ThreadRunning = FALSE;
 

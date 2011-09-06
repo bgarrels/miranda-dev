@@ -1,6 +1,6 @@
 /*
 Weather Protocol plugin for Miranda IM
-Copyright (C) 2005-2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005-2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2002-2005 Calvin Che
 
 This program is free software; you can redistribute it and/or
@@ -17,8 +17,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* This file contain the source related to downloading weather info
-   from the web using netlib
+/*
+This file contain the source related to downloading weather info
+from the web using netlib
 */
 
 #include "weather.h"
@@ -40,7 +41,7 @@ int findHeader(NETLIBHTTPREQUEST *nlhrReply, char *hdr)
 }
 
 //============  DOWNLOAD NEW WEATHER  ============
- 
+
 // function to download webpage from the internet
 // szUrl = URL of the webpage to be retrieved
 // return value = 0 for success, 1 or HTTP error code for failure
@@ -78,7 +79,7 @@ int InternetDownloadFile (char *szUrl, char* cookie, char** szData)
 //	nlhr.headers[5].szName  = "If-Modified-Since";
 //	nlhr.headers[5].szValue = "Tue, 24 Feb 2009 03:44:23 GMT";
 
-    if (cookie == NULL || cookie[0] == 0) --nlhr.headersCount;
+	if (cookie == NULL || cookie[0] == 0) --nlhr.headersCount;
 
 	while (result == 0xBADBAD)
 	{
@@ -91,56 +92,53 @@ int InternetDownloadFile (char *szUrl, char* cookie, char** szData)
 			// if the recieved code is 200 OK
 			if(nlhrReply->resultCode == 200) 
 			{
-                if (nlhrReply->dataLength)
-                {
-                    char* end;
-			        int i;
+				if (nlhrReply->dataLength)
+				{
+					char* end;
+					int i;
 
-                    result = 0;
+					result = 0;
 
 //				    i = findHeader(nlhrReply, "Date-Modified");
 
-                    // allocate memory and save the retrieved data
-			        *szData = (char *)mir_alloc(nlhrReply->dataLength + 2);
+					// allocate memory and save the retrieved data
+					*szData = (char *)mir_alloc(nlhrReply->dataLength + 2);
 
-			        memcpy(*szData, nlhrReply->pData, nlhrReply->dataLength);
-			        (*szData)[nlhrReply->dataLength] = 0;
+					memcpy(*szData, nlhrReply->pData, nlhrReply->dataLength);
+					(*szData)[nlhrReply->dataLength] = 0;
 
-//				    else
-//					    result = 1;
+					i = findHeader(nlhrReply, "Content-Type");
+					if (i != -1)
+					{
+						if (strstr(_strlwr((char*)nlhrReply->headers[i].szValue), "utf-8"))
+							mir_utf8decode(*szData, NULL);
+					}
 
-                    i = findHeader(nlhrReply, "Content-Type");
-			        if (i != -1)
-			        {
-				        if (strstr(_strlwr((char*)nlhrReply->headers[i].szValue), "utf-8"))
-					        mir_utf8decode(*szData, NULL);
-			        }
+					end = *szData;
+					for (;;)
+					{
+						char* beg = strstr(end, "<meta");
+						if (beg == NULL) break;
+						else
+						{
+							char* method, tmp;
+							end = strchr(beg, '>');
+							tmp = *end; *end  = 0;
 
-                    end = *szData;
-                    for (;;)
-                    {
-                        char* beg = strstr(end, "<meta");
-                        if (beg == NULL) break;
-                        else
-                        {
-                            char* method, tmp;
-                            end = strchr(beg, '>');
-                            tmp = *end; *end  = 0;
-
-                            method  = strstr(beg, "http-equiv=\"");
-                            if (method && _strnicmp(method+12, "Content-Type", 12) == 0 && strstr(method, "utf-8"))
-                            {
-                                *end = tmp;
-				                mir_utf8decode(*szData, NULL);
-                                break;
-                            }
-                            else
-                                *end = tmp;
-                        }
-                    } 
-                }
-                else
-                    result = DATA_EMPTY;
+							method  = strstr(beg, "http-equiv=\"");
+							if (method && _strnicmp(method+12, "Content-Type", 12) == 0 && strstr(method, "utf-8"))
+							{
+								*end = tmp;
+								mir_utf8decode(*szData, NULL);
+								break;
+							}
+							else
+								*end = tmp;
+						}
+					} 
+				}
+				else
+					result = DATA_EMPTY;
 			}
 			// if the recieved code is 302 Moved, Found, etc
 			// workaround for url forwarding
@@ -162,12 +160,12 @@ int InternetDownloadFile (char *szUrl, char* cookie, char** szData)
 						rlen = szPath != NULL ? szPath - szUrl : strlen(szUrl); 
 					}
 
-					szRedirUrl = mir_realloc(szRedirUrl, 
+					szRedirUrl = (char*)mir_realloc(szRedirUrl, 
 						rlen + strlen(nlhrReply->headers[i].szValue)*3 + 1);
 
 					strncpy(szRedirUrl, szUrl, rlen);
 					strcpy(szRedirUrl+rlen, nlhrReply->headers[i].szValue); 
-					
+
 					GetSearchStr(szRedirUrl);
 
 					nlhr.szUrl = szRedirUrl;

@@ -1,6 +1,6 @@
 /*
 Weather Protocol plugin for Miranda IM
-Copyright (C) 2005-2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005-2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2002-2005 Calvin Che
 
 This program is free software; you can redistribute it and/or
@@ -18,9 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
-/* This file contain the source for displaying information for the
-   ini files, as well as function that are used for debug purpose
-   regrading the loading of ini contents
+/*
+This file contain the source for displaying information for the
+ini files, as well as function that are used for debug purpose
+regrading the loading of ini contents
 */
 
 #include "weather.h"
@@ -34,7 +35,7 @@ void INIInfo(HWND hwndDlg)
 	size_t memused = 0;
 	LVITEM   lvi = {0};
 	WIDATALIST *Item = WIHead;
-	
+
 	HWND hIniList = GetDlgItem(hwndDlg, IDC_INFOLIST);
 
 	ListView_DeleteAllItems(hIniList);
@@ -56,13 +57,13 @@ void INIInfo(HWND hwndDlg)
 		lvi.iSubItem = 3;
 		switch (Item->Data.InternalVer) 
 		{
-			case 1:  lvi.pszText = "1.0";  break;
-			case 2:  lvi.pszText = "1.1";  break;
-			case 3:  lvi.pszText = "1.1a"; break;
-			case 4:  lvi.pszText = "1.2";  break;
-			case 5:  lvi.pszText = "1.3";  break;
-			case 6:  lvi.pszText = "1.4";  break;
-			default: lvi.pszText = "";     break;
+		case 1:  lvi.pszText = "1.0";  break;
+		case 2:  lvi.pszText = "1.1";  break;
+		case 3:  lvi.pszText = "1.1a"; break;
+		case 4:  lvi.pszText = "1.2";  break;
+		case 5:  lvi.pszText = "1.3";  break;
+		case 6:  lvi.pszText = "1.4";  break;
+		default: lvi.pszText = "";     break;
 		}
 		ListView_SetItem(hIniList, &lvi); 
 		lvi.iSubItem = 4;
@@ -105,40 +106,40 @@ INT_PTR CALLBACK DlgProcINIPage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 {
 	switch (msg) 
 	{
-		case WM_INITDIALOG: 
-			TranslateDialogDefault(hwndDlg);
-			{ 
-				unsigned i;
+	case WM_INITDIALOG: 
+		TranslateDialogDefault(hwndDlg);
+		{ 
+			unsigned i;
 
-				HWND hIniList = GetDlgItem(hwndDlg, IDC_INFOLIST);
-				LVCOLUMN lvc = {0}; 
-				
-				lvc.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT | LVCF_WIDTH;
-				lvc.fmt = LVCFMT_LEFT;
-				for (i=0; i<7; ++i)
-				{
-					lvc.iSubItem = i;
-					lvc.pszText = Translate(columns[i].name);	
-					lvc.cx = columns[i].size;
-					ListView_InsertColumnWth(hIniList, i, &lvc); 
-				} 
-				INIInfo(hwndDlg);
-			} 
-			
-			break;
+			HWND hIniList = GetDlgItem(hwndDlg, IDC_INFOLIST);
+			LVCOLUMN lvc = {0}; 
 
-		case WM_DESTROY: 
-			break;
-
-		case WM_COMMAND:
-			if ( HIWORD(wParam) == BN_CLICKED && 
-				LOWORD(wParam) == IDC_RELOADINI )
+			lvc.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT | LVCF_WIDTH;
+			lvc.fmt = LVCFMT_LEFT;
+			for (i=0; i<7; ++i)
 			{
-				DestroyWIList();
-				LoadWIData(TRUE);
-				INIInfo(hwndDlg);
-			}
-			break;
+				lvc.iSubItem = i;
+				lvc.pszText = Translate(columns[i].name);	
+				lvc.cx = columns[i].size;
+				ListView_InsertColumnWth(hIniList, i, &lvc); 
+			} 
+			INIInfo(hwndDlg);
+		} 
+
+		break;
+
+	case WM_DESTROY: 
+		break;
+
+	case WM_COMMAND:
+		if ( HIWORD(wParam) == BN_CLICKED && 
+			LOWORD(wParam) == IDC_RELOADINI )
+		{
+			DestroyWIList();
+			LoadWIData(TRUE);
+			INIInfo(hwndDlg);
+		}
+		break;
 	}
 	return 0;
 }
@@ -150,12 +151,14 @@ void GetINIInfo(char *pszSvc) {
 	char str2[2048];
 	WIDATA *sData = GetWIData(pszSvc);
 	// if the service does not exist among the loaded INI's
-	if (sData == NULL) {
+	if (sData == NULL)
+	{
 		wsprintf(str2, Translate("The corresponding INI file for \"%s\" is not found."), pszSvc);
 		MessageBox(NULL, str2, Translate("Weather INI information"), MB_OK|MB_ICONINFORMATION);
 	}
 	// if exist, get the information
-	else {
+	else
+	{
 		wsprintf(str2, Translate("Weather INI information for \"%s\":"), pszSvc);
 		strcat(str2, "\n\n");
 		strcat(str2, Translate("Name:"));
@@ -176,13 +179,14 @@ void GetINIInfo(char *pszSvc) {
 		strcat(str2, "\n");
 		strcat(str2, Translate("INI Version:"));
 		strcat(str2, "\t");
-		switch (sData->InternalVer) {
-			case 1: strcat(str2, "1.0"); break;
-			case 2: strcat(str2, "1.1"); break;
-			case 3: strcat(str2, "1.1a"); break;
-			case 4: strcat(str2, "1.2"); break;
-			case 5: strcat(str2, "1.3"); break;
-			case 6: strcat(str2, "1.4"); break;
+		switch (sData->InternalVer) 
+		{
+		case 1: strcat(str2, "1.0"); break;
+		case 2: strcat(str2, "1.1"); break;
+		case 3: strcat(str2, "1.1a"); break;
+		case 4: strcat(str2, "1.2"); break;
+		case 5: strcat(str2, "1.3"); break;
+		case 6: strcat(str2, "1.4"); break;
 		}
 		strcat(str2, "\n");
 		strcat(str2, Translate("File Name:"));
@@ -198,7 +202,7 @@ void GetINIInfo(char *pszSvc) {
 		strcat(str2, Translate("Description:"));
 		strcat(str2, "\n");
 		strcat(str2, sData->Description);
-		
+
 		// display the message box and quit
 		MessageBox(NULL, str2, Translate("Weather INI information"), MB_OK|MB_ICONINFORMATION);
 	}
@@ -211,7 +215,7 @@ void GetINIInfo(char *pszSvc) {
 void MoreVarList(void) 
 {
 	char str[10240], tempstr[1024], *find;
-	
+
 	WIDATALIST *Item = WIHead;
 	// heading
 	strcpy(str, Translate("Here is a list of custom variables that are currently available"));
@@ -242,7 +246,7 @@ void MoreVarList(void)
 	// remove the last comma in the list
 	find = strrchr(str, ',');
 	if (find != NULL)	*find = '\0';
-	
+
 	// display the list in a message box
 	MessageBox(NULL, str, Translate("More Variables"), MB_OK|MB_ICONINFORMATION|MB_TOPMOST);
 }

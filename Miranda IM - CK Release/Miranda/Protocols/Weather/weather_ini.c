@@ -1,6 +1,6 @@
 /*
 Weather Protocol plugin for Miranda IM
-Copyright (C) 2005-2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005-2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2002-2005 Calvin Che
 
 This program is free software; you can redistribute it and/or
@@ -18,9 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
-/* This file contain the source related to loading the reading the
-   weather ini files and store them into memory.  Also containing
-   code for unloading and getting weather data from the ini settings.
+/*
+This file contain the source related to loading the reading the
+weather ini files and store them into memory.  Also containing
+code for unloading and getting weather data from the ini settings.
 */
 
 #include "weather.h"
@@ -31,7 +32,8 @@ HWND hWndSetup;
 
 // add an item into weather service data list
 // Data = the service data to be added to the list
-void WIListAdd(WIDATA Data) {
+void WIListAdd(WIDATA Data) 
+{
 	WIDATALIST *newItem;
 
 	// create a new datalist item and point to the data
@@ -47,11 +49,13 @@ void WIListAdd(WIDATA Data) {
 // get the service data (from loaded ini file) by internal name
 // pszServ = internal name for the service
 // return value = the matching WIDATA struct for pszServ, NULL if no match found
-WIDATA* GetWIData(char *pszServ) {
+WIDATA* GetWIData(char *pszServ)
+{
 	WIDATALIST *Item = WIHead;
 
 	// loop through the list to find matching internal name
-	while (Item != NULL) {
+	while (Item != NULL)
+	{
 		// if internal name found, return the data
 		if (strcmp(Item->Data.InternalName, pszServ) == 0)	return &Item->Data;
 		Item = Item->next;
@@ -61,7 +65,7 @@ WIDATA* GetWIData(char *pszServ) {
 }
 
 // remove all service data from memory
-void DestroyWIList() 
+void DestroyWIList(void) 
 {
 	// free the list one by one
 	while (WIHead != NULL) 
@@ -79,7 +83,8 @@ void DestroyWIList()
 //============  DATA ITEM LIST (LINKED LIST)  ============
 
 // add a new update item into the current list
-void WIItemListAdd(WIDATAITEM *DataItem, WIDATA *Data) {
+void WIItemListAdd(WIDATAITEM *DataItem, WIDATA *Data)
+{
 	WIDATAITEMLIST *newItem;
 
 	newItem = (WIDATAITEMLIST*)mir_alloc(sizeof(WIDATAITEMLIST));
@@ -93,7 +98,8 @@ void WIItemListAdd(WIDATAITEM *DataItem, WIDATA *Data) {
 // reset the data item by using empty string
 // Item = the item to set
 // name = the string to store in the "name" field
-void ResetDataItem(WIDATAITEM *Item, const char *name) {
+void ResetDataItem(WIDATAITEM *Item, const char *name)
+{
 	char str[] = "ID Search - Station Name";
 	Item->Name = mir_alloc(sizeof(str));
 	strcpy(Item->Name, str);
@@ -107,7 +113,8 @@ void ResetDataItem(WIDATAITEM *Item, const char *name) {
 
 // free the data item by using empty string
 // Item = the item to free
-void FreeDataItem(WIDATAITEM *Item) {
+void FreeDataItem(WIDATAITEM *Item)
+{
 	wfree(&Item->Name);
 	wfree(&Item->Start);
 	wfree(&Item->End);
@@ -140,7 +147,8 @@ void WICondListAdd(char *str, WICONDLIST *List)
 }
 
 // check if the condition string matched for the assignment
-BOOL IsContainedInCondList(const char *pszStr, WICONDLIST *List) {
+BOOL IsContainedInCondList(const char *pszStr, WICONDLIST *List)
+{
 	WICONDITEM *Item = List->Head;
 
 	// loop through the list to find matching internal name
@@ -155,7 +163,8 @@ BOOL IsContainedInCondList(const char *pszStr, WICONDLIST *List) {
 }
 
 // free the memory for icon assignment list
-void DestroyCondList(WICONDLIST *List) {
+void DestroyCondList(WICONDLIST *List)
+{
 	WICONDITEM *temp;
 
 	temp = List->Head;
@@ -176,7 +185,8 @@ void DestroyCondList(WICONDLIST *List) {
 //============  LOADING INI FILES  ============
 
 // load the weather update data form INI files
-BOOL LoadWIData(BOOL dial) {
+BOOL LoadWIData(BOOL dial)
+{
 	HANDLE hFind;
 	char szSearchPath[MAX_PATH], FileName[MAX_PATH], *chop;
 	WIN32_FIND_DATA fd;
@@ -196,17 +206,21 @@ BOOL LoadWIData(BOOL dial) {
 	hFind = FindFirstFile(szSearchPath, &fd);
 
 	// load the content of the ini file into memory
-	if (hFind != INVALID_HANDLE_VALUE) {
-		do {
+	if (hFind != INVALID_HANDLE_VALUE)
+	{
+		do
+		{
 			chop = strrchr(FileName, '\\');
 			chop[1] = '\0';
 			strcat(FileName, fd.cFileName);
-			if (_stricmp(fd.cFileName, "SAMPLE_INI.INI")) {
+			if (_stricmp(fd.cFileName, "SAMPLE_INI.INI"))
+			{
 				LoadStationData(FileName, fd.cFileName, &Data);
 				if (Data.Enabled)	WIListAdd(Data);
 			}
-		// look through the entire "plugins\weather" directory
-		} while(FindNextFile(hFind, &fd));
+			// look through the entire "plugins\weather" directory
+		}
+		while(FindNextFile(hFind, &fd));
 		FindClose(hFind);
 	}
 	if (WIHead == NULL) 
@@ -216,8 +230,8 @@ BOOL LoadWIData(BOOL dial) {
 			hWndSetup = CreateDialog(hInst, MAKEINTRESOURCE(IDD_SETUP), NULL, DlgProcSetup);
 		else
 			MessageBox(NULL, 
-				Translate("No update data file is found.  Please check your Plugins\\Weather directory."), 
-				Translate("Weather Protocol"), MB_OK | MB_ICONERROR);
+			Translate("No update data file is found.  Please check your Plugins\\Weather directory."), 
+			Translate("Weather Protocol"), MB_OK | MB_ICONERROR);
 		return FALSE;
 	}
 	return TRUE;
@@ -227,14 +241,16 @@ BOOL LoadWIData(BOOL dial) {
 // pszFile = the file name + path for the ini file to be loaded
 // pszShortFile = the file name of the ini file, but not including the path
 // Data = the struct to load the ini content to, and return to previous function
-void LoadStationData(char *pszFile, char *pszShortFile, WIDATA *Data) {
+void LoadStationData(char *pszFile, char *pszShortFile, WIDATA *Data)
+{
 	WIDATAITEM DataItem;
 	FILE *pfile;
 	int i;
 	char Line[4096], *Group, *Temp;
 	char *ValName, *Value;
 
-	static const char *statusStr[10] = {
+	static const char *statusStr[10] =
+	{
 		"LIGHTNING",
 		"FOG",
 		"SNOW SHOWER",
@@ -253,7 +269,8 @@ void LoadStationData(char *pszFile, char *pszShortFile, WIDATA *Data) {
 
 	// open the ini file
 	pfile = _fsopen(pszFile, "rt", _SH_DENYWR);
-	if (pfile != NULL) {
+	if (pfile != NULL)
+	{
 		fgets(Line, sizeof(Line), pfile);
 		TrimString(Line);
 		// make sure it is a valid weather protocol ini file
@@ -269,7 +286,8 @@ void LoadStationData(char *pszFile, char *pszShortFile, WIDATA *Data) {
 			Data->InternalVer = 5;
 		else if (!strcmp(Line, "[Weather 0.3.x Update Data 1.4]"))
 			Data->InternalVer = 6;
-		else {
+		else
+		{
 			wsprintf(Line, Translate("Invalid ini format for: %s"), pszFile);
 			MessageBox(NULL, Line, Translate("Weather Protocol"), MB_OK|MB_ICONERROR);
 			fclose(pfile);
@@ -349,9 +367,9 @@ void LoadStationData(char *pszFile, char *pszShortFile, WIDATA *Data) {
 					wfree(&Group);
 					wSetData(&Group, Temp);
 					// see if it is a update item, if it is, add a new item to the linked list
-//					if (_stricmp(Group, "HEADER") && _stricmp(Group, "DEFAULT") && _stricmp(Group, "ID SEARCH") && 
-//					strcmpi(Group, "NAME SEARCH"))
-//						wSetData(&DataItem.Name, Group);
+					//					if (_stricmp(Group, "HEADER") && _stricmp(Group, "DEFAULT") && _stricmp(Group, "ID SEARCH") && 
+					//					strcmpi(Group, "NAME SEARCH"))
+					//						wSetData(&DataItem.Name, Group);
 					if (_stricmp(Group, "HEADER") && _stricmp(Group, "DEFAULT") && _stricmp(Group, "ID SEARCH") && 
 						_stricmp(Group, "NAME SEARCH") && _stricmp(Group, "ICONS")) 
 					{
@@ -362,7 +380,8 @@ void LoadStationData(char *pszFile, char *pszShortFile, WIDATA *Data) {
 					}
 					mir_free(Temp);
 				}
-				else {
+				else
+				{
 					wfree(&Group);
 					wSetData(&Group, "");
 				}
@@ -370,7 +389,7 @@ void LoadStationData(char *pszFile, char *pszShortFile, WIDATA *Data) {
 			// ignore comments and all lines without an '='
 			Value = strstr(Line, "=");
 			if (Value == NULL)	continue;
-			
+
 			// get the string before '=' (ValName) and after '=' (Value)
 			ValName = (char *)mir_alloc(strlen(Line)+1);
 			strncpy(ValName, Line, Value-Line);
@@ -561,13 +580,13 @@ INT_PTR CALLBACK DlgProcSetup(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPar
 	case WM_COMMAND:
 		switch(LOWORD(wParam)) 
 		{
-			case IDC_STEP1:
-				// update current data
-				CallService(MS_UTILS_OPENURL, opt.NewBrowserWin, 
-					(WPARAM)"http://addons.miranda-im.org/index.php?action=display&id=78");
-				break;
+		case IDC_STEP1:
+			// update current data
+			CallService(MS_UTILS_OPENURL, opt.NewBrowserWin, 
+				(WPARAM)"http://addons.miranda-im.org/index.php?action=display&id=78");
+			break;
 
-			case IDC_STEP2: 
+		case IDC_STEP2: 
 			{
 				char szPath[1024], *chop;
 				GetModuleFileName(GetModuleHandle(NULL), szPath, sizeof(szPath));
@@ -579,26 +598,26 @@ INT_PTR CALLBACK DlgProcSetup(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPar
 				break;
 			}
 
-			case IDC_STEP3:
-				if (LoadWIData(FALSE))
-					MessageBox(NULL, Translate("All update data has been reloaded."), 
-						Translate("Weather Protocol"), MB_OK|MB_ICONINFORMATION);
-				break;
+		case IDC_STEP3:
+			if (LoadWIData(FALSE))
+				MessageBox(NULL, Translate("All update data has been reloaded."), 
+				Translate("Weather Protocol"), MB_OK|MB_ICONINFORMATION);
+			break;
 
-			case IDC_STEP4:
-				WeatherAdd(0, 0);
+		case IDC_STEP4:
+			WeatherAdd(0, 0);
 
-			case IDCANCEL:
-				// close the info window
-				DestroyWindow(hwndDlg);
-				break;
+		case IDCANCEL:
+			// close the info window
+			DestroyWindow(hwndDlg);
+			break;
 		}
 		break;
 
 	case WM_CLOSE:
 		DestroyWindow(hwndDlg);
 		break;
-		
+
 	case WM_DESTROY:
 		ReleaseIconEx((HICON)SendMessage(hwndDlg, WM_SETICON, ICON_BIG, 0));
 		ReleaseIconEx((HICON)SendMessage(hwndDlg, WM_SETICON, ICON_SMALL, 0));

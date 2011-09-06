@@ -1,6 +1,6 @@
 /*
 Weather Protocol plugin for Miranda IM
-Copyright (C) 2005-2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005-2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2002-2005 Calvin Che
 
 This program is free software; you can redistribute it and/or
@@ -17,9 +17,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* This file contain the source related to weather protocol services
-   as required for a Miranda protocol. Also, it contains functions for
-   building/changing the weather menu items.
+/*
+This file contain the source related to weather protocol services
+as required for a Miranda protocol. Also, it contains functions for
+building/changing the weather menu items.
 */
 
 #include "weather.h"
@@ -57,34 +58,34 @@ INT_PTR WeatherGetCaps(WPARAM wParam, LPARAM lParam)
 
 	switch(wParam) 
 	{
-		case PFLAGNUM_1:
-			// support search and visible list
-			ret = PF1_BASICSEARCH | PF1_ADDSEARCHRES | PF1_EXTSEARCH | PF1_VISLIST | PF1_MODEMSGRECV;
-			break;
+	case PFLAGNUM_1:
+		// support search and visible list
+		ret = PF1_BASICSEARCH | PF1_ADDSEARCHRES | PF1_EXTSEARCH | PF1_VISLIST | PF1_MODEMSGRECV;
+		break;
 
-		case PFLAGNUM_2:
-			ret = PF2_ONLINE | PF2_INVISIBLE | PF2_SHORTAWAY | PF2_LONGAWAY | PF2_LIGHTDND | 
-				PF2_HEAVYDND | PF2_FREECHAT | PF2_OUTTOLUNCH | PF2_ONTHEPHONE;
-			break;	
+	case PFLAGNUM_2:
+		ret = PF2_ONLINE | PF2_INVISIBLE | PF2_SHORTAWAY | PF2_LONGAWAY | PF2_LIGHTDND | 
+			PF2_HEAVYDND | PF2_FREECHAT | PF2_OUTTOLUNCH | PF2_ONTHEPHONE;
+		break;	
 
-		case PFLAGNUM_4:
-			ret = PF4_AVATARS | PF4_NOCUSTOMAUTH | PF4_NOAUTHDENYREASON | PF4_FORCEADDED | 
-				PF4_FORCEAUTH;
-			break;
+	case PFLAGNUM_4:
+		ret = PF4_AVATARS | PF4_NOCUSTOMAUTH | PF4_NOAUTHDENYREASON | PF4_FORCEADDED | 
+			PF4_FORCEAUTH;
+		break;
 
-		case PFLAGNUM_5: /* this is PFLAGNUM_5 change when alpha SDK is released */
-			ret = PF2_INVISIBLE | PF2_SHORTAWAY | PF2_LONGAWAY | PF2_LIGHTDND | PF2_HEAVYDND | 
-				PF2_FREECHAT | PF2_OUTTOLUNCH | PF2_ONTHEPHONE;
-//			if (!opt.NoProtoCondition) ret |= PF2_ONLINE;
-			break;
+	case PFLAGNUM_5: /* this is PFLAGNUM_5 change when alpha SDK is released */
+		ret = PF2_INVISIBLE | PF2_SHORTAWAY | PF2_LONGAWAY | PF2_LIGHTDND | PF2_HEAVYDND | 
+			PF2_FREECHAT | PF2_OUTTOLUNCH | PF2_ONTHEPHONE;
+		//			if (!opt.NoProtoCondition) ret |= PF2_ONLINE;
+		break;
 
-		case PFLAG_UNIQUEIDTEXT:
-			ret = (INT_PTR)Translate("Station ID");
-			break;
+	case PFLAG_UNIQUEIDTEXT:
+		ret = (INT_PTR)Translate("Station ID");
+		break;
 
-		case PFLAG_UNIQUEIDSETTING:
-			ret = (INT_PTR)"ID";
-			break;
+	case PFLAG_UNIQUEIDSETTING:
+		ret = (INT_PTR)"ID";
+		break;
 	}
 	return ret;
 }
@@ -163,7 +164,6 @@ INT_PTR WeatherGetAvatarInfo(WPARAM wParam, LPARAM lParam)
 	if (chop) *chop = '\0';
 	else szSearchPath[0] = 0;
 
-	
 	status = (WORD)DBGetContactSettingWord(ai->hContact, WEATHERPROTONAME, "StatusIcon",0);
 	for (i=0; i<10; i++)
 	{
@@ -174,15 +174,15 @@ INT_PTR WeatherGetAvatarInfo(WPARAM wParam, LPARAM lParam)
 
 	ai->format = PA_FORMAT_PNG;
 	wsprintf(ai->filename, "%s\\Plugins\\Weather\\%s.png", szSearchPath, statusStr[i]);
-    if (_access(ai->filename, 4) == 0) return GAIR_SUCCESS;
-	
+	if (_access(ai->filename, 4) == 0) return GAIR_SUCCESS;
+
 	ai->format = PA_FORMAT_GIF;
 	wsprintf(ai->filename, "%s\\Plugins\\Weather\\%s.gif", szSearchPath, statusStr[i]);
-    if (_access(ai->filename, 4) == 0) return GAIR_SUCCESS;
+	if (_access(ai->filename, 4) == 0) return GAIR_SUCCESS;
 
 	ai->format = PA_FORMAT_UNKNOWN;
-    ai->filename[0] = 0;
-    return 	GAIR_NOAVATAR;
+	ai->filename[0] = 0;
+	return 	GAIR_NOAVATAR;
 }
 
 
@@ -215,8 +215,7 @@ static void __cdecl WeatherGetAwayMsgThread(HANDLE hContact)
 		DBFreeVariant( &dbv );
 	}
 	else 
-		ProtoBroadcastAck(WEATHERPROTONAME, hContact, ACKTYPE_AWAYMSG, ACKRESULT_SUCCESS, 
-			(HANDLE)1, 0);
+		ProtoBroadcastAck(WEATHERPROTONAME, hContact, ACKTYPE_AWAYMSG, ACKRESULT_SUCCESS, (HANDLE)1, 0);
 }
 
 static INT_PTR WeatherGetAwayMsg(WPARAM wParam, LPARAM lParam)
@@ -244,7 +243,7 @@ void InitServices(void)
 	hService[9]  = CreateProtoServiceFunction(WEATHERPROTONAME, PSS_GETINFO, WeatherGetInfo);
 	hService[10] = CreateProtoServiceFunction(WEATHERPROTONAME, PS_GETAVATARINFO, WeatherGetAvatarInfo);
 	hService[11] = CreateProtoServiceFunction(WEATHERPROTONAME, PSS_GETAWAYMSG, WeatherGetAwayMsg);
-    hService[12] = CreateProtoServiceFunction(WEATHERPROTONAME, PS_CREATEADVSEARCHUI, WeatherCreateAdvancedSearchUI);
+	hService[12] = CreateProtoServiceFunction(WEATHERPROTONAME, PS_CREATEADVSEARCHUI, WeatherCreateAdvancedSearchUI);
 	hService[13] = CreateProtoServiceFunction(WEATHERPROTONAME, PS_SEARCHBYADVANCED, WeatherAdvancedSearch);
 
 	hService[14] = CreateProtoServiceFunction(WEATHERPROTONAME, MS_WEATHER_GETDISPLAY, GetDisplaySvcFunc);

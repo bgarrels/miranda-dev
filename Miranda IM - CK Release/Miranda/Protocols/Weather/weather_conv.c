@@ -1,6 +1,6 @@
 /*
 Weather Protocol plugin for Miranda IM
-Copyright (C) 2005-2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005-2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2002-2005 Calvin Che
 
 This program is free software; you can redistribute it and/or
@@ -17,8 +17,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* This file contain the source related unit conversion, icon assignment, 
-   string conversions, display text parsing, etc
+/*
+This file contain the source related unit conversion, icon assignment, 
+string conversions, display text parsing, etc
 */
 
 #include "weather.h"
@@ -28,12 +29,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // see if a string is a number
 // s = the string to be determined
 // return value = true if the string is a number, false if it isn't
-BOOL is_number(char *s) {
+BOOL is_number(char *s) 
+{
 	BOOL tag = FALSE;
 	// looking character by character
 	// for a number: numerous spaces in front, then optional +/-, then the number
 	//               don't care anything that comes after it
-	while(*s != '\0') {
+	while(*s != '\0') 
+	{
 		if (*s >= '0' && *s <='9') return TRUE;
 		else if (*s == ' ');
 		else if (*s != '+' && *s != '-') return FALSE;
@@ -46,25 +49,25 @@ BOOL is_number(char *s) {
 
 static void numToStr(double num, char* str)
 {
-    int i = (int)(num * (opt.NoFrac ? 10 : 100));
-    int u = abs(i);
+	int i = (int)(num * (opt.NoFrac ? 10 : 100));
+	int u = abs(i);
 
-    int r = u % 10;
-    int w = u / 10 + (r >= 5);
+	int r = u % 10;
+	int w = u / 10 + (r >= 5);
 
-    if (opt.NoFrac) 
-    {
-        r = 0;
-    }
-    else
-    {
-        r = w % 10;
-        w /= 10;
-    }
-    
-    if (i < 0 && (w || r)) *(str++) = '-';
+	if (opt.NoFrac) 
+	{
+		r = 0;
+	}
+	else
+	{
+		r = w % 10;
+		w /= 10;
+	}
+
+	if (i < 0 && (w || r)) *(str++) = '-';
 	if (r)
-        sprintf(str, "%i.%i", w, r);
+		sprintf(str, "%i.%i", w, r);
 	else
 		sprintf(str, "%i", w);
 }
@@ -81,9 +84,9 @@ void GetTemp(char *tempchar, char *unit, char* str)
 	double temp;
 	char tstr[20];
 
-    TrimString(tempchar);
-    if (tempchar[0] == '-' && tempchar[1] == ' ')
-        memmove(&tempchar[1], &tempchar[2], strlen(&tempchar[2])+1);
+	TrimString(tempchar);
+	if (tempchar[0] == '-' && tempchar[1] == ' ')
+		memmove(&tempchar[1], &tempchar[2], strlen(&tempchar[2])+1);
 
 	// quit if the value obtained is N/A or not a number
 	if (!strcmp(tempchar, NODATA) || !strcmp(tempchar, "N/A")) 
@@ -107,22 +110,22 @@ void GetTemp(char *tempchar, char *unit, char* str)
 	// convert to apporiate unit
 	switch (opt.tUnit) 
 	{
-		case 1:
-			// rounding
-			numToStr((temp-32)/9*5, tstr);
-			if (opt.DoNotAppendUnit)
-				sprintf(str, "%s", tstr);
-			else
-				sprintf(str, "%s%sC", tstr, opt.DegreeSign);
-			break;
+	case 1:
+		// rounding
+		numToStr((temp-32)/9*5, tstr);
+		if (opt.DoNotAppendUnit)
+			sprintf(str, "%s", tstr);
+		else
+			sprintf(str, "%s%sC", tstr, opt.DegreeSign);
+		break;
 
-		case 2:
-			numToStr(temp, tstr);
-			if (opt.DoNotAppendUnit)
-				sprintf(str, "%s", tstr);
-			else
-				sprintf(str, "%s%sF", tstr, opt.DegreeSign);
-			break;
+	case 2:
+		numToStr(temp, tstr);
+		if (opt.DoNotAppendUnit)
+			sprintf(str, "%s", tstr);
+		else
+			sprintf(str, "%s%sF", tstr, opt.DegreeSign);
+		break;
 	}
 }
 
@@ -160,26 +163,27 @@ void GetPressure(char *tempchar, char *unit, char* str)
 		tempunit = (double)output * 1.33322;
 
 	// convert to apporiate unit
-	switch (opt.pUnit) {
-		case 1:
-			intunit = (int)(tempunit + 0.5);
-			wsprintf(str, "%i.%i %s", intunit/10, intunit%10, opt.DoNotAppendUnit ? "" : Translate("kPa"));
-			break;
-		case 2:
-			intunit = (int)(tempunit + 0.5);
-			wsprintf(str, "%i %s", intunit, opt.DoNotAppendUnit ? "" : Translate("mb"));
-			break;
-		case 3:
-			intunit = (int)((tempunit*10 / 33.86388) + 0.5);
-			wsprintf(str, "%i.%i %s", intunit/10, intunit%10, opt.DoNotAppendUnit ? "" : Translate("in"));
-			break;
-		case 4:
-			intunit = (int)((tempunit*10 / 1.33322) + 0.5);
-			wsprintf(str, "%i.%i %s", intunit/10, intunit%10, opt.DoNotAppendUnit ? "" : Translate("mm"));
-			break;
-		default:
-			strcpy(str, tempchar); 
-			break;
+	switch (opt.pUnit)
+	{
+	case 1:
+		intunit = (int)(tempunit + 0.5);
+		wsprintf(str, "%i.%i %s", intunit/10, intunit%10, opt.DoNotAppendUnit ? "" : Translate("kPa"));
+		break;
+	case 2:
+		intunit = (int)(tempunit + 0.5);
+		wsprintf(str, "%i %s", intunit, opt.DoNotAppendUnit ? "" : Translate("mb"));
+		break;
+	case 3:
+		intunit = (int)((tempunit*10 / 33.86388) + 0.5);
+		wsprintf(str, "%i.%i %s", intunit/10, intunit%10, opt.DoNotAppendUnit ? "" : Translate("in"));
+		break;
+	case 4:
+		intunit = (int)((tempunit*10 / 1.33322) + 0.5);
+		wsprintf(str, "%i.%i %s", intunit/10, intunit%10, opt.DoNotAppendUnit ? "" : Translate("mm"));
+		break;
+	default:
+		strcpy(str, tempchar); 
+		break;
 
 	}
 }
@@ -212,23 +216,24 @@ void GetSpeed(char *tempchar, char *unit, char *str)
 		tempunit *= 0.514444;
 
 	// convert to apporiate unit
-	switch (opt.wUnit) {
-		case 1:
-			numToStr(tempunit * 3.6, tstr);
-			sprintf(str, "%s %s", tstr, opt.DoNotAppendUnit ? "" : Translate("km/h"));
-			break;
-		case 2:
-			numToStr(tempunit, tstr);
-			sprintf(str, "%s %s", tstr, opt.DoNotAppendUnit ? "" : Translate("m/s"));
-			break;
-		case 3:
-			numToStr(tempunit / 0.44704, tstr);
-			sprintf(str, "%s %s", tstr, opt.DoNotAppendUnit ? "" : Translate("mph"));
-			break;
-		case 4:
-			numToStr(tempunit / 0.514444, tstr);
-			sprintf(str, "%s %s", tstr, opt.DoNotAppendUnit ? "" : Translate("knots"));
-			break;
+	switch (opt.wUnit)
+	{
+	case 1:
+		numToStr(tempunit * 3.6, tstr);
+		sprintf(str, "%s %s", tstr, opt.DoNotAppendUnit ? "" : Translate("km/h"));
+		break;
+	case 2:
+		numToStr(tempunit, tstr);
+		sprintf(str, "%s %s", tstr, opt.DoNotAppendUnit ? "" : Translate("m/s"));
+		break;
+	case 3:
+		numToStr(tempunit / 0.44704, tstr);
+		sprintf(str, "%s %s", tstr, opt.DoNotAppendUnit ? "" : Translate("mph"));
+		break;
+	case 4:
+		numToStr(tempunit / 0.514444, tstr);
+		sprintf(str, "%s %s", tstr, opt.DoNotAppendUnit ? "" : Translate("knots"));
+		break;
 	}
 }
 
@@ -258,18 +263,19 @@ void GetDist(char *tempchar, char *unit, char *str)
 		tempunit = (double)output * 1.609;
 
 	// convert to apporiate unit
-	switch (opt.vUnit) {
-		case 1:
-			intunit = (int)((tempunit*10) + 0.5);
-			wsprintf(str, "%i.%i %s", intunit/10, intunit%10, opt.DoNotAppendUnit ? "" : Translate("km"));
-			break;
-		case 2:
-			intunit = (int)((tempunit*10 / 1.609) + 0.5);
-			wsprintf(str, "%i.%i %s", intunit/10, intunit%10, opt.DoNotAppendUnit ? "" : Translate("miles"));
-			break;
-		default:
-			strcpy(str, tempchar);
-			break;
+	switch (opt.vUnit)
+	{
+	case 1:
+		intunit = (int)((tempunit*10) + 0.5);
+		wsprintf(str, "%i.%i %s", intunit/10, intunit%10, opt.DoNotAppendUnit ? "" : Translate("km"));
+		break;
+	case 2:
+		intunit = (int)((tempunit*10 / 1.609) + 0.5);
+		wsprintf(str, "%i.%i %s", intunit/10, intunit%10, opt.DoNotAppendUnit ? "" : Translate("miles"));
+		break;
+	default:
+		strcpy(str, tempchar);
+		break;
 	}
 }
 
@@ -325,7 +331,7 @@ WORD GetIcon(const char* cond, WIDATA *Data)
 	int i;
 
 	static const 
-	char *statusStr[10] = 
+		char *statusStr[10] = 
 	{
 		"Lightning",
 		"Fog",
@@ -340,7 +346,7 @@ WORD GetIcon(const char* cond, WIDATA *Data)
 	};
 
 	static const 
-	WORD statusValue[10] = 
+		WORD statusValue[10] = 
 	{
 		LIGHT,
 		FOG,
@@ -367,23 +373,23 @@ WORD GetIcon(const char* cond, WIDATA *Data)
 		strstr(cond, "partly cloudy") != NULL ||
 		strstr(cond, "mostly") != NULL ||
 		strstr(cond, "clouds") != NULL) {
-		return PCLOUDY;
+			return PCLOUDY;
 	}
 	else if (
 		strstr(cond, "sunny") != NULL ||
 		strstr(cond, "clear") != NULL ||
 		strstr(cond, "fair") != NULL) {
-		return SUNNY;
+			return SUNNY;
 	}
 	else if (
 		strstr(cond, "thunder") != NULL || 
 		strstr(cond, "t-storm") != NULL) {
-		return LIGHT;
+			return LIGHT;
 	}
 	else if (
 		strstr(cond, "cloud") != NULL ||
 		strstr(cond, "overcast") != NULL) {
-		return CLOUDY;
+			return CLOUDY;
 	}
 	else if (
 		strstr(cond, "fog") != NULL ||
@@ -392,12 +398,12 @@ WORD GetIcon(const char* cond, WIDATA *Data)
 		strstr(cond, "sand") != NULL ||
 		strstr(cond, "dust") != NULL ||
 		strstr(cond, "haze") != NULL) {
-		return FOG;
+			return FOG;
 	}
 	else if (
 		(strstr(cond, "shower") != NULL && strstr(cond, "snow") != NULL) ||
 		strstr(cond, "flurries") != NULL) {
-		return SSHOWER;
+			return SSHOWER;
 	}
 	else if (
 		strstr(cond, "rain shower") != NULL ||
@@ -410,7 +416,7 @@ WORD GetIcon(const char* cond, WIDATA *Data)
 		strstr(cond, "ice") != NULL ||
 		strstr(cond, "freezing") != NULL ||
 		strstr(cond, "wintry") != NULL) {
-		return SNOW;
+			return SNOW;
 	}
 	else if (
 		strstr(cond, "drizzle") != NULL ||
@@ -434,11 +440,11 @@ WORD GetIcon(const char* cond, WIDATA *Data)
 			CharLowerBuff(LangPackStr1, (DWORD)strlen(LangPackStr1));
 			if (strstr(cond, LangPackStr1) != NULL)
 				return statusValue[i];
-		// loop until the translation string exists (ie, the translated string is differ from original)
+			// loop until the translation string exists (ie, the translated string is differ from original)
 		} 
 		while (strcmp(Translate(LangPackStr), LangPackStr));
 	}
-	
+
 	return NA;
 }
 
@@ -449,7 +455,7 @@ void CaseConv(char *str)
 {
 	char *pstr;
 	BOOL nextUp = TRUE;
-	
+
 	CharLowerBuff(str, (DWORD)strlen(str));
 	for(pstr=str; *pstr; pstr++) 
 	{
@@ -555,45 +561,45 @@ char* GetDisplay(WEATHERINFO *w, const char *dis, char* str)
 			// turn capitalized characters to small case
 			if (chr < 'a' && chr != '[' && chr != '%') chr = (char)((int)chr + 32);
 			switch (chr) {
-				case 'c': strcat(str, w->cond); break;
-				case 'd':	// get the current date
-					GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, NULL, NULL, lpzDate, sizeof(lpzDate));
-					strcat(str, lpzDate); break;
-				case 'e': strcat(str, w->dewpoint); break;
-				case 'f': strcat(str, w->feel); break;
-				case 'h': strcat(str, w->high); break;
-				case 'i': strcat(str, w->winddir); break;
-				case 'l': strcat(str, w->low); break;
-				case 'm': strcat(str, w->humid); break;
-				case 'n': strcat(str, w->city); break;
-				case 'p': strcat(str, w->pressure); break;
-				case 'r': strcat(str, w->sunrise); break;
-				case 's': strcat(str, w->id); break;
-				case 't': strcat(str, w->temp); break;
-				case 'u':
-					if (strcmp(w->update, NODATA))	strcat(str, w->update);
-					else	strcat(str, Translate("<unknown time>"));
-					break;
-				case 'v': strcat(str, w->vis); break;
-				case 'w': strcat(str, w->wind); break;
-				case 'y': strcat(str, w->sunset); break;
-				case '%': strcat(str, "%"); break;
-				case '[':	// custom variables 
-					i++;
-					name[0] = 0;
-					// read the entire variable name
-					while (dis[i] != ']' && i < strlen(dis)) {
-						wsprintf(temp, "%c", dis[i++]);
-						strcat(name, temp);
-					}
-					// access the database to get its value
-					if (!DBGetContactSettingString(w->hContact, WEATHERCONDITION, name, &dbv))
-					{
-						if (dbv.pszVal != Translate(NODATA) && dbv.pszVal != Translate("<Error>"))	
-							strcat(str, dbv.pszVal);
-						DBFreeVariant(&dbv);
-					}
-					break;
+			case 'c': strcat(str, w->cond); break;
+			case 'd':	// get the current date
+				GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, NULL, NULL, lpzDate, sizeof(lpzDate));
+				strcat(str, lpzDate); break;
+			case 'e': strcat(str, w->dewpoint); break;
+			case 'f': strcat(str, w->feel); break;
+			case 'h': strcat(str, w->high); break;
+			case 'i': strcat(str, w->winddir); break;
+			case 'l': strcat(str, w->low); break;
+			case 'm': strcat(str, w->humid); break;
+			case 'n': strcat(str, w->city); break;
+			case 'p': strcat(str, w->pressure); break;
+			case 'r': strcat(str, w->sunrise); break;
+			case 's': strcat(str, w->id); break;
+			case 't': strcat(str, w->temp); break;
+			case 'u':
+				if (strcmp(w->update, NODATA))	strcat(str, w->update);
+				else	strcat(str, Translate("<unknown time>"));
+				break;
+			case 'v': strcat(str, w->vis); break;
+			case 'w': strcat(str, w->wind); break;
+			case 'y': strcat(str, w->sunset); break;
+			case '%': strcat(str, "%"); break;
+			case '[':	// custom variables 
+				i++;
+				name[0] = 0;
+				// read the entire variable name
+				while (dis[i] != ']' && i < strlen(dis)) {
+					wsprintf(temp, "%c", dis[i++]);
+					strcat(name, temp);
+				}
+				// access the database to get its value
+				if (!DBGetContactSettingString(w->hContact, WEATHERCONDITION, name, &dbv))
+				{
+					if (dbv.pszVal != Translate(NODATA) && dbv.pszVal != Translate("<Error>"))	
+						strcat(str, dbv.pszVal);
+					DBFreeVariant(&dbv);
+				}
+				break;
 			}
 		}
 		// if the character is not a variable, write the original character to the new string
@@ -650,35 +656,35 @@ char *GetError(int code)
 	char *str, str2[100];
 	switch (code)
 	{
-		case 10:	str = E10; break;
-		case 11:	str = E11; break;
-		case 12:	str = E12; break;
-		case 20:	str = E20; break;
-		case 30:	str = E30; break;
-		case 40:	str = E40; break;
-		case 42:	str = E42; break;
-		case 43:	str = E43; break;
-		case 99:	str = E99; break;
-		case 204:	str = E204; break;
-		case 301:	str = E301; break;
-		case 305:	str = E305; break;
-		case 307:	str = E307; break;
-		case 400:	str = E400; break;
-		case 401:	str = E401; break;
-		case 402:	str = E402; break;
-		case 403:	str = E403; break;
-		case 404:	str = E404; break;
-		case 405:	str = E405; break;
-		case 407:	str = E407; break;
-		case 410:	str = E410; break;
-		case 500:	str = E500; break;
-		case 502:	str = E502; break;
-		case 503:	str = E503; break;
-		case 504:	str = E504; break;
-		default:
-			mir_snprintf(str2, sizeof(str2), Translate("HTTP Error %i"), code);
-			str = str2;
-			break;
+	case 10:	str = E10; break;
+	case 11:	str = E11; break;
+	case 12:	str = E12; break;
+	case 20:	str = E20; break;
+	case 30:	str = E30; break;
+	case 40:	str = E40; break;
+	case 42:	str = E42; break;
+	case 43:	str = E43; break;
+	case 99:	str = E99; break;
+	case 204:	str = E204; break;
+	case 301:	str = E301; break;
+	case 305:	str = E305; break;
+	case 307:	str = E307; break;
+	case 400:	str = E400; break;
+	case 401:	str = E401; break;
+	case 402:	str = E402; break;
+	case 403:	str = E403; break;
+	case 404:	str = E404; break;
+	case 405:	str = E405; break;
+	case 407:	str = E407; break;
+	case 410:	str = E410; break;
+	case 500:	str = E500; break;
+	case 502:	str = E502; break;
+	case 503:	str = E503; break;
+	case 504:	str = E504; break;
+	default:
+		mir_snprintf(str2, sizeof(str2), Translate("HTTP Error %i"), code);
+		str = str2;
+		break;
 	}
 	return str;
 }
@@ -692,22 +698,22 @@ LPWSTR ConvToUnicode(LPCSTR str2)
 }
 
 typedef BOOL (WINAPI *ft_SetDlgItemTextW) (
-    HWND hDlg,
-    int nIDDlgItem,
-    LPCWSTR lpString
-);
+	HWND hDlg,
+	int nIDDlgItem,
+	LPCWSTR lpString
+	);
 
 typedef BOOL (WINAPI *ft_SetWindowTextW) (
-    HWND hWnd,
-    LPCWSTR lpString
-);
+	HWND hWnd,
+	LPCWSTR lpString
+	);
 
 typedef UINT (WINAPI *ft_GetDlgItemTextW) (
-    HWND hDlg,
-    int nIDDlgItem,
-    LPWSTR lpString,
-    int nMaxCount
-);
+	HWND hDlg,
+	int nIDDlgItem,
+	LPWSTR lpString,
+	int nMaxCount
+	);
 
 static ft_GetDlgItemTextW f_GetDlgItemTextW = NULL;
 static ft_SetDlgItemTextW f_SetDlgItemTextW = NULL;
