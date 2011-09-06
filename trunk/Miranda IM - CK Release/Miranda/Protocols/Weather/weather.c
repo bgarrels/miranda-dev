@@ -17,9 +17,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* Main file for the Weather Protocol, includes loading, unloading,
-   upgrading, support for plugin uninsaller, and anything that doesn't
-   belong to any other file.
+/*
+Main file for the Weather Protocol, includes loading, unloading,
+upgrading, support for plugin uninsaller, and anything that doesn't
+belong to any other file.
 */
 
 #include "weather.h"
@@ -68,12 +69,12 @@ static const PLUGININFOEX pluginInfoEx =
 {
 	sizeof(PLUGININFOEX),
 #ifdef _WIN64
-	"Weather Protocol x64",
+	"Weather Protocol x64 Mataes Release",
 #else
-	"Weather Protocol",
+	"Weather Protocol Mataes Release",
 #endif
 	__VERSION_DWORD,
-	"Retrieve weather information and display them in your contact list",
+	"Retrieve weather information and display them in your contact list. Mod for Mataes Pack.",
 	AUTH,
 	"borkra@miranda-im.org",
 	"(c) 2002-2005 NoName, 2005-2010 Boris Krasnovskiy",
@@ -105,10 +106,10 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
 	switch(fdwReason)
 	{
-		case DLL_PROCESS_ATTACH:
-			hInst = hinstDLL;
-			DisableThreadLibraryCalls(hinstDLL);
-			break;
+	case DLL_PROCESS_ATTACH:
+		hInst = hinstDLL;
+		DisableThreadLibraryCalls(hinstDLL);
+		break;
 	}
 
 	return TRUE;
@@ -126,7 +127,7 @@ int WeatherShutdown(WPARAM wParam,LPARAM lParam)
 
 	WindowList_Broadcast(hWindowList, WM_CLOSE, 0, 0);
 	WindowList_Broadcast(hDataWindowList, WM_CLOSE, 0, 0);
-    SendMessage(hWndSetup, WM_CLOSE, 0, 0);
+	SendMessage(hWndSetup, WM_CLOSE, 0, 0);
 
 	return 0;
 }

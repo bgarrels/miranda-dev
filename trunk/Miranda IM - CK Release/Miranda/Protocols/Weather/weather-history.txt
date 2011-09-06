@@ -1,5 +1,9 @@
 Weather Protocol - Version History
 ==================================
+Version 0.3.8.19		2011/09/03
+  - Fixed Brief window update on weather station update
+  - Fixed No ini window no show
+
 Version 0.3.8.18		2010/08/20
   - Specialized translations for all weather conditions
   - Fixed possible crashes

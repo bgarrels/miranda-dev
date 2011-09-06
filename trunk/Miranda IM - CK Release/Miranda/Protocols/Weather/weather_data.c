@@ -1,6 +1,6 @@
 /*
 Weather Protocol plugin for Miranda IM
-Copyright (C) 2005-2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005-2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2002-2005 Calvin Che
 
 This program is free software; you can redistribute it and/or
@@ -17,8 +17,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* This file contain the source related loading, obtaining, and
-   saving individual weather data for a weather contact.
+/* 
+This file contain the source related loading, obtaining, and
+saving individual weather data for a weather contact.
 */
 
 #include "weather.h"
@@ -214,7 +215,7 @@ void EraseAllInfo(DWORD lastver)
 		hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
 	}
 	// if weather contact exists, set the status to online so it is ready for update
-//	if (ContactCount != 0)	status = ONLINE;
+	// if (ContactCount != 0) status = ONLINE;
 	// in case where the default station is missing
 	if (opt.DefStn == NULL && ContactCount != 0) 
 	{
@@ -351,7 +352,7 @@ void GetDataValue(WIDATAITEM *UpdateData, char *Data, char** szData)
 			else if (szInfo[startloc] == '&' &&
 				(szInfo[startloc+1] == ';' || szInfo[startloc+2] == ';' || szInfo[startloc+3] == ';' || 
 				szInfo[startloc+4] == ';' || szInfo[startloc+5] == ';' || szInfo[startloc+6] == ';'))
-					symb = TRUE;
+				symb = TRUE;
 			else if (szInfo[startloc] == '>')	tag = FALSE;
 			else if (szInfo[startloc] == ';')	symb = FALSE;
 			else {
@@ -394,7 +395,7 @@ void GetDataValue(WIDATAITEM *UpdateData, char *Data, char** szData)
 		ConvertDataValue(UpdateData, Data);
 
 		// remove the string before the data from szInfo
- 		szInfo = end;
+		szInfo = end;
 	}
 	*szData = szInfo;
 }
@@ -438,7 +439,7 @@ void DBDataManage(HANDLE hContact, WORD Mode, WPARAM wParam, LPARAM lParam)
 	dbces.lParam=(LPARAM)&wc;
 	dbces.pfnEnumProc=GetWeatherDataFromDB;
 	dbces.szModule=WEATHERCONDITION;
-	
+
 	// get all the settings and stored them in a temporary list
 	if(CallService(MS_DB_CONTACT_ENUMSETTINGS,(WPARAM)hContact,(LPARAM)&dbces)==-1)
 		wc.current--;
@@ -450,11 +451,11 @@ void DBDataManage(HANDLE hContact, WORD Mode, WPARAM wParam, LPARAM lParam)
 		{
 			switch (Mode) 
 			{
-				case WDBM_REMOVE:
-					DBDeleteContactSetting(hContact, WEATHERCONDITION, wc.value[wc.current]);
-					break;
+			case WDBM_REMOVE:
+				DBDeleteContactSetting(hContact, WEATHERCONDITION, wc.value[wc.current]);
+				break;
 
-				case WDBM_DETAILDISPLAY: 
+			case WDBM_DETAILDISPLAY: 
 				{
 					HWND hList = GetDlgItem((HWND)wParam, IDC_DATALIST);
 					LV_ITEM lvi = { 0 };
