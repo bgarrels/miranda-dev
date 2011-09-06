@@ -29,7 +29,6 @@ int TrafficSend(WPARAM wParam,LPARAM lParam);
 #define TRAFFIC_SETTINGS_GROUP "TrafficCounter"
 
 #define SETTINGS_COUNTER_FORMAT "CounterFormat"
-#define SETTINGS_OVERALL_COUNTER_FORMAT "OverallCounterFormat"
 #define SETTINGS_TOOLTIP_FORMAT "TooltipFormat"
 #define SETTINGS_STAT_ACC_OPT "Stat_SelAcc"
 #define SETTINGS_ADDITION_SPACE "traffic_addition_space"
@@ -77,7 +76,7 @@ int OnAccountsListChange(WPARAM wParam, LPARAM lParam);
 //font service suppot
 int UpdateFonts(WPARAM wParam, LPARAM lParam);
 void UpdateTrafficWindowSize(void);
-unsigned short int UpdateTrafficWindowHeight(void);
+unsigned short int TrafficWindowHeight(void);
 // Рисование
 int TrafficCounter_Draw(HWND, HDC);
 int PaintTrafficCounterWindow(HWND, HDC);

@@ -9,8 +9,7 @@
 //
 #include <windows.h>
 #include <winres.h>
-#include "..\..\Include\statusmodes.h"
-
+#include "..\..\Include\statusmodes.h"
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
@@ -128,10 +127,8 @@ BEGIN
     CONTROL         "",IDC_APPEARANCEOPTIONS,"SysTreeView32",TVS_DISABLEDRAGDROP | TVS_SHOWSELALWAYS | TVS_NOTOOLTIPS | WS_BORDER | WS_HSCROLL | WS_TABSTOP,3,3,161,153
     EDITTEXT        IDC_EDIT_SPACE,259,23,30,12,ES_AUTOHSCROLL | ES_NUMBER
     CONTROL         "",IDC_SPIN1,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_TABSTOP,287,25,9,12
-    LTEXT           "Account counters format string:",IDC_STATIC,6,160,136,8
-    EDITTEXT        IDC_EDIT_COUNTER_FORMAT,3,168,298,13,ES_AUTOHSCROLL
-    LTEXT           "Overall counter format string:",IDC_STATIC,6,184,136,8
-    EDITTEXT        IDC_EDIT_OVERALL_COUNTER_FORMAT,3,192,297,13,ES_AUTOHSCROLL
+    LTEXT           "Counters format string:",IDC_STATIC,6,160,136,8
+    EDITTEXT        IDC_EDIT_COUNTER_FORMAT,3,168,298,38,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL
     EDITTEXT        IDC_EDIT_TOOLTIP_FORMAT,3,217,297,13,ES_MULTILINE | ES_AUTOHSCROLL
     LTEXT           "Tooltip format string:",IDC_STATIC,5,208,81,8
     LTEXT           "Display traffic for current",IDC_LAST_CLEAR,177,6,81,8
@@ -186,8 +183,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,1,1,5
- PRODUCTVERSION 0,1,1,5
+ FILEVERSION 0,1,1,7
+ PRODUCTVERSION 0,1,1,7
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -205,12 +202,12 @@ BEGIN
             VALUE "Comments", "Licensed under the terms of the GNU General Public License"
             VALUE "CompanyName", " "
             VALUE "FileDescription", "TrafficCounter"
-            VALUE "FileVersion", "0.1.1.5"
+            VALUE "FileVersion", "0.1.1.7"
             VALUE "InternalName", "TrafficCounter"
             VALUE "LegalCopyright", "Copyright ©  Ghost, Mironych"
             VALUE "OriginalFilename", "TrafficCounter.dll"
             VALUE "ProductName", "TrafficCounter"
-            VALUE "ProductVersion", "0.1.1.5"
+            VALUE "ProductVersion", "0.1.1.7"
         END
     END
     BLOCK "VarFileInfo"
@@ -229,8 +226,7 @@ END
 //
 // Generated from the TEXTINCLUDE 3 resource.
 //
-
-
+
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
 
