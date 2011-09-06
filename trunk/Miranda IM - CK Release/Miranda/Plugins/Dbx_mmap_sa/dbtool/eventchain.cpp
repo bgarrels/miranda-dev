@@ -1,6 +1,10 @@
 /*
 Miranda Database Tool
-Copyright (C) 2001-2005  Richard Hughes
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Copyright 2000-2011 Miranda ICQ/IM project, 
+all portions of this codebase are copyrighted to the people 
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -28,91 +32,8 @@ static DWORD memsize = 0;
 static DBEvent* memblock = NULL;
 static DBEvent* dbePrevEvent = NULL;
 
-extern void EncodeMemory(BYTE * mem, size_t size);
-extern void DecodeMemory(BYTE * mem, size_t size);
-extern BOOL bEncryption;
-
-//based on the code (C) 2001, 2002 Peter Verthez
-//under GNU LGPL
-
-BOOL is_utf8_string(LPCSTR str)
+static void ConvertOldEvent( DBEvent*& dbei )
 {
-	int expect_bytes = 0, utf_found = 0;
-
-	if (!str) return 0;
-
-	while (*str) {
-		if ((*str & 0x80) == 0) {
-			/* Looks like an ASCII character */
-			if (expect_bytes)
-				/* byte of UTF-8 character expected */
-				return 0;
-		}
-		else {
-			/* Looks like byte of an UTF-8 character */
-			if (expect_bytes) {
-				/* expect_bytes already set: first byte of UTF-8 char already seen */
-				if ((*str & 0xC0) != 0x80) {
-					/* again first byte ?!?! */
-					return 0;
-				}
-			}
-			else {
-				/* First byte of the UTF-8 character */
-				/* count initial one bits and set expect_bytes to 1 less */
-				char ch = *str;
-				while (ch & 0x80) {
-					expect_bytes++;
-					ch = (ch & 0x7f) << 1;
-				}
-			}
-			/* OK, next byte of UTF-8 character */
-			/* Decrement number of expected bytes */
-			if ( --expect_bytes == 0 )
-				utf_found = 1;
-		}
-		str++;
-	}
-
-	return (utf_found && expect_bytes == 0);
-}
-
-char* Utf8EncodeUcs2( const wchar_t* src )
-{
-	int len = (int)wcslen( src );
-	char* result = ( char* )malloc( len*3 + 1 );
-	if ( result == NULL )
-		return NULL;
-
-	{	const wchar_t* s = src;
-		BYTE*	d = ( BYTE* )result;
-
-		while( *s ) {
-			int U = *s++;
-
-			if ( U < 0x80 ) {
-				*d++ = ( BYTE )U;
-			}
-			else if ( U < 0x800 ) {
-				*d++ = 0xC0 + (( U >> 6 ) & 0x3F );
-				*d++ = 0x80 + ( U & 0x003F );
-			}
-			else {
-				*d++ = 0xE0 + ( U >> 12 );
-				*d++ = 0x80 + (( U >> 6 ) & 0x3F );
-				*d++ = 0x80 + ( U & 0x3F );
-		}	}
-
-		*d = 0;
-	}
-
-	return result;
-}
-
-static void ConvertOldEvent( DBEvent* dbei )
-{
-	if(bEncrypted)
-		DecodeMemory(dbei->blob, dbei->cbBlob);
 	int msglen = (int)strlen(( char* )dbei->blob) + 1, msglenW = 0;
 	if ( msglen != (int) dbei->cbBlob ) {
 		int i, count = (( dbei->cbBlob - msglen ) / sizeof( WCHAR ));
@@ -128,22 +49,17 @@ static void ConvertOldEvent( DBEvent* dbei )
 	}
 
 	if ( msglenW > 0 && msglenW <= msglen ) {
-		char* utf8str;
-
-		utf8str = Utf8EncodeUcs2(( WCHAR* )&dbei->blob[ msglen ] );
-		dbei->cbBlob = (int)strlen( utf8str )+1;
+		char* utf8str = Utf8EncodeUcs2(( WCHAR* )&dbei->blob[ msglen ] );
+		dbei->cbBlob = (DWORD)strlen( utf8str )+1;
 		dbei->flags |= DBEF_UTF;
 		if (offsetof(DBEvent,blob)+dbei->cbBlob > memsize) {
 			memsize = offsetof(DBEvent,blob)+dbei->cbBlob;
 			memblock = (DBEvent*)realloc(memblock, memsize);
+            dbei = memblock;
 		}
 		memcpy( &dbei->blob, utf8str, dbei->cbBlob );
-
 		free(utf8str);
-	}
-	if(bEncrypted)
-		EncodeMemory(dbei->blob, dbei->cbBlob);
-}
+}	}
 
 static void WriteOfsNextToPrevious(DWORD ofsPrev,DBContact *dbc,DWORD ofsNext)
 {
