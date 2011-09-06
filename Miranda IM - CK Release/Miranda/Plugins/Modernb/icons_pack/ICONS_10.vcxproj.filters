@@ -16,4 +16,48 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="icos\icon_accmgr.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_bookmarks.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_dbeditor.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_find_user.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_groups_off.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_groups_on.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_hideoffline.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_mainmenu.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_minimize.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_options.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_showoffline.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_sounds_off.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_sounds_on.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\icon_statusmenu.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
