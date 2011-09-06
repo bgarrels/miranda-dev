@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 //#define _WIN32_WINNT 0x0501
 #define MIRANDA_VER 0x0900
+#define MIRANDA_CUSTOM_LP
 #define _USE_32BIT_TIME_T 1
 
 // Standart includes
@@ -142,7 +143,7 @@ union
 		unsigned int Stat_Units:2;				//12,13
 		unsigned int Stat_Tab:3;				//14,15,16
 		unsigned int NotifyByTime:1;			//17
-		unsigned int ClistModernPresent:1;		//18
+		unsigned int Reserv2:1;					//18
 		unsigned int PeriodForShow:2;			//19,20
 		unsigned int FrameIsVisible:1;			//21
 		unsigned int Reserv1:1;					//22

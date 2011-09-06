@@ -242,12 +242,12 @@ BOOL CALLBACK DlgProcOptStatistics(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 										case 1: // Входящий
 										case 2: // Исходящий
 										case 3: // Сумма
-											GetFormattedTraffic(Value, unOptions.Stat_Units, pdi->item.pszText);
+											GetFormattedTraffic(Value, unOptions.Stat_Units, pdi->item.pszText, 32);
 											break;
 										case 4: // Время
 											{
 												TCHAR *Fmt[5] = {_T("m:ss"), _T("h:mm:ss"), _T("h:mm:ss"), _T("d hh:mm:ss"), _T("d hh:mm:ss")};
-												GetDurationFormatM(Value, Fmt[unOptions.Stat_Tab], pdi->item.pszText, 64);
+												GetDurationFormatM(Value, Fmt[unOptions.Stat_Tab], pdi->item.pszText, 32);
 											}
 											break;
 									}
@@ -374,11 +374,11 @@ void Stat_UpdateTotalTraffic(HWND hwndDialog, DWORD Incoming, DWORD Outgoing)
 {
 	TCHAR tmp[32];
 
-	GetFormattedTraffic(Incoming, unOptions.Stat_Units, tmp);
+	GetFormattedTraffic(Incoming, unOptions.Stat_Units, tmp, 32);
 	SetDlgItemText(hwndDialog, IDC_STATIC_DNL, tmp);
-	GetFormattedTraffic(Outgoing, unOptions.Stat_Units, tmp);
+	GetFormattedTraffic(Outgoing, unOptions.Stat_Units, tmp, 32);
 	SetDlgItemText(hwndDialog, IDC_STATIC_UPL, tmp);
-	GetFormattedTraffic(Incoming + Outgoing, unOptions.Stat_Units, tmp);
+	GetFormattedTraffic(Incoming + Outgoing, unOptions.Stat_Units, tmp, 32);
 	SetDlgItemText(hwndDialog, IDC_STATIC_SUMM, tmp);
 }
 

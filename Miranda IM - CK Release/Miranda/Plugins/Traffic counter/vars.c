@@ -22,15 +22,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 =======================================================================================*/
 
 #include "commonheaders.h"
-#define L1 16
-#define L2 255
 
 static TCHAR* GetTraffic(ARGUMENTSINFO *ai)
 {
 	DWORD tmp, tmpsn = 0, tmprn = 0, tmpst = 0, tmprt = 0;
 	BYTE ed;
-	static TCHAR res[L1];
-	
+	WORD l;
+	TCHAR *res;
+
 	if (ai->argc != 5) return NULL;
 
 	if (!_tcscmp(ai->targv[1], _T("overall")))
@@ -93,22 +92,31 @@ static TCHAR* GetTraffic(ARGUMENTSINFO *ai)
 	}
 	else return NULL;
 
-	if (!_tcscmp(ai->targv[4], _T("b"))) GetFormattedTraffic(tmp, 0, res);
+	if (!_tcscmp(ai->targv[4], _T("b"))) ed = 0;
 	else
-	if (!_tcscmp(ai->targv[4], _T("k"))) GetFormattedTraffic(tmp, 1, res);
+	if (!_tcscmp(ai->targv[4], _T("k"))) ed = 1;
 	else
-	if (!_tcscmp(ai->targv[4], _T("m"))) GetFormattedTraffic(tmp, 2, res);
+	if (!_tcscmp(ai->targv[4], _T("m"))) ed = 2;
 	else
-	if (!_tcscmp(ai->targv[4], _T("d"))) GetFormattedTraffic(tmp, 3, res);
+	if (!_tcscmp(ai->targv[4], _T("d"))) ed = 3;
 	else return NULL;
 
-	return res;
+	// Получаем форматированную строку и возвращаем указатель на неё.
+	// Сначала узнаем размер буфера.
+	l = GetFormattedTraffic(tmp, ed, NULL, 0);
+	res = (TCHAR*)mir_alloc(l * sizeof(TCHAR));
+	if (!res) return NULL;
+	if (GetFormattedTraffic(tmp, ed, res, l))
+		return res;
+
+	return NULL;
 }
 
 static TCHAR* GetTime(ARGUMENTSINFO *ai)
 {
 	BYTE ed, flag;
-	static TCHAR result3[L2];
+	TCHAR *res = NULL;
+	WORD l;
 	DWORD Duration;
 
 	if (ai->argc != 4) return NULL;
@@ -142,8 +150,15 @@ static TCHAR* GetTime(ARGUMENTSINFO *ai)
 	}
 	
 	if (flag != 0xAA) return NULL;
-	GetDurationFormatM(Duration, ai->targv[3], result3, 255);
-	return result3;
+
+	// Получаем форматированную строку и возвращаем указатель на неё.
+	// Сначала узнаем размер буфера.
+	l = GetDurationFormatM(Duration, ai->targv[3], NULL, 0);
+	res = (TCHAR*)mir_alloc(l * sizeof(TCHAR));
+	if (!res) return NULL;
+	GetDurationFormatM(Duration, ai->targv[3], res, l);
+
+	return res;
 }
 
 void RegisterVariablesTokens(void)
@@ -159,7 +174,8 @@ void RegisterVariablesTokens(void)
 	trs.tszTokenString = _T("tc_GetTraffic");
 	trs.parseFunctionT = GetTraffic;
 	trs.szHelpText = "Traffic counter\t(A,B,C,D)\tGet traffic counter value. A: <ProtocolName> OR overall OR summary; B: now OR total; C: sent OR recieved OR both; D: b - in bytes, k - in kilobytes, m - in megabytes, d - dynamic";
-	trs.flags = TRF_TCHAR | TRF_PARSEFUNC | TRF_FUNCTION;
+	trs.flags = TRF_TCHAR | TRF_PARSEFUNC | TRF_FUNCTION | TRF_FREEMEM;
+	trs.memType = TR_MEM_MIRANDA;
 	CallService(MS_VARS_REGISTERTOKEN, 0, (LPARAM)&trs);
 	// Функция, возвращающая время
 	trs.tszTokenString = _T("tc_GetTime");

@@ -19,38 +19,62 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "commonheaders.h"
 
-// Функция заменяет фигурные скобки в строке string на пробелы
-void ReplaceBrackets(TCHAR *string)
+/* Функция разбирает строку и возвращает список тегов и соответствующих им строк.
+Аргументы:
+InputString - строка для разбора;
+RowItemsList - список найденных элементов.
+Возвращаемое значение - количество элементов в списках. */
+WORD GetRowItems(TCHAR *InputString, RowItemInfo **RowItemsList)
 {
-	WORD i;
-	for (i = 0; string[i]; i++)
-		if ((string[i] == '{') || (string[i] == '}'))
-			string[i] = ' ';
-}
+	TCHAR *begin, *end;
+	WORD c = 0;
 
-// Функция принимает строку с фигурными скобками и возвращает строки, предназначенные для
-// вывода с выравниванием по левому/центру/по правому
-void GetFormattedStrings(TCHAR *src, TCHAR *la, TCHAR *ca, TCHAR *ra)
-{
-	signed short int BracketLeft, BracketRight;
-	BracketLeft = !_tcschr(src, '{') ? -1 : _tcschr(src, '{') - src;
-	BracketRight = !_tcschr(src, '}') ? -1 : _tcschr(src, '}') - src;
-	SecureZeroMemory(la, 512);
-	SecureZeroMemory(ca, 512);
-	SecureZeroMemory(ra, 512);
-	// Если присутствуют обе скобки в правильном порядке
-	if ((BracketLeft != -1) && (BracketRight != -1) && (BracketLeft < BracketRight))
+	// Ищем слева открывающую скобку.
+	begin = _tcschr(InputString, '{');
+	// Если скобка найдена...
+	if (begin)
 	{
-		_tcsncpy(la, src, BracketLeft);
-		_tcsncpy(ca, src + BracketLeft + 1, BracketRight - BracketLeft - 1);
-		_tcscpy(ra, src + BracketRight + 1);
+		// Выделяем память под указатели
+		*RowItemsList = (RowItemInfo*)mir_alloc(sizeof(RowItemInfo));
 	}
-	// иначе весь текст выравнивается по правому краю
-	else _tcscpy(ra, src);
-	// Избавляемся от оставшихся скобок
-	ReplaceBrackets(la);
-	ReplaceBrackets(ca);
-	ReplaceBrackets(ra);
+	else return 0;
+
+	do
+	{
+		// Сразу вслед за ней ищем закрывающую.
+		end = _tcschr(begin, '}');
+
+		// Выделяем память под указатели
+		*RowItemsList = (RowItemInfo*)mir_realloc(*RowItemsList, sizeof(RowItemInfo) * (c + 1));
+
+		// Разбираем тег.
+		_stscanf(begin + 1, _T("%c%d"),
+				&((*RowItemsList)[c].Alignment),
+				&((*RowItemsList)[c].Interval));
+
+		// Ищем далее открывающую скобку - это конец строки, соответствующей тегу.
+		begin = _tcschr(end, '{');
+
+		if (begin)
+		{
+			// Выделяем память под строку.
+			(*RowItemsList)[c].String = (TCHAR*)mir_alloc(sizeof(TCHAR) * (begin - end));
+			// Копируем строку.
+			_tcsncpy((*RowItemsList)[c].String, end + 1, begin - end - 1);
+			(*RowItemsList)[c].String[begin - end - 1] = 0;
+		}
+		else
+		{
+			// Выделяем память под строку.
+			(*RowItemsList)[c].String = (TCHAR*)mir_alloc(sizeof(TCHAR) * _tcslen(end));
+			// Копируем строку.
+			_tcsncpy((*RowItemsList)[c].String, end + 1, _tcslen(end));
+		}
+
+		c++;
+	} while (begin);
+
+	return c;
 }
 
 /* Функция возвращает количество дней в указанном месяце указанного года. */
@@ -92,15 +116,19 @@ BYTE DayOfWeek(BYTE Day, BYTE Month, WORD Year)
 
 /*
 Аргументы:
-Value - количество байт;
-Unit - единицы измерения (0 - байты, 1 - килобайты, 2 - мегабайты, 3 - автоматически);
-Buffer - адрес строки для записи результата
+	Value - количество байт;
+	Unit - единицы измерения (0 - байты, 1 - килобайты, 2 - мегабайты, 3 - автоматически);
+	Buffer - адрес строки для записи результата;
+	Size - размер буфера.
+Возвращаемое значение: требуемый размер буфера.
 */
-void GetFormattedTraffic(DWORD Value, BYTE Unit, TCHAR *Buffer)
+WORD GetFormattedTraffic(DWORD Value, BYTE Unit, TCHAR *Buffer, WORD Size)
 {
-	TCHAR Str1[32], szUnit[4] = {' ', 0}, *pChar;
+	TCHAR Str1[32], szUnit[4] = {' ', 0};
 	DWORD Divider;
 	NUMBERFMT nf = {0, 1, 3, _T(","), _T(" "), 0};
+	TCHAR *Res; // Промежуточный результат.
+	WORD l;
 
 	switch (Unit)
 	{
@@ -123,12 +151,28 @@ void GetFormattedTraffic(DWORD Value, BYTE Unit, TCHAR *Buffer)
 			else { Divider = 0x100000; szUnit[1] = 'M'; szUnit[2] = 'B'; }
 			break;
 	}
-	mir_sntprintf(Str1, 32, _T("%.2f"), 1.0 * Value / Divider);
-	pChar = _tcsrchr(Str1, ',');
-	*pChar = '.';
-	if (!GetNumberFormat(LOCALE_USER_DEFAULT, 0, Str1, &nf, Buffer, 32))
-		mir_sntprintf(Buffer, 32, _T("?? ??"));
-	_tcscat(Buffer, szUnit);
+
+	mir_sntprintf(Str1, 32, _T("%d.%d"), Value / Divider, Value % Divider);
+	l = GetNumberFormat(LOCALE_USER_DEFAULT, 0, Str1, &nf, NULL, 0);
+	if (!l) return 0;
+	l += _tcslen(szUnit) + 1;
+	Res = (TCHAR*)malloc(l * sizeof(TCHAR));
+	if (!Res) return 0;
+	GetNumberFormat(LOCALE_USER_DEFAULT, 0, Str1, &nf, Res, l);
+	_tcscat(Res, szUnit);
+
+	if (Size && Buffer)
+	{
+		_tcscpy(Buffer, Res);
+		l = _tcslen(Buffer);
+	}
+	else
+	{
+		l = _tcslen(Res) + 1;
+	}
+
+	free(Res);
+	return l;
 }
 
 /* Преобразование интервала времени в его строковое представление
@@ -137,66 +181,96 @@ Duration: интервал времени в секундах;
 Format: строка формата;
 Buffer: адрес буфера, куда функция помещает результат.
 Size - размер буфера. */
-void GetDurationFormatM(DWORD Duration, TCHAR *Format, TCHAR *Buffer, WORD Size)
+WORD GetDurationFormatM(DWORD Duration, TCHAR *Format, TCHAR *Buffer, WORD Size)
 {
-	WORD i, j;
-	DWORD Values[4]; // Значения интервалов времени.
-	BYTE Flags[4]; // Признаки наличия токенов в строке формата.
+	DWORD q;
+	WORD TokenIndex, FormatIndex, Length;
+	TCHAR Token[256],  // Аккумулятор.
+		*Res; // Промежуточный результат.
 
-	for (i = 0; i < Size; Buffer[i++] = 0);
+	Res = (TCHAR*)malloc(sizeof(TCHAR)); // Выделяем чуть-чуть памяти под результат, но это только начало.
+	SecureZeroMemory(Res, sizeof(TCHAR));
 
-	Flags[0] = NULL != _tcsstr(Format, _T("d"));
-	Flags[1] = NULL != _tcsstr(Format, _T("h"));
-	Flags[2] = NULL != _tcsstr(Format, _T("m"));
-	Flags[3] = NULL != _tcsstr(Format, _T("s"));
-	
-	Values[0] = Duration / (60 * 60 * 24);
-	Values[1] = Duration / (60 * 60) 
-		- (Flags[0] ? Values[0] * 24 : 0);
-	Values[2] = Duration / 60 
-		- (Flags[1] ? Values[1] * 60 : 0) 
-		- (Flags[0] ? Values[0] * 24 * 60 : 0);
-	Values[3] = Duration 
-		- (Flags[2] ? Values[2] * 60 : 0)
-		- (Flags[1] ? Values[1] * 60 * 60 : 0) 
-		- (Flags[0] ? Values[0] * 24 * 60 * 60 : 0);
-
-	for (i = j = 0; Format[i]; i++)
+	for (FormatIndex = 0; Format[FormatIndex];)
 	{
-		switch (Format[i])
+		// Ищем токены. Считается, что токен - только буквы.
+		TokenIndex = 0;
+		q = _istalpha(Format[FormatIndex]);
+		// Копируем символы в аккумулятор до смены флага.
+		do
 		{
-			case 'd':
-				mir_sntprintf(Buffer, Size, _T("%s%d"), Buffer, Values[0]);
-				break;
-			case 'h':
-				if (Format[i+1] == 'h')
-				{
-					mir_sntprintf(Buffer, Size, _T("%s%02d"), Buffer, Values[1]);
-					i++;
-				}
-				else mir_sntprintf(Buffer, Size, _T("%s%d"), Buffer, Values[1]);
-				break;
-			case 'm':
-				if (Format[i+1] == 'm')
-				{
-					mir_sntprintf(Buffer, Size, _T("%s%02d"), Buffer, Values[2]);
-					i++;
-				}
-				else mir_sntprintf(Buffer, Size, _T("%s%d"), Buffer, Values[2]);
-				break;
-			case 's':
-				if (Format[i+1] == 's')
-				{
-					mir_sntprintf(Buffer, Size, _T("%s%02d"), Buffer, Values[3]);
-					i++;
-				}
-				else mir_sntprintf(Buffer, Size, _T("%s%d"), Buffer, Values[3]);
-				break;
-			default:
-				mir_sntprintf(Buffer, Size, _T("%s%c"), Buffer, Format[i]); 
-				break;
+			Token[TokenIndex++] = Format[FormatIndex++];
+		} while (q == _istalpha(Format[FormatIndex]));
+		Token[TokenIndex] = 0;
+
+		// Что получили в аккумуляторе?
+		if (!_tcscmp(Token, _T("d")))
+		{
+			q = Duration / (60 * 60 * 24);
+			mir_sntprintf(Token, 256, _T("%d"), q);
+			Duration -= q * 60 * 60 * 24;
 		}
+		else
+		if (!_tcscmp(Token, _T("h")))
+		{
+			q = Duration / (60 * 60);
+			mir_sntprintf(Token, 256, _T("%d"), q);
+			Duration -= q * 60 * 60;
+		}
+		else
+		if (!_tcscmp(Token, _T("hh")))
+		{
+			q = Duration / (60 * 60);
+			mir_sntprintf(Token, 256, _T("%02d"), q);
+			Duration -= q * 60 * 60;
+		}
+		else
+		if (!_tcscmp(Token, _T("m")))
+		{
+			q = Duration / 60;
+			mir_sntprintf(Token, 256, _T("%d"), q);
+			Duration -= q * 60;
+		}
+		else
+		if (!_tcscmp(Token, _T("mm")))
+		{
+			q = Duration / 60;
+			mir_sntprintf(Token, 256, _T("%02d"), q);
+			Duration -= q * 60;
+		}
+		else
+		if (!_tcscmp(Token, _T("s")))
+		{
+			q = Duration;
+			mir_sntprintf(Token, 256, _T("%d"), q);
+			Duration -= q;
+		}
+		else
+		if (!_tcscmp(Token, _T("ss")))
+		{
+			q = Duration;
+			mir_sntprintf(Token, 256, _T("%02d"), q);
+			Duration -= q;
+		}
+
+		// Добавим памяти, если нужно.
+		Length = _tcslen(Res) + _tcslen(Token) + 1;
+		Res = (TCHAR*)realloc(Res, Length * sizeof(TCHAR));
+		_tcscat(Res, Token);
 	}
+
+	if (Size && Buffer)
+	{
+		_tcsncpy(Buffer, Res, Size);
+		Length = _tcslen(Buffer);
+	}
+	else
+	{
+		Length = _tcslen(Res) + 1;
+	}
+
+	free(Res);
+	return Length;
 }
 
 /* Результат:
