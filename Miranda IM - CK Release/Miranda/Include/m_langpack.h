@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef M_LANGPACK_H__
 #define M_LANGPACK_H__
 
-#if MIRANDA_VER >= 0x1000 && !defined( _STATIC )
+#if MIRANDA_VER >= 0x0A00 && !defined( _STATIC )
 	#define MIRANDA_CUSTOM_LP
 #endif
 
@@ -192,7 +192,7 @@ __inline static INT_PTR Langpack_PCharToTChar(const char* str)
 
 #if defined( MIRANDA_CUSTOM_LP )
 
-__forceinline void mir_getLP( PLUGININFOEX* pInfo )
+__forceinline void mir_getLP( const PLUGININFOEX* pInfo )
 {	CallService(MS_LANGPACK_REGISTER, (WPARAM)&hLangpack, (LPARAM)pInfo);
 }
 
