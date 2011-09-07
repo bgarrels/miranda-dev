@@ -49,17 +49,17 @@ INT_PTR MenuCommand(WPARAM wParam,LPARAM lParam)
 
 INT_PTR EmptyFolder(WPARAM wParam,LPARAM lParam)
 {
-    SHFILEOPSTRUCT file_op = {
-        NULL,
-        FO_DELETE,
-        tszRoot,
-        _T(""),
-        FOF_NOERRORUI |
-        FOF_SILENT,
-        false,
-        0,
-        _T("") };
-    SHFileOperation(&file_op);
+	SHFILEOPSTRUCT file_op = {
+		NULL,
+		FO_DELETE,
+		tszRoot,
+		_T(""),
+		FOF_NOERRORUI |
+		FOF_SILENT,
+		false,
+		0,
+		_T("") };
+	SHFileOperation(&file_op);
 	return 0;
 }
 

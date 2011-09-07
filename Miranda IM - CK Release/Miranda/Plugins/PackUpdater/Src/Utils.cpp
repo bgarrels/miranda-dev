@@ -176,12 +176,12 @@ VOID __stdcall RestartMe(void*)
 
 BOOL Exists(LPCTSTR strName)
 {   
-    return GetFileAttributes(strName) != INVALID_FILE_ATTRIBUTES;   
+	return GetFileAttributes(strName) != INVALID_FILE_ATTRIBUTES;   
 }
 
 BOOL IsPluginDisabled(TCHAR* filename)
 {
-    char* fname = mir_t2a(filename);
+	char* fname = mir_t2a(filename);
 	int res = DBGetContactSettingByte(NULL, "PluginDisable", fname, 0);
 	mir_free(fname);
 	return res;
@@ -203,7 +203,7 @@ static void CheckUpdates(void *)
 	vector<FILEINFO> UpdateFiles;
 
 	if(!Exists(tszRoot))
-        CreateDirectory(tszRoot, NULL);
+		CreateDirectory(tszRoot, NULL);
 	Files.clear();
 	Reminder = DBGetContactSettingByte(NULL, MODNAME, "Reminder", DEFAULT_REMINDER);
 	FileCount = DBGetContactSettingDword(NULL, MODNAME, "FileCount", DEFAULT_FILECOUNT);
