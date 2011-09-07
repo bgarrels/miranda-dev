@@ -1,0 +1,65 @@
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+//#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+#include <winres.h>
+#include <windows.h>
+#include <richedit.h>
+#include <commctrl.h>
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1250)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_HISTORY DIALOGEX 0, 0, 496, 366
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_CONTROLPARENT
+CAPTION "Message History"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL        "",IDC_LIST,WC_LISTVIEW, WS_TABSTOP | WS_BORDER | LVS_REPORT | LVS_NOCOLUMNHEADER | LVS_SHOWSELALWAYS | LVS_SINGLESEL ,82,27,407,73
+    CONTROL         "",IDC_SPLITTER,WC_STATIC,SS_ENHMETAFILE,82,100,413,2
+    CONTROL         "", IDC_EDIT, RICHEDIT_CLASS,  WS_VSCROLL | WS_TABSTOP | WS_BORDER | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | ES_DISABLENOSCROLL, 82,102,407,252
+    CONTROL         "", IDC_SHOWHIDE,"MButtonClass", WS_TABSTOP,7,7,16,14
+    EDITTEXT        IDC_FIND_TEXT,25,8,380,12,ES_AUTOHSCROLL
+    CONTROL         "", IDC_TOOLBAR,TOOLBARCLASSNAME, WS_TABSTOP | TBSTYLE_FLAT | TBSTYLE_TOOLTIPS | CCS_NOPARENTALIGN | CCS_NODIVIDER  | CCS_NORESIZE,413,7,76,20
+    LISTBOX         IDC_LIST_CONTACTS,7,27,73,327, WS_TABSTOP | LBS_NOINTEGRALHEIGHT | WS_BORDER | WS_VSCROLL | LBS_SORT
+    CONTROL         "",IDC_SPLITTERV,WC_STATIC,SS_ENHMETAFILE,80,27,2,338
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_INM                 ICON                    "icons\\Incom.ico"
+IDI_OUTM                ICON                    "icons\\Outg.ico"
+IDI_SHOW                ICON                    "icons\\plus.ico"
+IDI_HIDE                ICON                    "icons\\minus.ico"
+IDI_FINDNEXT            ICON                    "icons\\FindNext.ico"
+IDI_FINDPREV            ICON                    "icons\\FindPrev.ico"
+IDI_CONFIG              ICON                    "icons\\Config.ico"
+IDI_ERASE               ICON                    "icons\\Erase.ico"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
