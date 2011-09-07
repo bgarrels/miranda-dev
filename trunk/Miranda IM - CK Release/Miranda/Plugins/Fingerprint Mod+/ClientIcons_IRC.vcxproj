@@ -52,8 +52,7 @@
     <Link>
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
       <NoEntryPoint>true</NoEntryPoint>
     </Link>
     <Bscmake />
