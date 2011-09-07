@@ -21,6 +21,9 @@ Microsoft Visual C++ 2010 Redistributable Package
 Changelog
 =========
 
+--- 1.0.0.3 ---
+* fixed bad decoding characters from clipboard
+
 --- 1.0.0.2 ---
 * increased size of few labels in options
 
