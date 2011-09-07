@@ -21,7 +21,8 @@
 #include <map>
 #include <list>
 
-#define MIRANDA_VER		0x0700
+#define MIRANDA_VER		0x0900
+#define MIRANDA_CUSTOM_LP
 
 #include <newpluginapi.h>
 #include <m_clist.h>

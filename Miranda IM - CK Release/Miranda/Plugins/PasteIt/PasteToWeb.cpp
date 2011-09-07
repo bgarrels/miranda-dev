@@ -276,15 +276,16 @@ void PasteToWeb::FromClipboard()
 		HANDLE obj = GetClipboardData(CF_UNICODETEXT);
 		if(obj != NULL)
 		{
-			LPCWSTR wStr = (LPCWSTR)obj; 
+			LPCWSTR wStr = (LPCWSTR)GlobalLock(obj); 
 			str.append(wStr, wStr + wcslen(wStr));
+			GlobalUnlock(obj);
 			// Sometimes clipboard CF_UNICODETEXT format returns only 2 characters,
 			// to fix this I check if CF_TEXT contains more characters,
 			// if this is true, this mean that CF_UNICODETEXT is invalid.
 			obj = GetClipboardData(CF_TEXT);
 			if(obj != NULL)
 			{
-				LPCSTR cStr = (LPCSTR)obj; 
+				LPCSTR cStr = (LPCSTR)GlobalLock(obj); 
 				if(strlen(cStr) > str.length())
 				{
 					str = L"";
@@ -292,6 +293,7 @@ void PasteToWeb::FromClipboard()
 					str.append(wStr, wStr + wcslen(wStr));
 					mir_free(wStr);
 				}
+				GlobalUnlock(obj);
 			}
 		}
 		else 
@@ -299,17 +301,18 @@ void PasteToWeb::FromClipboard()
 			obj = GetClipboardData(CF_TEXT);
 			if(obj != NULL)
 			{
-				LPCSTR cStr = (LPCSTR)obj; 
+				LPCSTR cStr = (LPCSTR)GlobalLock(obj); 
 				LPWSTR wStr = mir_a2u_cp(cStr, CP_ACP);
 				str.append(wStr, wStr + wcslen(wStr));
 				mir_free(wStr);
+				GlobalUnlock(obj);
 			}
 			else
 			{
 				obj = GetClipboardData(CF_HDROP);
 				if(obj != NULL)
 				{
-					LPDROPFILES df = (LPDROPFILES) obj;
+					LPDROPFILES df = (LPDROPFILES) GlobalLock(obj);
 					isFile = 1;
 					if(df->fWide)
 					{
@@ -341,6 +344,7 @@ void PasteToWeb::FromClipboard()
 							error = TranslateT("You can only paste 1 file");
 						}
 					}
+					GlobalUnlock(obj);
 				}
 			}
 		}

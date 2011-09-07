@@ -31,7 +31,7 @@ PasteToWeb* pasteToWebs[PasteToWeb::pages];
 std::map<HANDLE, HWND>* contactWindows;
 DWORD gMirandaVersion;
 
-extern HINSTANCE hInst;
+HINSTANCE hInst;
 HANDLE hModulesLoaded, hTabsrmmButtonPressed;
 HANDLE g_hNetlibUser;
 HANDLE hPrebuildContactMenu;
@@ -41,6 +41,9 @@ HGENMENU hWebPageMenus[PasteToWeb::pages];
 HANDLE hMainIcon;
 HANDLE hOptionsInit;
 HANDLE hWindowEvent = NULL;
+struct MM_INTERFACE mmi;
+XML_API xi = {0};
+int hLangpack;
 
 #define MODULE				"PasteIt"
 #define FROM_CLIPBOARD 10
@@ -62,8 +65,11 @@ PLUGININFOEX pluginInfo={
 	MIID_PASTEIT
 };
 
-MM_INTERFACE mmi = {0};
-XML_API xi = {0};
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
+{
+	hInst = hinstDLL;
+	return TRUE;
+}
 
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {
@@ -383,7 +389,7 @@ void InitIcolib()
 	GetModuleFileName(hInst, stzFile, MAX_PATH);
 	
 	sid.pszName = "PasteIt_main";
-	sid.ptszDescription = TranslateT("Paste It");
+	sid.ptszDescription = LPGENT("Paste It");
 	sid.iDefaultIndex = -IDI_MENU;
 	hMainIcon = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
 }
@@ -537,6 +543,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	pluginLink = link;
 	mir_getMMI(&mmi);
 	mir_getXI(&xi);
+	mir_getLP(&pluginInfo);
 	NETLIBUSER nlu = {0};
 	nlu.cbSize = sizeof(nlu);
   	nlu.flags = NUF_TCHAR | NUF_OUTGOING | NUF_HTTPCONNS;
