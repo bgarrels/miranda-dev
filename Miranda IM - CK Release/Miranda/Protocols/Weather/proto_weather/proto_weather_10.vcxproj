@@ -70,8 +70,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <NoEntryPoint>true</NoEntryPoint>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
       <ImportLibrary>
       </ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
