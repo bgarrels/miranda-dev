@@ -387,18 +387,18 @@ return FALSE;
 
 int OptInit(WPARAM wParam, LPARAM lParam)
 {
- 	OPTIONSDIALOGPAGE odp = {0};
+	OPTIONSDIALOGPAGE odp = {0};
 
 	ZeroMemory(&odp, sizeof(odp));
 	odp.cbSize = sizeof(odp);
-    odp.position = 100000000;
-    odp.hInstance = hInst;
-    odp.flags = ODPF_TCHAR | ODPF_BOLDGROUPS;
-    odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_UPDATENOTIFY);
-    odp.ptszGroup = _T("Events");
-    odp.ptszTitle = _T("Pack Updater");
-    odp.pfnDlgProc = UpdateNotifyOptsProc;
-    CallService(MS_OPT_ADDPAGE, wParam, (LPARAM)&odp);
+	odp.position = 100000000;
+	odp.hInstance = hInst;
+	odp.flags = ODPF_TCHAR | ODPF_BOLDGROUPS;
+	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_UPDATENOTIFY);
+	odp.ptszGroup = _T("Events");
+	odp.ptszTitle = _T("Pack Updater");
+	odp.pfnDlgProc = UpdateNotifyOptsProc;
+	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM)&odp);
 	if (ServiceExists(MS_POPUP_ADDPOPUP))
 	{
 		odp.pszTemplate = MAKEINTRESOURCEA(IDD_POPUP);
@@ -407,5 +407,5 @@ int OptInit(WPARAM wParam, LPARAM lParam)
 		odp.pfnDlgProc = DlgPopUpOpts;
 		CallService(MS_OPT_ADDPAGE,wParam,(LPARAM)&odp);
 	}
-    return 0;
+	return 0;
 }
