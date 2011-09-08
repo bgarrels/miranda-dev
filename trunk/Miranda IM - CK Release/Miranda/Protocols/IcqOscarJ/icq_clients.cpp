@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_clients.cpp $
-// Revision       : $Revision: 13324 $
-// Last change on : $Date: 2011-01-23 16:58:59 +0100 (So, 23. Jan 2011) $
-// Last change by : $Author: borkra $
+// Revision       : $Revision: 13847 $
+// Last change on : $Date: 2011-09-07 21:12:32 +0200 (Mi, 07. Sep 2011) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -151,6 +151,7 @@ const capstr capQipIphone = {0x60, 0xDE, 0x5C, 0x8A, 0xDF, 0x8C, 0x4E, 0x1D, 0xA
 const capstr capQipMobile = {0xB0, 0x82, 0x62, 0xF6, 0x7F, 0x7C, 0x45, 0x61, 0xAD, 0xC1, 0x1C, 0x6D, 0x75, 0x70, 0x5E, 0xC5};
 const capstr capQipInfium = {0x7C, 0x73, 0x75, 0x02, 0xC3, 0xBE, 0x4F, 0x3E, 0xA6, 0x9F, 0x01, 0x53, 0x13, 0x43, 0x1E, 0x1A};
 const capstr capQip2010   = {0x7A, 0x7B, 0x7C, 0x7D, 0x7E, 0x7F, 0x0A, 0x03, 0x0B, 0x04, 0x01, 0x53, 0x00, 0x00, 0x00, 0x00};
+const capstr capQip2012   = {0x7F, 0x7F, 0x7C, 0x7D, 0x7E, 0x7F, 0x0A, 0x03, 0x0B, 0x04, 0x01, 0x53, 0x13, 0x43, 0x1E, 0x1A};
 const capstr capIm2       = {0x74, 0xED, 0xC3, 0x36, 0x44, 0xDF, 0x48, 0x5B, 0x8B, 0x1C, 0x67, 0x1A, 0x1F, 0x86, 0x09, 0x9F}; // IM2 Ext Msg
 const capstr capQutIm     = {'q', 'u', 't', 'i', 'm', 0x30, 0x2e, 0x31, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 const capstr capBayan     = {'b', 'a', 'y', 'a', 'n', 'I', 'C', 'Q', 0, 0, 0, 0, 0, 0, 0, 0};
@@ -545,6 +546,19 @@ const char* CIcqProto::detectUserClient(HANDLE hContact, int nIsICQ, WORD wUserC
 				char ver[10];
 
 				strcpy(szClientBuf, "QIP 2010");
+				if (dwFT1)
+				{	// add build
+					null_snprintf(ver, 10, " (%d)", dwFT1);
+					strcat(szClientBuf, ver);
+				}
+
+				szClient = szClientBuf;
+			}
+			else if (MatchCapability(caps, wLen, &capQip2012, 12))
+			{
+				char ver[10];
+
+				strcpy(szClientBuf, "QIP 2012");
 				if (dwFT1)
 				{	// add build
 					null_snprintf(ver, 10, " (%d)", dwFT1);
