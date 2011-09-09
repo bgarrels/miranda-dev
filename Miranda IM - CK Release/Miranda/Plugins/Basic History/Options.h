@@ -1,0 +1,60 @@
+/*
+Basic History plugin
+Copyright (C) 2011 Krzysztof Kral
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation version 2
+of the License.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#pragma once
+class Options
+{
+public:
+	Options();
+	~Options();
+	static int InitOptions(WPARAM wParam, LPARAM lParam);
+
+	static INT_PTR CALLBACK DlgProcOptsMain(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
+	static INT_PTR CALLBACK DlgProcOptsGroupList(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
+	static INT_PTR CALLBACK DlgProcOptsMessages(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
+	static INT_PTR CALLBACK DlgProcOptsSearching(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
+
+	static Options *instance;
+	void Save();
+	void Load();
+
+	bool showContacts, groupNewOnTop, groupShowEvents, groupShowTime, groupShowName, groupShowMessage;
+	bool messagesNewOnTop, messagesShowDate, messagesShowSec, messagesShowName, messagesShowEvents, messagesUseSmileys;
+	bool searchForInList, searchForInMess, searchMatchCase, searchMatchWhole, searchOnlyIn, searchOnlyOut, searchOnlyGroup;
+	int groupMessageLen, groupTime, groupMessagesNumber;
+
+	enum Fonts
+	{
+		OutTimestamp = 0,
+		InTimestamp,
+		OutName,
+		InName,
+		OutMessages,
+		InMessages,
+	};
+
+	enum Colors
+	{
+		OutBackground = 0,
+		InBackground,
+	};
+
+	COLORREF GetFont(Fonts fontId, PLOGFONT font);
+	COLORREF GetColor(Colors colorId);
+};
+

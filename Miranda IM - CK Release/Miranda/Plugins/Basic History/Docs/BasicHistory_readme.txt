@@ -19,6 +19,14 @@ Microsoft Visual C++ 2010 Redistributable Package
 Changelog
 =========
 
+--- 1.0.0.3 ---
+* fixed clicking URLs
++ added deleting history
++ added option pages
++ added context menu
++ added menu to open srmm message window
++ special context menu to links
+
 --- 1.0.0.2 ---
 + added toolbar
 + more search options

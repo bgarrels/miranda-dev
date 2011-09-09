@@ -44,6 +44,8 @@ private:
 	void ConfigToolbarClicked(LPNMTOOLBAR lpnmTB);
 	void DeleteToolbarClicked(LPNMTOOLBAR lpnmTB);
 	void Delete(int what);
+	void ContactChanged(bool sync = false);
+	void GroupImagesChanged();
 
 	static std::map<HANDLE, HistoryWindow*> windows;
 	static std::vector<HistoryWindow*> freeWindows;
@@ -61,12 +63,16 @@ private:
 	LONG listOryginalPos;
 	bool isLoading;
 	Searcher searcher;
+	bool isGroupImages;
+	HIMAGELIST himlSmall, himlNone;
 public:
 	~HistoryWindow();
 	static void Deinit();
 	static void Open(HANDLE hContact);
 	static void Close(HANDLE hContact);
 	static int FontsChanged(WPARAM wParam, LPARAM lParam);
+	static void OptionsGroupChanged();
+	static void OptionsSearchingChanged();
 	void Show();
 	void Focus();
 
