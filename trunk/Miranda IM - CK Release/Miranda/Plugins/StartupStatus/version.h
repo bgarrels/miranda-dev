@@ -8,7 +8,7 @@
 #define __MAJOR_VERSION				0
 #define __MINOR_VERSION				8
 #define __RELEASE_NUM				0
-#define __BUILD_NUM					41
+#define __BUILD_NUM					43
 
 // minimal MirandaIM version number, with which this plugin supposed to work
 #define __PROD_MAJOR_VERSION		0
@@ -25,7 +25,7 @@
 #define __AUTHOR					"P Boon"
 #define __AUTHOREMAIL				"unregistered@users.sourceforge.net"
 #define __AUTHORWEB					"http://www.miranda-im.org/"
-#define __COPYRIGHT					"(c) 2003-08 P. Boon, 2008-10 George Hazan"
+#define __COPYRIGHT					"(c) 2003-08 P. Boon, 2008-11 George Hazan"
 
 // other stuff for Version resource
 #define __STRINGIFY_IMPL(x)			#x
