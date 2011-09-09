@@ -1,6 +1,6 @@
 #ifndef _BUILDNUMBER_
 #define BUILDNUMBER 0
-#define __FILEVERSION_STRING 0,2,3,8
-#define __VERSION_STRING "0.2.3.8"
-#define __VERSION_DWORD 0x20308
+#define __FILEVERSION_STRING 0,2,3,9
+#define __VERSION_STRING "0.2.3.9"
+#define __VERSION_DWORD 0x20309
 #endif //_BUILDNUMBER_
