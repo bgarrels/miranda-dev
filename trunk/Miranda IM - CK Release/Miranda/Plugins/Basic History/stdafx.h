@@ -21,6 +21,7 @@
 #include <commdlg.h>
 #include <tom.h>
 #include <richole.h>
+#include <Shlobj.h>
 
 #include <map>
 #include <vector>
@@ -45,11 +46,12 @@
 #include <m_options.h>
 #include <m_fontservice.h>
 #include <m_hotkeys.h>
+#include <m_message.h>
 
 #include <win2k.h>
 
-#include "m_updater.h"
-#include "m_smileyadd.h"
+#include "sdk/m_updater.h"
+#include "sdk/m_smileyadd.h"
 
 #define HISTORY_HK_FIND 100
 #define HISTORY_HK_FINDNEXT 101
@@ -60,3 +62,4 @@
 #define HISTORY_HK_ONLYIN 106
 #define HISTORY_HK_ONLYOUT 107
 #define HISTORY_HK_DELETE 108
+#define HISTORY_HK_ONLYGROUP 109
