@@ -16,9 +16,9 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-#include "commonstatus.h"
+#include "../commonstatus.h"
 #include "startupstatus.h"
-#include "resource.h"
+#include "../resource.h"
 
 // for db cleanup
 static int settingIndex;
@@ -119,10 +119,11 @@ static char* GetCMDL(TSettingsList& protoSettings)
 	_snprintf(cmdl, strlen(path) + 4, "\"%s\" ", path);
 
 	char* args = GetCMDLArguments(protoSettings);
-	cmdl = ( char* )realloc(cmdl, strlen(cmdl) + strlen(args) + 1);
-	
-	strcat(cmdl, args);
-	free(args);
+	if ( args ) {
+		cmdl = ( char* )realloc(cmdl, strlen(cmdl) + strlen(args) + 1);
+		strcat(cmdl, args);
+		free(args);
+	}
 	return cmdl;
 }
 
