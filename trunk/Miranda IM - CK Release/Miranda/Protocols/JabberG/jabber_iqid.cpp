@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13848 $
-Last change on : $Date: 2011-09-10 02:40:44 +0200 (Sa, 10. Sep 2011) $
+Revision       : $Revision: 13856 $
+Last change on : $Date: 2011-09-10 13:23:46 +0200 (Sa, 10. Sep 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -76,6 +76,9 @@ void CJabberProto::OnIqResultServerDiscoInfo( HXML iqNode )
 							break;
 		}	}	}	}	}
 
+		if (m_ThreadInfo->jabberServerCaps & JABBER_CAPS_PRIVACY_LISTS)
+			QueryPrivacyLists();
+		
 		OnProcessLoginRq( m_ThreadInfo, JABBER_LOGIN_SERVERINFO);
 }	}
 
@@ -195,8 +198,6 @@ void CJabberProto::OnLoggedIn()
 	iqId = SerialNext();
 	IqAdd( iqId, IQ_PROC_NONE, &CJabberProto::OnIqResultServerDiscoInfo );
 	m_ThreadInfo->send( XmlNodeIq( _T("get"), iqId, _A2T(m_ThreadInfo->server)) << XQUERY( _T(JABBER_FEAT_DISCO_INFO)));
-
-	QueryPrivacyLists( m_ThreadInfo );
 
 	char szServerName[ sizeof(m_ThreadInfo->server) ];
 	if ( JGetStaticString( "LastLoggedServer", NULL, szServerName, sizeof(szServerName)))
