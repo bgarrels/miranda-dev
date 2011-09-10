@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13533 $
-Last change on : $Date: 2011-03-31 22:32:14 +0400 (Чт, 31 мар 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13856 $
+Last change on : $Date: 2011-09-10 13:23:46 +0200 (Sa, 10. Sep 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -36,7 +36,7 @@ Last change by : $Author: george.hazan $
 #include <m_hotkeys.h>
 #include <m_icolib.h>
 
-#include "m_toolbar.h"
+#include "sdk/m_toolbar.h"
 
 #define MENUITEM_LASTSEEN	1
 #define MENUITEM_SERVER		2
@@ -1053,8 +1053,10 @@ void CJabberProto::CheckMenuItems()
 	JCallService( MS_CLIST_MODIFYMENUITEM, ( WPARAM )m_hMenuBookmarks, ( LPARAM )&clmi );
 	JCallService( MS_CLIST_MODIFYMENUITEM, ( WPARAM )m_hMenuNotes, ( LPARAM )&clmi );
 
-	clmi.flags = CMIM_FLAGS | (( m_menuItemsStatus ) ? 0 : CMIF_HIDDEN);
+	clmi.flags = CMIM_FLAGS | (( m_ThreadInfo && ( m_ThreadInfo->jabberServerCaps & JABBER_CAPS_PRIVACY_LISTS)) ? 0 : CMIF_HIDDEN );
 	JCallService( MS_CLIST_MODIFYMENUITEM, ( WPARAM )m_hPrivacyMenuRoot, ( LPARAM )&clmi );
+	
+	clmi.flags = CMIM_FLAGS | ( m_menuItemsStatus ? 0 : CMIF_HIDDEN);
 	JCallService( MS_CLIST_MODIFYMENUITEM, ( WPARAM )m_hMenuPriorityRoot, ( LPARAM )&clmi );
 
 	if ( !m_bPepSupported )
