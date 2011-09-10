@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13772 $
-Last change on : $Date: 2011-08-14 23:41:15 +0200 (So, 14. Aug 2011) $
-Last change by : $Author: Michael.Kunz@s2005.TU-Chemnitz.de $
+Revision       : $Revision: 13848 $
+Last change on : $Date: 2011-09-10 02:40:44 +0200 (Sa, 10. Sep 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -554,7 +554,7 @@ BOOL CJabberProto::OnRosterPushRequest( HXML, CJabberIqInfo *pInfo )
 						JabberContactListCreateGroup( item->group );
 						DBWriteContactSettingTString( hContact, "CList", "Group", item->group );
 					}
-					else if (m_options.IgnoreRosterGroups == FALSE)
+					else if (!m_options.IgnoreRosterGroups)
 						DBDeleteContactSetting( hContact, "CList", "Group" );
 				}
 				mir_free( nick );
