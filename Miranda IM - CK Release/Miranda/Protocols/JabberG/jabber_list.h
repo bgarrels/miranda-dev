@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13774 $
-Last change on : $Date: 2011-08-15 12:42:54 +0200 (Mo, 15. Aug 2011) $
-Last change by : $Author: Michael.Kunz@s2005.TU-Chemnitz.de $
+Revision       : $Revision: 13833 $
+Last change on : $Date: 2011-09-04 18:48:36 +0200 (So, 04. Sep 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -191,9 +191,16 @@ struct JABBER_LIST_ITEM
 
 struct JABBER_HTTP_AVATARS
 {
-	JABBER_HTTP_AVATARS * Next;
+	char * Url;
 	HANDLE hContact;
-	TCHAR * Url;
+
+	JABBER_HTTP_AVATARS(const TCHAR* tUrl, HANDLE thContact)
+		: Url(mir_t2a(tUrl)), hContact(thContact) {}
+
+	~JABBER_HTTP_AVATARS() { mir_free(Url); }
+
+	static int compare(const JABBER_HTTP_AVATARS *p1, const JABBER_HTTP_AVATARS *p2)
+	{ return strcmp(p1->Url, p2->Url); }
 };
 
 #endif

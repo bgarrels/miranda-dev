@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13651 $
-Last change on : $Date: 2011-06-03 02:50:37 +0200 (Fr, 03. Jun 2011) $
+Revision       : $Revision: 13837 $
+Last change on : $Date: 2011-09-04 23:20:52 +0200 (So, 04. Sep 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -1317,7 +1317,6 @@ void CJabberProto::OnProcessMessage( HXML node, ThreadData* info )
 	}
 
 	for ( int i = 0; ( xNode = xmlGetChild( node, i )) != NULL; i++ ) {
-		// xmlGetNthChild() nth parameter starts from 1, not from 0
 		xNode = xmlGetNthChild( node, _T("x"), i + 1 );
 		if ( xNode == NULL ) {
 			xNode = xmlGetNthChild( node, _T("user:x"), i + 1 );
@@ -1432,7 +1431,6 @@ void CJabberProto::OnProcessMessage( HXML node, ThreadData* info )
 			if (( n = xmlGetChild( xNode , "password" )) != NULL )
 				invitePassword = xmlGetText( n );
 		}
-		// temporary disabled due to security holes (roster modification), infinite loops and invalid _tcscmp() usage
  		else if ( !_tcscmp( ptszXmlns, _T(JABBER_FEAT_ROSTER_EXCHANGE)) && 
  			item != NULL && (item->subscription == SUB_BOTH || item->subscription == SUB_TO)) {
 			TCHAR chkJID[512] = _T("@");

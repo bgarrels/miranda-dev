@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13596 $
-Last change on : $Date: 2011-04-15 23:07:23 +0400 (Пт, 15 апр 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13829 $
+Last change on : $Date: 2011-09-04 04:19:45 +0200 (So, 04. Sep 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -52,7 +52,7 @@ static char szVersion[200] = "";
 
 PLUGININFOEX pluginInfo = {
 	sizeof( PLUGININFOEX ),
-	__PLUGIN_NAME,
+	"Jabber Protocol",
 	__VERSION_DWORD,
 	szVersion,
 	"George Hazan, Maxim Mluhov, Victor Pavlychko, Artem Shpynov, Michael Stepura",
@@ -61,11 +61,11 @@ PLUGININFOEX pluginInfo = {
 	"http://miranda-im.org",
 	UNICODE_AWARE,
 	0,
-    #if defined( _UNICODE )
-    {0x144e80a2, 0xd198, 0x428b, {0xac, 0xbe, 0x9d, 0x55, 0xda, 0xcc, 0x7f, 0xde}} // {144E80A2-D198-428b-ACBE-9D55DACC7FDE}
-    #else
-    {0x74eb8cce, 0xc3e7, 0x4c32, {0x88, 0x9f, 0xd, 0xe7, 0xc8, 0x82, 0xbf, 0x7f}} // {74EB8CCE-C3E7-4c32-889F-0DE7C882BF7F}
-    #endif
+	#if defined( _UNICODE )
+	{0x144e80a2, 0xd198, 0x428b, {0xac, 0xbe, 0x9d, 0x55, 0xda, 0xcc, 0x7f, 0xde}} // {144E80A2-D198-428b-ACBE-9D55DACC7FDE}
+	#else
+	{0x74eb8cce, 0xc3e7, 0x4c32, {0x88, 0x9f, 0xd, 0xe7, 0xc8, 0x82, 0xbf, 0x7f}} // {74EB8CCE-C3E7-4c32-889F-0DE7C882BF7F}
+	#endif
 };
 
 MM_INTERFACE    mmi;
@@ -185,33 +185,35 @@ static int OnModulesLoaded( WPARAM, LPARAM )
 	// init fontservice for info frame
 	FontID fontid = {0};
 	fontid.cbSize = sizeof(fontid);
-	lstrcpyA(fontid.group, "Jabber");
-	lstrcpyA(fontid.dbSettingsGroup, GLOBAL_SETTING_MODULE);
+	strcpy(fontid.group, "Jabber");
+	strcpy(fontid.dbSettingsGroup, GLOBAL_SETTING_MODULE);
+	strcpy(fontid.backgroundGroup, "Jabber");
+	strcpy(fontid.backgroundName,"Background");
 	fontid.flags = FIDF_DEFAULTVALID;
 
 	fontid.deffontsettings.charset = DEFAULT_CHARSET;
 	fontid.deffontsettings.colour = GetSysColor(COLOR_WINDOWTEXT);
-	fontid.deffontsettings.size = -13;
-	lstrcpyA(fontid.deffontsettings.szFace, "Verdana");
+	fontid.deffontsettings.size = -11;
+	lstrcpyA(fontid.deffontsettings.szFace, "MS Shell Dlg");
 	fontid.deffontsettings.style = 0;
 
-	lstrcpyA(fontid.name, "Frame title");
-	lstrcpyA(fontid.prefix, "fntFrameTitle");
+	strcpy(fontid.name, "Frame title");
+	strcpy(fontid.prefix, "fntFrameTitle");
 	fontid.deffontsettings.style = DBFONTF_BOLD;
 	CallService(MS_FONT_REGISTER, (WPARAM)&fontid, 0);
 
-	lstrcpyA(fontid.name, "Frame text");
-	lstrcpyA(fontid.prefix, "fntFrameClock");
+	strcpy(fontid.name, "Frame text");
+	strcpy(fontid.prefix, "fntFrameClock");
 	fontid.deffontsettings.style = 0;
 	CallService(MS_FONT_REGISTER, (WPARAM)&fontid, 0);
 
 	ColourID colourid = {0};
 	colourid.cbSize = sizeof(colourid);
-	lstrcpyA(colourid.group, "Jabber");
-	lstrcpyA(colourid.dbSettingsGroup, GLOBAL_SETTING_MODULE);
+	strcpy(colourid.group, "Jabber");
+	strcpy(colourid.dbSettingsGroup, GLOBAL_SETTING_MODULE);
 
-	lstrcpyA(colourid.name, "Background");
-	lstrcpyA(colourid.setting, "clFrameBack");
+	strcpy(colourid.name, "Background");
+	strcpy(colourid.setting, "clFrameBack");
 	colourid.defcolour = GetSysColor(COLOR_WINDOW);
 	CallService(MS_COLOUR_REGISTER, (WPARAM)&colourid, 0);
 
@@ -256,7 +258,7 @@ extern "C" int __declspec( dllexport ) Load( PLUGINLINK *link )
 	CallService( MS_UTILS_GETCOUNTRYLIST, ( WPARAM )&g_cbCountries, ( LPARAM )&g_countries );
 	
 	setlocale(LC_ALL, "");
-	mir_snprintf( szVersion, SIZEOF( szVersion ), Translate("Jabber protocol plugin for Miranda IM. Mod for Mataes Pack."));
+	mir_snprintf( szVersion, sizeof( szVersion ), Translate("Jabber protocol plugin for Miranda IM (%s)"), __DATE__ );
 
 	pcli = ( CLIST_INTERFACE* )CallService(MS_CLIST_RETRIEVE_INTERFACE, 0, (LPARAM)hInst);
 

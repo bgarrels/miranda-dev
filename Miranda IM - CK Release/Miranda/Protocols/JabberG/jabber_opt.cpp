@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13772 $
-Last change on : $Date: 2011-08-14 23:41:15 +0200 (So, 14. Aug 2011) $
-Last change by : $Author: Michael.Kunz@s2005.TU-Chemnitz.de $
+Revision       : $Revision: 13848 $
+Last change on : $Date: 2011-09-10 02:40:44 +0200 (Sa, 10. Sep 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -741,7 +741,7 @@ private:
 
 	void RefreshServers( HXML node )
 	{
-		m_gotservers = node ? true : false;
+		m_gotservers = node != NULL;
 
 		TCHAR *server = m_cbServer.GetText();
 		bool bDropdown = m_cbServer.GetDroppedState();
@@ -773,28 +773,29 @@ private:
 		HWND hwnd = wnd->GetHwnd();
 		bool bIsError = true;
 
+		if (!IsWindow(hwnd)) return;
+
 		NETLIBHTTPREQUEST request = {0};
 		request.cbSize = sizeof(request);
 		request.requestType = REQUEST_GET;
-		request.flags = NLHRF_GENERATEHOST|NLHRF_SMARTREMOVEHOST|NLHRF_SMARTAUTHHEADER|NLHRF_HTTP11;
+		request.flags = NLHRF_REDIRECT | NLHRF_HTTP11;
 		request.szUrl = "http://xmpp.org/services/services.xml";
 
 		NETLIBHTTPREQUEST *result = (NETLIBHTTPREQUEST *)CallService(MS_NETLIB_HTTPTRANSACTION, (WPARAM)wnd->GetProto()->m_hNetlibUser, (LPARAM)&request);
-		if ( result && IsWindow(hwnd)) {
+		if ( result ) {
 			if ( result->resultCode == 200 && result->dataLength && result->pData ) {
 				TCHAR* buf = mir_a2t( result->pData );
 				XmlNode node( buf, NULL, NULL );
 				if ( node ) {
 					HXML queryNode = xmlGetChild( node, _T("query") );
-					if ( queryNode && IsWindow(hwnd)) {
-						SendMessage(hwnd, WM_JABBER_REFRESH, 0, (LPARAM)queryNode);
-						bIsError = false;
-				}	}
+					SendMessage(hwnd, WM_JABBER_REFRESH, 0, (LPARAM)queryNode);
+					bIsError = false;
+				}
 				mir_free( buf );
-		}	}
-
-		if ( result )
+			}	
 			CallService(MS_NETLIB_FREEHTTPREQUESTSTRUCT, 0, (LPARAM)result);
+		}
+
 		if ( bIsError )
 			SendMessage(hwnd, WM_JABBER_REFRESH, 0, (LPARAM)NULL);
 	}
@@ -1857,8 +1858,11 @@ protected:
 			m_proto->JDeleteSetting(NULL, "LoginPassword");
 		}
 
-		switch (m_cbType.GetItemData(m_cbType.GetCurSel())) {
+		switch (m_cbType.GetItemData(m_cbType.GetCurSel()))
+		{
 		case ACC_FBOOK:
+			m_proto->m_options.IgnoreRosterGroups = TRUE;
+
 		case ACC_PUBLIC:
 			m_proto->m_options.UseSSL = m_proto->m_options.UseTLS = FALSE;
 			break;
@@ -2203,7 +2207,7 @@ void CJabberDlgAccMgrUI::setupSMS()
 
 void CJabberDlgAccMgrUI::RefreshServers( HXML node )
 {
-	m_gotservers = node ? true : false;
+	m_gotservers = node != NULL;
 
 	TCHAR *server = m_cbServer.GetText();
 	bool bDropdown = m_cbServer.GetDroppedState();

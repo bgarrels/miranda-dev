@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13774 $
-Last change on : $Date: 2011-08-15 12:42:54 +0200 (Mo, 15. Aug 2011) $
-Last change by : $Author: Michael.Kunz@s2005.TU-Chemnitz.de $
+Revision       : $Revision: 13848 $
+Last change on : $Date: 2011-09-10 02:40:44 +0200 (Sa, 10. Sep 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -384,9 +384,8 @@ void CJabberProto::OnIqResultGetRoster( HXML iqNode, CJabberIqInfo* pInfo )
 
 	TCHAR* nick;
 	int i;
-	SortedList chatRooms = {0};
-	chatRooms.increment = 10;
-	JABBER_HTTP_AVATARS * httpavatars = 0;
+	LIST<void> chatRooms(10);
+	OBJLIST<JABBER_HTTP_AVATARS> *httpavatars = new OBJLIST<JABBER_HTTP_AVATARS>(20, JABBER_HTTP_AVATARS::compare);
 
 	for ( i=0; ; i++ ) {
 		BOOL bIsTransport=FALSE;
@@ -481,7 +480,7 @@ void CJabberProto::OnIqResultGetRoster( HXML iqNode, CJabberIqInfo* pInfo )
 			CallServiceSync( MS_GC_NEWSESSION, 0, ( LPARAM )&gcw );
 
 			DBDeleteContactSetting( hContact, "CList", "Hidden" );
-			li.List_Insert( &chatRooms, hContact, chatRooms.realCount );
+			chatRooms.insert( hContact );
 		} else
 		{
 			UpdateSubscriptionInfo(hContact, item);
@@ -499,7 +498,7 @@ void CJabberProto::OnIqResultGetRoster( HXML iqNode, CJabberIqInfo* pInfo )
 			}
 			else DBWriteContactSettingTString( hContact, "CList", "Group", item->group );
 		}
-		else if (m_options.IgnoreRosterGroups == FALSE)
+		else if (!m_options.IgnoreRosterGroups)
 			DBDeleteContactSetting( hContact, "CList", "Group" );
 		if ( hContact != NULL ) {
 			if ( bIsTransport)
@@ -510,17 +509,13 @@ void CJabberProto::OnIqResultGetRoster( HXML iqNode, CJabberIqInfo* pInfo )
 
 		const TCHAR* imagepath = xmlGetAttrValue(itemNode, _T("vz:img"));
 		if (imagepath)
-		{
-			JABBER_HTTP_AVATARS * ha = (JABBER_HTTP_AVATARS*)mir_alloc(sizeof(JABBER_HTTP_AVATARS));
-			ha->Next = httpavatars;
-			httpavatars = ha;
-			ha->hContact = hContact;
-			ha->Url = mir_tstrdup(imagepath);
-		}
+			httpavatars->insert(new JABBER_HTTP_AVATARS(imagepath, hContact));
 	}
 
-	if (httpavatars)
-		JForkThread((JThreadFunc)&CJabberProto::LoadHttpAvatars, httpavatars);
+	if (httpavatars->getCount())
+		JForkThread(&CJabberProto::LoadHttpAvatars, httpavatars);
+	else
+		delete httpavatars;
 
 	// Delete orphaned contacts ( if roster sync is enabled )
 	if ( m_options.RosterSync == TRUE ) {
@@ -564,11 +559,10 @@ void CJabberProto::OnIqResultGetRoster( HXML iqNode, CJabberIqInfo* pInfo )
 	SetServerStatus( m_iDesiredStatus );
 
 	if ( m_options.AutoJoinConferences ) {
-		for ( i=0; i < chatRooms.realCount; i++ )
-			GroupchatJoinByHContact(( HANDLE )chatRooms.items[i], true);
+		for ( i=0; i < chatRooms.getCount(); i++ )
+			GroupchatJoinByHContact(( HANDLE )chatRooms[i], true);
 	}
-	li.List_Destroy( &chatRooms );
-
+	chatRooms.destroy();
 
 	//UI_SAFE_NOTIFY(m_pDlgJabberJoinGroupchat, WM_JABBER_CHECK_ONLINE);
 	//UI_SAFE_NOTIFY(m_pDlgBookmarks, WM_JABBER_CHECK_ONLINE);
@@ -727,6 +721,12 @@ LBL_Ret:
 				DeleteFile( item->photoFileName );
 			replaceStr( item->photoFileName, szAvatarFileName );
 			Log( "Contact's picture saved to " TCHAR_STR_PARAM, szAvatarFileName );
+
+			if (JGetWord( hContact, "Status", ID_STATUS_OFFLINE ) == ID_STATUS_OFFLINE) {
+				char szHashValue[ MAX_PATH ];
+				if ( JGetStaticString( "AvatarHash", hContact, szHashValue, sizeof( szHashValue )))
+					OnIqResultGotAvatar( hContact, o, xmlGetText( m ));
+			}
 		}
 		JFreeVariant( &dbv );
 	}
