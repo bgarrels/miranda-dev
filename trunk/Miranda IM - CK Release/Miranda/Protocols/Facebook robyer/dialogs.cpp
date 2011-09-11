@@ -211,7 +211,7 @@ INT_PTR CALLBACK FBOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM l
 		}
 
 		if (!proto->isOffline())
-		{
+	    {
 			SendMessage(GetDlgItem(hwnd,IDC_UN),EM_SETREADONLY,TRUE,0);
 			SendMessage(GetDlgItem(hwnd,IDC_PW),EM_SETREADONLY,TRUE,0);
 		}
@@ -227,10 +227,10 @@ INT_PTR CALLBACK FBOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM l
 		for(size_t i=0; i<SIZEOF(user_agents); i++)
 		{
 			SendDlgItemMessageA(hwnd,IDC_AGENT,CB_INSERTSTRING,i,
-		reinterpret_cast<LPARAM>(user_agents[i].name));
+        reinterpret_cast<LPARAM>(user_agents[i].name));
 		}
 		SendDlgItemMessage(hwnd, IDC_AGENT, CB_SETCURSEL,
-			DBGetContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_USER_AGENT, 0), 0);
+		    DBGetContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_USER_AGENT, 0), 0);
 
 		LoadDBCheckState(proto, hwnd, IDC_SECURE, FACEBOOK_KEY_FORCE_HTTPS, DEFAULT_FORCE_HTTPS);
 		LoadDBCheckState(proto, hwnd, IDC_CLOSE_WINDOWS, FACEBOOK_KEY_CLOSE_WINDOWS_ENABLE, DEFAULT_CLOSE_WINDOWS_ENABLE);
@@ -262,7 +262,7 @@ INT_PTR CALLBACK FBOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM l
 			MessageBox( hwnd, TranslateT("Note: This option requires restart of Miranda IM to work properly."), proto->m_tszUserName, MB_OK );
 
 		if ((LOWORD(wparam)==IDC_UN || LOWORD(wparam)==IDC_PW || LOWORD(wparam)==IDC_GROUP || LOWORD(wparam)==IDC_COOKIES) &&
-			(HIWORD(wparam)!=EN_CHANGE || (HWND)lparam!=GetFocus()))
+		    (HIWORD(wparam)!=EN_CHANGE || (HWND)lparam!=GetFocus()))
 			return 0;
 		else
 			SendMessage(GetParent(hwnd),PSM_CHANGED,0,0);
@@ -291,7 +291,7 @@ INT_PTR CALLBACK FBOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM l
 				DBDeleteContactSetting(NULL,proto->m_szModuleName,FACEBOOK_KEY_DEF_GROUP);
 
 			DBWriteContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_USER_AGENT,
-				SendDlgItemMessage(hwnd, IDC_AGENT, CB_GETCURSEL, 0, 0));
+			    SendDlgItemMessage(hwnd, IDC_AGENT, CB_GETCURSEL, 0, 0));
 
 			StoreDBCheckState(proto, hwnd, IDC_SECURE, FACEBOOK_KEY_FORCE_HTTPS);
 			StoreDBCheckState(proto, hwnd, IDC_CLOSE_WINDOWS, FACEBOOK_KEY_CLOSE_WINDOWS_ENABLE);
@@ -327,7 +327,7 @@ INT_PTR CALLBACK FBEventsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM lp
 				reinterpret_cast<LPARAM>(Translate(feed_types[i].name)));
 		}
 		SendDlgItemMessage(hwnd, IDC_FEED_TYPE, CB_SETCURSEL,
-			DBGetContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_FEED_TYPE, 0), 0);
+		    DBGetContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_FEED_TYPE, 0), 0);
 
 		LoadDBCheckState(proto, hwnd, IDC_NOTIFICATIONS_ENABLE, FACEBOOK_KEY_EVENT_NOTIFICATIONS_ENABLE, DEFAULT_EVENT_NOTIFICATIONS_ENABLE);
 		LoadDBCheckState(proto, hwnd, IDC_FEEDS_ENABLE, FACEBOOK_KEY_EVENT_FEEDS_ENABLE, DEFAULT_EVENT_FEEDS_ENABLE);
@@ -401,7 +401,7 @@ INT_PTR CALLBACK FBEventsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM lp
 		if ( reinterpret_cast<NMHDR*>(lparam)->code == PSN_APPLY )
 		{
 			DBWriteContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_FEED_TYPE,
-				SendDlgItemMessage(hwnd, IDC_FEEDS_TYPE, CB_GETCURSEL, 0, 0));
+			    SendDlgItemMessage(hwnd, IDC_FEEDS_TYPE, CB_GETCURSEL, 0, 0));
 
 			StoreDBCheckState(proto, hwnd, IDC_NOTIFICATIONS_ENABLE, FACEBOOK_KEY_EVENT_NOTIFICATIONS_ENABLE);
 			StoreDBCheckState(proto, hwnd, IDC_FEEDS_ENABLE, FACEBOOK_KEY_EVENT_FEEDS_ENABLE);

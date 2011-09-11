@@ -201,7 +201,7 @@ void FacebookProto::ProcessFeeds( void* data )
 		
 		if ( (pos2 = post_content.find( "<\\/a>" )) != std::string::npos )
 			nf->text = post_content.substr( pos2, post_content.length() - pos2 );
-		//nf->text = utils::text::source_get_value( &post_content, 2, "<\\/a>",/*<span class=\\\"messageBody\\\">", *//*"<\\/h6"*/ "<form" );
+		nf->text = nf->text.substr(0, nf->text.find("<form"));
 
 		nf->link = utils::text::source_get_value( &rest_content, 2, "href=\\\"", "\\\">" );
 
