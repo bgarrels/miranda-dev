@@ -88,7 +88,7 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 	def_avatar_folder_ = std::string(profile)+"\\"+m_szModuleName;
 	mir_free(profile);
 	hAvatarFolder_ = FoldersRegisterCustomPath(m_szModuleName,"Avatars",
-		def_avatar_folder_.c_str());
+	    def_avatar_folder_.c_str());
 
 	// Set all contacts offline -- in case we crashed
 	SetAllContactStatuses( ID_STATUS_OFFLINE );
@@ -136,14 +136,14 @@ DWORD_PTR FacebookProto::GetCaps( int type, HANDLE hContact )
 		else
 			return PF1_IM | PF1_MODEMSGRECV;
 	case PFLAGNUM_2:
-		return PF2_ONLINE | PF2_IDLE | PF2_INVISIBLE | PF2_SHORTAWAY;
+		return PF2_ONLINE | PF2_INVISIBLE; // | PF2_IDLE | PF2_SHORTAWAY;
 	case PFLAGNUM_3:
 		if ( getByte( FACEBOOK_KEY_SET_MIRANDA_STATUS, 0 ) )
-			return PF2_ONLINE | PF2_SHORTAWAY;
+			return PF2_ONLINE; // | PF2_SHORTAWAY;
 		else
 			return 0;
 	case PFLAGNUM_4:
-		return PF4_FORCEAUTH | PF4_NOCUSTOMAUTH | PF4_SUPPORTIDLE | PF4_IMSENDUTF | PF4_AVATARS | PF4_SUPPORTTYPING | PF4_NOAUTHDENYREASON | PF4_IMSENDOFFLINE;
+		return PF4_FORCEAUTH | PF4_NOCUSTOMAUTH /*| PF4_SUPPORTIDLE*/ | PF4_IMSENDUTF | PF4_AVATARS | PF4_SUPPORTTYPING | PF4_NOAUTHDENYREASON | PF4_IMSENDOFFLINE;
 	case PFLAG_MAXLENOFMESSAGE:
 		return FACEBOOK_MESSAGE_LIMIT;
 	case PFLAG_UNIQUEIDTEXT:
@@ -174,28 +174,29 @@ int FacebookProto::SetStatus( int new_status )
 	// Routing statuses not supported by Facebook
 	switch ( new_status )
 	{
-	case ID_STATUS_FREECHAT:
-		LOG("===== Wanted status: Free For Chat");
-		new_status = ID_STATUS_ONLINE;
+	case ID_STATUS_INVISIBLE:
+	case ID_STATUS_OFFLINE:
+		// No change
 		break;
 
-	case ID_STATUS_DND:
-	case ID_STATUS_NA:
-	case ID_STATUS_OCCUPIED:
-	case ID_STATUS_ONTHEPHONE:
-	case ID_STATUS_OUTTOLUNCH:
-		LOG("===== Wanted status: Some Away");
-		new_status = ID_STATUS_AWAY;
-		break;
-
+	// RM TODO: needed/useful?
 	case ID_STATUS_CONNECTING:
-		LOG("===== Wanted status: Connecting");
 		new_status = ID_STATUS_OFFLINE;
+		break;
+	
+	default:
+		new_status = ID_STATUS_ONLINE;
 		break;
 	}
 
 	int old_status = m_iStatus;
 	m_iDesiredStatus = new_status;
+
+	if ( old_status == ID_STATUS_CONNECTING && new_status != ID_STATUS_OFFLINE )
+	{
+		LOG("===== Status is connecting, no change");
+		return 0;
+	}
 
 	if ( new_status == old_status)
 	{
@@ -203,13 +204,6 @@ int FacebookProto::SetStatus( int new_status )
 		return 0;
 	}
 
-	if ( old_status == ID_STATUS_CONNECTING && new_status != ID_STATUS_OFFLINE )
-	{
-		LOG("===== Status is connecting, no change");
-		return 0;		
-	}
-
-	facy.idle_ = ( new_status != ID_STATUS_ONLINE && new_status != ID_STATUS_OFFLINE );
 	facy.invisible_ = ( new_status == ID_STATUS_INVISIBLE );
 
 	if ( new_status == ID_STATUS_OFFLINE )
@@ -253,16 +247,6 @@ int FacebookProto::SetStatus( int new_status )
 		facy.chat_state( false );
 		facy.buddies.clear( );
 		this->SetAllContactStatuses( ID_STATUS_OFFLINE );
-	}
-	else if ( old_status == ID_STATUS_AWAY )
-	{
-		LOG("===== Old status: Away");
-
-		facy.chat_first_touch_ = true;
-
-		m_iStatus = facy.self_.status_id = new_status;
-		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
-			(HANDLE)old_status,m_iStatus);
 	} else { 
 		LOG("===== New status: Else");
 
@@ -339,7 +323,7 @@ int FacebookProto::OnEvent(PROTOEVENTTYPE event,WPARAM wParam,LPARAM lParam)
 		return OnOptionsInit  (wParam,lParam);
 
 	case EV_PROTO_ONCONTACTDELETED:
-		return OnContactDeleted(wParam,lParam);
+ 		return OnContactDeleted(wParam,lParam);
 	}
 
 	return 1;

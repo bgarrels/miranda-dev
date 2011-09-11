@@ -202,7 +202,6 @@ DWORD facebook_client::choose_security_level( int request_type )
 
 //	case FACEBOOK_REQUEST_API_CHECK:
 //	case FACEBOOK_REQUEST_LOGOUT:
-//	case FACEBOOK_REQUEST_KEEP_ALIVE:
 //	case FACEBOOK_REQUEST_HOME:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
 //	case FACEBOOK_REQUEST_FEEDS:
@@ -226,7 +225,6 @@ int facebook_client::choose_method( int request_type )
 	{
 	case FACEBOOK_REQUEST_LOGIN:
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
-	case FACEBOOK_REQUEST_KEEP_ALIVE:
 	case FACEBOOK_REQUEST_BUDDY_LIST:
 	case FACEBOOK_REQUEST_STATUS_SET:
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
@@ -262,7 +260,6 @@ std::string facebook_client::choose_proto( int request_type )
 //	case FACEBOOK_REQUEST_FEEDS:
 //	case FACEBOOK_REQUEST_RECONNECT:
 //	case FACEBOOK_REQUEST_PROFILE_GET:
-//	case FACEBOOK_REQUEST_KEEP_ALIVE:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
 //	case FACEBOOK_REQUEST_STATUS_SET:
 //	case FACEBOOK_REQUEST_MESSAGE_SEND:
@@ -303,7 +300,6 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 //		return FACEBOOK_SERVER_MOBILE;
 
 //	case FACEBOOK_REQUEST_LOGOUT:
-//	case FACEBOOK_REQUEST_KEEP_ALIVE:
 //	case FACEBOOK_REQUEST_HOME:
 //	case FACEBOOK_REQUEST_PROFILE_GET:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
@@ -336,9 +332,6 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 	case FACEBOOK_REQUEST_LOGOUT:
 		return "/logout.php";
 
-	case FACEBOOK_REQUEST_KEEP_ALIVE:
-		return "/ajax/presence/update.php?__a=1";
-
 	case FACEBOOK_REQUEST_HOME:
 		return "/home.php";
 
@@ -358,7 +351,6 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 	case FACEBOOK_REQUEST_RECONNECT:
 	{
 		std::string action = "/ajax/presence/reconnect.php?__a=1&reason=%s&iframe_loaded=false&post_form_id=%s";
-		//std::string reason = ( this->chat_first_touch_ ) ? FACEBOOK_RECONNECT_LOGIN : FACEBOOK_RECONNECT_KEEP_ALIVE;
 		utils::text::replace_first( &action, "%s", this->chat_reconnect_reason_ );
 		utils::text::replace_first( &action, "%s", this->post_form_id_ );
 		return action;
@@ -386,23 +378,9 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 
 	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 	{
-		std::string action = "/x/%s/0/%s/p_%s=%s";
-		std::string first_time;
+		std::string action = "/x/%s/0/true/p_%s=%s";
 
-		// RM TODO: ?
-		//this->chat_first_touch_ = !this->idle_;
-		
-		if ( this->chat_first_touch_ )
-		{
-			first_time = "true";
-			this->chat_first_touch_ = false;
-			this->chat_reconnect_reason_ = FACEBOOK_RECONNECT_LOGIN;
-		} else {
-			first_time = "false";
-		}
-		
 		utils::text::replace_first( &action, "%s", utils::time::unix_timestamp() );
-		utils::text::replace_first( &action, "%s", first_time );
 		utils::text::replace_first( &action, "%s", self_.user_id );
 		if (this->chat_sequence_num_ == "")
 			this->chat_sequence_num_ = "0";
@@ -828,6 +806,7 @@ bool facebook_client::home( )
 					mir_free( tmessage );
 				}
 
+				// TODO: parse messages directly to contacts
 				str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"messagesCountValue\">", "</span>" );
 				if ( str_count.length() && str_count != std::string( "0" ) )
 				{
@@ -838,6 +817,7 @@ bool facebook_client::home( )
 					mir_free( tmessage );
 				}
 
+				// TODO: parse notifications directly to popups
 				str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"notificationsCountValue\">", "</span>" );
 				if ( str_count.length() && str_count != std::string( "0" ) )
 				{
@@ -878,9 +858,6 @@ bool facebook_client::home( )
           parent->AddChat(id.c_str(), name.c_str());
 	      }        
       }*/
-
-			// Set first touch flag
-			this->chat_first_touch_ = true;
 
 			// Update self-contact
 			ForkThread(&FacebookProto::UpdateContactWorker, this->parent, (void*)&this->self_);

@@ -212,7 +212,7 @@ void FacebookProto::UpdateLoop(void *)
 		if ( i != 0 )
 			if ( !facy.invisible_ )
 				if ( !facy.buddy_list( ) )
-					break;
+    				break;
 		if ( !isOnline( ) )
 			break;
 		if ( i % 6 == 3 && getByte( FACEBOOK_KEY_EVENT_FEEDS_ENABLE, DEFAULT_EVENT_FEEDS_ENABLE ) )
@@ -220,12 +220,6 @@ void FacebookProto::UpdateLoop(void *)
 				break;
 		if ( !isOnline( ) )
 			break;
-		if ( i % 8 == 7 )
-			if ( !facy.idle_ )
-				facy.chat_first_touch_ = true;
-		/*if ( !facy.invisible_ )
-		if ( !facy.keep_alive( ) )
-				  break;*/
 		LOG( "***** FacebookProto::UpdateLoop[%d] going to sleep...", tim );
 		if ( SleepEx( GetPollRate( ) * 1000, true ) == WAIT_IO_COMPLETION )
 			break;
@@ -256,7 +250,7 @@ BYTE FacebookProto::GetPollRate( )
 	BYTE poll_rate = getByte( FACEBOOK_KEY_POLL_RATE, FACEBOOK_DEFAULT_POLL_RATE );
 
 	return (
-		( poll_rate >= FACEBOOK_MINIMAL_POLL_RATE &&
-		  poll_rate <= FACEBOOK_MAXIMAL_POLL_RATE )
-		? poll_rate : FACEBOOK_DEFAULT_POLL_RATE );
+	    ( poll_rate >= FACEBOOK_MINIMAL_POLL_RATE &&
+	      poll_rate <= FACEBOOK_MAXIMAL_POLL_RATE )
+	    ? poll_rate : FACEBOOK_DEFAULT_POLL_RATE );
 }
