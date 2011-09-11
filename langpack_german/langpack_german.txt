@@ -7,11 +7,11 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 09 Sep 2011 19:09:06
-; FLID: Deutsche Sprachdatei 0.11.09.09
+X-Langpack-creation-date: 11 Sep 2011 14:09:07
+; FLID: Deutsche Sprachdatei 0.11.09.11
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,AsSingleWindow,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Basic_History,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirFox,MirOTR,MirOUT,MirPy_Scripting,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
-; Start of langpack: Core (Letzte Änderung: 10:41, 25. Aug. 2011 )
+; Start of langpack: Core (Letzte Änderung: 15:33, 10. Sep. 2011 )
 
 [0 = Default]
 0 = Standard
@@ -4760,7 +4760,7 @@ Ergebnisse
 [There are no results to display.]
 Keine Ergebnisse gefunden.
 [Searching]
-Durchsuche
+Suchen
 [All Networks]
 Alle Protokolle
 [Handle]
@@ -5299,7 +5299,7 @@ Maximal
 [Size upwards]
 Größenanpassung nach oben
 [If window is partially covered, bring to front instead of hiding]
-Teilweise verdeckte Fenster in den Vordergrund bringen, anstatt sie zu verstecken
+Teilweise verdeckte Fenster in Vordergrund bringen, anstatt sie zu verstecken
 [Enable docking]
 Andocken aktivieren
 [Translucency options (Windows 2000/XP only)]
@@ -5780,81 +5780,81 @@ Aktiviere den \'Ereignisfilter\' für neue Chatfenster
 [Default events to show in new chat rooms if the \'event filter\' is enabled]
 Ereignisse, die in neuen Chatfenstern angezeigt werden, wenn \'Ereignisfilter\' aktiv ist
 [Show topic changes]
-Titeländerungen
+Themenänderungen anzeigen
 [Show users joining]
 Wenn Benutzer den Channel betritt
 [Show users disconnecting]
 Wenn Benutzer Verbindung unterbricht
 [Show messages]
-Nachrichten
+Nachrichten anzeigen
 [Show actions]
-Aktionen
+Aktionen anzeigen
 [Show users leaving]
 Wenn Benutzer den Channel verlässt
 [Show users being kicked]
 Wenn Benutzer gekickt wird
 [Show notices]
-Hinweise zeigen
+Hinweise anzeigen
 [Show users changing name]
-Nicknamenänderungen
+Nicknamenänderungen anzeigen
 [Show information messages]
-Informationsnachrichten
+Informationsnachrichten anzeigen
 [Show status changes of users]
-Statusänderungen von Benutzern
+Statusänderungen von Benutzern anzeigen
 [Icons to display in the message log]
 Folgende Icons im Verlaufsfenster anzeigen
 [Show icon for topic changes]
 Icon für Titeländerungen
 [Show icon for users joining]
-Icon, wenn Benutzer Channel betritt
+Icon anzeigen, wenn Benutzer Channel betritt
 [Show icon for users disconnecting]
-Icon, wenn Benutzer Verbindung unterbricht
+Icon anzeigen, wenn Benutzer Verbindung unterbricht
 [Show icon for messages]
-Icon für Nachrichten
+Icon für Nachrichten anzeigen
 [Show icon for actions]
-Icon für Aktionen
+Icon für Aktionen anzeigen
 [Show icon for highlights]
-Icon für Hervorhebungen
+Icon für Hervorhebungen anzeigen
 [Show icon for users leaving]
-Icon, wenn Benutzer Channel verlässt
+Icon anzeigen, wenn Benutzer Channel verlässt
 [Show icon for users kicking other user]
-Icon, wenn Benutzer gekickt wird
+Icon anzeigen, wenn Benutzer gekickt wird
 [Show icon for notices ]
-Icon für Hinweise
+Icon anzeigen für Hinweise
 [Show icon for name changes]
-Icon bei Namensänderung
+Icon bei Namensänderungen anzeigen
 [Show icon for information messages]
-Icon für Informationsnachrichten
+Icon für Informationsnachrichten anzeigen
 [Show icon for status changes]
-Icon für Statusänderungen
+Icon für Statusänderungen anzeigen
 [Show icons in tray only when the chat room is not active]
-Icon nur, wenn Chatfenster nicht aktiv
+Icon nur im Tray anzeigen, wenn Chatfenster nicht aktiv
 [Icons to display in the tray]
 Folgende Icons im Tray anzeigen
 [Show icon in tray for topic changes]
-Trayicon für Titeländerungen
+Trayicon für Themenänderungen anzeigen
 [Show icon in tray for users joining]
-Trayicon, wenn Benutzer Channel betritt
+Trayicon anzeigen, wenn Benutzer Channel betritt
 [Show icon in tray for users disconnecting]
-Trayicon, wenn Benutzer Verbindung unterbricht
+Trayicon anzeigen, wenn Benutzer Verbindung unterbricht
 [Show icon in tray for messages]
-Trayicon für Nachrichten
+Trayicon für Nachrichten anzeigen
 [Show icon in tray for actions]
-Trayicon für Aktionen
+Trayicon für Aktionen anzeigen
 [Show icon in tray for highlights]
-Trayiconfür Hervorhebungen
+Trayicon für Hervorhebungen anzeigen
 [Show icon in tray for users leaving]
-Trayicon, wenn Benutzer Channel verlässt
+Trayicon anzeigen, wenn Benutzer Channel verlässt
 [Show icon in tray for users kicking other user]
-Trayicon, wenn Benutzer gekickt wird
+Trayicon anzeigen, wenn Benutzer gekickt wird
 [Show icon in tray for notices ]
-Trayicon für Hinweise
+Trayicon für Hinweise anzeigen
 [Show icon in tray for name changes]
-Trayicon bei Namensänderung
+Trayicon bei Namensänderung anzeigen
 [Show icon in tray for information messages]
-Trayicon für Informationsnachrichten
+Trayicon für Informationsnachrichten anzeigen
 [Show icon in tray for status changes]
-Trayicon für Statusänderungen
+Trayicon für Statusänderungen anzeigen
 [Pop-ups to display]
 Folgende Popups anzeigen
 [Show pop-ups only when the chat room is not active]
@@ -5862,27 +5862,27 @@ Popup nur wenn Chatfenster nicht aktiv
 [Show pop-up for topic changes]
 Popup für Titeländerungen
 [Show pop-up for users joining]
-Popup, wenn Benutzer Channel betritt
+Popup anzeigen, wenn Benutzer Channel betritt
 [Show pop-up for users disconnecting]
-Popup, wenn Benutzer Verbindung unterbricht
+Popup anzeigen, wenn Benutzer Verbindung unterbricht
 [Show pop-up for messages]
-Popup für Nachrichten
+Popup für Nachrichten anzeigen
 [Show pop-up for actions]
-Popup für Aktionen
+Popup für Aktionen anzeigen
 [Show pop-up for highlights]
-Popup für Hervorhebungen
+Popup für Hervorhebungen anzeigen
 [Show pop-up for users leaving]
-Popup, wenn Benutzer Channel verlässt
+Popup anzeigen, wenn Benutzer Channel verlässt
 [Show pop-up for users kicking other user]
-Popup, wenn Benutzer gekickt wird
+Popup anzeigen, wenn Benutzer gekickt wird
 [Show pop-up for notices ]
-Popup für Hinweise
+Popup für Hinweise anzeigen
 [Show pop-up for name changes]
-Popup für Namensänderungen
+Popup für Namensänderungen anzeigen
 [Show pop-up for information messages]
-Popup für Informationsnachrichten
+Popup für Informationsnachrichten anzeigen
 [Show pop-up for status changes]
-Popup für Statusänderungen
+Popup für Statusänderungen anzeigen
 
 ; Customize => Schriftarten
 [Chat Module]
@@ -7911,7 +7911,7 @@ Benutzt Miranda IM um zu Ihren Freunden von battle.net zu sprechen.
 ; ##############################################
 ; End of langpack: BNET_Messenger
 ; ############################################## 
-; Start of langpack: Basic_History (Letzte Änderung: 19:55, 9. Sep. 2011 )
+; Start of langpack: Basic_History (Letzte Änderung: 14:28, 11. Sep. 2011 )
 
 ; Pluginname: Basic History 
 ; Version: 1.0.0.3
@@ -7925,9 +7925,9 @@ Immer Kontaktliste anzeigen
 [Group list]
 Gruppenliste
 [New messages on top]
-Neue Nachrichten im Vordergrund
+Neue Nachrichten nach oben
 [Delta time to group messages:]
-Delta-Zeit zu den Gruppennachrichten:
+Zeitdifferenz für gruppierte Nachrichten:
 [Limit messages to:]
 Limitiere Nachrichten auf:
 [Search forward in list group]
@@ -7946,7 +7946,9 @@ Nur ausgehende Nachrichten
 Nur ausgewählte Gruppen
 
 [Hide Contacts]
-Verstecke Kontakte
+Kontakte verstecken
+[Show Contacts]
+Kontakte anzeigen
 [Find Next]
 Finde nächste
 [Find Previous]
@@ -7958,6 +7960,8 @@ Speichere Fensterposition als Standard
 [Save window position for all contacts]
 Speichere Fensterposition für alle Kontakte
 
+[Open History]
+Öffne Verlauf
 [Open global history]
 Öffne globalen Verlauf
 [Show/Hide Contacts]
@@ -33742,7 +33746,7 @@ Standbilder
 ; ##############################################
 ; End of langpack: TV_plugin_YM
 ; ############################################## 
-; Start of langpack: TabSRMM (Letzte Änderung: 19:05, 22. Aug. 2011 )
+; Start of langpack: TabSRMM (Letzte Änderung: 13:28, 11. Sep. 2011 )
 
 ; Pluginname: TabSRMM 
 ; Version: 3.1.99.8
@@ -33750,20 +33754,6 @@ Standbilder
 ; Unique ID: {6ca5f042-7a7f-47cc-a715-fc8c46fbf434}
 ; Autor: Nightwish
 ; Link: http://miranda.or.at oder Testing
-
-; Pluginname: tabSRMM eternity Mod 
-; Version: 2.2.1.15
-; Dateiname: tabsrmm.dll
-; Unique ID: {a4f2d0d4-2c38-439a-bdfb-0b3ef1062d7d}
-; Autor: jarvis
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3483
-
-; '''Warnung! + Hinweis!  Bitte vor dem editieren lesen!!!!''' 
-
-; 1) Die [http://msdn.microsoft.com/de-de/library/ms997646.aspx visuellen Stile] dienen dazu, das Übersetzer leichter den Einsprung in den zu übersetzenden Strings/Abschnitte bekommen, diese werden nicht übersetzt! Bitte stehen lassen! 
-; 2) Einige kritische Warnungen lassen sich NICHT übersetzten, das ist kein Bug --> siehe hier http://blog.miranda.or.at/tabsrmm/custom-warning-dialogs-in-tabsrmm-3
-; 3) Einige Texte der Boxen sind zu groß, dies ist halt nunmal so. Dazu müsste der Autor die Boxen größer machen.
-; Bitte nach Möglichkeit solange den Text entsprechend "passend machen", welche sind es denn nun genau? -Freak
 
 ; resource.rc:IDD_TABCONFIG
 [IM and group chat module for Miranda IM.]
@@ -33863,11 +33853,11 @@ Verlaufshintergrund
 << Eingehende sonstige Ereignisse (alt)
 [>> Outgoing name (old)]
 >> Ausgehender Name (alt)
-[>> Outgoing time (old)]
+[>> Outgoing timestamp (old)]
 >> Ausgehende Zeit (alt)
 [<< Incoming name (old)]
 << Eingehender Name (alt)
-[<< Incoming time (old)]
+[<< Incoming timestamp (old)]
 << Eingehende Zeit (alt)
 [* Status changes]
 * Statusänderungen
@@ -33906,26 +33896,24 @@ Normaler Text
 ;Groupbox: Einstellungen für das Nachrichtenfenster
 [Message window options]
 Einstellungen für das Nachrichtenfenster
+
 [Message window behaviour]
 Verhalten des Nachrichtenfensters
 [Always flash contact list and tray icon for new messages]
 Neue Nachrichten immer auf der Kontaktliste und im Tray blinken lassen
 [Delete temporary contacts on close]
 Temporäre Kontakte beim Schließen löschen
-[Enable \"Paste and send\" feature]
-Aktiviere \"Einfügen und Senden\"-Funktion
+
+
 [Sending messages]
 Nachrichten senden
+[Enable \"Paste and send\" feature]
+Aktiviere \"Einfügen und Senden\"-Funktion
 [Send on SHIFT - Enter]
 'Shift+Enter' sendet Nachricht
-[Always keep the button bar at full width]
-Toolbar immer auf voller Breite halten
-[Enable "Paste and send" feature]
-'Einfügen und sofort senden'-Funktion aktivieren
+
 [Automatically split long messages (experimental, use with care)]
 Lange Nachrichten automatisch trennen (experimentell, Vorsicht)
-[Reset all hidden warnings]
-'Warnung nicht wieder zeigen' zurücksetzen
 
 ;Groupbox: Avatareinstellungen
 [Avatar options (size and scaling only for bottom avatar display)]
@@ -33936,26 +33924,10 @@ Maximale Anzeigehöhe (Pixel)
 (0 = unbegrenzt)
 [Try to keep original size]
 Versuche Originalgröße beizubehalten
-[Border type]
-Randart
-[Automatic]
-Automatisch
-[1 pixel solid]
-1 Pixel stark
-
-;Groupbox: Tabs und Fenster automatisch schließen
-[Automatically close tabs and windows]
-Tabs und Fenster automatisch schließen
-[Automatically close tabs after]
-Schließe Tabs automatisch nach
-[minutes of inactivity (0 = disable)]
-Minuten Inaktivität (0 = niemals)
-[Also auto-close the last tab and its container]
-Auch den letzten Tab und damit das Fenster schließen
 
 ;Groupbox: Diverse Einstellungen
-[Send text formatting:]
-Textformatierung senden:
+[Reset all hidden warnings]
+'Warnung nicht wieder zeigen' zurücksetzen
 [Help on this]
 Hilfe hierzu
 
@@ -33984,24 +33956,22 @@ Tabeinstellungen
 Statustext auf den Tabs
 [Prefer xStatus icons when available]
 XStatus-Icon bevorzugen, wenn vorhanden
-[Warn when closing a tab or window]
-Vor dem Schließen eines Tabs oder Fensters warnen
 [Detailed tooltip on tabs (requires mToolTip or Tipper plugin)]
 Detaillierte Tooltips auf Tabs (erfordert mTooltip- oder Tipper-Plugin)
+
 [How to create tabs and windows for incoming messages]
 Erzeugen von Tabs und Fenstern für eintreffende Nachrichten
 [ALWAYS activate new message sessions (has PRIORITY over the options below)]
 Fenster IMMER automatisch öffnen und auf den Desktop bringen (hat HÖCHSTE Priorität!)
 [Automatically create new message sessions without activating them]
-Aktiviere automatisch neue Nachrichtensitzungen ohne vorherige Aktivierung
+Erzeuge automatisch neue Nachrichtensitzungen ohne vorherige Aktivierung
 [New windows are minimized (the option above MUST be active)]
 Neue Fenster minimiert erzeugen (die Option darüber MUSS aktiviert sein!)
 [Activate a minimized window when a new tab is created inside it]
 Minimierte Fenster in Vordergrund bringen, wenn ein neuer Tab erzeugt wird
-[Automatically activate existing tabs in minimized windows]
-Neue Tabs in minimierten Fenstern automatisch in den Vordergrund bringen
 [Automatically switch existing tabs in minimized windows on incoming messages (ignored when using Aero Peek task bar features)]
-Tabs in minimierten Fenstern bei eingehenden Nachrichten automatisch umschalten (ignoriert, wenn Aero Peek benutzt wird)
+Automatisch zu existierenden Tabs in minimierten Fenstern bei eingehenden Nachrichten wechseln (ignoriert, wenn Aero Peek Taskleisten-Funktionen benutzt wird)
+
 [Miscellaneous options]
 Diverse Einstellungen
 [Remember and set keyboard layout per contact]
@@ -34037,14 +34007,6 @@ Chatraum %s
 Container
 [To set container options, please use the container settings dialog. It is available by:\n1. choosing "container settings" from the system menu of a container.\n2. right clicking the tab or the button bar in any message window.]
 Um Containereinstellungen festzulegen, bitte den entsprechenden Dialog benutzen. (Rechtsklick auf die Iconleiste eines Nachrichtenfensters oder über die Containereinstellungen in der Menüleiste.)
-[Windows Aero settings]
-Windows Aero Einstellungen
-[Use Aero UI elements(only when not using a custom skin)]
-Benutze Aero-Effekte (nur wenn kein benutzerdefinierter Skin benutzt wird)
-[Use Windows 7 task bar enhancements (restart required)]
-Benutze Windows 7 Taskleistenfunktion (benötigt Neustart)
-
-;Groupbox: Tabs sollten wie folgt genutzt werden
 [Tabs should be used in the following way]
 Tabs sollten wie folgt genutzt werden:
 [Use contact list groups for organizing tabs (one window per group)]
@@ -34058,7 +34020,7 @@ Standardmodus (getabbtes Fenster, manuelle Tab-Zuweisung)
 
 ;Groupbox: Blinken
 [Container flashing]
-Blinken
+Container-Blinken
 [Flash containers]
 Blinken des Containers
 [times]
@@ -34103,6 +34065,7 @@ Platziere einen Abstandshalter im Verlauf, wenn ein Fenster den Fokus verliert
 RTL ist Standardtextrichtung
 [Use normal templates (uncheck to use simple templates if your template set supports them)]
 Verwende normale Vorlagen (deaktivieren für einfache Vorlagen, falls unterstützt)
+
 [Support for external plugins]
 Unterstützung für externe Plugins
 [Show events at the new line (IEView Compatibility Mode)]
@@ -34111,16 +34074,17 @@ Ereignisse in einer neuen Zeile anzeigen (IEView-Kompatibilitätsmodus)
 Zeitstempel/Nicknamen unterstreichen (IEView-Kompatibilitätsmodus)
 [Show timestamp after nickname (IEView Compatibility Mode)]
 Zeitstempel nach Nicknamen anzeigen (IEView-Kompatibilitätsmodus)
+
 [Log status changes]
 Statuswechsel aufzeichnen
 [Automatically copy selected text]
 Markierten Text automatisch kopieren
+
 [Additional events to show]
 Zusätzliche Ereignisse anzeigen
 [Show file events]
 Datei-Ereignisse anzeigen
-[Appearance and functionality of chat room windows]
-Aussehen und Funktionalität des Chat-Raum-Fenster
+
 [Timestamp settings (note: timstamps also depend on your templates)]
 Zeitstempel-Einstellungen (Hinweis: ist auch von der verwendeten Vorlage abhängig)
 [Show timestamps]
@@ -34131,6 +34095,7 @@ Datum im Zeitstempel anzeigen
 Sekunden im Zeitstempel anzeigen
 [Use contacts local time (if timezone info available)]
 Lokale Kontaktzeit verwenden (falls Zeitzone bekannt)
+
 [Message log icons]
 Icons im Nachrichtenverlauf
 [Event type icons in the message log]
@@ -34139,6 +34104,7 @@ Ereignistypicons im Nachrichtenverlauf
 Textsymbole als 'Ereignis-Marker'
 [Use Incoming/Outgoing Icons]
 Verschiedene Icons für ein- und ausgehende Nachrichten
+
 [You have chosen to use an external plugin for displaying the message history in the chat window. Most of the settings on this page are for the standard message log viewer only and will have no effect. To change the appearance of the message log, you must configure either IEView or History++.]
 Sie haben sich entschieden, ein externes Plugin für die Darstellung des Nachrichtenverlaufs im Chatfenster zu nutzen. Die meisten Einstellungen auf dieser Seite sind für die Standartverlaufsansicht gedacht und haben daher keine Auswirkungen. Um das Erscheinungsbild zu verändern, müssen Sie IEView oder History++ konfigurieren. 
 
@@ -34169,6 +34135,22 @@ RTL-Vorlagen
 ;Groupbox: Vergangene Ereignisse laden
 [Always trim message log to]
 Neue Nachrichten begrenzen auf
+
+
+[Error message]
+Fehlernachricht
+[Message In]
+Nachricht, Eingehend
+[Message Out]
+Nachricht, Ausgehend
+[Group In (Start)]
+Gruppiert, Ein (Start)
+[Group Out (Start)]
+Gruppiert, Aus (Start)
+[Group In (Inner)]
+Gruppiert, Ein (Innen)
+[Group Out (Inner)]
+Gruppiert, Aus (Innen)
 
 ; templates.c  &  resource.rc:IDD_TEMPLATEEDIT
 [Template Set Editor]
@@ -34202,6 +34184,8 @@ Alle Vorlagen wurden erfolgreich zurückgesetzt, bitte schließen Sie alle offenen
 Zeige Schaltfläche in Einzelchats
 [Show in chat rooms]
 Zeige Schaltfläche in Gruppenchats
+[Hide if there isn't enough space]
+Verstecke, wenn nicht genügend Platz
 [Gap between buttons:]
 Schaltflächenabstand:
 [Insert Separator]
@@ -34357,7 +34341,7 @@ Färbe Nicknamen im Nachrichtenverlauf
 [Colorize nicknames in member list]
 Färbe Nicknamen in der Nickliste
 [Show topic as status message on the contact list]
-Zeige 'Thema des Raumes' als Statusnachricht in der Kontaktliste
+Zeige Thema als Statusnachricht in der Kontaktliste
 [Hide or show the window by double click in the contact list]
 Zeige oder verstecke das Fenster bei Doppelklick in der Kontaktliste
 [Sync splitter position with standard IM sessions]
@@ -34370,10 +34354,11 @@ Zeige Statusicon vor dem Rollen-/Rangicon des Kontakts
 Verwende IRC-ähnliche Statusanzeigen in der Nickliste
 [Use alternative sorting method in member list]
 Verwende alternative Sortierung in der Nickliste
+
 [Timestamp only when event time differs]
 Zeitstempel nur wenn Ereignis-Zeit abweicht
 [Timestamp has same color as the event]
-Zeitstempel hat die selbe Farbe wie ein Ereignis
+Zeitstempel hat die selbe Farbe wie das Ereignis
 [Add a colon (:) to auto-completed user names]
 Füge einen Doppelpunkt (:) zu autom. vervollständigten Benutzernamen hinzu
 [Start private conversation on doubleclick in nick list (insert nick if unchecked)]
@@ -34385,11 +34370,9 @@ Nicknamen im Nachrichtenverlauf in anklickbare Hyperlinks umwandeln
 [Scale down icons to 10x10 pixels in the chat log]
 Icons auf 10 x 10 Pixel im Verlauf verkleinern
 [Only place a separator when an incoming event is announced with a popup]
-Nur einen Abstandshalter für ein eingehendes Popup-Ereignis
+Nur einen Abstandshalter platzieren, wenn eingehendes Ereignis mit einem Popup angekündigt wird
 [Support the math module plugin]
 MathModule-Plugin unterstützen
-[Highlight messages containing my own nick name]
-Aktiviere "Highlight" für Nachrichten mit meinem Nick
 
 [Log formatting]
 Verlaufsformatierung
@@ -34438,25 +34421,25 @@ Zeige als Textsymbole
 Hebe Ereignis hervor
 
 [Highlight user names]
-Hervorherbung ("Highlight") für Benutzernamen
-[Highlight User...]
-"Highlighte" Benutzer ...
+Hervorherbungen für Benutzernamen
 [Enable highlighting for user names]
-Aktiviere "Highlight" für Benutzernamen
+Hervorhebungen für Benutzernamen aktivieren
 [Also look in user ids]
 Berücksichtige auch Nutzer-IDs 
-[Highlight message text]
-Hervorherbung ("Highlight") für Nachrichtentext 
 [Names to highlight, wildcards like * and ? are allowed, separate multiple entries with spaces]
-Namen für das Highlight, Platzhalter wie * und ? sind erlaubt, mehrere Einträge durch Leerzeichen trennen
+Namen, die hervorgeoben werden sollen, Platzhalter wie * und ? sind erlaubt, mehrere Einträge durch Leerzeichen trennen
+
+[Highlight message text]
+Hervorherbungen für Nachrichtentext 
 [Enable highlighting for message text]
-Aktiviere "Highlight" für Nachrichtentexte
-[Words to highlight, wildcards like * and ? are allowed, separate multiple entries with spaces]
-Wörter, die hervorgehoben ("gehighlightet") werden sollen; Platzhalter wie * und ? sind erlaubt, mehrere Einträge durch Leerzeichen trennen
+Hervorhebungen für Nachrichtentexte aktivieren
 [Words to highlight, wildcards like * and ? are allowed, separate multiple entries with spaces. Leave it empty if you only want to highlight your own nick name.]
-Wörter, die hervorgehoben ("gehighlightet") werden sollen; Platzhalter wie * und ? sind erlaubt, mehrere Einträge durch Leerzeichen trennen. Lassen Sie es leer, wenn Sie nur Ihren eigenen Nick-Namen hervorheben wollen.
+Wörter, die hervorgehoben werden sollen; Platzhalter wie * und ? sind erlaubt, mehrere Einträge durch Leerzeichen trennen. Lassen Sie es leer, wenn Sie nur Ihren eigenen Nicknamen hervorheben wollen.
 [Highlight messages containing my own nick name]
 Nachrichten, die meinen eigenen Nicknamen enthalten, hervorheben
+
+[Highlight User...]
+"Highlighte" Benutzer ...
 
 [Send typing notifications to the following users when you are typing a message to the them:]
 Sende eine Tippbenachrichtung an die folgenden Benutzer, wenn ich anfange zu schreiben:
@@ -34549,6 +34532,8 @@ Standardwert verwenden
 Blinken deaktivieren
 [Show Multisend Contact List]
 Kontaktliste einbetten
+[Place ToolBar at bottom]
+Toolbar unten platzieren
 
 [&User]
 Ben&utzer
@@ -34557,10 +34542,6 @@ Ben&utzer
 Nachrichten&verlauf
 [&Message Log Settings]
 Nachrichtenverlaufseinstellungen
-[&Export Message Log Settings...]
-Nachrichtenverlaufseinstellungen &exportieren...
-[&Import Message Log Settings...]
-Nachrichtenverlaufseinstellungen &importieren...
 [&Global...]
 &Global...
 [&For this Contact...]
@@ -34712,7 +34693,9 @@ Benutzer-ID in Statusleiste
 [Hide the tool bar]
 Toolbar verbergen
 [Place the tool bar at the bottom (*)]
-Toolbar unten anzeigen (*)
+Toolbar unten platzieren (*)
+[Show the info panel]
+Infobereich anzeigen
 
 ;Tab- und Umschaltleiste
 [Close button on tabs]
@@ -34781,6 +34764,8 @@ Titelleistenformat
 Verfügbare Formate
 
 ;Größe und Theme des Fensters
+[Window size and theme]
+Fenstergröße und -theme
 [You can select a private theme (.tabsrmm file) for this container which will then override the default message log theme. You will have to close and re-open all message windows after changing this option.]
 Sie können ein anderes Theme (.tabsrmm-Datei) für diesen Container auswählen. Dieses überschreibt das Standard-Theme. Nach dem Ändern des Themes müssen Sie alle Nachrichtenfenster schließen und erneut starten.
 [Use this to specify a private message log theme for this container. This will have no effect when using IEView or another message log viewer and should NOT be confused with skins.]
@@ -34789,6 +34774,10 @@ Wählen Sie hier das Theme für den Nachrichtenverlauf in diesem Container aus. Di
 Globale Containergröße und -position
 [Save current as global]
 Als global speichern
+
+; Transparenz
+[This feature requires Windows 2000 or later and may be unavailable when using a container skin.]
+Diese Funktion benötigt mindestens Windows 2000 und ist nicht verfügbar, wenn eigene Containerskins benutzt werden.
 
 ;Kontaktavatare
 [Contact avatars]
@@ -35030,6 +35019,10 @@ Tabs:
 ESC schließt Sitzungen, anstatt sie zu minimieren
 [Always pop up and activate new windows]
 Neue Fenster immer öffnen und aktivieren
+[Create new windows in minimized state]
+Neue Fenster minimiert erzeugen
+[Highlight messages containing my own nick name]
+Aktiviere "Highlight" für Nachrichten mit meinem Nick
 [Send message on Ctrl+Enter (always enabled)]
 Strg+Enter sendet Nachricht (immer aktiviert)
 [Send on Shift+Enter]
@@ -35615,122 +35608,6 @@ Tippklänge sind ausgeschaltet
 Tippt und tippt
 [Typing Backspace]
 Drückt die Backspace-Taste
-
-;Containereinstellungen
-[Check if you don't want this container to use the global container options. Titlebar format and window position can always be private.]
-Aktivieren, wenn Sie für diesen Container eigene lokale Einstellungen setzen wollen (Fenstergröße und -position können immer lokal sein).
-[Place ToolBar at bottom]
-Toolbar unten anzeigen
-[Show the info panel]
-Infobereich anzeigen
-[Select, in which cases you want to see event notifications for this message container. These options are disabled when you are using one of the "simple" notifications modes]
-Wählen Sie, in welchem Fall Sie Benachrichtigungen für diesen Container sehen wollen. Diese Einstellungen sind deaktiviert, wenn Sie einen "einfachen" Benachrichtigungsmodus benutzen.
-[Sync sounds with popup mode]
-Soundeffekte wie Popups
-[Always enable popups for]
-Popups immer zeigen, wenn
-[inactive tabs]
-Tab inaktiv ist
-[Titlebar options]
-Titelleisteneinstellungen
-[Use static container Icon]
-Festes Icon verwenden
-[Use private title format]
-Eigenes Format für die Titelleiste
-[Window size and theme]
-Größe und Theme des Fensters
-[This feature requires Windows 2000 or later and is not available when custom container skins are in use]
-Diese Funktion benötigt mindestens Windows 2000 und ist nicht verfügbar, wenn eigene Containerskins benutzt werden.
-[This feature requires Windows 2000 or later and may be unavailable when using a container skin.]
-Diese Funktion benötigt mindestens Windows 2000 und ist nicht verfügbar, wenn eigene Containerskins benutzt werden.
-
-;Einstellungen
-;Nachrichtensitzungen -> Tab: Tabs und Container
-[Message dialog visual settings]
-Layout des Nachrichtenfensters
-[No borders for text areas (make them appear "flat")]
-Keine Ränder für Textzonen (lässt sie "flach" erscheinen)
-[Dim icons for idle contacts]
-Icons für inaktive Kontakte abblenden
-
-;Nachrichtensitzungen -> Tab: Nachrichtenverlauf
-[Place dividers in inactive sessions]
-Trennlinien in inaktiven Sitzungen
-[Use popup configuration for placing dividers]
-Verwende Popup-Konfiguration für Trennlinien
-[Use multiple background colors]
-Verwende unterschiedliche Hintergrundfarben
-[Support math module plugin]
-MathModule-Plugin unterstützen
-[Show url events]
-URL-Ereignisse anzeigen
-
-;Nachrichtensitzungen -> Gruppenchats -> Tab: Ereignisse und Filter
-[Log these events to the log file (when file logging is enabled)]
-Folgende Ereignisse in der Logdatei speichern (falls Loggen aktiviert ist)
-[Log topic changes]
-Titeländerungen speichern
-[Log users joining]
-Speichern, wenn Benutzer Channel betritt
-[Log users disconnecting]
-Speichern, wenn Benutzer Verbindung unterbricht
-[Log messages]
-Nachrichten speichern
-[Log actions]
-Aktionen speichern
-[Log highlights]
-Hervorhebungen speichern
-[Log users leaving]
-Speichern, wenn Benutzer Channel verlässt
-[Log users kicking other user]
-Speichern, wenn Benutzer gekickt wird
-[Log notices ]
-Notizen speichern
-[Log name changes]
-Namensänderungen speichern
-[Log information messages]
-Informationsnachrichten speichern
-
-[General tweaks]
-Allgemeine Tweaks
-[Show this button in regular window]
-Zeige Schaltfläche in Einzel-Chats
-[Show this button in chat window]
-Zeige Schaltfläche in Gruppenchats
-[Hide if there isn't enough space]
-Verstecke, wenn nicht genügend Platz
-[Buttons spacing:]
-Schaltflächenabstand:
-[Message tab and window creation options]
-Erzeugen von Tabs und Fenstern
-[ALWAYS pop up and activate new message windows (has PRIORITY!)]
-Fenster IMMER automatisch öffnen und auf den Desktop bringen (hat Priorität!)
-[Create new tabs in existing windows without activating them]
-Neue Tabs in existierenden Fenstern erzeugen, ohne sie zu aktivieren
-[Create new windows in minimized state]
-Neue Fenster minimiert erzeugen
-[Pop up a minimized window when a new tab is created]
-Minimierte Fenster in Vordergrund bringen, wenn ein neuer Tab erzeugt wird
-[New events will automatically switch tabs in minimized windows]
-In minimierten Fenstern Tabs bei neuen Ereignissen automatisch wechseln
-[Enable event API (support for third party plugins)]
-Event-API aktivieren (Unterstützung für externe Plugins)
-[Chat module for instant messaging and group chat, offering a tabbed interface and many advanced features.]
-Chatmodul für Sofortnachrichten und Gruppenunterhaltung, bietet Tabs und viele erweiterte Funktionen.
-[Use IRC style status indicators in the member list (@, %, + etc.)]
-Verwende IRC-ähnliche Statusanzeigen in der Nickliste (@, %, + usw.)
-[Create container/tab on highlight, if it's not available]
-Erstelle Container/Tab bei "Highlight", wenn noch nicht verfügbar
-[Disable animated GIF avatars (*)]
-Deaktiviere animierte GIF-Avatare (*)
-[Enable typing sounds (*)]
-Tipp-Klänge aktivieren (*)
-[Allow PASTE AND SEND feature (Ctrl-D)]
-'Einfügen und sofort senden'-Funktion aktivieren (Strg+D)
-[Events to show]
-Folgende Ereignisse anzeigen
-[You can select a private theme (.tabsrmm file) for this container which will then override the default message log theme.]
-Sie können ein anderes Theme (.tabsrmm-Datei) für diesen Container auswählen. Dieses überschreibt das Standard-Nachrichtenfenster-Theme.
 
 [Send later job list...]
 Später-Senden-Liste...
