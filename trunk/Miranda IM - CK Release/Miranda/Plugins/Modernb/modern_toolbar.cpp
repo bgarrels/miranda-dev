@@ -315,8 +315,7 @@ static INT_PTR    svcToolBarAddButton(WPARAM wParam, LPARAM lParam)
 	tblock;
 	{	
 
-		MTB_BUTTONINFO * mtbi=(MTB_BUTTONINFO *)mir_alloc(sizeof(MTB_BUTTONINFO));
-		memset(mtbi,0,sizeof(MTB_BUTTONINFO));
+		MTB_BUTTONINFO * mtbi=(MTB_BUTTONINFO *)mir_calloc(sizeof(MTB_BUTTONINFO));
 		sttTBButton2MTBBUTTONINFO(bi,mtbi);
 	
 		sttGetButtonSettings(mtbi->szButtonID, &bVisible, &dwOrder, &bPanel);
@@ -424,7 +423,7 @@ static int   sttReposButtons(MTBINFO * mti)
 	qsort(mti->pButtonList->items,mti->pButtonList->realCount,sizeof(MTB_BUTTONINFO *),sttSortButtons);
 
 	GetClientRect(mti->hWnd, &rcClient);
-    nBarSize=rcClient.right-rcClient.left;
+	nBarSize=rcClient.right-rcClient.left;
 	if (nBarSize == 0) return 0; 
 	mti->nLineCount=0;
 	hdwp=BeginDeferWindowPos( mti->pButtonList->realCount );
@@ -708,7 +707,7 @@ static void	ToolBar_DefaultButtonRegistration()
 		"Accounts...", NULL,  282 , IDI_ACCMGR, IDI_ACCMGR, TRUE  );
 	
 	sttRegisterToolBarButton( "ShowHideOffline","Show/Hide offline contacts", MS_CLIST_TOGGLEHIDEOFFLINE,
-					    "Hide offline contacts", "Show offline contacts", 110 /*and 111 */ , IDI_RESETVIEW, IDI_RESETVIEW, TRUE  );
+						"Hide offline contacts", "Show offline contacts", 110 /*and 111 */ , IDI_RESETVIEW, IDI_RESETVIEW, TRUE  );
 	
 	sttSetButtonPressed( "ShowHideOffline", (BOOL) ModernGetSettingByte(NULL, "CList", "HideOffline", SETTING_HIDEOFFLINE_DEFAULT) );
 
@@ -779,8 +778,7 @@ static LRESULT CALLBACK ToolBar_WndProc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM 
 			CLISTFrame Frame={0};
 			CREATESTRUCT * lpcs = (CREATESTRUCT *) lParam;
 			//create internal info
-			MTBINFO * pMTBInfo = (MTBINFO *) mir_alloc( sizeof(MTBINFO) );
-			memset( pMTBInfo, 0, sizeof(MTBINFO) );
+			MTBINFO * pMTBInfo = (MTBINFO *) mir_calloc( sizeof(MTBINFO) );
 			pMTBInfo->cbSize = sizeof(MTBINFO);
 			SetWindowLongPtr( hwnd, GWLP_USERDATA, (LONG_PTR) pMTBInfo );
 
@@ -799,9 +797,9 @@ static LRESULT CALLBACK ToolBar_WndProc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM 
 	
 			Frame.height=ModernGetSettingDword(NULL, "ModernToolBar", "option_Bar0_OldHeight", pMTBInfo->nButtonHeight);
 			pMTBInfo->wLastHeight=Frame.height;
-          
-            pMTBInfo->nLineCount   = 1;
-            pMTBInfo->pButtonList=li.List_Create(0,1);
+		  
+			pMTBInfo->nLineCount   = 1;
+			pMTBInfo->pButtonList=li.List_Create(0,1);
 
 			Frame.name=(char*) lpcs->lpCreateParams;
 			hFrame=(HANDLE)CallService(MS_CLIST_FRAMES_ADDFRAME,(WPARAM)&Frame,(LPARAM)0);
@@ -811,7 +809,7 @@ static LRESULT CALLBACK ToolBar_WndProc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM 
 
 
 
-            //add self to window list
+			//add self to window list
 			WindowList_Add(tbdat.hToolBarWindowList, hwnd, NULL);
 			pMTBInfo->mtbXPTheme=xpt_AddThemeHandle(hwnd,L"TOOLBAR");
 			ToolBar_DefaultButtonRegistration();
@@ -1029,19 +1027,18 @@ static LRESULT CALLBACK ToolBar_WndProc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM 
 	case MTBM_SETBUTTONSTATE:
 		{	
 			char * hButtonId=(msg==MTBM_SETBUTTONSTATEBYID) ? (char *) wParam : NULL;
-			HWND hButton=(msg==MTBM_SETBUTTONSTATE) ?(HWND)wParam : NULL;
+			void * hButton=(msg==MTBM_SETBUTTONSTATE) ? (void *)wParam : NULL;
 			MTB_BUTTONINFO *mtbi=NULL;
 			int i;
 			for (i=0; i<pMTBInfo->pButtonList->realCount; i++)
 			{
 				mtbi=(MTB_BUTTONINFO*)pMTBInfo->pButtonList->items[i];
-				if ( (hButtonId && !strcmp(mtbi->szButtonID, hButtonId)) ||
-					 (hButton == mtbi->hWindow ) )
+				if ((hButtonId && !strcmp(mtbi->szButtonID, hButtonId)) || (hButton == mtbi))
 				{
 					mtbi->bPushButton=(BOOL)lParam;
-				    sttUpdateButtonState(mtbi);
+					sttUpdateButtonState(mtbi);
 					pcli->pfnInvalidateRect(hwnd, NULL, FALSE);
-				    break;
+					break;
 				}
 			}
 			break;
@@ -1052,14 +1049,13 @@ static LRESULT CALLBACK ToolBar_WndProc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM 
 			int * res= (int*)lParam;
 			if (res==NULL) break;
 			char * hButtonId=(msg==MTBM_GETBUTTONSTATEBYID) ? (char *) wParam : NULL;
-			HWND hButton=(msg==MTBM_GETBUTTONSTATE) ?(HWND)wParam  : NULL;
+			void * hButton=(msg==MTBM_GETBUTTONSTATE) ? (void *)wParam : NULL;
 			MTB_BUTTONINFO *mtbi=NULL;
 			int i;
 			for (i=0; i<pMTBInfo->pButtonList->realCount; i++)
 			{
 				mtbi=(MTB_BUTTONINFO*)pMTBInfo->pButtonList->items[i];
-				if ( (hButtonId && !strcmp(mtbi->szButtonID, hButtonId)) ||
-					(hButton == mtbi->hWindow ) )
+				if ((hButtonId && !strcmp(mtbi->szButtonID, hButtonId)) || (hButton == mtbi))
 				{
 					*res=0;
 					*res |= mtbi->bPushButton ? TBST_PUSHED : TBST_RELEASED;
@@ -1325,7 +1321,7 @@ static LRESULT CALLBACK ToolBar_OptDlgProc(HWND hwndDlg,UINT msg,WPARAM wParam,L
 			}
 			SendMessage(GetParent(hwndDlg), PSM_CHANGED, (WPARAM)hwndDlg, 0);
 		} else if ( (LOWORD(wParam)==IDC_TEXT_W || 
-			         LOWORD(wParam)==IDC_TEXT_H ||
+					 LOWORD(wParam)==IDC_TEXT_H ||
 					 LOWORD(wParam)==IDC_TEXT_S ) 
 					&& HIWORD(wParam) != EN_CHANGE || (HWND)lParam != GetFocus()) return 0; // dont make apply enabled during buddy set crap 
 		SendMessage(GetParent(hwndDlg), PSM_CHANGED, (WPARAM)hwndDlg, 0);

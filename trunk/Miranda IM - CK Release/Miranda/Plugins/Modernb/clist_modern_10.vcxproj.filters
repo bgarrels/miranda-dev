@@ -260,9 +260,6 @@
     <ClInclude Include="..\..\include\m_message.h">
       <Filter>m_api</Filter>
     </ClInclude>
-    <ClInclude Include="m_api\m_metacontacts.h">
-      <Filter>m_api</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\m_netlib.h">
       <Filter>m_api</Filter>
     </ClInclude>
@@ -290,22 +287,13 @@
     <ClInclude Include="..\..\include\m_skin.h">
       <Filter>m_api</Filter>
     </ClInclude>
-    <ClInclude Include="m_api\m_skin_eng.h">
-      <Filter>m_api</Filter>
-    </ClInclude>
     <ClInclude Include="m_api\m_skinbutton.h">
-      <Filter>m_api</Filter>
-    </ClInclude>
-    <ClInclude Include="m_api\m_smileyadd.h">
       <Filter>m_api</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\m_system.h">
       <Filter>m_api</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\m_system_cpp.h">
-      <Filter>m_api</Filter>
-    </ClInclude>
-    <ClInclude Include="m_api\m_toolbar.h">
       <Filter>m_api</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\m_url.h">
@@ -315,9 +303,6 @@
       <Filter>m_api</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\m_utils.h">
-      <Filter>m_api</Filter>
-    </ClInclude>
-    <ClInclude Include="m_api\m_variables.h">
       <Filter>m_api</Filter>
     </ClInclude>
     <ClInclude Include="m_api\m_xpTheme.h">
@@ -343,6 +328,21 @@
     </ClInclude>
     <ClInclude Include="hdr\modern_skinselector.h">
       <Filter>hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_metacontacts.h">
+      <Filter>m_api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_smileyadd.h">
+      <Filter>m_api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_toolbar.h">
+      <Filter>m_api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_variables.h">
+      <Filter>m_api</Filter>
+    </ClInclude>
+    <ClInclude Include="m_api\m_skin_eng.h">
+      <Filter>m_api</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
