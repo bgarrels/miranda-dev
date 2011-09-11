@@ -30,8 +30,9 @@ HCURSOR     hCurSplitNS, hCurSplitWE;
 
 extern HINSTANCE hInst;
 
-HANDLE hModulesLoaded, hOptionsInit, hPrebuildContactMenu, hServiceShowContactHistory, hPreShutdownHistoryModule, hHistoryContactDelete, hFontsChanged;
+HANDLE hModulesLoaded, hOptionsInit, hPrebuildContactMenu, hServiceShowContactHistory, hPreShutdownHistoryModule, hHistoryContactDelete, hFontsChanged,hToolBarLoaded;
 HANDLE hInIcon, hOutIcon, hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon, hConfigIcon, hDeleteIcon;
+HANDLE hToolbarButton;
 HGENMENU hContactMenu;
 bool g_SmileyAddAvail = false;
 const IID IID_ITextDocument={0x8CC497C0, 0xA1DF, 0x11ce, {0x80, 0x98, 0x00, 0xAA, 0x00, 0x47, 0xBE, 0x5D}};
@@ -85,6 +86,27 @@ int PrebuildContactMenu(WPARAM wParam, LPARAM lParam)
 	else mi.flags &= ~CMIF_HIDDEN;
 	CallService(MS_CLIST_MODIFYMENUITEM, (WPARAM)hContactMenu, (LPARAM)&mi);
 
+	return 0;
+}
+
+int ToolbarModuleLoaded(WPARAM wParam,LPARAM lParam)
+{
+	if(ServiceExists(MS_TB_ADDBUTTON))
+	{
+		TBButton tbb = {0};
+		tbb.cbSize = sizeof(tbb);
+		tbb.pszButtonID = "open_history";
+		tbb.pszButtonName = LPGEN("Open History");
+		tbb.pszServiceName = MS_HISTORY_SHOWCONTACTHISTORY;
+		tbb.lParam = 0;
+		tbb.pszTooltipUp = LPGEN("Open History");
+		tbb.pszTooltipDn = LPGEN("Open History");
+		tbb.defPos = 200;
+		tbb.tbbFlags = TBBF_SHOWTOOLTIP;
+		tbb.hPrimaryIconHandle = LoadSkinnedIconHandle(SKINICON_OTHER_HISTORY);
+		tbb.hSecondaryIconHandle = LoadSkinnedIconHandle(SKINICON_OTHER_HISTORY);
+		hToolbarButton = (HANDLE) CallService(MS_TB_ADDBUTTON,0, (LPARAM)&tbb);
+	}
 	return 0;
 }
 
@@ -204,7 +226,6 @@ int HistoryContactDelete(WPARAM wParam, LPARAM)
 
 int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 {
-	InitIcolib();
 	InitMenuItems();
 	InitUpdater();
 
@@ -232,6 +253,8 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	Options::instance = new Options();
 	hModulesLoaded = HookEvent(ME_SYSTEM_MODULESLOADED, ModulesLoaded);
 	hOptionsInit = HookEvent(ME_OPT_INITIALISE, Options::InitOptions);
+	hToolBarLoaded = HookEvent(ME_TB_MODULELOADED,ToolbarModuleLoaded);
+	InitIcolib();
 	return 0;
 }
 
@@ -243,6 +266,7 @@ extern "C" int __declspec(dllexport) Unload(void)
 	UnhookEvent(hHistoryContactDelete);
 	UnhookEvent(hOptionsInit);
 	UnhookEvent(hFontsChanged);
+	UnhookEvent(hToolBarLoaded);
 	DestroyServiceFunction(hServiceShowContactHistory);
 	HistoryWindow::Deinit();
 	DestroyCursor(hCurSplitNS);

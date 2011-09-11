@@ -82,3 +82,4 @@
 [Messages]
 [Searching]
 [Switch Only Selected Group]
+[Open History]

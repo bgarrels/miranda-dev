@@ -50,9 +50,9 @@
 
 #include <win2k.h>
 
-//ExternalAPI
-#include "m_updater.h"
-#include "m_smileyadd.h"
+#include "sdk/m_updater.h"
+#include "sdk/m_smileyadd.h"
+#include "sdk/m_toolbar.h"
 
 #define HISTORY_HK_FIND 100
 #define HISTORY_HK_FINDNEXT 101
