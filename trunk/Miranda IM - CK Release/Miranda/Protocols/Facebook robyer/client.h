@@ -48,7 +48,7 @@ public:
 		last_notification_time_ = last_message_time_ = \
 		last_grpmessage_time_ = last_close_chat_time_ = 0;
 
-		chat_first_touch_ = invisible_ = idle_ = is_typing_ = false;
+		invisible_ = is_typing_ = false;
 
 		buddies_lock_ = send_message_lock_ = NULL;
 		hMsgCon = NULL;
@@ -77,8 +77,6 @@ public:
 	std::string chat_channel_host_;
 	std::string chat_sequence_num_;
 	std::string chat_reconnect_reason_;
-	bool    chat_first_touch_;
-	bool    idle_;
 	bool    invisible_;
 	bool    is_typing_;
 	time_t  last_feeds_update_;
