@@ -806,7 +806,7 @@ bool facebook_client::home( )
 					mir_free( tmessage );
 				}
 
-				// TODO: parse messages directly to contacts
+				// RM TODO: parse messages directly to contacts
 				str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"messagesCountValue\">", "</span>" );
 				if ( str_count.length() && str_count != std::string( "0" ) )
 				{
@@ -817,7 +817,7 @@ bool facebook_client::home( )
 					mir_free( tmessage );
 				}
 
-				// TODO: parse notifications directly to popups
+				// RM TODO: parse notifications directly to popups
 				str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"notificationsCountValue\">", "</span>" );
 				if ( str_count.length() && str_count != std::string( "0" ) )
 				{
@@ -834,7 +834,7 @@ bool facebook_client::home( )
 /*      std::string chat_ids = utils::text::source_get_value( &resp.data, 2, "HomeNavController.initGroupCounts([","]" );
 			if ( chat_ids.length() )
       {
-        // RM TODO:
+
         // split by comma to ids, find names in source, inicialize groups in contactlist
         // maybe check which groupchats user wants
         // add to list? start worker for parse and add contacts to groupchat
