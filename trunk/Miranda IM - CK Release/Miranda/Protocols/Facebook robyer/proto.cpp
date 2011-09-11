@@ -107,8 +107,8 @@ FacebookProto::~FacebookProto( )
 	WaitForSingleObject( this->log_lock_, IGNORE );
 	WaitForSingleObject( this->facy.buddies_lock_, IGNORE );
 	WaitForSingleObject( this->facy.send_message_lock_, IGNORE );
-	WaitForSingleObject( this->update_loop_lock_, IGNORE );
-	WaitForSingleObject( this->message_loop_lock_, IGNORE );
+	//WaitForSingleObject( this->update_loop_lock_, IGNORE );
+	//WaitForSingleObject( this->message_loop_lock_, IGNORE );
 
 	CloseHandle( this->signon_lock_ );
 	CloseHandle( this->avatar_lock_ );
@@ -116,8 +116,8 @@ FacebookProto::~FacebookProto( )
 	CloseHandle( this->facy.buddies_lock_ );
 	CloseHandle( this->facy.send_message_lock_ );
 	CloseHandle( this->facy.fcb_conn_lock_ );
-	CloseHandle( this->update_loop_lock_ );
-	CloseHandle( this->message_loop_lock_ );
+	//CloseHandle( this->update_loop_lock_ );
+	//CloseHandle( this->message_loop_lock_ );
 
 	mir_free( m_tszUserName );
 	mir_free( m_szModuleName );
@@ -169,93 +169,42 @@ HICON FacebookProto::GetIcon(int index)
 
 int FacebookProto::SetStatus( int new_status )
 {
-	LOG("***** Beginning SetStatus process");
+	LOG("===== Beginning SetStatus process");
 	
 	// Routing statuses not supported by Facebook
 	switch ( new_status )
 	{
 	case ID_STATUS_INVISIBLE:
-	case ID_STATUS_OFFLINE:
-		// No change
+	case ID_STATUS_OFFLINE:		
+		m_iDesiredStatus = new_status;
 		break;
 
 	// RM TODO: needed/useful?
 	case ID_STATUS_CONNECTING:
-		new_status = ID_STATUS_OFFLINE;
+		m_iDesiredStatus = ID_STATUS_OFFLINE;
 		break;
 	
 	default:
-		new_status = ID_STATUS_ONLINE;
+		m_iDesiredStatus = ID_STATUS_ONLINE;
 		break;
 	}
 
-	int old_status = m_iStatus;
-	m_iDesiredStatus = new_status;
-
-	if ( old_status == ID_STATUS_CONNECTING && new_status != ID_STATUS_OFFLINE )
+	if ( m_iStatus == ID_STATUS_CONNECTING && m_iDesiredStatus != ID_STATUS_OFFLINE )
 	{
 		LOG("===== Status is connecting, no change");
 		return 0;
 	}
 
-	if ( new_status == old_status)
+	if ( m_iStatus == m_iDesiredStatus)
 	{
 		LOG("===== Statuses are same, no change");
 		return 0;
 	}
 
 	facy.invisible_ = ( new_status == ID_STATUS_INVISIBLE );
-
-	if ( new_status == ID_STATUS_OFFLINE )
-	{
-		LOG("===== New status: Offline");
-		
-		m_iStatus = facy.self_.status_id = ID_STATUS_CONNECTING;
-		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
-			(HANDLE)old_status,m_iStatus);
-
-		ForkThread( &FacebookProto::SignOff, this );
-	}
-	else if ( old_status == ID_STATUS_OFFLINE )
-	{
-		LOG("===== Old status: Offline");
-		
-		m_iStatus = facy.self_.status_id = ID_STATUS_CONNECTING;
-		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
-			(HANDLE)old_status,m_iStatus);
-
-		ForkThread( &FacebookProto::SignOn, this );
-	}
-	else if ( old_status == ID_STATUS_INVISIBLE )
-	{
-		LOG("===== Old status: Invisible");
-		
-		m_iStatus = facy.self_.status_id = ID_STATUS_CONNECTING;
-		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
-			(HANDLE)old_status,m_iStatus);
-
-		ForkThread( &FacebookProto::ChangeStatus, this );
-	}
-	else if ( new_status == ID_STATUS_INVISIBLE )
-	{
-		LOG("===== New status: Invisible");
-
-		m_iStatus = facy.self_.status_id = ID_STATUS_INVISIBLE;
-		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
-			(HANDLE)old_status,m_iStatus);
-
-		facy.chat_state( false );
-		facy.buddies.clear( );
-		this->SetAllContactStatuses( ID_STATUS_OFFLINE );
-	} else { 
-		LOG("===== New status: Else");
-
-		m_iStatus = facy.self_.status_id = new_status;
-		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
-			(HANDLE)old_status,m_iStatus);
-	}
   
-	LOG("***** SetStatus complete");
+	ForkThread( &FacebookProto::ChangeStatus, this );
+
 	return 0;
 }
 

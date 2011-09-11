@@ -187,8 +187,8 @@ public:
 	HANDLE  signon_lock_;
 	HANDLE  avatar_lock_;
 	HANDLE  log_lock_;
-	HANDLE  update_loop_lock_;
-	HANDLE  message_loop_lock_;
+	//HANDLE  update_loop_lock_;
+	//HANDLE  message_loop_lock_;
 
 	HANDLE  m_hNetlibUser;
 	HANDLE  m_hUpdLoop;
