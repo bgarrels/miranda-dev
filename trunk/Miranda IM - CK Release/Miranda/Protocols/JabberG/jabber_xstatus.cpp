@@ -20,7 +20,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Revision       : $Revision: 13500 $
-Last change on : $Date: 2011-03-25 16:14:31 +0300 (Пт, 25 мар 2011) $
+Last change on : $Date: 2011-03-25 14:14:31 +0100 (Fr, 25. Mrz 2011) $
 Last change by : $Author: Michael.Kunz@s2005.TU-Chemnitz.de $
 
 */
@@ -34,9 +34,9 @@ Last change by : $Author: Michael.Kunz@s2005.TU-Chemnitz.de $
 
 #include <m_cluiframes.h>
 
-#include "m_proto_listeningto.h"
-#include "m_skin_eng.h"
-#include "m_extraicons.h"
+#include "sdk/m_proto_listeningto.h"
+#include "sdk/m_skin_eng.h"
+#include "sdk/m_extraicons.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Simple dialog with timer and ok/cancel buttons
