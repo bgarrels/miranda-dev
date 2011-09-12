@@ -28,6 +28,7 @@ MM_INTERFACE mmi;
 LIST_INTERFACE li;
 CLIST_INTERFACE* pcli;
 UTF8_INTERFACE utfi;
+int hLangpack;
 
 HINSTANCE g_hInstance;
 std::string g_strUserAgent;
@@ -142,8 +143,7 @@ int OnModulesLoaded(WPARAM,LPARAM)
 		#else
 			upd.szBetaUpdateURL      = "http://robyer.info/stahni/omegle.zip";  
 		#endif    
-		upd.pbVersion = reinterpret_cast<BYTE*>( CreateVersionStringPlugin(
-			reinterpret_cast<PLUGININFO*>(&pluginInfo),curr_version) );
+		upd.pbVersion = reinterpret_cast<BYTE*>(CreateVersionStringPluginEx(&pluginInfo,curr_version) );
 		upd.cpbVersion = (int)strlen(reinterpret_cast<char*>(upd.pbVersion));
 		CallService(MS_UPDATE_REGISTER,0,(LPARAM)&upd);
 	}
@@ -162,6 +162,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	mir_getMMI(&mmi);
 	mir_getLI(&li);
 	mir_getUTFI(&utfi);
+	mir_getLP(&pluginInfo);
 
 	pcli = reinterpret_cast<CLIST_INTERFACE*>( CallService(
 	    MS_CLIST_RETRIEVE_INTERFACE,0,reinterpret_cast<LPARAM>(g_hInstance)) );
