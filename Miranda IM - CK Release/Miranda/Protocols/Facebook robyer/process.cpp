@@ -49,7 +49,7 @@ void FacebookProto::ProcessBuddyList( void* data )
 
 	for ( List::Item< facebook_user >* i = facy.buddies.begin( ); i != NULL; )
 	{
-		LOG("      Now %s%s: %s", (i->data->status_id==ID_STATUS_OFFLINE?"offline":"online"),(i->data->is_idle?" (idle)":""), i->data->real_name.c_str());
+		LOG("      Now %s: %s", (i->data->status_id == ID_STATUS_OFFLINE ? "offline" : "online"), i->data->real_name.c_str());
 
 		facebook_user* fu;
 
@@ -78,6 +78,138 @@ void FacebookProto::ProcessBuddyList( void* data )
 exit:
 	delete resp;
 }
+
+void FacebookProto::ProcessFriendList( void* data )
+{
+	if ( data == NULL )
+		return;
+
+	std::string* resp = (std::string*)data;
+
+	LOG("***** Starting processing friend list");
+
+	CODE_BLOCK_TRY
+
+	std::map<std::string, facebook_user*> friends;
+
+	facebook_json_parser* p = new facebook_json_parser( this );
+	p->parse_friends( data, &friends );
+	delete p;
+
+
+	// Check and update old contacts
+	for(HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST,0,0);
+	    hContact;
+	    hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT,(WPARAM)hContact,0) )
+	{
+		if(!IsMyContact(hContact))
+			continue;
+
+		DBVARIANT dbv;
+		facebook_user *fbu;
+		if( !DBGetContactSettingString(hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) ) {
+			std::string id = dbv.pszVal;
+			DBFreeVariant(&dbv);
+			
+			std::map< std::string, facebook_user* >::iterator iter;
+			
+			if ((iter = friends.find(id)) != friends.end()) {
+				// Found contact, update it and remove from map
+				fbu = iter->second;
+
+				DBVARIANT dbv;
+				bool update_required = true;
+
+				// RM TODO: remove, because contacts cant change it, so its only for "first run"
+				// Update gender
+				if ( DBGetContactSettingByte(hContact, m_szModuleName, "Gender", 0) != fbu->gender )
+					DBWriteContactSettingByte(hContact, m_szModuleName, "Gender", fbu->gender );
+
+				// Update real name
+				if ( !DBGetContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NAME, &dbv) )
+				{
+					update_required = strcmp( dbv.pszVal, fbu->real_name.c_str() ) != 0;
+					DBFreeVariant(&dbv);
+				}
+				if ( update_required )
+				{
+					DBWriteContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NAME, fbu->real_name.c_str());
+					DBWriteContactSettingUTF8String(hContact, m_szModuleName, "Nick", fbu->real_name.c_str());
+				}
+
+				// Check avatar change
+				update_required = true;
+				if ( !DBGetContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, &dbv) )
+				{
+					update_required = strcmp( dbv.pszVal, fbu->image_url.c_str() ) != 0;
+					DBFreeVariant(&dbv);
+				}
+				if ( update_required ) {
+					DBWriteContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, fbu->image_url.c_str());
+					DBWriteContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_NEW_AVATAR, 1);
+					// TODO: notify that avatar should change
+				}
+			
+				// TODO: remove and wait for avatar request...
+				/* if ( update_required || !proto->AvatarExists(&fbu) )
+				{
+					proto->Log("***** Saving new avatar url: %s",fbu.image_url.c_str());
+					proto->ProcessAvatar(hContact,&(fbu.image_url));
+				} */
+				
+				delete fbu;
+				friends.erase(iter);
+			} else {
+				// Contact was removed from "server-list", notify it
+
+				// Wasnt we already been notified about this contact?
+				if ( !DBGetContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) ) {
+					DBWriteContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 1);
+
+					std::string contactname = id;
+					if ( !DBGetContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NAME, &dbv) ) {
+						contactname = dbv.pszVal;
+						DBFreeVariant(&dbv);
+					}
+
+					std::string url = FACEBOOK_URL_PROFILE + id;
+
+					TCHAR* szTitle = mir_a2t_cp(contactname.c_str(), CP_UTF8);
+					TCHAR* szUrl = mir_a2t_cp(url.c_str(), CP_UTF8);
+					NotifyEvent(szTitle, TranslateT("Contact was removed from server."), hContact, FACEBOOK_EVENT_CLIENT, szUrl);
+					mir_free( szTitle );
+					// mir_free( szUrl ); // url is free'd in popup procedure
+				}
+			}
+		}
+	}
+
+	// Check remain contacts in map and add it to contact list
+	for ( std::map< std::string, facebook_user* >::iterator iter = friends.begin(); iter != friends.end(); ++iter )
+	{
+		facebook_user *fbu = iter->second;
+		
+		HANDLE hContact = AddToContactList(fbu, true); // This contact is surely new
+
+		DBWriteContactSettingByte(hContact, m_szModuleName, "Gender", fbu->gender );
+		DBWriteContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NAME, fbu->real_name.c_str());
+		DBWriteContactSettingUTF8String(hContact, m_szModuleName, "Nick", fbu->real_name.c_str());
+		DBWriteContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, fbu->image_url.c_str());
+		DBWriteContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_NEW_AVATAR, 1);
+//		DBWriteContactSettingWord(hContact, m_szModuleName, "Status", ID_STATUS_OFFLINE );
+	}
+
+	LOG("***** Friend list processed");
+
+	CODE_BLOCK_CATCH
+
+	LOG("***** Error processing friend list: %s", e.what());
+
+	CODE_BLOCK_END
+
+	delete resp;
+}
+
 
 void FacebookProto::ProcessMessages( void* data )
 {

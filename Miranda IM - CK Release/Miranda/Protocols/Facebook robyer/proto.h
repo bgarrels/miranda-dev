@@ -142,6 +142,7 @@ public:
 
 	// Processing threads
 	void __cdecl ProcessBuddyList(void*);
+	void __cdecl ProcessFriendList(void*);
 	void __cdecl ProcessMessages(void*);
 	void __cdecl ProcessFeeds(void*);
 	void         ProcessAvatar(HANDLE,const std::string*,bool force=false);
@@ -153,7 +154,6 @@ public:
 	void __cdecl GetAwayMsgWorker(void*);
 	void __cdecl SetAwayMsgWorker(void*);
 	void __cdecl UpdateContactWorker(void*);
-	void __cdecl UpdateFriendWorker(void*);
 	void __cdecl UpdateAvatarWorker(void*);
 	void __cdecl SendMsgWorker(void*);
 	void __cdecl SendTypingWorker(void*);
@@ -162,7 +162,7 @@ public:
 	// Contacts handling
 	bool    IsMyContact(HANDLE, bool include_chat = false);
 	HANDLE  ContactIDToHContact(std::string);
-	HANDLE  AddToContactList(facebook_user*);
+	HANDLE  AddToContactList(facebook_user*, bool dont_check = false);
 	void    SetAllContactStatuses(int);
 	bool    ContactNeedsUpdate(facebook_user*);
 

@@ -122,7 +122,7 @@ void FacebookProto::ChangeStatus(void*)
 	}
 	else if ( new_status == ID_STATUS_INVISIBLE )
 	{
-		facy.buddies.clear( );
+		facy.buddies.clear( ); // RM TODO: fix not freeing buddies? or are they free'd?
 		this->SetAllContactStatuses( ID_STATUS_OFFLINE );
 	}
 
