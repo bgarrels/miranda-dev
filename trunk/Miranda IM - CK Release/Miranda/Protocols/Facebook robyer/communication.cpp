@@ -943,17 +943,18 @@ bool facebook_client::buddy_list( )
 	handle_entry( "buddy_list" );
 
 	// Prepare update data
-	std::string data = "user=" + this->self_.user_id + "&popped_out=false&force_render=true&buddy_list=1&notifications=0&post_form_id=" + this->post_form_id_ + "&fb_dtsg=" + this->dtsg_ + "&post_form_id_source=AsyncRequest&__a=1&nctr[n]=1";
+	std::string data = "user=" + this->self_.user_id + "&__user=" + this->self_.user_id + "&popped_out=false&force_render=true&fetch_mobile=false&post_form_id=" + this->post_form_id_ + "&fb_dtsg=" + this->dtsg_ + "&post_form_id_source=AsyncRequest&lsd";
 
 	{
 		ScopedLock s(buddies_lock_);
 
-		for (List::Item< facebook_user >* i = buddies.begin(); i != NULL; i = i->next )
+		int num = 0;
+		for (List::Item< facebook_user >* i = buddies.begin(); i != NULL; i = i->next, num++ )
 		{
-			data += "&available_list[";
+			data += "&available_user_info_ids[";
+			data += num;
+			data += "]=";
 			data += i->data->user_id;
-			data += "][i]=";
-			data += ( i->data->is_idle ) ? "1" : "0";
 		}
 	}
 
@@ -994,10 +995,8 @@ bool facebook_client::load_friends( )
 	{
 	case HTTP_CODE_OK:
 	{
-		facebook_json_parser* p = new facebook_json_parser( this->parent );
-		p->parse_friends( &(resp.data) );
-		delete p;
-
+		std::string* response_data = new std::string( resp.data );
+		ForkThread( &FacebookProto::ProcessFriendList, this->parent, ( void* )response_data );
 		return handle_success( "load_friends" );
 	}
 	case HTTP_CODE_FAKE_ERROR:
@@ -1221,38 +1220,6 @@ void facebook_client::chat_mark_read( std::string message_recipient )
 	
 	http::response resp = flap( FACEBOOK_REQUEST_ASYNC, &data );
 }
-
-/*bool facebook_client::get_profile(facebook_user* fbu)
-{
-	handle_entry( "get_profile" );
-
-	http::response resp = flap( FACEBOOK_REQUEST_PROFILE_GET, &fbu->user_id );
-
-	validate_response(&resp);
-
-	switch ( resp.code )
-	{
-	case HTTP_CODE_OK:
-    {
-		// TODO: More items?
-		fbu->status = "";			
-
-		std::string image = utils::text::source_get_value( &resp.data, 2, "background-image: url(", ")" );
-		if ( image.length() )
-			fbu->image_url = utils::text::special_expressions_decode( image );
-		else
-			fbu->image_url = FACEBOOK_DEFAULT_AVATAR_URL;
-	}
-
-    case HTTP_CODE_FOUND:
-		return handle_success( "get_profile" );
-
-	case HTTP_CODE_FAKE_ERROR:
-	case HTTP_CODE_FAKE_DISCONNECTED:
-	default:
-  		return handle_error( "get_profile" );
-	}
-}*/
 
 bool facebook_client::set_status(const std::string &status_text)
 {

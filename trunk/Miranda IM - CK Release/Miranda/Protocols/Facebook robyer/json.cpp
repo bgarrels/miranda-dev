@@ -70,11 +70,9 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 
 			current = buddy_list->find( member.name );
 			const Object& objMember = member.element;
-			const Boolean idle = objMember["i"];
 
 			current->user_id = current->real_name = member.name;
-			current->is_idle = ( idle.Value( ) == 1 );
-			current->status_id = current->is_idle ? ID_STATUS_AWAY : ID_STATUS_ONLINE;			
+			current->status_id = ID_STATUS_ONLINE;
 		}
 
 		const Object& userInfosList = objRoot["payload"]["buddy_list"]["userInfos"];
@@ -115,13 +113,12 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 	return EXIT_SUCCESS;
 }
 
-int facebook_json_parser::parse_friends( void* data )
+int facebook_json_parser::parse_friends( void* data, std::map< std::string, facebook_user* >* friends )
 {
 	using namespace json;
 
 	try
 	{
-		facebook_user* current = NULL;
 		std::string buddyData = static_cast< std::string* >( data )->substr( 9 );
 		std::istringstream sDocument( buddyData );
 		Object objDocument;
@@ -139,64 +136,23 @@ int facebook_json_parser::parse_friends( void* data )
 			const String& realName = objMember["name"];
 			const String& imageUrl = objMember["thumbSrc"];
 			//const String& vanity = objMember["vanity"];
-			const Number& gender_num = objMember["gender"];
+			const Number& gender = objMember["gender"];
+			
+			facebook_user *fbu = new facebook_user();
 
-			facebook_user fbu;
-			fbu.user_id = member.name;
-
-			fbu.real_name = utils::text::slashu_to_utf8(
+			fbu->user_id = member.name;
+			fbu->real_name = utils::text::slashu_to_utf8(
 			    utils::text::special_expressions_decode( realName.Value() ) );
-			fbu.image_url = utils::text::slashu_to_utf8(
+			fbu->image_url = utils::text::slashu_to_utf8(
 			    utils::text::special_expressions_decode( imageUrl.Value() ) );
 
-			int gender = 0;
-			if (gender_num.Value() == 1) {
-				gender = 70; // woman
-			} else if (gender_num.Value() == 2) {
-				gender = 77; // man
+			if (gender.Value() == 1) {
+				fbu->gender = 70; // female
+			} else if (gender.Value() == 2) {
+				fbu->gender = 77; // male
 			}
 
-			HANDLE hContact = proto->AddToContactList(&fbu);
-							
-			if ( DBGetContactSettingByte(hContact,proto->m_szModuleName,"Gender", 0) != gender )
-				DBWriteContactSettingByte(hContact,proto->m_szModuleName,"Gender", gender );
-			
-//			DBWriteContactSettingWord(hContact,proto->m_szModuleName,"Status",ID_STATUS_OFFLINE );
-
-			DBVARIANT dbv;
-			// Update Real name
-			bool update_required = true;
-			if ( !DBGetContactSettingUTF8String(hContact,proto->m_szModuleName,FACEBOOK_KEY_NAME,&dbv) )
-			{
-				update_required = strcmp( dbv.pszVal, fbu.real_name.c_str() ) != 0;
-				DBFreeVariant(&dbv);
-			}
-			if ( update_required )
-			{
-				DBWriteContactSettingUTF8String(hContact,proto->m_szModuleName,FACEBOOK_KEY_NAME,fbu.real_name.c_str());
-				DBWriteContactSettingUTF8String(hContact,proto->m_szModuleName,"Nick",fbu.real_name.c_str());
-			}
-
-/*			// Check avatar change
-			update_required = true;
-			if ( !DBGetContactSettingString(hContact,proto->m_szModuleName,FACEBOOK_KEY_AV_URL,&dbv) )
-			{
-				update_required = strcmp( dbv.pszVal, fbu.image_url.c_str() ) != 0;
-				DBFreeVariant(&dbv);
-			}
-			if ( update_required ) {
-				DBWriteContactSettingString(hContact,proto->m_szModuleName,FACEBOOK_KEY_AV_URL,fbu.image_url.c_str());
-				DBWriteContactSettingByte(hContact,proto->m_szModuleName,FACEBOOK_KEY_NEW_AVATAR, 1);
-			}
-			
-			// TODO: remove and wait for avatar request...
-			if ( update_required || !proto->AvatarExists(&fbu) )
-			{
-				proto->Log("***** Saving new avatar url: %s",fbu.image_url.c_str());
-				proto->ProcessAvatar(hContact,&(fbu.image_url));
-			}*/
-
-			//ForkThread(&FacebookProto::UpdateFriendWorker, proto, (void*)fbu);
+			friends->insert( std::make_pair( member.name, fbu ) );
 		}
 	}
 	catch (Reader::ParseException& e)

@@ -35,8 +35,7 @@ struct facebook_user
 	std::string real_name;
 
 	unsigned int status_id;
-	std::string status;
-	bool is_idle;
+	unsigned int gender;
 
 	std::string image_url;
 
@@ -45,22 +44,20 @@ struct facebook_user
 	facebook_user( )
 	{
 		this->handle = NULL;
-		this->user_id = this->real_name = this->image_url = /*this->status = */"";
-		this->is_idle = false;
+		this->user_id = this->real_name = this->image_url = "";
 		this->status_id = ID_STATUS_OFFLINE;
-		this->last_update = 0;
+		this->last_update = this->gender = 0;
 	}
 
 	facebook_user( facebook_user* fu )
 	{
 		this->handle = fu->handle;
 		this->image_url = fu->image_url;
-		this->is_idle = fu->is_idle;
 		this->last_update = fu->last_update;
 		this->real_name = fu->real_name;
-		//this->status = fu->status;
 		this->status_id = fu->status_id;
 		this->user_id = fu->user_id;
+		this->gender = fu->gender;
 	}
 };
 
