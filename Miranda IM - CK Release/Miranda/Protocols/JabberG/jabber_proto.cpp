@@ -1354,7 +1354,7 @@ int __cdecl CJabberProto::SetStatus( int iNewStatus )
 	Log( "PS_SETSTATUS( %d )", iNewStatus );
 	m_iDesiredStatus = iNewStatus;
 
-	if ( iNewStatus == ID_STATUS_OFFLINE ) {
+ 	if ( iNewStatus == ID_STATUS_OFFLINE ) {
 		if ( m_ThreadInfo ) {
 			if ( m_bJabberOnline ) {
 				// Quit all chatrooms (will send quit message)
@@ -1400,7 +1400,7 @@ void __cdecl CJabberProto::GetAwayMsgThread( void* hContact )
 	JABBER_LIST_ITEM *item;
 	JABBER_RESOURCE_STATUS *r;
 	int i, msgCount;
-	size_t len;
+    size_t len;
 
 	if ( !JGetStringT( hContact, "jid", &dbv )) {
 		if (( item = ListGetItemPtr( LIST_ROSTER, dbv.ptszVal )) != NULL ) {
