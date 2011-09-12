@@ -52,8 +52,11 @@ OmegleProto::OmegleProto(const char* proto_name, const TCHAR* username)
 
 	//CreateProtoService(m_szModuleName, PS_CREATEACCMGRUI, &OmegleProto::SvcCreateAccMgrUI, this);
 	CreateProtoService(m_szModuleName,PS_GETNAME, &OmegleProto::GetName,this);
-
-	HookProtoEvent(ME_DB_CONTACT_DELETED,&OmegleProto::OnContactDeleted,this);
+	
+	if(g_mirandaVersion < PLUGIN_MAKE_VERSION(0, 10, 0, 2))
+	{
+		HookProtoEvent(ME_DB_CONTACT_DELETED,&OmegleProto::OnContactDeleted,this);
+	}
 	HookProtoEvent(ME_OPT_INITIALISE,&OmegleProto::OnOptionsInit,this);
 	HookProtoEvent(ME_GC_EVENT,&OmegleProto::OnChatOutgoing,this);
 
@@ -199,6 +202,9 @@ int OmegleProto::OnEvent(PROTOEVENTTYPE event,WPARAM wParam,LPARAM lParam)
 	
 	case EV_PROTO_ONOPTIONS:
 		return OnOptionsInit  (wParam,lParam);
+
+	case EV_PROTO_ONCONTACTDELETED:
+		return OnContactDeleted(wParam,lParam);
 	}
 
 	return 1;
@@ -240,7 +246,7 @@ int OmegleProto::OnOptionsInit(WPARAM wParam,LPARAM lParam)
 	odp.hInstance   = g_hInstance;
 	odp.ptszTitle   = m_tszUserName;
 	odp.dwInitParam = LPARAM(this);
-	odp.flags       = ODPF_BOLDGROUPS | ODPF_TCHAR;
+	odp.flags       = ODPF_BOLDGROUPS | ODPF_TCHAR | ODPF_DONTTRANSLATE;
 
 	odp.position    = 271828;
 	odp.ptszGroup   = LPGENT("Network");
