@@ -7,8 +7,8 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 11 Sep 2011 14:09:07
-; FLID: Deutsche Sprachdatei 0.11.09.11
+X-Langpack-creation-date: 12 Sep 2011 12:09:07
+; FLID: Deutsche Sprachdatei 0.11.09.12
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,AsSingleWindow,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Basic_History,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirFox,MirOTR,MirOUT,MirPy_Scripting,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
 ; Start of langpack: Core (Letzte Änderung: 15:33, 10. Sep. 2011 )
@@ -12230,7 +12230,7 @@ HTML
 ; ##############################################
 ; End of langpack: GTalkExt
 ; ############################################## 
-; Start of langpack: Gadu-Gadu (Letzte Änderung: 16:52, 6. Jul. 2011 )
+; Start of langpack: Gadu-Gadu (Letzte Änderung: 08:35, 12. Sep. 2011 )
 
 ; Pluginname: Gadu-Gadu Protocol
 ; Version: 0.9.10.2
@@ -12306,7 +12306,9 @@ Für die Anmeldung müssen Sie ihre registrierte eMail erst angeben.
 [Your password will be sent to your registration e-mail.\nDo you want to continue ?]
 Ihr Passwort wird zur Ihrer Registrierungsemail gesendet.\nMöchten Sie fortfahren?
 [You should disconnect before making any permanent changes with your account.\nDo you want to disconnect now ?]
-Sie sollten die Verbindung trennen bevor sie permanente Änderungen mit ihrem Account vornehmen.\nWollen sie nun die Verbindung trennen? 
+Sie sollten die Verbindung trennen bevor sie permanente Änderungen mit ihrem Account vornehmen.\nWollen sie nun die Verbindung trennen?
+[You have registered new account.\nPlease fill up your personal details in "M->View/Change My Details..."]
+Sie müssen einen neuen Account anlegen.\nBitte füllen sie alle wichtigen Informationen unter "Meine Details ändern" aus.
 
 [Connection cannot be established because of error:\n\t%s]
 Eine Verbindung konnte nicht hergestellt werden, Fehler:\n\t%s
@@ -33746,7 +33748,7 @@ Standbilder
 ; ##############################################
 ; End of langpack: TV_plugin_YM
 ; ############################################## 
-; Start of langpack: TabSRMM (Letzte Änderung: 13:28, 11. Sep. 2011 )
+; Start of langpack: TabSRMM (Letzte Änderung: 11:05, 12. Sep. 2011 )
 
 ; Pluginname: TabSRMM 
 ; Version: 3.1.99.8
@@ -34490,8 +34492,6 @@ Es stehen %d Nachrichten aus. Nachrichtenlänge: %d Bytes, Nachrichtenlänge begre
 Sitzungsliste:\nKlicke links für eine Liste der offenen Sitzungen.\Klick rechts für den Zugang zu Favoriten und schnell konfigurieren Meldungsfenster & Verhalten.
 [\n(Sent delayed. Original timestamp %s)]
 \n(Verzögert gesendet. Der Original-Zeitstempel war %s)
-[Original timestamp]
-Original-Zeitstempel
 [%s on %s%s]
 %s  in %s%s
 [UID: %s (SHIFT click -> copy to clipboard)\nClick for User's Details\nRight click for MetaContact control\nClick dropdown to add or remove user from your favorites.]
@@ -34511,10 +34511,6 @@ Sitzung schließen\tStrg-W
 Container schließen\tAlt-F4
 [Message Session...]
 Nachrichtensitzung ...
-[&Send later job list...]
-&Später-senden-Aufgabenliste...
-[Filter by contact:]
-Nach Kontakt gefiltert:
 
 [&View]
 Anzeige
@@ -34636,36 +34632,21 @@ Container schließen
 
 [Configure container options for\n%s]
 Konfiguriere Containeroptionen für\n%s
-[Container options]
-Containereinstellungen
 [Default container]
 Standardcontainer
-[\tConfigure container options]
-\tContainereinstellungen festlegen
-[Container settings are private]
-Einstellungen für diesen Container sind lokal
-[Check if you don't want this container to use the global container options. Window position can always be private.]
-Aktivieren, wenn Sie für diesen Container nicht die globalen Container-\neinstellungen verwenden wollen. Fensterposition kann immer privat sein.
-[Options marked with an asterisk (*) may not take effect in open message windows or tabs.]
-Optionen mit einem Sternchen (*) haben keinen Effekt auf geöffenete Fenster oder Tabs.
-[The container is using private settings. The panel  height  will not be shared with other containers]
-Der Container läuft mit privaten Einstellungen. Die Wandhöhe wird nicht mit anderen Container geteilt werden.
 [Rounded (only for internal avatar drawing)]
 Abgerundete (nur für interne Avatarzeichnung)
 [1 pixel, solid]
 1 Pixel, fest
 [Edit Highlight List...]
 Editiere "Highlight" Liste ...
-[Use text symbols instead of icons in the chat log (faster)]
-Textsymbole anstelle von Icons im Verlauf zeigen (schneller)
-[Make nicknames clickable hyperlinks]
-Nicknamen in anklickbare Hyperlinks umwandeln
 
 ;Allgemeine Einstellungen
 [Options marked with an asterisk (*) do not affect open message windows.]
 Optionen mit einem Sternchen (*) haben keinen Effekt auf bereits geöffnete Fenster.
 [When checked, this container will use private settings, otherwise settings are shared among containers.]
 Wenn aktiviert, wird der Container private Einstellungen verwenden, ansonsten wird die Standardeinstellung benutzt.
+
 [Close or hide inactive container after]
 Schließe oder verstecke Container nach
 [Only show tab bar when it's needed]
@@ -34678,8 +34659,6 @@ Vertikal maximieren
 Automatische Größe für das Eingabefeld (*)
 [sec. (0=never)]
 Sek. (0=niemals)
-[Close/hide inactive container after]
-Schließe/verst. inakt. Container nach:
 
 ;Layout des Fensters
 [Window layout]
@@ -34815,22 +34794,32 @@ Klänge für inaktive Tabs in aktiven Containern spielen
 [Play sounds for the active tab / window]
 Klänge für den aktiven Tab / Fenster spielen
 
-[Display popups for failed jobs]
-Zeige Popups für fehlgeschlagene Nachrichten
-[Display popups for completed jobs]
-Zeige Popups für komplett gesendete Nachrichten
+[&Send later job list...]
+&Später-senden-Aufgabenliste...
+
+[Queued send jobs]
+Gespeicherte Sendenaufgaben
+[Filter by contact:]
+Nach Kontakt gefiltert:
+[Original timestamp]
+Original-Zeitstempel
+[Message text]
+Nachrichtentext
 [Last send info]
 Letzte gesendete Info
 [Queued jobs]
 Gespeicherte Aufgaben
-[Queued send jobs]
-Gespeicherte Sendenaufgaben
 [Queue manager]
 Queue-Manager
 [Deferred]
 Hinausgeschoben
 [Suspended]
 Schwebend
+[Display popups for failed jobs]
+Zeige Popups für fehlgeschlagene Nachrichten
+[Display popups for completed jobs]
+Zeige Popups für komplett gesendete Nachrichten
+
 [Customize the panel]
 Anpassung des Infobereichs
 [Set panel visibility for this %s]
@@ -34841,8 +34830,6 @@ Kontakt
 Chatraum
 [Add user to highlight list]
 Füge Benutzer zur "Highlight"-Liste hinzu
-[Do not synchronize the panel height with IM windows]
-Syncronisiere nicht die Schaltflächenhöhe mit den IM-Fenstern
 [Open History...]
 Öffne Verlauf... 
 [Room Settings...]
@@ -34859,7 +34846,7 @@ Editiere Benutzer-"Highlight"-Liste
 
 ;Groupbox: Geltungsbereich der Einstellungen
 [Scope of settings]
-Geltungsbereich der Einstellungen
+Reichweite der Einstellungen
 [Inherit from container setting]
 Von den Containereinstellungen übernehmen
 [Always off]
@@ -34871,7 +34858,7 @@ Globale oder individuelle Bereichshöhe:
 [Use default size]
 Standardgröße
 [Use private size]
-Individuelle Größe
+Private Größe
 
 ;Groupbox: Einstellen der Größe
 [Set size to]
@@ -34884,14 +34871,18 @@ Normal (2 Zeilen)
 Groß
 [Tip: To use a custom size you can always drag the bottom edge of the panel]
 Tipp: Zur Größenanpassung können Sie die untere Kante mit der Maus verschieben.
-
-;Groupbox: Andere Einstellungen
+[Do not synchronize the panel height with IM windows]
+Syncronisiere nicht die Schaltflächenhöhe mit den IM-Fenstern
 [Do not synchronize the panel height with group chat windows]
 Die Bereichshöhe nicht mit der Höhe des Gruppenchatfensters synchronisieren
 [Show picture for this contact]
 Zeige Avatar des Kontaktes:
 [Note: All settings are applied immediately]
 Hinweis: Alle Einstellungen werden sofort aktiv!
+[The container is using private settings. The panel  height  will not be shared with other containers.]
+Der Container verwendet private Einstellungen. Die Wandhöhe wird nicht mit anderen Container geteilt werden.
+
+;Groupbox: Andere Einstellungen
 [%s has left (%s)]
 %s verlässt den Channel (%s)
 
