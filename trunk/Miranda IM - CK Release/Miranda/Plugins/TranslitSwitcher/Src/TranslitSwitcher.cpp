@@ -141,7 +141,7 @@ int OnModulesLoaded(WPARAM wParam, LPARAM lParam)
 	CallService(MS_HOTKEY_REGISTER, 0, (LPARAM)&hkd);
 
 	hOnButtonPressed = HookEvent(ME_MSG_BUTTONPRESSED, OnButtonPressed); 
-	if (ServiceExists(MS_SKIN2_ADDICON))
+	if (ServiceExists(MS_BB_ADDBUTTON) && ServiceExists(MS_SKIN2_ADDICON))
 	{
 		SKINICONDESC sid = {0};
 		sid.cbSize = sizeof(SKINICONDESC);
@@ -163,7 +163,7 @@ int OnModulesLoaded(WPARAM wParam, LPARAM lParam)
 		sid.hDefaultIcon = LoadIcon(hInst, MAKEINTRESOURCE(IDI_INVERTSEND));
 		hInvertIcon = (HICON)CallService(MS_SKIN2_ADDICON, 0, (LPARAM) &sid);
 	}
-	else
+	else if (ServiceExists(MS_BB_ADDBUTTON))
 	{
 		hSwitchIcon = LoadIcon(hInst, MAKEINTRESOURCE(IDI_SWITCHSEND));
 		hTranslitIcon = LoadIcon(hInst, MAKEINTRESOURCE(IDI_TRANSLITSEND));

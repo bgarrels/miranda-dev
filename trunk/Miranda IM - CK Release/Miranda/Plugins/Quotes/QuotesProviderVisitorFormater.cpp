@@ -187,30 +187,3 @@ void CQuotesProviderVisitorFormater::FormatDoubleHelper(LPCSTR pszDbSet,
 		m_sResult = sInvalid;
 	}
 }
-
-// void CQuotesProviderVisitorFormater::FormatChangeValueHelper(bool bPercentage)
-// {
-// 	double dPrev = 0.0,dRate = 0.0;
-// 	if((true == Quotes_DBReadDouble(m_hContact,QUOTES_PROTOCOL_NAME,DB_STR_QUOTE_CURR_VALUE,dRate))
-// 		&&(true == Quotes_DBReadDouble(m_hContact,QUOTES_PROTOCOL_NAME,DB_STR_QUOTE_PREV_VALUE,dPrev)))
-// 	{
-// 
-// 		if(false == bPercentage)
-// 		{
-// 			if(false == IsWithinAccuracy(dRate,dPrev))
-// 			{
-// 				if(dRate > dPrev)
-// 				{
-// 					m_sResult += _T("+");
-// 				}
-// 			}
-// 
-// 			m_sResult += format_double(dRate-dPrev,m_nWidth);
-// 		}
-// 		else
-// 		{
-// 			m_sResult += format_double((1.0-(dPrev/dRate))*100.0,m_nWidth);		
-// 			m_sResult += _T("%");
-// 		}
-// 	}
-// }

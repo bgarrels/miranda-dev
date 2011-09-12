@@ -193,8 +193,8 @@ public:
 
 class Options {
 private:
-   	static int 		generalFlags;
-   	static bool     isInited;
+	static int 		generalFlags;
+	static bool     isInited;
 	static bool     bMathModule;
 	static bool     bSmileyAdd;
 	static int      avatarServiceFlags;

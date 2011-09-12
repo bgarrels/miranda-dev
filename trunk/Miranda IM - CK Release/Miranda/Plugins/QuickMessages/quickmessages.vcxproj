@@ -87,6 +87,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -165,8 +166,8 @@
     <ClCompile Include="Utils.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="m_msg_buttonsbar.h" />
-    <ClInclude Include="m_updater.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_msg_buttonsbar.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_updater.h" />
     <ClInclude Include="quickmessages.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Utils.h" />

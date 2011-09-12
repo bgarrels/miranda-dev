@@ -183,6 +183,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -233,6 +234,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;_WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -247,8 +249,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
       <TurnOffAssemblyGeneration>true</TurnOffAssemblyGeneration>
       <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
@@ -376,6 +377,15 @@
     <ClCompile Include="ctrl_tzcombo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ExternalAPI\m_db3xsa.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_flags.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_MagneticWindows.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_metacontacts.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_popup2.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_toolbar.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_toptoolbar.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_updater.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_userinfoex.h" />
     <ClInclude Include="classMAnnivDate.h" />
     <ClInclude Include="classMTime.h" />
     <ClInclude Include="commonheaders.h" />
@@ -424,15 +434,6 @@
     <ClInclude Include="ctrl_tzcombo.h" />
     <ClInclude Include="Res\resource.h" />
     <ClInclude Include="Res\version.h" />
-    <ClInclude Include="SDK\m_db3xsa.h" />
-    <ClInclude Include="SDK\m_flags.h" />
-    <ClInclude Include="SDK\m_MagneticWindows.h" />
-    <ClInclude Include="SDK\m_metacontacts.h" />
-    <ClInclude Include="SDK\m_popup2.h" />
-    <ClInclude Include="SDK\m_toolbar.h" />
-    <ClInclude Include="SDK\m_toptoolbar.h" />
-    <ClInclude Include="SDK\m_updater.h" />
-    <ClInclude Include="SDK\m_userinfoex.h" />
     <ClInclude Include="..\..\include\m_addcontact.h" />
     <ClInclude Include="..\..\include\m_avatars.h" />
     <ClInclude Include="..\..\include\m_awaymsg.h" />

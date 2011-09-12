@@ -47,6 +47,7 @@
 #define IDC_CHECK_EXTERNAL_FILE         1021
 #define IDC_BUTTON_DESCRIPTION_STATUS_MESSAGE 1021
 #define IDC_EDIT_FILE_NAME              1022
+#define IDC_EDIT_TENDENCY_FORMAT        1022
 #define IDC_BUTTON_BROWSE               1023
 #define IDC_STATIC_SELECT_FILE          1024
 #define IDC_EDIT_NAME                   1025

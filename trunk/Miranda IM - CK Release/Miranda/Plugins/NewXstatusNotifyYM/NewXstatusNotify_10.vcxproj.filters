@@ -88,18 +88,6 @@
     <None Include="res\xstatus.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="docs\NewXstatusNotify_readme.txt">
-      <Filter>Docs</Filter>
-    </None>
-    <None Include="docs\NewXstatusNotify_translate.txt">
-      <Filter>Docs</Filter>
-    </None>
-    <None Include="docs\nsn_readme.txt">
-      <Filter>Docs</Filter>
-    </None>
-    <None Include="res\icon_undo.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\reset.ico">
       <Filter>Resource Files</Filter>
     </None>
@@ -108,6 +96,12 @@
     </None>
     <None Include="res\status_message.ico">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\nxsn_translate.txt">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="docs\nxsn_readme.txt">
+      <Filter>Docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

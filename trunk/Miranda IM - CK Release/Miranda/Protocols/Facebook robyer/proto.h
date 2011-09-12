@@ -153,6 +153,7 @@ public:
 	void __cdecl GetAwayMsgWorker(void*);
 	void __cdecl SetAwayMsgWorker(void*);
 	void __cdecl UpdateContactWorker(void*);
+	void __cdecl UpdateFriendWorker(void*);
 	void __cdecl UpdateAvatarWorker(void*);
 	void __cdecl SendMsgWorker(void*);
 	void __cdecl SendTypingWorker(void*);

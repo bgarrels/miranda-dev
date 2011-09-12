@@ -204,6 +204,7 @@ DWORD facebook_client::choose_security_level( int request_type )
 //	case FACEBOOK_REQUEST_LOGOUT:
 //	case FACEBOOK_REQUEST_HOME:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
+//	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 //	case FACEBOOK_REQUEST_FEEDS:
 //	case FACEBOOK_REQUEST_RECONNECT:
 //	case FACEBOOK_REQUEST_PROFILE_GET:
@@ -241,6 +242,7 @@ int facebook_client::choose_method( int request_type )
 //	case FACEBOOK_REQUEST_FEEDS:
 //	case FACEBOOK_REQUEST_RECONNECT:
 //	case FACEBOOK_REQUEST_PROFILE_GET:
+//	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 	default:
 		return REQUEST_GET;
 	}
@@ -261,6 +263,7 @@ std::string facebook_client::choose_proto( int request_type )
 //	case FACEBOOK_REQUEST_RECONNECT:
 //	case FACEBOOK_REQUEST_PROFILE_GET:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
+//	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 //	case FACEBOOK_REQUEST_STATUS_SET:
 //	case FACEBOOK_REQUEST_MESSAGE_SEND:
 //	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
@@ -303,6 +306,7 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 //	case FACEBOOK_REQUEST_HOME:
 //	case FACEBOOK_REQUEST_PROFILE_GET:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
+//	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 //	case FACEBOOK_REQUEST_FEEDS:
 //	case FACEBOOK_REQUEST_RECONNECT:
 //	case FACEBOOK_REQUEST_STATUS_SET:
@@ -337,6 +341,13 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 
 	case FACEBOOK_REQUEST_BUDDY_LIST:
 		return "/ajax/chat/buddy_list.php?__a=1";
+
+	case FACEBOOK_REQUEST_LOAD_FRIENDS:
+	{
+		std::string action = "/ajax/chat/user_info_all.php?__a=1&viewer=%s&__user=%s";
+		utils::text::replace_all( &action, "%s", self_.user_id );
+		return action;
+	}
 
 	case FACEBOOK_REQUEST_FEEDS:
 	{
@@ -422,6 +433,7 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_LOGIN:
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
 	case FACEBOOK_REQUEST_BUDDY_LIST:
+	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 	case FACEBOOK_REQUEST_PROFILE_GET:
 	case FACEBOOK_REQUEST_STATUS_SET:
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
@@ -454,6 +466,7 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_LOGIN:
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
 	case FACEBOOK_REQUEST_BUDDY_LIST:
+	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 	case FACEBOOK_REQUEST_PROFILE_GET:
 	case FACEBOOK_REQUEST_STATUS_SET:
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
@@ -964,6 +977,33 @@ bool facebook_client::buddy_list( )
 	case HTTP_CODE_FAKE_DISCONNECTED:
 	default:
 		return handle_error( "buddy_list" );
+	}
+}
+
+bool facebook_client::load_friends( )
+{
+	handle_entry( "load_friends" );
+
+	// Get buddy list
+	http::response resp = flap( FACEBOOK_REQUEST_LOAD_FRIENDS );
+
+	// Process result data
+	validate_response(&resp);
+
+	switch ( resp.code )
+	{
+	case HTTP_CODE_OK:
+	{
+		facebook_json_parser* p = new facebook_json_parser( this->parent );
+		p->parse_friends( &(resp.data) );
+		delete p;
+
+		return handle_success( "load_friends" );
+	}
+	case HTTP_CODE_FAKE_ERROR:
+	case HTTP_CODE_FAKE_DISCONNECTED:
+	default:
+		return handle_error( "load_friends" );
 	}
 }
 

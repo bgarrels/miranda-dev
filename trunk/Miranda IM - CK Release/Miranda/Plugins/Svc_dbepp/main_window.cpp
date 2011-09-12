@@ -236,7 +236,6 @@ INT_PTR CALLBACK MainDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			}
 
 			// move the dialog to the users position
-
 			MoveWindow(hwnd,DBGetContactSettingDword(NULL,modname,"x",0),DBGetContactSettingDword(NULL,modname,"y",0),DBGetContactSettingDword(NULL,modname,"width",500),DBGetContactSettingDword(NULL,modname,"height",250),0);
 			if (DBGetContactSettingByte(NULL,modname,"Maximised",0))
 			{

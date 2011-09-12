@@ -66,9 +66,9 @@ void UnloadGDIPlus()
 	}
 	__except ( EXCEPTION_EXECUTE_HANDLER ) {
 		// do nothing
-    }
+	}
 	gbGdiPlusLoaded = true;
-    g_gdiplusToken = 0;
+	g_gdiplusToken = 0;
 }
 
 using namespace Gdiplus;
@@ -80,37 +80,37 @@ using namespace Gdiplus;
 
 HBITMAP SkinEngine_CreateDIB32(int cx, int cy)
 {
-    BITMAPINFO RGB32BitsBITMAPINFO; 
-    UINT * ptPixels;
-    HBITMAP DirectBitmap;
+	BITMAPINFO RGB32BitsBITMAPINFO; 
+	UINT * ptPixels;
+	HBITMAP DirectBitmap;
 
-    if ( cx < 0 || cy < 0 ) {
-        return NULL;
-    }
+	if ( cx < 0 || cy < 0 ) {
+		return NULL;
+	}
 
-    ZeroMemory(&RGB32BitsBITMAPINFO,sizeof(BITMAPINFO));
-    RGB32BitsBITMAPINFO.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
-    RGB32BitsBITMAPINFO.bmiHeader.biWidth=cx;//bm.bmWidth;
-    RGB32BitsBITMAPINFO.bmiHeader.biHeight=cy;//bm.bmHeight;
-    RGB32BitsBITMAPINFO.bmiHeader.biPlanes=1;
-    RGB32BitsBITMAPINFO.bmiHeader.biBitCount=32;
-    // pointer used for direct Bitmap pixels access
+	ZeroMemory(&RGB32BitsBITMAPINFO,sizeof(BITMAPINFO));
+	RGB32BitsBITMAPINFO.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
+	RGB32BitsBITMAPINFO.bmiHeader.biWidth=cx;//bm.bmWidth;
+	RGB32BitsBITMAPINFO.bmiHeader.biHeight=cy;//bm.bmHeight;
+	RGB32BitsBITMAPINFO.bmiHeader.biPlanes=1;
+	RGB32BitsBITMAPINFO.bmiHeader.biBitCount=32;
+	// pointer used for direct Bitmap pixels access
 
 
-    DirectBitmap = CreateDIBSection(NULL, 
-        (BITMAPINFO *)&RGB32BitsBITMAPINFO, 
-        DIB_RGB_COLORS,
-        (void **)&ptPixels, 
-        NULL, 0);
-    if ((DirectBitmap == NULL || ptPixels == NULL) && cx!= 0 && cy!=0) 
-    {
-        ;
-    }
-    else
+	DirectBitmap = CreateDIBSection(NULL, 
+		(BITMAPINFO *)&RGB32BitsBITMAPINFO, 
+		DIB_RGB_COLORS,
+		(void **)&ptPixels, 
+		NULL, 0);
+	if ((DirectBitmap == NULL || ptPixels == NULL) && cx!= 0 && cy!=0) 
+	{
+		;
+	}
+	else
 	{
 		memset(ptPixels,0,cx*cy*4);
 	}
-    return DirectBitmap;
+	return DirectBitmap;
 }
 
 

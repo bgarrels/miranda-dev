@@ -167,18 +167,6 @@
     <ClInclude Include="INCLUDE\m_avatars.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="INCLUDE\m_cln_skinedit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="INCLUDE\m_metacontacts.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="INCLUDE\m_updater.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="INCLUDE\m_variables.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="INCLUDE\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -186,6 +174,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_cln_skinedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_metacontacts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_updater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_variables.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

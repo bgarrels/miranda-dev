@@ -37,10 +37,13 @@ Boston, MA 02111-1307, USA.
 #include "win2k.h"
 #include <m_icolib.h>
 #include "m_msg_buttonsbar.h"
+#include "m_popup.h"
 
 #include "..\version.h"
 #include "..\resource.h"
 #include "m_smileyadd.h"
+#include "m_ieview.h"
+#include "m_popup2.h"
 
 #define IDC_MESSAGE				1002
 #define IDC_CHATMESSAGE			1009

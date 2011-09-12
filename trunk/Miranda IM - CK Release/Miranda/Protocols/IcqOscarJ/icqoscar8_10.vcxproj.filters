@@ -149,10 +149,10 @@
     <None Include="docs\icq-readme.txt">
       <Filter>Documentation</Filter>
     </None>
-    <None Include="docs\IcqOscarJ-db settings.txt">
+    <None Include="docs\IcqOscarJ-translation.txt">
       <Filter>Documentation</Filter>
     </None>
-    <None Include="docs\IcqOscarJ-translation.txt">
+    <None Include="docs\icq-license.txt">
       <Filter>Documentation</Filter>
     </None>
   </ItemGroup>

@@ -50,6 +50,7 @@ Last change on : $Date: 2011-01-08 11:10:34 +0100 (so, 08 1 2011) $
 #define FACEBOOK_KEY_UPD_NAMES      "UpdateNames"
 #define FACEBOOK_KEY_DEVICE_ID      "DeviceID"
 #define FACEBOOK_KEY_AV_URL         "AvatarURL"
+#define FACEBOOK_KEY_NEW_AVATAR		"NewAvatar"
 
 #define FACEBOOK_KEY_DEF_GROUP      "DefaultGroup"
 #define FACEBOOK_KEY_USER_AGENT     "UserAgent"

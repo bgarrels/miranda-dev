@@ -30,6 +30,7 @@
 #define _WIN32_WINNT 0x0500
 #define WINVER 0x0600
 #define MIRANDA_VER 0x0900
+#define MIRANDA_CUSTOM_LP
 
 //Standard Windows "libraries"
 #include <windows.h>
@@ -91,9 +92,6 @@
 #define GENDER_UNSPECIFIED		0
 #define GENDER_MALE				1
 #define GENDER_FEMALE			2
-
-#define NOTIFY_INTERVAL_JABBER  2000
-#define NOTIFY_INTERVAL_ICQ		5000
 
 #define ID_STATUS_FROMOFFLINE	1
 #define ID_STATUS_EXTRASTATUS   40081

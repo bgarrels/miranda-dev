@@ -308,7 +308,34 @@
     <None Include="docs\todo.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="res\whatsnew.txt">
+    <None Include="docs\whatsnew.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\changelog_popup.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\readme_popup.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\rebase_popup.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\road_map.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\skin_popup.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\translation_popup.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\faq_popup.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\license_popup.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\popupplus_translate.txt">
       <Filter>docs</Filter>
     </None>
   </ItemGroup>

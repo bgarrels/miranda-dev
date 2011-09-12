@@ -105,9 +105,6 @@
     <ClInclude Include="contact.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="m_variables.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -155,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="trigger_variables.h">
       <Filter>TriggerPlugin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_variables.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

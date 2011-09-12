@@ -102,10 +102,29 @@ namespace
 
 	tstring get_company_id(const tstring& rsHTML)
 	{
-		static LPCTSTR pszVarName = _T("var _companyId = ");
+		static LPCTSTR pszVarName = _T("setCompanyId(");
 		static size_t cVarNameLength = _tcslen(pszVarName);
 
-		return get_var_value(rsHTML,pszVarName,cVarNameLength);		
+		tstring sResult;
+		tstring::size_type n = rsHTML.find(pszVarName);
+		if(tstring::npos != n)
+		{
+			size_t cLengthHTML = rsHTML.size();
+			for(size_t i = n + cVarNameLength;i < cLengthHTML;++i)
+			{
+				TCHAR c = rsHTML[i];
+				if(_T(')') == c)
+				{
+					break;
+				}
+				else
+				{
+					sResult.push_back(c);
+				}
+			}
+		}
+		return sResult;
+// 		return get_var_value(rsHTML,pszVarName,cVarNameLength);		
 	}
 
 	tstring get_company_name(const tstring& rsHTML)

@@ -153,6 +153,7 @@ public:
 	HANDLE  send_message_lock_;
 
 	bool    buddy_list( );
+	bool	load_friends( );
 	bool    feeds( );
 
 	////////////////////////////////////////////////////////////

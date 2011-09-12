@@ -13,7 +13,7 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Resource Files\Docs">
+    <Filter Include="Docs">
       <UniqueIdentifier>{e6bd3d70-0d30-4cf4-a284-c0fd38c83fa5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -76,16 +76,16 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Docs\PasteIt_licence.txt">
-      <Filter>Resource Files\Docs</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="Docs\PasteIt_translate.txt">
-      <Filter>Resource Files\Docs</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="Docs\PasteIt_langpack_polish.txt">
-      <Filter>Resource Files\Docs</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="Docs\PasteIt_readme.txt">
-      <Filter>Resource Files\Docs</Filter>
+      <Filter>Docs</Filter>
     </None>
   </ItemGroup>
 </Project>

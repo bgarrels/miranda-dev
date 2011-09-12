@@ -2,19 +2,19 @@
 	NewXstatusNotify YM - Plugin for Miranda IM
 	Copyright (c) 2007-2011 yaho
 
-	This program is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
-	(at your option) any later version.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 #include "common.h"
@@ -339,14 +339,12 @@ void LogChangeToFile(XSTATUSCHANGE *xsc)
 
 void ExtraStatusChanged(XSTATUSCHANGE *xsc) 
 {
-	bool bEnablePopup = true;
-	bool bEnableSound = true;
+	BOOL bEnablePopup = true, bEnableSound = true;
 	char buff[12] = {0};
 
 	wsprintfA(buff, "%d", ID_STATUS_EXTRASTATUS); 
 
-	if ((DBGetContactSettingByte(0, MODULE, xsc->szProto, 1) == 0) ||
-		(DBGetContactSettingByte(0, MODULE, buff, 1) == 0) ||
+	if ((DBGetContactSettingByte(0, MODULE, buff, 1) == 0) ||
 		(DBGetContactSettingWord(xsc->hContact, xsc->szProto, "Status", ID_STATUS_OFFLINE) == ID_STATUS_OFFLINE) ||
 		(!opt.HiddenContactsToo && DBGetContactSettingByte(xsc->hContact, "CList", "Hidden", 0)) ||	
 		(opt.TempDisabled))
@@ -371,7 +369,7 @@ void ExtraStatusChanged(XSTATUSCHANGE *xsc)
 	if (opt.PDisableForMusic && xsc->type == TYPE_ICQ_XSTATUS && xstatusID == XSTATUS_MUSIC)
 		bEnableSound = bEnablePopup = false;
 
-	if (bEnablePopup && DBGetContactSettingByte(xsc->hContact, MODULE, "EnableXStatusNotify", 1)) 
+	if (bEnablePopup && DBGetContactSettingByte(xsc->hContact, MODULE, "EnableXStatusNotify", 1) && TimeoutCheck()) 
 		ShowPopup(xsc);
 
 	if (bEnableSound && DBGetContactSettingByte(xsc->hContact, MODULE, "EnableXStatusNotify", 1)) 

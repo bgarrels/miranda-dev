@@ -3,8 +3,8 @@
 #include <windows.h>
 #include <stdlib.h>
 #include "skypepluginlink.h"
-#include "newpluginapi.h"
-#include "m_system.h"
+#include "include/newpluginapi.h"
+#include "include/m_system.h"
 
 #define LockMutex(x) EnterCriticalSection (&x)
 #define UnlockMutex(x) LeaveCriticalSection(&x)

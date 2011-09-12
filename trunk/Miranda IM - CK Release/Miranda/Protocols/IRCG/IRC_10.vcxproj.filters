@@ -113,9 +113,6 @@
     <None Include="Icons\irc.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Icons\Icons\irc.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="Icons\list.ico">
       <Filter>Resource Files</Filter>
     </None>

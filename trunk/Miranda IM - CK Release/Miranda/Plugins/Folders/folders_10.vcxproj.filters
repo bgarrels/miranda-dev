@@ -87,6 +87,6 @@
     <None Include="variablesHelp.inc">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\docs\folders_readme.txt" />
+    <None Include="docs\folders_readme.txt" />
   </ItemGroup>
 </Project>

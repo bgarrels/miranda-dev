@@ -178,6 +178,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -227,6 +228,7 @@
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <FloatingPointModel>Fast</FloatingPointModel>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -239,8 +241,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <BaseAddress>0x3EC20000</BaseAddress>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
       <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
@@ -248,6 +249,7 @@
     <Bscmake />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ExternalAPI\m_extraicons.h" />
     <ClInclude Include="BaseExtraIcon.h" />
     <ClInclude Include="CallbackExtraIcon.h" />
     <ClInclude Include="commons.h" />
@@ -255,7 +257,6 @@
     <ClInclude Include="ExtraIcon.h" />
     <ClInclude Include="ExtraIconGroup.h" />
     <ClInclude Include="IcolibExtraIcon.h" />
-    <ClInclude Include="m_extraicons.h" />
     <ClInclude Include="..\Utils\Pescuma\mir_icons.h" />
     <ClInclude Include="options.h" />
     <ClInclude Include="resource.h" />

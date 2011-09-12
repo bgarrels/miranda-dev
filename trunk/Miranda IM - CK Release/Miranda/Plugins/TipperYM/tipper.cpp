@@ -46,21 +46,22 @@ FI_INTERFACE *fii = NULL;
 MM_INTERFACE mmi;
 LIST_INTERFACE li;
 TIME_API tmi;
+int hLangpack;
 
 PLUGININFOEX pluginInfoEx = 
 {
 	sizeof(PLUGININFOEX),
 #if defined (_UNICODE)
 	#if defined _WIN64 
-		"Tipper YM (Unicode x64) Mataes Release",
+		"Tipper YM (Unicode x64) CK Release",
 	#else
-		"Tipper YM (Unicode) Mataes Release",
+		"Tipper YM (Unicode) CK Release",
 	#endif
 #else
 	"Tipper YM Mataes Release",
 #endif
 	__VERSION_DWORD,
-	"Tool Tip notification windows. Mod for Mataes Pack.",
+	"Tool Tip notification windows. Mod for CK's Pack.",
 	"Scott Ellis, yaho",
 	"yaho@miranda-easy.net",
 	"© 2005-2007 Scott Ellis, 2007-2011 Jan Holub",
@@ -368,6 +369,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 
 	CallService(MS_IMG_GETINTERFACE, FI_IF_VERSION, (LPARAM)&fii);
 	mir_getTMI(&tmi);
+	mir_getLP(&pluginInfoEx);
 
 	if (ServiceExists(MS_LANGPACK_GETCODEPAGE))
 		iCodePage = CallService(MS_LANGPACK_GETCODEPAGE, 0, 0);

@@ -343,7 +343,6 @@
     <None Include="Icons\delete.ico" />
     <None Include="Icons\edit.ico" />
     <None Include="Icons\irc.ico" />
-    <None Include="Icons\Icons\irc.ico" />
     <None Include="Icons\list.ico" />
     <None Include="Icons\manager.ico" />
     <None Include="Icons\question.ico" />

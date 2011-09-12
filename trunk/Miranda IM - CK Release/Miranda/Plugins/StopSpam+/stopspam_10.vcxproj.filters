@@ -56,7 +56,7 @@
     <ClInclude Include="res\version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\m_stopspam.h">
+    <ClInclude Include="..\..\ExternalAPI\m_stopspam.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

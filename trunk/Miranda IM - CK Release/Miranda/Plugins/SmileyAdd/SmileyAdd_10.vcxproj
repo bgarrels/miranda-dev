@@ -169,6 +169,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -212,6 +213,7 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
@@ -243,17 +245,17 @@
     <ClCompile Include="smltool.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ExternalAPI\m_folders.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_metacontacts.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_smileyadd.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_smileyadd_deprecated.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_updater.h" />
     <ClInclude Include="anim.h" />
     <ClInclude Include="bkstring.h" />
     <ClInclude Include="customsmiley.h" />
     <ClInclude Include="download.h" />
     <ClInclude Include="general.h" />
     <ClInclude Include="imagecache.h" />
-    <ClInclude Include="m_folders.h" />
-    <ClInclude Include="m_metacontacts.h" />
-    <ClInclude Include="m_smileyadd.h" />
-    <ClInclude Include="m_smileyadd_deprecated.h" />
-    <ClInclude Include="m_updater.h" />
     <ClInclude Include="options.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="services.h" />

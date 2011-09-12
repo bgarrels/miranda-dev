@@ -51,6 +51,7 @@ PROTOCOLDESCRIPTOR **proto;
 unsigned *oldStatus;
 TCHAR **oldStatusMsg;
 BYTE g_bOldSetting;
+int hLangpack;
 
 PWTSRegisterSessionNotification wtsRegisterSessionNotification ; 
 PWTSUnRegisterSessionNotification wtsUnRegisterSessionNotification;
@@ -873,6 +874,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 {
 	pluginLink = link;
 	mir_getMMI( &mmi );
+	mir_getLP(&pluginInfo);
 
 	g_wMaskAdv = DBGetContactSettingWord(NULL,MOD_NAME,"optsmaskadv",0);
 	g_bOldSetting = DBGetContactSettingByte(NULL, MOD_NAME, "OldSetting", 0);

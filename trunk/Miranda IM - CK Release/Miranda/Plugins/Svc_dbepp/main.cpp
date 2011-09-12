@@ -13,11 +13,13 @@ BOOL bServiceMode = FALSE;
 BOOL usePopUps;
 HWND hwnd2watchedVarsWindow;
 int UDB;
+int hLangpack;
 BYTE nameOrder[NAMEORDERCOUNT];
 HANDLE hUserMenu;
 HANDLE hRestore;
 WatchListArrayStruct WatchListArray;
 BYTE UsingIconManager;
+HANDLE sMenuCommand, sRegisterModule, sRegisterSingleModule, sImport;
 
 //========================
 //  MirandaPluginInfo
@@ -59,14 +61,6 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 {
 	hInst=hinstDLL;
 	return TRUE;
-}
-
-//===================
-// MainInit
-//===================
-int MainInit(WPARAM wParam,LPARAM lParam)
-{
-	return 0;
 }
 
 void settingChanged(HWND hwnd2Settings, HANDLE hContact, char* module, char* setting);
@@ -191,7 +185,7 @@ int ModulesLoaded(WPARAM wParam,LPARAM lParam)
 	char *coreMods = "";
 	char *mods;
 	char mod[64] = "";
-	char szModuleFileName[MAX_PATH];
+	TCHAR szModuleFileName[MAX_PATH];
 	int i=0, len;
 	if (!DBGetContactSetting(NULL,modname,"CoreModules",&dbv) && dbv.type == DBVT_ASCIIZ)
 		mods = dbv.pszVal;
@@ -223,7 +217,7 @@ int ModulesLoaded(WPARAM wParam,LPARAM lParam)
 	doOldKnownModulesList(); // add the old plugins which havnt been changed over yet..
 
 	// icons
-	if (GetModuleFileName(hInst,szModuleFileName,MAX_PATH) && ServiceExists(MS_SKIN2_ADDICON))
+	if (GetModuleFileName(hInst, szModuleFileName, MAX_PATH) && ServiceExists(MS_SKIN2_ADDICON))
 	{
 		UsingIconManager =1;
 		addIcons(szModuleFileName);
@@ -270,25 +264,7 @@ int ModulesLoaded(WPARAM wParam,LPARAM lParam)
 	// useless if DB doesnt not support unicode
 	UOS = (UDB && IsCP_UTF8() && IsWinVerNT());
 
-	// updater support
-	{
-		Update update = {0};
-		char szVersion[16];
-
-		update.cbSize = sizeof(Update);
-
-		update.szComponentName = pluginInfoEx.shortName;
-		update.pbVersion = (BYTE *)CreateVersionStringPluginEx(&pluginInfoEx, szVersion);
-		update.cpbVersion = (int)strlen((char *)update.pbVersion);
-
-		update.szUpdateURL = "http://addons.miranda-im.org/feed.php?dlsource=2957";
-		update.szVersionURL = "http://addons.miranda-im.org/details.php?action=viewfile&id=2957";
-
-		update.szBetaVersionURL = "http://forums.miranda-im.org/showpost.php?p=38051&postcount=1";
-		update.szBetaUpdateURL = "http://etplanet.com/bio/miranda/archive/other/dbeditorpp.dll";
-
-		CallService(MS_UPDATE_REGISTER, 0, (WPARAM)&update);
-	}
+	CallService(MS_UPDATE_REGISTERFL,2957,(LPARAM)&pluginInfoEx);
 
 	hTTBHook = HookEvent(ME_TTB_MODULELOADED, OnTTBLoaded);
 
@@ -314,6 +290,11 @@ int PreShutdown(WPARAM wParam,LPARAM lParam)
 	{
 		if (hHookedEvents[i]) UnhookEvent(hHookedEvents[i]);
 	}
+
+	DestroyServiceFunction(sMenuCommand);
+	DestroyServiceFunction(sRegisterModule);
+	DestroyServiceFunction(sRegisterSingleModule);
+	DestroyServiceFunction(sImport);
 
 	return 0;
 }
@@ -342,6 +323,7 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	pluginLink = link;
 	mir_getMMI(&mmi);
 	mir_getUTFI( &utfi );
+	mir_getLP(&pluginInfoEx);
 
 	hwnd2mainWindow = 0;
 	hwnd2watchedVarsWindow = 0;
@@ -352,29 +334,29 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 //	hHookedEvents[2] = HookEvent(ME_CLIST_PREBUILDCONTACTMENU,PrebuildContactMenu);
 	HookEvent(ME_SYSTEM_PRESHUTDOWN, PreShutdown);
 	hModulesLoadedHook = HookEvent(ME_SYSTEM_MODULESLOADED,ModulesLoaded);
-	CreateServiceFunction("DBEditorpp/MenuCommand", DBEditorppMenuCommand);
-	CreateServiceFunction("DBEditorpp/RegisterModule", RegisterModule);
-	CreateServiceFunction("DBEditorpp/RegisterSingleModule", RegisterSingleModule);
-	CreateServiceFunction("DBEditorpp/Import", ImportFromFile);
-	ZeroMemory(&mi,sizeof(mi));
-	mi.cbSize=sizeof(mi);
-	mi.position=1900000001;
-	mi.flags=0;
-	mi.hIcon=LoadIcon(hInst,MAKEINTRESOURCE(ICO_REGEDIT));
-	mi.pszName=modFullname;
-	mi.pszService="DBEditorpp/MenuCommand";
-	mi.pszContactOwner=NULL;
-	CallService(MS_CLIST_ADDMAINMENUITEM,0,(LPARAM)&mi);
+	sMenuCommand = CreateServiceFunction("DBEditorpp/MenuCommand", DBEditorppMenuCommand);
+	sRegisterModule = CreateServiceFunction("DBEditorpp/RegisterModule", RegisterModule);
+	sRegisterSingleModule = CreateServiceFunction("DBEditorpp/RegisterSingleModule", RegisterSingleModule);
+	sImport = CreateServiceFunction("DBEditorpp/Import", ImportFromFile);
+	ZeroMemory(&mi, sizeof(mi));
+	mi.cbSize = sizeof(mi);
+	mi.position = 1900000001;
+	mi.flags = CMIF_TCHAR;
+	mi.hIcon = LoadIcon(hInst, MAKEINTRESOURCE(ICO_REGEDIT));
+	mi.ptszName = _T(modFullname);
+	mi.pszService = "DBEditorpp/MenuCommand";
+	mi.pszContactOwner = NULL;
+	CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM)&mi);
 
-	ZeroMemory(&mi,sizeof(mi));
-	mi.cbSize=sizeof(mi);
-	mi.position=1900000001;
-	mi.flags=DBGetContactSettingByte(NULL,modname,"UserMenuItem",0)?0:CMIF_HIDDEN;
-	mi.hIcon=LoadIcon(hInst,MAKEINTRESOURCE(ICO_REGUSER));
-	mi.pszName="Open user tree in DBE++";
-	mi.pszService="DBEditorpp/MenuCommand";
-	mi.pszContactOwner=NULL;
-	hUserMenu = (HANDLE) CallService(MS_CLIST_ADDCONTACTMENUITEM, 0, (LPARAM) & mi);
+	ZeroMemory(&mi, sizeof(mi));
+	mi.cbSize = sizeof(mi);
+	mi.position = 1900000001;
+	mi.flags = DBGetContactSettingByte(NULL,modname,"UserMenuItem",0)?0:CMIF_HIDDEN;
+	mi.hIcon = LoadIcon(hInst, MAKEINTRESOURCE(ICO_REGUSER));
+	mi.ptszName = LPGENT("Open user tree in DBE++");
+	mi.pszService = "DBEditorpp/MenuCommand";
+	mi.pszContactOwner = NULL;
+	hUserMenu = (HANDLE)CallService(MS_CLIST_ADDCONTACTMENUITEM, 0, (LPARAM) & mi);
 
 	hHookedEvents[3] = CreateServiceFunction(MS_SERVICEMODE_LAUNCH, ServiceMode);
 
@@ -390,6 +372,20 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	}
 
 	ZeroMemory(&WatchListArray, sizeof(WatchListArray));
+
+	if(ServiceExists(MS_HOTKEY_REGISTER))
+	{
+		HOTKEYDESC hkd = {0};
+		hkd.cbSize = sizeof(hkd);
+		hkd.dwFlags = HKD_TCHAR;
+		hkd.pszName = "hk_dbepp_open";
+		hkd.pszService = "DBEditorpp/MenuCommand";
+		hkd.ptszDescription = LPGENT("Open Database Editor");
+		hkd.ptszSection = _T(modFullname);
+		hkd.DefHotKey = HOTKEYCODE(HOTKEYF_SHIFT|HOTKEYF_EXT, 'D');
+
+		CallService(MS_HOTKEY_REGISTER,0,(LPARAM)&hkd);
+	}
 
 	return 0;
 }

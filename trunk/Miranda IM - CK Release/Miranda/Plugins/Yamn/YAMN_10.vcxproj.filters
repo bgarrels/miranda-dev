@@ -124,16 +124,16 @@
     <ClInclude Include="include\m_kbdnotify.h">
       <Filter>Header Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="include\m_toptoolbar.h">
-      <Filter>Header Files\include</Filter>
-    </ClInclude>
     <ClInclude Include="include\m_uninstaller.h">
       <Filter>Header Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="include\m_updater.h">
+    <ClInclude Include="version.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_toptoolbar.h">
       <Filter>Header Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="version.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_updater.h">
+      <Filter>Header Files\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\YAMN.rc">

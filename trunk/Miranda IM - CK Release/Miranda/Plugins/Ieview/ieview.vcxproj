@@ -32,6 +32,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -174,7 +175,7 @@
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -187,17 +188,17 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ExternalAPI\m_ieview.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_MathModule.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_metacontacts.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_smileyadd.h" />
+    <ClInclude Include="..\..\Include\m_avatars.h" />
     <ClInclude Include="ChatHTMLBuilder.h" />
     <ClInclude Include="HistoryHTMLBuilder.h" />
     <ClInclude Include="HTMLBuilder.h" />
     <ClInclude Include="IEView.h" />
     <ClInclude Include="ieview_common.h" />
     <ClInclude Include="ieview_services.h" />
-    <ClInclude Include="m_avatars.h" />
-    <ClInclude Include="m_ieview.h" />
-    <ClInclude Include="m_MathModule.h" />
-    <ClInclude Include="m_metacontacts.h" />
-    <ClInclude Include="m_smileyadd.h" />
     <ClInclude Include="MUCCHTMLBuilder.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="resource.h" />
