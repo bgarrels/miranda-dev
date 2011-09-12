@@ -1294,7 +1294,8 @@ void HistoryWindow::FillHistoryThread(void* param)
 			CallService( MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&dbei );
 			if(CanShowHistory(&dbei)) 
 			{
-				if(lastTime - dbei.timestamp < groupTime && limitator < maxMess)
+				DWORD tm = isNewOnTop ? lastTime - dbei.timestamp : dbei.timestamp - lastTime;
+				if(tm < groupTime && limitator < maxMess)
 				{
 					lastTime = dbei.timestamp;
 					if(isNewOnTop)
@@ -1759,10 +1760,21 @@ bool HistoryWindow::DoHotkey(UINT msg, LPARAM lParam, WPARAM wParam, int window)
 
 void HistoryWindow::RestorePos()
 {
+	HANDLE contactToLoad = hContact;
 	if(hContact == NULL)
+	{
 		Utils_RestoreWindowPosition(hWnd,NULL,"BasicHistory","history_");
+		contactToLoad = NULL;
+	}
 	else if(Utils_RestoreWindowPosition(hWnd,hContact,"BasicHistory","history_") != 0)
+	{
 		Utils_RestoreWindowPosition(hWnd,NULL,"BasicHistory","history_");
+		contactToLoad = NULL;
+	}
+	if(DBGetContactSettingByte(contactToLoad, "BasicHistory", "history_ismax", 0))
+	{
+		ShowWindow(hWnd, SW_SHOWMAXIMIZED);
+	}
 }
 
 void HistoryWindow::SavePos(bool all)
@@ -1777,13 +1789,18 @@ void HistoryWindow::SavePos(bool all)
 			DBDeleteContactSetting(_hContact, "BasicHistory", "history_y");
 			DBDeleteContactSetting(_hContact, "BasicHistory", "history_width");
 			DBDeleteContactSetting(_hContact, "BasicHistory", "history_height");
+			DBDeleteContactSetting(_hContact, "BasicHistory", "history_ismax");
 			_hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)_hContact, 0);
 		}
 
 		contactToSave = NULL;
 	}
-
+	
 	Utils_SaveWindowPosition(hWnd,contactToSave,"BasicHistory","history_");
+	WINDOWPLACEMENT wp;
+	wp.length=sizeof(wp);
+	GetWindowPlacement(hWnd,&wp);
+	DBWriteContactSettingByte(contactToSave, "BasicHistory", "history_ismax", wp.showCmd == SW_MAXIMIZE ? 1 : 0);
 }
 
 void HistoryWindow::FindToolbarClicked(LPNMTOOLBAR lpnmTB)
