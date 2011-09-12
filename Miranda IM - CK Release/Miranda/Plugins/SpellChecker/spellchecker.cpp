@@ -25,13 +25,13 @@ Boston, MA 02111-1307, USA.
 
 PLUGININFOEX pluginInfo={
 	sizeof(PLUGININFOEX),
-	"Spell Checker",
-	PLUGIN_MAKE_VERSION(0,2,6,0),
-	"Spell checker for the message windows. Uses Hunspell to do the checking.",
-	"Ricardo Pescuma Domenecci, FREAK_THEMIGHTY",
-	"pescuma@miranda-im.org",
-	"© 2006-2010 Ricardo Pescuma Domenecci",
-	"http://pescuma.org/miranda/spellchecker",
+	__PLUGIN_NAME,
+	PLUGIN_MAKE_VERSION(__MAJOR_VERSION, __MINOR_VERSION, __RELEASE_NUM, __BUILD_NUM),
+	__DESCRIPTION,
+	__AUTHOR,
+	__AUTHOREMAIL,
+	__COPYRIGHT,
+	__AUTHORWEB,
 	UNICODE_AWARE,
 	0,		//doesn't replace anything built-in
 #ifdef WIN64
@@ -86,6 +86,8 @@ BITMAP bmpChecked;
 
 BOOL variables_enabled = FALSE;
 BOOL loaded = FALSE;
+
+int hLangpack;
 
 LIST<Dictionary> languages(1);
 
@@ -170,6 +172,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	mir_getMMI(&mmi);
 	mir_getUTFI(&utfi);
 	mir_getLI(&li);
+	mir_getLP(&pluginInfo);
 
 	// hooks
 	hHooks[0] = HookEvent(ME_SYSTEM_MODULESLOADED, ModulesLoaded);
@@ -198,8 +201,8 @@ int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 	// add our modules to the KnownModules list
 	CallService("DBEditorpp/RegisterSingleModule", (WPARAM) MODULE_NAME, 0);
 
-    // updater plugin support
-    if(ServiceExists(MS_UPDATE_REGISTER))
+	// updater plugin support
+	if(ServiceExists(MS_UPDATE_REGISTER))
 	{
 		Update upd = {0};
 		char szCurrentVersion[30];
@@ -232,10 +235,10 @@ int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 		upd.pbVersion = (BYTE *)CreateVersionStringPluginEx(&pluginInfo, szCurrentVersion);
 		upd.cpbVersion = (int)strlen((char *)upd.pbVersion);
 
-        CallService(MS_UPDATE_REGISTER, 0, (LPARAM)&upd);
+		CallService(MS_UPDATE_REGISTER, 0, (LPARAM)&upd);
 	}
 
-    // Folders plugin support
+	// Folders plugin support
 	if (ServiceExists(MS_FOLDERS_REGISTER_PATH))
 	{
 		hDictionariesFolder = FoldersRegisterCustomPathT(LPGEN("Spell Checker"), LPGEN("Dictionaries"), DICTIONARIES_FOLDER);

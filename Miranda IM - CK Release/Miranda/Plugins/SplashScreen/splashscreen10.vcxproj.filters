@@ -53,17 +53,17 @@
     <ClInclude Include="src\resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\m_folders.h">
-      <Filter>API</Filter>
-    </ClInclude>
-    <ClInclude Include="src\m_splash.h">
-      <Filter>API</Filter>
-    </ClInclude>
-    <ClInclude Include="src\m_updater.h">
-      <Filter>API</Filter>
-    </ClInclude>
     <ClInclude Include="src\splash.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_folders.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_splash.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_updater.h">
+      <Filter>API</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

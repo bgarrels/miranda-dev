@@ -93,10 +93,10 @@ Last change on : $Date$
 #define FACEBOOK_REQUEST_API_CHECK              50  // check latest API version
 #define FACEBOOK_REQUEST_LOGIN                  100 // connecting physically
 #define FACEBOOK_REQUEST_SETUP_MACHINE          102 // setting machine name
-#define FACEBOOK_REQUEST_KEEP_ALIVE             104 // keeping online status alive without idle
 #define FACEBOOK_REQUEST_LOGOUT                 106 // disconnecting physically
 #define FACEBOOK_REQUEST_HOME                   110 // getting __post_form_id__ + __fb_dtsg__ + ...
 #define FACEBOOK_REQUEST_BUDDY_LIST             120 // getting regular updates (friends online, ...)
+#define FACEBOOK_REQUEST_LOAD_FRIENDS			121 // getting list of all friends
 #define FACEBOOK_REQUEST_FEEDS                  125 // getting feeds
 #define FACEBOOK_REQUEST_RECONNECT              130 // getting __sequence_num__ and __channel_id__
 #define FACEBOOK_REQUEST_PROFILE_GET            200 // getting others' profiles
@@ -107,10 +107,6 @@ Last change on : $Date$
 #define FACEBOOK_REQUEST_SETTINGS               305 // setting chat visibility
 #define FACEBOOK_REQUEST_TABS					306 // closing message window, setting chat visibility
 #define	FACEBOOK_REQUEST_ASYNC					307 // marking messages read
-
-// Reconnect flags
-#define FACEBOOK_RECONNECT_LOGIN        "6" // When logging in
-#define FACEBOOK_RECONNECT_KEEP_ALIVE   "0" // After a period, used to keep session alive
 
 #define FACEBOOK_RECV_MESSAGE	1
 #define FACEBOOK_SEND_MESSAGE	2

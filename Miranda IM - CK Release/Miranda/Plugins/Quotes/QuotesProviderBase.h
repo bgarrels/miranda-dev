@@ -102,6 +102,7 @@ private:
 	HANDLE m_hEventRefreshContact;
 	tstring m_sContactListFormat;
 	tstring m_sStatusMsgFormat;
+	tstring m_sTendencyFormat;
 	TContracts m_aRefreshingContacts;
 	bool m_bRefreshInProgress;
 };

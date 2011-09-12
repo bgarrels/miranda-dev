@@ -115,6 +115,108 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 	return EXIT_SUCCESS;
 }
 
+int facebook_json_parser::parse_friends( void* data )
+{
+	using namespace json;
+
+	try
+	{
+		facebook_user* current = NULL;
+		std::string buddyData = static_cast< std::string* >( data )->substr( 9 );
+		std::istringstream sDocument( buddyData );
+		Object objDocument;
+		Reader::Read(objDocument, sDocument);
+
+		const Object& objRoot = objDocument;
+		const Object& payload = objRoot["payload"];
+
+		for ( Object::const_iterator payload_item( payload.Begin() ); payload_item != payload.End(); ++payload_item)
+		{
+			const Object::Member& member = *payload_item;
+
+			const Object& objMember = member.element;
+
+			const String& realName = objMember["name"];
+			const String& imageUrl = objMember["thumbSrc"];
+			//const String& vanity = objMember["vanity"];
+			const Number& gender_num = objMember["gender"];
+
+			facebook_user fbu;
+			fbu.user_id = member.name;
+
+			fbu.real_name = utils::text::slashu_to_utf8(
+			    utils::text::special_expressions_decode( realName.Value() ) );
+			fbu.image_url = utils::text::slashu_to_utf8(
+			    utils::text::special_expressions_decode( imageUrl.Value() ) );
+
+			int gender = 0;
+			if (gender_num.Value() == 1) {
+				gender = 70; // woman
+			} else if (gender_num.Value() == 2) {
+				gender = 77; // man
+			}
+
+			HANDLE hContact = proto->AddToContactList(&fbu);
+							
+			if ( DBGetContactSettingByte(hContact,proto->m_szModuleName,"Gender", 0) != gender )
+				DBWriteContactSettingByte(hContact,proto->m_szModuleName,"Gender", gender );
+			
+//			DBWriteContactSettingWord(hContact,proto->m_szModuleName,"Status",ID_STATUS_OFFLINE );
+
+			DBVARIANT dbv;
+			// Update Real name
+			bool update_required = true;
+			if ( !DBGetContactSettingUTF8String(hContact,proto->m_szModuleName,FACEBOOK_KEY_NAME,&dbv) )
+			{
+				update_required = strcmp( dbv.pszVal, fbu.real_name.c_str() ) != 0;
+				DBFreeVariant(&dbv);
+			}
+			if ( update_required )
+			{
+				DBWriteContactSettingUTF8String(hContact,proto->m_szModuleName,FACEBOOK_KEY_NAME,fbu.real_name.c_str());
+				DBWriteContactSettingUTF8String(hContact,proto->m_szModuleName,"Nick",fbu.real_name.c_str());
+			}
+
+/*			// Check avatar change
+			update_required = true;
+			if ( !DBGetContactSettingString(hContact,proto->m_szModuleName,FACEBOOK_KEY_AV_URL,&dbv) )
+			{
+				update_required = strcmp( dbv.pszVal, fbu.image_url.c_str() ) != 0;
+				DBFreeVariant(&dbv);
+			}
+			if ( update_required ) {
+				DBWriteContactSettingString(hContact,proto->m_szModuleName,FACEBOOK_KEY_AV_URL,fbu.image_url.c_str());
+				DBWriteContactSettingByte(hContact,proto->m_szModuleName,FACEBOOK_KEY_NEW_AVATAR, 1);
+			}
+			
+			// TODO: remove and wait for avatar request...
+			if ( update_required || !proto->AvatarExists(&fbu) )
+			{
+				proto->Log("***** Saving new avatar url: %s",fbu.image_url.c_str());
+				proto->ProcessAvatar(hContact,&(fbu.image_url));
+			}*/
+
+			//ForkThread(&FacebookProto::UpdateFriendWorker, proto, (void*)fbu);
+		}
+	}
+	catch (Reader::ParseException& e)
+	{
+		proto->Log( "!!!!! Caught json::ParseException: %s", e.what() );
+		proto->Log( "      Line/offset: %d/%d", e.m_locTokenBegin.m_nLine + 1, e.m_locTokenBegin.m_nLineOffset + 1 );
+	}
+	catch (const Exception& e)
+	{
+		proto->Log( "!!!!! Caught json::Exception: %s", e.what() );
+	}
+	catch (const std::exception& e)
+	{
+		proto->Log( "!!!!! Caught std::exception: %s", e.what() );
+	}
+
+	return EXIT_SUCCESS;
+}
+
+
 int facebook_json_parser::parse_messages( void* data, std::vector< facebook_message* >* messages, std::vector< facebook_notification* >* notifications )
 {
 	using namespace json;
@@ -157,6 +259,40 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 					message->user_id = was_id;
 
 					messages->push_back( message );
+				} else {
+					proto->Log("      Got duplicit message?");
+				}
+			}
+			else if ( type.Value( ) == "messaging" ) // inbox message
+			{				
+				const String& type = objMember["event"];
+
+				if (type.Value() == "deliver") {
+					const Object& messageContent = objMember["message"];
+
+					const Number& from = messageContent["sender_fbid"];
+					char was_id[32];
+					lltoa( from.Value(), was_id, 10 );
+				
+					const String& text = messageContent["body"];
+        
+					const Number& time_sent = messageContent["timestamp"];
+					if (time_sent.Value() > proto->facy.last_message_time_) // Check agains duplicit messages
+					{
+						proto->facy.last_message_time_ = time_sent.Value();
+
+  						facebook_message* message = new facebook_message( );
+						message->message_text= utils::text::special_expressions_decode(
+							utils::text::slashu_to_utf8( text.Value( ) ) );
+
+						message->time = ::time( NULL );
+
+						message->user_id = was_id;
+
+						messages->push_back( message );
+					} else {
+						proto->Log("      Got duplicit message?");
+					}
 				}
 			}
 			else if ( type.Value( ) == "group_msg" ) // chat message
@@ -177,8 +313,9 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				char was_id[32];
 				lltoa( from.Value(), was_id, 10 );
 
-				//      Ignore if message is from this user
-				if (was_id == proto->facy.self_.user_id) continue;
+				// Ignore if message is from self user
+				if (was_id == proto->facy.self_.user_id)
+					continue;
 
 				const Object& messageContent = objMember["msg"];
   				const String& text = messageContent["text"];
@@ -251,21 +388,25 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				else
 					CallService(MS_PROTO_CONTACTISTYPING, (WPARAM)hContact, (LPARAM)PROTOTYPE_CONTACTTYPING_OFF);
 			}
-			else if ( type.Value( ) == "inbox" )
-			{
+			/*else if ( type.Value( ) == "inbox" )
+			{ // Not needed because we are getting directly messages...
 				if ( proto->m_iStatus == ID_STATUS_INVISIBLE )
 				{ // Notify messages only in invisible status
 					const Number& unseen = objMember["unseen"];
 					if (unseen.Value() > 0) {
+
+						char count[32];
+						lltoa( unseen.Value(), count, 10 );
+
 						std::string message = Translate("Got new messages: ");
-						message += int(unseen.Value());
+						message += count;
 
 						TCHAR* tmessage = mir_a2t(message.c_str());
 						proto->NotifyEvent( proto->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_MESSAGES) );
 						mir_free( tmessage );
 					}
 				}
-			}
+			}*/
 			else
 				continue;
 		}

@@ -60,6 +60,7 @@ void CommonOptionDlgProc(HWND hWnd,UINT msg,WPARAM wp,LPARAM lp,CCommonDlgProcDa
 			assert(visitor.m_pszDbRefreshRateValue);
 			assert(visitor.m_pszDbDisplayNameFormat);
 			assert(visitor.m_pszDbStatusMsgFormat);
+			assert(visitor.m_pszDbTendencyFormat);
 
 			// set contact list display format
 			tstring sDspNameFrmt = Quotes_DBGetStringT(NULL,QUOTES_MODULE_NAME,visitor.m_pszDbDisplayNameFormat,visitor.m_pszDefDisplayFormat);
@@ -69,6 +70,10 @@ void CommonOptionDlgProc(HWND hWnd,UINT msg,WPARAM wp,LPARAM lp,CCommonDlgProcDa
 			tstring sStatusMsgFrmt = Quotes_DBGetStringT(NULL,QUOTES_MODULE_NAME,visitor.m_pszDbStatusMsgFormat,visitor.m_pszDefStatusMsgFormat);
 			::SetDlgItemText(hWnd,IDC_EDIT_STATUS_MESSAGE_FORMAT,sStatusMsgFrmt.c_str());
 
+			// set tendency format
+			tstring sTendencyFrmt = Quotes_DBGetStringT(NULL,QUOTES_MODULE_NAME,visitor.m_pszDbTendencyFormat,visitor.m_pszDefTendencyFormat);
+			::SetDlgItemText(hWnd,IDC_EDIT_TENDENCY_FORMAT,sTendencyFrmt.c_str());
+
 			// refresh rate
 			HWND hwndCombo = ::GetDlgItem(hWnd,IDC_COMBO_REFRESH_RATE);
 			LPCTSTR pszRefreshRateTypes[] = {TranslateT("Seconds"),TranslateT("Minutes"),TranslateT("Hours")};
@@ -77,13 +82,13 @@ void CommonOptionDlgProc(HWND hWnd,UINT msg,WPARAM wp,LPARAM lp,CCommonDlgProcDa
 				::SendMessage(hwndCombo,CB_ADDSTRING,0,reinterpret_cast<LPARAM>(pszRefreshRateTypes[i]));
 			}
 
-			int nRefreshRateType = DBGetContactSettingWord(NULL,QUOTES_MODULE_NAME,visitor.m_pszDbRefreshRateType,RRT_HOURS);
+			int nRefreshRateType = DBGetContactSettingWord(NULL,QUOTES_MODULE_NAME,visitor.m_pszDbRefreshRateType,RRT_MINUTES);
 			if(nRefreshRateType < RRT_SECONDS || nRefreshRateType > RRT_HOURS)
 			{
 				nRefreshRateType = RRT_MINUTES;
 			}
 
-			UINT nRate = DBGetContactSettingWord(NULL,QUOTES_MODULE_NAME,visitor.m_pszDbRefreshRateValue,3);
+			UINT nRate = DBGetContactSettingWord(NULL,QUOTES_MODULE_NAME,visitor.m_pszDbRefreshRateValue,1);
 			switch(nRefreshRateType)
 			{
 			default:
@@ -146,6 +151,7 @@ void CommonOptionDlgProc(HWND hWnd,UINT msg,WPARAM wp,LPARAM lp,CCommonDlgProcDa
 			case IDC_EDIT_REFRESH_RATE:
 			case IDC_EDIT_CONTACT_LIST_FORMAT:
 			case IDC_EDIT_STATUS_MESSAGE_FORMAT:
+			case IDC_EDIT_TENDENCY_FORMAT:
 				if(reinterpret_cast<HWND>(lp) == ::GetFocus())
 				{
 					PropSheet_Changed(::GetParent(hWnd),hWnd);
@@ -248,6 +254,9 @@ void CommonOptionDlgProc(HWND hWnd,UINT msg,WPARAM wp,LPARAM lp,CCommonDlgProcDa
 
 					s = get_window_text(::GetDlgItem(hWnd,IDC_EDIT_STATUS_MESSAGE_FORMAT));
 					DBWriteContactSettingTString(NULL,QUOTES_MODULE_NAME,visitor.m_pszDbStatusMsgFormat,s.c_str());
+
+					s = get_window_text(::GetDlgItem(hWnd,IDC_EDIT_TENDENCY_FORMAT));
+					DBWriteContactSettingTString(NULL,QUOTES_MODULE_NAME,visitor.m_pszDbTendencyFormat,s.c_str());
 
 					CAdvProviderSettings* pAdvSet = get_adv_settings(rData.m_pQuotesProvider,false);
 					if(pAdvSet)

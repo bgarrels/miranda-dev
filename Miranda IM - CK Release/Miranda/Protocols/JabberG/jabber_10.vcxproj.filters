@@ -259,9 +259,6 @@
     <None Include="icos\auth_revoke.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="icos\block.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="icos\bookmarks.ico">
       <Filter>Resource Files</Filter>
     </None>
@@ -286,18 +283,6 @@
     <None Include="icos\filter.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="icos\gcadmin.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icos\gcmodera.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icos\gcowner.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icos\gcvoice.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="icos\go.ico">
       <Filter>Resource Files</Filter>
     </None>
@@ -317,9 +302,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="icos\login.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icos\message.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="icos\message_allow.ico">
@@ -422,9 +404,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="icos\weather.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icos\write.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="docs\changelog_jabber.txt" />

@@ -575,80 +575,87 @@ void importSettings(HANDLE hContact, char *importstring )
 
 INT_PTR CALLBACK ImportDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	if (msg == WM_INITDIALOG)
+	switch(msg)
 	{
-		hwnd2importWindow = hwnd;
-		SetWindowLongPtr(hwnd,GWLP_USERDATA,lParam);
-		TranslateDialogDefault(hwnd);
-		SendDlgItemMessage(hwnd, IDC_TEXT, EM_LIMITTEXT, (WPARAM)sizeof(TCHAR)*0x7FFFFFFF, 0);
-	}
-	else
-	if (msg == WM_COMMAND)
-	{
-		switch(LOWORD(wParam))
+		case WM_INITDIALOG:
 		{
-			case IDC_CRLF:
-			{
-				int length = GetWindowTextLength(GetDlgItem(hwnd, IDC_TEXT));
-				char *string = (char*)_alloca(length+3);
-				int Pos = 2;
-
-    			if (length)
-				{
-					int	Range = SendDlgItemMessage(hwnd,IDC_TEXT,EM_GETSEL,0,0);
-					int Min = LOWORD(Range);
-					int Max = HIWORD(Range);
-
-
-					GetDlgItemText(hwnd, IDC_TEXT, string, length+1);
-
-					if (Min == -1)
-						memcpy(string, crlf_string, SIZEOF(crlf_string));
-					else
-					if (Max == -1 || Max >= length)
-						memcpy(&string[Min], crlf_string, SIZEOF(crlf_string));
-					else
-					if (Max-Min > 2)
-					{
-						memcpy(&string[Min], crlf_string, SIZEOF(crlf_string));
-						memmove(&string[Min+2], &string[Max], length - Max + 1);
-					}
-					else
-					{
-						memmove(&string[Min+2], &string[Max], length - Max + 1);
-						memcpy(&string[Min], crlf_string, SIZEOF(crlf_string));
-					}
-
-					if (Min) Pos += Min;
-				}
-				else
-					memcpy(string, crlf_string, SIZEOF(crlf_string));
-
-				SetDlgItemText(hwnd, IDC_TEXT, string);
-				SendDlgItemMessage(hwnd,IDC_TEXT,EM_SETSEL,Pos,Pos);
-				SetFocus(GetDlgItem(hwnd, IDC_TEXT));
-			}
-			break;
-			case IDOK:
-			{
-				HANDLE hContact = (HANDLE)GetWindowLongPtr(hwnd,GWLP_USERDATA);
-				int length = GetWindowTextLength(GetDlgItem(hwnd, IDC_TEXT));
-				char *string;
-				if (length)
-				{
-					string = (char*)_alloca(length+1);
-					if (!string) {msg(Translate("Couldnt allocate enough memory!"), modFullname); DestroyWindow(hwnd); }
-					GetDlgItemText(hwnd, IDC_TEXT, string, length+1);
-					importSettings(hContact, string);
-					refreshTree(1);
-				}
-			}
-			// fall through
-			case IDCANCEL:
-				DestroyWindow(hwnd);
-				hwnd2importWindow = 0;
-			break;
+			hwnd2importWindow = hwnd;
+			SetWindowLongPtr(hwnd,GWLP_USERDATA,lParam);
+			TranslateDialogDefault(hwnd);
+			SendDlgItemMessage(hwnd, IDC_TEXT, EM_LIMITTEXT, (WPARAM)sizeof(TCHAR)*0x7FFFFFFF, 0);
 		}
+		break;
+
+		case WM_COMMAND:
+		{
+			switch(LOWORD(wParam))
+			{
+				case IDC_CRLF:
+				{
+					int length = GetWindowTextLength(GetDlgItem(hwnd, IDC_TEXT));
+					char *string = (char*)_alloca(length+3);
+					int Pos = 2;
+
+    				if (length)
+					{
+						int	Range = SendDlgItemMessage(hwnd,IDC_TEXT,EM_GETSEL,0,0);
+						int Min = LOWORD(Range);
+						int Max = HIWORD(Range);
+
+
+						GetDlgItemText(hwnd, IDC_TEXT, string, length+1);
+
+						if (Min == -1)
+							memcpy(string, crlf_string, SIZEOF(crlf_string));
+						else
+						if (Max == -1 || Max >= length)
+							memcpy(&string[Min], crlf_string, SIZEOF(crlf_string));
+						else
+						if (Max-Min > 2)
+						{
+							memcpy(&string[Min], crlf_string, SIZEOF(crlf_string));
+							memmove(&string[Min+2], &string[Max], length - Max + 1);
+						}
+						else
+						{
+							memmove(&string[Min+2], &string[Max], length - Max + 1);
+							memcpy(&string[Min], crlf_string, SIZEOF(crlf_string));
+						}
+
+						if (Min) Pos += Min;
+					}
+					else
+						memcpy(string, crlf_string, SIZEOF(crlf_string));
+
+					SetDlgItemText(hwnd, IDC_TEXT, string);
+					SendDlgItemMessage(hwnd,IDC_TEXT,EM_SETSEL,Pos,Pos);
+					SetFocus(GetDlgItem(hwnd, IDC_TEXT));
+				}
+				break;
+				
+				case IDOK:
+				{
+					HANDLE hContact = (HANDLE)GetWindowLongPtr(hwnd,GWLP_USERDATA);
+					int length = GetWindowTextLength(GetDlgItem(hwnd, IDC_TEXT));
+					char *string;
+					if (length)
+					{
+						string = (char*)_alloca(length+1);
+						if (!string) {msg(Translate("Couldnt allocate enough memory!"), modFullname); DestroyWindow(hwnd); }
+						GetDlgItemText(hwnd, IDC_TEXT, string, length+1);
+						importSettings(hContact, string);
+						refreshTree(1);
+					}
+				}
+				break;
+				
+				case IDCANCEL:
+					DestroyWindow(hwnd);
+					hwnd2importWindow = 0;
+				break;
+			}
+		}
+		break;
 	}
 	return 0;
 }
@@ -672,14 +679,14 @@ int Openfile2Import(char *outputFiles)
 	ofn.lpstrFilter = filter;
 	ofn.hwndOwner = 0;
 	ofn.lpstrFile = outputFiles;
-	ofn.nMaxFile = MAX_PATH;
+	ofn.nMaxFile = MAX_PATH*10;
 	ofn.nMaxFileTitle = MAX_PATH;
 	ofn.Flags = OFN_HIDEREADONLY | OFN_SHAREAWARE | OFN_PATHMUSTEXIST | OFN_ALLOWMULTISELECT | OFN_EXPLORER;
 	ofn.lpstrTitle = title;
 	if (!GetOpenFileName(&ofn))
 		return 0;
 
-	return 1;
+	return ofn.nFileOffset;
 }
 
 BOOL Exists(LPCTSTR strName)
@@ -695,8 +702,9 @@ void ImportSettingsFromFileMenuItem(HANDLE hContact, char* FilePath)
 	int index = 0;
 	HANDLE hFile, hMap;
 	PBYTE pFile = NULL;
+	DWORD offset = 0;
 	if (lstrcmp(FilePath, "") == 0)
-		Openfile2Import(szFileNames);
+		offset = Openfile2Import(szFileNames);
 	else
 	{
 		if(Exists(FilePath))
@@ -704,8 +712,16 @@ void ImportSettingsFromFileMenuItem(HANDLE hContact, char* FilePath)
 		else
 			lstrcpy(szFileNames, "");
 	}
+
 	if (!lstrcmp(szFileNames, "") == 0)
 	{
+		if ((DWORD)lstrlenA(szFileNames) < offset)
+		{
+			index += offset;
+			strncpy(szPath, szFileNames, offset);
+			strcat(szPath, "\\");
+		}
+
 		while(szFileNames[index])
 		{
 			strcpy(szFile, szPath);

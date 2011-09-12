@@ -2,65 +2,66 @@
 
 HIMAGELIST himl;
 
-void addIcons(char* szModuleFileName)
+void addIcons(TCHAR* szModuleFileName)
 {
 	SKINICONDESC sid={0};
 	char name[32];
 	sid.cbSize = sizeof(sid);
-	sid.pszSection = Translate(modFullname);
-	sid.pszDefaultFile = szModuleFileName;
+	sid.ptszSection = _T(modFullname);
+	sid.ptszDefaultFile = szModuleFileName;
+	sid.flags = SIDF_ALL_TCHAR;
 
 	// closed known module
-	sid.pszDescription = Translate("Closed Known Module");
+	sid.ptszDescription = LPGENT("Closed Known Module");
 	mir_snprintf(name, SIZEOF(name), "DBE++_%d", ICO_KNOWN);
 	sid.pszName = name;
 	sid.iDefaultIndex = -ICO_KNOWN;
 	CallService(MS_SKIN2_ADDICON,0,(LPARAM)&sid);
 
 	// open known module
-	sid.pszDescription = Translate("Open Known Module");
+	sid.ptszDescription = LPGENT("Open Known Module");
 	mir_snprintf(name, SIZEOF(name), "DBE++_%d", ICO_KNOWNOPEN);
-	sid.pszName = name;;
+	sid.pszName = name;
 	sid.iDefaultIndex = -ICO_KNOWNOPEN;
 	CallService(MS_SKIN2_ADDICON,0,(LPARAM)&sid);
 
 	// closed unknown module
-	sid.pszDescription = Translate("Closed Unknown Module");
+	sid.ptszDescription = LPGENT("Closed Unknown Module");
 	mir_snprintf(name, SIZEOF(name), "DBE++_%d", ICO_UNKNOWN);
 	sid.pszName = name;
 	sid.iDefaultIndex = -ICO_UNKNOWN;
 	CallService(MS_SKIN2_ADDICON,0,(LPARAM)&sid);
 
 	// open unknown module
-	sid.pszDescription = Translate("Open Unknown Module");
+	sid.ptszDescription = LPGENT("Open Unknown Module");
 	mir_snprintf(name, SIZEOF(name), "DBE++_%d", ICO_UNKNOWNOPEN);
 	sid.pszName = name;
 	sid.iDefaultIndex = -ICO_UNKNOWNOPEN;
 	CallService(MS_SKIN2_ADDICON,0,(LPARAM)&sid);
 
 	// settings contact
-	sid.pszDescription = Translate("Settings");
+	sid.ptszDescription = LPGENT("Settings");
 	mir_snprintf(name, SIZEOF(name), "DBE++_%d", ICO_SETTINGS);
 	sid.pszName = name;
 	sid.iDefaultIndex = -ICO_SETTINGS;
 	CallService(MS_SKIN2_ADDICON,0,(LPARAM)&sid);
 
 	// contact group
-	sid.pszDescription = Translate("Contacts Group");
+	sid.ptszDescription = LPGENT("Contacts Group");
 	mir_snprintf(name, SIZEOF(name), "DBE++_%d", ICO_CONTACTS);
 	sid.pszName = name;
 	sid.iDefaultIndex = -ICO_CONTACTS;
 	CallService(MS_SKIN2_ADDICON,0,(LPARAM)&sid);
 
 	// unknwon contact
-	sid.pszDescription = Translate("Unknown Contact");
+	sid.ptszDescription = LPGENT("Unknown Contact");
 	mir_snprintf(name, SIZEOF(name), "DBE++_%d", ICO_OFFLINE);
 	sid.pszName = name;
 	sid.iDefaultIndex = -ICO_OFFLINE;
 	CallService(MS_SKIN2_ADDICON,0,(LPARAM)&sid);
 
 	// known contact
-	sid.pszDescription = Translate("Known Contact");
+	sid.ptszDescription = LPGENT("Known Contact");
 	mir_snprintf(name, SIZEOF(name), "DBE++_%d", ICO_ONLINE);
 	sid.pszName = name;
 	sid.iDefaultIndex = -ICO_ONLINE;

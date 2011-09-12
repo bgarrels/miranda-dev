@@ -133,6 +133,7 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -198,6 +199,7 @@
       <CompileAsManaged>false</CompileAsManaged>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -219,8 +221,7 @@
       <BaseAddress>
       </BaseAddress>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
       <ImportLibrary>$(OutDir)$(ProjectName).lib</ImportLibrary>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
@@ -347,9 +348,10 @@
     <ClInclude Include="xstatus.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\nxsn_readme.txt" />
+    <None Include="docs\nxsn_translate.txt" />
     <None Include="res\disable_all.ico" />
     <None Include="res\enable_all.ico" />
-    <None Include="res\icon_undo.ico" />
     <None Include="res\logging.ico" />
     <None Include="res\main_off.ico" />
     <None Include="res\main_on.ico" />
@@ -359,9 +361,6 @@
     <None Include="res\status_message.ico" />
     <None Include="res\variables.ico" />
     <None Include="res\xstatus.ico" />
-    <None Include="docs\NewXstatusNotify_readme.txt" />
-    <None Include="docs\NewXstatusNotify_translate.txt" />
-    <None Include="docs\nsn_readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

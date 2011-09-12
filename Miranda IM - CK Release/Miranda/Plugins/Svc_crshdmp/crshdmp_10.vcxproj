@@ -100,6 +100,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>Delayimp.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -144,6 +145,7 @@
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>Delayimp.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -231,14 +233,14 @@
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ExternalAPI\m_folders.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_toolbar.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_updater.h" />
     <ClInclude Include="bkstring.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="sdkstuff.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="version.h" />
-    <ClInclude Include="m_folders.h" />
-    <ClInclude Include="m_toolbar.h" />
-    <ClInclude Include="m_updater.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="crshdmp.rc" />

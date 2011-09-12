@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define _WIN32_WINNT  0x0501
 #include "Options.h"
 #include "resource.h"
-//#include "Smiley.h"
 #include "Template.h"
 #include "Utils.h"
 #include "m_MathModule.h"
@@ -49,10 +48,10 @@ typedef struct TabDefStruct {
 } TabDef;
 
 static TabDef tabPages[] = {
-						 {IEViewGeneralOptDlgProc, IDD_GENERAL_OPTIONS, LPGENT("General")},
-						 {IEViewSRMMOptDlgProc, IDD_SRMM_OPTIONS, LPGENT("Message Log")},
-						 {IEViewGroupChatsOptDlgProc, IDD_SRMM_OPTIONS, LPGENT("Group Chats")},
-						 {IEViewHistoryOptDlgProc, IDD_SRMM_OPTIONS, LPGENT("History")}
+						 {IEViewGeneralOptDlgProc, IDD_GENERAL_OPTIONS, _T("General")},
+						 {IEViewSRMMOptDlgProc, IDD_SRMM_OPTIONS, _T("Message Log")},
+						 {IEViewGroupChatsOptDlgProc, IDD_SRMM_OPTIONS, _T("Group Chats")},
+						 {IEViewHistoryOptDlgProc, IDD_SRMM_OPTIONS, _T("History")}
 						 };
 
 static LPARAM GetItemParam(HWND hwndTreeView, HTREEITEM hItem) {
@@ -328,12 +327,12 @@ static void RefreshProtoIcons() {
 	for (i=0,proto=Options::getProtocolSettings();proto!=NULL;proto=proto->getNext(),i++) {
 		HICON hIcon = NULL;
 		if (i > 0 ) {
-			hIcon=(HICON)CallProtoService(proto->getProtocolName(), PS_LOADICON, PLI_PROTOCOL | PLIF_SMALL | PLIF_ICOLIB, 0);
+			hIcon=(HICON)CallProtoService(proto->getProtocolName(), PS_LOADICON, PLI_PROTOCOL | PLIF_SMALL, 0);
 			if (hIcon == NULL)  {
-				hIcon=(HICON)CallProtoService(proto->getProtocolName(), PS_LOADICON, PLI_PROTOCOL | PLIF_ICOLIB, 0);
+				hIcon=(HICON)CallProtoService(proto->getProtocolName(), PS_LOADICON, PLI_PROTOCOL, 0);
 			}
 			ImageList_AddIcon(hProtocolImageList, hIcon);
-			//DestroyIcon(hIcon);
+			DestroyIcon(hIcon);
 		}
 		if (hIcon == NULL) {
 			hIcon=(HICON)LoadSkinnedIcon(SKINICON_OTHER_MIRANDA);
@@ -357,7 +356,7 @@ static void RefreshIcons() {
 
 static void RefreshProtoList(HWND hwndDlg, int mode, bool protoTemplates) {
 	int i;
-    HTREEITEM hItem = NULL;
+	HTREEITEM hItem = NULL;
 	HWND hProtoList = GetDlgItem(hwndDlg, IDC_PROTOLIST);
 	TreeView_DeleteAllItems(hProtoList);
 	TreeView_SetImageList(hProtoList, hProtocolImageList, TVSIL_NORMAL);
@@ -428,11 +427,17 @@ int IEViewOptInit(WPARAM wParam, LPARAM lParam)
 	odp.cbSize = sizeof(odp);
 	odp.position = 0;
 	odp.hInstance = hInstance;
-	odp.ptszGroup = LPGENT("Message Sessions");
-	odp.ptszTitle = LPGENT("IEView");
+	odp.ptszGroup = _T("Message Sessions");
+	odp.ptszTitle = _T("IEView");
 	odp.flags = ODPF_BOLDGROUPS | ODPF_TCHAR;
 	odp.nIDBottomSimpleControl = 0;
-	for (i = 0; i < SIZEOF(tabPages); i++) {
+	odp.pszTemplate = MAKEINTRESOURCEA(tabPages[0].dlgId);
+	odp.pfnDlgProc = tabPages[0].dlgProc;
+	odp.ptszTab = tabPages[0].tabName;
+	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM) & odp);
+	odp.ptszGroup = _T("Skins");
+	odp.ptszTitle = _T("Message Log");
+	for (i = 1; i < SIZEOF(tabPages); i++) {
 		odp.pszTemplate = MAKEINTRESOURCEA(tabPages[i].dlgId);
 		odp.pfnDlgProc = tabPages[i].dlgProc;
 		odp.ptszTab = tabPages[i].tabName;
@@ -498,23 +503,23 @@ static INT_PTR CALLBACK IEViewGeneralOptDlgProc(HWND hwndDlg, UINT msg, WPARAM w
 			EnableWindow(GetDlgItem(hwndDlg, IDC_ENABLE_MATHMODULE), Options::isMathModule());
 			EnableWindow(GetDlgItem(hwndDlg, IDC_SMILEYS_IN_NAMES), Options::isSmileyAdd());
 			EnableWindow(GetDlgItem(hwndDlg, IDC_EMBED_SIZE), IsDlgButtonChecked(hwndDlg, IDC_ENABLE_EMBED));
-			TCHAR* size[] = {  _T("320 x 205"), _T("480 x 385") , _T("560 x 349"), _T("640 x 390")};
+			TCHAR* size[] = {  _T("320õ205"), _T("480 x 385") , _T("560 x 349"), _T("640 x 390")};
 			for (i = 0; i < SIZEOF(size); ++i){
-                int item=SendDlgItemMessage(hwndDlg,IDC_EMBED_SIZE,CB_ADDSTRING,0,(LPARAM)TranslateTS(size[i]));
-                SendDlgItemMessage(hwndDlg,IDC_EMBED_SIZE,CB_SETITEMDATA,item,(LPARAM)0);
+				int item=SendDlgItemMessage(hwndDlg,IDC_EMBED_SIZE,CB_ADDSTRING,0,(LPARAM)TranslateTS(size[i]));
+				SendDlgItemMessage(hwndDlg,IDC_EMBED_SIZE,CB_SETITEMDATA,item,(LPARAM)0);
 			}
-			SendDlgItemMessage(hwndDlg,IDC_EMBED_SIZE,CB_SETCURSEL,Options::getEmbedsize(),0);
+			SendDlgItemMessage(hwndDlg,IDC_EMBED_SIZE,CB_SETCURSEL,Options::getEmbedsize(),0);	
 			return TRUE;
 		}
 	case WM_COMMAND:
 		{
 			switch (LOWORD(wParam)) {
 			case IDC_ENABLE_BBCODES:
-            case IDC_ENABLE_FLASH:
-            case IDC_ENABLE_MATHMODULE:
-            case IDC_ENABLE_PNGHACK:
-            case IDC_SMILEYS_IN_NAMES:
-            case IDC_NO_BORDER:
+			case IDC_ENABLE_FLASH:
+			case IDC_ENABLE_MATHMODULE:
+			case IDC_ENABLE_PNGHACK:
+			case IDC_SMILEYS_IN_NAMES:
+			case IDC_NO_BORDER:
 			case IDC_EMBED_SIZE:
 				MarkChanges(1, hwndDlg);
 				break;
@@ -566,7 +571,7 @@ static INT_PTR CALLBACK IEViewGeneralOptDlgProc(HWND hwndDlg, UINT msg, WPARAM w
 
 static INT_PTR CALLBACK IEViewSRMMOptDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
 	BOOL bChecked;
-	char path[MAX_PATH];
+	char path[MAX_PATH], filter[MAX_PATH];
 	switch (msg) {
 	case WM_INITDIALOG:
 		{
@@ -580,9 +585,9 @@ static INT_PTR CALLBACK IEViewSRMMOptDlgProc(HWND hwndDlg, UINT msg, WPARAM wPar
 		{
 			switch (LOWORD(wParam)) {
 			case IDC_BACKGROUND_IMAGE_FILENAME:
-            case IDC_EXTERNALCSS_FILENAME:
-            case IDC_EXTERNALCSS_FILENAME_RTL:
-            case IDC_TEMPLATES_FILENAME:
+			case IDC_EXTERNALCSS_FILENAME:
+			case IDC_EXTERNALCSS_FILENAME_RTL:
+			case IDC_TEMPLATES_FILENAME:
 				if ((HWND)lParam==GetFocus() && HIWORD(wParam)==EN_CHANGE)
 					MarkChanges(2, hwndDlg);
 				break;
@@ -597,33 +602,37 @@ static INT_PTR CALLBACK IEViewSRMMOptDlgProc(HWND hwndDlg, UINT msg, WPARAM wPar
 				MarkChanges(2, hwndDlg);
 				break;
 			case IDC_BACKGROUND_IMAGE:
-                bChecked = IsDlgButtonChecked(hwndDlg, IDC_MODE_COMPATIBLE) && IsDlgButtonChecked(hwndDlg, IDC_BACKGROUND_IMAGE);
+				bChecked = IsDlgButtonChecked(hwndDlg, IDC_MODE_COMPATIBLE) && IsDlgButtonChecked(hwndDlg, IDC_BACKGROUND_IMAGE);
 				EnableWindow(GetDlgItem(hwndDlg, IDC_BACKGROUND_IMAGE_FILENAME), bChecked);
 				EnableWindow(GetDlgItem(hwndDlg, IDC_BROWSE_BACKGROUND_IMAGE), bChecked);
 				EnableWindow(GetDlgItem(hwndDlg, IDC_SCROLL_BACKGROUND_IMAGE), bChecked);
 				MarkChanges(2, hwndDlg);
 				break;
 			case IDC_BROWSE_TEMPLATES:
-				if (BrowseFile(hwndDlg, "Template (*.ivt)\0*.ivt\0All Files\0*.*\0\0", "ivt", path, sizeof(path))) {
+				mir_snprintf(filter, SIZEOF(filter), "%s (*.ivt)%c*.ivt%c%s%c*.*%c%c", Translate("Template"), 0, 0, Translate("All Files"), 0, 0, 0);
+				if (BrowseFile(hwndDlg, filter, "ivt", path, SIZEOF(path))) {
 					SetDlgItemTextA(hwndDlg, IDC_TEMPLATES_FILENAME, path);
 					UpdateTemplateIcons(hwndDlg, path);
 					MarkChanges(2, hwndDlg);
 				}
 				break;
 			case IDC_BROWSE_BACKGROUND_IMAGE:
-				if (BrowseFile(hwndDlg, "All Images (*.jpg,*.gif,*.png,*.bmp)\0*.jpg;*.gif;*.png;*.bmp\0All Files\0*.*\0\0", "jpg", path, sizeof(path))) {
+				mir_snprintf(filter, SIZEOF(filter), "%s (*.jpg,*.gif,*.png,*.bmp)%c*.ivt%c%s%c*.*%c%c", Translate("All Images"), 0, 0, Translate("All Files"), 0, 0, 0);
+				if (BrowseFile(hwndDlg, filter, "jpg", path, SIZEOF(path))) {
 					SetDlgItemTextA(hwndDlg,IDC_BACKGROUND_IMAGE_FILENAME,path);
 					MarkChanges(2, hwndDlg);
 				}
 				break;
 			case IDC_BROWSE_EXTERNALCSS:
-				if (BrowseFile(hwndDlg, "Style Sheet (*.css)\0*.css\0All Files\0*.*\0\0", "css", path, sizeof(path))) {
+				mir_snprintf(filter, SIZEOF(filter), "%s (*.css)%c*.ivt%c%s%c*.*%c%c", Translate("Style Sheet"), 0, 0, Translate("All Files"), 0, 0, 0);
+				if (BrowseFile(hwndDlg, filter, "css", path, SIZEOF(path))) {
 					SetDlgItemTextA(hwndDlg, IDC_EXTERNALCSS_FILENAME, path);
 					MarkChanges(2, hwndDlg);
 				}
 				break;
 			case IDC_BROWSE_EXTERNALCSS_RTL:
-				if (BrowseFile(hwndDlg, "Style Sheet (*.css)\0*.css\0All Files\0*.*\0\0", "css", path, sizeof(path))) {
+				mir_snprintf(filter, SIZEOF(filter), "%s (*.css)%c*.ivt%c%s%c*.*%c%c", Translate("Style Sheet"), 0, 0, Translate("All Files"), 0, 0, 0);
+				if (BrowseFile(hwndDlg, filter, "css", path, SIZEOF(path))) {
 					SetDlgItemTextA(hwndDlg, IDC_EXTERNALCSS_FILENAME_RTL, path);
 					MarkChanges(2, hwndDlg);
 				}
@@ -665,8 +674,8 @@ static INT_PTR CALLBACK IEViewSRMMOptDlgProc(HWND hwndDlg, UINT msg, WPARAM wPar
 							MapWindowPoints(HWND_DESKTOP, ((LPNMHDR)lParam)->hwndFrom, &ht.pt, 1);
 							TreeView_HitTest(((LPNMHDR)lParam)->hwndFrom, &ht);
 							if (TVHT_ONITEMSTATEICON & ht.flags) {
-                                PostMessage(hwndDlg, UM_CHECKSTATECHANGE, (WPARAM)((LPNMHDR)lParam)->hwndFrom, (LPARAM)ht.hItem);
-                                return FALSE;
+								PostMessage(hwndDlg, UM_CHECKSTATECHANGE, (WPARAM)((LPNMHDR)lParam)->hwndFrom, (LPARAM)ht.hItem);
+								return FALSE;
 							}
 						}
 						break;
@@ -702,7 +711,7 @@ static INT_PTR CALLBACK IEViewSRMMOptDlgProc(HWND hwndDlg, UINT msg, WPARAM wPar
 
 static INT_PTR CALLBACK IEViewHistoryOptDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
 	BOOL bChecked = FALSE;
-	char path[MAX_PATH];
+	char path[MAX_PATH], filter[MAX_PATH];
 	switch (msg) {
 	case WM_INITDIALOG:
 		{
@@ -716,9 +725,9 @@ static INT_PTR CALLBACK IEViewHistoryOptDlgProc(HWND hwndDlg, UINT msg, WPARAM w
 		{
 			switch (LOWORD(wParam)) {
 			case IDC_BACKGROUND_IMAGE_FILENAME:
-            case IDC_EXTERNALCSS_FILENAME:
-            case IDC_EXTERNALCSS_FILENAME_RTL:
-            case IDC_TEMPLATES_FILENAME:
+			case IDC_EXTERNALCSS_FILENAME:
+			case IDC_EXTERNALCSS_FILENAME_RTL:
+			case IDC_TEMPLATES_FILENAME:
 				if ((HWND)lParam==GetFocus() && HIWORD(wParam)==EN_CHANGE)
 					MarkChanges(4, hwndDlg);
 				break;
@@ -733,33 +742,37 @@ static INT_PTR CALLBACK IEViewHistoryOptDlgProc(HWND hwndDlg, UINT msg, WPARAM w
 				MarkChanges(4, hwndDlg);
 				break;
 			case IDC_BACKGROUND_IMAGE:
-                bChecked = IsDlgButtonChecked(hwndDlg, IDC_MODE_COMPATIBLE) && IsDlgButtonChecked(hwndDlg, IDC_BACKGROUND_IMAGE);
+				bChecked = IsDlgButtonChecked(hwndDlg, IDC_MODE_COMPATIBLE) && IsDlgButtonChecked(hwndDlg, IDC_BACKGROUND_IMAGE);
 				EnableWindow(GetDlgItem(hwndDlg, IDC_BACKGROUND_IMAGE_FILENAME), bChecked);
 				EnableWindow(GetDlgItem(hwndDlg, IDC_BROWSE_BACKGROUND_IMAGE), bChecked);
 				EnableWindow(GetDlgItem(hwndDlg, IDC_SCROLL_BACKGROUND_IMAGE), bChecked);
 				MarkChanges(4, hwndDlg);
 				break;
 			case IDC_BROWSE_TEMPLATES:
-				if (BrowseFile(hwndDlg, "Template (*.ivt)\0*.ivt\0All Files\0*.*\0\0", "ivt", path, sizeof(path))) {
+				mir_snprintf(filter, SIZEOF(filter), "%s (*.ivt)%c*.ivt%c%s%c*.*%c%c", Translate("Template"), 0, 0, Translate("All Files"), 0, 0, 0);
+				if (BrowseFile(hwndDlg, filter, "ivt", path, SIZEOF(path))) {
 					SetDlgItemTextA(hwndDlg, IDC_TEMPLATES_FILENAME, path);
 					UpdateTemplateIcons(hwndDlg, path);
 					MarkChanges(4, hwndDlg);
 				}
 				break;
 			case IDC_BROWSE_BACKGROUND_IMAGE:
-				if (BrowseFile(hwndDlg, "All Images (*.jpg,*.gif,*.png,*.bmp)\0*.jpg;*.gif;*.png;*.bmp\0All Files\0*.*\0\0", "jpg", path, sizeof(path))) {
+				mir_snprintf(filter, SIZEOF(filter), "%s (*.jpg,*.gif,*.png,*.bmp)%c*.ivt%c%s%c*.*%c%c", Translate("All Images"), 0, 0, Translate("All Files"), 0, 0, 0);
+				if (BrowseFile(hwndDlg, filter, "jpg", path, SIZEOF(path))) {
 					SetDlgItemTextA(hwndDlg,IDC_BACKGROUND_IMAGE_FILENAME,path);
 					MarkChanges(4, hwndDlg);
 				}
 				break;
 			case IDC_BROWSE_EXTERNALCSS:
-				if (BrowseFile(hwndDlg, "Style Sheet (*.css)\0*.css\0All Files\0*.*\0\0", "css", path, sizeof(path))) {
+				mir_snprintf(filter, SIZEOF(filter), "%s (*.css)%c*.ivt%c%s%c*.*%c%c", Translate("Style Sheet"), 0, 0, Translate("All Files"), 0, 0, 0);
+				if (BrowseFile(hwndDlg, filter, "css", path, SIZEOF(path))) {
 					SetDlgItemTextA(hwndDlg, IDC_EXTERNALCSS_FILENAME, path);
 					MarkChanges(4, hwndDlg);
 				}
 				break;
 			case IDC_BROWSE_EXTERNALCSS_RTL:
-				if (BrowseFile(hwndDlg, "Style Sheet (*.css)\0*.css\0All Files\0*.*\0\0", "css", path, sizeof(path))) {
+				mir_snprintf(filter, SIZEOF(filter), "%s (*.css)%c*.ivt%c%s%c*.*%c%c", Translate("Style Sheet"), 0, 0, Translate("All Files"), 0, 0, 0);
+				if (BrowseFile(hwndDlg, filter, "css", path, SIZEOF(path))) {
 					SetDlgItemTextA(hwndDlg, IDC_EXTERNALCSS_FILENAME_RTL, path);
 					MarkChanges(4, hwndDlg);
 				}
@@ -801,8 +814,8 @@ static INT_PTR CALLBACK IEViewHistoryOptDlgProc(HWND hwndDlg, UINT msg, WPARAM w
 							MapWindowPoints(HWND_DESKTOP, ((LPNMHDR)lParam)->hwndFrom, &ht.pt, 1);
 							TreeView_HitTest(((LPNMHDR)lParam)->hwndFrom, &ht);
 							if (TVHT_ONITEMSTATEICON & ht.flags) {
-                                PostMessage(hwndDlg, UM_CHECKSTATECHANGE, (WPARAM)((LPNMHDR)lParam)->hwndFrom, (LPARAM)ht.hItem);
-                                return FALSE;
+								PostMessage(hwndDlg, UM_CHECKSTATECHANGE, (WPARAM)((LPNMHDR)lParam)->hwndFrom, (LPARAM)ht.hItem);
+								return FALSE;
 							}
 						}
 						break;
@@ -838,7 +851,7 @@ static INT_PTR CALLBACK IEViewHistoryOptDlgProc(HWND hwndDlg, UINT msg, WPARAM w
 
 static INT_PTR CALLBACK IEViewGroupChatsOptDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
 	BOOL bChecked;
-	char path[MAX_PATH];
+	char path[MAX_PATH], filter[MAX_PATH];
 	switch (msg) {
 	case WM_INITDIALOG:
 		{
@@ -853,9 +866,9 @@ static INT_PTR CALLBACK IEViewGroupChatsOptDlgProc(HWND hwndDlg, UINT msg, WPARA
 		{
 			switch (LOWORD(wParam)) {
 			case IDC_BACKGROUND_IMAGE_FILENAME:
-            case IDC_EXTERNALCSS_FILENAME:
-            case IDC_EXTERNALCSS_FILENAME_RTL:
-            case IDC_TEMPLATES_FILENAME:
+			case IDC_EXTERNALCSS_FILENAME:
+			case IDC_EXTERNALCSS_FILENAME_RTL:
+			case IDC_TEMPLATES_FILENAME:
 				if ((HWND)lParam==GetFocus() && HIWORD(wParam)==EN_CHANGE)
 					MarkChanges(8, hwndDlg);
 				break;
@@ -870,33 +883,37 @@ static INT_PTR CALLBACK IEViewGroupChatsOptDlgProc(HWND hwndDlg, UINT msg, WPARA
 				MarkChanges(8, hwndDlg);
 				break;
 			case IDC_BACKGROUND_IMAGE:
-                bChecked = IsDlgButtonChecked(hwndDlg, IDC_MODE_COMPATIBLE) && IsDlgButtonChecked(hwndDlg, IDC_BACKGROUND_IMAGE);
+				bChecked = IsDlgButtonChecked(hwndDlg, IDC_MODE_COMPATIBLE) && IsDlgButtonChecked(hwndDlg, IDC_BACKGROUND_IMAGE);
 				EnableWindow(GetDlgItem(hwndDlg, IDC_BACKGROUND_IMAGE_FILENAME), bChecked);
 				EnableWindow(GetDlgItem(hwndDlg, IDC_BROWSE_BACKGROUND_IMAGE), bChecked);
 				EnableWindow(GetDlgItem(hwndDlg, IDC_SCROLL_BACKGROUND_IMAGE), bChecked);
 				MarkChanges(8, hwndDlg);
 				break;
 			case IDC_BROWSE_TEMPLATES:
-				if (BrowseFile(hwndDlg, "Template (*.ivt)\0*.ivt\0All Files\0*.*\0\0", "ivt", path, sizeof(path))) {
+				mir_snprintf(filter, SIZEOF(filter), "%s (*.ivt)%c*.ivt%c%s%c*.*%c%c", Translate("Template"), 0, 0, Translate("All Files"), 0, 0, 0);
+				if (BrowseFile(hwndDlg, filter, "ivt", path, SIZEOF(path))) {
 					SetDlgItemTextA(hwndDlg, IDC_TEMPLATES_FILENAME, path);
 					UpdateTemplateIcons(hwndDlg, path);
 					MarkChanges(8, hwndDlg);
 				}
 				break;
 			case IDC_BROWSE_BACKGROUND_IMAGE:
-				if (BrowseFile(hwndDlg, "All Images (*.jpg,*.gif,*.png,*.bmp)\0*.jpg;*.gif;*.png;*.bmp\0All Files\0*.*\0\0", "jpg", path, sizeof(path))) {
+				mir_snprintf(filter, SIZEOF(filter), "%s (*.jpg,*.gif,*.png,*.bmp)%c*.ivt%c%s%c*.*%c%c", Translate("All Images"), 0, 0, Translate("All Files"), 0, 0, 0);
+				if (BrowseFile(hwndDlg, filter, "jpg", path, SIZEOF(path))) {
 					SetDlgItemTextA(hwndDlg,IDC_BACKGROUND_IMAGE_FILENAME,path);
 					MarkChanges(8, hwndDlg);
 				}
 				break;
 			case IDC_BROWSE_EXTERNALCSS:
-				if (BrowseFile(hwndDlg, "Style Sheet (*.css)\0*.css\0All Files\0*.*\0\0", "css", path, sizeof(path))) {
+				mir_snprintf(filter, SIZEOF(filter), "%s (*.css)%c*.ivt%c%s%c*.*%c%c", Translate("Style Sheet"), 0, 0, Translate("All Files"), 0, 0, 0);
+				if (BrowseFile(hwndDlg, filter, "css", path, SIZEOF(path))) {
 					SetDlgItemTextA(hwndDlg, IDC_EXTERNALCSS_FILENAME, path);
 					MarkChanges(8, hwndDlg);
 				}
 				break;
 			case IDC_BROWSE_EXTERNALCSS_RTL:
-				if (BrowseFile(hwndDlg, "Style Sheet (*.css)\0*.css\0All Files\0*.*\0\0", "css", path, sizeof(path))) {
+				mir_snprintf(filter, SIZEOF(filter), "%s (*.css)%c*.ivt%c%s%c*.*%c%c", Translate("Style Sheet"), 0, 0, Translate("All Files"), 0, 0, 0);
+				if (BrowseFile(hwndDlg, filter, "css", path, SIZEOF(path))) {
 					SetDlgItemTextA(hwndDlg, IDC_EXTERNALCSS_FILENAME_RTL, path);
 					MarkChanges(8, hwndDlg);
 				}
@@ -938,8 +955,8 @@ static INT_PTR CALLBACK IEViewGroupChatsOptDlgProc(HWND hwndDlg, UINT msg, WPARA
 							MapWindowPoints(HWND_DESKTOP, ((LPNMHDR)lParam)->hwndFrom, &ht.pt, 1);
 							TreeView_HitTest(((LPNMHDR)lParam)->hwndFrom, &ht);
 							if (TVHT_ONITEMSTATEICON & ht.flags) {
-                                PostMessage(hwndDlg, UM_CHECKSTATECHANGE, (WPARAM)((LPNMHDR)lParam)->hwndFrom, (LPARAM)ht.hItem);
-                                return FALSE;
+								PostMessage(hwndDlg, UM_CHECKSTATECHANGE, (WPARAM)((LPNMHDR)lParam)->hwndFrom, (LPARAM)ht.hItem);
+								return FALSE;
 							}
 						}
 						break;
@@ -1499,7 +1516,7 @@ void Options::init() {
 	}
 
 
-	generalFlags = DBGetContactSettingDword(NULL, ieviewModuleName, DBS_BASICFLAGS, 0);
+	generalFlags = DBGetContactSettingDword(NULL, ieviewModuleName, DBS_BASICFLAGS, 13);
 
 	/* TODO: move to buildProtocolList method */
 	int protoCount;
@@ -1527,7 +1544,7 @@ void Options::init() {
 		sprintf(dbsName, "%s.%s", proto->getProtocolName(), DBS_SRMM_MODE);
 		proto->setSRMMMode(DBGetContactSettingByte(NULL, ieviewModuleName, dbsName, FALSE));
 		sprintf(dbsName, "%s.%s", proto->getProtocolName(), DBS_SRMM_FLAGS);
-		proto->setSRMMFlags(DBGetContactSettingDword(NULL, ieviewModuleName, dbsName, FALSE));
+		proto->setSRMMFlags(DBGetContactSettingDword(NULL, ieviewModuleName, dbsName, 16128));
 		sprintf(dbsName, "%s.%s", proto->getProtocolName(), DBS_SRMM_BACKGROUND);
 		if (!DBGetContactSetting(NULL,  ieviewModuleName, dbsName, &dbv)) {
 			strcpy(tmpPath, dbv.pszVal);
@@ -1562,7 +1579,7 @@ void Options::init() {
 		sprintf(dbsName, "%s.%s", proto->getProtocolName(), DBS_CHAT_MODE);
 		proto->setChatMode(DBGetContactSettingByte(NULL, ieviewModuleName, dbsName, FALSE));
 		sprintf(dbsName, "%s.%s", proto->getProtocolName(), DBS_CHAT_FLAGS);
-		proto->setChatFlags(DBGetContactSettingDword(NULL, ieviewModuleName, dbsName, FALSE));
+		proto->setChatFlags(DBGetContactSettingDword(NULL, ieviewModuleName, dbsName, 16128));
 		sprintf(dbsName, "%s.%s", proto->getProtocolName(), DBS_CHAT_BACKGROUND);
 		if (!DBGetContactSetting(NULL,  ieviewModuleName, dbsName, &dbv)) {
 			strcpy(tmpPath, dbv.pszVal);
@@ -1597,7 +1614,7 @@ void Options::init() {
 		sprintf(dbsName, "%s.%s", proto->getProtocolName(), DBS_HISTORY_MODE);
 		proto->setHistoryMode(DBGetContactSettingByte(NULL, ieviewModuleName, dbsName, FALSE));
 		sprintf(dbsName, "%s.%s", proto->getProtocolName(), DBS_HISTORY_FLAGS);
-		proto->setHistoryFlags(DBGetContactSettingDword(NULL, ieviewModuleName, dbsName, FALSE));
+		proto->setHistoryFlags(DBGetContactSettingDword(NULL, ieviewModuleName, dbsName, 16128));
 		sprintf(dbsName, "%s.%s", proto->getProtocolName(), DBS_HISTORY_BACKGROUND);
 		if (!DBGetContactSetting(NULL,  ieviewModuleName, dbsName, &dbv)) {
 			strcpy(tmpPath, dbv.pszVal);

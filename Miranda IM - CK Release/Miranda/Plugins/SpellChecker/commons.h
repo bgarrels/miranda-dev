@@ -43,6 +43,8 @@ using namespace std;
 
 // Miranda headers
 #define MIRANDA_VER 0x0900
+#define MIRANDA_CUSTOM_LP
+
 #include <newpluginapi.h>
 #include <m_system.h>
 #include <m_system_cpp.h>
@@ -67,14 +69,15 @@ using namespace std;
 #include "m_variables.h"
 #include "m_userinfoex.h"
 
-#include "../utils/Pescuma/mir_memory.h"
-#include "../utils/Pescuma/mir_options.h"
-#include "../utils/Pescuma/mir_icons.h"
-#include "../utils/Pescuma/tstring.h"
-#include "../utils/Pescuma/utf8_helpers.h"
-#include "../utils/Pescuma/scope.h"
+#include "mir_memory.h"
+#include "mir_options.h"
+#include "mir_icons.h"
+#include "tstring.h"
+#include "utf8_helpers.h"
+#include "scope.h"
 
 #include "resource.h"
+#include "Version.h"
 #include "m_spellchecker.h"
 #include "options.h"
 #include "autoreplace.h"
@@ -86,7 +89,7 @@ using namespace std;
 #define MODULE_NAME		"SpellChecker"
 
 #define FLAGS_DLL_FOLDER _T("%miranda_path%\\Icons")
-#define CUSTOM_DICTIONARIES_FOLDER _T("%miranda_userdata%\\Dictionaries")
+#define CUSTOM_DICTIONARIES_FOLDER _T("%miranda_path%\\Dictionaries")
 #define DICTIONARIES_FOLDER _T("%miranda_path%\\Dictionaries")
 
 // Global Variables

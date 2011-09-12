@@ -11,6 +11,9 @@
     <Filter Include="Source Files\utils">
       <UniqueIdentifier>{e0bd61df-b5b5-4804-9667-a47e6782cc89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{64520de6-13e7-4e2b-b403-ab2bce794c38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="name_day.cpp">
@@ -36,7 +39,9 @@
     <ClInclude Include="utils\string_tokenizer.h">
       <Filter>Source Files\utils</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="namedayplug.rc">
@@ -44,10 +49,17 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\baloons.ico" />
-    <None Include="resources\icon1.ico" />
-    <None Include="icon1.ico" />
-    <None Include="resources\icon2.ico" />
-    <None Include="resources\icon3.ico" />
+    <None Include="resources\baloons.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\icon1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\icon2.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\icon3.ico">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

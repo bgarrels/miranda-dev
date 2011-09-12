@@ -100,13 +100,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\dbthdr.emf">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\dbtool.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\dbtool.emf">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\dbtool.ico">

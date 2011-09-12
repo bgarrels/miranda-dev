@@ -39,6 +39,7 @@ Boston, MA 02111-1307, USA.
 #endif
 
 #define MIRANDA_VER		0x0900
+#define MIRANDA_CUSTOM_LP
 
 #include <m_stdhdr.h>
 

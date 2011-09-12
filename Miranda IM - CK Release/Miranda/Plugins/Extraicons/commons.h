@@ -39,6 +39,8 @@ using namespace std;
 
 // Miranda headers
 #define MIRANDA_VER 0x0900
+#define MIRANDA_CUSTOM_LP
+
 #include <newpluginapi.h>
 #include <m_system.h>
 #include <m_protocols.h>

@@ -89,6 +89,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 struct MM_INTERFACE mmi;
 BOOL os_unicode_enabled = FALSE;
+int hLangpack;
 
 //! Information gathered by Miranda, displayed in the plugin pane of the Option Dialog
 PLUGININFOEX pluginInfo={
@@ -168,6 +169,7 @@ int __declspec(dllexport)Load(PLUGINLINK *link)
 	pluginLink=link;
 
     mir_getMMI(&mmi);
+	mir_getLP(&pluginInfo);
 
 	os_unicode_enabled = IsUnicodeOS();
 

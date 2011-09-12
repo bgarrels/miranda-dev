@@ -119,6 +119,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -355,11 +356,8 @@
     <ClInclude Include="sha256.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\dbthdr.emf" />
     <None Include="res\dbtool.bmp" />
-    <None Include="res\dbtool.emf" />
     <None Include="res\dbtool.ico" />
-    <None Include="res\header.ico" />
     <None Include="res\logo.ico" />
     <None Include="res\profileg.ico" />
     <None Include="res\profiler.ico" />

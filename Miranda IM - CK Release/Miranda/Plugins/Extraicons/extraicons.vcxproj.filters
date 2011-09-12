@@ -39,9 +39,6 @@
     <ClInclude Include="IcolibExtraIcon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="m_extraicons.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Utils\Pescuma\mir_icons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -52,6 +49,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="usedIcons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_extraicons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

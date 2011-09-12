@@ -243,7 +243,7 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./../../include/msapi/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/IGNORE:4089 /filealign:512  %(AdditionalOptions)</AdditionalOptions>
@@ -274,15 +274,15 @@
     <ClCompile Include="poll.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ExternalAPI\m_avatarhistory.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_flash.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_folders.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_metacontacts.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_png.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_updater.h" />
     <ClInclude Include="acc.h" />
     <ClInclude Include="commonheaders.h" />
     <ClInclude Include="image_utils.h" />
-    <ClInclude Include="m_avatarhistory.h" />
-    <ClInclude Include="m_flash.h" />
-    <ClInclude Include="m_folders.h" />
-    <ClInclude Include="m_metacontacts.h" />
-    <ClInclude Include="m_png.h" />
-    <ClInclude Include="m_updater.h" />
     <ClInclude Include="mir_thread.h" />
     <ClInclude Include="poll.h" />
     <ClInclude Include="version.h" />

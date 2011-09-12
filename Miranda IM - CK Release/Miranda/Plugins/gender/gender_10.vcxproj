@@ -136,6 +136,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)gender.dll</OutputFile>
@@ -169,9 +170,10 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <OutputFile>$(OutDir)gender.dll</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -188,10 +190,10 @@
     <ClCompile Include="options.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ExternalAPI\m_gender.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_metacontacts.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_updater.h" />
     <ClInclude Include="commonheaders.h" />
-    <ClInclude Include="m_gender.h" />
-    <ClInclude Include="sdk\m_metacontacts.h" />
-    <ClInclude Include="sdk\m_updater.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

@@ -74,11 +74,11 @@
     <ClInclude Include="src\textusers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="api\m_text.h">
-      <Filter>api</Filter>
-    </ClInclude>
     <ClInclude Include="src\version.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_text.h">
+      <Filter>api</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

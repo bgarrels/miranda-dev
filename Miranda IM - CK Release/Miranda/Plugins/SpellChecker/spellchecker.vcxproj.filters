@@ -36,9 +36,6 @@
     <ClInclude Include="dictionary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="m_spellchecker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="options.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -106,6 +103,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Utils\Pescuma\mir_memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_spellchecker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

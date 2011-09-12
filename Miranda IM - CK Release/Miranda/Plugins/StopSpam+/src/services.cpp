@@ -67,7 +67,9 @@ INT_PTR RemoveTempContacts(WPARAM wParam,LPARAM lParam)
 		}
 		hGroup++;
 	}
-		while( group_name );
+	while( group_name );
+	if (!lParam)
+		MessageBox(NULL, TranslateT("Complete"), TranslateT(pluginName), MB_ICONINFORMATION);
 
 	return 0;
 }
@@ -75,6 +77,6 @@ INT_PTR RemoveTempContacts(WPARAM wParam,LPARAM lParam)
 int OnSystemModulesLoaded(WPARAM wParam, LPARAM lParam)
 {
 	if (plSets->RemTmpAll.Get())
-		RemoveTempContacts(0,0);
+		RemoveTempContacts(0,1);
 	return 0;
 }

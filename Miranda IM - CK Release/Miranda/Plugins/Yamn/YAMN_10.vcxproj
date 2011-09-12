@@ -198,12 +198,11 @@
     <Link>
       <AdditionalOptions>/filealign:512 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>comctl32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <BaseAddress>0x60010000</BaseAddress>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
       <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
       <OptimizeReferences>true</OptimizeReferences>
@@ -280,6 +279,8 @@
     <None Include="ChangeLog.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ExternalAPI\m_toptoolbar.h" />
+    <ClInclude Include="..\..\ExternalAPI\m_updater.h" />
     <ClInclude Include="resources\resource.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="main.h" />
@@ -288,9 +289,7 @@
     <ClInclude Include="proto\pop3\pop3opt.h" />
     <ClInclude Include="yamn.h" />
     <ClInclude Include="include\m_kbdnotify.h" />
-    <ClInclude Include="include\m_toptoolbar.h" />
     <ClInclude Include="include\m_uninstaller.h" />
-    <ClInclude Include="include\m_updater.h" />
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>

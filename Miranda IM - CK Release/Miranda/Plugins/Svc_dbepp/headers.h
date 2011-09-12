@@ -6,6 +6,7 @@
 
 #define _WIN32_WINNT 0x0501
 #define MIRANDA_VER 0x0900
+#define MIRANDA_CUSTOM_LP
 
 #if defined( UNICODE ) && !defined( _UNICODE )
 	#define _UNICODE
@@ -43,6 +44,7 @@
 #include <m_history.h>
 #include <m_popup.h>
 #include <m_icolib.h>
+#include <m_hotkeys.h>
 
 #include "m_updater.h"
 #include "m_toptoolbar.h"
@@ -57,7 +59,7 @@
 /////// icons support
 
 extern BYTE UsingIconManager;
-void addIcons(char* szModuleFileName);
+void addIcons(TCHAR* szModuleFileName);
 HICON LoadSkinnedDBEIcon(int icon);
 int AddIconToList(HIMAGELIST hil, HICON hIcon);
 void AddProtoIconsToList(HIMAGELIST hil, int newshift);
@@ -161,6 +163,7 @@ struct WatchListArrayStruct{
 	int size;
 };
 extern WatchListArrayStruct WatchListArray;
+
 //=======================================================
 //  Variables
 //=======================================================

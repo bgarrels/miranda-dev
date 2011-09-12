@@ -420,10 +420,84 @@ VOID SwitchLayout(BOOL lastword)
 
 		if(hwnd2 != NULL)
 		{
-			TCHAR szClassName[16];
+			TCHAR szClassName[MAX_PATH];
 
 			GetClassName(hwnd2, szClassName, SIZEOF(szClassName));
+			if((lstrcmp(szClassName, _T("THppRichEdit.UnicodeClass")) == 0 || lstrcmp(szClassName, _T("THistoryGrid.UnicodeClass")) == 0 || lstrcmp(szClassName, _T("TExtHistoryGrid.UnicodeClass")) == 0 || lstrcmp(szClassName, _T("Internet Explorer_Server")) == 0) && ServiceExists(MS_POPUP_SHOWMESSAGE))	// make popup here
+			{
+				TCHAR buf[2048];
+				
+				if (lstrcmp(szClassName, _T("Internet Explorer_Server")) == 0)
+				{
+					TCHAR *selected = 0;
+					IEVIEWEVENT event;
+					HWND hwnd3 = GetParent(GetParent(hwnd2));
+					ZeroMemory((void *)&event, sizeof(event));
+					event.cbSize = sizeof(IEVIEWEVENT);
+					event.hContact = 0;
+					event.dwFlags = 0;
+					event.iType = IEE_GET_SELECTION;
+					event.hwnd = hwnd3;
+					selected = (TCHAR *)CallService(MS_IEVIEW_EVENT, 0, (LPARAM) & event);
+					lstrcpy(buf, selected);
+				}
+				else
+					SendMessage(hwnd2, WM_GETTEXT, SIZEOF(buf), (LPARAM)buf);		// gimme, gimme, gimme...
+				
+				int slen = lstrlen(buf);
+				if (slen != 0)
+				{	
+					HKL hkl;
+					ActivateKeyboardLayout((HKL)HKL_NEXT, KLF_ACTIVATE); // go to next layout before....
+					hkl = GetKeyboardLayout(dwThreadID);
+					ActivateKeyboardLayout((HKL)HKL_PREV, KLF_ACTIVATE); // return to prev layout
 
+					if (ServiceExists(MS_SMILEYADD_BATCHPARSE))
+					{
+						ZeroMemory(&smgp, sizeof(smgp));
+						smgp.cbSize = sizeof(smgp);
+						smgp.str = buf;
+						smgp.flag = SAFL_TCHAR;
+						smileyPrs = (SMADD_BATCHPARSERES *)CallService(MS_SMILEYADD_BATCHPARSE, 0, (LPARAM)&smgp);
+					}
+
+					for(int i = 0; i < slen; i++)
+					{
+						SHORT vks;
+						BYTE keys[256] = {0};
+
+						vks = VkKeyScanEx(buf[i], hkl);
+
+						keys[VK_SHIFT]   = (HIBYTE(vks) & 1) ? 0xFF : 0x00; // shift
+						keys[VK_CONTROL] = (HIBYTE(vks) & 2) ? 0xFF : 0x00; // ctrl
+						keys[VK_MENU]    = (HIBYTE(vks) & 4) ? 0xFF : 0x00;	// alt
+						
+						if (!isItSmiley(i))
+						{
+							TCHAR tchr;
+							if(ToUnicodeEx(LOBYTE(vks), 0, keys, &tchr, 1, 0, GetKeyboardLayout(dwThreadID)) == 1)
+								buf[i] = tchr;
+						}
+					}
+
+					if (smileyPrs != NULL)
+						CallService(MS_SMILEYADD_BATCHFREE, 0, (LPARAM)smileyPrs);
+					
+					POPUPDATAT_V2 pd;
+					ZeroMemory(&pd, sizeof(pd));
+					pd.cbSize = sizeof(POPUPDATAT_V2);
+					pd.lchContact = NULL; //(HANDLE)wParam;
+					pd.lchIcon = (HICON)CallService(MS_SKIN2_GETICON, 0, (LPARAM) "SwitchLayout and Send");
+					lstrcpyn(pd.lptzText, buf, SIZEOF(pd.lptzText));
+					lstrcpyn(pd.lptzContactName, TranslateT("TranslitSwitcher"), SIZEOF(pd.lptzContactName));
+					pd.colorBack = pd.colorText = 0;
+					pd.iSeconds = 0;
+					CallService(MS_POPUP_ADDPOPUPT, (WPARAM) &pd, 0);
+
+					//PUShowMessageT(buf, SM_NOTIFY);
+				}
+			}
+			else
 			if(lstrcmp(szClassName, _T("RichEdit20W")) == 0)
 			{
 				DWORD dwStart, dwEnd;
@@ -448,13 +522,14 @@ VOID SwitchLayout(BOOL lastword)
 				
 				if (slen != 0)
 				{
-					ZeroMemory(&smgp, sizeof(smgp));
-					smgp.cbSize = sizeof(smgp);
-					smgp.str = sel;
-					smgp.flag = SAFL_UNICODE;
-
-					if (ServiceExists(MS_SMILEYADD_BATCHPARSE)) 
+					if (ServiceExists(MS_SMILEYADD_BATCHPARSE))
+					{
+						ZeroMemory(&smgp, sizeof(smgp));
+						smgp.cbSize = sizeof(smgp);
+						smgp.str = sel;
+						smgp.flag = SAFL_TCHAR;
 						smileyPrs = (SMADD_BATCHPARSERES *)CallService(MS_SMILEYADD_BATCHPARSE, 0, (LPARAM)&smgp);
+					}
 
 					end = slen;
 					if (lastword && !somethingIsSelected)
@@ -712,7 +787,7 @@ int OnButtonPressed(WPARAM wParam, LPARAM lParam)
 			ZeroMemory(&smgp, sizeof(smgp));
 			smgp.cbSize = sizeof(smgp);
 			smgp.str = sel;
-			smgp.flag = SAFL_UNICODE;
+			smgp.flag = SAFL_TCHAR;
 
 			if (ServiceExists(MS_SMILEYADD_BATCHPARSE)) 
 				smileyPrs = (SMADD_BATCHPARSERES *)CallService(MS_SMILEYADD_BATCHPARSE, 0, (LPARAM)&smgp);

@@ -3,7 +3,6 @@
 
 #include "QuotesProviderGoogle.h"
 #include "QuotesProviderDukasCopy.h"
-#include "EconomicRateInfo.h"
 
 CQuotesProviderVisitorDbSettings::CQuotesProviderVisitorDbSettings()
 								 : m_pszDbRefreshRateType(NULL),
@@ -29,7 +28,9 @@ CQuotesProviderVisitorDbSettings::CQuotesProviderVisitorDbSettings()
 								   m_pszDbPopupTextColour(NULL),
 								   m_pszDbPopupDelayMode(NULL),
 								   m_pszDbPopupDelayTimeout(NULL),
-								   m_pszDbPopupHistoryFlag(NULL)
+								   m_pszDbPopupHistoryFlag(NULL),
+								   m_pszDbTendencyFormat(nullptr),
+								   m_pszDefTendencyFormat(_T("%r>%p"))
 {
 }
 
@@ -41,9 +42,7 @@ void CQuotesProviderVisitorDbSettings::Visit(const CQuotesProviderBase&/* rProvi
 {
 	m_pszDefLogFileFormat = _T("%s\\t%t\\t%r\\n");
 	m_pszDefHistoryFormat = _T("%s %r");
-	m_pszDefPopupFormat = _T("Current = %r\\nPrevious = %p");
-	m_pszDefStatusMsgFormat = _T("%S: %t");
-	m_pszDefLogMode = static_cast<WORD>(lmDisabled);
+	m_pszDefPopupFormat = _T("\\nCurrent = %r\\nPrevious = %p");
 }
 
 void CQuotesProviderVisitorDbSettings::Visit(const CQuotesProviderDukasCopy&/* rProvider*/)
@@ -51,7 +50,7 @@ void CQuotesProviderVisitorDbSettings::Visit(const CQuotesProviderDukasCopy&/* r
 	m_pszDbRefreshRateType = DB_STR_REFRESH_RATE_TYPE;
 	m_pszDbRefreshRateValue = DB_STR_REFRESH_RATE_VALUE;
 	m_pszDbDisplayNameFormat = DB_STR_DC_DISPLAY_NAME_FORMAT;
-	m_pszDefDisplayFormat = _T("%d %r");
+	m_pszDefDisplayFormat = _T("%s %r");
 	m_pszXMLIniFileName = _T("Dukascopy.xml");
 	m_pszDbStatusMsgFormat = "DC_StatusMessageFormat";
 
@@ -70,6 +69,7 @@ void CQuotesProviderVisitorDbSettings::Visit(const CQuotesProviderDukasCopy&/* r
 	m_pszDbPopupDelayMode = "DC_PopupDelayMode";
 	m_pszDbPopupDelayTimeout = "DC_PopupDelayTimeout";
 	m_pszDbPopupHistoryFlag = "DC_PopupHistoryFlag";
+	m_pszDbTendencyFormat = "DC_TendencyFormat";
 }
 
 void CQuotesProviderVisitorDbSettings::Visit(const CQuotesProviderGoogle&/* rProvider*/)
@@ -89,8 +89,6 @@ void CQuotesProviderVisitorDbSettings::Visit(const CQuotesProviderGoogle&/* rPro
 	m_pszDbLogCondition = "Google_AddToLogOnlyIfValueIsChanged";
 	m_pszDbPopupFormat ="Google_PopupFormat";
 	m_pszDbPopupCondition = "Google_ShowPopupOnlyIfValueChanged";
-	m_pszDefPopupFormat = _T("?translate(Current = %r\\nPrevious = %p)");
-	m_pszDefLogMode = 5;
 
 	m_pszDbPopupColourMode = "Google_PopupColourMode";
 	m_pszDbPopupBkColour = "Google_PopupColourBk";
@@ -98,6 +96,8 @@ void CQuotesProviderVisitorDbSettings::Visit(const CQuotesProviderGoogle&/* rPro
 	m_pszDbPopupDelayMode = "Google_PopupDelayMode";
 	m_pszDbPopupDelayTimeout = "Google_PopupDelayTimeout";
 	m_pszDbPopupHistoryFlag = "Google_PopupHistoryFlag";
+
+	m_pszDbTendencyFormat = "Google_TendencyFormat";
 }
 
 void CQuotesProviderVisitorDbSettings::Visit(const CQuotesProviderGoogleFinance&/* rProvider*/)
@@ -105,7 +105,7 @@ void CQuotesProviderVisitorDbSettings::Visit(const CQuotesProviderGoogleFinance&
 	m_pszDbRefreshRateType = "GoogleFinance_RefreshRateType";
 	m_pszDbRefreshRateValue = "GoogleFinance_RefreshRateValue";
 	m_pszDbDisplayNameFormat = "GoogleFinance_DspNameFrmt";
-	m_pszDefDisplayFormat = _T("%d %r");
+	m_pszDefDisplayFormat = _T("%s %r");
 	m_pszXMLIniFileName = _T("GoogleFinance.xml");
 	m_pszDbStatusMsgFormat = "GoogleFinance_StatusMessageFormat";
 
@@ -124,5 +124,7 @@ void CQuotesProviderVisitorDbSettings::Visit(const CQuotesProviderGoogleFinance&
 	m_pszDbPopupDelayMode = "GoogleFinance_PopupDelayMode";
 	m_pszDbPopupDelayTimeout = "GoogleFinance_PopupDelayTimeout";
 	m_pszDbPopupHistoryFlag = "GoogleFinance_PopupHistoryFlag";
+
+	m_pszDbTendencyFormat = "GoogleFinance_TendencyFormat";
 }
 

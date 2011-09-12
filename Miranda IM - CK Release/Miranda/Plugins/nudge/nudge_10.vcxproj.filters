@@ -55,9 +55,6 @@
     <None Include="miranda.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="nudge.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="ChangeLog.txt" />
     <None Include="resources\Nudge.ico">
       <Filter>Resource Files</Filter>

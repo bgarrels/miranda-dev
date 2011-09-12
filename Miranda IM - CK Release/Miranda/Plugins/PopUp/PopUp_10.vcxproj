@@ -150,6 +150,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -238,6 +239,7 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -251,8 +253,7 @@
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
       <BaseAddress>0x55550000</BaseAddress>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
       <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
@@ -330,6 +331,16 @@
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\changelog_popup.txt" />
+    <None Include="docs\faq_popup.txt" />
+    <None Include="docs\license_popup.txt" />
+    <None Include="docs\popupplus_translate.txt" />
+    <None Include="docs\readme_popup.txt" />
+    <None Include="docs\rebase_popup.txt" />
+    <None Include="docs\road_map.txt" />
+    <None Include="docs\skin_popup.txt" />
+    <None Include="docs\translation_popup.txt" />
+    <None Include="docs\whatsnew.txt" />
     <None Include="res\add.ico" />
     <None Include="res\auto.ico" />
     <None Include="res\avatar.bmp" />
@@ -364,7 +375,6 @@
     <None Include="res\warning.ico" />
     <None Include="docs\Changelog.txt" />
     <None Include="docs\todo.txt" />
-    <None Include="res\whatsnew.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

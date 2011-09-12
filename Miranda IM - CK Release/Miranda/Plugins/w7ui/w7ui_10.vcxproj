@@ -145,6 +145,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>msimg32.lib;dwmapi.lib;comctl32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;advapi32.lib;ole32.lib;oleaut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -175,6 +176,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>msimg32.lib;dwmapi.lib;comctl32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;advapi32.lib;ole32.lib;oleaut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -198,13 +200,13 @@
     <ClCompile Include="win7api.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ExternalAPI\m_w7ui.h" />
     <ClInclude Include="clistproxywindow.h" />
     <ClInclude Include="dwmwindow.h" />
     <ClInclude Include="headers.h" />
     <ClInclude Include="jumplist.h" />
     <ClInclude Include="jumplistarray.h" />
     <ClInclude Include="jumplistbuilder.h" />
-    <ClInclude Include="m_w7ui.h" />
     <ClInclude Include="srmmproxywindow.h" />
     <ClInclude Include="subclassmgr.h" />
     <ClInclude Include="win7api.h" />

@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /*
 ===============================================================================
-                           PopUp plugin
+						   PopUp plugin
 
 This plugin notifies you when a contact changes his/hers status with a PopUp.
 You can customize its look (style of popup, font, text...) and behaviour (the
@@ -123,7 +123,7 @@ Last change by : $Author: Merlin_de $
 
 
 	// API for 3rd party plugins (\include_API folder)
- 	// this folder contain always the latest API
+	// this folder contain always the latest API
 	#include <m_folders.h>
 	#include <m_hpp.h>
 	#include <m_ieview.h>

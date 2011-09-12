@@ -52,13 +52,15 @@ static int iDllPlugins=0;
 PLUGINLINK *pluginLink;
 YAMN_VARIABLES YAMNVar;
 
+int hLangpack;
+
 static const MUUID interfaces[] = {MUUID_YAMN_FORCECHECK, MIID_LAST};
 
 PLUGININFOEX pluginInfo={
 	sizeof(PLUGININFOEX),
 	YAMN_SHORTNAME,
 	YAMN_VERSION,
-	"Mail notifier and browser for Miranda IM. Included POP3 protocol. Mod for CK Pack.",
+	"Mail notifier and browser for Miranda IM. Included POP3 protocol. Mod for Mataes Pack.",
 	"y_b tweety (majvan)",
 	"francois.mean@skynet.be",
 	"© (2002-2004 majvan) 2005-2007 tweety y_b Miranda community",
@@ -414,6 +416,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	int i,k;
 
 	pluginLink=link;
+	mir_getLP(&pluginInfo);
 
 	YAMN_STATUS = ID_STATUS_OFFLINE;
 

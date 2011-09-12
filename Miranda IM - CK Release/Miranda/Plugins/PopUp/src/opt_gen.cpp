@@ -654,7 +654,7 @@ void ErrorMSG(int minValue, int maxValue) {
 void Check_ReorderPopUps(HWND hwnd) {
 	if (!PopUpOptions.ReorderPopUps && PopUpOptions.ReorderPopUpsWarning)
 	{
-		int res = MessageBox(NULL,
+		int res = MessageBox(hwnd,
 			TranslateTS(
 				_T("'Reorder Popups' option is currently diabled.\r\n")
 				_T("This may cause misaligned popups when used with\r\n")
@@ -678,10 +678,10 @@ void Check_ReorderPopUps(HWND hwnd) {
 			default:
 				return;
 		}
-		DBWriteContactSettingByte(NULL, MODULNAME, "ReorderPopUps", PopUpOptions.ReorderPopUps);
-		DBWriteContactSettingByte(NULL, MODULNAME, "ReorderPopUpsWarning", PopUpOptions.ReorderPopUpsWarning);
-		if(hwnd) CheckDlgButton(hwnd, IDC_REORDERPOPUPS, PopUpOptions.ReorderPopUps);
 	}
+	DBWriteContactSettingByte(NULL, MODULNAME, "ReorderPopUps", PopUpOptions.ReorderPopUps);
+	DBWriteContactSettingByte(NULL, MODULNAME, "ReorderPopUpsWarning", PopUpOptions.ReorderPopUpsWarning);
+	if(hwnd) CheckDlgButton(hwnd, IDC_REORDERPOPUPS, PopUpOptions.ReorderPopUps);
 }
 
 void ThemeDialogBackground(HWND hwnd) {

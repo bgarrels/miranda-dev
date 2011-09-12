@@ -169,6 +169,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -272,6 +273,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -286,8 +288,7 @@
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
       <BaseAddress>0x25a20000</BaseAddress>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
       <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
@@ -313,6 +314,7 @@
     <ClCompile Include="src\textusers.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ExternalAPI\m_text.h" />
     <ClInclude Include="src\fancy_rtf.h" />
     <ClInclude Include="src\FormattedTextDraw.h" />
     <ClInclude Include="src\headers.h" />
@@ -321,7 +323,6 @@
     <ClInclude Include="src\services.h" />
     <ClInclude Include="src\textcontrol.h" />
     <ClInclude Include="src\textusers.h" />
-    <ClInclude Include="api\m_text.h" />
     <ClInclude Include="src\version.h" />
   </ItemGroup>
   <ItemGroup>

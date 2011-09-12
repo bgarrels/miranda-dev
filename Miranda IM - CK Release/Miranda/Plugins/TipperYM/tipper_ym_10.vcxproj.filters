@@ -56,9 +56,6 @@
     <ClInclude Include="common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="docs\m_tipper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="message_pump.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -90,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_tipper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

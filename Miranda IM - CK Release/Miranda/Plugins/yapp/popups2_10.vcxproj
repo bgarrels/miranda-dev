@@ -159,6 +159,7 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>./../../include/msapi/</AdditionalIncludeDirectories>
@@ -215,6 +216,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\licence_YAPP.txt" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

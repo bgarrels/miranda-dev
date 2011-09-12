@@ -75,6 +75,9 @@
     <ClInclude Include="..\Utils\Pescuma\mir_options.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="players\mRadio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\listening_to.ico">
@@ -145,6 +148,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Utils\Pescuma\mir_icons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="players\mRadio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

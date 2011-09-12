@@ -26,8 +26,8 @@ public:
 	LPCSTR m_pszDbStatusMsgFormat;
 	LPCTSTR m_pszDefStatusMsgFormat;
 	LPCTSTR m_pszDefPopupFormat;
-	int m_pszDefLogMode;
-
+	LPCSTR m_pszDbTendencyFormat;
+	LPCTSTR m_pszDefTendencyFormat;
 
 	//global settings
 	LPCSTR m_pszDbLogMode;

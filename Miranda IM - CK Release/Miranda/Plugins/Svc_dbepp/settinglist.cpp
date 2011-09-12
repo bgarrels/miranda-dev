@@ -731,6 +731,27 @@ void EditLabel(HWND hwnd2List, int item, int subitem)
 
 static int test;
 void SettingsListRightClick(HWND hwnd, WPARAM wParam,LPARAM lParam);
+static int lastColumn = -1;
+
+struct SettingsSortParams{
+	HWND hList;
+	int column;
+};
+
+INT_PTR CALLBACK SettingsCompare(LPARAM lParam1, LPARAM lParam2, LPARAM myParam)
+{
+	SettingsSortParams params = *(SettingsSortParams *) myParam;
+	const int maxSize = 1024;
+	TCHAR text1[maxSize];
+	TCHAR text2[maxSize];
+	ListView_GetItemText(params.hList, (int) lParam1, params.column, text1, maxSize);
+	ListView_GetItemText(params.hList, (int) lParam2, params.column, text2, maxSize);
+	
+	int res = _tcsicmp(text1, text2);
+	res = (params.column == lastColumn) ? -res : res;
+	return res;
+}
+
 void SettingsListWM_NOTIFY(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
 {
 	switch(((NMHDR*)lParam)->code)
@@ -773,8 +794,9 @@ void SettingsListWM_NOTIFY(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
 				info->hwnd2Edit = NULL;
 				info->selectedItem = 0;
 			}
+			break;
 		}
-		break;
+
 		case NM_DBLCLK:
 		{
 			SettingListInfo* info = (SettingListInfo*)GetWindowLongPtr(GetDlgItem(hwnd,IDC_SETTINGS),GWLP_USERDATA);
@@ -794,12 +816,24 @@ void SettingsListWM_NOTIFY(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
 				}
 				else EditLabel(GetDlgItem(hwnd,IDC_SETTINGS),hti.iItem,hti.iSubItem);
 			}
+			break;
 		}
-		break;
 
 		case NM_RCLICK:
 			SettingsListRightClick(hwnd,wParam,lParam);
-		break;
+			break;
+
+		case LVN_COLUMNCLICK:
+			{
+				LPNMLISTVIEW lv = (LPNMLISTVIEW) lParam;
+				SettingsSortParams params = {0};
+				params.hList = GetDlgItem(hwnd, IDC_SETTINGS);
+				params.column = lv->iSubItem;
+				ListView_SortItemsEx(params.hList, SettingsCompare, (LPARAM) &params);
+				lastColumn = (params.column == lastColumn) ? -1 : params.column;
+				break;
+			}
+
 	} // switch(((NMHDR*)lParam)->code)
 }
 

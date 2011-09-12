@@ -44,18 +44,20 @@ bool servicemode;
 bool clsdates;
 bool dtsubfldr;
 
-static const PLUGININFOEX pluginInfoEx = 
+int hLangpack;
+
+PLUGININFOEX pluginInfoEx = 
 {
 	sizeof(PLUGININFOEX),
 #if defined(_WIN64) 
-	"Crash Dumper (x64) CK Release",
+	"Crash Dumper (x64) Mataes Release",
 #elif defined(_UNICODE)
-	"Crash Dumper (Unicode) CK Release",
+	"Crash Dumper (Unicode) Mataes Release",
 #else
-	"Crash Dumper CK Release",
+	"Crash Dumper Mataes Release",
 #endif
 	__VERSION_DWORD,
-	"Crash Dumper for Miranda IM. Mod for CK's Pack.",
+	"Crash Dumper for Miranda IM. Mod for Mataes Pack.",
 	"borkra",
 	"borkra@miranda-im.org",
 	"Copyright© 2008 - 2010 Boris Krasnovskiy All Rights Reserved",
@@ -428,6 +430,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	mir_getMMI(&mmi);
 	mir_getMD5I(&md5i);
 	mir_getUTFI(&utfi);
+	mir_getLP(&pluginInfoEx);
 
 	hHooks[0] = HookEvent(ME_SYSTEM_MODULESLOADED, ModulesLoaded);
 	hHooks[1] = HookEvent(ME_OPT_INITIALISE, OptionsInit);
