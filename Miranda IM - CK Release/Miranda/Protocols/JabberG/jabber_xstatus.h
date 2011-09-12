@@ -21,7 +21,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Revision       : $Revision: 13456 $
-Last change on : $Date: 2011-03-18 00:02:28 +0300 (Пт, 18 мар 2011) $
+Last change on : $Date: 2011-03-17 22:02:28 +0100 (Do, 17. Mrz 2011) $
 Last change by : $Author: george.hazan $
 
 */
