@@ -85,8 +85,8 @@ BEGIN
                     BS_LEFTTEXT | WS_TABSTOP,76,93,167,18
     CONTROL         "Show Grant icon",IDC_GRANTICON,"Button",BS_AUTOCHECKBOX | 
                     BS_LEFTTEXT | WS_TABSTOP,76,109,167,18
-    GROUPBOX        "Plugin settings",IDC_STATIC,46,46,222,118
-    RTEXT           "Use",IDC_STATIC,56,129,33,12
+    GROUPBOX        "Plugin settings",IDC_STATIC,19,46,276,118
+    RTEXT           "Use",IDC_STATIC,40,129,49,12
     LTEXT           "slot to draw the icon",IDC_STATIC,179,129,86,17
     CONTROL         "Enable Menu Item (*)",IDC_ENABLEMENUITEM,"Button",
                     BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,76,65,167,13
