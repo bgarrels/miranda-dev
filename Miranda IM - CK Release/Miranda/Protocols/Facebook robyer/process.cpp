@@ -242,9 +242,6 @@ void FacebookProto::ProcessMessages( void* data )
 
 			HANDLE hContact = AddToContactList(&fbu);
 			
-			if (m_iStatus != ID_STATUS_INVISIBLE)
-				DBWriteContactSettingWord(hContact,m_szModuleName,"Status",ID_STATUS_ONLINE);
-
 			PROTORECVEVENT recv = {};
 			CCSDATA ccs = {};
 

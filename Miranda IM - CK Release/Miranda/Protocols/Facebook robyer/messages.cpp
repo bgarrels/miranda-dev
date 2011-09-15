@@ -80,20 +80,7 @@ void FacebookProto::SendMsgWorker(void *p)
 	{
 		ProtoBroadcastAck(m_szModuleName, data->hContact, ACKTYPE_MESSAGE, ACKRESULT_FAILED, data->msgid, (LPARAM)Translate("You cannot send messages when you are offline."));
 	}
-/*	else if ( DBGetContactSettingWord( data->hContact, m_szModuleName, "Status", ID_STATUS_OFFLINE ) == ID_STATUS_OFFLINE )
-	{
-		ProtoBroadcastAck(m_szModuleName, data->hContact, ACKTYPE_MESSAGE, ACKRESULT_FAILED, data->msgid, (LPARAM)Translate("Facebook protocol don't support offline messages."));
-
-		if( !DBGetContactSettingString(data->hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
-		{ // RM TODO: remove when New Messages      
-			std::string url = "http://www.facebook.com/n/?messages/";
-			url += dbv.pszVal;
-			TCHAR* szUrl = mir_a2t_cp(url.c_str(), CP_UTF8);    
-			NotifyEvent(m_tszUserName,TranslateT("Click here if you want to send message through Facebook website."),NULL,FACEBOOK_EVENT_CLIENT,szUrl);
-			DBFreeVariant(&dbv);
-		}
-	}
-*/	else if( !DBGetContactSettingString(data->hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
+	else if( !DBGetContactSettingString(data->hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
 	{
 		int retries = 5;
 		std::string error_text = "";
@@ -106,8 +93,8 @@ void FacebookProto::SendMsgWorker(void *p)
 			ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_MESSAGE,ACKRESULT_SUCCESS, data->msgid,0);
 			MessagingWorker( new send_messaging(dbv.pszVal, FACEBOOK_SEND_MESSAGE ) );
 		} else {
-			// RM TODO: somehow fix error_text codepage
-			ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_MESSAGE,ACKRESULT_FAILED, data->msgid,(LPARAM)error_text.c_str()/*Translate("Error with sending message.")*/);
+			char *err = mir_utf8decodeA(error_text.c_str());
+			ProtoBroadcastAck(m_szModuleName,data->hContact,ACKTYPE_MESSAGE,ACKRESULT_FAILED, data->msgid,(LPARAM)err);
 		}
 		DBFreeVariant(&dbv);
 	}

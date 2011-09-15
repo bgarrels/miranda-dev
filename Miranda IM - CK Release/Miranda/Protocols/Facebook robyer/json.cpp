@@ -344,25 +344,12 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				else
 					CallService(MS_PROTO_CONTACTISTYPING, (WPARAM)hContact, (LPARAM)PROTOTYPE_CONTACTTYPING_OFF);
 			}
-			/*else if ( type.Value( ) == "inbox" )
-			{ // Not needed because we are getting directly messages...
-				if ( proto->m_iStatus == ID_STATUS_INVISIBLE )
-				{ // Notify messages only in invisible status
-					const Number& unseen = objMember["unseen"];
-					if (unseen.Value() > 0) {
-
-						char count[32];
-						lltoa( unseen.Value(), count, 10 );
-
-						std::string message = Translate("Got new messages: ");
-						message += count;
-
-						TCHAR* tmessage = mir_a2t(message.c_str());
-						proto->NotifyEvent( proto->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_MESSAGES) );
-						mir_free( tmessage );
-					}
-				}
-			}*/
+			else if ( type.Value( ) == "visibility" ) // change of chat status
+			{
+				const Boolean visibility = objMember["visibility"];
+				proto->Log("      Requested chat switch to %s", visibility ? "Online" : "Offline");
+				proto->SetStatus( visibility ? ID_STATUS_ONLINE : ID_STATUS_INVISIBLE );				
+			}
 			else
 				continue;
 		}
