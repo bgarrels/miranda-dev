@@ -344,8 +344,8 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 
 	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 	{
-		std::string action = "/ajax/chat/user_info_all.php?__a=1&viewer=%s&__user=%s";
-		utils::text::replace_all( &action, "%s", self_.user_id );
+		std::string action = "/ajax/chat/user_info_all.php?__a=1&viewer=%s";
+		utils::text::replace_first( &action, "%s", self_.user_id );
 		return action;
 	}
 
@@ -943,18 +943,16 @@ bool facebook_client::buddy_list( )
 	handle_entry( "buddy_list" );
 
 	// Prepare update data
-	std::string data = "user=" + this->self_.user_id + "&__user=" + this->self_.user_id + "&popped_out=false&force_render=true&fetch_mobile=false&post_form_id=" + this->post_form_id_ + "&fb_dtsg=" + this->dtsg_ + "&post_form_id_source=AsyncRequest&lsd";
+	std::string data = "user=" + this->self_.user_id + "&popped_out=false&force_render=true&buddy_list=1&notifications=0&post_form_id=" + this->post_form_id_ + "&fb_dtsg=" + this->dtsg_ + "&post_form_id_source=AsyncRequest&__a=1&nctr[n]=1";
 
 	{
 		ScopedLock s(buddies_lock_);
 
-		int num = 0;
-		for (List::Item< facebook_user >* i = buddies.begin(); i != NULL; i = i->next, num++ )
+		for (List::Item< facebook_user >* i = buddies.begin(); i != NULL; i = i->next )
 		{
-			data += "&available_user_info_ids[";
-			data += num;
-			data += "]=";
+			data += "&available_list[";
 			data += i->data->user_id;
+			data += "][i]=0";
 		}
 	}
 
@@ -1112,24 +1110,42 @@ bool facebook_client::send_message( std::string message_recipient, std::string m
 {
 	handle_entry( "send_message" );
 
-	std::string data = "msg_text=";
-	data += utils::url::encode( message_text );
-	data += "&msg_id=";
-	data += utils::time::unix_timestamp( );
-	data += "&to=";
-	data += message_recipient;
-	data += "&client_time=";
-	data += utils::time::mili_timestamp( );
-	data += "&pvs_time=";
-	data += utils::time::mili_timestamp( );
-	data += "&fb_dtsg=";
-	data += ( this->dtsg_.length( ) ) ? this->dtsg_ : "0";
-	data += "&to_offline=false&to_idle=false&lsd=&post_form_id_source=AsyncRequest&num_tabs=1";
-	data += "&post_form_id=";
-	data += ( post_form_id_.length( ) ) ? post_form_id_ : "0&";
+	http::response resp;
 
-	http::response resp = flap( FACEBOOK_REQUEST_MESSAGE_SEND, &data );
+	if (parent->isInvisible()) {
+		// Use inbox send message when invisible
+		std::string data = "action=send&body=";
+		data += utils::url::encode( message_text );
+		data += "&recipients[0]=";
+		data += message_recipient;
+		data += "&lsd=&fb_dtsg=";
+		data += ( dtsg_.length( ) ) ? dtsg_ : "0";
+		data += "&post_form_id=";
+		data += ( post_form_id_.length( ) ) ? post_form_id_ : "0";
 
+		resp = flap( FACEBOOK_REQUEST_ASYNC, &data );	
+	} else {
+		// Use standard send message
+		std::string data = "msg_text=";
+		data += utils::url::encode( message_text );
+		data += "&msg_id=";
+		data += utils::time::unix_timestamp( );
+		data += "&to=";
+		data += message_recipient;
+		data += "&client_time=";
+		data += utils::time::mili_timestamp( );
+		data += "&pvs_time=";
+		data += utils::time::mili_timestamp( );
+		data += "&fb_dtsg=";
+		data += ( dtsg_.length( ) ) ? dtsg_ : "0";
+		data += "&to_offline=false&to_idle=false&lsd=&post_form_id_source=AsyncRequest&num_tabs=1";
+		data += "&post_form_id=";
+		data += ( post_form_id_.length( ) ) ? post_form_id_ : "0";
+
+		resp = flap( FACEBOOK_REQUEST_MESSAGE_SEND, &data );
+	}
+
+	
 	validate_response(&resp);
 	*error_text = resp.error_text;
 

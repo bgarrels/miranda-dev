@@ -61,7 +61,7 @@ void FacebookProto::ChangeStatus(void*)
 	ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, (HANDLE)old_status, m_iStatus);
 
 	if ( new_status == ID_STATUS_OFFLINE )
-	{ // Logout		
+	{ // Logout	
 		LOG("##### Beginning SignOff process");
 
 		KillThreads( );
@@ -77,7 +77,7 @@ void FacebookProto::ChangeStatus(void*)
 
 		SetAllContactStatuses( ID_STATUS_OFFLINE );
 
-		ToggleStatusMenuItems(isOnline());
+		ToggleStatusMenuItems(false);
 
 		LOG("##### SignOff complete");
 
@@ -117,12 +117,12 @@ void FacebookProto::ChangeStatus(void*)
 			return;
 		}
 
-		ToggleStatusMenuItems(isOnline());
+		ToggleStatusMenuItems(true);
 		LOG("***** SignOn complete");
 	}
 	else if ( new_status == ID_STATUS_INVISIBLE )
 	{
-		facy.buddies.clear( ); // RM TODO: fix not freeing buddies? or are they free'd?
+		facy.buddies.clear( );
 		this->SetAllContactStatuses( ID_STATUS_OFFLINE );
 	}
 

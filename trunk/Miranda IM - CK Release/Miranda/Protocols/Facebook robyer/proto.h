@@ -57,6 +57,11 @@ public:
 		return ( m_iStatus == ID_STATUS_OFFLINE );
 	}
 
+	inline bool isInvisible( )
+	{
+		return ( m_iStatus == ID_STATUS_INVISIBLE );
+	}
+
 	//PROTO_INTERFACE
 
 	virtual	HANDLE   __cdecl AddToList( int flags, PROTOSEARCHRESULT* psr );
