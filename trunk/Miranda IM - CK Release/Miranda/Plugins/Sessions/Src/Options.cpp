@@ -182,19 +182,19 @@ INT_PTR CALLBACK OptionsProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
 			
 			hIcon=(bChecked=IsMarkedUserDefSession(opses_count))?hMarked:hNotMarked;
 
-			SetDlgItemInt(hdlg, IDC_TRACK,ses_limit=DBGetContactSettingByte(0, __INTERNAL_NAME, "TrackCount", 10), FALSE);
+			SetDlgItemInt(hdlg, IDC_TRACK,ses_limit=DBGetContactSettingByte(0, __INTERNAL_NAME, "TrackCount", 1), FALSE);
 			SendDlgItemMessage(hdlg, IDC_SPIN1, UDM_SETRANGE, 0, MAKELONG(10, 1));
 			SendDlgItemMessage(hdlg, IDC_SPIN1, UDM_SETPOS, 0, GetDlgItemInt(hdlg, IDC_TRACK, NULL, FALSE));
 
 			SendDlgItemMessage(hdlg, IDC_OPCLIST, LB_RESETCONTENT, 0, 0);
-			SetDlgItemInt(hdlg, IDC_STARTDELAY, DBGetContactSettingWord(NULL, __INTERNAL_NAME, "StartupModeDelay", 1500), FALSE);
-			startupmode = DBGetContactSettingByte(NULL, __INTERNAL_NAME, "StartupMode", 3);
+			SetDlgItemInt(hdlg, IDC_STARTDELAY, DBGetContactSettingWord(NULL, __INTERNAL_NAME, "StartupModeDelay", 0), FALSE);
+			startupmode = DBGetContactSettingByte(NULL, __INTERNAL_NAME, "StartupMode", 2);
 			exitmode = DBGetContactSettingByte(NULL, __INTERNAL_NAME, "ShutdownMode", 2);
 			
-			g_bExclHidden = DBGetContactSettingByte(NULL, __INTERNAL_NAME, "ExclHidden", 0);	
+			g_bExclHidden = DBGetContactSettingByte(NULL, __INTERNAL_NAME, "ExclHidden", 1);	
 			g_bWarnOnHidden = DBGetContactSettingByte(NULL, __INTERNAL_NAME, "WarnOnHidden", 0);
 			g_bOtherWarnings = DBGetContactSettingByte(NULL, __INTERNAL_NAME, "OtherWarnings", 1);
-			g_bCrashRecovery = DBGetContactSettingByte(NULL, __INTERNAL_NAME, "CrashRecovery", 0);
+			g_bCrashRecovery = DBGetContactSettingByte(NULL, __INTERNAL_NAME, "CrashRecovery", 1);
 			
 			CheckDlgButton(hdlg,IDC_EXCLHIDDEN,g_bExclHidden?BST_CHECKED:BST_UNCHECKED);
 			CheckDlgButton(hdlg,IDC_LASTHIDDENWARN,g_bWarnOnHidden?BST_CHECKED:BST_UNCHECKED);
