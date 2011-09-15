@@ -141,7 +141,7 @@ int AddInfoToComboBoxes(HWND hWnd)
 	return i;
 }
 
-SIZE GetControlTextSize(HWND hCtrl)
+SIZE GetControlTextSize(HWND hCtrl)	
 {
 	HDC hDC = GetDC(hCtrl);
 	HFONT font = (HFONT) SendMessage(hCtrl, WM_GETFONT, 0, 0);
