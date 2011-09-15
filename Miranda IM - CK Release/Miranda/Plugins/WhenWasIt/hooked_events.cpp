@@ -156,6 +156,24 @@ int OnModulesLoaded(WPARAM wParam, LPARAM lParam)
 	cl.hIcon = hiAddBirthdayContact;
 	cl.pszName = "Add/change user &birthday";
 	hmAddChangeBirthday = (HANDLE) CallService(MS_CLIST_ADDCONTACTMENUITEM, 0, (LPARAM) &cl);
+
+	if(ServiceExists(MS_HOTKEY_REGISTER))
+	{
+		HOTKEYDESC hotkey = {0};
+		hotkey.cbSize = sizeof(hotkey);
+		hotkey.dwFlags = HKD_TCHAR;
+		hotkey.ptszSection = LPGENT("Birthdays");
+
+		hotkey.pszName = "wwi_birthday_list";
+		hotkey.ptszDescription = LPGENT("Birthday list");
+		hotkey.pszService = MS_WWI_LIST_SHOW;
+		CallService(MS_HOTKEY_REGISTER,0,(LPARAM)&hotkey);
+		
+		hotkey.pszName = "wwi_check_birthdays";
+		hotkey.ptszDescription = LPGENT("Check for birthdays");
+		hotkey.pszService = MS_WWI_CHECK_BIRTHDAYS;
+		CallService(MS_HOTKEY_REGISTER,0,(LPARAM)&hotkey);
+	}
 	
 	return 0;
 }
