@@ -290,7 +290,7 @@ INT_PTR CALLBACK LoadSessionDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lpar
 	{
 		case WM_INITDIALOG:
 		{	 
-			int iDelay=DBGetContactSettingWord(NULL, __INTERNAL_NAME, "StartupModeDelay", 1500);
+			int iDelay=DBGetContactSettingWord(NULL, __INTERNAL_NAME, "StartupModeDelay", 0);
 			if(g_hghostw==TRUE)
 				SetTimer(hdlg, TIMERID_LOAD, iDelay, NULL);
 			else
@@ -884,10 +884,10 @@ static int PluginInit(WPARAM wparam,LPARAM lparam)
 	g_ses_count=DBGetContactSettingByte(0, __INTERNAL_NAME, "UserSessionsCount", 0);
 	if (!g_ses_count)  g_ses_count=DBGetContactSettingByte(0, "Sessions (Unicode)", "UserSessionsCount", 0);
 	ses_limit=DBGetContactSettingByte(0, __INTERNAL_NAME, "TrackCount", 10);
-	g_bExclHidden=DBGetContactSettingByte(NULL, __INTERNAL_NAME, "ExclHidden", 0);	
+	g_bExclHidden=DBGetContactSettingByte(NULL, __INTERNAL_NAME, "ExclHidden", 1);	
 	g_bWarnOnHidden=DBGetContactSettingByte(NULL, __INTERNAL_NAME, "WarnOnHidden", 0);
 	g_bOtherWarnings=DBGetContactSettingByte(NULL, __INTERNAL_NAME, "OtherWarnings", 1);
-	g_bCrashRecovery=DBGetContactSettingByte(NULL, __INTERNAL_NAME, "CrashRecovery", 0);
+	g_bCrashRecovery=DBGetContactSettingByte(NULL, __INTERNAL_NAME, "CrashRecovery", 1);
 
 
 	if(g_bCrashRecovery)
@@ -911,7 +911,7 @@ static int PluginInit(WPARAM wparam,LPARAM lparam)
 
 	if (!DBGetContactSettingByte(NULL, __INTERNAL_NAME, "lastempty", 1)||g_bIncompletedSave) isLastTRUE=TRUE;
 
-	startup=DBGetContactSettingByte(NULL, __INTERNAL_NAME, "StartupMode", 3);
+	startup=DBGetContactSettingByte(NULL, __INTERNAL_NAME, "StartupMode", 2);
 
 	if (startup==1||(startup==3&&isLastTRUE==TRUE))
 	{ 
