@@ -20,6 +20,7 @@ CFG=tcounter - Win32 Debug
 !MESSAGE "tcounter - Win32 Release" (based on "Win32 (x86) Dynamic-Link Library")
 !MESSAGE "tcounter - Win32 Debug" (based on "Win32 (x86) Dynamic-Link Library")
 !MESSAGE "tcounter - Win32 Release Unicode" (based on "Win32 (x86) Dynamic-Link Library")
+!MESSAGE "tcounter - Win32 Debug Unicode" (based on "Win32 (x86) Dynamic-Link Library")
 !MESSAGE 
 
 # Begin Project
@@ -40,11 +41,12 @@ RSC=rc.exe
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
 # PROP Output_Dir "Release"
-# PROP Intermediate_Dir "Release"
-# PROP Ignore_Export_Lib 0
+# PROP Intermediate_Dir "Release\obj"
+# PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "TCOUNTER_EXPORTS" /YX /FD /c
-# ADD CPP /nologo /MT /W3 /GX /O2 /I "..\..\Include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "TCOUNTER_EXPORTS" /FR /YX /FD /c
+# ADD CPP /nologo /MD /W3 /Zi /O2 /I "../../Include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "TCOUNTER_EXPORTS" /FD /c
+# SUBTRACT CPP /Fr /YX
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x419 /d "NDEBUG"
@@ -54,7 +56,8 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /machine:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib msimg32.lib comctl32.lib /nologo /dll /machine:I386
+# ADD LINK32 msimg32.lib comctl32.lib kernel32.lib user32.lib gdi32.lib oleaut32.lib Shlwapi.lib /nologo /dll /debug /machine:I386 /pdbtype:sept
+# SUBTRACT LINK32 /verbose /pdb:none /force
 
 !ELSEIF  "$(CFG)" == "tcounter - Win32 Debug"
 
@@ -108,7 +111,38 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib msimg32.lib comctl32.lib /nologo /dll /machine:I386
-# ADD LINK32 msimg32.lib comctl32.lib kernel32.lib user32.lib gdi32.lib oleaut32.lib /nologo /dll /pdb:"./ReleaseUnicode/TrafficCounter.pdb" /debug /machine:I386 /out:"./ReleaseUnicode/TrafficCounter.dll"
+# ADD LINK32 msimg32.lib comctl32.lib kernel32.lib user32.lib gdi32.lib oleaut32.lib Shlwapi.lib /nologo /dll /pdb:"./ReleaseUnicode/TrafficCounter.pdb" /debug /machine:I386 /out:"./ReleaseUnicode/TrafficCounter.dll" /pdbtype:sept
+# SUBTRACT LINK32 /pdb:none /map /nodefaultlib
+
+!ELSEIF  "$(CFG)" == "tcounter - Win32 Debug Unicode"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "tcounter___Win32_Debug_Unicode"
+# PROP BASE Intermediate_Dir "tcounter___Win32_Debug_Unicode"
+# PROP BASE Ignore_Export_Lib 1
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "DebugUnicode"
+# PROP Intermediate_Dir "DebugUnicode\obj"
+# PROP Ignore_Export_Lib 1
+# PROP Target_Dir ""
+# ADD BASE CPP /nologo /MD /W3 /O2 /I "../../Include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "TCOUNTER_EXPORTS" /D "_UNICODE" /D "UNICODE" /FD /c
+# SUBTRACT BASE CPP /Fr /YX /Yc /Yu
+# ADD CPP /nologo /MD /W3 /ZI /Od /I "../../Include" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "TCOUNTER_EXPORTS" /D "_UNICODE" /D "UNICODE" /FD /c
+# SUBTRACT CPP /Fr /YX /Yc /Yu
+# ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
+# ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
+# ADD BASE RSC /l 0x409 /d "NDEBUG"
+# ADD RSC /l 0x409 /d "NDEBUG"
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32=link.exe
+# ADD BASE LINK32 msimg32.lib comctl32.lib kernel32.lib user32.lib gdi32.lib oleaut32.lib /nologo /dll /pdb:"./ReleaseUnicode/TrafficCounter.pdb" /machine:I386 /out:"./ReleaseUnicode/TrafficCounter.dll" /pdbtype:sept
+# SUBTRACT BASE LINK32 /pdb:none /map /debug /nodefaultlib
+# ADD LINK32 msimg32.lib comctl32.lib kernel32.lib user32.lib gdi32.lib oleaut32.lib Shlwapi.lib /nologo /dll /pdb:"./DebugUnicode/TrafficCounter.pdb" /debug /machine:I386 /out:"./DebugUnicode/TrafficCounter.dll" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none /map /nodefaultlib
 
 !ENDIF 
@@ -118,6 +152,7 @@ LINK32=link.exe
 # Name "tcounter - Win32 Release"
 # Name "tcounter - Win32 Debug"
 # Name "tcounter - Win32 Release Unicode"
+# Name "tcounter - Win32 Debug Unicode"
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
@@ -185,6 +220,10 @@ SOURCE=.\vars.h
 # Begin Group "Resource Files"
 
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
+# Begin Source File
+
+SOURCE=.\res\network.ico
+# End Source File
 # Begin Source File
 
 SOURCE=.\resource.rc

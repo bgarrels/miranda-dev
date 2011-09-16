@@ -206,6 +206,7 @@ DWORD facebook_client::choose_security_level( int request_type )
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
 //	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 //	case FACEBOOK_REQUEST_FEEDS:
+//	case FACEBOOK_REQUEST_NOTIFICATIONS:
 //	case FACEBOOK_REQUEST_RECONNECT:
 //	case FACEBOOK_REQUEST_PROFILE_GET:
 //	case FACEBOOK_REQUEST_STATUS_SET:
@@ -214,6 +215,7 @@ DWORD facebook_client::choose_security_level( int request_type )
 //	case FACEBOOK_REQUEST_SETTINGS:
 //	case FACEBOOK_REQUEST_TABS:
 //	case FACEBOOK_REQUEST_ASYNC:
+//	case FACEBOOK_REQUEST_ASYNC2:
 //	case FACEBOOK_REQUEST_TYPING_SEND:
 	default:
 		return ( DWORD )0;
@@ -240,9 +242,11 @@ int facebook_client::choose_method( int request_type )
 //	case FACEBOOK_REQUEST_HOME:
 //	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 //	case FACEBOOK_REQUEST_FEEDS:
+//	case FACEBOOK_REQUEST_NOTIFICATIONS:
 //	case FACEBOOK_REQUEST_RECONNECT:
 //	case FACEBOOK_REQUEST_PROFILE_GET:
 //	case FACEBOOK_REQUEST_LOAD_FRIENDS:
+//	case FACEBOOK_REQUEST_ASYNC2:
 	default:
 		return REQUEST_GET;
 	}
@@ -260,6 +264,7 @@ std::string facebook_client::choose_proto( int request_type )
 //	case FACEBOOK_REQUEST_LOGOUT:
 //	case FACEBOOK_REQUEST_HOME:
 //	case FACEBOOK_REQUEST_FEEDS:
+//	case FACEBOOK_REQUEST_NOTIFICATIONS:
 //	case FACEBOOK_REQUEST_RECONNECT:
 //	case FACEBOOK_REQUEST_PROFILE_GET:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
@@ -270,6 +275,7 @@ std::string facebook_client::choose_proto( int request_type )
 //	case FACEBOOK_REQUEST_SETTINGS:
 //	case FACEBOOK_REQUEST_TABS:
 //	case FACEBOOK_REQUEST_ASYNC:
+//	case FACEBOOK_REQUEST_ASYNC2:
 //	case FACEBOOK_REQUEST_TYPING_SEND:
 	default:
 		return HTTP_PROTO_REGULAR;
@@ -308,12 +314,14 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
 //	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 //	case FACEBOOK_REQUEST_FEEDS:
+//	case FACEBOOK_REQUEST_NOTIFICATIONS:
 //	case FACEBOOK_REQUEST_RECONNECT:
 //	case FACEBOOK_REQUEST_STATUS_SET:
 //	case FACEBOOK_REQUEST_MESSAGE_SEND:
 //	case FACEBOOK_REQUEST_SETTINGS:
 //	case FACEBOOK_REQUEST_TABS:
 //	case FACEBOOK_REQUEST_ASYNC:
+//	case FACEBOOK_REQUEST_ASYNC2:
 //	case FACEBOOK_REQUEST_TYPING_SEND:
 	default:
 		return FACEBOOK_SERVER_REGULAR;
@@ -359,6 +367,13 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 		return action;
 	}
 
+	case FACEBOOK_REQUEST_NOTIFICATIONS:
+	{
+		std::string action = "/ajax/notifications/get.php?__a=1&user=%s&time=0&version=2";
+		utils::text::replace_first( &action, "%s", self_.user_id );
+		return action;
+	}
+	
 	case FACEBOOK_REQUEST_RECONNECT:
 	{
 		std::string action = "/ajax/presence/reconnect.php?__a=1&reason=%s&iframe_loaded=false&post_form_id=%s";
@@ -408,6 +423,13 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 	case FACEBOOK_REQUEST_ASYNC:
 		return "/ajax/messaging/async.php?__a=1";
 
+	case FACEBOOK_REQUEST_ASYNC2:
+	{
+		std::string action = "/ajax/messaging/async.php?__a=1&%s";
+		utils::text::replace_first( &action, "%s", (*data) );
+		return action;
+	}
+
 	case FACEBOOK_REQUEST_TYPING_SEND:
 		return "/ajax/messaging/typ.php?__a=1";
 
@@ -440,12 +462,14 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_SETTINGS:
 	case FACEBOOK_REQUEST_TABS:
 	case FACEBOOK_REQUEST_ASYNC:
+	case FACEBOOK_REQUEST_ASYNC2:
 	case FACEBOOK_REQUEST_TYPING_SEND:
 		*headers_count = 5;
 		break;
 
 	case FACEBOOK_REQUEST_HOME:
 	case FACEBOOK_REQUEST_FEEDS:
+	case FACEBOOK_REQUEST_NOTIFICATIONS:
 	case FACEBOOK_REQUEST_RECONNECT:
 	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 	default:
@@ -473,6 +497,7 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_SETTINGS:
 	case FACEBOOK_REQUEST_TABS:
 	case FACEBOOK_REQUEST_ASYNC:
+	case FACEBOOK_REQUEST_ASYNC2:
 	case FACEBOOK_REQUEST_TYPING_SEND:
 		set_header( &headers[4], "Content-Type" );
 
@@ -819,26 +844,25 @@ bool facebook_client::home( )
 					mir_free( tmessage );
 				}
 
-				// RM TODO: parse messages directly to contacts
 				str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"messagesCountValue\">", "</span>" );
 				if ( str_count.length() && str_count != std::string( "0" ) )
 				{
-					std::string message = Translate("Got new messages: ") + str_count;
+					if (!DBGetContactSettingByte(NULL,parent->m_szModuleName,FACEBOOK_KEY_PARSE_MESSAGES, 0)) {
+						std::string message = Translate("Got new messages: ") + str_count;
 
-					TCHAR* tmessage = mir_a2t(message.c_str());
-					parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_MESSAGES) );
-					mir_free( tmessage );
+						TCHAR* tmessage = mir_a2t(message.c_str());
+						parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_MESSAGES) );
+						mir_free( tmessage );
+					} else { // Parse messages directly for contacts
+						ForkThread( &FacebookProto::ProcessUnreadMessages, this->parent, NULL );
+					}
 				}
-
-				// RM TODO: parse notifications directly to popups
+				
 				str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"notificationsCountValue\">", "</span>" );
 				if ( str_count.length() && str_count != std::string( "0" ) )
 				{
-					std::string message = Translate("Got new notifications: ") + str_count;
-
-					TCHAR* tmessage = mir_a2t(message.c_str());
-					parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_NOTIFICATIONS) );
-					mir_free( tmessage );
+					// Parse notifications directly to popups
+					ForkThread( &FacebookProto::ProcessNotifications, this->parent, NULL );
 				}
 			}
 

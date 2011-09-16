@@ -173,6 +173,58 @@ int facebook_json_parser::parse_friends( void* data, std::map< std::string, face
 }
 
 
+int facebook_json_parser::parse_notifications( void *data, std::vector< facebook_notification* > *notifications ) 
+{
+	using namespace json;
+
+	try
+	{
+		std::string notificationsData = static_cast< std::string* >( data )->substr( 9 );
+		std::istringstream sDocument( notificationsData );
+		Object objDocument;
+		Reader::Read(objDocument, sDocument);
+
+		const Object& objRoot = objDocument;
+		const Object& payload = objRoot["payload"]["markup_map"];
+
+		for ( Object::const_iterator payload_item( payload.Begin() ); payload_item != payload.End(); ++payload_item)
+		{
+			const Object::Member& member = *payload_item;
+
+			const String& content = member.element;
+
+			std::string text = utils::text::slashu_to_utf8(
+								utils::text::special_expressions_decode( content.Value() ) );
+
+			if (text.find("jewelItemNew") == std::string::npos)
+				continue; // we want only unread notifications
+
+			facebook_notification* notification = new facebook_notification( );
+			
+			notification->text = utils::text::remove_html( utils::text::source_get_value(&text, 1, "<abbr") );
+			notification->link = utils::text::source_get_value(&text, 2, "<a href=\"", "\"");
+
+			notifications->push_back( notification );
+		}
+
+	}
+	catch (Reader::ParseException& e)
+	{
+		proto->Log( "!!!!! Caught json::ParseException: %s", e.what() );
+		proto->Log( "      Line/offset: %d/%d", e.m_locTokenBegin.m_nLine + 1, e.m_locTokenBegin.m_nLineOffset + 1 );
+	}
+	catch (const Exception& e)
+	{
+		proto->Log( "!!!!! Caught json::Exception: %s", e.what() );
+	}
+	catch (const std::exception& e)
+	{
+		proto->Log( "!!!!! Caught std::exception: %s", e.what() );
+	}
+
+	return EXIT_SUCCESS;
+}
+
 int facebook_json_parser::parse_messages( void* data, std::vector< facebook_message* >* messages, std::vector< facebook_notification* >* notifications )
 {
 	using namespace json;

@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
-Last change on : $Date: 2011-03-17 20:12:56 +0100 (Do, 17. Mrz 2011) $
+Revision       : $Revision: 13869 $
+Last change on : $Date: 2011-09-16 00:42:09 +0200 (Fr, 16. Sep 2011) $
 Last change by : $Author: george.hazan $
 
 */
@@ -238,7 +238,7 @@ void CJabberIqManager::ExpireInfo( CJabberIqInfo* pInfo, void*)
 	(ppro->*(pInfo->m_pHandler))( NULL, pInfo );
 }
 
-CJabberIqInfo* CJabberIqManager::AddHandler(JABBER_IQ_HANDLER pHandler, int nIqType, const TCHAR *szReceiver, DWORD dwParamsToParse, int nIqId, void *pUserData, DWORD dwGroupId, DWORD dwTimeout, int iPriority)
+CJabberIqInfo* CJabberIqManager::AddHandler(JABBER_IQ_HANDLER pHandler, int nIqType, const TCHAR *szReceiver, DWORD dwParamsToParse, int nIqId, void *pUserData, DWORD dwTimeout, int iPriority)
 {
 	CJabberIqInfo* pInfo = new CJabberIqInfo();
 	if (!pInfo)
@@ -251,7 +251,6 @@ CJabberIqInfo* CJabberIqManager::AddHandler(JABBER_IQ_HANDLER pHandler, int nIqT
 	pInfo->m_nIqType = nIqType;
 	pInfo->m_dwParamsToParse = dwParamsToParse;
 	pInfo->m_pUserData = pUserData;
-	pInfo->m_dwGroupId = dwGroupId;
 	pInfo->m_dwRequestTime = GetTickCount();
 	pInfo->m_dwTimeout = dwTimeout;
 	pInfo->m_iPriority = iPriority;
@@ -280,7 +279,7 @@ BOOL CJabberIqManager::HandleIq(int nIqId, HXML pNode )
 		return FALSE;
 
 	Lock();
-	CJabberIqInfo* pInfo = DetachInfo(nIqId, 0);
+	CJabberIqInfo* pInfo = DetachInfo(nIqId);
 	Unlock();
 	if (pInfo)
 	{

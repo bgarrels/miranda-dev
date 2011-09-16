@@ -59,6 +59,8 @@ INT_PTR EmptyFolder(WPARAM wParam,LPARAM lParam)
 		false,
 		0,
 		_T("") };
+	if (lParam)
+		file_op.fFlags |= FOF_NOCONFIRMMKDIR;
 	SHFileOperation(&file_op);
 	return 0;
 }

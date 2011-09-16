@@ -210,6 +210,91 @@ void FacebookProto::ProcessFriendList( void* data )
 	delete resp;
 }
 
+void FacebookProto::ProcessUnreadMessages( void* )
+{
+	facy.handle_entry( "messages" );
+
+	std::string data = "sk=inbox&query=is%3Aunread";
+
+	// Get unread inbox threads
+	http::response resp = facy.flap( FACEBOOK_REQUEST_ASYNC2, &data );
+
+	// Process result data
+	facy.validate_response(&resp);
+
+	if (resp.code != HTTP_CODE_OK) {
+		facy.handle_error( "messages" );
+		return;
+	}
+
+	std::string threadlist = utils::text::slashu_to_utf8(resp.data);
+	
+	std::string::size_type pos = 0;
+
+	while ( ( pos = threadlist.find( "<li class=\\\"threadRow noDraft unread", pos ) ) != std::string::npos )
+	{
+		std::string::size_type pos2 = threadlist.find( "<\\/li", pos );		
+		std::string thread_content = threadlist.substr( pos, pos2 - pos );
+
+		pos = pos2;
+
+		data = "sk=inbox&query=is%3Aunread&thread_query=is%3Aunread&action=read&tid=";
+		data += utils::text::source_get_value( &thread_content, 2, "id=\\\"", "\\\"" );
+		
+		resp = facy.flap( FACEBOOK_REQUEST_ASYNC2, &data );
+
+		facy.validate_response(&resp);
+
+		if (resp.code != HTTP_CODE_OK) {
+			LOG(" !! !! Error when getting messages list");
+			continue;
+		}
+		
+		std::string messageslist = utils::text::slashu_to_utf8(resp.data);
+		
+		std::string user_id = utils::text::source_get_value( &messageslist, 2, "single_thread_id\":", "," );
+		if (user_id.empty()) {
+			LOG(" !! !! Thread id is empty - this is groupchat message."); // todo remove as this is not such 'error'
+			continue;
+		}
+
+		messageslist = utils::text::source_get_value( &messageslist, 3, "class=\\\"MessagingMessage", "MessagingMessageUnread", "class=\\\"MessagingComposer" );
+
+		facebook_user fbu = new facebook_user();
+		fbu.user_id = user_id;
+
+		HANDLE hContact = AddToContactList(&fbu);
+
+		pos2 = 0;		
+		while ( ( pos2 = messageslist.find( "class=\\\"content noh", pos2 ) ) != std::string::npos )
+		{	
+			std::string message_text;
+			message_text = messageslist.substr(pos2, messageslist.find( "<\\/div", pos2) + 6 - pos2);
+			message_text = utils::text::source_get_value( &message_text, 2, "\\\">", "<\\/div" );
+			message_text = utils::text::trim(
+							utils::text::special_expressions_decode(
+								utils::text::remove_html( message_text ) ) );
+
+			PROTORECVEVENT recv = {};
+			CCSDATA ccs = {};
+
+			recv.flags = PREF_UTF;
+			recv.szMessage = const_cast<char*>(message_text.c_str());
+			recv.timestamp = static_cast<DWORD>(::time(NULL));
+
+			ccs.hContact = hContact;
+			ccs.szProtoService = PSR_MESSAGE;
+			ccs.wParam = 0;
+			ccs.lParam = reinterpret_cast<LPARAM>(&recv);
+			CallService(MS_PROTO_CHAINRECV,0,reinterpret_cast<LPARAM>(&ccs));
+
+			pos2++;
+		}
+
+		
+	}
+
+}
 
 void FacebookProto::ProcessMessages( void* data )
 {
@@ -289,6 +374,64 @@ void FacebookProto::ProcessMessages( void* data )
 exit:
 	delete resp;
 }
+
+void FacebookProto::ProcessNotifications( void* )
+{
+	if ( isOffline() )
+		return;
+
+	if (!getByte( FACEBOOK_KEY_EVENT_NOTIFICATIONS_ENABLE, DEFAULT_EVENT_NOTIFICATIONS_ENABLE ))
+		return;
+
+	facy.handle_entry( "notifications" );
+
+	// Get notifications
+	http::response resp = facy.flap( FACEBOOK_REQUEST_NOTIFICATIONS );
+
+	// Process result data
+	facy.validate_response(&resp);
+  
+	if (resp.code != HTTP_CODE_OK) {
+		facy.handle_error( "notifications" );
+		return;
+	}
+
+
+	// Process notifications
+	LOG("***** Starting processing notifications");
+
+	CODE_BLOCK_TRY
+
+	std::vector< facebook_notification* > notifications;
+
+	facebook_json_parser* p = new facebook_json_parser( this );
+	p->parse_notifications( &(resp.data), &notifications );
+	delete p;
+
+	for(std::vector<facebook_notification*>::size_type i=0; i<notifications.size( ); i++)
+	{
+		LOG("      Got notification: %s", notifications[i]->text.c_str());
+		TCHAR* szTitle = mir_a2t_cp(this->m_szModuleName, CP_UTF8);
+		TCHAR* szText = mir_a2t_cp(notifications[i]->text.c_str(), CP_UTF8);
+		TCHAR* szUrl = mir_a2t_cp(notifications[i]->link.c_str(), CP_UTF8);
+		NotifyEvent( szTitle, szText, ContactIDToHContact(notifications[i]->user_id), FACEBOOK_EVENT_NOTIFICATION, szUrl );
+		mir_free( szTitle );
+		mir_free( szText );
+//		mir_free( szUrl ); // URL is free'd in popup procedure
+
+		delete notifications[i];
+	}
+	notifications.clear();
+
+	LOG("***** Notifications processed");
+
+	CODE_BLOCK_CATCH
+
+	LOG("***** Error processing notifications: %s", e.what());
+
+	CODE_BLOCK_END
+}
+
 
 void FacebookProto::ProcessFeeds( void* data )
 {

@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13554 $
-Last change on : $Date: 2011-04-08 12:09:19 +0200 (Fr, 08. Apr 2011) $
+Revision       : $Revision: 13869 $
+Last change on : $Date: 2011-09-16 00:42:09 +0200 (Fr, 16. Sep 2011) $
 Last change by : $Author: george.hazan $
 
 */
@@ -241,7 +241,7 @@ JabberCapsBits CJabberProto::GetResourceCapabilites( const TCHAR *jid, BOOL appe
 		if ( jcbMainCaps == JABBER_RESOURCE_CAPS_UNINIT ) {
 			// send disco#info query
 
-			CJabberIqInfo *pInfo = m_iqManager.AddHandler( &CJabberProto::OnIqResultCapsDiscoInfo, JABBER_IQ_TYPE_GET, fullJid, JABBER_IQ_PARSE_FROM | JABBER_IQ_PARSE_CHILD_TAG_NODE, -1, NULL, 0, JABBER_RESOURCE_CAPS_QUERY_TIMEOUT );
+			CJabberIqInfo *pInfo = m_iqManager.AddHandler( &CJabberProto::OnIqResultCapsDiscoInfo, JABBER_IQ_TYPE_GET, fullJid, JABBER_IQ_PARSE_FROM | JABBER_IQ_PARSE_CHILD_TAG_NODE, -1, NULL, JABBER_RESOURCE_CAPS_QUERY_TIMEOUT );
 			m_clientCapsManager.SetClientCaps( r->szCapsNode, r->szCapsVer, JABBER_RESOURCE_CAPS_IN_PROGRESS, pInfo->GetIqId() );
 			r->dwDiscoInfoRequestTime = pInfo->GetRequestTime();
 			
@@ -269,7 +269,7 @@ JabberCapsBits CJabberProto::GetResourceCapabilites( const TCHAR *jid, BOOL appe
 				{
 					// send disco#info query
 
-					CJabberIqInfo* pInfo = m_iqManager.AddHandler( &CJabberProto::OnIqResultCapsDiscoInfo, JABBER_IQ_TYPE_GET, fullJid, JABBER_IQ_PARSE_FROM | JABBER_IQ_PARSE_CHILD_TAG_NODE, -1, NULL, 0, JABBER_RESOURCE_CAPS_QUERY_TIMEOUT );
+					CJabberIqInfo* pInfo = m_iqManager.AddHandler( &CJabberProto::OnIqResultCapsDiscoInfo, JABBER_IQ_TYPE_GET, fullJid, JABBER_IQ_PARSE_FROM | JABBER_IQ_PARSE_CHILD_TAG_NODE, -1, NULL, JABBER_RESOURCE_CAPS_QUERY_TIMEOUT );
 					m_clientCapsManager.SetClientCaps( r->szCapsNode, token, JABBER_RESOURCE_CAPS_IN_PROGRESS, pInfo->GetIqId() );
 
 					TCHAR queryNode[512];
@@ -308,7 +308,7 @@ JabberCapsBits CJabberProto::GetResourceCapabilites( const TCHAR *jid, BOOL appe
 		if ( !r->dwVersionRequestTime ) {
 			// send version query
 
-			CJabberIqInfo *pInfo = m_iqManager.AddHandler( &CJabberProto::OnIqResultVersion, JABBER_IQ_TYPE_GET, fullJid, JABBER_IQ_PARSE_FROM | JABBER_IQ_PARSE_HCONTACT | JABBER_IQ_PARSE_CHILD_TAG_NODE, -1, NULL, 0, JABBER_RESOURCE_CAPS_QUERY_TIMEOUT );
+			CJabberIqInfo *pInfo = m_iqManager.AddHandler( &CJabberProto::OnIqResultVersion, JABBER_IQ_TYPE_GET, fullJid, JABBER_IQ_PARSE_FROM | JABBER_IQ_PARSE_HCONTACT | JABBER_IQ_PARSE_CHILD_TAG_NODE, -1, NULL, JABBER_RESOURCE_CAPS_QUERY_TIMEOUT );
 			r->dwVersionRequestTime = pInfo->GetRequestTime();
 			
 			XmlNodeIq iq( pInfo );
@@ -329,7 +329,7 @@ JabberCapsBits CJabberProto::GetResourceCapabilites( const TCHAR *jid, BOOL appe
 		if ( !r->dwDiscoInfoRequestTime ) {
 			// send disco#info query
 
-			CJabberIqInfo *pInfo = m_iqManager.AddHandler( &CJabberProto::OnIqResultCapsDiscoInfo, JABBER_IQ_TYPE_GET, fullJid, JABBER_IQ_PARSE_FROM | JABBER_IQ_PARSE_CHILD_TAG_NODE, -1, NULL, 0, JABBER_RESOURCE_CAPS_QUERY_TIMEOUT );
+			CJabberIqInfo *pInfo = m_iqManager.AddHandler( &CJabberProto::OnIqResultCapsDiscoInfo, JABBER_IQ_TYPE_GET, fullJid, JABBER_IQ_PARSE_FROM | JABBER_IQ_PARSE_CHILD_TAG_NODE, -1, NULL, JABBER_RESOURCE_CAPS_QUERY_TIMEOUT );
 			r->dwDiscoInfoRequestTime = pInfo->GetRequestTime();
 
 			XmlNodeIq iq( pInfo );
@@ -371,7 +371,7 @@ JabberCapsBits CJabberProto::GetResourceCapabilites( const TCHAR *jid, BOOL appe
 		else if ( jcbMainCaps == JABBER_RESOURCE_CAPS_UNINIT ) {
 			// send disco#info query
 
-			CJabberIqInfo *pInfo = m_iqManager.AddHandler( &CJabberProto::OnIqResultCapsDiscoInfo, JABBER_IQ_TYPE_GET, fullJid, JABBER_IQ_PARSE_FROM | JABBER_IQ_PARSE_CHILD_TAG_NODE, -1, NULL, 0, JABBER_RESOURCE_CAPS_QUERY_TIMEOUT );
+			CJabberIqInfo *pInfo = m_iqManager.AddHandler( &CJabberProto::OnIqResultCapsDiscoInfo, JABBER_IQ_TYPE_GET, fullJid, JABBER_IQ_PARSE_FROM | JABBER_IQ_PARSE_CHILD_TAG_NODE, -1, NULL, JABBER_RESOURCE_CAPS_QUERY_TIMEOUT );
 			m_clientCapsManager.SetClientCaps( r->software, r->version, JABBER_RESOURCE_CAPS_IN_PROGRESS, pInfo->GetIqId() );
 			r->dwDiscoInfoRequestTime = pInfo->GetRequestTime();
 

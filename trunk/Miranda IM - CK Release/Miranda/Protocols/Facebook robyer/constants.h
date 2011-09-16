@@ -29,13 +29,13 @@ Last change on : $Date$
 
 // Version management
 #include "build.h"
-#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 4, 1)
+#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 4, 2)
 #define __PRODUCT_DWORD             PLUGIN_MAKE_VERSION(0, 9, 14, 0)
-#define __VERSION_STRING            "0.0.4.1"
+#define __VERSION_STRING            "0.0.4.2"
 #define __PRODUCT_STRING            "0.9.14.0"
-#define __VERSION_VS_FILE           0,0,4,1
+#define __VERSION_VS_FILE           0,0,4,2
 #define __VERSION_VS_PROD           0,9,14,0
-#define __VERSION_VS_FILE_STRING    "0, 0, 4, 1"
+#define __VERSION_VS_FILE_STRING    "0, 0, 4, 2"
 #define __VERSION_VS_PROD_STRING    "0, 9, 14, 0"
 
 // Product management
@@ -98,6 +98,7 @@ Last change on : $Date$
 #define FACEBOOK_REQUEST_BUDDY_LIST             120 // getting regular updates (friends online, ...)
 #define FACEBOOK_REQUEST_LOAD_FRIENDS			121 // getting list of all friends
 #define FACEBOOK_REQUEST_FEEDS                  125 // getting feeds
+#define FACEBOOK_REQUEST_NOTIFICATIONS			126 // getting notifications
 #define FACEBOOK_REQUEST_RECONNECT              130 // getting __sequence_num__ and __channel_id__
 #define FACEBOOK_REQUEST_PROFILE_GET            200 // getting others' profiles
 #define FACEBOOK_REQUEST_STATUS_SET             251 // setting my "What's on my mind?"
@@ -106,7 +107,8 @@ Last change on : $Date$
 #define FACEBOOK_REQUEST_TYPING_SEND            304 // sending typing notification
 #define FACEBOOK_REQUEST_SETTINGS               305 // setting chat visibility
 #define FACEBOOK_REQUEST_TABS					306 // closing message window, setting chat visibility
-#define	FACEBOOK_REQUEST_ASYNC					307 // marking messages read
+#define	FACEBOOK_REQUEST_ASYNC					307 // marking messages read and getting other things
+#define FACEBOOK_REQUEST_ASYNC2					308 // GET version of async request
 
 #define FACEBOOK_RECV_MESSAGE	1
 #define FACEBOOK_SEND_MESSAGE	2

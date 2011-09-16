@@ -64,7 +64,7 @@ typedef struct tagMenuHandles
 	HANDLE MIAlignTop,MIAlignClient,MIAlignBottom;
 	HANDLE MIBorder;
 	HANDLE MIPosRoot;
-    HANDLE MIPosUp,MIPosDown;
+	HANDLE MIPosUp,MIPosDown;
 } FrameMenuHandles;
 
 typedef struct tagFrameTitleBar{
@@ -122,11 +122,11 @@ typedef struct _tagFrameWnd{
 	BOOLEAN UseBorder;
 	int order;
 	DockOpt dockOpt;
-    HWND OwnerWindow;
-    tPaintCallbackProc PaintCallbackProc;
-    sPaintRequest * PaintData;
-    BOOLEAN bQueued;
-    HRGN UpdateRgn;
+	HWND OwnerWindow;
+	tPaintCallbackProc PaintCallbackProc;
+	sPaintRequest * PaintData;
+	BOOLEAN bQueued;
+	HRGN UpdateRgn;
 
 } FRAMEWND;
 

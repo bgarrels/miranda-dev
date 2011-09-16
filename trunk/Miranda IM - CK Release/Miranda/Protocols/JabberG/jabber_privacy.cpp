@@ -20,8 +20,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
-Last change on : $Date: 2011-03-17 20:12:56 +0100 (Do, 17. Mrz 2011) $
+Revision       : $Revision: 13869 $
+Last change on : $Date: 2011-09-16 00:42:09 +0200 (Fr, 16. Sep 2011) $
 Last change by : $Author: george.hazan $
 
 */
@@ -62,7 +62,8 @@ void CJabberProto::OnIqResultPrivacyListModify( HXML, CJabberIqInfo* pInfo )
 	if ( pInfo->m_nIqType != JABBER_IQ_TYPE_RESULT )
 		pParam->m_bAllOk = FALSE;
 
-	if ( !m_iqManager.GetGroupPendingIqCount( pInfo->m_dwGroupId )) {
+	InterlockedDecrement( &pParam->m_dwCount );
+	if ( !pParam->m_dwCount ) {
 		TCHAR szText[ 512 ];
 		if ( !pParam->m_bAllOk )
 			mir_sntprintf( szText, SIZEOF( szText ), TranslateT("Error occurred while applying changes"));
@@ -2057,7 +2058,6 @@ void CJabberDlgPrivacyLists::btnApply_OnClick(CCtrlButton *)
 		if (IsWindowVisible(GetDlgItem(m_hwnd, IDC_CLIST)))
 			CListBuildList(GetDlgItem(m_hwnd, IDC_CLIST), clc_info.pList);
 
-		DWORD dwGroupId = 0;
 		CPrivacyListModifyUserParam *pUserData = NULL;
 		CPrivacyList* pList = m_proto->m_privacyListManager.GetFirstList();
 		while ( pList ) {
@@ -2071,13 +2071,12 @@ void CJabberDlgPrivacyLists::btnApply_OnClick(CCtrlButton *)
 				}
 				pList->SetModified( FALSE );
 
-				if ( !dwGroupId ) {
-					dwGroupId = m_proto->m_iqManager.GetNextFreeGroupId();
-					pUserData = new CPrivacyListModifyUserParam;
-					pUserData->m_bAllOk = TRUE;
-				}
+				if ( !pUserData )
+					pUserData = new CPrivacyListModifyUserParam();
 
-				XmlNodeIq iq( m_proto->m_iqManager.AddHandler( &CJabberProto::OnIqResultPrivacyListModify, JABBER_IQ_TYPE_SET, NULL, 0, -1, pUserData, dwGroupId ));
+				pUserData->m_dwCount++;
+
+				XmlNodeIq iq( m_proto->m_iqManager.AddHandler( &CJabberProto::OnIqResultPrivacyListModify, JABBER_IQ_TYPE_SET, NULL, 0, -1, pUserData ));
 				HXML query = iq << XQUERY( _T(JABBER_FEAT_PRIVACY_LISTS ));
 				HXML listTag = query << XCHILD( _T("list")) << XATTR( _T("name"), pList->GetListName() );
 
