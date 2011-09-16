@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13869 $
-Last change on : $Date: 2011-09-16 00:42:09 +0200 (Fr, 16. Sep 2011) $
+Revision       : $Revision: 13870 $
+Last change on : $Date: 2011-09-16 15:30:27 +0200 (Fr, 16. Sep 2011) $
 Last change by : $Author: george.hazan $
 
 */
@@ -374,7 +374,7 @@ public:
 		LeaveCriticalSection(&m_cs);
 	}
 	// fucking params, maybe just return CJabberIqRequestInfo pointer ?
-	CJabberIqInfo* AddHandler(JABBER_IQ_HANDLER pHandler, int nIqType = JABBER_IQ_TYPE_GET, const TCHAR *szReceiver = NULL, DWORD dwParamsToParse = 0, int nIqId = -1, void *pUserData = NULL, DWORD dwTimeout = JABBER_DEFAULT_IQ_REQUEST_TIMEOUT, int iPriority = JH_PRIORITY_DEFAULT);
+	CJabberIqInfo* AddHandler(JABBER_IQ_HANDLER pHandler, int nIqType = JABBER_IQ_TYPE_GET, const TCHAR *szReceiver = NULL, DWORD dwParamsToParse = 0, int nIqId = -1, void *pUserData = NULL, int iPriority = JH_PRIORITY_DEFAULT);
 	CJabberIqPermanentInfo* AddPermanentHandler(JABBER_PERMANENT_IQ_HANDLER pHandler, int nIqTypes, DWORD dwParamsToParse, const TCHAR* szXmlns, BOOL bAllowPartialNs, const TCHAR* szTag, void *pUserData = NULL, IQ_USER_DATA_FREE_FUNC pUserDataFree = NULL, int iPriority = JH_PRIORITY_DEFAULT)
 	{
 		CJabberIqPermanentInfo* pInfo = new CJabberIqPermanentInfo();
