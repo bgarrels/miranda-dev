@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13869 $
-Last change on : $Date: 2011-09-16 00:42:09 +0200 (Fr, 16. Sep 2011) $
+Revision       : $Revision: 13870 $
+Last change on : $Date: 2011-09-16 15:30:27 +0200 (Fr, 16. Sep 2011) $
 Last change by : $Author: george.hazan $
 
 */
@@ -961,7 +961,10 @@ HJHANDLER CJabberNetInterface::AddTemporaryIqHandler( JABBER_HANDLER_FUNC Func, 
 	sHandlerData *d = (sHandlerData*)malloc(sizeof(sHandlerData));
 	d->Func = Func;
 	d->pUserData = pUserData;
-	return (HJHANDLER)m_psProto->m_iqManager.AddHandler( &CJabberProto::ExternalTempIqHandler, iIqTypes, NULL, 0, iIqId, d, dwTimeout, iPriority );
+	CJabberIqInfo* pInfo = m_psProto->m_iqManager.AddHandler( &CJabberProto::ExternalTempIqHandler, iIqTypes, NULL, 0, iIqId, d, iPriority );
+	if ( pInfo && dwTimeout > 0 )
+		pInfo->SetTimeout( dwTimeout );
+	return (HJHANDLER)pInfo;
 }
 
 HJHANDLER CJabberNetInterface::AddSendHandler( JABBER_HANDLER_FUNC Func, void *pUserData, int iPriority )
