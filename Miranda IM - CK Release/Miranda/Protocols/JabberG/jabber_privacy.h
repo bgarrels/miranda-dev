@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
-Last change on : $Date: 2011-03-17 20:12:56 +0100 (Do, 17. Mrz 2011) $
+Revision       : $Revision: 13869 $
+Last change on : $Date: 2011-09-16 00:42:09 +0200 (Fr, 16. Sep 2011) $
 Last change by : $Author: george.hazan $
 
 */
@@ -44,10 +44,12 @@ enum PrivacyListRuleType
 
 struct CPrivacyListModifyUserParam
 {
-	BOOL m_bAllOk;
-	CPrivacyListModifyUserParam()
+	BOOL   m_bAllOk;
+	volatile LONG m_dwCount;
+	CPrivacyListModifyUserParam() :
+		m_bAllOk( TRUE ),
+		m_dwCount( 0 )
 	{
-		ZeroMemory(this, sizeof(CPrivacyListModifyUserParam));
 	}
 };
 

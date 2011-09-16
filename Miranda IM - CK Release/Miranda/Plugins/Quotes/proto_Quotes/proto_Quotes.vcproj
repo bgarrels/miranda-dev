@@ -18,7 +18,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../../Files/Debug/Icons"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)/Icons"
 			IntermediateDirectory="$(SolutionDir)$(ConfigurationName)/Obj/$(ProjectName)"
 			ConfigurationType="2"
 			CharacterSet="0"
@@ -62,6 +62,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				OutputFile="../../../../Files/Trunk/Debug/Icons/$(ProjectName).dll"
+				LinkIncremental="1"
 				ResourceOnlyDLL="true"
 				RandomizedBaseAddress="1"
 				ImportLibrary=""
@@ -91,7 +93,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../../Files/Release/Icons"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)/Icons"
 			IntermediateDirectory="$(SolutionDir)$(ConfigurationName)/Obj/$(ProjectName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -136,6 +138,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				OutputFile="../../../../Files/Trunk/Release/Icons/$(ProjectName).dll"
 				ProgramDatabaseFile=""
 				LinkTimeCodeGeneration="0"
 				ResourceOnlyDLL="true"

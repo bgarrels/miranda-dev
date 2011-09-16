@@ -69,12 +69,12 @@ static const PLUGININFOEX pluginInfoEx =
 {
 	sizeof(PLUGININFOEX),
 #ifdef _WIN64
-	"Weather Protocol x64 Mataes Release",
+	"Weather Protocol x64",
 #else
-	"Weather Protocol Mataes Release",
+	"Weather Protocol",
 #endif
 	__VERSION_DWORD,
-	"Retrieve weather information and display them in your contact list. Mod for Mataes Pack.",
+	"Retrieve weather information and display them in your contact list",
 	AUTH,
 	"borkra@miranda-im.org",
 	"(c) 2002-2005 NoName, 2005-2010 Boris Krasnovskiy",

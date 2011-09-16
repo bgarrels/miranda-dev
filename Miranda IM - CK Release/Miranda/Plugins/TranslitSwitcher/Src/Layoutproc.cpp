@@ -881,7 +881,7 @@ int OnButtonPressed(WPARAM wParam, LPARAM lParam)
 			}
 			else
 			{
-				int FinalLen = slen + SIZEOF(dbv.ptszVal) + 1;
+				int FinalLen = lstrlen(sel) + SIZEOF(dbv.ptszVal) + 1;
 				TCHAR* FinalString = (TCHAR*)mir_alloc((FinalLen+1)*sizeof(TCHAR));
 				mir_sntprintf(FinalString, FinalLen, _T("%s %s"), dbv.ptszVal, sel);
 				SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)FinalString);

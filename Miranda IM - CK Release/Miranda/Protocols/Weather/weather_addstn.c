@@ -1,6 +1,6 @@
 /*
 Weather Protocol plugin for Miranda IM
-Copyright (C) 2005-2009 Boris Krasnovskiy All Rights Reserved
+Copyright (C) 2005-2011 Boris Krasnovskiy All Rights Reserved
 Copyright (C) 2002-2005 Calvin Che
 
 This program is free software; you can redistribute it and/or
@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /* This file contain the source related to search and add a weather station
-   to the contact list.  Contain code for both name and ID search.
+to the contact list.  Contain code for both name and ID search.
 */
 
 #include "weather.h"
@@ -103,7 +103,7 @@ INT_PTR WeatherAddToList(WPARAM wParam,LPARAM lParam)
 
 	// ignore status change
 	DBWriteContactSettingDword(hContact, "Ignore", "Mask", 8);
-	
+
 	// if no default station is found, set the new contact as default station
 	if (opt.Default[0] == 0) 
 	{
@@ -146,7 +146,7 @@ static void __cdecl BasicSearchTimerProc(LPVOID hWnd)
 	if (CheckSearch())	result = IDSearch(sID, searchId);
 	// broadcast the search result
 	ProtoBroadcastAck(WEATHERPROTONAME,NULL,ACKTYPE_SEARCH,ACKRESULT_SUCCESS,(HANDLE)searchId,0);
-	
+
 	// exit the search
 	searchId=-1;
 }
@@ -176,7 +176,7 @@ static void __cdecl NameSearchTimerProc(LPVOID hWnd)
 	}
 	// broadcast the result
 	ProtoBroadcastAck(WEATHERPROTONAME, NULL, ACKTYPE_SEARCH, ACKRESULT_SUCCESS, (HANDLE)searchId, 0);
-	
+
 	// exit the search
 	searchId = -1;
 }
@@ -184,15 +184,15 @@ static void __cdecl NameSearchTimerProc(LPVOID hWnd)
 static INT_PTR CALLBACK WeatherSearchAdvancedDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg) 
-    {
+	{
 	case WM_INITDIALOG:
 		TranslateDialogDefault(hwndDlg);
-        SetFocus(GetDlgItem(hwndDlg, IDC_SEARCHCITY));
+		SetFocus(GetDlgItem(hwndDlg, IDC_SEARCHCITY));
 		return TRUE;
 
 	case WM_COMMAND:
 		if (HIWORD(wParam) == EN_SETFOCUS)
-		    PostMessage(GetParent(hwndDlg), WM_COMMAND, MAKEWPARAM(0, EN_SETFOCUS), (LPARAM)hwndDlg);
+			PostMessage(GetParent(hwndDlg), WM_COMMAND, MAKEWPARAM(0, EN_SETFOCUS), (LPARAM)hwndDlg);
 	}
 	return FALSE;
 }
@@ -200,7 +200,7 @@ static INT_PTR CALLBACK WeatherSearchAdvancedDlgProc(HWND hwndDlg, UINT msg, WPA
 INT_PTR WeatherCreateAdvancedSearchUI(WPARAM wParam, LPARAM lParam)
 {
 	HWND parent = (HWND)lParam;
-	
+
 	if (parent)
 		return (INT_PTR)CreateDialogParam(hInst, MAKEINTRESOURCE(IDD_SEARCHCITY), parent, WeatherSearchAdvancedDlgProc, 0);
 
@@ -213,9 +213,9 @@ INT_PTR WeatherAdvancedSearch(WPARAM wParam, LPARAM lParam)
 	if (searchId != -1) return 0;   //only one search at a time
 	searchId = 1;
 
-    GetDlgItemText((HWND)lParam, IDC_SEARCHCITY, name1, 256);
+	GetDlgItemText((HWND)lParam, IDC_SEARCHCITY, name1, 256);
 
-    // search for the weather station using a thread
+	// search for the weather station using a thread
 	mir_forkthread(NameSearchTimerProc, NULL);
 	return searchId;
 }
@@ -241,7 +241,7 @@ int IDSearchProc(char *sID, const int searchId, WIIDSEARCH *sData, char *svc, ch
 		if (InternetDownloadFile(loc, NULL, &szData) == 0) 
 		{
 			char* szInfo = szData;
-		
+
 			// not found
 			if (strstr(szInfo, sData->NotFoundStr) == NULL) 
 				GetDataValue(&sData->Name, str, &szInfo);
@@ -297,7 +297,7 @@ int IDSearch(char *sID, const int searchId)
 		psr.email=Translate("<Enter station ID here>");		// to be entered
 		ProtoBroadcastAck(WEATHERPROTONAME,NULL,ACKTYPE_SEARCH,ACKRESULT_DATA,(HANDLE)searchId,(LPARAM)&psr);
 	}
-	
+
 	return 0;
 }
 
@@ -352,7 +352,7 @@ int NameSearchProc(char *name, const int searchId, WINAMESEARCH *sData, char *sv
 				}
 				// if can't get the name, use the search string as name
 				if (Name[0] == 0)		strcpy(Name, name);
-				
+
 				// set the data and broadcast it
 				memset(&psr,0,sizeof(psr));
 				psr.cbSize=sizeof(psr);
@@ -423,7 +423,7 @@ int NameSearch(char *name, const int searchId)
 		Item = Item->next;
 	}
 	NetlibHttpDisconnect();
-	
+
 	return 0;
 }
 

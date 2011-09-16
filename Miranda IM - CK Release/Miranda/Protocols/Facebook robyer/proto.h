@@ -149,7 +149,9 @@ public:
 	void __cdecl ProcessBuddyList(void*);
 	void __cdecl ProcessFriendList(void*);
 	void __cdecl ProcessMessages(void*);
+	void __cdecl ProcessUnreadMessages(void*);
 	void __cdecl ProcessFeeds(void*);
+	void __cdecl ProcessNotifications(void*);
 	void         ProcessAvatar(HANDLE,const std::string*,bool force=false);
 
 	// Worker threads
