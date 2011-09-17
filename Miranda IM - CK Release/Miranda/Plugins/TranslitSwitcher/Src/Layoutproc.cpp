@@ -544,7 +544,7 @@ VOID SwitchLayout(BOOL lastword)
 						start = dwStart-1;
 						while (start > 0 && start < (int)dwStart)
 						{
-							if ((_istspace(sel[start]) && (end-start>2)) || isItSmiley(start))
+							if ((_istspace(sel[start]) && !_istspace(sel[start+1])) || isItSmiley(start))
 								break;
 							start--;
 						}
