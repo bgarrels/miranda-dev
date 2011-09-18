@@ -223,7 +223,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_Jajc",					_T("|*Jajc*|Just Another Jabber Client"),		_T("JAJC"),								_T("ClientIcons_Jabber"),	IDI_JAJC, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Tkabber",					_T("|*Tkabber*|http://tkabber*"),				_T("Tkabber"),							_T("ClientIcons_Jabber"),	IDI_TKABBER, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Exodus",					_T("*Exodus*"),									_T("Exodus"),							_T("ClientIcons_Jabber"),	IDI_EXODUS, INVALID_HANDLE_VALUE, JABBER_CASE },
-	{ "client_Pandion",					_T("*Pandion*"),								_T("Pandion"),							_T("ClientIcons_Jabber"),	IDI_PANDION, INVALID_HANDLE_VALUE, JABBER_CASE },
+	{ "client_Pandion",					_T("|*Pandion*|*Пандион*"),						_T("Pandion"),							_T("ClientIcons_Jabber"),	IDI_PANDION, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Gush",					_T("*Gush*"),									_T("Gush"),								_T("ClientIcons_Jabber"),	IDI_GUSH, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Gabber",					_T("*Gabber*"),									_T("Gabber"),							_T("ClientIcons_Jabber"),	IDI_GABBER, INVALID_HANDLE_VALUE, JABBER_CASE },
 	{ "client_Gajim",					_T("*Gajim*"),									_T("Gajim"),							_T("ClientIcons_Jabber"),	IDI_GAJIM, INVALID_HANDLE_VALUE, JABBER_CASE },
