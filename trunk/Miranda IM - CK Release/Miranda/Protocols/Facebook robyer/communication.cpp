@@ -801,112 +801,127 @@ bool facebook_client::home( )
 	switch ( resp.code )
 	{
 	case HTTP_CODE_OK:
-		if ( resp.data.find( "id=\"navAccountName\"" ) != std::string::npos )
-		{
+	{		
+		if ( resp.data.find("id=\"pageNav\"") != std::string::npos ) {
+			// Get real_name
+			this->self_.real_name = utils::text::special_expressions_decode( utils::text::source_get_value( &resp.data, 3, " class=\"headerTinymanName\"", "\">", "</a" ) );
+			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,FACEBOOK_KEY_NAME,this->self_.real_name.c_str());
+			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,"Nick",this->self_.real_name.c_str());
+			parent->Log("      Got self real name: %s", this->self_.real_name.c_str());
+
+			// Get avatar
+			this->self_.image_url = utils::text::trim(
+				utils::text::special_expressions_decode(
+					utils::text::source_get_value( &resp.data, 3, "class=\\\"fbxWelcomeBoxImg", "src=\\\"", "\\\"" ) ) );
+			parent->Log("      Got self avatar: %s", this->self_.image_url.c_str());
+		}
+		else if ( resp.data.find( "id=\"navAccountName\"" ) != std::string::npos )
+		{ // Backup for old fb version
 			// Get real_name
 			this->self_.real_name = utils::text::special_expressions_decode( utils::text::source_get_value( &resp.data, 2, " id=\"navAccountName\">", "</a" ) );
 			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,FACEBOOK_KEY_NAME,this->self_.real_name.c_str());
 			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,"Nick",this->self_.real_name.c_str());
 			parent->Log("      Got self real name: %s", this->self_.real_name.c_str());
 
-			// Get post_form_id
-			this->post_form_id_ = utils::text::source_get_value( &resp.data, 2, "post_form_id:\"", "\"" );
-			parent->Log("      Got self post form id: %s", this->post_form_id_.c_str());
-
-			// If something would go wrong:
-//			this->post_form_id_ = resp.data.substr( resp.data.find( "post_form_id:" ) + 14, 48 );
-//			this->post_form_id_ = this->post_form_id_.substr( 0, this->post_form_id_.find( "\"" ) );
-
-			// Get dtsg
-			this->dtsg_ = utils::text::source_get_value( &resp.data, 2, ",fb_dtsg:\"", "\"" );
-			parent->Log("      Got self dtsg: %s", this->dtsg_.c_str());
-
-			// Get logout hash
-			this->logout_hash_ = utils::text::source_get_value( &resp.data, 2, "<input type=\"hidden\" autocomplete=\"off\" name=\"h\" value=\"", "\"" );
-			parent->Log("      Got self logout hash: %s", this->logout_hash_.c_str());
-
 			// Get avatar
 			this->self_.image_url = utils::text::trim(
 				utils::text::special_expressions_decode(
 					utils::text::source_get_value( &resp.data, 3, "class=\\\"fbxWelcomeBoxBlock", "class=\\\"img\\\" src=\\\"", "\\\"" ) ) );
 			parent->Log("      Got self avatar: %s", this->self_.image_url.c_str());
-
-			// Get friend requests count and messages count and notify it
-			if ( DBGetContactSettingByte( NULL, parent->m_szModuleName, FACEBOOK_KEY_EVENT_OTHER_ENABLE, DEFAULT_EVENT_OTHER_ENABLE ) )
-			{
-				std::string str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"requestsCountValue\">", "</span>" );
-				if ( str_count.length() && str_count != std::string( "0" ) )
-				{
-					std::string message = Translate("Got new friend requests: ") + str_count;
-
-					TCHAR* tmessage = mir_a2t(message.c_str());
-					parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_REQUESTS) );
-					mir_free( tmessage );
-				}
-
-				str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"messagesCountValue\">", "</span>" );
-				if ( str_count.length() && str_count != std::string( "0" ) )
-				{
-					if (!DBGetContactSettingByte(NULL,parent->m_szModuleName,FACEBOOK_KEY_PARSE_MESSAGES, 0)) {
-						std::string message = Translate("Got new messages: ") + str_count;
-
-						TCHAR* tmessage = mir_a2t(message.c_str());
-						parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_MESSAGES) );
-						mir_free( tmessage );
-					} else { // Parse messages directly for contacts
-						ForkThread( &FacebookProto::ProcessUnreadMessages, this->parent, NULL );
-					}
-				}
-				
-				str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"notificationsCountValue\">", "</span>" );
-				if ( str_count.length() && str_count != std::string( "0" ) )
-				{
-					// Parse notifications directly to popups
-					ForkThread( &FacebookProto::ProcessNotifications, this->parent, NULL );
-				}
-			}
-
-      // RM TODO: if enabled groupchats support
-      // Get group chats
-/*      std::string chat_ids = utils::text::source_get_value( &resp.data, 2, "HomeNavController.initGroupCounts([","]" );
-			if ( chat_ids.length() )
-      {
-
-        // split by comma to ids, find names in source, inicialize groups in contactlist
-        // maybe check which groupchats user wants
-        // add to list? start worker for parse and add contacts to groupchat
-
-        // add "," to end for better parsing
-        chat_ids += ",";
-        std::string::size_type oldpos = 0, pos = 0;
-        
-        while ( ( pos = chat_ids.find(",", oldpos) ) != std::string::npos )
-	      {
-          std::string id = chat_ids.substr(oldpos, pos-oldpos);
-          std::string name = utils::text::trim(
-            utils::text::special_expressions_decode(
-              utils::text::remove_html( 
-                utils::text::edit_html(
-                  utils::text::source_get_value( &resp.data, 5, "HomeNavController.initGroupCounts", "home.php?sk=group_", id.c_str(), "input title=\\\"", "\\\" " ) ) ) ) );
-
-          parent->Log("      Got groupchat id: %s, name: %s", id.c_str(), name.c_str());
-		      oldpos = pos+1;
-
-          parent->AddChat(id.c_str(), name.c_str());
-	      }        
-      }*/
-
-			// Update self-contact
-			ForkThread(&FacebookProto::UpdateContactWorker, this->parent, (void*)&this->self_);
-
-			return handle_success( "home" );
-		}
-		else
-		{
+		} else {
 			client_notify(TranslateT("Something happened to Facebook. Maybe there was some major update so you should wait for an update."));
 			return handle_error( "home", FORCE_DISCONNECT );
 		}
 
+
+		// Get post_form_id
+		this->post_form_id_ = utils::text::source_get_value( &resp.data, 2, "post_form_id:\"", "\"" );
+		parent->Log("      Got self post form id: %s", this->post_form_id_.c_str());
+
+		// If something would go wrong:
+//			this->post_form_id_ = resp.data.substr( resp.data.find( "post_form_id:" ) + 14, 48 );
+//			this->post_form_id_ = this->post_form_id_.substr( 0, this->post_form_id_.find( "\"" ) );
+
+		// Get dtsg
+		this->dtsg_ = utils::text::source_get_value( &resp.data, 2, ",fb_dtsg:\"", "\"" );
+		parent->Log("      Got self dtsg: %s", this->dtsg_.c_str());
+
+		// Get logout hash
+		this->logout_hash_ = utils::text::source_get_value( &resp.data, 2, "<input type=\"hidden\" autocomplete=\"off\" name=\"h\" value=\"", "\"" );
+		parent->Log("      Got self logout hash: %s", this->logout_hash_.c_str());
+
+			
+		// Get friend requests count and messages count and notify it
+		if ( DBGetContactSettingByte( NULL, parent->m_szModuleName, FACEBOOK_KEY_EVENT_OTHER_ENABLE, DEFAULT_EVENT_OTHER_ENABLE ) )
+		{
+			std::string str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"requestsCountValue\">", "</span>" );
+			if ( str_count.length() && str_count != std::string( "0" ) )
+			{
+				std::string message = Translate("Got new friend requests: ") + str_count;
+
+				TCHAR* tmessage = mir_a2t(message.c_str());
+				parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_REQUESTS) );
+				mir_free( tmessage );
+			}
+
+			str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"messagesCountValue\">", "</span>" );
+			if ( str_count.length() && str_count != std::string( "0" ) )
+			{
+				if (!DBGetContactSettingByte(NULL,parent->m_szModuleName,FACEBOOK_KEY_PARSE_MESSAGES, 0)) {
+					std::string message = Translate("Got new messages: ") + str_count;
+
+					TCHAR* tmessage = mir_a2t(message.c_str());
+					parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_MESSAGES) );
+					mir_free( tmessage );
+				} else { // Parse messages directly for contacts
+					ForkThread( &FacebookProto::ProcessUnreadMessages, this->parent, NULL );
+				}
+			}
+			
+			str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"notificationsCountValue\">", "</span>" );
+			if ( str_count.length() && str_count != std::string( "0" ) )
+			{
+				// Parse notifications directly to popups
+				ForkThread( &FacebookProto::ProcessNotifications, this->parent, NULL );
+			}
+		}
+
+  // RM TODO: if enabled groupchats support
+  // Get group chats
+/*      std::string chat_ids = utils::text::source_get_value( &resp.data, 2, "HomeNavController.initGroupCounts([","]" );
+		if ( chat_ids.length() )
+  {
+
+	// split by comma to ids, find names in source, inicialize groups in contactlist
+	// maybe check which groupchats user wants
+	// add to list? start worker for parse and add contacts to groupchat
+
+	// add "," to end for better parsing
+	chat_ids += ",";
+	std::string::size_type oldpos = 0, pos = 0;
+    
+	while ( ( pos = chat_ids.find(",", oldpos) ) != std::string::npos )
+	  {
+	  std::string id = chat_ids.substr(oldpos, pos-oldpos);
+	  std::string name = utils::text::trim(
+		utils::text::special_expressions_decode(
+		  utils::text::remove_html( 
+			utils::text::edit_html(
+			  utils::text::source_get_value( &resp.data, 5, "HomeNavController.initGroupCounts", "home.php?sk=group_", id.c_str(), "input title=\\\"", "\\\" " ) ) ) ) );
+
+	  parent->Log("      Got groupchat id: %s, name: %s", id.c_str(), name.c_str());
+		  oldpos = pos+1;
+
+	  parent->AddChat(id.c_str(), name.c_str());
+	  }        
+  }*/
+
+		// Update self-contact
+		ForkThread(&FacebookProto::UpdateContactWorker, this->parent, (void*)&this->self_);
+
+		return handle_success( "home" );
+
+	}
 	case HTTP_CODE_FOUND:
 		// Work-around for replica_down, f**king hell what's that?
 		parent->Log("      REPLICA_DOWN is back in force!");// What a regression, muhahaha! Revert to revision 88 to take care about this...");
