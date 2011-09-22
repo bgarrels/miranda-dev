@@ -153,38 +153,21 @@ void FacebookProto::UpdateContactWorker(void *p)
 
 		if ( fbu->user_id != facy.self_.user_id ) // if not self-contact
 		{ 
-			if (!fbu->handle) // just been added
+			if (!fbu->handle) { // just been added
 				fbu->handle = AddToContactList(fbu);
 
-			if (!fbu->last_update) // just come online
-				update_required = true;
-
-			if (!update_required) { // check old status
-				update_required = (DBGetContactSettingWord(fbu->handle,m_szModuleName,"Status", 0) != ID_STATUS_ONLINE);
+				DBWriteContactSettingUTF8String(fbu->handle,m_szModuleName,FACEBOOK_KEY_NAME,fbu->real_name.c_str());
+				DBWriteContactSettingUTF8String(fbu->handle,m_szModuleName,"Nick",fbu->real_name.c_str());
 			}
 
-			if (update_required)
-			{
+			if (DBGetContactSettingWord(fbu->handle,m_szModuleName,"Status", 0) != ID_STATUS_ONLINE) {
 				DBWriteContactSettingWord(fbu->handle,m_szModuleName,"Status", ID_STATUS_ONLINE );
 			}
 		}
 
 		if ( fbu->user_id == facy.self_.user_id || ContactNeedsUpdate( fbu ) )
-		{
+		{			
 			DBVARIANT dbv;
-			
-			// Update Real name
-			/*update_required = true;
-			if ( !DBGetContactSettingUTF8String(fbu->handle,m_szModuleName,FACEBOOK_KEY_NAME,&dbv) )
-			{
-				update_required = strcmp( dbv.pszVal, fbu->real_name.c_str() ) != 0;
-				DBFreeVariant(&dbv);
-			}
-			if ( update_required )
-			{
-				DBWriteContactSettingUTF8String(fbu->handle,m_szModuleName,FACEBOOK_KEY_NAME,fbu->real_name.c_str());
-				DBWriteContactSettingUTF8String(fbu->handle,m_szModuleName,"Nick",fbu->real_name.c_str());
-			}*/
 
 			// Check avatar change
 			update_required = true;
