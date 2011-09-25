@@ -38,7 +38,7 @@ PLUGININFOEX pluginInfo = {
 	sizeof(PLUGININFOEX),
 	__PLUGIN_NAME,
 	__VERSION_DWORD,
-	"Provides Miranda database support: global settings, contacts, history, settings per contact. Enhanced modification with Encoding.",
+	"Provides Miranda database support: global settings, contacts, history, settings per contact. Enhanced modification with Encryption support.",
 	"Miranda-IM project, modification by FYR and chaos.persei, nullbie, Billy_Bons",
 	"chaos.persei@gmail.com; ashpynov@gmail.com; bio@msx.ru; ghazan@miranda-im.org",
 	"Copyright 2000-2011 Miranda IM project, FYR, chaos.persei, induction, nullbie",
