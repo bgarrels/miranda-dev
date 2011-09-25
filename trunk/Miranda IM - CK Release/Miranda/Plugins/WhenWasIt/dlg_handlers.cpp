@@ -633,38 +633,6 @@ void AddAnchorWindowToDeferList(HDWP &hdWnds, HWND window, RECT *rParent, WINDOW
 	hdWnds = DeferWindowPos(hdWnds, window, HWND_NOTOPMOST, rChild.left, rChild.top, rChild.right - rChild.left, rChild.bottom - rChild.top, SWP_NOZORDER);
 }
 
-void SavePosition(HWND hWnd, char *wndName)
-{
-	RECT rWnd;
-	GetWindowRect(hWnd, &rWnd);
-	char buffer[512];
-	sprintf(buffer, "%sPosX", wndName);
-	DBWriteContactSettingDword(0, ModuleName, buffer, rWnd.left);
-	sprintf(buffer, "%sPosY", wndName);
-	DBWriteContactSettingDword(0, ModuleName, buffer, rWnd.top);
-	sprintf(buffer, "%sWidth", wndName);
-	DBWriteContactSettingDword(0, ModuleName, buffer, rWnd.right - rWnd.left);
-	sprintf(buffer, "%sHeight", wndName);
-	DBWriteContactSettingDword(0, ModuleName, buffer, rWnd.bottom - rWnd.top);
-}
-
-void LoadPosition(HWND hWnd, char *wndName)
-{
-	int x, y;
-	int width = 0, height = 0;
-	char buffer[512];
-	sprintf(buffer, "%sPosX", wndName);
-	x = DBGetContactSettingDword(0, ModuleName, buffer, 0);
-	sprintf(buffer, "%sPosY", wndName);
-	y = DBGetContactSettingDword(0, ModuleName, buffer, 0);
-	sprintf(buffer, "%sWidth", wndName);
-	width = DBGetContactSettingDword(0, ModuleName, buffer, 500);
-	sprintf(buffer, "%sHeight", wndName);
-	height = DBGetContactSettingDword(0, ModuleName, buffer, 300);
-	//MoveWindow(hWnd, x, y, width, height, TRUE);
-	SetWindowPos(hWnd, NULL, x, y, width, height, SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_NOSIZE);
-}
-
 
 #define NA TranslateT("N/A")
 
@@ -1000,7 +968,7 @@ INT_PTR CALLBACK DlgProcBirthdays(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPa
 					params.column = column;
 					ListView_SortItemsEx(params.hList, BirthdaysCompare, (LPARAM) &params);
 					
-					LoadPosition(hWnd, "BirthdayList");
+					Utils_RestoreWindowPosition(hWnd,NULL,ModuleName,"BirthdayList");
 					
 					return TRUE;
 					break;
@@ -1009,7 +977,7 @@ INT_PTR CALLBACK DlgProcBirthdays(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPa
 			case WM_DESTROY:
 				{
 					hBirthdaysDlg = NULL;
-					SavePosition(hWnd, "BirthdayList");
+					Utils_SaveWindowPosition(hWnd,NULL,ModuleName,"BirthdayList");
 					lastColumn = -1;
 					
 					break;

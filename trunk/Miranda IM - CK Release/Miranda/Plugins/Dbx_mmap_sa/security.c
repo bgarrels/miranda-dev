@@ -208,9 +208,9 @@ int SelectEncoder()
 	
 	if(uid == 0){
 		if (gl_bUnicodeAwareCore)
-			MessageBox(0, TranslateT("Crypto module doesnt chosen, using first found"), TranslateT("Notice"), MB_OK);
+			MessageBox(0, TranslateT("Crypto module hasn't been chosen, using first one found"), TranslateT("Notice"), MB_OK);
 		else
-			MessageBoxA(0, Translate("Crypto module doesnt chosen, using first found"), Translate("Notice"), MB_OK);
+			MessageBoxA(0, Translate("Crypto module hasn't been chosen, using first one found"), Translate("Notice"), MB_OK);
 
 		DBWriteContactSettingWord(NULL, "SecureMMAP", "CryptoModule", Modules[0]->cryptor->uid);
 
@@ -227,9 +227,9 @@ int SelectEncoder()
 		}
 		if(!Found){
 			if (gl_bUnicodeAwareCore)
-				MessageBox(0, TranslateT("Crypto module doesnt chosen, using first found"), TranslateT("Notice"), MB_OK);
+				MessageBox(0, TranslateT("Crypto module hasn't been chosen, using first one found"), TranslateT("Notice"), MB_OK);
 			else
-				MessageBoxA(0, Translate("Crypto module doesnt chosen, using first found"), Translate("Notice"), MB_OK);
+				MessageBoxA(0, Translate("Crypto module hasn't been chosen, using first one found"), Translate("Notice"), MB_OK);
 
 			DBWriteContactSettingWord(NULL, "SecureMMAP", "CryptoModule", Modules[0]->cryptor->uid);
 
