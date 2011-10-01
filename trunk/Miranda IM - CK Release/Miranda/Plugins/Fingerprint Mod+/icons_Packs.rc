@@ -80,6 +80,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
    IDI_MIRANDA_TWEETY      ICON    ".\\res\\overlays\\packs\\overlay_packs_Tweety.ico"
    IDI_MIRANDA_UMEDON      ICON    ".\\res\\overlays\\packs\\overlay_packs_Umedon.ico"
    IDI_MIRANDA_VALERAVI    ICON    ".\\res\\overlays\\packs\\overlay_packs_ValeraVi.ico"
+   IDI_MIRANDA_WATCHER     ICON    ".\\res\\overlays\\packs\\overlay_packs_watcher.ico"
    IDI_MIRANDA_SPELLHOWLER ICON    ".\\res\\overlays\\packs\\overlay_packs_xSpellhowleRx.ico"
    IDI_MIRANDA_YAOL        ICON    ".\\res\\overlays\\packs\\overlay_packs_Yaol.ico"
    IDI_MIRANDA_ZELEBOBA    ICON    ".\\res\\overlays\\packs\\overlay_packs_zeleboba.ico"

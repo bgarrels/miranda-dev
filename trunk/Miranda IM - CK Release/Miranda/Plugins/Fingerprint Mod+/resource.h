@@ -495,10 +495,11 @@
 #define IDI_MIRANDA_TWEETY				661
 #define IDI_MIRANDA_UMEDON				662
 #define IDI_MIRANDA_VALERAVI			663
-#define IDI_MIRANDA_SPELLHOWLER			664
-#define IDI_MIRANDA_YAOL				665
-#define IDI_MIRANDA_ZELEBOBA			666
-#define IDI_MIRANDA_DEVIL				667
+#define IDI_MIRANDA_WATCHER				664
+#define IDI_MIRANDA_SPELLHOWLER			665
+#define IDI_MIRANDA_YAOL				666
+#define IDI_MIRANDA_ZELEBOBA			667
+#define IDI_MIRANDA_DEVIL				668
 
 //##############################################################################################################
 //QQ clients
