@@ -125,6 +125,8 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_Ayttm",					_T("*Ayttm*"),									_T("Ayttm"),							_T("ClientIcons_Multiprotocols"),	IDI_AYTTM, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_qutIM",					_T("*qutIM*"),									_T("qutIM"),							_T("ClientIcons_Multiprotocols"),	IDI_QUTIM, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_YamiGo",					_T("YamiGo*"),									_T("YamiGo"),							_T("ClientIcons_Multiprotocols"),	IDI_YAMIGO, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
+	{ "client_QIP_2012",				_T("|QIP 2012*|http://qip* 64??")
+										_T("|http://qip* 65??"),						_T("QIP 2012"),							_T("ClientIcons_Multiprotocols"),	IDI_QIP_INFIUM, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_QIP_Infium",				_T("|QIP Infium*|http://qip*"),					_T("QIP Infium"),						_T("ClientIcons_Multiprotocols"),	IDI_QIP_INFIUM, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_QIP_2010",				_T("|QIP 2010*|http://2010.qip.ru*"),			_T("QIP 2010"),							_T("ClientIcons_Multiprotocols"),	IDI_QIP_2010, INVALID_HANDLE_VALUE, MULTIPROTOCOL_CASE },
 	{ "client_QIP_PDA",					_T("|QIP PDA*|http://pda.qip.ru/caps*")
@@ -633,6 +635,7 @@ KN_FP_MASK def_kn_fp_overlays_mask[] =
 	{ "client_DEVILSUITE_",		_T("*6.6.6*"),						    	_T("Devil Suite"),						_T("ClientIcons_Packs"),	IDI_MIRANDA_DEVIL, INVALID_HANDLE_VALUE, PACKS_CASE },
 	{ "client_FINAL",			_T("*[FinalPack]*"),						_T("Final Pack"),						_T("ClientIcons_Packs"),	IDI_MIRANDA_FINAL, INVALID_HANDLE_VALUE, PACKS_CASE },
 	{ "client_CAPPUCCINO",		_T("*[Cappuccino]*"),						_T("HotCoffee mod Pack"),				_T("ClientIcons_Packs"),	IDI_MIRANDA_CAPPUCCINO, INVALID_HANDLE_VALUE, PACKS_CASE },
+	{ "client_WATCHER",			_T("*[WatcherPack]*"),						_T("Watcher Pack"),						_T("ClientIcons_Packs"),	IDI_MIRANDA_WATCHER, INVALID_HANDLE_VALUE, PACKS_CASE },
 
 //#########################################################################################################################################
 //#########################################################################################################################################
