@@ -64,6 +64,7 @@
 #define IDM_OPENEXISTING                40021
 #define IDM_COPYLINK                    40022
 #define IDM_ONLYGROUP                   40023
+#define IDM_QUOTE                       40024
 
 // Next default values for new objects
 // 

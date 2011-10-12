@@ -31,18 +31,20 @@ public:
 
 	struct MessageData
 	{
-		MessageData(const std::wstring& _description, int _startPos, int _endPos, bool _isMe)
+		MessageData(const std::wstring& _description, int _startPos, int _endPos, bool _isMe, DWORD _timestamp)
 			:description(_description)
 		{
 			startPos = _startPos;
 			endPos = _endPos;
 			isMe = _isMe;
+			timestamp = _timestamp;
 		}
 
 		std::wstring description;
 		int startPos;
 		int endPos;
 		bool isMe;
+		DWORD timestamp;
 	};
 
 	std::vector<MessageData> currentGroup;
