@@ -83,3 +83,4 @@
 [Searching]
 [Switch Only Selected Group]
 [Open History]
+[Reply &Quoted]

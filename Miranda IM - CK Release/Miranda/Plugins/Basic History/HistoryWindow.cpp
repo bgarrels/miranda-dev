@@ -408,9 +408,32 @@ void OpenOptions(char* group, char* page, char* tab = NULL)
 	return (ret);\
 }
 
+class ShowMessageData
+{
+public:
+	ShowMessageData(HANDLE _hContact)
+		:hContact(_hContact)
+	{
+	}
+
+	ShowMessageData(HANDLE _hContact, const std::wstring &_str)
+		:hContact(_hContact),
+		str(_str)
+	{
+	}
+
+	HANDLE hContact;
+	std::wstring str;
+};
+
 void __stdcall ShowMessageWindow(void* arg)
 {
-	CallService(MS_MSG_SENDMESSAGE, (WPARAM)arg, 0);
+	ShowMessageData* dt = (ShowMessageData*)arg;
+	if(dt->str.empty())
+		CallService(MS_MSG_SENDMESSAGE, (WPARAM)dt->hContact, 0);
+	else
+		CallService(MS_MSG_SENDMESSAGET, (WPARAM)dt->hContact, (LPARAM)dt->str.c_str());
+	delete dt;
 }
 
 INT_PTR CALLBACK HistoryWindow::DlgProcHistory(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -548,7 +571,6 @@ INT_PTR CALLBACK HistoryWindow::DlgProcHistory(HWND hwndDlg, UINT msg, WPARAM wP
 							HistoryWindow* historyWindow =(HistoryWindow*)GetWindowLongPtr(hwndDlg,GWLP_USERDATA);
 							POINT clicked;
 							LPNMITEMACTIVATE nmlv = (LPNMITEMACTIVATE)lParam;
-							RECT rc;
 							HWND window = historyWindow->editWindow;
 							POINTL p;
 							POINT scrool;
@@ -596,6 +618,7 @@ INT_PTR CALLBACK HistoryWindow::DlgProcHistory(HWND hwndDlg, UINT msg, WPARAM wP
 									AppendMenu(hPopupMenu, MF_STRING, IDM_DELETE, TranslateT("Delete"));
 									AppendMenu(hPopupMenu, MFT_SEPARATOR, 0, NULL);
 									AppendMenu(hPopupMenu, MF_STRING, IDM_MESSAGE, TranslateT("Send Message"));
+									AppendMenu(hPopupMenu, MF_STRING, IDM_QUOTE, TranslateT("Reply &Quoted"));
 									AppendMenu(hPopupMenu, MF_STRING, IDM_DELETEGROUP, TranslateT("Delete Group"));
 									AppendMenu(hPopupMenu, MF_STRING, IDM_DELETEUSER, TranslateT("Delete All User History"));
 								}
@@ -609,14 +632,17 @@ INT_PTR CALLBACK HistoryWindow::DlgProcHistory(HWND hwndDlg, UINT msg, WPARAM wP
 										{
 											int start = 0;
 											while(start < historyWindow->currentGroup.size() && chrg.cpMin >= historyWindow->currentGroup[start].endPos) ++start;
-											CHARRANGE chrgNew;
-											chrgNew.cpMin = 0;
-											if(start > 0)
-												chrgNew.cpMin = historyWindow->currentGroup[start - 1].endPos;
-											chrgNew.cpMax = historyWindow->currentGroup[start].endPos;
-											SendMessage(window,EM_EXSETSEL,0,(LPARAM)&chrgNew);
-											SendMessage(window,WM_COPY,0,0);
-											SendMessage(window,EM_EXSETSEL,0,(LPARAM)&chrg);
+											if(start < historyWindow->currentGroup.size())
+											{
+												CHARRANGE chrgNew;
+												chrgNew.cpMin = 0;
+												if(start > 0)
+													chrgNew.cpMin = historyWindow->currentGroup[start - 1].endPos;
+												chrgNew.cpMax = historyWindow->currentGroup[start].endPos;
+												SendMessage(window,EM_EXSETSEL,0,(LPARAM)&chrgNew);
+												SendMessage(window,WM_COPY,0,0);
+												SendMessage(window,EM_EXSETSEL,0,(LPARAM)&chrg);
+											}
 										}
 										else
 										{
@@ -626,7 +652,65 @@ INT_PTR CALLBACK HistoryWindow::DlgProcHistory(HWND hwndDlg, UINT msg, WPARAM wP
 									break;
 								case IDM_MESSAGE:
 									//CallService(MS_MSG_SENDMESSAGE, (WPARAM)historyWindow->hContact, 0);
-									CallFunctionAsync(ShowMessageWindow, historyWindow->hContact);
+									CallFunctionAsync(ShowMessageWindow, new ShowMessageData(historyWindow->hContact));
+									break;
+								case IDM_QUOTE:
+									{
+										if(historyWindow->currentGroup.size() > 0)
+										{
+											std::wstring quote;
+											if(chrg.cpMax == chrg.cpMin)
+											{
+												int start = 0;
+												while(start < historyWindow->currentGroup.size() && chrg.cpMin >= historyWindow->currentGroup[start].endPos) ++start;
+												if(start < historyWindow->currentGroup.size())
+												{
+													historyWindow->FormatQuote(quote, historyWindow->currentGroup[start], historyWindow->currentGroup[start].description);
+												}
+											}
+											else
+											{
+												int start = 0;
+												while(start < historyWindow->currentGroup.size() && chrg.cpMin >= historyWindow->currentGroup[start].endPos) ++start;
+												int end = 0;
+												while(end < historyWindow->currentGroup.size() && chrg.cpMax > historyWindow->currentGroup[end].endPos) ++end;
+												if(end >= historyWindow->currentGroup.size())
+													end = historyWindow->currentGroup.size() - 1;
+												if(start == end && start < historyWindow->currentGroup.size())
+												{
+													int iStart = historyWindow->currentGroup[start].startPos;
+													if(chrg.cpMin > iStart)
+														iStart = chrg.cpMin;
+													int iEnd = historyWindow->currentGroup[start].endPos;
+													if(chrg.cpMax < iEnd)
+														iEnd = chrg.cpMax;
+													if(iEnd > iStart)
+													{
+														TEXTRANGE tr;
+														tr.chrg.cpMin = iStart;
+														tr.chrg.cpMax = iEnd;
+														tr.lpstrText = new TCHAR[iEnd - iStart + 1];
+														SendMessage(historyWindow->editWindow, EM_GETTEXTRANGE, 0, (LPARAM) & tr);
+														historyWindow->FormatQuote(quote, historyWindow->currentGroup[start], tr.lpstrText);
+														delete [] tr.lpstrText;
+													}
+												}
+												else
+												{
+													while(start <= end)
+													{
+														historyWindow->FormatQuote(quote, historyWindow->currentGroup[start], historyWindow->currentGroup[start].description);
+														++start;
+													}
+												}
+											}
+
+											if(!quote.empty())
+											{
+												CallFunctionAsync(ShowMessageWindow, new ShowMessageData(historyWindow->hContact, quote));
+											}
+										}
+									}
 									break;
 								case IDM_DELETE:
 									historyWindow->Delete(0);
@@ -729,7 +813,6 @@ INT_PTR CALLBACK HistoryWindow::DlgProcHistory(HWND hwndDlg, UINT msg, WPARAM wP
 						HistoryWindow* historyWindow =(HistoryWindow*)GetWindowLongPtr(hwndDlg,GWLP_USERDATA);
 						POINT clicked;
 						LPNMITEMACTIVATE nmlv = (LPNMITEMACTIVATE)lParam;
-						RECT rc;
 						HWND window = historyWindow->listWindow;
 						LVHITTESTINFO info = {0};
 						clicked.x = info.pt.x = nmlv->ptAction.x;
@@ -1607,7 +1690,7 @@ void HistoryWindow::SelectEventGroup(int sel)
 					ReplaceIcons(editWindow, startAt, lastMe);
 				TextSelection->SetStart(MAXLONG);
 				TextSelection->GetStart(&endAt);
-				currentGroup.push_back(MessageData(strStl, startAt, endAt, lastMe));
+				currentGroup.push_back(MessageData(strStl, startAt, endAt, lastMe, dbei.timestamp));
 			}
 		}
 	}
@@ -2055,5 +2138,46 @@ void HistoryWindow::GroupImagesChanged()
 			ListView_SetImageList(listWindow, himlNone, LVSIL_SMALL);
 		}
 	}
+}
+
+void HistoryWindow::FormatQuote(std::wstring& quote, const MessageData& md, const std::wstring& msg)
+{
+		if(md.isMe)
+			quote += myName;
+		else
+			quote += contactName;
+		TCHAR str[32];
+		tmi.printTimeStamp(NULL, md.timestamp, _T("d t"), str , 32, 0);
+		quote += _T(", ");
+		quote += str;
+		quote += _T("\n");
+		int f = 0;
+		do
+		{
+			int nf = msg.find_first_of(_T("\r\n"), f);
+			if(nf >= 0 && nf < msg.length())
+			{
+				if(nf - f >= 0 )
+				{
+					quote += _T(">");
+					quote += msg.substr(f, nf - f);
+					quote += _T("\n");
+				}
+
+				f = nf + 1;
+				if(msg[nf] == _T('\r') && f < msg.length() && msg[f] == _T('\n'))
+					++f;
+			}
+			else if(msg.length() - f > 0)
+			{
+				quote += _T(">");
+				quote += msg.substr(f, msg.length() - f);
+				quote += _T("\n");
+				f = -1;
+			}
+			else
+				f = -1;
+		}
+		while(f > 0 && f < msg.length());
 }
 

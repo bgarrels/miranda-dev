@@ -46,6 +46,7 @@ private:
 	void Delete(int what);
 	void ContactChanged(bool sync = false);
 	void GroupImagesChanged();
+	void FormatQuote(std::wstring& quote, const MessageData& md, const std::wstring& msg);
 
 	static std::map<HANDLE, HistoryWindow*> windows;
 	static std::vector<HistoryWindow*> freeWindows;
