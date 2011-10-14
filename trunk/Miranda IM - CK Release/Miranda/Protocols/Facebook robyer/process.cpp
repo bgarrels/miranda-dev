@@ -3,7 +3,7 @@
 Facebook plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2009-11 Michal Zelinka
+Copyright ï¿½ 2009-11 Michal Zelinka
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -51,20 +51,57 @@ void FacebookProto::ProcessBuddyList( void* data )
 	{
 		LOG("      Now %s: %s", (i->data->status_id == ID_STATUS_OFFLINE ? "offline" : "online"), i->data->real_name.c_str());
 
-		facebook_user* fu;
+		facebook_user* fbu;
 
 		if ( i->data->status_id == ID_STATUS_OFFLINE )
 		{
-			fu = new facebook_user( i->data );
+			fbu = i->data;
+
+			if (fbu->handle)
+				DBWriteContactSettingWord(fbu->handle, m_szModuleName, "Status", ID_STATUS_OFFLINE);
+
 			std::string to_delete( i->key );
 			i = i->next;
 			facy.buddies.erase( to_delete );
 		} else {
-			fu = i->data;
+			fbu = i->data;
 			i = i->next;
+
+			if (!fbu->handle) { // just been added
+				fbu->handle = AddToContactList(fbu);
+
+				DBWriteContactSettingUTF8String(fbu->handle,m_szModuleName,FACEBOOK_KEY_NAME,fbu->real_name.c_str());
+				DBWriteContactSettingUTF8String(fbu->handle,m_szModuleName,"Nick",fbu->real_name.c_str());
+			}
+
+			if (DBGetContactSettingWord(fbu->handle,m_szModuleName,"Status", 0) != ID_STATUS_ONLINE) {
+				DBWriteContactSettingWord(fbu->handle,m_szModuleName,"Status", ID_STATUS_ONLINE );
+			}
+
+
+			DBVARIANT dbv;
+
+			// Check avatar change
+			bool update_required = true;
+			if ( !DBGetContactSettingString(fbu->handle,m_szModuleName,FACEBOOK_KEY_AV_URL,&dbv) )
+			{
+				update_required = strcmp( dbv.pszVal, fbu->image_url.c_str() ) != 0;
+				DBFreeVariant(&dbv);
+			}
+			if ( update_required /*|| !AvatarExists(fbu) */)
+			{
+				//LOG("***** Saving new avatar url: %s",fbu->image_url.c_str());
+				DBWriteContactSettingString(fbu->handle,m_szModuleName,FACEBOOK_KEY_AV_URL,fbu->image_url.c_str());
+
+				ProtoBroadcastAck(m_szModuleName, fbu->handle, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
+
+				//DBWriteContactSettingByte(fbu->handle,m_szModuleName,FACEBOOK_KEY_NEW_AVATAR,1);
+				//ProcessAvatar(fbu->handle,&fbu->image_url);
+			}
+
 		}
 
-		ForkThread(&FacebookProto::UpdateContactWorker, this, (void*)fu);
+		//ForkThread(&FacebookProto::UpdateContactWorker, this, (void*)fu);
 	}
 
 	LOG("***** Buddy list processed");
@@ -146,17 +183,11 @@ void FacebookProto::ProcessFriendList( void* data )
 				}
 				if ( update_required ) {
 					DBWriteContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, fbu->image_url.c_str());
-					DBWriteContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_NEW_AVATAR, 1);
-					// TODO: notify that avatar should change
+					ProtoBroadcastAck(m_szModuleName, hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
+					//DBWriteContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_NEW_AVATAR, 1);
+					//RM TODO: notify that avatar should change
 				}
 			
-				// TODO: remove and wait for avatar request...
-				/* if ( update_required || !proto->AvatarExists(&fbu) )
-				{
-					proto->Log("***** Saving new avatar url: %s",fbu.image_url.c_str());
-					proto->ProcessAvatar(hContact,&(fbu.image_url));
-				} */
-				
 				delete fbu;
 				friends.erase(iter);
 			} else {
@@ -195,7 +226,7 @@ void FacebookProto::ProcessFriendList( void* data )
 		DBWriteContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NAME, fbu->real_name.c_str());
 		DBWriteContactSettingUTF8String(hContact, m_szModuleName, "Nick", fbu->real_name.c_str());
 		DBWriteContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, fbu->image_url.c_str());
-		DBWriteContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_NEW_AVATAR, 1);
+		//DBWriteContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_NEW_AVATAR, 1);
 //		DBWriteContactSettingWord(hContact, m_szModuleName, "Status", ID_STATUS_OFFLINE );
 	}
 
@@ -521,8 +552,7 @@ void FacebookProto::ProcessFeeds( void* data )
 	}
 	news.clear();
 
-	this->facy.last_feeds_update_ = ::time( NULL );
-	setDword( "LastNotificationsUpdate", this->facy.last_feeds_update_ ); // RM TODO: is this useful?
+	this->facy.last_feeds_update_ = ::time(NULL);
 
 	LOG("***** Feeds processed");
 
@@ -536,8 +566,8 @@ exit:
 	delete resp;
 }
 
-void FacebookProto::ProcessAvatar(HANDLE hContact,const std::string* url,bool force)
+/*void FacebookProto::ProcessAvatar(HANDLE hContact,const std::string* url,bool force)
 {
 	ForkThread(&FacebookProto::UpdateAvatarWorker, this,
 	    new update_avatar(hContact,(*url)));
-}
+}*/

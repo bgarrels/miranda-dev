@@ -35,7 +35,6 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 	m_tszUserName  = mir_tstrdup( username );
 
 	this->facy.parent = this;
-	this->facy.last_feeds_update_ = getDword( "LastNotificationsUpdate", 0 ); // RM TODO: is it useful?
 
 	this->signon_lock_ = CreateMutex( NULL, FALSE, NULL );
 	this->avatar_lock_ = CreateMutex( NULL, FALSE, NULL );
@@ -208,7 +207,7 @@ int FacebookProto::SetStatus( int new_status )
 	return 0;
 }
 
-int FacebookProto::SetAwayMsg( int status, const PROTOCHAR *msg )
+/*int FacebookProto::SetAwayMsg( int status, const PROTOCHAR *msg )
 {
 	if ( isOnline() && msg != NULL && getByte( FACEBOOK_KEY_SET_MIRANDA_STATUS, DEFAULT_SET_MIRANDA_STATUS ) )
 	{
@@ -216,7 +215,7 @@ int FacebookProto::SetAwayMsg( int status, const PROTOCHAR *msg )
 		ForkThread(&FacebookProto::SetAwayMsgWorker, this, narrow);
 	}
 	return 0;
-}
+}*/
 
 void FacebookProto::SetAwayMsgWorker(void * data)
 {
@@ -253,7 +252,11 @@ int FacebookProto::GetMyAwayMsg( WPARAM wParam, LPARAM lParam )
 
 int FacebookProto::SetMyAwayMsg( WPARAM wParam, LPARAM lParam )
 {
-	return SetAwayMsg( (int)wParam, (const TCHAR*)lParam );
+	if ( isOnline() && lParam != NULL && getByte( FACEBOOK_KEY_SET_MIRANDA_STATUS, DEFAULT_SET_MIRANDA_STATUS ) )
+	{
+		ForkThread(&FacebookProto::SetAwayMsgWorker, this, (void *)lParam);
+	}
+	return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////////

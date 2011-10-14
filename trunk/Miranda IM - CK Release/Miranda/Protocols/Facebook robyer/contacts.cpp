@@ -132,7 +132,7 @@ void FacebookProto::SetAllContactStatuses(int status)
 	}
 }
 
-void FacebookProto::UpdateContactWorker(void *p)
+/*void FacebookProto::UpdateContactWorker(void *p)
 {
 	if ( p == NULL )
 		return;
@@ -182,11 +182,11 @@ void FacebookProto::UpdateContactWorker(void *p)
 				DBWriteContactSettingString(fbu->handle,m_szModuleName,FACEBOOK_KEY_AV_URL,fbu->image_url.c_str());
 				ProcessAvatar(fbu->handle,&fbu->image_url);
 
-/*				if ( fbu->user_id == facy.self_.user_id )
-				{
-					LOG("***** Reporting MyAvatar changed");
-					CallService(MS_AV_REPORTMYAVATARCHANGED, (WPARAM)this->m_szModuleName, 0);
-				}*/
+//				if ( fbu->user_id == facy.self_.user_id )
+//				{
+					//LOG("***** Reporting MyAvatar changed");
+					//CallService(MS_AV_REPORTMYAVATARCHANGED, (WPARAM)this->m_szModuleName, 0);
+				//}
 			}
 
 			// Update update timestamp
@@ -197,7 +197,7 @@ void FacebookProto::UpdateContactWorker(void *p)
 exit:
 	if ( fbu->status_id == ID_STATUS_OFFLINE && fbu->user_id != this->facy.self_.user_id )
 		delete fbu;
-}
+}*/
 
 void FacebookProto::GetAwayMsgWorker(void *hContact)
 {

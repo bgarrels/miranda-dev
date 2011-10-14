@@ -81,7 +81,6 @@ Last change on : $Date$
 #define DEFAULT_EVENT_TIMEOUT_TYPE      0
 #define DEFAULT_EVENT_TIMEOUT           20
 #define DEFAULT_SYSTRAY_NOTIFY          0
-#define DEFAULT_SHOW_OLD_FEEDS          0
 
 // Event flags
 #define FACEBOOK_EVENT_CLIENT          0x10000000 // Facebook error or info message

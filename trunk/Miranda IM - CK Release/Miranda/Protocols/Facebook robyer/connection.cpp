@@ -91,8 +91,7 @@ void FacebookProto::ChangeStatus(void*)
 
 		if ( NegotiateConnection( ) )
 		{			
-			if (!getByte(FACEBOOK_KEY_SHOW_OLD_FEEDS, DEFAULT_SHOW_OLD_FEEDS))
-				facy.last_feeds_update_ = ::time( NULL );
+			facy.last_feeds_update_ = ::time( NULL );
 
 			facy.home();
 			facy.reconnect();

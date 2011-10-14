@@ -105,7 +105,7 @@ public:
 	virtual	HANDLE    __cdecl GetAwayMsg( HANDLE hContact );
 	virtual	int       __cdecl RecvAwayMsg( HANDLE hContact, int mode, PROTORECVEVENT* evt );
 	virtual	int       __cdecl SendAwayMsg( HANDLE hContact, HANDLE hProcess, const char* msg );
-	virtual	int       __cdecl SetAwayMsg( int iStatus, const PROTOCHAR* msg );
+	//virtual	int       __cdecl SetAwayMsg( int iStatus, const PROTOCHAR* msg );
 
 	virtual	int       __cdecl UserIsTyping( HANDLE hContact, int type );
 
@@ -152,7 +152,7 @@ public:
 	void __cdecl ProcessUnreadMessages(void*);
 	void __cdecl ProcessFeeds(void*);
 	void __cdecl ProcessNotifications(void*);
-	void         ProcessAvatar(HANDLE,const std::string*,bool force=false);
+//	void         ProcessAvatar(HANDLE,const std::string*,bool force=false);
 
 	// Worker threads
 	void __cdecl SignOn(void*);
@@ -160,7 +160,7 @@ public:
 	void __cdecl SignOff(void*);
 	void __cdecl GetAwayMsgWorker(void*);
 	void __cdecl SetAwayMsgWorker(void*);
-	void __cdecl UpdateContactWorker(void*);
+//	void __cdecl UpdateContactWorker(void*);
 	void __cdecl UpdateAvatarWorker(void*);
 	void __cdecl SendMsgWorker(void*);
 	void __cdecl SendTypingWorker(void*);
