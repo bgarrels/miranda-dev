@@ -415,6 +415,20 @@ namespace
 	{
 		return CallService(MS_CLIST_REMOVECONTACTMENUITEM,reinterpret_cast<WPARAM>(h),0);
 	}
+
+// 	PROTO_INTERFACE* protoInit(const char* pszProtoName, const TCHAR* tszUserName)
+// 	{
+// 		CAimProto *ppro = new CAimProto(pszProtoName, tszUserName);
+// 		g_Instances.insert(ppro);
+// 		return ppro;
+// 	}
+// 
+// 	int protoUninit(PROTO_INTERFACE* ppro)
+// 	{
+// 		g_Instances.remove((CAimProto*)ppro);
+// 		return 0;
+// 	}
+
 }
 
 extern "C" 
@@ -458,9 +472,12 @@ extern "C"
 		Quotes_IconsInit();
 
 		PROTOCOLDESCRIPTOR pd = {0};
-		pd.cbSize = sizeof(PROTOCOLDESCRIPTOR);//PROTOCOLDESCRIPTOR_V3_SIZE;
+		pd.cbSize = /*sizeof(pd)*/PROTOCOLDESCRIPTOR_V3_SIZE;
 		pd.szName = QUOTES_PROTOCOL_NAME;
 		pd.type = PROTOTYPE_PROTOCOL;
+// 		pd.fnInit = protoInit;
+// 		pd.fnUninit = protoUninit;
+
 		CallService( MS_PROTO_REGISTERMODULE, 0, ( LPARAM )&pd );
 
 		HANDLE h = CreateProtoServiceFunction(QUOTES_PROTOCOL_NAME, PS_GETNAME, QuoteProtoFunc_GetName);

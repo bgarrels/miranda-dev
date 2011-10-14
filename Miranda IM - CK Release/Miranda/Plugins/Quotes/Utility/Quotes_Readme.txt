@@ -1,4 +1,4 @@
-Quotes version 0.0.20.0 plugin for Miranda 
+Quotes version 0.0.22.0 plugin for Miranda 
 
 This plugin displays periodically updated economic quotes, currency exchanges and different economic and financial indexes in Miranda contact list.
 
@@ -9,6 +9,10 @@ How to install:
 unpack zip archive;
 copy quotes.dll and Quotes subdirectory from Plugins folder to miranda plugins floder.
 copy proto_Quotes.dll from Icons folder to miranda icons folder
+
+[2011-10-14] Changelog Release 0.0.22.0
+1. Supports YAHOO
+2. Options location was moved from "Plugins\Quotes" to "Network\Quotes"
 
 [2011-08-19] Changelog Release 0.0.21.0
 1. Tendency format specification

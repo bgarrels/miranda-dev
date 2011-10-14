@@ -56,7 +56,7 @@ bool Quotes_DBReadDouble(HANDLE hContact,const char* szModule,const char* szSett
 	cgs.pValue = &dbv;
 	dbv.type = DBVT_BLOB;
 
-	bool bResult = ((0 == CallService(MS_DB_CONTACT_GETSETTING_STR,(WPARAM)hContact,(LPARAM)&cgs))
+	bool bResult = ((0 == CallService(MS_DB_CONTACT_GETSETTING,(WPARAM)hContact,(LPARAM)&cgs))
 		&& (DBVT_BLOB == dbv.type));
 
 	if(bResult)

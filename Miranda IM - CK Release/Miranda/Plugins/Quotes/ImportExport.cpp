@@ -655,7 +655,7 @@ namespace
 				}
 			}
 
-			virtual void Visit(const CQuotesProviderGoogleFinance& rProvider)
+			virtual void Visit(const CQuotesProviderFinance& rProvider)
 			{
 				tstring sQuoteID = GetXMLNodeValue(DB_STR_QUOTE_ID);
 				if(false == sQuoteID.empty())

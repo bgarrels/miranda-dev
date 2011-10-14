@@ -46,8 +46,6 @@ namespace
 
 void CommonOptionDlgProc(HWND hWnd,UINT msg,WPARAM wp,LPARAM lp,CCommonDlgProcData& rData)
 {
-// 	USES_CONVERSION;
-
 	switch(msg)
 	{
 	case WM_INITDIALOG:
@@ -163,7 +161,6 @@ void CommonOptionDlgProc(HWND hWnd,UINT msg,WPARAM wp,LPARAM lp,CCommonDlgProcDa
 			switch( LOWORD(wp))
 			{
 			case IDC_BUTTON_DESCRIPTION:
-			case IDC_BUTTON_DESCRIPTION_STATUS_MESSAGE:
 				show_variable_list(hWnd,rData.m_pQuotesProvider);
 				break;
 			case IDC_BUTTON_ADVANCED_SETTINGS:

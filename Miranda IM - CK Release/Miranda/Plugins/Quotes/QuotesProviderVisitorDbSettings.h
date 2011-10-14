@@ -14,7 +14,7 @@ private:
 	virtual void Visit(const CQuotesProviderDukasCopy& rProvider);
 	virtual void Visit(const CQuotesProviderGoogle& rProvider);
 	virtual void Visit(const CQuotesProviderGoogleFinance& rProvider);
-
+	virtual void Visit(const CQuotesProviderYahoo& rProvider);
 public:
 	LPCSTR m_pszDbRefreshRateType;
 	LPCSTR m_pszDbRefreshRateValue;

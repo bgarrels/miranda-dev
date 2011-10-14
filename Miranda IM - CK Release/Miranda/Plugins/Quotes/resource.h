@@ -18,12 +18,13 @@
 #define IDD_CHART                       117
 #define IDD_DIALOG_QUOTE_INFO_1         118
 #define IDI_ICON_REFRESH                118
-#define IDD_DIALOG_OPT_GOOGLE_FINANCE   119
+#define IDD_DIALOG_OPT_FINANCE          119
 #define IDI_ICON_IMPORT                 119
 #define IDI_ICON_EXPORT                 120
 #define IDD_PROVIDER_ADV_SETTINGS       120
 #define IDI_ICON_SWAP                   121
 #define IDD_DIALOG_POPUP                121
+#define IDD_DIALOG_VARIABLE_LIST        123
 #define IDC_TREE_ECONOMIC_RATES         1001
 #define IDC_EDIT_REFRESH_RATE           1002
 #define IDC_SPIN_REFRESH_RATE           1003
@@ -45,7 +46,6 @@
 #define IDC_CHECK_INTERNAL_HISTORY      1020
 #define IDC_EDIT_STATUS_MESSAGE_FORMAT  1020
 #define IDC_CHECK_EXTERNAL_FILE         1021
-#define IDC_BUTTON_DESCRIPTION_STATUS_MESSAGE 1021
 #define IDC_EDIT_FILE_NAME              1022
 #define IDC_EDIT_TENDENCY_FORMAT        1022
 #define IDC_BUTTON_BROWSE               1023
@@ -86,7 +86,10 @@
 #define IDC_EDIT_FROM                   1070
 #define IDC_EDIT_FROM2                  1071
 #define IDC_EDIT_TO                     1071
+#define IDC_STATIC_PROVIDER_NAME        1071
 #define IDC_DELAY                       1072
+#define IDC_EDIT1                       1072
+#define IDC_EDIT_VARIABLE               1072
 #define IDC_BGCOLOR                     1074
 #define IDC_TEXTCOLOR                   1075
 #define IDC_PREV                        1076
@@ -98,9 +101,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        123
+#define _APS_NEXT_RESOURCE_VALUE        124
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         1071
+#define _APS_NEXT_CONTROL_VALUE         1073
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
