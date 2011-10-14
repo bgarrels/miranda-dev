@@ -63,16 +63,19 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 			itAvailable != nowAvailableList.End(); ++itAvailable)
 		{
 			const Object::Member& member = *itAvailable;
-
-			current = buddy_list->find( member.name );
-			if ( current == NULL )
-				buddy_list->insert( std::make_pair( member.name, new facebook_user( ) ) );
-
-			current = buddy_list->find( member.name );
 			const Object& objMember = member.element;
+			const Boolean idle = objMember["i"]; // In new version of Facebook "i" means "offline"
 
+			current = buddy_list->find( member.name );
+			if ( current == NULL) {
+				if (idle) continue; // Just little optimalization
+
+				buddy_list->insert( std::make_pair( member.name, new facebook_user( ) ) );
+				current = buddy_list->find( member.name );
+			}
+			
 			current->user_id = current->real_name = member.name;
-			current->status_id = ID_STATUS_ONLINE;
+			current->status_id = (idle ? ID_STATUS_OFFLINE : ID_STATUS_ONLINE);
 		}
 
 		const Object& userInfosList = objRoot["payload"]["buddy_list"]["userInfos"];
@@ -268,7 +271,9 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 
 					messages->push_back( message );
 				} else {
-					proto->Log("      Got duplicit message?");
+					std::string msg = "      Got duplicit message?\n";
+					msg += utils::text::special_expressions_decode(utils::text::slashu_to_utf8(text.Value()));
+					proto->Log(msg.c_str());
 				}
 			}
 			else if ( type.Value( ) == "messaging" ) // inbox message
@@ -283,6 +288,9 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 					lltoa( from.Value(), was_id, 10 );
 				
 					const String& text = messageContent["body"];
+
+					// RM TODO: include sender name
+					// const String& name = messageContent["sender_name"];
         
 					const Number& time_sent = messageContent["timestamp"];
 					if (time_sent.Value() > proto->facy.last_message_time_) // Check agains duplicit messages
@@ -299,7 +307,9 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 
 						messages->push_back( message );
 					} else {
-						proto->Log("      Got duplicit message?");
+						std::string msg = "      Got duplicit inbox message?\n";
+						msg += utils::text::special_expressions_decode(utils::text::slashu_to_utf8(text.Value()));
+						proto->Log(msg.c_str());
 					}
 				}
 			}

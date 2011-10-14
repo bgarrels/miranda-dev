@@ -40,7 +40,16 @@ http::response facebook_client::flap( const int request_type, std::string* reque
 	nlhr.szUrl = (char*)url.c_str( );
 	nlhr.flags = NLHRF_HTTP11 | NLHRF_NODUMP | choose_security_level( request_type ) | NLHRF_GENERATEHOST;
 	nlhr.headers = get_request_headers( request_type, &nlhr.headersCount );
-	nlhr.timeout = 1000 * (( request_type == FACEBOOK_REQUEST_MESSAGES_RECEIVE ) ? 60 : 15);
+	
+	switch (request_type)
+	{
+	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
+		nlhr.timeout = 1000 * 60; break;
+	case FACEBOOK_REQUEST_MESSAGE_SEND:
+		nlhr.timeout = 1000 * 5; break;
+	default:
+		nlhr.timeout = 1000 * 15; break;
+	}
 
 	if ( request_data != NULL )
 	{
@@ -802,36 +811,47 @@ bool facebook_client::home( )
 	{
 	case HTTP_CODE_OK:
 	{		
-		if ( resp.data.find("id=\"pageNav\"") != std::string::npos ) {
-			// Get real_name
-			this->self_.real_name = utils::text::special_expressions_decode( utils::text::source_get_value( &resp.data, 3, " class=\"headerTinymanName\"", "\">", "</a" ) );
-			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,FACEBOOK_KEY_NAME,this->self_.real_name.c_str());
-			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,"Nick",this->self_.real_name.c_str());
-			parent->Log("      Got self real name: %s", this->self_.real_name.c_str());
-
-			// Get avatar
-			this->self_.image_url = utils::text::trim(
-				utils::text::special_expressions_decode(
-					utils::text::source_get_value( &resp.data, 3, "class=\\\"fbxWelcomeBoxImg", "src=\\\"", "\\\"" ) ) );
-			parent->Log("      Got self avatar: %s", this->self_.image_url.c_str());
-		}
-		else if ( resp.data.find( "id=\"navAccountName\"" ) != std::string::npos )
+		if ( resp.data.find( "id=\"navAccountName\"" ) != std::string::npos )
 		{ // Backup for old fb version
 			// Get real_name
 			this->self_.real_name = utils::text::special_expressions_decode( utils::text::source_get_value( &resp.data, 2, " id=\"navAccountName\">", "</a" ) );
 			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,FACEBOOK_KEY_NAME,this->self_.real_name.c_str());
 			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,"Nick",this->self_.real_name.c_str());
 			parent->Log("      Got self real name: %s", this->self_.real_name.c_str());
-
-			// Get avatar
-			this->self_.image_url = utils::text::trim(
-				utils::text::special_expressions_decode(
-					utils::text::source_get_value( &resp.data, 3, "class=\\\"fbxWelcomeBoxBlock", "class=\\\"img\\\" src=\\\"", "\\\"" ) ) );
-			parent->Log("      Got self avatar: %s", this->self_.image_url.c_str());
+		} else if ( resp.data.find("id=\"pageNav\"") != std::string::npos ) {
+			// Get real_name
+			this->self_.real_name = utils::text::special_expressions_decode( utils::text::source_get_value( &resp.data, 3, " class=\"headerTinymanName\"", "\">", "</a" ) );
+			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,FACEBOOK_KEY_NAME,this->self_.real_name.c_str());
+			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,"Nick",this->self_.real_name.c_str());
+			parent->Log("      Got self real name: %s", this->self_.real_name.c_str());
 		} else {
 			client_notify(TranslateT("Something happened to Facebook. Maybe there was some major update so you should wait for an update."));
 			return handle_error( "home", FORCE_DISCONNECT );
 		}
+
+
+		// Get avatar
+		this->self_.image_url = utils::text::trim(
+			utils::text::special_expressions_decode(
+				utils::text::source_get_value( &resp.data, 3, "class=\\\"fbxWelcomeBoxImg", "src=\\\"", "\\\"" ) ) );
+		parent->Log("      Got self avatar: %s", this->self_.image_url.c_str());
+
+		DBVARIANT dbv;
+		facebook_user *fbu = &(this->self_);
+		// Check avatar change
+		bool update_required = true;
+		if ( !DBGetContactSettingString(fbu->handle,parent->m_szModuleName,FACEBOOK_KEY_AV_URL,&dbv) )
+		{
+			update_required = strcmp( dbv.pszVal, fbu->image_url.c_str() ) != 0;
+			DBFreeVariant(&dbv);
+		}
+		if ( update_required || !parent->AvatarExists(fbu) )
+		{
+			parent->Log("***** Saving my avatar url: %s", fbu->image_url.c_str());
+			DBWriteContactSettingString(fbu->handle, parent->m_szModuleName, FACEBOOK_KEY_AV_URL, fbu->image_url.c_str());			
+			ProtoBroadcastAck(parent->m_szModuleName, fbu->handle, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
+			//ForkThread(&FacebookProto::UpdateAvatarWorker, parent, new update_avatar(fbu->handle, fbu->image_url));
+		}	
 
 
 		// Get post_form_id
@@ -915,9 +935,6 @@ bool facebook_client::home( )
 	  parent->AddChat(id.c_str(), name.c_str());
 	  }        
   }*/
-
-		// Update self-contact
-		ForkThread(&FacebookProto::UpdateContactWorker, this->parent, (void*)&this->self_);
 
 		return handle_success( "home" );
 

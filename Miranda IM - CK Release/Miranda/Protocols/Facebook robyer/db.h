@@ -64,8 +64,8 @@ Last change on : $Date: 2011-01-08 11:10:34 +0100 (so, 08 1 2011) $
 #define FACEBOOK_KEY_TIMEOUTS_LIMIT "TimeoutsLimit" // [HIDDEN]
 #define FACEBOOK_KEY_DISABLE_LOGOUT "DisableLogout" // [HIDDEN]
 #define FACEBOOK_KEY_DISABLE_STATUS_NOTIFY  "DisableStatusNotify" // [HIDDEN]
-#define FACEBOOK_KEY_SHOW_OLD_FEEDS "ShowOldFeeds" // [HIDDEN]
 #define FACEBOOK_KEY_PARSE_MESSAGES	"ParseUnreadMessages" // [HIDDEN]
+#define FACEBOOK_KEY_BIG_AVATARS	"UseBigAvatars" // [HIDDEN]
 
 #define FACEBOOK_KEY_EVENT_NOTIFICATIONS_ENABLE     "EventNotificationsEnable"
 #define FACEBOOK_KEY_EVENT_FEEDS_ENABLE             "EventFeedsEnable"
