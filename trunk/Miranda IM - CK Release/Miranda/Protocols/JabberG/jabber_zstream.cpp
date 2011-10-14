@@ -20,9 +20,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
-Last change on : $Date: 2011-03-17 20:12:56 +0100 (Do, 17. Mrz 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13891 $
+Last change on : $Date: 2011-10-14 04:26:30 +0200 (Fr, 14. Okt 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -93,6 +93,7 @@ int ThreadData::zlibSend( char* data, int datalen )
 int ThreadData::zlibRecv( char* data, long datalen )
 {
 	if ( zRecvReady ) {
+retry:
 		zRecvDatalen = recvws( zRecvData, ZLIB_CHUNK_SIZE, MSG_NODUMP );
 		if ( zRecvDatalen == SOCKET_ERROR ) {
 			proto->Log( "Netlib_Recv() failed, error=%d", WSAGetLastError());
@@ -116,6 +117,8 @@ int ThreadData::zlibRecv( char* data, long datalen )
 	}
 
 	int len = datalen - zStreamIn.avail_out;
+	if ( len == 0 ) 
+		goto retry;
 
 	if ( DBGetContactSettingByte( NULL, "Netlib", "DumpRecv", TRUE ) == TRUE ) {
 		char* szLogBuffer = ( char* )alloca( len+32 );
