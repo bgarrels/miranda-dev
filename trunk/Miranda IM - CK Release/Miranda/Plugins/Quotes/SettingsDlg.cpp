@@ -750,9 +750,9 @@ CAdvProviderSettings::CAdvProviderSettings(const IQuotesProvider* pQuotesProvide
 	assert(visitor.m_pszDbLogFormat);
 	assert(visitor.m_pszDbLogCondition);
 
-	m_wLogMode = DBGetContactSettingWord(NULL,QUOTES_PROTOCOL_NAME,visitor.m_pszDbLogMode,visitor.m_pszDefLogMode);
+	m_wLogMode = DBGetContactSettingWord(NULL,QUOTES_PROTOCOL_NAME,visitor.m_pszDbLogMode,static_cast<WORD>(lmDisabled));
 	m_sFormatHistory = Quotes_DBGetStringT(NULL,QUOTES_PROTOCOL_NAME,visitor.m_pszDbHistoryFormat,visitor.m_pszDefHistoryFormat);
-	m_bIsOnlyChangedHistory = 1 == DBGetContactSettingByte(NULL,QUOTES_PROTOCOL_NAME,visitor.m_pszDbHistoryCondition,1);
+	m_bIsOnlyChangedHistory = 1 == DBGetContactSettingByte(NULL,QUOTES_PROTOCOL_NAME,visitor.m_pszDbHistoryCondition,0);
 
 	m_sLogFileName = Quotes_DBGetStringT(NULL,QUOTES_PROTOCOL_NAME,visitor.m_pszDbLogFile);
 	if(true == m_sLogFileName.empty())
@@ -767,7 +767,7 @@ CAdvProviderSettings::CAdvProviderSettings(const IQuotesProvider* pQuotesProvide
 	m_bIsOnlyChangedLogFile = (1 == DBGetContactSettingByte(NULL,QUOTES_PROTOCOL_NAME,visitor.m_pszDbLogCondition,0));
 
 	m_sPopupFormat = Quotes_DBGetStringT(NULL,QUOTES_PROTOCOL_NAME,visitor.m_pszDbPopupFormat,visitor.m_pszDefPopupFormat);
-	m_bShowPopupIfValueChanged = (1 == DBGetContactSettingByte(NULL,QUOTES_PROTOCOL_NAME,visitor.m_pszDbPopupCondition,1));
+	m_bShowPopupIfValueChanged = (1 == DBGetContactSettingByte(NULL,QUOTES_PROTOCOL_NAME,visitor.m_pszDbPopupCondition,0));
 }
 
 CAdvProviderSettings::~CAdvProviderSettings()

@@ -152,7 +152,7 @@ namespace
 			NETLIBHTTPREQUEST nlhr = {0};
 			nlhr.cbSize = sizeof(nlhr);
 			nlhr.requestType = REQUEST_GET;
-			nlhr.flags = NLHRF_DUMPASTEXT | NLHRF_HTTP11;
+			nlhr.flags = NLHRF_DUMPASTEXT|NLHRF_HTTP11|NLHRF_REDIRECT;
 			char* pURL = &*(m_aURL.begin());
 			nlhr.szUrl = pURL;
 

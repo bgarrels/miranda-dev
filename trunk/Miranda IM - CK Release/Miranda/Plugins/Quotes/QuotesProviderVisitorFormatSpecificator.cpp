@@ -50,3 +50,12 @@ const CQuotesProviderVisitorFormatSpecificator::TFormatSpecificators& CQuotesPro
 {
 	return m_aSpecificators;
 }
+
+void CQuotesProviderVisitorFormatSpecificator::Visit(const CQuotesProviderYahoo& rProvider)
+{
+	m_aSpecificators.push_back(CFormatSpecificator(_T("%s"),TranslateT("Quote Symbol")));
+	m_aSpecificators.push_back(CFormatSpecificator(_T("%n"),TranslateT("Quote Name")));
+	m_aSpecificators.push_back(CFormatSpecificator(_T("%o"),TranslateT("Open Price")));
+	m_aSpecificators.push_back(CFormatSpecificator(_T("%h"),TranslateT("Day's High")));
+	m_aSpecificators.push_back(CFormatSpecificator(_T("%g"),TranslateT("Day's Low")));
+}

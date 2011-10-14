@@ -1,22 +1,48 @@
 #include "stdafx.h"
 #include "QuotesProviderVisitorFormatSpecificator.h"
 #include "IQuotesProvider.h"
+#include "resource.h"
+#include "ModuleInfo.h"
 
 namespace
 {
-	inline void format_spec(tostream& o,const CQuotesProviderVisitorFormatSpecificator::CFormatSpecificator& spec)
+	INT_PTR CALLBACK VariableListDlgProc(HWND hWnd,UINT msg,WPARAM wp,LPARAM lp) 
 	{
-		o << spec.m_sSymbol << _T('\t') << spec.m_sDesc << _T('\n');
+		switch(msg)
+		{
+		case WM_INITDIALOG:
+			{
+				const IQuotesProvider* pProvider = reinterpret_cast<const IQuotesProvider*>(lp);
+				CQuotesProviderVisitorFormatSpecificator visitor;
+				pProvider->Accept(visitor);
+
+				tostringstream o;
+				const CQuotesProviderVisitorFormatSpecificator::TFormatSpecificators& raSpec = visitor.GetSpecificators();
+				std::for_each(raSpec.begin(),raSpec.end(),
+					[&o](const CQuotesProviderVisitorFormatSpecificator::CFormatSpecificator& spec)
+					{
+						o << spec.m_sSymbol << _T('\t') << spec.m_sDesc << _T("\r\n");
+					});
+				::SetDlgItemText(hWnd,IDC_EDIT_VARIABLE,o.str().c_str());
+			}
+			break;
+		case WM_COMMAND:
+			if((BN_CLICKED == HIWORD(wp)) && (IDOK == LOWORD(wp)))
+			{
+				::EndDialog(hWnd,IDOK);
+			}
+			break;
+		}
+
+		return FALSE;
 	}
 }
 
 void show_variable_list(HWND hwndParent,const IQuotesProvider* pProvider)
 {
-	CQuotesProviderVisitorFormatSpecificator visitor;
-	pProvider->Accept(visitor);
-
-	tostringstream o;
-	const CQuotesProviderVisitorFormatSpecificator::TFormatSpecificators& raSpec = visitor.GetSpecificators();
-	std::for_each(raSpec.begin(),raSpec.end(),boost::bind(format_spec,boost::ref(o),_1));
-	MessageBox(hwndParent,o.str().c_str(),TranslateT("Variable List"),MB_OK|MB_ICONINFORMATION);
+	::DialogBoxParam(CModuleInfo::GetModuleHandle(),
+		MAKEINTRESOURCE(IDD_DIALOG_VARIABLE_LIST),
+		hwndParent,
+		VariableListDlgProc,
+		reinterpret_cast<LPARAM>(pProvider));
 }

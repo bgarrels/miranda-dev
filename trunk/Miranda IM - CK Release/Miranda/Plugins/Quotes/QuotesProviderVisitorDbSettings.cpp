@@ -128,3 +128,30 @@ void CQuotesProviderVisitorDbSettings::Visit(const CQuotesProviderGoogleFinance&
 	m_pszDbTendencyFormat = "GoogleFinance_TendencyFormat";
 }
 
+void CQuotesProviderVisitorDbSettings::Visit(const CQuotesProviderYahoo& rProvider)
+{
+	m_pszDbRefreshRateType = "Yahoo_RefreshRateType";
+	m_pszDbRefreshRateValue = "Yahoo_RefreshRateValue";
+	m_pszDbDisplayNameFormat = "Yahoo_DspNameFrmt";
+	m_pszDefDisplayFormat = _T("%s %r");
+	m_pszXMLIniFileName = _T("Yahoo.xml");
+	m_pszDbStatusMsgFormat = "Yahoo_StatusMessageFormat";
+
+	m_pszDbLogMode = "Yahoo_LogMode";
+	m_pszDbHistoryFormat = "Yahoo_HistoryFormat";
+	m_pszDbHistoryCondition = "Yahoo_AddToHistoryOnlyIfValueIsChanged";
+	m_pszDbLogFile = "Yahoo_LogFile";
+	m_pszDbLogFormat = "Yahoo_LogFileFormat";
+	m_pszDbLogCondition = "Yahoo_AddToLogOnlyIfValueIsChanged";
+	m_pszDbPopupFormat ="Yahoo_PopupFormat";
+	m_pszDbPopupCondition = "Yahoo_ShowPopupOnlyIfValueChanged";
+
+	m_pszDbPopupColourMode = "Yahoo_PopupColourMode";
+	m_pszDbPopupBkColour = "Yahoo_PopupColourBk";
+	m_pszDbPopupTextColour = "Yahoo_PopupColourText";
+	m_pszDbPopupDelayMode = "Yahoo_PopupDelayMode";
+	m_pszDbPopupDelayTimeout = "Yahoo_PopupDelayTimeout";
+	m_pszDbPopupHistoryFlag = "Yahoo_PopupHistoryFlag";
+
+	m_pszDbTendencyFormat = "Yahoo_TendencyFormat";
+}

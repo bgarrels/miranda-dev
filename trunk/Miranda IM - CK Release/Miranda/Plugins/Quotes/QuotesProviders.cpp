@@ -6,6 +6,7 @@
 #include "QuotesProviderGoogle.h"
 #include "DBUtils.h"
 #include "QuotesProviderGoogleFinance.h"
+#include "QuotesProviderYahoo.h"
 
 #define LAST_RUN_VERSION "LastRunVersion"
 
@@ -29,6 +30,7 @@ void CQuotesProviders::CreateProviders()
 	m_apProviders.push_back(TQuotesProviderPtr(new CQuotesProviderDukasCopy));
 	m_apProviders.push_back(TQuotesProviderPtr(new CQuotesProviderGoogle));
 	m_apProviders.push_back(TQuotesProviderPtr(new CQuotesProviderGoogleFinance));
+	m_apProviders.push_back(TQuotesProviderPtr(new CQuotesProviderYahoo));
 }
 
 void CQuotesProviders::ClearProviders()

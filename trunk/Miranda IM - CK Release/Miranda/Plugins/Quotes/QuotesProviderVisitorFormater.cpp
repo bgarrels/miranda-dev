@@ -6,6 +6,7 @@
 #include "Locale.h"
 #include "IsWithinAccuracy.h"
 #include "QuotesProviderGoogleFinance.h"
+#include "QuotesProviderYahoo.h"
 
 CQuotesProviderVisitorFormater::CQuotesProviderVisitorFormater(HANDLE hContact,TCHAR chr,int nWidth)
 							   : m_hContact(hContact),
@@ -186,4 +187,24 @@ void CQuotesProviderVisitorFormater::FormatDoubleHelper(LPCSTR pszDbSet,
 	{
 		m_sResult = sInvalid;
 	}
+}
+
+void CQuotesProviderVisitorFormater::Visit(const CQuotesProviderYahoo& rProvider)
+{
+	switch(m_chr)
+	{
+	case _T('o'):
+		FormatDoubleHelper(DB_STR_YAHOO_OPEN_VALUE);
+		break;
+	case _T('h'):
+		FormatDoubleHelper(DB_STR_YAHOO_DAY_HIGH);
+		break;
+	case _T('g'):
+		FormatDoubleHelper(DB_STR_YAHOO_DAY_LOW);
+		break;
+	case _T('n'):
+		m_sResult = Quotes_DBGetStringT(m_hContact,QUOTES_MODULE_NAME,DB_STR_QUOTE_DESCRIPTION);
+		break;
+	}
+
 }
