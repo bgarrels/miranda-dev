@@ -117,6 +117,12 @@
     <ClCompile Include="QuotesProviderVisitorTendency.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QuotesProviderFinance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QuotesProviderYahoo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base64.h">
@@ -177,6 +183,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="m_Quotes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ModuleInfo.h">
@@ -248,7 +257,10 @@
     <ClInclude Include="QuotesProviderVisitorTendency.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_Quotes.h">
+    <ClInclude Include="QuotesProviderFinance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QuotesProviderYahoo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
