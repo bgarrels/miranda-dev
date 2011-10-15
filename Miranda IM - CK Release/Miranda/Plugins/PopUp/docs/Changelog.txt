@@ -1,4 +1,20 @@
-Popup Plus: 2.1.1.5
+Popup Plus: 2.1.1.6
++added support for custom langpacks
++added hotkey to open popup history
++added action copy to clipboard
+-removed old PLUGININFO support
+*some typos
+*fixed errors with ansi plugins
+*fixed destroying all of popups windows before unloading
+*added destroing functions on exit
+*background can now be changed together with font in font options
+*link to skins section in options page
+*unhook events on exit and resource optimization
+*Fullscreen detection from core
+*Skins tab moved to Skins-PopUps
+*fixes re-enabling the "reorder popups" option
+
+2.1.1.5
 + support new mtextcontrol interface (need new mtextcontrol.dll 0.8.0.1 or later)
 - support mtextcontrol by miranda service call
 + seperate x64 unicode release PopUpW.dll
