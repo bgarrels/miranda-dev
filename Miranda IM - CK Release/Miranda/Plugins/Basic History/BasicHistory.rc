@@ -47,15 +47,28 @@ END
 
 IDD_OPT_MAIN DIALOGEX 0, 0, 304, 225
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     GROUPBOX        "Settings",IDC_STATIC,4,5,298,220
     CONTROL         "Always show contact list",IDC_SHOWCONTACTS,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,23,270,10
+    COMBOBOX        IDC_DEFFILTER,172,34,122,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Default Event Filter",IDC_STATIC,12,37,145,8
+    GROUPBOX        "Custom filters",IDC_STATIC,12,56,282,86
+    LISTBOX         IDC_LIST_FILTERS,20,70,133,30, WS_TABSTOP | LBS_NOINTEGRALHEIGHT | WS_BORDER | WS_VSCROLL
+    LISTBOX         IDC_LIST_EVENTS,20,102,133,30, WS_TABSTOP | LBS_NOINTEGRALHEIGHT | WS_BORDER | WS_VSCROLL
+    EDITTEXT        IDC_FILTER_NAME,160,70,130,12,WS_TABSTOP|ES_AUTOHSCROLL
+    PUSHBUTTON      "Add filter",IDC_ADD_FILTER,160,86,63,14, WS_TABSTOP
+    PUSHBUTTON      "Delete filter",IDC_DELETE_FILTER,227,86,63,14, WS_TABSTOP
+    COMBOBOX        IDC_EVENT,160,102,130,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Add event",IDC_ADD_EVENT,160,118,63,14, WS_TABSTOP
+    PUSHBUTTON      "Delete event",IDC_DELETE_EVENT,227,118,63,14, WS_TABSTOP
 END
 
 IDD_OPT_GROUPLIST DIALOGEX 0, 0, 304, 225
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     GROUPBOX        "Settings",IDC_STATIC,4,5,298,220
@@ -80,6 +93,7 @@ END
 
 IDD_OPT_MESSAGES DIALOGEX 0, 0, 304, 225
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     GROUPBOX        "Settings",IDC_STATIC,4,5,298,220
@@ -99,6 +113,7 @@ END
 
 IDD_OPT_SEARCHING DIALOGEX 0, 0, 304, 225
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     GROUPBOX        "Settings",IDC_STATIC,4,5,298,220
@@ -131,8 +146,8 @@ IDI_SHOW                ICON                    "icons\\plus.ico"
 IDI_HIDE                ICON                    "icons\\minus.ico"
 IDI_FINDNEXT            ICON                    "icons\\FindNext.ico"
 IDI_FINDPREV            ICON                    "icons\\FindPrev.ico"
-IDI_CONFIG              ICON                    "icons\\Config.ico"
 IDI_ERASE               ICON                    "icons\\Erase.ico"
+IDI_STATUS              ICON                    "icons\\Status change.ico"
 #endif    // Neutral resources
 /////////////////////////////////////////////////////////////////////////////
 

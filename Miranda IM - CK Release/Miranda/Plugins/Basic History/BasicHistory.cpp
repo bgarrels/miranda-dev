@@ -31,7 +31,9 @@ HCURSOR     hCurSplitNS, hCurSplitWE;
 extern HINSTANCE hInst;
 
 HANDLE hModulesLoaded, hOptionsInit, hPrebuildContactMenu, hServiceShowContactHistory, hPreShutdownHistoryModule, hHistoryContactDelete, hFontsChanged,hToolBarLoaded;
-HANDLE hInIcon, hOutIcon, hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon, hConfigIcon, hDeleteIcon;
+HANDLE *hEventIcons = NULL;
+int iconsNum;
+HANDLE hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon, hDeleteIcon;
 HANDLE hToolbarButton;
 HGENMENU hContactMenu;
 bool g_SmileyAddAvail = false;
@@ -56,6 +58,7 @@ PLUGININFOEX pluginInfo={
 MM_INTERFACE mmi = {0};
 TIME_API tmi = {0};
 int hLangpack = 0;
+UTF8_INTERFACE utfi = {0};
 
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {
@@ -141,15 +144,22 @@ void InitIcolib()
 
 	GetModuleFileName(hInst, stzFile, MAX_PATH);
 	
+	iconsNum = 3;
+	hEventIcons = new HANDLE[iconsNum];
 	sid.pszName = "BasicHistory_in";
 	sid.ptszDescription = LPGENT("Incoming message");
 	sid.iDefaultIndex = -IDI_INM;
-	hInIcon = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
+	hEventIcons[0] = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
 
 	sid.pszName = "BasicHistory_out";
 	sid.ptszDescription = LPGENT("Outgoing message");
 	sid.iDefaultIndex = -IDI_OUTM;
-	hOutIcon = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
+	hEventIcons[1] = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
+
+	sid.pszName = "BasicHistory_status";
+	sid.ptszDescription = LPGENT("Statuschange");
+	sid.iDefaultIndex = -IDI_STATUS;
+	hEventIcons[2] = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
 
 	sid.pszName = "BasicHistory_show";
 	sid.ptszDescription = LPGENT("Show Contacts");
@@ -170,11 +180,6 @@ void InitIcolib()
 	sid.ptszDescription = LPGENT("Find Previous");
 	sid.iDefaultIndex = -IDI_FINDPREV;
 	hFindPrevIcon = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
-
-	sid.pszName = "BasicHistory_options";
-	sid.ptszDescription = LPGENT("Options");
-	sid.iDefaultIndex = -IDI_CONFIG;
-	hConfigIcon = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
 
 	sid.pszName = "BasicHistory_delete";
 	sid.ptszDescription = LPGENT("Delete");
@@ -247,6 +252,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	mir_getMMI(&mmi);
 	mir_getTMI(&tmi);
 	mir_getLP(&pluginInfo);
+	mir_getUTFI(&utfi);
 	hCurSplitNS = LoadCursor(NULL, IDC_SIZENS);
 	hCurSplitWE = LoadCursor(NULL, IDC_SIZEWE);
 	hServiceShowContactHistory = CreateServiceFunction(MS_HISTORY_SHOWCONTACTHISTORY, ShowContactHistory);
@@ -276,5 +282,11 @@ extern "C" int __declspec(dllexport) Unload(void)
 		delete Options::instance;
 		Options::instance = NULL;
 	}
+
+	if(hEventIcons != NULL)
+	{
+		delete [] hEventIcons;
+	}
+
 	return 0;
 }

@@ -21,10 +21,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "resource.h"
 
 extern HINSTANCE hInst;
+extern bool g_SmileyAddAvail;
 
 #define MODULE				"BasicHistory"
 
 Options *Options::instance;
+
+struct EventNamesType
+{
+	int id;
+	TCHAR* name;
+} EventNames[] = 
+{
+	EVENTTYPE_MESSAGE, LPGENT("Message"),
+	EVENTTYPE_FILE, LPGENT("File transfer"),
+	EVENTTYPE_URL, LPGENT("Link"),
+	EVENTTYPE_STATUSCHANGE, LPGENT("Status change"),
+	EVENTTYPE_AUTHREQUEST, LPGENT("Authorization request"),
+	EVENTTYPE_ADDED, LPGENT("You were added"),
+	EVENTTYPE_CONTACTS, LPGENT("Contacts recieved"),
+	EVENTTYPE_SMTPSIMPLE, LPGENT("SMTP Simple Email"),
+	ICQEVENTTYPE_SMS, LPGENT("SMS message")
+};
 
 Options::Options()
 {
@@ -50,6 +68,7 @@ Options::Options()
 	searchOnlyIn = false;
 	searchOnlyOut = false;
 	searchOnlyGroup = false;
+	defFilter = 0;
 }
 
 Options::~Options()
@@ -220,6 +239,70 @@ void Options::Load()
 	searchOnlyIn = DBGetContactSettingByte(0, MODULE, "searchOnlyIn", 0) ? true : false;
 	searchOnlyOut = DBGetContactSettingByte(0, MODULE, "searchOnlyOut", 0) ? true : false;
 	searchOnlyGroup = DBGetContactSettingByte(0, MODULE, "searchOnlyGroup", 0) ? true : false;
+
+	defFilter = DBGetContactSettingByte(0, MODULE, "defFilter", defFilter);
+	int filtersCount = DBGetContactSettingDword(0, MODULE, "customFiltersCount", 0);
+	for(int i = 0; i < filtersCount; ++i)
+	{
+		char buf[256];
+		FilterOptions fo;
+		sprintf_s(buf, "filterName_%d", i);
+		DBVARIANT nameV;
+		if(!DBGetContactSettingWString(0, MODULE, buf, &nameV))
+		{
+			fo.name = nameV.pwszVal;
+			DBFreeVariant(&nameV);
+		}
+		else break;
+		sprintf_s(buf, "filterInOut_%d", i);
+		int inOut = DBGetContactSettingByte(0, MODULE, buf, 0);
+		if(inOut == 1)
+			fo.onlyIncomming = true;
+		else if(inOut == 2)
+			fo.onlyOutgoing = true;
+		sprintf_s(buf, "filterEvents_%d", i);
+		DBVARIANT eventsV;
+		if(!DBGetContactSettingString(0, MODULE, buf, &eventsV))
+		{
+			int k = 0;
+			char* id = eventsV.pszVal;
+			while(eventsV.pszVal[k])
+			{
+				if(eventsV.pszVal[k] == ';')
+				{
+					eventsV.pszVal[k] = 0;
+					fo.events.push_back(strtol(id, NULL, 16));
+					id = eventsV.pszVal + k + 1;
+				}
+
+				++k;
+			}
+			DBFreeVariant(&eventsV);
+		}
+		else break;
+		
+		customFilters.insert(customFilters.end(), fo);
+	}
+
+	if(defFilter > 1)
+	{
+		defFilter = 0;
+		
+		DBVARIANT defFilterStrV;
+		if(!DBGetContactSettingWString(0, MODULE, "defFilterStr", &defFilterStrV))
+		{
+			std::wstring filterName = defFilterStrV.pwszVal;
+			for(int i = 0; i < customFilters.size(); ++i)
+			{
+				if(filterName == customFilters[i].name)
+				{
+					defFilter = i + 2;
+					break;
+				}
+			}
+			DBFreeVariant(&defFilterStrV);
+		}
+	}
 }
 
 COLORREF Options::GetFont(Fonts fontId, PLOGFONT font)
@@ -267,11 +350,123 @@ void Options::Save()
 	DBWriteContactSettingByte(0, MODULE, "searchOnlyIn", searchOnlyIn ? 1 : 0);
 	DBWriteContactSettingByte(0, MODULE, "searchOnlyOut", searchOnlyOut ? 1 : 0);
 	DBWriteContactSettingByte(0, MODULE, "searchOnlyGroup", searchOnlyGroup ? 1 : 0);
+	if(defFilter < 0 || defFilter - 2 >= customFilters.size()) defFilter = 0;
+	DBWriteContactSettingByte(0, MODULE, "defFilter", defFilter < 2 ? defFilter : 2);
+	if(defFilter >= 2)
+		DBWriteContactSettingWString(0, MODULE, "defFilterStr", customFilters[defFilter - 2].name.c_str());
+	DBWriteContactSettingDword(0, MODULE, "customFiltersCount", customFilters.size());
+	for(int i = 0 ; i < customFilters.size(); ++i)
+	{
+		char buf[256];
+		sprintf_s(buf, "filterName_%d", i);
+		DBWriteContactSettingWString(0, MODULE, buf, customFilters[i].name.c_str());
+		sprintf_s(buf, "filterInOut_%d", i);
+		DBWriteContactSettingByte(0, MODULE, buf, customFilters[i].onlyIncomming ? 1 : (customFilters[i].onlyOutgoing ? 2 : 0));
+		std::string events;
+		for(std::vector<int>::iterator it = customFilters[i].events.begin(); it != customFilters[i].events.end(); ++it)
+		{
+			_itoa_s(*it, buf, 16);
+			events += buf;
+			events += ";";
+		}
+
+		sprintf_s(buf, "filterEvents_%d", i);
+		DBWriteContactSettingString(0, MODULE, buf, events.c_str());
+	}
 }
 
 void OptionsGroupChanged();
 void OptionsMessageChanged();
 void OptionsSearchingChanged();
+
+void SetEventCB(HWND hwndCB, int eventId)
+{
+	int cpCount = SIZEOF(EventNames);
+	int selCpIdx = -1;
+	for(int i = 0; i < cpCount; ++i)
+	{
+		if(EventNames[i].id == eventId)
+			selCpIdx = i;
+	}
+
+	if(selCpIdx == -1)
+	{
+		TCHAR buf[24];
+		_stprintf_s(buf, 24, _T("%d"), eventId);
+		ComboBox_SetText(hwndCB, buf);	
+	}
+	else
+	{
+		ComboBox_SetCurSel(hwndCB, selCpIdx);	
+	}
+}
+
+int GetEventCB(HWND hwndCB, bool errorReport, int &eventId)
+{
+	int selCpIdx = ComboBox_GetCurSel(hwndCB);
+	if(selCpIdx < 0)
+	{
+		TCHAR text[24];
+		ComboBox_GetText(hwndCB, text, 24);
+		TCHAR * stopOn = NULL;
+		long cp = _tcstol(text, &stopOn, 10);
+		if(errorReport && (stopOn == text || *stopOn != '\0' || cp < 0))
+		{
+			MessageBox(GetParent(hwndCB), TranslateT("Invalid event number"), TranslateT("Error"), MB_OK | MB_ICONERROR);
+			SetFocus(hwndCB);
+			return -1;
+		}
+
+		eventId = cp;
+	}
+	else if(selCpIdx > 1)
+		eventId = EventNames[selCpIdx - 2].id;
+	else
+		return selCpIdx + 1;
+	
+	return 0;
+}
+
+void ClearLB(HWND hwndLB)
+{
+	while(ListBox_GetCount(hwndLB) > 0)
+		ListBox_DeleteString(hwndLB, 0);
+}
+
+void ReloadEventLB(HWND hwndLB, const FilterOptions &sel)
+{
+	while(ListBox_GetCount(hwndLB) > 0)
+		ListBox_DeleteString(hwndLB, 0);
+	if(sel.onlyIncomming && !sel.onlyOutgoing)
+	{
+		ListBox_AddString(hwndLB, TranslateT("Incoming events"));
+	}
+	else if(sel.onlyOutgoing && !sel.onlyIncomming)
+	{
+		ListBox_AddString(hwndLB, TranslateT("Outgoing events"));
+	}
+
+	for(std::vector<int>::const_iterator it = sel.events.begin(); it != sel.events.end(); ++it)
+	{
+		int cpCount = SIZEOF(EventNames);
+		int selCpIdx = -1;
+		for(int i = 0; i < cpCount; ++i)
+		{
+			if(EventNames[i].id == *it)
+				selCpIdx = i;
+		}
+		if(selCpIdx == -1)
+		{
+			TCHAR buf[24];
+			_stprintf_s(buf, 24, _T("%d"), *it);
+			ListBox_AddString(hwndLB, buf);	
+		}
+		else
+		{
+			ListBox_AddString(hwndLB, TranslateTS(EventNames[selCpIdx].name));	
+		}
+	}
+}
 
 INT_PTR CALLBACK Options::DlgProcOptsMain(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -281,11 +476,210 @@ INT_PTR CALLBACK Options::DlgProcOptsMain(HWND hwndDlg, UINT msg, WPARAM wParam,
 		{
 			TranslateDialogDefault(hwndDlg);
 			CheckDlgButton(hwndDlg, IDC_SHOWCONTACTS, instance->showContacts ? 1 : 0);
+			HWND events = GetDlgItem(hwndDlg, IDC_EVENT);
+			HWND defFilter = GetDlgItem(hwndDlg, IDC_DEFFILTER);
+				HWND listFilter = GetDlgItem(hwndDlg, IDC_LIST_FILTERS);
+			ComboBox_AddString(events, TranslateT("Incoming events"));
+			ComboBox_AddString(events, TranslateT("Outgoing events"));
+			for(int i = 0 ; i < SIZEOF(EventNames); ++i)
+			{
+				ComboBox_AddString(events, TranslateTS(EventNames[i].name));
+			}
+
+			ComboBox_AddString(defFilter, TranslateT("Default history events"));
+			ComboBox_AddString(defFilter, TranslateT("All events"));
+			Edit_LimitText(GetDlgItem(hwndDlg, IDC_FILTER_NAME), 20);
+			ComboBox_LimitText(events, 20);
+
+			instance->customFiltersTemp.clear();
+			instance->customFiltersTemp.insert(instance->customFiltersTemp.begin(), instance->customFilters.begin(), instance->customFilters.end());
+			for(std::vector<FilterOptions>::iterator it = instance->customFiltersTemp.begin(); it != instance->customFiltersTemp.end(); ++it)
+			{
+				ComboBox_AddString(defFilter, it->name.c_str());
+				ListBox_AddString(listFilter, it->name.c_str());
+			}
+			ComboBox_SetCurSel(defFilter, instance->defFilter);
+			EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_FILTER), FALSE);
+			EnableWindow(GetDlgItem(hwndDlg, IDC_EVENT), FALSE);
+			EnableWindow(GetDlgItem(hwndDlg, IDC_ADD_EVENT), FALSE);
+			EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_EVENT), FALSE);
 			return TRUE;
 		}
 		case WM_COMMAND:
 		{
 			if (HIWORD(wParam) == BN_CLICKED)
+			{
+				HWND listFilter = GetDlgItem(hwndDlg, IDC_LIST_FILTERS);
+				HWND listEvents = GetDlgItem(hwndDlg, IDC_LIST_EVENTS);
+				HWND nameFilter = GetDlgItem(hwndDlg, IDC_FILTER_NAME);
+				HWND defFilter = GetDlgItem(hwndDlg, IDC_DEFFILTER);
+				HWND eventCB = GetDlgItem(hwndDlg, IDC_EVENT);
+				switch(LOWORD(wParam))
+				{
+				case IDC_ADD_FILTER:
+					{
+						TCHAR name[24];
+						Edit_GetText(nameFilter, name, 24);
+						if(name[0] == 0)
+						{
+							MessageBox(hwndDlg, TranslateT("Enter filter name"), TranslateT("Error"), MB_ICONERROR);
+							return TRUE;
+						}
+						
+						FilterOptions fo(name);
+						for(std::vector<FilterOptions>::iterator it = instance->customFiltersTemp.begin(); it != instance->customFiltersTemp.end(); ++it)
+						{
+							if(it->name == fo.name)
+							{
+								MessageBox(hwndDlg, TranslateT("Filter name exists"), TranslateT("Error"), MB_ICONERROR);
+								return TRUE;
+							}
+						}
+
+						instance->customFiltersTemp.insert(instance->customFiltersTemp.end(), fo);
+						int i = ListBox_AddString(listFilter, name);
+						ListBox_SetCurSel(listFilter, i);
+						ComboBox_AddString(defFilter, name);
+						name[0] = 0;
+						Edit_SetText(nameFilter, name);
+						ReloadEventLB(listEvents, instance->customFiltersTemp[i]);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_FILTER), TRUE);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_EVENT), TRUE);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_ADD_EVENT), TRUE);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_EVENT), FALSE);
+					}
+					break;
+				case IDC_DELETE_FILTER:
+					{
+						int sel = ListBox_GetCurSel(listFilter);
+						if(sel < 0)
+							return TRUE;
+						for(int i = sel; i < instance->customFiltersTemp.size() - 1; ++i)
+						{
+							instance->customFiltersTemp[i] = instance->customFiltersTemp[i + 1];
+						}
+
+						instance->customFiltersTemp.resize(instance->customFiltersTemp.size() - 1);
+						ListBox_DeleteString(listFilter, sel);
+						ComboBox_DeleteString(defFilter, sel + 2);
+						if(ComboBox_GetCurSel(defFilter) < 0)
+						{
+							ComboBox_SetCurSel(defFilter, 0);
+						}
+						
+						ClearLB(listEvents);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_FILTER), FALSE);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_EVENT), FALSE);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_ADD_EVENT), FALSE);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_EVENT), FALSE);
+					}
+					break;
+				case IDC_ADD_EVENT:
+					{
+						int sel = ListBox_GetCurSel(listFilter);
+						if(sel < 0)
+							return TRUE;
+						int eventId;
+						int selCB = GetEventCB(eventCB, true, eventId);
+						if(selCB < 0)
+							return TRUE;
+						if(selCB == 1)
+						{
+							if(instance->customFiltersTemp[sel].onlyIncomming)
+							{
+								MessageBox(hwndDlg, TranslateT("Event already exists"), TranslateT("Error"), MB_ICONERROR);
+								return TRUE;
+							}
+
+							if(instance->customFiltersTemp[sel].onlyOutgoing)
+								instance->customFiltersTemp[sel].onlyOutgoing = false;
+							else
+								instance->customFiltersTemp[sel].onlyIncomming = true;
+						}
+						else if(selCB == 2)
+						{
+							if(instance->customFiltersTemp[sel].onlyOutgoing)
+							{
+								MessageBox(hwndDlg, TranslateT("Event already exists"), TranslateT("Error"), MB_ICONERROR);
+								return TRUE;
+							}
+							
+							if(instance->customFiltersTemp[sel].onlyIncomming)
+								instance->customFiltersTemp[sel].onlyIncomming = false;
+							else
+								instance->customFiltersTemp[sel].onlyOutgoing = true;
+						}
+						else
+						{
+							if(std::find(instance->customFiltersTemp[sel].events.begin(), instance->customFiltersTemp[sel].events.end(), eventId) != instance->customFiltersTemp[sel].events.end())
+							{
+								MessageBox(hwndDlg, TranslateT("Event already exists"), TranslateT("Error"), MB_ICONERROR);
+								return TRUE;
+							}
+
+							instance->customFiltersTemp[sel].events.push_back(eventId);
+						}
+
+						ReloadEventLB(listEvents, instance->customFiltersTemp[sel]);
+						ComboBox_SetCurSel(eventCB, -1);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_EVENT), FALSE);
+					}
+					break;
+				case IDC_DELETE_EVENT:
+					{
+						int sel = ListBox_GetCurSel(listFilter);
+						if(sel < 0)
+							return TRUE;
+						int eventSel = ListBox_GetCurSel(listEvents);
+						if(eventSel < 0)
+							return TRUE;
+						int stId = 0;
+						if(instance->customFiltersTemp[sel].onlyIncomming || instance->customFiltersTemp[sel].onlyOutgoing)
+							++stId;
+						if(eventSel >= stId)
+						{
+							--eventSel;
+							for(int i = eventSel; i < instance->customFiltersTemp[sel].events.size() - 1; ++i)
+							{
+								instance->customFiltersTemp[sel].events[i] = instance->customFiltersTemp[sel].events[i + 1];
+							}
+
+							instance->customFiltersTemp[sel].events.resize(instance->customFiltersTemp[sel].events.size() - 1);
+						}
+						else
+						{
+							instance->customFiltersTemp[sel].onlyIncomming = false;
+							instance->customFiltersTemp[sel].onlyOutgoing = false;
+						}
+
+						ReloadEventLB(listEvents, instance->customFiltersTemp[sel]);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_EVENT), FALSE);
+					}
+					break;
+				}
+			}
+			else if(HIWORD(wParam) == CBN_SELCHANGE && LOWORD(wParam) == IDC_LIST_FILTERS)
+			{
+				HWND listFilter = GetDlgItem(hwndDlg, IDC_LIST_FILTERS);
+				HWND listEvents = GetDlgItem(hwndDlg, IDC_LIST_EVENTS);
+				int sel = ListBox_GetCurSel(listFilter);
+				if(sel < 0)
+					ClearLB(listEvents);
+				else
+					ReloadEventLB(listEvents, instance->customFiltersTemp[sel]);
+				EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_FILTER), sel >= 0);
+				EnableWindow(GetDlgItem(hwndDlg, IDC_EVENT), sel >= 0);
+				EnableWindow(GetDlgItem(hwndDlg, IDC_ADD_EVENT), sel >= 0);
+				EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_EVENT), FALSE);
+			}
+			else if(HIWORD(wParam) == CBN_SELCHANGE && LOWORD(wParam) == IDC_LIST_EVENTS)
+			{
+				HWND listEvents = GetDlgItem(hwndDlg, IDC_LIST_EVENTS);
+				int sel = ListBox_GetCurSel(listEvents);
+				EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_EVENT), sel >= 0);
+			}
+
+			if (HIWORD(wParam) == BN_CLICKED || (HIWORD(wParam) == CBN_SELCHANGE && LOWORD(wParam) == IDC_DEFFILTER))
 				SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
 			return TRUE;
 		}
@@ -294,8 +688,11 @@ INT_PTR CALLBACK Options::DlgProcOptsMain(HWND hwndDlg, UINT msg, WPARAM wParam,
 			if(((LPNMHDR)lParam)->code == PSN_APPLY) 
 			{
 				instance->showContacts = IsDlgButtonChecked(hwndDlg, IDC_SHOWCONTACTS) ? true : false;
-				
+				instance->defFilter = ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_DEFFILTER));
+				instance->customFilters.clear();
+				instance->customFilters.insert(instance->customFilters.begin(), instance->customFiltersTemp.begin(), instance->customFiltersTemp.end());
 				Options::instance->Save();
+				OptionsGroupChanged();
 			}
 			return TRUE;
 		}
@@ -399,6 +796,8 @@ INT_PTR CALLBACK Options::DlgProcOptsMessages(HWND hwndDlg, UINT msg, WPARAM wPa
 			CheckDlgButton(hwndDlg, IDC_SHOWNAME, instance->messagesShowName ? 1 : 0);
 			CheckDlgButton(hwndDlg, IDC_SHOWEVENTS, instance->messagesShowEvents ? 1 : 0);
 			CheckDlgButton(hwndDlg, IDC_SHOWSMILEYS, instance->messagesUseSmileys ? 1 : 0);
+			if(!g_SmileyAddAvail)
+				EnableWindow(GetDlgItem(hwndDlg, IDC_SHOWSMILEYS), FALSE);
 			return TRUE;
 		}
 		case WM_COMMAND:

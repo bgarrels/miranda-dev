@@ -6,6 +6,8 @@
 [History]
 [Search]
 [History for %s]
+[Authorisation request by %s (%s%d): %s]
+[Server]
 
 ;Error messages
 ;----------------
@@ -15,6 +17,11 @@
 [This operation will PERMANENTLY REMOVE all history for this contact.\nAre you sure you want to do this?]
 [Number of history items to delete: %d.\nAre you sure you want to do this?]
 [You have reached the end of the group.]
+[Error]
+[Invalid event number]
+[Enter filter name]
+[Filter name exists]
+[Event already exists]
 
 ;Options and Menus
 ;-------------------
@@ -84,3 +91,23 @@
 [Switch Only Selected Group]
 [Open History]
 [Reply &Quoted]
+[Statuschange]
+[Default history events]
+[All events]
+[Message]
+[File transfer]
+[Link]
+[Status change]
+[Authorization request]
+[You were added]
+[Contacts recieved]
+[SMTP Simple Email]
+[SMS message]
+[Incoming events]
+[Outgoing events]
+[Default Event Filter]
+[Custom filters]
+[Add filter]
+[Delete filter]
+[Add event]
+[Delete event]

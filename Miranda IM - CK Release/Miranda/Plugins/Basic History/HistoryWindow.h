@@ -35,6 +35,7 @@ private:
 	void ReplaceIcons(HWND hwndDlg, int selStart, BOOL isSent);
 	void AddGroup(DBEVENTINFO *dbei);
 	void InitNames();
+	void InitFilters();
 	void EnableWindows(BOOL enable);
 	void ReloadContacts();
 	bool DoHotkey(UINT msg, LPARAM lParam, WPARAM wParam, int window);
@@ -47,6 +48,8 @@ private:
 	void ContactChanged(bool sync = false);
 	void GroupImagesChanged();
 	void FormatQuote(std::wstring& quote, const MessageData& md, const std::wstring& msg);
+	bool GetEventIcon(bool isMe, int eventType, int &id);
+	bool CanShowHistory(DBEVENTINFO* dbei);
 
 	static std::map<HANDLE, HistoryWindow*> windows;
 	static std::vector<HistoryWindow*> freeWindows;
@@ -58,7 +61,9 @@ private:
 	LONG splitterOrgY;
 	LONG splitterX;
 	LONG splitterOrgX;
-	HICON inIco, outIco, plusIco, minusIco, findNextIco, findPrevIco, configIco, deleteIco;
+	HICON *eventIcoms;
+	int allIconNumber;
+	HICON plusIco, minusIco, findNextIco, findPrevIco, configIco, deleteIco;
 	WNDPROC OldSplitterProc;
 	bool isContactList;
 	LONG listOryginalPos;
@@ -66,6 +71,11 @@ private:
 	Searcher searcher;
 	bool isGroupImages;
 	HIMAGELIST himlSmall, himlNone;
+	int defFilter;
+	std::wstring filterName;
+	std::map<int, bool> filterMap;
+	bool onlyInFilter;
+	bool onlyOutFilter;
 public:
 	~HistoryWindow();
 	static void Deinit();
