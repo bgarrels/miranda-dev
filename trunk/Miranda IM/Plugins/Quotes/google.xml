@@ -80,6 +80,12 @@
 	<quote>
 		<id>RUB</id><symbol>RUB</symbol><description>Russian Ruble (RUB)</description>
 	</quote>
-	<quote><id>SAR</id><symbol>SAR</symbol><description>Saudi Riyal (SAR)</description></quote><quote><id>SEK</id><symbol>SEK</symbol><description>Swedish Krona (SEK)</description></quote><quote><id>SGD</id><symbol>SGD</symbol><description>Singapore Dollar (SGD)</description></quote><quote><id>SIT</id><symbol>SIT</symbol><description>Slovenian Tolar (SIT)</description></quote><quote><id>SKK</id><symbol>SKK</symbol><description>Slovak Koruna (SKK)</description></quote><quote><id>THB</id><symbol>THB</symbol><description>Thai Baht (THB)</description></quote><quote><id>TRY</id><symbol>TRY</symbol><description>New Turkish Lira (TRY)</description></quote><quote><id>TTD</id><symbol>TTD</symbol><description>Trinidad and Tobago Dollar (TTD)</description></quote><quote><id>TWD</id><symbol>TWD</symbol><description>New Taiwan Dollar (TWD)</description></quote><quote><id>UAH</id><symbol>UAH</symbol><description>Ukrainian Hryvnia (UAH)</description></quote><quote><id>USD</id><symbol>USD</symbol><description>United States Dollar (USD)</description></quote><quote><id>VEB</id><symbol>VEB</symbol><description>Venezuelan Bolívar (VEB)</description></quote><quote><id>ZAR</id><symbol>ZAR</symbol><description>South African Rand (ZAR)</description></quote>
+	<quote>
+		<id>SAR</id><symbol>SAR</symbol><description>Saudi Riyal (SAR)</description>
+	</quote>
+	<quote><id>SEK</id><symbol>SEK</symbol><description>Swedish Krona (SEK)</description></quote><quote><id>SGD</id><symbol>SGD</symbol><description>Singapore Dollar (SGD)</description></quote><quote><id>SIT</id><symbol>SIT</symbol><description>Slovenian Tolar (SIT)</description></quote><quote><id>SKK</id><symbol>SKK</symbol><description>Slovak Koruna (SKK)</description></quote><quote><id>THB</id><symbol>THB</symbol><description>Thai Baht (THB)</description></quote><quote><id>TRY</id><symbol>TRY</symbol><description>New Turkish Lira (TRY)</description></quote><quote><id>TTD</id><symbol>TTD</symbol><description>Trinidad and Tobago Dollar (TTD)</description></quote><quote><id>TWD</id><symbol>TWD</symbol><description>New Taiwan Dollar (TWD)</description></quote><quote><id>UAH</id><symbol>UAH</symbol><description>Ukrainian Hryvnia (UAH)</description></quote><quote><id>USD</id><symbol>USD</symbol><description>United States Dollar (USD)</description></quote><quote><id>VEB</id><symbol>VEB</symbol><description>Venezuelan Bolívar (VEB)</description></quote><quote><id>ZAR</id><symbol>ZAR</symbol><description>South African Rand (ZAR)</description></quote>
+	<quote>
+		<id>VND</id><symbol>VND</symbol><description>Vietnamese Dong (VND)</description>
+	</quote>
 </section>
 </Provider>
