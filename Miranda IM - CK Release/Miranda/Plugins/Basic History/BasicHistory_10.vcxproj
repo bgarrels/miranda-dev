@@ -81,13 +81,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)/Plugins\</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)/Obj/$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)64/Plugins\</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)64/Obj/$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <ClCompile>
