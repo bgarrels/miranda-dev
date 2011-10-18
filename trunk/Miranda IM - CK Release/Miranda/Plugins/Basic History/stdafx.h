@@ -47,6 +47,8 @@
 #include <m_fontservice.h>
 #include <m_hotkeys.h>
 #include <m_message.h>
+#include <m_protosvc.h>
+#include <m_icq.h>
 
 #include <win2k.h>
 
@@ -64,3 +66,6 @@
 #define HISTORY_HK_ONLYOUT 107
 #define HISTORY_HK_DELETE 108
 #define HISTORY_HK_ONLYGROUP 109
+
+#define EVENTTYPE_STATUSCHANGE          25368
+#define EVENTTYPE_SMTPSIMPLE            2350

@@ -19,6 +19,15 @@ Microsoft Visual C++ 2010 Redistributable Package
 Changelog
 =========
 
+--- 1.0.0.4 ---
++ added filters
++ added System history
++ added more event icons
++ added "Reply Quoted" in context menu
+* fixed "New messages on top" option in group list
+* history window can be maximized
++ added toolbar support
+
 --- 1.0.0.3 ---
 * fixed clicking URLs
 + added deleting history

@@ -33,14 +33,23 @@
 #define IDC_ONLYIN                      1028
 #define IDC_ONLYOUT                     1029
 #define IDC_ONLYGROUP                   1030
+#define IDC_DEFFILTER                   1031
+#define IDC_LIST_FILTERS                1032
+#define IDC_LIST_EVENTS                 1033
+#define IDC_ADD_FILTER                  1034
+#define IDC_DELETE_FILTER               1035
+#define IDC_FILTER_NAME                 1036
+#define IDC_EVENT                       1037
+#define IDC_ADD_EVENT                   1038
+#define IDC_DELETE_EVENT                1039
 #define IDI_INM                         20000
 #define IDI_OUTM                        20001
 #define IDI_SHOW                        20002
 #define IDI_HIDE                        20003
 #define IDI_FINDNEXT                    20004
 #define IDI_FINDPREV                    20005
-#define IDI_CONFIG                      20006
 #define IDI_ERASE                       20007
+#define IDI_STATUS                      20008
 #define IDM_FIND                        40001
 #define IDM_CONFIG                      40002
 #define IDM_FINDNEXT                    40003
@@ -65,6 +74,8 @@
 #define IDM_COPYLINK                    40022
 #define IDM_ONLYGROUP                   40023
 #define IDM_QUOTE                       40024
+#define IDM_FILTERDEF                   40025
+#define IDM_FILTERALL                   40026
 
 // Next default values for new objects
 // 

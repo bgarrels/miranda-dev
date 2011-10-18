@@ -15,6 +15,14 @@ Nieprawid³owa Wiadomoœæ
 Iloœæ wpisów historii do usuniêcia: %d\nCzy na pewno chcesz to zrobiæ?
 [You have reached the end of the group.]
 Doszed³eœ na koniec grupy.
+[Invalid event number]
+Nieprawid³owy numer zdarzenia
+[Enter filter name]
+WprowadŸ nazwê filtra
+[Filter name exists]
+Nazwa filtra istnieje
+[Event already exists]
+Zdarzenie ju¿ istnieje
 
 ;Options and Menus
 ;-------------------
@@ -70,3 +78,19 @@ Tylko Zaznaczona Grupa
 Lista grup
 [Switch Only Selected Group]
 Prze³¹cz Tylko Zaznaczona Grupa
+[Default history events]
+Domyœlne zdarzenia historii
+[You were added]
+Zosta³eœ dodany
+[Contacts recieved]
+Pobrane kontakty
+[Custom filters]
+Filtry u¿ytkownika
+[Add filter]
+Dodaj filtr
+[Delete filter]
+Usuñ filtr
+[Add event]
+Dodaj zdarzenie
+[Delete event]
+Usuñ zdarzenie

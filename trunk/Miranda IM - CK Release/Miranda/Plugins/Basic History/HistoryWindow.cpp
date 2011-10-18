@@ -25,7 +25,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 extern HINSTANCE hInst;
 extern HCURSOR     hCurSplitNS, hCurSplitWE;
-extern HANDLE hInIcon, hOutIcon, hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon, hConfigIcon, hDeleteIcon;
+extern HANDLE *hEventIcons;
+extern int iconsNum;
+extern HANDLE hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon, hDeleteIcon;
 extern bool g_SmileyAddAvail;
 #define DM_HREBUILD  (WM_USER+11)
 #define DM_SPLITTERMOVED     (WM_USER+15)
@@ -40,8 +42,6 @@ HistoryWindow::HistoryWindow(HANDLE _hContact)
 	splitterOrgY(0),
 	splitterX(0),
 	splitterOrgX(0),
-	inIco(NULL),
-	outIco(NULL),
 	plusIco(NULL),
 	minusIco(NULL),
 	findNextIco(NULL),
@@ -51,7 +51,9 @@ HistoryWindow::HistoryWindow(HANDLE _hContact)
 	isContactList(false),
 	isLoading(false),
 	searcher(*this), 
-	isGroupImages(false)
+	isGroupImages(false),
+	allIconNumber(0), 
+	eventIcoms(NULL)
 {
 	selected = -1;
 	searcher.SetMatchCase(Options::instance->searchMatchCase);
@@ -67,14 +69,19 @@ HistoryWindow::HistoryWindow(HANDLE _hContact)
 HistoryWindow::~HistoryWindow()
 {
 	eventList.clear();
-	if(inIco != NULL)
+	if(eventIcoms != NULL)
 	{
-		CallService(MS_SKIN2_RELEASEICON, (LPARAM)inIco, 0);
+		for(int i = 0; i < iconsNum; ++i)
+		{
+			if(eventIcoms[i] != NULL)
+			{
+				CallService(MS_SKIN2_RELEASEICON, (LPARAM)eventIcoms[i], 0);
+			}
+		}
+
+		delete[] eventIcoms;
 	}
-	if(outIco != NULL)
-	{
-		CallService(MS_SKIN2_RELEASEICON, (LPARAM)outIco, 0);
-	}
+
 	if(plusIco != NULL)
 	{
 		CallService(MS_SKIN2_RELEASEICON, (LPARAM)plusIco, 0);
@@ -90,10 +97,6 @@ HistoryWindow::~HistoryWindow()
 	if(findPrevIco != NULL)
 	{
 		CallService(MS_SKIN2_RELEASEICON, (LPARAM)findPrevIco, 0);
-	}
-	if(configIco != NULL)
-	{
-		CallService(MS_SKIN2_RELEASEICON, (LPARAM)configIco, 0);
 	}
 	if(deleteIco != NULL)
 	{
@@ -1060,15 +1063,29 @@ void HistoryWindow::Initialise()
 	SendMessage(editWindow,EM_SETEVENTMASK,0,ENM_LINK | ENM_SELCHANGE | ENM_KEYEVENTS | ENM_MOUSEEVENTS);
 	SendMessage(editWindow,EM_SETEDITSTYLE,SES_EXTENDBACKCOLOR,SES_EXTENDBACKCOLOR);
 			
-	himlSmall = ImageList_Create(16, 16, ILC_COLORDDB | ILC_MASK, 2, 2);
-	himlNone = ImageList_Create(16, 16, ILC_COLORDDB | ILC_MASK, 2, 2);
+	himlSmall = ImageList_Create(16, 16, ILC_COLOR32 | ILC_MASK, 2, 2);
+	himlNone = ImageList_Create(16, 16, ILC_COLOR32 | ILC_MASK, 2, 2);
 	ImageList_SetIconSize(himlNone, 0, 16);
 	if(himlSmall)
 	{
-		inIco = (HICON)CallService(MS_SKIN2_GETICONBYHANDLE, 0, (LPARAM)hInIcon);
-		ImageList_AddIcon(himlSmall, inIco);
-		outIco = (HICON)CallService(MS_SKIN2_GETICONBYHANDLE, 0, (LPARAM)hOutIcon);
-		ImageList_AddIcon(himlSmall, outIco);
+		allIconNumber = iconsNum + 3;
+		eventIcoms = new HICON[allIconNumber];
+		for(int i = 0; i < iconsNum; ++i)
+		{
+			eventIcoms[i] = hEventIcons[i] == NULL ? NULL : (HICON)CallService(MS_SKIN2_GETICONBYHANDLE, 0, (LPARAM)hEventIcons[i]);
+			ImageList_AddIcon(himlSmall, eventIcoms[i]);
+		}
+
+		int id = iconsNum;
+		eventIcoms[id] = LoadSkinnedIcon(SKINICON_EVENT_FILE);
+		ImageList_AddIcon(himlSmall, eventIcoms[id]);
+
+		eventIcoms[++id] = LoadSkinnedIcon(SKINICON_EVENT_URL);
+		ImageList_AddIcon(himlSmall, eventIcoms[id]);
+
+		eventIcoms[++id] = LoadSkinnedIcon(SKINICON_OTHER_WINDOWS);
+		ImageList_AddIcon(himlSmall, eventIcoms[id]);
+
 		if((isGroupImages = Options::instance->groupShowEvents) != false)
 			ListView_SetImageList(listWindow, himlSmall, LVSIL_SMALL);
 	}
@@ -1084,14 +1101,14 @@ void HistoryWindow::Initialise()
 	Edit_LimitText(findWindow, 100);
 	RegisterHotkeyControl(findWindow);
 			
-	HIMAGELIST himlButtons = ImageList_Create(16, 16, ILC_COLORDDB | ILC_MASK, 3, 3);
+	HIMAGELIST himlButtons = ImageList_Create(16, 16, ILC_COLOR32 | ILC_MASK, 3, 3);
 	if(himlButtons)
 	{
 		findNextIco = (HICON)CallService(MS_SKIN2_GETICONBYHANDLE, 0, (LPARAM)hFindNextIcon);
 		ImageList_AddIcon(himlButtons, findNextIco);
 		findPrevIco = (HICON)CallService(MS_SKIN2_GETICONBYHANDLE, 0, (LPARAM)hFindPrevIcon);
 		ImageList_AddIcon(himlButtons, findPrevIco);
-		configIco = (HICON)CallService(MS_SKIN2_GETICONBYHANDLE, 0, (LPARAM)hConfigIcon);
+		configIco = LoadSkinnedIcon(SKINICON_OTHER_OPTIONS);
 		ImageList_AddIcon(himlButtons, configIco);
 		deleteIco = (HICON)CallService(MS_SKIN2_GETICONBYHANDLE, 0, (LPARAM)hDeleteIcon);
 		ImageList_AddIcon(himlButtons, deleteIco);
@@ -1114,6 +1131,12 @@ void HistoryWindow::Initialise()
 	SendMessage(toolbarWindow, TB_SETBUTTONSIZE, 0, MAKELPARAM(16, 16));
 	SendMessage(toolbarWindow, TB_SETEXTENDEDSTYLE, 0, TBSTYLE_EX_DRAWDDARROWS);
 	SendMessage(toolbarWindow, TB_SETMAXTEXTROWS, 0, 0);
+
+	defFilter = Options::instance->defFilter;
+	if(defFilter >= 2 && defFilter - 2 < Options::instance->customFilters.size())
+	{
+		filterName = Options::instance->customFilters[defFilter - 2].name;
+	}
 			
 	SendMessage(hWnd, DM_SETDEFID, IDM_FIND, 0);
 	SendMessage(hWnd, WM_SIZE, 0, 0);
@@ -1239,26 +1262,47 @@ int HistoryWindow::HistoryDlgResizer(HWND hwnd, LPARAM, UTILRESIZECONTROL *urc)
 	return RD_ANCHORX_LEFT|RD_ANCHORY_TOP;
 }
 
-bool CanShowHistory(DBEVENTINFO* dbei)
+bool HistoryWindow::CanShowHistory(DBEVENTINFO* dbei)
 {
-	switch( dbei->eventType ) 
-	{
-	case EVENTTYPE_MESSAGE:
-	case EVENTTYPE_URL:
-	case EVENTTYPE_FILE:
+	if(defFilter == 1)
 		return true;
-
-	default:
+	else if(defFilter < 1)
+	{
+		switch( dbei->eventType ) 
 		{
-			DBEVENTTYPEDESCR* et = ( DBEVENTTYPEDESCR* )CallService( MS_DB_EVENT_GETTYPE, ( WPARAM )dbei->szModule, ( LPARAM )dbei->eventType );
-			if ( et && ( et->flags & DETF_HISTORY )) 
+		case EVENTTYPE_MESSAGE:
+		case EVENTTYPE_URL:
+		case EVENTTYPE_FILE:
+			return true;
+
+		default:
 			{
-				return true;
+				DBEVENTTYPEDESCR* et = ( DBEVENTTYPEDESCR* )CallService( MS_DB_EVENT_GETTYPE, ( WPARAM )dbei->szModule, ( LPARAM )dbei->eventType );
+				if ( et && ( et->flags & DETF_HISTORY )) 
+				{
+					return true;
+				}
 			}
 		}
-	}
 
-	return false;
+		return false;
+	}
+	else
+	{
+		if(filterMap.find(dbei->eventType) != filterMap.end())
+		{
+			if(onlyInFilter)
+			{
+				return !(dbei->flags & DBEF_SENT);
+			}
+			else if(onlyOutFilter)
+			{
+				return dbei->flags & DBEF_SENT;
+			}
+			return true;
+		}
+		return false;
+	}
 }
 
 static void GetMessageDescription( DBEVENTINFO *dbei, TCHAR* buf, int cbBuf )
@@ -1269,68 +1313,89 @@ static void GetMessageDescription( DBEVENTINFO *dbei, TCHAR* buf, int cbBuf )
 	mir_free( msg );
 }
 
-static void GetUrlDescription( DBEVENTINFO *dbei, TCHAR* buf, int cbBuf )
+static void GetAuthRequestDescription( DBEVENTINFO *dbei, TCHAR* buf, int cbBuf )
 {
-	int len = dbei->cbBlob;
-	if ( len >= cbBuf )
-		len = cbBuf-1;
+	std::wstring allName;
+	buf[0] = 0;
+	int pos = sizeof( DWORD ) + sizeof( HANDLE );
+	if(pos >= dbei->cbBlob)
+		return;
+	DWORD uin = *((DWORD*)dbei->pBlob);
+	HANDLE hContact = *((HANDLE*)(dbei->pBlob + sizeof( DWORD )));
+	char* nick, *firstName, *lastName, *jid, *reason;
+	nick = ( char* )( dbei->pBlob + sizeof( DWORD )+ sizeof( HANDLE ));
+	pos += strnlen_s(nick, dbei->cbBlob - pos) + 1;
+	if(pos >= dbei->cbBlob)
+		return;
+	firstName = ( char* )dbei->pBlob + pos;
+	pos += strnlen_s(firstName, dbei->cbBlob - pos) + 1;
+	if(pos >= dbei->cbBlob)
+		return;
+	lastName = ( char* )dbei->pBlob + pos;
+	pos += strnlen_s(lastName, dbei->cbBlob - pos) + 1;
+	if(pos >= dbei->cbBlob)
+		return;
+	jid = (char*)dbei->pBlob + pos;
+	pos += strnlen_s(jid, dbei->cbBlob - pos) + 1;
+	if(pos >= dbei->cbBlob)
+		return;
+	reason = (char*)dbei->pBlob + pos;
+	TCHAR *newNick, *newFirstName, *newLastName, *newJid, *newReason;
+	if(dbei->flags & DBEF_UTF)
+	{
+		newNick = mir_utf8decodeT( nick );
+		newFirstName = mir_utf8decodeT( firstName );
+		newLastName = mir_utf8decodeT( lastName );
+		newJid = mir_utf8decodeT( jid );
+		newReason = mir_utf8decodeT( reason );
+	}
+	else
+	{
+		newNick = mir_a2t( nick );
+		newFirstName = mir_a2t( firstName );
+		newLastName = mir_a2t( lastName );
+		newJid = mir_a2t( jid );
+		newReason = mir_a2t( reason );
+	}
 
-	#if !defined( _UNICODE )
-		memcpy( buf, dbei->pBlob, len );
-	#else
-		MultiByteToWideChar( CP_ACP, 0, ( LPCSTR )dbei->pBlob, len, buf, cbBuf );
-	#endif
-	buf[ len ] = 0;
+	if(newFirstName[0] != 0)
+	{
+		allName += newFirstName;
+		if(newLastName[0] != 0)
+			allName += _T(" ");
+	}
 
-	if ( len < cbBuf-3 )
-		_tcscat( buf, _T( "\r\n" ));
-}
+	if(newLastName[0] != 0)
+		allName += newLastName;
+	if(!allName.empty())
+		allName += _T(", ");
+	if(newJid[0] != 0)
+	{
+		allName += newJid;
+		allName += _T(", ");
+	}
 
-static void GetFileDescription( DBEVENTINFO *dbei, TCHAR* buf, int cbBuf )
-{
-	int len = dbei->cbBlob - sizeof( DWORD );
-	if ( len >= cbBuf )
-		len = cbBuf-1;
-
-	#if !defined( _UNICODE )
-		memcpy( buf, dbei->pBlob + sizeof( DWORD ), len );
-	#else
-		MultiByteToWideChar( CP_ACP, 0, ( LPCSTR )dbei->pBlob + sizeof( DWORD ), len, buf, cbBuf );
-	#endif
-	buf[ len ] = 0;
-
-	if ( len < cbBuf-3 )
-		_tcscat( buf, _T( "\r\n" ));
+	_stprintf_s(buf, cbBuf, TranslateT("Authorisation request by %s (%s%d): %s"), 
+		(newNick[0] == 0 ? (TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) hContact, GCDNF_TCHAR) : newNick),
+		allName.c_str(), uin, newReason);
+	mir_free( newNick );
+	mir_free( newFirstName );
+	mir_free( newLastName );
+	mir_free( newJid );
+	mir_free( newReason );
 }
 
 void GetObjectDescription( DBEVENTINFO *dbei, TCHAR* str, int cbStr )
 {
 	switch( dbei->eventType ) 
 	{
-	case EVENTTYPE_MESSAGE:
-		GetMessageDescription( dbei, str, cbStr );
-		break;
-
-	case EVENTTYPE_URL:
-		GetUrlDescription( dbei, str, cbStr );
-		break;
-
-	case EVENTTYPE_FILE:
-		GetFileDescription( dbei, str, cbStr );
+	case EVENTTYPE_AUTHREQUEST:
+		GetAuthRequestDescription( dbei, str, cbStr );
 		break;
 
 	default:
-		{
-			DBEVENTTYPEDESCR* et = ( DBEVENTTYPEDESCR* )CallService( MS_DB_EVENT_GETTYPE, ( WPARAM )dbei->szModule, ( LPARAM )dbei->eventType );
-			if ( et && ( et->flags & DETF_HISTORY )) 
-			{
-				GetMessageDescription( dbei, str, cbStr );
-			}
-			else
-				str[ 0 ] = 0;
-		}	
+		GetMessageDescription( dbei, str, cbStr );
 	}
-
 }
 
 void HistoryWindow::FillHistoryThread(void* param)
@@ -1355,6 +1420,7 @@ void HistoryWindow::FillHistoryThread(void* param)
 	char* findNext = isNewOnTop ? MS_DB_EVENT_FINDPREV : MS_DB_EVENT_FINDNEXT;
 
 	hInfo->InitNames();
+	hInfo->InitFilters();
 
 	DWORD lastTime = MAXDWORD;
 	hInfo->eventList.push_back(std::deque<HANDLE>());
@@ -1375,7 +1441,7 @@ void HistoryWindow::FillHistoryThread(void* param)
 			}
 			dbei.cbBlob = oldBlobSize;
 			CallService( MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&dbei );
-			if(CanShowHistory(&dbei)) 
+			if(hInfo->hContact == NULL || hInfo->CanShowHistory(&dbei)) 
 			{
 				DWORD tm = isNewOnTop ? lastTime - dbei.timestamp : dbei.timestamp - lastTime;
 				if(tm < groupTime && limitator < maxMess)
@@ -1436,12 +1502,18 @@ void HistoryWindow::FillHistoryThread(void* param)
 
 void HistoryWindow::InitNames()
 {
-	_tcscpy_s(contactName, 256, (TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) hContact, GCDNF_TCHAR ));
 	TCHAR str[200];
 	if(hContact)
+	{
+		_tcscpy_s(contactName, 256, (TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) hContact, GCDNF_TCHAR ));
 		mir_sntprintf(str,200,TranslateT("History for %s"),contactName);
+	}
 	else
+	{
+		_tcscpy_s(contactName, 256, TranslateT("Server"));
 		mir_sntprintf(str,200,TranslateT("History"));
+	}
+
 	SetWindowText(hWnd,str);
 
 	myName[0] = 0;
@@ -1461,13 +1533,13 @@ void HistoryWindow::InitNames()
 		}
 		else if (ci.type == CNFT_DWORD) 
 		{
-			_ltot(ci.dVal, myName, 10 );
+			_ltot_s(ci.dVal, myName, 10 );
 		}	
 	}
 
 	if(!myName[0])
 	{
-		_tcscpy_s(myName, 256, _T("Me"));
+		_tcscpy_s(myName, 256, TranslateT("Me"));
 	}
 }
 
@@ -1513,11 +1585,33 @@ void HistoryWindow::AddGroup(DBEVENTINFO *dbei)
 		_tcscat_s(eventText, str);
 	}
 
-	if(dbei->flags & DBEF_SENT)
-		item.iImage = 1;
-	else
-		item.iImage = 0;
+	GetEventIcon(dbei->flags & DBEF_SENT, dbei->eventType, item.iImage);
 	ListView_InsertItem(listWindow, &item);
+}
+
+bool HistoryWindow::GetEventIcon(bool isMe, int eventType, int &id)
+{
+	switch(eventType)
+	{
+	case EVENTTYPE_MESSAGE:
+		id = isMe ? 1 : 0;
+		return true;
+	case EVENTTYPE_STATUSCHANGE:
+		id = 2;
+		return true;
+	case EVENTTYPE_FILE:
+		id = iconsNum;
+		return true;
+	case EVENTTYPE_URL:
+		id = iconsNum + 1;
+		return true;
+	case EVENTTYPE_AUTHREQUEST:
+		id = iconsNum + 2;
+		return true;
+	default:
+		id = isMe ? 1 : 0;
+		return false;
+	}
 }
 
 void HistoryWindow::ReplaceIcons(HWND hwndDlg, int selStart, BOOL isSent)
@@ -1625,7 +1719,31 @@ void HistoryWindow::SelectEventGroup(int sel)
 				backColor = Options::instance->GetColor(lastMe ? Options::OutBackground : Options::InBackground);
 				if(Options::instance->messagesShowEvents)
 				{
-					ImageDataObject::InsertIcon(RichEditOle, lastMe ? outIco : inIco, backColor, 16, 16);
+					str[0] = _T('>');
+					str[1] = 0;
+					*strLen = 1 * sizeof(TCHAR);
+					TextSelection->SetStart(MAXLONG);
+					TextSelection->GetFont(&TextFont);
+					TextFont->SetBackColor(backColor);
+					TextSelection->SetText(pStr);
+					TextFont->Release();
+					int imId;
+					HICON ico;
+					if(GetEventIcon(lastMe, dbei.eventType, imId))
+					{
+						ico = eventIcoms[imId];
+					}
+					else
+					{
+						ico = (HICON)CallService(MS_DB_EVENT_GETICON, LR_SHARED, (LPARAM)&dbei);
+						HICON icoMsg = LoadSkinnedIcon(SKINICON_EVENT_MESSAGE);
+						if(ico == NULL || icoMsg == ico)
+						{
+							ico = eventIcoms[imId];
+						}
+					}
+
+					ImageDataObject::InsertIcon(RichEditOle, ico, backColor, 16, 16);
 				}
 
 				TCHAR* formatDate = Options::instance->messagesShowSec ? (isUser ? _T("d s ") : _T("d s\n")) : (isUser ? _T("d t ") : _T("d t\n"));
@@ -1886,6 +2004,7 @@ void HistoryWindow::SavePos(bool all)
 	DBWriteContactSettingByte(contactToSave, "BasicHistory", "history_ismax", wp.showCmd == SW_MAXIMIZE ? 1 : 0);
 }
 
+#define DEF_FILTERS_START 50000
 void HistoryWindow::FindToolbarClicked(LPNMTOOLBAR lpnmTB)
 {
 	RECT rc;
@@ -1902,6 +2021,19 @@ void HistoryWindow::FindToolbarClicked(LPNMTOOLBAR lpnmTB)
 		AppendMenu(hPopupMenu, searcher.IsOnlyIn() ? MF_STRING | MF_CHECKED : MF_STRING, IDM_ONLYIN, TranslateT("Only Incomming Messages"));
 		AppendMenu(hPopupMenu, searcher.IsOnlyOut() ? MF_STRING | MF_CHECKED : MF_STRING, IDM_ONLYOUT, TranslateT("Only Outgoing Messages"));
 		AppendMenu(hPopupMenu, searcher.IsOnlyGroup() ? MF_STRING | MF_CHECKED : MF_STRING, IDM_ONLYGROUP, TranslateT("Only Selected Group"));
+		AppendMenu(hPopupMenu, MFT_SEPARATOR, 0, NULL);
+		HMENU hFilterMenu = CreatePopupMenu();
+		AppendMenu(hFilterMenu, defFilter == 0 ? MF_STRING | MF_CHECKED : MF_STRING, IDM_FILTERDEF, TranslateT("Default history events"));
+		AppendMenu(hFilterMenu, defFilter == 1 ? MF_STRING | MF_CHECKED : MF_STRING, IDM_FILTERALL, TranslateT("All events"));
+		for(int i = 0 ; i < Options::instance->customFilters.size(); ++i)
+		{
+			UINT flags = MF_STRING;
+			if(defFilter - 2 == i)
+				flags |= MF_CHECKED;
+
+			AppendMenu(hFilterMenu, flags, DEF_FILTERS_START + i, Options::instance->customFilters[i].name.c_str());
+		}
+		AppendMenu(hPopupMenu, MF_STRING | MF_POPUP, (UINT_PTR)hFilterMenu, TranslateT("Filters"));
 		if(searcher.IsFindBack())
 			SetMenuDefaultItem(hPopupMenu, IDM_FINDPREV, FALSE);
 		else
@@ -1931,8 +2063,29 @@ void HistoryWindow::FindToolbarClicked(LPNMTOOLBAR lpnmTB)
 		case IDM_ONLYGROUP:
 			searcher.SetOnlyGroup(!searcher.IsOnlyGroup());
 			break;
-		}
+		case IDM_FILTERDEF:
+			defFilter = 0;
+			SendMessage(hWnd,DM_HREBUILD,0,0);
+			break;
+		case IDM_FILTERALL:
+			defFilter = 1;
+			SendMessage(hWnd,DM_HREBUILD,0,0);
+			break;
+		default:
+			if(selected >= DEF_FILTERS_START)
+			{
+				defFilter = selected - DEF_FILTERS_START + 2;
+				if(defFilter >= 2 && defFilter - 2 < Options::instance->customFilters.size())
+				{
+					filterName = Options::instance->customFilters[defFilter - 2].name;
+				}
 
+				SendMessage(hWnd,DM_HREBUILD,0,0);
+			}
+			break;
+		}
+		
+		DestroyMenu(hFilterMenu);
 		DestroyMenu(hPopupMenu);
 	}
 }
@@ -2142,42 +2295,76 @@ void HistoryWindow::GroupImagesChanged()
 
 void HistoryWindow::FormatQuote(std::wstring& quote, const MessageData& md, const std::wstring& msg)
 {
-		if(md.isMe)
-			quote += myName;
-		else
-			quote += contactName;
-		TCHAR str[32];
-		tmi.printTimeStamp(NULL, md.timestamp, _T("d t"), str , 32, 0);
-		quote += _T(", ");
-		quote += str;
-		quote += _T("\n");
-		int f = 0;
-		do
+	if(md.isMe)
+		quote += myName;
+	else
+		quote += contactName;
+	TCHAR str[32];
+	tmi.printTimeStamp(NULL, md.timestamp, _T("d t"), str , 32, 0);
+	quote += _T(", ");
+	quote += str;
+	quote += _T("\n");
+	int f = 0;
+	do
+	{
+		int nf = msg.find_first_of(_T("\r\n"), f);
+		if(nf >= 0 && nf < msg.length())
 		{
-			int nf = msg.find_first_of(_T("\r\n"), f);
-			if(nf >= 0 && nf < msg.length())
-			{
-				if(nf - f >= 0 )
-				{
-					quote += _T(">");
-					quote += msg.substr(f, nf - f);
-					quote += _T("\n");
-				}
-
-				f = nf + 1;
-				if(msg[nf] == _T('\r') && f < msg.length() && msg[f] == _T('\n'))
-					++f;
-			}
-			else if(msg.length() - f > 0)
+			if(nf - f >= 0 )
 			{
 				quote += _T(">");
-				quote += msg.substr(f, msg.length() - f);
+				quote += msg.substr(f, nf - f);
 				quote += _T("\n");
-				f = -1;
 			}
-			else
-				f = -1;
+
+			f = nf + 1;
+			if(msg[nf] == _T('\r') && f < msg.length() && msg[f] == _T('\n'))
+				++f;
 		}
-		while(f > 0 && f < msg.length());
+		else if(msg.length() - f > 0)
+		{
+			quote += _T(">");
+			quote += msg.substr(f, msg.length() - f);
+			quote += _T("\n");
+			f = -1;
+		}
+		else
+			f = -1;
+	}
+	while(f > 0 && f < msg.length());
 }
 
+void HistoryWindow::InitFilters()
+{
+	filterMap.clear();
+	onlyInFilter = false;
+	onlyOutFilter = false;
+	if(defFilter >= 2)
+	{
+		defFilter = 0;
+		for(int i = 0; i < Options::instance->customFilters.size(); ++i)
+		{
+			if(filterName == Options::instance->customFilters[i].name)
+			{
+				defFilter = i + 2;
+				if(Options::instance->customFilters[i].onlyIncomming && !Options::instance->customFilters[i].onlyOutgoing)
+				{
+					onlyInFilter = true;
+				}
+				else if(Options::instance->customFilters[i].onlyOutgoing && !Options::instance->customFilters[i].onlyIncomming)
+				{
+					onlyOutFilter = true;
+				}
+
+				for(std::vector<int>::iterator it = Options::instance->customFilters[i].events.begin(); it != Options::instance->customFilters[i].events.end(); ++it)
+				{
+					filterMap[*it] = true;
+				}
+
+				break;
+			}
+		}
+	}
+	else
+		filterName = L"";
+}

@@ -17,8 +17,32 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
 #pragma once
+
+struct FilterOptions
+{
+	FilterOptions()
+		:onlyIncomming(false),
+		onlyOutgoing(false)
+	{
+	}
+
+	FilterOptions(const std::wstring& _name)
+		:name(_name),
+		onlyIncomming(false),
+		onlyOutgoing(false)
+	{
+	}
+
+	std::wstring name;
+	std::vector<int> events;
+	bool onlyIncomming;
+	bool onlyOutgoing;
+};
+
 class Options
 {
+private:
+	std::vector<FilterOptions> customFiltersTemp;
 public:
 	Options();
 	~Options();
@@ -37,6 +61,9 @@ public:
 	bool messagesNewOnTop, messagesShowDate, messagesShowSec, messagesShowName, messagesShowEvents, messagesUseSmileys;
 	bool searchForInList, searchForInMess, searchMatchCase, searchMatchWhole, searchOnlyIn, searchOnlyOut, searchOnlyGroup;
 	int groupMessageLen, groupTime, groupMessagesNumber;
+
+	std::vector<FilterOptions> customFilters;
+	int defFilter;
 
 	enum Fonts
 	{
