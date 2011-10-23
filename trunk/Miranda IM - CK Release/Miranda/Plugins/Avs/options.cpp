@@ -209,7 +209,7 @@ static char* g_selectedProto;
 INT_PTR CALLBACK DlgProcOptionsAvatars(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg) {
-   case WM_INITDIALOG:
+	case WM_INITDIALOG:
 		TranslateDialogDefault(hwndDlg);
 
 		CheckDlgButton(hwndDlg, IDC_SHOWWARNINGS, DBGetContactSettingByte(0, AVS_MODULE, "warnings", 0));
@@ -258,7 +258,7 @@ INT_PTR CALLBACK DlgProcOptionsAvatars(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 			}
 		case 0:
 			switch (((LPNMHDR) lParam)->code) {
-         case PSN_APPLY:
+			case PSN_APPLY:
 				DBWriteContactSettingByte(NULL, AVS_MODULE, "warnings", IsDlgButtonChecked(hwndDlg, IDC_SHOWWARNINGS) ? 1 : 0);
 				DBWriteContactSettingByte(NULL, AVS_MODULE, "MakeGrayscale", IsDlgButtonChecked(hwndDlg, IDC_MAKE_GRAYSCALE) ? 1 : 0);
 				DBWriteContactSettingByte(NULL, AVS_MODULE, "MakeTransparentBkg", IsDlgButtonChecked(hwndDlg, IDC_MAKE_TRANSPARENT_BKG) ? 1 : 0);
@@ -364,8 +364,8 @@ INT_PTR CALLBACK DlgProcOptionsProtos(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 					else
 						RemoveProtoPic( szProto );
 
-                    NMHDR nm = { hwndList, IDC_PROTOCOLS, NM_CLICK };
-                    SendMessage(hwndDlg, WM_NOTIFY, 0, (LPARAM)&nm);
+					NMHDR nm = { hwndList, IDC_PROTOCOLS, NM_CLICK };
+					SendMessage(hwndDlg, WM_NOTIFY, 0, (LPARAM)&nm);
 				}
 				break;
 			}
@@ -418,17 +418,17 @@ INT_PTR CALLBACK DlgProcOptionsProtos(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 					if ( g_selectedProto ) {
 						DBVARIANT dbv = {0};
 						if(!DBGetContactSettingString(NULL, PPICT_MODULE, g_selectedProto, &dbv)) 
-                        {
+						{
 							if (!AVS_pathIsAbsolute(dbv.pszVal))
-                            {
-							    char szFinalPath[MAX_PATH];
-                                // Unsane: change relative path from profile folder, to programm folder
+							{
+								char szFinalPath[MAX_PATH];
+								// Unsane: change relative path from profile folder, to programm folder
 								mir_snprintf(szFinalPath, SIZEOF(szFinalPath), "%%miranda_path%%\\%s", dbv.pszVal);
 
-							    SetDlgItemTextA(hwndDlg, IDC_PROTOAVATARNAME, szFinalPath);
-                            }
-                            else
-							    SetDlgItemTextA(hwndDlg, IDC_PROTOAVATARNAME, dbv.pszVal);
+								SetDlgItemTextA(hwndDlg, IDC_PROTOAVATARNAME, szFinalPath);
+							}
+							else
+								SetDlgItemTextA(hwndDlg, IDC_PROTOAVATARNAME, dbv.pszVal);
 
 							InvalidateRect(GetDlgItem(hwndDlg, IDC_PROTOPIC), NULL, TRUE);
 							DBFreeVariant(&dbv);
@@ -791,7 +791,7 @@ INT_PTR CALLBACK DlgProcAvatarUserInfo(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 			SendMessage(protopic, AVATAR_RESPECTHIDDEN, 0, (LPARAM) FALSE);
 			SendMessage(protopic, AVATAR_SETRESIZEIFSMALLER, 0, (LPARAM) FALSE);
 
-            SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)dat);
+			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)dat);
 			hContact = (HANDLE)lParam;
 			TranslateDialogDefault(hwndDlg);
 			SendMessage(hwndDlg, DM_SETAVATARNAME, 0, 0);
