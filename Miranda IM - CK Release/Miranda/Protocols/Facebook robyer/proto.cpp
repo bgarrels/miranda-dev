@@ -44,16 +44,12 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 	this->facy.fcb_conn_lock_ = CreateMutex( NULL, FALSE, NULL );
 
 	CreateProtoService(m_szModuleName, PS_CREATEACCMGRUI, &FacebookProto::SvcCreateAccMgrUI, this);
-	CreateProtoService(m_szModuleName, PS_GETNAME,        &FacebookProto::GetName,           this);
-	CreateProtoService(m_szModuleName, PS_GETSTATUS,      &FacebookProto::GetStatus,         this);
-	CreateProtoService(m_szModuleName, PS_SETSTATUS,      &FacebookProto::SetStatus,         this);
 	CreateProtoService(m_szModuleName, PS_GETMYAWAYMSG,   &FacebookProto::GetMyAwayMsg,      this);
-	CreateProtoService(m_szModuleName, PS_SETAWAYMSG,     &FacebookProto::SetMyAwayMsg,      this);
 	CreateProtoService(m_szModuleName, PS_GETMYAVATAR,    &FacebookProto::GetMyAvatar,       this);
 	CreateProtoService(m_szModuleName, PS_GETAVATARINFO,  &FacebookProto::GetAvatarInfo,     this);
 	CreateProtoService(m_szModuleName, PS_GETAVATARCAPS,  &FacebookProto::GetAvatarCaps,     this);
 
-  // RM TODO: group chats
+  // TODO RM: group chats
 /*  CreateProtoService(m_szModuleName,PS_JOINCHAT, &FacebookProto::OnJoinChat, this);
 	CreateProtoService(m_szModuleName,PS_LEAVECHAT,&FacebookProto::OnLeaveChat,this);*/
 	if(g_mirandaVersion < PLUGIN_MAKE_VERSION(0, 10, 0, 2))
@@ -178,7 +174,7 @@ int FacebookProto::SetStatus( int new_status )
 		m_iDesiredStatus = new_status;
 		break;
 
-	// RM TODO: needed/useful?
+	// TODO RM: needed/useful?
 	case ID_STATUS_CONNECTING:
 		m_iDesiredStatus = ID_STATUS_OFFLINE;
 		break;
@@ -207,21 +203,29 @@ int FacebookProto::SetStatus( int new_status )
 	return 0;
 }
 
-/*int FacebookProto::SetAwayMsg( int status, const PROTOCHAR *msg )
+int FacebookProto::SetAwayMsg( int status, const PROTOCHAR *msg )
 {
-	if ( isOnline() && msg != NULL && getByte( FACEBOOK_KEY_SET_MIRANDA_STATUS, DEFAULT_SET_MIRANDA_STATUS ) )
+	if (!msg)
 	{
-		char *narrow = mir_utf8encodeT(msg);
-		ForkThread(&FacebookProto::SetAwayMsgWorker, this, narrow);
+		last_status_msg_.clear();
+		return 0;
+	}
+
+	char *narrow = mir_utf8encodeT(msg);
+	if (last_status_msg_ != narrow) last_status_msg_ = narrow;
+	utils::mem::detract(narrow);
+
+	if (isOnline() && getByte(FACEBOOK_KEY_SET_MIRANDA_STATUS, DEFAULT_SET_MIRANDA_STATUS))
+	{
+		ForkThread(&FacebookProto::SetAwayMsgWorker, this, NULL);
 	}
 	return 0;
-}*/
+}
 
-void FacebookProto::SetAwayMsgWorker(void * data)
+void FacebookProto::SetAwayMsgWorker(void *)
 {
-	std::string new_status = ( char* )data;
-	facy.set_status( new_status );
-	utils::mem::detract( ( void** )&data );
+	if ( last_status_msg_.length() )
+		facy.set_status( last_status_msg_ );
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -248,15 +252,6 @@ int FacebookProto::GetMyAwayMsg( WPARAM wParam, LPARAM lParam )
 	} else {
 		return 0;
 	}
-}
-
-int FacebookProto::SetMyAwayMsg( WPARAM wParam, LPARAM lParam )
-{
-	if ( isOnline() && lParam != NULL && getByte( FACEBOOK_KEY_SET_MIRANDA_STATUS, DEFAULT_SET_MIRANDA_STATUS ) )
-	{
-		ForkThread(&FacebookProto::SetAwayMsgWorker, this, (void *)lParam);
-	}
-	return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -394,7 +389,7 @@ int FacebookProto::OnBuildStatusMenu(WPARAM wParam,LPARAM lParam)
 	mi.flags = CMIF_ICONFROMICOLIB | CMIF_CHILDPOPUP;
 	mi.pszName = LPGEN("Visit Profile");
 	mi.icolibItem = GetIconHandle("homepage");
-	// RM TODO: remember and properly free in destructor
+	// TODO RM: remember and properly free in destructor
 	/*m_hStatusMind = */reinterpret_cast<HGENMENU>( CallService(
 		MS_CLIST_ADDPROTOMENUITEM,0,reinterpret_cast<LPARAM>(&mi)) );
 
@@ -425,7 +420,7 @@ int FacebookProto::VisitProfile(WPARAM wParam,LPARAM lParam)
 		CallService(MS_UTILS_OPENURL,1,reinterpret_cast<LPARAM>(dbv.pszVal));
 		DBFreeVariant(&dbv);
 	}/* else {
-		// RM TODO: remove this
+		// TODO RM: remove this
 		std::string key, url;
 		if (DBGetContactSettingByte(hContact,m_szModuleName,"ChatRoom",0) == 0)
 		{ // usual contact

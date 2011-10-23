@@ -161,9 +161,6 @@ static HANDLE g_hEvents[1];
 
 extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 {
-#if defined _DEBUG
-	_CrtDumpMemoryLeaks( );
-#endif
 	pluginLink = link;
 	mir_getMMI(&mmi);
 	mir_getLI(&li);

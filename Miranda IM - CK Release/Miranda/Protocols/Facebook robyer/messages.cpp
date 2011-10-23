@@ -128,7 +128,7 @@ void FacebookProto::SendTypingWorker(void *p)
 
 	send_typing *typing = static_cast<send_typing*>(p);
 
-	// RM TODO: maybe better send typing optimalization
+	// TODO RM: maybe better send typing optimalization
 	facy.is_typing_ = (typing->status == PROTOTYPE_SELFTYPING_ON);
 	SleepEx( 2000, true );
 

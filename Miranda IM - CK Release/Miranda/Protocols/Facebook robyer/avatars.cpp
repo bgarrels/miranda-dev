@@ -27,51 +27,79 @@ Last change on : $Date: 2011-01-08 11:10:34 +0100 (so, 08 1 2011) $
 
 #include "common.h"
 
-void FacebookProto::UpdateAvatarWorker(void *p)
+bool FacebookProto::GetDbAvatarInfo(PROTO_AVATAR_INFORMATION &ai, std::string *url)
 {
-	LOG("***** UpdateAvatarWorker");
-
-	if(p == NULL)
-		return;
-
-	std::auto_ptr<update_avatar> data( static_cast<update_avatar*>(p) );
 	DBVARIANT dbv;
-
-	if (data->url.empty())
-		return;
-	
-	if( !DBGetContactSettingString(data->hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
+	if (!DBGetContactSettingString(ai.hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, &dbv))
 	{
-		std::string new_url = data->url;
-		std::string ext = new_url.substr(new_url.rfind('.'));
-
-		if( DBGetContactSettingByte(NULL, m_szModuleName, FACEBOOK_KEY_BIG_AVATARS, 1) ) {
-			std::string::size_type pos = new_url.rfind( "_q." );
-			if (pos != std::string::npos)
-				new_url = new_url.replace( pos, 3, "_s." );
-		}
-
-		std::string filename = GetAvatarFolder() + '\\' + dbv.pszVal + ext;
+		std::string new_url = dbv.pszVal;
 		DBFreeVariant(&dbv);
 
-		PROTO_AVATAR_INFORMATION ai = {sizeof(ai)};
-		ai.hContact = data->hContact;
-		ai.format = ext_to_format(ext);
-		strncpy(ai.filename,filename.c_str(),MAX_PATH);
-
-		ScopedLock s( avatar_lock_ );
-		LOG("***** Updating avatar: %s",data->url.c_str());
-		if (CallService(MS_SYSTEM_TERMINATED,0,0))
+		if (new_url.empty())
+			return false;
+	
+		if (!DBGetContactSettingString(ai.hContact, m_szModuleName, FACEBOOK_KEY_ID, &dbv))
 		{
-			LOG("***** Terminating avatar update early: %s",data->url.c_str());
-		} else {
-			bool success = facy.save_url(new_url,filename);
-			ProtoBroadcastAck(m_szModuleName, data->hContact, ACKTYPE_AVATAR, success ? ACKRESULT_SUCCESS : ACKRESULT_FAILED, (HANDLE)&ai, 0);
+			std::string ext = new_url.substr(new_url.rfind('.'));
 
-			if (!data->hContact)
-				CallService(MS_AV_REPORTMYAVATARCHANGED, (WPARAM)this->m_szModuleName, 0);
+			if (url && DBGetContactSettingByte(NULL, m_szModuleName, FACEBOOK_KEY_BIG_AVATARS, 1)) 
+			{
+				std::string::size_type pos = new_url.rfind( "_q." );
+				if (pos != std::string::npos)
+					new_url = new_url.replace( pos, 3, "_s." );
+
+				*url = new_url;
+			}
+
+			std::string filename = GetAvatarFolder() + '\\' + dbv.pszVal + ext;
+			DBFreeVariant(&dbv);
+
+			ai.hContact = ai.hContact;
+			ai.format = ext_to_format(ext);
+			strncpy(ai.filename, filename.c_str(), sizeof(ai.filename));
+			ai.filename[sizeof(ai.filename)-1] = 0;
+
+			return true;
 		}
 	}
+	return false;
+}
+
+void FacebookProto::UpdateAvatarWorker(void *)
+{
+	HANDLE nlc = NULL;
+
+	LOG("***** UpdateAvatarWorker");
+
+	for (;;)
+	{
+		std::string url;
+		PROTO_AVATAR_INFORMATION ai = {sizeof(ai)};
+		ai.hContact = avatar_queue[0];
+
+		if (Miranda_Terminated())
+		{
+			LOG("***** Terminating avatar update early: %s", url.c_str());
+			break;
+		} 
+
+		if (GetDbAvatarInfo(ai, &url))
+		{
+			LOG("***** Updating avatar: %s", url.c_str());
+			bool success = facy.save_url(url, std::string(ai.filename), nlc);
+
+			if (ai.hContact)
+				ProtoBroadcastAck(m_szModuleName, ai.hContact, ACKTYPE_AVATAR, success ? ACKRESULT_SUCCESS : ACKRESULT_FAILED, (HANDLE)&ai, 0);
+			else if (success)
+				CallService(MS_AV_REPORTMYAVATARCHANGED, (WPARAM)m_szModuleName, 0);
+		}
+
+		ScopedLock s(avatar_lock_);
+		avatar_queue.erase(avatar_queue.begin());
+		if (avatar_queue.empty())
+			break;
+	}
+	Netlib_CloseHandle(nlc);
 }
 
 std::string FacebookProto::GetAvatarFolder()
@@ -128,47 +156,30 @@ int FacebookProto::GetAvatarInfo(WPARAM wParam, LPARAM lParam)
 	LOG("***** GetAvatarInfo");
 
 	if (!lParam)
-		return -3;
+		return GAIR_NOAVATAR;
 
 	PROTO_AVATAR_INFORMATION* AI = ( PROTO_AVATAR_INFORMATION* )lParam;
-	DBVARIANT dbv;
 
-	if ( !DBGetContactSettingString( AI->hContact,m_szModuleName,FACEBOOK_KEY_AV_URL,&dbv ) )
+	if (GetDbAvatarInfo(*AI, NULL))
 	{
-		std::string avatar_url = dbv.pszVal;
-		DBFreeVariant(&dbv);
-		
-		if ( avatar_url.empty() )
-			return GAIR_NOAVATAR;
+		if (!_access(AI->filename, 0) || (wParam & GAIF_FORCE))
+		{												
+			LOG("***** Starting avatar request thread for %s", AI->filename);
+			ScopedLock s( avatar_lock_ );
 
-		if ( !DBGetContactSettingString( AI->hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv ) )
-		{
-			std::string ext = avatar_url.substr(avatar_url.rfind('.'));
-			std::string file_name = GetAvatarFolder() + '\\' + dbv.pszVal + ext;
-			DBFreeVariant(&dbv);
-			
-			if ((wParam & GAIF_FORCE) != 0)// || DBGetContactSettingByte(AI->hContact, m_szModuleName, FACEBOOK_KEY_NEW_AVATAR, 0))
-			{												
-				LOG("***** Starting avatar request thread for %s", AI->filename);
-				if ( !DBGetContactSettingString(AI->hContact,m_szModuleName,FACEBOOK_KEY_AV_URL,&dbv) ) {
-					std::string *url = new std::string(dbv.pszVal);
-					DBFreeVariant(&dbv);
-
-					ForkThread(&FacebookProto::UpdateAvatarWorker, this, new update_avatar(AI->hContact,*url));
-					//DBDeleteContactSetting(AI->hContact,m_szModuleName,FACEBOOK_KEY_NEW_AVATAR);
-					return GAIR_WAITFOR;
-				}
-			}
-
-			if (!_access((char*)file_name.c_str(), 0))
+			if (std::find(avatar_queue.begin(), avatar_queue.end(), AI->hContact) == avatar_queue.end())
 			{
-				LOG("***** Giving AvatarInfo: %s",file_name.c_str());
-				AI->format = ext_to_format(ext);
-				strncpy((char*)AI->filename, file_name.c_str(), (int)AI->cbSize);
-				return GAIR_SUCCESS;
+				bool is_empty = avatar_queue.empty();
+				avatar_queue.push_back(AI->hContact);
+				if (is_empty)
+					ForkThread(&FacebookProto::UpdateAvatarWorker, this, NULL);
 			}
-
+			
+			return GAIR_WAITFOR;
 		}
+
+		LOG("***** Giving AvatarInfo: %s", AI->filename);
+		return GAIR_SUCCESS;
 	}
 	return GAIR_NOAVATAR;
 }
@@ -211,17 +222,4 @@ int FacebookProto::GetMyAvatar(WPARAM wParam, LPARAM lParam)
 		}
 	}
 	return -2; // No avatar set
-}
-
-bool FacebookProto::AvatarExists(facebook_user* fbu)
-{
-	if (!fbu->image_url.empty())
-	{
-		std::string ext = fbu->image_url.substr(fbu->image_url.rfind('.'));
-		std::string file_name = GetAvatarFolder();
-		file_name += '\\' + fbu->user_id + ext;
-
-		return !_access(file_name.c_str(), 0);
-	}
-	return false;
 }

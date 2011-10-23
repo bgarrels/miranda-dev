@@ -27,12 +27,6 @@ Last change on : $Date: 2011-02-05 16:57:18 +0100 (so, 05 2 2011) $
 
 #pragma once
 
-// Verbose allocation functions (detection of memory leaks)
-#if defined _DEBUG
-#define _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAPALLOC
-#endif
-
 #define CODE_BLOCK_BEGIN        {
 #define CODE_BLOCK_TRY          try {
 #define CODE_BLOCK_CATCH        } catch(const std::exception &e) {

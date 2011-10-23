@@ -36,7 +36,6 @@ void FacebookProto::KillThreads( bool log )
 			LOG("***** Requesting MessageLoop to exit... %d", m_hMsgLoop );
 		WaitForSingleObject(m_hMsgLoop,IGNORE);
 		TerminateThread(m_hMsgLoop, 0);
-		ReleaseMutex(m_hMsgLoop);
 	}
 	
 	if(m_hUpdLoop != NULL)
@@ -45,7 +44,6 @@ void FacebookProto::KillThreads( bool log )
 			LOG("***** Requesting UpdateLoop to exit");
 		WaitForSingleObject(m_hUpdLoop,IGNORE);
 		TerminateThread(m_hUpdLoop, 0);
-		ReleaseMutex(m_hUpdLoop);
 	}
 }
 
@@ -101,6 +99,11 @@ void FacebookProto::ChangeStatus(void*)
 			setDword( "LogonTS", (DWORD)time(NULL) );
 			m_hUpdLoop = ForkThreadEx( &FacebookProto::UpdateLoop,  this );
 			m_hMsgLoop = ForkThreadEx( &FacebookProto::MessageLoop, this );
+
+			if (getByte(FACEBOOK_KEY_SET_MIRANDA_STATUS, DEFAULT_SET_MIRANDA_STATUS))
+			{
+				ForkThread(&FacebookProto::SetAwayMsgWorker, this, NULL);
+			}
 
 			LOG("***** Started messageloop thread handle %d", m_hMsgLoop);
 		} else {

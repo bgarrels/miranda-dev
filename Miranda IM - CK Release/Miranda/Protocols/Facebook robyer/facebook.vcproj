@@ -52,8 +52,8 @@
 				MinimalRebuild="false"
 				RuntimeLibrary="3"
 				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="0"
-				PrecompiledHeaderThrough=""
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough="common.h"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="4"
@@ -72,19 +72,14 @@
 				Name="VCLinkerTool"
 				OutputFile="Build\$(PlatformName) $(ConfigurationName)\plugins\$(ProjectName).dll"
 				LinkIncremental="2"
-				IgnoreAllDefaultLibraries="false"
-				IgnoreDefaultLibraryNames="msvcrt;MSVCP90D;MSVCP90;MSVCR90D;MSVCR90"
 				GenerateDebugInformation="true"
-				AssemblyDebug="1"
 				GenerateMapFile="true"
 				MapFileName="$(TargetDir)$(TargetName).map"
-				MapExports="false"
 				SubSystem="2"
 				OptimizeReferences="0"
 				EnableCOMDATFolding="0"
 				LinkTimeCodeGeneration="0"
 				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -140,13 +135,11 @@
 				WholeProgramOptimization="false"
 				AdditionalIncludeDirectories="../../include;."
 				PreprocessorDefinitions="_DEBUG;_WINDOWS;_USRDLL;FACEBOOK_EXPORTS;_CRT_SECURE_NO_WARNINGS;NOMINMAX;_WIN64"
-				MinimalRebuild="false"
 				RuntimeLibrary="3"
 				EnableFunctionLevelLinking="false"
-				UsePrecompiledHeader="0"
-				PrecompiledHeaderThrough=""
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough="common.h"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -163,19 +156,14 @@
 				Name="VCLinkerTool"
 				OutputFile="Build\$(PlatformName) $(ConfigurationName)\plugins\$(ProjectName).dll"
 				LinkIncremental="2"
-				IgnoreAllDefaultLibraries="false"
-				IgnoreDefaultLibraryNames="msvcrt;MSVCP90D;MSVCP90;MSVCR90D;MSVCR90"
 				GenerateDebugInformation="true"
-				AssemblyDebug="1"
 				GenerateMapFile="true"
 				MapFileName="$(TargetDir)$(TargetName).map"
-				MapExports="false"
 				SubSystem="2"
 				OptimizeReferences="0"
 				EnableCOMDATFolding="0"
 				LinkTimeCodeGeneration="0"
 				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -235,9 +223,9 @@
 				RuntimeLibrary="2"
 				BufferSecurityCheck="false"
 				RuntimeTypeInfo="false"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough="common.h"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -253,18 +241,14 @@
 			<Tool
 				Name="VCLinkerTool"
 				OutputFile="Build\$(PlatformName) $(ConfigurationName)\plugins\$(ProjectName).dll"
-				LinkIncremental="1"
-				IgnoreDefaultLibraryNames="MSVCP90D;MSVCP90;MSVCR90D;MSVCR90"
+				LinkIncremental="2"
 				GenerateDebugInformation="true"
-				AssemblyDebug="0"
 				GenerateMapFile="false"
 				MapFileName="$(TargetDir)$(TargetName).map"
-				MapExports="false"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -325,7 +309,8 @@
 				RuntimeLibrary="2"
 				BufferSecurityCheck="false"
 				RuntimeTypeInfo="false"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough="common.h"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="3"
@@ -343,18 +328,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				OutputFile="Build\$(PlatformName) $(ConfigurationName)\plugins\$(ProjectName).dll"
-				LinkIncremental="1"
-				IgnoreDefaultLibraryNames="MSVCP90D;MSVCP90;MSVCR90D;MSVCR90"
+				LinkIncremental="2"
 				GenerateDebugInformation="true"
-				AssemblyDebug="0"
-				GenerateMapFile="false"
 				MapFileName="$(TargetDir)$(TargetName).map"
-				MapExports="false"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -423,6 +403,38 @@
 			<File
 				RelativePath=".\main.cpp"
 				>
+				<FileConfiguration
+					Name="Debug Unicode|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug Unicode|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Unicode|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Unicode|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\messages.cpp"
@@ -431,38 +443,6 @@
 			<File
 				RelativePath=".\process.cpp"
 				>
-				<FileConfiguration
-					Name="Debug Unicode|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						RuntimeLibrary="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug Unicode|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						RuntimeLibrary="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release Unicode|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						RuntimeLibrary="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release Unicode|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						RuntimeLibrary="2"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\proto.cpp"

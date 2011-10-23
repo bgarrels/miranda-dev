@@ -163,8 +163,12 @@ INT_PTR CALLBACK FBMindProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM lpar
 			GetDlgItemText(hwnd,IDC_MINDMSG,mindMessage,SIZEOF(mindMessage));
 			ShowWindow(hwnd,SW_HIDE);
 
-			char *narrow = mir_t2a_cp(mindMessage,CP_UTF8);
-			ForkThread(&FacebookProto::SetAwayMsgWorker, proto, narrow);
+			char *narrow = mir_utf8encodeT(mindMessage);
+			if (proto->last_status_msg_ != narrow) proto->last_status_msg_ = narrow;
+			utils::mem::detract(narrow);
+
+			//char *narrow = mir_t2a_cp(mindMessage,CP_UTF8);
+			ForkThread(&FacebookProto::SetAwayMsgWorker, proto, NULL);
 
 			EndDialog(hwnd, wparam); 
 			return TRUE;
@@ -258,9 +262,6 @@ INT_PTR CALLBACK FBOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM l
 			utils::debug::info(cookie_content.c_str(),hwnd);
 		}
 
-		if ( LOWORD( wparam ) == IDC_SET_STATUS )
-			MessageBox( hwnd, TranslateT("Note: This option requires restart of Miranda IM to work properly."), proto->m_tszUserName, MB_OK );
-
 		if ((LOWORD(wparam)==IDC_UN || LOWORD(wparam)==IDC_PW || LOWORD(wparam)==IDC_GROUP || LOWORD(wparam)==IDC_COOKIES) &&
 		    (HIWORD(wparam)!=EN_CHANGE || (HWND)lparam!=GetFocus()))
 			return 0;
@@ -295,8 +296,18 @@ INT_PTR CALLBACK FBOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM l
 
 			StoreDBCheckState(proto, hwnd, IDC_SECURE, FACEBOOK_KEY_FORCE_HTTPS);
 			StoreDBCheckState(proto, hwnd, IDC_CLOSE_WINDOWS, FACEBOOK_KEY_CLOSE_WINDOWS_ENABLE);
-			StoreDBCheckState(proto, hwnd, IDC_SET_STATUS, FACEBOOK_KEY_SET_MIRANDA_STATUS);
 			StoreDBCheckState(proto, hwnd, IDC_LOGGING, FACEBOOK_KEY_LOGGING_ENABLE);
+
+			BOOL setStatus = IsDlgButtonChecked(hwnd, IDC_SET_STATUS);
+			BOOL setStatusOld = DBGetContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_SET_MIRANDA_STATUS, DEFAULT_SET_MIRANDA_STATUS);
+			if (setStatus != setStatusOld)
+			{
+				DBWriteContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_SET_MIRANDA_STATUS, setStatus);
+				if (setStatus && proto->isOnline() && DBGetContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_SET_MIRANDA_STATUS, DEFAULT_SET_MIRANDA_STATUS))
+				{
+					ForkThread(&FacebookProto::SetAwayMsgWorker, proto, NULL);
+				}
+			}
 
 			return TRUE;
 		}

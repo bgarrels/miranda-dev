@@ -38,7 +38,7 @@ http::response facebook_client::flap( const int request_type, std::string* reque
 	nlhr.requestType = choose_method( request_type );
 	std::string url = choose_request_url( request_type, request_data );
 	nlhr.szUrl = (char*)url.c_str( );
-	nlhr.flags = NLHRF_HTTP11 | NLHRF_NODUMP | choose_security_level( request_type ) | NLHRF_GENERATEHOST;
+	nlhr.flags = NLHRF_HTTP11 | NLHRF_NODUMP | choose_security_level( request_type );
 	nlhr.headers = get_request_headers( request_type, &nlhr.headersCount );
 	
 	switch (request_type)
@@ -309,7 +309,16 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 	{
 		std::string server = FACEBOOK_SERVER_CHAT;
-		utils::text::replace_first( &server, "%s", "0" );
+		//if (this->chat_channel_host_.substr(0, this->chat_channel_partition_.length()) != this->chat_channel_partition_)
+		//	server = FACEBOOK_SERVER_CHAT2;
+		if (!this->chat_channel_jslogger_.empty())
+			server = FACEBOOK_SERVER_CHAT2;
+
+		std::string fl = "0";
+		if ( cookies.find("L") != cookies.end() )
+			fl = cookies.find("L")->second;
+
+		utils::text::replace_first( &server, "%s", fl );
 		utils::text::replace_first( &server, "%s", this->chat_channel_host_ );
 		return server;
 	}
@@ -348,7 +357,8 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 		return "/login.php?login_attempt=1";
 
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
-		return "/loginnotify/setup_machine.php?persistent=1";
+		//return "/loginnotify/setup_machine.php?persistent=1";
+		return "/checkpoint/";
 
 	case FACEBOOK_REQUEST_LOGOUT:
 		return "/logout.php";
@@ -391,13 +401,6 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 		return action;
 	}
 
-// Backup for old mobile site profile getter
-//
-//	case FACEBOOK_REQUEST_PROFILE_GET: {
-//		std::string action = "/profile.php?id=%s&v=info";
-//		utils::text::replace_first( &action, "%s", (*data) );
-//		return action; }
-
 	case FACEBOOK_REQUEST_PROFILE_GET:
 	{
 		std::string action = "/ajax/hovercard/user.php?id=%s&__a=1";
@@ -414,10 +417,15 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 	{
 		std::string action = "/x/%s/0/true/p_%s=%s";
+		if (!this->chat_channel_jslogger_.empty()) {
+			action = "/pull?clientid=&channel=p_%s&seq=%s&cb=&state=active";
+			//utils::text::replace_first( &action, "%s", dtsg_ );
+		} else {
+			utils::text::replace_first( &action, "%s", utils::time::unix_timestamp() );
+		}
 
-		utils::text::replace_first( &action, "%s", utils::time::unix_timestamp() );
 		utils::text::replace_first( &action, "%s", self_.user_id );
-		if (this->chat_sequence_num_ == "")
+		if (this->chat_sequence_num_.empty())
 			this->chat_sequence_num_ = "0";
 		utils::text::replace_first( &action, "%s", chat_sequence_num_ );
 		return action;
@@ -540,7 +548,7 @@ void facebook_client::refresh_headers( )
 	{
 		this->headers["Accept"] = "*/*";
 		this->headers["Accept-Language"] = "en,en-US;q=0.9";
-		this->headers["Content-Type"] = "application/x-www-form-urlencoded";
+		this->headers["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8";
 	}
 	this->headers["User-Agent"] = get_user_agent( );
 	this->headers["Cookie"] = load_cookies( );
@@ -605,7 +613,7 @@ void facebook_client::store_headers( http::response* resp, NETLIBHTTPHEADER* hea
 			}
 		}
 		else
-		{ // RM TODO: (un)comment
+		{ // TODO RM: (un)comment
 			parent->Log("----- Got header '%s': %s", header_name.c_str(), header_value.c_str() );
 			resp->headers[header_name] = header_value;
 		}
@@ -689,7 +697,8 @@ bool facebook_client::login(const std::string &username,const std::string &passw
 		}
 		
 		// Check whether setting Machine name is required
-		if ( resp.headers["Location"].find("loginnotify/setup_machine.php") != std::string::npos )
+		//if ( resp.headers["Location"].find("loginnotify/setup_machine.php") != std::string::npos )
+		if ( resp.headers["Location"].find("/checkpoint/") != std::string::npos )
 		{
 			std::string inner_data = "charset_test=%e2%82%ac%2c%c2%b4%2c%e2%82%ac%2c%c2%b4%2c%e6%b0%b4%2c%d0%94%2c%d0%84&locale=en&machinename=MirandaIM&remembercomputer=1";
 			flap( FACEBOOK_REQUEST_SETUP_MACHINE, &inner_data );
@@ -842,15 +851,14 @@ bool facebook_client::home( )
 		bool update_required = true;
 		if ( !DBGetContactSettingString(fbu->handle,parent->m_szModuleName,FACEBOOK_KEY_AV_URL,&dbv) )
 		{
-			update_required = strcmp( dbv.pszVal, fbu->image_url.c_str() ) != 0;
+			update_required = fbu->image_url != dbv.pszVal;
 			DBFreeVariant(&dbv);
 		}
-		if ( update_required || !parent->AvatarExists(fbu) )
+		if ( update_required )
 		{
 			parent->Log("***** Saving my avatar url: %s", fbu->image_url.c_str());
 			DBWriteContactSettingString(fbu->handle, parent->m_szModuleName, FACEBOOK_KEY_AV_URL, fbu->image_url.c_str());			
 			ProtoBroadcastAck(parent->m_szModuleName, fbu->handle, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
-			//ForkThread(&FacebookProto::UpdateAvatarWorker, parent, new update_avatar(fbu->handle, fbu->image_url));
 		}	
 
 
@@ -869,13 +877,13 @@ bool facebook_client::home( )
 		// Get logout hash
 		this->logout_hash_ = utils::text::source_get_value( &resp.data, 2, "<input type=\"hidden\" autocomplete=\"off\" name=\"h\" value=\"", "\"" );
 		parent->Log("      Got self logout hash: %s", this->logout_hash_.c_str());
-
 			
-		// Get friend requests count and messages count and notify it
-		if ( DBGetContactSettingByte( NULL, parent->m_szModuleName, FACEBOOK_KEY_EVENT_OTHER_ENABLE, DEFAULT_EVENT_OTHER_ENABLE ) )
+
+		// Get friend requests count and notify it
+		std::string str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"requestsCountValue\">", "</span>" );
+		if ( str_count.length() && str_count != std::string( "0" ) )
 		{
-			std::string str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"requestsCountValue\">", "</span>" );
-			if ( str_count.length() && str_count != std::string( "0" ) )
+			if ( DBGetContactSettingByte( NULL, parent->m_szModuleName, FACEBOOK_KEY_EVENT_OTHER_ENABLE, DEFAULT_EVENT_OTHER_ENABLE ) )
 			{
 				std::string message = Translate("Got new friend requests: ") + str_count;
 
@@ -883,30 +891,33 @@ bool facebook_client::home( )
 				parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_REQUESTS) );
 				mir_free( tmessage );
 			}
+		}
 
-			str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"messagesCountValue\">", "</span>" );
-			if ( str_count.length() && str_count != std::string( "0" ) )
-			{
-				if (!DBGetContactSettingByte(NULL,parent->m_szModuleName,FACEBOOK_KEY_PARSE_MESSAGES, 0)) {
+		str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"messagesCountValue\">", "</span>" );
+		if ( str_count.length() && str_count != std::string( "0" ) )
+		{
+			if (!DBGetContactSettingByte(NULL,parent->m_szModuleName,FACEBOOK_KEY_PARSE_MESSAGES, 0)) {
+				if ( DBGetContactSettingByte( NULL, parent->m_szModuleName, FACEBOOK_KEY_EVENT_OTHER_ENABLE, DEFAULT_EVENT_OTHER_ENABLE ) )
+				{
 					std::string message = Translate("Got new messages: ") + str_count;
 
 					TCHAR* tmessage = mir_a2t(message.c_str());
 					parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_MESSAGES) );
 					mir_free( tmessage );
-				} else { // Parse messages directly for contacts
-					ForkThread( &FacebookProto::ProcessUnreadMessages, this->parent, NULL );
 				}
-			}
-			
-			str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"notificationsCountValue\">", "</span>" );
-			if ( str_count.length() && str_count != std::string( "0" ) )
-			{
-				// Parse notifications directly to popups
-				ForkThread( &FacebookProto::ProcessNotifications, this->parent, NULL );
+			} else { // Parse messages directly for contacts
+				ForkThread( &FacebookProto::ProcessUnreadMessages, this->parent, NULL );
 			}
 		}
+			
+		str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"notificationsCountValue\">", "</span>" );
+		if ( str_count.length() && str_count != std::string( "0" ) )
+		{
+			// Parse notifications directly to popups
+			ForkThread( &FacebookProto::ProcessNotifications, this->parent, NULL );
+		}
 
-  // RM TODO: if enabled groupchats support
+  // TODO RM: if enabled groupchats support
   // Get group chats
 /*      std::string chat_ids = utils::text::source_get_value( &resp.data, 2, "HomeNavController.initGroupCounts([","]" );
 		if ( chat_ids.length() )
@@ -980,6 +991,12 @@ bool facebook_client::reconnect( )
 	{
 	case HTTP_CODE_OK:
 	{
+		this->chat_channel_jslogger_ = utils::text::source_get_value( &resp.data, 2, "\"jslogger_suffix\":\"", "\"" );
+		parent->Log("      Got self channel jslogger: %s", this->chat_channel_jslogger_.c_str());
+				
+		this->chat_channel_partition_ = utils::text::source_get_value( &resp.data, 2, "\"partition\":", "," );
+		parent->Log("      Got self channel partition: %s", this->chat_channel_partition_.c_str());
+		
 		this->chat_channel_host_ = utils::text::source_get_value( &resp.data, 2, "\"host\":\"", "\"" );
 		parent->Log("      Got self channel host: %s", this->chat_channel_host_.c_str());
 
@@ -1123,7 +1140,7 @@ bool facebook_client::channel( )
 		parent->Log("      Reconnect reason: %s", this->chat_reconnect_reason_.c_str());
 
 //		client_notify(TranslateT("Required channel refresh, maybe we didn't received all messages.\nYou should check Facebook website to be sure."));
-		// RM TODO: reconnect isnt needed
+		// TODO RM: reconnect isnt needed
 		// return this->reconnect( );
 	}
 	else if ( resp.data.find( "\"t\":\"refresh\"" ) != std::string::npos )
@@ -1153,7 +1170,7 @@ bool facebook_client::channel( )
 		return handle_success( "channel" );
 
 	case HTTP_CODE_FAKE_DISCONNECTED:
-		if ( !parent->isOnline() )
+		if ( parent->m_iStatus == ID_STATUS_INVISIBLE )
 			return handle_success( "channel" );
 
 	case HTTP_CODE_FAKE_ERROR:
@@ -1256,7 +1273,7 @@ bool facebook_client::send_message( std::string message_recipient, std::string m
 
 void facebook_client::close_chat( std::string message_recipient )
 {
-	// RM TODO: better optimalization for close_chat
+	// TODO RM: better optimalization for close_chat
 	// add items to list and then checking every x seconds
 /*	if ( (::time(NULL) - parent->facy.last_close_chat_time_) < 8 )
 		return;*/
@@ -1280,7 +1297,7 @@ void facebook_client::close_chat( std::string message_recipient )
 
 void facebook_client::chat_mark_read( std::string message_recipient )
 {
-	// RM TODO: optimalization?
+	// TODO RM: optimalization?
 
 	std::string data = "action=chatMarkRead&other_user=";
 	data += message_recipient;
@@ -1310,8 +1327,6 @@ bool facebook_client::set_status(const std::string &status_text)
 		data += utils::url::encode( status_text );
 		data += "&profile_id=";
 		data += this->self_.user_id;
-	} else {
-		data += "&clear=1&nctr[_mod]=pagelet_top_bar";
 	}
 
 	http::response resp = flap( FACEBOOK_REQUEST_STATUS_SET, &data );
@@ -1332,18 +1347,21 @@ bool facebook_client::set_status(const std::string &status_text)
 
 //////////////////////////////////////////////////////////////////////////////
 
-bool facebook_client::save_url(const std::string &url,const std::string &filename)
+bool facebook_client::save_url(const std::string &url,const std::string &filename, HANDLE &nlc)
 {
 	NETLIBHTTPREQUEST req = {sizeof(req)};
 	NETLIBHTTPREQUEST *resp;
 	req.requestType = REQUEST_GET;
 	req.szUrl = const_cast<char*>(url.c_str());
+	req.flags = NLHRF_HTTP11 | NLHRF_REDIRECT | NLHRF_PERSISTENT;
+	req.nlc = nlc;
 
 	resp = reinterpret_cast<NETLIBHTTPREQUEST*>(CallService( MS_NETLIB_HTTPTRANSACTION,
 		reinterpret_cast<WPARAM>(this->parent->m_hNetlibUser), reinterpret_cast<LPARAM>(&req) ));
 
 	if ( resp )
 	{
+		nlc = resp->nlc;
 		parent->Log( "@@@@@ Saving avatar URL %s to path %s", url.c_str(), filename.c_str() );
 
 		// Create folder if necessary
@@ -1359,6 +1377,7 @@ bool facebook_client::save_url(const std::string &url,const std::string &filenam
 		CallService(MS_NETLIB_FREEHTTPREQUESTSTRUCT,0,(LPARAM)resp);
 		return true;
 	} else {
+		nlc = NULL;
 		return false;
 	}
 }
