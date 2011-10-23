@@ -289,7 +289,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				
 					const String& text = messageContent["body"];
 
-					// RM TODO: include sender name
+					// TODO RM: include sender name
 					// const String& name = messageContent["sender_name"];
         
 					const Number& time_sent = messageContent["timestamp"];
@@ -315,7 +315,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 			}
 			else if ( type.Value( ) == "group_msg" ) // chat message
 			{
-				if ( (::time(NULL) - proto->facy.last_grpmessage_time_) < 15 ) // RM TODO: remove dont notify more than once every 15 secs
+				if ( (::time(NULL) - proto->facy.last_grpmessage_time_) < 15 ) // TODO RM: remove dont notify more than once every 15 secs
 					continue;
 
 				proto->facy.last_grpmessage_time_ = ::time(NULL);
@@ -366,9 +366,12 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 			}
 			else if ( type.Value( ) == "app_msg" ) // event notification
 			{
+				if (!DBGetContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_EVENT_NOTIFICATIONS_ENABLE, DEFAULT_EVENT_NOTIFICATIONS_ENABLE))
+					continue;
+				
 				const String& text = objMember["response"]["payload"]["title"];
 				const String& link = objMember["response"]["payload"]["link"];
-				// RM TODO: include additional text of notification if exits? (e.g. comment text)
+				// TODO RM: include additional text of notification if exits? (e.g. comment text)
 				//const String& text2 = objMember["response"]["payload"]["alert"]["text"];
 
 				const Number& time_sent = objMember["response"]["payload"]["alert"]["time_sent"];        

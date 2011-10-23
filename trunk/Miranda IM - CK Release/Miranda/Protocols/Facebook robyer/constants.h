@@ -51,6 +51,7 @@ Last change on : $Date$
 #define FACEBOOK_SERVER_REGULAR     "www.facebook.com"
 //#define FACEBOOK_SERVER_MOBILE      "m.facebook.com"
 #define FACEBOOK_SERVER_CHAT        "%s.%s.facebook.com"
+#define FACEBOOK_SERVER_CHAT2       "%s-%s.facebook.com"
 #define FACEBOOK_SERVER_LOGIN       "login.facebook.com"
 #define FACEBOOK_SERVER_APPS        "apps.facebook.com"
 

@@ -132,96 +132,9 @@ void FacebookProto::SetAllContactStatuses(int status)
 	}
 }
 
-/*void FacebookProto::UpdateContactWorker(void *p)
-{
-	if ( p == NULL )
-		return;
-
-	facebook_user* fbu = ( facebook_user* )p;
-
-	if ( this->isOffline( ) )
-		goto exit;
-
-	LOG("***** Updating contact: %s",fbu->real_name.c_str());
-
-	if ( fbu->status_id == ID_STATUS_OFFLINE )
-	{
-		DBWriteContactSettingWord(fbu->handle,m_szModuleName,"Status",ID_STATUS_OFFLINE );
-		goto exit;
-	} else { // ID_STATUS_ONLINE + _CONNECTING for self-contact
-		bool update_required = false;
-
-		if ( fbu->user_id != facy.self_.user_id ) // if not self-contact
-		{ 
-			if (!fbu->handle) { // just been added
-				fbu->handle = AddToContactList(fbu);
-
-				DBWriteContactSettingUTF8String(fbu->handle,m_szModuleName,FACEBOOK_KEY_NAME,fbu->real_name.c_str());
-				DBWriteContactSettingUTF8String(fbu->handle,m_szModuleName,"Nick",fbu->real_name.c_str());
-			}
-
-			if (DBGetContactSettingWord(fbu->handle,m_szModuleName,"Status", 0) != ID_STATUS_ONLINE) {
-				DBWriteContactSettingWord(fbu->handle,m_szModuleName,"Status", ID_STATUS_ONLINE );
-			}
-		}
-
-		if ( fbu->user_id == facy.self_.user_id || ContactNeedsUpdate( fbu ) )
-		{			
-			DBVARIANT dbv;
-
-			// Check avatar change
-			update_required = true;
-			if ( !DBGetContactSettingString(fbu->handle,m_szModuleName,FACEBOOK_KEY_AV_URL,&dbv) )
-			{
-				update_required = strcmp( dbv.pszVal, fbu->image_url.c_str() ) != 0;
-				DBFreeVariant(&dbv);
-			}
-			if ( update_required || !AvatarExists(fbu) )
-			{
-				LOG("***** Saving new avatar url: %s",fbu->image_url.c_str());
-				DBWriteContactSettingString(fbu->handle,m_szModuleName,FACEBOOK_KEY_AV_URL,fbu->image_url.c_str());
-				ProcessAvatar(fbu->handle,&fbu->image_url);
-
-//				if ( fbu->user_id == facy.self_.user_id )
-//				{
-					//LOG("***** Reporting MyAvatar changed");
-					//CallService(MS_AV_REPORTMYAVATARCHANGED, (WPARAM)this->m_szModuleName, 0);
-				//}
-			}
-
-			// Update update timestamp
-			fbu->last_update = ::time( NULL );
-		}
-	}
-
-exit:
-	if ( fbu->status_id == ID_STATUS_OFFLINE && fbu->user_id != this->facy.self_.user_id )
-		delete fbu;
-}*/
-
-void FacebookProto::GetAwayMsgWorker(void *hContact)
-{
-/*	if(hContact == 0)
-    return;
-
-	DBVARIANT dbv;
-	if( !DBGetContactSettingString(hContact,"CList","StatusMsg",&dbv) )
-	{
-		ProtoBroadcastAck(m_szModuleName,hContact,ACKTYPE_AWAYMSG,ACKRESULT_SUCCESS,
-			(HANDLE)1,(LPARAM)dbv.pszVal);
-		DBFreeVariant(&dbv);
-	} else {
-		ProtoBroadcastAck(m_szModuleName,hContact,ACKTYPE_AWAYMSG,ACKRESULT_FAILED,
-			(HANDLE)1,(LPARAM)0);
-	}*/
-}
-
 HANDLE FacebookProto::GetAwayMsg(HANDLE hContact)
 {
-	return 0; // Status messages is disabled
-
-	//ForkThread(&FacebookProto::GetAwayMsgWorker, this,hContact);
-	//return (HANDLE)1;
+	return 0; // Status messages are disabled
 }
 
 int FacebookProto::OnContactDeleted(WPARAM wparam,LPARAM)

@@ -41,7 +41,7 @@ public:
 	{
 		username_ = password_ = \
 		post_form_id_ = dtsg_ = \
-		chat_sequence_num_ = chat_channel_host_ = \
+		chat_sequence_num_ = chat_channel_host_ = chat_channel_partition_ = chat_channel_jslogger_ = \
 		logout_hash_ = "";
 
 		msgid_ = error_count_ = last_feeds_update_ = \
@@ -75,6 +75,8 @@ public:
 	std::string dtsg_;
 	std::string logout_hash_;
 	std::string chat_channel_host_;
+	std::string chat_channel_jslogger_;
+	std::string chat_channel_partition_;
 	std::string chat_sequence_num_;
 	std::string chat_reconnect_reason_;
 	bool    invisible_;
@@ -176,7 +178,7 @@ public:
 	// HTTP communication
 
 	http::response  flap( const int request_type, std::string* request_data = NULL );
-	bool    save_url(const std::string &url,const std::string &filename);
+	bool    save_url(const std::string &url,const std::string &filename, HANDLE &nlc);
 
 	DWORD   choose_security_level( int );
 	int     choose_method( int );

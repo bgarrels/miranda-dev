@@ -105,7 +105,7 @@ public:
 	virtual	HANDLE    __cdecl GetAwayMsg( HANDLE hContact );
 	virtual	int       __cdecl RecvAwayMsg( HANDLE hContact, int mode, PROTORECVEVENT* evt );
 	virtual	int       __cdecl SendAwayMsg( HANDLE hContact, HANDLE hProcess, const char* msg );
-	//virtual	int       __cdecl SetAwayMsg( int iStatus, const PROTOCHAR* msg );
+	virtual	int       __cdecl SetAwayMsg( int iStatus, const PROTOCHAR* msg );
 
 	virtual	int       __cdecl UserIsTyping( HANDLE hContact, int type );
 
@@ -133,7 +133,7 @@ public:
 	int  __cdecl OnMind(WPARAM,LPARAM);
 	int  __cdecl OnPreShutdown(WPARAM,LPARAM);
 	int  __cdecl OnPrebuildContactMenu(WPARAM,LPARAM);
-	// RM TODO: Chat handling
+	// TODO RM: Chat handling
 	/*  int  __cdecl OnChatOutgoing(WPARAM,LPARAM);
 	int  __cdecl OnJoinChat(WPARAM,LPARAM);
 	int  __cdecl OnLeaveChat(WPARAM,LPARAM);*/
@@ -152,15 +152,12 @@ public:
 	void __cdecl ProcessUnreadMessages(void*);
 	void __cdecl ProcessFeeds(void*);
 	void __cdecl ProcessNotifications(void*);
-//	void         ProcessAvatar(HANDLE,const std::string*,bool force=false);
 
 	// Worker threads
 	void __cdecl SignOn(void*);
 	void __cdecl ChangeStatus(void*);
 	void __cdecl SignOff(void*);
-	void __cdecl GetAwayMsgWorker(void*);
 	void __cdecl SetAwayMsgWorker(void*);
-//	void __cdecl UpdateContactWorker(void*);
 	void __cdecl UpdateAvatarWorker(void*);
 	void __cdecl SendMsgWorker(void*);
 	void __cdecl SendTypingWorker(void*);
@@ -173,7 +170,7 @@ public:
 	void    SetAllContactStatuses(int);
 	bool    ContactNeedsUpdate(facebook_user*);
 
-	// RM TODO: Chats handling
+	// TODO RM: Chats handling
  	/*void AddChat(const char *id,const char *name);
 	void UpdateChat(const facebook_user &update);
 	void AddChatContact(const char *name,const char *nick=0);
@@ -185,7 +182,7 @@ public:
 
 	// Helpers
 	std::string GetAvatarFolder();
-	bool AvatarExists( facebook_user *fu);
+	bool GetDbAvatarInfo(PROTO_AVATAR_INFORMATION &ai, std::string *url);
 	void ToggleStatusMenuItems( BOOL bEnable );
 
 	// Handles, Locks
@@ -202,12 +199,14 @@ public:
 	HANDLE  m_hUpdLoop;
 	HANDLE  m_hMsgLoop;
 
+	std::string last_status_msg_;
 	std::string def_avatar_folder_;
 	HANDLE  hAvatarFolder_;
+	std::vector<HANDLE> avatar_queue;
 
 	static void CALLBACK APC_callback(ULONG_PTR p);
 
 	// Information providing
 	int Log(const char *fmt,...);
-	int NotifyEvent(TCHAR* title, TCHAR* info, HANDLE contact, DWORD flags, TCHAR* url=NULL);
+	void NotifyEvent(TCHAR* title, TCHAR* info, HANDLE contact, DWORD flags, TCHAR* url=NULL);
 };

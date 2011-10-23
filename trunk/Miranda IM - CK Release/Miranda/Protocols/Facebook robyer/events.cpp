@@ -88,7 +88,7 @@ LRESULT CALLBACK PopupDlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 	return DefWindowProc(hwnd, message, wParam, lParam);
 };
 
-int FacebookProto::NotifyEvent(TCHAR* title, TCHAR* info, HANDLE contact, DWORD flags, TCHAR* szUrl)
+void FacebookProto::NotifyEvent(TCHAR* title, TCHAR* info, HANDLE contact, DWORD flags, TCHAR* szUrl)
 {
 	int ret; int timeout; COLORREF colorBack = 0; COLORREF colorText = 0;
 
@@ -96,7 +96,7 @@ int FacebookProto::NotifyEvent(TCHAR* title, TCHAR* info, HANDLE contact, DWORD 
 	{
 	case FACEBOOK_EVENT_CLIENT:
 		if ( !getByte( FACEBOOK_KEY_EVENT_CLIENT_ENABLE, DEFAULT_EVENT_CLIENT_ENABLE ) )
-			return EXIT_SUCCESS;
+			goto exit;
 		if ( !getByte( FACEBOOK_KEY_EVENT_CLIENT_DEFAULT, 0 ) )
 		{
 			colorBack = getDword( FACEBOOK_KEY_EVENT_CLIENT_COLBACK, DEFAULT_EVENT_COLBACK );
@@ -108,7 +108,7 @@ int FacebookProto::NotifyEvent(TCHAR* title, TCHAR* info, HANDLE contact, DWORD 
 
 	case FACEBOOK_EVENT_NEWSFEED:
 		if ( !getByte( FACEBOOK_KEY_EVENT_FEEDS_ENABLE, DEFAULT_EVENT_FEEDS_ENABLE ) )
-			return EXIT_SUCCESS;
+			goto exit;
 		if ( !getByte( FACEBOOK_KEY_EVENT_FEEDS_DEFAULT, 0 ) )
 		{
 			colorBack = getDword( FACEBOOK_KEY_EVENT_FEEDS_COLBACK, DEFAULT_EVENT_COLBACK );
@@ -121,7 +121,7 @@ int FacebookProto::NotifyEvent(TCHAR* title, TCHAR* info, HANDLE contact, DWORD 
 
 	case FACEBOOK_EVENT_NOTIFICATION:
 		if ( !getByte( FACEBOOK_KEY_EVENT_NOTIFICATIONS_ENABLE, DEFAULT_EVENT_NOTIFICATIONS_ENABLE ) )
-			return EXIT_SUCCESS;
+			goto exit;
 		if ( !getByte( FACEBOOK_KEY_EVENT_NOTIFICATIONS_DEFAULT, 0 ) )
 		{
 			colorBack = getDword( FACEBOOK_KEY_EVENT_NOTIFICATIONS_COLBACK, DEFAULT_EVENT_COLBACK );
@@ -134,7 +134,7 @@ int FacebookProto::NotifyEvent(TCHAR* title, TCHAR* info, HANDLE contact, DWORD 
 
 	case FACEBOOK_EVENT_OTHER:
 		if ( !getByte( FACEBOOK_KEY_EVENT_OTHER_ENABLE, DEFAULT_EVENT_OTHER_ENABLE ) )
-			return EXIT_SUCCESS;
+			goto exit;
 		if ( !getByte( FACEBOOK_KEY_EVENT_OTHER_DEFAULT, 0 ) )
 		{
 			colorBack = getDword( FACEBOOK_KEY_EVENT_OTHER_COLBACK, DEFAULT_EVENT_COLBACK );
@@ -163,7 +163,7 @@ int FacebookProto::NotifyEvent(TCHAR* title, TCHAR* info, HANDLE contact, DWORD 
 			ret = PUAddPopUpT(&pd);
 
 			if (ret == 0)
-				return EXIT_FAILURE;
+				return;
 		}
 	} else {
 		if (ServiceExists(MS_CLIST_SYSTRAY_NOTIFY))
@@ -183,12 +183,14 @@ int FacebookProto::NotifyEvent(TCHAR* title, TCHAR* info, HANDLE contact, DWORD 
 			ret = CallService(MS_CLIST_SYSTRAY_NOTIFY, 0, (LPARAM) & err);
 
 			if (ret == 0)
-				return EXIT_FAILURE;
-		} 
+				goto exit;
+		}
 	}
 
 	if (FLAG_CONTAINS(flags, FACEBOOK_EVENT_CLIENT))
 		MessageBox(NULL, info, title, MB_OK | MB_ICONINFORMATION);
 
-	return EXIT_SUCCESS;
+exit:
+	if (szUrl != NULL)
+		mir_free(szUrl);
 }

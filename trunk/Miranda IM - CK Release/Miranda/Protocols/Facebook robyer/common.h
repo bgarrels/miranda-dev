@@ -35,15 +35,16 @@ Last change on : $Date: 2011-01-08 11:10:34 +0100 (so, 08 1 2011) $
 #define _WIN32_WINNT   0x0500
 #define _WIN32_WINDOWS 0x0500
 
-#include <iostream>
+//#include <m_stdhdr.h>
+
 #include <string>
-#include <cstring>
 #include <sstream>
 #include <fstream>
 #include <list>
 #include <map>
 #include <vector>
-#include <ctime>
+#include <algorithm>
+
 #include <stdarg.h>
 #include <time.h>
 #include <assert.h>
@@ -83,10 +84,10 @@ Last change on : $Date: 2011-01-08 11:10:34 +0100 (so, 08 1 2011) $
 #include <m_addcontact.h>
 #include <m_icolib.h>
 #include <m_utils.h>
-#include <m_xml.h>
 #include <m_hotkeys.h>
-#include <m_updater.h>
-#include <m_folders.h>
+
+#include "m_updater.h"
+#include "m_folders.h"
 
 class FacebookProto;
 
@@ -104,13 +105,6 @@ class FacebookProto;
 #include "dialogs.h"
 #include "theme.h"
 #include "resource.h"
-
-#if defined _DEBUG
-#include <stdlib.h>
-#include <crtdbg.h>
-#endif
-
-//#pragma warning(pop)
 
 extern HINSTANCE g_hInstance;
 extern std::string g_strUserAgent;

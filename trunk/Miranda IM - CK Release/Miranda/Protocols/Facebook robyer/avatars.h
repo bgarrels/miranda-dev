@@ -29,7 +29,9 @@ Last change on : $Date: 2011-01-08 11:10:34 +0100 (so, 08 1 2011) $
 
 struct update_avatar
 {
-	update_avatar(HANDLE hContact,const std::string &url) : hContact(hContact),url(url) {}
+	update_avatar(HANDLE hContact,const std::string &url,const std::string &file) 
+		: hContact(hContact),url(url),file(file) {}
+
 	HANDLE hContact;
-	std::string url;
+	std::string url, file;
 };

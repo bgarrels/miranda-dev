@@ -85,23 +85,16 @@ void FacebookProto::ProcessBuddyList( void* data )
 			bool update_required = true;
 			if ( !DBGetContactSettingString(fbu->handle,m_szModuleName,FACEBOOK_KEY_AV_URL,&dbv) )
 			{
-				update_required = strcmp( dbv.pszVal, fbu->image_url.c_str() ) != 0;
+				update_required = fbu->image_url != dbv.pszVal;
 				DBFreeVariant(&dbv);
 			}
-			if ( update_required /*|| !AvatarExists(fbu) */)
+			if ( update_required)
 			{
-				//LOG("***** Saving new avatar url: %s",fbu->image_url.c_str());
 				DBWriteContactSettingString(fbu->handle,m_szModuleName,FACEBOOK_KEY_AV_URL,fbu->image_url.c_str());
-
 				ProtoBroadcastAck(m_szModuleName, fbu->handle, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
-
-				//DBWriteContactSettingByte(fbu->handle,m_szModuleName,FACEBOOK_KEY_NEW_AVATAR,1);
-				//ProcessAvatar(fbu->handle,&fbu->image_url);
 			}
 
 		}
-
-		//ForkThread(&FacebookProto::UpdateContactWorker, this, (void*)fu);
 	}
 
 	LOG("***** Buddy list processed");
@@ -157,7 +150,7 @@ void FacebookProto::ProcessFriendList( void* data )
 				DBVARIANT dbv;
 				bool update_required = true;
 
-				// RM TODO: remove, because contacts cant change it, so its only for "first run"
+				// TODO RM: remove, because contacts cant change it, so its only for "first run"
 				// Update gender
 				if ( DBGetContactSettingByte(hContact, m_szModuleName, "Gender", 0) != fbu->gender )
 					DBWriteContactSettingByte(hContact, m_szModuleName, "Gender", fbu->gender );
@@ -174,18 +167,29 @@ void FacebookProto::ProcessFriendList( void* data )
 					DBWriteContactSettingUTF8String(hContact, m_szModuleName, "Nick", fbu->real_name.c_str());
 				}
 
+				// Wasn't contact removed from "server-list" someday?
+				if ( DBGetContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) ) {
+					DBDeleteContactSetting(hContact, m_szModuleName, FACEBOOK_KEY_DELETED);
+
+					std::string url = FACEBOOK_URL_PROFILE + fbu->user_id;					
+
+					TCHAR* szTitle = mir_a2t_cp(fbu->real_name.c_str(), CP_UTF8);
+					TCHAR* szUrl = mir_a2t_cp(url.c_str(), CP_UTF8);
+					NotifyEvent(szTitle, TranslateT("Contact is back on server-list."), hContact, FACEBOOK_EVENT_CLIENT, szUrl);
+					mir_free( szTitle );
+					// mir_free( szUrl ); // url is free'd in popup procedure
+				}
+
 				// Check avatar change
 				update_required = true;
 				if ( !DBGetContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, &dbv) )
 				{
-					update_required = strcmp( dbv.pszVal, fbu->image_url.c_str() ) != 0;
+					update_required = fbu->image_url != dbv.pszVal;
 					DBFreeVariant(&dbv);
 				}
 				if ( update_required ) {
 					DBWriteContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, fbu->image_url.c_str());
 					ProtoBroadcastAck(m_szModuleName, hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
-					//DBWriteContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_NEW_AVATAR, 1);
-					//RM TODO: notify that avatar should change
 				}
 			
 				delete fbu;
@@ -207,7 +211,7 @@ void FacebookProto::ProcessFriendList( void* data )
 
 					TCHAR* szTitle = mir_a2t_cp(contactname.c_str(), CP_UTF8);
 					TCHAR* szUrl = mir_a2t_cp(url.c_str(), CP_UTF8);
-					NotifyEvent(szTitle, TranslateT("Contact was removed from server."), hContact, FACEBOOK_EVENT_CLIENT, szUrl);
+					NotifyEvent(szTitle, TranslateT("Contact is no longer on server-list."), hContact, FACEBOOK_EVENT_CLIENT, szUrl);
 					mir_free( szTitle );
 					// mir_free( szUrl ); // url is free'd in popup procedure
 				}
@@ -226,7 +230,6 @@ void FacebookProto::ProcessFriendList( void* data )
 		DBWriteContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NAME, fbu->real_name.c_str());
 		DBWriteContactSettingUTF8String(hContact, m_szModuleName, "Nick", fbu->real_name.c_str());
 		DBWriteContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, fbu->image_url.c_str());
-		//DBWriteContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_NEW_AVATAR, 1);
 //		DBWriteContactSettingWord(hContact, m_szModuleName, "Status", ID_STATUS_OFFLINE );
 	}
 
@@ -306,8 +309,8 @@ void FacebookProto::ProcessUnreadMessages( void* )
 							utils::text::special_expressions_decode(
 								utils::text::remove_html( message_text ) ) );
 
-			PROTORECVEVENT recv = {};
-			CCSDATA ccs = {};
+			PROTORECVEVENT recv = {0};
+			CCSDATA ccs = {0};
 
 			recv.flags = PREF_UTF;
 			recv.szMessage = const_cast<char*>(message_text.c_str());
@@ -315,7 +318,6 @@ void FacebookProto::ProcessUnreadMessages( void* )
 
 			ccs.hContact = hContact;
 			ccs.szProtoService = PSR_MESSAGE;
-			ccs.wParam = 0;
 			ccs.lParam = reinterpret_cast<LPARAM>(&recv);
 			CallService(MS_PROTO_CHAINRECV,0,reinterpret_cast<LPARAM>(&ccs));
 
@@ -358,8 +360,8 @@ void FacebookProto::ProcessMessages( void* data )
 
 			HANDLE hContact = AddToContactList(&fbu);
 			
-			PROTORECVEVENT recv = {};
-			CCSDATA ccs = {};
+			PROTORECVEVENT recv = {0};
+			CCSDATA ccs = {0};
 
 			recv.flags = PREF_UTF;
 			recv.szMessage = const_cast<char*>(messages[i]->message_text.c_str());
@@ -367,7 +369,6 @@ void FacebookProto::ProcessMessages( void* data )
 
 			ccs.hContact = hContact;
 			ccs.szProtoService = PSR_MESSAGE;
-			ccs.wParam = ID_STATUS_ONLINE;
 			ccs.lParam = reinterpret_cast<LPARAM>(&recv);
 			CallService(MS_PROTO_CHAINRECV,0,reinterpret_cast<LPARAM>(&ccs));
 		}
@@ -375,21 +376,17 @@ void FacebookProto::ProcessMessages( void* data )
 	}
 	messages.clear();
 
-	// RM TODO: needed if notify?
-	BYTE notify = getByte( FACEBOOK_KEY_EVENT_NOTIFICATIONS_ENABLE, DEFAULT_EVENT_NOTIFICATIONS_ENABLE );
 	for(std::vector<facebook_notification*>::size_type i=0; i<notifications.size( ); i++)
 	{
-		if ( notify )
-		{
-			LOG("      Got notification: %s", notifications[i]->text.c_str());
-			TCHAR* szTitle = mir_a2t_cp(this->m_szModuleName, CP_UTF8);
-			TCHAR* szText = mir_a2t_cp(notifications[i]->text.c_str(), CP_UTF8);
-			TCHAR* szUrl = mir_a2t_cp(notifications[i]->link.c_str(), CP_UTF8);
-			NotifyEvent( szTitle, szText, ContactIDToHContact(notifications[i]->user_id), FACEBOOK_EVENT_NOTIFICATION, szUrl );
-			mir_free( szTitle );
-			mir_free( szText );
-//			mir_free( szUrl ); // URL is free'd in popup procedure
-		}
+		LOG("      Got notification: %s", notifications[i]->text.c_str());
+		TCHAR* szTitle = mir_a2t_cp(this->m_szModuleName, CP_UTF8);
+		TCHAR* szText = mir_a2t_cp(notifications[i]->text.c_str(), CP_UTF8);
+		TCHAR* szUrl = mir_a2t_cp(notifications[i]->link.c_str(), CP_UTF8);
+		NotifyEvent( szTitle, szText, ContactIDToHContact(notifications[i]->user_id), FACEBOOK_EVENT_NOTIFICATION, szUrl );
+		mir_free( szTitle );
+		mir_free( szText );
+//		mir_free( szUrl ); // URL is free'd in popup procedure
+
 		delete notifications[i];
 	}
 	notifications.clear();
@@ -485,7 +482,7 @@ void FacebookProto::ProcessFeeds( void* data )
 
 	*resp = utils::text::slashu_to_utf8(*resp);
 
-	// RM TODO: first parse against <li>...</li>?
+	// TODO RM: first parse against <li>...</li>?
 	while ( ( pos = resp->find( "<h6", pos ) ) != std::string::npos && limit <= 25 )
 	{
 		std::string::size_type pos2 = resp->find( "<abbr title", pos );
@@ -565,9 +562,3 @@ void FacebookProto::ProcessFeeds( void* data )
 exit:
 	delete resp;
 }
-
-/*void FacebookProto::ProcessAvatar(HANDLE hContact,const std::string* url,bool force)
-{
-	ForkThread(&FacebookProto::UpdateAvatarWorker, this,
-	    new update_avatar(hContact,(*url)));
-}*/
