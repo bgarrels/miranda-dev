@@ -37,6 +37,7 @@ HANDLE hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon, hDeleteIcon;
 HANDLE hToolbarButton;
 HGENMENU hContactMenu;
 bool g_SmileyAddAvail = false;
+char* metaContactProto = NULL;
 const IID IID_ITextDocument={0x8CC497C0, 0xA1DF, 0x11ce, {0x80, 0x98, 0x00, 0xAA, 0x00, 0x47, 0xBE, 0x5D}};
 
 #define MODULE				"BasicHistory"
@@ -242,6 +243,10 @@ int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 	if (ServiceExists(MS_SMILEYADD_REPLACESMILEYS)) 
 	{
 		g_SmileyAddAvail = true;
+	}
+	if (ServiceExists(MS_MC_GETPROTOCOLNAME)) 
+	{
+		metaContactProto = (char*)CallService(MS_MC_GETPROTOCOLNAME, 0, 0);
 	}
 	return 0;
 }

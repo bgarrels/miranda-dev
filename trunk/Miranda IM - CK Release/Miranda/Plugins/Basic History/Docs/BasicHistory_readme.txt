@@ -19,6 +19,11 @@ Microsoft Visual C++ 2010 Redistributable Package
 Changelog
 =========
 
+--- 1.0.0.5 ---
+* fixed bug with setting "All events" filter as default
+* fixed "buffer overrun" error in some cases
++ metacontacts improvements
+
 --- 1.0.0.4 ---
 + added filters
 + added System history
