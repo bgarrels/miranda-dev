@@ -239,6 +239,7 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
