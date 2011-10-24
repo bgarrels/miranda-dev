@@ -29,6 +29,7 @@ extern HANDLE *hEventIcons;
 extern int iconsNum;
 extern HANDLE hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon, hDeleteIcon;
 extern bool g_SmileyAddAvail;
+extern char* metaContactProto;
 #define DM_HREBUILD  (WM_USER+11)
 #define DM_SPLITTERMOVED     (WM_USER+15)
 
@@ -1375,7 +1376,7 @@ static void GetAuthRequestDescription( DBEVENTINFO *dbei, TCHAR* buf, int cbBuf 
 		allName += _T(", ");
 	}
 
-	_stprintf_s(buf, cbBuf, TranslateT("Authorisation request by %s (%s%d): %s"), 
+	_sntprintf_s(buf, cbBuf, _TRUNCATE, TranslateT("Authorisation request by %s (%s%d): %s"), 
 		(newNick[0] == 0 ? (TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) hContact, GCDNF_TCHAR) : newNick),
 		allName.c_str(), uin, newReason);
 	mir_free( newNick );
@@ -1882,7 +1883,7 @@ void HistoryWindow::ReloadContacts()
 	bool isEmpty = true;
 	while(_hContact)
 	{
-		if(CallService(MS_DB_EVENT_GETCOUNT,(WPARAM) _hContact,0))
+		if(CallService(MS_DB_EVENT_GETCOUNT,(WPARAM) _hContact,0) && (metaContactProto == NULL || DBGetContactSettingByte(_hContact, metaContactProto, "IsSubcontact", 0) == 0))
 		{
 			TCHAR* d = (TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) _hContact, GCDNF_TCHAR );
 			int pos = ListBox_AddString(GetDlgItem(hWnd,IDC_LIST_CONTACTS), d);

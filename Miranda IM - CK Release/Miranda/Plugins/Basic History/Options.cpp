@@ -350,7 +350,7 @@ void Options::Save()
 	DBWriteContactSettingByte(0, MODULE, "searchOnlyIn", searchOnlyIn ? 1 : 0);
 	DBWriteContactSettingByte(0, MODULE, "searchOnlyOut", searchOnlyOut ? 1 : 0);
 	DBWriteContactSettingByte(0, MODULE, "searchOnlyGroup", searchOnlyGroup ? 1 : 0);
-	if(defFilter < 0 || defFilter - 2 >= customFilters.size()) defFilter = 0;
+	if(defFilter < 0 || defFilter - 2 >= (int)customFilters.size()) defFilter = 0;
 	DBWriteContactSettingByte(0, MODULE, "defFilter", defFilter < 2 ? defFilter : 2);
 	if(defFilter >= 2)
 		DBWriteContactSettingWString(0, MODULE, "defFilterStr", customFilters[defFilter - 2].name.c_str());
