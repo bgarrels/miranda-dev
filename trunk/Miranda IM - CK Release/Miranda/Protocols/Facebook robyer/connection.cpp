@@ -55,9 +55,6 @@ void FacebookProto::ChangeStatus(void*)
 	int new_status = m_iDesiredStatus;
 	int old_status = m_iStatus;
 
-	m_iStatus = facy.self_.status_id = ID_STATUS_CONNECTING;
-	ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, (HANDLE)old_status, m_iStatus);
-
 	if ( new_status == ID_STATUS_OFFLINE )
 	{ // Logout	
 		LOG("##### Beginning SignOff process");
@@ -84,6 +81,9 @@ void FacebookProto::ChangeStatus(void*)
 	else if ( old_status == ID_STATUS_OFFLINE )
 	{ // Login
 		LOG("***** Beginning SignOn process");
+
+		m_iStatus = facy.self_.status_id = ID_STATUS_CONNECTING;
+		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, (HANDLE)old_status, m_iStatus);
 
 		KillThreads( );
 

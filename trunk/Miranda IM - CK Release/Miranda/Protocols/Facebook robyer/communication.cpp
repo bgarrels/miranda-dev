@@ -838,29 +838,13 @@ bool facebook_client::home( )
 			return handle_error( "home", FORCE_DISCONNECT );
 		}
 
-
 		// Get avatar
 		this->self_.image_url = utils::text::trim(
 			utils::text::special_expressions_decode(
 				utils::text::source_get_value( &resp.data, 3, "class=\\\"fbxWelcomeBoxImg", "src=\\\"", "\\\"" ) ) );
 		parent->Log("      Got self avatar: %s", this->self_.image_url.c_str());
 
-		DBVARIANT dbv;
-		facebook_user *fbu = &(this->self_);
-		// Check avatar change
-		bool update_required = true;
-		if ( !DBGetContactSettingString(fbu->handle,parent->m_szModuleName,FACEBOOK_KEY_AV_URL,&dbv) )
-		{
-			update_required = fbu->image_url != dbv.pszVal;
-			DBFreeVariant(&dbv);
-		}
-		if ( update_required )
-		{
-			parent->Log("***** Saving my avatar url: %s", fbu->image_url.c_str());
-			DBWriteContactSettingString(fbu->handle, parent->m_szModuleName, FACEBOOK_KEY_AV_URL, fbu->image_url.c_str());			
-			ProtoBroadcastAck(parent->m_szModuleName, fbu->handle, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
-		}	
-
+		parent->CheckAvatarChange(NULL, this->self_.image_url);
 
 		// Get post_form_id
 		this->post_form_id_ = utils::text::source_get_value( &resp.data, 2, "post_form_id:\"", "\"" );
@@ -883,31 +867,25 @@ bool facebook_client::home( )
 		std::string str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"requestsCountValue\">", "</span>" );
 		if ( str_count.length() && str_count != std::string( "0" ) )
 		{
-			if ( DBGetContactSettingByte( NULL, parent->m_szModuleName, FACEBOOK_KEY_EVENT_OTHER_ENABLE, DEFAULT_EVENT_OTHER_ENABLE ) )
-			{
-				std::string message = Translate("Got new friend requests: ") + str_count;
+			std::string message = Translate("Got new friend requests: ") + str_count;
 
-				TCHAR* tmessage = mir_a2t(message.c_str());
-				parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_REQUESTS) );
-				mir_free( tmessage );
-			}
+			TCHAR* tmessage = mir_a2t(message.c_str());
+			parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_REQUESTS) );
+			mir_free( tmessage );
 		}
 
-		str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"messagesCountValue\">", "</span>" );
-		if ( str_count.length() && str_count != std::string( "0" ) )
-		{
-			if (!DBGetContactSettingByte(NULL,parent->m_szModuleName,FACEBOOK_KEY_PARSE_MESSAGES, 0)) {
-				if ( DBGetContactSettingByte( NULL, parent->m_szModuleName, FACEBOOK_KEY_EVENT_OTHER_ENABLE, DEFAULT_EVENT_OTHER_ENABLE ) )
-				{
-					std::string message = Translate("Got new messages: ") + str_count;
+		if (!DBGetContactSettingByte(NULL,parent->m_szModuleName,FACEBOOK_KEY_PARSE_MESSAGES, 0)) {
+			str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"messagesCountValue\">", "</span>" );
+			if ( str_count.length() && str_count != std::string( "0" ) )
+			{
+				std::string message = Translate("Got new messages: ") + str_count;
 
-					TCHAR* tmessage = mir_a2t(message.c_str());
-					parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_MESSAGES) );
-					mir_free( tmessage );
-				}
-			} else { // Parse messages directly for contacts
-				ForkThread( &FacebookProto::ProcessUnreadMessages, this->parent, NULL );
+				TCHAR* tmessage = mir_a2t(message.c_str());
+				parent->NotifyEvent( parent->m_tszUserName, tmessage, NULL, FACEBOOK_EVENT_OTHER, TEXT(FACEBOOK_URL_MESSAGES) );
+				mir_free( tmessage );
 			}
+		} else { // Parse messages directly for contacts
+			ForkThread( &FacebookProto::ProcessUnreadMessages, this->parent, NULL );
 		}
 			
 		str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"notificationsCountValue\">", "</span>" );

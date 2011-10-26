@@ -82,10 +82,10 @@ public:
 	bool    invisible_;
 	bool    is_typing_;
 	time_t  last_feeds_update_;
-	time_t  last_notification_time_;
-	time_t  last_message_time_;
-	time_t  last_grpmessage_time_;
-	time_t  last_close_chat_time_;
+	double  last_notification_time_;
+	double  last_message_time_;
+	double  last_grpmessage_time_;
+	//time_t  last_close_chat_time_;
 	int     msgid_;
 
 	//bool api_check( );

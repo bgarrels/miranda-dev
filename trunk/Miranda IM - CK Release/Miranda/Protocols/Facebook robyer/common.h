@@ -35,7 +35,7 @@ Last change on : $Date: 2011-01-08 11:10:34 +0100 (so, 08 1 2011) $
 #define _WIN32_WINNT   0x0500
 #define _WIN32_WINDOWS 0x0500
 
-//#include <m_stdhdr.h>
+#include <m_stdhdr.h>
 
 #include <string>
 #include <sstream>

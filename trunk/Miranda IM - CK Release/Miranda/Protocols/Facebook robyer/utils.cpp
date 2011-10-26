@@ -272,7 +272,7 @@ std::string utils::text::trim( std::string data )
 std::string utils::text::source_get_value( std::string* data, unsigned int argument_count, ... )
 {
 	va_list arg;
-	std::string ret = "";
+	std::string ret;
 	std::string::size_type start = 0, end = 0;
 	
 	va_start( arg, argument_count );

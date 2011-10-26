@@ -79,21 +79,8 @@ void FacebookProto::ProcessBuddyList( void* data )
 			}
 
 
-			DBVARIANT dbv;
-
 			// Check avatar change
-			bool update_required = true;
-			if ( !DBGetContactSettingString(fbu->handle,m_szModuleName,FACEBOOK_KEY_AV_URL,&dbv) )
-			{
-				update_required = fbu->image_url != dbv.pszVal;
-				DBFreeVariant(&dbv);
-			}
-			if ( update_required)
-			{
-				DBWriteContactSettingString(fbu->handle,m_szModuleName,FACEBOOK_KEY_AV_URL,fbu->image_url.c_str());
-				ProtoBroadcastAck(m_szModuleName, fbu->handle, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
-			}
-
+			CheckAvatarChange(fbu->handle, fbu->image_url);
 		}
 	}
 
@@ -181,16 +168,7 @@ void FacebookProto::ProcessFriendList( void* data )
 				}
 
 				// Check avatar change
-				update_required = true;
-				if ( !DBGetContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, &dbv) )
-				{
-					update_required = fbu->image_url != dbv.pszVal;
-					DBFreeVariant(&dbv);
-				}
-				if ( update_required ) {
-					DBWriteContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, fbu->image_url.c_str());
-					ProtoBroadcastAck(m_szModuleName, hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
-				}
+				CheckAvatarChange(hContact, fbu->image_url);
 			
 				delete fbu;
 				friends.erase(iter);
