@@ -65,6 +65,32 @@ bool FacebookProto::GetDbAvatarInfo(PROTO_AVATAR_INFORMATION &ai, std::string *u
 	return false;
 }
 
+void FacebookProto::CheckAvatarChange(HANDLE hContact, const std::string &image_url)
+{
+	if (hContact)
+	{
+		DBVARIANT dbv;
+		bool update_required = true;
+		if (!DBGetContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, &dbv))
+		{
+			update_required = image_url != dbv.pszVal;
+			DBFreeVariant(&dbv);
+		}
+		if (update_required)
+		{
+			DBWriteContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, image_url.c_str());
+			ProtoBroadcastAck(m_szModuleName, hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
+		}
+	}
+	else
+	{
+		DBWriteContactSettingString(NULL, m_szModuleName, FACEBOOK_KEY_AV_URL, image_url.c_str());			
+		PROTO_AVATAR_INFORMATION ai = {sizeof(ai)};
+		if (GetAvatarInfo(0, (LPARAM)&ai) != GAIR_WAITFOR)
+			CallService(MS_AV_REPORTMYAVATARCHANGED, (WPARAM)m_szModuleName, 0);
+	}
+}
+
 void FacebookProto::UpdateAvatarWorker(void *)
 {
 	HANDLE nlc = NULL;
@@ -104,8 +130,6 @@ void FacebookProto::UpdateAvatarWorker(void *)
 
 std::string FacebookProto::GetAvatarFolder()
 {
-	LOG("***** GetAvatarFolder");
-
 	char path[MAX_PATH];
 	if ( hAvatarFolder_ && FoldersGetCustomPath(hAvatarFolder_,path,sizeof(path), "") == 0 )
 		return path;
@@ -115,7 +139,6 @@ std::string FacebookProto::GetAvatarFolder()
 
 int FacebookProto::GetAvatarCaps(WPARAM wParam, LPARAM lParam)
 {
-LOG("***** GetAvatarCaps");
 	int res = 0;
 
 	switch (wParam)
@@ -153,8 +176,6 @@ LOG("***** GetAvatarCaps");
 
 int FacebookProto::GetAvatarInfo(WPARAM wParam, LPARAM lParam)
 {
-	LOG("***** GetAvatarInfo");
-
 	if (!lParam)
 		return GAIR_NOAVATAR;
 
@@ -162,7 +183,7 @@ int FacebookProto::GetAvatarInfo(WPARAM wParam, LPARAM lParam)
 
 	if (GetDbAvatarInfo(*AI, NULL))
 	{
-		if (!_access(AI->filename, 0) || (wParam & GAIF_FORCE))
+		if (_access(AI->filename, 0) || (wParam & GAIF_FORCE))
 		{												
 			LOG("***** Starting avatar request thread for %s", AI->filename);
 			ScopedLock s( avatar_lock_ );
