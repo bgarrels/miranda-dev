@@ -634,7 +634,7 @@ KN_FP_MASK def_kn_fp_overlays_mask[] =
 	{ "client_LESTAT_",			_T("*[Lpack]*"),						    _T("Lestat Pack"),						_T("ClientIcons_Packs"),	IDI_MIRANDA_LESTAT, INVALID_HANDLE_VALUE, PACKS_CASE },
 	{ "client_DEVILSUITE_",		_T("*6.6.6*"),						    	_T("Devil Suite"),						_T("ClientIcons_Packs"),	IDI_MIRANDA_DEVIL, INVALID_HANDLE_VALUE, PACKS_CASE },
 	{ "client_FINAL",			_T("*[FinalPack]*"),						_T("Final Pack"),						_T("ClientIcons_Packs"),	IDI_MIRANDA_FINAL, INVALID_HANDLE_VALUE, PACKS_CASE },
-	{ "client_CAPPUCCINO",		_T("*[Cappuccino]*"),						_T("HotCoffee mod Pack"),				_T("ClientIcons_Packs"),	IDI_MIRANDA_CAPPUCCINO, INVALID_HANDLE_VALUE, PACKS_CASE },
+	{ "client_CAPPUCCINO",		_T("*[HotCoffee]*"),						_T("HotCoffee"),						_T("ClientIcons_Packs"),	IDI_MIRANDA_CAPPUCCINO, INVALID_HANDLE_VALUE, PACKS_CASE },
 	{ "client_WATCHER",			_T("*[WatcherPack]*"),						_T("Watcher Pack"),						_T("ClientIcons_Packs"),	IDI_MIRANDA_WATCHER, INVALID_HANDLE_VALUE, PACKS_CASE },
 
 //#########################################################################################################################################
