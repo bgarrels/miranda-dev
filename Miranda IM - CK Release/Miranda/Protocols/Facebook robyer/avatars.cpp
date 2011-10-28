@@ -38,21 +38,14 @@ bool FacebookProto::GetDbAvatarInfo(PROTO_AVATAR_INFORMATION &ai, std::string *u
 		if (new_url.empty())
 			return false;
 	
+		if (url)
+			*url = new_url;
+
 		if (!DBGetContactSettingString(ai.hContact, m_szModuleName, FACEBOOK_KEY_ID, &dbv))
 		{
 			std::string ext = new_url.substr(new_url.rfind('.'));
-
-			if (url && DBGetContactSettingByte(NULL, m_szModuleName, FACEBOOK_KEY_BIG_AVATARS, 1)) 
-			{
-				std::string::size_type pos = new_url.rfind( "_q." );
-				if (pos != std::string::npos)
-					new_url = new_url.replace( pos, 3, "_s." );
-
-				*url = new_url;
-			}
-
-			std::string filename = GetAvatarFolder() + '\\' + dbv.pszVal + ext;
-			DBFreeVariant(&dbv);
+			std::string filename = GetAvatarFolder() + '\\' + dbv.pszVal + ext;			
+			DBFreeVariant(&dbv);			
 
 			ai.hContact = ai.hContact;
 			ai.format = ext_to_format(ext);
@@ -65,29 +58,33 @@ bool FacebookProto::GetDbAvatarInfo(PROTO_AVATAR_INFORMATION &ai, std::string *u
 	return false;
 }
 
-void FacebookProto::CheckAvatarChange(HANDLE hContact, const std::string &image_url)
+void FacebookProto::CheckAvatarChange(HANDLE hContact, std::string image_url)
 {
-	if (hContact)
+	if (DBGetContactSettingByte(NULL, m_szModuleName, FACEBOOK_KEY_BIG_AVATARS, 0)) 
 	{
-		DBVARIANT dbv;
-		bool update_required = true;
-		if (!DBGetContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, &dbv))
-		{
-			update_required = image_url != dbv.pszVal;
-			DBFreeVariant(&dbv);
-		}
-		if (update_required)
-		{
-			DBWriteContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, image_url.c_str());
-			ProtoBroadcastAck(m_szModuleName, hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
-		}
+		std::string::size_type pos = image_url.rfind( "_q." );
+		if (pos != std::string::npos)
+			image_url = image_url.replace( pos, 3, "_s." );
 	}
-	else
+	
+	DBVARIANT dbv;
+	bool update_required = true;
+	if (!DBGetContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, &dbv))
 	{
-		DBWriteContactSettingString(NULL, m_szModuleName, FACEBOOK_KEY_AV_URL, image_url.c_str());			
-		PROTO_AVATAR_INFORMATION ai = {sizeof(ai)};
-		if (GetAvatarInfo(0, (LPARAM)&ai) != GAIR_WAITFOR)
-			CallService(MS_AV_REPORTMYAVATARCHANGED, (WPARAM)m_szModuleName, 0);
+		update_required = image_url != dbv.pszVal;
+		DBFreeVariant(&dbv);
+	}
+	if (update_required || !hContact)
+	{
+		DBWriteContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, image_url.c_str());
+		if (hContact)
+			ProtoBroadcastAck(m_szModuleName, hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
+		else
+		{
+			PROTO_AVATAR_INFORMATION ai = {sizeof(ai)};
+			if (GetAvatarInfo(update_required ? GAIF_FORCE : 0, (LPARAM)&ai) != GAIR_WAITFOR)
+				CallService(MS_AV_REPORTMYAVATARCHANGED, (WPARAM)m_szModuleName, 0);
+		}
 	}
 }
 

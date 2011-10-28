@@ -183,7 +183,7 @@ public:
 	// Helpers
 	std::string GetAvatarFolder();
 	bool GetDbAvatarInfo(PROTO_AVATAR_INFORMATION &ai, std::string *url);
-	void CheckAvatarChange(HANDLE hContact, const std::string &image_url);
+	void CheckAvatarChange(HANDLE hContact, std::string image_url);
 	void ToggleStatusMenuItems( BOOL bEnable );
 
 	// Handles, Locks

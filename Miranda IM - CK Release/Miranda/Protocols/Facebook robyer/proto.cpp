@@ -184,7 +184,7 @@ int FacebookProto::SetStatus( int new_status )
 		break;
 	}
 
-	if ( m_iStatus == ID_STATUS_CONNECTING && m_iDesiredStatus != ID_STATUS_OFFLINE )
+	if ( m_iStatus == ID_STATUS_CONNECTING )
 	{
 		LOG("===== Status is connecting, no change");
 		return 0;
@@ -224,7 +224,7 @@ int FacebookProto::SetAwayMsg( int status, const PROTOCHAR *msg )
 
 void FacebookProto::SetAwayMsgWorker(void *)
 {
-	if ( last_status_msg_.length() )
+	if ( !last_status_msg_.empty() )
 		facy.set_status( last_status_msg_ );
 }
 
