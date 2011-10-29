@@ -303,7 +303,6 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 		return "code.google.com";
 
 	case FACEBOOK_REQUEST_LOGIN:
-	case FACEBOOK_REQUEST_SETUP_MACHINE:
 		return FACEBOOK_SERVER_LOGIN;
 
 	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
@@ -341,6 +340,7 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 //	case FACEBOOK_REQUEST_ASYNC:
 //	case FACEBOOK_REQUEST_ASYNC2:
 //	case FACEBOOK_REQUEST_TYPING_SEND:
+//	case FACEBOOK_REQUEST_SETUP_MACHINE:
 	default:
 		return FACEBOOK_SERVER_REGULAR;
 	}
@@ -357,7 +357,6 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 		return "/login.php?login_attempt=1";
 
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
-		//return "/loginnotify/setup_machine.php?persistent=1";
 		return "/checkpoint/";
 
 	case FACEBOOK_REQUEST_LOGOUT:
@@ -678,6 +677,36 @@ bool facebook_client::login(const std::string &username,const std::string &passw
 
 	if ( resp.code == HTTP_CODE_FOUND && resp.headers.find("Location") != resp.headers.end() )
 	{
+		// Check whether captcha is required
+		if ( resp.headers["Location"].find("help.php") != std::string::npos )
+		{
+			client_notify( TranslateT("Login error: Captcha code is required. Bad login credentials?") );
+			parent->Log(" ! !  Login error: Captcha code is required.");
+			return handle_error( "login", FORCE_DISCONNECT );
+		}
+		
+		// Check whether setting Machine name is required
+		if ( resp.headers["Location"].find("/checkpoint/") != std::string::npos )
+		{
+			resp = flap( FACEBOOK_REQUEST_SETUP_MACHINE );
+			
+			std::string inner_data = "machine_name=MirandaIM&submit[Save%20Device]=Save%20Device";
+			inner_data += "&post_form_id=";
+			inner_data += utils::text::source_get_value(&resp.data, 3, "name=\"post_form_id\"", "value=\"", "\"" );
+			
+			inner_data += "&lsd=";
+			inner_data += utils::text::source_get_value(&resp.data, 3, "name=\"lsd\"", "value=\"", "\"" );
+			
+			inner_data += "&nh=";
+			inner_data += utils::text::source_get_value(&resp.data, 3, "name=\"nh\"", "value=\"", "\"" );
+
+			resp = flap( FACEBOOK_REQUEST_SETUP_MACHINE, &inner_data );
+			validate_response(&resp);
+		}
+	}
+	
+	if ( resp.code == HTTP_CODE_FOUND && resp.headers.find("Location") != resp.headers.end() )
+	{
 		// Check whether HTTPS connection is required and we don't have enabled it
 		if ( !DBGetContactSettingByte( NULL, parent->m_szProtoName, FACEBOOK_KEY_FORCE_HTTPS, 0 ) )
 		{    
@@ -688,21 +717,6 @@ bool facebook_client::login(const std::string &username,const std::string &passw
 			}
 		}
 
-		// Check whether captcha is required
-		if ( resp.headers["Location"].find("help.php") != std::string::npos )
-		{
-			client_notify( TranslateT("Login error: Captcha code is required. Bad login credentials?") );
-			parent->Log(" ! !  Login error: Captcha code is required.");
-			return handle_error( "login", FORCE_DISCONNECT );
-		}
-		
-		// Check whether setting Machine name is required
-		//if ( resp.headers["Location"].find("loginnotify/setup_machine.php") != std::string::npos )
-		if ( resp.headers["Location"].find("/checkpoint/") != std::string::npos )
-		{
-			std::string inner_data = "charset_test=%e2%82%ac%2c%c2%b4%2c%e2%82%ac%2c%c2%b4%2c%e6%b0%b4%2c%d0%94%2c%d0%84&locale=en&machinename=MirandaIM&remembercomputer=1";
-			flap( FACEBOOK_REQUEST_SETUP_MACHINE, &inner_data );
-		}
 	}
 
 	// Check for Device ID
@@ -839,11 +853,12 @@ bool facebook_client::home( )
 		}
 
 		// Get avatar
-		this->self_.image_url = utils::text::trim(
-			utils::text::special_expressions_decode(
-				utils::text::source_get_value( &resp.data, 3, "class=\\\"fbxWelcomeBoxImg", "src=\\\"", "\\\"" ) ) );
-		parent->Log("      Got self avatar: %s", this->self_.image_url.c_str());
+		std::string avatar = utils::text::source_get_value( &resp.data, 3, "class=\\\"fbxWelcomeBoxImg", "src=\\\"", "\\\"" );
+		if (avatar.empty())
+			avatar = utils::text::source_get_value( &resp.data, 3, "class=\"fbxWelcomeBoxImg", "src=\"", "\"" );
 
+		this->self_.image_url = utils::text::trim( utils::text::special_expressions_decode( avatar ) );
+		parent->Log("      Got self avatar: %s", this->self_.image_url.c_str());
 		parent->CheckAvatarChange(NULL, this->self_.image_url);
 
 		// Get post_form_id
@@ -874,7 +889,8 @@ bool facebook_client::home( )
 			mir_free( tmessage );
 		}
 
-		if (!DBGetContactSettingByte(NULL,parent->m_szModuleName,FACEBOOK_KEY_PARSE_MESSAGES, 0)) {
+		if (!DBGetContactSettingByte(NULL,parent->m_szModuleName,FACEBOOK_KEY_PARSE_MESSAGES, 0))
+		{
 			str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"messagesCountValue\">", "</span>" );
 			if ( str_count.length() && str_count != std::string( "0" ) )
 			{
