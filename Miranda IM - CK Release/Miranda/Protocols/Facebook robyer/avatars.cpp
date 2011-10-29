@@ -206,38 +206,24 @@ int FacebookProto::GetMyAvatar(WPARAM wParam, LPARAM lParam)
 {
 	LOG("***** GetMyAvatar");
 
-	if (!wParam)
+	if (!wParam || !lParam)
 		return -3;
 
 	char* buf = ( char* )wParam;
 	int  size = ( int )lParam;
 
-	DBVARIANT dbv;
-	std::string avatar_url;
-
-	if ( !getString( FACEBOOK_KEY_AV_URL,&dbv ) )
+	PROTO_AVATAR_INFORMATION ai = {sizeof(ai)};
+	switch (GetAvatarInfo(0, (LPARAM)&ai))
 	{
-		if ( strlen( dbv.pszVal ) == 0 )
-			return -2; // No avatar set
+	case GAIR_SUCCESS:
+		strncpy(buf, ai.filename, size);
+		buf[size-1] = 0;
+		return 0;
 
-		std::string avatar_url = dbv.pszVal;
-		DBFreeVariant(&dbv);
+	case GAIR_WAITFOR:
+		return -1;
 
-		if ( !getString( FACEBOOK_KEY_ID,&dbv ) )
-		{
-			std::string ext = avatar_url.substr(avatar_url.rfind('.'));
-			std::string file_name = GetAvatarFolder() + '\\' + dbv.pszVal + ext;
-			DBFreeVariant(&dbv);
-
-			if (!_access((char*)file_name.c_str(), 0))
-			{
-				LOG("***** Giving MyAvatar: %s",file_name.c_str());
-				strncpy((char*)wParam, file_name.c_str(), (int)lParam);
-				return 0; // Avatar file exists
-			}
-			
-			return -1; // Avatar file doesn't exist
-		}
+	default:
+		return -2;
 	}
-	return -2; // No avatar set
 }
