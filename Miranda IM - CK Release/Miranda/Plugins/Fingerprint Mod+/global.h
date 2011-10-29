@@ -88,7 +88,6 @@ typedef struct _knfpMask
 	LPTSTR	szClientDescription;
 	LPTSTR	szIconFileName;
 	int		iIconIndex;
-	HANDLE	hRegisteredImage;
 	int		iSectionFlag;
 	BOOL	fNotUseOverlay;
 } KN_FP_MASK;
