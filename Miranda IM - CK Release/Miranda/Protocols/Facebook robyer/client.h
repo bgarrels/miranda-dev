@@ -88,8 +88,6 @@ public:
 	//time_t  last_close_chat_time_;
 	int     msgid_;
 
-	//bool api_check( );
-
 	////////////////////////////////////////////////////////////
 
 	// Client vs protocol communication
@@ -163,7 +161,7 @@ public:
 	// Messages handling
 
 	bool    channel( );
-	bool    send_message( std::string message_recipient, std::string message_text, std::string *error_text );
+	bool    send_message( std::string message_recipient, std::string message_text, std::string *error_text, bool use_inbox = false );
 	void    close_chat( std::string message_recipient );
 	void    chat_mark_read( std::string message_recipient );
 

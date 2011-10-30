@@ -87,9 +87,6 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 
 	// Set all contacts offline -- in case we crashed
 	SetAllContactStatuses( ID_STATUS_OFFLINE );
-
-	// Check plugin API
-	//facy.api_check( );
 }
 
 FacebookProto::~FacebookProto( )
