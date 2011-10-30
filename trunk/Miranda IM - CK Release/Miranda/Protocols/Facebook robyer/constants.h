@@ -29,13 +29,13 @@ Last change on : $Date$
 
 // Version management
 #include "build.h"
-#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 5, 0)
+#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 5, 1)
 #define __PRODUCT_DWORD             PLUGIN_MAKE_VERSION(0, 9, 14, 0)
-#define __VERSION_STRING            "0.0.5.0"
+#define __VERSION_STRING            "0.0.5.1"
 #define __PRODUCT_STRING            "0.9.14.0"
-#define __VERSION_VS_FILE           0,0,5,0
+#define __VERSION_VS_FILE           0,0,5,1
 #define __VERSION_VS_PROD           0,9,14,0
-#define __VERSION_VS_FILE_STRING    "0, 0, 5, 0"
+#define __VERSION_VS_FILE_STRING    "0, 0, 5, 1"
 #define __VERSION_VS_PROD_STRING    "0, 9, 14, 0"
 
 // Product management
@@ -49,7 +49,6 @@ Last change on : $Date$
 
 // Connection
 #define FACEBOOK_SERVER_REGULAR     "www.facebook.com"
-//#define FACEBOOK_SERVER_MOBILE      "m.facebook.com"
 #define FACEBOOK_SERVER_CHAT        "%s.%s.facebook.com"
 #define FACEBOOK_SERVER_CHAT2       "%s-%s.facebook.com"
 #define FACEBOOK_SERVER_LOGIN       "login.facebook.com"
@@ -90,7 +89,6 @@ Last change on : $Date$
 #define FACEBOOK_EVENT_OTHER           0x80000000 // Facebook other event - friend requests/new messages
 
 // Facebook request types // TODO: Provide MS_ and release in FB plugin API?
-#define FACEBOOK_REQUEST_API_CHECK              50  // check latest API version
 #define FACEBOOK_REQUEST_LOGIN                  100 // connecting physically
 #define FACEBOOK_REQUEST_SETUP_MACHINE          102 // setting machine name
 #define FACEBOOK_REQUEST_LOGOUT                 106 // disconnecting physically

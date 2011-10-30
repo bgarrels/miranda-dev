@@ -61,7 +61,6 @@ http::response facebook_client::flap( const int request_type, std::string* reque
 
 	switch ( request_type )
 	{
-	case FACEBOOK_REQUEST_API_CHECK:
 	case FACEBOOK_REQUEST_LOGIN:
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
 		nlhr.nlc = NULL;
@@ -85,7 +84,6 @@ http::response facebook_client::flap( const int request_type, std::string* reque
 
 	switch ( request_type )
 	{
-	case FACEBOOK_REQUEST_API_CHECK:
 	case FACEBOOK_REQUEST_LOGIN:
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
 		break;
@@ -126,6 +124,15 @@ bool facebook_client::validate_response( http::response* resp )
 		return false;
 	}
 
+/*	std::string cookie = utils::text::source_get_value(&resp->data, 2, "setCookie(\\\"", ");");	
+	if (!cookie.empty()) {
+		std::string cookie_name = utils::text::source_get_value(&cookie, 1, "\\\"");
+		std::string cookie_value = utils::text::source_get_value(&cookie, 3, "\\\"", "\\\"", "\\\"");
+
+		parent->Log("      New cookie from response '%s': %s", cookie_name.c_str(), cookie_value.c_str());
+		this->cookies[cookie_name] = cookie_value;
+	}
+*/
 	std::string::size_type pos = resp->data.find( "\"error\":" );
 	if ( pos != std::string::npos )
     try
@@ -209,7 +216,6 @@ DWORD facebook_client::choose_security_level( int request_type )
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
 		return NLHRF_SSL;
 
-//	case FACEBOOK_REQUEST_API_CHECK:
 //	case FACEBOOK_REQUEST_LOGOUT:
 //	case FACEBOOK_REQUEST_HOME:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
@@ -247,7 +253,6 @@ int facebook_client::choose_method( int request_type )
 	case FACEBOOK_REQUEST_LOGOUT:
 		return REQUEST_POST;
 
-//	case FACEBOOK_REQUEST_API_CHECK:
 //	case FACEBOOK_REQUEST_HOME:
 //	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 //	case FACEBOOK_REQUEST_FEEDS:
@@ -269,7 +274,6 @@ std::string facebook_client::choose_proto( int request_type )
 
 	switch ( request_type )
 	{
-//	case FACEBOOK_REQUEST_API_CHECK:
 //	case FACEBOOK_REQUEST_LOGOUT:
 //	case FACEBOOK_REQUEST_HOME:
 //	case FACEBOOK_REQUEST_FEEDS:
@@ -299,9 +303,6 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 {
 	switch ( request_type )
 	{
-	case FACEBOOK_REQUEST_API_CHECK:
-		return "code.google.com";
-
 	case FACEBOOK_REQUEST_LOGIN:
 		return FACEBOOK_SERVER_LOGIN;
 
@@ -311,19 +312,17 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 		//if (this->chat_channel_host_.substr(0, this->chat_channel_partition_.length()) != this->chat_channel_partition_)
 		//	server = FACEBOOK_SERVER_CHAT2;
 		if (!this->chat_channel_jslogger_.empty())
+//			&& this->chat_channel_jslogger_ != this->chat_channel_host_.substr(0, this->chat_channel_jslogger_.length()))
 			server = FACEBOOK_SERVER_CHAT2;
 
-		std::string fl = "0";
+/*		std::string fl = "0";
 		if ( cookies.find("L") != cookies.end() )
-			fl = cookies.find("L")->second;
+			fl = cookies.find("L")->second;*/
 
-		utils::text::replace_first( &server, "%s", fl );
+		utils::text::replace_first( &server, "%s", this->chat_channel_partition_ );
 		utils::text::replace_first( &server, "%s", this->chat_channel_host_ );
 		return server;
 	}
-
-//	case FACEBOOK_REQUEST_PROFILE_GET:
-//		return FACEBOOK_SERVER_MOBILE;
 
 //	case FACEBOOK_REQUEST_LOGOUT:
 //	case FACEBOOK_REQUEST_HOME:
@@ -350,9 +349,6 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 {
 	switch ( request_type )
 	{
-	case FACEBOOK_REQUEST_API_CHECK:
-		return "/p/eternityplugins/wiki/FacebookProtocol_DevelopmentProgress";
-
 	case FACEBOOK_REQUEST_LOGIN:
 		return "/login.php?login_attempt=1";
 
@@ -491,10 +487,6 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	default:
 		*headers_count = 4;
 		break;
-
-	case FACEBOOK_REQUEST_API_CHECK:
-		*headers_count = 3;
-		break;
 	}
 
 	NETLIBHTTPHEADER* headers = ( NETLIBHTTPHEADER* )utils::mem::allocate( sizeof( NETLIBHTTPHEADER )*( *headers_count ) );
@@ -522,12 +514,6 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 	default:
 		set_header( &headers[3], "Cookie" );
-
-	case FACEBOOK_REQUEST_API_CHECK:
-		set_header( &headers[2], "User-Agent" );
-		set_header( &headers[1], "Accept" );
-		set_header( &headers[0], "Accept-Language" );
-		break;
 	}
 
 	return headers;
@@ -626,31 +612,6 @@ void facebook_client::clear_cookies( )
 	if ( !cookies.empty( ) )
 		cookies.clear( );
 }
-
-//////////////////////////////////////////////////////////////////////////////
-
-/*bool facebook_client::api_check( )
-{
-	handle_entry( "api_check" );
-
-	http::response resp = flap( FACEBOOK_REQUEST_API_CHECK );
-
-	// Process result
-
-	switch ( resp.code )
-	{
-	case HTTP_CODE_OK:
-		std::string api_version_latest = utils::text::source_get_value( &resp.data, 2, "</h1><p><var>", "</var>" );
-
-		if ( api_version_latest.length() && std::string( __API_VERSION_STRING ) != api_version_latest )
-			client_notify( TranslateT( "Facebook API version has changed, wait and watch for the Facebook protocol update." ) );
-	}
-
-  // Clear Google Code cookies
-	clear_cookies();
-
-	return handle_success( "api_check" );
-}*/
 
 bool facebook_client::login(const std::string &username,const std::string &password)
 {
@@ -1173,13 +1134,13 @@ bool facebook_client::channel( )
 	}
 }
 
-bool facebook_client::send_message( std::string message_recipient, std::string message_text, std::string *error_text )
+bool facebook_client::send_message( std::string message_recipient, std::string message_text, std::string *error_text, bool use_inbox )
 {
 	handle_entry( "send_message" );
 
 	http::response resp;
 
-	if (parent->isInvisible()) {
+	if (parent->isInvisible() || use_inbox) {
 		// Use inbox send message when invisible
 		std::string data = "action=send&body=";
 		data += utils::url::encode( message_text );
@@ -1196,16 +1157,19 @@ bool facebook_client::send_message( std::string message_recipient, std::string m
 		std::string data = "msg_text=";
 		data += utils::url::encode( message_text );
 		data += "&msg_id=";
+		data += utils::time::mili_timestamp( );
+		data += "%3A";
 		data += utils::time::unix_timestamp( );
 		data += "&to=";
 		data += message_recipient;
+		data += "&__user=";
+		data += this->self_.user_id;
 		data += "&client_time=";
 		data += utils::time::mili_timestamp( );
-		data += "&pvs_time=";
-		data += utils::time::mili_timestamp( );
-		data += "&fb_dtsg=";
+		data += "&pvs_time&fb_dtsg=";
 		data += ( dtsg_.length( ) ) ? dtsg_ : "0";
-		data += "&to_offline=false&to_idle=false&lsd=&post_form_id_source=AsyncRequest&num_tabs=1";
+		data += "&to_offline=false&to_idle=false&lsd&post_form_id_source=AsyncRequest&num_tabs=1";
+		data += "&window_id=0&sidebar_launched=false&sidebar_enabled=false&sidebar_capable=false&sidebar_should_show=false&sidebar_visible=false";
 		data += "&post_form_id=";
 		data += ( post_form_id_.length( ) ) ? post_form_id_ : "0";
 
