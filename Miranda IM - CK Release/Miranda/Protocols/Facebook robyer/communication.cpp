@@ -319,7 +319,7 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 		if ( cookies.find("L") != cookies.end() )
 			fl = cookies.find("L")->second;*/
 
-		utils::text::replace_first( &server, "%s", this->chat_channel_partition_ );
+		utils::text::replace_first( &server, "%s", this->chat_channel_partition_.empty() ? "0" : this->chat_channel_partition_ );
 		utils::text::replace_first( &server, "%s", this->chat_channel_host_ );
 		return server;
 	}
@@ -514,6 +514,10 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 	default:
 		set_header( &headers[3], "Cookie" );
+		set_header( &headers[2], "User-Agent" );
+		set_header( &headers[1], "Accept" );
+		set_header( &headers[0], "Accept-Language" );
+		break;
 	}
 
 	return headers;
