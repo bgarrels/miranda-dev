@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
-Last change on : $Date: 2011-03-17 20:12:56 +0100 (Do, 17. Mrz 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -385,12 +385,12 @@ BOOL CJabberProto::SendBothRequests(CJabberSDNode* pNode, HXML parent)
 
 void CJabberProto::PerformBrowse(HWND hwndDlg)
 {
-	TCHAR szJid[ 512 ];
+	TCHAR szJid[ JABBER_MAX_JID_LEN ];
 	TCHAR szNode[ 512 ];
 	if ( !GetDlgItemText( hwndDlg, IDC_COMBO_JID, szJid, SIZEOF( szJid )))
-		szJid[ 0 ] = _T('\0');
+		szJid[ 0 ] = 0;
 	if ( !GetDlgItemText( hwndDlg, IDC_COMBO_NODE, szNode, SIZEOF( szNode )))
-		szNode[ 0 ] = _T('\0');
+		szNode[ 0 ] = 0;
 	
 	ComboAddRecentString(hwndDlg, IDC_COMBO_JID, "discoWnd_rcJid", szJid);
 	ComboAddRecentString(hwndDlg, IDC_COMBO_NODE, "discoWnd_rcNode", szNode);

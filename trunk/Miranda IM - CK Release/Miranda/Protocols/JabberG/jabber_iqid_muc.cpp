@@ -18,9 +18,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
-Last change on : $Date: 2011-03-17 20:12:56 +0100 (Do, 17. Mrz 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -115,14 +115,14 @@ static void sttFillJidList(HWND hwndDlg)
 						lvi.pszText = ( TCHAR* )jid;
 						if ( jidListInfo->type == MUC_BANLIST ) {
 							if (( reason = xmlGetText(xmlGetChild( itemNode , "reason" ))) != NULL ) {
-								TCHAR jidreason[ 200 ];
+								TCHAR jidreason[ JABBER_MAX_JID_LEN + 256 ];
 								mir_sntprintf( jidreason, SIZEOF( jidreason ), _T("%s (%s)") , jid, reason );
 								lvi.pszText = jidreason;
 						}	}
 
 						if ( jidListInfo->type == MUC_VOICELIST || jidListInfo->type == MUC_MODERATORLIST ) {
 							if (( nick = xmlGetAttrValue( itemNode, _T("nick"))) != NULL ) {
-								TCHAR nickjid[ 200 ];
+								TCHAR nickjid[ JABBER_MAX_JID_LEN + 256 ];
 								mir_sntprintf( nickjid, SIZEOF( nickjid ), _T("%s (%s)") , nick, jid );
 								lvi.pszText = nickjid;
 						}	}

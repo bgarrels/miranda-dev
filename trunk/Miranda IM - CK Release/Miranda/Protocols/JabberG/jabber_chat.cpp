@@ -18,8 +18,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13620 $
-Last change on : $Date: 2011-04-22 17:21:52 +0200 (Fr, 22. Apr 2011) $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -407,7 +407,7 @@ void CJabberProto::GcQuit( JABBER_LIST_ITEM* item, int code, HXML reason )
 	item->bChatActive = FALSE;
 
 	if ( m_bJabberOnline ) {
-		TCHAR szPresenceTo[ 512 ];
+		TCHAR szPresenceTo[ JABBER_MAX_JID_LEN ];
 		mir_sntprintf( szPresenceTo, SIZEOF( szPresenceTo ), _T("%s/%s"), item->jid, item->nick );
 
 		m_ThreadInfo->send(
@@ -1515,7 +1515,7 @@ static void sttLogListHook( CJabberProto* ppro, JABBER_LIST_ITEM* item, GCHOOK* 
 
 static void sttSendPrivateMessage( CJabberProto* ppro, JABBER_LIST_ITEM* item, const TCHAR* nick )
 {
-	TCHAR szFullJid[ 256 ];
+	TCHAR szFullJid[ JABBER_MAX_JID_LEN ];
 	mir_sntprintf( szFullJid, SIZEOF(szFullJid), _T("%s/%s"), item->jid, nick );
 	HANDLE hContact = ppro->DBCreateContact( szFullJid, NULL, TRUE, FALSE );
 	if ( hContact != NULL ) {

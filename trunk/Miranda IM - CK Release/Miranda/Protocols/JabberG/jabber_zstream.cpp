@@ -20,8 +20,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13891 $
-Last change on : $Date: 2011-10-14 04:26:30 +0200 (Fr, 14. Okt 2011) $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -117,15 +117,15 @@ retry:
 	}
 
 	int len = datalen - zStreamIn.avail_out;
-	if ( len == 0 ) 
-		goto retry;
-
 	if ( DBGetContactSettingByte( NULL, "Netlib", "DumpRecv", TRUE ) == TRUE ) {
 		char* szLogBuffer = ( char* )alloca( len+32 );
 		memcpy( szLogBuffer, data, len );
 		szLogBuffer[ len ]='\0';
 		proto->Log( "(ZLIB) Data received\n%s\n===IN: %d(%d) bytes", szLogBuffer, len, zRecvDatalen );
 	}
+
+	if ( len == 0 ) 
+		goto retry;
 
 	zRecvReady = ( zStreamIn.avail_out != 0 );
 	return len;

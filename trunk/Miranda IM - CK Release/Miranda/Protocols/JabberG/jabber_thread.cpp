@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13870 $
-Last change on : $Date: 2011-09-16 15:30:27 +0200 (Fr, 16. Sep 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -1433,7 +1433,7 @@ void CJabberProto::OnProcessMessage( HXML node, ThreadData* info )
 		}
  		else if ( !_tcscmp( ptszXmlns, _T(JABBER_FEAT_ROSTER_EXCHANGE)) && 
  			item != NULL && (item->subscription == SUB_BOTH || item->subscription == SUB_TO)) {
-			TCHAR chkJID[512] = _T("@");
+			TCHAR chkJID[JABBER_MAX_JID_LEN] = _T("@");
 			JabberStripJid( from, chkJID + 1, SIZEOF(chkJID) - 1 ); 
  			for ( int i = 1; ; ++i ) { 
  				HXML iNode = xmlGetNthChild( xNode , _T("item"), i );
@@ -1665,9 +1665,9 @@ void CJabberProto::OnProcessPresence( HXML node, ThreadData* info )
 	}
 
 	BOOL bSelfPresence = FALSE;
-	TCHAR szBareFrom[ 512 ];
+	TCHAR szBareFrom[ JABBER_MAX_JID_LEN ];
 	JabberStripJid( from, szBareFrom, SIZEOF( szBareFrom ));
-	TCHAR szBareOurJid[ 512 ];
+	TCHAR szBareOurJid[ JABBER_MAX_JID_LEN ];
 	JabberStripJid( info->fullJID, szBareOurJid, SIZEOF( szBareOurJid ));
 
 	if ( !_tcsicmp( szBareFrom, szBareOurJid ))

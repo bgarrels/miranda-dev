@@ -23,8 +23,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13618 $
-Last change on : $Date: 2011-04-22 16:09:42 +0200 (Fr, 22. Apr 2011) $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -554,7 +554,7 @@ int __cdecl CJabberProto::ContactMenuRunCommands(WPARAM wParam, LPARAM lParam )
 	
 	if ((( hContact=( HANDLE ) wParam )!=NULL || (lParam!=0)) && m_bJabberOnline ) {
 		if ( wParam && !JGetStringT( hContact, "jid", &dbv )) {
-			TCHAR jid[ 512 ];
+			TCHAR jid[ JABBER_MAX_JID_LEN ];
 			int selected = 0;
 			_tcsncpy(jid, dbv.ptszVal, SIZEOF(jid));
 

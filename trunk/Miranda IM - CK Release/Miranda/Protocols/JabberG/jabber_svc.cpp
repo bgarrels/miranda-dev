@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13870 $
-Last change on : $Date: 2011-09-16 15:30:27 +0200 (Fr, 16. Sep 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -171,7 +171,7 @@ INT_PTR __cdecl CJabberProto::JabberGetAvatarInfo( WPARAM wParam, LPARAM lParam 
 			if ( item != NULL ) {
 				BOOL isXVcard = JGetByte( AI->hContact, "AvatarXVcard", 0 );
 
-				TCHAR szJid[ 512 ];
+				TCHAR szJid[ JABBER_MAX_JID_LEN ];
 				if ( item->resourceCount != NULL && !isXVcard ) {
 					TCHAR *bestResName = ListGetBestClientResourceNamePtr(dbv.ptszVal);
 					mir_sntprintf( szJid, SIZEOF( szJid ), bestResName?_T("%s/%s"):_T("%s"), dbv.ptszVal, bestResName );
@@ -617,7 +617,7 @@ INT_PTR __cdecl CJabberProto::JabberSendNudge( WPARAM wParam, LPARAM )
 	HANDLE hContact = ( HANDLE )wParam;
 	DBVARIANT dbv;
 	if ( !JGetStringT( hContact, "jid", &dbv )) {
-		TCHAR tszJid[ 512 ];
+		TCHAR tszJid[ JABBER_MAX_JID_LEN ];
 		TCHAR *szResource = ListGetBestClientResourceNamePtr( dbv.ptszVal );
 		if ( szResource )
 			mir_sntprintf( tszJid, SIZEOF(tszJid), _T("%s/%s"), dbv.ptszVal, szResource );

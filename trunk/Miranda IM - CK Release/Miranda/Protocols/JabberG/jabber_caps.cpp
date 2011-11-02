@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13870 $
-Last change on : $Date: 2011-09-16 15:30:27 +0200 (Fr, 16. Sep 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -73,7 +73,7 @@ const JabberFeatCapPair g_JabberFeatCapPairs[] = {
 	{	_T(JABBER_FEAT_MIRANDA_NOTES),        JABBER_CAPS_MIRANDA_NOTES,        _T("Supports Miranda IM notes extension"), },
 	{	_T(JABBER_FEAT_JINGLE),               JABBER_CAPS_JINGLE,               _T("Supports Jingle"), },
 	{	_T(JABBER_FEAT_ROSTER_EXCHANGE),      JABBER_CAPS_ROSTER_EXCHANGE,      _T("Supports Roster Exchange"), },
-	{	_T(JABBER_FEAT_GTALK_PMUC),           JABBER_CAPS_GTALK_PMUC,           _T("Supports private multi-user chat"), },
+	{	_T(JABBER_FEAT_GTALK_PMUC),           JABBER_CAPS_GTALK_PMUC,           _T("Supports GTalk private multi-user chat"), },
 	{	NULL,                                 0,                                NULL}
 };
 
@@ -219,7 +219,7 @@ JabberCapsBits CJabberProto::GetTotalJidCapabilites( const TCHAR *jid )
 
 JabberCapsBits CJabberProto::GetResourceCapabilites( const TCHAR *jid, BOOL appendBestResource )
 {
-	TCHAR fullJid[ 512 ];
+	TCHAR fullJid[ JABBER_MAX_JID_LEN ];
 	if ( appendBestResource )
 		GetClientJID( jid, fullJid, SIZEOF( fullJid ));
 	else
