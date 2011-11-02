@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13596 $
-Last change on : $Date: 2011-04-15 21:07:23 +0200 (Fr, 15. Apr 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13897 $
+Last change on : $Date: 2011-11-02 01:04:30 +0100 (Mi, 02. Nov 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -134,7 +134,7 @@ protected:
 
 #define JABBER_DEFAULT_PORT 5222
 #define JABBER_IQID "mir_"
-#define JABBER_MAX_JID_LEN  256
+#define JABBER_MAX_JID_LEN  1024
 
 #define JABBER_GC_MSG_QUIT				LPGENT("I'm happy Miranda IM user. Get it at http://miranda-im.org/.")
 #define JABBER_GC_MSG_SLAP				LPGENT("/me slaps %s around a bit with a large trout")
@@ -371,7 +371,7 @@ struct ThreadData
 	char  server[128];
 	char  manualHost[128];
 	TCHAR resource[128];
-	TCHAR fullJID[256];
+	TCHAR fullJID[JABBER_MAX_JID_LEN];
 	WORD  port;
 	TCHAR newPassword[512];
 
@@ -452,7 +452,7 @@ struct filetransfer
 struct JABBER_SEARCH_RESULT
 {
 	PROTOSEARCHRESULT hdr;
-	TCHAR jid[256];
+	TCHAR jid[JABBER_MAX_JID_LEN];
 };
 
 struct JABBER_GCLOG_FONT

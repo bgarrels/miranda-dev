@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13870 $
-Last change on : $Date: 2011-09-16 15:30:27 +0200 (Fr, 16. Sep 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
+Last change by : $Author: borkra $
 
 */
 
@@ -127,6 +127,9 @@ void CJabberProto::IqAdd( unsigned int iqId, JABBER_IQ_PROCID procId, JABBER_IQ_
 
 BOOL CJabberIqManager::FillPermanentHandlers()
 {
+	// Google Shared Status (http://code.google.com/apis/talk/jep_extensions/shared_status.html)
+	AddPermanentHandler( &CJabberProto::OnIqSetGoogleSharedStatus, JABBER_IQ_TYPE_SET, JABBER_IQ_PARSE_FROM | JABBER_IQ_PARSE_TO | JABBER_IQ_PARSE_ID_STR, _T("google:shared-status"), FALSE, _T("query"));
+	
 	// version requests (XEP-0092)
 	AddPermanentHandler( &CJabberProto::OnIqRequestVersion, JABBER_IQ_TYPE_GET, JABBER_IQ_PARSE_FROM | JABBER_IQ_PARSE_ID_STR, _T(JABBER_FEAT_VERSION), FALSE, _T("query"));
 

@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13856 $
-Last change on : $Date: 2011-09-10 13:23:46 +0200 (Sa, 10. Sep 2011) $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -1120,7 +1120,7 @@ int CJabberProto::OnProcessSrmmEvent( WPARAM, LPARAM lParam )
 			JFreeVariant( &dbv );
 		}
 		if ( bSupportTyping && !JGetStringT( event->hContact, "jid", &dbv )) {
-			TCHAR jid[ 256 ];
+			TCHAR jid[ JABBER_MAX_JID_LEN ];
 			GetClientJID( dbv.ptszVal, jid, SIZEOF( jid ));
 			JFreeVariant( &dbv );
 

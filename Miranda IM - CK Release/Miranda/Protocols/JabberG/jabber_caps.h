@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13535 $
-Last change on : $Date: 2011-04-02 05:10:52 +0200 (Sa, 02. Apr 2011) $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -170,6 +170,7 @@ typedef unsigned __int64 JabberCapsBits;
 #define JABBER_FEAT_IQ_ROSTER                   "jabber:iq:roster"
 #define JABBER_FEAT_DELAY                       "jabber:x:delay"
 #define JABBER_FEAT_ENTITY_TIME_OLD             "jabber:iq:time"
+#define JABBER_FEAT_GTALK_SHARED_STATUS         "google:shared-status"
 
 #define JABBER_FEAT_MUC_USER                    "http://jabber.org/protocol/muc#user"
 #define JABBER_FEAT_NICK                        "http://jabber.org/protocol/nick"

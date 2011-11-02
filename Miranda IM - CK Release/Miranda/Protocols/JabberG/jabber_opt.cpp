@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13848 $
-Last change on : $Date: 2011-09-10 02:40:44 +0200 (Sa, 10. Sep 2011) $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -1142,10 +1142,10 @@ void CJabberProto::_RosterHandleGetRequest( HXML node )
 		int ListItemCount=ListView_GetItemCount(hList);
 		for (int index=0; index<ListItemCount; index++)
 		{
-			TCHAR jid[260]={0};
-			TCHAR name[260]={0};
-			TCHAR group[260]={0};
-			TCHAR subscr[260]={0};
+			TCHAR jid[JABBER_MAX_JID_LEN]=_T("");
+			TCHAR name[260]=_T("");
+			TCHAR group[260]=_T("");
+			TCHAR subscr[260]=_T("");
 			ListView_GetItemText(hList, index, 0, jid, SIZEOF(jid));
 			ListView_GetItemText(hList, index, 1, name, SIZEOF(name));
 			ListView_GetItemText(hList, index, 2, group, SIZEOF(group));
@@ -1311,10 +1311,10 @@ void CJabberProto::_RosterExportToFile(HWND hwndDlg)
 
 	for (int index=0; index<ListItemCount; index++)
 	{
-		TCHAR jid[260]={0};
-		TCHAR name[260]={0};
-		TCHAR group[260]={0};
-		TCHAR subscr[260]={0};
+		TCHAR jid[JABBER_MAX_JID_LEN]=_T("");
+		TCHAR name[260]=_T("");
+		TCHAR group[260]=_T("");
+		TCHAR subscr[260]=_T("");
 		ListView_GetItemText(hList, index, 0, jid, SIZEOF(jid));
 		ListView_GetItemText(hList, index, 1, name, SIZEOF(name));
 		ListView_GetItemText(hList, index, 2, group, SIZEOF(group));

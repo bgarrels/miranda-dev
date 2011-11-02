@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13512 $
-Last change on : $Date: 2011-03-26 23:50:25 +0100 (Sa, 26. Mrz 2011) $
+Revision       : $Revision: 13898 $
+Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -435,7 +435,7 @@ void CJabberProto::IqResultStreamActivate( HXML iqNode )
 {
 	int id = JabberGetPacketID( iqNode );
 
-	TCHAR listJid[256];
+	TCHAR listJid[JABBER_MAX_JID_LEN];
 	mir_sntprintf(listJid, SIZEOF( listJid ), _T("ftproxy_%d"), id);
 
 	JABBER_LIST_ITEM *item = ListGetItemPtr( LIST_FTIQID, listJid );
@@ -737,7 +737,7 @@ int CJabberProto::ByteReceiveParse( HANDLE hConn, JABBER_BYTE_TRANSFER *jbt, cha
 			*(( DWORD* )data ) = 0x03000105;
 			data[4] = 40;
 
-			TCHAR text[256];
+			TCHAR text[JABBER_MAX_JID_LEN*2];
 			TCHAR *szInitiatorJid = JabberPrepareJid(jbt->srcJID);
 			TCHAR *szTargetJid = JabberPrepareJid(jbt->dstJID);
 			mir_sntprintf( text, SIZEOF( text ), _T("%s%s%s"), jbt->sid, szInitiatorJid, szTargetJid );
