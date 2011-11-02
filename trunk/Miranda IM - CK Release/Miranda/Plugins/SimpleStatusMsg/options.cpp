@@ -146,7 +146,7 @@ static INT_PTR CALLBACK DlgOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 
 						SendMessage(GetDlgItem(hwndDlg, IDC_CBOPTSTATUS), CB_SETITEMDATA, (WPARAM)index, (LPARAM)i - ID_STATUS_ONLINE);
 
-						val = DBGetContactSettingByte(NULL, "SimpleStatusMsg", (char *)StatusModeToDbSetting(i, "Flags"), STATUS_SHOW_DLG|STATUS_LAST_MSG);
+						val = DBGetContactSettingByte(NULL, "SimpleStatusMsg", (char *)StatusModeToDbSetting(i, "Flags"), STATUS_DEFAULT);
 						data->status_msg[0].flags[i - ID_STATUS_ONLINE] = val;
 						if (DBGetContactSettingTString(NULL, "SRAway", StatusModeToDbSetting(i, "Default"), &dbv))
 							dbv.ptszVal = mir_tstrdup(GetDefaultMessage(i));
@@ -160,7 +160,7 @@ static INT_PTR CALLBACK DlgOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 								continue;
 
 							mir_snprintf(setting, SIZEOF(setting), "%sFlags", accounts->pa[j]->szModuleName);
-							val = DBGetContactSettingByte(NULL, "SimpleStatusMsg", (char *)StatusModeToDbSetting(i, setting), STATUS_SHOW_DLG|STATUS_LAST_MSG);
+							val = DBGetContactSettingByte(NULL, "SimpleStatusMsg", (char *)StatusModeToDbSetting(i, setting), STATUS_DEFAULT);
 							data->status_msg[j+1].flags[i-ID_STATUS_ONLINE] = val;
 							mir_snprintf(setting, SIZEOF(setting), "%sDefault", accounts->pa[j]->szModuleName);
 							if (DBGetContactSettingTString(NULL, "SRAway", StatusModeToDbSetting(i, setting), &dbv))
@@ -198,7 +198,7 @@ static INT_PTR CALLBACK DlgOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 				{
 					data->proto_msg[0].msg = NULL;
 
-					val = DBGetContactSettingByte(NULL, "SimpleStatusMsg", "ProtoFlags", PROTO_NOCHANGE);
+					val = DBGetContactSettingByte(NULL, "SimpleStatusMsg", "ProtoFlags", PROTO_DEFAULT);
 					data->proto_msg[0].flags = val;
 					data->proto_msg[0].max_length = 0;
 					SendMessage(GetDlgItem(hwndDlg, IDC_CBOPTPROTO), CB_SETITEMDATA, (WPARAM)index, 0);
@@ -228,7 +228,7 @@ static INT_PTR CALLBACK DlgOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 							data->proto_msg[i+1].msg = NULL;
 
 						mir_snprintf(setting, SIZEOF(setting), "Proto%sFlags", accounts->pa[i]->szModuleName);
-						val = DBGetContactSettingByte(NULL, "SimpleStatusMsg", setting, PROTO_POPUPDLG);
+						val = DBGetContactSettingByte(NULL, "SimpleStatusMsg", setting, PROTO_DEFAULT);
 						data->proto_msg[i+1].flags = val;
 						mir_snprintf(setting, SIZEOF(setting), "Proto%sMaxLen", accounts->pa[i]->szModuleName);
 						val = DBGetContactSettingWord(NULL, "SimpleStatusMsg", setting, 1024);
@@ -1292,7 +1292,7 @@ static INT_PTR CALLBACK DlgAdvancedOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM w
 			else
 				SendMessage(GetDlgItem(hwndDlg, IDC_CCLOSEWND), BM_SETCHECK, BST_CHECKED, 0);
 
-			val = DBGetContactSettingByte(NULL, "SimpleStatusMsg", "DlgFlags", DLG_SHOW_STATUS|DLG_SHOW_STATUS_ICONS|DLG_SHOW_LIST_ICONS|DLG_SHOW_BUTTONS);
+			val = DBGetContactSettingByte(NULL, "SimpleStatusMsg", "DlgFlags", DLG_SHOW_DEFAULT);
 			if (val & DLG_SHOW_STATUS)
 				CheckDlgButton(hwndDlg, IDC_CSTATUSLIST, BST_CHECKED);
 			else
