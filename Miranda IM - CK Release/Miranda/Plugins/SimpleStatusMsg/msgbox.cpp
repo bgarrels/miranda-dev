@@ -783,11 +783,8 @@ void SetEditControlText(struct MsgBoxData *data, HWND hwndDlg, int iStatus)
 	num_start = SendMessage(data->recent_cbex, CB_GETCOUNT, 0, 0);
 	num_start -= data->num_def_msgs + 1;
 
-	if (data->m_szProto)
-		mir_snprintf(setting, SIZEOF(setting), "%sFlags", (char *)data->m_szProto);
-	else
-		mir_snprintf(setting, SIZEOF(setting), "Flags");
-	flags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", (char *)StatusModeToDbSetting(iStatus, setting), STATUS_SHOW_DLG | STATUS_LAST_MSG);
+	mir_snprintf(setting, SIZEOF(setting), "%sFlags", data->m_szProto ? data->m_szProto : "");
+	flags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", (char *)StatusModeToDbSetting(iStatus, setting), STATUS_DEFAULT);
 
 	if (flags & STATUS_LAST_MSG)
 	{
@@ -1041,7 +1038,7 @@ INT_PTR CALLBACK AwayMsgBoxDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 
 			copy_init_data->num_def_msgs = DBGetContactSettingWord(NULL, "SimpleStatusMsg", "DefMsgCount", 0);
 			copy_init_data->max_hist_msgs = DBGetContactSettingByte(NULL, "SimpleStatusMsg", "MaxHist", 10);
-			copy_init_data->m_iDlgFlags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", "DlgFlags", DLG_SHOW_STATUS|DLG_SHOW_STATUS_ICONS|DLG_SHOW_LIST_ICONS|DLG_SHOW_BUTTONS);
+			copy_init_data->m_iDlgFlags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", "DlgFlags", DLG_SHOW_DEFAULT);
 			copy_init_data->m_szProto = init_data->m_szProto;
 			copy_init_data->m_iStatus = init_data->m_iStatus;
 			copy_init_data->m_iStatusModes = init_data->m_iStatusModes;

@@ -524,11 +524,8 @@ static TCHAR *GetAwayMessageFormat(int iStatus, const char *szProto)
 	char szSetting[80];
 	TCHAR *format;
 
-	if (szProto)
-		mir_snprintf(szSetting, SIZEOF(szSetting), "%sFlags", szProto);
-	else
-		mir_snprintf(szSetting, SIZEOF(szSetting), "Flags");
-	flags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", (char *)StatusModeToDbSetting(iStatus, szSetting), STATUS_SHOW_DLG | STATUS_LAST_MSG);
+	mir_snprintf(szSetting, SIZEOF(szSetting), "%sFlags", szProto ? szProto : "");
+	flags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", (char *)StatusModeToDbSetting(iStatus, szSetting), STATUS_DEFAULT);
 
 	if (flags & STATUS_EMPTY_MSG)
 		return mir_tstrdup(_T(""));
@@ -670,13 +667,8 @@ static TCHAR *GetAwayMessage(int iStatus, const char *szProto, BOOL bInsertVars,
 		if (szProto && !(CallProtoService(szProto, PS_GETCAPS, PFLAGNUM_3, 0) & Proto_Status2Flag(iStatus)))
 			return NULL;
 
-		if (szProto)
-		{
-			mir_snprintf(szSetting, SIZEOF(szSetting), "Proto%sFlags", szProto);
-			flags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", szSetting, PROTO_POPUPDLG);
-		}
-		else
-			flags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", "ProtoFlags", PROTO_NOCHANGE);
+		mir_snprintf(szSetting, SIZEOF(szSetting), "Proto%sFlags", szProto ? szProto : "");
+		flags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", szSetting, PROTO_DEFAULT);
 
 		//if (flags & PROTO_NO_MSG)
 		//{
@@ -800,7 +792,7 @@ int HasProtoStaticStatusMsg(const char *szProto, int iInitialStatus, int iStatus
 	int flags;
 
 	mir_snprintf(szSetting, SIZEOF(szSetting), "Proto%sFlags", szProto);
-	flags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", szSetting, PROTO_POPUPDLG);
+	flags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", szSetting, PROTO_DEFAULT);
 
 	if (flags & PROTO_NO_MSG)
 	{
@@ -1171,11 +1163,8 @@ static int ChangeStatusMessage(WPARAM wParam, LPARAM lParam)
 		}
 	}
 
-	if (szProto)
-		mir_snprintf(szSetting, SIZEOF(szSetting), "%sFlags", szProto);
-	else
-		mir_snprintf(szSetting, SIZEOF(szSetting), "Flags");
-	iDlgFlags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", (char *)StatusModeToDbSetting(iStatus, szSetting), STATUS_SHOW_DLG | STATUS_LAST_MSG);
+	mir_snprintf(szSetting, SIZEOF(szSetting), "%sFlags", szProto ? szProto : "");
+	iDlgFlags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", (char *)StatusModeToDbSetting(iStatus, szSetting), STATUS_DEFAULT);
 	bShowDlg = iDlgFlags & STATUS_SHOW_DLG || bOnStartup;
 	SystemParametersInfo(SPI_GETSCREENSAVERRUNNING, 0, &bScreenSaverRunning, 0);
 
@@ -1202,7 +1191,7 @@ static int ChangeStatusMessage(WPARAM wParam, LPARAM lParam)
 		}
 
 		mir_snprintf(szSetting, SIZEOF(szSetting), "Proto%sFlags", szProto);
-		iProtoFlags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", szSetting, PROTO_POPUPDLG);
+		iProtoFlags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", szSetting, PROTO_DEFAULT);
 		if (iProtoFlags & PROTO_NO_MSG || iProtoFlags & PROTO_THIS_MSG)
 		{
 			if (HasProtoStaticStatusMsg(szProto, iStatus, iStatus))
@@ -1269,7 +1258,7 @@ static int ChangeStatusMessage(WPARAM wParam, LPARAM lParam)
 		if (iStatus == ID_STATUS_OFFLINE || (!(accounts->statusMsgFlags & Proto_Status2Flag(iStatus)) && iStatus != ID_STATUS_CURRENT))
 			return 0;
 
-		iProtoFlags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", "ProtoFlags", PROTO_NOCHANGE);
+		iProtoFlags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", "ProtoFlags", PROTO_DEFAULT);
 		if (!bShowDlg || bScreenSaverRunning || (iProtoFlags & PROTO_NOCHANGE && !bOnStartup))
 		{
 			TCHAR *msg = NULL;
@@ -1450,7 +1439,7 @@ int SetStartupStatus(int i)
 	}
 
 	mir_snprintf(szSetting, SIZEOF(szSetting), "Proto%sFlags", accounts->pa[i]->szModuleName);
-	flags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", szSetting, PROTO_POPUPDLG);
+	flags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", szSetting, PROTO_DEFAULT);
 	if (flags & PROTO_NO_MSG || flags & PROTO_THIS_MSG)
 	{
 		if (HasProtoStaticStatusMsg(accounts->pa[i]->szModuleName, ID_STATUS_OFFLINE, iStatus))
@@ -1761,7 +1750,7 @@ static int ChangeStatusMsgPrebuild(WPARAM wParam, LPARAM lParam)
 			continue;
 
 		mir_snprintf(szSetting, SIZEOF(szSetting), "Proto%sFlags", pa[i]->szModuleName);
-		iProtoFlags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", szSetting, PROTO_POPUPDLG);
+		iProtoFlags = DBGetContactSettingByte(NULL, "SimpleStatusMsg", szSetting, PROTO_DEFAULT);
 		if (iProtoFlags & PROTO_NO_MSG || iProtoFlags & PROTO_THIS_MSG)
 			continue;
 
