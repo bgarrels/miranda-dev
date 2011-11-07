@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13898 $
-Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
+Revision       : $Revision: 13905 $
+Last change on : $Date: 2011-11-06 00:31:18 +0100 (So, 06. Nov 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -1055,7 +1055,7 @@ void CJabberProto::CheckMenuItems()
 
 	clmi.flags = CMIM_FLAGS | (( m_ThreadInfo && ( m_ThreadInfo->jabberServerCaps & JABBER_CAPS_PRIVACY_LISTS)) ? 0 : CMIF_HIDDEN );
 	JCallService( MS_CLIST_MODIFYMENUITEM, ( WPARAM )m_hPrivacyMenuRoot, ( LPARAM )&clmi );
-	
+
 	clmi.flags = CMIM_FLAGS | ( m_menuItemsStatus ? 0 : CMIF_HIDDEN);
 	JCallService( MS_CLIST_MODIFYMENUITEM, ( WPARAM )m_hMenuPriorityRoot, ( LPARAM )&clmi );
 
