@@ -24,8 +24,8 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_constants.h $
-// Revision       : $Revision: 13699 $
-// Last change on : $Date: 2011-07-09 23:15:09 +0200 (Sa, 09. Jul 2011) $
+// Revision       : $Revision: 13915 $
+// Last change on : $Date: 2011-11-08 00:09:29 +0100 (Di, 08. Nov 2011) $
 // Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
@@ -414,6 +414,7 @@
 #define ICQ_META_ERROR              0x0001
 #define ICQ_META_CLI_REQUEST        0x0002
 #define ICQ_META_SRV_REPLY          0x0003
+#define ICQ_META_SRV_UPDATE         0x0004
 
 /* Subtypes for Authorization Family 0x0017 */
 #define ICQ_SIGNON_ERROR            0x0001
