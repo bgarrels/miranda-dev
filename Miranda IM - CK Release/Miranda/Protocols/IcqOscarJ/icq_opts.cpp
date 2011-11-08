@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_opts.cpp $
-// Revision       : $Revision: 13213 $
-// Last change on : $Date: 2010-12-22 07:54:39 +0100 (Mi, 22. Dez 2010) $
-// Last change by : $Author: borkra $
+// Revision       : $Revision: 13915 $
+// Last change on : $Date: 2011-11-08 00:09:29 +0100 (Di, 08. Nov 2011) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -298,13 +298,9 @@ static INT_PTR CALLBACK DlgProcIcqPrivacyOpts(HWND hwndDlg, UINT msg, WPARAM wPa
 				PBYTE buf=NULL;
 				int buflen=0;
 
-/*				ppro->ppackTLVLNTSBytefromDB(&buf, &buflen, "e-mail", (BYTE)!ppro->getSettingByte(NULL, "PublishPrimaryEmail", 0), TLV_EMAIL);
-				ppro->ppackTLVLNTSBytefromDB(&buf, &buflen, "e-mail0", 0, TLV_EMAIL);
-				ppro->ppackTLVLNTSBytefromDB(&buf, &buflen, "e-mail1", 0, TLV_EMAIL);*/
-
-				ppackTLVWord(&buf, &buflen, 0x19A, (WORD)!ppro->getSettingByte(NULL, "Auth", 1));
+				ppackTLVWord(&buf, &buflen, 0x19A, !ppro->getSettingByte(NULL, "Auth", 1));
 				ppackTLVByte(&buf, &buflen, 0x212, ppro->getSettingByte(NULL, "WebAware", 0));
-        ppackTLVWord(&buf, &buflen, 0x1F9, ppro->getSettingByte(NULL, "PrivacyLevel", 1));
+				ppackTLVWord(&buf, &buflen, 0x1F9, ppro->getSettingByte(NULL, "PrivacyLevel", 1));
 
 				ppro->icq_changeUserDirectoryInfoServ(buf, (WORD)buflen, DIRECTORYREQUEST_UPDATEPRIVACY);
 
