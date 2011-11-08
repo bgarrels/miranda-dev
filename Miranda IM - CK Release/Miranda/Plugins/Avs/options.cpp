@@ -63,13 +63,9 @@ static void RemoveProtoPic(const char *szProto)
 	DBDeleteContactSetting(NULL, PPICT_MODULE, szProto);
 
 	if ( szProto ) {
-		// Unsane: remove defaut avatar
-		if (!lstrcmpA(AVS_DEFAULT,szProto))
-		{
-			for (int i = 0; i < g_ProtoPictures.getCount(); i++)
-			{
-				if(g_ProtoPictures[i].szProtoname != NULL)
-				{
+		if (!lstrcmpA(AVS_DEFAULT,szProto)) {
+			for (int i = 0; i < g_ProtoPictures.getCount(); i++) {
+				if(g_ProtoPictures[i].szProtoname != NULL) {
 					protoPicCacheEntry& p = g_ProtoPictures[i];
 					if(p.hbmPic != 0) 
 						DeleteObject(p.hbmPic);
@@ -79,8 +75,7 @@ static void RemoveProtoPic(const char *szProto)
 				}
 			}
 		}
-		else if (strstr(szProto, "Global avatar for"))
-		{
+		else if (strstr(szProto, "Global avatar for")) {
 			char szProtoname[MAX_PATH] = {0};
 			lstrcpynA(szProtoname, szProto, lstrlenA(szProto)- lstrlenA("accounts"));
 			lstrcpyA(szProtoname, strrchr(szProtoname, ' ') + 1);
@@ -103,13 +98,14 @@ static void RemoveProtoPic(const char *szProto)
 				}
 			}
 		}
-		else
-			for(int i = 0; i < g_ProtoPictures.getCount(); i++){
+		else {
+			for(int i = 0; i < g_ProtoPictures.getCount(); i++) {
 				if(g_ProtoPictures[i].szProtoname != NULL && !strcmp(g_ProtoPictures[i].szProtoname, szProto)) {
 					if(g_ProtoPictures[i].hbmPic != 0)
 						DeleteObject(g_ProtoPictures[i].hbmPic);
 					ZeroMemory((void *)&g_ProtoPictures[i], sizeof(struct avatarCacheEntry));
 					NotifyEventHooks(hEventChanged, 0, (LPARAM)&g_ProtoPictures[i]);
+				}
 			}
 		}
 	}
@@ -422,13 +418,10 @@ INT_PTR CALLBACK DlgProcOptionsProtos(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 							if (!AVS_pathIsAbsolute(dbv.pszVal))
 							{
 								char szFinalPath[MAX_PATH];
-								// Unsane: change relative path from profile folder, to programm folder
 								mir_snprintf(szFinalPath, SIZEOF(szFinalPath), "%%miranda_path%%\\%s", dbv.pszVal);
-
 								SetDlgItemTextA(hwndDlg, IDC_PROTOAVATARNAME, szFinalPath);
 							}
-							else
-								SetDlgItemTextA(hwndDlg, IDC_PROTOAVATARNAME, dbv.pszVal);
+							else SetDlgItemTextA(hwndDlg, IDC_PROTOAVATARNAME, dbv.pszVal);
 
 							InvalidateRect(GetDlgItem(hwndDlg, IDC_PROTOPIC), NULL, TRUE);
 							DBFreeVariant(&dbv);
