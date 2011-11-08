@@ -175,9 +175,9 @@ TCHAR *InsertBuiltinVarsIntoMsg(TCHAR *in, const char *szProto, int status)
 
 	for (i = 0; msg[i]; i++)
 	{
-		if (msg[i] == 0x0D && DBGetContactSettingByte(NULL, "SimpleStatusMsg", "RemoveCR", 1))
+		if (msg[i] == 0x0D && DBGetContactSettingByte(NULL, "SimpleStatusMsg", "RemoveCR", 0))
 		{
-			TCHAR *p = msg+i;
+			TCHAR *p = msg + i;
 			if (i + 1 <= 1024 && msg[i + 1])
 			{
 				if (msg[i + 1] == 0x0A)
