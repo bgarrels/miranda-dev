@@ -1268,7 +1268,7 @@ static INT_PTR CALLBACK DlgAdvancedOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM w
 			SendMessage(GetDlgItem(hwndDlg, IDC_ETIMEOUT), EM_SETLIMITTEXT, 2, 0);
 			SetDlgItemInt(hwndDlg, IDC_ETIMEOUT, DBGetContactSettingByte(NULL, "SimpleStatusMsg", "DlgTime", 5), FALSE);
 
-			if (DBGetContactSettingByte(NULL, "SimpleStatusMsg", "RemoveCR", 1))
+			if (DBGetContactSettingByte(NULL, "SimpleStatusMsg", "RemoveCR", 0))
 				CheckDlgButton(hwndDlg, IDC_CREMOVECR, BST_CHECKED);
 
 			if (DBGetContactSettingByte(NULL, "SimpleStatusMsg", "ShowCopy", 1))
