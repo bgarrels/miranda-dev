@@ -207,7 +207,7 @@ bool facebook_client::handle_error( std::string method, bool force_disconnect )
 DWORD facebook_client::choose_security_level( int request_type )
 {
 	if ( DBGetContactSettingByte( NULL, parent->m_szProtoName, FACEBOOK_KEY_FORCE_HTTPS, 0 ) )
-		if ( request_type != FACEBOOK_REQUEST_MESSAGES_RECEIVE )
+		//if ( request_type != FACEBOOK_REQUEST_MESSAGES_RECEIVE )
 			return NLHRF_SSL;
 
 	switch ( request_type )
@@ -269,7 +269,7 @@ int facebook_client::choose_method( int request_type )
 std::string facebook_client::choose_proto( int request_type )
 {
 	if ( DBGetContactSettingByte( NULL, parent->m_szProtoName, FACEBOOK_KEY_FORCE_HTTPS, 0 ) )
-		if ( request_type != FACEBOOK_REQUEST_MESSAGES_RECEIVE )
+//		if ( request_type != FACEBOOK_REQUEST_MESSAGES_RECEIVE )
 			return HTTP_PROTO_SECURE;
 
 	switch ( request_type )
@@ -802,13 +802,13 @@ bool facebook_client::home( )
 		if ( resp.data.find( "id=\"navAccountName\"" ) != std::string::npos )
 		{ // Backup for old fb version
 			// Get real_name
-			this->self_.real_name = utils::text::special_expressions_decode( utils::text::source_get_value( &resp.data, 2, " id=\"navAccountName\">", "</a" ) );
+			this->self_.real_name = utils::text::remove_html( utils::text::special_expressions_decode( utils::text::source_get_value( &resp.data, 2, " id=\"navAccountName\">", "</a" ) ) );
 			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,FACEBOOK_KEY_NAME,this->self_.real_name.c_str());
 			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,"Nick",this->self_.real_name.c_str());
 			parent->Log("      Got self real name: %s", this->self_.real_name.c_str());
 		} else if ( resp.data.find("id=\"pageNav\"") != std::string::npos ) {
 			// Get real_name
-			this->self_.real_name = utils::text::special_expressions_decode( utils::text::source_get_value( &resp.data, 3, " class=\"headerTinymanName\"", "\">", "</a" ) );
+			this->self_.real_name = utils::text::remove_html( utils::text::special_expressions_decode( utils::text::source_get_value( &resp.data, 3, " class=\"headerTinymanName\"", ">", "</a" ) ) );
 			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,FACEBOOK_KEY_NAME,this->self_.real_name.c_str());
 			DBWriteContactSettingUTF8String(NULL,parent->m_szModuleName,"Nick",this->self_.real_name.c_str());
 			parent->Log("      Got self real name: %s", this->self_.real_name.c_str());
@@ -961,6 +961,13 @@ bool facebook_client::reconnect( )
 
 		this->chat_sequence_num_ = utils::text::source_get_value( &resp.data, 2, "\"seq\":", "," );
 		parent->Log("      Got self sequence number: %s", this->chat_sequence_num_.c_str());
+
+		if (this->chat_channel_jslogger_.empty()) {
+			if (!atoi(this->chat_channel_host_.substr(0, this->chat_channel_host_.find(".")).c_str())) {
+				this->chat_channel_jslogger_ = "SOMETHING";
+				parent->Log("      Got no jslogger, changed.");
+			}
+		}
   		
 		return handle_success( "reconnect" );
 	}
@@ -1131,6 +1138,12 @@ bool facebook_client::channel( )
 	case HTTP_CODE_FAKE_DISCONNECTED:
 		if ( parent->m_iStatus == ID_STATUS_INVISIBLE )
 			return handle_success( "channel" );
+		
+		// workaround for different channels - doesnt work, need better one...
+/*		if (this->chat_channel_jslogger_.empty())
+			this->chat_channel_jslogger_ = "SOMETHING";
+		else
+			this->chat_channel_jslogger_.erase(); */
 
 	case HTTP_CODE_FAKE_ERROR:
 	default:

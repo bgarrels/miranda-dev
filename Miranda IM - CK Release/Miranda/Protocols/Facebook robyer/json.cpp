@@ -242,6 +242,8 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 		const Object& objRoot = objDocument;
 		const Array& messagesArray = objRoot["ms"];
 
+		std::string last_msg = "";
+
 		for (Array::const_iterator itMessage(messagesArray.Begin());
 			itMessage != messagesArray.End(); ++itMessage)
 		{
@@ -258,10 +260,16 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				const Object& messageContent = objMember["msg"];
 				const String& text = messageContent["text"];
         
-				const Number& time_sent = messageContent["time"];
-				if (time_sent.Value() > proto->facy.last_message_time_) // Check agains duplicit messages
+				//const Number& time_sent = messageContent["time"];
+
+//				proto->Log("????? Checking time %15.2f > %15.2f", time_sent.Value(), proto->facy.last_message_time_);
+
+				if (last_msg != text.Value())
+/*				if (time_sent.Value() > proto->facy.last_message_time_
+						|| (time_sent.Value() < 0 && proto->facy.last_message_time_ >= 0)) // Check agains duplicit messages*/
 				{
-					proto->facy.last_message_time_ = time_sent.Value();
+					last_msg = text.Value();
+					//proto->facy.last_message_time_ = time_sent.Value();
 
   					facebook_message* message = new facebook_message( );
 					message->message_text= utils::text::special_expressions_decode(
@@ -271,7 +279,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 
 					messages->push_back( message );
 				} else {
-					std::string msg = "      Got duplicit message?\n";
+					std::string msg = "????? Got duplicit message?\n";
 					msg += utils::text::special_expressions_decode(utils::text::slashu_to_utf8(text.Value()));
 					proto->Log(msg.c_str());
 				}
@@ -292,10 +300,16 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 					// TODO RM: include sender name
 					// const String& name = messageContent["sender_name"];
         
-					const Number& time_sent = messageContent["timestamp"];
-					if (time_sent.Value() > proto->facy.last_message_time_) // Check agains duplicit messages
+					//const Number& time_sent = messageContent["timestamp"];
+
+					//proto->Log("????? Checking time %15.2f > %15.2f", time_sent.Value(), proto->facy.last_message_time_);
+
+					if (last_msg != text.Value())
+/*					if (time_sent.Value() > proto->facy.last_message_time_
+						|| (time_sent.Value() < 0 && proto->facy.last_message_time_ >= 0)) // Check agains duplicit messages*/
 					{
-						proto->facy.last_message_time_ = time_sent.Value();
+						last_msg = text.Value();
+						//proto->facy.last_message_time_ = time_sent.Value();
 
   						facebook_message* message = new facebook_message( );
 						message->message_text= utils::text::special_expressions_decode(
@@ -307,7 +321,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 
 						messages->push_back( message );
 					} else {
-						std::string msg = "      Got duplicit inbox message?\n";
+						std::string msg = "????? Got duplicit inbox message?\n";
 						msg += utils::text::special_expressions_decode(utils::text::slashu_to_utf8(text.Value()));
 						proto->Log(msg.c_str());
 					}
