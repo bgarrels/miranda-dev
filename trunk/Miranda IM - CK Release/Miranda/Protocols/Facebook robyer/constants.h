@@ -29,13 +29,13 @@ Last change on : $Date$
 
 // Version management
 #include "build.h"
-#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 5, 2)
+#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 5, 3)
 #define __PRODUCT_DWORD             PLUGIN_MAKE_VERSION(0, 9, 14, 0)
-#define __VERSION_STRING            "0.0.5.2"
+#define __VERSION_STRING            "0.0.5.3"
 #define __PRODUCT_STRING            "0.9.14.0"
-#define __VERSION_VS_FILE           0,0,5,2
+#define __VERSION_VS_FILE           0,0,5,3
 #define __VERSION_VS_PROD           0,9,14,0
-#define __VERSION_VS_FILE_STRING    "0, 0, 5, 2"
+#define __VERSION_VS_FILE_STRING    "0, 0, 5, 3"
 #define __VERSION_VS_PROD_STRING    "0, 9, 14, 0"
 
 // Product management

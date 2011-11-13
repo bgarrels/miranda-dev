@@ -119,9 +119,9 @@ namespace utils
 class ScopedLock
 {
 public:
-	ScopedLock(HANDLE h) : handle_(h)
+	ScopedLock(HANDLE h/*, int t = INFINITE*/) : handle_(h)//, timeout_(t)
 	{
-		WaitForSingleObject(handle_,INFINITE);
+		WaitForSingleObject(handle_,INFINITE/*timeout_*/);
 	}
 	~ScopedLock()
 	{
@@ -135,6 +135,7 @@ public:
 	}
 private:
 	HANDLE handle_;
+//	int timeout_;
 };
 
 static const struct

@@ -69,8 +69,8 @@ void FacebookProto::SendMsgWorker(void *p)
 {
 	if(p == NULL)
 		return;
-  
-	ScopedLock s( facy.send_message_lock_ );
+
+//	ScopedLock s( facy.send_message_lock_, 500 );
 
 	send_direct *data = static_cast<send_direct*>(p);
 

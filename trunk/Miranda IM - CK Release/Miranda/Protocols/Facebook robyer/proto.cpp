@@ -82,8 +82,9 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 	char *profile = Utils_ReplaceVars("%miranda_avatarcache%");
 	def_avatar_folder_ = std::string(profile)+"\\"+m_szModuleName;
 	mir_free(profile);
-	hAvatarFolder_ = FoldersRegisterCustomPath(m_szModuleName,"Avatars",
-	    def_avatar_folder_.c_str());
+	hAvatarFolder_ = FoldersRegisterCustomPath(m_szModuleName, "Avatars", def_avatar_folder_.c_str());
+
+	Log("Loaded Facebook Protocol RM %s", __VERSION_STRING);
 
 	// Set all contacts offline -- in case we crashed
 	SetAllContactStatuses( ID_STATUS_OFFLINE );
