@@ -258,14 +258,8 @@ HWND WINAPI CreateRecentComboBoxEx(HWND hwndDlg, struct MsgBoxData *data)
 		j--;
 		if (!DBGetContactSettingTString(NULL, "SimpleStatusMsg", buff, &dbv))
 		{
-			if (dbv.ptszVal)
+			if (dbv.ptszVal != NULL && dbv.ptszVal != '\0')
 			{
-				if (!lstrlen(dbv.ptszVal))
-				{
-					DBFreeVariant(&dbv);
-					continue;
-				}
-
 				found = TRUE;
 				cbei.iItem = -1;
 				cbei.pszText = (LPTSTR)dbv.ptszVal;
@@ -481,22 +475,28 @@ VOID APIENTRY HandlePopupMenu(HWND hwnd, POINT pt, HWND edit_control)
 		case IDM_COPY:
 			SendMessage(edit_control, WM_COPY, 0, 0);
 			break;
+
 		case IDM_CUT:
             SendMessage(edit_control, WM_CUT, 0, 0);
 			break;
+
         case IDM_PASTE:
 			SendMessage(edit_control, WM_PASTE, 0, 0);
 			break;
+
 		case IDM_SELECTALL:
 			SendMessage(edit_control, EM_SETSEL, 0, -1);
 			break;
+
 		case IDM_DELETE:
 			SendMessage(edit_control, WM_SETTEXT, 0, (LPARAM)"");
 			SendMessage(GetParent(hwnd), WM_COMMAND, MAKEWPARAM(IDC_EDIT1, EN_CHANGE), (LPARAM)edit_control);
 			break;
+
 		case ID__FORTUNEAWAYMSG:
 			CallService(MS_UTILS_OPENURL,1,(LPARAM)"http://addons.miranda-im.org/details.php?action=viewfile&id=1933");
 			break;
+
 		case ID__VARIABLES:
 #ifdef _UNICODE
 			CallService(MS_UTILS_OPENURL,1,(LPARAM)"http://addons.miranda-im.org/details.php?action=viewfile&id=3815");
@@ -504,6 +504,7 @@ VOID APIENTRY HandlePopupMenu(HWND hwnd, POINT pt, HWND edit_control)
 			CallService(MS_UTILS_OPENURL,1,(LPARAM)"http://addons.miranda-im.org/details.php?action=viewfile&id=3814");
 #endif
 			break;
+
 		case ID__VARIABLES_MOREVARIABLES:
 		{
 			VARHELPINFO vhi = {0};
@@ -515,6 +516,7 @@ VOID APIENTRY HandlePopupMenu(HWND hwnd, POINT pt, HWND edit_control)
 			CallService(MS_VARS_SHOWHELPEX, (WPARAM)hwnd, (LPARAM)&vhi);
 			break;
 		}
+
 		default:
 			if (!OpenClipboard(GetParent(hwnd))) break;
 			if (EmptyClipboard())
@@ -1203,6 +1205,7 @@ INT_PTR CALLBACK AwayMsgBoxDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 			}
 			return FALSE;
 		}
+
 		case WM_TIMER:
 			if (msgbox_data->m_iCountdown == -1)
 			{
@@ -1219,6 +1222,7 @@ INT_PTR CALLBACK AwayMsgBoxDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 			}
 			msgbox_data->m_iCountdown--;
 			break;
+
 		case WM_COMMAND:
 			switch (LOWORD(wParam))
 			{
@@ -1401,10 +1405,12 @@ INT_PTR CALLBACK AwayMsgBoxDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 							SetStatusMessage(msgbox_data->m_szProto, msgbox_data->m_iInitialStatus, msgbox_data->m_iStatus, tszMsg, msgbox_data->m_bOnStartup);
 					}
 				}
+
 				case IDCANCEL:
 				case IDC_CANCEL:
 					DestroyWindow(hwndDlg);
 					return TRUE;
+
 				case IDC_EDIT1:		// Notification from the edit control
 					if (msgbox_data->m_iCountdown > -2)
 					{
@@ -1436,6 +1442,7 @@ INT_PTR CALLBACK AwayMsgBoxDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 					}
 					break;
 			}
+
 			if ((HWND)lParam == msgbox_data->status_cbex)
 			{
 				if (msgbox_data->m_iCountdown > -2)
@@ -1464,6 +1471,7 @@ INT_PTR CALLBACK AwayMsgBoxDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 					}
 				}
 			}
+
 			if ((HWND)lParam == msgbox_data->recent_cbex)
 			{
 				if (msgbox_data->m_iCountdown > -2)
@@ -1597,6 +1605,7 @@ INT_PTR CALLBACK AwayMsgBoxDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 					}
 				}
 			}
+
 			if ((HWND)lParam == GetDlgItem(hwndDlg, IDC_BADD))
 			{
 				switch (HIWORD(wParam))
@@ -1620,9 +1629,10 @@ INT_PTR CALLBACK AwayMsgBoxDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 					}
 				}
 			}
+
 			if ((HWND)lParam == GetDlgItem(hwndDlg, IDC_BCLEAR))
 			{
-				switch(HIWORD(wParam))
+				switch (HIWORD(wParam))
 				{
 					case BN_CLICKED:
 						if (MessageBox(NULL, TranslateT("Are you sure you want to clear status message history?"), TranslateT("Confirm clearing history"), MB_ICONQUESTION | MB_YESNO) == IDYES)
@@ -1643,9 +1653,10 @@ INT_PTR CALLBACK AwayMsgBoxDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 						break;
 				}
 			}
+
 			if ((HWND)lParam == GetDlgItem(hwndDlg, IDC_BDEL))
 			{
-				switch(HIWORD(wParam))
+				switch (HIWORD(wParam))
 				{
 					case BN_CLICKED:
 					{
@@ -1707,9 +1718,11 @@ INT_PTR CALLBACK AwayMsgBoxDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 				}
 			}
 			break;
+
 		case DM_SIMPAWAY_SHUTDOWN:
 			DestroyWindow(hwndDlg);
 			break;
+
 		case DM_SIMPAWAY_CHANGEICONS:
 			ReleaseIconEx("cross");
 			ReleaseIconEx("recent");
@@ -1733,6 +1746,7 @@ INT_PTR CALLBACK AwayMsgBoxDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 				SendMessage(GetDlgItem(hwndDlg, IDC_BDEL), BM_SETIMAGE, IMAGE_ICON, (LPARAM)msgbox_data->icon[I_ICON_DEL]);
 			}
 			break;
+
 		case WM_DESTROY:
 		{
 			WINDOWPLACEMENT wp;
