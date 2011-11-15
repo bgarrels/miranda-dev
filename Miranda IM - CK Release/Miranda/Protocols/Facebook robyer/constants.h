@@ -125,8 +125,8 @@ static const struct
 // User-Agents
 static const struct
 {
-	char *name;
-	char *id;
+	const char *name;
+	const char *id;
 } user_agents[] = {
 	{ "Miranda IM (default)", "Miranda IM (default)" },
 	{ "Internet Explorer 8", "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)" },

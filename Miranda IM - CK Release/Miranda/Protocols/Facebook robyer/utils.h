@@ -94,6 +94,7 @@ namespace utils
 		std::string slashu_to_utf8( std::string data );
 		std::string trim( std::string data );
 		std::string source_get_value( std::string* data, unsigned int argument_count, ... );
+		std::string source_get_value2( std::string* data, const char *term, const char *endings);
 	};
 
 	namespace conversion

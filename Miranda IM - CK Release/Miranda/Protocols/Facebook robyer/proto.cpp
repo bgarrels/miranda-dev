@@ -34,14 +34,15 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 	m_szModuleName = mir_strdup( proto_name );
 	m_tszUserName  = mir_tstrdup( username );
 
-	this->facy.parent = this;
+	facy.parent = this;
 
-	this->signon_lock_ = CreateMutex( NULL, FALSE, NULL );
-	this->avatar_lock_ = CreateMutex( NULL, FALSE, NULL );
-	this->log_lock_ = CreateMutex( NULL, FALSE, NULL );
-	this->facy.buddies_lock_ = CreateMutex( NULL, FALSE, NULL );
-	this->facy.send_message_lock_ = CreateMutex( NULL, FALSE, NULL );
-	this->facy.fcb_conn_lock_ = CreateMutex( NULL, FALSE, NULL );
+	signon_lock_ = CreateMutex( NULL, FALSE, NULL );
+	avatar_lock_ = CreateMutex( NULL, FALSE, NULL );
+	log_lock_ = CreateMutex( NULL, FALSE, NULL );
+	update_loop_lock_ = CreateEvent( NULL, FALSE, FALSE, NULL);
+	facy.buddies_lock_ = CreateMutex( NULL, FALSE, NULL );
+	facy.send_message_lock_ = CreateMutex( NULL, FALSE, NULL );
+	facy.fcb_conn_lock_ = CreateMutex( NULL, FALSE, NULL );
 
 	CreateProtoService(m_szModuleName, PS_CREATEACCMGRUI, &FacebookProto::SvcCreateAccMgrUI, this);
 	CreateProtoService(m_szModuleName, PS_GETMYAWAYMSG,   &FacebookProto::GetMyAwayMsg,      this);
@@ -92,25 +93,22 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 
 FacebookProto::~FacebookProto( )
 {
-	KillThreads( false );
 	Netlib_CloseHandle( m_hNetlibUser );
 
-	WaitForSingleObject( this->signon_lock_, IGNORE );
-	WaitForSingleObject( this->avatar_lock_, IGNORE );
-	WaitForSingleObject( this->log_lock_, IGNORE );
-	WaitForSingleObject( this->facy.buddies_lock_, IGNORE );
-	WaitForSingleObject( this->facy.send_message_lock_, IGNORE );
-	//WaitForSingleObject( this->update_loop_lock_, IGNORE );
-	//WaitForSingleObject( this->message_loop_lock_, IGNORE );
+	WaitForSingleObject( signon_lock_, IGNORE );
+	WaitForSingleObject( avatar_lock_, IGNORE );
+	WaitForSingleObject( log_lock_, IGNORE );
+	WaitForSingleObject( facy.buddies_lock_, IGNORE );
+	WaitForSingleObject( facy.send_message_lock_, IGNORE );
 
-	CloseHandle( this->signon_lock_ );
-	CloseHandle( this->avatar_lock_ );
-	CloseHandle( this->log_lock_ );
-	CloseHandle( this->facy.buddies_lock_ );
-	CloseHandle( this->facy.send_message_lock_ );
-	CloseHandle( this->facy.fcb_conn_lock_ );
-	//CloseHandle( this->update_loop_lock_ );
+	CloseHandle( signon_lock_ );
+	CloseHandle( avatar_lock_ );
+	CloseHandle( log_lock_ );
+	CloseHandle( update_loop_lock_ );
 	//CloseHandle( this->message_loop_lock_ );
+	CloseHandle( facy.buddies_lock_ );
+	CloseHandle( facy.send_message_lock_ );
+	CloseHandle( facy.fcb_conn_lock_ );
 
 	mir_free( m_tszUserName );
 	mir_free( m_szModuleName );
