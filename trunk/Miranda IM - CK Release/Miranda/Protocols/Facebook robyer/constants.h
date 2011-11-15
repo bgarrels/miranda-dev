@@ -98,7 +98,6 @@ Last change on : $Date$
 #define FACEBOOK_REQUEST_FEEDS                  125 // getting feeds
 #define FACEBOOK_REQUEST_NOTIFICATIONS			126 // getting notifications
 #define FACEBOOK_REQUEST_RECONNECT              130 // getting __sequence_num__ and __channel_id__
-#define FACEBOOK_REQUEST_PROFILE_GET            200 // getting others' profiles
 #define FACEBOOK_REQUEST_STATUS_SET             251 // setting my "What's on my mind?"
 #define FACEBOOK_REQUEST_MESSAGE_SEND           300 // sending message
 #define FACEBOOK_REQUEST_MESSAGES_RECEIVE       301 // receiving messages
@@ -106,7 +105,7 @@ Last change on : $Date$
 #define FACEBOOK_REQUEST_SETTINGS               305 // setting chat visibility
 #define FACEBOOK_REQUEST_TABS					306 // closing message window, setting chat visibility
 #define	FACEBOOK_REQUEST_ASYNC					307 // marking messages read and getting other things
-#define FACEBOOK_REQUEST_ASYNC2					308 // GET version of async request
+#define FACEBOOK_REQUEST_ASYNC_GET				308 // GET version of async request
 
 #define FACEBOOK_RECV_MESSAGE	1
 #define FACEBOOK_SEND_MESSAGE	2

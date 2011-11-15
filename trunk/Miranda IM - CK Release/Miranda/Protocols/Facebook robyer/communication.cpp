@@ -226,14 +226,13 @@ DWORD facebook_client::choose_security_level( int request_type )
 //	case FACEBOOK_REQUEST_FEEDS:
 //	case FACEBOOK_REQUEST_NOTIFICATIONS:
 //	case FACEBOOK_REQUEST_RECONNECT:
-//	case FACEBOOK_REQUEST_PROFILE_GET:
 //	case FACEBOOK_REQUEST_STATUS_SET:
 //	case FACEBOOK_REQUEST_MESSAGE_SEND:
 //	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 //	case FACEBOOK_REQUEST_SETTINGS:
 //	case FACEBOOK_REQUEST_TABS:
 //	case FACEBOOK_REQUEST_ASYNC:
-//	case FACEBOOK_REQUEST_ASYNC2:
+//	case FACEBOOK_REQUEST_ASYNC_GET:
 //	case FACEBOOK_REQUEST_TYPING_SEND:
 	default:
 		return ( DWORD )0;
@@ -261,9 +260,8 @@ int facebook_client::choose_method( int request_type )
 //	case FACEBOOK_REQUEST_FEEDS:
 //	case FACEBOOK_REQUEST_NOTIFICATIONS:
 //	case FACEBOOK_REQUEST_RECONNECT:
-//	case FACEBOOK_REQUEST_PROFILE_GET:
 //	case FACEBOOK_REQUEST_LOAD_FRIENDS:
-//	case FACEBOOK_REQUEST_ASYNC2:
+//	case FACEBOOK_REQUEST_ASYNC_GET:
 	default:
 		return REQUEST_GET;
 	}
@@ -282,7 +280,6 @@ std::string facebook_client::choose_proto( int request_type )
 //	case FACEBOOK_REQUEST_FEEDS:
 //	case FACEBOOK_REQUEST_NOTIFICATIONS:
 //	case FACEBOOK_REQUEST_RECONNECT:
-//	case FACEBOOK_REQUEST_PROFILE_GET:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
 //	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 //	case FACEBOOK_REQUEST_STATUS_SET:
@@ -291,7 +288,7 @@ std::string facebook_client::choose_proto( int request_type )
 //	case FACEBOOK_REQUEST_SETTINGS:
 //	case FACEBOOK_REQUEST_TABS:
 //	case FACEBOOK_REQUEST_ASYNC:
-//	case FACEBOOK_REQUEST_ASYNC2:
+//	case FACEBOOK_REQUEST_ASYNC_GET:
 //	case FACEBOOK_REQUEST_TYPING_SEND:
 	default:
 		return HTTP_PROTO_REGULAR;
@@ -312,24 +309,16 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 	case FACEBOOK_REQUEST_MESSAGES_RECEIVE:
 	{
 		std::string server = FACEBOOK_SERVER_CHAT;
-		//if (this->chat_channel_host_.substr(0, this->chat_channel_partition_.length()) != this->chat_channel_partition_)
-		//	server = FACEBOOK_SERVER_CHAT2;
 		if (!this->chat_channel_jslogger_.empty())
-//			&& this->chat_channel_jslogger_ != this->chat_channel_host_.substr(0, this->chat_channel_jslogger_.length()))
 			server = FACEBOOK_SERVER_CHAT2;
 
-/*		std::string fl = "0";
-		if ( cookies.find("L") != cookies.end() )
-			fl = cookies.find("L")->second;*/
-
-		utils::text::replace_first( &server, "%s", this->chat_channel_partition_.empty() ? "0" : this->chat_channel_partition_ );
+		utils::text::replace_first( &server, "%s", "0" );
 		utils::text::replace_first( &server, "%s", this->chat_channel_host_ );
 		return server;
 	}
 
 //	case FACEBOOK_REQUEST_LOGOUT:
 //	case FACEBOOK_REQUEST_HOME:
-//	case FACEBOOK_REQUEST_PROFILE_GET:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
 //	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 //	case FACEBOOK_REQUEST_FEEDS:
@@ -340,7 +329,7 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 //	case FACEBOOK_REQUEST_SETTINGS:
 //	case FACEBOOK_REQUEST_TABS:
 //	case FACEBOOK_REQUEST_ASYNC:
-//	case FACEBOOK_REQUEST_ASYNC2:
+//	case FACEBOOK_REQUEST_ASYNC_GET:
 //	case FACEBOOK_REQUEST_TYPING_SEND:
 //	case FACEBOOK_REQUEST_SETUP_MACHINE:
 	default:
@@ -403,13 +392,6 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 		return action;
 	}
 
-	case FACEBOOK_REQUEST_PROFILE_GET:
-	{
-		std::string action = "/ajax/hovercard/user.php?id=%s&__a=1";
-		utils::text::replace_first( &action, "%s", (*data) );
-		return action;
-	}
-
 	case FACEBOOK_REQUEST_STATUS_SET:
 		return "/ajax/updatestatus.php?__a=1";
 
@@ -427,9 +409,7 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 		}
 
 		utils::text::replace_first( &action, "%s", self_.user_id );
-		if (this->chat_sequence_num_.empty())
-			this->chat_sequence_num_ = "0";
-		utils::text::replace_first( &action, "%s", chat_sequence_num_ );
+		utils::text::replace_first( &action, "%s", chat_sequence_num_.empty() ? "0" : chat_sequence_num_ );
 		return action;
 	}
 
@@ -442,7 +422,7 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 	case FACEBOOK_REQUEST_ASYNC:
 		return "/ajax/messaging/async.php?__a=1";
 
-	case FACEBOOK_REQUEST_ASYNC2:
+	case FACEBOOK_REQUEST_ASYNC_GET:
 	{
 		std::string action = "/ajax/messaging/async.php?__a=1&%s";
 		utils::text::replace_first( &action, "%s", (*data) );
@@ -473,13 +453,12 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
 	case FACEBOOK_REQUEST_BUDDY_LIST:
 	case FACEBOOK_REQUEST_LOAD_FRIENDS:
-	case FACEBOOK_REQUEST_PROFILE_GET:
 	case FACEBOOK_REQUEST_STATUS_SET:
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
 	case FACEBOOK_REQUEST_SETTINGS:
 	case FACEBOOK_REQUEST_TABS:
 	case FACEBOOK_REQUEST_ASYNC:
-	case FACEBOOK_REQUEST_ASYNC2:
+	case FACEBOOK_REQUEST_ASYNC_GET:
 	case FACEBOOK_REQUEST_TYPING_SEND:
 		*headers_count = 5;
 		break;
@@ -502,13 +481,12 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
 	case FACEBOOK_REQUEST_BUDDY_LIST:
 	case FACEBOOK_REQUEST_LOAD_FRIENDS:
-	case FACEBOOK_REQUEST_PROFILE_GET:
 	case FACEBOOK_REQUEST_STATUS_SET:
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
 	case FACEBOOK_REQUEST_SETTINGS:
 	case FACEBOOK_REQUEST_TABS:
 	case FACEBOOK_REQUEST_ASYNC:
-	case FACEBOOK_REQUEST_ASYNC2:
+	case FACEBOOK_REQUEST_ASYNC_GET:
 	case FACEBOOK_REQUEST_TYPING_SEND:
 		headers[4].szName = "Content-Type";
 		headers[4].szValue = "application/x-www-form-urlencoded; charset=utf-8";

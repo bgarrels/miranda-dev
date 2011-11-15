@@ -229,7 +229,7 @@ void FacebookProto::ProcessUnreadMessages( void* )
 	std::string data = "sk=inbox&query=is%3Aunread";
 
 	// Get unread inbox threads
-	http::response resp = facy.flap( FACEBOOK_REQUEST_ASYNC2, &data );
+	http::response resp = facy.flap( FACEBOOK_REQUEST_ASYNC_GET, &data );
 
 	// Process result data
 	facy.validate_response(&resp);
@@ -253,7 +253,7 @@ void FacebookProto::ProcessUnreadMessages( void* )
 		data = "sk=inbox&query=is%3Aunread&thread_query=is%3Aunread&action=read&tid=";
 		data += utils::text::source_get_value( &thread_content, 2, "id=\\\"", "\\\"" );
 		
-		resp = facy.flap( FACEBOOK_REQUEST_ASYNC2, &data );
+		resp = facy.flap( FACEBOOK_REQUEST_ASYNC_GET, &data );
 
 		facy.validate_response(&resp);
 
