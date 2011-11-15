@@ -23,6 +23,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 HINSTANCE g_hInst;
 PLUGINLINK *pluginLink;
+int hLangpack;
 struct MM_INTERFACE mmi;
 PROTOACCOUNTS *accounts;
 
@@ -2187,7 +2188,8 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 {
 	pluginLink = link;
 
-	mir_getMMI(&mmi); // set the memory
+	mir_getMMI(&mmi);
+	mir_getLP(&pluginInfo);
 	hwndSAMsgDialog	= NULL;
 	accounts = (PROTOACCOUNTS *)mir_alloc(sizeof(PROTOACCOUNTS));
 
