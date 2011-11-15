@@ -66,33 +66,33 @@ typedef struct {
 	   const WCHAR *pwszDescription;
 	};
 	HINSTANCE hInstance;             // instance of the calling module and where the icon
-	                                 // resource is located.
-	                                 // always be sure you set this to your own hInstance even if
-	                                 // you use the generic default icon
+									 // resource is located.
+									 // always be sure you set this to your own hInstance even if
+									 // you use the generic default icon
 
 	UINT nIconResID;                 // resource id of an icon to use for the file type.
-	                                 // this icon should contain icons of all sizes and color depths
-	                                 // needed by Windows.
-	                                 // set this to 0 to use the generic 'miranda file' icon
-	                                 // provided by assocmgr.
+									 // this icon should contain icons of all sizes and color depths
+									 // needed by Windows.
+									 // set this to 0 to use the generic 'miranda file' icon
+									 // provided by assocmgr.
 
 	const char *pszService;          // service to call when a file is opened
-	                                 // this service will be called with lParam set to
-	                                 // the file name being opened including path.
-	                                 // it can be assumed that the provided file name 
-	                                 // is always the long path name.
-	                                 // return zero on suceess, nonzero on error.
-	                                 // Note: set this to NULL to pass the file name as
-	                                 // commandline argument to miranda32.exe (db file).
+									 // this service will be called with lParam set to
+									 // the file name being opened including path.
+									 // it can be assumed that the provided file name 
+									 // is always the long path name.
+									 // return zero on suceess, nonzero on error.
+									 // Note: set this to NULL to pass the file name as
+									 // commandline argument to miranda32.exe (db file).
 
 	DWORD flags;                     // see FTDF_* flags below
 
 	const char *pszFileExt;          // file extension, e.g. ".ext"
-	                                 // first character must be a dot, assumed to be all lower case.
-	                                 // may only consist of ascii characters.
+									 // first character must be a dot, assumed to be all lower case.
+									 // may only consist of ascii characters.
 
 	const char *pszMimeType;         // MIME type of the file, e.g. "application/x-icq"
-	                                 // may only consist of ascii characters.
+									 // may only consist of ascii characters.
 	union {
 	   const char *pszVerbDesc;      // description for the open verb e.g. "&Install".
 	   const TCHAR *ptszVerbDesc;    // set this to NULL to use the default description.
@@ -101,26 +101,26 @@ typedef struct {
 } FILETYPEDESC;
 
 #define FTDF_UNICODE          0x0001  // pszDescription and pszVerbDesc in struct are Unicode.
-                                      // the specified service is called with Unicode parameters.
+									  // the specified service is called with Unicode parameters.
 
 #define FTDF_DEFAULTDISABLED  0x0002  // file type is not registered by default, it needs to be
-                                      // enabled explicitly on the options page.
+									  // enabled explicitly on the options page.
 
 #define FTDF_BROWSERAUTOOPEN  0x0004  // tells the browser to download and open the file directly
-                                      // without prompt (currently IE and Opera6+) - be careful!
-                                      // use only in conjunction with pszMimeType set.
-                                      // this tells Windows that open can be safely invoked for
-                                      // downloaded files.
-                                      // Note that this flag may create a security risk,
-                                      // because downloaded files could contain malicious content.
-                                      // you need to protect against such an exploit.
+									  // without prompt (currently IE and Opera6+) - be careful!
+									  // use only in conjunction with pszMimeType set.
+									  // this tells Windows that open can be safely invoked for
+									  // downloaded files.
+									  // Note that this flag may create a security risk,
+									  // because downloaded files could contain malicious content.
+									  // you need to protect against such an exploit.
 
 #define FTDF_ISTEXT           0x0008  // tells Windows that this file can be opened
-                                      // as a text file using e.g Notepad.
-                                      // only has an effect on Windows XP and higher.
+									  // as a text file using e.g Notepad.
+									  // only has an effect on Windows XP and higher.
 
 #define FTDF_ISSHORTCUT       0x0010  // file type behaves as shortcut, this means a
-                                      // small overlay arrow is applied and the extension is never shown
+									  // small overlay arrow is applied and the extension is never shown
 
 #if defined(_UNICODE)
    #define FTDF_TCHAR  FTDF_UNICODE   // strings in struct are WCHAR*, service accepts WCHAR*
@@ -193,32 +193,32 @@ typedef struct {
 	   const WCHAR *pwszDescription;
 	};
 	HINSTANCE hInstance;             // instance of the calling module and where the icon
-	                                 // resource is located.
-	                                 // always be sure you set this to your own hInstance even if
-	                                 // you use the generic default icon
+									 // resource is located.
+									 // always be sure you set this to your own hInstance even if
+									 // you use the generic default icon
 
 	UINT nIconResID;                 // resource id of an icon to use for the url type.
-	                                 // only a small one (16x16) is needed by Windows,
-	                                 // e.g. proto icon as used in Miranda.
-	                                 // set this to 0 to use the default miranda icon.
+									 // only a small one (16x16) is needed by Windows,
+									 // e.g. proto icon as used in Miranda.
+									 // set this to 0 to use the default miranda icon.
 
 	const char *pszService;          // service to call when a url is opened (can't be NULL)
-	                                 // this service will be called with lParam set to
-	                                 // the url being opened including the prefix.
-	                                 // return zero on suceess, nonzero on error.
+									 // this service will be called with lParam set to
+									 // the url being opened including the prefix.
+									 // return zero on suceess, nonzero on error.
 
 	DWORD flags;                     // see UTDF_* flags below
 
 	const char *pszProtoPrefix;      // protocol prefix, e.g. "http:"
-	                                 // last character must be a colon, assumed to be all lower case.
-	                                 // may only consist of ascii characters.
+									 // last character must be a colon, assumed to be all lower case.
+									 // may only consist of ascii characters.
 } URLTYPEDESC;
 
 #define UTDF_UNICODE          0x0001  // pszDescription in struct is Unicode.
-                                      // the specified service is called with Unicode parameters.
+									  // the specified service is called with Unicode parameters.
 
 #define UTDF_DEFAULTDISABLED  0x0002  // url type is not registered by default, it needs to be
-                                      // enabled explicitly on the options page.
+									  // enabled explicitly on the options page.
 #if defined(_UNICODE)
    #define UTDF_TCHAR  UTDF_UNICODE   // strings in struct are WCHAR*, service accepts WCHAR*
 #else
