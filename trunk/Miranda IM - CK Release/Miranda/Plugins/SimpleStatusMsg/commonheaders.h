@@ -17,8 +17,11 @@ You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
+
 // to enable all 0.9.0 core functions
 #define MIRANDA_VER 0x0900
+// to enable custom langpacks
+#define MIRANDA_CUSTOM_LP
 
 #define _WIN32_IE 0x0501
 
@@ -51,11 +54,11 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "sdk/icq_constants.h"
 #include "sdk/m_fortunemsg.h"
-#include "m_statusplugins.h"
-#include "m_toolbar.h"
-#include "m_toptoolbar.h"
-#include "m_updater.h"
-#include "m_variables.h"
+#include "sdk/m_statusplugins.h"
+#include "sdk/m_toolbar.h"
+#include "sdk/m_toptoolbar.h"
+#include "sdk/m_updater.h"
+#include "sdk/m_variables.h"
 #include "m_simpleaway.h"
 #include "m_simplestatusmsg.h"
 
