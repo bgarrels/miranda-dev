@@ -27,26 +27,6 @@ Last change on : $Date: 2011-01-08 11:10:34 +0100 (so, 08 1 2011) $
 
 #include "common.h"
 
-void FacebookProto::KillThreads( bool log )
-{
-	// Kill the old threads if they are still around
-	if(m_hMsgLoop != NULL)
-	{
-		if ( log )
-			LOG("***** Requesting MessageLoop to exit... %d", m_hMsgLoop );
-		WaitForSingleObject(m_hMsgLoop,IGNORE);
-		TerminateThread(m_hMsgLoop, 0);
-	}
-	
-	if(m_hUpdLoop != NULL)
-	{
-		if ( log )
-			LOG("***** Requesting UpdateLoop to exit");
-		WaitForSingleObject(m_hUpdLoop,IGNORE);
-		TerminateThread(m_hUpdLoop, 0);
-	}
-}
-
 void FacebookProto::ChangeStatus(void*)
 {
 	ScopedLock s(signon_lock_);
@@ -59,20 +39,26 @@ void FacebookProto::ChangeStatus(void*)
 	{ // Logout	
 		LOG("##### Beginning SignOff process");
 
-		KillThreads( );
+		m_iStatus = facy.self_.status_id = ID_STATUS_OFFLINE;
+		SetEvent(update_loop_lock_);
+		Netlib_Shutdown(facy.hMsgCon);
+
+		facy.logout( );
 
 		deleteSetting( "LogonTS" );
 
-		facy.logout( );
 		facy.clear_cookies( );
 		facy.buddies.clear( );
 
-		m_iStatus = facy.self_.status_id = ID_STATUS_OFFLINE;
 		ProtoBroadcastAck(m_szModuleName, 0, ACKTYPE_STATUS, ACKRESULT_SUCCESS, (HANDLE)old_status, m_iStatus);
 
 		SetAllContactStatuses( ID_STATUS_OFFLINE );
 
 		ToggleStatusMenuItems(false);
+
+		if (facy.hMsgCon)
+			Netlib_CloseHandle(facy.hMsgCon);
+		facy.hMsgCon = NULL;
 
 		LOG("##### SignOff complete");
 
@@ -85,8 +71,6 @@ void FacebookProto::ChangeStatus(void*)
 		m_iStatus = facy.self_.status_id = ID_STATUS_CONNECTING;
 		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, (HANDLE)old_status, m_iStatus);
 
-		KillThreads( );
-
 		if ( NegotiateConnection( ) )
 		{			
 			facy.last_feeds_update_ = ::time( NULL );
@@ -97,15 +81,13 @@ void FacebookProto::ChangeStatus(void*)
 			facy.load_friends();
 
 			setDword( "LogonTS", (DWORD)time(NULL) );
-			m_hUpdLoop = ForkThreadEx( &FacebookProto::UpdateLoop,  this );
-			m_hMsgLoop = ForkThreadEx( &FacebookProto::MessageLoop, this );
+			ForkThread( &FacebookProto::UpdateLoop,  this );
+			ForkThread( &FacebookProto::MessageLoop, this );
 
 			if (getByte(FACEBOOK_KEY_SET_MIRANDA_STATUS, DEFAULT_SET_MIRANDA_STATUS))
 			{
 				ForkThread(&FacebookProto::SetAwayMsgWorker, this, NULL);
 			}
-
-			LOG("***** Started messageloop thread handle %d", m_hMsgLoop);
 		} else {
 			ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_FAILED,
 				(HANDLE)old_status,m_iStatus);
@@ -186,7 +168,6 @@ bool FacebookProto::NegotiateConnection( )
 
 void FacebookProto::UpdateLoop(void *)
 {
-	//ScopedLock s(update_loop_lock_); // TODO: Required?
 	time_t tim = ::time(NULL);
 	LOG( ">>>>> Entering Facebook::UpdateLoop[%d]", tim );
 
@@ -200,7 +181,7 @@ void FacebookProto::UpdateLoop(void *)
 			if ( !facy.feeds( ) )
 				break;
 		LOG( "***** FacebookProto::UpdateLoop[%d] going to sleep...", tim );
-		if ( SleepEx( GetPollRate( ) * 1000, true ) == WAIT_IO_COMPLETION )
+		if ( WaitForSingleObjectEx( update_loop_lock_, GetPollRate( ) * 1000, true ) != WAIT_TIMEOUT )
 			break;
 		LOG( "***** FacebookProto::UpdateLoop[%d] waking up...", tim );
 	}

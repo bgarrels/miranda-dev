@@ -143,7 +143,6 @@ public:
 	BYTE    GetPollRate();
 	void __cdecl MessageLoop(void*);
 	void __cdecl UpdateLoop(void*);
-	void    KillThreads(bool log=false);
 
 	// Processing threads
 	void __cdecl ProcessBuddyList(void*);
@@ -193,12 +192,10 @@ public:
 	HANDLE  signon_lock_;
 	HANDLE  avatar_lock_;
 	HANDLE  log_lock_;
-	//HANDLE  update_loop_lock_;
+	HANDLE  update_loop_lock_;
 	//HANDLE  message_loop_lock_;
 
 	HANDLE  m_hNetlibUser;
-	HANDLE  m_hUpdLoop;
-	HANDLE  m_hMsgLoop;
 
 	std::string last_status_msg_;
 	std::string def_avatar_folder_;

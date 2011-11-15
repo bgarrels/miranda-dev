@@ -99,15 +99,13 @@ public:
 	// Cookies, Data storage
 
 	HANDLE cookies_lock_;
-	HANDLE headers_lock_;
 
 	std::map< std::string, std::string >    cookies;
-	std::map< std::string, std::string >    headers;
 
-	std::string get_user_agent( );
+	const char* get_user_agent( );
 	std::string get_newsfeed_type( );
 
-	std::string load_cookies( );
+	char*   load_cookies( );
 	void    store_headers( http::response* resp, NETLIBHTTPHEADER* headers, int headers_count );
 	void    clear_cookies( );
 
@@ -186,8 +184,6 @@ public:
 	std::string choose_request_url( int, std::string* data = NULL );
 
 	NETLIBHTTPHEADER*   get_request_headers( int request_type, int* headers_count );
-	void    set_header( NETLIBHTTPHEADER* header, char* name );
-	void    refresh_headers( );
 
 	////////////////////////////////////////////////////////////
 
