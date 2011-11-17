@@ -43,7 +43,7 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 		Reader::Read(objDocument, sDocument);
 
 		const Object& objRoot = objDocument;
-		const Array& wasAvailableIDs = objRoot["payload"]["buddy_list"]["wasAvailableIDs"];
+/*		const Array& wasAvailableIDs = objRoot["payload"]["buddy_list"]["wasAvailableIDs"];
 
 		for ( Array::const_iterator itWasAvailable( wasAvailableIDs.Begin() );
 			itWasAvailable != wasAvailableIDs.End(); ++itWasAvailable)
@@ -55,6 +55,11 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 			current = buddy_list->find( std::string( was_id ) );
 			if ( current != NULL )
 				current->status_id = ID_STATUS_OFFLINE;
+		}*/ // Facebook removed support for "wasAvailableIDs"
+
+		// Set all contacts in map to offline
+		for ( List::Item< facebook_user >* i = buddy_list->begin( ); i != NULL; i = i->next ) {
+			i->data->status_id = ID_STATUS_OFFLINE;
 		}
 
 		const Object& nowAvailableList = objRoot["payload"]["buddy_list"]["nowAvailableList"];
@@ -72,9 +77,9 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 
 				buddy_list->insert( std::make_pair( member.name, new facebook_user( ) ) );
 				current = buddy_list->find( member.name );
-			}
-			
-			current->user_id = current->real_name = member.name;
+				current->user_id = current->real_name = member.name;	
+			}			
+						
 			current->status_id = (idle ? ID_STATUS_OFFLINE : ID_STATUS_ONLINE);
 		}
 

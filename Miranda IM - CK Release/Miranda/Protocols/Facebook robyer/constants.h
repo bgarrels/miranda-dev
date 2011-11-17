@@ -29,13 +29,13 @@ Last change on : $Date$
 
 // Version management
 #include "build.h"
-#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 5, 3)
+#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 6, 0)
 #define __PRODUCT_DWORD             PLUGIN_MAKE_VERSION(0, 9, 14, 0)
-#define __VERSION_STRING            "0.0.5.3"
+#define __VERSION_STRING            "0.0.6.0"
 #define __PRODUCT_STRING            "0.9.14.0"
-#define __VERSION_VS_FILE           0,0,5,3
+#define __VERSION_VS_FILE           0,0,6,0
 #define __VERSION_VS_PROD           0,9,14,0
-#define __VERSION_VS_FILE_STRING    "0, 0, 5, 3"
+#define __VERSION_VS_FILE_STRING    "0, 0, 6, 0"
 #define __VERSION_VS_PROD_STRING    "0, 9, 14, 0"
 
 // Product management
@@ -69,9 +69,16 @@ Last change on : $Date$
 #define FACEBOOK_USER_UPDATE_RATE               7200 // in seconds
 
 #define DEFAULT_FORCE_HTTPS             0
+#define DEFAULT_FORCE_HTTPS_CHANNEL     0
 #define DEFAULT_CLOSE_WINDOWS_ENABLE    0
 #define DEFAULT_SET_MIRANDA_STATUS      0
 #define DEFAULT_LOGGING_ENABLE          0
+#define DEFAULT_SYSTRAY_NOTIFY          0
+#define DEFAULT_DISABLE_STATUS_NOTIFY	0
+#define DEFAULT_BIG_AVATARS				0
+#define DEFAULT_DISCONNECT_CHAT			0
+#define DEFAULT_PARSE_MESSAGES			0
+
 #define DEFAULT_EVENT_NOTIFICATIONS_ENABLE  1
 #define DEFAULT_EVENT_FEEDS_ENABLE          1
 #define DEFAULT_EVENT_OTHER_ENABLE          1
@@ -80,7 +87,6 @@ Last change on : $Date$
 #define DEFAULT_EVENT_COLTEXT           0x00000000
 #define DEFAULT_EVENT_TIMEOUT_TYPE      0
 #define DEFAULT_EVENT_TIMEOUT           20
-#define DEFAULT_SYSTRAY_NOTIFY          0
 
 // Event flags
 #define FACEBOOK_EVENT_CLIENT          0x10000000 // Facebook error or info message
@@ -113,26 +119,10 @@ Last change on : $Date$
 // News Feed types
 static const struct
 {
-	char *name;
-	char *id;
+	const char *name;
+	const char *id;
 } feed_types[] = {
 	{ "Most Recent", "lf" },
 	{ "Status Updates", "app_2915120374" },
 	{ "Top News", "h" },
-};
-
-// User-Agents
-static const struct
-{
-	const char *name;
-	const char *id;
-} user_agents[] = {
-	{ "Miranda IM (default)", "Miranda IM (default)" },
-	{ "Internet Explorer 8", "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)" },
-	{ "Internet Explorer 9", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)" },
-	{ "Mozilla Firefox 4.0", "Mozilla/5.0 (Windows NT 6.1; rv:2.0) Gecko/20100101 Firefox/4.0" },
-	{ "Opera 11.01 (Windows XP)", "Opera/9.80 (Windows NT 5.1; U; en) Presto/2.7.62 Version/11.01" },
-	{ "Opera 11.01 (Mac OS X 10.5.8)", "Opera/9.80 (Macintosh; Intel Mac OS X 10.5.8; U; en) Presto/2.7.62 Version/11.01" },
-	{ "Safari 5.0.3 (Mac OS X 10.5.8)", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-us) AppleWebKit/534.16+ (KHTML, like Gecko) Version/5.0.3 Safari/533.19.4" },
-	{ "Google Chrome 11.0.661 (Windows XP)", "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.19 (KHTML, like Gecko) Chrome/11.0.661.0 Safari/534.19" },
 };

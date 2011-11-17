@@ -60,7 +60,7 @@ bool FacebookProto::GetDbAvatarInfo(PROTO_AVATAR_INFORMATION &ai, std::string *u
 
 void FacebookProto::CheckAvatarChange(HANDLE hContact, std::string image_url)
 {
-	if (DBGetContactSettingByte(NULL, m_szModuleName, FACEBOOK_KEY_BIG_AVATARS, 0)) 
+	if (DBGetContactSettingByte(NULL, m_szModuleName, FACEBOOK_KEY_BIG_AVATARS, DEFAULT_BIG_AVATARS)) 
 	{
 		std::string::size_type pos = image_url.rfind( "_q." );
 		if (pos != std::string::npos)

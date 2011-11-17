@@ -43,6 +43,9 @@ void FacebookProto::ChangeStatus(void*)
 		SetEvent(update_loop_lock_);
 		Netlib_Shutdown(facy.hMsgCon);
 
+		if ( getByte(FACEBOOK_KEY_DISCONNECT_CHAT, DEFAULT_DISCONNECT_CHAT) )
+			facy.chat_state( false );
+
 		facy.logout( );
 
 		deleteSetting( "LogonTS" );
@@ -70,6 +73,8 @@ void FacebookProto::ChangeStatus(void*)
 
 		m_iStatus = facy.self_.status_id = ID_STATUS_CONNECTING;
 		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, (HANDLE)old_status, m_iStatus);
+
+		ResetEvent(update_loop_lock_);
 
 		if ( NegotiateConnection( ) )
 		{			

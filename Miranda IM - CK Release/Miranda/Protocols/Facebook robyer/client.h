@@ -102,7 +102,6 @@ public:
 
 	std::map< std::string, std::string >    cookies;
 
-	const char* get_user_agent( );
 	std::string get_newsfeed_type( );
 
 	char*   load_cookies( );

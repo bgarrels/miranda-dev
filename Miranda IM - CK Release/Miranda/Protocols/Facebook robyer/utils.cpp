@@ -322,12 +322,6 @@ int utils::number::random( )
 	return rand( );
 }
 
-void utils::debug::info( const char* info, HWND parent )
-{
-	CreateDialogParam( g_hInstance, MAKEINTRESOURCE( IDD_INFO ),
-		parent, FBInfoDialogProc, ( LPARAM )mir_strdup(info) );
-}
-
 int utils::debug::log(std::string file_name, std::string text)
 {
 	char szFile[MAX_PATH];
