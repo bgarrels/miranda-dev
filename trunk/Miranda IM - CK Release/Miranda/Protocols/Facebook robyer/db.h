@@ -53,18 +53,20 @@ Last change on : $Date: 2011-01-08 11:10:34 +0100 (so, 08 1 2011) $
 #define FACEBOOK_KEY_DELETED		"Deleted"
 
 #define FACEBOOK_KEY_DEF_GROUP      "DefaultGroup"
-#define FACEBOOK_KEY_USER_AGENT     "UserAgent"
 #define FACEBOOK_KEY_FORCE_HTTPS    "ForceHTTPS"
+#define FACEBOOK_KEY_FORCE_HTTPS_CHANNEL    "ForceHTTPSChannel"
 #define FACEBOOK_KEY_CLOSE_WINDOWS_ENABLE   "CloseChatEnable"
 #define FACEBOOK_KEY_SET_MIRANDA_STATUS "SetMirandaStatus"
 #define FACEBOOK_KEY_LOGGING_ENABLE "LoggingEnable"
+#define FACEBOOK_KEY_SYSTRAY_NOTIFY "UseSystrayNotify"
+#define FACEBOOK_KEY_DISABLE_STATUS_NOTIFY "DisableStatusNotify"
+#define FACEBOOK_KEY_PARSE_MESSAGES	"ParseUnreadMessages"
+#define FACEBOOK_KEY_BIG_AVATARS	"UseBigAvatars"
+#define FACEBOOK_KEY_DISCONNECT_CHAT "DisconnectChatEnable"
 
 #define FACEBOOK_KEY_POLL_RATE      "PollRate" // [HIDDEN]
 #define FACEBOOK_KEY_TIMEOUTS_LIMIT "TimeoutsLimit" // [HIDDEN]
 #define FACEBOOK_KEY_DISABLE_LOGOUT "DisableLogout" // [HIDDEN]
-#define FACEBOOK_KEY_DISABLE_STATUS_NOTIFY  "DisableStatusNotify" // [HIDDEN]
-#define FACEBOOK_KEY_PARSE_MESSAGES	"ParseUnreadMessages" // [HIDDEN]
-#define FACEBOOK_KEY_BIG_AVATARS	"UseBigAvatars" // [HIDDEN]
 
 #define FACEBOOK_KEY_EVENT_NOTIFICATIONS_ENABLE     "EventNotificationsEnable"
 #define FACEBOOK_KEY_EVENT_FEEDS_ENABLE             "EventFeedsEnable"
@@ -91,5 +93,3 @@ Last change on : $Date: 2011-01-08 11:10:34 +0100 (so, 08 1 2011) $
 #define FACEBOOK_KEY_EVENT_CLIENT_COLTEXT           "PopupClientColorText"
 #define FACEBOOK_KEY_EVENT_CLIENT_TIMEOUT           "PopupClientTimeout"
 #define FACEBOOK_KEY_EVENT_CLIENT_DEFAULT           "PopupClientColorDefault"
-
-#define FACEBOOK_KEY_SYSTRAY_NOTIFY                 "UseSystrayNotify"

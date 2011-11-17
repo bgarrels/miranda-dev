@@ -8,7 +8,6 @@
 #define IDD_MIND                        112
 #define IDD_OPTIONS                     113
 #define IDD_OPTIONS_EVENTS              114
-#define IDD_INFO                        115
 #define IDC_UN                          1001
 #define IDC_PW                          1002
 #define IDC_NEWACCOUNTLINK              1003
@@ -20,8 +19,19 @@
 #define IDC_POLLRATE                    1023
 #define IDC_SECURE                      1024
 #define IDC_CLOSE_WINDOWS               1025
+#define IDC_IGNORE_STATUS               1025
+#define IDC_SET_IGNORE_STATUS           1025
+#define IDC_SECURE2                     1026
+#define IDC_SECURE_CHANNEL              1026
 #define IDC_LOGGING                     1027
 #define IDC_COOKIES                     1028
+#define IDC_CLOSE_WINDOWS2              1028
+#define IDC_DISCONNECT_CHAT             1028
+#define IDC_LOGGING2                    1029
+#define IDC_UNREAD_MESSAGES             1029
+#define IDC_PARSE_UNREAD                1029
+#define IDC_SET_IGNORE_STATUS2          1030
+#define IDC_BIGGER_AVATARS              1030
 #define IDC_NOTIFICATIONS_ENABLE        1041
 #define IDC_FEEDS_ENABLE                1042
 #define IDC_OTHER_ENABLE                1043
@@ -48,7 +58,6 @@
 #define IDC_TIMEOUT_SPIN4               1088
 #define IDC_SYSTRAY_NOTIFY              1098
 #define IDC_PREVIEW                     1099
-#define IDC_DEBUGINFO                   1101
 #define IDC_SET_STATUS                  1126
 #define IDC_FEEDS_TYPE                  1201
 #define IDC_FEED_TYPE                   1201

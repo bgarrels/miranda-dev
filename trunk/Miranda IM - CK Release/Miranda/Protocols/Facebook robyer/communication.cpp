@@ -209,9 +209,11 @@ bool facebook_client::handle_error( std::string method, bool force_disconnect )
 
 DWORD facebook_client::choose_security_level( int request_type )
 {
-	if ( DBGetContactSettingByte( NULL, parent->m_szProtoName, FACEBOOK_KEY_FORCE_HTTPS, 0 ) )
-		//if ( request_type != FACEBOOK_REQUEST_MESSAGES_RECEIVE )
+	if ( DBGetContactSettingByte( NULL, parent->m_szProtoName, FACEBOOK_KEY_FORCE_HTTPS, DEFAULT_FORCE_HTTPS ) ) {				
+		if ( request_type != FACEBOOK_REQUEST_MESSAGES_RECEIVE
+			|| DBGetContactSettingByte( NULL, parent->m_szProtoName, FACEBOOK_KEY_FORCE_HTTPS_CHANNEL, DEFAULT_FORCE_HTTPS_CHANNEL ) )
 			return NLHRF_SSL;
+	}
 
 	switch ( request_type )
 	{
@@ -269,9 +271,11 @@ int facebook_client::choose_method( int request_type )
 
 std::string facebook_client::choose_proto( int request_type )
 {
-	if ( DBGetContactSettingByte( NULL, parent->m_szProtoName, FACEBOOK_KEY_FORCE_HTTPS, 0 ) )
-//		if ( request_type != FACEBOOK_REQUEST_MESSAGES_RECEIVE )
+	if ( DBGetContactSettingByte( NULL, parent->m_szProtoName, FACEBOOK_KEY_FORCE_HTTPS, DEFAULT_FORCE_HTTPS ) ) {				
+		if ( request_type != FACEBOOK_REQUEST_MESSAGES_RECEIVE
+			|| DBGetContactSettingByte( NULL, parent->m_szProtoName, FACEBOOK_KEY_FORCE_HTTPS_CHANNEL, DEFAULT_FORCE_HTTPS_CHANNEL ) )
 			return HTTP_PROTO_SECURE;
+	}			
 
 	switch ( request_type )
 	{
@@ -498,7 +502,7 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 		headers[3].szName = "Cookie";
 		headers[3].szValue = load_cookies( );
 		headers[2].szName = "User-Agent";
-		headers[2].szValue = (char*)get_user_agent( );
+		headers[2].szValue = (char *)g_strUserAgent.c_str( );
 		headers[1].szName = "Accept";
 		headers[1].szValue = "*/*";
 		headers[0].szName = "Accept-Language";
@@ -507,15 +511,6 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	}
 
 	return headers;
-}
-
-const char* facebook_client::get_user_agent( )
-{
-	BYTE user_agent = DBGetContactSettingByte(NULL, parent->m_szModuleName, FACEBOOK_KEY_USER_AGENT, 0);
-	if (user_agent < 0 || user_agent > SIZEOF(user_agents))
-		return g_strUserAgent.c_str();
-	else
-		return user_agents[user_agent].id;
 }
 
 std::string facebook_client::get_newsfeed_type( )
@@ -541,7 +536,7 @@ char* facebook_client::load_cookies( )
 			cookieString.append( 1, ';' );
 		}
 	
-  return mir_strdup(cookieString.c_str());
+	return mir_strdup(cookieString.c_str());
 }
 
 void facebook_client::store_headers( http::response* resp, NETLIBHTTPHEADER* headers, int headersCount )
@@ -638,7 +633,7 @@ bool facebook_client::login(const std::string &username,const std::string &passw
 	if ( resp.code == HTTP_CODE_FOUND && resp.headers.find("Location") != resp.headers.end() )
 	{
 		// Check whether HTTPS connection is required and we don't have enabled it
-		if ( !DBGetContactSettingByte( NULL, parent->m_szProtoName, FACEBOOK_KEY_FORCE_HTTPS, 0 ) )
+		if ( !DBGetContactSettingByte( NULL, parent->m_szProtoName, FACEBOOK_KEY_FORCE_HTTPS, DEFAULT_FORCE_HTTPS ) )
 		{    
 			if ( resp.headers["Location"].find("https://") != std::string::npos )
 			{
@@ -808,7 +803,7 @@ bool facebook_client::home( )
 			mir_free( tmessage );
 		}
 
-		if (!DBGetContactSettingByte(NULL,parent->m_szModuleName,FACEBOOK_KEY_PARSE_MESSAGES, 0))
+		if (!DBGetContactSettingByte(NULL,parent->m_szModuleName,FACEBOOK_KEY_PARSE_MESSAGES, DEFAULT_PARSE_MESSAGES))
 		{
 			str_count = utils::text::source_get_value( &resp.data, 2, "<span id=\"messagesCountValue\">", "</span>" );
 			if ( str_count.length() && str_count != std::string( "0" ) )
@@ -936,16 +931,18 @@ bool facebook_client::buddy_list( )
 	handle_entry( "buddy_list" );
 
 	// Prepare update data
-	std::string data = "user=" + this->self_.user_id + "&popped_out=false&force_render=true&buddy_list=1&notifications=0&post_form_id=" + this->post_form_id_ + "&fb_dtsg=" + this->dtsg_ + "&post_form_id_source=AsyncRequest&__a=1&nctr[n]=1";
+	std::string data = "user=" + this->self_.user_id + "&force_render=true&fetch_mobile=true&post_form_id=" + this->post_form_id_ + "&fb_dtsg=" + this->dtsg_ + "&lsd=&post_form_id_source=AsyncRequest&__user=" + this->self_.user_id;
 
 	{
 		ScopedLock s(buddies_lock_);
 
+		int counter = 0;
 		for (List::Item< facebook_user >* i = buddies.begin(); i != NULL; i = i->next )
 		{
-			data += "&available_list[";
+			data += "&available_user_info_ids[";
+			data += counter++;
+			data += "]=";
 			data += i->data->user_id;
-			data += "][i]=0";
 		}
 	}
 

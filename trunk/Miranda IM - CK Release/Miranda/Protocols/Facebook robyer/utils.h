@@ -104,7 +104,6 @@ namespace utils
 
 	namespace debug
 	{
-		void info( const char* info, HWND parent = NULL );
 		int log(std::string file_name, std::string text);
 	};
 
@@ -120,9 +119,9 @@ namespace utils
 class ScopedLock
 {
 public:
-	ScopedLock(HANDLE h/*, int t = INFINITE*/) : handle_(h)//, timeout_(t)
+	ScopedLock(HANDLE h, int t = INFINITE) : handle_(h), timeout_(t)
 	{
-		WaitForSingleObject(handle_,INFINITE/*timeout_*/);
+		WaitForSingleObject(handle_,timeout_);
 	}
 	~ScopedLock()
 	{
@@ -136,7 +135,7 @@ public:
 	}
 private:
 	HANDLE handle_;
-//	int timeout_;
+	int timeout_;
 };
 
 static const struct
