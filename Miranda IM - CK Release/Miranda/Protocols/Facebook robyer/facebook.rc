@@ -91,35 +91,30 @@ STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
 EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    GROUPBOX        "User Details",IDC_STATIC,50,7,224,51
+    GROUPBOX        "User Details",IDC_STATIC,50,7,224,54
     LTEXT           "E-mail:",IDC_STATIC,59,19,60,8
     EDITTEXT        IDC_UN,123,17,144,13,ES_AUTOHSCROLL
     LTEXT           "Password:",IDC_STATIC,59,34,60,8
     EDITTEXT        IDC_PW,123,32,144,13,ES_PASSWORD | ES_AUTOHSCROLL
     CONTROL         "Create a new Facebook account",IDC_NEWACCOUNTLINK,
                     "Hyperlink",WS_TABSTOP,123,47,144,10
-    LTEXT           "Default group:",IDC_STATIC,59,74,60,8
-    EDITTEXT        IDC_GROUP,123,71,144,13,ES_AUTOHSCROLL
+    LTEXT           "Default group:",IDC_STATIC,59,82,60,8
+    EDITTEXT        IDC_GROUP,123,81,144,13,ES_AUTOHSCROLL
     CONTROL         "Automatically set 'Ignore status change' flag",IDC_SET_IGNORE_STATUS,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,87,208,10
-    GROUPBOX        "Contacts Settings",IDC_STATIC,50,61,224,51
-    CONTROL         "Use balloon notifications in system tray instead of popups",IDC_SYSTRAY_NOTIFY,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,124,208,8
-    LTEXT           "News Feed type to notify:",IDC_STATIC,59,137,112,8
-    COMBOBOX        IDC_FEED_TYPE,177,135,90,59,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    GROUPBOX        "Notifications",IDC_STATIC,50,113,224,40
-    CONTROL         "Use bigger avatars",IDC_BIGGER_AVATARS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,98,208,10
-    GROUPBOX        "Advanced Settings",IDC_STATIC,50,159,224,86
-    CONTROL         "Force secure (HTTPS) connection",IDC_SECURE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,183,208,10
-    CONTROL         "Post Miranda statuses to Wall",IDC_SET_STATUS,"Button",BS_AUTOCHECKBOX | BS_TOP | WS_TABSTOP,59,207,208,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,97,208,10
+    GROUPBOX        "Contacts Settings",IDC_STATIC,50,68,224,57
+    CONTROL         "Use bigger avatars",IDC_BIGGER_AVATARS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,110,208,10
+    GROUPBOX        "Advanced Settings",IDC_STATIC,50,129,224,98
+    CONTROL         "Force secure (HTTPS) connection",IDC_SECURE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,154,208,10
+    CONTROL         "Post Miranda statuses to Wall",IDC_SET_STATUS,"Button",BS_AUTOCHECKBOX | BS_TOP | WS_TABSTOP,59,182,208,10
     CONTROL         "Enable logging for debugging purposes",IDC_LOGGING,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,170,208,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,140,208,10
     CONTROL         "Use secure connection also for channel requests",IDC_SECURE_CHANNEL,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,69,194,198,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,69,167,198,10
     CONTROL         "Also disconnect chat when going to offline",IDC_DISCONNECT_CHAT,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,218,208,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,196,208,10
     CONTROL         "Get unread messages on login (EXPERIMENTAL)",IDC_PARSE_UNREAD,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,231,208,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,59,210,208,10
 END
 
 IDD_OPTIONS_EVENTS DIALOGEX 0, 0, 305, 217
@@ -158,6 +153,10 @@ BEGIN
     EDITTEXT        IDC_TIMEOUT4,243,95,34,14,ES_AUTOHSCROLL
     CONTROL         "",IDC_TIMEOUT_SPIN4,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,266,95,11,14
     PUSHBUTTON      "Preview",IDC_PREVIEW,118,182,68,14
+    CONTROL         "Use balloon notifications in system tray instead of popups",IDC_SYSTRAY_NOTIFY,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,49,132,208,8
+    LTEXT           "News Feed types to notify:",IDC_STATIC,51,155,112,8
+    COMBOBOX        IDC_FEED_TYPE,169,153,90,59,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
 END
 
 
