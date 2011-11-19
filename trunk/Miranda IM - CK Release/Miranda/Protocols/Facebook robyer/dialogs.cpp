@@ -228,21 +228,12 @@ INT_PTR CALLBACK FBOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM l
 			DBFreeVariant(&dbv);
 		}
 
-		for(size_t i=0; i<SIZEOF(feed_types); i++)
-		{
-			SendDlgItemMessageA(hwnd,IDC_FEED_TYPE,CB_INSERTSTRING,i,
-				reinterpret_cast<LPARAM>(Translate(feed_types[i].name)));
-		}
-		SendDlgItemMessage(hwnd, IDC_FEED_TYPE, CB_SETCURSEL, DBGetContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_FEED_TYPE, 0), 0);
-
 		LoadDBCheckState(proto, hwnd, IDC_SECURE, FACEBOOK_KEY_FORCE_HTTPS, DEFAULT_FORCE_HTTPS);		
-		//SendMessage(GetDlgItem(hwnd,IDC_UN),EM_SETREADONLY,TRUE,0);		
 		LoadDBCheckState(proto, hwnd, IDC_SECURE_CHANNEL, FACEBOOK_KEY_FORCE_HTTPS_CHANNEL, DEFAULT_FORCE_HTTPS_CHANNEL);
 		LoadDBCheckState(proto, hwnd, IDC_SET_IGNORE_STATUS, FACEBOOK_KEY_DISABLE_STATUS_NOTIFY, DEFAULT_DISABLE_STATUS_NOTIFY);
 		LoadDBCheckState(proto, hwnd, IDC_BIGGER_AVATARS, FACEBOOK_KEY_BIG_AVATARS, DEFAULT_BIG_AVATARS);
 		LoadDBCheckState(proto, hwnd, IDC_DISCONNECT_CHAT, FACEBOOK_KEY_DISCONNECT_CHAT, DEFAULT_DISCONNECT_CHAT);
-		LoadDBCheckState(proto, hwnd, IDC_PARSE_UNREAD, FACEBOOK_KEY_PARSE_MESSAGES, DEFAULT_PARSE_MESSAGES);
-		LoadDBCheckState(proto, hwnd, IDC_SYSTRAY_NOTIFY, FACEBOOK_KEY_SYSTRAY_NOTIFY, DEFAULT_SYSTRAY_NOTIFY);
+		LoadDBCheckState(proto, hwnd, IDC_PARSE_UNREAD, FACEBOOK_KEY_PARSE_MESSAGES, DEFAULT_PARSE_MESSAGES);		
 		LoadDBCheckState(proto, hwnd, IDC_CLOSE_WINDOWS, FACEBOOK_KEY_CLOSE_WINDOWS_ENABLE, DEFAULT_CLOSE_WINDOWS_ENABLE);
 		LoadDBCheckState(proto, hwnd, IDC_SET_STATUS, FACEBOOK_KEY_SET_MIRANDA_STATUS, DEFAULT_SET_MIRANDA_STATUS);
 		LoadDBCheckState(proto, hwnd, IDC_LOGGING, FACEBOOK_KEY_LOGGING_ENABLE, DEFAULT_LOGGING_ENABLE);		
@@ -286,9 +277,6 @@ INT_PTR CALLBACK FBOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM l
 			else
 				DBDeleteContactSetting(NULL,proto->m_szModuleName,FACEBOOK_KEY_DEF_GROUP);
 
-			DBWriteContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_FEED_TYPE, SendDlgItemMessage(hwnd, IDC_FEEDS_TYPE, CB_GETCURSEL, 0, 0));
-
-			StoreDBCheckState(proto, hwnd, IDC_SYSTRAY_NOTIFY, FACEBOOK_KEY_SYSTRAY_NOTIFY);
 			StoreDBCheckState(proto, hwnd, IDC_SECURE, FACEBOOK_KEY_FORCE_HTTPS);
 			StoreDBCheckState(proto, hwnd, IDC_CLOSE_WINDOWS, FACEBOOK_KEY_CLOSE_WINDOWS_ENABLE);
 			StoreDBCheckState(proto, hwnd, IDC_LOGGING, FACEBOOK_KEY_LOGGING_ENABLE);			
@@ -331,6 +319,14 @@ INT_PTR CALLBACK FBEventsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM lp
 
 		proto = reinterpret_cast<FacebookProto*>(lparam);
 		SetWindowLong(hwnd,GWLP_USERDATA,lparam);		
+
+		for(size_t i=0; i<SIZEOF(feed_types); i++)
+		{
+			SendDlgItemMessageA(hwnd,IDC_FEED_TYPE,CB_INSERTSTRING,i,
+				reinterpret_cast<LPARAM>(Translate(feed_types[i].name)));
+		}
+		SendDlgItemMessage(hwnd, IDC_FEED_TYPE, CB_SETCURSEL, DBGetContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_FEED_TYPE, 0), 0);
+		LoadDBCheckState(proto, hwnd, IDC_SYSTRAY_NOTIFY, FACEBOOK_KEY_SYSTRAY_NOTIFY, DEFAULT_SYSTRAY_NOTIFY);
 
 		LoadDBCheckState(proto, hwnd, IDC_NOTIFICATIONS_ENABLE, FACEBOOK_KEY_EVENT_NOTIFICATIONS_ENABLE, DEFAULT_EVENT_NOTIFICATIONS_ENABLE);
 		LoadDBCheckState(proto, hwnd, IDC_FEEDS_ENABLE, FACEBOOK_KEY_EVENT_FEEDS_ENABLE, DEFAULT_EVENT_FEEDS_ENABLE);
@@ -402,6 +398,10 @@ INT_PTR CALLBACK FBEventsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM lp
 	{
 		if ( reinterpret_cast<NMHDR*>(lparam)->code == PSN_APPLY )
 		{
+			DBWriteContactSettingByte(NULL, proto->m_szModuleName, FACEBOOK_KEY_FEED_TYPE, SendDlgItemMessage(hwnd, IDC_FEEDS_TYPE, CB_GETCURSEL, 0, 0));
+
+			StoreDBCheckState(proto, hwnd, IDC_SYSTRAY_NOTIFY, FACEBOOK_KEY_SYSTRAY_NOTIFY);
+
 			StoreDBCheckState(proto, hwnd, IDC_NOTIFICATIONS_ENABLE, FACEBOOK_KEY_EVENT_NOTIFICATIONS_ENABLE);
 			StoreDBCheckState(proto, hwnd, IDC_FEEDS_ENABLE, FACEBOOK_KEY_EVENT_FEEDS_ENABLE);
 			StoreDBCheckState(proto, hwnd, IDC_OTHER_ENABLE, FACEBOOK_KEY_EVENT_OTHER_ENABLE);
