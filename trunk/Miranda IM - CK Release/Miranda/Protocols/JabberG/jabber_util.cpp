@@ -18,8 +18,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13898 $
-Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
+Revision       : $Revision: 13932 $
+Last change on : $Date: 2011-11-20 05:34:48 +0100 (So, 20. Nov 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -963,8 +963,10 @@ BOOL CJabberProto::OnIqSetGoogleSharedStatus(HXML iqNode, CJabberIqInfo* pInfo) 
 		LPCTSTR txt = xmlGetText(xmlGetChild(query, _T("show")));
 		if (txt && 0 == _tcsicmp(_T("dnd"), txt))
 			status = ID_STATUS_DND;
-		else
+		else if (m_iStatus == ID_STATUS_DND || m_iStatus == ID_STATUS_INVISIBLE)
 			status = ID_STATUS_ONLINE;
+		else
+			status = m_iStatus;
 	}
 	
 	if (status != m_iStatus) SetStatus(status);
