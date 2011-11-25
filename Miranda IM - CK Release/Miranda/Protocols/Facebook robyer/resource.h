@@ -4,6 +4,8 @@
 //
 #define IDI_FACEBOOK                    101
 #define IDI_MIND                        102
+#define IDI_ADDFRIEND                   103
+#define IDI_REMOVEFRIEND                104
 #define IDD_FACEBOOKACCOUNT             111
 #define IDD_MIND                        112
 #define IDD_OPTIONS                     113

@@ -225,6 +225,8 @@ DWORD facebook_client::choose_security_level( int request_type )
 //	case FACEBOOK_REQUEST_HOME:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
 //	case FACEBOOK_REQUEST_LOAD_FRIENDS:
+//  case FACEBOOK_REQUEST_DELETE_FRIEND:
+//	case FACEBOOK_REQUEST_ADD_FRIEND:
 //	case FACEBOOK_REQUEST_FEEDS:
 //	case FACEBOOK_REQUEST_NOTIFICATIONS:
 //	case FACEBOOK_REQUEST_RECONNECT:
@@ -255,6 +257,8 @@ int facebook_client::choose_method( int request_type )
 	case FACEBOOK_REQUEST_ASYNC:
 	case FACEBOOK_REQUEST_TYPING_SEND:
 	case FACEBOOK_REQUEST_LOGOUT:
+	case FACEBOOK_REQUEST_DELETE_FRIEND:
+	case FACEBOOK_REQUEST_ADD_FRIEND:
 		return REQUEST_POST;
 
 //	case FACEBOOK_REQUEST_HOME:
@@ -294,6 +298,8 @@ std::string facebook_client::choose_proto( int request_type )
 //	case FACEBOOK_REQUEST_ASYNC:
 //	case FACEBOOK_REQUEST_ASYNC_GET:
 //	case FACEBOOK_REQUEST_TYPING_SEND:
+//  case FACEBOOK_REQUEST_DELETE_FRIEND:
+//	case FACEBOOK_REQUEST_ADD_FRIEND:
 	default:
 		return HTTP_PROTO_REGULAR;
 
@@ -336,6 +342,8 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 //	case FACEBOOK_REQUEST_ASYNC_GET:
 //	case FACEBOOK_REQUEST_TYPING_SEND:
 //	case FACEBOOK_REQUEST_SETUP_MACHINE:
+//  case FACEBOOK_REQUEST_DELETE_FRIEND:
+//	case FACEBOOK_REQUEST_ADD_FRIEND:
 	default:
 		return FACEBOOK_SERVER_REGULAR;
 	}
@@ -365,6 +373,16 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 		std::string action = "/ajax/chat/user_info_all.php?__a=1&viewer=%s";
 		utils::text::replace_first( &action, "%s", self_.user_id );
 		return action;
+	}
+
+	case FACEBOOK_REQUEST_DELETE_FRIEND:
+	{
+		return "/ajax/profile/removefriend.php?__a=1";
+	}
+
+	case FACEBOOK_REQUEST_ADD_FRIEND:
+	{
+		return "/ajax/add_friend/action.php?__a=1";
 	}
 
 	case FACEBOOK_REQUEST_FEEDS:
@@ -464,6 +482,8 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_ASYNC:
 	case FACEBOOK_REQUEST_ASYNC_GET:
 	case FACEBOOK_REQUEST_TYPING_SEND:
+	case FACEBOOK_REQUEST_DELETE_FRIEND:
+	case FACEBOOK_REQUEST_ADD_FRIEND:
 		*headers_count = 5;
 		break;
 
@@ -492,6 +512,8 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_ASYNC:
 	case FACEBOOK_REQUEST_ASYNC_GET:
 	case FACEBOOK_REQUEST_TYPING_SEND:
+	case FACEBOOK_REQUEST_DELETE_FRIEND:
+	case FACEBOOK_REQUEST_ADD_FRIEND:
 		headers[4].szName = "Content-Type";
 		headers[4].szValue = "application/x-www-form-urlencoded; charset=utf-8";
 
@@ -780,11 +802,11 @@ bool facebook_client::home( )
 		parent->CheckAvatarChange(NULL, this->self_.image_url);
 
 		// Get post_form_id
-		this->post_form_id_ = utils::text::source_get_value( &resp.data, 2, "post_form_id:\"", "\"" );
+		this->post_form_id_ = utils::text::source_get_value( &resp.data, 3, "name=\"post_form_id\"", "value=\"", "\"" );
 		parent->Log("      Got self post form id: %s", this->post_form_id_.c_str());
 
 		// Get dtsg
-		this->dtsg_ = utils::text::source_get_value( &resp.data, 2, "fb_dtsg:\"", "\"" );
+		this->dtsg_ = utils::text::source_get_value( &resp.data, 3, "name=\"fb_dtsg\"", "value=\"", "\"" );
 		parent->Log("      Got self dtsg: %s", this->dtsg_.c_str());
 
 		// Get logout hash
@@ -1025,6 +1047,42 @@ bool facebook_client::feeds( )
 		return handle_error( "feeds" );
 	}
 }
+
+/*void facebook_client::delete_friends( )
+{
+	handle_entry( "delete_friends" );
+
+	// Check and update old contacts
+	for(HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST,0,0);
+	    hContact;
+	    hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT,(WPARAM)hContact,0) )
+	{
+		if(!parent->IsMyContact(hContact))
+			continue;
+		
+		if( !DBGetContactSettingByte(hContact,parent->m_szModuleName,FACEBOOK_KEY_DELETE_NEXT,0) ) {
+			DBVARIANT dbv;
+			if( !DBGetContactSettingString(hContact,parent->m_szModuleName,FACEBOOK_KEY_ID,&dbv) ) {
+				std::string* id = new std::string(dbv.pszVal);
+				DBFreeVariant(&dbv);
+			
+				if( !DBGetContactSettingString(hContact,parent->m_szModuleName,FACEBOOK_KEY_NAME,&dbv) ) {
+										
+					TCHAR* szTitle = mir_a2t_cp(dbv.pszVal, CP_UTF8);
+					parent->NotifyEvent(szTitle, TranslateT("Contact was deleted."), hContact, FACEBOOK_EVENT_CLIENT, NULL);
+					mir_free( szTitle );
+					DBFreeVariant(&dbv);
+
+					//CallService(MS_DB_CONTACT_DELETE,(WPARAM)hContact,0);
+					
+					ForkThread( &FacebookProto::DeleteContactFromServer, this->parent, ( void* )id );
+				}
+			}
+		}
+	}
+		
+	handle_success( "delete_friends" );
+}*/
 
 bool facebook_client::channel( )
 {

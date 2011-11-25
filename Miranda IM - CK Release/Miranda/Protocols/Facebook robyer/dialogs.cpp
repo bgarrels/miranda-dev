@@ -208,8 +208,7 @@ INT_PTR CALLBACK FBOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM l
 
 		if ( !DBGetContactSettingString(0,proto->ModuleName(),FACEBOOK_KEY_PASS,&dbv) )
 		{
-			CallService(MS_DB_CRYPT_DECODESTRING,strlen(dbv.pszVal)+1,
-				reinterpret_cast<LPARAM>(dbv.pszVal));
+			CallService(MS_DB_CRYPT_DECODESTRING,strlen(dbv.pszVal)+1,reinterpret_cast<LPARAM>(dbv.pszVal));
 			SetDlgItemTextA(hwnd,IDC_PW,dbv.pszVal);
 			DBFreeVariant(&dbv);
 		}
@@ -238,6 +237,8 @@ INT_PTR CALLBACK FBOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM l
 		LoadDBCheckState(proto, hwnd, IDC_SET_STATUS, FACEBOOK_KEY_SET_MIRANDA_STATUS, DEFAULT_SET_MIRANDA_STATUS);
 		LoadDBCheckState(proto, hwnd, IDC_LOGGING, FACEBOOK_KEY_LOGGING_ENABLE, DEFAULT_LOGGING_ENABLE);		
 
+		EnableWindow(GetDlgItem(hwnd, IDC_SECURE_CHANNEL), IsDlgButtonChecked(hwnd, IDC_SECURE));
+
 		} return TRUE;
 
 	case WM_COMMAND: {
@@ -247,6 +248,13 @@ INT_PTR CALLBACK FBOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM l
 				( FACEBOOK_URL_HOMEPAGE ) );
 			return TRUE;
 		}
+
+		if ( LOWORD( wparam ) == IDC_SECURE ) {			
+			EnableWindow(GetDlgItem(hwnd, IDC_SECURE_CHANNEL), IsDlgButtonChecked(hwnd, IDC_SECURE));
+		}		
+		
+		if (LOWORD(wparam) == IDC_SECURE_CHANNEL && IsDlgButtonChecked(hwnd, IDC_SECURE_CHANNEL))
+			MessageBox( hwnd, TranslateT("Note: Make sure you have disabled 'Validate SSL certificates' option in Network options to work properly."), proto->m_tszUserName, MB_OK );
 
 		if ((LOWORD(wparam)==IDC_UN || LOWORD(wparam)==IDC_PW || LOWORD(wparam)==IDC_GROUP) &&
 		    (HIWORD(wparam)!=EN_CHANGE || (HWND)lparam!=GetFocus()))

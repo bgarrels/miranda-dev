@@ -32,4 +32,4 @@ HANDLE GetIconHandle(const char *name);
 
 void InitContactMenus(void);
 void UninitContactMenus(void);
-void ShowContactMenus(bool show);
+void ShowContactMenus(bool show, bool deleted = false);
