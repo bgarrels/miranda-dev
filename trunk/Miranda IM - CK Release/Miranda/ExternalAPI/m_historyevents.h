@@ -128,8 +128,9 @@ Return: BOOL
 Get the icon for a history event type
 
 wParam: WORD - event type
-lParam: ignored
-Return: HICON - after use free with MS_HISTORYEVENTS_RELEASE_ICON
+lParam: BOOL - TRUE to copy the icon (should be released with DestroyObject), 
+			   FALSE to use icolib one (should be released with MS_HISTORYEVENTS_RELEASE_ICON)
+Return: HICON
 */
 #define MS_HISTORYEVENTS_GET_ICON		"HistoryEvents/GetIcon"
 
@@ -179,6 +180,8 @@ typedef struct {
 	PBYTE additionalData;
 	int additionalDataSize;
 	int flags;				// Flags for the event type
+	DWORD timestamp;		// 0 for now
+	BOOL addToMetaToo;
 } HISTORY_EVENT_ADD;
 
 /*
@@ -349,10 +352,18 @@ static char * HistoryEvents_GetRichText(HANDLE hDbEvent, DBEVENTINFO *dbe)
 //	CallService(MS_HISTORYEVENTS_RELEASE_TEXT, (WPARAM) str, 0);
 //}
 
+
+#ifdef __cplusplus
 static HANDLE HistoryEvents_AddToHistoryEx(HANDLE hContact, WORD eventType, int templateNum, 
 										 TCHAR **variables, int numVariables, 
 										 PBYTE additionalData, int additionalDataSize,
-										 int flags)
+										 int flags = 0, DWORD timestamp = 0, BOOL addToMetaToo = FALSE)
+#else
+static HANDLE HistoryEvents_AddToHistoryEx(HANDLE hContact, WORD eventType, int templateNum, 
+										 TCHAR **variables, int numVariables, 
+										 PBYTE additionalData, int additionalDataSize,
+										 int flags, DWORD timestamp, BOOL addToMetaToo)
+#endif
 {
 	HISTORY_EVENT_ADD hea = {0};
 
@@ -368,13 +379,21 @@ static HANDLE HistoryEvents_AddToHistoryEx(HANDLE hContact, WORD eventType, int 
 	hea.additionalData = additionalData;
 	hea.additionalDataSize = additionalDataSize;
 	hea.flags = flags;
+	hea.timestamp = timestamp;
+	hea.addToMetaToo = addToMetaToo;
 
 	return (HANDLE) CallService(MS_HISTORYEVENTS_ADD_TO_HISTORY, (WPARAM) &hea, 0);
 }
 
+#ifdef __cplusplus
 static HANDLE HistoryEvents_AddToHistoryVars(HANDLE hContact, WORD eventType, int templateNum, 
 											 TCHAR **variables, int numVariables, 
-											 int flags)
+											 int flags = 0, DWORD timestamp = 0, BOOL addToMetaToo = FALSE)
+#else
+static HANDLE HistoryEvents_AddToHistoryVars(HANDLE hContact, WORD eventType, int templateNum, 
+											 TCHAR **variables, int numVariables, 
+											 int flags, DWORD timestamp, BOOL addToMetaToo)
+#endif
 {
 	HISTORY_EVENT_ADD hea = {0};
 
@@ -388,11 +407,19 @@ static HANDLE HistoryEvents_AddToHistoryVars(HANDLE hContact, WORD eventType, in
 	hea.numVariables = numVariables;
 	hea.variables = variables;
 	hea.flags = flags;
+	hea.timestamp = timestamp;
+	hea.addToMetaToo = addToMetaToo;
 
 	return (HANDLE) CallService(MS_HISTORYEVENTS_ADD_TO_HISTORY, (WPARAM) &hea, 0);
 }
 
-static HANDLE HistoryEvents_AddToHistorySimple(HANDLE hContact, WORD eventType, int templateNum, int flags)
+#ifdef __cplusplus
+static HANDLE HistoryEvents_AddToHistorySimple(HANDLE hContact, WORD eventType, int templateNum, 
+											   int flags = 0, DWORD timestamp = 0, BOOL addToMetaToo = FALSE)
+#else
+static HANDLE HistoryEvents_AddToHistorySimple(HANDLE hContact, WORD eventType, int templateNum, 
+											   int flags, DWORD timestamp, BOOL addToMetaToo)
+#endif
 {
 	HISTORY_EVENT_ADD hea = {0};
 
@@ -404,6 +431,8 @@ static HANDLE HistoryEvents_AddToHistorySimple(HANDLE hContact, WORD eventType, 
 	hea.eventType = eventType;
 	hea.templateNum = templateNum;
 	hea.flags = flags;
+	hea.timestamp = timestamp;
+	hea.addToMetaToo = addToMetaToo;
 
 	return (HANDLE) CallService(MS_HISTORYEVENTS_ADD_TO_HISTORY, (WPARAM) &hea, 0);
 }

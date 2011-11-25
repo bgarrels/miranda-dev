@@ -40,6 +40,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /**
 	WPARAM FLASHAVATAR* (hContact, hParentWindow)
+	LPARAM LPRECT
+ */
+#define MS_FAVATAR_SETPOS 		"FlashAvatar/SetPos"
+
+/**
+	WPARAM FLASHAVATAR* (hContact, hParentWindow)
 	LPARAM not used
  */
 #define MS_FAVATAR_GETINFO 		"FlashAvatar/GetInfo"
@@ -50,22 +56,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 #define MS_FAVATAR_SETEMOFACE 	"FlashAvatar/SetEmoFace"
 
-#define MS_FAVATAR_SETPOS 		"FlashAvatar/SetPos"
-
 /**
 	WPARAM FLASHAVATAR* (hContact, hParentWindow)
 	LPARAM COLORREF
  */
-
 #define MS_FAVATAR_SETBKCOLOR	"FlashAvatar/SetBkColor"
-
-// tZers macros
-/**
-	WPARAM not used
-	LPARAM not used
-*/
-#define MS_TZERS_SUPPORT "FlashAvatar/tZers"
-#define EVENTTYPE_TZERS 4
 
 // Avatar emotion faces
 #define AV_SMILE	"smile"
@@ -78,6 +73,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define AV_LOVE		"love"
 #define AV_NORMAL	"stam"
 
+// Avatar default size
 #define FAVATAR_WIDTH 52
 #define FAVATAR_HEIGHT 64
 
@@ -88,6 +84,6 @@ typedef struct {
 	HWND hParentWindow;	// handle of flash avatar's parent object
 	char* cUrl;			// url of .swf file
 	int id;				// unique number of plugin which wants to use avatar service
-    char* cProto;	    // contacts protocol
-    char  reserved[16]; // future usage
+	char* cProto;		// contact's protocol
+	char reserved[16];
 } FLASHAVATAR;
