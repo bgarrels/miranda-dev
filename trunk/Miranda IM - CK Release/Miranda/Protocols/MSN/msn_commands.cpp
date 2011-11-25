@@ -534,10 +534,12 @@ void CMsnProto::MSN_ReceiveMessage(ThreadData* info, char* cmdString, char* para
 			else
 			{
 				DBEVENTINFO dbei = {0};
+
+				bool haveWnd = MSN_MsgWndExist(ccs.hContact);
 				
 				dbei.cbSize = sizeof(dbei);
 				dbei.eventType = EVENTTYPE_MESSAGE;
-				dbei.flags = DBEF_SENT | DBEF_UTF | (isRtl ? DBEF_RTL : 0);
+				dbei.flags = DBEF_SENT | DBEF_UTF | (haveWnd ? 0 : DBEF_READ) | (isRtl ? DBEF_RTL : 0);
 				dbei.szModule = m_szModuleName;
 				dbei.timestamp = time(NULL);
 				dbei.cbBlob = (unsigned)strlen(msgBody) + 1;
@@ -1856,9 +1858,9 @@ remove:
 
 				if (!strcmp(data.security, "SSO")) 
 				{
-					if (MSN_GetPassportAuth()) 
+					if (MSN_GetPassportAuth())
 					{
-						SendBroadcast(NULL, ACKTYPE_LOGIN, ACKRESULT_FAILED, NULL, LOGINERR_WRONGPASSWORD);
+						m_iDesiredStatus = ID_STATUS_OFFLINE;
 						return 1;
 					}
 
