@@ -54,11 +54,11 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "sdk/icq_constants.h"
 #include "sdk/m_fortunemsg.h"
-#include "sdk/m_statusplugins.h"
-#include "sdk/m_toolbar.h"
-#include "sdk/m_toptoolbar.h"
-#include "sdk/m_updater.h"
-#include "sdk/m_variables.h"
+#include "m_statusplugins.h"
+#include "m_toolbar.h"
+#include "m_toptoolbar.h"
+#include "m_updater.h"
+#include "m_variables.h"
 #include "m_simpleaway.h"
 #include "m_simplestatusmsg.h"
 
