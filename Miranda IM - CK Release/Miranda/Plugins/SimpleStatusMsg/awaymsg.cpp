@@ -7,7 +7,7 @@ all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 Portions of this code modified for Simple Status Message plugin
-Copyright (C) 2006-2010 Bartosz 'Dezeath' Bia³ek, (C) 2005 Harven
+Copyright (C) 2006-2011 Bartosz 'Dezeath' Bia³ek, (C) 2005 Harven
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -235,7 +235,7 @@ static INT_PTR CALLBACK CopyAwayMsgDlgProc(HWND hwndDlg, UINT message, WPARAM wP
 {
 	AwayMsgDlgData *dat = (AwayMsgDlgData*)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
 
-	switch(message)
+	switch (message)
 	{
 		case WM_INITDIALOG:
 		{
@@ -319,7 +319,7 @@ static INT_PTR CALLBACK CopyAwayMsgDlgProc(HWND hwndDlg, UINT message, WPARAM wP
 		}
 
 		case WM_COMMAND:
-			switch(LOWORD(wParam))
+			switch (LOWORD(wParam))
 			{
 				case IDCANCEL:
 				case IDOK:

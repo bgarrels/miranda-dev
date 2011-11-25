@@ -12,12 +12,12 @@ The SimpleAway plugin was originally created by Harven.
 Main features:
 - Global and per-protocol status messages.
 - Startup status and status message (per-protocol configurable).
-- Per-contact status messages (using contact-related variables) for ICQ protocol.
+- Per-contact status messages using contact-related variables for ICQ protocol (supported by older IM clients only).
 - Unicode status messages support.
 - Predefined status messages.
 - Can remember up to 25 recent status messages which you can choose in the status message dialog.
 - The status message dialog can be accessed through a hotkey, the status bar menu, Modern Contact List Toolbar,
-  TopToolbar plugin frame or on status change.
+  TopToolbar plugin frame or could pop up on status change.
 - Built-in variables (see below) and support for Variables plugin.
 - Can update variables in status messages every specified time.
 
@@ -57,7 +57,7 @@ Base Address: 0x3ab00000
 Copyright and License
 ---------------------
 
-Copyright (C) 2006-2010 Bartosz 'Dezeath' Bia³ek
+Copyright (C) 2006-2011 Bartosz 'Dezeath' Bia³ek
 mailto: dezred(at)gmail(dot)com
 http://code.google.com/p/dezeath
 

@@ -1,7 +1,7 @@
 /*
 
 Simple Status Message plugin for Miranda IM
-Copyright (C) 2006-2010 Bartosz 'Dezeath' Bia³ek, (C) 2005 Harven
+Copyright (C) 2006-2011 Bartosz 'Dezeath' Bia³ek, (C) 2005 Harven
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -192,7 +192,7 @@ static INT_PTR CALLBACK DlgOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 
 				data->proto_ok = TRUE;
 
-				index = SendMessage(GetDlgItem(hwndDlg, IDC_CBOPTPROTO), CB_ADDSTRING, 0, (LPARAM)TranslateT("Global"));
+				index = SendMessage(GetDlgItem(hwndDlg, IDC_CBOPTPROTO), CB_ADDSTRING, 0, (LPARAM)TranslateT("Global status change"));
 //				SendMessage(GetDlgItem(hwndDlg, IDC_CBOPTPROTO), CB_SETITEMDATA, index, 0);
 				if (index != CB_ERR && index != CB_ERRSPACE)
 				{
@@ -324,6 +324,7 @@ static INT_PTR CALLBACK DlgOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 
 							if (i == 0)
 							{
+								EnableWindow(GetDlgItem(hwndDlg, IDC_MAXLENGTH), FALSE);
 								EnableWindow(GetDlgItem(hwndDlg, IDC_EMAXLENGTH), FALSE);
 								EnableWindow(GetDlgItem(hwndDlg, IDC_SMAXLENGTH), FALSE);
 								EnableWindow(GetDlgItem(hwndDlg, IDC_ROPTPROTO3), FALSE);
@@ -337,6 +338,7 @@ static INT_PTR CALLBACK DlgOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, L
 							}
 							else
 							{
+								EnableWindow(GetDlgItem(hwndDlg, IDC_MAXLENGTH), TRUE);
 								EnableWindow(GetDlgItem(hwndDlg, IDC_EMAXLENGTH), TRUE);
 								EnableWindow(GetDlgItem(hwndDlg, IDC_SMAXLENGTH), TRUE);
 								EnableWindow(GetDlgItem(hwndDlg, IDC_ROPTPROTO3), TRUE);
@@ -1139,9 +1141,15 @@ static INT_PTR CALLBACK DlgVariablesOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM 
 			CheckDlgButton(hwndDlg, IDC_CNOICQREQ, DBGetContactSettingByte(NULL, "SimpleStatusMsg", "NoUpdateOnICQReq", 1) ? BST_CHECKED : BST_UNCHECKED);
 			CheckDlgButton(hwndDlg, IDC_CLEAVEWINAMP, DBGetContactSettingByte(NULL, "SimpleStatusMsg", "AmpLeaveTitle", 1) ? BST_CHECKED : BST_UNCHECKED);
 			if (ServiceExists(MS_VARS_FORMATSTRING))
+			{
 				CheckDlgButton(hwndDlg, IDC_CVARIABLES, DBGetContactSettingByte(NULL, "SimpleStatusMsg", "EnableVariables", 1) ? BST_CHECKED : BST_UNCHECKED);
+				CheckDlgButton(hwndDlg, IDC_CDATEPARSING, DBGetContactSettingByte(NULL, "SimpleStatusMsg", "ExclDateToken", 0) ? BST_CHECKED : BST_UNCHECKED);
+			}
 			else
+			{
 				EnableWindow(GetDlgItem(hwndDlg, IDC_CVARIABLES), FALSE);
+			}
+			EnableWindow(GetDlgItem(hwndDlg, IDC_CDATEPARSING), IsDlgButtonChecked(hwndDlg, IDC_CVARIABLES) == BST_CHECKED);
 
 			SendMessage(hwndDlg, WM_USER + 2, 0, 0);
 			return TRUE;
@@ -1173,6 +1181,10 @@ static INT_PTR CALLBACK DlgVariablesOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM 
 				case IDC_CUPDATEMSG:
 					SendMessage(hwndDlg, WM_USER + 2, 0, 0);
 					break;
+
+				case IDC_CVARIABLES:
+					EnableWindow(GetDlgItem(hwndDlg, IDC_CDATEPARSING), IsDlgButtonChecked(hwndDlg, IDC_CVARIABLES) == BST_CHECKED);
+					break;
 			}
 			SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
 			break;
@@ -1180,12 +1192,6 @@ static INT_PTR CALLBACK DlgVariablesOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM 
 		case WM_NOTIFY:
 			if (((LPNMHDR)lParam)->idFrom == 0 && ((LPNMHDR)lParam)->code == PSN_APPLY)
 			{
-				DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "AmpLeaveTitle", (BYTE)(IsDlgButtonChecked(hwndDlg, IDC_CLEAVEWINAMP) == BST_CHECKED));
-				DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "NoUpdateOnIdle", (BYTE)(IsDlgButtonChecked(hwndDlg, IDC_CNOIDLE) == BST_CHECKED));
-				DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "NoUpdateOnICQReq", (BYTE)(IsDlgButtonChecked(hwndDlg, IDC_CNOICQREQ) == BST_CHECKED));
-				if (ServiceExists(MS_VARS_FORMATSTRING))
-					DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "EnableVariables", (BYTE)(IsDlgButtonChecked(hwndDlg, IDC_CVARIABLES) == BST_CHECKED));
-
 				if (g_uUpdateMsgTimer)
 					KillTimer(NULL, g_uUpdateMsgTimer);
 
@@ -1198,7 +1204,18 @@ static INT_PTR CALLBACK DlgVariablesOptionsProc(HWND hwndDlg, UINT uMsg, WPARAM 
 					g_uUpdateMsgTimer = SetTimer(NULL, 0, val * 1000, (TIMERPROC)UpdateMsgTimerProc);
 				}
 				else
+				{
 					DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "UpdateMsgOn", (BYTE)0);
+				}
+
+				DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "NoUpdateOnIdle", (BYTE)(IsDlgButtonChecked(hwndDlg, IDC_CNOIDLE) == BST_CHECKED));
+				DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "NoUpdateOnICQReq", (BYTE)(IsDlgButtonChecked(hwndDlg, IDC_CNOICQREQ) == BST_CHECKED));
+				DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "AmpLeaveTitle", (BYTE)(IsDlgButtonChecked(hwndDlg, IDC_CLEAVEWINAMP) == BST_CHECKED));
+				if (ServiceExists(MS_VARS_FORMATSTRING))
+				{
+					DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "EnableVariables", (BYTE)(IsDlgButtonChecked(hwndDlg, IDC_CVARIABLES) == BST_CHECKED));
+					DBWriteContactSettingByte(NULL, "SimpleStatusMsg", "ExclDateToken", (BYTE)(IsDlgButtonChecked(hwndDlg, IDC_CDATEPARSING) == BST_CHECKED));
+				}
 				return TRUE;
 			}
 			break;
