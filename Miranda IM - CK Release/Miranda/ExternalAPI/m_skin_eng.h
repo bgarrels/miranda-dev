@@ -24,9 +24,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef M_ske_H_INC
 #define M_ske_H_INC
 
-#include "newpluginapi.h"
-#include "m_clui.h"
-#include "../Plugins/Modernb/hdr/modern_commonheaders.h"
 
 
 /*defaults*/
@@ -167,9 +164,32 @@ typedef struct s_SKINFONT
 /* HELPER FUNCTIONS */
 
 //Paint  ObjectID as parent background for frame hwndIn
-int __inline SkinDrawWindowBack(HWND hwndIn, HDC hdc, RECT * rcClip, char * objectID);
+int __inline SkinDrawWindowBack(HWND hwndIn, HDC hdc, RECT * rcClip, char * objectID)
+{
+	SKINDRAWREQUEST rq;
+	POINT pt={0};
+	RECT rc,r1;
+
+	HWND hwnd=(HWND)CallService(MS_CLUI_GETHWND,0,0);
+	if (!objectID) return 0;
+	GetWindowRect(hwndIn,&r1);
+	pt.x=r1.left;
+	pt.y=r1.top;
+	//ClientToScreen(hwndIn,&pt);
+	GetWindowRect(hwnd,&rc);
+	OffsetRect(&rc,-pt.x ,-pt.y);
+	rq.hDC=hdc;
+	rq.rcDestRect=rc;
+	rq.rcClipRect=*rcClip;
+	strncpy(rq.szObjectID,objectID,sizeof(rq.szObjectID));
+	///ske_Service_DrawGlyph((WPARAM)&rq,0);    //$$$
+	return CallService(MS_SKIN_DRAWGLYPH,(WPARAM)&rq,0);
+}
+
+
 //Paint  ObjectID
 int __inline SkinDrawGlyph(HDC hdc, RECT * rcSize, RECT * rcClip, char * objectID);
+
 //Register object with predefined style
 int __inline CreateGlyphedObjectDefStyle(char * ObjID,BYTE defStyle);
 int __inline CreateGlyphedObjectDefColor(char * ObjID,DWORD defColor);
@@ -231,17 +251,15 @@ static BOOL __inline ScreenToClientRect(HWND hWnd, LPRECT lpRect)
 //    prm.szObjectID=ObjID;
 //    return CallService(MS_SKIN_REGISTERDEFOBJECT,(WPARAM)&prm,0);
 //}  
-INT_PTR ske_Service_DrawGlyph(WPARAM wParam,LPARAM lParam);
-int __inline SkinDrawGlyph(HDC hdc, RECT * rcSize, RECT * rcClip, char * objectID)
+static int __inline SkinDrawGlyph(HDC hdc, RECT * rcSize, RECT * rcClip, char * objectID)
 {
   SKINDRAWREQUEST rq;
   if (!objectID) return 0;
   rq.hDC=hdc;
   rq.rcDestRect=*rcSize;
   rq.rcClipRect=*rcClip;  
-  strncpy(rq.szObjectID,objectID,SIZEOF(rq.szObjectID));
-  return ske_Service_DrawGlyph((WPARAM)&rq,0);
-  //return CallService(MS_SKIN_DRAWGLYPH,(WPARAM)&rq,0);
+  strncpy(rq.szObjectID,objectID,sizeof(rq.szObjectID));
+  return CallService(MS_SKIN_DRAWGLYPH,(WPARAM)&rq,0);
 }
 //#include "../hdr/modern_skin_selector.h"
 
@@ -285,13 +303,25 @@ typedef int (/*__stdcall*/ *tPaintCallbackProc)(HWND hWnd, HDC hDC, RECT * rcPai
 
 // HELPER TO UPDATEIMAGEFRAME
 
+
+inline BOOL isSkinEngineEnabled()
+{
+	return ServiceExists(MS_SKINENG_REGISTERPAINTSUB) && !DBGetContactSettingByte(NULL, "ModernData", "DisableEngine", FALSE);
+}
+
+
+inline BOOL isLayeredEnabled()
+{
+	return isSkinEngineEnabled() && DBGetContactSettingByte(NULL, "ModernData", "EnableLayering", TRUE);
+}
+
 int __inline SkinEngUpdateImageFrame(HWND hwnd, RECT * rcUpdate, DWORD dwFlags, void * CallBackData)
 {
   sPaintRequest sr={0};
   sr.dStructSize=sizeof(sPaintRequest);
   sr.hWnd=hwnd;
   if (rcUpdate)
-	sr.rcUpdate=*rcUpdate;
+    sr.rcUpdate=*rcUpdate;
   sr.dwFlags=dwFlags;
   sr.CallbackData=CallBackData;
   return CallService(MS_SKINENG_UPTATEFRAMEIMAGE,(WPARAM)hwnd,(LPARAM)&sr);
@@ -300,18 +330,18 @@ int __inline SkinEngUpdateImageFrame(HWND hwnd, RECT * rcUpdate, DWORD dwFlags, 
 int __inline SkinEngInvalidateImageFrame(HWND hwnd, CONST RECT * rcUpdate, DWORD dwFlags, void * CallBackData)
 {
   sPaintRequest sr={0};
-  if (hwnd && (!g_CluiData.fLayered)) return InvalidateRect(hwnd,rcUpdate,dwFlags);
+  if (hwnd && !isLayeredEnabled()) return InvalidateRect(hwnd,rcUpdate,dwFlags);
   sr.dStructSize=sizeof(sPaintRequest);
   sr.hWnd=hwnd;
   if (rcUpdate)
-	sr.rcUpdate=*rcUpdate;
+    sr.rcUpdate=*rcUpdate;
   sr.dwFlags=dwFlags;
   sr.CallbackData=CallBackData;
   return CallService(MS_SKINENG_INVALIDATEFRAMEIMAGE,(WPARAM)hwnd,(LPARAM)&sr);
 }
 
 
-int __inline SkinInvalidateFrame(HWND hWnd, CONST RECT* lpRect)
+int __inline SkinInvalidateFrame(HWND hWnd, CONST RECT* lpRect,BOOL bErase)
 {
 	return SkinEngInvalidateImageFrame(hWnd,lpRect,0,0);
 }
@@ -343,57 +373,6 @@ int __inline AlphaText(HDC hDC, LPCTSTR lpString, int nCount, RECT * lpRect, UIN
   ap.ARGBcolor=ARGBcolor;
   return CallService(MS_SKINENG_ALPHATEXTOUT,(WPARAM)&ap,0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
-// Paints text with correct alpha channel and effect, alternative to DrawText
-// wParam - pointer to DrawTextWithEffectParam
-
-typedef struct MODERNFONTEFFECT_tag
-{
-	BYTE     effectIndex;
-	DWORD    baseColour;        // ARGB
-	DWORD    secondaryColour;   // ARGB
-}
-MODERNFONTEFFECT;
-
-typedef struct DrawTextWithEffectParam_tag
-{
-	int cbSize;   
-	HDC             hdc;                  // handle to DC
-	LPCTSTR         lpchText;             // text to draw
-	int             cchText;              // length of text to draw
-	LPRECT          lprc;                 // rectangle coordinates
-	UINT            dwDTFormat;           // formatting options
-	MODERNFONTEFFECT *    pEffect;        // effect to be drawn on
-} DrawTextWithEffectParam;
-
-#define MS_DRAW_TEXT_WITH_EFFECTA "Modern/SkinEngine/DrawTextWithEffectA"
-#define MS_DRAW_TEXT_WITH_EFFECTW "Modern/SkinEngine/DrawTextWithEffectW"
-
-#ifdef UNICODE
-	#define MS_DRAW_TEXT_WITH_EFFECT MS_DRAW_TEXT_WITH_EFFECTW 
-#else
-	#define MS_DRAW_TEXT_WITH_EFFECT MS_DRAW_TEXT_WITH_EFFECTA
-#endif
-
-// Helper 
-/*int __inline DrawTextWithEffect( HDC hdc, LPCTSTR lpchText, int cchText, RECT * lprc, UINT dwDTFormat, MODERNFONTEFFECT * pEffect )
-{
-	DrawTextWithEffectParam params;
-	static BYTE bIfServiceExists = ServiceExists( MS_DRAW_TEXT_WITH_EFFECT ) ? 1 : 0;
-	if ( bIfServiceExists == 0 ) return DrawText ( hdc, lpchText, cchText, lprc, dwDTFormat );
-	
-	// else    
-	params.cbSize       = sizeof( DrawTextWithEffectParam );
-	params.hdc          = hdc;
-	params.lpchText     = lpchText;
-	params.cchText      = cchText;
-	params.lprc         = lprc;
-	params.dwDTFormat   = dwDTFormat;
-	params.pEffect      = pEffect;
-	return CallService( MS_DRAW_TEXT_WITH_EFFECT, (WPARAM)&params, 0 );
-}*/
-
 
 typedef struct _ImageListFixParam
 {
@@ -431,4 +410,26 @@ int __inline mod_DrawIconEx_helper(HDC hdc,int xLeft,int yTop,HICON hIcon,int cx
   p.diFlags=diFlags;
   return CallService(MS_SKINENG_DRAWICONEXFIX,(WPARAM)&p,0);
 }
+
+
+
+
+//  Register of plugin's user
+//
+//  wParam = (WPARAM)szSetting - string that describes a user
+//           format: Category/ModuleName,
+//           eg: "Contact list background/CLUI",
+//               "Status bar background/StatusBar"
+//  lParam = (LPARAM)dwFlags
+//
+#define MS_BACKGROUNDCONFIG_REGISTER "ModernBkgrCfg/Register"
+
+//
+//  Notification about changed background
+//  wParam = ModuleName
+//  lParam = 0
+#define ME_BACKGROUNDCONFIG_CHANGED "ModernBkgrCfg/Changed"
+
+
+
 #endif
