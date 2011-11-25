@@ -7,8 +7,8 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 08 Nov 2011 16:11:16
-; FLID: Deutsche Sprachdatei 0.11.11.08
+X-Langpack-creation-date: 25 Nov 2011 17:11:56
+; FLID: Deutsche Sprachdatei 0.11.11.25
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,AsSingleWindow,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Basic_History,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirFox,MirOTR,MirOUT,MirPy_Scripting,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
 ; Start of langpack: Core (Letzte Änderung: 22:23, 20. Sep. 2011 )
@@ -6253,7 +6253,7 @@ Verlauf löschen
 ; ##############################################
 ; End of langpack: 4x4x4
 ; ############################################## 
-; Start of langpack: AIM (Letzte Änderung: 15:57, 6. Jul. 2011 )
+; Start of langpack: AIM (Letzte Änderung: 19:08, 12. Nov. 2011 )
 
 ; Pluginname: AIM Protocol
 ; Version: 0.9.10.2
@@ -6373,6 +6373,8 @@ Wiederholen
 Account bestätigen
 [*Applied upon reconnect]
 *Bei Neuverb. gespeich.
+[Provides support for AOL® Instant Messenger (AIM) protocol]
+Bietet Unterstützung für das AOL® Instant Messenger (AIM)-Protokoll an
 
 [Save Profile]
 Profil speichern
@@ -6785,7 +6787,7 @@ Wiederholen, Abbrechen
 ; ##############################################
 ; End of langpack: ActMan_Hooks
 ; ############################################## 
-; Start of langpack: AddContact (Letzte Änderung: 00:54, 23. Aug. 2011 )
+; Start of langpack: AddContact (Letzte Änderung: 19:18, 12. Nov. 2011 )
 
 ; Pluginname: AddContact+ 
 ; Version: 0.9.9.0
@@ -6801,6 +6803,9 @@ Wiederholen, Abbrechen
 &Kontakt hinzufügen...
 [Provides the ability to add contacts manually (without searching for them)]
 Erlaubt Kontakte manuell hinzuzufügen (ohne die Kontaktsuche dafür zu starten)
+;Neue Beschreibung AddContact+
+[Provides the ability to quickly add new contacts]
+Erlaubt Kontakte schnell hinzuzufügen
 [Add Contact Manually]
 Kontakt manuell hinzufügen
 [&Add Contact Manually...]
@@ -7182,13 +7187,12 @@ Absturz in Modul %s\nDumpdatei: %s
 ; ##############################################
 ; End of langpack: Attache
 ; ############################################## 
-; Start of langpack: Authorization_State (Letzte Änderung: 17:35, 10. Okt. 2010 )
+; Start of langpack: Authorization_State (Letzte Änderung: 11:44, 20. Nov. 2011 )
 
 ; Pluginname: Authorization State 
 ; Version: 0.0.1.6
 ; Dateiname: authstate.dll
 ; Autor: Thief
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3161
 ; Übersetzung: Weishaupt am 27.09.06
 ; Besonderheiten: Entwicklung eingestellt!
 
@@ -7543,14 +7547,13 @@ Fortschrittsanzeige
 ; ##############################################
 ; End of langpack: AutoShutdown
 ; ############################################## 
-; Start of langpack: Autorun (Letzte Änderung: 14:23, 20. Okt. 2010 )
+; Start of langpack: Autorun (Letzte Änderung: 11:43, 20. Nov. 2011 )
 
 ; Pluginname: Autorun 
 ; Version: 0.1.0.1
 ; Dateiname: autorun.dll
 ; Unique ID: {eb0465e2-ceee-11db-83ef-c1bf55d89593}
 ; Autor: Wolfram3D
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4353
 ; Übersetzung: flower am 06.06.05
 
 [Launch Miranda IM at system startup]
@@ -8331,14 +8334,12 @@ Optionen Gruppe und Titel
 ; ##############################################
 ; End of langpack: Bonsai
 ; ############################################## 
-; Start of langpack: BossKey (Letzte Änderung: 19:55, 10. Nov. 2010 )
+; Start of langpack: BossKey (Letzte Änderung: 11:41, 20. Nov. 2011 )
 
 ; Pluginname: BossKey+ 
 ; Version: 0.5.0.3
 ; Dateiname: bosskey.dll
 ; Autor(en): Goblineye Entertainment, +Mod by Billy_Bons
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3694
-; SVN: https://db3xs.svn.sourceforge.net/svnroot/db3xs/trunk/BossKeyPlus
 ; Unique ID: {4fac353d-0a36-44a4-9064-6759c53ae782}
 ; Übersetzung: 30.06.05 von baphomet
 
@@ -9785,13 +9786,13 @@ Erledigt. Bitte Miranda neustarten.
 ; ##############################################
 ; End of langpack: Contact_merge_plugin_cleaner
 ; ############################################## 
-; Start of langpack: Contacts (Letzte Änderung: 23:21, 27. Aug. 2010 )
+; Start of langpack: Contacts (Letzte Änderung: 12:16, 20. Nov. 2011 )
 
 ; Pluginname: Contacts+
-; Version: 1.6.0.0
+; Version: 1.5.2.0
 ; Dateiname: contacts.dll 
+; Unique ID: {0324785E-74CE-4600-B781-851773B3EFC5}
 ; Autor: Todor Totev, Joe Kucera
-; Link: http://jokusoftware.wz.cz/miranda
 ; Übersetzung: 19.07.05 von andydu
 
 [Allows you to send and receive contacts]
@@ -10176,16 +10177,13 @@ Eigene Farben:
 ; ##############################################
 ; End of langpack: CopyIP
 ; ############################################## 
-; Start of langpack: Country_Flags (Letzte Änderung: 03:39, 18. Sep. 2010 )
+; Start of langpack: Country_Flags (Letzte Änderung: 16:06, 22. Nov. 2011 )
 
 ; Pluginname: Country Flags 
 ; Version: 0.1.0.3
 ; Dateiname: flags.dll
 ; Autor: HeikoH
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3462
-; Link Unicode: http://addons.miranda-im.org/details.php?action=viewfile&id=3463
 ; Übersetzung: 26.03.07 von Foso
-; Besonderheiten: Entwicklung eingestellt!
 
 [Show country flag as &status icon on message window]
 Zeige Länderflagge in der Statuszeile im Nachrichtenfenster
@@ -10512,14 +10510,13 @@ CycleAvatars für dieses Protokoll aktivieren
 ; ##############################################
 ; End of langpack: CycleAvatars
 ; ############################################## 
-; Start of langpack: DBEditor (Letzte Änderung: 13:17, 7. Okt. 2011 )
+; Start of langpack: DBEditor (Letzte Änderung: 12:11, 20. Nov. 2011 )
 
 ; Pluginname: Database Editor ++ 
 ; Version: 3.2.0.0
 ; Dateiname: dbeditorpp.dll, svc_dbepp.dll
 ; Unique ID: {a8a417ef-07aa-4f37-869f-7bfd74886534}
 ; Autor: JdGordon; Bio
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2957
 ; Übersetzung: 06.05.05 von Lastwebpage
 ; Besonderheiten: Entwicklung eingestellt!
 
@@ -12000,15 +11997,14 @@ Suchprozess
 ; ##############################################
 ; End of langpack: Find_A_Message
 ; ############################################## 
-; Start of langpack: Fingerprint_Mod (Letzte Änderung: 21:48, 2. MÃ¤r. 2011 )
+; Start of langpack: Fingerprint_Mod (Letzte Änderung: 12:10, 20. Nov. 2011 )
 
 ; Pluginname: Fingerprint Mod 
 ; Version: 0.2.2.4
 ; Dateiname: fingerprint.dll
 ; Autor(en): Artem Shpynov aka FYR, Bio, Faith Healer, HierOS
 ; Unique ID: {687364af-58b0-4af2-a4ee-20f40a8d9afb}
-; http://addons.miranda-im.org/details.php?action=viewfile&id=4300
-; SVN: http://code.google.com/p/fingerprintmod/source/browse/
+; SVN: http://miranda-plugins.googlecode.com/svn/trunk/fingerprint_mod
 ; Übersetzung: 09.08.2010 von FREAK_THEMIGHTY
 
 [Showing groups]
@@ -15256,14 +15252,13 @@ Keinen Verlauf aufbewahren
 ; ##############################################
 ; End of langpack: History_Sweeper
 ; ############################################## 
-; Start of langpack: History_Sweeper_Light (Letzte Änderung: 13:04, 27. Apr. 2011 )
+; Start of langpack: History_Sweeper_Light (Letzte Änderung: 11:46, 20. Nov. 2011 )
 
 ; Pluginname: History Sweeper Light
 ; Version: 0.0.0.7
 ; Dateiname: histyorysweeperlight.dll
 ; Autor: tico-tico
 ; Unique ID: {1d9bf74a-44a8-4b3f-a6e5-73069d3a8979}
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4416
 ; Übersetzung: CHEF-KOCH 23.04.2011
 
 ;Tabsrmm Button
@@ -15510,7 +15505,7 @@ Sie versuchen einen Eintrag hinzuzufügen, der bereits existiert!
 ; ##############################################
 ; End of langpack: HwHotKey
 ; ############################################## 
-; Start of langpack: IAX (Letzte Änderung: 03:24, 18. Sep. 2010 )
+; Start of langpack: IAX (Letzte Änderung: 19:28, 12. Nov. 2011 )
 
 ; Pluginname: IAX 
 ; Version: 0.0.3.0
@@ -15519,6 +15514,8 @@ Sie versuchen einen Eintrag hinzuzufügen, der bereits existiert!
 ; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3198
 ; Übersetzung Foso am 10.02.07
 
+[Provides support for Inter-Asterisk eXchange (IAX) protocol]
+Bietet Unterstützung für das Inter-Asterisk eXchange (IAX)-Protokoll an
 [*Source port:]
 Port:
 [(*Changes will take effect after restart)]
@@ -17500,15 +17497,13 @@ Tut mir leid, aber das ist kein ICQ-Benutzer. Ich kann leider nur den Status der
 ; ##############################################
 ; End of langpack: ICQ_Status_Checker
 ; ############################################## 
-; Start of langpack: IEView (Letzte Änderung: 18:25, 28. MÃ¤r. 2011 )
+; Start of langpack: IEView (Letzte Änderung: 19:39, 17. Nov. 2011 )
 
 ; Pluginname: IEView
 ; Version: 1.3.0.4
 ; Dateiname: ieview.dll
 ; Unique ID: {0495171b-7137-4ded-97f8-ce6fed67d691}
 ; Autor: the_leech
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1788
-; SVN: svn://svn.berlios.de/mgoodies/trunk/ieview
 ; Übersetzung: 24.06.06 von Dober
 
 [Copy Link]
@@ -18367,7 +18362,7 @@ Zeigt den aktuellen Status der Ignoriereinstellungen eines Kontaktes in der Kont
 ; ##############################################
 ; End of langpack: IgnoreState
 ; ############################################## 
-; Start of langpack: Import (Letzte Änderung: 13:42, 22. Jan. 2011 )
+; Start of langpack: Import (Letzte Änderung: 19:31, 12. Nov. 2011 )
 
 ; Pluginname: Import contacts and messages
 ; Version: 0.9.15.0
@@ -18498,17 +18493,19 @@ Wenn die Einstellungen der serverseitigen Kontakte später geändert werden sollen
 &Dateiname:
 [Import Information Wizard]
 Import-Informations-Plugin
+
+[Imports contacts and messages from Mirabilis ICQ and Miranda IM. Enhanced modification with encrypted database support.]
+Importiert Kontakte und Nachrichten aus ICQ und Miranda IM. Erweiterte Modifikation mit Unterstützung von verschlüsselte Datenbanken.
  
 ; ##############################################
 ; End of langpack: Import
 ; ############################################## 
-; Start of langpack: ImportTXT (Letzte Änderung: 21:11, 7. Jul. 2011 )
+; Start of langpack: ImportTXT (Letzte Änderung: 11:48, 20. Nov. 2011 )
 
 ; Pluginname: ImportTXT
 ; Version: 0.0.1.10
 ; Dateiname: importtxt.dll
 ; Autor: Abyss
-; Link: http://miranda-planet.com/forum/index.php?autocom=downloads&showfile=706
 ; Übersetzung: 22.01.2009 von Killua
 
 [This wizard will help you import message history from some other clients and Miranda plugins, stored in text files.]
@@ -20503,13 +20500,14 @@ Stelle XStatus Liste ein
 ; ##############################################
 ; End of langpack: Keyboard_Notify_Ext
 ; ############################################## 
-; Start of langpack: Language_Pack_Manager (Letzte Änderung: 00:39, 28. Apr. 2011 )
+; Start of langpack: Language_Pack_Manager (Letzte Änderung: 11:49, 20. Nov. 2011 )
 
 ; Pluginname: Language Pack Manager
 ; Version 1.0.2.3
 ; Dateiname: langman.dll
 ; Autor(en): H. Herkenrath
 ; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3002
+; SVN: http://miranda-plugins.googlecode.com/svn/trunk/Langman
 ; Übersetzung: H. Herkenrath
 
 [Language Pack Manager]
@@ -21511,14 +21509,12 @@ Phantombenutzer bearbeiten
 ; ##############################################
 ; End of langpack: MPhantomUser
 ; ############################################## 
-; Start of langpack: MRA (Letzte Änderung: 19:05, 10. Mai 2011 )
+; Start of langpack: MRA (Letzte Änderung: 11:50, 20. Nov. 2011 )
 
 ; Pluginname: Mail.ru Agent (MRA)
 ; Version: 1.21.0.1 (2011.05.08)
 ; Dateiname: mra.dll
 ; Autor: Rozhuk Ivan
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2544
-; Ausweichlink: http://www.rozhuk.org.ru/download/software/MirandaIM/Mra.dll
 ; Übersetzung: 01.11.07 von Sebijk
 
 [Display &Inbox]
@@ -23104,7 +23100,7 @@ Aktzeptiere Soundstummschaltung
 ; ##############################################
 ; End of langpack: MeSpeak
 ; ############################################## 
-; Start of langpack: MenuItemEx (Letzte Änderung: 21:20, 7. Jul. 2011 )
+; Start of langpack: MenuItemEx (Letzte Änderung: 19:33, 12. Nov. 2011 )
 
 ; Pluginname: MenuItemEx 
 ; Version: 1.3.0.8a
@@ -23114,6 +23110,8 @@ Aktzeptiere Soundstummschaltung
 ; Unique ID: {b1902a52-9114-4d7e-ac2e-b3a52e01d574}
 ; Übersetzung: 31.07.2010 von CHEF-KOCH
 
+[Adds some useful options to a contacts menu.]
+Fügt einige nützliche Einstellungen zum Kontaktmenü hinzu.
 [External IP: %d.%d.%d.%d\r\n]
 Externe IP: %d.%d.%d.%d\r\n
 [Internal IP: %d.%d.%d.%d\r\n]
@@ -24883,13 +24881,12 @@ MBot Console anzeigen
 ; ##############################################
 ; End of langpack: Miranda_Scripting_Plugin_(mBot)
 ; ############################################## 
-; Start of langpack: Miranda_Secure_database_with_AutoBackups (Letzte Änderung: 00:57, 23. Aug. 2011 )
+; Start of langpack: Miranda_Secure_database_with_AutoBackups (Letzte Änderung: 17:00, 13. Nov. 2011 )
 
 ; Pluginname: Miranda database - with AutoBackups 
 ; Version: 0.5.6.1
 ; Dateiname: dbx_3x.dll
 ; Autor: sje
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2004
 ; Übersetzung: 06.07.05 von Lastwebpage
 
 ; Pluginname: Miranda Memory-Mapped Secured Database with AutoBackups 
@@ -24902,7 +24899,6 @@ MBot Console anzeigen
 ; Version: 0.0.0.8
 ; Unique ID: {81c220a6-0226-4ad6-bfca-217b17a16053}
 ; Autor: chaos.persei, FYR, nullbie, Billy_Bons
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3667
 ; Übersetzung: 04.12.07 von Sebijk
 
 ;about
@@ -24946,12 +24942,14 @@ Profildateisicherung
 Sicherungsordner
 
 ;dbx_mmap_sa
-[Provides Miranda database support: global settings, contacts, history, settings per contact. Enhanced modification with Encoding and Autobackups]
-Stellt Unterstützung für die Miranda-Profildatei bereit: Globale Einstellungen, Kontakte, Verlauf, Einstellungen pro Kontakt. Erweiterte Modifikation mit Verschlüsselung und autom. Sicherung.
+[Provides Miranda database support: global settings, contacts, history, settings per contact. Enhanced modification with Encoding.]
+Stellt Unterstützung für die Miranda-Profildatei bereit: Globale Einstellungen, Kontakte, Verlauf, Einstellungen pro Kontakt. Erweiterte Modifikation mit Verschlüsselung.
 
 ;login window
 [Login to Miranda IM]
 Einloggen bei Miranda IM
+[Please type in your password for]
+Bitte geben Sie ihr Passwort ein für
 [Please enter password for]
 Bitte Passwort eingeben für
 [Password is not correct!]
@@ -25010,12 +25008,12 @@ Datenbank ist bereits sicher!
 ; ##############################################
 ; End of langpack: Miranda_Secure_database_with_AutoBackups
 ; ############################################## 
-; Start of langpack: Miranda_Text_Control (Letzte Änderung: 23:27, 5. Okt. 2010 )
+; Start of langpack: Miranda_Text_Control (Letzte Änderung: 11:51, 20. Nov. 2011 )
 
 ; Pluginname: mTextControl 
 ; Version: 0.8.0.1
 ; Dateiname: mtextcontrolA.dll (Ansi), mtextcontrolW.dll (Unicode)
-; Autor: Merlin_de, Victor Pavlychko
+; Autor: Merlin_de, Victor Pavlychko, mataes
 ; Unique ID: {69b9443b-dc58-4876-ad39-e3f418a133c5}
 ; Übersetzung: 10.12.05 von freak
 
@@ -26023,15 +26021,14 @@ Ein Fehler ist bei der Kontaktliste in der Datenbank aufgetreten
 ; ##############################################
 ; End of langpack: MySpace
 ; ############################################## 
-; Start of langpack: My_Details (Letzte Änderung: 13:49, 1. Okt. 2010 )
+; Start of langpack: My_Details (Letzte Änderung: 19:39, 17. Nov. 2011 )
 
 ; Pluginname: My Details 
 ; Version: 0.0.2.6
 ; Dateiname: mydetails.dll
 ; Autor: pescuma
 ; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2814
-; SVN: svn://svn.berlios.de/mgoodies/trunk/mydetails
-; SVN alternativ: http://pescuma.googlecode.com/svn/trunk/
+; SVN http://pescuma.googlecode.com/svn/trunk/
 ; Übersetzung: 08.12.05 von Dober
 
 [Show and allows you to edit your details for all protocols.]
@@ -28380,14 +28377,13 @@ Verlauf deaktivieren
 ; ##############################################
 ; End of langpack: NoHistory
 ; ############################################## 
-; Start of langpack: Nudge (Letzte Änderung: 00:07, 15. Okt. 2011 )
+; Start of langpack: Nudge (Letzte Änderung: 11:55, 20. Nov. 2011 )
 
 ; Pluginname: Nudge 
 ; Version: 0.0.1.22
 ; Dateiname: nudge.dll
 ; Unique ID: {9ceee701-35cd-4ff7-8cc4-ef7dd2ac535c}
 ; Autor(en): Tweety/GouZ
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2708
 ; Übersetzung: 24.03.06 von FREAK_THEMIGHTY
 
 [You sent a nudge]
@@ -29602,14 +29598,14 @@ Aber Unterkont. des Prot. in Liste lassen, wenn Metakont. verst. ist
 ; ##############################################
 ; End of langpack: Quick_Contacts
 ; ############################################## 
-; Start of langpack: Quick_Messages (Letzte Änderung: 12:04, 22. Okt. 2010 )
+; Start of langpack: Quick_Messages (Letzte Änderung: 11:56, 20. Nov. 2011 )
 
 ; Pluginname: Quick Messages
 ; Version: 0.0.4.2
 ; Dateiname: quickmessages.dll
 ; Unique ID: {37ed754b-6cf9-40ed-9eb6-0fef8e822475}
 ; Autor: MaD_CLuSTeR
-; Link: http://miranda.radicaled.ru/index.php?plugin=3
+; SVN: http://miranda-plugins.googlecode.com/svn/trunk/QuickMessages
 ; Übersetzung: 22.10.10 von Foso
 
 [Misc.]
@@ -29661,12 +29657,14 @@ Tipps:
 ; ##############################################
 ; End of langpack: Quick_Messages
 ; ############################################## 
-; Start of langpack: Quick_Replies (Letzte Änderung: 02:55, 18. Sep. 2010 )
+; Start of langpack: Quick_Replies (Letzte Änderung: 11:57, 20. Nov. 2011 )
 
 ; Pluginname: Quick Replies
 ; Version: 0.8.1.0
+; Dateiname: quickreplies.dll
 ; Author: Unsane
 ; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=4249
+; SVN: http://miranda-plugins.googlecode.com/svn/trunk/QuickReplies
 
 [Quick Replies]
 Schnelle Antworten
@@ -30795,13 +30793,12 @@ Bestätigen
 ; ##############################################
 ; End of langpack: SecVirtDB
 ; ############################################## 
-; Start of langpack: SecureIM (Letzte Änderung: 00:41, 28. Aug. 2010 )
+; Start of langpack: SecureIM (Letzte Änderung: 16:04, 22. Nov. 2011 )
 
-; Pluginname: SecureIM - modified by baloo 
+; Pluginname: SecureIM
 ; Version: 1.0.12.3
 ; Dateiname: SecureIM.dll
 ; Autor: Johell, Ghost, Nightwish, __alex, Baloo
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2445
 ; Übersetzung: 06.07.05 von derula
 
 [Set key]
@@ -31356,14 +31353,13 @@ Verfügbare Dienste:
 ; ##############################################
 ; End of langpack: Services_list
 ; ############################################## 
-; Start of langpack: Sessions_Manager (Letzte Änderung: 00:38, 16. Jul. 2011 )
+; Start of langpack: Sessions_Manager (Letzte Änderung: 11:59, 20. Nov. 2011 )
 
 ; Pluginname: Sessions 
 ; Version: 0.1.3.0
 ; Dateiname: sessions.dll
 ; Unique ID: {60558872-2aab-45aa-888d-097691c9b683}
 ; Autor: MaD_CLuSTeR
-; Link: http://miranda.radicaled.ru/index.php?plugin=2
 ; Übersetzung: 13.02.09 von kaye_styles
 
 [Action on Startup]
@@ -31571,14 +31567,13 @@ Protokoll-E-Mail-Adresse
 ; ##############################################
 ; End of langpack: ShowUIN
 ; ############################################## 
-; Start of langpack: Show_Contact_Gender (Letzte Änderung: 21:18, 27. Jan. 2011 )
+; Start of langpack: Show_Contact_Gender (Letzte Änderung: 12:10, 20. Nov. 2011 )
 
 ; Pluginname: Show Contact Gender 
 ; Version: 0.0.2.1
 ; Dateiname: gender.dll
 ; Unique ID: {fb1c17e0-77fc-45a7-9c8b-e2bef4f56b28}
 ; Autor(en): Thief, idea by nile, icons by a0x
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=3336
 ; Übersetzung: 27.01.07 von Foso
 
 [Draw an icon when gender info not found]
@@ -31644,14 +31639,14 @@ Dieses Plugin ist gestarten und wird alte Einstellungen zum herunterfahren verwe
 ; ##############################################
 ; End of langpack: Shutdown
 ; ############################################## 
-; Start of langpack: Simple_Auto_Replier (Letzte Änderung: 14:35, 12. Apr. 2011 )
+; Start of langpack: Simple_Auto_Replier (Letzte Änderung: 12:01, 20. Nov. 2011 )
 
 ; Pluginname: Simple Auto Replier (Simple AR)
 ; Version: 2.0.2.4
 ; Dateiname: simplear.dll
 ; Unique ID: {46bf191f-8dfb-4656-88b2-4c20be4cfa44}
 ; Autor(en): Stark Wong, Mikel-Ard-Ri
-; Hinweis: 'Simple Auto Replier' selbst darf nicht übersetzt werden, da sich auch der Pluginname mit übersetzt!
+; Alt. SVN: http://miranda-plugins.googlecode.com/svn/trunk/SimpleAR
 
 [Dear %user%, the owner left the following message:]
 Hallo, %user%, der Besitzer hat dir folgende Nachricht hinterlassen:
@@ -31693,10 +31688,10 @@ Autom. Antwort einschalten
 ; ##############################################
 ; End of langpack: Simple_Auto_Replier
 ; ############################################## 
-; Start of langpack: Simple_Status_Message (Letzte Änderung: 17:38, 26. Jun. 2011 )
+; Start of langpack: Simple_Status_Message (Letzte Änderung: 03:37, 23. Nov. 2011 )
 
 ; Pluginname: Simple Status Message 
-; Version: 1.9.0.3
+; Version: 1.9.0.4
 ; Dateiname: simplestatusmsg.dll
 ; Autor: Dezeath
 ; Unique ID: {768ce156-34ac-45a3-b53b-0083c47615c4}
@@ -31712,15 +31707,21 @@ Autom. Antwort einschalten
 [Update variables in status messages every]
 Aktualisiere Variablen in Statusnachricht alle
 [Do not update variables during idle]
-Variablen nicht im 'Idle' erneuern
+Variablen nicht erneuern, wenn untätig
 [Do not update variables on ICQ status message requests]
 Variablen nicht bei ICQ Statusnachrichtenanfragen erneuern
 [Leave last played track's title after exiting the player]
 Letzten abgespielten Track beibehalten, wenn Player beendet wird.
 [Enable status messages parsing by Variables plugin]
 Aktiviere Statusnachrichtenparsing vom Variables-Plugin
+[Exclude %date% token from parsing (restart required)]
+%date%-Variable nicht parsen (benötigt Neustart)
 
 ;Allgemein + Erweitert
+[Behaviour on status change]
+Verhalten beim Statuswechsel
+[Global status change]
+Globale Statusänderung
 [%s Message (%s)]
 %s Nachricht (%s)
 [Independent setting for each protocol]
@@ -31791,7 +31792,7 @@ Letzte Nachricht
 [Predefined Message]
 Vordefinierte Nachricht
 [Copy Away Message]
-Abwesendnachricht kopieren
+Abwesenheitsnachricht kopieren
 [Retrieving status message for %s...]
 Statusnachricht für %s ermitteln...
 [Change Status Message]
@@ -31846,13 +31847,14 @@ Gehe zu URL in Statusnachricht
 ; ##############################################
 ; End of langpack: Simple_Status_Message
 ; ############################################## 
-; Start of langpack: Skype (Letzte Änderung: 22:07, 27. Apr. 2011 )
+; Start of langpack: Skype (Letzte Änderung: 12:01, 20. Nov. 2011 )
 
 ; Pluginname: Skype
 ; Version: 0.0.0.51
 ; Dateiname: skype.dll
 ; Autor(en): leecher, tweety, jls17
 ; Unique ID: {a71f8335-7b87-4432-b8a3-81479431c6f5}
+; Alt. SVN: http://miranda-plugins.googlecode.com/svn/trunk/skype
 ; Übersetzung: 16.10.05 von HERODOMI
 
 
@@ -32078,14 +32080,13 @@ Synchronisieren, falls aktiver Status unterschiedlich ist
 ; ##############################################
 ; End of langpack: Skype_Status_Change
 ; ############################################## 
-; Start of langpack: Skype_to_imo.im_Gateway (Letzte Änderung: 11:02, 9. Okt. 2011 )
+; Start of langpack: Skype_to_imo.im_Gateway (Letzte Änderung: 11:47, 20. Nov. 2011 )
 
 ; Pluginname: Skype to imo.im Gateway
 ; Version: 1.0.0.14
 ; Dateiname: imoproxy.dll, imo2sproxy.exe
 ; Unique ID: {3005c2b1-4278-470c-9498-05953dfa4d88}
 ; Autor: leecher
-; Link: http://addons.miranda-im.org/download.php?dlfile=4146
 ; Übersetzung: 04.12.2009 by R(i)SK
 
 [Tunnelling Skype traffic via imo.im Web service]
@@ -33036,16 +33037,16 @@ Verbindung aufrechterhalten (Jede Minute einen Ping-Paket senden)
 ; ##############################################
 ; End of langpack: SpinChat
 ; ############################################## 
-; Start of langpack: Splash_Screen (Letzte Änderung: 23:27, 7. Jul. 2011 )
+; Start of langpack: Splash_Screen (Letzte Änderung: 12:02, 20. Nov. 2011 )
 
 ; Pluginname: Advanced Splash Screen
 ; Version: 0.1.2.3
-; Dateiname: advSplashScreen.dll
+; Dateiname: AdvSplashScreen.dll
 ; Unique ID: {c64cc8e0-cf03-474a-8b11-8bd4565ccf04}
 ; Autor(en): nullbie, Thief
 ; Übersetzung: 18.08.06 von Weishaupt
 
-[Shows a splash at Miranda startup]
+[Shows a splash at Miranda startup.]
 Zeigt einen "Splash" während des Startvorgangs von Miranda IM.
 [Splash Options]
 Splash - Optionen
@@ -36372,14 +36373,13 @@ P2P-Verbindungen
 ; ##############################################
 ; End of langpack: Tlen
 ; ############################################## 
-; Start of langpack: Tooltip_Notify (Letzte Änderung: 00:49, 28. Apr. 2011 )
+; Start of langpack: Tooltip_Notify (Letzte Änderung: 12:03, 20. Nov. 2011 )
 
 ; Pluginname: Tooltip Notify 
 ; Version: Tooltip Notify 0.6.0.47
 ; Dateiname: ttnotify.dll
 ; Unique ID: {5906a545-f31a-4726-b48f-03a09f060318}
 ; Autor: perf
-; Download: http://addons.miranda-im.org/details.php?id=1290
 ; Übersetzung: 18.04.06 von miroerr
 
 [Tooltip Notify]
@@ -39896,14 +39896,13 @@ WUMF Popups aktivieren
 ; ##############################################
 ; End of langpack: WUMF:_Who_uses_my_files
 ; ############################################## 
-; Start of langpack: WannaBe_OSD (Letzte Änderung: 13:29, 14. Jan. 2011 )
+; Start of langpack: WannaBe_OSD (Letzte Änderung: 12:06, 20. Nov. 2011 )
 
 ; Pluginname: WannaBe OSD 
 ; Version: 0.2.1.5
 ; Dateiname: wbOSD.dll, wbOSDW.dll
 ; Unique ID: Lädt auch ohne!
 ; Autor: andree
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1963
 ; Übersetzung: 0123hallo
 
 [Shadow align]
@@ -42141,7 +42140,7 @@ WhoIsReading-Popups aktivi&eren
 ; ##############################################
 ; End of langpack: WhoIsReadingMyStatusMsgNotify
 ; ############################################## 
-; Start of langpack: WinPopup (Letzte Änderung: 02:32, 18. Sep. 2010 )
+; Start of langpack: WinPopup (Letzte Änderung: 19:47, 12. Nov. 2011 )
 
 ; Pluginname: WinPopup Protocol 
 ; Version: 0.0.0.15
@@ -42150,7 +42149,7 @@ WhoIsReading-Popups aktivi&eren
 ; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1202
 ; Übersetzung: 22.06.05 von Snoop
 
-[Allows you to send and receive messages over Microsoft LAN. WinPopup and Net Send replacement powerd by Miranda IM.]
+[Allows you to send and receive messages over Microsoft LAN. WinPopup and Net Send replacement powered by Miranda IM.]
 Erlaubt Ihnen, Nachrichten über Microsoft-LAN zu senden und zu empfangen. WinPopup- und Net-Send-Ersatz für Miranda IM.
 [Add contact...]
 Kontakt hinzufügen...
@@ -43039,14 +43038,13 @@ hat den XStatus @ %d
 ; ##############################################
 ; End of langpack: XStatus_Notify
 ; ############################################## 
-; Start of langpack: YAMN_tweety (Letzte Änderung: 21:15, 3. MÃ¤r. 2011 )
+; Start of langpack: YAMN_tweety (Letzte Änderung: 12:07, 20. Nov. 2011 )
 
 ; Pluginname: YAMN tweety 
 ; Version: 0.1.2.5
 ; Dateiname: YAMN.dll
 ; Autor(en): y_b tweety (majvan) 
 ; Unique ID: {b047a7e5-027a-4cfc-8b18-eda8345d2790}
-; Link: YAMN tweety http://addons.miranda-im.org/details.php?action=viewfile&id=2165
 
 [Check mail]
 E-Mails abrufen
