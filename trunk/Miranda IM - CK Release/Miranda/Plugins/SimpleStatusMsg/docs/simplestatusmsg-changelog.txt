@@ -7,6 +7,21 @@ Simple Status Message plugin for Miranda IM Changelog
 
 
 ============================
+v 1.9.0.4 (2011/11/22):
+============================
++ Added support for custom langpacks
++ Added option to do not update variables during idle
++ Added option to do not update variables on ICQ status message requests
++ Added option to disable status messages parsing by Variables plugin
++ Added option to exclude %date% token from parsing by Variables plugin (built-in parser will be used instead)
+* Moved variables-related options to a new Variables tab
+* Minor Status Message dialog and Options dialog improvements
+* The default behavior for every account is now to not change status message on status change
+* URL recognition improved a bit
+! Fixed %time% variable for idle types independent of idle time
+! Fixed memory leaks
+
+============================
 v 1.9.0.3 (2010/11/14):
 ============================
 * Restored periodic status message updating on ICQ protocol
@@ -51,7 +66,7 @@ From now on, Miranda IM 0.9 or later is required.
 * x64 portability
 * Now "Copy Away Message" is unavailable when a buddy doesn't have status message
 * Status message dialog won't appear anymore when screen saver is running
-* Selecting status in status message dialog no longer changes status message
+* Selecting status in the status message dialog no longer changes status message
 * Updated icons
 * Code cleaning and optimization
 ! Fixed handling of status changes requested by another plugin

@@ -1,7 +1,7 @@
 /*
 
 Simple Status Message plugin for Miranda IM
-Copyright (C) 2006-2010 Bartosz 'Dezeath' Bia³ek, (C) 2005 Harven
+Copyright (C) 2006-2011 Bartosz 'Dezeath' Bia³ek, (C) 2005 Harven
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

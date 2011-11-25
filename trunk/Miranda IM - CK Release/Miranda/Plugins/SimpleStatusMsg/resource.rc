@@ -27,8 +27,8 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,9,0,3
- PRODUCTVERSION 1,9,0,3
+ FILEVERSION 1,9,0,4
+ PRODUCTVERSION 1,9,0,4
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -46,12 +46,12 @@ BEGIN
             VALUE "Comments", "Licensed under the terms of the GNU General Public License"
             VALUE "CompanyName", "Bartosz 'Dezeath' Bia³ek, Harven"
             VALUE "FileDescription", "Simple Status Message plugin for Miranda IM"
-            VALUE "FileVersion", "1.9.0.3"
+            VALUE "FileVersion", "1.9.0.4"
             VALUE "InternalName", "simplestatusmsg"
-            VALUE "LegalCopyright", "Copyright © 2006-2010 Bartosz Bia³ek, © 2005 Harven"
+            VALUE "LegalCopyright", "Copyright © 2006-2011 Bartosz Bia³ek, © 2005 Harven"
             VALUE "OriginalFilename", "simplestatusmsg.dll"
             VALUE "ProductName", "Simple Status Message"
-            VALUE "ProductVersion", "1.9.0.3"
+            VALUE "ProductVersion", "1.9.0.4"
         END
     END
     BLOCK "VarFileInfo"
@@ -269,10 +269,10 @@ STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
 EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    GROUPBOX        "Protocols",IDC_STATIC,4,2,300,58,WS_GROUP
+    GROUPBOX        "Behaviour on status change",IDC_STATIC,4,2,300,58,WS_GROUP
     COMBOBOX        IDC_CBOPTPROTO,13,15,106,97,CBS_DROPDOWNLIST | WS_TABSTOP
     PUSHBUTTON      "Apply to all",IDC_BOPTPROTO,123,15,60,13
-    LTEXT           "Max length:",IDC_STATIC,198,17,63,8
+    LTEXT           "Max length:",IDC_MAXLENGTH,198,17,63,8
     EDITTEXT        IDC_EMAXLENGTH,262,15,36,12,ES_NUMBER | NOT WS_BORDER,WS_EX_CLIENTEDGE
     CONTROL         "Spin2",IDC_SMAXLENGTH,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_NOTHOUSANDS,288,15,10,14
     CONTROL         "Pop up dialog box",IDC_ROPTPROTO1,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,26,31,128,8
@@ -301,7 +301,7 @@ STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
 EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    GROUPBOX        "Variables",IDC_STATIC,4,2,300,86,WS_GROUP
+    GROUPBOX        "Variables",IDC_STATIC,4,2,300,100,WS_GROUP
     CONTROL         "Update variables in status messages every",IDC_CUPDATEMSG,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,16,150,8
     EDITTEXT        IDC_ESECUPDTMSG,166,14,32,12,ES_AUTOHSCROLL | ES_NUMBER
@@ -315,6 +315,8 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,58,274,8
     CONTROL         "Enable status messages parsing by Variables plugin",IDC_CVARIABLES,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,72,287,8
+    CONTROL         "Exclude %date% token from parsing (restart required)",IDC_CDATEPARSING,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,86,274,8
 END
 
 IDD_OPT_ADVANCED DIALOGEX 0, 0, 307, 226

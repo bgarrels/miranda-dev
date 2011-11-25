@@ -1,7 +1,7 @@
 /*
 
 Simple Status Message plugin for Miranda IM
-Copyright (C) 2006-2010 Bartosz 'Dezeath' Bia³ek, (C) 2005 Harven
+Copyright (C) 2006-2011 Bartosz 'Dezeath' Bia³ek, (C) 2005 Harven
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -43,11 +43,11 @@ PLUGININFOEX pluginInfo = {
 #else
 	"Simple Status Message (ANSI)",
 #endif
-	PLUGIN_MAKE_VERSION(1, 9, 0, 3),
+	PLUGIN_MAKE_VERSION(1, 9, 0, 4),
 	"Provides a simple way to set status and away messages",
 	"Bartosz 'Dezeath' Bia³ek, Harven",
 	"dezred"/*antispam*/"@"/*antispam*/"gmail"/*antispam*/"."/*antispam*/"com",
-	"© 2006-2010 Bartosz Bia³ek, © 2005 Harven",
+	"© 2006-2011 Bartosz Bia³ek, © 2005 Harven",
 	"http://code.google.com/p/dezeath",
 	UNICODE_AWARE,
 	DEFMOD_SRAWAY,
@@ -1934,6 +1934,19 @@ static TCHAR *ParseWinampSong(ARGUMENTSINFO *ai)
 	return ptszWinampTitle;
 }
 
+static TCHAR *ParseDate(ARGUMENTSINFO *ai)
+{
+	TCHAR szStr[128] = {0};
+
+	if (ai->argc != 1)
+		return NULL;
+
+	ai->flags |= AIF_DONTPARSE;
+	GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, NULL, NULL, szStr, SIZEOF(szStr));
+
+	return mir_tstrdup(szStr);
+}
+
 int ICQMsgTypeToStatus(int iMsgType)
 {
 	switch (iMsgType)
@@ -2070,6 +2083,14 @@ static int OnModulesLoaded(WPARAM wParam, LPARAM lParam)
 		tr.parseFunctionT = ParseWinampSong;
 		tr.szHelpText = LPGEN("External Applications\tretrieves song name of the song currently playing in Winamp (Simple Status Message compatible)");
 		CallService(MS_VARS_REGISTERTOKEN, 0, (LPARAM)&tr);
+
+		if (DBGetContactSettingByte(NULL, "SimpleStatusMsg", "ExclDateToken", 0) != 0)
+		{
+			tr.tszTokenString = _T("date");
+			tr.parseFunctionT = ParseDate;
+			tr.szHelpText = LPGEN("Miranda Related\tget the date (Simple Status Message compatible)");
+			CallService(MS_VARS_REGISTERTOKEN, 0, (LPARAM)&tr);
+		}
 	}
 
 /*	if (DBGetContactSettingByte(NULL, "SimpleStatusMsg", "AmpLeaveTitle", 1))*/ {
