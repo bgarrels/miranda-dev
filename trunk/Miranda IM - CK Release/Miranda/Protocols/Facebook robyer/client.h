@@ -152,6 +152,7 @@ public:
 	bool    buddy_list( );
 	bool	load_friends( );
 	bool    feeds( );
+//	void	delete_friends( );
 
 	////////////////////////////////////////////////////////////
 

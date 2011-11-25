@@ -124,6 +124,8 @@ public:
 	int  __cdecl GetAvatarInfo(WPARAM, LPARAM );
 	int  __cdecl GetAvatarCaps(WPARAM, LPARAM );
 	int  __cdecl VisitProfile(WPARAM, LPARAM );
+	int  __cdecl RemoveFriend(WPARAM, LPARAM );
+	int  __cdecl AddFriend(WPARAM, LPARAM );	
 
 	// Events
 	int  __cdecl OnModulesLoaded(WPARAM, LPARAM);
@@ -161,13 +163,14 @@ public:
 	void __cdecl SendMsgWorker(void*);
 	void __cdecl SendTypingWorker(void*);
 	void __cdecl MessagingWorker(void*);
+	void __cdecl DeleteContactFromServer(void*);
+	void __cdecl AddContactToServer(void*);
 
 	// Contacts handling
 	bool    IsMyContact(HANDLE, bool include_chat = false);
 	HANDLE  ContactIDToHContact(std::string);
-	HANDLE  AddToContactList(facebook_user*, bool dont_check = false);
-	void    SetAllContactStatuses(int);
-	bool    ContactNeedsUpdate(facebook_user*);
+	HANDLE  AddToContactList(facebook_user*, bool dont_check = false);	
+	void    SetAllContactStatuses(int);	
 
 	// TODO RM: Chats handling
  	/*void AddChat(const char *id,const char *name);

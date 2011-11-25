@@ -311,8 +311,9 @@ int FacebookProto::OnPreShutdown(WPARAM wParam,LPARAM lParam)
 int FacebookProto::OnPrebuildContactMenu(WPARAM wParam,LPARAM lParam)
 {
 	HANDLE hContact = reinterpret_cast<HANDLE>(wParam);
-	if(IsMyContact(hContact, true))
-		ShowContactMenus(true);
+	if(IsMyContact(hContact, true)) {
+		ShowContactMenus(true, DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) > 0);
+	}
 
 	return 0;
 }
@@ -385,7 +386,7 @@ int FacebookProto::OnBuildStatusMenu(WPARAM wParam,LPARAM lParam)
 	mi.flags = CMIF_ICONFROMICOLIB | CMIF_CHILDPOPUP;
 	mi.pszName = LPGEN("Visit Profile");
 	mi.icolibItem = GetIconHandle("homepage");
-	// TODO RM: remember and properly free in destructor
+	// TODO RM: remember and properly free in destructor?
 	/*m_hStatusMind = */reinterpret_cast<HGENMENU>( CallService(
 		MS_CLIST_ADDPROTOMENUITEM,0,reinterpret_cast<LPARAM>(&mi)) );
 
@@ -415,27 +416,75 @@ int FacebookProto::VisitProfile(WPARAM wParam,LPARAM lParam)
 	{
 		CallService(MS_UTILS_OPENURL,1,reinterpret_cast<LPARAM>(dbv.pszVal));
 		DBFreeVariant(&dbv);
-	}/* else {
-		// TODO RM: remove this
-		std::string key, url;
-		if (DBGetContactSettingByte(hContact,m_szModuleName,"ChatRoom",0) == 0)
-		{ // usual contact
-			key = FACEBOOK_KEY_ID;
-			url = FACEBOOK_URL_PROFILE;
-		} else {
-			key = "ChatRoomID";
-			url = FACEBOOK_URL_GROUP;
-		}
+	}
 
-		if ( !DBGetContactSettingString(hContact,m_szModuleName,key.c_str(),&dbv) )
-		{
-			url += dbv.pszVal;
-			DBWriteContactSettingString(hContact,m_szModuleName,"Homepage",url.c_str());
+	return 0;
+}
 
-			CallService(MS_UTILS_OPENURL,1,reinterpret_cast<LPARAM>(url.c_str()));
+int FacebookProto::RemoveFriend(WPARAM wParam,LPARAM lParam)
+{
+	if (wParam == NULL)
+	{ // self contact
+	//	CallService(MS_UTILS_OPENURL,1,reinterpret_cast<LPARAM>(FACEBOOK_URL_PROFILE));
+		return 0;
+	}
+	
+	if (MessageBox( 0, TranslateT("Are you sure?"), TranslateT("Delete contact from server list"), MB_ICONWARNING | MB_YESNO | MB_DEFBUTTON2 ) != IDYES)
+		return 0;
+
+	HANDLE hContact = reinterpret_cast<HANDLE>(wParam);
+
+	DBVARIANT dbv;			
+	if( !DBGetContactSettingString(hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
+	{
+		if (!isOffline()) {
+			std::string* id = new std::string(dbv.pszVal);
+			ForkThread( &FacebookProto::DeleteContactFromServer, this, ( void* )id );
 			DBFreeVariant(&dbv);
+
+			if ( !DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) )
+				DBWriteContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, ::time(NULL));
+		} else {
+/*			facebook_user fbu;
+			fbu.user_id = dbv.pszVal;
+			hContact = AddToContactList(&fbu);
+
+			DBWriteContactSettingByte(hContact,m_szModuleName,FACEBOOK_KEY_DELETE_NEXT,1);
+			facy.client_notify(TranslateT("Contact will be deleted at next login."));*/
+			NotifyEvent(TranslateT("Deleting contact"), TranslateT("Contact wasn't deleted, because you are not connected."), NULL, FACEBOOK_EVENT_OTHER, NULL);
 		}
-	}*/
+	}
+
+	return 0;
+}
+
+int FacebookProto::AddFriend(WPARAM wParam,LPARAM lParam)
+{
+	if (wParam == NULL)
+	{ // self contact
+//		CallService(MS_UTILS_OPENURL,1,reinterpret_cast<LPARAM>(FACEBOOK_URL_PROFILE));
+		return 0;
+	}
+
+	HANDLE hContact = reinterpret_cast<HANDLE>(wParam);
+
+	DBVARIANT dbv;
+	if( !DBGetContactSettingString(hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
+	{
+		if (!isOffline()) {
+			std::string* id = new std::string(dbv.pszVal);
+			ForkThread( &FacebookProto::AddContactToServer, this, ( void* )id );
+			DBFreeVariant(&dbv);
+		} else {
+/*			facebook_user fbu;
+			fbu.user_id = dbv.pszVal;
+			hContact = AddToContactList(&fbu);
+
+			DBWriteContactSettingByte(hContact,m_szModuleName,FACEBOOK_KEY_DELETE_NEXT,1);
+			facy.client_notify(TranslateT("Contact will be deleted at next login."));*/
+			NotifyEvent(TranslateT("Deleting contact"), TranslateT("Contact wasn't added, because you are not connected."), NULL, FACEBOOK_EVENT_OTHER, NULL);
+		}
+	}
 
 	return 0;
 }

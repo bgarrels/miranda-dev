@@ -78,6 +78,18 @@ void FacebookProto::ProcessBuddyList( void* data )
 				DBWriteContactSettingWord(fbu->handle,m_szModuleName,"Status", ID_STATUS_ONLINE );
 			}
 
+			// Wasn't contact removed from "server-list" someday?
+			if ( DBGetContactSettingDword(fbu->handle, m_szModuleName, FACEBOOK_KEY_DELETED, 0) ) {
+				DBDeleteContactSetting(fbu->handle, m_szModuleName, FACEBOOK_KEY_DELETED);
+
+				std::string url = FACEBOOK_URL_PROFILE + fbu->user_id;					
+
+				TCHAR* szTitle = mir_a2t_cp(fbu->real_name.c_str(), CP_UTF8);
+				TCHAR* szUrl = mir_a2t_cp(url.c_str(), CP_UTF8);
+				NotifyEvent(szTitle, TranslateT("Contact is back on server-list."), fbu->handle, FACEBOOK_EVENT_OTHER, szUrl);
+				mir_free( szTitle );
+				// mir_free( szUrl ); // url is free'd in popup procedure
+			}
 
 			// Check avatar change
 			CheckAvatarChange(fbu->handle, fbu->image_url);
@@ -155,14 +167,14 @@ void FacebookProto::ProcessFriendList( void* data )
 				}
 
 				// Wasn't contact removed from "server-list" someday?
-				if ( DBGetContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) ) {
+				if ( DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) ) {
 					DBDeleteContactSetting(hContact, m_szModuleName, FACEBOOK_KEY_DELETED);
 
 					std::string url = FACEBOOK_URL_PROFILE + fbu->user_id;					
 
 					TCHAR* szTitle = mir_a2t_cp(fbu->real_name.c_str(), CP_UTF8);
 					TCHAR* szUrl = mir_a2t_cp(url.c_str(), CP_UTF8);
-					NotifyEvent(szTitle, TranslateT("Contact is back on server-list."), hContact, FACEBOOK_EVENT_CLIENT, szUrl);
+					NotifyEvent(szTitle, TranslateT("Contact is back on server-list."), hContact, FACEBOOK_EVENT_OTHER, szUrl);					
 					mir_free( szTitle );
 					// mir_free( szUrl ); // url is free'd in popup procedure
 				}
@@ -176,8 +188,8 @@ void FacebookProto::ProcessFriendList( void* data )
 				// Contact was removed from "server-list", notify it
 
 				// Wasnt we already been notified about this contact?
-				if ( !DBGetContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) ) {
-					DBWriteContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 1);
+				if ( !DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) ) {
+					DBWriteContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, ::time(NULL));
 
 					std::string contactname = id;
 					if ( !DBGetContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NAME, &dbv) ) {
@@ -189,7 +201,7 @@ void FacebookProto::ProcessFriendList( void* data )
 
 					TCHAR* szTitle = mir_a2t_cp(contactname.c_str(), CP_UTF8);
 					TCHAR* szUrl = mir_a2t_cp(url.c_str(), CP_UTF8);
-					NotifyEvent(szTitle, TranslateT("Contact is no longer on server-list."), hContact, FACEBOOK_EVENT_CLIENT, szUrl);
+					NotifyEvent(szTitle, TranslateT("Contact is no longer on server-list."), hContact, FACEBOOK_EVENT_OTHER, szUrl);
 					mir_free( szTitle );
 					// mir_free( szUrl ); // url is free'd in popup procedure
 				}
@@ -272,7 +284,7 @@ void FacebookProto::ProcessUnreadMessages( void* )
 
 		messageslist = utils::text::source_get_value( &messageslist, 3, "class=\\\"MessagingMessage", "MessagingMessageUnread", "class=\\\"MessagingComposer" );
 
-		facebook_user fbu = new facebook_user();
+		facebook_user fbu;
 		fbu.user_id = user_id;
 
 		HANDLE hContact = AddToContactList(&fbu);

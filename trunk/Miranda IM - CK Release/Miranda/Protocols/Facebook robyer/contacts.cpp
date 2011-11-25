@@ -111,11 +111,6 @@ HANDLE FacebookProto::AddToContactList(facebook_user* fbu, bool dont_check)
 	return 0;
 }
 
-bool FacebookProto::ContactNeedsUpdate(facebook_user* fbu)
-{
-	return ( ::time(NULL) - fbu->last_update ) > FACEBOOK_USER_UPDATE_RATE;
-}
-
 void FacebookProto::SetAllContactStatuses(int status)
 {
 	for (HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST,0,0);
@@ -132,6 +127,73 @@ void FacebookProto::SetAllContactStatuses(int status)
 	}
 }
 
+void FacebookProto::DeleteContactFromServer(void *data)
+{
+	facy.handle_entry( "DeleteContactFromServer" );
+
+	if ( data == NULL )
+		return;
+
+	std::string *id = (std::string*)data;
+	
+	std::string query = "norefresh=false&post_form_id_source=AsyncRequest&lsd=&fb_dtsg=";
+	query += facy.dtsg_;
+	query += "&post_form_id=";
+	query += facy.post_form_id_;
+	query += "&uid=";
+	query += *id;
+	query += "&__user=";
+	query += facy.self_.user_id;
+
+	// Get unread inbox threads
+	http::response resp = facy.flap( FACEBOOK_REQUEST_DELETE_FRIEND, &query );
+
+	// Process result data
+	facy.validate_response(&resp);
+
+	if (resp.code != HTTP_CODE_OK) {
+		facy.handle_error( "DeleteContactFromServer" );
+	}
+
+	NotifyEvent(TranslateT("Deleting contact"), TranslateT("Contact was sucessfully removed from server."), NULL, FACEBOOK_EVENT_OTHER, NULL);
+	
+	delete data;
+}
+
+void FacebookProto::AddContactToServer(void *data)
+{
+	facy.handle_entry( "AddContactToServer" );
+
+	if ( data == NULL )
+		return;
+
+	std::string *id = (std::string*)data;
+	
+	std::string query = "action=add_friend&how_found=profile_button&ref_param=ts&outgoing_id=&unwanted=&logging_location=&no_flyout_on_click=false&ego_log_data=&post_form_id_source=AsyncRequest&lsd=&fb_dtsg=";
+	query += facy.dtsg_;
+	query += "&post_form_id=";
+	query += facy.post_form_id_;	
+	query += "&to_friend=";
+	query += *id;
+	query += "&__user=";
+	query += facy.self_.user_id;
+
+	// Get unread inbox threads
+	http::response resp = facy.flap( FACEBOOK_REQUEST_ADD_FRIEND, &query );
+
+	// Process result data
+	facy.validate_response(&resp);
+
+	if (resp.code != HTTP_CODE_OK || resp.data.find("\"success\":true") == std::string::npos) {
+		facy.handle_error( "AddContactToServer" );
+	}
+// RM TODO: better notify...
+	NotifyEvent(TranslateT("Adding contact"), TranslateT("Request for friendship was sent successfully."), NULL, FACEBOOK_EVENT_OTHER, NULL);
+
+	delete data;
+}
+
+
 HANDLE FacebookProto::GetAwayMsg(HANDLE hContact)
 {
 	return 0; // Status messages are disabled
@@ -142,7 +204,29 @@ int FacebookProto::OnContactDeleted(WPARAM wparam,LPARAM)
 	HANDLE hContact = (HANDLE)wparam;
 
 	if (IsMyContact(hContact))
-	{
+	{		
+//		if (!DBGetContactSettingByte(hContact,m_szModuleName,FACEBOOK_KEY_DELETE_NEXT,0)) {
+			if (MessageBox( 0, TranslateT("Do you want to delete this contact also from server list?"), m_tszUserName, MB_ICONWARNING | MB_YESNO | MB_DEFBUTTON2 ) == IDYES) {
+				DBVARIANT dbv;			
+				if( !DBGetContactSettingString(hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
+				{
+					if (!isOffline()) {
+						std::string* id = new std::string(dbv.pszVal);
+						ForkThread( &FacebookProto::DeleteContactFromServer, this, ( void* )id );
+						DBFreeVariant(&dbv);
+					} else {
+/*						facebook_user fbu;
+						fbu.user_id = dbv.pszVal;
+						hContact = AddToContactList(&fbu);
+
+						DBWriteContactSettingByte(hContact,m_szModuleName,FACEBOOK_KEY_DELETE_NEXT,1);
+						facy.client_notify(TranslateT("Contact will be deleted at next login."));*/
+						NotifyEvent(TranslateT("Deleting contact"), TranslateT("Contact wasn't deleted, because you are not connected."), NULL, FACEBOOK_EVENT_OTHER, NULL);
+					}
+				}			
+			}				
+//		}
+
 		ScopedLock s(facy.buddies_lock_);
 
 		for (List::Item< facebook_user >* i = facy.buddies.begin( ); i != NULL; i = i->next )

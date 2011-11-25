@@ -66,7 +66,6 @@ Last change on : $Date$
 #define FACEBOOK_MINIMAL_POLL_RATE              10
 #define FACEBOOK_DEFAULT_POLL_RATE              24 // in seconds
 #define FACEBOOK_MAXIMAL_POLL_RATE              60
-#define FACEBOOK_USER_UPDATE_RATE               7200 // in seconds
 
 #define DEFAULT_FORCE_HTTPS             0
 #define DEFAULT_FORCE_HTTPS_CHANNEL     0
@@ -101,6 +100,8 @@ Last change on : $Date$
 #define FACEBOOK_REQUEST_HOME                   110 // getting __post_form_id__ + __fb_dtsg__ + ...
 #define FACEBOOK_REQUEST_BUDDY_LIST             120 // getting regular updates (friends online, ...)
 #define FACEBOOK_REQUEST_LOAD_FRIENDS			121 // getting list of all friends
+#define FACEBOOK_REQUEST_DELETE_FRIEND			122 // deleting friends
+#define FACEBOOK_REQUEST_ADD_FRIEND				123 // adding friends
 #define FACEBOOK_REQUEST_FEEDS                  125 // getting feeds
 #define FACEBOOK_REQUEST_NOTIFICATIONS			126 // getting notifications
 #define FACEBOOK_REQUEST_RECONNECT              130 // getting __sequence_num__ and __channel_id__

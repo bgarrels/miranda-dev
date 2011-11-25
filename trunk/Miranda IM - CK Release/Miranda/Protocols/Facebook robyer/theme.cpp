@@ -32,16 +32,18 @@ extern OBJLIST<FacebookProto> g_Instances;
 struct
 {
 	const char*  name;
-	const char*  descr;
+	char*  descr;
 	int          defIconID;
 	const char*  section;
 }
 static const icons[] =
 {
-	{ "facebook", LPGEN("Facebook Icon"), IDI_FACEBOOK },
-	{ "mind",     LPGEN("Mind"),          IDI_MIND     },
+	{ "facebook",		LPGEN("Facebook Icon"),			IDI_FACEBOOK },
+	{ "mind",			LPGEN("Mind"),					IDI_MIND },
+	{ "removeFriend",	LPGEN("Remove from server"),	IDI_REMOVEFRIEND },
+	{ "addFriend",		LPGEN("Request friendship"),	IDI_ADDFRIEND },
 
-	{ "homepage", LPGEN("Visit Profile"), 0, "core_main_2" }, 
+	{ "homepage",		LPGEN("Visit Profile"),	0, "core_main_2" },
 };
 
 static HANDLE hIconLibItem[SIZEOF(icons)];
@@ -98,8 +100,18 @@ HANDLE GetIconHandle(const char* name)
 	return 0;
 }
 
+char *GetIconDescription(const char* name)
+{
+	for(size_t i=0; i<SIZEOF(icons); i++)
+	{
+		if(strcmp(icons[i].name,name) == 0)
+			return icons[i].descr;
+	}
+	return "";
+}
+
 // Contact List menu stuff
-HANDLE g_hMenuItems[2];
+HANDLE g_hMenuItems[4];
 
 // Helper functions
 static FacebookProto * GetInstanceByHContact(HANDLE hContact)
@@ -131,7 +143,7 @@ static int PrebuildContactMenu(WPARAM wParam,LPARAM lParam)
 	return proto ? proto->OnPrebuildContactMenu(wParam,lParam) : 0;
 }
 
-HANDLE hHookPreBuildMenu,sVisitProfile;
+HANDLE hHookPreBuildMenu,sVisitProfile,sAddFriend,sRemoveFriend;
 void InitContactMenus()
 {
 	hHookPreBuildMenu = HookEvent(ME_CLIST_PREBUILDCONTACTMENU,PrebuildContactMenu);
@@ -141,10 +153,26 @@ void InitContactMenus()
 
 	mi.position=-2000006000;
 	mi.icolibItem = GetIconHandle("homepage");
-	mi.pszName = LPGEN("Visit Profile");
+	mi.pszName = GetIconDescription("homepage");
 	mi.pszService = "FacebookProto/VisitProfile";
 	sVisitProfile = CreateServiceFunction(mi.pszService,GlobalService<&FacebookProto::VisitProfile>);
 	g_hMenuItems[1] = reinterpret_cast<HANDLE>(
+		CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&mi) );
+
+	mi.position=-2000006000;
+	mi.icolibItem = GetIconHandle("removeFriend");
+	mi.pszName = GetIconDescription("removeFriend");
+	mi.pszService = "FacebookProto/RemoveFriend";
+	sRemoveFriend = CreateServiceFunction(mi.pszService,GlobalService<&FacebookProto::RemoveFriend>);
+	g_hMenuItems[2] = reinterpret_cast<HANDLE>(
+		CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&mi) );
+
+	mi.position=-2000006000;
+	mi.icolibItem = GetIconHandle("addFriend");
+	mi.pszName = GetIconDescription("addFriend");
+	mi.pszService = "FacebookProto/AddFriend";
+	sAddFriend = CreateServiceFunction(mi.pszService,GlobalService<&FacebookProto::AddFriend>);
+	g_hMenuItems[3] = reinterpret_cast<HANDLE>(
 		CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&mi) );
 }
 
@@ -154,15 +182,17 @@ void UninitContactMenus()
 		CallService(MS_CLIST_REMOVECONTACTMENUITEM,(WPARAM)g_hMenuItems[i],0);
 	UnhookEvent(hHookPreBuildMenu);
 	DestroyServiceFunction(sVisitProfile);
+	DestroyServiceFunction(sRemoveFriend);
+	DestroyServiceFunction(sAddFriend);
 }
 
-void ShowContactMenus(bool show)
+void ShowContactMenus(bool show, bool deleted)
 {
 	for(size_t i=0; i<SIZEOF(g_hMenuItems); i++)
 	{
 		CLISTMENUITEM item = { sizeof(item) };
 		item.flags = CMIM_FLAGS;
-		if(!show)
+		if(!show || (i == 3 && !deleted) || (i == 2 && deleted)) // 2 = REMOVE CONTACT; 3 = ADD CONTACT
 			item.flags |= CMIF_HIDDEN;
 
 		CallService(MS_CLIST_MODIFYMENUITEM,reinterpret_cast<WPARAM>(g_hMenuItems[i]),
