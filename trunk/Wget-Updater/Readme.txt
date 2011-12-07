@@ -1,7 +1,6 @@
 Es wird vorausgesetzt, dass die als Plugin verfügbare mimcmd.exe und dessen CmdLine.dll im Miranda IM Hauptordner sowie Plugins-Ordner liegen und dass sich die MIM-Update.bat hier befindet:
 
-XP:
-C:\Programme\GnuWin32\bin\MIM-Update.bat
+C:\Programme\GnuWin32\bin\
 
 
 Hierfür muss das Tool Wget for Windows installiert sein.
