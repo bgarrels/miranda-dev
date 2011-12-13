@@ -18,9 +18,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13680 $
-Last change on : $Date: 2011-07-04 01:36:24 +0200 (Mo, 04. Jul 2011) $
-Last change by : $Author: borkra $
+Revision       : $Revision: 13955 $
+Last change on : $Date: 2011-12-12 20:04:13 +0100 (Mo, 12. Dez 2011) $
+Last change by : $Author: george.hazan $
 
 */
 
@@ -280,6 +280,7 @@ TScramAuth::TScramAuth( ThreadData* info ) :
 	TJabberAuth( info )
 {
 	szName = "SCRAM-SHA-1";
+	cnonce = msg1 = serverSignature = NULL;
 }
 
 TScramAuth::~TScramAuth()
