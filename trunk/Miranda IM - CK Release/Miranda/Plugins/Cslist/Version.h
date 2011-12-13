@@ -12,9 +12,9 @@
 
 #ifdef _UNICODE
 #if defined(WIN64) || defined(_WIN64)
-	#define __PLUGIN_NAME "Custom Status List (Unicode x64) Mod"
+	#define __PLUGIN_NAME "Custom Status List (Unicode x64) mod"
 #else
-	#define __PLUGIN_NAME "Custom Status List (Unicode) Mod"
+	#define __PLUGIN_NAME "Custom Status List (Unicode) mod"
 #endif
 #else
 	#define __PLUGIN_NAME "Custom Status List mod"
@@ -22,7 +22,7 @@
 #define __INTERNAL_NAME				"CSList"
 #define __FILENAME					"CSList.dll"
 #define __DESCRIPTION 				"This plugin offers simple management functions to keep your extra statuses on one place."
-#define __AUTHOR					"CHEF-KOCH, Mataes, jarvis"
+#define __AUTHOR					"Mataes, jarvis"
 #define __AUTHOREMAIL				"mataes2007@gmail.com"
 #define __AUTHORWEB					"http://mataes.googlecode.com/svn/Miranda/Plugins/Cslist/"
-#define __COPYRIGHT					"© 2011-10 CHEF-KOCH, Mataes, 2009-2007 jarvis"
+#define __COPYRIGHT					"© 2011-10 Mataes, 2009-2007 jarvis"
