@@ -42,13 +42,13 @@
 #define IDC_EVENT                       1037
 #define IDC_ADD_EVENT                   1038
 #define IDC_DELETE_EVENT                1039
+#define IDC_SHOWCONTACTGROUPS           1040
 #define IDI_INM                         20000
 #define IDI_OUTM                        20001
 #define IDI_SHOW                        20002
 #define IDI_HIDE                        20003
 #define IDI_FINDNEXT                    20004
 #define IDI_FINDPREV                    20005
-#define IDI_ERASE                       20007
 #define IDI_STATUS                      20008
 #define IDM_FIND                        40001
 #define IDM_CONFIG                      40002

@@ -27,7 +27,7 @@ extern HINSTANCE hInst;
 extern HCURSOR     hCurSplitNS, hCurSplitWE;
 extern HANDLE *hEventIcons;
 extern int iconsNum;
-extern HANDLE hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon, hDeleteIcon;
+extern HANDLE hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon;
 extern bool g_SmileyAddAvail;
 extern char* metaContactProto;
 #define DM_HREBUILD  (WM_USER+11)
@@ -54,7 +54,8 @@ HistoryWindow::HistoryWindow(HANDLE _hContact)
 	searcher(*this), 
 	isGroupImages(false),
 	allIconNumber(0), 
-	eventIcoms(NULL)
+	eventIcoms(NULL),
+	bkBrush(NULL)
 {
 	selected = -1;
 	searcher.SetMatchCase(Options::instance->searchMatchCase);
@@ -99,10 +100,6 @@ HistoryWindow::~HistoryWindow()
 	{
 		CallService(MS_SKIN2_RELEASEICON, (LPARAM)findPrevIco, 0);
 	}
-	if(deleteIco != NULL)
-	{
-		CallService(MS_SKIN2_RELEASEICON, (LPARAM)deleteIco, 0);
-	}
 	if(himlSmall != NULL)
 	{
 		ImageList_Destroy(himlSmall);
@@ -110,6 +107,10 @@ HistoryWindow::~HistoryWindow()
 	if(himlNone != NULL)
 	{
 		ImageList_Destroy(himlNone);
+	}
+	if(bkBrush != NULL)
+	{
+		DeleteObject(bkBrush);
 	}
 }
 
@@ -279,7 +280,7 @@ int HistoryWindow::FontsChanged(WPARAM wParam, LPARAM lParam)
 	{
 		if(!it->second->isDestroyed)
 		{
-			it->second->SelectEventGroup(it->second->selected);
+			it->second->FontsChanged();
 		}
 	}
 
@@ -287,11 +288,30 @@ int HistoryWindow::FontsChanged(WPARAM wParam, LPARAM lParam)
 	{
 		if(!(*it)->isDestroyed)
 		{
-			(*it)->SelectEventGroup((*it)->selected);
+			(*it)->FontsChanged();
 		}
 	}
 
 	return 0;
+}
+
+void HistoryWindow::FontsChanged()
+{
+	if(bkBrush != NULL)
+	{
+		DeleteObject(bkBrush);
+	}
+
+	bkBrush = CreateSolidBrush(Options::instance->GetColor(Options::WindowBackground));
+
+	COLORREF bkColor = Options::instance->GetColor(Options::GroupListBackground);
+	ListView_SetBkColor(listWindow, bkColor);
+	ListView_SetTextBkColor(listWindow, bkColor);
+	LOGFONT font;
+	ListView_SetTextColor(listWindow, Options::instance->GetFont(Options::GroupList, &font));
+	InvalidateRect(listWindow, NULL, TRUE);
+	InvalidateRect(hWnd, NULL, TRUE);
+	SelectEventGroup(selected);
 }
 
 void OptionsGroupChanged()
@@ -318,6 +338,36 @@ void HistoryWindow::OptionsGroupChanged()
 			SendMessage((*it)->hWnd,DM_HREBUILD,0,0);
 		}
 	}
+}
+
+void OptionsMainChanged()
+{
+	HistoryWindow::OptionsMainChanged();
+}
+
+void HistoryWindow::OptionsMainChanged()
+{
+	for(std::map<HANDLE, HistoryWindow*>::iterator it = windows.begin(); it != windows.end(); ++it)
+	{
+		if(!it->second->isDestroyed)
+		{
+			it->second->ReloadMainOptions();
+		}
+	}
+
+	for(std::vector<HistoryWindow*>::iterator it = freeWindows.begin(); it != freeWindows.end(); ++it)
+	{
+		if(!(*it)->isDestroyed)
+		{
+			(*it)->ReloadMainOptions();
+		}
+	}
+}
+
+void HistoryWindow::ReloadMainOptions()
+{
+	SendDlgItemMessage(hWnd, IDC_LIST_CONTACTS, CLM_SETUSEGROUPS, Options::instance->showContactGroups, 0);
+	SendMessage(hWnd,DM_HREBUILD,0,0);
 }
 
 void OptionsMessageChanged()
@@ -349,6 +399,122 @@ void HistoryWindow::OptionsSearchingChanged()
 			(*it)->searcher.SetSearchForInMes(Options::instance->searchForInMess);
 		}
 	}
+}
+
+INT_PTR HistoryWindow::DeleteAllUserHistory(WPARAM wParam, LPARAM lParam)
+{
+	HANDLE hContact = (HANDLE)wParam;
+	HWND hWnd = NULL;
+	int toDelete = 1;
+	int start = 0;
+	int end = 0;
+	int count = CallService(MS_DB_EVENT_GETCOUNT,wParam,0);
+	if(!count)
+		return FALSE;
+	
+	for(std::map<HANDLE, HistoryWindow*>::iterator it = windows.begin(); it != windows.end(); ++it)
+	{
+		if(!it->second->isDestroyed)
+		{
+			if(it->second->hContact == hContact)
+			{
+				if(hWnd == NULL)
+				{
+					hWnd = it->second->hWnd;
+				}
+				else if(GetForegroundWindow() == it->second->hWnd)
+				{
+					hWnd = it->second->hWnd;
+				}
+			}
+		}
+	}
+
+	for(std::vector<HistoryWindow*>::iterator it = freeWindows.begin(); it != freeWindows.end(); ++it)
+	{
+		if(!(*it)->isDestroyed)
+		{
+			if((*it)->hContact == hContact)
+			{
+				if(hWnd == NULL)
+				{
+					hWnd = (*it)->hWnd;
+				}
+				else if(GetForegroundWindow() == (*it)->hWnd)
+				{
+					hWnd = (*it)->hWnd;
+				}
+			}
+		}
+	}
+
+	TCHAR *message = TranslateT("This operation will PERMANENTLY REMOVE all history for this contact.\nAre you sure you want to do this?");
+	if(MessageBox(hWnd, message, TranslateT("Are You sure?"), MB_OKCANCEL | MB_ICONERROR) != IDOK)
+		return FALSE;
+
+	std::deque<HANDLE> toRemove;
+	HANDLE hDbEvent=(HANDLE)CallService(MS_DB_EVENT_FINDFIRST,(WPARAM)hContact,0);
+	while ( hDbEvent != NULL ) 
+	{
+		toRemove.push_back(hDbEvent);
+		hDbEvent=(HANDLE)CallService(MS_DB_EVENT_FINDNEXT,(WPARAM)hDbEvent,0);
+	}
+	
+	for(std::deque<HANDLE>::iterator it = toRemove.begin(); it != toRemove.end(); ++it)
+	{
+		CallService(MS_DB_EVENT_DELETE,(WPARAM)hContact,(LPARAM)(HANDLE)*it);
+	}
+		
+	for(std::map<HANDLE, HistoryWindow*>::iterator it = windows.begin(); it != windows.end(); ++it)
+	{
+		if(!it->second->isDestroyed)
+		{
+			if(it->second->hContact == hContact)
+			{
+				SendMessage(it->second->hWnd,DM_HREBUILD,0,0);
+			}
+		}
+	}
+
+	for(std::vector<HistoryWindow*>::iterator it = freeWindows.begin(); it != freeWindows.end(); ++it)
+	{
+		if(!(*it)->isDestroyed)
+		{
+			if((*it)->hContact == hContact)
+			{
+				SendMessage((*it)->hWnd,DM_HREBUILD,0,0);
+			}
+		}
+	}
+
+	return TRUE;
+}
+
+bool HistoryWindow::IsInList(HWND hWnd)
+{
+	for(std::map<HANDLE, HistoryWindow*>::iterator it = windows.begin(); it != windows.end(); ++it)
+	{
+		if(!it->second->isDestroyed)
+		{
+			if(it->second->hWnd == hWnd)
+			{
+				return true;
+			}
+		}
+	}
+
+	for(std::vector<HistoryWindow*>::iterator it = freeWindows.begin(); it != freeWindows.end(); ++it)
+	{
+		if(!(*it)->isDestroyed)
+		{
+			if((*it)->hWnd == hWnd)
+			{
+				return true;
+			}
+		}
+	}
+	
+	return false;
 }
 
 void ClickLink(HWND hwnd, ENLINK *penLink)
@@ -526,14 +692,6 @@ INT_PTR CALLBACK HistoryWindow::DlgProcHistory(HWND hwndDlg, UINT msg, WPARAM wP
 
 				DlgReturn(TRUE);
 			}
-		case IDC_LIST_CONTACTS:
-				if(HIWORD( wParam ) == LBN_SELCHANGE)
-				{
-					HistoryWindow* historyWindow =(HistoryWindow*)GetWindowLongPtr(hwndDlg,GWLP_USERDATA);
-					historyWindow->ContactChanged();
-				}
-
-				DlgReturn(TRUE);
 		}
 		break;
 	case WM_NOTIFY:
@@ -544,6 +702,29 @@ INT_PTR CALLBACK HistoryWindow::DlgProcHistory(HWND hwndDlg, UINT msg, WPARAM wP
 			switch(pNmhdr->idFrom)
 			{
 				case IDC_LIST_CONTACTS:
+					if(pNmhdr->code == CLN_LISTREBUILT)// || pNmhdr->code == CLN_CONTACTMOVED || pNmhdr->code == CLN_NEWCONTACT)
+					{
+						HistoryWindow* historyWindow =(HistoryWindow*)GetWindowLongPtr(hwndDlg,GWLP_USERDATA);
+						historyWindow->ReloadContacts();
+						DlgReturn(TRUE);
+					}
+					else if(pNmhdr->code == CLN_MYSELCHANGED)
+					{
+						HistoryWindow* historyWindow =(HistoryWindow*)GetWindowLongPtr(hwndDlg,GWLP_USERDATA);
+						if(historyWindow->ContactChanged())
+						{
+							MSGFILTER* msgFilter = (MSGFILTER *) lParam;
+							if(msgFilter->msg == WM_LBUTTONDOWN)
+							{
+								SendMessage(pNmhdr->hwndFrom, WM_LBUTTONUP, msgFilter->wParam, msgFilter->lParam);
+							}
+						}
+
+						DlgReturn(TRUE);
+					}
+
+					//fall through
+				//case IDC_LIST_CONTACTS:
 				case IDC_SHOWHIDE:
 				case IDC_FIND_TEXT:
 				case IDC_EDIT:
@@ -901,75 +1082,15 @@ INT_PTR CALLBACK HistoryWindow::DlgProcHistory(HWND hwndDlg, UINT msg, WPARAM wP
 			}
 			break;
 		}
-	case WM_CONTEXTMENU:
+	case WM_CTLCOLORDLG:
 		{
-			HWND window = (HWND)wParam;
-			int itm = GetDlgCtrlID(window);
-			switch(itm)
-			{
-			case IDC_LIST_CONTACTS:
-				{
-					POINT clicked;
-					RECT rc;
-					clicked.x = GET_X_LPARAM(lParam); 
-					clicked.y = GET_Y_LPARAM(lParam); 
-					ScreenToClient(window, &clicked);
-					int count = ListBox_GetCount(window);
-					int curSel = ListBox_GetCurSel(window);
-					int newSel = -1;
-					for(int i = 0; i < count; ++i)
-					{
-						ListBox_GetItemRect(window, i, &rc);
-						if(rc.left <= clicked.x && rc.right > clicked.x && rc.top <= clicked.y && rc.bottom > clicked.y)
-						{
-							if(i != curSel)
-								ListBox_SetCurSel(window, i);
-							newSel = i;
-							break;
-						}
-					}
-
-					if(newSel >= 0)
-					{ 
-						HMENU hPopupMenu = CreatePopupMenu();
-						if(hPopupMenu != NULL)
-						{
-							HistoryWindow* historyWindow =(HistoryWindow*)GetWindowLongPtr(hwndDlg,GWLP_USERDATA);
-							AppendMenu(hPopupMenu, MF_STRING, IDM_MESSAGE, TranslateT("Send Message"));
-							AppendMenu(hPopupMenu, MF_STRING, IDM_DELETEUSER, TranslateT("Delete All User History"));
-
-							int selected = TrackPopupMenu(hPopupMenu, TPM_RETURNCMD, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam), 0, hwndDlg, 0);
-							switch (selected)
-							{
-							case IDM_MESSAGE:
-								if(newSel != curSel)
-									historyWindow->ContactChanged();
-								CallService(MS_MSG_SENDMESSAGE, (WPARAM)historyWindow->hContact, 0);
-								DestroyMenu(hPopupMenu);
-								return FALSE;
-							case IDM_DELETEUSER:
-								if(newSel != curSel)
-									historyWindow->ContactChanged(true);
-								historyWindow->Delete(2);
-								DestroyMenu(hPopupMenu);
-								return FALSE;
-							}
-
-							DestroyMenu(hPopupMenu);
-						}
-
-						if(newSel != curSel)
-							ListBox_SetCurSel(window, curSel);
-					}
-				}
-				break;
-			}
+			HistoryWindow* historyWindow =(HistoryWindow*)GetWindowLongPtr(hwndDlg,GWLP_USERDATA);
+			DlgReturn((LONG_PTR)historyWindow->bkBrush);
 		}
-		break;
 	case DM_SPLITTERMOVED: 
 		{
 			HistoryWindow* historyWindow =(HistoryWindow*)GetWindowLongPtr(hwndDlg,GWLP_USERDATA);
-			historyWindow->SplitterMoved((HWND)lParam, wParam);
+			historyWindow->SplitterMoved((HWND)lParam, wParam, true);
 			break;
 		}
 	case WM_INITDIALOG:
@@ -1056,6 +1177,8 @@ void HistoryWindow::Initialise()
 	}
 	RegisterHotkeyControl(GetDlgItem(hWnd, IDC_SHOWHIDE));
 	RegisterHotkeyControl(GetDlgItem(hWnd, IDC_LIST_CONTACTS));
+
+	SendDlgItemMessage(hWnd, IDC_LIST_CONTACTS, CLM_SETUSEGROUPS, Options::instance->showContactGroups, 0);
 			
 	RestorePos();
 	SendMessage(hWnd, WM_SETICON, ICON_BIG,   ( LPARAM )LoadSkinnedIconBig( SKINICON_OTHER_HISTORY ));
@@ -1090,6 +1213,8 @@ void HistoryWindow::Initialise()
 		if((isGroupImages = Options::instance->groupShowEvents) != false)
 			ListView_SetImageList(listWindow, himlSmall, LVSIL_SMALL);
 	}
+	
+	bkBrush = CreateSolidBrush(Options::instance->GetColor(Options::WindowBackground));
 
 	LVCOLUMN col = {0};
 	col.mask = LVCF_WIDTH | LVCF_TEXT;
@@ -1098,6 +1223,11 @@ void HistoryWindow::Initialise()
 	ListView_InsertColumn(listWindow, 0, &col);
 	ListView_SetColumnWidth(listWindow, 0, LVSCW_AUTOSIZE_USEHEADER);
 	ListView_SetExtendedListViewStyleEx(listWindow, LVS_EX_FULLROWSELECT, LVS_EX_FULLROWSELECT);
+	COLORREF bkColor = Options::instance->GetColor(Options::GroupListBackground);
+	ListView_SetBkColor(listWindow, bkColor);
+	ListView_SetTextBkColor(listWindow, bkColor);
+	LOGFONT font;
+	ListView_SetTextColor(listWindow, Options::instance->GetFont(Options::GroupList, &font));
 
 	Edit_LimitText(findWindow, 100);
 	RegisterHotkeyControl(findWindow);
@@ -1111,7 +1241,7 @@ void HistoryWindow::Initialise()
 		ImageList_AddIcon(himlButtons, findPrevIco);
 		configIco = LoadSkinnedIcon(SKINICON_OTHER_OPTIONS);
 		ImageList_AddIcon(himlButtons, configIco);
-		deleteIco = (HICON)CallService(MS_SKIN2_GETICONBYHANDLE, 0, (LPARAM)hDeleteIcon);
+		deleteIco = LoadSkinnedIcon(SKINICON_OTHER_DELETE);
 		ImageList_AddIcon(himlButtons, deleteIco);
 				
 		// Set the image list.
@@ -1161,7 +1291,7 @@ void HistoryWindow::Destroy()
 	HistoryWindow::Close(this);
 }
 
-void HistoryWindow::SplitterMoved(HWND splitter, LONG pos)
+void HistoryWindow::SplitterMoved(HWND splitter, LONG pos, bool screenPos)
 {
 	POINT pt;
 	RECT rc1;
@@ -1179,13 +1309,15 @@ void HistoryWindow::SplitterMoved(HWND splitter, LONG pos)
 		pt1.y = rc1.top;
 		pt2.x = rc2.right;
 		pt2.y = rc2.bottom;
-		ScreenToClient(hWnd, &pt);
+		if(screenPos)
+			ScreenToClient(hWnd, &pt);
 		ScreenToClient(hWnd, &pt1);
 		ScreenToClient(hWnd, &pt2);
 		if ((pt.y >= pt1.y + MIN_PANELHEIGHT) && (pt.y < pt2.y - MIN_PANELHEIGHT))
 		{
 			splitterY = pt.y;
-			SendMessage(hWnd, WM_SIZE, 0, 0);
+			if(!screenPos)
+				SendMessage(hWnd, WM_SIZE, 0, 0);
 			//if(M->isAero())
 			//	InvalidateRect(GetParent(hwndDlg), NULL, FALSE);
 		}
@@ -1200,13 +1332,15 @@ void HistoryWindow::SplitterMoved(HWND splitter, LONG pos)
 		pt1.y = rc1.top;
 		pt2.x = rc2.right;
 		pt2.y = rc2.bottom;
-		ScreenToClient(hWnd, &pt);
+		if(screenPos)
+			ScreenToClient(hWnd, &pt);
 		ScreenToClient(hWnd, &pt1);
 		ScreenToClient(hWnd, &pt2);
 		if ((pt.x >= pt1.x + MIN_PANELHEIGHT) && (pt.x < pt2.x - MIN_PANELHEIGHT))
 		{
 			splitterX = pt.x;
-			SendMessage(hWnd, WM_SIZE, 0, 0);
+			if(!screenPos)
+				SendMessage(hWnd, WM_SIZE, 0, 0);
 			//if(M->isAero())
 			//	InvalidateRect(GetParent(hwndDlg), NULL, FALSE);
 		}
@@ -1701,6 +1835,7 @@ void HistoryWindow::SelectEventGroup(int sel)
 		revDeq.insert(revDeq.begin(), deq.rbegin(), deq.rend());
 		deq = revDeq;
 	}
+	COLORREF lastColor = GetSysColor(COLOR_WINDOW);
 	for(std::deque<HANDLE>::iterator it = deq.begin(); it != deq.end(); ++it)
 	{
 		HANDLE hDbEvent = *it;
@@ -1717,7 +1852,7 @@ void HistoryWindow::SelectEventGroup(int sel)
 			{
 				bool isUser = Options::instance->messagesShowName && (isFirst || (!lastMe && (dbei.flags & DBEF_SENT)) || (lastMe && !(dbei.flags & DBEF_SENT)));
 				lastMe = dbei.flags & DBEF_SENT;
-				backColor = Options::instance->GetColor(lastMe ? Options::OutBackground : Options::InBackground);
+				lastColor = backColor = Options::instance->GetColor(lastMe ? Options::OutBackground : Options::InBackground);
 				if(Options::instance->messagesShowEvents)
 				{
 					str[0] = _T('>');
@@ -1820,6 +1955,7 @@ void HistoryWindow::SelectEventGroup(int sel)
 	TextDocument->Release();
 	RichEditOle->Release();
 	SendMessage(editWindow, EM_SETREADONLY, TRUE, 0);
+	SendMessage(editWindow,EM_SETBKGNDCOLOR,0, lastColor);
 	if (cnt == 0) 
 	{
 		UpdateWindow(editWindow);
@@ -1878,23 +2014,51 @@ void HistoryWindow::EnableWindows(BOOL enable)
 
 void HistoryWindow::ReloadContacts()
 {
-	ListBox_ResetContent(GetDlgItem(hWnd,IDC_LIST_CONTACTS));
+	//ListBox_ResetContent(GetDlgItem(hWnd,IDC_LIST_CONTACTS));
+	HWND contactList = GetDlgItem(hWnd,IDC_LIST_CONTACTS);
 	HANDLE _hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
 	bool isEmpty = true;
 	while(_hContact)
 	{
 		if(CallService(MS_DB_EVENT_GETCOUNT,(WPARAM) _hContact,0) && (metaContactProto == NULL || DBGetContactSettingByte(_hContact, metaContactProto, "IsSubcontact", 0) == 0))
 		{
-			TCHAR* d = (TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) _hContact, GCDNF_TCHAR );
+			/*TCHAR* d = (TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) _hContact, GCDNF_TCHAR );
 			int pos = ListBox_AddString(GetDlgItem(hWnd,IDC_LIST_CONTACTS), d);
 			if(pos != LB_ERR && pos != LB_ERRSPACE)
 			{
 				isEmpty = false;
 				ListBox_SetItemData(GetDlgItem(hWnd,IDC_LIST_CONTACTS), pos, _hContact);
+			}*/
+
+			HANDLE hItem = (HANDLE)SendMessage(contactList, CLM_FINDCONTACT, (WPARAM)_hContact, 0);
+			if(hItem == NULL)
+			{
+				SendMessage(contactList, CLM_ADDCONTACT, (WPARAM)_hContact, 0);
 			}
 		}
+		else
+		{
+			HANDLE hItem = (HANDLE)SendMessage(contactList, CLM_FINDCONTACT, (WPARAM)_hContact, 0);
+			if(hItem != NULL)
+			{
+				SendMessage(contactList, CLM_DELETEITEM, (WPARAM)_hContact, 0);
+			}
+		}
+
 		_hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)_hContact, 0);
 	}
+
+	if(hContact != NULL)
+	{
+		HANDLE hItem = (HANDLE)SendMessage(contactList, CLM_FINDCONTACT, (WPARAM)hContact, 0);
+		if(hItem != NULL)
+		{
+			SendMessage(contactList, CLM_ENSUREVISIBLE, (WPARAM)hItem, 0);
+			SendMessage(contactList, CLM_SELECTITEM, (WPARAM)hItem, 0);
+		}
+	}
+
+	/*
 	int count = ListBox_GetCount(GetDlgItem(hWnd,IDC_LIST_CONTACTS));
 	for(int i = 0; i < count; ++i)
 	{
@@ -1904,7 +2068,7 @@ void HistoryWindow::ReloadContacts()
 			ListBox_SetCurSel(GetDlgItem(hWnd,IDC_LIST_CONTACTS), i);
 			break;
 		}
-	}
+	}*/
 }
 
 bool HistoryWindow::DoHotkey(UINT msg, LPARAM lParam, WPARAM wParam, int window)
@@ -1977,6 +2141,18 @@ void HistoryWindow::RestorePos()
 	{
 		ShowWindow(hWnd, SW_SHOWMAXIMIZED);
 	}
+
+	LONG pos = DBGetContactSettingDword(contactToLoad, "BasicHistory", "history_splitterv", 0);
+	if(pos > 0)
+	{
+		SplitterMoved(GetDlgItem(hWnd, IDC_SPLITTERV), pos, false);
+	}
+
+	pos = DBGetContactSettingDword(contactToLoad, "BasicHistory", "history_splitter", 0);
+	if(pos > 0)
+	{
+		SplitterMoved(GetDlgItem(hWnd, IDC_SPLITTER), pos, false);
+	}
 }
 
 void HistoryWindow::SavePos(bool all)
@@ -1992,6 +2168,8 @@ void HistoryWindow::SavePos(bool all)
 			DBDeleteContactSetting(_hContact, "BasicHistory", "history_width");
 			DBDeleteContactSetting(_hContact, "BasicHistory", "history_height");
 			DBDeleteContactSetting(_hContact, "BasicHistory", "history_ismax");
+			DBDeleteContactSetting(_hContact, "BasicHistory", "history_splitterv");
+			DBDeleteContactSetting(_hContact, "BasicHistory", "history_splitter");
 			_hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)_hContact, 0);
 		}
 
@@ -2003,6 +2181,8 @@ void HistoryWindow::SavePos(bool all)
 	wp.length=sizeof(wp);
 	GetWindowPlacement(hWnd,&wp);
 	DBWriteContactSettingByte(contactToSave, "BasicHistory", "history_ismax", wp.showCmd == SW_MAXIMIZE ? 1 : 0);
+	DBWriteContactSettingDword(contactToSave, "BasicHistory", "history_splitterv", splitterX);
+	DBWriteContactSettingDword(contactToSave, "BasicHistory", "history_splitter", splitterY);
 }
 
 #define DEF_FILTERS_START 50000
@@ -2171,7 +2351,7 @@ void HistoryWindow::Delete(int what)
 	int toDelete = 1;
 	int start = 0;
 	int end = 0;
-	if(hContact == NULL || selected < 0 || selected >= eventList.size() || what > 2 || what < 0)
+	if(selected < 0 || selected >= eventList.size() || what > 2 || what < 0)
 		return;
 	if(what == 0)
 	{
@@ -2255,27 +2435,33 @@ void HistoryWindow::Delete(int what)
 	}
 }
 
-void HistoryWindow::ContactChanged(bool sync)
+bool HistoryWindow::ContactChanged(bool sync)
 {
 	if(!isLoading)
 	{
-		int i = ListBox_GetCurSel(GetDlgItem(hWnd, IDC_LIST_CONTACTS));
-		if(i != LB_ERR)
+		HANDLE hItem = (HANDLE)SendDlgItemMessage(hWnd, IDC_LIST_CONTACTS, CLM_GETSELECTION, 0, 0);
+		if(hItem != NULL)
 		{
-			HANDLE _hContact = (HANDLE)ListBox_GetItemData(GetDlgItem(hWnd, IDC_LIST_CONTACTS), i);
-			if(_hContact != NULL && hContact != _hContact)
+			int typeOf = SendDlgItemMessage(hWnd, IDC_LIST_CONTACTS, CLM_GETITEMTYPE,(WPARAM)hItem,0);
+			if(typeOf == CLCIT_CONTACT)
 			{
-				ChangeToFreeWindow(this);
-				isLoading = true;
-				hContact = _hContact;
-				ReloadContacts();
-				if(sync)
-					FillHistoryThread(this);
-				else
-					mir_forkthread(HistoryWindow::FillHistoryThread, this);
+				if(hContact != hItem)
+				{
+					ChangeToFreeWindow(this);
+					isLoading = true;
+					hContact = hItem;
+					ReloadContacts();
+					if(sync)
+						FillHistoryThread(this);
+					else
+						mir_forkthread(HistoryWindow::FillHistoryThread, this);
+					return true;
+				}
 			}
 		}
 	}
+
+	return false;
 }
 
 void HistoryWindow::GroupImagesChanged()

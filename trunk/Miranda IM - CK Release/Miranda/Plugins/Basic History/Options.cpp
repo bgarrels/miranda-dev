@@ -47,6 +47,7 @@ struct EventNamesType
 Options::Options()
 {
 	showContacts = false;
+	showContactGroups = true;
 	groupNewOnTop = true;
 	groupShowEvents = true;
 	groupShowTime = true;
@@ -115,6 +116,7 @@ struct FontOptionsList {
 	BYTE     defStyle;
 	char     defSize;
 	TCHAR*   szBackgroundName;
+	DWORD     flags;
 };
 
 struct ColorOptionsList {
@@ -132,17 +134,20 @@ struct HotkeyOptionsList {
 };
 
 static FontOptionsList g_FontOptionsList[] = {
-	{LPGENT(">> Outgoing timestamp"), RGB(0, 0, 0), _T("MS Shell Dlg 2"), DBFONTF_BOLD, -11, LPGENT("Outgoing background")},
-	{LPGENT("<< Incoming timestamp"), RGB(0, 0, 0), _T("MS Shell Dlg 2"), DBFONTF_BOLD, -11, LPGENT("Incoming background")},
-	{LPGENT(">> Outgoing name"), RGB(100,100,100), _T("MS Shell Dlg 2"), DBFONTF_BOLD, -11, LPGENT("Outgoing background")},
-	{LPGENT("<< Incoming name"), RGB(90,160,90), _T("MS Shell Dlg 2"), DBFONTF_BOLD, -11, LPGENT("Incoming background")},
-	{LPGENT(">> Outgoing messages"), RGB(0, 0, 0), _T("MS Shell Dlg 2"), 0, -11, LPGENT("Outgoing background")},
-	{LPGENT("<< Incoming messages"), RGB(0, 0, 0), _T("MS Shell Dlg 2"), 0, -11, LPGENT("Incoming background")},
+	{LPGENT(">> Outgoing timestamp"), RGB(0, 0, 0), _T("MS Shell Dlg 2"), DBFONTF_BOLD, -11, LPGENT("Outgoing background"), FIDF_ALLOWEFFECTS},
+	{LPGENT("<< Incoming timestamp"), RGB(0, 0, 0), _T("MS Shell Dlg 2"), DBFONTF_BOLD, -11, LPGENT("Incoming background"), FIDF_ALLOWEFFECTS},
+	{LPGENT(">> Outgoing name"), RGB(100,100,100), _T("MS Shell Dlg 2"), DBFONTF_BOLD, -11, LPGENT("Outgoing background"), FIDF_ALLOWEFFECTS},
+	{LPGENT("<< Incoming name"), RGB(90,160,90), _T("MS Shell Dlg 2"), DBFONTF_BOLD, -11, LPGENT("Incoming background"), FIDF_ALLOWEFFECTS},
+	{LPGENT(">> Outgoing messages"), RGB(0, 0, 0), _T("MS Shell Dlg 2"), 0, -11, LPGENT("Outgoing background"), FIDF_ALLOWEFFECTS},
+	{LPGENT("<< Incoming messages"), RGB(0, 0, 0), _T("MS Shell Dlg 2"), 0, -11, LPGENT("Incoming background"), FIDF_ALLOWEFFECTS},
+	{LPGENT("Group list"), RGB(0, 0, 0), _T("MS Shell Dlg 2"), 0, -11, LPGENT("Group list background"), FIDF_DISABLESTYLES},
 };
 
 static ColorOptionsList g_ColorOptionsList[] = {
 	LPGENT("Outgoing background"), RGB(245,245,255),
 	LPGENT("Incoming background"), RGB(245,255,245),
+	LPGENT("Group list background"), GetSysColor(COLOR_3DFACE),
+	LPGENT("Window background"), GetSysColor(COLOR_3DFACE),
 };
 
 static HotkeyOptionsList g_HotkeyOptionsList[] = {
@@ -176,7 +181,6 @@ void Options::Load()
 	strncpy(fid.dbSettingsGroup, "BasicHistory_Fonts", SIZEOF(fid.dbSettingsGroup));
 	_tcsncpy(fid.backgroundGroup, _T("History"), SIZEOF(fid.backgroundGroup));
 	_tcsncpy(fid.group, LPGENT("History"), SIZEOF(fid.group));
-	fid.flags = FIDF_DEFAULTVALID | FIDF_ALLOWEFFECTS | FIDF_CLASSGENERAL;
 	for(int i = 0; i < g_fontsSize; ++i)
 	{
 		fid.order = i;
@@ -188,6 +192,7 @@ void Options::Load()
 		sprintf_s(fid.prefix, SIZEOF(fid.prefix), "Font%d", i);
 		_tcsncpy(fid.name, g_FontOptionsList[i].szDescr, SIZEOF(fid.name));
 		_tcsncpy(fid.backgroundName, g_FontOptionsList[i].szBackgroundName, SIZEOF(fid.name));
+		fid.flags = FIDF_DEFAULTVALID | FIDF_CLASSGENERAL | g_FontOptionsList[i].flags;
 		CallService(MS_FONT_REGISTERT, (WPARAM)&fid, 0);
 	}
 	
@@ -213,8 +218,9 @@ void Options::Load()
 		hid.lParam = g_HotkeyOptionsList[i].lParam;
 		CallService(MS_HOTKEY_REGISTER, 0, (LPARAM)&hid);
 	}
-
+	
 	showContacts = DBGetContactSettingByte(0, MODULE, "showContacts", 0) ? true : false;
+	showContactGroups = DBGetContactSettingByte(0, MODULE, "showContactGroups", 1) ? true : false;
 	groupNewOnTop = DBGetContactSettingByte(0, MODULE, "groupNewOnTop", 1) ? true : false;
 	groupShowEvents = DBGetContactSettingByte(0, MODULE, "groupShowEvents", 1) ? true : false;
 	groupShowTime = DBGetContactSettingByte(0, MODULE, "groupShowTime", 1) ? true : false;
@@ -326,6 +332,7 @@ COLORREF Options::GetColor(Colors colorId)
 void Options::Save()
 {
 	DBWriteContactSettingByte(0, MODULE, "showContacts", showContacts ? 1 : 0);
+	DBWriteContactSettingByte(0, MODULE, "showContactGroups", showContactGroups ? 1 : 0);
 	DBWriteContactSettingByte(0, MODULE, "groupNewOnTop", groupNewOnTop ? 1 : 0);
 	DBWriteContactSettingByte(0, MODULE, "groupShowEvents", groupShowEvents ? 1 : 0);
 	DBWriteContactSettingByte(0, MODULE, "groupShowTime", groupShowTime ? 1 : 0);
@@ -375,6 +382,7 @@ void Options::Save()
 	}
 }
 
+void OptionsMainChanged();
 void OptionsGroupChanged();
 void OptionsMessageChanged();
 void OptionsSearchingChanged();
@@ -476,6 +484,7 @@ INT_PTR CALLBACK Options::DlgProcOptsMain(HWND hwndDlg, UINT msg, WPARAM wParam,
 		{
 			TranslateDialogDefault(hwndDlg);
 			CheckDlgButton(hwndDlg, IDC_SHOWCONTACTS, instance->showContacts ? 1 : 0);
+			CheckDlgButton(hwndDlg, IDC_SHOWCONTACTGROUPS, instance->showContactGroups ? 1 : 0);
 			HWND events = GetDlgItem(hwndDlg, IDC_EVENT);
 			HWND defFilter = GetDlgItem(hwndDlg, IDC_DEFFILTER);
 				HWND listFilter = GetDlgItem(hwndDlg, IDC_LIST_FILTERS);
@@ -688,11 +697,12 @@ INT_PTR CALLBACK Options::DlgProcOptsMain(HWND hwndDlg, UINT msg, WPARAM wParam,
 			if(((LPNMHDR)lParam)->code == PSN_APPLY) 
 			{
 				instance->showContacts = IsDlgButtonChecked(hwndDlg, IDC_SHOWCONTACTS) ? true : false;
+				instance->showContactGroups = IsDlgButtonChecked(hwndDlg, IDC_SHOWCONTACTGROUPS) ? true : false;
 				instance->defFilter = ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_DEFFILTER));
 				instance->customFilters.clear();
 				instance->customFilters.insert(instance->customFilters.begin(), instance->customFiltersTemp.begin(), instance->customFiltersTemp.end());
 				Options::instance->Save();
-				OptionsGroupChanged();
+				OptionsMainChanged();
 			}
 			return TRUE;
 		}

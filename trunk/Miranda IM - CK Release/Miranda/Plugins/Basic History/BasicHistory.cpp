@@ -25,17 +25,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 // {E25367A2-51AE-4044-BE28-131BC18B71A4}
 #define	MIID_BASICHISTORY { 0xe25367a2, 0x51ae, 0x4044, { 0xbe, 0x28, 0x13, 0x1b, 0xc1, 0x8b, 0x71, 0xa4 } }
 
+#define MS_HISTORY_DELETEALLCONTACTHISTORY       "BasicHistory/DeleteAllContactHistory" 
+
 PLUGINLINK *pluginLink;
 HCURSOR     hCurSplitNS, hCurSplitWE;
 
 extern HINSTANCE hInst;
 
-HANDLE hModulesLoaded, hOptionsInit, hPrebuildContactMenu, hServiceShowContactHistory, hPreShutdownHistoryModule, hHistoryContactDelete, hFontsChanged,hToolBarLoaded;
+HANDLE hModulesLoaded, hOptionsInit, hPrebuildContactMenu, hServiceShowContactHistory, hServiceDeleteAllContactHistory, hPreShutdownHistoryModule, hHistoryContactDelete, hFontsChanged,hToolBarLoaded;
 HANDLE *hEventIcons = NULL;
 int iconsNum;
-HANDLE hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon, hDeleteIcon;
+HANDLE hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon;
 HANDLE hToolbarButton;
-HGENMENU hContactMenu;
+HGENMENU hContactMenu, hDeleteContactMenu;
 bool g_SmileyAddAvail = false;
 char* metaContactProto = NULL;
 const IID IID_ITextDocument={0x8CC497C0, 0xA1DF, 0x11ce, {0x80, 0x98, 0x00, 0xAA, 0x00, 0x47, 0xBE, 0x5D}};
@@ -81,7 +83,7 @@ extern "C" __declspec(dllexport) const MUUID* MirandaPluginInterfaces(void)
 int PrebuildContactMenu(WPARAM wParam, LPARAM lParam)
 {
 	int count = CallService(MS_DB_EVENT_GETCOUNT,wParam,0);
-
+	bool isInList = HistoryWindow::IsInList(GetForegroundWindow());
 	CLISTMENUITEM mi = {0};
 	mi.cbSize = sizeof(mi);
 	mi.flags = CMIM_FLAGS;
@@ -89,6 +91,11 @@ int PrebuildContactMenu(WPARAM wParam, LPARAM lParam)
 	if (!count) mi.flags |= CMIF_HIDDEN;
 	else mi.flags &= ~CMIF_HIDDEN;
 	CallService(MS_CLIST_MODIFYMENUITEM, (WPARAM)hContactMenu, (LPARAM)&mi);
+	
+	mi.flags = CMIM_FLAGS;
+	if (!count || !isInList) mi.flags |= CMIF_HIDDEN;
+	else mi.flags &= ~CMIF_HIDDEN;
+	CallService(MS_CLIST_MODIFYMENUITEM, (WPARAM)hDeleteContactMenu, (LPARAM)&mi);
 
 	return 0;
 }
@@ -120,10 +127,17 @@ void InitMenuItems()
 	mi.cbSize = sizeof(mi);
 	mi.position = 1000090000;
 	mi.flags = CMIF_ICONFROMICOLIB;
-	mi.icolibItem = LoadSkinnedIconHandle( SKINICON_OTHER_HISTORY );
+	mi.icolibItem = LoadSkinnedIconHandle(SKINICON_OTHER_HISTORY);
 	mi.pszName = LPGEN("View &History");
 	mi.pszService = MS_HISTORY_SHOWCONTACTHISTORY;
 	hContactMenu = (HGENMENU)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&mi);
+	
+	mi.position = 1000090001;
+	mi.flags = CMIF_ICONFROMICOLIB;
+	mi.icolibItem = LoadSkinnedIconHandle(SKINICON_OTHER_DELETE);
+	mi.pszName = LPGEN("Delete All User History");
+	mi.pszService = MS_HISTORY_DELETEALLCONTACTHISTORY;
+	hDeleteContactMenu = (HGENMENU)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&mi);
 
 	mi.position = 500060000;
 	mi.pszService = MS_HISTORY_SHOWCONTACTHISTORY;
@@ -181,11 +195,6 @@ void InitIcolib()
 	sid.ptszDescription = LPGENT("Find Previous");
 	sid.iDefaultIndex = -IDI_FINDPREV;
 	hFindPrevIcon = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
-
-	sid.pszName = "BasicHistory_delete";
-	sid.ptszDescription = LPGENT("Delete");
-	sid.iDefaultIndex = -IDI_ERASE;
-	hDeleteIcon = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
 }
 
 void InitUpdater()
@@ -201,12 +210,18 @@ void InitUpdater()
 
 #ifdef _WIN64
 		update.szUpdateURL = "http://programista.free.of.pl/miranda/BasicHistory64.zip";
+		update.szVersionURL = "http://programista.free.of.pl/miranda/pluginversion.php?plugin=basichistory&x64=yes";
+		update.szBetaUpdateURL = "http://programista.free.of.pl/miranda/BasicHistoryBeta64.zip";
+		update.szBetaVersionURL = "http://programista.free.of.pl/miranda/pluginversion.php?plugin=basichistory&beta=yes&x64=yes";
 #else
 		update.szUpdateURL = "http://programista.free.of.pl/miranda/BasicHistory.zip";
+		update.szVersionURL = "http://programista.free.of.pl/miranda/pluginversion.php?plugin=basichistory";
+		update.szBetaUpdateURL = "http://programista.free.of.pl/miranda/BasicHistoryBeta.zip";
+		update.szBetaVersionURL = "http://programista.free.of.pl/miranda/pluginversion.php?plugin=basichistory&beta=yes";
+		
 #endif
-		update.szVersionURL = "http://programista.free.of.pl/miranda/BasicHistoryVersion.txt";
-		update.pbVersionPrefix = (BYTE *)"Basic History ";
-		update.cpbVersionPrefix = (int)strlen((char *)update.pbVersionPrefix);
+		update.pbBetaVersionPrefix = update.pbVersionPrefix = (BYTE *)"Basic History ";
+		update.cpbBetaVersionPrefix = update.cpbVersionPrefix = (int)strlen((char *)update.pbVersionPrefix);
 		CallService(MS_UPDATE_REGISTER, 0, (WPARAM)&update);
 	}
 }
@@ -261,6 +276,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	hCurSplitNS = LoadCursor(NULL, IDC_SIZENS);
 	hCurSplitWE = LoadCursor(NULL, IDC_SIZEWE);
 	hServiceShowContactHistory = CreateServiceFunction(MS_HISTORY_SHOWCONTACTHISTORY, ShowContactHistory);
+	hServiceDeleteAllContactHistory = CreateServiceFunction(MS_HISTORY_DELETEALLCONTACTHISTORY, HistoryWindow::DeleteAllUserHistory);
 	Options::instance = new Options();
 	hModulesLoaded = HookEvent(ME_SYSTEM_MODULESLOADED, ModulesLoaded);
 	hOptionsInit = HookEvent(ME_OPT_INITIALISE, Options::InitOptions);
@@ -279,6 +295,7 @@ extern "C" int __declspec(dllexport) Unload(void)
 	UnhookEvent(hFontsChanged);
 	UnhookEvent(hToolBarLoaded);
 	DestroyServiceFunction(hServiceShowContactHistory);
+	DestroyServiceFunction(hServiceDeleteAllContactHistory);
 	HistoryWindow::Deinit();
 	DestroyCursor(hCurSplitNS);
 	DestroyCursor(hCurSplitWE);

@@ -25,7 +25,7 @@ private:
 	HistoryWindow(HANDLE _hContact);
 	void Initialise();
 	void Destroy();
-	void SplitterMoved(HWND splitter, LONG pos);
+	void SplitterMoved(HWND splitter, LONG pos, bool screenPos);
 	static INT_PTR CALLBACK DlgProcHistory(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 	static LRESULT CALLBACK SplitterSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	static int HistoryDlgResizer(HWND, LPARAM, UTILRESIZECONTROL *urc);
@@ -45,11 +45,13 @@ private:
 	void ConfigToolbarClicked(LPNMTOOLBAR lpnmTB);
 	void DeleteToolbarClicked(LPNMTOOLBAR lpnmTB);
 	void Delete(int what);
-	void ContactChanged(bool sync = false);
+	bool ContactChanged(bool sync = false);
 	void GroupImagesChanged();
 	void FormatQuote(std::wstring& quote, const MessageData& md, const std::wstring& msg);
 	bool GetEventIcon(bool isMe, int eventType, int &id);
 	bool CanShowHistory(DBEVENTINFO* dbei);
+	void FontsChanged();
+	void ReloadMainOptions();
 
 	static std::map<HANDLE, HistoryWindow*> windows;
 	static std::vector<HistoryWindow*> freeWindows;
@@ -76,12 +78,16 @@ private:
 	std::map<int, bool> filterMap;
 	bool onlyInFilter;
 	bool onlyOutFilter;
+	HBRUSH bkBrush;
 public:
 	~HistoryWindow();
 	static void Deinit();
 	static void Open(HANDLE hContact);
 	static void Close(HANDLE hContact);
+	static bool IsInList(HWND hWnd);
 	static int FontsChanged(WPARAM wParam, LPARAM lParam);
+	static INT_PTR DeleteAllUserHistory(WPARAM wParam, LPARAM lParam);
+	static void OptionsMainChanged();
 	static void OptionsGroupChanged();
 	static void OptionsSearchingChanged();
 	void Show();

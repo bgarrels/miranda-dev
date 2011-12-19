@@ -77,6 +77,27 @@ LRESULT CALLBACK HotkeySubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
 					isPresed = true;
 					return 0;
 				}
+
+				LRESULT res = CallWindowProc(oldProc, hwnd, msg, wParam, lParam);
+				filter.nmhdr.code = CLN_MYSELCHANGED;
+				SendMessage(hwndParent, WM_NOTIFY, NULL, (LPARAM)&filter);
+				return res;
+			}
+			break;
+		case WM_LBUTTONDOWN:
+			{
+				HWND hwndParent = GetParent(hwnd);
+				MSGFILTER filter;
+				filter.msg = msg;
+				filter.lParam = lParam;
+				filter.wParam = wParam;
+				filter.nmhdr.hwndFrom = hwnd;
+				filter.nmhdr.code = CLN_MYSELCHANGED;
+				filter.nmhdr.idFrom = GetDlgCtrlID(hwnd);
+
+				LRESULT res = CallWindowProc(oldProc, hwnd, msg, wParam, lParam);
+				SendMessage(hwndParent, WM_NOTIFY, NULL, (LPARAM)&filter);
+				return res;
 			}
 			break;
 	}

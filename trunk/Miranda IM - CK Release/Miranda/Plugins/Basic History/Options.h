@@ -57,7 +57,7 @@ public:
 	void Save();
 	void Load();
 
-	bool showContacts, groupNewOnTop, groupShowEvents, groupShowTime, groupShowName, groupShowMessage;
+	bool showContacts, showContactGroups, groupNewOnTop, groupShowEvents, groupShowTime, groupShowName, groupShowMessage;
 	bool messagesNewOnTop, messagesShowDate, messagesShowSec, messagesShowName, messagesShowEvents, messagesUseSmileys;
 	bool searchForInList, searchForInMess, searchMatchCase, searchMatchWhole, searchOnlyIn, searchOnlyOut, searchOnlyGroup;
 	int groupMessageLen, groupTime, groupMessagesNumber;
@@ -73,12 +73,15 @@ public:
 		InName,
 		OutMessages,
 		InMessages,
+		GroupList,
 	};
 
 	enum Colors
 	{
 		OutBackground = 0,
 		InBackground,
+		GroupListBackground,
+		WindowBackground,
 	};
 
 	COLORREF GetFont(Fonts fontId, PLOGFONT font);
