@@ -89,7 +89,7 @@ Returns a country number on success,
 or 0xFFFF on failure (MS_UTILS_GETCOUNTRYBYNUMBER returns "Unknown" for this).
 */
 #define MS_FLAGS_DETECTCONTACTORIGINCOUNTRY "Flags/DetectContactOriginCountry"
-
+#define MS_FLAGS_GETCONTACTORIGINCOUNTRY "Flags/GetContactOriginCountry"	//for beta version 0.1.1.0
 
 #if !defined(FLAGS_NOSETTINGS) && defined(EXTRA_ICON_ADV2)
 #define SETTING_SHOWSTATUSICONFLAG_DEFAULT    1
