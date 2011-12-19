@@ -67,11 +67,16 @@ void Searcher::ClearFind()
 	}
 }
 
+inline TCHAR mytoupper(TCHAR a, std::locale* loc)
+{
+	return std::toupper<TCHAR>(a, *loc);
+}
+
 bool Searcher::CompareStr(std::wstring str, TCHAR *strFind)
 {
 	std::locale loc;
 	if(!matchCase)
-		std::transform(str.begin(), str.end(), str.begin(), std::bind2nd(std::ptr_fun(std::toupper<TCHAR>), loc));
+		std::transform(str.begin(), str.end(), str.begin(), std::bind2nd(std::ptr_fun(mytoupper), &loc));
 	if(!matchWholeWords)
 		return str.find(strFind) < str.length();
 	int findid = str.find(strFind);
@@ -113,7 +118,10 @@ void Searcher::Find()
 		return;
 	}
 	if(!matchCase)
-		std::transform(str, str + _tcslen(str), str, std::bind2nd(std::ptr_fun(std::toupper<TCHAR>), std::locale()));
+	{
+		std::locale loc;
+		std::transform(str, str + _tcslen(str), str, std::bind2nd(std::ptr_fun(mytoupper), &loc));
+	}
 	
 	bool findBack1 = findBack ^ !searchForInMes;
 	bool findBack2 = findBack ^ !searchForInLG;

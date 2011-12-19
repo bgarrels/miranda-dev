@@ -49,13 +49,14 @@
 #include <m_message.h>
 #include <m_protosvc.h>
 #include <m_icq.h>
+#include <m_clc.h>
 
 #include <win2k.h>
 
-#include "m_updater.h"
-#include "m_smileyadd.h"
-#include "m_toolbar.h"
-#include "m_metacontacts.h"
+#include "sdk/m_updater.h"
+#include "sdk/m_smileyadd.h"
+#include "sdk/m_toolbar.h"
+#include "sdk/m_metacontacts.h"
 
 #define HISTORY_HK_FIND 100
 #define HISTORY_HK_FINDNEXT 101
