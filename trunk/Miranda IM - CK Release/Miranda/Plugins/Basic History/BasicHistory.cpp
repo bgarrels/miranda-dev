@@ -131,6 +131,10 @@ void InitMenuItems()
 	mi.pszName = LPGEN("View &History");
 	mi.pszService = MS_HISTORY_SHOWCONTACTHISTORY;
 	hContactMenu = (HGENMENU)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&mi);
+
+	mi.position = 500060000;
+	mi.pszService = MS_HISTORY_SHOWCONTACTHISTORY;
+	CallService(MS_CLIST_ADDMAINMENUITEM,0,(LPARAM)&mi);
 	
 	mi.position = 1000090001;
 	mi.flags = CMIF_ICONFROMICOLIB;
@@ -138,10 +142,6 @@ void InitMenuItems()
 	mi.pszName = LPGEN("Delete All User History");
 	mi.pszService = MS_HISTORY_DELETEALLCONTACTHISTORY;
 	hDeleteContactMenu = (HGENMENU)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&mi);
-
-	mi.position = 500060000;
-	mi.pszService = MS_HISTORY_SHOWCONTACTHISTORY;
-	CallService(MS_CLIST_ADDMAINMENUITEM,0,(LPARAM)&mi);
 
 	hPrebuildContactMenu = HookEvent(ME_CLIST_PREBUILDCONTACTMENU, PrebuildContactMenu);
 }
