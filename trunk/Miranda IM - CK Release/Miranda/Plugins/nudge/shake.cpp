@@ -23,16 +23,14 @@ void CShake::Save(void)
 
 DWORD WINAPI ShakeChatWindow(LPVOID Param)
 {
-	HWND hWnd;
-	hWnd = (HWND) Param;
+	HWND hWnd = (HWND) Param;
 	shake.ShakeChat(hWnd);
 	return 1;
 }
 
 DWORD WINAPI ShakeClistWindow(LPVOID Param)
 {
-	HWND hWnd;
-	hWnd = (HWND) Param;
+	HWND hWnd = (HWND) Param;
 	shake.ShakeClist(hWnd);
 	return 0;
 }
@@ -40,8 +38,7 @@ DWORD WINAPI ShakeClistWindow(LPVOID Param)
 INT_PTR ShakeClist( WPARAM wParam, LPARAM lParam )
 {
 	DWORD tid;
-	HWND hWnd;
-	hWnd = (HWND) CallService( MS_CLUI_GETHWND, 0, 0 );
+	HWND hWnd = (HWND) CallService( MS_CLUI_GETHWND, 0, 0 );
 
 	CreateThread(NULL,0,ShakeClistWindow,(LPVOID) hWnd,0,&tid);
 	return 0;
@@ -52,7 +49,6 @@ INT_PTR ShakeChat( WPARAM wParam, LPARAM lParam )
     if(((HANDLE) wParam) == NULL) return -1;
         
 	DWORD tid;
-	HWND hWnd;
 	//char srmmName[100];
 	MessageWindowData mwd;
 	MessageWindowInputData mwid;
@@ -70,7 +66,7 @@ INT_PTR ShakeChat( WPARAM wParam, LPARAM lParam )
 	//CallService(MS_MSG_GETWINDOWCLASS,(WPARAM)srmmName,(LPARAM)100 );
 
 	HWND parent;
-	hWnd = mwd.hwndWindow;
+	HWND hWnd = mwd.hwndWindow;
 	while((parent = GetParent(hWnd)) != 0) hWnd = parent; // ensure we have the top level window (need parent window for scriver & tabsrmm)
 
 	CreateThread(NULL,0,ShakeChatWindow,(LPVOID) hWnd,0,&tid);
@@ -148,11 +144,10 @@ int CShake::ShakeChat(HWND hWnd)
 {
 	if(!ShakingChat)
 	{
-		Shaking = true;
-		int i;
+		ShakingChat = true;
 		RECT rect;
 		GetWindowRect(hWnd, &rect);
-		for(i = 0; i < nMoveChat; i++)
+		for(int i = 0; i < nMoveChat; i++)
 		{
 			SetWindowPos(hWnd, 0, rect.left - nScaleChat, rect.top, 0, 0, SWP_NOSIZE);
 			Sleep(10);
@@ -174,10 +169,9 @@ int CShake::ShakeClist(HWND hWnd)
 	if(!Shaking)
 	{
 		Shaking = true;
-		int i;
 		RECT rect;
 		GetWindowRect(hWnd, &rect);
-		for(i = 0; i < nMoveClist; i++)
+		for(int i = 0; i < nMoveClist; i++)
 		{
 			SetWindowPos(hWnd, 0, rect.left - nScaleClist, rect.top, 0, 0, SWP_NOSIZE);
 			Sleep(10);

@@ -6,6 +6,13 @@
 + open message window on popup click
 + open message window on preview
 + moved sounds in "Nudge" section
+- fixed navigation in options
++ new option: "Open message window"
++ New option: "Open contact list"
++ new option: "Respect ignore settings (status changes)"
+* status changes are now stored in UTF8
+- Removed popup on sending nudges (on popular request)
+* popup options are moved into popup classes, needs a recent version of popup+ or YAPP
 
 0.0.1.21
 ===========
