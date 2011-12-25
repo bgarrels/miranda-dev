@@ -12,6 +12,7 @@ namespace
 		{
 		case WM_INITDIALOG:
 			{
+				TranslateDialogDefault(hWnd);
 				const IQuotesProvider* pProvider = reinterpret_cast<const IQuotesProvider*>(lp);
 				CQuotesProviderVisitorFormatSpecificator visitor;
 				pProvider->Accept(visitor);
@@ -27,7 +28,7 @@ namespace
 			}
 			break;
 		case WM_COMMAND:
-			if((BN_CLICKED == HIWORD(wp)) && (IDOK == LOWORD(wp)))
+			if(BN_CLICKED == HIWORD(wp) && (IDOK == LOWORD(wp) || IDCANCEL == LOWORD(wp)))
 			{
 				::EndDialog(hWnd,IDOK);
 			}

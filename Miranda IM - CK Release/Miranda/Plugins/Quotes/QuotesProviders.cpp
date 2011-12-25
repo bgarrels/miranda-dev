@@ -25,12 +25,24 @@ const CQuotesProviders::TQuotesProviders& CQuotesProviders::GetProviders()const
 	return m_apProviders;
 }
 
+namespace
+{
+	template<class T>void create_provider(CQuotesProviders::TQuotesProviders& apProviders)
+	{
+		CQuotesProviders::TQuotesProviderPtr pProvider(new T);
+		if(pProvider->Init())
+		{
+			apProviders.push_back(pProvider);
+		}
+	}
+}
+
 void CQuotesProviders::CreateProviders()
 {
-	m_apProviders.push_back(TQuotesProviderPtr(new CQuotesProviderDukasCopy));
-	m_apProviders.push_back(TQuotesProviderPtr(new CQuotesProviderGoogle));
-	m_apProviders.push_back(TQuotesProviderPtr(new CQuotesProviderGoogleFinance));
-	m_apProviders.push_back(TQuotesProviderPtr(new CQuotesProviderYahoo));
+	create_provider<CQuotesProviderDukasCopy>(m_apProviders);
+	create_provider<CQuotesProviderGoogle>(m_apProviders);
+	create_provider<CQuotesProviderGoogleFinance>(m_apProviders);
+	create_provider<CQuotesProviderYahoo>(m_apProviders);
 }
 
 void CQuotesProviders::ClearProviders()

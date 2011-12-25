@@ -60,12 +60,14 @@ public:
 	struct CXMLFileInfo;
 
 public:
-	CQuotesProviderBase(void);
-	~CQuotesProviderBase(void);
+	CQuotesProviderBase();
+	~CQuotesProviderBase();
+
 
 	const CQuoteSection& GetQuotes()const;
 // 	void SetSettingsEvent();
 
+	virtual bool Init();
 	virtual const CProviderInfo& GetInfo()const;
 	virtual void AddContact(HANDLE hContact);
 	virtual void DeleteContact(HANDLE hContact);

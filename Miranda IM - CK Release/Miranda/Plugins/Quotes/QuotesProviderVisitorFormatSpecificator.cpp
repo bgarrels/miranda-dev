@@ -58,4 +58,6 @@ void CQuotesProviderVisitorFormatSpecificator::Visit(const CQuotesProviderYahoo&
 	m_aSpecificators.push_back(CFormatSpecificator(_T("%o"),TranslateT("Open Price")));
 	m_aSpecificators.push_back(CFormatSpecificator(_T("%h"),TranslateT("Day's High")));
 	m_aSpecificators.push_back(CFormatSpecificator(_T("%g"),TranslateT("Day's Low")));
+	m_aSpecificators.push_back(CFormatSpecificator(_T("%P"),TranslateT("Previous Close")));
+	m_aSpecificators.push_back(CFormatSpecificator(_T("%c"),TranslateT("Change")));
 }

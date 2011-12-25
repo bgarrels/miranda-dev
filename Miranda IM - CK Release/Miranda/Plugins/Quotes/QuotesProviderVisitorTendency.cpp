@@ -3,6 +3,7 @@
 #include "DBUtils.h"
 #include "QuotesProviderGoogleFinance.h"
 #include "EconomicRateInfo.h"
+#include "QuotesProviderYahoo.h"
 
 CQuotesProviderVisitorTendency::CQuotesProviderVisitorTendency(HANDLE hContact,TCHAR chr)
 	: m_hContact(hContact),m_chr(chr),m_bValid(false),m_dResult(0.0)
@@ -38,6 +39,30 @@ void CQuotesProviderVisitorTendency::Visit(const CQuotesProviderGoogleFinance& r
 		break;
 	}
 }
+
+void CQuotesProviderVisitorTendency::Visit(const CQuotesProviderYahoo& rProvider)
+{
+	switch(m_chr)
+	{
+	case _T('o'):
+		GetValue(DB_STR_YAHOO_OPEN_VALUE);
+		break;
+	case _T('h'):
+		GetValue(DB_STR_YAHOO_DAY_HIGH);
+		break;
+	case _T('P'):
+		GetValue(DB_STR_YAHOO_PREVIOUS_CLOSE);
+		break;
+	case _T('c'):
+		GetValue(DB_STR_YAHOO_CHANGE);
+		break;
+	case _T('g'):
+		GetValue(DB_STR_YAHOO_DAY_LOW);
+		break;
+	}
+
+}
+
 
 void CQuotesProviderVisitorTendency::GetValue(LPCSTR pszDbKeyName)
 {
