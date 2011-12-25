@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by resource.rc
 //
 #define IDD_DIALOG1                     101
@@ -11,7 +11,6 @@
 #define IDI_NUDGE_META                  113
 #define IDD_SHAKEOPT                    126
 #define IDD_OPT_NUDGE                   126
-#define IDD_OPTIONS                     127
 #define IDD_OPT_SHAKE                   128
 #define IDD_OPT_TRIGGER                 129
 #define IDC_BUTTON1                     1000
@@ -34,7 +33,6 @@
 #define IDC_SLIDER_CHAT                 1010
 #define IDC_SNUMBER_CHAT                1010
 #define IDC_LABEL_ERRSTATE              1011
-#define IDC_OPTIONSTAB                  1011
 #define IDC_SSCALE_CLIST                1011
 #define IDC_LABEL_TOTALBLOCKS           1012
 #define IDC_LNUMBER_CLIST               1012
@@ -75,6 +73,9 @@
 #define IDC_TRIGGER_SHAKECHAT           1041
 #define IDC_AUTORESEND                  1042
 #define IDC_RESENDDELAY                 1043
+#define IDC_OPENMESSAGE                 1044
+#define IDC_OPENCONTACTLIST             1046
+#define IDC_IGNORE                      1047
 
 // Next default values for new objects
 // 
@@ -82,7 +83,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        114
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         1041
+#define _APS_NEXT_CONTROL_VALUE         1048
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

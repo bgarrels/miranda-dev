@@ -1,10 +1,6 @@
 #ifndef NUDGE_H
 #define NUDGE_H
 
-
-
-static int code_page = CP_ACP;
-
 //	NUDGE account status flags
 #define	NUDGE_ACC_ST0	0x00000001		//Check (countdown) when Offline
 #define	NUDGE_ACC_ST1	0x00000002		//Check (countdown) when Online
@@ -38,23 +34,22 @@ class CNudgeElement
 {
 public:
 	char ProtocolName[64];
+	TCHAR AccountName[128];
 	char NudgeSoundname[100];
 	TCHAR recText[TEXT_LEN];
 	TCHAR senText[TEXT_LEN];
 	bool showPopup;
-	bool showEvent;
 	bool showStatus;
-	bool popupWindowColor;
+	bool openMessageWindow;
+	bool openContactList;
+	bool useIgnoreSettings;
 	bool shakeClist;
 	bool shakeChat;
 	bool enabled;
 	bool autoResend;
 	DWORD statusFlags;
-	unsigned int popupBackColor;
-	unsigned int popupTextColor;
-	int popupTimeSec;
 	int iProtoNumber;
-	HICON hIcon;
+	HANDLE hIcoLibItem;
 	HANDLE hEvent;
 	HANDLE hContactMenu;
 

@@ -3,57 +3,7 @@
 /*
 *
 ****************************/
-void RegisterToUpdate(void);
-
-/*
-*
-****************************/
-void RegisterToTrigger(void);
-
-/*
-*
-****************************/
-void LoadProtocols(void);
-
-/*
-*
-****************************/
-void LoadIcons(void);
-
-/*
-*
-****************************/
-static int LoadChangedIcons(WPARAM, LPARAM);
-
-/*
-*
-****************************/
-DWORD WINAPI ShakeClistWindow(LPVOID);
-
-/*
-*
-****************************/
-DWORD WINAPI ShakeChatWindow(LPVOID);
-
-/*
-*
-****************************/
-int ModulesLoaded(WPARAM,LPARAM);
-
-/*
-*
-****************************/
 void Nudge_ShowPopup(CNudgeElement, HANDLE, TCHAR *);
-
-/*
-*
-****************************/
-void Nudge_ShowEvent(CNudgeElement, HANDLE, DWORD timestamp);
-
-/*
-*
-****************************/
-void Nudge_SentEvent(CNudgeElement, HANDLE);
 
 /*
 *
@@ -68,27 +18,12 @@ void Nudge_SentStatus(CNudgeElement, HANDLE);
 /*
 *
 ****************************/
-int Nudge_AddElement(char*, HANDLE);
+void Nudge_AddAccount(PROTOACCOUNT *proto);
 
 /*
 *
 ****************************/
-int FreeVSApi();
-
-/*
-*
-****************************/
-int InitVSApi();
-
-/*
-*
-****************************/
-int TriggerActionRecv( DWORD actionID, REPORTINFO *ri);
-
-/*
-*
-****************************/
-int TriggerActionSend( DWORD actionID, REPORTINFO *ri);
+void LoadPopupClass();
 
 /*
 *
