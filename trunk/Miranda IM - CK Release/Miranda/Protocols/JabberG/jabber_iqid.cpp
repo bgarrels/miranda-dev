@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13905 $
-Last change on : $Date: 2011-11-06 00:31:18 +0100 (So, 06. Nov 2011) $
+Revision       : $Revision: 13973 $
+Last change on : $Date: 2011-12-25 23:02:12 +0100 (So, 25. Dez 2011) $
 Last change by : $Author: borkra $
 
 */
@@ -492,20 +492,23 @@ void CJabberProto::OnIqResultGetRoster( HXML iqNode, CJabberIqInfo* pInfo )
 			UpdateSubscriptionInfo(hContact, item);
 		}
 		
-		if ( item->group != NULL ) {
-			JabberContactListCreateGroup( item->group );
+		if (!m_options.IgnoreRosterGroups) {
+			if ( item->group != NULL ) {
+				JabberContactListCreateGroup( item->group );
 
-			// Don't set group again if already correct, or Miranda may show wrong group count in some case
-			DBVARIANT dbv;
-			if ( !DBGetContactSettingTString( hContact, "CList", "Group", &dbv )) {
-				if ( lstrcmp( dbv.ptszVal, item->group ))
-					DBWriteContactSettingTString( hContact, "CList", "Group", item->group );
-				JFreeVariant( &dbv );
+				// Don't set group again if already correct, or Miranda may show wrong group count in some case
+				DBVARIANT dbv;
+				if ( !DBGetContactSettingTString( hContact, "CList", "Group", &dbv )) {
+					if ( lstrcmp( dbv.ptszVal, item->group ))
+						DBWriteContactSettingTString( hContact, "CList", "Group", item->group );
+					JFreeVariant( &dbv );
+				}
+				else DBWriteContactSettingTString( hContact, "CList", "Group", item->group );
 			}
-			else DBWriteContactSettingTString( hContact, "CList", "Group", item->group );
+			else 
+				DBDeleteContactSetting( hContact, "CList", "Group" );
 		}
-		else if (!m_options.IgnoreRosterGroups)
-			DBDeleteContactSetting( hContact, "CList", "Group" );
+
 		if ( hContact != NULL ) {
 			if ( bIsTransport)
 				JSetByte( hContact, "IsTransport", TRUE );
