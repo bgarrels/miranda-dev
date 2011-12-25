@@ -7,7 +7,8 @@
 #define DB_STR_YAHOO_OPEN_VALUE "OpenQuotePrice"
 #define DB_STR_YAHOO_DAY_HIGH "DayHigh"
 #define DB_STR_YAHOO_DAY_LOW "DayLow"
-
+#define DB_STR_YAHOO_PREVIOUS_CLOSE "PreviousClose"
+#define DB_STR_YAHOO_CHANGE "Change"
 
 class CQuotesProviderYahoo : public CQuotesProviderFinance
 {

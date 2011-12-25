@@ -199,6 +199,12 @@ void CQuotesProviderVisitorFormater::Visit(const CQuotesProviderYahoo& rProvider
 	case _T('h'):
 		FormatDoubleHelper(DB_STR_YAHOO_DAY_HIGH);
 		break;
+	case _T('P'):
+		FormatDoubleHelper(DB_STR_YAHOO_PREVIOUS_CLOSE);
+		break;
+	case _T('c'):
+		FormatDoubleHelper(DB_STR_YAHOO_CHANGE);
+		break;
 	case _T('g'):
 		FormatDoubleHelper(DB_STR_YAHOO_DAY_LOW);
 		break;

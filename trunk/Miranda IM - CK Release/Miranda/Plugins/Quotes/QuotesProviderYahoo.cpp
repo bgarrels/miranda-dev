@@ -100,7 +100,7 @@ void CQuotesProviderYahoo::RefreshQuotes(TContracts& anContacts)
 
 	if(true == IsOnline())
 	{
-		oURL << _T("&f=snl1ohg");
+		oURL << _T("&f=snl1ohgpc1");
 		CHTTPSession http;
 		if((true == http.OpenURL(oURL.str())) && (true == IsOnline()))
 		{
@@ -151,6 +151,8 @@ void CQuotesProviderYahoo::RefreshQuotes(TContracts& anContacts)
 								indexOpen,
 								indexDayHigh,
 								indexDayLow,
+								indexPreviousClose,
+								indexChange
 							};
 							auto it3 = aQuoteID2Handles.find(asStrings[indexSymbol]);
 							if(it3 != aQuoteID2Handles.end())
@@ -164,6 +166,8 @@ void CQuotesProviderYahoo::RefreshQuotes(TContracts& anContacts)
 									get_double_from_parsed_line(hContact,asStrings,indexOpen,DB_STR_YAHOO_OPEN_VALUE);
 									get_double_from_parsed_line(hContact,asStrings,indexDayHigh,DB_STR_YAHOO_DAY_HIGH);
 									get_double_from_parsed_line(hContact,asStrings,indexDayLow,DB_STR_YAHOO_DAY_LOW);
+									get_double_from_parsed_line(hContact,asStrings,indexPreviousClose,DB_STR_YAHOO_PREVIOUS_CLOSE);
+									get_double_from_parsed_line(hContact,asStrings,indexChange,DB_STR_YAHOO_CHANGE);
 									WriteContactRate(hContact,dRate);
 									aQuoteID2Handles.erase(it3);
 								}
