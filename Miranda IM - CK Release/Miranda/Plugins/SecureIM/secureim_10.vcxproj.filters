@@ -13,6 +13,9 @@
       <UniqueIdentifier>{5c5bb985-18c1-42aa-8630-9c8d94df2a58}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{b7bcdfbb-dd85-41f7-85f3-78b2d77e93e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
@@ -163,5 +166,10 @@
     <ClCompile Include="svcs_srmm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\!whatsnew.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
 </Project>
