@@ -20,8 +20,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "Searcher.h"
 #include "resource.h"
 
-extern void GetObjectDescription( DBEVENTINFO *dbei, TCHAR* str, int cbStr );
-
 Searcher::Searcher(SearchContext& _context)
 	:context(_context),
 	lastFindSelection(-1),
@@ -348,7 +346,7 @@ bool Searcher::IsInSel(int sel, TCHAR *strFind)
 				bool isMe = dbei.flags & DBEF_SENT;
 				if(onlyIn && isMe || onlyOut && !isMe)
 					continue;
-				GetObjectDescription(&dbei,str, MAXSELECTSTR);
+				context.GetObjectDescription(&dbei,str, MAXSELECTSTR);
 				if(CompareStr(str, strFind))
 				{
 					mir_free(dbei.pBlob);

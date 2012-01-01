@@ -94,3 +94,30 @@ Usuñ filtr
 Dodaj zdarzenie
 [Delete event]
 Usuñ zdarzenie
+[Show groups in contact list]
+Poka¿ grupy w liœcie kontaktów
+[Window background]
+T³o okna
+[Plus in export]
+Plus w eksporcie
+[Minus in export]
+Minus w eksporcie
+[Rich Html]
+Rozszerzony Html
+[Plain Html]
+Czysty Html
+[_files]
+_pliki
+[Open all]
+Otwórz wszystkie
+[Close all]
+Zamknij wszystkie
+[Export To Rich Html]
+Eksport Do Rozszerzonego Html
+[Export To Plain Html]
+Eksport Do Czystego Html
+[Export To Txt]
+Eksport Do Txt
+[Filter:]
+#muuid {E25367A2-51AE-4044-BE28-131BC18B71A4}
+Filtr:

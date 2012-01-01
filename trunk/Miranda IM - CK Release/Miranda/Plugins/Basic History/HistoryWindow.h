@@ -33,9 +33,6 @@ private:
 	static void Close(HistoryWindow* historyWindow);
 	static void ChangeToFreeWindow(HistoryWindow* historyWindow);
 	void ReplaceIcons(HWND hwndDlg, int selStart, BOOL isSent);
-	void AddGroup(DBEVENTINFO *dbei);
-	void InitNames();
-	void InitFilters();
 	void EnableWindows(BOOL enable);
 	void ReloadContacts();
 	bool DoHotkey(UINT msg, LPARAM lParam, WPARAM wParam, int window);
@@ -48,17 +45,12 @@ private:
 	bool ContactChanged(bool sync = false);
 	void GroupImagesChanged();
 	void FormatQuote(std::wstring& quote, const MessageData& md, const std::wstring& msg);
-	bool GetEventIcon(bool isMe, int eventType, int &id);
-	bool CanShowHistory(DBEVENTINFO* dbei);
 	void FontsChanged();
 	void ReloadMainOptions();
 
 	static std::map<HANDLE, HistoryWindow*> windows;
 	static std::vector<HistoryWindow*> freeWindows;
-	HANDLE hContact;
 	bool isDestroyed;
-	TCHAR contactName[256];
-	TCHAR myName[256];
 	LONG splitterY;
 	LONG splitterOrgY;
 	LONG splitterX;
@@ -73,12 +65,9 @@ private:
 	Searcher searcher;
 	bool isGroupImages;
 	HIMAGELIST himlSmall, himlNone;
-	int defFilter;
-	std::wstring filterName;
-	std::map<int, bool> filterMap;
-	bool onlyInFilter;
-	bool onlyOutFilter;
 	HBRUSH bkBrush;
+protected:
+	virtual void AddGroup(bool isMe, const std::wstring &time, const std::wstring &user, const std::wstring &eventText, int ico);
 public:
 	~HistoryWindow();
 	static void Deinit();

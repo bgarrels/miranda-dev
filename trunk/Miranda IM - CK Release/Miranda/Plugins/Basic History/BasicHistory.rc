@@ -152,6 +152,12 @@ IDI_FINDNEXT            ICON                    "icons\\FindNext.ico"
 IDI_FINDPREV            ICON                    "icons\\FindPrev.ico"
 
 IDI_STATUS              ICON                    "icons\\Status change.ico"
+
+IDR_CSS					CUSTOMRES				"history.css"
+IDR_JS					CUSTOMRES				"history.js"
+IDI_PLUSEX				ICON					"icons\\pnode.ico"
+IDI_MINUSEX				ICON					"icons\\mnode.ico"
+
 #endif    // Neutral resources
 /////////////////////////////////////////////////////////////////////////////
 

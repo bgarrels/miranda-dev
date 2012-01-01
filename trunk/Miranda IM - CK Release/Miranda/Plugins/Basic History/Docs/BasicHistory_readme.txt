@@ -10,14 +10,30 @@ Main features
 =============
 - display history in RichEdit
 - grouping events
+- contact list to change distlayed history
 - searching
+- filtering
 
 !!! Requirements !!!
 ====================
-Microsoft Visual C++ 2010 Redistributable Package
+Microsoft Visual C++ 2010 Redistributable Package for x64 version
+Microsoft Visual C++ 2008 Redistributable Package for x86 version (included in Miranda`s installer) 
 
 Changelog
 =========
+
+--- 1.0.1.1 ---
++ export
+* fixed "View &History" menu
+
+--- 1.0.1.0 ---
++ changed contact list to look better
++ configurable color of main window and group list
+* saving splitter position
+* improvements in RichEdit colors
+* ability to delete system history
+* x86 version now using Microsoft Visual C++ 2008 Redistributable Package
++ updater beta version link to future use
 
 --- 1.0.0.5 ---
 * fixed bug with setting "All events" filter as default
