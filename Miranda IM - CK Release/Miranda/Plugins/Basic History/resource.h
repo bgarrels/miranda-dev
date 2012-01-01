@@ -50,6 +50,10 @@
 #define IDI_FINDNEXT                    20004
 #define IDI_FINDPREV                    20005
 #define IDI_STATUS                      20008
+#define IDR_CSS                         20009
+#define IDR_JS                          20010
+#define IDI_PLUSEX                      20011
+#define IDI_MINUSEX                     20012
 #define IDM_FIND                        40001
 #define IDM_CONFIG                      40002
 #define IDM_FINDNEXT                    40003
@@ -76,6 +80,11 @@
 #define IDM_QUOTE                       40024
 #define IDM_FILTERDEF                   40025
 #define IDM_FILTERALL                   40026
+#define IDM_EXPORTRHTML                 40027
+#define IDM_EXPORTPHTML                 40028
+#define IDM_EXPORTTXT                   40029
+
+#define CUSTOMRES                       300
 
 // Next default values for new objects
 // 

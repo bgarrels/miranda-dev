@@ -36,6 +36,7 @@ HANDLE hModulesLoaded, hOptionsInit, hPrebuildContactMenu, hServiceShowContactHi
 HANDLE *hEventIcons = NULL;
 int iconsNum;
 HANDLE hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon;
+HANDLE hPlusExIcon, hMinusExIcon;
 HANDLE hToolbarButton;
 HGENMENU hContactMenu, hDeleteContactMenu;
 bool g_SmileyAddAvail = false;
@@ -195,6 +196,16 @@ void InitIcolib()
 	sid.ptszDescription = LPGENT("Find Previous");
 	sid.iDefaultIndex = -IDI_FINDPREV;
 	hFindPrevIcon = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
+
+	sid.pszName = "BasicHistory_plusex";
+	sid.ptszDescription = LPGENT("Plus in export");
+	sid.iDefaultIndex = -IDI_PLUSEX;
+	hPlusExIcon = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
+
+	sid.pszName = "BasicHistory_minusex";
+	sid.ptszDescription = LPGENT("Minus in export");
+	sid.iDefaultIndex = -IDI_MINUSEX;
+	hMinusExIcon = (HANDLE)CallService(MS_SKIN2_ADDICON, 0, (LPARAM)&sid);
 }
 
 void InitUpdater()

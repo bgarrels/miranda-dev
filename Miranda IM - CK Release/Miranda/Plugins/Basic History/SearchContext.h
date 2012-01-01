@@ -17,10 +17,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
 #pragma once
-class SearchContext
+#include "EventList.h"
+
+class SearchContext : public EventList
 {
 public:
-	HWND hWnd;
 	HWND editWindow;
 	HWND findWindow;
 	HWND toolbarWindow;
@@ -48,6 +49,5 @@ public:
 	};
 
 	std::vector<MessageData> currentGroup;
-	std::vector<std::deque<HANDLE> > eventList;
 };
 

@@ -162,6 +162,9 @@ static HotkeyOptionsList g_HotkeyOptionsList[] = {
 	{ "basichistory_hot_onlyout", LPGENT("Switch Only Outgoing Messages"), LPGENT("History"), 0, 0, HISTORY_HK_ONLYOUT },
 	{ "basichistory_hot_onlygroup", LPGENT("Switch Only Selected Group"), LPGENT("History"), 0, 0, HISTORY_HK_ONLYGROUP },
 	{ "basichistory_hot_delete", LPGENT("Delete"), LPGENT("History"), 0, VK_DELETE, HISTORY_HK_DELETE },
+	{ "basichistory_hot_exrhtml", LPGENT("Export To Rich Html"), LPGENT("History"), 0, 0, HISTORY_HK_EXRHTML },
+	{ "basichistory_hot_exphtml", LPGENT("Export To Plain Html"), LPGENT("History"), 0, 0, HISTORY_HK_EXPHTML },
+	{ "basichistory_hot_extxt", LPGENT("Export To Txt"), LPGENT("History"), 0, 0, HISTORY_HK_EXTXT },
 };
 
 const int g_fontsSize = SIZEOF(g_FontOptionsList);

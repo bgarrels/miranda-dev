@@ -22,11 +22,15 @@
 #include <tom.h>
 #include <richole.h>
 #include <Shlobj.h>
+#include <shellapi.h>
 
 #include <map>
+#include <hash_set>
 #include <vector>
 #include <queue>
 #include <locale>
+#include <string>
+#include <fstream>
 
 #define MIRANDA_VER		0x0900
 #define MIRANDA_CUSTOM_LP
@@ -53,10 +57,10 @@
 
 #include <win2k.h>
 
-#include "m_updater.h"
-#include "m_smileyadd.h"
-#include "m_toolbar.h"
-#include "m_metacontacts.h"
+#include "sdk/m_updater.h"
+#include "sdk/m_smileyadd.h"
+#include "sdk/m_toolbar.h"
+#include "sdk/m_metacontacts.h"
 
 #define HISTORY_HK_FIND 100
 #define HISTORY_HK_FINDNEXT 101
@@ -68,6 +72,9 @@
 #define HISTORY_HK_ONLYOUT 107
 #define HISTORY_HK_DELETE 108
 #define HISTORY_HK_ONLYGROUP 109
+#define HISTORY_HK_EXRHTML 110
+#define HISTORY_HK_EXPHTML 111
+#define HISTORY_HK_EXTXT 112
 
 #define EVENTTYPE_STATUSCHANGE          25368
 #define EVENTTYPE_SMTPSIMPLE            2350
