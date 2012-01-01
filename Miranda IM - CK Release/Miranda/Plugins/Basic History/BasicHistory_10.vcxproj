@@ -191,7 +191,7 @@ copy "$(ProjectDir)Docs\*.*" "$(TargetDir)Docs\"</Command>
     <None Include="Docs\BasicHistory_licence.txt" />
     <None Include="Docs\BasicHistory_readme.txt" />
     <None Include="Docs\BasicHistory_translate.txt" />
-    <None Include="ReadMe.txt" />
+    <None Include="Docs\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HistoryWindow.h" />
