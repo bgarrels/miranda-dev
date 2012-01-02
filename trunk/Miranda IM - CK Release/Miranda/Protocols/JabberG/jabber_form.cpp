@@ -494,7 +494,7 @@ void JabberFormCreateUI( HWND hwndStatic, HXML xNode, int *formHeight, BOOL bCom
 			if ( !lstrcmp( xmlGetName( n ), _T("field"))) {
 				varStr = xmlGetAttrValue( n, _T("var"));
 				if (( typeName = xmlGetAttrValue( n, _T("type"))) != NULL ) {
- 					if (( label = xmlGetAttrValue( n, _T("label"))) != NULL )
+					if (( label = xmlGetAttrValue( n, _T("label"))) != NULL )
 						labelStr = mir_tstrdup( label );
 					else
 						labelStr = mir_tstrdup( varStr );
