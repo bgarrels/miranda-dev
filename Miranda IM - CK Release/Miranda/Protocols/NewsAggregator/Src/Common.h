@@ -51,6 +51,8 @@ Boston, MA 02111-1307, USA.
 #include "..\resource.h"
 
 #define MODULE	"NewsAggr"
+#define TAGSHELP "#<title># - The title of the item.\r\n#<description># - The item synopsis.\r\n#<link># - The URL of the item.\r\n#<author># - Email address of the author of the item.\r\n#<comments># - URL of a page for comments relating to the item.\r\n#<pubdate># - Indicates when the item was published.\r\n#<guid># - A string that uniquely identifies the item.\r\n#<category># - Specify one or more categories that the item belongs to."
+#define TAGSDEFAULT "#<title>#\r\n#<link>#\r\n#<description>#"
 extern HINSTANCE hInst;
 extern HWND hAddFeedDlg;
 extern UINT_PTR timerId;
