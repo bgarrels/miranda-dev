@@ -29,7 +29,7 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 			SetWindowText(hwndDlg, TranslateT("Add Feed"));
 			SetDlgItemText(hwndDlg, IDC_FEEDURL, _T("http://"));
 			SetDlgItemInt(hwndDlg, IDC_CHECKTIME, 60, false);
-			SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T("#<title>#\r\n#<link>#\r\n#<description>##<content>#"));
+			SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
 			TranslateDialogDefault(hwndDlg);
 			return TRUE;
 		}
@@ -113,6 +113,14 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 							EnableWindow(GetDlgItem(hwndDlg, IDC_PASSWORD), FALSE);
 						}
 					}
+					break;
+
+				case IDC_TAGHELP:
+					MessageBox(NULL, TranslateT(TAGSHELP), TranslateT("Feed Tag Help"), MB_OK);
+					break;
+
+				case IDC_RESET:
+					SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
 					break;
 			}
 			break;
@@ -255,7 +263,16 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 							EnableWindow(GetDlgItem(hwndDlg, IDC_LOGIN), FALSE);
 							EnableWindow(GetDlgItem(hwndDlg, IDC_PASSWORD), FALSE);
 						}
+						break;
 					}
+
+				case IDC_TAGHELP:
+					MessageBox(NULL, TranslateT(TAGSHELP), TranslateT("Feed Tag Help"), MB_OK);
+					break;
+
+				case IDC_RESET:
+					SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
+					break;
 			}
 			break;
 		}

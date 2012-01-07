@@ -25,6 +25,8 @@
 #define IDC_TAGSEDIT                    1049
 #define IDC_BUTTON2                     1050
 #define IDC_RESET                       1050
+#define IDC_BUTTON1                     1051
+#define IDC_TAGHELP                     1051
 
 // Next default values for new objects
 // 
@@ -32,7 +34,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        111
 #define _APS_NEXT_COMMAND_VALUE         40075
-#define _APS_NEXT_CONTROL_VALUE         1051
+#define _APS_NEXT_CONTROL_VALUE         1052
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
