@@ -30,7 +30,7 @@ VOID InitMenu()
 	mi.flags = CMIF_TCHAR|CMIF_ICONFROMICOLIB;
 
 	// adding main menu items
-	mi.ptszPopupName = _T(MODULE);
+	mi.ptszPopupName = _T("News Aggregator");
 	mi.popupPosition = 500099000;
 
 	hService[0] = CreateServiceFunction(MS_NEWSAGGR_CHECKALLFEEDS, CheckAllFeeds);

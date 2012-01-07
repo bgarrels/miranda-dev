@@ -122,7 +122,7 @@ VOID UpdateList (HWND hwndList)
 			lvI.mask = LVIF_TEXT | LVIF_PARAM;
 			lvI.iSubItem = 0;
 			DBVARIANT dbVar = {0};
-			DBGetContactSettingTString(hContact ,MODULE, "Nick", &dbVar);
+			DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
 			if (lstrcmp(dbVar.ptszVal, NULL) == 0)
 				DBFreeVariant(&dbVar);
 			else
@@ -132,7 +132,7 @@ VOID UpdateList (HWND hwndList)
 				ListView_InsertItem(hwndList, &lvI);
 				lvI.mask = LVIF_TEXT;
 				lvI.iSubItem = 1;
-				DBGetContactSettingTString(hContact ,MODULE, "URL", &dbVar);
+				DBGetContactSettingTString(hContact, MODULE, "URL", &dbVar);
 				if (lstrcmp(dbVar.ptszVal, NULL) == 0)
 					DBFreeVariant(&dbVar);
 				else
@@ -150,4 +150,213 @@ VOID UpdateList (HWND hwndList)
 VOID DeleteAllItems(HWND hwndList)
 {	
 	ListView_DeleteAllItems(hwndList);
+}
+
+time_t __stdcall DateToUnixTime(LPCTSTR stamp, BOOL FeedType)
+{
+	struct tm timestamp;
+	TCHAR date[9];
+	int i, y;
+	time_t t;
+
+	if ( stamp == NULL ) return ( time_t ) 0;
+
+	TCHAR *p = (TCHAR*)stamp;
+
+	if (FeedType)
+	{
+		// skip '-' chars
+		int si = 0, sj = 0;
+		while (1) {
+			if ( p[si] == _T('-') )
+				si++;
+			else
+				if ( !( p[sj++] = p[si++] ))
+					break;
+		};
+	}
+	else
+	{
+		TCHAR weekday[4], monthstr[4], timezonesign[2];
+		INT day, month, year, hour, min, sec, timezoneh, timezonem;
+		_stscanf( p, _T("%3s, %d %3s %d %d:%d:%d %1s%02d%02d"), &weekday, &day, &monthstr, &year, &hour, &min, &sec, &timezonesign, &timezoneh, &timezonem);
+		if (_tcsicmp(monthstr, _T("Jan")) ==0)
+			month = 1;
+		if (_tcsicmp(monthstr, _T("Feb")) ==0)
+			month = 2;
+		if (_tcsicmp(monthstr, _T("Mar")) ==0)
+			month = 3;
+		if (_tcsicmp(monthstr, _T("Apr")) ==0)
+			month = 4;
+		if (_tcsicmp(monthstr, _T("May")) ==0)
+			month = 5;
+		if (_tcsicmp(monthstr, _T("Jun")) ==0)
+			month = 6;
+		if (_tcsicmp(monthstr, _T("Jul")) ==0)
+			month = 7;
+		if (_tcsicmp(monthstr, _T("Aug")) ==0)
+			month = 8;
+		if (_tcsicmp(monthstr, _T("Sep")) ==0)
+			month = 9;
+		if (_tcsicmp(monthstr, _T("Oct")) ==0)
+			month = 10;
+		if (_tcsicmp(monthstr, _T("Nov")) ==0)
+			month = 11;
+		if (_tcsicmp(monthstr, _T("Dec")) ==0)
+			month = 12;
+		if (lstrcmp(timezonesign, _T("+")) ==0)
+			mir_sntprintf(p, 4+2+2+1+2+1+2+1+2+1, _T("%04d%02d%02dT%02d:%02d:%02d"), year, month, day, hour-timezoneh, min-timezonem, sec);
+		if (lstrcmp(timezonesign, _T("-")) ==0)
+			mir_sntprintf(p, 4+2+2+1+2+1+2+1+2+1, _T("%04d%02d%02dT%02d:%02d:%02d"), year, month, day, hour+timezoneh, min+timezonem, sec);
+	}
+	// Get the date part
+	for ( i=0; *p!='\0' && i<8 && isdigit( *p ); p++,i++ )
+		date[i] = *p;
+
+	// Parse year
+	if ( i == 6 ) {
+		// 2-digit year ( 1970-2069 )
+		y = ( date[0]-'0' )*10 + ( date[1]-'0' );
+		if ( y < 70 ) y += 100;
+	}
+	else if ( i == 8 ) {
+		// 4-digit year
+		y = ( date[0]-'0' )*1000 + ( date[1]-'0' )*100 + ( date[2]-'0' )*10 + date[3]-'0';
+		y -= 1900;
+	}
+	else
+		return ( time_t ) 0;
+	timestamp.tm_year = y;
+	// Parse month
+	timestamp.tm_mon = ( date[i-4]-'0' )*10 + date[i-3]-'0' - 1;
+	// Parse date
+	timestamp.tm_mday = ( date[i-2]-'0' )*10 + date[i-1]-'0';
+
+	// Skip any date/time delimiter
+	for ( ; *p!='\0' && !isdigit( *p ); p++ );
+
+	// Parse time
+	if ( _stscanf( p, _T("%d:%d:%d"), &timestamp.tm_hour, &timestamp.tm_min, &timestamp.tm_sec ) != 3 )
+		return ( time_t ) 0;
+
+	timestamp.tm_isdst = 0;	// DST is already present in _timezone below
+	t = mktime( &timestamp );
+
+	_tzset();
+	t -= _timezone;
+
+	if ( t >= 0 )
+		return t;
+	else
+		return ( time_t ) 0;
+}
+
+VOID CheckCurrentFeed (HANDLE hContact)
+{
+	char *szData = NULL;
+	DBVARIANT dbVar = {0};
+	DBGetContactSettingTString(hContact, MODULE, "URL", &dbVar);
+	if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+		DBFreeVariant(&dbVar);
+	else if (DBGetContactSettingWord(hContact, MODULE, "Status", ID_STATUS_OFFLINE) != ID_STATUS_OFFLINE)
+	{
+		GetNewsData(dbVar.ptszVal, &szData);
+		if (szData)
+		{
+			TCHAR *tszData = mir_a2t(szData);
+			int bytesParsed = 0;
+			HXML hXml = xi.parseString(tszData, &bytesParsed, NULL);
+			mir_free(tszData);
+			if(hXml != NULL)
+			{
+				HXML node = xi.getChild(hXml, 0);
+				if (_tcsicmp(xi.getName(node), _T("rss")) == 0)
+				{
+					for (int i = 0; i < xi.getAttrCount(node); i++)
+					{
+						if (_tcsicmp(xi.getAttrName(node, i), _T("version")) == 0)
+						{
+							TCHAR ver[MAX_PATH];
+							mir_sntprintf(ver, SIZEOF(ver), _T("RSS %s"), xi.getAttrValue(node, xi.getAttrName(node, i)));
+							DBWriteContactSettingTString(hContact, MODULE, "MirVer", ver);
+							break;
+						}
+					}
+					HXML chan = xi.getChild(node, 0);
+					for (int j = 0; j < xi.getChildCount(chan); j++)
+					{
+						HXML child = xi.getChild(chan, j);
+						if (_tcsicmp(xi.getName(child), _T("title")) == 0)
+						{
+							DBWriteContactSettingTString(hContact, MODULE, "FirstName", xi.getText(child));
+							continue;
+						}
+						if (_tcsicmp(xi.getName(child), _T("link")) == 0)
+						{
+							DBWriteContactSettingTString(hContact, MODULE, "Homepage", xi.getText(child));
+							continue;
+						}
+						if (_tcsicmp(xi.getName(child), _T("description")) == 0)
+						{
+							DBWriteContactSettingTString(hContact, MODULE, "About", xi.getText(child));
+							continue;
+						}
+						if (_tcsicmp(xi.getName(child), _T("language")) == 0)
+						{
+							DBWriteContactSettingTString(hContact, MODULE, "Language1", xi.getText(child));
+							continue;
+						}
+						if (_tcsicmp(xi.getName(child), _T("item")) == 0)
+						{
+							LPCTSTR title, link, datetime, descr;
+							for (int z = 0; z < xi.getChildCount(child); z++)
+							{
+								HXML itemval = xi.getChild(child, z);
+								if (_tcsicmp(xi.getName(itemval), _T("title")) == 0)
+								{
+									title = xi.getText(itemval);
+									continue;
+								}
+								if (_tcsicmp(xi.getName(itemval), _T("link")) == 0)
+								{
+									link = xi.getText(itemval);
+									continue;
+								}
+								if (_tcsicmp(xi.getName(itemval), _T("pubDate")) == 0)
+								{
+									datetime = xi.getText(itemval);
+									continue;
+								}
+								if (_tcsicmp(xi.getName(itemval), _T("description")) == 0)
+								{
+									descr = xi.getText(itemval);
+									continue;
+								}
+							}
+							TCHAR message[MAX_PATH];
+							mir_sntprintf(message, SIZEOF(message), _T("%s\n%s\n%s"), title, link, descr);
+							char* pszUtf = mir_utf8encodeT(message);
+
+							time_t stamp = DateToUnixTime(datetime, 0);
+							DBEVENTINFO dbei = {0};
+							dbei.cbSize = sizeof(dbei);
+							dbei.eventType = EVENTTYPE_MESSAGE;
+							dbei.flags = DBEF_UTF;
+							dbei.szModule = MODULE;
+							dbei.timestamp = stamp;//time(NULL);
+							dbei.cbBlob = lstrlenA(pszUtf) + 1;
+							dbei.pBlob = (PBYTE)pszUtf;
+							CallService(MS_DB_EVENT_ADD, (WPARAM)hContact, (LPARAM)&dbei);
+							mir_free(pszUtf);
+						}
+
+					}
+				}
+				else if (_tcsicmp(xi.getName(node), _T("feed")) == 0)
+				{
+					DBWriteContactSettingTString(hContact, MODULE, "MirVer", _T("Atom 3"));
+				}
+			}
+		}
+	}
 }

@@ -155,122 +155,7 @@ INT_PTR CheckAllFeeds(WPARAM wParam,LPARAM lParam)
 	{
 		if(IsMyContact(hContact)) 
 		{
-			char *szData = NULL;
-			DBVARIANT dbVar = {0};
-			DBGetContactSettingTString(hContact ,MODULE, "URL", &dbVar);
-			if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-				DBFreeVariant(&dbVar);
-			else if (DBGetContactSettingWord(hContact ,MODULE, "Status", ID_STATUS_OFFLINE) != ID_STATUS_OFFLINE)
-			{
-				GetNewsData(dbVar.ptszVal, &szData);
-				if (szData)
-				{
-					TCHAR *tszData = mir_a2t(szData);
-					int bytesParsed = 0;
-					HXML hXml = xi.parseString(tszData, &bytesParsed, NULL);
-					mir_free(tszData);
-					if(hXml != NULL)
-					{
-						HXML node = xi.getChild(hXml, 0);
-						if (_tcsicmp(xi.getName(node), _T("rss")) == 0)
-						{
-							for (int i = 0; i < xi.getAttrCount(node); i++)
-							{
-								if (_tcsicmp(xi.getAttrName(node, i), _T("version")) == 0)
-								{
-									TCHAR ver[MAX_PATH];
-									mir_sntprintf(ver, SIZEOF(ver), _T("RSS %s"), xi.getAttrValue(node, xi.getAttrName(node, i)));
-									DBWriteContactSettingTString(hContact, MODULE, "MirVer", ver);
-									break;
-								}
-							}
-							HXML chan = xi.getChild(node, 0);
-							for (int j = 0; j < xi.getChildCount(chan); j++)
-							{
-								HXML child = xi.getChild(chan, j);
-								if (_tcsicmp(xi.getName(child), _T("title")) == 0)
-								{
-									DBWriteContactSettingTString(hContact, MODULE, "FirstName", xi.getText(child));
-									continue;
-								}
-								if (_tcsicmp(xi.getName(child), _T("link")) == 0)
-								{
-									DBWriteContactSettingTString(hContact, MODULE, "Homepage", xi.getText(child));
-									continue;
-								}
-								if (_tcsicmp(xi.getName(child), _T("description")) == 0)
-								{
-									DBWriteContactSettingTString(hContact, MODULE, "About", xi.getText(child));
-									continue;
-								}
-								if (_tcsicmp(xi.getName(child), _T("language")) == 0)
-								{
-									DBWriteContactSettingTString(hContact, MODULE, "Language1", xi.getText(child));
-									continue;
-								}
-								if (_tcsicmp(xi.getName(child), _T("item")) == 0)
-								{
-									LPCTSTR title, link, timet, descr;
-									for (int z = 0; z < xi.getChildCount(child); z++)
-									{
-										HXML itemval = xi.getChild(child, z);
-										if (_tcsicmp(xi.getName(itemval), _T("title")) == 0)
-										{
-											title = xi.getText(itemval);
-											continue;
-										}
-										if (_tcsicmp(xi.getName(itemval), _T("link")) == 0)
-										{
-											link = xi.getText(itemval);
-											continue;
-										}
-										if (_tcsicmp(xi.getName(itemval), _T("pubDate")) == 0)
-										{
-											timet = xi.getText(itemval);
-											continue;
-										}
-										if (_tcsicmp(xi.getName(itemval), _T("description")) == 0)
-										{
-											descr = xi.getText(itemval);
-											continue;
-										}
-									}
-									TCHAR message[MAX_PATH];
-									mir_sntprintf(message, SIZEOF(message), _T("%s\n%s\n%s"), title, link, descr);
-									char* pszUtf = mir_utf8encodeT(message);
-
-									DBEVENTINFO dbei = {0};
-									dbei.cbSize = sizeof(dbei);
-									dbei.eventType = EVENTTYPE_MESSAGE;
-									dbei.flags = DBEF_UTF;
-									dbei.szModule = MODULE;
-									dbei.timestamp = time(NULL);
-									dbei.cbBlob = lstrlenA(pszUtf) + 1;
-									dbei.pBlob = (PBYTE)pszUtf;
-									CallService(MS_DB_EVENT_ADD, (WPARAM)hContact, (LPARAM)&dbei);
-									mir_free(pszUtf);
-								}
-
-							}
-						}
-						else if (_tcsicmp(xi.getName(node), _T("feed")) == 0)
-						{
-							DBWriteContactSettingTString(hContact, MODULE, "MirVer", _T("Atom 3"));
-
-
-						}
-							//text = xi.getText(node);
-						//HXML node = xi.getChildByPath(hXml, _T("NewsAggr"), 0);
-						//if(node != NULL)
-						//{
-							//HXML chan = xi.getChildByPath(node, _T("channel"), 0);
-							//HXML tit = xi.getChildByPath(chan, _T("title"), 0);
-							//LPCTSTR title = xi.getText(tit);
-							//TCHAR t[MAX_PATH];
-							//_tcscpy(t, title);
-					}
-				}
-			}
+			CheckCurrentFeed(hContact);
 		}
 		hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
 	}
@@ -297,5 +182,7 @@ INT_PTR ExportFeeds(WPARAM wParam,LPARAM lParam)
 
 INT_PTR CheckFeed(WPARAM wParam,LPARAM lParam)
 {
+	HANDLE hContact = (HANDLE)wParam;
+	CheckCurrentFeed(hContact);
 	return 0;
 }
