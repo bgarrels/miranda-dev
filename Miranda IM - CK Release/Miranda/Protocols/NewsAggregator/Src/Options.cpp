@@ -83,6 +83,8 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 							DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
 							GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "MsgFormat", str);
+							int status = CallProtoService(MODULE, PS_GETSTATUS, 0, 0);
+							DBWriteContactSettingWord(hContact, MODULE, "Status", status);
 							if (IsDlgButtonChecked(hwndDlg, IDC_USEAUTH))
 							{
 								DBWriteContactSettingByte(hContact, MODULE, "UseAuth", 1);
@@ -322,12 +324,12 @@ INT_PTR CALLBACK UpdateNotifyOptsProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 							if(IsMyContact(hContact)) 
 							{
 								DBVARIANT dbVar = {0};
-								DBGetContactSettingTString(hContact ,MODULE, "Nick", &dbVar);
+								DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
 								if (lstrcmp(dbVar.ptszVal, NULL) == 0)
 									DBFreeVariant(&dbVar);
 								else if (lstrcmp(dbVar.ptszVal, nick) == 0)
 								{
-									DBGetContactSettingTString(hContact ,MODULE, "URL", &dbVar);
+									DBGetContactSettingTString(hContact, MODULE, "URL", &dbVar);
 									if (lstrcmp(dbVar.ptszVal, NULL) == 0)
 										DBFreeVariant(&dbVar);
 									else if (lstrcmp(dbVar.ptszVal, url) == 0)

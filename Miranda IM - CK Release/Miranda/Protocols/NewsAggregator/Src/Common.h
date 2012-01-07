@@ -96,6 +96,8 @@ BOOL IsMyContact(HANDLE hContact);
 VOID GetNewsData(TCHAR *szUrl, char** szData);
 VOID UpdateList (HWND hwndList);
 VOID DeleteAllItems(HWND hwndList);
+time_t __stdcall DateToUnixTime(LPCTSTR stamp, BOOL FeedType);
+VOID CheckCurrentFeed (HANDLE hContact);
 
 // ===============  NewsAggr SERVICES  ================
 // Check all Feeds info
