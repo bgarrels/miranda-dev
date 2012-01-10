@@ -20,6 +20,7 @@ Boston, MA 02111-1307, USA.
 #include "common.h"
 
 HANDLE hNetlibUser = NULL, hNetlibHttp;
+BOOL UpdateListFlag = FALSE;
 
 BOOL IsMyContact(HANDLE hContact)
 {
@@ -114,11 +115,12 @@ VOID UpdateList (HWND hwndList)
 	// Initialize LVITEM members that are common to all
 	// items. 
 	HANDLE hContact= (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
+	int i = 0;
 	while (hContact != NULL) 
 	{
 		if(IsMyContact(hContact)) 
 		{
-			int i = 0;
+			UpdateListFlag = TRUE;
 			lvI.mask = LVIF_TEXT | LVIF_PARAM;
 			lvI.iSubItem = 0;
 			DBVARIANT dbVar = {0};
@@ -139,12 +141,15 @@ VOID UpdateList (HWND hwndList)
 				{
 					lvI.pszText = dbVar.ptszVal;
 					ListView_SetItem(hwndList, &lvI);
+					i += 1;
+					BYTE State = DBGetContactSettingByte(hContact, MODULE, "State", 1);
+					ListView_SetCheckState(hwndList, lvI.iItem, State);
 				}
 			}
-			i += 1;
 		}
 		hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
 	}
+	UpdateListFlag = FALSE;
 }
 
 VOID DeleteAllItems(HWND hwndList)
@@ -152,7 +157,7 @@ VOID DeleteAllItems(HWND hwndList)
 	ListView_DeleteAllItems(hwndList);
 }
 
-time_t __stdcall DateToUnixTime(LPCTSTR stamp, BOOL FeedType)
+time_t __stdcall DateToUnixTime(TCHAR* stamp, BOOL FeedType)
 {
 	struct tm timestamp;
 	TCHAR date[9];
@@ -161,7 +166,7 @@ time_t __stdcall DateToUnixTime(LPCTSTR stamp, BOOL FeedType)
 
 	if ( stamp == NULL ) return ( time_t ) 0;
 
-	TCHAR *p = (TCHAR*)stamp;
+	TCHAR *p = stamp;
 
 	if (FeedType)
 	{
@@ -251,14 +256,48 @@ time_t __stdcall DateToUnixTime(LPCTSTR stamp, BOOL FeedType)
 		return ( time_t ) 0;
 }
 
-VOID CheckCurrentFeed (HANDLE hContact)
+TCHAR* StrReplace (TCHAR* Search, TCHAR* Replace, TCHAR* Resource)
+{
+	int i = 0;
+	int SearchLen = (int)_tcslen(Search);
+	TCHAR* Work = mir_tstrdup(Replace);
+	int ReplaceLen = (int)_tcslen(Work);
+
+	TCHAR* Pointer = _tcsstr(Resource, Search);
+
+	while (Pointer != NULL)
+	{
+		int PointerLen = (int)_tcslen(Pointer);
+		int ResourceLen = (int)_tcslen(Resource);
+
+		TCHAR* NewText = (TCHAR*)mir_calloc((ResourceLen - SearchLen + ReplaceLen + 1)*sizeof(TCHAR));
+
+		_tcsncpy(NewText, Resource, ResourceLen - PointerLen);
+		_tcscat(NewText, Work);
+		_tcscat(NewText, Pointer + SearchLen);
+
+		Resource = (TCHAR*)mir_realloc(Resource, (ResourceLen - SearchLen + ReplaceLen + 1)*sizeof(TCHAR));
+
+		for (i = 0; i < (ResourceLen - SearchLen + ReplaceLen); i++)
+			Resource[i] = NewText[i];
+		Resource[i] = 0;
+		mir_free(NewText);
+
+		Pointer = _tcsstr(Resource + (ResourceLen - PointerLen + ReplaceLen), Search);
+	}
+	mir_free(Work);
+
+	return Resource;
+}
+
+VOID CheckCurrentFeed(HANDLE hContact)
 {
 	char *szData = NULL;
 	DBVARIANT dbVar = {0};
 	DBGetContactSettingTString(hContact, MODULE, "URL", &dbVar);
 	if (lstrcmp(dbVar.ptszVal, NULL) == 0)
 		DBFreeVariant(&dbVar);
-	else if (DBGetContactSettingWord(hContact, MODULE, "Status", ID_STATUS_OFFLINE) != ID_STATUS_OFFLINE)
+	else if ((DBGetContactSettingWord(hContact, MODULE, "Status", ID_STATUS_OFFLINE) != ID_STATUS_OFFLINE) && DBGetContactSettingByte(hContact, MODULE, "State", 1) != 0)
 	{
 		GetNewsData(dbVar.ptszVal, &szData);
 		if (szData)
@@ -308,33 +347,92 @@ VOID CheckCurrentFeed (HANDLE hContact)
 						}
 						if (_tcsicmp(xi.getName(child), _T("item")) == 0)
 						{
-							LPCTSTR title, link, datetime, descr;
+							TCHAR *title = NULL, *link = NULL, *datetime = NULL, *descr = NULL, *author = NULL, *comments = NULL, *guid = NULL, *category = NULL;
 							for (int z = 0; z < xi.getChildCount(child); z++)
 							{
 								HXML itemval = xi.getChild(child, z);
 								if (_tcsicmp(xi.getName(itemval), _T("title")) == 0)
 								{
-									title = xi.getText(itemval);
+									title = (TCHAR*)xi.getText(itemval);
 									continue;
 								}
 								if (_tcsicmp(xi.getName(itemval), _T("link")) == 0)
 								{
-									link = xi.getText(itemval);
+									link = (TCHAR*)xi.getText(itemval);
 									continue;
 								}
 								if (_tcsicmp(xi.getName(itemval), _T("pubDate")) == 0)
 								{
-									datetime = xi.getText(itemval);
+									datetime = (TCHAR*)xi.getText(itemval);
 									continue;
 								}
 								if (_tcsicmp(xi.getName(itemval), _T("description")) == 0)
 								{
-									descr = xi.getText(itemval);
+									descr = (TCHAR*)xi.getText(itemval);
+									continue;
+								}
+								if (_tcsicmp(xi.getName(itemval), _T("author")) == 0)
+								{
+									author = (TCHAR*)xi.getText(itemval);
+									continue;
+								}
+								if (_tcsicmp(xi.getName(itemval), _T("comments")) == 0)
+								{
+									comments = (TCHAR*)xi.getText(itemval);
+									continue;
+								}
+								if (_tcsicmp(xi.getName(itemval), _T("guid")) == 0)
+								{
+									guid = (TCHAR*)xi.getText(itemval);
+									continue;
+								}
+								if (_tcsicmp(xi.getName(itemval), _T("category")) == 0)
+								{
+									category = (TCHAR*)xi.getText(itemval);
 									continue;
 								}
 							}
-							TCHAR message[MAX_PATH];
-							mir_sntprintf(message, SIZEOF(message), _T("%s\n%s\n%s"), title, link, descr);
+							TCHAR* message;
+							DBVARIANT dbVar = {0};
+							DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbVar);
+							if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+							{
+								message = _T(TAGSDEFAULT);
+								DBFreeVariant(&dbVar);
+							}
+							else
+							{
+								message = dbVar.ptszVal;
+							}
+							if (lstrcmp(title, NULL) == 0)
+								message = StrReplace(_T("#<title>#"), TranslateT("empty"), message);
+							else
+								message = StrReplace(_T("#<title>#"), title, message);
+							if (lstrcmp(link, NULL) == 0)
+								message = StrReplace(_T("#<link>#"), TranslateT("empty"), message);
+							else
+								message = StrReplace(_T("#<link>#"), link, message);
+							if (lstrcmp(descr, NULL) == 0)
+								message = StrReplace(_T("#<description>#"), TranslateT("empty"), message);
+							else
+								message = StrReplace(_T("#<description>#"), descr, message);
+							if (lstrcmp(author, NULL) == 0)
+								message = StrReplace(_T("#<author>#"), TranslateT("empty"), message);
+							else
+								message = StrReplace(_T("#<author>#"), author, message);
+							if (lstrcmp(comments, NULL) == 0)
+								message = StrReplace(_T("#<comments>#"), TranslateT("empty"), message);
+							else
+								message = StrReplace(_T("#<comments>#"), comments, message);
+							if (lstrcmp(guid, NULL) == 0)
+								message = StrReplace(_T("#<guid>#"), TranslateT("empty"), message);
+							else
+								message = StrReplace(_T("#<guid>#"), guid, message);
+							if (lstrcmp(category, NULL) == 0)
+								message = StrReplace(_T("#<category>#"), TranslateT("empty"), message);
+							else
+								message = StrReplace(_T("#<category>#"), category, message);
+
 							char* pszUtf = mir_utf8encodeT(message);
 
 							time_t stamp = DateToUnixTime(datetime, 0);

@@ -80,6 +80,8 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 							lvI.pszText = str;
 							lvI.iSubItem = 1;
 							ListView_SetItem(hwndList, &lvI);
+							ListView_SetCheckState(hwndList, lvI.iItem, true);
+							DBWriteContactSettingByte(hContact, MODULE, "State", 1);
 							DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
 							GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "MsgFormat", str);
@@ -120,7 +122,8 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 					break;
 
 				case IDC_RESET:
-					SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
+					if (MessageBox(NULL, TranslateT("Are you sure?"), TranslateT("Tags Mask Reset"), MB_YESNO | MB_ICONWARNING) == IDYES)
+						SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
 					break;
 			}
 			break;
@@ -271,7 +274,8 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 					break;
 
 				case IDC_RESET:
-					SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
+					if (MessageBox(NULL, TranslateT("Are you sure?"), TranslateT("Tags Mask Reset"), MB_YESNO | MB_ICONWARNING) == IDYES)
+						SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
 					break;
 			}
 			break;
@@ -302,6 +306,7 @@ INT_PTR CALLBACK UpdateNotifyOptsProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 	case WM_INITDIALOG:
 		{
 			TranslateDialogDefault(hwndDlg);
+			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, 0);
 			UpdateList(hwndList);
 			return TRUE;
 		}
@@ -371,7 +376,21 @@ INT_PTR CALLBACK UpdateNotifyOptsProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 			switch (hdr->code)
 			{
 				case PSN_APPLY:
-					break;
+					{
+						HANDLE hContact= (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
+						int i = 0;
+						while (hContact != NULL) 
+						{
+							if(IsMyContact(hContact)) 
+							{
+								DBWriteContactSettingByte(hContact, MODULE, "State", ListView_GetCheckState(hwndList, i));
+								i += 1;
+							}
+							hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
+						}
+						break;
+					}
+
 				case NM_DBLCLK:
 					{
 						ItemInfo SelItem = {0};
@@ -386,8 +405,17 @@ INT_PTR CALLBACK UpdateNotifyOptsProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 						}
 						break;
 					}
-			}
 
+			case LVN_ITEMCHANGED:
+				{
+					NMLISTVIEW *nmlv = (NMLISTVIEW *)lParam;
+					if(((nmlv->uNewState ^ nmlv->uOldState) & LVIS_STATEIMAGEMASK) && !UpdateListFlag)
+					{
+						SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+					}
+					break;
+				}
+			}
 		}
 	}//end* switch (msg)
 	return FALSE;

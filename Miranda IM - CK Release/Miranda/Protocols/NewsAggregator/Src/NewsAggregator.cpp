@@ -23,11 +23,12 @@ HINSTANCE hInst = NULL;
 PLUGINLINK *pluginLink;
 int hLangpack;
 struct MM_INTERFACE mmi;
-HANDLE hOptHook = NULL,  hLoadHook = NULL, hOnPreShutdown = NULL, hPrebuildMenuHook = NULL;
+HANDLE hOptHook = NULL,  hLoadHook = NULL, hOnPreShutdown = NULL, hPrebuildMenuHook = NULL, hPackUpdaterFolder = NULL;
 HANDLE hProtoService[6];
 HWND hAddFeedDlg;
 XML_API xi = {0};
 struct UTF8_INTERFACE utfi;
+TCHAR tszRoot[MAX_PATH] = {0};
 
 PLUGININFOEX pluginInfoEx = {
     sizeof(PLUGININFOEX),
@@ -75,7 +76,17 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	mir_getXI(&xi);
 	mir_getUTFI(&utfi);
 
-	//pcli = ( CLIST_INTERFACE* )CallService(MS_CLIST_RETRIEVE_INTERFACE, 0, (LPARAM)hInst);
+	if (ServiceExists(MS_FOLDERS_REGISTER_PATH))
+	{
+		hPackUpdaterFolder = FoldersRegisterCustomPathT("News Aggregator", "Avatars", MIRANDA_USERDATAT _T("\\Avatars\\")_T(DEFAULT_AVATARS_FOLDER));
+		FoldersGetCustomPathT(hPackUpdaterFolder, tszRoot, MAX_PATH, _T(""));
+	}
+	else
+	{
+		TCHAR* tszFolder = Utils_ReplaceVarsT(_T("%miranda_userdata%\\"_T(DEFAULT_AVATARS_FOLDER)));
+		lstrcpyn(tszRoot, tszFolder, SIZEOF(tszRoot));
+		mir_free(tszFolder);
+	}
 	
 	// Add options hook
 	hOptHook = HookEvent(ME_OPT_INITIALISE, OptInit);
