@@ -55,9 +55,9 @@
 #include "m_message.h"
 #include "statusmodes.h"
 #include "win2k.h"
-
 #include "resource.h"
 
+//ExternalApi
 #include "m_updater.h"
 
 #include "utils.h"
