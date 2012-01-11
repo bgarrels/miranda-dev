@@ -291,6 +291,56 @@ TCHAR* StrReplace (TCHAR* Search, TCHAR* Replace, TCHAR* Resource)
 	return Resource;
 }
 
+BOOL DownloadFile(LPCTSTR tszURL, LPCTSTR tszLocal)
+{
+	HANDLE hFile = NULL;
+	DWORD dwBytes;
+
+	NETLIBHTTPREQUEST nlhr = {0};
+	nlhr.cbSize = sizeof(nlhr);
+	nlhr.requestType = REQUEST_GET;
+	nlhr.flags = NLHRF_DUMPASTEXT | NLHRF_HTTP11;
+	char* szUrl = mir_t2a(tszURL);
+	nlhr.szUrl = szUrl;
+	nlhr.headersCount = 4;
+	nlhr.headers=(NETLIBHTTPHEADER*)mir_alloc(sizeof(NETLIBHTTPHEADER)*nlhr.headersCount);
+	nlhr.headers[0].szName   = "User-Agent";
+	nlhr.headers[0].szValue = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
+	nlhr.headers[1].szName  = "Connection";
+	nlhr.headers[1].szValue = "close";
+	nlhr.headers[2].szName  = "Cache-Control";
+	nlhr.headers[2].szValue = "no-cache";
+	nlhr.headers[3].szName  = "Pragma";
+	nlhr.headers[3].szValue = "no-cache";
+
+	bool ret = false;
+	NETLIBHTTPREQUEST* pReply = NULL;
+	pReply = (NETLIBHTTPREQUEST*)CallService(MS_NETLIB_HTTPTRANSACTION, (WPARAM)hNetlibUser,(LPARAM)&nlhr);
+
+	if(pReply)
+	{
+		if((200 == pReply->resultCode) && (pReply->dataLength > 0)) 
+		{
+			hFile = CreateFile(tszLocal, GENERIC_READ | GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+			WriteFile(hFile, pReply->pData, (DWORD)pReply->dataLength, &dwBytes, NULL);
+			ret = true;
+		}
+		CallService(MS_NETLIB_FREEHTTPREQUESTSTRUCT,0,(LPARAM)pReply);
+	}
+
+	mir_free(szUrl);
+	mir_free(nlhr.headers);
+
+	if (hFile)
+		CloseHandle(hFile);
+
+	return ret;
+}
+
+size_t PathToRelative(const TCHAR *pSrc, TCHAR *pOut)
+{	return CallService( MS_UTILS_PATHTORELATIVET, (WPARAM)pSrc, (LPARAM)pOut );
+}
+
 VOID CheckCurrentFeed(HANDLE hContact)
 {
 	char *szData = NULL;
@@ -363,8 +413,17 @@ VOID CheckCurrentFeed(HANDLE hContact)
 								HXML imageval = xi.getChild(child, x);
 								if (_tcsicmp(xi.getName(imageval), _T("url")) == 0)
 								{
-									//сделать установление аватара
-									//(TCHAR*)xi.getText(imageval);
+									TCHAR path[MAX_PATH], *filename;
+									TCHAR *ext = _tcsrchr((TCHAR*)xi.getText(imageval), _T('.')) + 1;
+									DBVARIANT dbVar = {0};
+									DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
+									if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+										DBFreeVariant(&dbVar);
+									else
+										filename = dbVar.ptszVal;
+									mir_sntprintf(path, SIZEOF(path), _T("%s\\%s.%s"), tszRoot, filename, ext);
+									if (DownloadFile((TCHAR*)xi.getText(imageval), path))
+										CallService(MS_AV_SETAVATAR, (WPARAM)hContact, (LPARAM)path);
 									break;
 								}
 							}
@@ -456,6 +515,12 @@ VOID CheckCurrentFeed(HANDLE hContact)
 								message = StrReplace(_T("#<category>#"), TranslateT("empty"), message);
 							else
 								message = StrReplace(_T("#<category>#"), category, message);
+							message = StrReplace(_T("&amp;"), _T("&"), message);
+							message = StrReplace(_T("&apos;"), _T("\'"), message);
+							message = StrReplace(_T("&gt;"), _T(">"), message);
+							message = StrReplace(_T("&lt;"), _T("<"), message);
+							message = StrReplace(_T("&quot;"), _T("\""), message);
+							message = StrReplace(_T("<br>"), _T("\n"), message);
 
 							char* pszUtf = mir_utf8encodeT(message);
 
