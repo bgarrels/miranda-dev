@@ -83,7 +83,6 @@ void FacebookProto::ChangeStatus(void*)
 			facy.home();
 			facy.reconnect();
 
-//			facy.delete_friends();
 			facy.load_friends();
 
 			setDword( "LogonTS", (DWORD)time(NULL) );

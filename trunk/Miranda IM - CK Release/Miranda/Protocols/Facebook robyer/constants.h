@@ -29,13 +29,13 @@ Last change on : $Date$
 
 // Version management
 #include "build.h"
-#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 6, 0)
+#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 6, 1)
 #define __PRODUCT_DWORD             PLUGIN_MAKE_VERSION(0, 9, 14, 0)
-#define __VERSION_STRING            "0.0.6.0"
+#define __VERSION_STRING            "0.0.6.1"
 #define __PRODUCT_STRING            "0.9.14.0"
-#define __VERSION_VS_FILE           0,0,6,0
+#define __VERSION_VS_FILE           0,0,6,1
 #define __VERSION_VS_PROD           0,9,14,0
-#define __VERSION_VS_FILE_STRING    "0, 0, 6, 0"
+#define __VERSION_VS_FILE_STRING    "0, 0, 6, 1"
 #define __VERSION_VS_PROD_STRING    "0, 9, 14, 0"
 
 // Product management
@@ -77,6 +77,8 @@ Last change on : $Date$
 #define DEFAULT_BIG_AVATARS				0
 #define DEFAULT_DISCONNECT_CHAT			0
 #define DEFAULT_PARSE_MESSAGES			0
+#define DEFAULT_MAP_STATUSES			0
+#define DEFAULT_LOAD_MOBILE				0
 
 #define DEFAULT_EVENT_NOTIFICATIONS_ENABLE  1
 #define DEFAULT_EVENT_FEEDS_ENABLE          1
@@ -109,7 +111,7 @@ Last change on : $Date$
 #define FACEBOOK_REQUEST_MESSAGE_SEND           300 // sending message
 #define FACEBOOK_REQUEST_MESSAGES_RECEIVE       301 // receiving messages
 #define FACEBOOK_REQUEST_TYPING_SEND            304 // sending typing notification
-#define FACEBOOK_REQUEST_SETTINGS               305 // setting chat visibility
+#define FACEBOOK_REQUEST_VISIBILITY             305 // setting chat visibility
 #define FACEBOOK_REQUEST_TABS					306 // closing message window, setting chat visibility
 #define	FACEBOOK_REQUEST_ASYNC					307 // marking messages read and getting other things
 #define FACEBOOK_REQUEST_ASYNC_GET				308 // GET version of async request

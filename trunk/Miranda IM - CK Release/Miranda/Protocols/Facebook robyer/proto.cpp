@@ -127,7 +127,7 @@ DWORD_PTR FacebookProto::GetCaps( int type, HANDLE hContact )
 		else
 			return PF1_IM | PF1_MODEMSGRECV;
 	case PFLAGNUM_2:
-		return PF2_ONLINE | PF2_INVISIBLE; // | PF2_IDLE | PF2_SHORTAWAY;
+		return PF2_ONLINE | PF2_INVISIBLE | PF2_ONTHEPHONE; // | PF2_IDLE | PF2_SHORTAWAY;
 	case PFLAGNUM_3:
 		if ( getByte( FACEBOOK_KEY_SET_MIRANDA_STATUS, 0 ) )
 			return PF2_ONLINE; // | PF2_SHORTAWAY;
@@ -135,6 +135,8 @@ DWORD_PTR FacebookProto::GetCaps( int type, HANDLE hContact )
 			return 0;
 	case PFLAGNUM_4:
 		return PF4_FORCEAUTH | PF4_NOCUSTOMAUTH /*| PF4_SUPPORTIDLE*/ | PF4_IMSENDUTF | PF4_AVATARS | PF4_SUPPORTTYPING | PF4_NOAUTHDENYREASON | PF4_IMSENDOFFLINE;
+	case PFLAGNUM_5:
+		return PF2_ONTHEPHONE;
 	case PFLAG_MAXLENOFMESSAGE:
 		return FACEBOOK_MESSAGE_LIMIT;
 	case PFLAG_UNIQUEIDTEXT:
@@ -166,7 +168,7 @@ int FacebookProto::SetStatus( int new_status )
 	switch ( new_status )
 	{
 	case ID_STATUS_INVISIBLE:
-	case ID_STATUS_OFFLINE:		
+	case ID_STATUS_OFFLINE:	
 		m_iDesiredStatus = new_status;
 		break;
 
@@ -176,6 +178,11 @@ int FacebookProto::SetStatus( int new_status )
 		break;
 	
 	default:
+		m_iDesiredStatus = ID_STATUS_INVISIBLE;
+		if (DBGetContactSettingByte(NULL,m_szModuleName,FACEBOOK_KEY_MAP_STATUSES, DEFAULT_MAP_STATUSES))
+			break;
+	case ID_STATUS_ONLINE:
+	case ID_STATUS_FREECHAT:
 		m_iDesiredStatus = ID_STATUS_ONLINE;
 		break;
 	}
@@ -312,7 +319,9 @@ int FacebookProto::OnPrebuildContactMenu(WPARAM wParam,LPARAM lParam)
 {
 	HANDLE hContact = reinterpret_cast<HANDLE>(wParam);
 	if(IsMyContact(hContact, true)) {
-		ShowContactMenus(true, DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) > 0);
+		bool hide = (DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0)
+			|| DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_CONTACT_TYPE, 0) );
+		ShowContactMenus(true, hide);
 	}
 
 	return 0;
@@ -429,6 +438,9 @@ int FacebookProto::RemoveFriend(WPARAM wParam,LPARAM lParam)
 		return 0;
 	}
 	
+	if (isOffline())
+		return 0;
+
 	if (MessageBox( 0, TranslateT("Are you sure?"), TranslateT("Delete contact from server list"), MB_ICONWARNING | MB_YESNO | MB_DEFBUTTON2 ) != IDYES)
 		return 0;
 
@@ -482,7 +494,7 @@ int FacebookProto::AddFriend(WPARAM wParam,LPARAM lParam)
 
 			DBWriteContactSettingByte(hContact,m_szModuleName,FACEBOOK_KEY_DELETE_NEXT,1);
 			facy.client_notify(TranslateT("Contact will be deleted at next login."));*/
-			NotifyEvent(TranslateT("Deleting contact"), TranslateT("Contact wasn't added, because you are not connected."), NULL, FACEBOOK_EVENT_OTHER, NULL);
+			NotifyEvent(TranslateT("Adding contact"), TranslateT("Contact wasn't added, because you are not connected."), NULL, FACEBOOK_EVENT_OTHER, NULL);
 		}
 	}
 

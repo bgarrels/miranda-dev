@@ -68,7 +68,7 @@ HANDLE FacebookProto::ContactIDToHContact(std::string user_id)
 	return 0;
 }
 
-HANDLE FacebookProto::AddToContactList(facebook_user* fbu, bool dont_check)
+HANDLE FacebookProto::AddToContactList(facebook_user* fbu, bool dont_check, const char *new_name)
 {
 	HANDLE hContact;
 
@@ -98,7 +98,13 @@ HANDLE FacebookProto::AddToContactList(facebook_user* fbu, bool dont_check)
 				DBWriteContactSettingTString(hContact,"CList","Group",dbv.ptszVal);
 				DBFreeVariant(&dbv);
 			}
-			
+
+			if (strlen(new_name) > 0) {
+				DBWriteContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NAME, new_name);
+				DBWriteContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NICK, new_name);
+				DBWriteContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_CONTACT_TYPE, 1); // We suppose he is not on server list
+			}						
+
 			if (getByte(FACEBOOK_KEY_DISABLE_STATUS_NOTIFY, 0))
 				CallService(MS_IGNORE_IGNORE, (WPARAM)hContact, (LPARAM)IGNOREEVENT_USERONLINE);
 
