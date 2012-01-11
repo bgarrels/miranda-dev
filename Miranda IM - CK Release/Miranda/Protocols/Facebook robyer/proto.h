@@ -136,7 +136,7 @@ public:
 	int  __cdecl OnPreShutdown(WPARAM,LPARAM);
 	int  __cdecl OnPrebuildContactMenu(WPARAM,LPARAM);
 	// TODO RM: Chat handling
-	/*  int  __cdecl OnChatOutgoing(WPARAM,LPARAM);
+	/*int  __cdecl OnChatOutgoing(WPARAM,LPARAM);
 	int  __cdecl OnJoinChat(WPARAM,LPARAM);
 	int  __cdecl OnLeaveChat(WPARAM,LPARAM);*/
 
@@ -169,7 +169,7 @@ public:
 	// Contacts handling
 	bool    IsMyContact(HANDLE, bool include_chat = false);
 	HANDLE  ContactIDToHContact(std::string);
-	HANDLE  AddToContactList(facebook_user*, bool dont_check = false);	
+	HANDLE  AddToContactList(facebook_user*, bool dont_check = false, const char *new_name = "");
 	void    SetAllContactStatuses(int);	
 
 	// TODO RM: Chats handling

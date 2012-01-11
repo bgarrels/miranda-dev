@@ -70,12 +70,18 @@ void FacebookProto::ProcessBuddyList( void* data )
 			if (!fbu->handle) { // just been added
 				fbu->handle = AddToContactList(fbu);
 
-				DBWriteContactSettingUTF8String(fbu->handle,m_szModuleName,FACEBOOK_KEY_NAME,fbu->real_name.c_str());
-				DBWriteContactSettingUTF8String(fbu->handle,m_szModuleName,"Nick",fbu->real_name.c_str());
+				if (!fbu->real_name.empty()) {
+					DBWriteContactSettingUTF8String(fbu->handle,m_szModuleName,FACEBOOK_KEY_NAME,fbu->real_name.c_str());
+					DBWriteContactSettingUTF8String(fbu->handle,m_szModuleName,FACEBOOK_KEY_NICK,fbu->real_name.c_str());
+				}
 			}
 
-			if (DBGetContactSettingWord(fbu->handle,m_szModuleName,"Status", 0) != ID_STATUS_ONLINE) {
-				DBWriteContactSettingWord(fbu->handle,m_szModuleName,"Status", ID_STATUS_ONLINE );
+			if (DBGetContactSettingWord(fbu->handle,m_szModuleName,"Status", 0) != fbu->status_id ) {
+				DBWriteContactSettingWord(fbu->handle,m_szModuleName,"Status", fbu->status_id );
+			}
+
+			if (DBGetContactSettingByte(fbu->handle,m_szModuleName,FACEBOOK_KEY_CONTACT_TYPE, 0)) {
+				DBDeleteContactSetting(fbu->handle,m_szModuleName,FACEBOOK_KEY_CONTACT_TYPE); // Set type "on server-list" contact
 			}
 
 			// Wasn't contact removed from "server-list" someday?
@@ -163,7 +169,11 @@ void FacebookProto::ProcessFriendList( void* data )
 				if ( update_required )
 				{
 					DBWriteContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NAME, fbu->real_name.c_str());
-					DBWriteContactSettingUTF8String(hContact, m_szModuleName, "Nick", fbu->real_name.c_str());
+					DBWriteContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NICK, fbu->real_name.c_str());
+				}
+
+				if (DBGetContactSettingByte(fbu->handle,m_szModuleName,FACEBOOK_KEY_CONTACT_TYPE, 0)) {
+					DBDeleteContactSetting(fbu->handle,m_szModuleName,FACEBOOK_KEY_CONTACT_TYPE); // Has type "on server-list" contact
 				}
 
 				// Wasn't contact removed from "server-list" someday?
@@ -188,7 +198,9 @@ void FacebookProto::ProcessFriendList( void* data )
 				// Contact was removed from "server-list", notify it
 
 				// Wasnt we already been notified about this contact?
-				if ( !DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) ) {
+				if ( !DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) 
+					&& !DBGetContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_CONTACT_TYPE, 0)	) { // And is this contact "on-server" contact?
+					
 					DBWriteContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, ::time(NULL));
 
 					std::string contactname = id;
@@ -218,7 +230,7 @@ void FacebookProto::ProcessFriendList( void* data )
 
 		DBWriteContactSettingByte(hContact, m_szModuleName, "Gender", fbu->gender );
 		DBWriteContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NAME, fbu->real_name.c_str());
-		DBWriteContactSettingUTF8String(hContact, m_szModuleName, "Nick", fbu->real_name.c_str());
+		DBWriteContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NICK, fbu->real_name.c_str());
 		DBWriteContactSettingString(hContact, m_szModuleName, FACEBOOK_KEY_AV_URL, fbu->image_url.c_str());
 //		DBWriteContactSettingWord(hContact, m_szModuleName, "Status", ID_STATUS_OFFLINE );
 	}
@@ -278,7 +290,7 @@ void FacebookProto::ProcessUnreadMessages( void* )
 		
 		std::string user_id = utils::text::source_get_value( &messageslist, 2, "single_thread_id\":", "," );
 		if (user_id.empty()) {
-			LOG(" !! !! Thread id is empty - this is groupchat message."); // todo remove as this is not such 'error'
+			LOG(" !! !! Thread id is empty - this is groupchat message."); // TODO: remove as this is not such 'error'
 			continue;
 		}
 
@@ -348,8 +360,8 @@ void FacebookProto::ProcessMessages( void* data )
 			facebook_user fbu;
 			fbu.user_id = messages[i]->user_id;
 
-			HANDLE hContact = AddToContactList(&fbu);
-			
+			HANDLE hContact = AddToContactList(&fbu, false, messages[i]->sender_name.c_str());
+
 			PROTORECVEVENT recv = {0};
 			CCSDATA ccs = {0};
 

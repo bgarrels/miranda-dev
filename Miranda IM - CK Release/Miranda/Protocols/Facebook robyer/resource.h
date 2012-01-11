@@ -13,27 +13,21 @@
 #define IDC_UN                          1001
 #define IDC_PW                          1002
 #define IDC_NEWACCOUNTLINK              1003
-#define IDC_NAME                        1011
 #define IDC_MINDMSG                     1012
 #define IDC_CHARACTERS                  1013
 #define IDC_GROUP                       1021
-#define IDC_AGENT                       1022
-#define IDC_POLLRATE                    1023
 #define IDC_SECURE                      1024
-#define IDC_CLOSE_WINDOWS               1025
-#define IDC_IGNORE_STATUS               1025
 #define IDC_SET_IGNORE_STATUS           1025
-#define IDC_SECURE2                     1026
 #define IDC_SECURE_CHANNEL              1026
 #define IDC_LOGGING                     1027
-#define IDC_COOKIES                     1028
-#define IDC_CLOSE_WINDOWS2              1028
 #define IDC_DISCONNECT_CHAT             1028
-#define IDC_LOGGING2                    1029
-#define IDC_UNREAD_MESSAGES             1029
 #define IDC_PARSE_UNREAD                1029
-#define IDC_SET_IGNORE_STATUS2          1030
 #define IDC_BIGGER_AVATARS              1030
+#define IDC_CLOSE_CHAT                  1031
+#define IDC_CLOSE_WINDOWS               1031
+#define IDC_MAP_STATUSES                1032
+#define IDC_BIGGER_AVATARS2             1033
+#define IDC_LOAD_MOBILE                 1033
 #define IDC_NOTIFICATIONS_ENABLE        1041
 #define IDC_FEEDS_ENABLE                1042
 #define IDC_OTHER_ENABLE                1043
@@ -61,7 +55,6 @@
 #define IDC_SYSTRAY_NOTIFY              1098
 #define IDC_PREVIEW                     1099
 #define IDC_SET_STATUS                  1126
-#define IDC_FEEDS_TYPE                  1201
 #define IDC_FEED_TYPE                   1201
 
 // Next default values for new objects
