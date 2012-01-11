@@ -43,6 +43,7 @@ Boston, MA 02111-1307, USA.
 #include <m_protomod.h>
 #include <m_protosvc.h>
 #include <m_xml.h>
+#include <m_avatars.h>
 
 #include <m_folders.h>
 #include <m_popup2.h>
@@ -60,7 +61,7 @@ extern UINT_PTR timerId;
 // check if Feeds is currently updating
 extern BOOL ThreadRunning;
 extern BOOL UpdateListFlag;
-
+extern TCHAR tszRoot[MAX_PATH];
 struct ItemInfo
 {
 	HWND hwndList;
