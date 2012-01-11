@@ -44,9 +44,7 @@ public:
 		chat_sequence_num_ = chat_channel_host_ = chat_channel_partition_ = chat_channel_jslogger_ = \
 		logout_hash_ = "";
 
-		msgid_ = error_count_ = last_feeds_update_ = \
-		last_notification_time_ = \
-		last_grpmessage_time_ = /*last_close_chat_time_ =*/ 0;
+		msgid_ = error_count_ = last_feeds_update_ = last_notification_time_ = 0;
 
 		invisible_ = is_typing_ = false;
 
@@ -83,8 +81,6 @@ public:
 	bool    is_typing_;
 	time_t  last_feeds_update_;
 	unsigned __int64 last_notification_time_;
-	time_t  last_grpmessage_time_;
-	//time_t  last_close_chat_time_;
 	int     msgid_;
 
 	////////////////////////////////////////////////////////////
@@ -149,6 +145,7 @@ public:
 	HANDLE  send_message_lock_;
 
 	bool    buddy_list( );
+	bool    facepiles( );
 	bool	load_friends( );
 	bool    feeds( );
 

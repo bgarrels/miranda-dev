@@ -105,3 +105,34 @@ struct facebook_newsfeed
 		this->user_id = this->title = this->text = this->link = "";
 	}
 };
+
+
+struct send_chat
+{
+	send_chat(const std::string &chat_id,const std::string &msg) : chat_id(chat_id), msg(msg) {}
+	std::string chat_id;
+	std::string msg;
+};
+
+
+struct send_direct
+{
+	send_direct(HANDLE hContact,const std::string &msg, HANDLE msgid) : hContact(hContact), msg(msg), msgid(msgid) {}
+	HANDLE hContact;
+	std::string msg;
+	HANDLE msgid;
+};
+
+struct send_typing
+{
+	send_typing(HANDLE hContact,const int status) : hContact(hContact), status(status) {}
+	HANDLE hContact;
+	int status;
+};
+
+struct send_messaging
+{
+	send_messaging(const std::string &user_id, const int type) : user_id(user_id), type(type) {}
+	std::string user_id;
+	int type;
+};

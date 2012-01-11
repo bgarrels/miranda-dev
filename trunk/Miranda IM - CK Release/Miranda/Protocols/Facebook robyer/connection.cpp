@@ -55,6 +55,8 @@ void FacebookProto::ChangeStatus(void*)
 
 		ProtoBroadcastAck(m_szModuleName, 0, ACKTYPE_STATUS, ACKRESULT_SUCCESS, (HANDLE)old_status, m_iStatus);
 
+		OnLeaveChat(NULL, NULL);
+
 		SetAllContactStatuses( ID_STATUS_OFFLINE );
 
 		ToggleStatusMenuItems(false);
@@ -117,6 +119,7 @@ void FacebookProto::ChangeStatus(void*)
 
 	facy.chat_state( m_iDesiredStatus != ID_STATUS_INVISIBLE );	
 	facy.buddy_list( );
+	facy.facepiles( );
 
 	m_iStatus = facy.self_.status_id = m_iDesiredStatus;
 	ProtoBroadcastAck(m_szModuleName, 0, ACKTYPE_STATUS, ACKRESULT_SUCCESS, (HANDLE)old_status, m_iStatus);
@@ -178,10 +181,13 @@ void FacebookProto::UpdateLoop(void *)
 
 	for ( int i = -1; !isOffline(); i = ++i % 6 )
 	{
-		if ( i != -1 )
+		if ( i != -1 ) {
 			if ( !facy.invisible_ )
 				if ( !facy.buddy_list( ) )
     				break;
+			if ( !facy.facepiles( ) )
+					break;
+		}
 		if ( i == 2 && getByte( FACEBOOK_KEY_EVENT_FEEDS_ENABLE, DEFAULT_EVENT_FEEDS_ENABLE ) )
 			if ( !facy.feeds( ) )
 				break;

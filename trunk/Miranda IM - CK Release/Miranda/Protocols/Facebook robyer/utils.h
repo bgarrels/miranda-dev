@@ -95,6 +95,7 @@ namespace utils
 		std::string trim( std::string data );
 		std::string source_get_value( std::string* data, unsigned int argument_count, ... );
 		std::string source_get_value2( std::string* data, const char *term, const char *endings);
+		void explode(std::string str, std::string separator, std::vector<std::string>* results);
 	};
 
 	namespace conversion

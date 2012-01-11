@@ -114,6 +114,66 @@ exit:
 	delete resp;
 }
 
+void FacebookProto::ProcessFacepiles( void* data )
+{
+	if ( data == NULL )
+		return;
+
+	send_chat *resp = static_cast<send_chat*>(data);
+
+	if ( isOffline() )
+		goto exit;
+
+	LOG("***** Starting processing facepiles");	
+
+	CODE_BLOCK_TRY
+
+	std::map< std::string, std::string > facepiles;
+
+	facebook_json_parser* p = new facebook_json_parser( this );
+	p->parse_facepiles( &(resp->msg), &facepiles );
+	delete p;
+
+	std::map< std::string, std::string >::iterator iter;
+
+	char *chat_users = this->GetChatUsers(resp->chat_id.c_str());
+	std::string users = chat_users;
+	mir_free(chat_users);
+
+	std::vector<std::string> users_list;
+	utils::text::explode(users, " ", &users_list);
+
+	for( std::vector<std::string>::size_type i=0; i<users_list.size( ); i++) {
+		iter = facepiles.find( users_list[i] );
+		if (iter == facepiles.end()) {
+			// Contact is now offline, remove him from chat	
+			this->RemoveChatContact(resp->chat_id.c_str(), users_list[i].c_str());
+			LOG("      Now offline facepile (%s): [%s]", resp->chat_id.c_str(), users_list[i].c_str());
+		} else {
+			facepiles.erase(iter);
+		}
+	}
+
+	for ( iter = facepiles.begin( ); iter != facepiles.end(); ++iter )
+	{
+		// These contacts are newly online, add them...
+		this->AddChatContact(resp->chat_id.c_str(), iter->first.c_str(), iter->second.c_str());		
+		LOG("      Now online facepile (%s): [%s] %s", resp->chat_id.c_str(), iter->first.c_str(), iter->second.c_str());
+	}
+
+	LOG("***** Facepiles processed");
+
+	CODE_BLOCK_CATCH
+
+	LOG("***** Error processing facepiles: %s", e.what());
+
+	CODE_BLOCK_END
+
+exit:
+	delete resp;
+}
+
+
 void FacebookProto::ProcessFriendList( void* data )
 {
 	if ( data == NULL )

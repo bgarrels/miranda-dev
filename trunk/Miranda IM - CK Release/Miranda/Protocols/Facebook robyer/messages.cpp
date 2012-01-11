@@ -27,28 +27,6 @@ Last change on : $Date: 2011-02-07 18:19:39 +0100 (po, 07 2 2011) $
 
 #include "common.h"
 
-struct send_direct
-{
-	send_direct(HANDLE hContact,const std::string &msg, HANDLE msgid) : hContact(hContact), msg(msg), msgid(msgid) {}
-	HANDLE hContact;
-	std::string msg;
-	HANDLE msgid;
-};
-
-struct send_typing
-{
-	send_typing(HANDLE hContact,const int status) : hContact(hContact), status(status) {}
-	HANDLE hContact;
-	int status;
-};
-
-struct send_messaging
-{
-	send_messaging(const std::string &user_id, const int type) : user_id(user_id), type(type) {}
-	std::string user_id;
-	int type;
-};
-
 int FacebookProto::RecvMsg(HANDLE hContact, PROTORECVEVENT *pre)
 {
 	DBVARIANT dbv;
@@ -98,6 +76,19 @@ void FacebookProto::SendMsgWorker(void *p)
 		}
 		DBFreeVariant(&dbv);
 	}
+
+	delete data;
+}
+
+void FacebookProto::SendChatMsgWorker(void *p)
+{
+	if(p == NULL)
+		return;
+
+	send_chat *data = static_cast<send_chat*>(p);
+	std::string err_message = "";
+
+	facy.send_message(data->chat_id, data->msg, &err_message, false );
 
 	delete data;
 }

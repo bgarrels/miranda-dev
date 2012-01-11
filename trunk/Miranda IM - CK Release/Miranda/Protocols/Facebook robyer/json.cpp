@@ -144,6 +144,103 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 	return EXIT_SUCCESS;
 }
 
+int facebook_json_parser::parse_facepiles( void* data, std::map< std::string, std::string > *facepiles )
+{
+	using namespace json;
+
+	try
+	{
+		std::string buddyData = static_cast< std::string* >( data )->substr( 9 );
+		std::istringstream sDocument( buddyData );
+		Object objDocument;
+		Reader::Read(objDocument, sDocument);
+		std::map< std::string, std::string >::iterator it;
+
+		const Object& objRoot = objDocument;
+		const Array& infos = objRoot["payload"]["facepile_click_info"];
+
+		for ( Array::const_iterator info( infos.Begin() );
+			info != infos.End(); ++info)
+		{
+			const Object& objMember = *info;
+
+			if (objMember.Find("uid") != objMember.End()) {
+				const Number& id = objMember["uid"];
+				char was_id[32];
+				lltoa( id.Value(), was_id, 10 );
+
+				const String& name = objMember["name"];
+				std::string user_name = utils::text::slashu_to_utf8(
+					utils::text::special_expressions_decode( name.Value() ) );
+				
+				it = facepiles->find( std::string( was_id ) );
+				if ( it == facepiles->end() ) {
+					facepiles->insert( std::make_pair( was_id, user_name ) );
+				}
+			}
+		}
+
+
+/*		const Object& nowAvailableList = objRoot["payload"]["statuses"];
+
+		for (Object::const_iterator itAvailable(nowAvailableList.Begin());
+			itAvailable != nowAvailableList.End(); ++itAvailable)
+		{
+			const Object::Member& member = *itAvailable;
+			const Object& objMember = member.element;
+			
+			if (((const Number&)objMember).Value() == 2) {
+				// online? jinak offline?
+			}
+
+			if (facepiles->find( member.name ) == facepiles->end()) {
+				facepiles->insert( std::make_pair( member.name, "" ) );
+				current = buddy_list->find( member.name );
+				current->user_id = current->real_name = member.name;	
+			}
+
+			current->status_id = (idle ? ID_STATUS_OFFLINE : ID_STATUS_ONLINE);
+		}
+*/
+/*		const Object& userInfosList = objRoot["payload"]["buddy_list"]["userInfos"];
+
+		for (Object::const_iterator itUserInfo(userInfosList.Begin());
+			itUserInfo != userInfosList.End(); ++itUserInfo)
+		{
+			const Object::Member& member = *itUserInfo;
+
+			current = buddy_list->find( member.name );
+			if ( current == NULL )
+				continue;
+
+			const Object& objMember = member.element;
+			const String& realName = objMember["name"];
+			const String& imageUrl = objMember["thumbSrc"];
+
+			current->real_name = utils::text::slashu_to_utf8(
+			    utils::text::special_expressions_decode( realName.Value( ) ) );
+			current->image_url = utils::text::slashu_to_utf8(
+			    utils::text::special_expressions_decode( imageUrl.Value( ) ) );
+		}*/
+	}
+	catch (Reader::ParseException& e)
+	{
+		proto->Log( "!!!!! Caught json::ParseException: %s", e.what() );
+		proto->Log( "      Line/offset: %d/%d", e.m_locTokenBegin.m_nLine + 1, e.m_locTokenBegin.m_nLineOffset + 1 );
+	}
+	catch (const Exception& e)
+	{
+		proto->Log( "!!!!! Caught json::Exception: %s", e.what() );
+	}
+	catch (const std::exception& e)
+	{
+		proto->Log( "!!!!! Caught std::exception: %s", e.what() );
+	}
+
+	return EXIT_SUCCESS;
+}
+
+
 int facebook_json_parser::parse_friends( void* data, std::map< std::string, facebook_user* >* friends )
 {
 	using namespace json;
@@ -396,13 +493,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 			}
 			else if ( type.Value( ) == "group_msg" ) // chat message
 			{
-				if ( (::time(NULL) - proto->facy.last_grpmessage_time_) < 15 ) // TODO RM: remove dont notify more than once every 15 secs
-					continue;
-
-				proto->facy.last_grpmessage_time_ = ::time(NULL);
-        
 				const String& from_name = objMember["from_name"];
-				const String& group_name = objMember["to_name"];
 
 				const Number& to = objMember["to"];
 				char group_id[32];
@@ -412,46 +503,26 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				char was_id[32];
 				lltoa( from.Value(), was_id, 10 );
 
-				// Ignore if message is from self user
-				if (was_id == proto->facy.self_.user_id)
-					continue;
-
 				const Object& messageContent = objMember["msg"];
   				const String& text = messageContent["text"];
 
-				std::string popup_text = utils::text::remove_html(
-					utils::text::special_expressions_decode(
-						utils::text::slashu_to_utf8( from_name.Value( ) ) ) );
-				popup_text += ": ";
-				popup_text += utils::text::remove_html(
+				std::string msg = utils::text::remove_html(
 					utils::text::special_expressions_decode(
 						utils::text::slashu_to_utf8( text.Value( ) ) ) );
 
-				std::string title = Translate("Groupchat");
-				title += ": ";
-				title += utils::text::remove_html(
+				std::string name = utils::text::remove_html(
 					utils::text::special_expressions_decode(
-						utils::text::slashu_to_utf8( group_name.Value( ) ) ) );
+						utils::text::slashu_to_utf8( from_name.Value( ) ) ) );
 
-				std::string url = "/home.php?sk=group_";
-				url += group_id;
+				// Add contact into chat, if isn't there already
+				if (!proto->IsChatContact(group_id, was_id))
+					proto->AddChatContact(group_id, was_id, name.c_str());
 
-				proto->Log("      Got groupchat message");
-		    
-				TCHAR* szTitle = mir_a2t_cp(title.c_str(), CP_UTF8);
-				TCHAR* szText = mir_a2t_cp(popup_text.c_str(), CP_UTF8);
-				TCHAR* szUrl = mir_a2t_cp(url.c_str(), CP_UTF8);
-				proto->NotifyEvent(szTitle,szText,NULL,FACEBOOK_EVENT_OTHER, szUrl);
-				mir_free(szTitle);
-				mir_free(szText);
+				// Add message into chat
+				proto->UpdateChat(group_id, was_id, name.c_str(), msg.c_str());
 			}
 			else if ( type.Value( ) == "thread_msg" ) // multiuser message
 			{
-				//if ( (::time(NULL) - proto->facy.last_grpmessage_time_) < 15 ) // TODO RM: remove dont notify more than once every 15 secs
-					//continue;
-
-				//proto->facy.last_grpmessage_time_ = ::time(NULL);
-        
 				const String& from_name = objMember["from_name"];
 				const String& to_name = objMember["to_name"]["__html"];
 				const String& to_id = objMember["to"];
