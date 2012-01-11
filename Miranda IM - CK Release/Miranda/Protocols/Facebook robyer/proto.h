@@ -136,9 +136,9 @@ public:
 	int  __cdecl OnPreShutdown(WPARAM,LPARAM);
 	int  __cdecl OnPrebuildContactMenu(WPARAM,LPARAM);
 	// TODO RM: Chat handling
-	/*int  __cdecl OnChatOutgoing(WPARAM,LPARAM);
+	int  __cdecl OnChatOutgoing(WPARAM,LPARAM);
 	int  __cdecl OnJoinChat(WPARAM,LPARAM);
-	int  __cdecl OnLeaveChat(WPARAM,LPARAM);*/
+	int  __cdecl OnLeaveChat(WPARAM,LPARAM);
 
 	// Loops
 	bool    NegotiateConnection();
@@ -148,6 +148,7 @@ public:
 
 	// Processing threads
 	void __cdecl ProcessBuddyList(void*);
+	void __cdecl ProcessFacepiles(void*);
 	void __cdecl ProcessFriendList(void*);
 	void __cdecl ProcessMessages(void*);
 	void __cdecl ProcessUnreadMessages(void*);
@@ -161,6 +162,7 @@ public:
 	void __cdecl SetAwayMsgWorker(void*);
 	void __cdecl UpdateAvatarWorker(void*);
 	void __cdecl SendMsgWorker(void*);
+	void __cdecl SendChatMsgWorker(void*);
 	void __cdecl SendTypingWorker(void*);
 	void __cdecl MessagingWorker(void*);
 	void __cdecl DeleteContactFromServer(void*);
@@ -173,11 +175,13 @@ public:
 	void    SetAllContactStatuses(int);	
 
 	// TODO RM: Chats handling
- 	/*void AddChat(const char *id,const char *name);
-	void UpdateChat(const facebook_user &update);
-	void AddChatContact(const char *name,const char *nick=0);
-	void DeleteChatContact(const char *name);
-	void SetChatStatus(int);*/
+ 	void AddChat(const char *id, const char *name);
+	void UpdateChat(const char *chat_id, const char *id, const char *name, const char *message);
+	bool IsChatContact(const char *chat_id, const char *id);
+	void AddChatContact(const char *chat_id, const char *id, const char *name);
+	void RemoveChatContact(const char *chat_id, const char *id);
+	void SetChatStatus(const char *chat_id, int status);
+	char *GetChatUsers(const char *chat_id);
 
 	// Connection client
 	facebook_client facy; // TODO: Refactor to "client" and make dynamic

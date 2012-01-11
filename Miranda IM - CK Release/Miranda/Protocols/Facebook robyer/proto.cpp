@@ -51,14 +51,16 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 	CreateProtoService(m_szModuleName, PS_GETAVATARCAPS,  &FacebookProto::GetAvatarCaps,     this);
 
   // TODO RM: group chats
-/*  CreateProtoService(m_szModuleName,PS_JOINCHAT, &FacebookProto::OnJoinChat, this);
-	CreateProtoService(m_szModuleName,PS_LEAVECHAT,&FacebookProto::OnLeaveChat,this);*/
+	CreateProtoService(m_szModuleName, PS_JOINCHAT,  &FacebookProto::OnJoinChat,  this);
+	CreateProtoService(m_szModuleName, PS_LEAVECHAT, &FacebookProto::OnLeaveChat, this);
+
 	if(g_mirandaVersion < PLUGIN_MAKE_VERSION(0, 10, 0, 2))
 	{
 		HookProtoEvent(ME_DB_CONTACT_DELETED,        &FacebookProto::OnContactDeleted,   this);
 	}
-	HookProtoEvent(ME_CLIST_PREBUILDSTATUSMENU,  &FacebookProto::OnBuildStatusMenu,  this);
-	HookProtoEvent(ME_OPT_INITIALISE,            &FacebookProto::OnOptionsInit,      this);
+	HookProtoEvent(ME_CLIST_PREBUILDSTATUSMENU,	&FacebookProto::OnBuildStatusMenu,	this);
+	HookProtoEvent(ME_OPT_INITIALISE,			&FacebookProto::OnOptionsInit,		this);
+	HookProtoEvent(ME_GC_EVENT,					&FacebookProto::OnChatOutgoing,		this);
 
 	// Create standard network connection
 	TCHAR descr[512];
@@ -296,16 +298,14 @@ int FacebookProto::SvcCreateAccMgrUI(WPARAM wParam,LPARAM lParam)
 
 int FacebookProto::OnModulesLoaded(WPARAM wParam,LPARAM lParam)
 {
-/*
-	// RM TODO: group chats
 	// Register group chat
 	GCREGISTER gcr = {sizeof(gcr)};
-	gcr.dwFlags = GC_ACKMSG;
+	//gcr.dwFlags = GC_ACKMSG;
 	gcr.pszModule = m_szModuleName;
 	gcr.pszModuleDispName = m_szModuleName;
 	gcr.iMaxText = FACEBOOK_MESSAGE_LIMIT;
 	CallService(MS_GC_REGISTER,0,reinterpret_cast<LPARAM>(&gcr));
-*/
+
 	return 0;
 }
 
@@ -318,7 +318,7 @@ int FacebookProto::OnPreShutdown(WPARAM wParam,LPARAM lParam)
 int FacebookProto::OnPrebuildContactMenu(WPARAM wParam,LPARAM lParam)
 {
 	HANDLE hContact = reinterpret_cast<HANDLE>(wParam);
-	if(IsMyContact(hContact, true)) {
+	if(IsMyContact(hContact/*, true*/)) {
 		bool hide = (DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0)
 			|| DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_CONTACT_TYPE, 0) );
 		ShowContactMenus(true, hide);

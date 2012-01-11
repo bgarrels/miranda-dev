@@ -29,13 +29,13 @@ Last change on : $Date$
 
 // Version management
 #include "build.h"
-#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 6, 1)
+#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 6, 6)
 #define __PRODUCT_DWORD             PLUGIN_MAKE_VERSION(0, 9, 14, 0)
-#define __VERSION_STRING            "0.0.6.1"
+#define __VERSION_STRING            "0.0.6.6"
 #define __PRODUCT_STRING            "0.9.14.0"
-#define __VERSION_VS_FILE           0,0,6,1
+#define __VERSION_VS_FILE           0,0,6,6
 #define __VERSION_VS_PROD           0,9,14,0
-#define __VERSION_VS_FILE_STRING    "0, 0, 6, 1"
+#define __VERSION_VS_FILE_STRING    "0, 0, 6, 6"
 #define __VERSION_VS_PROD_STRING    "0, 9, 14, 0"
 
 // Product management
@@ -104,6 +104,7 @@ Last change on : $Date$
 #define FACEBOOK_REQUEST_LOAD_FRIENDS			121 // getting list of all friends
 #define FACEBOOK_REQUEST_DELETE_FRIEND			122 // deleting friends
 #define FACEBOOK_REQUEST_ADD_FRIEND				123 // adding friends
+#define FACEBOOK_REQUEST_FACEPILES              124 // getting list of contacts in chat
 #define FACEBOOK_REQUEST_FEEDS                  125 // getting feeds
 #define FACEBOOK_REQUEST_NOTIFICATIONS			126 // getting notifications
 #define FACEBOOK_REQUEST_RECONNECT              130 // getting __sequence_num__ and __channel_id__

@@ -224,6 +224,7 @@ DWORD facebook_client::choose_security_level( int request_type )
 //	case FACEBOOK_REQUEST_LOGOUT:
 //	case FACEBOOK_REQUEST_HOME:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
+//	case FACEBOOK_REQUEST_FACEPILES:
 //	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 //  case FACEBOOK_REQUEST_DELETE_FRIEND:
 //	case FACEBOOK_REQUEST_ADD_FRIEND:
@@ -250,6 +251,7 @@ int facebook_client::choose_method( int request_type )
 	case FACEBOOK_REQUEST_LOGIN:
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
 	case FACEBOOK_REQUEST_BUDDY_LIST:
+	case FACEBOOK_REQUEST_FACEPILES:
 	case FACEBOOK_REQUEST_STATUS_SET:
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
 	case FACEBOOK_REQUEST_VISIBILITY:
@@ -289,6 +291,7 @@ std::string facebook_client::choose_proto( int request_type )
 //	case FACEBOOK_REQUEST_NOTIFICATIONS:
 //	case FACEBOOK_REQUEST_RECONNECT:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
+//	case FACEBOOK_REQUEST_FACEPILES:
 //	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 //	case FACEBOOK_REQUEST_STATUS_SET:
 //	case FACEBOOK_REQUEST_MESSAGE_SEND:
@@ -330,6 +333,7 @@ std::string facebook_client::choose_server( int request_type, std::string* data 
 //	case FACEBOOK_REQUEST_LOGOUT:
 //	case FACEBOOK_REQUEST_HOME:
 //	case FACEBOOK_REQUEST_BUDDY_LIST:
+//	case FACEBOOK_REQUEST_FACEPILES:
 //	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 //	case FACEBOOK_REQUEST_FEEDS:
 //	case FACEBOOK_REQUEST_NOTIFICATIONS:
@@ -367,6 +371,9 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 
 	case FACEBOOK_REQUEST_BUDDY_LIST:
 		return "/ajax/chat/buddy_list.php?__a=1";
+
+	case FACEBOOK_REQUEST_FACEPILES:
+		return "/ajax/groups/chat/update_facepiles.php?__a=1";
 
 	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 	{
@@ -474,6 +481,7 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_LOGIN:
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
 	case FACEBOOK_REQUEST_BUDDY_LIST:
+	case FACEBOOK_REQUEST_FACEPILES:
 	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 	case FACEBOOK_REQUEST_STATUS_SET:
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
@@ -504,6 +512,7 @@ NETLIBHTTPHEADER* facebook_client::get_request_headers( int request_type, int* h
 	case FACEBOOK_REQUEST_LOGIN:
 	case FACEBOOK_REQUEST_SETUP_MACHINE:
 	case FACEBOOK_REQUEST_BUDDY_LIST:
+	case FACEBOOK_REQUEST_FACEPILES:
 	case FACEBOOK_REQUEST_LOAD_FRIENDS:
 	case FACEBOOK_REQUEST_STATUS_SET:
 	case FACEBOOK_REQUEST_MESSAGE_SEND:
@@ -847,35 +856,21 @@ bool facebook_client::home( )
 			ForkThread( &FacebookProto::ProcessNotifications, this->parent, NULL );
 		}
 
-  // TODO RM: if enabled groupchats support
-  // Get group chats
-/*      std::string chat_ids = utils::text::source_get_value( &resp.data, 2, "HomeNavController.initGroupCounts([","]" );
-		if ( chat_ids.length() )
-  {
-
-	// split by comma to ids, find names in source, inicialize groups in contactlist
-	// maybe check which groupchats user wants
-	// add to list? start worker for parse and add contacts to groupchat
-
-	// add "," to end for better parsing
-	chat_ids += ",";
-	std::string::size_type oldpos = 0, pos = 0;
-    
-	while ( ( pos = chat_ids.find(",", oldpos) ) != std::string::npos )
-	  {
-	  std::string id = chat_ids.substr(oldpos, pos-oldpos);
-	  std::string name = utils::text::trim(
-		utils::text::special_expressions_decode(
-		  utils::text::remove_html( 
-			utils::text::edit_html(
-			  utils::text::source_get_value( &resp.data, 5, "HomeNavController.initGroupCounts", "home.php?sk=group_", id.c_str(), "input title=\\\"", "\\\" " ) ) ) ) );
-
-	  parent->Log("      Got groupchat id: %s, name: %s", id.c_str(), name.c_str());
-		  oldpos = pos+1;
-
-	  parent->AddChat(id.c_str(), name.c_str());
-	  }        
-  }*/
+		// TODO RM: if enabled groupchats support
+		// Get group chats
+		std::string favorites = utils::text::source_get_value( &resp.data, 3, "&quot;nav_section&quot;:&quot;pinnedNav&quot;",">","\\u003c\\/ul>" );
+		favorites = utils::text::special_expressions_decode(utils::text::slashu_to_utf8( favorites ));
+		std::string::size_type pos = 0;
+		while ((pos = favorites.find("<li",pos)) != std::string::npos) {
+			std::string item = favorites.substr(pos, favorites.find("</li>", pos) - pos);
+			pos += 3;
+			std::string id = utils::text::source_get_value( &item, 2, "id=\\\"navItem_group_", "\\\"" );
+			if (!id.empty()) {
+				std::string name = utils::text::source_get_value( &item, 3, "<div class=\\\"linkWrap", ">", "</div>" );
+				parent->Log("      Got new group chat: %s (id: %s)", name.c_str(), id.c_str());
+				parent->AddChat(id.c_str(), name.c_str());
+			}
+		}
 
 		return handle_success( "home" );
 
@@ -989,6 +984,51 @@ bool facebook_client::buddy_list( )
 	default:
 		return handle_error( "buddy_list" );
 	}
+}
+
+bool facebook_client::facepiles( )
+{
+	handle_entry( "facepiles" );
+
+	int count = (int)CallServiceSync(MS_GC_GETSESSIONCOUNT, 0, (LPARAM)parent->m_szModuleName);
+	for ( int i = 0; i < count; i++ ) {
+		GC_INFO gci = {0};
+		gci.Flags = BYINDEX | TYPE | ID;
+		gci.iItem = i;
+		gci.pszModule = parent->m_szModuleName;
+		if ( !CallServiceSync( MS_GC_GETINFO, 0, (LPARAM)&gci ) && gci.iType == GCW_CHATROOM ) {
+			char *id = mir_t2a(gci.pszID);
+
+			// Prepare data
+			std::string data = "id=";
+			data += id;
+			data += "&post_form_id=" + this->post_form_id_ + "&fb_dtsg=" + this->dtsg_ + "&lsd=&post_form_id_source=AsyncRequest&__user=" + this->self_.user_id + "&phstamp=0";
+
+			// Get facepiles
+			http::response resp = flap( FACEBOOK_REQUEST_FACEPILES, &data );
+
+			// Process result data
+			validate_response(&resp);
+
+			std::string chat_id = id;
+			mir_free(id);
+			
+			switch ( resp.code )
+			{
+			case HTTP_CODE_OK:
+				ForkThread( &FacebookProto::ProcessFacepiles, this->parent, new send_chat(chat_id, resp.data) );
+				break;
+
+			case HTTP_CODE_FAKE_ERROR:
+			case HTTP_CODE_FAKE_DISCONNECTED:
+			default:
+				return handle_error( "facepiles" );
+			}
+			
+		}			
+	}
+
+	return handle_success( "facepiles" );
 }
 
 bool facebook_client::load_friends( )
@@ -1172,7 +1212,8 @@ bool facebook_client::send_message( std::string message_recipient, std::string m
 	case 1356003: // Contact is offline
 	{
 		HANDLE hContact = parent->ContactIDToHContact( message_recipient );
-  		DBWriteContactSettingWord(hContact,parent->m_szModuleName,"Status",ID_STATUS_OFFLINE);
+		if (hContact != NULL)
+  			DBWriteContactSettingWord(hContact,parent->m_szModuleName,"Status",ID_STATUS_OFFLINE);
 		return false;
 	} break;
 
@@ -1206,6 +1247,7 @@ bool facebook_client::send_message( std::string message_recipient, std::string m
 	case HTTP_CODE_FAKE_DISCONNECTED:
 	default:
 		*error_text = Translate("Timeout when sending message.");
+
 		handle_error( "send_message" );
 		return false;
 	}
