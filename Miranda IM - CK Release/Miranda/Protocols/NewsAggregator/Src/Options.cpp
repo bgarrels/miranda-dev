@@ -62,31 +62,18 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 						}
 						else
 						{
-							LVITEM lvI = {0};
 							HANDLE hContact = (HANDLE) CallService(MS_DB_CONTACT_ADD, 0, 0);
 							CallService(MS_PROTO_ADDTOCONTACT, (WPARAM)hContact, (LPARAM)MODULE);
 							GetDlgItemText(hwndDlg, IDC_FEEDTITLE, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "Nick", str);
 							HWND hwndList = (HWND)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
-							int count = ListView_GetItemCount(hwndList);
-							lvI.iItem = count;
-							lvI.mask = LVIF_TEXT | LVIF_PARAM;
-							lvI.iSubItem = 0;
-							lvI.pszText = str;
-							ListView_InsertItem(hwndList, &lvI);
 							GetDlgItemText(hwndDlg, IDC_FEEDURL, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "URL", str);
-							lvI.mask = LVIF_TEXT;
-							lvI.pszText = str;
-							lvI.iSubItem = 1;
-							ListView_SetItem(hwndList, &lvI);
-							ListView_SetCheckState(hwndList, lvI.iItem, true);
 							DBWriteContactSettingByte(hContact, MODULE, "State", 1);
 							DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
 							GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "MsgFormat", str);
-							int status = CallProtoService(MODULE, PS_GETSTATUS, 0, 0);
-							DBWriteContactSettingWord(hContact, MODULE, "Status", status);
+							DBWriteContactSettingWord(hContact, MODULE, "Status", CallProtoService(MODULE, PS_GETSTATUS, 0, 0));
 							if (IsDlgButtonChecked(hwndDlg, IDC_USEAUTH))
 							{
 								DBWriteContactSettingByte(hContact, MODULE, "UseAuth", 1);
@@ -95,6 +82,8 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 								GetDlgItemText(hwndDlg, IDC_PASSWORD, str, SIZEOF(str));
 								DBWriteContactSettingTString(hContact, MODULE, "Password", str);
 							}
+							DeleteAllItems(hwndList);
+							UpdateList(hwndList);
 						}
 					}
 
@@ -247,7 +236,6 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 							DeleteAllItems(SelItem->hwndList);
 							UpdateList(SelItem->hwndList);
 						}
-
 					}
 
 				case IDCANCEL:
@@ -307,6 +295,7 @@ INT_PTR CALLBACK UpdateNotifyOptsProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 		{
 			TranslateDialogDefault(hwndDlg);
 			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, 0);
+			CreateList(hwndList);
 			UpdateList(hwndList);
 			return TRUE;
 		}
