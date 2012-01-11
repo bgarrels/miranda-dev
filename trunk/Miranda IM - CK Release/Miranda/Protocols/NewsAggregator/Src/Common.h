@@ -98,6 +98,7 @@ VOID CALLBACK timerProc2(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime);
 
 BOOL IsMyContact(HANDLE hContact);
 VOID GetNewsData(TCHAR *szUrl, char** szData);
+VOID CreateList (HWND hwndList);
 VOID UpdateList (HWND hwndList);
 VOID DeleteAllItems(HWND hwndList);
 time_t __stdcall DateToUnixTime(TCHAR *stamp, BOOL FeedType);

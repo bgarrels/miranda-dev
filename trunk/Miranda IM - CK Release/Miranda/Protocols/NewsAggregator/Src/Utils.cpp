@@ -88,7 +88,7 @@ VOID GetNewsData(TCHAR *tszUrl, char** szData)
 	mir_free(szUrl);
 }
 
-VOID UpdateList (HWND hwndList)
+VOID CreateList (HWND hwndList)
 {
 	SendMessage(hwndList, LVM_SETEXTENDEDLISTVIEWSTYLE, 0, LVS_EX_FULLROWSELECT | LVS_EX_CHECKBOXES);	
 
@@ -108,12 +108,15 @@ VOID UpdateList (HWND hwndList)
 	lvc.pszText = TranslateT("URL");	
 	lvc.cx = 280;     // width of column in pixels
 	ListView_InsertColumn(hwndList, 1, &lvc);
+}
 
+VOID UpdateList (HWND hwndList)
+{
 	LVITEM lvI = {0};
 
 	// Some code to create the list-view control.
 	// Initialize LVITEM members that are common to all
-	// items. 
+	// items.
 	HANDLE hContact= (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
 	int i = 0;
 	while (hContact != NULL) 
@@ -121,7 +124,7 @@ VOID UpdateList (HWND hwndList)
 		if(IsMyContact(hContact)) 
 		{
 			UpdateListFlag = TRUE;
-			lvI.mask = LVIF_TEXT | LVIF_PARAM;
+			lvI.mask = LVIF_TEXT;
 			lvI.iSubItem = 0;
 			DBVARIANT dbVar = {0};
 			DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
@@ -132,7 +135,6 @@ VOID UpdateList (HWND hwndList)
 				lvI.pszText = dbVar.ptszVal;
 				lvI.iItem = i;
 				ListView_InsertItem(hwndList, &lvI);
-				lvI.mask = LVIF_TEXT;
 				lvI.iSubItem = 1;
 				DBGetContactSettingTString(hContact, MODULE, "URL", &dbVar);
 				if (lstrcmp(dbVar.ptszVal, NULL) == 0)
@@ -142,8 +144,7 @@ VOID UpdateList (HWND hwndList)
 					lvI.pszText = dbVar.ptszVal;
 					ListView_SetItem(hwndList, &lvI);
 					i += 1;
-					BYTE State = DBGetContactSettingByte(hContact, MODULE, "State", 1);
-					ListView_SetCheckState(hwndList, lvI.iItem, State);
+					ListView_SetCheckState(hwndList, lvI.iItem, DBGetContactSettingByte(hContact, MODULE, "State", 1));
 				}
 			}
 		}
@@ -345,6 +346,29 @@ VOID CheckCurrentFeed(HANDLE hContact)
 							DBWriteContactSettingTString(hContact, MODULE, "Language1", xi.getText(child));
 							continue;
 						}
+						if (_tcsicmp(xi.getName(child), _T("managingEditor")) == 0)
+						{
+							DBWriteContactSettingTString(hContact, MODULE, "e-mail", xi.getText(child));
+							continue;
+						}
+						if (_tcsicmp(xi.getName(child), _T("Category")) == 0)
+						{
+							DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", xi.getText(child));
+							continue;
+						}
+						if (_tcsicmp(xi.getName(child), _T("image")) == 0)
+						{
+							for (int x = 0; x < xi.getChildCount(child); x++)
+							{
+								HXML imageval = xi.getChild(child, x);
+								if (_tcsicmp(xi.getName(imageval), _T("url")) == 0)
+								{
+									//сделать установление аватара
+									//(TCHAR*)xi.getText(imageval);
+									break;
+								}
+							}
+						}
 						if (_tcsicmp(xi.getName(child), _T("item")) == 0)
 						{
 							TCHAR *title = NULL, *link = NULL, *datetime = NULL, *descr = NULL, *author = NULL, *comments = NULL, *guid = NULL, *category = NULL;
@@ -436,15 +460,34 @@ VOID CheckCurrentFeed(HANDLE hContact)
 							char* pszUtf = mir_utf8encodeT(message);
 
 							time_t stamp = DateToUnixTime(datetime, 0);
-							DBEVENTINFO dbei = {0};
-							dbei.cbSize = sizeof(dbei);
-							dbei.eventType = EVENTTYPE_MESSAGE;
-							dbei.flags = DBEF_UTF;
-							dbei.szModule = MODULE;
-							dbei.timestamp = stamp;//time(NULL);
-							dbei.cbBlob = lstrlenA(pszUtf) + 1;
-							dbei.pBlob = (PBYTE)pszUtf;
-							CallService(MS_DB_EVENT_ADD, (WPARAM)hContact, (LPARAM)&dbei);
+
+							DBEVENTINFO olddbei = { 0 };
+							HANDLE		hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDFIRST, (WPARAM)hContact, 0);
+							BOOL MesExist = FALSE;
+							while(hDbEvent)
+							{
+								ZeroMemory(&olddbei, sizeof(olddbei));
+								olddbei.cbSize = sizeof(olddbei);
+								olddbei.cbBlob = CallService(MS_DB_EVENT_GETBLOBSIZE, (WPARAM)hDbEvent, 0);
+								olddbei.pBlob = (PBYTE)malloc(olddbei.cbBlob);
+								CallService(MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&olddbei);
+								if (olddbei.timestamp == stamp && olddbei.cbBlob == lstrlenA(pszUtf) + 1 && lstrcmpA((char*)olddbei.pBlob, pszUtf) == 0)
+									MesExist = TRUE;
+								hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDNEXT, (WPARAM)hDbEvent, 0);
+							}
+
+							if (!MesExist)
+							{
+								DBEVENTINFO dbei = {0};
+								dbei.cbSize = sizeof(dbei);
+								dbei.eventType = EVENTTYPE_MESSAGE;
+								dbei.flags = DBEF_UTF;
+								dbei.szModule = MODULE;
+								dbei.timestamp = stamp;
+								dbei.cbBlob = lstrlenA(pszUtf) + 1;
+								dbei.pBlob = (PBYTE)pszUtf;
+								CallService(MS_DB_EVENT_ADD, (WPARAM)hContact, (LPARAM)&dbei);
+							}
 							mir_free(pszUtf);
 						}
 
