@@ -24,6 +24,8 @@ Boston, MA 02111-1307, USA.
 #include <windows.h>
 #include <commctrl.h>
 #include <time.h>
+#include <fcntl.h>
+#include <io.h>
 
 // Miranda header files
 #include <newpluginapi.h>
@@ -44,6 +46,7 @@ Boston, MA 02111-1307, USA.
 #include <m_protosvc.h>
 #include <m_xml.h>
 #include <m_avatars.h>
+#include <sys\stat.h>
 
 #include <m_folders.h>
 #include <m_popup2.h>

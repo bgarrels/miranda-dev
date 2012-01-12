@@ -214,6 +214,8 @@ time_t __stdcall DateToUnixTime(TCHAR* stamp, BOOL FeedType)
 			mir_sntprintf(p, 4+2+2+1+2+1+2+1+2+1, _T("%04d%02d%02dT%02d:%02d:%02d"), year, month, day, hour-timezoneh, min-timezonem, sec);
 		if (lstrcmp(timezonesign, _T("-")) ==0)
 			mir_sntprintf(p, 4+2+2+1+2+1+2+1+2+1, _T("%04d%02d%02dT%02d:%02d:%02d"), year, month, day, hour+timezoneh, min+timezonem, sec);
+		else
+			mir_sntprintf(p, 4+2+2+1+2+1+2+1+2+1, _T("%04d%02d%02dT%02d:%02d:%02d"), year, month, day, hour, min, sec);
 	}
 	// Get the date part
 	for ( i=0; *p!='\0' && i<8 && isdigit( *p ); p++,i++ )
@@ -321,9 +323,56 @@ BOOL DownloadFile(LPCTSTR tszURL, LPCTSTR tszLocal)
 	{
 		if((200 == pReply->resultCode) && (pReply->dataLength > 0)) 
 		{
-			hFile = CreateFile(tszLocal, GENERIC_READ | GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-			WriteFile(hFile, pReply->pData, (DWORD)pReply->dataLength, &dwBytes, NULL);
-			ret = true;
+			char *date = NULL, *size = NULL;
+			for (int i = 0; i < pReply->headersCount; i++)
+			{
+				if (lstrcmpiA(pReply->headers[i].szName, "Last-Modified") == 0)
+				{
+					date = pReply->headers[i].szValue;
+					continue;
+				}
+				if (lstrcmpiA(pReply->headers[i].szName, "Content-Length") == 0)
+				{
+					size = pReply->headers[i].szValue;
+					continue;
+				}
+			}
+			if (date != NULL && size != NULL)
+			{
+				TCHAR *tdate = mir_a2t(date);
+				TCHAR *tsize = mir_a2t(size);
+				int fh;
+				struct _stat buf;
+
+		        fh = _topen(tszLocal, _O_RDONLY);
+				if (fh != -1)
+				{
+					_fstat(fh, &buf);
+					time_t modtime = DateToUnixTime(tdate, 0);
+					time_t filemodtime = mktime(localtime(&buf.st_atime));
+					if (modtime > filemodtime && buf.st_size != _ttoi(tsize))
+					{
+						hFile = CreateFile(tszLocal, GENERIC_READ | GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+						WriteFile(hFile, pReply->pData, (DWORD)pReply->dataLength, &dwBytes, NULL);
+						ret = true;
+					}
+					_close(fh);
+				}
+				else
+				{
+					hFile = CreateFile(tszLocal, GENERIC_READ | GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+					WriteFile(hFile, pReply->pData, (DWORD)pReply->dataLength, &dwBytes, NULL);
+					ret = true;
+				}
+				mir_free(tdate);
+				mir_free(tsize);
+			}
+			else
+			{
+				hFile = CreateFile(tszLocal, GENERIC_READ | GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+				WriteFile(hFile, pReply->pData, (DWORD)pReply->dataLength, &dwBytes, NULL);
+				ret = true;
+			}
 		}
 		CallService(MS_NETLIB_FREEHTTPREQUESTSTRUCT,0,(LPARAM)pReply);
 	}
@@ -359,208 +408,427 @@ VOID CheckCurrentFeed(HANDLE hContact)
 			mir_free(tszData);
 			if(hXml != NULL)
 			{
-				HXML node = xi.getChild(hXml, 0);
-				if (_tcsicmp(xi.getName(node), _T("rss")) == 0)
+				BOOL UtfEncode = FALSE;
+				for (int i = 0; i < xi.getAttrCount(hXml); i++)
 				{
-					for (int i = 0; i < xi.getAttrCount(node); i++)
+					if (_tcsicmp(xi.getAttrName(hXml, i), _T("encoding")) == 0)
 					{
-						if (_tcsicmp(xi.getAttrName(node, i), _T("version")) == 0)
+						if (lstrcmpi((TCHAR*)xi.getAttrValue(hXml, xi.getAttrName(hXml, i)), _T("UTF-8")) == 0)
 						{
-							TCHAR ver[MAX_PATH];
-							mir_sntprintf(ver, SIZEOF(ver), _T("RSS %s"), xi.getAttrValue(node, xi.getAttrName(node, i)));
-							DBWriteContactSettingTString(hContact, MODULE, "MirVer", ver);
+							UtfEncode = TRUE;
 							break;
 						}
 					}
-					HXML chan = xi.getChild(node, 0);
-					for (int j = 0; j < xi.getChildCount(chan); j++)
+				}
+				int childcount = 0;
+				HXML node = xi.getChild(hXml, childcount);
+				while(node)
+				{
+					if (_tcsicmp(xi.getName(node), _T("rss")) == 0 || _tcsicmp(xi.getName(node), _T("rdf")) == 0)
 					{
-						HXML child = xi.getChild(chan, j);
-						if (_tcsicmp(xi.getName(child), _T("title")) == 0)
+						if (_tcsicmp(xi.getName(node), _T("rss")) == 0)
 						{
-							DBWriteContactSettingTString(hContact, MODULE, "FirstName", xi.getText(child));
-							continue;
-						}
-						if (_tcsicmp(xi.getName(child), _T("link")) == 0)
-						{
-							DBWriteContactSettingTString(hContact, MODULE, "Homepage", xi.getText(child));
-							continue;
-						}
-						if (_tcsicmp(xi.getName(child), _T("description")) == 0)
-						{
-							DBWriteContactSettingTString(hContact, MODULE, "About", xi.getText(child));
-							continue;
-						}
-						if (_tcsicmp(xi.getName(child), _T("language")) == 0)
-						{
-							DBWriteContactSettingTString(hContact, MODULE, "Language1", xi.getText(child));
-							continue;
-						}
-						if (_tcsicmp(xi.getName(child), _T("managingEditor")) == 0)
-						{
-							DBWriteContactSettingTString(hContact, MODULE, "e-mail", xi.getText(child));
-							continue;
-						}
-						if (_tcsicmp(xi.getName(child), _T("Category")) == 0)
-						{
-							DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", xi.getText(child));
-							continue;
-						}
-						if (_tcsicmp(xi.getName(child), _T("image")) == 0)
-						{
-							for (int x = 0; x < xi.getChildCount(child); x++)
+							for (int i = 0; i < xi.getAttrCount(node); i++)
 							{
-								HXML imageval = xi.getChild(child, x);
-								if (_tcsicmp(xi.getName(imageval), _T("url")) == 0)
+								if (_tcsicmp(xi.getAttrName(node, i), _T("version")) == 0)
 								{
-									TCHAR path[MAX_PATH], *filename;
-									TCHAR *ext = _tcsrchr((TCHAR*)xi.getText(imageval), _T('.')) + 1;
-									DBVARIANT dbVar = {0};
-									DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
-									if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-										DBFreeVariant(&dbVar);
-									else
-										filename = dbVar.ptszVal;
-									mir_sntprintf(path, SIZEOF(path), _T("%s\\%s.%s"), tszRoot, filename, ext);
-									if (DownloadFile((TCHAR*)xi.getText(imageval), path))
-										CallService(MS_AV_SETAVATAR, (WPARAM)hContact, (LPARAM)path);
+									TCHAR ver[MAX_PATH];
+									mir_sntprintf(ver, SIZEOF(ver), _T("RSS %s"), xi.getAttrValue(node, xi.getAttrName(node, i)));
+									DBWriteContactSettingTString(hContact, MODULE, "MirVer", ver);
 									break;
 								}
 							}
 						}
-						if (_tcsicmp(xi.getName(child), _T("item")) == 0)
+						else if (_tcsicmp(xi.getName(node), _T("rdf")) == 0)
 						{
-							TCHAR *title = NULL, *link = NULL, *datetime = NULL, *descr = NULL, *author = NULL, *comments = NULL, *guid = NULL, *category = NULL;
-							for (int z = 0; z < xi.getChildCount(child); z++)
-							{
-								HXML itemval = xi.getChild(child, z);
-								if (_tcsicmp(xi.getName(itemval), _T("title")) == 0)
-								{
-									title = (TCHAR*)xi.getText(itemval);
-									continue;
-								}
-								if (_tcsicmp(xi.getName(itemval), _T("link")) == 0)
-								{
-									link = (TCHAR*)xi.getText(itemval);
-									continue;
-								}
-								if (_tcsicmp(xi.getName(itemval), _T("pubDate")) == 0)
-								{
-									datetime = (TCHAR*)xi.getText(itemval);
-									continue;
-								}
-								if (_tcsicmp(xi.getName(itemval), _T("description")) == 0)
-								{
-									descr = (TCHAR*)xi.getText(itemval);
-									continue;
-								}
-								if (_tcsicmp(xi.getName(itemval), _T("author")) == 0)
-								{
-									author = (TCHAR*)xi.getText(itemval);
-									continue;
-								}
-								if (_tcsicmp(xi.getName(itemval), _T("comments")) == 0)
-								{
-									comments = (TCHAR*)xi.getText(itemval);
-									continue;
-								}
-								if (_tcsicmp(xi.getName(itemval), _T("guid")) == 0)
-								{
-									guid = (TCHAR*)xi.getText(itemval);
-									continue;
-								}
-								if (_tcsicmp(xi.getName(itemval), _T("category")) == 0)
-								{
-									category = (TCHAR*)xi.getText(itemval);
-									continue;
-								}
-							}
-							TCHAR* message;
-							DBVARIANT dbVar = {0};
-							DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbVar);
-							if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-							{
-								message = _T(TAGSDEFAULT);
-								DBFreeVariant(&dbVar);
-							}
-							else
-							{
-								message = dbVar.ptszVal;
-							}
-							if (lstrcmp(title, NULL) == 0)
-								message = StrReplace(_T("#<title>#"), TranslateT("empty"), message);
-							else
-								message = StrReplace(_T("#<title>#"), title, message);
-							if (lstrcmp(link, NULL) == 0)
-								message = StrReplace(_T("#<link>#"), TranslateT("empty"), message);
-							else
-								message = StrReplace(_T("#<link>#"), link, message);
-							if (lstrcmp(descr, NULL) == 0)
-								message = StrReplace(_T("#<description>#"), TranslateT("empty"), message);
-							else
-								message = StrReplace(_T("#<description>#"), descr, message);
-							if (lstrcmp(author, NULL) == 0)
-								message = StrReplace(_T("#<author>#"), TranslateT("empty"), message);
-							else
-								message = StrReplace(_T("#<author>#"), author, message);
-							if (lstrcmp(comments, NULL) == 0)
-								message = StrReplace(_T("#<comments>#"), TranslateT("empty"), message);
-							else
-								message = StrReplace(_T("#<comments>#"), comments, message);
-							if (lstrcmp(guid, NULL) == 0)
-								message = StrReplace(_T("#<guid>#"), TranslateT("empty"), message);
-							else
-								message = StrReplace(_T("#<guid>#"), guid, message);
-							if (lstrcmp(category, NULL) == 0)
-								message = StrReplace(_T("#<category>#"), TranslateT("empty"), message);
-							else
-								message = StrReplace(_T("#<category>#"), category, message);
-							message = StrReplace(_T("&amp;"), _T("&"), message);
-							message = StrReplace(_T("&apos;"), _T("\'"), message);
-							message = StrReplace(_T("&gt;"), _T(">"), message);
-							message = StrReplace(_T("&lt;"), _T("<"), message);
-							message = StrReplace(_T("&quot;"), _T("\""), message);
-							message = StrReplace(_T("<br>"), _T("\n"), message);
-
-							char* pszUtf = mir_utf8encodeT(message);
-
-							time_t stamp = DateToUnixTime(datetime, 0);
-
-							DBEVENTINFO olddbei = { 0 };
-							HANDLE		hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDFIRST, (WPARAM)hContact, 0);
-							BOOL MesExist = FALSE;
-							while(hDbEvent)
-							{
-								ZeroMemory(&olddbei, sizeof(olddbei));
-								olddbei.cbSize = sizeof(olddbei);
-								olddbei.cbBlob = CallService(MS_DB_EVENT_GETBLOBSIZE, (WPARAM)hDbEvent, 0);
-								olddbei.pBlob = (PBYTE)malloc(olddbei.cbBlob);
-								CallService(MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&olddbei);
-								if (olddbei.timestamp == stamp && olddbei.cbBlob == lstrlenA(pszUtf) + 1 && lstrcmpA((char*)olddbei.pBlob, pszUtf) == 0)
-									MesExist = TRUE;
-								hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDNEXT, (WPARAM)hDbEvent, 0);
-							}
-
-							if (!MesExist)
-							{
-								DBEVENTINFO dbei = {0};
-								dbei.cbSize = sizeof(dbei);
-								dbei.eventType = EVENTTYPE_MESSAGE;
-								dbei.flags = DBEF_UTF;
-								dbei.szModule = MODULE;
-								dbei.timestamp = stamp;
-								dbei.cbBlob = lstrlenA(pszUtf) + 1;
-								dbei.pBlob = (PBYTE)pszUtf;
-								CallService(MS_DB_EVENT_ADD, (WPARAM)hContact, (LPARAM)&dbei);
-							}
-							mir_free(pszUtf);
+							DBWriteContactSettingTString(hContact, MODULE, "MirVer", _T("RSS 1.0"));
 						}
 
+						HXML chan = xi.getChild(node, 0);
+						for (int j = 0; j < xi.getChildCount(chan); j++)
+						{
+							HXML child = xi.getChild(chan, j);
+							if (_tcsicmp(xi.getName(child), _T("title")) == 0)
+							{
+								DBWriteContactSettingTString(hContact, MODULE, "FirstName", xi.getText(child));
+								continue;
+							}
+							if (_tcsicmp(xi.getName(child), _T("link")) == 0)
+							{
+								DBWriteContactSettingTString(hContact, MODULE, "Homepage", xi.getText(child));
+								continue;
+							}
+							if (_tcsicmp(xi.getName(child), _T("description")) == 0)
+							{
+								DBWriteContactSettingTString(hContact, MODULE, "About", xi.getText(child));
+								continue;
+							}
+							if (_tcsicmp(xi.getName(child), _T("language")) == 0)
+							{
+								DBWriteContactSettingTString(hContact, MODULE, "Language1", xi.getText(child));
+								continue;
+							}
+							if (_tcsicmp(xi.getName(child), _T("managingEditor")) == 0)
+							{
+								DBWriteContactSettingTString(hContact, MODULE, "e-mail", xi.getText(child));
+								continue;
+							}
+							if (_tcsicmp(xi.getName(child), _T("Category")) == 0)
+							{
+								DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", xi.getText(child));
+								continue;
+							}
+							if (_tcsicmp(xi.getName(child), _T("image")) == 0)
+							{
+								for (int x = 0; x < xi.getChildCount(child); x++)
+								{
+									HXML imageval = xi.getChild(child, x);
+									if (_tcsicmp(xi.getName(imageval), _T("url")) == 0)
+									{
+										TCHAR path[MAX_PATH], *filename;
+										TCHAR *ext = _tcsrchr((TCHAR*)xi.getText(imageval), _T('.')) + 1;
+										DBVARIANT dbVar = {0};
+										DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
+										if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+											DBFreeVariant(&dbVar);
+										else
+											filename = dbVar.ptszVal;
+										mir_sntprintf(path, SIZEOF(path), _T("%s\\%s.%s"), tszRoot, filename, ext);
+										if (DownloadFile((TCHAR*)xi.getText(imageval), path))
+											CallService(MS_AV_SETAVATAR, (WPARAM)hContact, (LPARAM)path);
+										break;
+									}
+								}
+							}
+							if (_tcsicmp(xi.getName(child), _T("item")) == 0)
+							{
+								TCHAR *title = NULL, *link = NULL, *datetime = NULL, *descr = NULL, *author = NULL, *comments = NULL, *guid = NULL, *category = NULL;
+								for (int z = 0; z < xi.getChildCount(child); z++)
+								{
+									HXML itemval = xi.getChild(child, z);
+									if (_tcsicmp(xi.getName(itemval), _T("title")) == 0)
+									{
+										title = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("link")) == 0)
+									{
+										link = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("pubDate")) == 0)
+									{
+										datetime = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("dc:date")) == 0)
+									{
+										datetime = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("description")) == 0)
+									{
+										descr = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("author")) == 0)
+									{
+										author = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("comments")) == 0)
+									{
+										comments = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("guid")) == 0)
+									{
+										guid = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("category")) == 0)
+									{
+										category = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+								}
+								TCHAR* message;
+								DBVARIANT dbVar = {0};
+								DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbVar);
+								if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+								{
+									message = _T(TAGSDEFAULT);
+									DBFreeVariant(&dbVar);
+								}
+								else
+								{
+									message = dbVar.ptszVal;
+								}
+								if (lstrcmp(title, NULL) == 0)
+									message = StrReplace(_T("#<title>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<title>#"), title, message);
+								if (lstrcmp(link, NULL) == 0)
+									message = StrReplace(_T("#<link>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<link>#"), link, message);
+								if (lstrcmp(descr, NULL) == 0)
+									message = StrReplace(_T("#<description>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<description>#"), descr, message);
+								if (lstrcmp(author, NULL) == 0)
+									message = StrReplace(_T("#<author>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<author>#"), author, message);
+								if (lstrcmp(comments, NULL) == 0)
+									message = StrReplace(_T("#<comments>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<comments>#"), comments, message);
+								if (lstrcmp(guid, NULL) == 0)
+									message = StrReplace(_T("#<guid>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<guid>#"), guid, message);
+								if (lstrcmp(category, NULL) == 0)
+									message = StrReplace(_T("#<category>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<category>#"), category, message);
+								message = StrReplace(_T("&amp;"), _T("&"), message);
+								message = StrReplace(_T("&apos;"), _T("\'"), message);
+								message = StrReplace(_T("&gt;"), _T(">"), message);
+								message = StrReplace(_T("&lt;"), _T("<"), message);
+								message = StrReplace(_T("&quot;"), _T("\""), message);
+								message = StrReplace(_T("<br>"), _T("\n"), message);
+
+								char* pszUtf;
+								if (!UtfEncode)
+									pszUtf = mir_utf8encodeT(message);
+								else
+									pszUtf = mir_t2a(message);
+
+								time_t stamp = DateToUnixTime(datetime, 0);
+
+								DBEVENTINFO olddbei = { 0 };
+								HANDLE		hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDFIRST, (WPARAM)hContact, 0);
+								BOOL MesExist = FALSE;
+								while(hDbEvent)
+								{
+									ZeroMemory(&olddbei, sizeof(olddbei));
+									olddbei.cbSize = sizeof(olddbei);
+									olddbei.cbBlob = CallService(MS_DB_EVENT_GETBLOBSIZE, (WPARAM)hDbEvent, 0);
+									olddbei.pBlob = (PBYTE)malloc(olddbei.cbBlob);
+									CallService(MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&olddbei);
+									if (olddbei.timestamp == stamp && olddbei.cbBlob == lstrlenA(pszUtf) + 1 && lstrcmpA((char*)olddbei.pBlob, pszUtf) == 0)
+										MesExist = TRUE;
+									hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDNEXT, (WPARAM)hDbEvent, 0);
+								}
+
+								if (!MesExist)
+								{
+									DBEVENTINFO dbei = {0};
+									dbei.cbSize = sizeof(dbei);
+									dbei.eventType = EVENTTYPE_MESSAGE;
+									dbei.flags = DBEF_UTF;
+									dbei.szModule = MODULE;
+									dbei.timestamp = stamp;
+									dbei.cbBlob = lstrlenA(pszUtf) + 1;
+									dbei.pBlob = (PBYTE)pszUtf;
+									CallService(MS_DB_EVENT_ADD, (WPARAM)hContact, (LPARAM)&dbei);
+								}
+								mir_free(pszUtf);
+							}
+
+						}
 					}
-				}
-				else if (_tcsicmp(xi.getName(node), _T("feed")) == 0)
-				{
-					DBWriteContactSettingTString(hContact, MODULE, "MirVer", _T("Atom 3"));
+					else if (_tcsicmp(xi.getName(node), _T("feed")) == 0)
+					{
+						DBWriteContactSettingTString(hContact, MODULE, "MirVer", _T("Atom"));
+						HXML feed = xi.getChild(node, 0);
+						for (int j = 0; j < xi.getChildCount(feed); j++)
+						{
+							HXML child = xi.getChild(feed, j);
+							if (_tcsicmp(xi.getName(child), _T("title")) == 0)
+							{
+								DBWriteContactSettingTString(hContact, MODULE, "FirstName", xi.getText(child));
+								continue;
+							}
+							if (_tcsicmp(xi.getName(child), _T("link")) == 0)
+							{
+								DBWriteContactSettingTString(hContact, MODULE, "Homepage", xi.getText(child));
+								continue;
+							}
+							if (_tcsicmp(xi.getName(child), _T("subtitle")) == 0)
+							{
+								DBWriteContactSettingTString(hContact, MODULE, "About", xi.getText(child));
+								continue;
+							}
+							if (_tcsicmp(xi.getName(child), _T("language")) == 0)
+							{
+								DBWriteContactSettingTString(hContact, MODULE, "Language1", xi.getText(child));
+								continue;
+							}
+							if (_tcsicmp(xi.getName(child), _T("author")) == 0)
+							{
+								DBWriteContactSettingTString(hContact, MODULE, "e-mail", xi.getText(child));
+								continue;
+							}
+							if (_tcsicmp(xi.getName(child), _T("Category")) == 0)
+							{
+								DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", xi.getText(child));
+								continue;
+							}
+							if (_tcsicmp(xi.getName(child), _T("icon")) == 0)
+							{
+								for (int x = 0; x < xi.getChildCount(child); x++)
+								{
+									HXML imageval = xi.getChild(child, x);
+									if (_tcsicmp(xi.getName(imageval), _T("url")) == 0)
+									{
+										TCHAR path[MAX_PATH], *filename;
+										TCHAR *ext = _tcsrchr((TCHAR*)xi.getText(imageval), _T('.')) + 1;
+										DBVARIANT dbVar = {0};
+										DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
+										if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+											DBFreeVariant(&dbVar);
+										else
+											filename = dbVar.ptszVal;
+										mir_sntprintf(path, SIZEOF(path), _T("%s\\%s.%s"), tszRoot, filename, ext);
+										if (DownloadFile((TCHAR*)xi.getText(imageval), path))
+											CallService(MS_AV_SETAVATAR, (WPARAM)hContact, (LPARAM)path);
+										break;
+									}
+								}
+							}
+							if (_tcsicmp(xi.getName(child), _T("entry")) == 0)
+							{
+								TCHAR *title = NULL, *link = NULL, *datetime = NULL, *descr = NULL, *author = NULL, *comments = NULL, *guid = NULL, *category = NULL;
+								for (int z = 0; z < xi.getChildCount(child); z++)
+								{
+									HXML itemval = xi.getChild(child, z);
+									if (_tcsicmp(xi.getName(itemval), _T("title")) == 0)
+									{
+										title = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("link")) == 0)
+									{
+										link = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("updated")) == 0)
+									{
+										datetime = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("summary")) == 0)
+									{
+										descr = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("author")) == 0)
+									{
+										author = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("comments")) == 0)
+									{
+										comments = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("guid")) == 0)
+									{
+										guid = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+									if (_tcsicmp(xi.getName(itemval), _T("category")) == 0)
+									{
+										category = (TCHAR*)xi.getText(itemval);
+										continue;
+									}
+								}
+								TCHAR* message;
+								DBVARIANT dbVar = {0};
+								DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbVar);
+								if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+								{
+									message = _T(TAGSDEFAULT);
+									DBFreeVariant(&dbVar);
+								}
+								else
+								{
+									message = dbVar.ptszVal;
+								}
+								if (lstrcmp(title, NULL) == 0)
+									message = StrReplace(_T("#<title>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<title>#"), title, message);
+								if (lstrcmp(link, NULL) == 0)
+									message = StrReplace(_T("#<link>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<link>#"), link, message);
+								if (lstrcmp(descr, NULL) == 0)
+									message = StrReplace(_T("#<description>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<description>#"), descr, message);
+								if (lstrcmp(author, NULL) == 0)
+									message = StrReplace(_T("#<author>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<author>#"), author, message);
+								if (lstrcmp(comments, NULL) == 0)
+									message = StrReplace(_T("#<comments>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<comments>#"), comments, message);
+								if (lstrcmp(guid, NULL) == 0)
+									message = StrReplace(_T("#<guid>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<guid>#"), guid, message);
+								if (lstrcmp(category, NULL) == 0)
+									message = StrReplace(_T("#<category>#"), TranslateT("empty"), message);
+								else
+									message = StrReplace(_T("#<category>#"), category, message);
+								message = StrReplace(_T("&amp;"), _T("&"), message);
+								message = StrReplace(_T("&apos;"), _T("\'"), message);
+								message = StrReplace(_T("&gt;"), _T(">"), message);
+								message = StrReplace(_T("&lt;"), _T("<"), message);
+								message = StrReplace(_T("&quot;"), _T("\""), message);
+								message = StrReplace(_T("<br>"), _T("\n"), message);
+
+								char* pszUtf = mir_utf8encodeT(message);
+
+								time_t stamp = DateToUnixTime(datetime, 0);
+
+								DBEVENTINFO olddbei = { 0 };
+								HANDLE		hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDFIRST, (WPARAM)hContact, 0);
+								BOOL MesExist = FALSE;
+								while(hDbEvent)
+								{
+									ZeroMemory(&olddbei, sizeof(olddbei));
+									olddbei.cbSize = sizeof(olddbei);
+									olddbei.cbBlob = CallService(MS_DB_EVENT_GETBLOBSIZE, (WPARAM)hDbEvent, 0);
+									olddbei.pBlob = (PBYTE)malloc(olddbei.cbBlob);
+									CallService(MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&olddbei);
+									if (olddbei.timestamp == stamp && olddbei.cbBlob == lstrlenA(pszUtf) + 1 && lstrcmpA((char*)olddbei.pBlob, pszUtf) == 0)
+										MesExist = TRUE;
+									hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDNEXT, (WPARAM)hDbEvent, 0);
+								}
+
+								if (!MesExist)
+								{
+									DBEVENTINFO dbei = {0};
+									dbei.cbSize = sizeof(dbei);
+									dbei.eventType = EVENTTYPE_MESSAGE;
+									dbei.flags = DBEF_UTF;
+									dbei.szModule = MODULE;
+									dbei.timestamp = stamp;
+									dbei.cbBlob = lstrlenA(pszUtf) + 1;
+									dbei.pBlob = (PBYTE)pszUtf;
+									CallService(MS_DB_EVENT_ADD, (WPARAM)hContact, (LPARAM)&dbei);
+								}
+								mir_free(pszUtf);
+							}
+						}
+					}
+					childcount +=1;
+					node = xi.getChild(hXml, childcount);
 				}
 			}
 		}
