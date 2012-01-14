@@ -212,7 +212,7 @@ time_t __stdcall DateToUnixTime(TCHAR* stamp, BOOL FeedType)
 			month = 12;
 		if (lstrcmp(timezonesign, _T("+")) ==0)
 			mir_sntprintf(p, 4+2+2+1+2+1+2+1+2+1, _T("%04d%02d%02dT%02d:%02d:%02d"), year, month, day, hour-timezoneh, min-timezonem, sec);
-		if (lstrcmp(timezonesign, _T("-")) ==0)
+		else if (lstrcmp(timezonesign, _T("-")) ==0)
 			mir_sntprintf(p, 4+2+2+1+2+1+2+1+2+1, _T("%04d%02d%02dT%02d:%02d:%02d"), year, month, day, hour+timezoneh, min+timezonem, sec);
 		else
 			mir_sntprintf(p, 4+2+2+1+2+1+2+1+2+1, _T("%04d%02d%02dT%02d:%02d:%02d"), year, month, day, hour, min, sec);
