@@ -44,21 +44,82 @@ VOID NetlibUnInit()
 	hNetlibUser = NULL;
 }
 
+static void arrayToHex(BYTE* data, size_t datasz, char* res)
+{
+	char* resptr = res;
+	for (unsigned i=0; i<datasz ; i++)
+	{
+		const BYTE ch = data[i];
+
+		const char ch0 = (char)(ch >> 4);
+		*resptr++ = (char)((ch0 <= 9) ? ('0' + ch0) : (('a' - 10) + ch0));
+
+		const char ch1 = (char)(ch & 0xF);
+		*resptr++ = (char)((ch1 <= 9) ? ('0' + ch1) : (('a' - 10) + ch1));
+	}
+	*resptr = '\0';
+} 
+
+void GetLoginStr(char* user, size_t szuser, char* pass)
+{
+	DBVARIANT dbv;
+
+    //if (DBGetContactSettingString(NULL, PluginName, "Username", &dbv) == 0)
+	//{
+		//mir_snprintf(user, szuser, "%s", dbv.pszVal);
+		//DBFreeVariant(&dbv);
+	//}
+    //else
+        user[0] = 0;
+
+    //if (DBGetContactSettingString(NULL, PluginName, "Password", &dbv) == 0)
+	/*{
+		CallService(MS_DB_CRYPT_DECODESTRING, strlen(dbv.pszVal)+1, (LPARAM)dbv.pszVal);
+
+		mir_md5_byte_t hash[16];
+		mir_md5_state_t context;
+
+		mir_md5_init(&context);
+		mir_md5_append(&context, (BYTE*)dbv.pszVal, (int)strlen(dbv.pszVal));
+		mir_md5_finish(&context, hash);
+
+		arrayToHex(hash, sizeof(hash), pass);
+
+		DBFreeVariant(&dbv);
+	}
+    else*/
+        pass[0] = 0;
+}
+
+void CreateAuthString(char* auth)
+{
+    char user[64], pass[40];
+    GetLoginStr(user, sizeof(user), pass);
+
+	char str[110];
+    int len = mir_snprintf(str, sizeof(str), "%s@%s", user, pass);
+
+	strcpy(auth, "Basic ");
+	NETLIBBASE64 nlb = { auth+6, 250, (PBYTE)str, len };
+	CallService(MS_NETLIB_BASE64ENCODE, 0, LPARAM(&nlb));
+}
+
 VOID GetNewsData(TCHAR *tszUrl, char** szData)
 {
+	char* szRedirUrl  = NULL;
 	NETLIBHTTPREQUEST nlhr = {0}, *nlhrReply;
 	NETLIBHTTPHEADER headers[4];
 
 	// initialize the netlib request
 	nlhr.cbSize = sizeof(nlhr);
 	nlhr.requestType = REQUEST_GET;
-	nlhr.flags = NLHRF_DUMPASTEXT | NLHRF_HTTP11;
+	nlhr.flags = NLHRF_NODUMP | NLHRF_HTTP11;
 	char *szUrl = mir_t2a(tszUrl);
 	nlhr.szUrl = szUrl;
 	nlhr.nlc = hNetlibHttp;
 
 	// change the header so the plugin is pretended to be IE 6 + WinXP
-	nlhr.headersCount = 4;
+	nlhr.headersCount = 5;
 	nlhr.headers = headers;
 	nlhr.headers[0].szName  = "User-Agent";
 	nlhr.headers[0].szValue = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
@@ -68,21 +129,71 @@ VOID GetNewsData(TCHAR *tszUrl, char** szData)
 	nlhr.headers[2].szValue = "no-cache";
 	nlhr.headers[3].szName  = "Connection";
 	nlhr.headers[3].szValue = "close";
+	nlhr.headers[4].szName  = "Authorization";
+
+	//char auth[256];
+	//CreateAuthString(auth);
+	nlhr.headers[4].szValue = "Basic 123445";//auth;
 
 	// download the page
 	nlhrReply = (NETLIBHTTPREQUEST*)CallService(MS_NETLIB_HTTPTRANSACTION, (WPARAM)hNetlibUser, (LPARAM)&nlhr);
 	if (nlhrReply) 
 	{
 		// if the recieved code is 200 OK
-		if(nlhrReply->resultCode == 200) 
+		switch(nlhrReply->resultCode)
 		{
-			if (nlhrReply->dataLength)
+			case 200: 
 			{
-				// allocate memory and save the retrieved data
-				*szData = (char *)mir_alloc(nlhrReply->dataLength + 2);
-				memcpy(*szData, nlhrReply->pData, nlhrReply->dataLength);
-				(*szData)[nlhrReply->dataLength] = 0;
+				if (nlhrReply->dataLength)
+				{
+					// allocate memory and save the retrieved data
+					*szData = (char *)mir_alloc(nlhrReply->dataLength + 2);
+					memcpy(*szData, nlhrReply->pData, nlhrReply->dataLength);
+					(*szData)[nlhrReply->dataLength] = 0;
+				}
+				break;
 			}
+
+			case 401:
+			{
+				//ShowMessage(0, TranslateT("Cannot upload VersionInfo. Incorrect username or password"));
+				break;
+			}
+
+			case 301:
+			case 302:
+			case 307:
+				// get the url for the new location and save it to szInfo
+				// look for the reply header "Location"
+				for (int i=0; i<nlhrReply->headersCount; i++) 
+				{
+					if (!strcmp(nlhrReply->headers[i].szName, "Location")) 
+					{
+						size_t rlen = 0;
+						if (nlhrReply->headers[i].szValue[0] == '/')
+						{
+							const char* szPath;
+							const char* szPref = strstr(szUrl, "://");
+							szPref = szPref ? szPref + 3 : szUrl;
+							szPath = strchr(szPref, '/');
+							rlen = szPath != NULL ? szPath - szUrl : strlen(szUrl); 
+						}
+
+						szRedirUrl = (char*)mir_realloc(szRedirUrl, 
+							rlen + strlen(nlhrReply->headers[i].szValue)*3 + 1);
+
+						strncpy(szRedirUrl, szUrl, rlen);
+						strcpy(szRedirUrl+rlen, nlhrReply->headers[i].szValue); 
+							
+						nlhr.szUrl = szRedirUrl;
+						break;
+					}
+				}
+				break;
+
+			default:
+				//ShowMessage(0, TranslateT("Cannot upload VersionInfo. Unknown error"));
+				break;
 		}
 	}
 	mir_free(szUrl);
@@ -186,29 +297,29 @@ time_t __stdcall DateToUnixTime(TCHAR* stamp, BOOL FeedType)
 		TCHAR weekday[4], monthstr[4], timezonesign[2];
 		INT day, month, year, hour, min, sec, timezoneh, timezonem;
 		_stscanf( p, _T("%3s, %d %3s %d %d:%d:%d %1s%02d%02d"), &weekday, &day, &monthstr, &year, &hour, &min, &sec, &timezonesign, &timezoneh, &timezonem);
-		if (_tcsicmp(monthstr, _T("Jan")) ==0)
+		if (lstrcmpi(monthstr, _T("Jan")) ==0)
 			month = 1;
-		if (_tcsicmp(monthstr, _T("Feb")) ==0)
+		if (lstrcmpi(monthstr, _T("Feb")) ==0)
 			month = 2;
-		if (_tcsicmp(monthstr, _T("Mar")) ==0)
+		if (lstrcmpi(monthstr, _T("Mar")) ==0)
 			month = 3;
-		if (_tcsicmp(monthstr, _T("Apr")) ==0)
+		if (lstrcmpi(monthstr, _T("Apr")) ==0)
 			month = 4;
-		if (_tcsicmp(monthstr, _T("May")) ==0)
+		if (lstrcmpi(monthstr, _T("May")) ==0)
 			month = 5;
-		if (_tcsicmp(monthstr, _T("Jun")) ==0)
+		if (lstrcmpi(monthstr, _T("Jun")) ==0)
 			month = 6;
-		if (_tcsicmp(monthstr, _T("Jul")) ==0)
+		if (lstrcmpi(monthstr, _T("Jul")) ==0)
 			month = 7;
-		if (_tcsicmp(monthstr, _T("Aug")) ==0)
+		if (lstrcmpi(monthstr, _T("Aug")) ==0)
 			month = 8;
-		if (_tcsicmp(monthstr, _T("Sep")) ==0)
+		if (lstrcmpi(monthstr, _T("Sep")) ==0)
 			month = 9;
-		if (_tcsicmp(monthstr, _T("Oct")) ==0)
+		if (lstrcmpi(monthstr, _T("Oct")) ==0)
 			month = 10;
-		if (_tcsicmp(monthstr, _T("Nov")) ==0)
+		if (lstrcmpi(monthstr, _T("Nov")) ==0)
 			month = 11;
-		if (_tcsicmp(monthstr, _T("Dec")) ==0)
+		if (lstrcmpi(monthstr, _T("Dec")) ==0)
 			month = 12;
 		if (lstrcmp(timezonesign, _T("+")) ==0)
 			mir_sntprintf(p, 4+2+2+1+2+1+2+1+2+1, _T("%04d%02d%02dT%02d:%02d:%02d"), year, month, day, hour-timezoneh, min-timezonem, sec);
@@ -390,6 +501,95 @@ size_t PathToRelative(const TCHAR *pSrc, TCHAR *pOut)
 {	return CallService( MS_UTILS_PATHTORELATIVET, (WPARAM)pSrc, (LPARAM)pOut );
 }
 
+TCHAR* CheckFeed(TCHAR* tszURL)
+{
+	char *szData = NULL;
+	DBVARIANT dbVar = {0};
+	if (CallProtoService(MODULE, PS_GETSTATUS, 0, 0) != ID_STATUS_OFFLINE)
+	{
+		GetNewsData(tszURL, &szData);
+		if (szData)
+		{
+			TCHAR *tszData = mir_a2t(szData);
+			int bytesParsed = 0;
+			HXML hXml = xi.parseString(tszData, &bytesParsed, NULL);
+			mir_free(tszData);
+			if(hXml != NULL)
+			{
+				BOOL UtfEncode = FALSE;
+				for (int i = 0; i < xi.getAttrCount(hXml); i++)
+				{
+					if (lstrcmpi(xi.getAttrName(hXml, i), _T("encoding")) == 0)
+					{
+						if (lstrcmpi((TCHAR*)xi.getAttrValue(hXml, xi.getAttrName(hXml, i)), _T("UTF-8")) == 0)
+						{
+							UtfEncode = TRUE;
+							break;
+						}
+					}
+				}
+				int childcount = 0;
+				HXML node = xi.getChild(hXml, childcount);
+				while(node)
+				{
+					if (lstrcmpi(xi.getName(node), _T("rss")) == 0 || lstrcmpi(xi.getName(node), _T("rdf")) == 0)
+					{
+						HXML chan = xi.getChild(node, 0);
+						for (int j = 0; j < xi.getChildCount(chan); j++)
+						{
+							HXML child = xi.getChild(chan, j);
+							if (lstrcmpi(xi.getName(child), _T("title")) == 0)
+							{
+								TCHAR mes[MAX_PATH];
+								mir_sntprintf(mes, SIZEOF(mes), TranslateT("%s\nis a valid feed's address."), tszURL);
+								MessageBox(NULL, mes, TranslateT("New Aggregator"), MB_OK|MB_ICONINFORMATION);
+								TCHAR *tszTitle = (TCHAR*)xi.getText(child);
+								if (UtfEncode)
+								{
+									char* szstring = mir_t2a(tszTitle);
+									TCHAR* tszstring = mir_utf8decodeT(szstring);
+									tszTitle = (TCHAR*)mir_alloc(sizeof(TCHAR)*lstrlen(tszstring)+1);
+									_tcscpy(tszTitle, tszstring);
+									mir_free(tszstring);
+									mir_free(szstring);
+								}
+								return tszTitle;
+							}
+						}
+					}
+					else if (lstrcmpi(xi.getName(node), _T("feed")) == 0)
+					{
+						for (int j = 0; j < xi.getChildCount(node); j++)
+						{
+							HXML child = xi.getChild(node, j);
+							if (lstrcmpi(xi.getName(child), _T("title")) == 0)
+							{
+								TCHAR mes[MAX_PATH];
+								mir_sntprintf(mes, SIZEOF(mes), TranslateT("%s\nis a valid feed's address."), tszURL);
+								MessageBox(NULL, mes, TranslateT("New Aggregator"), MB_OK|MB_ICONINFORMATION);
+								TCHAR *tszTitle = (TCHAR*)xi.getText(child);
+								if (UtfEncode)
+								{
+									char* szstring = mir_t2a(tszTitle);
+									TCHAR* tszstring = mir_utf8decodeT(szstring);
+									tszTitle = (TCHAR*)mir_alloc(sizeof(TCHAR)*lstrlen(tszstring)+1);
+									_tcscpy(tszTitle, tszstring);
+									mir_free(tszstring);
+									mir_free(szstring);
+								}
+								return tszTitle;
+							}
+						}
+					}
+					childcount +=1;
+					node = xi.getChild(hXml, childcount);
+				}
+			}
+		}
+	}
+	return NULL;
+}
+
 VOID CheckCurrentFeed(HANDLE hContact)
 {
 	char *szData = NULL;
@@ -411,7 +611,7 @@ VOID CheckCurrentFeed(HANDLE hContact)
 				BOOL UtfEncode = FALSE;
 				for (int i = 0; i < xi.getAttrCount(hXml); i++)
 				{
-					if (_tcsicmp(xi.getAttrName(hXml, i), _T("encoding")) == 0)
+					if (lstrcmpi(xi.getAttrName(hXml, i), _T("encoding")) == 0)
 					{
 						if (lstrcmpi((TCHAR*)xi.getAttrValue(hXml, xi.getAttrName(hXml, i)), _T("UTF-8")) == 0)
 						{
@@ -424,13 +624,13 @@ VOID CheckCurrentFeed(HANDLE hContact)
 				HXML node = xi.getChild(hXml, childcount);
 				while(node)
 				{
-					if (_tcsicmp(xi.getName(node), _T("rss")) == 0 || _tcsicmp(xi.getName(node), _T("rdf")) == 0)
+					if (lstrcmpi(xi.getName(node), _T("rss")) == 0 || lstrcmpi(xi.getName(node), _T("rdf")) == 0)
 					{
-						if (_tcsicmp(xi.getName(node), _T("rss")) == 0)
+						if (lstrcmpi(xi.getName(node), _T("rss")) == 0)
 						{
 							for (int i = 0; i < xi.getAttrCount(node); i++)
 							{
-								if (_tcsicmp(xi.getAttrName(node, i), _T("version")) == 0)
+								if (lstrcmpi(xi.getAttrName(node, i), _T("version")) == 0)
 								{
 									TCHAR ver[MAX_PATH];
 									mir_sntprintf(ver, SIZEOF(ver), _T("RSS %s"), xi.getAttrValue(node, xi.getAttrName(node, i)));
@@ -439,7 +639,7 @@ VOID CheckCurrentFeed(HANDLE hContact)
 								}
 							}
 						}
-						else if (_tcsicmp(xi.getName(node), _T("rdf")) == 0)
+						else if (lstrcmpi(xi.getName(node), _T("rdf")) == 0)
 						{
 							DBWriteContactSettingTString(hContact, MODULE, "MirVer", _T("RSS 1.0"));
 						}
@@ -448,42 +648,42 @@ VOID CheckCurrentFeed(HANDLE hContact)
 						for (int j = 0; j < xi.getChildCount(chan); j++)
 						{
 							HXML child = xi.getChild(chan, j);
-							if (_tcsicmp(xi.getName(child), _T("title")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("title")) == 0)
 							{
 								DBWriteContactSettingTString(hContact, MODULE, "FirstName", xi.getText(child));
 								continue;
 							}
-							if (_tcsicmp(xi.getName(child), _T("link")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("link")) == 0)
 							{
 								DBWriteContactSettingTString(hContact, MODULE, "Homepage", xi.getText(child));
 								continue;
 							}
-							if (_tcsicmp(xi.getName(child), _T("description")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("description")) == 0)
 							{
 								DBWriteContactSettingTString(hContact, MODULE, "About", xi.getText(child));
 								continue;
 							}
-							if (_tcsicmp(xi.getName(child), _T("language")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("language")) == 0)
 							{
 								DBWriteContactSettingTString(hContact, MODULE, "Language1", xi.getText(child));
 								continue;
 							}
-							if (_tcsicmp(xi.getName(child), _T("managingEditor")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("managingEditor")) == 0)
 							{
 								DBWriteContactSettingTString(hContact, MODULE, "e-mail", xi.getText(child));
 								continue;
 							}
-							if (_tcsicmp(xi.getName(child), _T("Category")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("Category")) == 0)
 							{
 								DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", xi.getText(child));
 								continue;
 							}
-							if (_tcsicmp(xi.getName(child), _T("image")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("image")) == 0)
 							{
 								for (int x = 0; x < xi.getChildCount(child); x++)
 								{
 									HXML imageval = xi.getChild(child, x);
-									if (_tcsicmp(xi.getName(imageval), _T("url")) == 0)
+									if (lstrcmpi(xi.getName(imageval), _T("url")) == 0)
 									{
 										TCHAR path[MAX_PATH], *filename;
 										TCHAR *ext = _tcsrchr((TCHAR*)xi.getText(imageval), _T('.')) + 1;
@@ -500,53 +700,58 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									}
 								}
 							}
-							if (_tcsicmp(xi.getName(child), _T("item")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("item")) == 0)
 							{
 								TCHAR *title = NULL, *link = NULL, *datetime = NULL, *descr = NULL, *author = NULL, *comments = NULL, *guid = NULL, *category = NULL;
 								for (int z = 0; z < xi.getChildCount(child); z++)
 								{
 									HXML itemval = xi.getChild(child, z);
-									if (_tcsicmp(xi.getName(itemval), _T("title")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("title")) == 0)
 									{
 										title = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("link")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("link")) == 0)
 									{
 										link = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("pubDate")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("pubDate")) == 0)
 									{
 										datetime = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("dc:date")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("dc:date")) == 0)
 									{
 										datetime = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("description")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("description")) == 0)
 									{
 										descr = (TCHAR*)xi.getText(itemval);
+										TCHAR *test, *test2;
+										int tt;
+										test = (TCHAR*)xi.toString(itemval, &tt);
+										test2 = (TCHAR*)xi.toStringWithFormatting(itemval, &tt);
+										int count = xi.getAttrCount(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("author")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("author")) == 0)
 									{
 										author = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("comments")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("comments")) == 0)
 									{
 										comments = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("guid")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("guid")) == 0)
 									{
 										guid = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("category")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("category")) == 0)
 									{
 										category = (TCHAR*)xi.getText(itemval);
 										continue;
@@ -592,6 +797,7 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									message = StrReplace(_T("#<category>#"), TranslateT("empty"), message);
 								else
 									message = StrReplace(_T("#<category>#"), category, message);
+
 								message = StrReplace(_T("&amp;"), _T("&"), message);
 								message = StrReplace(_T("&apos;"), _T("\'"), message);
 								message = StrReplace(_T("&gt;"), _T(">"), message);
@@ -639,49 +845,68 @@ VOID CheckCurrentFeed(HANDLE hContact)
 
 						}
 					}
-					else if (_tcsicmp(xi.getName(node), _T("feed")) == 0)
+					else if (lstrcmpi(xi.getName(node), _T("feed")) == 0)
 					{
-						DBWriteContactSettingTString(hContact, MODULE, "MirVer", _T("Atom"));
-						HXML feed = xi.getChild(node, 0);
-						for (int j = 0; j < xi.getChildCount(feed); j++)
+						DBWriteContactSettingTString(hContact, MODULE, "MirVer", _T("Atom 3"));
+						for (int j = 0; j < xi.getChildCount(node); j++)
 						{
-							HXML child = xi.getChild(feed, j);
-							if (_tcsicmp(xi.getName(child), _T("title")) == 0)
+							HXML child = xi.getChild(node, j);
+							if (lstrcmpi(xi.getName(child), _T("title")) == 0)
 							{
 								DBWriteContactSettingTString(hContact, MODULE, "FirstName", xi.getText(child));
 								continue;
 							}
-							if (_tcsicmp(xi.getName(child), _T("link")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("link")) == 0)
 							{
-								DBWriteContactSettingTString(hContact, MODULE, "Homepage", xi.getText(child));
+								for (int x = 0; x < xi.getAttrCount(child); x++)
+								{
+									if (lstrcmpi(xi.getAttrName(child, x), _T("rel")) == 0)
+									{
+										if (lstrcmpi(xi.getAttrValue(child, xi.getAttrName(child, x)), _T("self")) == 0)
+											break;
+									}
+									if (lstrcmpi(xi.getAttrName(child, x), _T("href")) == 0)
+									{
+										DBWriteContactSettingTString(hContact, MODULE, "Homepage", xi.getAttrValue(child, xi.getAttrName(child, x)));
+									}
+								}
 								continue;
 							}
-							if (_tcsicmp(xi.getName(child), _T("subtitle")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("subtitle")) == 0)
 							{
 								DBWriteContactSettingTString(hContact, MODULE, "About", xi.getText(child));
 								continue;
 							}
-							if (_tcsicmp(xi.getName(child), _T("language")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("language")) == 0)
 							{
 								DBWriteContactSettingTString(hContact, MODULE, "Language1", xi.getText(child));
 								continue;
 							}
-							if (_tcsicmp(xi.getName(child), _T("author")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("author")) == 0)
 							{
-								DBWriteContactSettingTString(hContact, MODULE, "e-mail", xi.getText(child));
+								for (int x = 0; x < xi.getChildCount(child); x++)
+								{
+									HXML authorval = xi.getChild(child, x);
+									if (lstrcmpi(xi.getName(authorval), _T("name")) == 0)
+									{
+										DBWriteContactSettingTString(hContact, MODULE, "e-mail", xi.getText(authorval));
+										break;
+									}
+								}
+								
 								continue;
 							}
-							if (_tcsicmp(xi.getName(child), _T("Category")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("Category")) == 0)
 							{
 								DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", xi.getText(child));
 								continue;
 							}
-							if (_tcsicmp(xi.getName(child), _T("icon")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("icon")) == 0)
 							{
 								for (int x = 0; x < xi.getChildCount(child); x++)
 								{
 									HXML imageval = xi.getChild(child, x);
-									if (_tcsicmp(xi.getName(imageval), _T("url")) == 0)
+									if (lstrcmpi(xi.getName(imageval), _T("url")) == 0)
 									{
 										TCHAR path[MAX_PATH], *filename;
 										TCHAR *ext = _tcsrchr((TCHAR*)xi.getText(imageval), _T('.')) + 1;
@@ -698,50 +923,75 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									}
 								}
 							}
-							if (_tcsicmp(xi.getName(child), _T("entry")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("entry")) == 0)
 							{
 								TCHAR *title = NULL, *link = NULL, *datetime = NULL, *descr = NULL, *author = NULL, *comments = NULL, *guid = NULL, *category = NULL;
 								for (int z = 0; z < xi.getChildCount(child); z++)
 								{
 									HXML itemval = xi.getChild(child, z);
-									if (_tcsicmp(xi.getName(itemval), _T("title")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("title")) == 0)
 									{
-										title = (TCHAR*)xi.getText(itemval);
+										if (xi.getAttrCount(itemval) == 0)
+											title = (TCHAR*)xi.getText(itemval);
+										else///сделать правильно
+											title = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("link")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("link")) == 0)
 									{
-										link = (TCHAR*)xi.getText(itemval);
+										for (int x = 0; x < xi.getAttrCount(itemval); x++)
+										{
+											if (lstrcmpi(xi.getAttrName(itemval, x), _T("href")) == 0)
+											{
+												link = (TCHAR*)xi.getAttrValue(itemval, xi.getAttrName(itemval, x));
+												break;
+											}
+										}
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("updated")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("updated")) == 0)
 									{
 										datetime = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("summary")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("summary")) == 0 || lstrcmpi(xi.getName(itemval), _T("content")) == 0)
 									{
 										descr = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("author")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("author")) == 0)
 									{
-										author = (TCHAR*)xi.getText(itemval);
+										for (int x = 0; x < xi.getChildCount(itemval); x++)
+										{
+											HXML authorval = xi.getChild(itemval, x);
+											if (lstrcmpi(xi.getName(authorval), _T("name")) == 0)
+											{
+												author = (TCHAR*)xi.getText(authorval);
+												break;
+											}
+										}
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("comments")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("comments")) == 0)
 									{
 										comments = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("guid")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("id")) == 0)
 									{
 										guid = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (_tcsicmp(xi.getName(itemval), _T("category")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("category")) == 0)
 									{
-										category = (TCHAR*)xi.getText(itemval);
+										for (int x = 0; x < xi.getAttrCount(itemval); x++)
+										{
+											if (lstrcmpi(xi.getAttrName(itemval, x), _T("term")) == 0)
+											{
+												category = (TCHAR*)xi.getAttrValue(itemval, xi.getAttrName(itemval, x));
+												break;
+											}
+										}
 										continue;
 									}
 								}

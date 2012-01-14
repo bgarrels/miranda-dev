@@ -107,6 +107,7 @@ VOID UpdateList (HWND hwndList);
 VOID DeleteAllItems(HWND hwndList);
 time_t __stdcall DateToUnixTime(TCHAR *stamp, BOOL FeedType);
 VOID CheckCurrentFeed (HANDLE hContact);
+TCHAR* CheckFeed(TCHAR* tszURL);
 
 // ===============  NewsAggr SERVICES  ================
 // Check all Feeds info

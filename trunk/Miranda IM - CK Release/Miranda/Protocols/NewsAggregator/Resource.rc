@@ -65,7 +65,7 @@ BEGIN
     RTEXT           "Check every",IDC_STATIC,7,46,54,8
     EDITTEXT        IDC_CHECKTIME,63,44,28,12,ES_AUTOHSCROLL
     LTEXT           "minutes",IDC_STATIC,97,46,76,8
-    PUSHBUTTON      "Auto &discovery",IDC_DISCOVERY,177,44,59,12
+    PUSHBUTTON      "Check Feed",IDC_DISCOVERY,177,44,59,12
     GROUPBOX        "Authentication",IDC_STATIC,6,67,238,48
     CONTROL         "Use &authentication",IDC_USEAUTH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,80,157,10
     RTEXT           "Login",IDC_STATIC,16,96,42,8
