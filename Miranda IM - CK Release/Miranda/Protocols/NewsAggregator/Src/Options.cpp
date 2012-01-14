@@ -114,6 +114,21 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 					if (MessageBox(NULL, TranslateT("Are you sure?"), TranslateT("Tags Mask Reset"), MB_YESNO | MB_ICONWARNING) == IDYES)
 						SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
 					break;
+
+				case IDC_DISCOVERY:
+					{
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DISCOVERY), FALSE);
+						SetDlgItemText(hwndDlg, IDC_DISCOVERY, TranslateT("Wait..."));
+						TCHAR tszURL[MAX_PATH] = {0}, *tszTitle = NULL;
+						if (GetDlgItemText(hwndDlg, IDC_FEEDURL, tszURL, SIZEOF(tszURL)) || lstrcmp(tszURL, _T("http://")) != 0)
+							tszTitle = CheckFeed(tszURL);
+						else
+							MessageBox(NULL, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
+						SetDlgItemText(hwndDlg, IDC_FEEDTITLE, tszTitle);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DISCOVERY), TRUE);
+						SetDlgItemText(hwndDlg, IDC_DISCOVERY, TranslateT("Check Feed"));
+					}
+					break;
 			}
 			break;
 		}
@@ -264,6 +279,21 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 				case IDC_RESET:
 					if (MessageBox(NULL, TranslateT("Are you sure?"), TranslateT("Tags Mask Reset"), MB_YESNO | MB_ICONWARNING) == IDYES)
 						SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
+					break;
+
+				case IDC_DISCOVERY:
+					{
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DISCOVERY), FALSE);
+						SetDlgItemText(hwndDlg, IDC_DISCOVERY, TranslateT("Wait..."));
+						TCHAR tszURL[MAX_PATH] = {0}, *tszTitle = NULL;
+						if (GetDlgItemText(hwndDlg, IDC_FEEDURL, tszURL, SIZEOF(tszURL)) || lstrcmp(tszURL, _T("http://")) != 0)
+							tszTitle = CheckFeed(tszURL);
+						else
+							MessageBox(NULL, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
+						SetDlgItemText(hwndDlg, IDC_FEEDTITLE, tszTitle);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DISCOVERY), TRUE);
+						SetDlgItemText(hwndDlg, IDC_DISCOVERY, TranslateT("Check Feed"));
+					}
 					break;
 			}
 			break;
