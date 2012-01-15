@@ -282,14 +282,22 @@ bool DeleteDirectory(LPCTSTR lpszDir, bool noRecycleBin = true)
   return (ret == 0);
 }
 
-void RichHtmlExport::WriteHeader(const std::wstring &fileName, const std::wstring &filterName, const std::wstring &myName, const std::wstring &myId, const std::wstring &name1, const std::wstring &proto1, const std::wstring &id1, const std::string& baseProto1)
+void RichHtmlExport::WriteHeader(const std::wstring &fileName, const std::wstring &filterName, const std::wstring &myName, const std::wstring &myId, const std::wstring &name1, const std::wstring &proto1, const std::wstring &id1, const std::string& baseProto1, const std::wstring& encoding)
 {
 	baseProto = baseProto1;
 	folder = RemoveExt(fileName) + TranslateT("_files");
 	folderName = GetName(folder);
 	DeleteDirectory(folder.c_str());
 	CreateDirectory(folder.c_str(), NULL);
-	ExtractFile(IDR_CSS, folder + _T("\\history.css"));
+	std::wstring css =  folder + _T("\\history.css");
+	BOOL cssCopied = FALSE;
+	if(!Options::instance->extCssHtml2.empty())
+	{
+		cssCopied = CopyFile(Options::instance->extCssHtml2.c_str(), css.c_str(), FALSE);
+	}
+
+	if(!cssCopied)
+		ExtractFile(IDR_CSS, css);
 	ExtractFile(IDR_JS, folder + _T("\\history.js"));
 
 	HICON ico = (HICON)CallService(MS_SKIN2_GETICONBYHANDLE, 0, (LPARAM)hPlusExIcon);
@@ -306,7 +314,7 @@ void RichHtmlExport::WriteHeader(const std::wstring &fileName, const std::wstrin
 	CallService(MS_SKIN2_RELEASEICON, (LPARAM)ico, 0);
 
 	EXP_FILE << _T("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n");
-	EXP_FILE << _T("<html><head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n");
+	EXP_FILE << _T("<html><head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=") << encoding << _T("\">\n");
 	EXP_FILE << _T("<title>") << TranslateT("History Log") << _T(" [") << MakeTextHtmled(myName) << _T("] - [") << MakeTextHtmled(name1) << _T("]</title>\n");
 	EXP_FILE << _T("<link rel=\"Stylesheet\" href=\"") << folderName << _T("\\history.css\" type=\"text/css\">\n");
 	EXP_FILE << _T("<script type=\"text/javascript\" src=\"") << folderName << _T("\\history.js\"></script>\n");
@@ -331,8 +339,26 @@ void RichHtmlExport::WriteHeader(const std::wstring &fileName, const std::wstrin
 	EXP_FILE << _T("</script>\n");
 
 	EXP_FILE << _T("<h4>") << TranslateT("History Log") << _T("</h4>\n<h3>");
-	EXP_FILE << MakeTextHtmled(myName) << _T(" (") << MakeTextHtmled(proto1) << _T(": ") << MakeTextHtmled(myId) << _T(") - ");
-	EXP_FILE << MakeTextHtmled(name1) << _T(" (") << MakeTextHtmled(proto1) << _T(": ") << MakeTextHtmled(id1) << _T(")</h3>\n");
+	EXP_FILE << MakeTextHtmled(myName);
+	if(proto1.length() || myId.length())
+	{
+		EXP_FILE << _T(" (") << MakeTextHtmled(proto1) << _T(": ") << MakeTextHtmled(myId) << _T(") - ");
+	}
+	else
+	{
+		EXP_FILE << _T(" - ");
+	}
+
+	EXP_FILE << MakeTextHtmled(name1);
+	if(proto1.length() || id1.length())
+	{
+		EXP_FILE << _T(" (") << MakeTextHtmled(proto1) << _T(": ") << MakeTextHtmled(id1) << _T(")</h3>\n");
+	}
+	else
+	{
+		EXP_FILE << _T("</h3>\n");
+	}
+
 	EXP_FILE << _T("<h6>") << TranslateT("Filter:") << _T(" ") << MakeTextHtmled(filterName) << _T("</h6>\n");
 	groupId = 0;
 }
@@ -378,7 +404,7 @@ void RichHtmlExport::WriteMessage(bool isMe, int ico, const std::wstring &longDa
 		ev = _T("2");
 	EXP_FILE << _T("<div class=mes id=event") << ev << _T(">\n");
 	EXP_FILE << _T("<div class=eventimg id=") << id << _T(">")  << _T("<img src=\"") << folderName << _T("\\event") << ev1 << _T(".ico\" class=sessionimage width=\"16\" height=\"16\"/></div>\n");
-	EXP_FILE << _T("<div class=date id=") << id << _T(">") << shortDate << _T("</div>\n");
+	EXP_FILE << _T("<div class=date id=") << id << _T(">") << (Options::instance->exportHtml2ShowDate ? longDate : shortDate) << _T("</div>\n");
 	EXP_FILE << _T("<div class=nick id=") << id << _T(">") << MakeTextHtmled(user) << _T("</div>\n");
 	EXP_FILE << _T("<div class=text>\n");
 	EXP_FILE << mes;
@@ -388,14 +414,14 @@ void RichHtmlExport::WriteMessage(bool isMe, int ico, const std::wstring &longDa
 
 std::wstring RichHtmlExport::ReplaceSmileys(bool isMe, const std::wstring &msg, bool &isUrl)
 {
-	if(Options::instance->messagesUseSmileys && g_SmileyAddAvail)
+	if(Options::instance->exportHtml2UseSmileys && g_SmileyAddAvail)
 	{
 		TCHAR* msgbuf = new TCHAR[msg.length() + 1];
 		memcpy_s(msgbuf, (msg.length() + 1) * sizeof(TCHAR), msg.c_str(), (msg.length() + 1) * sizeof(TCHAR));
 		SMADD_BATCHPARSE2 sp = {0};
 		SMADD_BATCHPARSERES *spr;
 		sp.cbSize = sizeof(sp);
-		sp.Protocolname = baseProto.c_str();
+		sp.Protocolname = baseProto.length() == 0 ? NULL : baseProto.c_str();
 		sp.str = msgbuf;
 		sp.flag = SAFL_TCHAR | SAFL_PATH | (isMe ? SAFL_OUTGOING : 0);
 		spr = (SMADD_BATCHPARSERES*)CallService(MS_SMILEYADD_BATCHPARSE, 0, (LPARAM)&sp);

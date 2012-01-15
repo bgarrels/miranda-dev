@@ -52,6 +52,7 @@ public:
 	static INT_PTR CALLBACK DlgProcOptsGroupList(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 	static INT_PTR CALLBACK DlgProcOptsMessages(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 	static INT_PTR CALLBACK DlgProcOptsSearching(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
+	static INT_PTR CALLBACK DlgProcOptsExport(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	static Options *instance;
 	void Save();
@@ -64,6 +65,10 @@ public:
 
 	std::vector<FilterOptions> customFilters;
 	int defFilter;
+	unsigned int codepageTxt, codepageHtml1, codepageHtml2;
+	std::wstring encodingTxt, encodingHtml1, encodingHtml2;
+	bool exportHtml1ShowDate, exportHtml2ShowDate, exportHtml2UseSmileys;
+	std::wstring extCssHtml2;
 
 	enum Fonts
 	{

@@ -333,7 +333,8 @@ std::wstring EventList::GetProtocolName()
 
 std::string EventList::GetBaseProtocol()
 {
-	return (char *)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)hContact, 0);
+	char* proto = (char *)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)hContact, 0);
+	return proto == NULL ? "" : proto;
 }
 
 std::wstring EventList::GetMyId()

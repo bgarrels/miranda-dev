@@ -15,7 +15,7 @@
 #include <richedit.h>
 #include <commctrl.h>
 #include <tchar.h>
-// #include <m_clc.h>
+#include <m_clc.h>
 
 /////////////////////////////////////////////////////////////////////////////
 // Neutral resources
@@ -135,6 +135,32 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,93,270,10
     CONTROL         "Only Selected Group",IDC_ONLYGROUP,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,107,270,10
+END
+
+IDD_OPT_EXPORT DIALOGEX 0, 0, 304, 225
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+EXSTYLE WS_EX_CONTROLPARENT
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Export To Txt",IDC_STATIC,4,5,298,37
+    COMBOBOX        IDC_TXTENC,142,20,152,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "File encoding*",IDC_STATIC,12,23,115,8
+    GROUPBOX        "Export To Plain Html",IDC_STATIC,4,47,298,50
+    COMBOBOX        IDC_HTML1ENC,142,62,152,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "File encoding*",IDC_STATIC,12,65,115,8
+    CONTROL         "Show date in timestamps",IDC_HTML1DATE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,80,270,10
+    GROUPBOX        "Export To Rich Html",IDC_STATIC,4,102,298,80
+    COMBOBOX        IDC_HTML2ENC,142,117,152,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "File encoding*",IDC_STATIC,12,120,115,8
+    CONTROL         "Show date in timestamps",IDC_HTML2DATE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,135,270,10
+    CONTROL         "Enable Smileys",IDC_HTML2SHOWSMILEYS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,149,270,10
+    CONTROL         "External CSS file",IDC_HTML2EXTCSS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,163,115,10
+    EDITTEXT        IDC_HTML2EXTCSSFILE,142,162,152,12, WS_TABSTOP
+    LTEXT           "* Choose encoding from combo box or enter code page number and name separated by semicolon, name is used in Content-Type header.",IDC_STATIC,12,188,270,24
 END
 
 /////////////////////////////////////////////////////////////////////////////

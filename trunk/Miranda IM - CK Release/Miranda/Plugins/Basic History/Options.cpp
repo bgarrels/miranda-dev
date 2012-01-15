@@ -44,6 +44,34 @@ struct EventNamesType
 	ICQEVENTTYPE_SMS, LPGENT("SMS message")
 };
 
+struct TCpTable {
+	UINT cpId;
+	TCHAR *cpName;
+}
+cpTable[] = {
+	{ CP_UTF8,	_T("UTF-8")	 },
+	{ 1250,	_T("windows-1250")	 },
+	{ 1251,	_T("windows-1251") },
+	{ 1252,	_T("windows-1252") },
+	{ 1253,	_T("windows-1253") },
+	{ 1254,	_T("windows-1254") },
+	{ 1255,	_T("windows-1255") },
+	{ 1256,	_T("windows-1256") },
+	{ 1257,	_T("windows-1257") },
+	{ 1258,	_T("windows-1258") },
+	{ 28591,	_T("iso-8859-1") },
+	{ 28592,	_T("iso-8859-2") },
+	{ 28593,	_T("iso-8859-3") },
+	{ 28594,	_T("iso-8859-4") },
+	{ 28595,	_T("iso-8859-5") },
+	{ 28596,	_T("iso-8859-6") },
+	{ 28597,	_T("iso-8859-7") },
+	{ 28598,	_T("iso-8859-8") },
+	{ 28599,	_T("iso-8859-9") },
+	{ 28603,	_T("iso-8859-13") },
+	{ 28605,	_T("iso-8859-15") },
+};
+
 Options::Options()
 {
 	showContacts = false;
@@ -70,6 +98,15 @@ Options::Options()
 	searchOnlyOut = false;
 	searchOnlyGroup = false;
 	defFilter = 0;
+	codepageTxt = CP_UTF8;
+	codepageHtml1 = CP_UTF8;
+	codepageHtml2 = CP_UTF8;
+	encodingTxt = _T("UTF-8");
+	encodingHtml1 = _T("UTF-8");
+	encodingHtml2 = _T("UTF-8");
+	exportHtml1ShowDate = true;
+	exportHtml2ShowDate = false;
+	exportHtml2UseSmileys = true;
 }
 
 Options::~Options()
@@ -104,6 +141,11 @@ int Options::InitOptions(WPARAM wParam, LPARAM lParam)
 	odp.ptszTab = LPGENT("Searching");
 	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_SEARCHING);
 	odp.pfnDlgProc = Options::DlgProcOptsSearching;
+	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM)&odp);
+
+	odp.ptszTab = LPGENT("Export");
+	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_EXPORT);
+	odp.pfnDlgProc = Options::DlgProcOptsExport;
 	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM)&odp);
 
 	return 0;
@@ -312,6 +354,51 @@ void Options::Load()
 			DBFreeVariant(&defFilterStrV);
 		}
 	}
+	
+	codepageTxt = DBGetContactSettingDword(0, MODULE, "codepageTxt", CP_UTF8);
+	codepageHtml1 = DBGetContactSettingDword(0, MODULE, "codepageHtml1", CP_UTF8);
+	codepageHtml2 = DBGetContactSettingDword(0, MODULE, "codepageHtml2", CP_UTF8);
+	DBVARIANT encodingV;
+	if(!DBGetContactSettingWString(0, MODULE, "encodingTxt", &encodingV))
+	{
+		encodingTxt = encodingV.pwszVal;
+		DBFreeVariant(&encodingV);
+	}
+	else
+	{
+		encodingTxt = _T("UTF-8");
+	}
+	if(!DBGetContactSettingWString(0, MODULE, "encodingHtml1", &encodingV))
+	{
+		encodingHtml1 = encodingV.pwszVal;
+		DBFreeVariant(&encodingV);
+	}
+	else
+	{
+		encodingHtml1 = _T("UTF-8");
+	}
+	if(!DBGetContactSettingWString(0, MODULE, "encodingHtml2", &encodingV))
+	{
+		encodingHtml2 = encodingV.pwszVal;
+		DBFreeVariant(&encodingV);
+	}
+	else
+	{
+		encodingHtml2 = _T("UTF-8");
+	}
+
+	exportHtml1ShowDate = DBGetContactSettingByte(0, MODULE, "exportHtml1ShowDate", 1) ? true : false;
+	exportHtml2ShowDate = DBGetContactSettingByte(0, MODULE, "exportHtml2ShowDate", 0) ? true : false;
+	exportHtml2UseSmileys = DBGetContactSettingByte(0, MODULE, "exportHtml2UseSmileys", 1) ? true : false;
+	if(!DBGetContactSettingWString(0, MODULE, "extCssHtml2", &encodingV))
+	{
+		extCssHtml2 = encodingV.pwszVal;
+		DBFreeVariant(&encodingV);
+	}
+	else
+	{
+		extCssHtml2 = _T("");
+	}
 }
 
 COLORREF Options::GetFont(Fonts fontId, PLOGFONT font)
@@ -383,6 +470,17 @@ void Options::Save()
 		sprintf_s(buf, "filterEvents_%d", i);
 		DBWriteContactSettingString(0, MODULE, buf, events.c_str());
 	}
+
+	DBWriteContactSettingDword(0, MODULE, "codepageTxt", codepageTxt);
+	DBWriteContactSettingDword(0, MODULE, "codepageHtml1", codepageHtml1);
+	DBWriteContactSettingDword(0, MODULE, "codepageHtml2", codepageHtml2);
+	DBWriteContactSettingWString(0, MODULE, "encodingTxt", encodingTxt.c_str());
+	DBWriteContactSettingWString(0, MODULE, "encodingHtml1", encodingHtml1.c_str());
+	DBWriteContactSettingWString(0, MODULE, "encodingHtml2", encodingHtml2.c_str());
+	DBWriteContactSettingByte(0, MODULE, "exportHtml1ShowDate", exportHtml1ShowDate ? 1 : 0);
+	DBWriteContactSettingByte(0, MODULE, "exportHtml2ShowDate", exportHtml2ShowDate ? 1 : 0);
+	DBWriteContactSettingByte(0, MODULE, "exportHtml2UseSmileys", exportHtml2UseSmileys ? 1 : 0);
+	DBWriteContactSettingWString(0, MODULE, "extCssHtml2", extCssHtml2.c_str());
 }
 
 void OptionsMainChanged();
@@ -892,6 +990,191 @@ INT_PTR CALLBACK Options::DlgProcOptsSearching(HWND hwndDlg, UINT msg, WPARAM wP
 				
 				Options::instance->Save();
 				OptionsSearchingChanged();
+			}
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+void InitCodepageCB(HWND hwndCB, unsigned int codepage, const std::wstring& name)
+{
+	int cpCount = sizeof(cpTable) / sizeof(cpTable[0]);
+	int selCpIdx = -1;
+	ComboBox_LimitText(hwndCB, 256);
+	for(int i = 0; i < cpCount; ++i)
+	{
+		ComboBox_AddString(hwndCB, TranslateTS(cpTable[i].cpName));
+		if(cpTable[i].cpId == codepage && name == cpTable[i].cpName)
+			selCpIdx = i;
+	}
+
+	if(selCpIdx == -1)
+	{
+		TCHAR buf[300];
+		_stprintf_s(buf, 300, _T("%d;%s"), codepage, name.c_str());
+		ComboBox_SetText(hwndCB, buf);	
+	}
+	else
+	{
+		ComboBox_SetCurSel(hwndCB, selCpIdx);	
+	}
+
+	ComboBox_LimitText(hwndCB, 127);
+}
+
+unsigned int GetCodepageCB(HWND hwndCB, bool errorReport, unsigned int defCp, const std::wstring& defName, std::wstring& name)
+{
+	int selCpIdx = ComboBox_GetCurSel(hwndCB);
+	if(selCpIdx < 0)
+	{
+		TCHAR text[128];
+		ComboBox_GetText(hwndCB, text, 128);
+		std::wstring str = text;
+		name = _T("");
+		size_t pos = str.find_first_of(_T(';'));
+		if(pos < str.length())
+		{
+			text[pos] = 0;
+			name = str.substr(pos + 1);
+		}
+
+		TCHAR * stopOn = NULL;
+		long cp = _tcstol(text, &stopOn, 10);
+		if((pos >= str.length() || name.empty() || stopOn == text || *stopOn != '\0' || cp < 0 || cp > 0xffff))
+		{
+			if(errorReport)
+			{
+				MessageBox(GetParent(hwndCB), TranslateT("You've entered invalid codepage. Select codepage from combo box or enter correct number."), TranslateT("Invalid codepage"), MB_OK | MB_ICONERROR);
+				SetFocus(hwndCB);
+			}
+
+			name = defName;
+			return -1;
+		}
+
+		return cp;
+	}
+	else
+	{
+		name = cpTable[selCpIdx].cpName;
+		return cpTable[selCpIdx].cpId;
+	}
+}
+
+bool CheckFile(HWND hwndEdit)
+{
+	TCHAR buf[MAX_PATH];
+	Edit_GetText(hwndEdit, buf, MAX_PATH);
+	DWORD atr = GetFileAttributes(buf);
+	if(atr == INVALID_FILE_ATTRIBUTES || atr & FILE_ATTRIBUTE_DIRECTORY)
+	{
+		MessageBox(GetParent(hwndEdit), TranslateT("File do not exist. Enter correct file path."), TranslateT("Invalid file"), MB_OK | MB_ICONERROR);
+		SetFocus(hwndEdit);
+		return false;
+	}
+
+	return true;
+}
+
+INT_PTR CALLBACK Options::DlgProcOptsExport(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch(msg) 
+	{
+		case WM_INITDIALOG:
+		{
+			TranslateDialogDefault(hwndDlg);
+			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)FALSE);
+			InitCodepageCB(GetDlgItem(hwndDlg, IDC_TXTENC), instance->codepageTxt, instance->encodingTxt);
+			InitCodepageCB(GetDlgItem(hwndDlg, IDC_HTML1ENC), instance->codepageHtml1, instance->encodingHtml1);
+			InitCodepageCB(GetDlgItem(hwndDlg, IDC_HTML2ENC), instance->codepageHtml2, instance->encodingHtml2);
+			CheckDlgButton(hwndDlg, IDC_HTML1DATE, instance->exportHtml1ShowDate ? 1 : 0);
+			CheckDlgButton(hwndDlg, IDC_HTML2DATE, instance->exportHtml2ShowDate ? 1 : 0);
+			CheckDlgButton(hwndDlg, IDC_HTML2SHOWSMILEYS, instance->exportHtml2UseSmileys ? 1 : 0);
+			Edit_LimitText(GetDlgItem(hwndDlg, IDC_HTML2EXTCSSFILE), MAX_PATH);
+			if(instance->extCssHtml2.empty())
+			{
+				EnableWindow(GetDlgItem(hwndDlg, IDC_HTML2EXTCSSFILE), FALSE);
+			}
+			else
+			{
+				CheckDlgButton(hwndDlg, IDC_HTML2EXTCSS, TRUE);
+				Edit_SetText(GetDlgItem(hwndDlg, IDC_HTML2EXTCSSFILE), instance->extCssHtml2.c_str());
+			}
+
+			if(!g_SmileyAddAvail)
+				EnableWindow(GetDlgItem(hwndDlg, IDC_HTML2SHOWSMILEYS), FALSE);
+			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)TRUE);
+			return TRUE;
+		}
+		case WM_COMMAND:
+		{
+			BOOL init = (BOOL)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+			if(HIWORD(wParam) == BN_CLICKED && LOWORD(wParam) == IDC_HTML2EXTCSS)
+			{
+				EnableWindow(GetDlgItem(hwndDlg, IDC_HTML2EXTCSSFILE), (BOOL)IsDlgButtonChecked(hwndDlg, IDC_HTML2EXTCSS));
+			}
+
+			if (init && (HIWORD(wParam) == BN_CLICKED || HIWORD(wParam)==CBN_SELCHANGE || HIWORD(wParam)==CBN_EDITCHANGE || HIWORD(wParam) == EN_CHANGE))
+				SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+			return TRUE;
+		}
+		case WM_NOTIFY:
+		{
+			if(((LPNMHDR)lParam)->code == PSN_APPLY) 
+			{
+				std::wstring newName1, newName2, newName3;
+				unsigned int cp1 = GetCodepageCB(GetDlgItem(hwndDlg, IDC_TXTENC), true, instance->codepageTxt, instance->encodingTxt, newName1);
+				if(cp1 == -1)
+				{
+					SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+					SetWindowLongPtr(hwndDlg, DWLP_MSGRESULT, PSNRET_INVALID_NOCHANGEPAGE);
+					return TRUE;
+				}
+				unsigned int cp2 = GetCodepageCB(GetDlgItem(hwndDlg, IDC_HTML1ENC), true, instance->codepageHtml1, instance->encodingHtml1, newName2);
+				if(cp2 == -1)
+				{
+					SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+					SetWindowLongPtr(hwndDlg, DWLP_MSGRESULT, PSNRET_INVALID_NOCHANGEPAGE);
+					return TRUE;
+				}
+				unsigned int cp3 = GetCodepageCB(GetDlgItem(hwndDlg, IDC_HTML2ENC), true, instance->codepageHtml2, instance->encodingHtml2, newName3);
+				if(cp3 == -1)
+				{
+					SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+					SetWindowLongPtr(hwndDlg, DWLP_MSGRESULT, PSNRET_INVALID_NOCHANGEPAGE);
+					return TRUE;
+				}
+				if(IsDlgButtonChecked(hwndDlg, IDC_HTML2EXTCSS))
+				{
+					if(!CheckFile(GetDlgItem(hwndDlg, IDC_HTML2EXTCSSFILE)))
+					{
+						SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+						SetWindowLongPtr(hwndDlg, DWLP_MSGRESULT, PSNRET_INVALID_NOCHANGEPAGE);
+						return TRUE;
+					}
+
+					TCHAR buf[MAX_PATH];
+					Edit_GetText(GetDlgItem(hwndDlg, IDC_HTML2EXTCSSFILE), buf, MAX_PATH);
+					instance->extCssHtml2 = buf;
+				}
+				else
+				{
+					instance->extCssHtml2 = _T("");
+				}
+
+				instance->codepageTxt = cp1;
+				instance->encodingTxt = newName1;
+				instance->codepageHtml1 = cp2;
+				instance->encodingHtml1 = newName2;
+				instance->codepageHtml2 = cp3;
+				instance->encodingHtml2 = newName3;
+				instance->exportHtml1ShowDate = IsDlgButtonChecked(hwndDlg, IDC_HTML1DATE) ? true : false;
+				instance->exportHtml2ShowDate = IsDlgButtonChecked(hwndDlg, IDC_HTML2DATE) ? true : false;
+				instance->exportHtml2UseSmileys = IsDlgButtonChecked(hwndDlg, IDC_HTML2SHOWSMILEYS) ? true : false;
+
+				Options::instance->Save();
 			}
 			return TRUE;
 		}
