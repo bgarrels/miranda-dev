@@ -57,6 +57,7 @@
 
 #include <win2k.h>
 
+//ExternalApi
 #include "m_updater.h"
 #include "m_smileyadd.h"
 #include "m_toolbar.h"

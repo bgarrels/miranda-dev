@@ -23,6 +23,14 @@ WprowadŸ nazwê filtra
 Nazwa filtra istnieje
 [Event already exists]
 Zdarzenie ju¿ istnieje
+[You've entered invalid codepage. Select codepage from combo box or enter correct number.]
+Wprowadzi³eœ nieprawid³ow¹ stronê kodow¹. Wybierz j¹ z combo boxa lub wprowadŸ poprawn¹ liczbê.
+[Invalid codepage]
+Nieprawid³owa strona kodowa
+[File do not exist. Enter correct file path.]
+Plik nie istnieje. WprowadŸ poprawn¹ œcie¿kê do pliku.
+[Invalid file]
+Nieprawid³owy plik
 
 ;Options and Menus
 ;-------------------
@@ -118,6 +126,12 @@ Eksport Do Rozszerzonego Html
 Eksport Do Czystego Html
 [Export To Txt]
 Eksport Do Txt
+[File encoding*]
+Kodowanie pliku*
+[External CSS file]
+Zewnêtrzny plik CSS
+[* Choose encoding from combo box or enter code page number and name separated by semicolon, name is used in Content-Type header.]
+* Wybierz kodowanie z combo boxa lub wpisz stronê kodow¹ i nazwê rozdzielone œrednikiem, nazwa jest u¿ywana w nag³ówku Content-Type.
 [Filter:]
 #muuid {E25367A2-51AE-4044-BE28-131BC18B71A4}
 Filtr:

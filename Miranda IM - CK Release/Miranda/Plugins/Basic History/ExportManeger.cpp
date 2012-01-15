@@ -4,7 +4,7 @@
 #include "PlainHtmlExport.h"
 #include "RichHtmlExport.h"
 #include "Options.h"
-#include "codecvt_my_utf8.h"
+#include "codecvt_CodePage.h"
 
 ExportManeger::ExportManeger(HANDLE _hContact, int filter)
 	:EventList(_hContact, filter)
@@ -50,16 +50,24 @@ std::wstring GetFile(const TCHAR* ext)
 void ExportManeger::Export(ExportType type)
 {
 	exp = NULL;
+	UINT cp;
+	std::wstring encoding;
 	switch(type)
 	{
 	case Txt:
 		exp = new TxtExport();
+		cp = Options::instance->codepageTxt;
+		encoding = Options::instance->encodingTxt;
 		break;
 	case PlainHtml:
 		exp = new PlainHtmlExport();
+		cp = Options::instance->codepageHtml1;
+		encoding = Options::instance->encodingHtml1;
 		break;
 	case RichHtml:
 		exp = new RichHtmlExport();
+		cp = Options::instance->codepageHtml2;
+		encoding = Options::instance->encodingHtml2;
 		break;
 	default:
 		return;
@@ -73,11 +81,11 @@ void ExportManeger::Export(ExportType type)
 	if(!stream.is_open())
 		return;
 	
-	std::locale utf8locale(std::locale(), new codecvt_my_utf8<wchar_t>);
-	stream.imbue(utf8locale);
+	std::locale filelocale(std::locale(), new codecvt_CodePage<wchar_t>(cp));
+	stream.imbue(filelocale);
 	exp->SetStream(&stream);
 
-	exp->WriteHeader(fileName, GetFilterName(), GetMyName(), GetMyId(), GetContactName(), GetProtocolName(), GetContactId(), GetBaseProtocol());
+	exp->WriteHeader(fileName, GetFilterName(), GetMyName(), GetMyId(), GetContactName(), GetProtocolName(), GetContactId(), GetBaseProtocol(), encoding);
 
 	RefreshEventList();
 

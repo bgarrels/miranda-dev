@@ -4,6 +4,7 @@
 #define IDD_OPT_GROUPLIST               103
 #define IDD_OPT_MESSAGES                104
 #define IDD_OPT_SEARCHING               105
+#define IDD_OPT_EXPORT                  106
 #define IDC_EDIT                        1001
 #define IDC_LIST                        1002
 #define IDC_DELETEHISTORY               1004
@@ -43,6 +44,14 @@
 #define IDC_ADD_EVENT                   1038
 #define IDC_DELETE_EVENT                1039
 #define IDC_SHOWCONTACTGROUPS           1040
+#define IDC_TXTENC                      1041
+#define IDC_HTML1ENC                    1042
+#define IDC_HTML1DATE                   1043
+#define IDC_HTML2ENC                    1044
+#define IDC_HTML2DATE                   1045
+#define IDC_HTML2SHOWSMILEYS            1046
+#define IDC_HTML2EXTCSS                 1047
+#define IDC_HTML2EXTCSSFILE             1048
 #define IDI_INM                         20000
 #define IDI_OUTM                        20001
 #define IDI_SHOW                        20002

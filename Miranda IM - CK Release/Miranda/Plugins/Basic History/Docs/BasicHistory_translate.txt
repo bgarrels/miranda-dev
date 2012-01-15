@@ -22,6 +22,10 @@
 [Enter filter name]
 [Filter name exists]
 [Event already exists]
+[You've entered invalid codepage. Select codepage from combo box or enter correct number.]
+[Invalid codepage]
+[File do not exist. Enter correct file path.]
+[Invalid file]
 
 ;Options and Menus
 ;-------------------
@@ -129,3 +133,6 @@
 [Export To Rich Html]
 [Export To Plain Html]
 [Export To Txt]
+[File encoding*]
+[External CSS file]
+[* Choose encoding from combo box or enter code page number and name separated by semicolon, name is used in Content-Type header.]

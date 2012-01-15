@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "PlainHtmlExport.h"
+#include "Options.h"
 #define EXP_FILE (*stream)
 
 PlainHtmlExport::~PlainHtmlExport()
@@ -9,10 +10,10 @@ PlainHtmlExport::~PlainHtmlExport()
 extern std::wstring MakeTextHtmled(const std::wstring& message, std::queue<std::pair<size_t, size_t> >* positionMap = NULL);
 extern std::wstring UrlHighlightHtml(const std::wstring& message, bool& isUrl);
 
-void PlainHtmlExport::WriteHeader(const std::wstring &fileName, const std::wstring &filterName, const std::wstring &myName, const std::wstring &myId, const std::wstring &name1, const std::wstring &proto1, const std::wstring &id1, const std::string& baseProto1)
+void PlainHtmlExport::WriteHeader(const std::wstring &fileName, const std::wstring &filterName, const std::wstring &myName, const std::wstring &myId, const std::wstring &name1, const std::wstring &proto1, const std::wstring &id1, const std::string& baseProto1, const std::wstring& encoding)
 {
 	EXP_FILE << _T("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n");
-	EXP_FILE << _T("<html><head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n");
+	EXP_FILE << _T("<html><head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=") << encoding << _T("\">\n");
 	EXP_FILE << _T("<title>") << TranslateT("History Log") << _T(" [") << MakeTextHtmled(myName) << _T("] - [") << MakeTextHtmled(name1) << _T("]</title>\n");
 	EXP_FILE << _T("<style type=\"text/css\"><!--\n");
 	EXP_FILE << _T("h3 { color: #666666; text-align: center; font-family: Verdana, Helvetica, Arial, sans-serif; font-size: 16pt; }\n");
@@ -32,8 +33,26 @@ void PlainHtmlExport::WriteHeader(const std::wstring &fileName, const std::wstri
 	EXP_FILE << _T(".mes#event2 { background-color: #CCD9F4; }\n");
 	EXP_FILE << _T(".mes#session { background-color: #FFFDD7; }\n");
 	EXP_FILE << _T("--></style>\n</head><body>\n<h4>") << TranslateT("History Log") << _T("</h4>\n<h3>");
-	EXP_FILE << MakeTextHtmled(myName) << _T(" (") << MakeTextHtmled(proto1) << _T(": ") << MakeTextHtmled(myId) << _T(") - ");
-	EXP_FILE << MakeTextHtmled(name1) << _T(" (") << MakeTextHtmled(proto1) << _T(": ") << MakeTextHtmled(id1) << _T(")</h3>\n");
+	EXP_FILE << MakeTextHtmled(myName);
+	if(proto1.length() || myId.length())
+	{
+		EXP_FILE << _T(" (") << MakeTextHtmled(proto1) << _T(": ") << MakeTextHtmled(myId) << _T(") - ");
+	}
+	else
+	{
+		EXP_FILE << _T(" - ");
+	}
+
+	EXP_FILE << MakeTextHtmled(name1);
+	if(proto1.length() || id1.length())
+	{
+		EXP_FILE << _T(" (") << MakeTextHtmled(proto1) << _T(": ") << MakeTextHtmled(id1) << _T(")</h3>\n");
+	}
+	else
+	{
+		EXP_FILE << _T("</h3>\n");
+	}
+
 	EXP_FILE << _T("<h6>") << TranslateT("Filter:") << _T(" ") << MakeTextHtmled(filterName) << _T("</h6>\n");
 }
 
@@ -61,7 +80,7 @@ void PlainHtmlExport::WriteMessage(bool isMe, int ico, const std::wstring &longD
 		ev = _T("2");
 	EXP_FILE << _T("<div class=mes id=event") << ev << _T(">\n");
 	EXP_FILE << _T("<div class=nick id=") << id << _T(">") << MakeTextHtmled(user) << _T(":</div>\n");
-	EXP_FILE << _T("<div class=date id=") << id << _T(">") << longDate << _T("</div>\n");
+	EXP_FILE << _T("<div class=date id=") << id << _T(">") << (Options::instance->exportHtml1ShowDate ? longDate : shortDate) << _T("</div>\n");
 	EXP_FILE << _T("<div class=text>\n");
 	EXP_FILE << mes;
 	EXP_FILE << _T("\n</div>\n");
