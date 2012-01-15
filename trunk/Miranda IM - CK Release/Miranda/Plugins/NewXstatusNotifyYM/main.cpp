@@ -65,7 +65,7 @@ PLUGININFOEX pluginInfoEx = {
 	"Luca Santarelli, Vasilich, yaho",
 	"yaho@miranda-easy.net",
 	"© 2001-2004 Luca Santarelli, 2005-2007 Vasilich, 2007-2011 yaho",
-	"http://miranda-easy.net/mods.php",
+	"http://miranda-easy.net/",
 	UNICODE_AWARE,
 	DEFMOD_RNDUSERONLINE,
 	MIID_NXSN
