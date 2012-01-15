@@ -170,6 +170,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
+
 IDI_INM                 ICON                    "icons\\Incom.ico"
 IDI_OUTM                ICON                    "icons\\Outg.ico"
 IDI_SHOW                ICON                    "icons\\plus.ico"
@@ -184,6 +185,7 @@ IDR_JS					CUSTOMRES				"history.js"
 IDI_PLUSEX				ICON					"icons\\pnode.ico"
 IDI_MINUSEX				ICON					"icons\\mnode.ico"
 
-#endif    // Neutral resources
+#endif    
+// Neutral resources
 /////////////////////////////////////////////////////////////////////////////
 
