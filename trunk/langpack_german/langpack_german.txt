@@ -7,8 +7,8 @@ Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 06 Jan 2012 17:01:36
-; FLID: Deutsche Sprachdatei 0.12.01.06
+X-Langpack-creation-date: 16 Jan 2012 14:01:45
+; FLID: Deutsche Sprachdatei 0.12.01.16
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,AsSingleWindow,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Basic_History,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ConnectionNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirFox,MirOTR,MirOUT,MirPy_Scripting,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NewsAggregator,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
 ; Start of langpack: Core (Letzte Änderung: 22:23, 20. Sep. 2011 )
@@ -11697,7 +11697,7 @@ Keine Dateien...
 ; ##############################################
 ; End of langpack: FTP_File_YM
 ; ############################################## 
-; Start of langpack: Facebook (Letzte Änderung: 17:27, 6. Jan. 2012 )
+; Start of langpack: Facebook (Letzte Änderung: 14:48, 16. Jan. 2012 )
 
 ; Pluginname: Facebook Protokoll
 ; Version: 0.1.3.11 + RM 0.0.6.1
@@ -11754,6 +11754,11 @@ Erhalte neue Ereignisbenachrichtigungen:
 Eine Channelerneuerung wird benötigt, vielleicht wurden nicht alle Nachrichten empfangen!\nSie sollten die Facebook-Seite prüfen um sicher zu sein.
 [Need confirmation for sending messages to other clients.\nOpen facebook website and try to send message to this contact again!]
 Eine Konfiguration zum Nachrichtenversand zu anderen Clients wird benötigt.\nÖffnen Sie die Facebook-Seite und senden Sie die Nachricht zu den Kontakt erneut!
+
+[Remove from server]
+Vom Sever entfernt
+[Request friendship]
+Freundschaftsanfrage
 
 [Contacts Settings]
 Kontakte Einstellungen
@@ -18845,7 +18850,7 @@ Deaktiviere Invisible 4 Invisible
 ; ##############################################
 ; End of langpack: Invisible4Invisible
 ; ############################################## 
-; Start of langpack: Jabber (Letzte Änderung: 20:42, 4. Jan. 2012 )
+; Start of langpack: Jabber (Letzte Änderung: 22:58, 7. Jan. 2012 )
 
 ; Pluginname: Jabber Protocol 
 ; Version: 0.10.0.2
@@ -27037,7 +27042,7 @@ Dieses ist ein Beispiel-Popup für Nachrichten
 ; ##############################################
 ; End of langpack: NewEventNotify
 ; ############################################## 
-; Start of langpack: NewStatusNotify (Letzte Änderung: 21:26, 7. Jul. 2011 )
+; Start of langpack: NewStatusNotify (Letzte Änderung: 20:04, 7. Jan. 2012 )
 
 ; Pluginname: NewStatusNotify 
 ; Version: 1.1.3.0
@@ -27375,9 +27380,9 @@ Neuer Status:
 [Toggle status notification]
 Wechsel Statusbenachrichtigungen
 [Status notification enabled]
-Statusbenachrichtigung aktivieren
+Statusbenachrichtigung aktiviert
 [Status notification disabled]
-Statusbenachrichtigung deaktivieren
+Statusbenachrichtigung deaktiviert
 
 ;Popups (xstatus.h)
 [changed %N to: %T%D%I]
@@ -28212,7 +28217,7 @@ In den Root
 ; ##############################################
 ; End of langpack: New_Trilimport
 ; ############################################## 
-; Start of langpack: NewsAggregator (Letzte Änderung: 16:58, 6. Jan. 2012 )
+; Start of langpack: NewsAggregator (Letzte Änderung: 23:04, 7. Jan. 2012 )
 
 ; Pluginname: NewsAggregator
 ; Version: 0.0.0.1
@@ -28220,6 +28225,12 @@ In den Root
 ; Unique ID: {56cc3f29-ccbf-4546-a8ba-9856248a412a}
 ; Autor(en): Mataes
 ; Übersetzung: 06.01.12 von CHEF-KOCH
+
+; unübersetzt!
+; [#<title># - The title of the item.\r\n#<description># - The item synopsis.\r\n#<link># - The URL of the item.\r\n#<author># - Email address of the author of the item.\r\n#<comments># - URL of a page for comments relating to the item.\r\n#<pubdate># - Indicates when the item was published.\r\n#<guid># - A string that uniquely identifies the item.\r\n#<category># - Specify one or more categories that the item belongs to.]
+; blubb ... 
+; [#<title>#\r\n#<link>#\r\n#<description>#]
+; blubb ... 
 
 [News Aggregator plugin requires Miranda IM 0.9.0.0 or later]
 NewsAggregator benötigt Minimum Miranda IM 0.9.0.0 oder höher.
@@ -28232,6 +28243,9 @@ Alle Feeds prüfen
 Importiere Feeds
 [Export Feeds]
 Exportiere Feeds
+
+[Feed Tag Help]
+Feed Tag Hilfe
 
 [Check Feed]
 Prüfe Feeds
