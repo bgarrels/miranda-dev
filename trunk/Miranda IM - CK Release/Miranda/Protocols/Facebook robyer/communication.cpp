@@ -367,7 +367,7 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 		return "/logout.php";
 
 	case FACEBOOK_REQUEST_HOME:
-		return "/home.php";
+		return "/home.php?_fb_noscript=1";
 
 	case FACEBOOK_REQUEST_BUDDY_LIST:
 		return "/ajax/chat/buddy_list.php?__a=1";
@@ -462,7 +462,7 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 		return "/ajax/messaging/typ.php?__a=1";
 
 	default:
-		return "/";
+		return "/?_fb_noscript=1";
 	}
 }
 
@@ -858,18 +858,21 @@ bool facebook_client::home( )
 
 		// TODO RM: if enabled groupchats support
 		// Get group chats
-		std::string favorites = utils::text::source_get_value( &resp.data, 3, "&quot;nav_section&quot;:&quot;pinnedNav&quot;",">","\\u003c\\/ul>" );
-		favorites = utils::text::special_expressions_decode(utils::text::slashu_to_utf8( favorites ));
+		std::string favorites = utils::text::source_get_value( &resp.data, 2, "<div id=\"leftCol\"", "<div id=\"contentCol\"" );
+
 		std::string::size_type pos = 0;
-		while ((pos = favorites.find("<li",pos)) != std::string::npos) {
-			std::string item = favorites.substr(pos, favorites.find("</li>", pos) - pos);
-			pos += 3;
-			std::string id = utils::text::source_get_value( &item, 2, "id=\\\"navItem_group_", "\\\"" );
+		while ((pos = favorites.find("href=\"/groups/",pos)) != std::string::npos) {
+			pos += 14;
+			std::string item = favorites.substr(pos, favorites.find("</a>", pos) - pos);
+			std::string id = item.substr(0, item.find("/"));
+	
 			if (!id.empty()) {
-				std::string name = utils::text::source_get_value( &item, 3, "<div class=\\\"linkWrap", ">", "</div>" );
+				std::string name = utils::text::source_get_value( &item, 3, "class=\"linkWrap", ">", "</div>" );
+				name = utils::text::special_expressions_decode(utils::text::slashu_to_utf8( name ) );
 				parent->Log("      Got new group chat: %s (id: %s)", name.c_str(), id.c_str());
-				parent->AddChat(id.c_str(), name.c_str());
-			}
+				if (!name.empty())
+					parent->AddChat(id.c_str(), name.c_str());
+			}			
 		}
 
 		return handle_success( "home" );
