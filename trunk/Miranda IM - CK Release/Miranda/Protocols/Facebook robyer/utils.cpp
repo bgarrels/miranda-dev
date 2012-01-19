@@ -273,18 +273,18 @@ std::string utils::text::trim( std::string data )
 }
 
 void utils::text::explode(std::string str, std::string separator, std::vector<std::string>* results){
-     int found;
-     found = str.find_first_of(separator);
-	 while(found != std::string::npos){
-         if(found > 0){
-             results->push_back(str.substr(0,found));
-         }
-         str = str.substr(found+1);
-         found = str.find_first_of(separator);
-     }
-     if(str.length() > 0){
-         results->push_back(str);
-     }
+	std::string::size_type pos;
+	pos = str.find_first_of(separator);
+	while(pos != std::string::npos){
+		if(pos > 0){
+			results->push_back(str.substr(0,pos));
+		}
+		str = str.substr(pos+1);
+		pos = str.find_first_of(separator);
+	}
+	if(str.length() > 0){
+		results->push_back(str);
+	}
 }
 
 std::string utils::text::source_get_value( std::string* data, unsigned int argument_count, ... )

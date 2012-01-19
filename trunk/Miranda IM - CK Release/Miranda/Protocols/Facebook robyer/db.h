@@ -67,6 +67,7 @@ Last change on : $Date: 2011-01-08 11:10:34 +0100 (so, 08 1 2011) $
 #define FACEBOOK_KEY_DISCONNECT_CHAT "DisconnectChatEnable"
 #define FACEBOOK_KEY_MAP_STATUSES	"MapStatuses"
 #define FACEBOOK_KEY_LOAD_MOBILE	"LoadMobile"
+#define FACEBOOK_KEY_ENABLE_GROUPCHATS "GroupchatsEnable"
 
 #define FACEBOOK_KEY_POLL_RATE      "PollRate" // [HIDDEN]
 #define FACEBOOK_KEY_TIMEOUTS_LIMIT "TimeoutsLimit" // [HIDDEN]

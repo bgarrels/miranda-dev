@@ -28,6 +28,8 @@
 #define IDC_MAP_STATUSES                1032
 #define IDC_BIGGER_AVATARS2             1033
 #define IDC_LOAD_MOBILE                 1033
+#define IDC_PARSE_UNREAD2               1034
+#define IDC_GROUPCHATS                  1034
 #define IDC_NOTIFICATIONS_ENABLE        1041
 #define IDC_FEEDS_ENABLE                1042
 #define IDC_OTHER_ENABLE                1043
