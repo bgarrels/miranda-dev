@@ -857,22 +857,26 @@ bool facebook_client::home( )
 		}
 
 		// TODO RM: if enabled groupchats support
-		// Get group chats
-		std::string favorites = utils::text::source_get_value( &resp.data, 2, "<div id=\"leftCol\"", "<div id=\"contentCol\"" );
 
-		std::string::size_type pos = 0;
-		while ((pos = favorites.find("href=\"/groups/",pos)) != std::string::npos) {
-			pos += 14;
-			std::string item = favorites.substr(pos, favorites.find("</a>", pos) - pos);
-			std::string id = item.substr(0, item.find("/"));
-	
-			if (!id.empty()) {
-				std::string name = utils::text::source_get_value( &item, 3, "class=\"linkWrap", ">", "</div>" );
-				name = utils::text::special_expressions_decode(utils::text::slashu_to_utf8( name ) );
-				parent->Log("      Got new group chat: %s (id: %s)", name.c_str(), id.c_str());
-				if (!name.empty())
-					parent->AddChat(id.c_str(), name.c_str());
-			}			
+
+		if (DBGetContactSettingByte(NULL, parent->m_szModuleName, FACEBOOK_KEY_ENABLE_GROUPCHATS, DEFAULT_ENABLE_GROUPCHATS)) {
+			// Get group chats
+			std::string favorites = utils::text::source_get_value( &resp.data, 2, "<div id=\"leftCol\"", "<div id=\"contentCol\"" );
+
+			std::string::size_type pos = 0;
+			while ((pos = favorites.find("href=\"/groups/",pos)) != std::string::npos) {
+				pos += 14;
+				std::string item = favorites.substr(pos, favorites.find("</a>", pos) - pos);
+				std::string id = item.substr(0, item.find("/"));
+		
+				if (!id.empty()) {
+					std::string name = utils::text::source_get_value( &item, 3, "class=\"linkWrap", ">", "</div>" );
+					name = utils::text::special_expressions_decode(utils::text::slashu_to_utf8( name ) );
+					parent->Log("      Got new group chat: %s (id: %s)", name.c_str(), id.c_str());
+					if (!name.empty())
+						parent->AddChat(id.c_str(), name.c_str());
+				}
+			}
 		}
 
 		return handle_success( "home" );
@@ -989,7 +993,7 @@ bool facebook_client::buddy_list( )
 }
 
 bool facebook_client::facepiles( )
-{
+{	
 	handle_entry( "facepiles" );
 
 	int count = (int)CallServiceSync(MS_GC_GETSESSIONCOUNT, 0, (LPARAM)parent->m_szModuleName);

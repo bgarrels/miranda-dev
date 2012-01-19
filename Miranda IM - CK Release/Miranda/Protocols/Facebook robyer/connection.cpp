@@ -185,7 +185,8 @@ void FacebookProto::UpdateLoop(void *)
 			if ( !facy.invisible_ )
 				if ( !facy.buddy_list( ) )
     				break;
-			if ( !facy.facepiles( ) )
+			if ( getByte( FACEBOOK_KEY_ENABLE_GROUPCHATS, DEFAULT_ENABLE_GROUPCHATS) )
+				if ( !facy.facepiles( ) )
 					break;
 		}
 		if ( i == 2 && getByte( FACEBOOK_KEY_EVENT_FEEDS_ENABLE, DEFAULT_EVENT_FEEDS_ENABLE ) )

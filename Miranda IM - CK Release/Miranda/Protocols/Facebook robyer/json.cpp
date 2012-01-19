@@ -433,7 +433,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 						message->time = ::time( NULL );						
 						message->user_id = was_id; // TODO: Check if we have contact with this ID in friendlist and then do something different?
 
-						if (row.find("uiSplitPic",0) != std::string.npos) {
+						if (row.find("uiSplitPic",0) != std::string::npos) {
 							// This is multiuser message
 							
 							std::string authors = utils::text::special_expressions_decode(
@@ -474,6 +474,9 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 			}
 			else if ( type.Value( ) == "group_msg" ) // chat message
 			{
+				if (!DBGetContactSettingByte(NULL,proto->m_szModuleName,FACEBOOK_KEY_ENABLE_GROUPCHATS, DEFAULT_ENABLE_GROUPCHATS))
+					continue;
+				
 				const String& from_name = objMember["from_name"];
 
 				const Number& to = objMember["to"];
@@ -491,7 +494,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 						utils::text::slashu_to_utf8( text.Value( ) ) );
 
 				std::string name = utils::text::special_expressions_decode(
-						utils::text::slashu_to_utf8( from_name.Value( ) ) );
+						utils::text::slashu_to_utf8( from_name.Value( ) ) );				
 
 				// Add contact into chat, if isn't there already
 				if (!proto->IsChatContact(group_id, was_id))
