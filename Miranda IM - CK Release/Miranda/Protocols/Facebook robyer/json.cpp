@@ -62,6 +62,7 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 			i->data->status_id = ID_STATUS_OFFLINE;
 		}
 
+		// Find mobile friends
 		if (DBGetContactSettingByte(NULL,proto->m_szModuleName,FACEBOOK_KEY_LOAD_MOBILE, DEFAULT_LOAD_MOBILE)) {
 			const Array& mobileFriends = objRoot["payload"]["buddy_list"]["mobile_friends"];
 
@@ -86,7 +87,7 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 		}
 
 		const Object& nowAvailableList = objRoot["payload"]["buddy_list"]["nowAvailableList"];
-
+		// Find now awailable contacts
 		for (Object::const_iterator itAvailable(nowAvailableList.Begin());
 			itAvailable != nowAvailableList.End(); ++itAvailable)
 		{
@@ -107,7 +108,7 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 		}
 
 		const Object& userInfosList = objRoot["payload"]["buddy_list"]["userInfos"];
-
+		// Get aditional informations about contacts (if available)
 		for (Object::const_iterator itUserInfo(userInfosList.Begin());
 			itUserInfo != userInfosList.End(); ++itUserInfo)
 		{
@@ -157,7 +158,7 @@ int facebook_json_parser::parse_facepiles( void* data, std::map< std::string, st
 		std::map< std::string, std::string >::iterator it;
 
 		const Object& objRoot = objDocument;
-		const Array& infos = objRoot["payload"]["facepile_click_info"];
+/*		const Array& infos = objRoot["payload"]["facepile_click_info"];
 
 		for ( Array::const_iterator info( infos.Begin() );
 			info != infos.End(); ++info)
@@ -178,50 +179,30 @@ int facebook_json_parser::parse_facepiles( void* data, std::map< std::string, st
 					facepiles->insert( std::make_pair( was_id, user_name ) );
 				}
 			}
-		}
+		} */
 
+		// Contacts in chat are getting by parsing html response. Don't know if it will work also for many people in chat room.
+		const String& response_html = objRoot["payload"]["response_html"];
+		std::string contacts = utils::text::slashu_to_utf8( utils::text::special_expressions_decode( response_html.Value( ) ) );
 
-/*		const Object& nowAvailableList = objRoot["payload"]["statuses"];
+		std::string::size_type pos = 0;
+		while ((pos = contacts.find("<li", pos)) != std::string::npos) {
+			std::string row = contacts.substr(pos, contacts.find("</li>") - pos);
 
-		for (Object::const_iterator itAvailable(nowAvailableList.Begin());
-			itAvailable != nowAvailableList.End(); ++itAvailable)
-		{
-			const Object::Member& member = *itAvailable;
-			const Object& objMember = member.element;
-			
-			if (((const Number&)objMember).Value() == 2) {
-				// online? jinak offline?
+			std::string status = utils::text::source_get_value2( &row, "chat", "\" " ); // "Online" or "Idle"
+			std::string name = utils::text::source_get_value( &row, 2, "title=\"", "\"" );
+			std::string id = utils::text::source_get_value( &row, 3, "href=\"", "/profile.php?id=", "\"" );
+			if (id.empty())
+				id = utils::text::source_get_value( &row, 3, "href=\"", "facebook.com/", "\"" );
+
+			it = facepiles->find( id );
+			if ( it == facepiles->end() ) {
+				facepiles->insert( std::make_pair( id, name ) );
 			}
 
-			if (facepiles->find( member.name ) == facepiles->end()) {
-				facepiles->insert( std::make_pair( member.name, "" ) );
-				current = buddy_list->find( member.name );
-				current->user_id = current->real_name = member.name;	
-			}
-
-			current->status_id = (idle ? ID_STATUS_OFFLINE : ID_STATUS_ONLINE);
+			pos++;
 		}
-*/
-/*		const Object& userInfosList = objRoot["payload"]["buddy_list"]["userInfos"];
 
-		for (Object::const_iterator itUserInfo(userInfosList.Begin());
-			itUserInfo != userInfosList.End(); ++itUserInfo)
-		{
-			const Object::Member& member = *itUserInfo;
-
-			current = buddy_list->find( member.name );
-			if ( current == NULL )
-				continue;
-
-			const Object& objMember = member.element;
-			const String& realName = objMember["name"];
-			const String& imageUrl = objMember["thumbSrc"];
-
-			current->real_name = utils::text::slashu_to_utf8(
-			    utils::text::special_expressions_decode( realName.Value( ) ) );
-			current->image_url = utils::text::slashu_to_utf8(
-			    utils::text::special_expressions_decode( imageUrl.Value( ) ) );
-		}*/
 	}
 	catch (Reader::ParseException& e)
 	{
@@ -506,13 +487,11 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				const Object& messageContent = objMember["msg"];
   				const String& text = messageContent["text"];
 
-				std::string msg = utils::text::remove_html(
-					utils::text::special_expressions_decode(
-						utils::text::slashu_to_utf8( text.Value( ) ) ) );
+				std::string msg = utils::text::special_expressions_decode(
+						utils::text::slashu_to_utf8( text.Value( ) ) );
 
-				std::string name = utils::text::remove_html(
-					utils::text::special_expressions_decode(
-						utils::text::slashu_to_utf8( from_name.Value( ) ) ) );
+				std::string name = utils::text::special_expressions_decode(
+						utils::text::slashu_to_utf8( from_name.Value( ) ) );
 
 				// Add contact into chat, if isn't there already
 				if (!proto->IsChatContact(group_id, was_id))
@@ -542,19 +521,16 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				last_msg = text.Value();
 
 
-				std::string popup_text = utils::text::remove_html(
-					utils::text::special_expressions_decode(
-						utils::text::slashu_to_utf8( from_name.Value( ) ) ) );
+				std::string popup_text = utils::text::special_expressions_decode(
+						utils::text::slashu_to_utf8( from_name.Value( ) ) );
 				popup_text += ": ";
-				popup_text += utils::text::remove_html(
-					utils::text::special_expressions_decode(
-						utils::text::slashu_to_utf8( text.Value( ) ) ) );
+				popup_text += utils::text::special_expressions_decode(
+						utils::text::slashu_to_utf8( text.Value( ) ) );
 
 				std::string title = Translate("Multichat");
 				title += ": ";
-				title += utils::text::remove_html(
-					utils::text::special_expressions_decode(
-						utils::text::slashu_to_utf8( to_name.Value( ) ) ) );
+				title += utils::text::special_expressions_decode(
+						utils::text::slashu_to_utf8( to_name.Value( ) ) );
 				
 				std::string url = "/?action=read&sk=inbox&page&query&tid=";
 				url += to_id.Value();

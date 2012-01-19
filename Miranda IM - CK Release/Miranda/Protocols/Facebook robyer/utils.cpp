@@ -215,6 +215,9 @@ std::string utils::text::remove_html( std::string data )
 		if ( data.at(i) == '<' && data.at(i+1) != ' ' )
 		{
 			i = data.find( ">", i );
+			if (i == std::string::npos)
+				break;
+
 			continue;
 		}
 
