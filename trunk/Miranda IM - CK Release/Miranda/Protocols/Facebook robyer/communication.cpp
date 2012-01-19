@@ -951,7 +951,7 @@ bool facebook_client::buddy_list( )
 	handle_entry( "buddy_list" );
 
 	// Prepare update data
-	std::string data = "user=" + this->self_.user_id + "&force_render=true&fetch_mobile=true&post_form_id=" + this->post_form_id_ + "&fb_dtsg=" + this->dtsg_ + "&lsd=&post_form_id_source=AsyncRequest&__user=" + this->self_.user_id;
+	std::string data = "user=" + this->self_.user_id + "&fetch_mobile=true&post_form_id=" + this->post_form_id_ + "&fb_dtsg=" + this->dtsg_ + "&lsd=&post_form_id_source=AsyncRequest&__user=" + this->self_.user_id;
 
 	{
 		ScopedLock s(buddies_lock_);
@@ -975,12 +975,11 @@ bool facebook_client::buddy_list( )
 	switch ( resp.code )
 	{
 	case HTTP_CODE_OK:
-		if ( resp.data.find( "\"listChanged\":true" ) != std::string::npos )
-		{
-			std::string* response_data = new std::string( resp.data );
-			ForkThread( &FacebookProto::ProcessBuddyList, this->parent, ( void* )response_data );
-		}
+	{
+		std::string* response_data = new std::string( resp.data );
+		ForkThread( &FacebookProto::ProcessBuddyList, this->parent, ( void* )response_data );
 		return handle_success( "buddy_list" );
+	}
 
 	case HTTP_CODE_FAKE_ERROR:
 	case HTTP_CODE_FAKE_DISCONNECTED:
