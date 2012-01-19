@@ -293,6 +293,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="avatars.cpp" />
+    <ClCompile Include="chat.cpp" />
     <ClCompile Include="communication.cpp" />
     <ClCompile Include="connection.cpp" />
     <ClCompile Include="contacts.cpp" />
