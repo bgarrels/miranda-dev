@@ -39,7 +39,7 @@ SortedList *xstatusList;
 
 HANDLE hEnableDisableMenu, hOptionsInitialize, hModulesLoaded, hUserInfoInitialise;
 HANDLE hContactSettingChanged, hHookContactStatusChanged, hContactStatusChanged;
-HANDLE hStatusModeChange, hServiceMenu;
+HANDLE hStatusModeChange, hServiceMenu, hProtoAck;
 HANDLE hMessageWindowOpen;
 
 char szMetaModuleName[256] = {0};
@@ -65,7 +65,7 @@ PLUGININFOEX pluginInfoEx = {
 	"Luca Santarelli, Vasilich, yaho",
 	"yaho@miranda-easy.net",
 	"© 2001-2004 Luca Santarelli, 2005-2007 Vasilich, 2007-2011 yaho",
-	"http://miranda-easy.net/",
+	"http://miranda-easy.net/mods.php",
 	UNICODE_AWARE,
 	DEFMOD_RNDUSERONLINE,
 	MIID_NXSN
@@ -593,9 +593,6 @@ int ProcessStatus(DBCONTACTWRITESETTING *cws, HANDLE hContact)
 		if (oldStatus == newStatus) 
 			return 0;
 
-		if (oldStatus == ID_STATUS_OFFLINE)
-				LoadTime = GetTickCount();
-
 		//If we get here, the two stauses differ, so we can proceed.
 		DBWriteContactSettingWord(hContact, "UserOnline", "OldStatus", newStatus);
 
@@ -966,7 +963,7 @@ int ContactStatusChanged(WPARAM wParam, LPARAM lParam)
 	char buff[8], szProto[64], szSubProto[64]; 
 	bool bEnablePopup = true, bEnableSound = true;
 
-	char *hlpProto = (char *)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)wParam, 0);
+	char *hlpProto = (char *)CallService(MS_PROTO_GETCONTACTBASEPROTO, wParam, 0);
 	if (hlpProto == NULL || opt.TempDisabled) 
 		return 0;
 
@@ -1234,6 +1231,35 @@ void InitUpdaterSupport()
 #endif
 }
 
+int ProtoAck(WPARAM wParam,LPARAM lParam)
+{
+	ACKDATA *ack = (ACKDATA *)lParam;
+
+	if (ack->type == ACKTYPE_STATUS)
+	{
+		WORD newStatus = (WORD)ack->lParam;
+		WORD oldStatus = (WORD)ack->hProcess;
+		char *szProto = (char *)ack->szModule;
+
+		if (oldStatus == newStatus) 
+			return 0;
+
+		if (newStatus == ID_STATUS_OFFLINE) 
+		{
+			//The protocol switched to offline. Disable the popups for this protocol
+			DBWriteContactSettingByte(NULL, MODULE, szProto, 0);
+		}
+		else if (oldStatus < ID_STATUS_ONLINE && newStatus >= ID_STATUS_ONLINE) 
+		{
+			//The protocol changed from a disconnected status to a connected status.
+			//Enable the popups for this protocol.
+			LoadTime = GetTickCount();
+		}
+	}
+
+	return 0;
+}
+
 INT_PTR EnableDisableMenuCommand(WPARAM wParam, LPARAM lParam) 
 {
 	opt.TempDisabled = !opt.TempDisabled;
@@ -1386,6 +1412,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	hOptionsInitialize = HookEvent(ME_OPT_INITIALISE, OptionsInitialize);
 	//This is needed for "NoSound"-like routines.
 	hStatusModeChange = HookEvent(ME_CLIST_STATUSMODECHANGE, StatusModeChanged);
+	hProtoAck = HookEvent(ME_PROTO_ACK, ProtoAck);
 
 	LoadOptions();
 	InitStatusList();
@@ -1409,6 +1436,7 @@ extern "C" int __declspec(dllexport) Unload(void)
 	UnhookEvent(hModulesLoaded);
 	UnhookEvent(hUserInfoInitialise);
 	UnhookEvent(hStatusModeChange);
+	UnhookEvent(hProtoAck);
 	DestroyHookableEvent(hHookContactStatusChanged);
 	DestroyServiceFunction(hServiceMenu);
 	UnhookEvent(hMessageWindowOpen);
