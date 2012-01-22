@@ -1,6 +1,6 @@
 /*
 Plugin of Miranda IM for communicating with users of the MSN Messenger protocol.
-Copyright (c) 2006-2011 Boris Krasnovskiy.
+Copyright (c) 2006-2012 Boris Krasnovskiy.
 Copyright (c) 2003-2005 George Hazan.
 Copyright (c) 2002-2003 Richard Hughes (original version).
 
@@ -502,7 +502,7 @@ void CMsnProto::MSN_ReceiveMessage(ThreadData* info, char* cmdString, char* para
 			gce.dwFlags = GC_TCHAR | GCEF_ADDTOLOG;
 			gce.pDest = &gcd;
 			gce.ptszUID = mir_a2t(email);
-			gce.ptszNick = MSN_GetContactNameT(ccs.hContact);
+			gce.ptszNick = GetContactNameT(ccs.hContact);
 			gce.time = time(NULL);
 			gce.bIsMe = FALSE;
 
@@ -1222,7 +1222,7 @@ LBL_InvalidCommand:
 				gce.cbSize = sizeof(GCEVENT);
 				gce.dwFlags = GC_TCHAR | GCEF_ADDTOLOG;
 				gce.pDest = &gcd;
-				gce.ptszNick = MSN_GetContactNameT(hContact);
+				gce.ptszNick = GetContactNameT(hContact);
 				gce.ptszUID = mir_a2t(data.userEmail);
 				gce.time = time(NULL);
 				gce.bIsMe = FALSE;
@@ -1612,7 +1612,7 @@ remove:
 						gce.cbSize = sizeof(GCEVENT);
 						gce.dwFlags = GC_TCHAR | GCEF_ADDTOLOG;
 						gce.pDest = &gcd;
-						gce.ptszNick = MSN_GetContactNameT(hContact);
+						gce.ptszNick = GetContactNameT(hContact);
 						gce.ptszUID = mir_a2t(data.userEmail);
 						gce.ptszStatus = TranslateT("Others");
 						gce.time = time(NULL);
@@ -1800,30 +1800,6 @@ remove:
 		case ' NUU':	// UUN : MSNP13+ File sharing, P2P Bootstrap, TURN setup.
 			break;
 
-		case ' LRU':    // URL : Hotmail, Spaces URL 
-		{
-			union {
-				char* tWords[3];
-				struct { char *rru, *passport, *urlID; } data;
-			};
-
-			if (sttDivideWords(params, 3, tWords) != 3)
-				goto LBL_InvalidCommand;
-
-			if (trid == tridUrlInbox) 
-			{
-				replaceStr(passport, data.passport);
-				replaceStr(rru, data.rru);
-				replaceStr(urlId, data.urlID);
-				tridUrlInbox = -1;
-			}
-			if (trid == tridUrlCompose) 
-			{
-				MsnInvokeMyURL(true, data.rru);
-			}
-			break;
-		}
-
 		case ' RSU':	//********* USR: sections 7.3 Authentication, 8.2 Switchboard Connections and Authentication
 			if (info->mType == SERVER_SWITCHBOARD) //(section 8.2)
 			{
@@ -1870,8 +1846,6 @@ remove:
 
 					ForkThread(&CMsnProto::msn_keepAliveThread, NULL);
 					ForkThread(&CMsnProto::MSNConnDetectThread, NULL);
-
-					tridUrlInbox = msnNsThread->sendPacket("URL", "INBOX");
 				}
 				else if (!strcmp(data.security, "OK")) 
 				{

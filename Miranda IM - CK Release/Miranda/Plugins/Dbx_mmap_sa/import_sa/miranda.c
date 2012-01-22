@@ -354,7 +354,7 @@ INT_PTR CALLBACK MirandaAdvOptionsPageProc(HWND hdlg,UINT message,WPARAM wParam,
 			ST.wMonth = TM->tm_mon + 1;
 			ST.wDay = TM->tm_mday;
 
-    		DateTime_SetSystemtime(GetDlgItem(hdlg,IDC_DATETIMEPICKER),GDT_VALID,&ST);
+			DateTime_SetSystemtime(GetDlgItem(hdlg,IDC_DATETIMEPICKER),GDT_VALID,&ST);
 		}
 		return TRUE;
 
@@ -410,7 +410,7 @@ INT_PTR CALLBACK MirandaAdvOptionsPageProc(HWND hdlg,UINT message,WPARAM wParam,
 					dwSinceDate = mktime(&TM);
 
 					DBWriteContactSettingDword(NULL,IMPORT_MODULE,"ImportSinceTS",dwSinceDate);
-  			}	}
+			}	}
 
 			if (nCustomOptions)
 				PostMessage(GetParent(hdlg),WIZM_GOTOPAGE,IDD_PROGRESS,(LPARAM)ProgressPageProc);
@@ -952,9 +952,9 @@ BOOL GetEvent(HANDLE hDbFile, DWORD dwOffset, DBEVENTINFO* pDBEI)
 // Returns NULL on failure
 char* GetName(HANDLE hDbFile, DWORD dwOffset)
 {
-    static DWORD dwLastOffset = 0;
-    static HANDLE hLastDbFile = NULL;
-    static char szName[256] = {0};
+	static DWORD dwLastOffset = 0;
+	static HANDLE hLastDbFile = NULL;
+	static char szName[256] = {0};
 
 	DWORD dwBytesRead;
 	struct DBModuleName pModule;
