@@ -13,11 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Neutral resources
+// Нейтральный resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
 LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
-#pragma code_page(1250)
+#pragma code_page(1251)
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -331,13 +331,14 @@ BEGIN
     CONTROL         "Show PopUps when I connect",IDC_ONCONNECT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,11,202,8
     CONTROL         "Ignore empty status messages",IDC_PUIGNOREREMOVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,25,202,8
     GROUPBOX        "Protocols",IDC_STATIC,0,41,296,94
-    CTEXT           "Disable protocols which you don't wish to be notified for:",IDC_STATIC,10,52,280,10
+    CTEXT           "Enable/Disable protocols which you don't wish to be notified for:",IDC_STATIC,10,52,280,10
     CONTROL         "",IDC_PROTOCOLLIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,100,66,110,64
     GROUPBOX        "Text",IDC_STATIC,0,135,152,34
     EDITTEXT        IDC_POPUPTEXT,6,145,140,20,ES_MULTILINE | ES_AUTOHSCROLL | NOT WS_BORDER,WS_EX_STATICEDGE
     CONTROL         "Variables",IDC_BT_VARIABLES,"MButtonClass",WS_TABSTOP,11,174,16,14
     CONTROL         "Reset",IDC_BT_RESET,"MButtonClass",WS_TABSTOP,29,174,16,14
 END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -362,7 +363,7 @@ IDI_STATUS_MESSAGE      ICON                    "res\\status_message.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
-// German (Germany) resources
+// Немецкий (Германия) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
 LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
@@ -393,7 +394,7 @@ END
 
 #endif    // APSTUDIO_INVOKED
 
-#endif    // German (Germany) resources
+#endif    // Немецкий (Германия) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

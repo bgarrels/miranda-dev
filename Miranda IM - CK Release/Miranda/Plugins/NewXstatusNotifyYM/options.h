@@ -82,7 +82,6 @@ typedef struct tagTEMPLATES {
 	TCHAR LogNewMsg[256];
 	TCHAR LogRemove[256];
 	TCHAR LogOpening[256];
-	TCHAR PopupStatusMessage[256];
 } TEMPLATES;
 
 int OptionsInitialize(WPARAM wParam, LPARAM lParam); 
