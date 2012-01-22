@@ -125,6 +125,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
    IDI_LLUNA               ICON    "..\\icons\\Jabber\\LLuna.ico"
    IDI_M8JABBER            ICON    "..\\icons\\Jabber\\m8jabber.ico"
    IDI_MANGO               ICON    "..\\icons\\Jabber\\Mango.ico"
+   IDI_MCABBER             ICON    "..\\icons\\Jabber\\MCabber.ico"
    IDI_MEINVZ              ICON    "..\\icons\\Jabber\\meinvz.ico"
    IDI_MERCURY_MESSENGER   ICON    "..\\icons\\Jabber\\Mercury_Messenger.ico"
    IDI_MGTALK              ICON    "..\\icons\\Jabber\\MGTalk.ico"

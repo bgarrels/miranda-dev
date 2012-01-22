@@ -136,18 +136,18 @@ int onExtraImageApplying(WPARAM wParam, LPARAM lParam)
 		{
 		ExtraIcon_SetIcon(hExtraIcon, hContact, "ignore_full");
 		}
-  	else if (ignore == 0)
+	else if (ignore == 0)
 	  {
 		ExtraIcon_SetIcon(hExtraIcon, hContact, "");
-  	}
-  	else if (isIgnored((HANDLE)wParam, IGNOREEVENT_MESSAGE))
-  	{
+	}
+	else if (isIgnored((HANDLE)wParam, IGNOREEVENT_MESSAGE))
+	{
 		ExtraIcon_SetIcon(hExtraIcon, hContact, "ignore_mess");
 	  }
-  	else
+	else
 	  {
 		ExtraIcon_SetIcon(hExtraIcon, hContact, "ignore_part");
-  	}
+	}
   }
   else
   {
@@ -158,7 +158,7 @@ int onExtraImageApplying(WPARAM wParam, LPARAM lParam)
 		else if (ignore == 0)
 	  {
 			CallService(MS_CLIST_EXTRA_SET_ICON, (WPARAM) wParam, (LPARAM) &g_IECClear);
-	 	}
+		}
 		else if (isIgnored((HANDLE)wParam, IGNOREEVENT_MESSAGE))
 		{
 			CallService(MS_CLIST_EXTRA_SET_ICON, (WPARAM) wParam, (LPARAM) &g_IECIgnoreMess);
@@ -183,9 +183,9 @@ int onExtraImageListRebuild(WPARAM wParam, LPARAM lParam)
 
   if (ServiceExists(MS_CLIST_EXTRA_ADD_ICON))
   {
-      g_IECIgnoreMess.hImage = (HANDLE)CallService(MS_CLIST_EXTRA_ADD_ICON, (WPARAM)(HICON) CallService(MS_SKIN2_GETICON, 0, (LPARAM)"ignore_mess"), (LPARAM)0);
-      g_IECIgnorePart.hImage = (HANDLE)CallService(MS_CLIST_EXTRA_ADD_ICON, (WPARAM)(HICON) CallService(MS_SKIN2_GETICON, 0, (LPARAM)"ignore_part"), (LPARAM)0);
-      g_IECIgnoreFull.hImage = (HANDLE)CallService(MS_CLIST_EXTRA_ADD_ICON, (WPARAM)(HICON) CallService(MS_SKIN2_GETICON, 0, (LPARAM)"ignore_full"), (LPARAM)0);
+	  g_IECIgnoreMess.hImage = (HANDLE)CallService(MS_CLIST_EXTRA_ADD_ICON, (WPARAM)(HICON) CallService(MS_SKIN2_GETICON, 0, (LPARAM)"ignore_mess"), (LPARAM)0);
+	  g_IECIgnorePart.hImage = (HANDLE)CallService(MS_CLIST_EXTRA_ADD_ICON, (WPARAM)(HICON) CallService(MS_SKIN2_GETICON, 0, (LPARAM)"ignore_part"), (LPARAM)0);
+	  g_IECIgnoreFull.hImage = (HANDLE)CallService(MS_CLIST_EXTRA_ADD_ICON, (WPARAM)(HICON) CallService(MS_SKIN2_GETICON, 0, (LPARAM)"ignore_full"), (LPARAM)0);
   }
   return 0;
 }
@@ -223,9 +223,9 @@ VOID fill_filter(void)
 	for (; i< cii; i++)
   {
 	  if (checkState((ii[i].type)))
-  		ii[i].filtered =  true;
-  	else
-  		ii[i].filtered =  false;
+		ii[i].filtered =  true;
+	else
+		ii[i].filtered =  false;
   }
 }
 

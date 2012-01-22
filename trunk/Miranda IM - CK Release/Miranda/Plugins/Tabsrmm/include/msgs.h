@@ -207,7 +207,7 @@ struct TContainerData {
 	int     iContainerIndex;
 	bool	fHidden;
 	HMENU   hMenuContext;
-	HWND    hwndTip;			// tab - tooltips...
+	HWND    hwndTip;			  // tab - tooltips...
 	BOOL    bDontSmartClose;      // if set, do not search and select the next possible tab after closing one.
 	DWORD   dwFlags;
 	DWORD   dwFlagsEx;
@@ -262,16 +262,16 @@ struct TWindowData {
 	HWND    hwnd;
 	DWORD   dwFlags;
 	DWORD   dwFlagsEx;
-	HANDLE  hContact;
+	HANDLE  hContact	;
 	char    *szProto;
 	TCHAR 	szMyNickname[130];
 	TCHAR	szStatusBar[100];
-	TCHAR   newtitle[130];        // tab title...
+	TCHAR   newtitle[130];					// tab title...
 	TCHAR	szStatus[50];
 	WORD    wStatus;
 	char    *sendBuffer;
 	int     iSendBufferSize;
-	int		iSendLength;				// message length in utf-8 octets
+	int		iSendLength;					// message length in utf-8 octets
 	HICON   hTabIcon, hTabStatusIcon, hXStatusIcon, hClientIcon, hTaskbarIcon;
 	HICON   iFlashIcon;
 	BOOL    mayFlashTab;
@@ -494,9 +494,9 @@ struct TNewWindowData {
 #define CNT_EX_CLOSEWARN 1
 
 #define MWF_LOG_ALL (MWF_LOG_NORMALTEMPLATES | MWF_LOG_SHOWTIME | MWF_LOG_SHOWSECONDS | \
-        MWF_LOG_SHOWDATES | MWF_LOG_INDENT | MWF_LOG_TEXTFORMAT | MWF_LOG_SYMBOLS | MWF_LOG_INOUTICONS | \
-        MWF_LOG_SHOWICONS | MWF_LOG_GRID | MWF_LOG_GROUPMODE | \
- 		MWF_LOG_RTL | MWF_LOG_BBCODE | MWF_LOG_LOCALTIME/*MAD:*/ | \
+		MWF_LOG_SHOWDATES | MWF_LOG_INDENT | MWF_LOG_TEXTFORMAT | MWF_LOG_SYMBOLS | MWF_LOG_INOUTICONS | \
+		MWF_LOG_SHOWICONS | MWF_LOG_GRID | MWF_LOG_GROUPMODE | \
+		MWF_LOG_RTL | MWF_LOG_BBCODE | MWF_LOG_LOCALTIME/*MAD:*/ | \
 		MWF_LOG_STATUSCHANGES|MWF_LOG_NEWLINE|MWF_LOG_UNDERLINE|MWF_LOG_SWAPNICK /*_MAD*/)
 
 #define MWF_LOG_DEFAULT (MWF_LOG_SHOWTIME | MWF_LOG_NORMALTEMPLATES | MWF_LOG_SHOWDATES | MWF_LOG_SYMBOLS | MWF_LOG_GRID | MWF_LOG_STATUSCHANGES | MWF_LOG_INOUTICONS)

@@ -127,15 +127,15 @@ int SetDlgState(HWND hwndDlg) {
 int CALLBACK BrowseProc(HWND hwnd,UINT uMsg, LPARAM lParam, LPARAM lpData )
 {
 	TCHAR* folder;
-    switch(uMsg)
-    {
-        case BFFM_INITIALIZED:
+	switch(uMsg)
+	{
+		case BFFM_INITIALIZED:
 			folder = Utils_ReplaceVarsT(options.folder);
 			SendMessage(hwnd, BFFM_SETSELECTION, TRUE, (LPARAM)folder);
 			mir_free(folder);
-            break;
-    }
-    return 0;
+			break;
+	}
+	return 0;
 }
 
 INT_PTR CALLBACK DlgProcOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)

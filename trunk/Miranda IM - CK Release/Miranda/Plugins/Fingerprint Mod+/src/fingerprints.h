@@ -125,8 +125,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_Ayttm",					_T("*Ayttm*"),									_T("Ayttm"),							_T("ClientIcons_Multiprotocols"),	IDI_AYTTM, MULTIPROTOCOL_CASE },
 	{ "client_qutIM",					_T("*qutIM*"),									_T("qutIM"),							_T("ClientIcons_Multiprotocols"),	IDI_QUTIM, MULTIPROTOCOL_CASE },
 	{ "client_YamiGo",					_T("YamiGo*"),									_T("YamiGo"),							_T("ClientIcons_Multiprotocols"),	IDI_YAMIGO, MULTIPROTOCOL_CASE },
-	{ "client_QIP_2012",				_T("|QIP 2012*|http://qip* 64??")
-										_T("|http://qip* 65??"),						_T("QIP 2012"),							_T("ClientIcons_Multiprotocols"),	IDI_QIP_INFIUM, MULTIPROTOCOL_CASE },
+	{ "client_QIP_2012",				_T("|QIP 2012*|http://qip.ru/caps*"),		_T("QIP 2012"),							_T("ClientIcons_Multiprotocols"),	IDI_QIP_INFIUM, MULTIPROTOCOL_CASE },
 	{ "client_QIP_Infium",				_T("|QIP Infium*|http://qip*"),					_T("QIP Infium"),						_T("ClientIcons_Multiprotocols"),	IDI_QIP_INFIUM, MULTIPROTOCOL_CASE },
 	{ "client_QIP_2010",				_T("|QIP 2010*|http://2010.qip.ru*"),			_T("QIP 2010"),							_T("ClientIcons_Multiprotocols"),	IDI_QIP_2010, MULTIPROTOCOL_CASE },
 	{ "client_QIP_PDA",					_T("|QIP PDA*|http://pda.qip.ru/caps*")
@@ -297,6 +296,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_JMC",						_T("JMC*"),										_T("JMC (Jabber Mix Client)"),			_T("ClientIcons_Jabber"),	IDI_JMC, JABBER_CASE },
 	{ "client_BlackBerry",				_T("|*Berry*|*ICS?\?\?\?\?\?\?\?"),				_T("BlackBerry"),						_T("ClientIcons_Jabber"),	IDI_BLACKBERRY, JABBER_CASE },
 	{ "client_mobber",					_T("*mobber*"),									_T("mobber"),							_T("ClientIcons_Jabber"),	IDI_MOBBER, JABBER_CASE },
+	{ "client_MCabber",					_T("*mcabber*"),								_T("MCabber"),							_T("ClientIcons_Jabber"),	IDI_MCABBER, JABBER_CASE },
 	{ "client_Jeti",					_T("*Jeti*"),									_T("Jeti"),								_T("ClientIcons_Jabber"),	IDI_JETI, JABBER_CASE },
 	{ "client_Gnome",					_T("*Gnome*"),									_T("Gnome"),							_T("ClientIcons_Jabber"),	IDI_GNOME, JABBER_CASE },
 	{ "client_JabberBeOS",				_T("Jabber*BeOS*"),								_T("Jabber (BeOS)"),					_T("ClientIcons_Jabber"),	IDI_JABBER_BEOS, JABBER_CASE },

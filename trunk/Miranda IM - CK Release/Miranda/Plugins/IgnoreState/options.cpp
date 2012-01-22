@@ -153,7 +153,7 @@ INT_PTR CALLBACK DlgProcOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 			{
 				TVINSERTSTRUCT tvis={0};
 				HTREEITEM hti;
-                int index=ImageList_AddIcon(himlButtonIcons, LoadSkinnedIcon(ii[i].icon));
+				int index=ImageList_AddIcon(himlButtonIcons, LoadSkinnedIcon(ii[i].icon));
 				tvis.hParent=NULL;
 				tvis.hInsertAfter=TVI_LAST;
 				tvis.item.mask=TVIF_PARAM|TVIF_TEXT|TVIF_IMAGE|TVIF_SELECTEDIMAGE|TVIF_STATE;
