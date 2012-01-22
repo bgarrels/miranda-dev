@@ -90,6 +90,11 @@ typedef struct tagDBEVENT
 	HANDLE hDBEvent;
 } DBEVENT;
 
+typedef struct tagPROTOTAMPLATE
+{
+	TCHAR *ProtoName;
+	TCHAR *ProtoTamplate;
+} PROTOTAMPLATE;
 
 TCHAR *GetDefaultXstatusName(int statusID, char *szProto, TCHAR *buff, int bufflen);
 XSTATUSCHANGE *NewXSC(HANDLE hContact, char *szProto, int xstatusType, int action, TCHAR *stzTitle, TCHAR *stzText);

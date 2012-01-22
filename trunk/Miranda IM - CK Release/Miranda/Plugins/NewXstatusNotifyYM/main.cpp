@@ -676,12 +676,25 @@ int ProcessStatus(DBCONTACTWRITESETTING *cws, HANDLE hContact)
 			if (DBGetContactSettingByte(hContact, MODULE, "EnablePopups", 1) && DBGetContactSettingByte(0, MODULE, status, 1) && retem && rettime)
 			{
 				POPUPDATAT ppd = {0};
-				DBVARIANT dbv;
+				char* protoname = (char*)CallService(MS_PROTO_GETCONTACTBASEACCOUNT, (WPARAM)smi.hContact, 0);
+				PROTOACCOUNT* pdescr = (PROTOACCOUNT*)CallService(MS_PROTO_GETACCOUNT, 0, (LPARAM)protoname);
+				protoname = mir_t2a(pdescr->tszAccountName);
+				protoname = (char*)mir_realloc(protoname, lstrlenA(protoname) + lstrlenA("_TSMChange") + 1);
+				lstrcatA(protoname, "_TSMChange");
 				TCHAR *str;
-				if(!DBGetContactSettingTString(0, MODULE, "TSMChange", &dbv))
-					str = GetStr(&smi, dbv.ptszVal);
-				else
+				DBVARIANT dbVar = {0};
+				DBGetContactSettingTString(NULL, MODULE, protoname, &dbVar);
+				if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+				{
+					DBFreeVariant(&dbVar);
 					str = GetStr(&smi, DEFAULT_POPUP_STATUSMESSAGE);
+				}
+				else
+				{
+					str = GetStr(&smi, dbVar.ptszVal);
+				}
+				mir_free(protoname);
+					
 				ppd.lchContact = smi.hContact;
 				ppd.lchIcon = LoadSkinnedProtoIcon(smi.proto, DBGetContactSettingWord(smi.hContact, smi.proto, "Status", ID_STATUS_ONLINE));
 				lstrcpyn(ppd.lptzContactName, smi.cust, MAX_CONTACTNAME);
