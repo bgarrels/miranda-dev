@@ -248,7 +248,7 @@ namespace
 									catch(std::exception& e)
 									{
 										sError = e.what();
-										Quotes_MessageBox(hDlg,sResult.c_str());
+										//Quotes_MessageBox(hDlg,sResult.c_str());
 									}
 
 									if(false == sError.empty())
