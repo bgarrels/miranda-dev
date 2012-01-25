@@ -28,6 +28,9 @@
 
 OPTIONS opt = {0};
 TEMPLATES templates = {0};
+BOOL UpdateListFlag = FALSE;
+SortedList *ProtoTamplates; 
+int LastItem = 0;
 
 extern HINSTANCE hInst;
 extern HANDLE hEnableDisableMenu;
@@ -49,7 +52,6 @@ void LoadTemplates()
 	DBGetStringDefault(0, MODULE, "TLogOpening", templates.LogOpening, SIZEOF(templates.LogOpening), DEFAULT_LOG_OPENING);
 	templates.PopupFlags = DBGetContactSettingByte(0, MODULE, "TPopupFlags", NOTIFY_NEW_XSTATUS | NOTIFY_NEW_MESSAGE);
 	templates.LogFlags = DBGetContactSettingByte(0, MODULE, "TLogFlags", NOTIFY_NEW_XSTATUS | NOTIFY_NEW_MESSAGE | NOTIFY_OPENING_ML);
-	DBGetStringDefault(0, MODULE, "TSMChange", templates.PopupStatusMessage, SIZEOF(templates.PopupStatusMessage), DEFAULT_POPUP_STATUSMESSAGE);
 }
 
 void LoadOptions() 
@@ -112,7 +114,14 @@ void SaveTemplates()
 	DBWriteContactSettingTString(0, MODULE, "TLogOpening", templates.LogOpening);
 	DBWriteContactSettingByte(0, MODULE, "TPopupFlags", templates.PopupFlags);
 	DBWriteContactSettingByte(0, MODULE, "TLogFlags", templates.LogFlags);
-	DBWriteContactSettingTString(0, MODULE, "TSMChange", templates.PopupStatusMessage);
+	for (int i = 0; i < ProtoTamplates->realCount; i++)
+	{
+		PROTOTAMPLATE *prototamplate = (PROTOTAMPLATE *)ProtoTamplates->items[i];
+		TCHAR str[MAX_PATH];
+		mir_sntprintf(str, SIZEOF(str), _T("%s_TSMChange"), prototamplate->ProtoName);
+		char *szstr = mir_t2a(str);
+		DBWriteContactSettingTString(0, MODULE, szstr, prototamplate->ProtoTamplate);
+	}
 }
 
 void SaveOptions() 
@@ -555,7 +564,7 @@ int ResetTemplatesToDefault(HWND hwndDlg)
 		SetDlgItemText(hwndDlg, IDC_ED_TCHANGE, DEFAULT_POPUP_NEW);
 		SetDlgItemText(hwndDlg, IDC_ED_TCHANGEMSG, DEFAULT_POPUP_CHANGEMSG);
 		SetDlgItemText(hwndDlg, IDC_ED_TREMOVE, DEFAULT_POPUP_REMOVE);
-		SetDlgItemText(hwndDlg, IDC_POPUPTEXT, DEFAULT_POPUP_STATUSMESSAGE);
+		SetDlgItemText(hwndDlg, IDC_POPUPTEXT, TranslateT(DEFAULT_POPUP_STATUSMESSAGE));
 		CheckDlgButton(hwndDlg, IDC_CHK_XSTATUSCHANGE, 1);
 		CheckDlgButton(hwndDlg, IDC_CHK_MSGCHANGE, 1);
 		CheckDlgButton(hwndDlg, IDC_CHK_REMOVE, 1);
@@ -704,15 +713,9 @@ INT_PTR CALLBACK DlgProcSMPopupOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 	{
 		case WM_INITDIALOG:
 		{
-			HWND hList;
-			LVCOLUMN lvCol;
-			LVITEM lvItem;
-			int i;
-
 			TranslateDialogDefault(hwndDlg);
 			CheckDlgButton(hwndDlg, IDC_ONCONNECT, opt.PopupOnConnect);
 			CheckDlgButton(hwndDlg, IDC_PUIGNOREREMOVE, opt.IgnoreEmpty);
-			SetDlgItemText(hwndDlg, IDC_POPUPTEXT, templates.PopupStatusMessage);
 
 			// Buttons
 			SendDlgItemMessage(hwndDlg, IDC_BT_VARIABLES, BUTTONADDTOOLTIP, (WPARAM)TranslateT("Show available variables"), BATF_TCHAR);
@@ -726,15 +729,15 @@ INT_PTR CALLBACK DlgProcSMPopupOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 			DestroyIcon(hIcon);
 
 			// proto list
-			hList = GetDlgItem(hwndDlg, IDC_PROTOCOLLIST);
-			ListView_SetExtendedListViewStyleEx(hList, LVS_EX_FULLROWSELECT|LVS_EX_CHECKBOXES, LVS_EX_FULLROWSELECT|LVS_EX_CHECKBOXES);
-			memset(&lvCol,0,sizeof(lvCol));
+			HWND hList = GetDlgItem(hwndDlg, IDC_PROTOCOLLIST);
+			SendMessage(hList, LVM_SETEXTENDEDLISTVIEWSTYLE, 0, LVS_EX_FULLROWSELECT | LVS_EX_CHECKBOXES);
+			LVCOLUMN lvCol = {0};
 			lvCol.mask = LVCF_WIDTH|LVCF_TEXT;
 			lvCol.pszText=TranslateT("Protocol");
 			lvCol.cx = 118;
 			ListView_InsertColumn(hList, 0, &lvCol);
 			// fill the list
-			memset(&lvItem,0,sizeof(lvItem));
+			LVITEM lvItem = {0};
 			lvItem.mask=LVIF_TEXT|LVIF_PARAM;
 			lvItem.iItem=0;
 			lvItem.iSubItem=0;
@@ -742,20 +745,41 @@ INT_PTR CALLBACK DlgProcSMPopupOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 			int count;
 			PROTOACCOUNT** protos;
 			ProtoEnumAccounts( &count, &protos );
+			ProtoTamplates = li.List_Create(0, 10);
 
-			for(i=0;i<count;i++) {
+			for(int i=0;i<count;i++) {
 				if ( !IsSuitableProto( protos[i] ))
 					continue;
 
+				UpdateListFlag = TRUE;
 				lvItem.pszText = protos[i]->tszAccountName;
 				lvItem.lParam = (LPARAM)protos[i]->szModuleName;
+				PROTOTAMPLATE *prototamplate = (PROTOTAMPLATE *)mir_alloc(sizeof(PROTOTAMPLATE));
+				prototamplate->ProtoName = protos[i]->tszAccountName;
+				TCHAR protoname[MAX_PATH] = {0};
+				mir_sntprintf(protoname, SIZEOF(protoname), _T("%s_TSMChange"), protos[i]->tszAccountName);
+				char *szprotoname = mir_t2a(protoname);
+				DBVARIANT dbVar = {0};
+				DBGetContactSettingTString(NULL, MODULE, szprotoname, &dbVar);
+				if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+				{
+					DBFreeVariant(&dbVar);
+					_tcsncpy(prototamplate->ProtoTamplate, TranslateT(DEFAULT_POPUP_STATUSMESSAGE), SIZEOF(prototamplate->ProtoTamplate));
+				}
+				else
+				{
+					_tcsncpy(prototamplate->ProtoTamplate, dbVar.ptszVal, SIZEOF(prototamplate->ProtoTamplate));
+				}
+				mir_free(szprotoname);
 				ListView_InsertItem(hList,&lvItem);
+				li.List_Insert(ProtoTamplates, prototamplate, ProtoTamplates->realCount);
 
 				char dbSetting[128];
 				mir_snprintf(dbSetting, SIZEOF(dbSetting), "%s_enabled", protos[i]->szModuleName);
 				ListView_SetCheckState(hList, lvItem.iItem, DBGetContactSettingByte(NULL, MODULE, dbSetting, TRUE));
 				lvItem.iItem++;
 			}
+			UpdateListFlag = FALSE;
 			return TRUE;
 		}
 		case WM_COMMAND:
@@ -769,6 +793,7 @@ INT_PTR CALLBACK DlgProcSMPopupOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 						case IDC_BT_VARIABLES:
 							MessageBox(0, VARIABLES_SM_HELP_TEXT, TranslateT("Variables"), MB_OK | MB_ICONINFORMATION);
 							break;				
+
 						case IDC_BT_RESET:
 							if (ResetTemplatesToDefault(hwndDlg) == IDYES) break;
 							else return FALSE;
@@ -787,7 +812,6 @@ INT_PTR CALLBACK DlgProcSMPopupOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 				}
 
 			}
-
 			return TRUE;
 		}
 		case WM_NOTIFY:
@@ -797,31 +821,46 @@ INT_PTR CALLBACK DlgProcSMPopupOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 				case LVN_ITEMCHANGED:
 					{
 						NMLISTVIEW *nmlv = (NMLISTVIEW *)lParam;
-						if ((nmlv->uNewState^nmlv->uOldState)&LVIS_STATEIMAGEMASK)
+						if (nmlv->uNewState == 3 && !UpdateListFlag)
+						{
+							HWND hList = GetDlgItem(hwndDlg,IDC_PROTOCOLLIST);
+							PROTOTAMPLATE *prototamplate;
+							if (ListView_GetHotItem(hList) != ListView_GetSelectionMark(hList))
+							{
+								prototamplate = (PROTOTAMPLATE *)ProtoTamplates->items[ListView_GetSelectionMark(hList)];
+								GetDlgItemText(hwndDlg, IDC_POPUPTEXT, prototamplate->ProtoTamplate, MAX_PATH);
+								li.List_Remove(ProtoTamplates, ListView_GetSelectionMark(hList));
+								li.List_Insert(ProtoTamplates, prototamplate, ListView_GetSelectionMark(hList));
+
+							}
+							LastItem = ListView_GetHotItem(hList);
+							prototamplate = (PROTOTAMPLATE *)ProtoTamplates->items[LastItem];
+							SetDlgItemText(hwndDlg, IDC_POPUPTEXT, prototamplate->ProtoTamplate);
+						}
+						if ((nmlv->uNewState^nmlv->uOldState)&LVIS_STATEIMAGEMASK && !UpdateListFlag)
 							SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
 					}
 					break;
 			}	}
 			if (((LPNMHDR)lParam)->code == PSN_APPLY ) 
 			{
-				int i;
-				LVITEM lvItem;
-				HWND hList;
 
 				opt.IgnoreEmpty = IsDlgButtonChecked(hwndDlg, IDC_PUIGNOREREMOVE);
 				opt.PopupOnConnect = IsDlgButtonChecked(hwndDlg, IDC_ONCONNECT);
 
 				// Templates
-				GetDlgItemText(hwndDlg, IDC_POPUPTEXT, templates.PopupStatusMessage, SIZEOF(templates.PopupStatusMessage));
+				PROTOTAMPLATE *prototamplate = (PROTOTAMPLATE *)ProtoTamplates->items[LastItem];
+				GetDlgItemText(hwndDlg, IDC_POPUPTEXT, prototamplate->ProtoTamplate, MAX_PATH);
+				li.List_Remove(ProtoTamplates, LastItem);
+				li.List_Insert(ProtoTamplates, prototamplate, LastItem);
 
 				// Save options to db
 				SaveOptions();
 				SaveTemplates();
-
-				hList = GetDlgItem(hwndDlg,IDC_PROTOCOLLIST);
-				memset(&lvItem,0,sizeof(lvItem));
+				HWND hList = GetDlgItem(hwndDlg,IDC_PROTOCOLLIST);
+				LVITEM lvItem = {0};
 				lvItem.mask=LVIF_PARAM;
-				for (i=0;i<ListView_GetItemCount(hList);i++) {
+				for (int i=0;i<ListView_GetItemCount(hList);i++) {
 					lvItem.iItem=i;
 					lvItem.iSubItem=0;
 					ListView_GetItem(hList, &lvItem);
@@ -834,6 +873,13 @@ INT_PTR CALLBACK DlgProcSMPopupOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 
 			return TRUE;
 		}
+
+		case WM_DESTROY:
+		{
+			li.List_Destroy(ProtoTamplates);
+			break;
+		}
+
 	}
 
 	return FALSE;
