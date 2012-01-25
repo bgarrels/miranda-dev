@@ -64,7 +64,7 @@ PLUGININFOEX pluginInfoEx = {
 	"Notifies you when a contact changes his/her (X)status or status message.",
 	"Luca Santarelli, Vasilich, yaho",
 	"yaho@miranda-easy.net",
-	"© 2001-2004 Luca Santarelli, 2005-2007 Vasilich, 2007-2011 yaho",
+	"© 2001-2004 Luca Santarelli, 2005-2007 Vasilich, 2007-2011 yaho, CK",
 	"http://miranda-easy.net/mods.php",
 	UNICODE_AWARE,
 	DEFMOD_RNDUSERONLINE,
@@ -687,7 +687,7 @@ int ProcessStatus(DBCONTACTWRITESETTING *cws, HANDLE hContact)
 				if (lstrcmp(dbVar.ptszVal, NULL) == 0)
 				{
 					DBFreeVariant(&dbVar);
-					str = GetStr(&smi, DEFAULT_POPUP_STATUSMESSAGE);
+					str = GetStr(&smi, TranslateT(DEFAULT_POPUP_STATUSMESSAGE));
 				}
 				else
 				{

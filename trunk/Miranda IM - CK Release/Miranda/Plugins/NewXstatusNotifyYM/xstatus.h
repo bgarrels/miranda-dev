@@ -51,7 +51,7 @@
 #define DEFAULT_POPUP_NEW			TranslateT("changed %N to: %T%D%I") 
 #define DEFAULT_POPUP_CHANGEMSG		TranslateT("changed %N message to:%D%I") 
 #define DEFAULT_POPUP_REMOVE		TranslateT("removed %N") 
-#define DEFAULT_POPUP_STATUSMESSAGE	TranslateT("changed his/her status message to %n") 
+#define DEFAULT_POPUP_STATUSMESSAGE	"changed his/her status message to %n"
 
 #define DEFAULT_LOG_DELIMITER		_T(": ")
 #define DEFAULT_LOG_NEW				TranslateT("changed %N @ %T%D%I") 
@@ -93,7 +93,7 @@ typedef struct tagDBEVENT
 typedef struct tagPROTOTAMPLATE
 {
 	TCHAR *ProtoName;
-	TCHAR *ProtoTamplate;
+	TCHAR ProtoTamplate[MAX_PATH];
 } PROTOTAMPLATE;
 
 TCHAR *GetDefaultXstatusName(int statusID, char *szProto, TCHAR *buff, int bufflen);
