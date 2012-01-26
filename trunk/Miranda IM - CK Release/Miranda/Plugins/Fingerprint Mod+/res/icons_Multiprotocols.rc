@@ -61,6 +61,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
    IDI_IMOIM               ICON    "..\\icons\\multi-protocol\\imoim.ico"
    IDI_INLUX               ICON    "..\\icons\\multi-protocol\\Inlux Messenger.ico"
    IDI_INSTANTBIRD         ICON    "..\\icons\\multi-protocol\\Instantbird.ico"
+   IDI_JASMINEIM           ICON    "..\\icons\\multi-protocol\\JasmineIM.ico"
    IDI_JIMM                ICON    "..\\icons\\multi-protocol\\Jimm.ico"
    IDI_KOPETE              ICON    "..\\icons\\multi-protocol\\Kopete.ico"
    IDI_MCHAT               ICON    "..\\icons\\multi-protocol\\mChat.ico"
