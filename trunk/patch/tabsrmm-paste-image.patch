@@ -1,0 +1,53 @@
+Index: miranda/plugins/tabsrmm/src/msgdialog.cpp
+===================================================================
+--- miranda/plugins/tabsrmm/src/msgdialog.cpp	(revision 12784)
++++ miranda/plugins/tabsrmm/src/msgdialog.cpp	(working copy)
+@@ -709,8 +709,8 @@
+ 		case WM_PASTE:
+ 		case EM_PASTESPECIAL: {
+ 			if (OpenClipboard(hwnd)) {
+-				HANDLE hClip = GetClipboardData(CF_TEXT);
+-				if (hClip) {
++				HANDLE hClip;
++				if (hClip = GetClipboardData(CF_TEXT)) {
+ 					if (lstrlenA((char *)hClip) > mwdat->nMax) {
+ 						TCHAR szBuffer[512];
+ 						if (M->GetByte("autosplit", 0))
+@@ -719,6 +719,37 @@
+ 							_sntprintf(szBuffer, 512, CTranslator::get(CTranslator::GEN_MSG_TOO_LONG_NOSPLIT), mwdat->nMax);
+ 						SendMessage(hwndParent, DM_ACTIVATETOOLTIP, IDC_MESSAGE, (LPARAM)szBuffer);
+ 					}
++				} else if (hClip = GetClipboardData(CF_BITMAP)) {
++					TCHAR filename[MAX_PATH];
++					TCHAR tempdir[MAX_PATH];
++					GetTempPath(MAX_PATH, tempdir);
++					GetTempFileName(tempdir, L"buf", 0, filename);
++					int filenamelen = _tcsclen(filename);
++					_tcscpy(filename+filenamelen-3, L"jpg");
++
++					IMGSRVC_INFO ii;
++					ii.cbSize = sizeof(ii);
++					ii.hbm = (HBITMAP)hClip;
++#ifdef _UNICODE
++					ii.wszName
++#else
++					ii.szName
++#endif
++					= filename;
++					ii.dwMask = IMGI_HBITMAP;
++					ii.fif = FIF_JPEG;
++					CallService(MS_IMG_SAVE, (WPARAM)&ii, IMGL_TCHAR);
++
++					int fileCount = 1, totalCount = 0;
++					TCHAR** ppFiles = NULL;
++					Utils::AddToFileList(&ppFiles, &totalCount, filename);
++					TWindowData *dat = (struct TWindowData *) GetWindowLongPtr(hwndParent, GWLP_USERDATA);
++					CallService(MS_FILE_SENDSPECIFICFILEST, (WPARAM)dat->hContact, (LPARAM)ppFiles);
++
++					mir_free(ppFiles[0]);
++					mir_free(ppFiles);
++
++					DeleteObject((HBITMAP)hClip);
+ 				}
+ 				CloseClipboard();
+ 			}

@@ -1,0 +1,48 @@
+Index: jabber_menu.cpp
+===================================================================
+--- jabber_menu.cpp	(revision 12323)
++++ jabber_menu.cpp	(working copy)
+@@ -225,8 +225,10 @@
+ 	CLISTMENUITEM mi = { 0 };
+ 	mi.cbSize = sizeof( CLISTMENUITEM );
+ 
++	//NightFox: rename "authorization" to "subscription";
+ 	// "Request authorization"
+-	mi.pszName = LPGEN("Request authorization");
++//	mi.pszName = LPGEN("Request authorization");
++	mi.pszName = LPGEN("Request subscription");
+ 	mi.flags = CMIF_ICONFROMICOLIB;
+ 	mi.position = -2000001000;
+ 	mi.icolibItem = g_GetIconHandle( IDI_REQUEST );
+@@ -236,7 +238,8 @@
+ 
+ 	// "Grant authorization"
+ 	mi.pszService = "Jabber/GrantAuth";
+-	mi.pszName = LPGEN("Grant authorization");
++//	mi.pszName = LPGEN("Grant authorization");
++	mi.pszName = LPGEN("Grant subscription");
+ 	mi.position = -2000001001;
+ 	mi.icolibItem = g_GetIconHandle( IDI_GRANT );
+ 	g_hMenuGrantAuth = ( HGENMENU ) JCallService( MS_CLIST_ADDCONTACTMENUITEM, 0, ( LPARAM )&mi );
+@@ -244,7 +247,8 @@
+ 
+ 	// Revoke auth
+ 	mi.pszService = "Jabber/RevokeAuth";
+-	mi.pszName = LPGEN("Revoke authorization");
++//	mi.pszName = LPGEN("Revoke authorization");
++	mi.pszName = LPGEN("Revoke subscription");
+ 	mi.position = -2000001002;
+ 	mi.icolibItem = g_GetIconHandle( IDI_AUTHREVOKE );
+ 	g_hMenuRevokeAuth = ( HGENMENU ) JCallService( MS_CLIST_ADDCONTACTMENUITEM, 0, ( LPARAM )&mi );
+@@ -621,6 +625,11 @@
+ 	DBVARIANT dbv;
+ 
+ 	if (( hContact=( HANDLE ) wParam ) != NULL && m_bJabberOnline ) {
++	
++		//NightFox: add confirm dialog;
++		if (MessageBox (NULL, TranslateT("Are you sure you want to revoke user's subscription?"), TranslateT("Confirmation"), MB_ICONQUESTION | MB_YESNO) != IDYES)
++			return 0;	
++
+ 		if ( !JGetStringT( hContact, "jid", &dbv )) {
+ 			m_ThreadInfo->send( XmlNode( _T("presence")) << XATTR( _T("to"), dbv.ptszVal ) << XATTR( _T("type"), _T("unsubscribed")));
+ 			JFreeVariant( &dbv );

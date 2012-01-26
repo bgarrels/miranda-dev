@@ -1,0 +1,3016 @@
+Index: avatar.c
+===================================================================
+--- avatar.c	(revision 13182)
++++ avatar.c	(working copy)
+@@ -81,28 +81,28 @@
+ 			TCHAR *xmlAction;
+ 			TCHAR *tag;
+ 
+-			xmlAction = gg_a2t(resp->pData);
+-			tag = gg_a2t("result");
++			xmlAction = mir_a2t(resp->pData);
++			tag = mir_a2t("result");
+ 			hXml = xi.parseString(xmlAction, 0, tag);
+ 
+ 			if (hXml != NULL) {
+ 				HXML node;
+ 				char *blank;
+ 
+-				mir_free(tag); tag = gg_a2t("users/user/avatars/avatar");
++				mir_free(tag); tag = mir_a2t("users/user/avatars/avatar");
+ 				node = xi.getChildByPath(hXml, tag, 0);
+-				mir_free(tag); tag = gg_a2t("blank");
+-				blank = node != NULL ? gg_t2a(xi.getAttrValue(node, tag)) : NULL;
++				mir_free(tag); tag = mir_a2t("blank");
++				blank = node != NULL ? mir_t2a(xi.getAttrValue(node, tag)) : NULL;
+ 
+ 				if (blank != NULL && strcmp(blank, "1")) {
+-					mir_free(tag); tag = gg_a2t("users/user/avatars/avatar/bigAvatar");
++					mir_free(tag); tag = mir_a2t("users/user/avatars/avatar/bigAvatar");
+ 					node = xi.getChildByPath(hXml, tag, 0);
+-					*avatarurl = node != NULL ? gg_t2a(xi.getText(node)) : NULL;
++					*avatarurl = node != NULL ? mir_t2a(xi.getText(node)) : NULL;
+ 
+-					mir_free(tag); tag = gg_a2t("users/user/avatars/avatar/originBigAvatar");
++					mir_free(tag); tag = mir_a2t("users/user/avatars/avatar/originBigAvatar");
+ 					node = xi.getChildByPath(hXml, tag, 0);
+ 					if (node != NULL) {
+-						char *orgavurl = gg_t2a(xi.getText(node));
++						char *orgavurl = mir_t2a(xi.getText(node));
+ 						char *avtype = strrchr(orgavurl, '.');
+ 						avtype++;
+ 						if (!_stricmp(avtype, "jpg"))
+@@ -266,11 +266,11 @@
+ 	}
+ 
+ 	for (l = gg->avatar_requests; l; l = l->next) {
+-		GGREQUESTAVATARDATA *data = (GGREQUESTAVATARDATA *)gg->avatar_requests->data;
++		GGREQUESTAVATARDATA *data = (GGREQUESTAVATARDATA *)/*gg->avatar_requests*/l->data;
+ 		mir_free(data);
+ 	}
+ 	for (l = gg->avatar_transfers; l; l = l->next) {
+-		GGGETAVATARDATA *data = (GGGETAVATARDATA *)gg->avatar_transfers->data;
++		GGGETAVATARDATA *data = (GGGETAVATARDATA *)/*gg->avatar_transfers*/l->data;
+ 		mir_free(data->AvatarURL);
+ 		mir_free(data);
+ 	}
+@@ -336,7 +336,7 @@
+ 	int file_fd, avatardatalen, datalen, contentlen, contentendlen, res = 0, repeat = 0;
+ 
+ 	gg_netlog(gg, "gg_setvatar(): Trying to set user avatar using %s...", szFilename);
+-	UIN2ID(DBGetContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, 0), uin);
++	UIN2IDA(DBGetContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, 0), uin);
+ 
+ 	file_fd = _open(szFilename, _O_RDONLY | _O_BINARY, _S_IREAD);
+ 	if (file_fd == -1) {
+Index: core.c
+===================================================================
+--- core.c	(revision 13182)
++++ core.c	(working copy)
+@@ -55,7 +55,7 @@
+ 	if(gg_isonline(gg))
+ 	{
+ 		// Fetch proper status msg
+-		char *szMsg = NULL;
++		TCHAR *szMsg = NULL;
+ 		DBVARIANT dbv;
+ 
+ 		// Loadup status
+@@ -65,61 +65,61 @@
+ 			{
+ 				case ID_STATUS_ONLINE:
+ 					EnterCriticalSection(&gg->modemsg_mutex);
+-					szMsg = _strdup(gg->modemsg.online);
++					szMsg = _tcsdup(gg->modemsg.online);
+ 					LeaveCriticalSection(&gg->modemsg_mutex);
+ 					if(!szMsg &&
+-						!DBGetContactSettingString(NULL, "SRAway", gg_status2db(ID_STATUS_ONLINE, "Default"), &dbv))
++						!DBGetContactSettingTString(NULL, "SRAway", gg_status2db(ID_STATUS_ONLINE, "Default"), &dbv))
+ 					{
+-						if(*(dbv.pszVal))
+-							szMsg = _strdup(dbv.pszVal);
++						if(dbv.ptszVal && *(dbv.ptszVal))
++							szMsg = _tcsdup(dbv.ptszVal);
+ 						DBFreeVariant(&dbv);
+ 					}
+ 					break;
+ 				case ID_STATUS_AWAY:
+ 					EnterCriticalSection(&gg->modemsg_mutex);
+-					szMsg = _strdup(gg->modemsg.away);
++					szMsg = _tcsdup(gg->modemsg.away);
+ 					LeaveCriticalSection(&gg->modemsg_mutex);
+ 					if(!szMsg &&
+-						!DBGetContactSettingString(NULL, "SRAway", gg_status2db(ID_STATUS_AWAY, "Default"), &dbv))
++						!DBGetContactSettingTString(NULL, "SRAway", gg_status2db(ID_STATUS_AWAY, "Default"), &dbv))
+ 					{
+-						if(*(dbv.pszVal))
+-							szMsg = _strdup(dbv.pszVal);
++						if(dbv.ptszVal && *(dbv.ptszVal))
++							szMsg = _tcsdup(dbv.ptszVal);
+ 						DBFreeVariant(&dbv);
+ 					}
+ 					break;
+ 				case ID_STATUS_DND:
+ 					EnterCriticalSection(&gg->modemsg_mutex);
+-					szMsg = _strdup(gg->modemsg.dnd);
++					szMsg = _tcsdup(gg->modemsg.dnd);
+ 					LeaveCriticalSection(&gg->modemsg_mutex);
+ 					if(!szMsg &&
+-						!DBGetContactSettingString(NULL, "SRAway", gg_status2db(ID_STATUS_DND, "Default"), &dbv))
++						!DBGetContactSettingTString(NULL, "SRAway", gg_status2db(ID_STATUS_DND, "Default"), &dbv))
+ 					{
+-						if(*(dbv.pszVal))
+-							szMsg = _strdup(dbv.pszVal);
++						if(dbv.ptszVal && *(dbv.ptszVal))
++							szMsg = _tcsdup(dbv.ptszVal);
+ 						DBFreeVariant(&dbv);
+ 					}
+ 					break;
+ 				case ID_STATUS_FREECHAT:
+ 					EnterCriticalSection(&gg->modemsg_mutex);
+-					szMsg = _strdup(gg->modemsg.freechat);
++					szMsg = _tcsdup(gg->modemsg.freechat);
+ 					LeaveCriticalSection(&gg->modemsg_mutex);
+ 					if(!szMsg &&
+-						!DBGetContactSettingString(NULL, "SRAway", gg_status2db(ID_STATUS_FREECHAT, "Default"), &dbv))
++						!DBGetContactSettingTString(NULL, "SRAway", gg_status2db(ID_STATUS_FREECHAT, "Default"), &dbv))
+ 					{
+-						if(*(dbv.pszVal))
+-							szMsg = _strdup(dbv.pszVal);
++						if(dbv.ptszVal && *(dbv.ptszVal))
++							szMsg = _tcsdup(dbv.ptszVal);
+ 						DBFreeVariant(&dbv);
+ 					}
+ 					break;
+ 				case ID_STATUS_INVISIBLE:
+ 					EnterCriticalSection(&gg->modemsg_mutex);
+-					szMsg = _strdup(gg->modemsg.invisible);
++					szMsg = _tcsdup(gg->modemsg.invisible);
+ 					LeaveCriticalSection(&gg->modemsg_mutex);
+ 					if(!szMsg &&
+-						!DBGetContactSettingString(NULL, "SRAway", gg_status2db(ID_STATUS_INVISIBLE, "Default"), &dbv))
++						!DBGetContactSettingTString(NULL, "SRAway", gg_status2db(ID_STATUS_INVISIBLE, "Default"), &dbv))
+ 					{
+-						if(*(dbv.pszVal))
+-							szMsg = _strdup(dbv.pszVal);
++						if(dbv.ptszVal && *(dbv.ptszVal))
++							szMsg = _tcsdup(dbv.ptszVal);
+ 						DBFreeVariant(&dbv);
+ 					}
+ 					break;
+@@ -127,7 +127,7 @@
+ 				default:
+ 					// Set last status
+ 					EnterCriticalSection(&gg->modemsg_mutex);
+-					szMsg = _strdup(gg_getstatusmsg(gg, gg->proto.m_iStatus));
++					szMsg = _tcsdup(gg_getstatusmsg(gg, gg->proto.m_iStatus));
+ 					LeaveCriticalSection(&gg->modemsg_mutex);
+ 			}
+ 		}
+@@ -136,7 +136,9 @@
+ 		// Check if it has message
+ 		if(szMsg)
+ 		{
+-			gg_change_status_descr(gg->sess, GG_STATUS_NOT_AVAIL_DESCR, szMsg);
++			char *utf8_szMsg = mir_utf8encodeT(szMsg);
++			gg_change_status_descr(gg->sess, GG_STATUS_NOT_AVAIL_DESCR, utf8_szMsg);
++			mir_free(utf8_szMsg);
+ 			free(szMsg);
+ 			// Wait for disconnection acknowledge
+ 		}
+@@ -273,7 +275,7 @@
+ 	p.client_version = GG_DEFAULT_CLIENT_VERSION;
+ 	p.protocol_version = GG_DEFAULT_PROTOCOL_VERSION;
+ 	p.protocol_features = GG_FEATURE_DND_FFC | GG_FEATURE_UNKNOWN_100 | GG_FEATURE_USER_DATA | GG_FEATURE_MSG_ACK | GG_FEATURE_TYPING_NOTIFICATION;
+-	p.encoding = GG_ENCODING_CP1250;
++	p.encoding = GG_ENCODING_UTF8;
+ 	p.status_flags = GG_STATUS_FLAG_UNKNOWN;
+ 	if (DBGetContactSettingByte(NULL, GG_PROTO, GG_KEY_SHOWLINKS, GG_KEYDEF_SHOWLINKS))
+ 		p.status_flags |= GG_STATUS_FLAG_SPAM;
+@@ -372,11 +374,11 @@
+ 			if(!(p.external_addr = gg_dnslookup(gg, dbv.pszVal)))
+ 			{
+ 				char error[128];
+-				mir_snprintf(error, sizeof(error), Translate("External direct connections hostname %s is invalid. Disabling external host forwarding."), dbv.pszVal);
+-				MessageBox(
++				mir_snprintf(error, SIZEOF(error), Translate("External direct connections hostname %s is invalid. Disabling external host forwarding."), dbv.pszVal);
++				MessageBoxA(
+ 					NULL,
+ 					error,
+-					GG_PROTONAME,
++					GG_SZPROTONAME,
+ 					MB_OK | MB_ICONEXCLAMATION
+ 				);
+ 			}
+@@ -392,7 +394,7 @@
+ retry:
+ 	// Loadup startup status & description
+ 	EnterCriticalSection(&gg->modemsg_mutex);
+-	p.status_descr = _strdup(gg_getstatusmsg(gg, gg->proto.m_iDesiredStatus));
++	p.status_descr = mir_utf8encodeT(gg_getstatusmsg(gg, gg->proto.m_iDesiredStatus));
+ 	p.status = status_m2gg(gg, gg->proto.m_iDesiredStatus, p.status_descr != NULL);
+ 
+ 	gg_netlog(gg, "gg_mainthread(%x): Connecting with number %d, status %d and description \"%s\".", gg, p.uin, gg->proto.m_iDesiredStatus,
+@@ -405,11 +407,11 @@
+ 		if(!(p.server_addr = gg_dnslookup(gg, hosts[hostnum].hostname)))
+ 		{
+ 			char error[128];
+-			mir_snprintf(error, sizeof(error), Translate("Server hostname %s is invalid. Using default hostname provided by the network."), hosts[hostnum].hostname);
+-			MessageBox(
++			mir_snprintf(error, SIZEOF(error), Translate("Server hostname %s is invalid. Using default hostname provided by the network."), hosts[hostnum].hostname);
++			MessageBoxA(
+ 				NULL,
+ 				error,
+-				GG_PROTONAME,
++				GG_SZPROTONAME,
+ 				MB_OK | MB_ICONEXCLAMATION
+ 			);
+ 		}
+@@ -446,16 +448,16 @@
+ 			}
+ 			if(!perror)
+ 			{
+-				mir_snprintf(error, sizeof(error), Translate("Connection cannot be established because of error:\n\t%s"), strerror(errno));
++				mir_snprintf(error, SIZEOF(error), Translate("Connection cannot be established because of error:\n\t%s"), strerror(errno));
+ 				perror = error;
+ 			}
+ #ifdef DEBUGMODE
+ 			if(DBGetContactSettingByte(NULL, GG_PROTO, GG_KEY_SHOWCERRORS, GG_KEYDEF_SHOWCERRORS))
+ #endif
+-			MessageBox(
++			MessageBoxA(
+ 				NULL,
+ 				perror,
+-				GG_PROTONAME,
++				GG_SZPROTONAME,
+ 				MB_OK | MB_ICONSTOP
+ 			);
+ 			gg_netlog(gg, "gg_mainthread(%x): %s", gg, perror);
+@@ -597,51 +599,62 @@
+ 					for (i = 0; i < count; i++)
+ 					{
+ 						// Loadup fields
+-						const char *__fmnumber = gg_pubdir50_get(res, i, GG_PUBDIR50_UIN);
+-						const char *__nick = gg_pubdir50_get(res, i, GG_PUBDIR50_NICKNAME);
+-						const char *__firstname = gg_pubdir50_get(res, i, GG_PUBDIR50_FIRSTNAME);
+-						const char *__lastname = gg_pubdir50_get(res, i, GG_PUBDIR50_LASTNAME);
+-						const char *__familyname = gg_pubdir50_get(res, i, GG_PUBDIR50_FAMILYNAME);
+-						const char *__birthyear = gg_pubdir50_get(res, i, GG_PUBDIR50_BIRTHYEAR);
+-						const char *__city = gg_pubdir50_get(res, i, GG_PUBDIR50_CITY);
+-						const char *__origincity = gg_pubdir50_get(res, i, GG_PUBDIR50_FAMILYCITY);
+-						const char *__gender = gg_pubdir50_get(res, i, GG_PUBDIR50_GENDER);
+-						const char *__status = gg_pubdir50_get(res, i, GG_PUBDIR50_STATUS);
+-						uin_t uin = __fmnumber ? atoi(__fmnumber) : 0;
++						// GG pubdir does not support UTF-8, but unfortunately libgadu does the conversion
++						const char *_utf8_fmnumber = gg_pubdir50_get(res, i, GG_PUBDIR50_UIN);
++						TCHAR *__fmnumber = mir_utf8decodeT(_utf8_fmnumber);
++						const char *_utf8_nick = gg_pubdir50_get(res, i, GG_PUBDIR50_NICKNAME);
++						TCHAR *__nick = mir_utf8decodeT(_utf8_nick);
++						const char *_utf8_firstname = gg_pubdir50_get(res, i, GG_PUBDIR50_FIRSTNAME);
++						TCHAR *__firstname = mir_utf8decodeT(_utf8_firstname);
++						const char *_utf8_lastname = gg_pubdir50_get(res, i, GG_PUBDIR50_LASTNAME);
++						TCHAR *__lastname = mir_utf8decodeT(_utf8_lastname);
++						const char *_utf8_familyname = gg_pubdir50_get(res, i, GG_PUBDIR50_FAMILYNAME);
++						TCHAR *__familyname = mir_utf8decodeT(_utf8_familyname);
++						const char *_utf8_birthyear = gg_pubdir50_get(res, i, GG_PUBDIR50_BIRTHYEAR);
++						TCHAR *__birthyear = mir_utf8decodeT(_utf8_birthyear);
++						const char *_utf8_city = gg_pubdir50_get(res, i, GG_PUBDIR50_CITY);
++						TCHAR *__city = mir_utf8decodeT(_utf8_city);
++						const char *_utf8_origincity = gg_pubdir50_get(res, i, GG_PUBDIR50_FAMILYCITY);
++						TCHAR *__origincity = mir_utf8decodeT(_utf8_origincity);
++						const char *_utf8_gender = gg_pubdir50_get(res, i, GG_PUBDIR50_GENDER);
++						const char *_utf8_status = gg_pubdir50_get(res, i, GG_PUBDIR50_STATUS);
++						TCHAR *__status = mir_utf8decodeT(_utf8_status);
++						uin_t uin = __fmnumber ? _ttoi(__fmnumber) : 0;
+ 
+ 						HANDLE hContact = (res->seq == GG_SEQ_CHINFO) ? NULL : gg_getcontact(gg, uin, 0, 0, NULL);
+ 						gg_netlog(gg, "gg_mainthread(%x): Search result for uin %d, seq %d.", gg, uin, res->seq);
+ 						if(res->seq == GG_SEQ_SEARCH)
+ 						{
+-							char strFmt1[64];
+-							char strFmt2[64];
++							TCHAR strFmt1[64];
++							TCHAR strFmt2[64];
+ 							GGSEARCHRESULT sr = {0};
+ 
+-							mir_snprintf(strFmt2, sizeof(strFmt2), "%s", (char *)CallService(MS_CLIST_GETSTATUSMODEDESCRIPTION, status_gg2m(gg, atoi(__status)), 0));
++							mir_sntprintf(strFmt2, SIZEOF(strFmt2), _T("%s"), (char *)CallService(MS_CLIST_GETSTATUSMODEDESCRIPTION, status_gg2m(gg, _ttoi(__status)), GCMDF_TCHAR));
+ 							if(__city)
+ 							{
+-								mir_snprintf(strFmt1, sizeof(strFmt1), ", %s %s", Translate("City:"), __city);
+-								strncat(strFmt2, strFmt1, sizeof(strFmt2) - strlen(strFmt2));
++								mir_sntprintf(strFmt1, SIZEOF(strFmt1), _T(", %s %s"), TranslateT("City:"), __city);
++								_tcsncat(strFmt2, strFmt1, SIZEOF(strFmt2) - _tcslen(strFmt2));
+ 							}
+ 							if(__birthyear)
+ 							{
+ 								time_t t = time(NULL);
+ 								struct tm *lt = localtime(&t);
+-								int br = atoi(__birthyear);
++								int br = _ttoi(__birthyear);
+ 
+ 								if(br < (lt->tm_year + 1900) && br > 1900)
+ 								{
+-									mir_snprintf(strFmt1, sizeof(strFmt1), ", %s %d", Translate("Age:"), (lt->tm_year + 1900) - br);
+-									strncat(strFmt2, strFmt1, sizeof(strFmt2) - strlen(strFmt2));
++									mir_sntprintf(strFmt1, SIZEOF(strFmt1), _T(", %s %d"), TranslateT("Age:"), (lt->tm_year + 1900) - br);
++									_tcsncat(strFmt2, strFmt1, SIZEOF(strFmt2) - _tcslen(strFmt2));
+ 								}
+ 							}
+ 
+ 							sr.hdr.cbSize = sizeof(sr);
+-							sr.hdr.nick = (char *)__nick;
+-							sr.hdr.firstName = (char *)__firstname;
+-							sr.hdr.lastName = (char *)__lastname;
++							sr.hdr.nick = __nick;
++							sr.hdr.firstName = __firstname;
++							sr.hdr.lastName = __lastname;
+ 							sr.hdr.email = strFmt2;
+-							sr.hdr.id = _ultoa(uin, strFmt1, 10);
++							sr.hdr.flags = PSR_TCHAR;
++							sr.hdr.id = _ultot(uin, strFmt1, 10);
+ 							sr.uin = uin;
+ 
+ 							ProtoBroadcastAck(GG_PROTO, NULL, ACKTYPE_SEARCH, ACKRESULT_DATA, (HANDLE) 1, (LPARAM)&sr);
+@@ -652,26 +665,26 @@
+ 						{
+ 							// Change nickname if it's not present
+ 							if(__nick && (res->seq == GG_SEQ_GETNICK || res->seq == GG_SEQ_CHINFO))
+-								DBWriteContactSettingString(hContact, GG_PROTO, "Nick", __nick);
++								DBWriteContactSettingTString(hContact, GG_PROTO, "Nick", __nick);
+ 							if(__nick)
+-								DBWriteContactSettingString(hContact, GG_PROTO, "NickName", __nick);
++								DBWriteContactSettingTString(hContact, GG_PROTO, "NickName", __nick);
+ 
+ 							// Change other info
+ 							if(__city)
+-								DBWriteContactSettingString(hContact, GG_PROTO, "City", __city);
++								DBWriteContactSettingTString(hContact, GG_PROTO, "City", __city);
+ 							if(__firstname)
+-								DBWriteContactSettingString(hContact, GG_PROTO, "FirstName", __firstname);
++								DBWriteContactSettingTString(hContact, GG_PROTO, "FirstName", __firstname);
+ 							if(__lastname)
+-								DBWriteContactSettingString(hContact, GG_PROTO, "LastName", __lastname);
++								DBWriteContactSettingTString(hContact, GG_PROTO, "LastName", __lastname);
+ 							if(__familyname)
+-								DBWriteContactSettingString(hContact, GG_PROTO, "FamilyName", __familyname);
++								DBWriteContactSettingTString(hContact, GG_PROTO, "FamilyName", __familyname);
+ 							if(__origincity)
+-								DBWriteContactSettingString(hContact, GG_PROTO, "CityOrigin", __origincity);
++								DBWriteContactSettingTString(hContact, GG_PROTO, "CityOrigin", __origincity);
+ 							if(__birthyear)
+ 							{
+ 								time_t t = time(NULL);
+ 								struct tm *lt = localtime(&t);
+-								int br = atoi(__birthyear);
++								int br = _ttoi(__birthyear);
+ 								if(br > 0)
+ 								{
+ 									DBWriteContactSettingWord(hContact, GG_PROTO, "Age", (WORD)(lt->tm_year + 1900 - br));
+@@ -680,14 +693,34 @@
+ 							}
+ 
+ 							// Gadu-Gadu Male <-> Female
+-							if(__gender)
++							if(_utf8_gender)
+ 								DBWriteContactSettingByte(hContact, GG_PROTO, "Gender",
+-								(BYTE)(!strcmp(__gender, GG_PUBDIR50_GENDER_MALE) ? 'M' :
+-									  (!strcmp(__gender, GG_PUBDIR50_GENDER_FEMALE) ? 'F' : '?')));
++								(BYTE)(!strcmp(_utf8_gender, GG_PUBDIR50_GENDER_MALE) ? 'M' :
++									  (!strcmp(_utf8_gender, GG_PUBDIR50_GENDER_FEMALE) ? 'F' : '?')));
+ 
+ 							gg_netlog(gg, "gg_mainthread(%x): Setting user info for uin %d.", gg, uin);
+ 							ProtoBroadcastAck(GG_PROTO, hContact, ACKTYPE_GETINFO, ACKRESULT_SUCCESS, (HANDLE) 1, 0);
+ 						}
++
++						// Cleanup
++						if(__fmnumber)
++							mir_free(__fmnumber);
++						if(__nick)
++							mir_free(__nick);
++						if(__firstname)
++							mir_free(__firstname);
++						if(__lastname)
++							mir_free(__lastname);
++						if(__familyname)
++							mir_free(__familyname);
++						if(__birthyear)
++							mir_free(__birthyear);
++						if(__city)
++							mir_free(__city);
++						if(__origincity)
++							mir_free(__origincity);
++						if(__status)
++							mir_free(__status);
+ 					}
+ 				}
+ 				if(res->seq == GG_SEQ_SEARCH)
+@@ -733,7 +766,7 @@
+ 							gg_parsecontacts(gg, e->event.userlist.reply);
+ 							MessageBox(
+ 								NULL,
+-								Translate("List import successful."),
++								TranslateT("List import successful."),
+ 								GG_PROTONAME,
+ 								MB_OK | MB_ICONINFORMATION
+ 							);
+@@ -744,14 +777,14 @@
+ 						if(gg->list_remove)
+ 							MessageBox(
+ 								NULL,
+-								Translate("List remove successful."),
++								TranslateT("List remove successful."),
+ 								GG_PROTONAME,
+ 								MB_OK | MB_ICONINFORMATION
+ 							);
+ 						else
+ 							MessageBox(
+ 								NULL,
+-								Translate("List export successful."),
++								TranslateT("List export successful."),
+ 								GG_PROTONAME,
+ 								MB_OK | MB_ICONINFORMATION
+ 							);
+@@ -773,23 +806,26 @@
+ 					// Check if groupchat
+ 					if(e->event.msg.recipients_count && gg->gc_enabled && !DBGetContactSettingByte(NULL, GG_PROTO, GG_KEY_IGNORECONF, GG_KEYDEF_IGNORECONF))
+ 					{
+-						char *chat = gg_gc_getchat(gg, e->event.msg.sender, e->event.msg.recipients, e->event.msg.recipients_count);
++						TCHAR *chat = gg_gc_getchat(gg, e->event.msg.sender, e->event.msg.recipients, e->event.msg.recipients_count);
+ 						if(chat)
+ 						{
+-							char id[32];
+-							GCDEST gcdest = {GG_PROTO, chat, GC_EVENT_MESSAGE};
++							TCHAR id[32];
++							TCHAR *msg;
++							GCDEST gcdest = {GG_PROTO, (char*)chat, GC_EVENT_MESSAGE};
+ 							GCEVENT gcevent = {sizeof(GCEVENT), &gcdest};
+ 							time_t t = time(NULL);
+ 
+-							UIN2ID(e->event.msg.sender, id);
++							UIN2IDT(e->event.msg.sender, id);
+ 
+-							gcevent.pszUID = id;
+-							gcevent.pszText = e->event.msg.message;
+-							gcevent.pszNick = (char *) CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) gg_getcontact(gg, e->event.msg.sender, 1, 0, NULL), 0);
++							gcevent.ptszUID = id;
++							msg = mir_utf8decodeT((char *)e->event.msg.message);
++							gcevent.ptszText = msg;
++							gcevent.ptszNick = (TCHAR *) CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) gg_getcontact(gg, e->event.msg.sender, 1, 0, (TCHAR *)NULL), GCDNF_TCHAR);
+ 							gcevent.time = (!(e->event.msg.msgclass & GG_CLASS_OFFLINE) || e->event.msg.time > (t - timeDeviation)) ? t : e->event.msg.time;
+-							gcevent.dwFlags = GCEF_ADDTOLOG;
+-							gg_netlog(gg, "gg_mainthread(%x): Conference message to room %s & id %s.", gg, chat, id);
++							gcevent.dwFlags = GCEF_ADDTOLOG | GC_TCHAR;
++							gg_netlog(gg, "gg_mainthread(%x): Conference message to room %S & id %S.", gg, chat, id);
+ 							CallServiceSync(MS_GC_EVENT, 0, (LPARAM)&gcevent);
++							mir_free(msg);
+ 						}
+ 					}
+ 					// Check if not empty message ( who needs it? )
+@@ -802,9 +838,9 @@
+ 						ccs.hContact = gg_getcontact(gg, e->event.msg.sender, 1, 0, NULL);
+ 						ccs.wParam = 0;
+ 						ccs.lParam = (LPARAM) & pre;
+-						pre.flags = 0;
++						pre.flags = PREF_UTF;
+ 						pre.timestamp = (!(e->event.msg.msgclass & GG_CLASS_OFFLINE) || e->event.msg.time > (t - timeDeviation)) ? t : e->event.msg.time;
+-						pre.szMessage = e->event.msg.message;
++						pre.szMessage = (char *)e->event.msg.message;
+ 						pre.lParam = 0;
+ 						CallService(MS_PROTO_CHAINRECV, 0, (LPARAM) &ccs);
+ 					}
+@@ -1000,8 +1036,8 @@
+ 					TCHAR *xmlAction;
+ 					TCHAR *tag;
+ 
+-					xmlAction = gg_a2t(e->event.xml_action.data);
+-					tag = gg_a2t("events");
++					xmlAction = mir_a2t(e->event.xml_action.data);
++					tag = mir_a2t("events");
+ 					hXml = xi.parseString(xmlAction, 0, tag);
+ 
+ 					if (hXml != NULL) {
+@@ -1009,14 +1045,14 @@
+ 						char *type, *sender;
+ 						
+ 						mir_free(tag);
+-						tag = gg_a2t("event/type");
++						tag = mir_a2t("event/type");
+ 						node = xi.getChildByPath(hXml, tag, 0);
+-						type = node != NULL ? gg_t2a(xi.getText(node)) : NULL;
++						type = node != NULL ? mir_t2a(xi.getText(node)) : NULL;
+ 
+ 						mir_free(tag);
+-						tag = gg_a2t("event/sender");
++						tag = mir_a2t("event/sender");
+ 						node = xi.getChildByPath(hXml, tag, 0);
+-						sender = node != NULL ? gg_t2a(xi.getText(node)) : NULL;
++						sender = node != NULL ? mir_t2a(xi.getText(node)) : NULL;
+ 						gg_netlog(gg, "gg_mainthread(%x): XML Action type: %s.", gg, type != NULL ? type : "unknown");
+ 						// Avatar change notify
+ 						if (type != NULL && !strcmp(type, "28")) {
+@@ -1062,7 +1098,7 @@
+ 	}
+ 
+ 	free(p.password);
+-	free(p.status_descr);
++	mir_free(p.status_descr);
+ 
+ 	// Stop dcc server
+ 	gg->pth_dcc.dwThreadId = 0;
+@@ -1110,13 +1146,13 @@
+ 	type = DBGetContactSettingByte(hContact, GG_PROTO, "ChatRoom", 0);
+ 
+ 	// Terminate conference if contact is deleted
+-	if(type && !DBGetContactSetting(hContact, GG_PROTO, "ChatRoomID", &dbv) && gg->gc_enabled)
++	if(type && !DBGetContactSettingTString(hContact, GG_PROTO, "ChatRoomID", &dbv) && gg->gc_enabled)
+ 	{
+-		GCDEST gcdest = {GG_PROTO, dbv.pszVal, GC_EVENT_CONTROL};
++		GCDEST gcdest = {GG_PROTO, (char *)dbv.ptszVal, GC_EVENT_CONTROL};
+ 		GCEVENT gcevent = {sizeof(GCEVENT), &gcdest};
+-		GGGC *chat = gg_gc_lookup(gg, dbv.pszVal);
++		GGGC *chat = gg_gc_lookup(gg, dbv.ptszVal);
+ 
+-		gg_netlog(gg, "gg_gc_event(): Terminating chat %x, id %s from contact list...", chat, dbv.pszVal);
++		gg_netlog(gg, "gg_gc_event(): Terminating chat %x, id %S from contact list...", chat, dbv.ptszVal);
+ 		if(chat)
+ 		{
+ 			// Destroy chat entry
+@@ -1174,21 +1210,22 @@
+ 
+ 	// Contact is being renamed
+ 	if(gg->gc_enabled && !strcmp(cws->szModule, GG_PROTO) && !strcmp(cws->szSetting, "Nick")
+-		&& cws->value.pszVal)
++		&& cws->value.ptszVal)
+ 	{
+ 		// Groupchat window contact is being renamed
+ 		DBVARIANT dbv;
+ 		int type = DBGetContactSettingByte(hContact, GG_PROTO, "ChatRoom", 0);
+-		if(type && !DBGetContactSetting(hContact, GG_PROTO, "ChatRoomID", &dbv))
++		if(type && !DBGetContactSettingTString(hContact, GG_PROTO, "ChatRoomID", &dbv))
+ 		{
+ 			// Most important... check redundancy (fucking cascading)
+ 			static int cascade = 0;
+-			if(!cascade && dbv.pszVal)
++			if(!cascade && dbv.ptszVal)
+ 			{
+-				GCDEST gcdest = {GG_PROTO, dbv.pszVal, GC_EVENT_CHANGESESSIONAME};
++				GCDEST gcdest = {GG_PROTO, (char*)dbv.ptszVal, GC_EVENT_CHANGESESSIONAME};
+ 				GCEVENT gcevent = {sizeof(GCEVENT), &gcdest};
+-				gcevent.pszText = cws->value.pszVal;
+-				gg_netlog(gg, "gg_dbsettingchanged(): Conference %s was renamed to %s.", dbv.pszVal, cws->value.pszVal);
++				gcevent.ptszText = cws->value.ptszVal;
++				gcevent.dwFlags = GC_TCHAR;
++				gg_netlog(gg, "gg_dbsettingchanged(): Conference %S was renamed to %S.", dbv.ptszVal, cws->value.ptszVal);
+ 				// Mark cascading
+ 				/* FIXME */ cascade = 1;
+ 				CallServiceSync(MS_GC_EVENT, 0, (LPARAM)&gcevent);
+@@ -1198,15 +1235,15 @@
+ 		}
+ 		else
+ 			// Change contact name on all chats
+-			gg_gc_changenick(gg, hContact, cws->value.pszVal);
++			gg_gc_changenick(gg, hContact, cws->value.ptszVal);
+ 	}
+ 
+ 	// Contact list changes
+ 	if(!strcmp(cws->szModule, "CList"))
+ 	{
+ 		// If name changed... change nick
+-		if(!strcmp(cws->szSetting, "MyHandle") && cws->value.type == DBVT_ASCIIZ && cws->value.pszVal)
+-			DBWriteContactSettingString(hContact, GG_PROTO, GG_KEY_NICK, cws->value.pszVal);
++		if(!strcmp(cws->szSetting, "MyHandle") && cws->value.type == DBVT_TCHAR && cws->value.ptszVal)
++			DBWriteContactSettingTString(hContact, GG_PROTO, GG_KEY_NICK, cws->value.ptszVal);
+ 
+ 		// If not on list changed
+ 		if(!strcmp(cws->szSetting, "NotOnList"))
+@@ -1366,7 +1403,7 @@
+ 
+ ////////////////////////////////////////////////////////////
+ // Get contact by uin
+-HANDLE gg_getcontact(GGPROTO *gg, uin_t uin, int create, int inlist, char *szNick)
++HANDLE gg_getcontact(GGPROTO *gg, uin_t uin, int create, int inlist, TCHAR *szNick)
+ {
+ 	HANDLE hContact;
+ 	char *szProto;
+@@ -1397,7 +1434,7 @@
+ 
+ 	if(!hContact)
+ 	{
+-		gg_netlog(gg, "gg_getcontact(): Failed to create Gadu-Gadu contact %s", szNick);
++		gg_netlog(gg, "gg_getcontact(): Failed to create Gadu-Gadu contact %S", szNick);
+ 		return NULL;
+ 	}
+ 
+@@ -1421,7 +1458,7 @@
+ 
+ 	// If nick specified use it
+ 	if(szNick)
+-		DBWriteContactSettingString(hContact, GG_PROTO, GG_KEY_NICK, szNick);
++		DBWriteContactSettingTString(hContact, GG_PROTO, GG_KEY_NICK, szNick);
+ 	else if(gg_isonline(gg))
+ 	{
+ 		gg_pubdir50_t req;
+@@ -1579,7 +1616,7 @@
+ 	if(idescr && *idescr)
+ 	{
+ 		gg_netlog(gg, "gg_changecontactstatus(): Saving for %d status desct \"%s\".", uin, idescr);
+-		DBWriteContactSettingString(hContact, "CList", GG_KEY_STATUSDESCR, idescr);
++		DBWriteContactSettingUTF8String(hContact, "CList", GG_KEY_STATUSDESCR, idescr);
+ 	}
+ 	else
+ 		// Remove status if there's nothing
+Index: dialogs.c
+===================================================================
+--- dialogs.c	(revision 13182)
++++ dialogs.c	(working copy)
+@@ -42,6 +42,7 @@
+ {
+ 	DBVARIANT dbv;
+ 	char str[80],*pstr;
++	TCHAR *tstr = NULL;
+ 	int unspecified=0;
+ 
+ 	dbv.type=DBVT_DELETED;
+@@ -58,7 +59,7 @@
+ 					else if(special==SVS_MONTH) {
+ 							if(dbv.bVal>0 && dbv.bVal<=12) {
+ 									pstr=str;
+-									GetLocaleInfo(LOCALE_USER_DEFAULT,LOCALE_SABBREVMONTHNAME1-1+dbv.bVal,str,sizeof(str));
++									GetLocaleInfoA(LOCALE_USER_DEFAULT,LOCALE_SABBREVMONTHNAME1-1+dbv.bVal,str,sizeof(str));
+ 							}
+ 							else unspecified=1;
+ 					}
+@@ -101,24 +102,45 @@
+ 					unspecified=(special==SVS_ZEROISUNSPEC && dbv.pszVal[0]=='\0');
+ 					pstr=dbv.pszVal;
+ 					break;
+-			default: pstr=str; lstrcpy(str,"???"); break;
++			case DBVT_TCHAR:
++				unspecified=(special==SVS_ZEROISUNSPEC && dbv.ptszVal[0]=='\0');
++				tstr=dbv.ptszVal;
++				break;
++			default: pstr=str; lstrcpyA(str,"???"); break;
+ 		}
+ 	}
+ 
+-	if(disableIfUndef)
+-	{
+-		EnableWindow(GetDlgItem(hwndDlg, idCtrl), !unspecified);
+-		if (unspecified)
+-			SetDlgItemText(hwndDlg, idCtrl, Translate("<not specified>"));
++	if(tstr != NULL) {
++		if(disableIfUndef)
++		{
++			EnableWindow(GetDlgItem(hwndDlg, idCtrl), !unspecified);
++			if (unspecified)
++				SetDlgItemText(hwndDlg, idCtrl, TranslateT("<not specified>"));
++			else
++				SetDlgItemText(hwndDlg, idCtrl, tstr);
++		}
+ 		else
+-			SetDlgItemText(hwndDlg, idCtrl, pstr);
++		{
++			EnableWindow(GetDlgItem(hwndDlg, idCtrl), TRUE);
++			if (!unspecified)
++				SetDlgItemText(hwndDlg, idCtrl, tstr);
++		}
++	} else {
++		if(disableIfUndef)
++		{
++			EnableWindow(GetDlgItem(hwndDlg, idCtrl), !unspecified);
++			if (unspecified)
++				SetDlgItemTextA(hwndDlg, idCtrl, Translate("<not specified>"));
++			else
++				SetDlgItemTextA(hwndDlg, idCtrl, pstr);
++		}
++		else
++		{
++			EnableWindow(GetDlgItem(hwndDlg, idCtrl), TRUE);
++			if (!unspecified)
++				SetDlgItemTextA(hwndDlg, idCtrl, pstr);
++		}
+ 	}
+-	else
+-	{
+-		EnableWindow(GetDlgItem(hwndDlg, idCtrl), TRUE);
+-		if (!unspecified)
+-			SetDlgItemText(hwndDlg, idCtrl, pstr);
+-	}
+ 	DBFreeVariant(&dbv);
+ }
+ 
+@@ -132,25 +154,24 @@
+ 	odp.cbSize = sizeof(odp);
+ 	odp.position = 1003000;
+ 	odp.hInstance = hInstance;
+-	odp.pszGroup = LPGEN("Network");
+-	odp.pszTitle = GG_PROTONAME;
++	odp.ptszGroup = LPGENT("Network");
++	odp.ptszTitle = GG_PROTONAME;
+ 	odp.dwInitParam = (LPARAM)gg;
++	odp.flags = ODPF_BOLDGROUPS|ODPF_TCHAR|ODPF_DONTTRANSLATE;
+ 
+-	odp.pszTab = LPGEN("General");
+-	odp.pszTemplate = MAKEINTRESOURCE(IDD_OPT_GG_GENERAL);
++	odp.ptszTab = LPGENT("General");
++	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_GG_GENERAL);
+ 	odp.pfnDlgProc = gg_genoptsdlgproc;
+-	odp.flags = ODPF_BOLDGROUPS | ODPF_DONTTRANSLATE;
+ 	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM) & odp);
+ 
+-	odp.pszTab = LPGEN("Conference");
+-	odp.pszTemplate = MAKEINTRESOURCE(IDD_OPT_GG_CONFERENCE);
++	odp.ptszTab = LPGENT("Conference");
++	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_GG_CONFERENCE);
+ 	odp.pfnDlgProc = gg_confoptsdlgproc;
+ 	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM) & odp);
+ 
+-	odp.pszTab = LPGEN("Advanced");
+-	odp.pszTemplate = MAKEINTRESOURCE(IDD_OPT_GG_ADVANCED);
++	odp.ptszTab = LPGENT("Advanced");
++	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_GG_ADVANCED);
+ 	odp.pfnDlgProc = gg_advoptsdlgproc;
+-	odp.flags = ODPF_BOLDGROUPS | ODPF_EXPERTONLY | ODPF_DONTTRANSLATE;
+ 	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM) & odp);
+ 
+ 	return 0;
+@@ -161,10 +182,10 @@
+ static void gg_optsdlgcheck(HWND hwndDlg)
+ {
+ 	char text[128];
+-	GetDlgItemText(hwndDlg, IDC_UIN, text, sizeof(text));
++	GetDlgItemTextA(hwndDlg, IDC_UIN, text, sizeof(text));
+ 	if(strlen(text))
+ 	{
+-		GetDlgItemText(hwndDlg, IDC_EMAIL, text, sizeof(text));
++		GetDlgItemTextA(hwndDlg, IDC_EMAIL, text, sizeof(text));
+ 		if(strlen(text))
+ 			ShowWindow(GetDlgItem(hwndDlg, IDC_CHEMAIL), SW_SHOW);
+ 		else
+@@ -199,7 +220,7 @@
+ 			TranslateDialogDefault(hwndDlg);
+ 			if (num = DBGetContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, 0))
+ 			{
+-				SetDlgItemText(hwndDlg, IDC_UIN, ditoa(num));
++				SetDlgItemTextA(hwndDlg, IDC_UIN, ditoa(num));
+ 				ShowWindow(GetDlgItem(hwndDlg, IDC_CREATEACCOUNT), SW_HIDE);
+ 			}
+ 			else
+@@ -210,11 +231,11 @@
+ 			}
+ 			if (!DBGetContactSettingString(NULL, GG_PROTO, GG_KEY_PASSWORD, &dbv)) {
+ 				CallService(MS_DB_CRYPT_DECODESTRING, strlen(dbv.pszVal) + 1, (LPARAM) dbv.pszVal);
+-				SetDlgItemText(hwndDlg, IDC_PASSWORD, dbv.pszVal);
++				SetDlgItemTextA(hwndDlg, IDC_PASSWORD, dbv.pszVal);
+ 				DBFreeVariant(&dbv);
+ 			}
+ 			if (!DBGetContactSettingString(NULL, GG_PROTO, GG_KEY_EMAIL, &dbv)) {
+-				SetDlgItemText(hwndDlg, IDC_EMAIL, dbv.pszVal);
++				SetDlgItemTextA(hwndDlg, IDC_EMAIL, dbv.pszVal);
+ 				DBFreeVariant(&dbv);
+ 			}
+ 			else
+@@ -239,12 +260,12 @@
+ 
+ 			EnableWindow(GetDlgItem(hwndDlg, IDC_LEAVESTATUS), IsDlgButtonChecked(hwndDlg, IDC_LEAVESTATUSMSG));
+ 			EnableWindow(GetDlgItem(hwndDlg, IDC_IMGMETHOD), IsDlgButtonChecked(hwndDlg, IDC_IMGRECEIVE));
+-			SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_ADDSTRING, 0, (LPARAM)Translate("<Last Status>"));	// 0
+-			SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_ADDSTRING, 0, (LPARAM)Translate("Online")); 		// ID_STATUS_ONLINE
+-			SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_ADDSTRING, 0, (LPARAM)Translate("Away"));			// ID_STATUS_AWAY
+-			SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_ADDSTRING, 0, (LPARAM)Translate("DND"));			// ID_STATUS_DND
+-			SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_ADDSTRING, 0, (LPARAM)Translate("Free for chat"));	// ID_STATUS_FREECHAT
+-			SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_ADDSTRING, 0, (LPARAM)Translate("Invisible"));		// ID_STATUS_INVISIBLE
++			SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_ADDSTRING, 0, (LPARAM)TranslateT("<Last Status>"));	// 0
++			SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_ADDSTRING, 0, (LPARAM)TranslateT("Online")); 		// ID_STATUS_ONLINE
++			SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_ADDSTRING, 0, (LPARAM)TranslateT("Away"));			// ID_STATUS_AWAY
++			SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_ADDSTRING, 0, (LPARAM)TranslateT("DND"));			// ID_STATUS_DND
++			SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_ADDSTRING, 0, (LPARAM)TranslateT("Free for chat"));	// ID_STATUS_FREECHAT
++			SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_ADDSTRING, 0, (LPARAM)TranslateT("Invisible"));		// ID_STATUS_INVISIBLE
+ 			switch(DBGetContactSettingWord(NULL, GG_PROTO, GG_KEY_LEAVESTATUS, GG_KEYDEF_LEAVESTATUS))
+ 			{
+ 				case ID_STATUS_ONLINE:
+@@ -266,9 +287,9 @@
+ 					SendDlgItemMessage(hwndDlg, IDC_LEAVESTATUS, CB_SETCURSEL, 0, 0);
+ 			}
+ 
+-			SendDlgItemMessage(hwndDlg, IDC_IMGMETHOD, CB_ADDSTRING, 0, (LPARAM)Translate("System tray icon"));
+-			SendDlgItemMessage(hwndDlg, IDC_IMGMETHOD, CB_ADDSTRING, 0, (LPARAM)Translate("Popup window"));
+-			SendDlgItemMessage(hwndDlg, IDC_IMGMETHOD, CB_ADDSTRING, 0, (LPARAM)Translate("Message with [img] BBCode"));
++			SendDlgItemMessage(hwndDlg, IDC_IMGMETHOD, CB_ADDSTRING, 0, (LPARAM)TranslateT("System tray icon"));
++			SendDlgItemMessage(hwndDlg, IDC_IMGMETHOD, CB_ADDSTRING, 0, (LPARAM)TranslateT("Popup window"));
++			SendDlgItemMessage(hwndDlg, IDC_IMGMETHOD, CB_ADDSTRING, 0, (LPARAM)TranslateT("Message with [img] BBCode"));
+ 			SendDlgItemMessage(hwndDlg, IDC_IMGMETHOD, CB_SETCURSEL,
+ 				DBGetContactSettingByte(NULL, GG_PROTO, GG_KEY_IMGMETHOD, GG_KEYDEF_IMGMETHOD), 0);
+ 			break;
+@@ -300,18 +321,18 @@
+ 					char email[128];
+ 					uin_t uin;
+ 					GGPROTO *gg = (GGPROTO *)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+-					GetDlgItemText(hwndDlg, IDC_UIN, email, sizeof(email));
++					GetDlgItemTextA(hwndDlg, IDC_UIN, email, sizeof(email));
+ 					uin = atoi(email);
+-					GetDlgItemText(hwndDlg, IDC_EMAIL, email, sizeof(email));
++					GetDlgItemTextA(hwndDlg, IDC_EMAIL, email, sizeof(email));
+ 					if(!strlen(email))
+ 						MessageBox(
+ 							NULL,
+-							Translate("You need to specify your registration e-mail first."),
++							TranslateT("You need to specify your registration e-mail first."),
+ 							GG_PROTONAME,
+ 							MB_OK | MB_ICONEXCLAMATION);
+ 					else if(MessageBox(
+ 						NULL,
+-						Translate("Your password will be sent to your registration e-mail.\nDo you want to continue ?"),
++						TranslateT("Your password will be sent to your registration e-mail.\nDo you want to continue ?"),
+ 						GG_PROTONAME,
+ 						MB_OKCANCEL | MB_ICONQUESTION) == IDOK)
+ 							gg_remindpassword(gg, uin, email);
+@@ -321,7 +342,7 @@
+ 				case IDC_REMOVEACCOUNT:
+ 					if(gg_isonline((GGPROTO *)GetWindowLongPtr(hwndDlg, GWLP_USERDATA)))
+ 					{
+-						if(MessageBox(
++						if(MessageBoxA(
+ 							NULL,
+ 							Translate("You should disconnect before making any permanent changes with your account.\nDo you want to disconnect now ?"),
+ 							((GGPROTO *)GetWindowLongPtr(hwndDlg, GWLP_USERDATA))->proto.m_szModuleName,
+@@ -338,10 +359,10 @@
+ 						int ret;
+ 						char pass[128], email[128];
+ 						GGPROTO *gg = (GGPROTO *)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+-						GetDlgItemText(hwndDlg, IDC_UIN, pass, sizeof(pass));
++						GetDlgItemTextA(hwndDlg, IDC_UIN, pass, sizeof(pass));
+ 						dat.uin = atoi(pass);
+-						GetDlgItemText(hwndDlg, IDC_PASSWORD, pass, sizeof(pass));
+-						GetDlgItemText(hwndDlg, IDC_EMAIL, email, sizeof(email));
++						GetDlgItemTextA(hwndDlg, IDC_PASSWORD, pass, sizeof(pass));
++						GetDlgItemTextA(hwndDlg, IDC_EMAIL, email, sizeof(email));
+ 						dat.pass = pass;
+ 						dat.email = email;
+ 						dat.gg = gg;
+@@ -376,26 +397,26 @@
+ 
+ 							// Update uin
+ 							if (num = DBGetContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, 0))
+-								SetDlgItemText(hwndDlg, IDC_UIN, ditoa(num));
++								SetDlgItemTextA(hwndDlg, IDC_UIN, ditoa(num));
+ 							else
+-								SetDlgItemText(hwndDlg, IDC_UIN, "");
++								SetDlgItemTextA(hwndDlg, IDC_UIN, "");
+ 
+ 							// Update password
+ 							if (!DBGetContactSettingString(NULL, GG_PROTO, GG_KEY_PASSWORD, &dbv)) {
+ 								CallService(MS_DB_CRYPT_DECODESTRING, strlen(dbv.pszVal) + 1, (LPARAM) dbv.pszVal);
+-								SetDlgItemText(hwndDlg, IDC_PASSWORD, dbv.pszVal);
++								SetDlgItemTextA(hwndDlg, IDC_PASSWORD, dbv.pszVal);
+ 								DBFreeVariant(&dbv);
+ 							}
+ 							else
+-								SetDlgItemText(hwndDlg, IDC_PASSWORD, "");
++								SetDlgItemTextA(hwndDlg, IDC_PASSWORD, "");
+ 
+ 							// Update e-mail
+ 							if (!DBGetContactSettingString(NULL, GG_PROTO, GG_KEY_EMAIL, &dbv)) {
+-								SetDlgItemText(hwndDlg, IDC_EMAIL, dbv.pszVal);
++								SetDlgItemTextA(hwndDlg, IDC_EMAIL, dbv.pszVal);
+ 								DBFreeVariant(&dbv);
+ 							}
+ 							else
+-								SetDlgItemText(hwndDlg, IDC_EMAIL, "");
++								SetDlgItemTextA(hwndDlg, IDC_EMAIL, "");
+ 
+ 							// Update links
+ 							gg_optsdlgcheck(hwndDlg);
+@@ -431,14 +452,14 @@
+ 					int status_flags = GG_STATUS_FLAG_UNKNOWN;
+ 
+ 					// Write Gadu-Gadu number
+-					GetDlgItemText(hwndDlg, IDC_UIN, str, sizeof(str));
++					GetDlgItemTextA(hwndDlg, IDC_UIN, str, sizeof(str));
+ 					DBWriteContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, atoi(str));
+ 					// Write Gadu-Gadu password
+-					GetDlgItemText(hwndDlg, IDC_PASSWORD, str, sizeof(str));
++					GetDlgItemTextA(hwndDlg, IDC_PASSWORD, str, sizeof(str));
+ 					CallService(MS_DB_CRYPT_ENCODESTRING, sizeof(str), (LPARAM) str);
+ 					DBWriteContactSettingString(NULL, GG_PROTO, GG_KEY_PASSWORD, str);
+ 					// Write Gadu-Gadu email
+-					GetDlgItemText(hwndDlg, IDC_EMAIL, str, sizeof(str));
++					GetDlgItemTextA(hwndDlg, IDC_EMAIL, str, sizeof(str));
+ 					DBWriteContactSettingString(NULL, GG_PROTO, GG_KEY_EMAIL, str);
+ 
+ 					// Write checkboxes
+@@ -501,27 +522,27 @@
+ 			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)lParam);
+ 
+ 			TranslateDialogDefault(hwndDlg);
+-			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_TOTAL, CB_ADDSTRING, 0, (LPARAM)Translate("Allow"));
+-			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_TOTAL, CB_ADDSTRING, 0, (LPARAM)Translate("Ask"));
+-			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_TOTAL, CB_ADDSTRING, 0, (LPARAM)Translate("Ignore"));
++			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_TOTAL, CB_ADDSTRING, 0, (LPARAM)TranslateT("Allow"));
++			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_TOTAL, CB_ADDSTRING, 0, (LPARAM)TranslateT("Ask"));
++			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_TOTAL, CB_ADDSTRING, 0, (LPARAM)TranslateT("Ignore"));
+ 			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_TOTAL, CB_SETCURSEL,
+ 				DBGetContactSettingWord(NULL, GG_PROTO, GG_KEY_GC_POLICY_TOTAL, GG_KEYDEF_GC_POLICY_TOTAL), 0);
+ 
+ 			if (num = DBGetContactSettingWord(NULL, GG_PROTO, GG_KEY_GC_COUNT_TOTAL, GG_KEYDEF_GC_COUNT_TOTAL))
+-				SetDlgItemText(hwndDlg, IDC_GC_COUNT_TOTAL, ditoa(num));
++				SetDlgItemTextA(hwndDlg, IDC_GC_COUNT_TOTAL, ditoa(num));
+ 
+-			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_UNKNOWN, CB_ADDSTRING, 0, (LPARAM)Translate("Allow"));
+-			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_UNKNOWN, CB_ADDSTRING, 0, (LPARAM)Translate("Ask"));
+-			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_UNKNOWN, CB_ADDSTRING, 0, (LPARAM)Translate("Ignore"));
++			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_UNKNOWN, CB_ADDSTRING, 0, (LPARAM)TranslateT("Allow"));
++			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_UNKNOWN, CB_ADDSTRING, 0, (LPARAM)TranslateT("Ask"));
++			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_UNKNOWN, CB_ADDSTRING, 0, (LPARAM)TranslateT("Ignore"));
+ 			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_UNKNOWN, CB_SETCURSEL,
+ 				DBGetContactSettingWord(NULL, GG_PROTO, GG_KEY_GC_POLICY_UNKNOWN, GG_KEYDEF_GC_POLICY_UNKNOWN), 0);
+ 
+ 			if (num = DBGetContactSettingWord(NULL, GG_PROTO, GG_KEY_GC_COUNT_UNKNOWN, GG_KEYDEF_GC_COUNT_UNKNOWN))
+-				SetDlgItemText(hwndDlg, IDC_GC_COUNT_UNKNOWN, ditoa(num));
++				SetDlgItemTextA(hwndDlg, IDC_GC_COUNT_UNKNOWN, ditoa(num));
+ 
+-			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_DEFAULT, CB_ADDSTRING, 0, (LPARAM)Translate("Allow"));
+-			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_DEFAULT, CB_ADDSTRING, 0, (LPARAM)Translate("Ask"));
+-			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_DEFAULT, CB_ADDSTRING, 0, (LPARAM)Translate("Ignore"));
++			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_DEFAULT, CB_ADDSTRING, 0, (LPARAM)TranslateT("Allow"));
++			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_DEFAULT, CB_ADDSTRING, 0, (LPARAM)TranslateT("Ask"));
++			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_DEFAULT, CB_ADDSTRING, 0, (LPARAM)TranslateT("Ignore"));
+ 			SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_DEFAULT, CB_SETCURSEL,
+ 				DBGetContactSettingWord(NULL, GG_PROTO, GG_KEY_GC_POLICY_DEFAULT, GG_KEYDEF_GC_POLICY_DEFAULT), 0);
+ 			break;
+@@ -550,9 +571,9 @@
+ 					DBWriteContactSettingWord(NULL, GG_PROTO, GG_KEY_GC_POLICY_DEFAULT,
+ 						(WORD)SendDlgItemMessage(hwndDlg, IDC_GC_POLICY_DEFAULT, CB_GETCURSEL, 0, 0));
+ 
+-					GetDlgItemText(hwndDlg, IDC_GC_COUNT_TOTAL, str, sizeof(str));
++					GetDlgItemTextA(hwndDlg, IDC_GC_COUNT_TOTAL, str, sizeof(str));
+ 					DBWriteContactSettingWord(NULL, GG_PROTO, GG_KEY_GC_COUNT_TOTAL, (WORD)atoi(str));
+-					GetDlgItemText(hwndDlg, IDC_GC_COUNT_UNKNOWN, str, sizeof(str));
++					GetDlgItemTextA(hwndDlg, IDC_GC_COUNT_UNKNOWN, str, sizeof(str));
+ 					DBWriteContactSettingWord(NULL, GG_PROTO, GG_KEY_GC_COUNT_UNKNOWN, (WORD)atoi(str));
+ 
+ 					break;
+@@ -578,11 +599,11 @@
+ 
+ 			TranslateDialogDefault(hwndDlg);
+ 			if (!DBGetContactSettingString(NULL, GG_PROTO, GG_KEY_SERVERHOSTS, &dbv)) {
+-				SetDlgItemText(hwndDlg, IDC_HOST, dbv.pszVal);
++				SetDlgItemTextA(hwndDlg, IDC_HOST, dbv.pszVal);
+ 				DBFreeVariant(&dbv);
+ 			}
+ 			else
+-				SetDlgItemText(hwndDlg, IDC_HOST, GG_KEYDEF_SERVERHOSTS);
++				SetDlgItemTextA(hwndDlg, IDC_HOST, GG_KEYDEF_SERVERHOSTS);
+ 
+ 			CheckDlgButton(hwndDlg, IDC_KEEPALIVE, DBGetContactSettingByte(NULL, GG_PROTO, GG_KEY_KEEPALIVE, GG_KEYDEF_KEEPALIVE));
+ 			CheckDlgButton(hwndDlg, IDC_SHOWCERRORS, DBGetContactSettingByte(NULL, GG_PROTO, GG_KEY_SHOWCERRORS, GG_KEYDEF_SHOWCERRORS));
+@@ -602,14 +623,14 @@
+ 
+ 			CheckDlgButton(hwndDlg, IDC_DIRECTCONNS, DBGetContactSettingByte(NULL, GG_PROTO, GG_KEY_DIRECTCONNS, GG_KEYDEF_DIRECTCONNS));
+ 			if (num = DBGetContactSettingWord(NULL, GG_PROTO, GG_KEY_DIRECTPORT, GG_KEYDEF_DIRECTPORT))
+-				SetDlgItemText(hwndDlg, IDC_DIRECTPORT, ditoa(num));
++				SetDlgItemTextA(hwndDlg, IDC_DIRECTPORT, ditoa(num));
+ 			CheckDlgButton(hwndDlg, IDC_FORWARDING, DBGetContactSettingByte(NULL, GG_PROTO, GG_KEY_FORWARDING, GG_KEYDEF_FORWARDING));
+ 			if (!DBGetContactSettingString(NULL, GG_PROTO, GG_KEY_FORWARDHOST, &dbv)) {
+-				SetDlgItemText(hwndDlg, IDC_FORWARDHOST, dbv.pszVal);
++				SetDlgItemTextA(hwndDlg, IDC_FORWARDHOST, dbv.pszVal);
+ 				DBFreeVariant(&dbv);
+ 			}
+ 			if (num = DBGetContactSettingWord(NULL, GG_PROTO, GG_KEY_FORWARDPORT, GG_KEYDEF_FORWARDPORT))
+-				SetDlgItemText(hwndDlg, IDC_FORWARDPORT, ditoa(num));
++				SetDlgItemTextA(hwndDlg, IDC_FORWARDPORT, ditoa(num));
+ 
+ 			EnableWindow(GetDlgItem(hwndDlg, IDC_DIRECTPORT), IsDlgButtonChecked(hwndDlg, IDC_DIRECTCONNS));
+ 			EnableWindow(GetDlgItem(hwndDlg, IDC_FORWARDING), IsDlgButtonChecked(hwndDlg, IDC_DIRECTCONNS));
+@@ -664,16 +685,16 @@
+ 					DBWriteContactSettingByte(NULL, GG_PROTO, GG_KEY_FORWARDING, (BYTE) IsDlgButtonChecked(hwndDlg, IDC_FORWARDING));
+ 
+ 					// Write custom servers
+-					GetDlgItemText(hwndDlg, IDC_HOST, str, sizeof(str));
++					GetDlgItemTextA(hwndDlg, IDC_HOST, str, sizeof(str));
+ 					DBWriteContactSettingString(NULL, GG_PROTO, GG_KEY_SERVERHOSTS, str);
+ 
+ 					// Write direct port
+-					GetDlgItemText(hwndDlg, IDC_DIRECTPORT, str, sizeof(str));
++					GetDlgItemTextA(hwndDlg, IDC_DIRECTPORT, str, sizeof(str));
+ 					DBWriteContactSettingWord(NULL, GG_PROTO, GG_KEY_DIRECTPORT, (WORD)atoi(str));
+ 					// Write forwarding host
+-					GetDlgItemText(hwndDlg, IDC_FORWARDHOST, str, sizeof(str));
++					GetDlgItemTextA(hwndDlg, IDC_FORWARDHOST, str, sizeof(str));
+ 					DBWriteContactSettingString(NULL, GG_PROTO, GG_KEY_FORWARDHOST, str);
+-					GetDlgItemText(hwndDlg, IDC_FORWARDPORT, str, sizeof(str));
++					GetDlgItemTextA(hwndDlg, IDC_FORWARDPORT, str, sizeof(str));
+ 					DBWriteContactSettingWord(NULL, GG_PROTO, GG_KEY_FORWARDPORT, (WORD)atoi(str));
+ 					break;
+ 				}
+@@ -713,9 +734,9 @@
+ 			// Add genders
+ 			if(!dat->hContact)
+ 			{
+-				SendDlgItemMessage(hwndDlg, IDC_GENDER, CB_ADDSTRING, 0, (LPARAM)Translate(""));		// 0
+-				SendDlgItemMessage(hwndDlg, IDC_GENDER, CB_ADDSTRING, 0, (LPARAM)Translate("Male"));	// 1
+-				SendDlgItemMessage(hwndDlg, IDC_GENDER, CB_ADDSTRING, 0, (LPARAM)Translate("Female"));	// 2
++				SendDlgItemMessage(hwndDlg, IDC_GENDER, CB_ADDSTRING, 0, (LPARAM)TranslateT(""));		// 0
++				SendDlgItemMessage(hwndDlg, IDC_GENDER, CB_ADDSTRING, 0, (LPARAM)TranslateT("Male"));	// 1
++				SendDlgItemMessage(hwndDlg, IDC_GENDER, CB_ADDSTRING, 0, (LPARAM)TranslateT("Female"));	// 2
+ 			}
+ 			break;
+ 		}
+@@ -742,7 +763,7 @@
+ 							{
+ 								MessageBox(
+ 									NULL,
+-									Translate("Your info has been uploaded to public catalog."),
++									TranslateT("Your info has been uploaded to public catalog."),
+ 									GG_PROTONAME,
+ 									MB_OK | MB_ICONINFORMATION
+ 								);
+@@ -810,16 +831,16 @@
+ 
+ 				req = gg_pubdir50_new(GG_PUBDIR50_WRITE);
+ 
+-				GetDlgItemText(hwndDlg, IDC_FIRSTNAME, text, sizeof(text));
++				GetDlgItemTextA(hwndDlg, IDC_FIRSTNAME, text, sizeof(text));
+ 				if (strlen(text)) gg_pubdir50_add(req, GG_PUBDIR50_FIRSTNAME, text);
+ 
+-				GetDlgItemText(hwndDlg, IDC_LASTNAME, text, sizeof(text));
++				GetDlgItemTextA(hwndDlg, IDC_LASTNAME, text, sizeof(text));
+ 				if (strlen(text)) gg_pubdir50_add(req, GG_PUBDIR50_LASTNAME, text);
+ 
+-				GetDlgItemText(hwndDlg, IDC_NICKNAME, text, sizeof(text));
++				GetDlgItemTextA(hwndDlg, IDC_NICKNAME, text, sizeof(text));
+ 				if (strlen(text)) gg_pubdir50_add(req, GG_PUBDIR50_NICKNAME, text);
+ 
+-				GetDlgItemText(hwndDlg, IDC_CITY, text, sizeof(text));
++				GetDlgItemTextA(hwndDlg, IDC_CITY, text, sizeof(text));
+ 				if (strlen(text)) gg_pubdir50_add(req, GG_PUBDIR50_CITY, text);
+ 
+ 				// Gadu-Gadu Female <-> Male
+@@ -835,13 +856,13 @@
+ 						gg_pubdir50_add(req, GG_PUBDIR50_GENDER, "");
+ 				}
+ 
+-				GetDlgItemText(hwndDlg, IDC_BIRTHYEAR, text, sizeof(text));
++				GetDlgItemTextA(hwndDlg, IDC_BIRTHYEAR, text, sizeof(text));
+ 				if (strlen(text)) gg_pubdir50_add(req, GG_PUBDIR50_BIRTHYEAR, text);
+ 
+-				GetDlgItemText(hwndDlg, IDC_FAMILYNAME, text, sizeof(text));
++				GetDlgItemTextA(hwndDlg, IDC_FAMILYNAME, text, sizeof(text));
+ 				if (strlen(text)) gg_pubdir50_add(req, GG_PUBDIR50_FAMILYNAME, text);
+ 
+-				GetDlgItemText(hwndDlg, IDC_CITYORIGIN, text, sizeof(text));
++				GetDlgItemTextA(hwndDlg, IDC_CITYORIGIN, text, sizeof(text));
+ 				if (strlen(text)) gg_pubdir50_add(req, GG_PUBDIR50_FAMILYCITY, text);
+ 
+ 				// Run update
+@@ -888,12 +909,12 @@
+ 		OPTIONSDIALOGPAGE odp = {0};
+ 
+ 		odp.cbSize = sizeof(odp);
+-		odp.flags = ODPF_DONTTRANSLATE;
++		odp.flags = ODPF_DONTTRANSLATE | ODPF_TCHAR;
+ 		odp.hIcon = NULL;
+ 		odp.hInstance = hInstance;
+ 		odp.pfnDlgProc = gg_detailsdlgproc;
+ 		odp.position = -1900000000;
+-		odp.pszTemplate = ((HANDLE)lParam != NULL) ? MAKEINTRESOURCE(IDD_INFO_GG) : MAKEINTRESOURCE(IDD_CHINFO_GG);
++		odp.pszTemplate = ((HANDLE)lParam != NULL) ? MAKEINTRESOURCEA(IDD_INFO_GG) : MAKEINTRESOURCEA(IDD_CHINFO_GG);
+ 		odp.ptszTitle = GG_PROTONAME;
+ 		odp.dwInitParam = (LPARAM)gg;
+ 		CallService(MS_USERINFO_ADDPAGE, wParam, (LPARAM)&odp);
+@@ -921,14 +942,14 @@
+ 
+ 			TranslateDialogDefault(hwndDlg);
+ 			if (num = DBGetContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, 0))
+-				SetDlgItemText(hwndDlg, IDC_UIN, ditoa(num));
++				SetDlgItemTextA(hwndDlg, IDC_UIN, ditoa(num));
+ 			if (!DBGetContactSettingString(NULL, GG_PROTO, GG_KEY_PASSWORD, &dbv)) {
+ 				CallService(MS_DB_CRYPT_DECODESTRING, strlen(dbv.pszVal) + 1, (LPARAM) dbv.pszVal);
+-				SetDlgItemText(hwndDlg, IDC_PASSWORD, dbv.pszVal);
++				SetDlgItemTextA(hwndDlg, IDC_PASSWORD, dbv.pszVal);
+ 				DBFreeVariant(&dbv);
+ 			}
+ 			if (!DBGetContactSettingString(NULL, GG_PROTO, GG_KEY_EMAIL, &dbv)) {
+-				SetDlgItemText(hwndDlg, IDC_EMAIL, dbv.pszVal);
++				SetDlgItemTextA(hwndDlg, IDC_EMAIL, dbv.pszVal);
+ 				DBFreeVariant(&dbv);
+ 			}
+ 			break;
+@@ -943,10 +964,10 @@
+ 					int ret;
+ 					char pass[128], email[128];
+ 					GGPROTO *gg = (GGPROTO *)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+-					GetDlgItemText(hwndDlg, IDC_UIN, pass, sizeof(pass));
++					GetDlgItemTextA(hwndDlg, IDC_UIN, pass, sizeof(pass));
+ 					dat.uin = atoi(pass);
+-					GetDlgItemText(hwndDlg, IDC_PASSWORD, pass, sizeof(pass));
+-					GetDlgItemText(hwndDlg, IDC_EMAIL, email, sizeof(email));
++					GetDlgItemTextA(hwndDlg, IDC_PASSWORD, pass, sizeof(pass));
++					GetDlgItemTextA(hwndDlg, IDC_EMAIL, email, sizeof(email));
+ 					dat.pass = pass;
+ 					dat.email = email;
+ 					dat.gg = gg;
+@@ -963,26 +984,26 @@
+ 
+ 						// Update uin
+ 						if (num = DBGetContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, 0))
+-							SetDlgItemText(hwndDlg, IDC_UIN, ditoa(num));
++							SetDlgItemTextA(hwndDlg, IDC_UIN, ditoa(num));
+ 						else
+-							SetDlgItemText(hwndDlg, IDC_UIN, "");
++							SetDlgItemTextA(hwndDlg, IDC_UIN, "");
+ 
+ 						// Update password
+ 						if (!DBGetContactSettingString(NULL, GG_PROTO, GG_KEY_PASSWORD, &dbv)) {
+ 							CallService(MS_DB_CRYPT_DECODESTRING, strlen(dbv.pszVal) + 1, (LPARAM) dbv.pszVal);
+-							SetDlgItemText(hwndDlg, IDC_PASSWORD, dbv.pszVal);
++							SetDlgItemTextA(hwndDlg, IDC_PASSWORD, dbv.pszVal);
+ 							DBFreeVariant(&dbv);
+ 						}
+ 						else
+-							SetDlgItemText(hwndDlg, IDC_PASSWORD, "");
++							SetDlgItemTextA(hwndDlg, IDC_PASSWORD, "");
+ 
+ 						// Update e-mail
+ 						if (!DBGetContactSettingString(NULL, GG_PROTO, GG_KEY_EMAIL, &dbv)) {
+-							SetDlgItemText(hwndDlg, IDC_EMAIL, dbv.pszVal);
++							SetDlgItemTextA(hwndDlg, IDC_EMAIL, dbv.pszVal);
+ 							DBFreeVariant(&dbv);
+ 						}
+ 						else
+-							SetDlgItemText(hwndDlg, IDC_EMAIL, "");
++							SetDlgItemTextA(hwndDlg, IDC_EMAIL, "");
+ 					}
+ 				}
+ 
+@@ -1000,14 +1021,14 @@
+ 						char str[128];
+ 						GGPROTO *gg = (GGPROTO *)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+ 						// Write Gadu-Gadu number
+-						GetDlgItemText(hwndDlg, IDC_UIN, str, sizeof(str));
++						GetDlgItemTextA(hwndDlg, IDC_UIN, str, sizeof(str));
+ 						DBWriteContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, atoi(str));
+ 						// Write Gadu-Gadu password
+-						GetDlgItemText(hwndDlg, IDC_PASSWORD, str, sizeof(str));
++						GetDlgItemTextA(hwndDlg, IDC_PASSWORD, str, sizeof(str));
+ 						CallService(MS_DB_CRYPT_ENCODESTRING, sizeof(str), (LPARAM) str);
+ 						DBWriteContactSettingString(NULL, GG_PROTO, GG_KEY_PASSWORD, str);
+ 						// Write Gadu-Gadu email
+-						GetDlgItemText(hwndDlg, IDC_EMAIL, str, sizeof(str));
++						GetDlgItemTextA(hwndDlg, IDC_EMAIL, str, sizeof(str));
+ 						DBWriteContactSettingString(NULL, GG_PROTO, GG_KEY_EMAIL, str);
+ 					}
+ 				}
+Index: filetransfer.c
+===================================================================
+--- filetransfer.c	(revision 13182)
++++ filetransfer.c	(working copy)
+@@ -647,7 +647,7 @@
+ 	// Check if main dcc thread is on
+ 	if(!gg_isonline(gg)) return ftfail(gg, hContact);
+ 
+-	filename = gg_t2a(ppszFiles[0]);
++	filename = mir_t2a(ppszFiles[0]);
+ 
+ 	// Read user IP and port
+ 	ip = swap32(DBGetContactSettingDword(hContact, GG_PROTO, GG_KEY_CLIENTIP, 0));
+@@ -746,7 +746,7 @@
+ HANDLE gg_dccfileallow(GGPROTO *gg, HANDLE hTransfer, const PROTOCHAR* szPath)
+ {
+ 	struct gg_dcc *dcc = (struct gg_dcc *) hTransfer;
+-	char fileName[MAX_PATH], *path = gg_t2a(szPath);
++	char fileName[MAX_PATH], *path = mir_t2a(szPath);
+ 	strncpy(fileName, path, sizeof(fileName));
+ 	strncat(fileName, dcc->file_info.filename, sizeof(fileName) - strlen(fileName));
+ 	dcc->folder = _strdup((char *) path);
+@@ -784,7 +784,7 @@
+ HANDLE gg_dcc7fileallow(GGPROTO *gg, HANDLE hTransfer, const PROTOCHAR* szPath)
+ {
+ 	struct gg_dcc7 *dcc7 = (struct gg_dcc7 *) hTransfer;
+-	char fileName[MAX_PATH], *path = gg_t2a(szPath);
++	char fileName[MAX_PATH], *path = mir_t2a(szPath);
+ 	strncpy(fileName, path, sizeof(fileName));
+ 	strncat(fileName, dcc7->filename, sizeof(fileName) - strlen(fileName));
+ 	dcc7->folder = _strdup((char *) path);
+Index: gg.c
+===================================================================
+--- gg.c	(revision 13182)
++++ gg.c	(working copy)
+@@ -25,14 +25,18 @@
+ // Plugin info
+ PLUGININFOEX pluginInfo = {
+ 	sizeof(PLUGININFOEX),
+-	"Gadu-Gadu Protocol",
++	"Gadu-Gadu Protocol (with Unicode support)",
+ 	__VERSION_DWORD,
+ 	"Provides support for Gadu-Gadu protocol",
+-	"Bartosz Bia쿮k, Adam Strzelecki",
++	"Tomasz Figa, Bartosz Bia쿮k, Adam Strzelecki",
+ 	"dezred"/*antispam*/"@"/*antispam*/"gmail"/*antispam*/"."/*antispam*/"com",
+-	"� 2009-2010 Bartosz Bia쿮k, 2003-2009 Adam Strzelecki",
++	"� 2010 Tomasz Figa, 2009-2010 Bartosz Bia쿮k, 2003-2009 Adam Strzelecki",
+ 	"http://www.miranda-im.pl/",
++#ifdef _UNICODE
++	UNICODE_AWARE,
++#else
+ 	0,
++#endif
+ 	0,
+ 	// {F3FF65F3-250E-416A-BEE9-58C93F85AB33}
+ 	{ 0xf3ff65f3, 0x250e, 0x416a, { 0xbe, 0xe9, 0x58, 0xc9, 0x3f, 0x85, 0xab, 0x33 } }
+@@ -47,6 +51,7 @@
+ struct MD5_INTERFACE md5i;
+ struct LIST_INTERFACE li;
+ XML_API xi;
++struct UTF8_INTERFACE utfi;
+ CLIST_INTERFACE *pcli;
+ 
+ // Event hooks
+@@ -57,27 +62,27 @@
+ 
+ //////////////////////////////////////////////////////////
+ // Extra winsock function for error description
+-char *ws_strerror(int code)
++TCHAR *ws_strerror(int code)
+ {
+-	static char err_desc[160];
++	static TCHAR err_desc[160];
+ 
+ 	// Not a windows error display WinSock
+ 	if(code == 0)
+ 	{
+-		char buff[128];
++		TCHAR buff[128];
+ 		int len;
+ 		len = FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM,
+ 				  NULL, WSAGetLastError(), 0, buff,
+-				  sizeof(buff), NULL);
++				  SIZEOF(buff), NULL);
+ 		if(len == 0)
+-			mir_snprintf(err_desc, sizeof(err_desc), "WinSock %u: Unknown error.", WSAGetLastError());
++			mir_sntprintf(err_desc, SIZEOF(err_desc), _T("WinSock %u: Unknown error."), WSAGetLastError());
+ 		else
+-			mir_snprintf(err_desc, sizeof(err_desc), "WinSock %d: %s", WSAGetLastError(), buff);
++			mir_sntprintf(err_desc, SIZEOF(err_desc), _T("WinSock %d: %s"), WSAGetLastError(), buff);
+ 		return err_desc;
+ 	}
+ 
+ 	// Return normal error
+-	return strerror(code);
++	return _tcserror(code);
+ }
+ 
+ //////////////////////////////////////////////////////////
+@@ -122,7 +127,7 @@
+ 	switch (h)
+ 	{
+ 		case 0:
+-			return Translate((errno == ENOMEM) ? "HTTP failed memory" : "HTTP failed connecting");
++			return (errno == ENOMEM) ? Translate("HTTP failed memory") : Translate("HTTP failed connecting");
+ 		case GG_ERROR_RESOLVING:
+ 			return Translate("HTTP failed resolving");
+ 		case GG_ERROR_CONNECTING:
+@@ -144,8 +149,8 @@
+ 	{
+ 		MessageBox(
+ 			NULL,
+-			"The Gadu-Gadu protocol plugin cannot be loaded. It requires Miranda IM 0.9.0.0 or later.",
+-			"Gadu-Gadu Protocol Plugin",
++			_T("The Gadu-Gadu protocol plugin cannot be loaded. It requires Miranda IM 0.9.0.0 or later."),
++			_T("Gadu-Gadu Protocol Plugin"),
+ 			MB_OK | MB_ICONWARNING | MB_SETFOREGROUND | MB_TOPMOST
+ 		);
+ 		return NULL;
+@@ -265,7 +270,7 @@
+ 	CLISTMENUITEM mi = {0};
+ 
+ 	mi.cbSize = sizeof(mi);
+-	if (hRoot == NULL)
++	if (hRoot != NULL)
+ 	{
+ 		mi.ptszName = GG_PROTONAME;
+ 		mi.position = 500090000;
+@@ -298,7 +303,71 @@
+ 	gg_import_init(gg, hRoot);
+ }
+ 
++#if 0
+ //////////////////////////////////////////////////////////
++// Menus initialization
++void gg_menus_init(GGPROTO *gg)
++{
++<<<<<<< .mine
++	CLISTMENUITEM mi = {0};
++	HGENMENU hRoot = MO_GetProtoRootMenu(gg->proto.m_szModuleName);
++=======
++	HGENMENU hGCRoot, hRoot = MO_GetProtoRootMenu(gg->proto.m_szModuleName);
++	CLISTMENUITEM mi = {0};
++
++	mi.cbSize = sizeof(mi);
++>>>>>>> .r12267
++	if (hRoot != NULL)
++	{
++<<<<<<< .mine
++=======
++		mi.ptszName = GG_PROTONAME;
++		mi.position = 500090000;
++		mi.hParentMenu = HGENMENU_ROOT;
++		mi.flags = CMIF_ICONFROMICOLIB | CMIF_ROOTPOPUP | CMIF_TCHAR | CMIF_KEEPUNTRANSLATED;
++		mi.icolibItem = GetIconHandle(IDI_GG);
++		hGCRoot = hRoot = gg->hMenuRoot = (HANDLE)CallService(MS_CLIST_ADDPROTOMENUITEM, 0, (LPARAM) &mi);
++	}
++	else
++	{
++>>>>>>> .r12267
++		mi.hParentMenu = hRoot;
++		mi.flags = CMIF_ICONFROMICOLIB | CMIF_ROOTHANDLE | CMIF_TCHAR;
++
++		mi.ptszName = LPGENT("Conference");
++		mi.position = 200001;
++		mi.icolibItem = GetIconHandle(IDI_CONFERENCE);
++		hGCRoot = (HANDLE)CallService(MS_CLIST_ADDPROTOMENUITEM, 0, (LPARAM) &mi);
++
++		mi.ptszName = LPGENT("Contact list");
++		mi.position = 200002;
++		mi.icolibItem = GetIconHandle(IDI_LIST);
++		hRoot = (HANDLE)CallService(MS_CLIST_ADDPROTOMENUITEM, 0, (LPARAM) &mi);
++
++		if (gg->hMenuRoot)
++			CallService(MS_CLIST_REMOVEMAINMENUITEM, (WPARAM)gg->hMenuRoot, 0);
++		gg->hMenuRoot = NULL;
++	}
++
++<<<<<<< .mine
++	mi.cbSize = sizeof(mi);
++	mi.flags = CMIF_ICONFROMICOLIB | CMIF_TCHAR | CMIF_KEEPUNTRANSLATED;
++	mi.ptszPopupName = NULL;
++	mi.position = 500090000;
++	mi.icolibItem = GetIconHandle(IDI_GG);
++	mi.ptszName = GG_PROTONAME;
++	mi.pszService = gg->proto.m_szModuleName;
++	hRoot = gg->hMenuRoot = (HGENMENU)CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM) &mi);
++
++	gg_gc_menus_init(gg, hRoot);
++=======
++	gg_gc_menus_init(gg, hGCRoot);
++>>>>>>> .r12267
++	gg_import_init(gg, hRoot);
++}
++#endif
++
++//////////////////////////////////////////////////////////
+ // Custom protocol event
+ int gg_event(PROTO_INTERFACE *proto, PROTOEVENTTYPE eventType, WPARAM wParam, LPARAM lParam)
+ {
+@@ -350,7 +419,9 @@
+ 			gg_netlog(gg, "gg_event(EV_PROTO_ONRENAME): renaming account...");
+ #endif
+ 			mir_free(gg->name);
+-			gg->name = gg_t2a(gg->proto.m_tszUserName);
++			mir_free(gg->szName);
++			gg->name = mir_tstrdup(gg->proto.m_tszUserName);
++			gg->szName = mir_t2a(gg->name);
+ 			if (gg->hMenuRoot)
+ 			{
+ 				CLISTMENUITEM mi = {0};
+@@ -370,15 +441,11 @@
+ {
+ 	DWORD dwVersion;
+ 	GGPROTO *gg = (GGPROTO *)mir_alloc(sizeof(GGPROTO));
+-	char szVer[MAX_PATH];
++	TCHAR name[128];
+ 	NETLIBUSER nlu = { 0 };
+ 
+ 	ZeroMemory(gg, sizeof(GGPROTO));
+ 	gg->proto.vtbl = (PROTO_INTERFACE_VTBL*)mir_alloc(sizeof(PROTO_INTERFACE_VTBL));
+-	// Are we running under unicode Miranda core ?
+-	CallService(MS_SYSTEM_GETVERSIONTEXT, MAX_PATH, (LPARAM)szVer);
+-	_strlwr(szVer); // make sure it is lowercase
+-	gg->unicode_core = (strstr(szVer, "unicode") != NULL);
+ 
+ 	// Init mutex
+ 	InitializeCriticalSection(&gg->sess_mutex);
+@@ -389,31 +456,25 @@
+ 
+ 	// Init instance names
+ 	gg->proto.m_szModuleName = mir_strdup(pszProtoName);
+-	gg->proto.m_szProtoName = GGDEF_PROTONAME;
++	gg->proto.m_szProtoName = mir_strdup(GGDEF_PROTONAME);
+ 	gg->proto.m_iVersion = 2;
+ 
+-/* Anyway we won't get Unicode in GG yet */
+-#ifdef _UNICODE
++/* Anyway we won't get Unicode in GG yet. [O, rly?] */
+ 	gg->name = gg->proto.m_tszUserName = mir_tstrdup(tszUserName);
+-#else
+-	gg->proto.m_tszUserName = gg->unicode_core ? (TCHAR *)mir_wstrdup((wchar_t *)tszUserName) : (TCHAR *)mir_strdup((char *)tszUserName);
+-	gg->name = gg_t2a(tszUserName);
+-#endif
++	gg->szName = mir_t2a(gg->name);
+ 
+ 	// Register netlib user
+ 	nlu.cbSize = sizeof(nlu);
+ 	nlu.flags = NUF_OUTGOING | NUF_INCOMING | NUF_HTTPCONNS;
+ 	nlu.szSettingsModule = gg->proto.m_szModuleName;
+-	if (gg->unicode_core) {
+-		WCHAR name[128];
+-		_snwprintf(name, sizeof(name)/sizeof(name[0]), TranslateW(L"%s connection"), gg->proto.m_tszUserName);
+-		nlu.ptszDescriptiveName = (char *)name;
+-		nlu.flags |= NUF_UNICODE;
+-	} else {
+-		char name[128];
+-		mir_snprintf(name, sizeof(name)/sizeof(name[0]), Translate("%s connection"), gg->proto.m_tszUserName);
+-		nlu.ptszDescriptiveName = name;
+-	}
++
++
++	_sntprintf(name, SIZEOF(name), TranslateT("%s connection"), gg->proto.m_tszUserName);
++	nlu.ptszDescriptiveName = name;
++#ifdef _UNICODE
++	nlu.flags |= NUF_UNICODE;
++#endif
++
+ 	gg->netlib = (HANDLE)CallService(MS_NETLIB_REGISTERUSER, 0, (LPARAM)&nlu);
+ 
+ 	// Register services
+@@ -474,6 +535,7 @@
+ 	mir_free(gg->proto.m_szModuleName);
+ 	mir_free(gg->proto.m_tszUserName);
+ 	mir_free(gg->name);
++	mir_free(gg->szName);
+ 	mir_free(gg->proto.vtbl);
+ 	mir_free(gg);
+ 
+@@ -486,6 +548,7 @@
+ {
+ 	WSADATA wsaData;
+ 	PROTOCOLDESCRIPTOR pd;
++	char szVer[MAX_PATH];
+ 
+ 	pluginLink = link;
+ 	mir_getMMI(&mmi);
+@@ -493,7 +556,31 @@
+ 	mir_getMD5I(&md5i);
+ 	mir_getLI(&li);
+ 	mir_getXI(&xi);
++	mir_getUTFI(&utfi);
+ 
++	// Check if our character encoding is the same as in Miranda
++	CallService(MS_SYSTEM_GETVERSIONTEXT, MAX_PATH, (LPARAM)szVer);
++	_strlwr(szVer); // make sure it is lowercase
++	if (strstr(szVer, "unicode") != NULL) {
++#ifndef _UNICODE
++		MessageBox(0,
++			"Unicode version of miranda detected. "
++			"This plugin version supports only the non-unicode version. "
++			"Please get the unicode version of the plugin.",
++			"Error", MB_OK | MB_ICONERROR | MB_SETFOREGROUND | MB_TOPMOST);
++		return 1;
++#endif
++	} else {
++#ifdef _UNICODE
++		MessageBox(0,
++			L"Non-unicode version of miranda detected. "
++			L"This plugin version supports only the unicode version. "
++			L"Please get non-unicode version of the plugin.", 
++			L"Error", MB_OK | MB_ICONERROR | MB_SETFOREGROUND | MB_TOPMOST);
++		return 1;
++#endif
++	}
++
+ 	// Init winsock
+ 	if (WSAStartup(MAKEWORD( 1, 1 ), &wsaData))
+ 		return 1;
+Index: gg.h
+===================================================================
+--- gg.h	(revision 13182)
++++ gg.h	(working copy)
+@@ -121,6 +121,7 @@
+ {
+ 	PROTO_INTERFACE proto;
+ 	LPTSTR name;
++	LPSTR szName;
+ 	CRITICAL_SECTION ft_mutex, sess_mutex, img_mutex, modemsg_mutex, avatar_mutex;
+ 	list_t watches, transfers, requests, chats, imagedlgs, avatar_requests, avatar_transfers;
+ 	int gc_enabled, gc_id, list_remove, unicode_core;
+@@ -135,12 +136,12 @@
+ 	UINT_PTR timer;
+ 	struct
+ 	{
+-		char *online;
+-		char *away;
+-		char *dnd;
+-		char *freechat;
+-		char *invisible;
+-		char *offline;
++		TCHAR *online;
++		TCHAR *away;
++		TCHAR *dnd;
++		TCHAR *freechat;
++		TCHAR *invisible;
++		TCHAR *offline;
+ 	} modemsg;
+ 	HANDLE netlib,
+ 		hookOptsInit,
+@@ -171,7 +172,7 @@
+ {
+ 	uin_t *recipients;
+ 	int recipients_count;
+-	char id[32];
++	TCHAR id[32];
+ 	BOOL ignore;
+ } GGGC;
+ 
+@@ -193,6 +194,7 @@
+ // Wrappers of the old interface
+ #define GG_PROTO		(gg->proto.m_szModuleName)
+ #define GG_PROTONAME	(gg->name)
++#define GG_SZPROTONAME	(gg->szName)
+ #define GGDEF_PROTO 	 "GG"        // Default Proto
+ #define GGDEF_PROTONAME  "Gadu-Gadu" // Default ProtoName
+ 
+@@ -369,7 +371,7 @@
+ int status_m2gg(GGPROTO *gg, int status, int descr);
+ int status_gg2m(GGPROTO *gg, int status);
+ char *gg_status2db(int status, const char *suffix);
+-char *ws_strerror(int code);
++TCHAR *ws_strerror(int code);
+ uint32_t swap32(uint32_t x);
+ const char *gg_version2string(int v);
+ 
+@@ -382,7 +384,7 @@
+ void gg_notifyuser(GGPROTO *gg, HANDLE hContact, int refresh);
+ void gg_setalloffline(GGPROTO *gg);
+ void gg_disconnect(GGPROTO *gg);
+-HANDLE gg_getcontact(GGPROTO *gg, uin_t uin, int create, int inlist, char *nick);
++HANDLE gg_getcontact(GGPROTO *gg, uin_t uin, int create, int inlist, TCHAR *nick);
+ void gg_registerservices(GGPROTO *gg);
+ void __cdecl gg_mainthread(GGPROTO *gg, void *empty);
+ int gg_isonline(GGPROTO *gg);
+@@ -394,7 +396,7 @@
+ int gg_idlechanged(GGPROTO *gg, WPARAM wParam, LPARAM lParam);
+ void gg_notifyall(GGPROTO *gg);
+ void gg_changecontactstatus(GGPROTO *gg, uin_t uin, int status, const char *idescr, int time, uint32_t remote_ip, uint16_t remote_port, uint32_t version);
+-char *gg_getstatusmsg(GGPROTO *gg, int status);
++TCHAR *gg_getstatusmsg(GGPROTO *gg, int status);
+ void gg_dccstart(GGPROTO *gg);
+ void gg_dccconnect(GGPROTO *gg, uin_t uin);
+ int gg_gettoken(GGPROTO *gg, GGTOKEN *token);
+@@ -467,10 +469,11 @@
+ int gg_gc_init(GGPROTO *gg);
+ void gg_gc_menus_init(GGPROTO *gg, HGENMENU hRoot);
+ int gg_gc_destroy(GGPROTO *gg);
+-char * gg_gc_getchat(GGPROTO *gg, uin_t sender, uin_t *recipients, int recipients_count);
+-GGGC *gg_gc_lookup(GGPROTO *gg, char *id);
+-int gg_gc_changenick(GGPROTO *gg, HANDLE hContact, char *pszNick);
+-#define UIN2ID(uin,id) _itoa(uin,id,10)
++TCHAR * gg_gc_getchat(GGPROTO *gg, uin_t sender, uin_t *recipients, int recipients_count);
++GGGC *gg_gc_lookup(GGPROTO *gg, TCHAR *id);
++int gg_gc_changenick(GGPROTO *gg, HANDLE hContact, TCHAR *pszNick);
++#define UIN2IDA(uin,id) _itoa(uin,id,10)
++#define UIN2IDT(uin,id) _itot(uin,id,10)
+ 
+ /* Event helper */
+ #define HookProtoEvent(name, func, proto)             HookEventObj(name, (MIRANDAHOOKOBJ)func, proto)
+@@ -479,8 +482,10 @@
+ void CreateProtoService(const char* szService, GGPROTOFUNC serviceProc, GGPROTO *gg);
+ 
+ /* ANSI <-> Unicode conversion helpers */
+-#define gg_a2t(s) gg->unicode_core ? (TCHAR *)mir_a2u(s) : (TCHAR *)mir_strdup(s)
+-#define gg_t2a(s) gg->unicode_core ? mir_u2a((wchar_t *)s) : mir_strdup(s)
++//#define mir_a2t(s) gg->unicode_core ? (TCHAR *)mir_a2u(s) : (TCHAR *)mir_strdup(s)
++//#define mir_t2a(s) gg->unicode_core ? mir_u2a((wchar_t *)s) : mir_strdup(s)
++#define _tcsndup(t, l) _tcsncpy((TCHAR *)malloc((l) + 1), (t), (l))
++//#define SIZEOF(x) (sizeof(x) / sizeof((x)[0]))
+ 
+ // Debug functions
+ int gg_netlog(const GGPROTO *gg, const char *fmt, ...);
+Index: groupchat.c
+===================================================================
+--- groupchat.c	(revision 13182)
++++ groupchat.c	(working copy)
+@@ -108,7 +108,7 @@
+ 	return 1;
+ }
+ 
+-GGGC *gg_gc_lookup(GGPROTO *gg, char *id)
++GGGC *gg_gc_lookup(GGPROTO *gg, TCHAR *id)
+ {
+ 	GGGC *chat;
+ 	list_t l;
+@@ -116,7 +116,7 @@
+ 	for(l = gg->chats; l; l = l->next)
+ 	{
+ 		chat = (GGGC *)l->data;
+-		if(chat && !strcmp(chat->id, id))
++		if(chat && !_tcscmp(chat->id, id))
+ 			return chat;
+ 	}
+ 
+@@ -134,16 +134,16 @@
+ 		|| !gch->pDest
+ 		|| !gch->pDest->pszID
+ 		|| !gch->pDest->pszModule
+-		|| lstrcmpi(gch->pDest->pszModule, GG_PROTO)
++		|| lstrcmpiA(gch->pDest->pszModule, GG_PROTO)
+ 		|| !(uin = DBGetContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, 0))
+-		|| !(chat = gg_gc_lookup(gg, gch->pDest->pszID)))
++		|| !(chat = gg_gc_lookup(gg, gch->pDest->ptszID)))
+ 		return 0;
+ 
+ 	// Window terminated
+ 	if(gch->pDest->iType == SESSION_TERMINATE)
+ 	{
+ 		HANDLE hContact = NULL;
+-		gg_netlog(gg, "gg_gc_event(): Terminating chat %x, id %s from chat window...", chat, gch->pDest->pszID);
++		gg_netlog(gg, "gg_gc_event(): Terminating chat %x, id %S from chat window...", chat, gch->pDest->ptszID);
+ 		// Destroy chat entry
+ 		free(chat->recipients);
+ 		list_remove(&gg->chats, chat, 1);
+@@ -152,9 +152,9 @@
+ 		while (hContact)
+ 		{
+ 			DBVARIANT dbv;
+-			if(!DBGetContactSettingString(hContact, GG_PROTO, "ChatRoomID", &dbv))
++			if(!DBGetContactSettingTString(hContact, GG_PROTO, "ChatRoomID", &dbv))
+ 			{
+-				if(dbv.pszVal && !strcmp(gch->pDest->pszID, dbv.pszVal))
++				if(dbv.ptszVal && !_tcscmp(gch->pDest->ptszID, dbv.ptszVal))
+ 					CallService(MS_DB_CONTACT_DELETE, (WPARAM)hContact, 0);
+ 				DBFreeVariant(&dbv);
+ 			}
+@@ -164,36 +164,41 @@
+ 	}
+ 
+ 	// Message typed / send only if online
+-	if(gg_isonline(gg) && (gch->pDest->iType == GC_USER_MESSAGE) && gch->pszText)
++	if(gg_isonline(gg) && (gch->pDest->iType == GC_USER_MESSAGE) && gch->ptszText)
+ 	{
+-		char id[32];
++		TCHAR id[32];
+ 		DBVARIANT dbv;
+-		GCDEST gcdest = {GG_PROTO, gch->pDest->pszID, GC_EVENT_MESSAGE};
++		GCDEST gcdest = {GG_PROTO, (char *)gch->pDest->ptszID, GC_EVENT_MESSAGE};
+ 		GCEVENT gcevent = {sizeof(GCEVENT), &gcdest};
+ 		int lc;
+ 		time_t t = time(NULL);
+ 
+-		UIN2ID(uin, id);
++		UIN2IDT(uin, id);
+ 
+-		gcevent.pszUID = id;
+-		gcevent.pszText = gch->pszText;
+-		if(!DBGetContactSettingString(NULL, GG_PROTO, "Nick", &dbv))
+-			gcevent.pszNick = dbv.pszVal;
++		gcevent.ptszUID = id;
++		gcevent.ptszText = gch->ptszText;
++		gcevent.dwFlags = GC_TCHAR;
++		if(!DBGetContactSettingTString(NULL, GG_PROTO, "Nick", &dbv))
++			gcevent.ptszNick = dbv.ptszVal;
+ 		else
+-			gcevent.pszNick = Translate("Me");
++			gcevent.ptszNick = TranslateT("Me");
+ 
+ 		// Get rid of CRLF at back
+-		lc = (int)strlen(gch->pszText) - 1;
+-		while(lc >= 0 && (gch->pszText[lc] == '\n' || gch->pszText[lc] == '\r')) gch->pszText[lc --] = 0;
++		lc = (int)_tcslen(gch->ptszText) - 1;
++		while(lc >= 0 && (gch->ptszText[lc] == '\n' || gch->ptszText[lc] == '\r')) gch->ptszText[lc --] = 0;
+ 		gcevent.time = time(NULL);
+ 		gcevent.bIsMe = 1;
+-		gcevent.dwFlags = GCEF_ADDTOLOG;
+-		gg_netlog(gg, "gg_gc_event(): Sending conference message to room %s, \"%s\".", gch->pDest->pszID, gch->pszText);
++		gcevent.dwFlags = GCEF_ADDTOLOG | GC_TCHAR;
++		gg_netlog(gg, "gg_gc_event(): Sending conference message to room %S, \"%S\".", gch->pDest->ptszID, gch->ptszText);
+ 		CallServiceSync(MS_GC_EVENT, 0, (LPARAM)&gcevent);
+-		if(gcevent.pszNick == dbv.pszVal) DBFreeVariant(&dbv);
+-		EnterCriticalSection(&gg->sess_mutex);
+-		gg_send_message_confer(gg->sess, GG_CLASS_CHAT, chat->recipients_count, chat->recipients, gch->pszText);
+-		LeaveCriticalSection(&gg->sess_mutex);
++		if(gcevent.ptszNick == dbv.ptszVal) DBFreeVariant(&dbv);
++		{
++			char *utf8_text = mir_utf8encodeT(gch->ptszText);
++			EnterCriticalSection(&gg->sess_mutex);
++			gg_send_message_confer(gg->sess, GG_CLASS_CHAT, chat->recipients_count, chat->recipients, utf8_text);
++			LeaveCriticalSection(&gg->sess_mutex);
++			mir_free(utf8_text);
++		}
+ 		return 1;
+ 	}
+ 
+@@ -201,10 +206,10 @@
+ 	if(gch->pDest->iType == GC_USER_PRIVMESS)
+ 	{
+ 		HANDLE hContact = NULL;
+-		if((uin = atoi(gch->pszUID)) && (hContact = gg_getcontact(gg, uin, 1, 0, NULL)))
++		if((uin = _ttoi(gch->ptszUID)) && (hContact = gg_getcontact(gg, uin, 1, 0, NULL)))
+ 			CallService(MS_MSG_SENDMESSAGE, (WPARAM)hContact, (LPARAM)0);
+ 	}
+-	gg_netlog(gg, "gg_gc_event(): Unhandled event %d, chat %x, uin %d, text \"%s\".", gch->pDest->iType, chat, uin, gch->pszText);
++	gg_netlog(gg, "gg_gc_event(): Unhandled event %d, chat %x, uin %d, text \"%S\".", gch->pDest->iType, chat, uin, gch->ptszText);
+ 
+ 	return 0;
+ }
+@@ -219,11 +224,11 @@
+ 
+ ////////////////////////////////////////////////////////////////////////////////
+ // This is main groupchat initialization routine
+-char *gg_gc_getchat(GGPROTO *gg, uin_t sender, uin_t *recipients, int recipients_count)
++TCHAR *gg_gc_getchat(GGPROTO *gg, uin_t sender, uin_t *recipients, int recipients_count)
+ {
+ 	list_t l; int i;
+ 	GGGC *chat;
+-	char *senderName, status[256], *name, id[32];
++	TCHAR *senderName, status[256], *name, id[32];
+ 	uin_t uin; DBVARIANT dbv;
+ 	GCSESSION gcwindow;
+ 	GCDEST gcdest = {GG_PROTO, 0, GC_EVENT_ADDGROUP};
+@@ -255,9 +260,9 @@
+ 			if(found == recipients_count)
+ 			{
+ 				if(chat->ignore)
+-					gg_netlog(gg, "gg_gc_getchat(): Ignoring existing id %s, size %d.", chat->id, chat->recipients_count);
++					gg_netlog(gg, "gg_gc_getchat(): Ignoring existing id %S, size %d.", chat->id, chat->recipients_count);
+ 				else
+-					gg_netlog(gg, "gg_gc_getchat(): Returning existing id %s, size %d.", chat->id, chat->recipients_count);
++					gg_netlog(gg, "gg_gc_getchat(): Returning existing id %S, size %d.", chat->id, chat->recipients_count);
+ 				return !(chat->ignore) ? chat->id : NULL;
+ 			}
+ 		}
+@@ -265,7 +270,7 @@
+ 
+ 	// Make new uin list to chat mapping
+ 	chat = (GGGC *)malloc(sizeof(GGGC));
+-	UIN2ID(gg->gc_id ++, chat->id); chat->ignore = FALSE;
++	UIN2IDT(gg->gc_id ++, chat->id); chat->ignore = FALSE;
+ 
+ 	// Check groupchat policy (new) / only for incoming
+ 	if(sender)
+@@ -287,10 +292,10 @@
+ 		   (DBGetContactSettingWord(NULL, GG_PROTO, GG_KEY_GC_POLICY_UNKNOWN, GG_KEYDEF_GC_POLICY_UNKNOWN) == 1 &&
+ 			unknown >= DBGetContactSettingWord(NULL, GG_PROTO, GG_KEY_GC_COUNT_UNKNOWN, GG_KEYDEF_GC_COUNT_UNKNOWN))))
+ 		{
+-			char *senderName = unknownSender ?
+-				Translate("Unknown") : ((char *) CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) gg_getcontact(gg, sender, 0, 0, NULL), 0));
+-			char error[256];
+-			mir_snprintf(error, sizeof(error), Translate("%s has initiated conference with %d participants (%d unknowns).\nDo you want do participate ?"),
++			TCHAR *senderName = unknownSender ?
++				TranslateT("Unknown") : ((TCHAR *) CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) gg_getcontact(gg, sender, 0, 0, NULL), GCDNF_TCHAR));
++			TCHAR error[256];
++			mir_sntprintf(error, SIZEOF(error), TranslateT("%s has initiated conference with %d participants (%d unknowns).\nDo you want do participate ?"),
+ 				senderName, recipients_count + 1, unknown);
+ 			chat->ignore = (MessageBox(
+ 				NULL,
+@@ -307,60 +312,60 @@
+ 			for(i = 0; i < recipients_count; i++)
+ 				chat->recipients[i] = recipients[i];
+ 			if(sender) chat->recipients[i] = sender;
+-			gg_netlog(gg, "gg_gc_getchat(): Ignoring new chat %s, count %d.", chat->id, chat->recipients_count);
++			gg_netlog(gg, "gg_gc_getchat(): Ignoring new chat %S, count %d.", chat->id, chat->recipients_count);
+ 			list_add(&gg->chats, chat, 0);
+ 			return NULL;
+ 		}
+ 	}
+ 
+ 	// Create new chat window
+-	senderName = sender ? (char *) CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) gg_getcontact(gg, sender, 1, 0, NULL), 0) : NULL;
+-	mir_snprintf(status, 255, sender ? Translate("%s initiated the conference.") : Translate("This is my own conference."), senderName);
++	senderName = sender ? (TCHAR *) CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) gg_getcontact(gg, sender, 1, 0, NULL), GCDNF_TCHAR) : NULL;
++	mir_sntprintf(status, 255, sender ? TranslateT("%s initiated the conference.") : TranslateT("This is my own conference."), senderName);
+ 	gcwindow.cbSize		= sizeof(GCSESSION);
+ 	gcwindow.iType		= GCW_CHATROOM;
+ 	gcwindow.pszModule	= GG_PROTO;
+-	gcwindow.pszName	= sender ? senderName : Translate("Conference");
+-	gcwindow.pszID		= chat->id;
+-	gcwindow.pszStatusbarText = status;
+-	gcwindow.dwFlags = 0;
++	gcwindow.ptszName	= sender ? senderName : TranslateT("Conference");
++	gcwindow.ptszID		= chat->id;
++	gcwindow.ptszStatusbarText = status;
++	gcwindow.dwFlags = GC_TCHAR;
+ 	gcwindow.dwItemData = (DWORD)chat;
+ 
+ 	// Here we put nice new hash sign
+-	name = calloc(strlen(gcwindow.pszName) + 2, sizeof(char));
+-	*name = '#'; strcpy(name + 1, gcwindow.pszName);
+-	gcwindow.pszName = name;
++	name = (TCHAR *)calloc(_tcslen(gcwindow.ptszName) + 2, sizeof(TCHAR));
++	*name = '#'; _tcscpy(name + 1, gcwindow.ptszName);
++	gcwindow.ptszName = name;
+ 	// Create new room
+ 	if(CallServiceSync(MS_GC_NEWSESSION, 0, (LPARAM) &gcwindow))
+ 	{
+-		gg_netlog(gg, "gg_gc_getchat(): Cannot create new chat window %s.", chat->id);
++		gg_netlog(gg, "gg_gc_getchat(): Cannot create new chat window %S.", chat->id);
+ 		free(name);
+ 		free(chat);
+ 		return NULL;
+ 	}
+ 	free(name);
+ 
+-	gcdest.pszID = chat->id;
+-	gcevent.pszUID = id;
+-	gcevent.dwFlags = GCEF_ADDTOLOG;
++	gcdest.ptszID = chat->id;
++	gcevent.ptszUID = id;
++	gcevent.dwFlags = GCEF_ADDTOLOG | GC_TCHAR;
+ 	gcevent.time = 0;
+ 
+ 	// Add normal group
+-	gcevent.pszStatus = Translate("Participants");
++	gcevent.ptszStatus = TranslateT("Participants");
+ 	CallServiceSync(MS_GC_EVENT, 0, (LPARAM)&gcevent);
+ 	gcdest.iType = GC_EVENT_JOIN;
+ 
+ 	// Add myself
+ 	if(uin = DBGetContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, 0))
+ 	{
+-		UIN2ID(uin, id);
+-		if(!DBGetContactSettingString(NULL, GG_PROTO, "Nick", &dbv))
+-			gcevent.pszNick = dbv.pszVal;
++		UIN2IDT(uin, id);
++		if(!DBGetContactSettingTString(NULL, GG_PROTO, "Nick", &dbv))
++			gcevent.ptszNick = dbv.ptszVal;
+ 		else
+-			gcevent.pszNick = Translate("Me");
++			gcevent.ptszNick = TranslateT("Me");
+ 		gcevent.bIsMe = 1;
+ 		CallServiceSync(MS_GC_EVENT, 0, (LPARAM)&gcevent);
+-		gg_netlog(gg, "gg_gc_getchat(): Myself %s: %s (%s) to the list...", gcevent.pszUID, gcevent.pszNick, gcevent.pszStatus);
+-		if(gcevent.pszNick == dbv.pszVal) DBFreeVariant(&dbv);
++		gg_netlog(gg, "gg_gc_getchat(): Myself %S: %S (%S) to the list...", gcevent.ptszUID, gcevent.ptszNick, gcevent.ptszStatus);
++		if(gcevent.ptszNick == dbv.ptszVal) DBFreeVariant(&dbv);
+ 	}
+ 	else gg_netlog(gg, "gg_gc_getchat(): Myself adding failed with uin %d !!!", uin);
+ 
+@@ -375,20 +380,20 @@
+ 	for(i = 0; i < chat->recipients_count; i++)
+ 	{
+ 		HANDLE hContact = gg_getcontact(gg, chat->recipients[i], 1, 0, NULL);
+-		UIN2ID(chat->recipients[i], id);
+-		if(hContact && (name = (char *) CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) hContact, 0)))
+-			gcevent.pszNick = name;
++		UIN2IDT(chat->recipients[i], id);
++		if(hContact && (name = (TCHAR *) CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) hContact, GCDNF_TCHAR)))
++			gcevent.ptszNick = name;
+ 		else
+ 			gcevent.pszNick = Translate("'Unknown'");
+ 		gcevent.bIsMe = 0;
+-		gg_netlog(gg, "gg_gc_getchat(): Added %s: %s (%s) to the list...", gcevent.pszUID, gcevent.pszNick, gcevent.pszStatus);
++		gg_netlog(gg, "gg_gc_getchat(): Added %S: %S (%S) to the list...", gcevent.ptszUID, gcevent.ptszNick, gcevent.ptszStatus);
+ 		CallServiceSync(MS_GC_EVENT, 0, (LPARAM)&gcevent);
+ 	}
+ 	gcdest.iType = GC_EVENT_CONTROL;
+ 	CallServiceSync(MS_GC_EVENT, SESSION_INITDONE, (LPARAM)&gcevent);
+ 	CallServiceSync(MS_GC_EVENT, SESSION_ONLINE, (LPARAM)&gcevent);
+ 
+-	gg_netlog(gg, "gg_gc_getchat(): Returning new chat window %s, count %d.", chat->id, chat->recipients_count);
++	gg_netlog(gg, "gg_gc_getchat(): Returning new chat window %S, count %d.", chat->id, chat->recipients_count);
+ 	list_add(&gg->chats, chat, 0);
+ 	return chat->id;
+ }
+@@ -449,9 +454,9 @@
+ 					// Check if connected
+ 					if (!gg_isonline(gg))
+ 					{
+-						MessageBox(NULL,
++						MessageBoxA(NULL,
+ 							Translate("You have to be connected to open new conference."),
+-							GG_PROTONAME, MB_OK | MB_ICONSTOP
++							GG_SZPROTONAME, MB_OK | MB_ICONSTOP
+ 						);
+ 					}
+ 					else if(hwndList)
+@@ -526,7 +531,7 @@
+ 								if (hItem)
+ 								{
+ 									szProto = (char*)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)hContact, 0);
+-									if (szProto == NULL || lstrcmp(szProto, GG_PROTO) || !DBGetContactSettingDword(hContact, GG_PROTO, GG_KEY_UIN, 0))
++									if (szProto == NULL || lstrcmpA(szProto, GG_PROTO) || !DBGetContactSettingDword(hContact, GG_PROTO, GG_KEY_UIN, 0))
+ 										SendDlgItemMessage(hwndDlg, IDC_CLIST, CLM_DELETEITEM, (WPARAM)hItem, 0);
+ 								}
+ 								hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
+@@ -602,12 +607,12 @@
+ 			cleared = TRUE;
+ 		}
+ 	}
+-	MessageBox(
++	MessageBoxA(
+ 		NULL,
+ 		cleared ?
+ 			Translate("All ignored conferences are now unignored and the conference policy will act again.") :
+ 			Translate("There are no ignored conferences."),
+-		GG_PROTONAME,
++		GG_SZPROTONAME,
+ 		MB_OK | MB_ICONINFORMATION
+ 	);
+ 
+@@ -619,9 +624,9 @@
+ 	// Check if connected
+ 	if (!gg_isonline(gg))
+ 	{
+-		MessageBox(NULL,
++		MessageBoxA(NULL,
+ 			Translate("You have to be connected to open new conference."),
+-			GG_PROTONAME, MB_OK | MB_ICONSTOP
++			GG_SZPROTONAME, MB_OK | MB_ICONSTOP
+ 		);
+ 		return 0;
+ 	}
+@@ -630,13 +635,13 @@
+ 	return 1;
+ }
+ 
+-int gg_gc_changenick(GGPROTO *gg, HANDLE hContact, char *pszNick)
++int gg_gc_changenick(GGPROTO *gg, HANDLE hContact, TCHAR *ptszNick)
+ {
+ 	list_t l;
+ 	uin_t uin = DBGetContactSettingDword(hContact, GG_PROTO, GG_KEY_UIN, 0);
+-	if(!uin || !pszNick) return 0;
++	if(!uin || !ptszNick) return 0;
+ 
+-	gg_netlog(gg, "gg_gc_changenick(): Nickname for uin %d changed to %s.", uin, pszNick);
++	gg_netlog(gg, "gg_gc_changenick(): Nickname for uin %d changed to %S.", uin, ptszNick);
+ 	// Lookup for chats having this nick
+ 	for(l = gg->chats; l; l = l->next)
+ 	{
+@@ -647,18 +652,19 @@
+ 				// Rename this window if it's exising in the chat
+ 				if(chat->recipients[i] == uin)
+ 				{
+-					char id[32];
++					TCHAR id[32];
+ 					GCEVENT gce = {sizeof(GCEVENT)};
+ 					GCDEST gcd;
+ 
+-					UIN2ID(uin, id);
++					UIN2IDT(uin, id);
+ 					gcd.iType = GC_EVENT_NICK;
+ 					gcd.pszModule = GG_PROTO;
+ 					gce.pDest = &gcd;
+-					gcd.pszID = chat->id;
+-					gce.pszUID = id;
+-					gce.pszText = pszNick;
+-					gg_netlog(gg, "gg_gc_changenick(): Found room %s with uin %d, sending nick change %s.", chat->id, uin, id);
++					gcd.ptszID = chat->id;
++					gce.ptszUID = id;
++					gce.ptszText = ptszNick;
++					gce.dwFlags = GC_TCHAR;
++					gg_netlog(gg, "gg_gc_changenick(): Found room %S with uin %d, sending nick change %S.", chat->id, uin, id);
+ 					CallServiceSync(MS_GC_EVENT, 0, (LPARAM)&gce);
+ 
+ 					break;
+Index: image.c
+===================================================================
+--- image.c	(revision 13182)
++++ image.c	(working copy)
+@@ -218,10 +218,10 @@
+ 
+ 	// Make up filter
+ 	strncpy(pFilter, szFilterName, nSize);
+-	pFilter += strlen(pFilter) + 1;
++	pFilter += strlen(pFilter) + sizeof(TCHAR);
+ 	if(pFilter >= szFilter + nSize) return NULL;
+ 	strncpy(pFilter, szFilterMask, nSize - (pFilter - szFilter));
+-	pFilter += strlen(pFilter) + 1;
++	pFilter += strlen(pFilter) + sizeof(TCHAR);
+ 	if(pFilter >= szFilter + nSize) return NULL;
+ 	*pFilter = 0;
+ 
+@@ -232,7 +232,7 @@
+ // Save specified image entry
+ int gg_img_saveimage(HWND hwnd, GGIMAGEENTRY *dat)
+ {
+-	OPENFILENAME ofn = {0};
++	OPENFILENAMEA ofn = {0};
+ 	char szFileName[MAX_PATH];
+ 	char szFilter[128];
+ 
+@@ -247,9 +247,9 @@
+ 	ofn.lpstrFilter = szFilter;
+ 	ofn.nMaxFile = MAX_PATH;
+ 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR | OFN_OVERWRITEPROMPT;
+-	if(GetSaveFileName(&ofn))
++	if(GetSaveFileNameA(&ofn))
+ 	{
+-		FILE *fp = fopen(szFileName, "w+b" );
++		FILE *fp = fopen(szFileName, "w+b");
+ 		if(fp)
+ 		{
+ 			fwrite(dat->lpData, dat->nSize, 1, fp);
+@@ -259,7 +259,7 @@
+ 		else
+ 		{
+ 			gg_netlog(((GGIMAGEDLGDATA *)GetWindowLongPtr(hwnd, GWLP_USERDATA))->gg, "gg_img_saveimage(): Cannot save image to %s.", szFileName);
+-			MessageBox(hwnd, Translate("Image cannot be written to disk."), ((GGIMAGEDLGDATA *)GetWindowLongPtr(hwnd, GWLP_USERDATA))->gg->name, MB_OK | MB_ICONERROR);
++			MessageBoxA(hwnd, Translate("Image cannot be written to disk."), ((GGIMAGEDLGDATA *)GetWindowLongPtr(hwnd, GWLP_USERDATA))->gg->szName, MB_OK | MB_ICONERROR);
+ 		}
+ 	}
+ 
+@@ -378,7 +378,7 @@
+ 	{
+ 		case WM_INITDIALOG:
+ 			{
+-				char *szName, szTitle[128];
++				TCHAR *szName, szTitle[128];
+ 				RECT rect;
+ 
+ 				TranslateDialogDefault(hwndDlg);
+@@ -417,12 +417,12 @@
+ 				// Set main window image
+ 				SendMessage(hwndDlg, WM_SETICON, ICON_SMALL, (LPARAM)LoadIconEx("image", FALSE));
+ 				SendMessage(hwndDlg, WM_SETICON, ICON_BIG, (LPARAM)LoadIconEx("image", TRUE));
+-				szName = (char *) CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)dat->hContact, 0);
++				szName = (TCHAR *) CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)dat->hContact, GCDNF_TCHAR);
+ 
+ 				if(dat->bReceiving)
+-					mir_snprintf(szTitle, sizeof(szTitle), Translate("Image from %s"), szName);
++					mir_sntprintf(szTitle, SIZEOF(szTitle), TranslateT("Image from %s"), szName);
+ 				else
+-					mir_snprintf(szTitle, sizeof(szTitle), Translate("Image for %s"), szName);
++					mir_sntprintf(szTitle, SIZEOF(szTitle), TranslateT("Image for %s"), szName);
+ 				SetWindowText(hwndDlg, szTitle);
+ 
+ 				// Store client extents
+@@ -520,13 +520,13 @@
+ 
+ 				if(dat->bReceiving)
+ 				{
+-					char szTitle[128];
+-					mir_snprintf(szTitle, sizeof(szTitle),
+-						"%s (%d / %d)", img->lpszFileName, dat->nImg, dat->nImgTotal);
++					TCHAR szTitle[128];
++					mir_sntprintf(szTitle, sizeof(szTitle),
++						_T("%s (%d / %d)"), img->lpszFileName, dat->nImg, dat->nImgTotal);
+ 					SetDlgItemText(hwndDlg, IDC_IMG_NAME, szTitle);
+ 				}
+ 				else
+-					SetDlgItemText(hwndDlg, IDC_IMG_NAME, img->lpszFileName);
++					SetDlgItemTextA(hwndDlg, IDC_IMG_NAME, img->lpszFileName);
+ 				gg_img_paint(hwndDlg, img);
+ 			}
+ 			break;
+@@ -693,9 +693,9 @@
+ 		{
+ 			char szFilter[128];
+ 			char szFileName[MAX_PATH];
+-			OPENFILENAME ofn = {0};
++			OPENFILENAMEA ofn = {0};
+ 
+-			gg_img_getfilter(szFilter, sizeof(szFilter));
++			gg_img_getfilter(szFilter, SIZEOF(szFilter));
+ 			*szFileName = 0;
+ 			ofn.lStructSize = OPENFILENAME_SIZE_VERSION_400;
+ 			ofn.hwndOwner = hwndDlg;
+@@ -705,7 +705,7 @@
+ 			ofn.nMaxFile = MAX_PATH;
+ 			ofn.lpstrTitle = Translate("Select picture to send");
+ 			ofn.Flags = OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR | OFN_HIDEREADONLY;
+-			if(GetOpenFileName(&ofn))
++			if(GetOpenFileNameA(&ofn))
+ 			{
+ 				if(dat->lpImages)
+ 					gg_img_releasepicture(dat->lpImages);
+@@ -778,7 +778,7 @@
+ 		tPathLen = strlen(szPath);
+ 	}
+ 
+-	if (_access(szPath, 0))
++	if (access(szPath, 0))
+ 		CallService(MS_UTILS_CREATEDIRTREE, 0, (LPARAM)szPath);
+ 
+ 	mir_snprintf(szPath + tPathLen, MAX_PATH - tPathLen, "\\%s", dat->lpszFileName);
+@@ -791,8 +791,7 @@
+ 		fwrite(dat->lpData, dat->nSize, 1, fp);
+ 		fclose(fp);
+ 		gg_netlog(gg, "gg_img_displayasmsg: Image saved to %s.", szPath);
+-
+-		mir_snprintf(imgmsg, sizeof(imgmsg), "[img]%s[/img]", szPath);
++		mir_snprintf(imgmsg, MAX_PATH+11, "[img]%s[/img]", szPath);
+ 		pre.flags = 0;
+ 		pre.timestamp = time(NULL);
+ 		pre.szMessage = imgmsg;
+@@ -805,6 +804,25 @@
+ 	return 0;
+ }
+ 
++////////////////////////////////////////////////////////////////////////////////
++// Display received image using [img] BBCode in message
++int gg_img_displaysentasmsg(GGPROTO *gg, HANDLE hContact, char *fileName)
++{
++	char imgmsg[MAX_PATH + 11];
++	PROTORECVEVENT pre;
++#ifdef DEBUGMODE
++	gg_netlog(gg, "gg_img_displaysentasmsg: Sent image %s.", fileName);
++#endif
++	mir_snprintf(imgmsg, MAX_PATH+11, "[img]%s[/img]", fileName);
++	pre.flags = 0;
++	pre.timestamp = time(NULL);
++	pre.szMessage = imgmsg;
++	pre.lParam = 0;
++	gg_recvmessage((PROTO_INTERFACE *)gg, hContact, &pre);
++
++	return 0;
++}
++
+ ////////////////////////////////////////////////////////////////////////////
+ // Return if uin has it's window already opened
+ BOOL gg_img_opened(GGPROTO *gg, uin_t uin)
+@@ -822,7 +840,7 @@
+ 
+ ////////////////////////////////////////////////////////////////////////////
+ // Image Module : Looking for window entry, create if not found
+-gg_img_display(GGPROTO *gg, HANDLE hContact, void *img)
++int gg_img_display(GGPROTO *gg, HANDLE hContact, void *img)
+ {
+ 	list_t l = gg->imagedlgs;
+ 	GGIMAGEDLGDATA *dat;
+@@ -869,12 +887,12 @@
+ 
+ ////////////////////////////////////////////////////////////////////////////
+ // Image Window : Frees image entry structure
+-gg_img_releasepicture(void *img)
++int gg_img_releasepicture(void *img)
+ {
+ 	if(!img)
+ 		return FALSE;
+ 	if(((GGIMAGEENTRY *)img)->lpszFileName)
+-		free(((GGIMAGEENTRY *)img)->lpszFileName);
++		mir_free(((GGIMAGEENTRY *)img)->lpszFileName);
+ 	if(((GGIMAGEENTRY *)img)->hBitmap)
+ 		DeleteObject(((GGIMAGEENTRY *)img)->hBitmap);
+ 	if(((GGIMAGEENTRY *)img)->lpData)
+@@ -923,7 +941,7 @@
+ 			fclose(fp);
+ 			free(dat);
+ 			gg_netlog(gg, "gg_img_loadpicture(): Image size of \"%s\" exceeds 255 KB.", szFileName);
+-			MessageBox(NULL, Translate("Image exceeds maximum allowed size of 255 KB."), GG_PROTONAME, MB_OK | MB_ICONEXCLAMATION);
++			MessageBox(NULL, TranslateT("Image exceeds maximum allowed size of 255 KB."), GG_PROTONAME, MB_OK | MB_ICONEXCLAMATION);
+ 			return NULL;
+ 		}
+ 		fseek(fp, 0, SEEK_SET);
+@@ -937,12 +955,12 @@
+ 			return NULL;
+ 		}
+ 		fclose(fp);
+-		dat->lpszFileName = _strdup(szFileName);
++		dat->lpszFileName = mir_strdup(szFileName);
+ 	}
+ 	// Copy picture from packet
+ 	else if(e && e->event.image_reply.filename)
+ 	{
+-		dat->lpszFileName = _strdup(e->event.image_reply.filename);
++		dat->lpszFileName = mir_strdup(e->event.image_reply.filename);
+ 		dat->nSize = e->event.image_reply.size;
+ 		dat->lpData = malloc(dat->nSize);
+ 		memcpy(dat->lpData, e->event.image_reply.image, dat->nSize);
+@@ -974,7 +992,7 @@
+ 		if(dat->lpData)
+ 			free(dat->lpData);
+ 		if(dat->lpszFileName)
+-			free(dat->lpszFileName);
++			mir_free(dat->lpszFileName);
+ 		free(dat);
+ 	}
+ 	return NULL;
+Index: import.c
+===================================================================
+--- import.c	(revision 13182)
++++ import.c	(working copy)
+@@ -31,7 +31,7 @@
+ 	int i;
+ 
+ 	for (i = 0; ; i++) {
+-		_itoa(i, idstr, 10);
++		itoa(i, idstr, 10);
+ 		if (DBGetContactSettingString(NULL, "CListGroups", idstr, &dbv)) break;
+ 		if (!strcmp(dbv.pszVal + 1, name)) {
+ 			DBFreeVariant(&dbv);
+@@ -78,11 +78,11 @@
+ 	// Is this a duplicate?
+ 	if (!GroupNameExists(groupName))
+ 	{
+-		lstrcpyn(groupName2 + 1, groupName, (int)strlen(groupName) + 1);
++		lstrcpynA(groupName2 + 1, groupName, (int)strlen(groupName) + 1);
+ 
+ 		// Find an unused id
+ 		for (groupId = 0; ; groupId++) {
+-				_itoa(groupId, groupIdStr,10);
++				itoa(groupId, groupIdStr,10);
+ 				if (DBGetContactSettingString(NULL, "CListGroups", groupIdStr, &dbv))
+ 						break;
+ 				DBFreeVariant(&dbv);
+@@ -281,7 +281,9 @@
+ 		// Loadup contact
+ 		if(uin && strNick)
+ 		{
+-			HANDLE hContact = gg_getcontact(gg, uin, 1, 1, strNick);
++			TCHAR *tstrNick = mir_a2t(strNick);
++			HANDLE hContact = gg_getcontact(gg, uin, 1, 1, tstrNick);
++			mir_free(tstrNick);
+ #ifdef DEBUGMODE
+ 			gg_netlog(gg, "gg_parsecontacts(): Found contact %d with nickname \"%s\".", uin, strNick);
+ #endif
+@@ -319,9 +321,9 @@
+ 	// Check if connected
+ 	if (!gg_isonline(gg))
+ 	{
+-		MessageBox(NULL,
++		MessageBoxA(NULL,
+ 			Translate("You have to be connected before you can import/export contacts from/to server."),
+-			GG_PROTONAME, MB_OK | MB_ICONSTOP
++			GG_SZPROTONAME, MB_OK | MB_ICONSTOP
+ 		);
+ 		return 0;
+ 	}
+@@ -345,10 +347,10 @@
+ 		char error[128];
+ 		LeaveCriticalSection(&gg->sess_mutex);
+ 		mir_snprintf(error, sizeof(error), Translate("List cannot be imported because of error:\n\t%s"), strerror(errno));
+-		MessageBox(
++		MessageBoxA(
+ 			NULL,
+ 			error,
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_netlog(gg, "gg_import_server(): Cannot import list because of \"%s\".", strerror(errno));
+@@ -370,9 +372,9 @@
+ 	// Check if connected
+ 	if (!gg_isonline(gg))
+ 	{
+-		MessageBox(NULL,
++		MessageBoxA(NULL,
+ 			Translate("You have to be connected before you can import/export contacts from/to server."),
+-			GG_PROTONAME, MB_OK | MB_ICONSTOP
++			GG_SZPROTONAME, MB_OK | MB_ICONSTOP
+ 		);
+ 		return 0;
+ 	}
+@@ -396,10 +398,10 @@
+ 		char error[128];
+ 		LeaveCriticalSection(&gg->sess_mutex);
+ 		mir_snprintf(error, sizeof(error), Translate("List cannot be removeed because of error:\n\t%s"), strerror(errno));
+-		MessageBox(
++		MessageBoxA(
+ 			NULL,
+ 			error,
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_netlog(gg, "gg_remove_server(): Cannot remove list because of \"%s\".", strerror(errno));
+@@ -415,26 +417,26 @@
+ 
+ static INT_PTR gg_import_text(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
+ {
+-	char str[MAX_PATH] = "\0";
++	TCHAR str[MAX_PATH] = _T("\0");
+ 	OPENFILENAME ofn = {0};
+-	char filter[512], *pfilter;
++	TCHAR filter[512], *pfilter;
+ 	struct _stat st;
+ 	FILE *f;
+ 
+ 	ofn.lStructSize = OPENFILENAME_SIZE_VERSION_400;
+-	strncpy(filter, Translate("Text files"), sizeof(filter));
+-	strncat(filter, " (*.txt)", sizeof(filter) - strlen(filter));
+-	pfilter = filter + strlen(filter) + 1;
++	_tcsncpy(filter, TranslateT("Text files"), sizeof(filter));
++	_tcsncat(filter, _T(" (*.txt)"), sizeof(filter) - _tcslen(filter));
++	pfilter = filter + _tcslen(filter) + 1;
+ 	if(pfilter >= filter + sizeof(filter)) return 0;
+-	strncpy(pfilter, "*.TXT", sizeof(filter) - (pfilter - filter));
+-	pfilter = pfilter + strlen(pfilter) + 1;
++	_tcsncpy(pfilter, _T("*.TXT"), sizeof(filter) - (pfilter - filter));
++	pfilter = pfilter + _tcslen(pfilter) + 1;
+ 	if(pfilter >= filter + sizeof(filter)) return 0;
+-	strncpy(pfilter, Translate("All Files"), sizeof(filter) - (pfilter - filter));
+-	strncat(pfilter, " (*)", sizeof(filter) - (pfilter - filter) - strlen(pfilter));
+-	pfilter = pfilter + strlen(pfilter) + 1;
++	_tcsncpy(pfilter, TranslateT("All Files"), sizeof(filter) - (pfilter - filter));
++	_tcsncat(pfilter, _T(" (*)"), sizeof(filter) - (pfilter - filter) - _tcslen(pfilter));
++	pfilter = pfilter + _tcslen(pfilter) + 1;
+ 	if(pfilter >= filter + sizeof(filter)) return 0;
+-	strncpy(pfilter, "*", sizeof(filter) - (pfilter - filter));
+-	pfilter = pfilter + strlen(pfilter) + 1;
++	_tcsncpy(pfilter, _T("*"), sizeof(filter) - (pfilter - filter));
++	pfilter = pfilter + _tcslen(pfilter) + 1;
+ 	if(pfilter >= filter + sizeof(filter)) return 0;
+ 	*pfilter = '\0';
+ 	ofn.lpstrFilter = filter;
+@@ -442,15 +444,15 @@
+ 	ofn.Flags = OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+ 	ofn.nMaxFile = sizeof(str);
+ 	ofn.nMaxFileTitle = MAX_PATH;
+-	ofn.lpstrDefExt = "txt";
++	ofn.lpstrDefExt = _T("txt");
+ 
+ #ifdef DEBUGMODE
+ 	gg_netlog(gg, "gg_import_text()");
+ #endif
+ 	if(!GetOpenFileName(&ofn)) return 0;
+ 
+-	f = fopen(str, "r");
+-	_stat(str, &st);
++	f = _tfopen(str, _T("r"));
++	_tstat(str, &st);
+ 
+ 	if(f && st.st_size)
+ 	{
+@@ -462,7 +464,7 @@
+ 
+ 		MessageBox(
+ 			NULL,
+-			Translate("List import successful."),
++			TranslateT("List import successful."),
+ 			GG_PROTONAME,
+ 			MB_OK | MB_ICONINFORMATION
+ 		);
+@@ -471,10 +473,10 @@
+ 	{
+ 		char error[128];
+ 		mir_snprintf(error, sizeof(error), Translate("List cannot be imported from file \"%s\" because of error:\n\t%s"), str, strerror(errno));
+-		MessageBox(
++		MessageBoxA(
+ 			NULL,
+ 			error,
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_netlog(gg, "gg_import_text(): Cannot import list from file \"%s\" because of \"%s\".", str, strerror(errno));
+@@ -485,28 +487,28 @@
+ 
+ static INT_PTR gg_export_text(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
+ {
+-	char str[MAX_PATH];
++	TCHAR str[MAX_PATH];
+ 	OPENFILENAME ofn = {0};
+-	char filter[512], *pfilter;
++	TCHAR filter[512], *pfilter;
+ 	FILE *f;
+ 
+-	strncpy(str, Translate("contacts"), sizeof(str));
+-	strncat(str, ".txt", sizeof(str) - strlen(str));
++	_tcsncpy(str, TranslateT("contacts"), sizeof(str));
++	_tcsncat(str, _T(".txt"), sizeof(str) - _tcslen(str));
+ 
+ 	ofn.lStructSize = OPENFILENAME_SIZE_VERSION_400;
+-	strncpy(filter, Translate("Text files"), sizeof(filter));
+-	strncat(filter, " (*.txt)", sizeof(filter) - strlen(filter));
+-	pfilter = filter + strlen(filter) + 1;
++	_tcsncpy(filter, TranslateT("Text files"), sizeof(filter));
++	_tcsncat(filter, _T(" (*.txt)"), sizeof(filter) - _tcslen(filter));
++	pfilter = filter + _tcslen(filter) + 1;
+ 	if(pfilter >= filter + sizeof(filter)) return 0;
+-	strncpy(pfilter, "*.TXT", sizeof(filter) - (pfilter - filter));
+-	pfilter = pfilter + strlen(pfilter) + 1;
++	_tcsncpy(pfilter, _T("*.TXT"), sizeof(filter) - (pfilter - filter));
++	pfilter = pfilter + _tcslen(pfilter) + 1;
+ 	if(pfilter >= filter + sizeof(filter)) return 0;
+-	strncpy(pfilter, Translate("All Files"), sizeof(filter) - (pfilter - filter));
+-	strncat(pfilter, " (*)", sizeof(filter) - (pfilter - filter) - strlen(pfilter));
+-	pfilter = pfilter + strlen(pfilter) + 1;
++	_tcsncpy(pfilter, TranslateT("All Files"), sizeof(filter) - (pfilter - filter));
++	_tcsncat(pfilter, _T(" (*)"), sizeof(filter) - (pfilter - filter) - _tcslen(pfilter));
++	pfilter = pfilter + _tcslen(pfilter) + 1;
+ 	if(pfilter >= filter + sizeof(filter)) return 0;
+-	strncpy(pfilter, "*", sizeof(filter) - (pfilter - filter));
+-	pfilter = pfilter + strlen(pfilter) + 1;
++	_tcsncpy(pfilter, _T("*"), sizeof(filter) - (pfilter - filter));
++	pfilter = pfilter + _tcslen(pfilter) + 1;
+ 	if(pfilter >= filter + sizeof(filter)) return 0;
+ 	*pfilter = '\0';
+ 	ofn.lpstrFilter = filter;
+@@ -514,14 +516,14 @@
+ 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT | OFN_HIDEREADONLY;
+ 	ofn.nMaxFile = sizeof(str);
+ 	ofn.nMaxFileTitle = MAX_PATH;
+-	ofn.lpstrDefExt = "txt";
++	ofn.lpstrDefExt = _T("txt");
+ 
+ #ifdef DEBUGMODE
+-	gg_netlog(gg, "gg_export_text(%s).", str);
++	gg_netlog(gg, "gg_export_text(%S).", str);
+ #endif
+ 	if(!GetSaveFileName(&ofn)) return 0;
+ 
+-	if(f = fopen(str, "w"))
++	if(f = _tfopen(str, _T("w")))
+ 	{
+ 		char *contacts = gg_makecontacts(gg, 0);
+ 		fwrite(contacts, sizeof(char), strlen(contacts), f);
+@@ -530,7 +532,7 @@
+ 
+ 		MessageBox(
+ 			NULL,
+-			Translate("List export successful."),
++			TranslateT("List export successful."),
+ 			GG_PROTONAME,
+ 			MB_OK | MB_ICONINFORMATION
+ 		);
+@@ -539,10 +541,10 @@
+ 	{
+ 		char error[128];
+ 		mir_snprintf(error, sizeof(error), Translate("List cannot be exported to file \"%s\" because of error:\n\t%s"), str, strerror(errno));
+-		MessageBox(
++		MessageBoxA(
+ 			NULL,
+ 			error,
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_netlog(gg, "gg_import_text(): Cannot export list to file \"%s\" because of \"%s\".", str, strerror(errno));
+@@ -562,9 +564,9 @@
+ 	// Check if connected
+ 	if (!gg_isonline(gg))
+ 	{
+-		MessageBox(NULL,
++		MessageBoxA(NULL,
+ 			Translate("You have to be connected before you can import/export contacts from/to server."),
+-			GG_PROTONAME, MB_OK | MB_ICONSTOP
++			GG_SZPROTONAME, MB_OK | MB_ICONSTOP
+ 		);
+ 		return 0;
+ 	}
+@@ -594,10 +596,10 @@
+ 		char error[128];
+ 		LeaveCriticalSection(&gg->sess_mutex);
+ 		mir_snprintf(error, sizeof(error), Translate("List cannot be exported because of error:\n\t%s"), strerror(errno));
+-		MessageBox(
++		MessageBoxA(
+ 			NULL,
+ 			error,
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_netlog(gg, "gg_export_server(): Cannot export list because of \"%s\".", strerror(errno));
+Index: oauth.c
+===================================================================
+--- oauth.c	(revision 13182)
++++ oauth.c	(working copy)
+@@ -365,7 +365,7 @@
+ 	char *res, uin[32], *password = NULL, *token = NULL, *token_secret = NULL;
+ 	DBVARIANT dbv;
+ 
+-	UIN2ID(DBGetContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, 0), uin);
++	UIN2IDA(DBGetContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, 0), uin);
+ 	if(!DBGetContactSettingString(NULL, GG_PROTO, GG_KEY_PASSWORD, &dbv)) {
+ 		CallService(MS_DB_CRYPT_DECODESTRING, (WPARAM)(int)strlen(dbv.pszVal) + 1, (LPARAM)dbv.pszVal);
+ 		password = mir_strdup(dbv.pszVal);
+@@ -398,7 +398,7 @@
+ 	DBVARIANT dbv;
+ 	int res = 0;
+ 
+-	UIN2ID(DBGetContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, 0), uin);
++	UIN2IDA(DBGetContactSettingDword(NULL, GG_PROTO, GG_KEY_UIN, 0), uin);
+ 	if(!DBGetContactSettingString(NULL, GG_PROTO, GG_KEY_PASSWORD, &dbv)) {
+ 		CallService(MS_DB_CRYPT_DECODESTRING, strlen(dbv.pszVal) + 1, (LPARAM)dbv.pszVal);
+ 		password = mir_strdup(dbv.pszVal);
+@@ -430,19 +430,19 @@
+ 			TCHAR *xmlAction;
+ 			TCHAR *tag;
+ 
+-			xmlAction = gg_a2t(resp->pData);
+-			tag = gg_a2t("result");
++			xmlAction = mir_a2t(resp->pData);
++			tag = mir_a2t("result");
+ 			hXml = xi.parseString(xmlAction, 0, tag);
+ 			if (hXml != NULL) {
+ 				HXML node;
+ 
+-				mir_free(tag); tag = gg_a2t("oauth_token");
++				mir_free(tag); tag = mir_a2t("oauth_token");
+ 				node = xi.getChildByPath(hXml, tag, 0);
+-				token = node != NULL ? gg_t2a(xi.getText(node)) : NULL;
++				token = node != NULL ? mir_t2a(xi.getText(node)) : NULL;
+ 
+-				mir_free(tag); tag = gg_a2t("oauth_token_secret");
++				mir_free(tag); tag = mir_a2t("oauth_token_secret");
+ 				node = xi.getChildByPath(hXml, tag, 0);
+-				token_secret = node != NULL ? gg_t2a(xi.getText(node)) : NULL;
++				token_secret = node != NULL ? mir_t2a(xi.getText(node)) : NULL;
+ 
+ 				xi.destroyNode(hXml);
+ 			}
+@@ -510,19 +510,19 @@
+ 			TCHAR *xmlAction;
+ 			TCHAR *tag;
+ 
+-			xmlAction = gg_a2t(resp->pData);
+-			tag = gg_a2t("result");
++			xmlAction = mir_a2t(resp->pData);
++			tag = mir_a2t("result");
+ 			hXml = xi.parseString(xmlAction, 0, tag);
+ 			if (hXml != NULL) {
+ 				HXML node;
+ 
+-				mir_free(tag); tag = gg_a2t("oauth_token");
++				mir_free(tag); tag = mir_a2t("oauth_token");
+ 				node = xi.getChildByPath(hXml, tag, 0);
+-				token = node != NULL ? gg_t2a(xi.getText(node)) : NULL;
++				token = node != NULL ? mir_t2a(xi.getText(node)) : NULL;
+ 
+-				mir_free(tag); tag = gg_a2t("oauth_token_secret");
++				mir_free(tag); tag = mir_a2t("oauth_token_secret");
+ 				node = xi.getChildByPath(hXml, tag, 0);
+-				token_secret = node != NULL ? gg_t2a(xi.getText(node)) : NULL;
++				token_secret = node != NULL ? mir_t2a(xi.getText(node)) : NULL;
+ 
+ 				xi.destroyNode(hXml);
+ 			}
+Index: ownerinfo.c
+===================================================================
+--- ownerinfo.c	(revision 13182)
++++ ownerinfo.c	(working copy)
+@@ -51,11 +51,11 @@
+ 	if (!(h = gg_remind_passwd3(rp->uin, rp->email, token.id, token.val, 0)))
+ 	{
+ 		char error[128];
+-		mir_snprintf(error, sizeof(error), Translate("Password could not be reminded because of error:\n\t%s"), strerror(errno));
+-		MessageBox(
++		mir_snprintf(error, SIZEOF(error), Translate("Password could not be reminded because of error:\n\t%s"), strerror(errno));
++		MessageBoxA(
+ 			NULL,
+ 			error,
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_netlog(gg, "gg_remindpasswordthread(): Password could not be reminded because of \"%s\".", strerror(errno));
+@@ -64,10 +64,10 @@
+ 	{
+ 		gg_pubdir_free(h);
+ 		gg_netlog(gg, "gg_remindpasswordthread(): Password remind successful.");
+-		MessageBox(
++		MessageBoxA(
+ 			NULL,
+ 			Translate("Password was sent to your e-mail."),
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONINFORMATION
+ 		);
+ 	}
+Index: services.c
+===================================================================
+--- services.c	(revision 13182)
++++ services.c	(working copy)
+@@ -99,7 +99,7 @@
+ 
+ //////////////////////////////////////////////////////////
+ // gets protocol status
+-GGINLINE char *gg_getstatusmsg(GGPROTO *gg, int status)
++GGINLINE TCHAR *gg_getstatusmsg(GGPROTO *gg, int status)
+ {
+ 	switch(status)
+ 	{
+@@ -145,14 +145,14 @@
+ 	}
+ 	else
+ 	{
+-		char *szMsg = NULL;
++		char *szMsg;
+ 		// Select proper msg
+ 		EnterCriticalSection(&gg->modemsg_mutex);
+-		szMsg = mir_strdup(gg_getstatusmsg(gg, status));
++		szMsg = mir_utf8encodeT(gg_getstatusmsg(gg, status));
+ 		LeaveCriticalSection(&gg->modemsg_mutex);
+ 		if(szMsg)
+ 		{
+-			gg_netlog(gg, "gg_refreshstatus(): Setting status and away message \"%s\".", szMsg);
++			//gg_netlog(gg, "gg_refreshstatus(): Setting status and away message \"%S\".", szMsg);
+ 			EnterCriticalSection(&gg->sess_mutex);
+ 			gg_change_status_descr(gg->sess, status_m2gg(gg, status, szMsg != NULL), szMsg);
+ 			LeaveCriticalSection(&gg->sess_mutex);
+@@ -238,15 +238,24 @@
+ {
+ 	GGPROTO *gg = (GGPROTO *)proto;
+ 	uin_t uin;
++	char *utf8_msg;
+ 
+ 	if(gg_isonline(gg) && (uin = (uin_t)DBGetContactSettingDword(hContact, GG_PROTO, GG_KEY_UIN, 0)))
+ 	{
++		if ( flags & PREF_UTF )
++			utf8_msg = mir_strdup(msg);
++		else if ( flags & PREF_UNICODE )
++			utf8_msg = utfi.utf8_encodeW(( wchar_t* )&msg[ strlen( msg )+1 ]);
++		else
++			utf8_msg = utfi.utf8_encode(msg);
++
+ 		if(DBGetContactSettingByte(NULL, GG_PROTO, GG_KEY_MSGACK, GG_KEYDEF_MSGACK))
+ 		{
+ 			// Return normally
+ 			HANDLE hRetVal;
+ 			EnterCriticalSection(&gg->sess_mutex);
+-			hRetVal = (HANDLE) gg_send_message(gg->sess, GG_CLASS_CHAT, uin, msg);
++			hRetVal = (HANDLE) gg_send_message(gg->sess, GG_CLASS_CHAT, uin, utf8_msg);
++			mir_free(utf8_msg);
+ 			LeaveCriticalSection(&gg->sess_mutex);
+ 			return (int) hRetVal;
+ 		}
+@@ -256,7 +265,8 @@
+ 			int seq;
+ 			GG_SEQ_ACK *ack;
+ 			EnterCriticalSection(&gg->sess_mutex);
+-			seq = gg_send_message(gg->sess, GG_CLASS_CHAT, uin, msg);
++			seq = gg_send_message(gg->sess, GG_CLASS_CHAT, uin, utf8_msg);
++			mir_free(utf8_msg);
+ 			LeaveCriticalSection(&gg->sess_mutex);
+ 			ack = malloc(sizeof(GG_SEQ_ACK));
+ 			if(ack)
+@@ -294,7 +304,7 @@
+ 		return (HANDLE)1;
+ 	}
+ 
+-	ida = gg_t2a(id); 
++	ida = mir_t2a(id); 
+ 
+ 	// Add uin and search it
+ 	gg_pubdir50_add(req, GG_PUBDIR50_UIN, ida);
+@@ -338,7 +348,7 @@
+ 	// Add uin and search it
+ 	if(nick)
+ 	{
+-		char *nickA = gg_t2a(nick); 
++		char *nickA = mir_t2a(nick); 
+ 		gg_pubdir50_add(req, GG_PUBDIR50_NICKNAME, nickA);
+ 		strncat(data, nickA, sizeof(data) - strlen(data));
+ 		mir_free(nickA);
+@@ -347,7 +357,7 @@
+ 
+ 	if(firstName)
+ 	{
+-		char *firstNameA = gg_t2a(firstName); 
++		char *firstNameA = mir_t2a(firstName); 
+ 		gg_pubdir50_add(req, GG_PUBDIR50_FIRSTNAME, firstNameA);
+ 		strncat(data, firstNameA, sizeof(data) - strlen(data));
+ 		mir_free(firstNameA);
+@@ -356,7 +366,7 @@
+ 
+ 	if(lastName)
+ 	{
+-		char *lastNameA = gg_t2a(lastName); 
++		char *lastNameA = mir_t2a(lastName); 
+ 		gg_pubdir50_add(req, GG_PUBDIR50_LASTNAME, lastNameA);
+ 		strncat(data, lastNameA, sizeof(data) - strlen(data));
+ 		mir_free(lastNameA);
+@@ -393,14 +403,14 @@
+ {
+ 	GGPROTO *gg = (GGPROTO *)proto;
+ 	GGSEARCHRESULT *sr = (GGSEARCHRESULT *)psr;
+-	char *szNick = psr->flags & PSR_UNICODE ? mir_u2a((wchar_t *)sr->hdr.nick) : mir_strdup(sr->hdr.nick);
++	TCHAR *szNick = psr->flags & PSR_UNICODE ? mir_u2t(sr->hdr.nick) : mir_a2t((char *)sr->hdr.nick);
+ 	uin_t uin;
+ 	HANDLE hContact;
+ 
+ 	if (psr->cbSize == sizeof(GGSEARCHRESULT))
+ 		uin = sr->uin;
+ 	else
+-		uin = psr->flags & PSR_UNICODE ? _wtoi((wchar_t*)psr->id) : atoi(psr->id);
++		uin = psr->flags & PSR_UNICODE ? _wtoi((wchar_t*)psr->id) : _ttoi(psr->id);
+ 
+ 	hContact = gg_getcontact(gg, uin, 1, flags & PALF_TEMPORARY ? 0 : 1, szNick);
+ 	mir_free(szNick);
+@@ -507,10 +517,10 @@
+ {
+ 	GGPROTO *gg = (GGPROTO *)proto;
+ 	int status = gg_normalizestatus(iStatus);
+-	char **szMsg;
+-	char* msg = gg_t2a(msgt);
++	TCHAR **szMsg;
++	TCHAR* msg = mir_tstrdup(msgt);
+ 
+-	gg_netlog(gg, "gg_setawaymsg(): PS_SETAWAYMSG(%d, \"%s\").", iStatus, msg);
++	gg_netlog(gg, "gg_setawaymsg(): PS_SETAWAYMSG(%d, \"%S\").", iStatus, msg);
+ 
+ 	EnterCriticalSection(&gg->modemsg_mutex);
+ 	// Select proper msg
+@@ -538,7 +548,7 @@
+ 	}
+ 
+ 	// Check if we change status here somehow
+-	if(*szMsg && msg && !strcmp(*szMsg, msg)
++	if(*szMsg && msg && !_tcscmp(*szMsg, msg)
+ 		|| !*szMsg && (!msg || !*msg))	
+ 	{
+ 		if(status == gg->proto.m_iDesiredStatus && gg->proto.m_iDesiredStatus == gg->proto.m_iStatus)
+@@ -553,7 +563,7 @@
+ 	{
+ 		if(*szMsg)
+ 			free(*szMsg);
+-		*szMsg = msg && *msg ? _strdup(msg) : NULL;
++		*szMsg = msg && *msg ? _tcsdup(msg) : NULL;
+ #ifdef DEBUGMODE
+ 		gg_netlog(gg, "gg_setawaymsg(): Message changed.");
+ #endif
+@@ -632,7 +642,7 @@
+ 	}
+ 
+ 	// Fetch search data
+-	GetDlgItemText(hwndDlg, IDC_FIRSTNAME, text, sizeof(text));
++	GetDlgItemTextA(hwndDlg, IDC_FIRSTNAME, text, sizeof(text));
+ 	if(strlen(text))
+ 	{
+ 		gg_pubdir50_add(req, GG_PUBDIR50_FIRSTNAME, text);
+@@ -640,7 +650,7 @@
+ 	}
+ 	/* 1 */ strncat(data, ".", sizeof(data) - strlen(data));
+ 
+-	GetDlgItemText(hwndDlg, IDC_LASTNAME, text, sizeof(text));
++	GetDlgItemTextA(hwndDlg, IDC_LASTNAME, text, sizeof(text));
+ 	if(strlen(text))
+ 	{
+ 		gg_pubdir50_add(req, GG_PUBDIR50_LASTNAME, text);
+@@ -648,7 +658,7 @@
+ 	}
+ 	/* 2 */ strncat(data, ".", sizeof(data) - strlen(data));
+ 
+-	GetDlgItemText(hwndDlg, IDC_NICKNAME, text, sizeof(text));
++	GetDlgItemTextA(hwndDlg, IDC_NICKNAME, text, sizeof(text));
+ 	if(strlen(text))
+ 	{
+ 		gg_pubdir50_add(req, GG_PUBDIR50_NICKNAME, text);
+@@ -656,7 +666,7 @@
+ 	}
+ 	/* 3 */ strncat(data, ".", sizeof(data) - strlen(data));
+ 
+-	GetDlgItemText(hwndDlg, IDC_CITY, text, sizeof(text));
++	GetDlgItemTextA(hwndDlg, IDC_CITY, text, sizeof(text));
+ 	if(strlen(text))
+ 	{
+ 		gg_pubdir50_add(req, GG_PUBDIR50_CITY, text);
+@@ -664,7 +674,7 @@
+ 	}
+ 	/* 4 */ strncat(data, ".", sizeof(data) - strlen(data));
+ 
+-	GetDlgItemText(hwndDlg, IDC_AGEFROM, text, sizeof(text));
++	GetDlgItemTextA(hwndDlg, IDC_AGEFROM, text, sizeof(text));
+ 	if(strlen(text))
+ 	{
+ 		int yearTo = atoi(text);
+@@ -674,7 +684,7 @@
+ 		int ay = lt->tm_year + 1900;
+ 		char age[16];
+ 
+-		GetDlgItemText(hwndDlg, IDC_AGETO, age, sizeof(age));
++		GetDlgItemTextA(hwndDlg, IDC_AGETO, age, sizeof(age));
+ 		yearFrom = atoi(age);
+ 
+ 		// Count & fix ranges
+@@ -876,7 +886,7 @@
+ 	if (szFilename == NULL) {
+ 		MessageBox(
+ 			NULL,
+-			Translate("To remove your Gadu-Gadu avatar, you must use the MojaGeneracja.pl website."),
++			TranslateT("To remove your Gadu-Gadu avatar, you must use the MojaGeneracja.pl website."),
+ 			GG_PROTONAME, MB_OK | MB_ICONINFORMATION);
+ 	}
+ 	else {
+@@ -899,12 +909,12 @@
+ INT_PTR gg_getmyawaymsg(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
+ {
+ 	INT_PTR res = 0;
+-	char *szMsg;
++	TCHAR *szMsg;
+ 
+ 	EnterCriticalSection(&gg->modemsg_mutex);
+ 	szMsg = gg_getstatusmsg(gg, wParam ? gg_normalizestatus(wParam) : gg->proto.m_iStatus);
+ 	if(gg_isonline(gg) && szMsg)
+-		res = (lParam & SGMA_UNICODE) ? (INT_PTR)mir_a2u(szMsg) : (INT_PTR)mir_strdup(szMsg);
++		res = (lParam & SGMA_UNICODE) ? (INT_PTR)mir_t2u(szMsg) : (INT_PTR)mir_t2a(szMsg);
+ 	LeaveCriticalSection(&gg->modemsg_mutex);
+ 	return res;
+ }
+@@ -1022,6 +1032,7 @@
+ 	CreateProtoService(PS_SETMYAVATAR, gg_setmyavatar, gg);
+ 
+ 	CreateProtoService(PS_GETMYAWAYMSG, gg_getmyawaymsg, gg);
++	CreateProtoService(PS_SETAWAYMSGT, (GGPROTOFUNC)gg_setawaymsg, gg);
+ 	CreateProtoService(PS_CREATEACCMGRUI, gg_get_acc_mgr_gui, gg);
+ 
+ 	CreateProtoService(PS_LEAVECHAT, gg_leavechat, gg);
+Index: ssl.c
+===================================================================
+--- ssl.c	(revision 13182)
++++ ssl.c	(working copy)
+@@ -67,8 +67,8 @@
+ 	char *failFunction;
+ 
+ 	InitializeCriticalSection(&sslHandleMutex);
+-	hLibSSL = LoadLibrary("SSLEAY32.DLL");
+-	hLibEAY = LoadLibrary("LIBEAY32.DLL");
++	hLibSSL = LoadLibraryA("SSLEAY32.DLL");
++	hLibEAY = LoadLibraryA("LIBEAY32.DLL");
+ 
+ 	// Load main functions
+ 	if (hLibSSL)
+Index: token.c
+===================================================================
+--- token.c	(revision 13182)
++++ token.c	(working copy)
+@@ -66,7 +66,7 @@
+ 			{
+ 				case IDOK:
+ 				{
+-					GetDlgItemText(hwndDlg, IDC_TOKEN, dat->val, sizeof(dat->val));
++					GetDlgItemTextA(hwndDlg, IDC_TOKEN, dat->val, sizeof(dat->val));
+ 					EndDialog(hwndDlg, IDOK);
+ 					break;
+ 				}
+@@ -130,11 +130,11 @@
+ 	if(!(h = gg_token(0)) || gg_token_watch_fd(h) || h->state == GG_STATE_ERROR || h->state != GG_STATE_DONE)
+ 	{
+ 		char error[128];
+-		mir_snprintf(error, sizeof(error), Translate("Token retrieval failed because of error:\n\t%s"), http_error_string(h ? h->error : 0));
+-		MessageBox(
++		mir_snprintf(error, SIZEOF(error), Translate("Token retrieval failed because of error:\n\t%s"), http_error_string(h ? h->error : 0));
++		MessageBoxA(
+ 				NULL,
+ 				error,
+-				GG_PROTONAME,
++				GG_SZPROTONAME,
+ 				MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_free_pubdir(h);
+@@ -144,11 +144,11 @@
+ 	if (!(t = (struct gg_token *)h->data) || (!h->body))
+ 	{
+ 		char error[128];
+-		mir_snprintf(error, sizeof(error), Translate("Token retrieval failed because of error:\n\t%s"), http_error_string(h ? h->error : 0));
+-		MessageBox(
++		mir_snprintf(error, SIZEOF(error), Translate("Token retrieval failed because of error:\n\t%s"), http_error_string(h ? h->error : 0));
++		MessageBoxA(
+ 				NULL,
+ 				error,
+-				GG_PROTONAME,
++				GG_SZPROTONAME,
+ 				MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_free_pubdir(h);
+@@ -168,10 +168,10 @@
+ 	dat.hBitmap = (HBITMAP) CallService(MS_IMG_LOADFROMMEM, (WPARAM) &memio, 0);
+ 	if(dat.hBitmap == NULL)
+ 	{
+-		MessageBox(
++		MessageBoxA(
+ 				NULL,
+ 				Translate("Could not load token image."),
+-				GG_PROTONAME,
++				GG_SZPROTONAME,
+ 				MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_free_pubdir(h);
+Index: userutils.c
+===================================================================
+--- userutils.c	(revision 13182)
++++ userutils.c	(working copy)
+@@ -40,13 +40,13 @@
+ 	if (!(h = gg_register3(newEmail, newPass, token.id, token.val, 0)) || !(s = h->data) || !s->success || !s->uin)
+ 	{
+ 		char error[128];
+-		mir_snprintf(error, sizeof(error), Translate("Cannot register new account because of error:\n\t%s"),
++		mir_snprintf(error, SIZEOF(error), Translate("Cannot register new account because of error:\n\t%s"),
+ 			(h && !s) ? http_error_string(h ? h->error : 0) :
+ 			(s ? Translate("Registration rejected") : strerror(errno)));
+-		MessageBox(
++		MessageBoxA(
+ 			NULL,
+ 			error,
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_netlog(gg, "gg_doregister(): Cannot register because of \"%s\".", strerror(errno));
+@@ -61,7 +61,7 @@
+ 		gg_netlog(gg, "gg_doregister(): Account registration succesful.");
+ 		MessageBox(
+ 			NULL,
+-			Translate("You have registered new account.\nPlease fill up your personal details in \"M->Change my details...\""),
++			TranslateT("You have registered new account.\nPlease fill up your personal details in \"M->Change my details...\""),
+ 			GG_PROTONAME,
+ 			MB_OK | MB_ICONINFORMATION
+ 		);
+@@ -97,10 +97,10 @@
+ 		mir_snprintf(error, sizeof(error), Translate("Your account cannot be removed because of error:\n\t%s"),
+ 			(h && !s) ? http_error_string(h ? h->error : 0) :
+ 			(s ? Translate("Bad number or password") : strerror(errno)));
+-		MessageBox(
++		MessageBoxA(
+ 			NULL,
+ 			error,
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_netlog(gg, "gg_dounregister(): Cannot remove account because of \"%s\".", strerror(errno));
+@@ -111,10 +111,10 @@
+ 		DBDeleteContactSetting(NULL, GG_PROTO, GG_KEY_PASSWORD);
+ 		DBDeleteContactSetting(NULL, GG_PROTO, GG_KEY_UIN);
+ 		gg_netlog(gg, "gg_dounregister(): Account %d has been removed.", uin);
+-		MessageBox(
++		MessageBoxA(
+ 			NULL,
+ 			Translate("Your account has been removed."),
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONINFORMATION
+ 		);
+ 	}
+@@ -154,13 +154,13 @@
+ 	if (!(h = gg_change_passwd4(uin, email, password, newPass, token.id, token.val, 0)) || !(s = h->data) || !s->success)
+ 	{
+ 		char error[128];
+-		mir_snprintf(error, sizeof(error), Translate("Your password cannot be changed because of error:\n\t%s"),
++		mir_snprintf(error, SIZEOF(error), Translate("Your password cannot be changed because of error:\n\t%s"),
+ 			(h && !s) ? http_error_string(h ? h->error : 0) :
+ 			(s ? Translate("Invalid data entered") : strerror(errno)));
+-		MessageBox(
++		MessageBoxA(
+ 			NULL,
+ 			error,
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_netlog(gg, "gg_dochpass(): Cannot change password because of \"%s\".", strerror(errno));
+@@ -171,10 +171,10 @@
+ 		CallService(MS_DB_CRYPT_ENCODESTRING, strlen(newPass) + 1, (LPARAM) newPass);
+ 		DBWriteContactSettingString(NULL, GG_PROTO, GG_KEY_PASSWORD, newPass);
+ 		gg_netlog(gg, "gg_dochpass(): Password change succesful.");
+-		MessageBox(
++		MessageBoxA(
+ 			NULL,
+ 			Translate("Your password has been changed."),
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONINFORMATION
+ 		);
+ 	}
+@@ -203,16 +203,16 @@
+ 	// Load token
+ 	if(!gg_gettoken(gg, &token)) return NULL;
+ 
+-	if (!(h = gg_change_passwd4(uin, newEmail, password, password, token.id, token.val, 0)) || !(s = h->data) || !s->success)
++	if (!(h = gg_change_passwd4(uin, newEmail, password, password, token.id, token.val, 0)) || !(s = (struct gg_pubdir *)h->data) || !s->success)
+ 	{
+ 		char error[128];
+-		mir_snprintf(error, sizeof(error), Translate("Your e-mail cannot be changed because of error:\n\t%s"),
++		mir_snprintf(error, SIZEOF(error), Translate("Your e-mail cannot be changed because of error:\n\t%s"),
+ 			(h && !s) ? http_error_string(h ? h->error : 0) :
+ 			(s ? Translate("Bad old e-mail or password") : strerror(errno)));
+-		MessageBox(
++		MessageBoxA(
+ 			NULL,
+ 			error,
+-			GG_PROTONAME,
++			GG_SZPROTONAME,
+ 			MB_OK | MB_ICONSTOP
+ 		);
+ 		gg_netlog(gg, "gg_dochpass(): Cannot change e-mail because of \"%s\".", strerror(errno));
+@@ -224,7 +224,7 @@
+ 		gg_netlog(gg, "gg_doemail(): E-mail change succesful.");
+ 		MessageBox(
+ 			NULL,
+-			Translate("Your e-mail has been changed."),
++			TranslateT("Your e-mail has been changed."),
+ 			GG_PROTONAME,
+ 			MB_OK | MB_ICONINFORMATION
+ 		);
+@@ -256,7 +256,7 @@
+ 				LOGFONT lf;
+ 				HFONT hNormalFont = (HFONT)SendDlgItemMessage(hwndDlg, IDC_NAME, WM_GETFONT, 0, 0);
+ 				// Readup email
+-				SetDlgItemText(hwndDlg, IDC_EMAIL, dat->email);
++				SetDlgItemTextA(hwndDlg, IDC_EMAIL, dat->email);
+ 				GetObject(hNormalFont, sizeof(lf), &lf);
+ 				lf.lfWeight = FW_BOLD;
+ 				dat->hBoldFont = CreateFontIndirect(&lf);
+@@ -287,8 +287,8 @@
+ 					{
+ 						char pass[128], cpass[128];
+ 						BOOL enable;
+-						GetDlgItemText(hwndDlg, IDC_PASSWORD, pass, sizeof(pass));
+-						GetDlgItemText(hwndDlg, IDC_CPASSWORD, cpass, sizeof(cpass));
++						GetDlgItemTextA(hwndDlg, IDC_PASSWORD, pass, sizeof(pass));
++						GetDlgItemTextA(hwndDlg, IDC_CPASSWORD, cpass, sizeof(cpass));
+ 						enable = strlen(pass) && strlen(cpass) && !strcmp(cpass, pass);
+ 						if(dat && dat->mode == GG_USERUTIL_REMOVE)
+ 							EnableWindow(GetDlgItem(hwndDlg, IDOK), IsDlgButtonChecked(hwndDlg, IDC_CONFIRM) ? enable : FALSE);
+@@ -299,9 +299,9 @@
+ 				case IDOK:
+ 				{
+ 					char pass[128], cpass[128], email[128];
+-					GetDlgItemText(hwndDlg, IDC_PASSWORD, pass, sizeof(pass));
+-					GetDlgItemText(hwndDlg, IDC_CPASSWORD, cpass, sizeof(cpass));
+-					GetDlgItemText(hwndDlg, IDC_EMAIL, email, sizeof(email));
++					GetDlgItemTextA(hwndDlg, IDC_PASSWORD, pass, sizeof(pass));
++					GetDlgItemTextA(hwndDlg, IDC_CPASSWORD, cpass, sizeof(cpass));
++					GetDlgItemTextA(hwndDlg, IDC_EMAIL, email, sizeof(email));
+ 					EndDialog(hwndDlg, IDOK);
+ 
+ 					// Check dialog box mode
