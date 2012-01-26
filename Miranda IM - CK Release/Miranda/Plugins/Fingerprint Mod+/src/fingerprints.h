@@ -138,6 +138,7 @@ KN_FP_MASK def_kn_fp_mask[] =
 	{ "client_Instantbird",				_T("*Instantbird*"),							_T("Instantbird"),						_T("ClientIcons_Multiprotocols"),	IDI_INSTANTBIRD, MULTIPROTOCOL_CASE },
 	{ "client_Jimm",					_T("|*Jimm*|mobicq*"),							_T("Jimm"),								_T("ClientIcons_Multiprotocols"),	IDI_JIMM, MULTIPROTOCOL_CASE },
 	{ "client_Digsby",					_T("*Digsby*"),									_T("Digsby"),							_T("ClientIcons_Multiprotocols"),	IDI_DIGSBY, MULTIPROTOCOL_CASE },
+	{ "client_Jasmine_IM",				_T("|Jasmine IM*|http://jasmineicq.ru/caps*"),	_T("Jasmine IM"),						_T("ClientIcons_Multiprotocols"),	IDI_JASMINEIM, MULTIPROTOCOL_CASE },
 
 //#########################################################################################################################################
 //########################################################### Other ICQ clients ###########################################################
