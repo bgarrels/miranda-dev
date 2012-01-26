@@ -71,6 +71,10 @@ void FacebookProto::ChangeStatus(void*)
 	}
 	else if ( old_status == ID_STATUS_OFFLINE )
 	{ // Login
+		SYSTEMTIME t;
+		GetLocalTime( &t );
+		Log("[%d.%d.%d] Using Facebook Protocol RM %s", t.wDay, t.wMonth, t.wYear, __VERSION_STRING);
+		
 		LOG("***** Beginning SignOn process");
 
 		m_iStatus = facy.self_.status_id = ID_STATUS_CONNECTING;
