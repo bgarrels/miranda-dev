@@ -3,7 +3,7 @@
 Facebook plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011 Robert Pösel
+Copyright © 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 */
 
 #include "common.h"
@@ -214,6 +215,22 @@ void FacebookProto::AddChat(const char *id, const char *name)
 	mir_free(const_cast<TCHAR*>(gcd.ptszID));
 }
 
+/*void FacebookProto::SetTopic(const char *topic)
+{
+	GCDEST gcd = { m_szModuleName };
+	gcd.ptszID = const_cast<TCHAR*>(m_tszUserName);
+	gcd.iType = GC_EVENT_TOPIC;
+
+	GCEVENT gce = {sizeof(gce)};
+	gce.pDest = &gcd;
+	gce.dwFlags = GC_TCHAR;
+	gce.time = ::time(NULL);
+	
+	std::string top = Translate(topic);
+	gce.ptszText = mir_a2t(top.c_str());
+	CallServiceSync(MS_GC_EVENT,0,  reinterpret_cast<LPARAM>(&gce));
+}
+*/
 
 int FacebookProto::OnJoinChat(WPARAM,LPARAM suppress)
 {	
@@ -255,22 +272,6 @@ int FacebookProto::OnJoinChat(WPARAM,LPARAM suppress)
 	return 0;
 }
 
-/*void FacebookProto::SetTopic(const char *topic)
-{
-	GCDEST gcd = { m_szModuleName };
-	gcd.ptszID = const_cast<TCHAR*>(m_tszUserName);
-	gcd.iType = GC_EVENT_TOPIC;
-
-	GCEVENT gce = {sizeof(gce)};
-	gce.pDest = &gcd;
-	gce.dwFlags = GC_TCHAR;
-	gce.time = ::time(NULL);
-	
-	std::string top = Translate(topic);
-	gce.ptszText = mir_a2t(top.c_str());
-	CallServiceSync(MS_GC_EVENT,0,  reinterpret_cast<LPARAM>(&gce));
-}
-*/
 int FacebookProto::OnLeaveChat(WPARAM,LPARAM)
 {
 	GCDEST gcd = { m_szModuleName };
@@ -287,6 +288,7 @@ int FacebookProto::OnLeaveChat(WPARAM,LPARAM)
 
 	return 0;
 }
+
 /*
 void FacebookProto::SetChatStatus(int status)
 {
@@ -311,18 +313,5 @@ void FacebookProto::SetChatStatus(int status)
 	{
 		CallServiceSync(MS_GC_EVENT,SESSION_OFFLINE,reinterpret_cast<LPARAM>(&gce));
 	}
-}
-/*
-void FacebookProto::ClearChat()
-{
-	GCDEST gcd = { m_szModuleName };
-	gcd.ptszID = const_cast<TCHAR*>(m_tszUserName);
-	gcd.iType = GC_EVENT_CONTROL;
-
-	GCEVENT gce = {sizeof(gce)};
-	gce.dwFlags = GC_TCHAR;
-	gce.pDest = &gcd;
-
-	CallServiceSync(MS_GC_EVENT,WINDOW_CLEARLOG,reinterpret_cast<LPARAM>(&gce));
 }
 */

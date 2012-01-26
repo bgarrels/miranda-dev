@@ -3,7 +3,7 @@
 Facebook plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2009-11 Michal Zelinka
+Copyright © 2009-11 Michal Zelinka, 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,11 +17,6 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-File name      : $HeadURL: http://eternityplugins.googlecode.com/svn/trunk/facebook/proto.cpp $
-Revision       : $Revision: 93 $
-Last change by : $Author: n3weRm0re.ewer $
-Last change on : $Date: 2011-01-25 20:50:51 +0100 (út, 25 1 2011) $
 
 */
 
@@ -50,7 +45,6 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 	CreateProtoService(m_szModuleName, PS_GETAVATARINFO,  &FacebookProto::GetAvatarInfo,     this);
 	CreateProtoService(m_szModuleName, PS_GETAVATARCAPS,  &FacebookProto::GetAvatarCaps,     this);
 
-  // TODO RM: group chats
 	CreateProtoService(m_szModuleName, PS_JOINCHAT,  &FacebookProto::OnJoinChat,  this);
 	CreateProtoService(m_szModuleName, PS_LEAVECHAT, &FacebookProto::OnLeaveChat, this);
 
@@ -86,8 +80,6 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 	def_avatar_folder_ = std::string(profile)+"\\"+m_szModuleName;
 	mir_free(profile);
 	hAvatarFolder_ = FoldersRegisterCustomPath(m_szModuleName, "Avatars", def_avatar_folder_.c_str());
-
-	Log("Loaded Facebook Protocol RM %s", __VERSION_STRING);
 
 	// Set all contacts offline -- in case we crashed
 	SetAllContactStatuses( ID_STATUS_OFFLINE );
@@ -337,12 +329,18 @@ int FacebookProto::OnOptionsInit(WPARAM wParam,LPARAM lParam)
 
 	odp.position    = 271828;
 	odp.ptszGroup   = LPGENT("Network");
-	odp.ptszTab     = LPGENT("Account && Integration");
+	odp.ptszTab     = LPGENT("Account");
 	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPTIONS);
 	odp.pfnDlgProc  = FBOptionsProc;
 	CallService(MS_OPT_ADDPAGE,wParam,(LPARAM)&odp);
-
+	
 	odp.position    = 271829;
+	odp.ptszTab     = LPGENT("Advanced");
+	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPTIONS_ADVANCED);
+	odp.pfnDlgProc  = FBOptionsAdvancedProc;
+	CallService(MS_OPT_ADDPAGE,wParam,(LPARAM)&odp);
+
+	odp.position    = 271830;
 	if(ServiceExists(MS_POPUP_ADDPOPUPT))
 		odp.ptszGroup   = LPGENT("Popups");
 	odp.ptszTab     = LPGENT("Events");
