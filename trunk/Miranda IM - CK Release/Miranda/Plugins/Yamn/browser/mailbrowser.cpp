@@ -28,14 +28,14 @@
 #include <m_database.h>
 #include <m_clist.h>
 #include <m_popup.h>
-#include "../include/m_kbdnotify.h"
+#include "m_kbdnotify.h"
 #include "../main.h"
-#include "../m_protoplugin.h"
-#include "../m_account.h"
+#include "m_protoplugin.h"
+#include "m_account.h"
 #include "../debug.h"
-#include "../m_messages.h"
+#include "m_messages.h"
 #include "../mails/m_mails.h"
-#include "../m_yamn.h"
+#include "m_yamn.h"
 #include "../resources/resource.h"
 #include <win2k.h>
 
@@ -2537,22 +2537,22 @@ LRESULT CALLBACK ListViewSubclassProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM
 	HWND hwndParent = GetParent(hDlg);
 	
 	switch(msg) {
-      case WM_GETDLGCODE :
-       {
-        LPMSG lpmsg;
-          if ( ( lpmsg = (LPMSG)lParam ) != NULL ) {
-             if ( lpmsg->message == WM_KEYDOWN
-             && lpmsg->wParam == VK_RETURN)
-           return DLGC_WANTALLKEYS;
-           }
-         break;
-       }
+	  case WM_GETDLGCODE :
+	   {
+		LPMSG lpmsg;
+		  if ( ( lpmsg = (LPMSG)lParam ) != NULL ) {
+			 if ( lpmsg->message == WM_KEYDOWN
+			 && lpmsg->wParam == VK_RETURN)
+		   return DLGC_WANTALLKEYS;
+		   }
+		 break;
+	   }
 		case WM_KEYDOWN:
-        {
+		{
 			
-            BOOL isCtrl = GetKeyState(VK_CONTROL) & 0x8000;
-            BOOL isShift = GetKeyState(VK_SHIFT) & 0x8000;
-            BOOL isAlt = GetKeyState(VK_MENU) & 0x8000;
+			BOOL isCtrl = GetKeyState(VK_CONTROL) & 0x8000;
+			BOOL isShift = GetKeyState(VK_SHIFT) & 0x8000;
+			BOOL isAlt = GetKeyState(VK_MENU) & 0x8000;
 
 			switch (wParam) 
 			{

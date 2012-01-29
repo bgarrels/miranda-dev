@@ -4,11 +4,11 @@
 #include <windows.h>
 #include "pop3.h"
 
-#include "../../m_protoplugin.h"
+#include "m_protoplugin.h"
 //We can use synchro.h because this is internal plugin. If you use external plugin,
 //and you want to use SO for your plugin, you can use YAMN's SO.
 //All you need is to include synchro.h and use YAMN's exported synchronization functions.
-#include "../../m_synchro.h"
+#include "m_synchro.h"
 
 //For mail exported functions defintions
 #include "../../mails/m_mails.h"

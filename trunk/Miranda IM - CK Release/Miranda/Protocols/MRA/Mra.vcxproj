@@ -38,6 +38,7 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -243,7 +244,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <CLRThreadAttribute>
       </CLRThreadAttribute>
-      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
@@ -261,7 +262,7 @@
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
-      <Optimization>MinSpace</Optimization>
+      <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
@@ -280,11 +281,11 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>../../include;../../ExternalAPI</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include;Sdk;../../ExternalAPI</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CompileAsManaged>false</CompileAsManaged>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
-      <FloatingPointModel>Strict</FloatingPointModel>
+      <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
@@ -293,7 +294,7 @@
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
     <Link>
-      <AdditionalDependencies>shlwapi.lib;Ws2_32.lib;mswsock.lib;runtmchk.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shlwapi.lib;Ws2_32.lib;mswsock.lib;runtmchk.lib;comctl32.lib;comdlg32.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <AdditionalManifestDependencies>%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
@@ -346,6 +347,15 @@
     <ClCompile Include="MraSendQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Docs\langpack_MRA_russian.txt" />
+    <None Include="Docs\Mail_ru Агент.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="Docs\proto.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="Docs\region.txt" />
+    <None Include="Docs\region_m.txt" />
     <None Include="Icons\Alarm.ico" />
     <None Include="Icons\answers.ico" />
     <None Include="Icons\AuthGrant.ico" />
@@ -364,7 +374,6 @@
     <None Include="Icons\PostCards.ico" />
     <None Include="Icons\video.ico" />
     <None Include="Icons\WebSearch.ico" />
-    <None Include="langpack_MRA_russian.txt" />
     <None Include="Readme_MRA.txt" />
     <None Include="TODO.txt" />
   </ItemGroup>
@@ -402,6 +411,7 @@
     <ClInclude Include="..\..\Include\newpluginapi.h" />
     <ClInclude Include="..\..\Include\statusmodes.h" />
     <ClInclude Include="..\..\Include\win2k.h" />
+    <ClInclude Include="Docs\MraPlaces.h" />
     <ClInclude Include="Mra.h" />
     <ClInclude Include="MraAntiSpam.h" />
     <ClInclude Include="MraAvatars.h" />

@@ -42,7 +42,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "m_database.h"
 #include "database.h" // Note: This is a copy of database.h from the Miranda IM v0.3 tree.
-                      //       Remember to update this when releasing new dbtool versions.
+					  //       Remember to update this when releasing new dbtool versions.
 #include "resource.h"
 
 #define WZM_GOTOPAGE   (WM_USER+1)

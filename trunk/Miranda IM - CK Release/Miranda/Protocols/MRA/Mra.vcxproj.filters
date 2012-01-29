@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Miranda\ExternalAPI">
       <UniqueIdentifier>{cf886b2e-3907-4ee9-9a19-947f269d726f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{2bfebbfa-f8bc-4b1c-8c9a-18d88cf65b13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Mra.cpp">
@@ -137,9 +140,27 @@
     <None Include="Icons\WebSearch.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="langpack_MRA_russian.txt" />
-    <None Include="Readme_MRA.txt" />
-    <None Include="TODO.txt" />
+    <None Include="Readme_MRA.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="TODO.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\langpack_MRA_russian.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\region_m.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\region.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\proto.htm">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\Mail_ru Агент.htm">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mra.h">
@@ -351,6 +372,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Include\win2k.h">
       <Filter>Header Files\Miranda</Filter>
+    </ClInclude>
+    <ClInclude Include="Docs\MraPlaces.h">
+      <Filter>docs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -12,12 +12,12 @@
 #include <m_database.h>
 #include <m_popup.h>
 #include "../main.h"
-#include "../m_protoplugin.h"
-#include "../m_account.h"
+#include "m_protoplugin.h"
+#include "m_account.h"
 #include "../debug.h"
-#include "../m_messages.h"
+#include "m_messages.h"
 #include "../mails/m_mails.h"
-#include "../m_yamn.h"
+#include "m_yamn.h"
 #include "../resources/resource.h"
 #include "m_browser.h"
 #include <win2k.h>

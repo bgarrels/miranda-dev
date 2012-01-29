@@ -135,7 +135,6 @@ int __declspec(dllexport) Load(PLUGINLINK *link)
 	pluginLink = link;
 	mir_getMMI( &mmi );
 	mir_getUTFI( &utfi );
-	mir_getLP( &pluginInfo );
 
 	hImportService = CreateServiceFunction(IMPORT_SERVICE, ImportCommand);
 	{

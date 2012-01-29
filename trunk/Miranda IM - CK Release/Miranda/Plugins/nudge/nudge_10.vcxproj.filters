@@ -13,6 +13,9 @@
       <UniqueIdentifier>{c2f97cb9-f896-4c2e-aefd-2a77e72799dd}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{34eb8704-38d1-46ef-81a3-c534d168d2d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -30,9 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="m_nudge.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="main.h">
@@ -55,7 +55,6 @@
     <None Include="miranda.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ChangeLog.txt" />
     <None Include="resources\Nudge.ico">
       <Filter>Resource Files</Filter>
     </None>
@@ -73,6 +72,9 @@
     </None>
     <None Include="resources\NudgeYahoo.ico">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\ChangeLog.txt">
+      <Filter>docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

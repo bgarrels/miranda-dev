@@ -149,7 +149,7 @@
       <MapFileName>$(TargetDir)$(TargetName).pdb</MapFileName>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include\msapi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
       <Command>if not exist "$(TargetDir)Docs\" mkdir  "$(TargetDir)Docs\"

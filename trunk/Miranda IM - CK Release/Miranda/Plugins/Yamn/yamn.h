@@ -34,10 +34,10 @@
 #include "m_protocols.h"	//protocols
 #include "m_protomod.h"		//protocols module
 #include "m_protosvc.h"
-#include "include/m_uninstaller.h"		//PluginUninstaller structures
+#include "m_uninstaller.h"		//PluginUninstaller structures
 #include "m_toptoolbar.h"
 #include "m_icolib.h"
-#include "include/m_kbdnotify.h"
+#include "m_kbdnotify.h"
 #include "m_popup.h"
 #include "m_updater.h"
 #include "m_account.h"	//Account structure and all needed structures to cooperate with YAMN

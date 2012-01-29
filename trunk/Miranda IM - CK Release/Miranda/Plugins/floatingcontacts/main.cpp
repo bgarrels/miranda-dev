@@ -18,7 +18,6 @@ No warranty for any misbehaviour.
 #include "shlwapi.h"
 
 #include "version.h"
-#include "newpluginapi.h"
 
 #pragma comment ( lib, "comctl32.lib" )
 #pragma comment ( lib, "shlwapi.lib" )
@@ -70,10 +69,10 @@ static int OnStatusModeChange		( WPARAM wParam, LPARAM lParam );
 static int OnModulesLoded			( WPARAM wParam, LPARAM lParam );
 static int OnPrebuildContactMenu	( WPARAM wParam, LPARAM lParam );
 
-static INT_PTR OnContactMenu_Remove		( WPARAM wParam,LPARAM lParam );
+static int OnContactMenu_Remove		( WPARAM wParam,LPARAM lParam );
 //static int OnContactMenu_HideAll	( WPARAM wParam,LPARAM lParam );
-static INT_PTR OnMainMenu_HideAll		( WPARAM wParam,LPARAM lParam );
-static INT_PTR OnHotKey_HideWhenCListShow ( WPARAM wParam,LPARAM lParam );
+static int OnMainMenu_HideAll		( WPARAM wParam,LPARAM lParam );
+static int OnHotKey_HideWhenCListShow( WPARAM wParam,LPARAM lParam );
 static VOID CALLBACK ToTopTimerProc ( HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime);
 
 WNDPROC oldMirandaWndProc;
@@ -186,13 +185,13 @@ PLUGININFOEX pluginInfoEx ={
 
 _inline unsigned int MakeVer(int a,int b,int c,int d)
 {
-	return PLUGIN_MAKE_VERSION(a,b,c,d);
+    return PLUGIN_MAKE_VERSION(a,b,c,d);
 }
 
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion) {
 
 	if( mirandaVersion < MakeVer(MINIMAL_COREVERSION) ) return NULL;
-	pluginInfoEx.version=MakeVer(PRODUCT_VERSION);
+    pluginInfoEx.version=MakeVer(PRODUCT_VERSION);
 	return &pluginInfoEx;
 }
 
@@ -220,7 +219,7 @@ BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
 extern "C" __declspec(dllexport) PLUGININFO* MirandaPluginInfo( DWORD mirandaVersion )
 {
 	if( mirandaVersion < MakeVer(MINIMAL_COREVERSION) ) return NULL;
-	pluginInfo.version=MakeVer(PRODUCT_VERSION);
+    pluginInfo.version=MakeVer(PRODUCT_VERSION);
 	return &pluginInfo;
 }
 
@@ -303,7 +302,7 @@ static void CleanUp()
 		DeleteObject(hBmpBackground);
 	if (NULL != hBkBrush)
 	{
-		SetClassLong((HWND)WND_CLASS, GCLP_HBRBACKGROUND, (LONG)NULL);
+		SetClassLong((HWND)WND_CLASS, GCL_HBRBACKGROUND, (LONG)NULL);
 		DeleteObject(hBkBrush);
 		hBkBrush=NULL;
 	}
@@ -340,7 +339,7 @@ static int OnModulesLoded( WPARAM wParam, LPARAM lParam )
 	hevPrebuildMenu		= HookEvent( ME_CLIST_PREBUILDCONTACTMENU, OnPrebuildContactMenu );
 	hwndMiranda			= (HWND)CallService( MS_CLUI_GETHWND, 0, 0 );
 
-	oldMirandaWndProc	= (WNDPROC)SetWindowLong( hwndMiranda, GWLP_WNDPROC, (LONG)newMirandaWndProc); 
+	oldMirandaWndProc	= (WNDPROC)SetWindowLong( hwndMiranda, GWL_WNDPROC, (LONG)newMirandaWndProc); 
 
 	
 	
@@ -866,7 +865,7 @@ static void CreateThumbWnd( TCHAR *ptszName, HANDLE hContact, int nX, int nY )
 		if ( hwnd != NULL ) 
 		{
 			pThumb = thumbList.AddThumb( hwnd, ptszName, hContact );
-			SetWindowLong( hwnd, GWLP_USERDATA, (long)pThumb );
+			SetWindowLong( hwnd, GWL_USERDATA, (long)pThumb );
 			pThumb->ResizeThumb();
 			
 			pThumb->SetThumbOpacity( fcOpt.thumbAlpha );
@@ -947,7 +946,7 @@ static void CreateBackgroundBrush()
 	}
 	if (NULL != hBkBrush)
 	{
-		SetClassLong((HWND)WND_CLASS, GCLP_HBRBACKGROUND, (LONG)NULL);
+		SetClassLong((HWND)WND_CLASS, GCL_HBRBACKGROUND, (LONG)NULL);
 		DeleteObject( hBkBrush );
 		hBkBrush = NULL;
 	}
@@ -977,7 +976,7 @@ static void CreateBackgroundBrush()
 	hBkBrush	= CreateSolidBrush(bkColor);
 
 	// Attach brush to the window
-	SetClassLong((HWND)WND_CLASS, GCLP_HBRBACKGROUND, (LONG)hBkBrush);
+	SetClassLong((HWND)WND_CLASS, GCL_HBRBACKGROUND, (LONG)hBkBrush);
 }
 
 
@@ -1077,7 +1076,7 @@ void RegHotkey( HANDLE hContact, HWND hwnd )
 
 
 ///////////////////////////////////////////////////////
-// Contact settings
+// Contact sttings
 
 void SaveContactsPos()
 {	
@@ -1218,7 +1217,7 @@ BOOL HideOnFullScreen()
 }
 
 
-static INT_PTR OnContactMenu_Remove( WPARAM wParam,LPARAM lParam )
+static int OnContactMenu_Remove( WPARAM wParam,LPARAM lParam )
 {
 	HANDLE		hContact	= ( HANDLE )wParam;
 	ThumbInfo	*pThumb		= thumbList.FindThumbByContact( hContact );
@@ -1234,7 +1233,7 @@ static INT_PTR OnContactMenu_Remove( WPARAM wParam,LPARAM lParam )
 	return 0;
 }
 
-static INT_PTR OnHotKey_HideWhenCListShow( WPARAM wParam,LPARAM lParam )
+static int OnHotKey_HideWhenCListShow( WPARAM wParam,LPARAM lParam )
 {
 	fcOpt.bHideWhenCListShow=!fcOpt.bHideWhenCListShow;
 	DBWriteContactSettingByte(NULL, sModule, "HideWhenCListShow", (BYTE)fcOpt.bHideWhenCListShow);
@@ -1243,7 +1242,7 @@ static INT_PTR OnHotKey_HideWhenCListShow( WPARAM wParam,LPARAM lParam )
 }
 
 
-static INT_PTR OnMainMenu_HideAll( WPARAM wParam,LPARAM lParam )
+static int OnMainMenu_HideAll( WPARAM wParam,LPARAM lParam )
 {
 	CLISTMENUITEM clmi = {0};
 	int b;
