@@ -59,7 +59,7 @@ void RegisterToUpdate(void)
 		update.szUpdateURL = UPDATER_AUTOREGISTER;
 		update.szVersionURL = "http://addons.miranda-im.org/details.php?action=viewfile&id=2708";
 		update.pbVersionPrefix = (BYTE *)"<span class=\"fileNameHeader\">Nudge ";
-	    update.szBetaUpdateURL = "http://www.miranda-fr.net/tweety/Nudge/Nudge.zip";
+		update.szBetaUpdateURL = "http://www.miranda-fr.net/tweety/Nudge/Nudge.zip";
 		update.szBetaVersionURL = "http://www.miranda-fr.net/tweety/Nudge/Nudge_beta.html";
 		update.pbBetaVersionPrefix = (BYTE *)"Nudge version ";
 
@@ -287,19 +287,19 @@ extern "C" __declspec(dllexport) const MUUID * MirandaPluginInterfaces(void)
 
 static INT_PTR CALLBACK DlgProcOptsTrigger(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
-    switch (msg) {
+	switch (msg) {
 	case WM_INITDIALOG: {
 		// lParam = (LPARAM)(DWORD)actionID or 0 if this is a new trigger entry
 		BOOL bshakeClist,bshakeChat;
 		
 		DWORD actionID = (DWORD)lParam;
-        TranslateDialogDefault(hwnd);
+		TranslateDialogDefault(hwnd);
 		// Initialize the dialog according to the action ID
 		bshakeClist = DBGetActionSettingByte(actionID, NULL, "Nudge", "ShakeClist",FALSE);
 		bshakeChat = DBGetActionSettingByte(actionID, NULL, "Nudge", "ShakeChat",FALSE);
 		CheckDlgButton(hwnd, IDC_TRIGGER_SHAKECLIST, bshakeClist ? BST_CHECKED : BST_UNCHECKED);
 		CheckDlgButton(hwnd, IDC_TRIGGER_SHAKECHAT, bshakeChat ? BST_CHECKED : BST_UNCHECKED);
-        break;
+		break;
 						}
 
 	case TM_ADDACTION: {
@@ -316,7 +316,7 @@ static INT_PTR CALLBACK DlgProcOptsTrigger(HWND hwnd, UINT msg, WPARAM wParam, L
 					   }
 	}
 
-    return FALSE;
+	return FALSE;
 }
 
 int TriggerActionRecv( DWORD actionID, REPORTINFO *ri)
@@ -427,9 +427,9 @@ void RegisterToTrigger(void)
 
 void RegisterToDbeditorpp(void)
 {
-    // known modules list
-    if (ServiceExists("DBEditorpp/RegisterSingleModule"))
-        CallService("DBEditorpp/RegisterSingleModule", (WPARAM)"Nudge", 0);
+	// known modules list
+	if (ServiceExists("DBEditorpp/RegisterSingleModule"))
+		CallService("DBEditorpp/RegisterSingleModule", (WPARAM)"Nudge", 0);
 }
 
 void LoadIcons(void)
@@ -489,14 +489,14 @@ void HideNudgeButton(HANDLE hContact)
 	mir_snprintf(str,MAXMODULELABELLENGTH + 12,"%s/SendNudge", szProto);
 
 	if (!ServiceExists(str)) 
-    { 
-      BBButton bbd={0}; 
-      bbd.cbSize=sizeof(BBButton); 
-      bbd.bbbFlags=BBSF_HIDDEN|BBSF_DISABLED; 
-      bbd.pszModuleName="Nudge";
+	{ 
+	  BBButton bbd={0}; 
+	  bbd.cbSize=sizeof(BBButton); 
+	  bbd.bbbFlags=BBSF_HIDDEN|BBSF_DISABLED; 
+	  bbd.pszModuleName="Nudge";
 	  bbd.dwButtonID = 6000;
-      CallService(MS_BB_SETBUTTONSTATE, (WPARAM)hContact, (LPARAM)&bbd); 
-    } 
+	  CallService(MS_BB_SETBUTTONSTATE, (WPARAM)hContact, (LPARAM)&bbd); 
+	} 
 } 
 
 static int ContactWindowOpen(WPARAM wparam,LPARAM lParam) 
@@ -505,7 +505,7 @@ static int ContactWindowOpen(WPARAM wparam,LPARAM lParam)
 
    if(MWeventdata->uType == MSG_WINDOW_EVT_OPENING&&MWeventdata->hContact) 
    { 
-      HideNudgeButton(MWeventdata->hContact); 
+	  HideNudgeButton(MWeventdata->hContact); 
    } 
    return 0; 
 }
@@ -547,7 +547,8 @@ int AccListChanged(WPARAM wParam,LPARAM lParam)
 
 HANDLE hShakeClist=NULL,hShakeChat=NULL,hNudgeSend=NULL,hNudgeShowMenu=NULL;
 extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
-{ 	
+{
+	HANDLE NudgeOptInit; 	
 	pluginLink = link;
 	if(mir_getMMI(&mmi))
 	{

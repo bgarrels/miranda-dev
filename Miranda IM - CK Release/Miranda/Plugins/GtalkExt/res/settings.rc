@@ -1,6 +1,6 @@
 #include "resources.h"
 #include "winres.h"
-#include "include\m_utils.h"
+#include "m_utils.h"
 
 IDD_MAILSETTINGS DIALOGEX 0, 0, 304, 228
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
@@ -60,23 +60,23 @@ VS_VERSION_INFO VERSIONINFO
  FILETYPE 0x2L
  FILESUBTYPE 0x0L
 {
-    BLOCK "StringFileInfo"
+	BLOCK "StringFileInfo"
 	{
-        BLOCK "040904b0"
+		BLOCK "040904b0"
 		{
-            VALUE "FileDescription", PLUGIN_DESCRIPTION
-            VALUE "FileVersion", PLUGIN_VERSION_STRING
-            VALUE "InternalName", SHORT_PLUGIN_NAME
-            VALUE "LegalCopyright", COPYRIGHT_STRING
-            VALUE "OriginalFilename", SHORT_PLUGIN_NAME ".dll"
-            VALUE "PrivateBuild", "Yes"
-            VALUE "ProductName", PLUGIN_DESCRIPTION
-            VALUE "ProductVersion", PLUGIN_VERSION_STRING
+			VALUE "FileDescription", PLUGIN_DESCRIPTION
+			VALUE "FileVersion", PLUGIN_VERSION_STRING
+			VALUE "InternalName", SHORT_PLUGIN_NAME
+			VALUE "LegalCopyright", COPYRIGHT_STRING
+			VALUE "OriginalFilename", SHORT_PLUGIN_NAME ".dll"
+			VALUE "PrivateBuild", "Yes"
+			VALUE "ProductName", PLUGIN_DESCRIPTION
+			VALUE "ProductVersion", PLUGIN_VERSION_STRING
 		}
 	}
-    BLOCK "VarFileInfo"
+	BLOCK "VarFileInfo"
 	{
-        VALUE "Translation", 0x409, 1200
+		VALUE "Translation", 0x409, 1200
 	}
 }
 

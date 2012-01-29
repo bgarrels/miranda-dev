@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="options.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="commonheaders.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\gender-readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\gender-translate.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="icons\female.ico">
+      <Filter>icons</Filter>
+    </None>
+    <None Include="icons\male.ico">
+      <Filter>icons</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="docs">
+      <UniqueIdentifier>{8e55b74e-a109-4764-945a-4d57a70fb7c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="icons">
+      <UniqueIdentifier>{9fb98a50-8431-47a2-aac6-98f4cb109765}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="gender.rc">
+      <Filter>icons</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

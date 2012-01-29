@@ -24,6 +24,9 @@
     <Filter Include="Header Files\include">
       <UniqueIdentifier>{a5d01df4-9348-4078-ab04-99ee691cd263}</UniqueIdentifier>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{78fe97e0-7427-428b-9ec4-ab07cd66a76e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="account.cpp">
@@ -97,7 +100,27 @@
     <None Include="resources\yamn.bmp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ChangeLog.txt" />
+    <None Include="docs\language.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\YAMN-License.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\YAMN-Readme.developers.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\YAMN-Readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\ChangeLog.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\InstallScript.xml">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\language.pop3.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resources\resource.h">

@@ -47,15 +47,15 @@
 #include <m_cluiframes.h>
 
 //Gender SDK
-#include "sdk/m_gender.h"
+#include "m_gender.h"
 
 //Resources
 #include "resource.h"
 
 //external SDK headers
-#include "sdk/m_updater.h"
-#include "sdk/m_metacontacts.h"
-#include "sdk/m_extraicons.h"
+#include "m_updater.h"
+#include "m_metacontacts.h"
+#include "m_extraicons.h"
 
 static const int DefaultSlot = EXTRA_ICON_ADV2;
 #define MODULENAME "Gender"

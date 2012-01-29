@@ -40,5 +40,6 @@
 #include <m_chat.h>
 #include <m_protoint.h>
 
+//ExternalApi
 #include "m_msg_buttonsbar.h"
 #include "m_updater.h"

@@ -16,6 +16,9 @@
       <UniqueIdentifier>{cc11ab2b-a14e-4f67-8b7a-72d64c4aa033}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{044b603a-3626-4e79-b28e-e16fce407d2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dataobject.cpp">
@@ -87,6 +90,8 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Changelog.txt" />
+    <None Include="Changelog.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
 </Project>

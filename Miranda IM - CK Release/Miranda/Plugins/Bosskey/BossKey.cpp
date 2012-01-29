@@ -2,24 +2,25 @@
 	BossKey - Hide Miranda from your boss :)
 	Copyright (C) 2002-2003 Goblineye Entertainment, (C) 2007-2010 Billy_Bons
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 #include "BossKey.h"
 #include "m_updater.h"
 #include "m_msg_buttonsbar.h"
+#include "..\StopSpam+\res\version.h"
 
 // multiple instances support:
 // when hotkey is hit, handler notifies all listen windows
@@ -332,7 +333,7 @@ static int BackAllProtoStatuses(void)
 
 static void CreateTrayIcon(bool create)
 {
-    NOTIFYICONDATA nim;
+	NOTIFYICONDATA nim;
 	DBVARIANT dbVar;
 	if (!DBGetContactSettingTString(NULL,MOD_NAME,"ToolTipText",&dbVar))
 	{
@@ -342,12 +343,12 @@ static void CreateTrayIcon(bool create)
 	else
 		lstrcpy(nim.szTip, _T("Miranda IM"));
 
-    nim.cbSize = sizeof(nim);
-    nim.hWnd = g_hListenWindow;
-    nim.uID = 100;
-    nim.uFlags = NIF_ICON | NIF_MESSAGE | NIF_TIP;
-    nim.hIcon = ( HICON )CallService( MS_SKIN2_GETICON, 0, (LPARAM)"hidemim" );
-    nim.uCallbackMessage = WM_USER + 24;
+	nim.cbSize = sizeof(nim);
+	nim.hWnd = g_hListenWindow;
+	nim.uID = 100;
+	nim.uFlags = NIF_ICON | NIF_MESSAGE | NIF_TIP;
+	nim.hIcon = ( HICON )CallService( MS_SKIN2_GETICON, 0, (LPARAM)"hidemim" );
+	nim.uCallbackMessage = WM_USER + 24;
 	Shell_NotifyIcon(create ? NIM_ADD : NIM_DELETE, &nim);
 	g_TrayIcon = create;
 }
@@ -360,7 +361,7 @@ static void RestoreOldSettings(void)
 	if (g_bOldSetting & OLD_SOUND)
 		DBWriteContactSettingByte(NULL,"Skin","UseSound", 1);
 
-    if (g_bOldSetting & OLD_FLTCONT) // show Floating contacts if needed
+	if (g_bOldSetting & OLD_FLTCONT) // show Floating contacts if needed
 	{
 		if(ServiceExists("FloatingContacts/MainHideAllThumbs"))
 			CallService("FloatingContacts/MainHideAllThumbs",0,0);
