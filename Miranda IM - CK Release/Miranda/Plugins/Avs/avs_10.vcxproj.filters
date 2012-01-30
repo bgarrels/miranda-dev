@@ -13,6 +13,9 @@
       <UniqueIdentifier>{214ac298-955e-4931-a01c-3516a7206928}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{53becc9a-eda1-4640-9c0a-42390c120821}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acc.cpp">
@@ -75,6 +78,12 @@
   <ItemGroup>
     <None Include="res\avatar.ico">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\README">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\license.txt">
+      <Filter>docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

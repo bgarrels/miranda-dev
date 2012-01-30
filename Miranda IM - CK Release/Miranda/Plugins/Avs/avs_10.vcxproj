@@ -288,6 +288,8 @@
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\license.txt" />
+    <None Include="docs\README" />
     <None Include="res\avatar.ico" />
   </ItemGroup>
   <ItemGroup>
