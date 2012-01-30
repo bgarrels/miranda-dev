@@ -61,29 +61,32 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="mcmenu.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="mcmenuof.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="meta_add.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="meta_convert.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="meta_edit.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="meta_remove2.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="meta_set_as_default.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="MetaContacts translations\metacontacts_template.txt">
       <Filter>translation template</Filter>
+    </None>
+    <None Include="icons\mcmenuof.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icons\mcmenuoff2.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icons\meta_add.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icons\meta_convert.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icons\meta_edit.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icons\meta_remove2.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icons\meta_set_as_default.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icons\mcmenu.ico">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

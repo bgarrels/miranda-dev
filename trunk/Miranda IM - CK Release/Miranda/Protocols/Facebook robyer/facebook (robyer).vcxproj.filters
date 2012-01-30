@@ -16,6 +16,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{63fc793e-7512-4954-b405-d0691cbc5a35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="avatars.cpp">
@@ -144,6 +147,9 @@
     </None>
     <None Include="icons\mind.ico">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\changelog.txt">
+      <Filter>docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

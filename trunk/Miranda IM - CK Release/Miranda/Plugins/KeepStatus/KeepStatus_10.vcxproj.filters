@@ -13,6 +13,9 @@
       <UniqueIdentifier>{3795d706-cfb9-43c3-a967-b0759da5b8af}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{1ee1b349-e452-4be7-bf5a-9525fee738e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="action_keepstatus.cpp">
@@ -61,5 +64,10 @@
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\KeepStatus.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
 </Project>

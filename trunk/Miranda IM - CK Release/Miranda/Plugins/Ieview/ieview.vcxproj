@@ -190,11 +190,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ExternalAPI\m_ieview.h" />
     <ClInclude Include="..\..\ExternalAPI\m_MathModule.h" />
-    <ClInclude Include="..\..\ExternalAPI\m_metacontacts.h" />
-    <ClInclude Include="..\..\ExternalAPI\m_smileyadd.h" />
-    <ClInclude Include="..\..\Include\m_avatars.h" />
     <ClInclude Include="ChatHTMLBuilder.h" />
     <ClInclude Include="HistoryHTMLBuilder.h" />
     <ClInclude Include="HTMLBuilder.h" />
@@ -231,6 +227,9 @@
     <ClCompile Include="TemplateHTMLBuilder.cpp" />
     <ClCompile Include="TextToken.cpp" />
     <ClCompile Include="Utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ieview_10.vcxproj.filters" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -314,7 +314,6 @@
     <ClCompile Include="src\textusers.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ExternalAPI\m_text.h" />
     <ClInclude Include="src\fancy_rtf.h" />
     <ClInclude Include="src\FormattedTextDraw.h" />
     <ClInclude Include="src\headers.h" />
@@ -329,7 +328,7 @@
     <ResourceCompile Include="res\version.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Changelog.txt" />
+    <None Include="docs\Changelog.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

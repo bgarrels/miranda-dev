@@ -337,6 +337,7 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\changelog.txt" />
     <None Include="JSON_CAJUN\elements.inl" />
     <None Include="JSON_CAJUN\reader.inl" />
     <None Include="JSON_CAJUN\writer.inl" />

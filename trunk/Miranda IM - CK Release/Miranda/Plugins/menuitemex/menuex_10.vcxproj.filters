@@ -13,6 +13,9 @@
       <UniqueIdentifier>{520ce12c-5f98-47c6-a52a-2c46665efddd}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{273a6a04-ec17-44ae-8e64-066e467d6b90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="images.c">
@@ -40,5 +43,10 @@
     <ResourceCompile Include="resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\menuex_changelog.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
 </Project>

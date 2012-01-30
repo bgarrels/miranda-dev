@@ -382,13 +382,14 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="mcmenu.ico" />
-    <None Include="mcmenuof.ico" />
-    <None Include="meta_add.ico" />
-    <None Include="meta_convert.ico" />
-    <None Include="meta_edit.ico" />
-    <None Include="meta_remove2.ico" />
-    <None Include="meta_set_as_default.ico" />
+    <None Include="icons\mcmenu.ico" />
+    <None Include="icons\mcmenuof.ico" />
+    <None Include="icons\mcmenuoff2.ico" />
+    <None Include="icons\meta_add.ico" />
+    <None Include="icons\meta_convert.ico" />
+    <None Include="icons\meta_edit.ico" />
+    <None Include="icons\meta_remove2.ico" />
+    <None Include="icons\meta_set_as_default.ico" />
     <None Include="MetaContacts translations\metacontacts_template.txt" />
   </ItemGroup>
   <ItemGroup>
