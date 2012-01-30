@@ -261,6 +261,10 @@
     <ClInclude Include="commonheaders.h" />
     <ClInclude Include="skineditres.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\CHANGELOG" />
+    <None Include="docs\README" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
