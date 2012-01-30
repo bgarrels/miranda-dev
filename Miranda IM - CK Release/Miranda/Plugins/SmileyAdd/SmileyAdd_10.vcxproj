@@ -272,6 +272,7 @@
     <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\smileyadd_screenshot.jpg" />
     <None Include="RES\smiley.ico" />
     <None Include="docs\smileyadd_msl_specification.txt" />
     <None Include="docs\smileyadd_readme.txt" />

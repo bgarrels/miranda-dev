@@ -16,9 +16,6 @@
     <Filter Include="Docs">
       <UniqueIdentifier>{62573765-3bc2-4ca1-b4f4-934ae7b401f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="API">
-      <UniqueIdentifier>{75062870-e04c-48c9-a669-e98ec83b6f05}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\bitmap_funcs.cpp">
@@ -52,18 +49,6 @@
     </ClInclude>
     <ClInclude Include="src\resource.h">
       <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\splash.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_folders.h">
-      <Filter>API</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_splash.h">
-      <Filter>API</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_updater.h">
-      <Filter>API</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

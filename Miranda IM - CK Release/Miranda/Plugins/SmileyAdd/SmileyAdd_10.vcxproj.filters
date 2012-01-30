@@ -144,5 +144,8 @@
     <None Include="docs\smileyadd_translation.txt">
       <Filter>Documents</Filter>
     </None>
+    <None Include="docs\smileyadd_screenshot.jpg">
+      <Filter>Documents</Filter>
+    </None>
   </ItemGroup>
 </Project>

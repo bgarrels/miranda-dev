@@ -316,6 +316,10 @@
     <ClInclude Include="simplestatusmsg.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\simplestatusmsg-changelog.txt" />
+    <None Include="docs\simplestatusmsg-license.txt" />
+    <None Include="docs\simplestatusmsg-readme.txt" />
+    <None Include="docs\simplestatusmsg-translation.txt" />
     <None Include="res\cbook.ico" />
     <None Include="res\copy.ico" />
     <None Include="res\cross.ico" />
