@@ -35,4 +35,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\CHANGELOG">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="docs\README">
+      <Filter>Docs</Filter>
+    </None>
+  </ItemGroup>
 </Project>

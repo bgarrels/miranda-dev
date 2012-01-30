@@ -13,6 +13,9 @@
       <UniqueIdentifier>{56ec564b-af99-40f8-ae70-af5307bdc3f5}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{e5998d51-2964-4a9f-a9d9-923e4ad41fc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="contacts.cpp">
@@ -57,5 +60,13 @@
     <CustomBuild Include="res\SendContacts.ico">
       <Filter>Resource Files</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\readme_contacts.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\langpack_contacts.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
 </Project>

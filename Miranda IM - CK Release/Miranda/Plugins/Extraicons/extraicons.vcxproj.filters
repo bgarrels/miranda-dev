@@ -86,6 +86,9 @@
     <None Include="Docs\langpack_extraicons.txt">
       <Filter>Docs</Filter>
     </None>
+    <None Include="Docs\extraicons.png">
+      <Filter>Docs</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">

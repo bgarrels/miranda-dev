@@ -13,7 +13,7 @@
       <UniqueIdentifier>{0c22408f-3e3b-4310-970e-525e94308c9d}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-    <Filter Include="Other">
+    <Filter Include="docs">
       <UniqueIdentifier>{072cb5e6-88d2-4b64-a2ee-b49ae44f8b49}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -97,8 +97,8 @@
     <None Include="res\watch.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="changelog.txt">
-      <Filter>Other</Filter>
+    <None Include="docs\changelog.txt">
+      <Filter>docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
