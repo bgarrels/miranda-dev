@@ -2,7 +2,7 @@
 #define _XMLDATA_INC
 
 #include "options.h"
-#include "bzip2-1.0.3/bzlib.h"
+#include "bzip2-1.0.6/bzlib.h"
 #include "utils.h"
 #include "popups.h"
 #include "services.h"

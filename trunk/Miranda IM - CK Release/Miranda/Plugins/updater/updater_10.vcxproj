@@ -234,7 +234,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>zbin;../../include;bzip2-1.0.3;zbin\minizip;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>zbin;../../include;bzip2-1.0.6;zbin\minizip;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BZ_NO_STDIO;HAVE_BZIP2;WIN32;NDEBUG;_UNICODE;UNICODE;_WINDOWS;_USRDLL;UPDATER_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
@@ -279,6 +279,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="allocations.cpp" />
+    <ClCompile Include="bzip2-1.0.6\blocksort.c" />
+    <ClCompile Include="bzip2-1.0.6\bzlib.c" />
+    <ClCompile Include="bzip2-1.0.6\compress.c" />
+    <ClCompile Include="bzip2-1.0.6\crctable.c" />
+    <ClCompile Include="bzip2-1.0.6\decompress.c" />
+    <ClCompile Include="bzip2-1.0.6\huffman.c" />
+    <ClCompile Include="bzip2-1.0.6\randtable.c" />
     <ClCompile Include="conf_comp_dialog.cpp" />
     <ClCompile Include="conf_dialog.cpp" />
     <ClCompile Include="extern.cpp" />
@@ -294,13 +301,6 @@
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="xmldata.cpp" />
     <ClCompile Include="ezxml.c" />
-    <ClCompile Include="bzip2-1.0.3\blocksort.c" />
-    <ClCompile Include="bzip2-1.0.3\bzlib.c" />
-    <ClCompile Include="bzip2-1.0.3\compress.c" />
-    <ClCompile Include="bzip2-1.0.3\crctable.c" />
-    <ClCompile Include="bzip2-1.0.3\decompress.c" />
-    <ClCompile Include="bzip2-1.0.3\huffman.c" />
-    <ClCompile Include="bzip2-1.0.3\randtable.c" />
     <ClCompile Include="zbin\minizip\ioapi.c" />
     <ClCompile Include="zbin\minizip\ioapi_mem.c" />
     <ClCompile Include="zbin\minizip\unzip.c" />
@@ -308,6 +308,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\ExternalAPI\m_updater.h" />
     <ClInclude Include="allocations.h" />
+    <ClInclude Include="bzip2-1.0.6\bzlib.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="conf_comp_dialog.h" />
     <ClInclude Include="conf_dialog.h" />
@@ -325,8 +326,6 @@
     <ClInclude Include="version.h" />
     <ClInclude Include="xmldata.h" />
     <ClInclude Include="ezxml.h" />
-    <ClInclude Include="bzip2-1.0.3\bzlib.h" />
-    <ClInclude Include="bzip2-1.0.3\bzlib_private.h" />
     <ClInclude Include="zbin\minizip\ioapi.h" />
     <ClInclude Include="zbin\minizip\unzip.h" />
   </ItemGroup>
