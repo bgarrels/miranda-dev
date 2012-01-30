@@ -9,9 +9,6 @@
       <UniqueIdentifier>{b87dc5b7-8e8e-49a1-8291-b27797a443b7}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
-    <Filter Include="Header Files\Other">
-      <UniqueIdentifier>{6428b706-fb32-4704-bb58-7accb6169106}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{ac500f7b-22cc-423c-a5e9-35da455c5e6a}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
@@ -22,49 +19,49 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="clist.c">
+    <ClCompile Include="src\clist.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="colorchooser.c">
+    <ClCompile Include="src\colorchooser.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="log.c">
+    <ClCompile Include="src\log.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.c">
+    <ClCompile Include="src\main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="manager.c">
+    <ClCompile Include="src\manager.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="message.c">
+    <ClCompile Include="src\message.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="options.c">
+    <ClCompile Include="src\options.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="richutil.c">
+    <ClCompile Include="src\richutil.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="services.c">
+    <ClCompile Include="src\services.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tools.c">
+    <ClCompile Include="src\tools.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="window.c">
+    <ClCompile Include="src\window.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="chat.h">
+    <ClInclude Include="src\chat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="richutil.h">
+    <ClInclude Include="src\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files\Other</Filter>
+    <ClInclude Include="src\richutil.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -193,7 +190,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Chat.rc">
+    <ResourceCompile Include="src\chat.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

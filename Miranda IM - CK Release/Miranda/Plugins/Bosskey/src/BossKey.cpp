@@ -20,7 +20,6 @@
 #include "BossKey.h"
 #include "m_updater.h"
 #include "m_msg_buttonsbar.h"
-#include "..\StopSpam+\res\version.h"
 
 // multiple instances support:
 // when hotkey is hit, handler notifies all listen windows
