@@ -45,6 +45,9 @@
     <Filter Include="Toolkit Files">
       <UniqueIdentifier>{8a30217b-8369-4504-a6b0-5cd09f8b95a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{643f706f-a7cb-4208-b4f1-34a63c4ae188}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\FreeImage\BitmapAccess.cpp">
@@ -521,6 +524,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Todo.txt" />
+    <None Include="docs\Todo.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\license-fi.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\license-gpl.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
 </Project>
