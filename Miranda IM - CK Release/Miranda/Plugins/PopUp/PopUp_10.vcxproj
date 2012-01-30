@@ -375,7 +375,6 @@
     <None Include="res\resize.ico" />
     <None Include="res\warning.ico" />
     <None Include="docs\Changelog.txt" />
-    <None Include="docs\todo.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
