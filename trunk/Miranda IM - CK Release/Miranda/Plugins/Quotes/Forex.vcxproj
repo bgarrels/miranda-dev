@@ -295,7 +295,13 @@
     <None Include="res\Section.ico" />
     <None Include="res\swap.ico" />
     <None Include="res\up.ico" />
-    <None Include="ReadMe.txt" />
+    <None Include="Utility\DukasCopy.py" />
+    <None Include="Utility\Dukascopy.xml" />
+    <None Include="Utility\Google.py" />
+    <None Include="Utility\google.xml" />
+    <None Include="Utility\GoogleFinance.xml" />
+    <None Include="Utility\Quotes_Readme.txt" />
+    <None Include="Utility\Yahoo.xml" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Forex.rc" />

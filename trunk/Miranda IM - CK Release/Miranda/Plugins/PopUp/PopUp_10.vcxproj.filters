@@ -305,9 +305,6 @@
     <None Include="docs\Changelog.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="docs\todo.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\whatsnew.txt">
       <Filter>docs</Filter>
     </None>

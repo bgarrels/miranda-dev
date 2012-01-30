@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{4a0c264c-6d92-4d16-9bb8-4a51c3b1e4c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base64.cpp">
@@ -295,9 +298,29 @@
     <None Include="res\up.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ReadMe.txt" />
     <None Include="res\swap.ico">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Utility\Google.py">
+      <Filter>Utility</Filter>
+    </None>
+    <None Include="Utility\google.xml">
+      <Filter>Utility</Filter>
+    </None>
+    <None Include="Utility\GoogleFinance.xml">
+      <Filter>Utility</Filter>
+    </None>
+    <None Include="Utility\Quotes_Readme.txt">
+      <Filter>Utility</Filter>
+    </None>
+    <None Include="Utility\Yahoo.xml">
+      <Filter>Utility</Filter>
+    </None>
+    <None Include="Utility\DukasCopy.py">
+      <Filter>Utility</Filter>
+    </None>
+    <None Include="Utility\Dukascopy.xml">
+      <Filter>Utility</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
