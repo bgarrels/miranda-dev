@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{221dc5bf-caee-4de6-9bce-905e6127ca13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Version.h">
@@ -34,5 +37,10 @@
     <ClCompile Include="Src\TranslitSwitcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Docs\Readme.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
 </Project>

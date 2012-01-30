@@ -27,14 +27,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="SDK">
-      <UniqueIdentifier>{ea8b021b-f82f-4940-933d-15d813da6e9b}</UniqueIdentifier>
+    <Filter Include="docs">
+      <UniqueIdentifier>{66f24aab-55d6-4378-8ae9-5c2aef7512a6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SDK\custom">
-      <UniqueIdentifier>{d6379ec6-1149-4532-a9db-682f7754188b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SDK\miranda">
-      <UniqueIdentifier>{708cc988-cbf7-4f8b-aa0e-cec18af48b54}</UniqueIdentifier>
+    <Filter Include="sounds">
+      <UniqueIdentifier>{571080aa-5d49-4a75-aba7-3affcdba5b8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -355,159 +352,6 @@
     <ClInclude Include="Res\version.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\m_addcontact.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_avatars.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_awaymsg.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_button.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_chat.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_clc.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_clist.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_clistint.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_clui.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_contactdir.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_contacts.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_database.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_email.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_file.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_findadd.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_fontservice.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_fuse.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_genmenu.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_history.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_icolib.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_icq.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_idle.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_ignore.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_imgsrvc.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_langpack.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_message.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_netlib.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_options.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_plugins.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_png.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_protocols.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_protomod.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_protosvc.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_skin.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_system.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_system_cpp.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_url.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_userinfo.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\m_utils.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\newpluginapi.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\statusmodes.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\win2k.h">
-      <Filter>SDK\miranda</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_db3xsa.h">
-      <Filter>SDK\custom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_flags.h">
-      <Filter>SDK\custom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_MagneticWindows.h">
-      <Filter>SDK\custom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_metacontacts.h">
-      <Filter>SDK\custom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_popup2.h">
-      <Filter>SDK\custom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_toolbar.h">
-      <Filter>SDK\custom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_toptoolbar.h">
-      <Filter>SDK\custom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_updater.h">
-      <Filter>SDK\custom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_userinfoex.h">
-      <Filter>SDK\custom</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Res\default.ico">
@@ -516,19 +360,26 @@
     <None Include="Res\dragcopy.cur">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Res\lstFolder.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="Res\main.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Res\sendmail.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="changelog.txt" />
-    <None Include="docs\todo.txt" />
     <None Include="Res\flags.png">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\uinfoex_translate.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\changelog.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="sounds\birthday.wav">
+      <Filter>sounds</Filter>
+    </None>
+    <None Include="sounds\birthdaycoming.wav">
+      <Filter>sounds</Filter>
+    </None>
+    <None Include="sounds\reminder.wav">
+      <Filter>sounds</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
