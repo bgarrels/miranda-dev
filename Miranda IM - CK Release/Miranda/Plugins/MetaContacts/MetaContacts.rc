@@ -148,8 +148,8 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_SYS_DEFAULT
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_MCMENU              ICON                    "mcmenu.ico"
-IDI_MCMENUOFF           ICON                    "mcmenuof.ico"
+IDI_MCMENU              ICON                    "icons/mcmenu.ico"
+IDI_MCMENUOFF           ICON                    "icons/mcmenuof.ico"
 #endif    // Neutral (Sys. Default) resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -313,11 +313,11 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_MCEDIT              ICON                    "meta_edit.ico"
-IDI_MCREMOVE            ICON                    "meta_remove2.ico"
-IDI_MCCONVERT           ICON                    "meta_convert.ico"
-IDI_MCADD               ICON                    "meta_add.ico"
-IDI_MCSETDEFAULT        ICON                    "meta_set_as_default.ico"
+IDI_MCEDIT              ICON                    "icons/meta_edit.ico"
+IDI_MCREMOVE            ICON                    "icons/meta_remove2.ico"
+IDI_MCCONVERT           ICON                    "icons/meta_convert.ico"
+IDI_MCADD               ICON                    "icons/meta_add.ico"
+IDI_MCSETDEFAULT        ICON                    "icons/meta_set_as_default.ico"
 #endif    // English (Australia) resources
 /////////////////////////////////////////////////////////////////////////////
 

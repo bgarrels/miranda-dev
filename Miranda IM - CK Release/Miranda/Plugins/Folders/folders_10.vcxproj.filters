@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{056d6086-1631-4fd6-8daa-372ab824d401}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dlg_handlers.cpp">
@@ -59,9 +62,6 @@
     <ClInclude Include="hooked_events.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="m_folders.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -87,6 +87,8 @@
     <None Include="variablesHelp.inc">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="docs\folders_readme.txt" />
+    <None Include="docs\folders_readme.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
 </Project>

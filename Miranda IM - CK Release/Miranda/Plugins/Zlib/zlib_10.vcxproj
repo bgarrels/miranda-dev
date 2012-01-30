@@ -311,6 +311,8 @@
     <ResourceCompile Include="zlib.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\ChangeLog" />
+    <None Include="docs\README" />
     <None Include="zlib.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
