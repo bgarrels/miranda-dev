@@ -13,6 +13,9 @@
       <UniqueIdentifier>{a800d3aa-15e0-4d7d-8b9f-99dfd4112d8e}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{87a13262-76e5-44db-a161-381427b7dd29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="file.c">
@@ -54,7 +57,14 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="seen_info.txt" />
-    <None Include="seen_langpack.txt" />
+    <None Include="docs\seen_info.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\seen_langpack.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\readme_src.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
 </Project>

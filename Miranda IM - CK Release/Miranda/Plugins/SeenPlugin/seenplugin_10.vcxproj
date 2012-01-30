@@ -363,8 +363,9 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="seen_info.txt" />
-    <None Include="seen_langpack.txt" />
+    <None Include="docs\readme_src.txt" />
+    <None Include="docs\seen_info.txt" />
+    <None Include="docs\seen_langpack.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
