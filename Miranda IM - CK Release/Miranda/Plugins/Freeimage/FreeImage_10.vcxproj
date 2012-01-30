@@ -458,7 +458,9 @@
     <ClInclude Include="Miranda\version.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Todo.txt" />
+    <None Include="docs\license-fi.txt" />
+    <None Include="docs\license-gpl.txt" />
+    <None Include="docs\Todo.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
