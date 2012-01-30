@@ -273,9 +273,9 @@
     <ClInclude Include="Version.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\dbeditorpp_readme.txt" />
+    <None Include="docs\dbeditorpp_translation.txt" />
     <None Include="res\Contacts.ico" />
-    <None Include="dbeditorpp_readme.txt" />
-    <None Include="dbeditorpp_translation.txt" />
     <None Include="res\dbepp.ico" />
     <None Include="res\handle.ico" />
     <None Include="res\Icon_1.ico" />

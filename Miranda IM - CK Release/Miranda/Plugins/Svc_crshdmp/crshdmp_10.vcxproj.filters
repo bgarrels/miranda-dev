@@ -78,23 +78,23 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Vi show.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Vi to clipboard.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Vi to file.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Vi upload.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Vi.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="crshdmp_readme.txt">
+    <None Include="docs\crshdmp_readme.txt">
       <Filter>docs</Filter>
+    </None>
+    <None Include="icons\Vi show.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icons\Vi to clipboard.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icons\Vi to file.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icons\Vi upload.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icons\Vi.ico">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>
