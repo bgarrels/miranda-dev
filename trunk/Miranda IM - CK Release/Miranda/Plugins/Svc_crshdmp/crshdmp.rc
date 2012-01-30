@@ -151,7 +151,7 @@ BEGIN
             VALUE "FileDescription", "Crash Dumper plugin for Miranda IM "
             VALUE "FileVersion", __VERSION_STRING
             VALUE "InternalName", "svc_crshdmp"
-            VALUE "LegalCopyright", "Copyright© 2008 - 2010 Boris Krasnovskiy All Rights Reserved"
+            VALUE "LegalCopyright", "Copyright© 2008 - 2012 Boris Krasnovskiy All Rights Reserved"
             VALUE "OriginalFilename", "svc_crshdmp.dll"
             VALUE "ProductName", "Crash Dumper"
             VALUE "ProductVersion", __VERSION_STRING
@@ -171,11 +171,11 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_VI                  ICON                    "Vi.ico"
-IDI_VISHOW              ICON                    "Vi show.ico"
-IDI_VITOCLIP            ICON                    "Vi to clipboard.ico"
-IDI_VITOFILE            ICON                    "Vi to file.ico"
-IDI_VIUPLOAD            ICON                    "Vi upload.ico"
+IDI_VI                  ICON                    "icons\Vi.ico"
+IDI_VISHOW              ICON                    "icons\Vi show.ico"
+IDI_VITOCLIP            ICON                    "icons\Vi to clipboard.ico"
+IDI_VITOFILE            ICON                    "icons\Vi to file.ico"
+IDI_VIUPLOAD            ICON                    "icons\Vi upload.ico"
 #endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
 

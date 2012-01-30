@@ -248,12 +248,12 @@
     <ResourceCompile Include="crshdmp.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Vi show.ico" />
-    <None Include="Vi to clipboard.ico" />
-    <None Include="Vi to file.ico" />
-    <None Include="Vi upload.ico" />
-    <None Include="Vi.ico" />
-    <None Include="crshdmp_readme.txt" />
+    <None Include="docs\crshdmp_readme.txt" />
+    <None Include="icons\Vi show.ico" />
+    <None Include="icons\Vi to clipboard.ico" />
+    <None Include="icons\Vi to file.ico" />
+    <None Include="icons\Vi upload.ico" />
+    <None Include="icons\Vi.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

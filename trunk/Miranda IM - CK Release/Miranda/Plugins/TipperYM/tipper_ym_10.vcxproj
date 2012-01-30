@@ -300,6 +300,19 @@
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\autoexec_tipper_items_cz.ini" />
+    <None Include="docs\autoexec_tipper_items_eng.ini" />
+    <None Include="docs\sample skin\preview.jpg" />
+    <None Include="docs\sample skin\xpmc.tsf" />
+    <None Include="docs\sample skin\xpmc_bg.png" />
+    <None Include="docs\sample skin\xpmc_sidebar.png" />
+    <None Include="docs\tipper classic\back.png" />
+    <None Include="docs\tipper classic\classic.tsf" />
+    <None Include="docs\tipper classic\preview.jpg" />
+    <None Include="docs\tipper_licence.txt" />
+    <None Include="docs\tipper_orig_readme.txt" />
+    <None Include="docs\tipper_readme.txt" />
+    <None Include="docs\tipper_skins.txt" />
     <None Include="res\apply.ico" />
     <None Include="res\arrow_down.ico" />
     <None Include="res\arrow_up.ico" />

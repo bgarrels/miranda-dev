@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{e075a301-4e26-4475-a17a-629195e65b43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="docs\tipper classic">
+      <UniqueIdentifier>{75bc1c24-42ed-4663-9965-0d79690ba9d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="docs\sample skin">
+      <UniqueIdentifier>{d2494fb7-de8a-4ad6-b9e8-4eee0882b963}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bitmap_func.cpp">
@@ -114,6 +123,45 @@
     </None>
     <None Include="res\separator.ico">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\tipper_licence.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\tipper_orig_readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\tipper_readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\tipper_skins.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\autoexec_tipper_items_cz.ini">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\autoexec_tipper_items_eng.ini">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\sample skin\preview.jpg">
+      <Filter>docs\sample skin</Filter>
+    </None>
+    <None Include="docs\sample skin\xpmc.tsf">
+      <Filter>docs\sample skin</Filter>
+    </None>
+    <None Include="docs\sample skin\xpmc_bg.png">
+      <Filter>docs\sample skin</Filter>
+    </None>
+    <None Include="docs\sample skin\xpmc_sidebar.png">
+      <Filter>docs\sample skin</Filter>
+    </None>
+    <None Include="docs\tipper classic\back.png">
+      <Filter>docs\tipper classic</Filter>
+    </None>
+    <None Include="docs\tipper classic\classic.tsf">
+      <Filter>docs\tipper classic</Filter>
+    </None>
+    <None Include="docs\tipper classic\preview.jpg">
+      <Filter>docs\tipper classic</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

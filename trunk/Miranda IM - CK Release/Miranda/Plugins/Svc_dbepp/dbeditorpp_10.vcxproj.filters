@@ -19,6 +19,9 @@
       <UniqueIdentifier>{fb09bf3d-d973-466d-b87b-0b785885753b}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{6d73329b-8be7-468f-9599-ce318603b6df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="exportimport.cpp">
@@ -91,12 +94,6 @@
     <None Include="res\Contacts.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="dbeditorpp_readme.txt">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="dbeditorpp_translation.txt">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\Icon_1.ico">
       <Filter>Resource Files</Filter>
     </None>
@@ -147,6 +144,12 @@
     </None>
     <None Include="res\usermenu.ico">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\dbeditorpp_translation.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\dbeditorpp_readme.txt">
+      <Filter>docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
