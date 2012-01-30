@@ -10,7 +10,7 @@
 
 */
 
-#if (defined(_WIN32) && !defined(_CRT_SECURE_NO_WARNINGS))
+#if (defined(_WIN32))
         #define _CRT_SECURE_NO_WARNINGS
 #endif
 
@@ -32,22 +32,11 @@ long call_zseek64 (const zlib_filefunc64_32_def* pfilefunc,voidpf filestream, ZP
         return (*(pfilefunc->zfile_func64.zseek64_file)) (pfilefunc->zfile_func64.opaque,filestream,offset,origin);
     else
     {
-		if (origin == ZLIB_FILEFUNC_SEEK_SET)
-		{
-			uLong offsetTruncated = (uLong)offset;
-			if (offsetTruncated != offset)
-				return -1;
-			else
-				return (*(pfilefunc->zseek32_file))(pfilefunc->zfile_func64.opaque,filestream,offsetTruncated,origin);
-		}
-		else
-		{
-			long offsetTruncated = (long)(__int64)offset;
-			if (offsetTruncated != (__int64)offset)
-				return -1;
-			else
-				return (*(pfilefunc->zseek32_file))(pfilefunc->zfile_func64.opaque,filestream,offsetTruncated,origin);
-		}
+        uLong offsetTruncated = (uLong)offset;
+        if (offsetTruncated != offset)
+            return -1;
+        else
+            return (*(pfilefunc->zseek32_file))(pfilefunc->zfile_func64.opaque,filestream,offsetTruncated,origin);
     }
 }
 
