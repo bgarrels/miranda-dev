@@ -13,6 +13,9 @@
       <UniqueIdentifier>{c5545a4e-6cc9-4e0a-90c8-55b21f2510f4}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{5053f2b0-c799-43ae-ac4a-ca14c2628fe5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bitmap_funcs.cpp">
@@ -55,21 +58,33 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="fltcnt.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
     <ResourceCompile Include="Script.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+    <ResourceCompile Include="fltcnt.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="hide.ico">
+    <None Include="docs\fltcontacts_readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\fltcontacts_russian_langpack.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\fltcontacts_langpack.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\Readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="icons\show.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="show.ico">
+    <None Include="icons\hide.ico">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

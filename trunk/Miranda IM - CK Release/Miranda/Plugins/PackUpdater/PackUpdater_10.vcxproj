@@ -244,6 +244,12 @@
     <ClCompile Include="Src\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Docs\Langpack.txt" />
+    <None Include="Docs\Readme_eng.txt" />
+    <None Include="Docs\Readme_rus.txt" />
+    <None Include="Docs\Templates\Autoexec_PackUpdater.ini" />
+    <None Include="Docs\Templates\File1.ini" />
+    <None Include="Docs\ToDo.txt" />
     <None Include="res\btnClose.ico" />
     <None Include="res\btnOk.ico" />
     <None Include="res\delete.ico" />

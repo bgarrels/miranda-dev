@@ -270,6 +270,7 @@
     <ClInclude Include="Version.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\changelog.txt" />
     <None Include="res\add.ico" />
     <None Include="res\apply.ico" />
     <None Include="res\clear.ico" />
@@ -289,7 +290,6 @@
     <None Include="res\undo.ico" />
     <None Include="res\unset.ico" />
     <None Include="res\watch.ico" />
-    <None Include="changelog.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="cslist.rc" />
