@@ -1011,7 +1011,7 @@ local int unz64local_GetCurrentFileInfoInternal (unzFile file,
 
     if ((err==UNZ_OK) && (file_info.size_file_extra != 0))
     {
-		uLong acc = 0;
+                                uLong acc = 0;
 
         // since lSeek now points to after the extra field we need to move back
         lSeek -= file_info.size_file_extra;
@@ -1027,7 +1027,7 @@ local int unz64local_GetCurrentFileInfoInternal (unzFile file,
         while(acc < file_info.size_file_extra)
         {
             uLong headerId;
-			uLong dataSize;
+                                                uLong dataSize;
 
             if (unz64local_getShort(&s->z_filefunc, s->filestream,&headerId) != UNZ_OK)
                 err=UNZ_ERRNO;

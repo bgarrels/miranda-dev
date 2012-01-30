@@ -56,7 +56,7 @@
   #define fseeko64 _fseeki64
  #else // old MSC
   #define ftello64 ftell
-  #define fseeko64(a, b, c) fseek(a, (long)b, c)
+  #define fseeko64 fseek
  #endif
 #endif
 #endif
