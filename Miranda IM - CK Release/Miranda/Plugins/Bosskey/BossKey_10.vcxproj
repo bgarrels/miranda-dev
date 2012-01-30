@@ -305,6 +305,9 @@
     <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\bosskey_plus_langpack.txt" />
+    <None Include="docs\bosskey_plus_license.txt" />
+    <None Include="docs\bosskey_plus_readme.txt" />
     <None Include="icos\logo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
