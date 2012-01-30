@@ -72,27 +72,6 @@
     <ClCompile Include="ezxml.c">
       <Filter>ezxml</Filter>
     </ClCompile>
-    <ClCompile Include="bzip2-1.0.3\blocksort.c">
-      <Filter>bzip2</Filter>
-    </ClCompile>
-    <ClCompile Include="bzip2-1.0.3\bzlib.c">
-      <Filter>bzip2</Filter>
-    </ClCompile>
-    <ClCompile Include="bzip2-1.0.3\compress.c">
-      <Filter>bzip2</Filter>
-    </ClCompile>
-    <ClCompile Include="bzip2-1.0.3\crctable.c">
-      <Filter>bzip2</Filter>
-    </ClCompile>
-    <ClCompile Include="bzip2-1.0.3\decompress.c">
-      <Filter>bzip2</Filter>
-    </ClCompile>
-    <ClCompile Include="bzip2-1.0.3\huffman.c">
-      <Filter>bzip2</Filter>
-    </ClCompile>
-    <ClCompile Include="bzip2-1.0.3\randtable.c">
-      <Filter>bzip2</Filter>
-    </ClCompile>
     <ClCompile Include="zbin\minizip\ioapi.c">
       <Filter>minizip</Filter>
     </ClCompile>
@@ -101,6 +80,27 @@
     </ClCompile>
     <ClCompile Include="zbin\minizip\unzip.c">
       <Filter>minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2-1.0.6\randtable.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2-1.0.6\huffman.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2-1.0.6\crctable.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2-1.0.6\bzlib.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2-1.0.6\decompress.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2-1.0.6\compress.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2-1.0.6\blocksort.c">
+      <Filter>bzip2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,12 +158,6 @@
     <ClInclude Include="ezxml.h">
       <Filter>ezxml</Filter>
     </ClInclude>
-    <ClInclude Include="bzip2-1.0.3\bzlib.h">
-      <Filter>bzip2</Filter>
-    </ClInclude>
-    <ClInclude Include="bzip2-1.0.3\bzlib_private.h">
-      <Filter>bzip2</Filter>
-    </ClInclude>
     <ClInclude Include="zbin\minizip\ioapi.h">
       <Filter>minizip</Filter>
     </ClInclude>
@@ -172,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ExternalAPI\m_updater.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bzip2-1.0.6\bzlib.h">
+      <Filter>bzip2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
