@@ -119,6 +119,9 @@
     <ClCompile Include="Src\Layoutproc.cpp" />
     <ClCompile Include="Src\TranslitSwitcher.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Docs\Readme.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
