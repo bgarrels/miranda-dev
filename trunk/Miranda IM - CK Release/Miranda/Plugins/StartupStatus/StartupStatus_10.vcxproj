@@ -254,7 +254,6 @@
     <ClCompile Include="toolbars.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ExternalAPI\m_statusplugins.h" />
     <ClInclude Include="commonstatus.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="startupstatus.h" />

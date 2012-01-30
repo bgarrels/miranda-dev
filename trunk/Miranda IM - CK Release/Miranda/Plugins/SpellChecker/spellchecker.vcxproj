@@ -311,6 +311,7 @@
     <ClInclude Include="hunspell\w_char.hxx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Docs\spellchecker.png" />
     <None Include="res\no_spellcheck.ico" />
     <None Include="res\spellcheck.ico" />
     <None Include="res\unknown.ico" />

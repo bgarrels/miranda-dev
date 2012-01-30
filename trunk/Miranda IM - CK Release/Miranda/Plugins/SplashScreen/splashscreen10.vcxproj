@@ -236,13 +236,9 @@
     <ClCompile Include="src\splash.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ExternalAPI\m_folders.h" />
-    <ClInclude Include="..\..\ExternalAPI\m_splash.h" />
-    <ClInclude Include="..\..\ExternalAPI\m_updater.h" />
     <ClInclude Include="src\bitmap_funcs.h" />
     <ClInclude Include="src\debug.h" />
     <ClInclude Include="src\headers.h" />
-    <ClInclude Include="src\splash.h" />
     <ClInclude Include="src\version.h" />
     <ClInclude Include="src\resource.h" />
   </ItemGroup>

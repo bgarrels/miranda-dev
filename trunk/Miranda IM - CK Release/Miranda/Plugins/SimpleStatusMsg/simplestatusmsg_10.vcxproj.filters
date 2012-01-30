@@ -13,6 +13,9 @@
       <UniqueIdentifier>{7e43c061-a674-474a-98d1-e3a91ea453d4}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{2a35c978-e676-42aa-8879-acf3e5ddec28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="awaymsg.cpp">
@@ -69,6 +72,18 @@
     </None>
     <None Include="res\plus.ico">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\simplestatusmsg-license.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\simplestatusmsg-readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\simplestatusmsg-translation.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\simplestatusmsg-changelog.txt">
+      <Filter>docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

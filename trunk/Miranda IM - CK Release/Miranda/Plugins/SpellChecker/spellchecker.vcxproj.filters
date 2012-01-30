@@ -131,6 +131,9 @@
     <None Include="Docs\spellchecker_version.txt">
       <Filter>Docs</Filter>
     </None>
+    <None Include="Docs\spellchecker.png">
+      <Filter>Docs</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
