@@ -57,7 +57,7 @@ d) Submit a bugreport.
 4. Compatibility issues
 -----------------------
 Miranda IM supports all released versions of Windows from
-Windows 95 to Windows 7. Beta versions are not supported.
+Windows 95 to Windows 7.
 
 a) Windows 95
 
