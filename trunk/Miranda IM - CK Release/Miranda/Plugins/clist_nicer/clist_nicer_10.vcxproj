@@ -286,6 +286,7 @@
     <ClInclude Include="INCLUDE\rowheight_funcs.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\README.SOURCE" />
     <None Include="res\accounts.ico" />
     <None Include="res\addgoupp.ico" />
     <None Include="res\arrow-down.ico" />
