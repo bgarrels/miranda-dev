@@ -307,6 +307,9 @@
     <None Include="docs\Skinning.HOWTO">
       <Filter>Docs</Filter>
     </None>
+    <None Include="docs\README.SOURCE">
+      <Filter>Docs</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
