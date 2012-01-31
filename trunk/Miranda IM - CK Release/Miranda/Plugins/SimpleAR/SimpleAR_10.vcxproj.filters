@@ -26,10 +26,10 @@
     <ClInclude Include="Src\Common.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
+    <ClInclude Include="Src\Resource.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="Version.h">
+    <ClInclude Include="Src\Version.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
@@ -42,10 +42,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resource.rc">
+    <ResourceCompile Include="Src\Resource.rc">
       <Filter>Resource</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="Version.rc">
+    <ResourceCompile Include="Src\Version.rc">
       <Filter>Resource</Filter>
     </ResourceCompile>
   </ItemGroup>

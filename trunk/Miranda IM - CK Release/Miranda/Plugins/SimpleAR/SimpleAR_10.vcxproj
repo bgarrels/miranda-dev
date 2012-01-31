@@ -254,16 +254,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Common.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="Version.h" />
+    <ClInclude Include="Src\Resource.h" />
+    <ClInclude Include="Src\Version.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Res\Off.ico" />
     <None Include="Res\On.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resource.rc" />
-    <ResourceCompile Include="Version.rc" />
+    <ResourceCompile Include="Src\Resource.rc" />
+    <ResourceCompile Include="Src\Version.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
