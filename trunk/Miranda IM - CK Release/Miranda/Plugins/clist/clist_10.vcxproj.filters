@@ -13,41 +13,44 @@
       <UniqueIdentifier>{97bb8e2e-2508-4f05-bdcf-376efae7e97c}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{8947178f-f38a-45e3-bb58-d0e58ad9f484}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="clcfonts.c">
+    <ClCompile Include="src\clcfonts.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="clcopts.c">
+    <ClCompile Include="src\clcopts.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="clcpaint.c">
+    <ClCompile Include="src\clcpaint.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="clistmenus.c">
+    <ClCompile Include="src\clistmenus.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="clistopts.c">
+    <ClCompile Include="src\clistopts.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cluiopts.c">
+    <ClCompile Include="src\cluiopts.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="commonheaders.c">
+    <ClCompile Include="src\commonheaders.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="init.c">
+    <ClCompile Include="src\init.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="clc.h">
+    <ClInclude Include="src\clc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="commonheaders.h">
+    <ClInclude Include="src\commonheaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="src\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -64,9 +67,18 @@
     <None Include="res\hyperlin.cur">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="docs\clist-readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\clist-translation.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\clist-license.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resource.rc">
+    <ResourceCompile Include="src\resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
