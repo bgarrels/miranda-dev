@@ -1,6 +1,594 @@
-                   Miranda Instant Messenger Change Log
-                   ------------------------------------
-                           www.miranda-im.org
+				   Miranda Instant Messenger Changelogs
+				   ------------------------------------
+						   www.miranda-im.org
+
+
+* New in 0.9.42
+Bugfixes:
+ – Fixed Shift-Enter new line behavior in messaging window
+ – Improved UPnP port mapping behavior
+ – MSN: Fixed login issues
+ – MSN: Improved nick name display in chat rooms
+ – MSN: Improved connection handling
+ – MSN: Removed media sharing popup
+
+
+ * New in 0.9.41
+ Bugfixes:
+ – Fix boot ini processing logic
+ – Gadu-Gadu: Fixed ignoring rich text messages
+ – Gadu-Gadu: Improved blocking/ignoring system
+ – Jabber: Minor fix for the Jabber account item
+ – MSN: Fixed connecting state issue
+
+
+ * New in 0.9.40
+ Bugfixes:
+ – Jabber: Fixed ignore roster group option (fixes Facebook group issues)
+ – MSN: Fixed connecting state issue
+ – Gadu-Gadu: Improved client detection
+
+
+ * New in 0.9.39
+ Bugfixes:
+ – UPnP failed on some routers
+
+
+ * New in 0.9.38
+ Bugfixes:
+ – Profile manager doesn’t react to changes in subfolders
+ – Jabber: Fix rare crash
+ – MSN: Do not transition to idle if you are away
+
+
+ * New in 0.9.37
+ Bugfixes:
+ – Fixed tray balloon notifications
+ – Jabber: Fixed GTalk status message
+
+
+ * New in 0.9.36
+ – Fixed disabling hotkey issue
+ – Fixed icon blinking
+ – Jabber: Fixed inability login into Away with GTalk
+ – MSN: Fixed contact jumping out of group
+ – MSN: Fixed issues with multiple instances
+ – MSN: Improved error notifications
+
+
+ * New in 0.9.35
+ Bugfixes:
+ – Fixed message sending retry issues
+ – AIM: Fixed memory leak
+ – AIM: Improved error notifications
+ – ICQ: Fixed user info update
+ – MSN: Fixed avatar/file transfer with WLM 2011
+ – MSN: Fixed url reset when transitioning from old version
+
+
+ * New in 0.9.34
+ Bugfixes:
+ – AIM: Improved avatar support
+ – MSN: Improved group chat entry UI
+ – MSN: Fixed issue with one-to-one chats
+ – Jabber: GTalk improvements with status modes
+
+
+ * New in 0.9.33
+ Bugfixes:
+ – Jabber: Fixed disconnection issue with compressed connections
+ – Yahoo: File transfer fixes
+
+
+ * New in 0.9.32
+ Bugfixes:
+ – Jabber: Fixed disconnection issue with compressed connections
+ – Yahoo: File transfer fixes
+
+
+ * New in 0.9.31
+ Bugfixes:
+ – Minor display issue
+ – MSN: Fixes for file transfers
+ – MSN: Fixed receiving messages from Yahoo contacts
+
+
+ * New in 0.9.30
+ Bugfixes:
+ – Fixed search by name
+ – Fixed UTF-8 language packs
+ – Fixed issue with options ok/cancel buttons
+ – Gadu-Gadu: Fixed setting and fetching avatar
+ – Gadu-Gadu: Fixed setting and fetching user details
+ – ICQ: Fixed client detection
+ – Jabber: Fixed font settings
+ – Jabber: Fixed XMPP server list retrieval
+ – Jabber: Fixed roster group setup for Facebook accounts
+ – Jabber: Privacy list UI was shown when not supported
+ – MSN: Fixed user not online issue
+
+
+ * New in 0.9.29
+ Bugfixes:
+ – Improved IE autoproxy connectivity
+ – Fixed crash in image services
+ – ICQ: Fix issues with XStatus
+ – MSN: Fixed crash on custom smiley transfer
+ – MSN: Fixed Disable Popups checkbox
+ – MSN: Fixed crash when contact specifies avatar with improperly encoded hash
+ – MSN: Fixed crash on direct transfer with older clients
+ – MSN: Fixed nickname update
+ – Yahoo: Fixed version display
+
+
+ * New in 0.9.28
+ Enhancements:
+ – MSN: Update WLM protocol
+
+Bugfixes:
+ – Fixed XML parser causing issues with protocols
+ – Fixed memory leaks
+
+
+ * New in 0.9.27
+ Bugfixes:
+ – Fixed time display when Disable Automatic daylight correction checkbox in Windows is cleared
+ – Fixed show time different from current time
+ – Fixed pressing button with space
+ – Fixed utf8 langpacks and ansi translations
+ – Fixed error notifications when protocols are offline
+ – MSN: Fixed connectivity issues
+
+
+ * New in 0.9.26
+ Bugfixes:
+ – Fixed time display when Disable Automatic daylight correction checkbox in Windows is cleared
+ – Fixed show time different from current time
+ – Fixed pressing button with space
+ – Fixed utf8 langpacks and ansi translations
+ – Fixed error notifications when protocols are offline
+ – MSN: Fixed connectivity issues
+
+
+ * New in 0.9.25
+ Enhancements:
+ – Jabber: Added the special field for the alternative nick in Jabber groupchats
+
+Bugfixes:
+ – Minor crash issue under Wine
+ – ICQ: Minor spelling mistake
+ – Jabber: Translation issues
+
+
+ * New in 0.9.24
+ Enhancements:
+ – Added installer option to install contrib (extra) plugins
+
+Bugfixes:
+ – Time zone improvements
+ – Minor alignment issue in message window
+ – Gadu-Gadu: Fixed bug that allowed invite your own contact to a conference
+ – ICQ: Password dialog fixes
+ – ICQ: X Status improvments
+ – Jabber: Fixed moving to group
+
+
+ * New in 0.10.0 Alpha Build #2 
+ - new feature in the language packs: plugin’s specific translations;
+ - merge of the whole bunch of fixed added to the stable version;
+ - minor improvements for Jabber & ICQ protocols
+
+
+ * New in 0.9.23
+ Bugfixes:
+ – Minor display issues
+ – Jabber: Added support for old style plain authentication for Google Apps accounts and pre 2.1 versions of ejabberd
+
+
+ * New in 0.9.22
+ Bugfixes:
+ – Version displayed incorrectly
+ – Jabber: Fixed XMPP roster editor export XML UTF-8 encoding
+
+
+ * New in 0.9.21
+ Bugfixes:
+ – Check DNS SRV records in priority order (Fixes login server issues)
+ – Fix incorrect status mesage display in chat window
+ – Fix broken display in font options
+ – Jabber: Keep alive option works with XMPP ping
+ – Jabber: Fix memory leaks
+ – Jabber: Fix possible crash
+
+
+ * New in 0.9.20
+ Bugfixes:
+ – Fixed status message window title
+ – Improved idle detection
+ – Fixed rare crash in file transfers
+ – Gadu-Gadu: Fixed disconnect and message duplication issue
+ – Jabber: Fixed possible crash
+ – Yahoo: Fixed avatar retrieval
+
+
+ * New in 0.9.19
+ Bugfixes:
+ – Fixed connection with some broken proxies
+ – Fixed link to bug tracker
+ – Gadu-Gadu: Fixed SSL connection issue in x64 version
+ – IRC: Fixed ansi build issues
+ – Jabber: Fixed handling caps for clients with no cap node in presence
+
+
+ * New in 0.9.18
+ Bugfixes:
+ – Fixed shutdown after resume hibernate
+ – Fixed tab autocompletion in multi-user chats
+ – Gadu-Gadu: Fixed showing correct status of your own contact
+ – Jabber: Fixed status message notification in chat window
+ – Jabber: Fix for proper extended status handling
+ – Jabber: Fixed conference topic display
+ – MSN: Fixed idle handling
+ – MSN: Nickname wasn’t displayed for added contact
+ – Yahoo: Fixed adding contact to the list
+
+
+ * New in 0.9.18 Beta #1
+ Bugfixes:
+ - Fixed shutdown after resume hibernate
+ – Fixed tab autocompletion in multi-user chats
+ – Gadu-Gadu: Fixed showing correct status of your own contact
+ – Jabber: Fixed status message notification in chat window
+ – Jabber: Fix for proper extended status handling
+ – Jabber: Fixed conference topic display
+ – MSN: Fixed idle handling
+ – MSN: Nickname wasn’t displayed for added contact
+
+
+ * New in 0.9.17
+ Enhancements:
+ – Gadu-Gadu: Use core SSL support
+
+Bugfixes:
+ – Fixed unneeded crypt32 loading
+ – Fixed account disabling confirmation
+ – Fixed crash on exit when the account manager window is opened
+ – Gadu-Gadu: Fixed memory leaks
+ – ICQ: Fixed sending unicode messages
+ – Jabber: Fixed adding contacts
+ – Jabber: Fixed chat room issues
+ – MSN: Status change fixes
+ – MSN: Fixed idle handling
+
+
+ * New in 0.9.17 Beta #1
+ Enhancements:
+ – Gadu-Gadu: Use core SSL support
+
+Bugfixes:
+ – Fixed unneeded crypt32 loading
+ – Fixed account disabling confirmation
+ – Fixed crash on exit when the account manager window is opened
+ – Gadu-Gadu: Fixed memory leaks
+ – ICQ: Fixed sending unicode messages
+ – Jabber: Fixed adding contacts
+ – Jabber: Fixed chat room issues
+ – MSN: Status change fixes
+ – MSN: Fixed idle handling
+
+
+ * New in 0.9.16
+Bugfixes:
+ – Fixed minor UI issue in read status message dialog
+ – Removed unused text from auth request dialog
+ – Gadu-Gadu: Fixed file transfers with GG 8.x/10.x
+ – Gadu-Gadu: Fixed cancelling outgoing file transfer while waiting for acceptance
+ – ICQ: Fixed adding contacts to server list
+ – Jabber: Fixed the caps calculation problems for the XMPP file sending
+ – Yahoo: Fixed inability to create avatar cache folderh
+
+
+ * New in 0.9.15
+ Bugfixes:
+ – ICQ: HTML decoding issues
+ – MSN: Fixed possible crash
+
+
+ * New in 0.9.14
+ Enhancements:
+ – Configurable timeout for http requests
+ – ICQ: Improved client detection
+ – IRC: Added support for extra variables
+ – Jabber: Added option to disable version
+
+Bugfixes:
+ – AIM: Disabled SSL for mail connection
+ – ICQ: Fixed password limitation issues
+ – ICQ: Fixed message timeouts
+ – IRC: Fixed memory leak
+ – Jabber: Fixed Jabber GSSAPI authentication
+ – Jabber: Fixed transport not supporting Skype transport with icons
+ – Jabber: Fixed when contact added on the root level nick is lost
+ – Jabber: Fixed the client’s icon in Jabber user info
+ – Jabber: Fixed age calculation in Jabber user info
+ – MSN: Fixed invisibility issues
+ – MSN: Fixed double status change
+
+
+ * New in 0.9.13
+ Bugfixes:
+ – Closing Find/Add Contacts caused crash
+ – Enter on options search closed options
+ – ICQ: Added hints on password limiation to options
+
+
+ * New in 0.9.12
+ Bugfixes:
+ – Fixed UPnP for some routers
+ – Fixed UPnP port forwarding
+ – Fixed possible crash in file transfers window
+ – AIM: Fixed crash when server not available
+ – Gadu-Gadu: Improvements to the image dialog window
+ – Gadu-Gadu: Fixed fetching avatars
+ – Gadu-Gadu: Fixed search results encoding
+ – ICQ: Improved client detection
+ – ICQ: Fixed bug in client detection of Qnext v4
+ – IRC: Improved Ident implementation
+ – Jabber: Fixed changing status in jabber group chat
+ – MSN: Fixes for bogus address book URL stuck in database
+
+
+ * New in 0.9.12 Beta #1
+ Bugfixes:
+ - N/A
+
+
+ * New in 0.9.11
+ Bugfixes:
+ – Fixed 401 HTTP authentication
+ – Show Status Changes option is not maintained (srmm only)
+ – ICQ: Added automatic server upgrade for server migration
+ – ICQ: Fix rare crash
+ – ICQ: Fixed authorization requests
+ – IRC: DCC fixes
+ – Jabber: Updated GTalk default server settings
+
+
+ * New in 0.9.11 Beta #1
+ Bugfixes:
+ - N/A
+
+
+ * New in 0.9.10
+ Bugfixes:
+ – Fixed memory leaks
+ – ICQ: Fixed connection issues
+ – Jabber: Fixed account manager dialog to not allow manually setting SSL/TLS flag for the GTalk accounts
+
+
+ * New in 0.9.9
+ Bugfixes:
+ – Fixed scrolling issues with smilies (srmm only)
+ – Fixed url processing (srmm only)
+ – Fixed search logic with old protocols
+ – Fixed crash with autocomplete in chat window
+ – Fixed taskbar blinking when hiding contact list
+ – Improved HTTP authentication support
+ – AIM: Fixed error message on closing system buddy window
+ – ICQ: SSL fixes
+ – ICQ: Fixed status message unrequested change
+ – Jabber: Improved support for Jabber services
+ – MSN: Fixed QuotaLimitExceeded issue
+ – MSN: Fixes for contact addition
+ – MSN: Fixed avatar transfer
+ – Yahoo: Fixed setting avatar
+
+
+ * New in 0.9.9 Beta #1
+ Bugfixes:
+ - N/A
+
+
+ * New in 0.9.8
+ Enhancements:
+ – Improved method selection for proxy authentication
+ – Jabber: Added SMS service support
+
+Bugfixes:
+ – HTTP authentication fixes
+ – Fixed SPN resolution for Kerberos authentication
+ – Fixed auto scroll if log is focused (srmm only)
+ – Fixed message window blinking even if focused (srmm only)
+ – ICQ: Fixed retrieving user details deleting status message
+ – ICQ: Fixed read status dialog
+ – ICQ: Fixed default settings for SSL connection
+ – Jabber: Hide custom search option if no interface is available
+ – MSN: Fixed offline messaging
+
+
+ * New in 0.9.7
+ - N/A
+
+
+ * New in 0.9.6
+ Bugfixes:
+ – Fixed crash on failed http connection
+ – ICQ: Prevent user from setting free for chat message
+
+
+ * New in 0.9.5
+ Enhancements:
+ – Added ability to paste files into the message window
+ – Improved UPnP performance
+
+Bugfixes:
+ – Fixed crashes with OS older than Windows 2000
+ – Fixed log scrolling down on message reception
+ – ICQ: Fixed large icon retrieval
+ – ICQ: Fixed not setting all the contacts offline on connection failure
+ – IRC: Removed warning when manually going offline
+ – IRC: Fixed connect on start failure
+ – IRC: Fixed status handling on disconnect
+ – Jabber: Fixed icon in group chat invitation
+ – Jabber: Full XEP-0118 “User tune” conformance
+ – Yahoo: Fixed random crash
+
+
+ * New in 0.9.5 Beta #2
+ Bugfixes:
+ - N/A
+
+
+ * New in 0.9.5 Beta #1
+  Bugfixes:
+ - N/A
+
+
+ * New in 0.9.4 
+ Enhancements:
+ – Added skinnable sound for message sending error
+ – Added display of current contact time in message status bar
+ – AIM: Added support for strike-thru formatting
+
+Bugfixes:
+ – Fixed message window auto close
+ – Fixed message window input area focus issue
+ – Fixed typing notifications
+ – Improved time zone estimation from GMT offset
+ – HTTP gateway improvements
+ – Fixed proxy authentication issues
+ – AIM: Improved processing of XHTML
+ – ICQ: Fixed ICQ statuses
+ – ICQ: Fixed file transfer with UPnP router
+ – ICQ: Fix for hang on exit
+ – ICQ: Fixed crash in SSL mode
+ – ICQ: Fixed HTTP gateway disconnect issues
+ – ICQ: Fixed inability to connect when SSL and HTTP proxy selected
+ – IRC: Fix for wrong IRC status
+ – Jabber: Fixed memory leak
+ – Jabber: Fixed profile manager UI issues
+ – Jabber: Fix for groupchat’s nick extraction
+ – Jabber: Fixed password encryption
+ – Jabber: Account registration does not abort on inability to establish TLS connection
+ – Yahoo: Improved sound registration
+
+
+ * New in 0.9.4 Beta #2
+ Bugfixes:
+ - N/A
+
+
+ * New in 0.9.4 Beta #1
+ Bugfixes:
+ - N/A
+
+
+ * New in 0.10.0 Alpha Build #1
+ Bugfixes:
+ -  0.10.0.1 incorporates all bugfixes committed into the trunk since the 0.9.x release
+
+
+ * New in 0.9.3
+ Bugfixes:
+ - N/A
+
+
+ * New in 0.9.3 Beta #2
+ Bugfixes:
+ - N/A
+
+
+* New in 0.9.3. Beta #1
+Bugfixes:
+- N/A
+
+
+* New in 0.9.2
+Bugfixes:
+ – Fixed database upgrade logic
+ – IRC: Fixed possible crash
+ – Jabber: Can’t send messages on non-English language
+
+
+ * New in 0.9.1
+ Enhancements:
+ – Improved profile upgrade path logic
+
+Bugfixes:
+ – Fixed plugin file names
+ – AIM: Fixed possible crash
+ – IRC: Fixed crash on nick change
+
+
+ * New in 0.9.0
+ Enhancements:
+ – New improved protocols engine with full Unicode support
+ – New high quality icon theme
+ – Dynamic protocol’s menu creation
+ – New Unicode-aware profile manager
+ – Added the first official 64-bit core version
+ – Added 32×32 pixels icons support
+ – Added Windows 7 taskbar icon support
+ – Added full Unicode file transfers
+ – Added the Unicode search capability
+ – Added the Unicode status messages processing
+ – Added menu option to move all protocol menus to the status bar
+ – Added SSL certificate validation
+ – Added ability to transfer files longer than 4 GB
+ – Added support for HTTP 1.1 persistent connections including persistent HTTP proxy connections
+ – Added support for HTTP SPINEGO (Negotiate) authentication
+ – Added support for Internet Explorer proxy settings usage including proxy auto configuration scripts
+ – Added transparent HTTP proxy/server authentication if possible (no user settings needed)
+ – Jabber: Added GSSAPI authentication
+ – Jabber: Added API for the second-level Jabber subplugins
+ – Jabber: Added ability to transfer files longer than 4 GB
+ – Gadu-Gadu: Brought back and improved SSL support (still requires OpenSSL)
+ – Gadu-Gadu: The complete avatars support
+ – Gadu-Gadu: Custom profile folders plugin support for avatars and images
+ – Gadu-Gadu: Added support for changing status by the user simultaneously logged on using different Miranda account or IM client
+ – Gadu-Gadu: Improved showing links from unknown contacts
+ – Gadu-Gadu: Split the protocol menu into two popup menus when it’s moved to the status bar
+ – MSN: Added ability to transfer files longer than 4 GB
+ – MSN: Added automatic connection method selection
+ – YAHOO: Improved the login procedure
+
+Bugfixes:
+ – IRC: Fixed crash in file transfers
+ – Jabber: Fixed group chat affiliation issue
+ – Gadu-Gadu: Fixed setting status without status message
+ – Gadu-Gadu: Fixed changing status while connecting
+ – Gadu-Gadu: Fixed status mode/message change issue for yourself added to the contact list
+ – Gadu-Gadu: Auto reconnect did not work in some cases
+ – Gadu-Gadu: Improved thread safety
+ – Gadu-Gadu: Fixed network logging
+ – Gadu-Gadu: Fixed memory leaks
+
+
+ * New in 0.9.0 Beta #4
+ Bugfixes:
+ - Beta #4 includes some bug fixes from beta #3. It is recommended that all users of 0.9.0 beta #3 or earlier upgrade to the latest version.
+
+
+ * New in 0.9.0. Beta #3
+ Bugfixes:
+ - Beta #3 includes some bug fixes from beta #2. It is recommended that all users of 0.9.0 beta #2 or earlier upgrade to the latest version.
+
+
+ * New in 0.9.0 Beta #2
+ Bugfixes:
+ - Beta #2 includes some bug fixes from beta #1. It is recommended that all users of 0.9.0 beta #1 upgrade to the latest version.
+
+
+ * New in 0.9.0 Beta #1
+ Bugfixes:
+ - This is the first beta release of Miranda IM 0.9. Please test this release as it is considered release quality. Report any issues you may find to the bug tracker.
+
+
+ * New in 0.9.0 Build #12
+ Bugfixes + Enhancements:
+ - miranda databases are stored now inside the profile directory;
+ - strongly redesigned Unicode profile manager, with the support for the Unicode profile’s names;
+ - numerous big & small bug fixes.
 
 
 * New in 0.8.27

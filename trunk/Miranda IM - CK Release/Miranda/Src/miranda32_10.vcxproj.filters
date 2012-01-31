@@ -103,6 +103,9 @@
     <Filter Include="Resources Files">
       <UniqueIdentifier>{dcc9b0d7-b335-458b-ac09-6cc6cf55e397}</UniqueIdentifier>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{5a8e2bde-a5db-4e07-83a8-7cac99982901}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\m_addcontact.h">
@@ -649,9 +652,6 @@
     <None Include="res\contact_view_details.ico">
       <Filter>Resources Files</Filter>
     </None>
-    <None Include="..\docs\contributors.txt">
-      <Filter>Resources Files</Filter>
-    </None>
     <None Include="res\cursor_drag_copy.cur">
       <Filter>Resources Files</Filter>
     </None>
@@ -789,6 +789,24 @@
     </None>
     <None Include="res\status_user_online.ico">
       <Filter>Resources Files</Filter>
+    </None>
+    <None Include="..\Docs\license.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="..\Docs\mirandaboot.ini">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="..\Docs\readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="..\Docs\autoexec_sample.ini">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="..\Docs\changelog.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="..\Docs\contributors.txt">
+      <Filter>docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
