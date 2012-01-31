@@ -15,47 +15,47 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="commonheaders.c">
+    <ClCompile Include="src\commonheaders.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="database.c">
+    <ClCompile Include="src\database.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbcache.c">
+    <ClCompile Include="src\dbcache.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbcontacts.c">
+    <ClCompile Include="src\init.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbevents.c">
+    <ClCompile Include="src\dbcontacts.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbheaders.c">
+    <ClCompile Include="src\dbevents.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbmodulechain.c">
+    <ClCompile Include="src\dbheaders.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbsettings.c">
+    <ClCompile Include="src\dbmodulechain.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="encrypt.c">
+    <ClCompile Include="src\dbsettings.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="init.c">
+    <ClCompile Include="src\encrypt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="commonheaders.h">
+    <ClInclude Include="src\commonheaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="database.h">
+    <ClInclude Include="src\database.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resource.rc">
+    <ResourceCompile Include="src\resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
