@@ -18,43 +18,38 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="file.c">
+    <ClCompile Include="src\file.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="history.c">
+    <ClCompile Include="src\history.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.c">
+    <ClCompile Include="src\main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="menu.c">
+    <ClCompile Include="src\menu.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="missed.c">
+    <ClCompile Include="src\missed.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="options.c">
+    <ClCompile Include="src\options.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="userinfo.c">
+    <ClCompile Include="src\userinfo.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils.c">
+    <ClCompile Include="src\utils.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="src\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="seen.h">
+    <ClInclude Include="src\seen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="resource.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\seen_info.txt">
@@ -66,5 +61,10 @@
     <None Include="docs\readme_src.txt">
       <Filter>docs</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
