@@ -91,7 +91,7 @@
       <Optimization>MaxSpeed</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>sqlite3;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32_WINNT=0x0500;DBRW_OLD_PLUGINAPI_SUPPORT;NO_TCL;WIN32;NDEBUG;_WINDOWS;_USRDLL;DBRW_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -243,18 +243,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="contacts.c" />
-    <ClCompile Include="dbrw.c" />
-    <ClCompile Include="events.c" />
-    <ClCompile Include="settings.c" />
-    <ClCompile Include="sql.c" />
-    <ClCompile Include="utils.c" />
     <ClCompile Include="sqlite3\sqlite3.c" />
+    <ClCompile Include="src\contacts.c" />
+    <ClCompile Include="src\dbrw.c" />
+    <ClCompile Include="src\events.c" />
+    <ClCompile Include="src\settings.c" />
+    <ClCompile Include="src\sql.c" />
+    <ClCompile Include="src\utils.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dbrw.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="sqlite3\sqlite3.h" />
+    <ClInclude Include="src\dbrw.h" />
+    <ClInclude Include="src\resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\License.txt" />
+    <None Include="docs\Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

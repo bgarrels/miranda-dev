@@ -9,46 +9,57 @@
       <UniqueIdentifier>{afe7f4fa-5483-4fe4-b7cb-b31fad078cba}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
-    <Filter Include="SQLite">
-      <UniqueIdentifier>{9e3e754a-6129-45e8-bfe7-c3a788a4024d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{13fbe9ae-cbdc-4555-8c51-b1e902e67621}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{e0eb4955-e208-4145-9948-c1739e54b606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SQLite3">
+      <UniqueIdentifier>{9e3e754a-6129-45e8-bfe7-c3a788a4024d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="contacts.c">
+    <ClCompile Include="src\contacts.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbrw.c">
+    <ClCompile Include="src\dbrw.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="events.c">
+    <ClCompile Include="src\events.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="settings.c">
+    <ClCompile Include="src\settings.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sql.c">
+    <ClCompile Include="src\sql.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils.c">
+    <ClCompile Include="src\utils.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sqlite3\sqlite3.c">
-      <Filter>SQLite</Filter>
+      <Filter>SQLite3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dbrw.h">
+    <ClInclude Include="src\dbrw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="src\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sqlite3\sqlite3.h">
-      <Filter>SQLite</Filter>
+      <Filter>SQLite3</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\Readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\License.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
 </Project>
