@@ -40,13 +40,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "m_hotkeys.h"
 #include "win2k.h"
 
+//ExternalApi 
 #include "m_updater.h"
 #include "m_toolbar.h"
 #include "m_sessions.h"
 
 #include "Utils.h"
-#include "../Version.h"
-#include "../Resource.h"
+#include "Version.h"
+#include "Resource.h"
 
 extern HANDLE hibChecked;
 extern HANDLE hibNotChecked;
