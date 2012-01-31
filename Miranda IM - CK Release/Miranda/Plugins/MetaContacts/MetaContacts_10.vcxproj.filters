@@ -13,57 +13,54 @@
       <UniqueIdentifier>{84e0cae3-d6a7-4792-a808-7c015ba5af98}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-    <Filter Include="translation template">
+    <Filter Include="docs">
+      <UniqueIdentifier>{eebd7dd9-ad3b-4cdf-9db2-88ffb9c9f996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="docs\translation template">
       <UniqueIdentifier>{2a22c3af-eea5-4684-9448-3cd39b21b0d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="addto.c">
+    <ClCompile Include="src\addto.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="edit.c">
+    <ClCompile Include="src\edit.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="icons.c">
+    <ClCompile Include="src\icons.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="meta_api.c">
+    <ClCompile Include="src\meta_api.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="meta_main.c">
+    <ClCompile Include="src\meta_main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="meta_menu.c">
+    <ClCompile Include="src\meta_menu.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="meta_options.c">
+    <ClCompile Include="src\meta_options.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="meta_services.c">
+    <ClCompile Include="src\meta_services.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="meta_utils.c">
+    <ClCompile Include="src\meta_utils.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="m_metacontacts.h">
+    <ClInclude Include="src\metacontacts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="metacontacts.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="version.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="include\resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="MetaContacts translations\metacontacts_template.txt">
-      <Filter>translation template</Filter>
-    </None>
     <None Include="icons\mcmenuof.ico">
       <Filter>Resource Files</Filter>
     </None>
@@ -87,6 +84,9 @@
     </None>
     <None Include="icons\mcmenu.ico">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\metacontacts_template.txt">
+      <Filter>docs\translation template</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

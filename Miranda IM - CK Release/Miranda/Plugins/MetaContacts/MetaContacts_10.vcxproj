@@ -150,7 +150,7 @@
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>metacontacts.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -289,99 +289,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="addto.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-    </ClCompile>
-    <ClCompile Include="edit.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-    </ClCompile>
-    <ClCompile Include="icons.c" />
-    <ClCompile Include="meta_api.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-    </ClCompile>
-    <ClCompile Include="meta_main.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Create</PrecompiledHeader>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">EnableFastChecks</BasicRuntimeChecks>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">Create</PrecompiledHeader>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">Create</PrecompiledHeader>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="meta_menu.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-    </ClCompile>
-    <ClCompile Include="meta_options.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-    </ClCompile>
-    <ClCompile Include="meta_services.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-    </ClCompile>
-    <ClCompile Include="meta_utils.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">WIN32;_DEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">EnableFastChecks</BasicRuntimeChecks>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</BrowseInformation>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">WIN32;NDEBUG;_WINDOWS;_USRDLL;METACONTACTS_EXPORTS;_MBCS;_WINDLL;_AFXDLL</PreprocessorDefinitions>
-    </ClCompile>
+    <ClCompile Include="src\addto.c" />
+    <ClCompile Include="src\edit.c" />
+    <ClCompile Include="src\icons.c" />
+    <ClCompile Include="src\meta_api.c" />
+    <ClCompile Include="src\meta_main.c" />
+    <ClCompile Include="src\meta_menu.c" />
+    <ClCompile Include="src\meta_options.c" />
+    <ClCompile Include="src\meta_services.c" />
+    <ClCompile Include="src\meta_utils.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="m_metacontacts.h" />
-    <ClInclude Include="metacontacts.h" />
-    <ClInclude Include="version.h" />
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="include\resource.h" />
+    <ClInclude Include="include\version.h" />
+    <ClInclude Include="src\metacontacts.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\metacontacts_template.txt" />
     <None Include="icons\mcmenu.ico" />
     <None Include="icons\mcmenuof.ico" />
     <None Include="icons\mcmenuoff2.ico" />
@@ -390,7 +314,6 @@
     <None Include="icons\meta_edit.ico" />
     <None Include="icons\meta_remove2.ico" />
     <None Include="icons\meta_set_as_default.ico" />
-    <None Include="MetaContacts translations\metacontacts_template.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetaContacts.rc" />

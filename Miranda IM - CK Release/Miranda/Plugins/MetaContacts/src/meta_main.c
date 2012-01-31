@@ -1,7 +1,7 @@
 /*
 MetaContacts Plugin for Miranda IM.
 
-Copyright © 2004 Universite Louis PASTEUR, STRASBOURG.
+Copyright © 2004-2012 Universite Louis PASTEUR, STRASBOURG.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -85,13 +85,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "metacontacts.h"
 
 // Use VersionNo.h to set the version number, and ensure resource file is not open
-#include "version.h"
+#include "../include/version.h"
 
 struct MM_INTERFACE mmi;
 BOOL os_unicode_enabled = FALSE;
 int hLangpack;
 
-//! Information gathered by Miranda, displayed in the plugin pane of the Option Dialog
+//! Information gathered by Miranda IM, displayed in the plugin pane of the Option Dialog
 PLUGININFOEX pluginInfo={
 	sizeof(PLUGININFOEX),
 	__PLUGIN_NAME,		// altered here and on file listing, so as not to match original
@@ -168,7 +168,7 @@ int __declspec(dllexport)Load(PLUGINLINK *link)
 	
 	pluginLink=link;
 
-    mir_getMMI(&mmi);
+	mir_getMMI(&mmi);
 	mir_getLP(&pluginInfo);
 
 	os_unicode_enabled = IsUnicodeOS();
