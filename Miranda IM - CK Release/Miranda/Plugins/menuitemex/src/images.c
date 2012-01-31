@@ -25,9 +25,9 @@ void HalfBitmap32Alpha(HBITMAP hBitmap)
 	GetBitmapBits(hBitmap, dwLen, p);
 
 	for (y = 0; y < bmp.bmHeight; ++y) {
-        BYTE *px = p + bmp.bmWidth * 4 * y;
+		BYTE *px = p + bmp.bmWidth * 4 * y;
 
-        for (x = 0; x < bmp.bmWidth; ++x) 
+		for (x = 0; x < bmp.bmWidth; ++x) 
 		{
 			px[3]>>=1;
 			px += 4;
@@ -88,9 +88,9 @@ void CorrectBitmap32Alpha(HBITMAP hBitmap, BOOL force)
 
 	fixIt = TRUE;
 	for (y = 0; fixIt && y < bmp.bmHeight; ++y) {
-        BYTE *px = p + bmp.bmWidth * 4 * y;
+		BYTE *px = p + bmp.bmWidth * 4 * y;
 
-        for (x = 0; fixIt && x < bmp.bmWidth; ++x) 
+		for (x = 0; fixIt && x < bmp.bmWidth; ++x) 
 		{
 			if (px[3] != 0 && !force) 
 			{
@@ -202,7 +202,7 @@ HBITMAP CopyBitmapTo32(HBITMAP hBitmap)
 
 BOOL MakeBitmap32(HBITMAP *hBitmap)
 {
-    BITMAP bmp;
+	BITMAP bmp;
 
 	GetObject(*hBitmap, sizeof(bmp), &bmp);
 
@@ -340,7 +340,7 @@ HICON BindOverlayIcon(HICON SourceIcon,LPCSTR OverlayIconName)
 	SelectObject(OverlayDC, OverlayIconInfo.hbmMask);
 
 	BitBlt(TargetDC, 0, 0, TargetBitmapInfo.bmWidth, TargetBitmapInfo.bmHeight,
-	       OverlayDC, 0, 0, SRCCOPY);
+		   OverlayDC, 0, 0, SRCCOPY);
 
 	TargetIcon = CreateIconIndirect(&TargetIconInfo);
 	DestroyIcon(TempIcon);

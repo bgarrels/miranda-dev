@@ -8,6 +8,8 @@
 #include <windows.h>
 #include "resource.h"
 #include <stdio.h>
+
+//Miranda IM
 #include "newpluginapi.h"
 #include "win2k.h"
 #include "m_system.h"
@@ -26,6 +28,8 @@
 #include "m_genmenu.h"
 #include "m_popup.h"
 #include "m_message.h"
+
+//ExternalApi
 #include "m_updater.h"
 #include "m_fingerprint.h"
 #include "m_metacontacts.h"

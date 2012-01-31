@@ -187,7 +187,7 @@
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>../../include;../../ExternalAPI</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;include;../../include;../../ExternalAPI</AdditionalIncludeDirectories>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -286,28 +286,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="images.c" />
-    <ClCompile Include="main.c">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Disabled</Optimization>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</BrowseInformation>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">Disabled</Optimization>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</BrowseInformation>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">MaxSpeed</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">MaxSpeed</Optimization>
-    </ClCompile>
-    <ClCompile Include="options.c">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Disabled</Optimization>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</BrowseInformation>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">Disabled</Optimization>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</BrowseInformation>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">MaxSpeed</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">MaxSpeed</Optimization>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="menuex.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="version.h" />
+    <ClCompile Include="src\images.c" />
+    <ClCompile Include="src\main.c" />
+    <ClCompile Include="src\options.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
@@ -317,6 +298,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\menuex_changelog.txt" />
+    <None Include="icons\Always Visible.ico" />
+    <None Include="icons\auth_added.ico" />
+    <None Include="icons\auth_ask.ico" />
+    <None Include="icons\change_proto.ico" />
+    <None Include="icons\CopyID_overlay.ico" />
+    <None Include="icons\copyip_overlay.ico" />
+    <None Include="icons\CopyMirVer.ico" />
+    <None Include="icons\hide_from_list.ico" />
+    <None Include="icons\Ignore_list.ico" />
+    <None Include="icons\msg_status.ico" />
+    <None Include="icons\msg_xStatus.ico" />
+    <None Include="icons\Never Visible.ico" />
+    <None Include="icons\recv_files.ico" />
+    <None Include="icons\salad.right.ico" />
+    <None Include="icons\show_in_list.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\images.h" />
+    <ClInclude Include="include\menuex.h" />
+    <ClInclude Include="include\version.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
