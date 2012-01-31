@@ -13,136 +13,82 @@
       <UniqueIdentifier>{ed6d6a77-6f3c-4512-afc9-7c872bee5ded}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{2f541412-afc3-4fa9-8ec9-a6cb71c09487}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cmdlist.c">
+    <ClCompile Include="src\cmdlist.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="globals.c">
+    <ClCompile Include="src\globals.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="msgdialog.c">
+    <ClCompile Include="src\msgdialog.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="msglog.c">
+    <ClCompile Include="src\msglog.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="msgoptions.c">
+    <ClCompile Include="src\msgoptions.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="msgs.c">
+    <ClCompile Include="src\msgs.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="msgtimedout.c">
+    <ClCompile Include="src\msgtimedout.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="richutil.c">
+    <ClCompile Include="src\richutil.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="srmm.c">
+    <ClCompile Include="src\srmm.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="statusicon.c">
+    <ClCompile Include="src\statusicon.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cmdlist.h">
+    <ClInclude Include="src\cmdlist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="commonheaders.h">
+    <ClInclude Include="src\commonheaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="globals.h">
+    <ClInclude Include="src\globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="msgs.h">
+    <ClInclude Include="src\msgs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="src\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="richutil.h">
+    <ClInclude Include="src\richutil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="statusicon.h">
+    <ClInclude Include="src\statusicon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Miranda-IM\res\addcontact.ico">
-      <Filter>Resource Files</Filter>
+    <None Include="Docs\srmm-readme.txt">
+      <Filter>docs</Filter>
     </None>
-    <None Include="..\..\src\res\addcontact.ico">
-      <Filter>Resource Files</Filter>
+    <None Include="Docs\srmm-translation.txt">
+      <Filter>docs</Filter>
     </None>
-    <None Include="res\Clock32.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Clock8.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Details32.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Details8.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\downarrow.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Downarrow32.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Downarrow8.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\dragcopy.cur">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\dragcopy.cur">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\src\res\dragcopy.cur">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\dropuser.cur">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\src\res\dropuser.cur">
-      <Filter>Resource Files</Filter>
+    <None Include="Docs\srmm-license.txt">
+      <Filter>docs</Filter>
     </None>
     <None Include="res\dropuser.cur">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\history.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\History32.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\History8.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\src\res\hyperlin.cur">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\hyperlin.cur">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\Miranda-IM\res\hyperlin.cur">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\incoming.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\multisend.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Multisend32.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Multisend8.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\notice.ico">
@@ -151,27 +97,12 @@
     <None Include="res\outgoing.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\Miranda-IM\res\rename.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\timestamp.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\typing.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Typing32.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Typing8.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\viewdetails.ico">
+    <None Include="res\dragcopy.cur">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resource.rc">
+    <ResourceCompile Include="src\resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
