@@ -2,7 +2,7 @@
 Chat module plugin for Miranda IM
 
 Copyright (C) 2003 Jörgen Persson
-Copyright 2003-2009 Miranda ICQ/IM project,
+Copyright 2003-2012 Miranda ICQ/IM project,
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#include "../commonheaders.h"
+#include "commonheaders.h"
 #include "chat.h"
 #include <math.h>
 #include <mbstring.h>
@@ -317,7 +317,7 @@ static void AddEventTextToBuffer(char **buffer, int *bufferEnd, int *bufferAlloc
 static void AddEventToBuffer(char **buffer, int *bufferEnd, int *bufferAlloced, LOGSTREAMDATA *streamData, TCHAR *pszNick)
 {
 
- 	if ( streamData && streamData->lin ) {
+	if ( streamData && streamData->lin ) {
 		switch ( streamData->lin->iType ) {
 		case GC_EVENT_MESSAGE:
 			if ( streamData->lin->ptszText ) {
@@ -343,7 +343,7 @@ static void AddEventToBuffer(char **buffer, int *bufferEnd, int *bufferAlloced, 
 		case GC_EVENT_JOIN:
 			if (pszNick) {
 				if (!streamData->lin->bIsMe)
-				 	Log_AppendRTF(streamData, TRUE, buffer, bufferEnd, bufferAlloced, TranslateT("%s has joined"), pszNick);
+					Log_AppendRTF(streamData, TRUE, buffer, bufferEnd, bufferAlloced, TranslateT("%s has joined"), pszNick);
 				else
 					Log_AppendRTF(streamData, TRUE, buffer, bufferEnd, bufferAlloced, TranslateT("You have joined %s"), streamData->si->ptszName);
 			}
@@ -410,7 +410,7 @@ static void AddEventTextToBufferIEView(TCHAR **buffer, int *bufferEnd, int *buff
 static void AddEventToBufferIEView(TCHAR **buffer, int *bufferEnd, int *bufferAlloced, LOGSTREAMDATA *streamData, TCHAR *pszNick)
 {
 
- 	if ( streamData && streamData->lin ) {
+	if ( streamData && streamData->lin ) {
 		switch ( streamData->lin->iType ) {
 		case GC_EVENT_MESSAGE:
 			if ( streamData->lin->ptszText ) {
@@ -436,7 +436,7 @@ static void AddEventToBufferIEView(TCHAR **buffer, int *bufferEnd, int *bufferAl
 		case GC_EVENT_JOIN:
 			if (pszNick) {
 				if (!streamData->lin->bIsMe)
-				 	Log_AppendIEView(streamData, TRUE, buffer, bufferEnd, bufferAlloced, TranslateT("%s has joined"), pszNick);
+					Log_AppendIEView(streamData, TRUE, buffer, bufferEnd, bufferAlloced, TranslateT("%s has joined"), pszNick);
 				else
 					Log_AppendIEView(streamData, TRUE, buffer, bufferEnd, bufferAlloced, TranslateT("You have joined %s"), streamData->si->ptszName);
 			}
@@ -884,7 +884,7 @@ char * Log_CreateRtfHeader(MODULEINFO * mi, SESSION_INFO* si)
 #if !defined ( _UNICODE )
 		if (si->windowData.codePage != CP_ACP) {
 			CHARSETINFO csi;
- 			if(TranslateCharsetInfo((DWORD*)si->windowData.codePage, &csi, TCI_SRCCODEPAGE)) {
+			if(TranslateCharsetInfo((DWORD*)si->windowData.codePage, &csi, TCI_SRCCODEPAGE)) {
 				forceCharset = TRUE;
 				charset = csi.ciCharset;
 			}

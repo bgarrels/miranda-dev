@@ -2,7 +2,7 @@
 Chat module plugin for Miranda IM
 
 Copyright (C) 2003 Jörgen Persson
-Copyright 2003-2009 Miranda ICQ/IM project,
+Copyright 2003-2012 Miranda IM project,
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#include "../commonheaders.h"
+#include "commonheaders.h"
 #include "chat.h"
 
 extern TCHAR* pszActiveWndID ;
@@ -786,28 +786,28 @@ char* SM_GetUsers(SESSION_INFO* si)
 
 SESSION_INFO* SM_FindSessionAutoComplete(const char* pszModule, SESSION_INFO* currSession, SESSION_INFO* prevSession, const TCHAR* pszOriginal, const TCHAR* pszCurrent)
 {
-        SESSION_INFO* pResult = NULL;
-        if (prevSession == NULL && my_strstri( currSession->ptszName, pszOriginal) == currSession->ptszName) {
-            pResult = currSession;
-        } else {
-            TCHAR* pszName = NULL;
-            SESSION_INFO* pTemp = m_WndList;
+		SESSION_INFO* pResult = NULL;
+		if (prevSession == NULL && my_strstri( currSession->ptszName, pszOriginal) == currSession->ptszName) {
+			pResult = currSession;
+		} else {
+			TCHAR* pszName = NULL;
+			SESSION_INFO* pTemp = m_WndList;
 			if (currSession == prevSession) {
 				pszCurrent = pszOriginal;
 			}
-            while (pTemp != NULL) {
-                    if (pTemp != currSession && !lstrcmpiA(pszModule, pTemp->pszModule)) {
-                            if ( my_strstri( pTemp->ptszName, pszOriginal) == pTemp->ptszName ) {
-                                    if ( prevSession != pTemp && lstrcmpi( pTemp->ptszName, pszCurrent ) > 0 && ( !pszName || lstrcmpi( pTemp->ptszName, pszName ) < 0) ) {
-                                            pResult = pTemp;
-                                            pszName = pTemp->ptszName;
-                                    }
-                            }
-                    }
-                    pTemp = pTemp->next;
-            }
-        }
-        return pResult;
+			while (pTemp != NULL) {
+					if (pTemp != currSession && !lstrcmpiA(pszModule, pTemp->pszModule)) {
+							if ( my_strstri( pTemp->ptszName, pszOriginal) == pTemp->ptszName ) {
+									if ( prevSession != pTemp && lstrcmpi( pTemp->ptszName, pszCurrent ) > 0 && ( !pszName || lstrcmpi( pTemp->ptszName, pszName ) < 0) ) {
+											pResult = pTemp;
+											pszName = pTemp->ptszName;
+									}
+							}
+					}
+					pTemp = pTemp->next;
+			}
+		}
+		return pResult;
 
 }
 

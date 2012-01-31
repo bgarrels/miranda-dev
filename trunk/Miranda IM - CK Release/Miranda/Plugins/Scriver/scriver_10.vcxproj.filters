@@ -22,53 +22,11 @@
     <Filter Include="Resource Files\chat">
       <UniqueIdentifier>{8caf6eda-a9d5-4a96-a8e4-4667b3ea8012}</UniqueIdentifier>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{5cbfee48-dd06-43d1-8cc0-8619749e6fbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cmdlist.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="globals.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="infobar.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="input.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="msgdialog.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="msglog.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="msgoptions.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="msgs.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="msgtimedout.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="msgwindow.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="richutil.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sendqueue.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="srmm.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="statusicon.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="utils.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="chat\clist.c">
       <Filter>Source Files\chat</Filter>
     </ClCompile>
@@ -99,289 +57,250 @@
     <ClCompile Include="chat\window.c">
       <Filter>Source Files\chat</Filter>
     </ClCompile>
+    <ClCompile Include="src\sendqueue.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\statusicon.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\srmm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cmdlist.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\globals.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\infobar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\input.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\msgdialog.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\msglog.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\msgoptions.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\msgtimedout.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\msgwindow.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\richutil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\msgs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cmdlist.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="commonheaders.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="infobar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="msgs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="msgwindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="multimon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="richutil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sendqueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="statusicon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="chat\chat.h">
       <Filter>Header Files\chat</Filter>
     </ClInclude>
+    <ClInclude Include="src\commonheaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\infobar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\msgwindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\multimon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\richutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Docs\scriver-license.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\scriver-readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\scriver-translation.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="res\chat\window.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\1.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\2.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\3.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\4.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\5.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\6.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\action.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\addmode.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\bkgcolor.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\bold.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\color.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\filter.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\filter2.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\info.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\italic.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\join.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\kick.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\nick.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\nicklist.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\nicklist2.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\notice.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\overlay.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\part.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\quit.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\removestatus.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\topic.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\topicbut.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
+    <None Include="res\chat\underline.ico">
+      <Filter>Resource Files\chat</Filter>
+    </None>
     <None Include="res\addcontact.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\src\res\addcontact.ico">
+    <None Include="res\ansi.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\Miranda-IM\res\addcontact.ico">
+    <None Include="res\bing.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\Clock32.ico">
+    <None Include="res\clock.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\Clock8.ico">
+    <None Include="res\closex.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\delete.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\src\res\delete.ico">
+    <None Include="res\details.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\Details32.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Details8.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\downarrow.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Downarrow32.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Downarrow8.ico">
+    <None Include="res\downarrow.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\dragcopy.cur">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\src\res\dragcopy.cur">
+    <None Include="res\foodnetwork.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\emptyblo.ico">
+    <None Include="res\google.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\src\res\emptyblo.ico">
+    <None Include="res\highlight.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\Miranda-IM\res\history.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\History32.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\History8.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\hyperlin.cur">
+    <None Include="res\history.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\hyperlin.cur">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\src\res\hyperlin.cur">
+    <None Include="res\message.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\incoming.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\multisend.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Multisend32.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Multisend8.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\notice.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\outgoing.ico">
+    <None Include="res\messageout.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\quote.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\Miranda-IM\res\rename.ico">
+    <None Include="res\send.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\send8.ico">
+    <None Include="res\smiley.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\smiley8.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\timestamp.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\typing.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Typing32.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Typing8.ico">
+    <None Include="res\typing.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\typingoff.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\typingon.ico">
+    <None Include="res\unicode.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\unicodeoff.ico">
+    <None Include="res\wikipedia.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\unicodeon.ico">
+    <None Include="res\yahoo.ico">
       <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\unknown.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Miranda-IM\res\viewdetails.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="chat\Icons\1.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\2.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\3.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\4.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\5.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\6.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\action.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\addmode.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\bkgcolor.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\bold.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\close.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\color.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\filter.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\filter2.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\highlight.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\history.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\info.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\italics.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\join.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\kick.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\message.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\messageout.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\nick.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\nicklist.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\nicklist2.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\notice.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\overlay.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\part.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\quit.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\removestatus.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\smiley.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\smileyc.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\topic.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\topicbut.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\underline.ico">
-      <Filter>Resource Files\chat</Filter>
-    </None>
-    <None Include="chat\Icons\window.ico">
-      <Filter>Resource Files\chat</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resource.rc">
+    <ResourceCompile Include="src\resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
