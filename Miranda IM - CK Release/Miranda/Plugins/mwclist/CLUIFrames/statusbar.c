@@ -1,4 +1,4 @@
-#include "../commonheaders.h"
+#include "commonheaders.h"
 
 extern HINSTANCE g_hInst;
 HANDLE hStatusBarShowToolTipEvent,hStatusBarHideToolTipEvent;
@@ -86,7 +86,7 @@ void DrawDataForStatusBar(LPDRAWITEMSTRUCT dis)
 	x=dis->rcItem.left+extraspace;
 
 	if(showOpts&1) 
-    {
+	{
 		if ((DBGetContactSettingByte(NULL,"CLUI","UseConnectingIcon",1)==1) && status < ID_STATUS_OFFLINE)
 		{
 			hIcon=(HICON)GetConnectingIconService((WPARAM)szProto,0);
@@ -111,10 +111,10 @@ void DrawDataForStatusBar(LPDRAWITEMSTRUCT dis)
 	if(showOpts&2) {
 		TCHAR szName[64];
 
-        PROTOACCOUNT* pa = ProtoGetAccount(szProto);
-        mir_sntprintf(szName, SIZEOF(szName), _T("%s%s"), pa->tszAccountName, showOpts&4 ? _T(" ") : _T(""));
+		PROTOACCOUNT* pa = ProtoGetAccount(szProto);
+		mir_sntprintf(szName, SIZEOF(szName), _T("%s%s"), pa->tszAccountName, showOpts&4 ? _T(" ") : _T(""));
 		GetTextExtentPoint32(dis->hDC, szName, (int)_tcslen(szName), &textSize);
-       
+	   
 		TextOut(dis->hDC,x,(dis->rcItem.top+dis->rcItem.bottom-textSize.cy)>>1,szName,lstrlen(szName));
 		x+=textSize.cx;
 	}
@@ -295,9 +295,9 @@ void DrawBackGround(HWND hwnd,HDC mhdc)
 }
 
 LRESULT CALLBACK StatusBarOwnerDrawProc(          HWND hwnd,
-    UINT uMsg,
-    WPARAM wParam,
-    LPARAM lParam
+	UINT uMsg,
+	WPARAM wParam,
+	LPARAM lParam
 )
 {
 if (UseOwnerDrawStatusBar)
@@ -400,7 +400,7 @@ LRESULT CALLBACK StatusHelperProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
 				if (pt.x==lastpnt.x&&pt.y==lastpnt.y)
 				{
 					{
-	 				int i,nParts;
+					int i,nParts;
 					ProtocolData *PD;
 					RECT rc;
 						ScreenToClient(pcli->hwndStatus,&pt);

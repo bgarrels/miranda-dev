@@ -20,7 +20,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#include "../commonheaders.h"
+#include "commonheaders.h"
 
 extern HINSTANCE g_hInst;
 
@@ -624,11 +624,11 @@ int LocateStorePosition(int Frameid,int maxstored)
 	int i;
 	LPTSTR frmname;
 	char settingname[255];
-    if(Frames[Frameid].name==NULL) return -1;
+	if(Frames[Frameid].name==NULL) return -1;
 
 	for(i=0;i<maxstored;i++) {
-        mir_snprintf(settingname,sizeof(settingname),"Name%d",i);
-        frmname=DBGetStringT(0,CLUIFrameModule,settingname);
+		mir_snprintf(settingname,sizeof(settingname),"Name%d",i);
+		frmname=DBGetStringT(0,CLUIFrameModule,settingname);
 		if(frmname==NULL) continue;
 		if(lstrcmpi(frmname,Frames[Frameid].name)==0) {
 			mir_free(frmname);
@@ -694,13 +694,13 @@ int CLUIFramesGetalClientFrame(void)
 		return alclientFrame;
 
   if(alclientFrame!=-1) {
-    /* this value could become invalid if RemoveItemFromList was called,
-     * so we double-check */
-    if (alclientFrame<nFramescount) {
-      if(Frames[alclientFrame].align==alClient) {
-        return alclientFrame;
-      }
-    }
+	/* this value could become invalid if RemoveItemFromList was called,
+	 * so we double-check */
+	if (alclientFrame<nFramescount) {
+	  if(Frames[alclientFrame].align==alClient) {
+		return alclientFrame;
+	  }
+	}
 }
 
 	for(i=0;i<nFramescount;i++)
@@ -1545,7 +1545,7 @@ INT_PTR CLUIFramesCollapseUnCollapseFrame(WPARAM wParam,LPARAM lParam)
 		  contwnd.top=contwnd.bottom-contwnd.top;//height
 		  contwnd.left=contwnd.right-contwnd.left;//width
 
-  		  contwnd.top-=(oldHeight-Frames[FrameId].height);//newheight
+		  contwnd.top-=(oldHeight-Frames[FrameId].height);//newheight
 		  SetWindowPos(Frames[FrameId].ContainerWnd,HWND_TOP,0,0,contwnd.left,contwnd.top,SWP_SHOWWINDOW|SWP_NOMOVE);
 		}
 		CLUIFramesStoreAllFrames();
@@ -1616,7 +1616,7 @@ static int CLUIFramesLoadMainMenu()
 
 	// create frames menu
 	separator=3000200000;
- 	for (i=0;i<nFramescount;i++) {
+	for (i=0;i<nFramescount;i++) {
 		mi.hIcon=Frames[i].TitleBar.hicon;
 		mi.flags=CMIF_CHILDPOPUP|CMIF_ROOTPOPUP|CMIF_TCHAR;
 		mi.position=separator;
@@ -1727,17 +1727,17 @@ INT_PTR CLUIFramesAddFrame(WPARAM wParam,LPARAM lParam)
 	}
 	Frames[nFramescount].dwFlags=clfrm->Flags;
 
-    if (clfrm->name==NULL||((clfrm->Flags&F_UNICODE) ? lstrlenW(clfrm->wname) : lstrlenA(clfrm->name))==0) {
-        Frames[nFramescount].name=(LPTSTR)malloc(255 * sizeof(TCHAR));
-        GetClassName(Frames[nFramescount].hWnd,Frames[nFramescount].name,255);
-    }
-    else
-        Frames[nFramescount].name=(clfrm->Flags&F_UNICODE) ? mir_u2t(clfrm->wname) : mir_a2t(clfrm->name);
-    if (IsBadCodePtr((FARPROC)clfrm->TBname) || clfrm->TBname==NULL
-        || ((clfrm->Flags&F_UNICODE) ? lstrlenW(clfrm->TBwname) : lstrlenA(clfrm->TBname)) == 0)
-        Frames[nFramescount].TitleBar.tbname=mir_tstrdup(Frames[nFramescount].name);
-    else
-        Frames[nFramescount].TitleBar.tbname=(clfrm->Flags&F_UNICODE) ? mir_u2t(clfrm->TBwname) : mir_a2t(clfrm->TBname);
+	if (clfrm->name==NULL||((clfrm->Flags&F_UNICODE) ? lstrlenW(clfrm->wname) : lstrlenA(clfrm->name))==0) {
+		Frames[nFramescount].name=(LPTSTR)malloc(255 * sizeof(TCHAR));
+		GetClassName(Frames[nFramescount].hWnd,Frames[nFramescount].name,255);
+	}
+	else
+		Frames[nFramescount].name=(clfrm->Flags&F_UNICODE) ? mir_u2t(clfrm->wname) : mir_a2t(clfrm->name);
+	if (IsBadCodePtr((FARPROC)clfrm->TBname) || clfrm->TBname==NULL
+		|| ((clfrm->Flags&F_UNICODE) ? lstrlenW(clfrm->TBwname) : lstrlenA(clfrm->TBname)) == 0)
+		Frames[nFramescount].TitleBar.tbname=mir_tstrdup(Frames[nFramescount].name);
+	else
+		Frames[nFramescount].TitleBar.tbname=(clfrm->Flags&F_UNICODE) ? mir_u2t(clfrm->TBwname) : mir_a2t(clfrm->TBname);
 	Frames[nFramescount].needhide=FALSE;
 	Frames[nFramescount].TitleBar.ShowTitleBar=(clfrm->Flags&F_SHOWTB?TRUE:FALSE);
 	Frames[nFramescount].TitleBar.ShowTitleBarTip=(clfrm->Flags&F_SHOWTBTIP?TRUE:FALSE);
@@ -1762,14 +1762,14 @@ INT_PTR CLUIFramesAddFrame(WPARAM wParam,LPARAM lParam)
 
  Frames[nFramescount].TitleBar.hwndTip
 	 =CreateWindowEx(0, TOOLTIPS_CLASS, NULL,
-                            WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP,
-                            CW_USEDEFAULT, CW_USEDEFAULT,
-                            CW_USEDEFAULT, CW_USEDEFAULT,
-                            pcli->hwndContactList, NULL, g_hInst,
-                            NULL);
+							WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP,
+							CW_USEDEFAULT, CW_USEDEFAULT,
+							CW_USEDEFAULT, CW_USEDEFAULT,
+							pcli->hwndContactList, NULL, g_hInst,
+							NULL);
 
 SetWindowPos(Frames[nFramescount].TitleBar.hwndTip, HWND_TOPMOST,0, 0, 0, 0,
-             SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+			 SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
 		{
 		TOOLINFOA ti;
 		int res;
@@ -2666,7 +2666,7 @@ LRESULT CALLBACK CLUIFrameTitleBarProc(HWND hwnd, UINT msg, WPARAM wParam, LPARA
 				);
 
 			oldflags=CallService(MS_CLIST_FRAMES_GETFRAMEOPTIONS,MAKEWPARAM(FO_FLAGS,Frames[pos].id),(LPARAM)0);
- 			if (!(oldflags&F_SHOWTBTIP))
+			if (!(oldflags&F_SHOWTBTIP))
 			{
 			oldflags|=F_SHOWTBTIP;
 				//CallService(MS_CLIST_FRAMES_SETFRAMEOPTIONS,MAKEWPARAM(FO_FLAGS,Frames[pos].id),(LPARAM)oldflags);
@@ -2984,7 +2984,7 @@ if ((msg == WM_MOVE) || (msg == WM_MOVING) || (msg == WM_NCLBUTTONDOWN) || (msg 
 {
 	if (ServiceExists("Utils/SnapWindowProc"))
 	{
-	    SnapWindowProc_t SnapInfo;
+		SnapWindowProc_t SnapInfo;
 		memset(&SnapInfo,0,sizeof(SnapInfo));
 
 		SnapInfo.hWnd = hwnd;
@@ -3395,11 +3395,11 @@ int UnLoadCLUIFramesModule(void)
 	int i;
 	FramesSysNotStarted=TRUE;
 
-    for (i=0; i<SIZEOF(hService); ++i)
-	    DestroyServiceFunction(hService[i]);
+	for (i=0; i<SIZEOF(hService); ++i)
+		DestroyServiceFunction(hService[i]);
 
-    for (i=0; i<SIZEOF(hHook); ++i)
-	    UnhookEvent(hHook[i]);
+	for (i=0; i<SIZEOF(hHook); ++i)
+		UnhookEvent(hHook[i]);
 
 	CLUIFramesOnClistResize((WPARAM)pcli->hwndContactList,0);
 	CLUIFramesStoreAllFrames();
