@@ -78,7 +78,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>commonheaders.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -91,7 +91,7 @@
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0809</Culture>
       <AdditionalIncludeDirectories>../../include;../../include/msapi/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -164,31 +164,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="clcfonts.c" />
-    <ClCompile Include="clcopts.c" />
-    <ClCompile Include="clcpaint.c" />
-    <ClCompile Include="clistmenus.c" />
-    <ClCompile Include="clistopts.c" />
-    <ClCompile Include="cluiopts.c" />
-    <ClCompile Include="commonheaders.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="init.c" />
+    <ClCompile Include="src\clcfonts.c" />
+    <ClCompile Include="src\clcopts.c" />
+    <ClCompile Include="src\clcpaint.c" />
+    <ClCompile Include="src\clistmenus.c" />
+    <ClCompile Include="src\clistopts.c" />
+    <ClCompile Include="src\cluiopts.c" />
+    <ClCompile Include="src\commonheaders.c" />
+    <ClCompile Include="src\init.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="clc.h" />
-    <ClInclude Include="commonheaders.h" />
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\clc.h" />
+    <ClInclude Include="src\commonheaders.h" />
+    <ClInclude Include="src\resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\clist-license.txt" />
+    <None Include="docs\clist-readme.txt" />
+    <None Include="docs\clist-translation.txt" />
     <None Include="res\blank.ico" />
     <None Include="res\dragcopy.cur" />
     <None Include="res\dropuser.cur" />
     <None Include="res\hyperlin.cur" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resource.rc" />
+    <ResourceCompile Include="src\resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
