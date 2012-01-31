@@ -2,7 +2,7 @@
 Chat module plugin for Miranda IM
 
 Copyright (C) 2003 Jörgen Persson
-Copyright 2003-2009 Miranda ICQ/IM project,
+Copyright 2003-2012 Miranda IM project,
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 // this color chooser window is inspired by PeaCow's smiley chooser window for the Smileyadd plugin
 
-#include "../commonheaders.h"
+#include "commonheaders.h"
 #include "chat.h"
 #include <math.h>
 
@@ -117,7 +117,7 @@ INT_PTR CALLBACK DlgProcColorToolWindow(HWND hwndDlg, UINT msg, WPARAM wParam, L
 
 	case WM_COMMAND:
 		switch ( LOWORD( wParam )) {
- 		case IDOK:
+		case IDOK:
 			if (iCurrentHotTrack >= 0)
 			PostMessage(hwndDlg, WM_LBUTTONUP, 0, 0);
 			break;

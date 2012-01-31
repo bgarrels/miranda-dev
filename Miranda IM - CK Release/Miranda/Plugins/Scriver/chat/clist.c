@@ -2,7 +2,7 @@
 Chat module plugin for Miranda IM
 
 Copyright (C) 2003 Jörgen Persson
-Copyright 2003-2009 Miranda ICQ/IM project,
+Copyright 2003-2012 Miranda IM project,
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#include "../commonheaders.h"
+#include "commonheaders.h"
 #include "chat.h"
 
 extern HINSTANCE		g_hInst;
@@ -102,7 +102,7 @@ BOOL CList_SetOffline(HANDLE hContact, BOOL bHide)
 		DBWriteContactSettingWord(hContact, szProto, "Status", ID_STATUS_OFFLINE);
 /*
 		int i = DBGetContactSettingByte(hContact, szProto, "ChatRoom", 0);
- 		if (bHide && i != GCW_SERVER)
+		if (bHide && i != GCW_SERVER)
 			DBWriteContactSettingByte(hContact, "CList", "Hidden", 1);*/
 		return TRUE;
 	}
@@ -136,8 +136,8 @@ BOOL CList_SetAllOffline(BOOL bHide, const char *pszModule)
 
 int	CList_RoomDoubleclicked(WPARAM wParam,LPARAM lParam)
 {
-    DBVARIANT dbv;
-    char *szProto;
+	DBVARIANT dbv;
+	char *szProto;
 
 	HANDLE hContact = (HANDLE)wParam;
 	if (!hContact)
@@ -247,33 +247,33 @@ INT_PTR CList_PrebuildContactMenuSvc(WPARAM wParam, LPARAM lParam)
 void CList_CreateGroup(TCHAR* group)
 {
 	int i;
-    char str[50];
+	char str[50];
 	TCHAR name[256];
-    DBVARIANT dbv;
+	DBVARIANT dbv;
 
 	if (!group)
 		return;
 
 	for (i = 0;; i++)
 	{
-        _itoa(i, str, 10);
+		_itoa(i, str, 10);
 		if ( DBGetContactSettingTString( NULL, "CListGroups", str, &dbv ))
-            break;
+			break;
 
 		if ( dbv.pszVal[0] != '\0' && !lstrcmpi(dbv.ptszVal + 1, group)) {
 				DBFreeVariant(&dbv);
 				return;
 			}
 
-	        DBFreeVariant(&dbv);
-        }
+			DBFreeVariant(&dbv);
+		}
 
  //	CallService(MS_CLIST_GROUPCREATE, (WPARAM)group, 0);
 	name[0] = 1 | GROUPF_EXPANDED;
 	_tcsncpy(name + 1, group, SIZEOF(name) - 1);
 	name[ lstrlen(group) + 1] = '\0';
 	DBWriteContactSettingTString(NULL, "CListGroups", str, name);
-    CallService(MS_CLUI_GROUPADDED, i + 1, 0);
+	CallService(MS_CLUI_GROUPADDED, i + 1, 0);
 }
 
 BOOL CList_AddEvent(HANDLE hContact, HICON Icon, HANDLE event, int type, TCHAR* fmt, ... )

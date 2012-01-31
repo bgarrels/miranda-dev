@@ -2,7 +2,7 @@
 Chat module plugin for Miranda IM
 
 Copyright (C) 2003 Jörgen Persson
-Copyright 2003-2009 Miranda ICQ/IM project,
+Copyright 2003-2012 Miranda IM project,
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#include "../commonheaders.h"
+#include "commonheaders.h"
 #include "chat.h"
 #include <shlobj.h>
 #include <shlwapi.h>
@@ -38,15 +38,15 @@ static HWND hPathTip = 0;
 #define FONTF_ITALIC 2
 struct FontOptionsList
 {
-    TCHAR*   szDescr;
-    COLORREF defColour;
-    TCHAR*   szDefFace;
-    BYTE     defCharset, defStyle;
-    char     defSize;
-    COLORREF colour;
-    TCHAR    szFace[LF_FACESIZE];
-    BYTE     charset, style;
-    char     size;
+	TCHAR*   szDescr;
+	COLORREF defColour;
+	TCHAR*   szDefFace;
+	BYTE     defCharset, defStyle;
+	char     defSize;
+	COLORREF colour;
+	TCHAR    szFace[LF_FACESIZE];
+	BYTE     charset, style;
+	char     size;
 }
 
 //remeber to put these in the Translate( ) template file too
@@ -91,8 +91,8 @@ static struct branch_t branch1[] = {
 	{LPGENT("Do not play sounds when focused"), "SoundsFocus", 0, 0, NULL},
 	{LPGENT("Do not pop up when joining"), "PopupOnJoin", 0,0, NULL},
 	{LPGENT("Show and hide by double clicking in the contact list"), "ToggleVisibility", 0,0, NULL},
-    {LPGENT("Show contact statuses (if supported)"), "ShowContactStatus", 0,0, NULL},
-    {LPGENT("Display contact status icon before role icon"), "ContactStatusFirst", 0,0, NULL},
+	{LPGENT("Show contact statuses (if supported)"), "ShowContactStatus", 0,0, NULL},
+	{LPGENT("Display contact status icon before role icon"), "ContactStatusFirst", 0,0, NULL},
 	{LPGENT("Add \':\' to auto-completed names"), "AddColonToAutoComplete", 0, 1, NULL}
 };
 static struct branch_t branch2[] = {
@@ -291,7 +291,7 @@ void RegisterFonts( void )
 	for (i = 0; i < SIZEOF(fontOptionsList); i++, index++) {
 		if (i == 17) continue;
 		strncpy(fontid.dbSettingsGroup, "ChatFonts", sizeof(fontid.dbSettingsGroup));
-                mir_sntprintf(fontid.group, SIZEOF(fontid.group), _T("%s/%s"), LPGENT("Messaging"), LPGENT("Group Chats"));
+				mir_sntprintf(fontid.group, SIZEOF(fontid.group), _T("%s/%s"), LPGENT("Messaging"), LPGENT("Group Chats"));
 		_tcsncpy(fontid.name, fontOptionsList[i].szDescr, SIZEOF(fontid.name));
 		sprintf(idstr, "Font%d", index);
 		strncpy(fontid.prefix, idstr, sizeof(fontid.prefix));
@@ -302,7 +302,7 @@ void RegisterFonts( void )
 		fontid.deffontsettings.size = fontOptionsList[i].defSize;
 		fontid.deffontsettings.style = fontOptionsList[i].defStyle;
 		_tcsncpy(fontid.deffontsettings.szFace, fontOptionsList[i].szDefFace, SIZEOF(fontid.deffontsettings.szFace));
-                mir_sntprintf(fontid.backgroundGroup, SIZEOF(fontid.backgroundGroup), _T("%s/%s"), LPGENT("Messaging"), LPGENT("Group Chats"));
+				mir_sntprintf(fontid.backgroundGroup, SIZEOF(fontid.backgroundGroup), _T("%s/%s"), LPGENT("Messaging"), LPGENT("Group Chats"));
 		switch (i) {
 		case 17:
 			_tcsncpy(fontid.backgroundName, _T("Message background"), SIZEOF(fontid.backgroundName));
@@ -324,7 +324,7 @@ void RegisterFonts( void )
 
 	strncpy(colourid.setting, "ColorLogBG", SIZEOF(colourid.setting));
 	_tcsncpy(colourid.name, LPGENT("Background"), SIZEOF(colourid.name));
-        mir_sntprintf(colourid.group, SIZEOF(colourid.group), _T("%s/%s"), LPGENT("Messaging"), LPGENT("Group Chats"));
+		mir_sntprintf(colourid.group, SIZEOF(colourid.group), _T("%s/%s"), LPGENT("Messaging"), LPGENT("Group Chats"));
 	colourid.defcolour = GetSysColor(COLOR_WINDOW);
 	CallService(MS_COLOUR_REGISTERT, (WPARAM)&colourid, 0);
 
@@ -599,10 +599,10 @@ BOOL CALLBACK DlgProcOptions2(HWND hwndDlg,UINT uMsg,WPARAM wParam,LPARAM lParam
 
 				idList=SHBrowseForFolder(&bi);
 				if(idList) {
-                                    SHGetPathFromIDList(idList,tszDirectory);
-                                    lstrcat(tszDirectory, _T("\\"));
-                                    CallService(MS_UTILS_PATHTORELATIVET, (WPARAM)tszDirectory, (LPARAM)tszTemp );
-                                    SetWindowText(GetDlgItem(hwndDlg, IDC_CHAT_LOGDIRECTORY), lstrlen(tszTemp) > 1?tszTemp:DEFLOGFILENAME);
+									SHGetPathFromIDList(idList,tszDirectory);
+									lstrcat(tszDirectory, _T("\\"));
+									CallService(MS_UTILS_PATHTORELATIVET, (WPARAM)tszDirectory, (LPARAM)tszTemp );
+									SetWindowText(GetDlgItem(hwndDlg, IDC_CHAT_LOGDIRECTORY), lstrlen(tszTemp) > 1?tszTemp:DEFLOGFILENAME);
 				}
 				psMalloc->lpVtbl->Free(psMalloc,idList);
 				psMalloc->lpVtbl->Release(psMalloc);
@@ -662,14 +662,14 @@ BOOL CALLBACK DlgProcOptions2(HWND hwndDlg,UINT uMsg,WPARAM wParam,LPARAM lParam
 				TCHAR *p2 = NULL;
 
 				if(ptszText) {
-				    GetDlgItemText(hwndDlg, IDC_CHAT_HIGHLIGHTWORDS, ptszText, iLen + 1);
-				    p2 = _tcschr(ptszText, (TCHAR)',');
-				    while ( p2 ) {
+					GetDlgItemText(hwndDlg, IDC_CHAT_HIGHLIGHTWORDS, ptszText, iLen + 1);
+					p2 = _tcschr(ptszText, (TCHAR)',');
+					while ( p2 ) {
 					   *p2 = ' ';
 					   p2 = _tcschr(ptszText, (TCHAR)',');
-				    }
-				    DBWriteContactSettingTString(NULL, "Chat", "HighlightWords", ptszText);
-				    mir_free(ptszText);
+					}
+					DBWriteContactSettingTString(NULL, "Chat", "HighlightWords", ptszText);
+					mir_free(ptszText);
 				}
 			}
 			else DBDeleteContactSetting(NULL, "Chat", "HighlightWords");
@@ -689,7 +689,7 @@ BOOL CALLBACK DlgProcOptions2(HWND hwndDlg,UINT uMsg,WPARAM wParam,LPARAM lParam
 
 			iLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_CHAT_LOGTIMESTAMP));
 			if ( iLen > 0 ) {
-                pszText = mir_realloc(pszText, iLen+1);
+				pszText = mir_realloc(pszText, iLen+1);
 				GetDlgItemTextA(hwndDlg, IDC_CHAT_LOGTIMESTAMP, pszText,iLen+1);
 				DBWriteContactSettingString(NULL, "Chat", "LogTimestamp", pszText);
 			}
@@ -697,7 +697,7 @@ BOOL CALLBACK DlgProcOptions2(HWND hwndDlg,UINT uMsg,WPARAM wParam,LPARAM lParam
 
 			iLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_CHAT_TIMESTAMP));
 			if( iLen > 0 ) {
-                pszText = mir_realloc(pszText, iLen+1);
+				pszText = mir_realloc(pszText, iLen+1);
 				GetDlgItemTextA(hwndDlg, IDC_CHAT_TIMESTAMP, pszText,iLen+1);
 				DBWriteContactSettingString(NULL, "Chat", "HeaderTime", pszText);
 			}
@@ -705,7 +705,7 @@ BOOL CALLBACK DlgProcOptions2(HWND hwndDlg,UINT uMsg,WPARAM wParam,LPARAM lParam
 
 			iLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_CHAT_INSTAMP));
 			if ( iLen > 0 ) {
-                pszText = mir_realloc(pszText, iLen+1);
+				pszText = mir_realloc(pszText, iLen+1);
 				GetDlgItemTextA(hwndDlg, IDC_CHAT_INSTAMP, pszText,iLen+1);
 				DBWriteContactSettingString(NULL, "Chat", "HeaderIncoming", pszText);
 			}

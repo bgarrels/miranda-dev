@@ -1,7 +1,5 @@
 /*
-Scriver
-
-Copyright 2000-2009 Miranda ICQ/IM project,
+Scriver - Copyright 2000-2012 Miranda IM project,
 
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -23,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "commonheaders.h"
 #include "statusicon.h"
-#include "chat/chat.h"
+#include "../chat/chat.h"
 
 #ifndef __MINGW32__
 #if (_MSC_VER < 1300)
