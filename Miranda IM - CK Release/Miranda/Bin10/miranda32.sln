@@ -144,8 +144,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Yamn", "..\Plugins\Yamn\YAM
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XFire", "..\Protocols\xfire\xfiretest\xfiretest.vcxproj", "{E4CD8BBA-B580-4584-AC3E-B4E9915026AE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MRA", "..\Protocols\MRA\Mra.vcxproj", "{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fingerprint", "..\Plugins\Fingerprint Mod+\fingerprint_mod_vs2010.vcxproj", "{AF7D71D4-19B7-42B8-91DD-701F155AC4AE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clist_nicer", "..\Plugins\clist_nicer\clist_nicer_10.vcxproj", "{3C42510C-A29E-4A53-899C-203BFA874E0B}"
@@ -153,8 +151,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MenuEx", "..\Plugins\menuitemex\menuex_10.vcxproj", "{210DD88D-649B-4695-8C5F-898A4F60A8CE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "modernopt", "..\Plugins\modernopt\modernopt_10.vcxproj", "{153DD132-084C-4DE4-8F40-A088BCB22723}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Skype", "..\Protocols\Skype\Skype_protocol.vcxproj", "{BF1AA628-942C-42F7-A5F3-121E81584A94}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scriver", "..\Plugins\Scriver\scriver_10.vcxproj", "{B8928210-546C-4AE3-956B-E2B724E6B8E5}"
 EndProject
@@ -387,6 +383,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "spellchecker", "..\Plugins\SpellChecker\spellchecker_10.vcxproj", "{5D5564DD-A900-4686-B78B-CAC6909A7FC7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "w7ui", "..\Plugins\w7ui\w7ui_10.vcxproj", "{86704897-EABF-439D-BE0E-52CEA67C2C43}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MRA", "..\Protocols\MRA\Mra_10.vcxproj", "{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Skype", "..\Protocols\Skype\Skype_protocol_10.vcxproj", "{BF1AA628-942C-42F7-A5F3-121E81584A94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -935,14 +935,6 @@ Global
 		{E4CD8BBA-B580-4584-AC3E-B4E9915026AE}.Release Unicode|Win32.ActiveCfg = Release Unicode|Win32
 		{E4CD8BBA-B580-4584-AC3E-B4E9915026AE}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
 		{E4CD8BBA-B580-4584-AC3E-B4E9915026AE}.Release Unicode|x64.ActiveCfg = Release Unicode|Win32
-		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Debug Unicode|Win32.ActiveCfg = Debug Unicode|Win32
-		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Debug Unicode|Win32.Build.0 = Debug Unicode|Win32
-		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Debug Unicode|x64.ActiveCfg = Debug Unicode|x64
-		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Debug Unicode|x64.Build.0 = Debug Unicode|x64
-		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Release Unicode|Win32.ActiveCfg = Release Unicode|Win32
-		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
-		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Release Unicode|x64.ActiveCfg = Release Unicode|x64
-		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Release Unicode|x64.Build.0 = Release Unicode|x64
 		{AF7D71D4-19B7-42B8-91DD-701F155AC4AE}.Debug Unicode|Win32.ActiveCfg = Debug Unicode|Win32
 		{AF7D71D4-19B7-42B8-91DD-701F155AC4AE}.Debug Unicode|Win32.Build.0 = Debug Unicode|Win32
 		{AF7D71D4-19B7-42B8-91DD-701F155AC4AE}.Debug Unicode|x64.ActiveCfg = Debug Unicode|x64
@@ -975,12 +967,6 @@ Global
 		{153DD132-084C-4DE4-8F40-A088BCB22723}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
 		{153DD132-084C-4DE4-8F40-A088BCB22723}.Release Unicode|x64.ActiveCfg = Release Unicode|x64
 		{153DD132-084C-4DE4-8F40-A088BCB22723}.Release Unicode|x64.Build.0 = Release Unicode|x64
-		{BF1AA628-942C-42F7-A5F3-121E81584A94}.Debug Unicode|Win32.ActiveCfg = Debug Unicode|Win32
-		{BF1AA628-942C-42F7-A5F3-121E81584A94}.Debug Unicode|Win32.Build.0 = Debug Unicode|Win32
-		{BF1AA628-942C-42F7-A5F3-121E81584A94}.Debug Unicode|x64.ActiveCfg = Debug Unicode|Win32
-		{BF1AA628-942C-42F7-A5F3-121E81584A94}.Release Unicode|Win32.ActiveCfg = Release Unicode|Win32
-		{BF1AA628-942C-42F7-A5F3-121E81584A94}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
-		{BF1AA628-942C-42F7-A5F3-121E81584A94}.Release Unicode|x64.ActiveCfg = Release Unicode|Win32
 		{B8928210-546C-4AE3-956B-E2B724E6B8E5}.Debug Unicode|Win32.ActiveCfg = Debug Unicode|Win32
 		{B8928210-546C-4AE3-956B-E2B724E6B8E5}.Debug Unicode|Win32.Build.0 = Debug Unicode|Win32
 		{B8928210-546C-4AE3-956B-E2B724E6B8E5}.Debug Unicode|x64.ActiveCfg = Debug Unicode|x64
@@ -1494,6 +1480,20 @@ Global
 		{86704897-EABF-439D-BE0E-52CEA67C2C43}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
 		{86704897-EABF-439D-BE0E-52CEA67C2C43}.Release Unicode|x64.ActiveCfg = Release Unicode|x64
 		{86704897-EABF-439D-BE0E-52CEA67C2C43}.Release Unicode|x64.Build.0 = Release Unicode|x64
+		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Debug Unicode|Win32.ActiveCfg = Debug Unicode|Win32
+		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Debug Unicode|Win32.Build.0 = Debug Unicode|Win32
+		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Debug Unicode|x64.ActiveCfg = Debug Unicode|x64
+		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Debug Unicode|x64.Build.0 = Debug Unicode|x64
+		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Release Unicode|Win32.ActiveCfg = Release Unicode|Win32
+		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
+		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Release Unicode|x64.ActiveCfg = Release Unicode|x64
+		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA}.Release Unicode|x64.Build.0 = Release Unicode|x64
+		{BF1AA628-942C-42F7-A5F3-121E81584A94}.Debug Unicode|Win32.ActiveCfg = Debug Unicode|Win32
+		{BF1AA628-942C-42F7-A5F3-121E81584A94}.Debug Unicode|Win32.Build.0 = Debug Unicode|Win32
+		{BF1AA628-942C-42F7-A5F3-121E81584A94}.Debug Unicode|x64.ActiveCfg = Debug Unicode|Win32
+		{BF1AA628-942C-42F7-A5F3-121E81584A94}.Release Unicode|Win32.ActiveCfg = Release Unicode|Win32
+		{BF1AA628-942C-42F7-A5F3-121E81584A94}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
+		{BF1AA628-942C-42F7-A5F3-121E81584A94}.Release Unicode|x64.ActiveCfg = Release Unicode|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1622,13 +1622,13 @@ Global
 		{01DDCB36-4DE2-405D-BC36-2C8BDEB86659} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
 		{6DA1396F-2A44-4D5C-8442-012F71006217} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
 		{E4CD8BBA-B580-4584-AC3E-B4E9915026AE} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
-		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
-		{BF1AA628-942C-42F7-A5F3-121E81584A94} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
 		{43CCE193-624F-4285-B5C9-657579C4E916} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
 		{B500A374-0564-41E7-98DE-5771C800BD68} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
 		{6BFE3E13-BD5D-4C1C-BB29-A82FB51A16CE} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
 		{6DE11A47-2268-4B08-8DE5-15A1705FCE28} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
 		{DADE9455-DC28-465A-9604-2CA28052B9FB} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
+		{EE182018-5D3D-43F3-955F-7B5AB0BE2FCA} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
+		{BF1AA628-942C-42F7-A5F3-121E81584A94} = {FE86A267-423D-47FE-96D4-71CEAACE27BB}
 		{B8928210-546C-4AE3-956B-E2B724E6B8E5} = {6BF594C8-8D85-4525-B8E6-06C66DB5BF16}
 		{F47EAB99-C78F-4A92-87D5-B0E16FE5A133} = {6BF594C8-8D85-4525-B8E6-06C66DB5BF16}
 		{99D26CA1-BFD4-4E77-9A1E-919E54CF33F7} = {6BF594C8-8D85-4525-B8E6-06C66DB5BF16}
