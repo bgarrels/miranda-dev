@@ -20,9 +20,9 @@ Boston, MA 02111-1307, USA.
 
 #include "commons.h"
 
-#include "hunspell/config.h"
-#include "hunspell/hunspell.hxx"
-#include "hunspell/csutil.hxx"
+#include "../hunspell/config.h"
+#include "../hunspell/hunspell.hxx"
+#include "../hunspell/csutil.hxx"
 
 
 #include "codepages.cpp"

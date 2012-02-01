@@ -1,5 +1,5 @@
-#include "license.hunspell"
-#include "license.myspell"
+#include "docs/license.hunspell"
+#include "docs/license.myspell"
 
 #include <stdlib.h>
 #include <string.h>
