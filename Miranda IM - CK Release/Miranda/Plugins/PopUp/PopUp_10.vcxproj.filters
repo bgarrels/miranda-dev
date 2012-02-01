@@ -20,9 +20,6 @@
       <UniqueIdentifier>{7120a8a4-3eb5-4623-8a8b-3cc1a7c38928}</UniqueIdentifier>
       <Extensions>txt</Extensions>
     </Filter>
-    <Filter Include="Deprecatet">
-      <UniqueIdentifier>{bfe757f4-9ec4-4c1d-b614-62890e40bdce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Option Pages">
       <UniqueIdentifier>{3dd8f824-baba-46b3-9ade-2865d3b6bc2c}</UniqueIdentifier>
     </Filter>
@@ -207,9 +204,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\add.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\auto.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\avatar.bmp">
