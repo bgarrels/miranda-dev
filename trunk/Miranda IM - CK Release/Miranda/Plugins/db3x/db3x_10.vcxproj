@@ -270,7 +270,7 @@
       <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0809</Culture>
       <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
     </ResourceCompile>
