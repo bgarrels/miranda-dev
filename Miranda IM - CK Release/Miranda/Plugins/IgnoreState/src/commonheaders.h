@@ -35,7 +35,7 @@
 //needed by m_utils.h
 #include <stdio.h>
 
-// needed by m_icolib.h > r9256
+// needed by m_icolib.h
 #include <stddef.h>
 
 
@@ -55,7 +55,7 @@
 #include <m_langpack.h>
 #include <m_icolib.h>
 #include "resource.h"
-#include "Version.h"
+#include "../Version.h"
 
 //external SDK headers
 #include <m_cluiframes.h>
