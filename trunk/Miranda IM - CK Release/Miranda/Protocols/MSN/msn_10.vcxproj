@@ -29,6 +29,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -40,6 +41,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -171,16 +173,16 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include;../../ExternalAPI</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;MSN_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>msn_global.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -188,9 +190,10 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>./../../include/msapi/</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
@@ -224,16 +227,16 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;MSN_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>msn_global.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -241,9 +244,10 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
@@ -262,57 +266,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="des.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="ezxml.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="msn.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="msn_auth.cpp" />
-    <ClCompile Include="msn_chat.cpp" />
-    <ClCompile Include="msn_commands.cpp" />
-    <ClCompile Include="msn_contact.cpp" />
-    <ClCompile Include="msn_errors.cpp" />
-    <ClCompile Include="msn_ftold.cpp" />
-    <ClCompile Include="msn_http.cpp" />
-    <ClCompile Include="msn_libstr.cpp" />
-    <ClCompile Include="msn_links.cpp" />
-    <ClCompile Include="msn_lists.cpp" />
-    <ClCompile Include="msn_mail.cpp" />
-    <ClCompile Include="msn_menu.cpp" />
-    <ClCompile Include="msn_mime.cpp" />
-    <ClCompile Include="msn_misc.cpp" />
-    <ClCompile Include="msn_msgqueue.cpp" />
-    <ClCompile Include="msn_msgsplit.cpp" />
-    <ClCompile Include="msn_natdetect.cpp" />
-    <ClCompile Include="msn_opts.cpp" />
-    <ClCompile Include="msn_p2p.cpp" />
-    <ClCompile Include="msn_p2ps.cpp" />
-    <ClCompile Include="msn_proto.cpp" />
-    <ClCompile Include="msn_soapab.cpp" />
-    <ClCompile Include="msn_soapstore.cpp" />
-    <ClCompile Include="msn_srv.cpp" />
-    <ClCompile Include="msn_ssl.cpp" />
-    <ClCompile Include="msn_std.cpp" />
-    <ClCompile Include="msn_svcs.cpp" />
-    <ClCompile Include="msn_switchboard.cpp" />
-    <ClCompile Include="msn_threads.cpp" />
-    <ClCompile Include="msn_useropts.cpp" />
-    <ClCompile Include="msn_ws.cpp" />
+    <ClCompile Include="src\des.c" />
+    <ClCompile Include="src\ezxml.c" />
+    <ClCompile Include="src\msn.cpp" />
+    <ClCompile Include="src\msn_auth.cpp" />
+    <ClCompile Include="src\msn_chat.cpp" />
+    <ClCompile Include="src\msn_commands.cpp" />
+    <ClCompile Include="src\msn_contact.cpp" />
+    <ClCompile Include="src\msn_errors.cpp" />
+    <ClCompile Include="src\msn_ftold.cpp" />
+    <ClCompile Include="src\msn_http.cpp" />
+    <ClCompile Include="src\msn_libstr.cpp" />
+    <ClCompile Include="src\msn_links.cpp" />
+    <ClCompile Include="src\msn_lists.cpp" />
+    <ClCompile Include="src\msn_mail.cpp" />
+    <ClCompile Include="src\msn_menu.cpp" />
+    <ClCompile Include="src\msn_mime.cpp" />
+    <ClCompile Include="src\msn_misc.cpp" />
+    <ClCompile Include="src\msn_msgqueue.cpp" />
+    <ClCompile Include="src\msn_msgsplit.cpp" />
+    <ClCompile Include="src\msn_natdetect.cpp" />
+    <ClCompile Include="src\msn_opts.cpp" />
+    <ClCompile Include="src\msn_p2p.cpp" />
+    <ClCompile Include="src\msn_p2ps.cpp" />
+    <ClCompile Include="src\msn_proto.cpp" />
+    <ClCompile Include="src\msn_soapab.cpp" />
+    <ClCompile Include="src\msn_soapstore.cpp" />
+    <ClCompile Include="src\msn_srv.cpp" />
+    <ClCompile Include="src\msn_ssl.cpp" />
+    <ClCompile Include="src\msn_std.cpp" />
+    <ClCompile Include="src\msn_svcs.cpp" />
+    <ClCompile Include="src\msn_switchboard.cpp" />
+    <ClCompile Include="src\msn_threads.cpp" />
+    <ClCompile Include="src\msn_useropts.cpp" />
+    <ClCompile Include="src\msn_ws.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Docs\gpl.txt" />
+    <None Include="Docs\history-msn.txt" />
+    <None Include="Docs\readme-msn.txt" />
+    <None Include="Docs\todo-msn.txt" />
+    <None Include="Docs\translate-msn.txt" />
     <None Include="Icos\inbox.ico" />
     <None Include="Icos\invite.ico" />
     <None Include="Icos\list_al.ico" />
@@ -334,14 +328,11 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="des.h" />
     <ClInclude Include="ezxml.h" />
-    <ClInclude Include="msn_global.h" />
-    <ClInclude Include="msn_proto.h" />
+    <ClInclude Include="SDK\icftypes.h" />
+    <ClInclude Include="SDK\netfw.h" />
+    <ClInclude Include="src\msn_global.h" />
+    <ClInclude Include="src\msn_proto.h" />
     <ClInclude Include="version.h" />
-    <ClInclude Include="SDK\m_assocmgr.h" />
-    <ClInclude Include="SDK\m_folders.h" />
-    <ClInclude Include="SDK\m_metacontacts.h" />
-    <ClInclude Include="SDK\m_proto_listeningto.h" />
-    <ClInclude Include="SDK\m_smileyadd.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
