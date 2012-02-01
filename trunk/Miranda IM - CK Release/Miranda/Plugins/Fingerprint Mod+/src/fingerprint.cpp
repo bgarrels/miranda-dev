@@ -1387,7 +1387,7 @@ INT_PTR ServiceSameClientsA(WPARAM wParam, LPARAM lParam)
 			{
 				if(WildCompare(tszMirVerSecondUp, def_kn_fp_mask[secondIndex].szMask))
 					break;
-	 			secondIndex++;
+				secondIndex++;
 			}
 
 		mir_free(tszMirVerFirstUp);
@@ -1501,7 +1501,7 @@ INT_PTR ServiceSameClientsW(WPARAM wParam, LPARAM lParam)
 			{
 				if(WildCompareW(wszMirVerSecondUp, def_kn_fp_mask[secondIndex].szMask))
 					break;
-	 			secondIndex++;
+				secondIndex++;
 			}
 
 		mir_free(wszMirVerFirstUp);
@@ -1553,7 +1553,7 @@ HBITMAP FASTCALL CreateBitmap32Point(int cx, int cy, LPVOID* bits)
 					DIB_RGB_COLORS,
 					&ptPixels,
 					NULL, 0);
- 	GdiFlush();
+	GdiFlush();
 	if(ptPixels) memset(ptPixels, 0, cx * cy * 4);
 	if(bits != NULL) *bits = ptPixels;
 
