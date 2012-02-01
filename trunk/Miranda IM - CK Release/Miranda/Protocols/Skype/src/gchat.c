@@ -8,10 +8,10 @@
 
 #pragma warning (push)
 #pragma warning (disable: 4100) // unreferenced formal parameter
-#include "../../include/m_langpack.h"
-#include "../../include/m_userinfo.h"
-#include "../../include/m_history.h"
-#include "../../include/m_contacts.h"
+#include "m_langpack.h"
+#include "m_userinfo.h"
+#include "m_history.h"
+#include "m_contacts.h"
 #pragma warning (pop)
 
 #ifndef DWLP_USER
@@ -85,7 +85,7 @@ void RemChat(TCHAR *szChatId) {
   Parameters: gc       - gchat_contacts entry for the chat session to be searched
 			  hContact - Handle to the contact to be found.
   Returns:    -1  = Not found
-              >=0 = Number of found item
+			  >=0 = Number of found item
  */
 static int ExistsChatContact(gchat_contacts *gc, HANDLE hContact) {
 	int i;
@@ -114,7 +114,7 @@ static int AddChatContact(gchat_contacts *gc, char *who, TCHAR *pszRole) {
 	HANDLE hContact;
 	GCDEST gcd = {0};
 	GCEVENT gce = {0};
-    CONTACTINFO ci = {0};
+	CONTACTINFO ci = {0};
 	TCHAR *twho;
 
 	LOG (("AddChatContact %s", who));
@@ -141,7 +141,7 @@ static int AddChatContact(gchat_contacts *gc, char *who, TCHAR *pszRole) {
 
 	if (!CallService(MS_CONTACT_GETCONTACTINFO,0,(LPARAM)&ci)) gce.ptszNick=ci.pszVal; 
 	else gce.ptszNick=twho;
-        
+		
 	gce.ptszUID=twho;
 	if (!CallService(MS_GC_EVENT, 0, (LPARAM)&gce)) {
 		if ((gc->mJoinedContacts=realloc(gc->mJoinedContacts, (gc->mJoinedCount+1)*sizeof(gchat_contact))))
@@ -151,7 +151,7 @@ static int AddChatContact(gchat_contacts *gc, char *who, TCHAR *pszRole) {
 			gc->mJoinedCount++;
 		}
 	}
-    if (ci.pszVal) miranda_sys_free (ci.pszVal);
+	if (ci.pszVal) miranda_sys_free (ci.pszVal);
 	free_nonutf_tchar_string (twho);
 	return i;
 }
@@ -182,7 +182,7 @@ HANDLE find_chat(TCHAR *chatname) {
 			DBGetContactSettingByte(hContact, SKYPE_PROTONAME, "ChatRoom", 0)==1)
 		{
 			if (DBGetContactSettingTString(hContact, SKYPE_PROTONAME, "ChatRoomID", &dbv)) continue;
-            tCompareResult = _tcscmp(dbv.ptszVal, chatname);
+			tCompareResult = _tcscmp(dbv.ptszVal, chatname);
 			DBFreeVariant(&dbv);
 			if (tCompareResult) continue;
 			return hContact; // already there, return handle
@@ -204,7 +204,7 @@ HANDLE find_chatA(char *chatname) {
 			DBGetContactSettingByte(hContact, SKYPE_PROTONAME, "ChatRoom", 0)==1)
 		{
 			if (DBGetContactSettingString(hContact, SKYPE_PROTONAME, "ChatRoomID", &dbv)) continue;
-            tCompareResult = strcmp(dbv.pszVal, chatname);
+			tCompareResult = strcmp(dbv.pszVal, chatname);
 			DBFreeVariant(&dbv);
 			if (tCompareResult) continue;
 			return hContact; // already there, return handle
@@ -289,7 +289,7 @@ int  __cdecl AddMembers(char *szSkypeMsg) {
 			gce.pDest = &gcd;
 			gce.time = (DWORD)time(NULL);
 			gce.dwFlags = GCEF_ADDTOLOG | GC_TCHAR;
-        
+		
 			ci.cbSize = sizeof(ci);
 			ci.szProto = SKYPE_PROTONAME;
 			ci.dwFlag = CNF_DISPLAY;
@@ -372,7 +372,7 @@ BOOL CALLBACK InputBoxDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPar
    This hook is called when a new chat is initialised.
    Parameters:  wParam = (char *)Name of new chat session [Has to be ASCIIZ/UTF8]
 				lParam = 1 - Create groupchat, but don't open it
-				         0 - Default - open groupchat after init
+						 0 - Default - open groupchat after init
 */
 int __cdecl  ChatInit(WPARAM wParam, LPARAM lParam) {
 	GCSESSION gcw = {0};
@@ -514,7 +514,7 @@ void InviteUser(TCHAR *szChatId) {
 	// add the heading
 	AppendMenu(tMenu, MF_STRING|MF_GRAYED|MF_DISABLED, (UINT_PTR)0, TranslateT("&Invite user..."));
 	AppendMenu(tMenu, MF_SEPARATOR, (UINT_PTR)1, NULL);
-    
+	
 	// generate a list of contact
 	while (hContact) {
 		if (!strcmp(SKYPE_PROTONAME, (char*)CallService(MS_PROTO_GETCONTACTBASEPROTO, (WPARAM)hContact,0 )) &&
@@ -528,10 +528,10 @@ void InviteUser(TCHAR *szChatId) {
 					break;
 				}
 			}
-            if (!alreadyInSession)
+			if (!alreadyInSession)
 				AppendMenu(tMenu, MF_STRING, (UINT_PTR)hContact, 
 					(TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)hContact, GCDNF_TCHAR));
-        }
+		}
 		hContact = (HANDLE)CallService( MS_DB_CONTACT_FINDNEXT,(WPARAM)hContact, 0);
 	}
 
@@ -578,7 +578,7 @@ static void KickUser (HANDLE hContact, GCHOOK *gch)
 				ci.hContact = hContact;
 				if (!CallService(MS_CONTACT_GETCONTACTINFO,0,(LPARAM)&ci)) gce.ptszNick=ci.pszVal; 
 				else gce.ptszNick=gce.ptszUID;
-        
+		
 				if (!DBGetContactSettingTString(NULL, SKYPE_PROTONAME, "Nick", &dbv)) {
 					gce.ptszStatus = dbv.ptszVal;		
 					CallServiceSync(MS_GC_EVENT, 0, (LPARAM)&gce);
@@ -646,9 +646,9 @@ int GCEventHook(WPARAM wParam,LPARAM lParam) {
 
 				if (gc->mJoinedCount == 1) {
 					// switch back to normal session
-                    // I don't know if this behaviour isn't a bit annoying, therefore, we
+					// I don't know if this behaviour isn't a bit annoying, therefore, we
 					// don't do this now, until a user requests this feature :)
-                    
+					
 					// open up srmm dialog when quit while 1 person left
 //					CallService(MS_MSG_SENDMESSAGE, (WPARAM)gc->mJoinedContacts[0].hContact, 0);
 
@@ -672,7 +672,7 @@ int GCEventHook(WPARAM wParam,LPARAM lParam) {
 					// remove the ending linebreak
 					for (pEnd = &gch->ptszText[_tcslen(gch->ptszText) - 1];
 						 *pEnd==_T('\r') || *pEnd==_T('\n'); pEnd--) *pEnd=0;
-                    // Send message to the chat-contact    
+					// Send message to the chat-contact    
 					if (ccs.hContact = find_chat(gch->pDest->ptszID)) {
 #ifdef _UNICODE
 						// If PREF_UTF is supported, just convert it to UTF8 and pass the buffer to PSS_MESSAGE
@@ -730,7 +730,7 @@ int GCEventHook(WPARAM wParam,LPARAM lParam) {
 				switch(gch->dwData) {
 				case 10: InviteUser(gch->pDest->ptszID); break;
 				case 20: KillChatSession(gch->pDest); break;
-                case 30: 
+				case 30: 
 					{
 						TCHAR *ptr, buf[MAX_BUF];
 
@@ -808,7 +808,7 @@ int __cdecl  GCMenuHook(WPARAM wParam,LPARAM lParam) {
 			case MENU_ON_LOG:
 				gcmi->nItems = sizeof(Item_log)/sizeof(Item_log[0]);
 				gcmi->Item = &Item_log[0];
-                LOG (("GCMenuHook: Items in log window: %d", gcmi->nItems));
+				LOG (("GCMenuHook: Items in log window: %d", gcmi->nItems));
 				break;
 			case MENU_ON_NICKLIST:
 				if (DBGetContactSettingTString(NULL, SKYPE_PROTONAME, SKYPE_NAME, &dbv)) return -1;
@@ -833,7 +833,7 @@ int __cdecl  GCMenuHook(WPARAM wParam,LPARAM lParam) {
 				DBFreeVariant(&dbv);
 				break;
 			}
-        } else {LOG (("GCMenuHook: ERROR: Not our protocol."));}
+		} else {LOG (("GCMenuHook: ERROR: Not our protocol."));}
 	} else {LOG (("GCMenuHook: ERROR: No gcmi"));}
 	LOG (("GCMenuHook: terminated."));
 	return 0;
