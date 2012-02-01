@@ -375,34 +375,34 @@ typedef struct BASS_3DVECTOR {
 // EAX environments, use with BASS_SetEAXParameters
 enum
 {
-    EAX_ENVIRONMENT_GENERIC,
-    EAX_ENVIRONMENT_PADDEDCELL,
-    EAX_ENVIRONMENT_ROOM,
-    EAX_ENVIRONMENT_BATHROOM,
-    EAX_ENVIRONMENT_LIVINGROOM,
-    EAX_ENVIRONMENT_STONEROOM,
-    EAX_ENVIRONMENT_AUDITORIUM,
-    EAX_ENVIRONMENT_CONCERTHALL,
-    EAX_ENVIRONMENT_CAVE,
-    EAX_ENVIRONMENT_ARENA,
-    EAX_ENVIRONMENT_HANGAR,
-    EAX_ENVIRONMENT_CARPETEDHALLWAY,
-    EAX_ENVIRONMENT_HALLWAY,
-    EAX_ENVIRONMENT_STONECORRIDOR,
-    EAX_ENVIRONMENT_ALLEY,
-    EAX_ENVIRONMENT_FOREST,
-    EAX_ENVIRONMENT_CITY,
-    EAX_ENVIRONMENT_MOUNTAINS,
-    EAX_ENVIRONMENT_QUARRY,
-    EAX_ENVIRONMENT_PLAIN,
-    EAX_ENVIRONMENT_PARKINGLOT,
-    EAX_ENVIRONMENT_SEWERPIPE,
-    EAX_ENVIRONMENT_UNDERWATER,
-    EAX_ENVIRONMENT_DRUGGED,
-    EAX_ENVIRONMENT_DIZZY,
-    EAX_ENVIRONMENT_PSYCHOTIC,
+	EAX_ENVIRONMENT_GENERIC,
+	EAX_ENVIRONMENT_PADDEDCELL,
+	EAX_ENVIRONMENT_ROOM,
+	EAX_ENVIRONMENT_BATHROOM,
+	EAX_ENVIRONMENT_LIVINGROOM,
+	EAX_ENVIRONMENT_STONEROOM,
+	EAX_ENVIRONMENT_AUDITORIUM,
+	EAX_ENVIRONMENT_CONCERTHALL,
+	EAX_ENVIRONMENT_CAVE,
+	EAX_ENVIRONMENT_ARENA,
+	EAX_ENVIRONMENT_HANGAR,
+	EAX_ENVIRONMENT_CARPETEDHALLWAY,
+	EAX_ENVIRONMENT_HALLWAY,
+	EAX_ENVIRONMENT_STONECORRIDOR,
+	EAX_ENVIRONMENT_ALLEY,
+	EAX_ENVIRONMENT_FOREST,
+	EAX_ENVIRONMENT_CITY,
+	EAX_ENVIRONMENT_MOUNTAINS,
+	EAX_ENVIRONMENT_QUARRY,
+	EAX_ENVIRONMENT_PLAIN,
+	EAX_ENVIRONMENT_PARKINGLOT,
+	EAX_ENVIRONMENT_SEWERPIPE,
+	EAX_ENVIRONMENT_UNDERWATER,
+	EAX_ENVIRONMENT_DRUGGED,
+	EAX_ENVIRONMENT_DIZZY,
+	EAX_ENVIRONMENT_PSYCHOTIC,
 
-    EAX_ENVIRONMENT_COUNT			// total number of environments
+	EAX_ENVIRONMENT_COUNT			// total number of environments
 };
 
 // EAX presets, usage: BASS_SetEAXParameters(EAX_PRESET_xxx)
@@ -441,7 +441,7 @@ buffer : Buffer to write the samples in
 length : Number of bytes to write
 user   : The 'user' parameter value given when calling BASS_StreamCreate
 RETURN : Number of bytes written. Set the BASS_STREAMPROC_END flag to end
-         the stream. */
+		 the stream. */
 
 #define BASS_STREAMPROC_END		0x80000000	// end of user stream flag
 
@@ -716,81 +716,81 @@ enum
 };
 
 typedef struct {
-    float       fWetDryMix;
-    float       fDepth;
-    float       fFeedback;
-    float       fFrequency;
-    DWORD       lWaveform;	// 0=triangle, 1=sine
-    float       fDelay;
-    DWORD       lPhase;		// BASS_DX8_PHASE_xxx
+	float       fWetDryMix;
+	float       fDepth;
+	float       fFeedback;
+	float       fFrequency;
+	DWORD       lWaveform;	// 0=triangle, 1=sine
+	float       fDelay;
+	DWORD       lPhase;		// BASS_DX8_PHASE_xxx
 } BASS_DX8_CHORUS;
 
 typedef struct {
-    float   fGain;
-    float   fAttack;
-    float   fRelease;
-    float   fThreshold;
-    float   fRatio;
-    float   fPredelay;
+	float   fGain;
+	float   fAttack;
+	float   fRelease;
+	float   fThreshold;
+	float   fRatio;
+	float   fPredelay;
 } BASS_DX8_COMPRESSOR;
 
 typedef struct {
-    float   fGain;
-    float   fEdge;
-    float   fPostEQCenterFrequency;
-    float   fPostEQBandwidth;
-    float   fPreLowpassCutoff;
+	float   fGain;
+	float   fEdge;
+	float   fPostEQCenterFrequency;
+	float   fPostEQBandwidth;
+	float   fPreLowpassCutoff;
 } BASS_DX8_DISTORTION;
 
 typedef struct {
-    float   fWetDryMix;
-    float   fFeedback;
-    float   fLeftDelay;
-    float   fRightDelay;
-    BOOL    lPanDelay;
+	float   fWetDryMix;
+	float   fFeedback;
+	float   fLeftDelay;
+	float   fRightDelay;
+	BOOL    lPanDelay;
 } BASS_DX8_ECHO;
 
 typedef struct {
-    float       fWetDryMix;
-    float       fDepth;
-    float       fFeedback;
-    float       fFrequency;
-    DWORD       lWaveform;	// 0=triangle, 1=sine
-    float       fDelay;
-    DWORD       lPhase;		// BASS_DX8_PHASE_xxx
+	float       fWetDryMix;
+	float       fDepth;
+	float       fFeedback;
+	float       fFrequency;
+	DWORD       lWaveform;	// 0=triangle, 1=sine
+	float       fDelay;
+	DWORD       lPhase;		// BASS_DX8_PHASE_xxx
 } BASS_DX8_FLANGER;
 
 typedef struct {
-    DWORD       dwRateHz;               // Rate of modulation in hz
-    DWORD       dwWaveShape;            // 0=triangle, 1=square
+	DWORD       dwRateHz;               // Rate of modulation in hz
+	DWORD       dwWaveShape;            // 0=triangle, 1=square
 } BASS_DX8_GARGLE;
 
 typedef struct {
-    int     lRoom;                  // [-10000, 0]      default: -1000 mB
-    int     lRoomHF;                // [-10000, 0]      default: 0 mB
-    float   flRoomRolloffFactor;    // [0.0, 10.0]      default: 0.0
-    float   flDecayTime;            // [0.1, 20.0]      default: 1.49s
-    float   flDecayHFRatio;         // [0.1, 2.0]       default: 0.83
-    int     lReflections;           // [-10000, 1000]   default: -2602 mB
-    float   flReflectionsDelay;     // [0.0, 0.3]       default: 0.007 s
-    int     lReverb;                // [-10000, 2000]   default: 200 mB
-    float   flReverbDelay;          // [0.0, 0.1]       default: 0.011 s
-    float   flDiffusion;            // [0.0, 100.0]     default: 100.0 %
-    float   flDensity;              // [0.0, 100.0]     default: 100.0 %
-    float   flHFReference;          // [20.0, 20000.0]  default: 5000.0 Hz
+	int     lRoom;                  // [-10000, 0]      default: -1000 mB
+	int     lRoomHF;                // [-10000, 0]      default: 0 mB
+	float   flRoomRolloffFactor;    // [0.0, 10.0]      default: 0.0
+	float   flDecayTime;            // [0.1, 20.0]      default: 1.49s
+	float   flDecayHFRatio;         // [0.1, 2.0]       default: 0.83
+	int     lReflections;           // [-10000, 1000]   default: -2602 mB
+	float   flReflectionsDelay;     // [0.0, 0.3]       default: 0.007 s
+	int     lReverb;                // [-10000, 2000]   default: 200 mB
+	float   flReverbDelay;          // [0.0, 0.1]       default: 0.011 s
+	float   flDiffusion;            // [0.0, 100.0]     default: 100.0 %
+	float   flDensity;              // [0.0, 100.0]     default: 100.0 %
+	float   flHFReference;          // [20.0, 20000.0]  default: 5000.0 Hz
 } BASS_DX8_I3DL2REVERB;
 
 typedef struct {
-    float   fCenter;
-    float   fBandwidth;
-    float   fGain;
+	float   fCenter;
+	float   fBandwidth;
+	float   fGain;
 } BASS_DX8_PARAMEQ;
 
 typedef struct {
-    float   fInGain;                // [-96.0,0.0]            default: 0.0 dB
-    float   fReverbMix;             // [-96.0,0.0]            default: 0.0 db
-    float   fReverbTime;            // [0.001,3000.0]         default: 1000.0 ms
-    float   fHighFreqRTRatio;       // [0.001,0.999]          default: 0.001
+	float   fInGain;                // [-96.0,0.0]            default: 0.0 dB
+	float   fReverbMix;             // [-96.0,0.0]            default: 0.0 db
+	float   fReverbTime;            // [0.001,3000.0]         default: 1000.0 ms
+	float   fHighFreqRTRatio;       // [0.001,0.999]          default: 0.001
 } BASS_DX8_REVERB;
 
 #define BASS_DX8_PHASE_NEG_180        0

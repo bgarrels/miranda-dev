@@ -22,10 +22,10 @@ Copyright (C) 2010, 2011 tico-tico
 #include "m_toolbar.h"
 
 #include "resource.h"
-#include "version.h"
+#include "../version.h"
 
 #define BASSDEF(f) (WINAPI *f)
-#include "bass.h"
+#include "../bass.h"
 
 #define LOADBASSFUNCTION(f) (*((void**)&f)=(void*)GetProcAddress(hBass,#f))
 

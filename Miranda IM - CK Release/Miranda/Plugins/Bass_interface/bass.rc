@@ -2,7 +2,7 @@
 //
 #include <windows.h>
 #include <commctrl.h>
-#include "resource.h"
+#include "src/resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -67,19 +67,19 @@ END
 
 1 TEXTINCLUDE 
 BEGIN
-    "resource.h\0"
+	"resource.h\0"
 END
 
 2 TEXTINCLUDE 
 BEGIN
-    "#include ""afxres.h""\r\n"
-    "\0"
+	"#include ""afxres.h""\r\n"
+	"\0"
 END
 
 3 TEXTINCLUDE 
 BEGIN
-    "\r\n"
-    "\0"
+	"\r\n"
+	"\0"
 END
 
 #endif    // APSTUDIO_INVOKED
