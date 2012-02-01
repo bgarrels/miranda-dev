@@ -13,7 +13,7 @@
 #include <time.h>
 #include <sys/stat.h>
 
-#include "yahoo.h"
+#include "../yahoo.h"
 #include <m_protosvc.h>
 #include "file_transfer.h"
 
@@ -287,10 +287,10 @@ static void upload_file(int id, int fd, int error, void *data)
 
 static void dl_file(int id, int fd, int error,	const char *filename, unsigned long size, void *data) 
 {
-    y_filetransfer *sf = (y_filetransfer*) data;
+	y_filetransfer *sf = (y_filetransfer*) data;
 	struct yahoo_file_info *fi = (struct yahoo_file_info *)sf->files->data;
-    char buf[1024];
-    unsigned long rsize = 0;
+	char buf[1024];
+	unsigned long rsize = 0;
 	DWORD dw, c;
 
 	if (fd < 0) {
@@ -304,7 +304,7 @@ static void dl_file(int id, int fd, int error,	const char *filename, unsigned lo
 		error = 1;
 	}
 	
-    if(!error) {
+	if(!error) {
 		HANDLE myhFile;
 		TCHAR filefull[MAX_PATH];
 		
@@ -406,7 +406,7 @@ static void dl_file(int id, int fd, int error,	const char *filename, unsigned lo
 			}
 			
 		} 
-    }
+	}
 	
 	if (fd > 0) {
 		LOG(("Closing connection: %d", fd));
@@ -418,7 +418,7 @@ static void dl_file(int id, int fd, int error,	const char *filename, unsigned lo
 		}
 	}
 	
-    if (! error) {
+	if (! error) {
 		sf->pfts.currentFileNumber++;
 		
 		LOG(("File %d/%d download complete!", sf->pfts.currentFileNumber, sf->pfts.totalFiles));
@@ -737,7 +737,7 @@ HANDLE __cdecl CYahooProto::SendFile( HANDLE hContact, const PROTOCHAR* szDescri
 	if ( ppszFiles[1] != NULL ){
 		MessageBoxA(NULL, "YAHOO protocol allows only one file to be sent at a time", "Yahoo", MB_OK | MB_ICONINFORMATION);
 		return 0;
- 	}
+	}
 	
 	DebugLog("Getting Yahoo ID");
 	*/

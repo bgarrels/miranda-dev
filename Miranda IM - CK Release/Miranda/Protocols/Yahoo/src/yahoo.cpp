@@ -14,7 +14,7 @@
 /*
  * Miranda headers
  */
-#include "yahoo.h"
+#include "../yahoo.h"
 #include <m_protosvc.h>
 #include <m_langpack.h>
 #include <m_skin.h>
@@ -120,7 +120,7 @@ yahoo_status miranda_to_yahoo(int myyahooStatus)
 		break;
 	}                                                
 
-    return ret;
+	return ret;
 }
 
 int yahoo_to_miranda_status(int m_iStatus, int away)
@@ -763,8 +763,8 @@ void CYahooProto::ext_contact_added(const char *myid, const char *who, const cha
 	PROTORECVEVENT pre = { 0 };
 
 	/* NOTE: Msg is actually in UTF8 unless stated otherwise!! */
-    LOG(("[ext_contact_added] %s %s (%s:%d) added you as %s w/ msg '%s'", fname, lname, who, protocol, myid, msg));
-    
+	LOG(("[ext_contact_added] %s %s (%s:%d) added you as %s w/ msg '%s'", fname, lname, who, protocol, myid, msg));
+	
 	if ( BuddyIgnored( who )) {
 		LOG(("User '%s' on our Ignore List. Dropping Authorization Request.", who));
 		return;
@@ -890,9 +890,9 @@ void CYahooProto::ext_game_notify(const char *me, const char *who, int stat, con
 [17:36:44 YAHOO] [Reading packet done]
 
 	 */
-    LOG(("[ext_game_notify] me: %s, who: %s, stat: %d, msg: %s", me, who, stat, msg));
-    /* FIXME - Not Implemented - this informs you someone else is playing on Yahoo! Games */
-    /* Also Stubbed in Sample Client */
+	LOG(("[ext_game_notify] me: %s, who: %s, stat: %d, msg: %s", me, who, stat, msg));
+	/* FIXME - Not Implemented - this informs you someone else is playing on Yahoo! Games */
+	/* Also Stubbed in Sample Client */
 	HANDLE hContact = getbuddyH(who);
 	if (!hContact)
 		return;
@@ -987,7 +987,7 @@ void CYahooProto::ext_mail_notify(const char *from, const char *subj, int cnt)
 	m_unreadMessages = cnt;
 	SendBroadcast( NULL, ACKTYPE_EMAIL, ACKRESULT_STATUS, NULL, 0 );
 }    
-    
+	
 void CYahooProto::ext_system_message(const char *me, const char *who, const char *msg)
 {
 	LOG(("[ext_system_message] System Message to: %s from: %s msg: %s", me, who, msg));
@@ -997,11 +997,11 @@ void CYahooProto::ext_system_message(const char *me, const char *who, const char
 
 void CYahooProto::ext_got_identities(const char *nick, const char *fname, const char *lname, YList * ids)
 {
-    LOG(("[ext_got_identities] First Name: %s, Last Name: %s", fname, lname));
+	LOG(("[ext_got_identities] First Name: %s, Last Name: %s", fname, lname));
 	
-    /* FIXME - Not implemented - Got list of Yahoo! identities */
-    /* We currently only use the default identity */
-    /* Also Stubbed in Sample Client */
+	/* FIXME - Not implemented - Got list of Yahoo! identities */
+	/* We currently only use the default identity */
+	/* Also Stubbed in Sample Client */
 	SetString(NULL, "First Name", fname ? fname : "");
 	SetString(NULL, "Last Name", lname ? lname : "");
 }
@@ -1018,17 +1018,17 @@ void ext_yahoo_got_cookies(int id)
 {
 //    char z[1024];
 
-    LOG(("[ext_got_cookies] id: %d", id));
+	LOG(("[ext_got_cookies] id: %d", id));
 /*    LOG(("Y Cookie: '%s'", yahoo_get_cookie(id, "y")));
-    LOG(("T Cookie: '%s'", yahoo_get_cookie(id, "t")));
-    LOG(("C Cookie: '%s'", yahoo_get_cookie(id, "c")));
-    LOG(("Login Cookie: '%s'", yahoo_get_cookie(id, "login")));
-    
-    //wsprintfA(z, "Cookie: %s; C=%s; Y=%s; T=%s", Bcookie, yahoo_get_cookie(id, "c"), yahoo_get_cookie(id, "y"), yahoo_get_cookie(id, "t"));
-    //wsprintfA(z, "Cookie: %s; Y=%s", Bcookie, yahoo_get_cookie(id, "y"), yahoo_get_cookie(id, "t"));    
-    wsprintfA(z, "Cookie: Y=%s; T=%s", yahoo_get_cookie(id, "y"), yahoo_get_cookie(id, "t"));    
-    LOG(("Our Cookie: '%s'", z));
-    YAHOO_CallService(MS_NETLIB_SETSTICKYHEADERS, (WPARAM)hnuMain, (LPARAM)z);*/
+	LOG(("T Cookie: '%s'", yahoo_get_cookie(id, "t")));
+	LOG(("C Cookie: '%s'", yahoo_get_cookie(id, "c")));
+	LOG(("Login Cookie: '%s'", yahoo_get_cookie(id, "login")));
+	
+	//wsprintfA(z, "Cookie: %s; C=%s; Y=%s; T=%s", Bcookie, yahoo_get_cookie(id, "c"), yahoo_get_cookie(id, "y"), yahoo_get_cookie(id, "t"));
+	//wsprintfA(z, "Cookie: %s; Y=%s", Bcookie, yahoo_get_cookie(id, "y"), yahoo_get_cookie(id, "t"));    
+	wsprintfA(z, "Cookie: Y=%s; T=%s", yahoo_get_cookie(id, "y"), yahoo_get_cookie(id, "t"));    
+	LOG(("Our Cookie: '%s'", z));
+	YAHOO_CallService(MS_NETLIB_SETSTICKYHEADERS, (WPARAM)hnuMain, (LPARAM)z);*/
 
 #ifdef HTTP_GATEWAY	
 	if (iHTTPGateway) {
@@ -1151,7 +1151,7 @@ void CYahooProto::ext_error(const char *err, int fatal, int num)
 	char buff[1024];
 	
 	LOG(("[ext_error] Error: fatal: %d, num: %d, err: %s", fatal, num, err));
-        
+		
 	switch(num) {
 	case E_UNKNOWN:
 		snprintf(buff, sizeof(buff), Translate("Unknown error %s"), err);
@@ -1228,7 +1228,7 @@ void CYahooProto::ext_send_http_request(enum yahoo_connection_type type, const c
 	else 
 		LOG(("ERROR: Unknown method: %s", method));
 */
-    NETLIBHTTPREQUEST 	nlhr={0};
+	NETLIBHTTPREQUEST 	nlhr={0};
 	NETLIBHTTPHEADER 	httpHeaders[5];
 	int 				fd, error = 0;
 	char 				host[255];
@@ -1391,9 +1391,9 @@ int CYahooProto::ext_connect_async(const char *host, int port, int type, yahoo_c
 {
 	int err = 0, res;
 	
-    LOG(("[ext_connect_async] %s:%d type: %d", host, port, type));
-    
-    res = ext_connect(host, port, type);
+	LOG(("[ext_connect_async] %s:%d type: %d", host, port, type));
+	
+	res = ext_connect(host, port, type);
 
 	LOG(("[ext_connect_async] %s:%d type: %d, result: %d", host, port, type, res));
 	

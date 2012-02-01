@@ -11,7 +11,7 @@
  * and for answering some of my questions during development of this plugin.
  */
 
-#include "yahoo.h"
+#include "../yahoo.h"
 #include <m_langpack.h>
 #include <m_protosvc.h>
 

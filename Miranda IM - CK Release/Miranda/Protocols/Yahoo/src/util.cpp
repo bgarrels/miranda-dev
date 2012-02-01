@@ -10,7 +10,7 @@
  * I want to thank Robert Rainwater and George Hazan for their code and support
  * and for answering some of my questions during development of this plugin.
  */
-#include "yahoo.h"
+#include "../yahoo.h"
 #include <windowsx.h>
 #include <m_popup.h>
 #include <m_protomod.h>
@@ -114,7 +114,7 @@ DWORD CYahooProto::GetDword( HANDLE hContact, const char* valueName, DWORD parDe
 
 DWORD CYahooProto::SetDword( const char* valueName, DWORD parValue )
 {
-    return DBWriteContactSettingDword( NULL, m_szModuleName, valueName, parValue);
+	return DBWriteContactSettingDword( NULL, m_szModuleName, valueName, parValue);
 }
 
 DWORD CYahooProto::GetDword( const char* valueName, DWORD parDefltValue )
@@ -124,7 +124,7 @@ DWORD CYahooProto::GetDword( const char* valueName, DWORD parDefltValue )
 
 DWORD CYahooProto::SetDword( HANDLE hContact, const char* valueName, DWORD parValue )
 {
-    return DBWriteContactSettingDword( hContact, m_szModuleName, valueName, parValue);
+	return DBWriteContactSettingDword( hContact, m_szModuleName, valueName, parValue);
 }
 
 
@@ -347,18 +347,18 @@ extern PLUGININFOEX pluginInfo;
  */
 void CYahooProto::YAHOO_utils_logversion()
 {
-    char str[256];
+	char str[256];
 
 #ifdef YAHOO_CVSBUILD
-    _snprintf(str, sizeof(str), "Yahoo v%d.%d.%d.%da (%s %s)", (pluginInfo.version >> 24) & 0xFF, (pluginInfo.version >> 16) & 0xFF,
-              (pluginInfo.version >> 8) & 0xFF, pluginInfo.version & 0xFF, __DATE__, __TIME__);
+	_snprintf(str, sizeof(str), "Yahoo v%d.%d.%d.%da (%s %s)", (pluginInfo.version >> 24) & 0xFF, (pluginInfo.version >> 16) & 0xFF,
+			  (pluginInfo.version >> 8) & 0xFF, pluginInfo.version & 0xFF, __DATE__, __TIME__);
 #else
-    _snprintf(str, sizeof(str), "Yahoo v%d.%d.%d.%d", (pluginInfo.version >> 24) & 0xFF, (pluginInfo.version >> 16) & 0xFF,
-              (pluginInfo.version >> 8) & 0xFF, pluginInfo.version & 0xFF);
+	_snprintf(str, sizeof(str), "Yahoo v%d.%d.%d.%d", (pluginInfo.version >> 24) & 0xFF, (pluginInfo.version >> 16) & 0xFF,
+			  (pluginInfo.version >> 8) & 0xFF, pluginInfo.version & 0xFF);
 #endif
-    DebugLog(str);
+	DebugLog(str);
 #ifdef YAHOO_CVSBUILD
-    DebugLog("You are using a development version of Yahoo.  Please make sure you are using the latest version before posting bug reports.");
+	DebugLog("You are using a development version of Yahoo.  Please make sure you are using the latest version before posting bug reports.");
 #endif
 }
 

@@ -11,7 +11,7 @@
  * and for answering some of my questions during development of this plugin.
  */
 
-#include "yahoo.h"
+#include "../yahoo.h"
 
 #ifdef HTTP_GATEWAY
 
@@ -58,27 +58,27 @@ int YAHOO_httpGatewayWrapSend(HANDLE hConn, PBYTE buf, int len, int flags, MIRAN
 
 PBYTE YAHOO_httpGatewayUnwrapRecv(NETLIBHTTPREQUEST *nlhr, PBYTE buf, int len, int *outBufLen, void *(*NetlibRealloc)(void *, size_t))
 {
-    DebugLog("YAHOO_httpGatewayUnwrapRecv!!! Len: %d", len);
+	DebugLog("YAHOO_httpGatewayUnwrapRecv!!! Len: %d", len);
 
-    DebugLog("Got headers: %d", nlhr->headersCount);
-    /* we need to get the first 4 bytes! */
+	DebugLog("Got headers: %d", nlhr->headersCount);
+	/* we need to get the first 4 bytes! */
 	if (len < 4) 
 		return NULL;
 
 	ylad->rpkts = buf[0] + buf[1] *256;
 	DebugLog("Got packets: %d", ylad->rpkts);
 	
-    if (len == 4){
-        *outBufLen = 0;
-        return buf;
-    } else  if ( (buf[4] == 'Y') && (buf[5] == 'M') && (buf[6] == 'S') && (buf[7] == 'G') ) {
+	if (len == 4){
+		*outBufLen = 0;
+		return buf;
+	} else  if ( (buf[4] == 'Y') && (buf[5] == 'M') && (buf[6] == 'S') && (buf[7] == 'G') ) {
 		MoveMemory( buf, buf + 4, len - 4);
 		*outBufLen = len-4;// we take off 4 bytes from the beginning
 		 
 		return buf;                 
-    } else
-        return NULL; /* Break connection, something went wrong! */
-     
+	} else
+		return NULL; /* Break connection, something went wrong! */
+	 
 }
 
 #endif
