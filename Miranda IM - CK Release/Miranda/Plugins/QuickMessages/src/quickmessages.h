@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #define _CRT_SECURE_NO_DEPRECATE
-
+#define MIRANDA_VER  0x0900
 
 #include <tchar.h>
 #include <windows.h>
@@ -26,20 +26,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <commctrl.h>
 #include <Richedit.h>
 
-#define MIRANDA_VER  0x0600
-#include "..\..\include\m_plugins.h"
-#include "..\..\include\newpluginapi.h"
-#include "..\..\include\m_utils.h"
-#include "..\..\include\m_system.h"
-#include "..\..\include\m_clist.h"
-#include "..\..\include\m_options.h"
-#include "..\..\include\m_database.h"
-#include "..\..\include\m_protomod.h"
-#include "..\..\include\m_langpack.h"
-#include "..\..\include\m_icolib.h"
-#include "..\..\include\m_message.h"
-#include "..\..\include\m_contacts.h"
+//Miranda IM
+#include "m_plugins.h"
+#include "newpluginapi.h"
+#include "m_utils.h"
+#include "m_system.h"
+#include "m_clist.h"
+#include "m_options.h"
+#include "m_database.h"
+#include "m_protomod.h"
+#include "m_langpack.h"
+#include "m_icolib.h"
+#include "m_message.h"
+#include "m_contacts.h"
 
+//ExternalAPI
 #include "Utils.h"
 #include "m_msg_buttonsbar.h"
 #include "m_updater.h"
