@@ -34,7 +34,7 @@ static int CalculateCoordinatesToButton(COLORCHOOSER * pCC, POINT pt)
 	int nCols = iSquareRoot * iSquareRoot < pCC->pModule->nColorCount?iSquareRoot+1:iSquareRoot;
 
 	int col = pt.x / 25;
-	int row = (pt.y-20) / 20;
+	int row = (pt.y - 20) / 20;
 	int pos = nCols * row + col;
 
 	if (pt.y < 20 && pos >= pCC->pModule->nColorCount)
@@ -52,9 +52,9 @@ static RECT CalculateButtonToCoordinates(COLORCHOOSER * pCC, int buttonPosition)
 	int row = buttonPosition / nCols;
 	int col = buttonPosition % nCols;
 
-	pt.left = col * 25+1;
+	pt.left = col * 25 + 1;
 	pt.top = row * 20 + 20;
-	pt.right = pt.left + 25-1;
+	pt.right = pt.left + 25 - 1;
 	pt.bottom = pt.top + 20;
 
 	return pt;
