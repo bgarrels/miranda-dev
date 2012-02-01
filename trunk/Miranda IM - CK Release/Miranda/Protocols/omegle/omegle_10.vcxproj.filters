@@ -13,42 +13,45 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{fd7c4838-9af2-49a2-b818-4fbea10d7534}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="chat.cpp">
+    <ClCompile Include="src\chat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="communication.cpp">
+    <ClCompile Include="src\communication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="connection.cpp">
+    <ClCompile Include="src\connection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="contacts.cpp">
+    <ClCompile Include="src\contacts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="events.cpp">
+    <ClCompile Include="src\events.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="http.cpp">
+    <ClCompile Include="src\http.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="messages.cpp">
+    <ClCompile Include="src\messages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="proto.cpp">
+    <ClCompile Include="src\proto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stubs.cpp">
+    <ClCompile Include="src\stubs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="theme.cpp">
+    <ClCompile Include="src\theme.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils.cpp">
+    <ClCompile Include="src\utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,37 +59,40 @@
     <ClInclude Include="build.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="client.h">
+    <ClInclude Include="src\client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="common.h">
+    <ClInclude Include="src\common.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\db.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\http.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\proto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\theme.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource.h">
+      <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="constants.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="db.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="http.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="proto.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="theme.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="icons\omegle.ico">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\readme.txt">
+      <Filter>docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
