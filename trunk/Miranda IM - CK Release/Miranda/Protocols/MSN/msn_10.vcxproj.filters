@@ -18,6 +18,12 @@
     <Filter Include="docs">
       <UniqueIdentifier>{a62c6ec1-028b-45e7-8336-9762059df283}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ezxml">
+      <UniqueIdentifier>{b8e628f8-521c-41e4-97ed-28b41ee48f6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ezxml">
+      <UniqueIdentifier>{c2a41fcc-3340-4406-9c8c-c715dd9fafb9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\des.c">
@@ -120,7 +126,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ezxml\ezxml.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\ezxml</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,11 +209,11 @@
     <ClInclude Include="version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ezxml\ezxml.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\des.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ezxml\ezxml.h">
+      <Filter>Header Files\ezxml</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
