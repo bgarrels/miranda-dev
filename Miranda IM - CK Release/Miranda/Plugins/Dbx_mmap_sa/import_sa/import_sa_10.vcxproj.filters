@@ -18,42 +18,42 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ICQserver.c">
+    <ClCompile Include="src\encryption.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.c">
+    <ClCompile Include="src\ICQserver.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mirabilis.c">
+    <ClCompile Include="src\main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="miranda.c">
+    <ClCompile Include="src\mirabilis.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="progress.c">
+    <ClCompile Include="src\miranda.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="wizard.c">
+    <ClCompile Include="src\wizard.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="encryption.c">
+    <ClCompile Include="src\progress.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ICQserver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="import.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mirabilis.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mirandadb0700.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ICQserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\import.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mirabilis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mirandadb0700.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
