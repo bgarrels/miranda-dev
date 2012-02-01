@@ -26,7 +26,8 @@ void LoadEmfCache();
 void UnloadEmfCache();
 HENHMETAFILE CacheIconToEmf(HICON hIcon);
 
-//bool InsertBitmap(IRichEditOle* pRichEditOle, HBITMAP hBitmap, HGLOBAL hGlobal);
+//Disable first if you get some troubles with hGLOBAL
+bool InsertBitmap(IRichEditOle* pRichEditOle, HBITMAP hBitmap, HGLOBAL hGlobal);
 bool InsertBitmap(IRichEditOle* pRichEditOle, HENHMETAFILE hEmf);
 
 #endif
