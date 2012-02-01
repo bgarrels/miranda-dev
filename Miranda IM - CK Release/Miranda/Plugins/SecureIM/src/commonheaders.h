@@ -101,10 +101,10 @@
  
 #endif
 
-// my libs
+// SecureIM libs
 #include "secureim.h"
-#include "version.h"
-#include "resource.h"
+#include "../version.h"
+#include "../resource.h"
 #include "language.h"
 #include "loadlib.h"
 #include "mmi.h"
