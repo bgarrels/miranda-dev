@@ -52,12 +52,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define GC_CHANGEFILTERFLAG		(WM_USER+112)
 #define GC_SHOWFILTERMENU		(WM_USER+113)
 #define GC_SETWINDOWPOS			(WM_USER+114)
-//#define	GC_NICKLISTCLEAR		(WM_USER+117)
+//#define	GC_NICKLISTCLEAR	(WM_USER+117)
 #define GC_REDRAWWINDOW			(WM_USER+118)
 #define GC_SHOWCOLORCHOOSER		(WM_USER+119)
 #define GC_ADDLOG				(WM_USER+120)
 #define GC_ACKMESSAGE			(WM_USER+121)
-//#define GC_ADDUSER				(WM_USER+122)
+//#define GC_ADDUSER			(WM_USER+122)
 //#define GC_REMOVEUSER			(WM_USER+123)
 //#define GC_NICKCHANGE			(WM_USER+124)
 #define GC_UPDATENICKLIST		(WM_USER+125)
@@ -71,7 +71,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define GC_REDRAWLOG3			(WM_USER+141)
 
 //#define EM_SUBCLASSED			(WM_USER+200)
-//#define EM_UNSUBCLASSED			(WM_USER+201)
+//#define EM_UNSUBCLASSED		(WM_USER+201)
 #define EM_ACTIVATE				(WM_USER+202)
 
 #define GCW_TABROOM				10
