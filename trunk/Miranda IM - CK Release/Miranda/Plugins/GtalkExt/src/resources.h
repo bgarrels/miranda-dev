@@ -1,7 +1,7 @@
 //***************************************************************************************
 //
 //   Google Extension plugin for the Miranda IM's Jabber protocol
-//   Copyright (c) 2011 bems@jabber.org, George Hazan (ghazan@jabber.ru)
+//   Copyright (c) 2012 bems@jabber.org, George Hazan (ghazan@jabber.ru)
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License
@@ -64,4 +64,4 @@
 #define PLUGIN_VERSION_DWORD PLUGIN_MAKE_VERSION(0, 0, 0, 19)
 
 #define PLUGIN_DESCRIPTION "GTalk extensions for Jabber protocol"
-#define COPYRIGHT_STRING "2010, 11 bems"
+#define COPYRIGHT_STRING "2012, 11 bems"
