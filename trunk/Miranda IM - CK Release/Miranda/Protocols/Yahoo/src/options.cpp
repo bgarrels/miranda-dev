@@ -11,7 +11,7 @@
  * and for answering some of my questions during development of this plugin.
  */
 
-#include "yahoo.h"
+#include "../yahoo.h"
 #include "resource.h"
 
 #include <shlwapi.h>
@@ -67,12 +67,12 @@ static INT_PTR CALLBACK DlgProcYahooOpts(HWND hwndDlg, UINT msg, WPARAM wParam, 
 	case WM_COMMAND: 
 		
 		switch ( LOWORD( wParam )) {
- 		case IDC_NEWYAHOOACCOUNTLINK:
- 			YAHOO_CallService( MS_UTILS_OPENURL, 1, 
+		case IDC_NEWYAHOOACCOUNTLINK:
+			YAHOO_CallService( MS_UTILS_OPENURL, 1, 
 				ppro->GetByte( "YahooJapan", 0 ) ?
 					(LPARAM)"http://edit.yahoo.co.jp/config/eval_register" :
 					(LPARAM)"http://edit.yahoo.com/config/eval_register" );
- 			return TRUE;
+			return TRUE;
  
 		//case IDC_DISABLE_UTF8: 
 		case IDC_USE_YAB:	
@@ -80,11 +80,11 @@ static INT_PTR CALLBACK DlgProcYahooOpts(HWND hwndDlg, UINT msg, WPARAM wParam, 
 		case IDC_MAIL_AUTOLOGIN:
 		case IDC_SHOW_ERRORS:
 		case IDC_DISABLEYAHOOMAIL:
- 		    SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
- 		    break;
- 		}    
+			SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+			break;
+		}    
 
- 		if ( HIWORD( wParam ) == EN_CHANGE && ( HWND )lParam == GetFocus())
+		if ( HIWORD( wParam ) == EN_CHANGE && ( HWND )lParam == GetFocus())
 			switch( LOWORD( wParam )) {
 			case IDC_HANDLE:			
 			case IDC_PASSWORD:			
@@ -187,12 +187,12 @@ static INT_PTR CALLBACK DlgProcYahooOptsConn(HWND hwndDlg, UINT msg, WPARAM wPar
 
 	case WM_COMMAND:
 		switch ( LOWORD( wParam )) {
- 		case IDC_RESETSERVER:
+		case IDC_RESETSERVER:
 			SetDlgItemTextA( hwndDlg, IDC_LOGINSERVER, YAHOO_DEFAULT_LOGIN_SERVER );
- 			SetDlgItemInt(  hwndDlg, IDC_YAHOOPORT,  YAHOO_DEFAULT_PORT, FALSE );
- 			SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
- 			break;
- 		
+			SetDlgItemInt(  hwndDlg, IDC_YAHOOPORT,  YAHOO_DEFAULT_PORT, FALSE );
+			SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+			break;
+		
 		case IDC_YAHOO_JAPAN:
 			SetDlgItemTextA( hwndDlg, IDC_LOGINSERVER, 
 				(IsDlgButtonChecked(hwndDlg,IDC_YAHOO_JAPAN)==BST_CHECKED) ?
@@ -202,14 +202,14 @@ static INT_PTR CALLBACK DlgProcYahooOptsConn(HWND hwndDlg, UINT msg, WPARAM wPar
 
 			SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
 			break;
-  		}    
+		}    
 
- 		if ( HIWORD( wParam ) == EN_CHANGE && ( HWND )lParam == GetFocus())
-  			switch( LOWORD( wParam )) {
+		if ( HIWORD( wParam ) == EN_CHANGE && ( HWND )lParam == GetFocus())
+			switch( LOWORD( wParam )) {
 			case IDC_LOGINSERVER:
-  			case IDC_YAHOOPORT:			
-  				SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
-  			}
+			case IDC_YAHOOPORT:			
+				SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+			}
 
 		break;
 

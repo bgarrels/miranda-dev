@@ -11,7 +11,7 @@
  * and for answering some of my questions during development of this plugin.
  */
 
-#include "yahoo.h"
+#include "../yahoo.h"
 
 #include <shlwapi.h>
 #include <win2k.h>
@@ -87,7 +87,7 @@ INT_PTR CYahooProto::OnModulesLoadedEx( WPARAM, LPARAM )
 #ifdef HTTP_GATEWAY
 	nlu.flags = NUF_OUTGOING | NUF_HTTPGATEWAY| NUF_HTTPCONNS | NUF_TCHAR;
 #else
-  	nlu.flags = NUF_OUTGOING | NUF_HTTPCONNS | NUF_TCHAR;
+	nlu.flags = NUF_OUTGOING | NUF_HTTPCONNS | NUF_TCHAR;
 #endif
 	nlu.szSettingsModule = m_szModuleName;
 	nlu.ptszDescriptiveName = tModuleDescr;
@@ -96,7 +96,7 @@ INT_PTR CYahooProto::OnModulesLoadedEx( WPARAM, LPARAM )
 	// Here comes the Gateway Code! 
 	nlu.szHttpGatewayHello = NULL;
 	nlu.szHttpGatewayUserAgent = "User-Agent: Mozilla/4.01 [en] (Win95; I)";
- 	nlu.pfnHttpGatewayInit = YAHOO_httpGatewayInit;
+	nlu.pfnHttpGatewayInit = YAHOO_httpGatewayInit;
 	nlu.pfnHttpGatewayBegin = NULL;
 	nlu.pfnHttpGatewayWrapSend = YAHOO_httpGatewayWrapSend;
 	nlu.pfnHttpGatewayUnwrapRecv = YAHOO_httpGatewayUnwrapRecv;
@@ -720,7 +720,7 @@ int __cdecl CYahooProto::SetAwayMsg( int status, const PROTOCHAR* msg )
 		
 	DebugLog("[YahooSetAwayMessage] Status: %s, Msg: %s",(char *) CallService(MS_CLIST_GETSTATUSMODEDESCRIPTION, status, 0), (char*) c);
 	
-    if(!m_bLoggedIn){
+	if(!m_bLoggedIn){
 		if (m_iStatus == ID_STATUS_OFFLINE) {
 			DebugLog("[YahooSetAwayMessage] WARNING: WE ARE OFFLINE!"); 
 			mir_free(c);
@@ -748,7 +748,7 @@ int __cdecl CYahooProto::SetAwayMsg( int status, const PROTOCHAR* msg )
 		} else if(status != ID_STATUS_INVISIBLE){ 
 			set_status(YAHOO_CUSTOM_STATUS, c, 1);
 		}
-    } else {
+	} else {
 		set_status(status, NULL, 0);
 		m_startMsg = NULL;
 	}

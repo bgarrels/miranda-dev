@@ -16,9 +16,9 @@
 #include <io.h>
 
 /*
- * Miranda headers
+ * Miranda IM headers
  */
-#include "yahoo.h"
+#include "../yahoo.h"
 #include <m_protosvc.h>
 #include <m_langpack.h>
 #include <m_message.h>

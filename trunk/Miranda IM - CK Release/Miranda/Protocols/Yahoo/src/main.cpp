@@ -10,9 +10,9 @@
  * I want to thank Robert Rainwater and George Hazan for their code and support
  * and for answering some of my questions during development of this plugin.
  */
-#include "yahoo.h"
+#include "../yahoo.h"
 #include "http_gateway.h"
-#include "version.h"
+#include "../version.h"
 #include "resource.h"
 
 #include <m_langpack.h>
@@ -46,11 +46,11 @@ PLUGININFOEX pluginInfo={
 		"http://www.miranda-im.org",
 		UNICODE_AWARE, //not transient
 		0, //DEFMOD_PROTOCOLYAHOO - no core yahoo protocol
-        #if defined( _UNICODE )
-        {0xaa7bfea, 0x1fc7, 0x45f0, {0x90, 0x6e, 0x2a, 0x46, 0xb6, 0xe1, 0x19, 0xcf}} // {0AA7BFEA-1FC7-45f0-906E-2A46B6E119CF}
-        #else
-        {0x6151b6e6, 0x3a7b, 0x45e6, {0x9a, 0x51, 0x18, 0x72, 0xc1, 0x7b, 0x5, 0xa9}} // {6151B6E6-3A7B-45e6-9A51-1872C17B05A9}
-        #endif
+		#if defined( _UNICODE )
+		{0xaa7bfea, 0x1fc7, 0x45f0, {0x90, 0x6e, 0x2a, 0x46, 0xb6, 0xe1, 0x19, 0xcf}} // {0AA7BFEA-1FC7-45f0-906E-2A46B6E119CF}
+		#else
+		{0x6151b6e6, 0x3a7b, 0x45e6, {0x9a, 0x51, 0x18, 0x72, 0xc1, 0x7b, 0x5, 0xa9}} // {6151B6E6-3A7B-45e6-9A51-1872C17B05A9}
+		#endif
 };
 
 void YmsgrLinksInit(void);
@@ -109,7 +109,7 @@ static int yahooProtoUninit( CYahooProto* ppro )
 
 extern "C" int __declspec(dllexport)Load(PLUGINLINK *link)
 {
- 	pluginLink = link;
+	pluginLink = link;
 	
 	/**
 	 * Grab the interface handles (through pluginLink)
@@ -136,7 +136,7 @@ extern "C" int __declspec(dllexport)Load(PLUGINLINK *link)
 
 	NETLIBUSER nlu = {0};
 	nlu.cbSize = sizeof(nlu);
-  	nlu.flags = NUF_TCHAR | NUF_OUTGOING | NUF_HTTPCONNS;
+	nlu.flags = NUF_TCHAR | NUF_OUTGOING | NUF_HTTPCONNS;
 	nlu.szSettingsModule = "YAHOO/libyahoo2";
 	nlu.ptszDescriptiveName = TranslateT("YAHOO plugin HTTP connections");
 	g_hNetlibUser = ( HANDLE )YAHOO_CallService( MS_NETLIB_REGISTERUSER, 0, ( LPARAM )&nlu );
@@ -174,16 +174,16 @@ extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD miranda
 	/*
 	 * This requires the latest trunk... [md5, sha, etc..]
 	 */
-    if (mirandaVersion < MIRANDA_VERSION_CORE ) {
+	if (mirandaVersion < MIRANDA_VERSION_CORE ) {
 		MessageBoxA( NULL, 
 				"Yahoo plugin cannot be loaded. It requires Miranda IM " MIRANDA_VERSION_CORE_STRING " or later.",
 				"Yahoo",
 				MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST );
 
-        return NULL;
+		return NULL;
 	}
 
-    return &pluginInfo;
+	return &pluginInfo;
 }
 
 /*

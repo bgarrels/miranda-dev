@@ -10,7 +10,7 @@
  * I want to thank Robert Rainwater and George Hazan for their code and support
  * and for answering some of my questions during development of this plugin.
  */
-#include "yahoo.h"
+#include "../yahoo.h"
 #include <m_protosvc.h>
 #include <m_langpack.h>
 #include <m_message.h>
@@ -64,9 +64,9 @@ void ext_yahoo_chat_message(int id, const char *me, const char *who, const char 
 
 void ext_yahoo_chat_yahoologout(int id, const char *me)
 { 
- 	LOG(("got chat logout"));
+	LOG(("got chat logout"));
 }
 void ext_yahoo_chat_yahooerror(int id, const char *me)
 { 
- 	LOG(("got chat error"));
+	LOG(("got chat error"));
 }

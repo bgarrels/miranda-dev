@@ -11,7 +11,7 @@
  * and for answering some of my questions during development of this plugin.
  */
 
-#include "yahoo.h"
+#include "../yahoo.h"
 #include <m_protosvc.h>
 #include <m_langpack.h>
 
@@ -103,7 +103,7 @@ void CYahooProto::ext_got_search_result(int found, int start, int total, YList *
 				psr.email = mir_utf8decodeT( yct->location );
 			else
 				psr.email = NULL;
-    
+	
 			//void yahoo_search(int id, enum yahoo_search_type t, const char *text, enum yahoo_search_gender g, enum yahoo_search_agerange ar, 
 			//	int photo, int yahoo_only)
 
