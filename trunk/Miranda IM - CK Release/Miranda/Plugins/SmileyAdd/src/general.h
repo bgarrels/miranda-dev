@@ -75,7 +75,7 @@ typedef Matcher _TMatcher;
 
 #define _MT
 
-#include "resource.h"
+#include "../resource.h"
 
 #pragma warning( push )
 #pragma warning( disable : 4100 )

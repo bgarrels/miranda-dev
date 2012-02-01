@@ -17,13 +17,16 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+//Miranda IM
 #include "smileys.h"
 #include "customsmiley.h"
 #include "services.h"
 #include "options.h"
 #include "download.h"
 #include "imagecache.h"
-#include "version.h"
+#include "../version.h"
+
+//ExternalAPI
 #include "m_updater.h"
 #include "m_metacontacts.h"
 

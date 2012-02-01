@@ -30,6 +30,7 @@
     <UseOfAtl>false</UseOfAtl>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -42,6 +43,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -151,7 +153,7 @@
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
       </ExceptionHandling>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
@@ -171,6 +173,7 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -192,6 +195,7 @@
       <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
@@ -203,6 +207,9 @@
       <AdditionalDependencies>comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;advapi32.lib;gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <DelayLoadDLLs>gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <TurnOffAssemblyGeneration>true</TurnOffAssemblyGeneration>
+      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
     </Link>
     <ClCompile>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
@@ -217,6 +224,7 @@
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
@@ -230,42 +238,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="anim.cpp" />
-    <ClCompile Include="AniSmileyObject.cpp" />
-    <ClCompile Include="bkstring.cpp" />
-    <ClCompile Include="customsmiley.cpp" />
-    <ClCompile Include="dlgboxsubclass.cpp" />
-    <ClCompile Include="download.cpp" />
-    <ClCompile Include="general.cpp" />
-    <ClCompile Include="imagecache.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="options.cpp" />
-    <ClCompile Include="richcall.cpp" />
-    <ClCompile Include="services.cpp" />
-    <ClCompile Include="SmileyBase.cpp" />
-    <ClCompile Include="smileyroutines.cpp" />
-    <ClCompile Include="smileys.cpp" />
-    <ClCompile Include="smltool.cpp" />
+    <ClCompile Include="src\anim.cpp" />
+    <ClCompile Include="src\AniSmileyObject.cpp" />
+    <ClCompile Include="src\bkstring.cpp" />
+    <ClCompile Include="src\customsmiley.cpp" />
+    <ClCompile Include="src\dlgboxsubclass.cpp" />
+    <ClCompile Include="src\download.cpp" />
+    <ClCompile Include="src\general.cpp" />
+    <ClCompile Include="src\imagecache.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\options.cpp" />
+    <ClCompile Include="src\richcall.cpp" />
+    <ClCompile Include="src\services.cpp" />
+    <ClCompile Include="src\SmileyBase.cpp" />
+    <ClCompile Include="src\smileyroutines.cpp" />
+    <ClCompile Include="src\smileys.cpp" />
+    <ClCompile Include="src\smltool.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ExternalAPI\m_folders.h" />
-    <ClInclude Include="..\..\ExternalAPI\m_metacontacts.h" />
-    <ClInclude Include="..\..\ExternalAPI\m_smileyadd.h" />
-    <ClInclude Include="..\..\ExternalAPI\m_smileyadd_deprecated.h" />
-    <ClInclude Include="..\..\ExternalAPI\m_updater.h" />
-    <ClInclude Include="anim.h" />
-    <ClInclude Include="bkstring.h" />
-    <ClInclude Include="customsmiley.h" />
-    <ClInclude Include="download.h" />
-    <ClInclude Include="general.h" />
-    <ClInclude Include="imagecache.h" />
-    <ClInclude Include="options.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="services.h" />
-    <ClInclude Include="SmileyBase.h" />
-    <ClInclude Include="smileyroutines.h" />
-    <ClInclude Include="smileys.h" />
-    <ClInclude Include="smltool.h" />
+    <ClInclude Include="src\anim.h" />
+    <ClInclude Include="src\bkstring.h" />
+    <ClInclude Include="src\customsmiley.h" />
+    <ClInclude Include="src\download.h" />
+    <ClInclude Include="src\general.h" />
+    <ClInclude Include="src\imagecache.h" />
+    <ClInclude Include="src\options.h" />
+    <ClInclude Include="src\services.h" />
+    <ClInclude Include="src\SmileyBase.h" />
+    <ClInclude Include="src\smileyroutines.h" />
+    <ClInclude Include="src\smileys.h" />
+    <ClInclude Include="src\smltool.h" />
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
