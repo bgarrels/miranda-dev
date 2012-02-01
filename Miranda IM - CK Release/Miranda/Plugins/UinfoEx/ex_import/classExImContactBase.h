@@ -30,7 +30,7 @@ Last change by : $Author: ing.u.horn $
 #pragma once
 
 #include "tinyxml.h"
-#include "..\svc_gender.h"
+#include "..\src\svc_gender.h"
 
 HANDLE CListFindGroup(LPCSTR pszGroup);
 

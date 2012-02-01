@@ -31,7 +31,7 @@ Last change by : $Author: ing.u.horn $
 ===============================================================================
 */
 
-#include "..\commonheaders.h"
+#include "..\src\commonheaders.h"
 #include "svc_flags.h"
 #include "svc_flagsicons.h"
 

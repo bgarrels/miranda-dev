@@ -28,7 +28,7 @@ Last change by : $Author: ing.u.horn $
 ===============================================================================
 */
 
-#include "commonheaders.h"
+#include "..\src\commonheaders.h"
 
 #ifdef _UNICODE
  #include <dlgs.h>

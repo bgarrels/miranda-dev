@@ -138,8 +138,8 @@ typedef std::basic_string<TCHAR>	tstring;
 #define GetUserData(p)		GetWindowLongPtr((p), GWLP_USERDATA)
 #define SetUserData(p, l)	SetWindowLongPtr((p), GWLP_USERDATA, (LONG_PTR) (l))
 
-#include "res\resource.h"
-#include "iconpacks/icons.h"
+#include "..\res\resource.h"
+#include "..\iconpacks/icons.h"
 
 #include "svc_constants.h"
 

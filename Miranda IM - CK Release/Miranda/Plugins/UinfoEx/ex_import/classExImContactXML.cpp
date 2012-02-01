@@ -27,7 +27,7 @@ Last change by : $Author: ing.u.horn $
 
 ===============================================================================
 */
-#include "commonheaders.h"
+#include "..\src\commonheaders.h"
 #include "classExImContactXML.h"
 #include "svc_ExImXML.h"
 #include "mir_rfcCodecs.h"

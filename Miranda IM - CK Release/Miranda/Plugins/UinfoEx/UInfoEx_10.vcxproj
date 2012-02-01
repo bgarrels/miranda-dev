@@ -30,6 +30,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -40,6 +41,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -174,7 +176,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;UINFOEX_EXPORTS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>commonheaders.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -186,6 +188,7 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -224,7 +227,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;UINFOEX_EXPORTS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>commonheaders.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -236,9 +239,10 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;_WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;_WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
@@ -263,34 +267,47 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="classMAnnivDate.cpp" />
-    <ClCompile Include="classMTime.cpp" />
-    <ClCompile Include="classPsTree.cpp" />
-    <ClCompile Include="classPsTreeItem.cpp" />
-    <ClCompile Include="commonheaders.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="init.cpp" />
-    <ClCompile Include="mir_contactqueue.cpp" />
-    <ClCompile Include="mir_db.cpp" />
-    <ClCompile Include="mir_icolib.cpp" />
-    <ClCompile Include="mir_menuitems.cpp" />
-    <ClCompile Include="mir_string.cpp" />
-    <ClCompile Include="psp_options.cpp" />
-    <ClCompile Include="svc_avatar.cpp" />
-    <ClCompile Include="svc_constants.cpp" />
-    <ClCompile Include="svc_contactinfo.cpp" />
-    <ClCompile Include="svc_email.cpp" />
-    <ClCompile Include="svc_gender.cpp" />
-    <ClCompile Include="svc_homepage.cpp" />
-    <ClCompile Include="svc_phone.cpp" />
-    <ClCompile Include="svc_refreshci.cpp" />
-    <ClCompile Include="svc_reminder.cpp" />
-    <ClCompile Include="svc_timezone.cpp" />
-    <ClCompile Include="svc_timezone_old.cpp" />
+    <ClCompile Include="src\classMAnnivDate.cpp" />
+    <ClCompile Include="src\classMTime.cpp" />
+    <ClCompile Include="src\classPsTree.cpp" />
+    <ClCompile Include="src\classPsTreeItem.cpp" />
+    <ClCompile Include="src\commonheaders.cpp" />
+    <ClCompile Include="src\ctrl_annivedit.cpp" />
+    <ClCompile Include="src\ctrl_base.cpp" />
+    <ClCompile Include="src\ctrl_button.cpp" />
+    <ClCompile Include="src\ctrl_combo.cpp" />
+    <ClCompile Include="src\ctrl_contact.cpp" />
+    <ClCompile Include="src\ctrl_edit.cpp" />
+    <ClCompile Include="src\ctrl_tzcombo.cpp" />
+    <ClCompile Include="src\dlg_anniversarylist.cpp" />
+    <ClCompile Include="src\dlg_msgbox.cpp" />
+    <ClCompile Include="src\dlg_propsheet.cpp" />
+    <ClCompile Include="src\init.cpp" />
+    <ClCompile Include="src\mir_contactqueue.cpp" />
+    <ClCompile Include="src\mir_db.cpp" />
+    <ClCompile Include="src\mir_icolib.cpp" />
+    <ClCompile Include="src\mir_menuitems.cpp" />
+    <ClCompile Include="src\mir_string.cpp" />
+    <ClCompile Include="src\psp_about.cpp" />
+    <ClCompile Include="src\psp_anniversary.cpp" />
+    <ClCompile Include="src\psp_base.cpp" />
+    <ClCompile Include="src\psp_company.cpp" />
+    <ClCompile Include="src\psp_contact.cpp" />
+    <ClCompile Include="src\psp_general.cpp" />
+    <ClCompile Include="src\psp_options.cpp" />
+    <ClCompile Include="src\psp_origin.cpp" />
+    <ClCompile Include="src\psp_profile.cpp" />
+    <ClCompile Include="src\svc_avatar.cpp" />
+    <ClCompile Include="src\svc_constants.cpp" />
+    <ClCompile Include="src\svc_contactinfo.cpp" />
+    <ClCompile Include="src\svc_email.cpp" />
+    <ClCompile Include="src\svc_gender.cpp" />
+    <ClCompile Include="src\svc_homepage.cpp" />
+    <ClCompile Include="src\svc_phone.cpp" />
+    <ClCompile Include="src\svc_refreshci.cpp" />
+    <ClCompile Include="src\svc_reminder.cpp" />
+    <ClCompile Include="src\svc_timezone.cpp" />
+    <ClCompile Include="src\svc_timezone_old.cpp" />
     <ClCompile Include="ex_import\classExImContactBase.cpp" />
     <ClCompile Include="ex_import\classExImContactXML.cpp" />
     <ClCompile Include="ex_import\dlg_ExImModules.cpp" />
@@ -358,46 +375,38 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">..\commonheaders.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">..\commonheaders.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="dlg_anniversarylist.cpp" />
-    <ClCompile Include="dlg_msgbox.cpp" />
-    <ClCompile Include="dlg_propsheet.cpp" />
-    <ClCompile Include="psp_about.cpp" />
-    <ClCompile Include="psp_anniversary.cpp" />
-    <ClCompile Include="psp_base.cpp" />
-    <ClCompile Include="psp_company.cpp" />
-    <ClCompile Include="psp_contact.cpp" />
-    <ClCompile Include="psp_general.cpp" />
-    <ClCompile Include="psp_origin.cpp" />
-    <ClCompile Include="psp_profile.cpp" />
-    <ClCompile Include="ctrl_annivedit.cpp" />
-    <ClCompile Include="ctrl_base.cpp" />
-    <ClCompile Include="ctrl_button.cpp" />
-    <ClCompile Include="ctrl_combo.cpp" />
-    <ClCompile Include="ctrl_contact.cpp" />
-    <ClCompile Include="ctrl_edit.cpp" />
-    <ClCompile Include="ctrl_tzcombo.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="classMAnnivDate.h" />
-    <ClInclude Include="classMTime.h" />
-    <ClInclude Include="commonheaders.h" />
-    <ClInclude Include="mir_contactqueue.h" />
-    <ClInclude Include="mir_db.h" />
-    <ClInclude Include="mir_icolib.h" />
-    <ClInclude Include="mir_menuitems.h" />
-    <ClInclude Include="mir_string.h" />
-    <ClInclude Include="psp_options.h" />
-    <ClInclude Include="svc_avatar.h" />
-    <ClInclude Include="svc_constants.h" />
-    <ClInclude Include="svc_contactinfo.h" />
-    <ClInclude Include="svc_email.h" />
-    <ClInclude Include="svc_gender.h" />
-    <ClInclude Include="svc_homepage.h" />
-    <ClInclude Include="svc_phone.h" />
-    <ClInclude Include="svc_refreshci.h" />
-    <ClInclude Include="svc_reminder.h" />
-    <ClInclude Include="svc_timezone.h" />
-    <ClInclude Include="svc_timezone_old.h" />
+    <ClInclude Include="src\classMAnnivDate.h" />
+    <ClInclude Include="src\classMTime.h" />
+    <ClInclude Include="src\commonheaders.h" />
+    <ClInclude Include="src\ctrl_annivedit.h" />
+    <ClInclude Include="src\ctrl_base.h" />
+    <ClInclude Include="src\ctrl_button.h" />
+    <ClInclude Include="src\ctrl_combo.h" />
+    <ClInclude Include="src\ctrl_contact.h" />
+    <ClInclude Include="src\ctrl_edit.h" />
+    <ClInclude Include="src\ctrl_tzcombo.h" />
+    <ClInclude Include="src\dlg_anniversarylist.h" />
+    <ClInclude Include="src\dlg_msgbox.h" />
+    <ClInclude Include="src\dlg_propsheet.h" />
+    <ClInclude Include="src\mir_contactqueue.h" />
+    <ClInclude Include="src\mir_db.h" />
+    <ClInclude Include="src\mir_icolib.h" />
+    <ClInclude Include="src\mir_menuitems.h" />
+    <ClInclude Include="src\mir_string.h" />
+    <ClInclude Include="src\psp_base.h" />
+    <ClInclude Include="src\psp_options.h" />
+    <ClInclude Include="src\svc_avatar.h" />
+    <ClInclude Include="src\svc_constants.h" />
+    <ClInclude Include="src\svc_contactinfo.h" />
+    <ClInclude Include="src\svc_email.h" />
+    <ClInclude Include="src\svc_gender.h" />
+    <ClInclude Include="src\svc_homepage.h" />
+    <ClInclude Include="src\svc_phone.h" />
+    <ClInclude Include="src\svc_refreshci.h" />
+    <ClInclude Include="src\svc_reminder.h" />
+    <ClInclude Include="src\svc_timezone.h" />
     <ClInclude Include="ex_import\classExImContactBase.h" />
     <ClInclude Include="ex_import\classExImContactXML.h" />
     <ClInclude Include="ex_import\dlg_ExImModules.h" />
@@ -413,19 +422,9 @@
     <ClInclude Include="Flags\svc_countrylistext.h" />
     <ClInclude Include="Flags\svc_flags.h" />
     <ClInclude Include="Flags\svc_flagsicons.h" />
-    <ClInclude Include="dlg_anniversarylist.h" />
-    <ClInclude Include="dlg_msgbox.h" />
-    <ClInclude Include="dlg_propsheet.h" />
-    <ClInclude Include="psp_base.h" />
-    <ClInclude Include="ctrl_annivedit.h" />
-    <ClInclude Include="ctrl_base.h" />
-    <ClInclude Include="ctrl_button.h" />
-    <ClInclude Include="ctrl_combo.h" />
-    <ClInclude Include="ctrl_contact.h" />
-    <ClInclude Include="ctrl_edit.h" />
-    <ClInclude Include="ctrl_tzcombo.h" />
     <ClInclude Include="Res\resource.h" />
     <ClInclude Include="Res\version.h" />
+    <ClInclude Include="src\svc_timezone_old.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\changelog.txt" />

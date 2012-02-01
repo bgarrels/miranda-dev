@@ -28,7 +28,7 @@ Last change by : $Author: kreol13 $
 ===============================================================================
 */
 #include "commonheaders.h"
-#include "res/version.h"
+#include "../res/version.h"
 #include "m_updater.h"
 
 #include "mir_menuitems.h"
@@ -38,8 +38,8 @@ Last change by : $Author: kreol13 $
 #include "dlg_propsheet.h"
 #include "dlg_anniversarylist.h"
 #include "psp_options.h"
-#include "ex_import/svc_ExImport.h"
-//#include "ex_import/svc_ExImVCF.h"
+#include "..\ex_import/svc_ExImport.h"
+//#include "..\ex_import/svc_ExImVCF.h"
 #include "svc_avatar.h"
 #include "svc_contactinfo.h"
 #include "svc_email.h"
@@ -50,7 +50,7 @@ Last change by : $Author: kreol13 $
 #include "svc_reminder.h"
 #include "svc_timezone.h"
 #include "svc_timezone_old.h"
-#include "flags/svc_flags.h"
+#include "..\Flags/svc_flags.h"
 
 int hLangpack;
 
