@@ -22,10 +22,10 @@ PLUGININFOEX pluginInfo={
 	"http://mods.mirandaim.ru/",
 	UNICODE_AWARE,
 	0,		//doesn't replace anything built-in
-    // Generate your own unique id for your plugin.
-    // Do not use this UUID!
-    // Use uuidgen.exe to generate the uuuid
-    // {81C220A6-0226-4ad6-BFCA-217B17A16053}
+	// Generate your own unique id for your plugin.
+	// Do not use this UUID!
+	// Use uuidgen.exe to generate the uuuid
+	// {81C220A6-0226-4ad6-BFCA-217B17A16053}
 	{ 0x81c220a6, 0x226, 0x4ad6, { 0xbf, 0xca, 0x21, 0x7b, 0x17, 0xa1, 0x60, 0x53 } }
 };
 
@@ -237,25 +237,25 @@ HWND CreateToolTip(HWND hwndParent, LPTSTR ptszText, LPTSTR ptszTitle)
 {
 	TOOLINFO ti = { 0 };
 	HWND hwndTT;
-    hwndTT = CreateWindowEx(WS_EX_TOPMOST,
-        TOOLTIPS_CLASS, NULL,
-        WS_POPUP | TTS_NOPREFIX,		
-        CW_USEDEFAULT, CW_USEDEFAULT,
-        CW_USEDEFAULT, CW_USEDEFAULT,
-        hwndParent, NULL, hInst, NULL);
+	hwndTT = CreateWindowEx(WS_EX_TOPMOST,
+		TOOLTIPS_CLASS, NULL,
+		WS_POPUP | TTS_NOPREFIX,		
+		CW_USEDEFAULT, CW_USEDEFAULT,
+		CW_USEDEFAULT, CW_USEDEFAULT,
+		hwndParent, NULL, hInst, NULL);
 
-    SetWindowPos(hwndTT, HWND_TOPMOST, 0, 0, 0, 0,
-        SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+	SetWindowPos(hwndTT, HWND_TOPMOST, 0, 0, 0, 0,
+		SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
 
-    ti.cbSize = sizeof(TOOLINFO);
-    ti.uFlags = TTF_SUBCLASS | TTF_CENTERTIP;
-    ti.hwnd = hwndParent;
-    ti.hinst = hInst;
-    ti.lpszText = ptszText;
-    GetClientRect (hwndParent, &ti.rect);
+	ti.cbSize = sizeof(TOOLINFO);
+	ti.uFlags = TTF_SUBCLASS | TTF_CENTERTIP;
+	ti.hwnd = hwndParent;
+	ti.hinst = hInst;
+	ti.lpszText = ptszText;
+	GetClientRect (hwndParent, &ti.rect);
 	ti.rect.left -= 80;
 
-    SendMessage(hwndTT, TTM_ADDTOOL, 0, (LPARAM) (LPTOOLINFO) &ti);
+	SendMessage(hwndTT, TTM_ADDTOOL, 0, (LPARAM) (LPTOOLINFO) &ti);
 	SendMessage(hwndTT, TTM_SETTITLE, 1, (LPARAM)ptszTitle);
 	SendMessage(hwndTT, TTM_SETMAXTIPWIDTH, 0, (LPARAM)700);
 	return hwndTT;
