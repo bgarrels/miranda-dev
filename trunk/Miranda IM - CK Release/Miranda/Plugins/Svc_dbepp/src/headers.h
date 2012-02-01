@@ -49,8 +49,8 @@
 #include "m_updater.h"
 #include "m_toptoolbar.h"
 
-#include "resource.h"
-#include "Version.h"
+#include "../resource.h"
+#include "../Version.h"
 #include "modsettingenum.h"
 
 #define DEF_ICON    7
