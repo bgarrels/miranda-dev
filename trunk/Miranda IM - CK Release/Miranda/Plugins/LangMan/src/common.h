@@ -50,5 +50,5 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //#include "update.h"
 //#include "unzip.h"
 #include "utils.h"
-#include "resource.h"
+#include "../resource.h"
 #include "m_langman.h"
