@@ -3,6 +3,7 @@
 	Copyright (c) 2001-2004 Luca Santarelli
 	Copyright (c) 2005-2007 Vasilich
 	Copyright (c) 2007-2011 yaho
+	Copyright (c) 2011-2012 CHEF-KOCH, Mataes
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -19,23 +20,15 @@
 	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#ifndef INDSND_H
-#define INDSND_H
+#ifndef UTILS_H
+#define UTILS_H
 
-#define EXTRA_IMAGE_SOUND		0
-#define EXTRA_IMAGE_POPUP		1
-#define EXTRA_IMAGE_XSTATUS		2
-#define EXTRA_IMAGE_LOGGING		3
-#define EXTRA_IMAGE_DISABLEALL	4
-#define EXTRA_IMAGE_ENABLEALL	5
-#define EXTRA_IMAGE_DOT			6
-#define EXTRA_IMAGE_BLANK		0xFF
-
-#define STATUS_COLUMN			110
-
-#define DEFAULT_SOUND			"(default sound)"
-
-int UserInfoInitialise(WPARAM wParam, LPARAM lParam);
-INT_PTR CALLBACK DlgProcFiltering(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam); 
+TCHAR *db2t(DBVARIANT *dbv);
+int DBGetStringDefault(HANDLE hContact, const char *szModule, const char *szSetting, TCHAR *setting, int size, const TCHAR *defaultValue);
+void HigherLower(int maxValue, int minValue);
+void ShowLog(TCHAR *file);
+int ProtoServiceExists(const char *szModule, const char *szService);
+BOOL StatusHasAwayMessage(char *szProto, int status);
+void LogToFile(TCHAR *stzText);
 
 #endif
