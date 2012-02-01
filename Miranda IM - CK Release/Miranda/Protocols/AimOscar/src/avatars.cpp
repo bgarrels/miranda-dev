@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "aim.h"
+#include "../aim.h"
 #include "avatars.h"
 
 #include "m_folders.h"
@@ -286,10 +286,10 @@ void rescale_image(char *data, unsigned short size, char *&data1, unsigned short
 	CallService(MS_IMG_GETINTERFACE, FI_IF_VERSION, (LPARAM) &fei);
 	if (fei == NULL) return;
 
-    FIMEMORY *hmem = fei->FI_OpenMemory((BYTE *)data, size);
-    FREE_IMAGE_FORMAT fif = fei->FI_GetFileTypeFromMemory(hmem, 0);
-    FIBITMAP *dib = fei->FI_LoadFromMemory(fif, hmem, 0);
-    fei->FI_CloseMemory(hmem);
+	FIMEMORY *hmem = fei->FI_OpenMemory((BYTE *)data, size);
+	FREE_IMAGE_FORMAT fif = fei->FI_GetFileTypeFromMemory(hmem, 0);
+	FIBITMAP *dib = fei->FI_LoadFromMemory(fif, hmem, 0);
+	fei->FI_CloseMemory(hmem);
 
 	if (fei->FI_GetWidth(dib) > 64)
 	{
