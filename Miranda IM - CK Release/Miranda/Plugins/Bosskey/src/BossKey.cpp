@@ -1,5 +1,5 @@
 /*
-	BossKey - Hide Miranda from your boss :)
+	BossKey - Hide Miranda IM from your boss :)
 	Copyright (C) 2002-2003 Goblineye Entertainment, (C) 2007-2010 Billy_Bons
 
 	This program is free software; you can redistribute it and/or modify
