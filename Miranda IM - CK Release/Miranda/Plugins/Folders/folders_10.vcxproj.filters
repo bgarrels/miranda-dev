@@ -18,60 +18,60 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dlg_handlers.cpp">
+    <ClCompile Include="src\dlg_handlers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="events.cpp">
+    <ClCompile Include="src\events.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="folderItem.cpp">
+    <ClCompile Include="src\folderItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="folders.cpp">
+    <ClCompile Include="src\folders.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="foldersList.cpp">
+    <ClCompile Include="src\foldersList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hooked_events.cpp">
+    <ClCompile Include="src\hooked_events.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="services.cpp">
+    <ClCompile Include="src\services.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils.cpp">
+    <ClCompile Include="src\utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="commonheaders.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dlg_handlers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="events.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="folderItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="foldersList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hooked_events.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="services.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commonheaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dlg_handlers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\folderItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\foldersList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hooked_events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\services.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -84,11 +84,14 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="variablesHelp.inc">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="docs\folders_readme.txt">
       <Filter>docs</Filter>
+    </None>
+    <None Include="docs\variables help.doc">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="src\variablesHelp.inc">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>

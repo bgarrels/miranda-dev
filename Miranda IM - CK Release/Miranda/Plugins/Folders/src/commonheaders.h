@@ -20,9 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #ifndef M_FOLDERS_COMMONHEADERS_H
 #define M_FOLDERS_COMMONHEADERS_H
-
 #define MIRANDA_CUSTOM_LP
-
 #define MAX_FOLDER_SIZE 2048
 
 #include <stdio.h>
@@ -30,16 +28,19 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <string.h>
 #include <windows.h>
 
+//Core
 #include "newpluginapi.h"
 #include "m_utils.h"
 #include "m_folders.h"
 
-#include "version.h"
+//res to api
+#include "../version.h"
 #include "utils.h"
 #include "resource.h"
 #include "foldersList.h"
 #include "dlg_handlers.h"
 
+//Miranda IM
 #include "m_database.h"
 #include "m_system.h"
 #include "m_skin.h"
