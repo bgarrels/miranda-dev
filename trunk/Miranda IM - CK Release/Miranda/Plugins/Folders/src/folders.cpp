@@ -54,8 +54,8 @@ PLUGININFOEX pluginInfo = {
 
 typedef struct{
 	int cbSize;																	//size of struct
-	int nUniqueID;															//unique id for this path. This ID should be unique for your plugin.
-	char szName[FOLDERS_NAME_MAX_SIZE];					//name to show in options
+	int nUniqueID;																//unique id for this path. This ID should be unique for your plugin.
+	char szName[FOLDERS_NAME_MAX_SIZE];											//name to show in options
 } FOLDERSDATA_OLD;
 
 INT_PTR TestPlugin(WPARAM wParam, LPARAM lParam)
