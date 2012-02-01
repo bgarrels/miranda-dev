@@ -30,6 +30,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -40,6 +41,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -163,7 +165,7 @@
       <StringPooling>false</StringPooling>
       <MinimalRebuild>true</MinimalRebuild>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CallingConvention>Cdecl</CallingConvention>
@@ -176,6 +178,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <AdditionalDependencies>unicows.lib;ws2_32.lib;msimg32.lib;comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -212,7 +215,6 @@
       <StringPooling>false</StringPooling>
       <MinimalRebuild>true</MinimalRebuild>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -226,6 +228,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <AdditionalDependencies>comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;ws2_32.lib;msimg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -251,52 +254,32 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bitmap_func.cpp" />
-    <ClCompile Include="message_pump.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="mir_smileys.cpp" />
-    <ClCompile Include="options.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="popwin.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="preset_items.cpp" />
-    <ClCompile Include="skin_parser.cpp" />
-    <ClCompile Include="str_utils.cpp" />
-    <ClCompile Include="subst.cpp" />
-    <ClCompile Include="tipper.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="translations.cpp" />
+    <ClCompile Include="src\bitmap_func.cpp" />
+    <ClCompile Include="src\message_pump.cpp" />
+    <ClCompile Include="src\mir_smileys.cpp" />
+    <ClCompile Include="src\options.cpp" />
+    <ClCompile Include="src\popwin.cpp" />
+    <ClCompile Include="src\preset_items.cpp" />
+    <ClCompile Include="src\skin_parser.cpp" />
+    <ClCompile Include="src\str_utils.cpp" />
+    <ClCompile Include="src\subst.cpp" />
+    <ClCompile Include="src\tipper.cpp" />
+    <ClCompile Include="src\translations.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ExternalAPI\m_tipper.h" />
-    <ClInclude Include="bitmap_func.h" />
-    <ClInclude Include="common.h" />
-    <ClInclude Include="message_pump.h" />
-    <ClInclude Include="mir_smileys.h" />
-    <ClInclude Include="options.h" />
-    <ClInclude Include="popwin.h" />
-    <ClInclude Include="preset_items.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="skin_parser.h" />
-    <ClInclude Include="str_utils.h" />
-    <ClInclude Include="subst.h" />
-    <ClInclude Include="translations.h" />
+    <ClInclude Include="src\bitmap_func.h" />
+    <ClInclude Include="src\common.h" />
+    <ClInclude Include="src\message_pump.h" />
+    <ClInclude Include="src\mir_smileys.h" />
+    <ClInclude Include="src\options.h" />
+    <ClInclude Include="src\popwin.h" />
+    <ClInclude Include="src\preset_items.h" />
+    <ClInclude Include="src\skin_parser.h" />
+    <ClInclude Include="src\str_utils.h" />
+    <ClInclude Include="src\subst.h" />
+    <ClInclude Include="src\translations.h" />
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>

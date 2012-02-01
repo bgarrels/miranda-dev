@@ -51,6 +51,7 @@ Boston, MA 02111-1307, USA.
 #include <time.h>
 #include <windowsx.h>
 
+//Miranda IM
 #include <win2k.h>
 #include <newpluginapi.h>
 #include <statusmodes.h>
@@ -77,7 +78,9 @@ Boston, MA 02111-1307, USA.
 #include <m_utils.h>
 #include <m_icq.h>
 
-#include "resource.h"
+#include "../resource.h"
+
+//ExternalAPI
 #include "m_tipper.h"
 #include "m_fingerprint.h"
 #include "m_flags.h"
