@@ -19,7 +19,7 @@ Boston, MA 02111-1307, USA.
 */
 
 #include "common.h"
-#include "version.h"
+#include "../version.h"
 #include "message_pump.h"
 #include "options.h"
 #include "popwin.h"
@@ -75,7 +75,7 @@ extern "C" bool WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvRe
 {
 	hInst = hinstDLL;
 	DisableThreadLibraryCalls(hInst);
-    return TRUE;
+	return TRUE;
 }
 
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
