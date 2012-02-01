@@ -17,10 +17,8 @@
 // Englisch (USA) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -53,7 +51,7 @@ BEGIN
     CONTROL         "Apply template for info from contacts (overrides contacts template)",IDC_OVERRIDE_CONTACTS_TEMPLATE,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,180,262,11
     CONTROL         "Show advanced icon in slot",IDC_SHOW_ADV_ICON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,193,104,13
-    COMBOBOX        IDC_ADV_ICON,122,193,140,15,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_ADV_ICON,122,193,149,15,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
 END
 
 IDD_PLAYERS DIALOGEX 0, 0, 288, 224
@@ -62,7 +60,7 @@ EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     CONTROL         "Get info from WATrack plugin",IDC_WATRACK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,3,12,282,11
-    LTEXT           "Get info from these players:",IDC_PLAYERS_L,3,30,282,11
+    LTEXT           "Get info from these players:",IDC_PLAYERS_L,4,30,282,11
     CONTROL         "Winamp (*)",IDC_WINAMP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,44,265,11
     CONTROL         "Windows Media Player",IDC_WMP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,58,265,11
     CONTROL         "iTunes",IDC_ITUNES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,86,265,11
@@ -74,7 +72,7 @@ BEGIN
     CONTROL         "",IDC_POLL_TIMER_SPIN,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_NOTHOUSANDS | UDS_HOTTRACK,125,152,11,12
     LTEXT           "seconds",IDC_POLL_TIMER_S_L,138,155,82,12
     CONTROL         "Allow auto-loading plugins into players (affect players with *)",IDC_CODE_INJECTION,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,3,171,282,11
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,3,171,273,11
     CONTROL         "Players with Windows Live Messanger support",IDC_WLM,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,72,265,11
     CONTROL         "mRadio plugin",IDC_MRADIO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,114,265,11
@@ -118,7 +116,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_OPTIONS, DIALOG
     BEGIN
@@ -171,10 +169,8 @@ IDI_LISTENINGTO         ICON                    "res\\listening_to.ico"
 // Englisch (Kanada) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENC)
-#ifdef _WIN32
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_CAN
 #pragma code_page(1252)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
