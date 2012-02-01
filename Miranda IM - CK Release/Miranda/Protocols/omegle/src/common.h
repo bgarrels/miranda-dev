@@ -83,7 +83,7 @@ class OmegleProto;
 #include "client.h"
 #include "proto.h"
 #include "db.h"
-#include "constants.h"
+#include "../constants.h"
 #include "theme.h"
 #include "resource.h"
 
