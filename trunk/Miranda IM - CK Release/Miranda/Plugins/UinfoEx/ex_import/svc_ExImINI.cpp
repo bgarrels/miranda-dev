@@ -31,7 +31,7 @@ Last change by : $Author: ing.u.horn $
 /**
  * system & local includes:
  **/
-#include "commonheaders.h"
+#include "..\src\commonheaders.h"
 #include "classExImContactBase.h"
 #include "dlg_ExImModules.h"
 #include "svc_ExImport.h"

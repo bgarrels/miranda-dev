@@ -42,7 +42,7 @@ Last change by : $Author: kreol13@gmail.com $
 #include "svc_Reminder.h"
 #include "svc_Timezone.h"
 #include "svc_Timezone_old.h"
-#include "flags\svc_flags.h"
+#include "..\flags\svc_flags.h"
 #include "psp_options.h"
 
 #define		PSM_ENABLE_TABITEM	(WM_USER+106)

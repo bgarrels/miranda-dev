@@ -33,77 +33,23 @@
     <Filter Include="sounds">
       <UniqueIdentifier>{571080aa-5d49-4a75-aba7-3affcdba5b8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{e9b6dbf2-898c-40a0-8fb3-d4a612593710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controls">
+      <UniqueIdentifier>{4d0da1e4-e882-45ba-aa31-15d2e0b85d33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Dialogs">
+      <UniqueIdentifier>{6551c414-cdb1-4b12-adf1-c20c6e91ee08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Dialogs\Details Pages">
+      <UniqueIdentifier>{e51f8d05-665b-41c9-a187-16d1886ab082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Services">
+      <UniqueIdentifier>{9b3bf43e-84d4-4255-a34e-11d36576f7a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="classMAnnivDate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="classMTime.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="classPsTree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="classPsTreeItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="commonheaders.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="init.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mir_contactqueue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mir_db.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mir_icolib.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mir_menuitems.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mir_string.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="psp_options.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="svc_avatar.cpp">
-      <Filter>Source Files\Services</Filter>
-    </ClCompile>
-    <ClCompile Include="svc_constants.cpp">
-      <Filter>Source Files\Services</Filter>
-    </ClCompile>
-    <ClCompile Include="svc_contactinfo.cpp">
-      <Filter>Source Files\Services</Filter>
-    </ClCompile>
-    <ClCompile Include="svc_email.cpp">
-      <Filter>Source Files\Services</Filter>
-    </ClCompile>
-    <ClCompile Include="svc_gender.cpp">
-      <Filter>Source Files\Services</Filter>
-    </ClCompile>
-    <ClCompile Include="svc_homepage.cpp">
-      <Filter>Source Files\Services</Filter>
-    </ClCompile>
-    <ClCompile Include="svc_phone.cpp">
-      <Filter>Source Files\Services</Filter>
-    </ClCompile>
-    <ClCompile Include="svc_refreshci.cpp">
-      <Filter>Source Files\Services</Filter>
-    </ClCompile>
-    <ClCompile Include="svc_reminder.cpp">
-      <Filter>Source Files\Services</Filter>
-    </ClCompile>
-    <ClCompile Include="svc_timezone.cpp">
-      <Filter>Source Files\Services</Filter>
-    </ClCompile>
-    <ClCompile Include="svc_timezone_old.cpp">
-      <Filter>Source Files\Services</Filter>
-    </ClCompile>
     <ClCompile Include="ex_import\classExImContactBase.cpp">
       <Filter>Source Files\Services\Ex/Import</Filter>
     </ClCompile>
@@ -152,122 +98,131 @@
     <ClCompile Include="Flags\svc_flagsicons.cpp">
       <Filter>Source Files\Services\flags</Filter>
     </ClCompile>
-    <ClCompile Include="dlg_anniversarylist.cpp">
+    <ClCompile Include="src\classMAnnivDate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\classMTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\classPsTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\classPsTreeItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commonheaders.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\init.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mir_contactqueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mir_db.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mir_icolib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mir_menuitems.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mir_string.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\psp_options.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctrl_annivedit.cpp">
+      <Filter>Source Files\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctrl_base.cpp">
+      <Filter>Source Files\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctrl_button.cpp">
+      <Filter>Source Files\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctrl_combo.cpp">
+      <Filter>Source Files\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctrl_contact.cpp">
+      <Filter>Source Files\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctrl_edit.cpp">
+      <Filter>Source Files\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctrl_tzcombo.cpp">
+      <Filter>Source Files\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\psp_about.cpp">
+      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\psp_anniversary.cpp">
+      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\psp_base.cpp">
+      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\psp_company.cpp">
+      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\psp_contact.cpp">
+      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\psp_general.cpp">
+      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\psp_origin.cpp">
+      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\psp_profile.cpp">
+      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dlg_anniversarylist.cpp">
       <Filter>Source Files\Dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="dlg_msgbox.cpp">
+    <ClCompile Include="src\dlg_msgbox.cpp">
       <Filter>Source Files\Dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="dlg_propsheet.cpp">
+    <ClCompile Include="src\dlg_propsheet.cpp">
       <Filter>Source Files\Dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="psp_about.cpp">
-      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    <ClCompile Include="src\svc_avatar.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
-    <ClCompile Include="psp_anniversary.cpp">
-      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    <ClCompile Include="src\svc_constants.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
-    <ClCompile Include="psp_base.cpp">
-      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    <ClCompile Include="src\svc_contactinfo.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
-    <ClCompile Include="psp_company.cpp">
-      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    <ClCompile Include="src\svc_email.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
-    <ClCompile Include="psp_contact.cpp">
-      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    <ClCompile Include="src\svc_gender.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
-    <ClCompile Include="psp_general.cpp">
-      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    <ClCompile Include="src\svc_homepage.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
-    <ClCompile Include="psp_origin.cpp">
-      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    <ClCompile Include="src\svc_phone.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
-    <ClCompile Include="psp_profile.cpp">
-      <Filter>Source Files\Dialogs\Details Pages</Filter>
+    <ClCompile Include="src\svc_refreshci.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
-    <ClCompile Include="ctrl_annivedit.cpp">
-      <Filter>Source Files\Controls</Filter>
+    <ClCompile Include="src\svc_reminder.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
-    <ClCompile Include="ctrl_base.cpp">
-      <Filter>Source Files\Controls</Filter>
+    <ClCompile Include="src\svc_timezone.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
-    <ClCompile Include="ctrl_button.cpp">
-      <Filter>Source Files\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="ctrl_combo.cpp">
-      <Filter>Source Files\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="ctrl_contact.cpp">
-      <Filter>Source Files\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="ctrl_edit.cpp">
-      <Filter>Source Files\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="ctrl_tzcombo.cpp">
-      <Filter>Source Files\Controls</Filter>
+    <ClCompile Include="src\svc_timezone_old.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="classMAnnivDate.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="classMTime.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="commonheaders.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mir_contactqueue.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mir_db.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mir_icolib.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mir_menuitems.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mir_string.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="psp_options.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="svc_avatar.h">
-      <Filter>Source Files\Services</Filter>
-    </ClInclude>
-    <ClInclude Include="svc_constants.h">
-      <Filter>Source Files\Services</Filter>
-    </ClInclude>
-    <ClInclude Include="svc_contactinfo.h">
-      <Filter>Source Files\Services</Filter>
-    </ClInclude>
-    <ClInclude Include="svc_email.h">
-      <Filter>Source Files\Services</Filter>
-    </ClInclude>
-    <ClInclude Include="svc_gender.h">
-      <Filter>Source Files\Services</Filter>
-    </ClInclude>
-    <ClInclude Include="svc_homepage.h">
-      <Filter>Source Files\Services</Filter>
-    </ClInclude>
-    <ClInclude Include="svc_phone.h">
-      <Filter>Source Files\Services</Filter>
-    </ClInclude>
-    <ClInclude Include="svc_refreshci.h">
-      <Filter>Source Files\Services</Filter>
-    </ClInclude>
-    <ClInclude Include="svc_reminder.h">
-      <Filter>Source Files\Services</Filter>
-    </ClInclude>
-    <ClInclude Include="svc_timezone.h">
-      <Filter>Source Files\Services</Filter>
-    </ClInclude>
-    <ClInclude Include="svc_timezone_old.h">
-      <Filter>Source Files\Services</Filter>
-    </ClInclude>
     <ClInclude Include="ex_import\classExImContactBase.h">
       <Filter>Source Files\Services\Ex/Import</Filter>
     </ClInclude>
@@ -313,44 +268,104 @@
     <ClInclude Include="Flags\svc_flagsicons.h">
       <Filter>Source Files\Services\flags</Filter>
     </ClInclude>
-    <ClInclude Include="dlg_anniversarylist.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="dlg_msgbox.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="dlg_propsheet.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="psp_base.h">
-      <Filter>Source Files\Dialogs\Details Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="ctrl_annivedit.h">
-      <Filter>Source Files\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="ctrl_base.h">
-      <Filter>Source Files\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="ctrl_button.h">
-      <Filter>Source Files\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="ctrl_combo.h">
-      <Filter>Source Files\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="ctrl_contact.h">
-      <Filter>Source Files\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="ctrl_edit.h">
-      <Filter>Source Files\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="ctrl_tzcombo.h">
-      <Filter>Source Files\Controls</Filter>
-    </ClInclude>
     <ClInclude Include="Res\resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="Res\version.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\classMAnnivDate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\classMTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commonheaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mir_contactqueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mir_db.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mir_icolib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mir_menuitems.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mir_string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\psp_options.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ctrl_annivedit.h">
+      <Filter>Header Files\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ctrl_base.h">
+      <Filter>Header Files\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ctrl_button.h">
+      <Filter>Header Files\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ctrl_combo.h">
+      <Filter>Header Files\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ctrl_contact.h">
+      <Filter>Header Files\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ctrl_edit.h">
+      <Filter>Header Files\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ctrl_tzcombo.h">
+      <Filter>Header Files\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\psp_base.h">
+      <Filter>Header Files\Dialogs\Details Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dlg_anniversarylist.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dlg_msgbox.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dlg_propsheet.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\svc_avatar.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\svc_constants.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\svc_contactinfo.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\svc_email.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\svc_gender.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\svc_homepage.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\svc_phone.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\svc_refreshci.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\svc_reminder.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\svc_timezone.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="src\svc_timezone_old.h">
+      <Filter>Header Files\Services</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

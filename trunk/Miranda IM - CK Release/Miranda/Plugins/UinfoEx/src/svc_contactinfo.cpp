@@ -37,7 +37,7 @@ Last change by : $Author: kreol13@gmail.com $
 #include "svc_timezone_old.h"
 #include "svc_contactinfo.h"
 #include "svc_gender.h"
-#include "Flags\svc_countrylistext.h"
+#include "..\Flags\svc_countrylistext.h"
 
 #define	CI_TCHAR(ci)	(((ci)->dwFlag & CNF_UNICODE) ? DBVT_WCHAR : DBVT_ASCIIZ)
 

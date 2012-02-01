@@ -32,7 +32,7 @@ Last change by : $Author: ing.u.horn $
 
 #include "svc_email.h"
 #include "svc_homepage.h"
-#include ".\ex_import\svc_ExImport.h"
+#include "..\ex_import\svc_ExImport.h"
 
 enum ECascadeType {
 	MCAS_DISABLED	= 2,
