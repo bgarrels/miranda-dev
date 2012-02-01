@@ -18,36 +18,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="awaymsg.cpp">
+    <ClCompile Include="src\awaymsg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="msgbox.cpp">
+    <ClCompile Include="src\msgbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="options.cpp">
+    <ClCompile Include="src\options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils.cpp">
+    <ClCompile Include="src\utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="commonheaders.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="m_simpleaway.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="m_simplestatusmsg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="simplestatusmsg.h">
+    <ClInclude Include="src\commonheaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\m_simpleaway.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\m_simplestatusmsg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\simplestatusmsg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
