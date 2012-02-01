@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // This file holds functions that are called upon receiving
 // certain commands from the server.
 
-#include "irc.h"
+#include "../irc.h"
 
 using namespace irc;
 
@@ -176,7 +176,7 @@ VOID CALLBACK OnlineNotifTimerProc( HWND, UINT, UINT_PTR idEvent, DWORD )
 									ppro->m_namesToWho += CMString(DBWildcard) + _T(" ");
 
 								if ( DBNick )     DBFreeVariant(&dbv);
-                        if ( DBWildcard ) DBFreeVariant(&dbv2);
+						if ( DBWildcard ) DBFreeVariant(&dbv2);
 			}	}	}	}	}
 
 			hContact = (HANDLE) CallService( MS_DB_CONTACT_FINDNEXT, (WPARAM) hContact, 0);
@@ -1861,7 +1861,7 @@ bool CIrcProto::OnIrc_NICK_ERR( const CIrcMessage* pmsg )
 	}	}
 
 	ShowMessage( pmsg );
- 	return true;
+	return true;
 }
 
 bool CIrcProto::OnIrc_JOINERROR( const CIrcMessage* pmsg )
@@ -2475,7 +2475,7 @@ int CIrcProto::IsIgnored( CMString user, char type )
 	for ( int i=0; i < m_ignoreItems.getCount(); i++ ) {
 		const CIrcIgnoreItem& C = m_ignoreItems[i];
 
-      if ( type == '\0' )	
+	  if ( type == '\0' )	
 			if ( !lstrcmpi( user.c_str(), C.mask.c_str()))
 				return i+1;
 			

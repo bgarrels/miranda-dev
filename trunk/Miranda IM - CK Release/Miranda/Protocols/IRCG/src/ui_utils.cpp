@@ -24,7 +24,7 @@ Last change by : $Author: george.hazan $
 
 */
 
-#include "irc.h"
+#include "../irc.h"
 #include "ui_utils.h"
 
 extern HINSTANCE hInst;
