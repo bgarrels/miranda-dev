@@ -6,17 +6,17 @@ Copyright	(C) 2005-2011 Ricardo Pescuma Domenecci
 
 PRE-CONDITION to use this code under the GNU General Public License:
  1. you do not build another Miranda IM plugin with the code without written permission
-    of the autor (peace for the project).
+	of the autor (peace for the project).
  2. you do not publish copies of the code in other Miranda IM-related code repositories.
-    This project is already hosted in a SVN and you are welcome to become a contributing member.
+	This project is already hosted in a SVN and you are welcome to become a contributing member.
  3. you do not create listeningTo-derivatives based on this code for the Miranda IM project.
-    (feel free to do this for another project e.g. foobar)
+	(feel free to do this for another project e.g. foobar)
  4. you do not distribute any kind of self-compiled binary of this plugin (we want continuity
-    for the plugin users, who should know that they use the original) you can compile this plugin
-    for your own needs, friends, but not for a whole branch of people (e.g. miranda plugin pack).
+	for the plugin users, who should know that they use the original) you can compile this plugin
+	for your own needs, friends, but not for a whole branch of people (e.g. miranda plugin pack).
  5. This isn't free beer. If your jurisdiction (country) does not accept
-    GNU General Public License, as a whole, you have no rights to the software
-    until you sign a private contract with its author. !!!
+	GNU General Public License, as a whole, you have no rights to the software
+	until you sign a private contract with its author. !!!
  6. you always put these notes and copyright notice at the beginning of your code.
 ==========================================================================
 
@@ -38,7 +38,7 @@ Free Software Foundation, Inc.,
 */
 
 
-#include "..\commons.h"
+#include "..\src\commons.h"
 
 static UINT_PTR			hSendTimer = NULL;
 static GenericPlayer	*singleton = NULL;
@@ -50,17 +50,17 @@ int
 m_log(const TCHAR *function, const TCHAR *fmt, ...)
 {
 #if 0
-    va_list va;
-    TCHAR text[1024];
+	va_list va;
+	TCHAR text[1024];
 	size_t len;
 
 	mir_sntprintf(text, MAX_REGS(text) - 10, _T("[%08u - %08u] [%s] "), 
 				 GetCurrentThreadId(), GetTickCount(), function);
 	len = lstrlen(text);
 
-    va_start(va, fmt);
-    mir_vsntprintf(&text[len], MAX_REGS(text) - len, fmt, va);
-    va_end(va);
+	va_start(va, fmt);
+	mir_vsntprintf(&text[len], MAX_REGS(text) - len, fmt, va);
+	va_end(va);
 
 	BOOL writeBOM = (GetFileAttributes(_T("c:\\miranda_listeningto.log.txt")) == INVALID_FILE_ATTRIBUTES);
 
