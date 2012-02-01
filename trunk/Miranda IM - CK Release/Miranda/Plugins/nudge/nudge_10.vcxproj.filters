@@ -52,9 +52,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="miranda.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="resources\Nudge.ico">
       <Filter>Resource Files</Filter>
     </None>
@@ -75,6 +72,9 @@
     </None>
     <None Include="docs\ChangeLog.txt">
       <Filter>docs</Filter>
+    </None>
+    <None Include="resources\miranda.ico">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
