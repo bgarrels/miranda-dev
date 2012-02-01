@@ -23,9 +23,6 @@
     <ClCompile Include="src\des.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ezxml.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\msn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -122,6 +119,9 @@
     <ClCompile Include="src\msn_threads.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ezxml\ezxml.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Icos\inbox.ico">
@@ -188,12 +188,6 @@
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="des.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ezxml.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SDK\netfw.h">
       <Filter>Header Files\SDK</Filter>
     </ClInclude>
@@ -207,6 +201,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ezxml\ezxml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\des.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

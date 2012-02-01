@@ -266,8 +266,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ezxml\ezxml.c" />
     <ClCompile Include="src\des.c" />
-    <ClCompile Include="src\ezxml.c" />
     <ClCompile Include="src\msn.cpp" />
     <ClCompile Include="src\msn_auth.cpp" />
     <ClCompile Include="src\msn_chat.cpp" />
@@ -325,11 +325,11 @@
     <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ezxml\ezxml.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="des.h" />
-    <ClInclude Include="ezxml.h" />
     <ClInclude Include="SDK\icftypes.h" />
     <ClInclude Include="SDK\netfw.h" />
+    <ClInclude Include="src\des.h" />
     <ClInclude Include="src\msn_global.h" />
     <ClInclude Include="src\msn_proto.h" />
     <ClInclude Include="version.h" />
