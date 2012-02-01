@@ -45,6 +45,7 @@ using namespace std;
 #define MIRANDA_VER 0x0900
 #define MIRANDA_CUSTOM_LP
 
+//Miranda IM
 #include <newpluginapi.h>
 #include <m_system.h>
 #include <m_system_cpp.h>
@@ -62,7 +63,7 @@ using namespace std;
 #include <m_icolib.h>
 #include <m_hotkeys.h>
 
-//own includes
+//ExternalAPI includes
 #include "m_folders.h"
 #include "m_updater.h"
 #include "m_metacontacts.h"
@@ -76,8 +77,8 @@ using namespace std;
 #include "utf8_helpers.h"
 #include "scope.h"
 
-#include "resource.h"
-#include "Version.h"
+#include "../resource.h"
+#include "../Version.h"
 #include "m_spellchecker.h"
 #include "options.h"
 #include "autoreplace.h"
