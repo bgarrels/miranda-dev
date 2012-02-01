@@ -5,12 +5,12 @@
  */
 
 #include "name_day_core.h"
-#include "utils/string_tokenizer.h"
+#include "../utils/string_tokenizer.h"
 
 #include "static_database.h"
 
 
-// Miranda stuff.
+// Miranda IM
 #include "resource.h"
 #include "newpluginapi.h"
 #include "m_database.h"

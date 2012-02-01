@@ -5,7 +5,7 @@
 #ifndef name_day_core_h
 #define name_day_core_h
 
-#include "calendar/calendar.h"
+#include "../calendar/calendar.h"
 
 // WInd00z stuff
 #include <windows.h>
@@ -26,7 +26,7 @@ class name_day_core_t
 
 			int				perform_command				(const unsigned calendar_idx);
 
-    private:				
+	private:				
 
 			void			create_name_day_event		(HANDLE &handle, const string &contact_name, const string &first_name, const string &country);			
 			bool			has_name_day				(const string &name_day, const string &first_name);
