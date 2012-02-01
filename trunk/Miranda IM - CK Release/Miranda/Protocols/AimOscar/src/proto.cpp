@@ -15,7 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "aim.h"
+#include "../aim.h"
 
 #include "m_genmenu.h"
 
@@ -492,7 +492,7 @@ int __cdecl CAimProto::RecvMsg(HANDLE hContact, PROTORECVEVENT* pre)
 	html_decode(pre->szMessage);
 
 	HANDLE res = (HANDLE)CallService(MS_PROTO_RECVMSG, 0, (LPARAM)&ccs);
-    mir_free(bbuf);
+	mir_free(bbuf);
 	pre->szMessage = omsg;
 
 	return ( int )res;
