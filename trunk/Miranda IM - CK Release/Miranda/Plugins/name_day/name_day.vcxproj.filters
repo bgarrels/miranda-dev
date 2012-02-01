@@ -14,33 +14,36 @@
     <Filter Include="Resource Files">
       <UniqueIdentifier>{64520de6-13e7-4e2b-b403-ab2bce794c38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{52009963-4f00-4b9a-bc10-083d61ebbb90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="name_day.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="name_day_core.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="calendar\calendar.cpp">
       <Filter>Source Files\calendar</Filter>
     </ClCompile>
+    <ClCompile Include="src\name_day.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\name_day_core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="name_day_core.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="static_database.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="calendar\calendar.h">
       <Filter>Source Files\calendar</Filter>
     </ClInclude>
     <ClInclude Include="utils\string_tokenizer.h">
       <Filter>Source Files\utils</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="src\resource.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\static_database.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\name_day_core.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

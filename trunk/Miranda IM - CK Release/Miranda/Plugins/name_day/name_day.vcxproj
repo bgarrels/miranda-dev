@@ -26,6 +26,7 @@
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -78,6 +79,7 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
@@ -146,16 +148,16 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="name_day.cpp" />
-    <ClCompile Include="name_day_core.cpp" />
     <ClCompile Include="calendar\calendar.cpp" />
+    <ClCompile Include="src\name_day.cpp" />
+    <ClCompile Include="src\name_day_core.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="name_day_core.h" />
-    <ClInclude Include="static_database.h" />
+    <ClInclude Include="src\name_day_core.h" />
+    <ClInclude Include="src\resource.h" />
     <ClInclude Include="calendar\calendar.h" />
+    <ClInclude Include="src\static_database.h" />
     <ClInclude Include="utils\string_tokenizer.h" />
-    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="namedayplug.rc" />
