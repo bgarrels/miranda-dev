@@ -16,51 +16,57 @@
       <UniqueIdentifier>{4a88a619-935e-4a14-94cb-10b092dc8390}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="Underground">
+      <UniqueIdentifier>{67333181-51ad-40e2-bc17-465c86c8a1d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Underground\docs">
+      <UniqueIdentifier>{9e70d8ca-757f-4da2-9667-68976e5745f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="weather.c">
+    <ClCompile Include="src\weather.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_addstn.c">
+    <ClCompile Include="src\weather_addstn.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_contacts.c">
+    <ClCompile Include="src\weather_contacts.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_conv.c">
+    <ClCompile Include="src\weather_conv.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_data.c">
+    <ClCompile Include="src\weather_data.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_http.c">
+    <ClCompile Include="src\weather_popup.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_icons.c">
+    <ClCompile Include="src\weather_svcs.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_info.c">
+    <ClCompile Include="src\weather_update.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_ini.c">
+    <ClCompile Include="src\weather_userinfo.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_mwin.c">
+    <ClCompile Include="src\weather_http.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_opt.c">
+    <ClCompile Include="src\weather_icons.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_popup.c">
+    <ClCompile Include="src\weather_info.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_svcs.c">
+    <ClCompile Include="src\weather_ini.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_update.c">
+    <ClCompile Include="src\weather_mwin.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="weather_userinfo.c">
+    <ClCompile Include="src\weather_opt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,29 +77,11 @@
     <ClInclude Include="version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="weather.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_weather.h">
+    <ClInclude Include="src\weather.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="langpack_defweather.txt">
-      <Filter>Documentations</Filter>
-    </None>
-    <None Include="sample_ini.ini">
-      <Filter>Documentations</Filter>
-    </None>
-    <None Include="weather-history.txt">
-      <Filter>Documentations</Filter>
-    </None>
-    <None Include="weather-readme.html">
-      <Filter>Documentations</Filter>
-    </None>
-    <None Include="weather-translation.txt">
-      <Filter>Documentations</Filter>
-    </None>
     <None Include="res\brief.ico">
       <Filter>Resource Files</Filter>
     </None>
@@ -126,6 +114,45 @@
     </None>
     <None Include="res\update2.ico">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\license.txt">
+      <Filter>Documentations</Filter>
+    </None>
+    <None Include="docs\weather-history.txt">
+      <Filter>Documentations</Filter>
+    </None>
+    <None Include="docs\weather-readme.html">
+      <Filter>Documentations</Filter>
+    </None>
+    <None Include="docs\weather-translation.txt">
+      <Filter>Documentations</Filter>
+    </None>
+    <None Include="docs\langpack_defweather.txt">
+      <Filter>Documentations</Filter>
+    </None>
+    <None Include="weather underground\wundergrnd_xml.ini">
+      <Filter>Underground</Filter>
+    </None>
+    <None Include="weather underground\wurss.ini">
+      <Filter>Underground</Filter>
+    </None>
+    <None Include="weather underground\wurss_intl.ini">
+      <Filter>Underground</Filter>
+    </None>
+    <None Include="weather underground\wundergrnd.ini">
+      <Filter>Underground</Filter>
+    </None>
+    <None Include="weather underground\wundergrnd_ca.ini">
+      <Filter>Underground</Filter>
+    </None>
+    <None Include="weather underground\wundergrnd_intl.ini">
+      <Filter>Underground</Filter>
+    </None>
+    <None Include="weather underground\doc\wundergrnd-readme.txt">
+      <Filter>Underground\docs</Filter>
+    </None>
+    <None Include="docs\sample_ini.ini">
+      <Filter>Documentations</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
