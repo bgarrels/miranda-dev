@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 // Version management
-#include "build.h"
+#include "../build.h"
 #define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 7, 1)
 #define __VERSION_STRING            "0.0.7.1"
 
