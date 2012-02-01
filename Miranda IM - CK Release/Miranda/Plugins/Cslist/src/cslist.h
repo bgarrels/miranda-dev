@@ -1,7 +1,7 @@
 /* ========================================================================
 
-                              Custom Status List
-                              __________________
+							  Custom Status List
+							  __________________
 
   Custom Status List plugin for Miranda-IM (www.miranda-im.org)
   Follower of Custom Status History List by HANAX
@@ -83,7 +83,7 @@
 // ====[ BASIC DEFINITIONS ]==================================================
 
 #include "resource.h"
-#include "version.h"
+#include "../version.h"
 
 #define MODULENAME	       "Custom Status List"
 
@@ -403,7 +403,7 @@ public:
 			while ( help->next != NULL )
 			{
 				int cmp = compare( item->item, help->next->item );
-			    if ( cmp == 1 )
+				if ( cmp == 1 )
 					help = help->next;
 				else if ( cmp == 0 )
 				{
@@ -411,7 +411,7 @@ public:
 					return -1;
 				}
 				else
-				    break;
+					break;
 				position++;
 			}
 			if ( help != item )
@@ -420,7 +420,7 @@ public:
 				help->next = item;
 			}
 			else
-			    items = item;
+				items = item;
 		}
 		this->count++;
 		return position;
@@ -632,7 +632,7 @@ static const MUUID interfaces[] = { PLUGIN_GUUID, MIID_LAST };
 
 PLUGINLINK*  pluginLink = NULL;
 PLUGININFOEX pluginInfoEx = {
-    sizeof(PLUGININFOEX),
+	sizeof(PLUGININFOEX),
 	__PLUGIN_NAME,
 	PLUGIN_MAKE_VERSION(__MAJOR_VERSION, __MINOR_VERSION, __RELEASE_NUM, __BUILD_NUM),
 	__DESCRIPTION,
