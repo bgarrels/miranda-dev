@@ -34,6 +34,7 @@
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -45,6 +46,7 @@
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -105,14 +107,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;JABBER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <FloatingPointModel>Precise</FloatingPointModel>
+      <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>jabber.h</PrecompiledHeaderFile>
@@ -121,6 +123,8 @@
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <EnablePREfast>true</EnablePREfast>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -158,16 +162,16 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;JABBER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>jabber.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -175,9 +179,10 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <FloatingPointExceptions>false</FloatingPointExceptions>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>./../../include/msapi/</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -275,93 +280,95 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="jabber.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="jabber_adhoc.cpp" />
-    <ClCompile Include="jabber_agent.cpp" />
-    <ClCompile Include="jabber_bookmarks.cpp" />
-    <ClCompile Include="jabber_byte.cpp" />
-    <ClCompile Include="jabber_caps.cpp" />
-    <ClCompile Include="jabber_captcha.cpp" />
-    <ClCompile Include="jabber_chat.cpp" />
-    <ClCompile Include="jabber_console.cpp" />
-    <ClCompile Include="jabber_disco.cpp" />
-    <ClCompile Include="jabber_events.cpp" />
-    <ClCompile Include="jabber_file.cpp" />
-    <ClCompile Include="jabber_form.cpp" />
-    <ClCompile Include="jabber_ft.cpp" />
-    <ClCompile Include="jabber_groupchat.cpp" />
-    <ClCompile Include="jabber_ibb.cpp" />
-    <ClCompile Include="jabber_icolib.cpp" />
-    <ClCompile Include="jabber_iq.cpp" />
-    <ClCompile Include="jabber_iq_handlers.cpp" />
-    <ClCompile Include="jabber_iqid.cpp" />
-    <ClCompile Include="jabber_iqid_muc.cpp" />
-    <ClCompile Include="jabber_libstr.cpp" />
-    <ClCompile Include="jabber_list.cpp" />
-    <ClCompile Include="jabber_menu.cpp" />
-    <ClCompile Include="jabber_message_handlers.cpp" />
-    <ClCompile Include="jabber_message_manager.cpp" />
-    <ClCompile Include="jabber_misc.cpp" />
-    <ClCompile Include="jabber_notes.cpp" />
-    <ClCompile Include="jabber_opt.cpp" />
-    <ClCompile Include="jabber_opttree.cpp" />
-    <ClCompile Include="jabber_password.cpp" />
-    <ClCompile Include="jabber_presence_manager.cpp" />
-    <ClCompile Include="jabber_privacy.cpp" />
-    <ClCompile Include="jabber_proto.cpp" />
-    <ClCompile Include="jabber_proxy.cpp" />
-    <ClCompile Include="jabber_rc.cpp" />
-    <ClCompile Include="jabber_search.cpp" />
-    <ClCompile Include="jabber_secur.cpp" />
-    <ClCompile Include="jabber_send_manager.cpp" />
-    <ClCompile Include="jabber_std.cpp" />
-    <ClCompile Include="jabber_svc.cpp" />
-    <ClCompile Include="jabber_thread.cpp" />
-    <ClCompile Include="jabber_treelist.cpp" />
-    <ClCompile Include="jabber_userinfo.cpp" />
-    <ClCompile Include="jabber_util.cpp" />
-    <ClCompile Include="jabber_vcard.cpp" />
-    <ClCompile Include="jabber_ws.cpp" />
-    <ClCompile Include="jabber_xml.cpp" />
-    <ClCompile Include="jabber_xstatus.cpp" />
-    <ClCompile Include="jabber_zstream.cpp" />
-    <ClCompile Include="MString.cpp" />
-    <ClCompile Include="ui_utils.cpp" />
+    <ClCompile Include="src\jabber.cpp" />
+    <ClCompile Include="src\jabber_adhoc.cpp" />
+    <ClCompile Include="src\jabber_agent.cpp" />
+    <ClCompile Include="src\jabber_bookmarks.cpp" />
+    <ClCompile Include="src\jabber_byte.cpp" />
+    <ClCompile Include="src\jabber_caps.cpp" />
+    <ClCompile Include="src\jabber_captcha.cpp" />
+    <ClCompile Include="src\jabber_chat.cpp" />
+    <ClCompile Include="src\jabber_console.cpp" />
+    <ClCompile Include="src\jabber_disco.cpp" />
+    <ClCompile Include="src\jabber_events.cpp" />
+    <ClCompile Include="src\jabber_file.cpp" />
+    <ClCompile Include="src\jabber_form.cpp" />
+    <ClCompile Include="src\jabber_ft.cpp" />
+    <ClCompile Include="src\jabber_groupchat.cpp" />
+    <ClCompile Include="src\jabber_ibb.cpp" />
+    <ClCompile Include="src\jabber_icolib.cpp" />
+    <ClCompile Include="src\jabber_iq.cpp" />
+    <ClCompile Include="src\jabber_iqid.cpp" />
+    <ClCompile Include="src\jabber_iqid_muc.cpp" />
+    <ClCompile Include="src\jabber_iq_handlers.cpp" />
+    <ClCompile Include="src\jabber_libstr.cpp" />
+    <ClCompile Include="src\jabber_list.cpp" />
+    <ClCompile Include="src\jabber_menu.cpp" />
+    <ClCompile Include="src\jabber_message_handlers.cpp" />
+    <ClCompile Include="src\jabber_message_manager.cpp" />
+    <ClCompile Include="src\jabber_misc.cpp" />
+    <ClCompile Include="src\jabber_notes.cpp" />
+    <ClCompile Include="src\jabber_opt.cpp" />
+    <ClCompile Include="src\jabber_opttree.cpp" />
+    <ClCompile Include="src\jabber_password.cpp" />
+    <ClCompile Include="src\jabber_presence_manager.cpp" />
+    <ClCompile Include="src\jabber_privacy.cpp" />
+    <ClCompile Include="src\jabber_proto.cpp" />
+    <ClCompile Include="src\jabber_proxy.cpp" />
+    <ClCompile Include="src\jabber_rc.cpp" />
+    <ClCompile Include="src\jabber_search.cpp" />
+    <ClCompile Include="src\jabber_secur.cpp" />
+    <ClCompile Include="src\jabber_send_manager.cpp" />
+    <ClCompile Include="src\jabber_std.cpp" />
+    <ClCompile Include="src\jabber_svc.cpp" />
+    <ClCompile Include="src\jabber_thread.cpp" />
+    <ClCompile Include="src\jabber_treelist.cpp" />
+    <ClCompile Include="src\jabber_userinfo.cpp" />
+    <ClCompile Include="src\jabber_util.cpp" />
+    <ClCompile Include="src\jabber_vcard.cpp" />
+    <ClCompile Include="src\jabber_ws.cpp" />
+    <ClCompile Include="src\jabber_xml.cpp" />
+    <ClCompile Include="src\jabber_xstatus.cpp" />
+    <ClCompile Include="src\jabber_zstream.cpp" />
+    <ClCompile Include="src\MString.cpp" />
+    <ClCompile Include="src\ui_utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="jabber.h" />
-    <ClInclude Include="jabber_byte.h" />
-    <ClInclude Include="jabber_caps.h" />
-    <ClInclude Include="jabber_db_utils.h" />
-    <ClInclude Include="jabber_disco.h" />
-    <ClInclude Include="jabber_ibb.h" />
-    <ClInclude Include="jabber_icolib.h" />
-    <ClInclude Include="jabber_iq.h" />
-    <ClInclude Include="jabber_list.h" />
-    <ClInclude Include="jabber_message_manager.h" />
-    <ClInclude Include="jabber_notes.h" />
-    <ClInclude Include="jabber_opttree.h" />
-    <ClInclude Include="jabber_presence_manager.h" />
-    <ClInclude Include="jabber_privacy.h" />
-    <ClInclude Include="jabber_proto.h" />
-    <ClInclude Include="jabber_proxy.h" />
-    <ClInclude Include="jabber_rc.h" />
-    <ClInclude Include="jabber_search.h" />
-    <ClInclude Include="jabber_secur.h" />
-    <ClInclude Include="jabber_send_manager.h" />
-    <ClInclude Include="jabber_xml.h" />
-    <ClInclude Include="jabber_xstatus.h" />
-    <ClInclude Include="MString.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="ui_utils.h" />
+    <ClInclude Include="src\jabber_byte.h" />
+    <ClInclude Include="src\jabber_caps.h" />
+    <ClInclude Include="src\jabber_db_utils.h" />
+    <ClInclude Include="src\jabber_disco.h" />
+    <ClInclude Include="src\jabber_ibb.h" />
+    <ClInclude Include="src\jabber_icolib.h" />
+    <ClInclude Include="src\jabber_iq.h" />
+    <ClInclude Include="src\jabber_list.h" />
+    <ClInclude Include="src\jabber_message_manager.h" />
+    <ClInclude Include="src\jabber_notes.h" />
+    <ClInclude Include="src\jabber_opttree.h" />
+    <ClInclude Include="src\jabber_presence_manager.h" />
+    <ClInclude Include="src\jabber_privacy.h" />
+    <ClInclude Include="src\jabber_proto.h" />
+    <ClInclude Include="src\jabber_proxy.h" />
+    <ClInclude Include="src\jabber_rc.h" />
+    <ClInclude Include="src\jabber_search.h" />
+    <ClInclude Include="src\jabber_secur.h" />
+    <ClInclude Include="src\jabber_send_manager.h" />
+    <ClInclude Include="src\jabber_xml.h" />
+    <ClInclude Include="src\jabber_xstatus.h" />
+    <ClInclude Include="src\MString.h" />
+    <ClInclude Include="src\ui_utils.h" />
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\changelog_jabber.txt" />
+    <None Include="docs\copying.txt" />
+    <None Include="docs\copyright.txt" />
+    <None Include="docs\license.txt" />
+    <None Include="docs\readme_jabber.txt" />
+    <None Include="docs\todo_jabber.txt" />
+    <None Include="docs\translation_jabber.txt" />
     <None Include="icos\add2roster.ico" />
     <None Include="icos\addcontact.ico" />
     <None Include="icos\arrow_down.ico" />
@@ -416,8 +423,6 @@
     <None Include="icos\view_as_list.ico" />
     <None Include="icos\view_as_tree.ico" />
     <None Include="icos\weather.ico" />
-    <None Include="docs\changelog_jabber.txt" />
-    <None Include="docs\readme_jabber.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="jabber.rc" />
