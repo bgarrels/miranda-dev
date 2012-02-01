@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "stdafx.h"
 #include "PasteToWeb1.h"
 #include "PasteToWeb2.h"
-#include "version.h"
+#include "../version.h"
 #include "resource.h"
 #include "Options.h"
 
@@ -546,7 +546,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	mir_getLP(&pluginInfo);
 	NETLIBUSER nlu = {0};
 	nlu.cbSize = sizeof(nlu);
-  	nlu.flags = NUF_TCHAR | NUF_OUTGOING | NUF_HTTPCONNS;
+	nlu.flags = NUF_TCHAR | NUF_OUTGOING | NUF_HTTPCONNS;
 	nlu.szSettingsModule = MODULE;
 	nlu.ptszDescriptiveName = TranslateT("Paste It HTTP connections");
 	g_hNetlibUser = ( HANDLE )CallService( MS_NETLIB_REGISTERUSER, 0, ( LPARAM )&nlu );
