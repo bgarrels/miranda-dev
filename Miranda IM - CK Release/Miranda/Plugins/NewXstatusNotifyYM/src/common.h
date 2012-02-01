@@ -3,6 +3,7 @@
 	Copyright (c) 2001-2004 Luca Santarelli
 	Copyright (c) 2005-2007 Vasilich
 	Copyright (c) 2007-2011 yaho
+	Copyright (c) 2011-2012 CHEF-KOCH, Mataes
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -43,6 +44,7 @@
 #include <stdlib.h>
 #include <tchar.h>
 
+//Miranda IM
 #include "newpluginapi.h"
 #include "statusmodes.h"
 #include "win2k.h"
@@ -67,10 +69,11 @@
 #include "m_utils.h"
 #include "m_icq.h"
 
+//ExternalAPI
 #include "m_metacontacts.h"
 #include "m_updater.h"
 #include "m_toolbar.h"
-#include "resource.h"
+#include "../resource.h"
 
 #if defined _WIN64
 #define	MIID_NXSN { 0x16f0674f, 0xc4e7, 0x494e, { 0xb7, 0x5e, 0x41, 0xbb, 0xf4, 0xaf, 0xe6, 0x11 } }
