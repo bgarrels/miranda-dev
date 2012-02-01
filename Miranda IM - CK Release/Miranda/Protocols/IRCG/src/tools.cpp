@@ -19,7 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#include "irc.h"
+#include "../irc.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // Standard functions
@@ -154,7 +154,7 @@ char* __stdcall rtrim( char *string )
    char* p = string + strlen( string ) - 1;
    while ( p >= string ) {
 		if ( *p != ' ' && *p != '\t' && *p != '\n' && *p != '\r' )
-         break;
+		 break;
 
 		*p-- = 0;
    }

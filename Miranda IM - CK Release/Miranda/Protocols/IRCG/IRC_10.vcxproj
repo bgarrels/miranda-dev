@@ -29,6 +29,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -39,6 +40,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -209,7 +211,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>irc.h</PrecompiledHeaderFile>
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
       <WarningLevel>Level3</WarningLevel>
@@ -222,6 +224,7 @@
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -283,9 +286,10 @@
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -307,36 +311,31 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="clist.cpp" />
-    <ClCompile Include="commandmonitor.cpp" />
-    <ClCompile Include="input.cpp" />
-    <ClCompile Include="irclib.cpp" />
-    <ClCompile Include="ircproto.cpp" />
-    <ClCompile Include="main.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="MString.cpp" />
-    <ClCompile Include="options.cpp" />
-    <ClCompile Include="output.cpp" />
-    <ClCompile Include="scripting.cpp" />
-    <ClCompile Include="services.cpp" />
-    <ClCompile Include="tools.cpp" />
-    <ClCompile Include="ui_utils.cpp" />
-    <ClCompile Include="userinfo.cpp" />
-    <ClCompile Include="windows.cpp" />
+    <ClCompile Include="src\clist.cpp" />
+    <ClCompile Include="src\commandmonitor.cpp" />
+    <ClCompile Include="src\input.cpp" />
+    <ClCompile Include="src\irclib.cpp" />
+    <ClCompile Include="src\ircproto.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MString.cpp" />
+    <ClCompile Include="src\options.cpp" />
+    <ClCompile Include="src\output.cpp" />
+    <ClCompile Include="src\scripting.cpp" />
+    <ClCompile Include="src\services.cpp" />
+    <ClCompile Include="src\tools.cpp" />
+    <ClCompile Include="src\ui_utils.cpp" />
+    <ClCompile Include="src\userinfo.cpp" />
+    <ClCompile Include="src\windows.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="commandmonitor.h" />
     <ClInclude Include="irc.h" />
-    <ClInclude Include="irc_dlg.h" />
-    <ClInclude Include="irclib.h" />
-    <ClInclude Include="m_ircscript.h" />
-    <ClInclude Include="MString.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="ui_utils.h" />
+    <ClInclude Include="src\commandmonitor.h" />
+    <ClInclude Include="src\irclib.h" />
+    <ClInclude Include="src\irc_dlg.h" />
+    <ClInclude Include="src\MString.h" />
+    <ClInclude Include="src\m_ircscript.h" />
+    <ClInclude Include="src\ui_utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\add.ico" />

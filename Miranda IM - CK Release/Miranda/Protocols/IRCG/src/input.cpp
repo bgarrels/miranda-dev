@@ -19,8 +19,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#include "irc.h"
-#include "version.h"
+#include "../irc.h"
+#include "../version.h"
 
 #define NICKSUBSTITUTE _T("!_nick_!")
 
@@ -237,12 +237,12 @@ BOOL CIrcProto::DoHardcodedCommand( CMString text, TCHAR* window, HANDLE hContac
 	}
 
 	else if (command == _T("/sleep") || command == _T("/wait")) {
-   	if (!one.IsEmpty()) {
-      	int ms;
-         if (_stscanf(one.c_str(), _T("%d"), &ms) == 1 && ms > 0 && ms <= 4000)
-         	Sleep(ms);
+	if (!one.IsEmpty()) {
+		int ms;
+		 if (_stscanf(one.c_str(), _T("%d"), &ms) == 1 && ms > 0 && ms <= 4000)
+			Sleep(ms);
 			else
-         	DoEvent( GC_EVENT_INFORMATION, NULL, m_info.sNick.c_str(), TranslateT("Incorrect parameters. Usage: /sleep [ms], ms should be greater than 0 and less than 4000."), NULL, NULL, NULL, true, false);
+			DoEvent( GC_EVENT_INFORMATION, NULL, m_info.sNick.c_str(), TranslateT("Incorrect parameters. Usage: /sleep [ms], ms should be greater than 0 and less than 4000."), NULL, NULL, NULL, true, false);
 		}
 		return true;
 	}
@@ -340,12 +340,12 @@ BOOL CIrcProto::DoHardcodedCommand( CMString text, TCHAR* window, HANDLE hContac
 	}
 
 	if ( command == _T("/userhost")) {
- 		if ( one.IsEmpty())
+		if ( one.IsEmpty())
 			return true;
 
 		DoUserhostWithReason( 1, _T("U"), false, temp );
- 		return false;
- 	}
+		return false;
+	}
 
 	if ( command == _T("/joinx")) {
 		if ( !one.IsEmpty()) {
