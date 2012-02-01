@@ -20,9 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // to enable all 0.9.0 core functions
 #define MIRANDA_VER 0x0900
-// to enable custom langpacks
-#define MIRANDA_CUSTOM_LP
-
+#define MIRANDA_CUSTOM_LP 
 #define _WIN32_IE 0x0501
 
 #include <m_stdhdr.h>
@@ -33,6 +31,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <string.h>
 #include <time.h>
 
+//Miranda IM
 #include <newpluginapi.h>
 #include <m_button.h>
 #include <m_clist.h>
@@ -52,8 +51,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <m_icq.h>
 #include <win2k.h>
 
-#include "sdk/icq_constants.h"
-#include "sdk/m_fortunemsg.h"
+//ExternalAPI
+#include "../sdk/icq_constants.h"
+#include "m_fortunemsg.h"
 #include "m_statusplugins.h"
 #include "m_toolbar.h"
 #include "m_toptoolbar.h"
@@ -62,4 +62,4 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "m_simpleaway.h"
 #include "m_simplestatusmsg.h"
 
-#include "resource.h"
+#include "../resource.h"
