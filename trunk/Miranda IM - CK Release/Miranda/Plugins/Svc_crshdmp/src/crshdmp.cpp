@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <m_options.h>
 #include "m_folders.h"
 #include "m_toolbar.h"
-#include "version.h"
+#include "../version.h"
 
 MM_INTERFACE  mmi;
 MD5_INTERFACE md5i;
@@ -50,17 +50,17 @@ PLUGININFOEX pluginInfoEx =
 {
 	sizeof(PLUGININFOEX),
 #if defined(_WIN64) 
-	"Crash Dumper (x64) Mataes Release",
+	"Crash Dumper (x64) CK Release",
 #elif defined(_UNICODE)
-	"Crash Dumper (Unicode) Mataes Release",
+	"Crash Dumper (Unicode) CK Release",
 #else
 	"Crash Dumper Mataes Release",
 #endif
 	__VERSION_DWORD,
-	"Crash Dumper for Miranda IM. Mod for Mataes Pack.",
+	"Crash Dumper for Miranda IM. Mod for CK Pack.",
 	"borkra",
 	"borkra@miranda-im.org",
-	"Copyright© 2008 - 2010 Boris Krasnovskiy All Rights Reserved",
+	"Copyright© 2008 - 2012 Boris Krasnovskiy All Rights Reserved",
 	"http://code.google.com/p/mirandaimplugins/downloads/list",
 	UNICODE_AWARE,		//not transient
 	0,		//doesn't replace anything built-in
