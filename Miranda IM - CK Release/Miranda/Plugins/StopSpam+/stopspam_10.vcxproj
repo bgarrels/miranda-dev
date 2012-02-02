@@ -245,7 +245,6 @@
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ExternalAPI\m_stopspam.h" />
     <ClInclude Include="src\eventhooker.h" />
     <ClInclude Include="headers.h" />
     <ClInclude Include="res\resource.h" />
