@@ -53,7 +53,7 @@ using std::fstream;
 //utf8cpp
 #include <utf8.h>
 
-//miranda
+//miranda im stuff
 #include <newpluginapi.h>
 #include <m_database.h>
 #include <m_options.h>
