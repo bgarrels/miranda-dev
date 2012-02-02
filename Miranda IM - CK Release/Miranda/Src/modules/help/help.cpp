@@ -51,17 +51,17 @@ static INT_PTR WebsiteCommand(WPARAM, LPARAM)
 }
 
 static int BugCommandEvent(WPARAM wParam, LPARAM lParam) {
-    char *szUrl = (char*)lParam;
+	char *szUrl = (char*)lParam;
 
-    if (szUrl) {
-        CallService(MS_UTILS_OPENURL,1,(LPARAM)szUrl);
-    }
-    return 0;
+	if (szUrl) {
+		CallService(MS_UTILS_OPENURL,1,(LPARAM)szUrl);
+	}
+	return 0;
 }
 
 static INT_PTR BugCommand(WPARAM, LPARAM)
 {
-    NotifyEventHooks(hBugEvent, 0, (LPARAM)"http://code.google.com/p/miranda/issues/list");
+	NotifyEventHooks(hBugEvent, 0, (LPARAM)"http://code.google.com/p/miranda/issues/list");
 	return 0;
 }
 

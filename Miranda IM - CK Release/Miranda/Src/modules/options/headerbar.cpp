@@ -63,8 +63,8 @@ struct MHeaderbarCtrl
 	// UI info
 	RECT		rc;
 	int			width, height;
-    HICON       hIcon;
-    
+	HICON       hIcon;
+	
 	// control colors
 	RGBQUAD		rgbBkgTop, rgbBkgBottom;
 	COLORREF	clText;
@@ -345,14 +345,14 @@ static LRESULT CALLBACK MHeaderbarWndProc(HWND hwndDlg, UINT  msg, WPARAM wParam
 	case WM_LBUTTONDOWN:
 		SendMessage(GetParent(hwndDlg), WM_SYSCOMMAND, 0xF012, 0);
 		return 0;
-    
-    case WM_SETICON:
+	
+	case WM_SETICON:
 		if (wParam < 3) {
 			itc->hIcon = (HICON)lParam;
 			InvalidateRect(hwndDlg, NULL, FALSE);
 		}
 		break;
-        
+		
 	case WM_ERASEBKGND:
 		return 1;
 

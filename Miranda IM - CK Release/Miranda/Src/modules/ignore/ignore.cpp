@@ -178,9 +178,9 @@ static void SetAllContactIcons(HWND hwndList)
 			szProto=(char*)CallService(MS_PROTO_GETCONTACTBASEPROTO,(WPARAM)hContact,0);
 			if(szProto==NULL) proto1Caps=proto4Caps=0;
 			else {
-                proto1Caps=CallProtoService(szProto,PS_GETCAPS,PFLAGNUM_1,0);
-                proto4Caps=CallProtoService(szProto,PS_GETCAPS,PFLAGNUM_4,0);
-            }
+				proto1Caps=CallProtoService(szProto,PS_GETCAPS,PFLAGNUM_1,0);
+				proto4Caps=CallProtoService(szProto,PS_GETCAPS,PFLAGNUM_4,0);
+			}
 			InitialiseItem(hwndList,hContact,hItem,proto1Caps,proto4Caps);
 			if(!DBGetContactSettingByte(hContact,"CList","Hidden",0))
 				SendMessage(hwndList,CLM_SETCHECKMARK,(WPARAM)hItem,1);

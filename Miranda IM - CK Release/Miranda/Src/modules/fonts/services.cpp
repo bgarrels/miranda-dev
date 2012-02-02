@@ -71,18 +71,18 @@ void ConvertColourID(ColourID *cid, TColourID* cidw)
 
 void ConvertEffectID(EffectID *eid, TEffectID* eidw)
 {
-    eidw->cbSize = sizeof(TEffectID);
+	eidw->cbSize = sizeof(TEffectID);
 
-    strcpy(eidw->dbSettingsGroup, eid->dbSettingsGroup);
-    strcpy(eidw->setting, eid->setting);
-    eidw->flags = eid->flags;
-    eidw->defeffect.effectIndex = eid->defeffect.effectIndex;
-    eidw->defeffect.baseColour = eid->defeffect.baseColour;
-    eidw->defeffect.secondaryColour = eid->defeffect.secondaryColour;
-    eidw->order = eid->order;
+	strcpy(eidw->dbSettingsGroup, eid->dbSettingsGroup);
+	strcpy(eidw->setting, eid->setting);
+	eidw->flags = eid->flags;
+	eidw->defeffect.effectIndex = eid->defeffect.effectIndex;
+	eidw->defeffect.baseColour = eid->defeffect.baseColour;
+	eidw->defeffect.secondaryColour = eid->defeffect.secondaryColour;
+	eidw->order = eid->order;
 
-    MultiByteToWideChar( code_page, 0, eid->group, -1, eidw->group, 64);
-    MultiByteToWideChar( code_page, 0, eid->name, -1, eidw->name, 64);
+	MultiByteToWideChar( code_page, 0, eid->group, -1, eidw->group, 64);
+	MultiByteToWideChar( code_page, 0, eid->name, -1, eidw->name, 64);
 }
 
 
@@ -462,34 +462,34 @@ void UpdateEffectSettings(TEffectID* effect_id, TEffectSettings* effectsettings)
 
 static int sttRegisterEffectWorker( TEffectID* effect_id )
 {
-    for ( int i = 0; i < effect_id_list.getCount(); i++ ) {
-        TEffectID& E = effect_id_list[i];
-        if ( !_tcscmp( E.group, effect_id->group ) && !_tcscmp( E.name, effect_id->name ))
-            return 1;
-    }
+	for ( int i = 0; i < effect_id_list.getCount(); i++ ) {
+		TEffectID& E = effect_id_list[i];
+		if ( !_tcscmp( E.group, effect_id->group ) && !_tcscmp( E.name, effect_id->name ))
+			return 1;
+	}
 
-    TEffectID* newItem = new TEffectID;
-    memcpy( newItem, effect_id, sizeof( TEffectID ));
-    UpdateEffectSettings( effect_id, &newItem->value );
-    effect_id_list.insert( newItem );
-    return 0;
+	TEffectID* newItem = new TEffectID;
+	memcpy( newItem, effect_id, sizeof( TEffectID ));
+	UpdateEffectSettings( effect_id, &newItem->value );
+	effect_id_list.insert( newItem );
+	return 0;
 }
 
 #if defined( _UNICODE )
 INT_PTR RegisterEffectW(WPARAM wParam, LPARAM lParam)
 {
-    return sttRegisterEffectWorker(( TEffectID* )wParam );
+	return sttRegisterEffectWorker(( TEffectID* )wParam );
 }
 #endif
 
 INT_PTR RegisterEffect(WPARAM wParam, LPARAM lParam)
 {
 #if defined( _UNICODE )
-    TEffectID temp;
-    ConvertEffectID( ( EffectID* )wParam, &temp );
-    return sttRegisterEffectWorker( &temp );
+	TEffectID temp;
+	ConvertEffectID( ( EffectID* )wParam, &temp );
+	return sttRegisterEffectWorker( &temp );
 #else
-    return sttRegisterEffectWorker(( TEffectID* )wParam );
+	return sttRegisterEffectWorker(( TEffectID* )wParam );
 #endif
 }
 
@@ -518,17 +518,17 @@ static int sttGetEffectWorker( TEffectID* effect_id, FONTEFFECT* effect )
 #if defined( _UNICODE )
 INT_PTR GetEffectW(WPARAM wParam, LPARAM lParam)
 {
-    return sttGetEffectWorker(( TEffectID* )wParam, ( FONTEFFECT* )lParam );
+	return sttGetEffectWorker(( TEffectID* )wParam, ( FONTEFFECT* )lParam );
 }
 #endif
 
 INT_PTR GetEffect(WPARAM wParam, LPARAM lParam)
 {
 #if defined( _UNICODE )
-    TEffectID temp;
-    ConvertEffectID((EffectID *)wParam, &temp);
-    return sttGetEffectWorker( &temp, ( FONTEFFECT* )lParam );
+	TEffectID temp;
+	ConvertEffectID((EffectID *)wParam, &temp);
+	return sttGetEffectWorker( &temp, ( FONTEFFECT* )lParam );
 #else
-    return sttGetEffectWorker(( TEffectID* )wParam, ( FONTEFFECT* )lParam );
+	return sttGetEffectWorker(( TEffectID* )wParam, ( FONTEFFECT* )lParam );
 #endif
 }

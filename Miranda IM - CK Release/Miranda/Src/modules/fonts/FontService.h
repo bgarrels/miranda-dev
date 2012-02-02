@@ -27,11 +27,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // settings to be used for the value of 'deffontsettings' in the FontID structure below - i.e. defaults
 typedef struct TFontSettings_tag
 {
-    COLORREF colour;
-    char     size;
-    BYTE     style;					// see the DBFONTF_* flags above
-    BYTE     charset;
-    TCHAR    szFace[LF_FACESIZE];
+	COLORREF colour;
+	char     size;
+	BYTE     style;					// see the DBFONTF_* flags above
+	BYTE     charset;
+	TCHAR    szFace[LF_FACESIZE];
 }
 	TFontSettings;
 
@@ -47,7 +47,7 @@ struct TFontID
 	DWORD flags;                   // bitwise OR of the FIDF_* flags above
 	TFontSettings deffontsettings; // defaults, valid if flags & FIDF_DEFAULTVALID
 	int   order;                   // controls the order in the font group in which the fonts are listed in the UI (if order fields are equal,
-                                  // they will be ordered alphabetically by name)
+								  // they will be ordered alphabetically by name)
 	TCHAR 	 backgroundGroup[64];
 	TCHAR 	 backgroundName[64];
 	TFontSettings value;
@@ -71,25 +71,25 @@ struct TColourID
 
 typedef struct TEffectSettings_tag
 {
-    BYTE     effectIndex;
-    DWORD    baseColour;        // ARGB
-    DWORD    secondaryColour;   // ARGB
+	BYTE     effectIndex;
+	DWORD    baseColour;        // ARGB
+	DWORD    secondaryColour;   // ARGB
 }
 TEffectSettings;
 
 
 struct TEffectID
 {
-    int      cbSize;
-    TCHAR    group[64];
-    TCHAR    name[64];
-    char     dbSettingsGroup[32];
-    char     setting[32];
-    DWORD    flags;
-    TEffectSettings defeffect;
-    int      order;
+	int      cbSize;
+	TCHAR    group[64];
+	TCHAR    name[64];
+	char     dbSettingsGroup[32];
+	char     setting[32];
+	DWORD    flags;
+	TEffectSettings defeffect;
+	int      order;
 
-    TEffectSettings value;
+	TEffectSettings value;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////

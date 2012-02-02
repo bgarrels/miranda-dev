@@ -49,23 +49,23 @@ INT_PTR CALLBACK DlgProcAbout(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPar
 			mir_free(pVerInfo);
 		}
 		{	char productVersion[56], *p;
-            int isAnsi = 0;
+			int isAnsi = 0;
 			TCHAR str[64];
 			CallService(MS_SYSTEM_GETVERSIONTEXT,SIZEOF(productVersion),(LPARAM)productVersion);
-            // Hide Unicode from version text as it is assumed at this point
-            p = strstr(productVersion, " Unicode"); 
+			// Hide Unicode from version text as it is assumed at this point
+			p = strstr(productVersion, " Unicode"); 
 			if (p)
 				*p = '\0';
-            else
-                isAnsi = 1;
+			else
+				isAnsi = 1;
 			mir_sntprintf(str,SIZEOF(str),_T(STR_VERSION_FORMAT), TranslateT("v"), productVersion, isAnsi?" ANSI":"");
-            {
-                TCHAR oldTitle[256], newTitle[256];
+			{
+				TCHAR oldTitle[256], newTitle[256];
 				GetDlgItemText( hwndDlg, IDC_HEADERBAR, oldTitle, SIZEOF( oldTitle ));
 				mir_sntprintf( newTitle, SIZEOF(newTitle), oldTitle, str );
 				SetDlgItemText( hwndDlg, IDC_HEADERBAR, newTitle );
 			}
-            
+			
 			mir_sntprintf(str,SIZEOF(str),TranslateT("Built %s %s"),_T(__DATE__),_T(__TIME__));
 			SetDlgItemText(hwndDlg,IDC_BUILDTIME,str);
 		}
@@ -131,7 +131,7 @@ INT_PTR CALLBACK DlgProcAbout(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPar
 			break;
 		default:
 			return FALSE;
-      }
+	  }
 		SetBkColor((HDC)wParam, GetSysColor(COLOR_WINDOW));
 		return (INT_PTR)GetSysColorBrush(COLOR_WINDOW);
 
