@@ -22,8 +22,6 @@
 #define __PLUGIN_NAME				"Updater x64"
 #elif defined(_UNICODE)
 #define __PLUGIN_NAME				"Updater (Unicode)"
-#else
-#define __PLUGIN_NAME				"Updater (ANSI)"
 #endif
 
 #define __FILENAME					"updater.dll"

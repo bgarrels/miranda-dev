@@ -29,6 +29,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -39,6 +40,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -79,6 +81,8 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">$(SolutionDir)$(Configuration)64/Obj/$(ProjectName)\</IntDir>
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
+    </LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <Midl>
@@ -180,7 +184,7 @@
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
@@ -196,6 +200,7 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -206,7 +211,7 @@
       <AdditionalDependencies>comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>zbin/x32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>updater.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>src/updater.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
@@ -239,7 +244,7 @@
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
@@ -247,12 +252,15 @@
       <WarningLevel>Level3</WarningLevel>
       <CompileAs>Default</CompileAs>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsManaged>
+      </CompileAsManaged>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
+      <UseUnicodeForAssemblerListing>
+      </UseUnicodeForAssemblerListing>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -262,7 +270,7 @@
     <Link>
       <AdditionalDependencies>comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>zbin/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>updater.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>src/updater.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
       <GenerateMapFile>false</GenerateMapFile>
@@ -278,7 +286,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="allocations.cpp" />
     <ClCompile Include="bzip2-1.0.6\blocksort.c" />
     <ClCompile Include="bzip2-1.0.6\bzlib.c" />
     <ClCompile Include="bzip2-1.0.6\compress.c" />
@@ -286,68 +293,58 @@
     <ClCompile Include="bzip2-1.0.6\decompress.c" />
     <ClCompile Include="bzip2-1.0.6\huffman.c" />
     <ClCompile Include="bzip2-1.0.6\randtable.c" />
-    <ClCompile Include="conf_comp_dialog.cpp" />
-    <ClCompile Include="conf_dialog.cpp" />
-    <ClCompile Include="extern.cpp" />
-    <ClCompile Include="icons.cpp" />
-    <ClCompile Include="options.cpp" />
-    <ClCompile Include="popups.cpp" />
-    <ClCompile Include="progress_dialog.cpp" />
-    <ClCompile Include="scan.cpp" />
-    <ClCompile Include="services.cpp" />
-    <ClCompile Include="socket.cpp" />
-    <ClCompile Include="unzipfile.cpp" />
-    <ClCompile Include="updater.cpp" />
-    <ClCompile Include="utils.cpp" />
-    <ClCompile Include="xmldata.cpp" />
-    <ClCompile Include="ezxml.c" />
+    <ClCompile Include="ezxml\ezxml.c" />
+    <ClCompile Include="src\allocations.cpp" />
+    <ClCompile Include="src\conf_comp_dialog.cpp" />
+    <ClCompile Include="src\conf_dialog.cpp" />
+    <ClCompile Include="src\extern.cpp" />
+    <ClCompile Include="src\icons.cpp" />
+    <ClCompile Include="src\options.cpp" />
+    <ClCompile Include="src\popups.cpp" />
+    <ClCompile Include="src\progress_dialog.cpp" />
+    <ClCompile Include="src\scan.cpp" />
+    <ClCompile Include="src\services.cpp" />
+    <ClCompile Include="src\socket.cpp" />
+    <ClCompile Include="src\unzipfile.cpp" />
+    <ClCompile Include="src\updater.cpp" />
+    <ClCompile Include="src\utils.cpp" />
+    <ClCompile Include="src\xmldata.cpp" />
     <ClCompile Include="zbin\minizip\ioapi.c" />
     <ClCompile Include="zbin\minizip\ioapi_mem.c" />
     <ClCompile Include="zbin\minizip\unzip.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ExternalAPI\m_updater.h" />
-    <ClInclude Include="allocations.h" />
     <ClInclude Include="bzip2-1.0.6\bzlib.h" />
-    <ClInclude Include="common.h" />
-    <ClInclude Include="conf_comp_dialog.h" />
-    <ClInclude Include="conf_dialog.h" />
-    <ClInclude Include="extern.h" />
-    <ClInclude Include="icons.h" />
-    <ClInclude Include="options.h" />
-    <ClInclude Include="popups.h" />
-    <ClInclude Include="progress_dialog.h" />
+    <ClInclude Include="bzip2-1.0.6\bzlib_private.h" />
+    <ClInclude Include="ezxml\ezxml.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="scan.h" />
-    <ClInclude Include="services.h" />
-    <ClInclude Include="socket.h" />
+    <ClInclude Include="src\allocations.h" />
+    <ClInclude Include="src\common.h" />
+    <ClInclude Include="src\conf_comp_dialog.h" />
+    <ClInclude Include="src\conf_dialog.h" />
+    <ClInclude Include="src\extern.h" />
+    <ClInclude Include="src\icons.h" />
+    <ClInclude Include="src\options.h" />
+    <ClInclude Include="src\popups.h" />
+    <ClInclude Include="src\progress_dialog.h" />
+    <ClInclude Include="src\scan.h" />
+    <ClInclude Include="src\services.h" />
+    <ClInclude Include="src\socket.h" />
+    <ClInclude Include="src\utils.h" />
+    <ClInclude Include="src\xmldata.h" />
     <ClInclude Include="updater.h" />
-    <ClInclude Include="utils.h" />
     <ClInclude Include="version.h" />
-    <ClInclude Include="xmldata.h" />
-    <ClInclude Include="ezxml.h" />
     <ClInclude Include="zbin\minizip\ioapi.h" />
     <ClInclude Include="zbin\minizip\unzip.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="restart.ico" />
-    <None Include="u.ico" />
-    <None Include="ue.ico" />
+    <None Include="icos\restart.ico" />
+    <None Include="icos\u.ico" />
+    <None Include="icos\ue.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resource.rc" />
-    <ResourceCompile Include="updater.rc">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">true</ExcludedFromBuild>
-    </ResourceCompile>
-    <ResourceCompile Include="version.rc">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">true</ExcludedFromBuild>
-    </ResourceCompile>
+    <ResourceCompile Include="updater.rc" />
+    <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
