@@ -13,45 +13,54 @@
       <UniqueIdentifier>{2d794d19-0987-4aa7-940d-2378ba7e4fdb}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{e46f567d-000e-4158-ac78-1efa93bc6fcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="helpers">
+      <UniqueIdentifier>{c193ab31-2d4a-42c6-b46c-8f0052ab2f28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="advancedautoaway.cpp">
+    <ClCompile Include="src\advancedautoaway.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\commonstatus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="msgoptions.cpp">
+    <ClCompile Include="src\confirmdialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="options.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="trigger_aaa.cpp">
+    <ClCompile Include="src\msgoptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="commonstatus.cpp">
+    <ClCompile Include="src\options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="confirmdialog.cpp">
+    <ClCompile Include="src\trigger_aaa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="helpers\gen_helpers.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="advancedautoaway.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="trigger_aaa.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="commonstatus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\advancedautoaway.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commonstatus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\trigger_aaa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\gen_helpers.h">
+      <Filter>helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +75,12 @@
     </None>
     <None Include="Icons\icon1.ico">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\fsm.sdr">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\fsm.jpg">
+      <Filter>docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

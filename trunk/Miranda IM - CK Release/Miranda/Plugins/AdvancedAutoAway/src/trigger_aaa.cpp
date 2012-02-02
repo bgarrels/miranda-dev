@@ -2,7 +2,7 @@
 #include "advancedautoaway.h"
 #include <m_trigger.h>
 #include "trigger_aaa.h"
-#include "resource.h"
+#include "../resource.h"
 
 extern HINSTANCE hInst;
 static HANDLE hAAAStateChangedHook;

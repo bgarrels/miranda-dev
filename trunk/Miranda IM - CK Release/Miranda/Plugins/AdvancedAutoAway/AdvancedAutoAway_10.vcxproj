@@ -29,6 +29,7 @@
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -40,6 +41,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -125,7 +127,7 @@
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>C:\Users\CHEF-KOCH\Desktop\miranda-dev\Miranda IM - CK Release\Miranda\Plugins\AdvancedAutoAway\helpers;../../include;../../ExternalAPI;../includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./helpers;../../include;../includes;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;ADVANCEDAUTOAWAY_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -141,11 +143,12 @@
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <ExceptionHandling>false</ExceptionHandling>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
       <FloatingPointModel>Fast</FloatingPointModel>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -191,7 +194,7 @@
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
       <FloatingPointModel>Fast</FloatingPointModel>
       <AdditionalIncludeDirectories>./helpers;../../include;../includes;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -200,6 +203,8 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <EnablePREfast>true</EnablePREfast>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <Link />
     <Link />
@@ -212,6 +217,7 @@
       <AdditionalDependencies>comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <BaseAddress>0x11bd0000</BaseAddress>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
@@ -230,22 +236,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="advancedautoaway.cpp" />
-    <ClCompile Include="commonstatus.cpp" />
-    <ClCompile Include="confirmdialog.cpp" />
     <ClCompile Include="helpers\gen_helpers.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="msgoptions.cpp" />
-    <ClCompile Include="options.cpp" />
-    <ClCompile Include="trigger_aaa.cpp" />
+    <ClCompile Include="src\advancedautoaway.cpp" />
+    <ClCompile Include="src\commonstatus.cpp" />
+    <ClCompile Include="src\confirmdialog.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\msgoptions.cpp" />
+    <ClCompile Include="src\options.cpp" />
+    <ClCompile Include="src\trigger_aaa.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="advancedautoaway.h" />
-    <ClInclude Include="commonstatus.h" />
+    <ClInclude Include="helpers\gen_helpers.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="trigger_aaa.h" />
+    <ClInclude Include="src\advancedautoaway.h" />
+    <ClInclude Include="src\commonstatus.h" />
+    <ClInclude Include="src\trigger_aaa.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\fsm.jpg" />
+    <None Include="docs\fsm.sdr" />
     <None Include="Icons\icon1.ico" />
     <None Include="Icons\ttbDown.bmp" />
     <None Include="Icons\ttbUp.bmp" />

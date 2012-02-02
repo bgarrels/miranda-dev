@@ -18,7 +18,7 @@
 */
 #include "commonstatus.h"
 #include "advancedautoaway.h"
-#include "resource.h"
+#include "../resource.h"
 #include <commctrl.h>
 
 static BOOL (WINAPI *pfnEnableThemeDialogTexture)(HANDLE, DWORD) = 0;
