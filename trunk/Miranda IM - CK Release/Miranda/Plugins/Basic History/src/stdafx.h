@@ -32,6 +32,7 @@
 #include <string>
 #include <fstream>
 
+//Miranda IM stuff
 #define MIRANDA_VER		0x0900
 #define MIRANDA_CUSTOM_LP
 
@@ -54,7 +55,6 @@
 #include <m_protosvc.h>
 #include <m_icq.h>
 #include <m_clc.h>
-
 #include <win2k.h>
 
 //ExternalApi
