@@ -1,6 +1,6 @@
 // Microsoft Visual C++ generated resource script.
 //
-#include "resource.h"
+#include "src/resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -9,7 +9,7 @@
 //
 #include <windows.h>
 #include <winres.h>
-#include <statusmodes.h>
+#include <../../include/statusmodes.h>
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
@@ -437,7 +437,7 @@ END
 BEGIN
     "#include <windows.h>\r\n"
     "#include <winres.h>\r\n"
-    "#include <statusmodes.h>\r\n"
+    "#include <../../include/statusmodes.h>\r\n"
     "\0"
 END
 
