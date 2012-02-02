@@ -22,13 +22,19 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $Source: /cvsroot/miranda/miranda/protocols/IcqOscarJ/UI/userinfotab.h,v $
+// File name      : $Source: /cvsroot/miranda/miranda/protocols/IcqOscarJ/icqoscar.c,v $
 // Revision       : $Revision: 7500 $
 // Last change on : $Date: 2008-03-24 19:07:37 +0100 (Mo, 24. Mrz 2008) $
 // Last change by : $Author: jokusoftware $
 //
 // DESCRIPTION:
 //
-//  Describe me here please...
+//  The only purpose of this file is to make sure that the precompiled headers
+//  are included and compiled. The Visual Studio settings for this file must be
+//  'Create precompiled header file' and all the other .c files must be set to
+//  'User precompiled header file'. Remember to check this when adding new
+//  files to the project...
 //
 // -----------------------------------------------------------------------------
+
+#include "icqoscar.h"

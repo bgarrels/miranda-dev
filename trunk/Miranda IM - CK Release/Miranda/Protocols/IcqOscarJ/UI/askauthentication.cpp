@@ -33,8 +33,7 @@
 //  Describe me here please...
 //
 // -----------------------------------------------------------------------------
-
-#include "icqoscar.h"
+#include "../src/icqoscar.h"
 
 struct AskAuthParam
 {
