@@ -34,7 +34,7 @@
 //
 // -----------------------------------------------------------------------------
 
-#include "icqoscar.h"
+#include "../src/icqoscar.h"
 
 #define SVS_NORMAL        0
 #define SVS_ZEROISUNSPEC  2
@@ -230,8 +230,8 @@ static INT_PTR CALLBACK IcqDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 				{
 					CIcqProto* ppro = (CIcqProto*)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
 
-          if (!ppro)
-            break;
+		  if (!ppro)
+			break;
 
 					char* szProto;
 					HANDLE hContact = (HANDLE)((LPPSHNOTIFY)lParam)->lParam;

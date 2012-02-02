@@ -2,10 +2,10 @@
 //                ICQ plugin for Miranda Instant Messenger
 //                ________________________________________
 // 
-// Copyright © 2000,2001 Richard Hughes, Roland Rabien, Tristan Van de Vreede
-// Copyright © 2001,2002 Jon Keating, Richard Hughes
-// Copyright © 2002,2003,2004 Martin Öberg, Sam Kothari, Robert Rainwater
-// Copyright © 2004,2005 Joe Kucera
+// Copyright © 2000-2001 Richard Hughes, Roland Rabien, Tristan Van de Vreede
+// Copyright © 2001-2002 Jon Keating, Richard Hughes
+// Copyright © 2002-2004 Martin Öberg, Sam Kothari, Robert Rainwater
+// Copyright © 2004-2009 Joe Kucera
 // 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,13 +23,36 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $Source: /cvsroot/miranda/miranda/protocols/IcqOscarJ/UI/loginpassword.h,v $
-// Revision       : $Revision: 7500 $
-// Last change on : $Date: 2008-03-24 19:07:37 +0100 (Mo, 24. Mrz 2008) $
-// Last change by : $Author: jokusoftware $
+// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/iconlib.h $
+// Revision       : $Revision: 11719 $
+// Last change on : $Date: 2010-05-09 00:01:13 +0200 (So, 09. Mai 2010) $
+// Last change by : $Author: borkra $
 //
 // DESCRIPTION:
 //
-//  Describe me here please...
+//  Headers for IconLib Plugin / module support
 //
 // -----------------------------------------------------------------------------
+#ifndef __ICONLIB_H
+#define __ICONLIB_H
+
+
+struct IcqIconHandle_s
+{
+  char *szName;
+  HANDLE hIcoLib;
+
+  HANDLE Handle();
+  HICON GetIcon(bool big = false);
+  void ReleaseIcon(bool big = false);
+};
+
+typedef IcqIconHandle_s *IcqIconHandle;
+
+
+IcqIconHandle IconLibDefine(const char *desc, const char *section, const char *module, const char *ident, const TCHAR *def_file, int def_idx);
+void IconLibRemove(IcqIconHandle *phIcon);
+
+
+
+#endif /* __ICONLIB_H */

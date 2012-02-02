@@ -32,7 +32,7 @@
 //
 // -----------------------------------------------------------------------------
 
-#include "icqoscar.h"
+#include "../src/icqoscar.h"
 
 
 int CIcqProto::StringToListItemId(const char *szSetting,int def)

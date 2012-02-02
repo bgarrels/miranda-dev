@@ -2,9 +2,10 @@
 //                ICQ plugin for Miranda Instant Messenger
 //                ________________________________________
 // 
-// Copyright © 2000,2001 Richard Hughes, Roland Rabien, Tristan Van de Vreede
-// Copyright © 2001,2002 Jon Keating, Richard Hughes
-// Copyright © 2002,2003,2004 Martin Öberg, Sam Kothari, Robert Rainwater
+// Copyright © 2000-2001 Richard Hughes, Roland Rabien, Tristan Van de Vreede
+// Copyright © 2001-2002 Jon Keating, Richard Hughes
+// Copyright © 2002-2004 Martin Öberg, Sam Kothari, Robert Rainwater
+// Copyright © 2004-2008 Joe Kucera
 // 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,13 +23,22 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $Source: /cvsroot/miranda/miranda/protocols/IcqOscarJ/UI/userinfotab.h,v $
-// Revision       : $Revision: 7500 $
-// Last change on : $Date: 2008-03-24 19:07:37 +0100 (Mo, 24. Mrz 2008) $
-// Last change by : $Author: jokusoftware $
+// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/log.h $
+// Revision       : $Revision: 7484 $
+// Last change on : $Date: 2008-03-21 10:43:39 +0100 (Fr, 21. Mrz 2008) $
+// Last change by : $Author: ghazan $
 //
 // DESCRIPTION:
 //
 //  Describe me here please...
 //
 // -----------------------------------------------------------------------------
+#ifndef __LOG_H
+#define __LOG_H
+
+#define LOG_NOTE       0   //trivial problems or problems that will already have been reported elsewhere
+#define LOG_WARNING    1   //problems that may have caused data loss
+#define LOG_ERROR      2   //problems that cause a disconnection from the network
+#define LOG_FATAL      3   //problems requiring user intervention: password wrong, rate exceeded, etc.
+
+#endif /* __LOG_H */

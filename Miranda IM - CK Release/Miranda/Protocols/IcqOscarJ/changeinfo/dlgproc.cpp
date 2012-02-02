@@ -32,7 +32,7 @@
 //
 // -----------------------------------------------------------------------------
 
-#include "icqoscar.h"
+#include "../src/icqoscar.h"
 
 
 #define DM_PROTOACK  (WM_USER+10)
@@ -78,7 +78,7 @@ char* ChangeInfoData::GetItemSettingText(int i, char *buf, size_t bufsize)
 		case LI_STRING:
 		case LI_LONGSTRING:
 			text = BinaryToEscapes((char*)settingData[i].value);
-      alloced = 1;
+	  alloced = 1;
 			break;
 
 		case LI_NUMBER:
@@ -92,19 +92,19 @@ char* ChangeInfoData::GetItemSettingText(int i, char *buf, size_t bufsize)
 			{
 				text = ICQTranslateUtfStatic(LPGEN("Unknown value"), buf, bufsize);
 
-        FieldNamesItem *list = (FieldNamesItem*)setting[i].pList;
-        for (int j=0; TRUE; j++)
+		FieldNamesItem *list = (FieldNamesItem*)setting[i].pList;
+		for (int j=0; TRUE; j++)
 					if (list[j].code == settingData[i].value) 
 					{
 						text = ICQTranslateUtfStatic(list[j].text, buf, bufsize);
 						break;
 					}
-          else if (!list[j].text)
-          {
-            if (list[j].code == settingData[i].value)
-              text = ICQTranslateUtfStatic("Unspecified", buf, bufsize);
-            break;
-          }
+		  else if (!list[j].text)
+		  {
+			if (list[j].code == settingData[i].value)
+			  text = ICQTranslateUtfStatic("Unspecified", buf, bufsize);
+			break;
+		  }
 			}
 			break;
 		}
@@ -116,20 +116,20 @@ char* ChangeInfoData::GetItemSettingText(int i, char *buf, size_t bufsize)
 		else 
 		{
 			if (alloced) 
-      {
+	  {
 				SAFE_FREE(&text);
-        alloced = 0;
-      }
-      text = "********";
+		alloced = 0;
+	  }
+	  text = "********";
 		}
 	}
   if (text != buf)
   {
-    char *tmp = text;
+	char *tmp = text;
 
-    text = null_strcpy(buf, text, bufsize - 1);
-    if (alloced)
-      SAFE_FREE(&tmp);
+	text = null_strcpy(buf, text, bufsize - 1);
+	if (alloced)
+	  SAFE_FREE(&tmp);
   }
 
   return text;
@@ -517,7 +517,7 @@ INT_PTR CALLBACK ChangeInfoDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 
 				dat->ClearChangeFlags();
 				UnhookEvent(dat->hAckHook); 
-        dat->hAckHook = NULL;
+		dat->hAckHook = NULL;
 				EnableDlgItem(hwndDlg, IDC_LIST, TRUE);
 				EnableDlgItem(hwndDlg, IDC_UPLOADING, FALSE);
 				SetDlgItemTextUtf(hwndDlg, IDC_UPLOADING, ICQTranslateUtfStatic(LPGEN("Upload complete"), str, MAX_PATH));
@@ -531,7 +531,7 @@ INT_PTR CALLBACK ChangeInfoDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 				EnableDlgItem(hwndDlg, IDC_UPLOADING, FALSE);
 				SetDlgItemTextUtf(hwndDlg, IDC_UPLOADING, ICQTranslateUtfStatic(LPGEN("Upload FAILED"), str, MAX_PATH));
 				SendMessage(GetParent(hwndDlg), PSM_FORCECHANGED, 0, 0);
-        EnableDlgItem(hwndDlg, IDC_SAVE, TRUE);
+		EnableDlgItem(hwndDlg, IDC_SAVE, TRUE);
 			}
 			break;
 		}
@@ -541,13 +541,13 @@ INT_PTR CALLBACK ChangeInfoDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 			UnhookEvent(dat->hAckHook);
 			dat->hAckHook = NULL;
 		}
-    {
-      HFONT hFont = (HFONT)SendMessage(dat->hwndList, WM_GETFONT, 0, 0);
+	{
+	  HFONT hFont = (HFONT)SendMessage(dat->hwndList, WM_GETFONT, 0, 0);
 		  DeleteObject(hFont);
-    }
+	}
 		dat->FreeStoredDbSettings();
-    SetWindowLongPtr(hwndDlg, GWLP_USERDATA, 0);
-    SAFE_DELETE((void_struct**)&dat);
+	SetWindowLongPtr(hwndDlg, GWLP_USERDATA, 0);
+	SAFE_DELETE((void_struct**)&dat);
 		break;
 	}
 	return FALSE;
