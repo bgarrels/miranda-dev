@@ -59,9 +59,6 @@
     <ClInclude Include="res\version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_stopspam.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="res\stopspam.rc">
