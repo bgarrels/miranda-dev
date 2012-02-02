@@ -183,6 +183,8 @@
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <EnablePREfast>true</EnablePREfast>
+      <OpenMPSupport>
+      </OpenMPSupport>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
