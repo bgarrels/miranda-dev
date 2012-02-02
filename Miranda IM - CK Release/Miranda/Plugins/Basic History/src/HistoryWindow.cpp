@@ -36,6 +36,7 @@ extern char* metaContactProto;
 
 #define MIN_PANELHEIGHT 40
 
+
 HistoryWindow::HistoryWindow(HANDLE _hContact)
 	:isDestroyed(true),
 	OldSplitterProc(0),
@@ -1805,7 +1806,7 @@ bool HistoryWindow::DoHotkey(UINT msg, LPARAM lParam, WPARAM wParam, int window)
 		break;
 	case HISTORY_HK_SHOWCONTACTS:
 		Button_SetCheck(GetDlgItem(hWnd, IDC_SHOWHIDE), Button_GetCheck(GetDlgItem(hWnd, IDC_SHOWHIDE)) & BST_CHECKED ? BST_UNCHECKED : BST_CHECKED);
-        SendMessage(hWnd, WM_COMMAND, MAKELONG(IDC_SHOWHIDE, BN_CLICKED), NULL);
+		SendMessage(hWnd, WM_COMMAND, MAKELONG(IDC_SHOWHIDE, BN_CLICKED), NULL);
 		break;
 	case HISTORY_HK_ONLYIN:
 		searcher.SetOnlyIn(!searcher.IsOnlyIn());
