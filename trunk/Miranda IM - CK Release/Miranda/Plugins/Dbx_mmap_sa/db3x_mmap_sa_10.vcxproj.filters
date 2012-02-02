@@ -15,68 +15,68 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="commonheaders.c">
+    <ClCompile Include="src\commonheaders.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="database.c">
+    <ClCompile Include="src\database.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbcache.c">
+    <ClCompile Include="src\dbcache.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbcontacts.c">
+    <ClCompile Include="src\dbcontacts.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbevents.c">
+    <ClCompile Include="src\dbevents.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbheaders.c">
+    <ClCompile Include="src\dbheaders.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbmodulechain.c">
+    <ClCompile Include="src\dbmodulechain.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbpreset.c">
+    <ClCompile Include="src\dbpreset.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbsettings.c">
+    <ClCompile Include="src\dbsettings.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dialogs.c">
+    <ClCompile Include="src\dialogs.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="encrypt.c">
+    <ClCompile Include="src\encrypt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="init.c">
+    <ClCompile Include="src\init.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="security.c">
+    <ClCompile Include="src\security.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="commonheaders.h">
+    <ClInclude Include="src\commonheaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="database.h">
+    <ClInclude Include="src\database.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="options.h">
+    <ClInclude Include="src\options.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="src\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="version.h">
+    <ClInclude Include="src\version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="db3x_mmap.rc">
+    <ResourceCompile Include="src\db3x_mmap.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="version.rc">
+    <ResourceCompile Include="src\version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -85,6 +85,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="icos\pass.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\restart.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\backup.ico">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
