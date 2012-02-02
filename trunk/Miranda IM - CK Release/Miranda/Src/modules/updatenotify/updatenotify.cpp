@@ -44,19 +44,19 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 typedef struct {
 	int isNew;
 	int isManual;
-    char version[64];
-    char versionReal[16];
-    char notesUrl[256];
+	char version[64];
+	char versionReal[16];
+	char notesUrl[256];
 	char downloadUrl[256];
 	DWORD reqTime;
 } UpdateNotifyData;
 
 typedef struct {
-    DWORD dwVersion;
-    char *szVersionPublic;
-    char *szVersion;
-    char *szDownload;
-    char *szNotes;
+	DWORD dwVersion;
+	char *szVersionPublic;
+	char *szVersion;
+	char *szDownload;
+	char *szNotes;
 } UpdateNotifyReleaseData;
 
 static BOOL bModuleInitialized = FALSE;
@@ -101,13 +101,13 @@ int LoadUpdateNotifyModule(void) {
 	
 	bModuleInitialized = TRUE;
 	
-    // Upgrade Routine
-    if (DBGetContactSettingByte(NULL, UN_MOD, "UpdateNotifyNotifyAlpha", 0)) {
-        DBDeleteContactSetting(NULL, UN_MOD, "UpdateNotifyNotifyAlpha");
-        DBWriteContactSettingByte(NULL, UN_MOD, UN_NOTIFYTYPE, UN_NOTIFYTYPE_ALPHA);
-    }
-    // Ene Upgrade Routine
-    
+	// Upgrade Routine
+	if (DBGetContactSettingByte(NULL, UN_MOD, "UpdateNotifyNotifyAlpha", 0)) {
+		DBDeleteContactSetting(NULL, UN_MOD, "UpdateNotifyNotifyAlpha");
+		DBWriteContactSettingByte(NULL, UN_MOD, UN_NOTIFYTYPE, UN_NOTIFYTYPE_ALPHA);
+	}
+	// Ene Upgrade Routine
+	
 	CreateServiceFunction("UpdateNotify/UpdateCommand", UpdateNotifyMenuCommand);
 	mi.cbSize = sizeof(mi);
 	mi.flags = CMIF_ICONFROMICOLIB;
@@ -122,7 +122,7 @@ int LoadUpdateNotifyModule(void) {
 	hHookPreShutdown = HookEvent(ME_SYSTEM_PRESHUTDOWN, UpdateNotifyPreShutdown);
 	HookEvent(ME_OPT_INITIALISE, UpdateNotifyOptInit);
 	updateTimerId = SetTimer(NULL, 0, 1000*UN_FIRSTCHECK, UpdateNotifyTimerCheck);
-    mir_getXI(&xun);
+	mir_getXI(&xun);
 	return 0;
 }
 
@@ -207,54 +207,54 @@ static VOID CALLBACK UpdateNotifyTimerCheck(HWND, UINT, UINT_PTR, DWORD)
 }
 
 static DWORD UpdateNotifyMakeVersion(char *str) {
-    DWORD a1,a2,a3,a4;
-    if (!str)
-        return 0;
-    sscanf(str, "%u.%u.%u.%u", &a1, &a2, &a3, &a4);
-    return PLUGIN_MAKE_VERSION(a1, a2, a3, a4);
+	DWORD a1,a2,a3,a4;
+	if (!str)
+		return 0;
+	sscanf(str, "%u.%u.%u.%u", &a1, &a2, &a3, &a4);
+	return PLUGIN_MAKE_VERSION(a1, a2, a3, a4);
 }
 
 static int UpdateNotifyIsNewer(DWORD dwCurrent, DWORD dwTest) {
-    if (dwTest>dwCurrent) 
-        return 1;
-    return 0;
+	if (dwTest>dwCurrent) 
+		return 1;
+	return 0;
 }
 
 static int UpdateNotifyReleaseDataValid(UpdateNotifyReleaseData *d) {
-    if (d&&d->szVersionPublic&&d->szVersion&&d->szDownload&&d->szNotes)
-        return 1;
-    return 0;
+	if (d&&d->szVersionPublic&&d->szVersion&&d->szDownload&&d->szNotes)
+		return 1;
+	return 0;
 }
 
 static void UpdateNotifyFreeReleaseData(UpdateNotifyReleaseData *d) {
-    if (!d) 
-        return;
-    if (d->szVersionPublic) mir_free(d->szVersionPublic);
-    if (d->szVersion) mir_free(d->szVersion);
-    if (d->szDownload) mir_free(d->szDownload);
-    if (d->szNotes) mir_free(d->szNotes);
+	if (!d) 
+		return;
+	if (d->szVersionPublic) mir_free(d->szVersionPublic);
+	if (d->szVersion) mir_free(d->szVersion);
+	if (d->szDownload) mir_free(d->szDownload);
+	if (d->szNotes) mir_free(d->szNotes);
 }
 
 static void UpdateNotifyReleaseLogUpdate(UpdateNotifyReleaseData *d) {
-    if (!UpdateNotifyReleaseDataValid(d)) 
-        return;
-    #ifdef _WIN64
-    Netlib_Logf(hNetlibUser, "Update server version: %s [%s] [64-bit]", d->szVersionPublic, d->szVersion);
-    #elif defined(_UNICODE)
-    Netlib_Logf(hNetlibUser, "Update server version: %s [%s] [Unicode]", d->szVersionPublic, d->szVersion);
-    #else
-    Netlib_Logf(hNetlibUser, "Update server version: %s [%s] [ANSI]", d->szVersionPublic, d->szVersion);
-    #endif
-    
+	if (!UpdateNotifyReleaseDataValid(d)) 
+		return;
+	#ifdef _WIN64
+	Netlib_Logf(hNetlibUser, "Update server version: %s [%s] [64-bit]", d->szVersionPublic, d->szVersion);
+	#elif defined(_UNICODE)
+	Netlib_Logf(hNetlibUser, "Update server version: %s [%s] [Unicode]", d->szVersionPublic, d->szVersion);
+	#else
+	Netlib_Logf(hNetlibUser, "Update server version: %s [%s] [ANSI]", d->szVersionPublic, d->szVersion);
+	#endif
+	
 }
 
 static void UpdateNotifyReleaseCopyData(UpdateNotifyReleaseData *d, UpdateNotifyData *und) {
-    if (!UpdateNotifyReleaseDataValid(d)||!und) 
-        return;
-    mir_snprintf(und->version, sizeof(und->version), "%s", d->szVersionPublic);
-    mir_snprintf(und->versionReal, sizeof(und->versionReal), "%s", d->szVersion);
-    mir_snprintf(und->notesUrl, sizeof(und->notesUrl), "%s", d->szNotes);
-    mir_snprintf(und->downloadUrl, sizeof(und->downloadUrl), "%s", d->szDownload);
+	if (!UpdateNotifyReleaseDataValid(d)||!und) 
+		return;
+	mir_snprintf(und->version, sizeof(und->version), "%s", d->szVersionPublic);
+	mir_snprintf(und->versionReal, sizeof(und->versionReal), "%s", d->szVersion);
+	mir_snprintf(und->notesUrl, sizeof(und->notesUrl), "%s", d->szNotes);
+	mir_snprintf(und->downloadUrl, sizeof(und->downloadUrl), "%s", d->szDownload);
 }
 
 static int UpdateNotifyMakeRequest(UpdateNotifyData *und) {
@@ -295,13 +295,13 @@ static int UpdateNotifyMakeRequest(UpdateNotifyData *und) {
 	req.flags = 0;
 	headers[0].szName = "User-Agent";
 	headers[0].szValue = szUserAgent;
-    #ifdef _WIN64
-    mir_snprintf(szUserAgent, sizeof(szUserAgent), "Miranda/%s (x64)", szVersion);
-    #elif defined(_UNICODE)
-    mir_snprintf(szUserAgent, sizeof(szUserAgent), "Miranda/%s (Unicode)", szVersion);
-    #else
-    mir_snprintf(szUserAgent, sizeof(szUserAgent), "Miranda/%s (ANSI)", szVersion);
-    #endif
+	#ifdef _WIN64
+	mir_snprintf(szUserAgent, sizeof(szUserAgent), "Miranda/%s (x64)", szVersion);
+	#elif defined(_UNICODE)
+	mir_snprintf(szUserAgent, sizeof(szUserAgent), "Miranda/%s (Unicode)", szVersion);
+	#else
+	mir_snprintf(szUserAgent, sizeof(szUserAgent), "Miranda/%s (ANSI)", szVersion);
+	#endif
 	req.headersCount = 1;
 	req.headers = headers;
 	resp = (NETLIBHTTPREQUEST *)CallService(MS_NETLIB_HTTPTRANSACTION, (WPARAM)hNetlibUser, (LPARAM)&req);
@@ -309,202 +309,202 @@ static int UpdateNotifyMakeRequest(UpdateNotifyData *und) {
 		if (resp->resultCode == 200 && resp->dataLength > 0) {
 			//int i;
 			int resUpdate = 0;
-            TCHAR *tXml;
-            char *tmp;
-            HXML nodeDoc, n;
-            
-            tXml = mir_a2t(resp->pData);
-            nodeDoc = xun.parseString(tXml, 0, _T("miranda"));
-            if (nodeDoc) {
-                int rdStableValid = 0, rdBetaValid = 0, rdAlphaValid = 0;
-                // stable release
-                UpdateNotifyReleaseData rdStable;
-                ZeroMemory(&rdStable, sizeof(rdStable));
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasestable/versionpublic"), 0)) != NULL && xun.getText(n)) {
-                    rdStable.szVersionPublic = mir_t2a(xun.getText(n));
-                }
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasestable/versionreal"), 0)) != NULL && xun.getText(n)) {
-                    rdStable.szVersion = mir_t2a(xun.getText(n));
-                    if (rdStable.szVersion)
-                        rdStable.dwVersion = UpdateNotifyMakeVersion(rdStable.szVersion);
-                }
-                #ifdef _WIN64
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasestable/downloadx64exe"), 0)) != NULL && xun.getText(n)) {
-                    rdStable.szDownload = mir_t2a(xun.getText(n));
-                }
-                #elif defined(_UNICODE)
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasestable/downloadunicodeexe"), 0)) != NULL && xun.getText(n)) {
-                    rdStable.szDownload = mir_t2a(xun.getText(n));
-                }
-                #else
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasestable/downloadansiexe"), 0)) != NULL && xun.getText(n)) {
-                    rdStable.szDownload = mir_t2a(xun.getText(n));
-                }
-                #endif
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasestable/notesurl"), 0)) != NULL && xun.getText(n)) {
-                    rdStable.szNotes = mir_t2a(xun.getText(n));
-                }
-                rdStableValid = UpdateNotifyReleaseDataValid(&rdStable);
-                
-                // beta release
-                UpdateNotifyReleaseData rdBeta;
-                ZeroMemory(&rdBeta, sizeof(rdBeta));
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasebeta/versionpublic"), 0)) != NULL && xun.getText(n)) {
-                    rdBeta.szVersionPublic = mir_t2a(xun.getText(n));
-                }
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasebeta/versionreal"), 0)) != NULL && xun.getText(n)) {
-                    rdBeta.szVersion = mir_t2a(xun.getText(n));
-                    if (rdBeta.szVersion)
-                        rdBeta.dwVersion = UpdateNotifyMakeVersion(rdBeta.szVersion);
-                }
-                #ifdef _WIN64
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasebeta/downloadx64zip"), 0)) != NULL && xun.getText(n)) {
-                    rdBeta.szDownload = mir_t2a(xun.getText(n));
-                }
-                #elif defined(_UNICODE)
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasebeta/downloadunicodeexe"), 0)) != NULL && xun.getText(n)) {
-                    rdBeta.szDownload = mir_t2a(xun.getText(n));
-                }
-                #else
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasebeta/downloadansiexe"), 0)) != NULL && xun.getText(n)) {
-                    rdBeta.szDownload = mir_t2a(xun.getText(n));
-                }
-                #endif
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasebeta/notesurl"), 0)) != NULL && xun.getText(n)) {
-                    rdBeta.szNotes = mir_t2a(xun.getText(n));
-                }
-                rdBetaValid = UpdateNotifyReleaseDataValid(&rdBeta);
-                
-                // alpha release
-                UpdateNotifyReleaseData rdAlpha;
-                ZeroMemory(&rdAlpha, sizeof(rdAlpha));
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasealpha/versionpublic"), 0)) != NULL && xun.getText(n)) {
-                    rdAlpha.szVersionPublic = mir_t2a(xun.getText(n));
-                }
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasealpha/versionreal"), 0)) != NULL && xun.getText(n)) {
-                    rdAlpha.szVersion = mir_t2a(xun.getText(n));
-                    if (rdAlpha.szVersion)
-                        rdAlpha.dwVersion = UpdateNotifyMakeVersion(rdAlpha.szVersion);
-                }
-                #ifdef _WIN64
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasealpha/downloadx64zip"), 0)) != NULL && xun.getText(n)) {
-                    rdAlpha.szDownload = mir_t2a(xun.getText(n));
-                }
-                #elif defined(_UNICODE)
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasealpha/downloadunicodezip"), 0)) != NULL && xun.getText(n)) {
-                    rdAlpha.szDownload = mir_t2a(xun.getText(n));
-                }
-                #else
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasealpha/downloadansizip"), 0)) != NULL && xun.getText(n)) {
-                    rdAlpha.szDownload = mir_t2a(xun.getText(n));
-                }
-                #endif
-                if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasealpha/notesurl"), 0)) != NULL && xun.getText(n)) {
-                    rdAlpha.szNotes = mir_t2a(xun.getText(n));
-                }
-                rdAlphaValid = UpdateNotifyReleaseDataValid(&rdAlpha);
-                
-                if (isBetaCheck) {
-                    if (!rdBetaValid&&rdStableValid) {
-                        UpdateNotifyReleaseLogUpdate(&rdStable);
-                        if (UpdateNotifyIsNewer(dwVersion, rdStable.dwVersion)) 
-                            resUpdate = 1;
-                        UpdateNotifyReleaseCopyData(&rdStable, und);
-                    }
-                    else if (rdBetaValid&&rdStableValid&&UpdateNotifyIsNewer(rdBeta.dwVersion, rdStable.dwVersion)) {
-                        UpdateNotifyReleaseLogUpdate(&rdStable);
-                        if (UpdateNotifyIsNewer(dwVersion, UpdateNotifyMakeVersion(rdStable.szVersion))) 
-                            resUpdate = 1;
-                        UpdateNotifyReleaseCopyData(&rdStable, und);
-                    }
-                    else if (rdBetaValid) {
-                        UpdateNotifyReleaseLogUpdate(&rdBeta);
-                        if (UpdateNotifyIsNewer(dwVersion, rdBeta.dwVersion)) 
-                            resUpdate = 1;
-                        UpdateNotifyReleaseCopyData(&rdBeta, und);
-                    }
-                }
-                else if (isAlphaCheck) {                 
-                    if (!rdAlphaValid&&rdStableValid) {
-                        if (UpdateNotifyIsNewer(rdStable.dwVersion, rdAlpha.dwVersion)) {
-                            UpdateNotifyReleaseLogUpdate(&rdAlpha);
-                            if (UpdateNotifyIsNewer(dwVersion, rdAlpha.dwVersion)) 
-                                resUpdate = 1;
-                            UpdateNotifyReleaseCopyData(&rdAlpha, und);
-                        }
-                        else {
-                            UpdateNotifyReleaseLogUpdate(&rdStable);
-                            if (UpdateNotifyIsNewer(dwVersion, rdStable.dwVersion)) 
-                                resUpdate = 1;
-                            UpdateNotifyReleaseCopyData(&rdStable, und);
-                        } 
-                    }
-                    else if (rdAlphaValid&&rdStableValid&&UpdateNotifyIsNewer(rdAlpha.dwVersion, rdStable.dwVersion)) {
-                        UpdateNotifyReleaseLogUpdate(&rdStable);
-                        if (UpdateNotifyIsNewer(dwVersion, rdStable.dwVersion)) 
-                            resUpdate = 1;
-                        UpdateNotifyReleaseCopyData(&rdStable, und);
-                    }
-                    else if (!rdAlphaValid&&rdBetaValid&&rdStableValid) {
-                        if (UpdateNotifyIsNewer(rdStable.dwVersion, rdBeta.dwVersion)) {
-                            UpdateNotifyReleaseLogUpdate(&rdBeta);
-                            if (UpdateNotifyIsNewer(dwVersion, rdBeta.dwVersion)) 
-                                resUpdate = 1;
-                            UpdateNotifyReleaseCopyData(&rdBeta, und);
-                        }
-                        else {
-                            UpdateNotifyReleaseLogUpdate(&rdStable);
-                            if (UpdateNotifyIsNewer(dwVersion, rdStable.dwVersion)) 
-                                resUpdate = 1;
-                            UpdateNotifyReleaseCopyData(&rdStable, und);
-                        } 
-                    }
-                    else if (rdAlphaValid) {
-                        UpdateNotifyReleaseLogUpdate(&rdAlpha);
-                        if (UpdateNotifyIsNewer(dwVersion, rdAlpha.dwVersion)) 
-                            resUpdate = 1;
-                        UpdateNotifyReleaseCopyData(&rdAlpha, und);
-                    }
-                }
-                else {
-                    if (rdStableValid) {
-                        UpdateNotifyReleaseLogUpdate(&rdStable);
-                        if (UpdateNotifyIsNewer(dwVersion, rdStable.dwVersion)) 
-                            resUpdate = 1;
-                        UpdateNotifyReleaseCopyData(&rdStable, und);
-                    }
-                }
-              
-                UpdateNotifyFreeReleaseData(&rdStable);
-                UpdateNotifyFreeReleaseData(&rdBeta);
-                UpdateNotifyFreeReleaseData(&rdAlpha);
-                // settings
-                if ((n = xun.getChildByPath(nodeDoc, _T("settings/ping"), 0)) != NULL && xun.getText(n)) {
-                    tmp = mir_t2a(xun.getText(n));
-                    if (tmp) {
-                        int pingval = atoi(tmp);
-                        if ((pingval*60*60)>UN_MINCHECKTIME) {
-                            Netlib_Logf(hNetlibUser, "Next update check in %d hours", pingval);
-                            DBWriteContactSettingDword(NULL, UN_MOD, UN_SERVERPERIOD, pingval*60*60);
-                        }
-                        mir_free(tmp);
-                    }
-                }
-                if ((n = xun.getChildByPath(nodeDoc, _T("settings/updateurl"), 0)) != NULL && xun.getText(n)) {
-                    tmp = mir_t2a(xun.getText(n));
-                    if (tmp) {
-                        Netlib_Logf(hNetlibUser, "Update URL has changed (%s)", tmp);
-                        DBWriteContactSettingString(NULL, UN_MOD, UN_CUSTOMXMLURL, tmp);
-                        mir_free(tmp);
-                    }
-                }
-                if (resUpdate&&und->version&&und->versionReal&&und->notesUrl&&und->downloadUrl) {
-                    Netlib_Logf(hNetlibUser, "A new version of Miranda IM is available: %s", und->version);
-                    und->isNew = 1;
-                }
+			TCHAR *tXml;
+			char *tmp;
+			HXML nodeDoc, n;
+			
+			tXml = mir_a2t(resp->pData);
+			nodeDoc = xun.parseString(tXml, 0, _T("miranda"));
+			if (nodeDoc) {
+				int rdStableValid = 0, rdBetaValid = 0, rdAlphaValid = 0;
+				// stable release
+				UpdateNotifyReleaseData rdStable;
+				ZeroMemory(&rdStable, sizeof(rdStable));
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasestable/versionpublic"), 0)) != NULL && xun.getText(n)) {
+					rdStable.szVersionPublic = mir_t2a(xun.getText(n));
+				}
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasestable/versionreal"), 0)) != NULL && xun.getText(n)) {
+					rdStable.szVersion = mir_t2a(xun.getText(n));
+					if (rdStable.szVersion)
+						rdStable.dwVersion = UpdateNotifyMakeVersion(rdStable.szVersion);
+				}
+				#ifdef _WIN64
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasestable/downloadx64exe"), 0)) != NULL && xun.getText(n)) {
+					rdStable.szDownload = mir_t2a(xun.getText(n));
+				}
+				#elif defined(_UNICODE)
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasestable/downloadunicodeexe"), 0)) != NULL && xun.getText(n)) {
+					rdStable.szDownload = mir_t2a(xun.getText(n));
+				}
+				#else
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasestable/downloadansiexe"), 0)) != NULL && xun.getText(n)) {
+					rdStable.szDownload = mir_t2a(xun.getText(n));
+				}
+				#endif
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasestable/notesurl"), 0)) != NULL && xun.getText(n)) {
+					rdStable.szNotes = mir_t2a(xun.getText(n));
+				}
+				rdStableValid = UpdateNotifyReleaseDataValid(&rdStable);
+				
+				// beta release
+				UpdateNotifyReleaseData rdBeta;
+				ZeroMemory(&rdBeta, sizeof(rdBeta));
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasebeta/versionpublic"), 0)) != NULL && xun.getText(n)) {
+					rdBeta.szVersionPublic = mir_t2a(xun.getText(n));
+				}
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasebeta/versionreal"), 0)) != NULL && xun.getText(n)) {
+					rdBeta.szVersion = mir_t2a(xun.getText(n));
+					if (rdBeta.szVersion)
+						rdBeta.dwVersion = UpdateNotifyMakeVersion(rdBeta.szVersion);
+				}
+				#ifdef _WIN64
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasebeta/downloadx64zip"), 0)) != NULL && xun.getText(n)) {
+					rdBeta.szDownload = mir_t2a(xun.getText(n));
+				}
+				#elif defined(_UNICODE)
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasebeta/downloadunicodeexe"), 0)) != NULL && xun.getText(n)) {
+					rdBeta.szDownload = mir_t2a(xun.getText(n));
+				}
+				#else
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasebeta/downloadansiexe"), 0)) != NULL && xun.getText(n)) {
+					rdBeta.szDownload = mir_t2a(xun.getText(n));
+				}
+				#endif
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasebeta/notesurl"), 0)) != NULL && xun.getText(n)) {
+					rdBeta.szNotes = mir_t2a(xun.getText(n));
+				}
+				rdBetaValid = UpdateNotifyReleaseDataValid(&rdBeta);
+				
+				// alpha release
+				UpdateNotifyReleaseData rdAlpha;
+				ZeroMemory(&rdAlpha, sizeof(rdAlpha));
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasealpha/versionpublic"), 0)) != NULL && xun.getText(n)) {
+					rdAlpha.szVersionPublic = mir_t2a(xun.getText(n));
+				}
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasealpha/versionreal"), 0)) != NULL && xun.getText(n)) {
+					rdAlpha.szVersion = mir_t2a(xun.getText(n));
+					if (rdAlpha.szVersion)
+						rdAlpha.dwVersion = UpdateNotifyMakeVersion(rdAlpha.szVersion);
+				}
+				#ifdef _WIN64
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasealpha/downloadx64zip"), 0)) != NULL && xun.getText(n)) {
+					rdAlpha.szDownload = mir_t2a(xun.getText(n));
+				}
+				#elif defined(_UNICODE)
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasealpha/downloadunicodezip"), 0)) != NULL && xun.getText(n)) {
+					rdAlpha.szDownload = mir_t2a(xun.getText(n));
+				}
+				#else
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasealpha/downloadansizip"), 0)) != NULL && xun.getText(n)) {
+					rdAlpha.szDownload = mir_t2a(xun.getText(n));
+				}
+				#endif
+				if ((n = xun.getChildByPath(nodeDoc, _T("releases/releasealpha/notesurl"), 0)) != NULL && xun.getText(n)) {
+					rdAlpha.szNotes = mir_t2a(xun.getText(n));
+				}
+				rdAlphaValid = UpdateNotifyReleaseDataValid(&rdAlpha);
+				
+				if (isBetaCheck) {
+					if (!rdBetaValid&&rdStableValid) {
+						UpdateNotifyReleaseLogUpdate(&rdStable);
+						if (UpdateNotifyIsNewer(dwVersion, rdStable.dwVersion)) 
+							resUpdate = 1;
+						UpdateNotifyReleaseCopyData(&rdStable, und);
+					}
+					else if (rdBetaValid&&rdStableValid&&UpdateNotifyIsNewer(rdBeta.dwVersion, rdStable.dwVersion)) {
+						UpdateNotifyReleaseLogUpdate(&rdStable);
+						if (UpdateNotifyIsNewer(dwVersion, UpdateNotifyMakeVersion(rdStable.szVersion))) 
+							resUpdate = 1;
+						UpdateNotifyReleaseCopyData(&rdStable, und);
+					}
+					else if (rdBetaValid) {
+						UpdateNotifyReleaseLogUpdate(&rdBeta);
+						if (UpdateNotifyIsNewer(dwVersion, rdBeta.dwVersion)) 
+							resUpdate = 1;
+						UpdateNotifyReleaseCopyData(&rdBeta, und);
+					}
+				}
+				else if (isAlphaCheck) {                 
+					if (!rdAlphaValid&&rdStableValid) {
+						if (UpdateNotifyIsNewer(rdStable.dwVersion, rdAlpha.dwVersion)) {
+							UpdateNotifyReleaseLogUpdate(&rdAlpha);
+							if (UpdateNotifyIsNewer(dwVersion, rdAlpha.dwVersion)) 
+								resUpdate = 1;
+							UpdateNotifyReleaseCopyData(&rdAlpha, und);
+						}
+						else {
+							UpdateNotifyReleaseLogUpdate(&rdStable);
+							if (UpdateNotifyIsNewer(dwVersion, rdStable.dwVersion)) 
+								resUpdate = 1;
+							UpdateNotifyReleaseCopyData(&rdStable, und);
+						} 
+					}
+					else if (rdAlphaValid&&rdStableValid&&UpdateNotifyIsNewer(rdAlpha.dwVersion, rdStable.dwVersion)) {
+						UpdateNotifyReleaseLogUpdate(&rdStable);
+						if (UpdateNotifyIsNewer(dwVersion, rdStable.dwVersion)) 
+							resUpdate = 1;
+						UpdateNotifyReleaseCopyData(&rdStable, und);
+					}
+					else if (!rdAlphaValid&&rdBetaValid&&rdStableValid) {
+						if (UpdateNotifyIsNewer(rdStable.dwVersion, rdBeta.dwVersion)) {
+							UpdateNotifyReleaseLogUpdate(&rdBeta);
+							if (UpdateNotifyIsNewer(dwVersion, rdBeta.dwVersion)) 
+								resUpdate = 1;
+							UpdateNotifyReleaseCopyData(&rdBeta, und);
+						}
+						else {
+							UpdateNotifyReleaseLogUpdate(&rdStable);
+							if (UpdateNotifyIsNewer(dwVersion, rdStable.dwVersion)) 
+								resUpdate = 1;
+							UpdateNotifyReleaseCopyData(&rdStable, und);
+						} 
+					}
+					else if (rdAlphaValid) {
+						UpdateNotifyReleaseLogUpdate(&rdAlpha);
+						if (UpdateNotifyIsNewer(dwVersion, rdAlpha.dwVersion)) 
+							resUpdate = 1;
+						UpdateNotifyReleaseCopyData(&rdAlpha, und);
+					}
+				}
+				else {
+					if (rdStableValid) {
+						UpdateNotifyReleaseLogUpdate(&rdStable);
+						if (UpdateNotifyIsNewer(dwVersion, rdStable.dwVersion)) 
+							resUpdate = 1;
+						UpdateNotifyReleaseCopyData(&rdStable, und);
+					}
+				}
+			  
+				UpdateNotifyFreeReleaseData(&rdStable);
+				UpdateNotifyFreeReleaseData(&rdBeta);
+				UpdateNotifyFreeReleaseData(&rdAlpha);
+				// settings
+				if ((n = xun.getChildByPath(nodeDoc, _T("settings/ping"), 0)) != NULL && xun.getText(n)) {
+					tmp = mir_t2a(xun.getText(n));
+					if (tmp) {
+						int pingval = atoi(tmp);
+						if ((pingval*60*60)>UN_MINCHECKTIME) {
+							Netlib_Logf(hNetlibUser, "Next update check in %d hours", pingval);
+							DBWriteContactSettingDword(NULL, UN_MOD, UN_SERVERPERIOD, pingval*60*60);
+						}
+						mir_free(tmp);
+					}
+				}
+				if ((n = xun.getChildByPath(nodeDoc, _T("settings/updateurl"), 0)) != NULL && xun.getText(n)) {
+					tmp = mir_t2a(xun.getText(n));
+					if (tmp) {
+						Netlib_Logf(hNetlibUser, "Update URL has changed (%s)", tmp);
+						DBWriteContactSettingString(NULL, UN_MOD, UN_CUSTOMXMLURL, tmp);
+						mir_free(tmp);
+					}
+				}
+				if (resUpdate&&und->version&&und->versionReal&&und->notesUrl&&und->downloadUrl) {
+					Netlib_Logf(hNetlibUser, "A new version of Miranda IM is available: %s", und->version);
+					und->isNew = 1;
+				}
 				xun.destroyNode(nodeDoc);
-            }
-            mir_free(tXml);
+			}
+			mir_free(tXml);
 		}
 		else Netlib_Logf(hNetlibUser, "Invalid response code from HTTP request");
 		CallService(MS_NETLIB_FREEHTTPREQUESTSTRUCT, 0, (LPARAM)resp);
@@ -654,8 +654,8 @@ static INT_PTR CALLBACK UpdateNotifyOptsProc(HWND hwndDlg, UINT msg, WPARAM wPar
 		switch (LOWORD(wParam)) {
 	case IDC_ENABLEUPDATES:
 	case IDC_ENABLEALPHA:
-    case IDC_ENABLEBETA:
-    case IDC_ENABLESTABLE:
+	case IDC_ENABLEBETA:
+	case IDC_ENABLESTABLE:
 		SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
 		break;
 		}
@@ -666,12 +666,12 @@ static INT_PTR CALLBACK UpdateNotifyOptsProc(HWND hwndDlg, UINT msg, WPARAM wPar
 			NMHDR *hdr = (NMHDR *)lParam;
 			if (hdr&&hdr->code==PSN_APPLY) {
 				DBWriteContactSettingByte(NULL, UN_MOD, UN_ENABLE, (BYTE)(IsDlgButtonChecked(hwndDlg, IDC_ENABLEUPDATES)));
-                if (IsDlgButtonChecked(hwndDlg, IDC_ENABLESTABLE))
-                    DBWriteContactSettingByte(NULL, UN_MOD, UN_NOTIFYTYPE, UN_NOTIFYTYPE_STABLE);
-                if (IsDlgButtonChecked(hwndDlg, IDC_ENABLEBETA))
-                    DBWriteContactSettingByte(NULL, UN_MOD, UN_NOTIFYTYPE, UN_NOTIFYTYPE_BETA);
-                if (IsDlgButtonChecked(hwndDlg, IDC_ENABLEALPHA))
-                    DBWriteContactSettingByte(NULL, UN_MOD, UN_NOTIFYTYPE, UN_NOTIFYTYPE_ALPHA);
+				if (IsDlgButtonChecked(hwndDlg, IDC_ENABLESTABLE))
+					DBWriteContactSettingByte(NULL, UN_MOD, UN_NOTIFYTYPE, UN_NOTIFYTYPE_STABLE);
+				if (IsDlgButtonChecked(hwndDlg, IDC_ENABLEBETA))
+					DBWriteContactSettingByte(NULL, UN_MOD, UN_NOTIFYTYPE, UN_NOTIFYTYPE_BETA);
+				if (IsDlgButtonChecked(hwndDlg, IDC_ENABLEALPHA))
+					DBWriteContactSettingByte(NULL, UN_MOD, UN_NOTIFYTYPE, UN_NOTIFYTYPE_ALPHA);
 			}
 			break;
 		}

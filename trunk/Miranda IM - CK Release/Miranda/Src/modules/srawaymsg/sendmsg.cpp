@@ -242,7 +242,7 @@ static INT_PTR CALLBACK SetAwayMsgDlgProc(HWND hwndDlg, UINT message, WPARAM wPa
 	case WM_TIMER:
 		if (--dat->countdown >= 0) 
 		{
-            TCHAR str[64];
+			TCHAR str[64];
 			mir_sntprintf(str, SIZEOF(str), dat->okButtonFormat, dat->countdown);
 			SetDlgItemText(hwndDlg, IDOK, str);
 		}
@@ -262,7 +262,7 @@ static INT_PTR CALLBACK SetAwayMsgDlgProc(HWND hwndDlg, UINT message, WPARAM wPa
 		DestroyWindow(hwndDlg);
 		break;
 
-    case WM_COMMAND:
+	case WM_COMMAND:
 		 switch(LOWORD(wParam)) 
 		 {
 		 case IDOK:
@@ -312,7 +312,7 @@ static int StatusModeChange(WPARAM wParam, LPARAM lParam)
 	int statusMode = (int)wParam;
 	char *szProto = (char*)lParam;
 
-  	if (protoModeMsgFlags == 0) return 0;
+	if (protoModeMsgFlags == 0) return 0;
 
 	// If its a global change check the complete PFLAGNUM_3 flags to see if a popup might be needed
 	if (!szProto) 
@@ -334,7 +334,7 @@ static int StatusModeChange(WPARAM wParam, LPARAM lParam)
 		ChangeAllProtoMessages(szProto, statusMode, NULL);
 	}
 	else if (bScreenSaverRunning || ((!GetAsyncKeyState(VK_CONTROL) || prochotkey) &&
-        DBGetContactSettingByte(NULL, "SRAway", StatusModeToDbSetting(statusMode, "NoDlg"), 0))) 
+		DBGetContactSettingByte(NULL, "SRAway", StatusModeToDbSetting(statusMode, "NoDlg"), 0))) 
 	{
 		TCHAR *msg = GetAwayMessage(statusMode, szProto);
 		ChangeAllProtoMessages(szProto, statusMode, msg);
