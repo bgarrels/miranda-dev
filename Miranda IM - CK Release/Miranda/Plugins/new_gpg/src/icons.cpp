@@ -44,8 +44,8 @@ HANDLE IconLibDefine(TCHAR* desc, TCHAR* section, char* ident, HICON icon, char*
 void InitIconLib()
 {
 	extern HINSTANCE hInst;
-    char lib[MAX_PATH];
-    GetModuleFileNameA(hInst, lib, MAX_PATH);
+	char lib[MAX_PATH];
+	GetModuleFileNameA(hInst, lib, MAX_PATH);
 	TCHAR *module = mir_a2t(szGPGModuleName);
 
 	IconLibDefine(_T("Secured"), module, "secured", NULL, lib, -IDI_SECURED,0);
