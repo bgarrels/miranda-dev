@@ -13,21 +13,24 @@
       <UniqueIdentifier>{379f9a87-c54b-4f64-ae10-cddbc3c96dbf}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
+    <Filter Include="Header Files\Modernb">
+      <UniqueIdentifier>{08b35516-9fb4-4581-8d06-487423803b6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="opttree.c">
+    <ClCompile Include="src\misc.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="statistics.c">
+    <ClCompile Include="src\opttree.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TrafficCounter.c">
+    <ClCompile Include="src\statistics.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vars.c">
+    <ClCompile Include="src\TrafficCounter.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="misc.c">
+    <ClCompile Include="src\vars.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,23 +45,32 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="commonheaders.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="misc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="opttree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="statistics.h">
+    <ClInclude Include="src\commonheaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TrafficCounter.h">
+    <ClInclude Include="src\misc.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\opttree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\statistics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TrafficCounter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Modernb\modern_commonheaders.h">
+      <Filter>Header Files\Modernb</Filter>
+    </ClInclude>
+    <ClInclude Include="Modernb\modern_global_structure.h">
+      <Filter>Header Files\Modernb</Filter>
+    </ClInclude>
+    <ClInclude Include="Modernb\m_skin_eng.h">
+      <Filter>Header Files\Modernb</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
