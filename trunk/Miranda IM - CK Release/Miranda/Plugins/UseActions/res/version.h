@@ -31,7 +31,7 @@
 #define __AUTHOR					"Igor Abakumov"
 #define __AUTHOREMAIL				"abakumoff@mail.ru"
 #define __AUTHORWEB					"http://vasilich.org/blog"
-#define __COPYRIGHT					"© 2010 Igor Abakumov"
+#define __COPYRIGHT					"© 2012 Igor Abakumov"
 
 // other stuff for Version resource
 #define __STRINGIFY_IMPL(x)			#x

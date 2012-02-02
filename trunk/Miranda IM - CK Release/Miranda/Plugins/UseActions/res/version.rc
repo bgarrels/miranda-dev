@@ -1,3 +1,4 @@
+#include <windows.h>
 #include "version.h"
 
 #ifdef _WIN32
