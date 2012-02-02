@@ -13,65 +13,71 @@
       <UniqueIdentifier>{c1aeb530-ddb3-4043-b2e6-a303f23951ad}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{91bf9cf0-7ad0-4910-bf81-db9d35424782}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="backup.c">
+    <ClCompile Include="src\backup.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="commonheaders.c">
+    <ClCompile Include="src\commonheaders.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="database.c">
+    <ClCompile Include="src\database.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbcache.c">
+    <ClCompile Include="src\dbcache.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbcontacts.c">
+    <ClCompile Include="src\dbcontacts.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbevents.c">
+    <ClCompile Include="src\dbevents.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbheaders.c">
+    <ClCompile Include="src\dbheaders.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbmodulechain.c">
+    <ClCompile Include="src\dbmodulechain.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dbsettings.c">
+    <ClCompile Include="src\dbsettings.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="encrypt.c">
+    <ClCompile Include="src\encrypt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="init.c">
+    <ClCompile Include="src\init.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="initmenu.c">
+    <ClCompile Include="src\initmenu.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SecureDB.c">
+    <ClCompile Include="src\SecureDB.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sha256.c">
+    <ClCompile Include="src\sha256.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="commonheaders.h">
+    <ClInclude Include="src\commonheaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="database.h">
+    <ClInclude Include="src\database.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SecureDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sha256.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\encryption.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SecureDB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sha256.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="version.h">
@@ -79,10 +85,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="db3xS.rc">
+    <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="version.rc">
+    <ResourceCompile Include="resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="db3xS.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -91,6 +100,21 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="icos\pass.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\license.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\translation.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="icos\restart.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icos\backup.ico">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
