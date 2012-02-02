@@ -18,7 +18,7 @@
 */
 #include "commonstatus.h"
 #include "advancedautoaway.h"
-#include "resource.h"
+#include "../resource.h"
 
 extern char *StatusModeToDbSetting(int status,const char *suffix);
 

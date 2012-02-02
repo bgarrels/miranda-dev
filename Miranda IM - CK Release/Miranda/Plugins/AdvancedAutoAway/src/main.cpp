@@ -22,7 +22,7 @@
 
 #include "commonstatus.h"
 #include "advancedautoaway.h"
-#include "resource.h"
+#include "../resource.h"
 
 // {F0FDF73A-753D-499d-8DBA-336DB79CDD41}
 #define MIID_ADVAUTOAWAY { 0xf0fdf73a, 0x753d, 0x499d, { 0x8d, 0xba, 0x33, 0x6d, 0xb7, 0x9c, 0xdd, 0x41 } }

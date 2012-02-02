@@ -19,7 +19,7 @@
 	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 #include "commonstatus.h" 
-#include "resource.h"
+#include "../resource.h"
 
 #define TIMER_ID	1
 
