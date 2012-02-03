@@ -1,6 +1,6 @@
 /*
-Miranda Database Tool
-Copyright 2000-2011 Miranda ICQ/IM project, 
+Miranda IM Database Tool
+Copyright 2000-2012 Miranda IM project, 
 all portions of this codebase are copyrighted to the people 
 listed in contributors.txt.
 
@@ -19,9 +19,16 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#if defined( UNICODE ) && !defined( _UNICODE )
-	#define _UNICODE
+#ifdef  _UNICODE 
+#define _tWinMain  wWinMain 
+#else 
+#define _tWinMain  WinMain 
 #endif
+
+//#if defined( UNICODE ) && !defined( _UNICODE )
+//	#define _UNICODE
+//#endif
+
 
 #include <tchar.h>
 
@@ -41,7 +48,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../../miranda/include/m_database.h"
 #include "database.h" // Note: This is a copy of database.h from the Miranda IM v0.3 tree.
-                      //       Remember to update this when releasing new dbtool versions.
+					  //       Remember to update this when releasing new dbtool versions.
 #include "resource.h"
 
 
