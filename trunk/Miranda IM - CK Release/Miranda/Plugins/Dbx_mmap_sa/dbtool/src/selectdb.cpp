@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-#include "dbtool.h"
+#include "../dbtool.h"
 
 void GetProfileDirectory(TCHAR* szMirandaDir, TCHAR* szPath, int cbPath)
 {
@@ -186,7 +186,7 @@ BOOL CALLBACK SelectDbDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lParam
 
 				FindAdd(hdlg, szMirandaProfiles, _T("[prf]\\"));
 				// search in current dir (as DBTOOL)
-        		FindAdd(hdlg, szMirandaPath, _T("[ . ]\\"));
+				FindAdd(hdlg, szMirandaPath, _T("[ . ]\\"));
 
 				// search in profile dir (using registry path + ini file)
 				if(RegOpenKeyEx(HKEY_LOCAL_MACHINE,_T("SOFTWARE\\Miranda"),0,KEY_QUERY_VALUE,&hKey) == ERROR_SUCCESS) {

@@ -1,6 +1,6 @@
 // (C) Artem Shpynov aka FYR and Igonin Vitaliy aka chaos.persei, 2007 - 2008
 
-#include "dbtool.h"
+#include "../dbtool.h"
 
 typedef struct{
 	void* (__stdcall *GenerateKey)(char* pwd);
@@ -8,11 +8,11 @@ typedef struct{
 	void (__stdcall *EncryptMem)(BYTE* data, int size, void* key);
 	void (__stdcall *DecryptMem)(BYTE* data, int size, void* key);
 
-    char* Name;
-    char* Info;
-    char* Author;
-    char* Site;
-    char* Email;
+	char* Name;
+	char* Info;
+	char* Author;
+	char* Site;
+	char* Email;
 
 	DWORD Version;
 
