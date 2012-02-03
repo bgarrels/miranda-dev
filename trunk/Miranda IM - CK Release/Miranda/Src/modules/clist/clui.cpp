@@ -145,7 +145,7 @@ static INT_PTR CALLBACK AskForConfirmationDlgProc(HWND hWnd, UINT msg, WPARAM wP
 			mir_sntprintf(szFinal, SIZEOF(szFinal), szFormat, cli.pfnGetContactDisplayName((HANDLE)lParam, 0));
 			SetDlgItemText(hWnd, IDC_TOPLINE, szFinal);
 		}
-        SetFocus(GetDlgItem(hWnd, IDNO));
+		SetFocus(GetDlgItem(hWnd, IDNO));
 		SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 		break;
 	case WM_COMMAND:
@@ -538,13 +538,13 @@ LRESULT CALLBACK fnContactListWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 		break;
 
 	case M_RESTORESTATUS:
-        #ifndef _DEBUG
-        {
-	        int nStatus = DBGetContactSettingWord(NULL, "CList", "Status", ID_STATUS_OFFLINE);
-	        if (nStatus != ID_STATUS_OFFLINE) CallService(MS_CLIST_SETSTATUSMODE, nStatus, 0);
-        }
-        #endif
-        break;
+		#ifndef _DEBUG
+		{
+			int nStatus = DBGetContactSettingWord(NULL, "CList", "Status", ID_STATUS_OFFLINE);
+			if (nStatus != ID_STATUS_OFFLINE) CallService(MS_CLIST_SETSTATUSMODE, nStatus, 0);
+		}
+		#endif
+		break;
 
 	// Power management
 	case WM_POWERBROADCAST:
@@ -886,11 +886,11 @@ LRESULT CALLBACK fnContactListWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 					SystemParametersInfo(SPI_GETWORKAREA, 0, &rcWorkArea, FALSE);
 					if (MyMonitorFromWindow)
 					{
- 						HMONITOR hMon = MyMonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+						HMONITOR hMon = MyMonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
 						MONITORINFO mi;
 						mi.cbSize = sizeof(mi);
 						if (MyGetMonitorInfo(hMon, &mi))
- 							rcWorkArea = mi.rcWork;
+							rcWorkArea = mi.rcWork;
 					}
 
 					newHeight = max(nmc->pt.y, 9) + 1 + (rcWindow.bottom - rcWindow.top) - (rcTree.bottom - rcTree.top);
@@ -948,17 +948,17 @@ LRESULT CALLBACK fnContactListWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 				else nPanel = nm->dwItemSpec;
 
 				if (nParts > 0)
-                {
-                    unsigned int cpnl = 0;
-                    int mcnt = GetMenuItemCount(hMenu);
-                    for (int i=0; i<mcnt; ++i) {
-					    HMENU hMenus = GetSubMenu(hMenu, i);
-                        if (hMenus && cpnl++ == nPanel) { 
-                            hMenu = hMenus; 
-                            break; 
-                        }
-                    }
-                }
+				{
+					unsigned int cpnl = 0;
+					int mcnt = GetMenuItemCount(hMenu);
+					for (int i=0; i<mcnt; ++i) {
+						HMENU hMenus = GetSubMenu(hMenu, i);
+						if (hMenus && cpnl++ == nPanel) { 
+							hMenu = hMenus; 
+							break; 
+						}
+					}
+				}
 				SendMessage(cli.hwndStatus, SB_GETRECT, nPanel, (LPARAM) & rc);
 				pt.x = rc.left;
 				pt.y = rc.top;
@@ -973,7 +973,7 @@ LRESULT CALLBACK fnContactListWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 			POINT pt;
 			GetCursorPos(&pt);
 			if ((pos == 0 || pos == 1) && (HIWORD(wParam) & MF_POPUP) && 
-                (!(HIWORD(wParam) & MF_MOUSESELECT) || MenuItemFromPoint(hwnd, cli.hMenuMain, pt) != -1)) {
+				(!(HIWORD(wParam) & MF_MOUSESELECT) || MenuItemFromPoint(hwnd, cli.hMenuMain, pt) != -1)) {
 				MENUITEMINFO mii = { 0 };
 				mii.cbSize = MENUITEMINFO_V4_SIZE;
 				mii.fMask = MIIM_SUBMENU;

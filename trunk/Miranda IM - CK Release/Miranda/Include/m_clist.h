@@ -59,7 +59,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //returns a static buffer of the description of the given status mode
 //returns NULL if the status mode was unknown
 #define GSMDF_PREFIXONLINE   1   //prefix "Online: " to all status modes that
-                                 //imply online, eg "Online: Away"
+								 //imply online, eg "Online: Away"
 #define GSMDF_UNICODE        2   //will return TCHAR* instead of char*
 #if defined( _UNICODE )
 	#define GSMDF_TCHAR       GSMDF_UNICODE      //will return TCHAR* instead of char*
@@ -86,14 +86,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 typedef struct {
 	int cbSize;	            //size in bytes of this structure
 	union {
-      char*  pszName;      //[TRANSLATED-BY-CORE] text of the menu item
+	  char*  pszName;      //[TRANSLATED-BY-CORE] text of the menu item
 		TCHAR* ptszName;     //Unicode text of the menu item
 	};
 	DWORD flags;            //set of CMIF_* flags
 	int position;           //approx position on the menu. lower numbers go nearer the top
 	union {
 		HICON hIcon;         //icon to put by the item. If this was not loaded from
-                           //a resource, you can delete it straight after the call
+						   //a resource, you can delete it straight after the call
 		HANDLE icolibItem;   //set CMIF_ICONFROMICOLIB to pass this value
 	};
 	char* pszService;       //name of service to call when the item gets selected
@@ -104,13 +104,13 @@ typedef struct {
 	};
 
 	int popupPosition;      //position of the popup menu on the root menu. Ignored
-                           //if pszPopupName is NULL or the popup menu already
-                           //existed
+						   //if pszPopupName is NULL or the popup menu already
+						   //existed
 	DWORD hotKey;           //keyboard accelerator, same as lParam of WM_HOTKEY,0 for none
 	char *pszContactOwner;  //contact menus only. The protocol module that owns
-                           //the contacts to which this menu item applies. NULL if it
-                           //applies to all contacts. If it applies to multiple but not all
-                           //protocols, add multiple menu items or use ME_CLIST_PREBUILDCONTACTMENU
+						   //the contacts to which this menu item applies. NULL if it
+						   //applies to all contacts. If it applies to multiple but not all
+						   //protocols, add multiple menu items or use ME_CLIST_PREBUILDCONTACTMENU
 } CLISTMENUITEM;
 
 #define HGENMENU_ROOT      (( HGENMENU )-1)
@@ -229,7 +229,7 @@ sense to store all this information in memory, etc.
 	#define GCDNF_TCHAR       0      //will return char*, as usual
 #endif
 
-           //even if it's the one that should be displayed.  v0.1.2.0+
+		   //even if it's the one that should be displayed.  v0.1.2.0+
 		   //v0.3.0.0+ if using GCDNF_NOMYHANDLE you must free your string
 #define MS_CLIST_GETCONTACTDISPLAYNAME  "CList/GetContactDisplayName"
 
@@ -446,8 +446,8 @@ typedef struct {
 //lParam=pointer to CLISTGROUPCHANGE
 typedef struct {
 	int cbSize;	            //size in bytes of this structure
-    TCHAR*  pszOldName;     //old group name
-    TCHAR*  pszNewName;     //new group name
+	TCHAR*  pszOldName;     //old group name
+	TCHAR*  pszNewName;     //new group name
 } CLISTGROUPCHANGE;
 
 #define ME_CLIST_GROUPCHANGE       "CList/GroupChange"
@@ -596,7 +596,7 @@ typedef struct {
 		TCHAR *tszInfoTitle; // used if NIIF_INTERN_UNICODE is specified
 	};
 	union {
-      char *szInfo;		// only 256chars of it will be used
+	  char *szInfo;		// only 256chars of it will be used
 		TCHAR *tszInfo;   // used if NIIF_INTERN_UNICODE is specified
 	};
 	DWORD dwInfoFlags;	// see NIIF_* stuff
