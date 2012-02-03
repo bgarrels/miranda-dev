@@ -1,0 +1,1301 @@
+diff -rduN0a db3x/SecureDB.c SecureDB/SecureDB.c
+--- db3x/SecureDB.c	Thu Jan  1 01:00:00 1970
++++ SecureDB/SecureDB.c	Sun Sep 18 19:32:34 2005
+@@ -0,0 +1,508 @@
++/*
++ *  SecureDB
++ *
++ *  Copyright (C) 2005  Piotr Pawluczuk (piotrek@piopawlu.net)
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ */
++
++#include "commonheaders.h"
++#include "database.h"
++#include "SecureDB.h"
++#include "sha256.h"
++
++//we want to link to the old libs
++#if defined _MSC_VER && _MSC_VER >= 1300
++#define VC6LIBSPATH "d:/piotr/projekty/_libs_/lib/vc6/"
++#pragma comment(lib,VC6LIBSPATH "msvcrt.lib")
++#endif 
++
++//global vars
++char g_password[128] = {0};
++long g_passlen = 1;
++unsigned char g_sha256sum[32] = {0};
++
++char g_newpassword[128] = {0};
++long g_newpasslen = 0;
++unsigned char g_new256sum[32] = {0};
++
++long g_secured = 0;
++
++//global handles
++HANDLE hSetPwdMenu = NULL;
++HANDLE hDelPwdMenu = NULL;
++HANDLE hOnLoadHook = NULL;
++
++//encryption offset; all data except the header;
++#define ENC_OFFSET sizeof(struct DBHeader)
++
++BOOL CALLBACK DlgStdInProc(HWND hDlg,UINT uMsg,WPARAM wParam,LPARAM lParam)
++{
++	switch(uMsg)
++	{
++	case WM_INITDIALOG:
++		{
++			SendDlgItemMessage(hDlg,IDC_EDIT1,EM_LIMITTEXT,sizeof(g_password)-1,0);
++
++			if(lParam)
++			{
++				SetDlgItemText(hDlg,IDC_EDIT2,(LPCSTR)lParam);
++			}else{
++				SendDlgItemMessage(hDlg,IDC_EDIT2,EM_LIMITTEXT,sizeof(g_password)-1,0);
++			}
++			SetWindowLong(hDlg,GWL_USERDATA,(lParam==0));
++
++			return (TRUE);
++		}
++	case WM_COMMAND:
++		{
++			UINT uid = LOWORD(wParam);
++			if(uid == IDOK){
++				if(!GetWindowLong(hDlg,GWL_USERDATA))
++				{
++					g_passlen = GetDlgItemText(hDlg,IDC_EDIT1,g_password,sizeof(g_password)-1);
++					if(g_passlen<4){
++						MessageBox(hDlg,"Password is too short!","db3xS",MB_ICONEXCLAMATION);
++						return TRUE;
++					}else{
++						EndDialog(hDlg,IDOK);
++					}
++				}else{
++					char temp1[sizeof(g_password)+1];
++					char temp2[sizeof(g_password)+1];
++					long tlen1 = 0;
++					long tlen2 = 0;
++
++					tlen1 = GetDlgItemText(hDlg,IDC_EDIT2,temp1,sizeof(temp1)-1);
++					tlen2 = GetDlgItemText(hDlg,IDC_EDIT1,temp2,sizeof(temp2)-1);
++
++					if(tlen1 < 4 || tlen2 < 4){
++						MessageBox(hDlg,"Password is too short!","db3xS",MB_ICONEXCLAMATION);
++						return TRUE;
++					}else if(strcmp(temp1,temp2)){
++						MessageBox(hDlg,"Passwords do not match!","db3xS",MB_ICONEXCLAMATION);
++					}else{
++						strcpy(g_newpassword,temp1);
++						g_newpasslen = tlen1;
++						EndDialog(hDlg,IDOK);
++					}
++				}
++			}else if(uid == IDCANCEL){
++				EndDialog(hDlg,IDCANCEL);
++			}
++		}
++		break;
++	default:
++		return (FALSE);
++	}
++	return (TRUE);
++}
++
++void updateCachedHdr(struct DBHeader* dbh)
++{
++	extern struct DBCacheSectionInfo cacheSectionInfo[CACHESECTIONCOUNT];
++	extern PBYTE pDbCache;
++	extern struct DBHeader dbHeader;
++	int i=0;
++
++	struct DBHeader* pdbh;
++
++	dbHeader.version = dbh->version;
++	memcpy(dbHeader.signature,dbh->signature,sizeof(pdbh->signature));
++
++	//this is not that necessary, but it's better to make sure :)
++	for(;i<CACHESECTIONCOUNT;i++){
++		if(cacheSectionInfo[i].ofsBase == 0)
++		{
++			pdbh = (struct DBHeader*)(pDbCache + (i*CACHESECTIONSIZE));
++			pdbh->version = dbh->version;
++			memcpy(pdbh->signature,dbh->signature,sizeof(pdbh->signature));
++			break;
++		}
++	}
++}
++
++int EncGetPassword(void* pdbh,const char* dbase)
++{
++	extern HINSTANCE g_hInst;
++	int res;
++	unsigned long pwdcrc=0;
++	char* tmp;
++	sha256_context ctx;
++
++	struct DBHeader* dbh = (struct DBHeader*)pdbh;
++
++	memset(g_password,0,sizeof(g_password));
++
++	if(dbase){
++		tmp = strrchr(dbase,'\\');
++		if(tmp)dbase = tmp + 1;
++	}
++
++Again:
++	res = DialogBoxParam(g_hInst,MAKEINTRESOURCE(IDD_DIALOG1),NULL,(DLGPROC)DlgStdInProc,(LPARAM)dbase);
++	if(res != IDOK)return -1;
++
++	//generate the sha256 sum for the password; used in encryption + password checking
++	sha256_starts(&ctx);
++	sha256_update(&ctx,(uint8*)g_password,g_passlen);
++	sha256_finish(&ctx,g_sha256sum);
++
++	pwdcrc = (g_sha256sum[0] | (g_sha256sum[5] << 8)) + ((g_sha256sum[10]) | (g_sha256sum[31] << 8));
++
++	if(dbh->version != pwdcrc){
++		MessageBox(NULL,"Password is not correct!","db3xS",MB_ICONERROR);
++		goto Again;
++	}
++
++	g_secured = 1;
++	return 0;
++}
++
++static __inline void rotl(unsigned char* a,unsigned char n)
++{
++	_asm mov eax,a;
++	_asm mov cl,n;
++	_asm rol BYTE PTR[eax],cl;
++}
++
++static __inline void rotr(unsigned char* a,unsigned char n)
++{
++	_asm mov eax,a;
++	_asm mov cl,n;
++	_asm ror BYTE PTR[eax],cl;
++}
++
++void xModifyMenu(HANDLE hMenu,long flags,const char* name)
++{
++	CLISTMENUITEM mi = {0};
++
++	mi.cbSize = sizeof(mi);
++	mi.flags = CMIM_FLAGS | ((name)?CMIM_NAME:0);
++	mi.flags |= flags;
++	mi.pszName = (char*)name;
++
++	CallService(MS_CLIST_MODIFYMENUITEM,(WPARAM)hMenu,(LPARAM)&mi);
++}
++
++static int RemovePassword()
++{
++	extern CRITICAL_SECTION csDbAccess;
++	extern HANDLE hDbFile;
++	extern struct DBSignature dbSignature;
++
++	int result = 1;
++	unsigned long size;
++	unsigned long rw;
++	unsigned char* buffer = NULL;
++	struct DBHeader *dbh = NULL;
++
++	EnterCriticalSection(&csDbAccess);
++
++	FlushFileBuffers(hDbFile);
++	size = GetFileSize(hDbFile,NULL);
++	if(size < ENC_OFFSET)goto End;
++	buffer = (unsigned char*)malloc(size + 1);
++	if(!buffer)goto End;
++	dbh = (struct DBHeader*)buffer;
++
++	SetFilePointer(hDbFile,0,NULL,FILE_BEGIN);
++	if(!EncReadFile(hDbFile,buffer,size,&rw,NULL) || rw!=size)goto End;
++	g_secured = 0;
++
++	dbh->version = DB_THIS_VERSION;
++	memcpy(dbh->signature,&dbSignature,sizeof(dbh->signature));
++	updateCachedHdr(dbh);
++
++	SetFilePointer(hDbFile,0,NULL,FILE_BEGIN);
++	if(!EncWriteFile(hDbFile,buffer,size,&rw,NULL) || rw!=size)goto End;
++	FlushFileBuffers(hDbFile);
++	result = 0;
++End:
++	if(buffer)free(buffer);
++	LeaveCriticalSection(&csDbAccess);
++
++	if(!g_secured){
++		xModifyMenu(hSetPwdMenu,0,"Set Password");
++		xModifyMenu(hDelPwdMenu,CMIF_GRAYED,NULL);
++	}
++	return result;
++}
++
++static int SetPassword()
++{
++	extern CRITICAL_SECTION csDbAccess;
++	extern HANDLE hDbFile;
++	extern struct DBSignature dbSecSignature;
++
++	int result = 1;
++	unsigned long size;
++	unsigned long rw;
++	unsigned char* buffer = NULL;
++	struct DBHeader *dbh = NULL;
++
++	EnterCriticalSection(&csDbAccess);
++
++	FlushFileBuffers(hDbFile);
++	size = GetFileSize(hDbFile,NULL);
++	if(size < ENC_OFFSET)goto End;
++	buffer = (unsigned char*)malloc(size + 1);
++	if(!buffer)goto End;
++	dbh = (struct DBHeader*)buffer;
++
++	SetFilePointer(hDbFile,0,NULL,FILE_BEGIN);
++	if(!EncReadFile(hDbFile,buffer,size,&rw,NULL) || rw!=size)goto End;
++	g_secured = 1;
++
++	dbh->version = (g_sha256sum[0] | (g_sha256sum[5] << 8)) + ((g_sha256sum[10]) | (g_sha256sum[31] << 8));
++	memcpy(dbh->signature,&dbSecSignature,sizeof(dbh->signature));
++
++	updateCachedHdr(dbh);
++
++	SetFilePointer(hDbFile,0,NULL,FILE_BEGIN);
++	if(!EncWriteFile(hDbFile,buffer,size,&rw,NULL) || rw!=size)goto End;
++	FlushFileBuffers(hDbFile);
++	result = 0;
++End:
++	if(buffer)free(buffer);
++	LeaveCriticalSection(&csDbAccess);
++
++	if(g_secured){
++		xModifyMenu(hSetPwdMenu,0,"Change Password");
++		xModifyMenu(hDelPwdMenu,0,NULL);
++	}
++	return result;
++}
++
++
++static int DB3XSSetPassword(WPARAM wParam, LPARAM lParam)
++{
++	extern HINSTANCE g_hInst;
++	sha256_context ctx;
++	int res;
++
++	res = DialogBoxParam(g_hInst,MAKEINTRESOURCE(IDD_DIALOG2),NULL,(DLGPROC)DlgStdInProc,FALSE);
++	if(res != IDOK)return 0;
++
++	sha256_starts(&ctx);
++	sha256_update(&ctx,(uint8*)g_newpassword,g_newpasslen);
++	sha256_finish(&ctx,g_new256sum);
++
++	if(g_secured){RemovePassword();}
++	g_passlen = g_newpasslen;
++	memcpy(g_password,g_newpassword,g_newpasslen+1);
++	memcpy(g_sha256sum,g_new256sum,32);
++
++	if(SetPassword()){
++		dbpanic(NULL);
++	}else{
++		MessageBox(NULL,Translate("Password has been changed!"),"SecureDB",MB_ICONINFORMATION);
++	}
++
++	return 0;
++}
++
++static int DB3XSRemovePassword(WPARAM wParam, LPARAM lParam)
++{
++	if(g_secured && MessageBox(NULL,Translate("Are you sure you want to remove the password?"),"SecureDB",MB_ICONQUESTION | MB_YESNO)==IDYES)
++	{
++		if(RemovePassword()){
++			dbpanic(NULL);
++		}else{
++			MessageBox(NULL,Translate("Password has been removed!"),"SecureDB",MB_ICONINFORMATION);
++		}
++	}
++	return 0;
++}
++
++static int DB3XSMakeBackup(WPARAM wParam, LPARAM lParam)
++{
++	extern CRITICAL_SECTION csDbAccess;
++	extern HANDLE hDbFile;
++	extern struct DBHeader dbHeader;
++
++	HANDLE hNewFile = NULL;
++	unsigned long size = 0;
++	unsigned long rw = 0;
++	unsigned long trw = 0;
++	unsigned char buffer[2048];
++	int result = 1;
++
++	if(!lParam)return 1;
++
++	hNewFile = CreateFile((LPCTSTR)lParam,GENERIC_WRITE,NULL,NULL,CREATE_ALWAYS,NULL,NULL);
++	if(hNewFile == INVALID_HANDLE_VALUE)return 1;
++
++	EnterCriticalSection(&csDbAccess);
++
++	size = GetFileSize(hDbFile,NULL);
++	if(size < sizeof(dbHeader))goto End;
++	size -= sizeof(dbHeader);
++
++	SetFilePointer(hDbFile,sizeof(dbHeader),NULL,FILE_BEGIN);
++	
++	if(!WriteFile(hNewFile,&dbHeader,sizeof(dbHeader),&rw,NULL)){
++		goto End;
++	}
++	//we only make a copy so there is no need to decrypt the data;
++	while(size){
++		trw = min(2048,size);
++		if(!ReadFile(hDbFile,buffer,trw,&rw,NULL) || rw != trw){
++			goto End;
++		}
++		if(!WriteFile(hNewFile,buffer,trw,&rw,NULL) || rw != trw){
++			goto End;
++		}
++		size -= trw;
++	}
++	result = 0;
++End:
++	LeaveCriticalSection(&csDbAccess);
++
++	CloseHandle(hNewFile);
++	if(result){
++		DeleteFile((LPCTSTR)lParam);
++	}
++	return result;
++}
++
++int EncInitMenus(WPARAM wParam, LPARAM lParam)
++{
++	extern HINSTANCE g_hInst;
++	CLISTMENUITEM mi = {0};
++
++	CreateServiceFunction("DB3XS/SetPassword",DB3XSSetPassword);
++	CreateServiceFunction("DB3XS/RemovePassword",DB3XSRemovePassword);
++
++	mi.cbSize = sizeof(mi);
++	mi.position = 0xFFffFFff;
++	mi.flags = 0;
++	mi.hIcon = LoadIcon(g_hInst,MAKEINTRESOURCE(IDI_ICON3));
++	mi.pszPopupName ="SecureDB";
++
++	mi.pszName=(g_secured)?"Change Password":"Set Password";
++	mi.pszService="DB3XS/SetPassword";
++	if(!(hSetPwdMenu = (HANDLE)CallService(MS_CLIST_ADDMAINMENUITEM,0,(LPARAM)&mi)))return 1;
++
++	mi.pszName="Remove Password";
++	mi.pszService="DB3XS/RemovePassword";
++	mi.hIcon = LoadIcon(g_hInst,MAKEINTRESOURCE(IDI_ICON2));
++	if(!(hDelPwdMenu = (HANDLE)CallService(MS_CLIST_ADDMAINMENUITEM,0,(LPARAM)&mi)))return 1;
++
++	if(!g_secured){
++		xModifyMenu(hDelPwdMenu,CMIF_GRAYED,NULL);
++	}
++
++	UnhookEvent(hOnLoadHook);
++	hOnLoadHook = NULL;
++	return 0;
++}
++
++int EncOnLoad()
++{
++	hOnLoadHook = HookEvent(ME_SYSTEM_MODULESLOADED,EncInitMenus);
++	CreateServiceFunction("DB3XS/MakeBackup",DB3XSMakeBackup);
++	return hOnLoadHook == NULL;
++}
++
++int EncReadFile(HANDLE hFile,void* data,unsigned long toread,unsigned long* read,void* dummy)
++{
++	unsigned char* bd = (unsigned char*)data;
++	unsigned long i;
++	unsigned long rtw;
++	unsigned char pw;
++
++	if(!g_secured){
++		return ReadFile(hFile,data,toread,read,NULL);
++	}
++
++	i = SetFilePointer(hFile,0,NULL,FILE_CURRENT);
++
++	if(ReadFile(hFile,data,toread,read,NULL))
++	{
++		for(rtw=i+*read;i<rtw;i++){
++			if(i >= ENC_OFFSET){
++				pw = (unsigned char)g_password[i%g_passlen];
++				if(g_sha256sum[i%32] & 0x01){
++					*bd = ~*bd;
++				}
++				if(pw & 0x01){
++					rotr(bd,2);
++				}
++				*bd ^= pw;
++				rotr(bd,pw);
++				*bd ^= g_sha256sum[i%32];
++			}
++			bd++;
++		}
++		return TRUE;
++	}else{
++		return FALSE;
++	}
++}
++
++int EncWriteFile(HANDLE hFile,void* data,unsigned long towrite,unsigned long* written,void* dummy)
++{
++	static unsigned char statbuff[16*1024];
++
++	unsigned char* bd;
++	unsigned char* dynbuff = NULL;
++	unsigned long rtw;
++	unsigned char* buffer;
++	unsigned long i;
++	unsigned char pw;
++
++	if(!g_secured){
++		return WriteFile(hFile,data,towrite,written,NULL);
++	}
++
++	if(towrite > 16*1024){
++		buffer = dynbuff = (unsigned char*)malloc(towrite+1);
++		if(!buffer)return FALSE;
++	}else{
++		buffer = statbuff;
++	}
++
++	memcpy(buffer,data,towrite);
++	bd = buffer;
++
++	i = SetFilePointer(hFile,0,NULL,FILE_CURRENT);
++	rtw = i + towrite;
++
++	for(;i<rtw;i++){
++		if(i >= ENC_OFFSET){
++			pw = (unsigned char)g_password[i%g_passlen];
++			*bd ^= g_sha256sum[i%32];
++			rotl(bd,pw);
++			*bd ^= pw;
++			if(pw & 0x01){
++				rotl(bd,2);
++			}
++			if(g_sha256sum[i%32] & 0x01){
++				*bd = ~*bd;
++			}
++		}else{
++			pw = *bd;
++		}
++		bd++;
++	}
++
++	i = WriteFile(hFile,buffer,towrite,written,NULL);
++
++	if(dynbuff){
++		free(dynbuff);
++	}
++	return i;
++}
+\ No newline at end of file
+diff -rduN0a db3x/SecureDB.h SecureDB/SecureDB.h
+--- db3x/SecureDB.h	Thu Jan  1 01:00:00 1970
++++ SecureDB/SecureDB.h	Sun Sep 18 19:32:34 2005
+@@ -0,0 +1,12 @@
++#ifndef _SECURE_DB__
++#define _SECURE_DB__
++
++#include <m_clist.h>
++
++int EncReadFile(HANDLE hFile,void* data,unsigned long toread,unsigned long* read,void* ov);
++int EncWriteFile(HANDLE hFile,void* data,unsigned long towrite,unsigned long* written,void* ov);
++int EncGetPassword(void* dbh,const char* dbase);
++int EncInitMenus(WPARAM wParam, LPARAM lParam);
++int EncOnLoad();
++
++#endif //_SECURE_DB__
+\ No newline at end of file
+diff -rduN0a db3x/commonheaders.h SecureDB/commonheaders.h
+--- db3x/commonheaders.h	Mon Jul 11 19:21:28 2005
++++ SecureDB/commonheaders.h	Sun Sep 18 22:29:12 2005
+@@ -51,0 +52,2 @@
++#include "SecureDB.h"
++#include "sha256.h"
+diff -rduN0a db3x/database.c SecureDB/database.c
+--- db3x/database.c	Thu May  5 23:41:21 2005
++++ SecureDB/database.c	Sun Sep 18 19:32:34 2005
+@@ -121 +121 @@
+-		if ( !ReadFile(hDbFile,&dbHeader,sizeof(dbHeader),&dummy,NULL) ) {
++		if ( !EncReadFile(hDbFile,&dbHeader,sizeof(dbHeader),&dummy,NULL) ) {
+diff -rduN0a db3x/database.h SecureDB/database.h
+--- db3x/database.h	Mon Jul 11 19:21:28 2005
++++ SecureDB/database.h	Sun Sep 18 19:32:34 2005
+@@ -51 +51 @@
+-#define DB_THIS_VERSION          0x00000700u
++#define DB_THIS_VERSION          (0x00000700u)
+@@ -163,0 +164,7 @@
++struct DBCacheSectionInfo {
++	DWORD ofsBase;
++	DWORD lastUsed;
++};
++
++#define CACHESECTIONSIZE   4096
++#define CACHESECTIONCOUNT  32
+@@ -176 +183 @@
+-int CheckDbHeaders(struct DBHeader * hdr);
++int CheckDbHeaders(struct DBHeader * hdr,long* secure);
+diff -rduN0a db3x/db3x.dsp SecureDB/db3x.dsp
+--- db3x/db3x.dsp	Mon Sep  5 16:31:37 2005
++++ SecureDB/db3x.dsp	Sun Sep 18 22:30:38 2005
+@@ -1 +1 @@
+-# Microsoft Developer Studio Project File - Name="db3x" - Package Owner=<4>
++# Microsoft Developer Studio Project File - Name="SecureDB" - Package Owner=<4>
+@@ -7 +7 @@
+-CFG=db3x - Win32 Debug
++CFG=SecureDB - Win32 Debug
+@@ -16 +16 @@
+-!MESSAGE NMAKE /f "db3x.mak" CFG="db3x - Win32 Debug"
++!MESSAGE NMAKE /f "db3x.mak" CFG="SecureDB - Win32 Debug"
+@@ -20,2 +20,2 @@
+-!MESSAGE "db3x - Win32 Release" (based on "Win32 (x86) Dynamic-Link Library")
+-!MESSAGE "db3x - Win32 Debug" (based on "Win32 (x86) Dynamic-Link Library")
++!MESSAGE "SecureDB - Win32 Release" (based on "Win32 (x86) Dynamic-Link Library")
++!MESSAGE "SecureDB - Win32 Debug" (based on "Win32 (x86) Dynamic-Link Library")
+@@ -26 +26 @@
+-# PROP Scc_ProjName ""$/Miranda/miranda/plugins/db3x", WKIAAAAA"
++# PROP Scc_ProjName ""$/Miranda/miranda/plugins/SecureDB", WKIAAAAA"
+@@ -32 +32 @@
+-!IF  "$(CFG)" == "db3x - Win32 Release"
++!IF  "$(CFG)" == "SecureDB - Win32 Release"
+@@ -56 +56 @@
+-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /base:"0x5130000" /dll /map /machine:I386 /out:"../../bin/release/plugins/dbx_3x.dll" /IGNORE:4089
++# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /base:"0x5130000" /dll /map /machine:I386 /out:"../../bin/release/plugins/dbx_3xS.dll" /IGNORE:4089
+@@ -59 +59 @@
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
++!ELSEIF  "$(CFG)" == "SecureDB - Win32 Debug"
+@@ -83 +83 @@
+-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /map /debug /machine:I386 /out:"../../bin/debug/plugins/dbx_3x.dll" /pdbtype:sept
++# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /map /debug /machine:I386 /out:"../../bin/debug/plugins/dbx_3xS.dll" /pdbtype:sept
+@@ -89,2 +89,2 @@
+-# Name "db3x - Win32 Release"
+-# Name "db3x - Win32 Debug"
++# Name "SecureDB - Win32 Release"
++# Name "SecureDB - Win32 Debug"
+@@ -97,7 +96,0 @@
+-
+-!IF  "$(CFG)" == "db3x - Win32 Release"
+-
+-# ADD CPP /Yc"commonheaders.h"
+-
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
+-
+@@ -105,3 +97,0 @@
+-
+-!ENDIF 
+-
+@@ -113 +103 @@
+-!IF  "$(CFG)" == "db3x - Win32 Release"
++!IF  "$(CFG)" == "SecureDB - Win32 Release"
+@@ -117 +107 @@
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
++!ELSEIF  "$(CFG)" == "SecureDB - Win32 Debug"
+@@ -126 +116 @@
+-!IF  "$(CFG)" == "db3x - Win32 Release"
++!IF  "$(CFG)" == "SecureDB - Win32 Release"
+@@ -130 +120 @@
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
++!ELSEIF  "$(CFG)" == "SecureDB - Win32 Debug"
+@@ -139 +129 @@
+-!IF  "$(CFG)" == "db3x - Win32 Release"
++!IF  "$(CFG)" == "SecureDB - Win32 Release"
+@@ -143 +133 @@
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
++!ELSEIF  "$(CFG)" == "SecureDB - Win32 Debug"
+@@ -152 +142 @@
+-!IF  "$(CFG)" == "db3x - Win32 Release"
++!IF  "$(CFG)" == "SecureDB - Win32 Release"
+@@ -156 +146 @@
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
++!ELSEIF  "$(CFG)" == "SecureDB - Win32 Debug"
+@@ -165 +155 @@
+-!IF  "$(CFG)" == "db3x - Win32 Release"
++!IF  "$(CFG)" == "SecureDB - Win32 Release"
+@@ -169 +159 @@
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
++!ELSEIF  "$(CFG)" == "SecureDB - Win32 Debug"
+@@ -178 +168 @@
+-!IF  "$(CFG)" == "db3x - Win32 Release"
++!IF  "$(CFG)" == "SecureDB - Win32 Release"
+@@ -182 +172 @@
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
++!ELSEIF  "$(CFG)" == "SecureDB - Win32 Debug"
+@@ -191 +181 @@
+-!IF  "$(CFG)" == "db3x - Win32 Release"
++!IF  "$(CFG)" == "SecureDB - Win32 Release"
+@@ -195 +185 @@
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
++!ELSEIF  "$(CFG)" == "SecureDB - Win32 Debug"
+@@ -204 +194 @@
+-!IF  "$(CFG)" == "db3x - Win32 Release"
++!IF  "$(CFG)" == "SecureDB - Win32 Release"
+@@ -208 +198 @@
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
++!ELSEIF  "$(CFG)" == "SecureDB - Win32 Debug"
+@@ -217 +207 @@
+-!IF  "$(CFG)" == "db3x - Win32 Release"
++!IF  "$(CFG)" == "SecureDB - Win32 Release"
+@@ -221 +211 @@
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
++!ELSEIF  "$(CFG)" == "SecureDB - Win32 Debug"
+@@ -230 +220 @@
+-!IF  "$(CFG)" == "db3x - Win32 Release"
++!IF  "$(CFG)" == "SecureDB - Win32 Release"
+@@ -234 +224 @@
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
++!ELSEIF  "$(CFG)" == "SecureDB - Win32 Debug"
+@@ -243 +233 @@
+-!IF  "$(CFG)" == "db3x - Win32 Release"
++!IF  "$(CFG)" == "SecureDB - Win32 Release"
+@@ -247 +237 @@
+-!ELSEIF  "$(CFG)" == "db3x - Win32 Debug"
++!ELSEIF  "$(CFG)" == "SecureDB - Win32 Debug"
+@@ -253,0 +244,9 @@
++SOURCE=.\SecureDB.c
++# End Source File
++# Begin Source File
++
++SOURCE=.\sha256.c
++# ADD CPP /YX
++# End Source File
++# Begin Source File
++
+@@ -270,0 +270,8 @@
++# End Source File
++# Begin Source File
++
++SOURCE=.\SecureDB.h
++# End Source File
++# Begin Source File
++
++SOURCE=.\sha256.h
+diff -rduN0a db3x/db3x.dsw SecureDB/db3x.dsw
+--- db3x/db3x.dsw	Wed Oct 20 13:57:32 2004
++++ SecureDB/db3x.dsw	Sun Sep 18 22:31:00 2005
+@@ -6 +6 @@
+-Project: "db3x"=.\db3x.dsp - Package Owner=<4>
++Project: "SecureDB"=.\db3x.dsp - Package Owner=<4>
+diff -rduN0a db3x/db3x.vcproj SecureDB/db3x.vcproj
+--- db3x/db3x.vcproj	Mon Jul 11 07:51:10 2005
++++ SecureDB/db3x.vcproj	Sun Sep 18 22:00:32 2005
+@@ -5,2 +5,2 @@
+-	Name="db3x"
+-	SccProjectName="&quot;$/Miranda/miranda/plugins/db3x&quot;, WKIAAAAA"
++	Name="SecureDB"
++	SccProjectName="&quot;$/Miranda/miranda/plugins/SecureDB&quot;, WKIAAAAA"
+@@ -17,2 +17,2 @@
+-			OutputDirectory="../../bin7/Debug/Plugins"
+-			IntermediateDirectory="../../bin7/Debug/Obj/$(ProjectName)"
++			OutputDirectory="../../bin/Debug/Plugins"
++			IntermediateDirectory="../../bin/Debug/Obj/$(ProjectName)"
+@@ -43 +43 @@
+-				OutputFile="$(OutDir)/dbx_3x.dll"
++				OutputFile="$(OutDir)/dbx_3xS.dll"
+@@ -54 +54 @@
+-				TypeLibraryName=".\Debug/db3x.tlb"
++				TypeLibraryName=".\Debug/SecureDB.tlb"
+@@ -79,2 +79,2 @@
+-			OutputDirectory="../../bin7/Release/Plugins"
+-			IntermediateDirectory="../../bin7/Release/Obj/$(ProjectName)"
++			OutputDirectory="../../bin/Release/Plugins"
++			IntermediateDirectory="../../bin/Release/Obj/$(ProjectName)"
+@@ -110 +110 @@
+-				OutputFile="$(OutDir)/dbx_3x.dll"
++				OutputFile="$(OutDir)/dbx_3xS.dll"
+@@ -128 +128 @@
+-				TypeLibraryName=".\Release/db3x.tlb"
++				TypeLibraryName=".\Release/SecureDB.tlb"
+diff -rduN0a db3x/dbcache.c SecureDB/dbcache.c
+--- db3x/dbcache.c	Thu May  5 23:41:26 2005
++++ SecureDB/dbcache.c	Sun Sep 18 19:32:34 2005
+@@ -24,2 +23,0 @@
+-#include "commonheaders.h"
+-#include "database.h"
+@@ -28,2 +26,2 @@
+-#define CACHESECTIONSIZE   4096
+-#define CACHESECTIONCOUNT  32
++#include "commonheaders.h"
++#include "database.h"
+@@ -35 +32,0 @@
+-static PBYTE pDbCache;
+@@ -37,4 +34,3 @@
+-struct DBCacheSectionInfo {
+-	DWORD ofsBase;
+-	DWORD lastUsed;
+-} static cacheSectionInfo[CACHESECTIONCOUNT];
++
++PBYTE pDbCache;
++struct DBCacheSectionInfo cacheSectionInfo[CACHESECTIONCOUNT];
+@@ -64 +60 @@
+-	ReadFile(hDbFile,pDbCache+i*CACHESECTIONSIZE,CACHESECTIONSIZE,&ofs,NULL);
++	EncReadFile(hDbFile,pDbCache+i*CACHESECTIONSIZE,CACHESECTIONSIZE,&ofs,NULL);
+@@ -142 +138 @@
+-	if (WriteFile(hDbFile,pData,bytes,&bytesWritten,NULL)==0)
++	if (EncWriteFile(hDbFile,pData,bytes,&bytesWritten,NULL)==0)
+@@ -172 +168 @@
+-	ReadFile(hDbFile,buf,bytes,&bytesRead,NULL);
++	EncReadFile(hDbFile,buf,bytes,&bytesRead,NULL);
+@@ -220 +216 @@
+-		ReadFile(hDbFile,pDbCache+i*CACHESECTIONSIZE,CACHESECTIONSIZE,&bytesRead,NULL);
++		EncReadFile(hDbFile,pDbCache+i*CACHESECTIONSIZE,CACHESECTIONSIZE,&bytesRead,NULL);
+diff -rduN0a db3x/dbheaders.c SecureDB/dbheaders.c
+--- db3x/dbheaders.c	Thu May  5 23:41:26 2005
++++ SecureDB/dbheaders.c	Sun Sep 18 19:32:34 2005
+@@ -34 +34,2 @@
+-static struct DBSignature dbSignature={"Miranda ICQ DB",0x1A};
++struct DBSignature dbSignature={"Miranda ICQ DB",0x1A};
++struct DBSignature dbSecSignature={"Miranda SEC DB",0x1A};
+@@ -53,0 +55 @@
++
+@@ -55 +57 @@
+-	WriteFile(hFile,&dbHeader,sizeof(dbHeader),&bytesWritten,NULL);
++	EncWriteFile(hFile,&dbHeader,sizeof(dbHeader),&bytesWritten,NULL);
+@@ -60,0 +63 @@
++
+@@ -62 +65 @@
+-	WriteFile(hFile,&user,sizeof(struct DBContact),&bytesWritten,NULL);
++	EncWriteFile(hFile,&user,sizeof(struct DBContact),&bytesWritten,NULL);
+@@ -67 +70 @@
+-int CheckDbHeaders(struct DBHeader * hdr)
++int CheckDbHeaders(struct DBHeader * hdr,long* secure)
+@@ -69,2 +72,13 @@
+-	if(memcmp(hdr->signature,&dbSignature,sizeof(hdr->signature))) return 1;
+-	if(hdr->version!=DB_THIS_VERSION) return 2;
++	if(!memcmp(hdr->signature,&dbSecSignature,sizeof(hdr->signature)))
++	{
++		*secure = 1;
++	}
++	else if(!memcmp(hdr->signature,&dbSignature,sizeof(hdr->signature)))
++	{
++		if(hdr->version!=DB_THIS_VERSION) return 2;
++		*secure = 0;
++	}
++	else
++	{
++		return 1;
++	}
+diff -rduN0a db3x/dbsec.ico SecureDB/dbsec.ico
+--- db3x/dbsec.ico	Thu Jan  1 01:00:00 1970
++++ SecureDB/dbsec.ico	Fri May 13 12:04:48 2005
+@@ -0,0 +1 @@
++          h     (                                     VUT ≈≈≈ ΩΩΩ ØØØ ≠≠≠ ††† °°° °°° §§§ üüü ëëë îîî www ççç ööö ˇˇˇ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      	              	                                                                                    ˇˇ  ˇˇ  ˇˇ                ¯œ  ¯œ  ¯  ¸  ˇˇ  ˇˇ  
+\ No newline at end of file
+diff -rduN0a db3x/delpw.ico SecureDB/delpw.ico
+--- db3x/delpw.ico	Thu Jan  1 01:00:00 1970
++++ SecureDB/delpw.ico	Fri May 13 12:04:48 2005
+@@ -0,0 +1,2 @@
++          h     (                                     ÑÔˇ Ü‰Ú x›Û †¡ 1m| 7dn ÜÈˇ ≥‹ 8”ˇ K◊ˇ 'Q] q◊Ú òÈˇ ,ΩÎ 2 ¯ ?–ˇ B»Ú DΩ„ =ä£ [¡· l–Ò qº‘ ê‘Í yúß ,¿ı 3¶— <°∆ :Äò £‚˘ >FI *¶⁄ 5¬˝ 4µÎ >«˝ 4¶‘ ?≈˝  `y Aá¢ Ñ‹ˇ ì– )†÷ 4∏Ú 7∫ı A®‘ Iñ∑ aΩÂ Oó∂ %ES l¥’ {Ω⁄ å≈ﬁ 9NW ùÀﬂ BIL û‹ #ñœ $y§ ;º˘ ,>G ÄµŒ EMQ KMN oü ?™„ 7á≥ /mé W∑Ó Rë≥ &@N 4LY 	bò öÊ $kï Dµ˝ ^Ω˜ w¿Ì âæﬁ ì√‡ C`s  Jj Tfw -aó 3aî Tg~ guà eee ddd ___ [[[ ZZZ MMM ˇ ˇ˙     ˛ ˇˇˇ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Q=             &#%[            	W          1!+Y          2$+WY          3 +8W          5$+804F6W      N:8GADBEY      MKJH@.,9;W      LC)P[_ _ _  <RY _]_   '(TU#	SY_]]]_  -7?I
++O  _]_      _ _ _    -   ˇˇ  üˇ  ˇ  ˇ  ˇ  Äˇ  ¿  ‡    ¯   ¸   V   é     è  Wá  
+\ No newline at end of file
+diff -rduN0a db3x/init.c SecureDB/init.c
+--- db3x/init.c	Tue Aug 16 18:38:04 2005
++++ SecureDB/init.c	Sun Sep 18 19:32:34 2005
+@@ -25,0 +26 @@
++#include "SecureDB.h"
+@@ -56,0 +58 @@
++	int sec=0;
+@@ -59 +61 @@
+-	DWORD dummy=0;	
++	DWORD dummy=0;
+@@ -65,0 +68 @@
++
+@@ -67 +70 @@
+-	if ( !ReadFile(hFile, &hdr, sizeof(struct DBHeader), &dummy, NULL) ) {
++	if ( !EncReadFile(hFile, &hdr, sizeof(struct DBHeader), &dummy, NULL) ) {
+@@ -72 +75,7 @@
+-	chk=CheckDbHeaders(&hdr);
++
++	chk=CheckDbHeaders(&hdr,&sec);
++
++	if(sec && EncGetPassword(&hdr,profile)){
++		return 1;
++	}
++
+@@ -107 +115,0 @@
+-	PLUGINLINK *link = plink;
+@@ -110 +118,2 @@
+-#endif	
++#endif
++	//PLUGINLINK *link = (PLUGINLINK*)plink;
+@@ -114 +123 @@
+-	pluginLink=link;
++	pluginLink=plink;
+@@ -118,0 +128,2 @@
++
++	EncOnLoad();
+@@ -131 +142 @@
+-	strncpy(buf,shortName ? "Miranda database" : "Miranda database support",cch);
++	strncpy(buf,shortName ? "Miranda SecureDB" : "Miranda SecureDB support",cch);
+@@ -148 +159 @@
+-	"Miranda database driver",
++	"Miranda SecureDB driver",
+@@ -150,5 +161,5 @@
+-	"Provides Miranda database support: global settings, contacts, history, settings per contact.",
+-	"Miranda-IM project",
+-	"egodust@users.sourceforge.net",
+-	"Copyright 2000-2005 Miranda-IM project",
+-	"",
++	"Provides Miranda database support: encryption, global settings, contacts, history, settings per contact.",
++	"Miranda-IM project; Piotr Pawluczuk;",
++	"egodust@users.sourceforge.net; piotrek@piopawlu.net",
++	"Copyright 2000-2005 Miranda-IM project; Piotr Pawluczuk",
++	"www.miranda-im.org; www.piopawlu.net",
+diff -rduN0a db3x/newpw.ico SecureDB/newpw.ico
+--- db3x/newpw.ico	Thu Jan  1 01:00:00 1970
++++ SecureDB/newpw.ico	Fri May 13 12:04:48 2005
+@@ -0,0 +1,2 @@
++          h     (                                     ÑÔˇ Ü‰Ú x›Û †¡ 1m| 7dn ÜÈˇ ≥‹ 8”ˇ K◊ˇ 'Q] q◊Ú òÈˇ ,ΩÎ 2 ¯ ?–ˇ B»Ú DΩ„ =ä£ [¡· l–Ò qº‘ ê‘Í yúß ,¿ı 3¶— <°∆ :Äò £‚˘ >FI *¶⁄ 5¬˝ 4µÎ >«˝ 4¶‘ ?≈˝  `y Aá¢ Ñ‹ˇ ì– )†÷ 4∏Ú 7∫ı A®‘ Iñ∑ aΩÂ Oó∂ %ES l¥’ {Ω⁄ å≈ﬁ 9NW ùÀﬂ BIL û‹ #ñœ $y§ ;º˘ ,>G ÄµŒ EMQ KMN oü ?™„ 7á≥ /mé W∑Ó Rë≥ &@N 4LY 	bò öÊ $kï Dµ˝ ^Ω˜ w¿Ì âæﬁ ì√‡ C`s  Jj Tfw -aó 3aî Tg~ guà eee ddd ___ [[[ ZZZ MMM        ≥  4ï                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   Q=             &#%[            	W          1!+Y          2$+WY          3 +8W          5$+804F6W      N:8GADBEY      MKJH@.,9;W __   LC)P[ ^__   <RY ]^__  '(TU#	SY ]^^   -7?I
++O  ]]                -   ˇˇ  üˇ  ˇ  ˇ  ˇ  Äˇ  ¿  ‡    ¯   ú   é   Ü   é  ü  ˇá  
+\ No newline at end of file
+diff -rduN0a db3x/resource.h SecureDB/resource.h
+--- db3x/resource.h	Wed Oct 20 13:57:32 2004
++++ SecureDB/resource.h	Sun Sep 18 19:32:34 2005
+@@ -2 +2 @@
+-// Microsoft Developer Studio generated include file.
++// Microsoft Visual C++ generated include file.
+@@ -110,0 +111,5 @@
++#define IDD_DIALOG1                     269
++#define IDI_ICON1                       270
++#define IDD_DIALOG2                     270
++#define IDI_ICON2                       271
++#define IDI_ICON3                       272
+@@ -516,0 +522,2 @@
++#define IDC_EDIT1                       1657
++#define IDC_EDIT2                       1658
+@@ -545 +552 @@
+-#define _APS_NEXT_RESOURCE_VALUE        269
++#define _APS_NEXT_RESOURCE_VALUE        273
+@@ -547 +554 @@
+-#define _APS_NEXT_CONTROL_VALUE         1657
++#define _APS_NEXT_CONTROL_VALUE         1658
+diff -rduN0a db3x/resource.rc SecureDB/resource.rc
+--- db3x/resource.rc	Fri May 13 14:23:04 2005
++++ SecureDB/resource.rc	Sun Sep 18 19:32:34 2005
+@@ -27,0 +28,29 @@
++IDD_DIALOG1 DIALOGEX 0, 0, 166, 73
++STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP |
++    WS_CAPTION | WS_SYSMENU
++CAPTION "Please type in your password"
++FONT 8, "MS Shell Dlg", 400, 0, 0x1
++BEGIN
++    EDITTEXT        IDC_EDIT1,46,33,113,13,ES_PASSWORD | ES_AUTOHSCROLL
++    PUSHBUTTON      "OK",IDOK,126,54,33,12
++    PUSHBUTTON      "Cancel",IDCANCEL,92,54,33,12
++    EDITTEXT        IDC_EDIT2,46,14,113,13,ES_AUTOHSCROLL | ES_READONLY |
++                    WS_DISABLED
++    LTEXT           "Database:",IDC_STATIC,7,16,34,8
++    LTEXT           "Password:",IDC_STATIC,7,36,34,8
++END
++
++IDD_DIALOG2 DIALOGEX 0, 0, 166, 73
++STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP |
++    WS_CAPTION | WS_SYSMENU
++CAPTION "Please type in your new password"
++FONT 8, "MS Shell Dlg", 400, 0, 0x1
++BEGIN
++    EDITTEXT        IDC_EDIT2,49,14,110,13,ES_PASSWORD | ES_AUTOHSCROLL
++    EDITTEXT        IDC_EDIT1,49,33,110,13,ES_PASSWORD | ES_AUTOHSCROLL
++    PUSHBUTTON      "OK",IDOK,126,54,33,12
++    PUSHBUTTON      "Cancel",IDCANCEL,92,54,33,12
++    LTEXT           "Password:",IDC_STATIC,7,16,34,8
++    LTEXT           "Confirm:",IDC_STATIC,7,36,28,8
++END
++
+@@ -29 +58 @@
+-STYLE DS_MODALFRAME | DS_SETFOREGROUND | DS_3DLOOK | DS_FIXEDSYS | DS_CENTER | 
++STYLE DS_MODALFRAME | DS_SETFOREGROUND | DS_3DLOOK | DS_FIXEDSYS | DS_CENTER |
+@@ -49 +78 @@
+-STYLE DS_MODALFRAME | DS_SETFOREGROUND | DS_3DLOOK | DS_FIXEDSYS | DS_CENTER | 
++STYLE DS_MODALFRAME | DS_SETFOREGROUND | DS_3DLOOK | DS_FIXEDSYS | DS_CENTER |
+@@ -57 +86 @@
+-    CONTROL         "",IDC_ININAME,"Static",SS_SIMPLE | SS_NOPREFIX | 
++    CONTROL         "",IDC_ININAME,"Static",SS_SIMPLE | SS_NOPREFIX |
+@@ -61 +90 @@
+-    CONTROL         "",IDC_SETTINGNAME,"Static",SS_SIMPLE | SS_NOPREFIX | 
++    CONTROL         "",IDC_SETTINGNAME,"Static",SS_SIMPLE | SS_NOPREFIX |
+@@ -64 +93 @@
+-    CONTROL         "",IDC_NEWVALUE,"Static",SS_SIMPLE | SS_NOPREFIX | 
++    CONTROL         "",IDC_NEWVALUE,"Static",SS_SIMPLE | SS_NOPREFIX |
+@@ -78 +107 @@
+-STYLE DS_MODALFRAME | DS_SETFOREGROUND | DS_3DLOOK | DS_FIXEDSYS | DS_CENTER | 
++STYLE DS_MODALFRAME | DS_SETFOREGROUND | DS_3DLOOK | DS_FIXEDSYS | DS_CENTER |
+@@ -85 +114 @@
+-    CONTROL         "",IDC_ININAME,"Static",SS_SIMPLE | SS_NOPREFIX | 
++    CONTROL         "",IDC_ININAME,"Static",SS_SIMPLE | SS_NOPREFIX |
+@@ -103 +132 @@
+-GUIDELINES DESIGNINFO DISCARDABLE 
++GUIDELINES DESIGNINFO DISCARDABLE
+@@ -138 +167 @@
+-1 TEXTINCLUDE DISCARDABLE 
++1 TEXTINCLUDE DISCARDABLE
+@@ -143 +172 @@
+-2 TEXTINCLUDE DISCARDABLE 
++2 TEXTINCLUDE DISCARDABLE
+@@ -148 +177 @@
+-3 TEXTINCLUDE DISCARDABLE 
++3 TEXTINCLUDE DISCARDABLE
+@@ -154,0 +184,49 @@
++
++/////////////////////////////////////////////////////////////////////////////
++//
++// Version
++//
++
++VS_VERSION_INFO VERSIONINFO
++ FILEVERSION 1,0,0,1
++ PRODUCTVERSION 1,0,0,1
++ FILEFLAGSMASK 0x17L
++#ifdef _DEBUG
++ FILEFLAGS 0x1L
++#else
++ FILEFLAGS 0x0L
++#endif
++ FILEOS 0x4L
++ FILETYPE 0x2L
++ FILESUBTYPE 0x0L
++BEGIN
++    BLOCK "StringFileInfo"
++    BEGIN
++        BLOCK "041504b0"
++        BEGIN
++            VALUE "FileDescription", "db3xS"
++            VALUE "FileVersion", "1, 0, 0, 2"
++            VALUE "InternalName", "db3xS"
++            VALUE "LegalCopyright", "Copyright (C) 2005; (S) Piotr Pawluczuk"
++            VALUE "OriginalFilename", "db3xS.dll"
++            VALUE "ProductName", " db3xS"
++            VALUE "ProductVersion", "1, 0, 0, 2"
++        END
++    END
++    BLOCK "VarFileInfo"
++    BEGIN
++        VALUE "Translation", 0x415, 1200
++    END
++END
++
++
++/////////////////////////////////////////////////////////////////////////////
++//
++// Icon
++//
++
++// Icon with lowest ID value placed first to ensure application icon
++// remains consistent on all systems.
++IDI_ICON1               ICON                    "dbsec.ico"
++IDI_ICON2               ICON                    "delpw.ico"
++IDI_ICON3               ICON                    "newpw.ico"
+diff -rduN0a db3x/sha256.c SecureDB/sha256.c
+--- db3x/sha256.c	Thu Jan  1 01:00:00 1970
++++ SecureDB/sha256.c	Sun Sep 18 19:32:34 2005
+@@ -0,0 +1,261 @@
++/*
++ *  FIPS-180-2 compliant SHA-256 implementation
++ *
++ *  Copyright (C) 2001-2003  Christophe Devine
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ */
++
++#include <string.h>
++
++#include "sha256.h"
++
++#define GET_UINT32(n,b,i)                       \
++{                                               \
++    (n) = ( (uint32) (b)[(i)    ] << 24 )       \
++        | ( (uint32) (b)[(i) + 1] << 16 )       \
++        | ( (uint32) (b)[(i) + 2] <<  8 )       \
++        | ( (uint32) (b)[(i) + 3]       );      \
++}
++
++#define PUT_UINT32(n,b,i)                       \
++{                                               \
++    (b)[(i)    ] = (uint8) ( (n) >> 24 );       \
++    (b)[(i) + 1] = (uint8) ( (n) >> 16 );       \
++    (b)[(i) + 2] = (uint8) ( (n) >>  8 );       \
++    (b)[(i) + 3] = (uint8) ( (n)       );       \
++}
++
++void sha256_starts( sha256_context *ctx )
++{
++    ctx->total[0] = 0;
++    ctx->total[1] = 0;
++
++    ctx->state[0] = 0x6A09E667;
++    ctx->state[1] = 0xBB67AE85;
++    ctx->state[2] = 0x3C6EF372;
++    ctx->state[3] = 0xA54FF53A;
++    ctx->state[4] = 0x510E527F;
++    ctx->state[5] = 0x9B05688C;
++    ctx->state[6] = 0x1F83D9AB;
++    ctx->state[7] = 0x5BE0CD19;
++}
++
++void sha256_process( sha256_context *ctx, uint8 data[64] )
++{
++    uint32 temp1, temp2, W[64];
++    uint32 A, B, C, D, E, F, G, H;
++
++    GET_UINT32( W[0],  data,  0 );
++    GET_UINT32( W[1],  data,  4 );
++    GET_UINT32( W[2],  data,  8 );
++    GET_UINT32( W[3],  data, 12 );
++    GET_UINT32( W[4],  data, 16 );
++    GET_UINT32( W[5],  data, 20 );
++    GET_UINT32( W[6],  data, 24 );
++    GET_UINT32( W[7],  data, 28 );
++    GET_UINT32( W[8],  data, 32 );
++    GET_UINT32( W[9],  data, 36 );
++    GET_UINT32( W[10], data, 40 );
++    GET_UINT32( W[11], data, 44 );
++    GET_UINT32( W[12], data, 48 );
++    GET_UINT32( W[13], data, 52 );
++    GET_UINT32( W[14], data, 56 );
++    GET_UINT32( W[15], data, 60 );
++
++#define  SHR(x,n) ((x & 0xFFFFFFFF) >> n)
++#define ROTR(x,n) (SHR(x,n) | (x << (32 - n)))
++
++#define S0(x) (ROTR(x, 7) ^ ROTR(x,18) ^  SHR(x, 3))
++#define S1(x) (ROTR(x,17) ^ ROTR(x,19) ^  SHR(x,10))
++
++#define S2(x) (ROTR(x, 2) ^ ROTR(x,13) ^ ROTR(x,22))
++#define S3(x) (ROTR(x, 6) ^ ROTR(x,11) ^ ROTR(x,25))
++
++#define F0(x,y,z) ((x & y) | (z & (x | y)))
++#define F1(x,y,z) (z ^ (x & (y ^ z)))
++
++#define R(t)                                    \
++(                                               \
++    W[t] = S1(W[t -  2]) + W[t -  7] +          \
++           S0(W[t - 15]) + W[t - 16]            \
++)
++
++#define P(a,b,c,d,e,f,g,h,x,K)                  \
++{                                               \
++    temp1 = h + S3(e) + F1(e,f,g) + K + x;      \
++    temp2 = S2(a) + F0(a,b,c);                  \
++    d += temp1; h = temp1 + temp2;              \
++}
++
++    A = ctx->state[0];
++    B = ctx->state[1];
++    C = ctx->state[2];
++    D = ctx->state[3];
++    E = ctx->state[4];
++    F = ctx->state[5];
++    G = ctx->state[6];
++    H = ctx->state[7];
++
++    P( A, B, C, D, E, F, G, H, W[ 0], 0x428A2F98 );
++    P( H, A, B, C, D, E, F, G, W[ 1], 0x71374491 );
++    P( G, H, A, B, C, D, E, F, W[ 2], 0xB5C0FBCF );
++    P( F, G, H, A, B, C, D, E, W[ 3], 0xE9B5DBA5 );
++    P( E, F, G, H, A, B, C, D, W[ 4], 0x3956C25B );
++    P( D, E, F, G, H, A, B, C, W[ 5], 0x59F111F1 );
++    P( C, D, E, F, G, H, A, B, W[ 6], 0x923F82A4 );
++    P( B, C, D, E, F, G, H, A, W[ 7], 0xAB1C5ED5 );
++    P( A, B, C, D, E, F, G, H, W[ 8], 0xD807AA98 );
++    P( H, A, B, C, D, E, F, G, W[ 9], 0x12835B01 );
++    P( G, H, A, B, C, D, E, F, W[10], 0x243185BE );
++    P( F, G, H, A, B, C, D, E, W[11], 0x550C7DC3 );
++    P( E, F, G, H, A, B, C, D, W[12], 0x72BE5D74 );
++    P( D, E, F, G, H, A, B, C, W[13], 0x80DEB1FE );
++    P( C, D, E, F, G, H, A, B, W[14], 0x9BDC06A7 );
++    P( B, C, D, E, F, G, H, A, W[15], 0xC19BF174 );
++    P( A, B, C, D, E, F, G, H, R(16), 0xE49B69C1 );
++    P( H, A, B, C, D, E, F, G, R(17), 0xEFBE4786 );
++    P( G, H, A, B, C, D, E, F, R(18), 0x0FC19DC6 );
++    P( F, G, H, A, B, C, D, E, R(19), 0x240CA1CC );
++    P( E, F, G, H, A, B, C, D, R(20), 0x2DE92C6F );
++    P( D, E, F, G, H, A, B, C, R(21), 0x4A7484AA );
++    P( C, D, E, F, G, H, A, B, R(22), 0x5CB0A9DC );
++    P( B, C, D, E, F, G, H, A, R(23), 0x76F988DA );
++    P( A, B, C, D, E, F, G, H, R(24), 0x983E5152 );
++    P( H, A, B, C, D, E, F, G, R(25), 0xA831C66D );
++    P( G, H, A, B, C, D, E, F, R(26), 0xB00327C8 );
++    P( F, G, H, A, B, C, D, E, R(27), 0xBF597FC7 );
++    P( E, F, G, H, A, B, C, D, R(28), 0xC6E00BF3 );
++    P( D, E, F, G, H, A, B, C, R(29), 0xD5A79147 );
++    P( C, D, E, F, G, H, A, B, R(30), 0x06CA6351 );
++    P( B, C, D, E, F, G, H, A, R(31), 0x14292967 );
++    P( A, B, C, D, E, F, G, H, R(32), 0x27B70A85 );
++    P( H, A, B, C, D, E, F, G, R(33), 0x2E1B2138 );
++    P( G, H, A, B, C, D, E, F, R(34), 0x4D2C6DFC );
++    P( F, G, H, A, B, C, D, E, R(35), 0x53380D13 );
++    P( E, F, G, H, A, B, C, D, R(36), 0x650A7354 );
++    P( D, E, F, G, H, A, B, C, R(37), 0x766A0ABB );
++    P( C, D, E, F, G, H, A, B, R(38), 0x81C2C92E );
++    P( B, C, D, E, F, G, H, A, R(39), 0x92722C85 );
++    P( A, B, C, D, E, F, G, H, R(40), 0xA2BFE8A1 );
++    P( H, A, B, C, D, E, F, G, R(41), 0xA81A664B );
++    P( G, H, A, B, C, D, E, F, R(42), 0xC24B8B70 );
++    P( F, G, H, A, B, C, D, E, R(43), 0xC76C51A3 );
++    P( E, F, G, H, A, B, C, D, R(44), 0xD192E819 );
++    P( D, E, F, G, H, A, B, C, R(45), 0xD6990624 );
++    P( C, D, E, F, G, H, A, B, R(46), 0xF40E3585 );
++    P( B, C, D, E, F, G, H, A, R(47), 0x106AA070 );
++    P( A, B, C, D, E, F, G, H, R(48), 0x19A4C116 );
++    P( H, A, B, C, D, E, F, G, R(49), 0x1E376C08 );
++    P( G, H, A, B, C, D, E, F, R(50), 0x2748774C );
++    P( F, G, H, A, B, C, D, E, R(51), 0x34B0BCB5 );
++    P( E, F, G, H, A, B, C, D, R(52), 0x391C0CB3 );
++    P( D, E, F, G, H, A, B, C, R(53), 0x4ED8AA4A );
++    P( C, D, E, F, G, H, A, B, R(54), 0x5B9CCA4F );
++    P( B, C, D, E, F, G, H, A, R(55), 0x682E6FF3 );
++    P( A, B, C, D, E, F, G, H, R(56), 0x748F82EE );
++    P( H, A, B, C, D, E, F, G, R(57), 0x78A5636F );
++    P( G, H, A, B, C, D, E, F, R(58), 0x84C87814 );
++    P( F, G, H, A, B, C, D, E, R(59), 0x8CC70208 );
++    P( E, F, G, H, A, B, C, D, R(60), 0x90BEFFFA );
++    P( D, E, F, G, H, A, B, C, R(61), 0xA4506CEB );
++    P( C, D, E, F, G, H, A, B, R(62), 0xBEF9A3F7 );
++    P( B, C, D, E, F, G, H, A, R(63), 0xC67178F2 );
++
++    ctx->state[0] += A;
++    ctx->state[1] += B;
++    ctx->state[2] += C;
++    ctx->state[3] += D;
++    ctx->state[4] += E;
++    ctx->state[5] += F;
++    ctx->state[6] += G;
++    ctx->state[7] += H;
++}
++
++void sha256_update( sha256_context *ctx, uint8 *input, uint32 length )
++{
++    uint32 left, fill;
++
++    if( ! length ) return;
++
++    left = ctx->total[0] & 0x3F;
++    fill = 64 - left;
++
++    ctx->total[0] += length;
++    ctx->total[0] &= 0xFFFFFFFF;
++
++    if( ctx->total[0] < length )
++        ctx->total[1]++;
++
++    if( left && length >= fill )
++    {
++        memcpy( (void *) (ctx->buffer + left),
++                (void *) input, fill );
++        sha256_process( ctx, ctx->buffer );
++        length -= fill;
++        input  += fill;
++        left = 0;
++    }
++
++    while( length >= 64 )
++    {
++        sha256_process( ctx, input );
++        length -= 64;
++        input  += 64;
++    }
++
++    if( length )
++    {
++        memcpy( (void *) (ctx->buffer + left),
++                (void *) input, length );
++    }
++}
++
++static uint8 sha256_padding[64] =
++{
++ 0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
++    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
++    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
++    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
++};
++
++void sha256_finish( sha256_context *ctx, uint8 digest[32] )
++{
++    uint32 last, padn;
++    uint32 high, low;
++    uint8 msglen[8];
++
++    high = ( ctx->total[0] >> 29 )
++         | ( ctx->total[1] <<  3 );
++    low  = ( ctx->total[0] <<  3 );
++
++    PUT_UINT32( high, msglen, 0 );
++    PUT_UINT32( low,  msglen, 4 );
++
++    last = ctx->total[0] & 0x3F;
++    padn = ( last < 56 ) ? ( 56 - last ) : ( 120 - last );
++
++    sha256_update( ctx, sha256_padding, padn );
++    sha256_update( ctx, msglen, 8 );
++
++    PUT_UINT32( ctx->state[0], digest,  0 );
++    PUT_UINT32( ctx->state[1], digest,  4 );
++    PUT_UINT32( ctx->state[2], digest,  8 );
++    PUT_UINT32( ctx->state[3], digest, 12 );
++    PUT_UINT32( ctx->state[4], digest, 16 );
++    PUT_UINT32( ctx->state[5], digest, 20 );
++    PUT_UINT32( ctx->state[6], digest, 24 );
++    PUT_UINT32( ctx->state[7], digest, 28 );
++}
+diff -rduN0a db3x/sha256.h SecureDB/sha256.h
+--- db3x/sha256.h	Thu Jan  1 01:00:00 1970
++++ SecureDB/sha256.h	Sun Sep 18 19:32:34 2005
+@@ -0,0 +1,24 @@
++#ifndef _SHA256_H
++#define _SHA256_H
++
++#ifndef uint8
++#define uint8  unsigned char
++#endif
++
++#ifndef uint32
++#define uint32 unsigned long int
++#endif
++
++typedef struct
++{
++    uint32 total[2];
++    uint32 state[8];
++    uint8 buffer[64];
++}
++sha256_context;
++
++void sha256_starts( sha256_context *ctx );
++void sha256_update( sha256_context *ctx, uint8 *input, uint32 length );
++void sha256_finish( sha256_context *ctx, uint8 digest[32] );
++
++#endif /* sha256.h */

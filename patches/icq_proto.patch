@@ -1,0 +1,13 @@
+Index: protocols/IcqOscarJ/icq_proto.cpp
+===================================================================
+--- protocols/IcqOscarJ/icq_proto.cpp	(Revision 11371)
++++ protocols/IcqOscarJ/icq_proto.cpp	(Arbeitskopie)
+@@ -795,7 +795,7 @@
+ 		break;
+ 
+ 	case PFLAGNUM_4:
+-		nReturn = PF4_SUPPORTIDLE | PF4_IMSENDUTF | PF4_IMSENDOFFLINE | PF4_INFOSETTINGSVC;
++		nReturn = PF4_SUPPORTIDLE | PF4_IMSENDUTF | PF4_IMSENDOFFLINE | PF4_INFOSETTINGSVC | PF4_FORCEAUTH | PF4_FORCEADDED;
+ 		if (m_bAvatarsEnabled)
+ 			nReturn |= PF4_AVATARS;
+ #ifdef DBG_CAPMTN

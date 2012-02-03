@@ -1,0 +1,644 @@
+Index: trunk/backup.c
+===================================================================
+--- trunk/backup.c	(Revision 116)
++++ trunk/backup.c	(Arbeitskopie)
+@@ -6,7 +6,7 @@
+ extern BOOL gl_bUnicodeAwareCore;
+ struct DBHeader dbHeader;
+ 
+-int BackupService(WPARAM wParam, LPARAM lParam);
++INT_PTR BackupService(WPARAM wParam, LPARAM lParam);
+ 
+ static HANDLE hEventBackup;
+ 
+@@ -19,15 +19,13 @@
+ 
+ int Backup(char* backup_filename, HWND progress_dialog)
+ {
+-	HANDLE hBackupFile;
+ 	char buff[8192];
+ 	DWORD bytes_read, bytes_written, file_size, total_bytes_copied = 0;
+-	HWND prog;
+ 	MSG msg;
+ 	DWORD start_time = GetTickCount();
+-	prog = GetDlgItem(progress_dialog, 0xDEAD);
++	HWND prog = GetDlgItem(progress_dialog, 0xDEAD);
+ 	
+-	hBackupFile = CreateFileA(backup_filename, GENERIC_WRITE, FILE_SHARE_WRITE, 0, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
++	HANDLE hBackupFile = CreateFileA(backup_filename, GENERIC_WRITE, FILE_SHARE_WRITE, 0, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+ 	
+ 	if(hBackupFile != INVALID_HANDLE_VALUE) {
+ 		if(progress_dialog) {
+@@ -66,7 +64,7 @@
+ 		}
+ 
+ 		while(ReadFile(hDbFile, buff, sizeof(buff), &bytes_read, 0) == TRUE && bytes_read > 0
+-			&& GetWindowLong(progress_dialog, GWL_USERDATA) == 0)
++			&& GetWindowLongPtr(progress_dialog, GWLP_USERDATA) == 0)
+ 		{
+ 			if(!WriteFile(hBackupFile, buff, bytes_read, &bytes_written, 0)) {
+ 				LeaveCriticalSection(&csDbAccess);
+@@ -95,7 +93,7 @@
+ 
+ 		CloseHandle(hBackupFile);
+ 
+-		if(progress_dialog && GetWindowLong(progress_dialog, GWL_USERDATA) != 0)
++		if(progress_dialog && GetWindowLongPtr(progress_dialog, GWLP_USERDATA) != 0)
+ 			DeleteFileA(backup_filename);
+ 		else
+ 			NotifyEventHooks(hEventBackup, (WPARAM)backup_filename, 0);
+@@ -106,7 +104,7 @@
+ 	return 1;
+ }
+ 
+-int BackupService(WPARAM wParam,LPARAM lParam)
++INT_PTR BackupService(WPARAM wParam,LPARAM lParam)
+ {
+ 	return Backup((char*)wParam, (HWND)lParam);	
+ }
+\ No newline at end of file
+Index: trunk/dbcontacts.c
+===================================================================
+--- trunk/dbcontacts.c	(Revision 116)
++++ trunk/dbcontacts.c	(Arbeitskopie)
+@@ -30,12 +30,12 @@
+ int GetContactSettingStatic(WPARAM wParam,LPARAM lParam);
+ void FreeCachedVariant( DBVARIANT* V );
+ 
+-static int GetContactCount(WPARAM wParam,LPARAM lParam);
+-static int FindFirstContact(WPARAM wParam,LPARAM lParam);
+-static int FindNextContact(WPARAM wParam,LPARAM lParam);
+-static int DeleteContact(WPARAM wParam,LPARAM lParam);
+-static int AddContact(WPARAM wParam,LPARAM lParam);
+-static int IsDbContact(WPARAM wParam,LPARAM lParam);
++static INT_PTR GetContactCount(WPARAM wParam,LPARAM lParam);
++static INT_PTR FindFirstContact(WPARAM wParam,LPARAM lParam);
++static INT_PTR FindNextContact(WPARAM wParam,LPARAM lParam);
++static INT_PTR DeleteContact(WPARAM wParam,LPARAM lParam);
++static INT_PTR AddContact(WPARAM wParam,LPARAM lParam);
++static INT_PTR IsDbContact(WPARAM wParam,LPARAM lParam);
+ 
+ static HANDLE hContactDeletedEvent,hContactAddedEvent;
+ 
+@@ -67,7 +67,7 @@
+ 	return VL;
+ }
+ 
+-static int GetContactCount(WPARAM wParam,LPARAM lParam)
++static INT_PTR GetContactCount(WPARAM wParam,LPARAM lParam)
+ {
+ 	int ret;
+ 
+@@ -96,7 +96,7 @@
+ 	return !strcmp(protobuf,proto);
+ }
+ 
+-static int FindFirstContact(WPARAM wParam,LPARAM lParam)
++static INT_PTR FindFirstContact(WPARAM wParam,LPARAM lParam)
+ {
+ 	int ret = 0;
+ 	EnterCriticalSection(&csDbAccess);
+@@ -107,7 +107,7 @@
+ 	return ret;
+ }
+ 
+-static int FindNextContact(WPARAM wParam,LPARAM lParam)
++static INT_PTR FindNextContact(WPARAM wParam,LPARAM lParam)
+ {
+ 	int index;
+ 	struct DBContact *dbc;
+@@ -145,7 +145,7 @@
+ 	return 0;
+ }
+ 
+-static int DeleteContact(WPARAM wParam,LPARAM lParam)
++static INT_PTR DeleteContact(WPARAM wParam,LPARAM lParam)
+ {
+ 	struct DBContact *dbc,*dbcPrev;
+ 	DWORD ofsThis,ofsNext,ofsFirstEvent;
+@@ -246,7 +246,7 @@
+ 	return 0;
+ }
+ 
+-static int AddContact(WPARAM wParam,LPARAM lParam)
++static INT_PTR AddContact(WPARAM wParam,LPARAM lParam)
+ {
+ 	struct DBContact dbc;
+ 	DWORD ofsNew;
+@@ -274,7 +274,7 @@
+ 	return (int)ofsNew;
+ }
+ 
+-static int IsDbContact(WPARAM wParam,LPARAM lParam)
++static INT_PTR IsDbContact(WPARAM wParam,LPARAM lParam)
+ {
+ 	struct DBContact *dbc;
+ 	DWORD ofsContact=(DWORD)wParam;
+Index: trunk/dbsettings.c
+===================================================================
+--- trunk/dbsettings.c	(Revision 116)
++++ trunk/dbsettings.c	(Arbeitskopie)
+@@ -397,7 +397,7 @@
+ 	return 1;
+ }
+ 
+-static int GetContactSetting(WPARAM wParam,LPARAM lParam)
++static INT_PTR GetContactSetting(WPARAM wParam,LPARAM lParam)
+ {
+ 	DBCONTACTGETSETTING* dgs = ( DBCONTACTGETSETTING* )lParam;
+ 	dgs->pValue->type = 0;
+@@ -431,7 +431,7 @@
+ 	return 0;
+ }
+ 
+-static int GetContactSettingStr(WPARAM wParam,LPARAM lParam)
++static INT_PTR GetContactSettingStr(WPARAM wParam,LPARAM lParam)
+ {
+ 	DBCONTACTGETSETTING* dgs = (DBCONTACTGETSETTING*)lParam;
+ 	int iSaveType = dgs->pValue->type;
+@@ -479,7 +479,7 @@
+ 	return 0;
+ }
+ 
+-int GetContactSettingStatic(WPARAM wParam,LPARAM lParam)
++INT_PTR GetContactSettingStatic(WPARAM wParam,LPARAM lParam)
+ {
+ 	DBCONTACTGETSETTING* dgs = (DBCONTACTGETSETTING*)lParam;
+ 	if ( GetContactSettingWorker(( HANDLE )wParam, dgs, 1 ))
+@@ -493,7 +493,7 @@
+ 	return 0;
+ }
+ 
+-static int FreeVariant(WPARAM wParam,LPARAM lParam)
++static INT_PTR FreeVariant(WPARAM wParam,LPARAM lParam)
+ {
+ 	DBVARIANT *dbv=(DBVARIANT*)lParam;
+ 	if ( dbv == 0 ) return 1;
+@@ -517,7 +517,7 @@
+ 	return 0;
+ }
+ 
+-static int SetSettingResident(WPARAM wParam,LPARAM lParam)
++static INT_PTR SetSettingResident(WPARAM wParam,LPARAM lParam)
+ {
+ 	size_t cbSettingNameLen = strlen(( char* )lParam) + 2;
+ 	if (cbSettingNameLen  < 512)
+@@ -548,7 +548,7 @@
+ 	return 0;
+ }
+ 
+-static int WriteContactSetting(WPARAM wParam,LPARAM lParam)
++static INT_PTR WriteContactSetting(WPARAM wParam,LPARAM lParam)
+ {
+ 	DBCONTACTWRITESETTING *dbcws=(DBCONTACTWRITESETTING*)lParam;
+ 	DBCONTACTWRITESETTING tmp;
+@@ -833,7 +833,7 @@
+ 	return 0;
+ }
+ 
+-static int DeleteContactSetting(WPARAM wParam,LPARAM lParam)
++static INT_PTR DeleteContactSetting(WPARAM wParam,LPARAM lParam)
+ {
+ 	DBCONTACTGETSETTING *dbcgs=(DBCONTACTGETSETTING*)lParam;
+ 	struct DBContact *dbc;
+@@ -930,7 +930,7 @@
+ 	return 0;
+ }
+ 
+-static int EnumContactSettings(WPARAM wParam,LPARAM lParam)
++static INT_PTR EnumContactSettings(WPARAM wParam,LPARAM lParam)
+ {
+ 	DBCONTACTENUMSETTINGS *dbces=(DBCONTACTENUMSETTINGS*)lParam;
+ 	struct DBContact *dbc;
+@@ -978,7 +978,7 @@
+ 	return result;
+ }
+ 
+-static int EnumResidentSettings(WPARAM wParam,LPARAM lParam)
++static INT_PTR EnumResidentSettings(WPARAM wParam,LPARAM lParam)
+ {
+ 	int i;
+ 	int ret;
+Index: trunk/dbtool/dbtool.h
+===================================================================
+--- trunk/dbtool/dbtool.h	(Revision 116)
++++ trunk/dbtool/dbtool.h	(Arbeitskopie)
+@@ -71,7 +71,7 @@
+ BOOL CALLBACK CleaningDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lParam);
+ BOOL CALLBACK ProgressDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lParam);
+ BOOL CALLBACK FileAccessDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lParam);
+-BOOL CALLBACK WizardDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lParam);
++INT_PTR CALLBACK WizardDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lParam);
+ BOOL CALLBACK FinishedDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lParam);
+ BOOL CALLBACK WelcomeDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lParam);
+ BOOL CALLBACK OpenErrorDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lParam);
+Index: trunk/dbtool/encryption.cpp
+===================================================================
+--- trunk/dbtool/encryption.cpp	(Revision 116)
++++ trunk/dbtool/encryption.cpp	(Arbeitskopie)
+@@ -277,7 +277,7 @@
+ 			UINT uid = LOWORD(wParam);
+ 
+ 			if(uid == IDOK){
+-				if(!GetWindowLong(hDlg,GWL_USERDATA))
++				if(!GetWindowLongPtr(hDlg,GWLP_USERDATA))
+ 				{
+ 					encryptKeyLength = GetDlgItemTextA(hDlg, IDC_USERPASS, encryptKey, 254);
+ 					EndDialog(hDlg,IDOK);
+Index: trunk/dbtool/progress.cpp
+===================================================================
+--- trunk/dbtool/progress.cpp	(Revision 116)
++++ trunk/dbtool/progress.cpp	(Arbeitskopie)
+@@ -169,7 +169,7 @@
+ 				SetEvent(hEventAbort);
+ 			}
+ 			SetEvent(hEventRun);
+-			SetWindowLong(hdlg,DWL_MSGRESULT,TRUE);
++			SetWindowLongPtr(hdlg,DWLP_MSGRESULT,TRUE);
+ 			return TRUE;
+ 		case WM_COMMAND:
+ 			switch(LOWORD(wParam)) {
+Index: trunk/dbtool/wizard.cpp
+===================================================================
+--- trunk/dbtool/wizard.cpp	(Revision 116)
++++ trunk/dbtool/wizard.cpp	(Arbeitskopie)
+@@ -86,7 +86,7 @@
+ 	return FALSE;
+ }
+ 
+-BOOL CALLBACK WizardDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lParam)
++INT_PTR CALLBACK WizardDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lParam)
+ {
+ 	static HWND hdlgPage;
+ 
+Index: trunk/dialogs.c
+===================================================================
+--- trunk/dialogs.c	(Revision 116)
++++ trunk/dialogs.c	(Arbeitskopie)
+@@ -10,7 +10,7 @@
+ 
+ extern char encryptKey[255];
+ extern size_t encryptKeyLength;
+-extern HANDLE g_hInst;
++extern HINSTANCE g_hInst;
+ HANDLE hSetPwdMenu;
+ 
+ extern BOOL gl_bUnicodeAwareCore;
+@@ -18,7 +18,7 @@
+ int Backup(void);
+ int BackupService(WPARAM wParam, LPARAM lParam);
+ 
+-BOOL CALLBACK DlgProcOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
++INT_PTR CALLBACK DlgProcOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
+ BOOL ShowDlgItem(HWND hwndDlg, int iIDCtrl, BOOL bShow)
+ {
+ 	HWND hwndCtrl = GetDlgItem(hwndDlg, iIDCtrl);
+@@ -62,14 +62,14 @@
+ 	odp.flags						= ODPF_BOLDGROUPS;
+ 	if (gl_bUnicodeAwareCore)
+ 	{
+-		odp.ptszTitle				= TranslateT("Database Features");
+-		odp.ptszGroup				= TranslateT("Services");
++		odp.ptszTitle				= LPGENT("Database Features");
++		odp.ptszGroup				= LPGENT("Services");
+ 		odp.flags				   |= ODPF_UNICODE;
+ 	}
+ 	else
+ 	{
+-		odp.pszTitle				= Translate("Database Features");
+-		odp.pszGroup				= Translate("Services");
++		odp.pszTitle				= LPGEN("Database Features");
++		odp.pszGroup				= LPGEN("Services");
+ 	}
+ 	
+ 	odp.nIDBottomSimpleControl		= 0;
+@@ -79,7 +79,7 @@
+ 	return 0;
+ }
+ 
+-static int ChangePassword(WPARAM wParam, LPARAM lParam)
++static INT_PTR ChangePassword(WPARAM wParam, LPARAM lParam)
+ {
+ 	if(bEncoding){
+ 		ChangePwd();
+@@ -117,7 +117,7 @@
+ 	menu.cbSize=sizeof(menu);
+ 	menu.flags = CMIM_ALL;
+ 
+-	menu.hIcon=LoadIcon(g_hInst, MAKEINTRESOURCE(IDI_ICON2));
++	menu.hIcon=LoadIcon((HANDLE)g_hInst, MAKEINTRESOURCE(IDI_ICON2));
+ 
+ 	// main menu item
+ 	if (gl_bUnicodeAwareCore)
+@@ -178,7 +178,7 @@
+ 	return res;
+ }
+ 
+-BOOL CALLBACK DlgProcOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
++INT_PTR CALLBACK DlgProcOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
+ {
+ 	HWND hwndList = GetDlgItem(hwndDlg, IDC_MODULES);
+ 	LVCOLUMN col;
+@@ -420,7 +420,7 @@
+ 			UINT uid = LOWORD(wParam);
+ 
+ 			if(uid == IDOK){
+-				if(!GetWindowLong(hDlg,GWL_USERDATA))
++				if(!GetWindowLongPtr(hDlg,GWLP_USERDATA))
+ 				{
+ 					encryptKeyLength = GetDlgItemTextA(hDlg, IDC_USERPASS, encryptKey, 254);
+ 					EndDialog(hDlg,IDOK);
+@@ -479,7 +479,7 @@
+ 			UINT uid = LOWORD(wParam);
+ 
+ 			if(uid == IDOK){
+-				if(!GetWindowLong(hDlg,GWL_USERDATA))
++				if(!GetWindowLongPtr(hDlg,GWLP_USERDATA))
+ 				{
+ 					char pass1[255], pass2[255];
+ 					if(GetDlgItemTextA(hDlg, IDC_USERPASS1, pass1, 254) < 3){
+Index: trunk/import_sa/encryption.c
+===================================================================
+--- trunk/import_sa/encryption.c	(Revision 116)
++++ trunk/import_sa/encryption.c	(Arbeitskopie)
+@@ -282,7 +282,7 @@
+ 			UINT uid = LOWORD(wParam);
+ 
+ 			if(uid == IDOK){
+-				if(!GetWindowLong(hDlg,GWL_USERDATA))
++				if(!GetWindowLongPtr(hDlg,GWLP_USERDATA))
+ 				{
+ 					encryptKeyLength = GetDlgItemTextA(hDlg, IDC_USERPASS, encryptKey, 254);
+ 					EndDialog(hDlg,IDOK);
+Index: trunk/init.c
+===================================================================
+--- trunk/init.c	(Revision 116)
++++ trunk/init.c	(Arbeitskopie)
+@@ -106,7 +106,7 @@
+ // returns 0 if all the APIs are injected otherwise, 1
+ static int LoadDatabase( char * profile, void * plink )
+ {
+-	PLUGINLINK *link = plink;
++	PLUGINLINK *link = (PLUGINLINK*) plink;
+ #ifdef _DEBUG
+ 	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+ #endif
+@@ -206,7 +206,7 @@
+ 	if ((GetVersion() & 0x80000000) == 0)
+ 	{
+ 		//Unicode Os - Unicode Aware
+-		pluginInfo.flags = 1;
++		pluginInfo.flags = UNICODE_AWARE;
+ 	}
+ 	return &pluginInfo;
+ }
+Index: trunk/sdk/m_folders.h
+===================================================================
+--- trunk/sdk/m_folders.h	(Revision 116)
++++ trunk/sdk/m_folders.h	(Arbeitskopie)
+@@ -27,12 +27,14 @@
+ #define CURRENT_PROFILE "%current_profile%"
+ #define MIRANDA_PATH "%miranda_path%"
+ #define PLUGINS_PATH "%miranda_path%" "\\plugins"
++#define MIRANDA_USERDATA "%miranda_userdata%"
+ 
+ #define TO_WIDE(x)     L ## x
+ 
+ #define PROFILE_PATHW    L"%profile_path%"
+ #define CURRENT_PROFILEW L"%current_profile%"
+ #define MIRANDA_PATHW    L"%miranda_path%"
++#define MIRANDA_USERDATAW L"%miranda_userdata%"
+ 
+ #define FOLDER_AVATARS                 PROFILE_PATH "\\" CURRENT_PROFILE "\\avatars"
+ #define FOLDER_VCARDS                  PROFILE_PATH "\\" CURRENT_PROFILE "\\vcards"
+@@ -78,16 +80,16 @@
+ 
+ /*Folders/Register/Path service
+   wParam - not used, must be 0
+-  lParam - (LPARAM) (const FOLDERDATA *) - Data structure filled with 
++  lParam - (LPARAM) (const FOLDERDATA *) - Data structure filled with
+   the necessary information.
+-  Returns a handle to the registered path or 0 on error. 
++  Returns a handle to the registered path or 0 on error.
+   You need to use this to call the other services.
+ */
+ #define MS_FOLDERS_REGISTER_PATH "Folders/Register/Path"
+ 
+ /*Folders/Get/PathSize service
+   wParam - (WPARAM) (int) - handle to registered path
+-  lParam - (LPARAM) (int *) - pointer to the variable that receives the size of the path 
++  lParam - (LPARAM) (int *) - pointer to the variable that receives the size of the path
+   string (not including the null character). Depending on the flags set when creating the path
+   it will either call strlen() or wcslen() to get the length of the string.
+   Returns the size of the buffer.
+@@ -172,10 +174,10 @@
+ 	return (HANDLE) CallService(MS_FOLDERS_REGISTER_PATH, 0, (LPARAM) &fd);
+ }
+ 
+-__inline static int FoldersGetCustomPath(HANDLE hFolderEntry, char *path, const int size, char *notFound)
++__inline static INT_PTR FoldersGetCustomPath(HANDLE hFolderEntry, char *path, const int size, const char *notFound)
+ {
+ 	FOLDERSGETDATA fgd = {0};
+-	int res;
++	INT_PTR res;
+ 	fgd.cbSize = sizeof(FOLDERSGETDATA);
+ 	fgd.nMaxPathSize = size;
+ 	fgd.szPath = path;
+@@ -186,14 +188,14 @@
+ 		CallService(MS_UTILS_PATHTOABSOLUTE, (WPARAM) notFound, (LPARAM) buffer);
+ 		mir_snprintf(path, size, "%s", buffer);
+ 	}
+-		
++
+ 	return res;
+ }
+ 
+-__inline static int FoldersGetCustomPathW(HANDLE hFolderEntry, wchar_t *pathW, const int count, wchar_t *notFoundW)
++__inline static INT_PTR FoldersGetCustomPathW(HANDLE hFolderEntry, wchar_t *pathW, const int count, const wchar_t *notFoundW)
+ {
+ 	FOLDERSGETDATA fgd = {0};
+-	int res;
++	INT_PTR res;
+ 	fgd.cbSize = sizeof(FOLDERSGETDATA);
+ 	fgd.nMaxPathSize = count;
+ 	fgd.szPathW = pathW;
+@@ -203,14 +205,14 @@
+ 		wcsncpy(pathW, notFoundW, count);
+ 		pathW[count - 1] = '\0';
+ 	}
+-		
++
+ 	return res;
+ }
+ 
+-__inline static int FoldersGetCustomPathEx(HANDLE hFolderEntry, char *path, const int size, char *notFound, char *fileName)
++__inline static INT_PTR FoldersGetCustomPathEx(HANDLE hFolderEntry, char *path, const int size, char *notFound, char *fileName)
+ {
+ 	FOLDERSGETDATA fgd = {0};
+-	int res;
++	INT_PTR res;
+ 	fgd.cbSize = sizeof(FOLDERSGETDATA);
+ 	fgd.nMaxPathSize = size;
+ 	fgd.szPath = path;
+@@ -228,19 +230,19 @@
+ 	else{
+ 		path[0] = '\0';
+ 	}
+-	
++
+ 	if (fileName)
+ 	{
+ 		strcat(path, fileName);
+ 	}
+-	
++
+ 	return res;
+ }
+ 
+-__inline static int FoldersGetCustomPathExW(HANDLE hFolderEntry, wchar_t *pathW, const int count, wchar_t *notFoundW, wchar_t *fileNameW)
++__inline static INT_PTR FoldersGetCustomPathExW(HANDLE hFolderEntry, wchar_t *pathW, const int count, wchar_t *notFoundW, wchar_t *fileNameW)
+ {
+ 	FOLDERSGETDATA fgd = {0};
+-	int res;
++	INT_PTR res;
+ 	fgd.cbSize = sizeof(FOLDERSGETDATA);
+ 	fgd.nMaxPathSize = count;
+ 	fgd.szPathW = pathW;
+@@ -250,7 +252,7 @@
+ 		wcsncpy(pathW, notFoundW, count);
+ 		pathW[count - 1] = '\0';
+ 	}
+-	
++
+ 	if (wcslen(pathW) > 0)
+ 	{
+ 		wcscat(pathW, L"\\");
+@@ -258,12 +260,12 @@
+ 	else{
+ 		pathW[0] = L'\0';
+ 	}
+-	
++
+ 	if (fileNameW)
+ 	{
+ 		wcscat(pathW, fileNameW);
+ 	}
+-	
++
+ 	return res;
+ }
+ 
+@@ -279,4 +281,4 @@
+ 
+ #endif
+ 
+-#endif //M_CUSTOM_FOLDERS_H
++#endif //M_CUSTOM_FOLDERS_H
+\ No newline at end of file
+Index: trunk/security.c
+===================================================================
+--- trunk/security.c	(Revision 116)
++++ trunk/security.c	(Arbeitskopie)
+@@ -93,7 +93,7 @@
+ 	if(!bEncoding)
+ 		return;
+ 	
+-	CryptoEngine->EncryptMem(dst, size, key);
++	CryptoEngine->EncryptMem((BYTE*)dst,(int) size, key);
+ }
+ 
+ void DecodeCopyMemory(void * dst, void * src, size_t size )
+@@ -103,7 +103,7 @@
+ 	if(!bEncoding)
+ 		return;
+ 
+-	CryptoEngine->DecryptMem(dst, size, key);
++	CryptoEngine->DecryptMem((BYTE*)dst, (int)size, key);
+ }
+ 
+ void EncodeDBWrite(DWORD ofs, void * src, size_t size)
+@@ -114,12 +114,12 @@
+ 		
+ 		buf = (BYTE*)GlobalAlloc(GPTR, sizeof(BYTE)*size);
+ 		EncodeCopyMemory(buf, src, size);
+-		DBWrite(ofs,buf,size);
++		DBWrite(ofs,buf,(int)size);
+ 		GlobalFree(buf);
+ 	}
+ 	else
+ 	{
+-		DBWrite(ofs,src,size);
++		DBWrite(ofs,src,(int)size);
+ 	}
+ }
+ 
+@@ -128,16 +128,14 @@
+ 	
+ 	if(bEncoding)
+ 	{
+-		BYTE * buf;
+-
+-		buf = (BYTE*)GlobalAlloc(GPTR, sizeof(BYTE)*size);
++		BYTE * buf = (BYTE*)GlobalAlloc(GPTR, sizeof(BYTE)*size);
+ 		DecodeCopyMemory(buf, src, size);
+-		DBWrite(ofs,buf,size);
++		DBWrite(ofs,buf,(int)size);
+ 		GlobalFree(buf);
+ 	}
+ 	else
+ 	{
+-		DBWrite(ofs,src,size);
++		DBWrite(ofs,src,(int)size);
+ 	}
+ }
+ 
+@@ -242,9 +240,7 @@
+ 
+ void EncodeAll()
+ {
+-	HANDLE hContact;
+-
+-	hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
++	HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
+ 	if(hContact){
+ 		do{
+ 			EncodeContactEvents(hContact);
+@@ -258,9 +254,7 @@
+ 
+ void DecodeAll()
+ {
+-	HANDLE hContact;	
+-	
+-	hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
++	HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
+ 	if(hContact){
+ 		do{
+ 			DecodeContactEvents(hContact);
+@@ -365,7 +359,7 @@
+ 
+ 	bEncoding = 0;
+ 
+-	zero_fill(encryptKey, sizeof encryptKey);
++	zero_fill((BYTE*)encryptKey, sizeof encryptKey);
+ 
+ 	if (gl_bUnicodeAwareCore)
+ 		xModifyMenu(hSetPwdMenu, 0, LPGENT("Set Password"), 0);
+@@ -421,7 +415,7 @@
+ 		CryptoEngine = NULL;
+ 		DBWriteContactSettingWord(NULL, "SecureMMAP", "CryptoModule", 0);
+ 
+-		zero_fill(encryptKey, sizeof encryptKey);
++		zero_fill((BYTE*)encryptKey, sizeof encryptKey);
+ 
+ 		if (gl_bUnicodeAwareCore)
+ 			xModifyMenu(hSetPwdMenu, 0, LPGENT("Set Password"), 0);
+@@ -442,7 +436,7 @@
+ 		WriteCryptHeader();
+ 	}
+ 
+-	zero_fill(newpass, sizeof newpass);
++	zero_fill((BYTE*)newpass, sizeof newpass);
+ 
+ 	LeaveCriticalSection(&csDbAccess);
+ }
+\ No newline at end of file

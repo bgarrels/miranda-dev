@@ -1,0 +1,564 @@
+diff -rduN1 SecureDB/commonheaders.h SecureDB-new/commonheaders.h
+--- SecureDB/commonheaders.h	Sat May 14 14:30:10 2005
++++ SecureDB-new/commonheaders.h	Thu Mar  2 17:36:12 2006
+@@ -38,2 +38,3 @@
+ #include <stdio.h>
++#include <string.h>
+ #include <time.h>
+@@ -55,2 +56,5 @@
+ extern struct MM_INTERFACE memoryManagerInterface;
++extern char gszMirandaDir[MAX_PATH];
++extern unsigned int giMirandaDirLen;
++#define DBVT_PATH   250	  //pszVal is valid
+ 
+@@ -66 +70,4 @@
+ #endif
++
++
++
+diff -rduN1 SecureDB/database.c SecureDB-new/database.c
+--- SecureDB/database.c	Fri May 13 12:06:42 2005
++++ SecureDB-new/database.c	Thu Mar  2 04:50:52 2006
+@@ -24,2 +24,3 @@
+ #include "database.h"
++#include "SecureDB.h"
+ 
+@@ -110,4 +111,8 @@
+ 
++char gszMirandaDir[MAX_PATH];
++unsigned int giMirandaDirLen;
++
+ int LoadDatabaseModule(void)
+ {
++	static int sec=0;
+ 	InitializeCriticalSection(&csDbAccess);
+@@ -125,2 +130,6 @@
+ 	}
++	CheckDbHeaders(&dbHeader,&sec);
++	if(sec && EncGetPassword(&dbHeader,szDbPath)){
++		return 1;
++	}
+ 	//if(ParseCommandLine()) return 1;
+diff -rduN1 SecureDB/database.h SecureDB-new/database.h
+--- SecureDB/database.h	Fri May 13 17:04:42 2005
++++ SecureDB-new/database.h	Thu Mar  2 17:37:14 2006
+@@ -186,2 +186,5 @@
+ void UnloadDatabaseModule(void);
++void Utf8Decode( char* str, wchar_t** ucs2 );
++char* Utf8Encode( const char* src );
++char* Utf8EncodeUcs2( const wchar_t* src );
+ 
+diff -rduN1 SecureDB/dbcache.c SecureDB-new/dbcache.c
+--- SecureDB/dbcache.c	Fri May 13 17:06:08 2005
++++ SecureDB-new/dbcache.c	Thu Mar  2 04:34:38 2006
+@@ -27,2 +27,3 @@
+ #include "database.h"
++#include "SecureDB.h"
+ 
+diff -rduN1 SecureDB/dbheaders.c SecureDB-new/dbheaders.c
+--- SecureDB/dbheaders.c	Fri May 13 14:52:04 2005
++++ SecureDB-new/dbheaders.c	Thu Mar  2 04:35:10 2006
+@@ -25,2 +25,3 @@
+ #include "database.h"
++#include "SecureDB.h"
+ 
+diff -rduN1 SecureDB/dblists.h SecureDB-new/dblists.h
+--- SecureDB/dblists.h	Wed Oct 20 15:57:32 2004
++++ SecureDB-new/dblists.h	Thu Mar  2 17:41:40 2006
+@@ -24,3 +24,3 @@
+ /* a simple sorted list implementation */
+-
++/*// SortedList structure is defined in newer m_system.h
+ typedef int ( *FSortFunc )( void*, void* );
+@@ -37,3 +37,3 @@
+ 	SortedList;
+-
++*/
+ SortedList* List_Create( int, int );
+diff -rduN1 SecureDB/dbsettings.c SecureDB-new/dbsettings.c
+--- SecureDB/dbsettings.c	Mon May 23 23:44:22 2005
++++ SecureDB-new/dbsettings.c	Thu Mar  2 17:51:36 2006
+@@ -30,2 +30,3 @@
+ static int GetContactSetting(WPARAM wParam,LPARAM lParam);
++static int GetContactSettingStr(WPARAM wParam,LPARAM lParam);
+ static int GetContactSettingStatic(WPARAM wParam,LPARAM lParam);
+@@ -77,2 +78,3 @@
+ 	CreateServiceFunction(MS_DB_CONTACT_GETSETTING,GetContactSetting);
++	CreateServiceFunction(MS_DB_CONTACT_GETSETTING_STR,GetContactSettingStr);
+ 	CreateServiceFunction(MS_DB_CONTACT_GETSETTINGSTATIC,GetContactSettingStatic);
+@@ -167,6 +169,6 @@
+ {
+-	char* szSave = d->type == DBVT_ASCIIZ ? d->pszVal : NULL;
++	char* szSave = ( d->type == DBVT_UTF8 || d->type == DBVT_ASCIIZ ) ? d->pszVal : NULL;
+ 
+ 	memcpy( d, s, sizeof( DBVARIANT ));
+-	if ( s->type == DBVT_ASCIIZ && s->pszVal != NULL ) {
++	if (( s->type == DBVT_UTF8 || s->type == DBVT_ASCIIZ ) && s->pszVal != NULL ) {
+ 		if ( szSave != NULL )
+@@ -182,2 +184,3 @@
+ 		case DBVT_DWORD:	log1( "set cached dword: %d", d->dVal ); break;
++		case DBVT_UTF8:
+ 		case DBVT_ASCIIZ: log1( "set cached string: '%s'", d->pszVal ); break;
+@@ -188,3 +191,3 @@
+ {
+-	if ( V->type == DBVT_ASCIIZ && V->pszVal != NULL )
++	if (( V->type == DBVT_ASCIIZ || V->type == DBVT_UTF8 ) && V->pszVal != NULL )
+ 		HeapFree(hCacheHeap,HEAP_NO_SERIALIZE,V->pszVal);
+@@ -266,2 +269,3 @@
+ #define MoveAlong(n)   {int x=n; pBlob+=(x); ofsBlobPtr+=(x); bytesRemaining-=(x);}
++#define VLT(n) (((n==DBVT_UTF8)||(n==DBVT_PATH))?DBVT_ASCIIZ:n)
+ static __inline int GetContactSettingWorker(HANDLE hContact,DBCONTACTGETSETTING *dbcgs,int isStatic)
+@@ -291,3 +295,3 @@
+ 			memcpy( dbcgs->pValue, pCachedValue, sizeof( DBVARIANT ));
+-			if ( pCachedValue->type == DBVT_ASCIIZ ) {
++			if ( pCachedValue->type == DBVT_ASCIIZ || pCachedValue->type == DBVT_UTF8 ) {
+ 				if ( isStatic ) {
+@@ -313,2 +317,3 @@
+ 				case DBVT_DWORD:	log1( "get cached dword: %d", dbcgs->pValue->dVal ); break;
++				case DBVT_UTF8:
+ 				case DBVT_ASCIIZ: log1( "get cached string: '%s'", dbcgs->pValue->pszVal); break;
+@@ -339,3 +344,3 @@
+ 				NeedBytes(5);
+-				if(isStatic && pBlob[0]&DBVTF_VARIABLELENGTH && dbcgs->pValue->type!=pBlob[0]) {
++				if(isStatic && pBlob[0]&DBVTF_VARIABLELENGTH && VLT(dbcgs->pValue->type) != VLT(pBlob[0])) {
+ 					LeaveCriticalSection(&csDbAccess);
+@@ -353,2 +358,37 @@
+ 					case DBVT_DWORD: dbcgs->pValue->dVal=*(PDWORD)(pBlob+1); break;
++					case DBVT_PATH:
++						// For cache / outter world, this is a asciiz
++						dbcgs->pValue->type=DBVT_ASCIIZ;
++
++						NeedBytes(3+*(PWORD)(pBlob+1));
++						if(isStatic) {
++							dbcgs->pValue->cchVal--;
++
++							if(*(PWORD)(pBlob+1) + giMirandaDirLen < dbcgs->pValue->cchVal)
++									dbcgs->pValue->cchVal = *(PWORD)(pBlob+1) + giMirandaDirLen;
++
++
++							if (dbcgs->pValue->cchVal <= giMirandaDirLen)
++							{
++								CopyMemory(dbcgs->pValue->pszVal, gszMirandaDir, dbcgs->pValue->cchVal);
++							}
++							else
++							{
++								CopyMemory(dbcgs->pValue->pszVal, gszMirandaDir, giMirandaDirLen);
++								CopyMemory(dbcgs->pValue->pszVal + giMirandaDirLen, pBlob+3,
++										dbcgs->pValue->cchVal - giMirandaDirLen);
++							}
++
++							dbcgs->pValue->pszVal[dbcgs->pValue->cchVal]=0;
++							dbcgs->pValue->cchVal=*(PWORD)(pBlob+1) + giMirandaDirLen;
++						}
++						else
++						{
++							dbcgs->pValue->pszVal=(char*)mir_alloc(1+*(PWORD)(pBlob+1)+giMirandaDirLen);
++							CopyMemory(dbcgs->pValue->pszVal,gszMirandaDir,giMirandaDirLen);
++							CopyMemory(dbcgs->pValue->pszVal+giMirandaDirLen,pBlob+3,*(PWORD)(pBlob+1));
++							dbcgs->pValue->pszVal[giMirandaDirLen+*(PWORD)(pBlob+1)]=0;
++						}
++						break;
++					case DBVT_UTF8:
+ 					case DBVT_ASCIIZ:
+@@ -416,3 +456,60 @@
+ {
+-	return GetContactSettingWorker((HANDLE)wParam,(DBCONTACTGETSETTING*)lParam,0);
++	DBCONTACTGETSETTING* dgs = ( DBCONTACTGETSETTING* )lParam;
++	dgs->pValue->type = 0;
++	if ( GetContactSettingWorker(( HANDLE )wParam, dgs, 0 ))
++		return 1;
++
++	if ( dgs->pValue->type == DBVT_UTF8 ) {
++		Utf8Decode( dgs->pValue->pszVal, NULL );
++		dgs->pValue->type = DBVT_ASCIIZ;
++	}
++
++	return 0;
++}
++
++static int GetContactSettingStr(WPARAM wParam,LPARAM lParam)
++{
++	DBCONTACTGETSETTING* dgs = (DBCONTACTGETSETTING*)lParam;
++	int iSaveType = dgs->pValue->type;
++
++	if ( GetContactSettingWorker(( HANDLE )wParam, dgs, 0 ))
++		return 1;
++
++   if ( iSaveType == 0 || iSaveType == dgs->pValue->type )
++		return 0;
++
++	if ( dgs->pValue->type != DBVT_ASCIIZ && dgs->pValue->type != DBVT_UTF8 )
++		return 0;
++
++	if ( iSaveType == DBVT_WCHAR ) {
++		if ( dgs->pValue->type != DBVT_UTF8 ) {
++			int len = MultiByteToWideChar( CP_ACP, 0, dgs->pValue->pszVal, -1, NULL, 0 );
++			wchar_t* wszResult = ( wchar_t* )mir_alloc(( len+1 )*sizeof( wchar_t ));
++			if ( wszResult == NULL )
++				return 1;
++
++			MultiByteToWideChar( CP_ACP, 0, dgs->pValue->pszVal, -1, wszResult, len );
++			wszResult[ len ] = 0;
++			mir_free( dgs->pValue->pszVal );
++			dgs->pValue->pwszVal = wszResult;
++		}
++		else {
++			char* savePtr = dgs->pValue->pszVal;
++			Utf8Decode( dgs->pValue->pszVal, &dgs->pValue->pwszVal );
++			mir_free( savePtr );
++		}
++	}
++	else if ( iSaveType == DBVT_UTF8 ) {
++		char* tmpBuf = Utf8Encode( dgs->pValue->pszVal );
++		if ( tmpBuf == NULL )
++			return 1;
++
++		mir_free( dgs->pValue->pszVal );
++		dgs->pValue->pszVal = tmpBuf;
++	}
++	else if ( iSaveType == DBVT_ASCIIZ )
++		Utf8Decode( dgs->pValue->pszVal, NULL );
++
++	dgs->pValue->type = iSaveType;
++	return 0;
+ }
+@@ -421,3 +518,12 @@
+ {
+-	return GetContactSettingWorker((HANDLE)wParam,(DBCONTACTGETSETTING*)lParam,1);
++	DBCONTACTGETSETTING* dgs = (DBCONTACTGETSETTING*)lParam;
++	if ( GetContactSettingWorker(( HANDLE )wParam, dgs, 1 ))
++		return 1;
++
++	if ( dgs->pValue->type == DBVT_UTF8 ) {
++		Utf8Decode( dgs->pValue->pszVal, NULL );
++		dgs->pValue->type = DBVT_ASCIIZ;
++	}
++
++	return 0;
+ }
+@@ -429,3 +535,6 @@
+ 	switch ( dbv->type ) {
++		case DBVT_PATH:
+ 		case DBVT_ASCIIZ:
++		case DBVT_UTF8:
++		case DBVT_WCHAR:
+ 		{
+@@ -456,2 +565,3 @@
+ 	int settingDataLen=0;
++	char szTmpPath[MAX_PATH];
+ 
+@@ -460,6 +570,22 @@
+ 
+-	if (dbcws == NULL) return 1;
+-	if(dbcws->value.type!=DBVT_BYTE && dbcws->value.type!=DBVT_WORD && dbcws->value.type!=DBVT_DWORD && dbcws->value.type!=DBVT_ASCIIZ && dbcws->value.type!=DBVT_BLOB)
++	if (dbcws == NULL) 
+ 		return 1;
+-	if ((!dbcws->szModule) || (!dbcws->szSetting) || (dbcws->value.type == DBVT_ASCIIZ && dbcws->value.pszVal == NULL) || (dbcws->value.type == DBVT_BLOB && dbcws->value.pbVal == NULL) )
++
++	if (dbcws->value.type == DBVT_WCHAR) {
++		if (dbcws->value.pszVal != NULL) {
++			char* val = Utf8EncodeUcs2(dbcws->value.pwszVal);
++			if ( val == NULL )
++				return 1;
++
++			dbcws->value.pszVal = ( char* )alloca( strlen( val )+1 );
++			strcpy( dbcws->value.pszVal, val );
++			free(val);
++			dbcws->value.type = DBVT_UTF8;
++		}
++		else return 1;
++	}
++
++	if(dbcws->value.type!=DBVT_BYTE && dbcws->value.type!=DBVT_WORD && dbcws->value.type!=DBVT_DWORD && dbcws->value.type!=DBVT_ASCIIZ && dbcws->value.type!=DBVT_UTF8 && dbcws->value.type!=DBVT_BLOB)
++		return 1;
++	if ((!dbcws->szModule) || (!dbcws->szSetting) || ((dbcws->value.type == DBVT_ASCIIZ || dbcws->value.type == DBVT_UTF8 )&& dbcws->value.pszVal == NULL) || (dbcws->value.type == DBVT_BLOB && dbcws->value.pbVal == NULL) )
+ 		return 1;
+@@ -482,8 +608,8 @@
+ 	}
+-	// the db can not tolerate strings/blobs longer than 0xFFFF since the format writes 2 lengths
+-	if ( dbcws->value.type == DBVT_ASCIIZ || dbcws->value.type == DBVT_BLOB ) {
+-		int len = ( dbcws->value.type == DBVT_ASCIIZ ) ? strlen(dbcws->value.pszVal) : dbcws->value.cpbVal;
+-		if ( len >= 0xFFFF ) {
++	if ( dbcws->value.type == DBVT_WCHAR )
++	{	
++		char* tmpbuf = Utf8EncodeUcs2( dbcws->value.pwszVal );
++		if ( tmpbuf == NULL ) {
+ 			#ifdef _DEBUG
+-			OutputDebugString("WriteContactSetting() writing huge string/blob, rejecting ( >= 0xFFFF ) \n");
++				OutputDebugString("WriteContactSetting(): memory allocation failure.\n");
+ 			#endif
+@@ -491,4 +617,20 @@
+ 		}
++
++		mir_free( dbcws->value.pwszVal );
++		dbcws->value.pszVal = tmpbuf;
++		dbcws->value.type = DBVT_UTF8;
+ 	}
+ 
++	// the db can not tolerate strings/blobs longer than 0xFFFF since the format writes 2 lengths
++	switch( dbcws->value.type ) {
++	case DBVT_ASCIIZ:		case DBVT_BLOB:	case DBVT_UTF8:
++		{	int len = ( dbcws->value.type != DBVT_BLOB ) ? strlen(dbcws->value.pszVal) : dbcws->value.cpbVal;
++			if ( len >= 0xFFFF ) {
++				#ifdef _DEBUG
++					OutputDebugString("WriteContactSetting() writing huge string/blob, rejecting ( >= 0xFFFF ) \n");
++				#endif
++				return 1;
++			}
++		}
++	}
+ 	EnterCriticalSection(&csDbAccess);
+@@ -505,2 +647,4 @@
+ 						case DBVT_DWORD:  bIsIdentical = pCachedValue->dVal == dbcws->value.dVal;  break;
++						case DBVT_UTF8:
++						case DBVT_PATH:
+ 						case DBVT_ASCIIZ: bIsIdentical = strcmp( pCachedValue->pszVal, dbcws->value.pszVal ) == 0; break;
+@@ -528,2 +672,9 @@
+ 	log0("write setting");
++	if ( dbcws->value.type == DBVT_ASCIIZ && strnicmp(gszMirandaDir, dbcws->value.pszVal, giMirandaDirLen) == 0
++		&& strlen(dbcws->value.pszVal) < MAX_PATH )
++	{
++		strcpy(szTmpPath, &dbcws->value.pszVal[giMirandaDirLen]);
++		dbcws->value.pszVal = szTmpPath;
++		dbcws->value.type = DBVT_PATH;
++	}
+ 	//make sure the module group exists
+@@ -532,3 +683,3 @@
+ 		if(dbcws->value.type&DBVTF_VARIABLELENGTH) {
+-		  if(dbcws->value.type==DBVT_ASCIIZ) bytesRequired=strlen(dbcws->value.pszVal)+2;
++ 		  if(dbcws->value.type==DBVT_ASCIIZ || dbcws->value.type==DBVT_UTF8 || dbcws->value.type==DBVT_PATH) bytesRequired=strlen(dbcws->value.pszVal)+2;
+ 		  else if(dbcws->value.type==DBVT_BLOB) bytesRequired=dbcws->value.cpbVal+2;
+@@ -569,3 +720,3 @@
+ 			NeedBytes(3);
+-			if(pBlob[0]!=dbcws->value.type || (pBlob[0]==DBVT_ASCIIZ && *(PWORD)(pBlob+1)!=strlen(dbcws->value.pszVal)) || (pBlob[0]==DBVT_BLOB && *(PWORD)(pBlob+1)!=dbcws->value.cpbVal)) {
++ 			if(pBlob[0]!=dbcws->value.type || ((pBlob[0]==DBVT_ASCIIZ || pBlob[0]==DBVT_UTF8 || pBlob[0]==DBVT_PATH) && *(PWORD)(pBlob+1)!=strlen(dbcws->value.pszVal)) || (pBlob[0]==DBVT_BLOB && *(PWORD)(pBlob+1)!=dbcws->value.cpbVal)) {
+ 				//bin it
+@@ -596,2 +747,4 @@
+ 					case DBVT_DWORD: DBWrite(ofsBlobPtr,&dbcws->value.dVal,4); break;
++					case DBVT_PATH:
++					case DBVT_UTF8:
+ 					case DBVT_ASCIIZ: DBWrite(ofsBlobPtr+2,dbcws->value.pszVal,strlen(dbcws->value.pszVal)); break;
+@@ -612,3 +765,3 @@
+ 	if(dbcws->value.type&DBVTF_VARIABLELENGTH) {
+-	  if(dbcws->value.type==DBVT_ASCIIZ) bytesRequired=strlen(dbcws->value.pszVal)+2;
++ 	  if(dbcws->value.type==DBVT_ASCIIZ || dbcws->value.type==DBVT_UTF8 || dbcws->value.type==DBVT_PATH) bytesRequired=strlen(dbcws->value.pszVal)+2;
+ 	  else if(dbcws->value.type==DBVT_BLOB) bytesRequired=dbcws->value.cpbVal+2;
+@@ -667,2 +820,4 @@
+ 		case DBVT_DWORD: DBWrite(ofsBlobPtr,&dbcws->value.dVal,4); MoveAlong(4); break;
++		case DBVT_PATH:
++		case DBVT_UTF8:
+ 		case DBVT_ASCIIZ:
+diff -rduN1 SecureDB/init.c SecureDB-new/init.c
+--- SecureDB/init.c	Sat May 14 15:26:42 2005
++++ SecureDB-new/init.c	Thu Mar  2 04:44:52 2006
+@@ -77,6 +77,2 @@
+ 
+-	if(sec && EncGetPassword(&hdr,profile)){
+-		return 1;
+-	}
+-
+ 	if ( chk == 0 ) {
+@@ -159,7 +155,7 @@
+ 	"Miranda SecureDB driver",
+-	PLUGIN_MAKE_VERSION(0,5,0,0),
+-	"Provides Miranda database support: encryption, global settings, contacts, history, settings per contact.",
+-	"Miranda-IM project; Piotr Pawluczuk;",
++	PLUGIN_MAKE_VERSION(0,5,1,0),
++	"Provides Miranda database support: encryption, global settings, contacts, history, settings per contact, optimized paths.",
++	"Miranda-IM project; Piotr Pawluczuk; Pescuma",
+ 	"egodust@users.sourceforge.net; piotrek@piopawlu.net",
+-	"Copyright 2000-2005 Miranda-IM project; Piotr Pawluczuk",
++	"Copyright 2000-2005 Miranda-IM project; Piotr Pawluczuk; Pescuma",
+ 	"www.miranda-im.org; www.piopawlu.net",
+diff -rduN1 SecureDB/resource.rc SecureDB-new/resource.rc
+--- SecureDB/resource.rc	Sun Jun 12 11:14:56 2005
++++ SecureDB-new/resource.rc	Thu Mar  2 04:57:26 2006
+@@ -190,4 +190,4 @@
+ VS_VERSION_INFO VERSIONINFO
+- FILEVERSION 1,0,0,1
+- PRODUCTVERSION 1,0,0,1
++ FILEVERSION 0,5,1,5
++ PRODUCTVERSION 0,5,1,0
+  FILEFLAGSMASK 0x17L
+@@ -207,8 +207,8 @@
+             VALUE "FileDescription", "db3xS"
+-            VALUE "FileVersion", "1, 0, 0, 2"
++            VALUE "FileVersion", "0, 5, 1, 5"
+             VALUE "InternalName", "db3xS"
+-            VALUE "LegalCopyright", "Copyright (C) 2005; (S) Piotr Pawluczuk"
++            VALUE "LegalCopyright", "Copyright (C) 2005; (S) Piotr Pawluczuk; Pescuma"
+             VALUE "OriginalFilename", "db3xS.dll"
+             VALUE "ProductName", " db3xS"
+-            VALUE "ProductVersion", "1, 0, 0, 2"
++            VALUE "ProductVersion", "0, 5, 1, 0"
+         END
+diff -rduN1 SecureDB/utf.c SecureDB-new/utf.c
+--- SecureDB/utf.c	Thu Jan  1 01:00:00 1970
++++ SecureDB-new/utf.c	Wed Sep 28 00:22:38 2005
+@@ -0,0 +1,166 @@
++/*
++
++Miranda IM: the free IM client for Microsoft* Windows*
++
++Copyright 2000-2003 Miranda ICQ/IM project, 
++all portions of this codebase are copyrighted to the people 
++listed in contributors.txt.
++
++This program is free software; you can redistribute it and/or
++modify it under the terms of the GNU General Public License
++as published by the Free Software Foundation; either version 2
++of the License, or (at your option) any later version.
++
++This program is distributed in the hope that it will be useful,
++but WITHOUT ANY WARRANTY; without even the implied warranty of
++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++GNU General Public License for more details.
++
++You should have received a copy of the GNU General Public License
++along with this program; if not, write to the Free Software
++Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++*/
++
++#include "commonheaders.h"
++#include "database.h"
++
++/////////////////////////////////////////////////////////////////////////////////////////
++// Utf8Decode - converts UTF8-encoded string to the UCS2/MBCS format
++
++void Utf8Decode( char* str, wchar_t** ucs2 )
++{
++	int len;
++	wchar_t* tempBuf;
++
++	if ( str == NULL )
++		return;
++
++	len = strlen( str );
++	if ( len < 2 ) {
++		if ( ucs2 != NULL ) {
++			*ucs2 = ( wchar_t* )mir_alloc(( len+1 )*sizeof( wchar_t ));
++			MultiByteToWideChar( CP_ACP, 0, str, len, *ucs2, len );
++			( *ucs2 )[ len ] = 0;
++		}
++		return;
++	}
++
++	tempBuf = ( wchar_t* )alloca(( len+1 )*sizeof( wchar_t ));
++	{
++		wchar_t* d = tempBuf;
++		BYTE* s = ( BYTE* )str;
++
++		while( *s )
++		{
++			if (( *s & 0x80 ) == 0 ) {
++				*d++ = *s++;
++				continue;
++			}
++
++			if (( s[0] & 0xE0 ) == 0xE0 && ( s[1] & 0xC0 ) == 0x80 && ( s[2] & 0xC0 ) == 0x80 ) {
++				*d++ = (( WORD )( s[0] & 0x0F) << 12 ) + ( WORD )(( s[1] & 0x3F ) << 6 ) + ( WORD )( s[2] & 0x3F );
++				s += 3;
++				continue;
++			}
++
++			if (( s[0] & 0xE0 ) == 0xC0 && ( s[1] & 0xC0 ) == 0x80 ) {
++				*d++ = ( WORD )(( s[0] & 0x1F ) << 6 ) + ( WORD )( s[1] & 0x3F );
++				s += 2;
++				continue;
++			}
++
++			*d++ = *s++;
++		}
++
++		*d = 0;
++	}
++
++	if ( ucs2 != NULL ) {
++		int fullLen = ( len+1 )*sizeof( wchar_t );
++		*ucs2 = ( wchar_t* )mir_alloc( fullLen );
++		memcpy( *ucs2, tempBuf, fullLen );
++	}
++
++   WideCharToMultiByte( CP_ACP, 0, tempBuf, -1, str, len, NULL, NULL );
++}
++
++/////////////////////////////////////////////////////////////////////////////////////////
++// Utf8Encode - converts MBCS string to the UTF8-encoded format
++
++char* Utf8Encode( const char* src )
++{
++	int len;
++	char* result;
++	wchar_t* tempBuf;
++
++	if ( src == NULL )
++		return NULL;
++
++	len = strlen( src );
++	result = ( char* )mir_alloc( len*3 + 1 );
++	if ( result == NULL )
++		return NULL;
++
++	tempBuf = ( wchar_t* )alloca(( len+1 )*sizeof( wchar_t ));
++	MultiByteToWideChar( CP_ACP, 0, src, -1, tempBuf, len );
++	tempBuf[ len ] = 0;
++	{
++		wchar_t* s = tempBuf;
++		BYTE*		d = ( BYTE* )result;
++
++		while( *s ) {
++			int U = *s++;
++
++			if ( U < 0x80 ) {
++				*d++ = ( BYTE )U;
++			}
++			else if ( U < 0x800 ) {
++				*d++ = 0xC0 + (( U >> 6 ) & 0x3F );
++				*d++ = 0x80 + ( U & 0x003F );
++			}
++			else {
++				*d++ = 0xE0 + ( U >> 12 );
++				*d++ = 0x80 + (( U >> 6 ) & 0x3F );
++				*d++ = 0x80 + ( U & 0x3F );
++		}	}
++
++		*d = 0;
++	}
++
++	return result;
++}
++
++/////////////////////////////////////////////////////////////////////////////////////////
++// Utf8Encode - converts UCS2 string to the UTF8-encoded format
++
++char* Utf8EncodeUcs2( const wchar_t* src )
++{
++	int len = wcslen( src );
++	char* result = ( char* )mir_alloc( len*3 + 1 );
++	if ( result == NULL )
++		return NULL;
++
++	{	const wchar_t* s = src;
++		BYTE*	d = ( BYTE* )result;
++
++		while( *s ) {
++			int U = *s++;
++
++			if ( U < 0x80 ) {
++				*d++ = ( BYTE )U;
++			}
++			else if ( U < 0x800 ) {
++				*d++ = 0xC0 + (( U >> 6 ) & 0x3F );
++				*d++ = 0x80 + ( U & 0x003F );
++			}
++			else {
++				*d++ = 0xE0 + ( U >> 12 );
++				*d++ = 0x80 + (( U >> 6 ) & 0x3F );
++				*d++ = 0x80 + ( U & 0x3F );
++		}	}
++
++		*d = 0;
++	}
++
++	return result;
++}
