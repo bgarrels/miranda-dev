@@ -1,0 +1,50 @@
+Index: jabber_db_utils.h
+===================================================================
+--- jabber_db_utils.h	(revision 12323)
++++ jabber_db_utils.h	(working copy)
+@@ -203,6 +203,8 @@
+ 	CMOption<BYTE> IgnoreMUCInvites;
+ 	CMOption<BYTE> KeepAlive;
+ 	CMOption<BYTE> LogChatstates;
++	//NightFox: none
++	CMOption<BYTE> SendChatstate;
+ 	CMOption<BYTE> LogPresence;
+ 	CMOption<BYTE> LogPresenceErrors;
+ 	CMOption<BYTE> ManualConnect;
+@@ -254,6 +256,8 @@
+ 		IgnoreMUCInvites(proto, "IgnoreMUCInvites", FALSE),
+ 		KeepAlive(proto, "KeepAlive", 1),
+ 		LogChatstates(proto, "LogChatstates", FALSE),
++		//NightFox: none
++		SendChatstate(proto, "SendChatstate", FALSE),
+ 		LogPresence(proto, "LogPresence", TRUE),
+ 		LogPresenceErrors(proto, "LogPresenceErrors", FALSE),
+ 		ManualConnect(proto, "ManualConnect", FALSE),
+Index: jabber_menu.cpp
+===================================================================
+--- jabber_menu.cpp	(revision 12323)
++++ jabber_menu.cpp	(working copy)
+@@ -1123,7 +1123,9 @@
+ 
+ 			JABBER_RESOURCE_STATUS *r = ResourceInfoFromJID( jid );
+ 
+-			if ( r && r->bMessageSessionActive ) {
++				//NightFox: none
++//				if ( jcb & JABBER_CAPS_CHATSTATES ) {
++				if ( jcb & JABBER_CAPS_CHATSTATES && m_options.SendChatstate) {
+ 				r->bMessageSessionActive = FALSE;
+ 				JabberCapsBits jcb = GetResourceCapabilites( jid, TRUE );
+ 
+Index: jabber_opt.cpp
+===================================================================
+--- jabber_opt.cpp	(revision 12323)
++++ jabber_opt.cpp	(working copy)
+@@ -816,6 +816,8 @@
+ 		m_otvOptions.AddOption(LPGENT("Messaging") _T("/") LPGENT("Send messages slower, but with full acknowledgement"), m_proto->m_options.MsgAck);
+ 		m_otvOptions.AddOption(LPGENT("Messaging") _T("/") LPGENT("Enable avatars"), m_proto->m_options.EnableAvatars);
+ 		m_otvOptions.AddOption(LPGENT("Messaging") _T("/") LPGENT("Log chat state changes"), m_proto->m_options.LogChatstates);
++		//NightFox: none
++		m_otvOptions.AddOption(LPGENT("Messaging") _T("/") LPGENT("Notify users when the chat session is closed"), m_proto->m_options.SendChatstate);
+ 		m_otvOptions.AddOption(LPGENT("Messaging") _T("/") LPGENT("Log presence subscription state changes"), m_proto->m_options.LogPresence);
+ 		m_otvOptions.AddOption(LPGENT("Messaging") _T("/") LPGENT("Log presence errors"), m_proto->m_options.LogPresenceErrors);
+ 		m_otvOptions.AddOption(LPGENT("Messaging") _T("/") LPGENT("Enable user moods receiving"), m_proto->m_options.EnableUserMood);

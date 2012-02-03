@@ -1,0 +1,614 @@
+/* x64-Patch for Twitter Miranda IM Plugin 
+Please use latest Stable Boost Lib C++ Lib, you can get it here: http://sourceforge.net/projects/boost/files/boost/1.48.0/
+and use the latest Miranda Sources http://miranda.googlecode.com/svn/trunk
+I played all this needed stuff an my Desktop, so you may change the paths */
+
+/* I also fixed some mem leaks, that's not in this patch, if you interesting in this you can ask me */ 
+
+Index: connection.cpp
+===================================================================
+--- connection.cpp	(Revision 11)
++++ connection.cpp	(Arbeitskopie)
+@@ -104,21 +104,21 @@
+ 	wstring oauthAccessTokenSecret;
+ 	string screenName;
+ 
+-	int dbTOK = DBGetContactSettingWString(0,m_szModuleName,TWITTER_KEY_OAUTH_TOK,&dbv);
++	INT_PTR dbTOK = DBGetContactSettingWString(0,m_szModuleName,TWITTER_KEY_OAUTH_TOK,&dbv);
+ 	if (!dbTOK) {
+ 		oauthToken = dbv.pwszVal;
+ 		DBFreeVariant(&dbv);
+ 		//WLOG("**NegotiateConnection - we have an oauthToken already in the db - %s", oauthToken);
+ 	}
+  
+-	int dbTOKSec = DBGetContactSettingWString(0,m_szModuleName,TWITTER_KEY_OAUTH_TOK_SECRET,&dbv);
++	INT_PTR dbTOKSec = DBGetContactSettingWString(0,m_szModuleName,TWITTER_KEY_OAUTH_TOK_SECRET,&dbv);
+ 	if (!dbTOKSec) {
+ 		oauthTokenSecret = dbv.pwszVal;
+ 		DBFreeVariant(&dbv);
+ 		//WLOG("**NegotiateConnection - we have an oauthTokenSecret already in the db - %s", oauthTokenSecret);
+ 	}
+ 
+-	int dbName = DBGetContactSettingString(0,m_szModuleName,TWITTER_KEY_NICK,&dbv);
++	INT_PTR dbName = DBGetContactSettingString(0,m_szModuleName,TWITTER_KEY_NICK,&dbv);
+ 	if (!dbName) {
+ 		screenName = dbv.pszVal;
+ 		DBFreeVariant(&dbv);
+Index: m_folders.h
+===================================================================
+--- m_folders.h	(Revision 11)
++++ m_folders.h	(Arbeitskopie)
+@@ -27,32 +27,42 @@
+ #define CURRENT_PROFILE "%current_profile%"
+ #define MIRANDA_PATH "%miranda_path%"
+ #define PLUGINS_PATH "%miranda_path%" "\\plugins"
++#define MIRANDA_USERDATA "%miranda_userdata%"
+ 
+-#define TO_WIDE(x)     L ## x
+-
+ #define PROFILE_PATHW    L"%profile_path%"
+ #define CURRENT_PROFILEW L"%current_profile%"
+ #define MIRANDA_PATHW    L"%miranda_path%"
++#define MIRANDA_USERDATAW L"%miranda_userdata%"
+ 
+-#define FOLDER_AVATARS                 PROFILE_PATH "\\" CURRENT_PROFILE "\\avatars"
+-#define FOLDER_VCARDS                  PROFILE_PATH "\\" CURRENT_PROFILE "\\vcards"
+-#define FOLDER_LOGS                    PROFILE_PATH "\\" CURRENT_PROFILE "\\logs"
+-#define FOLDER_RECEIVED_FILES          PROFILE_PATH "\\" CURRENT_PROFILE "\\received files"
+-#define FOLDER_DOCS                    MIRANDA_PATH "\\" "docs"
++#ifdef _UNICODE	
++	#define PROFILE_PATHT		PROFILE_PATHW
++	#define CURRENT_PROFILET	CURRENT_PROFILEW
++	#define MIRANDA_PATHT		MIRANDA_PATHW
++	#define MIRANDA_USERDATAT	MIRANDA_USERDATAW
++#else
++	#define PROFILE_PATHT		PROFILE_PATH
++	#define CURRENT_PROFILET	CURRENT_PROFILE
++	#define MIRANDA_PATHT		MIRANDA_PATH
++	#define MIRANDA_USERDATAT	MIRANDA_USERDATA
++#endif
+ 
+-#define FOLDER_CONFIG                  PLUGINS_PATH "\\" "config"
++#define FOLDER_AVATARS                 PROFILE_PATHT "\\" CURRENT_PROFILET "\\avatars"
++#define FOLDER_VCARDS                  PROFILE_PATHT "\\" CURRENT_PROFILET "\\vcards"
++#define FOLDER_LOGS                    PROFILE_PATHT "\\" CURRENT_PROFILET "\\logs"
++#define FOLDER_RECEIVED_FILES          PROFILE_PATHT "\\" CURRENT_PROFILET "\\received files"
++#define FOLDER_DOCS                    MIRANDA_PATHT "\\" "docs"
++#define FOLDER_CONFIG                  PLUGINS_PATHT "\\" "config"
++#define FOLDER_SCRIPTS                 MIRANDA_PATHT "\\" "scripts"
++#define FOLDER_UPDATES                 MIRANDA_PATHT "\\" "updates"
+ 
+-#define FOLDER_SCRIPTS                 MIRANDA_PATH "\\" "scripts"
+-
+-#define FOLDER_UPDATES                 MIRANDA_PATH "\\" "updates"
+-
+-#define FOLDER_CUSTOMIZE               MIRANDA_PATH "\\" "customize"
++#define FOLDER_CUSTOMIZE               MIRANDA_PATHT "\\" "customize"
+ #define FOLDER_CUSTOMIZE_SOUNDS        FOLDER_CUSTOMIZE "\\sounds"
+ #define FOLDER_CUSTOMIZE_ICONS         FOLDER_CUSTOMIZE "\\icons"
+ #define FOLDER_CUSTOMIZE_SMILEYS       FOLDER_CUSTOMIZE "\\smileys"
+ #define FOLDER_CUSTOMIZE_SKINS         FOLDER_CUSTOMIZE "\\skins"
+ #define FOLDER_CUSTOMIZE_THEMES        FOLDER_CUSTOMIZE "\\themes"
+ 
++#define TO_WIDE(x)     L ## x
+ 
+ #define FOLDERS_NAME_MAX_SIZE 64  //maximum name and section size
+ 
+@@ -78,16 +88,16 @@
+ 
+ /*Folders/Register/Path service
+   wParam - not used, must be 0
+-  lParam - (LPARAM) (const FOLDERDATA *) - Data structure filled with 
++  lParam - (LPARAM) (const FOLDERDATA *) - Data structure filled with
+   the necessary information.
+-  Returns a handle to the registered path or 0 on error. 
++  Returns a handle to the registered path or 0 on error.
+   You need to use this to call the other services.
+ */
+ #define MS_FOLDERS_REGISTER_PATH "Folders/Register/Path"
+ 
+ /*Folders/Get/PathSize service
+   wParam - (WPARAM) (int) - handle to registered path
+-  lParam - (LPARAM) (int *) - pointer to the variable that receives the size of the path 
++  lParam - (LPARAM) (int *) - pointer to the variable that receives the size of the path
+   string (not including the null character). Depending on the flags set when creating the path
+   it will either call strlen() or wcslen() to get the length of the string.
+   Returns the size of the buffer.
+@@ -172,10 +182,10 @@
+ 	return (HANDLE) CallService(MS_FOLDERS_REGISTER_PATH, 0, (LPARAM) &fd);
+ }
+ 
+-__inline static int FoldersGetCustomPath(HANDLE hFolderEntry, char *path, const int size, const char *notFound)
++__inline static INT_PTR FoldersGetCustomPath(HANDLE hFolderEntry, char *path, const int size, const char *notFound)
+ {
+ 	FOLDERSGETDATA fgd = {0};
+-	int res;
++	INT_PTR res;
+ 	fgd.cbSize = sizeof(FOLDERSGETDATA);
+ 	fgd.nMaxPathSize = size;
+ 	fgd.szPath = path;
+@@ -186,14 +196,14 @@
+ 		CallService(MS_UTILS_PATHTOABSOLUTE, (WPARAM) notFound, (LPARAM) buffer);
+ 		mir_snprintf(path, size, "%s", buffer);
+ 	}
+-		
++
+ 	return res;
+ }
+ 
+-__inline static int FoldersGetCustomPathW(HANDLE hFolderEntry, wchar_t *pathW, const int count, const wchar_t *notFoundW)
++__inline static INT_PTR FoldersGetCustomPathW(HANDLE hFolderEntry, wchar_t *pathW, const int count, const wchar_t *notFoundW)
+ {
+ 	FOLDERSGETDATA fgd = {0};
+-	int res;
++	INT_PTR res;
+ 	fgd.cbSize = sizeof(FOLDERSGETDATA);
+ 	fgd.nMaxPathSize = count;
+ 	fgd.szPathW = pathW;
+@@ -203,14 +213,14 @@
+ 		wcsncpy(pathW, notFoundW, count);
+ 		pathW[count - 1] = '\0';
+ 	}
+-		
++
+ 	return res;
+ }
+ 
+-__inline static int FoldersGetCustomPathEx(HANDLE hFolderEntry, char *path, const int size, char *notFound, char *fileName)
++__inline static INT_PTR FoldersGetCustomPathEx(HANDLE hFolderEntry, char *path, const int size, char *notFound, char *fileName)
+ {
+ 	FOLDERSGETDATA fgd = {0};
+-	int res;
++	INT_PTR res;
+ 	fgd.cbSize = sizeof(FOLDERSGETDATA);
+ 	fgd.nMaxPathSize = size;
+ 	fgd.szPath = path;
+@@ -228,19 +238,19 @@
+ 	else{
+ 		path[0] = '\0';
+ 	}
+-	
++
+ 	if (fileName)
+ 	{
+ 		strcat(path, fileName);
+ 	}
+-	
++
+ 	return res;
+ }
+ 
+-__inline static int FoldersGetCustomPathExW(HANDLE hFolderEntry, wchar_t *pathW, const int count, wchar_t *notFoundW, wchar_t *fileNameW)
++__inline static INT_PTR FoldersGetCustomPathExW(HANDLE hFolderEntry, wchar_t *pathW, const int count, wchar_t *notFoundW, wchar_t *fileNameW)
+ {
+ 	FOLDERSGETDATA fgd = {0};
+-	int res;
++	INT_PTR res;
+ 	fgd.cbSize = sizeof(FOLDERSGETDATA);
+ 	fgd.nMaxPathSize = count;
+ 	fgd.szPathW = pathW;
+@@ -250,7 +260,7 @@
+ 		wcsncpy(pathW, notFoundW, count);
+ 		pathW[count - 1] = '\0';
+ 	}
+-	
++
+ 	if (wcslen(pathW) > 0)
+ 	{
+ 		wcscat(pathW, L"\\");
+@@ -258,12 +268,12 @@
+ 	else{
+ 		pathW[0] = L'\0';
+ 	}
+-	
++
+ 	if (fileNameW)
+ 	{
+ 		wcscat(pathW, fileNameW);
+ 	}
+-	
++
+ 	return res;
+ }
+ 
+@@ -279,4 +289,4 @@
+ 
+ #endif
+ 
+-#endif //M_CUSTOM_FOLDERS_H
++#endif //M_CUSTOM_FOLDERS_H
+Index: m_updater.h
+===================================================================
+--- m_updater.h	(Revision 11)
++++ m_updater.h	(Arbeitskopie)
+@@ -63,7 +63,11 @@
+ 	return CreateVersionString(pluginInfo->version, buf);
+ }
+ 
++__inline static char *CreateVersionStringPluginEx(PLUGININFOEX *pluginInfo, char *buf) {
++	return CreateVersionString(pluginInfo->version, buf);
++}
+ 
++
+ // register the 'easy' way - use this method if you have no beta URL and the plugin is on the miranda file listing
+ // NOTE: the plugin version string on the file listing must be the string version of the version in pluginInfo (i.e. 0.0.0.1,
+ // four numbers between 0 and 255 inclusivem, so no letters, brackets, etc.)
+Index: main.cpp
+===================================================================
+--- main.cpp	(Revision 11)
++++ main.cpp	(Arbeitskopie)
+@@ -35,7 +35,11 @@
+ 
+ PLUGININFOEX pluginInfo={
+ 	sizeof(PLUGININFOEX),
++	#ifdef WIN64
++	"Twitter Plugin (x64)",
++	#else
+ 	"Twitter Plugin",
++	#endif
+ 	__VERSION_DWORD,
+ 	"Provides basic support for Twitter protocol. [Built: "__DATE__" "__TIME__"]",
+ 	"dentist, omniwolf, Thief",
+@@ -44,8 +48,13 @@
+ 	"http://code.google.com/p/miranda-twitter-oauth/",
+ 	UNICODE_AWARE, //not transient
+ 	0,             //doesn't replace anything built-in
++	#ifdef WIN64
++	// {ECD828A6-FF3C-4F24-95CE-5FF73A06FB6F}
++	{ 0xecd828a6, 0xff3c, 0x4f24, { 0x95, 0xce, 0x5f, 0xf7, 0x3a, 0x6, 0xfb, 0x6f } }
++	#else
+ 	//{BC09A71B-B86E-4d33-B18D-82D30451DD3C}
+-    { 0xbc09a71b, 0xb86e, 0x4d33, { 0xb1, 0x8d, 0x82, 0xd3, 0x4, 0x51, 0xdd, 0x3c } }
++	{ 0xbc09a71b, 0xb86e, 0x4d33, { 0xb1, 0x8d, 0x82, 0xd3, 0x4, 0x51, 0xdd, 0x3c } }
++	#endif
+ };
+ 
+ /////////////////////////////////////////////////////////////////////////////
+@@ -160,7 +169,7 @@
+ 	InitIcons();
+ 	InitContactMenus();
+ 
+-    return 0;
++	return 0;
+ }
+ 
+ /////////////////////////////////////////////////////////////////////////////////////////
+Index: proto.cpp
+===================================================================
+--- proto.cpp	(Revision 11)
++++ proto.cpp	(Arbeitskopie)
+@@ -110,7 +110,7 @@
+ 
+ // *************************
+ 
+-DWORD TwitterProto::GetCaps(int type,HANDLE hContact)
++DWORD_PTR TwitterProto::GetCaps(int type,HANDLE hContact)
+ {
+ 	switch(type)
+ 	{
+@@ -260,7 +260,7 @@
+ 	return m_iStatus;
+ }
+ 
+-int TwitterProto::ReplyToTweet(WPARAM wParam,LPARAM lParam)
++INT_PTR TwitterProto::ReplyToTweet(WPARAM wParam,LPARAM lParam)
+ {
+ 	// TODO: support replying to tweets instead of just users
+ 	HANDLE hContact = reinterpret_cast<HANDLE>(wParam);
+@@ -280,7 +280,7 @@
+ 	return 0;
+ }
+ 
+-int TwitterProto::VisitHomepage(WPARAM wParam,LPARAM lParam)
++INT_PTR TwitterProto::VisitHomepage(WPARAM wParam,LPARAM lParam)
+ {
+ 	HANDLE hContact = reinterpret_cast<HANDLE>(wParam);
+ 
+@@ -353,7 +353,7 @@
+ 	odp.flags       = ODPF_BOLDGROUPS | ODPF_TCHAR;
+ 
+ 	odp.ptszTab     = LPGENT("Basic");
+-    odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPTIONS);
++	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPTIONS);
+ 	odp.pfnDlgProc  = options_proc;
+ 	CallService(MS_OPT_ADDPAGE,wParam,(LPARAM)&odp);
+ 
+@@ -498,7 +498,7 @@
+ 		MessageBox(0,popup.lptzText,popup.lptzContactName,0);
+ }
+ 
+-int TwitterProto::LOG(const char *fmt,...)
++INT_PTR TwitterProto::LOG(const char *fmt,...)
+ {
+ 	va_list va;
+ 	char text[1024];
+@@ -512,7 +512,7 @@
+ 	return CallService(MS_NETLIB_LOG,(WPARAM)hNetlib_,(LPARAM)text);
+ }
+ 
+-int TwitterProto::WLOG(const char* first, const wstring last)
++INT_PTR TwitterProto::WLOG(const char* first, const wstring last)
+ {
+ 	char *str1 = new char[1024*96];
+ 	sprintf(str1,"%ls", last.c_str());
+Index: proto.h
+===================================================================
+--- proto.h	(Revision 11)
++++ proto.h	(Arbeitskopie)
+@@ -62,7 +62,7 @@
+ 	virtual	int    __cdecl FileDeny(HANDLE,HANDLE,const char *);
+ 	virtual	int    __cdecl FileResume(HANDLE,int *,const char **);
+ 
+-	virtual	DWORD  __cdecl GetCaps(int,HANDLE = 0);
++	virtual	DWORD_PTR  __cdecl GetCaps(int,HANDLE = 0);
+ 	virtual	HICON  __cdecl GetIcon(int);
+ 	virtual	int    __cdecl GetInfo(HANDLE,int);
+ 
+@@ -100,8 +100,8 @@
+ 	int  __cdecl SvcCreateAccMgrUI(WPARAM,LPARAM);
+ 	int  __cdecl GetName(WPARAM,LPARAM);
+ 	int  __cdecl GetStatus(WPARAM,LPARAM);
+-	int  __cdecl ReplyToTweet(WPARAM,LPARAM);
+-	int  __cdecl VisitHomepage(WPARAM,LPARAM);
++	INT_PTR  __cdecl ReplyToTweet(WPARAM,LPARAM);
++	INT_PTR  __cdecl VisitHomepage(WPARAM,LPARAM);
+ 	int  __cdecl GetAvatar(WPARAM,LPARAM);
+ 	int  __cdecl SetAvatar(WPARAM,LPARAM);
+ 
+@@ -146,8 +146,8 @@
+ 	HANDLE AddToClientList(const char *,const char *);
+ 	void SetAllContactStatuses(int);
+ 
+-	int LOG(const char *fmt,...);
+-	int WLOG(const char* first, const wstring last);
++	INT_PTR LOG(const char *fmt,...);
++	INT_PTR WLOG(const char* first, const wstring last);
+ 	static void CALLBACK APC_callback(ULONG_PTR p);
+ 
+ 	void UpdateChat(const twitter_user &update);
+Index: theme.cpp
+===================================================================
+--- theme.cpp	(Revision 11)
++++ theme.cpp	(Arbeitskopie)
+@@ -115,8 +115,8 @@
+ 	return 0;
+ }
+ 
+-template<int (__cdecl TwitterProto::*Fcn)(WPARAM,LPARAM)>
+-int GlobalService(WPARAM wParam,LPARAM lParam)
++template<INT_PTR (__cdecl TwitterProto::*Fcn)(WPARAM,LPARAM)>
++INT_PTR GlobalService(WPARAM wParam,LPARAM lParam)
+ {
+ 	TwitterProto *proto = GetInstanceByHContact(reinterpret_cast<HANDLE>(wParam));
+ 	return proto ? (proto->*Fcn)(wParam,lParam) : 0;
+Index: tinyjson.hpp
+===================================================================
+--- tinyjson.hpp	(Revision 11)
++++ tinyjson.hpp	(Arbeitskopie)
+@@ -42,7 +42,7 @@
+ namespace json
+ {
+ 	boost::spirit::int_parser<long long> const
+-        longlong_p   = boost::spirit::int_parser<long long>();
++		longlong_p   = boost::spirit::int_parser<long long>();
+ 
+ 	// ==========================================================================================================
+ 	// ===                                    U N I C O D E _ C O N V E R T                                   ===
+Index: twitter.vcxproj
+===================================================================
+--- twitter.vcxproj	(Revision 11)
++++ twitter.vcxproj	(Arbeitskopie)
+@@ -112,8 +112,6 @@
+     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)\</IntDir>
+     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Configuration)\</OutDir>
+     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)\</IntDir>
+     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+@@ -161,7 +159,7 @@
+     <ClCompile>
+       <Optimization>Disabled</Optimization>
+       <AdditionalIncludeDirectories>.\miranda;%(AdditionalIncludeDirectories);D:\code\boost_1_43_0;d:\Dev\Miranda\boost_1_44_0</AdditionalIncludeDirectories>
+-      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;TWITTER_EXPORTS;_CRT_SECURE_NO_WARNINGS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <PreprocessorDefinitions>WIN64;_WINDOWS;_USRDLL;TWITTER_EXPORTS;_CRT_SECURE_NO_WARNINGS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+       <MinimalRebuild>true</MinimalRebuild>
+       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+@@ -181,7 +179,7 @@
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <ClCompile>
+       <Optimization>Disabled</Optimization>
+-      <AdditionalIncludeDirectories>.\miranda;%(AdditionalIncludeDirectories);D:\code\boost_1_43_0</AdditionalIncludeDirectories>
++      <AdditionalIncludeDirectories>.\miranda;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+       <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;TWITTER_EXPORTS;_CRT_SECURE_NO_WARNINGS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+@@ -198,7 +196,7 @@
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <ClCompile>
+-      <AdditionalIncludeDirectories>.\miranda;%(AdditionalIncludeDirectories);D:\code\boost_1_43_0</AdditionalIncludeDirectories>
++      <AdditionalIncludeDirectories>.\miranda;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;TWITTER_EXPORTS;_CRT_SECURE_NO_WARNINGS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+       <PrecompiledHeader>
+@@ -216,13 +214,16 @@
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <ClCompile>
+-      <AdditionalIncludeDirectories>.\miranda;%(AdditionalIncludeDirectories);D:\code\boost_1_43_0</AdditionalIncludeDirectories>
++      <AdditionalIncludeDirectories>C:\Users\CHEF-KOCH\Desktop\Miranda IM Trunk\miranda\include;%(AdditionalIncludeDirectories);C:\Users\CHEF-KOCH\Desktop\boost_1_48_0</AdditionalIncludeDirectories>
+       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;TWITTER_EXPORTS;_CRT_SECURE_NO_WARNINGS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+       <PrecompiledHeader>
+       </PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
++      <MultiProcessorCompilation>true</MultiProcessorCompilation>
++      <Optimization>Full</Optimization>
++      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+     </ClCompile>
+     <Link>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+Index: ui.cpp
+===================================================================
+--- ui.cpp	(Revision 11)
++++ ui.cpp	(Arbeitskopie)
+@@ -38,7 +38,7 @@
+ 		TranslateDialogDefault(hwndDlg);
+ 
+ 		proto = reinterpret_cast<TwitterProto*>(lParam);
+-		SetWindowLong(hwndDlg,GWL_USERDATA,lParam);
++		SetWindowLongPtr(hwndDlg,GWLP_USERDATA,lParam);
+ 
+ 		DBVARIANT dbv;
+ 
+@@ -90,7 +90,7 @@
+ 			return true;
+ 		}
+ 
+-		if(GetWindowLong(hwndDlg,GWL_USERDATA)) // Window is done initializing
++		if(GetWindowLong(hwndDlg,GWLP_USERDATA)) // Window is done initializing
+ 		{
+ 			switch(HIWORD(wParam))
+ 			{
+@@ -105,7 +105,7 @@
+ 	case WM_NOTIFY: // might be able to get rid of this bit?
+ 		if(reinterpret_cast<NMHDR*>(lParam)->code == PSN_APPLY) 
+ 		{
+-			proto = reinterpret_cast<TwitterProto*>(GetWindowLong(hwndDlg,GWL_USERDATA));
++			proto = reinterpret_cast<TwitterProto*>(GetWindowLong(hwndDlg,GWLP_USERDATA));
+ 			char str[128];
+ 			TCHAR tstr[128];
+ 			
+@@ -144,7 +144,7 @@
+ 		TranslateDialogDefault(hwndDlg);
+ 
+ 		proto = reinterpret_cast<TwitterProto*>(lParam);
+-		SetWindowLong(hwndDlg,GWL_USERDATA,lParam);
++		SetWindowLongPtr(hwndDlg,GWLP_USERDATA,lParam);
+ 		SendDlgItemMessage(hwndDlg,IDC_TWEETMSG,EM_LIMITTEXT,140,0);
+ 		SetDlgItemText(hwndDlg,IDC_CHARACTERS,_T("140"));
+ 
+@@ -158,7 +158,7 @@
+ 		if(LOWORD(wParam) == IDOK)
+ 		{
+ 			TCHAR msg[141];
+-			proto = reinterpret_cast<TwitterProto*>(GetWindowLong(hwndDlg,GWL_USERDATA));
++			proto = reinterpret_cast<TwitterProto*>(GetWindowLong(hwndDlg,GWLP_USERDATA));
+ 
+ 			GetDlgItemText(hwndDlg,IDC_TWEETMSG,msg,SIZEOF(msg));
+ 			ShowWindow(hwndDlg,SW_HIDE);
+@@ -262,11 +262,11 @@
+ 
+ 		// Do this last so that any events propagated by pre-filling the form don't
+ 		// instigate a PSM_CHANGED message
+-		SetWindowLong(hwndDlg,GWL_USERDATA,lParam);
++		SetWindowLongPtr(hwndDlg,GWLP_USERDATA,lParam);
+ 
+ 		break;
+ 	case WM_COMMAND:
+-		if(GetWindowLong(hwndDlg,GWL_USERDATA)) // Window is done initializing
++		if(GetWindowLong(hwndDlg,GWLP_USERDATA)) // Window is done initializing
+ 		{
+ 			switch(HIWORD(wParam))
+ 			{
+@@ -289,7 +289,7 @@
+ 	case WM_NOTIFY:
+ 		if(reinterpret_cast<NMHDR*>(lParam)->code == PSN_APPLY) 
+ 		{
+-			proto = reinterpret_cast<TwitterProto*>(GetWindowLong(hwndDlg,GWL_USERDATA));
++			proto = reinterpret_cast<TwitterProto*>(GetWindowLong(hwndDlg,GWLP_USERDATA));
+ 			char str[128];
+ 
+ 			GetDlgItemTextA(hwndDlg,IDC_UN,str,sizeof(str));
+@@ -394,7 +394,7 @@
+ 
+ 		// Pick a random contact
+ 		HANDLE hContact = 0;
+-		int n_contacts = CallService(MS_DB_CONTACT_GETCOUNT,0,0);
++		INT_PTR n_contacts = CallService(MS_DB_CONTACT_GETCOUNT,0,0);
+ 
+ 		if(n_contacts != 0)
+ 		{
+@@ -480,7 +480,7 @@
+ 		}
+ 
+ 		SendDlgItemMessage(hwndDlg,IDC_TIMEOUT_SPIN,UDM_SETRANGE32,1,INT_MAX);
+-		SetWindowLong(hwndDlg,GWL_USERDATA,lParam);
++		SetWindowLongPtr(hwndDlg,GWLP_USERDATA,lParam);
+ 
+ 		return true;
+ 	case WM_COMMAND:
+@@ -520,14 +520,14 @@
+ 			}
+ 
+ 		case EN_CHANGE:
+-			if(GetWindowLong(hwndDlg,GWL_USERDATA)) // Window is done initializing
++			if(GetWindowLong(hwndDlg,GWLP_USERDATA)) // Window is done initializing
+ 				SendMessage(GetParent(hwndDlg),PSM_CHANGED,0,0);
+ 		}
+ 		break;
+ 	case WM_NOTIFY:
+ 		if(reinterpret_cast<NMHDR*>(lParam)->code == PSN_APPLY) 
+ 		{
+-			proto = reinterpret_cast<TwitterProto*>(GetWindowLong(hwndDlg,GWL_USERDATA));
++			proto = reinterpret_cast<TwitterProto*>(GetWindowLong(hwndDlg,GWLP_USERDATA));
+ 
+ 			DBWriteContactSettingByte(0,proto->ModuleName(),TWITTER_KEY_POPUP_SHOW,
+ 				IsDlgButtonChecked(hwndDlg,IDC_SHOWPOPUPS));
+@@ -562,13 +562,13 @@
+ 		case WM_INITDIALOG:
+ 			TranslateDialogDefault(hwndDlg);
+ 
+-			SetWindowLong(hwndDlg,GWL_USERDATA,lParam);
++			SetWindowLongPtr(hwndDlg,GWLP_USERDATA,lParam);
+ 
+ 			return true;
+ 		case WM_COMMAND:
+ 			if(LOWORD(wParam) == IDOK)
+ 			{
+-				proto = reinterpret_cast<TwitterProto*>(GetWindowLong(hwndDlg,GWL_USERDATA));
++				proto = reinterpret_cast<TwitterProto*>(GetWindowLong(hwndDlg,GWLP_USERDATA));
+ 				char str[128];
+ 
+ 				GetDlgItemTextA(hwndDlg,IDC_PIN,str,sizeof(str));
+Index: utility.cpp
+===================================================================
+--- utility.cpp	(Revision 11)
++++ utility.cpp	(Arbeitskopie)
+@@ -151,7 +151,7 @@
+ 	return resp_data;
+ }
+ 
+-int mir_twitter::LOG(const char *fmt,...)
++INT_PTR mir_twitter::LOG(const char *fmt,...)
+ {
+ 	va_list va;
+ 	char text[1024];
+@@ -165,7 +165,7 @@
+ 	return CallService(MS_NETLIB_LOG,(WPARAM)handle_,(LPARAM)text);
+ }
+ 
+-int mir_twitter::WLOG(const char* first, const std::wstring last)
++INT_PTR mir_twitter::WLOG(const char* first, const std::wstring last)
+ {
+ 	char *str1 = new char[1024*96];
+ 	sprintf(str1,"%ls", last.c_str());
+Index: utility.h
+===================================================================
+--- utility.h	(Revision 11)
++++ utility.h	(Arbeitskopie)
+@@ -111,8 +111,8 @@
+ 
+ protected:
+ 	http::response slurp(const std::string &,http::method, OAuthParameters );
+-	int LOG(const char *fmt,...);
+-	int WLOG(const char* first, const std::wstring last);
++	INT_PTR LOG(const char *fmt,...);
++	INT_PTR WLOG(const char* first, const std::wstring last);
+ 
+ 	HANDLE httpPOST_;
+ 	HANDLE handle_;

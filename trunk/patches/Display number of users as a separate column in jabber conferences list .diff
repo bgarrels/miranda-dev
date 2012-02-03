@@ -1,0 +1,208 @@
+Index: miranda/protocols/JabberG/jabber_disco.cpp
+===================================================================
+--- miranda/protocols/JabberG/jabber_disco.cpp	(revision 11369)
++++ miranda/protocols/JabberG/jabber_disco.cpp	(working copy)
+@@ -552,10 +552,30 @@
+ 	CJabberSDNode* pTmp = pNode;
+ 	while (pTmp) {
+ 		if ( !pTmp->GetTreeItemHandle() ) {
++			TCHAR* fName = pTmp->GetName();
++			TCHAR* tName;
++			TCHAR* tUsers;
++			if (fName){
++				TCHAR* p = fName + _tcslen( fName ) - 1;
++				int counter = -1;
++				while(*p != '(' ){
++					*p--;
++					counter++;
++				}
++				*p--;
++				tName = (TCHAR *)mir_alloc((sizeof(TCHAR) * (_tcslen( fName ) - _tcslen( p )))+1);
++				lstrcpyn(tName, fName, _tcslen( fName ) - _tcslen( p ) + 1);
++				*p++;
++				*p++;
++				tUsers = (TCHAR *)mir_alloc((sizeof(TCHAR)*counter)+1);
++				lstrcpyn(tUsers, p, counter+1);
++			}else{
++				tName = pTmp->GetJid();
++				tUsers = _T("n/a");
++			}
+ 			HTREELISTITEM hNewItem = TreeList_AddItem(
+-				GetDlgItem(m_pDlgServiceDiscovery->GetHwnd(), IDC_TREE_DISCO), hIndex,
+-				pTmp->GetName() ? pTmp->GetName() : pTmp->GetJid(),
+-				(LPARAM)pTmp);
++				GetDlgItem(m_pDlgServiceDiscovery->GetHwnd(), IDC_TREE_DISCO), hIndex, tName, (LPARAM)pTmp);
++			TreeList_AppendColumn(hNewItem, tUsers);
+ 			TreeList_AppendColumn(hNewItem, pTmp->GetJid());
+ 			TreeList_AppendColumn(hNewItem, pTmp->GetNode());
+ 			if (!pTmp->GetInfoRequestId())
+@@ -676,14 +696,18 @@
+ 	lvc.iSubItem = 0;
+ 	lvc.pszText = TranslateT("Node hierarchy");
+ 	ListView_InsertColumn(hwndList, 0, &lvc);
+-	lvc.cx = DBGetContactSettingWord(NULL, m_proto->m_szModuleName, "discoWnd_cx1", 200);
++	lvc.cx = DBGetContactSettingWord(NULL, m_proto->m_szModuleName, "discoWnd_cx1", 50);
+ 	lvc.iSubItem = 1;
+-	lvc.pszText = _T("JID");
++	lvc.pszText = TranslateT("Users");
+ 	ListView_InsertColumn(hwndList, 1, &lvc);
+ 	lvc.cx = DBGetContactSettingWord(NULL, m_proto->m_szModuleName, "discoWnd_cx2", 200);
+ 	lvc.iSubItem = 2;
++	lvc.pszText = _T("JID");
++	ListView_InsertColumn(hwndList, 2, &lvc);
++	lvc.cx = DBGetContactSettingWord(NULL, m_proto->m_szModuleName, "discoWnd_cx3", 200);
++	lvc.iSubItem = 3;
+ 	lvc.pszText = TranslateT("Node");
+-	ListView_InsertColumn(hwndList, 2, &lvc);
++	ListView_InsertColumn(hwndList, 3, &lvc);
+ 
+ 	TreeList_Create(hwndList);
+ 	TreeList_AddIcon(hwndList, m_proto->LoadIconEx("main"), 0);
+@@ -723,6 +747,8 @@
+ 	DBWriteContactSettingWord(NULL, m_proto->m_szModuleName, "discoWnd_cx1", lvc.cx);
+ 	ListView_GetColumn(hwndList, 2, &lvc);
+ 	DBWriteContactSettingWord(NULL, m_proto->m_szModuleName, "discoWnd_cx2", lvc.cx);
++	ListView_GetColumn(hwndList, 3, &lvc);
++	DBWriteContactSettingWord(NULL, m_proto->m_szModuleName, "discoWnd_cx3", lvc.cx);
+ 
+ 	Utils_SaveWindowPosition(m_hwnd, NULL, m_proto->m_szModuleName, "discoWnd_");
+ 	DestroyWindow( m_hwnd );
+@@ -988,10 +1014,30 @@
+ 			{
+ 				if ( pNode->GetJid() ) {
+ 					if ( !pNode->GetTreeItemHandle() ) {
++						TCHAR* fName = pNode->GetName();
++						TCHAR* tName;
++						TCHAR* tUsers;
++						if (fName){
++							TCHAR* p = fName + _tcslen( fName ) - 1;
++							int counter = -1;
++							while(*p != '(' ){
++								*p--;
++								counter++;
++							}
++							*p--;
++							tName = (TCHAR *)mir_alloc((sizeof(TCHAR) * (_tcslen( fName ) - _tcslen( p )))+1);
++							lstrcpyn(tName, fName, _tcslen( fName ) - _tcslen( p ) + 1);
++							*p++;
++							*p++;
++							tUsers = (TCHAR *)mir_alloc((sizeof(TCHAR)*counter)+1);
++							lstrcpyn(tUsers, p, counter+1);
++						}else{
++							tName = pNode->GetJid();
++							tUsers = _T("n/a");
++						}
+ 						HTREELISTITEM hNewItem = TreeList_AddItem(
+-							GetDlgItem( m_hwnd, IDC_TREE_DISCO), NULL,
+-							pNode->GetName() ? pNode->GetName() : pNode->GetJid(),
+-							(LPARAM)pNode);
++							GetDlgItem( m_hwnd, IDC_TREE_DISCO), NULL, tName, (LPARAM)pNode);
++						TreeList_AppendColumn(hNewItem, tUsers);
+ 						TreeList_AppendColumn(hNewItem, pNode->GetJid());
+ 						TreeList_AppendColumn(hNewItem, pNode->GetNode());
+ 						pNode->SetTreeItemHandle( hNewItem );
+Index: miranda/protocols/JabberG/jabber_treelist.cpp
+===================================================================
+--- miranda/protocols/JabberG/jabber_treelist.cpp	(revision 11369)
++++ miranda/protocols/JabberG/jabber_treelist.cpp	(working copy)
+@@ -175,7 +175,7 @@
+ void TreeList_SetSortMode(HWND hwnd, int col, BOOL descending)
+ {
+ 	TTreeList_Data *data = (TTreeList_Data *)sttTreeList_GeWindowData(hwnd);
+-	if ((col >= 0) && (col < 2))
++	if ((col >= 0) && (col < 3))
+ 		data->sortMode = 1 + col * 2 + (descending ? 1 : 0);
+ 	else
+ 		data->sortMode = 0;
+@@ -351,7 +351,19 @@
+ 		case LVN_COLUMNCLICK:
+ 			{
+ 				LPNMLISTVIEW lpnmlv = (LPNMLISTVIEW)lparam;
+-				TreeList_SetSortMode(lpnmlv->hdr.hwndFrom, lpnmlv->iSubItem, FALSE);
++				static int nSortColumn = 0;
++				static BOOL bSortDescending = FALSE;
++				if(lpnmlv->iSubItem == 1 && lpnmlv->iSubItem == nSortColumn){
++					nSortColumn = 0;
++					bSortDescending = FALSE;
++				}else if(lpnmlv->iSubItem == 1){
++					nSortColumn = 1;
++					bSortDescending = TRUE;
++				}else{
++					nSortColumn = lpnmlv->iSubItem;
++					bSortDescending = FALSE;
++				}
++				TreeList_SetSortMode(lpnmlv->hdr.hwndFrom, lpnmlv->iSubItem, bSortDescending);
+ 			}
+ 			break;
+ 
+@@ -477,10 +489,59 @@
+ ///////////////////////////////////////////////////////////////////////////
+ static int sttTreeList_SortItems_Cmp0(const void *p1, const void *p2) { return  lstrcmp((*(HTREELISTITEM *)p1)->text[0], (*(HTREELISTITEM *)p2)->text[0]); }
+ static int sttTreeList_SortItems_Cmp1(const void *p1, const void *p2) { return -lstrcmp((*(HTREELISTITEM *)p1)->text[0], (*(HTREELISTITEM *)p2)->text[0]); }
+-static int sttTreeList_SortItems_Cmp2(const void *p1, const void *p2) { return  lstrcmp((*(HTREELISTITEM *)p1)->text[1], (*(HTREELISTITEM *)p2)->text[1]); }
+-static int sttTreeList_SortItems_Cmp3(const void *p1, const void *p2) { return -lstrcmp((*(HTREELISTITEM *)p1)->text[1], (*(HTREELISTITEM *)p2)->text[1]); }
++static int compareUsers(const void *p1, const void *p2){
++	int arg1;
++	int arg2;
++	if((int)*(*(HTREELISTITEM *)p1)->text[1] == 110){
++		arg1 = -1;
++	}else{
++		arg1 = _ttoi((*(HTREELISTITEM *)p1)->text[1]);
++	}
++	if((int)*(*(HTREELISTITEM *)p2)->text[1] == 110){
++		arg2 = -1;
++	}else{
++		arg2 = _ttoi((*(HTREELISTITEM *)p2)->text[1]);
++	}
++	return arg1 - arg2;
++}
++static int sttTreeList_SortItems_Cmp2(const void *p1, const void *p2) {
++	TCHAR* p = (*(HTREELISTITEM *)p1)->text[2] + _tcslen((*(HTREELISTITEM *)p1)->text[2]) - 1;
++    bool isConf = false;
++	while ( p >= (*(HTREELISTITEM *)p1)->text[2]+2 ) {
++		p--;
++		if ( *p == _T('@') ){
++			isConf = true;
++			break;
++		}
++    }
++
++	if(isConf){
++		return compareUsers(p1, p2);
++	}else{
++		return 1;
++	}
++}
++static int sttTreeList_SortItems_Cmp3(const void *p1, const void *p2) { 
++	TCHAR* p = (*(HTREELISTITEM *)p1)->text[2] + _tcslen((*(HTREELISTITEM *)p1)->text[2]) - 1;
++    bool isConf = false;
++	while ( p >= (*(HTREELISTITEM *)p1)->text[2]+2 ) {
++		p--;
++		if ( *p == _T('@') ){
++			isConf = true;
++			break;
++		}
++    }
++
++	if(isConf){
++		return -compareUsers(p1, p2);
++	}else{
++		return 1;
++	}
++}
+ static int sttTreeList_SortItems_Cmp4(const void *p1, const void *p2) { return  lstrcmp((*(HTREELISTITEM *)p1)->text[2], (*(HTREELISTITEM *)p2)->text[2]); }
+ static int sttTreeList_SortItems_Cmp5(const void *p1, const void *p2) { return -lstrcmp((*(HTREELISTITEM *)p1)->text[2], (*(HTREELISTITEM *)p2)->text[2]); }
++static int sttTreeList_SortItems_Cmp6(const void *p1, const void *p2) { return  lstrcmp((*(HTREELISTITEM *)p1)->text[3], (*(HTREELISTITEM *)p2)->text[3]); }
++static int sttTreeList_SortItems_Cmp7(const void *p1, const void *p2) { return -lstrcmp((*(HTREELISTITEM *)p1)->text[3], (*(HTREELISTITEM *)p2)->text[3]); }
+ 
+ static void sttTreeList_SortItems(HTREELISTITEM hItem, LPARAM data)
+ {
+@@ -495,6 +556,8 @@
+ 		sttTreeList_SortItems_Cmp3,
+ 		sttTreeList_SortItems_Cmp4,
+ 		sttTreeList_SortItems_Cmp5,
++		sttTreeList_SortItems_Cmp6,
++		sttTreeList_SortItems_Cmp7,
+ 	};
+ 	qsort(((SortedList *)&hItem->subItems)->items, hItem->subItems.getCount(), sizeof(void *), funcs[data-1]);
+ }

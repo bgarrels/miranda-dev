@@ -1,0 +1,18 @@
+Index: modern_cachefuncs.cpp
+===================================================================
+--- modern_cachefuncs.cpp	(revision 11934)
++++ modern_cachefuncs.cpp	(working copy)
+@@ -615,11 +615,8 @@
+             lstrcpyn(nick, dbv.ptszVal, SIZEOF(contact->szText));
+             ModernDBFreeVariant(&dbv);
+ 
+-            if (_tcsnicmp(name, nick, lstrlen(name)) == 0) {
+-                // They are the same -> use the nick to keep the case
+-                lstrcpyn(contact->szText, nick, SIZEOF(contact->szText));
+-            } else if (_tcsnicmp(name, nick, lstrlen(nick)) == 0) {
+-                // They are the same -> use the nick to keep the case
++            if (_tcsicmp(name, nick) == 0) {
++                // They are the same -> use the name to keep the case
+                 lstrcpyn(contact->szText, name, SIZEOF(contact->szText));
+             } else {
+                 // Append then
