@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-#include "dbtool.h"
+#include "../dbtool.h"
 
 static BOOL backLookup;
 static DWORD ofsThisEvent,ofsPrevEvent;
@@ -55,7 +55,7 @@ static void ConvertOldEvent( DBEvent*& dbei )
 		if (offsetof(DBEvent,blob)+dbei->cbBlob > memsize) {
 			memsize = offsetof(DBEvent,blob)+dbei->cbBlob;
 			memblock = (DBEvent*)realloc(memblock, memsize);
-            dbei = memblock;
+			dbei = memblock;
 		}
 		memcpy( &dbei->blob, utf8str, dbei->cbBlob );
 		free(utf8str);
@@ -247,7 +247,7 @@ int WorkEventChain(DWORD ofsContact,DBContact *dbc,int firstTime)
 	}
 	else if ( !firstTime && dbeNew->timestamp < lastTimestamp ) 
 	{
-	    DWORD found = 0;
+		DWORD found = 0;
 		DBEvent dbeTmp;
 		DWORD ofsTmp;
 
@@ -259,12 +259,12 @@ int WorkEventChain(DWORD ofsContact,DBContact *dbc,int firstTime)
 				while(PeekSegment(ofsTmp,&dbeTmp,sizeof(dbeTmp))==ERROR_SUCCESS)
 				{
 					if (dbeTmp.ofsPrev == ofsContact) {
-			    		found = 1;
-			    		break;
+						found = 1;
+						break;
 					}	
 					if (dbeTmp.timestamp < dbeNew->timestamp) {
-					    found = 2;
-		    			break;
+						found = 2;
+						break;
 					}
 					ofsTmp = dbeTmp.ofsPrev;
 				}

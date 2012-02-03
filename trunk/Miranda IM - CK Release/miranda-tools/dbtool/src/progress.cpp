@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-#include "dbtool.h"
+#include "../dbtool.h"
 
 #define WM_PROCESSINGDONE  (WM_USER+1)
 
@@ -53,7 +53,7 @@ void SetProgressBar(int perThou)
 
 void ProcessingDone(void)
 {
-    if (opts.pFile) {
+	if (opts.pFile) {
 		UnmapViewOfFile(opts.pFile);
 		opts.pFile = NULL;
 	}
