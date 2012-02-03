@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{28f9c5b1-e22e-47c3-9588-4f293878aa27}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{fb50d277-d7b3-44a3-9330-fa8332ee1975}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Functions">
+      <UniqueIdentifier>{b86b234f-e9db-45b3-97ed-47c15ca4bb75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{482639cd-fb25-4cfb-9e55-4a299271787c}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{2bfebbfa-f8bc-4b1c-8c9a-18d88cf65b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Functions\zlib">
+      <UniqueIdentifier>{ab9706b5-7422-422d-ba4c-37692fb3282c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Mra.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mra_functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mra_options.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mra_proto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mra_svcs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraAdvancedSearch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraAntiSpam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraAvatars.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraChat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraFilesQueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraIcons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraMPop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraMRIMProxy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraOfflineMsg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraPopUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraRTFMsg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraSelectEMail.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraSendCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MraSendQueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\Alarm.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\answers.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\AuthGrant.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\AuthReguest.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\Bagz.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\Blogs.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\BlogStatus.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\Chat.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\Info.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\Magent.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\Mail.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\MailNotify.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\my world.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\Phone.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\Photo.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\PostCards.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\video.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Icons\WebSearch.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Docs\region.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\region_m.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\TODO.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\langpack_MRA_russian.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\Mail_ru Агент.htm">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\proto.htm">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="Docs\Readme_MRA.txt">
+      <Filter>docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\Base64.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\BuffToLowerCase.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\SHA1.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\SocketFunctions.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\StrHexToNum.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\StrToNum.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\timefuncs.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\DebugFunctions.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\FIFOMT.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\InterlockedFunctions.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\InternetTime.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\ListMT.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\MemoryCompare.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\MemoryFind.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\MemoryFindByte.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\MemoryReplace.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\RC4.h">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Docs\MraPlaces.h">
+      <Filter>docs</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\zconf.h">
+      <Filter>Header Files\Functions\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk\zlib.h">
+      <Filter>Header Files\Functions\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mra.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraAntiSpam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraAvatars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraChat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraConstans.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraFilesQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraIcons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraMPop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraMRIMProxy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraOfflineMsg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraPlaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraPopUp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraRTFMsg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraSelectEMail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraSendCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MraSendQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\proto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -1,11 +1,22 @@
 #include "Mra.h"
 
 
-
-
-
-
 #ifndef  _WIN64
+
+
+//initializes the plugin-specific translation context v0.10.0+
+//wParam=pointer to the langpack handle
+//lParam=PLUGININFOEX* of the caller plugin
+//always returns 0
+#define MS_LANGPACK_REGISTER "LangPack/Register"
+
+#if defined( MIRANDA_CUSTOM_LP )
+
+__forceinline void mir_getLP( PLUGININFOEX* pInfo )
+{ CallService(MS_LANGPACK_REGISTER, (WPARAM)&hLangpack, (LPARAM)pInfo);
+}
+
+
 
 /*extern "C" __declspec(naked) void _chkstk()
 {
@@ -54,10 +65,10 @@
 
 /*extern "C" __declspec(naked) void __cdecl _chkstk()
 { 
-    _asm {    jz    esp_okay    }; 
-    _asm {    int    3    }; 
+	_asm {    jz    esp_okay    }; 
+	_asm {    int    3    }; 
 esp_okay: 
-    _asm {    ret    }; 
+	_asm {    ret    }; 
 } //*/
 
 
@@ -68,35 +79,35 @@ esp_okay:
  /*//_alloca_probe_16 : 16 byte aligned alloca
  extern "C" void _alloca_probe_16()
  {
- 	__asm 
- 	{
- 		push    ecx
- 		lea     ecx, [esp] + 8          ; TOS before entering this function
- 		sub     ecx, eax                ; New TOS
- 		and     ecx, (16 - 1)           ; Distance from 16 bit align (align down)
- 		add     eax, ecx                ; Increase allocation size
- 		sbb     ecx, ecx                ; ecx = 0xFFFFFFFF if size wrapped around
- 		or      eax, ecx                ; cap allocation size on wraparound
- 		pop     ecx                     ; Restore ecx
- 		jmp     _chkstk
- 	}
+	__asm 
+	{
+		push    ecx
+		lea     ecx, [esp] + 8          ; TOS before entering this function
+		sub     ecx, eax                ; New TOS
+		and     ecx, (16 - 1)           ; Distance from 16 bit align (align down)
+		add     eax, ecx                ; Increase allocation size
+		sbb     ecx, ecx                ; ecx = 0xFFFFFFFF if size wrapped around
+		or      eax, ecx                ; cap allocation size on wraparound
+		pop     ecx                     ; Restore ecx
+		jmp     _chkstk
+	}
  }
  
  //alloca_8: 8 byte aligned alloca
  extern "C" void _alloca_probe_8()
  {
- 	__asm 
- 	{
- 		push    ecx
- 		lea     ecx, [esp] + 8          ; TOS before entering this function
- 		sub     ecx, eax                ; New TOS
- 		and     ecx, (8 - 1)            ; Distance from 8 bit align (align down)
- 		add     eax, ecx                ; Increase allocation Size
- 		sbb     ecx, ecx                ; ecx = 0xFFFFFFFF if size wrapped around
- 		or      eax, ecx                ; cap allocation size on wraparound
- 		pop     ecx                     ; Restore ecx
- 		jmp     _chkstk
- 	}
+	__asm 
+	{
+		push    ecx
+		lea     ecx, [esp] + 8          ; TOS before entering this function
+		sub     ecx, eax                ; New TOS
+		and     ecx, (8 - 1)            ; Distance from 8 bit align (align down)
+		add     eax, ecx                ; Increase allocation Size
+		sbb     ecx, ecx                ; ecx = 0xFFFFFFFF if size wrapped around
+		or      eax, ecx                ; cap allocation size on wraparound
+		pop     ecx                     ; Restore ecx
+		jmp     _chkstk
+	}
  }//*/
 
 /*extern "C" void __cdecl _chkstk()
@@ -178,46 +189,46 @@ extern "C" __declspec(naked) void _chkstk()
 /*extern "C" __declspec(naked)  void __cdecl _chkstk()
 {
 #ifndef _PAGESIZE_
-    #define _PAGESIZE_ 1000h
+	#define _PAGESIZE_ 1000h
 #endif //_PAGESIZE_
 
-    __asm
-    {
-        push    ecx                     // save ecx
-        cmp     eax, _PAGESIZE_         // more than one page requested?
-        lea     ecx, [esp] + 8          // compute new stack pointer in ecx
-                                        // correct for return address and
-                                        // saved ecx
-        jb      short lastpage          // no
+	__asm
+	{
+		push    ecx                     // save ecx
+		cmp     eax, _PAGESIZE_         // more than one page requested?
+		lea     ecx, [esp] + 8          // compute new stack pointer in ecx
+										// correct for return address and
+										// saved ecx
+		jb      short lastpage          // no
 
 
 probepages:
 
-        sub     ecx, _PAGESIZE_         // yes, move down a page
-        sub     eax, _PAGESIZE_         // adjust request and...
+		sub     ecx, _PAGESIZE_         // yes, move down a page
+		sub     eax, _PAGESIZE_         // adjust request and...
 
-        test    dword ptr [ecx], eax    // ...probe it
+		test    dword ptr [ecx], eax    // ...probe it
 
-        cmp     eax, _PAGESIZE_         // more than one page requested?
-        jae     short probepages        // no
+		cmp     eax, _PAGESIZE_         // more than one page requested?
+		jae     short probepages        // no
 
 
 lastpage:
 
-        sub     ecx, eax                // move stack down by eax
-        mov     eax, esp                // save current tos and do a...
+		sub     ecx, eax                // move stack down by eax
+		mov     eax, esp                // save current tos and do a...
 
-        test    dword ptr [ecx], eax    // ...probe in case a page was crossed
+		test    dword ptr [ecx], eax    // ...probe in case a page was crossed
 
-        mov     esp, ecx                // set the new stack pointer
+		mov     esp, ecx                // set the new stack pointer
 
-        mov     ecx, dword ptr [eax]    // recover ecx
-        mov     eax, dword ptr [eax + 4]// recover return address
+		mov     ecx, dword ptr [eax]    // recover ecx
+		mov     eax, dword ptr [eax + 4]// recover return address
 
-        push    eax                     // prepare return address
-                                        // ...probe in case a page was crossed
-        ret
-    }
+		push    eax                     // prepare return address
+										// ...probe in case a page was crossed
+		ret
+	}
 }//*/
 
 
@@ -434,7 +445,7 @@ void	VersionConversions	();
 
 BOOL WINAPI DllMain(HINSTANCE hInstance,DWORD dwReason,LPVOID Reserved)
 {
-    switch(dwReason){
+	switch(dwReason){
 	case DLL_PROCESS_ATTACH:
 		memset(&masMraSettings, 0, sizeof(masMraSettings));
 		masMraSettings.hInstance=hInstance;
@@ -450,7 +461,7 @@ BOOL WINAPI DllMain(HINSTANCE hInstance,DWORD dwReason,LPVOID Reserved)
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:
 		break;
-    }
+	}
 
 	/*BYTE szBuff[1024]={0};
 	LPSTR lpszString="\r\n\t  GET \t  \r\n  \r\n  \r\n    http://mail.ru/  \tHTTP/1.1  \t  ";
@@ -529,7 +540,6 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	PROTOCOLDESCRIPTOR pd={0};
 
 	pluginLink=link;
-	mir_getLP(&pluginInfoEx);
 	mir_getMMI(&mmi);
 
 
@@ -909,4 +919,4 @@ void VersionConversions()
 //*/
 }
 
-
+#endif

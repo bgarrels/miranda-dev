@@ -1696,7 +1696,7 @@ INT_PTR CALLBACK SetXStatusDlgProc(HWND hWndDlg,UINT message,WPARAM wParam,LPARA
 	SetXStatusData *psxsData=(SetXStatusData*)GetWindowLongPtr(hWndDlg,GWLP_USERDATA);
 
 	switch(message){
-    case WM_INITDIALOG:// set our xStatus
+	case WM_INITDIALOG:// set our xStatus
 		TranslateDialogDefault(hWndDlg);
 
 		psxsData=(SetXStatusData*)MEMALLOC(sizeof(SetXStatusData));
@@ -1755,10 +1755,10 @@ INT_PTR CALLBACK SetXStatusDlgProc(HWND hWndDlg,UINT message,WPARAM wParam,LPARA
 			psxsData->dwCountdown--;
 			break;
 		}
-    case WM_CLOSE:
-      DestroyWindow(hWndDlg);
-      break;
-    case WM_COMMAND:
+	case WM_CLOSE:
+	  DestroyWindow(hWndDlg);
+	  break;
+	case WM_COMMAND:
 		switch(LOWORD(wParam)){
 		case IDOK:
 			DestroyWindow(hWndDlg);
@@ -1770,7 +1770,7 @@ INT_PTR CALLBACK SetXStatusDlgProc(HWND hWndDlg,UINT message,WPARAM wParam,LPARA
 			break;
 		}
 		break;
-    case WM_DESTROY:
+	case WM_DESTROY:
 		if (psxsData)
 		{ // set our xStatus
 			char szValueName[MAX_PATH];
@@ -1840,7 +1840,7 @@ INT_PTR CALLBACK SendReplyBlogStatusDlgProc(HWND hWndDlg,UINT message,WPARAM wPa
 	SetBlogStatusData *psbsdData=(SetBlogStatusData*)GetWindowLongPtr(hWndDlg,GWLP_USERDATA);
 
 	switch(message){
-    case WM_INITDIALOG:// set our xStatus
+	case WM_INITDIALOG:// set our xStatus
 		TranslateDialogDefault(hWndDlg);
 
 		psbsdData=(SetBlogStatusData*)MEMALLOC(sizeof(SetBlogStatusData));
@@ -1891,10 +1891,10 @@ INT_PTR CALLBACK SendReplyBlogStatusDlgProc(HWND hWndDlg,UINT message,WPARAM wPa
 			iRet=TRUE;
 		}
 		break;
-    case WM_CLOSE:
-      DestroyWindow(hWndDlg);
-      break;
-    case WM_COMMAND:
+	case WM_CLOSE:
+	  DestroyWindow(hWndDlg);
+	  break;
+	case WM_COMMAND:
 		switch(LOWORD(wParam)){
 		case IDOK:
 			{
@@ -1931,7 +1931,7 @@ INT_PTR CALLBACK SendReplyBlogStatusDlgProc(HWND hWndDlg,UINT message,WPARAM wPa
 			break;			
 		}
 		break;
-    case WM_DESTROY:
+	case WM_DESTROY:
 		if (psbsdData)
 		{
 			HWND hWndEdit;
