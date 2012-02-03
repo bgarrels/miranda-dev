@@ -134,8 +134,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="dbtool.exe.manifest">
-      <Filter>Source Files</Filter>
-    </Manifest>
+    <Manifest Include="dbtool.exe.manifest" />
   </ItemGroup>
 </Project>
