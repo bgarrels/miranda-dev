@@ -31,7 +31,7 @@ struct UTF8_INTERFACE utfi;
 TCHAR tszRoot[MAX_PATH] = {0};
 
 PLUGININFOEX pluginInfoEx = {
-    sizeof(PLUGININFOEX),
+	sizeof(PLUGININFOEX),
 	__PLUGIN_NAME,
 	PLUGIN_MAKE_VERSION(__MAJOR_VERSION, __MINOR_VERSION, __RELEASE_NUM, __BUILD_NUM),
 	__DESCRIPTION,
@@ -90,8 +90,8 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	
 	// Add options hook
 	hOptHook = HookEvent(ME_OPT_INITIALISE, OptInit);
-	hLoadHook = HookEvent(ME_SYSTEM_MODULESLOADED, NewsAggrInit);
-	hOnPreShutdown = HookEvent(ME_SYSTEM_PRESHUTDOWN, NewsAggrPreShutdown);
+	//hLoadHook = HookEvent(ME_SYSTEM_MODULESLOADED, NewsAggrInit);
+	//hOnPreShutdown = HookEvent(ME_SYSTEM_PRESHUTDOWN, NewsAggrPreShutdown);
 
 	// register weather protocol
 	PROTOCOLDESCRIPTOR pd = {0};
