@@ -19,83 +19,86 @@
       <UniqueIdentifier>{23dec603-6892-4273-9319-7607a5e49a58}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{e7a42d0b-a37f-4bed-8311-39f3ab227cf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="disk.cpp">
+    <ClCompile Include="src\cleaning.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fileaccess.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\finished.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\openerror.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\progress.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\selectdb.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\welcome.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\aggressive.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\contactchain.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\eventchain.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\finaltasks.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\initialchecks.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modulechain.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\settingschain.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\user.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\disk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="encryption.cpp">
+    <ClCompile Include="src\encryption.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="langpack.cpp">
+    <ClCompile Include="src\langpack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="wizard.cpp">
+    <ClCompile Include="src\utf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="worker.cpp">
+    <ClCompile Include="src\wizard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="aggressive.cpp">
-      <Filter>Source Files\Workers</Filter>
-    </ClCompile>
-    <ClCompile Include="contactchain.cpp">
-      <Filter>Source Files\Workers</Filter>
-    </ClCompile>
-    <ClCompile Include="eventchain.cpp">
-      <Filter>Source Files\Workers</Filter>
-    </ClCompile>
-    <ClCompile Include="finaltasks.cpp">
-      <Filter>Source Files\Workers</Filter>
-    </ClCompile>
-    <ClCompile Include="initialchecks.cpp">
-      <Filter>Source Files\Workers</Filter>
-    </ClCompile>
-    <ClCompile Include="modulechain.cpp">
-      <Filter>Source Files\Workers</Filter>
-    </ClCompile>
-    <ClCompile Include="settingschain.cpp">
-      <Filter>Source Files\Workers</Filter>
-    </ClCompile>
-    <ClCompile Include="user.cpp">
-      <Filter>Source Files\Workers</Filter>
-    </ClCompile>
-    <ClCompile Include="cleaning.cpp">
-      <Filter>Source Files\Wizard Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="fileaccess.cpp">
-      <Filter>Source Files\Wizard Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="finished.cpp">
-      <Filter>Source Files\Wizard Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="openerror.cpp">
-      <Filter>Source Files\Wizard Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="progress.cpp">
-      <Filter>Source Files\Wizard Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="selectdb.cpp">
-      <Filter>Source Files\Wizard Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="welcome.cpp">
-      <Filter>Source Files\Wizard Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="utf.cpp">
+    <ClCompile Include="src\worker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="database.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dbtool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\database.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -118,6 +121,9 @@
     <None Include="res\profiley.ico">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="docs\langpack_dbtool.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
@@ -125,6 +131,8 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="dbtool.exe.manifest" />
+    <Manifest Include="dbtool.exe.manifest">
+      <Filter>Source Files</Filter>
+    </Manifest>
   </ItemGroup>
 </Project>
