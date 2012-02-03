@@ -1,5 +1,4 @@
 /*
-
 Miranda IM: the free IM client for Microsoft* Windows*
 
 Copyright 2000-2011 Miranda ICQ/IM project,
@@ -19,7 +18,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-
 */
 
 #include "commonheaders.h"
@@ -547,7 +545,19 @@ void ParseCommandLine()
 	}	
 }
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int )
+int APIENTRY _tWinMain( HINSTANCE hInstance,
+	HINSTANCE hPrevInstance,
+	PTSTR    lpCmdLine,
+	int       nCmdShow )
+
+/* ToDO if i fully removed the ANSI shit!
+
+int WINAPI WinMain ( HINSTANCE hInstance,            // Instance 
+	HINSTANCE hPrevInstance,						// Previous Instance 
+	LPSTR lpCmdLine,								// Command Line Parameters
+	int nCmdShow)									// Window Show State */
+
+//int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int )
 {
 	DWORD myPid=0;
 	int messageloop=1;

@@ -174,11 +174,11 @@ int GetAverageMode(int* pNetProtoCount = NULL)
 			averageMode = CallProtoService( pa->szModuleName, PS_GETSTATUS, 0, 0 );
 		else if ( averageMode > 0 && averageMode != CallProtoService( pa->szModuleName, PS_GETSTATUS, 0, 0 )) {
 			averageMode = -1;
-            if (pNetProtoCount == NULL) break;
-	    }	
-    }
+			if (pNetProtoCount == NULL) break;
+		}	
+	}
 
-    if (pNetProtoCount) *pNetProtoCount = netProtoCount;
+	if (pNetProtoCount) *pNetProtoCount = netProtoCount;
 	return averageMode;
 }
 
@@ -642,25 +642,25 @@ INT_PTR StatusMenuExecService(WPARAM wParam, LPARAM)
 				NotifyEventHooks(hStatusModeChangeEvent, smep->status, (LPARAM)smep->proto);
 			}
 			else {
-	            int MenusProtoCount = 0;
+				int MenusProtoCount = 0;
 
-	            for( int i=0; i < accounts.getCount(); i++ )
-		            if ( cli.pfnGetProtocolVisibility( accounts[i]->szModuleName ))
-			            MenusProtoCount++;
+				for( int i=0; i < accounts.getCount(); i++ )
+					if ( cli.pfnGetProtocolVisibility( accounts[i]->szModuleName ))
+						MenusProtoCount++;
 
-	            cli.currentDesiredStatusMode = smep->status;
+				cli.currentDesiredStatusMode = smep->status;
 
-	            for ( int j=0; j < accounts.getCount(); j++ ) {
-		            PROTOACCOUNT* pa = accounts[j];
-		            if ( !Proto_IsAccountEnabled( pa ))
-			            continue;
-		            if ( MenusProtoCount > 1 && Proto_IsAccountLocked( pa ))
-			            continue;
+				for ( int j=0; j < accounts.getCount(); j++ ) {
+					PROTOACCOUNT* pa = accounts[j];
+					if ( !Proto_IsAccountEnabled( pa ))
+						continue;
+					if ( MenusProtoCount > 1 && Proto_IsAccountLocked( pa ))
+						continue;
 
 					Proto_SetStatus(pa->szModuleName, cli.currentDesiredStatusMode);
-	            }
-	            NotifyEventHooks( hStatusModeChangeEvent, cli.currentDesiredStatusMode, 0 );
-	            DBWriteContactSettingWord( NULL, "CList", "Status", ( WORD )cli.currentDesiredStatusMode );
+				}
+				NotifyEventHooks( hStatusModeChangeEvent, cli.currentDesiredStatusMode, 0 );
+				DBWriteContactSettingWord( NULL, "CList", "Status", ( WORD )cli.currentDesiredStatusMode );
 				return 1;
 	}	}	}
 
@@ -759,15 +759,15 @@ BOOL FindMenuHanleByGlobalID(HMENU hMenu, PMO_IntMenuItem id, MenuItemData* itda
 
 static INT_PTR MenuProcessHotkey(WPARAM vKey, LPARAM)
 {
-    prochotkey = true;
+	prochotkey = true;
 
-    bool res = 
-        MO_ProcessHotKeys( hStatusMenuObject, vKey ) ||
-        MO_ProcessHotKeys( hMainMenuObject, vKey );
+	bool res = 
+		MO_ProcessHotKeys( hStatusMenuObject, vKey ) ||
+		MO_ProcessHotKeys( hMainMenuObject, vKey );
 
-    prochotkey = false;
+	prochotkey = false;
 
-    return res;
+	return res;
 }
 
 static int MenuIconsChanged(WPARAM, LPARAM)
@@ -829,7 +829,7 @@ int fnGetProtocolVisibility(const char* accName)
 	if ( accName ) {
 		PROTOACCOUNT* pa = Proto_GetAccount( accName );
 		return pa && pa->bIsVisible && Proto_IsAccountEnabled( pa ) && 
-            pa->ppro && (pa->ppro->GetCaps( PFLAGNUM_2, 0 ) & ~pa->ppro->GetCaps( PFLAGNUM_5, 0 ));
+			pa->ppro && (pa->ppro->GetCaps( PFLAGNUM_2, 0 ) & ~pa->ppro->GetCaps( PFLAGNUM_5, 0 ));
 	}
 
 	return FALSE;
@@ -1110,9 +1110,9 @@ static int MenuProtoAck(WPARAM, LPARAM lParam)
 	if ( ack->result != ACKRESULT_SUCCESS ) return 0;
 	if ( hStatusMainMenuHandles == NULL ) return 0;
 
-    if ( cli.pfnGetProtocolVisibility( ack->szModule ) == 0 ) return 0;
+	if ( cli.pfnGetProtocolVisibility( ack->szModule ) == 0 ) return 0;
 
-    overallStatus = GetAverageMode();
+	overallStatus = GetAverageMode();
 
 	memset(&tmi,0,sizeof(tmi));
 	tmi.cbSize=sizeof(tmi);
