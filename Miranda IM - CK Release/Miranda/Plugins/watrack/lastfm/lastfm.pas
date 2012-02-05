@@ -67,7 +67,7 @@ const
 
 procedure TimerProc(wnd:HWND;uMsg:uint;idEvent:uint_ptr;dwTime:dword); stdcall;
 var
-  res:uint_ptr;
+  res:{$IFDEF COMPILER_16_UP}Longword{$ELSE}uint_ptr{$ENDIF};
 begin
   if hTimer<>0 then
   begin
@@ -89,7 +89,10 @@ begin
   case wParam of
     WAT_EVENT_NEWTRACK: begin
       if hTimer<>0 then
+      begin
         KillTimer(0,hTimer);
+        hTimer:=0;
+      end;
       if lfm_on=0 then
         hTimer:=SetTimer(0,0,30000,@TimerProc)
     end;
@@ -246,7 +249,7 @@ begin
 
   LoadOpt;
 
-  if md5.cbSize=0 then
+//  if md5.cbSize=0 then
   begin
     md5.cbSize:=SizeOf(TMD5_INTERFACE);
     if (CallService(MS_SYSTEM_GET_MD5I,0,lparam(@md5))<>0) then
@@ -269,6 +272,8 @@ begin
   else
     PluginLink^.DestroyServiceFunction(slastinf);
 
+  CallService(MS_CLIST_REMOVEMAINMENUITEM,hMenuLast,0);
+  hMenuLast:=0;
   PluginLink^.DestroyServiceFunction(slast);
   PluginLink^.UnhookEvent(plStatusHook);
   PluginLink^.UnhookEvent(sic);

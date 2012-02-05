@@ -1,5 +1,5 @@
 /*
-Miranda SmileyAdd Plugin
+Miranda IM SmileyAdd Plugin
 Copyright (C) 2005 - 2010 Boris Krasnovskiy
 Copyright (C) 2003 - 2004 Rein-Peter de Boer
 
@@ -19,24 +19,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <richedit.h>
 
 #define SAFLRE_INSERTEMF  2     // insert smiley as EMF into RichEdit, otherwise bitmap inserted
-                                // this flag allows "true" transparency
+								// this flag allows "true" transparency
 #define SAFLRE_OUTGOING  4      // Parsing outgoing message
 #define SAFLRE_NOCUSTOM  8      // Do not use custom smileys
 
 typedef struct 
 {
-    unsigned cbSize;            //size of the structure
-    HWND hwndRichEditControl;   //handle to the rich edit control
-    CHARRANGE* rangeToReplace;  //same meaning as for normal Richedit use (NULL = replaceall)
-    const char* Protocolname;   //protocol to use... if you have defined a protocol, u can 
-                                //use your own protocol name. SmileyAdd will automatically 
-                                //select the smileypack that is defined for your protocol.
-                                //Or, use "Standard" for standard smiley set. Or "ICQ", "MSN"
-                                //if you prefer those icons. 
-                                //If not found or NULL, "Standard" will be used
-    unsigned flags;             //Flags (SAFLRE_*) that define the behaivior
-    BOOL disableRedraw;         //Parameter have been depricated, have no effect on operation
-    HANDLE hContact;            //Contact handle
+	unsigned cbSize;            //size of the structure
+	HWND hwndRichEditControl;   //handle to the rich edit control
+	CHARRANGE* rangeToReplace;  //same meaning as for normal Richedit use (NULL = replaceall)
+	const char* Protocolname;   //protocol to use... if you have defined a protocol, u can 
+								//use your own protocol name. SmileyAdd will automatically 
+								//select the smileypack that is defined for your protocol.
+								//Or, use "Standard" for standard smiley set. Or "ICQ", "MSN"
+								//if you prefer those icons. 
+								//If not found or NULL, "Standard" will be used
+	unsigned flags;             //Flags (SAFLRE_*) that define the behaivior
+	BOOL disableRedraw;         //Parameter have been depricated, have no effect on operation
+	HANDLE hContact;            //Contact handle
 } SMADD_RICHEDIT3;
 
 //Replace smileys in a rich edit control... 
@@ -48,23 +48,23 @@ typedef struct
 
 typedef struct 
 {
-    unsigned cbSize;            //size of the structure
-    char* Protocolname;         //protocol to use... if you have defined a protocol, you can 
-                                //use your own protocol name. Smiley add will automatically 
-                                //select the smileypack that is defined for your protocol.
-                                //Or, use "Standard" for standard smiley set. Or "ICQ", "MSN"
-                                //if you prefer those icons. 
-                                //If not found or NULL: "Standard" will be used
-    int xPosition;              //Postition to place the selectwindow
-    int yPosition;              // "
-    int Direction;              //Direction (i.e. size upwards/downwards/etc) of the window 0, 1, 2, 3
+	unsigned cbSize;            //size of the structure
+	char* Protocolname;         //protocol to use... if you have defined a protocol, you can 
+								//use your own protocol name. Smiley add will automatically 
+								//select the smileypack that is defined for your protocol.
+								//Or, use "Standard" for standard smiley set. Or "ICQ", "MSN"
+								//if you prefer those icons. 
+								//If not found or NULL: "Standard" will be used
+	int xPosition;              //Postition to place the selectwindow
+	int yPosition;              // "
+	int Direction;              //Direction (i.e. size upwards/downwards/etc) of the window 0, 1, 2, 3
 
-    HWND hwndTarget;            //Window, where to send the message when smiley is selected.
-    UINT targetMessage;         //Target message, to be sent.
-    LPARAM targetWParam;        //Target WParam to be sent (LParam will be char* to select smiley)
-                                //see the example file.
-    HWND hwndParent;            //Parent window for smiley dialog 
-    HANDLE hContact;            //Contact handle
+	HWND hwndTarget;            //Window, where to send the message when smiley is selected.
+	UINT targetMessage;         //Target message, to be sent.
+	LPARAM targetWParam;        //Target WParam to be sent (LParam will be char* to select smiley)
+								//see the example file.
+	HWND hwndParent;            //Parent window for smiley dialog 
+	HANDLE hContact;            //Contact handle
 } SMADD_SHOWSEL3;
 
 //Show smiley selection window 
@@ -76,15 +76,15 @@ typedef struct
 
 typedef struct 
 {
-    unsigned cbSize;            //size of the structure
-    char* Protocolname;         //   "             "
-    HICON ButtonIcon;           //RETURN VALUE: this is filled with the icon handle
-                                //of the smiley that can be used on the button
-                                //if used with GETINFO2 handle must be destroyed by user!
-                                //NULL if the buttonicon is not defined...
-    int NumberOfVisibleSmileys; //Number of visible smileys defined.
-    int NumberOfSmileys;        //Number of total smileys defined
-    HANDLE hContact;            //Contact handle
+	unsigned cbSize;            //size of the structure
+	char* Protocolname;         //   "             "
+	HICON ButtonIcon;           //RETURN VALUE: this is filled with the icon handle
+								//of the smiley that can be used on the button
+								//if used with GETINFO2 handle must be destroyed by user!
+								//NULL if the buttonicon is not defined...
+	int NumberOfVisibleSmileys; //Number of visible smileys defined.
+	int NumberOfSmileys;        //Number of total smileys defined
+	HANDLE hContact;            //Contact handle
 } SMADD_INFO2;
 
 //get button smiley icon
@@ -112,41 +112,41 @@ typedef struct
 
 typedef struct 
 {
-    unsigned cbSize;            //size of the structure
-    const char* Protocolname;   //protocol to use... if you have defined a protocol, u can 
-                                //use your own protocol name. Smiley add wil automatically 
-                                //select the smileypack that is defined for your protocol.
-                                //Or, use "Standard" for standard smiley set. Or "ICQ", "MSN"
-                                //if you prefer those icons. 
-                                //If not found or NULL: "Standard" will be used
-    union {
-       TCHAR*   str;            //String to parse
-       char*    astr;
-       wchar_t* wstr;
-    };
-    unsigned flag;              //One of the SAFL_ flags specifies parsing requirements
-                                //This parameter should be filled by the user
+	unsigned cbSize;            //size of the structure
+	const char* Protocolname;   //protocol to use... if you have defined a protocol, u can 
+								//use your own protocol name. Smiley add wil automatically 
+								//select the smileypack that is defined for your protocol.
+								//Or, use "Standard" for standard smiley set. Or "ICQ", "MSN"
+								//if you prefer those icons. 
+								//If not found or NULL: "Standard" will be used
+	union {
+	   TCHAR*   str;            //String to parse
+	   char*    astr;
+	   wchar_t* wstr;
+	};
+	unsigned flag;              //One of the SAFL_ flags specifies parsing requirements
+								//This parameter should be filled by the user
 
-    unsigned numSmileys;        //Number of Smileys found, this parameter filled by SmileyAdd
-    unsigned oflag;             //One of the SAFL_ flags specifies content of the parse results
-                                //this parameter filled by SmileyAdd
-    HANDLE hContact;            //Contact handle
+	unsigned numSmileys;        //Number of Smileys found, this parameter filled by SmileyAdd
+	unsigned oflag;             //One of the SAFL_ flags specifies content of the parse results
+								//this parameter filled by SmileyAdd
+	HANDLE hContact;            //Contact handle
 } SMADD_BATCHPARSE2;
 
 typedef struct 
 {
-    unsigned startChar;         //Starting smiley character 
-                                //Because of iterative nature of the API caller should set this 
-                                //parameter to correct value
-    unsigned size;              //Number of characters in smiley (0 if not found)
-                                //Because of iterative nature of the API caller should set this 
-                                //parameter to correct value
-    union {
-      const TCHAR*   filepath;
-      const char*    afilepath;
-      const wchar_t* wfilepath;
-      HICON          hIcon;     //User responsible for destroying icon handle 
-    };
+	unsigned startChar;         //Starting smiley character 
+								//Because of iterative nature of the API caller should set this 
+								//parameter to correct value
+	unsigned size;              //Number of characters in smiley (0 if not found)
+								//Because of iterative nature of the API caller should set this 
+								//parameter to correct value
+	union {
+	  const TCHAR*   filepath;
+	  const char*    afilepath;
+	  const wchar_t* wfilepath;
+	  HICON          hIcon;     //User responsible for destroying icon handle 
+	};
 } SMADD_BATCHPARSERES;
 
 //find all smileys in text, API parses the provided text and returns all smileys found
@@ -164,9 +164,9 @@ typedef struct
 
 typedef struct 
 {
-    unsigned cbSize;            //size of the structure
-    char* name;                 //smiley category name for reference
-    char* dispname;             //smiley category name for display 
+	unsigned cbSize;            //size of the structure
+	char* name;                 //smiley category name for reference
+	char* dispname;             //smiley category name for display 
 } SMADD_REGCAT;
 
 //Register smiley category
@@ -220,19 +220,19 @@ typedef struct
 // Extended NMHDR structure for WM_NOTIFY
 typedef struct  
 {   
-    //NMHDR structure
-    HWND hwndFrom;              // Window of smiley host
-    UINT idFrom;                // ignored
-    UINT code;                  // NM_FIREVIEWCHANGE
-    
-    size_t      cbSize;
-    BYTE        bEvent;         // FVCN_ value - pre- or post- painting
-    BYTE        bAction;        // FVCA_ keys
-    HDC         hDC;            // Canvas to draw on
-    RECT        rcRect;         // Valid/should be in case of FVCA_DRAW
-    COLORREF    clrBackground;  // color to fill background if fTransparent is not set
-    BOOL        fTransparent;   // if need to fill back color (not supported)
-    LPARAM      lParam;         // used by host window PreFire and PostFire event
+	//NMHDR structure
+	HWND hwndFrom;              // Window of smiley host
+	UINT idFrom;                // ignored
+	UINT code;                  // NM_FIREVIEWCHANGE
+	
+	size_t      cbSize;
+	BYTE        bEvent;         // FVCN_ value - pre- or post- painting
+	BYTE        bAction;        // FVCA_ keys
+	HDC         hDC;            // Canvas to draw on
+	RECT        rcRect;         // Valid/should be in case of FVCA_DRAW
+	COLORREF    clrBackground;  // color to fill background if fTransparent is not set
+	BOOL        fTransparent;   // if need to fill back color (not supported)
+	LPARAM      lParam;         // used by host window PreFire and PostFire event
 } FVCNDATA_NMHDR;
 
 // Code of WM_NOTIFY message (code)

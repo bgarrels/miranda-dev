@@ -1,7 +1,7 @@
 #ifndef modern_sync_h__
 #define modern_sync_h__
 
-#include "hdr/modern_commonheaders.h"
+#include "../hdr/modern_commonheaders.h"
 
 
 typedef INT_PTR (*PSYNCCALLBACKPROC)(WPARAM,LPARAM);

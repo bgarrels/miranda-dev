@@ -130,6 +130,7 @@ static int LoadDatabase( char * profile, void * plink )
 #endif
 	// don't need thread notifications
 	strncpy(szDbPath, profile, sizeof(szDbPath));
+	szDbPath[sizeof(szDbPath)-1]=0;
 
 	// this is like Load()'s pluginLink
 	pluginLink=link;
@@ -139,6 +140,20 @@ static int LoadDatabase( char * profile, void * plink )
 	mir_getMMI( &mmi );
 	mir_getUTFI( &utfi );
 	mir_getLP( &pluginInfo );
+		return 1;
+		}
+//path
+		{
+		char *p;
+		strncpy(szDbDir,szDbPath,sizeof(szDbDir));
+		p = strrchr(szDbDir, '\\');
+		if ( p != NULL )
+			*(p+1)=0;
+		uiDbDirLen = strlen(szDbDir);
+
+		szDbDirUtf8 = Utf8Encode(szDbDir);
+		uiDbDirLenUtf8 = strlen(szDbDirUtf8);
+	}
 
 	// inject all APIs and hooks into the core
 	return LoadDatabaseModule();
@@ -147,7 +162,9 @@ static int LoadDatabase( char * profile, void * plink )
 static int UnloadDatabase(int wasLoaded)
 {
 	if ( !wasLoaded) return 0;
+	mir_free(szDbDirUtf8);
 	UnloadDatabaseModule();
+	mir_free(szDbDirUtf8);
 	return 0;
 }
 

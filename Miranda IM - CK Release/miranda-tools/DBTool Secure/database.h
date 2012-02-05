@@ -42,8 +42,8 @@ DBHeader
  |   |-->first settings	as above
  |   \-->first/last/firstunread event as above
  \-->first module name (DBModuleName)
-     \-->next module name (DBModuleName)
-	     \--> ...
+	 \-->next module name (DBModuleName)
+		 \--> ...
 */
 
 #define DB_RESIZE_GRANULARITY    16384
@@ -54,11 +54,11 @@ DBHeader
 struct DBHeader {
   BYTE signature[16];      // 'Miranda ICQ DB',0,26
   DWORD version;		   //as 4 bytes, ie 1.2.3.10=0x0102030a
-                           //this version is 0x00000700
+						   //this version is 0x00000700
   DWORD ofsFileEnd;		   //offset of the end of the database - place to write
-                           //new structures
+						   //new structures
   DWORD slackSpace;		   //a counter of the number of bytes that have been
-                           //wasted so far due to deleting structures and/or
+						   //wasted so far due to deleting structures and/or
 						   //re-making them at the end. We should compact when
 						   //this gets above a threshold
   DWORD contactCount;	   //number of contacts in the chain,excluding the user
@@ -71,13 +71,13 @@ struct DBHeader {
 struct DBContact {
   DWORD signature;
   DWORD ofsNext;			 //offset to the next contact in the chain. zero if
-                             //this is the 'user' contact or the last contact
+							 //this is the 'user' contact or the last contact
 							 //in the chain
   DWORD ofsFirstSettings;	 //offset to the first DBContactSettings in the
-                             //chain for this contact.
+							 //chain for this contact.
   DWORD eventCount;			 //number of events in the chain for this contact
   DWORD ofsFirstEvent,ofsLastEvent;	 //offsets to the first and last DBEvent in
-                                     //the chain for this contact
+									 //the chain for this contact
   DWORD ofsFirstUnreadEvent; //offset to the first (chronological) unread event
 							 //in the chain, 0 if all are read
   DWORD timestampFirstUnread; //timestamp of the event at ofsFirstUnreadEvent
@@ -96,22 +96,22 @@ struct DBContactSettings {
   DWORD signature;
   DWORD ofsNext;		 //offset to the next contactsettings in the chain
   DWORD ofsModuleName;	 //offset to the DBModuleName of the owner of these
-                         //settings
+						 //settings
   DWORD cbBlob;			 //size of the blob in bytes. May be larger than the
-                         //actual size for reducing the number of moves
+						 //actual size for reducing the number of moves
 						 //required using granularity in resizing
   BYTE blob[1];			 //the blob. a back-to-back sequence of DBSetting
-                         //structs, the last has cbName=0
+						 //structs, the last has cbName=0
 };
 
 /*	not a valid structure, content is figured out on the fly
 struct DBSetting {
   BYTE cbName;			//number of bytes in the name of this setting
-                        //this =0 marks the end
+						//this =0 marks the end
   char szName[...];		//setting name, excluding nul
   BYTE dataType;		//type of data. see m_database.h, db/contact/getsetting
   union {			   //a load of types of data, length is defined by dataType
-    BYTE bVal; WORD wVal; DWORD dVal;
+	BYTE bVal; WORD wVal; DWORD dVal;
 	struct {
 	  WORD cbString;
 	  char szVal[...];	  //excludes nul terminator
@@ -128,9 +128,9 @@ struct DBSetting {
 struct DBEvent {
   DWORD signature;
   DWORD ofsPrev,ofsNext;	 //offset to the previous and next events in the
-                             //chain. Chain is sorted chronologically
+							 //chain. Chain is sorted chronologically
   DWORD ofsModuleName;		 //offset to a DBModuleName struct of the name of
-                             //the owner of this event
+							 //the owner of this event
   DWORD timestamp;			 //seconds since 00:00:00 01/01/1970
   DWORD flags;				 //see m_database.h, db/event/add
   WORD eventType;			 //module-defined event type

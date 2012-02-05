@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "msn_global.h"
 #include "msn_proto.h"
-#include "../version.h"
+#include "version.h"
 
 #if !defined(_UNICODE) && !defined(_WIN64)
 
@@ -1228,7 +1228,6 @@ int filetransfer::openNext(void)
 	if (fileId != -1) 
 	{
 		close();
-		fileId = -1;
 		++std.currentFileNumber;
 		++cf;
 	}

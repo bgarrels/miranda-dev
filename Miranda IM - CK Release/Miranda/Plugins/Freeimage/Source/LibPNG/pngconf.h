@@ -1,9 +1,9 @@
 
 /* pngconf.h - machine configurable file for libpng
  *
- * libpng version 1.5.8 - February 1, 2012
+ * libpng version 1.5.4 - July 7, 2011
  *
- * Copyright (c) 1998-2012 Glenn Randers-Pehrson
+ * Copyright (c) 1998-2011 Glenn Randers-Pehrson
  * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
  * (Version 0.88 Copyright (c) 1995, 1996 Guy Eric Schalnat, Group 42, Inc.)
  *
@@ -164,9 +164,7 @@
  *                       'type', compiler specific.
  *
  * PNG_DLL_EXPORT Set to the magic to use during a libpng build to
- *                make a symbol exported from the DLL.  Not used in the
- *                public header files; see pngpriv.h for how it is used
- *                in the libpng build.
+ *                make a symbol exported from the DLL.
  *
  * PNG_DLL_IMPORT Set to the magic to force the libpng symbols to come
  *                from a DLL - used to define PNG_IMPEXP when
@@ -260,14 +258,25 @@
 #  define PNGAPI PNGCAPI
 #endif
 
-/* PNG_IMPEXP may be set on the compilation system command line or (if not set)
- * then in an internal header file when building the library, otherwise (when
- * using the library) it is set here.
+/* The default for PNG_IMPEXP depends on whether the library is
+ * being built or used.
  */
 #ifndef PNG_IMPEXP
-#  if defined(PNG_USE_DLL) && defined(PNG_DLL_IMPORT)
-     /* This forces use of a DLL, disallowing static linking */
-#    define PNG_IMPEXP PNG_DLL_IMPORT
+#  ifdef PNGLIB_BUILD
+    /* Building the library */
+#    if (defined(DLL_EXPORT)/*from libtool*/ ||\
+        defined(_WINDLL) || defined(_DLL) || defined(__DLL__) ||\
+        defined(_USRDLL) ||\
+        defined(PNG_BUILD_DLL)) && defined(PNG_DLL_EXPORT)
+      /* Building a DLL. */
+#      define PNG_IMPEXP PNG_DLL_EXPORT
+#    endif /* DLL */
+#  else
+    /* Using the library */
+#    if defined(PNG_USE_DLL) && defined(PNG_DLL_IMPORT)
+      /* This forces use of a DLL, disallowing static linking */
+#      define PNG_IMPEXP PNG_DLL_IMPORT
+#    endif
 #  endif
 
 #  ifndef PNG_IMPEXP
@@ -347,18 +356,25 @@
 #    ifndef PNG_ALLOCATED
 #      define PNG_ALLOCATED  __attribute__((__malloc__))
 #    endif
-#    ifndef PNG_DEPRECATED
-#      define PNG_DEPRECATED __attribute__((__deprecated__))
-#    endif
-#    ifndef PNG_PRIVATE
-#      if 0 /* Doesn't work so we use deprecated instead*/
-#        define PNG_PRIVATE \
-          __attribute__((warning("This function is not exported by libpng.")))
-#      else
-#        define PNG_PRIVATE \
-          __attribute__((__deprecated__))
+
+    /* This specifically protects structure members that should only be
+     * accessed from within the library, therefore should be empty during
+     * a library build.
+     */
+#    ifndef PNGLIB_BUILD
+#      ifndef PNG_DEPRECATED
+#        define PNG_DEPRECATED __attribute__((__deprecated__))
 #      endif
-#    endif
+#      ifndef PNG_PRIVATE
+#        if 0 /* Doesn't work so we use deprecated instead*/
+#          define PNG_PRIVATE \
+            __attribute__((warning("This function is not exported by libpng.")))
+#        else
+#          define PNG_PRIVATE \
+            __attribute__((__deprecated__))
+#        endif
+#      endif
+#    endif /* PNGLIB_BUILD */
 #  endif /* __GNUC__ */
 
 #  if defined(_MSC_VER)  && (_MSC_VER >= 1300)
@@ -366,19 +382,26 @@
 #      define PNG_USE_RESULT /* not supported */
 #    endif
 #    ifndef PNG_NORETURN
-#      define PNG_NORETURN __declspec(noreturn)
+#      define PNG_NORETURN   __declspec(noreturn)
 #    endif
 #    ifndef PNG_ALLOCATED
 #      if (_MSC_VER >= 1400)
 #        define PNG_ALLOCATED __declspec(restrict)
 #      endif
 #    endif
-#    ifndef PNG_DEPRECATED
-#      define PNG_DEPRECATED __declspec(deprecated)
-#    endif
-#    ifndef PNG_PRIVATE
-#      define PNG_PRIVATE __declspec(deprecated)
-#    endif
+
+    /* This specifically protects structure members that should only be
+     * accessed from within the library, therefore should be empty during
+     * a library build.
+     */
+#    ifndef PNGLIB_BUILD
+#      ifndef PNG_DEPRECATED
+#        define PNG_DEPRECATED __declspec(deprecated)
+#      endif
+#      ifndef PNG_PRIVATE
+#        define PNG_PRIVATE __declspec(deprecated)
+#      endif
+#    endif /* PNGLIB_BUILD */
 #  endif /* _MSC_VER */
 #endif /* PNG_PEDANTIC_WARNINGS */
 

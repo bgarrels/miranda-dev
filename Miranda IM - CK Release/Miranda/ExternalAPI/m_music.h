@@ -111,8 +111,8 @@ typedef struct tSongInfo {
   warning: Non-Unicode data filled only by request
   if lParam=0 only internal SongInfo structure will be filled
   Example:
-    LPSONGINFO p;
-    PluginLink->CallService(MS_WAT_GETMUSICINFO,0,(DWORD)&p);
+	LPSONGINFO p;
+	PluginLink->CallService(MS_WAT_GETMUSICINFO,0,(DWORD)&p);
 */
 #define MS_WAT_GETMUSICINFO  "WATrack/GetMusicInfo"
 
@@ -122,7 +122,7 @@ typedef struct tSongInfo {
   Affects: Fill structure by info from file named in SongInfo.mfile
   returns: 0, if success
   note: fields, which values can't be obtained, leaves old values.
-    you must free given strings by miranda mmi.free
+	you must free given strings by miranda mmi.free
 */
 #define MS_WAT_GETFILEINFO "WATrack/GetFileInfo"
 
@@ -164,10 +164,10 @@ typedef struct tSongInfo {
 
 /*
   wParam: 1  - switch off plugin
-          0  - switch on plugin
-          -1 - switch plugin status
-          2  - get plugin version
-          other - get plugin status
+		  0  - switch on plugin
+		  -1 - switch plugin status
+		  2  - get plugin version
+		  other - get plugin status
   lParam: 0
   Affects: Switch plugin status to enabled or disabled
   returns: old plugin status, 0, if was enabled
@@ -257,7 +257,7 @@ typedef struct tSongInfo {
 #define WAT_OPT_IMPLANTANT  0x00200 // use process implantation
 #define WAT_OPT_HASURL      0x00400 // (player registration) URL field present
 #define WAT_OPT_CHANGES     0x00800 // obtain only chaged values
-                                    // (volume, status, window text, elapsed time)
+									// (volume, status, window text, elapsed time)
 #define WAT_OPT_APPCOMMAND  0x01000 // Special (multimedia) key support
 #define WAT_OPT_CHECKALL    0x02000 // Check all players
 #define WAT_OPT_KEEPOLD     0x04000 // Keep Old opened file
@@ -269,15 +269,15 @@ typedef struct tSongInfo {
 typedef BOOL (__cdecl *LPREADFORMATPROC)(LPSONGINFO Info);
 
 typedef struct tMusicFormat {
-    LPREADFORMATPROC proc;
-    CHAR ext[8];
-    UINT flags;
+	LPREADFORMATPROC proc;
+	CHAR ext[8];
+	UINT flags;
 } MUSICFORMAT, *LPMUSICFORMAT;
 
 /*
   wParam: action
   lParam: pointer to MUSICFORMAT if wParam = WAT_ACT_REGISTER,
-          else - pointer to extension string (ANSI)
+		  else - pointer to extension string (ANSI)
   returns: see result codes
 */
 #define MS_WAT_FORMAT  "WATrack/Format"
@@ -321,10 +321,10 @@ typedef struct tPlayerCell {
 /*
   wParam: action
   lParam: pointer to PLAYERCELL if wParam = WAT_ACT_REGISTER,
-          else - pointer to player description string (ANSI)
+		  else - pointer to player description string (ANSI)
   returns: player window handle or value>0 if found
   note: If you use GetName or GetInfo field, please, do not return empty
-        filename even when mediafile is remote!
+		filename even when mediafile is remote!
 */
 #define MS_WAT_PLAYER   "WATrack/Player"
 

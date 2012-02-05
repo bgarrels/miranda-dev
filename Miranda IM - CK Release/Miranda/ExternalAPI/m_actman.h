@@ -47,10 +47,10 @@ typedef struct{
 #define MS_ACT_RUNPARAMS "Actions/RunWithParams"
 typedef struct TAct_Param
 	{
-    DWORD flags; // 0 - ID, 1 - Name
-    DWORD ID; // Id or name
-    WPARAM wParam;
-    LPARAM lParam;
+	DWORD flags; // 0 - ID, 1 - Name
+	DWORD ID; // Id or name
+	WPARAM wParam;
+	LPARAM lParam;
 	} TAct_Param, *PAct_Param;
 
 #define ACTM_NEW      0x00000001

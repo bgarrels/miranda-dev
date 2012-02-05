@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{494ae410-282e-473d-b957-456a6908965f}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Workers">
+      <UniqueIdentifier>{0c72f462-0b2d-45ea-b714-25219da1c819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Wizard Pages">
+      <UniqueIdentifier>{39e9f578-3969-4c95-9c8c-20f4604037fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{545478c1-840a-48bf-ab03-d069cfe06295}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{3b11d887-fbc6-49f5-b39e-bb03a6f8e562}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{73de602d-3aca-4dba-be98-04612c5e6e3d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\cleaning.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fileaccess.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\finished.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\openerror.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\progress.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\selectdb.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\welcome.cpp">
+      <Filter>Source Files\Wizard Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\aggressive.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\contactchain.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\eventchain.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\finaltasks.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\initialchecks.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modulechain.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\settingschain.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\user.cpp">
+      <Filter>Source Files\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\disk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\langpack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SecureDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sha256.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wizard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\worker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="database.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbtool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SecureDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sha256.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\dbtool.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\dbtool.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\logo.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\profileg.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\profiler.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\profiley.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="docs\dbtool-license.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\dbtool-readme.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\langpack_dbtools.txt">
+      <Filter>docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="dbtool.exe.manifest" />
+  </ItemGroup>
+</Project>

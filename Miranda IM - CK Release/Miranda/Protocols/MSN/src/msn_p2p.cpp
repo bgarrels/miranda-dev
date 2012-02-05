@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "msn_global.h"
 #include "msn_proto.h"
-#include "m_smileyadd.h"
+#include "sdk/m_smileyadd.h"
 
 static const char sttP2Pheader[] =
 	"Content-Type: application/x-msnmsgrp2p\r\n"
@@ -925,6 +925,7 @@ LONG  CMsnProto::p2p_sendPortion(filetransfer* ft, ThreadData* T, bool isV2)
 		*(unsigned*)databuf = portion + (p - databuf) - (unsigned)sizeof(unsigned);
 
 	// Fill data (payload) for transfer
+	if (ft->fileId == -1) return 0;
 	_read(ft->fileId, p, portion);
 	p += portion;
 
@@ -1013,6 +1014,7 @@ void __cdecl CMsnProto::p2p_sendFeedThread(void* arg)
 		if (ft->tType != lastType)
 			T = MSN_GetThreadByContact(ft->p2p_dest, ft->tType);
 
+		if (ft->bCanceled) break;
 		bool cfault = (T == NULL || p2p_sendPortion(ft, T, isV2) == 0);
 
 		if (cfault) 
@@ -1033,13 +1035,19 @@ void __cdecl CMsnProto::p2p_sendFeedThread(void* arg)
 			WaitForSingleObject(T->hWaitEvent, 5000);
 	}
 	ReleaseMutex(hLockHandle);
-	SendBroadcast(ft->std.hContact, ACKTYPE_FILE, ACKRESULT_DATA, ft, (LPARAM)&ft->std);
-
-	if (isV2 && ft->p2p_appID == MSN_APPID_FILE)
+	
+	if (ft->p2p_appID == MSN_APPID_FILE)
 	{
-		ft->bCompleted = true;
-		p2p_sendBye(ft);
-		p2p_sessionComplete(ft);
+		SendBroadcast(ft->std.hContact, ACKTYPE_FILE, ACKRESULT_DATA, ft, (LPARAM)&ft->std);
+		if (isV2)
+		{
+			if (!ft->bCanceled)
+			{
+				ft->bCompleted = true;
+				p2p_sendBye(ft);
+			}
+			p2p_sessionComplete(ft);
+		}
 	}
 	MSN_DebugLog("File send thread completed");
 }
@@ -1204,7 +1212,7 @@ void CMsnProto::p2p_InitFileTransfer(
 	replaceStr(ft->p2p_branch, szBranch);
 	ft->p2p_dest = mir_strdup(wlid);
 	ft->p2p_isV2 = strchr(wlid, ';') != NULL;
-	ft->std.hContact = MSN_HContactFromEmail(wlid);
+ 	ft->std.hContact = MSN_HContactFromEmail(wlid);
 
 	p2p_registerSession(ft);
 
@@ -1780,7 +1788,7 @@ void CMsnProto::p2p_processSIP(ThreadData* info, char* msgbody, P2PB_Header* hdr
 
 //			application/x-msnmsgr-session-failure-respbody
 			
-			directconnection *dc = p2p_getDCByCallID(callID, wlid);
+  			directconnection *dc = p2p_getDCByCallID(callID, wlid);
 			if (dc != NULL)
 			{
 				p2p_unregisterDC(dc);
@@ -1855,7 +1863,7 @@ void  CMsnProto::p2p_processMsgV2(ThreadData* info,  char* msgbody, const char* 
 
 			if (hdrdata.mRemSize == 0)
 			{
-				size_t newsize;
+	  			size_t newsize;
 				if (getCachedMsg(idx, msgbody, newsize))
 				{
 					unsigned id = hdrdata.mID;

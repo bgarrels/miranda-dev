@@ -1,7 +1,7 @@
 #ifndef __MAILBROWSER_H
 #define __MAILBROWSER_H
 
-#include "../m_account.h"
+#include "m_account.h"
 #include "../debug.h"
 
 typedef struct MailBrowserWinParam

@@ -30,7 +30,7 @@ Boston, MA 02111-1307, USA.
 #define HISTORYEVENTS_FORMAT_RICH_TEXT		4
 #define HISTORYEVENTS_FORMAT_HTML			8
 
-#define HISTORYEVENTS_FLAG_DEFAULT						(1 << 0) // Is a miranda core event type
+#define HISTORYEVENTS_FLAG_DEFAULT						(1 << 0) // Is a miranda im core event type
 #define HISTORYEVENTS_FLAG_SHOW_IM_SRMM					(1 << 1) // If this event has to be shown in srmm dialog
 #define HISTORYEVENTS_FLAG_USE_SENT_FLAG				(1 << 2) // Means that it can be a sent or received and uses DBEF_SENT to mark that
 #define HISTORYEVENTS_FLAG_EXPECT_CONTACT_NAME_BEFORE	(1 << 3) // Means that who is drawing this should draw the contact name before the text
@@ -90,7 +90,7 @@ To retrieve by number, pass -1 as type. To retrieve by type, pass -1 as number.
 wParam: (int) event number
 lParam: (int) event type
 Return: (const HISTORY_EVENT_HANDLER *) if the event exists, NULL  otherwise. Don't change the
-		returned strunc: it is a pointer to the internall struct.
+		returned strunc: it is a pointer to the internal struct.
 */
 #define MS_HISTORYEVENTS_GET_EVENT		"HistoryEvents/GetEvent"
 

@@ -72,7 +72,7 @@
     <ClCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;WBOSD_EXPORTS;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -106,20 +106,23 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="events.cpp" />
-    <ClCompile Include="main.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release UNICODE|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="options.cpp" />
-    <ClCompile Include="wbOSD.cpp" />
+    <ClCompile Include="src\events.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\options.cpp" />
+    <ClCompile Include="src\wbOSD.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="wbOSD.h" />
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\resource.h" />
+    <ClInclude Include="src\wbOSD.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="wbOSD.rc" />
+    <None Include="docs\langpack_wbOSD.txt" />
+    <None Include="docs\lpgen.pl" />
+    <None Include="docs\readme" />
+    <None Include="docs\wbOSD-translation.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\wbOSD.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

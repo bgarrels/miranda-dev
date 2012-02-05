@@ -22,8 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #define MIRANDA_VER 0x1000
-
-#define _WIN32_WINNT 0x0501
+#define _WIN32_WINNT 0x0502
 
 #include "m_stdhdr.h"
 
@@ -46,7 +45,19 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "version.h"
 
 extern PLUGINLINK *pluginLink;
+extern char szMirandaDir[MAX_PATH];
+extern size_t uiMirandaDirLen;
+extern char szDbDir[MAX_PATH];
+extern size_t uiDbDirLen;
+extern char *szMirandaDirUtf8;
+extern size_t uiMirandaDirLenUtf8;
+extern char *szDbDirUtf8;
+extern size_t uiDbDirLenUtf8;
 
+extern struct MM_INTERFACE memoryManagerInterface;
+extern char gszMirandaDir[MAX_PATH];
+extern unsigned int giMirandaDirLen;
+#define DBVT_PATH   250			//pszVal is valid
 extern struct LIST_INTERFACE li;
 
 #ifdef __GNUC__
@@ -55,4 +66,9 @@ extern struct LIST_INTERFACE li;
 #define mir_i64(x) (x##i64)
 #endif
 
+
+#define DBVT_ASCIIZ_PATH    250	  //pszVal is valid
+#define DBVT_UTF8_PATH	    249	  //pszVal is valid
+#define DBVT_ASCIIZ_DB_PATH 248	  //pszVal is valid
+#define DBVT_UTF8_DB_PATH	247	  //pszVal is valid
 #define NEWSTR_ALLOCA(A) (A==NULL)?NULL:strcpy((char*)alloca(strlen(A)+1),A)

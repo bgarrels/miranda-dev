@@ -10,11 +10,11 @@ begin
     PFLAGNUM_3:
       result:=PF2_ONLINE;// or PF2_INVISIBLE or PF2_SHORTAWAY;
     PFLAGNUM_4:
-      result:=PF4_NOCUSTOMAUTH;
+      result:=PF4_NOCUSTOMAUTH or PF4_AVATARS;
     PFLAG_UNIQUEIDTEXT:
       result:=int_ptr(Translate('Radio station URL'));
-    PFLAG_UNIQUEIDSETTING:
-      result:=int_ptr(optStationURL)
+//    PFLAG_UNIQUEIDSETTING:
+//      result:=int_ptr(optStationURL)
     else
       result:=0;
   end
@@ -102,7 +102,7 @@ end;
 function Service_GetAwayMsg(wParam:WPARAM;lParam:LPARAM):int_ptr;cdecl;
 var
   ccs:PCCSDATA;
-  res:uint_ptr;
+  res:{$IFDEF COMPILER_16_UP}Longword{$ELSE}uint_ptr{$ENDIF};
 begin
   ccs:=PCCSDATA(lParam);
   if (ccs^.hContact<>0) and (PluginStatus=ID_STATUS_ONLINE) and

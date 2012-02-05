@@ -20,23 +20,22 @@
 #ifndef __M_EXTRAICONS_H__
 #define __M_EXTRAICONS_H__
 
-
 /*
 
 There is 2 ways of registering with Extra Icons service:
 
 1. Using callbacks
-    This works similar to clist API. When you register you provide 2 callbacks, one to rebuild the icons
+	This works similar to clist API. When you register you provide 2 callbacks, one to rebuild the icons
 and one to apply the icons for a contact. 
-    In the RebuildIcons callback, all icons that will be used have to be registered calling 
+	In the RebuildIcons callback, all icons that will be used have to be registered calling 
 MS_CLIST_EXTRA_ADD_ICON service. The value returned by this service has to be stored and used in the
 apply icons.
-    The ApplyIcons callback will be called for all the needed contacts. Inside it, you must call 
+	The ApplyIcons callback will be called for all the needed contacts. Inside it, you must call 
 MS_EXTRAICON_SET_ICON to set the icon for the contact, sending the value returned by MS_CLIST_EXTRA_ADD_ICON
 as the hImage.
 
 2. Using icolib
-    In this case no callback is needed and the plugin just need to call MS_EXTRAICON_SET_ICON passing the 
+	In this case no callback is needed and the plugin just need to call MS_EXTRAICON_SET_ICON passing the 
 icolib name in icoName when needed. If your plugin can have extra icons on startup, remember to do a loop 
 over all contacts to set the initial icon.
 

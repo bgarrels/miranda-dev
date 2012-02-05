@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef SRMM_COMMONHEADERS_H
 #define SRMM_COMMONHEADERS_H
 
-#define MIRANDA_VER 0x0800
+#define MIRANDA_VER 0x0900
 #define MIRANDA_CUSTOM_LP
 
 #define COMPILE_MULTIMON_STUBS
@@ -48,6 +48,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <win2k.h>
 
+//Miranda IM
 #include <newpluginapi.h>
 #include <m_system.h>
 #include <m_database.h>
@@ -73,6 +74,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <m_popup.h>
 #include <m_timezones.h>
 
+//Ieview
 #include "m_ieview.h"
 
 #include "resource.h"
@@ -83,6 +85,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "input.h"
 #include "sendqueue.h"
 
+//ExternalAPI
 #include "m_smileyadd.h"
 #include "m_metacontacts.h"
 #include "m_historyevents.h"

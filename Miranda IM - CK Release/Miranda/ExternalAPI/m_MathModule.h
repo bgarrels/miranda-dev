@@ -4,21 +4,21 @@
 
 
 /*
-           **************************
-           *     2                  *
-        ** *    x  + 2 Pi
-          **  *************  +  R
-           *     Sin(wt)
-           *
+		   **************************
+		   *     2                  *
+		** *    x  + 2 Pi
+		  **  *************  +  R
+		   *     Sin(wt)
+		   *
 
-                   Math-Module
-                 **************
+				   Math-Module
+				 **************
 
-      Miranda Plugin by Stephan Kassemeyer
+	  Miranda Plugin by Stephan Kassemeyer
 
 
    MathModule API  -  (c) Stephan Kassemeyer
-                  8 May, 2004
+				  8 May, 2004
 
 */
 
@@ -45,9 +45,9 @@
 // return: TRUE if replacement succeeded, FALSE if not (disable by user?).
 typedef struct
 {
-    HWND hwndRichEditControl;  // handle of richedit.
-    CHARRANGE* sel;    // NULL: replace all.
-    int disableredraw;
+	HWND hwndRichEditControl;  // handle of richedit.
+	CHARRANGE* sel;    // NULL: replace all.
+	int disableredraw;
 }    TMathRicheditInfo;
 // WARNING:   !!!
 // Strange things happen if you use this function twice on the same CHARRANGE:
@@ -119,19 +119,19 @@ typedef struct
 
 
 // **********parameter functions:
-                       
+					   
 #define MATH_SET_PARAMS "Math/SetParams"
 //--------------------------------------
 // sets a parameter (only integer values) specified in  wparam
 // wparam=paramcode
 // lparam=parametervalue
 // paramcodes:
-    #define MATH_PARAM_BKGCOLOR 0   // (COLORREF) std-rgb-color or TRANSPARENT_Color
-                                    // you can make the BKGCOLOR Transparent (default) by using this color:
-                                    #define TRANSPARENT_Color 0xffffffff -1  // this is default
-    #define MATH_PARAM_FONTCOLOR 1   // (COLORREF) std-rgb-color
-    #define MATH_PARAM_RESIZE_HWND 2            // (HWND) preview window resizes RESIZE_HWND when it is being resized.
-    #define MATH_PARAM_ToolboxEdit_HWND 3       // (HWND) If this hwnd (of an edit-box) is set, MathModule can insert Formula-elements from the Math-Toolbox.
+	#define MATH_PARAM_BKGCOLOR 0   // (COLORREF) std-rgb-color or TRANSPARENT_Color
+									// you can make the BKGCOLOR Transparent (default) by using this color:
+									#define TRANSPARENT_Color 0xffffffff -1  // this is default
+	#define MATH_PARAM_FONTCOLOR 1   // (COLORREF) std-rgb-color
+	#define MATH_PARAM_RESIZE_HWND 2            // (HWND) preview window resizes RESIZE_HWND when it is being resized.
+	#define MATH_PARAM_ToolboxEdit_HWND 3       // (HWND) If this hwnd (of an edit-box) is set, MathModule can insert Formula-elements from the Math-Toolbox.
 
 #define MATH_GET_PARAMS "Math/GetParams"
 //---------------------------------------
@@ -139,12 +139,12 @@ typedef struct
 // wparam=paramcode
 // lparam=lparamOfPARAM // see below
 // paramcodes and returnvalues:
-    #define MATH_PARAM_STARTDELIMITER 4 // retval: *char delimiter // the delimiter that marks the beginning of a formula
-                                      // !!! the result-buffer must be deleted with MTH_FREE_MATH_BUFFER
-                                      // lparam=0
-    #define MATH_PARAM_ENDDELIMITER 5 // retval: *char delimiter // the delimiter that marks the end of a formula
-                                      // !!! the result-buffer must be deleted with MTH_FREE_MATH_BUFFER
-                                      // lparam=0
+	#define MATH_PARAM_STARTDELIMITER 4 // retval: *char delimiter // the delimiter that marks the beginning of a formula
+									  // !!! the result-buffer must be deleted with MTH_FREE_MATH_BUFFER
+									  // lparam=0
+	#define MATH_PARAM_ENDDELIMITER 5 // retval: *char delimiter // the delimiter that marks the end of a formula
+									  // !!! the result-buffer must be deleted with MTH_FREE_MATH_BUFFER
+									  // lparam=0
 // ************end parameter functions.
 
 #define MTH_FREE_MATH_BUFFER "Math/FreeRTFBitmapText"
@@ -176,7 +176,7 @@ typedef struct
 // result=0
 typedef struct
 {
-    int top;
+	int top;
 	int left;
 	int right;
 	int bottom;

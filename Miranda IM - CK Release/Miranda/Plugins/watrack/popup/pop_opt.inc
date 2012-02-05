@@ -20,8 +20,6 @@ const
   opt_PopText     :PAnsiChar = 'popup/poptext';
   opt_PopUpButtons:PAnsiChar = 'popup/usebuttons';
 
-  opt_popuptitle:PAnsiChar = 'template/popuptitle';
-  opt_popuptext :PAnsiChar = 'template/popuptext';
   spref = 'strings/';
 
 function GetModStatus:integer;
@@ -37,8 +35,6 @@ end;
 procedure loadpopup;
 var
   def1,def2:pWideChar;
-  setting:array [0..63] of AnsiChar;
-  pset:PAnsiChar;
 begin
   PopUpButtons:=DBReadByte (0,PluginShort,opt_PopUpButtons,BST_CHECKED);
   PopUpFile   :=DBReadByte (0,PluginShort,opt_PopUpFile   ,BST_CHECKED);
