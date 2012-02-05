@@ -22,8 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #define MIRANDA_VER 0x1000
-
-#define _WIN32_WINNT 0x0501
+#define _WIN32_WINNT 0x0502
 
 #include "m_stdhdr.h"
 
@@ -37,10 +36,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <io.h>
 #include <string.h>
 #include <direct.h>
-#ifndef __GNUC__
-#include <crtdbg.h>
-#endif
-#include "resource.h"
+#include "../resource.h"
 #include "version.h"
 #include <newpluginapi.h>
 #include <win2k.h>
