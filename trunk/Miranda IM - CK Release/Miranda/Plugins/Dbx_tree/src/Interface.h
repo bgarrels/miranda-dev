@@ -2,7 +2,7 @@
 
 dbx_tree: tree database driver for Miranda IM
 
-Copyright 2007-2010 Michael "Protogenes" Kunz,
+Copyright 2007-2012 Michael "Protogenes" Kunz,
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -26,6 +26,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #define MIRANDA_VER 0x0900
 #include <windows.h>
+
+//Miranda IM
 #include "newpluginapi.h"
 #include "m_plugins.h"
 #include "m_system.h"
@@ -52,7 +54,7 @@ extern DATABASELINK gDBLink;
 #define gDescription "Provides extended Miranda database support"
 #define gAutor "Michael 'Protogenes' Kunz"
 #define gAutorEmail "Michael.Kunz@s2005.TU-Chemnitz.de"
-#define gCopyright "2007 - 2010 Michael 'Protogenes' Kunz"
+#define gCopyright "2007 - 2012 Michael 'Protogenes' Kunz"
 
 
 
