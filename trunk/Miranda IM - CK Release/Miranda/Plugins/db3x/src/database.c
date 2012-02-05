@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 #include "commonheaders.h"
 #include "database.h"
+#include "SecureDB.h"
 
 int ProfileManager(char *szDbDest,int cbDbDest);
 int ShouldAutoCreate(void);
@@ -45,6 +46,14 @@ HANDLE hDbFile=INVALID_HANDLE_VALUE;
 CRITICAL_SECTION csDbAccess;
 struct DBHeader dbHeader;
 char szDbPath[MAX_PATH];
+char szDbDir[MAX_PATH];
+size_t uiDbDirLen;
+char szMirandaDir[MAX_PATH];
+size_t uiMirandaDirLen;
+char *szMirandaDirUtf8;
+size_t uiMirandaDirLenUtf8;
+char *szDbDirUtf8;
+size_t uiDbDirLenUtf8;
 
 static void UnloadDatabase(void)
 {
@@ -84,10 +93,15 @@ void UnloadDatabaseModule(void)
 	UninitCache();
 	UnloadDatabase();
 	DeleteCriticalSection(&csDbAccess);
+	mir_free(szMirandaDirUtf8);
 }
+
+char gszMirandaDir[MAX_PATH];
+unsigned int giMirandaDirLen;
 
 int LoadDatabaseModule(void)
 {
+	static int sec=0;
 	InitializeCriticalSection(&csDbAccess);
 	log0("DB logging running");
 	{
@@ -101,6 +115,24 @@ int LoadDatabaseModule(void)
 			return 1;
 		}
 	}
+	
+		{
+		char *p;
+		GetModuleFileName(GetModuleHandle(NULL),szMirandaDir,sizeof(szMirandaDir));
+		p = strrchr(szMirandaDir,'\\');
+		if( p != NULL )
+			*(p+1)=0;
+		uiMirandaDirLen = strlen(szMirandaDir);
+
+		szMirandaDirUtf8 = Utf8Encode(szMirandaDir);
+		uiMirandaDirLenUtf8 = strlen(szMirandaDirUtf8);
+	}
+
+	CheckDbHeaders(&dbHeader,&sec);
+	if(sec && EncGetPassword(&dbHeader,szDbPath)){
+		return 1;
+	}
+	
 	//if(ParseCommandLine()) return 1;
 	if(InitCache()) return 1;
 	if(InitModuleNames()) return 1;
@@ -143,6 +175,14 @@ void DatabaseCorruption(void)
 }
 
 #ifdef DBLOGGING
+__inline static int mir_vsnprintf(char *buffer, size_t count, const char* fmt, va_list va) {
+	int len;
+
+	len = _vsnprintf(buffer, count-1, fmt, va);
+	buffer[count-1] = 0;
+	return len;
+}
+
 void DBLog(const char *file,int line,const char *fmt,...)
 {
 	FILE *fp;

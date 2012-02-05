@@ -1,9 +1,9 @@
 /*
 ===============================================================================
-                                PopUp plugin
+								PopUp plugin
 Plugin Name: PopUp
 Plugin authors: Luca Santarelli aka hrk (hrk@users.sourceforge.net)
-                Victor Pavlychko (nullbie@gmail.com)
+				Victor Pavlychko (nullbie@gmail.com)
 ===============================================================================
 The purpose of this plugin is to give developers a common "platform/interface"
 to show PopUps. It is born from the source code of NewStatusNotify, another
@@ -199,9 +199,9 @@ Otherwise, it can return anything else...
 Popup Plus 2.0.4.0+
 You may pass additional creation flags via lParam:
 /* core define see miranda\include\m_popup.h
-        APF_RETURN_HWND ....... function returns handle to newly created popup window (however this calls are a bit slower)
-        APF_CUSTOM_POPUP ...... new popup is created in hidden state and doesn't obey to popup queue rules.
-                                you may control it via UM_* messages and custom window procedure (not yet implemented)
+		APF_RETURN_HWND ....... function returns handle to newly created popup window (however this calls are a bit slower)
+		APF_CUSTOM_POPUP ...... new popup is created in hidden state and doesn't obey to popup queue rules.
+								you may control it via UM_* messages and custom window procedure (not yet implemented)
 additional APF_ flags */
 #define APF_NO_HISTORY   0x04	//do not log this popup in popup history (useful for previews)
 #define APF_NO_POPUP     0x08	//do not show popup. this is useful if you want popup yo be stored in history only
@@ -365,7 +365,7 @@ Deadlock scenario:
    2. Miranda core calls EnterCriticalSection(csHooks) and starts notifications
    3. You decide to unhook event, therefore call UnhookEvent
    4. Miranda core *INSIDE YOUR THREAD* calls EnterCriticalSection(csHooks) and
-      waits for main thread to finish processing
+	  waits for main thread to finish processing
    5. Main thread calls SendMessage(hwnd, ...) to notify your window
    6. Your window's thread is busy waiting for main thread to leave critical section
    7. deadlock....

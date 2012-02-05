@@ -22,11 +22,11 @@ const
 {$include pop_opt.inc}
 
 const
-  MainTmpl = 'artist: %s'#13#10'title: "%s"'#13#10'album: "%s"'#13#10+
-    'genre: %s'#13#10'comment: %s'#13#10'year: %s'#13#10'track: %u'#13#10+
-    'bitrate: %ukbps %s'#13#10'samplerate: %uKHz'#13#10+
-    'channels: %u'#13#10'length: %s'#13#10'player: "%s" v.%s';
-  AddTmpl = #13#10'file: "%s"'#13#10'size: %u bytes';
+  MainTmpl = 'artist: %ls'#13#10'title: "%ls"'#13#10'album: "%ls"'#13#10+
+    'genre: %ls'#13#10'comment: %ls'#13#10'year: %ls'#13#10'track: %lu'#13#10+
+    'bitrate: %lukbps %ls'#13#10'samplerate: %luKHz'#13#10+
+    'channels: %lu'#13#10'length: %ls'#13#10'player: "%ls" v.%ls';
+  AddTmpl = #13#10'file: "%ls"'#13#10'size: %lu bytes';
 
 procedure ShowMusicInfo(si:pSongInfo);
 var
@@ -58,15 +58,15 @@ begin
     lvars[12]:=uint_ptr(player);
     lvars[13]:=uint_ptr(txtver);
   end;
-  StrCopyW(Tmpl,MainTmpl);
+  StrCopyW(Tmpl,TranslateW(MainTmpl));
   if PopUpFile=BST_CHECKED then
   begin
     lvars[14]:=uint_ptr(si^.mfile);
     lvars[15]:=si^.fsize;
-    StrCatW(Tmpl,AddTmpl);
+    StrCatW(Tmpl,TranslateW(AddTmpl));
   end;
 
-  wvsprintfw(buf,TranslateW(Tmpl),@lvars);
+  wvsprintfw(buf,Tmpl,@lvars);
   MessageBoxW(0,buf,PluginName,MB_OK);
   mFreeMem(buf);
 end;
@@ -290,7 +290,7 @@ end;
 
 procedure ShowPopup(si:pSongInfo);
 var
-  res:uint_ptr;
+  res:{$IFDEF COMPILER_16_UP}Longword{$ELSE}uint_ptr{$ENDIF};
 begin
   CloseHandle(BeginThread(nil,0,@ThShowPopup,si,0,res));
 end;
@@ -470,7 +470,7 @@ begin
   end;
 
   plStatusHook:=PluginLink^.HookEvent(ME_WAT_NEWSTATUS,@NewPlStatus);
-
+(*
   // get info button
   FillChar(ttb,SizeOf(ttb),0);
   ttb.cbSize :=SizeOf(ttb);
@@ -481,6 +481,7 @@ begin
   ttb.pszServiceDown:=MS_WAT_SHOWMUSICINFO;
   ttb.name          :='Music Info';
   ttbInfo:=CallService(MS_TTB_ADDBUTTON,wparam(@ttb),0);
+*)
 end;
 
 procedure DeInitProc(aSetDisable:boolean);
@@ -488,6 +489,7 @@ begin
   if aSetDisable then
     SetModStatus(0);
 
+  CallService(MS_CLIST_REMOVEMAINMENUITEM,hMenuInfo,0);
   PluginLink^.UnhookEvent(plStatusHook);
   PluginLink^.DestroyServiceFunction(ssmi);
   PluginLink^.UnhookEvent(sic);

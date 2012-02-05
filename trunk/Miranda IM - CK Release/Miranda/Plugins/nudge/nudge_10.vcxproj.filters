@@ -18,36 +18,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="nudge.cpp">
+    <ClCompile Include="src\nudge.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="options.cpp">
+    <ClCompile Include="src\options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="shake.cpp">
+    <ClCompile Include="src\shake.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers.h">
+    <ClInclude Include="src\headers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
+    <ClInclude Include="src\main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="nudge.h">
+    <ClInclude Include="src\nudge.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="options.h">
+    <ClInclude Include="src\options.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="shake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

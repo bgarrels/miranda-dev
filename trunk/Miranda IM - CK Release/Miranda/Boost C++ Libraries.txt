@@ -1,3 +1,0 @@
-Some plugins use the Boost c++ libaries, please download it here:
-
-http://www.boost.org/

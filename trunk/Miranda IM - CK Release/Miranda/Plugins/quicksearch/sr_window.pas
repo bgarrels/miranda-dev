@@ -344,8 +344,39 @@ begin
 end;
 
 function BuildLastSeenTime(cont:THANDLE;modulename:PAnsiChar):PWideChar;
+
 var
-  vars:array [0..4] of integer;
+  buf:array [0..19] of WideChar;
+  pc:pWideChar;
+  year:integer;
+begin
+  pc:=@buf;
+  year:=DBReadWord(cont,modulename,'Year',0);
+  if year<>0 then
+  begin
+    IntToStr(pc,DBReadWord(cont,modulename,'Day',0),2);
+    inc(pc,2);
+    pc^:='.'; inc(pc);
+    IntToStr(pc,DBReadWord(cont,modulename,'Month',0),2);
+    inc(pc,2);
+    pc^:='.'; inc(pc);
+    IntToStr(pc,year,4);
+    inc(pc,4);
+    pc^:=' '; inc(pc);
+    pc^:='-'; inc(pc);
+    pc^:=' '; inc(pc);
+    IntToStr(pc,DBReadWord(cont,modulename,'Hours',0),2);
+    inc(pc,2);
+    pc^:=':'; inc(pc);
+    IntToStr(pc,DBReadWord(cont,modulename,'Minutes',0),2);
+
+    StrDupw(result,@buf);
+  end
+  else
+    result:=nil;
+{
+var
+  vars:array [0..4] of uint_ptr;
 begin
   vars[2]:=DBReadWord(cont,modulename,'Year',0);
   if vars[2]<>0 then
@@ -355,10 +386,11 @@ begin
     vars[0]:=DBReadWord(cont,modulename,'Day'    ,0);
     vars[3]:=DBReadWord(cont,modulename,'Hours'  ,0);
     vars[4]:=DBReadWord(cont,modulename,'Minutes',0);
-    wvsprintfw(result,'%.2u.%.2u.%.4u - %.2u:%.2u',@vars);
+    wvsprintfw(result,'%.2lu.%.2lu.%.4lu - %.2lu:%.2lu',@vars);
   end
   else
     result:=nil;
+}
 end;
 
 function BuildLastSeenTimeInt(cont:thandle;modulename:PAnsiChar):cardinal;
@@ -702,7 +734,7 @@ begin
     FillChar(fi,SizeOf(fi),0);
     fi.flags :=LVFI_PARAM;
     fi.lParam:=num;
-    result:=SendMessage(grid,LVM_FINDITEM,-1,lparam(@fi));
+    result:=SendMessage(grid,LVM_FINDITEM,wparam(-1),lparam(@fi));
   end
   else
     result:=num;
@@ -755,20 +787,22 @@ var
   aPartPos:array [0..63 ] of integer;
   buf     :array [0..255] of WideChar;
   fmtstr  :array [0..255] of WideChar;
-  vars    :array [0..6  ] of int_ptr;
+  vars    :array [0..6  ] of uint_ptr;
   all:integer;
   i,j:integer;
-  p:PWideChar;
+  p,pc,po,pd,poff,pa:PWideChar;
   rc:TRECT;
   dc:HDC;
   icon:HICON;
   protocnt:integer;
 begin
-  StrCopyW(@fmtstr,TranslateW('%u users found (%u) Online: %u'));
-  vars[0]:=SBData[0].found;
-  vars[1]:=Length(FlagBuf);
-  vars[2]:=SBData[0].online;
-  wvsprintfw(buf,fmtstr,@vars);
+  p:=@buf;
+  p:=StrEndW(IntToStr(p,SBData[0].found));
+  p:=StrCopyEW(p,TranslateW(' users found ('));
+  p:=StrEndW(IntToStr(p,Length(FlagBuf)));
+  p:=StrCopyEW(p,TranslateW(') Online: '));
+  IntToStr(p,SBData[0].online);
+
   dc:=GetDC(StatusBar);
   DrawTextW(dc,pWidechar(@buf),-1,rc,DT_CALCRECT);
   ReleaseDC(StatusBar,dc);
@@ -786,7 +820,10 @@ begin
   SendMessageW(StatusBar,SB_SETPARTS,protocnt+2,lparam(@aPartPos));
   SendMessageW(StatusBar,SB_SETTEXTW,0,lparam(@buf));
 
-  vars[4]:=int_ptr(TranslateW('Online'));
+  po  :=TranslateW('Online');
+  pd  :=TranslateW('deleted');
+  poff:=TranslateW('off');
+  pa  :=TranslateW('active');
 
   for i:=1 to protocnt do
   begin
@@ -801,13 +838,13 @@ begin
     end;
 
     FastAnsiToWideBuf(GetProtoName(i),fmtstr);
-    vars[0]:=int_ptr(@fmtstr);
 
     SendMessageW(StatusBar,SB_SETICON,i,icon);
 
     j:=High(buf);//(SizeOf(buf) div SizeOf(WideChar))-1;
     buf[j]:=#0;
 
+    // fill by spaces
     p:=@buf[0];
     while j>0 do
     begin
@@ -819,29 +856,48 @@ begin
     if (SBData[i].flags and QSF_ACCDEL)<>0 then
     begin
       buf [0]:='!';
-      vars[1]:=int_ptr(TranslateW('deleted'));
+      pc:=pd;
     end
     else if (SBData[i].flags and QSF_ACCOFF)<>0 then
     begin
       buf [0]:='?';
-      vars[1]:=int_ptr(TranslateW('off'));
+      pc:=poff
     end
     else
-      vars[1]:=int_ptr(TranslateW('active'));
+      pc:=pa;
 
     IntToStr(pWideChar(@buf[2]),SBData[i].found);
     StrEndW(buf)^:=' ';
     SendMessageW(StatusBar,SB_SETTEXTW,i,lparam(@buf));
 
 // create tooltip
+    p:=@buf;
+    p:=StrCopyEW(p,fmtstr); // Protocol
+    p^:=' '; inc(p);
+    p^:='('; inc(p);
+    p:=StrCopyEW(p,pc);     // Protocol status
+    p^:=')'; inc(p);
+    p^:=':'; inc(p);
+    p^:=' '; inc(p);
+
     with SBData[i] do
     begin
-      vars[2]:=found;
-      vars[3]:=total;
-      vars[5]:=liston;
-      vars[6]:=online;
+      p:=StrEndW(IntToStr(p,found));
+      p^:=' '; inc(p);
+      p^:='('; inc(p);
+      p:=StrEndW(IntToStr(p,total));
+      p^:=')'; inc(p);
+      p^:=';'; inc(p);
+      p^:=' '; inc(p);
+      p:=StrCopyEW(p,po);
+      p^:=' '; inc(p);
+      p:=StrEndW(IntToStr(p,liston));
+      p^:=' '; inc(p);
+      p^:='('; inc(p);
+      p:=StrEndW(IntToStr(p,online));
+      p^:=')'; inc(p);
     end;
-    wvsprintfw(buf,'%s (%s): %u (%u); %s %u (%u)',@vars);
+    p^:=#0;
     SendMessageW(StatusBar,SB_SETTIPTEXTW,i,lparam(@buf));
   end;
 
@@ -904,10 +960,10 @@ var
   lpatptr:PWideChar;
 begin
   numpattern:=0;
+  mFreeMem(patstr);
   if (pattern<>nil) and (pattern^<>#0) then
   begin
     wasquote:=false;
-    mFreeMem(patstr);
     StrDupW(patstr,pattern);
     lpatptr:=patstr;
     repeat
@@ -946,10 +1002,6 @@ begin
         if numpattern=maxpattern then break;
       end;
     until lpatptr^=#0;
-  end
-  else
-  begin
-    mFreeMem(patstr);
   end;
 end;
 
@@ -1091,6 +1143,9 @@ begin
 
   Sort;
   UpdateSB;
+
+  AdvancedFilter; //!!
+  
   ListView_SetItemState(grid,0,LVIS_FOCUSED or LVIS_SELECTED,
     LVIS_FOCUSED or LVIS_SELECTED);
 end;
@@ -1975,7 +2030,7 @@ begin
       begin
         li.statemask:=LVIS_SELECTED;
         li.state:=0;
-        SendMessage(grid,LVM_SETITEMSTATE,-1,tlparam(@li));
+        SendMessage(grid,LVM_SETITEMSTATE,twparam(-1),tlparam(@li));
         ListView_SetItemState(grid,next,LVIS_FOCUSED or LVIS_SELECTED,
             LVIS_FOCUSED or LVIS_SELECTED);
   //      ListView_EnsureVisible(grid,next,false);
@@ -2342,7 +2397,11 @@ begin
         SetDlgItemTextW(Dialog,IDC_E_SEARCHTEXT,pattern)
       end
       else
+      begin
+        buf[0]:=#0;
+        SetDlgItemTextW(Dialog,IDC_E_SEARCHTEXT,@buf);
         FillGrid;
+      end;
 
       TranslateDialogDefault(dialog);
 

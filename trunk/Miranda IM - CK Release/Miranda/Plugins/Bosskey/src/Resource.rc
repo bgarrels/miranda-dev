@@ -1,0 +1,2 @@
+#include "src/BossKey.rc"
+#include "src/version.rc"

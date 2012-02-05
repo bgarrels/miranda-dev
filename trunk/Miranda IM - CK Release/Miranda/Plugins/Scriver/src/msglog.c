@@ -1,7 +1,5 @@
 /*
-Scriver
-
-Copyright 2000-2009 Miranda ICQ/IM project,
+Scriver - Copyright 2000-2012 Miranda IM project,
 
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -53,18 +51,18 @@ typedef struct EventDataStruct {
 	int         fontStyle;
 	COLORREF	color;
 	union {
-		char *pszNick;		// Nick, usage depends on type of event
-		wchar_t *pszNickW;    // Nick - Unicode
+		char *pszNick;		    // Nick, usage depends on type of event
+		wchar_t *pszNickW;      // Nick - Unicode
 		TCHAR *pszNickT;
 	};
 	union {
 		char *pszText;			// Text, usage depends on type of event
-		wchar_t *pszTextW;			// Text - Unicode
+		wchar_t *pszTextW;		// Text - Unicode
 		TCHAR *pszTextT;
 	};
 	union {
 		char *pszText2;			// Text, usage depends on type of event
-		wchar_t *pszText2W;			// Text - Unicode
+		wchar_t *pszText2W;		// Text - Unicode
 		TCHAR *pszText2T;
 	};
 	DWORD	time;
@@ -1058,7 +1056,7 @@ void StreamInEvents(HWND hwndDlg, HANDLE hDbEventFirst, int count, int fAppend)
 	struct MessageWindowData *dat = (struct MessageWindowData *) GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
 	CHARRANGE oldSel, sel;
 
-// IEVIew MOD Begin
+// IEView MOD Begin
 	if (dat->windowData.hwndLog != NULL) {
 		IEVIEWEVENT event;
 		IEVIEWWINDOW ieWindow;
@@ -1086,7 +1084,7 @@ void StreamInEvents(HWND hwndDlg, HANDLE hDbEventFirst, int count, int fAppend)
 		CallService(MS_IEVIEW_WINDOW, 0, (LPARAM)&ieWindow);
 		return;
 	}
-// IEVIew MOD End
+// IEView MOD End
 
 	SendDlgItemMessage(hwndDlg, IDC_LOG, EM_HIDESELECTION, TRUE, 0);
 	SendDlgItemMessage(hwndDlg, IDC_LOG, EM_EXGETSEL, 0, (LPARAM) & oldSel);

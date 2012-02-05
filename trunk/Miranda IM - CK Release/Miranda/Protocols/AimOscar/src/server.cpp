@@ -1,6 +1,6 @@
 /*
 Plugin of Miranda IM for communicating with users of the AIM protocol.
-Copyright (c) 2008-2011 Boris Krasnovskiy
+Copyright (c) 2008-2012 Boris Krasnovskiy
 Copyright (C) 2005-2006 Aaron Myles Landwehr
 
 This program is free software; you can redistribute it and/or
@@ -19,9 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "../aim.h"
 #include "../version.h"
 
-void CAimProto::snac_md5_authkey(SNAC &snac,HANDLE hServerConn,unsigned short &seqno, const char* username, const char* password)//family 0x0017
+void CAimProto::snac_md5_authkey(SNAC &snac,HANDLE hServerConn,unsigned short &seqno, const char* username, const char* password)				//family 0x0017
 {
-	if (snac.subcmp(0x0007))//md5 authkey string
+	if (snac.subcmp(0x0007))	//md5 authkey string
 	{
 		unsigned short length=snac.ushort();
 		char* authkey = snac.part(2, length);
@@ -30,7 +30,7 @@ void CAimProto::snac_md5_authkey(SNAC &snac,HANDLE hServerConn,unsigned short &s
 	}
 }
 
-int CAimProto::snac_authorization_reply(SNAC &snac)//family 0x0017
+int CAimProto::snac_authorization_reply(SNAC &snac)		//family 0x0017
 {
 	int res = 0;
 	
@@ -180,13 +180,13 @@ void CAimProto::snac_icbm_limitations(SNAC &snac,HANDLE hServerConn,unsigned sho
 
 		char** msgptr = get_status_msg_loc(m_iDesiredStatus);
 		mir_free(last_status_msg);
-		last_status_msg = mir_strdup(*msgptr);
-		aim_set_statusmsg(hServerConn,seqno,*msgptr);
+		last_status_msg = msgptr ? mir_strdup(*msgptr) : NULL;
+		aim_set_statusmsg(hServerConn, seqno, last_status_msg);
 
 		if (m_iDesiredStatus == ID_STATUS_AWAY)
-			aim_set_away(hServerConn, seqno, *msgptr, true);
+			aim_set_away(hServerConn, seqno, last_status_msg, true);
 
-		if (getByte( AIM_KEY_II,0))
+		if (getByte(AIM_KEY_II,0))
 		{
 			unsigned long time = getDword(AIM_KEY_IIT, 0);
 			aim_set_idle(hServerConn,seqno,time*60);

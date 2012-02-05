@@ -57,7 +57,7 @@ Returns 0 on success or nonzero on failure
 #define MS_HELP_SETCONTEXTSTATE  "Help/SetContextState"
 #define HCSF_CONTEXTMENU  0x01  // show help context menu for this control
 #define HCSF_AUTOTIP      0x02  // show automatic help tip on hover for this control
-                                // only works for non-editable
+								// only works for non-editable
 #if !defined(HELP_NOHELPERFUNCTIONS)
 __inline static int Help_SetContextState(HWND hwndCtl,DWORD flags) {
 	if(!ServiceExists(MS_HELP_SETCONTEXTSTATE)) return -1;

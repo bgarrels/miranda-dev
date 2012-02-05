@@ -297,7 +297,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_V                   ICON    DISCARDABLE     "V.ico"
+IDI_V                   ICON    DISCARDABLE     "ico\\V.ico"
 #endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
 

@@ -1,8 +1,13 @@
-{$IMAGEBASE $13000000}
 {$include compilers.inc}
+{$IFDEF COMPILER_16_UP}
+  {$WEAKLINKRTTI ON}
+  {.$RTTI EXPLICIT METHODS([]) PROPERTIES([]) FIELDS([])}
+{$ENDIF}
+{$IMAGEBASE $13000000}
 library WATrack;
 uses
-  {$IFNDEF FPC}fastmm4,{$ENDIF}
+  // FastMM not compatible with FPC, internal for delphi xe
+  {$IFNDEF COMPILER_16_UP}{$IFNDEF FPC}fastmm4,{$ENDIF}{$ENDIF}
   m_api,dbsettings,activex,winampapi,
   Windows,messages,commctrl,//uxtheme,
   srv_format,srv_player,wat_api,wrapper,
@@ -299,7 +304,6 @@ begin
       if stat=WAT_PLS_NORMAL then
       begin
         GetChangingInfo(WorkSI,flags);
-
         // full info requires
         // "no music" case blocked
         if (result=WAT_RES_NEWFILE) or           // new file
@@ -408,7 +412,7 @@ begin
   giused:=0;
 end;
 
-function PressButton(wParam:WPARAM;lParam:LPARAM):int;cdecl;
+function PressButton(wParam:WPARAM;lParam:LPARAM):int_ptr;cdecl;
 var
   flags:integer;
 begin
@@ -437,7 +441,7 @@ begin
     result:=1
   else
     result:=0;
-  if (wParam<0) or (wParam=MenuDisablePos) then
+  if (integer(wParam)<0) or (wParam=MenuDisablePos) then
   begin
     if result=0 then
       wParam:=1

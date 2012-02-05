@@ -13,31 +13,48 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{805ac216-7f9d-48c1-a5ca-95eaa82af351}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="events.cpp">
+    <ClCompile Include="src\events.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="wbOSD.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="options.cpp">
+    <ClCompile Include="src\wbOSD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="wbOSD.h">
+    <ClInclude Include="src\wbOSD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="src\resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="wbOSD.rc">
+    <None Include="docs\lpgen.pl">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\readme">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\wbOSD-translation.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\langpack_wbOSD.txt">
+      <Filter>docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\wbOSD.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

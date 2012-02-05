@@ -390,6 +390,122 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xstatus_MRA", "..\Protocols
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dbtoolS", "..\..\miranda-tools\DBTool Secure\dbtoolS_10.vcxproj", "{EEDDE5B0-C023-40C2-96A5-1D1F4B11B791}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Include", "Include", "{3D06DEBD-4F6C-4201-970A-C52E7F53B76C}"
+	ProjectSection(SolutionItems) = preProject
+		..\Include\m_acc.h = ..\Include\m_acc.h
+		..\Include\m_addcontact.h = ..\Include\m_addcontact.h
+		..\Include\m_avatars.h = ..\Include\m_avatars.h
+		..\Include\m_awaymsg.h = ..\Include\m_awaymsg.h
+		..\Include\m_button.h = ..\Include\m_button.h
+		..\Include\m_chat.h = ..\Include\m_chat.h
+		..\Include\m_clc.h = ..\Include\m_clc.h
+		..\Include\m_clist.h = ..\Include\m_clist.h
+		..\Include\m_clistint.h = ..\Include\m_clistint.h
+		..\Include\m_clui.h = ..\Include\m_clui.h
+		..\Include\m_cluiframes.h = ..\Include\m_cluiframes.h
+		..\Include\m_contactdir.h = ..\Include\m_contactdir.h
+		..\Include\m_contacts.h = ..\Include\m_contacts.h
+		..\Include\m_crypto.h = ..\Include\m_crypto.h
+		..\Include\m_database.h = ..\Include\m_database.h
+		..\Include\m_descbutton.h = ..\Include\m_descbutton.h
+		..\Include\m_email.h = ..\Include\m_email.h
+		..\Include\m_errors.h = ..\Include\m_errors.h
+		..\Include\m_file.h = ..\Include\m_file.h
+		..\Include\m_findadd.h = ..\Include\m_findadd.h
+		..\Include\m_fontservice.h = ..\Include\m_fontservice.h
+		..\Include\m_freeimage.h = ..\Include\m_freeimage.h
+		..\Include\m_fuse.h = ..\Include\m_fuse.h
+		..\Include\m_genmenu.h = ..\Include\m_genmenu.h
+		..\Include\m_help.h = ..\Include\m_help.h
+		..\Include\m_history.h = ..\Include\m_history.h
+		..\Include\m_hotkeys.h = ..\Include\m_hotkeys.h
+		..\Include\m_icolib.h = ..\Include\m_icolib.h
+		..\Include\m_iconheader.h = ..\Include\m_iconheader.h
+		..\Include\m_icq.h = ..\Include\m_icq.h
+		..\Include\m_idle.h = ..\Include\m_idle.h
+		..\Include\m_ignore.h = ..\Include\m_ignore.h
+		..\Include\m_imgsrvc.h = ..\Include\m_imgsrvc.h
+		..\Include\m_jabber.h = ..\Include\m_jabber.h
+		..\Include\m_keybindings.h = ..\Include\m_keybindings.h
+		..\Include\m_langpack.h = ..\Include\m_langpack.h
+		..\Include\m_message.h = ..\Include\m_message.h
+		..\Include\m_modernopt.h = ..\Include\m_modernopt.h
+		..\Include\m_netlib.h = ..\Include\m_netlib.h
+		..\Include\m_options.h = ..\Include\m_options.h
+		..\Include\m_plugins.h = ..\Include\m_plugins.h
+		..\Include\m_png.h = ..\Include\m_png.h
+		..\Include\m_popup.h = ..\Include\m_popup.h
+		..\Include\m_protocols.h = ..\Include\m_protocols.h
+		..\Include\m_protoint.h = ..\Include\m_protoint.h
+		..\Include\m_protomod.h = ..\Include\m_protomod.h
+		..\Include\m_protosvc.h = ..\Include\m_protosvc.h
+		..\Include\m_skin.h = ..\Include\m_skin.h
+		..\Include\m_ssl.h = ..\Include\m_ssl.h
+		..\Include\m_stdhdr.h = ..\Include\m_stdhdr.h
+		..\Include\m_system.h = ..\Include\m_system.h
+		..\Include\m_system_cpp.h = ..\Include\m_system_cpp.h
+		..\Include\m_timezones.h = ..\Include\m_timezones.h
+		..\Include\m_url.h = ..\Include\m_url.h
+		..\Include\m_userinfo.h = ..\Include\m_userinfo.h
+		..\Include\m_utils.h = ..\Include\m_utils.h
+		..\Include\m_version.h = ..\Include\m_version.h
+		..\Include\m_xml.h = ..\Include\m_xml.h
+		..\Include\newpluginapi.h = ..\Include\newpluginapi.h
+		..\Include\statusmodes.h = ..\Include\statusmodes.h
+		..\Include\win2k.h = ..\Include\win2k.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "delphi", "delphi", "{2DD74A3D-66FB-4398-A294-54D58FED8DAF}"
+	ProjectSection(SolutionItems) = preProject
+		..\Include\delphi\m_addcontact.inc = ..\Include\delphi\m_addcontact.inc
+		..\Include\delphi\m_api.pas = ..\Include\delphi\m_api.pas
+		..\Include\delphi\m_awaymsg.inc = ..\Include\delphi\m_awaymsg.inc
+		..\Include\delphi\m_clc.inc = ..\Include\delphi\m_clc.inc
+		..\Include\delphi\m_clist.inc = ..\Include\delphi\m_clist.inc
+		..\Include\delphi\m_clui.inc = ..\Include\delphi\m_clui.inc
+		..\Include\delphi\m_contacts.inc = ..\Include\delphi\m_contacts.inc
+		..\Include\delphi\m_database.inc = ..\Include\delphi\m_database.inc
+		..\Include\delphi\m_email.inc = ..\Include\delphi\m_email.inc
+		..\Include\delphi\m_file.inc = ..\Include\delphi\m_file.inc
+		..\Include\delphi\m_findadd.inc = ..\Include\delphi\m_findadd.inc
+		..\Include\delphi\m_globaldefs.pas = ..\Include\delphi\m_globaldefs.pas
+		..\Include\delphi\m_helpers.inc = ..\Include\delphi\m_helpers.inc
+		..\Include\delphi\m_history.inc = ..\Include\delphi\m_history.inc
+		..\Include\delphi\m_icq.inc = ..\Include\delphi\m_icq.inc
+		..\Include\delphi\m_ignore.inc = ..\Include\delphi\m_ignore.inc
+		..\Include\delphi\m_langpack.inc = ..\Include\delphi\m_langpack.inc
+		..\Include\delphi\m_message.inc = ..\Include\delphi\m_message.inc
+		..\Include\delphi\m_netlib.inc = ..\Include\delphi\m_netlib.inc
+		..\Include\delphi\m_options.inc = ..\Include\delphi\m_options.inc
+		..\Include\delphi\m_plugins.inc = ..\Include\delphi\m_plugins.inc
+		..\Include\delphi\m_popup.inc = ..\Include\delphi\m_popup.inc
+		..\Include\delphi\m_protocols.inc = ..\Include\delphi\m_protocols.inc
+		..\Include\delphi\m_protomod.inc = ..\Include\delphi\m_protomod.inc
+		..\Include\delphi\m_protosvc.inc = ..\Include\delphi\m_protosvc.inc
+		..\Include\delphi\m_skin.inc = ..\Include\delphi\m_skin.inc
+		..\Include\delphi\m_system.inc = ..\Include\delphi\m_system.inc
+		..\Include\delphi\m_url.inc = ..\Include\delphi\m_url.inc
+		..\Include\delphi\m_userinfo.inc = ..\Include\delphi\m_userinfo.inc
+		..\Include\delphi\m_utils.inc = ..\Include\delphi\m_utils.inc
+		..\Include\delphi\newpluginapi.inc = ..\Include\delphi\newpluginapi.inc
+		..\Include\delphi\README.txt = ..\Include\delphi\README.txt
+		..\Include\delphi\statusmodes.inc = ..\Include\delphi\statusmodes.inc
+		..\Include\delphi\testdll.dpr = ..\Include\delphi\testdll.dpr
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mingw (temp.)", "mingw (temp.)", "{8FC482D5-2A41-43E8-B4D8-1A6511AFC5EA}"
+	ProjectSection(SolutionItems) = preProject
+		..\Include\mingw\shobjidl.h = ..\Include\mingw\shobjidl.h
+		..\Include\mingw\tom.h = ..\Include\mingw\tom.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "msapi (temp.)", "msapi (temp.)", "{1B8D4C33-EC7B-4C79-9B77-6F9A695D749A}"
+	ProjectSection(SolutionItems) = preProject
+		..\Include\msapi\vsstyle.h = ..\Include\msapi\vsstyle.h
+		..\Include\msapi\vssym32.h = ..\Include\msapi\vssym32.h
+		..\Include\msapi\winres.h = ..\Include\msapi\winres.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Unicode|Win32 = Debug Unicode|Win32
@@ -408,8 +524,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DEB2F289-23E7-4E40-9131-C60840698F7B}.Debug Unicode|Win32.ActiveCfg = Release Unicode|Win32
 		{DEB2F289-23E7-4E40-9131-C60840698F7B}.Debug Unicode|Win32.Build.0 = Release Unicode|Win32
-		{DEB2F289-23E7-4E40-9131-C60840698F7B}.Debug Unicode|x64.ActiveCfg = Release Unicode|x64
-		{DEB2F289-23E7-4E40-9131-C60840698F7B}.Debug Unicode|x64.Build.0 = Release Unicode|x64
+		{DEB2F289-23E7-4E40-9131-C60840698F7B}.Debug Unicode|x64.ActiveCfg = Debug Unicode|x64
+		{DEB2F289-23E7-4E40-9131-C60840698F7B}.Debug Unicode|x64.Build.0 = Debug Unicode|x64
 		{DEB2F289-23E7-4E40-9131-C60840698F7B}.Debug|Win32.ActiveCfg = Release Unicode|x64
 		{DEB2F289-23E7-4E40-9131-C60840698F7B}.Debug|x64.ActiveCfg = Release Unicode|x64
 		{DEB2F289-23E7-4E40-9131-C60840698F7B}.Debug|x64.Build.0 = Release Unicode|x64
@@ -687,7 +803,8 @@ Global
 		{DB315D7D-00BB-43B2-93A6-0430CA2B9F28}.Release|x64.Build.0 = Release Unicode|x64
 		{751ED05D-AD3E-4EC6-A485-4ECDF1FE6068}.Debug Unicode|Win32.ActiveCfg = Debug Unicode|Win32
 		{751ED05D-AD3E-4EC6-A485-4ECDF1FE6068}.Debug Unicode|Win32.Build.0 = Debug Unicode|Win32
-		{751ED05D-AD3E-4EC6-A485-4ECDF1FE6068}.Debug Unicode|x64.ActiveCfg = Debug Unicode|Win32
+		{751ED05D-AD3E-4EC6-A485-4ECDF1FE6068}.Debug Unicode|x64.ActiveCfg = Debug Unicode|x64
+		{751ED05D-AD3E-4EC6-A485-4ECDF1FE6068}.Debug Unicode|x64.Build.0 = Debug Unicode|x64
 		{751ED05D-AD3E-4EC6-A485-4ECDF1FE6068}.Debug|Win32.ActiveCfg = Debug Unicode|x64
 		{751ED05D-AD3E-4EC6-A485-4ECDF1FE6068}.Debug|x64.ActiveCfg = Debug Unicode|x64
 		{751ED05D-AD3E-4EC6-A485-4ECDF1FE6068}.Debug|x64.Build.0 = Debug Unicode|x64
@@ -2409,8 +2526,8 @@ Global
 		{7DF5234A-A93A-47AD-8201-377ECF59AE5F}.Release|x64.Build.0 = Release Unicode|x64
 		{E71C1722-A41D-4475-87F4-29961A3654BB}.Debug Unicode|Win32.ActiveCfg = Release Unicode|Win32
 		{E71C1722-A41D-4475-87F4-29961A3654BB}.Debug Unicode|Win32.Build.0 = Release Unicode|Win32
-		{E71C1722-A41D-4475-87F4-29961A3654BB}.Debug Unicode|x64.ActiveCfg = Release Unicode|x64
-		{E71C1722-A41D-4475-87F4-29961A3654BB}.Debug Unicode|x64.Build.0 = Release Unicode|x64
+		{E71C1722-A41D-4475-87F4-29961A3654BB}.Debug Unicode|x64.ActiveCfg = Debug Unicode|x64
+		{E71C1722-A41D-4475-87F4-29961A3654BB}.Debug Unicode|x64.Build.0 = Debug Unicode|x64
 		{E71C1722-A41D-4475-87F4-29961A3654BB}.Debug|Win32.ActiveCfg = Release Unicode|x64
 		{E71C1722-A41D-4475-87F4-29961A3654BB}.Debug|x64.ActiveCfg = Release Unicode|x64
 		{E71C1722-A41D-4475-87F4-29961A3654BB}.Debug|x64.Build.0 = Release Unicode|x64
@@ -3359,6 +3476,9 @@ Global
 		{F60935E3-8F27-46E2-8598-013E7D4C90E7} = {9A4B663F-AA57-45C6-A30B-B49FF368503F}
 		{7E88D7F5-8B0A-4B79-84CD-D7982D4E0D4D} = {9A4B663F-AA57-45C6-A30B-B49FF368503F}
 		{541BE2B3-4320-47B8-AB64-C7F7ED0EFABA} = {9A4B663F-AA57-45C6-A30B-B49FF368503F}
+		{2DD74A3D-66FB-4398-A294-54D58FED8DAF} = {3D06DEBD-4F6C-4201-970A-C52E7F53B76C}
+		{8FC482D5-2A41-43E8-B4D8-1A6511AFC5EA} = {3D06DEBD-4F6C-4201-970A-C52E7F53B76C}
+		{1B8D4C33-EC7B-4C79-9B77-6F9A695D749A} = {3D06DEBD-4F6C-4201-970A-C52E7F53B76C}
 	EndGlobalSection
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}

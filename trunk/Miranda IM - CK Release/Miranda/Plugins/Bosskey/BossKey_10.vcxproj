@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>BossKey</ProjectName>
+    <ProjectName>BossKey+</ProjectName>
     <ProjectGuid>{88E47CF7-7B40-4312-A35A-9B28885FFED9}</ProjectGuid>
     <RootNamespace>BossKey</RootNamespace>
   </PropertyGroup>

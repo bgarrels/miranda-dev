@@ -1,4 +1,9 @@
 {.$DEFINE CHANGE_NAME_BUFFERED}
+{$include compilers.inc}
+{$IFDEF COMPILER_16_UP}
+  {$WEAKLINKRTTI ON}
+  {.$RTTI EXPLICIT METHODS([]) PROPERTIES([]) FIELDS([])}
+{$ENDIF}
 {$IMAGEBASE $13300000}
 library MRadio;
 
@@ -15,7 +20,9 @@ uses
 {$include i_vars.inc}
 
 const
-  PluginName:PAnsiChar = 'mRadio';
+  cPluginName = 'mRadio';
+const
+  PluginName:PAnsiChar = cPluginName;
 
 var
   PluginInterfaces:array [0..1] of MUUID;
@@ -227,6 +234,13 @@ begin
 end;
 
 function PreShutdown(wParam:WPARAM;lParam:LPARAM):int;cdecl;
+{
+var
+  buf:array [0..MAX_PATH-1] of AnsiChar;
+  fdata:WIN32_FIND_DATAA;
+  p:pAnsiChar;
+  fi:THANDLE;
+}
 begin
   CallService(MS_RADIO_COMMAND,MRC_STOP,1);
   UnRegisterHotKey;
@@ -269,7 +283,23 @@ begin
   mFreeMem(StatusTmpl);
   mFreeMem(basspath);
   FreePresets;
+{
+  //delete cover files
+  buf[0]:=#0;
+  GetTempPathA(MAX_PATH,buf);
+  p:=StrEnd(buf);
+  StrCopy(p,'mrAvt*.*');
 
+  fi:=FindFirstFileA(buf,fdata);
+  if fi<>THANDLE(INVALID_HANDLE_VALUE) then
+  begin
+    repeat
+      StrCopy(p,fdata.cFileName);
+      DeleteFileA(buf);
+    until not FindNextFileA(fi,fdata);
+    FindClose(fi);
+  end;
+}
   result:=0;
 end;
 

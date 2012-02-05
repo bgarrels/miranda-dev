@@ -1,4 +1,92 @@
 {search station code}
+
+procedure SetAvatar(hContact:THANDLE);
+var
+  success:boolean;
+  local:boolean;
+  fname:pAnsiChar;
+  url:pWideChar;
+  buf,buf1,buf2:array [0..MAX_PATH-1] of AnsiChar;
+  ext:array [0..15] of AnsiChar;
+  section:pAnsiChar;
+  pc:pAnsiChar;
+  i:integer;
+begin
+  // get url
+  url:=DBReadUnicode(hContact,PluginName,optStationURL);
+  // translate to ansi
+  FastWideToAnsiBuf(url,buf);
+  mFreeMem(url);
+
+  // search in INI
+  i:=GetFSize(storage);
+  if i=0 then
+    i:=32767;
+  mGetMem(pc,i+1);
+  pc^:=#0;
+  GetPrivateProfileSectionNamesA(pc,i,storage);
+  section:=pc;
+
+  while section^<>#0 do
+  begin
+    GetPrivateProfileStringA(section,'URL','',buf1,SizeOf(buf1),storage);
+    if StrCmp(@buf,@buf1)=0 then
+      break;
+
+    while section^<>#0 do inc(section);
+    inc(section);
+  end;
+  mFreeMem(pc);
+
+  if section^<>#0 then
+  begin
+    // get avatar link
+    buf[0]:=#0;
+    GetPrivateProfileStringA(section,'Avatar','',buf,SizeOf(buf),storage);
+
+    if buf[0]<>#0 then
+    begin
+      // Here we trying to get Avatar chache directory
+      // (create it if needs)
+      // and copy (load) owr avatars there
+      // in : buf = source avatar path
+      // out: fname = destination (file name in cache)
+      // rule for name is?..
+
+
+      local:=StrPos(buf,'://')=nil;
+      if local then
+      begin
+        fname:=@buf;
+        success:=FileExists(fname);
+        // need to copy this file to avatar cache
+      end
+      else
+      begin
+        // download file
+{
+        GetTempPathA(MAX_PATH,pAnsiChar(@buf1));
+        pc:=extract(pAnsiChar(@buf),true);
+        StrCat(pAnsiChar(@buf1),pc);
+        mFreeMem(pc);
+}
+        //mrAvt
+
+        GetExt(pAnsiChar(@buf),pAnsiChar(@ext));
+        GetTempPathA(MAX_PATH,pAnsiChar(@buf2));
+        GetTempFileNameA(pAnsiChar(@buf2),'mrAvt',GetCurrentTime,pAnsiChar(@buf1));
+        ChangeExt(pAnsiChar(@buf1),PAnsiChar(@ext));
+        //
+        fname:=@buf1;
+        success:=GetFile(pAnsiChar(@buf),fname);
+      end;
+
+      if success then
+        CallService(MS_AV_SETAVATAR,hContact,LPARAM(fname));
+    end;
+  end;
+end;
+
 type
   TMySearchFilter = record
     lStation,
@@ -172,7 +260,7 @@ end;
 
 function Service_SearchBasic(wParam:WPARAM;lParam:LPARAM):int_ptr;cdecl;
 var
-  res:uint_ptr;
+  res:{$IFDEF COMPILER_16_UP}Longword{$ELSE}uint_ptr{$ENDIF};
 begin
   if lParam=0 then
     result:=0
@@ -186,7 +274,7 @@ end;
 
 function Service_SearchByAdvanced(wParam:WPARAM;lParam:LPARAM):int_ptr;cdecl;
 var
-  res:uint_ptr;
+  res:{$IFDEF COMPILER_16_UP}Longword{$ELSE}uint_ptr{$ENDIF};
 begin
   if lParam=0 then
     result:=0
@@ -220,7 +308,7 @@ begin
       else if loword(wParam)=IDC_BN_INIPATH then
       begin
         if ShowDlg(@buf,storage,'*.ini'#0'*.ini'#0#0) then
-          SetDlgItemText(Dialog,IDC_CUSTOMINI,@buf);
+          SetDlgItemTextA(Dialog,IDC_CUSTOMINI,@buf);
       end;
     end;
   end;
@@ -325,7 +413,6 @@ begin
         if hContact<>0 then
         begin
           CallService(MS_PROTO_ADDTOCONTACT,hContact,tlparam(PluginName));
-
           // URL
           DBWriteUnicode(hContact,PluginName,optStationURL,lurl);
           DBWriteUnicode(hContact,PluginName,optFirstName ,lurl);
@@ -373,6 +460,9 @@ begin
           end;
 
           SetStatus(hContact,ID_STATUS_OFFLINE);
+
+//          SetAvatar(hContact);
+
           CallService(MS_IGNORE_IGNORE,hContact,IGNOREEVENT_USERONLINE{IGNOREEVENT_ALL});
           result:=hContact;
         end;

@@ -16,7 +16,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-   File name      : $URL: http://svn.miranda.im/mainrepo/gender/trunk/m_gender.h $
+   File name      : $URL: https://miranda-dev.googlecode.com/svn/trunk/Miranda%20IM%20-%20CK%20Release/Miranda/ExternalAPI/m_gender.h $
    Revision       : $Rev: 957 $
    Last change on : $Date: 2007-10-19 13:46:08 +0300 (Пт, 19 окт 2007) $
    Last change by : $Author: Thief $
