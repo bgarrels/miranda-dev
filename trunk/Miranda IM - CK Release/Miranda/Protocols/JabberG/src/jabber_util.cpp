@@ -2,7 +2,7 @@
 
 Jabber Protocol Plugin for Miranda IM
 Copyright ( C ) 2002-04  Santithorn Bunchua
-Copyright ( C ) 2005-11  George Hazan
+Copyright ( C ) 2005-12  George Hazan
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -18,9 +18,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13946 $
-Last change on : $Date: 2011-11-24 18:48:30 +0100 (Do, 24. Nov 2011) $
-Last change by : $Author: borkra $
+Revision       : $Revision: 14060 $
+Last change on : $Date: 2012-02-06 17:41:59 +0100 (Mo, 06. Feb 2012) $
+Last change by : $Author: george.hazan $
 
 */
 
@@ -1716,7 +1716,7 @@ void __cdecl CJabberProto::LoadHttpAvatars(void* param)
 				{
 					TCHAR tszFileName[ MAX_PATH ];
 
-					PROTO_AVATAR_INFORMATION AI;
+					PROTO_AVATAR_INFORMATIONT AI;
 					AI.cbSize = sizeof(AI);
 					AI.format = pictureType;
 					AI.hContact = avs[i].hContact;
@@ -1741,11 +1741,7 @@ void __cdecl CJabberProto::LoadHttpAvatars(void* param)
 					if (JGetStaticString("AvatarSaved", AI.hContact, cmpsha, sizeof(cmpsha)) || strnicmp(cmpsha, buffer, sizeof(buffer)))
 					{
 						GetAvatarFileName( AI.hContact, tszFileName, SIZEOF(tszFileName));
-	#if defined( _UNICODE )
-						WideCharToMultiByte( CP_ACP, 0, tszFileName, -1, AI.filename, sizeof(AI.filename), 0, 0 );
-	#else
-						strncpy(AI.filename, tszFileName, sizeof(AI.filename));
-	#endif
+						_tcsncpy(AI.filename, tszFileName, SIZEOF(AI.filename));
 						FILE* out = _tfopen( tszFileName, _T("wb"));
 						if ( out != NULL ) {
 							fwrite( res->pData, res->dataLength, 1, out );

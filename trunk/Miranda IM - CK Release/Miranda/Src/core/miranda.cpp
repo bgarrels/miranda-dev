@@ -547,7 +547,10 @@ void ParseCommandLine()
 	}	
 }
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int )
+int APIENTRY _tWinMain( HINSTANCE hInstance,
+	HINSTANCE hPrevInstance,
+	PTSTR    lpCmdLine,
+	int       nCmdShow )
 {
 	DWORD myPid=0;
 	int messageloop=1;

@@ -2,8 +2,8 @@
 
 Jabber Protocol Plugin for Miranda IM
 Copyright ( C ) 2002-04  Santithorn Bunchua
-Copyright ( C ) 2005-11  George Hazan
 Copyright ( C ) 2007     Maxim Mluhov
+Copyright ( C ) 2005-12  George Hazan
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13898 $
-Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
-Last change by : $Author: borkra $
+Revision       : $Revision: 14060 $
+Last change on : $Date: 2012-02-06 17:41:59 +0100 (Mo, 06. Feb 2012) $
+Last change by : $Author: george.hazan $
 
 */
 
@@ -84,7 +84,7 @@ INT_PTR __cdecl CJabberProto::GetMyAwayMsg(WPARAM wParam, LPARAM lParam)
 
 INT_PTR __cdecl CJabberProto::JabberGetAvatar( WPARAM wParam, LPARAM lParam )
 {
-	char* buf = ( char* )wParam;
+	TCHAR* buf = ( TCHAR* )wParam;
 	int  size = ( int )lParam;
 
 	if ( buf == NULL || size <= 0 )
@@ -93,13 +93,7 @@ INT_PTR __cdecl CJabberProto::JabberGetAvatar( WPARAM wParam, LPARAM lParam )
 	if ( !m_options.EnableAvatars )
 		return -2;
 
-	#if defined( _UNICODE )
-		TCHAR tszBuf[MAX_PATH];
-		GetAvatarFileName( NULL, tszBuf, SIZEOF(tszBuf));
-		WideCharToMultiByte( CP_ACP, 0, tszBuf, -1, buf, size, 0, 0 );
-	#else
-		GetAvatarFileName( NULL, buf, size );
-	#endif
+	GetAvatarFileName( NULL, buf, size );
 		
 	return 0;
 }
@@ -138,7 +132,7 @@ INT_PTR __cdecl CJabberProto::JabberGetAvatarInfo( WPARAM wParam, LPARAM lParam 
 	if ( !m_options.EnableAvatars )
 		return GAIR_NOAVATAR;
 
-	PROTO_AVATAR_INFORMATION* AI = ( PROTO_AVATAR_INFORMATION* )lParam;
+	PROTO_AVATAR_INFORMATIONT* AI = ( PROTO_AVATAR_INFORMATIONT* )lParam;
 
 	char szHashValue[ MAX_PATH ];
 	if ( JGetStaticString( "AvatarHash", AI->hContact, szHashValue, sizeof szHashValue )) {
@@ -148,15 +142,11 @@ INT_PTR __cdecl CJabberProto::JabberGetAvatarInfo( WPARAM wParam, LPARAM lParam 
 
 	TCHAR tszFileName[ MAX_PATH ];
 	GetAvatarFileName( AI->hContact, tszFileName, SIZEOF(tszFileName));
-	#if defined( _UNICODE )
-		WideCharToMultiByte( CP_ACP, 0, tszFileName, -1, AI->filename, sizeof AI->filename, 0, 0 );
-	#else
-		strncpy( AI->filename, tszFileName, sizeof AI->filename );
-	#endif
+	_tcsncpy( AI->filename, tszFileName, SIZEOF(AI->filename));
 
 	AI->format = ( AI->hContact == NULL ) ? PA_FORMAT_PNG : JGetByte( AI->hContact, "AvatarType", 0 );
 
-	if ( ::_access( AI->filename, 0 ) == 0 ) {
+	if ( ::_taccess( AI->filename, 0 ) == 0 ) {
 		char szSavedHash[ 256 ];
 		if ( !JGetStaticString( "AvatarSaved", AI->hContact, szSavedHash, sizeof szSavedHash )) {
 			if ( !strcmp( szSavedHash, szHashValue )) {
