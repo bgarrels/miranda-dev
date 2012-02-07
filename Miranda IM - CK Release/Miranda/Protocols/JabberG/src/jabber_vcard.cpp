@@ -2,7 +2,7 @@
 
 Jabber Protocol Plugin for Miranda IM
 Copyright ( C ) 2002-04  Santithorn Bunchua
-Copyright ( C ) 2005-11  George Hazan
+Copyright ( C ) 2005-12  George Hazan
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -18,8 +18,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13588 $
-Last change on : $Date: 2011-04-12 16:40:04 +0200 (Di, 12. Apr 2011) $
+Revision       : $Revision: 14060 $
+Last change on : $Date: 2012-02-06 17:41:59 +0100 (Mo, 06. Feb 2012) $
 Last change by : $Author: george.hazan $
 
 */
@@ -329,21 +329,11 @@ static INT_PTR CALLBACK PhotoDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 		case IDC_LOAD:
 			{
 				TCHAR szFilter[512];
-				union {
-					TCHAR szFileName[MAX_PATH];
-					char  boo[512];
-				};
+				TCHAR szFileName[MAX_PATH];
 
-				#if defined( _UNICODE )
-					JCallService( MS_UTILS_GETBITMAPFILTERSTRINGS, sizeof( boo ), ( LPARAM )boo );
-					memset( szFilter, 0, sizeof( szFilter ));
-					MultiByteToWideChar( CP_ACP, 0, boo, -1, szFilter, SIZEOF(szFilter));
-				#else
-					JCallService( MS_UTILS_GETBITMAPFILTERSTRINGS, sizeof( szFilter ), ( LPARAM )szFilter );
-				#endif
+				JCallService( MS_UTILS_GETBITMAPFILTERSTRINGST, SIZEOF( szFilter ), ( LPARAM )szFilter );
 
 				OPENFILENAME ofn = {0};
-				ofn.lStructSize = OPENFILENAME_SIZE_VERSION_400;
 				ofn.hwndOwner = hwndDlg;
 				ofn.lpstrFilter = szFilter;
 				ofn.lpstrCustomFilter = NULL;

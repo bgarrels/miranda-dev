@@ -115,7 +115,7 @@
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;_NOSDK;_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_NOSDK;_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -148,7 +148,8 @@
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/msapi/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>Advapi32.lib;wsock32.lib;comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;winmm.lib;version.lib;crypt32.lib;uuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -165,7 +166,8 @@
       <ImportLibrary>
       </ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
-      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapFileName>
+      </MapFileName>
       <LargeAddressAware>true</LargeAddressAware>
       <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
       <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
@@ -235,7 +237,8 @@
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
-      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapFileName>
+      </MapFileName>
       <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
       <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
       <LargeAddressAware>true</LargeAddressAware>
@@ -527,7 +530,6 @@
     <None Include="..\Docs\license.txt" />
     <None Include="..\Docs\mirandaboot.ini" />
     <None Include="..\Docs\readme.txt" />
-    <None Include="res\_blank.ico" />
     <None Include="res\arrow_sort_column_down.bmp" />
     <None Include="res\arrow_sort_column_up.bmp" />
     <None Include="res\chat_join.ico" />
@@ -548,6 +550,7 @@
     <None Include="res\icon_all.ico" />
     <None Include="res\icon_ansi.ico" />
     <None Include="res\icon_auth_request.ico" />
+    <None Include="res\icon_changefont.ico" />
     <None Include="res\icon_connecting.ico" />
     <None Include="res\icon_down_arrow.ico" />
     <None Include="res\Icon_exit.ico" />
@@ -573,6 +576,8 @@
     <None Include="res\miranda_home.ico" />
     <None Include="res\miranda_logo.ico" />
     <None Include="res\miranda_manager.ico" />
+    <None Include="res\Off.ico" />
+    <None Include="res\On.ico" />
     <None Include="res\status_away.ico" />
     <None Include="res\status_DND.ico" />
     <None Include="res\status_free4chat.ico" />
@@ -581,20 +586,21 @@
     <None Include="res\status_NA.ico" />
     <None Include="res\status_occupied.ico" />
     <None Include="res\status_offline.ico" />
-    <None Include="res\status_on_the_phone.ico" />
     <None Include="res\status_online.ico" />
+    <None Include="res\status_on_the_phone.ico" />
     <None Include="res\status_out2lunch.ico" />
     <None Include="res\status_user_online.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="resource.rc" />
-    <ResourceCompile Include="version.rc" />
+    <None Include="res\_blank.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\plugins\zlib\zlib_10.vcxproj">
       <Project>{e2a369cd-eda3-414f-8ad0-e732cd7ee68c}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
+    <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

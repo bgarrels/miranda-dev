@@ -100,11 +100,11 @@
     <Filter Include="Modules\xmlparser">
       <UniqueIdentifier>{c3bf6128-d3fd-44f6-a207-df2977019960}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources Files">
-      <UniqueIdentifier>{dcc9b0d7-b335-458b-ac09-6cc6cf55e397}</UniqueIdentifier>
-    </Filter>
     <Filter Include="docs">
       <UniqueIdentifier>{5a8e2bde-a5db-4e07-83a8-7cac99982901}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources Files">
+      <UniqueIdentifier>{6a23f5d0-8ef0-408e-b12d-408da6715a7f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -270,11 +270,11 @@
     <ClInclude Include="modules\xml\xmlParser.h">
       <Filter>Modules\xmlparser</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Resources Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\m_timezones.h">
       <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resources Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -616,67 +616,31 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\_blank.ico">
-      <Filter>Resources Files</Filter>
+    <None Include="..\Docs\license.txt">
+      <Filter>docs</Filter>
     </None>
-    <None Include="res\arrow_sort_column_down.bmp">
-      <Filter>Resources Files</Filter>
+    <None Include="..\Docs\mirandaboot.ini">
+      <Filter>docs</Filter>
     </None>
-    <None Include="res\arrow_sort_column_up.bmp">
-      <Filter>Resources Files</Filter>
+    <None Include="..\Docs\readme.txt">
+      <Filter>docs</Filter>
     </None>
-    <None Include="res\chat_join.ico">
-      <Filter>Resources Files</Filter>
+    <None Include="..\Docs\autoexec_sample.ini">
+      <Filter>docs</Filter>
     </None>
-    <None Include="res\chat_leave.ico">
-      <Filter>Resources Files</Filter>
+    <None Include="..\Docs\changelog.txt">
+      <Filter>docs</Filter>
     </None>
-    <None Include="res\check_off.ico">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\check_on.ico">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\contact_add.ico">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\contact_delete.ico">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\contact_groups.ico">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\contact_rename.ico">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\contact_view_details.ico">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\cursor_drag_copy.cur">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\cursor_drop_user.cur">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\cursor_hyperlink.cur">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\group_closed.ico">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\group_opened.ico">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\icon_accmgr.ico">
-      <Filter>Resources Files</Filter>
-    </None>
-    <None Include="res\icon_all.ico">
-      <Filter>Resources Files</Filter>
+    <None Include="..\Docs\contributors.txt">
+      <Filter>docs</Filter>
     </None>
     <None Include="res\icon_ansi.ico">
       <Filter>Resources Files</Filter>
     </None>
     <None Include="res\icon_auth_request.ico">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\icon_changefont.ico">
       <Filter>Resources Files</Filter>
     </None>
     <None Include="res\icon_connecting.ico">
@@ -754,6 +718,12 @@
     <None Include="res\miranda_manager.ico">
       <Filter>Resources Files</Filter>
     </None>
+    <None Include="res\Off.ico">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\On.ico">
+      <Filter>Resources Files</Filter>
+    </None>
     <None Include="res\status_away.ico">
       <Filter>Resources Files</Filter>
     </None>
@@ -790,23 +760,62 @@
     <None Include="res\status_user_online.ico">
       <Filter>Resources Files</Filter>
     </None>
-    <None Include="..\Docs\license.txt">
-      <Filter>docs</Filter>
+    <None Include="res\_blank.ico">
+      <Filter>Resources Files</Filter>
     </None>
-    <None Include="..\Docs\mirandaboot.ini">
-      <Filter>docs</Filter>
+    <None Include="res\arrow_sort_column_down.bmp">
+      <Filter>Resources Files</Filter>
     </None>
-    <None Include="..\Docs\readme.txt">
-      <Filter>docs</Filter>
+    <None Include="res\arrow_sort_column_up.bmp">
+      <Filter>Resources Files</Filter>
     </None>
-    <None Include="..\Docs\autoexec_sample.ini">
-      <Filter>docs</Filter>
+    <None Include="res\chat_join.ico">
+      <Filter>Resources Files</Filter>
     </None>
-    <None Include="..\Docs\changelog.txt">
-      <Filter>docs</Filter>
+    <None Include="res\chat_leave.ico">
+      <Filter>Resources Files</Filter>
     </None>
-    <None Include="..\Docs\contributors.txt">
-      <Filter>docs</Filter>
+    <None Include="res\check_off.ico">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\check_on.ico">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\contact_add.ico">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\contact_delete.ico">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\contact_groups.ico">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\contact_rename.ico">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\contact_view_details.ico">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\cursor_drag_copy.cur">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\cursor_drop_user.cur">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\cursor_hyperlink.cur">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\group_closed.ico">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\group_opened.ico">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\icon_accmgr.ico">
+      <Filter>Resources Files</Filter>
+    </None>
+    <None Include="res\icon_all.ico">
+      <Filter>Resources Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
