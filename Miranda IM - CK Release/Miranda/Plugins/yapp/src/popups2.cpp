@@ -56,7 +56,7 @@ extern "C" BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LP
 {
 	hInst = hModule;
 	DisableThreadLibraryCalls(hInst);
-    return TRUE;
+	return TRUE;
 }
 
 extern "C" POPUPS2_API PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)

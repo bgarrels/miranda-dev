@@ -26,12 +26,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #pragma warning(disable:4201) /* nonstandard extension used : nameless struct/union */
 #include <commctrl.h>
 #pragma warning(default:4201) /* nonstandard extension used : nameless struct/union */
-#include <win2k.h>
+#include "win2k.h"
 
 #include <tchar.h>
 #include <stdio.h>            /* for mir_snprintf() */
 #include <time.h>             /* for time() */
 
+//Miranda IM stuff
 #define MIRANDA_VER  0x0900
 #include <newpluginapi.h>
 #include <m_system.h>

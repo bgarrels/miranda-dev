@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 TokenDef::TokenDef(const char *tokenString) {
 	this->tokenString = tokenString;
-	this->tokenLen = strlen(tokenString);
+	this->tokenLen = (int)strlen(tokenString);
 	this->token = 0;
 	this->escape = 0;
 }
@@ -31,7 +31,7 @@ TokenDef::TokenDef(const char *tokenString) {
 TokenDef::TokenDef(const char *tokenString, int token, int escape) {
 	this->tokenString = tokenString;
 	this->token = token;
-	this->tokenLen = strlen(tokenString);
+	this->tokenLen = (int)strlen(tokenString);
 	this->escape = escape;
 }
 
@@ -42,7 +42,7 @@ Token::Token(int type, const char *text, int escape) {
 	if (text!=NULL) {
 		this->text = Utils::dupString(text);
 	} else {
-        this->text = NULL;
+		this->text = NULL;
 	}
 }
 
@@ -159,7 +159,7 @@ void Template::tokenize() {
 		Token *lastToken = NULL;
 		int lastTokenType = Token::PLAIN;
 		int lastTokenEscape = 0;
-		int l = strlen(str);
+		int l = (int)strlen(str);
 		for (int i=0, lastTokenStart=0; i<=l;) {
 			Token *newToken;
 			int newTokenType = 0, newTokenSize = 0, newTokenEscape = 0;
@@ -186,13 +186,13 @@ void Template::tokenize() {
 			}
 			if (newTokenType != Token::PLAIN) {
 				if (str[i + newTokenSize] == '%') {
-                    //newTokenSize++;
+					//newTokenSize++;
 				}
 				str[i] = '\0';
 			}
 			if ((lastTokenType!=newTokenType || lastTokenEscape != newTokenEscape) && i!=lastTokenStart) {
 				if (lastTokenType == Token::PLAIN) {
-                    newToken = new Token(lastTokenType, str+lastTokenStart, lastTokenEscape);
+					newToken = new Token(lastTokenType, str+lastTokenStart, lastTokenEscape);
 				} else {
 					newToken = new Token(lastTokenType, NULL, lastTokenEscape);
 				}
@@ -344,16 +344,16 @@ TemplateMap* TemplateMap::loadTemplateFile(const char *id, const char *filename,
 	char *templateText = NULL;
 	int templateTextSize = 0;
 	while (fgets(store, sizeof(store), fh) != NULL) {
-    	if (sscanf(store, "%s", tmp2) == EOF) continue;
-	    //template start
-    	bool bFound = false;
-        for (unsigned i = 0; i < sizeof(templateNames) / sizeof (templateNames[0]); i++) {
-    		if (!strncmp(store, templateNames[i].tokenString, templateNames[i].tokenLen)) {
-    			bFound = true;
-    			break;
-    		}
-    	}
-        if (bFound) {
+		if (sscanf(store, "%s", tmp2) == EOF) continue;
+		//template start
+		bool bFound = false;
+		for (unsigned i = 0; i < sizeof(templateNames) / sizeof (templateNames[0]); i++) {
+			if (!strncmp(store, templateNames[i].tokenString, templateNames[i].tokenLen)) {
+				bFound = true;
+				break;
+			}
+		}
+		if (bFound) {
 			if (wasTemplate) {
 				tmap->addTemplate(lastTemplate, templateText);
 			}
@@ -363,7 +363,7 @@ TemplateMap* TemplateMap::loadTemplateFile(const char *id, const char *filename,
 			templateText = NULL;
 			templateTextSize = 0;
 			wasTemplate = true;
-            sscanf(store, "<!--%[^-]", lastTemplate);
+			sscanf(store, "<!--%[^-]", lastTemplate);
 		} else if (wasTemplate) {
 			Utils::appendText(&templateText, &templateTextSize, "%s", store);
 		}
@@ -373,9 +373,9 @@ TemplateMap* TemplateMap::loadTemplateFile(const char *id, const char *filename,
 	}
   	fclose(fh);
 	static const char *groupTemplates[] = {"MessageInGroupStart", "MessageInGroupInner",
-	                                       "hMessageInGroupStart", "hMessageInGroupInner",
+										   "hMessageInGroupStart", "hMessageInGroupInner",
 										   "MessageOutGroupStart", "MessageOutGroupInner",
-	                                       "hMessageOutGroupStart", "hMessageOutGroupInner"};
+										   "hMessageOutGroupStart", "hMessageOutGroupInner"};
 	tmap->grouping = true;
 	for (i = 0; i<SIZEOF(groupTemplates); i++) {
 		if (tmap->getTemplate(groupTemplates[i])== NULL) {
@@ -433,12 +433,12 @@ TemplateMap* TemplateMap::getTemplateMap(const char *proto) {
 }
 
 const char *TemplateMap::getFilename() {
-    return filename;
+	return filename;
 }
 
 void TemplateMap::setFilename(const char *filename) {
 	if (this->filename != NULL) {
-	    delete this->filename;
+		delete this->filename;
 	}
 	this->filename = Utils::dupString(filename);
 	Utils::convertPath(this->filename);

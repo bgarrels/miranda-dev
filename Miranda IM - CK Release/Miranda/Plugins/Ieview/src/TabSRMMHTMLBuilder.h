@@ -28,7 +28,7 @@ class TabSRMMHTMLBuilder;
 class TabSRMMHTMLBuilder:public TemplateHTMLBuilder
 {
 protected:
-    virtual void loadMsgDlgFont(int i, LOGFONTA * lf, COLORREF * colour);
+	virtual void loadMsgDlgFont(int i, LOGFONTA * lf, COLORREF * colour);
 	char *timestampToString(DWORD dwFlags, time_t check, int isGroupBreak);
 	time_t 		startedTime;
 	time_t 		getStartedTime();
@@ -36,7 +36,7 @@ protected:
 	bool isDbEventShown(DBEVENTINFO * dbei);
 	void appendEventNonTemplate(IEView *, IEVIEWEVENT *event);
 public:
-    TabSRMMHTMLBuilder();
+	TabSRMMHTMLBuilder();
 	void buildHead(IEView *, IEVIEWEVENT *event);
 	void appendEvent(IEView *, IEVIEWEVENT *event);
 

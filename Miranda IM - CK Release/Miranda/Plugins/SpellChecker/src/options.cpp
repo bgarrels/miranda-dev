@@ -17,9 +17,7 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.  
 */
 
-
 #include "commons.h"
-
 
 
 // Prototypes /////////////////////////////////////////////////////////////////////////////////////
@@ -67,29 +65,29 @@ int InitOptionsCallback(WPARAM wParam,LPARAM lParam)
 	OPTIONSDIALOGPAGE odp;
 
 	ZeroMemory(&odp,sizeof(odp));
-    odp.cbSize=sizeof(odp);
-    odp.position=0;
+	odp.cbSize=sizeof(odp);
+	odp.position=0;
 	odp.hInstance=hInst;
 	odp.ptszGroup = LPGENT("Message Sessions");
 	odp.ptszTitle = LPGENT("Spell Checker");
 	odp.pfnDlgProc = OptionsDlgProc;
 	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPTIONS);
-    odp.flags = ODPF_BOLDGROUPS | ODPF_TCHAR;
+	odp.flags = ODPF_BOLDGROUPS | ODPF_TCHAR;
 	odp.nIDBottomSimpleControl = IDC_SPELL_CHECKER;
 	odp.expertOnlyControls = optionsExpertControls;
 	odp.nExpertOnlyControls = MAX_REGS(optionsExpertControls);
-    CallService(MS_OPT_ADDPAGE,wParam,(LPARAM)&odp);
+	CallService(MS_OPT_ADDPAGE,wParam,(LPARAM)&odp);
 
 	ZeroMemory(&odp,sizeof(odp));
-    odp.cbSize=sizeof(odp);
-    odp.position=0;
+	odp.cbSize=sizeof(odp);
+	odp.position=0;
 	odp.hInstance=hInst;
 	odp.ptszGroup = LPGENT("Message Sessions");
 	odp.ptszTitle = LPGENT("Auto-replacements");
 	odp.pfnDlgProc = AutoreplaceDlgProc;
 	odp.pszTemplate = MAKEINTRESOURCEA(IDD_REPLACEMENTS);
-    odp.flags = ODPF_BOLDGROUPS | ODPF_TCHAR;
-    CallService(MS_OPT_ADDPAGE,wParam,(LPARAM)&odp);
+	odp.flags = ODPF_BOLDGROUPS | ODPF_TCHAR;
+	CallService(MS_OPT_ADDPAGE,wParam,(LPARAM)&odp);
 
 	return 0;
 }

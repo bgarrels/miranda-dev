@@ -25,7 +25,7 @@ Last change by : $Author: george.hazan $
 
 */
 
-#include "jabber.h"
+#include "../jabber.h"
 
 #include <fcntl.h>
 #include <io.h>
@@ -38,7 +38,7 @@ Last change by : $Author: george.hazan $
 #include "m_file.h"
 #include "m_addcontact.h"
 #include "jabber_disco.h"
-#include "sdk/m_proto_listeningto.h"
+#include "m_proto_listeningto.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // GetMyAwayMsg - obtain the current away message
@@ -109,7 +109,7 @@ INT_PTR __cdecl CJabberProto::JabberGetAvatarCaps( WPARAM wParam, LPARAM lParam 
 			if ( size )
 				size->x = size->y = 96;
 		}
-      return 0;
+	  return 0;
 
 	case AF_PROPORTION:
 		return PIP_NONE;
@@ -508,7 +508,7 @@ INT_PTR __cdecl CJabberProto::JabberServiceParseXmppURI( WPARAM wParam, LPARAM l
 		// message
 		if ( ServiceExists( MS_MSG_SENDMESSAGE )) {
 			HANDLE hContact = HContactFromJID( szJid, TRUE );
-            TCHAR *szMsgBody = NULL;
+			TCHAR *szMsgBody = NULL;
 			if ( !hContact )
 				hContact = DBCreateContact( szJid, szJid, TRUE, TRUE );
 			if ( !hContact )

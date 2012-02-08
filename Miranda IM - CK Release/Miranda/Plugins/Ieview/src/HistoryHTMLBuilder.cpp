@@ -72,69 +72,69 @@ HistoryHTMLBuilder::HistoryHTMLBuilder() {
 
 bool HistoryHTMLBuilder::isDbEventShown(DBEVENTINFO * dbei)
 {
-    switch (dbei->eventType) {
-        case EVENTTYPE_MESSAGE:
-            return 1;
-        case EVENTTYPE_STATUSCHANGE:
-            return 1;
-    }
-    return 1;
+	switch (dbei->eventType) {
+		case EVENTTYPE_MESSAGE:
+			return 1;
+		case EVENTTYPE_STATUSCHANGE:
+			return 1;
+	}
+	return 1;
 }
 
 char *HistoryHTMLBuilder::timestampToString(DWORD dwFlags, time_t check) {
-    static char szResult[512];
-    char str[80];
-    DBTIMETOSTRING dbtts;
-    dbtts.cbDest = 70;;
-    dbtts.szDest = str;
-    szResult[0] = '\0';
-    dbtts.szFormat = (char *)"d t";
+	static char szResult[512];
+	char str[80];
+	DBTIMETOSTRING dbtts;
+	dbtts.cbDest = 70;;
+	dbtts.szDest = str;
+	szResult[0] = '\0';
+	dbtts.szFormat = (char *)"d t";
 	CallService(MS_DB_TIME_TIMESTAMPTOSTRING, check, (LPARAM) & dbtts);
-    strncat(szResult, str, 500);
+	strncat(szResult, str, 500);
 	Utils::UTF8Encode(szResult, szResult, 500);
-    return szResult;
+	return szResult;
 }
 
 void HistoryHTMLBuilder::loadMsgDlgFont(const char *dbSetting, LOGFONTA * lf, COLORREF * colour, COLORREF * bkgColour) {
-    char str[128];
-    int style;
-    DBVARIANT dbv;
-    if (bkgColour) {
-        wsprintfA(str, "Back.%s", dbSetting);
-        *bkgColour = DBGetContactSettingDword(NULL, HPPMOD, str, 0xFFFFFF);
-    }
-    if (colour) {
-        wsprintfA(str, "Font.%s.Color", dbSetting);
-        *colour = DBGetContactSettingDword(NULL, HPPMOD, str, 0x000000);
-    }
-    if (lf) {
-        wsprintfA(str, "Font.%s.Size", dbSetting);
-        lf->lfHeight = (char) DBGetContactSettingByte(NULL, HPPMOD, str, 10);
-        lf->lfWidth = 0;
-        lf->lfEscapement = 0;
-        lf->lfOrientation = 0;
-        wsprintfA(str, "Font.%s.Style.Bold", dbSetting);
-        style = DBGetContactSettingByte(NULL, HPPMOD, str, 0);
-        lf->lfWeight = style & FONTF_BOLD ? FW_BOLD : FW_NORMAL;
-        wsprintfA(str, "Font.%s.Style.Italic", dbSetting);
-        style = DBGetContactSettingByte(NULL, HPPMOD, str, 0) << 1;
-        lf->lfItalic = style & FONTF_ITALIC ? 1 : 0;
-        lf->lfUnderline = style & FONTF_UNDERLINE ? 1 : 0;
-        lf->lfStrikeOut = 0;
-        wsprintfA(str, "Font.%s.Charset", dbSetting);
-        lf->lfCharSet = DBGetContactSettingByte(NULL, HPPMOD, str, DEFAULT_CHARSET);
-        lf->lfOutPrecision = OUT_DEFAULT_PRECIS;
-        lf->lfClipPrecision = CLIP_DEFAULT_PRECIS;
-        lf->lfQuality = DEFAULT_QUALITY;
-        lf->lfPitchAndFamily = DEFAULT_PITCH | FF_DONTCARE;
-        wsprintfA(str, "Font.%s.Name", dbSetting);
-        if (DBGetContactSetting(NULL, HPPMOD, str, &dbv))
-            lstrcpyA(lf->lfFaceName, "Verdana");
-        else {
-            lstrcpynA(lf->lfFaceName, dbv.pszVal, sizeof(lf->lfFaceName));
-            DBFreeVariant(&dbv);
-        }
-    }
+	char str[128];
+	int style;
+	DBVARIANT dbv;
+	if (bkgColour) {
+		wsprintfA(str, "Back.%s", dbSetting);
+		*bkgColour = DBGetContactSettingDword(NULL, HPPMOD, str, 0xFFFFFF);
+	}
+	if (colour) {
+		wsprintfA(str, "Font.%s.Color", dbSetting);
+		*colour = DBGetContactSettingDword(NULL, HPPMOD, str, 0x000000);
+	}
+	if (lf) {
+		wsprintfA(str, "Font.%s.Size", dbSetting);
+		lf->lfHeight = (char) DBGetContactSettingByte(NULL, HPPMOD, str, 10);
+		lf->lfWidth = 0;
+		lf->lfEscapement = 0;
+		lf->lfOrientation = 0;
+		wsprintfA(str, "Font.%s.Style.Bold", dbSetting);
+		style = DBGetContactSettingByte(NULL, HPPMOD, str, 0);
+		lf->lfWeight = style & FONTF_BOLD ? FW_BOLD : FW_NORMAL;
+		wsprintfA(str, "Font.%s.Style.Italic", dbSetting);
+		style = DBGetContactSettingByte(NULL, HPPMOD, str, 0) << 1;
+		lf->lfItalic = style & FONTF_ITALIC ? 1 : 0;
+		lf->lfUnderline = style & FONTF_UNDERLINE ? 1 : 0;
+		lf->lfStrikeOut = 0;
+		wsprintfA(str, "Font.%s.Charset", dbSetting);
+		lf->lfCharSet = DBGetContactSettingByte(NULL, HPPMOD, str, DEFAULT_CHARSET);
+		lf->lfOutPrecision = OUT_DEFAULT_PRECIS;
+		lf->lfClipPrecision = CLIP_DEFAULT_PRECIS;
+		lf->lfQuality = DEFAULT_QUALITY;
+		lf->lfPitchAndFamily = DEFAULT_PITCH | FF_DONTCARE;
+		wsprintfA(str, "Font.%s.Name", dbSetting);
+		if (DBGetContactSetting(NULL, HPPMOD, str, &dbv))
+			lstrcpyA(lf->lfFaceName, "Verdana");
+		else {
+			lstrcpynA(lf->lfFaceName, dbv.pszVal, sizeof(lf->lfFaceName));
+			DBFreeVariant(&dbv);
+		}
+	}
 }
 
 const char *HistoryHTMLBuilder::getTemplateFilename(ProtocolSettings * protoSettings) {
@@ -160,20 +160,20 @@ void HistoryHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 		return;
 	}
  	if (protoSettings->getHistoryMode() == Options::MODE_CSS) {
-	 	const char *externalCSS = protoSettings->getHistoryCssFilename();
-        Utils::appendText(&output, &outputSize, "<html><head><link rel=\"stylesheet\" href=\"%s\"/></head><body class=\"body\">\n", externalCSS);
+		const char *externalCSS = protoSettings->getHistoryCssFilename();
+		Utils::appendText(&output, &outputSize, "<html><head><link rel=\"stylesheet\" href=\"%s\"/></head><body class=\"body\">\n", externalCSS);
 	} else {
 		Utils::appendText(&output, &outputSize, "<html><head>");
 		Utils::appendText(&output, &outputSize, "<style type=\"text/css\">\n");
 		COLORREF lineColor = DBGetContactSettingDword(NULL, HPPMOD, "LineColour", 0xFFFFFF);
-	    lineColor= 0;//(((lineColor & 0xFF) << 16) | (lineColor & 0xFF00) | ((lineColor & 0xFF0000) >> 16));
+		lineColor= 0;//(((lineColor & 0xFF) << 16) | (lineColor & 0xFF00) | ((lineColor & 0xFF0000) >> 16));
 		bkgColor = 0xFFFFFF;
 		if (protoSettings->getHistoryFlags() & Options::LOG_IMAGE_ENABLED) {
 			Utils::appendText(&output, &outputSize, ".body {padding: 2px; text-align: left; background-attachment: %s; background-color: #%06X;  background-image: url('%s'); overflow: auto;}\n",
 			protoSettings->getHistoryFlags() & Options::LOG_IMAGE_SCROLL ? "scroll" : "fixed", (int) bkgColor, protoSettings->getHistoryBackgroundFilename());
 		} else {
 			Utils::appendText(&output, &outputSize, ".body {margin: 0px; text-align: left; background-color: #%06X; overflow: auto;}\n",
-				 	     (int) bkgColor);
+						(int) bkgColor);
 		}
 		Utils::appendText(&output, &outputSize, ".link {color: #0000FF; text-decoration: underline;}\n");
 		Utils::appendText(&output, &outputSize, ".img {float: left; vertical-align: middle;}\n");
@@ -200,7 +200,7 @@ void HistoryHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 					lf.lfItalic ? "font-style: italic;" : "");
 			}
 		}
-	 	for(i = 0; i < SPAN_FONT_NUM; i++) {
+		for(i = 0; i < SPAN_FONT_NUM; i++) {
 			loadMsgDlgFont(dbSpanSettingNames[i], &lf, &color, NULL);
 			Utils::appendText(&output, &outputSize, "%s {float: %s; font-family: %s; font-size: %dpt; font-weight: %s; color: #%06X; %s }\n",
 			spanClassNames[i],
@@ -214,7 +214,7 @@ void HistoryHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 		Utils::appendText(&output, &outputSize, "</style></head><body class=\"body\">\n");
 	}
 	if (output != NULL) {
-        view->write(output);
+		view->write(output);
 		free(output);
 	}
 	setLastEventType(-1);
@@ -237,13 +237,13 @@ void HistoryHTMLBuilder::appendEventNonTemplate(IEView *view, IEVIEWEVENT *event
 			char *szText = NULL;
 			if (eventData->dwFlags & IEEDF_UNICODE_NICK) {
 				szName = encodeUTF8(event->hContact, szRealProto, eventData->pszNickW, ENF_NAMESMILEYS, true);
-   			} else {
-                szName = encodeUTF8(event->hContact, szRealProto, eventData->pszNick, ENF_NAMESMILEYS, true);
+			} else {
+				szName = encodeUTF8(event->hContact, szRealProto, eventData->pszNick, ENF_NAMESMILEYS, true);
 			}
 			if (eventData->dwFlags & IEEDF_UNICODE_TEXT) {
 				szText = encodeUTF8(event->hContact, szRealProto, eventData->pszTextW, eventData->iType == IEED_EVENT_MESSAGE ? ENF_ALL : 0, isSent);
-   			} else {
-                szText = encodeUTF8(event->hContact, szRealProto, eventData->pszText, event->codepage, eventData->iType == IEED_EVENT_MESSAGE ? ENF_ALL : 0, isSent);
+			} else {
+				szText = encodeUTF8(event->hContact, szRealProto, eventData->pszText, event->codepage, eventData->iType == IEED_EVENT_MESSAGE ? ENF_ALL : 0, isSent);
 			}
 			/* History++-specific formatting */
 			const char *className = NULL;
@@ -269,36 +269,36 @@ void HistoryHTMLBuilder::appendEventNonTemplate(IEView *view, IEVIEWEVENT *event
 			} else {
 				Utils::appendText(&output, &outputSize, " ");
 			}
-           	Utils::appendText(&output, &outputSize, "<span class=\"%s\">%s:</span>", isSent ? "nameOut" : "nameIn", szName);
-           	Utils::appendText(&output, &outputSize, "<span class=\"%s\">%s</span><br>", isSent ? "timeOut" : "timeIn", timestampToString(dwFlags, eventData->time));
+			Utils::appendText(&output, &outputSize, "<span class=\"%s\">%s:</span>", isSent ? "nameOut" : "nameIn", szName);
+			Utils::appendText(&output, &outputSize, "<span class=\"%s\">%s</span><br>", isSent ? "timeOut" : "timeIn", timestampToString(dwFlags, eventData->time));
 			if (eventData->iType == IEED_EVENT_FILE) {
 				Utils::appendText(&output, &outputSize, "%s:<br> %s", isSent ? Translate("Outgoing File Transfer") : Translate("Incoming File Transfer"), szText);
 			} else if (eventData->iType == IEED_EVENT_URL) {
-            	Utils::appendText(&output, &outputSize, "%s:<br> %s", isSent ? Translate("URL sent") : Translate("URL received"), szText);
+				Utils::appendText(&output, &outputSize, "%s:<br> %s", isSent ? Translate("URL sent") : Translate("URL received"), szText);
 			} else {
-            	Utils::appendText(&output, &outputSize, "%s", szText);
+				Utils::appendText(&output, &outputSize, "%s", szText);
 			}
-            Utils::appendText(&output, &outputSize, "</div>\n");
+			Utils::appendText(&output, &outputSize, "</div>\n");
 			setLastEventType(MAKELONG(eventData->dwFlags, eventData->iType));
 			setLastEventTime(eventData->time);
 			if (szName!=NULL) delete szName;
 			if (szText!=NULL) delete szText;
 		}
 		if (output != NULL) {
-            view->write(output);
+			view->write(output);
 			free(output);
 		}
-    }
-    if (szRealProto!=NULL) delete szRealProto;
-    view->documentClose();
+	}
+	if (szRealProto!=NULL) delete szRealProto;
+	view->documentClose();
 }
 
 void HistoryHTMLBuilder::appendEvent(IEView *view, IEVIEWEVENT *event) {
-    ProtocolSettings *protoSettings = getHistoryProtocolSettings(event->hContact);
+	ProtocolSettings *protoSettings = getHistoryProtocolSettings(event->hContact);
 	if (protoSettings == NULL) {
 		return;
 	}
-    if (protoSettings->getHistoryMode() & Options::MODE_TEMPLATE) {
+	if (protoSettings->getHistoryMode() & Options::MODE_TEMPLATE) {
 		appendEventTemplate(view, event, protoSettings);
 	} else{
 		appendEventNonTemplate(view, event);

@@ -28,13 +28,13 @@ class ScriverHTMLBuilder;
 class ScriverHTMLBuilder:public TemplateHTMLBuilder
 {
 protected:
-    void loadMsgDlgFont(int i, LOGFONTA * lf, COLORREF * colour);
+	void loadMsgDlgFont(int i, LOGFONTA * lf, COLORREF * colour);
 	char *timestampToString(DWORD dwFlags, time_t check, int groupStart);
 	DWORD startedTime;
 	bool isDbEventShown(DBEVENTINFO * dbei);
 	void appendEventNonTemplate(IEView *, IEVIEWEVENT *event);
 public:
-    ScriverHTMLBuilder();
+	ScriverHTMLBuilder();
 	void buildHead(IEView *, IEVIEWEVENT *event);
 	void appendEvent(IEView *, IEVIEWEVENT *event);
 };

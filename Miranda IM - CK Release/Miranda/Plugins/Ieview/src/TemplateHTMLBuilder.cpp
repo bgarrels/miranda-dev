@@ -126,7 +126,7 @@ char *TemplateHTMLBuilder::timestampToString(DWORD dwFlags, time_t check, int mo
 		dbtts.szFormat = (dwFlags & Options::LOG_SHOW_SECONDS) ? (char *)"s" : (char *)"t";
 		CallService(MS_DB_TIME_TIMESTAMPTOSTRING, check, (LPARAM) & dbtts);
 		strncat(szResult, str, 500);
-	} else {    //date
+	} else {//date
 		struct tm tm_now, tm_today;
 		time_t now = time(NULL);
 		time_t today;
@@ -243,7 +243,7 @@ void TemplateHTMLBuilder::buildHeadTemplate(IEView *view, IEVIEWEVENT *event, Pr
 			tokenVal = NULL;
 			switch (token->getType()) {
 				case Token::PLAIN:
-                    tokenVal = token->getText();
+					tokenVal = token->getText();
 					break;
 				case Token::BASE:
 					tokenVal = szBase;

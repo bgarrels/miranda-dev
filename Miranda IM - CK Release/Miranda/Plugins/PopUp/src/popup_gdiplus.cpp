@@ -1,10 +1,10 @@
 /*
 Popup Plus plugin for Miranda IM
 
-Copyright	© 2002 Luca Santarelli,
-			© 2004-2007 Victor Pavlychko
-			© 2010 MPK
-			© 2010 Merlin_de
+Copyright	ï¿½ 2002 Luca Santarelli,
+			ï¿½ 2004-2007 Victor Pavlychko
+			ï¿½ 2010 MPK
+			ï¿½ 2010 Merlin_de
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -66,9 +66,9 @@ void UnloadGDIPlus()
 	}
 	__except ( EXCEPTION_EXECUTE_HANDLER ) {
 		// do nothing
-	}
+    }
 	gbGdiPlusLoaded = true;
-	g_gdiplusToken = 0;
+    g_gdiplusToken = 0;
 }
 
 using namespace Gdiplus;
@@ -80,46 +80,44 @@ using namespace Gdiplus;
 
 HBITMAP SkinEngine_CreateDIB32(int cx, int cy)
 {
-	BITMAPINFO RGB32BitsBITMAPINFO; 
-	UINT * ptPixels;
-	HBITMAP DirectBitmap;
+    BITMAPINFO RGB32BitsBITMAPINFO; 
+    UINT * ptPixels;
+    HBITMAP DirectBitmap;
 
-	if ( cx < 0 || cy < 0 ) {
-		return NULL;
-	}
+    if ( cx < 0 || cy < 0 ) {
+        return NULL;
+    }
 
-	ZeroMemory(&RGB32BitsBITMAPINFO,sizeof(BITMAPINFO));
-	RGB32BitsBITMAPINFO.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
-	RGB32BitsBITMAPINFO.bmiHeader.biWidth=cx;//bm.bmWidth;
-	RGB32BitsBITMAPINFO.bmiHeader.biHeight=cy;//bm.bmHeight;
-	RGB32BitsBITMAPINFO.bmiHeader.biPlanes=1;
-	RGB32BitsBITMAPINFO.bmiHeader.biBitCount=32;
-	// pointer used for direct Bitmap pixels access
+    ZeroMemory(&RGB32BitsBITMAPINFO,sizeof(BITMAPINFO));
+    RGB32BitsBITMAPINFO.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
+    RGB32BitsBITMAPINFO.bmiHeader.biWidth=cx;//bm.bmWidth;
+    RGB32BitsBITMAPINFO.bmiHeader.biHeight=cy;//bm.bmHeight;
+    RGB32BitsBITMAPINFO.bmiHeader.biPlanes=1;
+    RGB32BitsBITMAPINFO.bmiHeader.biBitCount=32;
+    // pointer used for direct Bitmap pixels access
 
 
-	DirectBitmap = CreateDIBSection(NULL, 
-		(BITMAPINFO *)&RGB32BitsBITMAPINFO, 
-		DIB_RGB_COLORS,
-		(void **)&ptPixels, 
-		NULL, 0);
-	if ((DirectBitmap == NULL || ptPixels == NULL) && cx!= 0 && cy!=0) 
-	{
-		;
-	}
-	else
+    DirectBitmap = CreateDIBSection(NULL, 
+        (BITMAPINFO *)&RGB32BitsBITMAPINFO, 
+        DIB_RGB_COLORS,
+        (void **)&ptPixels, 
+        NULL, 0);
+    if ((DirectBitmap == NULL || ptPixels == NULL) && cx!= 0 && cy!=0) 
+    {
+        ;
+    }
+    else
 	{
 		memset(ptPixels,0,cx*cy*4);
 	}
-	return DirectBitmap;
+    return DirectBitmap;
 }
 
 
-BOOL GDIPlus_IsAnimatedGIF(char * szName)
+BOOL GDIPlus_IsAnimatedGIF(TCHAR * szName)
 {
 	int nFrameCount=0;
-	WCHAR * temp= mir_a2u(szName);
-	Image image(temp);
-	mir_free(temp);
+	Image image(szName);
 	UINT count = 0;
 
 	count = image.GetFrameDimensionsCount();
@@ -136,22 +134,18 @@ BOOL GDIPlus_IsAnimatedGIF(char * szName)
 	return (BOOL) (nFrameCount > 1) && image.GetWidth() && image.GetHeight();
 }
 
-void GDIPlus_GetGIFSize(char * szName, int * width, int * height)
+void GDIPlus_GetGIFSize(TCHAR * szName, int * width, int * height)
 {
-	WCHAR * temp= mir_a2u(szName);
-	Image image(temp);
-	mir_free(temp);
+	Image image(szName);
 
 	*width = image.GetWidth();
 	*height = image.GetHeight();
 }
 
-void GDIPlus_ExtractAnimatedGIF(char * szName, int width, int height, HBITMAP * pBitmap, int ** pframesDelay, int * pframesCount, SIZE * pSizeAvatar)
+void GDIPlus_ExtractAnimatedGIF(TCHAR * szName, int width, int height, HBITMAP * pBitmap, int ** pframesDelay, int * pframesCount, SIZE * pSizeAvatar)
 {
 	int nFrameCount=0;
-	WCHAR * temp = mir_a2u(szName);
-	Bitmap image(temp);
-	mir_free(temp);
+	Bitmap image(szName);
 	PropertyItem * pPropertyItem; 
 
 	UINT count = 0;

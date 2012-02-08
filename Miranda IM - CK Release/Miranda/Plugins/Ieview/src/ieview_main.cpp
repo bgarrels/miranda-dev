@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "ieview_services.h"
 #include "Options.h"
 #include "Utils.h"
-#include "../Version.h"
+#include "Version.h"
 
 char *ieviewModuleName;
 HINSTANCE hInstance;
@@ -44,7 +44,7 @@ PLUGININFOEX pluginInfoEx = {
 	__AUTHORWEB,
 	UNICODE_AWARE,
 	0,
-	{0x0495171b,   0x7137,   0x4ded,    {0x97, 0xf8, 0xce, 0x6f, 0xed, 0x67, 0xd6, 0x91}}
+	{0x0495171b,   0x7137,   0x4ded, {0x97, 0xf8, 0xce, 0x6f, 0xed, 0x67, 0xd6, 0x91}}
 };
 
 extern "C" BOOL WINAPI DllMain(HINSTANCE hModule, DWORD dwReason, LPVOID lpvReserved)

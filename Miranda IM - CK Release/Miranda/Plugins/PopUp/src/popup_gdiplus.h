@@ -1,10 +1,10 @@
 /*
 Popup Plus plugin for Miranda IM
 
-Copyright	© 2002 Luca Santarelli,
-			© 2004-2007 Victor Pavlychko
-			© 2010 MPK
-			© 2010 Merlin_de
+Copyright	ï¿½ 2002 Luca Santarelli,
+			ï¿½ 2004-2007 Victor Pavlychko
+			ï¿½ 2010 MPK
+			ï¿½ 2010 Merlin_de
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -35,8 +35,8 @@ Last change by : $Author: Merlin_de $
 void LoadGDIPlus();
 void UnloadGDIPlus();
 
-BOOL GDIPlus_IsAnimatedGIF(char * szName);
-void GDIPlus_GetGIFSize(char * szName, int * width, int * height);
-void GDIPlus_ExtractAnimatedGIF(char * szName, int width, int height, HBITMAP * pBitmap, int ** pframesDelay, int * pframesCount, SIZE * pSizeAvatar);
+BOOL GDIPlus_IsAnimatedGIF(TCHAR * szName);
+void GDIPlus_GetGIFSize(TCHAR * szName, int * width, int * height);
+void GDIPlus_ExtractAnimatedGIF(TCHAR * szName, int width, int height, HBITMAP * pBitmap, int ** pframesDelay, int * pframesCount, SIZE * pSizeAvatar);
 
 #endif // __popup_gdiplus_h__

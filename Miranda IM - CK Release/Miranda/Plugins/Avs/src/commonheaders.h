@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #define MIRANDA_VER  0x0900
 #define MIRANDA_CUSTOM_LP
-#define _WIN32_WINNT 0x0501
+#define _WIN32_WINNT 0x0502
 
 #include "m_stdhdr.h"
 
@@ -40,6 +40,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <math.h>
 #include <win2k.h>
 
+//Miranda IM stuff
 #include <newpluginapi.h>
 #include <m_system_cpp.h>
 #include <m_clist.h>
@@ -59,15 +60,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <m_addcontact.h>
 #include <m_png.h>
 #include <m_userinfo.h>
-#include "m_folders.h"
 
+//ExternalAPI
+#include "m_folders.h"
 #include <m_avatars.h>
 #include <m_popup.h>
 #include <m_imgsrvc.h>
 #include "m_metacontacts.h"
 #include "m_avatarhistory.h"
 
-#include "resource.h"
+#include "../resource.h"
 #include "m_updater.h"
 #include "m_flash.h"
 #include "image_utils.h"
@@ -96,7 +98,7 @@ struct protoPicCacheEntry : public avatarCacheEntry
 	__inline void* operator new( size_t size ) { return mir_alloc( size ); }
 	__inline void operator delete( void* p ) { mir_free( p ); }
 
-    protoPicCacheEntry() { memset(this, 0, sizeof(*this)); };
+	protoPicCacheEntry() { memset(this, 0, sizeof(*this)); };
 	~protoPicCacheEntry();
 
 	char*  szProtoname;

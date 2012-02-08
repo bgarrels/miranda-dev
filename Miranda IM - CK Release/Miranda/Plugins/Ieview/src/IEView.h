@@ -39,7 +39,6 @@ static const CLSID CLSID_MozillaBrowser=
 #ifndef __IDocHostUIHandler_INTERFACE_DEFINED__
 #define __IDocHostUIHandler_INTERFACE_DEFINED__
 
-
 typedef struct _DOCHOSTUIINFO
 	{
 	ULONG cbSize;
@@ -47,8 +46,7 @@ typedef struct _DOCHOSTUIINFO
 	DWORD dwDoubleClick;
 	OLECHAR *pchHostCss;
 	OLECHAR *pchHostNS;
-	} 	DOCHOSTUIINFO;
-
+	} DOCHOSTUIINFO;
 
 const IID IID_IDocHostUIHandler ={0xbd3f23c0,0xd43e,0x11CF,{0x89, 0x3b, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x1a}};
 
@@ -151,9 +149,8 @@ typedef enum tagDOCHOSTUIFLAG
 	DOCHOSTUIFLAG_USE_WINDOWED_SELECTCONTROL	= 0x10000000,
 	DOCHOSTUIFLAG_ENABLE_ACTIVEX_INACTIVATE_MODE	= 0x20000000,
 	DOCHOSTUIFLAG_DPI_AWARE	= 0x40000000
-	} 	DOCHOSTUIFLAG;
+	} DOCHOSTUIFLAG;
 
-	
 #endif 	/* __IDocHostUIHandler_INTERFACE_DEFINED__ */
 
 #ifndef __IHTMLAnchorElement_INTERFACE_DEFINED__
@@ -165,134 +162,133 @@ typedef enum tagDOCHOSTUIFLAG
 
 EXTERN_C const IID IID_IHTMLAnchorElement;
 
-	
 	MIDL_INTERFACE("3050f1da-98b5-11cf-bb82-00aa00bdce0b")
 	IHTMLAnchorElement : public IDispatch
 	{
 	public:
 		virtual /* [bindable][displaybind][id][propput] */ HRESULT STDMETHODCALLTYPE put_href( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propget] */ HRESULT STDMETHODCALLTYPE get_href( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propput] */ HRESULT STDMETHODCALLTYPE put_target( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propget] */ HRESULT STDMETHODCALLTYPE get_target( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propput] */ HRESULT STDMETHODCALLTYPE put_rel( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propget] */ HRESULT STDMETHODCALLTYPE get_rel( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propput] */ HRESULT STDMETHODCALLTYPE put_rev( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propget] */ HRESULT STDMETHODCALLTYPE get_rev( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propput] */ HRESULT STDMETHODCALLTYPE put_urn( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propget] */ HRESULT STDMETHODCALLTYPE get_urn( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propput] */ HRESULT STDMETHODCALLTYPE put_Methods( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propget] */ HRESULT STDMETHODCALLTYPE get_Methods( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propput] */ HRESULT STDMETHODCALLTYPE put_name( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propget] */ HRESULT STDMETHODCALLTYPE get_name( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_host( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_host( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_hostname( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_hostname( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_pathname( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_pathname( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_port( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_port( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_protocol( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_protocol( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_search( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_search( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_hash( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_hash( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propput] */ HRESULT STDMETHODCALLTYPE put_onblur( 
 			/* [in] */ VARIANT v) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propget] */ HRESULT STDMETHODCALLTYPE get_onblur( 
 			/* [out][retval] */  VARIANT *p) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propput] */ HRESULT STDMETHODCALLTYPE put_onfocus( 
 			/* [in] */ VARIANT v) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propget] */ HRESULT STDMETHODCALLTYPE get_onfocus( 
 			/* [out][retval] */  VARIANT *p) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propput] */ HRESULT STDMETHODCALLTYPE put_accessKey( 
 			/* [in] */  BSTR v) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propget] */ HRESULT STDMETHODCALLTYPE get_accessKey( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_protocolLong( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_mimeType( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_nameProp( 
 			/* [out][retval] */  BSTR *p) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propput] */ HRESULT STDMETHODCALLTYPE put_tabIndex( 
 			/* [in] */ short v) = 0;
-		
+
 		virtual /* [bindable][displaybind][id][propget] */ HRESULT STDMETHODCALLTYPE get_tabIndex( 
 			/* [out][retval] */  short *p) = 0;
-		
+
 		virtual /* [id] */ HRESULT STDMETHODCALLTYPE focus( void) = 0;
-		
+
 		virtual /* [id] */ HRESULT STDMETHODCALLTYPE blur( void) = 0;
-		
+
 	};
-	
+
 #endif 	/* __IHTMLAnchorElement_INTERFACE_DEFINED__ */
 
 #ifndef __IInternetSecurityManager_INTERFACE_DEFINED__
@@ -512,8 +508,8 @@ private:
 	STDMETHOD(GetZoneMappings)(DWORD dwZone, IEnumString **ppenumString, DWORD dwFlags);
 
 	IHTMLDocument2 *getDocument();
-	BSTR 			getHrefFromAnchor(IHTMLElement *element);
-	BSTR 			getSelection();
+	BSTR			getHrefFromAnchor(IHTMLElement *element);
+	BSTR			getSelection();
 	void			setBorder();
 protected:
 	void			navigate(const char *);
@@ -528,18 +524,18 @@ public:
 	void 			translateAccelerator(UINT uMsg, WPARAM wParam, LPARAM lParam);
 	bool			mouseClick(POINT pt);
 	bool			mouseActivate();
-	bool            setFocus(HWND prevFocus);
-	void            setWindowPos(int x, int y, int cx, int cy);
+	bool			setFocus(HWND prevFocus);
+	void			setWindowPos(int x, int y, int cx, int cy);
 	HTMLBuilder*    getBuilder();
 
 	void			write(const wchar_t *text);
 	void			write(const char *text);
-	void            writef(const char *fmt, ...);
-	void            documentClose();
-	void            rebuildLog();
-	void            scrollToBottom();
-	void            scrollToBottomSoft();
-	void            scrollToTop();
+	void			writef(const char *fmt, ...);
+	void			documentClose();
+	void			rebuildLog();
+	void			scrollToBottom();
+	void			scrollToBottomSoft();
+	void			scrollToTop();
 
 	void            setMainWndProc(WNDPROC);
 	WNDPROC         getMainWndProc();
@@ -557,9 +553,9 @@ public:
 
 	void			setContact(HANDLE hContact);
 
-	static IEView* 	get(HWND);
-	static void 	init();
-	static void 	release();
+	static IEView*	get(HWND);
+	static void		init();
+	static void		release();
 	static void		setOptions();
 
 };

@@ -30,11 +30,11 @@ Boston, MA 02111-1307, USA.
 #include <string>
 #include <commctrl.h>
 #include "win2k.h"
-#include "vector"       // stl vector header
+#include "vector"			// stl vector header
 #include <Shlobj.h>
 
 // Miranda header files
-#include <newpluginapi.h>
+#include <newpluginapi.h>	// CallService,UnHookEvent
 #include <m_clist.h>
 #include <m_skin.h>
 #include <m_langpack.h>

@@ -1,5 +1,5 @@
 
-#include "../include/commonheaders.h"
+#include "commonheaders.h"
 
 PLUGINLINK *pluginLink;
 HINSTANCE hInst;

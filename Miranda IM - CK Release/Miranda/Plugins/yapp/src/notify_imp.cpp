@@ -3,6 +3,7 @@
 #include "notify.h"
 #include "message_pump.h"
 #include "m_popup2.h"
+#include "m_notify_popup.h"
 
 HANDLE hhkShow=0, hhkUpdate=0, hhkRemove=0;
 

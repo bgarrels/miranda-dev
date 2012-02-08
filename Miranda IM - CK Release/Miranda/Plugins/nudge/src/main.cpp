@@ -2,6 +2,7 @@
 #include "main.h"
 #include "shake.h"
 #include "m_msg_buttonsbar.h"
+#include "m_ignore.h"
 
 
 int nProtocol = 0;
@@ -43,7 +44,14 @@ PLUGININFOEX pluginInfo={
 #endif
 };
 
+/*
+NudgeOptInit
+*************************** */
+int NudgeOptInit(WPARAM wParam,LPARAM lParam);
 
+int Preview();
+
+HANDLE Nudge_GethContact(HANDLE);
  
 void RegisterToUpdate(void)
 {
