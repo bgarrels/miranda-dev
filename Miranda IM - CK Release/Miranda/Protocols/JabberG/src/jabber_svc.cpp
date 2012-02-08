@@ -2,8 +2,8 @@
 
 Jabber Protocol Plugin for Miranda IM
 Copyright ( C ) 2002-04  Santithorn Bunchua
+Copyright ( C ) 2005-11  George Hazan
 Copyright ( C ) 2007     Maxim Mluhov
-Copyright ( C ) 2005-12  George Hazan
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,13 +19,13 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 14060 $
-Last change on : $Date: 2012-02-06 17:41:59 +0100 (Mo, 06. Feb 2012) $
+Revision       : $Revision: 14069 $
+Last change on : $Date: 2012-02-07 09:52:37 +0100 (Di, 07. Feb 2012) $
 Last change by : $Author: george.hazan $
 
 */
 
-#include "../jabber.h"
+#include "jabber.h"
 
 #include <fcntl.h>
 #include <io.h>
@@ -38,7 +38,7 @@ Last change by : $Author: george.hazan $
 #include "m_file.h"
 #include "m_addcontact.h"
 #include "jabber_disco.h"
-#include "m_proto_listeningto.h"
+#include "sdk/m_proto_listeningto.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // GetMyAwayMsg - obtain the current away message
@@ -94,7 +94,6 @@ INT_PTR __cdecl CJabberProto::JabberGetAvatar( WPARAM wParam, LPARAM lParam )
 		return -2;
 
 	GetAvatarFileName( NULL, buf, size );
-		
 	return 0;
 }
 
@@ -110,7 +109,7 @@ INT_PTR __cdecl CJabberProto::JabberGetAvatarCaps( WPARAM wParam, LPARAM lParam 
 			if ( size )
 				size->x = size->y = 96;
 		}
-	  return 0;
+      return 0;
 
 	case AF_PROPORTION:
 		return PIP_NONE;
@@ -286,7 +285,7 @@ INT_PTR __cdecl CJabberProto::OnGetEventTextPresence( WPARAM, LPARAM lParam )
 
 INT_PTR __cdecl CJabberProto::JabberSetAvatar( WPARAM, LPARAM lParam )
 {
-	TCHAR* tszFileName = mir_a2t(( char* )lParam );
+	TCHAR* tszFileName = ( TCHAR* )lParam;
 
 	if ( m_bJabberOnline ) {
 		SetServerVcard( TRUE, tszFileName );
@@ -345,7 +344,7 @@ INT_PTR __cdecl CJabberProto::JabberSetAvatar( WPARAM, LPARAM lParam )
 
 		JSetString( NULL, "AvatarSaved", buf );
 	}
-	mir_free(tszFileName);
+
 	return 0;
 }
 
@@ -509,7 +508,7 @@ INT_PTR __cdecl CJabberProto::JabberServiceParseXmppURI( WPARAM wParam, LPARAM l
 		// message
 		if ( ServiceExists( MS_MSG_SENDMESSAGE )) {
 			HANDLE hContact = HContactFromJID( szJid, TRUE );
-			TCHAR *szMsgBody = NULL;
+            TCHAR *szMsgBody = NULL;
 			if ( !hContact )
 				hContact = DBCreateContact( szJid, szJid, TRUE, TRUE );
 			if ( !hContact )
