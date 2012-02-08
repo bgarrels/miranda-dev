@@ -436,7 +436,7 @@ int IEViewOptInit(WPARAM wParam, LPARAM lParam)
 	odp.ptszTab = tabPages[0].tabName;
 	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM) & odp);
 	odp.ptszGroup = _T("Skins");
-	odp.ptszTitle = _T("Message Log");
+	odp.ptszTitle = _T("IEView");
 	for (i = 1; i < SIZEOF(tabPages); i++) {
 		odp.pszTemplate = MAKEINTRESOURCEA(tabPages[i].dlgId);
 		odp.pfnDlgProc = tabPages[i].dlgProc;

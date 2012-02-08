@@ -2,7 +2,7 @@
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2004 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #include "commonheaders.h"
-#include "version.h"
+#include "../version.h"
 
 HINSTANCE g_hInst = 0;
 PLUGINLINK *pluginLink;
@@ -1393,7 +1393,7 @@ static INT_PTR SetMyAvatar(WPARAM wParam, LPARAM lParam)
 	{
 		SetForegroundWindow((HWND) hwndSetMyAvatar);
 		SetFocus((HWND) hwndSetMyAvatar);
- 		ShowWindow((HWND) hwndSetMyAvatar, SW_SHOW);
+		ShowWindow((HWND) hwndSetMyAvatar, SW_SHOW);
 		return -2;
 	}
 

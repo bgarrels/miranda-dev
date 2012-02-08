@@ -21,12 +21,12 @@
 #include "socksproxy.h"
 #include "w32skypeemu.h"
 #include "skypepluginlink.h"
-#include "include/newpluginapi.h"
-#include "include/m_langpack.h"
-#include "include/m_options.h"
-#include "include/m_database.h"
-#include "include/m_system.h"
-#include "sdk/m_updater.h"
+#include "newpluginapi.h"
+#include "m_langpack.h"
+#include "m_options.h"
+#include "m_database.h"
+#include "m_system.h"
+#include "m_updater.h"
 #include "resource.h"
 
 // Crash dumper

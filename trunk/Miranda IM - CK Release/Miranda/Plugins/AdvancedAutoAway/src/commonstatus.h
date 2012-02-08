@@ -37,6 +37,7 @@
 #include <stdio.h>
 #include <tchar.h>
 
+//Miranda IM stuff
 #include <newpluginapi.h>
 #include <m_system.h>
 #include <m_system_cpp.h>

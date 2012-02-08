@@ -1,4 +1,4 @@
-#include "menuex.h"
+#include "../include/menuex.h"
 
 
 extern HINSTANCE hinstance;
@@ -119,14 +119,14 @@ int OptionsInit(WPARAM wparam,LPARAM lparam)
 	OPTIONSDIALOGPAGE odp={0};
 
 	odp.cbSize=sizeof(odp);
-    odp.position=955000000;
-    odp.hInstance=hinstance;
-    odp.pszTemplate=MAKEINTRESOURCEA(IDD_OPTIONS);
-    odp.ptszTitle= _T(MODULENAME);
-    odp.pfnDlgProc=OptionsProc;
+	odp.position=955000000;
+	odp.hInstance=hinstance;
+	odp.pszTemplate=MAKEINTRESOURCEA(IDD_OPTIONS);
+	odp.ptszTitle= _T(MODULENAME);
+	odp.pfnDlgProc=OptionsProc;
 	odp.ptszGroup=_T("Customize");
 	odp.flags=ODPF_BOLDGROUPS | ODPF_TCHAR;
 
-    CallService(MS_OPT_ADDPAGE,wparam,(LPARAM)&odp);
+	CallService(MS_OPT_ADDPAGE,wparam,(LPARAM)&odp);
 	return 0;
 }

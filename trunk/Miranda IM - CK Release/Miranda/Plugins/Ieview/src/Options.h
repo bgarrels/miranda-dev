@@ -193,8 +193,8 @@ public:
 
 class Options {
 private:
-	static int 		generalFlags;
-	static bool     isInited;
+   	static int 		generalFlags;
+   	static bool     isInited;
 	static bool     bMathModule;
 	static bool     bSmileyAdd;
 	static int      avatarServiceFlags;
@@ -234,7 +234,6 @@ public:
 	static int				getGeneralFlags();
 	static void     		setEmbedsize(int size);
 	static int				getEmbedsize();
-
 
 	static bool             isMathModule();
 	static bool             isSmileyAdd();

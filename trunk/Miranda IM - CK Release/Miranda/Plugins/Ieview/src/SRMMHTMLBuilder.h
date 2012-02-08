@@ -28,7 +28,7 @@ class SRMMHTMLBuilder;
 class SRMMHTMLBuilder:public TemplateHTMLBuilder
 {
 protected:
-    virtual void loadMsgDlgFont(int i, LOGFONTA * lf, COLORREF * colour);
+	virtual void loadMsgDlgFont(int i, LOGFONTA * lf, COLORREF * colour);
 	char *timestampToString(DWORD dwFlags, time_t check);
 	bool isDbEventShown(DBEVENTINFO * dbei);
 	void 	appendEventNonTemplate(IEView *, IEVIEWEVENT *event);

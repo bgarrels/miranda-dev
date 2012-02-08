@@ -1,5 +1,5 @@
-#include "menuex.h"
-#include "images.h"
+#include "../include/menuex.h"
+#include "../include/images.h"
 
 extern HINSTANCE hinstance;
 

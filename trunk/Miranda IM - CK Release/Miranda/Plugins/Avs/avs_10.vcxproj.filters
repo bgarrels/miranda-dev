@@ -53,7 +53,7 @@
     <ClInclude Include="src\poll.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\version.h">
+    <ClInclude Include="version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -69,10 +69,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="src\avs.rc">
+    <ResourceCompile Include="avs.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="src\version.rc">
+    <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

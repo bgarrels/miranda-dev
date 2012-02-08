@@ -3,13 +3,9 @@
 #include "pthread.h"
 #include "gchat.h"
 #include "skypeprofile.h"
-#if(WINVER >= 0x0500)
-#include "uxtheme.h"
-#define HAVE_UXTHEMES
-#endif
 
 #ifdef SKYPE_AUTO_DETECTION
-#include "ezxml/ezxml.c"
+#include "../ezxml/ezxml.c"
 #endif
 
 #ifdef UNICODE

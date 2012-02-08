@@ -15,10 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\commonheaders.h">
+    <ClInclude Include="src\modernopt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\modernopt.h">
+    <ClInclude Include="src\commonheaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

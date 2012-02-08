@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "msn_global.h"
 #include "msn_proto.h"
-#include "sdk/m_smileyadd.h"
+#include "m_smileyadd.h"
 
 static const char sttP2Pheader[] =
 	"Content-Type: application/x-msnmsgrp2p\r\n"
@@ -1212,7 +1212,7 @@ void CMsnProto::p2p_InitFileTransfer(
 	replaceStr(ft->p2p_branch, szBranch);
 	ft->p2p_dest = mir_strdup(wlid);
 	ft->p2p_isV2 = strchr(wlid, ';') != NULL;
- 	ft->std.hContact = MSN_HContactFromEmail(wlid);
+	ft->std.hContact = MSN_HContactFromEmail(wlid);
 
 	p2p_registerSession(ft);
 
@@ -1788,7 +1788,7 @@ void CMsnProto::p2p_processSIP(ThreadData* info, char* msgbody, P2PB_Header* hdr
 
 //			application/x-msnmsgr-session-failure-respbody
 			
-  			directconnection *dc = p2p_getDCByCallID(callID, wlid);
+			directconnection *dc = p2p_getDCByCallID(callID, wlid);
 			if (dc != NULL)
 			{
 				p2p_unregisterDC(dc);
@@ -1863,7 +1863,7 @@ void  CMsnProto::p2p_processMsgV2(ThreadData* info,  char* msgbody, const char* 
 
 			if (hdrdata.mRemSize == 0)
 			{
-	  			size_t newsize;
+				size_t newsize;
 				if (getCachedMsg(idx, msgbody, newsize))
 				{
 					unsigned id = hdrdata.mID;

@@ -15,7 +15,7 @@
 #include <richedit.h>
 #include <commctrl.h>
 #include <tchar.h>
-#include <m_clc.h>
+#include <./../../include/m_clc.h>
 
 /////////////////////////////////////////////////////////////////////////////
 // Neutral resources

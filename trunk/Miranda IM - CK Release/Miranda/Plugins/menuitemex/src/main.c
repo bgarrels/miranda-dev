@@ -1,6 +1,6 @@
-#include "menuex.h"
-#include "images.h"
-#include "version.h"
+#include "../include/menuex.h"
+#include "../include/images.h"
+#include "../include/version.h"
 
 #define MS_SETINVIS		"MenuEx/SetInvis"
 #define MS_SETVIS		"MenuEx/SetVis"
@@ -156,8 +156,8 @@ int enumModulesSettingsProc( const char *szName, LPARAM lParam)
 
 void FreeModuleSettingLL(ModuleSettingLL* msll)
 {
-    if (msll)
-    {
+	if (msll)
+	{
 		struct ModSetLinkLinkItem *item = msll->first;
 		struct ModSetLinkLinkItem *temp;
 
@@ -1138,14 +1138,14 @@ static int TabsrmmButtonsInit(WPARAM wParam, LPARAM lParam)
 static void TabsrmmButtonsModify(HANDLE hContact) 
 { 
 	if (!DirectoryExists(hContact)) 
-    { 
-      BBButton bbd = {0}; 
-      bbd.cbSize = sizeof(BBButton); 
+	{ 
+	  BBButton bbd = {0}; 
+	  bbd.cbSize = sizeof(BBButton); 
 	  bbd.dwButtonID = 0;
-      bbd.pszModuleName = MODULENAME;
+	  bbd.pszModuleName = MODULENAME;
 	  bbd.bbbFlags = BBSF_DISABLED | BBSF_HIDDEN;
-      CallService(MS_BB_SETBUTTONSTATE, (WPARAM)hContact, (LPARAM)&bbd); 
-    } 
+	  CallService(MS_BB_SETBUTTONSTATE, (WPARAM)hContact, (LPARAM)&bbd); 
+	} 
 } 
 
 static int ContactWindowOpen(WPARAM wparam,LPARAM lParam) 
@@ -1154,7 +1154,7 @@ static int ContactWindowOpen(WPARAM wparam,LPARAM lParam)
 
    if(MWeventdata->uType == MSG_WINDOW_EVT_OPENING && MWeventdata->hContact) 
    { 
-      TabsrmmButtonsModify(MWeventdata->hContact); 
+	  TabsrmmButtonsModify(MWeventdata->hContact); 
    } 
    return 0; 
 }

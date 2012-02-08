@@ -1,10 +1,10 @@
 /*
 Popup Plus plugin for Miranda IM
 
-Copyright	© 2002 Luca Santarelli,
-			© 2004-2007 Victor Pavlychko
-			© 2010 MPK
-			© 2010 Merlin_de
+Copyright	ï¿½ 2002 Luca Santarelli,
+			ï¿½ 2004-2007 Victor Pavlychko
+			ï¿½ 2010 MPK
+			ï¿½ 2010 Merlin_de
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -40,10 +40,10 @@ PopupAvatar *PopupAvatar::create(HANDLE hContact)
 		{
 			avatarCacheEntry *av = (avatarCacheEntry *)CallService(MS_AV_GETAVATARBITMAP, (WPARAM)hContact, 0);
 //			MessageBox(NULL, _T("00"), _T(MODULNAME_LONG), MB_OK);
-			if (av && (strlen(av->szFilename) > 4))
+			if (av && (_tcslen(av->szFilename) > 4))
 			{
 //				MessageBox(NULL, _T("01"), _T(MODULNAME_LONG), MB_OK);
-				if (!stricmp(av->szFilename+strlen(av->szFilename)-4, ".gif"))
+				if (!_tcsicmp(av->szFilename+_tcslen(av->szFilename)-4, _T(".gif")))
 				{
 //					MessageBox(NULL, _T("02"), _T(MODULNAME_LONG), MB_OK);
 					if (DBGetContactSettingByte(NULL, MODULNAME, "EnableGifAnimation", 1) && GDIPlus_IsAnimatedGIF(av->szFilename))

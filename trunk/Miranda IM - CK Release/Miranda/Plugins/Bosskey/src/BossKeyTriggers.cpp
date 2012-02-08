@@ -17,7 +17,7 @@
 	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include "BossKey.h"
+#include "../BossKey.h"
 extern HANDLE g_hIsHiddenService;
 
 static INT_PTR CALLBACK DlgProcOptsBossKeyTrigger(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam) {

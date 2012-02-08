@@ -171,12 +171,6 @@
     <ClCompile Include="hunspell\suggestmgr.cxx">
       <Filter>Source Files\hunspell Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\berlios\trunk\utils\mir_icons.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\berlios\trunk\utils\mir_options.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\ardialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
