@@ -455,58 +455,93 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Include", "Include", "{3D06
 		..\Include\win2k.h = ..\Include\win2k.h
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "delphi", "delphi", "{2DD74A3D-66FB-4398-A294-54D58FED8DAF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "historysweeper", "..\Plugins\HistorySweeper\historysweeper_10.vcxproj", "{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "delphi", "delphi", "{9EAB8DE0-5B3A-49DB-8296-FC1DE4FC8851}"
 	ProjectSection(SolutionItems) = preProject
+		..\Include\delphi\FreeImage.pas = ..\Include\delphi\FreeImage.pas
+		..\Include\delphi\interfaces.inc = ..\Include\delphi\interfaces.inc
+		..\Include\delphi\m_acc.inc = ..\Include\delphi\m_acc.inc
 		..\Include\delphi\m_addcontact.inc = ..\Include\delphi\m_addcontact.inc
+		..\Include\delphi\m_anismiley.inc = ..\Include\delphi\m_anismiley.inc
 		..\Include\delphi\m_api.pas = ..\Include\delphi\m_api.pas
+		..\Include\delphi\m_avatars.inc = ..\Include\delphi\m_avatars.inc
 		..\Include\delphi\m_awaymsg.inc = ..\Include\delphi\m_awaymsg.inc
+		..\Include\delphi\m_button.inc = ..\Include\delphi\m_button.inc
+		..\Include\delphi\m_chat.inc = ..\Include\delphi\m_chat.inc
 		..\Include\delphi\m_clc.inc = ..\Include\delphi\m_clc.inc
 		..\Include\delphi\m_clist.inc = ..\Include\delphi\m_clist.inc
+		..\Include\delphi\m_clistint.inc = ..\Include\delphi\m_clistint.inc
 		..\Include\delphi\m_clui.inc = ..\Include\delphi\m_clui.inc
+		..\Include\delphi\m_cluiframes.inc = ..\Include\delphi\m_cluiframes.inc
 		..\Include\delphi\m_contacts.inc = ..\Include\delphi\m_contacts.inc
+		..\Include\delphi\m_crypto.inc = ..\Include\delphi\m_crypto.inc
 		..\Include\delphi\m_database.inc = ..\Include\delphi\m_database.inc
+		..\Include\delphi\m_dbeditor.inc = ..\Include\delphi\m_dbeditor.inc
+		..\Include\delphi\m_descbutton.inc = ..\Include\delphi\m_descbutton.inc
 		..\Include\delphi\m_email.inc = ..\Include\delphi\m_email.inc
+		..\Include\delphi\m_errors.inc = ..\Include\delphi\m_errors.inc
+		..\Include\delphi\m_extraicons.inc = ..\Include\delphi\m_extraicons.inc
 		..\Include\delphi\m_file.inc = ..\Include\delphi\m_file.inc
 		..\Include\delphi\m_findadd.inc = ..\Include\delphi\m_findadd.inc
+		..\Include\delphi\m_fingerprint.inc = ..\Include\delphi\m_fingerprint.inc
+		..\Include\delphi\m_fontservice.inc = ..\Include\delphi\m_fontservice.inc
+		..\Include\delphi\m_genmenu.inc = ..\Include\delphi\m_genmenu.inc
 		..\Include\delphi\m_globaldefs.pas = ..\Include\delphi\m_globaldefs.pas
+		..\Include\delphi\m_help.inc = ..\Include\delphi\m_help.inc
 		..\Include\delphi\m_helpers.inc = ..\Include\delphi\m_helpers.inc
 		..\Include\delphi\m_history.inc = ..\Include\delphi\m_history.inc
+		..\Include\delphi\m_historyevents.inc = ..\Include\delphi\m_historyevents.inc
+		..\Include\delphi\m_hotkeys.inc = ..\Include\delphi\m_hotkeys.inc
+		..\Include\delphi\m_icolib.inc = ..\Include\delphi\m_icolib.inc
+		..\Include\delphi\m_iconheader.inc = ..\Include\delphi\m_iconheader.inc
 		..\Include\delphi\m_icq.inc = ..\Include\delphi\m_icq.inc
 		..\Include\delphi\m_ignore.inc = ..\Include\delphi\m_ignore.inc
+		..\Include\delphi\m_imgsrvc.inc = ..\Include\delphi\m_imgsrvc.inc
+		..\Include\delphi\m_keybindings.inc = ..\Include\delphi\m_keybindings.inc
 		..\Include\delphi\m_langpack.inc = ..\Include\delphi\m_langpack.inc
+		..\Include\delphi\m_libJSON.inc = ..\Include\delphi\m_libJSON.inc
 		..\Include\delphi\m_message.inc = ..\Include\delphi\m_message.inc
+		..\Include\delphi\m_metacontacts.inc = ..\Include\delphi\m_metacontacts.inc
+		..\Include\delphi\m_modernopt.inc = ..\Include\delphi\m_modernopt.inc
+		..\Include\delphi\m_msg_buttonsbar.inc = ..\Include\delphi\m_msg_buttonsbar.inc
 		..\Include\delphi\m_netlib.inc = ..\Include\delphi\m_netlib.inc
+		..\Include\delphi\m_newawaysys.inc = ..\Include\delphi\m_newawaysys.inc
 		..\Include\delphi\m_options.inc = ..\Include\delphi\m_options.inc
 		..\Include\delphi\m_plugins.inc = ..\Include\delphi\m_plugins.inc
+		..\Include\delphi\m_png.inc = ..\Include\delphi\m_png.inc
 		..\Include\delphi\m_popup.inc = ..\Include\delphi\m_popup.inc
+		..\Include\delphi\m_proto_listeningto.inc = ..\Include\delphi\m_proto_listeningto.inc
 		..\Include\delphi\m_protocols.inc = ..\Include\delphi\m_protocols.inc
+		..\Include\delphi\m_protoint.inc = ..\Include\delphi\m_protoint.inc
 		..\Include\delphi\m_protomod.inc = ..\Include\delphi\m_protomod.inc
 		..\Include\delphi\m_protosvc.inc = ..\Include\delphi\m_protosvc.inc
 		..\Include\delphi\m_skin.inc = ..\Include\delphi\m_skin.inc
+		..\Include\delphi\m_smileyadd.inc = ..\Include\delphi\m_smileyadd.inc
+		..\Include\delphi\m_ssl.inc = ..\Include\delphi\m_ssl.inc
 		..\Include\delphi\m_system.inc = ..\Include\delphi\m_system.inc
+		..\Include\delphi\m_tabsrmm.inc = ..\Include\delphi\m_tabsrmm.inc
+		..\Include\delphi\m_timezones.inc = ..\Include\delphi\m_timezones.inc
+		..\Include\delphi\m_tipper.inc = ..\Include\delphi\m_tipper.inc
+		..\Include\delphi\m_toolbar.inc = ..\Include\delphi\m_toolbar.inc
+		..\Include\delphi\m_toptoolbar.inc = ..\Include\delphi\m_toptoolbar.inc
+		..\Include\delphi\m_updater.inc = ..\Include\delphi\m_updater.inc
 		..\Include\delphi\m_url.inc = ..\Include\delphi\m_url.inc
 		..\Include\delphi\m_userinfo.inc = ..\Include\delphi\m_userinfo.inc
+		..\Include\delphi\m_userinfoex.inc = ..\Include\delphi\m_userinfoex.inc
 		..\Include\delphi\m_utils.inc = ..\Include\delphi\m_utils.inc
+		..\Include\delphi\m_variables.inc = ..\Include\delphi\m_variables.inc
+		..\Include\delphi\m_xml.inc = ..\Include\delphi\m_xml.inc
 		..\Include\delphi\newpluginapi.inc = ..\Include\delphi\newpluginapi.inc
-		..\Include\delphi\README.txt = ..\Include\delphi\README.txt
 		..\Include\delphi\statusmodes.inc = ..\Include\delphi\statusmodes.inc
 		..\Include\delphi\testdll.dpr = ..\Include\delphi\testdll.dpr
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mingw (temp.)", "mingw (temp.)", "{8FC482D5-2A41-43E8-B4D8-1A6511AFC5EA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{1168DC36-120A-464F-80C4-F96EF15A1B6F}"
 	ProjectSection(SolutionItems) = preProject
-		..\Include\mingw\shobjidl.h = ..\Include\mingw\shobjidl.h
-		..\Include\mingw\tom.h = ..\Include\mingw\tom.h
+		..\Include\delphi\docs\make.bat = ..\Include\delphi\docs\make.bat
+		..\Include\delphi\docs\README.txt = ..\Include\delphi\docs\README.txt
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "msapi (temp.)", "msapi (temp.)", "{1B8D4C33-EC7B-4C79-9B77-6F9A695D749A}"
-	ProjectSection(SolutionItems) = preProject
-		..\Include\msapi\vsstyle.h = ..\Include\msapi\vsstyle.h
-		..\Include\msapi\vssym32.h = ..\Include\msapi\vssym32.h
-		..\Include\msapi\winres.h = ..\Include\msapi\winres.h
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "historysweeper", "..\Plugins\HistorySweeper\historysweeper_10.vcxproj", "{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -3499,9 +3534,8 @@ Global
 		{F60935E3-8F27-46E2-8598-013E7D4C90E7} = {9A4B663F-AA57-45C6-A30B-B49FF368503F}
 		{7E88D7F5-8B0A-4B79-84CD-D7982D4E0D4D} = {9A4B663F-AA57-45C6-A30B-B49FF368503F}
 		{541BE2B3-4320-47B8-AB64-C7F7ED0EFABA} = {9A4B663F-AA57-45C6-A30B-B49FF368503F}
-		{2DD74A3D-66FB-4398-A294-54D58FED8DAF} = {3D06DEBD-4F6C-4201-970A-C52E7F53B76C}
-		{8FC482D5-2A41-43E8-B4D8-1A6511AFC5EA} = {3D06DEBD-4F6C-4201-970A-C52E7F53B76C}
-		{1B8D4C33-EC7B-4C79-9B77-6F9A695D749A} = {3D06DEBD-4F6C-4201-970A-C52E7F53B76C}
+		{9EAB8DE0-5B3A-49DB-8296-FC1DE4FC8851} = {3D06DEBD-4F6C-4201-970A-C52E7F53B76C}
+		{1168DC36-120A-464F-80C4-F96EF15A1B6F} = {9EAB8DE0-5B3A-49DB-8296-FC1DE4FC8851}
 	EndGlobalSection
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
