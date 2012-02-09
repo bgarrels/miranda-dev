@@ -23,13 +23,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ///// structures and services to manage modern skin objects (mask mechanism)
 
-//#include "windows.h"
-#include "hdr/modern_commonheaders.h"
-#include "hdr/modern_skinselector.h"
-#include "hdr/modern_skinengine.h"
-#include "m_api/m_skin_eng.h"
-#include "m_api/m_skinbutton.h"
-#include "hdr/modern_commonprototypes.h"
+#include "windows.h"
+
+//hdr
+#include "modern_commonheaders.h"
+#include "modern_skinselector.h"
+#include "modern_skinengine.h"
+#include "modern_commonprototypes.h"
+
+//m_api
+#include "m_skin_eng.h"
+#include "m_skinbutton.h"
 LISTMODERNMASK * MainModernMaskList=NULL;
 
 
@@ -164,53 +168,53 @@ BOOL MatchMask(char * name, char * mask)
 DWORD mod_CalcHash(const char *szStr)
 {
 #if defined _M_IX86 && !defined _NUMEGA_BC_FINALCHECK && !defined NOINLINEASM
-    __asm {		   //this breaks if szStr is empty
-        xor  edx,edx
-            xor  eax,eax
-            mov  esi,szStr
-            mov  al,[esi]
-            xor  cl,cl
+	__asm {		   //this breaks if szStr is empty
+		xor  edx,edx
+			xor  eax,eax
+			mov  esi,szStr
+			mov  al,[esi]
+			xor  cl,cl
 lph_top:	 //only 4 of 9 instructions in here don't use AL, so optimal pipe use is impossible
-            xor  edx,eax
-                inc  esi
-                xor  eax,eax
-                and  cl,31
-                mov  al,[esi]
-                add  cl,5
-                    test al,al
-                    rol  eax,cl		 //rol is u-pipe only, but pairable
-                    //rol doesn't touch z-flag
-                    jnz  lph_top  //5 clock tick loop. not bad.
+			xor  edx,eax
+				inc  esi
+				xor  eax,eax
+				and  cl,31
+				mov  al,[esi]
+				add  cl,5
+					test al,al
+					rol  eax,cl		 //rol is u-pipe only, but pairable
+					//rol doesn't touch z-flag
+					jnz  lph_top  //5 clock tick loop. not bad.
 
-                    xor  eax,edx
-    }
+					xor  eax,edx
+	}
 #else
-    DWORD hash=0;
-    int i;
-    int shift=0;
-    for(i=0;szStr[i];i++) {
-        hash^=szStr[i]<<shift;
-        if(shift>24) hash^=(szStr[i]>>(32-shift))&0x7F;
-        shift=(shift+5)&0x1F;
-    }
-    return hash;
+	DWORD hash=0;
+	int i;
+	int shift=0;
+	for(i=0;szStr[i];i++) {
+		hash^=szStr[i]<<shift;
+		if(shift>24) hash^=(szStr[i]>>(32-shift))&0x7F;
+		shift=(shift+5)&0x1F;
+	}
+	return hash;
 #endif
 }
 
 /*
 DWORD mod_CalcHash(const char * a)
 {
-    DWORD Val=0;
-    BYTE N;
-    DWORD k=mir_strlen(a);
-    if (k<23) N=(BYTE)k; else N=23;
-    while (N>0)
-    {
-        Val=Val<<1;
-        Val^=((DWORD)*a++)-31;
-        N--;
-    }
-    return Val;
+	DWORD Val=0;
+	BYTE N;
+	DWORD k=mir_strlen(a);
+	if (k<23) N=(BYTE)k; else N=23;
+	while (N>0)
+	{
+		Val=Val<<1;
+		Val^=((DWORD)*a++)-31;
+		N--;
+	}
+	return Val;
 }
 */
 int AddModernMaskToList(MODERNMASK * mm,  LISTMODERNMASK * mmTemplateList)
