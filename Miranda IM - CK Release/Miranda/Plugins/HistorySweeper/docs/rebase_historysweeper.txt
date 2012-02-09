@@ -1,0 +1,4 @@
+== TO PLUGIN DEVELOPERS ==
+
+This plugin has its Base Address set to:
+0x30030000

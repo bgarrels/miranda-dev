@@ -1,0 +1,20 @@
+History Sweeper Roadmap:
+
+[+] Sweep history from selected contacts only
+[+] Automatically sweep system (all, selected contacts) history at Miranda IM 
+    startup/shutdown (if enabled).
+[+] Main menu item: selectable from
+    [+]Sweep whole history
+    [+]Sweep system history
+    [+]Sweep history from selected contacts
+[+] Sweep history older than: 1 day (week, month, year).
+[+] Don't show contact menu item if history messages does not exists.
+[+] Show number of history messages in contact menu
+[+] Miranda IM installer support
+[ ] Sweep messages of certain type (Message's, URL's, File's, AuthRequest's, etc)
+[ ] Add progress bar for long operations
+[ ] Maybe something else.
+
+===========================
+[ ] - not implemented yet
+[+] - implemented and working
