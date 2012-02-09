@@ -1,0 +1,44 @@
+Translation
+-----------
+HistorySweeper can be translated with the Miranda IM language files
+
+;; == History Sweeper v0.1.1.3 ==
+
+;Name of plugin, message box caption, ...
+;[History Sweeper]
+
+;Questions and notifications
+;[Sweep history messages?]
+;[Sweep system history?]
+;[Sweep whole history?]
+;[Sweep history from selected contacts?]
+
+;Contact menu item
+;Sweep history [%d]
+
+;Main menu & options items
+;[Sweep system history]
+;[Sweep whole history]
+;[Sweep history from selected contacts]
+
+;Options page items
+;[Sweep history for this contacts:]
+;[Sweep history at Miranda IM startup]
+;[Sweep history at Miranda IM shutdown]
+;[Put an item in the main menu*]
+;[Put an item in the contact menu*]
+;[Main menu action:]
+;[At Startup/Shutdown:]
+;[Use UNSAFE mode (sweep fastest as possible, but dangerous for DB)]
+;[* Note: Miranda IM will have to be restarted for changes to take effect.]
+
+;Time intervals
+;[All events]
+;[Older than 1 Day]
+;[Older than 3 Days]
+;[Older than 7 Days]
+;[Older than 2 Weeks (14 days)]
+;[Older than 1 Month (30 days)]
+;[Older than 3 Months (90 days)]
+;[Older than 6 Months (180 days)]
+;[Older than 1 Year (364 days)]

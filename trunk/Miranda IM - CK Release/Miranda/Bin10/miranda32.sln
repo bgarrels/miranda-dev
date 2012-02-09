@@ -84,13 +84,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Proto_Yahoo", "..\Icons\Pro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Proto_conn_Yahoo", "..\Icons\Proto_conn_Yahoo\Proto_conn_Yahoo_10.vcxproj", "{43AFC354-3215-48D4-AE8C-F5F0F8F12967}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PopUp", "..\Plugins\PopUp\PopUp_10.vcxproj", "{726460C7-E1F1-4C37-B64F-DA8A8DD26D70}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PopUpW", "..\Plugins\PopUp\PopUp_10.vcxproj", "{726460C7-E1F1-4C37-B64F-DA8A8DD26D70}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mTextControl", "..\Plugins\mTextControl\mtextcontrol_10.vcxproj", "{E26D2311-C164-48CF-BA24-5CEDA873D1B2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mTextControlW", "..\Plugins\mTextControl\mtextcontrol_10.vcxproj", "{E26D2311-C164-48CF-BA24-5CEDA873D1B2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BossKey+", "..\Plugins\Bosskey\BossKey_10.vcxproj", "{88E47CF7-7B40-4312-A35A-9B28885FFED9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NewXstatusNotify", "..\Plugins\NewXstatusNotifyYM\NewXstatusNotify_10.vcxproj", "{D726A7E5-CF4C-4CF2-A2D3-073DECEC0260}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NewXstatusNotifyW", "..\Plugins\NewXstatusNotifyYM\NewXstatusNotify_10.vcxproj", "{D726A7E5-CF4C-4CF2-A2D3-073DECEC0260}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Folders", "..\Plugins\Folders\folders_10.vcxproj", "{019FAEBD-BD7B-4470-A15B-A7DB1787E6BD}"
 EndProject
@@ -100,7 +100,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tabsrmm", "..\Plugins\Tabsr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PackUpdater", "..\Plugins\PackUpdater\PackUpdater_10.vcxproj", "{21F6C0E4-DD1A-49E6-82FD-64574BB902BD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tipper", "..\Plugins\TipperYM\tipper_ym_10.vcxproj", "{2C818919-A38F-44FF-BD91-A6A204AC592A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tipper YM", "..\Plugins\TipperYM\tipper_ym_10.vcxproj", "{2C818919-A38F-44FF-BD91-A6A204AC592A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleAR", "..\Plugins\SimpleAR\SimpleAR_10.vcxproj", "{06C44834-7B7A-4074-A6D8-7F163B3FF707}"
 EndProject
@@ -118,7 +118,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TrafficCounter", "..\Plugin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "updater", "..\Plugins\updater\updater_10.vcxproj", "{4C1CE389-7129-45FC-83C2-E9C310AC0427}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "uinfoex", "..\Plugins\UinfoEx\UInfoEx_10.vcxproj", "{AD3B6CDC-7B26-4338-B6AE-0306DEDA0D6A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "uinfoexW", "..\Plugins\UinfoEx\UInfoEx_10.vcxproj", "{AD3B6CDC-7B26-4338-B6AE-0306DEDA0D6A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dbx_tree", "..\Plugins\Dbx_tree\dbx_tree_10.vcxproj", "{2D0BB338-FF3A-4FB5-A7A5-32B63967678C}"
 EndProject
@@ -505,6 +505,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "msapi (temp.)", "msapi (tem
 		..\Include\msapi\vssym32.h = ..\Include\msapi\vssym32.h
 		..\Include\msapi\winres.h = ..\Include\msapi\winres.h
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "historysweeper", "..\Plugins\HistorySweeper\historysweeper_10.vcxproj", "{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -3334,6 +3336,26 @@ Global
 		{EEDDE5B0-C023-40C2-96A5-1D1F4B11B791}.Release|Win32.ActiveCfg = Release Unicode|Win32
 		{EEDDE5B0-C023-40C2-96A5-1D1F4B11B791}.Release|Win32.Build.0 = Release Unicode|Win32
 		{EEDDE5B0-C023-40C2-96A5-1D1F4B11B791}.Release|x64.ActiveCfg = Release Unicode|Win32
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Debug Unicode|Win32.ActiveCfg = Debug Unicode|Win32
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Debug Unicode|Win32.Build.0 = Debug Unicode|Win32
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Debug Unicode|x64.ActiveCfg = Debug Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Debug Unicode|x64.Build.0 = Debug Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Debug|Win32.ActiveCfg = Debug Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Debug|x64.ActiveCfg = Debug Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Debug|x64.Build.0 = Debug Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release - dbg|Win32.ActiveCfg = Release Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release - dbg|x64.ActiveCfg = Release Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release - dbg|x64.Build.0 = Release Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release Unicode x64|Win32.ActiveCfg = Release Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release Unicode x64|x64.ActiveCfg = Release Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release Unicode x64|x64.Build.0 = Release Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release Unicode|Win32.ActiveCfg = Release Unicode|Win32
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release Unicode|x64.ActiveCfg = Release Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release Unicode|x64.Build.0 = Release Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release|Win32.ActiveCfg = Release Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release|x64.ActiveCfg = Release Unicode|x64
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8}.Release|x64.Build.0 = Release Unicode|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -3444,6 +3466,7 @@ Global
 		{86704897-EABF-439D-BE0E-52CEA67C2C43} = {A9745BFF-148D-4FDF-A4E1-507E579BFC9F}
 		{4A76BDA6-38C5-51A7-B398-ACE5D6DAF88F} = {A9745BFF-148D-4FDF-A4E1-507E579BFC9F}
 		{F29D0C8D-141A-43CF-86B2-34A04653F8D4} = {A9745BFF-148D-4FDF-A4E1-507E579BFC9F}
+		{8444AC58-CE2A-48F1-8F09-22E8EDECCFC8} = {A9745BFF-148D-4FDF-A4E1-507E579BFC9F}
 		{20D781FB-4A20-4B75-B863-304A47182966} = {35B395AF-9BAF-4EC0-BFE5-730044E3517C}
 		{2D0BB338-FF3A-4FB5-A7A5-32B63967678C} = {35B395AF-9BAF-4EC0-BFE5-730044E3517C}
 		{3C2B7490-0A5C-4BE1-911C-1FA89AEB09D2} = {35B395AF-9BAF-4EC0-BFE5-730044E3517C}
