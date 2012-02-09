@@ -1,22 +1,37 @@
+// Microsoft Visual C++ generated resource script.
+//
 #include "src/resource.h"
 
-#ifdef __MINGW32__ //wtf mingw? need to correct this 
-	#define WINVER 0x500 // the same ^^
-	#define _WIN32_IE 0x500 // lol ^^
-#endif
-#include <windows.h>
-#ifndef IDC_STATIC
-#define IDC_STATIC (-1)
-#endif
-#include <commctrl.h>
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU) || defined(__MINGW32__)
+#define APSTUDIO_READONLY_SYMBOLS
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "windows.h"
+#include "version.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+// 
+//#include <windows.h>
+//#ifndef IDC_STATIC
+//#define IDC_STATIC (-1)
+//#endif
+//#include <commctrl.h>
+//
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 #ifdef _WIN32
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 #endif
-#ifdef APSTUDIO_INVOKED
 
-1 TEXTINCLUDE DISCARDABLE
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE //DISCARDABLE
 BEGIN
 	"src/resource.h\0"
 END
@@ -24,10 +39,11 @@ END
 2 TEXTINCLUDE DISCARDABLE
 BEGIN
 	"#include ""winres.h""\r\n"
+	"#include ""../version.h""\r\n"
 	"\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE
+3 TEXTINCLUDE //DISCARDABLE
 BEGIN
 	"\r\n"
 	"\0"
@@ -139,59 +155,21 @@ BEGIN
 
 END
 
-/*
-IDD_SMILEYSELECTION DIALOGEX 10, 10, 234, 150
-STYLE DS_SETFONT | DS_SETFOREGROUND | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP | WS_BORDER | WS_SYSMENU | NOT WS_VISIBLE
-EXSTYLE WS_EX_TOPMOST | WS_EX_TOOLWINDOW
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
-BEGIN
 
-END
-*/
-#ifndef _MAC
+
+#endif    // Neutral resources
 /////////////////////////////////////////////////////////////////////////////
-//
-// Version
-//
 
-VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,3,0,3
- PRODUCTVERSION 1,3,0,3
- FILEFLAGSMASK 0x3fL
-#ifdef _DEBUG
- FILEFLAGS 0x1L
-#else
- FILEFLAGS 0x0L
-#endif
- FILEOS 0x40004L
- FILETYPE 0x2L
- FILESUBTYPE 0x0L
-BEGIN
-	BLOCK "StringFileInfo"
-	BEGIN
-		BLOCK "041504e3"
-		BEGIN
-			VALUE "Comments", "\0"
-			VALUE "CompanyName", "http://developer.berlios.de/projects/mgoodies\0"
-			VALUE "FileDescription", "IEView Plugin for Miranda IM\0"
-			VALUE "FileVersion", "1.3.0.3\0"
-			VALUE "InternalName", "ieview\0"
-			VALUE "LegalCopyright", "Copyright (c) 2005-2011 Piotr Piastucki\0"
-			VALUE "LegalTrademarks", "\0"
-			VALUE "OriginalFilename", "ieview.dll\0"
-			VALUE "PrivateBuild", "\0"
-			VALUE "ProductName", "IEView Plugin\0"
-			VALUE "ProductVersion", "1.3.0.3\0"
-			VALUE "SpecialBuild", "\0"
-		END
-	END
-	BLOCK "VarFileInfo"
-	BEGIN
-		VALUE "Translation", 0x415, 1251
-	END
-END
 
-#endif    // !_MAC
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
 
 
 /////////////////////////////////////////////////////////////////////////////

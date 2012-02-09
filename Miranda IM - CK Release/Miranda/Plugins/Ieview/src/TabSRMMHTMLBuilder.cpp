@@ -1,7 +1,7 @@
 /*
 
 IEView Plugin for Miranda IM
-Copyright (C) 2005-2010  Piotr Piastucki
+Copyright (C) 2005-2012 Piotr Piastucki
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -213,12 +213,12 @@ void TabSRMMHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 	if (protoSettings == NULL) {
 		return;
 	}
- 	if (protoSettings->getSRMMMode() == Options::MODE_TEMPLATE) {
+	if (protoSettings->getSRMMMode() == Options::MODE_TEMPLATE) {
 		buildHeadTemplate(view, event, protoSettings);
 		return;
 	}
- 	if (protoSettings->getSRMMMode() == Options::MODE_CSS) {
-	 	const char *externalCSS = protoSettings->getSRMMCssFilename();
+	if (protoSettings->getSRMMMode() == Options::MODE_CSS) {
+		const char *externalCSS = protoSettings->getSRMMCssFilename();
 		if (strncmp(externalCSS, "http://", 7)) {
 			Utils::appendText(&output, &outputSize, "<html><head><link rel=\"stylesheet\" href=\"file://%s\"/></head><body class=\"body\">\n", externalCSS);
 		} else {
@@ -228,7 +228,7 @@ void TabSRMMHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 		HDC hdc = GetDC(NULL);
 		int logPixelSY = GetDeviceCaps(hdc, LOGPIXELSY);
 		ReleaseDC(NULL, hdc);
-	 	DWORD dwFlags = DBGetContactSettingDword(NULL, SRMSGMOD_T, "mwflags", MWF_LOG_DEFAULT);
+		DWORD dwFlags = DBGetContactSettingDword(NULL, SRMSGMOD_T, "mwflags", MWF_LOG_DEFAULT);
 		Utils::appendText(&output, &outputSize, "<html><head><style type=\"text/css\">\n");
 		COLORREF inColor, outColor;
 		COLORREF bkgColor = DBGetContactSettingDword(NULL, TABSRMM_FONTMODULE, "BkgColour", 0xFFFFFF);
@@ -248,7 +248,7 @@ void TabSRMMHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 			protoSettings->getSRMMFlags() & Options::LOG_IMAGE_SCROLL ? "scroll" : "fixed", (int) bkgColor, protoSettings->getSRMMBackgroundFilename());
 		} else {
 			Utils::appendText(&output, &outputSize, ".body {margin: 0px; text-align: left; background-color: #%06X; overflow: auto;}\n",
-				 		 (int) bkgColor);
+						 (int) bkgColor);
 		}
 		Utils::appendText(&output, &outputSize, ".link {color: #0000FF; text-decoration: underline;}\n");
 		Utils::appendText(&output, &outputSize, ".img {vertical-align: middle;}\n");
@@ -275,7 +275,7 @@ void TabSRMMHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 			Utils::appendText(&output, &outputSize, ".divOutGridRTL {text-align: right; direction:RTL; unicode-bidi:embed; padding-left: 2px; padding-right: 2px; word-wrap: break-word; border-top: 1px solid #%06X; background-color: #%06X;}\n",
 				(int) gridColor, (int) outColor);
 		}
-	 	for(int i = 0; i < FONT_NUM; i++) {
+		for(int i = 0; i < FONT_NUM; i++) {
 			loadMsgDlgFont(i, &lf, &color);
 			Utils::appendText(&output, &outputSize, "%s {font-family: %s; font-size: %dpt; font-weight: %s; color: #%06X; %s }\n",
 			classNames[i],
@@ -303,7 +303,7 @@ void TabSRMMHTMLBuilder::appendEventNonTemplate(IEView *view, IEVIEWEVENT *event
 //	int	  indentRight = DBGetContactSettingDword(NULL, SRMSGMOD_T, "RightIndent", 0);
 	DWORD today = (DWORD)time(NULL);
 	today = today - today % 86400;
- 	DWORD dwFlags = DBGetContactSettingDword(NULL, SRMSGMOD_T, "mwflags", MWF_LOG_DEFAULT);
+	DWORD dwFlags = DBGetContactSettingDword(NULL, SRMSGMOD_T, "mwflags", MWF_LOG_DEFAULT);
 	DWORD dwFlags2 = DBGetContactSettingByte(NULL, SRMSGMOD_T, SRMSGSET_SHOWURLS, 0) ? MWF_SHOW_URLEVENTS : 0;
 	dwFlags2 |= DBGetContactSettingByte(NULL, SRMSGMOD_T, SRMSGSET_SHOWFILES, 0) ? MWF_SHOW_FILEEVENTS : 0;
 	dwFlags2 |= DBGetContactSettingByte(NULL, SRMSGMOD_T, "in_out_icons", 0) ? MWF_SHOW_INOUTICONS : 0;
@@ -322,7 +322,7 @@ void TabSRMMHTMLBuilder::appendEventNonTemplate(IEView *view, IEVIEWEVENT *event
 			int isSent = (eventData->dwFlags & IEEDF_SENT);
 			int isRTL = eventData->dwFlags & IEEDF_RTL;
 			int isHistory = (eventData->time < (DWORD)getStartedTime() && (eventData->dwFlags & IEEDF_READ || eventData->dwFlags & IEEDF_SENT));
-		  	if (dwFlags & MWF_LOG_GROUPMODE && eventData->dwFlags == LOWORD(getLastEventType())
+			if (dwFlags & MWF_LOG_GROUPMODE && eventData->dwFlags == LOWORD(getLastEventType())
 			  && eventData->iType == IEED_EVENT_MESSAGE && HIWORD(getLastEventType()) == IEED_EVENT_MESSAGE
 			  && ((eventData->time < today) == (getLastEventTime() < today))
 			  && (((eventData->time < (DWORD)startedTime) == (getLastEventTime() < (DWORD)startedTime)) || !(eventData->dwFlags & IEEDF_READ))) {
@@ -332,12 +332,12 @@ void TabSRMMHTMLBuilder::appendEventNonTemplate(IEView *view, IEVIEWEVENT *event
 			char *szText = NULL;
 			if (eventData->dwFlags & IEEDF_UNICODE_NICK) {
 				szName = encodeUTF8(event->hContact, szRealProto, eventData->pszNickW, ENF_NAMESMILEYS, true);
-   			} else {
+			} else {
 				szName = encodeUTF8(event->hContact, szRealProto, eventData->pszNick, ENF_NAMESMILEYS, true);
 			}
 			if (eventData->dwFlags & IEEDF_UNICODE_TEXT) {
 				szText = encodeUTF8(event->hContact, szRealProto, eventData->pszTextW, eventData->iType == IEED_EVENT_MESSAGE ? ENF_ALL : 0, isSent);
-   			} else {
+			} else {
 				szText = encodeUTF8(event->hContact, szRealProto, eventData->pszText, event->codepage, eventData->iType == IEED_EVENT_MESSAGE ? ENF_ALL : 0, isSent);
 			}
 			/* TabSRMM-specific formatting */
@@ -438,7 +438,7 @@ void TabSRMMHTMLBuilder::appendEvent(IEView *view, IEVIEWEVENT *event) {
 	if (protoSettings == NULL) {
 		return;
 	}
- 	if (protoSettings->getSRMMMode() == Options::MODE_TEMPLATE) {
+	if (protoSettings->getSRMMMode() == Options::MODE_TEMPLATE) {
 		appendEventTemplate(view, event, protoSettings);
 	} else {
 		appendEventNonTemplate(view, event);

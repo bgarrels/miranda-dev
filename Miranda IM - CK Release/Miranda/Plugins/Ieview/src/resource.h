@@ -1,6 +1,6 @@
 /*
 IEView Plugin for Miranda IM
-Copyright (C) 2005-2010  Piotr Piastucki
+Copyright (C) 2005-2012 Piotr Piastucki
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -37,8 +37,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define IDC_ENABLE_PNGHACK              1007
 #define IDC_SMILEYS_IN_NAMES            1008
 #define IDC_NO_BORDER                   1009
-#define IDC_ENABLE_EMBED		1010
-#define IDC_EMBED_SIZE			1011
+#define IDC_ENABLE_EMBED				1010
+#define IDC_EMBED_SIZE					1011
 #define IDC_EXTERNALCSS                 1020
 #define IDC_EXTERNALCSS_FILENAME        1021
 #define IDC_BROWSE_EXTERNALCSS          1022
@@ -49,6 +49,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define IDC_BROWSE_TEMPLATES            1032
 #define IDC_TEMPLATES_FILENAME_RTL      1033
 #define IDC_BROWSE_TEMPLATES_RTL        1034
+#define IDC_SIMPLE                      1041
 #define IDC_LOG_SHOW_NICKNAMES          1043
 #define IDC_LOG_SHOW_TIME               1044
 #define IDC_LOG_SHOW_DATE               1045

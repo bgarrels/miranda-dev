@@ -1,7 +1,7 @@
 /*
 
 IEView Plugin for Miranda IM
-Copyright (C) 2005-2010  Piotr Piastucki
+Copyright (C) 2005-2012 Piotr Piastucki
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -367,11 +367,11 @@ TemplateMap* TemplateMap::loadTemplateFile(const char *id, const char *filename,
 		} else if (wasTemplate) {
 			Utils::appendText(&templateText, &templateTextSize, "%s", store);
 		}
-  	}
-  	if (wasTemplate) {
+	}
+	if (wasTemplate) {
 		tmap->addTemplate(lastTemplate, templateText);
 	}
-  	fclose(fh);
+	fclose(fh);
 	static const char *groupTemplates[] = {"MessageInGroupStart", "MessageInGroupInner",
 										   "hMessageInGroupStart", "hMessageInGroupInner",
 										   "MessageOutGroupStart", "MessageOutGroupInner",

@@ -1,7 +1,7 @@
 /*
 
 IEView Plugin for Miranda IM
-Copyright (C) 2005-2010  Piotr Piastucki
+Copyright (C) 2005-2012 Piotr Piastucki
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 #include "ScriverHTMLBuilder.h"
-
 #include "Options.h"
 #include "Utils.h"
 
@@ -187,12 +186,12 @@ void ScriverHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 	if (protoSettings == NULL) {
 		return;
 	}
- 	if (protoSettings->getSRMMMode() == Options::MODE_TEMPLATE) {
+	if (protoSettings->getSRMMMode() == Options::MODE_TEMPLATE) {
 		buildHeadTemplate(view, event, protoSettings);
 		return;
 	}
- 	if (protoSettings->getSRMMMode() == Options::MODE_CSS) {
-	 	const char *externalCSS = protoSettings->getSRMMCssFilename();
+	if (protoSettings->getSRMMMode() == Options::MODE_CSS) {
+		const char *externalCSS = protoSettings->getSRMMCssFilename();
 		if (strncmp(externalCSS, "http://", 7)) {
 			Utils::appendText(&output, &outputSize, "<html><head><link rel=\"stylesheet\" href=\"file://%s\"/></head><body class=\"body\">\n", externalCSS);
 		} else {
@@ -217,7 +216,7 @@ void ScriverHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 			protoSettings->getSRMMFlags() & Options::LOG_IMAGE_SCROLL ? "scroll" : "fixed", (int) bkgColor, protoSettings->getSRMMBackgroundFilename());
 		} else {
 			Utils::appendText(&output, &outputSize, ".body {margin: 0px; text-align: left; background-color: #%06X; overflow: auto;}\n",
-				 		 (int) bkgColor);
+						 (int) bkgColor);
 		}
 		Utils::appendText(&output, &outputSize, ".link {color: #0000FF; text-decoration: underline;}\n");
 		Utils::appendText(&output, &outputSize, ".img {}\n");
@@ -248,7 +247,7 @@ void ScriverHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 		Utils::appendText(&output, &outputSize, ".divNoticeGrid {padding-left: 2px; padding-right: 2px; word-wrap: break-word; border-top: 1px solid #%06X}\n", (int) lineColor);
 		Utils::appendText(&output, &outputSize, ".divNoticeRTL {text-align: right; direction:RTL; unicode-bidi:embed; padding-left: 2px; padding-right: 2px; word-wrap: break-word;}\n");
 		Utils::appendText(&output, &outputSize, ".divNoticeGridRTL {text-align: right; direction:RTL; unicode-bidi:embed; padding-left: 2px; padding-right: 2px; word-wrap: break-word; border-top: 1px solid #%06X}\n", (int) lineColor);
-	 	for(int i = 0; i < FONT_NUM; i++) {
+		for(int i = 0; i < FONT_NUM; i++) {
 			loadMsgDlgFont(i, &lf, &color);
 			Utils::appendText(&output, &outputSize, "%s {font-family: %s; font-size: %dpt; font-weight: %s; color: #%06X; %s }\n",
 			classNames[i],
@@ -295,7 +294,7 @@ void ScriverHTMLBuilder::appendEventNonTemplate(IEView *view, IEVIEWEVENT *event
 		if (eventData->iType == IEED_EVENT_MESSAGE || eventData->iType == IEED_EVENT_STATUSCHANGE
 			|| eventData->iType == IEED_EVENT_URL || eventData->iType == IEED_EVENT_FILE) {
 			int isGroupBreak = TRUE;
- 		  	if ((dwFlags & SMF_LOG_GROUPMESSAGES) && eventData->dwFlags == LOWORD(getLastEventType())
+			if ((dwFlags & SMF_LOG_GROUPMESSAGES) && eventData->dwFlags == LOWORD(getLastEventType())
 			  && eventData->iType == IEED_EVENT_MESSAGE && HIWORD(getLastEventType()) == IEED_EVENT_MESSAGE
 			  && (isSameDate(eventData->time, getLastEventTime()))
 			  && (((eventData->time < startedTime) == (getLastEventTime() < startedTime)) || !(eventData->dwFlags & IEEDF_READ))) {
@@ -443,7 +442,7 @@ void ScriverHTMLBuilder::appendEvent(IEView *view, IEVIEWEVENT *event) {
 	if (protoSettings == NULL) {
 		return;
 	}
- 	if (protoSettings->getSRMMMode() == Options::MODE_TEMPLATE) {
+	if (protoSettings->getSRMMMode() == Options::MODE_TEMPLATE) {
 		appendEventTemplate(view, event, protoSettings);
 	} else {
 		appendEventNonTemplate(view, event);

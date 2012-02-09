@@ -16,8 +16,7 @@
 #else
 	#define __PLUGIN_NAME "IEView (Unicode)"
 #endif
-#else
-	#define __PLUGIN_NAME "IEView"
+
 #endif
 #define __INTERNAL_NAME				"IEView"
 #define __FILENAME					"IEView.dll"
@@ -25,4 +24,4 @@
 #define __AUTHOR					"Piotr Piastucki, Francois Mean"
 #define __AUTHOREMAIL				"the_leech@users.berlios.de"
 #define __AUTHORWEB					"http://developer.berlios.de/projects/mgoodies"
-#define __COPYRIGHT					"© 2005-2011 Piotr Piastucki, Francois Mean"
+#define __COPYRIGHT					"© 2005-2012 Piotr Piastucki, Francois Mean"
