@@ -1,7 +1,7 @@
 /*
 
 IEView Plugin for Miranda IM
-Copyright (C) 2005-2010  Piotr Piastucki
+Copyright (C) 2005-2012 Piotr Piastucki
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -59,7 +59,8 @@ char *TemplateHTMLBuilder::getAvatar(HANDLE hContact, const char * szProto) {
 			ace = (struct avatarCacheEntry *)CallService(MS_AV_GETAVATARBITMAP, (WPARAM)hContact, (LPARAM)0);
 		}
 		if (ace!=NULL) {
-			result = ace->szFilename;
+			ace->szFilename[0] = 0;
+			//result = ace->szFilename;
 		}
 	}
 	if (!DBGetContactSetting(hContact, "ContactPhoto", "File",&dbv)) {
@@ -275,7 +276,7 @@ void TemplateHTMLBuilder::buildHeadTemplate(IEView *view, IEVIEWEVENT *event, Pr
 				case Token::NICKIN:
 					tokenVal = szNickIn;
 					break;
- 				case Token::NICKOUT:
+				case Token::NICKOUT:
 					tokenVal = szNickOut;
 					break;
 			}
@@ -418,7 +419,7 @@ void TemplateHTMLBuilder::appendEventTemplate(IEView *view, IEVIEWEVENT *event, 
 			int isRTL = (eventData->dwFlags & IEEDF_RTL) && tmpm->isRTL();
 			int isHistory = (eventData->time < (DWORD)getStartedTime() && (eventData->dwFlags & IEEDF_READ || eventData->dwFlags & IEEDF_SENT));
 			int isGroupBreak = TRUE;
- 		  	if ((getFlags(protoSettings) & Options::LOG_GROUP_MESSAGES) && eventData->dwFlags == LOWORD(getLastEventType())
+			if ((getFlags(protoSettings) & Options::LOG_GROUP_MESSAGES) && eventData->dwFlags == LOWORD(getLastEventType())
 			  && eventData->iType == IEED_EVENT_MESSAGE && HIWORD(getLastEventType()) == IEED_EVENT_MESSAGE
 			  && (isSameDate(eventData->time, getLastEventTime()))
 //			  && ((eventData->time < today) == (getLastEventTime() < today))
@@ -447,12 +448,12 @@ void TemplateHTMLBuilder::appendEventTemplate(IEView *view, IEVIEWEVENT *event, 
 			}
 			if (eventData->dwFlags & IEEDF_UNICODE_TEXT) {
 				szText = encodeUTF8(event->hContact, szRealProto, eventData->pszTextW, eventData->iType == IEED_EVENT_MESSAGE ? ENF_ALL : 0, isSent);
-   			} else {
+			} else {
 				szText = encodeUTF8(event->hContact, szRealProto, eventData->pszText, event->codepage, eventData->iType == IEED_EVENT_MESSAGE ? ENF_ALL : 0, isSent);
 			}
 			if (eventData->dwFlags & IEEDF_UNICODE_TEXT2) {
 				szFileDesc = encodeUTF8(event->hContact, szRealProto, eventData->pszText2W, 0, isSent);
-   			} else {
+			} else {
 				szFileDesc = encodeUTF8(event->hContact, szRealProto, eventData->pszText2, event->codepage, 0, isSent);
 			}
 			if ((eventData->iType == IEED_EVENT_MESSAGE)) {
@@ -528,13 +529,13 @@ void TemplateHTMLBuilder::appendEventTemplate(IEView *view, IEVIEWEVENT *event, 
 								tokenVal = "&nbsp;";
 							}
 							break;
-	  					case Token::TEXT:
+						case Token::TEXT:
 							tokenVal = szText;
 							break;
-	  					case Token::AVATAR:
+						case Token::AVATAR:
 							tokenVal = szAvatar;
 							break;
-	  					case Token::CID:
+						case Token::CID:
 							tokenVal = szCID;
 							break;
 						case Token::BASE:
@@ -586,7 +587,7 @@ void TemplateHTMLBuilder::appendEventTemplate(IEView *view, IEVIEWEVENT *event, 
 						case Token::NICKIN:
 							tokenVal = szNickIn;
 							break;
-		 				case Token::NICKOUT:
+						case Token::NICKOUT:
 							tokenVal = szNickOut;
 							break;
 						case Token::FILEDESC:

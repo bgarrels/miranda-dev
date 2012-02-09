@@ -1,7 +1,7 @@
 /*
 
 IEView Plugin for Miranda IM
-Copyright (C) 2005-2010  Piotr Piastucki
+Copyright (C) 2005-2012 Piotr Piastucki
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -193,8 +193,8 @@ public:
 
 class Options {
 private:
-   	static int 		generalFlags;
-   	static bool     isInited;
+	static int 		generalFlags;
+	static bool     isInited;
 	static bool     bMathModule;
 	static bool     bSmileyAdd;
 	static int      avatarServiceFlags;

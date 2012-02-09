@@ -115,6 +115,9 @@
     <Filter Include="Resource Files">
       <UniqueIdentifier>{1f310f24-02c0-4bf1-86b7-863a0e4ef830}</UniqueIdentifier>
     </Filter>
+    <Filter Include="docs\css">
+      <UniqueIdentifier>{1134cdfc-44a2-4d87-881f-617383adb167}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\ieview-readme.txt">
@@ -126,20 +129,20 @@
     <None Include="docs\ieview-translation.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="docs\scriver.css">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\srmm.css">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\tabsrmm.css">
+    <None Include="docs\ieview-license.txt">
       <Filter>docs</Filter>
     </None>
     <None Include="docs\chat.css">
-      <Filter>docs</Filter>
+      <Filter>docs\css</Filter>
     </None>
-    <None Include="docs\ieview-license.txt">
-      <Filter>docs</Filter>
+    <None Include="docs\scriver.css">
+      <Filter>docs\css</Filter>
+    </None>
+    <None Include="docs\srmm.css">
+      <Filter>docs\css</Filter>
+    </None>
+    <None Include="docs\tabsrmm.css">
+      <Filter>docs\css</Filter>
     </None>
   </ItemGroup>
 </Project>

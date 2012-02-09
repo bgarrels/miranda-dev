@@ -21,12 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #if defined( UNICODE ) && !defined( _UNICODE )
    #define _UNICODE
 #endif
-#ifdef __MINGW32__
-	#define WINVER 0x500
-	#define _WIN32_IE 0x500
-	#define __try
-	#define __except(a)
-#endif
 
 #ifndef IEVIEW_COMMON_H
 #define IEVIEW_COMMON_H
@@ -42,14 +36,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <process.h>
 #include <shlguid.h>
 #include <oleauto.h>
-#ifdef __MINGW32__
-	#include <exdisp.h>
-	#include <servprov.h>
-#endif
 #include <mshtml.h>
 
+//which version
 #include <win2k.h>
 
+//Miranda stuff
 #include <newpluginapi.h>
 #include <m_utils.h>
 #include <m_clist.h>

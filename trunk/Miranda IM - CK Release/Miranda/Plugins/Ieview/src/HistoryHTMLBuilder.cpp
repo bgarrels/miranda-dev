@@ -1,7 +1,7 @@
 /*
 
 IEView Plugin for Miranda IM
-Copyright (C) 2005-2010  Piotr Piastucki
+Copyright (C) 2005-2012 Piotr Piastucki
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 #include "HistoryHTMLBuilder.h"
-
 #include "Options.h"
 #include "Utils.h"
 
@@ -155,11 +154,11 @@ void HistoryHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 	if (protoSettings == NULL) {
 		return;
 	}
- 	if (protoSettings->getHistoryMode() == Options::MODE_TEMPLATE) {
+	if (protoSettings->getHistoryMode() == Options::MODE_TEMPLATE) {
 		buildHeadTemplate(view, event, protoSettings);
 		return;
 	}
- 	if (protoSettings->getHistoryMode() == Options::MODE_CSS) {
+	if (protoSettings->getHistoryMode() == Options::MODE_CSS) {
 		const char *externalCSS = protoSettings->getHistoryCssFilename();
 		Utils::appendText(&output, &outputSize, "<html><head><link rel=\"stylesheet\" href=\"%s\"/></head><body class=\"body\">\n", externalCSS);
 	} else {
@@ -177,7 +176,7 @@ void HistoryHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 		}
 		Utils::appendText(&output, &outputSize, ".link {color: #0000FF; text-decoration: underline;}\n");
 		Utils::appendText(&output, &outputSize, ".img {float: left; vertical-align: middle;}\n");
-	 	for(i = 0; i < DIV_FONT_NUM; i++) {
+		for(i = 0; i < DIV_FONT_NUM; i++) {
 			loadMsgDlgFont(dbDivSettingNames[i], &lf, &color, &bkgColor);
 			if (protoSettings->getHistoryFlags() & Options::LOG_IMAGE_ENABLED) {
 				Utils::appendText(&output, &outputSize, "%s {float: left; padding-left: 2px; padding-right: 2px; word-wrap: break-word; border-top: 1px solid #%06X; font-family: %s; font-size: %dpt; font-weight: %s; color: #%06X; %s}\n",
