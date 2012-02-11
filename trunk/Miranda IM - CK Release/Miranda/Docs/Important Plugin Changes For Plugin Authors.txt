@@ -1,0 +1,94 @@
+Starting with v0.7 build 17, Miranda now supports a new plugin api. It is important for plugin devs who are developing their plugins for 0.7 to make these changes. If you are still supporting 0.6.x in your plugins, please be aware these changes will make your plugin incompatible with 0.6.x.
+
+Starting with v0.8 Build #9, these changes are required for all plugins.
+
+ To use the new api you should change your PlUGININFO struct to the new PLUGININFOEX struct. Here are the details:
+
+////////////////////////////////////////////////
+typedef struct {
+	int cbSize;
+	char *shortName;
+	DWORD version;
+	char *description;
+	char *author;
+	char *authorEmail;
+	char *copyright;
+	char *homepage;
+	BYTE isTransient;
+	int replacesDefaultModule;
+	MUUID uuid;
+} PLUGININFOEX;
+////////////////////////////////////////////////
+
+Notice that this is essentially the same as the previous struct except a new MUUID field. In 0.8, the replacesDefaultModule will be deprecated (and ignored), but you should continue to use this field for now. The MUUID struct consist of the following:
+
+
+////////////////////////////////////////////////
+typedef struct _MUUID {
+  unsigned long a;
+  unsigned short b;
+  unsigned short c;
+  unsigned char d[8];
+} MUUID;
+////////////////////////////////////////////////
+
+To generate this struct, you can use the guidgen.exe program to create it. Select option 3 for the output format so it will create a compatible struct. Here is an example plugin info struct:
+
+////////////////////////////////////////////////
+PLUGININFOEX pluginInfo =
+{
+	sizeof(PLUGININFOEX),
+	#if defined( _UNICODE )
+	"My Plugin (Unicode)",
+	#else
+	"My Plugin",
+	#endif
+	__VERSION_DWORD,
+	"My description",
+	"Author",
+	"Email",
+	"© 2007 Author",
+	"http://miranda-im.org",
+	UNICODE_AWARE,	
+	0,
+	#if defined( _UNICODE )
+	{0xdc39da8b, 0x8385, 0x4cd9, {0xb2, 0x98, 0x80, 0x67, 0x7b, 0x8f, 0xe6, 0xe4}}
+	//{DC39DA8B-8385-4cd9-B298-80677B8FE6E4}
+	#else
+	{0x29aa3a81, 0x3368, 0x4b78, { 0x82, 0xc1, 0xdf, 0xc7, 0x29, 0x6a, 0x58, 0x99 }} 
+	//{29AA3A81-3368-4b78-82C1-DFC7296A5899}
+	#endif
+};
+////////////////////////////////////////////////
+Note: You should generate a new uuid for unicode and ansi versions. This will be important for linking plugins to the new addons site.
+
+The next change you should make is to use the new MirandaPluginInfoEx instead of MirandaPluginInfo. 
+
+////////////////////////////////////////////////
+__declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
+{
+	return &pluginInfo;
+}
+The following function is required to be implemented if you are using MirandaPluginInfoEx.
+
+Code:
+__declspec(dllexport) const MUUID * MirandaPluginInterfaces(void);
+A common implementation will look like this:
+Code:
+static const MUUID interfaces[] = {MIID_CHAT, MIID_SRMM, MIID_LAST};
+__declspec(dllexport) const MUUID * MirandaPluginInterfaces(void)
+{
+	return interfaces;
+}
+////////////////////////////////////////////////
+In the above example, the plugin declares that it implements 2 interfaces that are already defined in newpluginapi.h. MIID_LAST is always used to denote the end of the list. Every plugin must return atleast one interface (besides MIID_LAST). If their plugin implements an interface that isn't already defined in newpluginapi.h, then they need to create a new UUID to use.
+
+Note: Protocols are the only plugin that is run simultaneously with the same interface definition.
+
+In 0.8, these interface changes will allow plugins to implement one or more interfaces. What will happen is if a user activates Scriver, then chat.dll and srmm.dll will automatically be deactivated in the plugin options. Also, no longer are we limited to a finite set of defmod definitions. Plugins such as mtooltip and tipper will implement the same interface so they will work nicely together. No longer does a user have to know which plugins have the same function.
+
+ Using this interface api will allow us to break compatibility with certain apis and not have to worry about plugins causing problems for the user. The core loader will be able to disable any interfaces that are outdated. This will allow us to make bigger api changes and keep Miranda stable at the same time.
+
+Note: In 0.8, these changes will be required for your plugin to load. So it is important that you make these changes if you want your plugin to be supported.
+
+Interface changes have not been implemented yet. When they are, I will update this post with the details.
