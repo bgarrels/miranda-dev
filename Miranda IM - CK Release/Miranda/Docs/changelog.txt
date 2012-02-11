@@ -1,7 +1,16 @@
 				   Miranda Instant Messenger Changelogs
 				   ------------------------------------
-						   www.miranda-im.org
+							www.miranda-im.org
 
+							
+* New in 0.9.43
+– Improved image services (FreeImage Update)
+ – Improved stability
+ – Gadu-Gadu: Fixed reception of images without file extension
+ – ICQ: Fixed issues sending messages
+ – ICQ: Fixed possible crash
+ – MSN: Fixed issues during file transfer cancellation						
+							
 
 * New in 0.9.42
 Bugfixes:
