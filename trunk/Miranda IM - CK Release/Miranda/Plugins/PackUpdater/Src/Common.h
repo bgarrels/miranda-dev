@@ -17,24 +17,14 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.  
 */
 
-#define MIRANDA_VER    0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER    0x0A00
 
 // Windows Header Files:
-#include <stdio.h>
-#include <windows.h>
-#include <deque>
-#include "Wininet.h"
-#include "Urlmon.h"
-#include <prsht.h>
-#include <string>
-#include <commctrl.h>
-#include "win2k.h"
-#include "vector"			// stl vector header
+#include "vector"       // stl vector header
 #include <Shlobj.h>
 
 // Miranda header files
-#include <newpluginapi.h>	// CallService,UnHookEvent
+#include <newpluginapi.h>
 #include <m_clist.h>
 #include <m_skin.h>
 #include <m_langpack.h>
@@ -48,6 +38,7 @@ Boston, MA 02111-1307, USA.
 #include <m_popup2.h>
 #include <m_netlib.h>
 #include <m_icolib.h>
+#include <win2k.h>
 
 #include "..\version.h"
 #include "..\resource.h"
@@ -58,12 +49,10 @@ Boston, MA 02111-1307, USA.
 #define MODULEW					L"Pack Updater"
 #ifdef _UNICODE
 	#define DEFAULT_UPDATES_FOLDER	L"Pack Updates"
-	#define MIRANDA_USERDATAT MIRANDA_USERDATAW
 	typedef std::wstring tString;
 	#define MODULE	MODULEW
 #else
 	#define DEFAULT_UPDATES_FOLDER	"Pack Updates"
-	#define MIRANDA_USERDATAT MIRANDA_USERDATA
 	typedef std::string tString;
 	#define MODULE	MODULEA
 #endif
@@ -87,6 +76,7 @@ struct FILEINFO
 	BOOL enabled;
 	BYTE FileType;
 	INT FileNum;
+	BYTE Force;
 };
 
 struct PackUpdaterIconList

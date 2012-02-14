@@ -2,8 +2,6 @@
 #include "MraIcons.h"
 
 
-
-
 void AddIcoLibItems(LPWSTR lpwszRootSectionName,LPWSTR lpwszSubSectionName,const GUI_DISPLAY_ITEM *pgdiItems,SIZE_T dwCount,HANDLE *hResult)
 {
 	char szBuff[MAX_PATH];

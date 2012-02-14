@@ -21,8 +21,7 @@ Boston, MA 02111-1307, USA.
 #ifndef __QUICK_REPLY_H__
 #define __QUICK_REPLY_H__
 
-#define MIRANDA_VER 0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER 0x0A00
 
 #include <windows.h>
 #include <vector>
@@ -30,7 +29,6 @@ Boston, MA 02111-1307, USA.
 
 #include "tchar.h"
 
-//Miranda IM
 #include <newpluginapi.h>
 #include <m_database.h>
 #include <m_icolib.h>
@@ -38,12 +36,11 @@ Boston, MA 02111-1307, USA.
 #include <m_message.h>
 #include <m_options.h>
 
-//ExternalAPI
 #include "m_msg_buttonsbar.h"
 #include "m_variables.h"
 
-#include "../resource.h"
-#include "../version.h"
+#include "resource.h"
+#include "version.h"
 
 #define MODULE_NAME				__INTERNAL_NAME
 #define TEXT_LIMIT				2048

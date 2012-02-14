@@ -151,18 +151,18 @@ __inline SIZE_T ListMTItemAdd(PCLIST_MT pclmtListMT,PCLIST_MT_ITEM pclmtListMTIt
 	pclmtListMTItem->lpData=lpData;
 	pclmtListMTItem->lpListMT=pclmtListMT;
 
-    if (pclmtListMT->plmtiLast) 
+	if (pclmtListMT->plmtiLast) 
 	{// add node to end of list        
-        pclmtListMTItem->plmtiPrev=pclmtListMT->plmtiLast;
-        pclmtListMTItem->plmtiNext=NULL;
-        pclmtListMT->plmtiLast->plmtiNext=pclmtListMTItem;
+		pclmtListMTItem->plmtiPrev=pclmtListMT->plmtiLast;
+		pclmtListMTItem->plmtiNext=NULL;
+		pclmtListMT->plmtiLast->plmtiNext=pclmtListMTItem;
 		pclmtListMT->plmtiLast=pclmtListMTItem;
 	}else{// add the first node to the linked list
-        pclmtListMTItem->plmtiPrev=NULL;
-        pclmtListMTItem->plmtiNext=NULL;
+		pclmtListMTItem->plmtiPrev=NULL;
+		pclmtListMTItem->plmtiNext=NULL;
 		pclmtListMT->plmtiFirst=pclmtListMTItem;
-        pclmtListMT->plmtiLast=pclmtListMTItem;
- 	}
+		pclmtListMT->plmtiLast=pclmtListMTItem;
+	}
 
 return(dwRet);
 }

@@ -43,6 +43,7 @@
     <OutDir>$(SolutionDir)$(Configuration)/Plugins\</OutDir>
     <IntDir>$(SolutionDir)$(Configuration)/Obj/$(ProjectName)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)/Plugins\</OutDir>

@@ -23,7 +23,7 @@ Boston, MA 02111-1307, USA.
 #include <stdio.h>
 #include <tchar.h>
 
-#define MIRANDA_VER 0x0600
+#define MIRANDA_VER 0x0A00
 #include <newpluginapi.h>
 #include <m_database.h>
 #include <m_utils.h>
@@ -89,57 +89,57 @@ static TCHAR dbPath[MAX_PATH] = {0};		// database profile path (read at startup 
 
 static int PathIsAbsolute(const TCHAR *path)
 {
-	if (!path || !(lstrlen(path) > 2))
-		return 0;
-	if ((path[1]==_T(':') && path[2]==_T('\\')) || (path[0]==_T('\\')&&path[1]==_T('\\'))) 
+    if (!path || !(lstrlen(path) > 2))
+        return 0;
+    if ((path[1]==_T(':') && path[2]==_T('\\')) || (path[0]==_T('\\')&&path[1]==_T('\\'))) 
 		return 1;
-	return 0;
+    return 0;
 }
 
 static void PathToRelative(TCHAR *pOut, size_t outSize, const TCHAR *pSrc)
 {
-	if (!PathIsAbsolute(pSrc)) 
+    if (!PathIsAbsolute(pSrc)) 
 	{
 		lstrcpyn(pOut, pSrc, (int)outSize);
-	}
-	else 
+    }
+    else 
 	{
 		if (dbPath[0] == _T('\0'))
 		{
 			char tmp[1024];
-			CallService(MS_DB_GETPROFILEPATH, MAX_REGS(tmp), (LPARAM) tmp);
+		    CallService(MS_DB_GETPROFILEPATH, MAX_REGS(tmp), (LPARAM) tmp);
 			mir_sntprintf(dbPath, MAX_REGS(dbPath), _T(TCHAR_STR_PARAM) _T("\\"), tmp);
 		}
 
 		size_t len = lstrlen(dbPath);
-		if (_tcsnicmp(pSrc, dbPath, len)) 
+        if (_tcsnicmp(pSrc, dbPath, len)) 
 		{
-			mir_sntprintf(pOut, outSize, _T("%s"), pSrc + len);
-		}
-		else 
+            mir_sntprintf(pOut, outSize, _T("%s"), pSrc + len);
+        }
+        else 
 		{
-			lstrcpyn(pOut, pSrc, (int)outSize);
-		}
-	}
+            lstrcpyn(pOut, pSrc, (int)outSize);
+        }
+    }
 }
 
 static void PathToAbsolute(TCHAR *pOut, size_t outSize, const TCHAR *pSrc)
 {
-	if (PathIsAbsolute(pSrc) || !isalnum(pSrc[0])) 
+    if (PathIsAbsolute(pSrc) || !isalnum(pSrc[0])) 
 	{
-		lstrcpyn(pOut, pSrc, (int)outSize);
-	}
-	else 
+        lstrcpyn(pOut, pSrc, (int)outSize);
+    }
+    else 
 	{
 		if (dbPath[0] == _T('\0'))
 		{
 			char tmp[1024];
-			CallService(MS_DB_GETPROFILEPATH, MAX_REGS(tmp), (LPARAM) tmp);
+		    CallService(MS_DB_GETPROFILEPATH, MAX_REGS(tmp), (LPARAM) tmp);
 			mir_sntprintf(dbPath, MAX_REGS(dbPath), _T(TCHAR_STR_PARAM) _T("\\"), tmp);
 		}
 
-		mir_sntprintf(pOut, outSize, _T("%s%s"), dbPath, pSrc);
-	}
+        mir_sntprintf(pOut, outSize, _T("%s%s"), dbPath, pSrc);
+    }
 }
 
 

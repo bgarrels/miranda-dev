@@ -1,5 +1,7 @@
 /*
-Scriver - Copyright 2000-2012 Miranda IM project,
+Scriver
+
+Copyright 2000-2012 Miranda ICQ/IM project,
 
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -702,11 +704,11 @@ static BOOL IsTypingNotificationEnabled(struct MessageWindowData *dat) {
 	return TRUE;
 }
 
-/* Don't send to protocols who don't support typing
-   Don't send to users who are unchecked in the typing notification options
-   Don't send to protocols that are offline
-   Don't send to users who are not visible and
-   Don't send to users who are not on the visible list when you are in invisible mode. */
+// Don't send to protocols who don't support typing
+// Don't send to users who are unchecked in the typing notification options
+// Don't send to protocols that are offline
+// Don't send to users who are not visible and
+// Don't send to users who are not on the visible list when you are in invisible mode.
 static void NotifyTyping(struct MessageWindowData *dat, int mode) {
 	if (!IsTypingNotificationSupported(dat)) {
 		return;
@@ -1656,7 +1658,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 		}
 		break;
 	case DM_CLEARLOG:
-	// IEView MOD Begin
+	// IEVIew MOD Begin
 		if (dat->windowData.hwndLog != NULL) {
 			IEVIEWEVENT event;
 			ZeroMemory(&event, sizeof(event));
@@ -1669,7 +1671,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 			event.pszProto = dat->szProto;
 			CallService(MS_IEVIEW_EVENT, 0, (LPARAM)&event);
 		}
-	// IEView MOD End
+	// IEVIew MOD End
 		SetDlgItemText(hwndDlg, IDC_LOG, _T(""));
 		dat->hDbEventFirst = NULL;
 		dat->lastEventType = -1;

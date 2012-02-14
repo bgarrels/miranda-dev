@@ -24,8 +24,8 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_proto.cpp $
-// Revision       : $Revision: 13553 $
-// Last change on : $Date: 2011-04-08 03:25:55 +0200 (Fr, 08. Apr 2011) $
+// Revision       : $Revision: 14083 $
+// Last change on : $Date: 2012-02-13 00:49:16 +0400 (Пн, 13 фев 2012) $
 // Last change by : $Author: borkra $
 //
 // DESCRIPTION:
@@ -36,7 +36,6 @@
 
 #include "icqoscar.h"
 
-//Miranda and Externals
 #include "m_icolib.h"
 #include "m_updater.h"
 
@@ -201,6 +200,9 @@ cheekySearchId( -1 )
 
 	// Init extra statuses
 	InitXStatusIcons();
+
+	// Unsane: init contact menu
+	MenuInit();
 
 	HookProtoEvent(ME_CLIST_PREBUILDSTATUSMENU, &CIcqProto::OnPreBuildStatusMenu);
 
@@ -1584,6 +1586,7 @@ int __cdecl CIcqProto::SendMsg( HANDLE hContact, int flags, const char* pszSrc )
 		DWORD dwCookie;
 		char* puszText = NULL;
 		int bNeedFreeU = 0;
+		cookie_message_data *pCookieData = NULL;
 
 		// Invalid contact
 		DWORD dwUin;
@@ -1628,9 +1631,6 @@ int __cdecl CIcqProto::SendMsg( HANDLE hContact, int flags, const char* pszSrc )
 		// Looks OK
 		else
 		{
-			// Set up the ack type
-			cookie_message_data *pCookieData = CreateMessageCookieData(MTYPE_PLAIN, hContact, dwUin, TRUE);
-
 #ifdef _DEBUG
 			NetLog_Server("Send %smessage - Message cap is %u", puszText ? "unicode " : "", CheckContactCapabilities(hContact, CAPF_SRV_RELAY));
 			NetLog_Server("Send %smessage - Contact status is %u", puszText ? "unicode " : "", wRecipientStatus);
@@ -1651,6 +1651,9 @@ int __cdecl CIcqProto::SendMsg( HANDLE hContact, int flags, const char* pszSrc )
 					}
 				}
 
+				// Set up the ack type
+				pCookieData = CreateMessageCookieData(MTYPE_PLAIN, hContact, dwUin, TRUE);
+				pCookieData->nAckType = ACKTYPE_CLIENT;
 				dwCookie = icq_SendDirectMessage(hContact, dc_msg, strlennull(dc_msg), 1, pCookieData, dc_cap);
 
 				SAFE_FREE(&szUserAnsi);
@@ -1663,7 +1666,10 @@ int __cdecl CIcqProto::SendMsg( HANDLE hContact, int flags, const char* pszSrc )
 				// on failure, fallback to send thru server
 			}
 
-//			if (!dwUin || !CheckContactCapabilities(hContact, CAPF_SRV_RELAY) || wRecipientStatus == ID_STATUS_OFFLINE)
+			if (!dwUin || !CheckContactCapabilities(hContact, CAPF_SRV_RELAY) || 
+				wRecipientStatus == ID_STATUS_OFFLINE || wRecipientStatus == ID_STATUS_INVISIBLE ||
+				getSettingByte(hContact, "OnlyServerAcks", getSettingByte(NULL, "OnlyServerAcks", DEFAULT_ONLYSERVERACKS)) ||
+				getSettingByte(hContact, "SlowSend", getSettingByte(NULL, "SlowSend", DEFAULT_SLOWSEND)))
 			{
 				/// TODO: add support for RTL & user customizable font
 				{
@@ -1684,7 +1690,6 @@ int __cdecl CIcqProto::SendMsg( HANDLE hContact, int flags, const char* pszSrc )
 					// only limit to not get disconnected, all other will be handled by error 0x0A
 					dwCookie = ReportGenericSendError(hContact, ACKTYPE_MESSAGE, "The message could not be delivered, it is too long.");
 
-					SAFE_FREE((void**)&pCookieData);
 					// free the buffers if alloced
 					SAFE_FREE((void**)&pwszText);
 					if (bNeedFreeU) SAFE_FREE(&puszText);
@@ -1696,15 +1701,14 @@ int __cdecl CIcqProto::SendMsg( HANDLE hContact, int flags, const char* pszSrc )
 				{ // rate is too high, the message will not go thru...
 					dwCookie = ReportGenericSendError(hContact, ACKTYPE_MESSAGE, "The message could not be delivered. You are sending too fast. Wait a while and try again.");
 
-					SAFE_FREE((void**)&pCookieData);
 					// free the buffers if alloced
 					SAFE_FREE((void**)&pwszText);
 					if (bNeedFreeU) SAFE_FREE(&puszText);
 
 					return dwCookie;
 				}
-				// set flag for offline messages - to allow proper error handling
-				if (wRecipientStatus == ID_STATUS_OFFLINE) ((cookie_message_data_ext*)pCookieData)->isOffline = TRUE;
+
+				pCookieData = CreateMessageCookieData(MTYPE_PLAIN, hContact, dwUin, FALSE);
 
 				if (plain_ascii)
 					dwCookie = icq_SendChannel1Message(dwUin, szUID, hContact, puszText, pCookieData);
@@ -1713,7 +1717,6 @@ int __cdecl CIcqProto::SendMsg( HANDLE hContact, int flags, const char* pszSrc )
 				// free the unicode message
 				SAFE_FREE((void**)&pwszText);
 			}
-/*
 			else
 			{
 				WORD wPriority;
@@ -1742,7 +1745,6 @@ int __cdecl CIcqProto::SendMsg( HANDLE hContact, int flags, const char* pszSrc )
 					dwCookie = ReportGenericSendError(hContact, ACKTYPE_MESSAGE, "The message could not be delivered, it is too long.");
 
 					SAFE_FREE(&szUserAnsi);
-					SAFE_FREE((void**)&pCookieData);
 					// free the buffers if alloced
 					if (bNeedFreeU) SAFE_FREE(&puszText);
 
@@ -1754,25 +1756,19 @@ int __cdecl CIcqProto::SendMsg( HANDLE hContact, int flags, const char* pszSrc )
 					dwCookie = ReportGenericSendError(hContact, ACKTYPE_MESSAGE, "The message could not be delivered. You are sending too fast. Wait a while and try again.");
 
 					SAFE_FREE(&szUserAnsi);
-					SAFE_FREE((void**)&pCookieData);
 					// free the buffers if alloced
 					if (bNeedFreeU) SAFE_FREE(&puszText);
 
 					return dwCookie;
 				}
-				// WORKAROUND!!
-				// Nasty workaround for ICQ6 client's bug - it does not send acknowledgement when in temporary visible mode
-				// - This uses only server ack, but also for visible invisible contact!
-				if (wRecipientStatus == ID_STATUS_INVISIBLE && pCookieData->nAckType == ACKTYPE_CLIENT && getSettingByte(hContact, "ClientID", CLID_GENERIC) == CLID_ICQ6)
-					pCookieData->nAckType = ACKTYPE_SERVER;
 
+				pCookieData = CreateMessageCookieData(MTYPE_PLAIN, hContact, dwUin, TRUE);
 				dwCookie = icq_SendChannel2Message(dwUin, hContact, srv_msg, strlennull(srv_msg), wPriority, pCookieData, srv_cap);
 				SAFE_FREE(&szUserAnsi);
 			}
-*/
 
 			// This will stop the message dialog from waiting for the real message delivery ack
-			if (pCookieData->nAckType == ACKTYPE_NONE)
+			if (pCookieData && pCookieData->nAckType == ACKTYPE_NONE)
 			{
 				SendProtoAck(hContact, dwCookie, ACKRESULT_SUCCESS, ACKTYPE_MESSAGE, NULL);
 				// We need to free this here since we will never see the real ack

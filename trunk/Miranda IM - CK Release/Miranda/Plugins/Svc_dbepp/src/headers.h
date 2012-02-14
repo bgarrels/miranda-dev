@@ -5,8 +5,7 @@
 //=====================================================
 
 #define _WIN32_WINNT 0x0501
-#define MIRANDA_VER 0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER 0x0A00
 
 #if defined( UNICODE ) && !defined( _UNICODE )
 	#define _UNICODE
@@ -49,8 +48,8 @@
 #include "m_updater.h"
 #include "m_toptoolbar.h"
 
-#include "../resource.h"
-#include "../Version.h"
+#include "resource.h"
+#include "Version.h"
 #include "modsettingenum.h"
 
 #define DEF_ICON    7

@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #pragma once
-#define MIRANDA_VER 0x0700
+#define MIRANDA_VER 0x0A00
 #define MIRANDA_CUSTOM_LP
 
 #define _WIN32_WINNT 0x0501
@@ -119,7 +119,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "modern_clist.h"
 #include "modern_cluiframes.h"
 #include "m_cluiframes.h"
-#include "m_metacontacts.h"
+#include "../m_api/m_metacontacts.h"
 #include "../m_api/m_skin_eng.h"
 
 #include "modern_rowheight_funcs.h"
@@ -127,14 +127,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "modern_log.h"
 
 #include "richedit.h"
-#include "m_variables.h"
+#include "../m_api/m_variables.h"
 
-#include "m_smileyadd.h"
+#include "../m_api/m_smileyadd.h"
 
 #include "../m_api/m_xpTheme.h"
-#include "m_toolbar.h"
+#include "../m_api/m_toolbar.h"
 
-#include "resource.h"
+#include "../resource.h"
 
 #include "modern_layered_window_engine.h"
 
@@ -519,10 +519,10 @@ int __cdecl ModernDBFreeVariant     ( DBVARIANT *dbv );
 #ifdef _UNICODE
 	int __cdecl ModernWriteSettingWString    ( HANDLE hContact, const char *szModule, const char *szSetting, const WCHAR *val );
 	#define ModernWriteSettingTString(a,b,c,d) ModernWriteSettingWString( a,b,c,d )
-	#define ModernGetSettingTString(a,b,c,d)   ModernGetSettingWString(a,b,c,d) 
+    #define ModernGetSettingTString(a,b,c,d)   ModernGetSettingWString(a,b,c,d) 
 #else
-	#define ModernWriteSettingTString(a,b,c,d) ModernWriteSettingString( a,b,c,d )
-	#define ModernGetSettingTString(a,b,c,d)   ModernGetSettingString(a,b,c,d) 
+    #define ModernWriteSettingTString(a,b,c,d) ModernWriteSettingString( a,b,c,d )
+    #define ModernGetSettingTString(a,b,c,d)   ModernGetSettingString(a,b,c,d) 
 #endif //_UNICODE
 
 

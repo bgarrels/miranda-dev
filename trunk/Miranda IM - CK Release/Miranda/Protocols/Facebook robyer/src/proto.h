@@ -170,7 +170,7 @@ public:
 	void    SetAllContactStatuses(int);	
 
 	// TODO RM: Chats handling
- 	void AddChat(const char *id, const char *name);
+	void AddChat(const char *id, const char *name);
 	void UpdateChat(const char *chat_id, const char *id, const char *name, const char *message);
 	bool IsChatContact(const char *chat_id, const char *id);
 	void AddChatContact(const char *chat_id, const char *id, const char *name);

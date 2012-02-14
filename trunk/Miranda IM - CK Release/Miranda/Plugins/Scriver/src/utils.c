@@ -1,5 +1,7 @@
 /*
-Scriver - Copyright 2000-2012 Miranda IM project,
+Scriver
+
+Copyright 2000-2012 Miranda ICQ/IM project,
 
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -18,12 +20,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-
 #include "commonheaders.h"
-#include <ctype.h>
-#include <mbstring.h>
-#include <winsock.h>
-#include <m_netlib.h>
+
 #ifndef TTI_NONE
 #define TTI_NONE 0
 #endif
@@ -74,7 +72,7 @@ void DestroyServices_Ex() {
 
 
 int safe_wcslen(wchar_t *msg, int maxLen) {
-	int i;
+    int i;
 	for (i = 0; i < maxLen; i++) {
 		if (msg[i] == (wchar_t)0)
 			return i;
@@ -189,14 +187,14 @@ void logInfo(const char *fmt, ...) {
 	FILE *flog=fopen(filename,"at");
 	if (flog!=NULL) {
 		GetLocalTime(&time);
-		va_start(vararg, fmt);
-		str = (char *) malloc(strsize=2048);
-		while (_vsnprintf(str, strsize, fmt, vararg) == -1)
-			str = (char *) realloc(str, strsize+=2048);
-		va_end(vararg);
-		fprintf(flog,"%04d-%02d-%02d %02d:%02d:%02d,%03d [%s]",time.wYear,time.wMonth,time.wDay,time.wHour,time.wMinute,time.wSecond,time.wMilliseconds, "INFO");
+    	va_start(vararg, fmt);
+    	str = (char *) malloc(strsize=2048);
+    	while (_vsnprintf(str, strsize, fmt, vararg) == -1)
+    		str = (char *) realloc(str, strsize+=2048);
+    	va_end(vararg);
+    	fprintf(flog,"%04d-%02d-%02d %02d:%02d:%02d,%03d [%s]",time.wYear,time.wMonth,time.wDay,time.wHour,time.wMinute,time.wSecond,time.wMilliseconds, "INFO");
 		fprintf(flog,"  %s\n",str);
-		free(str);
+    	free(str);
 		fclose(flog);
 	}
 }
@@ -255,7 +253,7 @@ int SetRichTextEncoded(HWND hwnd, const char *text, int codepage) {
 		st.codepage = 1200;
 		textToSet = mir_utf8decodeW(text);
 	#else
-		st.codepage = codepage;
+    	st.codepage = codepage;
 		textToSet = (char *)text;
 	#endif
 	SendMessage(hwnd, EM_SETTEXTEX, (WPARAM) &st, (LPARAM)textToSet);
@@ -444,8 +442,8 @@ char *url_encode(char *str) {
 	char *pstr = str, *buf = (char *)mir_alloc(strlen(str) * 3 + 1), *pbuf = buf;
 	while (*pstr) {
 		if ( (48 <= *pstr && *pstr <= 57) ||//0-9
-			 (65 <= *pstr && *pstr <= 90) ||//ABC...XYZ
-			 (97 <= *pstr && *pstr <= 122) ||//abc...xyz
+             (65 <= *pstr && *pstr <= 90) ||//ABC...XYZ
+             (97 <= *pstr && *pstr <= 122) ||//abc...xyz
 			*pstr == '-' || *pstr == '_' || *pstr == '.') 
 				*pbuf++ = *pstr;
 		else if (*pstr == ' ') 
@@ -509,22 +507,22 @@ void SetSearchEngineIcons(HMENU hMenu, HIMAGELIST hImageList) {
 void GetContactUniqueId(struct MessageWindowData *dat, char *buf, int maxlen) {
 	CONTACTINFO ci;
 	ZeroMemory(&ci, sizeof(ci));
-	ci.cbSize = sizeof(ci);
-	ci.hContact = dat->windowData.hContact;
-	ci.szProto = dat->szProto;
-	ci.dwFlag = CNF_UNIQUEID;
+    ci.cbSize = sizeof(ci);
+    ci.hContact = dat->windowData.hContact;
+    ci.szProto = dat->szProto;
+    ci.dwFlag = CNF_UNIQUEID;
 	buf[0] = 0;
-	if (!CallService(MS_CONTACT_GETCONTACTINFO, 0, (LPARAM) & ci)) {
-		switch (ci.type) {
-			case CNFT_ASCIIZ:
-				mir_snprintf(buf, maxlen, "%s", ci.pszVal);
-				miranda_sys_free(ci.pszVal);
-				break;
-			case CNFT_DWORD:
-				mir_snprintf(buf, maxlen, "%u", ci.dVal);
-				break;
-		}
-	}
+    if (!CallService(MS_CONTACT_GETCONTACTINFO, 0, (LPARAM) & ci)) {
+        switch (ci.type) {
+            case CNFT_ASCIIZ:
+                mir_snprintf(buf, maxlen, "%s", ci.pszVal);
+                miranda_sys_free(ci.pszVal);
+                break;
+            case CNFT_DWORD:
+                mir_snprintf(buf, maxlen, "%u", ci.dVal);
+                break;
+        }
+    }
 }
 
 HWND CreateToolTip(HWND hwndParent, LPTSTR ptszText, LPTSTR ptszTitle, RECT* rect)

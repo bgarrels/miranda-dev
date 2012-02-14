@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/fam_01service.cpp $
-// Revision       : $Revision: 13608 $
-// Last change on : $Date: 2011-04-21 21:18:19 +0200 (Do, 21. Apr 2011) $
-// Last change by : $Author: george.hazan $
+// Revision       : $Revision: 14075 $
+// Last change on : $Date: 2012-02-11 15:41:20 +0100 (Sa, 11. Feb 2012) $
+// Last change by : $Author: borkra $
 //
 // DESCRIPTION:
 //
@@ -93,7 +93,7 @@ void CIcqProto::handleServiceFam(BYTE *pBuffer, WORD wBufferLength, snac_header 
 #ifdef _DEBUG
 		NetLog_Server("Sending Rate Info Ack");
 #endif
-	m_rates->initAckPacket(&packet);
+    m_rates->initAckPacket(&packet);
 		sendServPacket(&packet);
 
 		/* CLI_REQINFO - This command requests from the server certain information about the client that is stored on the server. */
@@ -187,7 +187,7 @@ void CIcqProto::handleServiceFam(BYTE *pBuffer, WORD wBufferLength, snac_header 
 		// Query flags: 1 = Enable Avatars
 		//              2 = Enable offline status message notification
 		//              4 = Enable Avatars for offline contacts
-	//              8 = Use reject for not authorized contacts
+    //              8 = Use reject for not authorized contacts
 		packTLVWord(&packet, 0x05, 0x0007);
 		sendServPacket(&packet);
 
@@ -443,22 +443,22 @@ void CIcqProto::handleServiceFam(BYTE *pBuffer, WORD wBufferLength, snac_header 
 #ifdef _DEBUG
 			NetLog_Server("Received owner session data.");
 #endif
-	  while (wBufferLength > 4)
-	  { // loop thru all items
-		WORD itemType = pBuffer[0] * 0x10 | pBuffer[1];
-		BYTE itemFlags = pBuffer[2];
-		BYTE itemLen = pBuffer[3];
+      while (wBufferLength > 4)
+      { // loop thru all items
+        WORD itemType = pBuffer[0] * 0x10 | pBuffer[1];
+        BYTE itemFlags = pBuffer[2];
+        BYTE itemLen = pBuffer[3];
 
 			  if (itemType == AVATAR_HASH_PHOTO) /// TODO: handle photo item
 			  { // skip photo item
 #ifdef _DEBUG
-		  NetLog_Server("Photo item recognized");
+          NetLog_Server("Photo item recognized");
 #endif
 			  }
 			  else if ((itemType == AVATAR_HASH_STATIC || itemType == AVATAR_HASH_FLASH) && (itemLen >= 0x10))
 			  {
 #ifdef _DEBUG
-		  NetLog_Server("Avatar item recognized");
+          NetLog_Server("Avatar item recognized");
 #endif
 				  if (m_bAvatarsEnabled && !info->bMyAvatarInited) // signal the server after login
 				  { // this refreshes avatar state - it used to work automatically, but now it does not
@@ -480,29 +480,29 @@ void CIcqProto::handleServiceFam(BYTE *pBuffer, WORD wBufferLength, snac_header 
 					  info->bMyAvatarInited = TRUE;
 					  break;
 				  }
-		  // process owner avatar hash changed notification
-		  handleAvatarOwnerHash(itemType, itemFlags, pBuffer, itemLen + 4);
-		}
-		else if (itemType == 0x02)
-		{
+          // process owner avatar hash changed notification
+          handleAvatarOwnerHash(itemType, itemFlags, pBuffer, itemLen + 4);
+        }
+        else if (itemType == 0x02)
+        {
 #ifdef _DEBUG
-		  NetLog_Server("Status message item recognized");
+          NetLog_Server("Status message item recognized");
 #endif
-		}
-		else if (itemType == 0x0E)
-		{
+        }
+        else if (itemType == 0x0E)
+        {
 #ifdef _DEBUG
-		  NetLog_Server("Status mood item recognized");
+          NetLog_Server("Status mood item recognized");
 #endif
-		}
+        }
 
-		// move to next item
+        // move to next item
 			  if (wBufferLength >= itemLen + 4)
 			  {
-					wBufferLength -= itemLen + 4;
-				pBuffer += itemLen + 4;
-			}
-			else
+ 					wBufferLength -= itemLen + 4;
+  				pBuffer += itemLen + 4;
+	  		}
+		  	else
 			  {
 				  pBuffer += wBufferLength;
 				  wBufferLength = 0;

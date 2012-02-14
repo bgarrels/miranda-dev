@@ -475,10 +475,8 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	}
 
 	//Registering YAMN as protocol
-	PROTOCOLDESCRIPTOR pd;
-
-	memset(&pd,0,sizeof(pd));
-	pd.cbSize=sizeof(pd);
+	PROTOCOLDESCRIPTOR pd = {0};
+	pd.cbSize=PROTOCOLDESCRIPTOR_V3_SIZE;
 	pd.szName=ProtoName;
 	pd.type=PROTOTYPE_PROTOCOL;
 	

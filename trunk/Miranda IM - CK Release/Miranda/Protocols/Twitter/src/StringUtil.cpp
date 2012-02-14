@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 Brook Miles
+Copyright (c) 2012 Brook Miles
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -100,12 +100,12 @@ tstring GetWord(const tstring& str, unsigned index, bool getRest)
 // within the string with "to". returns the pointer to the string which is kinda silly IMO
 std::string& replaceAll(std::string& context, const std::string& from, const std::string& to)
 {
-    size_t lookHere = 0;
-    size_t foundHere;
-    while((foundHere = context.find(from, lookHere)) != std::string::npos)
-    {
-          context.replace(foundHere, from.size(), to);
-          lookHere = foundHere + to.size();
-    }
-    return context;
+	size_t lookHere = 0;
+	size_t foundHere;
+	while((foundHere = context.find(from, lookHere)) != std::string::npos)
+	{
+		  context.replace(foundHere, from.size(), to);
+		  lookHere = foundHere + to.size();
+	}
+	return context;
 }

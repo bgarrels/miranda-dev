@@ -21,8 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define _WIN32_WINNT 0x0501
 
-#define MIRANDA_VER    0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER    0x0A00
 
 #include <windows.h>
 #include <commctrl.h>
@@ -40,14 +39,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "m_hotkeys.h"
 #include "win2k.h"
 
-//ExternalApi 
 #include "m_updater.h"
 #include "m_toolbar.h"
 #include "m_sessions.h"
 
 #include "Utils.h"
-#include "Version.h"
-#include "Resource.h"
+#include "../Version.h"
+#include "../Resource.h"
 
 extern HANDLE hibChecked;
 extern HANDLE hibNotChecked;

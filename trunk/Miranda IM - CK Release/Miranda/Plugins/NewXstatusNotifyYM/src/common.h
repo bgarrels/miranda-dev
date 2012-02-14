@@ -3,21 +3,20 @@
 	Copyright (c) 2001-2004 Luca Santarelli
 	Copyright (c) 2005-2007 Vasilich
 	Copyright (c) 2007-2011 yaho
-	Copyright (c) 2011-2012 CHEF-KOCH, Mataes
 
-	This program is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
-	(at your option) any later version.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 #ifndef COMMON_H
@@ -30,8 +29,7 @@
 
 #define _WIN32_WINNT 0x0500
 #define WINVER 0x0600
-#define MIRANDA_VER 0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER 0x0A00
 
 //Standard Windows "libraries"
 #include <windows.h>
@@ -44,7 +42,6 @@
 #include <stdlib.h>
 #include <tchar.h>
 
-//Miranda IM
 #include "newpluginapi.h"
 #include "statusmodes.h"
 #include "win2k.h"
@@ -69,11 +66,10 @@
 #include "m_utils.h"
 #include "m_icq.h"
 
-//ExternalAPI
 #include "m_metacontacts.h"
 #include "m_updater.h"
 #include "m_toolbar.h"
-#include "../resource.h"
+#include "resource.h"
 
 #if defined _WIN64
 #define	MIID_NXSN { 0x16f0674f, 0xc4e7, 0x494e, { 0xb7, 0x5e, 0x41, 0xbb, 0xf4, 0xaf, 0xe6, 0x11 } }
@@ -96,12 +92,15 @@
 #define GENDER_MALE				1
 #define GENDER_FEMALE			2
 
+#define NOTIFY_INTERVAL_JABBER  2000
+#define NOTIFY_INTERVAL_ICQ		5000
+
 #define ID_STATUS_FROMOFFLINE	1
 #define ID_STATUS_EXTRASTATUS   40081
 #define ID_STATUS_MIN			ID_STATUS_OFFLINE
 #define ID_STATUS_MAX			ID_STATUS_OUTTOLUNCH
-#define ID_STATUS_MAX2			ID_STATUS_EXTRASTATUS + 1
-#define STATUS_COUNT			ID_STATUS_MAX2 - ID_STATUS_MIN
+#define ID_STATUS_MAX2			ID_STATUS_EXTRASTATUS
+#define STATUS_COUNT			ID_STATUS_MAX2 - ID_STATUS_MIN + 1
 #define Index(ID_STATUS)		ID_STATUS - ID_STATUS_OFFLINE
 
 #define COLOR_BG_AVAILDEFAULT	RGB(173,206,247)
@@ -138,15 +137,6 @@ typedef struct tagPLUGINDATA
 	HANDLE hAwayMsgHook;
 } PLUGINDATA;
 
-typedef struct {
-	HANDLE hContact;
-	TCHAR *cust;
-	TCHAR *oldstatusmsg;
-	TCHAR *newstatusmsg;
-	char *proto;
-	int compare;
-} STATUSMSGINFO;
-
 /*
 HANDLE hContact = (HANDLE)wParam;
 WORD oldStatus = LOWORD(lParam);
@@ -158,7 +148,5 @@ Cast them to (int) if you need them that way.
 #define ME_STATUSCHANGE_CONTACTSTATUSCHANGED "Miranda/StatusChange/ContactStatusChanged"
 
 #define MS_STATUSCHANGE_MENUCOMMAND "NewStatusNotify/EnableDisableMenuCommand"
-
-#define TMR_CONNECTIONTIMEOUT		10000
 
 #endif //COMMON_H

@@ -1,5 +1,5 @@
 /*
-Copyright © 2009 Jim Porter
+Copyright © 2012 Jim Porter
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -53,10 +53,10 @@ void InitIcons(void)
 	sid.cx = sid.cy = 16;
 	sid.pszName = setting_name;
 	sid.pszSection = section_name;
-    sid.flags = SIDF_PATH_TCHAR;
+	sid.flags = SIDF_PATH_TCHAR;
 
 	for (int i=0; i<SIZEOF(icons); i++) 
-    {
+	{
 		if(icons[i].defIconID)
 		{
 			mir_snprintf(setting_name,sizeof(setting_name),"%s_%s","Twitter",icons[i].name);

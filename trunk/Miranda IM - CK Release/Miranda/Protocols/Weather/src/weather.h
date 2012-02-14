@@ -37,8 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <win2k.h>
 
-#define MIRANDA_VER 0x0700
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER 0x0A00
 
 #include <newpluginapi.h>
 #include <m_system.h>
@@ -66,8 +65,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <m_popup.h>
 
 #include "m_weather.h"
-#include "../resource.h"
-#include "../version.h"
+#include "resource.h"
+#include "version.h"
 
 //============  CONSTANTS  ============
 
@@ -191,7 +190,7 @@ typedef struct {
 	WORD eUnit;
 	char DegreeSign[4];
 	BOOL DoNotAppendUnit;
-	BOOL NoFrac;
+    BOOL NoFrac;
 // texts
 	char *cText;
 	char *bTitle;

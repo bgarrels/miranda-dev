@@ -24,8 +24,8 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/fam_04message.cpp $
-// Revision       : $Revision: 13324 $
-// Last change on : $Date: 2011-01-23 16:58:59 +0100 (So, 23. Jan 2011) $
+// Revision       : $Revision: 14075 $
+// Last change on : $Date: 2012-02-11 15:41:20 +0100 (Sa, 11. Feb 2012) $
 // Last change by : $Author: borkra $
 //
 // DESCRIPTION:
@@ -2654,7 +2654,7 @@ void CIcqProto::handleRecvServMsgError(BYTE *buf, WORD wLen, WORD wFlags, DWORD 
 		case 0x0004:     // Recipient is not logged in (resend in a offline message)
 			if (pCookieData->bMessageType == MTYPE_PLAIN) 
 			{
-				if (((cookie_message_data_ext*)pCookieData)->isOffline)
+				if (pCookieData->isOffline)
 				{ // offline failed - most probably to AIM contact
 					pszErrorMessage = ICQTranslate("The contact does not support receiving offline messages.");
 					break;

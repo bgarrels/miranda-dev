@@ -1,5 +1,4 @@
-#define MIRANDA_VER    0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER    0x0A00
 
 // Windows Header Files
 #include <windows.h>
@@ -31,10 +30,10 @@
 #include "m_clc.h"
 #include <m_variables.h>
 
-#include "Resource.h"
-#include "Version.h"
+#include "..\Resource.h"
+#include "..\Version.h"
 
-#define protocolname		"SimpleAutoReplier" //no spaces here 
+#define protocolname		"SimpleAutoReplier" //no spaces here :)
 
 #define KEY_ENABLED			"Enabled"
 #define KEY_HEADING			"Heading"

@@ -2,9 +2,6 @@
 #include "proto.h"
 
 
-
-
-
 INT_PTR		MraXStatusMenu			(WPARAM wParam,LPARAM lParam,LPARAM param);
 
 int			MraContactDeleted		(WPARAM wParam,LPARAM lParam);

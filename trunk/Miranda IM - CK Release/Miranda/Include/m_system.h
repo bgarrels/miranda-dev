@@ -2,7 +2,7 @@
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2008 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -32,9 +32,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 	#define MIRANDACLASS	"Miranda"
 #endif
 
-// set the default compatibility lever for Miranda 0.4.x
+// set the default compatibility lever for Miranda 0.10.x
 #ifndef MIRANDA_VER
-	#define MIRANDA_VER    0x0400
+	#define MIRANDA_VER    0x0A00
 #endif
 
 #ifndef _MSC_VER
@@ -152,7 +152,7 @@ struct MM_INTERFACE
 		wchar_t* (*mmi_wstrdup) (const wchar_t *src);
 	#endif
 	#if MIRANDA_VER >= 0x0700
-	  int      (*mir_snprintf) (char *buffer, size_t count, const char* fmt, ...);
+      int      (*mir_snprintf) (char *buffer, size_t count, const char* fmt, ...);
 		int      (*mir_sntprintf) (TCHAR *buffer, size_t count, const TCHAR* fmt, ...);
 		int      (*mir_vsnprintf) (char *buffer, size_t count, const char* fmt, va_list va);
 		int      (*mir_vsntprintf) (TCHAR *buffer, size_t count, const TCHAR* fmt, va_list va);
@@ -339,9 +339,9 @@ extern struct UTF8_INTERFACE utfi;
 
 __forceinline char* mir_utf8decodeA(const char* src)
 {
-	char* tmp = mir_strdup(src);
-	mir_utf8decode(tmp, NULL);
-	return tmp;
+    char* tmp = mir_strdup(src);
+    mir_utf8decode(tmp, NULL);
+    return tmp;
 }
 
 #if defined( _UNICODE )
@@ -559,11 +559,11 @@ of shutting down
 	wParam : 0
 	lParam : (address) void (__cdecl *callback) (void)
 	Affect : Setup a function pointer to be called after main loop iterations, it allows for
-			 idle processing, See notes
+		     idle processing, See notes
 	Returns: 1 on success, 0 on failure
 
 	Notes  : This service will only allow one function to be registered, if one is registered, 0 will be returned
-			 Remember that this uses __cdecl.
+		     Remember that this uses __cdecl.
 	Version: Added during 0.3.4+
 
 */

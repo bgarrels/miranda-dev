@@ -1,5 +1,5 @@
 /*
-Copyright © 2009 Jim Porter
+Copyright © 2012 Jim Porter
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -445,7 +445,7 @@ time_t timegm(struct tm *t)
 }
 
 static char *month_names[] = { "Jan","Feb","Mar","Apr","May","Jun",
-                               "Jul","Aug","Sep","Oct","Nov","Dec" };
+							   "Jul","Aug","Sep","Oct","Nov","Dec" };
 
 int parse_month(const char *m)
 {

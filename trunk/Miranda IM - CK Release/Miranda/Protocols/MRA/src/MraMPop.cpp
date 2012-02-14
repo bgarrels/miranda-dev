@@ -2,8 +2,6 @@
 #include "MraMPop.h"
 
 
-
-
 //	MPOP_SESSION
 typedef struct
 {

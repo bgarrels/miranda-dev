@@ -2,7 +2,7 @@
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2008 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -97,10 +97,10 @@ typedef struct {
 	DWORD flags;
 	HWND hwndDlg;
 	const int *ignoreControls;   //zero-terminated list of control IDs *not* to
-	    //translate
+		//translate
 } LANGPACKTRANSLATEDIALOG;
 #define LPTDF_NOIGNOREEDIT   1     //translate all edit controls. By default
-                   //non-read-only edit controls are not translated
+				   //non-read-only edit controls are not translated
 #define LPTDF_NOTITLE        2     //do not translate the title of the dialog
 
 #define MS_LANGPACK_TRANSLATEDIALOG  "LangPack/TranslateDialog"

@@ -2,8 +2,6 @@
 #include "MraSendQueue.h"
 
 
-
-
 typedef struct
 {
 	LIST_MT			lmtListMT;

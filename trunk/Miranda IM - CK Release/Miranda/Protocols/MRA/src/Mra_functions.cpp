@@ -1,7 +1,6 @@
 #include "Mra.h"
 
 
-
 typedef struct SetXStatusData_s {
 	DWORD dwXStatus;
 	DWORD dwCountdown;

@@ -3,8 +3,6 @@
 #include "proto.h"
 
 
-
-
 #define MRA_FT_HELLO	"MRA_FT_HELLO"
 #define MRA_FT_GET_FILE	"MRA_FT_GET_FILE"
 
@@ -294,7 +292,7 @@ return(dwRetErrorCode);
 
 void MraFilesQueueItemFree(MRA_FILES_QUEUE_ITEM *pmrafqFilesQueueItem)
 {
- 	LIST_MT *plmtListMT=(LIST_MT*)pmrafqFilesQueueItem->lmtListMTItem.lpListMT;
+	LIST_MT *plmtListMT=(LIST_MT*)pmrafqFilesQueueItem->lmtListMTItem.lpListMT;
 
 	for(SIZE_T i=0;i<pmrafqFilesQueueItem->dwFilesCount;i++)
 	{
@@ -1014,7 +1012,7 @@ void MraFilesQueueRecvThreadProc(LPVOID lpParameter)
 	{
 		MRA_FILES_QUEUE *pmrafqFilesQueue=(MRA_FILES_QUEUE*)((MRA_FILES_THREADPROC_PARAMS*)lpParameter)->hFilesQueueHandle;
 		MRA_FILES_QUEUE_ITEM *pmrafqFilesQueueItem=((MRA_FILES_THREADPROC_PARAMS*)lpParameter)->pmrafqFilesQueueItem;
-	    
+		
 		WCHAR wszFileName[MAX_FILEPATH]={0};
 		WCHAR szErrorText[2048];
 		BYTE btBuff[BUFF_SIZE_RCV];
@@ -1234,7 +1232,7 @@ void MraFilesQueueSendThreadProc(LPVOID lpParameter)
 	{
 		MRA_FILES_QUEUE *pmrafqFilesQueue=(MRA_FILES_QUEUE*)((MRA_FILES_THREADPROC_PARAMS*)lpParameter)->hFilesQueueHandle;
 		MRA_FILES_QUEUE_ITEM *pmrafqFilesQueueItem=((MRA_FILES_THREADPROC_PARAMS*)lpParameter)->pmrafqFilesQueueItem;
-	    
+		
 		CHAR szFileName[MAX_FILEPATH]={0};
 		WCHAR szErrorText[2048];
 		BYTE btBuff[BUFF_SIZE_RCV];
