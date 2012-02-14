@@ -2,9 +2,9 @@
  * This code implements decoding encoded MIME header in style
  * =?iso-8859-2?Q? "User using email in central Europe characters such as =E9" ?=
  *
- * (c) majvan 2002-2004
+ * (c) majvan 2002-2012
  */
-#include "../yamn.h"
+#include "yamn.h"
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 

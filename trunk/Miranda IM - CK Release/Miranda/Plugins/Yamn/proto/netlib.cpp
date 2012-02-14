@@ -1,7 +1,7 @@
 /*
  * This code implements communication based on Miranda netlib library
  *
- * (c) majvan 2002-2004
+ * (c) majvan 2002-2012
  */
 
 #if !defined(_WIN64)
@@ -12,7 +12,7 @@
 #include <newpluginapi.h>	//CallService,UnHookEvent
 #include <m_netlib.h>		//socket thorugh proxy functions
 #include <m_langpack.h>	//langpack for "connection" and other words
-#include "../debug.h"
+#include "debug.h"
 #include "netlib.h"
 
 //--------------------------------------------------------------------------------------------------

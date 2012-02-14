@@ -1,17 +1,17 @@
 /*
  * YAMN plugin main file
- * Miranda homepage: http://miranda-icq.sourceforge.net/
- * YAMN homepage: http://www.majvan.host.sk/Projekty/YAMN
+ * Miranda homepage: http://www.miranda-im.org/
+ * YAMN homepage: http://miranda-plugins.googlecode.com/
  *
  * initializes all variables for further work
  *
- * (c) majvan 2002-2004
+ * (c) majvan 2002-2012
  */
 
 
 #include "main.h"
 #include "yamn.h"
-#include "resources/resource.h"
+#include "../resources/resource.h"
 #include <io.h>
 //- imported ---------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ extern LPCRITICAL_SECTION FileWritingCS;
 //--------------------------------------------------------------------------------------------------
 
 WCHAR	*ProfileName		= NULL;		//e.g. "majvan"
-WCHAR	*UserDirectory		= NULL;		//e.g. "F:\WINNT\Profiles\UserXYZ"
+WCHAR	*UserDirectory		= NULL;		//e.g. "C:\($WinDIR)\Profiles\UserXYZ"
 char	*ProtoName			= YAMN_DBMODULE;
 //char *AltProtoName;
 char	*szMirandaDir		= NULL;
@@ -52,6 +52,7 @@ static int iDllPlugins=0;
 PLUGINLINK *pluginLink;
 YAMN_VARIABLES YAMNVar;
 
+struct MM_INTERFACE mmi;
 int hLangpack;
 
 static const MUUID interfaces[] = {MUUID_YAMN_FORCECHECK, MIID_LAST};
@@ -63,7 +64,7 @@ PLUGININFOEX pluginInfo={
 	"Mail notifier and browser for Miranda IM. Included POP3 protocol. Mod for Mataes Pack.",
 	"y_b tweety (majvan)",
 	"francois.mean@skynet.be",
-	"© (2002-2004 majvan) 2005-2007 tweety y_b Miranda community",
+	"© (2002-2004 majvan) 2005-2012 tweety y_b Miranda community",
 	"http://www.miranda-im.org/download/details.php?action=viewfile&id=3411", //"http://www.majvan.host.sk/Projekty/YAMN?fm=soft",
 	UNICODE_AWARE,
 	0,		//doesn't replace anything built-in

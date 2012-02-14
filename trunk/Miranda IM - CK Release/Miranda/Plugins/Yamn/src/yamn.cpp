@@ -1,7 +1,7 @@
 /*
  * This code implements miscellaneous usefull functions
  * 
- * (c) majvan 2002-2004
+ * (c) majvan 2002-2012
  */
 #include "m_yamn.h"
 #include "m_protoplugin.h"

@@ -5,7 +5,7 @@
  * (c) majvan 2002-2004
  */
 #if !defined(_WIN64)
-	#include "filter/simple/AggressiveOptimize.h"
+	#include "../filter/simple/AggressiveOptimize.h"
 #endif
 #include <windows.h>
 #include "debug.h"
