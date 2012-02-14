@@ -1,7 +1,7 @@
 /*
  * This code implements POP3 options window handling
  *
- * (c) majvan 2002-2003
+ * (c) majvan 2002-2012
 */
 
 /*
@@ -23,8 +23,8 @@
 #include "../../m_yamn.h"
 #include "../../debug.h"
 */
-#include "../../yamn.h"
-#include "../../main.h"
+#include "yamn.h"
+#include "main.h"
 #include "pop3comm.h"
 #include "pop3opt.h"
 

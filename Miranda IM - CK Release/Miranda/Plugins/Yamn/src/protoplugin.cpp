@@ -1,11 +1,11 @@
 /*
  * YAMN plugin export functions for protocols
  *
- * (c) majvan 2002-2004
+ * (c) majvan 2002-2012
  */
 
 #if !defined(_WIN64)
-	#include "filter/simple/AggressiveOptimize.h"
+	#include "../filter/simple/AggressiveOptimize.h"
 #endif
 #include <windows.h>
 #include <tchar.h>
@@ -20,8 +20,8 @@
 //- imported ---------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 
-extern WCHAR *UserDirectory;		//e.g. "F:\WINNT\Profiles\UserXYZ"
-extern WCHAR *ProfileName;		//e.g. "majvan"
+extern WCHAR *UserDirectory;						//e.g. "C:\(&WinDir)\Profiles\UserXYZ"
+extern WCHAR *ProfileName;							//e.g. "majvan"
 extern SWMRG *AccountBrowserSO;
 extern LPCRITICAL_SECTION PluginRegCS;
 extern YAMN_VARIABLES YAMNVar;

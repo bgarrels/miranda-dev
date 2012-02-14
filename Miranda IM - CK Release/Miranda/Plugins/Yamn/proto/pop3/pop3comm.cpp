@@ -11,11 +11,11 @@
 
 
 #pragma warning( disable : 4290 )
-#include "../../main.h"
-#include "../../yamn.h"
+#include "main.h"				//main functions for yamn
+#include "yamn.h"				
 #include "pop3.h"
-#include "pop3comm.h"		//all we need for POP3 account (POP3 account= YAMN account + some more POP3 specified members)
-#include <m_netlib.h>		//socket thorugh proxy functions
+#include "pop3comm.h"			//all we need for POP3 account (POP3 account= YAMN account + some more POP3 specified members)
+#include <m_netlib.h>			//socket thorugh proxy functions
 
 #define ERRORSTR_MAXLEN	1024	//in wide-chars
 

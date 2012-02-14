@@ -13,7 +13,7 @@
 //For mail exported functions defintions
 #include "../../mails/m_mails.h"
 
-#include "../../debug.h"
+#include "debug.h"
 					
 #define	POP3_FILEVERSION	1	//Version of aditional information stored in book file
 

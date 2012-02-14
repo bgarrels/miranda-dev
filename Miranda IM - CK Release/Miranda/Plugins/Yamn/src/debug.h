@@ -11,7 +11,7 @@
 //#pragma comment(lib, "th32.lib")
 
 #if !defined(_WIN32_WINNT)
-#define _WIN32_WINNT 0x0501 // WinXP only
+#define _WIN32_WINNT 0x0502 
 #endif
 #define VC_EXTRALEAN
 #include <windows.h>

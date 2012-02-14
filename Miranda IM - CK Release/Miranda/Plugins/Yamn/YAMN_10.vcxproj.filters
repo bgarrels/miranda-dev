@@ -21,38 +21,11 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{c58708cc-53b7-4db2-b19e-4d6291665e8b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\include">
-      <UniqueIdentifier>{a5d01df4-9348-4078-ab04-99ee691cd263}</UniqueIdentifier>
-    </Filter>
     <Filter Include="docs">
       <UniqueIdentifier>{78fe97e0-7427-428b-9ec4-ab07cd66a76e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="account.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="filterplugin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="protoplugin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="services.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="synchro.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="yamn.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="browser\badconnect.cpp">
       <Filter>Source Files\Mail browser, dialogs</Filter>
     </ClCompile>
@@ -82,6 +55,30 @@
     </ClCompile>
     <ClCompile Include="proto\pop3\pop3opt.cpp">
       <Filter>Source Files\POP3 plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\account.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\filterplugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\protoplugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\services.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\synchro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\yamn.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,9 +112,6 @@
     <None Include="docs\ChangeLog.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="docs\InstallScript.xml">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\language.pop3.txt">
       <Filter>docs</Filter>
     </None>
@@ -125,12 +119,6 @@
   <ItemGroup>
     <ClInclude Include="resources\resource.h">
       <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="debug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="proto\pop3\pop3.h">
       <Filter>Header Files</Filter>
@@ -141,22 +129,16 @@
     <ClInclude Include="proto\pop3\pop3opt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="yamn.h">
+    <ClInclude Include="src\debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\m_kbdnotify.h">
-      <Filter>Header Files\include</Filter>
+    <ClInclude Include="src\main.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\m_uninstaller.h">
-      <Filter>Header Files\include</Filter>
+    <ClInclude Include="src\yamn.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="version.h" />
-    <ClInclude Include="..\..\ExternalAPI\m_toptoolbar.h">
-      <Filter>Header Files\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_updater.h">
-      <Filter>Header Files\include</Filter>
-    </ClInclude>
+    <ClInclude Include="src\version.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\YAMN.rc">

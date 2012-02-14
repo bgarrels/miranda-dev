@@ -3,11 +3,11 @@
  * such as reading accounts from file, writing them to file,
  * finding account by name etc.
  *
- * (c) majvan 2002-2004
+ * (c) majvan 2002-2012
  */
 
 #include "yamn.h"
-#include "mails/m_mails.h"
+#include "../mails/m_mails.h"
 #if defined(DEBUG_FILEREAD) || defined(DEBUG_FILEREADMESSAGES) || defined(DEBUG_SYNCHRO)
 	#include <stdio.h>
 #endif

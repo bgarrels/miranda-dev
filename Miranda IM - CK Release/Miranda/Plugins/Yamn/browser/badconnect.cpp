@@ -1,7 +1,7 @@
 /*
  * This code implements window handling (connection error)
  *
- * (c) majvan 2002,2004
+ * (c) majvan 2002-2004
  */
 #include <windows.h>
 #include <stdio.h>
@@ -11,10 +11,10 @@
 #include <m_langpack.h>
 #include <m_database.h>
 #include <m_popup.h>
-#include "../main.h"
+#include "main.h"
 #include "m_protoplugin.h"
 #include "m_account.h"
-#include "../debug.h"
+#include "debug.h"
 #include "m_messages.h"
 #include "../mails/m_mails.h"
 #include "m_yamn.h"

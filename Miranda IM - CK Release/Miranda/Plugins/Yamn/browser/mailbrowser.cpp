@@ -1,7 +1,7 @@
 /*
  * This code implements window handling (new mail)
  *
- * (c) majvan 2002-2004
+ * (c) majvan 2002-2012
  */
 /* There can be problems when compiling this file, because in this file
  * we are using both unicode and no-unicode functions and compiler does not
@@ -10,7 +10,7 @@
  * put it back to uncommented and compile again :)
  */
 #ifndef _WIN32_IE
-	#define _WIN32_IE 0x0400
+	#define _WIN32_IE 0x0600
 #endif
 #ifndef _WIN32_WINNT
 	#define _WIN32_WINNT 0x0501
@@ -29,10 +29,10 @@
 #include <m_clist.h>
 #include <m_popup.h>
 #include "m_kbdnotify.h"
-#include "../main.h"
+#include "main.h"
 #include "m_protoplugin.h"
 #include "m_account.h"
-#include "../debug.h"
+#include "debug.h"
 #include "m_messages.h"
 #include "../mails/m_mails.h"
 #include "m_yamn.h"
