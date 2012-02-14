@@ -1,6 +1,5 @@
 #include "Mra.h"
 
-
 #ifndef  _WIN64
 
 
@@ -409,18 +408,21 @@ extern "C" __declspec(naked) void __cdecl _allshl()
 #endif
 
 
-
-
-PLUGINLINK *pluginLink;
-MM_INTERFACE mmi;
+struct MM_INTERFACE mmi;
+struct UTF8_INTERFACE utfi;
 MRA_SETTINGS masMraSettings;
-int hLangpack;
+extern PLUGINLINK *pluginLink;
+DWORD g_mirandaVersion;
+int hLangpack = 0;
 
-PLUGININFOEX pluginInfoEx={
+/////////////////////////////////////////////////////////////////////////////////////////
+// MirandaPluginInfoEx - returns the extended information about a plugin
+
+PLUGININFOEX pluginInfoEx = {
 	sizeof(PLUGININFOEX),
 	PROTOCOL_DISPLAY_NAME_ORIGA,
 	PLUGIN_VERSION_DWORD,
-	"Provides support for Mail.ru agent Instant Messenger protocol.",
+	"Provides support for Mail.ru agent Instant Messenger protocol. [Built: "__DATE__" "__TIME__"]",
 	"Rozhuk Ivan",
 	"Rozhuk_I@mail.ru",
 	"© 2006-2011 Rozhuk Ivan",
@@ -431,14 +433,13 @@ PLUGININFOEX pluginInfoEx={
 	{ 0xe7c48bab, 0x8ace, 0x4cb3, { 0x84, 0x46, 0xd4, 0xb7, 0x34, 0x81, 0xf4, 0x97 } }
 };
 
+
 static const MUUID interfaces[]={MIID_PROTOCOL,MIID_LAST};
 
 
 int		OnModulesLoaded		(WPARAM wParam,LPARAM lParam);
 int		OnPreShutdown		(WPARAM wParam,LPARAM lParam);
 void	VersionConversions	();
-
-
 
 
 
@@ -522,7 +523,8 @@ extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD miranda
 		MessageBox(NULL, TranslateT("Pleace, update your Miranda IM, MRA will not load with this version."), NULL, (MB_OK|MB_ICONERROR));
 		return(NULL);
 	}
-	return(&pluginInfoEx);
+	else
+		return(&pluginInfoEx);
 }
 
 extern "C" __declspec(dllexport) const MUUID* MirandaPluginInterfaces()

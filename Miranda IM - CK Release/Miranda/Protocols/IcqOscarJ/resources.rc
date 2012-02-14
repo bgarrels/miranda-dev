@@ -8,7 +8,7 @@
 // Generated from the TEXTINCLUDE 2 resource.
 //
 #include "winres.h"
-#include "src/version.h"
+#include "version.h"
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
@@ -32,6 +32,9 @@ IDI_AUTH_GRANT          ICON                    "icos/auth_grant.ico"
 IDI_AUTH_REVOKE         ICON                    "icos/auth_revoke.ico"
 IDI_SERVLIST_ADD        ICON                    "icos/srvlist_add.ico"
 IDI_EXPANDSTRINGEDIT    ICON                    "changeinfo/expandst.ico"
+IDI_SERVICE_DISCOVERY   ICON                    "icos/service_discovery.ico"
+IDI_KEYS                ICON                    "icos/key.ico"
+IDI_SERVLIST_EDITOR     ICON                    "icos/srvlist_edit.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -144,7 +147,7 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,53,288,10
     CONTROL         "Notify me when a message delivery has failed (recommended)",IDC_SLOWSEND,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,65,288,10
-    CONTROL         "Use only server's acknowledgement (faster)",IDC_ONLYSERVERACKS,
+    CONTROL         "Never use legacy messaging (server acknowledgements)",IDC_ONLYSERVERACKS,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,77,288,10
     GROUPBOX        "Peer-to-peer Messaging",IDC_STATIC,4,95,302,41
     CONTROL         "Enable peer-to-peer message connections",IDC_DCENABLE,
@@ -199,40 +202,41 @@ STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
 EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    GROUPBOX        "Options",IDC_STATIC,4,4,305,81
+    GROUPBOX        "Options",IDC_STATIC,4,4,305,71
     CONTROL         "Enable popup support",IDC_POPUPS_ENABLED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,19,216,10
     CONTROL         "Display errors using popups",IDC_POPUPS_LOG_ENABLED,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,37,216,10
     CONTROL         "Display popup when spambot is detected",IDC_POPUPS_SPAM_ENABLED,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,50,216,10
-    GROUPBOX        "Look && Feel",IDC_STATIC,4,91,305,143
-    LTEXT           "Back Color",IDC_STATIC,80,104,42,8
-    LTEXT           "Text Color",IDC_STATIC,130,104,40,8
-    LTEXT           "Timeout (*)",IDC_STATIC,182,104,60,8
-    LTEXT           "Note",IDC_STATIC,12,116,60,8
-    CONTROL         "",IDC_POPUP_LOG0_BACKCOLOR,"ColourPicker",WS_TABSTOP,80,115,39,10
-    CONTROL         "",IDC_POPUP_LOG0_TEXTCOLOR,"ColourPicker",WS_TABSTOP,130,115,39,10
-    EDITTEXT        IDC_POPUP_LOG0_TIMEOUT,182,114,34,12,ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "Warning",IDC_STATIC,12,131,60,8
-    CONTROL         "",IDC_POPUP_LOG1_BACKCOLOR,"ColourPicker",WS_TABSTOP,80,130,39,10
-    CONTROL         "",IDC_POPUP_LOG1_TEXTCOLOR,"ColourPicker",WS_TABSTOP,130,130,39,10
-    EDITTEXT        IDC_POPUP_LOG1_TIMEOUT,182,129,34,12,ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "Error",IDC_STATIC,12,146,60,8
-    CONTROL         "",IDC_POPUP_LOG2_BACKCOLOR,"ColourPicker",WS_TABSTOP,80,145,39,10
-    CONTROL         "",IDC_POPUP_LOG2_TEXTCOLOR,"ColourPicker",WS_TABSTOP,130,145,39,10
-    EDITTEXT        IDC_POPUP_LOG2_TIMEOUT,182,144,34,12,ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "Fatal",IDC_STATIC,12,161,60,8
-    CONTROL         "",IDC_POPUP_LOG3_BACKCOLOR,"ColourPicker",WS_TABSTOP,80,160,39,10
-    CONTROL         "",IDC_POPUP_LOG3_TEXTCOLOR,"ColourPicker",WS_TABSTOP,130,160,39,10
-    EDITTEXT        IDC_POPUP_LOG3_TIMEOUT,182,159,34,12,ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "Spam detected",IDC_STATIC,12,176,60,8
-    CONTROL         "",IDC_POPUP_SPAM_BACKCOLOR,"ColourPicker",WS_TABSTOP,80,175,39,10
-    CONTROL         "",IDC_POPUP_SPAM_TEXTCOLOR,"ColourPicker",WS_TABSTOP,130,175,39,10
-    EDITTEXT        IDC_POPUP_SPAM_TIMEOUT,182,174,34,12,ES_AUTOHSCROLL | ES_NUMBER
-    CONTROL         "&Use Windows colors",IDC_USEWINCOLORS,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,12,194,220,8
-    CONTROL         "Use system &icons",IDC_USESYSICONS,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,12,207,220,8
-    DEFPUSHBUTTON   "Previe&w",IDC_PREVIEW,247,203,52,12
-    LTEXT           "(*) Timeouts require Popup v. 1.0.1.9 or later",IDC_STATIC,12,221,232,8
+    GROUPBOX        "Look && Feel",IDC_STATIC,4,80,305,160
+    LTEXT           "Back Color",IDC_STATIC,80,93,42,8
+    LTEXT           "Text Color",IDC_STATIC,130,93,40,8
+    LTEXT           "Timeout (*)",IDC_STATIC,182,93,60,8
+    LTEXT           "Note",IDC_STATIC,12,105,60,8
+    CONTROL         "",IDC_POPUP_LOG0_BACKCOLOR,"ColourPicker",WS_TABSTOP,80,104,39,10
+    CONTROL         "",IDC_POPUP_LOG0_TEXTCOLOR,"ColourPicker",WS_TABSTOP,130,104,39,10
+    EDITTEXT        IDC_POPUP_LOG0_TIMEOUT,182,103,34,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Warning",IDC_STATIC,12,120,60,8
+    CONTROL         "",IDC_POPUP_LOG1_BACKCOLOR,"ColourPicker",WS_TABSTOP,80,119,39,10
+    CONTROL         "",IDC_POPUP_LOG1_TEXTCOLOR,"ColourPicker",WS_TABSTOP,130,119,39,10
+    EDITTEXT        IDC_POPUP_LOG1_TIMEOUT,182,118,34,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Error",IDC_STATIC,12,135,60,8
+    CONTROL         "",IDC_POPUP_LOG2_BACKCOLOR,"ColourPicker",WS_TABSTOP,80,134,39,10
+    CONTROL         "",IDC_POPUP_LOG2_TEXTCOLOR,"ColourPicker",WS_TABSTOP,130,134,39,10
+    EDITTEXT        IDC_POPUP_LOG2_TIMEOUT,182,133,34,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Fatal",IDC_STATIC,12,150,60,8
+    CONTROL         "",IDC_POPUP_LOG3_BACKCOLOR,"ColourPicker",WS_TABSTOP,80,149,39,10
+    CONTROL         "",IDC_POPUP_LOG3_TEXTCOLOR,"ColourPicker",WS_TABSTOP,130,149,39,10
+    EDITTEXT        IDC_POPUP_LOG3_TIMEOUT,182,148,34,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Spam detected",IDC_STATIC,12,165,60,8
+    CONTROL         "",IDC_POPUP_SPAM_BACKCOLOR,"ColourPicker",WS_TABSTOP,80,164,39,10
+    CONTROL         "",IDC_POPUP_SPAM_TEXTCOLOR,"ColourPicker",WS_TABSTOP,130,164,39,10
+    EDITTEXT        IDC_POPUP_SPAM_TIMEOUT,182,163,34,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "&Use Windows colors",IDC_USEWINCOLORS,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,12,183,220,8
+    CONTROL         "Use system &icons",IDC_USESYSICONS,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,12,211,220,8
+    DEFPUSHBUTTON   "Previe&w",IDC_PREVIEW,247,192,52,12
+    LTEXT           "(*) Timeouts require Popup v. 1.0.1.9 or later",IDC_STATIC,12,225,232,8
+    CONTROL         "Use default colours",IDC_USEDEFCOLORS,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,12,196,221,10
 END
 
 IDD_INFO_ICQ DIALOGEX 0, 0, 222, 132
@@ -280,7 +284,7 @@ BEGIN
     COMBOBOX        IDC_GENDER,65,72,91,51,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Age:",IDC_STATIC,15,89,50,8
     COMBOBOX        IDC_AGERANGE,65,87,91,90,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Marital status:",IDC_STATIC,15,104,50,8
+    LTEXT           "Marital status:",IDC_STATIC,15,101,50,16
     COMBOBOX        IDC_MARITALSTATUS,65,102,91,90,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Keywords:",IDC_STATIC,15,119,50,8
     EDITTEXT        IDC_KEYWORDS,65,117,91,12,ES_AUTOHSCROLL
@@ -323,7 +327,7 @@ BEGIN
     LTEXT           "Keywords:",IDC_STATIC,188,179,40,8
     EDITTEXT        IDC_HOMEPAGEKEY,228,177,91,12,ES_AUTOHSCROLL
     GROUPBOX        "Other",IDC_OTHERGROUP,171,199,156,41
-    CONTROL         "Search online users only",IDC_ONLINEONLY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,178,217,142,10
+    CONTROL         "Search online users only",IDC_ONLINEONLY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,178,217,144,10
 END
 
 IDD_ICQUPLOADLIST DIALOGEX 0, 0, 358, 241
@@ -377,6 +381,20 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,91,59,50,14
 END
 
+IDD_CHANGEPASSWORD DIALOGEX 0, 0, 181, 79
+STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_3DLOOK | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Change Password"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LTEXT           "Current Password:",IDC_STATIC,7,8,81,8
+    EDITTEXT        IDC_OLDPASSWD,95,7,79,12,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "New Password:",IDC_STATIC,7,22,81,8
+    EDITTEXT        IDC_NEWPASSWD,95,21,79,12,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "Confirm New Password:",IDC_STATIC,7,36,81,8
+    EDITTEXT        IDC_NEWPASSWD2,95,35,79,12,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,38,58,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,92,58,50,14
+END
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -527,7 +545,7 @@ END
 2 TEXTINCLUDE 
 BEGIN
     "#include ""winres.h""\0"
-    "#include ""src/version.h""\0"
+    "#include ""version.h""\0"
 END
 
 3 TEXTINCLUDE 

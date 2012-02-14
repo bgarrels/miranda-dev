@@ -112,29 +112,29 @@ wstring mir_twitter::UrlGetQuery( const wstring& url )
 // oauthToken and oauthTokenSecret - need to be provided for every call, except for the first token request before authorizing
 // pin - only used during authorization, when the user enters the PIN they received from the twitter website
 wstring mir_twitter::OAuthWebRequestSubmit( 
-    const wstring& url, 
-    const wstring& httpMethod, 
+	const wstring& url, 
+	const wstring& httpMethod, 
 	const OAuthParameters *postData,
-    const wstring& consumerKey, 
-    const wstring& consumerSecret, 
+	const wstring& consumerKey, 
+	const wstring& consumerSecret, 
 	const wstring& oauthToken, 
-    const wstring& oauthTokenSecret, 
-    const wstring& pin
-    )
+	const wstring& oauthTokenSecret, 
+	const wstring& pin
+	)
 {
 	//WLOG("URL is %s", url);
-    wstring query = UrlGetQuery(url);
+	wstring query = UrlGetQuery(url);
 	//WLOG("query is %s", query);
-    OAuthParameters originalParameters = ParseQueryString(query);
+	OAuthParameters originalParameters = ParseQueryString(query);
 
-    OAuthParameters oauthSignedParameters = BuildSignedOAuthParameters(
-        originalParameters, 
-        url, 
-        httpMethod, postData,
-        consumerKey, consumerSecret, 
-        oauthToken, oauthTokenSecret, 
-        pin );
-    return OAuthWebRequestSubmit(oauthSignedParameters, url);
+	OAuthParameters oauthSignedParameters = BuildSignedOAuthParameters(
+		originalParameters, 
+		url, 
+		httpMethod, postData,
+		consumerKey, consumerSecret, 
+		oauthToken, oauthTokenSecret, 
+		pin );
+	return OAuthWebRequestSubmit(oauthSignedParameters, url);
 }
 
 wstring mir_twitter::OAuthWebRequestSubmit( 

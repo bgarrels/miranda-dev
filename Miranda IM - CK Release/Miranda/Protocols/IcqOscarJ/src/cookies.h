@@ -24,15 +24,16 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/cookies.h $
-// Revision       : $Revision: 11353 $
-// Last change on : $Date: 2010-03-10 01:21:03 +0100 (Mi, 10. Mrz 2010) $
-// Last change by : $Author: jokusoftware $
+// Revision       : $Revision: 14075 $
+// Last change on : $Date: 2012-02-11 15:41:20 +0100 (Sa, 11. Feb 2012) $
+// Last change by : $Author: borkra $
 //
 // DESCRIPTION:
 //
 //  Describe me here please...
 //
 // -----------------------------------------------------------------------------
+
 #ifndef __COOKIES_H
 #define __COOKIES_H
 
@@ -88,14 +89,8 @@ struct cookie_message_data
   DWORD dwMsgID2;
   WORD bMessageType;
   BYTE nAckType;
-};
-
-
-struct cookie_message_data_ext: public cookie_message_data
-{
   BYTE isOffline;
 };
-
 
 #define REQUESTTYPE_OWNER        0
 #define REQUESTTYPE_USERAUTO     1

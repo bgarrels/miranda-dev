@@ -1,5 +1,5 @@
 /*
- * $Id: yahoo.h 13596 2011-04-15 19:07:23Z george.hazan $
+ * $Id: yahoo.h 14085 2012-02-13 10:55:56Z george.hazan $
  *
  * myYahoo Miranda Plugin 
  *
@@ -13,8 +13,7 @@
 #ifndef _YAHOO_YAHOO_H_
 #define _YAHOO_YAHOO_H_
 
-#define MIRANDA_VER 0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER 0x0A00
 
 extern "C"
 {

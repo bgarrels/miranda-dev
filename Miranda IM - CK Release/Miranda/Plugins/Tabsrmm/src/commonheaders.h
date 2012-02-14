@@ -54,8 +54,7 @@
 #define _WIN32_IE 0x0501
 #define WIN32_LEAN_AND_MEAN
 
-#define MIRANDA_VER 0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER 0x0A00
 
 #include <m_stdhdr.h>
 

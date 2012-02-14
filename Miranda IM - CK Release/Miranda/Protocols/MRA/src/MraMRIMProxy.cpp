@@ -3,7 +3,6 @@
 #include "proto.h"
 
 
-
 typedef struct
 {
 	LPSTR			lpszEMail;		// LPS to

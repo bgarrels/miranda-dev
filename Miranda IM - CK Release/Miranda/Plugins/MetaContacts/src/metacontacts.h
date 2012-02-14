@@ -1,7 +1,7 @@
 /*
 MetaContacts Plugin for Miranda IM.
 
-Copyright © 2004-2012 Universite Louis PASTEUR, STRASBOURG.
+Copyright © 2004 Universite Louis PASTEUR, STRASBOURG.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -28,8 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define _WIN32_WINNT 0x0400
 #define _WIN32_IE 0x0300
 
-#define MIRANDA_VER 0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER 0x0A00
 
 #include <m_stdhdr.h>
 
@@ -37,12 +36,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <commctrl.h>
 #include <string.h>
 #include <time.h>
-#include "../include/resource.h"
+#include "resource.h"
 
-//own
 #include "m_metacontacts.h"
 
-//Miranda IM
 #include <newpluginapi.h>
 #include <m_clist.h>
 #include <m_clui.h>

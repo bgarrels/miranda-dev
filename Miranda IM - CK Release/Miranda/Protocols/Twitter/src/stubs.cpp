@@ -1,5 +1,5 @@
 /*
-Copyright © 2009 Jim Porter
+Copyright © 2012 Jim Porter
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -69,7 +69,7 @@ int TwitterProto::FileResume(HANDLE hTransfer,int *action,const char **filename)
 }
 
 HANDLE TwitterProto::SearchByName(const char *nick,const char *first_name,
-                                  const char *last_name)
+								  const char *last_name)
 {
 	return 0;
 }

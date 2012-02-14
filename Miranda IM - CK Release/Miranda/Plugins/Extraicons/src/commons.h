@@ -37,9 +37,8 @@
 #include <algorithm>
 using namespace std;
 
-// Miranda IM headers
-#define MIRANDA_VER 0x0900
-#define MIRANDA_CUSTOM_LP
+// Miranda headers
+#define MIRANDA_VER 0x0A00
 
 #include <newpluginapi.h>
 #include <m_system.h>
@@ -61,7 +60,7 @@ using namespace std;
 
 #include "mir_icons.h"
 
-#include "../resource.h"
+#include "resource.h"
 #include "m_extraicons.h"
 
 #include "ExtraIcon.h"

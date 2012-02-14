@@ -817,6 +817,9 @@
     <None Include="res\icon_all.ico">
       <Filter>Resources Files</Filter>
     </None>
+    <None Include="..\Docs\Important Plugin Changes For Plugin Authors.txt">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">

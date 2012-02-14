@@ -7,9 +7,6 @@
 #endif // _MSC_VER > 1000
 
 
-
-
-
 DWORD			MraAvatarsQueueInitialize			(HANDLE *phAvatarsQueueHandle);
 void			MraAvatarsQueueDestroy				(HANDLE hAvatarsQueueHandle);
 

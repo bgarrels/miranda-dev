@@ -18,12 +18,12 @@
 
 typedef struct mrim_packet_header_t
 {
-    u_long      magic;		// Magic
-    u_long      proto;		// Версия протокола
-    u_long      seq;		// Sequence
-    u_long      msg;		// Тип пакета
-    u_long      dlen; 		// Длина данных
-    u_char		reserved[24];	// Зарезервировано
+	u_long      magic;			// Magic
+	u_long      proto;			// Версия протокола
+	u_long      seq;			// Sequence
+	u_long      msg;			// Тип пакета
+	u_long      dlen; 			// Длина данных
+	u_char		reserved[24];	// Зарезервировано
 }
 mrim_packet_header_t;
 
@@ -232,8 +232,8 @@ mrim_packet_header_t;
 // [LPS multichat_data]
 //		CLPS members (>= 1.20)
 //		[ LPS owner ]
-    #define ADD_CONTACT_FLAG_MYMAIL_INVITE		0x00000001
-    #define ADD_CONTACT_FLAG_MULTICHAT_ATTACHE	0x00000002
+	#define ADD_CONTACT_FLAG_MYMAIL_INVITE		0x00000001
+	#define ADD_CONTACT_FLAG_MULTICHAT_ATTACHE	0x00000002
 	//used internal in win32 agent
 	#define CONTACT_AWAITING_AUTHORIZATION_USER	0x00000100
 	#define CONTACT_FLAG_TEMPORARY				0x00010000 

@@ -16,8 +16,7 @@
 #include <stdio.h>
 #include <direct.h>			//For _chdir()
 
-#define MIRANDA_VER 0x0600
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER 0x0A00
 
 #include <commctrl.h>		//For hotkeys
 #include "win2k.h"

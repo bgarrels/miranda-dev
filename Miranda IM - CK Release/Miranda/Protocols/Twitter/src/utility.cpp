@@ -1,5 +1,5 @@
 /*
-Copyright © 2009 Jim Porter
+Copyright © 2012 Jim Porter
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 std::string b64encode(const std::string &s)
 {
 	NETLIBBASE64 encode;
-	encode.cbDecoded = s.length();
+	encode.cbDecoded = (int)s.length();
 	encode.pbDecoded = (BYTE*)s.c_str();
 	encode.cchEncoded = Netlib_GetBase64EncodedBufferSize(encode.cbDecoded);
 	encode.pszEncoded = new char[encode.cchEncoded+1];

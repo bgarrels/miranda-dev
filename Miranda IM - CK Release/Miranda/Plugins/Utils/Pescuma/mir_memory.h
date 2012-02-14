@@ -117,7 +117,7 @@ static int strcmpnullW(WCHAR *str1, WCHAR *str2)
 
 
 // Free memory and set to NULL
-//#define MIR_FREE(_x_) if (_x_ != NULL) { mir_free(_x_); _x_ = NULL; }
+#define MIR_FREE(_x_) if (_x_ != NULL) { mir_free(_x_); _x_ = NULL; }
 
 
 

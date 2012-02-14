@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13897 $
-Last change on : $Date: 2011-11-02 01:04:30 +0100 (Mi, 02. Nov 2011) $
-Last change by : $Author: borkra $
+Revision       : $Revision: 14085 $
+Last change on : $Date: 2012-02-13 11:55:56 +0100 (Mo, 13. Feb 2012) $
+Last change by : $Author: george.hazan $
 
 */
 
@@ -32,7 +32,7 @@ Last change by : $Author: borkra $
 	#pragma warning(disable:4706 4121 4127)
 #endif
 
-#define MIRANDA_VER 0x1000
+#define MIRANDA_VER 0x0A00
 
 #include "m_stdhdr.h"
 

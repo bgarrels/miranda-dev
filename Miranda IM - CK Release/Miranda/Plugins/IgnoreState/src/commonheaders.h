@@ -21,8 +21,7 @@
 #ifndef COMMHEADERS_H
 #define COMMHEADERS_H
 
-#define MIRANDA_VER    0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER    0x0A00
 //#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
 #define _WIN32_WINNT 0x0501
@@ -35,7 +34,7 @@
 //needed by m_utils.h
 #include <stdio.h>
 
-// needed by m_icolib.h
+// needed by m_icolib.h > r9256
 #include <stddef.h>
 
 
@@ -55,7 +54,7 @@
 #include <m_langpack.h>
 #include <m_icolib.h>
 #include "resource.h"
-#include "../Version.h"
+#include "Version.h"
 
 //external SDK headers
 #include <m_cluiframes.h>

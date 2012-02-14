@@ -1,6 +1,7 @@
 #if !defined(AFX_MRA_H__F58D13FF_F6F2_476C_B8F0_7B9E9357CF48__INCLUDED_)
 #define AFX_MRA_H__F58D13FF_F6F2_476C_B8F0_7B9E9357CF48__INCLUDED_
 
+
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
@@ -15,7 +16,7 @@
 #define WINVER       0x0502
 #define _WIN32_WINNT 0x0502
 
-#define MIRANDA_VER 0x0900
+#define MIRANDA_VER 0x0A00
 
 #include <windows.h>
 #include <wincrypt.h>
@@ -31,7 +32,7 @@
 #include <commctrl.h>
 #include <uxtheme.h>
 
-// Miranda IM
+// miranda API
 #include <newpluginapi.h>
 #include <m_system.h>
 #include <m_protocols.h>
@@ -64,7 +65,7 @@
 #include <m_music.h>
 #include <m_proto_listeningto.h>
 
-//ExternalSDK
+//sdk
 #include <timefuncs.h>
 #include "zlib.h"
 #include <DebugFunctions.h>
@@ -84,8 +85,8 @@
 #include <RC4.h>
 #include <SHA1.h>
 
-#include "../resource.h"
-#include "../xstatus_MRA/resource.h"
+#include "resource.h"
+#include ".\xstatus_MRA\resource.h"
 #include "proto.h"
 #include "MraSendQueue.h"
 #include "MraFilesQueue.h"
@@ -99,12 +100,6 @@
 
 typedef int (*PUNCOMPRESS)(unsigned char*,DWORD*,unsigned char*,DWORD);
 typedef int (*PCOMPRESS2)(unsigned char*,DWORD*,unsigned char*,DWORD,int);
-
-extern "C"
-{
-	extern struct MD5_INTERFACE  md5i;
-	extern struct tagPLUGINLINK* pluginLink;
-};
 
 // LPS
 typedef struct

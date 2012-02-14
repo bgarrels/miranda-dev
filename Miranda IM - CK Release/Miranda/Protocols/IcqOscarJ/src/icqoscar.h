@@ -1,46 +1,41 @@
-/* -----------------------------------------------------------------------------
-				ICQ plugin for Miranda Instant Messenger
-				  ________________________________________
+// ---------------------------------------------------------------------------80
+//                ICQ plugin for Miranda Instant Messenger
+//                ________________________________________
+//
+// Copyright © 2000-2001 Richard Hughes, Roland Rabien, Tristan Van de Vreede
+// Copyright © 2001-2002 Jon Keating, Richard Hughes
+// Copyright © 2002-2004 Martin Öberg, Sam Kothari, Robert Rainwater
+// Copyright © 2004-2010 Joe Kucera
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//
+// -----------------------------------------------------------------------------
+//
+// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icqoscar.h $
+// Revision       : $Revision: 14085 $
+// Last change on : $Date: 2012-02-13 11:55:56 +0100 (Mo, 13. Feb 2012) $
+// Last change by : $Author: george.hazan $
+//
+// DESCRIPTION:
+//
+// Includes all header files that should be precompiled to speed up compilation.
+//
+// -----------------------------------------------------------------------------
 
- Copyright © 2000-2001 Richard Hughes, Roland Rabien, Tristan Van de Vreede
- Copyright © 2001-2002 Jon Keating, Richard Hughes
- Copyright © 2002-2004 Martin Öberg, Sam Kothari, Robert Rainwater
- Copyright © 2004-2010 Joe Kucera
+#define MIRANDA_VER 0x0A00
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
- -----------------------------------------------------------------------------
-
- File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icqoscar.h $
- Revision       : $Revision: 13596 $
- Last change on : $Date: 2011-04-15 21:07:23 +0200 (Fr, 15. Apr 2011) $
- Last change by : $Author: george.hazan $
-
- DESCRIPTION:
-
- Includes all header files that should be precompiled to speed up compilation.
- ^^ and thats bullshit, it's not faster .... 
- it was faster for ... hm, 5 years ... 
-
- ----------------------------------------------------------------------------- */
-
-
-//Core
-#define MIRANDA_VER 0x1000
-
-//Which windows version
 #define _WIN32_WINNT 0x0501
 #define _WIN32_IE 0x0501
 
@@ -99,7 +94,7 @@
 #include <win2k.h>
 
 // Project resources
-#include "../resource.h"
+#include "resource.h"
 
 // ICQ plugin includes
 #include "version.h"
@@ -133,14 +128,15 @@
 #include "icq_advsearch.h"
 #include "icq_uploadui.h"
 #include "log.h"
-#include "../UI/askauthentication.h"
-#include "../UI/userinfotab.h"
-#include "../UI/loginpassword.h"
+#include "UI/askauthentication.h"
+#include "UI/userinfotab.h"
+#include "UI/loginpassword.h"
 
 #include "icq_rates.h"
+
 #include "icq_avatar.h"
 
-#include "../changeinfo/changeinfo.h"
+#include "changeinfo/changeinfo.h"
 #include "icq_popups.h"
 #include "icq_proto.h"
 

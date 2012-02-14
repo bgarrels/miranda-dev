@@ -75,13 +75,12 @@ typedef Matcher _TMatcher;
 
 #define _MT
 
-#include "../resource.h"
+#include "resource.h"
 
 #pragma warning( push )
 #pragma warning( disable : 4100 )
-#define MIRANDA_VER 0x0600
+#define MIRANDA_VER 0x0A00
 #define NETLIB_NOLOGGING
-#define MIRANDA_CUSTOM_LP
 
 #include <win2k.h>
 #include <newpluginapi.h>

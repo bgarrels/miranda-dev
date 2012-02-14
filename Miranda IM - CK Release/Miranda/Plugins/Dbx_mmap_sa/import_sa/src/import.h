@@ -23,7 +23,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 //#define _LOGGING   1
 
-#define MIRANDA_VER 0x0900
+#define MIRANDA_VER 0x0A00
+
 #define WINVER 0x0501
 #define _WIN32_WINNT 0x0501
 #define _WIN32_IE 0x0501
@@ -50,7 +51,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <m_clist.h>
 
 // Unsane: none
-#include "../resource.h"
+#include "resource.h"
 
 // ** Global constants
 
@@ -61,7 +62,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define IMP_KEY_FR      "FirstRun"   // First run
 
 
-#define WIZM_GOTOPAGE    (WM_USER+10)		//wParam=resource id, lParam=dlgproc
+#define WIZM_GOTOPAGE    (WM_USER+10)	//wParam=resource id, lParam=dlgproc
 #define WIZM_DISABLEBUTTON  (WM_USER+11)    //wParam=0:back, 1:next, 2:cancel
 #define WIZM_SETCANCELTEXT  (WM_USER+12)    //lParam=(char*)newText
 #define WIZM_ENABLEBUTTON   (WM_USER+13)    //wParam=0:back, 1:next, 2:cancel

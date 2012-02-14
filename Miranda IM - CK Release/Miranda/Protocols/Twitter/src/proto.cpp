@@ -1,5 +1,5 @@
 /*
-Copyright © 2009 Jim Porter
+Copyright © 2012 Jim Porter
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "theme.h"
 #include "ui.h"
 
-//ExternalApi
+//ExternalAPI
 #include "m_folders.h"
 #include "m_historyevents.h"
 
@@ -127,9 +127,9 @@ DWORD_PTR TwitterProto::GetCaps(int type,HANDLE hContact)
 	case PFLAG_MAXLENOFMESSAGE:
 		return 159; // 140 + <max length of a users name (15 apparently)> + 4 ("RT @").  this allows for the new style retweets
 	case PFLAG_UNIQUEIDTEXT:
-		return (int) "Username";
+		return (DWORD_PTR) "Username";
 	case PFLAG_UNIQUEIDSETTING:
-		return (int) TWITTER_KEY_UN;
+		return (DWORD_PTR) TWITTER_KEY_UN;
 	}
 	return 0;
 }
@@ -252,7 +252,7 @@ int TwitterProto::SvcCreateAccMgrUI(WPARAM wParam,LPARAM lParam)
 
 int TwitterProto::GetName(WPARAM wParam,LPARAM lParam)
 {
-	lstrcpynA(reinterpret_cast<char*>(lParam),m_szProtoName,wParam);
+	lstrcpynA(reinterpret_cast<char*>(lParam),m_szProtoName,(int)wParam);
 	return 0;
 }
 

@@ -38,8 +38,7 @@ Boston, MA 02111-1307, USA.
 #define _WIN32_IE 0x0600	// Change this to the appropriate value to target other versions of IE.
 #endif
 
-#define MIRANDA_VER		0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER		0x0A00
 
 #include <m_stdhdr.h>
 
@@ -51,7 +50,6 @@ Boston, MA 02111-1307, USA.
 #include <time.h>
 #include <windowsx.h>
 
-//Miranda IM
 #include <win2k.h>
 #include <newpluginapi.h>
 #include <statusmodes.h>
@@ -78,9 +76,7 @@ Boston, MA 02111-1307, USA.
 #include <m_utils.h>
 #include <m_icq.h>
 
-#include "../resource.h"
-
-//ExternalAPI
+#include "resource.h"
 #include "m_tipper.h"
 #include "m_fingerprint.h"
 #include "m_flags.h"

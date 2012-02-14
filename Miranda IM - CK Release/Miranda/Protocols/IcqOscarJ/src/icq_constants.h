@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_constants.h $
-// Revision       : $Revision: 13915 $
-// Last change on : $Date: 2011-11-08 00:09:29 +0100 (Di, 08. Nov 2011) $
-// Last change by : $Author: george.hazan $
+// Revision       : $Revision: 14075 $
+// Last change on : $Date: 2012-02-11 15:41:20 +0100 (Sa, 11. Feb 2012) $
+// Last change by : $Author: borkra $
 //
 // DESCRIPTION:
 //
@@ -38,7 +38,7 @@
 // Oscar documentation at http://iserverd.khstu.ru/oscar/index.html
 // BIG THANKS to Alexandr for maintaining this site and to everyone
 // in the ICQ devel community who have helped to collect the data.
-// -----------------------------------------------------------------------------
+
 #ifndef __ICQ_CONSTANTS_H
 #define __ICQ_CONSTANTS_H
 
@@ -87,7 +87,7 @@
 #define DEFAULT_KILLSPAM_ENABLED    1
 
 #define DEFAULT_SLOWSEND            1
-#define DEFAULT_ONLYSERVERACKS      0
+#define DEFAULT_ONLYSERVERACKS      1
 
 #define DEFAULT_POPUPS_ENABLED      1
 #define DEFAULT_SPAM_POPUPS_ENABLED 1

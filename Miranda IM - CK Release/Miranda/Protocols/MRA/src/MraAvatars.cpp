@@ -328,7 +328,7 @@ void MraAvatarsThreadProc(LPVOID lpParameter)
 									if(IsFileExistA(szFileName))
 									{
 										dwAvatarFormat=MraAvatarsGetFileFormat(szFileName,dwFileNameSize);
-                                        bFailed=FALSE;
+										bFailed=FALSE;
 									}else{//loading default avatar
 										bDownloadNew=TRUE;
 									}
@@ -428,7 +428,7 @@ void MraAvatarsThreadProc(LPVOID lpParameter)
 				pai.format=dwAvatarFormat;
 				if (DBGetContactSettingByte(NULL,MRA_AVT_SECT_NAME,"ReturnAbsolutePath",MRA_AVT_DEFAULT_RET_ABC_PATH))
 				{
-                    lstrcpynA(pai.filename,szFileName,SIZEOF(pai.filename));
+					lstrcpynA(pai.filename,szFileName,SIZEOF(pai.filename));
 				}else{
 					CallService(MS_UTILS_PATHTORELATIVE,(WPARAM)szFileName,(LPARAM)pai.filename);
 				}
