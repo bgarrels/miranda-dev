@@ -1,8 +1,9 @@
 #include "headers.h"
 #include "main.h"
 #include "shake.h"
+
+//Miranda stuff
 #include "m_msg_buttonsbar.h"
-#include "m_ignore.h"
 
 
 int nProtocol = 0;
@@ -15,7 +16,9 @@ CShake shake;
 CNudge GlobalNudge;
 
 MM_INTERFACE mmi;
+#ifdef UNICODE
 UTF8_INTERFACE utfi;
+#endif
 int hLangpack = 0;
 
 
@@ -26,58 +29,27 @@ PLUGININFOEX pluginInfo={
 	sizeof(PLUGININFOEX),
 #ifdef WIN64
 	"Nudge (x64)",
-#else
+#elif UNICODE
 	"Nudge",
+#else
+	"Nudge (ANSI)",
 #endif
-	PLUGIN_MAKE_VERSION(0,0,1,19),
+	PLUGIN_MAKE_VERSION(0,0,2,0),
 	"Plugin to shake the clist and chat window",
-	"Tweety/GouZ",
-	"francois.mean@skynet.be / Sylvain.gougouzian@gmail.com ",
+	"Tweety/GouZ, FREAK_THEMIGHTY",
+	"francois.mean@skynet.be, Sylvain.gougouzian@gmail.com, wishmaster51@googlemail.com",
 	"copyright to the miranda community",
-	"http://addons.miranda-im.org/details.php?action=viewfile&id=2708",		// www
+	"http://addons.miranda-im.org/",		// www
 	UNICODE_AWARE,
 	0,		//doesn't replace anything built-in
 #ifdef WIN64
 	{ 0xf6f60ea4, 0xfa8e, 0x4d17, { 0xb2, 0x9d, 0xff, 0x74, 0x1a, 0x3c, 0xc, 0x51 } } // {F6F60EA4-FA8E-4D17-B29D-FF741A3C0C51}
+#elif UNICODE
+	{ 0xe47cc215, 0xd28, 0x462d, { 0xa0, 0xf6, 0x3a, 0xe4, 0x44, 0x3d, 0x29, 0x26 } } // {E47CC215-0D28-462D-A0F6-3AE4443D2926}
 #else
 	{ 0x9ceee701, 0x35cd, 0x4ff7, { 0x8c, 0xc4, 0xef, 0x7d, 0xd2, 0xac, 0x53, 0x5c } }	// {9CEEE701-35CD-4ff7-8CC4-EF7DD2AC535C}
 #endif
 };
-
-/*
-NudgeOptInit
-*************************** */
-int NudgeOptInit(WPARAM wParam,LPARAM lParam);
-
-int Preview();
-
-HANDLE Nudge_GethContact(HANDLE);
- 
-void RegisterToUpdate(void)
-{
-	//Use for the Updater plugin
-	if(ServiceExists(MS_UPDATE_REGISTER)) 
-	{
-		Update update = {0};
-		char szVersion[16];
-
-		update.szComponentName = pluginInfo.shortName;
-		update.pbVersion = (BYTE *)CreateVersionStringPluginEx(&pluginInfo, szVersion);
-		update.cpbVersion = (int)strlen((char *)update.pbVersion);
-		update.szUpdateURL = UPDATER_AUTOREGISTER;
-		update.szVersionURL = "http://addons.miranda-im.org/details.php?action=viewfile&id=2708";
-		update.pbVersionPrefix = (BYTE *)"<span class=\"fileNameHeader\">Nudge ";
-		update.szBetaUpdateURL = "http://www.miranda-fr.net/tweety/Nudge/Nudge.zip";
-		update.szBetaVersionURL = "http://www.miranda-fr.net/tweety/Nudge/Nudge_beta.html";
-		update.pbBetaVersionPrefix = (BYTE *)"Nudge version ";
-
-		update.cpbVersionPrefix = (int)strlen((char *)update.pbVersionPrefix);
-		update.cpbBetaVersionPrefix = (int)strlen((char *)update.pbBetaVersionPrefix);
-
-		CallService(MS_UPDATE_REGISTER, 0, (WPARAM)&update);
-
-	}
-}
 
 INT_PTR NudgeShowMenu(WPARAM wParam,LPARAM lParam)
 {	
@@ -295,19 +267,19 @@ extern "C" __declspec(dllexport) const MUUID * MirandaPluginInterfaces(void)
 
 static INT_PTR CALLBACK DlgProcOptsTrigger(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
-	switch (msg) {
+    switch (msg) {
 	case WM_INITDIALOG: {
 		// lParam = (LPARAM)(DWORD)actionID or 0 if this is a new trigger entry
 		BOOL bshakeClist,bshakeChat;
 		
 		DWORD actionID = (DWORD)lParam;
-		TranslateDialogDefault(hwnd);
+        TranslateDialogDefault(hwnd);
 		// Initialize the dialog according to the action ID
 		bshakeClist = DBGetActionSettingByte(actionID, NULL, "Nudge", "ShakeClist",FALSE);
 		bshakeChat = DBGetActionSettingByte(actionID, NULL, "Nudge", "ShakeChat",FALSE);
 		CheckDlgButton(hwnd, IDC_TRIGGER_SHAKECLIST, bshakeClist ? BST_CHECKED : BST_UNCHECKED);
 		CheckDlgButton(hwnd, IDC_TRIGGER_SHAKECHAT, bshakeChat ? BST_CHECKED : BST_UNCHECKED);
-		break;
+        break;
 						}
 
 	case TM_ADDACTION: {
@@ -324,7 +296,7 @@ static INT_PTR CALLBACK DlgProcOptsTrigger(HWND hwnd, UINT msg, WPARAM wParam, L
 					   }
 	}
 
-	return FALSE;
+    return FALSE;
 }
 
 int TriggerActionRecv( DWORD actionID, REPORTINFO *ri)
@@ -435,9 +407,9 @@ void RegisterToTrigger(void)
 
 void RegisterToDbeditorpp(void)
 {
-	// known modules list
-	if (ServiceExists("DBEditorpp/RegisterSingleModule"))
-		CallService("DBEditorpp/RegisterSingleModule", (WPARAM)"Nudge", 0);
+    // known modules list
+    if (ServiceExists("DBEditorpp/RegisterSingleModule"))
+        CallService("DBEditorpp/RegisterSingleModule", (WPARAM)"Nudge", 0);
 }
 
 void LoadIcons(void)
@@ -497,14 +469,14 @@ void HideNudgeButton(HANDLE hContact)
 	mir_snprintf(str,MAXMODULELABELLENGTH + 12,"%s/SendNudge", szProto);
 
 	if (!ServiceExists(str)) 
-	{ 
-	  BBButton bbd={0}; 
-	  bbd.cbSize=sizeof(BBButton); 
-	  bbd.bbbFlags=BBSF_HIDDEN|BBSF_DISABLED; 
-	  bbd.pszModuleName="Nudge";
+    { 
+      BBButton bbd={0}; 
+      bbd.cbSize=sizeof(BBButton); 
+      bbd.bbbFlags=BBSF_HIDDEN|BBSF_DISABLED; 
+      bbd.pszModuleName="Nudge";
 	  bbd.dwButtonID = 6000;
-	  CallService(MS_BB_SETBUTTONSTATE, (WPARAM)hContact, (LPARAM)&bbd); 
-	} 
+      CallService(MS_BB_SETBUTTONSTATE, (WPARAM)hContact, (LPARAM)&bbd); 
+    } 
 } 
 
 static int ContactWindowOpen(WPARAM wparam,LPARAM lParam) 
@@ -513,16 +485,13 @@ static int ContactWindowOpen(WPARAM wparam,LPARAM lParam)
 
    if(MWeventdata->uType == MSG_WINDOW_EVT_OPENING&&MWeventdata->hContact) 
    { 
-	  HideNudgeButton(MWeventdata->hContact); 
+      HideNudgeButton(MWeventdata->hContact); 
    } 
    return 0; 
 }
 
 int ModulesLoaded(WPARAM,LPARAM)
 {
-#ifndef WIN64
-	RegisterToUpdate();
-#endif
 	RegisterToTrigger();
 	RegisterToDbeditorpp();
 	LoadProtocols();
@@ -562,11 +531,13 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 		MessageBox(NULL,_T("Cannot retrieve Miranda Memory Manager Interface.\nYou need to update Miranda IM to the latest version."),_T("Nudge Plugin"),MB_OK);
 		return 1;
 	}
+#ifdef UNICODE
 	if(mir_getUTFI(&utfi))
 	{
 		MessageBox(NULL,_T("Cannot retrieve Miranda UTF8 Interface.\nYou need to update Miranda IM to the latest version."),_T("Nudge Plugin"),MB_OK);
 		return 1;
 	}
+#endif
 	mir_getLP(&pluginInfo);
 
 	g_hEventModulesLoaded = HookEvent(ME_SYSTEM_MODULESLOADED,ModulesLoaded);

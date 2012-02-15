@@ -221,8 +221,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,1,19
- PRODUCTVERSION 0,0,1,19
+ FILEVERSION 0,0,2,0
+ PRODUCTVERSION 0,0,2,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -240,12 +240,12 @@ BEGIN
             VALUE "Comments", "Plugin that render nudge events from different protocols"
             VALUE "CompanyName", "Miranda community"
             VALUE "FileDescription", "Nudge plugin for Miranda-IM"
-            VALUE "FileVersion", "0, 0, 1, 19"
+            VALUE "FileVersion", "0, 0, 2, 0"
             VALUE "InternalName", "Nudge"
             VALUE "LegalCopyright", "Copyright © 2006-2011"
             VALUE "OriginalFilename", "nudge.dll"
             VALUE "ProductName", "nudge"
-            VALUE "ProductVersion", "0, 0, 1, 19"
+            VALUE "ProductVersion", "0, 0, 2, 0"
         END
     END
     BLOCK "VarFileInfo"
