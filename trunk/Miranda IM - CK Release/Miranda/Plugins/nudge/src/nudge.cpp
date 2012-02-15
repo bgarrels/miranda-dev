@@ -102,6 +102,8 @@ void CNudgeElement::Load(void)
 			_tcsncpy(this->recText,TranslateT("You received a nudge"),TEXT_LEN);
 		DBFreeVariant(&dbv);
 	}
+	else
+		_tcsncpy(this->recText,TranslateT("You received a nudge"),TEXT_LEN);
 	mir_snprintf(SectionName,512,"%s-senText", ProtocolName);
 	if(!DBGetContactSettingTString(NULL,"Nudge",SectionName,&dbv)) 
 	{
@@ -110,4 +112,6 @@ void CNudgeElement::Load(void)
 			_tcsncpy(this->senText,TranslateT("You sent a nudge"),TEXT_LEN);
 		DBFreeVariant(&dbv);
 	}
+	else
+		_tcsncpy(this->senText,TranslateT("You sent a nudge"),TEXT_LEN);
 }
