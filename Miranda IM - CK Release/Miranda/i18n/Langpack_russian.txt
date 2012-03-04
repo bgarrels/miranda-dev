@@ -11,7 +11,7 @@ Authors: Mataes, Mikel-Ard-Ri, mitrich, Navy, NightFox, Oleg Makovski, PoWeR, Ra
 Authors: Sergey Morozov, SergoZD, Sledge, theMIROn, thundred, Valery Bragin,
 Authors: Viktor Shanin, Vjacheslav Ogrenich, Vladimir Rozhkovskiy aka Voron, 
 Authors: Yevgeny, YurasiK, Yury A. Marcinchick
-; FLID: Russian Language Pack 7.0.2
+; FLID: Russian Language Pack 7.0.3
 
 ;============================================================
 ;  File: miranda32.exe
@@ -6358,6 +6358,32 @@ INI файлы
 Повторить
 [Current age]
 Текущий возраст
+[History Log]
+Просмотр истории
+[Monday]
+Понедельник
+[Tuesday]
+Вторник
+[Wednesday]
+Среда
+[Thursday]
+Четверг
+[Friday]
+Пятница
+[Saturday]
+Суббота
+[Sunday]
+Воскресенье
+[This operation will PERMANENTLY REMOVE all history for this contact.\nAre you sure you want to do this?]
+Эта операция полностью удалит историю этого контакта.\nВы уверены?
+["%s" not found]
+"%s" не найдено
+[You've entered invalid codepage. Select codepage from combo box or enter correct number.]
+Вы ввели неверную кодовую страницу. Выберите кодовую страницу из выпадающего списка или введите правильное имя.
+[Invalid codepage]
+Неверная кодовая страница
+[Scheduler]
+Планировщик
 
 #muuid {2f30f130-9749-4523-91c9-28b7e9779dcd}
 ;============================================================
@@ -6587,8 +6613,6 @@ INI файлы
 Упакованная структура
 [NativeInt]
 Системное целое
-[Scheduler]
-Планировщик
 [Starting from]
 Начать с
 [Starting after]
@@ -6671,7 +6695,7 @@ INI файлы
 ;  Source: http://miranda.googlecode.com/svn/trunk/miranda/plugins/freeimage/
 ;  Authors: Nightwish, The FreeImage project
 ;============================================================
-[Generic image services for Miranda IM]
+[Generic image services for Miranda IM.]
 Общая служба изображений в Miranda IM.
 
 #muuid {f0fdf73a-753d-499d-8dba-336db79cdd41}
@@ -7853,6 +7877,20 @@ XML файлы
 Имя фильтра существует
 [Event already exists]
 Событие уже существует
+[File do not exist. Enter correct file path.]
+Файл отсутствует. Введи верный путь к файлу.
+[Invalid file]
+Неверный файл
+[Invalid '%s' value.]
+Неверное значение '%s'.
+[Invalid '%s' value.\n%s]
+Неверное значение '%s'.\n%s
+[At least one contact should be selected.]
+Должен быть выбран, хотя бы один контакт
+[To create session open WinSCP, click New Session,  enter data and save with specific name. Remember if FTP server using password you should save it in WinSCP.]
+Для создания сессии, откройте WinSCP, нажмите "Новая сессия", введите дату и сохраните под определённым именем. Помните, если FTP сервер использует пароль, то Вы должны сохранить его в WinSCP.
+[FTP path must contains '/' instead '\\' and starts from '/'.]
+FTP путь должен содержать '/' вместо '\ \' и начинаться с '/'.
 
 ;Options and Menus
 ;-------------------
@@ -7936,8 +7974,74 @@ XML файлы
 Полноценный HTML
 [Plain Html]
 Чистый HTML
-[Txt]
-Текст
+[Export To Rich Html]
+Экспорт в полноценный HTML
+[Export To Plain Html]
+Экспорт в чистый HTML
+[Export To Txt]
+Экспорт в текст
+[File encoding*]
+Кодировка файла*
+[External CSS file]
+Внешний файл CSS
+[* Choose encoding from combo box or enter code page number and name separated by semicolon, name is used in Content-Type header.]
+* Выберите кодировку из выпадающего списка или введите имя кодировки через точку с запятой, имя используется в заголовка типа содержимого.
+[WinSCP path]
+Путь к WinSCP
+[WinSCP log path]
+Путь к логам WinSCP
+[Add task]
+Добавить задачу
+[Edit task]
+Править задачу
+[Delete task]
+Удалить задачу
+[Action type]
+Тип действия
+[Events older than*]
+События старше чем*
+[Events older than]
+События старше чем
+[Triger type]
+Поведение
+[Delta time]
+Через время
+[Export to]
+Экспортировать в
+[Compress output files]
+Сжать файлы
+[Upload to FTP (WinSCP requred)]
+Залить на FTP (требуется WinSCP)
+[Upload to FTP]
+Залить на FTP
+[Session name]
+Имя сессии
+[Path to output file**]
+Путь к файлу**
+[Path to output file]
+Путь к файлу
+[* Use negative values to filter younger events]
+* Отрицательные значения для фильтрации ранних событий
+[** Use <date> to insert date, <ext> to insert extension, <contact> to insert contact name]
+** <date> - вставляет дату, <ext> - расширение, <contact> - имя контакта
+[Execute task for specified contacts]
+Выполнять задачу для определённых контактов
+[Export and Delete]
+Экспортировать и удалить
+[Minute]
+Минуты
+[Hour]
+Часы
+[At Start]
+При запуске
+[At Finish]
+При выходе
+[Delta time (minutes)]
+Через время (минуты)
+[Delta time (hours)]
+Через время (часы)
+[Task]
+Задача
 
 #muuid {2f07ea05-05b5-4ff0-875dc590da2ddac1}
 ;============================================================
@@ -12771,8 +12875,6 @@ EMail Express
 Продолжено снизу
 [Search: %s (F3 to find next)]
 Поиск: %s (F3 для продолжения)
-["%s" not found]
-"%s" не найдено
 [You have entered the wrong password]
 Вы ввели неверный пароль
 [%d event]
@@ -15222,6 +15324,8 @@ SNAC(4.1) Ошибка SENDMSG (x%02x)
 Передача файла прервана пользователем на той стороне.
 [Unable to connect to ICQ login server, SSL could not be negotiated]
 Невозможно установить SSL соединение с сервером ICQ
+[Failed to create the correct sub-group, the using closest parent group.]
+Не удалось создать правильную подгруппу, будет использована ближайшая родительская группа.
 
 ;  ДИАЛОГ УСТАНОВКИ хСТАТУСА
 
@@ -21445,8 +21549,6 @@ Wave файлы
 История включена
 [NoHistory]
 Без истории
-[This operation will PERMANENTLY REMOVE all history for this contact.\nAre you sure you want to do this?]
-Эта операция полностью удалит историю этого контакта.\nВы уверены?
 
 ;============================================================
 ;  File: NotifyAnything.dll 
@@ -21653,10 +21755,6 @@ HTTP подключение Pack Updater
 HTTP подключение Paste It
 
 ;Error messages
-[You've entered invalid codepage. Select codepage from combo box or enter correct number.]
-Вы ввели неверную кодовую страницу. Выберите кодовую страницу из выпадающего списка или введите правильный номер.
-[Invalid codepage]
-Неверная кодовая страница
 [You can only paste 1 file]
 Вы можете разместить только 1 файл
 [Cannot get data from clipboard]
@@ -23268,13 +23366,13 @@ Scriver - отправка и получение мгновенных сообщ
 [Enable tabs]
 Включить вкладки
 [Always show tab bar]
-Всегда показывать панель закладок
+Всегда показывать панель вкладок
 [Limit names on tabs to]
 Ограничить имена на вкладках
 [Show close button on each tab ]
-Кнопка закрытия на закладках
+Кнопка закрытия на вкладках
 [Switch to active tab]
-Переключаться на активную закладку
+Переключаться на активную вкладку
 [Limit number of tabs per window to]
 Ограничить число вкладок на окно
 [Use separate windows for group chats]
@@ -24674,6 +24772,8 @@ Miranda IM будет автоматически закрыта через %u с
 Включить автоответ
 [Turn off Autoanswer]
 Отключить автоответ
+[mins]
+мин.
 
 #muuid {768ce156-34ac-45a3-b53b-0083c47615c4}
 ;============================================================
@@ -32422,8 +32522,6 @@ ID города
 Показ текста
 [Extra Text]
 Доп. текст
-[History Log]
-Просмотр истории
 [External Log]
 Внешняя история
 [Popup Text]
@@ -33048,20 +33146,6 @@ URL полного прогноза погоды не установлен. Вы
 Падает
 [Moderate]
 Умеренный
-[Monday]
-Понедельник
-[Tuesday]
-Вторник
-[Wednesday]
-Среда
-[Thursday]
-Четверг
-[Friday]
-Пятница
-[Saturday]
-Суббота
-[Sunday]
-Воскресенье
 [N]
 С
 [W]
