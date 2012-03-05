@@ -11,8 +11,8 @@ The building environment is as follows:
 
 * DirectX SDK 9.29.1962 (June 2010)
 * Inno Setup v5.4.3 unicode
-* Microsoft Visual C++ 2010 SP1
-* Microsoft Windows SDK v7.1
+* Microsoft Visual C++ 2011 Beta
+* Microsoft Windows SDK v7.1 and 8.0
 
 
 * If you are using another setup, please feel free and setup you builds, but don't blame me for supporting outdated stuff or some other crap i don't like.  
