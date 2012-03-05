@@ -42,22 +42,22 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 						TCHAR str[MAX_PATH];
 						if (!GetDlgItemText(hwndDlg, IDC_FEEDTITLE, str, SIZEOF(str)))
 						{
-							MessageBox(NULL, TranslateT("Enter Feed name"), TranslateT("Error"), MB_OK);
+							MessageBox(hwndDlg, TranslateT("Enter Feed name"), TranslateT("Error"), MB_OK);
 							break;
 						}
 						else if (!GetDlgItemText(hwndDlg, IDC_FEEDURL, str, SIZEOF(str)) || lstrcmp(str, _T("http://")) == 0)
 						{
-							MessageBox(NULL, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
+							MessageBox(hwndDlg, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
 							break;
 						}
 						else if (!GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false))
 						{
-							MessageBox(NULL, TranslateT("Enter checking interval"), TranslateT("Error"), MB_OK);
+							MessageBox(hwndDlg, TranslateT("Enter checking interval"), TranslateT("Error"), MB_OK);
 							break;
 						}
 						else if (!GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str)))
 						{
-							MessageBox(NULL, TranslateT("Enter message format"), TranslateT("Error"), MB_OK);
+							MessageBox(hwndDlg, TranslateT("Enter message format"), TranslateT("Error"), MB_OK);
 							break;
 						}
 						else
@@ -107,11 +107,11 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 					break;
 
 				case IDC_TAGHELP:
-					MessageBox(NULL, TranslateT(TAGSHELP), TranslateT("Feed Tag Help"), MB_OK);
+					MessageBox(hwndDlg, TranslateT(TAGSHELP), TranslateT("Feed Tag Help"), MB_OK);
 					break;
 
 				case IDC_RESET:
-					if (MessageBox(NULL, TranslateT("Are you sure?"), TranslateT("Tags Mask Reset"), MB_YESNO | MB_ICONWARNING) == IDYES)
+					if (MessageBox(hwndDlg, TranslateT("Are you sure?"), TranslateT("Tags Mask Reset"), MB_YESNO | MB_ICONWARNING) == IDYES)
 						SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
 					break;
 
@@ -123,7 +123,7 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 						if (GetDlgItemText(hwndDlg, IDC_FEEDURL, tszURL, SIZEOF(tszURL)) || lstrcmp(tszURL, _T("http://")) != 0)
 							tszTitle = CheckFeed(tszURL);
 						else
-							MessageBox(NULL, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
+							MessageBox(hwndDlg, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
 						SetDlgItemText(hwndDlg, IDC_FEEDTITLE, tszTitle);
 						EnableWindow(GetDlgItem(hwndDlg, IDC_DISCOVERY), TRUE);
 						SetDlgItemText(hwndDlg, IDC_DISCOVERY, TranslateT("Check Feed"));
@@ -213,22 +213,22 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 						TCHAR str[MAX_PATH];
 						if (!GetDlgItemText(hwndDlg, IDC_FEEDTITLE, str, SIZEOF(str)))
 						{
-							MessageBox(NULL, TranslateT("Enter Feed name"), TranslateT("Error"), MB_OK);
+							MessageBox(hwndDlg, TranslateT("Enter Feed name"), TranslateT("Error"), MB_OK);
 							break;
 						}
 						else if (!GetDlgItemText(hwndDlg, IDC_FEEDURL, str, SIZEOF(str)) || lstrcmp(str, _T("http://")) == 0)
 						{
-							MessageBox(NULL, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
+							MessageBox(hwndDlg, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
 							break;
 						}
 						else if (!GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false))
 						{
-							MessageBox(NULL, TranslateT("Enter checking interval"), TranslateT("Error"), MB_OK);
+							MessageBox(hwndDlg, TranslateT("Enter checking interval"), TranslateT("Error"), MB_OK);
 							break;
 						}
 						else if (!GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str)))
 						{
-							MessageBox(NULL, TranslateT("Enter message format"), TranslateT("Error"), MB_OK);
+							MessageBox(hwndDlg, TranslateT("Enter message format"), TranslateT("Error"), MB_OK);
 							break;
 						}
 						else
@@ -273,11 +273,11 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 					}
 
 				case IDC_TAGHELP:
-					MessageBox(NULL, TranslateT(TAGSHELP), TranslateT("Feed Tag Help"), MB_OK);
+					MessageBox(hwndDlg, TranslateT(TAGSHELP), TranslateT("Feed Tag Help"), MB_OK);
 					break;
 
 				case IDC_RESET:
-					if (MessageBox(NULL, TranslateT("Are you sure?"), TranslateT("Tags Mask Reset"), MB_YESNO | MB_ICONWARNING) == IDYES)
+					if (MessageBox(hwndDlg, TranslateT("Are you sure?"), TranslateT("Tags Mask Reset"), MB_YESNO | MB_ICONWARNING) == IDYES)
 						SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
 					break;
 
@@ -289,7 +289,7 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 						if (GetDlgItemText(hwndDlg, IDC_FEEDURL, tszURL, SIZEOF(tszURL)) || lstrcmp(tszURL, _T("http://")) != 0)
 							tszTitle = CheckFeed(tszURL);
 						else
-							MessageBox(NULL, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
+							MessageBox(hwndDlg, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
 						SetDlgItemText(hwndDlg, IDC_FEEDTITLE, tszTitle);
 						EnableWindow(GetDlgItem(hwndDlg, IDC_DISCOVERY), TRUE);
 						SetDlgItemText(hwndDlg, IDC_DISCOVERY, TranslateT("Check Feed"));
@@ -352,7 +352,7 @@ INT_PTR CALLBACK UpdateNotifyOptsProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 				return FALSE;
 			case IDC_REMOVE:
 				{
-					if (MessageBox(NULL, TranslateT("Are you sure?"), TranslateT("Contact deleting"), MB_YESNO | MB_ICONWARNING) == IDYES)
+					if (MessageBox(hwndDlg, TranslateT("Are you sure?"), TranslateT("Contact deleting"), MB_YESNO | MB_ICONWARNING) == IDYES)
 					{
 						TCHAR nick[MAX_PATH], url[MAX_PATH];
 						int sel = ListView_GetSelectionMark(hwndList);

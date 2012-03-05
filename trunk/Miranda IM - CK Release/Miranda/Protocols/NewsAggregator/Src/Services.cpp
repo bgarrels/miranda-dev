@@ -43,7 +43,7 @@ static void __cdecl WorkingThread(void* param)
 	}
 }
 
-INT_PTR NewsAggrInit(WPARAM wParam,LPARAM lParam)
+int NewsAggrInit(WPARAM wParam,LPARAM lParam)
 {
 	HANDLE hContact= (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
 	while (hContact != NULL) 
@@ -64,7 +64,7 @@ INT_PTR NewsAggrInit(WPARAM wParam,LPARAM lParam)
 	return 0;
 }
 
-INT_PTR NewsAggrPreShutdown(WPARAM wParam,LPARAM lParam)
+int NewsAggrPreShutdown(WPARAM wParam,LPARAM lParam)
 {
 	if (hAddFeedDlg)
 	{
@@ -155,10 +155,13 @@ INT_PTR CheckAllFeeds(WPARAM wParam,LPARAM lParam)
 	{
 		if(IsMyContact(hContact)) 
 		{
-			CheckCurrentFeed(hContact);
+			UpdateListAdd(hContact);
 		}
 		hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
 	}
+	if (!ThreadRunning)
+		mir_forkthread(UpdateThreadProc, NULL);
+
 
 	return 0;
 }
@@ -183,6 +186,8 @@ INT_PTR ExportFeeds(WPARAM wParam,LPARAM lParam)
 INT_PTR CheckFeed(WPARAM wParam,LPARAM lParam)
 {
 	HANDLE hContact = (HANDLE)wParam;
-	CheckCurrentFeed(hContact);
+	UpdateListAdd(hContact);
+	if (!ThreadRunning)
+		mir_forkthread(UpdateThreadProc, NULL);
 	return 0;
 }

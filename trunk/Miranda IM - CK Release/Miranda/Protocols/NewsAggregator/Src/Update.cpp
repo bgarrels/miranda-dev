@@ -21,13 +21,15 @@ Boston, MA 02111-1307, USA.
 
 // check if Feed is currently updating
 BOOL ThreadRunning;
+UPDATELIST *UpdateListHead = NULL;
+UPDATELIST *UpdateListTail = NULL;
 
 // main auto-update timer
 VOID CALLBACK timerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 {
 	// only run if it is not current updating and the auto update option is enabled
-//	if (!ThreadRunning && !Miranda_Terminated() && status == ID_STATUS_ONLINE)
-//		UpdateAll(TRUE, FALSE);
+	if (!ThreadRunning && !Miranda_Terminated())
+		CheckAllFeeds(0,0);
 }
 
 // temporary timer for first run
@@ -39,7 +41,86 @@ VOID CALLBACK timerProc2(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 
 	if (!Miranda_Terminated())
 	{
-//		UpdateAll(FALSE, FALSE);
-		//timerId = SetTimer(NULL, 0, ((int)opt.UpdateTime)*60000, (TIMERPROC)timerProc);
+		CheckAllFeeds(0,0);
+		timerId = SetTimer(NULL, 0, 30*60000, (TIMERPROC)timerProc);
 	}
+}
+
+void UpdateListAdd(HANDLE hContact)
+{
+	UPDATELIST *newItem;
+
+	newItem = (UPDATELIST*)mir_alloc(sizeof(UPDATELIST));
+	newItem->hContact = hContact;
+	newItem->next = NULL;
+
+	WaitForSingleObject(hUpdateMutex, INFINITE);
+
+	if (UpdateListTail == NULL) UpdateListHead = newItem;
+	else UpdateListTail->next = newItem;
+	UpdateListTail = newItem;
+
+	ReleaseMutex(hUpdateMutex);
+}
+
+HANDLE UpdateGetFirst() 
+{
+	HANDLE hContact = NULL;
+
+	WaitForSingleObject(hUpdateMutex, INFINITE);
+
+	if (UpdateListHead != NULL) 
+	{
+		UPDATELIST* Item = UpdateListHead; 
+
+		hContact = Item->hContact;
+		UpdateListHead = Item->next;
+		mir_free(Item);
+
+		if (UpdateListHead == NULL) UpdateListTail = NULL; 
+	}
+
+	ReleaseMutex(hUpdateMutex);
+
+	return hContact;
+}
+
+void DestroyUpdateList(void) 
+{
+	UPDATELIST *temp;
+
+	WaitForSingleObject(hUpdateMutex, INFINITE);
+
+	temp = UpdateListHead;
+
+	// free the list one by one
+	while (temp != NULL) 
+	{
+		UpdateListHead = temp->next;
+		mir_free(temp);
+		temp = UpdateListHead;
+	}
+	// make sure the entire list is clear
+	UpdateListTail = NULL;
+
+	ReleaseMutex(hUpdateMutex);
+}
+
+void UpdateThreadProc(LPVOID hWnd)
+{
+	WaitForSingleObject(hUpdateMutex, INFINITE);
+	if (ThreadRunning)
+	{
+		ReleaseMutex(hUpdateMutex);
+		return;
+	}
+	ThreadRunning = TRUE;	// prevent 2 instance of this thread running
+	ReleaseMutex(hUpdateMutex);
+
+	// update weather by getting the first station from the queue until the queue is empty
+	while (UpdateListHead != NULL && !Miranda_Terminated())	
+		CheckCurrentFeed(UpdateGetFirst());
+
+	// exit the update thread
+	ThreadRunning = FALSE;
 }

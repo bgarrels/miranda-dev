@@ -62,7 +62,7 @@ static void arrayToHex(BYTE* data, size_t datasz, char* res)
 
 void GetLoginStr(char* user, size_t szuser, char* pass)
 {
-	DBVARIANT dbv;
+	//DBVARIANT dbv;
 
     //if (DBGetContactSettingString(NULL, PluginName, "Username", &dbv) == 0)
 	//{
@@ -119,7 +119,7 @@ VOID GetNewsData(TCHAR *tszUrl, char** szData)
 	nlhr.nlc = hNetlibHttp;
 
 	// change the header so the plugin is pretended to be IE 6 + WinXP
-	nlhr.headersCount = 5;
+	nlhr.headersCount = 4;
 	nlhr.headers = headers;
 	nlhr.headers[0].szName  = "User-Agent";
 	nlhr.headers[0].szValue = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
@@ -129,11 +129,11 @@ VOID GetNewsData(TCHAR *tszUrl, char** szData)
 	nlhr.headers[2].szValue = "no-cache";
 	nlhr.headers[3].szName  = "Connection";
 	nlhr.headers[3].szValue = "close";
-	nlhr.headers[4].szName  = "Authorization";
+	//nlhr.headers[4].szName  = "Authorization";
 
 	//char auth[256];
 	//CreateAuthString(auth);
-	nlhr.headers[4].szValue = "Basic 123445";//auth;
+	//nlhr.headers[4].szValue = "Basic 123445";//auth;
 
 	// download the page
 	nlhrReply = (NETLIBHTTPREQUEST*)CallService(MS_NETLIB_HTTPTRANSACTION, (WPARAM)hNetlibUser, (LPARAM)&nlhr);
@@ -660,7 +660,9 @@ VOID CheckCurrentFeed(HANDLE hContact)
 							}
 							if (lstrcmpi(xi.getName(child), _T("description")) == 0)
 							{
-								DBWriteContactSettingTString(hContact, MODULE, "About", xi.getText(child));
+								const LPCTSTR descr =  xi.getText(child);
+								DBWriteContactSettingTString(hContact, MODULE, "About",descr);
+								DBWriteContactSettingTString(hContact, "CList", "StatusMsg", descr);
 								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("language")) == 0)
@@ -729,11 +731,6 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									if (lstrcmpi(xi.getName(itemval), _T("description")) == 0)
 									{
 										descr = (TCHAR*)xi.getText(itemval);
-										TCHAR *test, *test2;
-										int tt;
-										test = (TCHAR*)xi.toString(itemval, &tt);
-										test2 = (TCHAR*)xi.toStringWithFormatting(itemval, &tt);
-										int count = xi.getAttrCount(itemval);
 										continue;
 									}
 									if (lstrcmpi(xi.getName(itemval), _T("author")) == 0)
@@ -874,7 +871,9 @@ VOID CheckCurrentFeed(HANDLE hContact)
 							}
 							if (lstrcmpi(xi.getName(child), _T("subtitle")) == 0)
 							{
-								DBWriteContactSettingTString(hContact, MODULE, "About", xi.getText(child));
+								const LPCTSTR descr =  xi.getText(child);
+								DBWriteContactSettingTString(hContact, MODULE, "About",descr);
+								DBWriteContactSettingTString(hContact, "CList", "StatusMsg", descr);
 								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("language")) == 0)

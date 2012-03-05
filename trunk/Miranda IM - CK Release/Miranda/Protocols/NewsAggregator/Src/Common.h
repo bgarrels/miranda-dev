@@ -17,8 +17,7 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.  
 */
 
-#define MIRANDA_VER    0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER    0x0A00
 
 // Windows Header Files:
 #include <windows.h>
@@ -26,6 +25,7 @@ Boston, MA 02111-1307, USA.
 #include <time.h>
 #include <fcntl.h>
 #include <io.h>
+#include <mshtml.h>
 
 // Miranda header files
 #include <newpluginapi.h>
@@ -49,7 +49,7 @@ Boston, MA 02111-1307, USA.
 #include <sys\stat.h>
 
 #include <m_folders.h>
-#include <m_popup2.h>
+#include <m_popup.h>
 
 #include "..\version.h"
 #include "..\resource.h"
@@ -74,9 +74,27 @@ struct ItemInfo
 	TCHAR url[MAX_PATH];
 };
 
-INT_PTR NewsAggrInit(WPARAM wParam,LPARAM lParam);
+//============  STRUCT USED TO MAKE AN UPDATE LIST  ============
+
+struct NEWSCONTACTLIST {
+	HANDLE hContact;
+	struct NEWSCONTACTLIST *next;
+};
+
+typedef struct NEWSCONTACTLIST UPDATELIST;
+
+extern UPDATELIST *UpdateListHead;
+extern UPDATELIST *UpdateListTail;
+
+void UpdateListAdd(HANDLE hContact);
+void UpdateThreadProc(LPVOID hWnd);
+void DestroyUpdateList(void);
+
+extern HANDLE hUpdateMutex;
+
+int NewsAggrInit(WPARAM wParam,LPARAM lParam);
 INT OptInit(WPARAM wParam, LPARAM lParam);
-INT_PTR NewsAggrPreShutdown(WPARAM wParam,LPARAM lParam);
+int NewsAggrPreShutdown(WPARAM wParam,LPARAM lParam);
 VOID NetlibInit();
 VOID NetlibUnInit();
 VOID InitMenu();
