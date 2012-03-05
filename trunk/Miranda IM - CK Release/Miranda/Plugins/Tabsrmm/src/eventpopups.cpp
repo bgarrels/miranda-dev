@@ -742,7 +742,7 @@ static int PopupShowT(NEN_OPTIONS *pluginOptions, HANDLE hContact, HANDLE hEvent
 		dbe.szModule = Translate("Unknown module or contact");
 
 	pdata = (PLUGIN_DATAT *)malloc(sizeof(PLUGIN_DATAT));
-	ZeroMemory((void *)pdata, sizeof(PLUGIN_DATAT));
+	//ZeroMemory((void *)pdata, sizeof(PLUGIN_DATAT));
 
 	pdata->eventType = eventType;
 	pdata->hContact = hContact;
