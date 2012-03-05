@@ -29,9 +29,10 @@ HWND hAddFeedDlg;
 XML_API xi = {0};
 struct UTF8_INTERFACE utfi;
 TCHAR tszRoot[MAX_PATH] = {0};
+HANDLE hUpdateMutex;
 
 PLUGININFOEX pluginInfoEx = {
-	sizeof(PLUGININFOEX),
+    sizeof(PLUGININFOEX),
 	__PLUGIN_NAME,
 	PLUGIN_MAKE_VERSION(__MAJOR_VERSION, __MINOR_VERSION, __RELEASE_NUM, __BUILD_NUM),
 	__DESCRIPTION,
@@ -90,8 +91,10 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	
 	// Add options hook
 	hOptHook = HookEvent(ME_OPT_INITIALISE, OptInit);
-	//hLoadHook = HookEvent(ME_SYSTEM_MODULESLOADED, NewsAggrInit);
-	//hOnPreShutdown = HookEvent(ME_SYSTEM_PRESHUTDOWN, NewsAggrPreShutdown);
+	hLoadHook = HookEvent(ME_SYSTEM_MODULESLOADED, NewsAggrInit);
+	hOnPreShutdown = HookEvent(ME_SYSTEM_PRESHUTDOWN, NewsAggrPreShutdown);
+
+	hUpdateMutex = CreateMutex(NULL, FALSE, NULL);
 
 	// register weather protocol
 	PROTOCOLDESCRIPTOR pd = {0};
@@ -112,5 +115,8 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 
 extern "C" __declspec(dllexport) int Unload(void)
 {
+	DestroyUpdateList();
+	CloseHandle(hUpdateMutex);
+
 	return 0;
 }
