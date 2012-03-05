@@ -324,9 +324,9 @@ void CMsnProto::sttCustomSmiley(const char* msgBody, char* email, char* nick, in
 			UrlEncode(buf, smileyName, rlen*3);
 			mir_free(buf);
 
-			char path[MAX_PATH];
+			TCHAR path[MAX_PATH];
 			MSN_GetCustomSmileyFileName(hContact, path, SIZEOF(path), smileyName, iSmileyType);
-			ft->std.tszCurrentFile = mir_a2t(path);
+			ft->std.tszCurrentFile = mir_tstrdup(path);
 			mir_free(smileyName);
 
 			if (p2p_IsDlFileOk(ft))
@@ -1284,6 +1284,7 @@ LBL_InvalidCommand:
 			int newStatus = MSNStatusToMiranda(params);
 			if (oldStatus <= ID_STATUS_OFFLINE)
 			{
+				isConnectSuccess = true;
 				int count = -1;
 				for (;;)
 				{
@@ -1433,7 +1434,7 @@ LBL_InvalidCommand:
 							char szSavedContext[64];
 							int result = getStaticString(hContact, "PictSavedContext", szSavedContext, sizeof(szSavedContext));
 							if (result || strcmp(szSavedContext, data.cmdstring))
-								setString(hContact, "PictSavedContext", szSavedContext);
+								SendBroadcast(hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, 0);
 						}
 						mir_free(szAvatarHash);
 					}
@@ -1848,13 +1849,12 @@ remove:
 				}
 				else if (!strcmp(data.security, "OK")) 
 				{
-					isConnectSuccess = true;
 				}
 				else
 				{
 					MSN_DebugLog("Unknown security package '%s'", data.security);
 
-					if (info->mType == SERVER_NOTIFICATION || info->mType == SERVER_DISPATCH) 
+					if (info->mType == SERVER_NOTIFICATION) 
 					{
 						SendBroadcast(NULL, ACKTYPE_LOGIN, ACKRESULT_FAILED, NULL, LOGINERR_WRONGPROTOCOL);
 					}
@@ -1901,7 +1901,7 @@ remove:
 			{
 				MSN_ShowError("Server has requested an unknown protocol set (%s)", params);
 
-				if (info->mType == SERVER_NOTIFICATION || info->mType == SERVER_DISPATCH) 
+				if (info->mType == SERVER_NOTIFICATION) 
 				{
 					SendBroadcast(NULL, ACKTYPE_LOGIN, ACKRESULT_FAILED, NULL, LOGINERR_WRONGPROTOCOL);
 				}
@@ -1930,7 +1930,7 @@ remove:
 			};
 
 			int numWords = sttDivideWords(params, 7, tWords);
-			if (numWords < 2)
+			if (numWords < 3)
 				goto LBL_InvalidCommand;
 
 			if (!strcmp(data.type, "NS"))  //notification server
@@ -1941,6 +1941,7 @@ remove:
 				newThread->mType = SERVER_NOTIFICATION;
 				newThread->mTrid = info->mTrid;
 				newThread->mIsMainThread = true;
+				usingGateway |= *data.security == 'G';
 				info->mIsMainThread = false;
 
 				MSN_DebugLog("Switching to notification server '%s'...", data.newServer);

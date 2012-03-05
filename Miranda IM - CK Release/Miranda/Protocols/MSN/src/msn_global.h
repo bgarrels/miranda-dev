@@ -1,6 +1,6 @@
 /*
 Plugin of Miranda IM for communicating with users of the MSN Messenger protocol.
-Copyright (c) 2006-2011 Boris Krasnovskiy.
+Copyright (c) 2006-2012 Boris Krasnovskiy.
 Copyright (c) 2003-2005 George Hazan.
 Copyright (c) 2002-2003 Richard Hughes (original version).
 
@@ -36,7 +36,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <fcntl.h>
 #include <sys/stat.h>
 
-//Miranda IM
 #include <newpluginapi.h>
 
 #include <m_clc.h>
@@ -71,7 +70,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "m_folders.h"
 #include "m_metacontacts.h"
 
-//C libary xml parser
 #include "../ezxml/ezxml.h"
 
 #include "../resource.h"
@@ -178,9 +176,8 @@ void     	UrlEncode(const char* src, char* dest, size_t cbDest);
 void		__cdecl MSN_ConnectionProc(HANDLE hNewConnection, DWORD dwRemoteIP, void*);
 
 char*		MSN_GetAvatarHash(char* szContext);
-void        MSN_GetAvatarFileName(HANDLE hContact, char* pszDest, size_t cbLen, const char *ext);
-int			MSN_GetImageFormat(void* buf, const char** ext);
-int			MSN_GetImageFormat(const char* file);
+int			MSN_GetImageFormat(void* buf, const TCHAR** ext);
+int			MSN_GetImageFormat(const TCHAR* file);
 bool		MSN_MsgWndExist(HANDLE hContact);
 
 #define		MSN_SendNickname(a) MSN_SendNicknameUtf(UTF8(a))
@@ -355,7 +352,6 @@ struct HReadBuffer
 
 enum TInfoType
 {
-	SERVER_DISPATCH,
 	SERVER_NOTIFICATION,
 	SERVER_SWITCHBOARD,
 	SERVER_FILETRANS,
@@ -881,7 +877,7 @@ struct chunkedmsg
 	chunkedmsg(const char* tid, const size_t totsz, const bool bychunk);
 	~chunkedmsg();
 
-	void add(const char* msg, const size_t offset, const size_t portion);
+	void add(const char* msg, size_t offset, size_t portion);
 	bool get(char*& tmsg, size_t& tsize);
 };
 
