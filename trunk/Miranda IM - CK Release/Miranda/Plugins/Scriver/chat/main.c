@@ -2,7 +2,7 @@
 Chat module plugin for Miranda IM
 
 Copyright (C) 2003 Jörgen Persson
-Copyright 2003-2012 Miranda IM project,
+Copyright 2003-2009 Miranda ICQ/IM project,
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "commonheaders.h"
 #include "chat.h"
 
-void RegisterFonts( void );
+void RegisterChatFonts( void );
 
 extern struct GlobalMessageData *g_dat;
 extern CRITICAL_SECTION	cs;
@@ -73,7 +73,7 @@ int Chat_ModulesLoaded(WPARAM wParam,LPARAM lParam)
 {
 	char* mods[3] = { "Chat", "ChatFonts" };
 	CallService( "DBEditorpp/RegisterModule", (WPARAM)mods, 2 );
-	RegisterFonts();
+	RegisterChatFonts();
 	OptionsInit();
 	LoadIcons();
 	{
@@ -94,7 +94,7 @@ int Chat_ModulesLoaded(WPARAM wParam,LPARAM lParam)
 		hLeaveMenuItem = ( HANDLE )CallService(MS_CLIST_ADDCONTACTMENUITEM, 0, (LPARAM) & mi);
 	}
 	CList_SetAllOffline(TRUE, NULL);
-	return 0;
+ 	return 0;
 }
 
 
