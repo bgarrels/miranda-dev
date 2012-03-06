@@ -2,7 +2,7 @@
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2009 Miranda ICQ/IM project, 
+Copyright 2000-2012 Miranda IM project, 
 all portions of this codebase are copyrighted to the people 
 listed in contributors.txt.
 
@@ -109,7 +109,7 @@ int CreateDirectoryTree( const char *szDir )
 
 	lstrcpynA( szTestDir, szDir, SIZEOF( szTestDir ));
 	if (( dwAttributes = GetFileAttributesA( szTestDir )) != INVALID_FILE_ATTRIBUTES && ( dwAttributes & FILE_ATTRIBUTE_DIRECTORY ))
-		return ERROR_ACCESS_DENIED;
+		return 0;
 
 	pszLastBackslash = strrchr( szTestDir, '\\' );
 	if ( pszLastBackslash == NULL )
@@ -208,7 +208,7 @@ int CreateDirectoryTreeW( const WCHAR* szDir )
 
 	lstrcpynW( szTestDir, szDir, SIZEOF( szTestDir ));
 	if (( dwAttributes = GetFileAttributesW( szTestDir )) != INVALID_FILE_ATTRIBUTES && ( dwAttributes & FILE_ATTRIBUTE_DIRECTORY ))
-		return ERROR_ACCESS_DENIED;
+		return 0;
 
 	pszLastBackslash = wcsrchr( szTestDir, '\\' );
 	if ( pszLastBackslash == NULL )
@@ -225,8 +225,7 @@ static INT_PTR createDirTreeW(WPARAM, LPARAM lParam)
 	if ( lParam == 0 )
 		return 1;
 
-	CreateDirectoryTreeW(( WCHAR* )lParam );
-	return 0;
+	return CreateDirectoryTreeW(( WCHAR* )lParam );
 }
 
 int InitPathUtilsW(void)
