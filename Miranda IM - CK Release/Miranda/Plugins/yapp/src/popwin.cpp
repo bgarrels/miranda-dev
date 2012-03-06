@@ -633,9 +633,9 @@ LRESULT CALLBACK PopupWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 					if(ace && (ace->dwFlags & AVS_BITMAP_VALID) && !(ace->dwFlags & AVS_HIDEONCLIST)) {
 						if(ace->bmHeight >= ace->bmWidth) {
 							pwd->real_av_height = options.av_size;
-							pwd->real_av_width = (int)(options.av_size * (ace->bmWidth / (double)ace->bmHeight));
+							pwd->real_av_width = options.av_size * ace->bmWidth / ace->bmHeight;
 						} else {
-							pwd->real_av_height = (int)(options.av_size * (ace->bmHeight / (double)ace->bmWidth));
+							pwd->real_av_height = options.av_size * ace->bmHeight / ace->bmWidth;
 							pwd->real_av_width = options.av_size;
 						}
 						pwd->have_av = true;
@@ -762,7 +762,7 @@ LRESULT CALLBACK PopupWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 }
 
 void InitWindowStack() {
-	hUserDll = LoadLibrary(_T("user32.dll"));
+	hUserDll = GetModuleHandle(_T("user32.dll"));
 	if (hUserDll) {
 		MySetLayeredWindowAttributes = (BOOL (WINAPI *)(HWND,COLORREF,BYTE,DWORD))GetProcAddress(hUserDll, "SetLayeredWindowAttributes");
 		MyAnimateWindow=(BOOL (WINAPI*)(HWND,DWORD,DWORD))GetProcAddress(hUserDll,"AnimateWindow");
@@ -777,6 +777,5 @@ void InitWindowStack() {
 
 void DeinitWindowStack() {
 	ClearStack();
-	if(hUserDll) FreeLibrary(hUserDll);
 }
 

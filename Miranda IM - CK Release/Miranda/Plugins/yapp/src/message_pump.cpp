@@ -4,7 +4,7 @@
 #include "services.h"
 #include "options.h"
 
-DWORD message_pump_thread_id = 0;
+unsigned message_pump_thread_id = 0;
 int num_popups = 0;
 
 HANDLE hMPEvent;
@@ -72,9 +72,7 @@ bool is_workstation_locked()
 }
 
 
-DWORD CALLBACK MessagePumpThread(LPVOID param) {
-	CallService(MS_SYSTEM_THREAD_PUSH, 0, 0);
-
+unsigned __stdcall MessagePumpThread(void* param) {
 	InitWindowStack();
 
 	if(param) SetEvent((HANDLE)param);
@@ -154,8 +152,6 @@ DWORD CALLBACK MessagePumpThread(LPVOID param) {
     DeinitOptions();
 	DeinitServices();
 
-	CallService(MS_SYSTEM_THREAD_POP, 0, 0);
-
 	return 0;
 }
 
@@ -180,7 +176,7 @@ void InitMessagePump() {
 	InitServices();
 
 	hMPEvent = CreateEvent(0, TRUE, 0, 0);
-	CloseHandle(CreateThread(0, 0, MessagePumpThread, hMPEvent, 0, &message_pump_thread_id));
+	CloseHandle(mir_forkthreadex(MessagePumpThread, hMPEvent, 0, &message_pump_thread_id));
 	WaitForSingleObject(hMPEvent, INFINITE);
 	CloseHandle(hMPEvent);
 }

@@ -1,7 +1,7 @@
 #ifndef _MESSAGE_PUMP_INC
 #define _MESSAGE_PUMP_INC
 
-extern DWORD message_pump_thread_id;
+extern unsigned message_pump_thread_id;
 void PostMPMessage(UINT msg, WPARAM, LPARAM);
 
 #define MUM_CREATEPOPUP					(WM_USER + 0x011)
