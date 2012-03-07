@@ -24,12 +24,14 @@ PLUGINLINK *pluginLink;
 int hLangpack;
 struct MM_INTERFACE mmi;
 HANDLE hOptHook = NULL,  hLoadHook = NULL, hOnPreShutdown = NULL, hPrebuildMenuHook = NULL, hPackUpdaterFolder = NULL;
-HANDLE hProtoService[6];
+HANDLE hProtoService[7];
 HWND hAddFeedDlg;
 XML_API xi = {0};
 struct UTF8_INTERFACE utfi;
 TCHAR tszRoot[MAX_PATH] = {0};
 HANDLE hUpdateMutex;
+#define NUM_SERVICES 5
+HANDLE hService[NUM_SERVICES];
 
 PLUGININFOEX pluginInfoEx = {
     sizeof(PLUGININFOEX),
@@ -109,12 +111,26 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	hProtoService[3] = CreateProtoServiceFunction(MODULE, PS_GETSTATUS, NewsAggrGetStatus);
 	hProtoService[4] = CreateProtoServiceFunction(MODULE, PS_LOADICON, NewsAggrLoadIcon);
 	hProtoService[5] = CreateProtoServiceFunction(MODULE, PSS_GETINFO, NewsAggrGetInfo);
+	hProtoService[6] = CreateProtoServiceFunction(MODULE, PS_GETAVATARINFO, NewsAggrGetAvatarInfo);
+
+	hService[0] = CreateServiceFunction(MS_NEWSAGGR_CHECKALLFEEDS, CheckAllFeeds);
+	hService[1] = CreateServiceFunction(MS_NEWSAGGR_ADDFEED, AddFeed);
+	hService[2] = CreateServiceFunction(MS_NEWSAGGR_IMPORTFEEDS, ImportFeeds);
+	hService[3] = CreateServiceFunction(MS_NEWSAGGR_EXPORTFEEDS, ExportFeeds);
+	hService[4] = CreateServiceFunction(MS_NEWSAGGR_CHECKFEED, CheckFeed);
 
 	return 0;
 }
 
 extern "C" __declspec(dllexport) int Unload(void)
 {
+	for (int i = 0;i<NUM_SERVICES;i++)
+		DestroyServiceFunction(hService[i]);
+
+	UnhookEvent(hOptHook);
+	UnhookEvent(hLoadHook);
+	UnhookEvent(hOnPreShutdown);
+
 	DestroyUpdateList();
 	CloseHandle(hUpdateMutex);
 

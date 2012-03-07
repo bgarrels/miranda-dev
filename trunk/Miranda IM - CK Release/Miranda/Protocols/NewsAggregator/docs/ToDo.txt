@@ -3,5 +3,11 @@
 экспорт\импорт
 автоимпорт из файла
 авторизация
-вынести скачку в отдельный поток
 замена всего html'ного
+
+xml parse
+timer on each protocol contacts
+contacts export\import
+autoimport from file service
+authorization
+replace all html to text

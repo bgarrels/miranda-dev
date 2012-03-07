@@ -60,6 +60,45 @@ static void arrayToHex(BYTE* data, size_t datasz, char* res)
 	*resptr = '\0';
 } 
 
+int GetImageFormat(const TCHAR* ext)
+{
+	if(lstrcmp(ext,_T(".jpg")) || lstrcmp(ext,_T(".jpeg")))
+	{
+		return PA_FORMAT_JPEG;
+	}
+	else if(lstrcmp(ext,_T(".png")))
+	{
+		return PA_FORMAT_PNG;
+	}
+	else if(lstrcmp(ext,_T(".gif")))
+	{
+		return PA_FORMAT_GIF;
+	}
+	else if(lstrcmp(ext,_T(".ico")))
+	{
+		return PA_FORMAT_ICON;
+	}
+	else if(lstrcmp(ext,_T(".bmp")))
+	{
+		return PA_FORMAT_BMP;
+	}
+	else if(lstrcmp(ext,_T(".swf")))
+	{
+		return PA_FORMAT_SWF;
+	}
+	else if(lstrcmp(ext,_T(".xml")))
+	{
+		return PA_FORMAT_XML;
+	}
+	else if(lstrcmp(ext,_T(".jpg")) || lstrcmp(ext,_T(".jpeg")))
+	{
+		return PA_FORMAT_JPEG;
+	}
+	else
+	{
+		return PA_FORMAT_UNKNOWN;
+	}
+}
 void GetLoginStr(char* user, size_t szuser, char* pass)
 {
 	//DBVARIANT dbv;
@@ -107,7 +146,7 @@ void CreateAuthString(char* auth)
 VOID GetNewsData(TCHAR *tszUrl, char** szData)
 {
 	char* szRedirUrl  = NULL;
-	NETLIBHTTPREQUEST nlhr = {0}, *nlhrReply;
+	NETLIBHTTPREQUEST nlhr = {0};
 	NETLIBHTTPHEADER headers[4];
 
 	// initialize the netlib request
@@ -136,7 +175,7 @@ VOID GetNewsData(TCHAR *tszUrl, char** szData)
 	//nlhr.headers[4].szValue = "Basic 123445";//auth;
 
 	// download the page
-	nlhrReply = (NETLIBHTTPREQUEST*)CallService(MS_NETLIB_HTTPTRANSACTION, (WPARAM)hNetlibUser, (LPARAM)&nlhr);
+	NETLIBHTTPREQUEST *nlhrReply = (NETLIBHTTPREQUEST*)CallService(MS_NETLIB_HTTPTRANSACTION, (WPARAM)hNetlibUser, (LPARAM)&nlhr);
 	if (nlhrReply) 
 	{
 		// if the recieved code is 200 OK
@@ -427,8 +466,7 @@ BOOL DownloadFile(LPCTSTR tszURL, LPCTSTR tszLocal)
 	nlhr.headers[3].szValue = "no-cache";
 
 	bool ret = false;
-	NETLIBHTTPREQUEST* pReply = NULL;
-	pReply = (NETLIBHTTPREQUEST*)CallService(MS_NETLIB_HTTPTRANSACTION, (WPARAM)hNetlibUser,(LPARAM)&nlhr);
+	NETLIBHTTPREQUEST *pReply = (NETLIBHTTPREQUEST*)CallService(MS_NETLIB_HTTPTRANSACTION, (WPARAM)hNetlibUser,(LPARAM)&nlhr);
 
 	if(pReply)
 	{
@@ -687,20 +725,36 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									HXML imageval = xi.getChild(child, x);
 									if (lstrcmpi(xi.getName(imageval), _T("url")) == 0)
 									{
-										TCHAR path[MAX_PATH], *filename;
-										TCHAR *ext = _tcsrchr((TCHAR*)xi.getText(imageval), _T('.')) + 1;
+										LPCTSTR url = xi.getText(imageval);
+										DBWriteContactSettingTString(hContact,MODULE,"ImageURL",url);
+
+										PROTO_AVATAR_INFORMATIONT pai = {NULL};
+										pai.cbSize = sizeof(pai);
+										pai.hContact = hContact;
 										DBVARIANT dbVar = {0};
-										DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
-										if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+
+										if(!DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar))
+										{
+											TCHAR *ext = _tcsrchr((TCHAR*)url, _T('.')) + 1;
+											pai.format = GetImageFormat(ext);
+
+											TCHAR *filename = dbVar.ptszVal;
+											mir_sntprintf(pai.filename, SIZEOF(pai.filename), _T("%s\\%s.%s"), tszRoot, filename, ext);
+											if (DownloadFile(url, pai.filename))
+												ProtoBroadcastAck(MODULE,hContact,ACKTYPE_AVATAR,ACKRESULT_SUCCESS,(HANDLE) &pai,NULL);
+											else
+												ProtoBroadcastAck(MODULE,hContact,ACKTYPE_AVATAR,ACKRESULT_FAILED,(HANDLE) &pai,NULL);
+											DBWriteContactSettingTString(hContact,MODULE,"ImagePath",pai.filename);
 											DBFreeVariant(&dbVar);
-										else
-											filename = dbVar.ptszVal;
-										mir_sntprintf(path, SIZEOF(path), _T("%s\\%s.%s"), tszRoot, filename, ext);
-										if (DownloadFile((TCHAR*)xi.getText(imageval), path))
-											CallService(MS_AV_SETAVATAR, (WPARAM)hContact, (LPARAM)path);
-										break;
+											break;
+										}
 									}
 								}
+							}
+							else
+							{
+								DBDeleteContactSetting(hContact,MODULE,"ImageURL");
+								DBDeleteContactSetting(hContact,MODULE,"ImagePath");
 							}
 							if (lstrcmpi(xi.getName(child), _T("item")) == 0)
 							{
@@ -796,11 +850,15 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									message = StrReplace(_T("#<category>#"), category, message);
 
 								message = StrReplace(_T("&amp;"), _T("&"), message);
+								message = StrReplace(_T("&#038;"), _T("&"),message);
 								message = StrReplace(_T("&apos;"), _T("\'"), message);
 								message = StrReplace(_T("&gt;"), _T(">"), message);
 								message = StrReplace(_T("&lt;"), _T("<"), message);
 								message = StrReplace(_T("&quot;"), _T("\""), message);
 								message = StrReplace(_T("<br>"), _T("\n"), message);
+								message = StrReplace(_T("<br/>"), _T("\n"), message);
+								message = StrReplace(_T("<br />"), _T("\n"), message);
+								message = StrReplace(_T("&#8211;"), _T("–"), message);
 
 								char* pszUtf;
 								if (!UtfEncode)
@@ -1081,5 +1139,6 @@ VOID CheckCurrentFeed(HANDLE hContact)
 				}
 			}
 		}
+		DBWriteContactSettingDword(hContact,MODULE,"LastCheck",time(NULL));
 	}
 }
