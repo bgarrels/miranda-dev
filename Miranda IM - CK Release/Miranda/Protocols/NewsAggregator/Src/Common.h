@@ -107,6 +107,7 @@ INT_PTR NewsAggrSetStatus(WPARAM wp,LPARAM /*lp*/);
 INT_PTR NewsAggrGetStatus(WPARAM/* wp*/,LPARAM/* lp*/);
 INT_PTR NewsAggrLoadIcon(WPARAM wParam,LPARAM lParam);
 INT_PTR NewsAggrGetInfo(WPARAM wParam,LPARAM lParam);
+INT_PTR NewsAggrGetAvatarInfo(WPARAM wParam,LPARAM lParam);
 
 INT_PTR CheckAllFeeds(WPARAM wParam,LPARAM lParam);
 INT_PTR AddFeed(WPARAM wParam,LPARAM lParam);

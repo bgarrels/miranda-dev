@@ -19,7 +19,6 @@ Boston, MA 02111-1307, USA.
 
 #include "common.h"
 
-HANDLE hService[5];
 HANDLE hService2[5];
 
 VOID InitMenu()
@@ -27,34 +26,30 @@ VOID InitMenu()
 	CLISTMENUITEM mi = {0};
 	mi.cbSize = sizeof(mi);
 	mi.pszContactOwner = MODULE;
-	mi.flags = CMIF_TCHAR|CMIF_ICONFROMICOLIB;
+	mi.flags = CMIF_TCHAR|CMIF_ICONFROMICOLIB|CMIF_NOTOFFLINE;
 
 	// adding main menu items
 	mi.ptszPopupName = _T("News Aggregator");
 	mi.popupPosition = 500099000;
 
-	hService[0] = CreateServiceFunction(MS_NEWSAGGR_CHECKALLFEEDS, CheckAllFeeds);
 	mi.position=10100001;
 	mi.icolibItem = GetIconHandle("main");
 	mi.ptszName = _T("Check All Feeds");
 	mi.pszService = MS_NEWSAGGR_CHECKALLFEEDS;
 	hService2[0] = (HANDLE)CallService(MS_CLIST_ADDMAINMENUITEM,0,(LPARAM)&mi);
 
-	hService[1] = CreateServiceFunction(MS_NEWSAGGR_ADDFEED, AddFeed);
 	mi.position=10100002;
 	mi.icolibItem = GetIconHandle("addfeed");
 	mi.ptszName = _T("Add Feed");
 	mi.pszService = MS_NEWSAGGR_ADDFEED;
 	hService2[1] = (HANDLE)CallService(MS_CLIST_ADDMAINMENUITEM,0,(LPARAM)&mi);
 
-	hService[2] = CreateServiceFunction(MS_NEWSAGGR_IMPORTFEEDS, ImportFeeds);
 	mi.position=10100003;
 	mi.icolibItem = GetIconHandle("importfeeds");
 	mi.ptszName = _T("Import Feeds");
 	mi.pszService = MS_NEWSAGGR_IMPORTFEEDS;
 	hService2[2] = (HANDLE)CallService(MS_CLIST_ADDMAINMENUITEM,0,(LPARAM)&mi);
 
-	hService[3] = CreateServiceFunction(MS_NEWSAGGR_EXPORTFEEDS, ExportFeeds);
 	mi.position=10100004;
 	mi.icolibItem = GetIconHandle("exportfeeds");
 	mi.ptszName = _T("Export Feeds");
@@ -62,7 +57,6 @@ VOID InitMenu()
 	hService2[3] = (HANDLE)CallService(MS_CLIST_ADDMAINMENUITEM,0,(LPARAM)&mi);
 
 	// adding contact menu items
-	hService[4] = CreateServiceFunction(MS_NEWSAGGR_CHECKFEED, CheckFeed);
 	mi.position=-0x7FFFFFFA;
 	mi.icolibItem = GetIconHandle("checkfeed");
 	mi.ptszName = _T("Check feed");

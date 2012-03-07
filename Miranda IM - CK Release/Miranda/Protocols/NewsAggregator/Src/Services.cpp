@@ -59,7 +59,7 @@ int NewsAggrInit(WPARAM wParam,LPARAM lParam)
 	InitMenu();
 
 	// timer for the first update
-	timerId = SetTimer(NULL, 0, 5000, (TIMERPROC)timerProc2);  // first update is 5 sec after load
+	timerId = SetTimer(NULL, 0, 5000, timerProc2);  // first update is 5 sec after load
 
 	return 0;
 }
@@ -92,19 +92,22 @@ INT_PTR NewsAggrGetName(WPARAM wParam, LPARAM lParam)
 
 INT_PTR NewsAggrGetCaps(WPARAM wp,LPARAM lp)
 {
-	int ret = 0;
 	switch(wp)
 	{        
 	case PFLAGNUM_1:
-		ret = PF1_IM | PF1_PEER2PEER;
-		break;
+		return PF1_IM | PF1_PEER2PEER;
 	case PFLAGNUM_3:
 	case PFLAGNUM_2:
-		ret = PF2_ONLINE;
-		break;
+		return PF2_ONLINE;
+	case PFLAGNUM_4:
+		return PF4_AVATARS;
+	case PFLAG_UNIQUEIDTEXT:
+		return (INT_PTR) "News Feed";
+	case PFLAG_UNIQUEIDSETTING:
+		return (INT_PTR) "Nick";
+	default:
+		return 0;
 	}
-
-	return ret;
 }
 
 INT_PTR NewsAggrSetStatus(WPARAM wp,LPARAM /*lp*/)
@@ -186,8 +189,30 @@ INT_PTR ExportFeeds(WPARAM wParam,LPARAM lParam)
 INT_PTR CheckFeed(WPARAM wParam,LPARAM lParam)
 {
 	HANDLE hContact = (HANDLE)wParam;
-	UpdateListAdd(hContact);
+	if(IsMyContact(hContact))
+		UpdateListAdd(hContact);
 	if (!ThreadRunning)
 		mir_forkthread(UpdateThreadProc, NULL);
 	return 0;
+}
+
+INT_PTR NewsAggrGetAvatarInfo(WPARAM wParam,LPARAM lParam)
+{
+	PROTO_AVATAR_INFORMATION* pai = (PROTO_AVATAR_INFORMATION*) lParam;
+
+	if(!IsMyContact(pai->hContact))
+		return GAIR_NOAVATAR;
+
+	// if GAIF_FORCE is set, we are updating the feed
+	// otherwise, cached avatar is used
+	if (wParam & GAIF_FORCE)
+		CheckCurrentFeed(pai->hContact);
+
+	DBVARIANT dbv = {0};
+	if(DBGetContactSettingTString(pai->hContact,MODULE,"ImageURL",&dbv))
+	{
+		return GAIR_NOAVATAR;
+	}
+	DBFreeVariant(&dbv);
+	return GAIR_WAITFOR;
 }
