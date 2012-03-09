@@ -2,7 +2,7 @@
 
 Jabber Protocol Plugin for Miranda IM
 Copyright ( C ) 2002-04  Santithorn Bunchua
-Copyright ( C ) 2005-11  George Hazan
+Copyright ( C ) 2005-12  George Hazan
 Copyright ( C ) 2007     Maxim Mluhov
 
 This program is free software; you can redistribute it and/or
@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13898 $
-Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
+Revision       : $Revision: 14134 $
+Last change on : $Date: 2012-03-08 03:11:39 +0100 (Do, 08. Mrz 2012) $
 Last change by : $Author: borkra $
 
 */
@@ -304,7 +304,7 @@ LBL_FatalError:
 			oldStatus = m_iStatus;
 			m_iDesiredStatus = m_iStatus = ID_STATUS_OFFLINE;
 			JSendBroadcast( NULL, ACKTYPE_STATUS, ACKRESULT_SUCCESS, ( HANDLE ) oldStatus, m_iStatus );
-		 goto LBL_Exit;
+         goto LBL_Exit;
 		}
 
 		if ( !DBGetContactSettingString( NULL, m_szModuleName, "LoginServer", &dbv )) {
@@ -492,7 +492,7 @@ LBL_FatalError:
 					if ( m_ThreadInfo->jabberServerCaps & JABBER_CAPS_PING ) {
 						CJabberIqInfo* pInfo = m_iqManager.AddHandler( &CJabberProto::OnPingReply, JABBER_IQ_TYPE_GET, NULL, 0, -1, this );
 						pInfo->SetTimeout( m_options.ConnectionKeepAliveTimeout );
-						info->send( XmlNodeIq( pInfo ) << XCHILDNS( _T("ping"), _T(JABBER_FEAT_PING)));
+						info->send( XmlNodeIq( pInfo ) << XATTR( _T("from"), m_ThreadInfo->fullJID ) << XCHILDNS( _T("ping"), _T(JABBER_FEAT_PING)));
 					}
 					else info->send( " \t " );
 					continue;
@@ -824,7 +824,7 @@ void CJabberProto::OnProcessFeatures( HXML node, ThreadData* info )
 
 				if ( !_tcscmp( xmlGetName( c ), _T("mechanism"))) {
 					//JabberLog("Mechanism: %s",xmlGetText( c ));
-						 if ( !_tcscmp( xmlGetText( c ), _T("PLAIN")))          m_AuthMechs.isPlainOldAvailable = m_AuthMechs.isPlainAvailable = true;
+					     if ( !_tcscmp( xmlGetText( c ), _T("PLAIN")))          m_AuthMechs.isPlainOldAvailable = m_AuthMechs.isPlainAvailable = true;
 					else if ( !_tcscmp( xmlGetText( c ), _T("DIGEST-MD5")))     m_AuthMechs.isMd5Available = true;
 					else if ( !_tcscmp( xmlGetText( c ), _T("SCRAM-SHA-1")))    m_AuthMechs.isScramAvailable = true;
 					else if ( !_tcscmp( xmlGetText( c ), _T("NTLM")))           m_AuthMechs.isNtlmAvailable = true;
@@ -1345,7 +1345,7 @@ void CJabberProto::OnProcessMessage( HXML node, ThreadData* info )
 			_tcsncpy( tempstring + _tcslen( prolog ), xmlGetText( xNode ), _tcslen( xmlGetText( xNode ) ) + 1);
 			_tcsncpy( tempstring + _tcslen( prolog ) + _tcslen(xmlGetText( xNode ) ), epilog, _tcslen( epilog ) + 1);
 			szMessage = tempstring;
-	  }
+      }
 		else if ( !_tcscmp( ptszXmlns, _T(JABBER_FEAT_DELAY)) && msgTime == 0 ) {
 			const TCHAR* ptszTimeStamp = xmlGetAttrValue( xNode, _T("stamp"));
 			if ( ptszTimeStamp != NULL )
@@ -1431,34 +1431,34 @@ void CJabberProto::OnProcessMessage( HXML node, ThreadData* info )
 			if (( n = xmlGetChild( xNode , "password" )) != NULL )
 				invitePassword = xmlGetText( n );
 		}
-		else if ( !_tcscmp( ptszXmlns, _T(JABBER_FEAT_ROSTER_EXCHANGE)) && 
-			item != NULL && (item->subscription == SUB_BOTH || item->subscription == SUB_TO)) {
+ 		else if ( !_tcscmp( ptszXmlns, _T(JABBER_FEAT_ROSTER_EXCHANGE)) && 
+ 			item != NULL && (item->subscription == SUB_BOTH || item->subscription == SUB_TO)) {
 			TCHAR chkJID[JABBER_MAX_JID_LEN] = _T("@");
 			JabberStripJid( from, chkJID + 1, SIZEOF(chkJID) - 1 ); 
-			for ( int i = 1; ; ++i ) { 
-				HXML iNode = xmlGetNthChild( xNode , _T("item"), i );
+ 			for ( int i = 1; ; ++i ) { 
+ 				HXML iNode = xmlGetNthChild( xNode , _T("item"), i );
 				if ( iNode == NULL ) break;
-				const TCHAR *action = xmlGetAttrValue( iNode, _T("action"));
-				const TCHAR *jid = xmlGetAttrValue( iNode, _T("jid"));
-				const TCHAR *nick = xmlGetAttrValue( iNode, _T("name"));
-				const TCHAR *group =  xmlGetText( xmlGetChild( iNode, _T("group")));
-				if ( action && jid && _tcsstr( jid, chkJID )) {
-					if ( !_tcscmp( action, _T("add"))) {
-						HANDLE hContact = DBCreateContact( jid, nick, FALSE, FALSE );
-						if ( group )
+ 				const TCHAR *action = xmlGetAttrValue( iNode, _T("action"));
+ 				const TCHAR *jid = xmlGetAttrValue( iNode, _T("jid"));
+ 				const TCHAR *nick = xmlGetAttrValue( iNode, _T("name"));
+ 				const TCHAR *group =  xmlGetText( xmlGetChild( iNode, _T("group")));
+ 				if ( action && jid && _tcsstr( jid, chkJID )) {
+ 					if ( !_tcscmp( action, _T("add"))) {
+ 						HANDLE hContact = DBCreateContact( jid, nick, FALSE, FALSE );
+ 						if ( group )
 							DBWriteContactSettingTString( hContact, "CList", "Group", group );
-					}
-					else if ( !_tcscmp( action, _T("modify"))) {
+ 					}
+ 					else if ( !_tcscmp( action, _T("modify"))) {
 //						HANDLE hContact = HContactFromJID( jid );
-					}
-					else if ( !_tcscmp( action, _T("delete"))) {
-						HANDLE hContact = HContactFromJID( jid );
-						if ( hContact )
-							JCallService( MS_DB_CONTACT_DELETE, ( WPARAM ) hContact, 0 );
-					}
-				}
-			}
-		}
+ 					}
+ 					else if ( !_tcscmp( action, _T("delete"))) {
+ 						HANDLE hContact = HContactFromJID( jid );
+ 						if ( hContact )
+ 							JCallService( MS_DB_CONTACT_DELETE, ( WPARAM ) hContact, 0 );
+ 					}
+ 				}
+ 			}
+ 		}
 		else if ( !isChatRoomInvitation && !_tcscmp( ptszXmlns, _T("jabber:x:conference"))) {
 			inviteRoomJid = xmlGetAttrValue( xNode, _T("jid"));
 			inviteFromJid = from;

@@ -98,10 +98,10 @@ extern "C" {
 #endif
 
 // Plugin headers
-#include "resource.h"
+#include "../resource.h"
 
 // libgadu headers
-#include "libgadu/libgadu.h"
+#include "../libgadu/libgadu.h"
 #include "dynstuff.h"
 
 // Search

@@ -1,4 +1,4 @@
-// ---------------------------------------------------------------------------80
+// ---------------------------------------------------------------------------
 //                ICQ plugin for Miranda Instant Messenger
 //                ________________________________________
 //
@@ -6,6 +6,7 @@
 // Copyright © 2001-2002 Jon Keating, Richard Hughes
 // Copyright © 2002-2004 Martin Öberg, Sam Kothari, Robert Rainwater
 // Copyright © 2004-2010 Joe Kucera
+// Copyright © 2010-2012 Borkra
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -94,7 +95,7 @@
 #include <win2k.h>
 
 // Project resources
-#include "resource.h"
+#include "../resource.h"
 
 // ICQ plugin includes
 #include "version.h"
@@ -128,15 +129,15 @@
 #include "icq_advsearch.h"
 #include "icq_uploadui.h"
 #include "log.h"
-#include "UI/askauthentication.h"
-#include "UI/userinfotab.h"
-#include "UI/loginpassword.h"
+#include "../UI/askauthentication.h"
+#include "../UI/userinfotab.h"
+#include "../UI/loginpassword.h"
 
 #include "icq_rates.h"
 
 #include "icq_avatar.h"
 
-#include "changeinfo/changeinfo.h"
+#include "../changeinfo/changeinfo.h"
 #include "icq_popups.h"
 #include "icq_proto.h"
 

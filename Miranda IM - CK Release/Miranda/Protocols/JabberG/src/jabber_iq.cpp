@@ -2,7 +2,7 @@
 
 Jabber Protocol Plugin for Miranda IM
 Copyright ( C ) 2002-04  Santithorn Bunchua
-Copyright ( C ) 2005-11  George Hazan
+Copyright ( C ) 2005-12  George Hazan
 Copyright ( C ) 2007     Maxim Mluhov
 
 This program is free software; you can redistribute it and/or
@@ -19,8 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13898 $
-Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
+Revision       : $Revision: 14134 $
+Last change on : $Date: 2012-03-08 03:11:39 +0100 (Do, 08. Mrz 2012) $
 Last change by : $Author: borkra $
 
 */
@@ -235,7 +235,7 @@ void CJabberIqManager::ExpireInfo( CJabberIqInfo* pInfo, void*)
 	if (( pInfo->m_dwParamsToParse & JABBER_IQ_PARSE_HCONTACT ) && ( pInfo->m_szFrom ))
 		pInfo->m_hContact = ppro->HContactFromJID( pInfo->m_szFrom , 3);
 
-	ppro->Log( "Expiring iq id %d, sent to " TCHAR_STR_PARAM, pInfo->m_nIqId, pInfo->m_szReceiver ? pInfo->m_szReceiver : _T("unknown") );
+	ppro->Log( "Expiring iq id %d, sent to " TCHAR_STR_PARAM, pInfo->m_nIqId, pInfo->m_szReceiver ? pInfo->m_szReceiver : _T("server") );
 
 	pInfo->m_nIqType = JABBER_IQ_TYPE_FAIL;
 	(ppro->*(pInfo->m_pHandler))( NULL, pInfo );

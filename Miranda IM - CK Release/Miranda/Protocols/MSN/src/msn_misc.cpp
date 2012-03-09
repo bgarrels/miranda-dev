@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "msn_global.h"
 #include "msn_proto.h"
-#include "../version.h"
+#include "version.h"
 
 #if !defined(_UNICODE) && !defined(_WIN64)
 
@@ -180,28 +180,16 @@ void CMsnProto::InitCustomFolders(void)
 {
 	if (InitCstFldRan) return; 
 
-	{
-		TCHAR folder[MAX_PATH];
+	TCHAR folder[MAX_PATH];
+	TCHAR* tszModuleName = mir_a2t( m_szModuleName );
 
-		TCHAR *tmpPath = _T("%miranda_userdata%");
-		TCHAR *tszModuleName = mir_a2t(m_szModuleName);
-		mir_sntprintf(folder, SIZEOF(folder), _T("%s\\Avatars\\%s"), tmpPath, tszModuleName);
-		hMSNAvatarsFolder = FoldersRegisterCustomPathT(m_szModuleName, "Avatars", folder);
-		mir_free(tszModuleName);
-		//mir_free(tmpPath);
-	}
+	mir_sntprintf(folder, SIZEOF(folder), _T("%%miranda_avatarcache%%\\%s"), tszModuleName);
+	hMSNAvatarsFolder = FoldersRegisterCustomPathT(m_szModuleName, "Avatars", folder);
 
-	{
-		TCHAR folder[MAX_PATH];
+	mir_sntprintf(folder, SIZEOF(folder), _T("%%miranda_userdata%%\\%s\\CustomSmiley"), tszModuleName);
+	hCustomSmileyFolder = FoldersRegisterCustomPathT(m_szModuleName, "Custom Smiley", folder);
 
-		TCHAR *tmpPath = _T("%miranda_userdata%");
-		TCHAR *tszModuleName = mir_a2t(m_szModuleName);
-		mir_sntprintf(folder, SIZEOF(folder), _T("%s\\Avatars\\%s"), tmpPath, tszModuleName);
-		hCustomSmileyFolder = FoldersRegisterCustomPathT(m_szModuleName, "Custom Smiley", folder);
-		mir_free(tszModuleName);
-		//mir_free(tmpPath);
-	}
-
+	mir_free(tszModuleName);
 	InitCstFldRan = true;
 }
 
@@ -241,9 +229,9 @@ void  CMsnProto::MSN_GetAvatarFileName(HANDLE hContact, TCHAR* pszDest, size_t c
 	TCHAR* path = (TCHAR*)alloca(cbLen * sizeof(TCHAR));
 	if (hMSNAvatarsFolder == NULL || FoldersGetCustomPathT(hMSNAvatarsFolder, path, (int)cbLen, _T("")))
 	{
-		TCHAR *tmpPath = Utils_ReplaceVarsT(_T("%miranda_userdata%"));
+		TCHAR *tmpPath = Utils_ReplaceVarsT(_T("%miranda_avatarcache%"));
 		TCHAR *sztModuleName = mir_a2t(m_szModuleName);
-		tPathLen = mir_sntprintf(pszDest, cbLen, _T("%s\\Avatars\\%s"), tmpPath, sztModuleName);
+		tPathLen = mir_sntprintf(pszDest, cbLen, _T("%s\\%s"), tmpPath, sztModuleName);
 		mir_free(sztModuleName);
 		mir_free(tmpPath);
 	}

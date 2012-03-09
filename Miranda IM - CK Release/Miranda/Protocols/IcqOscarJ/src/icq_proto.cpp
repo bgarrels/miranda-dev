@@ -24,8 +24,8 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_proto.cpp $
-// Revision       : $Revision: 14083 $
-// Last change on : $Date: 2012-02-13 00:49:16 +0400 (Пн, 13 фев 2012) $
+// Revision       : $Revision: 14090 $
+// Last change on : $Date: 2012-02-18 18:31:33 +0100 (Sa, 18. Feb 2012) $
 // Last change by : $Author: borkra $
 //
 // DESCRIPTION:
@@ -200,9 +200,6 @@ cheekySearchId( -1 )
 
 	// Init extra statuses
 	InitXStatusIcons();
-
-	// Unsane: init contact menu
-	MenuInit();
 
 	HookProtoEvent(ME_CLIST_PREBUILDSTATUSMENU, &CIcqProto::OnPreBuildStatusMenu);
 
@@ -1669,7 +1666,7 @@ int __cdecl CIcqProto::SendMsg( HANDLE hContact, int flags, const char* pszSrc )
 			if (!dwUin || !CheckContactCapabilities(hContact, CAPF_SRV_RELAY) || 
 				wRecipientStatus == ID_STATUS_OFFLINE || wRecipientStatus == ID_STATUS_INVISIBLE ||
 				getSettingByte(hContact, "OnlyServerAcks", getSettingByte(NULL, "OnlyServerAcks", DEFAULT_ONLYSERVERACKS)) ||
-				getSettingByte(hContact, "SlowSend", getSettingByte(NULL, "SlowSend", DEFAULT_SLOWSEND)))
+				!getSettingByte(hContact, "SlowSend", getSettingByte(NULL, "SlowSend", DEFAULT_SLOWSEND)))
 			{
 				/// TODO: add support for RTL & user customizable font
 				{
