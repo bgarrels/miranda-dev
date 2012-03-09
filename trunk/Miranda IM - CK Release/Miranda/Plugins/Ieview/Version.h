@@ -1,7 +1,7 @@
 #define __MAJOR_VERSION				1
 #define __MINOR_VERSION				3
 #define __RELEASE_NUM				0
-#define __BUILD_NUM					2
+#define __BUILD_NUM					3
 
 #define __FILEVERSION_STRING		__MAJOR_VERSION,__MINOR_VERSION,__RELEASE_NUM,__BUILD_NUM
 #define __FILEVERSION_DOTS			__MAJOR_VERSION.__MINOR_VERSION.__RELEASE_NUM.__BUILD_NUM
@@ -23,5 +23,5 @@
 #define __DESCRIPTION 				"IE Based Chat Log."
 #define __AUTHOR					"Piotr Piastucki, Francois Mean"
 #define __AUTHOREMAIL				"the_leech@users.berlios.de"
-#define __AUTHORWEB					"http://developer.berlios.de/projects/mgoodies"
+#define __AUTHORWEB					"http://miranda-plugins.googlecode.com/svn/trunk/IEView"
 #define __COPYRIGHT					"© 2005-2012 Piotr Piastucki, Francois Mean"

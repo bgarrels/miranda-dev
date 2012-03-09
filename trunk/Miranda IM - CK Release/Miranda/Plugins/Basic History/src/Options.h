@@ -17,6 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
 #pragma once
+#include "IExport.h"
 
 struct FilterOptions
 {
@@ -39,6 +40,81 @@ struct FilterOptions
 	bool onlyOutgoing;
 };
 
+struct TaskOptions
+{
+	bool compress;
+	bool useFtp;
+	bool isSystem;
+	bool active;
+	enum TaskType
+	{
+		Export,
+		Delete,
+		ExportAndDelete
+	} type;
+
+	enum EventUnit
+	{
+		Minute,
+		Hour,
+		Day
+	} eventUnit;
+
+	enum TrigerType
+	{
+		AtStart,
+		AtEnd,
+		Daily, 
+		Weekly,
+		Monthly,
+		DeltaMin,
+		DeltaHour
+	} trigerType;
+
+	IExport::ExportType exportType;
+	int eventDeltaTime;
+	int filterId;
+	int dayTime;
+	int dayOfWeek;
+	int dayOfMonth;
+	int deltaTime;
+	int orderNr;
+	time_t lastExport;
+	std::wstring ftpName;
+	std::wstring filterName;
+	std::wstring filePath;
+	std::wstring taskName;
+	std::vector<HANDLE> contacts;
+	TaskOptions()
+	{
+		type = Export;
+		eventUnit = Hour;
+		trigerType = AtStart;
+		exportType = IExport::RichHtml;
+		eventDeltaTime = 0;
+		filterId = 0;
+		compress = true;
+		useFtp = false;
+		isSystem = false;
+		active = true;
+		dayTime = 20 * 60;
+		dayOfWeek = 0;
+		dayOfMonth = 1;
+		deltaTime = 24;
+		orderNr = 0;
+		TCHAR buf[MAX_PATH];
+		if(SUCCEEDED(SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, buf)))
+		{
+			filePath = buf;
+			filePath += _T("\\");
+		}
+
+		filePath += TranslateT("History");
+		filePath += _T("_<contact>_<date>.<ext>");
+		lastExport = time(NULL);
+	}
+};
+
 class Options
 {
 private:
@@ -53,10 +129,17 @@ public:
 	static INT_PTR CALLBACK DlgProcOptsMessages(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 	static INT_PTR CALLBACK DlgProcOptsSearching(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 	static INT_PTR CALLBACK DlgProcOptsExport(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
+	static INT_PTR CALLBACK DlgProcOptsScheduler(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
+	static INT_PTR CALLBACK DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
+	static bool FTPAvail();
 
 	static Options *instance;
 	void Save();
+	void SaveTasks(std::list<TaskOptions>* tasks);
+	void SaveTaskTime(TaskOptions& to);
 	void Load();
+	void LoadTasks();
+	void Unload();
 
 	bool showContacts, showContactGroups, groupNewOnTop, groupShowEvents, groupShowTime, groupShowName, groupShowMessage;
 	bool messagesNewOnTop, messagesShowDate, messagesShowSec, messagesShowName, messagesShowEvents, messagesUseSmileys;
@@ -69,6 +152,11 @@ public:
 	std::wstring encodingTxt, encodingHtml1, encodingHtml2;
 	bool exportHtml1ShowDate, exportHtml2ShowDate, exportHtml2UseSmileys;
 	std::wstring extCssHtml2;
+	std::vector<TaskOptions> taskOptions;
+	std::wstring ftpLogPath;
+	std::wstring ftpExePathDef;
+	std::wstring ftpExePath;
+	CRITICAL_SECTION criticalSection;
 
 	enum Fonts
 	{

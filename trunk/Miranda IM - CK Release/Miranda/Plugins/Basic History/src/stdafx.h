@@ -7,6 +7,10 @@
 
 #include "targetver.h"
 
+#if defined(__DEBUG__) || defined(_DEBUG) || defined(DEBUG)
+#define DEBUGMODE // Debug Mode
+#endif
+
 #ifndef _WIN64
 #define _USE_32BIT_TIME_T
 #endif
@@ -32,7 +36,8 @@
 #include <string>
 #include <fstream>
 
-#define MIRANDA_VER		0x0A00
+#define MIRANDA_VER 0x0A00
+#define MIRANDA_CUSTOM_LP
 
 #include <newpluginapi.h>
 #include <m_langpack.h>
@@ -53,9 +58,11 @@
 #include <m_protosvc.h>
 #include <m_icq.h>
 #include <m_clc.h>
+#include <m_utils.h>
 
 #include <win2k.h>
 
+//ExternalApi
 #include "m_updater.h"
 #include "m_smileyadd.h"
 #include "m_toolbar.h"

@@ -2,7 +2,7 @@
 
 'Language Pack Manager'-Plugin for Miranda IM
 
-Copyright (C) 2005-2007 H. Herkenrath
+Copyright (C) 2005-2012 H. Herkenrath
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

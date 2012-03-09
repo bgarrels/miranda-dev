@@ -21,6 +21,8 @@
 //
 // ---------------------------------------------------------------------------
 
+#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_NONSTDC_NO_WARNINGS
 
 #include <windows.h>
 #include <commctrl.h>
@@ -55,9 +57,9 @@
 #include "m_message.h"
 #include "statusmodes.h"
 #include "win2k.h"
+
 #include "resource.h"
 
-//ExternalApi
 #include "m_updater.h"
 
 #include "utils.h"

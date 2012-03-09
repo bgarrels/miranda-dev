@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 #ifndef _WIN32_WINNT
-#define _WIN32_WINNT 0x0501		// XP
+#define _WIN32_WINNT 0x0600		// Win 7
 #endif
 
 /*

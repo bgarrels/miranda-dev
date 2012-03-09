@@ -217,7 +217,8 @@ static BOOL CALLBACK DlgProcFirstRun(HWND hwndDlg,UINT msg,WPARAM wParam,LPARAM 
 				  DBWriteContactSettingTString(NULL, szGPGModuleName, dbsetting.c_str(), passwd);
 			  }
 			  {
-				  wstring keyinfo = _T("Current private key id: ");
+				  wstring keyinfo = TranslateT("Current private key id");
+				  keyinfo += _T(": ");
 				  keyinfo += (fp[0])?fp:_T("not set");
 				  extern HWND hwndCurKey_p;
 				  SetWindowText(hwndCurKey_p, keyinfo.c_str());
@@ -389,7 +390,7 @@ static BOOL CALLBACK DlgProcFirstRun(HWND hwndDlg,UINT msg,WPARAM wParam,LPARAM 
 				  wfstream f(path.c_str(), std::ios::out);
 				  if(!f.is_open())
 				  {
-					  MessageBox(0, _T("Failed to open file"), _T("Error"), MB_OK);
+					  MessageBox(0, TranslateT("Failed to open file"), TranslateT("Error"), MB_OK);
 					  break;
 				  }
 				  f<<"Key-Type: RSA";
@@ -552,7 +553,7 @@ static BOOL CALLBACK DlgProcGpgBinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 			if(_waccess(gpg_lang_path, 0) != -1)
 				lang_exists = true;
 			if(gpg_exists && !lang_exists) //TODO: check gpg version
-				MessageBox(0, _T("gpg binary found in miranda folder, but english locale does not exists.\nit's highly recommended to place \\gnupg.nls\\en@quot.mo in gnupg folder under miranda root.\nwithout this file you may expirense many problem with gpg output on non english systems.\nand plugin may completely do not work.\nyou have beed warned."), _T("Warning"), MB_OK);		
+				MessageBox(0, TranslateT("gpg binary found in miranda folder, but english locale does not exists.\nit's highly recommended to place \\gnupg.nls\\en@quot.mo in gnupg folder under miranda root.\nwithout this file you may expirense many problem with gpg output on non english systems.\nand plugin may completely do not work.\nyou have beed warned."), TranslateT("Warning"), MB_OK);
 			mir_free(gpg_path);
 			mir_free(gpg_lang_path);
 		}
@@ -570,7 +571,7 @@ static BOOL CALLBACK DlgProcGpgBinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 				{
 					if(errno == ENOENT)
 					{
-						MessageBox(0, _T("wrong gpg binary location found in system.\nplease choose another location"), _T("Warning"), MB_OK);
+						MessageBox(0, TranslateT("wrong gpg binary location found in system.\nplease choose another location"), TranslateT("Warning"), MB_OK);
 					}
 				}
 			}
@@ -614,10 +615,10 @@ static BOOL CALLBACK DlgProcGpgBinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 			else
 			{
 				bad_version = false;
-				MessageBox(0, _T("This is not gnupg binary !\nrecommended to use GnuPG v1.x.x with this plugn."), _T("Warning"), MB_OK);
+				MessageBox(0, TranslateT("This is not gnupg binary !\nrecommended to use GnuPG v1.x.x with this plugn."), TranslateT("Warning"), MB_OK);
 			}
 			if(bad_version)
-				MessageBox(0, _T("Unsupported gnupg version found, use at you own risk!\nrecommended to use GnuPG v1.x.x with this plugn."), _T("Warning"), MB_OK);
+				MessageBox(0, TranslateT("Unsupported gnupg version found, use at you own risk!\nrecommended to use GnuPG v1.x.x with this plugn."), TranslateT("Warning"), MB_OK);
 		}
 		mir_free(tmp);
 		if(!gpg_exists)
@@ -629,7 +630,7 @@ static BOOL CALLBACK DlgProcGpgBinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 		SetDlgItemText(hwndDlg, IDC_HOME_DIR, !gpg_exists?tmp:_T("gpg"));
 		mir_free(tmp);
 		if(gpg_exists && lang_exists && !bad_version)
-			MessageBox(0, _T("You have supported version of gpg binary, and gpg language file in place!\ngpg plugin should work fine on your installation!\njust press ok in wollowing diallog."), _T("Info"), MB_OK);
+			MessageBox(0, TranslateT("Your GPG version is supported. The language file was found.\nGPG plugin should work fine.\nPress OK to continue."), TranslateT("Info"), MB_OK);
 		extern bool bIsMiranda09;
 		EnableWindow(GetDlgItem(hwndDlg, IDC_AUTO_EXCHANGE), bIsMiranda09);
       return TRUE;
@@ -690,14 +691,14 @@ static BOOL CALLBACK DlgProcGpgBinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 			  {
 				  if(errno == ENOENT)
 				  {
-					  MessageBox(0, _T("gpg binary does not exists.\nplease choose another location"), _T("Warning"), MB_OK);
+					  MessageBox(0, TranslateT("gpg binary does not exists.\nplease choose another location"), TranslateT("Warning"), MB_OK);
 					  break;
 				  }
 			  }
 		  }
 		  else
 		  {
-			  MessageBox(0, _T("please choose gpg binary location"), _T("Warning"), MB_OK);
+			  MessageBox(0, TranslateT("please choose gpg binary location"), TranslateT("Warning"), MB_OK);
 			  break;
 		  }
 		  {
@@ -734,10 +735,10 @@ static BOOL CALLBACK DlgProcGpgBinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 			  else
 			  {
 				  bad_version = false;
-				  MessageBox(0, _T("This is not gnupg binary !\nrecommended to use GnuPG v1.x.x with this plugn."), _T("Warning"), MB_OK);
+				  MessageBox(0, TranslateT("This is not gnupg binary !\nrecommended to use GnuPG v1.x.x with this plugn."), TranslateT("Warning"), MB_OK);
 			  }
 			  if(bad_version)
-				  MessageBox(0, _T("Unsupported gnupg version found, use at you own risk!\nrecommended to use GnuPG v1.x.x with this plugn."), _T("Warning"), MB_OK);
+				  MessageBox(0, TranslateT("Unsupported gnupg version found, use at you own risk!\nrecommended to use GnuPG v1.x.x with this plugn."), TranslateT("Warning"), MB_OK);
 		  }
 		  DBWriteContactSettingTString(NULL, szGPGModuleName, "szGpgBinPath", tmp);
 		  GetDlgItemText(hwndDlg, IDC_HOME_DIR, tmp, 512);
@@ -745,7 +746,7 @@ static BOOL CALLBACK DlgProcGpgBinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 			  tmp[_tcslen(tmp)-1] = '\0';
 		  if(!tmp[0])
 		  {
-			  MessageBox(0, _T("please set keyring's home directory"), _T("Warning"), MB_OK);
+			  MessageBox(0, TranslateT("please set keyring's home directory"), TranslateT("Warning"), MB_OK);
 			  break;
 		  }
 		  DBWriteContactSettingTString(NULL, szGPGModuleName, "szHomePath", tmp);
@@ -779,14 +780,14 @@ static BOOL CALLBACK DlgProcGpgBinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 				{
 					if(errno == ENOENT)
 					{
-						MessageBox(0, _T("gpg binary does not exists.\nplease choose another location"), _T("Warning"), MB_OK);
+						MessageBox(0, TranslateT("gpg binary does not exists.\nplease choose another location"), TranslateT("Warning"), MB_OK);
 						break;
 					}
 				}
 			}
 			else
 			{
-				MessageBox(0, _T("please choose gpg binary location"), _T("Warning"), MB_OK);
+				MessageBox(0, TranslateT("please choose gpg binary location"), TranslateT("Warning"), MB_OK);
 				break;
 			}
 			{
@@ -823,10 +824,10 @@ static BOOL CALLBACK DlgProcGpgBinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 				else
 				{
 					bad_version = false;
-					MessageBox(0, _T("This is not gnupg binary !\nrecommended to use GnuPG v1.x.x with this plugn."), _T("Warning"), MB_OK);
+					MessageBox(0, TranslateT("This is not gnupg binary !\nrecommended to use GnuPG v1.x.x with this plugn."), TranslateT("Warning"), MB_OK);
 				}
 				if(bad_version)
-					MessageBox(0, _T("Unsupported gnupg version found, use at you own risk!\nrecommended to use GnuPG v1.x.x with this plugn."), _T("Warning"), MB_OK);
+					MessageBox(0, TranslateT("Unsupported gnupg version found, use at you own risk!\nrecommended to use GnuPG v1.x.x with this plugn."), TranslateT("Warning"), MB_OK);
 			}
 			DBWriteContactSettingTString(NULL, szGPGModuleName, "szGpgBinPath", tmp);
 			GetDlgItemText(hwndDlg, IDC_HOME_DIR, tmp, 512);
@@ -834,7 +835,7 @@ static BOOL CALLBACK DlgProcGpgBinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 				tmp[_tcslen(tmp)-1] = '\0';
 			if(!tmp[0])
 			{
-				MessageBox(0, _T("please set keyring's home directory"), _T("Warning"), MB_OK);
+				MessageBox(0, TranslateT("please set keyring's home directory"), TranslateT("Warning"), MB_OK);
 				break;
 			}
 			DBWriteContactSettingTString(NULL, szGPGModuleName, "szHomePath", tmp);
@@ -859,7 +860,7 @@ static BOOL CALLBACK DlgProcGpgBinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 				  wfstream f(path.c_str(), std::ios::out);
 				  if(!f.is_open())
 				  {
-					  MessageBox(0, _T("Failed to open file"), _T("Error"), MB_OK);
+					  MessageBox(0, TranslateT("Failed to open file"), TranslateT("Error"), MB_OK);
 					  break;
 				  }
 				  f<<"Key-Type: RSA";
@@ -989,23 +990,24 @@ static BOOL CALLBACK DlgProcNewKeyDialog(HWND hwndDlg, UINT msg, WPARAM wParam, 
 {
 	extern HANDLE new_key_hcnt;
 	extern boost::mutex new_key_hcnt_mutex;
-	HANDLE hContact = new_key_hcnt;
-	new_key_hcnt_mutex.unlock();
+	HANDLE hContact = INVALID_HANDLE_VALUE;
 	void ImportKey();
 	TCHAR *tmp = NULL;
   switch (msg)
   {
   case WM_INITDIALOG:
     {
+		hContact = new_key_hcnt;
+		new_key_hcnt_mutex.unlock();
 		SetWindowPos(hwndDlg, 0, new_key_rect.left, new_key_rect.top, 0, 0, SWP_NOSIZE|SWP_SHOWWINDOW);
 		TranslateDialogDefault(hwndDlg);
 		TCHAR *tmp = UniGetContactSettingUtf(hContact, szGPGModuleName, "GPGPubKey", _T(""));
-		SetDlgItemText(hwndDlg, IDC_MESSAGE, (_tcslen(tmp) > 0)?_T("There is existing key for contact, would you like to replace with new key ?"):_T("New public key was received, do you want to import it?"));
+		SetDlgItemText(hwndDlg, IDC_MESSAGE, (_tcslen(tmp) > 0)?TranslateT("There is existing key for contact, would you like to replace with new key ?"):TranslateT("New public key was received, do you want to import it?"));
 		EnableWindow(GetDlgItem(hwndDlg, IDC_IMPORT_AND_USE), DBGetContactSettingByte(hContact, szGPGModuleName, "GPGEncryption", 0)?0:1);
-		SetDlgItemText(hwndDlg, ID_IMPORT, (_tcslen(tmp) > 0)?_T("Replace"):_T("Accept"));
+		SetDlgItemText(hwndDlg, ID_IMPORT, (_tcslen(tmp) > 0)?TranslateT("Replace"):_T("Accept"));
 		mir_free(tmp);
 		tmp = new TCHAR [256];
-		_tcscpy(tmp, _T("Received key from "));
+		_tcscpy(tmp, TranslateT("Received key from "));
 		_tcscat(tmp, (TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)hContact, (LPARAM)GCDNF_TCHAR));
 		SetDlgItemText(hwndDlg, IDC_KEY_FROM, tmp);
 		delete [] tmp;
@@ -1072,7 +1074,7 @@ static BOOL CALLBACK DlgProcKeyGenDialog(HWND hwndDlg, UINT msg, WPARAM wParam, 
     {
 		SetWindowPos(hwndDlg, 0, key_gen_rect.left, key_gen_rect.top, 0, 0, SWP_NOSIZE|SWP_SHOWWINDOW);
 		TranslateDialogDefault(hwndDlg);
-		SetWindowText(hwndDlg, TranslateW(_T("Key Generation dialog")));
+		SetWindowText(hwndDlg, TranslateT("Key Generation dialog"));
 		ComboBoxAddStringUtf(GetDlgItem(hwndDlg, IDC_KEY_TYPE), _T("RSA"), 0);
 		ComboBoxAddStringUtf(GetDlgItem(hwndDlg, IDC_KEY_TYPE), _T("DSA"), 1);
 		SendDlgItemMessage(hwndDlg, IDC_KEY_TYPE, CB_SETCURSEL, (WPARAM)1, 0);
@@ -1098,7 +1100,7 @@ static BOOL CALLBACK DlgProcKeyGenDialog(HWND hwndDlg, UINT msg, WPARAM wParam, 
 				  if(_tcslen(tmp) < 3)
 				  {
 					  mir_free(tmp);
-					  MessageBox(0, TranslateW(_T("You must set encryption algorythm first")), TranslateW(_T("Error")), MB_OK);
+					  MessageBox(0, TranslateT("You must set encryption algorythm first"), TranslateT("Error"), MB_OK);
 					  break;
 				  }
 				  mir_free(tmp);
@@ -1108,14 +1110,14 @@ static BOOL CALLBACK DlgProcKeyGenDialog(HWND hwndDlg, UINT msg, WPARAM wParam, 
 				  mir_free(tmp);
 				  if(length < 1024 || length > 4096)
 				  {
-					  MessageBox(0, TranslateW(_T("Key length must be of length from 1024 to 4096 bits")), TranslateW(_T("Error")), MB_OK);
+					  MessageBox(0, TranslateT("Key length must be of length from 1024 to 4096 bits"), TranslateT("Error"), MB_OK);
 					  break;
 				  }
 				  tmp = new TCHAR [12];
 				  GetDlgItemText(hwndDlg, IDC_KEY_EXPIRE_DATE, tmp, 12);
 				  if(_tcslen(tmp) != 10 && tmp[0] != '0')
 				  {
-					  MessageBox(0, TranslateW(_T("Invalid date")), TranslateW(_T("Error")), MB_OK);
+					  MessageBox(0, TranslateT("Invalid date"), TranslateT("Error"), MB_OK);
 					  delete [] tmp;
 					  break;
 				  }
@@ -1124,13 +1126,13 @@ static BOOL CALLBACK DlgProcKeyGenDialog(HWND hwndDlg, UINT msg, WPARAM wParam, 
 				  GetDlgItemText(hwndDlg, IDC_KEY_REAL_NAME, tmp, 128);
 				  if(_tcslen(tmp) < 5)
 				  {
-					  MessageBox(0, TranslateW(_T("Name must contain at least 5 characters")), TranslateW(_T("Error")), MB_OK);
+					  MessageBox(0, TranslateT("Name must contain at least 5 characters"), TranslateT("Error"), MB_OK);
 					  delete [] tmp;
 					  break;
 				  }
 				  else if (_tcschr(tmp, _T('(')) || _tcschr(tmp, _T(')')))
 				  {
-					  MessageBox(0, TranslateW(_T("Name cannot contain '(' or ')'")), TranslateW(_T("Error")), MB_OK);
+					  MessageBox(0, TranslateT("Name cannot contain '(' or ')'"), TranslateT("Error"), MB_OK);
 					  delete [] tmp;
 					  break;
 				  }
@@ -1139,7 +1141,7 @@ static BOOL CALLBACK DlgProcKeyGenDialog(HWND hwndDlg, UINT msg, WPARAM wParam, 
 				  GetDlgItemText(hwndDlg, IDC_KEY_EMAIL, tmp, 128);
 				  if((_tcslen(tmp)) < 5 || (!_tcschr(tmp, _T('@'))) || (!_tcschr(tmp, _T('.'))))
 				  {
-					  MessageBox(0, TranslateW(_T("Invalid Email")), TranslateW(_T("Error")), MB_OK);
+					  MessageBox(0, TranslateT("Invalid Email"), TranslateT("Error"), MB_OK);
 					  delete [] tmp;
 					  break;
 				  }
@@ -1155,7 +1157,7 @@ static BOOL CALLBACK DlgProcKeyGenDialog(HWND hwndDlg, UINT msg, WPARAM wParam, 
 				  wfstream f(path.c_str(), std::ios::out);
 				  if(!f.is_open())
 				  {
-					  MessageBox(0, TranslateW(_T("Failed to open file")), TranslateW(_T("Error")), MB_OK);
+					  MessageBox(0, TranslateT("Failed to open file"), TranslateT("Error"), MB_OK);
 					  break;
 				  }
 				  f<<"Key-Type: ";
@@ -1567,10 +1569,25 @@ static BOOL CALLBACK DlgProcLoadExistingKey(HWND hwndDlg,UINT msg,WPARAM wParam,
 			  {
 				  out.erase(s, 1);
 			  }
-			  TCHAR *tmp = mir_a2t(out.c_str());
+			  std::string::size_type p1 = 0, p2 = 0;
+			  p1 = out.find("-----BEGIN PGP PUBLIC KEY BLOCK-----");
+			  if(p1 != std::string::npos)
+			  {
+				  p2 = out.find("-----END PGP PUBLIC KEY BLOCK-----", p1);
+				  if(p2 != std::string::npos)
+				  {
+					  p2 += strlen("-----END PGP PUBLIC KEY BLOCK-----");
+					  out = out.substr(p1, p2-p1);
+					  TCHAR *tmp = mir_a2t(out.c_str());
+					  SetWindowText(hPubKeyEdit, tmp);
+					  mir_free(tmp);
+				  }
+				  else
+					  MessageBox(NULL, TranslateT("Failed to export public key."), TranslateT("Error"), MB_OK);
+			  }
+			  else
+				  MessageBox(NULL, TranslateT("Failed to export public key."), TranslateT("Error"), MB_OK);
 //			  SetDlgItemText(hPubKeyEdit, IDC_PUBLIC_KEY_EDIT, tmp);
-			  SetWindowText(hPubKeyEdit, tmp);
-			  mir_free(tmp);
 		  }
 		  DestroyWindow(hwndDlg);
 		  break;
@@ -1622,12 +1639,13 @@ static BOOL CALLBACK DlgProcImportKeyDialog(HWND hwndDlg, UINT msg, WPARAM wPara
 {
   extern HANDLE new_key_hcnt;
   extern boost::mutex new_key_hcnt_mutex;
-  HANDLE hContact = new_key_hcnt;
-  new_key_hcnt_mutex.unlock();
+  HANDLE hContact = INVALID_HANDLE_VALUE;
   switch (msg)
   {
   case WM_INITDIALOG:
     {
+		hContact = new_key_hcnt;
+		new_key_hcnt_mutex.unlock();
 		SetWindowPos(hwndDlg, 0 , import_key_rect.left, import_key_rect.top, 0, 0, SWP_NOSIZE|SWP_SHOWWINDOW);
 		TranslateDialogDefault(hwndDlg);
 		ComboBoxAddStringUtf(GetDlgItem(hwndDlg, IDC_KEYSERVER), _T("subkeys.pgp.net"), 0);
@@ -1801,14 +1819,14 @@ void InitCheck()
 		mir_free(home_dir);
 		tmp_dir += _T("\\tmp");
 		_wmkdir(tmp_dir.c_str());
-		string question = "Your secret key whith id: ";
+		string question = Translate("Your secret key whith id: ");
 		char *keyid = UniGetContactSettingUtf(NULL, szGPGModuleName, "KeyID", "");
 		question += keyid;
 		mir_free(keyid);
-		question += " deleted from gpg secret keyring\nDo you want to set another key ?";
+		question += Translate(" deleted from gpg secret keyring\nDo you want to set another key ?");
 		void ShowFirstRunDialog();
 		if(out.find(keyid) == string::npos)
-			if(MessageBoxA(0, question.c_str(), "Own secret key warning", MB_YESNO) == IDYES)
+			if(MessageBoxA(0, question.c_str(), Translate("Own secret key warning"), MB_YESNO) == IDYES)
 				ShowFirstRunDialog();
 	}
 	{
@@ -1842,7 +1860,7 @@ void ImportKey()
 	new_key_hcnt_mutex.unlock();
 	bool for_all_sub = false;
 	if(metaIsProtoMetaContacts(hContact))
-		if(MessageBox(0, _T("Do you want load key for all subcontacts ?"), _T("Metacontact detected"), MB_YESNO) == IDYES)
+		if(MessageBox(0, TranslateT("Do you want load key for all subcontacts ?"), TranslateT("Metacontact detected"), MB_YESNO) == IDYES)
 			for_all_sub = true;
 	if(metaIsProtoMetaContacts(hContact))
 	{

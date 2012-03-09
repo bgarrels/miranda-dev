@@ -42,9 +42,10 @@
 #include "strpos.h"
 #include "legacy.h"
 
-MM_INTERFACE mmi;
+struct MM_INTERFACE mmi;
 LIST_INTERFACE  li;
 SortedList *servicesList;
+int hLangpack;
 
 // ====[ MAIN ]===============================================================
 

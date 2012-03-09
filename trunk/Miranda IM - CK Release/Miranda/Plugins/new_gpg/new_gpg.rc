@@ -1,6 +1,6 @@
 // Microsoft Visual C++ generated resource script.
 //
-#include "resource.h"
+#include "src/resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 
 1 TEXTINCLUDE 
 BEGIN
-    "resource.h\0"
+    "src/resource.h\0"
 END
 
 2 TEXTINCLUDE 
@@ -280,7 +280,7 @@ BEGIN
             VALUE "FileDescription", "new_gpg"
             VALUE "FileVersion", "0.0.0.11"
             VALUE "InternalName", "new_gpg"
-            VALUE "LegalCopyright", "Copyright (C) 2010-2011 sss"
+            VALUE "LegalCopyright", "Copyright (C) 2010 - 2012 sss"
             VALUE "OriginalFilename", "new_gpg"
             VALUE "ProductName", "new_gpg"
             VALUE "ProductVersion", "0.9.0.0"

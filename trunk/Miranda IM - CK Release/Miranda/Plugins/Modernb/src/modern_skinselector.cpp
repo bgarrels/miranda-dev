@@ -2,7 +2,7 @@
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2008 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -26,14 +26,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "windows.h"
 
 //hdr
-#include "modern_commonheaders.h"
-#include "modern_skinselector.h"
-#include "modern_skinengine.h"
-#include "modern_commonprototypes.h"
+#include "../hdr/modern_commonheaders.h"
+#include "../hdr/modern_skinselector.h"
+#include "../hdr/modern_skinengine.h"
+#include "../hdr/modern_commonprototypes.h"
 
 //m_api
-#include "m_skin_eng.h"
-#include "m_skinbutton.h"
+#include "../m_api/m_skin_eng.h"
+#include "../m_api/m_skinbutton.h"
 LISTMODERNMASK * MainModernMaskList=NULL;
 
 

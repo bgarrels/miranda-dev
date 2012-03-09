@@ -294,9 +294,9 @@ void SetStatusIcon(struct MessageWindowData *dat) {
 	if (dat->szProto != NULL) {
 		char *szProto = dat->szProto;
 		HANDLE hContact = dat->windowData.hContact;
-		
+
 		char* szMetaProto = (char*)CallService(MS_MC_GETPROTOCOLNAME, 0, 0);
-		if ((INT_PTR)szMetaProto != CALLSERVICE_NOTFOUND && strcmp(dat->szProto, szMetaProto) == 0 && 
+		if ((INT_PTR)szMetaProto != CALLSERVICE_NOTFOUND && strcmp(dat->szProto, szMetaProto) == 0 &&
 			DBGetContactSettingByte(NULL,"CLC","Meta",0) == 0) {
 			hContact = (HANDLE)CallService(MS_MC_GETMOSTONLINECONTACT,(WPARAM)dat->windowData.hContact, 0);
 			if (hContact != NULL) {
@@ -507,7 +507,7 @@ static LRESULT CALLBACK MessageEditSubclassProc(HWND hwnd, UINT msg, WPARAM wPar
 	case WM_PASTE:
 		if (IsClipboardFormatAvailable(CF_HDROP))
 		{
-			if (OpenClipboard(hwnd)) 
+			if (OpenClipboard(hwnd))
 			{
 				HANDLE hDrop = GetClipboardData(CF_HDROP);
 				if (hDrop)
@@ -582,10 +582,12 @@ static void MessageDialogResize(HWND hwndDlg, struct MessageWindowData *dat, int
 			if (avatarHeight < BOTTOM_RIGHT_AVATAR_HEIGHT) {
 				avatarHeight = BOTTOM_RIGHT_AVATAR_HEIGHT;
 				hSplitterPos = avatarHeight - toolbarHeight + 2;
+			} else {
+				avatarHeight = BOTTOM_RIGHT_AVATAR_HEIGHT;
 			}
 			avatarWidth = avatarHeight;
-			if (avatarWidth > BOTTOM_RIGHT_AVATAR_HEIGHT && avatarWidth > w/3) {
-				avatarWidth = w /3;
+			if (avatarWidth > BOTTOM_RIGHT_AVATAR_HEIGHT && avatarWidth > w/4) {
+				avatarWidth = w /4;
 			}
 			if ((toolbarWidth - avatarWidth - 2) < dat->toolbarSize.cx) {
 				avatarWidth = toolbarWidth - dat->toolbarSize.cx - 2;
@@ -604,7 +606,7 @@ static void MessageDialogResize(HWND hwndDlg, struct MessageWindowData *dat, int
 	hdwp = DeferWindowPos(hdwp, GetDlgItem(hwndDlg, IDC_LOG), 0, 1, logY, w-2, logH, SWP_NOZORDER);
 	hdwp = DeferWindowPos(hdwp, GetDlgItem(hwndDlg, IDC_MESSAGE), 0, 1, h - hSplitterPos + SPLITTER_HEIGHT, messageEditWidth, hSplitterPos - SPLITTER_HEIGHT - 1, SWP_NOZORDER);
 	hdwp = DeferWindowPos(hdwp, GetDlgItem(hwndDlg, IDC_AVATAR), 0, w-avatarWidth - 1, h - (avatarHeight + avatarWidth) / 2 - 1, avatarWidth, avatarWidth, SWP_NOZORDER);
-	
+
 	hdwp = DeferWindowPos(hdwp, GetDlgItem(hwndDlg, IDC_SPLITTER), 0, 0, h - hSplitterPos-1, toolbarWidth, SPLITTER_HEIGHT, SWP_NOZORDER);
 	hdwp = ResizeToolbar(hwndDlg, hdwp, toolbarWidth, h - hSplitterPos - toolbarHeight + 1, toolbarHeight, SIZEOF(toolbarButtons), toolbarButtons, g_dat->buttonVisibility);
 
@@ -667,9 +669,9 @@ static void UpdateReadChars(HWND hwndDlg, struct MessageWindowData * dat)
 void ShowAvatar(HWND hwndDlg, struct MessageWindowData *dat) {
 	dat->avatarPic = (dat->ace != NULL && (dat->ace->dwFlags & AVS_HIDEONCLIST) == 0) ? dat->ace->hbmPic : NULL;
 	SendMessage(hwndDlg, WM_SIZE, 0, 0);
-	
+
     RefreshInfobar(dat->infobarData);
-	
+
 	RedrawWindow(GetDlgItem(hwndDlg, IDC_AVATAR), NULL, NULL, RDW_INVALIDATE);
 }
 
@@ -1101,7 +1103,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 	case HM_AVATARACK:
 	{
 		ACKDATA *pAck = (ACKDATA *)lParam;
-		PROTO_AVATAR_INFORMATION *pai = (PROTO_AVATAR_INFORMATION *)pAck->hProcess;
+		PROTO_AVATAR_INFORMATIONT *pai = ( PROTO_AVATAR_INFORMATIONT* )pAck->hProcess;
 		if (pAck->hContact!=dat->windowData.hContact)
 			return 0;
 		if (pAck->type != ACKTYPE_AVATAR)
@@ -1113,7 +1115,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 		if (pai==NULL)
 			return 0;
 		if (pAck->result == ACKRESULT_SUCCESS) {
-			if (pai->filename&&strlen(pai->filename)&&VALID_AVATAR(pai->format)) {
+			if (pai->filename && *pai->filename && VALID_AVATAR(pai->format)) {
 				ShowAvatar(hwndDlg, dat);
 			}
 		} else if (pAck->result == ACKRESULT_FAILED) {
@@ -1214,7 +1216,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
                     GetContactUniqueId(dat, idbuf, sizeof(idbuf));
                     mir_snprintf(buf, sizeof(buf), Translate("User Menu - %s"), idbuf);
                     SendMessage(GetDlgItem(hwndDlg, IDC_USERMENU), BUTTONADDTOOLTIP, (WPARAM) buf, 0);
-    
+
                     if (!cws || (!strcmp(cws->szModule, dat->szProto) && !strcmp(cws->szSetting, "Status"))) {
                         DWORD wStatus;
                         wStatus = DBGetContactSettingWord( dat->windowData.hContact, dat->szProto, "Status", ID_STATUS_OFFLINE);

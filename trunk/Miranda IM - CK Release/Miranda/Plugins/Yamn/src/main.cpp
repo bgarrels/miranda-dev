@@ -1,7 +1,7 @@
 /*
  * YAMN plugin main file
- * Miranda homepage: http://www.miranda-im.org/
- * YAMN homepage: http://miranda-plugins.googlecode.com/
+ * Miranda homepage: http://code.google.com/p/miranda/
+ * YAMN homepage: http://www.majvan.host.sk/Projekty/YAMN
  *
  * initializes all variables for further work
  *
@@ -34,7 +34,7 @@ extern LPCRITICAL_SECTION FileWritingCS;
 //--------------------------------------------------------------------------------------------------
 
 WCHAR	*ProfileName		= NULL;		//e.g. "majvan"
-WCHAR	*UserDirectory		= NULL;		//e.g. "C:\($WinDIR)\Profiles\UserXYZ"
+WCHAR	*UserDirectory		= NULL;		//e.g. "F:\WINNT\Profiles\UserXYZ"
 char	*ProtoName			= YAMN_DBMODULE;
 //char *AltProtoName;
 char	*szMirandaDir		= NULL;
@@ -52,8 +52,8 @@ static int iDllPlugins=0;
 PLUGINLINK *pluginLink;
 YAMN_VARIABLES YAMNVar;
 
-struct MM_INTERFACE mmi;
 int hLangpack;
+struct MM_INTERFACE mmi;
 
 static const MUUID interfaces[] = {MUUID_YAMN_FORCECHECK, MIID_LAST};
 
@@ -418,6 +418,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 
 	pluginLink=link;
 	mir_getLP(&pluginInfo);
+	mir_getMMI(&mmi);
 
 	YAMN_STATUS = ID_STATUS_OFFLINE;
 

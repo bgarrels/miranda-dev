@@ -7,14 +7,16 @@ extern int iconsNum;
 EventList::EventList()
 	:hWnd(NULL),
 	isWnd(false),
-	hContact(NULL)
+	hContact(NULL),
+	deltaTime(0)
 {
 }
 
 EventList::EventList(HANDLE _hContact, int filter)
 	:hWnd(NULL),
 	isWnd(false),
-	hContact(_hContact)
+	hContact(_hContact),
+	deltaTime(0)
 {
 	SetDefFilter(filter);
 }
@@ -27,8 +29,23 @@ EventList::~EventList()
 
 bool EventList::CanShowHistory(DBEVENTINFO* dbei)
 {
-	if(defFilter == 1)
+	if(deltaTime != 0)
+	{
+		if(deltaTime > 0)
+		{
+			if(now - deltaTime < dbei->timestamp)
+				return false;
+		}
+		else
+		{
+			if(now + deltaTime > dbei->timestamp)
+				return false;
+		}
+	}
+
+	if(hContact == NULL || defFilter == 1)
 		return true;
+
 	else if(defFilter < 1)
 	{
 		switch( dbei->eventType ) 
@@ -167,7 +184,7 @@ void EventList::RefreshEventList()
 			}
 			dbei.cbBlob = oldBlobSize;
 			CallService( MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&dbei );
-			if(hContact == NULL || CanShowHistory(&dbei)) 
+			if(CanShowHistory(&dbei)) 
 			{
 				DWORD tm = isNewOnTop ? lastTime - dbei.timestamp : dbei.timestamp - lastTime;
 				if(tm < groupTime && limitator < maxMess)

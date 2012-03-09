@@ -212,12 +212,12 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_SESSIONS            ICON                    "icons\\sessions.ico"
-IDI_SESSIONS_LOAD       ICON                    "icons\\load.ico"
-IDD_SESSIONS_SAVE       ICON                    "icons\\save.ico"
-IDD_SESSIONS_LOADLAST   ICON                    "icons\\loadlast.ico"
-IDD_SESSION_CHECKED     ICON                    "icons\\checked.ico"
-IDD_SESSION_UNCHECKED   ICON                    "icons\\unchecked.ico"
+IDI_SESSIONS            ICON                    "../Icons\\sessions.ico"
+IDI_SESSIONS_LOAD       ICON                    "../Icons\\load.ico"
+IDD_SESSIONS_SAVE       ICON                    "../Icons\\save.ico"
+IDD_SESSIONS_LOADLAST   ICON                    "../Icons\\loadlast.ico"
+IDD_SESSION_CHECKED     ICON                    "../Icons\\checked.ico"
+IDD_SESSION_UNCHECKED   ICON                    "../Icons\\unchecked.ico"
 
 
 #endif    // Russian resources

@@ -43,7 +43,7 @@ Boston, MA 02111-1307, USA.
 #include <m_stdhdr.h>
 
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
-// Windows Header Files:
+// Windows Header Files
 #include <windows.h>
 #include <commctrl.h>
 #include <stddef.h>
@@ -76,7 +76,8 @@ Boston, MA 02111-1307, USA.
 #include <m_utils.h>
 #include <m_icq.h>
 
-#include "resource.h"
+//Miranda stuff 
+#include "../resource.h"
 #include "m_tipper.h"
 #include "m_fingerprint.h"
 #include "m_flags.h"
