@@ -294,7 +294,7 @@ VOID UpdateList (HWND hwndList)
 					lvI.pszText = dbVar.ptszVal;
 					ListView_SetItem(hwndList, &lvI);
 					i += 1;
-					ListView_SetCheckState(hwndList, lvI.iItem, DBGetContactSettingByte(hContact, MODULE, "State", 1));
+					ListView_SetCheckState(hwndList, lvI.iItem, DBGetContactSettingByte(hContact, MODULE, "CheckState", 1));
 				}
 			}
 		}
@@ -635,7 +635,7 @@ VOID CheckCurrentFeed(HANDLE hContact)
 	DBGetContactSettingTString(hContact, MODULE, "URL", &dbVar);
 	if (lstrcmp(dbVar.ptszVal, NULL) == 0)
 		DBFreeVariant(&dbVar);
-	else if ((DBGetContactSettingWord(hContact, MODULE, "Status", ID_STATUS_OFFLINE) != ID_STATUS_OFFLINE) && DBGetContactSettingByte(hContact, MODULE, "State", 1) != 0)
+	else if ((DBGetContactSettingWord(hContact, MODULE, "Status", ID_STATUS_OFFLINE) != ID_STATUS_OFFLINE) && DBGetContactSettingByte(hContact, MODULE, "CheckState", 1) != 0)
 	{
 		GetNewsData(dbVar.ptszVal, &szData);
 		if (szData)
@@ -1139,6 +1139,6 @@ VOID CheckCurrentFeed(HANDLE hContact)
 				}
 			}
 		}
-		DBWriteContactSettingDword(hContact,MODULE,"LastCheck",time(NULL));
+		DBWriteContactSettingDword(hContact, MODULE, "LastCheck", time(NULL));
 	}
 }

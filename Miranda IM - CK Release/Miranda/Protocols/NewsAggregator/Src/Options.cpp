@@ -69,7 +69,7 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 							HWND hwndList = (HWND)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
 							GetDlgItemText(hwndDlg, IDC_FEEDURL, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "URL", str);
-							DBWriteContactSettingByte(hContact, MODULE, "State", 1);
+							DBWriteContactSettingByte(hContact, MODULE, "CheckState", 1);
 							DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
 							GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "MsgFormat", str);
@@ -316,6 +316,161 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 	return FALSE;
 }
 
+INT_PTR CALLBACK DlgProcChangeFeedMenu(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (msg) 
+	{
+		case WM_INITDIALOG:
+		{
+			TranslateDialogDefault(hwndDlg);
+			SetWindowText(hwndDlg, TranslateT("Change Feed"));
+
+			HANDLE hContact = (HANDLE)lParam;
+			DBVARIANT dbVar = {0};
+			DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
+			if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+				DBFreeVariant(&dbVar);
+			else
+			{
+				SetDlgItemText(hwndDlg, IDC_FEEDTITLE, dbVar.ptszVal);
+				DBGetContactSettingTString(hContact, MODULE, "URL", &dbVar);
+				if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+					DBFreeVariant(&dbVar);
+				else
+				{
+					SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG)lParam);
+					SetDlgItemText(hwndDlg, IDC_FEEDURL, dbVar.ptszVal);
+					SetDlgItemInt(hwndDlg, IDC_CHECKTIME, DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 0), false);
+					DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbVar);
+					if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+						DBFreeVariant(&dbVar);
+					else
+						SetDlgItemText(hwndDlg, IDC_TAGSEDIT, dbVar.ptszVal);
+					if (DBGetContactSettingByte(hContact, MODULE, "UseAuth", 0))
+					{
+						CheckDlgButton(hwndDlg, IDC_USEAUTH, BST_CHECKED);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_LOGIN), TRUE);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_PASSWORD), TRUE);
+						DBGetContactSettingTString(hContact, MODULE, "Login", &dbVar);
+						if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+							DBFreeVariant(&dbVar);
+						else
+							SetDlgItemText(hwndDlg, IDC_LOGIN, dbVar.ptszVal);
+						DBGetContactSettingTString(hContact, MODULE, "Password", &dbVar);
+						if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+							DBFreeVariant(&dbVar);
+						else
+							SetDlgItemText(hwndDlg, IDC_PASSWORD, dbVar.ptszVal);
+					}
+					break;
+				}
+			}
+			return TRUE;
+		}
+		case WM_COMMAND:
+		{
+			switch (LOWORD(wParam)) 
+			{
+				case IDOK:
+					{
+						HANDLE hContact = (HANDLE)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+						TCHAR str[MAX_PATH];
+						if (!GetDlgItemText(hwndDlg, IDC_FEEDTITLE, str, SIZEOF(str)))
+						{
+							MessageBox(hwndDlg, TranslateT("Enter Feed name"), TranslateT("Error"), MB_OK);
+							break;
+						}
+						else if (!GetDlgItemText(hwndDlg, IDC_FEEDURL, str, SIZEOF(str)) || lstrcmp(str, _T("http://")) == 0)
+						{
+							MessageBox(hwndDlg, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
+							break;
+						}
+						else if (!GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false))
+						{
+							MessageBox(hwndDlg, TranslateT("Enter checking interval"), TranslateT("Error"), MB_OK);
+							break;
+						}
+						else if (!GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str)))
+						{
+							MessageBox(hwndDlg, TranslateT("Enter message format"), TranslateT("Error"), MB_OK);
+							break;
+						}
+						else
+						{
+							GetDlgItemText(hwndDlg, IDC_FEEDURL, str, SIZEOF(str));
+							DBWriteContactSettingTString(hContact, MODULE, "URL", str);
+							GetDlgItemText(hwndDlg, IDC_FEEDTITLE, str, SIZEOF(str));
+							DBWriteContactSettingTString(hContact, MODULE, "Nick", str);
+							DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
+							GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str));
+							DBWriteContactSettingTString(hContact, MODULE, "MsgFormat", str);
+							if (IsDlgButtonChecked(hwndDlg, IDC_USEAUTH))
+							{
+								DBWriteContactSettingByte(hContact, MODULE, "UseAuth", 1);
+								GetDlgItemText(hwndDlg, IDC_LOGIN, str, SIZEOF(str));
+								DBWriteContactSettingTString(hContact, MODULE, "Login", str);
+								GetDlgItemText(hwndDlg, IDC_PASSWORD, str, SIZEOF(str));
+								DBWriteContactSettingTString(hContact, MODULE, "Password", str);
+							}
+						}
+					}
+
+				case IDCANCEL:
+					DestroyWindow(hwndDlg);
+					break;
+
+				case IDC_USEAUTH:
+					{
+						if (IsDlgButtonChecked(hwndDlg, IDC_USEAUTH))
+						{
+							EnableWindow(GetDlgItem(hwndDlg, IDC_LOGIN), TRUE);
+							EnableWindow(GetDlgItem(hwndDlg, IDC_PASSWORD), TRUE);
+						}
+						else
+						{
+							EnableWindow(GetDlgItem(hwndDlg, IDC_LOGIN), FALSE);
+							EnableWindow(GetDlgItem(hwndDlg, IDC_PASSWORD), FALSE);
+						}
+						break;
+					}
+
+				case IDC_TAGHELP:
+					MessageBox(hwndDlg, TranslateT(TAGSHELP), TranslateT("Feed Tag Help"), MB_OK);
+					break;
+
+				case IDC_RESET:
+					if (MessageBox(hwndDlg, TranslateT("Are you sure?"), TranslateT("Tags Mask Reset"), MB_YESNO | MB_ICONWARNING) == IDYES)
+						SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
+					break;
+
+				case IDC_DISCOVERY:
+					{
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DISCOVERY), FALSE);
+						SetDlgItemText(hwndDlg, IDC_DISCOVERY, TranslateT("Wait..."));
+						TCHAR tszURL[MAX_PATH] = {0}, *tszTitle = NULL;
+						if (GetDlgItemText(hwndDlg, IDC_FEEDURL, tszURL, SIZEOF(tszURL)) || lstrcmp(tszURL, _T("http://")) != 0)
+							tszTitle = CheckFeed(tszURL);
+						else
+							MessageBox(hwndDlg, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
+						SetDlgItemText(hwndDlg, IDC_FEEDTITLE, tszTitle);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DISCOVERY), TRUE);
+						SetDlgItemText(hwndDlg, IDC_DISCOVERY, TranslateT("Check Feed"));
+					}
+					break;
+			}
+			break;
+		}
+
+		case WM_CLOSE:
+		{
+			DestroyWindow(hwndDlg);
+			break;
+		}
+	}
+
+	return FALSE;
+}
+
 INT_PTR CALLBACK UpdateNotifyOptsProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	HWND hwndList = GetDlgItem(hwndDlg, IDC_FEEDLIST);
@@ -402,7 +557,7 @@ INT_PTR CALLBACK UpdateNotifyOptsProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 						{
 							if(IsMyContact(hContact)) 
 							{
-								DBWriteContactSettingByte(hContact, MODULE, "State", ListView_GetCheckState(hwndList, i));
+								DBWriteContactSettingByte(hContact, MODULE, "CheckState", ListView_GetCheckState(hwndList, i));
 								i += 1;
 							}
 							hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);

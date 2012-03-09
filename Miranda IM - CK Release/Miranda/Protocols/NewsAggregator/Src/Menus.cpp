@@ -19,7 +19,7 @@ Boston, MA 02111-1307, USA.
 
 #include "common.h"
 
-HANDLE hService2[5];
+HANDLE hService2[6];
 
 VOID InitMenu()
 {
@@ -62,6 +62,13 @@ VOID InitMenu()
 	mi.ptszName = _T("Check feed");
 	mi.pszService = MS_NEWSAGGR_CHECKFEED;
 	hService2[4] = (HANDLE)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&mi);
+
+	// adding contact menu items
+	mi.position=-0x7FFFFFFA;
+	//mi.icolibItem = GetIconHandle("checkfeed");
+	mi.ptszName = _T("Change feed");
+	mi.pszService = MS_NEWSAGGR_CHANGEFEED;
+	hService2[5] = (HANDLE)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&mi);
 
 	ZeroMemory(&mi, sizeof(mi));
 	mi.cbSize = sizeof(mi);
