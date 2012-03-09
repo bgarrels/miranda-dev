@@ -26,15 +26,16 @@ struct MM_INTERFACE mmi;
 HANDLE hOptHook = NULL,  hLoadHook = NULL, hOnPreShutdown = NULL, hPrebuildMenuHook = NULL, hPackUpdaterFolder = NULL;
 HANDLE hProtoService[7];
 HWND hAddFeedDlg;
+HWND hChangeFeedDlg;
 XML_API xi = {0};
 struct UTF8_INTERFACE utfi;
 TCHAR tszRoot[MAX_PATH] = {0};
 HANDLE hUpdateMutex;
-#define NUM_SERVICES 5
+#define NUM_SERVICES 6
 HANDLE hService[NUM_SERVICES];
 
 PLUGININFOEX pluginInfoEx = {
-    sizeof(PLUGININFOEX),
+	sizeof(PLUGININFOEX),
 	__PLUGIN_NAME,
 	PLUGIN_MAKE_VERSION(__MAJOR_VERSION, __MINOR_VERSION, __RELEASE_NUM, __BUILD_NUM),
 	__DESCRIPTION,
@@ -118,6 +119,7 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 	hService[2] = CreateServiceFunction(MS_NEWSAGGR_IMPORTFEEDS, ImportFeeds);
 	hService[3] = CreateServiceFunction(MS_NEWSAGGR_EXPORTFEEDS, ExportFeeds);
 	hService[4] = CreateServiceFunction(MS_NEWSAGGR_CHECKFEED, CheckFeed);
+	hService[5] = CreateServiceFunction(MS_NEWSAGGR_CHANGEFEED, ChangeFeed);
 
 	return 0;
 }

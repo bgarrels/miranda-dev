@@ -60,6 +60,7 @@ Boston, MA 02111-1307, USA.
 #define DEFAULT_AVATARS_FOLDER "NewsAggregator"
 extern HINSTANCE hInst;
 extern HWND hAddFeedDlg;
+extern HWND hChangeFeedDlg;
 extern UINT_PTR timerId;
 // check if Feeds is currently updating
 extern BOOL ThreadRunning;
@@ -111,11 +112,13 @@ INT_PTR NewsAggrGetAvatarInfo(WPARAM wParam,LPARAM lParam);
 
 INT_PTR CheckAllFeeds(WPARAM wParam,LPARAM lParam);
 INT_PTR AddFeed(WPARAM wParam,LPARAM lParam);
+INT_PTR ChangeFeed(WPARAM wParam,LPARAM lParam);
 INT_PTR ImportFeeds(WPARAM wParam,LPARAM lParam);
 INT_PTR ExportFeeds(WPARAM wParam,LPARAM lParam);
 INT_PTR CheckFeed(WPARAM wParam,LPARAM lParam);
 INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
+INT_PTR CALLBACK DlgProcChangeFeedMenu(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 VOID CALLBACK timerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime);
 VOID CALLBACK timerProc2(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime);
 
@@ -136,6 +139,10 @@ TCHAR* CheckFeed(TCHAR* tszURL);
 // Add new Feed channel
 // WPARAM = LPARAM = NULL
 #define MS_NEWSAGGR_ADDFEED	"NEWSAGGR/AddNewsFeed"
+
+// Add new Feed channel
+// WPARAM = LPARAM = NULL
+#define MS_NEWSAGGR_CHANGEFEED	"NEWSAGGR/ChangeNewsFeed"
 
 // Import Feed chanels from file
 // WPARAM = LPARAM = NULL

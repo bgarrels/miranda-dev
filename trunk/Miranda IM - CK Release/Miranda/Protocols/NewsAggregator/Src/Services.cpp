@@ -70,6 +70,10 @@ int NewsAggrPreShutdown(WPARAM wParam,LPARAM lParam)
 	{
 		SendMessage(hAddFeedDlg, WM_CLOSE, 0, 0);
 	}
+	if (hChangeFeedDlg)
+	{
+		SendMessage(hChangeFeedDlg, WM_CLOSE, 0, 0);
+	}
 	mir_forkthread(WorkingThread, (void*)ID_STATUS_OFFLINE);
 	KillTimer(NULL, timerId);
 	NetlibUnInit();
@@ -104,7 +108,7 @@ INT_PTR NewsAggrGetCaps(WPARAM wp,LPARAM lp)
 	case PFLAG_UNIQUEIDTEXT:
 		return (INT_PTR) "News Feed";
 	case PFLAG_UNIQUEIDSETTING:
-		return (INT_PTR) "Nick";
+		return (INT_PTR) "URL";
 	default:
 		return 0;
 	}
@@ -173,6 +177,13 @@ INT_PTR AddFeed(WPARAM wParam,LPARAM lParam)
 {
 	hAddFeedDlg = CreateDialog(hInst, MAKEINTRESOURCE(IDD_ADDFEED), NULL, DlgProcAddFeedOpts);
 	ShowWindow(hAddFeedDlg, SW_SHOW);
+	return 0;
+}
+
+INT_PTR ChangeFeed(WPARAM wParam,LPARAM lParam)
+{
+	hChangeFeedDlg = CreateDialogParam(hInst, MAKEINTRESOURCE(IDD_ADDFEED), NULL, DlgProcChangeFeedMenu, (LPARAM)wParam);
+	ShowWindow(hChangeFeedDlg, SW_SHOW);
 	return 0;
 }
 
