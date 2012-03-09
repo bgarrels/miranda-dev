@@ -1817,7 +1817,8 @@ Global
 		{2C818919-A38F-44FF-BD91-A6A204AC592A}.Template|Win32.Build.0 = Debug Unicode|Win32
 		{2C818919-A38F-44FF-BD91-A6A204AC592A}.Template|x64.ActiveCfg = Debug Unicode|x64
 		{2C818919-A38F-44FF-BD91-A6A204AC592A}.Template|x64.Build.0 = Debug Unicode|x64
-		{2D1D3D7C-F86B-4189-8D57-96575D441182}.DLL-Import Debug|Win32.ActiveCfg = Debug Unicode|x64
+		{2D1D3D7C-F86B-4189-8D57-96575D441182}.DLL-Import Debug|Win32.ActiveCfg = Debug Unicode|Win32
+		{2D1D3D7C-F86B-4189-8D57-96575D441182}.DLL-Import Debug|Win32.Build.0 = Debug Unicode|Win32
 		{2D1D3D7C-F86B-4189-8D57-96575D441182}.DLL-Import Debug|x64.ActiveCfg = Debug Unicode|x64
 		{2D1D3D7C-F86B-4189-8D57-96575D441182}.DLL-Import Debug|x64.Build.0 = Debug Unicode|x64
 		{2D1D3D7C-F86B-4189-8D57-96575D441182}.DLL-Import Release|Win32.ActiveCfg = Debug Unicode|x64
@@ -2540,7 +2541,8 @@ Global
 		{43AFC354-3215-48D4-AE8C-F5F0F8F12967}.Template|Win32.ActiveCfg = Release Unicode|x64
 		{43AFC354-3215-48D4-AE8C-F5F0F8F12967}.Template|x64.ActiveCfg = Release Unicode|x64
 		{43AFC354-3215-48D4-AE8C-F5F0F8F12967}.Template|x64.Build.0 = Release Unicode|x64
-		{48DDA047-898E-4C4C-A567-C76FE007BBB3}.DLL-Import Debug|Win32.ActiveCfg = Debug Unicode|x64
+		{48DDA047-898E-4C4C-A567-C76FE007BBB3}.DLL-Import Debug|Win32.ActiveCfg = Debug Unicode|Win32
+		{48DDA047-898E-4C4C-A567-C76FE007BBB3}.DLL-Import Debug|Win32.Build.0 = Debug Unicode|Win32
 		{48DDA047-898E-4C4C-A567-C76FE007BBB3}.DLL-Import Debug|x64.ActiveCfg = Debug Unicode|x64
 		{48DDA047-898E-4C4C-A567-C76FE007BBB3}.DLL-Import Debug|x64.Build.0 = Debug Unicode|x64
 		{48DDA047-898E-4C4C-A567-C76FE007BBB3}.DLL-Import Release|Win32.ActiveCfg = Debug Unicode|x64
@@ -3978,7 +3980,8 @@ Global
 		{7DF5234A-A93A-47AD-8201-377ECF59AE5F}.Template|Win32.Build.0 = Debug Unicode|Win32
 		{7DF5234A-A93A-47AD-8201-377ECF59AE5F}.Template|x64.ActiveCfg = Debug Unicode|x64
 		{7DF5234A-A93A-47AD-8201-377ECF59AE5F}.Template|x64.Build.0 = Debug Unicode|x64
-		{7E88D7F5-8B0A-4B79-84CD-D7982D4E0D4D}.DLL-Import Debug|Win32.ActiveCfg = Debug Unicode|x64
+		{7E88D7F5-8B0A-4B79-84CD-D7982D4E0D4D}.DLL-Import Debug|Win32.ActiveCfg = Debug Unicode|Win32
+		{7E88D7F5-8B0A-4B79-84CD-D7982D4E0D4D}.DLL-Import Debug|Win32.Build.0 = Debug Unicode|Win32
 		{7E88D7F5-8B0A-4B79-84CD-D7982D4E0D4D}.DLL-Import Debug|x64.ActiveCfg = Debug Unicode|x64
 		{7E88D7F5-8B0A-4B79-84CD-D7982D4E0D4D}.DLL-Import Debug|x64.Build.0 = Debug Unicode|x64
 		{7E88D7F5-8B0A-4B79-84CD-D7982D4E0D4D}.DLL-Import Release|Win32.ActiveCfg = Debug Unicode|x64
@@ -4017,7 +4020,8 @@ Global
 		{7E88D7F5-8B0A-4B79-84CD-D7982D4E0D4D}.Template|Win32.ActiveCfg = Release Unicode|x64
 		{7E88D7F5-8B0A-4B79-84CD-D7982D4E0D4D}.Template|x64.ActiveCfg = Release Unicode|x64
 		{7E88D7F5-8B0A-4B79-84CD-D7982D4E0D4D}.Template|x64.Build.0 = Release Unicode|x64
-		{7F854B13-37EA-4956-BAEE-9715AE9F4579}.DLL-Import Debug|Win32.ActiveCfg = Debug Unicode|x64
+		{7F854B13-37EA-4956-BAEE-9715AE9F4579}.DLL-Import Debug|Win32.ActiveCfg = Debug Unicode|Win32
+		{7F854B13-37EA-4956-BAEE-9715AE9F4579}.DLL-Import Debug|Win32.Build.0 = Debug Unicode|Win32
 		{7F854B13-37EA-4956-BAEE-9715AE9F4579}.DLL-Import Debug|x64.ActiveCfg = Debug Unicode|x64
 		{7F854B13-37EA-4956-BAEE-9715AE9F4579}.DLL-Import Debug|x64.Build.0 = Debug Unicode|x64
 		{7F854B13-37EA-4956-BAEE-9715AE9F4579}.DLL-Import Release|Win32.ActiveCfg = Debug Unicode|x64
@@ -6669,7 +6673,8 @@ Global
 		{F4DFD2F1-05E5-4A90-BEED-AF0D9015393D}.Template|Win32.ActiveCfg = Release Unicode|x64
 		{F4DFD2F1-05E5-4A90-BEED-AF0D9015393D}.Template|x64.ActiveCfg = Release Unicode|x64
 		{F4DFD2F1-05E5-4A90-BEED-AF0D9015393D}.Template|x64.Build.0 = Release Unicode|x64
-		{F60935E3-8F27-46E2-8598-013E7D4C90E7}.DLL-Import Debug|Win32.ActiveCfg = Debug Unicode|x64
+		{F60935E3-8F27-46E2-8598-013E7D4C90E7}.DLL-Import Debug|Win32.ActiveCfg = Debug Unicode|Win32
+		{F60935E3-8F27-46E2-8598-013E7D4C90E7}.DLL-Import Debug|Win32.Build.0 = Debug Unicode|Win32
 		{F60935E3-8F27-46E2-8598-013E7D4C90E7}.DLL-Import Debug|x64.ActiveCfg = Debug Unicode|x64
 		{F60935E3-8F27-46E2-8598-013E7D4C90E7}.DLL-Import Debug|x64.Build.0 = Debug Unicode|x64
 		{F60935E3-8F27-46E2-8598-013E7D4C90E7}.DLL-Import Release|Win32.ActiveCfg = Debug Unicode|x64
