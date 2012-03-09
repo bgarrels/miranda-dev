@@ -4,7 +4,7 @@
  *
  * Miranda IM: the free IM client for Microsoft* Windows*
  *
- * Copyright 2000-2010 Miranda ICQ/IM project,
+ * Copyright 2000-2012 Miranda IM project,
  * all portions of this codebase are copyrighted to the people
  * listed in contributors.txt.
  *
@@ -30,11 +30,11 @@
  *
  */
 
-#define MIRANDA_VER 0x0900
+#define MIRANDA_VER 0x0A00
 #define MIRANDA_CUSTOM_LP
 
-#define _WIN32_WINNT 0x0502
-#define _WIN32_IE 0x0502
+#define _WIN32_WINNT 0x0503
+#define _WIN32_IE 0x0503
 
 #define  EXTRA_ICON_COUNT	11
 

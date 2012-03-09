@@ -32,7 +32,7 @@ BEGIN
 #else
             VALUE "InternalName", "LangMan"
 #endif
-            VALUE "LegalCopyright", "Copyright © 2005-2010 H. Herkenrath"
+            VALUE "LegalCopyright", "Copyright © 2005 - 2012 H. Herkenrath"
             VALUE "OriginalFilename", "langman.dll"
             VALUE "ProductName", "Language Pack Manager"
             VALUE "ProductVersion", FILE_VERSION_STR

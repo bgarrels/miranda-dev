@@ -17,6 +17,8 @@ protected:
 	TCHAR contactName[256];
 	TCHAR myName[256];
 	bool isWnd;
+	int deltaTime;
+	DWORD now;
 	
 	virtual void AddGroup(bool isMe, const std::wstring &time, const std::wstring &user, const std::wstring &eventText, int ico) = 0;
 	bool GetEventIcon(bool isMe, int eventType, int &id);

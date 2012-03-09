@@ -2,7 +2,7 @@
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2012 Miranda IM project,
+Copyright 2000-2004 Miranda ICQ/IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -1393,7 +1393,7 @@ static INT_PTR SetMyAvatar(WPARAM wParam, LPARAM lParam)
 	{
 		SetForegroundWindow((HWND) hwndSetMyAvatar);
 		SetFocus((HWND) hwndSetMyAvatar);
-		ShowWindow((HWND) hwndSetMyAvatar, SW_SHOW);
+ 		ShowWindow((HWND) hwndSetMyAvatar, SW_SHOW);
 		return -2;
 	}
 
@@ -1940,6 +1940,8 @@ static int DestroyServicesAndEvents()
 
 	for ( int i=0; i < arServices.getCount(); i++ )
 		DestroyServiceFunction( arServices[i] );
+
+	arServices.destroy();
 
 	DestroyHookableEvent(hEventChanged);
 	DestroyHookableEvent(hEventContactAvatarChanged);

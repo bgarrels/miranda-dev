@@ -32,7 +32,7 @@ HCURSOR     hCurSplitNS, hCurSplitWE;
 
 extern HINSTANCE hInst;
 
-HANDLE hModulesLoaded, hOptionsInit, hPrebuildContactMenu, hServiceShowContactHistory, hServiceDeleteAllContactHistory, hPreShutdownHistoryModule, hHistoryContactDelete, hFontsChanged,hToolBarLoaded;
+HANDLE hModulesLoaded, hOptionsInit, hPrebuildContactMenu, hServiceShowContactHistory, hServiceDeleteAllContactHistory, hPreShutdownHistoryModule, hHistoryContactDelete, hFontsChanged,hToolBarLoaded, hSysOK;
 HANDLE *hEventIcons = NULL;
 int iconsNum;
 HANDLE hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon;
@@ -80,6 +80,10 @@ extern "C" __declspec(dllexport) const MUUID* MirandaPluginInterfaces(void)
 {
 	return interfaces;
 }
+
+void InitScheduler();
+void DeinitScheduler();
+int DoLastTask(WPARAM, LPARAM);
 
 int PrebuildContactMenu(WPARAM wParam, LPARAM lParam)
 {
@@ -247,6 +251,7 @@ INT_PTR ShowContactHistory(WPARAM wParam, LPARAM lParam)
 int PreShutdownHistoryModule(WPARAM, LPARAM)
 {
 	HistoryWindow::Deinit();
+	DeinitScheduler();
 	return 0;
 }
 
@@ -260,12 +265,40 @@ int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 {
 	InitMenuItems();
 	InitUpdater();
+	
+	TCHAR ftpExe[MAX_PATH];
+	if(SUCCEEDED(SHGetFolderPath(NULL, CSIDL_PROGRAM_FILES, NULL, SHGFP_TYPE_CURRENT, ftpExe)))
+	{
+		_tcscat_s(ftpExe, _T("\\WinSCP\\WinSCP.exe"));
+		DWORD atr = GetFileAttributes(ftpExe);
+		if(atr == INVALID_FILE_ATTRIBUTES || atr & FILE_ATTRIBUTE_DIRECTORY)
+		{
+#ifdef _WIN64
+			if(SUCCEEDED(SHGetFolderPath(NULL, CSIDL_PROGRAM_FILESX86, NULL, SHGFP_TYPE_CURRENT, ftpExe)))
+			{
+				_tcscat_s(ftpExe, _T("\\WinSCP\\WinSCP.exe"));
+				atr = GetFileAttributes(ftpExe);
+				if(!(atr == INVALID_FILE_ATTRIBUTES || atr & FILE_ATTRIBUTE_DIRECTORY))
+				{
+					Options::instance->ftpExePathDef = ftpExe;
+				}
+			}
+#endif
+		}
+		else
+			Options::instance->ftpExePathDef = ftpExe;
+	}
 
+	TCHAR* log = _T("%miranda_logpath%\\BasicHistory\\ftplog.txt");
+	TCHAR* logAbsolute = Utils_ReplaceVarsT(log);
+	Options::instance->ftpLogPath = logAbsolute;
+	mir_free(logAbsolute);
 	Options::instance->Load();
 	
 	hPreShutdownHistoryModule = HookEvent(ME_SYSTEM_PRESHUTDOWN,PreShutdownHistoryModule);
 	hHistoryContactDelete = HookEvent(ME_DB_CONTACT_DELETED,HistoryContactDelete);
 	hFontsChanged  = HookEvent(ME_FONT_RELOAD, HistoryWindow::FontsChanged);
+	hSysOK  = HookEvent(ME_SYSTEM_OKTOEXIT, DoLastTask);
 	if (ServiceExists(MS_SMILEYADD_REPLACESMILEYS)) 
 	{
 		g_SmileyAddAvail = true;
@@ -274,6 +307,8 @@ int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 	{
 		metaContactProto = (char*)CallService(MS_MC_GETPROTOCOLNAME, 0, 0);
 	}
+
+	InitScheduler();
 	return 0;
 }
 
@@ -305,6 +340,7 @@ extern "C" int __declspec(dllexport) Unload(void)
 	UnhookEvent(hOptionsInit);
 	UnhookEvent(hFontsChanged);
 	UnhookEvent(hToolBarLoaded);
+	UnhookEvent(hSysOK);
 	DestroyServiceFunction(hServiceShowContactHistory);
 	DestroyServiceFunction(hServiceDeleteAllContactHistory);
 	HistoryWindow::Deinit();

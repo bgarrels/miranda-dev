@@ -31,6 +31,16 @@ Nieprawid³owa strona kodowa
 Plik nie istnieje. WprowadŸ poprawn¹ œcie¿kê do pliku.
 [Invalid file]
 Nieprawid³owy plik
+[Invalid '%s' value.]
+Nieprawid³owa wartoœæ '%s'.
+[Invalid '%s' value.\n%s]
+Nieprawid³owa wartoœæ '%s'.\n%s
+[At least one contact should be selected.]
+Przynajmniej jeden kontakt powinien byæ zaznaczony.
+[To create session open WinSCP, click New Session, enter data and save with specific name. Remember if FTP server using password you should save it in WinSCP.]
+Aby utworzyæ sesiê: otwórz WinSCP, naciœniej Nowa Sesia, wprowadŸ dane i zapisz z okreœlon¹ nazw¹. Pamiêtaj, je¿eli serwer FTP u¿ywa has³a, powinienieœ zapisaæ go w WinSCP.
+[FTP path must contains '/' instead '\\' and starts from '/'.]
+Œcie¿ka FTP musi zawieraæ '/' zamiast '\\' i zaczynaæ siê z '/'.
 
 ;Options and Menus
 ;-------------------
@@ -132,6 +142,62 @@ Kodowanie pliku*
 Zewnêtrzny plik CSS
 [* Choose encoding from combo box or enter code page number and name separated by semicolon, name is used in Content-Type header.]
 * Wybierz kodowanie z combo boxa lub wpisz stronê kodow¹ i nazwê rozdzielone œrednikiem, nazwa jest u¿ywana w nag³ówku Content-Type.
+[WinSCP path]
+Œcie¿ka do programu WinSCP
+[WinSCP log path]
+Œcie¿ka do loga WinSCP
+[Add task]
+Dodaj zadanie
+[Edit task]
+Edytuj zadanie
+[Delete task]
+Usuñ zadanie
+[Action type]
+Typ akcji
+[Events older than*]
+Zdarzenia starsze ni¿*
+[Events older than]
+Zdarzenia starsze ni¿
+[Triger type]
+Typ wyzwalacza
+[Delta time]
+Ró¿nica czasu
+[Day of week]
+Dzieñ tygodnia
+[Export to]
+Eksportuj do
+[Compress output files]
+Kompresuj pliki wynikowe
+[Upload to FTP (WinSCP requred)]
+Wyœlij do FTP (wymagany WinSCP)
+[Upload to FTP]
+Wyœlij do FTP
+[Session name]
+Nazwa sesji
+[Path to output file**]
+Œcie¿ka do pliku wynikowego**
+[Path to output file]
+Œcie¿ka do pliku wynikowego
+[* Use negative values to filter younger events]
+* U¿yj ujemnych wartoœci do filtrowania m³odszych zdarzeñ
+[** Use <date> to insert date, <ext> to insert extension, <contact> to insert contact name]
+** U¿yj <date> do wstawienia daty, <ext> do wstawienia rozszerzenia, <contact> do wstawienia nazwy kontaktu
+[Execute task for specified contacts]
+Wykonaj zadanie dla nastêpuj¹cych kontaktów
+[Export and Delete]
+Eksport i usuwanie
+[Minute]
+Minuta
+[Hour]
+Godzina
+[At Start]
+Podczas startu
+[At Finish]
+Przy wy³¹czaniu
+[Delta time (minutes)]
+Ró¿nica czasu (minuty)
+[Delta time (hours)]
+Ró¿nica czasu (godziny)
 [Filter:]
 #muuid {E25367A2-51AE-4044-BE28-131BC18B71A4}
 Filtr:

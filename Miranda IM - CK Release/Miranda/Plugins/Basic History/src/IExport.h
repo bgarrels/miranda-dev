@@ -4,6 +4,12 @@ class IExport
 protected:
 	std::wostream* stream;
 public:
+	enum ExportType
+	{
+		RichHtml,
+		PlainHtml,
+		Txt
+	};
 
 	void SetStream(std::wostream *str)
 	{

@@ -76,8 +76,8 @@ END
 
 // Icon
 // remains consistent on all systems.
-IDI_ON              ICON                    "Res/On.ico"
-IDI_OFF             ICON                    "Res/Off.ico"
+IDI_ON              ICON                    "../Res/On.ico"
+IDI_OFF             ICON                    "../Res/Off.ico"
 /////////////////////////////////////////////////////////////////////////////
 
 

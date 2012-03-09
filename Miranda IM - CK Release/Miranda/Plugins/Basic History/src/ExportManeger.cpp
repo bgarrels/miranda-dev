@@ -47,39 +47,60 @@ std::wstring GetFile(const TCHAR* ext)
 	return L"";
 }
 
-void ExportManeger::Export(ExportType type)
+std::wstring ReplaceExt(const std::wstring& file, const TCHAR* ext)
+{
+	size_t pos = file.find(_T("<ext>"));
+	if(pos < file.length())
+	{
+		std::wstring fileName = file.substr(0, pos);
+		fileName += ext;
+		fileName += file.substr(pos + 5);
+		return fileName;
+	}
+
+	return file;
+}
+
+bool ExportManeger::Export(IExport::ExportType type)
 {
 	exp = NULL;
 	UINT cp;
 	std::wstring encoding;
 	switch(type)
 	{
-	case Txt:
+	case IExport::Txt:
 		exp = new TxtExport();
 		cp = Options::instance->codepageTxt;
 		encoding = Options::instance->encodingTxt;
 		break;
-	case PlainHtml:
+	case IExport::PlainHtml:
 		exp = new PlainHtmlExport();
 		cp = Options::instance->codepageHtml1;
 		encoding = Options::instance->encodingHtml1;
 		break;
-	case RichHtml:
+	case IExport::RichHtml:
 		exp = new RichHtmlExport();
 		cp = Options::instance->codepageHtml2;
 		encoding = Options::instance->encodingHtml2;
 		break;
 	default:
-		return;
+		return false;
 	}
 
-	std::wstring fileName = GetFile(exp->GetExt());
+	std::wstring fileName;
+	if(file.empty())
+		fileName = GetFile(exp->GetExt());
+	else
+	{
+		fileName = ReplaceExt(file, exp->GetExt());
+	}
+
 	if(fileName.empty())
-		return;
+		return false;
 
 	std::wofstream stream (fileName.c_str());//, std::ios_base::binary);
 	if(!stream.is_open())
-		return;
+		return false;
 	
 	std::locale filelocale(std::locale(), new codecvt_CodePage<wchar_t>(cp));
 	stream.imbue(filelocale);
@@ -92,10 +113,13 @@ void ExportManeger::Export(ExportType type)
 	exp->WriteFooter();
 	stream.close();
 	delete exp;
+	return true;
 }
 
 void ExportManeger::AddGroup(bool isMe, const std::wstring &time, const std::wstring &user, const std::wstring &eventText, int ico)
 {
+	if(exp == NULL)
+		return;
 	exp->WriteGroup(isMe, time, user, eventText, ico);
 #define MAXSELECTSTR 8184
 	TCHAR str[MAXSELECTSTR + 8]; // for safety reason
@@ -178,4 +202,23 @@ void ExportManeger::AddGroup(bool isMe, const std::wstring &time, const std::wst
 	}
 	
 	mir_free(dbei.pBlob);
+}
+
+void ExportManeger::DeleteExportedEvents()
+{
+	for(int j = 0; j < eventList.size(); ++j)
+	{
+		for(int i = 0; i < eventList[j].size(); ++i)
+		{
+			CallService(MS_DB_EVENT_DELETE,(WPARAM)hContact,(LPARAM)(HANDLE)eventList[j][i]);
+		}
+	}
+}
+
+void ExportManeger::SetDeleteWithoutExportEvents(int _deltaTime, DWORD _now)
+{
+	exp = NULL;
+	deltaTime = _deltaTime;
+	now = _now;
+	RefreshEventList();
 }

@@ -23,6 +23,8 @@ boost::mutex new_key_hcnt_mutex;
 bool _terminate = false;
 int returnNoError(HANDLE hContact);
 
+std::list<HANDLE> sent_msgs;
+
 int RecvMsgSvc_func(HANDLE hContact, std::wstring str, char *msg, DWORD flags, DWORD timestamp)
 {		
 	DWORD dbflags = DBEF_UTF;
@@ -99,28 +101,28 @@ int RecvMsgSvc_func(HANDLE hContact, std::wstring str, char *msg, DWORD flags, D
 				{
 					char *inkeyid = UniGetContactSettingUtf(metaGetMostOnline(hContact), szGPGModuleName, "InKeyID", "");
 					TCHAR *pass = NULL;
-					if(strlen(inkeyid) > 0)
+					if(inkeyid[0])
 					{
 						string dbsetting = "szKey_";
 						dbsetting += inkeyid;
 						dbsetting += "_Password";
 						pass = UniGetContactSettingUtf(NULL, szGPGModuleName, dbsetting.c_str(), _T(""));
-						if(_tcslen(pass) > 0)
+						if(pass[0])
 							debuglog<<time_str()<<": info: found password in database for key id: "<<inkeyid<<", trying to decrypt message from "<<(TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)hContact, GCDNF_TCHAR)<<" with password\n";
 					}
 					else
 					{
 						pass = UniGetContactSettingUtf(NULL, szGPGModuleName, "szKeyPassword", _T(""));
-						if(_tcslen(pass) > 0)
+						if(pass[0])
 							debuglog<<time_str()<<": info: found password for all keys in database, trying to decrypt message from "<<(TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)hContact, GCDNF_TCHAR)<<" with password\n";
 					}
-					if(_tcslen(pass) > 0)
+					if(pass && pass[0])
 					{
 						cmd += _T("--passphrase \"");
 						cmd += pass;
 						cmd += _T("\" ");
 					}
-					else if(password)
+					else if(password && password[0])
 					{
 						debuglog<<time_str()<<": info: found password in memory, trying to decrypt message from "<<(TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)hContact, GCDNF_TCHAR)<<" with password\n";
 						cmd += _T("--passphrase \"");
@@ -593,6 +595,8 @@ int SendMsgSvc_func(HANDLE hContact, char *msg, DWORD flags)
 		str.append(tmp);
 		mir_free(tmp);
 	}
+/*	for(std::wstring::size_type i = str.find(_T("\r\n")); i != std::wstring::npos; i = str.find(_T("\r\n"), i+1))
+		str.replace(i, 2, _T("\n")); */
 	string out;
 	DWORD code;
 	wstring cmd;
@@ -612,7 +616,7 @@ int SendMsgSvc_func(HANDLE hContact, char *msg, DWORD flags)
 		cmd += _T("--comment \"\" --no-version ");
 	if(DBGetContactSettingByte(hContact, szGPGModuleName, "bAlwaysTrust", 0))
 		cmd += _T("--trust-model always ");
-	cmd += _T("--batch --yes -e -a -r ");
+	cmd += _T("--batch --yes -e -a -t -r ");
 	TCHAR *tmp2 = mir_a2t(tmp);
 	mir_free(tmp);
 	cmd += tmp2;
@@ -746,7 +750,7 @@ int SendMsgSvc_func(HANDLE hContact, char *msg, DWORD flags)
 	HistoryLog(hContact, db_event((char*)str_event.c_str(), 0,0, dbflags|DBEF_SENT));
 	if(!(flags & PREF_UTF))
 		flags |= PREF_UTF; 
-	CallContactService(hContact, PSS_MESSAGE, (WPARAM)flags, (LPARAM)toUTF8(str).c_str());
+	sent_msgs.push_back((HANDLE)CallContactService(hContact, PSS_MESSAGE, (WPARAM)flags, (LPARAM)toUTF8(str).c_str()));
 	mir_free(msg);
 	return 0;
 }
@@ -890,14 +894,15 @@ int HookSendMsg(WPARAM w, LPARAM l)
 
 static BOOL CALLBACK DlgProcKeyPassword(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	char *inkeyid = UniGetContactSettingUtf(new_key_hcnt, szGPGModuleName, "InKeyID", "");
-	new_key_hcnt_mutex.unlock();
-	TCHAR *tmp = NULL;
-	
+	char *inkeyid = NULL;
   switch (msg)
   {
   case WM_INITDIALOG:
     {
+		inkeyid = UniGetContactSettingUtf(new_key_hcnt, szGPGModuleName, "InKeyID", "");
+		new_key_hcnt_mutex.unlock();
+		TCHAR *tmp = NULL;
+
 		SetWindowPos(hwndDlg, 0, key_password_rect.left, key_password_rect.top, 0, 0, SWP_NOSIZE|SWP_SHOWWINDOW);
 		TranslateDialogDefault(hwndDlg);
 		string questionstr = "Please enter password for key with ID: ";
@@ -916,12 +921,12 @@ static BOOL CALLBACK DlgProcKeyPassword(HWND hwndDlg, UINT msg, WPARAM wParam, L
         {
 			TCHAR tmp[64];
 			GetDlgItemText(hwndDlg, IDC_KEY_PASSWORD, tmp, 64);
-			if(_tcslen(tmp) > 0)
+			if(tmp[0])
 			{
 				extern TCHAR *password;
 				if(IsDlgButtonChecked(hwndDlg, IDC_SAVE_PASSWORD))
 				{
-					if((strlen(inkeyid) > 0) && !IsDlgButtonChecked(hwndDlg, IDC_DEFAULT_PASSWORD))
+					if(inkeyid && inkeyid[0] && !IsDlgButtonChecked(hwndDlg, IDC_DEFAULT_PASSWORD))
 					{
 						string dbsetting = "szKey_";
 						dbsetting += inkeyid;

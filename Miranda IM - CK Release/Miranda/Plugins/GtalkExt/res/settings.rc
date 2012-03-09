@@ -1,6 +1,6 @@
-#include "src/resources.h"
+#include "../src/resources.h"
 #include "winres.h"
-#include "../../include/m_utils.h"
+#include "../../../include/m_utils.h"
 
 IDD_MAILSETTINGS DIALOGEX 0, 0, 304, 228
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
@@ -80,5 +80,5 @@ VS_VERSION_INFO VERSIONINFO
 	}
 }
 
-IDI_POPUP ICON "res\\PopupIcon.ico"
-IDI_PSEUDOAVA PNG "res\\pseudoava.png"
+IDI_POPUP ICON "../res\\PopupIcon.ico"
+IDI_PSEUDOAVA PNG "../res\\pseudoava.png"

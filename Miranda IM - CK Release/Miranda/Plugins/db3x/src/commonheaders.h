@@ -2,7 +2,7 @@
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2003 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -21,7 +21,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#define MIRANDA_VER 0x1000
+#define MIRANDA_VER 0x0A00
 #define _WIN32_WINNT 0x0502
 
 #include "m_stdhdr.h"
@@ -42,7 +42,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <m_system.h>
 #include <m_database.h>
 #include <m_langpack.h>
-#include "version.h"
+#include "../version.h"
 
 extern PLUGINLINK *pluginLink;
 extern char szMirandaDir[MAX_PATH];

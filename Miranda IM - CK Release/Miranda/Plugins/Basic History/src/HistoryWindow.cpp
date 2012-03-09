@@ -36,9 +36,8 @@ extern char* metaContactProto;
 
 #define MIN_PANELHEIGHT 40
 
-
 HistoryWindow::HistoryWindow(HANDLE _hContact)
-	:isDestroyed(true),
+	: isDestroyed(true),
 	OldSplitterProc(0),
 	splitterY(0),
 	splitterOrgY(0),
@@ -1806,7 +1805,7 @@ bool HistoryWindow::DoHotkey(UINT msg, LPARAM lParam, WPARAM wParam, int window)
 		break;
 	case HISTORY_HK_SHOWCONTACTS:
 		Button_SetCheck(GetDlgItem(hWnd, IDC_SHOWHIDE), Button_GetCheck(GetDlgItem(hWnd, IDC_SHOWHIDE)) & BST_CHECKED ? BST_UNCHECKED : BST_CHECKED);
-		SendMessage(hWnd, WM_COMMAND, MAKELONG(IDC_SHOWHIDE, BN_CLICKED), NULL);
+        SendMessage(hWnd, WM_COMMAND, MAKELONG(IDC_SHOWHIDE, BN_CLICKED), NULL);
 		break;
 	case HISTORY_HK_ONLYIN:
 		searcher.SetOnlyIn(!searcher.IsOnlyIn());
@@ -1820,19 +1819,19 @@ bool HistoryWindow::DoHotkey(UINT msg, LPARAM lParam, WPARAM wParam, int window)
 	case HISTORY_HK_EXRHTML:
 		{
 			ExportManeger exp(hContact, GetFilterNr());
-			exp.Export(ExportManeger::RichHtml);
+			exp.Export(IExport::RichHtml);
 		}
 		break;
 	case HISTORY_HK_EXPHTML:
 		{
 			ExportManeger exp(hContact, GetFilterNr());
-			exp.Export(ExportManeger::PlainHtml);
+			exp.Export(IExport::PlainHtml);
 		}
 		break;
 	case HISTORY_HK_EXTXT:
 		{
 			ExportManeger exp(hContact, GetFilterNr());
-			exp.Export(ExportManeger::Txt);
+			exp.Export(IExport::Txt);
 		}
 		break;
 	case HISTORY_HK_DELETE:
@@ -2041,21 +2040,21 @@ void HistoryWindow::ConfigToolbarClicked(LPNMTOOLBAR lpnmTB)
 		case IDM_EXPORTRHTML:
 			{
 				ExportManeger exp(hContact, GetFilterNr());
-				exp.Export(ExportManeger::RichHtml);
+				exp.Export(IExport::RichHtml);
 			}
 
 			break;
 		case IDM_EXPORTPHTML:
 			{
 				ExportManeger exp(hContact, GetFilterNr());
-				exp.Export(ExportManeger::PlainHtml);
+				exp.Export(IExport::PlainHtml);
 			}
 
 			break;
 		case IDM_EXPORTTXT:
 			{
 				ExportManeger exp(hContact, GetFilterNr());
-				exp.Export(ExportManeger::Txt);
+				exp.Export(IExport::Txt);
 			}
 
 			break;

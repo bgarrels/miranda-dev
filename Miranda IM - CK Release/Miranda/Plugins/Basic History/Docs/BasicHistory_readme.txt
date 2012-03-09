@@ -22,6 +22,11 @@ Microsoft Visual C++ 2008 Redistributable Package for x86 version (included in M
 Changelog
 =========
 
+--- 1.0.1.2 ---
+* fixed exporting system history
++ added export configuration
++ added export scheduler
+
 --- 1.0.1.1 ---
 + export
 * fixed "View &History" menu

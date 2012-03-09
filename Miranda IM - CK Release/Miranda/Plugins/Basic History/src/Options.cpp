@@ -123,11 +123,6 @@ int Options::InitOptions(WPARAM wParam, LPARAM lParam)
 	odp.flags = ODPF_BOLDGROUPS | ODPF_TCHAR;
 	odp.ptszTitle = LPGENT("History");
 
-	odp.ptszTab = LPGENT("Main");
-	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_MAIN);
-	odp.pfnDlgProc = Options::DlgProcOptsMain;
-	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM)&odp);
-
 	odp.ptszTab = LPGENT("Group list");
 	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_GROUPLIST);
 	odp.pfnDlgProc = Options::DlgProcOptsGroupList;
@@ -146,6 +141,16 @@ int Options::InitOptions(WPARAM wParam, LPARAM lParam)
 	odp.ptszTab = LPGENT("Export");
 	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_EXPORT);
 	odp.pfnDlgProc = Options::DlgProcOptsExport;
+	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM)&odp);
+
+	odp.ptszTab = LPGENT("Scheduler");
+	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_SCHEDULER);
+	odp.pfnDlgProc = Options::DlgProcOptsScheduler;
+	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM)&odp);
+
+	odp.ptszTab = LPGENT("Advanced");
+	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPT_MAIN);
+	odp.pfnDlgProc = Options::DlgProcOptsMain;
 	CallService(MS_OPT_ADDPAGE, wParam, (LPARAM)&odp);
 
 	return 0;
@@ -215,8 +220,14 @@ const int g_colorsSize = SIZEOF(g_ColorOptionsList);
 
 const int g_hotkeysSize = SIZEOF(g_HotkeyOptionsList);
 
+void Options::Unload()
+{
+	DeleteCriticalSection(&criticalSection);
+}
+
 void Options::Load()
 {
+	InitializeCriticalSection(&criticalSection);
 	FontIDT fid = {0};
 	ColourIDT cid = {0};
 	HOTKEYDESC hid = {0};
@@ -399,6 +410,24 @@ void Options::Load()
 	{
 		extCssHtml2 = _T("");
 	}
+
+	if(!DBGetContactSettingWString(0, MODULE, "ftpLogPath", &encodingV))
+	{
+		ftpLogPath = encodingV.pwszVal;
+		DBFreeVariant(&encodingV);
+	}
+
+	if(!DBGetContactSettingWString(0, MODULE, "ftpExePath", &encodingV))
+	{
+		ftpExePath = encodingV.pwszVal;
+		DBFreeVariant(&encodingV);
+	}
+	else
+	{
+		ftpExePath = ftpExePathDef;
+	}
+
+	LoadTasks();
 }
 
 COLORREF Options::GetFont(Fonts fontId, PLOGFONT font)
@@ -481,12 +510,239 @@ void Options::Save()
 	DBWriteContactSettingByte(0, MODULE, "exportHtml2ShowDate", exportHtml2ShowDate ? 1 : 0);
 	DBWriteContactSettingByte(0, MODULE, "exportHtml2UseSmileys", exportHtml2UseSmileys ? 1 : 0);
 	DBWriteContactSettingWString(0, MODULE, "extCssHtml2", extCssHtml2.c_str());
+	DBWriteContactSettingWString(0, MODULE, "ftpLogPath", ftpLogPath.c_str());
+	if(ftpExePath != ftpExePathDef)
+	{
+		DBWriteContactSettingWString(0, MODULE, "ftpExePath", ftpExePath.c_str());
+	}
+	else
+	{
+		DBDeleteContactSetting(0, MODULE, "ftpExePath");
+	}
+}
+
+void Options::SaveTasks(std::list<TaskOptions>* tasks)
+{
+	EnterCriticalSection(&criticalSection);
+	int oldTaskNr = taskOptions.size();
+	taskOptions.clear();
+	int i = 0;
+	char buf[256];
+	for(std::list<TaskOptions>::iterator it = tasks->begin(); it != tasks->end(); ++it)
+	{
+		sprintf_s(buf, "Task_compress_%d", i);
+		DBWriteContactSettingByte(0, MODULE, buf, it->compress);
+		sprintf_s(buf, "Task_useFtp_%d", i);
+		DBWriteContactSettingByte(0, MODULE, buf, it->useFtp);
+		sprintf_s(buf, "Task_isSystem_%d", i);
+		DBWriteContactSettingByte(0, MODULE, buf, it->isSystem);
+		sprintf_s(buf, "Task_active_%d", i);
+		DBWriteContactSettingByte(0, MODULE, buf, it->active);
+		sprintf_s(buf, "Task_type_%d", i);
+		DBWriteContactSettingByte(0, MODULE, buf, it->type);
+		sprintf_s(buf, "Task_eventUnit_%d", i);
+		DBWriteContactSettingByte(0, MODULE, buf, it->eventUnit);
+		sprintf_s(buf, "Task_trigerType_%d", i);
+		DBWriteContactSettingByte(0, MODULE, buf, it->trigerType);
+		sprintf_s(buf, "Task_exportType_%d", i);
+		DBWriteContactSettingByte(0, MODULE, buf, it->exportType);
+		sprintf_s(buf, "Task_eventDeltaTime_%d", i);
+		DBWriteContactSettingDword(0, MODULE, buf, it->eventDeltaTime);
+		sprintf_s(buf, "Task_filterId_%d", i);
+		DBWriteContactSettingDword(0, MODULE, buf, it->filterId);
+		sprintf_s(buf, "Task_dayTime_%d", i);
+		DBWriteContactSettingDword(0, MODULE, buf, it->dayTime);
+		sprintf_s(buf, "Task_dayOfWeek_%d", i);
+		DBWriteContactSettingDword(0, MODULE, buf, it->dayOfWeek);
+		sprintf_s(buf, "Task_dayOfMonth_%d", i);
+		DBWriteContactSettingDword(0, MODULE, buf, it->dayOfMonth);
+		sprintf_s(buf, "Task_deltaTime_%d", i);
+		DBWriteContactSettingDword(0, MODULE, buf, it->deltaTime);
+		sprintf_s(buf, "Task_lastExport_low_%d", i);
+		DBWriteContactSettingDword(0, MODULE, buf, (int)it->lastExport);
+		sprintf_s(buf, "Task_lastExport_hi_%d", i);
+		DBWriteContactSettingDword(0, MODULE, buf, ((unsigned long long int)it->lastExport) >> 32);
+		sprintf_s(buf, "Task_ftpName_%d", i);
+		DBWriteContactSettingWString(0, MODULE, buf, it->ftpName.c_str());
+		sprintf_s(buf, "Task_filterName_%d", i);
+		DBWriteContactSettingWString(0, MODULE, buf, it->filterName.c_str());
+		sprintf_s(buf, "Task_filePath_%d", i);
+		DBWriteContactSettingWString(0, MODULE, buf, it->filePath.c_str());
+		sprintf_s(buf, "Task_taskName_%d", i);
+		DBWriteContactSettingWString(0, MODULE, buf, it->taskName.c_str());
+
+		HANDLE _hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
+		sprintf_s(buf, "IsInTask_%d", i);
+		while(_hContact)
+		{
+			DBDeleteContactSetting(_hContact, MODULE, buf);
+			_hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)_hContact, 0);
+		}
+
+		for(int j = 0; j < it->contacts.size(); ++j)
+		{
+			DBWriteContactSettingByte(it->contacts[j], MODULE, buf, 1);
+		}
+
+		it->orderNr = i++;
+		taskOptions.push_back(*it);
+	}
+
+	DBWriteContactSettingDword(0, MODULE, "Task_count", i);
+	
+	for(i = tasks->size(); i < oldTaskNr; ++i)
+	{
+		sprintf_s(buf, "Task_compress_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_useFtp_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_isSystem_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_active_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_type_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_eventUnit_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_trigerType_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_exportType_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_eventDeltaTime_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_filterId_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_dayTime_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_dayOfWeek_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_dayOfMonth_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_deltaTime_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_lastExport_low_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_lastExport_hi_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_ftpName_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_filterName_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_filePath_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+		sprintf_s(buf, "Task_taskName_%d", i);
+		DBDeleteContactSetting(NULL, MODULE, buf);
+
+		HANDLE _hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
+		sprintf_s(buf, "IsInTask_%d", i);
+		while(_hContact)
+		{
+			DBDeleteContactSetting(_hContact, MODULE, buf);
+			_hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)_hContact, 0);
+		}
+	}
+
+	LeaveCriticalSection(&criticalSection);
+}
+
+void Options::SaveTaskTime(TaskOptions& to)
+{
+	int i = to.orderNr;
+	char buf[256];
+	sprintf_s(buf, "Task_lastExport_low_%d", i);
+	DBWriteContactSettingDword(0, MODULE, buf, (int)to.lastExport);
+	sprintf_s(buf, "Task_lastExport_hi_%d", i);
+	DBWriteContactSettingDword(0, MODULE, buf, ((unsigned long long int)to.lastExport) >> 32);
+}
+
+void Options::LoadTasks()
+{
+	int taskCount = DBGetContactSettingDword(0, MODULE, "Task_count", 0);
+	char buf[256];
+	for(int i = 0; i < taskCount; ++i)
+	{
+		TaskOptions to;
+		sprintf_s(buf, "Task_compress_%d", i);
+		to.compress = DBGetContactSettingByte(0, MODULE, buf, to.compress);
+		sprintf_s(buf, "Task_useFtp_%d", i);
+		to.useFtp = DBGetContactSettingByte(0, MODULE, buf, to.useFtp);
+		sprintf_s(buf, "Task_isSystem_%d", i);
+		to.isSystem = DBGetContactSettingByte(0, MODULE, buf, to.isSystem);
+		sprintf_s(buf, "Task_active_%d", i);
+		to.active = DBGetContactSettingByte(0, MODULE, buf, to.active);
+		sprintf_s(buf, "Task_type_%d", i);
+		to.type = (TaskOptions::TaskType)DBGetContactSettingByte(0, MODULE, buf, to.type);
+		sprintf_s(buf, "Task_eventUnit_%d", i);
+		to.eventUnit = (TaskOptions::EventUnit)DBGetContactSettingByte(0, MODULE, buf, to.eventUnit);
+		sprintf_s(buf, "Task_trigerType_%d", i);
+		to.trigerType = (TaskOptions::TrigerType)DBGetContactSettingByte(0, MODULE, buf, to.trigerType);
+		sprintf_s(buf, "Task_exportType_%d", i);
+		to.exportType = (IExport::ExportType)DBGetContactSettingByte(0, MODULE, buf, to.exportType);
+		sprintf_s(buf, "Task_eventDeltaTime_%d", i);
+		to.eventDeltaTime = DBGetContactSettingDword(0, MODULE, buf, to.eventDeltaTime);
+		sprintf_s(buf, "Task_filterId_%d", i);
+		to.filterId = DBGetContactSettingDword(0, MODULE, buf, to.filterId);
+		sprintf_s(buf, "Task_dayTime_%d", i);
+		to.dayTime = DBGetContactSettingDword(0, MODULE, buf, to.dayTime);
+		sprintf_s(buf, "Task_dayOfWeek_%d", i);
+		to.dayOfWeek = DBGetContactSettingDword(0, MODULE, buf, to.dayOfWeek);
+		sprintf_s(buf, "Task_dayOfMonth_%d", i);
+		to.dayOfMonth = DBGetContactSettingDword(0, MODULE, buf, to.dayOfMonth);
+		sprintf_s(buf, "Task_deltaTime_%d", i);
+		to.deltaTime = DBGetContactSettingDword(0, MODULE, buf, to.deltaTime);
+		unsigned long long int le = to.lastExport;
+		sprintf_s(buf, "Task_lastExport_low_%d", i);
+		to.lastExport = DBGetContactSettingDword(0, MODULE, buf, (int)le) & 0xffffffff;
+		sprintf_s(buf, "Task_lastExport_hi_%d", i);
+		to.lastExport |= ((unsigned int)DBGetContactSettingDword(0, MODULE, buf, le >> 32)) << 32;
+		sprintf_s(buf, "Task_ftpName_%d", i);
+		DBVARIANT var;
+		if(!DBGetContactSettingWString(0, MODULE, buf, &var))
+		{
+			to.ftpName = var.ptszVal;
+			DBFreeVariant(&var);
+		}
+		sprintf_s(buf, "Task_filterName_%d", i);
+		if(!DBGetContactSettingWString(0, MODULE, buf, &var))
+		{
+			to.filterName = var.ptszVal;
+			DBFreeVariant(&var);
+		}
+		sprintf_s(buf, "Task_filePath_%d", i);
+		if(!DBGetContactSettingWString(0, MODULE, buf, &var))
+		{
+			to.filePath = var.ptszVal;
+			DBFreeVariant(&var);
+		}
+		sprintf_s(buf, "Task_taskName_%d", i);
+		if(!DBGetContactSettingWString(0, MODULE, buf, &var))
+		{
+			to.taskName = var.ptszVal;
+			DBFreeVariant(&var);
+		}
+
+		HANDLE _hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
+		sprintf_s(buf, "IsInTask_%d", i);
+		while(_hContact)
+		{
+			if(DBGetContactSettingByte(_hContact, MODULE, buf, 0) == 1)
+			{
+				to.contacts.push_back(_hContact);
+			}
+
+			_hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)_hContact, 0);
+		}
+
+		to.orderNr = i;
+		taskOptions.push_back(to);
+	}
 }
 
 void OptionsMainChanged();
 void OptionsGroupChanged();
 void OptionsMessageChanged();
 void OptionsSearchingChanged();
+void OptionsSchedulerChanged();
 
 void SetEventCB(HWND hwndCB, int eventId)
 {
@@ -577,6 +833,21 @@ void ReloadEventLB(HWND hwndLB, const FilterOptions &sel)
 	}
 }
 
+bool CheckFile(HWND hwndEdit)
+{
+	TCHAR buf[MAX_PATH];
+	Edit_GetText(hwndEdit, buf, MAX_PATH);
+	DWORD atr = GetFileAttributes(buf);
+	if(atr == INVALID_FILE_ATTRIBUTES || atr & FILE_ATTRIBUTE_DIRECTORY)
+	{
+		MessageBox(GetParent(hwndEdit), TranslateT("File do not exist. Enter correct file path."), TranslateT("Invalid file"), MB_OK | MB_ICONERROR);
+		SetFocus(hwndEdit);
+		return false;
+	}
+
+	return true;
+}
+
 INT_PTR CALLBACK Options::DlgProcOptsMain(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch(msg) 
@@ -584,11 +855,14 @@ INT_PTR CALLBACK Options::DlgProcOptsMain(HWND hwndDlg, UINT msg, WPARAM wParam,
 		case WM_INITDIALOG:
 		{
 			TranslateDialogDefault(hwndDlg);
+			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)FALSE);
 			CheckDlgButton(hwndDlg, IDC_SHOWCONTACTS, instance->showContacts ? 1 : 0);
 			CheckDlgButton(hwndDlg, IDC_SHOWCONTACTGROUPS, instance->showContactGroups ? 1 : 0);
 			HWND events = GetDlgItem(hwndDlg, IDC_EVENT);
 			HWND defFilter = GetDlgItem(hwndDlg, IDC_DEFFILTER);
-				HWND listFilter = GetDlgItem(hwndDlg, IDC_LIST_FILTERS);
+			HWND listFilter = GetDlgItem(hwndDlg, IDC_LIST_FILTERS);
+			HWND ftp = GetDlgItem(hwndDlg, IDC_WINSCP);
+			HWND ftpLog = GetDlgItem(hwndDlg, IDC_WINSCPLOG);
 			ComboBox_AddString(events, TranslateT("Incoming events"));
 			ComboBox_AddString(events, TranslateT("Outgoing events"));
 			for(int i = 0 ; i < SIZEOF(EventNames); ++i)
@@ -613,10 +887,17 @@ INT_PTR CALLBACK Options::DlgProcOptsMain(HWND hwndDlg, UINT msg, WPARAM wParam,
 			EnableWindow(GetDlgItem(hwndDlg, IDC_EVENT), FALSE);
 			EnableWindow(GetDlgItem(hwndDlg, IDC_ADD_EVENT), FALSE);
 			EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_EVENT), FALSE);
+
+			Edit_LimitText(ftp, MAX_PATH);
+			Edit_LimitText(ftpLog, MAX_PATH);
+			Edit_SetText(ftp, instance->ftpExePath.c_str());
+			Edit_SetText(ftpLog, instance->ftpLogPath.c_str());
+			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)TRUE);
 			return TRUE;
 		}
 		case WM_COMMAND:
 		{
+			BOOL init = (BOOL)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
 			if (HIWORD(wParam) == BN_CLICKED)
 			{
 				HWND listFilter = GetDlgItem(hwndDlg, IDC_LIST_FILTERS);
@@ -789,7 +1070,7 @@ INT_PTR CALLBACK Options::DlgProcOptsMain(HWND hwndDlg, UINT msg, WPARAM wParam,
 				EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_EVENT), sel >= 0);
 			}
 
-			if (HIWORD(wParam) == BN_CLICKED || (HIWORD(wParam) == CBN_SELCHANGE && LOWORD(wParam) == IDC_DEFFILTER))
+			if (init && (HIWORD(wParam) == BN_CLICKED || (HIWORD(wParam) == CBN_SELCHANGE && LOWORD(wParam) == IDC_DEFFILTER) || (HIWORD(wParam) == EN_CHANGE && LOWORD(wParam) != IDC_FILTER_NAME)))
 				SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
 			return TRUE;
 		}
@@ -797,6 +1078,20 @@ INT_PTR CALLBACK Options::DlgProcOptsMain(HWND hwndDlg, UINT msg, WPARAM wParam,
 		{
 			if(((LPNMHDR)lParam)->code == PSN_APPLY) 
 			{
+				HWND ftp = GetDlgItem(hwndDlg, IDC_WINSCP);
+				TCHAR buf[MAX_PATH];
+				Edit_GetText(ftp, buf, MAX_PATH);
+				if(buf[0] != 0 && !CheckFile(ftp))
+				{
+					SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+					SetWindowLongPtr(hwndDlg, DWLP_MSGRESULT, PSNRET_INVALID_NOCHANGEPAGE);
+					return TRUE;
+				}
+
+				instance->ftpExePath = buf;
+				Edit_GetText(GetDlgItem(hwndDlg, IDC_WINSCPLOG), buf, MAX_PATH);
+				instance->ftpLogPath = buf;
+
 				instance->showContacts = IsDlgButtonChecked(hwndDlg, IDC_SHOWCONTACTS) ? true : false;
 				instance->showContactGroups = IsDlgButtonChecked(hwndDlg, IDC_SHOWCONTACTGROUPS) ? true : false;
 				instance->defFilter = ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_DEFFILTER));
@@ -1063,21 +1358,6 @@ unsigned int GetCodepageCB(HWND hwndCB, bool errorReport, unsigned int defCp, co
 	}
 }
 
-bool CheckFile(HWND hwndEdit)
-{
-	TCHAR buf[MAX_PATH];
-	Edit_GetText(hwndEdit, buf, MAX_PATH);
-	DWORD atr = GetFileAttributes(buf);
-	if(atr == INVALID_FILE_ATTRIBUTES || atr & FILE_ATTRIBUTE_DIRECTORY)
-	{
-		MessageBox(GetParent(hwndEdit), TranslateT("File do not exist. Enter correct file path."), TranslateT("Invalid file"), MB_OK | MB_ICONERROR);
-		SetFocus(hwndEdit);
-		return false;
-	}
-
-	return true;
-}
-
 INT_PTR CALLBACK Options::DlgProcOptsExport(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch(msg) 
@@ -1181,4 +1461,518 @@ INT_PTR CALLBACK Options::DlgProcOptsExport(HWND hwndDlg, UINT msg, WPARAM wPara
 	}
 
 	return FALSE;
+}
+
+
+struct DlgTaskOpt
+{
+	std::list<TaskOptions>* tasks;
+	TaskOptions* to;
+};
+
+INT_PTR CALLBACK Options::DlgProcOptsScheduler(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch(msg) 
+	{
+		case WM_INITDIALOG:
+		{
+			TranslateDialogDefault(hwndDlg);
+			std::list<TaskOptions>* tasks = new std::list<TaskOptions>(Options::instance->taskOptions.begin(), Options::instance->taskOptions.end());
+			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR)tasks);
+			HWND listTasks = GetDlgItem(hwndDlg, IDC_LIST_TASKS);
+			for(std::list<TaskOptions>::iterator it = tasks->begin(); it != tasks->end(); ++it)
+			{
+				ListBox_AddString(listTasks, it->taskName.c_str());
+			}
+			
+			EnableWindow(GetDlgItem(hwndDlg, IDC_EDIT_TASK), FALSE);
+			EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_TASK), FALSE);
+			return TRUE;
+		}
+		case WM_COMMAND:
+		{
+			if(HIWORD(wParam) == BN_CLICKED)
+			{
+				std::list<TaskOptions>* tasks = (std::list<TaskOptions>*)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+				HWND listTasks = GetDlgItem(hwndDlg, IDC_LIST_TASKS);
+				int sel = ListBox_GetCurSel(listTasks);
+				TaskOptions toAdd;
+				TaskOptions* to = &toAdd;
+				switch(LOWORD(wParam))
+				{
+				case IDC_EDIT_TASK:
+					if(sel >= 0)
+					{
+						std::list<TaskOptions>::iterator it = tasks->begin();
+						while(sel-- > 0 && it != tasks->end())
+							++it;
+						if(it == tasks->end())
+							break;
+						to = &(*it);
+					}
+					else
+						break;
+				case IDC_ADD_TASK:
+					{
+						DlgTaskOpt top;
+						top.tasks = tasks;
+						top.to = to;
+						if(DialogBoxParam(hInst, MAKEINTRESOURCE(IDD_DLG_TASK), hwndDlg, DlgProcOptsTask, (LPARAM)&top) == IDOK)
+						{
+							if(LOWORD(wParam) == IDC_ADD_TASK)
+							{
+								tasks->push_back(*to); 
+								ListBox_AddString(listTasks, to->taskName.c_str());
+								ListBox_SetCurSel(listTasks, tasks->size() - 1);
+							}
+							else
+							{
+								sel = ListBox_GetCurSel(listTasks);
+								ListBox_DeleteString(listTasks, sel);
+								ListBox_InsertString(listTasks, sel, to->taskName.c_str());
+								ListBox_SetCurSel(listTasks, sel);
+							}
+							EnableWindow(GetDlgItem(hwndDlg, IDC_EDIT_TASK), TRUE);
+							EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_TASK), TRUE);
+							SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+						}
+					}
+
+					break;
+				case IDC_DELETE_TASK:
+					if(sel >= 0)
+					{
+						ListBox_DeleteString(listTasks, sel);
+						std::list<TaskOptions>::iterator it = tasks->begin();
+						while(sel-- > 0 && it != tasks->end())
+							++it;
+						if(it != tasks->end())
+							tasks->erase(it);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_EDIT_TASK), FALSE);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_TASK), FALSE);
+						SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+					}
+
+					break;
+				}
+			}
+			else if(HIWORD(wParam) == CBN_SELCHANGE && LOWORD(wParam) == IDC_LIST_TASKS)
+			{
+				HWND listTasks = GetDlgItem(hwndDlg, IDC_LIST_TASKS);
+				int sel = ListBox_GetCurSel(listTasks);
+				if(sel < 0)
+				{
+					EnableWindow(GetDlgItem(hwndDlg, IDC_EDIT_TASK), FALSE);
+					EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_TASK), FALSE);
+				}
+				else
+				{
+					EnableWindow(GetDlgItem(hwndDlg, IDC_EDIT_TASK), TRUE);
+					EnableWindow(GetDlgItem(hwndDlg, IDC_DELETE_TASK), TRUE);
+				}
+			}
+			return TRUE;
+		}
+		case WM_NOTIFY:
+		{
+			if(((LPNMHDR)lParam)->code == PSN_APPLY) 
+			{
+				std::list<TaskOptions>* tasks = (std::list<TaskOptions>*)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+				Options::instance->SaveTasks(tasks);
+				OptionsSchedulerChanged();
+			}
+			return TRUE;
+		}
+		case WM_DESTROY:
+		{
+			std::list<TaskOptions>* tasks = (std::list<TaskOptions>*)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+			delete tasks;
+			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, NULL);
+			break;
+		}
+	}
+
+	return FALSE;
+}
+
+void ResetListOptions(HWND hwnd)
+{
+	SendMessage(hwnd, CLM_SETGREYOUTFLAGS, 0, 0);
+	SendMessage(hwnd, CLM_SETLEFTMARGIN, 2, 0);
+	SendMessage(hwnd, CLM_SETBKBITMAP, 0, (LPARAM)(HBITMAP) NULL);
+	SendMessage(hwnd, CLM_SETBKCOLOR, GetSysColor(COLOR_WINDOW), 0);
+	SendMessage(hwnd, CLM_SETINDENT, 10, 0);
+	for (int i = 0; i <= FONTID_MAX; i++)
+		SendMessage(hwnd, CLM_SETTEXTCOLOR, i, GetSysColor(COLOR_WINDOWTEXT));
+}
+
+void RebuildList(HWND hwnd, HANDLE hSystem, TaskOptions* to)
+{
+	HANDLE hItem;
+	if(to->isSystem && hSystem)
+	{
+		SendMessage(hwnd, CLM_SETCHECKMARK, (WPARAM) hSystem, 1);
+	}
+
+	for(int i = 0; i < to->contacts.size(); ++i)
+	{
+		hItem = (HANDLE) SendMessage(hwnd, CLM_FINDCONTACT, (WPARAM) to->contacts[i], 0);
+		if (hItem)
+			SendMessage(hwnd, CLM_SETCHECKMARK, (WPARAM) hItem, 1);
+	}
+}
+
+void SaveList(HWND hwnd, HANDLE hSystem, TaskOptions* to)
+{
+	HANDLE hContact, hItem;
+
+	to->contacts.clear();
+	if (hSystem)
+		to->isSystem = SendMessage(hwnd, CLM_GETCHECKMARK, (WPARAM) hSystem, 0);
+	hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
+	do 
+	{
+		hItem = (HANDLE) SendMessage(hwnd, CLM_FINDCONTACT, (WPARAM) hContact, 0);
+		if (hItem && SendMessage(hwnd, CLM_GETCHECKMARK, (WPARAM) hItem, 0))
+			to->contacts.push_back(hContact);
+	} 
+	while (hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM) hContact, 0));
+}
+
+bool IsValidTask(TaskOptions& to, std::list<TaskOptions>* top = NULL, std::wstring* err = NULL, std::wstring* errDescr = NULL);
+
+#ifndef LOCALE_SSHORTTIME
+#define LOCALE_SSHORTTIME             0x00000079
+#endif
+
+INT_PTR CALLBACK Options::DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	static HANDLE hSystem;
+	switch(msg) 
+	{
+		case WM_INITDIALOG:
+		{
+			TCHAR buf[1024];
+			TranslateDialogDefault(hwndDlg);
+			DlgTaskOpt* top = (DlgTaskOpt*)lParam;
+			TaskOptions* to = top->to;
+			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, lParam);
+			HWND comboType = GetDlgItem(hwndDlg, IDC_TASK_TYPE);
+			HWND filter = GetDlgItem(hwndDlg, IDC_TASK_FILTER);
+			HWND eventUnit = GetDlgItem(hwndDlg, IDC_EVENT_UNIT);
+			HWND trigerType = GetDlgItem(hwndDlg, IDC_TRIGER_TYPE);
+			HWND exportType = GetDlgItem(hwndDlg, IDC_EXPORT_TYPE);
+			HWND compress = GetDlgItem(hwndDlg, IDC_COMPRESS);
+			HWND exportPath = GetDlgItem(hwndDlg, IDC_EXPORT_PATH);
+			HWND ftpFile = GetDlgItem(hwndDlg, IDC_FTP);
+			HWND ftpFileButton = GetDlgItem(hwndDlg, IDC_UPLOAD);
+			HWND contactList = GetDlgItem(hwndDlg, IDC_LIST_CONTACTSEX);
+			HWND weekList = GetDlgItem(hwndDlg, IDC_TRIGER_WEEK);
+			HWND day = GetDlgItem(hwndDlg, IDC_TRIGER_DAY);
+			HWND deltaTime = GetDlgItem(hwndDlg, IDC_TRIGER_DELTA_TIME);
+			HWND time = GetDlgItem(hwndDlg, IDC_TRIGER_TIME);
+			HWND name = GetDlgItem(hwndDlg, IDC_TASK_NAME);
+			HWND active = GetDlgItem(hwndDlg, IDC_TASK_ACTIVE);
+			HWND star = GetDlgItem(hwndDlg, IDC_TASK_STAR);
+
+			Edit_LimitText(name, 16);
+			Edit_SetText(name, to->taskName.c_str());
+
+			Button_SetCheck(active, to->active);
+
+			ComboBox_AddString(comboType, TranslateT("Export"));
+			ComboBox_AddString(comboType, TranslateT("Delete"));
+			ComboBox_AddString(comboType, TranslateT("Export and Delete"));
+			ComboBox_SetCurSel(comboType, to->type);
+
+			Edit_LimitText(GetDlgItem(hwndDlg, IDC_EVENT_TIME), 6);
+			SetDlgItemInt(hwndDlg, IDC_EVENT_TIME, to->eventDeltaTime, TRUE);
+			ComboBox_AddString(eventUnit, TranslateT("Minute"));
+			ComboBox_AddString(eventUnit, TranslateT("Hour"));
+			ComboBox_AddString(eventUnit, TranslateT("Day"));
+			ComboBox_SetCurSel(eventUnit, to->eventUnit);
+
+			ComboBox_AddString(filter, TranslateT("Default history events"));
+			ComboBox_AddString(filter, TranslateT("All events"));
+			int selFilter = to->filterId;
+			if(selFilter > 1)
+				selFilter = 0;
+			int i = 1;
+			for(std::vector<FilterOptions>::iterator it = instance->customFilters.begin(); it != instance->customFilters.end(); ++it)
+			{
+				++i;
+				ComboBox_AddString(filter, it->name.c_str());
+				if(to->filterId > 1 && it->name == to->filterName)
+				{
+					selFilter = i;
+				}
+			}
+			ComboBox_SetCurSel(filter, selFilter);
+
+			ComboBox_AddString(trigerType, TranslateT("At Start"));
+			ComboBox_AddString(trigerType, TranslateT("At Finish"));
+			ComboBox_AddString(trigerType, TranslateT("Daily"));
+			ComboBox_AddString(trigerType, TranslateT("Weekly"));
+			ComboBox_AddString(trigerType, TranslateT("Monthly"));
+			ComboBox_AddString(trigerType, TranslateT("Delta time (minutes)"));
+			ComboBox_AddString(trigerType, TranslateT("Delta time (hours)"));
+			ComboBox_SetCurSel(trigerType, to->trigerType);
+
+			ComboBox_AddString(exportType, TranslateT("Rich Html"));
+			ComboBox_AddString(exportType, TranslateT("Plain Html"));
+			ComboBox_AddString(exportType, TranslateT("Txt"));
+			ComboBox_SetCurSel(exportType, to->exportType);
+
+			Button_SetCheck(compress, to->compress);
+			
+			Edit_LimitText(exportPath, MAX_PATH);
+			Edit_SetText(exportPath, to->filePath.c_str());
+			
+			if(!FTPAvail())
+			{
+				EnableWindow(ftpFile, FALSE);
+				EnableWindow(ftpFileButton, FALSE);
+				to->useFtp == false;
+			}
+
+			Button_SetCheck(ftpFileButton, to->useFtp);
+			Edit_SetText(ftpFile, to->ftpName.c_str());
+
+			ComboBox_AddString(weekList, TranslateT("Monday"));
+			ComboBox_AddString(weekList, TranslateT("Tuesday"));
+			ComboBox_AddString(weekList, TranslateT("Wednesday"));
+			ComboBox_AddString(weekList, TranslateT("Thursday"));
+			ComboBox_AddString(weekList, TranslateT("Friday"));
+			ComboBox_AddString(weekList, TranslateT("Saturday"));
+			ComboBox_AddString(weekList, TranslateT("Sunday"));
+			ComboBox_SetCurSel(weekList, to->dayOfWeek);
+			
+			Edit_LimitText(day, 2);
+			SetDlgItemInt(hwndDlg, IDC_TRIGER_DAY, to->dayOfMonth, FALSE);
+
+			Edit_LimitText(deltaTime, 4);
+			SetDlgItemInt(hwndDlg, IDC_TRIGER_DELTA_TIME, to->deltaTime, FALSE);
+			
+			TCHAR timeFormat[10];
+			if(GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_SSHORTTIME, timeFormat, 10) == 0)
+			{
+				TCHAR sep = _T(':');
+				if(GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_STIME, timeFormat, 10) > 0)
+					sep = timeFormat[0];
+				_stprintf_s(timeFormat, _T("HH%cmm"), sep);
+			}
+
+			SYSTEMTIME st;
+			GetSystemTime (&st);
+			st.wHour = to->dayTime/60;
+			st.wMinute = to->dayTime%60;
+			st.wSecond = 0;
+			st.wMilliseconds = 0;
+			DateTime_SetFormat(time, timeFormat);
+			DateTime_SetSystemtime(time, GDT_VALID, &st);
+
+			if(to->type != TaskOptions::Delete)
+			{
+				std::wstring str = TranslateT("* Use negative values to filter younger events");
+				str += _T("\n");
+				str += TranslateT("** Use <date> to insert date, <ext> to insert extension, <contact> to insert contact name");
+				Static_SetText(star, str.c_str());
+			}
+
+			CLCINFOITEM cii = { 0 };
+			cii.cbSize = sizeof(cii);
+			cii.flags = CLCIIF_GROUPFONT | CLCIIF_CHECKBOX;
+			cii.pszText = TranslateT("Server");
+			hSystem = (HANDLE) SendMessage(contactList, CLM_ADDINFOITEM, 0, (LPARAM) & cii);
+			SendMessage(contactList, CLM_AUTOREBUILD, 0, 0);
+			ResetListOptions(contactList);
+			RebuildList(contactList, hSystem, to);
+
+			SendMessage(hwndDlg, WM_COMMAND, MAKEWPARAM(IDC_TASK_TYPE, CBN_SELCHANGE), NULL);
+			SendMessage(hwndDlg, WM_COMMAND, MAKEWPARAM(IDC_TRIGER_TYPE, CBN_SELCHANGE), NULL);
+			SendMessage(hwndDlg, WM_COMMAND, MAKEWPARAM(IDC_COMPRESS, BN_CLICKED), NULL);
+			SendMessage(hwndDlg, WM_COMMAND, MAKEWPARAM(IDC_UPLOAD, BN_CLICKED), NULL);
+			return TRUE;
+		}
+		case WM_COMMAND:
+		{
+			if (HIWORD(wParam) == BN_CLICKED) 
+			{
+				if (LOWORD(wParam) == IDOK)
+				{
+					DlgTaskOpt* top = (DlgTaskOpt*)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+					TaskOptions* to = top->to;
+					TaskOptions toCp(*to);
+					toCp.taskName.resize(17);
+					int nameLen = Edit_GetText(GetDlgItem(hwndDlg, IDC_TASK_NAME), (wchar_t*)toCp.taskName.c_str(), 17);
+					toCp.taskName.resize(nameLen);
+					toCp.active = Button_GetCheck(GetDlgItem(hwndDlg, IDC_TASK_ACTIVE));
+					toCp.type = (enum TaskOptions::TaskType)ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_TASK_TYPE));
+					toCp.filterId = ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_TASK_FILTER));
+					if(toCp.filterId > 1)
+						toCp.filterName = instance->customFilters[toCp.filterId - 2].name;
+					BOOL isOK = FALSE;
+					toCp.eventDeltaTime = GetDlgItemInt(hwndDlg, IDC_EVENT_TIME, &isOK, TRUE);
+					if(!isOK)
+					{
+						TCHAR msg[256];
+						_stprintf_s(msg, TranslateT("Invalid '%s' value."), TranslateT("Events older than"));
+						MessageBox(hwndDlg, msg, TranslateT("Error"), MB_ICONERROR);
+						break;
+					}
+					toCp.eventUnit = (enum TaskOptions::EventUnit)ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_EVENT_UNIT));
+					toCp.trigerType = (enum TaskOptions::TrigerType)ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_TRIGER_TYPE));
+					toCp.exportType = (enum IExport::ExportType)ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_EXPORT_TYPE));
+					toCp.compress = Button_GetCheck(GetDlgItem(hwndDlg, IDC_COMPRESS)) != 0;
+					HWND exportPath = GetDlgItem(hwndDlg, IDC_EXPORT_PATH);
+					int exLen = Edit_GetTextLength(exportPath);
+					toCp.filePath.resize(exLen + 1);
+					Edit_GetText(exportPath, (wchar_t*)toCp.filePath.c_str(), exLen + 1);
+					toCp.filePath.resize(exLen);
+					toCp.useFtp = Button_GetCheck(GetDlgItem(hwndDlg, IDC_UPLOAD)) != 0;
+					HWND ftpFile = GetDlgItem(hwndDlg, IDC_FTP);
+					exLen = Edit_GetTextLength(ftpFile);
+					toCp.ftpName.resize(exLen + 1);
+					Edit_GetText(ftpFile, (wchar_t*)toCp.ftpName.c_str(), exLen + 1);
+					toCp.ftpName.resize(exLen);
+					SYSTEMTIME st;
+					DateTime_GetSystemtime(GetDlgItem(hwndDlg, IDC_TRIGER_TIME), &st);
+					toCp.dayTime = st.wHour * 60 + st.wMinute;
+					toCp.dayOfWeek = ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_TRIGER_WEEK));
+					toCp.dayOfMonth = GetDlgItemInt(hwndDlg, IDC_TRIGER_DAY, &isOK, FALSE);
+					if(!isOK)
+					{
+						if(toCp.trigerType == TaskOptions::Monthly)
+						{
+							TCHAR msg[256];
+							_stprintf_s(msg, TranslateT("Invalid '%s' value."), TranslateT("Day"));
+							MessageBox(hwndDlg, msg, TranslateT("Error"), MB_ICONERROR);
+							break;
+						}
+						else
+							toCp.dayOfMonth = to->dayOfMonth;
+					}
+					toCp.deltaTime = GetDlgItemInt(hwndDlg, IDC_TRIGER_DELTA_TIME, &isOK, FALSE);
+					if(!isOK)
+					{
+						if(toCp.trigerType == TaskOptions::DeltaMin || toCp.trigerType == TaskOptions::DeltaHour)
+						{
+							TCHAR msg[256];
+							_stprintf_s(msg, TranslateT("Invalid '%s' value."), TranslateT("Delta time"));
+							MessageBox(hwndDlg, msg, TranslateT("Error"), MB_ICONERROR);
+							break;
+						}
+						else
+							toCp.deltaTime = to->deltaTime;
+					}
+					SaveList(GetDlgItem(hwndDlg, IDC_LIST_CONTACTSEX), hSystem, &toCp);
+					std::wstring err;
+					std::wstring errDescr;
+					std::wstring lastName = to->taskName;
+					to->taskName = L"";
+					if(!IsValidTask(toCp, top->tasks, &err, &errDescr))
+					{
+						to->taskName = lastName;
+						TCHAR msg[256];
+						if(err.empty())
+							_tcscpy_s(msg, TranslateT("Some value is invalid"));
+						else if(errDescr.empty())
+						{
+							_stprintf_s(msg, TranslateT("Invalid '%s' value."), err.c_str());
+						}
+						else
+						{
+							_stprintf_s(msg, TranslateT("Invalid '%s' value.\n%s"), err.c_str(), errDescr.c_str());
+						}
+
+						MessageBox(hwndDlg, msg, TranslateT("Error"), MB_ICONERROR);
+						break;
+					}
+
+					toCp.lastExport = time(NULL);
+
+					*to = toCp;
+					EndDialog(hwndDlg, IDOK);
+				}
+				else if (LOWORD(wParam) == IDCANCEL)
+				{
+					EndDialog(hwndDlg, IDCANCEL);
+				}
+				else if (LOWORD(wParam) == IDC_UPLOAD)
+				{
+					if(Button_GetCheck(GetDlgItem(hwndDlg, IDC_UPLOAD)) == 0)
+					{
+						EnableWindow(GetDlgItem(hwndDlg, IDC_FTP), FALSE);
+					}
+					else
+					{
+						EnableWindow(GetDlgItem(hwndDlg, IDC_FTP), TRUE);
+					}
+				}
+			}
+			else if (HIWORD(wParam) == CBN_SELCHANGE) 
+			{
+				if(LOWORD(wParam) == IDC_TASK_TYPE)
+				{
+					TaskOptions::TaskType sel = (enum TaskOptions::TaskType)ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_TASK_TYPE));
+					int show = sel == TaskOptions::Delete ? SW_HIDE : SW_SHOW;
+					ShowWindow(GetDlgItem(hwndDlg, IDC_EXPORT_TYPE), show);  
+					ShowWindow(GetDlgItem(hwndDlg, IDC_EXPORT_TYPE_LABEL), show); 
+					ShowWindow(GetDlgItem(hwndDlg, IDC_COMPRESS), show); 
+					ShowWindow(GetDlgItem(hwndDlg, IDC_EXPORT_PATH), show); 
+					ShowWindow(GetDlgItem(hwndDlg, IDC_EXPORT_PATH_LABEL), show); 
+					ShowWindow(GetDlgItem(hwndDlg, IDC_FTP), show); 
+					ShowWindow(GetDlgItem(hwndDlg, IDC_UPLOAD), show); 
+					ShowWindow(GetDlgItem(hwndDlg, IDC_FTP_LABEL), show); 
+					if(show == SW_HIDE)
+					{
+						std::wstring str = TranslateT("* Use negative values to filter younger events");
+						Static_SetText(GetDlgItem(hwndDlg, IDC_TASK_STAR), str.c_str());
+					}
+					else
+					{
+						std::wstring str = TranslateT("* Use negative values to filter younger events");
+						str += _T("\n");
+						str += TranslateT("** Use <date> to insert date, <ext> to insert extension, <contact> to insert contact name");
+						Static_SetText(GetDlgItem(hwndDlg, IDC_TASK_STAR), str.c_str());
+					}
+				}
+				else if(LOWORD(wParam) == IDC_TRIGER_TYPE)
+				{
+					TaskOptions::TrigerType sel = (enum TaskOptions::TrigerType)ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_TRIGER_TYPE));
+					int showT = (sel == TaskOptions::Daily || sel == TaskOptions::Weekly || sel == TaskOptions::Monthly) ? SW_SHOW : SW_HIDE;
+					int showW = sel == TaskOptions::Weekly ? SW_SHOW : SW_HIDE;
+					int showM = sel == TaskOptions::Monthly ? SW_SHOW : SW_HIDE;
+					int showDT = (sel == TaskOptions::DeltaMin || sel == TaskOptions::DeltaHour) ? SW_SHOW : SW_HIDE;
+					ShowWindow(GetDlgItem(hwndDlg, IDC_TRIGER_TIME), showT);  
+					ShowWindow(GetDlgItem(hwndDlg, IDC_TRIGER_TIME_LABEL), showT);  
+					ShowWindow(GetDlgItem(hwndDlg, IDC_TRIGER_WEEK), showW);  
+					ShowWindow(GetDlgItem(hwndDlg, IDC_TRIGER_WEEK_LABEL), showW);  
+					ShowWindow(GetDlgItem(hwndDlg, IDC_TRIGER_DAY), showM);  
+					ShowWindow(GetDlgItem(hwndDlg, IDC_TRIGER_DAY_LABEL), showM);  
+					ShowWindow(GetDlgItem(hwndDlg, IDC_TRIGER_DELTA_TIME), showDT);  
+					ShowWindow(GetDlgItem(hwndDlg, IDC_TRIGER_DELTA_TIME_LABEL), showDT);  
+				}
+			}
+			return TRUE;
+		}
+		case WM_NOTIFY:
+		{
+			NMHDR* nmhdr = (NMHDR *) lParam;
+			if (nmhdr->idFrom == IDC_LIST_CONTACTSEX && nmhdr->code == CLN_OPTIONSCHANGED) 
+			{
+				ResetListOptions(hwndDlg);
+			}
+
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+bool Options::FTPAvail()
+{
+	DWORD atr = GetFileAttributes(instance->ftpExePath.c_str());
+	return !(atr == INVALID_FILE_ATTRIBUTES || atr & FILE_ATTRIBUTE_DIRECTORY);
 }

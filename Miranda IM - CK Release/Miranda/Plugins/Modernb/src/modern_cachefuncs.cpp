@@ -32,11 +32,11 @@ Modified by FYR
 /************************************************************************/
 
 //hdr
-#include "modern_commonheaders.h"
-#include "modern_cache_funcs.h"
+#include "../hdr/modern_commonheaders.h"
+#include "../hdr/modern_cache_funcs.h"
 #include "newpluginapi.h"
-#include "modern_gettextasync.h"
-#include "modern_sync.h"
+#include "../hdr/modern_gettextasync.h"
+#include "../hdr/modern_sync.h"
 
 typedef BOOL (* ExecuteOnAllContactsFuncPtr) (struct ClcContact *contact, BOOL subcontact, void *param);
 

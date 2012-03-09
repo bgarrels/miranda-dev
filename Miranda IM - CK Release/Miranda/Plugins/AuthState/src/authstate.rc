@@ -28,9 +28,9 @@ LANGUAGE LANG_UKRAINIAN, SUBLANG_DEFAULT
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_AUTH                ICON                    "icons\\auth.ico"
-IDI_GRANT               ICON                    "icons\\grant.ico"
-IDI_AUTHGRANT           ICON                    "icons\\authgrant.ico"
+IDI_AUTH                ICON                    "../icons\\auth.ico"
+IDI_GRANT               ICON                    "../icons\\grant.ico"
+IDI_AUTHGRANT           ICON                    "../icons\\authgrant.ico"
 #endif    // Ukrainian resources
 /////////////////////////////////////////////////////////////////////////////
 

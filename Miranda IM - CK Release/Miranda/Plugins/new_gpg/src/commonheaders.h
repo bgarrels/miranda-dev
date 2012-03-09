@@ -22,6 +22,7 @@
 #include <io.h>
 #include <uxtheme.h>
 #include <shlwapi.h>
+#include <richedit.h>
 //c
 #include <locale.h>
 #include <errno.h>
@@ -53,7 +54,7 @@ using std::fstream;
 //utf8cpp
 #include <utf8.h>
 
-//miranda im stuff
+//miranda
 #include <newpluginapi.h>
 #include <m_database.h>
 #include <m_options.h>

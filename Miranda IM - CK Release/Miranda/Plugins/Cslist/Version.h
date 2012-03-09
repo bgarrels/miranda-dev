@@ -25,4 +25,4 @@
 #define __AUTHOR					"Mataes, jarvis"
 #define __AUTHOREMAIL				"mataes2007@gmail.com"
 #define __AUTHORWEB					"http://mataes.googlecode.com/svn/Miranda/Plugins/Cslist/"
-#define __COPYRIGHT					"© 2011-10 Mataes, 2009-2007 jarvis"
+#define __COPYRIGHT					"© 2010-12 Mataes, 2009-2007 jarvis"

@@ -180,7 +180,8 @@ static BOOL CALLBACK DlgProcGpgOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 		EnableWindow(GetDlgItem(hwndDlg, IDC_JABBER_API), bIsMiranda09);
 		EnableWindow(GetDlgItem(hwndDlg, IDC_AUTO_EXCHANGE), (bIsMiranda09 && bJabberAPI));
 		{
-			string keyinfo = Translate("Current private key id: ");
+			string keyinfo = Translate("Current private key id");
+			keyinfo += ": ";
 			char *keyid = UniGetContactSettingUtf(NULL, szGPGModuleName, "KeyID", "");
 			keyinfo += (strlen(keyid) > 0)?keyid:"not set";
 			mir_free(keyid);
@@ -353,6 +354,51 @@ static BOOL CALLBACK DlgProcGpgOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 			  f.close();
 		  }
 		  break;
+	  case IDC_COPY_KEY:
+		  {
+			  if(OpenClipboard(hwndDlg))
+			  {
+				  char *szKey = UniGetContactSettingUtf(NULL, szGPGModuleName, "GPGPubKey", "");
+				  std::string str = szKey;;
+				  mir_free(szKey);
+				  for(std::string::size_type i = str.find("\n"); i != std::string::npos; i = str.find("\n", i+2))
+					  str.replace(i, 1, "\r\n"); 
+				  HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, str.size() +1);
+				  if(!hMem)
+				  {
+					  MessageBoxA(0, "Failed to alocate memory", "Error", MB_OK);
+					  break;
+				  }
+				  szKey = (char*)GlobalLock(hMem);
+				  if(!szKey)
+				  {
+					  char msg[64];
+					  mir_snprintf(msg, 127, "Failed to lock memory with error %d", GetLastError());
+					  MessageBoxA(0, msg, "Error", MB_OK);
+					  GlobalFree(hMem);
+				  }
+				  memcpy(szKey, str.c_str(), str.size());
+				  szKey[str.size()] = '\0';
+				  str.clear();
+				  EmptyClipboard();
+				  GlobalUnlock(hMem);
+				  if(!SetClipboardData(CF_OEMTEXT, hMem))
+				  {
+					  GlobalFree(hMem);
+					  char msg[64];
+					  mir_snprintf(msg, 127, "Failed write to clipboard with error %d", GetLastError());
+					  MessageBoxA(0, msg, "Error", MB_OK);
+				  }
+				  CloseClipboard();
+			  }
+			  else
+			  {
+				  char msg[64];
+				  mir_snprintf(msg, 127, "Failed to open clipboard with error %d", GetLastError());
+				  MessageBoxA(0, msg, "Error", MB_OK);
+			  }
+		  }
+		  break;
 	  case IDC_LOG_FILE_SET:
 		  {
 			  tmp = GetFilePath(_T("Set log file"), _T("*"), _T("LOG files"), 1);
@@ -366,7 +412,7 @@ static BOOL CALLBACK DlgProcGpgOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
       SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
       break;
     }
-    
+   
   case WM_NOTIFY:
     {
 		EnableWindow(GetDlgItem(hwndDlg, IDC_AUTO_EXCHANGE), (bIsMiranda09 && IsDlgButtonChecked(hwndDlg, IDC_JABBER_API)));
@@ -481,10 +527,10 @@ static BOOL CALLBACK DlgProcGpgBinOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 					  else
 					  {
 						  bad_version = false;
-						  MessageBox(0, _T("This is not gnupg binary !\nrecommended to use GnuPG v1.x.x with this plugn."), _T("Warning"), MB_OK);
+						  MessageBox(0, TranslateT("This is not gnupg binary !\nrecommended to use GnuPG v1.x.x with this plugn."), _T("Warning"), MB_OK);
 					  }
-					  if(bad_version)
-						  MessageBox(0, _T("Unsupported gnupg version found, use at you own risk!\nrecommended to use GnuPG v1.x.x with this plugn."), _T("Warning"), MB_OK);
+/*					  if(bad_version) //looks like working fine with gpg2
+						  MessageBox(0, TranslateT("Unsupported gnupg version found, use at you own risk!\nrecommended to use GnuPG v1.x.x with this plugn."), _T("Warning"), MB_OK); */
 				  }
 			  }
 			  char mir_path[MAX_PATH];
@@ -668,6 +714,7 @@ static BOOL CALLBACK DlgProcLoadPublicKey(HWND hwndDlg,UINT msg,WPARAM wParam,LP
 			SetDlgItemText(hwndDlg, IDC_ENABLE_ENCRYPTION, TranslateW(_T("Turn on encryption")));
 			CheckDlgButton(hwndDlg, IDC_ENABLE_ENCRYPTION, 1);
 		}
+		RegisterHotKey(hwndDlg, 2, MOD_CONTROL | MOD_NOREPEAT, 0x41);
 		if(hcnt)
 		{
 			tmp = UniGetContactSettingUtf(hcnt, szGPGModuleName, "GPGPubKey", _T(""));
@@ -1250,7 +1297,12 @@ static BOOL CALLBACK DlgProcLoadPublicKey(HWND hwndDlg,UINT msg,WPARAM wParam,LP
 			DBWriteContactSettingDword(NULL, szGPGModuleName, "LoadKeyWindowY", load_key_rect.top);
 		}
 		break;
-
+	case WM_HOTKEY:
+		{
+			if(wParam == 2)
+				PostMessage(GetDlgItem(hwndDlg, IDC_PUBLIC_KEY_EDIT), EM_SETSEL, 0, -1);
+		}
+		break;
   }
 
   return FALSE;
