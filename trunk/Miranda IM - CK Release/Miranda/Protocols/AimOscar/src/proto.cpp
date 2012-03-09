@@ -1,6 +1,6 @@
 /*
 Plugin of Miranda IM for communicating with users of the AIM protocol.
-Copyright (c) 2008-2011 Boris Krasnovskiy
+Copyright (c) 2008-2012 Boris Krasnovskiy
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -42,9 +42,9 @@ CAimProto::CAimProto(const char* aProtoName, const TCHAR* aUserName)
 	
 	CreateProtoService(PS_GETMYAWAYMSG,   &CAimProto::GetMyAwayMsg);
 
-	CreateProtoService(PS_GETAVATARINFO,  &CAimProto::GetAvatarInfo);
-	CreateProtoService(PS_GETMYAVATAR,    &CAimProto::GetAvatar);
-	CreateProtoService(PS_SETMYAVATAR,    &CAimProto::SetAvatar);
+	CreateProtoService(PS_GETAVATARINFOT,  &CAimProto::GetAvatarInfo);
+	CreateProtoService(PS_GETMYAVATART,   &CAimProto::GetAvatar);
+	CreateProtoService(PS_SETMYAVATART,   &CAimProto::SetAvatar);
 	CreateProtoService(PS_GETAVATARCAPS,  &CAimProto::GetAvatarCaps);
 
 	CreateProtoService(PS_JOINCHAT,       &CAimProto::OnJoinChat);
@@ -492,7 +492,7 @@ int __cdecl CAimProto::RecvMsg(HANDLE hContact, PROTORECVEVENT* pre)
 	html_decode(pre->szMessage);
 
 	HANDLE res = (HANDLE)CallService(MS_PROTO_RECVMSG, 0, (LPARAM)&ccs);
-	mir_free(bbuf);
+    mir_free(bbuf);
 	pre->szMessage = omsg;
 
 	return ( int )res;

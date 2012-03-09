@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug Unicode|Win32">
+      <Configuration>Debug Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug Unicode|x64">
+      <Configuration>Debug Unicode</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release Unicode|Win32">
       <Configuration>Release Unicode</Configuration>
       <Platform>Win32</Platform>
@@ -14,19 +22,36 @@
     <SccProjectName />
     <SccLocalPath />
     <ProjectName>xstatus_jabber</ProjectName>
+    <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and $(VisualStudioVersion) == ''">$(VCTargetsPath11)</VCTargetsPath>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>Windows7.1SDK</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>
+    </CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>
+    </CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>Windows7.1SDK</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>
+    </CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>
+    </CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -35,12 +60,27 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\Icons\</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)\Obj\$(ProjectName)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\Icons\</OutDir>
     <IntDir>$(SolutionDir)$(Configuration)\Obj\$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
@@ -54,7 +94,54 @@
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
+    <OutDir>$(SolutionDir)$(Configuration)64\Icons\</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)64\Obj\$(ProjectName)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;JABBER_XSTATUS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Release\JABBER_XSTATUS.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>.\Release\JABBER_XSTATUS.tlb</TypeLibraryName>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\JABBER_XSTATUS.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <LinkDLL>true</LinkDLL>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <ImportLibrary>.\Release Unicode\xstatus_jabber.lib</ImportLibrary>
+      <NoEntryPoint>true</NoEntryPoint>
+      <AdditionalOptions> /ALIGN:4096  /ignore:4108</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <ClCompile>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
@@ -133,71 +220,133 @@
       <AdditionalOptions> /ALIGN:4096  /ignore:4108</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <CustomBuild Include="icos\afraid.ico" />
-    <CustomBuild Include="icos\amazed.ico" />
-    <CustomBuild Include="icos\angry.ico" />
-    <CustomBuild Include="icos\annoyed.ico" />
-    <CustomBuild Include="icos\anxious.ico" />
-    <CustomBuild Include="icos\aroused.ico" />
-    <CustomBuild Include="icos\ashamed.ico" />
-    <CustomBuild Include="icos\bored.ico" />
-    <CustomBuild Include="icos\brave.ico" />
-    <CustomBuild Include="icos\calm.ico" />
-    <CustomBuild Include="icos\cold.ico" />
-    <CustomBuild Include="icos\confused.ico" />
-    <CustomBuild Include="icos\contented.ico" />
-    <CustomBuild Include="icos\cranky.ico" />
-    <CustomBuild Include="icos\curious.ico" />
-    <CustomBuild Include="icos\depressed.ico" />
-    <CustomBuild Include="icos\disappointed.ico" />
-    <CustomBuild Include="icos\disgusted.ico" />
-    <CustomBuild Include="icos\distracted.ico" />
-    <CustomBuild Include="icos\embarrassed.ico" />
-    <CustomBuild Include="icos\excited.ico" />
-    <CustomBuild Include="icos\flirtatious.ico" />
-    <CustomBuild Include="icos\frustrated.ico" />
-    <CustomBuild Include="icos\grumpy.ico" />
-    <CustomBuild Include="icos\guilty.ico" />
-    <CustomBuild Include="icos\happy.ico" />
-    <CustomBuild Include="icos\hot.ico" />
-    <CustomBuild Include="icos\humbled.ico" />
-    <CustomBuild Include="icos\humiliated.ico" />
-    <CustomBuild Include="icos\hungry.ico" />
-    <CustomBuild Include="icos\hurt.ico" />
-    <CustomBuild Include="icos\impressed.ico" />
-    <CustomBuild Include="icos\in_awe.ico" />
-    <CustomBuild Include="icos\in_love.ico" />
-    <CustomBuild Include="icos\indignant.ico" />
-    <CustomBuild Include="icos\interested.ico" />
-    <CustomBuild Include="icos\intoxicated.ico" />
-    <CustomBuild Include="icos\invincible.ico" />
-    <CustomBuild Include="icos\jealous.ico" />
-    <CustomBuild Include="icos\lonely.ico" />
-    <CustomBuild Include="icos\mean.ico" />
-    <CustomBuild Include="icos\moody.ico" />
-    <CustomBuild Include="icos\nervous.ico" />
-    <CustomBuild Include="icos\neutral.ico" />
-    <CustomBuild Include="icos\offended.ico" />
-    <CustomBuild Include="icos\playful.ico" />
-    <CustomBuild Include="icos\proud.ico" />
-    <CustomBuild Include="icos\relieved.ico" />
-    <CustomBuild Include="icos\remorseful.ico" />
-    <CustomBuild Include="icos\restless.ico" />
-    <CustomBuild Include="icos\sad.ico" />
-    <CustomBuild Include="icos\sarcastic.ico" />
-    <CustomBuild Include="icos\serious.ico" />
-    <CustomBuild Include="icos\shocked.ico" />
-    <CustomBuild Include="icos\shy.ico" />
-    <CustomBuild Include="icos\sick.ico" />
-    <CustomBuild Include="icos\sleepy.ico" />
-    <CustomBuild Include="icos\stressed.ico" />
-    <CustomBuild Include="icos\surprised.ico" />
-    <CustomBuild Include="icos\thirsty.ico" />
-    <CustomBuild Include="icos\worried.ico" />
-  </ItemGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;JABBER_XSTATUS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Release\JABBER_XSTATUS.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>.\Release\JABBER_XSTATUS.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\JABBER_XSTATUS.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <LinkDLL>true</LinkDLL>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <ImportLibrary>.\Release Unicode\xstatus_jabber.lib</ImportLibrary>
+      <NoEntryPoint>true</NoEntryPoint>
+      <AdditionalOptions> /ALIGN:4096  /ignore:4108</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ResourceCompile Include="JABBER_XSTATUS.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icos\moods\afraid.ico" />
+    <Image Include="icos\moods\amazed.ico" />
+    <Image Include="icos\moods\amorous.ico" />
+    <Image Include="icos\moods\angry.ico" />
+    <Image Include="icos\moods\annoyed.ico" />
+    <Image Include="icos\moods\anxious.ico" />
+    <Image Include="icos\moods\aroused.ico" />
+    <Image Include="icos\moods\ashamed.ico" />
+    <Image Include="icos\moods\bored.ico" />
+    <Image Include="icos\moods\brave.ico" />
+    <Image Include="icos\moods\calm.ico" />
+    <Image Include="icos\moods\cautious.ico" />
+    <Image Include="icos\moods\cold.ico" />
+    <Image Include="icos\moods\confident.ico" />
+    <Image Include="icos\moods\confused.ico" />
+    <Image Include="icos\moods\contemplative.ico" />
+    <Image Include="icos\moods\contented.ico" />
+    <Image Include="icos\moods\cranky.ico" />
+    <Image Include="icos\moods\crazy.ico" />
+    <Image Include="icos\moods\creative.ico" />
+    <Image Include="icos\moods\curious.ico" />
+    <Image Include="icos\moods\dejected.ico" />
+    <Image Include="icos\moods\depressed.ico" />
+    <Image Include="icos\moods\disappointed.ico" />
+    <Image Include="icos\moods\disgusted.ico" />
+    <Image Include="icos\moods\dismayed.ico" />
+    <Image Include="icos\moods\distracted.ico" />
+    <Image Include="icos\moods\embarrassed.ico" />
+    <Image Include="icos\moods\envious.ico" />
+    <Image Include="icos\moods\excited.ico" />
+    <Image Include="icos\moods\flirtatious.ico" />
+    <Image Include="icos\moods\frustrated.ico" />
+    <Image Include="icos\moods\grateful.ico" />
+    <Image Include="icos\moods\grieving.ico" />
+    <Image Include="icos\moods\grumpy.ico" />
+    <Image Include="icos\moods\guilty.ico" />
+    <Image Include="icos\moods\happy.ico" />
+    <Image Include="icos\moods\hopeful.ico" />
+    <Image Include="icos\moods\hot.ico" />
+    <Image Include="icos\moods\humbled.ico" />
+    <Image Include="icos\moods\humiliated.ico" />
+    <Image Include="icos\moods\hungry.ico" />
+    <Image Include="icos\moods\hurt.ico" />
+    <Image Include="icos\moods\impressed.ico" />
+    <Image Include="icos\moods\indignant.ico" />
+    <Image Include="icos\moods\interested.ico" />
+    <Image Include="icos\moods\intoxicated.ico" />
+    <Image Include="icos\moods\invincible.ico" />
+    <Image Include="icos\moods\in_awe.ico" />
+    <Image Include="icos\moods\in_love.ico" />
+    <Image Include="icos\moods\jealous.ico" />
+    <Image Include="icos\moods\lonely.ico" />
+    <Image Include="icos\moods\lost.ico" />
+    <Image Include="icos\moods\lucky.ico" />
+    <Image Include="icos\moods\mean.ico" />
+    <Image Include="icos\moods\moody.ico" />
+    <Image Include="icos\moods\nervous.ico" />
+    <Image Include="icos\moods\neutral.ico" />
+    <Image Include="icos\moods\offended.ico" />
+    <Image Include="icos\moods\outraged.ico" />
+    <Image Include="icos\moods\playful.ico" />
+    <Image Include="icos\moods\proud.ico" />
+    <Image Include="icos\moods\relaxed.ico" />
+    <Image Include="icos\moods\relieved.ico" />
+    <Image Include="icos\moods\remorseful.ico" />
+    <Image Include="icos\moods\restless.ico" />
+    <Image Include="icos\moods\sad.ico" />
+    <Image Include="icos\moods\sarcastic.ico" />
+    <Image Include="icos\moods\satisfied.ico" />
+    <Image Include="icos\moods\serious.ico" />
+    <Image Include="icos\moods\shocked.ico" />
+    <Image Include="icos\moods\shy.ico" />
+    <Image Include="icos\moods\sick.ico" />
+    <Image Include="icos\moods\sleepy.ico" />
+    <Image Include="icos\moods\spontaneous.ico" />
+    <Image Include="icos\moods\stressed.ico" />
+    <Image Include="icos\moods\strong.ico" />
+    <Image Include="icos\moods\surprised.ico" />
+    <Image Include="icos\moods\thankful.ico" />
+    <Image Include="icos\moods\thirsty.ico" />
+    <Image Include="icos\moods\tired.ico" />
+    <Image Include="icos\moods\undefined.ico" />
+    <Image Include="icos\moods\weak.ico" />
+    <Image Include="icos\moods\worried.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,8 +18,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 14060 $
-Last change on : $Date: 2012-02-06 17:41:59 +0100 (Mo, 06. Feb 2012) $
+Revision       : $Revision: 14120 $
+Last change on : $Date: 2012-03-05 16:39:37 +0100 (Mo, 05. Mrz 2012) $
 Last change by : $Author: george.hazan $
 
 */
@@ -334,11 +334,12 @@ static INT_PTR CALLBACK PhotoDlgProc( HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 				JCallService( MS_UTILS_GETBITMAPFILTERSTRINGST, SIZEOF( szFilter ), ( LPARAM )szFilter );
 
 				OPENFILENAME ofn = {0};
+				ofn.lStructSize = sizeof(ofn);
 				ofn.hwndOwner = hwndDlg;
 				ofn.lpstrFilter = szFilter;
 				ofn.lpstrCustomFilter = NULL;
 				ofn.lpstrFile = szFileName;
-				ofn.nMaxFile = _MAX_PATH;
+				ofn.nMaxFile = MAX_PATH;
 				ofn.Flags = OFN_FILEMUSTEXIST | OFN_DONTADDTORECENT;
 				szFileName[0] = '\0';
 				if ( GetOpenFileName( &ofn )) {

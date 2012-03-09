@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{BF1AA628-942C-42F7-A5F3-121E81584A94}</ProjectGuid>
+    <ProjectGuid>{C9911337-051F-4614-B72E-99DF82000D34}</ProjectGuid>
     <RootNamespace>Skype_protocol</RootNamespace>
     <ProjectName>Skype</ProjectName>
     <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and $(VisualStudioVersion) == ''">$(VCTargetsPath11)</VCTargetsPath>

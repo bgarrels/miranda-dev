@@ -12,188 +12,257 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="icos\afraid.ico">
+    <Image Include="icos\moods\afraid.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\amazed.ico">
+    </Image>
+    <Image Include="icos\moods\amazed.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\angry.ico">
+    </Image>
+    <Image Include="icos\moods\amorous.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\annoyed.ico">
+    </Image>
+    <Image Include="icos\moods\angry.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\anxious.ico">
+    </Image>
+    <Image Include="icos\moods\annoyed.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\aroused.ico">
+    </Image>
+    <Image Include="icos\moods\anxious.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\ashamed.ico">
+    </Image>
+    <Image Include="icos\moods\aroused.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\bored.ico">
+    </Image>
+    <Image Include="icos\moods\ashamed.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\brave.ico">
+    </Image>
+    <Image Include="icos\moods\bored.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\calm.ico">
+    </Image>
+    <Image Include="icos\moods\brave.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\cold.ico">
+    </Image>
+    <Image Include="icos\moods\calm.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\confused.ico">
+    </Image>
+    <Image Include="icos\moods\cautious.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\contented.ico">
+    </Image>
+    <Image Include="icos\moods\cold.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\cranky.ico">
+    </Image>
+    <Image Include="icos\moods\confident.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\curious.ico">
+    </Image>
+    <Image Include="icos\moods\confused.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\depressed.ico">
+    </Image>
+    <Image Include="icos\moods\contemplative.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\disappointed.ico">
+    </Image>
+    <Image Include="icos\moods\contented.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\disgusted.ico">
+    </Image>
+    <Image Include="icos\moods\cranky.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\distracted.ico">
+    </Image>
+    <Image Include="icos\moods\crazy.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\embarrassed.ico">
+    </Image>
+    <Image Include="icos\moods\creative.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\excited.ico">
+    </Image>
+    <Image Include="icos\moods\curious.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\flirtatious.ico">
+    </Image>
+    <Image Include="icos\moods\dejected.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\frustrated.ico">
+    </Image>
+    <Image Include="icos\moods\depressed.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\grumpy.ico">
+    </Image>
+    <Image Include="icos\moods\disappointed.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\guilty.ico">
+    </Image>
+    <Image Include="icos\moods\disgusted.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\happy.ico">
+    </Image>
+    <Image Include="icos\moods\dismayed.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\hot.ico">
+    </Image>
+    <Image Include="icos\moods\distracted.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\humbled.ico">
+    </Image>
+    <Image Include="icos\moods\embarrassed.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\humiliated.ico">
+    </Image>
+    <Image Include="icos\moods\envious.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\hungry.ico">
+    </Image>
+    <Image Include="icos\moods\excited.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\hurt.ico">
+    </Image>
+    <Image Include="icos\moods\flirtatious.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\impressed.ico">
+    </Image>
+    <Image Include="icos\moods\frustrated.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\in_awe.ico">
+    </Image>
+    <Image Include="icos\moods\grateful.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\in_love.ico">
+    </Image>
+    <Image Include="icos\moods\grieving.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\indignant.ico">
+    </Image>
+    <Image Include="icos\moods\grumpy.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\interested.ico">
+    </Image>
+    <Image Include="icos\moods\guilty.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\intoxicated.ico">
+    </Image>
+    <Image Include="icos\moods\happy.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\invincible.ico">
+    </Image>
+    <Image Include="icos\moods\hopeful.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\jealous.ico">
+    </Image>
+    <Image Include="icos\moods\hot.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\lonely.ico">
+    </Image>
+    <Image Include="icos\moods\humbled.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\mean.ico">
+    </Image>
+    <Image Include="icos\moods\humiliated.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\moody.ico">
+    </Image>
+    <Image Include="icos\moods\hungry.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\nervous.ico">
+    </Image>
+    <Image Include="icos\moods\hurt.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\neutral.ico">
+    </Image>
+    <Image Include="icos\moods\impressed.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\offended.ico">
+    </Image>
+    <Image Include="icos\moods\indignant.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\playful.ico">
+    </Image>
+    <Image Include="icos\moods\interested.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\proud.ico">
+    </Image>
+    <Image Include="icos\moods\intoxicated.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\relieved.ico">
+    </Image>
+    <Image Include="icos\moods\invincible.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\remorseful.ico">
+    </Image>
+    <Image Include="icos\moods\in_awe.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\restless.ico">
+    </Image>
+    <Image Include="icos\moods\in_love.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\sad.ico">
+    </Image>
+    <Image Include="icos\moods\jealous.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\sarcastic.ico">
+    </Image>
+    <Image Include="icos\moods\lonely.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\serious.ico">
+    </Image>
+    <Image Include="icos\moods\lost.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\shocked.ico">
+    </Image>
+    <Image Include="icos\moods\lucky.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\shy.ico">
+    </Image>
+    <Image Include="icos\moods\mean.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\sick.ico">
+    </Image>
+    <Image Include="icos\moods\moody.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\sleepy.ico">
+    </Image>
+    <Image Include="icos\moods\nervous.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\stressed.ico">
+    </Image>
+    <Image Include="icos\moods\neutral.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\surprised.ico">
+    </Image>
+    <Image Include="icos\moods\offended.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\thirsty.ico">
+    </Image>
+    <Image Include="icos\moods\outraged.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="icos\worried.ico">
+    </Image>
+    <Image Include="icos\moods\playful.ico">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
+    </Image>
+    <Image Include="icos\moods\proud.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\relaxed.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\relieved.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\remorseful.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\restless.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\sad.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\sarcastic.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\satisfied.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\serious.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\shocked.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\shy.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\sick.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\sleepy.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\spontaneous.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\stressed.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\strong.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\surprised.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\thankful.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\thirsty.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\tired.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\undefined.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\weak.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icos\moods\worried.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
