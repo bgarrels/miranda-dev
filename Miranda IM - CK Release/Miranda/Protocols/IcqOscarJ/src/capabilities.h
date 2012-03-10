@@ -23,16 +23,15 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/capabilities.h $
+// File name      : &URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/capabilities.h $
 // Revision       : $Revision: 11353 $
 // Last change on : $Date: 2010-03-10 01:21:03 +0100 (Mi, 10. Mrz 2010) $
 // Last change by : $Author: jokusoftware $
 //
 // DESCRIPTION:
-//
 //  Contains helper functions to handle OSCAR user capabilities.
-//
 // -----------------------------------------------------------------------------
+
 #ifndef __CAPABILITIES_H
 #define __CAPABILITIES_H
 

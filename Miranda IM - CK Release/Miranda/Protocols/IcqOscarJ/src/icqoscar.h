@@ -6,7 +6,7 @@
 // Copyright © 2001-2002 Jon Keating, Richard Hughes
 // Copyright © 2002-2004 Martin Öberg, Sam Kothari, Robert Rainwater
 // Copyright © 2004-2010 Joe Kucera
-// Copyright © 2010-2012 Borkra
+// Copyright © 2010-2012 Borkra, g.hazan
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -28,17 +28,12 @@
 // Revision       : $Revision: 14085 $
 // Last change on : $Date: 2012-02-13 11:55:56 +0100 (Mo, 13. Feb 2012) $
 // Last change by : $Author: george.hazan $
-//
-// DESCRIPTION:
-//
-// Includes all header files that should be precompiled to speed up compilation.
-//
 // -----------------------------------------------------------------------------
 
 #define MIRANDA_VER 0x0A00
 
-#define _WIN32_WINNT 0x0501
-#define _WIN32_IE 0x0501
+#define _WIN32_WINNT 0x0600
+#define _WIN32_IE 0x0600
 
 #include <m_stdhdr.h>
 

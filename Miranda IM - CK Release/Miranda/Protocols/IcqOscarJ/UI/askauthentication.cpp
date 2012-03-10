@@ -24,15 +24,11 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/UI/askauthentication.cpp $
-// Revision       : $Revision: 13579 $
-// Last change on : $Date: 2011-04-11 16:45:19 +0200 (Mo, 11. Apr 2011) $
+// Revision       : $Revision: 14148 $
+// Last change on : $Date: 2012-03-09 23:01:01 +0100 (Fr, 09. Mrz 2012) $
 // Last change by : $Author: george.hazan $
-//
-// DESCRIPTION:
-//
-//  Describe me here please...
-//
 // -----------------------------------------------------------------------------
+
 #include "../src/icqoscar.h"
 
 struct AskAuthParam
@@ -51,7 +47,7 @@ static INT_PTR CALLBACK AskAuthProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 		if (!dat->hContact || !dat->ppro->icqOnline())
 			EndDialog(hwndDlg, 0);
 
-		ICQTranslateDialog(hwndDlg);
+		TranslateDialogDefault(hwndDlg);
 		SetWindowLongPtr(hwndDlg, GWLP_USERDATA, lParam);
 		SendDlgItemMessage(hwndDlg, IDC_EDITAUTH, EM_LIMITTEXT, (WPARAM)255, 0);
 		SetDlgItemText(hwndDlg, IDC_EDITAUTH, TranslateT("Please authorize me to add you to my contact list."));

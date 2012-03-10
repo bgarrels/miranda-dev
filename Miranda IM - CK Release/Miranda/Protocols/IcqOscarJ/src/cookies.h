@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/cookies.h $
-// Revision       : $Revision: 14075 $
-// Last change on : $Date: 2012-02-11 15:41:20 +0100 (Sa, 11. Feb 2012) $
-// Last change by : $Author: borkra $
+// Revision       : $Revision: 14141 $
+// Last change on : $Date: 2012-03-09 21:52:15 +0100 (Fr, 09. Mrz 2012) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -125,7 +125,7 @@ struct cookie_avatar
   unsigned int hashlen;
   BYTE *hash;
   unsigned int cbData;
-  char *szFile;
+  TCHAR *szFile;
 };
 
 

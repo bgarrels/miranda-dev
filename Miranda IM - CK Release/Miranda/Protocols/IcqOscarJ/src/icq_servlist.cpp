@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_servlist.cpp $
-// Revision       : $Revision: 13553 $
-// Last change on : $Date: 2011-04-08 03:25:55 +0200 (Fr, 08. Apr 2011) $
-// Last change by : $Author: borkra $
+// Revision       : $Revision: 14146 $
+// Last change on : $Date: 2012-03-09 22:54:49 +0100 (Fr, 09. Mrz 2012) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -1962,7 +1962,7 @@ int CIcqProto::servlistCreateGroup_gotParentGroup(const char *szGroup, WORD wGro
 		}
 	}
 	// we failed to create sub-group give parent groupid
-	icq_LogMessage(LOG_ERROR, "Failed to create the correct sub-group, the using closest parent group.");
+	icq_LogMessage(LOG_ERROR, LPGEN("Failed to create the correct sub-group, the using closest parent group."));
 
 	servlistPendingRemoveGroup(szSubGroup, wGroupID, PENDING_RESULT_FAILED);
 
@@ -2499,16 +2499,18 @@ void CIcqProto::servlistRenameGroup(char *szGroup, WORD wGroupId, char *szNewGro
 		int i = nGroupLevel;
 		while (i)
 		{ // find correct part of grouppath
-			szGroupName = strstrnull(szGroupName, "\\") + 1;
+			szGroupName = strstrnull(szGroupName, "\\");
 			if (!szGroupName) return; // failed to get correct part of the grouppath
+			szGroupName++;
 			i--;
 		}
 		szNewGroupName = szNewGroup;
 		i = nGroupLevel;
 		while (i)
 		{ // find correct part of new grouppath
-			szNewGroupName = strstrnull(szNewGroupName, "\\") + 1;
+			szNewGroupName = strstrnull(szNewGroupName, "\\");
 			if (!szNewGroupName) return; // failed to get correct part of the new grouppath
+			szNewGroupName++;
 			i--;
 		}
 		// truncate possible sub-groups

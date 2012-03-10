@@ -33,6 +33,7 @@
 //  Describe me here please...
 //
 // -----------------------------------------------------------------------------
+
 #ifndef __ICQ_SERVLIST_H
 #define __ICQ_SERVLIST_H
 

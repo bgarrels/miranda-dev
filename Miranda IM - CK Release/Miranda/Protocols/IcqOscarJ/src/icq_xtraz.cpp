@@ -84,7 +84,7 @@ void CIcqProto::handleXtrazNotify(DWORD dwUin, DWORD dwMID, DWORD dwMID2, WORD w
 
 					if ((DWORD)atoi(szSender) == dwUin)
 					{
-			BYTE dwXId = m_bXStatusEnabled ? getContactXStatus(NULL) : 0;
+            BYTE dwXId = m_bXStatusEnabled ? getContactXStatus(NULL) : 0;
 
 						if (dwXId && validateStatusMessageRequest(hContact, MTYPE_SCRIPT_NOTIFY))
 						{ // apply privacy rules
@@ -115,50 +115,50 @@ void CIcqProto::handleXtrazNotify(DWORD dwUin, DWORD dwMID, DWORD dwMID2, WORD w
 							SAFE_FREE(&szXName);
 							SAFE_FREE(&szXMsg);
 
-			  struct rates_xstatus_response: public rates_queue_item {
-			  protected:
-				virtual rates_queue_item* copyItem(rates_queue_item *aDest = NULL) {
-				  rates_xstatus_response *pDest = (rates_xstatus_response*)aDest;
-				  if (!pDest)
-					pDest = new rates_xstatus_response(ppro, wGroup);
+              struct rates_xstatus_response: public rates_queue_item {
+              protected:
+                virtual rates_queue_item* copyItem(rates_queue_item *aDest = NULL) {
+                  rates_xstatus_response *pDest = (rates_xstatus_response*)aDest;
+                  if (!pDest)
+                    pDest = new rates_xstatus_response(ppro, wGroup);
 
-				  pDest->bThruDC = bThruDC;
-				  pDest->dwMsgID1 = dwMsgID1;
-				  pDest->dwMsgID2 = dwMsgID2;
-				  pDest->wCookie = wCookie;
-				  pDest->szResponse = null_strdup(szResponse);
+                  pDest->bThruDC = bThruDC;
+                  pDest->dwMsgID1 = dwMsgID1;
+                  pDest->dwMsgID2 = dwMsgID2;
+                  pDest->wCookie = wCookie;
+                  pDest->szResponse = null_strdup(szResponse);
 
-				  return rates_queue_item::copyItem(pDest);
-				};
-			  public:
-				rates_xstatus_response(CIcqProto *ppro, WORD wGroup): rates_queue_item(ppro, wGroup), szResponse(NULL) { };
-				virtual ~rates_xstatus_response() { if (bCreated) SAFE_FREE(&szResponse); };
+                  return rates_queue_item::copyItem(pDest);
+                };
+              public:
+                rates_xstatus_response(CIcqProto *ppro, WORD wGroup): rates_queue_item(ppro, wGroup), szResponse(NULL) { };
+                virtual ~rates_xstatus_response() { if (bCreated) SAFE_FREE(&szResponse); };
 
-				virtual void execute() {
+                virtual void execute() {
 									ppro->SendXtrazNotifyResponse(dwUin, dwMsgID1, dwMsgID2, wCookie, szResponse, strlennull(szResponse), bThruDC);
-				};
+                };
 
-				BOOL bThruDC;
-				DWORD dwMsgID1;
-				DWORD dwMsgID2;
-				WORD wCookie;
-				char *szResponse;
-			  };
+                BOOL bThruDC;
+                DWORD dwMsgID1;
+                DWORD dwMsgID2;
+                WORD wCookie;
+                char *szResponse;
+              };
 
-					  m_ratesMutex->Enter();
-			  WORD wGroup = m_rates->getGroupFromSNAC(ICQ_MSG_FAMILY, ICQ_MSG_RESPONSE);
-					  m_ratesMutex->Leave();
+				      m_ratesMutex->Enter();
+              WORD wGroup = m_rates->getGroupFromSNAC(ICQ_MSG_FAMILY, ICQ_MSG_RESPONSE);
+				      m_ratesMutex->Leave();
 
-					rates_xstatus_response rr(this, wGroup);
-			  rr.hContact = hContact;
-					  rr.dwUin = dwUin;
-			  rr.bThruDC = bThruDC;
-					  rr.dwMsgID1 = dwMID;
-					  rr.dwMsgID2 = dwMID2;
-					  rr.wCookie = wCookie;
-			  rr.szResponse = szResponse;
+      				rates_xstatus_response rr(this, wGroup);
+              rr.hContact = hContact;
+				      rr.dwUin = dwUin;
+              rr.bThruDC = bThruDC;
+				      rr.dwMsgID1 = dwMID;
+				      rr.dwMsgID2 = dwMID2;
+				      rr.wCookie = wCookie;
+              rr.szResponse = szResponse;
 
-					handleRateItem(&rr, RQT_RESPONSE, 0, !bThruDC);
+      				handleRateItem(&rr, RQT_RESPONSE, 0, !bThruDC);
 						}
 						else if (dwXId)
 							NetLog_Server("Privacy: Ignoring XStatus request");

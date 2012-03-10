@@ -24,15 +24,16 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_proto.h $
-// Revision       : $Revision: 13678 $
-// Last change on : $Date: 2011-07-03 23:53:23 +0200 (So, 03. Jul 2011) $
-// Last change by : $Author: borkra $
+// Revision       : $Revision: 14141 $
+// Last change on : $Date: 2012-03-09 21:52:15 +0100 (Fr, 09. Mrz 2012) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
 //  Protocol Interface declarations
 //
 // -----------------------------------------------------------------------------
+
 #ifndef _ICQ_PROTO_H_
 #define _ICQ_PROTO_H_
 
@@ -149,7 +150,7 @@ struct CIcqProto : public PROTO_INTERFACE
 
 	INT_PTR  __cdecl OnCreateAccMgrUI(WPARAM, LPARAM);
 
-	//====| Events |======================================================================
+    //====| Events |======================================================================
 	void __cdecl OnAddContactForever( DBCONTACTWRITESETTING* cws, HANDLE hContact );
 	int  __cdecl OnIdleChanged( WPARAM, LPARAM );
 	int  __cdecl OnModernOptInit( WPARAM, LPARAM );
@@ -433,12 +434,12 @@ struct CIcqProto : public PROTO_INTERFACE
 	void   InitAvatars();
 	avatars_request *ReleaseAvatarRequestInQueue(avatars_request *request);
 
-	char*  GetOwnerAvatarFileName();
-	void   GetFullAvatarFileName(int dwUin, const char *szUid, int dwFormat, char *pszDest, int cbLen);
-	void   GetAvatarFileName(int dwUin, const char *szUid, char *pszDest, int cbLen);
+	TCHAR* GetOwnAvatarFileName();
+	void   GetFullAvatarFileName(int dwUin, const char *szUid, int dwFormat, TCHAR *pszDest, int cbLen);
+	void   GetAvatarFileName(int dwUin, const char *szUid, TCHAR *pszDest, int cbLen);
 	int    IsAvatarChanged(HANDLE hContact, const BYTE *pHash, int nHashLen);
 
-	int    GetAvatarData(HANDLE hContact, DWORD dwUin, const char *szUid, const BYTE *hash, unsigned int hashlen, const char *file);
+	int    GetAvatarData(HANDLE hContact, DWORD dwUin, const char *szUid, const BYTE *hash, unsigned int hashlen, const TCHAR *file);
 	int    SetAvatarData(HANDLE hContact, WORD wRef, const BYTE *data, unsigned int datalen);
 
 	void   StartAvatarThread(HANDLE hConn, char* cookie, WORD cookieLen);
