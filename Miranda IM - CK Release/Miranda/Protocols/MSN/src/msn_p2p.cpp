@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "msn_global.h"
 #include "msn_proto.h"
-#include "m_smileyadd.h"
+#include "sdk/m_smileyadd.h"
 
 static const char sttP2Pheader[] =
 	"Content-Type: application/x-msnmsgrp2p\r\n"
@@ -187,7 +187,7 @@ void CMsnProto::p2p_pictureTransferFailed(filetransfer* ft)
 	case MSN_APPID_AVATAR:
 	case MSN_APPID_AVATAR2:
 		{
-			PROTO_AVATAR_INFORMATION AI = {0};
+			PROTO_AVATAR_INFORMATIONT AI = {0};
 			AI.cbSize = sizeof(AI);
 			AI.hContact = ft->std.hContact;
 			deleteSetting(ft->std.hContact, "AvatarHash");

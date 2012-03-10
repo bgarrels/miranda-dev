@@ -24,8 +24,8 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icqosc_svcs.cpp $
-// Revision       : $Revision: 14148 $
-// Last change on : $Date: 2012-03-09 23:01:01 +0100 (Fr, 09. Mrz 2012) $
+// Revision       : $Revision: 14152 $
+// Last change on : $Date: 2012-03-10 18:53:00 +0100 (Sa, 10. Mrz 2012) $
 // Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
@@ -589,7 +589,7 @@ INT_PTR CIcqProto::SetMyAvatar(WPARAM wParam, LPARAM lParam)
 		if (dwPaFormat != PA_FORMAT_XML)
 		{ 
 			// if it should be image, check if it is valid
-			HBITMAP avt = (HBITMAP)CallService(MS_UTILS_LOADBITMAP, 0, (WPARAM)tszFile);
+			HBITMAP avt = (HBITMAP)CallService(MS_UTILS_LOADBITMAPT, 0, (WPARAM)tszFile);
 			if (!avt) return iRet;
 			DeleteObject(avt);
 		}
