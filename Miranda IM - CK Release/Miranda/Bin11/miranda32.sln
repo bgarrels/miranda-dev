@@ -392,6 +392,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tabsrmm", "..\Plugins\Tabsrmm\tabsrmm_11.vcxproj", "{99D26CA1-BFD4-4E77-9A1E-919E54CF33F7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jabber", "..\Protocols\JabberG\jabber_11.vcxproj", "{53BA0E68-8A69-4AC1-991D-99674BAFC128}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E2A369CD-EDA3-414F-8AD0-E732CD7EE68C} = {E2A369CD-EDA3-414F-8AD0-E732CD7EE68C}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aim", "..\Protocols\AimOscar\aim_11.vcxproj", "{E465A374-6073-4E96-BC24-2072B543F446}"
 EndProject

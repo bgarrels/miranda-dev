@@ -205,7 +205,6 @@
   <ItemGroup>
     <None Include="xfiretest.cpp.old" />
     <None Include="Export.def" />
-    <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="authpacket.h" />

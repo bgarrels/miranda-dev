@@ -85,8 +85,9 @@
 #include <RC4.h>
 #include <SHA1.h>
 
-#include "resource.h"
-#include ".\xstatus_MRA\resource.h"
+//MRA Stuff
+#include "../resource.h"
+#include "../xstatus_MRA/resource.h"
 #include "proto.h"
 #include "MraSendQueue.h"
 #include "MraFilesQueue.h"

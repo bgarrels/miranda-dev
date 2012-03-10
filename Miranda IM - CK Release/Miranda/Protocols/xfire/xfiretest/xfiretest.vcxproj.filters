@@ -191,7 +191,6 @@
     <None Include="Export.def">
       <Filter>Miranda Plugin</Filter>
     </None>
-    <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="authpacket.h">
