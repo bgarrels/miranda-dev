@@ -726,7 +726,7 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									if (lstrcmpi(xi.getName(imageval), _T("url")) == 0)
 									{
 										LPCTSTR url = xi.getText(imageval);
-										DBWriteContactSettingTString(hContact,MODULE,"ImageURL",url);
+										DBWriteContactSettingTString(hContact, MODULE, "ImageURL", url);
 
 										PROTO_AVATAR_INFORMATIONT pai = {NULL};
 										pai.cbSize = sizeof(pai);
@@ -741,10 +741,12 @@ VOID CheckCurrentFeed(HANDLE hContact)
 											TCHAR *filename = dbVar.ptszVal;
 											mir_sntprintf(pai.filename, SIZEOF(pai.filename), _T("%s\\%s.%s"), tszRoot, filename, ext);
 											if (DownloadFile(url, pai.filename))
-												ProtoBroadcastAck(MODULE,hContact,ACKTYPE_AVATAR,ACKRESULT_SUCCESS,(HANDLE) &pai,NULL);
+											{
+												DBWriteContactSettingTString(hContact, MODULE, "ImagePath", pai.filename);
+												ProtoBroadcastAck(MODULE, hContact, ACKTYPE_AVATAR, ACKRESULT_SUCCESS, (HANDLE) &pai, NULL);
+											}
 											else
-												ProtoBroadcastAck(MODULE,hContact,ACKTYPE_AVATAR,ACKRESULT_FAILED,(HANDLE) &pai,NULL);
-											DBWriteContactSettingTString(hContact,MODULE,"ImagePath",pai.filename);
+												ProtoBroadcastAck(MODULE, hContact, ACKTYPE_AVATAR, ACKRESULT_FAILED, (HANDLE) &pai, NULL);
 											DBFreeVariant(&dbVar);
 											break;
 										}
@@ -753,8 +755,8 @@ VOID CheckCurrentFeed(HANDLE hContact)
 							}
 							else
 							{
-								DBDeleteContactSetting(hContact,MODULE,"ImageURL");
-								DBDeleteContactSetting(hContact,MODULE,"ImagePath");
+								DBDeleteContactSetting(hContact, MODULE, "ImageURL");
+								DBDeleteContactSetting(hContact, MODULE, "ImagePath");
 							}
 							if (lstrcmpi(xi.getName(child), _T("item")) == 0)
 							{
@@ -965,20 +967,38 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									HXML imageval = xi.getChild(child, x);
 									if (lstrcmpi(xi.getName(imageval), _T("url")) == 0)
 									{
-										TCHAR path[MAX_PATH], *filename;
-										TCHAR *ext = _tcsrchr((TCHAR*)xi.getText(imageval), _T('.')) + 1;
+										LPCTSTR url = xi.getText(imageval);
+										DBWriteContactSettingTString(hContact, MODULE, "ImageURL", url);
+
+										PROTO_AVATAR_INFORMATIONT pai = {NULL};
+										pai.cbSize = sizeof(pai);
+										pai.hContact = hContact;
 										DBVARIANT dbVar = {0};
-										DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
-										if (lstrcmp(dbVar.ptszVal, NULL) == 0)
+
+										if(!DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar))
+										{
+											TCHAR *ext = _tcsrchr((TCHAR*)url, _T('.')) + 1;
+											pai.format = GetImageFormat(ext);
+
+											TCHAR *filename = dbVar.ptszVal;
+											mir_sntprintf(pai.filename, SIZEOF(pai.filename), _T("%s\\%s.%s"), tszRoot, filename, ext);
+											if (DownloadFile(url, pai.filename))
+											{
+												DBWriteContactSettingTString(hContact, MODULE, "ImagePath", pai.filename);
+												ProtoBroadcastAck(MODULE, hContact, ACKTYPE_AVATAR, ACKRESULT_SUCCESS, (HANDLE) &pai, NULL);
+											}
+											else
+												ProtoBroadcastAck(MODULE, hContact, ACKTYPE_AVATAR, ACKRESULT_FAILED, (HANDLE) &pai, NULL);
 											DBFreeVariant(&dbVar);
-										else
-											filename = dbVar.ptszVal;
-										mir_sntprintf(path, SIZEOF(path), _T("%s\\%s.%s"), tszRoot, filename, ext);
-										if (DownloadFile((TCHAR*)xi.getText(imageval), path))
-											CallService(MS_AV_SETAVATAR, (WPARAM)hContact, (LPARAM)path);
-										break;
+											break;
+										}
 									}
 								}
+							}
+							else
+							{
+								DBDeleteContactSetting(hContact, MODULE, "ImageURL");
+								DBDeleteContactSetting(hContact, MODULE, "ImagePath");
 							}
 							if (lstrcmpi(xi.getName(child), _T("entry")) == 0)
 							{

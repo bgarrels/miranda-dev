@@ -217,7 +217,10 @@ INT_PTR NewsAggrGetAvatarInfo(WPARAM wParam,LPARAM lParam)
 	// if GAIF_FORCE is set, we are updating the feed
 	// otherwise, cached avatar is used
 	if (wParam & GAIF_FORCE)
-		CheckCurrentFeed(pai->hContact);
+		UpdateListAdd(pai->hContact);
+		//CheckCurrentFeed(pai->hContact);
+	if (!ThreadRunning)
+		mir_forkthread(UpdateThreadProc, NULL);
 
 	DBVARIANT dbv = {0};
 	if(DBGetContactSettingTString(pai->hContact,MODULE,"ImageURL",&dbv))
