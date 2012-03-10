@@ -31,7 +31,7 @@ IDI_AUTH_ASK            ICON                    "icos/auth_ask.ico"
 IDI_AUTH_GRANT          ICON                    "icos/auth_grant.ico"
 IDI_AUTH_REVOKE         ICON                    "icos/auth_revoke.ico"
 IDI_SERVLIST_ADD        ICON                    "icos/srvlist_add.ico"
-IDI_EXPANDSTRINGEDIT    ICON                    "changeinfo/expandst.ico"
+IDI_EXPANDSTRINGEDIT    ICON                    "icos/expandst.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //

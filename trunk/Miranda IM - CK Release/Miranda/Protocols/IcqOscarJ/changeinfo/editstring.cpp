@@ -4,6 +4,7 @@
 // 
 // Copyright © 2001-2004 Richard Hughes, Martin Öberg
 // Copyright © 2004-2009 Joe Kucera, Bio
+// Copyright © 2009-2012 Borkra, g.hazan
 // 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -25,11 +26,6 @@
 // Revision       : $Revision: 11081 $
 // Last change on : $Date: 2009-12-21 23:10:01 +0100 (Mo, 21. Dez 2009) $
 // Last change by : $Author: jokusoftware $
-//
-// DESCRIPTION:
-//
-//  ChangeInfo Plugin stuff
-//
 // -----------------------------------------------------------------------------
 
 #include "../src/icqoscar.h"
@@ -155,14 +151,14 @@ static LRESULT CALLBACK StringEditSubclassProc(HWND hwnd,UINT msg,WPARAM wParam,
 	case WM_KEYDOWN:
 		if (wParam==VK_ESCAPE) 
 		{
-	  if (dataStringEdit)
+      if (dataStringEdit)
 			  dataStringEdit->EndStringEdit(0); 
 			return 0;
 		}
 		if (wParam==VK_RETURN) 
 		{
 			if (GetWindowLong(hwnd, GWL_STYLE) & ES_MULTILINE && !(GetKeyState(VK_CONTROL) & 0x8000)) break;
-	  if (dataStringEdit)
+      if (dataStringEdit)
 			  dataStringEdit->EndStringEdit(1);
 			return 0;
 		}
@@ -173,7 +169,7 @@ static LRESULT CALLBACK StringEditSubclassProc(HWND hwnd,UINT msg,WPARAM wParam,
 
 	case WM_KILLFOCUS:
 		if ((HWND)wParam == hwndExpandButton) break;
-	if (dataStringEdit)
+    if (dataStringEdit)
 		  dataStringEdit->EndStringEdit(1);
 		return 0;
 	}
@@ -342,15 +338,15 @@ void ChangeInfoData::EndStringEdit(int save)
 				settingData[iEditItem].changed = 1;
 			}
 		}
-	if (settingData[iEditItem].changed)
-	{
-	  TCHAR tbuf[MAX_PATH];
+    if (settingData[iEditItem].changed)
+    {
+      TCHAR tbuf[MAX_PATH];
 
-	  GetWindowText(hwndEdit, tbuf, SIZEOF(tbuf));
-	  ListView_SetItemText(hwndList, iEditItem, 1, tbuf);
+      GetWindowText(hwndEdit, tbuf, SIZEOF(tbuf));
+      ListView_SetItemText(hwndList, iEditItem, 1, tbuf);
 
-	  EnableDlgItem(hwndDlg, IDC_SAVE, TRUE);
-	}
+      EnableDlgItem(hwndDlg, IDC_SAVE, TRUE);
+    }
 	}
 	ListView_RedrawItems(hwndList, iEditItem, iEditItem);
 	iEditItem = -1;

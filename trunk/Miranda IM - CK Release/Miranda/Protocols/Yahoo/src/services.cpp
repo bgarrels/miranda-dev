@@ -1,5 +1,5 @@
 /*
- * $Id: services.cpp 13557 2011-04-09 02:26:58Z borkra $
+ * $Id: services.cpp 14142 2012-03-09 21:11:27Z george.hazan $
  *
  * myYahoo Miranda Plugin 
  *
@@ -215,7 +215,7 @@ INT_PTR __cdecl CYahooProto::SetCustomStatCommand( WPARAM wParam, LPARAM lParam 
 	HWND hwndSetCustomStatus = CreateDialogParam(hInstance, MAKEINTRESOURCE( IDD_SETCUSTSTAT ), NULL, DlgProcSetCustStat, ( LPARAM )this );
 	SetForegroundWindow( hwndSetCustomStatus );
 	SetFocus( hwndSetCustomStatus );
-	ShowWindow( hwndSetCustomStatus, SW_SHOW );
+ 	ShowWindow( hwndSetCustomStatus, SW_SHOW );
 	return 0;
 }
 
@@ -499,13 +499,13 @@ void CYahooProto::MenuUninit( void )
 
 INT_PTR __cdecl CYahooProto::OnPrebuildContactMenu(WPARAM wParam, LPARAM)
 {
-	const HANDLE hContact = (HANDLE)wParam;
+    const HANDLE hContact = (HANDLE)wParam;
 	char *szProto;
 	
 	CLISTMENUITEM mi = {0};
 	mi.cbSize = sizeof(mi);
 
-	szProto = ( char* )YAHOO_CallService( MS_PROTO_GETCONTACTBASEPROTO, (WPARAM) hContact, 0 );
+    szProto = ( char* )YAHOO_CallService( MS_PROTO_GETCONTACTBASEPROTO, (WPARAM) hContact, 0 );
 	if ( szProto == NULL || lstrcmpA( szProto, m_szModuleName ))  {
 		DebugLog("[OnPrebuildContactMenu] Not a Yahoo Contact!!!");
 		return 0;
@@ -513,12 +513,12 @@ INT_PTR __cdecl CYahooProto::OnPrebuildContactMenu(WPARAM wParam, LPARAM)
 
 	mi.flags = CMIM_FLAGS;
 	
-	if (GetWord( hContact, "yprotoid", 0) != 0) 
+    if (GetWord( hContact, "yprotoid", 0) != 0) 
 		mi.flags |= CMIF_HIDDEN;
 	
 	YAHOO_CallService(MS_CLIST_MODIFYMENUITEM, (WPARAM)hShowProfileMenuItem, (LPARAM)&mi);
 
-	return 0;
+    return 0;
 }
 
 
@@ -539,9 +539,9 @@ void CYahooProto::LoadYahooServices( void )
 	//----| Service creation |------------------------------------------------------------
 	YCreateService( PS_CREATEACCMGRUI, &CYahooProto::SvcCreateAccMgrUI);
 	
-	YCreateService( PS_GETAVATARINFO,  &CYahooProto::GetAvatarInfo );
-	YCreateService( PS_GETMYAVATAR,    &CYahooProto::GetMyAvatar );
-	YCreateService( PS_SETMYAVATAR,    &CYahooProto::SetMyAvatar );
+	YCreateService( PS_GETAVATARINFOT, &CYahooProto::GetAvatarInfo );
+	YCreateService( PS_GETMYAVATART,   &CYahooProto::GetMyAvatar );
+	YCreateService( PS_SETMYAVATART,   &CYahooProto::SetMyAvatar );
 	YCreateService( PS_GETAVATARCAPS,  &CYahooProto::GetAvatarCaps );
 
 	YCreateService(	PS_GETMYAWAYMSG, &CYahooProto::GetMyAwayMsg);

@@ -27,11 +27,6 @@
 // Revision       : $Revision: 13596 $
 // Last change on : $Date: 2011-04-15 21:07:23 +0200 (Fr, 15. Apr 2011) $
 // Last change by : $Author: george.hazan $
-//
-// DESCRIPTION:
-//
-//  Describe me here please...
-//
 // -----------------------------------------------------------------------------
 
 #include "icqoscar.h"
@@ -59,8 +54,8 @@ PLUGININFOEX pluginInfo = {
 	"Support for ICQ network, enhanced.",
 	"Joe Kucera, Bio, Martin Öberg, Richard Hughes, Jon Keating, etc",
 	"jokusoftware@miranda-im.org",
-	"(C) 2000-2010 M.Öberg, R.Hughes, J.Keating, Bio, Angeli-Ka, G.Hazan, J.Kucera",
-	"http://addons.miranda-im.org/details.php?action=viewfile&id=1683",
+	"(C) 2000-2012 M.Öberg, R.Hughes, J.Keating, Bio, Angeli-Ka, G.Hazan, J.Kucera",
+	"http://code.google.com/p/miranda/downloads/list",
 	UNICODE_AWARE,
 	0,   //doesn't replace anything built-in
 #if defined( _UNICODE )

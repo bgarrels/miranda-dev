@@ -4,6 +4,7 @@
 //
 // Copyright © 2001-2004 Richard Hughes, Martin Öberg
 // Copyright © 2004-2009 Joe Kucera, Bio
+// Copyright © 2009-2012 Borkra, g.hazan
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -25,11 +26,6 @@
 // Revision       : $Revision: 11081 $
 // Last change on : $Date: 2009-12-21 23:10:01 +0100 (Mo, 21. Dez 2009) $
 // Last change by : $Author: jokusoftware $
-//
-// DESCRIPTION:
-//
-//  ChangeInfo Plugin stuff
-//
 // -----------------------------------------------------------------------------
 
 #include "../src/icqoscar.h"

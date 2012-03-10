@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_filerequests.cpp $
-// Revision       : $Revision: 11018 $
-// Last change on : $Date: 2009-11-29 23:29:15 +0100 (So, 29. Nov 2009) $
-// Last change by : $Author: jokusoftware $
+// Revision       : $Revision: 14148 $
+// Last change on : $Date: 2012-03-09 23:01:01 +0100 (Fr, 09. Mrz 2012) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -138,7 +138,7 @@ void CIcqProto::handleFileRequest(PBYTE buf, WORD wLen, DWORD dwUin, DWORD dwCoo
 
 	if (strlennull(pszDescription) == 0)
 	{
-		pszDescription = ICQTranslate("No description given");
+		pszDescription = Translate("No description given");
 		bEmptyDesc = TRUE;
 	}
 

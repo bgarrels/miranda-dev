@@ -6,6 +6,7 @@
 // Copyright © 2001-2002 Jon Keating, Richard Hughes
 // Copyright © 2002-2004 Martin Öberg, Sam Kothari, Robert Rainwater
 // Copyright © 2004-2010 Joe Kucera
+// Copyright © 2009-2012 Borkra, g.hazan
 // 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,14 +25,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/UI/userinfotab.cpp $
-// Revision       : $Revision: 13692 $
-// Last change on : $Date: 2011-07-09 19:34:05 +0200 (Sa, 09. Jul 2011) $
-// Last change by : $Author: borkra $
-//
-// DESCRIPTION:
-//
-//  Code for User details ICQ specific pages
-//
+// Revision       : $Revision: 14148 $
+// Last change on : $Date: 2012-03-09 23:01:01 +0100 (Fr, 09. Mrz 2012) $
+// Last change by : $Author: george.hazan $
 // -----------------------------------------------------------------------------
 
 #include "../src/icqoscar.h"
@@ -215,7 +211,7 @@ static INT_PTR CALLBACK IcqDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 {
 	switch (msg) {
 	case WM_INITDIALOG:
-		ICQTranslateDialog(hwndDlg);
+		TranslateDialogDefault(hwndDlg);
 		break;
 
 	case WM_NOTIFY:
@@ -230,8 +226,8 @@ static INT_PTR CALLBACK IcqDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 				{
 					CIcqProto* ppro = (CIcqProto*)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
 
-		  if (!ppro)
-			break;
+          if (!ppro)
+            break;
 
 					char* szProto;
 					HANDLE hContact = (HANDLE)((LPPSHNOTIFY)lParam)->lParam;

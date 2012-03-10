@@ -33,6 +33,7 @@
 //  Describe me here please...
 //
 // -----------------------------------------------------------------------------
+
 #ifndef __ICQOSC_SVCS_H
 #define __ICQOSC_SVCS_H
 

@@ -18,9 +18,6 @@
     <Filter Include="Direct Connection">
       <UniqueIdentifier>{731741ea-7d07-4c09-aa88-641a254b5f48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Miranda Bits">
-      <UniqueIdentifier>{33754d1e-5911-4ebf-bbb2-f7f9ac930bb5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Documentation">
       <UniqueIdentifier>{a21400e8-a7db-41a3-9bae-b2f9e0bde49a}</UniqueIdentifier>
       <Extensions>.txt</Extensions>
@@ -30,6 +27,9 @@
     </Filter>
     <Filter Include="Changeinfo">
       <UniqueIdentifier>{8380b888-17be-4a22-a3f2-36f8fd65b730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Miranda Source Files">
+      <UniqueIdentifier>{33754d1e-5911-4ebf-bbb2-f7f9ac930bb5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -251,31 +251,31 @@
       <Filter>SNAC Families</Filter>
     </ClCompile>
     <ClCompile Include="src\icq_advsearch.cpp">
-      <Filter>Miranda Bits</Filter>
+      <Filter>Miranda Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\icq_db.cpp">
-      <Filter>Miranda Bits</Filter>
+      <Filter>Miranda Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\icq_menu.cpp">
-      <Filter>Miranda Bits</Filter>
+      <Filter>Miranda Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\icq_popups.cpp">
-      <Filter>Miranda Bits</Filter>
+      <Filter>Miranda Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\icq_proto.cpp">
-      <Filter>Miranda Bits</Filter>
+      <Filter>Miranda Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\icq_xstatus.cpp">
-      <Filter>Miranda Bits</Filter>
+      <Filter>Miranda Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\icqosc_svcs.cpp">
-      <Filter>Miranda Bits</Filter>
+      <Filter>Miranda Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\init.cpp">
-      <Filter>Miranda Bits</Filter>
+      <Filter>Miranda Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\log.cpp">
-      <Filter>Miranda Bits</Filter>
+      <Filter>Miranda Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\icq_direct.cpp">
       <Filter>Direct Connection</Filter>

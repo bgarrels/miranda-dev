@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_uploadui.cpp $
-// Revision       : $Revision: 9994 $
-// Last change on : $Date: 2009-06-09 22:47:21 +0200 (Di, 09. Jun 2009) $
-// Last change by : $Author: jokusoftware $
+// Revision       : $Revision: 14148 $
+// Last change on : $Date: 2012-03-09 23:01:01 +0100 (Fr, 09. Mrz 2012) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -311,7 +311,7 @@ static INT_PTR CALLBACK DlgProcUploadList(HWND hwndDlg,UINT message,WPARAM wPara
 
 	switch(message) {
 	case WM_INITDIALOG:
-		ICQTranslateDialog(hwndDlg);
+		TranslateDialogDefault(hwndDlg);
 
 		SetWindowLongPtr(hwndDlg, GWLP_USERDATA, lParam);
 		{
@@ -885,8 +885,8 @@ static INT_PTR CALLBACK DlgProcUploadList(HWND hwndDlg,UINT message,WPARAM wPara
 				AppendToUploadLog(hwndDlg, ICQTranslateUtfStatic(LPGEN("All operations complete"), str, MAX_PATH));
 				EnableDlgItem(hwndDlg, IDCANCEL, TRUE);
 				SetDlgItemTextUtf(hwndDlg, IDCANCEL, ICQTranslateUtfStatic(LPGEN("Close"), str, MAX_PATH));
-		// end server modifications here
-		ppro->servlistPostPacket(NULL, 0, SSO_END_OPERATION, 100);
+        // end server modifications here
+        ppro->servlistPostPacket(NULL, 0, SSO_END_OPERATION, 100);
 				working = 0;
 				//        SendMessage(hwndList, CLM_SETGREYOUTFLAGS,0,0);
 				UpdateCheckmarks(hwndList, ppro, hItemAll);
@@ -917,8 +917,8 @@ static INT_PTR CALLBACK DlgProcUploadList(HWND hwndDlg,UINT message,WPARAM wPara
 			//        InvalidateRect(GetDlgItem(hwndDlg, IDC_CLIST), NULL, FALSE);
 			EnableDlgItem(hwndDlg, IDC_CLIST, FALSE);
 			hProtoAckHook = HookEventMessage(ME_PROTO_ACK, hwndDlg, M_PROTOACK);
-	  // start server modifications here
-	  ppro->servlistPostPacket(NULL, 0, SSO_BEGIN_OPERATION | SSOF_IMPORT_OPERATION, 100);
+      // start server modifications here
+      ppro->servlistPostPacket(NULL, 0, SSO_BEGIN_OPERATION | SSOF_IMPORT_OPERATION, 100);
 			PostMessage(hwndDlg, M_UPLOADMORE, 0, 0);
 			break;
 

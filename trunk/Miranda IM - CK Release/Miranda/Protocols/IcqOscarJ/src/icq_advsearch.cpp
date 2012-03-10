@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_advsearch.cpp $
-// Revision       : $Revision: 13501 $
-// Last change on : $Date: 2011-03-25 15:21:53 +0100 (Fr, 25. Mrz 2011) $
-// Last change by : $Author: Michael.Kunz@s2005.TU-Chemnitz.de $
+// Revision       : $Revision: 14148 $
+// Last change on : $Date: 2012-03-09 23:01:01 +0100 (Fr, 09. Mrz 2012) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -65,7 +65,7 @@ INT_PTR CALLBACK AdvancedSearchDlgProc(HWND hwndDlg, UINT message, WPARAM wParam
 	switch(message)
 	{
 	case WM_INITDIALOG:
-		ICQTranslateDialog(hwndDlg);
+		TranslateDialogDefault(hwndDlg);
 		InitComboBox(GetDlgItem(hwndDlg, IDC_GENDER), genderField);
 		InitComboBox(GetDlgItem(hwndDlg, IDC_AGERANGE), agesField);
 		InitComboBox(GetDlgItem(hwndDlg, IDC_MARITALSTATUS), maritalField);

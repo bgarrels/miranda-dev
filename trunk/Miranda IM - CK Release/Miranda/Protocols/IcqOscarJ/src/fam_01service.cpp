@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/fam_01service.cpp $
-// Revision       : $Revision: 14075 $
-// Last change on : $Date: 2012-02-11 15:41:20 +0100 (Sa, 11. Feb 2012) $
-// Last change by : $Author: borkra $
+// Revision       : $Revision: 14141 $
+// Last change on : $Date: 2012-03-09 21:52:15 +0100 (Fr, 09. Mrz 2012) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -464,8 +464,7 @@ void CIcqProto::handleServiceFam(BYTE *pBuffer, WORD wBufferLength, snac_header 
 				  { // this refreshes avatar state - it used to work automatically, but now it does not
 					  if (getSettingByte(NULL, "ForceOurAvatar", 0))
 					  { // keep our avatar
-						  char *file = GetOwnerAvatarFileName();
-
+						  TCHAR *file = GetOwnAvatarFileName();
 						  SetMyAvatar(0, (LPARAM)file);
 						  SAFE_FREE(&file);
 					  }

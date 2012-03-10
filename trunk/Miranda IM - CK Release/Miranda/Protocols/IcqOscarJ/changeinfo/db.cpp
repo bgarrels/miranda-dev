@@ -4,6 +4,7 @@
 // 
 // Copyright © 2001-2004 Richard Hughes, Martin Öberg
 // Copyright © 2004-2009 Joe Kucera, Bio
+// Copyright © 2009-2012 Borkra, g.hazan
 // 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,14 +23,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/changeinfo/db.cpp $
-// Revision       : $Revision: 13213 $
-// Last change on : $Date: 2010-12-22 07:54:39 +0100 (Mi, 22. Dez 2010) $
-// Last change by : $Author: borkra $
-//
-// DESCRIPTION:
-//
-//  ChangeInfo Plugin stuff
-//
+// Revision       : $Revision: 14148 $
+// Last change on : $Date: 2012-03-09 23:01:01 +0100 (Fr, 09. Mrz 2012) $
+// Last change by : $Author: george.hazan $
 // -----------------------------------------------------------------------------
 
 #include "../src/icqoscar.h"
@@ -50,13 +46,13 @@ void ChangeInfoData::LoadSettingsFromDb(int keepChanged)
 
 		if (setting[i].displayType & LIF_PASSWORD) continue;
 
-	DBVARIANT dbv = {DBVT_DELETED};
+    DBVARIANT dbv = {DBVT_DELETED};
 		if (!ppro->getSetting(NULL, setting[i].szDbSetting, &dbv))
-	{
+    {
 			switch(dbv.type) {
 			case DBVT_ASCIIZ:
 				settingData[i].value = (LPARAM)ppro->getSettingStringUtf(NULL, setting[i].szDbSetting, NULL);
-		break;
+        break;
 
 			case DBVT_UTF8:
 				settingData[i].value = (LPARAM)null_strdup(dbv.pszVal);
@@ -85,11 +81,11 @@ void ChangeInfoData::LoadSettingsFromDb(int keepChanged)
 			ICQFreeVariant(&dbv);
 		}
 
-	char buf[MAX_PATH];
-	TCHAR tbuf[MAX_PATH];
+    char buf[MAX_PATH];
+    TCHAR tbuf[MAX_PATH];
 
-	if (utf8_to_tchar_static(GetItemSettingText(i, buf, SIZEOF(buf)), tbuf, SIZEOF(tbuf)))
-	  ListView_SetItemText(hwndList, i, 1, tbuf);
+    if (utf8_to_tchar_static(GetItemSettingText(i, buf, SIZEOF(buf)), tbuf, SIZEOF(tbuf)))
+      ListView_SetItemText(hwndList, i, 1, tbuf);
 	}
 }
 
@@ -131,7 +127,7 @@ static INT_PTR CALLBACK PwConfirmDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, 
 
 	switch(msg) {
 	case WM_INITDIALOG:
-		ICQTranslateDialog(hwndDlg);
+		TranslateDialogDefault(hwndDlg);
 		SetWindowLongPtr(hwndDlg, GWLP_USERDATA, lParam);
 		SendDlgItemMessage(hwndDlg,IDC_PASSWORD,EM_LIMITTEXT,15,0);
 		return TRUE;
@@ -179,7 +175,7 @@ int ChangeInfoData::SaveSettingsToDb(HWND hwndDlg)
   {
 		if (!settingData[i].changed) continue;
 		if (!(setting[i].displayType & LIF_ZEROISVALID) && settingData[i].value==0)
-	{
+    {
 			ppro->deleteSetting(NULL, setting[i].szDbSetting);
 			continue;
 		}
@@ -211,12 +207,12 @@ int ChangeInfoData::SaveSettingsToDb(HWND hwndDlg)
 			}
 			break;
 
-	case DBVT_UTF8:
+    case DBVT_UTF8:
 			if (*(char*)settingData[i].value)
 				ppro->setSettingStringUtf(NULL, setting[i].szDbSetting, (char*)settingData[i].value);
 			else
 				ppro->deleteSetting(NULL, setting[i].szDbSetting);
-	  break;
+      break;
 
 		case DBVT_WORD:
 			ppro->setSettingWord(NULL, setting[i].szDbSetting, (WORD)settingData[i].value);

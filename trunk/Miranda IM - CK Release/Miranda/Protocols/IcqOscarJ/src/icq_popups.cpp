@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_popups.cpp $
-// Revision       : $Revision: 11719 $
-// Last change on : $Date: 2010-05-09 00:01:13 +0200 (So, 09. Mai 2010) $
-// Last change by : $Author: borkra $
+// Revision       : $Revision: 14148 $
+// Last change on : $Date: 2012-03-09 23:01:01 +0100 (Fr, 09. Mrz 2012) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -63,7 +63,7 @@ INT_PTR CALLBACK DlgProcIcqPopupOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 
 	switch (msg) {
 	case WM_INITDIALOG:
-		ICQTranslateDialog(hwndDlg);
+		TranslateDialogDefault(hwndDlg);
 
 		ppro = (CIcqProto*)lParam;
 		SetWindowLongPtr(hwndDlg, GWLP_USERDATA, lParam);

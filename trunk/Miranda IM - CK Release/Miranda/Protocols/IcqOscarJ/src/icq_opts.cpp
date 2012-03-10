@@ -24,8 +24,8 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_opts.cpp $
-// Revision       : $Revision: 13915 $
-// Last change on : $Date: 2011-11-08 00:09:29 +0100 (Di, 08. Nov 2011) $
+// Revision       : $Revision: 14148 $
+// Last change on : $Date: 2012-03-09 23:01:01 +0100 (Fr, 09. Mrz 2012) $
 // Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
@@ -35,6 +35,7 @@
 // -----------------------------------------------------------------------------
 
 #include "icqoscar.h"
+
 #include <win2k.h>
 
 extern BOOL bPopUpService;
@@ -73,7 +74,7 @@ static INT_PTR CALLBACK DlgProcIcqOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 
 	switch (msg) {
 	case WM_INITDIALOG:
-		ICQTranslateDialog(hwndDlg);
+		TranslateDialogDefault(hwndDlg);
 
 		ppro = (CIcqProto*)lParam;
 		SetWindowLongPtr( hwndDlg, GWLP_USERDATA, lParam );
@@ -217,7 +218,7 @@ static INT_PTR CALLBACK DlgProcIcqPrivacyOpts(HWND hwndDlg, UINT msg, WPARAM wPa
 
 	switch (msg) {
 	case WM_INITDIALOG:
-		ICQTranslateDialog(hwndDlg);
+		TranslateDialogDefault(hwndDlg);
 
 		ppro = (CIcqProto*)lParam;
 		SetWindowLongPtr(hwndDlg, GWLP_USERDATA, lParam);
@@ -386,7 +387,7 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
 
 	switch (msg) {
 	case WM_INITDIALOG:
-		ICQTranslateDialog(hwndDlg);
+		TranslateDialogDefault(hwndDlg);
 
 		ppro = (CIcqProto*)lParam;
 		SetWindowLongPtr( hwndDlg, GWLP_USERDATA, lParam );
@@ -404,10 +405,10 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
 			icq_EnableMultipleControls(hwndDlg, icqDCMsgControls, SIZEOF(icqDCMsgControls), byData?TRUE:FALSE);
 			BYTE byXStatusEnabled = ppro->getSettingByte(NULL, "XStatusEnabled", DEFAULT_XSTATUS_ENABLED);
 			CheckDlgButton(hwndDlg, IDC_XSTATUSENABLE, byXStatusEnabled);
-	  BYTE byMoodsEnabled = ppro->getSettingByte(NULL, "MoodsEnabled", DEFAULT_MOODS_ENABLED);
+      BYTE byMoodsEnabled = ppro->getSettingByte(NULL, "MoodsEnabled", DEFAULT_MOODS_ENABLED);
 			CheckDlgButton(hwndDlg, IDC_MOODSENABLE, byMoodsEnabled);
 			icq_EnableMultipleControls(hwndDlg, icqXStatusControls, SIZEOF(icqXStatusControls), byXStatusEnabled);
-	  icq_EnableMultipleControls(hwndDlg, icqCustomStatusControls, SIZEOF(icqCustomStatusControls), byXStatusEnabled || byMoodsEnabled);
+      icq_EnableMultipleControls(hwndDlg, icqCustomStatusControls, SIZEOF(icqCustomStatusControls), byXStatusEnabled || byMoodsEnabled);
 			LoadDBCheckState(ppro, hwndDlg, IDC_XSTATUSAUTO, "XStatusAuto", DEFAULT_XSTATUS_AUTO);
 			LoadDBCheckState(ppro, hwndDlg, IDC_XSTATUSRESET, "XStatusReset", DEFAULT_XSTATUS_RESET);
 			LoadDBCheckState(ppro, hwndDlg, IDC_KILLSPAMBOTS, "KillSpambots", DEFAULT_KILLSPAM_ENABLED);
@@ -438,16 +439,24 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
 		switch (LOWORD(wParam)) {
 		case IDC_UTFENABLE:
 			icq_EnableMultipleControls(hwndDlg, icqUnicodeControls, SIZEOF(icqUnicodeControls), IsDlgButtonChecked(hwndDlg, IDC_UTFENABLE));
+			OptDlgChanged(hwndDlg);
+			break;
+		case IDC_UTFCODEPAGE:
+			if(HIWORD(wParam)==CBN_SELCHANGE)
+				OptDlgChanged(hwndDlg);
 			break;
 		case IDC_DCENABLE:
 			icq_EnableMultipleControls(hwndDlg, icqDCMsgControls, SIZEOF(icqDCMsgControls), IsDlgButtonChecked(hwndDlg, IDC_DCENABLE));
+			OptDlgChanged(hwndDlg);
 			break;
 		case IDC_XSTATUSENABLE:
 			icq_EnableMultipleControls(hwndDlg, icqXStatusControls, SIZEOF(icqXStatusControls), IsDlgButtonChecked(hwndDlg, IDC_XSTATUSENABLE));
-	case IDC_MOODSENABLE:
-	  icq_EnableMultipleControls(hwndDlg, icqCustomStatusControls, SIZEOF(icqCustomStatusControls), IsDlgButtonChecked(hwndDlg, IDC_XSTATUSENABLE) || IsDlgButtonChecked(hwndDlg, IDC_MOODSENABLE));
+    case IDC_MOODSENABLE:
+      icq_EnableMultipleControls(hwndDlg, icqCustomStatusControls, SIZEOF(icqCustomStatusControls), IsDlgButtonChecked(hwndDlg, IDC_XSTATUSENABLE) || IsDlgButtonChecked(hwndDlg, IDC_MOODSENABLE));
+		default:
+			OptDlgChanged(hwndDlg);
+			break;
 		}
-		OptDlgChanged(hwndDlg);
 		break;
 
 	case WM_NOTIFY:
@@ -474,8 +483,8 @@ static INT_PTR CALLBACK DlgProcIcqFeaturesOpts(HWND hwndDlg, UINT msg, WPARAM wP
 			ppro->setSettingByte(NULL, "DirectMessaging", ppro->m_bDCMsgEnabled);
 			ppro->m_bXStatusEnabled = (BYTE)IsDlgButtonChecked(hwndDlg, IDC_XSTATUSENABLE);
 			ppro->setSettingByte(NULL, "XStatusEnabled", ppro->m_bXStatusEnabled);
-	  ppro->m_bMoodsEnabled = (BYTE)IsDlgButtonChecked(hwndDlg, IDC_MOODSENABLE);
-	  ppro->setSettingByte(NULL, "MoodsEnabled", ppro->m_bMoodsEnabled);
+      ppro->m_bMoodsEnabled = (BYTE)IsDlgButtonChecked(hwndDlg, IDC_MOODSENABLE);
+      ppro->setSettingByte(NULL, "MoodsEnabled", ppro->m_bMoodsEnabled);
 			StoreDBCheckState(ppro, hwndDlg, IDC_XSTATUSAUTO, "XStatusAuto");
 			StoreDBCheckState(ppro, hwndDlg, IDC_XSTATUSRESET, "XStatusReset");
 			StoreDBCheckState(ppro, hwndDlg, IDC_KILLSPAMBOTS , "KillSpambots");
@@ -496,7 +505,7 @@ static INT_PTR CALLBACK DlgProcIcqContactsOpts(HWND hwndDlg, UINT msg, WPARAM wP
 
 	switch (msg) {
 	case WM_INITDIALOG:
-		ICQTranslateDialog(hwndDlg);
+		TranslateDialogDefault(hwndDlg);
 
 		ppro = (CIcqProto*)lParam;
 		SetWindowLongPtr( hwndDlg, GWLP_USERDATA, lParam );

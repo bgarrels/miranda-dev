@@ -6,6 +6,7 @@
 // Copyright © 2001-2002 Jon Keating, Richard Hughes
 // Copyright © 2002-2004 Martin Öberg, Sam Kothari, Robert Rainwater
 // Copyright © 2004-2009 Joe Kucera
+// Copyright © 2009-2012 Borkra, g.hazan
 // 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -27,11 +28,6 @@
 // Revision       : $Revision: 13324 $
 // Last change on : $Date: 2011-01-23 16:58:59 +0100 (So, 23. Jan 2011) $
 // Last change by : $Author: borkra $
-//
-// DESCRIPTION:
-//
-//  Describe me here please...
-//
 // -----------------------------------------------------------------------------
 
 #include "icqoscar.h"

@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_firstrun.cpp $
-// Revision       : $Revision: 11719 $
-// Last change on : $Date: 2010-05-09 00:01:13 +0200 (So, 09. Mai 2010) $
-// Last change by : $Author: borkra $
+// Revision       : $Revision: 14148 $
+// Last change on : $Date: 2012-03-09 23:01:01 +0100 (Fr, 09. Mrz 2012) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -59,7 +59,7 @@ INT_PTR CALLBACK icq_FirstRunDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 
 	switch (msg) {
 	case WM_INITDIALOG:
-		ICQTranslateDialog(hwndDlg);
+		TranslateDialogDefault(hwndDlg);
 
 		ppro = (CIcqProto*)lParam;
 		SetWindowLongPtr( hwndDlg, GWLP_USERDATA, lParam );
@@ -84,40 +84,40 @@ INT_PTR CALLBACK icq_FirstRunDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 
 	case WM_COMMAND:
 		switch (LOWORD(wParam))
-	{
+    {
 		case IDC_REGISTER:
 			CallService(MS_UTILS_OPENURL, 1, (LPARAM)URL_REGISTER);
 			break;
 
-	case IDC_UIN:
-	case IDC_PW:
+    case IDC_UIN:
+    case IDC_PW:
 			if (HIWORD(wParam) == EN_CHANGE && (HWND)lParam == GetFocus())
 			{
-		SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
+        SendMessage(GetParent(hwndDlg), PSM_CHANGED, 0, 0);
 				break;
 			}
-	}
-	break;
+    }
+    break;
 
 	case WM_NOTIFY:
 		switch (((LPNMHDR)lParam)->code)
 		{
 		case PSN_APPLY:
 			{
-		char str[128];
-		GetDlgItemTextA(hwndDlg, IDC_UIN, str, sizeof(str));
-		ppro->setSettingDword(NULL, UNIQUEIDSETTING, atoi(str));
-		GetDlgItemTextA(hwndDlg, IDC_PW, str, sizeof(ppro->m_szPassword));
-		strcpy(ppro->m_szPassword, str);
-		CallService(MS_DB_CRYPT_ENCODESTRING, sizeof(ppro->m_szPassword), (LPARAM) str);
-		ppro->setSettingString(NULL, "Password", str);
-	  }
-	  break;
+        char str[128];
+        GetDlgItemTextA(hwndDlg, IDC_UIN, str, sizeof(str));
+        ppro->setSettingDword(NULL, UNIQUEIDSETTING, atoi(str));
+        GetDlgItemTextA(hwndDlg, IDC_PW, str, sizeof(ppro->m_szPassword));
+        strcpy(ppro->m_szPassword, str);
+        CallService(MS_DB_CRYPT_ENCODESTRING, sizeof(ppro->m_szPassword), (LPARAM) str);
+        ppro->setSettingString(NULL, "Password", str);
+      }
+      break;
 
-	case PSN_RESET:
-	  accountLoadDetails(ppro, hwndDlg);
-	  break;
-	}
+    case PSN_RESET:
+      accountLoadDetails(ppro, hwndDlg);
+      break;
+    }
 		break;
 	}
 

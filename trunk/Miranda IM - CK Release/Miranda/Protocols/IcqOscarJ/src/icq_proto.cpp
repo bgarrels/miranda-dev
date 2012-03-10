@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_proto.cpp $
-// Revision       : $Revision: 14090 $
-// Last change on : $Date: 2012-02-18 18:31:33 +0100 (Sa, 18. Feb 2012) $
-// Last change by : $Author: borkra $
+// Revision       : $Revision: 14148 $
+// Last change on : $Date: 2012-03-09 23:01:01 +0100 (Fr, 09. Mrz 2012) $
+// Last change by : $Author: george.hazan $
 //
 // DESCRIPTION:
 //
@@ -153,10 +153,10 @@ cheekySearchId( -1 )
 	// ChangeInfo API
 	CreateProtoService(PS_CHANGEINFOEX, &CIcqProto::ChangeInfoEx);
 	// Avatar API
-	CreateProtoService(PS_GETAVATARINFO, &CIcqProto::GetAvatarInfo);
+	CreateProtoService(PS_GETAVATARINFOT, &CIcqProto::GetAvatarInfo);
 	CreateProtoService(PS_GETAVATARCAPS, &CIcqProto::GetAvatarCaps);
-	CreateProtoService(PS_GETMYAVATAR, &CIcqProto::GetMyAvatar);
-	CreateProtoService(PS_SETMYAVATAR, &CIcqProto::SetMyAvatar);
+	CreateProtoService(PS_GETMYAVATART, &CIcqProto::GetMyAvatar);
+	CreateProtoService(PS_SETMYAVATART, &CIcqProto::SetMyAvatar);
 	// Custom Status API
 	CreateProtoService(PS_ICQ_SETCUSTOMSTATUS, &CIcqProto::SetXStatus);
 	CreateProtoService(PS_ICQ_GETCUSTOMSTATUS, &CIcqProto::GetXStatus);
@@ -799,7 +799,7 @@ DWORD_PTR __cdecl CIcqProto::GetCaps( int type, HANDLE hContact )
 		break;
 
 	case PFLAG_UNIQUEIDTEXT:
-		nReturn = (DWORD_PTR)ICQTranslate("User ID");
+		nReturn = (DWORD_PTR)Translate("User ID");
 		break;
 
 	case PFLAG_UNIQUEIDSETTING:
