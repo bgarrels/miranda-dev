@@ -1,7 +1,5 @@
 /*
-Scriver
-
-Copyright 2000-2012 Miranda ICQ/IM project,
+Scriver - Copyright 2000-2012 Miranda IM project,
 
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -419,10 +417,6 @@ static INT_PTR GetWindowData(WPARAM wParam, LPARAM lParam)
    return 0;
 }
 
-static int MyAvatarChanged(WPARAM wParam, LPARAM lParam) {
-   return 0;
-}
-
 static int PrebuildContactMenu(WPARAM wParam, LPARAM lParam) {
 	HANDLE hContact = (HANDLE)wParam;
 	if ( hContact ) {
@@ -448,7 +442,7 @@ static int AvatarChanged(WPARAM wParam, LPARAM lParam) {
    if (wParam == 0) {         // protocol picture has changed...
       WindowList_Broadcast(g_dat->hMessageWindowList, DM_AVATARCHANGED, wParam, lParam);
    } else {
-       HWND hwnd = WindowList_Find(g_dat->hMessageWindowList, (HANDLE)wParam);
+      HWND hwnd = WindowList_Find(g_dat->hMessageWindowList, (HANDLE)wParam);
       SendMessage(hwnd, DM_AVATARCHANGED, wParam, lParam);
    }
     return 0;
@@ -561,7 +555,6 @@ static int OnModulesLoaded(WPARAM wParam, LPARAM lParam)
 
 	HookEvent_Ex(ME_SMILEYADD_OPTIONSCHANGED, SmileySettingsChanged);
 	HookEvent_Ex(ME_IEVIEW_OPTIONSCHANGED, SmileySettingsChanged);
-	HookEvent_Ex(ME_AV_MYAVATARCHANGED, MyAvatarChanged);
 	HookEvent_Ex(ME_AV_AVATARCHANGED, AvatarChanged);
 	HookEvent_Ex(ME_FONT_RELOAD, FontServiceFontsChanged);
 	HookEvent_Ex(ME_MSG_ICONPRESSED, StatusIconPressed);
