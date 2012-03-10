@@ -37,14 +37,12 @@ VOID CALLBACK timerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 			{
 				double diff = difftime(time(NULL), DBGetContactSettingDword(hContact, MODULE, "LastCheck", 0));
 				if (diff >= DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 0) * 60)
-				{
 					UpdateListAdd(hContact);
-					if (!ThreadRunning)
-						mir_forkthread(UpdateThreadProc, NULL);
-				}
 			}
 			hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
 		}
+		if (!ThreadRunning)
+			mir_forkthread(UpdateThreadProc, NULL);
 	}
 }
 
