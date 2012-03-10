@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 #include "commonheaders.h"
 #include "database.h"
+#include "m_db3xsa.h"
 
 extern HANDLE hDbFile;
 extern CRITICAL_SECTION csDbAccess;
