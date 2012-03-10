@@ -65,8 +65,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <m_popup.h>
 
 #include "m_weather.h"
-#include "resource.h"
-#include "version.h"
+#include "../resource.h"
+#include "../version.h"
 
 //============  CONSTANTS  ============
 
