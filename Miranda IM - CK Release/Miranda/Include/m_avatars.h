@@ -2,7 +2,7 @@
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2012 Miranda IM project, 
+Copyright 2000-2004 Miranda ICQ/IM project, 
 all portions of this codebase are copyrighted to the people 
 listed in contributors.txt.
 
@@ -170,6 +170,13 @@ typedef struct _avatarDrawRequest {
 
 #define MS_AV_SETAVATAR "SV_Avatars/SetAvatar"
 
+#if defined(_UNICODE) && MIRANDA_VER >= 0x0A00
+	#define MS_AV_SETAVATARW "SV_Avatars/SetAvatarW"
+	#define MS_AV_SETAVATART MS_AV_SETAVATARW
+#else
+	#define MS_AV_SETAVATART MS_AV_SETAVATAR
+#endif
+
 // set a local picture for the given protocol
 // 
 // wParam = (char *) protocol name or NULL for all protocols
@@ -177,6 +184,13 @@ typedef struct _avatarDrawRequest {
 // will open a file selection dialog. If lParam == "" the avatar will be removed
 
 #define MS_AV_SETMYAVATAR "SV_Avatars/SetMyAvatar"
+
+#if defined(_UNICODE) && MIRANDA_VER >= 0x0A00
+	#define MS_AV_SETMYAVATARW "SV_Avatars/SetMyAvatarW"
+	#define MS_AV_SETMYAVATART MS_AV_SETMYAVATARW
+#else
+	#define MS_AV_SETMYAVATART MS_AV_SETMYAVATAR
+#endif
 
 // see if is possible to set the avatar for the expecified protocol
 // 
