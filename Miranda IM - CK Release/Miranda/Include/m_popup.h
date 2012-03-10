@@ -1,4 +1,7 @@
 /*
+
+Miranda IM: the free IM client for Microsoft* Windows*
+
 ===============================================================================
                                 PopUp plugin
 Plugin Name: PopUp
