@@ -1,12 +1,10 @@
 Парсить xml
-таймер на каждый контакт
 экспорт\импорт
 автоимпорт из файла
 авторизация
 замена всего html'ного
 
 xml parse
-timer on each protocol contacts
 contacts export\import
 autoimport from file service
 authorization
