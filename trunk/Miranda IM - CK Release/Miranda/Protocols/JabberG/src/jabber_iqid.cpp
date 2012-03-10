@@ -2,8 +2,8 @@
 
 Jabber Protocol Plugin for Miranda IM
 Copyright ( C ) 2002-04  Santithorn Bunchua
+Copyright ( C ) 2005-11  George Hazan
 Copyright ( C ) 2007     Maxim Mluhov
-Copyright ( C ) 2005-12  George Hazan
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,13 +19,13 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 14060 $
-Last change on : $Date: 2012-02-06 17:41:59 +0100 (Mo, 06. Feb 2012) $
+Revision       : $Revision: 14151 $
+Last change on : $Date: 2012-03-10 17:44:03 +0100 (Sa, 10. Mrz 2012) $
 Last change by : $Author: george.hazan $
 
 */
 
-#include "../jabber.h"
+#include "jabber.h"
 #include "jabber_list.h"
 #include "jabber_iq.h"
 #include "jabber_caps.h"
@@ -237,7 +237,7 @@ void CJabberProto::OnIqResultGetAuth( HXML iqNode )
 			char text[200];
 			mir_snprintf( text, SIZEOF(text), "%s%s", m_szStreamId, str );
 			mir_free( str );
-		 if (( str=JabberSha1( text )) != NULL ) {
+         if (( str=JabberSha1( text )) != NULL ) {
 				query << XCHILD( _T("digest"), _A2T(str));
 				mir_free( str );
 			}
@@ -257,7 +257,7 @@ void CJabberProto::OnIqResultGetAuth( HXML iqNode )
 		m_ThreadInfo->send( iq );
 	}
 	else if ( !lstrcmp( type, _T("error"))) {
-		m_ThreadInfo->send( "</stream:stream>" );
+ 		m_ThreadInfo->send( "</stream:stream>" );
 
 		TCHAR text[128];
 		mir_sntprintf( text, SIZEOF( text ), _T("%s %s."), TranslateT( "Authentication failed for" ), m_ThreadInfo->username );
@@ -670,9 +670,9 @@ LBL_NoTypeSpecified:
 	else {
 		const TCHAR* tszType = xmlGetText( m );
 		if ( !_tcscmp( tszType, _T("image/jpeg")) ||
-			 !_tcscmp( tszType, _T("image/png"))  ||
-			 !_tcscmp( tszType, _T("image/gif"))  || 
-			 !_tcscmp( tszType, _T("image/bmp")))
+		     !_tcscmp( tszType, _T("image/png"))  ||
+		     !_tcscmp( tszType, _T("image/gif"))  || 
+		     !_tcscmp( tszType, _T("image/bmp")))
 			szPicType = tszType;
 		else
 			goto LBL_NoTypeSpecified;
@@ -712,7 +712,7 @@ LBL_Ret:
 	Log( "%d bytes written", nWritten );
 	if ( hContact == NULL ) {
 		hasPhoto = TRUE;
-		JCallService( MS_AV_SETMYAVATAR, ( WPARAM )this->m_szModuleName, ( LPARAM )szAvatarFileName );
+		JCallService( MS_AV_SETMYAVATART, ( WPARAM )m_szModuleName, ( LPARAM )szAvatarFileName );
 
 		Log( "My picture saved to " TCHAR_STR_PARAM, szAvatarFileName );
 	}

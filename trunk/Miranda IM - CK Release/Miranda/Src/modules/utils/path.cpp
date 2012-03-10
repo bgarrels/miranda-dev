@@ -2,7 +2,7 @@
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2012 Miranda IM project, 
+Copyright 2000-2009 Miranda ICQ/IM project, 
 all portions of this codebase are copyrighted to the people 
 listed in contributors.txt.
 
@@ -230,9 +230,8 @@ static INT_PTR createDirTreeW(WPARAM, LPARAM lParam)
 
 int InitPathUtilsW(void)
 {
-	TCHAR *p = 0;
 	GetModuleFileName(hMirandaInst, szMirandaPathW, SIZEOF(szMirandaPathW));
-	p = _tcsrchr(szMirandaPathW,'\\');
+	TCHAR *p = _tcsrchr(szMirandaPathW,'\\');
 	if ( p )
 		p[1] = 0;
 	mir_sntprintf(szMirandaPathWLower, SIZEOF(szMirandaPathWLower), _T("%s"), szMirandaPathW);

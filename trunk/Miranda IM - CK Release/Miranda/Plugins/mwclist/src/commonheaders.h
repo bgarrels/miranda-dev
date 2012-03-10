@@ -2,7 +2,7 @@
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2004 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -23,11 +23,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef _COMMON_HEADERS_H_
 #define _COMMON_HEADERS_H_ 1
 
-#define MIRANDA_VER 0x0800
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER 0x0A00
 
-#define _WIN32_WINNT 0x0501
-#define _WIN32_IE 0x0501
+#define _WIN32_WINNT 0x0600
+#define _WIN32_IE 0x0600
 
 #include "m_stdhdr.h"
 

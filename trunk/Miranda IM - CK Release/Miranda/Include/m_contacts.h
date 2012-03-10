@@ -1,6 +1,7 @@
 /*
-Miranda IM
+Miranda IM: the free IM client for Microsoft* Windows*
 
+Copyright 2000-2012 Miranda IM project.
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
