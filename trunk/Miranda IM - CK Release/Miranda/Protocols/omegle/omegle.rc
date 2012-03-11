@@ -29,7 +29,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 1 TEXTINCLUDE 
 BEGIN
-    "../resource.h\0"
+    "src/resource.h\0"
 END
 
 2 TEXTINCLUDE 
@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "Omegle protocol plugin for Miranda IM"
             VALUE "FileVersion", __VERSION_VS_FILE_STRING
             VALUE "InternalName", "Omegle"
-            VALUE "LegalCopyright", "Copyright © 2011 Robert Pösel"
+            VALUE "LegalCopyright", "Copyright © 2012 Robert Pösel"
             VALUE "OriginalFilename", "omegle.dll"
             VALUE "ProductName", "Omegle Protocol"
             VALUE "ProductVersion", __VERSION_VS_FILE_STRING
