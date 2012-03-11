@@ -1,2 +1,2 @@
-#include "irc.rc"
+#include "IRC.rc"
 #include "version.rc"

@@ -1,8 +1,9 @@
 /*
 IRC plugin for Miranda IM
 
-Copyright (C) 2003-05 Jurgen Persson
-Copyright (C) 2007-09 George Hazan
+Copyright (C) 2003-2005 Jurgen Persson
+Copyright (C) 2007-2009 George Hazan
+Copyright (C) 2010-2012 George Hazan
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -248,6 +249,8 @@ void CIrcProto::Disconnect(void)
 	if( con == NULL )
 		return;
 
+	KillIdent();
+
 	if ( m_quitMessage && m_quitMessage[0] )
 		NLSend( _T("QUIT :%s\r\n"), m_quitMessage);
 	else
@@ -335,9 +338,10 @@ int CIrcProto::NLReceive(unsigned char* buf, int cbBuf)
 
 void CIrcProto::KillIdent()
 {
-	if ( hBindPort )
+	if ( hBindPort ) {
 		Netlib_CloseHandle( hBindPort );
-	return;
+		hBindPort = NULL;
+	}
 }
 
 void CIrcProto::InsertIncomingEvent(TCHAR* pszRaw)
@@ -445,8 +449,6 @@ void CIrcProto::DoReceive()
 		Netlib_CloseHandle(con);
 		con = NULL;
 	}
-
-	KillIdent();
 
 	// notify monitor objects that the connection has been closed
 	Notify(NULL);
