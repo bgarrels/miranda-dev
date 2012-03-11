@@ -26,9 +26,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#pragma warning(disable:4312)
 #pragma warning(disable:4996)
 
-#define MIRANDA_VER    0x1000
-#define _WIN32_WINNT   0x0500
-#define _WIN32_WINDOWS 0x0500
+#define MIRANDA_VER    0x0A00
+
+#define _WIN32_WINNT   0x0600
+#define _WIN32_WINDOWS 0x0600
 
 #include <m_stdhdr.h>
 
@@ -81,6 +82,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <m_utils.h>
 #include <m_hotkeys.h>
 
+//Updater and Folders support
 #include "m_updater.h"
 #include "m_folders.h"
 
