@@ -3,7 +3,7 @@
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011 Robert Pösel
+Copyright © 2012 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ PLUGININFOEX pluginInfo = {
 	"Provides basic support for Omegle Chat protocol. [Built: "__DATE__" "__TIME__"]",
 	"Robert Posel",
 	"robyer@seznam.cz",
-	"(c) 2011 Robert Posel",
+	"(c) 2012 Robert Posel",
 	"http://code.google.com/p/robyer/",
 	UNICODE_AWARE, //not transient
 	0,             //doesn't replace anything built-in
