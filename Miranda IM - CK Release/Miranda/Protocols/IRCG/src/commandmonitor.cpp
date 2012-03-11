@@ -1,8 +1,9 @@
 /*
 IRC plugin for Miranda IM
 
-Copyright (C) 2003-05 Jurgen Persson
-Copyright (C) 2007-09 George Hazan
+Copyright (C) 2003-2005 Jurgen Persson
+Copyright (C) 2007-2009 George Hazan
+Copyright (C) 2010-2012 George Hazan
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -176,7 +177,7 @@ VOID CALLBACK OnlineNotifTimerProc( HWND, UINT, UINT_PTR idEvent, DWORD )
 									ppro->m_namesToWho += CMString(DBWildcard) + _T(" ");
 
 								if ( DBNick )     DBFreeVariant(&dbv);
-						if ( DBWildcard ) DBFreeVariant(&dbv2);
+                        if ( DBWildcard ) DBFreeVariant(&dbv2);
 			}	}	}	}	}
 
 			hContact = (HANDLE) CallService( MS_DB_CONTACT_FINDNEXT, (WPARAM) hContact, 0);
@@ -1861,7 +1862,7 @@ bool CIrcProto::OnIrc_NICK_ERR( const CIrcMessage* pmsg )
 	}	}
 
 	ShowMessage( pmsg );
-	return true;
+ 	return true;
 }
 
 bool CIrcProto::OnIrc_JOINERROR( const CIrcMessage* pmsg )
@@ -2325,6 +2326,7 @@ void CIrcProto::OnIrcDisconnected()
 	m_myHost[0] = '\0';
 
 	int Temp = m_iStatus;
+	KillIdent();
 	KillChatTimer( OnlineNotifTimer );
 	KillChatTimer( OnlineNotifTimer3 );
 	KillChatTimer( KeepAliveTimer );
@@ -2475,7 +2477,7 @@ int CIrcProto::IsIgnored( CMString user, char type )
 	for ( int i=0; i < m_ignoreItems.getCount(); i++ ) {
 		const CIrcIgnoreItem& C = m_ignoreItems[i];
 
-	  if ( type == '\0' )	
+      if ( type == '\0' )	
 			if ( !lstrcmpi( user.c_str(), C.mask.c_str()))
 				return i+1;
 			
