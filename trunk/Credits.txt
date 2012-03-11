@@ -47,6 +47,7 @@ Maato
 Mataes (aka MikelArdRi)
 MaKaR
 Messier
+MG Lena
 Mironych
 Matrix
 Necrolatry
@@ -85,6 +86,7 @@ theMIROn
 Thief
 tico-tico
 Thomas
+TRUTHFUL
 UnregistereD
 Vampyre
 Vasilich (aka NightFox)
@@ -103,7 +105,10 @@ Icons and Smilies:
 Angeli-ka
 Tango
 Vit@liy
+fukr
 
+Scripts and Templates:
+Archie
 
 Service:
 Wombat
