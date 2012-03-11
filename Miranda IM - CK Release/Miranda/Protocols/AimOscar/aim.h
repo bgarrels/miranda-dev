@@ -1,6 +1,6 @@
 /*
 Plugin of Miranda IM for communicating with users of the AIM protocol.
-Copyright (c) 2008-2011 Boris Krasnovskiy
+Copyright (c) 2008-2012 Boris Krasnovskiy
 Copyright (C) 2005-2006 Aaron Myles Landwehr
 
 This program is free software; you can redistribute it and/or
@@ -131,14 +131,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #define AIM_KEY_PW                  "Password"
 #define AIM_KEY_HN                  "loginhost"
 #define AIM_KEY_PN                  "loginport"
-#define AIM_KEY_DC                  "DelConf"//delivery confirmation
+#define AIM_KEY_DC                  "DelConf"			//delivery confirmation
 #define AIM_KEY_FP                  "ForceProxyTransfer"
 #define AIM_KEY_HF                  "HiptopFake"
 #define AIM_KEY_AT                  "DisableATIcons"
 #define AIM_KEY_ES                  "DisableESIcons"
 #define AIM_KEY_DM                  "DisableModeMsg"
-#define AIM_KEY_FI                  "FormatIncoming"//html->bbcodes
-#define AIM_KEY_FO                  "FormatOutgoing"//bbcodes->html
+#define AIM_KEY_FI                  "FormatIncoming"	//html->bbcodes
+#define AIM_KEY_FO                  "FormatOutgoing"	//bbcodes->html
 #define AIM_KEY_II                  "InstantIdle"
 #define AIM_KEY_IIT                 "InstantIdleTS"
 #define AIM_KEY_CM                  "CheckMail"
@@ -149,11 +149,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #define OTH_KEY_SM                  "StatusMsg"
 #define OTH_KEY_GP                  "Group"
+
 //Module Name Key
 #define MOD_KEY_CL                  "CList"
+
 //Settings Keys
 #define AIM_KEY_PR                  "Profile"
 #define AIM_KEY_LA                  "LastAwayChange"
+
 //Contact Keys
 #define AIM_KEY_BI                  "BuddyId"
 #define AIM_KEY_GI                  "GroupId"
@@ -161,8 +164,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #define AIM_KEY_IT                  "IdleTS"
 #define AIM_KEY_OT                  "LogonTS"
 #define AIM_KEY_MS                  "MemberTS"
-#define AIM_KEY_AC                  "AccType"//account type
-#define AIM_KEY_ET                  "ESType"//Extended Status type
+#define AIM_KEY_AC                  "AccType"			//account type
+#define AIM_KEY_ET                  "ESType"			//Extended Status type
 #define AIM_KEY_MV                  "MirVer"
 #define AIM_KEY_US                  "Utf8Support"
 #define AIM_KEY_NL                  "NotOnList"
@@ -178,6 +181,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #define AIM_KEY_BLS                 "IsBlast"
 #define AIM_KEY_NIL                 "IsNotInList"
 
+//Server
 #define AIM_DEFAULT_SERVER          "slogin.oscar.aol.com"
 #define AIM_DEFAULT_SERVER_NS       "login.oscar.aol.com"
 #define AIM_PROXY_SERVER            "ars.oscar.aol.com"
@@ -190,6 +194,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #define AIM_DEFAULT_GROUP           "miranda merged"
 #define SYSTEM_BUDDY                "aolsystemmsg"
 #define DEFAULT_AWAY_MSG            "I am away from my computer right now."
+
 //Md5 Roasting stuff
 #define AIM_MD5_STRING              "AOL Instant Messenger (SM)"
 #define MD5_HASH_LENGTH             16

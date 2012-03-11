@@ -19,6 +19,7 @@
 #include <time.h>
 #include <vssym32.h>
 #include <winuser.h>
+
 //Miranda IM includes
 #pragma warning( disable: 4100 )
 #pragma warning( disable: 4244 )
@@ -48,12 +49,14 @@
 #pragma warning( default: 4100 )
 #pragma warning( default: 4244 )
 #pragma warning( default: 4201 )
+
 //independent includes
 #include "strl.h"
 #include "flap.h"
 #include "snac.h"
 #include "tlv.h"
-//rest o includes
+
+//rest includes
 #include "avatars.h"
 #include "away.h"
 #include "utility.h"
@@ -73,8 +76,10 @@
 #include "theme.h"
 #include "thread.h"
 #include "windows.h"
+
 //Packet Stuff
 #define MSG_LEN							4089
+
 //Extended Status Icon Numbers
 #define ACCOUNT_TYPE_UNCONFIRMED		1
 #define ACCOUNT_TYPE_CONFIRMED			2
@@ -83,23 +88,25 @@
 #define ACCOUNT_TYPE_ADMIN				5
 #define EXTENDED_STATUS_BOT				1
 #define EXTENDED_STATUS_HIPTOP			2
+
 //Popup flags
 #define	MAIL_POPUP						4
+
 //Main Option Window Keys
 #define AIM_KEY_SN						"SN"
 #define AIM_KEY_NK						"Nick"
 #define AIM_KEY_PW						"Password"
 #define AIM_KEY_HN						"hostname"
-#define AIM_KEY_DC						"DelConf"//delivery confirmation
+#define AIM_KEY_DC						"DelConf"				//delivery confirmation
 #define AIM_KEY_FP						"ForceProxyTransfer"
 #define AIM_KEY_GP						"FileTransferGracePeriod"//in seconds default 60
-#define AIM_KEY_KA						"KeepAlive"//in seconds default 60
+#define AIM_KEY_KA						"KeepAlive"				//in seconds default 60
 #define AIM_KEY_HF						"HiptopFake"
 #define AIM_KEY_AT						"DisableATIcons"
 #define AIM_KEY_ES						"DisableESIcons"
 #define AIM_KEY_DM						"DisableModeMsg"
-#define AIM_KEY_FI						"FormatIncoming"//html->bbcodes
-#define AIM_KEY_FO						"FormatOutgoing"//bbcodes->html
+#define AIM_KEY_FI						"FormatIncoming"		//html->bbcodes
+#define AIM_KEY_FO						"FormatOutgoing"		//bbcodes->html
 #define AIM_KEY_FR						"FirstRun"
 #define AIM_KEY_II						"InstantIdle"
 #define AIM_KEY_IIT						"InstantIdleTS"
@@ -128,31 +135,35 @@
 
 #define OTH_KEY_SM						"StatusMsg"
 #define OTH_KEY_GP						"Group"
+
 //Module Name Key
 #define MOD_KEY_SA						"SRAway"
 #define MOD_KEY_CL						"CList"
+
 //Settings Keys
 #define AIM_KEY_PR						"Profile"
 #define AIM_KEY_LA						"LastAwayChange"
 #define AIM_MOD_IG						"ID2Group"
 #define AIM_MOD_GI						"Group2ID"
-#define AIM_KEY_AL						"AIMLinks"// aim: links support
+#define AIM_KEY_AL						"AIMLinks"		// aim: links support
+
 //Contact Keys
 #define AIM_KEY_BI						"BuddyId"
 #define AIM_KEY_GI						"GroupId"
 #define AIM_KEY_ST						"Status"
 #define AIM_KEY_IT						"IdleTS"
 #define AIM_KEY_OT						"LogonTS"
-#define AIM_KEY_AC						"AccType"//account type		
-#define AIM_KEY_ET						"ESType"//Extended Status type
+#define AIM_KEY_AC						"AccType"		//account type		
+#define AIM_KEY_ET						"ESType"		//Extended Status type
 #define AIM_KEY_MV						"MirVer"
 #define AIM_KEY_US						"Utf8Support"
 #define AIM_KEY_NL						"NotOnList"
 #define AIM_KEY_LM						"LastMessage"
 #define AIM_KEY_NC						"NewContact"
 #define AIM_KEY_AH						"AvatarHash"
+
 //File Transfer Keys
-#define AIM_KEY_FT						"FileTransfer"//1= sending 0=receiving
+#define AIM_KEY_FT						"FileTransfer"	//1= sending 0=receiving
 #define AIM_KEY_CK						"Cookie"
 #define AIM_KEY_CK2						"Cookie2"
 #define AIM_KEY_FN						"FileName"
@@ -162,20 +173,23 @@
 #define AIM_KEY_PS						"ProxyStage"
 #define AIM_KEY_PC						"PortCheck"
 #define AIM_KEY_DH						"DCHandle"
+
 //Old Keys
 #define OLD_KEY_PW						"password"
 #define OLD_KEY_DM						"AutoResponse"
 
 //Some Defaults for various things
-#define DEFAULT_KEEPALIVE_TIMER			60// 1000 milliseconds * 60 = 60 secs
+#define DEFAULT_KEEPALIVE_TIMER			60				//1000 milliseconds * 60 = 60 secs
 #define DEFAULT_GRACE_PERIOD			60
 #define AIM_DEFAULT_GROUP				"miranda merged"
 #define AIM_DEFAULT_SERVER				"login.oscar.aol.com:5190"
 #define SYSTEM_BUDDY					"aolsystemmsg"
 #define DEFAULT_AWAY_MSG				"I am away from my computer right now."
+
 //Md5 Roasting stuff
 #define AIM_MD5_STRING					"AOL Instant Messenger (SM)"
 #define MD5_HASH_LENGTH					16
+
 //Aim Version Stuff
 #define AIM_CLIENT_ID_NUMBER			"\x01\x09"
 #define AIM_CLIENT_MAJOR_VERSION		"\0\x05"
@@ -188,6 +202,7 @@
 #define AIM_MSG_TYPE					"text/x-aolrtf; charset=\"us-ascii\""
 #define AIM_TOOL_VERSION				"\x01\x10\x08\xf1"
 extern char* AIM_CLIENT_ID_STRING;		//Client id EXTERN
+
 //Supported Clients
 #define CLIENT_UNKNOWN					"?"
 #define CLIENT_AIM5						"AIM 5.x"
@@ -212,6 +227,7 @@ extern char* AIM_CLIENT_ID_STRING;		//Client id EXTERN
 #define CLIENT_TERRAIM					"TerraIM"
 #define CLIENT_TRILLIAN_PRO				"Trillian Pro"
 #define CLIENT_TRILLIAN					"Trillian"
+
 //Aim Caps
 #define AIM_CAPS_LENGTH					16
 #define AIM_CAP_ICHAT					"\x09\x46\x00\x00\x4c\x7f\x11\xD1\x82\x22\x44\x45\x53\x54\0\0"
@@ -239,6 +255,7 @@ extern char* AIM_CLIENT_ID_STRING;		//Client id EXTERN
 #define AIM_CAP_IM2						"\x74\xed\xc3\x36\x44\xdf\x48\x5b\x8b\x1c\x67\x1a\x1f\x86\x09\x9f"
 #define AIM_CAP_TRILLIAN				"\xF2\xE7\xC7\xF4\xFE\xAD\x4D\xFB\xB2\x35\x36\x79\x8B\xDF\0\0"
 extern char	AIM_CAP_MIRANDA[];			//Miranda cap EXTERN
+
 //Aim Services
 #define AIM_SERVICE_GENERIC				"\0\x01\0\x04"//version 4
 #define AIM_SERVICE_SSI					"\0\x13\0\x03"//version 3
@@ -253,6 +270,7 @@ extern char	AIM_CAP_MIRANDA[];			//Miranda cap EXTERN
 #define AIM_SERVICE_STATS				"\0\x0B\0\x01"//version 1
 #define AIM_SERVICE_MAIL				"\0\x18\0\x01"//version 1
 #define AIM_SERVICE_RATES				"\0\x01\0\x02\0\x03\0\x04\0\x05"
+
 //Aim Statuses
 #define AIM_STATUS_WEBAWARE				"\0\x01"	
 #define AIM_STATUS_SHOWIP				"\0\x02"
