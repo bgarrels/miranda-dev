@@ -19,8 +19,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-// to enable all 0.9 core functions
-#define MIRANDA_VER 0x0900
+// to enable all 0.10.x core functions
+#define MIRANDA_VER 0x0A00
+#define MIRANDA_CUSTOM_LP
 
 #include <m_stdhdr.h>
 
@@ -42,6 +43,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <m_utils.h>
 #include <m_addcontact.h>
 
+//ExternalApi
 #include "m_toolbar.h"
 #include "m_updater.h"
 #include "m_addcontactplus.h"
