@@ -24,10 +24,13 @@
 #include "AggressiveOptimize.h"
 
 #undef _WIN32_WINNT
-#define _WIN32_WINNT 0x0500
+#define _WIN32_WINNT 0x0600
 
 #define WIN32_LEAN_AND_MEAN
 #define _MERGE_RDATA_
+
+//#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER 0x0A00
 
 /// windows and crt headers (win32 api)
 #include <windows.h>

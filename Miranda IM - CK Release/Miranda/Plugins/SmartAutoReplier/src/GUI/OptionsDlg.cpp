@@ -520,7 +520,7 @@ END_PROTECT_AND_LOG_CODE
 	return FALSE;
 }
 
-INT_PTR COptionsDlg::OnLbnDblclkListRules(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
+LRESULT COptionsDlg::OnLbnDblclkListRules(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
 {
 BEGIN_PROTECT_AND_LOG_CODE
 	return OnBtnEditRuleClick(wNotifyCode, wID, hWndCtl, bHandled);
