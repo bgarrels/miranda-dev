@@ -22,9 +22,8 @@
 */
 
 #include "stdafx.h"
-#include "SarLuaScript.h"
+#include "Lua/SarLuaScript.h"
 
-//miranda bits
 #include "m_protomod.h"
 #include "m_protosvc.h"
 

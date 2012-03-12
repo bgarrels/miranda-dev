@@ -181,16 +181,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="sar.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="src\sar.html">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="SAR.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icos\sar.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

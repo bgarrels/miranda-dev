@@ -1,5 +1,5 @@
 /*
-** $Id: lapi.c,v 1.235 2003/04/07 14:36:08 roberto Exp $
+** $Id$
 ** Lua API
 ** See Copyright Notice in lua.h
 */
@@ -30,7 +30,7 @@
 const char lua_ident[] =
   "$Lua: " LUA_VERSION " " LUA_COPYRIGHT " $\n"
   "$Authors: " LUA_AUTHORS " $\n"
-  "$URL: www.lua.org $\n";
+  "$URL$\n";
 
 
 

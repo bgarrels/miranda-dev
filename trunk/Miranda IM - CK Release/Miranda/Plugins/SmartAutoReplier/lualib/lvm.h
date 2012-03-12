@@ -1,5 +1,5 @@
 /*
-** $Id: lvm.h,v 1.47 2002/11/14 16:16:21 roberto Exp $
+** $Id$
 ** Lua virtual machine
 ** See Copyright Notice in lua.h
 */
