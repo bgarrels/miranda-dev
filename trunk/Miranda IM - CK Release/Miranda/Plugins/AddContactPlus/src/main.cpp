@@ -2,7 +2,7 @@
 
 AddContact+ plugin for Miranda IM
 
-Copyright (C) 2007-2011 Bartosz 'Dezeath' Bia쿮k
+Copyright (C) 2007-2012 Bartosz 'Dezeath' Bia쿮k
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@ static HANDLE hModulesLoaded = 0, hChangedIcons = 0, hAccListChanged = 0,
 			  hMainMenuItem = 0, hToolBarItem = 0, hService = 0;
 HANDLE hIconLibItem;
 struct MM_INTERFACE	mmi;
+int hLangpack = 0;
 
 PLUGININFOEX pluginInfo = {
 	sizeof(PLUGININFOEX),
@@ -40,7 +41,7 @@ PLUGININFOEX pluginInfo = {
 	"Provides the ability to quickly add new contacts",
 	"Bartosz 'Dezeath' Bia쿮k",
 	"dezred"/*antispam*/"@"/*antispam*/"gmail"/*antispam*/"."/*antispam*/"com",
-	"� 2007-2011 Bartosz 'Dezeath' Bia쿮k",
+	"� 2007-2012 Bartosz 'Dezeath' Bia쿮k",
 	"http://code.google.com/p/dezeath",
 	UNICODE_AWARE,
 	0,
