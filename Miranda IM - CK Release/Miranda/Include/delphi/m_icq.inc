@@ -23,10 +23,10 @@
 
  -----------------------------------------------------------------------------
 
-// File name      : $URL: https://svn.sourceforge.net/svnroot/miranda/trunk/miranda/include/m_icq.h $
-// Revision       : $Revision: 9376 $
-// Last change on : $Date: 2009-04-09 23:55:33 +0400 (êë', 09 ê¯êıë? 2009) $
-// Last change by : $Author: jokusoftware $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 
  DESCRIPTION:
 

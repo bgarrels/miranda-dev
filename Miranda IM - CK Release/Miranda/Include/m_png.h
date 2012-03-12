@@ -24,9 +24,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 File name      : $Source: /cvsroot/miranda/miranda/include/m_png.h,v $
-Revision       : $Revision: 2876 $
-Last change on : $Date: 2006-05-16 23:56:03 +0200 (Di, 16. Mai 2006) $
-Last change by : $Author: rainwater $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
