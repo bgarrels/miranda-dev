@@ -1,8 +1,7 @@
 /*
-
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2004 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -59,10 +58,9 @@ static int ComparePicture( const protoPicCacheEntry* p1, const protoPicCacheEntr
 {
 	if ((lstrcmpA(p1->szProtoname, "Global avatar") == 0) || strstr(p1->szProtoname, "Global avatar"))
 		return -1;
-	else if ((lstrcmpA(p2->szProtoname, "Global avatar") == 0) || strstr(p1->szProtoname, "Global avatar"))
+	if ((lstrcmpA(p2->szProtoname, "Global avatar") == 0) || strstr(p1->szProtoname, "Global avatar"))
 		return 1;
-	else
-		return lstrcmpA( p1->szProtoname, p2->szProtoname );
+	return lstrcmpA( p1->szProtoname, p2->szProtoname );
 }
 
 OBJLIST<protoPicCacheEntry>
@@ -109,7 +107,7 @@ PLUGININFOEX pluginInfoEx = {
 	"Load and manage contact pictures for other plugins.",
 	"Nightwish, Pescuma",
 	"",
-	"Copyright 2000-2011 Miranda-IM project",
+	"Copyright 2000-2012 Miranda-IM project",
 	"http://www.miranda-im.org",
 	UNICODE_AWARE,
 	0,
