@@ -928,7 +928,7 @@ __inline static int DBGetContactSettingByte_Helper(HANDLE hContact, const char *
 #ifdef _DEBUG
 	if(dbv.type!=DBVT_BYTE) {
 		char buf[128];
-		_snprintf(buf,sizeof(buf),"%s:%d for %s/%s not a byte, return: %d",szFile,nLine,szModule,szSetting,dbv.type);
+		mir_snprintf(buf,sizeof(buf),"%s:%d for %s/%s not a byte, return: %d",szFile,nLine,szModule,szSetting,dbv.type);
 		buf[sizeof(buf)-1]=0;
 		db_msg_dbg(buf);
 	}
@@ -953,7 +953,7 @@ __inline static int DBGetContactSettingWord_Helper(HANDLE hContact,const char *s
 #ifdef _DEBUG
 	if(dbv.type!=DBVT_WORD) {
 		char buf[128];
-		_snprintf(buf,sizeof(buf),"%s:%d for %s/%s not a word, return: %d",szFile,nLine,szModule,szSetting,dbv.type);
+		mir_snprintf(buf,sizeof(buf),"%s:%d for %s/%s not a word, return: %d",szFile,nLine,szModule,szSetting,dbv.type);
 		buf[sizeof(buf)-1]=0;
 		db_msg_dbg(buf);
 	}
@@ -978,7 +978,7 @@ __inline static DWORD DBGetContactSettingDword_Helper(HANDLE hContact,const char
 #ifdef _DEBUG
 	if(dbv.type!=DBVT_DWORD) {
 		char buf[128];
-		_snprintf(buf,sizeof(buf),"%s:%d for %s/%s not a dword, return: %d",szFile,nLine,szModule,szSetting,dbv.type);
+		mir_snprintf(buf,sizeof(buf),"%s:%d for %s/%s not a dword, return: %d",szFile,nLine,szModule,szSetting,dbv.type);
 		buf[sizeof(buf)-1]=0;
 		db_msg_dbg(buf);
 	}
@@ -1168,7 +1168,7 @@ __inline static BYTE DBGetContactSettingRangedByte(HANDLE hContact, const char *
 	if (bVal < minValue || bVal > maxValue) {
 #ifdef _DEBUG
 		char szBuf[MAX_PATH];
-		_snprintf(szBuf,sizeof(szBuf),"(%s:%s) not in range of %d..%d",szModule,szSetting,minValue,maxValue);
+		mir_snprintf(szBuf,sizeof(szBuf),"(%s:%s) not in range of %d..%d",szModule,szSetting,minValue,maxValue);
 		szBuf[sizeof(szBuf)-1]=0;
 		MessageBoxA(0,szBuf,"DBGetContactSettingRangedByte failed",MB_ICONERROR);
 #endif
@@ -1183,7 +1183,7 @@ __inline static WORD DBGetContactSettingRangedWord(HANDLE hContact, const char *
 	if (wVal < minValue || wVal > maxValue) {
 #ifdef _DEBUG
 		char szBuf[MAX_PATH];
-		_snprintf(szBuf,sizeof(szBuf),"(%s:%s) not in range of %d..%d",szModule,szSetting,minValue,maxValue);
+		mir_snprintf(szBuf,sizeof(szBuf),"(%s:%s) not in range of %d..%d",szModule,szSetting,minValue,maxValue);
 		szBuf[sizeof(szBuf)-1]=0;
 		MessageBoxA(0,szBuf,"DBGetContactSettingRangedWord failed",MB_ICONERROR);
 #endif
@@ -1198,7 +1198,7 @@ __inline static DWORD DBGetContactSettingRangedDword(HANDLE hContact, const char
 	if (dVal < minValue || dVal > maxValue) {
 #ifdef _DEBUG
 		char szBuf[MAX_PATH];
-		_snprintf(szBuf,sizeof(szBuf),"(%s:%s) not in range of %d..%d",szModule,szSetting,minValue,maxValue);
+		mir_snprintf(szBuf,sizeof(szBuf),"(%s:%s) not in range of %d..%d",szModule,szSetting,minValue,maxValue);
 		szBuf[sizeof(szBuf)-1]=0;
 		MessageBoxA(0,szBuf,"DBGetContactSettingRangedDword failed",MB_ICONERROR);
 #endif

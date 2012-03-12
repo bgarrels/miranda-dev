@@ -20,10 +20,10 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-File name      : $URL: https://miranda.svn.sourceforge.net/svnroot/miranda/trunk/miranda/include/m_jabber.h $
-Revision       : $Revision: 9996 $
-Last change on : $Date: 2009-11-15 13:27:32 +0200 $
-Last change by : $Author: dchervov $
+File name      : $URL$
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
