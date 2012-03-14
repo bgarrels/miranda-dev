@@ -4,28 +4,6 @@
 #include <mbstring.h>
 #include <wchar.h>
 
-#ifdef __MINGW32__
-#include <limits.h>
-
-__inline size_t strnlen(const char *string, size_t maxlen)
-{
-	const char *end = (const char *)memchr ((const void *)string, '\0', maxlen);
-	return end ? (size_t) (end - string) : maxlen;
-}
-__inline size_t wcsnlen(const wchar_t *string, size_t maxlen)
-{
-	const wchar_t *end = wmemchr (string, L'\0', maxlen);
-	return end ? (size_t) (end - string) : maxlen;
-}
-
-/* FIXME: This may be wrong assumption about _AtlGetConversionACP */
-#define _AtlGetConversionACP() CP_THREAD_ACP
-/* FIXME: This is unsafe */
-#define memcpy_s(dest,size,src,count) memcpy(dest,src,count)
-/* FIXME: This is quite silly implementation of _mbsstr */
-#define _mbsstr(str,search) strstr((const char *)str,(const char *)search)
-#define __max(x,y) (((x)<(y))?(y):(x))
-#endif /* __MINGW32__ */
 
 struct CMStringData
 {
