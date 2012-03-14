@@ -22,6 +22,9 @@
     <Filter Include="docs\JSON_CAJUN">
       <UniqueIdentifier>{a7b811ed-2cd2-48a7-9500-85416b14a21e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="docs\Translation">
+      <UniqueIdentifier>{1024eae3-2937-45d1-a540-9e1cce114ba0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\avatars.cpp">
@@ -165,5 +168,13 @@
     <ResourceCompile Include="facebook.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Facebook_RM_translate.txt">
+      <Filter>docs\Translation</Filter>
+    </Text>
+    <Text Include="docs\Facebook_RM_germany.txt">
+      <Filter>docs\Translation</Filter>
+    </Text>
   </ItemGroup>
 </Project>
