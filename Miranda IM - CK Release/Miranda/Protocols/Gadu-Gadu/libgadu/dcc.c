@@ -1,5 +1,5 @@
 /* coding: UTF-8 */
-/* $Id: dcc.c 12145 2010-07-07 23:49:04Z dezred $ */
+/* $Id$ */
 
 /*
  *  (C) Copyright 2001-2008 Wojtek Kaniewski <wojtekka@irc.pl>

@@ -1,5 +1,5 @@
 /* coding: UTF-8 */
-/* $Id: pubdir.c 11370 2010-03-13 16:17:54Z dezred $ */
+/* $Id$ */
 
 /*
  *  (C) Copyright 2001-2006 Wojtek Kaniewski <wojtekka@irc.pl>

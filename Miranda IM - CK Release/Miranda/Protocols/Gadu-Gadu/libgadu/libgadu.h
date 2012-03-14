@@ -1,5 +1,5 @@
 /* coding: UTF-8 */
-/* $Id: libgadu.h 13762 2011-08-09 12:35:16Z dezred $ */
+/* $Id$ */
 
 /*
  *  (C) Copyright 2001-2009 Wojtek Kaniewski <wojtekka@irc.pl>
