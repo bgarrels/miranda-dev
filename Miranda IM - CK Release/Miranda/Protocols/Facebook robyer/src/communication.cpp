@@ -406,13 +406,15 @@ std::string facebook_client::choose_action( int request_type, std::string* data 
 	
 	case FACEBOOK_REQUEST_RECONNECT:
 	{
-		std::string action = "/ajax/presence/reconnect.php?__a=1&reason=%s&iframe_loaded=false&post_form_id=%s";
+		std::string action = "/ajax/presence/reconnect.php?__a=1&reason=%s&fb_dtsg=%s&post_form_id=%s&__user=%s";
 		
 		if (this->chat_reconnect_reason_.empty())
-			this->chat_reconnect_reason_ = "0";
+			this->chat_reconnect_reason_ = "0"; // 6?
 
 		utils::text::replace_first( &action, "%s", this->chat_reconnect_reason_ );
+		utils::text::replace_first( &action, "%s", this->dtsg_ );
 		utils::text::replace_first( &action, "%s", this->post_form_id_ );
+		utils::text::replace_first( &action, "%s", this->self_.user_id );
 		return action;
 	}
 
@@ -851,9 +853,6 @@ bool facebook_client::home( )
 			ForkThread( &FacebookProto::ProcessNotifications, this->parent, NULL );
 		}
 
-		// TODO RM: if enabled groupchats support
-
-
 		if (DBGetContactSettingByte(NULL, parent->m_szModuleName, FACEBOOK_KEY_ENABLE_GROUPCHATS, DEFAULT_ENABLE_GROUPCHATS)) {
 			// Get group chats
 			std::string favorites = utils::text::source_get_value( &resp.data, 2, "<div id=\"leftCol\"", "<div id=\"contentCol\"" );
@@ -1126,6 +1125,9 @@ bool facebook_client::channel( )
     
 		this->chat_reconnect_reason_ = utils::text::source_get_value2( &resp.data, "\"reason\":", ",}" );
 		parent->Log("      Reconnect reason: %s", this->chat_reconnect_reason_.c_str());
+
+		this->chat_sequence_num_ = utils::text::source_get_value2( &resp.data, "\"seq\":", ",}" );
+		parent->Log("      Got self sequence number: %s", this->chat_sequence_num_.c_str());
 
 		return this->reconnect( );
 	} else {

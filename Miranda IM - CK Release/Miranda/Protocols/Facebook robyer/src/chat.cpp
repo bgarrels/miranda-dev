@@ -105,9 +105,9 @@ void FacebookProto::AddChatContact(const char *chat_id, const char *id, const ch
 	gce.time       = ::time(NULL);
 	gce.bIsMe      = !strcmp(id, facy.self_.user_id.c_str());
 
-/*	if (gce.bIsMe)
+	if (gce.bIsMe)
 		gce.ptszStatus = _T("Admin");
-	else*/
+	else
 		gce.ptszStatus = _T("Normal");
 
 	CallServiceSync(MS_GC_EVENT,0,reinterpret_cast<LPARAM>(&gce));

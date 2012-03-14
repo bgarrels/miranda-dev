@@ -18,10 +18,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-File name      : $HeadURL: http://eternityplugins.googlecode.com/svn/trunk/facebook/avatars.cpp $
-Revision       : $Revision: 91 $
-Last change by : $Author: n3weRm0re.ewer $
-Last change on : $Date: 2011-01-08 11:10:34 +0100 (so, 08 1 2011) $
+File name      : $HeadURL$
+Revision       : $Revision$
+Last change by : $Author$
+Last change on : $Date$
 
 */
 

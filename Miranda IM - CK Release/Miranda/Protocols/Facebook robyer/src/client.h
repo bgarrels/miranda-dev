@@ -3,7 +3,7 @@
 Facebook plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2009-12 Michal Zelinka, 2011-12 Robert Pösel
+Copyright © 2009-11 Michal Zelinka, 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ public:
 
 		msgid_ = error_count_ = last_feeds_update_ = last_notification_time_ = 0;
 
-		invisible_ = is_typing_ = false;
+		is_idle_ = invisible_ = is_typing_ = false;
 
 		buddies_lock_ = send_message_lock_ = NULL;
 		hMsgCon = NULL;
@@ -74,6 +74,7 @@ public:
 	std::string chat_reconnect_reason_;
 	bool    invisible_;
 	bool    is_typing_;
+	bool	is_idle_;
 	time_t  last_feeds_update_;
 	unsigned __int64 last_notification_time_;
 	int     msgid_;

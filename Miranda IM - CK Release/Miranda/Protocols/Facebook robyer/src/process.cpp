@@ -211,6 +211,7 @@ void FacebookProto::ProcessFriendList( void* data )
 				bool update_required = true;
 
 				// TODO RM: remove, because contacts cant change it, so its only for "first run"
+					// - but what with contacts, that was added after logon?
 				// Update gender
 				if ( DBGetContactSettingByte(hContact, m_szModuleName, "Gender", 0) != fbu->gender )
 					DBWriteContactSettingByte(hContact, m_szModuleName, "Gender", fbu->gender );
@@ -537,43 +538,46 @@ void FacebookProto::ProcessFeeds( void* data )
 	std::string::size_type pos = 0;
 	UINT limit = 0;
 
-	*resp = utils::text::slashu_to_utf8(*resp);
+	*resp = utils::text::slashu_to_utf8(*resp);	
+	*resp = utils::text::source_get_value(resp, 2, "\"html\":\"", ">\"");
 
-	// TODO RM: first parse against <li>...</li>?
-	while ( ( pos = resp->find( "<h6", pos ) ) != std::string::npos && limit <= 25 )
-	{
-		std::string::size_type pos2 = resp->find( "<abbr title", pos );
+	while ( ( pos = resp->find( "<div class=\\\"mainWrapper\\\"", pos ) ) != std::string::npos && limit <= 25 )
+	{		
+		std::string::size_type pos2 = resp->find( "<div class=\\\"mainWrapper\\\"", pos+5 );
 		if (pos2 == std::string::npos)
-			pos2 = resp->find( "<\\/h6", pos );
-
-		std::string post_content = resp->substr( pos, pos2 - pos );
-		std::string rest_content;
-
-		if ( (pos2 = post_content.find( "class=\\\"uiStreamSource\\\"" ), pos) != std::string::npos )
-			rest_content = post_content.substr( pos2, post_content.find( "<abbr title=", pos2 ) - pos2 );
-
-		pos += 4;
-		facebook_newsfeed* nf = new facebook_newsfeed;
-
-		nf->title = utils::text::source_get_value( &post_content, 3, "<a ", "\\\">", "<\\/a" );
-		nf->user_id = utils::text::source_get_value( &post_content, 2, "user.php?id=", "\\\"" );
+			pos2 = resp->length();
 		
-		if ( (pos2 = post_content.find( "<\\/a>" )) != std::string::npos )
-			nf->text = post_content.substr( pos2, post_content.length() - pos2 );
-		nf->text = nf->text.substr(0, nf->text.find("<form"));
+		std::string post = resp->substr( pos, pos2 - pos );
+		pos += 5;
 
-		nf->link = utils::text::source_get_value( &rest_content, 2, "href=\\\"", "\\\">" );
+		std::string post_header = utils::text::source_get_value(&post, 4, "<h6 class=", "uiStreamHeadline", ">", "<\\/h6>");
+		std::string post_message = utils::text::source_get_value(&post, 3, "<h6 class=\\\"uiStreamMessage\\\"", ">", "<\\/h6>");
+		std::string post_link = utils::text::source_get_value(&post, 3, "<span class=\\\"uiStreamSource\\\"", ">", "<\\/span>");
+		std::string post_attach = utils::text::source_get_value(&post, 4, "<div class=", "uiStreamAttachments", ">", "<form");
+
+		// in title keep only name, end of events like "X shared link" put into message
+		pos2 = post_header.find("<\\/a>") + 5;
+		post_message = post_header.substr(pos2, post_header.length() - pos2) + post_message;
+		post_header = post_header.substr(0, pos2);
+
+		// append attachement to message (if any)
+		post_message += utils::text::trim( post_attach );
+
+		facebook_newsfeed* nf = new facebook_newsfeed;
 
 		nf->title = utils::text::trim(
 			utils::text::special_expressions_decode(
-				utils::text::remove_html( nf->title ) ) );
+				utils::text::remove_html( post_header ) ) );
+
+		nf->user_id = utils::text::source_get_value( &post_header, 2, "user.php?id=", "\\\"" );
 		
+		nf->link = utils::text::special_expressions_decode(
+				utils::text::source_get_value( &post_link, 2, "href=\\\"", "\\\">" ) );
+
 		nf->text = utils::text::trim(
 			utils::text::special_expressions_decode(
 				utils::text::remove_html(
-					utils::text::edit_html( nf->text ) ) ) );
-		
-		nf->link = utils::text::special_expressions_decode( nf->link );
+					utils::text::edit_html( post_message ) ) ) );
 
 		if ( !nf->title.length() || !nf->text.length() )
 		{

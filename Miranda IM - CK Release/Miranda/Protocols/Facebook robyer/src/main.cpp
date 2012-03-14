@@ -41,18 +41,22 @@ PLUGININFOEX pluginInfo = {
 	  "Facebook Protocol RM x64",
   #else
 	  "Facebook Protocol RM",
-  #endif    	
+  #endif
 	__VERSION_DWORD,
 	"Provides basic support for Facebook Chat protocol. [Built: "__DATE__" "__TIME__"]",
-	"Michal Zelinka, Robert Posel",
+	"Michal Zelinka, Robert Pösel",
 	"robyer@seznam.cz",
-	"(c) 2009-11 Michal Zelinka, 2011 Robert Posel",
+	"(c) 2009-11 Michal Zelinka, 2011-12 Robert Pösel",
 	"http://code.google.com/p/robyer/",
 	UNICODE_AWARE, //not transient
 	0,             //doesn't replace anything built-in
+  #ifdef _WIN64
+	// {8808C20C-5404-48A6-8390-232AAE5E793A}
+	{ 0x8808c20c, 0x5404, 0x48a6, { 0x83, 0x90, 0x23, 0x2a, 0xae, 0x5e, 0x79, 0x3a } }
+  #else
 	// {8432B009-FF32-4727-AAE6-A9035038FD58}
 	{ 0x8432b009, 0xff32, 0x4727, { 0xaa, 0xe6, 0xa9, 0x3, 0x50, 0x38, 0xfd, 0x58 } }
-
+  #endif
 };
 
 /////////////////////////////////////////////////////////////////////////////
@@ -80,10 +84,10 @@ extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD miranda
 			MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST);
 		return NULL;
 	}
-	else if(mirandaVersion < PLUGIN_MAKE_VERSION(0,9,14,0))
+	else if(mirandaVersion < PLUGIN_MAKE_VERSION(0,9,43,0))
 	{
 		MessageBox(0,_T("The Facebook protocol plugin cannot be loaded. ")
-			_T("It requires Miranda IM 0.9.14 or later."),_T("Miranda"),
+			_T("It requires Miranda IM 0.9.43 or later."),_T("Miranda"),
 			MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST);
 		return NULL;
 	}
@@ -91,15 +95,6 @@ extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD miranda
 	g_mirandaVersion = mirandaVersion;
 	return &pluginInfo;
 }
-
-/*extern "C" __declspec(dllexport) PLUGININFO* MirandaPluginInfo(DWORD mirandaVersion)
-{
-	// TODO: Make product version controlled via definitions
-	MessageBox(0,_T("The Facebook protocol plugin cannot be loaded. ")
-		_T("It requires Miranda IM 0.9.14 or later."),_T("Miranda"),
-		MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST);
-	return NULL;
-}*/
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // Interface information
@@ -191,7 +186,11 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 		agent << (( g_mirandaVersion >>  8) & 0xFF);
 		agent << ".";
 		agent << (( g_mirandaVersion      ) & 0xFF);
-		agent << " FacebookProtocolRM/";
+	#ifdef _WIN64
+		agent << " Facebook Protocol RM x64/";
+	#else
+		agent << " Facebook Protocol RM/";
+	#endif
 		agent << __VERSION_STRING;
 		g_strUserAgent = agent.str( );
 	}

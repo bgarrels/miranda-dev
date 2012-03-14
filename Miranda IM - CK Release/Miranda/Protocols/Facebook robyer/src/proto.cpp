@@ -48,13 +48,10 @@ FacebookProto::FacebookProto(const char* proto_name,const TCHAR* username)
 	CreateProtoService(m_szModuleName, PS_JOINCHAT,  &FacebookProto::OnJoinChat,  this);
 	CreateProtoService(m_szModuleName, PS_LEAVECHAT, &FacebookProto::OnLeaveChat, this);
 
-	if(g_mirandaVersion < PLUGIN_MAKE_VERSION(0, 10, 0, 2))
-	{
-		HookProtoEvent(ME_DB_CONTACT_DELETED,        &FacebookProto::OnContactDeleted,   this);
-	}
 	HookProtoEvent(ME_CLIST_PREBUILDSTATUSMENU,	&FacebookProto::OnBuildStatusMenu,	this);
 	HookProtoEvent(ME_OPT_INITIALISE,			&FacebookProto::OnOptionsInit,		this);
 	HookProtoEvent(ME_GC_EVENT,					&FacebookProto::OnChatOutgoing,		this);
+	HookProtoEvent(ME_IDLE_CHANGED,             &FacebookProto::OnIdleChanged,		this);
 
 	// Create standard network connection
 	TCHAR descr[512];
@@ -117,18 +114,18 @@ DWORD_PTR FacebookProto::GetCaps( int type, HANDLE hContact )
 	{
 	case PFLAGNUM_1: // TODO: Other caps available: PF1_BASICSEARCH, PF1_SEARCHBYEMAIL
 		if ( getByte( FACEBOOK_KEY_SET_MIRANDA_STATUS, 0 ) )
-			return PF1_IM | PF1_MODEMSG;
+			return PF1_IM | PF1_CHAT | PF1_SERVERCLIST | PF1_MODEMSG;
 		else
-			return PF1_IM | PF1_MODEMSGRECV;
+			return PF1_IM | PF1_CHAT | PF1_SERVERCLIST | PF1_MODEMSGRECV;
 	case PFLAGNUM_2:
-		return PF2_ONLINE | PF2_INVISIBLE | PF2_ONTHEPHONE; // | PF2_IDLE | PF2_SHORTAWAY;
+		return PF2_ONLINE | PF2_INVISIBLE | PF2_ONTHEPHONE | PF2_IDLE; // | PF2_SHORTAWAY;
 	case PFLAGNUM_3:
 		if ( getByte( FACEBOOK_KEY_SET_MIRANDA_STATUS, 0 ) )
 			return PF2_ONLINE; // | PF2_SHORTAWAY;
 		else
 			return 0;
 	case PFLAGNUM_4:
-		return PF4_FORCEAUTH | PF4_NOCUSTOMAUTH /*| PF4_SUPPORTIDLE*/ | PF4_IMSENDUTF | PF4_AVATARS | PF4_SUPPORTTYPING | PF4_NOAUTHDENYREASON | PF4_IMSENDOFFLINE;
+		return PF4_FORCEAUTH | PF4_NOCUSTOMAUTH | PF4_SUPPORTIDLE | PF4_IMSENDUTF | PF4_AVATARS | PF4_SUPPORTTYPING | PF4_NOAUTHDENYREASON | PF4_IMSENDOFFLINE;
 	case PFLAGNUM_5:
 		return PF2_ONTHEPHONE;
 	case PFLAG_MAXLENOFMESSAGE:
@@ -170,7 +167,8 @@ int FacebookProto::SetStatus( int new_status )
 	case ID_STATUS_CONNECTING:
 		m_iDesiredStatus = ID_STATUS_OFFLINE;
 		break;
-	
+
+	case ID_STATUS_IDLE:	
 	default:
 		m_iDesiredStatus = ID_STATUS_INVISIBLE;
 		if (DBGetContactSettingByte(NULL,m_szModuleName,FACEBOOK_KEY_MAP_STATUSES, DEFAULT_MAP_STATUSES))
@@ -251,6 +249,28 @@ int FacebookProto::GetMyAwayMsg( WPARAM wParam, LPARAM lParam )
 	}
 }
 
+int FacebookProto::OnIdleChanged( WPARAM wParam, LPARAM lParam )
+{
+	if (m_iStatus == ID_STATUS_INVISIBLE || m_iStatus <= ID_STATUS_OFFLINE)
+		return 0;
+
+	bool bIdle = (lParam & IDF_ISIDLE) != 0;
+	bool bPrivacy = (lParam & IDF_PRIVACY) != 0;
+
+	if (facy.is_idle_ && !bIdle)
+	{
+		facy.is_idle_ = false;
+		SetStatus(m_iDesiredStatus);
+	}
+	else if (!facy.is_idle_ && bIdle && !bPrivacy && m_iDesiredStatus != ID_STATUS_INVISIBLE)
+	{
+		facy.is_idle_ = true;
+		SetStatus(ID_STATUS_IDLE);
+	}
+
+	return 0;
+}
+
 //////////////////////////////////////////////////////////////////////////////
 
 int FacebookProto::OnEvent(PROTOEVENTTYPE event,WPARAM wParam,LPARAM lParam)
@@ -261,10 +281,10 @@ int FacebookProto::OnEvent(PROTOEVENTTYPE event,WPARAM wParam,LPARAM lParam)
 		return OnModulesLoaded(wParam,lParam);
 
 	case EV_PROTO_ONEXIT:
-		return OnPreShutdown  (wParam,lParam);
+		return OnPreShutdown(wParam,lParam);
 	
 	case EV_PROTO_ONOPTIONS:
-		return OnOptionsInit  (wParam,lParam);
+		return OnOptionsInit(wParam,lParam);
 
 	case EV_PROTO_ONCONTACTDELETED:
  		return OnContactDeleted(wParam,lParam);
@@ -292,10 +312,12 @@ int FacebookProto::OnModulesLoaded(WPARAM wParam,LPARAM lParam)
 {
 	// Register group chat
 	GCREGISTER gcr = {sizeof(gcr)};
-	//gcr.dwFlags = GC_ACKMSG;
+	gcr.dwFlags = 0; //GC_ACKMSG;
 	gcr.pszModule = m_szModuleName;
 	gcr.pszModuleDispName = m_szModuleName;
 	gcr.iMaxText = FACEBOOK_MESSAGE_LIMIT;
+	gcr.nColors = 0;
+	gcr.pColors = NULL;
 	CallService(MS_GC_REGISTER,0,reinterpret_cast<LPARAM>(&gcr));
 
 	return 0;
@@ -454,14 +476,6 @@ int FacebookProto::RemoveFriend(WPARAM wParam,LPARAM lParam)
 
 			if ( !DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) )
 				DBWriteContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, ::time(NULL));
-		} else {
-/*			facebook_user fbu;
-			fbu.user_id = dbv.pszVal;
-			hContact = AddToContactList(&fbu);
-
-			DBWriteContactSettingByte(hContact,m_szModuleName,FACEBOOK_KEY_DELETE_NEXT,1);
-			facy.client_notify(TranslateT("Contact will be deleted at next login."));*/
-			NotifyEvent(TranslateT("Deleting contact"), TranslateT("Contact wasn't deleted, because you are not connected."), NULL, FACEBOOK_EVENT_OTHER, NULL);
 		}
 	}
 
@@ -476,6 +490,9 @@ int FacebookProto::AddFriend(WPARAM wParam,LPARAM lParam)
 		return 0;
 	}
 
+	if (isOffline())
+		return 0;
+
 	HANDLE hContact = reinterpret_cast<HANDLE>(wParam);
 
 	DBVARIANT dbv;
@@ -485,14 +502,6 @@ int FacebookProto::AddFriend(WPARAM wParam,LPARAM lParam)
 			std::string* id = new std::string(dbv.pszVal);
 			ForkThread( &FacebookProto::AddContactToServer, this, ( void* )id );
 			DBFreeVariant(&dbv);
-		} else {
-/*			facebook_user fbu;
-			fbu.user_id = dbv.pszVal;
-			hContact = AddToContactList(&fbu);
-
-			DBWriteContactSettingByte(hContact,m_szModuleName,FACEBOOK_KEY_DELETE_NEXT,1);
-			facy.client_notify(TranslateT("Contact will be deleted at next login."));*/
-			NotifyEvent(TranslateT("Adding contact"), TranslateT("Contact wasn't added, because you are not connected."), NULL, FACEBOOK_EVENT_OTHER, NULL);
 		}
 	}
 
