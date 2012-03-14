@@ -130,7 +130,7 @@ public:
 	int  __cdecl OnMind(WPARAM,LPARAM);
 	int  __cdecl OnPreShutdown(WPARAM,LPARAM);
 	int  __cdecl OnPrebuildContactMenu(WPARAM,LPARAM);
-	// TODO RM: Chat handling
+	int  __cdecl OnIdleChanged(WPARAM,LPARAM);
 	int  __cdecl OnChatOutgoing(WPARAM,LPARAM);
 	int  __cdecl OnJoinChat(WPARAM,LPARAM);
 	int  __cdecl OnLeaveChat(WPARAM,LPARAM);
@@ -169,8 +169,8 @@ public:
 	HANDLE  AddToContactList(facebook_user*, bool dont_check = false, const char *new_name = "");
 	void    SetAllContactStatuses(int);	
 
-	// TODO RM: Chats handling
-	void AddChat(const char *id, const char *name);
+	// Chats handling
+ 	void AddChat(const char *id, const char *name);
 	void UpdateChat(const char *chat_id, const char *id, const char *name, const char *message);
 	bool IsChatContact(const char *chat_id, const char *id);
 	void AddChatContact(const char *chat_id, const char *id, const char *name);

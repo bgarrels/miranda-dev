@@ -146,6 +146,8 @@ void FacebookProto::DeleteContactFromServer(void *data)
 	query += "&__user=";
 	query += facy.self_.user_id;
 
+	delete data;
+
 	// Get unread inbox threads
 	http::response resp = facy.flap( FACEBOOK_REQUEST_DELETE_FRIEND, &query );
 
@@ -156,9 +158,8 @@ void FacebookProto::DeleteContactFromServer(void *data)
 		facy.handle_error( "DeleteContactFromServer" );
 	}
 
-	NotifyEvent(TranslateT("Deleting contact"), TranslateT("Contact was sucessfully removed from server."), NULL, FACEBOOK_EVENT_OTHER, NULL);
-	
-	delete data;
+	// TODO: better notify - check result code
+	NotifyEvent(TranslateT("Deleting contact"), TranslateT("Contact was sucessfully removed from server."), NULL, FACEBOOK_EVENT_OTHER, NULL);	
 }
 
 void FacebookProto::AddContactToServer(void *data)
@@ -179,6 +180,8 @@ void FacebookProto::AddContactToServer(void *data)
 	query += "&__user=";
 	query += facy.self_.user_id;
 
+	delete data;
+
 	// Get unread inbox threads
 	http::response resp = facy.flap( FACEBOOK_REQUEST_ADD_FRIEND, &query );
 
@@ -188,10 +191,8 @@ void FacebookProto::AddContactToServer(void *data)
 	if (resp.code != HTTP_CODE_OK || resp.data.find("\"success\":true") == std::string::npos) {
 		facy.handle_error( "AddContactToServer" );
 	}
-// RM TODO: better notify...
+// RM TODO: better notify... - check result code
 	NotifyEvent(TranslateT("Adding contact"), TranslateT("Request for friendship was sent successfully."), NULL, FACEBOOK_EVENT_OTHER, NULL);
-
-	delete data;
 }
 
 
@@ -203,40 +204,28 @@ HANDLE FacebookProto::GetAwayMsg(HANDLE hContact)
 int FacebookProto::OnContactDeleted(WPARAM wparam,LPARAM)
 {
 	HANDLE hContact = (HANDLE)wparam;
+	
+	// TODO: load contact name and show it in messagebox
 
-	if (IsMyContact(hContact))
-	{		
-//		if (!DBGetContactSettingByte(hContact,m_szModuleName,FACEBOOK_KEY_DELETE_NEXT,0)) {
-			if (MessageBox( 0, TranslateT("Do you want to delete this contact also from server list?"), m_tszUserName, MB_ICONWARNING | MB_YESNO | MB_DEFBUTTON2 ) == IDYES) {
-				DBVARIANT dbv;			
-				if( !DBGetContactSettingString(hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
-				{
-					if (!isOffline()) {
-						std::string* id = new std::string(dbv.pszVal);
-						ForkThread( &FacebookProto::DeleteContactFromServer, this, ( void* )id );
-						DBFreeVariant(&dbv);
-					} else {
-/*						facebook_user fbu;
-						fbu.user_id = dbv.pszVal;
-						hContact = AddToContactList(&fbu);
-
-						DBWriteContactSettingByte(hContact,m_szModuleName,FACEBOOK_KEY_DELETE_NEXT,1);
-						facy.client_notify(TranslateT("Contact will be deleted at next login."));*/
-						NotifyEvent(TranslateT("Deleting contact"), TranslateT("Contact wasn't deleted, because you are not connected."), NULL, FACEBOOK_EVENT_OTHER, NULL);
-					}
-				}			
-			}				
-//		}
-
-		ScopedLock s(facy.buddies_lock_);
-
-		for (List::Item< facebook_user >* i = facy.buddies.begin( ); i != NULL; i = i->next )
+	if (MessageBox( 0, TranslateT("Do you want to delete this contact also from server list?"), m_tszUserName, MB_ICONWARNING | MB_YESNO | MB_DEFBUTTON2 ) == IDYES) {
+		DBVARIANT dbv;			
+		if( !DBGetContactSettingString(hContact,m_szModuleName,FACEBOOK_KEY_ID,&dbv) )
 		{
-			if (hContact == i->data->handle)
-			{
-				facy.buddies.erase(i->key);
-				break;
+			if (!isOffline()) { // TODO: is this needed?
+				std::string* id = new std::string(dbv.pszVal);
+				ForkThread( &FacebookProto::DeleteContactFromServer, this, ( void* )id );
+				DBFreeVariant(&dbv);
 			}
+		}
+	}
+
+	//ScopedLock s(facy.buddies_lock_); 
+	for (List::Item< facebook_user >* i = facy.buddies.begin( ); i != NULL; i = i->next )
+	{
+		if (hContact == i->data->handle)
+		{
+			facy.buddies.erase(i->key);
+			break;
 		}
 	}
 

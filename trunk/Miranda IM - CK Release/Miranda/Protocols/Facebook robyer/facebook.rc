@@ -35,7 +35,7 @@ END
 2 TEXTINCLUDE 
 BEGIN
     "#include ""afxres.h""\r\n"
-    "#include ""src/constants.h""\0"
+    "#include ""constants.h""\0"
 END
 
 3 TEXTINCLUDE 
@@ -242,7 +242,7 @@ BEGIN
         VERTGUIDE, 17
         VERTGUIDE, 32
         VERTGUIDE, 119
-        VERTGUIDE, 123
+        VERTGUIDE, 122
         VERTGUIDE, 284
         TOPMARGIN, 7
         BOTTOMMARGIN, 231
@@ -298,7 +298,8 @@ END
 //
 // Generated from the TEXTINCLUDE 3 resource.
 //
-
+
+
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
 

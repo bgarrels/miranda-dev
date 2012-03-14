@@ -151,8 +151,7 @@ std::string utils::text::edit_html( std::string data )
 		}
 	}
 
-	start = 0;
-	end = 0;
+	start = end = 0;
 	data = new_string;
 	new_string = "";
 
@@ -168,6 +167,23 @@ std::string utils::text::edit_html( std::string data )
 		}
 	}
 
+	// Remove "Translate" link
+	start = end = 0;
+	data = new_string;
+	new_string = "";
+	while ( end != std::string::npos )
+	{
+		end = data.find( "translate_story_link\\\">", start );
+		if ( end != std::string::npos )
+		{
+			new_string += data.substr( start, end - start );
+			start = data.find( "<\\/div", end );
+		} else {
+			new_string += data.substr( start, data.length() - start );
+		}
+	}
+
+	// Append newline after attachement title
 	start = new_string.find( "class=\\\"uiAttachmentTitle", 0 );
 	if ( start != std::string::npos )
 	{
@@ -183,7 +199,8 @@ std::string utils::text::edit_html( std::string data )
 			new_string.insert(start, "\n");
 	}
 
-	start = new_string.find( "uiAttachmentDesc\\\"", 0 );
+	// Append newline between attachement link and description
+	start = new_string.find( "uiAttachmentDesc", 0 );
 	if ( start != std::string::npos )
 	{
 		start = new_string.find( ">", start );
@@ -197,6 +214,8 @@ std::string utils::text::edit_html( std::string data )
   
 	utils::text::replace_all( &new_string, "<br \\/>", "\n" );
 	utils::text::replace_all( &new_string, "\n\n\n", "\n\n" );
+	//utils::text::replace_all( &new_string, "\\t", "" );
+	//utils::text::replace_all( &new_string, "\\n", "" );
 	return new_string;
 }
 
@@ -260,24 +279,25 @@ std::string utils::text::slashu_to_utf8( std::string data )
 
 std::string utils::text::trim( std::string data )
 {
-	std::string spaces = " \t\r\n"; // TODO: include "nbsp"
+	std::string spaces = " \t\r\n"; // TODO: include "nbsp"?
 	std::string::size_type begin = data.find_first_not_of( spaces );
 	std::string::size_type end = data.find_last_not_of( spaces ) + 1;
 
 	return (begin != std::string::npos) ? data.substr( begin, end - begin ) : "";
 }
 
-void utils::text::explode(std::string str, std::string separator, std::vector<std::string>* results){
+void utils::text::explode(std::string str, std::string separator, std::vector<std::string>* results)
+{
 	std::string::size_type pos;
 	pos = str.find_first_of(separator);
-	while(pos != std::string::npos){
-		if(pos > 0){
+	while (pos != std::string::npos) {
+		if (pos > 0) {
 			results->push_back(str.substr(0,pos));
 		}
 		str = str.substr(pos+1);
 		pos = str.find_first_of(separator);
 	}
-	if(str.length() > 0){
+	if (str.length() > 0) {
 		results->push_back(str);
 	}
 }
@@ -383,19 +403,4 @@ int ext_to_format(const std::string &ext)
 	}
 	
 	return PA_FORMAT_UNKNOWN;
-}
-
-
-// OBSOLETE
-
-void MB( const char* m )
-{
-	MessageBoxA( NULL, m, NULL, MB_OK );
-}
-
-void MBI( int a )
-{
-	char b[32];
-	itoa( a, b, 10 );
-	MB( b );
 }
