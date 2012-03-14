@@ -17,10 +17,10 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IRCG/ui_utils.cpp $
-Revision       : $Revision: 13133 $
-Last change on : $Date: 2010-11-17 14:54:24 +0100 (Mi, 17. Nov 2010) $
-Last change by : $Author: george.hazan $
+File name      : $URL$
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
