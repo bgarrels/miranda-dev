@@ -1,5 +1,5 @@
 /*
- * $Id: proto.cpp 13497 2011-03-25 04:55:36Z borkra $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *

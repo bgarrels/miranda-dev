@@ -1,5 +1,5 @@
 /*
- * $Id: config.h 9339 2009-04-05 00:15:32Z gena01 $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *

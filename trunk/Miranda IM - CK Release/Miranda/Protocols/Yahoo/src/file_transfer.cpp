@@ -1,5 +1,5 @@
 /*
- * $Id: file_transfer.cpp 13893 2011-10-23 19:29:28Z borkra $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *

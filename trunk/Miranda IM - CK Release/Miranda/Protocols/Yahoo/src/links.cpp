@@ -1,5 +1,5 @@
 /*
- * $Id: services.c 5376 2007-05-07 16:13:18Z gena01 $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *

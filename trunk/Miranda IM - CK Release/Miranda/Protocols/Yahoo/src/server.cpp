@@ -1,5 +1,5 @@
 /*
- * $Id: server.cpp 9810 2009-05-19 01:43:22Z gena01 $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *

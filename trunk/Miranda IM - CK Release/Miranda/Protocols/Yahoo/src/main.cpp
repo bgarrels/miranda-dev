@@ -1,5 +1,5 @@
 /*
- * $Id: main.cpp 13596 2011-04-15 19:07:23Z george.hazan $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *

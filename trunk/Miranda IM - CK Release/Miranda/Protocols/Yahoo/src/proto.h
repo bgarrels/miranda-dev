@@ -1,7 +1,7 @@
 /*
- * $Id: proto.h 12844 2010-09-29 19:39:21Z george.hazan $
+ * $Id$
  *
- * myYahoo Miranda Plugin 
+ * myYahoo Miranda IM Plugin 
  *
  * Authors: Gennady Feldman (aka Gena01) 
  *          Laurent Marechal (aka Peorth)
@@ -160,7 +160,7 @@ struct CYahooProto : public PROTO_INTERFACE
 	void   reset_avatar(HANDLE hContact);
 	void   request_avatar(const char* who);
 
-	void   SendAvatar(const char *szFile);
+	void   SendAvatar(const TCHAR *szFile);
 	void   GetAvatarFileName(HANDLE hContact, TCHAR* pszDest, int cbLen, int type);
 
 	//====| filetransfer.cpp |============================================================

@@ -1,5 +1,5 @@
 /*
- * $Id: util.cpp 13557 2011-04-09 02:26:58Z borkra $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *

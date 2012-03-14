@@ -1,5 +1,5 @@
 /*
- * $Id: http_gateway.h 3541 2006-08-18 21:18:33Z gena01 $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *

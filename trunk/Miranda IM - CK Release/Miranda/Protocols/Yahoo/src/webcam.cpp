@@ -1,5 +1,5 @@
 /*
- * $Id: webcam.cpp 9228 2009-03-26 13:47:12Z ghazan $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *

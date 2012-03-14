@@ -1,5 +1,5 @@
 /*
- * $Id: http_gateway.cpp 9232 2009-03-26 18:11:02Z ghazan $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *

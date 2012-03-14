@@ -1,5 +1,5 @@
 /*
- * $Id: search.cpp 11632 2010-04-24 12:32:03Z borkra $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *

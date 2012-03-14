@@ -1,5 +1,5 @@
 /*
- * $Id: im.cpp 12307 2010-08-11 21:49:46Z Michael.Kunz@s2005.TU-Chemnitz.de $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *
