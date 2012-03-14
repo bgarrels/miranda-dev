@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : $Source: /cvsroot/miranda/miranda/protocols/IcqOscarJ/icq_http.c,v $
-// Revision       : $Revision: 12606 $
-// Last change on : $Date: 2010-09-06 14:38:27 +0200 (Mo, 06. Sep 2010) $
-// Last change by : $Author: borkra $
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

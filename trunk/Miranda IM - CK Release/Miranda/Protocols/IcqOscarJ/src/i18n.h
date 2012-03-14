@@ -23,10 +23,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/i18n.h $
-// Revision       : $Revision: 11599 $
-// Last change on : $Date: 2010-04-19 08:00:16 +0200 (Mo, 19. Apr 2010) $
-// Last change by : $Author: borkra $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

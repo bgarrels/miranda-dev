@@ -24,10 +24,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/oscar_filetransfer.cpp $
-// Revision       : $Revision: 14045 $
-// Last change on : $Date: 2012-02-02 15:44:53 +0100 (Do, 02. Feb 2012) $
-// Last change by : $Author: george.hazan $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

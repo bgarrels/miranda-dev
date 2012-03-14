@@ -23,10 +23,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_clients.cpp $
-// Revision       : $Revision: 13847 $
-// Last change on : $Date: 2011-09-07 21:12:32 +0200 (Mi, 07. Sep 2011) $
-// Last change by : $Author: george.hazan $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

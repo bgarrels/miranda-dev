@@ -23,10 +23,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_servlist.h $
-// Revision       : $Revision: 11805 $
-// Last change on : $Date: 2010-05-20 22:54:42 +0200 (Do, 20. Mai 2010) $
-// Last change by : $Author: jokusoftware $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

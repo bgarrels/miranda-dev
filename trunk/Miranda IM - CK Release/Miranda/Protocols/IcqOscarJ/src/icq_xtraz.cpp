@@ -23,10 +23,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_xtraz.cpp $
-// Revision       : $Revision: 13678 $
-// Last change on : $Date: 2011-07-03 23:53:23 +0200 (So, 03. Jul 2011) $
-// Last change by : $Author: borkra $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

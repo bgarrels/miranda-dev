@@ -23,10 +23,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icqosc_svcs.h $
-// Revision       : $Revision: 9261 $
-// Last change on : $Date: 2009-03-28 20:16:39 +0100 (Sa, 28. Mrz 2009) $
-// Last change by : $Author: borkra $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

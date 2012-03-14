@@ -23,10 +23,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/fam_15icqserver.cpp $
-// Revision       : $Revision: 13027 $
-// Last change on : $Date: 2010-10-24 16:23:07 +0200 (So, 24. Okt 2010) $
-// Last change by : $Author: borkra $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

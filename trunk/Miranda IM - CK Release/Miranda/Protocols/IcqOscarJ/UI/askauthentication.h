@@ -22,10 +22,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/UI/askauthentication.h,v $
-// Revision       : $Revision: 7500 $
-// Last change on : $Date: 2008-03-24 19:07:37 +0100 (Mo, 24. Mrz 2008) $
-// Last change by : $Author: jokusoftware $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

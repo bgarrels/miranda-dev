@@ -23,10 +23,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_fieldnames.cpp $
-// Revision       : $Revision: 11199 $
-// Last change on : $Date: 2010-01-29 13:45:44 +0100 (Fr, 29. Jan 2010) $
-// Last change by : $Author: george.hazan $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

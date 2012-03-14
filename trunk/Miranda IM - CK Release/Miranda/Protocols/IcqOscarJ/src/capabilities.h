@@ -24,9 +24,9 @@
 // -----------------------------------------------------------------------------
 //
 // File name      : &URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/capabilities.h $
-// Revision       : $Revision: 11353 $
-// Last change on : $Date: 2010-03-10 01:21:03 +0100 (Mi, 10. Mrz 2010) $
-// Last change by : $Author: jokusoftware $
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //  Contains helper functions to handle OSCAR user capabilities.

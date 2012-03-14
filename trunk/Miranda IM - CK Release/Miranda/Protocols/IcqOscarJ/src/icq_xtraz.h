@@ -23,10 +23,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_xtraz.h $
-// Revision       : $Revision: 7484 $
-// Last change on : $Date: 2008-03-21 10:43:39 +0100 (Fr, 21. Mrz 2008) $
-// Last change by : $Author: ghazan $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

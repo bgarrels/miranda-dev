@@ -21,10 +21,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/changeinfo/changeinfo.h $
-// Revision       : $Revision: 12945 $
-// Last change on : $Date: 2010-10-13 06:48:50 +0200 (Mi, 13. Okt 2010) $
-// Last change by : $Author: borkra $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

@@ -23,10 +23,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/fam_03buddy.cpp $
-// Revision       : $Revision: 13414 $
-// Last change on : $Date: 2011-03-09 14:17:26 +0100 (Mi, 09. Mrz 2011) $
-// Last change by : $Author: ashpynov@gmail.com $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

@@ -24,10 +24,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_direct.cpp $
-// Revision       : $Revision: 11570 $
-// Last change on : $Date: 2010-04-11 15:58:57 +0200 (So, 11. Apr 2010) $
-// Last change by : $Author: jokusoftware $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

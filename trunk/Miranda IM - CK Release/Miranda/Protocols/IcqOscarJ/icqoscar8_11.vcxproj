@@ -256,7 +256,7 @@
       <FloatingPointModel>Precise</FloatingPointModel>
       <RuntimeTypeInfo>
       </RuntimeTypeInfo>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>icqoscar.h</PrecompiledHeaderFile>
       <AssemblerOutput>NoListing</AssemblerOutput>
       <BrowseInformationFile>
@@ -335,7 +335,7 @@
       <FloatingPointModel>Precise</FloatingPointModel>
       <RuntimeTypeInfo>
       </RuntimeTypeInfo>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>icqoscar.h</PrecompiledHeaderFile>
       <AssemblerOutput>NoListing</AssemblerOutput>
       <BrowseInformationFile>

@@ -24,10 +24,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/chan_05ping.cpp $
-// Revision       : $Revision: 13324 $
-// Last change on : $Date: 2011-01-23 16:58:59 +0100 (So, 23. Jan 2011) $
-// Last change by : $Author: borkra $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 // -----------------------------------------------------------------------------
 
 #include "icqoscar.h"
