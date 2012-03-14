@@ -1,5 +1,5 @@
 /* coding: UTF-8 */
-/* $Id: compat.h 11075 2009-12-20 15:01:43Z dezred $ */
+/* $Id$ */
 
 /*
  *  (C) Copyright 2001-2002 Wojtek Kaniewski <wojtekka@irc.pl>

@@ -1,5 +1,5 @@
 /* coding: UTF-8 */
-/* $Id: libgadu.c 13762 2011-08-09 12:35:16Z dezred $ */
+/* $Id$ */
 
 /*
  *  (C) Copyright 2001-2010 Wojtek Kaniewski <wojtekka@irc.pl>
@@ -178,7 +178,7 @@ static char rcsid[]
 #ifdef __GNUC__
 __attribute__ ((unused))
 #endif
-= "$Id: libgadu.c 13762 2011-08-09 12:35:16Z dezred $";
+= "$Id$";
 #endif
 
 #endif /* DOXYGEN */
