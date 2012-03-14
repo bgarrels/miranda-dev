@@ -23,10 +23,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/init.cpp $
-// Revision       : $Revision: 13596 $
-// Last change on : $Date: 2011-04-15 21:07:23 +0200 (Fr, 15. Apr 2011) $
-// Last change by : $Author: george.hazan $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 // -----------------------------------------------------------------------------
 
 #include "icqoscar.h"

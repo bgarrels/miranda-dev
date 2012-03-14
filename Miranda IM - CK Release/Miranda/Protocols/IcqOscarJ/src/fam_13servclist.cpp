@@ -23,10 +23,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/fam_13servclist.cpp $
-// Revision       : $Revision: 13699 $
-// Last change on : $Date: 2011-07-09 23:15:09 +0200 (Sa, 09. Jul 2011) $
-// Last change by : $Author: george.hazan $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

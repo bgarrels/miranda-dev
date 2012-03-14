@@ -24,10 +24,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/chan_03error.c,v $
-// Revision       : $Revision: 7500 $
-// Last change on : $Date: 2012-03-09 00:07:37 +0100 $
-// Last change by : $Author: g.hazan $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

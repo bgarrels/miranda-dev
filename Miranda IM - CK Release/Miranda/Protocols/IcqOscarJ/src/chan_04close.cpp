@@ -24,10 +24,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/chan_04close.cpp $
-// Revision       : $Revision: 13324 $
-// Last change on : $Date: 2012-03-08 16:58:59 +0100 $
-// Last change by : $Author: borkra $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //

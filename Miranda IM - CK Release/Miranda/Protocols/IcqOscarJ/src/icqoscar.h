@@ -24,10 +24,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: http://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icqoscar.h $
-// Revision       : $Revision: 14085 $
-// Last change on : $Date: 2012-02-13 11:55:56 +0100 (Mo, 13. Feb 2012) $
-// Last change by : $Author: george.hazan $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 // -----------------------------------------------------------------------------
 
 #define MIRANDA_VER 0x0A00
