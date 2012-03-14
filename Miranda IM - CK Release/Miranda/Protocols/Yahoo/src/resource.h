@@ -1,5 +1,5 @@
 /*
- * $Id: resource.h 9837 2009-05-21 15:12:06Z gena01 $
+ * $Id$
  *
  * myYahoo Miranda Plugin
  *

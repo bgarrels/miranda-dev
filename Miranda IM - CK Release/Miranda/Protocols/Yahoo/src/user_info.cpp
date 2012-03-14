@@ -1,5 +1,5 @@
 /*
- * $Id: proto.cpp 9802 2009-05-18 03:03:48Z gena01 $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *

@@ -1,5 +1,5 @@
 /*
- * $Id: util.c 3936 2006-10-02 06:58:19Z ghazan $
+ * $Id$
  *
  * myYahoo Miranda Plugin 
  *
