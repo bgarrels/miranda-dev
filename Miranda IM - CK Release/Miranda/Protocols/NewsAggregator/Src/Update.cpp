@@ -35,9 +35,12 @@ VOID CALLBACK timerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 		{
 			if(IsMyContact(hContact)) 
 			{
-				double diff = difftime(time(NULL), DBGetContactSettingDword(hContact, MODULE, "LastCheck", 0));
-				if (diff >= DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 0) * 60)
-					UpdateListAdd(hContact);
+				if (DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 0) != -1)
+				{
+					double diff = difftime(time(NULL), DBGetContactSettingDword(hContact, MODULE, "LastCheck", 0));
+					if (diff >= DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 0) * 60)
+						UpdateListAdd(hContact);
+				}
 			}
 			hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
 		}
