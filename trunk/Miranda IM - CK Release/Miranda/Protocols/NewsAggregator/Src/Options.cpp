@@ -30,6 +30,7 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 			SetDlgItemText(hwndDlg, IDC_FEEDURL, _T("http://"));
 			SetDlgItemInt(hwndDlg, IDC_CHECKTIME, 60, false);
 			SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
+			SendDlgItemMessage(hwndDlg, IDC_CHECKTIME, UDM_SETRANGE32, -1, 9999);
 			TranslateDialogDefault(hwndDlg);
 			return TRUE;
 		}
@@ -70,7 +71,10 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 							GetDlgItemText(hwndDlg, IDC_FEEDURL, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "URL", str);
 							DBWriteContactSettingByte(hContact, MODULE, "CheckState", 1);
-							DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
+							if (GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false) > -1 && GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false)<=5)
+								DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", 5);
+							else
+								DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
 							GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "MsgFormat", str);
 							DBWriteContactSettingWord(hContact, MODULE, "Status", CallProtoService(MODULE, PS_GETSTATUS, 0, 0));
@@ -152,6 +156,7 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 			ItemInfo &SelItem = *(ItemInfo*)lParam;
 			ItemInfo *nSelItem = new ItemInfo(SelItem);
 			SetWindowText(hwndDlg, TranslateT("Change Feed"));
+			SendDlgItemMessage(hwndDlg, IDC_CHECKTIME, UDM_SETRANGE32, -1, 9999);
 
 			HANDLE hContact= (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
 			while (hContact != NULL) 
@@ -237,7 +242,10 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 							DBWriteContactSettingTString(SelItem->hContact, MODULE, "URL", str);
 							GetDlgItemText(hwndDlg, IDC_FEEDTITLE, str, SIZEOF(str));
 							DBWriteContactSettingTString(SelItem->hContact, MODULE, "Nick", str);
-							DBWriteContactSettingDword(SelItem->hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
+							if (GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false) > -1 && GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false)<=5)
+								DBWriteContactSettingDword(SelItem->hContact, MODULE, "UpdateTime", 5);
+							else
+								DBWriteContactSettingDword(SelItem->hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
 							GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str));
 							DBWriteContactSettingTString(SelItem->hContact, MODULE, "MsgFormat", str);
 							if (IsDlgButtonChecked(hwndDlg, IDC_USEAUTH))
@@ -324,6 +332,7 @@ INT_PTR CALLBACK DlgProcChangeFeedMenu(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 		{
 			TranslateDialogDefault(hwndDlg);
 			SetWindowText(hwndDlg, TranslateT("Change Feed"));
+			SendDlgItemMessage(hwndDlg, IDC_CHECKTIME, UDM_SETRANGE32, -1, 9999);
 
 			HANDLE hContact = (HANDLE)lParam;
 			DBVARIANT dbVar = {0};
@@ -401,7 +410,10 @@ INT_PTR CALLBACK DlgProcChangeFeedMenu(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 							DBWriteContactSettingTString(hContact, MODULE, "URL", str);
 							GetDlgItemText(hwndDlg, IDC_FEEDTITLE, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "Nick", str);
-							DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
+							if (GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false) > -1 && GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false)<=5)
+								DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", 5);
+							else
+								DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
 							GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "MsgFormat", str);
 							if (IsDlgButtonChecked(hwndDlg, IDC_USEAUTH))
