@@ -301,14 +301,8 @@ INT_PTR CALLBACK SaveOptsDlgProc(OptPageControl *controls, int controlsSize, cha
 						lvi.iItem = 1000;
 						
 						PROTOACCOUNT **protos;
-						int count;
-
-						BOOL hasAccounts = ServiceExists(MS_PROTO_ENUMACCOUNTS);
-
-						if (hasAccounts)
-							CallService(MS_PROTO_ENUMACCOUNTS, (WPARAM)&count, (LPARAM)&protos);
-						else
-							CallService(MS_PROTO_ENUMPROTOCOLS, (WPARAM)&count, (LPARAM)&protos);
+						int count = 0;
+						ProtoEnumAccounts(&count,&protos);
 						
 						for (int i = 0; i < count; i++)
 						{
@@ -321,18 +315,7 @@ INT_PTR CALLBACK SaveOptsDlgProc(OptPageControl *controls, int controlsSize, cha
 							if (ctrl->allowProtocol != NULL && !ctrl->allowProtocol(protos[i]->szModuleName))
 								continue;
 
-							TCHAR *name;
-							if (hasAccounts)
-							{
-								name = mir_tstrdup(protos[i]->tszAccountName);
-							}
-							else
-							{
-								char szName[128];
-								CallProtoService(protos[i]->szModuleName, PS_GETNAME, sizeof(szName), (LPARAM)szName);
-								name = mir_a2t(szName);
-							}
-							
+							TCHAR *name = mir_tstrdup(protos[i]->tszAccountName);
 							char *setting = (char *) mir_alloc(128 * sizeof(char));
 							mir_snprintf(setting, 128, ctrl->setting, protos[i]->szModuleName);
 
