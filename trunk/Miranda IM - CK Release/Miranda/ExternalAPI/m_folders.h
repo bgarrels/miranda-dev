@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef M_CUSTOM_FOLDERS_H
 #define M_CUSTOM_FOLDERS_H
 
-#define FOLDERS_API 501 //dunno why it's here but it is :)
+#define FOLDERS_API 501								//dunno why it's here but it is :)
 
 #define PROFILE_PATH "%profile_path%"
 #define CURRENT_PROFILE "%current_profile%"
@@ -64,7 +64,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #define TO_WIDE(x)     L ## x
 
-#define FOLDERS_NAME_MAX_SIZE 64  //maximum name and section size
+#define FOLDERS_NAME_MAX_SIZE 64				//maximum name and section size
 
 #define FF_UNICODE 0x00000001
 
