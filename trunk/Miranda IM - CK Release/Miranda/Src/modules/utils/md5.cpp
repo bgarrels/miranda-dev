@@ -51,7 +51,7 @@
   1999-05-03 lpd Original version.
  */
 
-// (C) 2005 Joe @ Whale - changed to compile with Miranda
+// (C) 2005 Joe @ Whale - changed to compile with Miranda IM
 
 #include "commonheaders.h"
 
