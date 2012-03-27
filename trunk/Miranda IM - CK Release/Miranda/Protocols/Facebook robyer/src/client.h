@@ -41,7 +41,7 @@ public:
 
 		msgid_ = error_count_ = last_feeds_update_ = last_notification_time_ = 0;
 
-		is_idle_ = invisible_ = is_typing_ = false;
+		https_ = is_idle_ = invisible_ = is_typing_ = false;
 
 		buddies_lock_ = send_message_lock_ = NULL;
 		hMsgCon = NULL;
@@ -75,6 +75,7 @@ public:
 	bool    invisible_;
 	bool    is_typing_;
 	bool	is_idle_;
+	bool	https_;
 	time_t  last_feeds_update_;
 	unsigned __int64 last_notification_time_;
 	int     msgid_;
@@ -141,7 +142,6 @@ public:
 	HANDLE  send_message_lock_;
 
 	bool    buddy_list( );
-	bool    facepiles( );
 	bool	load_friends( );
 	bool    feeds( );
 
@@ -164,15 +164,15 @@ public:
 
 	// HTTP communication
 
-	http::response  flap( const int request_type, std::string* request_data = NULL );
+	http::response  flap( const int request_type, std::string* request_data = NULL, std::string* request_get_data = NULL );
 	bool    save_url(const std::string &url,const std::string &filename, HANDLE &nlc);
 
 	DWORD   choose_security_level( int );
 	int     choose_method( int );
 	std::string choose_proto( int );
-	std::string choose_server( int, std::string* data = NULL );
-	std::string choose_action( int, std::string* data = NULL );
-	std::string choose_request_url( int, std::string* data = NULL );
+	std::string choose_server( int, std::string* data = NULL, std::string* get_data = NULL );
+	std::string choose_action( int, std::string* data = NULL, std::string* get_data = NULL );
+	std::string choose_request_url( int, std::string* data = NULL, std::string* get_data = NULL );
 
 	NETLIBHTTPHEADER*   get_request_headers( int request_type, int* headers_count );
 

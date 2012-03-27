@@ -31,7 +31,6 @@ class facebook_json_parser
 public:
 	FacebookProto* proto;
 	int parse_buddy_list( void*, List::List< facebook_user >* );
-	int parse_facepiles( void*, std::map< std::string, std::string >* );
 	int parse_friends( void*, std::map< std::string, facebook_user* >* );
 	int parse_notifications( void*, std::vector< facebook_notification* >* );
 	int parse_messages( void*, std::vector< facebook_message* >*, std::vector< facebook_notification* >* );

@@ -143,7 +143,6 @@ public:
 
 	// Processing threads
 	void __cdecl ProcessBuddyList(void*);
-	void __cdecl ProcessFacepiles(void*);
 	void __cdecl ProcessFriendList(void*);
 	void __cdecl ProcessMessages(void*);
 	void __cdecl ProcessUnreadMessages(void*);

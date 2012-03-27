@@ -23,13 +23,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 // Version management
-#include "../build.h"
-#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 7, 1)
-#define __VERSION_STRING            "0.0.7.1"
+#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 8, 0)
+#define __VERSION_STRING            "0.0.8.0"
 
 // Product management
 #define FACEBOOK_NAME               "Facebook"
-#define FACEBOOK_URL_HOMEPAGE       "http://www.facebook.com/"
+#define FACEBOOK_URL_HOMEPAGE       "http://www.facebook.com"
 #define FACEBOOK_URL_REQUESTS       "http://www.facebook.com/n/?reqs.php"
 #define FACEBOOK_URL_MESSAGES       "http://www.facebook.com/n/?inbox"
 #define FACEBOOK_URL_NOTIFICATIONS  "http://www.facebook.com/n/?notifications.php"
@@ -94,7 +93,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define FACEBOOK_REQUEST_LOAD_FRIENDS			121 // getting list of all friends
 #define FACEBOOK_REQUEST_DELETE_FRIEND			122 // deleting friends
 #define FACEBOOK_REQUEST_ADD_FRIEND				123 // adding friends
-#define FACEBOOK_REQUEST_FACEPILES              124 // getting list of contacts in chat
 #define FACEBOOK_REQUEST_FEEDS                  125 // getting feeds
 #define FACEBOOK_REQUEST_NOTIFICATIONS			126 // getting notifications
 #define FACEBOOK_REQUEST_RECONNECT              130 // getting __sequence_num__ and __channel_id__
@@ -103,9 +101,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define FACEBOOK_REQUEST_MESSAGES_RECEIVE       301 // receiving messages
 #define FACEBOOK_REQUEST_TYPING_SEND            304 // sending typing notification
 #define FACEBOOK_REQUEST_VISIBILITY             305 // setting chat visibility
-#define FACEBOOK_REQUEST_TABS					306 // closing message window, setting chat visibility
+#define FACEBOOK_REQUEST_TABS					306 // closing message window
 #define	FACEBOOK_REQUEST_ASYNC					307 // marking messages read and getting other things
-#define FACEBOOK_REQUEST_ASYNC_GET				308 // GET version of async request
 
 #define FACEBOOK_RECV_MESSAGE	1
 #define FACEBOOK_SEND_MESSAGE	2
@@ -116,10 +113,10 @@ static const struct
 	const char *name;
 	const char *id;
 } feed_types[] = {
-	{ "Most Recent", "lf" },
-	{ "Status Updates", "app_2915120374" },
-	{ "Top News", "h" },
+	{ "Most Recent", "lf_" }, //h_chr?
+	{ "Wall Posts", "app_2915120374" },
+	{ "Top News", "h_nor" }, //h
 	{ "Photos", "app_2305272732_2392950137" },
 	{ "Links", "app_2309869772" },
-
+	{ "Apps and Games", "appsandgames" },
 };

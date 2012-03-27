@@ -44,9 +44,9 @@ PLUGININFOEX pluginInfo = {
   #endif
 	__VERSION_DWORD,
 	"Provides basic support for Facebook Chat protocol. [Built: "__DATE__" "__TIME__"]",
-	"Michal Zelinka, Robert Pösel",
+	"Michal Zelinka, Robert Posel",
 	"robyer@seznam.cz",
-	"(c) 2009-11 Michal Zelinka, 2011-12 Robert Pösel",
+	"(c) 2009-11 Michal Zelinka, 2011-12 Robert Posel",
 	"http://code.google.com/p/robyer/",
 	UNICODE_AWARE, //not transient
 	0,             //doesn't replace anything built-in

@@ -34,6 +34,7 @@ struct facebook_user
 
 	std::string image_url;
 
+	bool deleted;
 
 	facebook_user( )
 	{
@@ -41,6 +42,7 @@ struct facebook_user
 		this->user_id = this->real_name = this->image_url = "";
 		this->status_id = ID_STATUS_OFFLINE;
 		this->gender = 0;
+		this->deleted = false;
 	}
 
 	facebook_user( facebook_user* fu )
@@ -51,6 +53,7 @@ struct facebook_user
 		this->status_id = fu->status_id;
 		this->user_id = fu->user_id;
 		this->gender = fu->gender;
+		this->deleted = fu->deleted;
 	}
 };
 

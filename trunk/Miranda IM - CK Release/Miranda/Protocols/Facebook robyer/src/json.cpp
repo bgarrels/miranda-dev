@@ -118,9 +118,9 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 			const String& imageUrl = objMember["thumbSrc"];
 
 			current->real_name = utils::text::slashu_to_utf8(
-				utils::text::special_expressions_decode( realName.Value( ) ) );
+			    utils::text::special_expressions_decode( realName.Value( ) ) );
 			current->image_url = utils::text::slashu_to_utf8(
-				utils::text::special_expressions_decode( imageUrl.Value( ) ) );
+			    utils::text::special_expressions_decode( imageUrl.Value( ) ) );
 		}
 	}
 	catch (Reader::ParseException& e)
@@ -139,83 +139,6 @@ int facebook_json_parser::parse_buddy_list( void* data, List::List< facebook_use
 
 	return EXIT_SUCCESS;
 }
-
-int facebook_json_parser::parse_facepiles( void* data, std::map< std::string, std::string > *facepiles )
-{
-	using namespace json;
-
-	try
-	{
-		std::string buddyData = static_cast< std::string* >( data )->substr( 9 );
-		std::istringstream sDocument( buddyData );
-		Object objDocument;
-		Reader::Read(objDocument, sDocument);
-		std::map< std::string, std::string >::iterator it;
-
-		const Object& objRoot = objDocument;
-/*		const Array& infos = objRoot["payload"]["facepile_click_info"];
-
-		for ( Array::const_iterator info( infos.Begin() );
-			info != infos.End(); ++info)
-		{
-			const Object& objMember = *info;
-
-			if (objMember.Find("uid") != objMember.End()) {
-				const Number& id = objMember["uid"];
-				char was_id[32];
-				lltoa( id.Value(), was_id, 10 );
-
-				const String& name = objMember["name"];
-				std::string user_name = utils::text::slashu_to_utf8(
-					utils::text::special_expressions_decode( name.Value() ) );
-				
-				it = facepiles->find( std::string( was_id ) );
-				if ( it == facepiles->end() ) {
-					facepiles->insert( std::make_pair( was_id, user_name ) );
-				}
-			}
-		} */
-
-		// Contacts in chat are getting by parsing html response. Don't know if it will work also for many people in chat room.
-		const String& response_html = objRoot["payload"]["response_html"];
-		std::string contacts = utils::text::slashu_to_utf8( utils::text::special_expressions_decode( response_html.Value( ) ) );
-
-		std::string::size_type pos = 0;
-		while ((pos = contacts.find("<li", pos)) != std::string::npos) {
-			std::string row = contacts.substr(pos, contacts.find("</li>") - pos);
-
-			std::string status = utils::text::source_get_value2( &row, "chat", "\" " ); // "Online" or "Idle"
-			std::string name = utils::text::source_get_value( &row, 2, "title=\"", "\"" );
-			std::string id = utils::text::source_get_value( &row, 3, "href=\"", "/profile.php?id=", "\"" );
-			if (id.empty())
-				id = utils::text::source_get_value( &row, 3, "href=\"", "facebook.com/", "\"" );
-
-			it = facepiles->find( id );
-			if ( it == facepiles->end() ) {
-				facepiles->insert( std::make_pair( id, name ) );
-			}
-
-			pos++;
-		}
-
-	}
-	catch (Reader::ParseException& e)
-	{
-		proto->Log( "!!!!! Caught json::ParseException: %s", e.what() );
-		proto->Log( "      Line/offset: %d/%d", e.m_locTokenBegin.m_nLine + 1, e.m_locTokenBegin.m_nLineOffset + 1 );
-	}
-	catch (const Exception& e)
-	{
-		proto->Log( "!!!!! Caught json::Exception: %s", e.what() );
-	}
-	catch (const std::exception& e)
-	{
-		proto->Log( "!!!!! Caught std::exception: %s", e.what() );
-	}
-
-	return EXIT_SUCCESS;
-}
-
 
 int facebook_json_parser::parse_friends( void* data, std::map< std::string, facebook_user* >* friends )
 {
@@ -246,9 +169,9 @@ int facebook_json_parser::parse_friends( void* data, std::map< std::string, face
 
 			fbu->user_id = member.name;
 			fbu->real_name = utils::text::slashu_to_utf8(
-				utils::text::special_expressions_decode( realName.Value() ) );
+			    utils::text::special_expressions_decode( realName.Value() ) );
 			fbu->image_url = utils::text::slashu_to_utf8(
-				utils::text::special_expressions_decode( imageUrl.Value() ) );
+			    utils::text::special_expressions_decode( imageUrl.Value() ) );
 
 			if (gender.Value() == 1) {
 				fbu->gender = 70; // female
@@ -289,24 +212,27 @@ int facebook_json_parser::parse_notifications( void *data, std::vector< facebook
 		Reader::Read(objDocument, sDocument);
 
 		const Object& objRoot = objDocument;
-		const Object& payload = objRoot["payload"]["markup_map"];
+		const Object& payload = objRoot["payload"]["notifications"];
 
 		for ( Object::const_iterator payload_item( payload.Begin() ); payload_item != payload.End(); ++payload_item)
 		{
 			const Object::Member& member = *payload_item;
+			
+			const Object& objMember = member.element;
 
-			const String& content = member.element;
-
+			const String& content = objMember["markup"];
+			const Number& unread = objMember["unread"];
+			
+			if (unread.Value() == 0) // ignore old notifications
+				continue;
+			
 			std::string text = utils::text::slashu_to_utf8(
 								utils::text::special_expressions_decode( content.Value() ) );
-
-			if (text.find("jewelItemNew") == std::string::npos)
-				continue; // we want only unread notifications
 
 			facebook_notification* notification = new facebook_notification( );
 			
 			notification->text = utils::text::remove_html( utils::text::source_get_value(&text, 1, "<abbr") );
-			notification->link = utils::text::source_get_value(&text, 2, "<a href=\"", "\"");
+			notification->link = utils::text::source_get_value(&text, 3, "<a ", "href=\"", "\"");
 
 			notifications->push_back( notification );
 		}
@@ -361,7 +287,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				const Object& messageContent = objMember["msg"];
 				const String& text = messageContent["text"];
 				//"tab_type":"friend",     objMember["tab_type"]
-		
+        
 				//const Number& time_sent = messageContent["time"];
 //				proto->Log("????? Checking time %15.2f > %15.2f", time_sent.Value(), proto->facy.last_message_time_);
 
@@ -374,10 +300,10 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				} else if (last_msg != text.Value()) {
 					last_msg = text.Value();
 
-					facebook_message* message = new facebook_message( );
+  					facebook_message* message = new facebook_message( );
 					message->message_text = utils::text::special_expressions_decode(
 						utils::text::slashu_to_utf8( text.Value( ) ) );
-					message->time = ::time( NULL );
+					message->time = ::time( NULL ); // TODO: use real time from facebook
 					message->user_id = was_id;
 
 					messages->push_back( message );
@@ -410,7 +336,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 					const String& sender_name = messageContent["sender_name"];
 
 					std::string row = ((const String &)objMember["thread_row"]).Value();
-		
+        
 					//const Number& time_sent = messageContent["timestamp"];
 
 					//proto->Log("????? Checking time %15.2f > %15.2f", time_sent.Value(), proto->facy.last_message_time_);
@@ -418,14 +344,14 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 					if (last_msg != text.Value()) {
 						last_msg = text.Value();
 
-						facebook_message* message = new facebook_message( );
+  						facebook_message* message = new facebook_message( );
 						message->message_text = utils::text::special_expressions_decode(
 							utils::text::slashu_to_utf8( text.Value( ) ) );
 
 						message->sender_name = utils::text::special_expressions_decode(
 							utils::text::slashu_to_utf8( sender_name.Value( ) ) );
 
-						message->time = ::time( NULL );						
+						message->time = ::time( NULL ); // TODO: user real time from facebook
 						message->user_id = was_id; // TODO: Check if we have contact with this ID in friendlist and then do something different?
 
 						if (row.find("uiSplitPic",0) != std::string::npos) {
@@ -449,7 +375,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 							url += to_id.Value();
 
 							proto->Log("      Got multichat message");
-			
+		    
 							TCHAR* szTitle = mir_a2t_cp(title.c_str(), CP_UTF8);
 							TCHAR* szText = mir_a2t_cp(popup_text.c_str(), CP_UTF8);
 							TCHAR* szUrl = mir_a2t_cp(url.c_str(), CP_UTF8);
@@ -483,7 +409,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				lltoa( from.Value(), was_id, 10 );
 
 				const Object& messageContent = objMember["msg"];
-				const String& text = messageContent["text"];
+  				const String& text = messageContent["text"];
 
 				std::string msg = utils::text::special_expressions_decode(
 						utils::text::slashu_to_utf8( text.Value( ) ) );
@@ -513,7 +439,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 					continue;
 
 				const Object& messageContent = objMember["msg"];
-				const String& text = messageContent["text"];
+  				const String& text = messageContent["text"];
 
 				
 				last_msg = text.Value();
@@ -534,7 +460,7 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 				url += to_id.Value();
 
 				proto->Log("      Got multichat message");
-			
+		    
 				TCHAR* szTitle = mir_a2t_cp(title.c_str(), CP_UTF8);
 				TCHAR* szText = mir_a2t_cp(popup_text.c_str(), CP_UTF8);
 				TCHAR* szUrl = mir_a2t_cp(url.c_str(), CP_UTF8);
@@ -559,10 +485,10 @@ int facebook_json_parser::parse_messages( void* data, std::vector< facebook_mess
 
 					facebook_notification* notification = new facebook_notification( );
 					notification->text = utils::text::remove_html(
-						utils::text::special_expressions_decode(
+  						utils::text::special_expressions_decode(
 							utils::text::slashu_to_utf8( text.Value( ) ) ) );
 
-					notification->link = utils::text::special_expressions_decode( link.Value( ) );
+  					notification->link = utils::text::special_expressions_decode( link.Value( ) );
 
 					notifications->push_back( notification );
 				}
