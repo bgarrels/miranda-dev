@@ -68,7 +68,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 __inline static HANDLE CreateProtoServiceFunction(const char *szModule,const char *szService,MIRANDASERVICE serviceProc)
 {
 	char str[MAXMODULELABELLENGTH];
-	mir_snprintf(str, sizeof(str), "%s%s", szModule, szService);
+	_snprintf_s(str, sizeof(str), "%s%s", szModule, szService);
     str[MAXMODULELABELLENGTH-1] = 0;
 	return CreateServiceFunction(str,serviceProc);
 }
