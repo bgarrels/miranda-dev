@@ -432,19 +432,18 @@ int FacebookProto::OnMind(WPARAM,LPARAM)
 
 int FacebookProto::VisitProfile(WPARAM wParam,LPARAM lParam)
 {
-	if (wParam == NULL)
-	{ // self contact
-		CallService(MS_UTILS_OPENURL,1,reinterpret_cast<LPARAM>(FACEBOOK_URL_PROFILE));
-		return 0;
-	}
-
 	HANDLE hContact = reinterpret_cast<HANDLE>(wParam);
 
 	DBVARIANT dbv;
-	if( !DBGetContactSettingString(hContact,m_szModuleName,"Homepage",&dbv) )
+	if( wParam != 0 && !DBGetContactSettingString(hContact,m_szModuleName,"Homepage",&dbv) )
 	{
 		CallService(MS_UTILS_OPENURL,1,reinterpret_cast<LPARAM>(dbv.pszVal));
 		DBFreeVariant(&dbv);
+	} else {
+		// self contact, probably
+		// TODO: why isn't wParam == 0 when is status menu moved to main menu?
+		CallService(MS_UTILS_OPENURL,1,reinterpret_cast<LPARAM>(FACEBOOK_URL_PROFILE));
+		return 0;
 	}
 
 	return 0;

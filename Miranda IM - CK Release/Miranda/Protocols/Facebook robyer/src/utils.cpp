@@ -32,6 +32,17 @@ std::string utils::url::encode(const std::string &s)
 	return ret;
 }
 
+std::string utils::url::decode(std::string data)
+{
+	// TODO: Better and universal method?
+	utils::text::replace_all( &data, "%2F", "/" );
+	utils::text::replace_all( &data, "%3F", "?" );
+	utils::text::replace_all( &data, "%3D", "=" );
+	utils::text::replace_all( &data, "%26", "&" );
+
+	return data;
+}
+
 std::string utils::time::unix_timestamp( )
 {
 	time_t in = ::time( NULL );

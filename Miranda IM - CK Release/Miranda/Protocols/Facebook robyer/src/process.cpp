@@ -48,11 +48,11 @@ void FacebookProto::ProcessBuddyList( void* data )
 
 		facebook_user* fbu;
 
-		if ( i->data->status_id == ID_STATUS_OFFLINE )
+		if ( i->data->status_id == ID_STATUS_OFFLINE || i->data->deleted )
 		{
 			fbu = i->data;
 
-			if (fbu->handle)
+			if (fbu->handle && !fbu->deleted)
 				DBWriteContactSettingWord(fbu->handle, m_szModuleName, "Status", ID_STATUS_OFFLINE);
 
 			std::string to_delete( i->key );
@@ -109,66 +109,6 @@ exit:
 	delete resp;
 }
 
-void FacebookProto::ProcessFacepiles( void* data )
-{
-	if ( data == NULL )
-		return;
-
-	send_chat *resp = static_cast<send_chat*>(data);
-
-	if ( isOffline() )
-		goto exit;
-
-	LOG("***** Starting processing facepiles");	
-
-	CODE_BLOCK_TRY
-
-	std::map< std::string, std::string > facepiles;
-
-	facebook_json_parser* p = new facebook_json_parser( this );
-	p->parse_facepiles( &(resp->msg), &facepiles );
-	delete p;
-
-	std::map< std::string, std::string >::iterator iter;
-
-	char *chat_users = this->GetChatUsers(resp->chat_id.c_str());
-	std::string users = chat_users;
-	mir_free(chat_users);
-
-	std::vector<std::string> users_list;
-	utils::text::explode(users, " ", &users_list);
-
-	for( std::vector<std::string>::size_type i=0; i<users_list.size( ); i++) {
-		iter = facepiles.find( users_list[i] );
-		if (iter == facepiles.end()) {
-			// Contact is now offline, remove him from chat	
-			this->RemoveChatContact(resp->chat_id.c_str(), users_list[i].c_str());
-			LOG("      Now offline facepile (%s): [%s]", resp->chat_id.c_str(), users_list[i].c_str());
-		} else {
-			facepiles.erase(iter);
-		}
-	}
-
-	for ( iter = facepiles.begin( ); iter != facepiles.end(); ++iter )
-	{
-		// These contacts are newly online, add them...
-		this->AddChatContact(resp->chat_id.c_str(), iter->first.c_str(), iter->second.c_str());		
-		LOG("      Now online facepile (%s): [%s] %s", resp->chat_id.c_str(), iter->first.c_str(), iter->second.c_str());
-	}
-
-	LOG("***** Facepiles processed");
-
-	CODE_BLOCK_CATCH
-
-	LOG("***** Error processing facepiles: %s", e.what());
-
-	CODE_BLOCK_END
-
-exit:
-	delete resp;
-}
-
-
 void FacebookProto::ProcessFriendList( void* data )
 {
 	if ( data == NULL )
@@ -214,7 +154,16 @@ void FacebookProto::ProcessFriendList( void* data )
 					// - but what with contacts, that was added after logon?
 				// Update gender
 				if ( DBGetContactSettingByte(hContact, m_szModuleName, "Gender", 0) != fbu->gender )
-					DBWriteContactSettingByte(hContact, m_szModuleName, "Gender", fbu->gender );
+					DBWriteContactSettingByte(hContact, m_szModuleName, "Gender", fbu->gender);
+
+				// TODO: Remove in next version
+				if( !DBGetContactSettingString(hContact, m_szModuleName, "MirVer", &dbv) ) {
+					update_required = strcmp( dbv.pszVal, FACEBOOK_NAME ) != 0;
+					DBFreeVariant(&dbv);
+				}
+				if (update_required) {
+					DBWriteContactSettingString(hContact, m_szModuleName, "MirVer", FACEBOOK_NAME);
+				}
 
 				// Update real name
 				if ( !DBGetContactSettingUTF8String(hContact, m_szModuleName, FACEBOOK_KEY_NAME, &dbv) )
@@ -256,7 +205,7 @@ void FacebookProto::ProcessFriendList( void* data )
 				// Wasnt we already been notified about this contact?
 				if ( !DBGetContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, 0) 
 					&& !DBGetContactSettingByte(hContact, m_szModuleName, FACEBOOK_KEY_CONTACT_TYPE, 0)	) { // And is this contact "on-server" contact?
-					
+
 					DBWriteContactSettingDword(hContact, m_szModuleName, FACEBOOK_KEY_DELETED, ::time(NULL));
 
 					std::string contactname = id;
@@ -306,13 +255,23 @@ void FacebookProto::ProcessUnreadMessages( void* )
 {
 	facy.handle_entry( "messages" );
 
-	std::string data = "sk=inbox&query=is%3Aunread";
+	std::string get_data = "sk=inbox&query=is%3Aunread";
+
+	std::string data = "post_form_id=";
+	data += ( facy.post_form_id_.length( ) ) ? facy.post_form_id_ : "0";
+	data += "&fb_dtsg=" + facy.dtsg_;
+	data += "&post_form_id_source=AsyncRequest&lsd=&phstamp=";
+	data += utils::time::mili_timestamp();
+	data += "&__user=";
+	data += facy.self_.user_id;
 
 	// Get unread inbox threads
-	http::response resp = facy.flap( FACEBOOK_REQUEST_ASYNC_GET, &data );
+	http::response resp = facy.flap( FACEBOOK_REQUEST_ASYNC, &data, &get_data );
+
+	// sk=inbox,  sk=other
 
 	// Process result data
-	facy.validate_response(&resp);
+	facy.validate_response(&resp);	
 
 	if (resp.code != HTTP_CODE_OK) {
 		facy.handle_error( "messages" );
@@ -325,15 +284,16 @@ void FacebookProto::ProcessUnreadMessages( void* )
 
 	while ( ( pos = threadlist.find( "<li class=\\\"threadRow noDraft unread", pos ) ) != std::string::npos )
 	{
-		std::string::size_type pos2 = threadlist.find( "<\\/li", pos );		
+		std::string::size_type pos2 = threadlist.find( "/li>", pos );
 		std::string thread_content = threadlist.substr( pos, pos2 - pos );
 
 		pos = pos2;
 
-		data = "sk=inbox&query=is%3Aunread&thread_query=is%3Aunread&action=read&tid=";
-		data += utils::text::source_get_value( &thread_content, 2, "id=\\\"", "\\\"" );
+		get_data = "sk=inbox&query=is%3Aunread&thread_query=is%3Aunread&action=read&tid=";
+		get_data += utils::text::source_get_value( &thread_content, 2, "id=\\\"", "\\\"" );
 		
-		resp = facy.flap( FACEBOOK_REQUEST_ASYNC_GET, &data );
+		resp = facy.flap( FACEBOOK_REQUEST_ASYNC, &data, &get_data );
+		// TODO: move this to new thread...
 
 		facy.validate_response(&resp);
 
@@ -342,7 +302,7 @@ void FacebookProto::ProcessUnreadMessages( void* )
 			continue;
 		}
 		
-		std::string messageslist = utils::text::slashu_to_utf8(resp.data);
+		std::string messageslist = utils::text::slashu_to_utf8(resp.data);		
 		
 		std::string user_id = utils::text::source_get_value( &messageslist, 2, "single_thread_id\":", "," );
 		if (user_id.empty()) {
@@ -350,38 +310,96 @@ void FacebookProto::ProcessUnreadMessages( void* )
 			continue;
 		}
 
-		messageslist = utils::text::source_get_value( &messageslist, 3, "class=\\\"MessagingMessage", "MessagingMessageUnread", "class=\\\"MessagingComposer" );
-
 		facebook_user fbu;
 		fbu.user_id = user_id;
 
 		HANDLE hContact = AddToContactList(&fbu);
+		// TODO: if contact is newly added, get his user info
+		// TODO: maybe create new "receiveMsg" function and use it for offline and channel messages?
 
-		pos2 = 0;		
-		while ( ( pos2 = messageslist.find( "class=\\\"content noh", pos2 ) ) != std::string::npos )
-		{	
-			std::string message_text;
-			message_text = messageslist.substr(pos2, messageslist.find( "<\\/div", pos2) + 6 - pos2);
-			message_text = utils::text::source_get_value( &message_text, 2, "\\\">", "<\\/div" );
-			message_text = utils::text::trim(
-							utils::text::special_expressions_decode(
-								utils::text::remove_html( message_text ) ) );
+		pos2 = 0;
+		while ( ( pos2 = messageslist.find( "class=\\\"MessagingMessage ", pos2 ) ) != std::string::npos ) {
+			pos2 += 8;
+			std::string strclass = messageslist.substr(pos2, messageslist.find("\\\"", pos2) - pos2);
 
-			PROTORECVEVENT recv = {0};
-			CCSDATA ccs = {0};
+			if (strclass.find("MessagingMessageUnread") == std::string::npos)
+				continue; // ignoring old messages
 
-			recv.flags = PREF_UTF;
-			recv.szMessage = const_cast<char*>(message_text.c_str());
-			recv.timestamp = static_cast<DWORD>(::time(NULL));
+			//std::string::size_type pos3 = messageslist.find( "/li>", pos2 ); // TODO: ne proti tomuhle li, protože i přílohy mají li...
+			std::string::size_type pos3 = messageslist.find( "class=\\\"MessagingMessage ", pos2 );
+			std::string messagesgroup = messageslist.substr( pos2, pos3 - pos2 );
 
-			ccs.hContact = hContact;
-			ccs.szProtoService = PSR_MESSAGE;
-			ccs.lParam = reinterpret_cast<LPARAM>(&recv);
-			CallService(MS_PROTO_CHAINRECV,0,reinterpret_cast<LPARAM>(&ccs));
+			DWORD timestamp = NULL;
+			std::string strtime = utils::text::source_get_value( &messagesgroup, 2, "data-utime=\\\"", "\\\"" );
+			if (!utils::conversion::from_string<DWORD>(timestamp, strtime, std::dec)) {
+				timestamp = static_cast<DWORD>(::time(NULL));
+			}
 
-			pos2++;
+			pos3 = 0;
+			while ( ( pos3 = messagesgroup.find( "class=\\\"content noh", pos3 ) ) != std::string::npos )
+			{
+
+				std::string message_attachments = "";
+				std::string::size_type pos4 = 0;
+				if ((pos4 = messagesgroup.find( "class=\\\"attachments\\\"", pos4)) != std::string::npos) {
+					std::string attachments = messagesgroup.substr( pos4, messagesgroup.find("<\\/ul", pos4) - pos4 );
+
+					pos4 = 0;
+					while ( ( pos4 = attachments.find("<li", pos4) ) != std::string::npos ) {
+						std::string attachment = attachments.substr( pos4, attachments.find("<\\/li>", pos4) - pos4 );
+						std::string link = utils::text::source_get_value( &attachment, 4, "<a class=", "attachment", "href=\\\"", "\\\"" );
+
+						link = utils::text::trim(
+								utils::text::special_expressions_decode( link ) );
+
+						// or first: std::string name = utils::text::source_get_value( &attachment, 4, "<a class=", "attachment", ">", "<\\/a>" );
+						std::string name = utils::text::trim(
+								utils::text::special_expressions_decode(
+									utils::text::remove_html( attachment ) ) );
+
+						if (link.find("/ajax/messaging/attachments/photo/dialog.php?uri=") != std::string::npos) {
+							link = link.substr(49);
+							link = utils::url::decode(link);
+						}
+
+						message_attachments += "< " + name + " > " + FACEBOOK_URL_HOMEPAGE;
+						message_attachments += link + "\r\n";
+
+						pos4++;
+					}
+
+				}
+
+				std::string message_text = messagesgroup.substr(pos3, messagesgroup.find( "<\\/div", pos3 ) + 6 - pos3);
+				message_text = utils::text::source_get_value( &message_text, 2, "\\\">", "<\\/div" );
+				message_text = utils::text::trim(
+								utils::text::special_expressions_decode(
+									utils::text::remove_html( message_text ) ) );
+
+				if (!message_attachments.empty()) {
+					if (!message_text.empty())
+						message_text += "\r\n\r\n";
+
+					message_text += Translate("Attachments:");
+					message_text += "\r\n" + message_attachments;
+				}
+
+				PROTORECVEVENT recv = {0};
+				CCSDATA ccs = {0};
+
+				recv.flags = PREF_UTF;
+				recv.szMessage = const_cast<char*>(message_text.c_str());
+				recv.timestamp = timestamp;
+
+				ccs.hContact = hContact;
+				ccs.szProtoService = PSR_MESSAGE;
+				ccs.lParam = reinterpret_cast<LPARAM>(&recv);
+				CallService(MS_PROTO_CHAINRECV,0,reinterpret_cast<LPARAM>(&ccs));
+
+				pos3++;
+			}
+
 		}
-
 		
 	}
 
@@ -417,6 +435,9 @@ void FacebookProto::ProcessMessages( void* data )
 			fbu.user_id = messages[i]->user_id;
 
 			HANDLE hContact = AddToContactList(&fbu, false, messages[i]->sender_name.c_str());
+
+			// TODO: if contact is newly added, get his user info
+			// TODO: maybe create new "receiveMsg" function and use it for offline and channel messages?
 
 			PROTORECVEVENT recv = {0};
 			CCSDATA ccs = {0};

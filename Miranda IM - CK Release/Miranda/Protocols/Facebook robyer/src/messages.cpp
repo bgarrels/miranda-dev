@@ -131,11 +131,12 @@ void FacebookProto::SendTypingWorker(void *p)
 		data += ( typing->status == PROTOTYPE_SELFTYPING_ON ) ? "1" : "0"; // PROTOTYPE_SELFTYPING_OFF
 		data += "&to=";
 		data += dbv.pszVal;
-		data += "&source=chat";
+		data += "&source=mercury-chat";
 		data += "&fb_dtsg=" + facy.dtsg_;
 		data += "&post_form_id=";
 		data += ( facy.post_form_id_.length( ) ) ? facy.post_form_id_ : "0";
-		data += "&post_form_id_source=AsyncRequest&lsd=";
+		data += "&post_form_id_source=AsyncRequest&lsd=&phstamp=0&__user=";
+		data += facy.self_.user_id;
 
 		http::response resp = facy.flap( FACEBOOK_REQUEST_TYPING_SEND, &data );
 
@@ -155,8 +156,8 @@ void FacebookProto::MessagingWorker(void *p)
 	if (data->type == FACEBOOK_RECV_MESSAGE)
 		facy.chat_mark_read( data->user_id );
 
-	if ( DBGetContactSettingByte(NULL, m_szModuleName, FACEBOOK_KEY_CLOSE_WINDOWS_ENABLE, DEFAULT_CLOSE_WINDOWS_ENABLE ) )
-		facy.close_chat( data->user_id );
+//	if ( DBGetContactSettingByte(NULL, m_szModuleName, FACEBOOK_KEY_CLOSE_WINDOWS_ENABLE, DEFAULT_CLOSE_WINDOWS_ENABLE ) )
+//		facy.close_chat( data->user_id );
 
 	delete data;
 }

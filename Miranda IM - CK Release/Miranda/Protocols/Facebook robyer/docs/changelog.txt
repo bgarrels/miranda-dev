@@ -1,3 +1,22 @@
+0.0.8.0
+-------
+
+# For running plugin is required Miranda 0.9.43 or newer
+ # Plugin is compiled with VS2005 (Fb x86) and a VS2010 (Fb x64)
+ + Added 2 types of newsfeeds: Photos and Links
+ * Reworked options
+ ! Fixed setting to notify different type of newsfeeds
+ ! Fixed and improved parsing newsfeeds
+ ! Fixed getting groupchat messages which contains %
+ ! Fixed not working login
+ ! Improved deleting of contacts
+ + Support for Miranda's EV_PROTO_ONCONTACTDELETED events
+ + Added missing GUID for x64 version and updated user-agent
+ ! Some other minor fixes or improvements
+ ! Fixed item 'Visit Profile' when protocol menus are moved to Main menu
+ * Updated language pack file (for translators) 
+ - Disabled option for closing message windows on website (temporary doesnt work)
+
 0.0.7.0
 -------
 

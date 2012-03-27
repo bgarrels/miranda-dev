@@ -48,16 +48,11 @@ LRESULT CALLBACK PopupDlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 		TCHAR* data = (TCHAR*)PUGetPluginData(hwnd);
 		if (data != NULL)
 		{
-//			char *url = mir_t2a_cp(data,CP_UTF8);
-			std::string url2 = mir_t2a_cp(data,CP_UTF8);
-			std::string url = "http://www.facebook.com";
-			if ( url2.substr(0,4) != "http" )
-			{
-				url.append(url2);
-				CallService(MS_UTILS_OPENURL, (WPARAM) 1, (LPARAM) url.c_str() );
-			} else {
-				CallService(MS_UTILS_OPENURL, (WPARAM) 1, (LPARAM) url2.c_str() );
-			}
+			std::string url = mir_t2a_cp(data,CP_UTF8);
+			if ( url.substr(0,4) != "http" )
+				url = FACEBOOK_URL_HOMEPAGE + url; // make absolute url
+
+			CallService(MS_UTILS_OPENURL, (WPARAM) 1, (LPARAM) url.c_str() );
 		}
 
 		// After a click, destroy popup

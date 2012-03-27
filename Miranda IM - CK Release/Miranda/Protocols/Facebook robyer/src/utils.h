@@ -65,6 +65,7 @@ namespace utils
 	namespace url
 	{
 		std::string encode(const std::string &s);
+		std::string decode(std::string data);
 	};
 
 	namespace time
@@ -96,6 +97,12 @@ namespace utils
 	namespace conversion
 	{
 		std::string to_string( void*, WORD type );
+		
+		template <class T>
+		bool from_string(T& t, const std::string& s, std::ios_base& (*f)(std::ios_base&)) {
+			std::istringstream iss(s);
+			return !(iss >> f >> t).fail();				
+		}
 	};
 
 	namespace debug
