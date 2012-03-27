@@ -26,7 +26,7 @@ unit ActiveIMM_TLB;
 // manual modifications will be lost.                                         
 // ************************************************************************ //
 
-// PASTLWTR : $Revision:   1.88.1.0.1.0  $
+// PASTLWTR : $Revision$
 // File generated on 04/03/2001 11:32:13 PM from Type Library described below.
 
 // *************************************************************************//
