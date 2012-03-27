@@ -1,5 +1,4 @@
 /*
-
 Miranda IM: the free IM client for Microsoft* Windows*
 
 Copyright 2000-2012 Miranda IM project, 
@@ -45,8 +44,8 @@ Cavets:
 
 	The function must be reimplemented across MT plugins, since thread
 	creation depends on CRT which can not be shared.
-
 */
+
 UINT_PTR forkthread (
 	void (__cdecl *threadcode)(void*),
 	unsigned long stacksize,

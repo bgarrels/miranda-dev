@@ -1,13 +1,12 @@
 /*
-
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2009 Miranda ICQ/IM project,
+Copyright 2000 Alexandre Julliard of Wine project 
+(UTF-8 conversion routines)
+
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
-
- Copyright 2000 Alexandre Julliard of Wine project 
- (UTF-8 conversion routines)
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
