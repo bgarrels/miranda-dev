@@ -1,15 +1,19 @@
-{.$DEFINE USE_MMI}
 {$INCLUDE compilers.inc}
+{$IFDEF Miranda}
+  {.$DEFINE Use_MMI}
+{$ENDIF}
 unit common;
 
 interface
 
 uses
 windows
-{$IFDEF USE_MMI}
+{$IFDEF Miranda}
 ,m_api
 {$ENDIF}
 ;
+
+procedure ShowDump(ptr:pbyte;len:integer);
 
 Const {- Character sets -}
   sBinNum   = ['0'..'1'];
@@ -56,6 +60,8 @@ const
   SIGN_REVERSEBOM = $FFFE;
   SIGN_UTF8       = $BFBBEF;
 
+function BSwap(value:dword):dword;
+
 function Encode(dst,src:pAnsiChar):PAnsiChar;
 function Decode(dst,src:pAnsiChar):PAnsiChar;
 function GetTextFormat(Buffer:pByte;sz:cardinal):integer;
@@ -67,7 +73,7 @@ function IIF(cond:bool;ret1,ret2:Extended ):Extended;  overload;
 function IIF(cond:bool;ret1,ret2:tDateTime):tDateTime; overload;
 function IIF(cond:bool;ret1,ret2:pointer  ):pointer;   overload;
 function IIF(cond:bool;ret1,ret2:string   ):string;    overload;
-{$IFNDEF DELPHI7_UP}
+{$IFNDEF DELPHI_7_UP}
 function IIF(cond:bool;ret1,ret2:variant  ):variant;   overload;
 {$ENDIF}
 
@@ -90,11 +96,15 @@ function WideToANSI(src:PWideChar;var dst:PAnsiChar;cp:dword=CP_ACP):PAnsiChar;
 function ANSIToWide(src:PAnsiChar;var dst:PWideChar;cp:dword=CP_ACP):PWideChar;
 function ANSIToUTF8(src:PAnsiChar;var dst:PAnsiChar;cp:dword=CP_ACP):PAnsiChar;
 function UTF8toANSI(src:PAnsiChar;var dst:PAnsiChar;cp:dword=CP_ACP):PAnsiChar;
-function UTF8toWide(src:PAnsiChar;var dst:PWideChar;len:cardinal=dword(-1)):PWideChar;
+function UTF8toWide(src:PAnsiChar;var dst:PWideChar;len:cardinal=cardinal(-1)):PWideChar;
 function WidetoUTF8(src:PWideChar;var dst:PAnsiChar):PAnsiChar;
 
-function FastWideToAnsiBuf(src:PWideChar;dst:PAnsiChar;len:cardinal=dword(-1)):PAnsiChar;
-function FastAnsiToWideBuf(src:PAnsiChar;dst:PWideChar;len:cardinal=dword(-1)):PWideChar;
+function CharWideToUTF8(src:WideChar;var dst:pAnsiChar):integer;
+function CharUTF8ToWide(src:pAnsiChar;pin:pinteger=nil):WideChar;
+function CharUTF8Len(src:pAnsiChar):integer;
+
+function FastWideToAnsiBuf(src:PWideChar;dst:PAnsiChar;len:cardinal=cardinal(-1)):PAnsiChar;
+function FastAnsiToWideBuf(src:PAnsiChar;dst:PWideChar;len:cardinal=cardinal(-1)):PWideChar;
 function FastWideToAnsi   (src:PWideChar;var dst:PAnsiChar):PAnsiChar;
 function FastAnsiToWide   (src:PAnsiChar;var dst:PWideChar):PWideChar;
 
@@ -112,8 +122,8 @@ function StrReplace (src,SubStr,NewStr:PAnsiChar):PAnsiChar;
 function StrReplaceW(src,SubStr,NewStr:pWideChar):PWideChar;
 function CharReplace (dst:pAnsiChar;old,new:AnsiChar):PAnsiChar;
 function CharReplaceW(dst:pWideChar;old,new:WideChar):PWideChar;
-function StrCmp (a,b:PAnsiChar;n:cardinal=$FFFFFFFF):integer;
-function StrCmpW(a,b:PWideChar;n:cardinal=$FFFFFFFF):integer;
+function StrCmp (a,b:PAnsiChar;n:cardinal=0):integer;
+function StrCmpW(a,b:PWideChar;n:cardinal=0):integer;
 function StrEnd (const a:PAnsiChar):PAnsiChar;
 function StrEndW(const a:PWideChar):PWideChar;
 function StrScan (src:PAnsiChar;c:AnsiChar):PAnsiChar;
@@ -137,6 +147,7 @@ function StrIndexW(const aStr, aSubStr: PWideChar):integer;
 
 procedure FillWord(var buf;count:cardinal;value:word); register;
 function CompareMem(P1, P2: Pointer; Length: Integer): Boolean;
+
 function Min(a,b:integer):integer;
 function Max(a,b:integer):integer;
 
@@ -194,6 +205,23 @@ function isPathAbsolute(path:PAnsiChar):boolean; overload;
 
 implementation
 
+function BSwap(value:dword):dword;
+  {$IFNDEF WIN64}
+begin
+  asm
+    mov   eax,value
+    bswap eax
+    mov   result,eax
+  end;
+  {$ELSE}
+begin
+  result:=((value and $000000FF) shl 6) +
+          ((value and $0000FF00) shl 2) +
+          ((value and $00FF0000) shr 2) +
+          ((value and $FF000000) shr 6);
+  {$ENDIF}
+end;
+
 function Encode(dst,src:pAnsiChar):PAnsiChar;
 begin
   while src^<>#0 do
@@ -220,7 +248,7 @@ begin
     if (src^='%') and ((src+1)^ in sHexNum) and ((src+2)^ in sHexNum) then
     begin
       inc(src);
-      dst^:=chr(HexToInt(src,2));
+      dst^:=AnsiChar(HexToInt(src,2));
       inc(src);
     end
     else
@@ -376,7 +404,7 @@ function IIF(cond:bool;ret1,ret2:string):string; overload;
 begin
   if cond then result:=ret1 else result:=ret2;
 end;
-{$IFNDEF DELPHI7_UP}
+{$IFNDEF DELPHI_7_UP}
 function IIF(cond:bool;ret1,ret2:variant):variant; overload;
 begin
   if cond then result:=ret1 else result:=ret2;
@@ -658,7 +686,76 @@ begin
   end;
 end;
 
-function UTF8toWide(src:PAnsiChar; var dst:PWideChar; len:cardinal=dword(-1)):PWideChar;
+function CharWideToUTF8(src:WideChar;var dst:pAnsiChar):integer;
+begin
+  if src<#$0080 then
+  begin
+    dst^:=AnsiChar(src);
+    result:=1;
+  end
+  else if src<#$0800 then
+  begin
+    dst^:=AnsiChar($C0 or (ord(src) shr 6));
+    inc(dst);
+    dst^:=AnsiChar($80 or (ord(src) and $3F));
+    result:=2;
+  end
+  else
+  begin
+    dst^:=AnsiChar($E0 or (ord(src) shr 12));
+    inc(dst);
+    dst^:=AnsiChar($80 or ((ord(src) shr 6) and $3F));
+    inc(dst);
+    dst^:=AnsiChar($80 or (ord(src) and $3F));
+    result:=3;
+  end;
+  inc(dst); dst^:=#0;
+end;
+
+function CharUTF8ToWide(src:pAnsiChar;pin:pinteger=nil):WideChar;
+var
+  cnt:integer;
+  w:word;
+begin
+  if ord(src^)<$80 then
+  begin
+    w:=ord(src^);
+    cnt:=1;
+  end
+  else if (ord(src^) and $E0)=$E0 then
+  begin
+    w:=(ord(src^) and $1F) shl 12;
+    inc(src);
+    w:=w or (((ord(src^))and $3F) shl 6);
+    inc(src);
+    w:=w or (ord(src^) and $3F);
+    cnt:=3;
+  end
+  else
+  begin
+    w:=(ord(src^) and $3F) shl 6;
+    inc(src);
+    w:=w or (ord(src^) and $3F);
+    cnt:=2;
+  end;
+  if pin<>nil then
+    pin^:=cnt;
+  result:=WideChar(w);
+end;
+
+function CharUTF8Len(src:pAnsiChar):integer;
+begin
+{!!}
+  if (ord(src^) and $80)=0 then
+    result:=1
+  else if (ord(src^) and $E0)=$E0 then
+    result:=3
+  else
+    result:=2;
+{}
+end;
+
+function UTF8toWide(src:PAnsiChar; var dst:PWideChar; len:cardinal=cardinal(-1)):PWideChar;
 var
   w:word;
   p:PWideChar;
@@ -739,7 +836,8 @@ begin
   result:=dst;
 end;
 
-procedure FillWord(var buf;count:cardinal;value:word); register; assembler;
+procedure FillWord(var buf;count:cardinal;value:word); register;
+{$IFNDEF WIN64}assembler;
 {
   PUSH EDI 
   MOV EDI, ECX // Move Value To Write 
@@ -766,7 +864,19 @@ asm
   pop  edi
 }
 end;
-
+{$ELSE}
+var
+  ptr:pword;
+  i:integer;
+begin
+  ptr:=pword(@buf);
+  for i:=0 to count-1 do
+  begin
+    ptr^:=value;
+    inc(ptr);
+  end;
+end;
+{$ENDIF}
 // from SysUtils
 { Delphi 7.0
 function CompareMem(P1, P2: Pointer; Length: Integer): Boolean; assembler;
@@ -857,8 +967,25 @@ asm
 end;
 {$ELSE}
 function CompareMem(P1, P2: Pointer; Length: Integer): Boolean;
+  {$IFNDEF COMPILER_16_UP}
 begin
   result:=CompareByte(P1,P2,Length)=0;
+  {$ELSE}
+var
+  i:integer;
+begin
+  for i:=0 to Length-1 do
+  begin
+    if pByte(p1)^<>pbyte(p2)^ then
+    begin
+      result:=false;
+      exit;
+    end;
+    inc(pbyte(p1));
+    inc(pbyte(p2));
+  end;
+  result:=true;
+  {$ENDIF}
 end; 
 {$ENDIF}
 
@@ -880,7 +1007,7 @@ end;
 
 function mGetMem(var dst;size:integer):pointer;
 begin
-{$IFDEF USE_MMI}
+{$IFDEF Use_MMI}
   if @mmi.malloc<>nil then
     pointer(dst):=mmi.malloc(size)
   else
@@ -893,7 +1020,7 @@ procedure mFreeMem(var ptr);
 begin
   if pointer(ptr)<>nil then
   begin
-{$IFDEF USE_MMI}
+{$IFDEF UseMMI}
     if @mmi.free<>nil then
       mmi.free(pointer(ptr))
     else
@@ -905,7 +1032,7 @@ end;
 
 function mReallocMem(var dst; size:integer):pointer;
 begin
-{$IFDEF USE_MMI}
+{$IFDEF Use_MMI}
   if @mmi.malloc<>nil then
     pointer(dst):=mmi.realloc(pointer(dst),size)
   else
@@ -1318,7 +1445,7 @@ begin
   end;
 end;
 
-function StrCmp(a,b:PAnsiChar;n:cardinal=$FFFFFFFF):integer; // CompareString
+function StrCmp(a,b:PAnsiChar;n:cardinal=0):integer; // CompareString
 begin
   result:=0;
   if (a=nil) and (b=nil) then
@@ -1328,18 +1455,17 @@ begin
     result:=-1;
     exit;
   end;
-  while n>0 do
-  begin
+  repeat
     result:=ord(a^)-ord(b^);
     if (result<>0) or (a^=#0) then
       break;
     inc(a);
     inc(b);
     dec(n);
-  end;
+  until n=0;
 end;
 
-function StrCmpW(a,b:PWideChar;n:cardinal=$FFFFFFFF):integer;
+function StrCmpW(a,b:PWideChar;n:cardinal=0):integer;
 begin
   result:=0;
   if (a=nil) and (b=nil) then
@@ -1349,15 +1475,14 @@ begin
     result:=-1;
     exit;
   end;
-  while n>0 do
-  begin
+  repeat
     result:=ord(a^)-ord(b^);
     if (result<>0) or (a^=#0) then
       break;
     inc(a);
     inc(b);
     dec(n);
-  end;
+  until n=0;
 end;
 
 function StrEnd(const a:PAnsiChar):PAnsiChar;
@@ -1608,15 +1733,16 @@ end;
 
 function Extract(s:PAnsiChar;name:Boolean=true):PAnsiChar;
 var
-  i,j:integer;
+  i:integer;
 begin
   i:=StrLen(s)-1;
-  j:=i;
+//  j:=i;
   while (i>=0) and ((s[i]<>'\') and (s[i]<>'/')) do dec(i);
   if name then
   begin
-    mGetMem(result,(j-i+1));
-    StrCopy(result,s+i+1);
+    StrDup(result,s+i+1);
+//    mGetMem(result,(j-i+1));
+//    StrCopy(result,s+i+1);
   end
   else
   begin
@@ -1626,15 +1752,16 @@ end;
 
 function ExtractW(s:pWideChar;name:Boolean=true):pWideChar;
 var
-  i,j:integer;
+  i:integer;
 begin
   i:=StrLenW(s)-1;
-  j:=i;
+//  j:=i;
   while (i>=0) and ((s[i]<>'\') and (s[i]<>'/')) do dec(i);
   if name then
   begin
-    mGetMem(result,(j-i+1)*SizeOf(WideChar));
-    StrCopyW(result,s+i+1);
+    StrDupW(result,s+i+1);
+//    mGetMem(result,(j-i+1)*SizeOf(WideChar));
+//    StrCopyW(result,s+i+1);
   end
   else
   begin
@@ -2104,7 +2231,7 @@ begin
   end;
 end;
 
-function FastWideToAnsiBuf(src:PWideChar;dst:PAnsiChar;len:cardinal=dword(-1)):PAnsiChar;
+function FastWideToAnsiBuf(src:PWideChar;dst:PAnsiChar;len:cardinal=cardinal(-1)):PAnsiChar;
 begin
   result:=dst;
   if src<>nil then
@@ -2139,7 +2266,7 @@ begin
   result:=dst;
 end;
 
-function FastAnsiToWideBuf(src:PAnsiChar;dst:PWideChar;len:cardinal=dword(-1)):PWideChar;
+function FastAnsiToWideBuf(src:PAnsiChar;dst:PWideChar;len:cardinal=cardinal(-1)):PWideChar;
 begin
   result:=dst;
   if src<>nil then
@@ -2186,6 +2313,24 @@ begin
           (StrPos(path,'://')<>nil);
 end;
 
+procedure ShowDump(ptr:pbyte;len:integer);
+var
+  buf: array of ansichar;
+  i:integer;
+  p:pAnsiChar;
+  p1:pByte;
+begin
+  SetLength(buf,len*3+1);
+  p:=@buf[0];
+  p1:=ptr;
+  for i:=0 to len-1 do
+  begin
+    IntToHex(p,p1^,2);
+    inc(p,2);
+    inc(p1);
+  end;
+  messageboxa(0,@buf[0],'',0);
+end;
 begin
   CheckSystem;
 end.

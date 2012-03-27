@@ -50,7 +50,7 @@
 {                                                                                                  }
 {**************************************************************************************************}
 
-// Last modified: $Date: 2005/12/26 20:30:07 $
+// Last modified: $Date$
 // For history see end of file
 
 unit hpp_JclSysUtils;
