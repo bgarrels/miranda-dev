@@ -21,7 +21,7 @@
   ghost@aladdin.com
 
  */
-/* $Id: md5.c 2874 2006-05-16 21:38:00Z ghazan $ */
+/* $Id$ */
 /*
   Independent implementation of MD5 (RFC 1321).
 
