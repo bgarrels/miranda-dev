@@ -24,9 +24,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 File name      : $Source: /cvsroot/miranda/miranda/plugins/png2dib/m_png.h,v $
-Revision       : $Revision: 3502 $
-Last change on : $Date: 2006-08-15 23:21:49 +0200 (Di, 15 Aug 2006) $
-Last change by : $Author: ghazan $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 

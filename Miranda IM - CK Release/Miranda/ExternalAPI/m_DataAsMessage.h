@@ -1,6 +1,6 @@
 /*
 	DataAsMessage plugin for Miranda IM
-	Copyright (c) 2006-2007 Chervov Dmitry
+	Copyright (c) 2006-2012 Chervov Dmitry
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

@@ -3,7 +3,7 @@
  * Other plugin can use this (so YAMN does not check it and another plugin can inform YAMN about new mail e.g.),
  * this can be usefull for plugins like Yahoo or MSN (Hotmail notify)
  *
- * (c) majvan 2002-2004
+ * (c) majvan 2002-2012
  */
 
 #ifndef __ACCOUNT_H
