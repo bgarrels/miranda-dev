@@ -83,13 +83,7 @@ int OmegleProto::OnChatOutgoing(WPARAM wParam,LPARAM lParam)
 						*response_data = dbv.pszVal;
 						DBFreeVariant(&dbv);
 					}
-				} /*else if (*response_data == "/hi") {
-					*response_data = "";
-					if ( !getU8String( OMEGLE_KEY_HI,&dbv ) ) {
-						*response_data = dbv.pszVal;
-						DBFreeVariant(&dbv);
-					}
-				}*/
+				}
 
 				LOG("**Chat - Outgoing message: %s", response_data->c_str());
 				ForkThread(&OmegleProto::SendMsgWorker, this, (void*)response_data);
@@ -200,7 +194,7 @@ int OmegleProto::OnJoinChat(WPARAM,LPARAM suppress)
 	gcw.ptszID    = m_tszUserName;
 	CallServiceSync(MS_GC_NEWSESSION, 0, (LPARAM)&gcw);
 
-	if(m_iStatus != ID_STATUS_ONLINE)
+	if(m_iStatus == ID_STATUS_OFFLINE)
 		return 0;
 
 	// Create a group
@@ -219,17 +213,29 @@ int OmegleProto::OnJoinChat(WPARAM,LPARAM suppress)
 	gce.ptszStatus = _T("Normal");
 	CallServiceSync( MS_GC_EVENT, NULL, reinterpret_cast<LPARAM>(&gce) );
 
-	// Set topic
-	gcd.iType = GC_EVENT_TOPIC;
-	gce.time = ::time(NULL);
-	gce.ptszText = TranslateT("Omegle is a great way of meeting new friends!");
-	CallServiceSync(MS_GC_EVENT,0,  reinterpret_cast<LPARAM>(&gce));
-
+	SetTopic("Omegle is a great way of meeting new friends!");
+		
 	// Note: Initialization will finish up in SetChatStatus, called separately
 	if(!suppress)
 		SetChatStatus(m_iStatus);
 
 	return 0;
+}
+
+void OmegleProto::SetTopic(const char *topic)
+{
+	GCDEST gcd = { m_szModuleName };
+	gcd.ptszID = const_cast<TCHAR*>(m_tszUserName);
+	gcd.iType = GC_EVENT_TOPIC;
+
+	GCEVENT gce = {sizeof(gce)};
+	gce.pDest = &gcd;
+	gce.dwFlags = GC_TCHAR;
+	gce.time = ::time(NULL);
+	
+	std::string top = Translate(topic);
+	gce.ptszText = mir_a2t(top.c_str());
+	CallServiceSync(MS_GC_EVENT,0,  reinterpret_cast<LPARAM>(&gce));
 }
 
 int OmegleProto::OnLeaveChat(WPARAM,LPARAM)
@@ -276,6 +282,9 @@ void OmegleProto::SetChatStatus(int status)
 
 void OmegleProto::ClearChat()
 {
+	if (getByte(OMEGLE_KEY_NO_CLEAR, 0))
+		return;
+
 	GCDEST gcd = { m_szModuleName };
 	gcd.ptszID = const_cast<TCHAR*>(m_tszUserName);
 	gcd.iType = GC_EVENT_CONTROL;

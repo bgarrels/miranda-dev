@@ -105,7 +105,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <PreBuildEvent>
-      <Command>incrementbuild.exe</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <ClCompile>
       <Optimization>Disabled</Optimization>
@@ -354,7 +355,7 @@
     <ClCompile Include="src\chat.cpp" />
     <ClCompile Include="src\communication.cpp" />
     <ClCompile Include="src\connection.cpp" />
-    <ClCompile Include="src\contacts.cpp" />
+    <ClCompile Include="src\dialogs.cpp" />
     <ClCompile Include="src\events.cpp" />
     <ClCompile Include="src\http.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -370,6 +371,7 @@
     <ClInclude Include="src\common.h" />
     <ClInclude Include="src\constants.h" />
     <ClInclude Include="src\db.h" />
+    <ClInclude Include="src\dialogs.h" />
     <ClInclude Include="src\http.h" />
     <ClInclude Include="src\proto.h" />
     <ClInclude Include="src\theme.h" />

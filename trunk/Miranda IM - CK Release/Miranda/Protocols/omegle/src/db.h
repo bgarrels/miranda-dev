@@ -38,7 +38,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define deleteSetting( setting )            DBDeleteContactSetting( NULL, m_szModuleName, setting )
 
 // DB settings
-#define OMEGLE_KEY_TIMEOUTS_LIMIT "TimeoutsLimit" // [HIDDEN]
-#define OMEGLE_KEY_ASL			  "MessageAsl" // [HIDDEN]
-#define OMEGLE_KEY_HI			  "MessageHi" // [HIDDEN]
-#define OMEGLE_KEY_NAME			  "ChatName" // [HIDDEN]
+#define OMEGLE_KEY_TIMEOUTS_LIMIT	"TimeoutsLimit" // [HIDDEN]
+#define OMEGLE_KEY_ASL				"MessageAsl" // [HIDDEN]
+#define OMEGLE_KEY_HI				"MessageHi" // [HIDDEN]
+#define OMEGLE_KEY_NAME				"ChatName" // [HIDDEN]
+#define OMEGLE_KEY_DONT_STOP		"DontStop" // [HIDDEN]
+#define OMEGLE_KEY_NO_CLEAR			"NoClear" // [HIDDEN]
