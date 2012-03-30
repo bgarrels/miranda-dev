@@ -43,10 +43,7 @@ int OmegleProto::OnContactDeleted(WPARAM wparam,LPARAM)
 {
 	HANDLE hContact = (HANDLE)wparam;
 
-	if (IsMyContact(hContact, true))
-	{
-		ForkThread(&OmegleProto::StopChatWorker, this, NULL);
-	}
+	ForkThread(&OmegleProto::StopChatWorker, this, NULL);
 
 	return 0;
 }

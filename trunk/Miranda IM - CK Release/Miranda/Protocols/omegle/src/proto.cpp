@@ -53,10 +53,6 @@ OmegleProto::OmegleProto(const char* proto_name, const TCHAR* username)
 	//CreateProtoService(m_szModuleName, PS_CREATEACCMGRUI, &OmegleProto::SvcCreateAccMgrUI, this);
 	CreateProtoService(m_szModuleName,PS_GETNAME, &OmegleProto::GetName,this);
 	
-	if(g_mirandaVersion < PLUGIN_MAKE_VERSION(0, 10, 0, 2))
-	{
-		HookProtoEvent(ME_DB_CONTACT_DELETED,&OmegleProto::OnContactDeleted,this);
-	}
 	HookProtoEvent(ME_OPT_INITIALISE,&OmegleProto::OnOptionsInit,this);
 	HookProtoEvent(ME_GC_EVENT,&OmegleProto::OnChatOutgoing,this);
 
@@ -142,15 +138,14 @@ int OmegleProto::SetStatus( int new_status )
 		break;
 	}
 
-	int old_status = m_iStatus;
 	m_iDesiredStatus = new_status;
 
-	if ( new_status == old_status)
+	if ( new_status == m_iStatus)
 	{
 		return 0;
 	}
 
-	if ( old_status == ID_STATUS_CONNECTING && new_status != ID_STATUS_OFFLINE )
+	if ( m_iStatus == ID_STATUS_CONNECTING && new_status != ID_STATUS_OFFLINE )
 	{
 		return 0;		
 	}
@@ -161,10 +156,6 @@ int OmegleProto::SetStatus( int new_status )
 	}
 	else
 	{
-		m_iStatus = ID_STATUS_CONNECTING;
-		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
-			(HANDLE)old_status,m_iStatus);
-
 		ForkThread( &OmegleProto::SignOn, this );
 	}
 	return 0;
@@ -225,10 +216,12 @@ int OmegleProto::OnModulesLoaded(WPARAM wParam,LPARAM lParam)
 {
 	// Register group chat
 	GCREGISTER gcr = {sizeof(gcr)};
-	//gcr.dwFlags = GC_ACKMSG;
+	gcr.dwFlags = GC_TYPNOTIF; //GC_ACKMSG;
 	gcr.pszModule = m_szModuleName;
 	gcr.pszModuleDispName = m_szModuleName;
 	gcr.iMaxText = OMEGLE_MESSAGE_LIMIT;
+	gcr.nColors = 0;
+	gcr.pColors = NULL;
 	CallService(MS_GC_REGISTER,0,reinterpret_cast<LPARAM>(&gcr));
 
 	return 0;

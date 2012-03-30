@@ -46,6 +46,22 @@ void OmegleProto::SendMsgWorker(void *p)
 	delete data;
 }
 
+void OmegleProto::SendTypingWorker(void *p)
+{
+	if (p == NULL)
+		return;
+
+	std::string *data = static_cast<std::string*>(p);
+
+	bool typ = (*data == "1");
+	delete data;
+	
+	if (typ)
+		facy.typing_start();
+	else
+		facy.typing_stop();
+}
+
 void OmegleProto::NewChatWorker(void*p)
 {
 	NewChat();

@@ -101,6 +101,19 @@ int OmegleProto::OnChatOutgoing(WPARAM wParam,LPARAM lParam)
 		break;
 	}
 
+	case GC_USER_TYPNOTIFY:
+	{
+		if ( facy.connected_ ) {
+			text = mir_t2a_cp(hook->ptszText,CP_UTF8);
+			std::string* response_data = new std::string(text);
+
+			LOG("**Chat - Self typing: %s", response_data->c_str());		
+			ForkThread(&OmegleProto::SendTypingWorker, this, (void*)response_data);
+		}
+
+		break;
+	}
+
 	case GC_USER_LEAVE:
 	case GC_SESSION_TERMINATE:
 	{

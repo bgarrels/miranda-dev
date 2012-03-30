@@ -32,6 +32,8 @@ void OmegleProto::SignOn(void*)
 	LOG("***** Beginning SignOn process");		
 
 	int old_status = m_iStatus;
+	m_iStatus = ID_STATUS_CONNECTING;
+	ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS,(HANDLE)old_status,m_iStatus);
 	
 	setDword( "LogonTS", (DWORD)time(NULL) );
 	ClearChat();
