@@ -1,5 +1,5 @@
 /*
- * $Id: pthread.c,v 1.4 2003/12/19 12:53:36 gena01 Exp $
+ * $Id$
  *
  * Skype Miranda Plugin 
  *

@@ -202,9 +202,11 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\alogon.c" />
     <ClCompile Include="src\contacts.c" />
     <ClCompile Include="src\debug.c" />
     <ClCompile Include="src\gchat.c" />
+    <ClCompile Include="src\msgq.c" />
     <ClCompile Include="src\pthread.c" />
     <ClCompile Include="src\skype.c" />
     <ClCompile Include="src\skypeapi.c" />
@@ -216,9 +218,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ezxml\ezxml.h" />
+    <ClInclude Include="src\alogon.h" />
     <ClInclude Include="src\contacts.h" />
     <ClInclude Include="src\debug.h" />
     <ClInclude Include="src\gchat.h" />
+    <ClInclude Include="src\msgq.h" />
     <ClInclude Include="src\pthread.h" />
     <ClInclude Include="src\resource.h" />
     <ClInclude Include="src\skype.h" />

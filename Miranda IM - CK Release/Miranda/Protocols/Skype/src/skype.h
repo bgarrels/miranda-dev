@@ -34,14 +34,16 @@
 #include "m_database.h"
 #include "m_clist.h"
 #include "m_system.h"
-#include "m_updater.h"
-#include "m_folders.h"
 #include "m_options.h"
 #include "m_langpack.h"
 #include "m_userinfo.h"
 #include "m_avatars.h"
 #include "m_contacts.h"
 #include "m_popup.h"
+
+//ExternalAPI
+#include "m_updater.h"
+#include "m_folders.h"
 
 #pragma warning (pop)
 
