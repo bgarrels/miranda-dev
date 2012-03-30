@@ -3,7 +3,7 @@
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011 Robert Pösel
+Copyright © 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -146,14 +146,5 @@ void __fastcall utils::mem::detract(void* p)
 
 void* __fastcall utils::mem::allocate(size_t size)
 {
-	void* p = NULL;
-
-	if (size)
-	{
-		p = malloc(size);
-
-		if (p)
-			ZeroMemory(p, size);
-	}
-	return p;
+	return mir_calloc(size);
 }

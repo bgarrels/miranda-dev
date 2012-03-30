@@ -3,7 +3,7 @@
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2012 Robert Pösel
+Copyright © 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -40,18 +40,22 @@ PLUGININFOEX pluginInfo = {
 	  "Omegle Protocol x64",
   #else
 	  "Omegle Protocol",
-  #endif    	
+  #endif
 	__VERSION_DWORD,
 	"Provides basic support for Omegle Chat protocol. [Built: "__DATE__" "__TIME__"]",
 	"Robert Posel",
 	"robyer@seznam.cz",
-	"(c) 2012 Robert Posel",
+	"(c) 2011-12 Robert Posel",
 	"http://code.google.com/p/robyer/",
 	UNICODE_AWARE, //not transient
 	0,             //doesn't replace anything built-in
+  #ifdef _WIN64
+	// {95A3FF9B-0124-4A34-A123-E3262858010F}
+	{ 0x95a3ff9b, 0x124, 0x4a34, { 0xa1, 0x23, 0xe3, 0x26, 0x28, 0x58, 0x1, 0xf } }
+  #else
 	// {9E1D9244-606C-4ef4-99A0-1D7D23CB7601}
 	{ 0x9e1d9244, 0x606c, 0x4ef4, { 0x99, 0xa0, 0x1d, 0x7d, 0x23, 0xcb, 0x76, 0x1 } }
-
+  #endif
 };
 
 /////////////////////////////////////////////////////////////////////////////
@@ -74,15 +78,15 @@ extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD miranda
 	if(mirandaVersion > PLUGIN_MAKE_VERSION(0,10,0,0) &&
 	   mirandaVersion < PLUGIN_MAKE_VERSION(0,10,0,2))
 	{
-		MessageBox(0,_T("The Omegle protocol plugin cannot be loaded. ")
+		MessageBox(0,_T("The Facebook protocol plugin cannot be loaded. ")
 			_T("It requires Miranda IM 0.10 alpha build #2 or later."),_T("Miranda"),
 			MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST);
 		return NULL;
 	}
-	else if(mirandaVersion < PLUGIN_MAKE_VERSION(0,9,14,0))
+	else if(mirandaVersion < PLUGIN_MAKE_VERSION(0,9,43,0))
 	{
-		MessageBox(0,_T("The Omegle protocol plugin cannot be loaded. ")
-			_T("It requires Miranda IM 0.9.14 or later."),_T("Miranda"),
+		MessageBox(0,_T("The Facebook protocol plugin cannot be loaded. ")
+			_T("It requires Miranda IM 0.9.43 or later."),_T("Miranda"),
 			MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST);
 		return NULL;
 	}
@@ -90,15 +94,6 @@ extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD miranda
 	g_mirandaVersion = mirandaVersion;
 	return &pluginInfo;
 }
-
-/*extern "C" __declspec(dllexport) PLUGININFO* MirandaPluginInfo(DWORD mirandaVersion)
-{
-	// TODO: Make product version controlled via definitions
-	MessageBox(0,_T("The Omegle protocol plugin cannot be loaded. ")
-		_T("It requires Miranda IM 0.9.14 or later."),_T("Miranda"),
-		MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST);
-	return NULL;
-}*/
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // Interface information
@@ -155,9 +150,6 @@ static HANDLE g_hEvents[1];
 
 extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 {
-#if defined _DEBUG
-	_CrtDumpMemoryLeaks( );
-#endif
 	pluginLink = link;
 	mir_getMMI(&mmi);
 	mir_getLI(&li);
@@ -178,11 +170,12 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	g_hEvents[0] = HookEvent(ME_SYSTEM_MODULESLOADED,OnModulesLoaded);
 
 	InitIcons();
+	//InitContactMenus();
 
 	// Init native User-Agent
 	{
 		std::stringstream agent;
-		agent << "MirandaIM/";
+		agent << "Miranda IM/";
 		agent << (( g_mirandaVersion >> 24) & 0xFF);
 		agent << ".";
 		agent << (( g_mirandaVersion >> 16) & 0xFF);
@@ -190,7 +183,11 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 		agent << (( g_mirandaVersion >>  8) & 0xFF);
 		agent << ".";
 		agent << (( g_mirandaVersion      ) & 0xFF);
-		agent << " OmegleProtocol/";
+	#ifdef _WIN64
+		agent << " Omegle Protocol x64/";
+	#else
+		agent << " Omegle Protocol/";
+	#endif
 		agent << __VERSION_STRING;
 		g_strUserAgent = agent.str( );
 	}
@@ -203,6 +200,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 
 extern "C" int __declspec(dllexport) Unload(void)
 {
+	//UninitContactMenus();
 	for(size_t i=1; i<SIZEOF(g_hEvents); i++)
 		UnhookEvent(g_hEvents[i]);
 

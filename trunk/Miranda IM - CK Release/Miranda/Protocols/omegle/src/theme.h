@@ -3,7 +3,7 @@
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011 Robert Pösel
+Copyright © 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -24,3 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 void InitIcons(void);
 HANDLE GetIconHandle(const char *name);
+
+//void InitContactMenus(void);
+//void UninitContactMenus(void);
+//void ShowContactMenus(bool show, bool deleted = false);

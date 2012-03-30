@@ -3,7 +3,7 @@
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2012 Robert Pösel
+Copyright © 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -79,7 +79,6 @@ OmegleProto::OmegleProto(const char* proto_name, const TCHAR* username)
 
 OmegleProto::~OmegleProto( )
 {
-	KillThreads( false );
 	Netlib_CloseHandle( m_hNetlibUser );
 
 	WaitForSingleObject( this->signon_lock_, IGNORE );
@@ -93,6 +92,7 @@ OmegleProto::~OmegleProto( )
 	CloseHandle( this->events_loop_lock_ );
 	CloseHandle( this->facy.connection_lock_ );
 
+	mir_free( m_tszUserName );
 	mir_free( m_szModuleName );
 	mir_free( m_szProtoName );
 }
@@ -157,11 +157,6 @@ int OmegleProto::SetStatus( int new_status )
 
 	if ( new_status == ID_STATUS_OFFLINE )
 	{
-		m_iStatus = ID_STATUS_CONNECTING;
-
-		ProtoBroadcastAck(m_szModuleName,0,ACKTYPE_STATUS,ACKRESULT_SUCCESS, 
-			(HANDLE)old_status,m_iStatus);
-
 		ForkThread( &OmegleProto::SignOff, this );
 	}
 	else
