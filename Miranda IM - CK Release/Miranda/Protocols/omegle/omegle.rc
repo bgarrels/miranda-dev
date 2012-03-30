@@ -13,6 +13,48 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
+// Czech (Czech Republic) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CSY)
+LANGUAGE LANG_CZECH, SUBLANG_DEFAULT
+#pragma code_page(1250)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_OPTIONS DIALOGEX 0, 0, 316, 183
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+EXSTYLE WS_EX_CONTROLPARENT
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 309
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 176
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Czech (Czech Republic) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
 // English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
@@ -73,7 +115,7 @@ END
 
 VS_VERSION_INFO VERSIONINFO
  FILEVERSION 0,0,0,6
- PRODUCTVERSION 0,9,14,0
+ PRODUCTVERSION 0,9,43,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -91,10 +133,10 @@ BEGIN
             VALUE "FileDescription", "Omegle protocol plugin for Miranda IM"
             VALUE "FileVersion", "0.0.0.6"
             VALUE "InternalName", "Omegle"
-            VALUE "LegalCopyright", "Copyright © 2011 Robert Pösel"
+            VALUE "LegalCopyright", "Copyright © 2011-12 Robert Pösel"
             VALUE "OriginalFilename", "omegle.dll"
             VALUE "ProductName", "Omegle Protocol"
-            VALUE "ProductVersion", "0, 0, 0, 6"
+            VALUE "ProductVersion", "0.9.43.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -102,6 +144,21 @@ BEGIN
         VALUE "Translation", 0x409, 1200
     END
 END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_OmegleACCOUNT, DIALOG
+    BEGIN
+    END
+END
+#endif    // APSTUDIO_INVOKED
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////

@@ -20,30 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-#include "common.h"
+#pragma once
 
-bool OmegleProto::IsMyContact(HANDLE hContact, bool include_chat)
-{
-	const char *proto = reinterpret_cast<char*>( CallService(MS_PROTO_GETCONTACTBASEPROTO,
-		reinterpret_cast<WPARAM>(hContact),0) );
-
-	if( proto && strcmp(m_szModuleName,proto) == 0 )
-	{
-		if( include_chat )
-			return true;
-		else
-			return DBGetContactSettingByte(hContact,m_szModuleName,"ChatRoom",0) == 0;
-	} else {
-		return false;
-	}
-}
-
-
-int OmegleProto::OnContactDeleted(WPARAM wparam,LPARAM)
-{
-	HANDLE hContact = (HANDLE)wparam;
-
-	ForkThread(&OmegleProto::StopChatWorker, this, NULL);
-
-	return 0;
-}
+INT_PTR CALLBACK OmegleAccountProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam );
+INT_PTR CALLBACK OmegleOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam );

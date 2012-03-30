@@ -47,14 +47,14 @@ OmegleProto::OmegleProto(const char* proto_name, const TCHAR* username)
 	this->facy.connection_lock_ = CreateMutex( NULL, FALSE, NULL );
 
 	// Group chats
-	CreateProtoService(m_szModuleName,PS_JOINCHAT,&OmegleProto::OnJoinChat,this);
-	CreateProtoService(m_szModuleName,PS_LEAVECHAT,&OmegleProto::OnLeaveChat,this);
+	CreateProtoService(m_szModuleName, PS_JOINCHAT, &OmegleProto::OnJoinChat, this);
+	CreateProtoService(m_szModuleName, PS_LEAVECHAT, &OmegleProto::OnLeaveChat, this);
 
-	//CreateProtoService(m_szModuleName, PS_CREATEACCMGRUI, &OmegleProto::SvcCreateAccMgrUI, this);
-	CreateProtoService(m_szModuleName,PS_GETNAME, &OmegleProto::GetName,this);
+	CreateProtoService(m_szModuleName, PS_CREATEACCMGRUI, &OmegleProto::SvcCreateAccMgrUI, this);
+	CreateProtoService(m_szModuleName, PS_GETNAME, &OmegleProto::GetName, this);
 	
-	HookProtoEvent(ME_OPT_INITIALISE,&OmegleProto::OnOptionsInit,this);
-	HookProtoEvent(ME_GC_EVENT,&OmegleProto::OnChatOutgoing,this);
+	HookProtoEvent(ME_OPT_INITIALISE, &OmegleProto::OnOptionsInit, this);
+	HookProtoEvent(ME_GC_EVENT, &OmegleProto::OnChatOutgoing, this);
 
 	// Create standard network connection
 	TCHAR descr[512];
@@ -71,6 +71,11 @@ OmegleProto::OmegleProto(const char* proto_name, const TCHAR* username)
 		MessageBox(NULL,TranslateT("Unable to get Netlib connection for Omegle"),m_tszUserName,MB_OK);
 
 	facy.set_handle(m_hNetlibUser);
+
+	SkinAddNewSoundExT( "StrangerIn", m_tszUserName, LPGENT( "Stranger connected" ) );
+	SkinAddNewSoundExT( "StrangerOut", m_tszUserName, LPGENT( "Stranger disconnected" ) );
+	SkinAddNewSoundExT( "MessageIn", m_tszUserName, LPGENT( "Incomming message" ) );
+	SkinAddNewSoundExT( "MessageOut", m_tszUserName, LPGENT( "Outgoing message" ) );
 }
 
 OmegleProto::~OmegleProto( )
@@ -104,7 +109,7 @@ DWORD_PTR OmegleProto::GetCaps( int type, HANDLE hContact )
 	case PFLAGNUM_2:
 		return PF2_ONLINE;
 	case PFLAGNUM_4:
-		return PF4_IMSENDUTF | PF4_SUPPORTTYPING;
+		return PF4_IMSENDUTF; // | PF4_SUPPORTTYPING;
 	case PFLAG_MAXLENOFMESSAGE:
 		return OMEGLE_MESSAGE_LIMIT;
 	}
@@ -207,9 +212,8 @@ int OmegleProto::GetName( WPARAM wParam, LPARAM lParam )
 
 int OmegleProto::SvcCreateAccMgrUI(WPARAM wParam,LPARAM lParam)
 {
-	//return (int)CreateDialogParam(g_hInstance,MAKEINTRESOURCE(IDD_OmegleACCOUNT), 
-	//(HWND)lParam, NULL/*FBAccountProc*/, (LPARAM)this );
-	return 0;
+	return (int)CreateDialogParam(g_hInstance,MAKEINTRESOURCE(IDD_OmegleACCOUNT),
+		(HWND)lParam, OmegleAccountProc, (LPARAM)this );
 }
 
 int OmegleProto::OnModulesLoaded(WPARAM wParam,LPARAM lParam)
@@ -227,10 +231,9 @@ int OmegleProto::OnModulesLoaded(WPARAM wParam,LPARAM lParam)
 	return 0;
 }
 
-
 int OmegleProto::OnOptionsInit(WPARAM wParam,LPARAM lParam)
 {
-/*	OPTIONSDIALOGPAGE odp = {sizeof(odp)};
+	OPTIONSDIALOGPAGE odp = {sizeof(odp)};
 	odp.hInstance   = g_hInstance;
 	odp.ptszTitle   = m_tszUserName;
 	odp.dwInitParam = LPARAM(this);
@@ -238,18 +241,10 @@ int OmegleProto::OnOptionsInit(WPARAM wParam,LPARAM lParam)
 
 	odp.position    = 271828;
 	odp.ptszGroup   = LPGENT("Network");
-	odp.ptszTab     = LPGENT("Account && Integration");
+	odp.ptszTab     = LPGENT("Account");
 	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPTIONS);
-	odp.pfnDlgProc  = FBOptionsProc;
+	odp.pfnDlgProc  = OmegleOptionsProc;
 	CallService(MS_OPT_ADDPAGE,wParam,(LPARAM)&odp);
-
-	odp.position    = 271829;
-	if(ServiceExists(MS_POPUP_ADDPOPUPT))
-		odp.ptszGroup   = LPGENT("Popups");
-	odp.ptszTab     = LPGENT("Events");
-	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPTIONS_EVENTS);
-	odp.pfnDlgProc  = FBEventsProc;
-	CallService(MS_OPT_ADDPAGE,wParam,(LPARAM)&odp);*/
 
 	return 0;
 }
@@ -258,4 +253,32 @@ int OmegleProto::OnPreShutdown(WPARAM wParam,LPARAM lParam)
 {
 	SetStatus( ID_STATUS_OFFLINE );
 	return 0;
+}
+
+int OmegleProto::OnContactDeleted(WPARAM wparam,LPARAM)
+{
+	//HANDLE hContact = (HANDLE)wparam;
+
+	ForkThread(&OmegleProto::StopChatWorker, this, NULL);
+	return 0;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////
+// OTHER
+
+bool OmegleProto::IsMyContact(HANDLE hContact, bool include_chat)
+{
+	const char *proto = reinterpret_cast<char*>( CallService(MS_PROTO_GETCONTACTBASEPROTO,
+		reinterpret_cast<WPARAM>(hContact),0) );
+
+	if( proto && strcmp(m_szModuleName,proto) == 0 )
+	{
+		if( include_chat )
+			return true;
+		else
+			return DBGetContactSettingByte(hContact,m_szModuleName,"ChatRoom",0) == 0;
+	} else {
+		return false;
+	}
 }
