@@ -3,7 +3,7 @@
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011 Robert Pösel
+Copyright © 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,19 +22,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#pragma warning(disable:4996)
+//#pragma warning(disable:4996)
 
-#define MIRANDA_VER    0x1000
-#define _WIN32_WINNT   0x0500
-#define _WIN32_WINDOWS 0x0500
+#define MIRANDA_VER    0x0A00
+#define _WIN32_WINNT   0x0600
+#define _WIN32_WINDOWS 0x0600
 
-#include <iostream>
+#include <m_stdhdr.h>
+
 #include <string>
 #include <cstring>
 #include <sstream>
 #include <fstream>
 #include <map>
+#include <stdarg.h>
 #include <time.h>
+#include <assert.h>
 #include <io.h>
 
 #include <windows.h>
@@ -62,19 +65,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <m_utils.h>
 #include <m_hotkeys.h>
 #include <m_updater.h>
-#include <m_msg_buttonsbar.h>
+//#include <m_msg_buttonsbar.h>
 
 class OmegleProto;
-
-
-#define CODE_BLOCK_BEGIN        {
-#define CODE_BLOCK_TRY          try {
-#define CODE_BLOCK_CATCH        } catch(const std::exception &e) {
-#define CODE_BLOCK_INFINITE     while( true ) {
-#define CODE_BLOCK_END          }
-
-#define FLAG_CONTAINS(x,y)      ( ( x & y ) == y )
-#define REMOVE_FLAG(x,y)        ( x = ( x & ~y ) )
 
 #define LOG Log
 
@@ -83,16 +76,11 @@ class OmegleProto;
 #include "client.h"
 #include "proto.h"
 #include "db.h"
-#include "../constants.h"
+#include "constants.h"
+#include "dialogs.h"
 #include "theme.h"
-#include "resource.h"
-
-#if defined _DEBUG
-#include <stdlib.h>
-#include <crtdbg.h>
-#endif
+#include "../resource.h"
 
 extern HINSTANCE g_hInstance;
 extern std::string g_strUserAgent;
 extern DWORD g_mirandaVersion;
-

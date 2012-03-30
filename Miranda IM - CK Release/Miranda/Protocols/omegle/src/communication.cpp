@@ -3,7 +3,7 @@
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011 Robert Pösel
+Copyright © 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ http::response Omegle_client::flap( const int request_type, std::string* request
 	nlhr.requestType = choose_method( request_type );
 	std::string url = choose_request_url( request_type, request_data );
 	nlhr.szUrl = (char*)url.c_str( );
-	nlhr.flags = NLHRF_HTTP11 | NLHRF_NODUMP | NLHRF_GENERATEHOST;
+	nlhr.flags = NLHRF_HTTP11 | /*NLHRF_NODUMP |*/ NLHRF_GENERATEHOST;
 	nlhr.headers = get_request_headers( request_type, &nlhr.headersCount );
 	nlhr.timeout = 1000 * (( request_type == OMEGLE_REQUEST_EVENTS ) ? 60 : 15);
 
@@ -227,8 +227,6 @@ std::string Omegle_client::choose_request_url( int request_type, std::string* da
 
 NETLIBHTTPHEADER* Omegle_client::get_request_headers( int request_type, int* headers_count )
 {
-	ScopedLock s( headers_lock_ );
-
 	switch ( request_type )
 	{
 	case OMEGLE_REQUEST_START:
@@ -238,22 +236,17 @@ NETLIBHTTPHEADER* Omegle_client::get_request_headers( int request_type, int* hea
 	case OMEGLE_REQUEST_TYPING_START:
 	case OMEGLE_REQUEST_TYPING_STOP:
 	case OMEGLE_REQUEST_RECAPTCHA:
-		*headers_count = 5;
+		*headers_count = 4;
 		break;
 
 	case OMEGLE_REQUEST_HOME:
 	default:
-		*headers_count = 4;
+		*headers_count = 3;
 		break;
-
-/*		*headers_count = 3;
-		break;*/
 	}
 
 	NETLIBHTTPHEADER* headers = ( NETLIBHTTPHEADER* )utils::mem::allocate( sizeof( NETLIBHTTPHEADER )*( *headers_count ) );
 
-	refresh_headers( );
-
 	switch ( request_type )
 	{
 	case OMEGLE_REQUEST_START:
@@ -263,102 +256,56 @@ NETLIBHTTPHEADER* Omegle_client::get_request_headers( int request_type, int* hea
 	case OMEGLE_REQUEST_TYPING_START:
 	case OMEGLE_REQUEST_TYPING_STOP:
 	case OMEGLE_REQUEST_RECAPTCHA:
-		set_header( &headers[4], "Content-Type" );
+		headers[3].szName = "Content-Type";
+		headers[3].szValue = "application/x-www-form-urlencoded; charset=utf-8";
 
 	case OMEGLE_REQUEST_HOME:
 	default:
-		set_header( &headers[3], "Cookie" );
-		set_header( &headers[2], "User-Agent" );
-		set_header( &headers[1], "Accept" );
-		set_header( &headers[0], "Accept-Language" );
+		headers[2].szName = "User-Agent";
+		headers[2].szValue = (char *)g_strUserAgent.c_str( );
+		headers[1].szName = "Accept";
+		headers[1].szValue = "*/*";
+		headers[0].szName = "Accept-Language";
+		headers[0].szValue = "en,en-US;q=0.9";
 		break;
 	}
 
 	return headers;
 }
 
-void Omegle_client::set_header( NETLIBHTTPHEADER* header, char* name )
-{
-	header->szName  = name;
-	header->szValue = (char*)this->headers[name].c_str();
-}
-
-void Omegle_client::refresh_headers( )
-{
-	ScopedLock s( headers_lock_ );
-
-	if ( headers.size() < 5 )
-	{
-		this->headers["Accept"] = "*/*";
-		this->headers["Accept-Language"] = "en,en-US;q=0.9";
-		this->headers["Content-Type"] = "application/x-www-form-urlencoded";
-	}
-	this->headers["User-Agent"] = g_strUserAgent;
-	//this->headers["Cookie"] = load_cookies( );
-}
-
-/*std::string Omegle_client::load_cookies( )
-{
-	ScopedLock s( cookies_lock_ );
-
-	std::string cookieString = "isfbe=false;";
-
-	if ( !cookies.empty( ) )
-		for ( std::map< std::string, std::string >::iterator iter = cookies.begin(); iter != cookies.end(); ++iter )
-		{
-			cookieString.append( iter->first );
-			cookieString.append( 1, '=' );
-			cookieString.append( iter->second );
-			cookieString.append( 1, ';' );
-		}
-	
-  return cookieString;
-}*/
-
 void Omegle_client::store_headers( http::response* resp, NETLIBHTTPHEADER* headers, int headersCount )
 {
-	ScopedLock h( headers_lock_ );
-//	ScopedLock c( cookies_lock_ );
-
 	for ( int i = 0; i < headersCount; i++ )
 	{
 		std::string header_name = headers[i].szName; // TODO: Casting?
 		std::string header_value = headers[i].szValue; // TODO: Casting?
 
-/*		if ( header_name == "Set-Cookie" )
-		{
-			std::string cookie_name = header_value.substr( 0, header_value.find( "=" ) );
-			std::string cookie_value = header_value.substr( header_value.find( "=" ) + 1, header_value.find( ";" ) - header_value.find( "=" ) - 1 );
-			if ( cookie_value == "deleted" )
-			{
-				parent->Log("      Deleted cookie '%s'", cookie_name.c_str());
-				cookies.erase( cookie_name );
-			} else {
-				parent->Log("      New cookie '%s': %s", cookie_name.c_str(), cookie_value.c_str());
-				cookies[cookie_name] = cookie_value;
-			}
-		}
-		else*/
-		{ // RM TODO: uncomment
-			//parent->Log("----- Got header '%s': %s", header_name.c_str(), header_value.c_str() );
-			resp->headers[header_name] = header_value;
-		}
+		parent->Log("----- Got header '%s': %s", header_name.c_str(), header_value.c_str() );
+		resp->headers[header_name] = header_value;
 	}
 }
-
-/*void Omegle_client::clear_cookies( )
-{
-	ScopedLock s( cookies_lock_ );
-
-	if ( !cookies.empty( ) )
-		cookies.clear( );
-}*/
 
 //////////////////////////////////////////////////////////////////////////////
 
 bool Omegle_client::start()
 {
 	handle_entry( "start" );
+
+
+	// Choose random server
+	const char *servers[] = {"bajor", "cardassia", "promenade", "odo-bucket", "quarks"};
+	
+	srand(::time(NULL));
+	this->server_ = servers[rand() % 5];
+	parent->Log("Chosing server %s", this->server_.c_str());
+
+	std::string log = Translate("Chosing server:");
+	log += " " + this->server_;
+
+	parent->UpdateChat(NULL, log.c_str());
+
+
+
 
 	std::string data = "id=";
 	data += this->chat_id_;
@@ -652,37 +599,3 @@ bool Omegle_client::recaptcha()
 		return handle_error( "typing_start" );
 	}
 }
-
-
-//////////////////////////////////////////////////////////////////////////////
-
-/*bool Omegle_client::save_url(const std::string &url,const std::string &filename)
-{
-	NETLIBHTTPREQUEST req = {sizeof(req)};
-	NETLIBHTTPREQUEST *resp;
-	req.requestType = REQUEST_GET;
-	req.szUrl = const_cast<char*>(url.c_str());
-
-	resp = reinterpret_cast<NETLIBHTTPREQUEST*>(CallService( MS_NETLIB_HTTPTRANSACTION,
-		reinterpret_cast<WPARAM>(this->parent->m_hNetlibUser), reinterpret_cast<LPARAM>(&req) ));
-
-	if ( resp )
-	{
-		parent->Log( "@@@@@ Saving avatar URL %s to path %s", url.c_str(), filename.c_str() );
-
-		// Create folder if necessary
-		std::string dir = filename.substr(0,filename.rfind('\\'));
-		if(_access(dir.c_str(),0))
-			CallService(MS_UTILS_CREATEDIRTREE, 0, (LPARAM)dir.c_str());
-
-		// Write to file
-		FILE *f = fopen(filename.c_str(),"wb");
-		fwrite(resp->pData,1,resp->dataLength,f);
-		fclose(f);
-
-		CallService(MS_NETLIB_FREEHTTPREQUESTSTRUCT,0,(LPARAM)resp);
-		return true;
-	} else {
-		return false;
-	}
-}*/

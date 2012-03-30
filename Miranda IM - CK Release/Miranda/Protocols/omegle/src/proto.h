@@ -3,7 +3,7 @@
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2012 Robert Pösel
+Copyright © 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -120,7 +120,6 @@ public:
 
 	// Loops
 	void __cdecl EventsLoop(void*);
-	void    KillThreads(bool log = true);
 
 	// Worker threads
 	void __cdecl SignOn(void*);
@@ -154,7 +153,6 @@ public:
 	HANDLE  events_loop_lock_;
 
 	HANDLE  m_hNetlibUser;
-	HANDLE  m_hMsgLoop;
 
 	static void CALLBACK APC_callback(ULONG_PTR p);
 
