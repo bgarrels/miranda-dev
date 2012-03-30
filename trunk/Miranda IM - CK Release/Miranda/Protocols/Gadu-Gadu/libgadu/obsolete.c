@@ -1,5 +1,5 @@
 /* coding: UTF-8 */
-/* $Id: obsolete.c 854 2009-10-12 21:06:28Z wojtekka $ */
+/* $Id$ */
 
 /*
  *  (C) Copyright 2001-2003 Wojtek Kaniewski <wojtekka@irc.pl>
