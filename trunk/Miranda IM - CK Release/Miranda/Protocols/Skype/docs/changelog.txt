@@ -13,6 +13,14 @@ CODE
 
 HISTORY
 -------
+0.0.0.53 - ! No x64 ANSI build (as this isn't necessary)
+	   ! Fixed a crash in Groupchat when adding members to groupchat.
+ 	   ! Some groupchat fixes.
+	   * Moved Autologon functions from skypeapi.c to seperate alogon.c module
+           * Abstracted message queue into msgq.c
+           * Sending a Message to the Skype API is now handled in a separate queue to prevent                  lockups when core calls services (as proposed by borkra)
+           * Also ACK Offline messages on sending, as we don't know their fate.
+           * Don't inherit handles when starting Skype from plugin (who came up with that stupid              idea?!) This caused some really strange blocking issues on alertable waits, mainly                regarding sockets.
 
 0.0.0.45 - ! "NA" and "Free for chat" status are available again; NA is supported by skype and Free for chat 
              uses skypes "Skype Me" status; better leave it that way

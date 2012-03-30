@@ -51,6 +51,12 @@
     <ClCompile Include="src\voiceservice.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\msgq.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\alogon.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\resource.h">
@@ -90,6 +96,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\voiceservice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\msgq.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\alogon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
