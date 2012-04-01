@@ -10,9 +10,9 @@
 // remains consistent on all systems.
 
 IDI_ONLINE              ICON    DISCARDABLE     "../resources/iconeutral.ico"
-IDI_ICOYAMN1            ICON    DISCARDABLE     "icoyamn1.ico"
-IDI_ICOYAMN2            ICON    DISCARDABLE     "icoyamn2.ico"
-IDI_ICOTTBUP            ICON    DISCARDABLE     "iconttbup.ico"
+IDI_ICOYAMN1            ICON    DISCARDABLE     "res\icoyamn1.ico"
+IDI_ICOYAMN2            ICON    DISCARDABLE     "res\\icoyamn2.ico"
+IDI_ICOTTBUP            ICON    DISCARDABLE     "res\\iconttbup.ico"
 
 IDI_OFFLINE             ICON    DISCARDABLE     "../resources/icooffline.ico"
 IDI_NA                  ICON    DISCARDABLE     "../resources/icoyamn3.ico"
