@@ -22,10 +22,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL: http://svn.miranda.im/mainrepo/popup/trunk/src/font.h $
-Revision       : $Revision: 1623 $
-Last change on : $Date: 2010-06-24 18:47:07 +0300 (Чт, 24 июн 2010) $
-Last change by : $Author: Merlin_de $
+File name      : $HeadURL$
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 ===============================================================================
 */

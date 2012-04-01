@@ -22,10 +22,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL: http://svn.miranda.im/mainrepo/popup/trunk/src/opt_gen.cpp $
-Revision       : $Revision: 1628 $
-Last change on : $Date: 2010-06-30 03:42:27 +0300 (Ср, 30 июн 2010) $
-Last change by : $Author: Merlin_de $
+File name      : $HeadURL$
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 ===============================================================================
 */
