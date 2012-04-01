@@ -2,8 +2,7 @@
 IRC plugin for Miranda IM
 
 Copyright (C) 2003-2005 Jurgen Persson
-Copyright (C) 2007-2009 George Hazan
-Copyright (C) 2010-2012 Borkra
+Copyright (C) 2007-2012 George Hazan
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,7 +18,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-#include "../irc.h"
+
+#include "irc.h"
 
 #define DCCCHATTIMEOUT 300
 #define DCCSENDTIMEOUT 120
@@ -339,8 +339,9 @@ int CIrcProto::NLReceive(unsigned char* buf, int cbBuf)
 void CIrcProto::KillIdent()
 {
 	if ( hBindPort ) {
-		Netlib_CloseHandle( hBindPort );
+		HANDLE hPort = hBindPort;
 		hBindPort = NULL;
+		Netlib_CloseHandle( hPort );
 	}
 }
 
