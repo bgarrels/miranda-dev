@@ -20,10 +20,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL: main.cpp $
-Revision       : $Revision: $
-Last change on : $Date: 2010-07-03 15:25:00 $
-Last change by : $Author: Merlin_de $
+File name      : $HeadURL$
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 ===============================================================================
 */
