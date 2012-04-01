@@ -2,7 +2,7 @@
 set myopts=-dMiranda
 set dprname=mradio.dpr
 
-..\delphi\brcc32.exe mradio.rc -fomradio.res
+..\..\Delphi\Awkward\brcc32.exe mradio.rc -fomradio.res
 
 if /i '%1' == 'fpc' (
   ..\FPC\bin\fpc.exe %myopts% %dprname% %2 %3 %4 %5 %6 %7 %8 %9
