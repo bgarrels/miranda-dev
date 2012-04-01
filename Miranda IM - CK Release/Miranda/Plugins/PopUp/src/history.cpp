@@ -22,10 +22,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL: http://svn.miranda.im/mainrepo/popup/trunk/src/history.cpp $
-Revision       : $Revision: 1631 $
-Last change on : $Date: 2010-07-08 08:22:12 +0300 (Чт, 08 июл 2010) $
-Last change by : $Author: MPK $
+File name      : $HeadURL$
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 ===============================================================================
 */
