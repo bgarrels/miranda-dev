@@ -1,7 +1,7 @@
 Miranda Language Pack Version 1
 Language: German (DE)
 Locale: 0407
-Last-Modified-Using: Miranda IM 0.9.45
+Last-Modified-Using: Miranda IM 0.9.47
 Authors: miranda-im.de Projekt Sprachdatei - diverse Autoren
 Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
