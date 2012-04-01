@@ -234,6 +234,7 @@ VOID GetNewsData(TCHAR *tszUrl, char** szData)
 				//ShowMessage(0, TranslateT("Cannot upload VersionInfo. Unknown error"));
 				break;
 		}
+		CallService(MS_NETLIB_FREEHTTPREQUESTSTRUCT, 0, (LPARAM)nlhrReply);
 	}
 	mir_free(szUrl);
 }
@@ -552,6 +553,7 @@ TCHAR* CheckFeed(TCHAR* tszURL)
 			int bytesParsed = 0;
 			HXML hXml = xi.parseString(tszData, &bytesParsed, NULL);
 			mir_free(tszData);
+			mir_free(szData);
 			if(hXml != NULL)
 			{
 				BOOL UtfEncode = FALSE;
@@ -623,11 +625,13 @@ TCHAR* CheckFeed(TCHAR* tszURL)
 					node = xi.getChild(hXml, childcount);
 				}
 			}
+			xi.destroyNode(hXml);
 		}
 	}
 	return NULL;
 }
 
+size_t decode_html_entities_utf8(char *dest, const char *src);
 VOID CheckCurrentFeed(HANDLE hContact)
 {
 	char *szData = NULL;
@@ -644,6 +648,7 @@ VOID CheckCurrentFeed(HANDLE hContact)
 			int bytesParsed = 0;
 			HXML hXml = xi.parseString(tszData, &bytesParsed, NULL);
 			mir_free(tszData);
+			mir_free(szData);
 			if(hXml != NULL)
 			{
 				BOOL UtfEncode = FALSE;
@@ -688,7 +693,16 @@ VOID CheckCurrentFeed(HANDLE hContact)
 							HXML child = xi.getChild(chan, j);
 							if (lstrcmpi(xi.getName(child), _T("title")) == 0)
 							{
-								DBWriteContactSettingTString(hContact, MODULE, "FirstName", xi.getText(child));
+								if (UtfEncode)
+								{
+									char* szstring = mir_t2a(xi.getText(child));
+									TCHAR* tszstring = mir_utf8decodeT(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "FirstName", tszstring);
+									mir_free(tszstring);
+									mir_free(szstring);
+								}
+								else
+									DBWriteContactSettingTString(hContact, MODULE, "FirstName", xi.getText(child));
 								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("link")) == 0)
@@ -698,14 +712,34 @@ VOID CheckCurrentFeed(HANDLE hContact)
 							}
 							if (lstrcmpi(xi.getName(child), _T("description")) == 0)
 							{
-								const LPCTSTR descr =  xi.getText(child);
-								DBWriteContactSettingTString(hContact, MODULE, "About",descr);
-								DBWriteContactSettingTString(hContact, "CList", "StatusMsg", descr);
+								if (UtfEncode)
+								{
+									char* szstring = mir_t2a(xi.getText(child));
+									TCHAR* tszstring = mir_utf8decodeT(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "About", tszstring);
+									DBWriteContactSettingTString(hContact, "CList", "StatusMsg", tszstring);
+									mir_free(tszstring);
+									mir_free(szstring);
+								}
+								else
+								{
+									DBWriteContactSettingTString(hContact, MODULE, "About", xi.getText(child));
+									DBWriteContactSettingTString(hContact, "CList", "StatusMsg", xi.getText(child));
+								}
 								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("language")) == 0)
 							{
-								DBWriteContactSettingTString(hContact, MODULE, "Language1", xi.getText(child));
+								if (UtfEncode)
+								{
+									char* szstring = mir_t2a(xi.getText(child));
+									TCHAR* tszstring = mir_utf8decodeT(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "Language1", tszstring);
+									mir_free(tszstring);
+									mir_free(szstring);
+								}
+								else
+									DBWriteContactSettingTString(hContact, MODULE, "Language1", xi.getText(child));
 								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("managingEditor")) == 0)
@@ -715,7 +749,16 @@ VOID CheckCurrentFeed(HANDLE hContact)
 							}
 							if (lstrcmpi(xi.getName(child), _T("Category")) == 0)
 							{
-								DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", xi.getText(child));
+								if (UtfEncode)
+								{
+									char* szstring = mir_t2a(xi.getText(child));
+									TCHAR* tszstring = mir_utf8decodeT(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", tszstring);
+									mir_free(tszstring);
+									mir_free(szstring);
+								}
+								else
+									DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", xi.getText(child));
 								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("image")) == 0)
@@ -851,22 +894,16 @@ VOID CheckCurrentFeed(HANDLE hContact)
 								else
 									message = StrReplace(_T("#<category>#"), category, message);
 
-								message = StrReplace(_T("&amp;"), _T("&"), message);
-								message = StrReplace(_T("&#038;"), _T("&"),message);
-								message = StrReplace(_T("&apos;"), _T("\'"), message);
-								message = StrReplace(_T("&gt;"), _T(">"), message);
-								message = StrReplace(_T("&lt;"), _T("<"), message);
-								message = StrReplace(_T("&quot;"), _T("\""), message);
 								message = StrReplace(_T("<br>"), _T("\n"), message);
 								message = StrReplace(_T("<br/>"), _T("\n"), message);
 								message = StrReplace(_T("<br />"), _T("\n"), message);
-								message = StrReplace(_T("&#8211;"), _T("–"), message);
 
 								char* pszUtf;
 								if (!UtfEncode)
 									pszUtf = mir_utf8encodeT(message);
 								else
 									pszUtf = mir_t2a(message);
+								decode_html_entities_utf8(pszUtf, 0);
 
 								time_t stamp = DateToUnixTime(datetime, 0);
 
@@ -878,11 +915,12 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									ZeroMemory(&olddbei, sizeof(olddbei));
 									olddbei.cbSize = sizeof(olddbei);
 									olddbei.cbBlob = CallService(MS_DB_EVENT_GETBLOBSIZE, (WPARAM)hDbEvent, 0);
-									olddbei.pBlob = (PBYTE)malloc(olddbei.cbBlob);
+									olddbei.pBlob = (PBYTE)mir_alloc(olddbei.cbBlob);
 									CallService(MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&olddbei);
 									if (olddbei.timestamp == stamp && olddbei.cbBlob == lstrlenA(pszUtf) + 1 && lstrcmpA((char*)olddbei.pBlob, pszUtf) == 0)
 										MesExist = TRUE;
 									hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDNEXT, (WPARAM)hDbEvent, 0);
+									mir_free(olddbei.pBlob);
 								}
 
 								if (!MesExist)
@@ -899,7 +937,6 @@ VOID CheckCurrentFeed(HANDLE hContact)
 								}
 								mir_free(pszUtf);
 							}
-
 						}
 					}
 					else if (lstrcmpi(xi.getName(node), _T("feed")) == 0)
@@ -1157,6 +1194,7 @@ VOID CheckCurrentFeed(HANDLE hContact)
 					childcount +=1;
 					node = xi.getChild(hXml, childcount);
 				}
+				xi.destroyNode(hXml);
 			}
 		}
 		DBWriteContactSettingDword(hContact, MODULE, "LastCheck", time(NULL));
