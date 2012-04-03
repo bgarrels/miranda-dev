@@ -1,12 +1,44 @@
 {}
-
+//type  tDigest = array [0..15] of byte;
+(*
 const
   client_id  = 'wat';//'wat'; 'tst'
   client_ver = '1.0';
   api_key    = '51f5d25159da31b0814609c3a12900e2';
+*)
+const API_URL = 'http://api.myshows.ru/';
 
 const
-  defreq = 'http://post.audioscrobbler.com/?hs=true&p=1.2.1&c=<client-id>&v=<client-ver>&u=<user>&t=<timestamp>&a=<auth>';
+  defreq = API_URL+'profile/login?login=<login>&password=<password>';
+
+procedure ShowError(code:integer);
+var
+  buf:array [0..511] of AnsiChar;
+  ppc:pAnsiChar;
+begin
+  case code of
+    401: begin // “ребуетс€ авторизаци€
+      ppc:='Authorization required'; 
+    end;
+    403: begin // »м€ пользовател€ или пароль не подошли
+      ppc:='User name of password wrong';
+    end;
+    404: begin // Ќе найдено, неправильные параметры
+      ppc:='Not found / wrong parameters';
+    end;
+    500: begin // параметр запроса отсутствует
+      ppc:='Wrong query parameters';
+    end;
+  else
+    ppc:='something wrong!';
+  end;
+  StrCopy(StrCopyE(buf,'MyShows: '),Translate(ppc));
+  
+  if PluginLink^.ServiceExists(MS_POPUP_SHOWMESSAGE)<>0 then
+    CallService(MS_POPUP_SHOWMESSAGE,TLPARAM(@buf),SM_WARNING)
+  else
+    MessageBoxA(0,@buf,'ERROR',MB_ICONERROR)
+end;
 
 function GetMD5Str(digest:TMD5Hash; buf:pAnsiChar):PAnsiChar;
 begin
@@ -39,50 +71,35 @@ begin
   result:=digest;
 end;
 
-function HandShake(login, password:PAnsiChar; notify:bool=false):bool;
+function Handshake(login, password:PAnsiChar):boolean;
 var
   buf:array [0..32] of AnsiChar;
   digest:TMD5Hash;
-  stat:mir_md5_state_t;
-  timestamp:array [0..31] of AnsiChar;
   request:array [0..511] of AnsiChar;
-  tmp,res:pAnsiChar;
+  res:pAnsiChar;
+  stat:mir_md5_state_t;
 begin
   result:=false;
   GetMD5Str(GetMD5(password,StrLen(password),digest),buf);
   md5.md5_init(@stat);
   md5.md5_append(@stat,@buf,32);
-  IntToStr(timestamp,GetCurrentTime);
-  md5.md5_append(@stat,@timestamp,StrLen(timestamp));
   md5.md5_finish(@stat,digest);
-  GetMD5Str(digest,buf);
   StrCopy(request,defreq);
-  StrReplace(request,'<client-id>' ,client_id);
-  StrReplace(request,'<client-ver>',client_ver);
-  StrReplace(request,'<user>'      ,login);
-  StrReplace(request,'<timestamp>' ,timestamp);
-  StrReplace(request,'<auth>'      ,buf);
+  StrReplace(request,'<login>'   ,login);
+  StrReplace(request,'<password>',buf);
 
   res:=SendRequest(request,REQUEST_GET);
-  if (res<>nil) and (int_ptr(res)>$0FFF) then
+  if res<>nil then
   begin
-    if StrCmp(CharReplace(res,#10,#0),'OK')=0 then
+    if int_ptr(res)<$0FFF then
+    begin
+      ShowError(int_ptr(res));
+    end
+    else
     begin
       result:=true;
-      tmp:=StrEnd(res)+1; StrDup(session_id,tmp);
-      tmp:=StrEnd(tmp)+1; StrDup(np_url    ,tmp);
-      tmp:=StrEnd(tmp)+1; StrDup(sub_url   ,tmp);
-    end
-    else if notify then
-    begin
-      tmp:=StrCopyE(request,Translate('Last.fm error: '));
-      if      StrCmp(res,'BANNED'  )=0 then StrCopy(tmp,Translate('Client is banned'))
-      else if StrCmp(res,'BADAUTH' )=0 then StrCopy(tmp,Translate('Bad Auth. Check login and password'))
-      else if StrCmp(res,'BADTIME' )=0 then StrCopy(tmp,Translate('Bad TimeStamp'))
-      else if StrCmp(res,'FAILED',6)=0 then StrCopy(tmp,res+7);
-      CallService(MS_POPUP_SHOWMESSAGE,wparam(@request),SM_ERROR);
+      mFreeMem(res);
     end;
-    mFreeMem(res);
   end;
 end;
 
@@ -105,102 +122,82 @@ begin
   result:=dst;
 end;
 
-function SendNowPlaying:integer;
-var
-  si:pSongInfoA;
-  buf    :array [0..31  ] of AnsiChar;
-  args   :array [0..1023] of AnsiChar;
-  res,pc:PAnsiChar;
+function SendMSRequest(request:pAnsiChar;doShowError:boolean):pAnsiChar;
 begin
-  result:=-1;
-  if session_id<>nil then
+  result:=SendRequest(request,REQUEST_GET);
+  if int_ptr(result)<$0FFF then
   begin
-    si:=pointer(CallService(MS_WAT_RETURNGLOBAL,WAT_INF_UTF8,0));
-
-    pc:=@args;
-    pc:=StrCopyE(pc,'s='); pc:=StrCopyE(pc,session_id); //'?s='
-    pc:=StrCopyE(pc,'&a=');
-    if si^.artist=nil then pc:=StrCopyE(pc,'Unknown')
-    else                   pc:=encode(pc,si^.artist);
-    pc:=StrCopyE(pc,'&t=');
-    if si^.title =nil then pc:=StrCopyE(pc,'Unknown')
-    else                   pc:=encode(pc,si^.title);
-    pc:=StrCopyE(pc,'&l='); if si^.total>0 then pc:=StrCopyE(pc,IntToStr(buf,si^.total));
-    pc:=StrCopyE(pc,'&b='); pc:=encode(pc,si^.album);
-    pc:=StrCopyE(pc,'&n=');
-    if si^.track<>0 then
-      pc:=StrCopyE(pc,IntToStr(buf,si^.track));
-
-    res:=SendRequest(np_url,REQUEST_POST,args);
-    if (res<>nil) and (int_ptr(res)>$0FFF) then
+//!!    if int_ptr(result)=401 then
     begin
-      if StrCmp(CharReplace(res,#10,#0),'OK')=0 then
-        result:=1
-      else if StrCmp(res,'BADSESSION')=0 then
-        result:=-1;
-      mFreeMem(res);
+      Handshake(msh_login,msh_password);
+
+      result:=SendRequest(request,REQUEST_GET);
     end;
+    if (int_ptr(result)<$0FFF) and doShowError then
+      ShowError(int_ptr(result));
   end;
 end;
 
 function Scrobble:integer;
 var
   si:pSongInfoA;
-  buf,timestamp:array [0..31] of AnsiChar;
-  args   :array [0..1023] of AnsiChar;
+  buf:array [0..511] of AnsiChar;
+  request:array [0..511] of AnsiChar;
   res,pc:PAnsiChar;
+  shId,epId:pAnsiChar;
+  json:TJSONSERVICEINTERFACE;
+  jn,jroot:PJSONNODE;
 begin
   result:=-1;
-  if session_id<>nil then
+
+  si:=pointer(CallService(MS_WAT_RETURNGLOBAL,WAT_INF_UTF8,0));
+  Encode(buf,Si.mfile);
+  pc:=Extract(buf,true);
+
+  // Episode search by filename
+  StrCopy(StrCopyE(request,API_URL+'shows/search/file/?q='),pc);
+  mFreeMem(pc);
+  res:=SendRequest(request,REQUEST_GET);
+  if (res<>nil) and (int_ptr(res)>$0FFF) then
   begin
-    si:=pointer(CallService(MS_WAT_RETURNGLOBAL,WAT_INF_UTF8,0));
-    IntToStr(timestamp,GetCurrentTime);
+    CallService(MS_JSON_GETINTERFACE,wparam(@json),0);
 
-    pc:=@args;
-    pc:=StrCopyE(pc,'s='  ); pc:=StrCopyE(pc,session_id);
-    pc:=StrCopyE(pc,'&a[0]=');
-    if si^.artist=nil then pc:=StrCopyE(pc,'Unknown')
-    else                   pc:=encode(pc,si^.artist);
-    pc:=StrCopyE(pc,'&t[0]=');
-    if si^.title =nil then pc:=StrCopyE(pc,'Unknown')
-    else                   pc:=encode(pc,si^.title);
-    pc:=StrCopyE(pc,'&i[0]='); pc:=StrCopyE(pc,timestamp);
-    pc:=StrCopyE(pc,'&r[0]=&m[0]=');
-    pc:=StrCopyE(pc,'&l[0]=');
-    if si^.total>0 then
-    begin
-      pc:=StrCopyE(pc,IntToStr(buf,si^.total));
-      pc:=StrCopyE(pc,'&o[0]=P');
-    end
-    else
-    begin
-      pc:=StrCopyE(pc,'&o[0]=R');
-    end;
-    pc:=StrCopyE(pc,'&b[0]='); pc:=encode(pc,si^.album);
-    pc:=StrCopyE(pc,'&n[0]=');
-    if si^.track<>0 then
-      pc:=StrCopyE(pc,IntToStr(buf,si^.track));
+    jroot:=json.parse(res);
 
-    res:=SendRequest(sub_url,REQUEST_POST,args);
-    if (res<>nil) and (int_ptr(res)>$0FFF) then
-    begin
-      if StrCmp(CharReplace(res,#10,#0),'OK')=0 then
-        result:=1
-      else if StrCmp(res,'BADSESSION')=0 then
-      begin
-        result:=-1;
-      end
-      else if StrCmp(res,'FAILED',6)=0 then
-      begin
-        StrCopy(StrCopyE(args,Translate('Last.fm error: ')),res+7);
-        CallService(MS_POPUP_SHOWMESSAGE,wparam(@args),SM_NOTIFY);
-        result:=0;
-      end;
-      mFreeMem(res);
-    end;
+    jn:=json.get(jroot,'show');
+    shId:=json.as_string(json.get(jn,'id'));
+
+    jn:=json.get(jn,'episodes');
+    epId:=json.name(json.at(jn,0));
+{
+kinopoiskId
+image
+ruTitle
+episodes:{:{id:
+}
+  end
+  else
+  begin
+    if res<>nil then
+      ShowError(int_ptr(res));
+    exit;
   end;
+
+  // Show mark as "watching"
+  StrCopy(StrCopyE(StrCopyE(request,API_URL+'profile/shows/'),shId),'/watching');
+  SendMSRequest(request,false);
+  json.free(shId);
+
+  // Episode check
+  StrCopy(StrCopyE(request,API_URL+'profile/episodes/check/'),epId);
+//  StrCopy(request,API_URL+'profile/shows/');
+  SendMSRequest(request,true);
+  json.free(epId);
+
+  json.delete_(jroot);
 end;
 
+(*
 //----- Get Info service functions -----
 
 function FullEncode(dst,src:pAnsiChar):PAnsiChar;
@@ -296,12 +293,12 @@ begin
   if lang<>0 then
     StrCopyE(StrCopyE(pc,'&lang='),pAnsiChar(@lang));
   res:=SendRequest(request,REQUEST_GET);
-  if (res<>nil) and (int_ptr(res)>$0FFF) then
+  if res<>nil then
   begin
     UTF8ToWide(res,pcw);
     mFreeMem(res);
     xmlparser.cbSize:=XML_API_SIZEOF_V1;
-    CallService(MS_SYSTEM_GET_XI,0,lparam(@xmlparser));
+    CallService(MS_SYSTEM_GET_XI,0,dword(@xmlparser));
     with xmlparser do
     begin
       i:=StrLenW(pcw)*SizeOf(WideChar);
@@ -425,7 +422,7 @@ begin
     UTF8ToWide(res,pcw);
     mFreeMem(res);
     xmlparser.cbSize:=XML_API_SIZEOF_V1;
-    CallService(MS_SYSTEM_GET_XI,0,lparam(@xmlparser));
+    CallService(MS_SYSTEM_GET_XI,0,dword(@xmlparser));
     with xmlparser do
     begin
       i:=StrLenW(pcw)*SizeOf(WideChar);
@@ -534,7 +531,7 @@ begin
     UTF8ToWide(res,pcw);
     mFreeMem(res);
     xmlparser.cbSize:=XML_API_SIZEOF_V1;
-    CallService(MS_SYSTEM_GET_XI,0,lparam(@xmlparser));
+    CallService(MS_SYSTEM_GET_XI,0,dword(@xmlparser));
     with xmlparser do
     begin
       i:=StrLenW(pcw)*SizeOf(WideChar);
@@ -597,3 +594,4 @@ begin
     end;
   end;
 end;
+*)
