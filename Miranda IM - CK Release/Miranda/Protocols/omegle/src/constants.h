@@ -1,9 +1,8 @@
 /*
-
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011-12 Robert Pösel
+Copyright © 2011-2012 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,7 +16,6 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 */
 
 #pragma once
@@ -39,6 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // Omegle request types
 #define OMEGLE_REQUEST_HOME						100 // getting server name
+#define OMEGLE_REQUEST_COUNT					105 // get count of connected users
 #define OMEGLE_REQUEST_START					110 // starting conversation
 #define OMEGLE_REQUEST_STOP						120 // ending conversation
 #define OMEGLE_REQUEST_SEND						300 // sending message
@@ -46,3 +45,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define OMEGLE_REQUEST_TYPING_START				310 // started typing
 #define OMEGLE_REQUEST_TYPING_STOP				311 // stoped typing
 #define OMEGLE_REQUEST_RECAPTCHA				400 // recaptcha handling
+
+// Servers list
+static const char *servers[] = {"Random", "bajor", "cardassia", "promenade", "odo-bucket", "ferengi", "quarks"};

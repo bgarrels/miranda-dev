@@ -1,9 +1,8 @@
 /*
-
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011-12 Robert Pösel
+Copyright © 2011-2012 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,12 +16,11 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 */
 
 #include "common.h"
 
-static BOOL LoadDBCheckState(OmegleProto* ppro, HWND hwnd, int idCtrl, const char* szSetting, BYTE bDef)
+static BOOL LoadDBCheckState(OmegleProto* ppro, HWND hwnd, int idCtrl, const char* szSetting, BYTE bDef = 0)
 {
 	BOOL state = DBGetContactSettingByte(NULL, ppro->m_szModuleName, szSetting, bDef);
 	CheckDlgButton(hwnd, idCtrl, state);
@@ -36,9 +34,32 @@ static BOOL StoreDBCheckState(OmegleProto* ppro, HWND hwnd, int idCtrl, const ch
 	return state;
 }
 
+static void LoadDBText(OmegleProto* ppro, HWND hwnd, int idCtrl, const char* szSetting)
+{
+	DBVARIANT dbv;
+	if( !DBGetContactSettingTString(NULL, ppro->m_szModuleName, szSetting, &dbv) )
+	{
+		SetDlgItemText(hwnd, idCtrl, dbv.ptszVal);
+		DBFreeVariant(&dbv);
+	}
+}
+
+static void StoreDBText(OmegleProto* ppro, HWND hwnd, int idCtrl, const char* szSetting)
+{
+	TCHAR tstr[OMEGLE_MESSAGE_LIMIT+1];
+
+	GetDlgItemText(hwnd, idCtrl, tstr, sizeof(tstr));
+	if ( lstrlen( tstr ) > 0 ) {
+		DBWriteContactSettingTString(NULL, ppro->m_szModuleName, szSetting, tstr);
+	} else {
+		DBDeleteContactSetting(NULL, ppro->m_szModuleName, szSetting);
+	}
+}
+
+
 INT_PTR CALLBACK OmegleAccountProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam )
 {
-/*	OmegleProto *proto;
+	OmegleProto *proto;
 
 	switch ( message )
 	{
@@ -49,43 +70,40 @@ INT_PTR CALLBACK OmegleAccountProc( HWND hwnd, UINT message, WPARAM wparam, LPAR
 		proto = reinterpret_cast<OmegleProto*>(lparam);
 		SetWindowLong(hwnd,GWLP_USERDATA,lparam);
 
-		DBVARIANT dbv;
-		if( !DBGetContactSettingString(0,proto->ModuleName(),OMEGLE_KEY_LOGIN,&dbv) )
-		{
-			SetDlgItemTextA(hwnd,IDC_UN,dbv.pszVal);
-			DBFreeVariant(&dbv);
-		}
+		SendDlgItemMessage(hwnd,IDC_INTERESTS, EM_LIMITTEXT, 512, 0);
 
-		if ( !DBGetContactSettingString(0,proto->ModuleName(),OMEGLE_KEY_PASS,&dbv) )
+		// Server
+		SendDlgItemMessageA(hwnd, IDC_SERVER, CB_INSERTSTRING, 0, reinterpret_cast<LPARAM>(Translate(servers[0])));
+		for(size_t i=1; i<SIZEOF(servers); i++)
 		{
-			CallService(MS_DB_CRYPT_DECODESTRING,strlen(dbv.pszVal)+1,
-				reinterpret_cast<LPARAM>(dbv.pszVal));
-			SetDlgItemTextA(hwnd,IDC_PW,dbv.pszVal);
-			DBFreeVariant(&dbv);
+			SendDlgItemMessageA(hwnd, IDC_SERVER, CB_INSERTSTRING, i, reinterpret_cast<LPARAM>(servers[i]));
 		}
+		SendDlgItemMessage(hwnd, IDC_SERVER, CB_SETCURSEL, DBGetContactSettingByte(NULL, proto->m_szModuleName, OMEGLE_KEY_SERVER, 0), 0);
 
-		if (!proto->isOffline()) {
-			SendMessage(GetDlgItem(hwnd,IDC_UN),EM_SETREADONLY,1,0);
-			SendMessage(GetDlgItem(hwnd,IDC_PW),EM_SETREADONLY,1,0); }
+		LoadDBText(proto, hwnd, IDC_NAME, OMEGLE_KEY_NAME);
+		LoadDBText(proto, hwnd, IDC_INTERESTS, OMEGLE_KEY_INTERESTS);
+		LoadDBCheckState(proto, hwnd, IDC_MEET_COMMON, OMEGLE_KEY_MEET_COMMON);
 
 		return TRUE;
 
 	case WM_COMMAND:
-		if ( LOWORD( wparam ) == IDC_NEWACCOUNTLINK )
+		switch(LOWORD(wparam))
 		{
-			CallService(MS_UTILS_OPENURL,1,reinterpret_cast<LPARAM>
-				( OMEGLE_URL_HOMEPAGE ) );
-			return TRUE;
-		}
-
-		if ( HIWORD( wparam ) == EN_CHANGE && reinterpret_cast<HWND>(lparam) == GetFocus() )
-		{
-			switch(LOWORD(wparam))
-			{
-			case IDC_UN:
-			case IDC_PW:
-				SendMessage(GetParent(hwnd),PSM_CHANGED,0,0);
-			}
+			case IDC_SERVER:	
+				if (HIWORD(wparam) == CBN_SELCHANGE) {
+					SendMessage(GetParent(hwnd), PSM_CHANGED, 0, 0);
+				} break;
+			case IDC_NAME:
+			case IDC_INTERESTS:
+				if (HIWORD(wparam) != EN_CHANGE || (HWND) lparam != GetFocus()) {
+					return TRUE;
+				} else {
+					SendMessage(GetParent(hwnd), PSM_CHANGED, 0, 0);
+				} break;
+			case IDC_MEET_COMMON:
+				if (HIWORD(wparam) == BN_CLICKED) {
+					SendMessage(GetParent(hwnd), PSM_CHANGED, 0, 0);
+				} break;
 		}
 		break;
 
@@ -93,27 +111,24 @@ INT_PTR CALLBACK OmegleAccountProc( HWND hwnd, UINT message, WPARAM wparam, LPAR
 		if ( reinterpret_cast<NMHDR*>(lparam)->code == PSN_APPLY )
 		{
 			proto = reinterpret_cast<OmegleProto*>(GetWindowLong(hwnd,GWLP_USERDATA));
-			char str[128];
 
-			GetDlgItemTextA(hwnd,IDC_UN,str,sizeof(str));
-			DBWriteContactSettingString(0,proto->ModuleName(),OMEGLE_KEY_LOGIN,str);
+			DBWriteContactSettingByte(NULL, proto->m_szModuleName, OMEGLE_KEY_SERVER, SendDlgItemMessage(hwnd, IDC_SERVER, CB_GETCURSEL, 0, 0));
 
-			GetDlgItemTextA(hwnd,IDC_PW,str,sizeof(str));
-			CallService(MS_DB_CRYPT_ENCODESTRING,sizeof(str),reinterpret_cast<LPARAM>(str));
-			DBWriteContactSettingString(0,proto->ModuleName(),OMEGLE_KEY_PASS,str);
+			StoreDBText(proto, hwnd, IDC_NAME, OMEGLE_KEY_NAME);
+			StoreDBText(proto, hwnd, IDC_INTERESTS, OMEGLE_KEY_INTERESTS);
+			StoreDBCheckState(proto, hwnd, IDC_MEET_COMMON, OMEGLE_KEY_MEET_COMMON);
 
 			return TRUE;
 		}
 		break;
 
 	}
-	*/
 	return FALSE;
 }
 
 INT_PTR CALLBACK OmegleOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam )
 {
-/*	OmegleProto *proto = reinterpret_cast<OmegleProto*>(GetWindowLong(hwnd,GWLP_USERDATA));
+	OmegleProto *proto = reinterpret_cast<OmegleProto*>(GetWindowLong(hwnd,GWLP_USERDATA));
 
 	switch ( message )
 	{
@@ -125,90 +140,86 @@ INT_PTR CALLBACK OmegleOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPAR
 		proto = reinterpret_cast<OmegleProto*>(lparam);
 		SetWindowLong(hwnd,GWLP_USERDATA,lparam);
 
-		DBVARIANT dbv;
-		if( !DBGetContactSettingString(0,proto->ModuleName(),OMEGLE_KEY_LOGIN,&dbv) )
+		SendDlgItemMessage(hwnd,IDC_INTERESTS, EM_LIMITTEXT, 512, 0);
+		SendDlgItemMessage(hwnd,IDC_HI_MESSAGE, EM_LIMITTEXT, OMEGLE_MESSAGE_LIMIT, 0);
+		SendDlgItemMessage(hwnd,IDC_ASL_MESSAGE, EM_LIMITTEXT, OMEGLE_MESSAGE_LIMIT, 0);
+
+		// Server
+		SendDlgItemMessageA(hwnd, IDC_SERVER, CB_INSERTSTRING, 0, reinterpret_cast<LPARAM>(Translate(servers[0])));
+		for(size_t i=1; i<SIZEOF(servers); i++)
 		{
-			SetDlgItemTextA(hwnd,IDC_UN,dbv.pszVal);
-			DBFreeVariant(&dbv);
+			SendDlgItemMessageA(hwnd, IDC_SERVER, CB_INSERTSTRING, i, reinterpret_cast<LPARAM>(servers[i]));
 		}
+		SendDlgItemMessage(hwnd, IDC_SERVER, CB_SETCURSEL, DBGetContactSettingByte(NULL, proto->m_szModuleName, OMEGLE_KEY_SERVER, 0), 0);
 
-		if ( !DBGetContactSettingString(0,proto->ModuleName(),OMEGLE_KEY_PASS,&dbv) )
-		{
-			CallService(MS_DB_CRYPT_DECODESTRING,strlen(dbv.pszVal)+1,reinterpret_cast<LPARAM>(dbv.pszVal));
-			SetDlgItemTextA(hwnd,IDC_PW,dbv.pszVal);
-			DBFreeVariant(&dbv);
-		}
+		LoadDBText(proto, hwnd, IDC_NAME, OMEGLE_KEY_NAME);
+		LoadDBText(proto, hwnd, IDC_INTERESTS, OMEGLE_KEY_INTERESTS);
+		LoadDBText(proto, hwnd, IDC_HI_MESSAGE, OMEGLE_KEY_HI);
+		LoadDBText(proto, hwnd, IDC_ASL_MESSAGE, OMEGLE_KEY_ASL);
 
-		if (!proto->isOffline())
-	    {
-			SendMessage(GetDlgItem(hwnd,IDC_UN),EM_SETREADONLY,TRUE,0);
-			SendMessage(GetDlgItem(hwnd,IDC_PW),EM_SETREADONLY,TRUE,0);
-		}
-
-		SendDlgItemMessage(hwnd, IDC_GROUP, EM_LIMITTEXT, OMEGLE_GROUP_NAME_LIMIT, 0);
-
-		if( !DBGetContactSettingTString(0,proto->ModuleName(),OMEGLE_KEY_DEF_GROUP,&dbv) )
-		{
-			SetDlgItemText(hwnd,IDC_GROUP,dbv.ptszVal);
-			DBFreeVariant(&dbv);
-		}
-
-		LoadDBCheckState(proto, hwnd, IDC_SET_IGNORE_STATUS, OMEGLE_KEY_DISABLE_STATUS_NOTIFY, DEFAULT_DISABLE_STATUS_NOTIFY);
-		LoadDBCheckState(proto, hwnd, IDC_BIGGER_AVATARS, OMEGLE_KEY_BIG_AVATARS, DEFAULT_BIG_AVATARS);
-		LoadDBCheckState(proto, hwnd, IDC_LOAD_MOBILE, OMEGLE_KEY_LOAD_MOBILE, DEFAULT_LOAD_MOBILE);
+		LoadDBCheckState(proto, hwnd, IDC_MEET_COMMON, OMEGLE_KEY_MEET_COMMON);
+		LoadDBCheckState(proto, hwnd, IDC_HI_ENABLED, OMEGLE_KEY_HI_ENABLED);
+		LoadDBCheckState(proto, hwnd, IDC_NOCLEAR, OMEGLE_KEY_NO_CLEAR);
+		LoadDBCheckState(proto, hwnd, IDC_DONTSTOP, OMEGLE_KEY_DONT_STOP);
+		LoadDBCheckState(proto, hwnd, IDC_REUSE_QUESTIONS, OMEGLE_KEY_REUSE_QUESTION);
+		LoadDBCheckState(proto, hwnd, IDC_LOGGING, OMEGLE_KEY_LOGGING);
 
 	} return TRUE;
 
 	case WM_COMMAND: {
-		if ( LOWORD( wparam ) == IDC_NEWACCOUNTLINK )
-		{
-			CallService(MS_UTILS_OPENURL,1,reinterpret_cast<LPARAM>
-				( OMEGLE_URL_HOMEPAGE ) );
-			return TRUE;
-		}
 
-		if ( LOWORD( wparam ) == IDC_SECURE ) {			
-			EnableWindow(GetDlgItem(hwnd, IDC_SECURE_CHANNEL), IsDlgButtonChecked(hwnd, IDC_SECURE));
-		}		
-		
-		if ((LOWORD(wparam)==IDC_UN || LOWORD(wparam)==IDC_PW || LOWORD(wparam)==IDC_GROUP) &&
-		    (HIWORD(wparam)!=EN_CHANGE || (HWND)lparam!=GetFocus()))
-			return 0;
-		else
-			SendMessage(GetParent(hwnd),PSM_CHANGED,0,0);
+		switch(LOWORD(wparam))
+		{
+			case IDC_SERVER:	
+				if (HIWORD(wparam) == CBN_SELCHANGE) {
+					SendMessage(GetParent(hwnd), PSM_CHANGED, 0, 0);
+				} break;
+			case IDC_NAME:
+			case IDC_INTERESTS:			
+			case IDC_HI_MESSAGE:
+			case IDC_ASL_MESSAGE:
+				if (HIWORD(wparam) != EN_CHANGE || (HWND) lparam != GetFocus()) {
+					return TRUE;
+				} else {
+					SendMessage(GetParent(hwnd), PSM_CHANGED, 0, 0);
+				} break;
+			case IDC_MEET_COMMON:
+			case IDC_HI_ENABLED:
+			case IDC_NOCLEAR:
+			case IDC_DONTSTOP:
+			case IDC_REUSE_QUESTIONS:
+			case IDC_LOGGING:
+				if (HIWORD(wparam) == BN_CLICKED) {
+					SendMessage(GetParent(hwnd), PSM_CHANGED, 0, 0);
+				} break;
+		}
 
 	} break;
 
 	case WM_NOTIFY:
 		if ( reinterpret_cast<NMHDR*>(lparam)->code == PSN_APPLY )
 		{
-			char str[128]; TCHAR tstr[128];
+			proto = reinterpret_cast<OmegleProto*>(GetWindowLong(hwnd,GWLP_USERDATA));
 
-			GetDlgItemTextA(hwnd,IDC_UN,str,sizeof(str));
-			DBWriteContactSettingString(0,proto->ModuleName(),OMEGLE_KEY_LOGIN,str);
+			DBWriteContactSettingByte(NULL, proto->m_szModuleName, OMEGLE_KEY_SERVER, SendDlgItemMessage(hwnd, IDC_SERVER, CB_GETCURSEL, 0, 0));
 
-			GetDlgItemTextA(hwnd,IDC_PW,str,sizeof(str));
-			CallService(MS_DB_CRYPT_ENCODESTRING,sizeof(str),reinterpret_cast<LPARAM>(str));
-			DBWriteContactSettingString(NULL,proto->m_szModuleName,OMEGLE_KEY_PASS,str);
+			StoreDBText(proto, hwnd, IDC_NAME, OMEGLE_KEY_NAME);
+			StoreDBText(proto, hwnd, IDC_INTERESTS, OMEGLE_KEY_INTERESTS);
+			StoreDBText(proto, hwnd, IDC_HI_MESSAGE, OMEGLE_KEY_HI);
+			StoreDBText(proto, hwnd, IDC_ASL_MESSAGE, OMEGLE_KEY_ASL);
 
-			GetDlgItemText(hwnd,IDC_GROUP,tstr,sizeof(tstr));
-			if ( lstrlen( tstr ) > 0 )
-			{
-				DBWriteContactSettingTString(NULL,proto->m_szModuleName,OMEGLE_KEY_DEF_GROUP,tstr);
-				CallService( MS_CLIST_GROUPCREATE, 0, (LPARAM)tstr );
-			}
-			else
-				DBDeleteContactSetting(NULL,proto->m_szModuleName,OMEGLE_KEY_DEF_GROUP);
-
-			StoreDBCheckState(proto, hwnd, IDC_SET_IGNORE_STATUS, OMEGLE_KEY_DISABLE_STATUS_NOTIFY);
-			StoreDBCheckState(proto, hwnd, IDC_BIGGER_AVATARS, OMEGLE_KEY_BIG_AVATARS);
-			StoreDBCheckState(proto, hwnd, IDC_LOAD_MOBILE, OMEGLE_KEY_LOAD_MOBILE);
+			StoreDBCheckState(proto, hwnd, IDC_MEET_COMMON, OMEGLE_KEY_MEET_COMMON);
+			StoreDBCheckState(proto, hwnd, IDC_HI_ENABLED, OMEGLE_KEY_HI_ENABLED);
+			StoreDBCheckState(proto, hwnd, IDC_NOCLEAR, OMEGLE_KEY_NO_CLEAR);
+			StoreDBCheckState(proto, hwnd, IDC_DONTSTOP, OMEGLE_KEY_DONT_STOP);
+			StoreDBCheckState(proto, hwnd, IDC_REUSE_QUESTIONS, OMEGLE_KEY_REUSE_QUESTION);
+			StoreDBCheckState(proto, hwnd, IDC_LOGGING, OMEGLE_KEY_LOGGING);
 			
 			return TRUE;
 		}
 		break;
 
 	}
-	*/
+	
 	return FALSE;
 }
