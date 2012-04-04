@@ -1,9 +1,8 @@
 /*
-
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011-12 Robert Pösel
+Copyright © 2011-2012 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,7 +16,6 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 */
 
 #include "common.h"
@@ -30,16 +28,6 @@ OmegleProto::OmegleProto(const char* proto_name, const TCHAR* username)
 	m_tszUserName  = mir_tstrdup( username );
 
 	this->facy.parent = this;
-	this->facy.nick_ = Translate("You");
-
-	DBVARIANT dbv;
-	if ( !DBGetContactSettingUTF8String(NULL,m_szModuleName,"Nick",&dbv) )
-	{
-		this->facy.nick_ = dbv.pszVal;
-		DBFreeVariant(&dbv);
-	} else {
-		DBWriteContactSettingUTF8String(NULL,m_szModuleName,"Nick",this->facy.nick_.c_str());
-	}
 
 	this->signon_lock_ = CreateMutex( NULL, FALSE, NULL );
 	this->log_lock_ = CreateMutex( NULL, FALSE, NULL );
@@ -74,7 +62,7 @@ OmegleProto::OmegleProto(const char* proto_name, const TCHAR* username)
 
 	SkinAddNewSoundExT( "StrangerIn", m_tszUserName, LPGENT( "Stranger connected" ) );
 	SkinAddNewSoundExT( "StrangerOut", m_tszUserName, LPGENT( "Stranger disconnected" ) );
-	SkinAddNewSoundExT( "MessageIn", m_tszUserName, LPGENT( "Incomming message" ) );
+	SkinAddNewSoundExT( "MessageIn", m_tszUserName, LPGENT( "Incoming message" ) );
 	SkinAddNewSoundExT( "MessageOut", m_tszUserName, LPGENT( "Outgoing message" ) );
 }
 

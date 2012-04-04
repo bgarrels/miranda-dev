@@ -1,9 +1,8 @@
 /*
-
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011-12 Robert Pösel
+Copyright © 2011-2012 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,7 +16,6 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 */
 
 #pragma once
@@ -42,7 +40,7 @@ public:
 	}
 
 	HANDLE hConnection;
-	HANDLE hEventsConnection;;
+	HANDLE hEventsConnection;
 	HANDLE connection_lock_;
 
 	// Parent handle
@@ -60,6 +58,8 @@ public:
 	// Data storage
 	std::map< std::string, std::string >    headers;
 	void    store_headers( http::response* resp, NETLIBHTTPHEADER* headers, int headers_count );
+	
+	std::string get_server( );
 
 	// Connection handling
 	unsigned int error_count_;
@@ -72,10 +72,8 @@ public:
 
 	void __inline increment_error( ) { this->error_count_++; }
 	void __inline decrement_error( ) { if ( error_count_ > 0 ) error_count_--; }
-	void __inline reset_error( ) { error_count_ = 0; }
+	void __inline reset_error( ) { error_count_ = 0; }	
 
-
-	bool    home( );
 	bool    start( );
 	bool    stop( );
 	bool    events( );
@@ -83,17 +81,19 @@ public:
 	bool    typing_start( );
 	bool    typing_stop( );
 	bool    recaptcha( );
+
+	std::string get_page( int );
 	
 	bool    send_message( std::string message_text );
 
 	// HTTP communication
-	http::response  flap( const int request_type, std::string* request_data = NULL );
+	http::response  flap( const int request_type, std::string* request_data = NULL, std::string* get_data = NULL );
 
 	int     choose_method( int );
 	std::string choose_proto( int );
-	std::string choose_server( int, std::string* data = NULL );
-	std::string choose_action( int, std::string* data = NULL );
-	std::string choose_request_url( int, std::string* data = NULL );
+	std::string choose_server( int, std::string* data = NULL, std::string* get_data = NULL );
+	std::string choose_action( int, std::string* data = NULL, std::string* get_data = NULL );
+	std::string choose_request_url( int, std::string* data = NULL, std::string* get_data = NULL );
 
 	NETLIBHTTPHEADER*   get_request_headers( int request_type, int* headers_count );
 

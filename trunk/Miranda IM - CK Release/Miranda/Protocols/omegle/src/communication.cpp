@@ -1,9 +1,8 @@
 /*
-
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011-12 Robert Pösel
+Copyright © 2011-2012 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,11 +20,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "common.h"
 
-http::response Omegle_client::flap( const int request_type, std::string* request_data )
+http::response Omegle_client::flap( const int request_type, std::string* request_data, std::string* get_data )
 {
 	NETLIBHTTPREQUEST nlhr = {sizeof( NETLIBHTTPREQUEST )};
 	nlhr.requestType = choose_method( request_type );
-	std::string url = choose_request_url( request_type, request_data );
+	std::string url = choose_request_url( request_type, request_data, get_data );
 	nlhr.szUrl = (char*)url.c_str( );
 	nlhr.flags = NLHRF_HTTP11 | /*NLHRF_NODUMP |*/ NLHRF_GENERATEHOST;
 	nlhr.headers = get_request_headers( request_type, &nlhr.headersCount );
@@ -146,11 +145,26 @@ bool Omegle_client::handle_error( std::string method, bool force_disconnect )
 
 //////////////////////////////////////////////////////////////////////////////
 
+std::string Omegle_client::get_server( )
+{
+	BYTE server = DBGetContactSettingByte(NULL, parent->m_szModuleName, OMEGLE_KEY_SERVER, 0);
+	if (server < 0 || server >= SIZEOF(servers))
+		server = 0;	
+
+	if (server == 0) {
+		srand(::time(NULL));
+		server = (rand() % (SIZEOF(servers)-1))+1;
+	}
+
+	return servers[server];
+}
+
 int Omegle_client::choose_method( int request_type )
 {
 	switch ( request_type )
 	{
 	case OMEGLE_REQUEST_HOME:
+	case OMEGLE_REQUEST_COUNT:
 		return REQUEST_GET;
 	
 /*	case OMEGLE_REQUEST_START:
@@ -165,7 +179,7 @@ int Omegle_client::choose_method( int request_type )
 	}
 }
 
-std::string Omegle_client::choose_server( int request_type, std::string* data )
+std::string Omegle_client::choose_server( int request_type, std::string* data, std::string* get_data )
 {
 	switch ( request_type )
 	{
@@ -179,6 +193,7 @@ std::string Omegle_client::choose_server( int request_type, std::string* data )
 	case OMEGLE_REQUEST_TYPING_START:
 	case OMEGLE_REQUEST_TYPING_STOP:
 	case OMEGLE_REQUEST_RECAPTCHA:
+	case OMEGLE_REQUEST_COUNT:
 */	default:
 		std::string server = OMEGLE_SERVER_CHAT;
 		utils::text::replace_first( &server, "%s", this->server_ );
@@ -186,12 +201,18 @@ std::string Omegle_client::choose_server( int request_type, std::string* data )
 	}
 }
 
-std::string Omegle_client::choose_action( int request_type, std::string* data )
+std::string Omegle_client::choose_action( int request_type, std::string* data, std::string* get_data )
 {
 	switch ( request_type )
 	{
 	case OMEGLE_REQUEST_START:
-		return "/start?rcs=1&spid=";
+		{
+			std::string action = "/start?rcs=1&spid=";
+			if (get_data != NULL)
+				action += (*get_data);
+
+			return action;
+		}
 
 	case OMEGLE_REQUEST_STOP:
 		return "/disconnect";
@@ -211,17 +232,22 @@ std::string Omegle_client::choose_action( int request_type, std::string* data )
 	case OMEGLE_REQUEST_RECAPTCHA:
 		return "/recaptcha";
 
+	case OMEGLE_REQUEST_COUNT:
+		return "/count";
+
+	// "/stoplookingforcommonlikes"
+
 /*	case OMEGLE_REQUEST_HOME:
 */	default:
 		return "/";
 	}
 }
 
-std::string Omegle_client::choose_request_url( int request_type, std::string* data )
+std::string Omegle_client::choose_request_url( int request_type, std::string* data, std::string* get_data )
 {
 	std::string url = "";
-	url.append( choose_server( request_type, data ) );
-	url.append( choose_action( request_type, data ) );
+	url.append( choose_server( request_type, data, get_data ) );
+	url.append( choose_action( request_type, data, get_data ) );
 	return url;
 }
 
@@ -240,6 +266,7 @@ NETLIBHTTPHEADER* Omegle_client::get_request_headers( int request_type, int* hea
 		break;
 
 	case OMEGLE_REQUEST_HOME:
+	case OMEGLE_REQUEST_COUNT:
 	default:
 		*headers_count = 3;
 		break;
@@ -260,6 +287,7 @@ NETLIBHTTPHEADER* Omegle_client::get_request_headers( int request_type, int* hea
 		headers[3].szValue = "application/x-www-form-urlencoded; charset=utf-8";
 
 	case OMEGLE_REQUEST_HOME:
+	case OMEGLE_REQUEST_COUNT:
 	default:
 		headers[2].szName = "User-Agent";
 		headers[2].szValue = (char *)g_strUserAgent.c_str( );
@@ -280,6 +308,7 @@ void Omegle_client::store_headers( http::response* resp, NETLIBHTTPHEADER* heade
 		std::string header_name = headers[i].szName; // TODO: Casting?
 		std::string header_value = headers[i].szValue; // TODO: Casting?
 
+		// TODO RM: (un)comment
 		//parent->Log("----- Got header '%s': %s", header_name.c_str(), header_value.c_str() );
 		resp->headers[header_name] = header_value;
 	}
@@ -291,25 +320,75 @@ bool Omegle_client::start()
 {
 	handle_entry( "start" );
 
+	this->server_ = get_server();
+	//parent->Log("Chosing server %s", this->server_.c_str());
+	//std::string log = Translate("Chosing server: ") + this->server_;
+	//parent->UpdateChat(NULL, log.c_str());
 
-	// Choose random server
-	const char *servers[] = {"bajor", "cardassia", "promenade", "odo-bucket", "quarks"};
-	
-	srand(::time(NULL));
-	this->server_ = servers[rand() % 5];
-	parent->Log("Chosing server %s", this->server_.c_str());
+	std::string data;
 
-	std::string log = Translate("Chosing server: ") + this->server_;
+	/*if (1) {
+		data = "&wantsspy=1";
 
-	parent->UpdateChat(NULL, log.c_str());
+		std::string question = "How are you?";
+		data = "&ask=" + utils::url::encode(question);
+		data += "&cansavequestion=" + DBGetContactSettingByte(NULL, parent->m_szModuleName, OMEGLE_KEY_REUSE_QUESTION, 0) ? "1" : "0";
+	}
+	else */if ( DBGetContactSettingByte(NULL, parent->m_szModuleName, OMEGLE_KEY_MEET_COMMON, 0) )
+	{
+		DBVARIANT dbv;
+		if (!DBGetContactSettingUTF8String(NULL, parent->m_szModuleName, OMEGLE_KEY_INTERESTS, &dbv))
+		{
+			std::string topics = dbv.pszVal;
+			std::string topic;
+		
+			DBFreeVariant(&dbv);
 
+			std::string::size_type pos = 0;
+			std::string::size_type pos2 = 0;
+			while ((pos2 = topics.find(",", pos)) != std::string::npos) {
+				topic = topics.substr(pos, pos2 - pos);
+				topic = utils::text::trim(topic);
 
+				if (!topic.empty()) {
+					if (pos > 0)
+						data += ",";
 
+					data += "\"" + topic + "\"";
+				}
 
-	std::string data = "id=" + this->chat_id_;
+				pos = pos2 + 1;
+			}
+		
+			topic = topics.substr(pos);
+			topic = utils::text::trim(topic);
+			if (!topic.empty()) {			
+				if (pos > 0)
+					data += ",";
+				data += "\"" + topic + "\"";			
+			}
+
+			parent->Log("TOPICS: %s", data.c_str());
+
+			if (!data.empty()) {
+				data = "[" + data + "]";
+				data = "&topics=" + utils::url::encode(data);
+			}
+				
+			// Interests feature supports only Quarks server
+			this->server_ = "quarks";
+		}
+	}
+
+	std::string count = get_page( OMEGLE_REQUEST_COUNT );
+	if (!count.empty()) {
+		char str[255];
+		mir_snprintf(str, sizeof(str), Translate("Connected to server %s. There are %s users online now."), server_.c_str(), count.c_str());
+		parent->UpdateChat(NULL, str);
+	}
 
 	// Send validation
-	http::response resp = flap( OMEGLE_REQUEST_START, &data );
+	http::response resp = flap( OMEGLE_REQUEST_START, NULL, &data );
 
 	// Process result data
 	validate_response(&resp);
@@ -319,7 +398,7 @@ bool Omegle_client::start()
 	case HTTP_CODE_FAKE_DISCONNECTED:
 	{
 		// If is is only timeout error, try login once more
-		if ( handle_error( "login" ) )
+		if ( handle_error( "start" ) )
 			return start();
 		else
 			return false;
@@ -331,14 +410,14 @@ bool Omegle_client::start()
 			this->chat_id_ = resp.data.substr(1,resp.data.length()-2);
 			this->connected_ = true;
 
-			return handle_success( "login" );
+			return handle_success( "start" );
 		} else {
-			return handle_error( "login", FORCE_DISCONNECT );
+			return handle_error( "start", FORCE_DISCONNECT );
 		}
 	}
 
 	default:
-		return handle_error( "login", FORCE_DISCONNECT );
+		return handle_error( "start", FORCE_DISCONNECT );
 	}
 }
 
@@ -377,43 +456,6 @@ bool Omegle_client::stop( )
 	}*/
 }
 
-bool Omegle_client::home( )
-{
-	handle_entry( "home" );
-
-	http::response resp = flap( OMEGLE_REQUEST_HOME );
-
-	// Process result data
-	validate_response(&resp);
-
-	switch ( resp.code )
-	{
-	case HTTP_CODE_OK:
-	{
-		std::string::size_type pos = 0;
-		if ( (pos = resp.data.find( "<frame src=\"http://" )) != std::string::npos )
-		{
-			// Get chat server address
-			pos += 19;
-			this->server_ = resp.data.substr(pos, resp.data.find(".omegle.com", pos) - pos);
-			parent->Log("      Got chat server name: %s", this->server_.c_str());
-
-			return handle_success( "home" );
-		}
-		else
-		{
-			/*client_notify(TranslateT("Something happened to Omegle. Maybe there was some major update so you should wait for an update."));*/
-			return handle_error( "home", FORCE_DISCONNECT );
-		}
-	}
-	case HTTP_CODE_FOUND:
-		return this->home();
-	
-	default:
-		return handle_error( "home", FORCE_DISCONNECT );
-	}
-}
-
 bool Omegle_client::events( )
 {
 	handle_entry( "events" );
@@ -434,50 +476,111 @@ bool Omegle_client::events( )
 		if ( resp.data == "null" ) {
 			// Everything is OK, no new message received
 			return handle_success( "events" );
-		}
-		else if ( resp.data == "fail" ) {
+		} else if ( resp.data == "fail" ) {
 			// Something went wrong
 			return handle_error( "events" );
 		}
 		
 		std::string::size_type pos = 0;
+		bool newStranger = false;
+		bool waiting = false;
 		
 		if ( resp.data.find( "[\"waiting\"]" ) != std::string::npos ) {
 			// We are just waiting for new Stranger
+			waiting = true;
 		}
+
 		if ( (pos = resp.data.find( "[\"count\"," )) != std::string::npos ) {
 			// We got info about count of connected people there
 			pos += 9;
 
-			std::string count = utils::text::trim(
-				resp.data.substr(pos, resp.data.find("]", pos) - pos) );
+			std::string count = utils::text::trim( resp.data.substr(pos, resp.data.find("]", pos) - pos) );
 
 			char str[255];
-			mir_snprintf(str, sizeof(str), Translate("There are %s strangers online"), count.c_str());
+			mir_snprintf(str, sizeof(str), Translate("On whole Omegle are %s strangers online now."), count.c_str());
 			parent->UpdateChat(NULL, str);
 		}
+
 		if ( resp.data.find( "[\"connected\"]" ) != std::string::npos ) {
 			// Stranger connected
 			parent->AddChatContact(Translate("Stranger"));
-			
-			// Send HI message?
-			DBVARIANT dbv;				
-			if ( !DBGetContactSettingUTF8String( NULL, parent->m_szModuleName, OMEGLE_KEY_HI, &dbv ) ) {
-				std::string *message = new std::string(dbv.pszVal);
-				DBFreeVariant(&dbv);
-
-				parent->Log("**Chat - saying Hi! message");
-				ForkThread(&OmegleProto::SendMsgWorker, parent, (void*)message);
-			}
+			newStranger = true;
+			waiting = false;
 		}
+
+		if ( (pos = resp.data.find( "[\"commonLikes\",", pos )) != std::string::npos ) {
+			pos += 18;
+			std::string like = resp.data.substr(pos, resp.data.find("\"]", pos) - pos);
+			utils::text::replace_all(&like, "\", \"", ", ");
+
+			parent->Log("Got common likes: '%s'", like.c_str());
+
+			like = Translate("You and the Stranger both like: ") + like;
+			parent->UpdateChat(NULL, like.c_str());
+		}
+
+		if ( (pos = resp.data.find( "[\"question\"," )) != std::string::npos ) {
+			pos += 14;
+
+			std::string question = utils::text::trim(
+				utils::text::special_expressions_decode(
+					utils::text::slashu_to_utf8(
+						resp.data.substr(pos, resp.data.find("\"]", pos) - pos)	) ) );
+			
+			question = Translate("Question to discuss: ") + question;
+
+			parent->UpdateChat(NULL, question.c_str());
+		}
+
 		if ( resp.data.find( "[\"typing\"]" ) != std::string::npos ) {
 			// Stranger is typing
 			// TODO: not supported by Group chats right now
 		}
-		if ( resp.data.find( "[\"stoppedtyping\"]" ) != std::string::npos ) {
+
+		if ( resp.data.find( "[\"stoppedTyping\"]" ) != std::string::npos ) {
 			// Stranger stopped typing
 			// TODO: not supported by Group chats right now
 		}
+
+
+		if ( (pos = resp.data.find( "[\"spyTyping\",", pos )) != std::string::npos ) {
+			pos += 15;
+
+			std::string stranger = utils::text::trim(
+				utils::text::special_expressions_decode(
+					utils::text::slashu_to_utf8(
+						resp.data.substr(pos, resp.data.find("\"]", pos) - pos)	) ) );
+
+			// parent->UpdateChat(NULL, question.c_str());
+		}
+		
+		if ( (pos = resp.data.find( "[\"spyStoppedTyping\",", pos )) != std::string::npos ) {
+			pos += 22;
+
+			std::string stranger = utils::text::trim(
+				utils::text::special_expressions_decode(
+					utils::text::slashu_to_utf8(
+						resp.data.substr(pos, resp.data.find("\"]", pos) - pos)	) ) );
+
+			// parent->UpdateChat(NULL, question.c_str());
+		}
+
+		if ( (pos = resp.data.find( "[\"spyDisconnected\",", pos )) != std::string::npos ) {
+			pos += 21;
+
+			std::string stranger = utils::text::trim(
+				utils::text::special_expressions_decode(
+					utils::text::slashu_to_utf8(
+						resp.data.substr(pos, resp.data.find("\"]", pos) - pos)	) ) );
+
+			// Stranger disconnected
+			if (DBGetContactSettingByte(NULL, parent->m_szModuleName, OMEGLE_KEY_DONT_STOP, 0))
+				parent->NewChat();
+			else			
+				parent->StopChat(false);
+		}
+
+		// TODO: "spyMessage", ["name", "message"]
 		
 		pos = 0;
 		while ( (pos = resp.data.find( "[\"gotMessage\",", pos )) != std::string::npos ) {
@@ -498,14 +601,50 @@ bool Omegle_client::events( )
 			else			
 				parent->StopChat(false);
 		}
+
 		if ( resp.data.find( "[\"recaptchaRequired\"" ) != std::string::npos ) {
 			// Nothing to do with recaptcha
 			parent->UpdateChat(NULL, Translate("Recaptcha is required.\nOpen Omegle chat in webbrowser, solve Recaptcha and try again."));
 			parent->StopChat(false);
 		}
+
 		if ( resp.data.find( "[\"recaptchaRejected\"]" ) != std::string::npos ) {
 			// Nothing to do with recaptcha
 			parent->StopChat(false);
+		}
+
+		pos = 0;
+		if ( (pos = resp.data.find( "[\"error\",", pos )) != std::string::npos ) {
+			pos += 11;
+
+			std::string error = utils::text::trim(
+				utils::text::special_expressions_decode(
+					utils::text::slashu_to_utf8(
+						resp.data.substr(pos, resp.data.find("\"]", pos) - pos)	) ) );
+
+			error = Translate("Error: ") + error; 
+			parent->UpdateChat(NULL, error.c_str());
+		}
+				
+		if (newStranger) {
+			// We got new stranger in this event, lets say him "Hi message" if enabled			
+			if ( DBGetContactSettingByte( NULL, parent->m_szModuleName, OMEGLE_KEY_HI_ENABLED, 0 ) ) {
+				DBVARIANT dbv;
+				if ( !DBGetContactSettingUTF8String( NULL, parent->m_szModuleName, OMEGLE_KEY_HI, &dbv ) ) {
+					std::string *message = new std::string(dbv.pszVal);
+					DBFreeVariant(&dbv);
+	
+					parent->Log("**Chat - saying Hi! message");
+					ForkThread(&OmegleProto::SendMsgWorker, parent, (void*)message);
+				} else {
+					parent->Log("**Chat - Hi message is enabled but not used");
+				}
+			}
+		}
+
+		if (waiting) {
+			// If we are only waiting in this event...
+			parent->UpdateChat(NULL, Translate("We are still waiting..."));
 		}
 
 		return handle_success( "events" );
@@ -600,6 +739,9 @@ bool Omegle_client::recaptcha()
 
 	handle_entry( "recaptcha" );
 
+	// data:{id:this.clientID,challenge:b,response:a}}
+	//std::string data = "?id=...&challenge= ..., &response= ...";
+
 	http::response resp = flap( OMEGLE_REQUEST_RECAPTCHA );
 
 	validate_response(&resp);
@@ -616,4 +758,25 @@ bool Omegle_client::recaptcha()
 	default:
 		return handle_error( "typing_start" );
 	}
+}
+
+std::string Omegle_client::get_page( const int request_type )
+{
+	handle_entry( "get_page" );
+
+	http::response resp = flap( OMEGLE_REQUEST_COUNT );
+
+	switch ( resp.code )
+	{
+	case HTTP_CODE_OK:
+		handle_success( "get_page" );
+		return resp.data;
+		break;
+
+	case HTTP_CODE_FAKE_ERROR:
+	case HTTP_CODE_FAKE_DISCONNECTED:
+	default:
+		handle_error( "get_page" );
+		return NULL;
+	}	
 }
