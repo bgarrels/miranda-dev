@@ -190,7 +190,6 @@ static bool NetlibHttpGatewayOscarPost(NetlibConnection *nlc, const char *buf, i
 	nlcSend.nlu              = nlc->nlu;
 	nlcSend.nlhpi            = nlc->nlhpi;
 	nlcSend.s                = nlc->s2;
-	nlcSend.sinProxy         = nlc->sinProxy;
 	nlcSend.usingHttpGateway = nlc->usingHttpGateway;
 	nlcSend.szProxyServer    = nlc->szProxyServer;
 	nlcSend.wProxyPort       = nlc->wProxyPort;
@@ -432,7 +431,7 @@ int NetlibHttpGatewayRecv(struct NetlibConnection *nlc, char *buf, int len, int 
 
 int NetlibInitHttpConnection(struct NetlibConnection *nlc, struct NetlibUser *nlu, NETLIBOPENCONNECTION *nloc)
 {
-	NETLIBHTTPREQUEST *nlhrReply=NULL;
+	NETLIBHTTPREQUEST *nlhrReply = NULL;
 
 	nlc->nlhpi.firstGetSequence  = 1; 
 	nlc->nlhpi.firstPostSequence = 1;
@@ -440,9 +439,8 @@ int NetlibInitHttpConnection(struct NetlibConnection *nlc, struct NetlibUser *nl
 	if (nlu->user.szHttpGatewayHello != NULL) 
 	{
 		nlc->usingHttpGateway = true;
-		NetlibHttpGatewaySend(nlc, reqHelloGet, NULL, 0);
-
-		nlhrReply = NetlibHttpRecv(nlc, MSG_DUMPPROXY | MSG_RAW, MSG_DUMPPROXY | MSG_RAW);
+		if (NetlibHttpGatewaySend(nlc, reqHelloGet, NULL, 0))
+			nlhrReply = NetlibHttpRecv(nlc, MSG_DUMPPROXY | MSG_RAW, MSG_DUMPPROXY | MSG_RAW);
 		nlc->usingHttpGateway = false;
 		if (nlhrReply == NULL) return 0;
 

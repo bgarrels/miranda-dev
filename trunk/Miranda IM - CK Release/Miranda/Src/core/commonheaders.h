@@ -20,18 +20,20 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-// to enable all 0.10.0 core functions
-#define MIRANDA_VER 0x0A00
+// to enable all 0.9.0 core functions
+#define MIRANDA_VER 0x1000
 
 #define _ALPHA_BASE_ 1	// defined for CVS builds
 #define _ALPHA_FUSE_ 1	// defined for fuse powered core
 
-#define WINVER 0x0600
-#define _WIN32_WINNT 0x0600
-#define _WIN32_IE 0x0600
+#define WINVER 0x0700
+#define _WIN32_WINNT 0x0700
+#define _WIN32_IE 0x0601
 
 #include "m_stdhdr.h"
 
+#include <winsock2.h>
+#include <ws2tcpip.h>
 #include <windows.h>
 #include <windowsx.h>
 #include <shlobj.h>

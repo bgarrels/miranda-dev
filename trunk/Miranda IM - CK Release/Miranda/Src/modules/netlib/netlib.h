@@ -1,7 +1,7 @@
 /*
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2012 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -62,7 +62,6 @@ struct NetlibConnection
 	bool dnsThroughProxy;
 	bool termRequested;
 	struct NetlibUser *nlu;
-	SOCKADDR_IN sinProxy;
 	NETLIBHTTPPROXYINFO nlhpi;
 	PBYTE dataBuffer;
 	int dataBufferLen;

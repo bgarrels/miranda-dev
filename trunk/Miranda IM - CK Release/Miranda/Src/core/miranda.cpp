@@ -75,6 +75,9 @@ pfnGetBufferedPaintBits getBufferedPaintBits;
 pfnDwmExtendFrameIntoClientArea dwmExtendFrameIntoClientArea;
 pfnDwmIsCompositionEnabled dwmIsCompositionEnabled;
 
+pfnGetaddrinfo MyGetaddrinfo;
+pfnFreeaddrinfo MyFreeaddrinfo;
+
 ITaskbarList3 * pTaskbarInterface;
 
 static DWORD MsgWaitForMultipleObjectsExWorkaround(DWORD nCount, const HANDLE *pHandles,
@@ -545,10 +548,7 @@ void ParseCommandLine()
 	}	
 }
 
-int APIENTRY _tWinMain( HINSTANCE hInstance,
-	HINSTANCE hPrevInstance,
-	PTSTR    lpCmdLine,
-	int       nCmdShow )
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int )
 {
 	DWORD myPid=0;
 	int messageloop=1;
@@ -626,6 +626,10 @@ int APIENTRY _tWinMain( HINSTANCE hInstance,
 			dwmIsCompositionEnabled = (pfnDwmIsCompositionEnabled)GetProcAddress(hDwmApi,"DwmIsCompositionEnabled");
 		}
 	}
+
+	HMODULE hWinSock = GetModuleHandleA("ws2_32");
+	MyGetaddrinfo = (pfnGetaddrinfo)GetProcAddress(hWinSock, "getaddrinfo");
+	MyFreeaddrinfo = (pfnFreeaddrinfo)GetProcAddress(hWinSock, "freeaddrinfo");
 
 	if (bufferedPaintInit) bufferedPaintInit();
 
