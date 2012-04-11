@@ -20,42 +20,38 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "common.h"
 
-void OmegleProto::UpdateChat(const char *name, const char *message, bool addtolog)
+void OmegleProto::UpdateChat(const TCHAR *name, const TCHAR *message, bool addtolog)
 {
 	GCDEST gcd = { m_szModuleName };
 	gcd.ptszID = const_cast<TCHAR*>(m_tszUserName);
 
 	GCEVENT gce  = {sizeof(gce)};
 	gce.pDest    = &gcd;
-	gce.ptszText = mir_a2t_cp(message,CP_UTF8);
+	gce.ptszText = message;
 	gce.time     = ::time(NULL);
 	gce.dwFlags  = GC_TCHAR;
 	gcd.iType  = GC_EVENT_MESSAGE;
 
 	if (name == NULL) {
 		gcd.iType = GC_EVENT_INFORMATION;
-		name = Translate("Server");
+		name = TranslateT("Server");
 		gce.bIsMe = false;
 	} else {
-		gce.bIsMe = !strcmp(name,this->facy.nick_.c_str());
+		gce.bIsMe = !_tcscmp(name, this->facy.nick_);
 	}
 
 	if (addtolog)
 		gce.dwFlags  |= GCEF_ADDTOLOG;
 
-	gce.ptszNick = mir_a2t(name);
+	gce.ptszNick = name;
 	gce.ptszUID  = gce.ptszNick;
 
 	CallServiceSync(MS_GC_EVENT,0,reinterpret_cast<LPARAM>(&gce));
-
-	mir_free(const_cast<TCHAR*>(gce.ptszNick));
-	mir_free(const_cast<TCHAR*>(gce.ptszText));
 }
 
-int OmegleProto::OnChatOutgoing(WPARAM wParam,LPARAM lParam)
+int OmegleProto::OnChatEvent(WPARAM wParam,LPARAM lParam)
 {
 	GCHOOK *hook = reinterpret_cast<GCHOOK*>(lParam);
-	char *text;
 
 	if(strcmp(hook->pDest->pszModule,m_szModuleName))
 		return 0;
@@ -63,56 +59,110 @@ int OmegleProto::OnChatOutgoing(WPARAM wParam,LPARAM lParam)
 	switch(hook->pDest->iType)
 	{
 	case GC_USER_MESSAGE:
-	{
-		text = mir_t2a_cp(hook->ptszText,CP_UTF8);
+	{		
+		std::string text = mir_t2a_cp(hook->ptszText,CP_UTF8);
 
-		std::string* response_data = new std::string(text);
-	
-		if (*response_data == "/new")
-			ForkThread(&OmegleProto::NewChatWorker, this, NULL);
-		else if (*response_data == "/quit")
-			ForkThread(&OmegleProto::StopChatWorker, this, NULL);
-		else {
-			if ( facy.connected_ ) {
+		if (text.empty())
+			break;
 
-				DBVARIANT dbv;
-				if (*response_data == "/asl") {
-					*response_data = "";
-					if ( !getU8String( OMEGLE_KEY_ASL,&dbv ) ) {
-						*response_data = dbv.pszVal;
-						DBFreeVariant(&dbv);
-					}
-				}
+		if (text.substr(0,1) == "/")
+		{ // Process commands
+			
+			std::string command = "";
+			std::string params = "";						
 
-				LOG("**Chat - Outgoing message: %s", response_data->c_str());
-				ForkThread(&OmegleProto::SendMsgWorker, this, (void*)response_data);
+			std::string::size_type pos = 0;
+			if ((pos = text.find(" ")) != std::string::npos) {
+				command = text.substr(1, pos-1);
+				params = text.substr(pos+1);
 			} else {
-				UpdateChat(NULL, Translate("First you have to connect to some Stranger by sending '/new' message. You can use this to change actual Stranger during conversation too. Send '/quit' message if you want to end conversation."), false);
+				command = text.substr(1);
 			}
+
+			if (!stricmp(command.c_str(), "new"))
+			{
+				facy.spy_mode_ = false;
+				facy.question_ = "";
+
+				ForkThread(&OmegleProto::NewChatWorker, this, NULL);
+				break;
+			}
+			else if (!stricmp(command.c_str(), "quit"))
+			{
+				ForkThread(&OmegleProto::StopChatWorker, this, NULL);
+				break;
+			}
+			else if (!stricmp(command.c_str(), "ask"))
+			{				
+				facy.spy_mode_ = true;
+				facy.question_ = params;
+				ForkThread(&OmegleProto::NewChatWorker, this, NULL);
+				break;
+			}
+			else if (!stricmp(command.c_str(), "asl"))
+			{
+				DBVARIANT dbv;
+				if ( !getU8String( OMEGLE_KEY_ASL,&dbv ) ) {
+					text = dbv.pszVal;
+					DBFreeVariant(&dbv);
+				} else {
+					UpdateChat(NULL, TranslateT("Your '/asl' setting is empty."), false);
+					break;
+				}
+			}
+			else if (!stricmp(command.c_str(), "help"))
+			{
+				UpdateChat(NULL, TranslateT("You can use different commands:\
+\n/new\t - connect to new stranger or reconnect to different stranger\
+\n/quit\t - disconnect from stranger or stop connecting\
+\n/ask\t - question mode\
+\n/ask <question> - spy mode with your question\
+\n/asl\t - send your predefined ASL message"), false);
+				break;
+			}
+			else
+			{
+				UpdateChat(NULL, TranslateT("Unknown command. Send '/help' for available commands."), false);
+				break;
+			}
+
+		}
+
+		// Outgoing message
+		switch (facy.state_)
+		{
+			case STATE_ACTIVE:
+				LOG("**Chat - Outgoing message: %s", text.c_str());
+				ForkThread(&OmegleProto::SendMsgWorker, this, (void*)new std::string(text));
+				break;
+
+			case STATE_INACTIVE:
+				UpdateChat(NULL, TranslateT("You aren't connected to any stranger. Send '/help' for available commands."), false);
+				break;
+
+			case STATE_SPY:
+				UpdateChat(NULL, TranslateT("You can't send messages in spy mode."), false);
+				break;
+
+			//case STATE_WAITING:
+			//case STATE_DISCONNECTING:
+			default:
+				break;
 		}
 	
 		break;
 	}
 
 	case GC_USER_TYPNOTIFY:
-	{
-		if ( facy.connected_ ) {
-			text = mir_t2a_cp(hook->ptszText,CP_UTF8);
-			std::string* response_data = new std::string(text);
-
-			//LOG("**Chat - Self typing: %s", response_data->c_str());		
-			ForkThread(&OmegleProto::SendTypingWorker, this, (void*)response_data);
-		}
-
+		if ( facy.state_ == STATE_ACTIVE )
+			ForkThread(&OmegleProto::SendTypingWorker, this, (void*)mir_tstrdup(hook->ptszText));
 		break;
-	}
 
 	case GC_USER_LEAVE:
 	case GC_SESSION_TERMINATE:
-	{
+		mir_free( facy.nick_ );
 		ForkThread(&OmegleProto::StopChatWorker, this, NULL);
 		break;
-	}
 	}
 
 	return 0;
@@ -131,8 +181,8 @@ int OmegleProto::OnChatOutgoing(WPARAM wParam,LPARAM lParam)
 	CallServiceSync(MS_GC_EVENT,WINDOW_CLEARLOG,reinterpret_cast<LPARAM>(&gce));
 }*/
 
-void OmegleProto::AddChatContact(const char *name)
-{
+void OmegleProto::AddChatContact(const TCHAR *name)
+{	
 	GCDEST gcd = { m_szModuleName };
 	gcd.ptszID = const_cast<TCHAR*>(m_tszUserName);
 	gcd.iType  = GC_EVENT_JOIN;
@@ -140,14 +190,14 @@ void OmegleProto::AddChatContact(const char *name)
 	GCEVENT gce    = {sizeof(gce)};
 	gce.pDest      = &gcd;
 	gce.dwFlags    = GC_TCHAR | GCEF_ADDTOLOG;
-	gce.ptszNick   = mir_a2t(name);
+	gce.ptszNick   = name;
 	gce.ptszUID    = gce.ptszNick;
 	gce.time       = static_cast<DWORD>(time(0));
 
 	if (name == NULL)
 		gce.bIsMe = false;
 	else 
-		gce.bIsMe      = !strcmp(name,this->facy.nick_.c_str());
+		gce.bIsMe = !_tcscmp(name, this->facy.nick_);
 
 	if (gce.bIsMe)
 		gce.ptszStatus = _T("Admin");
@@ -155,11 +205,9 @@ void OmegleProto::AddChatContact(const char *name)
 		gce.ptszStatus = _T("Normal");
 
 	CallServiceSync(MS_GC_EVENT,0,reinterpret_cast<LPARAM>(&gce));
-
-	mir_free(const_cast<TCHAR*>(gce.ptszNick));
 }
 
-void OmegleProto::DeleteChatContact(const char *name)
+void OmegleProto::DeleteChatContact(const TCHAR *name)
 {
 	GCDEST gcd = { m_szModuleName };
 	gcd.ptszID = const_cast<TCHAR*>(m_tszUserName);
@@ -168,17 +216,15 @@ void OmegleProto::DeleteChatContact(const char *name)
 	GCEVENT gce    = {sizeof(gce)};
 	gce.pDest      = &gcd;
 	gce.dwFlags    = GC_TCHAR | GCEF_ADDTOLOG;
-	gce.ptszNick   = mir_a2t(name);
+	gce.ptszNick   = name;
 	gce.ptszUID    = gce.ptszNick;
 	gce.time       = static_cast<DWORD>(time(0));
 	if (name == NULL)
 		gce.bIsMe = false;
 	else 
-		gce.bIsMe      = !strcmp(name,this->facy.nick_.c_str());
+		gce.bIsMe = !_tcscmp(name, this->facy.nick_);
 
 	CallServiceSync(MS_GC_EVENT,0,reinterpret_cast<LPARAM>(&gce));
-
-	mir_free(const_cast<TCHAR*>(gce.ptszNick));
 }
 
 int OmegleProto::OnJoinChat(WPARAM,LPARAM suppress)
@@ -212,7 +258,7 @@ int OmegleProto::OnJoinChat(WPARAM,LPARAM suppress)
 	gce.ptszStatus = _T("Normal");
 	CallServiceSync( MS_GC_EVENT, NULL, reinterpret_cast<LPARAM>(&gce) );
 
-	SetTopic("Omegle is a great way of meeting new friends!");
+	SetTopic();
 		
 	// Note: Initialization will finish up in SetChatStatus, called separately
 	if(!suppress)
@@ -221,8 +267,8 @@ int OmegleProto::OnJoinChat(WPARAM,LPARAM suppress)
 	return 0;
 }
 
-void OmegleProto::SetTopic(const char *topic)
-{
+void OmegleProto::SetTopic(const TCHAR *topic)
+{		
 	GCDEST gcd = { m_szModuleName };
 	gcd.ptszID = const_cast<TCHAR*>(m_tszUserName);
 	gcd.iType = GC_EVENT_TOPIC;
@@ -232,8 +278,11 @@ void OmegleProto::SetTopic(const char *topic)
 	gce.dwFlags = GC_TCHAR;
 	gce.time = ::time(NULL);
 	
-	std::string top = Translate(topic);
-	gce.ptszText = mir_a2t(top.c_str());
+	if (topic == NULL)
+		gce.ptszText = TranslateT("Omegle is a great way of meeting new friends!");
+	else
+		gce.ptszText = topic;
+
 	CallServiceSync(MS_GC_EVENT,0,  reinterpret_cast<LPARAM>(&gce));
 }
 
@@ -264,23 +313,25 @@ void OmegleProto::SetChatStatus(int status)
 	gce.dwFlags = GC_TCHAR;
 	gce.time = ::time(NULL);
 	gce.pDest = &gcd;
-
+	
 	if(status == ID_STATUS_ONLINE)
-	{
-
+	{		
+		// Free previously loaded name
+		mir_free(facy.nick_);
+		
 		// Load actual name from database
 		DBVARIANT dbv;
-		if ( !DBGetContactSettingUTF8String(NULL, m_szModuleName, OMEGLE_KEY_NAME, &dbv) )
+		if ( !DBGetContactSettingTString(NULL, m_szModuleName, OMEGLE_KEY_NAME, &dbv) )
 		{
-			this->facy.nick_ = dbv.pszVal;
+			facy.nick_ = mir_tstrdup(dbv.ptszVal);
 			DBFreeVariant(&dbv);
 		} else {
-			this->facy.nick_ = Translate("You");
-			DBWriteContactSettingUTF8String(NULL, m_szModuleName, OMEGLE_KEY_NAME, facy.nick_.c_str());
+			facy.nick_ = mir_tstrdup(TranslateT("You"));
+			DBWriteContactSettingTString(NULL, m_szModuleName, OMEGLE_KEY_NAME, facy.nick_);
 		}
 		
 		// Add self contact
-		AddChatContact(facy.nick_.c_str());
+		AddChatContact(facy.nick_);
 
 		CallServiceSync(MS_GC_EVENT,SESSION_INITDONE,reinterpret_cast<LPARAM>(&gce));
 		CallServiceSync(MS_GC_EVENT,SESSION_ONLINE,  reinterpret_cast<LPARAM>(&gce));

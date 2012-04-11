@@ -22,6 +22,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define FORCE_DISCONNECT true
 
+#define STATE_INACTIVE			0	// not connected to any stranger
+#define STATE_WAITING			1	// connecting to stranger
+#define STATE_ACTIVE			2	// active discussion
+#define STATE_DISCONNECTING		3	// disconnecting from stranger
+#define STATE_SPY				4	// spy mode (read-only)
+
 class Omegle_client
 {
 public:
@@ -29,10 +35,13 @@ public:
 	// Client definition
 	Omegle_client( )
 	{
-		chat_id_ = server_ = nick_ = "";
-		connected_ = false;
+		chat_id_ = server_ = question_ = "";
+		nick_ = NULL;
+		//msgid_ = 0;
 		send_message_lock_ = NULL;
-		msgid_ = 0;
+		state_ = STATE_INACTIVE;
+
+		old_typing_ = typing_ = spy_mode_ = false;
 
 		hConnection = NULL;
 		hEventsConnection = NULL;
@@ -49,28 +58,32 @@ public:
 	// Chat data
 	std::string chat_id_;
 	std::string server_;
-	std::string nick_;
-	bool connected_;
+	std::string question_;
+	TCHAR *nick_;
 
 	HANDLE send_message_lock_;
-	int	msgid_;
+	//int	msgid_;
+	
+	// State of client
+	int state_;
+	bool typing_;
+	bool old_typing_;
+	bool spy_mode_;
 
 	// Data storage
 	std::map< std::string, std::string >    headers;
 	void    store_headers( http::response* resp, NETLIBHTTPHEADER* headers, int headers_count );
 	
-	std::string get_server( );
+	std::string get_server( bool not_last = false );
 
 	// Connection handling
 	unsigned int error_count_;
-
-	void	validate_response( http::response* );
 
 	bool    handle_entry( std::string method );
 	bool    handle_success( std::string method );
 	bool    handle_error( std::string method, bool force_disconnect = false );
 
-	void __inline increment_error( ) { this->error_count_++; }
+	void __inline increment_error( ) { error_count_++; }
 	void __inline decrement_error( ) { if ( error_count_ > 0 ) error_count_--; }
 	void __inline reset_error( ) { error_count_ = 0; }	
 

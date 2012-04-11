@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define HTTP_CODE_FOUND					302
 #define HTTP_CODE_FORBIDDEN				403
 #define HTTP_CODE_NOT_FOUND				404
+#define HTTP_CODE_REQUEST_TIMEOUT		408
 #define HTTP_CODE_INTERNAL_SERVER_ERROR	500
 #define HTTP_CODE_NOT_IMPLEMENTED		501
 #define HTTP_CODE_BAD_GATEWAY			502

@@ -112,7 +112,7 @@ public:
 	int  __cdecl OnPrebuildContactMenu(WPARAM,LPARAM);
 
 	// Chat handling
-	int  __cdecl OnChatOutgoing(WPARAM,LPARAM);
+	int  __cdecl OnChatEvent(WPARAM,LPARAM);
 	int  __cdecl OnJoinChat(WPARAM,LPARAM);
 	int  __cdecl OnLeaveChat(WPARAM,LPARAM);
 
@@ -133,17 +133,16 @@ public:
 	void NewChat();
 
 	// Contacts handling
-	bool    IsMyContact(HANDLE, bool include_chat = false);
+	//bool    IsMyContact(HANDLE, bool include_chat = false);
 
 	// Chat handling
- 	void AddChat(const char *id,const char *name);
-	void UpdateChat(const char *name, const char *message, bool addtochat = true);
-	void AddChatContact(const char *nick);
-	void DeleteChatContact(const char *name);
+ 	void AddChat(const TCHAR *id,const TCHAR *name);
+	void UpdateChat(const TCHAR *name, const TCHAR *message, bool addtochat = true);
+	void AddChatContact(const TCHAR *nick);
+	void DeleteChatContact(const TCHAR *name);
 	void SetChatStatus(int);
-	void ClearChat();
-	
-	void SetTopic(const char *topic);
+	void ClearChat();	
+	void SetTopic(const TCHAR *topic = NULL);
 
 	// Connection client
 	Omegle_client facy;
