@@ -49,3 +49,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define OMEGLE_KEY_REUSE_QUESTION	"ReuseQuestion"
 #define OMEGLE_KEY_SERVER			"Server"
 #define OMEGLE_KEY_LOGGING			"EnableLogging"
+#define OMEGLE_KEY_SERVER_INFO		"GetServerInfo"

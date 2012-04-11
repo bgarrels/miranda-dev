@@ -42,7 +42,7 @@ PLUGININFOEX pluginInfo = {
 	"Provides basic support for Omegle Chat protocol. [Built: "__DATE__" "__TIME__"]",
 	"Robert Posel",
 	"robyer@seznam.cz",
-	"(c) 2011-12 Robert Posel",
+	"(c) 2011-2012 Robert Posel",
 	"http://code.google.com/p/robyer/",
 	UNICODE_AWARE, //not transient
 	0,             //doesn't replace anything built-in

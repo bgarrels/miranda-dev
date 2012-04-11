@@ -24,7 +24,7 @@ LANGUAGE LANG_CZECH, SUBLANG_DEFAULT
 // Dialog
 //
 
-IDD_OPTIONS DIALOGEX 0, 0, 316, 226
+IDD_OPTIONS DIALOGEX 0, 0, 316, 238
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
 EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
@@ -34,22 +34,24 @@ BEGIN
     LTEXT           "Visible name:",IDC_STATIC,24,26,60,8
     EDITTEXT        IDC_NAME,84,23,130,14,ES_AUTOHSCROLL
     CONTROL         "Meet strangers with common interests",IDC_MEET_COMMON,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,43,272,10
-    EDITTEXT        IDC_INTERESTS,24,66,272,23,ES_MULTILINE | ES_AUTOVSCROLL | WS_VSCROLL
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,41,272,10
+    EDITTEXT        IDC_INTERESTS,24,65,272,23,ES_MULTILINE | ES_AUTOVSCROLL | WS_VSCROLL
     LTEXT           "Your interests (separated by commas):",IDC_STATIC,24,55,272,8
     CONTROL         "Automatically send this message to stranger after connection:",IDC_HI_ENABLED,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,93,272,10
-    EDITTEXT        IDC_HI_MESSAGE,24,104,272,23,ES_MULTILINE | ES_AUTOVSCROLL | WS_VSCROLL
-    EDITTEXT        IDC_ASL_MESSAGE,24,141,272,23,ES_MULTILINE | ES_AUTOVSCROLL | WS_VSCROLL
-    LTEXT           "This text will be sent when you use ""/asl"" message:",IDC_STATIC,24,131,272,8
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,92,272,10
+    EDITTEXT        IDC_HI_MESSAGE,24,103,272,23,ES_MULTILINE | ES_AUTOVSCROLL | WS_VSCROLL
+    EDITTEXT        IDC_ASL_MESSAGE,24,140,272,23,ES_MULTILINE | ES_AUTOVSCROLL | WS_VSCROLL
+    LTEXT           "This text will be sent when you use ""/asl"" message:",IDC_STATIC,24,130,272,8
     CONTROL         "Don't clear chat before connecting to new stranger",IDC_NOCLEAR,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,170,272,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,167,272,10
     CONTROL         "Automatically connect to another stranger when current disconnects",IDC_DONTSTOP,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,182,272,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,179,272,10
     CONTROL         "I want Omegle to reuse my questions if they are good enough (question mod)",IDC_REUSE_QUESTIONS,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,194,272,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,191,272,10
     CONTROL         "Enable logging for debugging purposes",IDC_LOGGING,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,207,272,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,215,272,10
+    CONTROL         "Load count of users on actual server after connection",IDC_SERVER_INFO,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,203,272,10
 END
 
 
@@ -70,7 +72,7 @@ BEGIN
         VERTGUIDE, 214
         VERTGUIDE, 296
         TOPMARGIN, 7
-        BOTTOMMARGIN, 219
+        BOTTOMMARGIN, 231
     END
 END
 #endif    // APSTUDIO_INVOKED

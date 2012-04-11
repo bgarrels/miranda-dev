@@ -17,6 +17,8 @@
 #define IDC_REUSE_QUESTIONS             1215
 #define IDC_REUSE_QUESTIONS2            1216
 #define IDC_LOGGING                     1216
+#define IDC_REUSE_QUESTIONS3            1217
+#define IDC_SERVER_INFO                 1217
 
 // Next default values for new objects
 // 

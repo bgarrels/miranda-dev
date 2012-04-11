@@ -20,11 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "common.h"
 
-int OmegleProto::RecvMsg(HANDLE hContact, PROTORECVEVENT *pre)
-{
-	return 0;
-}
-
 void OmegleProto::SendMsgWorker(void *p)
 {
 	if(p == NULL)
@@ -36,9 +31,11 @@ void OmegleProto::SendMsgWorker(void *p)
 
 	*data = utils::text::trim(*data);
 
-	if (data->length() && facy.send_message( *data ))
+	if (facy.state_ == STATE_ACTIVE && data->length() && facy.send_message( *data ))
 	{
-		UpdateChat(facy.nick_.c_str(), data->c_str());
+		TCHAR *msg = mir_a2t_cp(data->c_str(), CP_UTF8);
+		UpdateChat(facy.nick_, msg);
+		mir_free(msg);
 	}
 
 	delete data;
@@ -49,11 +46,21 @@ void OmegleProto::SendTypingWorker(void *p)
 	if (p == NULL)
 		return;
 
-	std::string *data = static_cast<std::string*>(p);
+	// Save typing info
+	bool typ = !_tcscmp(static_cast<TCHAR*>(p), _T("1"));
+	mir_free(p);
 
-	bool typ = (*data == "1");
-	delete data;
-	
+	// Ignore same typing info
+	if ( facy.typing_ == typ )
+		return;
+
+	facy.typing_ = typ;
+	// Wait for eventually changes to typing info by other thread and ignore if changed
+	SleepEx( 2000, true );
+	if ( facy.typing_ != typ || facy.old_typing_ == typ || facy.state_ != STATE_ACTIVE )
+		return;	
+
+	facy.old_typing_ = typ;
 	if (typ)
 		facy.typing_start();
 	else
