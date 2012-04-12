@@ -18,6 +18,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+File name      : $HeadURL$
+Revision       : $Revision$
+Last change by : $Author$
+Last change on : $Date$
 */
 
 #include "common.h"
