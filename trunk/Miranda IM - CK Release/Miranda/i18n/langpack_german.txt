@@ -1,17 +1,16 @@
 Miranda Language Pack Version 1
 Language: German (DE)
 Locale: 0407
-Last-Modified-Using: Miranda IM 0.9.47
+Last-Modified-Using: Miranda IM 0.10.0 alpha build #3
 Authors: miranda-im.de Projekt Sprachdatei - diverse Autoren
-Author-email: sprachdatei@miranda-im.de
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 05 Mar 2012 16:03:52
-; FLID: Deutsche Sprachdatei 0.12.03.05
+X-Langpack-creation-date: 15 Apr 2012 03:04:19
+; FLID: Deutsche Sprachdatei 0.12.04.15
 Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,AsSingleWindow,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Basic_History,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ConnectionNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirFox,MirOTR,MirOUT,MirPy_Scripting,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NewsAggregator,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,Smart_Auto_Replier,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XSoundNotify,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
 
-; Start of langpack: Core (Letzte Änderung: 22:23, 20. Sep. 2011 )
+; Start of langpack: Core (Letzte Änderung: 14:42, 14. Apr. 2012 )
 
 [0 = Default]
 0 = Standard
@@ -19,6 +18,10 @@ Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway
 -1 = Unendlich
 [** Not-on-list contacts **]
 ** Kontakte nicht in der Liste **
+[%s connection]
+%s Verbindung
+[%I64u bytes]
+%I64u Bytes
 [< &Back]
 < Zurück
 [<current>]
@@ -1210,10 +1213,6 @@ Geändert
 Verschieben/U&mbenennen
 [&Move to Group]
 Verschiebe in Gruppe
-[Move to the main menu]
-In das Hauptmenü setzen
-[Move to the status bar]
-In die Statusleiste setzen
 [minutes]
 Minuten
 [minutes of inactivity]
@@ -1567,8 +1566,6 @@ Protokolle
 Zu prüfende Protokolle
 [Protocol icon]
 Protokollicon
-[Protocol menus]
-Protokollmenüs
 
 [Question]
 Frage
@@ -4257,18 +4254,22 @@ Menüreihenfolge
 Menüobjekte
 [Menu Items]
 Menüeinträge
+
+
+[Protocol menus]
+Protokollmenüs
+[Move to the main menu]
+In das Hauptmenü setzen
+[Move to the status bar]
+In die Statusleiste setzen
+
 [Insert separator]
 Trennlinie einfügen
 [Service:]
 Dienst:
-[Become idle if application full screen]
-Inaktiv werden, falls eine Vollbildanwendung aktiviert wird
 
-; Miranda 0.8 und niedriger
-[MenuObjects]
-Menüobjekte
-[MenuItems]
-Menüeinträge
+[Disable icons]
+Icons deaktivieren
 
 [Open Find User Dialog]
 "Kontakt suchen/hinzufügen"-Dialog
@@ -4307,6 +4308,8 @@ für
 Minute(n)
 [Become idle if the screen saver is active]
 Inaktiv werden, wenn Bildschirmschoner aktiviert wird
+[Become idle if application full screen]
+Inaktiv werden, falls eine Vollbildanwendung aktiviert wird
 [Become idle if the computer is locked (2000/XP+ only)]
 Inaktiv werden, wenn Computer gesperrt wird (ab Windows 2000)
 [Become idle if a terminal session is disconnected]
@@ -6105,13 +6108,12 @@ Tipphinweis: tippt nicht mehr
 ; ##############################################
 ; End of langpack: Core
 ; ############################################## 
-; Start of langpack: 4x4x4 (Letzte Änderung: 03:51, 18. Sep. 2010 )
+; Start of langpack: 4x4x4 (Letzte Änderung: 14:49, 8. MÃ¤r. 2012 )
 
 ; Pluginname: 4x4x4 
 ; Version: 0.1.0.3a
 ; Dateiname: 4x4x4.dll
 ; Autor: gosu
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=1210
 ; Übersetzung: Weishaupt am 28.03.06
 ; Besonderheiten: Entwicklung eingestellt!
 
@@ -7706,7 +7708,7 @@ Dieses Plugin speichert alle Avataränderungen ihrer Kontakte und/oder zeigt ents
 ; ##############################################
 ; End of langpack: Avatar_History
 ; ############################################## 
-; Start of langpack: Avatar_service (Letzte Änderung: 00:47, 23. Aug. 2011 )
+; Start of langpack: Avatar_service (Letzte Änderung: 21:34, 13. Apr. 2012 )
 
 ; Pluginname: Avatar service 
 ; Version: 0.10.0.2
@@ -7717,8 +7719,8 @@ Dieses Plugin speichert alle Avataränderungen ihrer Kontakte und/oder zeigt ents
 ; Übersetzung: Dober am 10.11.05
 ; Update: FREAK am 16.10.05
 
-[Global avatar for]
-Globaler Avatar für
+[Global avatar]
+Globaler Avatar
 [Global avatar for %s accounts]
 Globaler Avatar für %s Konten
 
@@ -7927,7 +7929,7 @@ Benutzt Miranda IM um zu Ihren Freunden von battle.net zu sprechen.
 ; ##############################################
 ; End of langpack: BNET_Messenger
 ; ############################################## 
-; Start of langpack: Basic_History (Letzte Änderung: 19:50, 3. MÃ¤r. 2012 )
+; Start of langpack: Basic_History (Letzte Änderung: 13:02, 2. Apr. 2012 )
 
 ; Pluginname: Basic History 
 ; Version: 1.0.0.5
@@ -7967,11 +7969,11 @@ Nur ausgewählte Gruppen
 [Custom filters]
 Eigene Filter
 [Add filter]
-Neuer Filter
+Filter hzfg.
 [Delete filter]
-Lösche Filter
+Filter löschen
 [Delete event]
-Lösche Ereignis
+Ereignis löschen
 [Add event]
 Ereignis hzfg.
 [Contacts recieved]
@@ -8093,6 +8095,10 @@ Diese Operation wird alle Verlaufseinträge für diesen Kontakt DAUERHAFT LÖSCHEN.
 [Number of history items to delete: %d.\nAre you sure you want to do this?]
 Anzahl der zu löschenden Verlaufseinträge: %d.\nSind Sie sich sicher, dass Sie dies machen wollen?
 
+[Export To Binary]
+Als Binärdatei exportieren
+[Import From Binary]
+Aus Binärdatei importieren
 [Open History]
 Öffne Verlauf
 [Open global history]
@@ -8574,13 +8580,11 @@ Nutze Popup-Farben
 ; ##############################################
 ; End of langpack: Buddy_Expectator
 ; ############################################## 
-; Start of langpack: C6 (Letzte Änderung: 15:26, 29. Apr. 2011 )
+; Start of langpack: C6 (Letzte Änderung: 03:29, 10. MÃ¤r. 2012 )
 
 ; Pluginname: C6 Protocol 
-; Version: 0.3.0.0
+; Version: 0.3.0.1
 ; Dateiname: c6.dll
-; Download (alte Version): http://addons.miranda-im.org/details.php?action=viewfile&id=2450
-; Aktuelle Version: http://r3vindt.altervista.org/
 ; Übersetzung: 18.04.2009 von Sebijk
 
 [C6 Protocol]
@@ -8634,15 +8638,12 @@ Server-Verbindung
 (Meine Details ändern)
 [0 rooms]
 0 Räume
-;[Argument]
 [Automatic Connected with Last Nick (only New Login)]
 Automatisch mit dem letzten Nicknamen verbinden (nur beim neuen Login)
 [Automatic Remove Avatar Unused on Exit]
 Unbenutzte Avatare beim Beenden automatisch entfernen
-;[Avatar Unused Cleaning]
 [Blacklist]
 Schwarze Liste
-;[C6]
 [C6 Account Setup]
 C6-Konto konfigurieren
 [C6 UniqueKey or Nick:]
@@ -8667,12 +8668,12 @@ Ein neues C6-Messengerkonto über die C6-Website erstellen
 Auf dem E-Mail-Postfach ausliefern
 [Deliver them on Miranda IM]
 Auf Miranda IM ausliefern
-;[Dislike:]
+[Avatar Unused Cleaning]
+Unb. Avatarsäuberung
 [Enable Avatar Support (*)]
 Avatar-Unterstützung aktivieren (*)
 [Enable Server-side contact list]
 Serverseitige Kontaktliste aktivieren
-;[Flags:]
 [Force Auth request (*)]
 Autorisierungsanfrage erzwingen (*)
 [Get Extended Capabilities from Server (reconnection request)]
@@ -8691,10 +8692,8 @@ Unsichtbarkeitsstatus in der erweiterten Suche
 Einladen !
 [Invite Message]
 Einladungsnachricht
-;[Kind]
 [Last Online:]
 Zuletzt online:
-;[Load Preferred Search]
 [Manage C6 Server Contacts]
 C6-Serverkontakte verwalten
 [Music:]
@@ -8713,7 +8712,6 @@ Rechte
 Bitte geben Sie Ihre C6-Kontodaten zum Fortfahren ein:
 [Popup Messages]
 Popup-Nachrichten
-;[Programme]
 [Required always your authorization]
 Benötigt immer Ihre Autorisierung
 [Reset Search]
@@ -8742,7 +8740,6 @@ Standard-Log benutzen
 Weiße Liste
 [Work:]
 Arbeiten
-;[XCAP]
 
 [%d room(s)]
 %d Raum/Räume
@@ -11780,14 +11777,19 @@ Keine Dateien...
 ; ##############################################
 ; End of langpack: FTP_File_YM
 ; ############################################## 
-; Start of langpack: Facebook (Letzte Änderung: 22:07, 1. Feb. 2012 )
+; Start of langpack: Facebook (Letzte Änderung: 18:46, 12. Apr. 2012 )
 
 ; Pluginname: Facebook Protokoll
-; Version: 0.0.7.1
+; Version: 0.0.8.0
 ; Dateiname: facebook.dll
 ; Unique ID: {dde897ad-e40a-4e2c-98d8-d20b575e96bc}
 ; Autor(en) jarvis, robyer
 ; Übersetzung: 0123hallo
+
+[It requires Miranda IM 0.9.43 or later.]
+Es benötigt Miranda IM 0.9.43 oder höher!
+[It requires Miranda IM 0.10 alpha build #2 or later.]
+Es benötigt Miranda IM 0.10.0 Alpha Build #2 oder höher!
 
 [Automatically set 'Ignore status change' flag]
 Automatisch 'Ignoriere Statusänderung Flag' setzen
@@ -11800,14 +11802,8 @@ Lade auch Kontakte mit 'Am Telefon' Status
 Hinweis: Diese Option benötigt einen Miranda-IM-Neustart, damit sie funktioniert.
 [The Facebook protocol plugin cannot be loaded. ]
 Das Facebook-Protokoll-Plugin konnte nicht geladen werden.
-[It requires Miranda IM 0.9.14 or later.]
-Es benötigt Miranda IM 0.9.14 oder höher!
-[It requires Miranda IM 0.10 alpha build #2 or later.]
-Es benötigt Miranda IM 0.10.0 Alpha Build #2 oder höher!
 [Facebook protocol don't support offline messages.]
 Das Facebook-Protokoll unterstützt keine Offlinenachrichten.
-[Unable to get Netlib connection for Facebook]
-Es konnte keine Netlib-Verbindung zu Facebook hergestellt werden
 [Account && Integration]
 Konten && Integration
 [Use balloon notifications in system tray instead of popups]
@@ -11822,12 +11818,6 @@ Das Facebook-API wurde geändert, warten Sie und suchen Sie nach einem Facebook-P
 Loginfehler:
 [Login error, probably bad login credentials.]
 Loginfehler, wahrscheinlich falsche Anmeldeinformationen.
-[Unknown login error]
-Unbekannter Login-Fehler
-[Login error: Captcha code is required. Bad login credentials?]
-Login-Fehler: Ein Captcha-Code wird benötigt. Falsche Zugangsdaten?
-[Your account requires HTTPS connection. Activating.]
-Ihr Account benötigt eine HTTPS-Verbindung. Aktivierung.
 [Got new friend requests: ]
 Erhalte neue Freundschaftsanfragen:
 [Got new notifications: ]
@@ -11836,8 +11826,6 @@ Erhalte neue Ereignisbenachrichtigungen:
 Eine Channelerneuerung wird benötigt, vielleicht wurden nicht alle Nachrichten empfangen!\nSie sollten die Facebook-Seite prüfen um sicher zu sein.
 [Need confirmation for sending messages to other clients.\nOpen facebook website and try to send message to this contact again!]
 Eine Konfiguration zum Nachrichtenversand zu anderen Clients wird benötigt.\nÖffnen Sie die Facebook-Seite und senden Sie die Nachricht zu den Kontakt erneut!
-[Remove from server]
-Vom Sever entfernt
 [Request friendship]
 Freundschaftsanfrage
 [Enable groupchats support (EXPERIMENTAL)]
@@ -11882,8 +11870,6 @@ Pinnwand
 Was machst du gerade?
 [What's on your mind?]
 Was machst du gerade?
-[Visit Profile]
-Profil ansehen
 [Share]
 Mitteilen
 [Show cookies]
@@ -11900,8 +11886,12 @@ Benachrichtigungen aktivieren
 Feeds aktivieren
 [Request following types of News Feed items]
 Folgende Art von News Feeds holen:
-[Request following type of News Feed items]
-Folgende Art von News Feeds holen:
+
+;Newsfeed Settings
+[News Feed types to notify:]
+Newsfeed-Ereignisse melden:
+[Wall Posts]
+Wall Beiträge
 [Most Recent]
 Jüngste Nachrichten 
 [Most recent]
@@ -11910,10 +11900,10 @@ Jüngste Nachrichten
 Nach Aktualisierung
 [Top News]
 Aktuelle Nachrichten
-[News Feed types to notify:]
-Newsfeed-Ereignisse melden:
 [Client notifications]
 Benutzer Ereignis
+[Apps and Games]
+Apps und Spiele
 [Sample notification]
 Beispiel Benachrichtigung
 [Sample newsfeed]
@@ -11936,6 +11926,39 @@ Etwas ist mit Facebook passiert. Vielleicht gab es ein großes Update oder Sie ha
 Sie haben %s ungelesene Nachrichten
 [Unseen messages]
 Ungelesene Nachrichten
+[Automatically close chat windows (on website) (NOT WORKING)]
+Schließe automatisch alle Chatfenster auf der Webseite (funzt nicht)
+
+[Note: Make sure you have disabled 'Validate SSL certificates' option in Network options to work properly.]
+Hinweis: Stellen Sie sicher das 'Nur valide SSL-Zertifikate' in den Netzwerkoptionen deaktiviert wurde, damit diese Funktion richtig funktioniert.
+
+[Login error: Some Facebook things are required.]
+Loginfehler: Einige Facebook-Komponenten fehlen.
+[Your account requires HTTPS connection. Activating.]
+Ihr Account benötigt eine HTTPS-Verbindung. Aktivierung.
+[Login error: Captcha code is required. Bad login credentials?]
+Login-Fehler: Ein Captcha-Code wird benötigt. Falsche Zugangsdaten?
+[Unknown login error]
+Unbekannter Login-Fehler
+
+[Contact was sucessfully removed from server.]
+Der Kontakt wurde erfolgreich vom Sever entfernt.
+[Error occured when removing contact from server.]
+Fehler beim entfernen des Kontakts vom Server.
+[Request for friendship was sent successfully.]
+Freundschaftsanfrage wurde erfolgreich versendet.
+[Error occured when requesting friendship.]
+Fehler beim Versand der Freundschaftsanfrage.
+[Do you want to delete contact '%s' from server list?]
+Wollen Sie '%s' von ihrere Serverliste löschen?
+
+[Unable to get Netlib connection for Facebook]
+Es konnte keine Netlib-Verbindung zu Facebook hergestellt werden.
+
+[Remove from server]
+Entferne Kontakt vom Server
+[Visit Profile]
+Profil ansehen
  
 ; ##############################################
 ; End of langpack: Facebook
@@ -12406,10 +12429,10 @@ HTML
 ; ##############################################
 ; End of langpack: GTalkExt
 ; ############################################## 
-; Start of langpack: Gadu-Gadu (Letzte Änderung: 17:43, 12. Sep. 2011 )
+; Start of langpack: Gadu-Gadu (Letzte Änderung: 23:17, 5. MÃ¤r. 2012 )
 
 ; Pluginname: Gadu-Gadu Protocol
-; Version: 0.9.10.2
+; Version: 0.9.10.3
 ; Dateiname: gg.dll
 ; Unique ID: {f3ff65f3-250e-416a-bee9-58c93f85ab33}
 ; Autor(en): OnO, Bartosz Bia³ek, Adam Strzelecki
@@ -12499,8 +12522,8 @@ Serverhostname %s ist falsch. Benutzen Sie bitte den vorausgesetzten Standard Ho
 Lösche Bild(er) von der Liste
 [Save image to disk]
 Speichere Bild auf die Festplatte
-[Image received]
-Bild empfangen
+[Incoming image]
+Ankommendes Bild
 [Message with [img] BBCode]
 Nachrichten mit [img] BBCode
 [Provides support for Gadu-Gadu protocol]
@@ -22109,7 +22132,7 @@ Mono fokusieren
 ; ##############################################
 ; End of langpack: MRadio
 ; ############################################## 
-; Start of langpack: MSN (Letzte Änderung: 16:01, 5. MÃ¤r. 2012 )
+; Start of langpack: MSN (Letzte Änderung: 16:20, 9. Apr. 2012 )
 
 ; Pluginname: MSN Protocol 
 ; Version: 0.10.0.2
@@ -22121,6 +22144,8 @@ Mono fokusieren
 [Adds support for communicating with users of the MSN Messenger network]
 Fügt Unterstützung für die Kommunikation mit Benutzern des MSN-Netzwerks hinzu
 
+[Create &Chat]
+&Chat erstellen
 [Display &Hotmail Inbox]
 &Hotmail-Posteingang anzeigen
 [My Live &Space]
@@ -24493,15 +24518,13 @@ Fehler: Konnte keine Verbindung zur Kamera herstellen. Ist sie angeschlossen?
 ; ##############################################
 ; End of langpack: MirandaComm
 ; ############################################## 
-; Start of langpack: MirandaG15 (Letzte Änderung: 13:52, 3. Apr. 2011 )
+; Start of langpack: MirandaG15 (Letzte Änderung: 09:19, 27. MÃ¤r. 2012 )
 
 ; Pluginname: MirandaG15 
-; Version: 0.1.2.12
+; Version: 0.1.2.0
 ; Dateiname: mirandag15.dll
 ; Unique ID: {798221e1-e47a-4dc8-9077-1e576f9c4307}
 ; Autor: Tharit, CHEF-KOCH
-; Link: Unicode: http://addons.miranda-im.org/details.php?action=viewfile&id=2610
-; ANSI: http://addons.miranda-im.org/details.php?action=viewfile&id=2921
 ; Übersetzung: 09.07.06 von Tharit
 
 [Timeout: No response from contact/server]
@@ -30655,15 +30678,15 @@ Tipp: Die Skripte haben ein Rechtsklick Kontextmenü
 ; ##############################################
 ; End of langpack: Scriptc
 ; ############################################## 
-; Start of langpack: Scriver (Letzte Änderung: 00:18, 23. Aug. 2011 )
+; Start of langpack: Scriver (Letzte Änderung: 14:29, 14. Apr. 2012 )
 
 ; Pluginname: Scriver 
-; Version: 2.10.0.2
+; Version: 2.10.0.3
 ; Dateiname: scriver.dll
 ; Autor: the_leech
 ; Unique ID: {84636f78-2057-4302-8a65-23a16d46844c}
 ; Link: Testing
-; Übersetzung: 02.07.06 von Dober
+; Übersetzung: Dober
 
 [Scriver - send and receive instant messages]
 Scriver - Sofortnachrichten senden und empfangen
@@ -30720,82 +30743,47 @@ sie zu erhalten.
 [Always On Top]
 Immer im Vordergrund
 
-[Customize fonts and colors]
-Schriften & Farben ändern
+
 [Automatically pop up the window when]
 Automatisch das Fenster öffnen bei
-[But be polite]
-Fenster in der Taskleiste öffnen
 [and stay minimized]
 und Fenster in der Taskleiste öffnen
-[and do not steal focus]
-und Fenster nicht in Vordergrund bringen
-[Stay minimized]
-Fenster in der Taskleiste öffnen
-[Save splitter position for each contact]
-Splitterposition für jeden Kontakt merken
+[Save size and location for each contact]
+Größe und Position pro Kontakt speichern
+[Hide windows on close]
+Fenster beim Schließen verstecken
 [Remember unsent messages]
 Ungesendete Nachrichten merken
 [Delete temporary contacts on closing]
-Temp. Kontakte beim Schließen entfernen
-[Hide windows on close]
-Fenster beim Schließen verstecken
-[Auto resize input area]
-Größe des Eingabebereichs automatisch anpassen
-[Look And Feel]
-Aussehen
-[Use tabbed mode]
-Tabs verwenden
+Temporäre Kontakte beim Schließen entfernen
+
+
 [Enable tabs]
 Tabs verwenden
-[Always show tab bar]
-Tableiste immer zeigen
-[Hide tab bar if there is only one tab]
-Tableiste bei einzelnem Tab verstecken
 [Tabs at bottom]
 Tabs unten anzeigen
 [Limit names on tabs to]
 Namen auf Tabs kürzen auf
-[Show close button on each tab ]
-Schließen-Button auf jedem Tab anzeigen
-[Automatically switch to active tab]
-Automatisch zum aktiven Tab wechseln
 [Switch to active tab]
 Zum aktiven Tab wechseln
-[Limit number of tabs per container to]
-Maximale Anzahl an Tabs in einem Container
 [Limit number of tabs per window to]
 Maximale Anzahl an Tabs in einem Fenster
-[Use separate containers for chats]
-Seperate Container für Chats verwenden
 [Use separate windows for group chats]
 Seperate Fenster für Gruppenchats verwenden
-[Limit number of chats tabs per container to]
-Maximale Anzahl an Chattabs in einem Container
 [Limit number of group chats tabs per window to]
 Maximale Anzahl an Gruppenchats in einem Fenster
-[Save size and location for each contact]
-Größe und Position pro Kontakt speichern
-[Hide containers on close]
-Container beim Schließen nur verstecken
-[Save the splitter position individually for each contact]
-Speichere die Splitterposition für jeden Kontakt einzeln
-[Save message draft when closing message window]
-Nachrichtenentwurf beim Schließen des Nachrichtenfensters speichern
-[Show tool bar ]
-Toolbar anzeigen
+
 [Show titlebar]
 Titelleiste anzeigen
-[Show toolbar ]
-Toolbar anzeigen
 [Show toolbar]
 Toolbar anzeigen
 [Show infobar]
 Infoleiste anzeigen
-[Show 'sending in progress' indicator]
-'Sende'-Benachrichtigungen anzeigen
 [Show progress indicator]
 'Sende'-Benachrichtigungen anzeigen
+[Min input area size]
+Minimale Größe Eingabebereich
+
 [Limit avatar height to min.]
 Avatarhöhe minimal
 [Limit height to min.]
@@ -30813,8 +30801,6 @@ Während des Sendens folgender Nachricht:
 Ereignislog
 [Enable IEView]
 IEView oder History++ aktivieren
-[Show times]
-Zeiten anzeigen
 [Long date format]
 Langes Datumsformat
 [Relative date]
@@ -30822,21 +30808,26 @@ Relatives Datum
 [Enable message grouping]
 Nachrichtengruppierung nutzen
 [Mark follow-up msgs with timestamp]
-Nachfolgende Nachrichten mit Zeitstempel versehen
+Folgende Nachrichten mit Zeitstempel versehen
 [Start message text on a new line]
 Nachrichtentext in einer neuen Zeile
-[Draw lines between messages]
-Linie zwischen Nachrichten
 [Show lines between messages]
 Linie zwischen Nachrichten
 [Indent text]
 Text einrücken
+[Customize fonts and colors]
+Schriften und Farben anpassen
+
 [Preload]
 Laden
 [Unread events only]
 Nur ungelesene Ereignisse
 [Events in the last]
 Ereignisse in den letzten
+
+
+
+
 [Input area background:]
 Eingabefeld Hintergrund:
 [Incoming background:]
@@ -30958,6 +30949,19 @@ Benutzerliste (online)
 Benutzerliste, ausgewählter Benutzer
 [User list lines]
 Benutzerliste, Linie
+
+[Always On Top]
+Immer im Vordergrund
+[Quote]
+Zitat
+[Quote Text]
+Text zitieren
+
+
+[Paste && Send]
+Einfügen und Versenden
+[&Paste && Send]
+Einfügen und Versenden
  
 ; ##############################################
 ; End of langpack: Scriver
@@ -32803,13 +32807,12 @@ Spam-o-tron hat Ihre Autorisierungsanfrage zurückgestellt. Bitte antworten Sie z
 ; ##############################################
 ; End of langpack: Spam-o-tron
 ; ############################################## 
-; Start of langpack: Spam_Filter_(beta) (Letzte Änderung: 00:40, 28. Aug. 2010 )
+; Start of langpack: Spam_Filter_(beta) (Letzte Änderung: 13:34, 6. MÃ¤r. 2012 )
 
 ; Pluginname: Spam Filter (Beta) 
 ; Version: 2.5.2.4
 ; Dateiname: spamfilter.dll
 ; Autor: HeikoH
-; Link: http://addons.miranda-im.org/details.php?action=viewfile&id=2188
 ; Übersetzung: hrathh, Weishaupt, FoSo
 
 [Spam Filter]
@@ -34119,7 +34122,7 @@ Standbilder
 ; ##############################################
 ; End of langpack: TV_plugin_YM
 ; ############################################## 
-; Start of langpack: TabSRMM (Letzte Änderung: 11:05, 12. Sep. 2011 )
+; Start of langpack: TabSRMM (Letzte Änderung: 19:24, 30. MÃ¤r. 2012 )
 
 ; Pluginname: TabSRMM 
 ; Version: 3.1.99.8
@@ -34280,17 +34283,19 @@ Temporäre Kontakte beim Schließen löschen
 
 [Sending messages]
 Nachrichten senden
-[Enable \"Paste and send\" feature]
-Aktiviere \"Einfügen und Senden\"-Funktion
 [Send on SHIFT - Enter]
 'Shift+Enter' sendet Nachricht
+[Enable \"Paste and send\" feature]
+Aktiviere \"Einfügen und Senden\"-Funktion
+[Allow BBCode formatting in outgoing messages]
+Erlaube BBCode-Formatierung in ausgehenden Nachrichten
 
 [Automatically split long messages (experimental, use with care)]
 Lange Nachrichten automatisch trennen (experimentell, Vorsicht)
 
 ;Groupbox: Avatareinstellungen
-[Avatar options (size and scaling only for bottom avatar display)]
-Avatareinstellungen (Größe und Skalierung nur, wenn Avatar unten)
+[Size and scaling options for the bottom avatar display]
+Größe und Darstellungsoptionen für Avataranzeige unten
 [Maximum display height (pixels)]
 Maximale Anzeigehöhe (Pixel)
 [(0 = no limit)]
@@ -34402,18 +34407,20 @@ mal
 Blinkintervall
 
 ;Groupbox: Aero-Effekt
-[Aero effect]
-Aero-Effekt
-[Semi transparent, custom colors]
-Halbtransparent, benutzerdefinierte Farben
+[Windows Aero settings]
+Windows Aero Einstellungen
+[Use Aero UI elements(only when not using a custom skin)]
+Aero UI-Elemente verwenden (nur wenn kein eigener Skin verwendet wird)
 [Milky Glass]
 Milchglas
+[Semi transparent, custom colors]
+Halbtransparent, benutzerdefinierte Farben
 [Silver shadow]
 Silberner Schatten
 [Custom (use own gradient colors)]
 Benutzerdefiniert (benutze eigenen Farbverl.)
-[Expand or collapse the side bar]
-Erweitern oder Reduzieren der Sidebar
+[Use Windows 7 task bar enhancements (restart required)]
+Windows 7 Taskleisten-Funktionen verwenden (benötigt Neustart)
 [Help on containers]
 Hilfe zu Containern
 
@@ -34507,7 +34514,7 @@ RTL-Vorlagen
 
 ;Groupbox: Vergangene Ereignisse laden
 [Always trim message log to]
-Neue Nachrichten begrenzen auf
+Nachrichtenverlauf begrenzen auf
 
 
 [Error message]
@@ -34596,10 +34603,6 @@ Tipp-Klänge aktivieren
 Animierte GIF-Avatare deaktivieren (hat keinen Effekt auf bereits geöffnete Fenster)
 [Close current tab on send]
 Aktuellen Tab nach dem Senden schließen
-[Use Aero Glass for the message window (Vista+)]
-Aero Glass für das Nachrichtenfenster nutzen (Vista+)
-[Use Windows 7 task bar features for tabbed windows (*)]
-Windows-7-Taskleistenfunktionen für Tab-Fenster nutzen (*)
 [Automatic keyboard layout: Do not load the system default for new contacts]
 Automatisches Tastaturlayout: Lade nicht das Systemstandard-Layout für neue Kontakte
 [Enable unattended send (experimental feature, required for multisend and send later) (*)]
@@ -34620,8 +34623,6 @@ Einträge
 Hilfe zu den erweiterten Einstellungen
 [Revert to (safe) defaults]
 Zurücksetzen auf sichere Werte
-[Show skinable tooltip in chat (tipper plugin required)]
-Zeige skinnbare Tooltips in Chats (benötigt Tipper-Plugin)
 
 ;Groupbox: Einstellungen für Ereignisbenachrichtigungen
 [Event notify options]
@@ -35543,10 +35544,7 @@ Keine Sounds abspielen
 [Be "Super Quiet"]
 Alles unterdrücken
 
-[Size and scaling options for the bottom avatar display]
-Größe und Darstellungsoptionen für den Boden der Avatardarstellung
-[Allow BBCode formatting in outgoing messages]
-Erlaube BBCode-Formatierung in ausgehenden Nachrichten
+
 [<All contacts>]
 <Alle Kontakte>
 [You can add the user by user name or his id. Wildcards are allowed and recommended.]
@@ -36103,14 +36101,13 @@ Kopiere Nachrichten in Zwischenablage
 ; ##############################################
 ; End of langpack: TabSRMM
 ; ############################################## 
-; Start of langpack: Tipper (Letzte Änderung: 23:21, 6. Feb. 2011 )
+; Start of langpack: Tipper (Letzte Änderung: 12:02, 6. MÃ¤r. 2012 )
 
 ; Pluginname: Tipper 
-; Version: 0.4.1.8
+; Version: 0.4.1.9
 ; Dateiname: tipper.dll
 ; Unique ID: {785c25e3-c906-434b-9723-e244e1beca02}
 ; Autor: Scott Ellis
-; Link: http://forums.miranda-im.org/showthread.php?t=7930
 ; Übersetzung: 08.04.06 von freak
 
 ; Pluginname: Tipper YM 
@@ -36118,7 +36115,6 @@ Kopiere Nachrichten in Zwischenablage
 ; Dateiname: tipper.dll
 ; Unique ID: {8392df1d-9090-4f8e-9df6-2fe058edd800}
 ; Autor: Scott Ellis, yaho
-; Link: http://miranda-easy.net/mods.php
 
 ; Zeitangaben
 ; Bitte die DIN 8601 beachten! Bei Smileyproblemen bitte Leerzeichen benutzen!
@@ -39591,14 +39587,14 @@ Andere Optionen
 ; ##############################################
 ; End of langpack: VyPressChat
 ; ############################################## 
-; Start of langpack: WATrack (Letzte Änderung: 10:36, 9. Feb. 2012 )
+; Start of langpack: WATrack (Letzte Änderung: 18:59, 12. Apr. 2012 )
 
 ; Pluginname: WATrack 
 ; Version: 0.0.6.12
 ; Dateiname: watrack.dll
 ; Unique ID: {fc6c81f4-837e-4430-9601-a0aa43177ae3}
 ; Autor: Awkward
-; Übersetzung: 30.10.05 von Dober
+; Übersetzung: Dober, CHEF-KOCH
 ; Besonderheiten: Einiges ist aktuell noch nicht übersetzbar, Source Anpassung nötig!
 
 [Switch ON these modules]
@@ -40171,6 +40167,14 @@ Textformatierungsvariablen\r\n{b}text{/b}\tFett\r\n{i}text{/i}\tKursiv\r\n{u}tex
 Farbe
 [Color codes]
 Farbtabelle
+
+[Method '%s' not supported by automation object]
+Methode '%s' wird nicht vom gewählten Objekt unterstützt.
+[Variant does not reference an automation object]
+Diese Variante referenziert kein Automatisierungsobjekt.
+
+[Don't forget to enter Login and Password to use MyShows service]
+Bitte vergessen sie nicht ihr Login und Passwort für den MyShows Dienst einzutragen.
  
 ; ##############################################
 ; End of langpack: WATrack
