@@ -5,9 +5,17 @@
 
 #pragma once
 
-#ifndef _WIN32_WINNT		// Lassen Sie die Verwendung spezifischer Features von Windows XP oder später zu.                   
-#define _WIN32_WINNT 0x0501	// Ändern Sie dies in den geeigneten Wert für andere Versionen von Windows.
-#endif						
+/* disable warnings
+#pragma warning(disable:4267)
+#pragma warning(disable:4244)
+#pragma warning(disable:4312)
+#pragma warning(disable:4099)
+#pragma warning(disable:4311)
+*/
+
+#define MIRANDA_VER    0x0A00
+#define _WIN32_WINNT   0x0600
+#define _WIN32_WINDOWS 0x0600						
 
 #include <stdio.h>
 #include <cstdlib>
@@ -17,11 +25,6 @@
 #define uint unsigned int
 #define socklen_t int
 
-#pragma warning(disable:4267)
-#pragma warning(disable:4244)
-#pragma warning(disable:4312)
-#pragma warning(disable:4099)
-#pragma warning(disable:4311)
 
 	#define     MSG_CTRUNC 0x08
     #define     MSG_PROXY 0x10

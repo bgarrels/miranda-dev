@@ -399,10 +399,45 @@
     <Filter Include="Header Files\mir-plugin">
       <UniqueIdentifier>{68ced24c-3193-4960-b39d-04951c2d734d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\icons">
+      <UniqueIdentifier>{367e70b5-adfe-4f96-98a9-4ade7f353741}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Docs\srcheader.txt">
       <Filter>Docs</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\xfire away.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\xfire offline.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\xfire online.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\xfire.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\xfiresmall.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\d_xfire.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\icon.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\im_xfire.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\true.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\x_fire16x16.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>
