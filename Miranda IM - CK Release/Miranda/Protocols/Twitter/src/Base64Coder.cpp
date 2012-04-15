@@ -132,11 +132,11 @@ void Base64Coder::Encode(const PBYTE pBuffer, DWORD nBufLen)
 	}
 }
 
-void Base64Coder::Encode(LPCSTR szMessage)
+/*void Base64Coder::Encode(LPCSTR szMessage)
 {
 	if(szMessage != NULL)
 		Base64Coder::Encode((const PBYTE)szMessage, strlen(szMessage));
-}
+}*/
 
 void Base64Coder::Decode(const PBYTE pBuffer, DWORD dwBufLen)
 {
@@ -189,11 +189,11 @@ void Base64Coder::Decode(const PBYTE pBuffer, DWORD dwBufLen)
 	}
 }
 
-void Base64Coder::Decode(LPCSTR szMessage)
+/*void Base64Coder::Decode(LPCSTR szMessage)
 {
 	if(szMessage != NULL)
 		Base64Coder::Decode((const PBYTE)szMessage, strlen(szMessage));
-}
+}*/
 
 DWORD Base64Coder::_DecodeToBuffer(const TempBucket &Decode, PBYTE pBuffer)
 {

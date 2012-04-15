@@ -1,5 +1,5 @@
 /*
-Copyright © 2012 Jim Porter
+Copyright © 2009 Jim Porter
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "proto.h"
 #include "theme.h"
 
-//ExternalAPI
 #include "m_updater.h"
 
 PLUGINLINK *pluginLink;
@@ -29,7 +28,6 @@ MD5_INTERFACE md5i;
 MM_INTERFACE mmi;
 UTF8_INTERFACE utfi;
 LIST_INTERFACE li;
-int hLangpack = 0;
 
 CLIST_INTERFACE* pcli;
 
@@ -37,11 +35,7 @@ HINSTANCE g_hInstance;
 
 PLUGININFOEX pluginInfo={
 	sizeof(PLUGININFOEX),
-#ifdef WIN64
-	"Twitter Plugin (x64)",
-#else
 	"Twitter Plugin",
-#endif
 	__VERSION_DWORD,
 	"Provides basic support for Twitter protocol. [Built: "__DATE__" "__TIME__"]",
 	"dentist, omniwolf, Thief",
@@ -50,13 +44,8 @@ PLUGININFOEX pluginInfo={
 	"http://code.google.com/p/miranda-twitter-oauth/",
 	UNICODE_AWARE, //not transient
 	0,             //doesn't replace anything built-in
-#ifdef WIN64
-	// {ECD828A6-FF3C-4F24-95CE-5FF73A06FB6F}
-	{ 0xecd828a6, 0xff3c, 0x4f24, { 0x95, 0xce, 0x5f, 0xf7, 0x3a, 0x6, 0xfb, 0x6f } }
-#else
 	//{BC09A71B-B86E-4d33-B18D-82D30451DD3C}
-	{ 0xbc09a71b, 0xb86e, 0x4d33, { 0xb1, 0x8d, 0x82, 0xd3, 0x4, 0x51, 0xdd, 0x3c } }
-#endif
+    { 0xbc09a71b, 0xb86e, 0x4d33, { 0xb1, 0x8d, 0x82, 0xd3, 0x4, 0x51, 0xdd, 0x3c } }
 };
 
 /////////////////////////////////////////////////////////////////////////////
@@ -136,7 +125,8 @@ int OnModulesLoaded(WPARAM,LPARAM)
 		upd.szBetaUpdateURL      = "http://www.teamboxel.com/update/twitter/ansi";
 #endif
 
-		upd.pbVersion = reinterpret_cast<BYTE*>( CreateVersionStringPluginEx(&pluginInfo,curr_version) );
+		upd.pbVersion = reinterpret_cast<BYTE*>( CreateVersionStringPlugin(
+			reinterpret_cast<PLUGININFO*>(&pluginInfo),curr_version) );
 		upd.cpbVersion = strlen(reinterpret_cast<char*>(upd.pbVersion));
 
 		CallService(MS_UPDATE_REGISTER,0,(LPARAM)&upd);
@@ -154,7 +144,6 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	mir_getMD5I(&md5i);
 	mir_getUTFI(&utfi);
 	mir_getLI(&li);
-	mir_getLP(&pluginInfo);
 
 	pcli = reinterpret_cast<CLIST_INTERFACE*>( CallService(
 		MS_CLIST_RETRIEVE_INTERFACE,0,reinterpret_cast<LPARAM>(g_hInstance)) );
@@ -171,7 +160,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	InitIcons();
 	InitContactMenus();
 
-	return 0;
+    return 0;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////

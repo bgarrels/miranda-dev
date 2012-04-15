@@ -1,5 +1,5 @@
 /*
-Copyright © 2012 Jim Porter
+Copyright © 2009 Jim Porter
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "theme.h"
 #include "ui.h"
 
-//ExternalAPI
 #include "m_folders.h"
 #include "m_historyevents.h"
 
@@ -111,7 +110,7 @@ TwitterProto::~TwitterProto()
 
 // *************************
 
-DWORD_PTR TwitterProto::GetCaps(int type,HANDLE hContact)
+DWORD TwitterProto::GetCaps(int type,HANDLE hContact)
 {
 	switch(type)
 	{
@@ -127,9 +126,9 @@ DWORD_PTR TwitterProto::GetCaps(int type,HANDLE hContact)
 	case PFLAG_MAXLENOFMESSAGE:
 		return 159; // 140 + <max length of a users name (15 apparently)> + 4 ("RT @").  this allows for the new style retweets
 	case PFLAG_UNIQUEIDTEXT:
-		return (DWORD_PTR) "Username";
+		return (int) "Username";
 	case PFLAG_UNIQUEIDSETTING:
-		return (DWORD_PTR) TWITTER_KEY_UN;
+		return (int) TWITTER_KEY_UN;
 	}
 	return 0;
 }
@@ -200,11 +199,18 @@ int TwitterProto::SetStatus(int new_status)
 		return 0;
 
 	m_iDesiredStatus = new_status;
-
-	if(new_status == ID_STATUS_ONLINE)
+	// 40072 - 40080 are the "online" statuses, basically every status except offline.  see statusmodes.h
+	if(new_status >= 40072 && new_status <= 40080)
 	{
+
+		m_iDesiredStatus = ID_STATUS_ONLINE; //i think i have to set this so it forces the twitter proto to be online (and not away, DND, etc)
+
 		// if we're already connecting and they want to go online, BAIL!  we're already trying to connect you dumbass
 		if(old_status == ID_STATUS_CONNECTING)
+			return 0;
+
+		// if we're already connected, and we change to another connected status, don't try and reconnect!
+		if (old_status >= 40072 && old_status <= 40080)
 			return 0;
 
 		// i think here we tell the proto interface struct that we're connecting, just so it knows
@@ -252,7 +258,7 @@ int TwitterProto::SvcCreateAccMgrUI(WPARAM wParam,LPARAM lParam)
 
 int TwitterProto::GetName(WPARAM wParam,LPARAM lParam)
 {
-	lstrcpynA(reinterpret_cast<char*>(lParam),m_szProtoName,(int)wParam);
+	lstrcpynA(reinterpret_cast<char*>(lParam),m_szProtoName,wParam);
 	return 0;
 }
 
@@ -261,7 +267,7 @@ int TwitterProto::GetStatus(WPARAM wParam,LPARAM lParam)
 	return m_iStatus;
 }
 
-INT_PTR TwitterProto::ReplyToTweet(WPARAM wParam,LPARAM lParam)
+int TwitterProto::ReplyToTweet(WPARAM wParam,LPARAM lParam)
 {
 	// TODO: support replying to tweets instead of just users
 	HANDLE hContact = reinterpret_cast<HANDLE>(wParam);
@@ -281,7 +287,7 @@ INT_PTR TwitterProto::ReplyToTweet(WPARAM wParam,LPARAM lParam)
 	return 0;
 }
 
-INT_PTR TwitterProto::VisitHomepage(WPARAM wParam,LPARAM lParam)
+int TwitterProto::VisitHomepage(WPARAM wParam,LPARAM lParam)
 {
 	HANDLE hContact = reinterpret_cast<HANDLE>(wParam);
 
@@ -354,7 +360,7 @@ int TwitterProto::OnOptionsInit(WPARAM wParam,LPARAM lParam)
 	odp.flags       = ODPF_BOLDGROUPS | ODPF_TCHAR;
 
 	odp.ptszTab     = LPGENT("Basic");
-	odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPTIONS);
+    odp.pszTemplate = MAKEINTRESOURCEA(IDD_OPTIONS);
 	odp.pfnDlgProc  = options_proc;
 	CallService(MS_OPT_ADDPAGE,wParam,(LPARAM)&odp);
 
@@ -499,7 +505,7 @@ void TwitterProto::ShowPopup(const char *text, int Error)
 		MessageBox(0,popup.lptzText,popup.lptzContactName,0);
 }
 
-INT_PTR TwitterProto::LOG(const char *fmt,...)
+int TwitterProto::LOG(const char *fmt,...)
 {
 	va_list va;
 	char text[1024];
@@ -513,7 +519,7 @@ INT_PTR TwitterProto::LOG(const char *fmt,...)
 	return CallService(MS_NETLIB_LOG,(WPARAM)hNetlib_,(LPARAM)text);
 }
 
-INT_PTR TwitterProto::WLOG(const char* first, const wstring last)
+int TwitterProto::WLOG(const char* first, const wstring last)
 {
 	char *str1 = new char[1024*96];
 	sprintf(str1,"%ls", last.c_str());

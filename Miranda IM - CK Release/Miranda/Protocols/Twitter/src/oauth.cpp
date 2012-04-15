@@ -1,7 +1,4 @@
-/* aww whatup?  this is all the oauth functions, at the moment
- * they're all part of the twitter class.. i think this is the
- * best way?  
- */
+//oauth 1.0
 
 #include "twitter.h"
 //#include "tc2.h"
