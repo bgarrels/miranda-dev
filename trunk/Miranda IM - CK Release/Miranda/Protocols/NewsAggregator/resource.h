@@ -3,12 +3,13 @@
 // Used by Resource.rc
 //
 #define IDD_OPTIONS                     101
-#define IDI_ICON                        110
+#define IDI_ICON                        109
 #define IDD_ADDFEED                     110
 #define IDI_CHECKALL                    111
 #define IDI_ADDFEED                     112
 #define IDI_IMPORTFEEDS                 113
 #define IDI_EXPORTFEEDS                 114
+#define IDC_TIMEOUT_VALUE_SPIN          1035
 #define IDC_FEEDLIST                    1036
 #define IDC_ADD                         1037
 #define IDC_CHANGE                      1038
@@ -23,9 +24,7 @@
 #define IDC_LOGIN                       1047
 #define IDC_PASSWORD                    1048
 #define IDC_TAGSEDIT                    1049
-#define IDC_BUTTON2                     1050
 #define IDC_RESET                       1050
-#define IDC_BUTTON1                     1051
 #define IDC_TAGHELP                     1051
 
 // Next default values for new objects

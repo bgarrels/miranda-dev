@@ -99,66 +99,64 @@ int GetImageFormat(const TCHAR* ext)
 		return PA_FORMAT_UNKNOWN;
 	}
 }
-void GetLoginStr(char* user, size_t szuser, char* pass)
+void CreateAuthString(char* auth, HANDLE hContact, HWND hwndDlg)
 {
-	//DBVARIANT dbv;
-
-    //if (DBGetContactSettingString(NULL, PluginName, "Username", &dbv) == 0)
-	//{
-		//mir_snprintf(user, szuser, "%s", dbv.pszVal);
-		//DBFreeVariant(&dbv);
-	//}
-    //else
-        user[0] = 0;
-
-    //if (DBGetContactSettingString(NULL, PluginName, "Password", &dbv) == 0)
-	/*{
-		CallService(MS_DB_CRYPT_DECODESTRING, strlen(dbv.pszVal)+1, (LPARAM)dbv.pszVal);
-
-		mir_md5_byte_t hash[16];
-		mir_md5_state_t context;
-
-		mir_md5_init(&context);
-		mir_md5_append(&context, (BYTE*)dbv.pszVal, (int)strlen(dbv.pszVal));
-		mir_md5_finish(&context, hash);
-
-		arrayToHex(hash, sizeof(hash), pass);
-
-		DBFreeVariant(&dbv);
+    char *user = NULL, *pass = NULL;
+	TCHAR *tlogin = NULL, *tpass = NULL, buf[MAX_PATH] = {0};
+	if (hContact && DBGetContactSettingByte(hContact, MODULE, "UseAuth", 0))
+	{
+		DBVARIANT dbLogin = {0};
+		if (!DBGetContactSettingTString(hContact, MODULE, "Login", &dbLogin))
+		{
+			tlogin = (TCHAR*)mir_alloc(_tcslen(dbLogin.ptszVal)*sizeof(TCHAR));
+			memcpy(tlogin, dbLogin.ptszVal, _tcslen(dbLogin.ptszVal)*sizeof(TCHAR));
+			tlogin[_tcslen(dbLogin.ptszVal)] = 0;
+			DBFreeVariant(&dbLogin);
+		}
+		DBVARIANT dbPass = {0};
+		if (!DBGetContactSettingTString(hContact, MODULE, "Password", &dbPass))
+		{
+			tpass = (TCHAR*)mir_alloc(_tcslen(dbPass.ptszVal)*sizeof(TCHAR));
+			memcpy(tpass, dbPass.ptszVal, _tcslen(dbPass.ptszVal)*sizeof(TCHAR));
+			tpass[_tcslen(dbPass.ptszVal)] = 0;
+			DBFreeVariant(&dbPass);
+		}
 	}
-    else*/
-        pass[0] = 0;
-}
+	else if (hwndDlg && IsDlgButtonChecked(hwndDlg, IDC_USEAUTH))
+	{
+		GetDlgItemText(hwndDlg, IDC_LOGIN, buf, SIZEOF(buf));
+		tlogin = buf;
+		GetDlgItemText(hwndDlg, IDC_PASSWORD, buf, SIZEOF(buf));
+		tpass = buf;
+	}
+	user = mir_t2a(tlogin);
+	pass = mir_t2a(tpass);
 
-void CreateAuthString(char* auth)
-{
-    char user[64], pass[40];
-    GetLoginStr(user, sizeof(user), pass);
-
-	char str[110];
-    int len = mir_snprintf(str, sizeof(str), "%s@%s", user, pass);
+	char str[MAX_PATH];
+    int len = mir_snprintf(str, SIZEOF(str), "%s:%s", user, pass);
+	mir_free(user);
+	mir_free(pass);
 
 	strcpy(auth, "Basic ");
 	NETLIBBASE64 nlb = { auth+6, 250, (PBYTE)str, len };
 	CallService(MS_NETLIB_BASE64ENCODE, 0, LPARAM(&nlb));
 }
 
-VOID GetNewsData(TCHAR *tszUrl, char** szData)
+VOID GetNewsData(TCHAR *tszUrl, char** szData, HANDLE hContact, HWND hwndDlg)
 {
 	char* szRedirUrl  = NULL;
 	NETLIBHTTPREQUEST nlhr = {0};
-	NETLIBHTTPHEADER headers[4];
+	NETLIBHTTPHEADER headers[5];
 
 	// initialize the netlib request
 	nlhr.cbSize = sizeof(nlhr);
-	nlhr.requestType = REQUEST_GET;
+	nlhr.requestType = REQUEST_POST;
 	nlhr.flags = NLHRF_NODUMP | NLHRF_HTTP11;
 	char *szUrl = mir_t2a(tszUrl);
 	nlhr.szUrl = szUrl;
 	nlhr.nlc = hNetlibHttp;
 
 	// change the header so the plugin is pretended to be IE 6 + WinXP
-	nlhr.headersCount = 4;
 	nlhr.headers = headers;
 	nlhr.headers[0].szName  = "User-Agent";
 	nlhr.headers[0].szValue = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
@@ -168,11 +166,17 @@ VOID GetNewsData(TCHAR *tszUrl, char** szData)
 	nlhr.headers[2].szValue = "no-cache";
 	nlhr.headers[3].szName  = "Connection";
 	nlhr.headers[3].szValue = "close";
-	//nlhr.headers[4].szName  = "Authorization";
-
-	//char auth[256];
-	//CreateAuthString(auth);
-	//nlhr.headers[4].szValue = "Basic 123445";//auth;
+	if (DBGetContactSettingByte(hContact, MODULE, "UseAuth", 0) || IsDlgButtonChecked(hwndDlg, IDC_USEAUTH))
+	{
+		nlhr.headersCount = 5;
+		nlhr.headers[4].szName  = "Authorization";
+	
+		char auth[256];
+		CreateAuthString(auth, hContact, hwndDlg);
+		nlhr.headers[4].szValue = auth;
+	}
+	else
+		nlhr.headersCount = 4;
 
 	// download the page
 	NETLIBHTTPREQUEST *nlhrReply = (NETLIBHTTPREQUEST*)CallService(MS_NETLIB_HTTPTRANSACTION, (WPARAM)hNetlibUser, (LPARAM)&nlhr);
@@ -268,35 +272,32 @@ VOID UpdateList (HWND hwndList)
 	// Some code to create the list-view control.
 	// Initialize LVITEM members that are common to all
 	// items.
-	HANDLE hContact= (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
+	HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
 	int i = 0;
 	while (hContact != NULL) 
 	{
-		if(IsMyContact(hContact)) 
+		if (IsMyContact(hContact)) 
 		{
 			UpdateListFlag = TRUE;
 			lvI.mask = LVIF_TEXT;
 			lvI.iSubItem = 0;
-			DBVARIANT dbVar = {0};
-			DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
-			if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-				DBFreeVariant(&dbVar);
-			else
+			DBVARIANT dbNick = {0};
+			if (!DBGetContactSettingTString(hContact, MODULE, "Nick", &dbNick))
 			{
-				lvI.pszText = dbVar.ptszVal;
+				lvI.pszText = dbNick.ptszVal;
 				lvI.iItem = i;
 				ListView_InsertItem(hwndList, &lvI);
 				lvI.iSubItem = 1;
-				DBGetContactSettingTString(hContact, MODULE, "URL", &dbVar);
-				if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-					DBFreeVariant(&dbVar);
-				else
+				DBVARIANT dbURL = {0};
+				if (!DBGetContactSettingTString(hContact, MODULE, "URL", &dbURL))
 				{
-					lvI.pszText = dbVar.ptszVal;
+					lvI.pszText = dbURL.ptszVal;
 					ListView_SetItem(hwndList, &lvI);
 					i += 1;
 					ListView_SetCheckState(hwndList, lvI.iItem, DBGetContactSettingByte(hContact, MODULE, "CheckState", 1));
+					DBFreeVariant(&dbURL);
 				}
+				DBFreeVariant(&dbNick);
 			}
 		}
 		hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
@@ -430,7 +431,7 @@ TCHAR* StrReplace (TCHAR* Search, TCHAR* Replace, TCHAR* Resource)
 		_tcscat(NewText, Work);
 		_tcscat(NewText, Pointer + SearchLen);
 
-		Resource = (TCHAR*)mir_realloc(Resource, (ResourceLen - SearchLen + ReplaceLen + 1)*sizeof(TCHAR));
+		Resource = (TCHAR*)mir_alloc((ResourceLen - SearchLen + ReplaceLen + 1)*sizeof(TCHAR));
 
 		for (i = 0; i < (ResourceLen - SearchLen + ReplaceLen); i++)
 			Resource[i] = NewText[i];
@@ -540,13 +541,13 @@ size_t PathToRelative(const TCHAR *pSrc, TCHAR *pOut)
 {	return CallService( MS_UTILS_PATHTORELATIVET, (WPARAM)pSrc, (LPARAM)pOut );
 }
 
-TCHAR* CheckFeed(TCHAR* tszURL)
+TCHAR* CheckFeed(TCHAR* tszURL, HWND hwndDlg)
 {
 	char *szData = NULL;
 	DBVARIANT dbVar = {0};
 	if (CallProtoService(MODULE, PS_GETSTATUS, 0, 0) != ID_STATUS_OFFLINE)
 	{
-		GetNewsData(tszURL, &szData);
+		GetNewsData(tszURL, &szData, NULL, hwndDlg);
 		if (szData)
 		{
 			TCHAR *tszData = mir_a2t(szData);
@@ -631,17 +632,16 @@ TCHAR* CheckFeed(TCHAR* tszURL)
 	return NULL;
 }
 
-size_t decode_html_entities_utf8(char *dest, const char *src);
 VOID CheckCurrentFeed(HANDLE hContact)
 {
 	char *szData = NULL;
-	DBVARIANT dbVar = {0};
-	DBGetContactSettingTString(hContact, MODULE, "URL", &dbVar);
-	if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-		DBFreeVariant(&dbVar);
+	DBVARIANT dbURL = {0};
+	if (DBGetContactSettingTString(hContact, MODULE, "URL", &dbURL))
+		return;
 	else if ((DBGetContactSettingWord(hContact, MODULE, "Status", ID_STATUS_OFFLINE) != ID_STATUS_OFFLINE) && DBGetContactSettingByte(hContact, MODULE, "CheckState", 1) != 0)
 	{
-		GetNewsData(dbVar.ptszVal, &szData);
+		GetNewsData(dbURL.ptszVal, &szData, hContact, NULL);
+		DBFreeVariant(&dbURL);
 		if (szData)
 		{
 			TCHAR *tszData = mir_a2t(szData);
@@ -691,18 +691,26 @@ VOID CheckCurrentFeed(HANDLE hContact)
 						for (int j = 0; j < xi.getChildCount(chan); j++)
 						{
 							HXML child = xi.getChild(chan, j);
-							if (lstrcmpi(xi.getName(child), _T("title")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("title")) == 0 && xi.getText(child))
 							{
+								char* szstring = mir_t2a(xi.getText(child));
+								decode_html_entities_utf8(szstring, 0);
+								boost::regex xRegEx("<(.|\n)*?>");
+								std::string xStr(szstring);
+								strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
 								if (UtfEncode)
 								{
-									char* szstring = mir_t2a(xi.getText(child));
 									TCHAR* tszstring = mir_utf8decodeT(szstring);
 									DBWriteContactSettingTString(hContact, MODULE, "FirstName", tszstring);
 									mir_free(tszstring);
-									mir_free(szstring);
 								}
 								else
-									DBWriteContactSettingTString(hContact, MODULE, "FirstName", xi.getText(child));
+								{
+									TCHAR* tszstring = mir_a2t(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "FirstName", tszstring);
+									mir_free(tszstring);
+								}
+								mir_free(szstring);
 								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("link")) == 0)
@@ -710,55 +718,94 @@ VOID CheckCurrentFeed(HANDLE hContact)
 								DBWriteContactSettingTString(hContact, MODULE, "Homepage", xi.getText(child));
 								continue;
 							}
-							if (lstrcmpi(xi.getName(child), _T("description")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("description")) == 0 && xi.getText(child))
 							{
+								char* szstring = mir_t2a(xi.getText(child));
+								decode_html_entities_utf8(szstring, 0);
+								boost::regex xRegEx("<(.|\n)*?>");
+								std::string xStr(szstring);
+								strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
 								if (UtfEncode)
 								{
-									char* szstring = mir_t2a(xi.getText(child));
 									TCHAR* tszstring = mir_utf8decodeT(szstring);
 									DBWriteContactSettingTString(hContact, MODULE, "About", tszstring);
 									DBWriteContactSettingTString(hContact, "CList", "StatusMsg", tszstring);
 									mir_free(tszstring);
-									mir_free(szstring);
 								}
 								else
 								{
-									DBWriteContactSettingTString(hContact, MODULE, "About", xi.getText(child));
-									DBWriteContactSettingTString(hContact, "CList", "StatusMsg", xi.getText(child));
+									TCHAR* tszstring = mir_a2t(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "About", tszstring);
+									DBWriteContactSettingTString(hContact, "CList", "StatusMsg", tszstring);
+									mir_free(tszstring);
 								}
+								mir_free(szstring);
 								continue;
 							}
-							if (lstrcmpi(xi.getName(child), _T("language")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("language")) == 0 && xi.getText(child))
 							{
+								char* szstring = mir_t2a(xi.getText(child));
+								decode_html_entities_utf8(szstring, 0);
+								boost::regex xRegEx("<(.|\n)*?>");
+								std::string xStr(szstring);
+								strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
 								if (UtfEncode)
 								{
-									char* szstring = mir_t2a(xi.getText(child));
 									TCHAR* tszstring = mir_utf8decodeT(szstring);
 									DBWriteContactSettingTString(hContact, MODULE, "Language1", tszstring);
 									mir_free(tszstring);
-									mir_free(szstring);
 								}
 								else
-									DBWriteContactSettingTString(hContact, MODULE, "Language1", xi.getText(child));
+								{
+									TCHAR* tszstring = mir_a2t(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "Language1", tszstring);
+									mir_free(tszstring);
+								}
+								mir_free(szstring);
 								continue;
 							}
-							if (lstrcmpi(xi.getName(child), _T("managingEditor")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("managingEditor")) == 0 && xi.getText(child))
 							{
-								DBWriteContactSettingTString(hContact, MODULE, "e-mail", xi.getText(child));
-								continue;
-							}
-							if (lstrcmpi(xi.getName(child), _T("Category")) == 0)
-							{
+								char* szstring = mir_t2a(xi.getText(child));
+								decode_html_entities_utf8(szstring, 0);
+								boost::regex xRegEx("<(.|\n)*?>");
+								std::string xStr(szstring);
+								strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
 								if (UtfEncode)
 								{
-									char* szstring = mir_t2a(xi.getText(child));
+									TCHAR* tszstring = mir_utf8decodeT(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "e-mail", tszstring);
+									mir_free(tszstring);
+								}
+								else
+								{
+									TCHAR* tszstring = mir_a2t(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "e-mail", tszstring);
+									mir_free(tszstring);
+								}
+								mir_free(szstring);
+								continue;
+							}
+							if (lstrcmpi(xi.getName(child), _T("category")) == 0 && xi.getText(child))
+							{
+								char* szstring = mir_t2a(xi.getText(child));
+								decode_html_entities_utf8(szstring, 0);
+								boost::regex xRegEx("<(.|\n)*?>");
+								std::string xStr(szstring);
+								strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
+								if (UtfEncode)
+								{
 									TCHAR* tszstring = mir_utf8decodeT(szstring);
 									DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", tszstring);
 									mir_free(tszstring);
-									mir_free(szstring);
 								}
 								else
-									DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", xi.getText(child));
+								{
+									TCHAR* tszstring = mir_a2t(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", tszstring);
+									mir_free(tszstring);
+								}
+								mir_free(szstring);
 								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("image")) == 0)
@@ -794,12 +841,26 @@ VOID CheckCurrentFeed(HANDLE hContact)
 											break;
 										}
 									}
+									else
+									{
+										DBDeleteContactSetting(hContact, MODULE, "ImageURL");
+										DBDeleteContactSetting(hContact, MODULE, "ImagePath");
+									}
 								}
 							}
-							else
+							if (lstrcmpi(xi.getName(child), _T("lastBuildDate")) == 0 && xi.getText(child))
 							{
-								DBDeleteContactSetting(hContact, MODULE, "ImageURL");
-								DBDeleteContactSetting(hContact, MODULE, "ImagePath");
+								TCHAR *lastupdtime = (TCHAR*)xi.getText(child);
+								time_t stamp = DateToUnixTime(lastupdtime, 0);
+								double deltaupd = difftime(time(NULL), stamp);
+								double deltacheck = difftime(time(NULL), DBGetContactSettingDword(hContact, MODULE, "LastCheck", 0));
+								if (deltaupd - deltacheck >= 0)
+								{
+									DBWriteContactSettingDword(hContact, MODULE, "LastCheck", time(NULL));
+									xi.destroyNode(hXml);
+									return;
+								}
+								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("item")) == 0)
 							{
@@ -854,16 +915,15 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									}
 								}
 								TCHAR* message;
-								DBVARIANT dbVar = {0};
-								DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbVar);
-								if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-								{
+								DBVARIANT dbMsg = {0};
+								if (DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbMsg))
 									message = _T(TAGSDEFAULT);
-									DBFreeVariant(&dbVar);
-								}
 								else
 								{
-									message = dbVar.ptszVal;
+									message = (TCHAR*)mir_alloc(_tcslen(dbMsg.ptszVal)*sizeof(TCHAR));
+									memcpy(message, dbMsg.ptszVal, _tcslen(dbMsg.ptszVal)*sizeof(TCHAR));
+									message[_tcslen(dbMsg.ptszVal)] = 0;
+									DBFreeVariant(&dbMsg);
 								}
 								if (lstrcmp(title, NULL) == 0)
 									message = StrReplace(_T("#<title>#"), TranslateT("empty"), message);
@@ -904,8 +964,18 @@ VOID CheckCurrentFeed(HANDLE hContact)
 								else
 									pszUtf = mir_t2a(message);
 								decode_html_entities_utf8(pszUtf, 0);
+								boost::regex xRegEx("<(.|\n)*?>");
+								std::string xStr(pszUtf);
+								strcpy(pszUtf, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
+								xRegEx = "^\\s+";
+								xStr = pszUtf;
+								strcpy(pszUtf, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
 
-								time_t stamp = DateToUnixTime(datetime, 0);
+								time_t stamp;
+								if (lstrcmpi(datetime, NULL) ==0)
+									stamp = time(NULL);
+								else
+									stamp = DateToUnixTime(datetime, 0);
 
 								DBEVENTINFO olddbei = { 0 };
 								HANDLE		hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDFIRST, (WPARAM)hContact, 0);
@@ -917,7 +987,7 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									olddbei.cbBlob = CallService(MS_DB_EVENT_GETBLOBSIZE, (WPARAM)hDbEvent, 0);
 									olddbei.pBlob = (PBYTE)mir_alloc(olddbei.cbBlob);
 									CallService(MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&olddbei);
-									if (olddbei.timestamp == stamp && olddbei.cbBlob == lstrlenA(pszUtf) + 1 && lstrcmpA((char*)olddbei.pBlob, pszUtf) == 0)
+									if (olddbei.cbBlob == lstrlenA(pszUtf) + 1 && lstrcmpA((char*)olddbei.pBlob, pszUtf) == 0)
 										MesExist = TRUE;
 									hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDNEXT, (WPARAM)hDbEvent, 0);
 									mir_free(olddbei.pBlob);
@@ -936,6 +1006,7 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									CallService(MS_DB_EVENT_ADD, (WPARAM)hContact, (LPARAM)&dbei);
 								}
 								mir_free(pszUtf);
+								mir_free(message);
 							}
 						}
 					}
@@ -945,9 +1016,26 @@ VOID CheckCurrentFeed(HANDLE hContact)
 						for (int j = 0; j < xi.getChildCount(node); j++)
 						{
 							HXML child = xi.getChild(node, j);
-							if (lstrcmpi(xi.getName(child), _T("title")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("title")) == 0 && xi.getText(child))
 							{
-								DBWriteContactSettingTString(hContact, MODULE, "FirstName", xi.getText(child));
+								char* szstring = mir_t2a(xi.getText(child));
+								decode_html_entities_utf8(szstring, 0);
+								boost::regex xRegEx("<(.|\n)*?>");
+								std::string xStr(szstring);
+								strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
+								if (UtfEncode)
+								{
+									TCHAR* tszstring = mir_utf8decodeT(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "FirstName", tszstring);
+									mir_free(tszstring);
+								}
+								else
+								{
+									TCHAR* tszstring = mir_a2t(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "FirstName", tszstring);
+									mir_free(tszstring);
+								}
+								mir_free(szstring);
 								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("link")) == 0)
@@ -966,16 +1054,50 @@ VOID CheckCurrentFeed(HANDLE hContact)
 								}
 								continue;
 							}
-							if (lstrcmpi(xi.getName(child), _T("subtitle")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("subtitle")) == 0 && xi.getText(child))
 							{
-								const LPCTSTR descr =  xi.getText(child);
-								DBWriteContactSettingTString(hContact, MODULE, "About",descr);
-								DBWriteContactSettingTString(hContact, "CList", "StatusMsg", descr);
+								char* szstring = mir_t2a(xi.getText(child));
+								decode_html_entities_utf8(szstring, 0);
+								boost::regex xRegEx("<(.|\n)*?>");
+								std::string xStr(szstring);
+								strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
+								if (UtfEncode)
+								{
+									TCHAR* tszstring = mir_utf8decodeT(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "About", tszstring);
+									DBWriteContactSettingTString(hContact, "CList", "StatusMsg", tszstring);
+									mir_free(tszstring);
+								}
+								else
+								{
+									TCHAR* tszstring = mir_a2t(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "About", tszstring);
+									DBWriteContactSettingTString(hContact, "CList", "StatusMsg", tszstring);
+									mir_free(tszstring);
+								}
+								mir_free(szstring);
 								continue;
 							}
-							if (lstrcmpi(xi.getName(child), _T("language")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("language")) == 0 && xi.getText(child))
 							{
-								DBWriteContactSettingTString(hContact, MODULE, "Language1", xi.getText(child));
+								char* szstring = mir_t2a(xi.getText(child));
+								decode_html_entities_utf8(szstring, 0);
+								boost::regex xRegEx("<(.|\n)*?>");
+								std::string xStr(szstring);
+								strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
+								if (UtfEncode)
+								{
+									TCHAR* tszstring = mir_utf8decodeT(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "Language1", tszstring);
+									mir_free(tszstring);
+								}
+								else
+								{
+									TCHAR* tszstring = mir_a2t(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "Language1", tszstring);
+									mir_free(tszstring);
+								}
+								mir_free(szstring);
 								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("author")) == 0)
@@ -989,12 +1111,28 @@ VOID CheckCurrentFeed(HANDLE hContact)
 										break;
 									}
 								}
-								
 								continue;
 							}
-							if (lstrcmpi(xi.getName(child), _T("Category")) == 0)
+							if (lstrcmpi(xi.getName(child), _T("category")) == 0 && xi.getText(child))
 							{
-								DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", xi.getText(child));
+								char* szstring = mir_t2a(xi.getText(child));
+								decode_html_entities_utf8(szstring, 0);
+								boost::regex xRegEx("<(.|\n)*?>");
+								std::string xStr(szstring);
+								strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
+								if (UtfEncode)
+								{
+									TCHAR* tszstring = mir_utf8decodeT(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", tszstring);
+									mir_free(tszstring);
+								}
+								else
+								{
+									TCHAR* tszstring = mir_a2t(szstring);
+									DBWriteContactSettingTString(hContact, MODULE, "Interest0Text", tszstring);
+									mir_free(tszstring);
+								}
+								mir_free(szstring);
 								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("icon")) == 0)
@@ -1030,12 +1168,26 @@ VOID CheckCurrentFeed(HANDLE hContact)
 											break;
 										}
 									}
+									else
+									{
+										DBDeleteContactSetting(hContact, MODULE, "ImageURL");
+										DBDeleteContactSetting(hContact, MODULE, "ImagePath");
+									}
 								}
 							}
-							else
+							if (lstrcmpi(xi.getName(child), _T("updated")) == 0 && xi.getText(child))
 							{
-								DBDeleteContactSetting(hContact, MODULE, "ImageURL");
-								DBDeleteContactSetting(hContact, MODULE, "ImagePath");
+								TCHAR *lastupdtime = (TCHAR*)xi.getText(child);
+								time_t stamp = DateToUnixTime(lastupdtime, 0);
+								double deltaupd = difftime(time(NULL), stamp);
+								double deltacheck = difftime(time(NULL), DBGetContactSettingDword(hContact, MODULE, "LastCheck", 0));
+								if (deltaupd - deltacheck >= 0)
+								{
+									DBWriteContactSettingDword(hContact, MODULE, "LastCheck", time(NULL));
+									xi.destroyNode(hXml);
+									return;
+								}
+								continue;
 							}
 							if (lstrcmpi(xi.getName(child), _T("entry")) == 0)
 							{
@@ -1043,12 +1195,15 @@ VOID CheckCurrentFeed(HANDLE hContact)
 								for (int z = 0; z < xi.getChildCount(child); z++)
 								{
 									HXML itemval = xi.getChild(child, z);
-									if (lstrcmpi(xi.getName(itemval), _T("title")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("title")) == 0 && xi.getText(itemval))
 									{
-										if (xi.getAttrCount(itemval) == 0)
-											title = (TCHAR*)xi.getText(itemval);
-										else///сделать правильно
-											title = (TCHAR*)xi.getText(itemval);
+										char* szstring = mir_t2a(xi.getText(itemval));
+										decode_html_entities_utf8(szstring, 0);
+										boost::regex xRegEx("<(.|\n)*?>");
+										std::string xStr(szstring);
+										strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
+										title = mir_a2t(szstring);
+										mir_free(szstring);
 										continue;
 									}
 									if (lstrcmpi(xi.getName(itemval), _T("link")) == 0)
@@ -1068,9 +1223,15 @@ VOID CheckCurrentFeed(HANDLE hContact)
 										datetime = (TCHAR*)xi.getText(itemval);
 										continue;
 									}
-									if (lstrcmpi(xi.getName(itemval), _T("summary")) == 0 || lstrcmpi(xi.getName(itemval), _T("content")) == 0)
+									if ((lstrcmpi(xi.getName(itemval), _T("summary")) == 0 || lstrcmpi(xi.getName(itemval), _T("content")) == 0) && xi.getText(itemval))
 									{
-										descr = (TCHAR*)xi.getText(itemval);
+										char* szstring = mir_t2a(xi.getText(itemval));
+										decode_html_entities_utf8(szstring, 0);
+										boost::regex xRegEx("<(.|\n)*?>");
+										std::string xStr(szstring);
+										strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
+										descr = mir_a2t(szstring);
+										mir_free(szstring);
 										continue;
 									}
 									if (lstrcmpi(xi.getName(itemval), _T("author")) == 0)
@@ -1078,17 +1239,29 @@ VOID CheckCurrentFeed(HANDLE hContact)
 										for (int x = 0; x < xi.getChildCount(itemval); x++)
 										{
 											HXML authorval = xi.getChild(itemval, x);
-											if (lstrcmpi(xi.getName(authorval), _T("name")) == 0)
+											if (lstrcmpi(xi.getName(authorval), _T("name")) == 0 && xi.getText(authorval))
 											{
-												author = (TCHAR*)xi.getText(authorval);
+												char* szstring = mir_t2a(xi.getText(authorval));
+												decode_html_entities_utf8(szstring, 0);
+												boost::regex xRegEx("<(.|\n)*?>");
+												std::string xStr(szstring);
+												strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
+												author = mir_a2t(szstring);
+												mir_free(szstring);
 												break;
 											}
 										}
 										continue;
 									}
-									if (lstrcmpi(xi.getName(itemval), _T("comments")) == 0)
+									if (lstrcmpi(xi.getName(itemval), _T("comments")) == 0 && xi.getText(itemval))
 									{
-										comments = (TCHAR*)xi.getText(itemval);
+										char* szstring = mir_t2a(xi.getText(itemval));
+										decode_html_entities_utf8(szstring, 0);
+										boost::regex xRegEx("<(.|\n)*?>");
+										std::string xStr(szstring);
+										strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
+										comments = mir_a2t(szstring);
+										mir_free(szstring);
 										continue;
 									}
 									if (lstrcmpi(xi.getName(itemval), _T("id")) == 0)
@@ -1100,9 +1273,15 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									{
 										for (int x = 0; x < xi.getAttrCount(itemval); x++)
 										{
-											if (lstrcmpi(xi.getAttrName(itemval, x), _T("term")) == 0)
+											if (lstrcmpi(xi.getAttrName(itemval, x), _T("term")) == 0 && xi.getText(itemval))
 											{
-												category = (TCHAR*)xi.getAttrValue(itemval, xi.getAttrName(itemval, x));
+												char* szstring = mir_t2a(xi.getAttrValue(itemval, xi.getAttrName(itemval, x)));
+												decode_html_entities_utf8(szstring, 0);
+												boost::regex xRegEx("<(.|\n)*?>");
+												std::string xStr(szstring);
+												strcpy(szstring, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
+												category = mir_a2t(szstring);
+												mir_free(szstring);
 												break;
 											}
 										}
@@ -1110,16 +1289,15 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									}
 								}
 								TCHAR* message;
-								DBVARIANT dbVar = {0};
-								DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbVar);
-								if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-								{
+								DBVARIANT dbMsg = {0};
+								if (DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbMsg))
 									message = _T(TAGSDEFAULT);
-									DBFreeVariant(&dbVar);
-								}
 								else
 								{
-									message = dbVar.ptszVal;
+									message = (TCHAR*)mir_alloc(_tcslen(dbMsg.ptszVal)*sizeof(TCHAR));
+									memcpy(message, dbMsg.ptszVal, _tcslen(dbMsg.ptszVal)*sizeof(TCHAR));
+									message[_tcslen(dbMsg.ptszVal)] = 0;
+									DBFreeVariant(&dbMsg);
 								}
 								if (lstrcmp(title, NULL) == 0)
 									message = StrReplace(_T("#<title>#"), TranslateT("empty"), message);
@@ -1149,16 +1327,29 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									message = StrReplace(_T("#<category>#"), TranslateT("empty"), message);
 								else
 									message = StrReplace(_T("#<category>#"), category, message);
-								message = StrReplace(_T("&amp;"), _T("&"), message);
-								message = StrReplace(_T("&apos;"), _T("\'"), message);
-								message = StrReplace(_T("&gt;"), _T(">"), message);
-								message = StrReplace(_T("&lt;"), _T("<"), message);
-								message = StrReplace(_T("&quot;"), _T("\""), message);
+
 								message = StrReplace(_T("<br>"), _T("\n"), message);
+								message = StrReplace(_T("<br/>"), _T("\n"), message);
+								message = StrReplace(_T("<br />"), _T("\n"), message);
 
-								char* pszUtf = mir_utf8encodeT(message);
+								char* pszUtf;
+								if (!UtfEncode)
+									pszUtf = mir_utf8encodeT(message);
+								else
+									pszUtf = mir_t2a(message);
+								decode_html_entities_utf8(pszUtf, 0);
+								boost::regex xRegEx("<(.|\n)*?>");
+								std::string xStr(pszUtf);
+								strcpy(pszUtf, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
+								xRegEx = "^\\s+";
+								xStr = pszUtf;
+								strcpy(pszUtf, boost::regex_replace(xStr, xRegEx, "", boost::match_default | boost::format_perl).c_str());
 
-								time_t stamp = DateToUnixTime(datetime, 0);
+								time_t stamp;
+								if (lstrcmpi(datetime, NULL) ==0)
+									stamp = time(NULL);
+								else
+									stamp = DateToUnixTime(datetime, 1);
 
 								DBEVENTINFO olddbei = { 0 };
 								HANDLE		hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDFIRST, (WPARAM)hContact, 0);
@@ -1170,7 +1361,7 @@ VOID CheckCurrentFeed(HANDLE hContact)
 									olddbei.cbBlob = CallService(MS_DB_EVENT_GETBLOBSIZE, (WPARAM)hDbEvent, 0);
 									olddbei.pBlob = (PBYTE)malloc(olddbei.cbBlob);
 									CallService(MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&olddbei);
-									if (olddbei.timestamp == stamp && olddbei.cbBlob == lstrlenA(pszUtf) + 1 && lstrcmpA((char*)olddbei.pBlob, pszUtf) == 0)
+									if (olddbei.cbBlob == lstrlenA(pszUtf) + 1 && lstrcmpA((char*)olddbei.pBlob, pszUtf) == 0)
 										MesExist = TRUE;
 									hDbEvent = (HANDLE)CallService(MS_DB_EVENT_FINDNEXT, (WPARAM)hDbEvent, 0);
 								}
