@@ -1,0 +1,21 @@
+--- miranda-tools/lpgen/lpgen.pl.orig	Thu Apr 12 15:54:24 2012
++++ miranda-tools/lpgen/lpgen.pl	Fri Apr 13 14:33:13 2012
+@@ -200,7 +200,7 @@
+ 		}
+ 		close(READ);
+ 		$_ = $all;
+-		while (/(?:Button_SetIcon_IcoLib|Translate[A-Z]{0,2}|LPGENT?|ICQTranslateUtfStatic)\s*\(\s*(\".*?\")\s*[,\)]/g) {
++		while (/(?:Button_SetIcon_IcoLib|Translate[A-Z]{0,2}|LPGENT?|ICQTranslateUtfStatic)\s*\(\s*(\"[^\\]*?(\\.[^\\]*?)*\")\s*[,\)]/g) {
+ 			$found += append_str($1, $found);
+ 		}
+ 		print "($found)\n";
+@@ -219,7 +219,8 @@
+ 		}
+ 		close(READ);
+ 		$_ = $all;
+-		while (/\s*(?:CONTROL|(?:DEF)?PUSHBUTTON|[LRC]TEXT|GROUPBOX|CAPTION|MENUITEM|POPUP)\s*(\".*?\")/g) {
++		s/\"\"/\\\"/g;
++		while (/\s*(?:CONTROL|(?:DEF)?PUSHBUTTON|[LRC]TEXT|GROUPBOX|CAPTION|MENUITEM|POPUP)\s*(\"[^\\]*?(\\.[^\\]*?)*\")/g) {
+ 			$found += append_str($1, $found);
+ 		}
+ 		print "($found)\n";
