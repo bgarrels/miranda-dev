@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug Unicode|Win32">
+      <Configuration>Debug Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Unicode|Win32">
+      <Configuration>Release Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>XFire</ProjectName>
+    <ProjectGuid>{E4CD8BBA-B580-4584-AC3E-B4E9915026AE}</ProjectGuid>
+    <RootNamespace>xfiretest</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and $(VisualStudioVersion) == ''">$(VCTargetsPath11)</VCTargetsPath>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">$(SolutionDir)$(Configuration)/Plugins\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">$(SolutionDir)$(Configuration)/Obj/$(ProjectName)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">$(SolutionDir)$(Configuration)/Plugins\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">$(SolutionDir)$(Configuration)/Obj/$(ProjectName)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">true</GenerateManifest>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
+    <ClCompile>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>kernel32.lib</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <MapFileName>
+      </MapFileName>
+      <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
+    <ClCompile>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;PTW32_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <ErrorReporting>Queue</ErrorReporting>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <AdditionalIncludeDirectories>../../include;../../ExternalAPI</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <CompileAsManaged>
+      </CompileAsManaged>
+      <UseUnicodeForAssemblerListing>
+      </UseUnicodeForAssemblerListing>
+      <FloatingPointExceptions>
+      </FloatingPointExceptions>
+      <CreateHotpatchableImage>
+      </CreateHotpatchableImage>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>false</GenerateMapFile>
+      <MapExports>false</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <BaseAddress>0x5800000</BaseAddress>
+      <ImportLibrary>
+      </ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <MapFileName>
+      </MapFileName>
+      <LinkTimeCodeGeneration>
+      </LinkTimeCodeGeneration>
+      <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="xfiretest\authpacket.cpp" />
+    <ClCompile Include="xfiretest\buddylist.cpp" />
+    <ClCompile Include="xfiretest\buddylistgames2packet.cpp" />
+    <ClCompile Include="xfiretest\buddylistgamespacket.cpp" />
+    <ClCompile Include="xfiretest\buddylistnamespacket.cpp" />
+    <ClCompile Include="xfiretest\buddylistonlinepacket.cpp" />
+    <ClCompile Include="xfiretest\clanbuddylistnamespacket.cpp" />
+    <ClCompile Include="xfiretest\client.cpp" />
+    <ClCompile Include="xfiretest\clientinformationpacket.cpp" />
+    <ClCompile Include="xfiretest\clientloginpacket.cpp" />
+    <ClCompile Include="xfiretest\clientversionpacket.cpp" />
+    <ClCompile Include="xfiretest\dummyxfiregameresolver.cpp" />
+    <ClCompile Include="xfiretest\invitebuddypacket.cpp" />
+    <ClCompile Include="xfiretest\inviterequestpacket.cpp" />
+    <ClCompile Include="xfiretest\loginfailedpacket.cpp" />
+    <ClCompile Include="xfiretest\loginsuccesspacket.cpp" />
+    <ClCompile Include="xfiretest\main.cpp" />
+    <ClCompile Include="xfiretest\messageackpacket.cpp" />
+    <ClCompile Include="xfiretest\messagepacket.cpp" />
+    <ClCompile Include="xfiretest\monitoredobj.cpp" />
+    <ClCompile Include="xfiretest\options.cpp" />
+    <ClCompile Include="xfiretest\otherloginpacket.cpp" />
+    <ClCompile Include="xfiretest\packetreader.cpp" />
+    <ClCompile Include="xfiretest\recvdidpacket.cpp" />
+    <ClCompile Include="xfiretest\recvoldversionpacket.cpp" />
+    <ClCompile Include="xfiretest\recvprefspacket.cpp" />
+    <ClCompile Include="xfiretest\recvremovebuddypacket.cpp" />
+    <ClCompile Include="xfiretest\recvstatusmessagepacket.cpp" />
+    <ClCompile Include="xfiretest\sendacceptinvitationpacket.cpp" />
+    <ClCompile Include="xfiretest\senddenyinvitationpacket.cpp" />
+    <ClCompile Include="xfiretest\sendgameserverpacket.cpp" />
+    <ClCompile Include="xfiretest\sendgamestatus2packet.cpp" />
+    <ClCompile Include="xfiretest\sendgamestatuspacket.cpp" />
+    <ClCompile Include="xfiretest\sendkeepalivepacket.cpp" />
+    <ClCompile Include="xfiretest\sendmessagepacket.cpp" />
+    <ClCompile Include="xfiretest\sendnickchangepacket.cpp" />
+    <ClCompile Include="xfiretest\sendremovebuddypacket.cpp" />
+    <ClCompile Include="xfiretest\sendstatusmessagepacket.cpp" />
+    <ClCompile Include="xfiretest\sendtypingpacket.cpp" />
+    <ClCompile Include="xfiretest\services.cpp" />
+    <ClCompile Include="xfiretest\SHA1.cpp" />
+    <ClCompile Include="xfiretest\socket.cpp" />
+    <ClCompile Include="xfiretest\stdafx.cpp" />
+    <ClCompile Include="xfiretest\testclient\test.cpp" />
+    <ClCompile Include="xfiretest\tools.cpp" />
+    <ClCompile Include="xfiretest\userdetails.cpp" />
+    <ClCompile Include="xfiretest\variablevalue.cpp" />
+    <ClCompile Include="xfiretest\xfireclanpacket.cpp" />
+    <ClCompile Include="xfiretest\xfiregame.cpp" />
+    <ClCompile Include="xfiretest\xfiregameresolver.cpp" />
+    <ClCompile Include="xfiretest\xfirepacket.cpp" />
+    <ClCompile Include="xfiretest\xfirepacketcontent.cpp" />
+    <ClCompile Include="xfiretest\xfireparse.cpp" />
+    <ClCompile Include="xfiretest\xfirerecvpacketcontent.cpp" />
+    <ClCompile Include="xfiretest\xfiresendpacketcontent.cpp" />
+    <ClCompile Include="xfiretest\xfireutils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="xfiretest\Export.def" />
+    <None Include="xfiretest\testclient\Jamfile" />
+    <None Include="xfiretest\xfiretest.cpp.old" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Api\cdefs.h" />
+    <ClInclude Include="Api\features.h" />
+    <ClInclude Include="Api\pthread.h" />
+    <ClInclude Include="Api\pthread_impl.h" />
+    <ClInclude Include="Api\sched.h" />
+    <ClInclude Include="Api\unistd.h" />
+    <ClInclude Include="Api\wrap_features.h" />
+    <ClInclude Include="xfiretest\authpacket.h" />
+    <ClInclude Include="xfiretest\baseProtocol.h" />
+    <ClInclude Include="xfiretest\buddylist.h" />
+    <ClInclude Include="xfiretest\buddylistgames2packet.h" />
+    <ClInclude Include="xfiretest\buddylistnamespacket.h" />
+    <ClInclude Include="xfiretest\buddylistonlinepacket.h" />
+    <ClInclude Include="xfiretest\clanbuddylistnamespacket.h" />
+    <ClInclude Include="xfiretest\client.h" />
+    <ClInclude Include="xfiretest\clientinformationpacket.h" />
+    <ClInclude Include="xfiretest\clientloginpacket.h" />
+    <ClInclude Include="xfiretest\clientversionpacket.h" />
+    <ClInclude Include="xfiretest\dummyxfiregameresolver.h" />
+    <ClInclude Include="xfiretest\invitebuddypacket.h" />
+    <ClInclude Include="xfiretest\inviterequestpacket.h" />
+    <ClInclude Include="xfiretest\loginfailedpacket.h" />
+    <ClInclude Include="xfiretest\loginsuccesspacket.h" />
+    <ClInclude Include="xfiretest\messageackpacket.h" />
+    <ClInclude Include="xfiretest\messagepacket.h" />
+    <ClInclude Include="xfiretest\monitoredobj.h" />
+    <ClInclude Include="xfiretest\otherloginpacket.h" />
+    <ClInclude Include="xfiretest\packetlistener.h" />
+    <ClInclude Include="xfiretest\packetreader.h" />
+    <ClInclude Include="xfiretest\recvdidpacket.h" />
+    <ClInclude Include="xfiretest\recvoldversionpacket.h" />
+    <ClInclude Include="xfiretest\recvprefspacket.h" />
+    <ClInclude Include="xfiretest\recvremovebuddypacket.h" />
+    <ClInclude Include="xfiretest\recvstatusmessagepacket.h" />
+    <ClInclude Include="xfiretest\resource.h" />
+    <ClInclude Include="xfiretest\sendacceptinvitationpacket.h" />
+    <ClInclude Include="xfiretest\senddenyinvitationpacket.h" />
+    <ClInclude Include="xfiretest\sendgameserverpacket.h" />
+    <ClInclude Include="xfiretest\sendgamestatus2packet.h" />
+    <ClInclude Include="xfiretest\sendgamestatuspacket.h" />
+    <ClInclude Include="xfiretest\sendkeepalivepacket.h" />
+    <ClInclude Include="xfiretest\sendmessagepacket.h" />
+    <ClInclude Include="xfiretest\sendnickchangepacket.h" />
+    <ClInclude Include="xfiretest\sendremovebuddypacket.h" />
+    <ClInclude Include="xfiretest\sendstatusmessagepacket.h" />
+    <ClInclude Include="xfiretest\sendtypingpacket.h" />
+    <ClInclude Include="xfiretest\SHA1.h" />
+    <ClInclude Include="xfiretest\socket.h" />
+    <ClInclude Include="xfiretest\socketexception.h" />
+    <ClInclude Include="xfiretest\stdafx.h" />
+    <ClInclude Include="xfiretest\testclient\test.h" />
+    <ClInclude Include="xfiretest\variablevalue.h" />
+    <ClInclude Include="xfiretest\xdebug.h" />
+    <ClInclude Include="xfiretest\xfireclanpacket.h" />
+    <ClInclude Include="xfiretest\xfiregame.h" />
+    <ClInclude Include="xfiretest\xfiregameresolver.h" />
+    <ClInclude Include="xfiretest\xfirepacket.h" />
+    <ClInclude Include="xfiretest\xfirepacketcontent.h" />
+    <ClInclude Include="xfiretest\xfireparse.h" />
+    <ClInclude Include="xfiretest\xfirerecvpacketcontent.h" />
+    <ClInclude Include="xfiretest\xfiresendpacketcontent.h" />
+    <ClInclude Include="xfiretest\xfireutils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="xfiretest\resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\srcheader.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
