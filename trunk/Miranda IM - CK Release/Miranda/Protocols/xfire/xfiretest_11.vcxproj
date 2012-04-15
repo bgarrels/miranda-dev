@@ -275,6 +275,18 @@
   <ItemGroup>
     <Text Include="Docs\srcheader.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\d_xfire.ico" />
+    <Image Include="icons\icon.ico" />
+    <Image Include="icons\im_xfire.ico" />
+    <Image Include="icons\true.ico" />
+    <Image Include="icons\xfire away.ico" />
+    <Image Include="icons\xfire offline.ico" />
+    <Image Include="icons\xfire online.ico" />
+    <Image Include="icons\xfire.ico" />
+    <Image Include="icons\xfiresmall.ico" />
+    <Image Include="icons\x_fire16x16.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

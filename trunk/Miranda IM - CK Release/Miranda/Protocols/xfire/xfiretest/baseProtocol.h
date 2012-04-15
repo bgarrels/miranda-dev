@@ -27,7 +27,7 @@ Copyright (C) 2000-2012  Richard Hughes, Roland Rabien & Tristan Van de Vreede
 */
 
 //=====================================================
-//	Includes (yea why not include lots of stuff :D )
+//	Includes
 //=====================================================
 #include <windows.h>
 #include <gdiplus.h>
@@ -68,7 +68,7 @@ Copyright (C) 2000-2012  Richard Hughes, Roland Rabien & Tristan Van de Vreede
 //=======================================================
 //	Definitions
 //=======================================================
-#define protocolname		"XFire" //no spaces here :)
+#define protocolname		"XFire" //no spaces here 
 #define DEFAULT_SERVER		"206.220.42.147"
 #define DEFAULT_SERVER_PORT 25999
 
