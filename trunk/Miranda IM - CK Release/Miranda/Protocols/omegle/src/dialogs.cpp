@@ -1,8 +1,9 @@
 /*
+
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011-2012 Robert Pösel
+Copyright © 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,6 +17,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 */
 
 #include "common.h"
@@ -49,7 +51,7 @@ static void StoreDBText(OmegleProto* ppro, HWND hwnd, int idCtrl, const char* sz
 	TCHAR tstr[OMEGLE_MESSAGE_LIMIT+1];
 
 	GetDlgItemText(hwnd, idCtrl, tstr, sizeof(tstr));
-	if ( lstrlen( tstr ) > 0 ) {
+	if ( _tcsclen( tstr ) > 0 ) {
 		DBWriteContactSettingTString(NULL, ppro->m_szModuleName, szSetting, tstr);
 	} else {
 		DBDeleteContactSetting(NULL, ppro->m_szModuleName, szSetting);
