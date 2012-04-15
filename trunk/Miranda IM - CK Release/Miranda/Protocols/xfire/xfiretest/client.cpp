@@ -1,6 +1,6 @@
 /*
  *  xfirelib - C++ Library for the xfire protocol.
- *  Copyright (C) 2006 by
+ *  Copyright (C) 2006-2012 by
  *          Beat Wolf <asraniel@fryx.ch> / http://gfire.sf.net
  *          Herbert Poul <herbert.poul@gmail.com> / http://goim.us
  *    http://xfirelib.sphene.net
