@@ -28,6 +28,9 @@ Boston, MA 02111-1307, USA.
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys\stat.h>
+
+#include <boost/regex.hpp>
 
 // Miranda header files
 #include <newpluginapi.h>
@@ -48,7 +51,6 @@ Boston, MA 02111-1307, USA.
 #include <m_protosvc.h>
 #include <m_xml.h>
 #include <m_avatars.h>
-#include <sys\stat.h>
 
 #include <m_folders.h>
 #include <m_popup.h>
@@ -125,13 +127,14 @@ VOID CALLBACK timerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime);
 VOID CALLBACK timerProc2(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime);
 
 BOOL IsMyContact(HANDLE hContact);
-VOID GetNewsData(TCHAR *szUrl, char** szData);
+VOID GetNewsData(TCHAR *szUrl, char** szData, HANDLE hContact, HWND hwndDlg);
 VOID CreateList (HWND hwndList);
 VOID UpdateList (HWND hwndList);
 VOID DeleteAllItems(HWND hwndList);
 time_t __stdcall DateToUnixTime(TCHAR *stamp, BOOL FeedType);
 VOID CheckCurrentFeed (HANDLE hContact);
-TCHAR* CheckFeed(TCHAR* tszURL);
+TCHAR* CheckFeed(TCHAR* tszURL, HWND hwndDlg);
+size_t decode_html_entities_utf8(char *dest, const char *src);
 
 // ===============  NewsAggr SERVICES  ================
 // Check all Feeds info

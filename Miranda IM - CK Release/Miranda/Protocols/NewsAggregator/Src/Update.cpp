@@ -30,21 +30,25 @@ VOID CALLBACK timerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 	// only run if it is not current updating and the auto update option is enabled
 	if (!ThreadRunning && !Miranda_Terminated())
 	{
-		HANDLE hContact= (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
+		BOOL HaveUpdates = FALSE;
+		HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
 		while (hContact != NULL) 
 		{
 			if(IsMyContact(hContact)) 
 			{
-				if (DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 0) != -1)
+				if (DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 60))
 				{
 					double diff = difftime(time(NULL), DBGetContactSettingDword(hContact, MODULE, "LastCheck", 0));
-					if (diff >= DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 0) * 60)
+					if (diff >= DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 60) * 60)
+					{
 						UpdateListAdd(hContact);
+						HaveUpdates = TRUE;
+					}
 				}
 			}
 			hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
 		}
-		if (!ThreadRunning)
+		if (!ThreadRunning && HaveUpdates)
 			mir_forkthread(UpdateThreadProc, NULL);
 	}
 }

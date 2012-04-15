@@ -25,13 +25,14 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 	{
 		case WM_INITDIALOG:
 		{
+			TranslateDialogDefault(hwndDlg);
 			SetWindowLongPtr(hwndDlg, GWLP_USERDATA, lParam);
 			SetWindowText(hwndDlg, TranslateT("Add Feed"));
 			SetDlgItemText(hwndDlg, IDC_FEEDURL, _T("http://"));
-			SetDlgItemInt(hwndDlg, IDC_CHECKTIME, 60, false);
 			SetDlgItemText(hwndDlg, IDC_TAGSEDIT, _T(TAGSDEFAULT));
-			SendDlgItemMessage(hwndDlg, IDC_CHECKTIME, UDM_SETRANGE32, -1, 9999);
-			TranslateDialogDefault(hwndDlg);
+			SendDlgItemMessage(hwndDlg, IDC_CHECKTIME, EM_LIMITTEXT, 3, 0);
+			SetDlgItemInt(hwndDlg, IDC_CHECKTIME, 60, TRUE);
+			SendDlgItemMessage(hwndDlg, IDC_TIMEOUT_VALUE_SPIN, UDM_SETRANGE32, 0, 999);	
 			return TRUE;
 		}
 		case WM_COMMAND:
@@ -51,7 +52,7 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 							MessageBox(hwndDlg, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
 							break;
 						}
-						else if (!GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false))
+						else if (GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false) < 0)
 						{
 							MessageBox(hwndDlg, TranslateT("Enter checking interval"), TranslateT("Error"), MB_OK);
 							break;
@@ -71,10 +72,7 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 							GetDlgItemText(hwndDlg, IDC_FEEDURL, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "URL", str);
 							DBWriteContactSettingByte(hContact, MODULE, "CheckState", 1);
-							if (GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false) > -1 && GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false)<=5)
-								DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", 5);
-							else
-								DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
+							DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
 							GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "MsgFormat", str);
 							DBWriteContactSettingWord(hContact, MODULE, "Status", CallProtoService(MODULE, PS_GETSTATUS, 0, 0));
@@ -125,7 +123,7 @@ INT_PTR CALLBACK DlgProcAddFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 						SetDlgItemText(hwndDlg, IDC_DISCOVERY, TranslateT("Wait..."));
 						TCHAR tszURL[MAX_PATH] = {0}, *tszTitle = NULL;
 						if (GetDlgItemText(hwndDlg, IDC_FEEDURL, tszURL, SIZEOF(tszURL)) || lstrcmp(tszURL, _T("http://")) != 0)
-							tszTitle = CheckFeed(tszURL);
+							tszTitle = CheckFeed(tszURL, hwndDlg);
 						else
 							MessageBox(hwndDlg, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
 						SetDlgItemText(hwndDlg, IDC_FEEDTITLE, tszTitle);
@@ -156,53 +154,60 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 			ItemInfo &SelItem = *(ItemInfo*)lParam;
 			ItemInfo *nSelItem = new ItemInfo(SelItem);
 			SetWindowText(hwndDlg, TranslateT("Change Feed"));
-			SendDlgItemMessage(hwndDlg, IDC_CHECKTIME, UDM_SETRANGE32, -1, 9999);
+			SendDlgItemMessage(hwndDlg, IDC_CHECKTIME, EM_LIMITTEXT, 3, 0);
+			SendDlgItemMessage(hwndDlg, IDC_TIMEOUT_VALUE_SPIN, UDM_SETRANGE32, 0, 999);	
 
-			HANDLE hContact= (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
+			HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
 			while (hContact != NULL) 
 			{
-				if(IsMyContact(hContact)) 
+				if (IsMyContact(hContact)) 
 				{
-					DBVARIANT dbVar = {0};
-					DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
-					if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-						DBFreeVariant(&dbVar);
-					else if (lstrcmp(dbVar.ptszVal, SelItem.nick) == 0)
+					DBVARIANT dbNick = {0};
+					if (DBGetContactSettingTString(hContact, MODULE, "Nick", &dbNick))
+						break;
+					else if (lstrcmp(dbNick.ptszVal, SelItem.nick) == 0)
 					{
-						DBGetContactSettingTString(hContact, MODULE, "URL", &dbVar);
-						if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-							DBFreeVariant(&dbVar);
-						else if (lstrcmp(dbVar.ptszVal, SelItem.url) == 0)
+						DBFreeVariant(&dbNick);
+						DBVARIANT dbURL = {0};
+						if (DBGetContactSettingTString(hContact, MODULE, "URL", &dbURL))
+							break;
+						else if (lstrcmp(dbURL.ptszVal, SelItem.url) == 0)
 						{
+							DBFreeVariant(&dbURL);
 							nSelItem->hContact = hContact;
 							SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG)nSelItem);
 							SetDlgItemText(hwndDlg, IDC_FEEDURL, SelItem.url);
 							SetDlgItemText(hwndDlg, IDC_FEEDTITLE, SelItem.nick);
-							SetDlgItemInt(hwndDlg, IDC_CHECKTIME, DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 0), false);
-							DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbVar);
-							if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-								DBFreeVariant(&dbVar);
-							else
-								SetDlgItemText(hwndDlg, IDC_TAGSEDIT, dbVar.ptszVal);
+							SetDlgItemInt(hwndDlg, IDC_CHECKTIME, DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 60), TRUE);
+							DBVARIANT dbMsg = {0};
+							if (!DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbMsg))
+							{
+								SetDlgItemText(hwndDlg, IDC_TAGSEDIT, dbMsg.ptszVal);
+								DBFreeVariant(&dbMsg);
+							}
 							if (DBGetContactSettingByte(hContact, MODULE, "UseAuth", 0))
 							{
 								CheckDlgButton(hwndDlg, IDC_USEAUTH, BST_CHECKED);
 								EnableWindow(GetDlgItem(hwndDlg, IDC_LOGIN), TRUE);
 								EnableWindow(GetDlgItem(hwndDlg, IDC_PASSWORD), TRUE);
-								DBGetContactSettingTString(hContact, MODULE, "Login", &dbVar);
-								if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-									DBFreeVariant(&dbVar);
-								else
-									SetDlgItemText(hwndDlg, IDC_LOGIN, dbVar.ptszVal);
-								DBGetContactSettingTString(hContact, MODULE, "Password", &dbVar);
-								if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-									DBFreeVariant(&dbVar);
-								else
-									SetDlgItemText(hwndDlg, IDC_PASSWORD, dbVar.ptszVal);
+								DBVARIANT dbLogin = {0};
+								if (!DBGetContactSettingTString(hContact, MODULE, "Login", &dbLogin))
+								{
+									SetDlgItemText(hwndDlg, IDC_LOGIN, dbLogin.ptszVal);
+									DBFreeVariant(&dbLogin);
+								}
+								DBVARIANT dbPass = {0};
+								if (!DBGetContactSettingTString(hContact, MODULE, "Password", &dbPass))
+								{
+									SetDlgItemText(hwndDlg, IDC_PASSWORD, dbPass.ptszVal);
+									DBFreeVariant(&dbPass);
+								}
 							}
 							break;
 						}
+						DBFreeVariant(&dbURL);
 					}
+					DBFreeVariant(&dbNick);
 				}
 				hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
 			}
@@ -226,7 +231,7 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 							MessageBox(hwndDlg, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
 							break;
 						}
-						else if (!GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false))
+						else if (GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false) < 0)
 						{
 							MessageBox(hwndDlg, TranslateT("Enter checking interval"), TranslateT("Error"), MB_OK);
 							break;
@@ -242,10 +247,7 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 							DBWriteContactSettingTString(SelItem->hContact, MODULE, "URL", str);
 							GetDlgItemText(hwndDlg, IDC_FEEDTITLE, str, SIZEOF(str));
 							DBWriteContactSettingTString(SelItem->hContact, MODULE, "Nick", str);
-							if (GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false) > -1 && GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false)<=5)
-								DBWriteContactSettingDword(SelItem->hContact, MODULE, "UpdateTime", 5);
-							else
-								DBWriteContactSettingDword(SelItem->hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
+							DBWriteContactSettingDword(SelItem->hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
 							GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str));
 							DBWriteContactSettingTString(SelItem->hContact, MODULE, "MsgFormat", str);
 							if (IsDlgButtonChecked(hwndDlg, IDC_USEAUTH))
@@ -295,7 +297,7 @@ INT_PTR CALLBACK DlgProcChangeFeedOpts(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 						SetDlgItemText(hwndDlg, IDC_DISCOVERY, TranslateT("Wait..."));
 						TCHAR tszURL[MAX_PATH] = {0}, *tszTitle = NULL;
 						if (GetDlgItemText(hwndDlg, IDC_FEEDURL, tszURL, SIZEOF(tszURL)) || lstrcmp(tszURL, _T("http://")) != 0)
-							tszTitle = CheckFeed(tszURL);
+							tszTitle = CheckFeed(tszURL, hwndDlg);
 						else
 							MessageBox(hwndDlg, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
 						SetDlgItemText(hwndDlg, IDC_FEEDTITLE, tszTitle);
@@ -332,44 +334,44 @@ INT_PTR CALLBACK DlgProcChangeFeedMenu(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 		{
 			TranslateDialogDefault(hwndDlg);
 			SetWindowText(hwndDlg, TranslateT("Change Feed"));
-			SendDlgItemMessage(hwndDlg, IDC_CHECKTIME, UDM_SETRANGE32, -1, 9999);
+			SendDlgItemMessage(hwndDlg, IDC_CHECKTIME, UDM_SETRANGE32, 0, 999);
 
 			HANDLE hContact = (HANDLE)lParam;
-			DBVARIANT dbVar = {0};
-			DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
-			if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-				DBFreeVariant(&dbVar);
-			else
+			DBVARIANT dbNick = {0};
+			if (!DBGetContactSettingTString(hContact, MODULE, "Nick", &dbNick))
 			{
-				SetDlgItemText(hwndDlg, IDC_FEEDTITLE, dbVar.ptszVal);
-				DBGetContactSettingTString(hContact, MODULE, "URL", &dbVar);
-				if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-					DBFreeVariant(&dbVar);
-				else
+				SetDlgItemText(hwndDlg, IDC_FEEDTITLE, dbNick.ptszVal);
+				DBFreeVariant(&dbNick);
+				DBVARIANT dbURL = {0};
+				if (!DBGetContactSettingTString(hContact, MODULE, "URL", &dbURL))
 				{
 					SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG)lParam);
-					SetDlgItemText(hwndDlg, IDC_FEEDURL, dbVar.ptszVal);
-					SetDlgItemInt(hwndDlg, IDC_CHECKTIME, DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 0), false);
-					DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbVar);
-					if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-						DBFreeVariant(&dbVar);
-					else
-						SetDlgItemText(hwndDlg, IDC_TAGSEDIT, dbVar.ptszVal);
+					SetDlgItemText(hwndDlg, IDC_FEEDURL, dbURL.ptszVal);
+					DBFreeVariant(&dbURL);
+					SetDlgItemInt(hwndDlg, IDC_CHECKTIME, DBGetContactSettingDword(hContact, MODULE, "UpdateTime", 60), TRUE);
+					DBVARIANT dbMsg = {0};
+					if (!DBGetContactSettingTString(hContact, MODULE, "MsgFormat", &dbMsg))
+					{
+						SetDlgItemText(hwndDlg, IDC_TAGSEDIT, dbMsg.ptszVal);
+						DBFreeVariant(&dbMsg);
+					}
 					if (DBGetContactSettingByte(hContact, MODULE, "UseAuth", 0))
 					{
 						CheckDlgButton(hwndDlg, IDC_USEAUTH, BST_CHECKED);
 						EnableWindow(GetDlgItem(hwndDlg, IDC_LOGIN), TRUE);
 						EnableWindow(GetDlgItem(hwndDlg, IDC_PASSWORD), TRUE);
-						DBGetContactSettingTString(hContact, MODULE, "Login", &dbVar);
-						if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-							DBFreeVariant(&dbVar);
-						else
-							SetDlgItemText(hwndDlg, IDC_LOGIN, dbVar.ptszVal);
-						DBGetContactSettingTString(hContact, MODULE, "Password", &dbVar);
-						if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-							DBFreeVariant(&dbVar);
-						else
-							SetDlgItemText(hwndDlg, IDC_PASSWORD, dbVar.ptszVal);
+						DBVARIANT dbLogin = {0};
+						if (!DBGetContactSettingTString(hContact, MODULE, "Login", &dbLogin))
+						{
+							SetDlgItemText(hwndDlg, IDC_LOGIN, dbLogin.ptszVal);
+							DBFreeVariant(&dbLogin);
+						}
+						DBVARIANT dbPass = {0};
+						if (!DBGetContactSettingTString(hContact, MODULE, "Password", &dbPass))
+						{
+							SetDlgItemText(hwndDlg, IDC_PASSWORD, dbPass.ptszVal);
+							DBFreeVariant(&dbPass);
+						}
 					}
 					break;
 				}
@@ -394,7 +396,7 @@ INT_PTR CALLBACK DlgProcChangeFeedMenu(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 							MessageBox(hwndDlg, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
 							break;
 						}
-						else if (!GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false))
+						else if (GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false) < 0)
 						{
 							MessageBox(hwndDlg, TranslateT("Enter checking interval"), TranslateT("Error"), MB_OK);
 							break;
@@ -410,10 +412,7 @@ INT_PTR CALLBACK DlgProcChangeFeedMenu(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 							DBWriteContactSettingTString(hContact, MODULE, "URL", str);
 							GetDlgItemText(hwndDlg, IDC_FEEDTITLE, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "Nick", str);
-							if (GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false) > -1 && GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false)<=5)
-								DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", 5);
-							else
-								DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
+							DBWriteContactSettingDword(hContact, MODULE, "UpdateTime", GetDlgItemInt(hwndDlg, IDC_CHECKTIME, false, false));
 							GetDlgItemText(hwndDlg, IDC_TAGSEDIT, str, SIZEOF(str));
 							DBWriteContactSettingTString(hContact, MODULE, "MsgFormat", str);
 							if (IsDlgButtonChecked(hwndDlg, IDC_USEAUTH))
@@ -461,7 +460,7 @@ INT_PTR CALLBACK DlgProcChangeFeedMenu(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 						SetDlgItemText(hwndDlg, IDC_DISCOVERY, TranslateT("Wait..."));
 						TCHAR tszURL[MAX_PATH] = {0}, *tszTitle = NULL;
 						if (GetDlgItemText(hwndDlg, IDC_FEEDURL, tszURL, SIZEOF(tszURL)) || lstrcmp(tszURL, _T("http://")) != 0)
-							tszTitle = CheckFeed(tszURL);
+							tszTitle = CheckFeed(tszURL, hwndDlg);
 						else
 							MessageBox(hwndDlg, TranslateT("Enter Feed URL"), TranslateT("Error"), MB_OK);
 						SetDlgItemText(hwndDlg, IDC_FEEDTITLE, tszTitle);
@@ -526,27 +525,30 @@ INT_PTR CALLBACK UpdateNotifyOptsProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 						ListView_GetItemText(hwndList, sel, 0, nick, MAX_PATH);								
 						ListView_GetItemText(hwndList, sel, 1, url, MAX_PATH);								
 
-						HANDLE hContact= (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
+						HANDLE hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
 						while (hContact != NULL) 
 						{
 							if(IsMyContact(hContact)) 
 							{
-								DBVARIANT dbVar = {0};
-								DBGetContactSettingTString(hContact, MODULE, "Nick", &dbVar);
-								if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-									DBFreeVariant(&dbVar);
-								else if (lstrcmp(dbVar.ptszVal, nick) == 0)
+								DBVARIANT dbNick = {0};
+								if (DBGetContactSettingTString(hContact, MODULE, "Nick", &dbNick))
+									break;
+								else if (lstrcmp(dbNick.ptszVal, nick) == 0)
 								{
-									DBGetContactSettingTString(hContact, MODULE, "URL", &dbVar);
-									if (lstrcmp(dbVar.ptszVal, NULL) == 0)
-										DBFreeVariant(&dbVar);
-									else if (lstrcmp(dbVar.ptszVal, url) == 0)
+									DBFreeVariant(&dbNick);
+									DBVARIANT dbURL = {0};
+									if (DBGetContactSettingTString(hContact, MODULE, "URL", &dbURL))
+										break;
+									else if (lstrcmp(dbURL.ptszVal, url) == 0)
 									{
+										DBFreeVariant(&dbURL);
 										CallService(MS_DB_CONTACT_DELETE, (WPARAM)hContact, 0);
 										ListView_DeleteItem(hwndList, sel);
 										break;
 									}
+									DBFreeVariant(&dbURL);
 								}
+								DBFreeVariant(&dbNick);
 							}
 							hContact = (HANDLE)CallService(MS_DB_CONTACT_FINDNEXT, (WPARAM)hContact, 0);
 						}
