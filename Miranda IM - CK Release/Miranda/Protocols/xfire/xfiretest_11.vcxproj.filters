@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="xfiretest\Export.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="xfiretest\xfiretest.cpp.old">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="xfiretest\testclient\Jamfile">
+      <Filter>testclient</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="xfiretest\authpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\buddylist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\buddylistgames2packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\buddylistnamespacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\buddylistonlinepacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\clanbuddylistnamespacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\clientinformationpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\clientloginpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\clientversionpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\dummyxfiregameresolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\invitebuddypacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\inviterequestpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\loginfailedpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\loginsuccesspacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\messageackpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\messagepacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\monitoredobj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\otherloginpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\packetlistener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\packetreader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\recvdidpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\recvoldversionpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\recvprefspacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\recvremovebuddypacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\recvstatusmessagepacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\sendacceptinvitationpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\senddenyinvitationpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\sendgameserverpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\sendgamestatus2packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\sendgamestatuspacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\sendkeepalivepacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\sendmessagepacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\sendnickchangepacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\sendremovebuddypacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\sendstatusmessagepacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\SHA1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\socket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\socketexception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\variablevalue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\xdebug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\xfireclanpacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\xfiregame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\xfiregameresolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\xfirepacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\xfirepacketcontent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\xfireparse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\xfirerecvpacketcontent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\xfiresendpacketcontent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\xfireutils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\testclient\test.h">
+      <Filter>testclient</Filter>
+    </ClInclude>
+    <ClInclude Include="Api\pthread.h">
+      <Filter>Header Files\Api</Filter>
+    </ClInclude>
+    <ClInclude Include="Api\pthread_impl.h">
+      <Filter>Header Files\Api</Filter>
+    </ClInclude>
+    <ClInclude Include="Api\sched.h">
+      <Filter>Header Files\Api</Filter>
+    </ClInclude>
+    <ClInclude Include="Api\unistd.h">
+      <Filter>Header Files\Api</Filter>
+    </ClInclude>
+    <ClInclude Include="Api\wrap_features.h">
+      <Filter>Header Files\Api</Filter>
+    </ClInclude>
+    <ClInclude Include="Api\cdefs.h">
+      <Filter>Header Files\Api</Filter>
+    </ClInclude>
+    <ClInclude Include="Api\features.h">
+      <Filter>Header Files\Api</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\baseProtocol.h">
+      <Filter>Header Files\mir-plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="xfiretest\sendtypingpacket.h">
+      <Filter>Header Files\mir-plugin</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="xfiretest\authpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\buddylist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\buddylistgames2packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\buddylistgamespacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\buddylistnamespacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\buddylistonlinepacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\clanbuddylistnamespacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\clientinformationpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\clientloginpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\clientversionpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\dummyxfiregameresolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\invitebuddypacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\inviterequestpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\loginfailedpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\loginsuccesspacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\messageackpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\messagepacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\monitoredobj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\otherloginpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\packetreader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\recvdidpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\recvoldversionpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\recvprefspacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\recvremovebuddypacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\recvstatusmessagepacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\sendacceptinvitationpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\senddenyinvitationpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\sendgameserverpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\sendgamestatus2packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\sendgamestatuspacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\sendkeepalivepacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\sendmessagepacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\sendnickchangepacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\sendremovebuddypacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\sendstatusmessagepacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\SHA1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\socket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\variablevalue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\xfireclanpacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\xfiregame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\xfiregameresolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\xfirepacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\xfirepacketcontent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\xfireparse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\xfirerecvpacketcontent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\xfiresendpacketcontent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\xfireutils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\testclient\test.cpp">
+      <Filter>testclient</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\main.cpp">
+      <Filter>Source Files\mir-plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\options.cpp">
+      <Filter>Source Files\mir-plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\services.cpp">
+      <Filter>Source Files\mir-plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\tools.cpp">
+      <Filter>Source Files\mir-plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\sendtypingpacket.cpp">
+      <Filter>Source Files\mir-plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="xfiretest\userdetails.cpp">
+      <Filter>Source Files\mir-plugin</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="xfiretest\resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{4f0c7f6c-46ca-436e-99c5-287a09348a4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{a7f84884-0443-4d3a-b75a-9f01f2a5221d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{05663f34-144c-40e4-95d0-74356d050236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{34857c6e-280e-413d-879b-85860d57a241}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="testclient">
+      <UniqueIdentifier>{17023f66-4bd1-4e54-846a-a6a8c1f70497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Api">
+      <UniqueIdentifier>{6d686269-5b00-424c-8254-6e30f58553b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mir-plugin">
+      <UniqueIdentifier>{8ed0b761-57f5-4485-878f-250a1207a6d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mir-plugin">
+      <UniqueIdentifier>{68ced24c-3193-4960-b39d-04951c2d734d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\srcheader.txt">
+      <Filter>Docs</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
