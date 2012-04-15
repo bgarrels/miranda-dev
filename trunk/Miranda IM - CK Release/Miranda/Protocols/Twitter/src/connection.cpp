@@ -1,5 +1,5 @@
 /*
-Copyright © 2012 Jim Porter
+Copyright © 2009 Jim Porter
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -104,21 +104,21 @@ bool TwitterProto::NegotiateConnection()
 	wstring oauthAccessTokenSecret;
 	string screenName;
 
-	INT_PTR dbTOK = DBGetContactSettingWString(0,m_szModuleName,TWITTER_KEY_OAUTH_TOK,&dbv);
+	int dbTOK = DBGetContactSettingWString(0,m_szModuleName,TWITTER_KEY_OAUTH_TOK,&dbv);
 	if (!dbTOK) {
 		oauthToken = dbv.pwszVal;
 		DBFreeVariant(&dbv);
 		//WLOG("**NegotiateConnection - we have an oauthToken already in the db - %s", oauthToken);
 	}
  
-	INT_PTR dbTOKSec = DBGetContactSettingWString(0,m_szModuleName,TWITTER_KEY_OAUTH_TOK_SECRET,&dbv);
+	int dbTOKSec = DBGetContactSettingWString(0,m_szModuleName,TWITTER_KEY_OAUTH_TOK_SECRET,&dbv);
 	if (!dbTOKSec) {
 		oauthTokenSecret = dbv.pwszVal;
 		DBFreeVariant(&dbv);
 		//WLOG("**NegotiateConnection - we have an oauthTokenSecret already in the db - %s", oauthTokenSecret);
 	}
 
-	INT_PTR dbName = DBGetContactSettingString(0,m_szModuleName,TWITTER_KEY_NICK,&dbv);
+	int dbName = DBGetContactSettingString(0,m_szModuleName,TWITTER_KEY_NICK,&dbv);
 	if (!dbName) {
 		screenName = dbv.pszVal;
 		DBFreeVariant(&dbv);
@@ -594,7 +594,7 @@ void TwitterProto::UpdateStatuses(bool pre_read, bool popups, bool tweetToMsg)
 				dbei.cbBlob = i->status.text.size()+1;
 				dbei.eventType = TWITTER_DB_EVENT_TYPE_TWEET;
 				dbei.flags = DBEF_UTF;
-				//dbei.flags = DBEF_READ;
+				dbei.flags = DBEF_READ; // i had commented this line out.. can't remember why :(  might need to do it again, uncommented for mrQQ for testing
 				dbei.timestamp = static_cast<DWORD>(i->status.time);
 				dbei.szModule = m_szModuleName;
 				CallService(MS_DB_EVENT_ADD, (WPARAM)hContact, (LPARAM)&dbei);

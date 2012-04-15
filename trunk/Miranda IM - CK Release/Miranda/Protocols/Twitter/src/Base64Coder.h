@@ -43,8 +43,8 @@ public:
 public:
 	virtual void		Encode(const PBYTE, DWORD);
 	virtual void		Decode(const PBYTE, DWORD);
-	virtual void		Encode(LPCSTR sMessage);
-	virtual void		Decode(LPCSTR sMessage);
+	//virtual void		Encode(LPCSTR sMessage);
+	//virtual void		Decode(LPCSTR sMessage);
 
 	virtual LPCSTR	DecodedMessage() const;
 	virtual LPCSTR	EncodedMessage() const;
