@@ -68,7 +68,7 @@ int CAimProto::aim_sendflap(HANDLE hServerConn, char type,unsigned short length,
 {
 	EnterCriticalSection(&SendingMutex);
 	const int slen = FLAP_SIZE + length;
-	char* obuf = (char*)alloca(slen);
+	char* obuf = (char*)_malloca(slen);
 	flap_header *flap = (flap_header*)obuf;
 	flap->ast = '*';
 	flap->type = type;

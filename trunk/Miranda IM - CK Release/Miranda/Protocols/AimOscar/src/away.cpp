@@ -59,7 +59,7 @@ int CAimProto::aim_set_away(HANDLE hServerConn, unsigned short &seqno, const cha
 	const char* msg = str.getBuf();
 	const unsigned short msg_len = str.getSize();
 
-	char* buf=(char*)alloca(SNAC_SIZE+TLV_HEADER_SIZE*3+charset_len+msg_len+1);
+	char* buf=(char*)_malloca(SNAC_SIZE+TLV_HEADER_SIZE*3+charset_len+msg_len+1);
 
 	aim_writesnac(0x02,0x04,offset,buf);
 	aim_writetlv(0x03,charset_len,charset,offset,buf);
@@ -86,11 +86,11 @@ int CAimProto::aim_set_statusmsg(HANDLE hServerConn,unsigned short &seqno,const 
 	size_t msg_size =_strlens(msg);
 
 	unsigned short msgoffset=0;
-	char* msgbuf=(char*)alloca(10+msg_size);
+	char* msgbuf=(char*)_malloca(10+msg_size);
 
 	if (msg_size)
 	{
-		char* msgb=(char*)alloca(4+msg_size);
+		char* msgb=(char*)_malloca(4+msg_size);
 		msgb[0]=(unsigned char)(msg_size >> 8);
 		msgb[1]=(unsigned char)(msg_size & 0xff);
 		memcpy(&msgb[2],msg,msg_size);
@@ -103,7 +103,7 @@ int CAimProto::aim_set_statusmsg(HANDLE hServerConn,unsigned short &seqno,const 
 		aim_writebartid(2,0,0,NULL,msgoffset,msgbuf);
 
 	unsigned short offset=0;
-	char* buf=(char*)alloca(SNAC_SIZE+TLV_HEADER_SIZE+msgoffset+8);
+	char* buf=(char*)_malloca(SNAC_SIZE+TLV_HEADER_SIZE+msgoffset+8);
 	aim_writesnac(0x01,0x1e,offset,buf);
 	aim_writetlv(0x1d,msgoffset,msgbuf,offset,buf);
 	
@@ -114,7 +114,7 @@ int CAimProto::aim_query_away_message(HANDLE hServerConn,unsigned short &seqno,c
 {
 	unsigned short offset=0;
 	unsigned short sn_length=(unsigned short)strlen(sn);
-	char* buf=(char*)alloca(SNAC_SIZE+5+sn_length);
+	char* buf=(char*)_malloca(SNAC_SIZE+5+sn_length);
 	aim_writesnac(0x02,0x15,offset,buf);
 	aim_writegeneric(4,"\0\0\0\x02",offset,buf);
 	aim_writegeneric(1,(char*)&sn_length,offset,buf);

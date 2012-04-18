@@ -141,7 +141,7 @@ int proxy_initialize_send(HANDLE connection, char* sn, char* cookie)
 	const char sn_length = (char)strlen(sn);
 	const int len = sn_length + 21 + TLV_HEADER_SIZE + AIM_CAPS_LENGTH;
 
-	char* buf= (char*)alloca(len);
+	char* buf= (char*)_malloca(len);
 	unsigned short offset=0;
 
 	aim_writeshort(len-2, offset, buf);
@@ -159,7 +159,7 @@ int proxy_initialize_recv(HANDLE connection,char* sn, char* cookie,unsigned shor
 	const char sn_length = (char)strlen(sn);
 	const int len = sn_length + 23 + TLV_HEADER_SIZE + AIM_CAPS_LENGTH;
 
-	char* buf= (char*)alloca(len);
+	char* buf= (char*)_malloca(len);
 	unsigned short offset=0;
 
 	aim_writeshort(len-2, offset, buf);

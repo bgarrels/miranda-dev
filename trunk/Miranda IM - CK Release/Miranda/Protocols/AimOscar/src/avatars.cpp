@@ -34,7 +34,7 @@ void __cdecl CAimProto::avatar_request_thread(void* param)
 		char type = getByte(hContact, AIM_KEY_AHT, 1);
 
 		size_t len = (strlen(hash_str) + 1) / 2;
-		char* hash = (char*)alloca(len);
+		char* hash = (char*)_malloca(len);
 		string_to_bytes(hash_str, hash);
 		LOG("Requesting an Avatar: %s (Hash: %s)", sn, hash_str);
 		aim_request_avatar(hAvatarConn, avatar_seqno, sn, type, hash, (unsigned short)len);
@@ -189,7 +189,7 @@ int CAimProto::get_avatar_filename(HANDLE hContact, TCHAR* pszDest, size_t cbLen
 
 	init_custom_folders();
 
-	TCHAR* path = (TCHAR*)alloca(cbLen * sizeof(TCHAR));
+	TCHAR* path = (TCHAR*)_malloca(cbLen * sizeof(TCHAR));
 	if (hAvatarsFolder == NULL || FoldersGetCustomPathT(hAvatarsFolder, path, (int)cbLen, _T("")))
 	{
 		TCHAR *tmpPath = Utils_ReplaceVarsT(_T("%miranda_avatarcache%"));
