@@ -136,7 +136,7 @@ INT_PTR CIcqProto::GetInfoSetting(WPARAM wParam, LPARAM lParam)
 				}
 				else 
 				{
-					char *savePtr = dbv.pszVal ? strcpy((char*)_alloca(strlennull(dbv.pszVal) + 1), dbv.pszVal) : NULL;
+					char *savePtr = dbv.pszVal ? strcpy((char*)_malloca(strlennull(dbv.pszVal) + 1), dbv.pszVal) : NULL;
 					if (!mir_utf8decode(savePtr, &cgs->pValue->pwszVal))
 						rc = 1;
 				}
@@ -606,7 +606,7 @@ INT_PTR CIcqProto::SetMyAvatar(WPARAM wParam, LPARAM lParam)
 		BYTE *hash = calcMD5HashOfFile(tszMyFile);
 		if (hash)
 		{
-			BYTE* ihash = (BYTE*)_alloca(0x14);
+			BYTE* ihash = (BYTE*)_malloca(0x14);
 			// upload hash to server
 			ihash[0] = 0;    //unknown
 			ihash[1] = dwPaFormat == PA_FORMAT_XML ? AVATAR_HASH_FLASH : AVATAR_HASH_STATIC; //hash type
@@ -773,7 +773,7 @@ INT_PTR icq_getEventTextMissedMessage(WPARAM wParam, LPARAM lParam)
 			WCHAR *pwszText;
 			int wchars = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pszText, strlennull(pszText), NULL, 0);
 
-			pwszText = (WCHAR*)_alloca((wchars + 1) * sizeof(WCHAR));
+			pwszText = (WCHAR*)_malloca((wchars + 1) * sizeof(WCHAR));
 			pwszText[wchars] = 0;
 
 			MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pszText, strlennull(pszText), pwszText, wchars);

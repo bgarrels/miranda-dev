@@ -433,7 +433,7 @@ void CIcqProto::handleRecvServMsgOFT(BYTE *buf, WORD wLen, DWORD dwUin, char *sz
 					{ // parse User Message
 						BYTE* tBuf = tlv->pData;
 
-						pszDescription = (char*)_alloca(tlv->wLen + 2);
+						pszDescription = (char*)_malloca(tlv->wLen + 2);
 						unpackString(&tBuf, (char*)pszDescription, tlv->wLen);
 						pszDescription[tlv->wLen] = '\0';
 						pszDescription[tlv->wLen+1] = '\0';
@@ -444,7 +444,7 @@ void CIcqProto::handleRecvServMsgOFT(BYTE *buf, WORD wLen, DWORD dwUin, char *sz
 
 							if (charset)
 							{ // decode charset
-								char *szEnc = (char*)_alloca(charset->wLen + 1);
+								char *szEnc = (char*)_malloca(charset->wLen + 1);
 
 								null_strcpy(szEnc, (char*)charset->pData, charset->wLen);
 								str = ApplyEncoding((char*)pszDescription, szEnc);
@@ -514,7 +514,7 @@ void CIcqProto::handleRecvServMsgOFT(BYTE *buf, WORD wLen, DWORD dwUin, char *sz
 					if (tLen)
 					{ // some filename specified, unpack
 						wFilenameLength = tLen - 1;
-						pszFileName = (char*)_alloca(tLen);
+						pszFileName = (char*)_malloca(tLen);
 						unpackString(&tBuf, (char*)pszFileName, wFilenameLength);
 						pszFileName[wFilenameLength] = '\0';
 					}
@@ -528,7 +528,7 @@ void CIcqProto::handleRecvServMsgOFT(BYTE *buf, WORD wLen, DWORD dwUin, char *sz
 
 						if (charset)
 						{
-							char* szEnc = (char*)_alloca(charset->wLen + 1);
+							char* szEnc = (char*)_malloca(charset->wLen + 1);
 
 							null_strcpy(szEnc, (char*)charset->pData, charset->wLen);
 							pszFileName = ApplyEncoding(pszFileName, szEnc);
@@ -538,7 +538,7 @@ void CIcqProto::handleRecvServMsgOFT(BYTE *buf, WORD wLen, DWORD dwUin, char *sz
 					}
 					if (ft->wFilesCount == 1)
 					{  // Filename - use for DB event
-			char *szFileName = (char*)_alloca(strlennull(pszFileName) + 1);
+			char *szFileName = (char*)_malloca(strlennull(pszFileName) + 1);
 
 			strcpy(szFileName, pszFileName);
 			SAFE_FREE(&pszFileName);
@@ -548,7 +548,7 @@ void CIcqProto::handleRecvServMsgOFT(BYTE *buf, WORD wLen, DWORD dwUin, char *sz
 					{  // Save Directory name for future use
 						ft->szThisPath = pszFileName;
 						// for multi-file transfer we do not display "folder" name, but create only a simple notice
-						pszFileName = (char*)_alloca(64);
+						pszFileName = (char*)_malloca(64);
 
 			char tmp[64];
 						null_snprintf(pszFileName, 64, ICQTranslateUtfStatic(LPGEN("%d Files"), tmp, SIZEOF(tmp)), ft->wFilesCount);
@@ -573,7 +573,7 @@ void CIcqProto::handleRecvServMsgOFT(BYTE *buf, WORD wLen, DWORD dwUin, char *sz
 				ft->fileId = -1;
 
 		// Send chain event
-				char *szBlob = (char*)_alloca(sizeof(DWORD) + strlennull(pszFileName) + strlennull(pszDescription) + 2);
+				char *szBlob = (char*)_malloca(sizeof(DWORD) + strlennull(pszFileName) + strlennull(pszDescription) + 2);
 				*(PDWORD)szBlob = 0;
 				strcpy(szBlob + sizeof(DWORD), pszFileName);
 				strcpy(szBlob + sizeof(DWORD) + strlennull(pszFileName) + 1, pszDescription);

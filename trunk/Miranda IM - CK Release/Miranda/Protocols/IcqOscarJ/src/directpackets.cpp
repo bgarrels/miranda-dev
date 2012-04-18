@@ -115,7 +115,7 @@ void CIcqProto::icq_sendAwayMsgReplyDirect(directconnect* dc, WORD wCookie, BYTE
 		{
 			// prepare Ansi message - only Ansi supported
 			WORD wMsgLen = strlennull(*szMsg) + 1;
-			char *szAnsiMsg = (char*)_alloca(wMsgLen);
+			char *szAnsiMsg = (char*)_malloca(wMsgLen);
 
 			utf8_decode_static(*szMsg, szAnsiMsg, wMsgLen);
 			wMsgLen = strlennull(szAnsiMsg);

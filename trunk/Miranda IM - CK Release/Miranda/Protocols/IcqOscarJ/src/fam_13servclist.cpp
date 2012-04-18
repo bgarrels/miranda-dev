@@ -1547,7 +1547,7 @@ void CIcqProto::handleServerCListItemUpdate(const char *szRecordName, WORD wGrou
 			}
 
 			{ // update server's data - otherwise consequent operations can fail with 0x0E
-				BYTE *data = (BYTE*)_alloca(pItemData->getChainLength());
+				BYTE *data = (BYTE*)_malloca(pItemData->getChainLength());
 				int datalen = getServerDataFromItemTLV(pItemData, data);
 
 				if (datalen > 0)
@@ -1659,7 +1659,7 @@ void CIcqProto::handleRecvAuthRequest(unsigned char *buf, WORD wLen)
 		szReason[wReasonLen] = '\0';
 		nReasonLen = strlennull(szReason);
 
-		char *temp = (char*)_alloca(nReasonLen + 2);
+		char *temp = (char*)_malloca(nReasonLen + 2);
 		if (!IsUSASCII(szReason, nReasonLen) && UTF8_IsValid(szReason) && utf8_decode_static(szReason, temp, nReasonLen + 1)) 
 			pre.flags |= PREF_UTF;
 	}
@@ -1685,7 +1685,7 @@ void CIcqProto::handleRecvAuthRequest(unsigned char *buf, WORD wLen)
 	setSettingByte(ccs.hContact, "Grant", 1);
 
 	/*blob is: uin(DWORD), hcontact(HANDLE), nick(ASCIIZ), first(ASCIIZ), last(ASCIIZ), email(ASCIIZ), reason(ASCIIZ)*/
-	char *szBlob = (char *)_alloca(pre.lParam);
+	char *szBlob = (char *)_malloca(pre.lParam);
 	char *pCurBlob = szBlob;
 	memcpy(pCurBlob, &dwUin, sizeof(DWORD)); pCurBlob += sizeof(DWORD);
 	memcpy(pCurBlob, &hContact, sizeof(HANDLE)); pCurBlob += sizeof(HANDLE);
@@ -1753,7 +1753,7 @@ void CIcqProto::handleRecvAdded(unsigned char *buf, WORD wLen)
 
 	cbBlob += nNickLen;
 
-	pCurBlob=pBlob=(PBYTE)_alloca(cbBlob);
+	pCurBlob=pBlob=(PBYTE)_malloca(cbBlob);
 	/*blob is: uin(DWORD), hContact(HANDLE), nick(ASCIIZ), first(ASCIIZ), last(ASCIIZ), email(ASCIIZ) */
 	memcpy(pCurBlob,&dwUin,sizeof(DWORD)); pCurBlob+=sizeof(DWORD);
 	memcpy(pCurBlob,&hContact,sizeof(HANDLE)); pCurBlob+=sizeof(HANDLE);
@@ -1811,7 +1811,7 @@ void CIcqProto::handleRecvAuthResponse(unsigned char *buf, WORD wLen)
 		wLen -= 2;
 		if (wLen >= nReasonLen)
 		{
-			szReason = (char*)_alloca(nReasonLen+1);
+			szReason = (char*)_malloca(nReasonLen+1);
 			unpackString(&buf, szReason, nReasonLen);
 			szReason[nReasonLen] = '\0';
 		}
@@ -2005,7 +2005,7 @@ void CIcqProto::updateServAvatarHash(BYTE *pHash, int size)
 
 		// Initialize our handy data buffer
 		pBuffer.wPlace = 0;
-		pBuffer.pData = (BYTE *)_alloca(wTLVlen);
+		pBuffer.pData = (BYTE *)_malloca(wTLVlen);
 		pBuffer.wLen = wTLVlen;
 
 		packTLV(&pBuffer, SSI_TLV_NAME, 0, NULL);                    // TLV (Name)

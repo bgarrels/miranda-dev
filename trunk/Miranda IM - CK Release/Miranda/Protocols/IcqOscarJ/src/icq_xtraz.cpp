@@ -99,7 +99,7 @@ void CIcqProto::handleXtrazNotify(DWORD dwUin, DWORD dwMID, DWORD dwMID2, WORD w
 							SAFE_FREE(&tmp);
 
 							int nResponseLen = 212 + strlennull(szXName) + strlennull(szXMsg) + UINMAXLEN + 2;
-							char *szResponse = (char*)_alloca(nResponseLen + 1);
+							char *szResponse = (char*)_malloca(nResponseLen + 1);
 							// send response
 							null_snprintf(szResponse, nResponseLen, 
 								"<ret event=\"OnRemoteNotification\">"
@@ -357,7 +357,7 @@ void CIcqProto::handleXtrazData(DWORD dwUin, DWORD dwMID, DWORD dwMID2, WORD wCo
 		{
 			int nDataLen = szEnd - szWork;
 
-			szUrl = (char*)_alloca(nDataLen);
+			szUrl = (char*)_malloca(nDataLen);
 			memcpy(szUrl, szWork+5, nDataLen);
 			szUrl[nDataLen - 5] = '\0';
 
@@ -430,7 +430,7 @@ DWORD CIcqProto::SendXtrazNotifyRequest(HANDLE hContact, char* szQuery, char* sz
 	szQueryBody = MangleXml(szQuery, strlennull(szQuery));
 	szNotifyBody = MangleXml(szNotify, strlennull(szNotify));
 	nBodyLen = strlennull(szQueryBody) + strlennull(szNotifyBody) + 41;
-	szBody = (char*)_alloca(nBodyLen);
+	szBody = (char*)_malloca(nBodyLen);
 	nBodyLen = null_snprintf(szBody, nBodyLen, "<N><QUERY>%s</QUERY><NOTIFY>%s</NOTIFY></N>", szQueryBody, szNotifyBody);
 	SAFE_FREE((void**)&szQueryBody);
 	SAFE_FREE((void**)&szNotifyBody);
@@ -453,7 +453,7 @@ void CIcqProto::SendXtrazNotifyResponse(DWORD dwUin, DWORD dwMID, DWORD dwMID2, 
 {
 	char *szResBody = MangleXml(szResponse, nResponseLen);
 	int nBodyLen = strlennull(szResBody) + 21;
-	char *szBody = (char*)_alloca(nBodyLen);
+	char *szBody = (char*)_malloca(nBodyLen);
 	HANDLE hContact = HContactFromUIN(dwUin, NULL);
 
 	if (hContact != INVALID_HANDLE_VALUE && !CheckContactCapabilities(hContact, CAPF_XTRAZ))

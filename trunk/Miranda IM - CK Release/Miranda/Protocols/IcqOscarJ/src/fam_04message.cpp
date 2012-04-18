@@ -754,7 +754,7 @@ void CIcqProto::parseServRelayData(BYTE *pDataBuf, WORD wLen, HANDLE hContact, D
 						return;
 					}
 
-					char* szMsg = (char *)_alloca(wMsgLen + 1);
+					char* szMsg = (char *)_malloca(wMsgLen + 1);
 					memcpy(szMsg, pDataBuf, wMsgLen);
 					szMsg[wMsgLen] = '\0';
 					pDataBuf += wMsgLen;
@@ -933,7 +933,7 @@ void CIcqProto::parseServRelayPluginData(BYTE *pDataBuf, WORD wLen, HANDLE hCont
 			}
 			NetLog_Server("This is file ack");
 
-			char *szMsg = (char *)_alloca(dwDataLen + 1);
+			char *szMsg = (char *)_malloca(dwDataLen + 1);
 			memcpy(szMsg, pDataBuf, dwDataLen);
 			szMsg[dwDataLen] = '\0';
 			pDataBuf += dwDataLen;
@@ -950,7 +950,7 @@ void CIcqProto::parseServRelayPluginData(BYTE *pDataBuf, WORD wLen, HANDLE hCont
 			}
 			NetLog_Server("This is a file request");
 
-			char *szMsg = (char *)_alloca(dwDataLen + 1);
+			char *szMsg = (char *)_malloca(dwDataLen + 1);
 			memcpy(szMsg, pDataBuf, dwDataLen);
 			szMsg[dwDataLen] = '\0';
 			pDataBuf += dwDataLen;
@@ -967,7 +967,7 @@ void CIcqProto::parseServRelayPluginData(BYTE *pDataBuf, WORD wLen, HANDLE hCont
 			}
 			NetLog_Server("This is a chat request");
 
-			char *szMsg = (char *)_alloca(dwDataLen + 1);
+			char *szMsg = (char *)_malloca(dwDataLen + 1);
 			memcpy(szMsg, pDataBuf, dwDataLen);
 			szMsg[dwDataLen] = '\0';
 			pDataBuf += dwDataLen;
@@ -1492,7 +1492,7 @@ int CIcqProto::unpackPluginTypeId(BYTE **pBuffer, WORD *pwLen, int *pTypeId, WOR
 		dwPluginNameLen = wLen;
 		NetLog_Uni(bThruDC, "Warning: malformed size of plugin name.");
 	}
-	char *szPluginName = (char *)_alloca(dwPluginNameLen + 1);
+	char *szPluginName = (char *)_malloca(dwPluginNameLen + 1);
 	memcpy(szPluginName, *pBuffer, dwPluginNameLen);
 	szPluginName[dwPluginNameLen] = '\0';
 	wLen -= (WORD)dwPluginNameLen;
@@ -1805,7 +1805,7 @@ void CIcqProto::handleMessageTypes(DWORD dwUin, char *szUID, DWORD dwTimestamp, 
 
 					if (dwExtraLen < dwDataLen && !strncmp(szMsg, "{\\rtf", 5))
 					{ // it is icq5 sending us crap, get real message from it
-						WCHAR* usMsg = (WCHAR*)_alloca((dwExtraLen + 1)*sizeof(WCHAR));
+						WCHAR* usMsg = (WCHAR*)_malloca((dwExtraLen + 1)*sizeof(WCHAR));
 						// make sure it is null-terminated
 						wcsncpy(usMsg, (WCHAR*)(pMsg + 4), dwExtraLen);
 						usMsg[dwExtraLen] = '\0';
@@ -1934,7 +1934,7 @@ void CIcqProto::handleMessageTypes(DWORD dwUin, char *szUID, DWORD dwTimestamp, 
 			pre.lParam=sizeof(DWORD)+sizeof(HANDLE)+strlennull(pszMsgField[0])+strlennull(pszMsgField[1])+strlennull(pszMsgField[2])+strlennull(pszMsgField[3])+strlennull(pszMsgField[5])+5;
 
 			/*blob is: uin(DWORD), hcontact(HANDLE), nick(ASCIIZ), first(ASCIIZ), last(ASCIIZ), email(ASCIIZ), reason(ASCIIZ)*/
-			pCurBlob=szBlob=(char *)_alloca(pre.lParam);
+			pCurBlob=szBlob=(char *)_malloca(pre.lParam);
 			memcpy(pCurBlob,&dwUin,sizeof(DWORD)); pCurBlob+=sizeof(DWORD);
 			memcpy(pCurBlob,&hContact,sizeof(HANDLE)); pCurBlob+=sizeof(HANDLE);
 			strcpy((char *)pCurBlob,pszMsgField[0]); pCurBlob+=strlennull((char *)pCurBlob)+1;
@@ -1964,7 +1964,7 @@ void CIcqProto::handleMessageTypes(DWORD dwUin, char *szUID, DWORD dwTimestamp, 
 
 			/*blob is: uin(DWORD), hcontact(HANDLE), nick(ASCIIZ), first(ASCIIZ), last(ASCIIZ), email(ASCIIZ) */
 			cbBlob=sizeof(DWORD)+sizeof(HANDLE)+strlennull(pszMsgField[0])+strlennull(pszMsgField[1])+strlennull(pszMsgField[2])+strlennull(pszMsgField[3])+4;
-			pCurBlob=pBlob=(PBYTE)_alloca(cbBlob);
+			pCurBlob=pBlob=(PBYTE)_malloca(cbBlob);
 			memcpy(pCurBlob,&dwUin,sizeof(DWORD)); pCurBlob+=sizeof(DWORD);
 			memcpy(pCurBlob,&hContact,sizeof(HANDLE)); pCurBlob+=sizeof(HANDLE);
 			strcpy((char *)pCurBlob,pszMsgField[0]); pCurBlob+=strlennull((char *)pCurBlob)+1;
@@ -1995,7 +1995,7 @@ void CIcqProto::handleMessageTypes(DWORD dwUin, char *szUID, DWORD dwTimestamp, 
 			}
 
 			int valid = 1;
-			ICQSEARCHRESULT** isrList = (ICQSEARCHRESULT**)_alloca(nContacts * sizeof(ICQSEARCHRESULT*));
+			ICQSEARCHRESULT** isrList = (ICQSEARCHRESULT**)_malloca(nContacts * sizeof(ICQSEARCHRESULT*));
 			for (i = 0; i < nContacts; i++)
 			{
 				isrList[i] = (ICQSEARCHRESULT*)SAFE_MALLOC(sizeof(ICQSEARCHRESULT));
@@ -2089,7 +2089,7 @@ void CIcqProto::handleMessageTypes(DWORD dwUin, char *szUID, DWORD dwTimestamp, 
 
 			/*blob is: body(ASCIIZ), name(ASCIIZ), email(ASCIIZ) */
 			cbBlob=strlennull(pszMsgField[0])+strlennull(pszMsgField[3])+strlennull(pszMsgField[5])+3;
-			pCurBlob=pBlob=(PBYTE)_alloca(cbBlob);
+			pCurBlob=pBlob=(PBYTE)_malloca(cbBlob);
 			strcpy((char *)pCurBlob,pszMsgField[5]); pCurBlob+=strlennull((char *)pCurBlob)+1;
 			strcpy((char *)pCurBlob,pszMsgField[0]); pCurBlob+=strlennull((char *)pCurBlob)+1;
 			strcpy((char *)pCurBlob,pszMsgField[3]);
@@ -2112,7 +2112,7 @@ void CIcqProto::handleMessageTypes(DWORD dwUin, char *szUID, DWORD dwTimestamp, 
 
 			/*blob is: body(ASCIIZ), name(ASCIIZ), email(ASCIIZ) */
 			cbBlob=strlennull(pszMsgField[0])+strlennull(pszMsgField[3])+strlennull(pszMsgField[5])+3;
-			pCurBlob=pBlob=(PBYTE)_alloca(cbBlob);
+			pCurBlob=pBlob=(PBYTE)_malloca(cbBlob);
 			strcpy((char *)pCurBlob,pszMsgField[5]); pCurBlob+=strlennull((char *)pCurBlob)+1;
 			strcpy((char *)pCurBlob,pszMsgField[0]); pCurBlob+=strlennull((char *)pCurBlob)+1;
 			strcpy((char *)pCurBlob,pszMsgField[3]);
@@ -2391,7 +2391,7 @@ void CIcqProto::handleRecvMsgResponse(BYTE *buf, WORD wLen, WORD wFlags, DWORD d
 				// Message length
 				unpackLEWord(&buf, &wMsgLen);
 				wLen -= 2;
-				szMsg = (char *)_alloca(wMsgLen + 1);
+				szMsg = (char *)_malloca(wMsgLen + 1);
 				szMsg[wMsgLen] = '\0';
 				if (wMsgLen > 0) 
 				{
@@ -2466,7 +2466,7 @@ void CIcqProto::handleRecvMsgResponse(BYTE *buf, WORD wLen, WORD wFlags, DWORD d
 				case MTYPE_PLAIN:
 					if (pCookieData && pCookieData->bMessageType == MTYPE_AUTOAWAY && dwLengthToEnd >= 4)
 					{ // ICQ 6 invented this
-						char *szMsg = (char*)_alloca(dwDataLen + 1);
+						char *szMsg = (char*)_malloca(dwDataLen + 1);
 
 						if (dwDataLen > 0)
 							memcpy(szMsg, buf, dwDataLen);
@@ -2492,7 +2492,7 @@ void CIcqProto::handleRecvMsgResponse(BYTE *buf, WORD wLen, WORD wFlags, DWORD d
 					{
 						NetLog_Server("This is file ack");
 
-						char *szMsg = (char *)_alloca(dwDataLen + 1);
+						char *szMsg = (char *)_malloca(dwDataLen + 1);
 
 						if (dwDataLen > 0)
 							memcpy(szMsg, buf, dwDataLen);
@@ -2508,7 +2508,7 @@ void CIcqProto::handleRecvMsgResponse(BYTE *buf, WORD wLen, WORD wFlags, DWORD d
 
 				case MTYPE_SCRIPT_NOTIFY:
 					{
-						char *szMsg = (char*)_alloca(dwDataLen + 1);
+						char *szMsg = (char*)_malloca(dwDataLen + 1);
 
 						if (dwDataLen > 0)
 							memcpy(szMsg, buf, dwDataLen);
@@ -2702,7 +2702,7 @@ void CIcqProto::handleRecvServMsgError(BYTE *buf, WORD wLen, WORD wFlags, DWORD 
 		case 0x0017:     // Server queue full
 		case 0x0018:     // Not while on AOL
 		default:
-			if (pszErrorMessage = (char*)_alloca(256))
+			if (pszErrorMessage = (char*)_malloca(256))
 				null_snprintf(pszErrorMessage, 256, Translate("SNAC(4.1) SENDMSG Error (x%02x)"), wError);
 			break;
 		}

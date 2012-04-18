@@ -192,7 +192,7 @@ void CIcqProto::handleLocationUserInfoReply(BYTE* buf, WORD wLen, DWORD dwCookie
 					pTLV = pChain->getTLV(0x01, 1);
 					if (pTLV && (pTLV->wLen >= 1))
 					{
-						szEncoding = (char*)_alloca(pTLV->wLen + 1);
+						szEncoding = (char*)_malloca(pTLV->wLen + 1);
 						memcpy(szEncoding, pTLV->pData, pTLV->wLen);
 						szEncoding[pTLV->wLen] = '\0';
 					}
@@ -263,7 +263,7 @@ void CIcqProto::handleLocationUserInfoReply(BYTE* buf, WORD wLen, DWORD dwCookie
 					pTLV = pChain->getTLV(0x03, 1);
 					if (pTLV && (pTLV->wLen >= 1))
 					{
-						szEncoding = (char*)_alloca(pTLV->wLen + 1);
+						szEncoding = (char*)_malloca(pTLV->wLen + 1);
 						memcpy(szEncoding, pTLV->pData, pTLV->wLen);
 						szEncoding[pTLV->wLen] = '\0';
 					}

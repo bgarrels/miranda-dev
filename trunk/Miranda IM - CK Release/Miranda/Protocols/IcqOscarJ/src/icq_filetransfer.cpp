@@ -379,7 +379,7 @@ void CIcqProto::handleFileTransferPacket(directconnect* dc, PBYTE buf, WORD wLen
 			if (wLen < 19 + wThisFilenameLen)
 				return;
 			SAFE_FREE(&dc->ft->szThisFile);
-	  szAnsi = (char *)_alloca(wThisFilenameLen + 1);
+	  szAnsi = (char *)_malloca(wThisFilenameLen + 1);
 			memcpy(szAnsi, buf, wThisFilenameLen);
 			szAnsi[wThisFilenameLen] = '\0';
 	  dc->ft->szThisFile = ansi_to_utf8(szAnsi);
@@ -389,7 +389,7 @@ void CIcqProto::handleFileTransferPacket(directconnect* dc, PBYTE buf, WORD wLen
 			if (wLen < 18 + wThisFilenameLen + wSubdirLen)
 				return;
 			SAFE_FREE(&dc->ft->szThisSubdir);
-	  szAnsi = (char *)_alloca(wSubdirLen + 1);
+	  szAnsi = (char *)_malloca(wSubdirLen + 1);
 			memcpy(szAnsi, buf, wSubdirLen);
 			szAnsi[wSubdirLen] = '\0';
 			dc->ft->szThisSubdir = ansi_to_utf8(szAnsi);
