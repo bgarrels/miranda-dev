@@ -90,15 +90,15 @@ AimOSCAR Beta 5
     * Options dialog changes.
     * Removed pointless structs in code.
     * Removed some functions that were not used.
-    * Replaced malloc() with c++ style memory allocation.
+    * Replaced malloc() with c++ style memory mallocation.
     * Replaced free() with c++ style memory deletion.
     * now use delete[] correctly.
     * addition of a tlv class to make code more maintainable and easier to deal with.
     * major code clean up.
     * removed extra generic services not used- here and there.
-    * dynamic memory allocation for all strip and conversion functions.
+    * dynamic memory mallocation for all strip and conversion functions.
     * Fixed memleaks here and there.
-    * Removal of most static memory buffers- they were approximately 8KB allocation for each.
+    * Removal of most static memory buffers- they were approximately 8KB mallocation for each.
     * Addition of dynamic memory buffers and small memory buffers.
     * attempted to fix buddy addition.
     * Addition of a snac and flap class.
@@ -148,7 +148,7 @@ AimOSCAR Beta 3
     * fixed a memory leak in add_contacts_to_groups().
     * fixed memory leak with sending messages.
     * fixed memory leaks involving the extended and account type icon functions.
-    * moved freeing of globally allocated strings to the unload function(should stop some hangings on exit).
+    * moved freeing of globally mallocated strings to the unload function(should stop some hangings on exit).
     * addition of a first run dialog for entering a username and password(contributed by RiPOFF).
     * Temporary Contacts can now added permanently to the buddy list.
     * Contacts added to the list are now added to their actual server-side group.

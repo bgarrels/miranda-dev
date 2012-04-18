@@ -61,7 +61,7 @@ bool send_init_oft2(file_transfer *ft, char* file)
 
 	unsigned short len = max(0x100, 0xc0 + astr.getTermSize());
 
-	oft2 *oft = (oft2*)alloca(len);
+	oft2 *oft = (oft2*)_malloca(len);
 	memset(oft, 0, len);
 
 	memcpy(oft->protocol_version, "OFT2", 4);

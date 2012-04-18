@@ -1398,7 +1398,7 @@ void CAimProto::snac_received_message(SNAC &snac,HANDLE hServerConn,unsigned sho
 
 					char* away = mir_utf8encodeT(TranslateT("[Auto-Response]:"));
 					size_t len = strlen(s_msg) + strlen(away) + 2;
-					char* buf = (char*)alloca(len);
+					char* buf = (char*)_malloca(len);
 					mir_snprintf(buf, len, "%s %s", away, s_msg);
 					mir_free(away);
 
