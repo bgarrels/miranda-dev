@@ -873,7 +873,7 @@ HANDLE CIcqProto::oftInitTransfer(HANDLE hContact, DWORD dwUin, char* szUid, con
 			if (!(statbuf.st_mode&_S_IFDIR))
 			{ // take only files
 				ft->files[ft->wFilesCount].szFile = ft->files_list[ft->wFilesCount] = FileNameToUtf(files[i]);
-				ft->files[ft->wFilesCount].szContainer = oftGetFileContainer(ft, (LPCSTR*)ft->files_list, ft->wFilesCount);
+				ft->files[ft->wFilesCount].szContainer = oftGetFileContainer(ft, (LPCSTR*) files, i);
 
 				ft->wFilesCount++;
 				ft->qwTotalSize += statbuf.st_size;
