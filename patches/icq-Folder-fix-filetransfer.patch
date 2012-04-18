@@ -1,0 +1,25 @@
+From a587b8230d7723bd4405f8e939b738b3bfe91f56 Mon Sep 17 00:00:00 2001
+From: Cyrus <jirka.kulovany@seznam.cz>
+Date: Mon, 16 Apr 2012 20:20:32 +0200
+Subject: [PATCH] Folder fix
+
+---
+ protocols/IcqOscarJ/oscar_filetransfer.cpp |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/protocols/IcqOscarJ/oscar_filetransfer.cpp b/protocols/IcqOscarJ/oscar_filetransfer.cpp
+index 136a0fa..dad74e8 100644
+--- a/protocols/IcqOscarJ/oscar_filetransfer.cpp
++++ b/protocols/IcqOscarJ/oscar_filetransfer.cpp
+@@ -872,7 +872,7 @@ HANDLE CIcqProto::oftInitTransfer(HANDLE hContact, DWORD dwUin, char* szUid, con
+ 			if (!(statbuf.st_mode&_S_IFDIR))
+ 			{ // take only files
+ 				ft->files[ft->wFilesCount].szFile = ft->files_list[ft->wFilesCount] = FileNameToUtf(files[i]);
+-				ft->files[ft->wFilesCount].szContainer = oftGetFileContainer(ft, (LPCSTR*)ft->files_list, ft->wFilesCount);
++				ft->files[ft->wFilesCount].szContainer = oftGetFileContainer(ft, (LPCSTR*) files, i);
+ 
+ 				ft->wFilesCount++;
+ 				ft->qwTotalSize += statbuf.st_size;
+-- 
+1.7.9.msysgit.0
+
