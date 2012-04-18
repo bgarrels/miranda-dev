@@ -945,7 +945,7 @@ char *ApplyEncoding(const char *string, const char *pszEncoding)
 		if (!_strnicmp(pszEncoding, "unicode-2-0", 11))
 		{ // it is UCS-2 encoded
 			int wLen = strlennull((WCHAR*)string) + 1;
-			WCHAR *szStr = (WCHAR*)_alloca(wLen*2);
+			WCHAR *szStr = (WCHAR*)_malloca(wLen*2);
 			BYTE *tmp = (BYTE*)string;
 
 			unpackWideString(&tmp, szStr, (WORD)(wLen*2));
@@ -1371,7 +1371,7 @@ void CIcqProto::writeDbInfoSettingTLVStringUtf(HANDLE hContact, const char *szSe
 
 	if (pTLV && pTLV->wLen > 0)
 	{
-		char *str = (char*)_alloca(pTLV->wLen + 1); 
+		char *str = (char*)_malloca(pTLV->wLen + 1); 
 
 		memcpy(str, pTLV->pData, pTLV->wLen);
 		str[pTLV->wLen] = '\0';
@@ -1388,7 +1388,7 @@ void CIcqProto::writeDbInfoSettingTLVString(HANDLE hContact, const char *szSetti
 
 	if (pTLV && pTLV->wLen > 0)
 	{
-		char *str = (char*)_alloca(pTLV->wLen + 1); 
+		char *str = (char*)_malloca(pTLV->wLen + 1); 
 
 		memcpy(str, pTLV->pData, pTLV->wLen);
 		str[pTLV->wLen] = '\0';
@@ -1975,7 +1975,7 @@ char* FileNameToUtf(const TCHAR *filename)
 	{ // the function is available (it is not on old NT systems)
 		WCHAR *usFileName = NULL;
 		int wchars = RealGetLongPathName(filename, usFileName, 0);
-		usFileName = (WCHAR*)_alloca((wchars + 1) * sizeof(WCHAR));
+		usFileName = (WCHAR*)_malloca((wchars + 1) * sizeof(WCHAR));
 		RealGetLongPathName(filename, usFileName, wchars);
 
 		return make_utf8_string(usFileName);
@@ -1990,7 +1990,7 @@ char* FileNameToUtf(const TCHAR *filename)
 int FileAccessUtf(const char *path, int mode)
 {
 	int size = strlennull(path) + 2;
-	TCHAR *szPath = (TCHAR*)_alloca(size * sizeof(TCHAR));
+	TCHAR *szPath = (TCHAR*)_malloca(size * sizeof(TCHAR));
 
 	if (utf8_to_tchar_static(path, szPath, size))
 		return _taccess(szPath, mode);
@@ -2002,7 +2002,7 @@ int FileAccessUtf(const char *path, int mode)
 int FileStatUtf(const char *path, struct _stati64 *buffer)
 {
 	int size = strlennull(path) + 2;
-	TCHAR *szPath = (TCHAR*)_alloca(size * sizeof(TCHAR));
+	TCHAR *szPath = (TCHAR*)_malloca(size * sizeof(TCHAR));
 
 	if (utf8_to_tchar_static(path, szPath, size))
 		return _tstati64(szPath, buffer);
@@ -2015,7 +2015,7 @@ int MakeDirUtf(const char *dir)
 {
 	int wRes = -1;
 	int size = strlennull(dir) + 2;
-	TCHAR *szDir = (TCHAR*)_alloca(size * sizeof(TCHAR));
+	TCHAR *szDir = (TCHAR*)_malloca(size * sizeof(TCHAR));
 
 	if (utf8_to_tchar_static(dir, szDir, size))
 	{ // _tmkdir can created only one dir at once
@@ -2047,7 +2047,7 @@ int MakeDirUtf(const char *dir)
 int OpenFileUtf(const char *filename, int oflag, int pmode)
 {
 	int size = strlennull(filename) + 2;
-	TCHAR *szFile = (TCHAR*)_alloca(size * sizeof(TCHAR));
+	TCHAR *szFile = (TCHAR*)_malloca(size * sizeof(TCHAR));
 
 	if (utf8_to_tchar_static(filename, szFile, size))
 		return _topen(szFile, oflag, pmode);
@@ -2069,7 +2069,7 @@ WCHAR *GetWindowTextUcs(HWND hWnd)
 	char *text;
 	int wchars, nLen = GetWindowTextLengthA(hWnd);
 
-	text = (char*)_alloca(nLen+2);
+	text = (char*)_malloca(nLen+2);
 	GetWindowTextA(hWnd, text, nLen + 1);
 
 	wchars = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, text,
@@ -2100,7 +2100,7 @@ void SetWindowTextUcs(HWND hWnd, WCHAR *text)
 char* GetWindowTextUtf(HWND hWnd)
 {
 	int nLen = GetWindowTextLength(hWnd);
-	TCHAR *szText = (TCHAR*)_alloca((nLen + 2) * sizeof(TCHAR));
+	TCHAR *szText = (TCHAR*)_malloca((nLen + 2) * sizeof(TCHAR));
 
 	GetWindowText(hWnd, szText, nLen + 1);
 
@@ -2117,7 +2117,7 @@ char* GetDlgItemTextUtf(HWND hwndDlg, int iItem)
 void SetWindowTextUtf(HWND hWnd, const char *szText)
 {
 	int size = strlennull(szText) + 2;
-	TCHAR *tszText = (TCHAR*)_alloca(size * sizeof(TCHAR));
+	TCHAR *tszText = (TCHAR*)_malloca(size * sizeof(TCHAR));
 
 	if (utf8_to_tchar_static(szText, tszText, size))
 		SetWindowText(hWnd, tszText);
@@ -2142,7 +2142,7 @@ static int ControlAddStringUtf(HWND ctrl, DWORD msg, const char *szString)
 	SAFE_FREE((void**)&wItem);
 #else
 	int size = strlennull(szItem) + 2;
-	char *aItem = (char*)_alloca(size);
+	char *aItem = (char*)_malloca(size);
 
 	if (utf8_decode_static(szItem, aItem, size))
 		item = SendMessage(ctrl, msg, 0, (LPARAM)aItem);
@@ -2178,8 +2178,8 @@ int MessageBoxUtf(HWND hWnd, const char *szText, const char *szCaption, UINT uTy
 	SAFE_FREE((void**)&text);
 #else
 	int size = strlennull(szText) + 2, size2 = strlennull(szCaption) + 2;
-	char *text = (char*)_alloca(size);
-	char *caption = (char*)_alloca(size2);
+	char *text = (char*)_malloca(size);
+	char *caption = (char*)_malloca(size2);
 
 	utf8_decode_static(ICQTranslateUtfStatic(szText, str, 1024), text, size);
 	utf8_decode_static(ICQTranslateUtfStatic(szCaption, cap, MAX_PATH), caption, size2);

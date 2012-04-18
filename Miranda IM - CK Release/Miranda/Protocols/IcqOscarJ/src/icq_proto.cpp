@@ -440,7 +440,7 @@ HANDLE __cdecl CIcqProto::AddToListByEvent( int flags, int iContact, HANDLE hDbE
 	if ((dbei.cbBlob = CallService(MS_DB_EVENT_GETBLOBSIZE, (WPARAM)hDbEvent, 0)) == -1)
 		return 0;
 
-	dbei.pBlob = (PBYTE)_alloca(dbei.cbBlob + 1);
+	dbei.pBlob = (PBYTE)_malloca(dbei.cbBlob + 1);
 	dbei.pBlob[dbei.cbBlob] = '\0';
 
 	if (CallService(MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&dbei))
@@ -1089,7 +1089,7 @@ int __cdecl CIcqProto::RecvContacts( HANDLE hContact, PROTORECVEVENT* pre )
 		else
 			cbBlob += strlennull((char*)isrList[i]->hdr.id);
 	}
-	PBYTE pBlob = (PBYTE)_alloca(cbBlob), pCurBlob;
+	PBYTE pBlob = (PBYTE)_malloca(cbBlob), pCurBlob;
 	for (i = 0, pCurBlob = pBlob; i < pre->lParam; i++)
 	{
 		if (pre->flags & PREF_UNICODE)
@@ -1203,7 +1203,7 @@ int __cdecl CIcqProto::SendContacts( HANDLE hContact, int flags, int nContacts, 
 				// Format the data part and the names part
 				// This is kinda messy, but there is no simple way to do it. First
 				// we need to calculate the length of the packet.
-				contacts = (struct icq_contactsend_s*)_alloca(sizeof(struct icq_contactsend_s)*nContacts);
+				contacts = (struct icq_contactsend_s*)_malloca(sizeof(struct icq_contactsend_s)*nContacts);
 				ZeroMemory(contacts, sizeof(struct icq_contactsend_s)*nContacts);
 				{
 					nDataLen = 0; nNamesLen = 0;
@@ -1333,7 +1333,7 @@ int __cdecl CIcqProto::SendContacts( HANDLE hContact, int flags, int nContacts, 
 				// Format the body
 				// This is kinda messy, but there is no simple way to do it. First
 				// we need to calculate the length of the packet.
-				contacts = (struct icq_contactsend_s*)_alloca(sizeof(struct icq_contactsend_s)*nContacts);
+				contacts = (struct icq_contactsend_s*)_malloca(sizeof(struct icq_contactsend_s)*nContacts);
 				ZeroMemory(contacts, sizeof(struct icq_contactsend_s)*nContacts);
 				{
 					nBodyLength = 0;
@@ -1824,7 +1824,7 @@ int __cdecl CIcqProto::SendUrl( HANDLE hContact, int flags, const char* url )
 			szDesc = (char *)url + nUrlLen + 1;
 			nDescLen = strlennull(szDesc);
 			nBodyLen = nUrlLen + nDescLen + 2;
-			szBody = (char *)_alloca(nBodyLen);
+			szBody = (char *)_malloca(nBodyLen);
 			strcpy(szBody, szDesc);
 			szBody[nDescLen] = (char)0xFE; // Separator
 			strcpy(szBody + nDescLen + 1, url);
@@ -2335,14 +2335,14 @@ INT_PTR CIcqProto::GetMyAwayMsg(WPARAM wParam, LPARAM lParam)
 
 	if (lParam & SGMA_UNICODE)
 	{
-		WCHAR *szMsg = (WCHAR*)_alloca(nMsgLen * sizeof(WCHAR));
+		WCHAR *szMsg = (WCHAR*)_malloca(nMsgLen * sizeof(WCHAR));
 
 		make_unicode_string_static(*ppszMsg, szMsg, nMsgLen);
 		return (INT_PTR)mir_wstrdup(szMsg);
 	}
 	else
 	{ // convert to ansi
-		char *szMsg = (char*)_alloca(nMsgLen);
+		char *szMsg = (char*)_malloca(nMsgLen);
 
 		if (utf8_decode_static(*ppszMsg, szMsg, nMsgLen))
 			return (INT_PTR)mir_strdup(szMsg);

@@ -230,7 +230,7 @@ void CIcqProto::handleExtensionMetaResponse(BYTE *databuf, WORD wPacketLen, WORD
 			// Todo: We only use this as an SMS ack, that will have to change
 			{
 				// Terminate buffer
-				char *pszInfo = (char *)_alloca(wPacketLen + 1);
+				char *pszInfo = (char *)_malloca(wPacketLen + 1);
 				if (wPacketLen > 0)
 					memcpy(pszInfo, databuf, wPacketLen);
 				pszInfo[wPacketLen] = 0;
@@ -261,7 +261,7 @@ void CIcqProto::handleExtensionMetaResponse(BYTE *databuf, WORD wPacketLen, WORD
 					wPacketLen -= wNetworkNameLen;
 
 					unpackWord(&databuf, &wAckLen);
-					if (pszInfo = (char *)_alloca(wAckLen + 1))
+					if (pszInfo = (char *)_malloca(wAckLen + 1))
 					{
 						// Terminate buffer
 						if (wAckLen > 0)

@@ -72,6 +72,9 @@ void __cdecl CIcqProto::KeepAliveThread(void *arg)
 
 	CloseHandle(info->hKeepAliveEvent);
 	info->hKeepAliveEvent = NULL;
+	//
+	//info->hKeepAliveEvent = NULL;
+	// ^^^ this is not consistent with the SAL annotation on 'CloseHandle'
 }
 
 

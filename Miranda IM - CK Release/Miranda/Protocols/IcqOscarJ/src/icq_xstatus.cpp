@@ -62,7 +62,7 @@ DWORD CIcqProto::sendXStatusDetailsRequest(HANDLE hContact, int bForced)
 	if (m_bXStatusEnabled && getContactXStatus(hContact) != 0)
 	{ // only request custom status detail when the contact has one
 		int nNotifyLen = 94 + UINMAXLEN;
-		char *szNotify = (char*)_alloca(nNotifyLen);
+		char *szNotify = (char*)_malloca(nNotifyLen);
 
     null_snprintf(szNotify, nNotifyLen, "<srv><id>cAwaySrv</id><req><id>AwayStat</id><trans>1</trans><senderId>%d</senderId></req></srv>", m_dwLocalUIN);
 

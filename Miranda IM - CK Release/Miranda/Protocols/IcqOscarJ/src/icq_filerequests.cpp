@@ -93,7 +93,7 @@ void CIcqProto::handleFileAck(PBYTE buf, WORD wLen, DWORD dwUin, DWORD dwCookie,
 	{
 		if (wFilenameLength > wLen - 2)
 			wFilenameLength = wLen - 2;
-		pszFileName = (char*)_alloca(wFilenameLength+1);
+		pszFileName = (char*)_malloca(wFilenameLength+1);
 		unpackString(&buf, pszFileName, wFilenameLength);
 		pszFileName[wFilenameLength] = '\0';
 	}
@@ -150,7 +150,7 @@ void CIcqProto::handleFileRequest(PBYTE buf, WORD wLen, DWORD dwUin, DWORD dwCoo
 	unpackLEWord(&buf, &wFilenameLength);
 	if (wFilenameLength > 0)
 	{
-		pszFileName = (char*)_alloca(wFilenameLength + 1);
+		pszFileName = (char*)_malloca(wFilenameLength + 1);
 		unpackString(&buf, pszFileName, wFilenameLength);
 		pszFileName[wFilenameLength] = '\0';
 	}
@@ -182,7 +182,7 @@ void CIcqProto::handleFileRequest(PBYTE buf, WORD wLen, DWORD dwUin, DWORD dwCoo
 	ft->bEmptyDesc = bEmptyDesc;
 
   // Send chain event
-  char *szBlob = (char*)_alloca(sizeof(DWORD) + strlennull(pszFileName) + strlennull(pszDescription) + 2);
+  char *szBlob = (char*)_malloca(sizeof(DWORD) + strlennull(pszFileName) + strlennull(pszDescription) + 2);
   *(PDWORD)szBlob = 0;
   strcpy(szBlob + sizeof(DWORD), pszFileName);
   strcpy(szBlob + sizeof(DWORD) + strlennull(pszFileName) + 1, pszDescription);

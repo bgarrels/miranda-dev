@@ -301,7 +301,7 @@ int __stdcall utf8_encode(const char *from, char **to)
 		return -1;
 	}
 
-	WCHAR *unicode = (WCHAR*)_alloca((wchars + 1) * sizeof(WCHAR));
+	WCHAR *unicode = (WCHAR*)_malloca((wchars + 1) * sizeof(WCHAR));
 	ZeroMemory(unicode, (wchars + 1) * sizeof(WCHAR));
 
 	int err = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, from, strlennull(from), unicode, wchars);
@@ -338,7 +338,7 @@ char* __stdcall ansi_to_utf8(const char *ansi)
 char* __stdcall ansi_to_utf8_codepage(const char *ansi, WORD wCp)
 {
 	int wchars = strlennull(ansi);
-	WCHAR *unicode = (WCHAR*)_alloca((wchars + 1) * sizeof(WCHAR));
+	WCHAR *unicode = (WCHAR*)_malloca((wchars + 1) * sizeof(WCHAR));
 	ZeroMemory(unicode, (wchars + 1) * sizeof(WCHAR));
 
 	MultiByteToWideChar(wCp, MB_PRECOMPOSED, ansi, wchars, unicode, wchars);
@@ -362,7 +362,7 @@ int __stdcall utf8_decode_codepage(const char *from, char **to, WORD wCp)
 	if (bHasCP_UTF8)
 	{
 		int inlen = strlennull(from) + 1;
-		WCHAR *wszTemp = (WCHAR *)_alloca(inlen * sizeof(WCHAR));
+		WCHAR *wszTemp = (WCHAR *)_malloca(inlen * sizeof(WCHAR));
 	ZeroMemory(wszTemp, inlen * sizeof(WCHAR));
 
 		// Convert the UTF-8 string to UCS
@@ -383,7 +383,7 @@ int __stdcall utf8_decode_codepage(const char *from, char **to, WORD wCp)
 	else
 	{
 		int chars = strlennull(from) + 1;
-		WCHAR *unicode = (WCHAR*)_alloca(chars * sizeof(WCHAR));
+		WCHAR *unicode = (WCHAR*)_malloca(chars * sizeof(WCHAR));
 		make_unicode_string_static(from, unicode, chars);
 
 		chars = WideCharToMultiByte(wCp, WC_COMPOSITECHECK, unicode, -1, NULL, 0, NULL, NULL);
@@ -447,7 +447,7 @@ int __stdcall utf8_decode_static(const char *from, char *to, int to_size)
 	if (bHasCP_UTF8)
 	{
 		int inlen = strlennull(from) + 1;
-		WCHAR *wszTemp = (WCHAR*)_alloca(inlen * sizeof(WCHAR));
+		WCHAR *wszTemp = (WCHAR*)_malloca(inlen * sizeof(WCHAR));
 		ZeroMemory(wszTemp, inlen * sizeof(WCHAR));
 
 		// Convert the UTF-8 string to UCS
@@ -463,7 +463,7 @@ int __stdcall utf8_decode_static(const char *from, char *to, int to_size)
 	else
 	{
 		size_t chars = strlennull(from) + 1;
-		WCHAR *unicode = (WCHAR*)_alloca(chars * sizeof(WCHAR));
+		WCHAR *unicode = (WCHAR*)_malloca(chars * sizeof(WCHAR));
 
 		make_unicode_string_static(from, unicode, chars);
 

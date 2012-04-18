@@ -437,7 +437,7 @@ void CIcqProto::handleAvatarOwnerHash(WORD wItemID, BYTE bFlags, BYTE *pData, BY
 						if (m_bSsiEnabled && getSettingByte(NULL, "ForceOurAvatar", 1))
 						{ // we want our avatar, update hash
 							DWORD dwPaFormat = DetectAvatarFormat(file);
-							BYTE *pHash = (BYTE*)_alloca(0x14);
+							BYTE *pHash = (BYTE*)_malloca(0x14);
 
 							NetLog_Server("Our avatar is different, setting our new hash.");
 
@@ -508,7 +508,7 @@ void CIcqProto::handleAvatarOwnerHash(WORD wItemID, BYTE bFlags, BYTE *pData, BY
 				}
 				else
 				{
-					BYTE *pHash = (BYTE*)_alloca(0x14);
+					BYTE *pHash = (BYTE*)_malloca(0x14);
 
 					NetLog_Server("Our file is different, set our new hash.");
 
@@ -1666,7 +1666,7 @@ void avatars_server_connection::handleAvatarFam(BYTE *pBuffer, WORD wBufferLengt
 						NetLog_Server("Received user avatar, storing (%d bytes).", datalen);
 
 						int dwPaFormat = DetectAvatarFormatBuffer((char*)pBuffer);
-						TCHAR *tszImageFile = (TCHAR*)_alloca(sizeof(TCHAR)*(strlennull(pCookieData->szFile) + 6));
+						TCHAR *tszImageFile = (TCHAR*)_malloca(sizeof(TCHAR)*(strlennull(pCookieData->szFile) + 6));
 
 						_tcscpy(tszImageFile, pCookieData->szFile);
 						AddAvatarExt(dwPaFormat, tszImageFile);

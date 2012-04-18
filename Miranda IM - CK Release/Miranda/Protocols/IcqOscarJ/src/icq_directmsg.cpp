@@ -106,7 +106,7 @@ void CIcqProto::handleDirectMessage(directconnect* dc, PBYTE buf, WORD wLen)
 	unpackLEWord(&buf, &wTextLen);
 	if (wTextLen > 0)
 	{
-		pszText = (char*)_alloca(wTextLen+1);
+		pszText = (char*)_malloca(wTextLen+1);
 		unpackString(&buf, pszText, wTextLen);
 		pszText[wTextLen] = '\0';
 	}
@@ -267,7 +267,7 @@ void CIcqProto::handleDirectGreetingMessage(directconnect* dc, PBYTE buf, WORD w
 		char* szMsg;
 
 		NetLog_Direct("This is file request");
-		szMsg = (char*)_alloca(dwDataLength+1);
+		szMsg = (char*)_malloca(dwDataLength+1);
 		unpackString(&buf, szMsg, (WORD)dwDataLength);
 		szMsg[dwDataLength] = '\0';
 		wLen = wLen - (WORD)dwDataLength;
@@ -279,7 +279,7 @@ void CIcqProto::handleDirectGreetingMessage(directconnect* dc, PBYTE buf, WORD w
 		char* szMsg;
 
 		NetLog_Direct("This is file ack");
-		szMsg = (char*)_alloca(dwDataLength+1);
+		szMsg = (char*)_malloca(dwDataLength+1);
 		unpackString(&buf, szMsg, (WORD)dwDataLength);
 		szMsg[dwDataLength] = '\0';
 		wLen = wLen - (WORD)dwDataLength;
@@ -302,7 +302,7 @@ void CIcqProto::handleDirectGreetingMessage(directconnect* dc, PBYTE buf, WORD w
 	{ // especially for icq2003b
 		NetLog_Direct("This is extended status reply");
 
-		char *szMsg = (char*)_alloca(dwDataLength+1);
+		char *szMsg = (char*)_malloca(dwDataLength+1);
 	uid_str szUID;
 		unpackString(&buf, szMsg, (WORD)dwDataLength);
 		szMsg[dwDataLength] = '\0';
@@ -342,7 +342,7 @@ void CIcqProto::handleDirectGreetingMessage(directconnect* dc, PBYTE buf, WORD w
 				{
 					char *szMsg;
 
-					szMsg = (char*)_alloca(dwDataLength + 1);
+					szMsg = (char*)_malloca(dwDataLength + 1);
 					if (dwDataLength > 0)
 						memcpy(szMsg, buf, dwDataLength);
 					szMsg[dwDataLength] = '\0';

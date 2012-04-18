@@ -1200,7 +1200,7 @@ DWORD CIcqProto::icq_sendServerContact(HANDLE hContact, DWORD dwCookie, WORD wAc
 	if (!getSetting(hContact, DBSETTING_METAINFO_TOKEN, &dbv))
 	{
 		nMetaTokenLen = dbv.cpbVal;
-		pMetaToken = (BYTE*)_alloca(dbv.cpbVal);
+		pMetaToken = (BYTE*)_malloca(dbv.cpbVal);
 		memcpy(pMetaToken, dbv.pbVal, dbv.cpbVal);
 
 		ICQFreeVariant(&dbv);
@@ -1208,7 +1208,7 @@ DWORD CIcqProto::icq_sendServerContact(HANDLE hContact, DWORD dwCookie, WORD wAc
 	if (!getSetting(hContact, DBSETTING_METAINFO_TIME, &dbv))
 	{
 		nMetaTimeLen = dbv.cpbVal;
-		pMetaTime = (BYTE*)_alloca(dbv.cpbVal);
+		pMetaTime = (BYTE*)_malloca(dbv.cpbVal);
 		for (int i = 0; i < dbv.cpbVal; i++)
 			pMetaTime[i] = dbv.pbVal[dbv.cpbVal - i - 1];
 
@@ -1218,7 +1218,7 @@ DWORD CIcqProto::icq_sendServerContact(HANDLE hContact, DWORD dwCookie, WORD wAc
 	if (!getSetting(hContact, DBSETTING_SERVLIST_DATA, &dbv))
 	{ // read additional server item data
 		nDataLen = dbv.cpbVal;
-		pData = (BYTE*)_alloca(nDataLen);
+		pData = (BYTE*)_malloca(nDataLen);
 		memcpy(pData, dbv.pbVal, nDataLen);
 
 		ICQFreeVariant(&dbv);
@@ -1250,7 +1250,7 @@ DWORD CIcqProto::icq_sendServerContact(HANDLE hContact, DWORD dwCookie, WORD wAc
 
 	// Initialize our handy data buffer
 	pBuffer.wPlace = 0;
-	pBuffer.pData = (BYTE *)_alloca(wTLVlen);
+	pBuffer.pData = (BYTE *)_malloca(wTLVlen);
 	pBuffer.wLen = wTLVlen;
 
 	if (nNickLen)
@@ -1301,7 +1301,7 @@ DWORD CIcqProto::icq_sendServerGroup(DWORD dwCookie, WORD wAction, WORD wGroupId
 
 	// Initialize our handy data buffer
 	pBuffer.wPlace = 0;
-	pBuffer.pData = (BYTE *)_alloca(wTLVlen);
+	pBuffer.pData = (BYTE *)_malloca(wTLVlen);
 	pBuffer.wLen = wTLVlen;
 
 	if (wTLVlen)
@@ -1599,7 +1599,7 @@ int CIcqProto::getCListGroupHandle(const char *szGroup)
 	}
 
 	int size = strlennull(szGroup) + 2;
-	TCHAR *tszGroup = (TCHAR*)_alloca(size * sizeof(TCHAR));
+	TCHAR *tszGroup = (TCHAR*)_malloca(size * sizeof(TCHAR));
 
 	if (utf8_to_tchar_static(pszGroup, tszGroup, size))
 		hGroup = CallService(MS_CLIST_GROUPCREATE, hParentGroup, (LPARAM)tszGroup); // 0.7+
@@ -1627,7 +1627,7 @@ int CIcqProto::getCListGroupExists(const char *szGroup)
 	if (clint && clint->version >= 1)
 	{ // we've got clist interface, use it
 		int size = strlennull(szGroup) + 2;
-		TCHAR *tszGroup = (TCHAR*)_alloca(size * sizeof(TCHAR));
+		TCHAR *tszGroup = (TCHAR*)_malloca(size * sizeof(TCHAR));
 
 		if (utf8_to_tchar_static(szGroup, tszGroup, size))
 			for (int i = 1; TRUE; i++)
@@ -1646,7 +1646,7 @@ int CIcqProto::getCListGroupExists(const char *szGroup)
 	else
 	{ // old ansi version - no other way
 		int size = strlennull(szGroup) + 2;
-		char *aszGroup = (char*)_alloca(size);
+		char *aszGroup = (char*)_malloca(size);
 
 		utf8_decode_static(szGroup, aszGroup, size);
 

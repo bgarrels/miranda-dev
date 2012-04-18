@@ -570,7 +570,7 @@ DWORD CIcqProto::icq_sendGetInfoServ(HANDLE hContact, DWORD dwUin, int bManual)
 	if (!getSetting(hContact, DBSETTING_METAINFO_TOKEN, &infoToken))
 	{ // retrieve user details using privacy token
 		cbToken = infoToken.cpbVal;
-		pToken = (BYTE*)_alloca(cbToken);
+		pToken = (BYTE*)_malloca(cbToken);
 		memcpy(pToken, infoToken.pbVal, cbToken);
 
 		ICQFreeVariant(&infoToken);
@@ -1010,7 +1010,7 @@ void CIcqProto::icq_sendAwayMsgReplyServ(DWORD dwUin, DWORD dwMsgID1, DWORD dwMs
 			else
 			{ // only v9 protocol supports UTF-8 mode messagees
 				WORD wMsgLen = strlennull(*szMsg) + 1;
-				char *szAnsiMsg = (char*)_alloca(wMsgLen);
+				char *szAnsiMsg = (char*)_malloca(wMsgLen);
 
 				utf8_decode_static(*szMsg, szAnsiMsg, wMsgLen);
 				pszMsg = szAnsiMsg;
@@ -1058,7 +1058,7 @@ void CIcqProto::icq_sendAwayMsgReplyServExt(DWORD dwUin, char *szUID, DWORD dwMs
 			else
 			{ // only v9 protocol supports UTF-8 mode messagees
 				WORD wMsgLen = strlennull(*szMsg) + 1;
-				char *szAnsiMsg = (char*)_alloca(wMsgLen);
+				char *szAnsiMsg = (char*)_malloca(wMsgLen);
 
 				utf8_decode_static(*szMsg, szAnsiMsg, wMsgLen);
 				pszMsg = szAnsiMsg;
@@ -1133,7 +1133,7 @@ DWORD CIcqProto::SearchByUin(DWORD dwUin)
 
 	// Initialize our handy data buffer
 	pBuffer.wPlace = 0;
-	pBuffer.pData = (BYTE *)_alloca(wInfoLen);
+	pBuffer.pData = (BYTE *)_malloca(wInfoLen);
 	pBuffer.wLen = wInfoLen;
 
 	// Initialize our handy data buffer
@@ -1168,7 +1168,7 @@ DWORD CIcqProto::SearchByNames(const char *pszNick, const char *pszFirstName, co
 
 	// Initialize our handy data buffer
 	pBuffer.wPlace = 0;
-	pBuffer.pData = (BYTE *)_alloca(wInfoLen);
+	pBuffer.pData = (BYTE *)_malloca(wInfoLen);
 	pBuffer.wLen = wInfoLen;
 
 	// Pack the search details
@@ -1207,7 +1207,7 @@ DWORD CIcqProto::SearchByMail(const char* pszEmail)
 		wInfoLen = wEmailLen + 7;
 
 		// Initialize our handy data buffer
-		pBuffer = (BYTE *)_alloca(wInfoLen);
+		pBuffer = (BYTE *)_malloca(wInfoLen);
 		pBufferPos = 0;
 
 		// Pack the search details
@@ -1409,7 +1409,7 @@ DWORD CIcqProto::icq_sendSMSServ(const char *szPhoneNumber, const char *szMsg)
 	szMyNick = null_strdup((char *)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)(HANDLE)NULL, 0));
 	nBufferSize = 1 + strlennull(szMyNick) + strlennull(szPhoneNumber) + strlennull(szMsg) + sizeof("<icq_sms_message><destination></destination><text></text><codepage>1252</codepage><encoding>utf8</encoding><senders_UIN>0000000000</senders_UIN><senders_name></senders_name><delivery_receipt>Yes</delivery_receipt><time>Sun, 00 Jan 0000 00:00:00 GMT</time></icq_sms_message>");
 
-	if (szBuffer = (char *)_alloca(nBufferSize))
+	if (szBuffer = (char *)_malloca(nBufferSize))
 	{
 
 		wBufferLen = null_snprintf(szBuffer, nBufferSize,
@@ -1776,7 +1776,7 @@ void CIcqProto::oft_sendFileRequest(DWORD dwUin, char *szUid, oscar_filetransfer
 {
 	icq_packet packet;
 
-	char *szCoolStr = (char*)_alloca(strlennull(ft->szDescription)+strlennull(pszFiles) + 160);
+	char *szCoolStr = (char*)_malloca(strlennull(ft->szDescription)+strlennull(pszFiles) + 160);
 	sprintf(szCoolStr, "<ICQ_COOL_FT><FS>%s</FS><S>%I64u</S><SID>1</SID><DESC>%s</DESC></ICQ_COOL_FT>", pszFiles, ft->qwTotalSize, ft->szDescription);
 	szCoolStr = MangleXml(szCoolStr, strlennull(szCoolStr));
 

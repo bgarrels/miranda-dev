@@ -356,7 +356,7 @@ void CIcqProto::handleUserOnline(BYTE *buf, WORD wLen, serverthread_info *info)
 		if (pShortTLV && (pShortTLV->wLen >= 2))
 			capLen += (pShortTLV->wLen * 8);
 
-		capBuf = (BYTE*)_alloca(capLen + BINARY_CAP_SIZE);
+		capBuf = (BYTE*)_malloca(capLen + BINARY_CAP_SIZE);
 
 		if (capLen)
 		{
@@ -716,7 +716,7 @@ void CIcqProto::parseStatusNote(DWORD dwUin, char *szUid, HANDLE hContact, oscar
 
 			if (wTextLen > 0)
 			{
-				szStatusNote = (char*)_alloca(wStatusNoteLen + 1);
+				szStatusNote = (char*)_malloca(wStatusNoteLen + 1);
 				unpackString(&buf, szStatusNote, wTextLen);
 				szStatusNote[wTextLen] = '\0';
 				buflen -= wTextLen;
@@ -734,7 +734,7 @@ void CIcqProto::parseStatusNote(DWORD dwUin, char *szUid, HANDLE hContact, oscar
 					unpackWord(&buf, &wTextLen);
 					if (wTextLen > buflen)
 						wTextLen = buflen;
-					szEncoding = (char*)_alloca(wTextLen + 1);
+					szEncoding = (char*)_malloca(wTextLen + 1);
 					unpackString(&buf, szEncoding, wTextLen);
 					szEncoding[wTextLen] = '\0';
 				}
@@ -766,7 +766,7 @@ void CIcqProto::parseStatusNote(DWORD dwUin, char *szUid, HANDLE hContact, oscar
 
 				if (nNoteLen)
 				{ // the broadcast does not support unicode
-					szNoteAnsi = (char*)_alloca(nNoteLen + 1);
+					szNoteAnsi = (char*)_malloca(nNoteLen + 1);
 					utf8_decode_static(szStatusNote, szNoteAnsi, strlennull(szStatusNote) + 1);
 				}
 				if (getContactXStatus(hContact) != 0 || !CheckContactCapabilities(hContact, CAPF_STATUS_MESSAGES))
