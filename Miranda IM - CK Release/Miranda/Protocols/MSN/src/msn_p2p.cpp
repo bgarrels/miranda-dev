@@ -302,7 +302,7 @@ void  CMsnProto::p2p_sendMsg(ThreadData* info, const char *wlid, unsigned appId,
 	unsigned fportion = msgType == 1 ? 1352 : 1202;
 	if (hdrdata.isV2Hdr()) fportion += 4;
 
-	char* buf = (char*) alloca(sizeof(sttP2PheaderV2)+ MSN_MAX_EMAIL_LEN + 
+	char* buf = (char*) _malloca(sizeof(sttP2PheaderV2)+ MSN_MAX_EMAIL_LEN + 
 		120 + fportion);
 
 	size_t offset = 0;
@@ -508,7 +508,7 @@ void  CMsnProto::p2p_sendSlp(int iKind, filetransfer *ft, MimeHeaders &pHeaders,
 	size_t cbContLen = pContent.getLength();
 	pHeaders.addULong("Content-Length", (unsigned)cbContLen + 1);
 
-	char* buf = (char*)alloca(pHeaders.getLength() + cbContLen + 512);
+	char* buf = (char*)_malloca(pHeaders.getLength() + cbContLen + 512);
 	char* p = buf;
 
 	switch (iKind) 

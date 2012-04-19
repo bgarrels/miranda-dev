@@ -297,7 +297,7 @@ HANDLE __cdecl CMsnProto::AddToListByEvent(int flags, int iContact, HANDLE hDbEv
 	if ((dbei.cbBlob = MSN_CallService(MS_DB_EVENT_GETBLOBSIZE, (WPARAM)hDbEvent, 0)) == (DWORD)(-1))
 		return NULL;
 
-	dbei.pBlob=(PBYTE) alloca(dbei.cbBlob);
+	dbei.pBlob=(PBYTE) _malloca(dbei.cbBlob);
 	if (MSN_CallService(MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&dbei))	return NULL;
 	if (strcmp(dbei.szModule, m_szModuleName)) return NULL;
 	if (dbei.eventType != EVENTTYPE_AUTHREQUEST) return NULL;
@@ -382,7 +382,7 @@ int CMsnProto::Authorize(HANDLE hDbEvent)
 	if ((int)(dbei.cbBlob = MSN_CallService(MS_DB_EVENT_GETBLOBSIZE, (WPARAM)hDbEvent, 0)) == -1)
 		return 1;
 
-	dbei.pBlob = (PBYTE)alloca(dbei.cbBlob);
+	dbei.pBlob = (PBYTE)_malloca(dbei.cbBlob);
 	if (MSN_CallService(MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&dbei))
 		return 1;
 
@@ -422,7 +422,7 @@ int CMsnProto::AuthDeny(HANDLE hDbEvent, const TCHAR* szReason)
 	if ((int)(dbei.cbBlob = MSN_CallService(MS_DB_EVENT_GETBLOBSIZE, (WPARAM)hDbEvent, 0)) == -1)
 		return 1;
 
-	dbei.pBlob = (PBYTE)alloca(dbei.cbBlob);
+	dbei.pBlob = (PBYTE)_malloca(dbei.cbBlob);
 	if (MSN_CallService(MS_DB_EVENT_GET, (WPARAM)hDbEvent, (LPARAM)&dbei))
 		return 1;
 
