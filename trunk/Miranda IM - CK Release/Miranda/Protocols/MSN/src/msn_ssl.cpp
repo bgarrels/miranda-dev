@@ -42,7 +42,7 @@ char* CMsnProto::getSslResult(char** parUrl, const char* parAuthInfo, const char
 #endif
 
 	nlhr.headersCount = 4;
-	nlhr.headers=(NETLIBHTTPHEADER*)alloca(sizeof(NETLIBHTTPHEADER) * (nlhr.headersCount + 5));
+	nlhr.headers=(NETLIBHTTPHEADER*)_malloca(sizeof(NETLIBHTTPHEADER) * (nlhr.headersCount + 5));
 	nlhr.headers[0].szName   = "User-Agent";
 	nlhr.headers[0].szValue = (char*)MSN_USER_AGENT;
 	nlhr.headers[1].szName  = "Accept";
@@ -117,7 +117,7 @@ bool CMsnProto::getMyAvatarFile(char *url, TCHAR *fname)
 	nlhr.szUrl = url;
 
 	nlhr.headersCount = 1;
-	nlhr.headers=(NETLIBHTTPHEADER*)alloca(sizeof(NETLIBHTTPHEADER) * nlhr.headersCount);
+	nlhr.headers=(NETLIBHTTPHEADER*)_malloca(sizeof(NETLIBHTTPHEADER) * nlhr.headersCount);
 	nlhr.headers[0].szName   = "User-Agent";
 	nlhr.headers[0].szValue = (char*)MSN_USER_AGENT;
 

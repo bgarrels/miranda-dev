@@ -327,13 +327,13 @@ void  CMsnProto::MSN_SendNicknameUtf(const char* nickname)
 void  CMsnProto::MSN_SetNicknameUtf(const char* nickname)
 {
 	const size_t urlNickSz = strlen(nickname) * 3 + 1;
-	char* urlNick = (char*)alloca(urlNickSz);
+	char* urlNick = (char*)_malloca(urlNickSz);
 
 	UrlEncode(nickname, urlNick, urlNickSz);
 	msnNsThread->sendPacket("PRP", "MFN %s", urlNick);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 // msn_storeAvatarThread - update our own avatar on the server
 
 void CMsnProto::msn_storeAvatarThread(void* arg)

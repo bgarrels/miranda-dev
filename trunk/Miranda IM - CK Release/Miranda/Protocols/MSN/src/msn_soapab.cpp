@@ -973,7 +973,7 @@ bool CMsnProto::MSN_ABFind(const char* szMethod, const char* szGuid, bool deltas
 				int cbCircleTicket = (int)strlen(szCircleTicket); 
 
 				int cbCircleTicketEnc = Netlib_GetBase64EncodedBufferSize(cbCircleTicket);
-				char* szCircleTicketEnc = (char*)alloca(cbCircleTicketEnc);
+				char* szCircleTicketEnc = (char*)_malloca(cbCircleTicketEnc);
 
 				NETLIBBASE64 nlb = { szCircleTicketEnc, cbCircleTicketEnc, (PBYTE)szCircleTicket, cbCircleTicket };
 				MSN_CallService(MS_NETLIB_BASE64ENCODE, 0, LPARAM(&nlb));
