@@ -1,6 +1,9 @@
 #include "headers.h"
 #include <commctrl.h>
 
+//debug reasons
+//#pragma warning( disable: 6386 )
+
 TCHAR dbname[MAX_PATH];
 
 static UINT_PTR timer_id;
@@ -125,7 +128,7 @@ int Backup(TCHAR* backup_filename)
 	TCHAR source_file[MAX_PATH] = {0}, dest_file[MAX_PATH] = {0};
 	TCHAR* backupfolder,* pathtmp,* puText;
 	HWND progress_dialog;
-	DWORD start_time = GetTickCount();
+	DWORD start_time = GetTickCount64();
 	int i;
 	size_t dest_file_len;
 
@@ -136,8 +139,12 @@ int Backup(TCHAR* backup_filename)
 		int err = 0;
 
 		SYSTEMTIME st;
-		TCHAR buffer[MAX_COMPUTERNAME_LENGTH+1];
+		TCHAR buffer[MAX_COMPUTERNAME_LENGTH + 1 ];
+		//GetComputerName (buffer , & size);
 		DWORD size = sizeof(buffer);
+		/* Buffer size is chosen large enough to contain any DNS name, not just MAX_COMPUTERNAME_LENGTH + 1 */
+		/* characters. MAX_COMPUTERNAME_LENGTH is usually less than 32, but it varies among systems, so we  */
+		/* cannot use the constant in a precompiled Windows agent, which is expected to work on any system. */
 
 		backupfolder = Utils_ReplaceVarsT(options.folder);
 		// ensure the backup folder exists (either create it or return non-zero signifying error)
