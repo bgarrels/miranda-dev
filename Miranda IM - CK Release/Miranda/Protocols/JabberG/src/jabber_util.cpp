@@ -62,7 +62,7 @@ void CJabberProto::Log( const char* fmt, ... )
 {
 	va_list vararg;
 	va_start( vararg, fmt );
-	char* str = ( char* )alloca( 32000 );
+	char* str = ( char* )_malloca( 32000 );
 	mir_vsnprintf( str, 32000, fmt, vararg );
 	va_end( vararg );
 

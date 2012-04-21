@@ -218,7 +218,7 @@ char* TMD5Auth::getChallenge( const TCHAR* challenge )
 	mir_md5_append( &ctx, ( BYTE* )tmpBuf, (int)strlen( tmpBuf ));
 	mir_md5_finish( &ctx, ( BYTE* )digest );
 
-	char* buf = (char*)alloca(8000);
+	char* buf = (char*)_malloca(8000);
 	int cbLen = mir_snprintf( buf, 8000, 
 		"username=\"%s\",realm=\"%s\",nonce=\"%s\",cnonce=\"%s\",nc=%08d,"
 		"qop=auth,digest-uri=\"xmpp/%s\",charset=utf-8,response=%08x%08x%08x%08x",
@@ -434,7 +434,7 @@ char* TPlainAuth::getInitialRequest()
 		 *passw = mir_utf8encodeT( info->password ); 
 
 	size_t size = 2 * strlen( uname ) + strlen( passw ) + strlen( info->server ) + 4;
-	char *toEncode = ( char* )alloca( size );
+	char *toEncode = ( char* )_malloca( size );
 	if ( bOld )
 		size = mir_snprintf( toEncode, size, "%s@%s%c%s%c%s", uname, info->server, 0, uname, 0, passw );
 	else

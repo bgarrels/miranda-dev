@@ -1182,7 +1182,7 @@ void CJabberProto::OnProcessMessage( HXML node, ThreadData* info )
 		szMessage = xmlGetText( bodyNode );
 	if (( subjectNode = xmlGetChild( node , "subject" )) && xmlGetText( subjectNode ) && xmlGetText( subjectNode )[0] != _T('\0')) {
 		size_t cbLen = (szMessage ? _tcslen( szMessage ) : 0) + _tcslen( xmlGetText( subjectNode ) ) + 128;
-		TCHAR* szTmp = ( TCHAR * )alloca( sizeof(TCHAR) * cbLen );
+		TCHAR* szTmp = ( TCHAR * )_malloca( sizeof(TCHAR) * cbLen );
 		szTmp[0] = _T('\0');
 		if ( szMessage )
 			_tcscat( szTmp, _T("Subject: "));
@@ -1200,7 +1200,7 @@ void CJabberProto::OnProcessMessage( HXML node, ThreadData* info )
 			const TCHAR* szJid = xmlGetAttrValue( addressNode, _T("jid"));
 			if ( szJid ) {
 				size_t cbLen = _tcslen( szMessage ) + 1000;
-				TCHAR* p = ( TCHAR* )alloca( sizeof( TCHAR ) * cbLen );
+				TCHAR* p = ( TCHAR* )_malloca( sizeof( TCHAR ) * cbLen );
 				mir_sntprintf( p, cbLen, TranslateT("Message redirected from: %s\r\n%s"), from, szMessage );
 				szMessage = p;
 				from = szJid;
@@ -1339,7 +1339,7 @@ void CJabberProto::OnProcessMessage( HXML node, ThreadData* info )
 
 			TCHAR* prolog = _T("-----BEGIN PGP MESSAGE-----\r\n\r\n");
 			TCHAR* epilog = _T("\r\n-----END PGP MESSAGE-----\r\n");
-			TCHAR* tempstring = ( TCHAR* )alloca( sizeof( TCHAR ) * ( _tcslen( prolog ) + _tcslen( xmlGetText( xNode ) ) + _tcslen( epilog ) + 3 ));
+			TCHAR* tempstring = ( TCHAR* )_malloca( sizeof( TCHAR ) * ( _tcslen( prolog ) + _tcslen( xmlGetText( xNode ) ) + _tcslen( epilog ) + 3 ));
 			_tcsncpy( tempstring, prolog, _tcslen( prolog ) + 1 );
 			_tcsncpy( tempstring + _tcslen( prolog ), xmlGetText( xNode ), _tcslen( xmlGetText( xNode ) ) + 1);
 			_tcsncpy( tempstring + _tcslen( prolog ) + _tcslen(xmlGetText( xNode ) ), epilog, _tcslen( epilog ) + 1);
@@ -1401,7 +1401,7 @@ void CJabberProto::OnProcessMessage( HXML node, ThreadData* info )
 			HXML urlNode;
 			if ( ((urlNode = xmlGetChild( xNode , "url" )) != NULL) && xmlGetText( urlNode ) && xmlGetText( urlNode )[0] != _T('\0')) {
 				size_t cbLen = (szMessage ? _tcslen( szMessage ) : 0) + _tcslen( xmlGetText( urlNode ) ) + 32;
-				TCHAR* szTmp = ( TCHAR * )alloca( sizeof(TCHAR) * cbLen );
+				TCHAR* szTmp = ( TCHAR * )_malloca( sizeof(TCHAR) * cbLen );
 				_tcscpy( szTmp, xmlGetText( urlNode ) );
 				if ( szMessage ) {
 					_tcscat( szTmp, _T("\r\n"));

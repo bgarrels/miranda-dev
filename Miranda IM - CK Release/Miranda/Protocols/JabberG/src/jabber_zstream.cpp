@@ -118,7 +118,7 @@ retry:
 
 	int len = datalen - zStreamIn.avail_out;
 	if ( DBGetContactSettingByte( NULL, "Netlib", "DumpRecv", TRUE ) == TRUE ) {
-		char* szLogBuffer = ( char* )alloca( len+32 );
+		char* szLogBuffer = ( char* )_malloca( len+32 );
 		memcpy( szLogBuffer, data, len );
 		szLogBuffer[ len ]='\0';
 		proto->Log( "(ZLIB) Data received\n%s\n===IN: %d(%d) bytes", szLogBuffer, len, zRecvDatalen );

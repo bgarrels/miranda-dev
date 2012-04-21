@@ -234,7 +234,7 @@ public:
 		if (( queryNode = xmlGetChild( m_agentRegIqNode ,  "query" )) == NULL ) return;
 		HWND hFrame = GetDlgItem( m_hwnd, IDC_FRAME );
 
-		TCHAR *str2 = ( TCHAR* )alloca( sizeof(TCHAR) * 128 );
+		TCHAR *str2 = ( TCHAR* )_malloca( sizeof(TCHAR) * 128 );
 		int id = 0;
 
 		int iqId = m_proto->SerialNext();

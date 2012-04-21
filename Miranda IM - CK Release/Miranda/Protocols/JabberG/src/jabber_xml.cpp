@@ -306,14 +306,14 @@ void XPath::ProcessPath(LookupInfo &info, bool bCreate)
 {
 	if (!info.nodeName) return;
 
-	TCHAR *nodeName = (TCHAR *)alloca(sizeof(TCHAR) * (info.nodeName.length+1));
+	TCHAR *nodeName = (TCHAR *)_malloca(sizeof(TCHAR) * (info.nodeName.length+1));
 	lstrcpyn(nodeName, info.nodeName.p, info.nodeName.length+1);
 
 	if (info.attrName && info.attrValue)
 	{
-		TCHAR *attrName = (TCHAR *)alloca(sizeof(TCHAR) * (info.attrName.length+1));
+		TCHAR *attrName = (TCHAR *)_malloca(sizeof(TCHAR) * (info.attrName.length+1));
 		lstrcpyn(attrName, info.attrName.p, info.attrName.length+1);
-		TCHAR *attrValue = (TCHAR *)alloca(sizeof(TCHAR) * (info.attrValue.length+1));
+		TCHAR *attrValue = (TCHAR *)_malloca(sizeof(TCHAR) * (info.attrValue.length+1));
 		lstrcpyn(attrValue, info.attrValue.p, info.attrValue.length+1);
 		HXML hXml = xmlGetChildByTag(m_hXml, nodeName, attrName, attrValue);
 
