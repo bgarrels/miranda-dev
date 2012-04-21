@@ -16,6 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #include "../aim.h"
 #include "../version.h"
 
@@ -59,7 +60,7 @@ static const PLUGININFOEX pluginInfo =
 	sizeof(PLUGININFOEX),
 	"AIM Protocol",
 	__VERSION_DWORD,
-	"Provides support for Aol. Instant Messenger (AIM) protocol",
+	"Provides support for AOL. Instant Messenger (AIM) protocol",
 	"Boris Krasnovskiy, Aaron Myles Landwehr",
 	"borkra@miranda-im.org",
 	"© 2008-2012 Boris Krasnovskiy, 2005-2006 Aaron Myles Landwehr",
