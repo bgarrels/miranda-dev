@@ -1,30 +1,32 @@
 /*
 Avatar History Plugin
- Copyright (C) 2006  Matthew Wild - Email: mwild1@gmail.com
+Copyright (C) 2006  Matthew Wild - Email: mwild1@gmail.com
+Copyright (C) 2012  wishmaster51@gmail.com
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "AvatarHistory.h"
 #include <commctrl.h>
 #include <prsht.h>
-#include "../../Utils/Pescuma/mir_options.h"
+
+//Pescuma stuff
+#include "mir_options.h"
 
 
-// Prototypes /////////////////////////////////////////////////////////////////////////////////////
+// Prototypes 
 
 Options opts;
 
@@ -64,7 +66,7 @@ static UINT popupsExpertControls[] = {
 };
 
 
-// Functions //////////////////////////////////////////////////////////////////////////////////////
+// Functions
 
 
 int OptInit(WPARAM wParam,LPARAM lParam)
@@ -221,7 +223,8 @@ static INT_PTR CALLBACK PopupsDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 					op.popup_use_win_colors = IsDlgButtonChecked(hwndDlg, IDC_WINCOLORS) != 0;
 					op.popup_use_default_colors = IsDlgButtonChecked(hwndDlg, IDC_DEFAULTCOLORS) != 0;
 
-					ShowTestPopup(TranslateT("Test Contact"), TranslateT("Test description"), &op);
+					HANDLE hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDFIRST,0,0);
+					ShowTestPopup(hContact,TranslateT("Test Contact"), TranslateT("Test description"), &op);
 
 					break;
 				}
