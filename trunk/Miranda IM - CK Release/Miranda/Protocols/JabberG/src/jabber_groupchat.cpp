@@ -18,9 +18,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13898 $
-Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
-Last change by : $Author: borkra $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
@@ -700,7 +700,7 @@ INT_PTR CJabberDlgGcJoin::DlgProc(UINT msg, WPARAM wParam, LPARAM lParam)
 					SendDlgItemMessage(m_hwnd, IDC_ROOM, CB_RESETCONTENT, 0, 0);
 
 					int len = GetWindowTextLength(GetDlgItem(m_hwnd, IDC_SERVER)) + 1;
-					TCHAR *server = (TCHAR *)_alloca(len * sizeof(TCHAR));
+					TCHAR *server = (TCHAR *)_malloca(len * sizeof(TCHAR));
 					GetWindowText(GetDlgItem(m_hwnd, IDC_SERVER), server, len);
 
 					if (*server)

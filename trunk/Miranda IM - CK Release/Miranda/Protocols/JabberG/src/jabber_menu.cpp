@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13905 $
-Last change on : $Date: 2011-11-06 00:31:18 +0100 (So, 06. Nov 2011) $
-Last change by : $Author: borkra $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 

@@ -1,9 +1,8 @@
 /*
-
 Jabber Protocol Plugin for Miranda IM
-Copyright ( C ) 2002-04  Santithorn Bunchua
-Copyright ( C ) 2005-11  George Hazan
-Copyright ( C ) 2007     Maxim Mluhov
+Copyright (C) 2002-2004  Santithorn Bunchua
+Copyright (C) 2007		 Maxim Mluhov
+Copyright (C) 2005-2012  George Hazan, Boris
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,13 +18,13 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 14151 $
-Last change on : $Date: 2012-03-10 17:44:03 +0100 (Sa, 10. Mrz 2012) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
-#include "jabber.h"
+#include "../jabber.h"
 #include "jabber_list.h"
 #include "jabber_iq.h"
 #include "jabber_caps.h"

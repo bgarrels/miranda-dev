@@ -20,9 +20,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
-Last change on : $Date: 2011-03-17 20:12:56 +0100 (Do, 17. Mrz 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
@@ -632,7 +632,7 @@ public:
 		if (GetDataType() == DBVT_TCHAR)
 		{
 			int len = GetWindowTextLength(m_hwnd) + 1;
-			TCHAR *buf = (TCHAR *)_alloca(sizeof(TCHAR) * len);
+			TCHAR *buf = (TCHAR *)_malloca(sizeof(TCHAR) * len);
 			GetWindowText(m_hwnd, buf, len);
 			SaveText(buf);
 		}
@@ -725,7 +725,7 @@ public:
 		if (GetDataType() == DBVT_TCHAR)
 		{
 			int len = GetWindowTextLength(m_hwnd) + 1;
-			TCHAR *buf = (TCHAR *)_alloca(sizeof(TCHAR) * len);
+			TCHAR *buf = (TCHAR *)_malloca(sizeof(TCHAR) * len);
 			GetWindowText(m_hwnd, buf, len);
 			SaveText(buf);
 		}

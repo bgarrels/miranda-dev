@@ -1,9 +1,8 @@
 /*
-
 Jabber Protocol Plugin for Miranda IM
-Copyright ( C ) 2002-04  Santithorn Bunchua
-Copyright ( C ) 2005-12  George Hazan
-Copyright ( C ) 2007     Maxim Mluhov
+Copyright (C) 2002-2004  Santithorn Bunchua
+Copyright (C) 2007		 Maxim Mluhov
+Copyright (C) 2005-2012  George Hazan, Boris
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,9 +18,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 14134 $
-Last change on : $Date: 2012-03-08 03:11:39 +0100 (Do, 08. Mrz 2012) $
-Last change by : $Author: borkra $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
@@ -1734,9 +1733,9 @@ void CJabberProto::OnProcessPresence( HXML node, ThreadData* info )
 						Log( "AvatarXVcard deleted" );
 						JSetStringT( hContact, "AvatarHash", xmlGetText( xNode ) );
 						hasAvatar = true;
-						DBVARIANT dbv = {0};
+						DBVARIANT dbv;
 						int result = JGetStringT( hContact, "AvatarSaved", &dbv );
-						if ( !result || lstrcmp( dbv.ptszVal, xmlGetText( xNode ) )) {
+						if ( result || lstrcmp( dbv.ptszVal, xmlGetText( xNode ) )) {
 							Log( "Avatar was changed" );
 							JSendBroadcast( hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, NULL );
 						} else Log( "Not broadcasting avatar changed" );
@@ -1756,9 +1755,9 @@ void CJabberProto::OnProcessPresence( HXML node, ThreadData* info )
 								Log( "AvatarXVcard set" );
 								JSetStringT( hContact, "AvatarHash", txt );
 								hasAvatar = true;
-								DBVARIANT dbv = {0};
+								DBVARIANT dbv;
 								int result = JGetStringT( hContact, "AvatarSaved", &dbv );
-								if ( !result || lstrcmp( dbv.ptszVal, xmlGetText( xNode ) )) {
+								if ( result || lstrcmp( dbv.ptszVal, txt )) {
 									Log( "Avatar was changed. Using vcard-temp:x:update" );
 									JSendBroadcast( hContact, ACKTYPE_AVATAR, ACKRESULT_STATUS, NULL, NULL );
 								}

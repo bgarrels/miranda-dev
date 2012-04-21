@@ -20,9 +20,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13869 $
-Last change on : $Date: 2011-09-16 00:42:09 +0200 (Fr, 16. Sep 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
@@ -1195,7 +1195,7 @@ void CJabberDlgPrivacyLists::DrawRulesList(LPDRAWITEMSTRUCT lpdis)
 		rc.left += 25;
 
 		int len = SendDlgItemMessage(m_hwnd, lpdis->CtlID, LB_GETTEXTLEN, lpdis->itemID, 0) + 1;
-		TCHAR *str = (TCHAR *)_alloca(len * sizeof(TCHAR));
+		TCHAR *str = (TCHAR *)_malloca(len * sizeof(TCHAR));
 		SendDlgItemMessage(m_hwnd, lpdis->CtlID, LB_GETTEXT, lpdis->itemID, (LPARAM)str);
 		DrawNextRulePart(lpdis->hDC, clLine1, str, &rc);
 	}
@@ -1787,7 +1787,7 @@ void CJabberDlgPrivacyLists::btnAdvanced_OnClick(CCtrlButton *)
 void CJabberDlgPrivacyLists::btnAddJid_OnClick(CCtrlButton *)
 {
 	int len = GetWindowTextLength(GetDlgItem(m_hwnd, IDC_NEWJID))+1;
-	TCHAR *buf = (TCHAR *)_alloca(sizeof(TCHAR) * len);
+	TCHAR *buf = (TCHAR *)_malloca(sizeof(TCHAR) * len);
 	GetWindowText(GetDlgItem(m_hwnd, IDC_NEWJID), buf, len);
 	SetWindowText(GetDlgItem(m_hwnd, IDC_NEWJID), _T(""));
 	CListAddContact(GetDlgItem(m_hwnd, IDC_CLIST), buf);

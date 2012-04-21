@@ -20,9 +20,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
-Last change on : $Date: 2011-03-17 20:12:56 +0100 (Do, 17. Mrz 2011) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
@@ -351,7 +351,7 @@ static void sttJabberConsoleRebuildStrings(CJabberProto* ppro, HWND hwndCombo)
 	JABBER_LIST_ITEM *item = NULL;
 
 	int len = GetWindowTextLength(hwndCombo) + 1;
-	TCHAR *buf = (TCHAR *)_alloca(len * sizeof(TCHAR));
+	TCHAR *buf = (TCHAR *)_malloca(len * sizeof(TCHAR));
 	GetWindowText(hwndCombo, buf, len);
 
 	SendMessage(hwndCombo, CB_RESETCONTENT, 0, 0);
@@ -684,7 +684,7 @@ INT_PTR CJabberDlgConsole::DlgProc(UINT msg, WPARAM wParam, LPARAM lParam)
 						EnterCriticalSection(&m_proto->m_filterInfo.csPatternLock);
 						if (len > SIZEOF(m_proto->m_filterInfo.pattern))
 						{
-							TCHAR *buf = (TCHAR *)_alloca(len * sizeof(TCHAR));
+							TCHAR *buf = (TCHAR *)_malloca(len * sizeof(TCHAR));
 							SendDlgItemMessage(m_hwnd, IDC_CB_FILTER, CB_GETLBTEXT, idx, (LPARAM)buf);
 							lstrcpyn(m_proto->m_filterInfo.pattern, buf, SIZEOF(m_proto->m_filterInfo.pattern));
 						} else

@@ -18,9 +18,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13898 $
-Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
-Last change by : $Author: borkra $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
@@ -75,7 +75,7 @@ static void sttFillJidList(HWND hwndDlg)
 	if (GetWindowLongPtr(GetDlgItem(hwndDlg, IDC_FILTER), GWLP_USERDATA))
 	{
 		int filterLength = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_FILTER)) + 1;
-		filter = (TCHAR *)_alloca(filterLength * sizeof(TCHAR));
+		filter = (TCHAR *)_malloca(filterLength * sizeof(TCHAR));
 		GetDlgItemText(hwndDlg, IDC_FILTER, filter, filterLength);
 	}
 

@@ -2,8 +2,8 @@
 
 Jabber Protocol Plugin for Miranda IM
 Copyright ( C ) 2002-04  Santithorn Bunchua
-Copyright ( C ) 2005-11  George Hazan
 Copyright ( C ) 2007     Artem Shpynov
+Copyright ( C ) 2005-12  George Hazan, Boris
 
 Module implements an XMPP protocol extension for reporting and executing ad-hoc, 
 human-oriented commands according to XEP-0050: Ad-Hoc Commands
@@ -23,9 +23,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13898 $
-Last change on : $Date: 2011-11-02 04:38:43 +0100 (Mi, 02. Nov 2011) $
-Last change by : $Author: borkra $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
