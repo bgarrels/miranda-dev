@@ -13,18 +13,18 @@
       <UniqueIdentifier>{9b408743-a629-4fd3-b59c-a46910ddb9ef}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-    <Filter Include="docs">
-      <UniqueIdentifier>{e7d7d6b2-c6fb-4a21-a069-29cbea13382e}</UniqueIdentifier>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{ac0e8a95-923c-43f4-ae65-8261384d51c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\jabber.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\jabber_adhoc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_agent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\jabber.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_bookmarks.cpp">
@@ -36,13 +36,13 @@
     <ClCompile Include="src\jabber_caps.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\jabber_captcha.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\jabber_chat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\jabber_captcha.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_disco.cpp">
@@ -51,31 +51,28 @@
     <ClCompile Include="src\jabber_events.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\jabber_file.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\jabber_form.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\jabber_ft.cpp">
+    <ClCompile Include="src\jabber_file.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_groupchat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\jabber_ibb.cpp">
+    <ClCompile Include="src\jabber_ft.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_icolib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\jabber_iq.cpp">
+    <ClCompile Include="src\jabber_ibb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_iq_handlers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\jabber_iqid.cpp">
+    <ClCompile Include="src\jabber_iq.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_iqid_muc.cpp">
@@ -87,19 +84,22 @@
     <ClCompile Include="src\jabber_list.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\jabber_iqid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\jabber_message_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\jabber_menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_message_handlers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\jabber_message_manager.cpp">
+    <ClCompile Include="src\jabber_notes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_misc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\jabber_notes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_opt.cpp">
@@ -108,10 +108,10 @@
     <ClCompile Include="src\jabber_opttree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\jabber_password.cpp">
+    <ClCompile Include="src\jabber_presence_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\jabber_presence_manager.cpp">
+    <ClCompile Include="src\jabber_password.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_privacy.cpp">
@@ -141,12 +141,6 @@
     <ClCompile Include="src\jabber_svc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\jabber_thread.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\jabber_treelist.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\jabber_userinfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -156,10 +150,16 @@
     <ClCompile Include="src\jabber_vcard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\jabber_ws.cpp">
+    <ClCompile Include="src\jabber_thread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\jabber_treelist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_xml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\jabber_ws.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\jabber_xstatus.cpp">
@@ -209,10 +209,10 @@
     <ClInclude Include="src\jabber_list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\jabber_message_manager.h">
+    <ClInclude Include="src\jabber_notes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\jabber_notes.h">
+    <ClInclude Include="src\jabber_message_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\jabber_opttree.h">
@@ -418,26 +418,11 @@
     <None Include="icos\weather.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="docs\copyright.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\license.txt">
-      <Filter>docs</Filter>
+    <None Include="docs\changelog_jabber.txt">
+      <Filter>Docs</Filter>
     </None>
     <None Include="docs\readme_jabber.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\todo_jabber.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\translation_jabber.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\changelog_jabber.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\copying.txt">
-      <Filter>docs</Filter>
+      <Filter>Docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -447,5 +432,22 @@
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\todo_jabber.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\translation_jabber.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\copyright.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\license.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\copying.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

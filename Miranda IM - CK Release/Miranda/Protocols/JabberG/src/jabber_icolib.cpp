@@ -20,9 +20,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13452 $
+Revision       : $Revision$
 Last change on : $Date: 2006-07-13 16:11:29 +0400
-Last change by : $Author: george.hazan $
+Last change by : $Author$
 
 */
 

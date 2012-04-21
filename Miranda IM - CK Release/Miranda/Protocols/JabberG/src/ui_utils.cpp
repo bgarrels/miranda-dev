@@ -17,9 +17,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 13134 $
-Last change on : $Date: 2010-11-17 15:53:21 +0100 (Mi, 17. Nov 2010) $
-Last change by : $Author: george.hazan $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
@@ -335,7 +335,7 @@ TCHAR* CCtrlCombo::GetItemText(int index)
 
 TCHAR* CCtrlCombo::GetItemText(int index, TCHAR *buf, int size)
 {
-	TCHAR *result = (TCHAR *)_alloca(sizeof(TCHAR) * (SendMessage(m_hwnd, CB_GETLBTEXTLEN, index, 0) + 1));
+	TCHAR *result = (TCHAR *)_malloca(sizeof(TCHAR) * (SendMessage(m_hwnd, CB_GETLBTEXTLEN, index, 0) + 1));
 	SendMessage(m_hwnd, CB_GETLBTEXT, index, (LPARAM)result);
 	lstrcpyn(buf, result, size);
 	return buf;
@@ -423,7 +423,7 @@ TCHAR* CCtrlListBox::GetItemText(int index)
 
 TCHAR* CCtrlListBox::GetItemText(int index, TCHAR *buf, int size)
 {
-	TCHAR *result = (TCHAR *)_alloca(sizeof(TCHAR) * (SendMessage(m_hwnd, LB_GETTEXTLEN, index, 0) + 1));
+	TCHAR *result = (TCHAR *)_malloca(sizeof(TCHAR) * (SendMessage(m_hwnd, LB_GETTEXTLEN, index, 0) + 1));
 	SendMessage(m_hwnd, LB_GETTEXT, index, (LPARAM)result);
 	lstrcpyn(buf, result, size);
 	return buf;
@@ -2365,7 +2365,7 @@ char* CCtrlBase::GetTextA(char *buf, int size)
 int CCtrlBase::GetInt()
 {
 	int length = GetWindowTextLength(m_hwnd) + 1;
-	TCHAR *result = (TCHAR *)_alloca(length * sizeof(TCHAR));
+	TCHAR *result = (TCHAR *)_malloca(length * sizeof(TCHAR));
 	GetWindowText(m_hwnd, result, length);
 	return _ttoi(result);
 }
@@ -2551,14 +2551,14 @@ void CProtoIntDlgBase::UpdateProtoTitle(TCHAR *szText)
 	} else
 	{
 		curLength = GetWindowTextLength(m_hwnd) + 1;
-		curText = (TCHAR *)_alloca(curLength * sizeof(TCHAR));
+		curText = (TCHAR *)_malloca(curLength * sizeof(TCHAR));
 		GetWindowText(m_hwnd, curText, curLength);
 	}
 
 	if (!_tcsstr(curText, m_proto_interface->m_tszUserName))
 	{
 		int length = curLength + lstrlen(m_proto_interface->m_tszUserName) + 256;
-		TCHAR *text = (TCHAR *)_alloca(length * sizeof(TCHAR));
+		TCHAR *text = (TCHAR *)_malloca(length * sizeof(TCHAR));
 		mir_sntprintf(text, length, _T("%s [%s: %s]"), curText, TranslateT("Account"), m_proto_interface->m_tszUserName);
 		SetWindowText(m_hwnd, text);
 	}

@@ -19,9 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Revision       : $Revision: 6992 $
-Last change on : $Date: 2007-12-29 03:47:51 +0300 (Сб, 29 дек 2007) $
-Last change by : $Author: m_mluhov $
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 */
 
