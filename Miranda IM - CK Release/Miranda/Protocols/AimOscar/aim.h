@@ -16,6 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
+
 #ifndef AIM_H
 #define AIM_H
 
@@ -35,11 +36,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <sys/stat.h>
 #include <time.h>
 
-//Miranda IM includes
-#ifdef _MSC_VER
-#pragma warning( disable: 4100 )
-#endif
-
+//Miranda stuff
 #include <newpluginapi.h>
 #include <m_avatars.h>
 #include <m_button.h>
@@ -215,6 +212,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 //Supported Clients
 #define CLIENT_UNKNOWN "?"
+#define CLIENT_ADRENDO "ADRENDO" //no final icos yet
 #define CLIENT_AIM5 "AIM 5.x"
 #define CLIENT_AIM4 "AIM 4.x"
 #define CLIENT_AIMEXPRESS5 "AIM Express 5"
