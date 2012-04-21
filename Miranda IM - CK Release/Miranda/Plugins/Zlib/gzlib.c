@@ -177,7 +177,7 @@ local gzFile gz_open(path, fd, mode)
 
     /* open the file with the appropriate mode (or just use fd) */
     state->fd = fd != -1 ? fd :
-        open(path,
+        _open(path,
 #ifdef O_LARGEFILE
             O_LARGEFILE |
 #endif
