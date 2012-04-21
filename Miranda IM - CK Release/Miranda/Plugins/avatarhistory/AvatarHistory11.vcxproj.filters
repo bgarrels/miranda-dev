@@ -2,14 +2,17 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="src\AvatarHistory.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\m_avatarhistory.h">
+    <ClInclude Include="SDK\m_historyevents.h">
       <Filter>SDK</Filter>
     </ClInclude>
     <ClInclude Include="src\popup.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AvatarHistory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\m_avatarhist.h">
+      <Filter>SDK</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -30,11 +33,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="src\AvatarHistory.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Docs">
       <UniqueIdentifier>{a4a71b18-38b6-41bc-8ce8-b71881835752}</UniqueIdentifier>
     </Filter>
@@ -46,6 +44,9 @@
     </Filter>
     <Filter Include="SDK">
       <UniqueIdentifier>{b0ae4c26-6842-4000-a7ed-aa6dbc3fbfd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{12183d7d-8894-4790-a300-c5588be64913}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,5 +73,10 @@
     <Image Include="Icons\AvatarOverlay.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AvatarHistory.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

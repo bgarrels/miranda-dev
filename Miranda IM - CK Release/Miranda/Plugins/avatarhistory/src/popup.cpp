@@ -17,12 +17,9 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.  
 */
 
-
 #include "AvatarHistory.h"
 
-
-
-// Prototypes /////////////////////////////////////////////////////////////////////////////////////
+// Prototypes
 
 #define WMU_ACTION	(WM_USER + 1)
 
@@ -37,8 +34,7 @@ static LRESULT CALLBACK DumbPopupDlgProc(HWND hWnd, UINT message, WPARAM wParam,
 
 
 
-// Functions //////////////////////////////////////////////////////////////////////////////////////
-
+// Functions 
 
 // Initializations needed by popups
 void InitPopups()
@@ -65,9 +61,9 @@ void ShowErrPopup(const TCHAR *description, const TCHAR *title)
 }
 
 
-void ShowTestPopup(const TCHAR *title, const TCHAR *description, const Options *op)
+void ShowTestPopup(HANDLE hContact,const TCHAR *title, const TCHAR *description, const Options *op)
 {
-	ShowPopupEx(NULL, title, description, NULL, POPUP_TYPE_TEST, op);
+	ShowPopupEx(hContact, title, description, NULL, POPUP_TYPE_TEST, op);
 }
 
 

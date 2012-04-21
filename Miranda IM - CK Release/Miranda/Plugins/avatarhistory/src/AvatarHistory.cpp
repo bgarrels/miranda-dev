@@ -1,29 +1,24 @@
 /*
 Avatar History Plugin
----------
+Copyright (C) 2006  Matthew Wild - Email: mwild1@gmail.com
+Copyright (C) 2012  wishmaster51@gmail.com
 
- This plugin uses the event provided by Avatar Service to 
- automatically back up contacts' avatars when they change.
- Copyright (C) 2006  Matthew Wild - Email: mwild1@gmail.com
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-#include "AvatarHistory.h"
 
-// #define DBGPOPUPS
+#include "AvatarHistory.h"
 
 HINSTANCE hInst;
 PLUGINLINK *pluginLink;
@@ -221,8 +216,9 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 
 	hHooks[0] = HookEvent(ME_SYSTEM_MODULESLOADED,ModulesLoaded);
 	hHooks[1] = HookEvent(ME_SYSTEM_PRESHUTDOWN, PreShutdown);
-	hHooks[2] = HookEvent(ME_AV_CONTACTAVATARCHANGED, AvatarChanged);
 	hHooks[3] = HookEvent(ME_OPT_INITIALISE, OptInit);
+	hHooks[4] = HookEvent(ME_SKIN2_ICONSCHANGED, IcoLibIconsChanged);
+	hHooks[5] = HookEvent(ME_CLIST_PREBUILDCONTACTMENU, PreBuildContactMenu);
 
 	hServices[0] = CreateServiceFunction(MS_AVATARHISTORY_ENABLED, IsEnabled);
 	hServices[1] = CreateServiceFunction(MS_AVATARHISTORY_GET_CACHED_AVATAR, GetCachedAvatar);
@@ -292,6 +288,8 @@ static int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 			GetHistoryEventText, templates, MAX_REGS(templates));
 		DestroyIcon(hIcon);
 	}
+	
+	hHooks[2] = HookEvent(ME_AV_CONTACTAVATARCHANGED, AvatarChanged);
 
 	return 0;
 }
@@ -489,52 +487,39 @@ static int AvatarChanged(WPARAM wParam, LPARAM lParam)
 		return 0;
 	}
 
-	BOOL removed = (avatar == NULL && DBGetContactSettingWord(hContact, "ContactPhoto", "Format", 0) == 0);
+	DBVARIANT dbvOldHash = {0};
+	bool ret = (DBGetContactSettingTString(hContact,MODULE_NAME,"AvatarHash",&dbvOldHash) == 0);
 
-	TCHAR oldhash[1024] = _T("");
-	TCHAR * ret = MyDBGetStringT(hContact, MODULE_NAME, "AvatarHash", oldhash, sizeof(oldhash));
-
-	BOOL first_time = (ret == NULL);
-
-	if(
-		(avatar != NULL && !_tcscmp(oldhash, avatar->hash)) // Changed it
-		|| (avatar == NULL && oldhash[0] == '\0') // Removed it
-		)
+	if (avatar == NULL)
 	{
-		ShowDebugPopup(hContact, _T("AVH Debug"), _T("Hashes are the same... skipping"));
-		return 0;
-	}
-
-	if (removed)
-	{
-		SkinPlaySound("avatar_removed");
-		DBWriteContactSettingTString(hContact, MODULE_NAME, "AvatarHash", _T(""));
-
-		if (!first_time && ContactEnabled(hContact, "AvatarPopups", AVH_DEF_AVPOPUPS) && opts.popup_show_removed)
-			ShowPopup(hContact, NULL, opts.popup_removed);
-
-		if (ContactEnabled(hContact, "LogToHistory", AVH_DEF_LOGTOHISTORY))
-			HistoryEvents_AddToHistorySimple(hContact, EVENTTYPE_AVATAR_CHANGE, 1, DBEF_READ);
-	}
-	else if (avatar == NULL)
-	{
-		if (!_tcscmp(oldhash, _T("-")))
+		if (!ret || !_tcscmp(dbvOldHash.ptszVal, _T("-")))
 		{
-			ShowDebugPopup(hContact, _T("AVH Debug"), _T("Changed from a flash avatar to a flash avatar... skipping"));
+			//avoid duplicate "removed avatar" notifications
+			//do not notify on an empty profile
+			ShowDebugPopup(hContact, _T("AVH Debug"), _T("Removed avatar, no avatar before...skipping"));
+			DBFreeVariant(&dbvOldHash);
 			return 0;
 		}
+		SkinPlaySound("avatar_removed");
 
 		// Is a flash avatar or avs could not load it
 		DBWriteContactSettingTString(hContact, MODULE_NAME, "AvatarHash", _T("-"));
 
-		if (!first_time && ContactEnabled(hContact, "AvatarPopups", AVH_DEF_AVPOPUPS) && opts.popup_show_changed)
+		if (ContactEnabled(hContact, "AvatarPopups", AVH_DEF_AVPOPUPS) && opts.popup_show_changed)
 			ShowPopup(hContact, NULL, opts.popup_changed);
 
 		if (ContactEnabled(hContact, "LogToHistory", AVH_DEF_LOGTOHISTORY))
-			HistoryEvents_AddToHistorySimple(hContact, EVENTTYPE_AVATAR_CHANGE, 0, DBEF_READ);
+			HistoryEvents_AddToHistorySimple(hContact, EVENTTYPE_AVATAR_CHANGE, 1, DBEF_READ);
 	}
 	else
 	{
+		if(ret && !_tcscmp(dbvOldHash.ptszVal, avatar->hash)) 
+		{
+			// same avatar hash, skipping
+			ShowDebugPopup(hContact, _T("AVH Debug"), _T("Hashes are the same... skipping"));
+			DBFreeVariant(&dbvOldHash);
+			return 0;
+		}
 		SkinPlaySound("avatar_changed");
 		DBWriteContactSettingTString(hContact, "AvatarHistory", "AvatarHash", avatar->hash);
 
@@ -615,7 +600,7 @@ static int AvatarChanged(WPARAM wParam, LPARAM lParam)
 		}
 
 
-		if (!first_time && ContactEnabled(hContact, "AvatarPopups", AVH_DEF_AVPOPUPS) && opts.popup_show_changed)
+		if (ContactEnabled(hContact, "AvatarPopups", AVH_DEF_AVPOPUPS) && opts.popup_show_changed)
 			ShowPopup(hContact, NULL, opts.popup_changed);
 
 		if (ContactEnabled(hContact, "LogToHistory", AVH_DEF_LOGTOHISTORY))
@@ -805,10 +790,6 @@ TCHAR * GetOldStyleAvatarName(TCHAR *fn, HANDLE hContact)
 	ShowDebugPopup(hContact,_T("AVH Debug: GetOldStyleAvatarName"),fn);
 	return fn;
 }
-
-
-#include <ShObjIdl.h>
-#include <ShlGuid.h>
 
 BOOL CreateShortcut(TCHAR *file, TCHAR *shortcut)
 {
