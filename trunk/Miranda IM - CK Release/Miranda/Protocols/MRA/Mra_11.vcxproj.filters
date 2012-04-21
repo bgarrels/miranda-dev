@@ -9,9 +9,6 @@
       <UniqueIdentifier>{fb50d277-d7b3-44a3-9330-fa8332ee1975}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
     </Filter>
-    <Filter Include="Header Files\Functions">
-      <UniqueIdentifier>{b86b234f-e9db-45b3-97ed-47c15ca4bb75}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{482639cd-fb25-4cfb-9e55-4a299271787c}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
@@ -19,7 +16,13 @@
     <Filter Include="docs">
       <UniqueIdentifier>{2bfebbfa-f8bc-4b1c-8c9a-18d88cf65b13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Functions\zlib">
+    <Filter Include="SDK">
+      <UniqueIdentifier>{e3260d4a-bc5a-4fd3-a751-ca0880a8fcba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SDK Functions">
+      <UniqueIdentifier>{b86b234f-e9db-45b3-97ed-47c15ca4bb75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SDK Functions\zlib">
       <UniqueIdentifier>{ab9706b5-7422-422d-ba4c-37692fb3282c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -164,64 +167,64 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\Base64.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\BuffToLowerCase.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\SHA1.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\SocketFunctions.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\StrHexToNum.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\StrToNum.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\timefuncs.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\DebugFunctions.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\FIFOMT.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\InterlockedFunctions.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\InternetTime.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\ListMT.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\MemoryCompare.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\MemoryFind.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\MemoryFindByte.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\MemoryReplace.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\RC4.h">
-      <Filter>Header Files\Functions</Filter>
+      <Filter>Header Files\SDK Functions</Filter>
     </ClInclude>
     <ClInclude Include="Docs\MraPlaces.h">
       <Filter>docs</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\zconf.h">
-      <Filter>Header Files\Functions\zlib</Filter>
+      <Filter>Header Files\SDK Functions\zlib</Filter>
     </ClInclude>
     <ClInclude Include="Sdk\zlib.h">
-      <Filter>Header Files\Functions\zlib</Filter>
+      <Filter>Header Files\SDK Functions\zlib</Filter>
     </ClInclude>
     <ClInclude Include="src\Mra.h">
       <Filter>Header Files</Filter>
