@@ -6,17 +6,19 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+/*
 #define _CRT_SECURE_NO_WARNINGS
 
 #if defined( UNICODE ) && !defined( _UNICODE )
 	#define _UNICODE
-#endif
+#endif */
 
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
-#define WINVER       0x0502
-#define _WIN32_WINNT 0x0502
+#define WINVER       0x0600
+#define _WIN32_WINNT 0x0600
 
 #define MIRANDA_VER 0x0A00
+
 
 #include <windows.h>
 #include <wincrypt.h>
@@ -32,7 +34,7 @@
 #include <commctrl.h>
 #include <uxtheme.h>
 
-// miranda API
+// Miranda API
 #include <newpluginapi.h>
 #include <m_system.h>
 #include <m_protocols.h>

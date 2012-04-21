@@ -542,7 +542,6 @@ extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 
 	mir_getMMI( &mmi );
 	mir_getUTFI( &utfi );
-	mir_getMD5I( &md5i );
 	mir_getLP( &pluginInfoEx );
 
 	// Get module name from DLL file name
