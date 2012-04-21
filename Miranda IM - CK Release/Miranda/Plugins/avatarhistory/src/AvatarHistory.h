@@ -56,12 +56,14 @@ extern DWORD mirVer;
 extern HANDLE hAvatarWindowsList;
 
 #include "../resource.h"
+
+//SDK
 #include "m_avatarhist.h"
+#include "m_historyevents.h"
 
 //Pescuma stuff
 #include "mir_buffer.h"
 
-#include "m_historyevents.h"
 
 #define MODULE_NAME "AvatarHistory"
 #define AVH_DEF_POPUPFG 0

@@ -152,7 +152,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../../include;../../ExternalAPI</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Utils/Pescuma;../../include;../../ExternalAPI;SDK</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;UNICODE;_USRDLL;AvatarHistory_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformation>true</BrowseInformation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -188,7 +188,7 @@
       <Optimization>MinSpace</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>../../include;../../ExternalAPI</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Utils/Pescuma;../../include;../../ExternalAPI;SDK</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;UNICODE;_USRDLL;AvatarHistory_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
@@ -225,7 +225,7 @@
       <Optimization>MinSpace</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>../../include;../../ExternalAPI</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Utils/Pescuma;../../include;../../ExternalAPI;SDK</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN64;NDEBUG;_WINDOWS;UNICODE;_USRDLL;AvatarHistory_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
