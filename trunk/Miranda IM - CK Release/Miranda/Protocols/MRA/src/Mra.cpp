@@ -1,7 +1,5 @@
 #include "Mra.h"
-
 #ifndef  _WIN64
-
 
 //initializes the plugin-specific translation context v0.10.0+
 //wParam=pointer to the langpack handle
@@ -75,8 +73,8 @@ esp_okay:
 
 
 
- /*//_alloca_probe_16 : 16 byte aligned alloca
- extern "C" void _alloca_probe_16()
+ /*//_malloca_probe_16 : 16 byte aligned alloca
+ extern "C" void _malloca_probe_16()
  {
 	__asm 
 	{
@@ -93,7 +91,7 @@ esp_okay:
  }
  
  //alloca_8: 8 byte aligned alloca
- extern "C" void _alloca_probe_8()
+ extern "C" void _malloca_probe_8()
  {
 	__asm 
 	{
@@ -418,6 +416,7 @@ int hLangpack = 0;
 /////////////////////////////////////////////////////////////////////////////////////////
 // MirandaPluginInfoEx - returns the extended information about a plugin
 
+PLUGINLINK *pluginLink;		//!< Link between Miranda and this plugin
 PLUGININFOEX pluginInfoEx = {
 	sizeof(PLUGININFOEX),
 	PROTOCOL_DISPLAY_NAME_ORIGA,
@@ -425,7 +424,7 @@ PLUGININFOEX pluginInfoEx = {
 	"Provides support for Mail.ru agent Instant Messenger protocol. [Built: "__DATE__" "__TIME__"]",
 	"Rozhuk Ivan",
 	"Rozhuk_I@mail.ru",
-	"© 2006-2011 Rozhuk Ivan",
+	"© 2006-2012 Rozhuk Ivan",
 	"http://addons.miranda-im.org/details.php?action=viewfile&id=2544",
 	UNICODE_AWARE,		//not transient
 	0,		//doesn't replace anything built-in
@@ -532,18 +531,19 @@ extern "C" __declspec(dllexport) const MUUID* MirandaPluginInterfaces()
 	return(interfaces);
 }
 
-
 extern "C" __declspec(dllexport) int Load(PLUGINLINK *link)
 {
+	pluginLink = link;
 	SIZE_T dwBuffLen;
 	WCHAR szBuff[MAX_FILEPATH];
 	LPSTR lpszFullFileName=(LPSTR)szBuff;
 	LPWSTR lpwszFileName;
 	PROTOCOLDESCRIPTOR pd={0};
 
-	pluginLink=link;
-	mir_getMMI(&mmi);
-
+	mir_getMMI( &mmi );
+	mir_getUTFI( &utfi );
+	mir_getMD5I( &md5i );
+	mir_getLP( &pluginInfoEx );
 
 	// Get module name from DLL file name
 	if (GetModuleFileName(masMraSettings.hInstance,szBuff,MAX_FILEPATH))
