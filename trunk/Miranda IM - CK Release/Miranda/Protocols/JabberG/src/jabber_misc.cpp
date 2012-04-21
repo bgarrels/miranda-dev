@@ -270,7 +270,7 @@ void CJabberProto::InitCustomFolders( void )
 void CJabberProto::GetAvatarFileName( HANDLE hContact, TCHAR* pszDest, size_t cbLen )
 {
 	size_t tPathLen;
-	TCHAR* path = ( TCHAR* )alloca( cbLen * sizeof( TCHAR ));
+	TCHAR* path = ( TCHAR* )_malloca( cbLen * sizeof( TCHAR ));
 
 	InitCustomFolders();
 

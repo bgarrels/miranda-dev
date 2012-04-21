@@ -441,7 +441,7 @@ HANDLE __cdecl CJabberProto::AddToListByEvent( int flags, int /*iContact*/, HAND
 	dbei.cbSize = sizeof( dbei );
 	if (( dbei.cbBlob = JCallService( MS_DB_EVENT_GETBLOBSIZE, ( WPARAM )hDbEvent, 0 )) == ( DWORD )( -1 ))
 		return NULL;
-	if (( dbei.pBlob=( PBYTE ) alloca( dbei.cbBlob )) == NULL )
+	if (( dbei.pBlob=( PBYTE ) _malloca( dbei.cbBlob )) == NULL )
 		return NULL;
 	if ( JCallService( MS_DB_EVENT_GET, ( WPARAM )hDbEvent, ( LPARAM )&dbei ))
 		return NULL;
@@ -484,7 +484,7 @@ int CJabberProto::Authorize( HANDLE hContact )
 	dbei.cbSize = sizeof( dbei );
 	if (( dbei.cbBlob=JCallService( MS_DB_EVENT_GETBLOBSIZE, ( WPARAM )hContact, 0 )) == ( DWORD )( -1 ))
 		return 1;
-	if (( dbei.pBlob=( PBYTE )alloca( dbei.cbBlob )) == NULL )
+	if (( dbei.pBlob=( PBYTE )_malloca( dbei.cbBlob )) == NULL )
 		return 1;
 	if ( JCallService( MS_DB_EVENT_GET, ( WPARAM )hContact, ( LPARAM )&dbei ))
 		return 1;
@@ -1201,7 +1201,7 @@ int __cdecl CJabberProto::SendMsg( HANDLE hContact, int flags, const char* pszSr
 
 	if ( !strncmp( pszSrc, PGP_PROLOG, strlen( PGP_PROLOG ))) {
 		const char* szEnd = strstr( pszSrc, PGP_EPILOG );
-		char* tempstring = ( char* )alloca( strlen( pszSrc ) + 1 );
+		char* tempstring = ( char* )_malloca( strlen( pszSrc ) + 1 );
 		size_t nStrippedLength = strlen(pszSrc) - strlen(PGP_PROLOG) - (szEnd ? strlen(szEnd) : 0);
 		strncpy( tempstring, pszSrc + strlen(PGP_PROLOG), nStrippedLength );
 		tempstring[ nStrippedLength ] = 0;
@@ -1424,7 +1424,7 @@ void __cdecl CJabberProto::GetAwayMsgThread( void* hContact )
 						len += ( _tcslen( r[i].resourceName ) + _tcslen( r[i].statusMessage ) + 8 );
 				}	}
 
-				TCHAR* str = ( TCHAR* )alloca( sizeof( TCHAR )*( len+1 ));
+				TCHAR* str = ( TCHAR* )_malloca( sizeof( TCHAR )*( len+1 ));
 				str[0] = str[len] = '\0';
 				for ( i=0; i < item->resourceCount; i++ ) {
 					if ( r[i].statusMessage ) {

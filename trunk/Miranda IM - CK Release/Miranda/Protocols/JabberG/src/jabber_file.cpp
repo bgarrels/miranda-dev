@@ -336,7 +336,7 @@ void __cdecl CJabberProto::FileServerThread( filetransfer* ft )
 				mir_snprintf( szAddr, sizeof(szAddr), "http://%s:%d/%s", myAddr, nlb.wPort, pFileName );
 
 				int len = lstrlen(ptszResource) + lstrlen(ft->jid) + 2;
-				TCHAR* fulljid = ( TCHAR* )alloca( sizeof( TCHAR )*len );
+				TCHAR* fulljid = ( TCHAR* )_malloca( sizeof( TCHAR )*len );
 				wsprintf( fulljid, _T("%s/%s"), ft->jid, ptszResource );
 
 				XmlNodeIq iq( _T("set"), id, fulljid );
