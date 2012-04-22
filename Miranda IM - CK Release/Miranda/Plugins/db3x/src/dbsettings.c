@@ -1,8 +1,7 @@
 /*
-
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2003 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -104,7 +103,7 @@ static char* GetCachedSetting(const char *szModuleName,const char *szSettingName
 {
 	static char *lastsetting = NULL;
 	int moduleNameLen = (int)strlen(szModuleName),index;
-	char *szFullName = (char*)alloca(moduleNameLen+settingNameLen+3);
+	char *szFullName = (char*)_malloca(moduleNameLen+settingNameLen+3);
 
 	strcpy(szFullName+1,szModuleName);
 	szFullName[moduleNameLen+1]='/';
@@ -502,7 +501,7 @@ static INT_PTR SetSettingResident(WPARAM wParam,LPARAM lParam)
 	char*  szSetting;
 	size_t cbSettingNameLen = strlen(( char* )lParam );
 	int    idx;
-	char*  szTemp = ( char* )alloca( cbSettingNameLen+2 );
+	char*  szTemp = ( char* )_malloca( cbSettingNameLen+2 );
 	strcpy( szTemp+1, ( char* )lParam );
 
 	EnterCriticalSection(&csDbAccess);
@@ -541,7 +540,7 @@ static INT_PTR WriteContactSetting(WPARAM wParam,LPARAM lParam)
 			if ( val == NULL )
 				return 1;
 
-			tmp.value.pszVal = ( char* )alloca( strlen( val )+1 );
+			tmp.value.pszVal = ( char* )_malloca( strlen( val )+1 );
 			strcpy( tmp.value.pszVal, val );
 			mir_free(val);
 			tmp.value.type = DBVT_UTF8;

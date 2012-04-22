@@ -2,7 +2,7 @@
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2003 Miranda ICQ/IM project,
+Copyright 2000-2003 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -182,7 +182,7 @@ __declspec(dllexport) DATABASELINK* DatabasePluginInfo(void * reserved)
 __declspec(dllexport) PLUGININFOEX * MirandaPluginInfoEx(DWORD mirandaVersion)
 {
 	if ( mirandaVersion < MIRANDA_VERSION_CORE ) {
-		MessageBox( NULL, _T("The db3x plugin cannot be loaded. It requires Miranda IM 0.7.0.0 or later."), _T("db3x Plugin"), MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST );
+		MessageBox( NULL, _T("The db3x plugin cannot be loaded. It requires Miranda IM 0.10.0.0 or later."), _T("db3x Plugin"), MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST );
 		return NULL;
 	}
 	return &pluginInfo;

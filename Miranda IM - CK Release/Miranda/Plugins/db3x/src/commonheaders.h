@@ -1,5 +1,4 @@
 /*
-
 Miranda IM: the free IM client for Microsoft* Windows*
 
 Copyright 2000-2012 Miranda IM project,
@@ -22,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #define MIRANDA_VER 0x0A00
-#define _WIN32_WINNT 0x0502
+#define _WIN32_WINNT 0x0600
 
 #include "m_stdhdr.h"
 
