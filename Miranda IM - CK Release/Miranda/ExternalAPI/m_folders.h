@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef M_CUSTOM_FOLDERS_H
 #define M_CUSTOM_FOLDERS_H
 
-#define FOLDERS_API 501								//dunno why it's here but it is :)
+#define FOLDERS_API 501 //dunno why it's here but it is :)
 
 #define PROFILE_PATH "%profile_path%"
 #define CURRENT_PROFILE "%current_profile%"
@@ -46,25 +46,25 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 	#define MIRANDA_USERDATAT	MIRANDA_USERDATA
 #endif
 
-#define FOLDER_AVATARS                 PROFILE_PATHT "\\" CURRENT_PROFILET "\\avatars"
-#define FOLDER_VCARDS                  PROFILE_PATHT "\\" CURRENT_PROFILET "\\vcards"
-#define FOLDER_LOGS                    PROFILE_PATHT "\\" CURRENT_PROFILET "\\logs"
-#define FOLDER_RECEIVED_FILES          PROFILE_PATHT "\\" CURRENT_PROFILET "\\received files"
-#define FOLDER_DOCS                    MIRANDA_PATHT "\\" "docs"
-#define FOLDER_CONFIG                  PLUGINS_PATHT "\\" "config"
-#define FOLDER_SCRIPTS                 MIRANDA_PATHT "\\" "scripts"
-#define FOLDER_UPDATES                 MIRANDA_PATHT "\\" "updates"
+#define FOLDER_AVATARS                 PROFILE_PATHT _T("\\") CURRENT_PROFILET _T("\\avatars")
+#define FOLDER_VCARDS                  PROFILE_PATHT _T("\\") CURRENT_PROFILET _T("\\vcards")
+#define FOLDER_LOGS                    PROFILE_PATHT _T("\\") CURRENT_PROFILET _T("\\logs")
+#define FOLDER_RECEIVED_FILES          PROFILE_PATHT _T("\\") CURRENT_PROFILET _T("\\received files")
+#define FOLDER_DOCS                    MIRANDA_PATHT _T("\\") _T("docs")
+#define FOLDER_CONFIG                  PLUGINS_PATHT _T("\\") _T("config")
+#define FOLDER_SCRIPTS                 MIRANDA_PATHT _T("\\") _T("scripts")
+#define FOLDER_UPDATES                 MIRANDA_PATHT _T("\\") _T("updates")
 
-#define FOLDER_CUSTOMIZE               MIRANDA_PATHT "\\" "customize"
-#define FOLDER_CUSTOMIZE_SOUNDS        FOLDER_CUSTOMIZE "\\sounds"
-#define FOLDER_CUSTOMIZE_ICONS         FOLDER_CUSTOMIZE "\\icons"
-#define FOLDER_CUSTOMIZE_SMILEYS       FOLDER_CUSTOMIZE "\\smileys"
-#define FOLDER_CUSTOMIZE_SKINS         FOLDER_CUSTOMIZE "\\skins"
-#define FOLDER_CUSTOMIZE_THEMES        FOLDER_CUSTOMIZE "\\themes"
+#define FOLDER_CUSTOMIZE               MIRANDA_PATHT _T("\\") _T("customize")
+#define FOLDER_CUSTOMIZE_SOUNDS        FOLDER_CUSTOMIZE _T("\\sounds")
+#define FOLDER_CUSTOMIZE_ICONS         FOLDER_CUSTOMIZE _T("\\icons")
+#define FOLDER_CUSTOMIZE_SMILEYS       FOLDER_CUSTOMIZE _T("\\smileys")
+#define FOLDER_CUSTOMIZE_SKINS         FOLDER_CUSTOMIZE _T("\\skins")
+#define FOLDER_CUSTOMIZE_THEMES        FOLDER_CUSTOMIZE _T("\\themes")
 
 #define TO_WIDE(x)     L ## x
 
-#define FOLDERS_NAME_MAX_SIZE 64				//maximum name and section size
+#define FOLDERS_NAME_MAX_SIZE 64  //maximum name and section size
 
 #define FF_UNICODE 0x00000001
 
@@ -79,9 +79,9 @@ typedef struct{
   char szSection[FOLDERS_NAME_MAX_SIZE];       //section name, if it doesn't exist it will be created otherwise it will just add this entry to it
   char szName[FOLDERS_NAME_MAX_SIZE];          //entry name - will be shown in options
   union{
-	const char *szFormat;                      //default string format. Fallback string in case there's no entry in the database for this folder. This should be the initial value for the path, users will be able to change it later.
-	const wchar_t *szFormatW;                  //String is dup()'d so you can free it later. If you set the unicode string don't forget to set the flag accordingly.
-	const TCHAR *szFormatT;
+    const char *szFormat;                      //default string format. Fallback string in case there's no entry in the database for this folder. This should be the initial value for the path, users will be able to change it later.
+    const wchar_t *szFormatW;                  //String is dup()'d so you can free it later. If you set the unicode string don't forget to set the flag accordingly.
+    const TCHAR *szFormatT;
   };
   DWORD flags;                                 //FF_* flags
 } FOLDERSDATA;
@@ -124,9 +124,9 @@ typedef struct{
 typedef struct{
   int cbSize;
   union{
-	char **szPath;                    //address of a string variable (char *) or (wchar_t*) where the path should be stored (the last \ won't be copied).
-	wchar_t **szPathW;                //unicode version of string.
-	TCHAR **szPathT;
+    char **szPath;                    //address of a string variable (char *) or (wchar_t*) where the path should be stored (the last \ won't be copied).
+    wchar_t **szPathW;                //unicode version of string.
+    TCHAR **szPathT;
 	};
 } FOLDERSGETALLOCDATA;
 
