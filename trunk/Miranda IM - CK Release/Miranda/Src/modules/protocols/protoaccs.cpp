@@ -389,11 +389,11 @@ static INT_PTR stub43( PROTO_INTERFACE* ppi, WPARAM wParam, LPARAM lParam )
 
 static INT_PTR stub44( PROTO_INTERFACE* ppi, WPARAM wParam, LPARAM lParam )
 {	
-	wchar_t* buf = ( wchar_t* )_alloca( sizeof(wchar_t) * (lParam + 1));
+	wchar_t* buf = ( wchar_t* )_malloca( sizeof(wchar_t) * (lParam + 1));
 	int result = CallProtoService( ppi->m_szModuleName, PS_GETMYAVATARW, WPARAM( buf ), lParam );
 	if ( result == 0 )
 	{
-		wchar_t* filename = ( wchar_t* )_alloca( sizeof(wchar_t) * (lParam + 1));
+		wchar_t* filename = ( wchar_t* )_malloca( sizeof(wchar_t) * (lParam + 1));
 		wcscpy(filename, buf);
 		GetShortPathNameW(buf, filename, lParam + 1);
 

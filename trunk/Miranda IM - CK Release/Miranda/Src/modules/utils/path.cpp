@@ -449,7 +449,7 @@ template<typename XCHAR>
 XCHAR *GetInternalVariable(XCHAR *key, size_t keyLength, HANDLE hContact)
 {
 	XCHAR *theValue = NULL;
-	XCHAR *theKey = (XCHAR *)_alloca(sizeof(XCHAR) * (keyLength + 1));
+	XCHAR *theKey = (XCHAR *)_malloca(sizeof(XCHAR) * (keyLength + 1));
 	_xcsncpy(theKey, key, keyLength);
 	theKey[keyLength] = 0;
 
