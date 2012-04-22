@@ -294,7 +294,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "delphi", "delphi", "{9EAB8D
 		..\Include\delphi\m_xml.inc = ..\Include\delphi\m_xml.inc
 		..\Include\delphi\newpluginapi.inc = ..\Include\delphi\newpluginapi.inc
 		..\Include\delphi\statusmodes.inc = ..\Include\delphi\statusmodes.inc
-		..\Include\delphi\testdll.dpr = ..\Include\delphi\testdll.dpr
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{1168DC36-120A-464F-80C4-F96EF15A1B6F}"
