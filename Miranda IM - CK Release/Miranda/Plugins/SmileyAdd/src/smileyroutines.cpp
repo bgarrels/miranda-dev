@@ -80,7 +80,7 @@ void LookupAllSmileys(SmileyPackType* smileyPack, SmileyPackCType* smileyCPack, 
 		}
 	}
 
-	int* csmlit = (int*)alloca(smlsz * sizeof(int));
+	int* csmlit = (int*)_malloca(smlsz * sizeof(int));
 	if (csmlit == NULL) return;
 	memset(csmlit, 0, smlsz * sizeof(int));
 
