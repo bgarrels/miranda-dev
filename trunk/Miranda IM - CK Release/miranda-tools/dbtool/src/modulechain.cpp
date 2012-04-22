@@ -84,7 +84,7 @@ int WorkModuleChain(int firstTime)
 				return ERROR_NO_MORE_ITEMS;
 			}
 			if(modChain[iCurrentModName].ofsNew==0) {
-				newModName=(DBModuleName*)_alloca(modChain[iCurrentModName].size);
+				newModName=(DBModuleName*)_malloca(modChain[iCurrentModName].size);
 				if(ReadSegment(modChain[iCurrentModName].ofsOld,newModName,modChain[iCurrentModName].size)!=ERROR_SUCCESS)
 					return ERROR_NO_MORE_ITEMS;
 				if((modChain[iCurrentModName].ofsNew=WriteSegment(WSOFS_END,newModName,modChain[iCurrentModName].size))==WS_ERROR)

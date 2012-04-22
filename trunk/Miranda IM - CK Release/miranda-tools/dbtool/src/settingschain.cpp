@@ -44,7 +44,7 @@ int WorkSettingsChain(DWORD ofsContact,DBContact *dbc,int firstTime)
 		ofsThisSettings=dbcsOld.ofsNext;
 		return ERROR_SUCCESS;
 	}
-	dbcsNew=(DBContactSettings*)_alloca(offsetof(DBContactSettings,blob)+dbcsOld.cbBlob);
+	dbcsNew=(DBContactSettings*)_malloca(offsetof(DBContactSettings,blob)+dbcsOld.cbBlob);
 	if((ret=ReadSegment(ofsThisSettings,dbcsNew,offsetof(DBContactSettings,blob)+dbcsOld.cbBlob))!=ERROR_SUCCESS) {
 		if(ret!=ERROR_HANDLE_EOF) {   //eof is OK because blank space at the end doesn't matter
 			return ERROR_NO_MORE_ITEMS;

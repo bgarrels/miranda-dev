@@ -231,7 +231,7 @@ INT_PTR CALLBACK SelectDbDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lPa
 					TCHAR *filter, *tmp, *tmp1, *tmp2;
 					tmp1 = TranslateT("Miranda Databases (*.dat)");
 					tmp2 = TranslateT("All Files");
-					filter = tmp = (TCHAR*)_alloca((_tcslen(tmp1)+_tcslen(tmp2)+11)*sizeof(TCHAR));
+					filter = tmp = (TCHAR*)_malloca((_tcslen(tmp1)+_tcslen(tmp2)+11)*sizeof(TCHAR));
 					tmp = addstring(tmp, tmp1);
 					tmp = addstring(tmp, _T("*.DAT"));
 					tmp = addstring(tmp, tmp2);
