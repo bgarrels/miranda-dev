@@ -1,6 +1,6 @@
 /*
-Miranda SmileyAdd Plugin
-Copyright (C) 2007 - 2011 Boris Krasnovskiy
+Miranda IM SmileyAdd Plugin
+Copyright (C) 2007 - 2012 Boris Krasnovskiy
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -56,11 +56,11 @@ bool InternetDownloadFile(const char *szUrl, char* szDest, HANDLE &hHttpDwnl)
 	if (CallService(MS_SYSTEM_GETVERSION, 0, 0) >= PLUGIN_MAKE_VERSION(0,9,0,5))
 		nlhr.flags |= NLHRF_HTTP11 | NLHRF_PERSISTENT | NLHRF_REDIRECT;
 
-	// change the header so the plugin is pretended to be IE 6 + WinXP
+	// change the header so the plugin is pretended to be IE 8 + WinXP
 	nlhr.headersCount = 2;
-	nlhr.headers=(NETLIBHTTPHEADER*)alloca(sizeof(NETLIBHTTPHEADER)*nlhr.headersCount);
+	nlhr.headers=(NETLIBHTTPHEADER*)_malloca(sizeof(NETLIBHTTPHEADER)*nlhr.headersCount);
 	nlhr.headers[0].szName   = "User-Agent";
-	nlhr.headers[0].szValue = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
+	nlhr.headers[0].szValue = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)";
 	nlhr.headers[1].szName  = "Connection";
 	nlhr.headers[1].szValue = "close";
 

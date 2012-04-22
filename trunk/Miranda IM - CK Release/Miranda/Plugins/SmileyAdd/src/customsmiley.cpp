@@ -79,7 +79,7 @@ bool SmileyCType::CreateTriggerText(char* text)
 	if (len == 0) return false;
 
 	int reslen = Netlib_GetBase64DecodedBufferSize(len)+1;
-	char* res = (char*)alloca(reslen);
+	char* res = (char*)_malloca(reslen);
 
 	NETLIBBASE64 nlb = { text, len, ( PBYTE )res, reslen };
 	if (!CallService(MS_NETLIB_BASE64DECODE, 0, LPARAM( &nlb ))) return false;
