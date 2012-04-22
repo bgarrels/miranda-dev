@@ -28,8 +28,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /////////////////////////////////////////////////////////////////////
 //  ResolveHostName                               (a helper function)
 /////////////////////////////////////////////////////////////////////
-DWORD __stdcall ResolveHostName(LPSTR lpszHostName,
-	LPSTR lpszIPAddress, LPDWORD lpdwIPAddressSize)
+DWORD __stdcall ResolveHostName(LPTSTR lpszHostName,
+	LPTSTR lpszIPAddress, LPDWORD lpdwIPAddressSize)
 {
 	if (*lpdwIPAddressSize < 17 || lpszIPAddress == NULL) 
 	{
@@ -56,7 +56,7 @@ DWORD __stdcall ResolveHostName(LPSTR lpszHostName,
 /////////////////////////////////////////////////////////////////////
 //  IsResolvable                                  (a helper function)
 /////////////////////////////////////////////////////////////////////
-BOOL __stdcall IsResolvable(LPSTR lpszHost)
+BOOL __stdcall IsResolvable(LPTSTR lpszHost)
 {
 	char szDummy[255];
 	DWORD dwDummySize = sizeof (szDummy) - 1;
@@ -69,7 +69,7 @@ BOOL __stdcall IsResolvable(LPSTR lpszHost)
 /////////////////////////////////////////////////////////////////////
 //  GetIPAddress                                  (a helper function)
 /////////////////////////////////////////////////////////////////////
-DWORD __stdcall GetIPAddress(LPSTR lpszIPAddress, LPDWORD lpdwIPAddressSize)
+DWORD __stdcall GetIPAddress(LPTSTR lpszIPAddress, LPDWORD lpdwIPAddressSize)
 {
 	char szHostBuffer[255];
 
@@ -81,7 +81,7 @@ DWORD __stdcall GetIPAddress(LPSTR lpszIPAddress, LPDWORD lpdwIPAddressSize)
 /////////////////////////////////////////////////////////////////////
 //  IsInNet                                       (a helper function)
 /////////////////////////////////////////////////////////////////////
-BOOL __stdcall IsInNet(LPSTR lpszIPAddress, LPSTR lpszDest, LPSTR lpszMask)
+BOOL __stdcall IsInNet(LPTSTR lpszIPAddress, LPTSTR lpszDest, LPTSTR lpszMask)
 {
 	DWORD dwDest;
 	DWORD dwIpAddr;
