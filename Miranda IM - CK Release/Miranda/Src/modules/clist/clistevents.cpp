@@ -100,7 +100,7 @@ static void ShowEventsInTray()
 	// in case if we have several icons in tray and several events with different protocols 
 	// lets use several icon to show events from protocols in different icons
 	cli.pfnLockTray();
-	pTrayProtos = (char**)_alloca(sizeof(char*)*cli.trayIconCount);
+	pTrayProtos = (char**)_malloca(sizeof(char*)*cli.trayIconCount);
 	nTrayProtoCnt=0;
 	for (i=0; i<cli.trayIconCount; i++)
 	{

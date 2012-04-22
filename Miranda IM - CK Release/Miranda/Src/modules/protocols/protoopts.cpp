@@ -600,7 +600,7 @@ INT_PTR CALLBACK AccMgrDlgProc(HWND hwndDlg,UINT message, WPARAM wParam, LPARAM 
 
 			length = SendDlgItemMessage(hwndDlg, IDC_ACCLIST, LB_GETTEXTLEN, lps->itemID, 0);
 			size = max(length+1, 256);
-			text = (TCHAR *)_alloca(sizeof(TCHAR) * size);
+			text = (TCHAR *)_malloca(sizeof(TCHAR) * size);
 			SendDlgItemMessage(hwndDlg, IDC_ACCLIST, LB_GETTEXT, lps->itemID, (LPARAM)text);
 
 			SelectObject(lps->hDC, dat->hfntTitle);
