@@ -24,12 +24,6 @@
  *  USA.
  */
 
-/**
- * \file dcc7.c
- *
- * \brief Obsługa połączeń bezpośrednich od wersji Gadu-Gadu 7.x
- */
-
 #ifndef _WIN64
 #define _USE_32BIT_TIME_T
 #endif
@@ -66,14 +60,6 @@
 #include "resolver.h"
 #include "internal.h"
 
-/**
- * \internal Dodaje połączenie bezpośrednie do sesji.
- *
- * \param sess Struktura sesji
- * \param dcc Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_dcc7_session_add(struct gg_session *sess, struct gg_dcc7 *dcc)
 {
 	gg_debug_session(sess, GG_DEBUG_FUNCTION, "** gg_dcc7_session_add(%p, %p)\n", sess, dcc);
@@ -90,14 +76,6 @@ static int gg_dcc7_session_add(struct gg_session *sess, struct gg_dcc7 *dcc)
 	return 0;
 }
 
-/**
- * \internal Usuwa połączenie bezpośrednie z sesji.
- *
- * \param sess Struktura sesji
- * \param dcc Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_dcc7_session_remove(struct gg_session *sess, struct gg_dcc7 *dcc)
 {
 	struct gg_dcc7 *tmp;
@@ -128,15 +106,6 @@ static int gg_dcc7_session_remove(struct gg_session *sess, struct gg_dcc7 *dcc)
 	return -1;
 }
 
-/**
- * \internal Zwraca strukturę połączenia o danym identyfikatorze.
- *
- * \param sess Struktura sesji
- * \param id Identyfikator połączenia
- * \param uin Numer nadawcy lub odbiorcy
- *
- * \return Struktura połączenia lub \c NULL jeśli nie znaleziono
- */
 static struct gg_dcc7 *gg_dcc7_session_find(struct gg_session *sess, gg_dcc7_id_t id, uin_t uin)
 {
 	struct gg_dcc7 *tmp;
@@ -159,13 +128,6 @@ static struct gg_dcc7 *gg_dcc7_session_find(struct gg_session *sess, gg_dcc7_id_
 	return NULL;
 }
 
-/**
- * \internal Rozpoczyna proces pobierania adresu
- *
- * \param dcc Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_dcc7_get_relay_addr(struct gg_dcc7 *dcc)
 {
 	gg_debug_session((dcc) ? (dcc)->sess : NULL, GG_DEBUG_FUNCTION, "** gg_dcc7_get_relay_addr(%p)\n", dcc);
@@ -188,13 +150,6 @@ static int gg_dcc7_get_relay_addr(struct gg_dcc7 *dcc)
 	return 0;
 }
 
-/**
- * \internal Nawiązuje połączenie bezpośrednie
- *
- * \param dcc Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_dcc7_connect(struct gg_dcc7 *dcc)
 {
 	gg_debug_session((dcc) ? (dcc)->sess : NULL, GG_DEBUG_FUNCTION, "** gg_dcc7_connect(%p)\n", dcc);
@@ -218,14 +173,6 @@ static int gg_dcc7_connect(struct gg_dcc7 *dcc)
 	return 0;
 }
 
-/**
- * \internal Tworzy gniazdo nasłuchujące dla połączenia bezpośredniego
- *
- * \param dcc Struktura połączenia
- * \param port Preferowany port (jeśli równy 0 lub -1, próbuje się domyślnego)
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_dcc7_listen(struct gg_dcc7 *dcc, uint16_t port)
 {
 	struct sockaddr_in sin;
@@ -285,13 +232,6 @@ static int gg_dcc7_listen(struct gg_dcc7 *dcc, uint16_t port)
 	return 0;
 }
 
-/**
- * \internal Tworzy gniazdo nasłuchujące i wysyła jego parametry
- *
- * \param dcc Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_dcc7_listen_and_send_info(struct gg_dcc7 *dcc)
 {
 	struct gg_dcc7_info pkt;
@@ -335,13 +275,6 @@ static int gg_dcc7_listen_and_send_info(struct gg_dcc7 *dcc)
 	return gg_send_packet(dcc->sess, GG_DCC7_INFO, &pkt, sizeof(pkt), NULL);
 }
 
-/**
- * \internal Odwraca połączenie po nieudanym connect()
- *
- * \param dcc Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_dcc7_reverse_connect(struct gg_dcc7 *dcc)
 {
 	gg_debug_session((dcc) ? (dcc)->sess : NULL, GG_DEBUG_FUNCTION, "** gg_dcc7_reverse_connect(%p)\n", dcc);
@@ -359,14 +292,6 @@ static int gg_dcc7_reverse_connect(struct gg_dcc7 *dcc)
 	return gg_dcc7_listen_and_send_info(dcc);
 }
 
-/**
- * \internal Wysyła do serwera żądanie nadania identyfikatora sesji
- *
- * \param sess Struktura sesji
- * \param type Rodzaj połączenia (\c GG_DCC7_TYPE_FILE lub \c GG_DCC7_TYPE_VOICE)
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_dcc7_request_id(struct gg_session *sess, uint32_t type)
 {
 	struct gg_dcc7_id_request pkt;
@@ -397,24 +322,6 @@ static int gg_dcc7_request_id(struct gg_session *sess, uint32_t type)
 	return gg_send_packet(sess, GG_DCC7_ID_REQUEST, &pkt, sizeof(pkt), NULL);
 }
 
-/**
- * \internal Rozpoczyna wysyłanie pliku.
- *
- * Funkcja jest wykorzystywana przez \c gg_dcc7_send_file() oraz
- * \c gg_dcc_send_file_fd().
- *
- * \param sess Struktura sesji
- * \param rcpt Numer odbiorcy
- * \param fd Deskryptor pliku
- * \param size Rozmiar pliku
- * \param filename1250 Nazwa pliku w kodowaniu CP-1250
- * \param hash Skrót SHA-1 pliku
- * \param seek Flaga mówiąca, czy można używać lseek()
- *
- * \return Struktura \c gg_dcc7 lub \c NULL w przypadku błędu
- *
- * \ingroup dcc7
- */
 static struct gg_dcc7 *gg_dcc7_send_file_common(struct gg_session *sess, uin_t rcpt, int fd, size_t size, const char *filename1250, const char *hash, int seek)
 {
 	struct gg_dcc7 *dcc = NULL;
@@ -461,19 +368,6 @@ fail:
 	return NULL;
 }
 
-/**
- * Rozpoczyna wysyłanie pliku o danej nazwie.
- *
- * \param sess Struktura sesji
- * \param rcpt Numer odbiorcy
- * \param filename Nazwa pliku w lokalnym systemie plików
- * \param filename1250 Nazwa pliku w kodowaniu CP-1250
- * \param hash Skrót SHA-1 pliku (lub \c NULL jeśli ma być wyznaczony)
- *
- * \return Struktura \c gg_dcc7 lub \c NULL w przypadku błędu
- *
- * \ingroup dcc7
- */
 struct gg_dcc7 *gg_dcc7_send_file(struct gg_session *sess, uin_t rcpt, const char *filename, const char *filename1250, const char *hash)
 {
 	struct gg_dcc7 *dcc = NULL;
@@ -539,23 +433,6 @@ fail:
 	return NULL;
 }
 
-/**
- * \internal Rozpoczyna wysyłanie pliku o danym deskryptorze.
- *
- * \note Wysyłanie pliku nie będzie działać poprawnie, jeśli deskryptor
- * źródłowy jest w trybie nieblokującym i w pewnym momencie zabraknie danych.
- *
- * \param sess Struktura sesji
- * \param rcpt Numer odbiorcy
- * \param fd Deskryptor pliku
- * \param size Rozmiar pliku
- * \param filename1250 Nazwa pliku w kodowaniu CP-1250
- * \param hash Skrót SHA-1 pliku
- *
- * \return Struktura \c gg_dcc7 lub \c NULL w przypadku błędu
- *
- * \ingroup dcc7
- */
 struct gg_dcc7 *gg_dcc7_send_file_fd(struct gg_session *sess, uin_t rcpt, int fd, size_t size, const char *filename1250, const char *hash)
 {
 	gg_debug_session(sess, GG_DEBUG_FUNCTION, "** gg_dcc7_send_file_fd(%p, %d, %d, %u, \"%s\", %p)\n", sess, rcpt, fd, size, filename1250, hash);
@@ -564,20 +441,6 @@ struct gg_dcc7 *gg_dcc7_send_file_fd(struct gg_session *sess, uin_t rcpt, int fd
 }
 
 
-/**
- * Potwierdza chęć odebrania pliku.
- *
- * \param dcc Struktura połączenia
- * \param offset Początkowy offset przy wznawianiu przesyłania pliku
- *
- * \note Biblioteka nie zmienia położenia w odbieranych plikach. Jeśli offset
- * początkowy jest różny od zera, należy ustawić go funkcją \c lseek() lub
- * podobną.
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup dcc7
- */
 int gg_dcc7_accept(struct gg_dcc7 *dcc, unsigned int offset)
 {
 	struct gg_dcc7_accept pkt;
@@ -603,16 +466,6 @@ int gg_dcc7_accept(struct gg_dcc7 *dcc, unsigned int offset)
 	return gg_dcc7_listen_and_send_info(dcc);
 }
 
-/**
- * Odrzuca próbę przesłania pliku.
- *
- * \param dcc Struktura połączenia
- * \param reason Powód odrzucenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup dcc7
- */
 int gg_dcc7_reject(struct gg_dcc7 *dcc, int reason)
 {
 	struct gg_dcc7_reject pkt;
@@ -633,15 +486,6 @@ int gg_dcc7_reject(struct gg_dcc7 *dcc, int reason)
 	return gg_send_packet(dcc->sess, GG_DCC7_REJECT, &pkt, sizeof(pkt), NULL);
 }
 
-/**
- * Przerwanie żądania przesłania pliku.
- *
- * \param dcc Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup dcc7
- */
 int gg_dcc7_abort(struct gg_dcc7 *dcc)
 {
 	struct gg_dcc7_abort pkt;
@@ -662,16 +506,6 @@ int gg_dcc7_abort(struct gg_dcc7 *dcc)
 	return gg_send_packet(dcc->sess, GG_DCC7_ABORT, &pkt, sizeof(pkt), NULL);
 }
 
-/**
- * \internal Obsługuje pakiet identyfikatora połączenia bezpośredniego.
- *
- * \param sess Struktura sesji
- * \param e Struktura zdarzenia
- * \param payload Treść pakietu
- * \param len Długość pakietu
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_dcc7_handle_id(struct gg_session *sess, struct gg_event *e, void *payload, int len)
 {
 	struct gg_dcc7_id_reply *p = payload;
@@ -712,16 +546,6 @@ int gg_dcc7_handle_id(struct gg_session *sess, struct gg_event *e, void *payload
 	return 0;
 }
 
-/**
- * \internal Obsługuje pakiet akceptacji połączenia bezpośredniego.
- *
- * \param sess Struktura sesji
- * \param e Struktura zdarzenia
- * \param payload Treść pakietu
- * \param len Długość pakietu
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_dcc7_handle_accept(struct gg_session *sess, struct gg_event *e, void *payload, int len)
 {
 	struct gg_dcc7_accept *p = payload;
@@ -754,16 +578,6 @@ int gg_dcc7_handle_accept(struct gg_session *sess, struct gg_event *e, void *pay
 	return 0;
 }
 
-/**
- * \internal Obsługuje pakiet informacji o połączeniu bezpośrednim.
- *
- * \param sess Struktura sesji
- * \param e Struktura zdarzenia
- * \param payload Treść pakietu
- * \param len Długość pakietu
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_dcc7_handle_info(struct gg_session *sess, struct gg_event *e, void *payload, int len)
 {
 	struct gg_dcc7_info *p = payload;
@@ -904,16 +718,6 @@ int gg_dcc7_handle_info(struct gg_session *sess, struct gg_event *e, void *paylo
 	return 0;
 }
 
-/**
- * \internal Obsługuje pakiet odrzucenia połączenia bezpośredniego.
- *
- * \param sess Struktura sesji
- * \param e Struktura zdarzenia
- * \param payload Treść pakietu
- * \param len Długość pakietu
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_dcc7_handle_reject(struct gg_session *sess, struct gg_event *e, void *payload, int len)
 {
 	struct gg_dcc7_reject *p = payload;
@@ -943,16 +747,6 @@ int gg_dcc7_handle_reject(struct gg_session *sess, struct gg_event *e, void *pay
 	return 0;
 }
 
-/**
- * \internal Obsługuje pakiet przerwania żądania połączenia bezpośredniego.
- *
- * \param sess Struktura sesji
- * \param e Struktura zdarzenia
- * \param payload Treść pakietu
- * \param len Długość pakietu
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_dcc7_handle_abort(struct gg_session *sess, struct gg_event *e, void *payload, int len)
 {
 	struct gg_dcc7_aborted *p = payload;
@@ -984,16 +778,6 @@ int gg_dcc7_handle_abort(struct gg_session *sess, struct gg_event *e, void *payl
 	return 0;
 }
 
-/**
- * \internal Obsługuje pakiet nowego połączenia bezpośredniego.
- *
- * \param sess Struktura sesji
- * \param e Struktura zdarzenia
- * \param payload Treść pakietu
- * \param len Długość pakietu
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_dcc7_handle_new(struct gg_session *sess, struct gg_event *e, void *payload, int len)
 {
 	struct gg_dcc7_new *p = payload;
@@ -1071,14 +855,6 @@ int gg_dcc7_handle_new(struct gg_session *sess, struct gg_event *e, void *payloa
 	return 0;
 }
 
-/**
- * \internal Ustawia odpowiednie stany wewnętrzne w zależności od rodzaju
- * połączenia.
- * 
- * \param dcc Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu.
- */
 static int gg_dcc7_postauth_fixup(struct gg_dcc7 *dcc)
 {
 	gg_debug_session((dcc) ? (dcc)->sess : NULL, GG_DEBUG_FUNCTION, "** gg_dcc7_postauth_fixup(%p)\n", dcc);
@@ -1111,19 +887,6 @@ static int gg_dcc7_postauth_fixup(struct gg_dcc7 *dcc)
 	return -1;
 }
 
-/**
- * Funkcja wywoływana po zaobserwowaniu zmian na deskryptorze połączenia.
- *
- * Funkcja zwraca strukturę zdarzenia \c gg_event. Jeśli rodzaj zdarzenia
- * to \c GG_EVENT_NONE, nie wydarzyło się jeszcze nic wartego odnotowania.
- * Strukturę zdarzenia należy zwolnić funkcja \c gg_event_free().
- *
- * \param dcc Struktura połączenia
- *
- * \return Struktura zdarzenia lub \c NULL jeśli wystąpił błąd
- *
- * \ingroup dcc7
- */
 struct gg_event *gg_dcc7_watch_fd(struct gg_dcc7 *dcc)
 {
 	struct gg_event *e;
@@ -1625,13 +1388,6 @@ struct gg_event *gg_dcc7_watch_fd(struct gg_dcc7 *dcc)
 	return e;
 }
 
-/**
- * Zwalnia zasoby używane przez połączenie bezpośrednie.
- *
- * \param dcc Struktura połączenia
- *
- * \ingroup dcc7
- */
 void gg_dcc7_free(struct gg_dcc7 *dcc)
 {
 	gg_debug_session((dcc) ? (dcc)->sess : NULL, GG_DEBUG_FUNCTION, "** gg_dcc7_free(%p)\n", dcc);
@@ -1643,7 +1399,7 @@ void gg_dcc7_free(struct gg_dcc7 *dcc)
 		gg_sock_close(dcc->fd);
 
 	if (dcc->file_fd != -1)
-		close(dcc->file_fd);
+		_close(dcc->file_fd);
 
 	if (dcc->sess)
 		gg_dcc7_session_remove(dcc->sess, dcc);

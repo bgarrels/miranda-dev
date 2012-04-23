@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////
 // Gadu-Gadu Plugin for Miranda IM
 //
 // Copyright (c) 2003-2006 Adam Strzelecki <ono+miranda@java.pl>
@@ -16,11 +16,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////
 
 #include "gg.h"
 
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////
 // Create New Account : Proc
 void *gg_doregister(GGPROTO *gg, char *newPass, char *newEmail)
 {
@@ -75,7 +75,7 @@ void *gg_doregister(GGPROTO *gg, char *newPass, char *newEmail)
 	return NULL;
 }
 
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////
 // Remove Account : Proc
 void *gg_dounregister(GGPROTO *gg, uin_t uin, char *password)
 {
@@ -127,7 +127,7 @@ void *gg_dounregister(GGPROTO *gg, uin_t uin, char *password)
 	return NULL;
 }
 
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////
 // Change Password Page : Proc
 void *gg_dochpass(GGPROTO *gg, uin_t uin, char *password, char *newPass)
 {
@@ -187,7 +187,7 @@ void *gg_dochpass(GGPROTO *gg, uin_t uin, char *password, char *newPass)
 	return NULL;
 }
 
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////
 // Change E-mail Page : Proc
 void *gg_dochemail(GGPROTO *gg, uin_t uin, char *password, char *email, char *newEmail)
 {
@@ -238,7 +238,7 @@ void *gg_dochemail(GGPROTO *gg, uin_t uin, char *password, char *email, char *ne
 	return NULL;
 }
 
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////
 // User Util Dlg Page : Data
 INT_PTR CALLBACK gg_userutildlgproc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {

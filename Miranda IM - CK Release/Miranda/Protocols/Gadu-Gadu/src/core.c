@@ -1,29 +1,28 @@
-////////////////////////////////////////////////////////////////////////////////
-// Gadu-Gadu Plugin for Miranda IM
-//
-// Copyright (c) 2003-2009 Adam Strzelecki <ono+miranda@java.pl>
-// Copyright (c) 2009-2012 Bartosz Bia³ek
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-////////////////////////////////////////////////////////////////////////////////
+/*
+Gadu-Gadu Plugin for Miranda IM
+
+Copyright (c) 2003-2009 Adam Strzelecki <ono+miranda@java.pl>
+Copyright (c) 2009-2010 Bartosz Bia³ek
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
 
 #include "gg.h"
 #include <errno.h>
 #include <io.h>
 
-////////////////////////////////////////////////////////////
 // Swap bits in DWORD
 uint32_t swap32(uint32_t x)
 {
@@ -34,7 +33,6 @@ uint32_t swap32(uint32_t x)
 				((x & (uint32_t) 0xff000000U) >> 24));
 }
 
-////////////////////////////////////////////////////////////
 // Is online function
 GGINLINE int gg_isonline(GGPROTO *gg)
 {
@@ -46,7 +44,6 @@ GGINLINE int gg_isonline(GGPROTO *gg)
 	return isonline;
 }
 
-////////////////////////////////////////////////////////////
 // Send disconnect request and wait for server thread to die
 void gg_disconnect(GGPROTO *gg)
 {
@@ -151,7 +148,6 @@ void gg_disconnect(GGPROTO *gg)
 		closesocket(gg->sock);
 }
 
-////////////////////////////////////////////////////////////
 // DNS lookup function
 uint32_t gg_dnslookup(GGPROTO *gg, char *host)
 {
@@ -180,7 +176,6 @@ uint32_t gg_dnslookup(GGPROTO *gg, char *host)
 	return 0;
 }
 
-////////////////////////////////////////////////////////////
 // Host list decoder
 typedef struct
 {
@@ -228,7 +223,6 @@ int gg_decodehosts(char *var, GGHOST *hosts, int max)
 	return hp;
 }
 
-////////////////////////////////////////////////////////////
 // Main connection session thread
 void __cdecl gg_mainthread(GGPROTO *gg, void *empty)
 {
@@ -505,7 +499,7 @@ retry:
 		}
 	}
 
-	//////////////////////////////////////////////////////////////////////////////////
+	////////////////////////
 	// Main loop
 	while(gg_isonline(gg))
 	{
@@ -1254,7 +1248,7 @@ retry:
 	return;
 }
 
-////////////////////////////////////////////////////////////
+//
 // Change status function
 void gg_broadcastnewstatus(GGPROTO *gg, int newStatus)
 {
@@ -1275,7 +1269,7 @@ void gg_broadcastnewstatus(GGPROTO *gg, int newStatus)
 	gg_netlog(gg, "gg_broadcastnewstatus(): Broadcast new status: %d.", newStatus);
 }
 
-////////////////////////////////////////////////////////////
+//
 // When contact is deleted
 int gg_contactdeleted(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -1318,7 +1312,7 @@ int gg_contactdeleted(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-////////////////////////////////////////////////////////////
+//
 // When db settings changed
 int gg_dbsettingchanged(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -1386,7 +1380,7 @@ int gg_dbsettingchanged(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-////////////////////////////////////////////////////////////
+//
 // All users set offline
 void gg_setalloffline(GGPROTO *gg)
 {
@@ -1415,7 +1409,7 @@ void gg_setalloffline(GGPROTO *gg)
 #endif
 }
 
-////////////////////////////////////////////////////////////
+//
 // All users set offline
 void gg_notifyuser(GGPROTO *gg, HANDLE hContact, int refresh)
 {
@@ -1526,7 +1520,7 @@ void gg_notifyall(GGPROTO *gg)
 	free(uins); free(types);
 }
 
-////////////////////////////////////////////////////////////
+//
 // Get contact by uin
 HANDLE gg_getcontact(GGPROTO *gg, uin_t uin, int create, int inlist, char *szNick)
 {
@@ -1632,7 +1626,7 @@ HANDLE gg_getcontact(GGPROTO *gg, uin_t uin, int create, int inlist, char *szNic
 	return hContact;
 }
 
-////////////////////////////////////////////////////////////
+//
 // Status conversion
 int status_m2gg(GGPROTO *gg, int status, int descr)
 {
@@ -1736,7 +1730,7 @@ int status_gg2m(GGPROTO *gg, int status)
 	}
 }
 
-////////////////////////////////////////////////////////////
+//
 // Called when contact status is changed
 void gg_changecontactstatus(GGPROTO *gg, uin_t uin, int status, const char *idescr, int time, uint32_t remote_ip, uint16_t remote_port, uint32_t version)
 {
@@ -1770,7 +1764,7 @@ void gg_changecontactstatus(GGPROTO *gg, uin_t uin, int status, const char *ides
 	}
 }
 
-////////////////////////////////////////////////////////////
+//
 // Returns GG client version string from packet version
 const char *gg_version2string(int v)
 {

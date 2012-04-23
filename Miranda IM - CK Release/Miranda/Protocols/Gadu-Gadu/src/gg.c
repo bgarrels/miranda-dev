@@ -1,23 +1,23 @@
-////////////////////////////////////////////////////////////////////////////////
-// Gadu-Gadu Plugin for Miranda IM
-//
-// Copyright (c) 2003-2009 Adam Strzelecki <ono+miranda@java.pl>
-// Copyright (c) 2009-2012 Bartosz Bia³ek
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-////////////////////////////////////////////////////////////////////////////////
+/*
+Gadu-Gadu Plugin for Miranda IM
+
+Copyright (c) 2003-2009 Adam Strzelecki <ono+miranda@java.pl>
+Copyright (c) 2009-2012 Bartosz Bia³ek
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
 
 #include "gg.h"
 #include "../version.h"
@@ -59,7 +59,6 @@ static HANDLE hHookPreShutdown = NULL;
 
 static unsigned long crc_table[256];
 
-//////////////////////////////////////////////////////////
 // Extra winsock function for error description
 char *ws_strerror(int code)
 {
@@ -84,7 +83,6 @@ char *ws_strerror(int code)
 	return strerror(code);
 }
 
-//////////////////////////////////////////////////////////
 // Build the crc table
 void crc_gentable(void)
 {
@@ -106,7 +104,6 @@ void crc_gentable(void)
 	}
 }
 
-//////////////////////////////////////////////////////////
 // Calculate the crc value
 unsigned long crc_get(char *mem)
 {
@@ -117,7 +114,6 @@ unsigned long crc_get(char *mem)
 	return (crc ^ 0xFFFFFFFF);
 }
 
-//////////////////////////////////////////////////////////
 // http_error_string()
 //
 // returns http error text
@@ -140,7 +136,6 @@ const char *http_error_string(int h)
 	return Translate("Unknown HTTP error");
 }
 
-//////////////////////////////////////////////////////////
 // Gets plugin info
 __declspec(dllexport) PLUGININFOEX *MirandaPluginInfoEx(DWORD mirandaVersion)
 {
@@ -161,7 +156,6 @@ __declspec(dllexport) const MUUID* MirandaPluginInterfaces(void)
 	return interfaces;
 }
 
-//////////////////////////////////////////////////////////
 // Cleanups from last plugin
 void gg_cleanuplastplugin(GGPROTO *gg, DWORD version)
 {
@@ -217,7 +211,6 @@ void gg_cleanuplastplugin(GGPROTO *gg, DWORD version)
 	DBWriteContactSettingDword(NULL, GG_PROTO, GG_PLUGINVERSION, pluginInfo.version);
 }
 
-//////////////////////////////////////////////////////////
 // Custom folders initialization
 void gg_initcustomfolders(GGPROTO *gg)
 {
@@ -233,7 +226,6 @@ void gg_initcustomfolders(GGPROTO *gg)
 	gg->hImagesFolder = FoldersRegisterCustomPath(GG_PROTO, "Images", szPath);
 }
 
-//////////////////////////////////////////////////////////
 // When Miranda loaded its modules
 static int gg_modulesloaded(WPARAM wParam, LPARAM lParam)
 {
@@ -246,7 +238,6 @@ static int gg_modulesloaded(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
 // When Miranda starting shutdown sequence
 static int gg_preshutdown(WPARAM wParam, LPARAM lParam)
 {
@@ -255,7 +246,6 @@ static int gg_preshutdown(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
 // Gets protocol instance associated with a contact
 static GGPROTO* gg_getprotoinstance(HANDLE hContact)
 {
@@ -275,7 +265,6 @@ static GGPROTO* gg_getprotoinstance(HANDLE hContact)
 	return NULL;
 }
 
-//////////////////////////////////////////////////////////
 // Handles PrebuildContactMenu event
 static int gg_prebuildcontactmenu(WPARAM wParam, LPARAM lParam)
 {
@@ -298,7 +287,6 @@ static int gg_prebuildcontactmenu(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
 // Contact block service function
 INT_PTR gg_blockuser(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -308,8 +296,6 @@ INT_PTR gg_blockuser(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-
-//////////////////////////////////////////////////////////
 // Contact blocking initialization
 #define GGS_BLOCKUSER "%s/BlockUser"
 static void gg_block_init(GGPROTO *gg)
@@ -332,7 +318,6 @@ static void gg_block_init(GGPROTO *gg)
 	gg->hPrebuildMenuHook = HookEvent(ME_CLIST_PREBUILDCONTACTMENU, gg_prebuildcontactmenu);
 }
 
-//////////////////////////////////////////////////////////
 // Contact blocking uninitialization
 static void gg_block_uninit(GGPROTO *gg)
 {
@@ -340,7 +325,6 @@ static void gg_block_uninit(GGPROTO *gg)
 	CallService(MS_CLIST_REMOVECONTACTMENUITEM, (WPARAM)gg->hBlockMenuItem, 0);
 }
 
-//////////////////////////////////////////////////////////
 // Menus initialization
 void gg_menus_init(GGPROTO *gg)
 {
@@ -382,7 +366,6 @@ void gg_menus_init(GGPROTO *gg)
 	gg_sessions_menus_init(gg, hRoot);
 }
 
-//////////////////////////////////////////////////////////
 // Custom protocol event
 int gg_event(PROTO_INTERFACE *proto, PROTOEVENTTYPE eventType, WPARAM wParam, LPARAM lParam)
 {
@@ -455,7 +438,6 @@ int gg_event(PROTO_INTERFACE *proto, PROTOEVENTTYPE eventType, WPARAM wParam, LP
 	return TRUE;
 }
 
-//////////////////////////////////////////////////////////
 // Module instance initialization
 static GGPROTO *gg_proto_init(const char* pszProtoName, const TCHAR* tszUserName)
 {
@@ -528,7 +510,6 @@ static GGPROTO *gg_proto_init(const char* pszProtoName, const TCHAR* tszUserName
 	return gg;
 }
 
-//////////////////////////////////////////////////////////
 // Module instance uninitialization
 static int gg_proto_uninit(PROTO_INTERFACE *proto)
 {
@@ -580,7 +561,6 @@ static int gg_proto_uninit(PROTO_INTERFACE *proto)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
 // When plugin is loaded
 int __declspec(dllexport) Load(PLUGINLINK * link)
 {
@@ -623,7 +603,6 @@ int __declspec(dllexport) Load(PLUGINLINK * link)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
 // When plugin is unloaded
 int __declspec(dllexport) Unload()
 {
@@ -636,7 +615,6 @@ int __declspec(dllexport) Unload()
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
 // Adds a new protocol specific service function
 void CreateProtoService(const char* szService, GGPROTOFUNC serviceProc, GGPROTO *gg)
 {
@@ -645,21 +623,19 @@ void CreateProtoService(const char* szService, GGPROTOFUNC serviceProc, GGPROTO 
 	CreateServiceFunctionObj(str, (MIRANDASERVICEOBJ)serviceProc, gg);
 }
 
-//////////////////////////////////////////////////////////
 // Forks a thread
 void gg_forkthread(GGPROTO *gg, GGThreadFunc pFunc, void *param)
 {
 	CloseHandle((HANDLE)mir_forkthreadowner((pThreadFuncOwner)&pFunc, gg, param, NULL));
 }
 
-//////////////////////////////////////////////////////////
 // Forks a thread and returns a pseudo handle for it
 HANDLE gg_forkthreadex(GGPROTO *gg, GGThreadFunc pFunc, void *param, UINT *threadId)
 {
 	return (HANDLE)mir_forkthreadowner((pThreadFuncOwner)&pFunc, gg, param, threadId);
 }
 
-//////////////////////////////////////////////////////////
+
 // Wait for thread to stop
 void gg_threadwait(GGPROTO *gg, GGTHREAD *thread)
 {
@@ -669,7 +645,6 @@ void gg_threadwait(GGPROTO *gg, GGTHREAD *thread)
 	ZeroMemory(thread, sizeof(GGTHREAD));
 }
 
-//////////////////////////////////////////////////////////
 // DEBUGING FUNCTIONS
 struct
 {
@@ -748,7 +723,6 @@ void gg_debughandler(int level, const char *format, va_list ap)
 }
 #endif
 
-//////////////////////////////////////////////////////////
 // Log funcion
 int gg_netlog(const GGPROTO *gg, const char *fmt, ...)
 {
@@ -761,7 +735,6 @@ int gg_netlog(const GGPROTO *gg, const char *fmt, ...)
 	return CallService(MS_NETLIB_LOG, (WPARAM) gg->netlib, (LPARAM) szText);
 }
 
-//////////////////////////////////////////////////////////
 // main DLL function
 BOOL APIENTRY DllMain(HINSTANCE hInst, DWORD reason, LPVOID reserved)
 {

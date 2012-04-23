@@ -1,23 +1,23 @@
-////////////////////////////////////////////////////////////////////////////////
-// Gadu-Gadu Plugin for Miranda IM
-//
-// Copyright (c) 2003-2009 Adam Strzelecki <ono+miranda@java.pl>
-// Copyright (c) 2009-2012 Bartosz Bia³ek
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-////////////////////////////////////////////////////////////////////////////////
+/*
+Gadu-Gadu Plugin for Miranda IM
+
+Copyright (c) 2003-2009 Adam Strzelecki <ono+miranda@java.pl>
+Copyright (c) 2009-2012 Bartosz Bia³ek
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
 
 #include "gg.h"
 #include <io.h>
@@ -27,7 +27,7 @@
 #define WM_CHOOSEIMG WM_USER + 3
 #define TIMERID_FLASHWND WM_USER + 4
 
-////////////////////////////////////////////////////////////////////////////
+
 // Image Window : Data
 
 // tablica zawiera uin kolesia i uchwyt do okna, okno zawiera GGIMAGEDLGDATA
@@ -64,7 +64,6 @@ typedef struct
 int gg_img_remove(GGIMAGEDLGDATA *dat);
 INT_PTR gg_img_sendimg(GGPROTO *gg, WPARAM wParam, LPARAM lParam);
 
-////////////////////////////////////////////////////////////////////////////
 // Image Module : Adding item to contact menu, creating sync objects
 int gg_img_init(GGPROTO *gg)
 {
@@ -91,7 +90,6 @@ int gg_img_init(GGPROTO *gg)
 	return FALSE;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Image Module : closing dialogs, sync objects
 int gg_img_shutdown(GGPROTO *gg)
 {
@@ -121,7 +119,6 @@ int gg_img_shutdown(GGPROTO *gg)
 	return FALSE;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Image Module : destroying list
 int gg_img_destroy(GGPROTO *gg)
 {
@@ -135,7 +132,6 @@ int gg_img_destroy(GGPROTO *gg)
 	return FALSE;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Painting image
 int gg_img_paint(HWND hwnd, GGIMAGEENTRY *dat)
 {
@@ -200,7 +196,6 @@ int gg_img_paint(HWND hwnd, GGIMAGEENTRY *dat)
 	return FALSE;
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // Returns supported image filters
 char *gg_img_getfilter(char *szFilter, int nSize)
 {
@@ -223,7 +218,6 @@ char *gg_img_getfilter(char *szFilter, int nSize)
 	return szFilter;
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // Save specified image entry
 int gg_img_saveimage(HWND hwnd, GGIMAGEENTRY *dat)
 {
@@ -261,7 +255,6 @@ int gg_img_saveimage(HWND hwnd, GGIMAGEENTRY *dat)
 	return 0;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Fit window size to image size
 BOOL gg_img_fit(HWND hwndDlg)
 {
@@ -333,7 +326,6 @@ BOOL gg_img_fit(HWND hwndDlg)
 	return TRUE;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Dialog resizer procedure
 static int sttImageDlgResizer(HWND hwndDlg, LPARAM lParam, UTILRESIZECONTROL* urc)
 {
@@ -353,7 +345,6 @@ static int sttImageDlgResizer(HWND hwndDlg, LPARAM lParam, UTILRESIZECONTROL* ur
 	return RD_ANCHORX_LEFT | RD_ANCHORY_TOP;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Send / Recv main dialog procedure
 static INT_PTR CALLBACK gg_img_dlgproc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -694,7 +685,6 @@ static INT_PTR CALLBACK gg_img_dlgproc(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 	return FALSE;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Image dialog call thread
 void __cdecl gg_img_dlgcallthread(GGPROTO *gg, void *param)
 {
@@ -705,7 +695,6 @@ void __cdecl gg_img_dlgcallthread(GGPROTO *gg, void *param)
 		hMIWnd, gg_img_dlgproc, (LPARAM) dat);
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Open dialog receive for specified contact
 GGIMAGEDLGDATA *gg_img_recvdlg(GGPROTO *gg, HANDLE hContact)
 {
@@ -720,7 +709,6 @@ GGIMAGEDLGDATA *gg_img_recvdlg(GGPROTO *gg, HANDLE hContact)
 	return dat;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Checks if an image is already saved to the specified path
 // Returns 1 if yes, 0 if no or -1 if different image on this path is found
 int gg_img_isexists(char *szPath, GGIMAGEENTRY *dat)
@@ -753,7 +741,6 @@ int gg_img_isexists(char *szPath, GGIMAGEENTRY *dat)
 	return -1;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Determine if image's file name has the proper extension
 char *gg_img_hasextension(const char *filename)
 {
@@ -776,12 +763,11 @@ char *gg_img_hasextension(const char *filename)
 	return NULL;
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // Display received image using message with [img] BBCode
 int gg_img_displayasmsg(GGPROTO *gg, HANDLE hContact, void *img)
 {
 	GGIMAGEENTRY *dat = (GGIMAGEENTRY *)img;
-	char szPath[MAX_PATH], *path = (char*)alloca(MAX_PATH), *pImgext, imgext[6];
+	char szPath[MAX_PATH], *path = (char*)_malloca(MAX_PATH), *pImgext, imgext[6];
 	size_t tPathLen;
 	int i, res;
 
@@ -844,7 +830,6 @@ int gg_img_displayasmsg(GGPROTO *gg, HANDLE hContact, void *img)
 	return 0;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Return if uin has it's window already opened
 BOOL gg_img_opened(GGPROTO *gg, uin_t uin)
 {
@@ -859,7 +844,6 @@ BOOL gg_img_opened(GGPROTO *gg, uin_t uin)
 	return FALSE;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Image Module : Looking for window entry, create if not found
 gg_img_display(GGPROTO *gg, HANDLE hContact, void *img)
 {
@@ -906,7 +890,6 @@ gg_img_display(GGPROTO *gg, HANDLE hContact, void *img)
 	return TRUE;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Image Window : Frees image entry structure
 gg_img_releasepicture(void *img)
 {
@@ -923,7 +906,6 @@ gg_img_releasepicture(void *img)
 	return TRUE;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Helper function to determine image file format and the right extension
 const char *gg_img_guessfileextension(const char *lpData)
 {
@@ -941,7 +923,6 @@ const char *gg_img_guessfileextension(const char *lpData)
 	return "";
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Image Window : Loading picture and sending for display
 void *gg_img_loadpicture(GGPROTO *gg, struct gg_event* e, char *szFileName)
 {
@@ -1022,7 +1003,6 @@ void *gg_img_loadpicture(GGPROTO *gg, struct gg_event* e, char *szFileName)
 			dat->lpszFileName = _strdup(e->event.image_reply.filename);
 	}
 
-	////////////////////////////////////////////////////////////////////
 	// Loading picture using Miranda Image services
 
 	// Load image from memory
@@ -1054,7 +1034,6 @@ void *gg_img_loadpicture(GGPROTO *gg, struct gg_event* e, char *szFileName)
 	return NULL;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Image Recv : AddEvent proc
 INT_PTR gg_img_recvimage(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -1069,12 +1048,9 @@ INT_PTR gg_img_recvimage(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return FALSE;
 }
 
-////////////////////////////////////////////////////////////////////////////
-// Windows queue management
-////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////
-// Removes dat structure
+//Windows queue management
+//Removes dat structure
 int gg_img_remove(GGIMAGEDLGDATA *dat)
 {
 	GGIMAGEENTRY *temp = NULL, *img = NULL;
@@ -1102,8 +1078,6 @@ int gg_img_remove(GGIMAGEDLGDATA *dat)
 	return TRUE;
 }
 
-////////////////////////////////////////////////////////////////////////////
-//
 GGIMAGEDLGDATA *gg_img_find(GGPROTO *gg, uin_t uin, uint32_t crc32)
 {
 	int res = 0;
@@ -1134,8 +1108,6 @@ GGIMAGEDLGDATA *gg_img_find(GGPROTO *gg, uin_t uin, uint32_t crc32)
 	return NULL;
 }
 
-
-////////////////////////////////////////////////////////////////////////////
 // Image Module : Send on Request
 BOOL gg_img_sendonrequest(GGPROTO *gg, struct gg_event* e)
 {
@@ -1152,7 +1124,6 @@ BOOL gg_img_sendonrequest(GGPROTO *gg, struct gg_event* e)
 	return TRUE;
 }
 
-////////////////////////////////////////////////////////////////////////////
 // Send Image : Run (Thread and main)
 INT_PTR gg_img_sendimg(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {

@@ -1,22 +1,22 @@
-////////////////////////////////////////////////////////////////////////////////
-// Gadu-Gadu Plugin for Miranda IM
-//
-// Copyright (c) 2003-2006 Adam Strzelecki <ono+miranda@java.pl>
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-////////////////////////////////////////////////////////////////////////////////
+/*
+Gadu-Gadu Plugin for Miranda IM
+
+Copyright (c) 2003-2006 Adam Strzelecki <ono+miranda@java.pl>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
 
 #include "gg.h"
 #include <errno.h>
@@ -84,7 +84,6 @@ void gg_dccconnect(GGPROTO *gg, uin_t uin)
 	LeaveCriticalSection(&gg->ft_mutex);
 }
 
-//////////////////////////////////////////////////////////
 // THREAD: File transfer fail
 struct ftfaildata
 {
@@ -112,7 +111,6 @@ HANDLE ftfail(GGPROTO *gg, HANDLE hContact)
 	return ft->hProcess;
 }
 
-////////////////////////////////////////////////////////////
 // Main DCC connection session thread
 
 // Info refresh min time (msec) / half-sec
@@ -220,7 +218,7 @@ void __cdecl gg_dccmainthread(GGPROTO *gg, void *empty)
 					if (!dcc || (!FD_ISSET(dcc->fd, &rd) && !FD_ISSET(dcc->fd, &wd)))
 						continue;
 
-					/////////////////////////////////////////////////////////////////
+					///////
 					// Process DCC events
 
 					// Connection broken/closed
@@ -352,7 +350,6 @@ void __cdecl gg_dccmainthread(GGPROTO *gg, void *empty)
 							// Add to waiting transfers
 							list_add(&gg->transfers, dcc, 0);
 
-							//////////////////////////////////////////////////
 							// Add file recv request
 							{
 								CCSDATA ccs;
@@ -455,7 +452,6 @@ void __cdecl gg_dccmainthread(GGPROTO *gg, void *empty)
 					if (!dcc7 || (!FD_ISSET(dcc7->fd, &rd) && !FD_ISSET(dcc7->fd, &wd)))
 						continue;
 
-					/////////////////////////////////////////////////////////////////
 					// Process DCC7 events
 
 					// Connection broken/closed
@@ -632,7 +628,7 @@ void __cdecl gg_dccmainthread(GGPROTO *gg, void *empty)
 	gg_netlog(gg, "gg_dccmainthread(): DCC Server Thread Ending");
 }
 
-////////////////////////////////////////////////////////////
+//
 // Called when received an file
 int gg_recvfile(PROTO_INTERFACE *proto, HANDLE hContact, PROTOFILEEVENT* pre)
 {
@@ -640,7 +636,7 @@ int gg_recvfile(PROTO_INTERFACE *proto, HANDLE hContact, PROTOFILEEVENT* pre)
 	return CallService( MS_PROTO_RECVFILE, 0, ( LPARAM )&ccs );
 }
 
-////////////////////////////////////////////////////////////
+//
 // Called when user sends a file
 HANDLE gg_sendfile(PROTO_INTERFACE *proto, HANDLE hContact, const PROTOCHAR* szDescription, PROTOCHAR** ppszFiles)
 {
@@ -838,7 +834,7 @@ HANDLE gg_dcc7fileallow(GGPROTO *gg, HANDLE hTransfer, const PROTOCHAR* szPath)
 	return hTransfer;
 }
 
-////////////////////////////////////////////////////////////
+//
 // File receiving allowed
 HANDLE gg_fileallow(PROTO_INTERFACE *proto, HANDLE hContact, HANDLE hTransfer, const PROTOCHAR* szPath)
 {
@@ -892,7 +888,7 @@ int gg_dcc7filedeny(GGPROTO *gg, HANDLE hTransfer)
 	return 0;
 }
 
-////////////////////////////////////////////////////////////
+//
 // File receiving denied
 int gg_filedeny(PROTO_INTERFACE *proto, HANDLE hContact, HANDLE hTransfer, const PROTOCHAR* szReason)
 {
@@ -965,7 +961,7 @@ int gg_dcc7filecancel(GGPROTO *gg, HANDLE hTransfer)
 	return 0;
 }
 
-////////////////////////////////////////////////////////////
+//
 // File transfer canceled
 int gg_filecancel(PROTO_INTERFACE *proto, HANDLE hContact, HANDLE hTransfer)
 {

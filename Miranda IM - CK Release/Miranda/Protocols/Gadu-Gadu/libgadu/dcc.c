@@ -2,29 +2,23 @@
 /* $Id$ */
 
 /*
- *  (C) Copyright 2001-2008 Wojtek Kaniewski <wojtekka@irc.pl>
- *                          Tomasz Chiliński <chilek@chilan.com>
- *                          Adam Wysocki <gophi@ekg.chmurka.net>
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License Version
- *  2.1 as published by the Free Software Foundation.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public
- *  License along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
- *  USA.
- */
+(C) Copyright 2001-2008 Wojtek Kaniewski <wojtekka@irc.pl>
+                        Tomasz Chiliński <chilek@chilan.com>
+                        Adam Wysocki <gophi@ekg.chmurka.net>
 
-/**
- * \file dcc.c
- *
- * \brief Obsługa połączeń bezpośrednich do wersji Gadu-Gadu 6.x
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License Version
+2.1 as published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+ 
+ You should have received a copy of the GNU Lesser General Public
+ License along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
+ USA.
  */
 
 #ifndef _WIN64
@@ -65,14 +59,6 @@
 
 #ifndef GG_DEBUG_DISABLE
 
-/**
- * \internal Przekazuje zawartość pakietu do odpluskwiania.
- *
- * \param prefix Prefiks informacji
- * \param fd Deskryptor gniazda
- * \param buf Bufor z danumi
- * \param size Rozmiar bufora z danymi
- */
 static void gg_dcc_debug_data(const char *prefix, SOCKET fd, const void *buf, unsigned int size)
 {
 	unsigned int i;
@@ -88,35 +74,11 @@ static void gg_dcc_debug_data(const char *prefix, SOCKET fd, const void *buf, un
 #define gg_dcc_debug_data(a,b,c,d) do { } while (0)
 #endif
 
-/**
- * Wysyła żądanie zwrotnego połączenia bezpośredniego.
- *
- * Funkcję wykorzystuje się, jeśli nie ma możliwości połączenia się z odbiorcą
- * pliku lub rozmowy głosowej. Po otrzymaniu żądania druga strona spróbuje
- * nawiązać zwrotne połączenie bezpośrednie z nadawcą.
- * gg_dcc_request()
- *
- * \param sess Struktura sesji
- * \param uin Numer odbiorcy
- *
- * \return Patrz \c gg_send_message_ctcp()
- *
- * \ingroup dcc6
- */
 int gg_dcc_request(struct gg_session *sess, uin_t uin)
 {
 	return gg_send_message_ctcp(sess, GG_CLASS_CTCP, uin, (unsigned char*) "\002", 1);
 }
 
-/**
- * \internal Zamienia znacznik czasu w postaci uniksowej na format API WIN32.
- *
- * \note Funkcja działa jedynie gdy kompilator obsługuje typ danych
- * \c long \c long.
- *
- * \param ut Czas w postaci uniksowej
- * \param ft Czas w postaci API WIN32
- */
 static void gg_dcc_fill_filetime(time_t ut, uint32_t *ft)
 {
 #ifdef GG_CONFIG_HAVE_LONG_LONG
@@ -137,34 +99,11 @@ static void gg_dcc_fill_filetime(time_t ut, uint32_t *ft)
 #endif
 }
 
-/**
- * Wypełnia pola struktury \c gg_dcc niezbędne do wysłania pliku.
- *
- * \note Większą funkcjonalność zapewnia funkcja \c gg_dcc_fill_file_info2().
- *
- * \param d Struktura połączenia
- * \param filename Nazwa pliku
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup dcc6
- */
 int gg_dcc_fill_file_info(struct gg_dcc *d, const char *filename)
 {
 	return gg_dcc_fill_file_info2(d, filename, filename);
 }
 
-/**
- * Wypełnia pola struktury \c gg_dcc niezbędne do wysłania pliku.
- *
- * \param d Struktura połączenia
- * \param filename Nazwa pliku zapisywana w strukturze
- * \param local_filename Nazwa pliku w lokalnym systemie plików
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup dcc6
- */
 int gg_dcc_fill_file_info2(struct gg_dcc *d, const char *filename, const char *local_filename)
 {
 	struct stat st;
@@ -191,7 +130,7 @@ int gg_dcc_fill_file_info2(struct gg_dcc *d, const char *filename, const char *l
 		return -1;
 	}
 
-	if ((d->file_fd = open(local_filename, O_RDONLY | O_BINARY)) == -1) {
+	if ((d->file_fd = _open(local_filename, O_RDONLY | O_BINARY)) == -1) {
 		gg_debug(GG_DEBUG_MISC, "// gg_dcc_fill_file_info2() open() failed (%s)\n", strerror(errno));
 		return -1;
 	}
@@ -261,17 +200,6 @@ int gg_dcc_fill_file_info2(struct gg_dcc *d, const char *filename, const char *l
 	return 0;
 }
 
-/**
- * \internal Rozpoczyna połączenie bezpośrednie z danym klientem.
- *
- * \param ip Adres IP odbiorcy
- * \param port Port odbiorcy
- * \param my_uin Własny numer
- * \param peer_uin Numer odbiorcy
- * \param type Rodzaj połączenia (\c GG_SESSION_DCC_SEND lub \c GG_SESSION_DCC_GET)
- *
- * \return Struktura \c gg_dcc lub \c NULL w przypadku błędu
- */
 static struct gg_dcc *gg_dcc_transfer(uint32_t ip, uint16_t port, uin_t my_uin, uin_t peer_uin, int type)
 {
 	struct gg_dcc *d = NULL;
@@ -311,18 +239,6 @@ static struct gg_dcc *gg_dcc_transfer(uint32_t ip, uint16_t port, uin_t my_uin, 
 	return d;
 }
 
-/**
- * Rozpoczyna odbieranie pliku przez zwrotne połączenie bezpośrednie.
- *
- * \param ip Adres IP nadawcy
- * \param port Port nadawcy
- * \param my_uin Własny numer
- * \param peer_uin Numer nadawcy
- *
- * \return Struktura \c gg_dcc lub \c NULL w przypadku błędu
- *
- * \ingroup dcc6
- */
 struct gg_dcc *gg_dcc_get_file(uint32_t ip, uint16_t port, uin_t my_uin, uin_t peer_uin)
 {
 	gg_debug(GG_DEBUG_MISC, "// gg_dcc_get_file() handing over to gg_dcc_transfer()\n");
@@ -330,18 +246,6 @@ struct gg_dcc *gg_dcc_get_file(uint32_t ip, uint16_t port, uin_t my_uin, uin_t p
 	return gg_dcc_transfer(ip, port, my_uin, peer_uin, GG_SESSION_DCC_GET);
 }
 
-/**
- * Rozpoczyna wysyłanie pliku.
- *
- * \param ip Adres IP odbiorcy
- * \param port Port odbiorcy
- * \param my_uin Własny numer
- * \param peer_uin Numer odbiorcy
- *
- * \return Struktura \c gg_dcc lub \c NULL w przypadku błędu
- *
- * \ingroup dcc6
- */
 struct gg_dcc *gg_dcc_send_file(uint32_t ip, uint16_t port, uin_t my_uin, uin_t peer_uin)
 {
 	gg_debug(GG_DEBUG_MISC, "// gg_dcc_send_file() handing over to gg_dcc_transfer()\n");
@@ -349,18 +253,6 @@ struct gg_dcc *gg_dcc_send_file(uint32_t ip, uint16_t port, uin_t my_uin, uin_t 
 	return gg_dcc_transfer(ip, port, my_uin, peer_uin, GG_SESSION_DCC_SEND);
 }
 
-/**
- * Rozpoczyna połączenie głosowe.
- *
- * \param ip Adres IP odbiorcy
- * \param port Port odbiorcy
- * \param my_uin Własny numer
- * \param peer_uin Numer odbiorcy
- *
- * \return Struktura \c gg_dcc lub \c NULL w przypadku błędu
- *
- * \ingroup dcc6
- */
 struct gg_dcc *gg_dcc_voice_chat(uint32_t ip, uint16_t port, uin_t my_uin, uin_t peer_uin)
 {
 	gg_debug(GG_DEBUG_MISC, "// gg_dcc_voice_chat() handing over to gg_dcc_transfer()\n");
@@ -368,35 +260,12 @@ struct gg_dcc *gg_dcc_voice_chat(uint32_t ip, uint16_t port, uin_t my_uin, uin_t
 	return gg_dcc_transfer(ip, port, my_uin, peer_uin, GG_SESSION_DCC_VOICE);
 }
 
-/**
- * Ustawia typ przychodzącego połączenia bezpośredniego.
- *
- * Funkcję należy wywołać po otrzymaniu zdarzenia \c GG_EVENT_DCC_CALLBACK.
- *
- * \param d Struktura połączenia
- * \param type Rodzaj połączenia (\c GG_SESSION_DCC_SEND lub
- *             \c GG_SESSION_DCC_VOICE)
- *
- * \ingroup dcc6
- */
 void gg_dcc_set_type(struct gg_dcc *d, int type)
 {
 	d->type = type;
 	d->state = (type == GG_SESSION_DCC_SEND) ? GG_STATE_SENDING_FILE_INFO : GG_STATE_SENDING_VOICE_REQUEST;
 }
 
-/**
- * \internal Funkcja zwrotna połączenia bezpośredniego.
- *
- * Pole \c callback struktury \c gg_dcc zawiera wskaźnik do tej funkcji.
- * Wywołuje ona \c gg_watch_fd() i zachowuje wynik w polu \c event.
- *
- * \note Funkcjonalność funkcjo zwrotnej nie jest już wspierana.
- *
- * \param d Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_dcc_callback(struct gg_dcc *d)
 {
 	struct gg_event *e = gg_dcc_watch_fd(d);
@@ -406,18 +275,6 @@ static int gg_dcc_callback(struct gg_dcc *d)
 	return (e != NULL) ? 0 : -1;
 }
 
-/**
- * Tworzy gniazdo nasłuchujące dla połączeń bezpośrednich.
- *
- * Funkcja przywiązuje gniazdo do pierwszego wolnego portu TCP.
- *
- * \param uin Własny numer
- * \param port Preferowany port (jeśli równy 0 lub -1, próbuje się domyślnego)
- *
- * \return Struktura \c gg_dcc lub \c NULL w przypadku błędu
- *
- * \ingroup dcc6
- */
 struct gg_dcc *gg_dcc_socket_create(uin_t uin, uint16_t port)
 {
 	struct gg_dcc *c;
@@ -488,17 +345,6 @@ struct gg_dcc *gg_dcc_socket_create(uin_t uin, uint16_t port)
 	return c;
 }
 
-/**
- * Wysyła ramkę danych połączenia głosowego.
- *
- * \param d Struktura połączenia
- * \param buf Bufor z danymi
- * \param length Długość bufora z danymi
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup dcc6
- */
 int gg_dcc_voice_send(struct gg_dcc *d, char *buf, int length)
 {
 	struct packet_s {
@@ -532,13 +378,6 @@ int gg_dcc_voice_send(struct gg_dcc *d, char *buf, int length)
 	return 0;
 }
 
-/**
- * \internal Odbiera dane z połączenia bezpośredniego z obsługą błędów.
- *
- * \param fd Deskryptor gniazda
- * \param buf Bufor na dane
- * \param size Rozmiar bufora na dane
- */
 #define gg_dcc_read(fd, buf, size) \
 { \
 	int tmp = gg_sock_read(fd, buf, size); \
@@ -558,13 +397,6 @@ int gg_dcc_voice_send(struct gg_dcc *d, char *buf, int length)
 	gg_dcc_debug_data("read", fd, buf, size); \
 }
 
-/**
- * \internal Wysyła dane do połączenia bezpośredniego z obsługą błędów.
- *
- * \param fd Deskryptor gniazda
- * \param buf Bufor z danymi
- * \param size Rozmiar bufora z danymi
- */
 #define gg_dcc_write(fd, buf, size) \
 { \
 	int tmp; \
@@ -582,19 +414,6 @@ int gg_dcc_voice_send(struct gg_dcc *d, char *buf, int length)
 	} \
 }
 
-/**
- * Funkcja wywoływana po zaobserwowaniu zmian na deskryptorze połączenia.
- *
- * Funkcja zwraca strukturę zdarzenia \c gg_event. Jeśli rodzaj zdarzenia
- * to \c GG_EVENT_NONE, nie wydarzyło się jeszcze nic wartego odnotowania.
- * Strukturę zdarzenia należy zwolnić funkcja \c gg_event_free.
- *
- * \param h Struktura połączenia
- *
- * \return Struktura zdarzenia lub \c NULL jeśli wystąpił błąd
- *
- * \ingroup dcc6
- */
 struct gg_event *gg_dcc_watch_fd(struct gg_dcc *h)
 {
 	struct gg_event *e;
@@ -1281,7 +1100,7 @@ struct gg_event *gg_dcc_watch_fd(struct gg_dcc *h)
 					return e;
 				}
 
-				tmp = write(h->file_fd, buf, size);
+				tmp = _write(h->file_fd, buf, size);
 
 				if (tmp == -1 || tmp < size) {
 					gg_debug(GG_DEBUG_MISC, "// gg_dcc_watch_fd() write() failed (%d:fd=%d:res=%d:%s)\n", tmp, h->file_fd, size, strerror(errno));
@@ -1331,13 +1150,6 @@ struct gg_event *gg_dcc_watch_fd(struct gg_dcc *h)
 	return e;
 }
 
-/**
- * Zwalnia zasoby używane przez połączenie bezpośrednie.
- *
- * \param d Struktura połączenia
- *
- * \ingroup dcc6
- */
 void gg_dcc_free(struct gg_dcc *d)
 {
 	gg_debug(GG_DEBUG_FUNCTION, "** gg_dcc_free(%p);\n", d);
@@ -1351,13 +1163,3 @@ void gg_dcc_free(struct gg_dcc *d)
 	free(d->chunk_buf);
 	free(d);
 }
-
-/*
- * Local variables:
- * c-indentation-style: k&r
- * c-basic-offset: 8
- * indent-tabs-mode: notnil
- * End:
- *
- * vim: shiftwidth=8:
- */

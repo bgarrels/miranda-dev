@@ -1,22 +1,22 @@
-////////////////////////////////////////////////////////////////////////////////
-// Gadu-Gadu Plugin for Miranda IM
-//
-// Copyright (c) 2003-2006 Adam Strzelecki <ono+miranda@java.pl>
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-////////////////////////////////////////////////////////////////////////////////
+/*
+Gadu-Gadu Plugin for Miranda IM
+
+Copyright (c) 2003-2006 Adam Strzelecki <ono+miranda@java.pl>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
 
 #include "gg.h"
 #include "m_metacontacts.h"
@@ -29,7 +29,6 @@ int gg_gc_event(GGPROTO *gg, WPARAM wParam, LPARAM lParam);
 INT_PTR gg_gc_openconf(GGPROTO *gg, WPARAM wParam, LPARAM lParam);
 INT_PTR gg_gc_clearignored(GGPROTO *gg, WPARAM wParam, LPARAM lParam);
 
-////////////////////////////////////////////////////////////////////////////////
 // Inits Gadu-Gadu groupchat module using chat.dll
 int gg_gc_init(GGPROTO *gg)
 {
@@ -59,7 +58,6 @@ int gg_gc_init(GGPROTO *gg)
 	return 1;
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // Groupchat menus initialization
 void gg_gc_menus_init(GGPROTO *gg, HGENMENU hRoot)
 {
@@ -92,7 +90,6 @@ void gg_gc_menus_init(GGPROTO *gg, HGENMENU hRoot)
 	}
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // Releases Gadu-Gadu groupchat module using chat.dll
 int gg_gc_destroy(GGPROTO *gg)
 {
@@ -217,7 +214,6 @@ typedef struct _gg_gc_echat
 	char * chat_id;
 } gg_gc_echat;
 
-////////////////////////////////////////////////////////////////////////////////
 // This is main groupchat initialization routine
 char *gg_gc_getchat(GGPROTO *gg, uin_t sender, uin_t *recipients, int recipients_count)
 {

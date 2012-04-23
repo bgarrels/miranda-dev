@@ -2,31 +2,25 @@
 /* $Id$ */
 
 /*
- *  (C) Copyright 2001-2009 Wojtek Kaniewski <wojtekka@irc.pl>
- *                          Robert J. Woźny <speedy@ziew.org>
- *                          Arkadiusz Miśkiewicz <arekm@pld-linux.org>
- *                          Tomasz Chiliński <chilek@chilan.com>
- *                          Adam Wysocki <gophi@ekg.chmurka.net>
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License Version
- *  2.1 as published by the Free Software Foundation.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public
- *  License along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
- *  USA.
- */
-
-/**
- * \file resolver.c
- *
- * \brief Funkcje rozwiązywania nazw
+ (C) Copyright 2001-2009 Wojtek Kaniewski <wojtekka@irc.pl>
+                         Robert J. Woźny <speedy@ziew.org>
+                         Arkadiusz Miśkiewicz <arekm@pld-linux.org>
+                         Tomasz Chiliński <chilek@chilan.com>
+                         Adam Wysocki <gophi@ekg.chmurka.net>
+ 
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License Version
+ 2.1 as published by the Free Software Foundation.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+ 
+ You should have received a copy of the GNU Lesser General Public
+ License along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
+ USA.
  */
 
 #ifdef _WIN32
@@ -84,18 +78,6 @@ static void gg_gethostbyname_cleaner(void *data)
 #endif
 #endif /* GG_CONFIG_HAVE_PTHREAD */
 
-/**
- * \internal Odpowiednik \c gethostbyname zapewniający współbieżność.
- *
- * Jeśli dany system dostarcza \c gethostbyname_r, używa się tej wersji, jeśli
- * nie, to zwykłej \c gethostbyname.
- *
- * \param hostname Nazwa serwera
- * \param addr Wskaźnik na rezultat rozwiązywania nazwy
- * \param pthread Flaga blokowania unicestwiania wątku podczas alokacji pamięci
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_gethostbyname_real(const char *hostname, struct in_addr *addr, int pthread)
 {
 #ifdef GG_CONFIG_HAVE_GETHOSTBYNAME_R
@@ -192,16 +174,6 @@ int gg_gethostbyname_real(const char *hostname, struct in_addr *addr, int pthrea
 #endif /* GG_CONFIG_HAVE_GETHOSTBYNAME_R */
 }
 
-/**
- * \internal Odpowiednik \c gethostbyname zapewniający współbieżność.
- *
- * Jeśli dany system dostarcza \c gethostbyname_r, używa się tej wersji, jeśli
- * nie, to zwykłej \c gethostbyname.
- *
- * \param hostname Nazwa serwera
- *
- * \return Zaalokowana struktura \c in_addr lub NULL w przypadku błędu.
- */
 struct in_addr *gg_gethostbyname(const char *hostname)
 {
 	struct in_addr *addr;
@@ -223,23 +195,6 @@ struct gg_resolver_fork_data {
 	int pid;		/*< Identyfikator procesu */
 };
 
-/**
- * \internal Rozwiązuje nazwę serwera w osobnym procesie.
- *
- * Połączenia asynchroniczne nie mogą blokować procesu w trakcie rozwiązywania
- * nazwy serwera. W tym celu tworzony jest potok, nowy proces i dopiero w nim
- * przeprowadzane jest rozwiązywanie nazwy. Deskryptor strony do odczytu 
- * zapisuje się w strukturze sieci i czeka na dane w postaci struktury
- * \c in_addr. Jeśli nie znaleziono nazwy, zwracana jest \c INADDR_NONE.
- *
- * \param fd Wskaźnik na zmienną, gdzie zostanie umieszczony deskryptor
- *           potoku
- * \param priv_data Wskaźnik na zmienną, gdzie zostanie umieszczony wskaźnik
- *                  do numeru procesu potomnego rozwiązującego nazwę
- * \param hostname Nazwa serwera do rozwiązania
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_resolver_fork_start(SOCKET *fd, void **priv_data, const char *hostname)
 {
 	struct gg_resolver_fork_data *data = NULL;
@@ -310,16 +265,6 @@ cleanup:
 	return -1;
 }
 
-/**
- * \internal Usuwanie zasobów po procesie rozwiązywaniu nazwy.
- *
- * Funkcja wywoływana po zakończeniu rozwiązanywania nazwy lub przy zwalnianiu
- * zasobów sesji podczas rozwiązywania nazwy.
- *
- * \param priv_data Wskaźnik na zmienną przechowującą wskaźnik do prywatnych
- *                  danych
- * \param force Flaga usuwania zasobów przed zakończeniem działania
- */
 static void gg_resolver_fork_cleanup(void **priv_data, int force)
 {
 	struct gg_resolver_fork_data *data;
@@ -350,16 +295,6 @@ struct gg_resolver_pthread_data {
 	SOCKET wfd;		/*< Deskryptor do zapisu */
 };
 
-/**
- * \internal Usuwanie zasobów po wątku rozwiązywaniu nazwy.
- *
- * Funkcja wywoływana po zakończeniu rozwiązanywania nazwy lub przy zwalnianiu
- * zasobów sesji podczas rozwiązywania nazwy.
- *
- * \param priv_data Wskaźnik na zmienną przechowującą wskaźnik do prywatnych
- *                  danych
- * \param force Flaga usuwania zasobów przed zakończeniem działania
- */
 static void gg_resolver_pthread_cleanup(void **priv_data, int force)
 {
 	struct gg_resolver_pthread_data *data;
@@ -386,11 +321,6 @@ static void gg_resolver_pthread_cleanup(void **priv_data, int force)
 	free(data);
 }
 
-/**
- * \internal Wątek rozwiązujący nazwę.
- *
- * \param arg Wskaźnik na strukturę \c gg_resolver_pthread_data
- */
 static void *__stdcall gg_resolver_pthread_thread(void *arg)
 {
 	struct gg_resolver_pthread_data *data = arg;
@@ -413,21 +343,6 @@ static void *__stdcall gg_resolver_pthread_thread(void *arg)
 	return NULL;	/* żeby kompilator nie marudził */
 }
 
-/**
- * \internal Rozwiązuje nazwę serwera w osobnym wątku.
- *
- * Funkcja działa analogicznie do \c gg_resolver_fork_start(), z tą różnicą,
- * że działa na wątkach, nie procesach. Jest dostępna wyłącznie gdy podczas
- * kompilacji włączono odpowiednią opcję.
- *
- * \param fd Wskaźnik na zmienną, gdzie zostanie umieszczony deskryptor
- *           potoku
- * \param priv_data Wskaźnik na zmienną, gdzie zostanie umieszczony wskaźnik
- *                  do prywatnych danych wątku rozwiązującego nazwę
- * \param hostname Nazwa serwera do rozwiązania
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_resolver_pthread_start(SOCKET *fd, void **priv_data, const char *hostname)
 {
 	struct gg_resolver_pthread_data *data = NULL;
@@ -495,14 +410,6 @@ cleanup:
 
 #endif /* GG_CONFIG_HAVE_PTHREAD */
 
-/**
- * Ustawia sposób rozwiązywania nazw w sesji.
- *
- * \param gs Struktura sesji
- * \param type Sposób rozwiązywania nazw (patrz \ref build-resolver)
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_session_set_resolver(struct gg_session *gs, gg_resolver_t type)
 {
 	if (gs == NULL) {
@@ -546,13 +453,6 @@ int gg_session_set_resolver(struct gg_session *gs, gg_resolver_t type)
 	}
 }
 
-/**
- * Zwraca sposób rozwiązywania nazw w sesji.
- *
- * \param gs Struktura sesji
- *
- * \return Sposób rozwiązywania nazw
- */
 gg_resolver_t gg_session_get_resolver(struct gg_session *gs)
 {
 	if (gs == NULL) {
@@ -563,15 +463,6 @@ gg_resolver_t gg_session_get_resolver(struct gg_session *gs)
 	return gs->resolver_type;
 }
 
-/**
- * Ustawia własny sposób rozwiązywania nazw w sesji.
- *
- * \param gs Struktura sesji
- * \param resolver_start Funkcja rozpoczynająca rozwiązywanie nazwy
- * \param resolver_cleanup Funkcja zwalniająca zasoby
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_session_set_custom_resolver(struct gg_session *gs, int (*resolver_start)(SOCKET*, void**, const char*), void (*resolver_cleanup)(void**, int))
 {
 	if (gs == NULL || resolver_start == NULL || resolver_cleanup == NULL) {
@@ -586,14 +477,6 @@ int gg_session_set_custom_resolver(struct gg_session *gs, int (*resolver_start)(
 	return 0;
 }
 
-/**
- * Ustawia sposób rozwiązywania nazw połączenia HTTP.
- *
- * \param gh Struktura połączenia
- * \param type Sposób rozwiązywania nazw (patrz \ref build-resolver)
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_http_set_resolver(struct gg_http *gh, gg_resolver_t type)
 {
 	if (gh == NULL) {
@@ -637,13 +520,6 @@ int gg_http_set_resolver(struct gg_http *gh, gg_resolver_t type)
 	}
 }
 
-/**
- * Zwraca sposób rozwiązywania nazw połączenia HTTP.
- *
- * \param gh Struktura połączenia
- *
- * \return Sposób rozwiązywania nazw
- */
 gg_resolver_t gg_http_get_resolver(struct gg_http *gh)
 {
 	if (gh == NULL) {
@@ -654,15 +530,6 @@ gg_resolver_t gg_http_get_resolver(struct gg_http *gh)
 	return gh->resolver_type;
 }
 
-/**
- * Ustawia własny sposób rozwiązywania nazw połączenia HTTP.
- *
- * \param gh Struktura sesji
- * \param resolver_start Funkcja rozpoczynająca rozwiązywanie nazwy
- * \param resolver_cleanup Funkcja zwalniająca zasoby
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_http_set_custom_resolver(struct gg_http *gh, int (*resolver_start)(SOCKET*, void**, const char*), void (*resolver_cleanup)(void**, int))
 {
 	if (gh == NULL || resolver_start == NULL || resolver_cleanup == NULL) {
@@ -677,13 +544,6 @@ int gg_http_set_custom_resolver(struct gg_http *gh, int (*resolver_start)(SOCKET
 	return 0;
 }
 
-/**
- * Ustawia sposób rozwiązywania nazw globalnie dla biblioteki.
- *
- * \param type Sposób rozwiązywania nazw (patrz \ref build-resolver)
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_global_set_resolver(gg_resolver_t type)
 {
 	switch (type) {
@@ -713,43 +573,11 @@ int gg_global_set_resolver(gg_resolver_t type)
 	}
 }
 
-/**
- * Zwraca sposób rozwiązywania nazw globalnie dla biblioteki.
- *
- * \return Sposób rozwiązywania nazw
- */
 gg_resolver_t gg_global_get_resolver(void)
 {
 	return gg_global_resolver_type;
 }
 
-/**
- * Ustawia własny sposób rozwiązywania nazw globalnie dla biblioteki.
- *
- * \param resolver_start Funkcja rozpoczynająca rozwiązywanie nazwy
- * \param resolver_cleanup Funkcja zwalniająca zasoby
- *
- * Parametry funkcji rozpoczynającej rozwiązywanie nazwy wyglądają następująco:
- *  - \c "SOCKET *fd" &mdash; wskaźnik na zmienną, gdzie zostanie umieszczony deskryptor potoku
- *  - \c "void **priv_data" &mdash; wskaźnik na zmienną, gdzie można umieścić wskaźnik do prywatnych danych na potrzeby rozwiązywania nazwy
- *  - \c "const char *name" &mdash; nazwa serwera do rozwiązania
- *
- * Parametry funkcji zwalniającej zasoby wyglądają następująco:
- *  - \c "void **priv_data" &mdash; wskaźnik na zmienną przechowującą wskaźnik do prywatnych danych, należy go ustawić na \c NULL po zakończeniu
- *  - \c "int force" &mdash; flaga mówiąca o tym, że zasoby są zwalniane przed zakończeniem rozwiązywania nazwy, np. z powodu zamknięcia sesji.
- *
- * Własny kod rozwiązywania nazwy powinien stworzyć potok, parę gniazd lub
- * inny deskryptor pozwalający na co najmniej jednostronną komunikację i 
- * przekazać go w parametrze \c fd. Po zakończeniu rozwiązywania nazwy,
- * powinien wysłać otrzymany adres IP w postaci sieciowej (big-endian) do
- * deskryptora. Jeśli rozwiązywanie nazwy się nie powiedzie, należy wysłać
- * \c INADDR_NONE. Następnie zostanie wywołana funkcja zwalniająca zasoby
- * z parametrem \c force równym \c 0. Gdyby sesja została zakończona przed
- * rozwiązaniem nazwy, np. za pomocą funkcji \c gg_logoff(), funkcja
- * zwalniająca zasoby zostanie wywołana z parametrem \c force równym \c 1.
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_global_set_custom_resolver(int (*resolver_start)(SOCKET*, void**, const char*), void (*resolver_cleanup)(void**, int))
 {
 	if (resolver_start == NULL || resolver_cleanup == NULL) {

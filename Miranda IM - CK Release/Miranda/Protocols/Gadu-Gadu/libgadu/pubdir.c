@@ -2,29 +2,23 @@
 /* $Id$ */
 
 /*
- *  (C) Copyright 2001-2006 Wojtek Kaniewski <wojtekka@irc.pl>
- *                          Dawid Jarosz <dawjar@poczta.onet.pl>
- *                          Adam Wysocki <gophi@ekg.chmurka.net>
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License Version
- *  2.1 as published by the Free Software Foundation.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public
- *  License along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
- *  USA.
- */
-
-/**
- * \file pubdir.c
- *
- * \brief Obsługa katalogu publicznego
+ (C) Copyright 2001-2006 Wojtek Kaniewski <wojtekka@irc.pl>
+                         Dawid Jarosz <dawjar@poczta.onet.pl>
+                         Adam Wysocki <gophi@ekg.chmurka.net>
+ 
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License Version
+ 2.1 as published by the Free Software Foundation.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+ 
+ You should have received a copy of the GNU Lesser General Public
+ License along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
+ USA.
  */
 
 #include <ctype.h>
@@ -42,21 +36,6 @@
 
 #include "libgadu.h"
 
-/**
- * Rejestruje nowego użytkownika.
- *
- * Wymaga wcześniejszego pobrania tokenu za pomocą \c gg_token().
- *
- * \param email Adres e-mail
- * \param password Hasło
- * \param tokenid Identyfikator tokenu
- * \param tokenval Zawartość tokenu
- * \param async Flaga połączenia asynchronicznego
- *
- * \return Struktura \c gg_http lub \c NULL w przypadku błędu
- *
- * \ingroup register
- */
 struct gg_http *gg_register3(const char *email, const char *password, const char *tokenid, const char *tokenval, int async)
 {
 	struct gg_http *h;
@@ -136,36 +115,11 @@ struct gg_http *gg_register3(const char *email, const char *password, const char
 
 #ifdef DOXYGEN
 
-/**
- * Funkcja wywoływana po zaobserwowaniu zmian na deskryptorze połączenia.
- *
- * Operacja będzie zakończona, gdy pole \c state będzie równe \c GG_STATE_DONE.
- * Jeśli wystąpi błąd, \c state będzie równe \c GG_STATE_ERROR, a kod błędu
- * znajdzie się w polu \c error.
- *
- * \note W rzeczywistości funkcja jest makrem rozwijanym do
- * \c gg_pubdir_watch_fd().
- *
- * \param h Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup register
- */
 int gg_register_watch_fd(struct gg_httpd *h)
 {
 	return gg_pubdir_watch_fd(h);
 }
 
-/**
- * Zwalnia zasoby po operacji.
- *
- * \note W rzeczywistości funkcja jest makrem rozwijanym do \c gg_pubdir_free().
- *
- * \param h Struktura połączenia
- *
- * \ingroup register
- */
 void gg_register_free(struct gg_http *h)
 {
 	return gg_pubdir_free(h);
@@ -173,21 +127,6 @@ void gg_register_free(struct gg_http *h)
 
 #endif /* DOXYGEN */
 
-/**
- * Usuwa użytkownika.
- *
- * Wymaga wcześniejszego pobrania tokenu za pomocą \c gg_token().
- *
- * \param uin Numer Gadu-Gadu
- * \param password Hasło
- * \param tokenid Identyfikator tokenu
- * \param tokenval Zawartość tokenu
- * \param async Flaga połączenia asynchronicznego
- *
- * \return Struktura \c gg_http lub \c NULL w przypadku błędu
- *
- * \ingroup unregister
- */
 struct gg_http *gg_unregister3(uin_t uin, const char *password, const char *tokenid, const char *tokenval, int async)
 {
 	struct gg_http *h;
@@ -265,36 +204,11 @@ struct gg_http *gg_unregister3(uin_t uin, const char *password, const char *toke
 
 #ifdef DOXYGEN
 
-/**
- * Funkcja wywoływana po zaobserwowaniu zmian na deskryptorze połączenia.
- *
- * Operacja będzie zakończona, gdy pole \c state będzie równe \c GG_STATE_DONE.
- * Jeśli wystąpi błąd, \c state będzie równe \c GG_STATE_ERROR, a kod błędu
- * znajdzie się w polu \c error.
- *
- * \note W rzeczywistości funkcja jest makrem rozwijanym do
- * \c gg_pubdir_watch_fd().
- *
- * \param h Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup unregister
- */
 int gg_unregister_watch_fd(struct gg_httpd *h)
 {
 	return gg_pubdir_watch_fd(h);
 }
 
-/**
- * Zwalnia zasoby po operacji.
- *
- * \note W rzeczywistości funkcja jest makrem rozwijanym do \c gg_pubdir_free().
- *
- * \param h Struktura połączenia
- *
- * \ingroup unregister
- */
 void gg_unregister_free(struct gg_http *h)
 {
 	return gg_pubdir_free(h);
@@ -302,23 +216,6 @@ void gg_unregister_free(struct gg_http *h)
 
 #endif /* DOXYGEN */
 
-/**
- * Zmienia hasło użytkownika.
- *
- * Wymaga wcześniejszego pobrania tokenu za pomocą \c gg_token().
- *
- * \param uin Numer Gadu-Gadu
- * \param email Adres e-mail
- * \param passwd Obecne hasło
- * \param newpasswd Nowe hasło
- * \param tokenid Identyfikator tokenu
- * \param tokenval Zawartość tokenu
- * \param async Flaga połączenia asynchronicznego
- *
- * \return Struktura \c gg_http lub \c NULL w przypadku błędu
- *
- * \ingroup passwd
- */
 struct gg_http *gg_change_passwd4(uin_t uin, const char *email, const char *passwd, const char *newpasswd, const char *tokenid, const char *tokenval, int async)
 {
 	struct gg_http *h;
@@ -403,36 +300,11 @@ struct gg_http *gg_change_passwd4(uin_t uin, const char *email, const char *pass
 
 #ifdef DOXYGEN
 
-/**
- * Funkcja wywoływana po zaobserwowaniu zmian na deskryptorze połączenia.
- *
- * Operacja będzie zakończona, gdy pole \c state będzie równe \c GG_STATE_DONE.
- * Jeśli wystąpi błąd, \c state będzie równe \c GG_STATE_ERROR, a kod błędu
- * znajdzie się w polu \c error.
- *
- * \note W rzeczywistości funkcja jest makrem rozwijanym do
- * \c gg_pubdir_watch_fd().
- *
- * \param h Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup passwd
- */
 int gg_change_passwd_watch_fd(struct gg_httpd *h)
 {
 	return gg_pubdir_watch_fd(h);
 }
 
-/**
- * Zwalnia zasoby po operacji.
- *
- * \note W rzeczywistości funkcja jest makrem rozwijanym do \c gg_pubdir_free().
- *
- * \param h Struktura połączenia
- *
- * \ingroup passwd
- */
 void gg_change_passwd_free(struct gg_http *h)
 {
 	return gg_pubdir_free(h);
@@ -440,21 +312,6 @@ void gg_change_passwd_free(struct gg_http *h)
 
 #endif /* DOXYGEN */
 
-/**
- * Wysyła hasło użytkownika na e-mail.
- *
- * Wymaga wcześniejszego pobrania tokenu za pomocą \c gg_token().
- *
- * \param uin Numer Gadu-Gadu
- * \param email Adres e-mail (podany przy rejestracji)
- * \param tokenid Identyfikator tokenu
- * \param tokenval Zawartość tokenu
- * \param async Flaga połączenia asynchronicznego
- *
- * \return Struktura \c gg_http lub \c NULL w przypadku błędu
- *
- * \ingroup remind
- */
 struct gg_http *gg_remind_passwd3(uin_t uin, const char *email, const char *tokenid, const char *tokenval, int async)
 {
 	struct gg_http *h;
@@ -530,36 +387,11 @@ struct gg_http *gg_remind_passwd3(uin_t uin, const char *email, const char *toke
 
 #ifdef DOXYGEN
 
-/**
- * Funkcja wywoływana po zaobserwowaniu zmian na deskryptorze połączenia.
- *
- * Operacja będzie zakończona, gdy pole \c state będzie równe \c GG_STATE_DONE.
- * Jeśli wystąpi błąd, \c state będzie równe \c GG_STATE_ERROR, a kod błędu
- * znajdzie się w polu \c error.
- *
- * \note W rzeczywistości funkcja jest makrem rozwijanym do
- * \c gg_pubdir_watch_fd().
- *
- * \param h Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup remind
- */
 int gg_remind_watch_fd(struct gg_httpd *h)
 {
 	return gg_pubdir_watch_fd(h);
 }
 
-/**
- * Zwalnia zasoby po operacji.
- *
- * \note W rzeczywistości funkcja jest makrem rozwijanym do \c gg_pubdir_free().
- *
- * \param h Struktura połączenia
- *
- * \ingroup remind
- */
 void gg_remind_free(struct gg_http *h)
 {
 	return gg_pubdir_free(h);
@@ -567,17 +399,6 @@ void gg_remind_free(struct gg_http *h)
 
 #endif /* DOXYGEN */
 
-/**
- * Funkcja wywoływana po zaobserwowaniu zmian na deskryptorze połączenia.
- *
- * Operacja będzie zakończona, gdy pole \c state będzie równe \c GG_STATE_DONE.
- * Jeśli wystąpi błąd, \c state będzie równe \c GG_STATE_ERROR, a kod błędu
- * znajdzie się w polu \c error.
- *
- * \param h Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_pubdir_watch_fd(struct gg_http *h)
 {
 	struct gg_pubdir *p;
@@ -632,11 +453,6 @@ int gg_pubdir_watch_fd(struct gg_http *h)
 	return 0;
 }
 
-/**
- * Zwalnia zasoby po operacji na katalogu publicznym.
- *
- * \param h Struktura połączenia
- */
 void gg_pubdir_free(struct gg_http *h)
 {
 	if (!h)
@@ -646,18 +462,6 @@ void gg_pubdir_free(struct gg_http *h)
 	gg_http_free(h);
 }
 
-/**
- * Pobiera token do autoryzacji operacji na katalogu publicznym.
- *
- * Token jest niezbędny do tworzenia nowego i usuwania użytkownika,
- * zmiany hasła itd.
- *
- * \param async Flaga połączenia asynchronicznego
- *
- * \return Struktura \c gg_http lub \c NULL w przypadku błędu
- *
- * \ingroup token
- */
 struct gg_http *gg_token(int async)
 {
 	struct gg_http *h;
@@ -686,19 +490,6 @@ struct gg_http *gg_token(int async)
 	return h;
 }
 
-/**
- * Funkcja wywoływana po zaobserwowaniu zmian na deskryptorze połączenia.
- *
- * Operacja będzie zakończona, gdy pole \c state będzie równe \c GG_STATE_DONE.
- * Jeśli wystąpi błąd, \c state będzie równe \c GG_STATE_ERROR, a kod błędu
- * znajdzie się w polu \c error.
- *
- * \param h Struktura połączenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup token
- */
 int gg_token_watch_fd(struct gg_http *h)
 {
 	if (!h) {
@@ -830,13 +621,6 @@ int gg_token_watch_fd(struct gg_http *h)
 	return 0;
 }
 
-/**
- * Zwalnia zasoby po operacji pobierania tokenu.
- *
- * \param h Struktura połączenia
- *
- * \ingroup token
- */
 void gg_token_free(struct gg_http *h)
 {
 	struct gg_token *t;
@@ -850,13 +634,3 @@ void gg_token_free(struct gg_http *h)
 	free(h->data);
 	gg_http_free(h);
 }
-
-/*
- * Local variables:
- * c-indentation-style: k&r
- * c-basic-offset: 8
- * indent-tabs-mode: notnil
- * End:
- *
- * vim: shiftwidth=8:
- */

@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////
 // Gadu-Gadu Plugin for Miranda IM
 //
 // Copyright (c) 2011-2012 Bartosz Bia³ek
@@ -16,7 +16,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////
 
 #include "gg.h"
 
@@ -28,7 +28,7 @@ typedef struct _tag_PopupData
 	GGPROTO* gg;
 } PopupData;
 
-/////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////
 // Popup plugin window proc
 
 LRESULT CALLBACK PopupWindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -67,7 +67,7 @@ LRESULT CALLBACK PopupWindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////
 // Popup plugin class registration
 
 void gg_initpopups(GGPROTO* gg)
@@ -100,7 +100,7 @@ void gg_initpopups(GGPROTO* gg)
 	CallService(MS_POPUP_REGISTERCLASS, 0, (WPARAM)&puc);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////
 // Show popup - popup plugin support
 
 void CALLBACK sttMainThreadCallback(PVOID dwParam)

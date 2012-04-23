@@ -2,29 +2,23 @@
 /* $Id$ */
 
 /*
- *  (C) Copyright 2007 Wojtek Kaniewski <wojtekka@irc.pl>
- *
- *  Public domain SHA-1 implementation by Steve Reid <steve@edmweb.com>
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License Version
- *  2.1 as published by the Free Software Foundation.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public
- *  License along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
- *  USA.
- */
-
-/**
- * \file sha1.c
- *
- * \brief Funkcje wyznaczania skrĂłtu SHA1
+ (C) Copyright 2007 Wojtek Kaniewski <wojtekka@irc.pl>
+ 
+ Public domain SHA-1 implementation by Steve Reid <steve@edmweb.com>
+ 
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License Version
+ 2.1 as published by the Free Software Foundation.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+ 
+ You should have received a copy of the GNU Lesser General Public
+ License along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
+ USA.
  */
 
 #include <string.h>
@@ -44,26 +38,6 @@
 #include <openssl/sha.h>
 
 #else
-
-/*
-SHA-1 in C
-By Steve Reid <steve@edmweb.com>
-100% Public Domain
-
-Modified by Wojtek Kaniewski <wojtekka@toxygen.net> for compatibility
-with libgadu and OpenSSL API.
-
-Test Vectors (from FIPS PUB 180-1)
-"abc"
-  A9993E36 4706816A BA3E2571 7850C26C 9CD0D89D
-"abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"
-  84983E44 1C3BD26E BAAE4AA1 F95129E5 E54670F1
-A million repetitions of "a"
-  34AA973C D4C4DAA4 F61EEB2B DBAD2731 6534016F
-*/
-
-/* #define LITTLE_ENDIAN * This should be #define'd if true. */
-/* #define SHA1HANDSOFF * Copies data before messing with it. */
 
 #include <string.h>
 
@@ -223,13 +197,6 @@ unsigned char finalcount[8];
 
 /** \cond internal */
 
-/**
- * \internal Liczy skrĂłt SHA1 z ziarna i hasĹa.
- *
- * \param password HasĹo
- * \param seed Ziarno
- * \param result Bufor na wynik funkcji skrĂłtu (20 bajtĂłw)
- */
 void gg_login_hash_sha1(const char *password, uint32_t seed, uint8_t *result)
 {
 	SHA_CTX ctx;
@@ -242,14 +209,6 @@ void gg_login_hash_sha1(const char *password, uint32_t seed, uint8_t *result)
 	SHA1_Final(result, &ctx);
 }
 
-/**
- * \internal Liczy skrĂłt SHA1 z pliku.
- *
- * \param fd Deskryptor pliku
- * \param result WskaĹşnik na skrĂłt
- *
- * \return 0 lub -1
- */
 int gg_file_hash_sha1(int fd, uint8_t *result)
 {
 	unsigned char buf[4096];
@@ -304,5 +263,3 @@ int gg_file_hash_sha1(int fd, uint8_t *result)
 
 	return 0;
 }
-
-/** \endcond */
