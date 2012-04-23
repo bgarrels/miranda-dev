@@ -41,6 +41,16 @@ Przynajmniej jeden kontakt powinien byæ zaznaczony.
 Aby utworzyæ sesiê: otwórz WinSCP, naciœniej Nowa Sesia, wprowadŸ dane i zapisz z okreœlon¹ nazw¹. Pamiêtaj, je¿eli serwer FTP u¿ywa has³a, powinienieœ zapisaæ go w WinSCP.
 [FTP path must contains '/' instead '\\' and starts from '/'.]
 Œcie¿ka FTP musi zawieraæ '/' zamiast '\\' i zaczynaæ siê z '/'.
+[File do not contain selected contact]
+Plik nie zawiera zaznaczonych kontaktów
+[File is corrupted]
+Plik jest nieprawid³owy
+[Do you want save imported messages to local profile?]
+Czy chcesz zapisaæ importowane wiadomoœci do lokalnego profilu?
+[Do you want delete all imported messages for this contact?\nNote that next scheduler task import this messages again.]
+Czy chcesz usun¹æ wszystkie zimportowane wiadomoœci dla tego kontaktu?\nZauwa¿ ¿e nastepne zadanie harmonogramu zimportuje t¹ wiadomoœæ ponownie.
+[FTP path cannot contain <date> in import task.]
+Œcie¿ka FTP nie mo¿e zawieraæ <date> w zadaniu importu.
 
 ;Options and Menus
 ;-------------------
@@ -174,10 +184,10 @@ Wyœlij do FTP (wymagany WinSCP)
 Wyœlij do FTP
 [Session name]
 Nazwa sesji
-[Path to output file**]
-Œcie¿ka do pliku wynikowego**
-[Path to output file]
-Œcie¿ka do pliku wynikowego
+[Path to file**]
+Œcie¿ka do pliku**
+[Path to file]
+Œcie¿ka do pliku
 [* Use negative values to filter younger events]
 * U¿yj ujemnych wartoœci do filtrowania m³odszych zdarzeñ
 [** Use <date> to insert date, <ext> to insert extension, <contact> to insert contact name]
@@ -198,6 +208,30 @@ Przy wy³¹czaniu
 Ró¿nica czasu (minuty)
 [Delta time (hours)]
 Ró¿nica czasu (godziny)
+[Scheduler]
+Harmonogram
+[Binary]
+Binarny
+[Export To Binary]
+Eksportuj Do Binarnego
+[Import From Binary]
+Importuj Z Binarnego
+[Execute history task]
+Wykonaj zadanie historii
+[Export To Dat (mContacts)]
+Exportuj Do Dat (mContacts)
+[Import From Dat (mContacts)]
+Importuj Z Dat (mContacts)]
+[Import and Marge]
+Importuj i Z³¹cz
+[Input files are compressed]
+Pliki wejœciowe s¹ skompresowane
+[Download from FTP (WinSCP requred)]
+Sci¹gnij z FTP (wymagany WinSCP)
+[Import from]
+Importuj z
+[** Use <ext> to insert extension, <contact> to insert contact name]
+** U¿yj <ext> do wstawienia rozszerzenia, <contact> do wstawienia nazwy kontaktu
 [Filter:]
 #muuid {E25367A2-51AE-4044-BE28-131BC18B71A4}
 Filtr:

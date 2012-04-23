@@ -13,6 +13,8 @@ Main features
 - contact list to change distlayed history
 - searching
 - filtering
+- export and import
+- scheduler to export, delete or import messages
 
 !!! Requirements !!!
 ====================
@@ -21,6 +23,17 @@ Microsoft Visual C++ 2008 Redistributable Package for x86 version (included in M
 
 Changelog
 =========
+
+--- 1.0.1.4 ---
++ added dat (mContacts) export and import
++ added scheduled import
++ added "Execute history task" menu
++ added password to protect exported messages
+* fixed importing messages with this same time
+
+--- 1.0.1.3 ---
++ added binary export
++ added import
 
 --- 1.0.1.2 ---
 * fixed exporting system history
