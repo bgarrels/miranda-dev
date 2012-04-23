@@ -144,7 +144,7 @@ static INT_PTR PcharToTchar(WPARAM wParam, LPARAM lParam)
 
 	#if defined( _UNICODE )
 	{	int len = (int)strlen( pszStr );
-		TCHAR* result = ( TCHAR* )alloca(( len+1 )*sizeof( TCHAR ));
+		TCHAR* result = ( TCHAR* )_malloca(( len+1 )*sizeof( TCHAR ));
 		MultiByteToWideChar( LangPackGetDefaultCodePage(), 0, pszStr, -1, result, len );
 		result[len] = 0;
 		return ( INT_PTR )mir_wstrdup(( wchar_t* )LangPackTranslateString( uuid, ( char* )result, 1 ));

@@ -155,7 +155,7 @@ static LRESULT CALLBACK MessageEditSubclassProc(HWND hwnd,UINT msg,WPARAM wParam
 			SendMessage(hwnd, WM_KEYDOWN, VK_LEFT, 0);
 			SendMessage(hwnd, EM_GETSEL, (WPARAM)&start, 0);
 			textLen = GetWindowTextLength(hwnd);
-			text = (TCHAR *)alloca(sizeof(TCHAR) * (textLen + 1));
+			text = (TCHAR *)_malloca(sizeof(TCHAR) * (textLen + 1));
 			GetWindowText(hwnd, text, textLen + 1);
 			memmove(text + start, text + end, sizeof(TCHAR) * (textLen + 1 - end));
 			SetWindowText(hwnd, text);
