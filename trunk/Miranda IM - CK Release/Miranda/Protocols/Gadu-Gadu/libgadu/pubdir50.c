@@ -2,27 +2,21 @@
 /* $Id$ */
 
 /*
- *  (C) Copyright 2003 Wojtek Kaniewski <wojtekka@irc.pl>
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License Version
- *  2.1 as published by the Free Software Foundation.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public
- *  License along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
- *  USA.
- */
+(C) Copyright 2003 Wojtek Kaniewski <wojtekka@irc.pl>
 
-/**
- * \file pubdir50.c
- *
- * \brief Obsługa katalogu publicznego od wersji Gadu-Gadu 5.x
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License Version
+2.1 as published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+ 
+You should have received a copy of the GNU Lesser General Public
+License along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
+USA.
  */
 
 #ifndef _WIN64
@@ -42,15 +36,6 @@
 #include "libgadu.h"
 #include "internal.h"
 
-/**
- * Tworzy nowe zapytanie katalogu publicznego.
- *
- * \param type Rodzaj zapytania
- *
- * \return Zmienna \c gg_pubdir50_t lub \c NULL w przypadku błędu.
- *
- * \ingroup pubdir50
- */
 gg_pubdir50_t gg_pubdir50_new(int type)
 {
 	gg_pubdir50_t res = malloc(sizeof(struct gg_pubdir50_s));
@@ -69,17 +54,6 @@ gg_pubdir50_t gg_pubdir50_new(int type)
 	return res;
 }
 
-/**
- * \internal Dodaje lub zastępuje pole zapytania lub odpowiedzi katalogu
- * publicznego.
- *
- * \param req Zapytanie lub odpowiedź
- * \param num Numer wyniku odpowiedzi (0 dla zapytania)
- * \param field Nazwa pola
- * \param value Wartość pola
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_pubdir50_add_n(gg_pubdir50_t req, int num, const char *field, const char *value)
 {
 	struct gg_pubdir50_entry *tmp = NULL, *entry;
@@ -128,32 +102,11 @@ static int gg_pubdir50_add_n(gg_pubdir50_t req, int num, const char *field, cons
 	return 0;
 }
 
-/**
- * Dodaje pole zapytania.
- *
- * \param req Zapytanie
- * \param field Nazwa pola
- * \param value Wartość pola
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup pubdir50
- */
 int gg_pubdir50_add(gg_pubdir50_t req, const char *field, const char *value)
 {
 	return gg_pubdir50_add_n(req, 0, field, value);
 }
 
-/**
- * Ustawia numer sekwencyjny zapytania.
- *
- * \param req Zapytanie
- * \param seq Numer sekwencyjny
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- *
- * \ingroup pubdir50
- */
 int gg_pubdir50_seq_set(gg_pubdir50_t req, uint32_t seq)
 {
 	gg_debug(GG_DEBUG_FUNCTION, "** gg_pubdir50_seq_set(%p, %d);\n", req, seq);
@@ -169,13 +122,6 @@ int gg_pubdir50_seq_set(gg_pubdir50_t req, uint32_t seq)
 	return 0;
 }
 
-/**
- * Zwalnia zasoby po zapytaniu lub odpowiedzi katalogu publicznego.
- *
- * \param s Zapytanie lub odpowiedź
- *
- * \ingroup pubdir50
- */
 void gg_pubdir50_free(gg_pubdir50_t s)
 {
 	int i;
@@ -192,16 +138,6 @@ void gg_pubdir50_free(gg_pubdir50_t s)
 	free(s);
 }
 
-/**
- * Wysyła zapytanie katalogu publicznego do serwera.
- *
- * \param sess Struktura sesji
- * \param req Zapytanie
- *
- * \return Numer sekwencyjny zapytania lub 0 w przypadku błędu
- *
- * \ingroup pubdir50
- */
 uint32_t gg_pubdir50(struct gg_session *sess, gg_pubdir50_t req)
 {
 	size_t size = 5;
@@ -314,17 +250,6 @@ uint32_t gg_pubdir50(struct gg_session *sess, gg_pubdir50_t req)
 	return res;
 }
 
-/*
- * \internal Analizuje przychodzący pakiet odpowiedzi i zapisuje wynik
- * w strukturze \c gg_event.
- *
- * \param sess Struktura sesji
- * \param e Struktura zdarzenia
- * \param packet Pakiet odpowiedzi
- * \param length Długość pakietu odpowiedzi
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 int gg_pubdir50_handle_reply_sess(struct gg_session *sess, struct gg_event *e, const char *packet, int length)
 {
 	const char *end = packet + length, *p;
@@ -451,17 +376,6 @@ failure:
 	return -1;
 }
 
-/**
- * Pobiera pole z odpowiedzi katalogu publicznego.
- *
- * \param res Odpowiedź
- * \param num Numer wyniku odpowiedzi
- * \param field Nazwa pola (wielkość liter nie ma znaczenia)
- *
- * \return Wartość pola lub \c NULL jeśli nie znaleziono
- *
- * \ingroup pubdir50
- */
 const char *gg_pubdir50_get(gg_pubdir50_t res, int num, const char *field)
 {
 	char *value = NULL;
@@ -485,73 +399,22 @@ const char *gg_pubdir50_get(gg_pubdir50_t res, int num, const char *field)
 	return value;
 }
 
-/**
- * Zwraca liczbę wyników odpowiedzi.
- *
- * \param res Odpowiedź
- *
- * \return Liczba wyników lub -1 w przypadku błędu
- *
- * \ingroup pubdir50
- */
 int gg_pubdir50_count(gg_pubdir50_t res)
 {
 	return (!res) ? -1 : res->count;
 }
 
-/**
- * Zwraca rodzaj zapytania lub odpowiedzi.
- *
- * \param res Zapytanie lub odpowiedź
- *
- * \return Rodzaj lub -1 w przypadku błędu
- *
- * \ingroup pubdir50
- */
 int gg_pubdir50_type(gg_pubdir50_t res)
 {
 	return (!res) ? -1 : res->type;
 }
 
-/**
- * Zwraca numer, od którego należy rozpocząc kolejne wyszukiwanie.
- *
- * Dłuższe odpowiedzi katalogu publicznego są wysyłane przez serwer
- * w mniejszych paczkach. Po otrzymaniu odpowiedzi, jeśli numer kolejnego
- * wyszukiwania jest większy od zera, dalsze wyniki można otrzymać przez
- * wywołanie kolejnego zapytania z określonym numerem początkowym.
- *
- * \param res Odpowiedź
- *
- * \return Numer lub -1 w przypadku błędu
- *
- * \ingroup pubdir50
- */
 uin_t gg_pubdir50_next(gg_pubdir50_t res)
 {
 	return (!res) ? (unsigned) -1 : res->next;
 }
 
-/**
- * Zwraca numer sekwencyjny zapytania lub odpowiedzi.
- *
- * \param res Zapytanie lub odpowiedź
- *
- * \return Numer sekwencyjny lub -1 w przypadku błędu
- *
- * \ingroup pubdir50
- */
 uint32_t gg_pubdir50_seq(gg_pubdir50_t res)
 {
 	return (!res) ? (unsigned) -1 : res->seq;
 }
-
-/*
- * Local variables:
- * c-indentation-style: k&r
- * c-basic-offset: 8
- * indent-tabs-mode: notnil
- * End:
- *
- * vim: shiftwidth=8:
- */

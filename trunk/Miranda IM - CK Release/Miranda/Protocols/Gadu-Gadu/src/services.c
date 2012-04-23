@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////
 // Gadu-Gadu Plugin for Miranda IM
 //
 // Copyright (c) 2003-2009 Adam Strzelecki <ono+miranda@java.pl>
@@ -17,12 +17,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////
 
 #include "gg.h"
 #include <io.h>
 
-//////////////////////////////////////////////////////////
+
 // Status mode -> DB
 char *gg_status2db(int status, const char *suffix)
 {
@@ -47,7 +47,7 @@ char *gg_status2db(int status, const char *suffix)
 	return str;
 }
 
-//////////////////////////////////////////////////////////
+
 // checks proto capabilities
 DWORD_PTR gg_getcaps(PROTO_INTERFACE *proto, int type, HANDLE hContact)
 {
@@ -72,7 +72,7 @@ DWORD_PTR gg_getcaps(PROTO_INTERFACE *proto, int type, HANDLE hContact)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
+
 // loads protocol icon
 HICON gg_geticon(PROTO_INTERFACE *proto, int iconIndex)
 {
@@ -98,7 +98,7 @@ HICON gg_geticon(PROTO_INTERFACE *proto, int iconIndex)
 	return (HICON)NULL;
 }
 
-//////////////////////////////////////////////////////////
+
 // gets protocol status
 GGINLINE char *gg_getstatusmsg(GGPROTO *gg, int status)
 {
@@ -122,7 +122,7 @@ GGINLINE char *gg_getstatusmsg(GGPROTO *gg, int status)
 	}
 }
 
-//////////////////////////////////////////////////////////
+
 // sets specified protocol status
 int gg_refreshstatus(GGPROTO *gg, int status)
 {
@@ -174,7 +174,7 @@ int gg_refreshstatus(GGPROTO *gg, int status)
 	return TRUE;
 }
 
-//////////////////////////////////////////////////////////
+
 // normalize gg status
 int gg_normalizestatus(int status)
 {
@@ -195,7 +195,7 @@ int gg_normalizestatus(int status)
 	}
 }
 
-//////////////////////////////////////////////////////////
+
 // sets protocol status
 int gg_setstatus(PROTO_INTERFACE *proto, int iNewStatus)
 {
@@ -216,7 +216,7 @@ int gg_setstatus(PROTO_INTERFACE *proto, int iNewStatus)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
+
 // when messsage received
 int gg_recvmessage(PROTO_INTERFACE *proto, HANDLE hContact, PROTORECVEVENT *pre)
 {
@@ -224,7 +224,7 @@ int gg_recvmessage(PROTO_INTERFACE *proto, HANDLE hContact, PROTORECVEVENT *pre)
 	return CallService(MS_PROTO_RECVMSG, 0, ( LPARAM )&ccs);
 }
 
-//////////////////////////////////////////////////////////
+
 // when messsage sent
 typedef struct
 {
@@ -265,7 +265,7 @@ int gg_sendmessage(PROTO_INTERFACE *proto, HANDLE hContact, int flags, const cha
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
+
 // when basic search
 void __cdecl gg_searchthread(GGPROTO *gg, void *empty)
 {
@@ -381,7 +381,7 @@ static HANDLE gg_searchbydetails(PROTO_INTERFACE *proto, const PROTOCHAR *nick, 
 	return (HANDLE)1;
 }
 
-//////////////////////////////////////////////////////////
+
 // when contact is added to list
 HANDLE gg_addtolist(PROTO_INTERFACE *proto, int flags, PROTOSEARCHRESULT *psr)
 {
@@ -402,7 +402,7 @@ HANDLE gg_addtolist(PROTO_INTERFACE *proto, int flags, PROTOSEARCHRESULT *psr)
 	return hContact;
 }
 
-//////////////////////////////////////////////////////////
+
 // user info request
 void __cdecl gg_cmdgetinfothread(GGPROTO *gg, void *hContact)
 {
@@ -472,7 +472,7 @@ int gg_getinfo(PROTO_INTERFACE *proto, HANDLE hContact, int infoType)
 	return 1;
 }
 
-//////////////////////////////////////////////////////////
+
 // when away message is requested
 void __cdecl gg_getawaymsgthread(GGPROTO *gg, void *hContact)
 {
@@ -495,7 +495,7 @@ HANDLE gg_getawaymsg(PROTO_INTERFACE *proto, HANDLE hContact)
 	return (HANDLE)1;
 }
 
-//////////////////////////////////////////////////////////
+
 // when away message is being set
 int gg_setawaymsg(PROTO_INTERFACE *proto, int iStatus, const PROTOCHAR *msgt)
 {
@@ -562,7 +562,7 @@ int gg_setawaymsg(PROTO_INTERFACE *proto, int iStatus, const PROTOCHAR *msgt)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
+
 // visible lists
 int gg_setapparentmode(PROTO_INTERFACE *proto, HANDLE hContact, int mode)
 {
@@ -572,7 +572,7 @@ int gg_setapparentmode(PROTO_INTERFACE *proto, HANDLE hContact, int mode)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
+
 // create adv search dialog proc
 INT_PTR CALLBACK gg_advancedsearchdlgproc(HWND hwndDlg,UINT message,WPARAM wParam,LPARAM lParam)
 {
@@ -599,7 +599,7 @@ INT_PTR CALLBACK gg_advancedsearchdlgproc(HWND hwndDlg,UINT message,WPARAM wPara
 	return FALSE;
 }
 
-//////////////////////////////////////////////////////////
+
 // create adv search dialog
 HWND gg_createadvsearchui(PROTO_INTERFACE *proto, HWND owner)
 {
@@ -607,7 +607,7 @@ HWND gg_createadvsearchui(PROTO_INTERFACE *proto, HWND owner)
 		MAKEINTRESOURCE(IDD_GGADVANCEDSEARCH), owner, gg_advancedsearchdlgproc, (LPARAM)(GGPROTO *)proto);
 }
 
-//////////////////////////////////////////////////////////
+
 // search by advanced
 HWND gg_searchbyadvanced(PROTO_INTERFACE *proto, HWND hwndDlg)
 {
@@ -737,7 +737,7 @@ HWND gg_searchbyadvanced(PROTO_INTERFACE *proto, HWND hwndDlg)
 	return (HWND)1;
 }
 
-//////////////////////////////////////////////////////////
+
 // gets avatar capabilities
 INT_PTR gg_getavatarcaps(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -759,7 +759,7 @@ INT_PTR gg_getavatarcaps(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
+
 // gets avatar information
 INT_PTR gg_getavatarinfo(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -838,7 +838,7 @@ INT_PTR gg_getavatarinfo(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return result;
 }
 
-//////////////////////////////////////////////////////////
+
 // gets avatar
 INT_PTR gg_getmyavatar(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -857,7 +857,7 @@ INT_PTR gg_getmyavatar(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return _access(szFilename, 0);
 }
 
-//////////////////////////////////////////////////////////
+
 // sets avatar
 INT_PTR gg_setmyavatar(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -886,7 +886,7 @@ INT_PTR gg_setmyavatar(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
+
 // gets protocol status message
 INT_PTR gg_getmyawaymsg(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -901,7 +901,7 @@ INT_PTR gg_getmyawaymsg(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return res;
 }
 
-//////////////////////////////////////////////////////////
+
 // gets account manager GUI
 extern INT_PTR CALLBACK gg_acc_mgr_guidlgproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -910,7 +910,7 @@ static INT_PTR gg_get_acc_mgr_gui(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return (INT_PTR) CreateDialogParam(hInstance, MAKEINTRESOURCE(IDD_ACCMGRUI), (HWND)lParam, gg_acc_mgr_guidlgproc, (LPARAM) gg);
 }
 
-//////////////////////////////////////////////////////////
+
 // leaves (terminates) conference
 INT_PTR gg_leavechat(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -921,7 +921,7 @@ INT_PTR gg_leavechat(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
+
 // sends a notification that the user is typing a message
 int gg_useristyping(PROTO_INTERFACE *proto, HANDLE hContact, int type)
 {
@@ -939,7 +939,7 @@ int gg_useristyping(PROTO_INTERFACE *proto, HANDLE hContact, int type)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
+
 // Dummies for function that have to be implemented
 
 HANDLE gg_dummy_addtolistbyevent(PROTO_INTERFACE *proto, int flags, int iContact, HANDLE hDbEvent) { return NULL; }
@@ -957,7 +957,7 @@ int    gg_dummy_sendurl(PROTO_INTERFACE *proto, HANDLE hContact, int flags, cons
 int    gg_dummy_recvawaymsg(PROTO_INTERFACE *proto, HANDLE hContact, int mode, PROTORECVEVENT *evt) { return 0; }
 int    gg_dummy_sendawaymsg(PROTO_INTERFACE *proto, HANDLE hContact, HANDLE hProcess, const char *msg) { return 0; }
 
-//////////////////////////////////////////////////////////
+
 // Register services
 void gg_registerservices(GGPROTO *gg)
 {

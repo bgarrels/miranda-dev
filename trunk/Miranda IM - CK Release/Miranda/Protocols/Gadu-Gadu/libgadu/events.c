@@ -2,30 +2,24 @@
 /* $Id$ */
 
 /*
- *  (C) Copyright 2001-2006 Wojtek Kaniewski <wojtekka@irc.pl>
- *                          Robert J. Woźny <speedy@ziew.org>
- *                          Arkadiusz Miśkiewicz <arekm@pld-linux.org>
- *                          Adam Wysocki <gophi@ekg.chmurka.net>
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License Version
- *  2.1 as published by the Free Software Foundation.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public
- *  License along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
- *  USA.
- */
-
-/**
- * \file events.c
- *
- * \brief Obsługa zdarzeń
+ (C) Copyright 2001-2006 Wojtek Kaniewski <wojtekka@irc.pl>
+                         Robert J. Woźny <speedy@ziew.org>
+                         Arkadiusz Miśkiewicz <arekm@pld-linux.org>
+                         Adam Wysocki <gophi@ekg.chmurka.net>
+ 
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License Version
+ 2.1 as published by the Free Software Foundation.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+ 
+ You should have received a copy of the GNU Lesser General Public
+ License along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
+ USA.
  */
 
 #ifndef _WIN64
@@ -63,16 +57,6 @@
 #endif
 #endif
 
-/**
- * Zwalnia pamięć zajmowaną przez informację o zdarzeniu.
- *
- * Funkcję należy wywoływać za każdym razem gdy funkcja biblioteki zwróci
- * strukturę \c gg_event.
- *
- * \param e Struktura zdarzenia
- *
- * \ingroup events
- */
 void gg_event_free(struct gg_event *e)
 {
 	gg_debug(GG_DEBUG_FUNCTION, "** gg_event_free(%p);\n", e);
@@ -179,17 +163,6 @@ void gg_event_free(struct gg_event *e)
 	free(e);
 }
 
-/** \cond internal */
-
-/**
- * \internal Usuwa obrazek z kolejki do wysłania.
- *
- * \param s Struktura sesji
- * \param q Struktura obrazka
- * \param freeq Flaga zwolnienia elementu kolejki
- *
- * \return 0 jeśli się powiodło, -1 jeśli wystąpił błąd
- */
 int gg_image_queue_remove(struct gg_session *s, struct gg_image_queue *q, int freeq)
 {
 	if (!s || !q) {
@@ -219,17 +192,6 @@ int gg_image_queue_remove(struct gg_session *s, struct gg_image_queue *q, int fr
 	return 0;
 }
 
-/**
- * \internal Analizuje przychodzący pakiet z obrazkiem.
- *
- * \param e Struktura zdarzenia
- * \param p Bufor z danymi
- * \param len Długość bufora
- * \param sess Struktura sesji
- * \param sender Numer nadawcy
- * \param size Rozmiar pliku (z nagłówka)
- * \param crc32 Suma kontrolna (z nagłówka)
- */
 static void gg_image_queue_parse(struct gg_event *e, char *p, unsigned int len, struct gg_session *sess, uin_t sender, uint32_t size, uint32_t crc32)
 {
 	struct gg_image_queue *q, *qq;
@@ -298,19 +260,6 @@ static void gg_image_queue_parse(struct gg_event *e, char *p, unsigned int len, 
 	}
 }
 
-/**
- * \internal Analizuje informacje rozszerzone wiadomości.
- * 
- * \param sess Struktura sesji.
- * \param e Struktura zdarzenia.
- * \param sender Numer nadawcy.
- * \param p Wskaźnik na dane rozszerzone.
- * \param packet_end Wskaźnik na koniec pakietu.
- *
- * \return 0 jeśli się powiodło, -1 jeśli wiadomość obsłużono i wynik ma
- * zostać przekazany aplikacji, -2 jeśli wystąpił błąd ogólny, -3 jeśli
- * wiadomość jest niepoprawna.
- */
 static int gg_handle_recv_msg_options(struct gg_session *sess, struct gg_event *e, uin_t sender, char *p, char *packet_end)
 {
 	while (p < packet_end) {
@@ -487,18 +436,6 @@ malformed:
 	return -3;
 }
 
-/**
- * \internal Analizuje przychodzący pakiet z wiadomością.
- *
- * Rozbija pakiet na poszczególne składniki -- tekst, informacje
- * o konferencjach, formatowani itd.
- *
- * \param h Wskaźnik do odebranego pakietu
- * \param e Struktura zdarzenia
- * \param sess Struktura sesji
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_handle_recv_msg(struct gg_header *h, struct gg_event *e, struct gg_session *sess)
 {
 	struct gg_recv_msg *r = (struct gg_recv_msg*) ((char*) h + sizeof(struct gg_header));
@@ -571,16 +508,6 @@ fail:
 	return -1;
 }
 
-/**
- * \internal Zamienia tekst w formacie HTML na czysty tekst.
- *
- * \param dst Bufor wynikowy (może być \c NULL)
- * \param html Tekst źródłowy
- *
- * \note Dokleja \c \\0 na końcu bufora wynikowego.
- *
- * \return Długość tekstu wynikowego bez \c \\0 (nawet jeśli \c dst to \c NULL).
- */
 static int gg_convert_from_html(char *dst, const char *html)
 {
 	const char *src, *entity, *tag;
@@ -656,19 +583,6 @@ static int gg_convert_from_html(char *dst, const char *html)
 	return len;
 }
 
-/**
- * \internal Analizuje przychodzący pakiet z wiadomością protokołu Gadu-Gadu 8.0.
- *
- * Rozbija pakiet na poszczególne składniki -- tekst, informacje
- * o konferencjach, formatowani itd.
- *
- * \param h Wskaźnik do odebranego pakietu
- * \param e Struktura zdarzenia
- * \param sess Struktura sesji
- * \param event Typ zdarzenia
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_handle_recv_msg80(struct gg_header *h, struct gg_event *e, struct gg_session *sess, int event)
 {
 	char *packet = (char*) h + sizeof(struct gg_header);
@@ -776,13 +690,6 @@ malformed:
 	return 0;
 }
 
-/**
- * \internal Wysyła potwierdzenie odebrania wiadomości.
- *
- * \param sess Struktura sesji
- *
- * \return 0 jeśli się powiodło, -1 jeśli wystąpił błąd
- */
 static int gg_handle_recv_msg_ack(struct gg_header *h, struct gg_session *sess)
 {
 	char *packet = (char*) h + sizeof(struct gg_header);
@@ -799,16 +706,6 @@ static int gg_handle_recv_msg_ack(struct gg_header *h, struct gg_session *sess)
 	return gg_send_packet(sess, GG_RECV_MSG_ACK, &pkt, sizeof(pkt), NULL);
 }
 
-/**
- * \internal Analizuje przychodzący pakiet z danymi kontaktów.
- *
- * \param sess Struktura sesji
- * \param e Struktura zdarzenia
- * \param payload Treść pakietu
- * \param len Długość pakietu
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_handle_user_data(struct gg_session *sess, struct gg_event *e, void *packet, size_t len)
 {
 	struct gg_user_data d;
@@ -986,16 +883,6 @@ malformed:
 	return res;
 }
 
-/**
- * \internal Analizuje przychodzący pakiet z listą sesji multilogowania.
- *
- * \param sess Struktura sesji
- * \param e Struktura zdarzenia
- * \param payload Treść pakietu
- * \param len Długość pakietu
- *
- * \return 0 jeśli się powiodło, -1 w przypadku błędu
- */
 static int gg_handle_multilogon_info(struct gg_session *sess, struct gg_event *e, void *packet, size_t len)
 {
 	char *packet_end = (char*) packet + len;
@@ -1081,16 +968,6 @@ malformed:
 	return res;
 }
 
-/**
- * \internal Odbiera pakiet od serwera.
- *
- * Analizuje pakiet i wypełnia strukturę zdarzenia.
- *
- * \param sess Struktura sesji
- * \param e Struktura zdarzenia
- *
- * \return 0 jeśli się powiodło, -1 jeśli wystąpił błąd
- */
 static int gg_watch_fd_connected(struct gg_session *sess, struct gg_event *e)
 {
 	struct gg_header *h = NULL;
@@ -1883,19 +1760,6 @@ fail:
 
 /** \endcond */
 
-/**
- * Funkcja wywoływana po zaobserwowaniu zmian na deskryptorze sesji.
- *
- * Funkcja zwraca strukturę zdarzenia \c gg_event. Jeśli rodzaj zdarzenia
- * to \c GG_EVENT_NONE, nie wydarzyło się jeszcze nic wartego odnotowania.
- * Strukturę zdarzenia należy zwolnić funkcja \c gg_event_free().
- *
- * \param sess Struktura sesji
- *
- * \return Struktura zdarzenia lub \c NULL jeśli wystąpił błąd
- *
- * \ingroup events
- */
 struct gg_event *gg_watch_fd(struct gg_session *sess)
 {
 	struct gg_event *e;
@@ -2852,13 +2716,3 @@ fail_unavailable:
 	sess->state = GG_STATE_IDLE;
 	goto done;
 }
-
-/*
- * Local variables:
- * c-indentation-style: k&r
- * c-basic-offset: 8
- * indent-tabs-mode: notnil
- * End:
- *
- * vim: shiftwidth=8:
- */

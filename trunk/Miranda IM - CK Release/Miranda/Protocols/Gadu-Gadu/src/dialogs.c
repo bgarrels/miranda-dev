@@ -1,22 +1,22 @@
-////////////////////////////////////////////////////////////////////////////////
-// Gadu-Gadu Plugin for Miranda IM
-//
-// Copyright (c) 2003-2006 Adam Strzelecki <ono+miranda@java.pl>
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-////////////////////////////////////////////////////////////////////////////////
+/*
+Gadu-Gadu Plugin for Miranda IM
+
+Copyright (c) 2003-2006 Adam Strzelecki <ono+miranda@java.pl>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
 
 #include "gg.h"
 
@@ -25,7 +25,7 @@ static INT_PTR CALLBACK gg_confoptsdlgproc(HWND hwndDlg, UINT msg, WPARAM wParam
 static INT_PTR CALLBACK gg_advoptsdlgproc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 extern INT_PTR CALLBACK gg_userutildlgproc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 
-////////////////////////////////////////////////////////////////////////////////
+
 // SetValue
 #define SVS_NORMAL			0
 #define SVS_GENDER			1
@@ -121,7 +121,6 @@ static void SetValue(HWND hwndDlg, int idCtrl, HANDLE hContact, char *szModule, 
 	DBFreeVariant(&dbv);
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // Options Page : Init
 int gg_options_init(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -154,7 +153,6 @@ int gg_options_init(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // Check if new user data has been filled in for specified account
 void gg_checknewuser(GGPROTO* gg, uin_t uin, const char* passwd)
 {
@@ -173,7 +171,7 @@ void gg_checknewuser(GGPROTO* gg, uin_t uin, const char* passwd)
 		gg->check_first_conn = 1;
 }
 
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////
 // Options Page : Proc
 static void gg_optsdlgcheck(HWND hwndDlg)
 {
@@ -201,7 +199,6 @@ static void gg_optsdlgcheck(HWND hwndDlg)
 	}
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////
 // Proc: General options dialog
 static INT_PTR CALLBACK gg_genoptsdlgproc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -509,7 +506,6 @@ static INT_PTR CALLBACK gg_genoptsdlgproc(HWND hwndDlg, UINT msg, WPARAM wParam,
 	return FALSE;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////
 // Proc: Conference options dialog
 static INT_PTR CALLBACK gg_confoptsdlgproc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -584,7 +580,6 @@ static INT_PTR CALLBACK gg_confoptsdlgproc(HWND hwndDlg, UINT msg, WPARAM wParam
 	return FALSE;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////
 // Proc: Advanced options dialog
 static INT_PTR CALLBACK gg_advoptsdlgproc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -697,7 +692,6 @@ static INT_PTR CALLBACK gg_advoptsdlgproc(HWND hwndDlg, UINT msg, WPARAM wParam,
 	return FALSE;
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // Info Page : Data
 struct GGDETAILSDLGDATA
 {
@@ -707,7 +701,6 @@ struct GGDETAILSDLGDATA
 	int updating;
 };
 
-////////////////////////////////////////////////////////////////////////////////
 // Info Page : Proc
 static INT_PTR CALLBACK gg_detailsdlgproc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -896,7 +889,6 @@ static INT_PTR CALLBACK gg_detailsdlgproc(HWND hwndDlg, UINT msg, WPARAM wParam,
 	return FALSE;
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // Info Page : Init
 int gg_details_init(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -926,10 +918,8 @@ int gg_details_init(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////
 // Proc: Account manager options dialog
 INT_PTR CALLBACK gg_acc_mgr_guidlgproc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
-////////////////////////////////////////////////////////////////////////////////////////////
 {
 	switch (msg) {
 		case WM_INITDIALOG:

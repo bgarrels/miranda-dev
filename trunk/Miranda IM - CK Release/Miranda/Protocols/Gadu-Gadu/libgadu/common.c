@@ -20,34 +20,6 @@
  *  USA.
  */
 
-/*
- * Funkcje konwersji między UTF-8 i CP1250 są oparte o kod biblioteki iconv.
- * Informacje o prawach autorskich oryginalnego kodu zamieszczono poniżej:
- *
- * Copyright (C) 1999-2001, 2004 Free Software Foundation, Inc.
- * This file is part of the GNU LIBICONV Library.
- *
- * The GNU LIBICONV Library is free software; you can redistribute it
- * and/or modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * The GNU LIBICONV Library is distributed in the hope that it will be
- * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with the GNU LIBICONV Library; see the file COPYING.LIB.
- * If not, write to the Free Software Foundation, Inc., 51 Franklin Street,
- * Fifth Floor, Boston, MA 02110-1301, USA.
- */
-
-/**
- * \file common.c
- *
- * \brief Funkcje wykorzystywane przez różne moduły biblioteki
- */
 #include <sys/types.h>
 #ifdef _WIN32
 #include "win32.h"
@@ -77,32 +49,10 @@
 #include "libgadu.h"
 #include "internal.h"
 
-/**
- * Plik, do którego będą przekazywane informacje odpluskwiania.
- *
- * Funkcja \c gg_debug() i pochodne mogą być przechwytywane przez aplikację
- * korzystającą z biblioteki, by wyświetlić je na żądanie użytkownika lub
- * zapisać do późniejszej analizy. Jeśli nie określono pliku, wybrane
- * informacje będą wysyłane do standardowego wyjścia błędu (\c stderr).
- *
- * \ingroup debug
- */
 FILE *gg_debug_file = NULL;
 
 #ifndef GG_DEBUG_DISABLE
 
-/**
- * \internal Przekazuje informacje odpluskwiania do odpowiedniej funkcji.
- *
- * Jeśli aplikacja ustawiła odpowiednią funkcję obsługi w
- * \c gg_debug_handler_session lub \c gg_debug_handler, jest ona wywoływana.
- * W przeciwnym wypadku wynik jest wysyłany do standardowego wyjścia błędu.
- *
- * \param sess Struktura sesji (może być \c NULL)
- * \param level Poziom informacji
- * \param format Format wiadomości (zgodny z \c printf)
- * \param ap Lista argumentów (zgodna z \c printf)
- */
 static void gg_debug_common(struct gg_session *sess, int level, const char *format, va_list ap)
 {
 	if (gg_debug_handler_session)
@@ -114,14 +64,6 @@ static void gg_debug_common(struct gg_session *sess, int level, const char *form
 }
 
 
-/**
- * \internal Przekazuje informację odpluskawiania.
- *
- * \param level Poziom wiadomości
- * \param format Format wiadomości (zgodny z \c printf)
- *
- * \ingroup debug
- */
 void gg_debug(int level, const char *format, ...)
 {
 	va_list ap;
@@ -132,15 +74,6 @@ void gg_debug(int level, const char *format, ...)
 	errno = old_errno;
 }
 
-/**
- * \internal Przekazuje informację odpluskwiania związaną z sesją.
- *
- * \param sess Struktura sesji
- * \param level Poziom wiadomości
- * \param format Format wiadomości (zgodny z \c printf)
- *
- * \ingroup debug
- */
 void gg_debug_session(struct gg_session *sess, int level, const char *format, ...)
 {
 	va_list ap;
@@ -151,16 +84,6 @@ void gg_debug_session(struct gg_session *sess, int level, const char *format, ..
 	errno = old_errno;
 }
 
-/**
- * \internal Przekazuje informację odpluskwiania związane z zawartością pamięci.
- *
- * \param sess Struktura sesji
- * \param buf Adres w pamięci
- * \param buf_length Ilość danych do wyświetlenia
- * \param format Format wiadomości (zgodny z \c printf)
- *
- * \ingroup debug
- */
 void gg_debug_dump_session(struct gg_session *sess, const void *buf, unsigned int buf_length, const char *format, ...)
 {
 	va_list ap;
@@ -179,19 +102,6 @@ void gg_debug_dump_session(struct gg_session *sess, const void *buf, unsigned in
 
 #endif
 
-/**
- * \internal Odpowiednik funkcji \c vsprintf alokujący miejsce na wynik.
- *
- * Funkcja korzysta z funkcji \c vsnprintf, sprawdzając czy dostępna funkcja
- * systemowa jest zgodna ze standardem C99 czy wcześniejszymi.
- *
- * \param format Format wiadomości (zgodny z \c printf)
- * \param ap Lista argumentów (zgodna z \c printf)
- *
- * \return Zaalokowany bufor lub NULL, jeśli zabrakło pamięci.
- *
- * \ingroup helper
- */
 char *gg_vsaprintf(const char *format, va_list ap)
 {
 	int size = 0;
@@ -252,18 +162,6 @@ char *gg_vsaprintf(const char *format, va_list ap)
 	return buf;
 }
 
-/**
- * \internal Odpowiednik funkcji \c sprintf alokujący miejsce na wynik.
- *
- * Funkcja korzysta z funkcji \c vsnprintf, sprawdzając czy dostępna funkcja
- * systemowa jest zgodna ze standardem C99 czy wcześniejszymi.
- *
- * \param format Format wiadomości (zgodny z \c printf)
- *
- * \return Zaalokowany bufor lub NULL, jeśli zabrakło pamięci.
- *
- * \ingroup helper
- */
 char *gg_saprintf(const char *format, ...)
 {
 	va_list ap;
@@ -276,18 +174,6 @@ char *gg_saprintf(const char *format, ...)
 	return res;
 }
 
-/**
- * \internal Pobiera linię tekstu z bufora.
- *
- * Funkcja niszczy bufor źródłowy bezpowrotnie, dzieląc go na kolejne ciągi
- * znaków i obcina znaki końca linii.
- *
- * \param ptr Wskaźnik do zmiennej, która przechowuje aktualne położenie
- *            w analizowanym buforze
- *
- * \return Wskaźnik do kolejnej linii tekstu lub NULL, jeśli to już koniec
- *         bufora.
- */
 char *gg_get_line(char **ptr)
 {
 	char *foo, *res;
@@ -313,18 +199,6 @@ char *gg_get_line(char **ptr)
 	return res;
 }
 
-/**
- * \internal Czyta linię tekstu z gniazda.
- *
- * Funkcja czyta tekst znak po znaku, więc nie jest efektywna, ale dzięki
- * brakowi buforowania, nie koliduje z innymi funkcjami odczytu.
- *
- * \param sock Deskryptor gniazda
- * \param buf Wskaźnik do bufora
- * \param length Długość bufora
- *
- * \return Zwraca \c buf jeśli się powiodło, lub \c NULL w przypadku błędu.
- */
 char *gg_read_line(SOCKET sock, char *buf, int length)
 {
 	int ret;
@@ -355,17 +229,6 @@ char *gg_read_line(SOCKET sock, char *buf, int length)
 	return buf;
 }
 
-/**
- * \internal Nawiązuje połączenie TCP.
- *
- * \param addr Wskaźnik na strukturę \c in_addr z adresem serwera
- * \param port Port serwera
- * \param async Flaga asynchronicznego połączenia
- *
- * \return Deskryptor gniazda lub -1 w przypadku błędu
- *
- * \ingroup helper
- */
 #ifdef GG_CONFIG_MIRANDA
 SOCKET gg_connect_internal(void *addr, int port, int async, SOCKET *gg_sock)
 #else
@@ -442,15 +305,6 @@ SOCKET gg_connect(void *addr, int port, int async)
 }
 #endif
 
-/**
- * \internal Usuwa znaki końca linii.
- *
- * Funkcja działa bezpośrednio na buforze.
- *
- * \param line Bufor z tekstem
- *
- * \ingroup helper
- */
 void gg_chomp(char *line)
 {
 	size_t len;
@@ -466,19 +320,6 @@ void gg_chomp(char *line)
 		line[--len] = 0;
 }
 
-/**
- * \internal Koduje ciąg znaków do postacji adresu HTTP.
- *
- * Zamienia znaki niedrukowalne, spoza ASCII i mające specjalne znaczenie
- * dla protokołu HTTP na encje postaci \c %XX, gdzie \c XX jest szesnastkową
- * wartością znaku.
- * 
- * \param str Ciąg znaków do zakodowania
- *
- * \return Zaalokowany bufor lub \c NULL w przypadku błędu.
- *
- * \ingroup helper
- */
 char *gg_urlencode(const char *str)
 {
 	char *q, *buf, hex[] = "0123456789abcdef";
@@ -515,20 +356,6 @@ char *gg_urlencode(const char *str)
 	return buf;
 }
 
-/**
- * \internal Wyznacza skrót dla usług HTTP.
- *
- * Funkcja jest wykorzystywana do wyznaczania skrótu adresu e-mail, hasła
- * i innych wartości przekazywanych jako parametry usług HTTP.
- *
- * W parametrze \c format należy umieścić znaki określające postać kolejnych
- * parametrów: \c 's' jeśli parametr jest ciągiem znaków, \c 'u' jeśli jest
- * liczbą.
- *
- * \param format Format kolejnych parametrów (niezgodny z \c printf)
- *
- * \return Wartość skrótu
- */
 int gg_http_hash(const char *format, ...)
 {
 	unsigned int a, c, i, j;
@@ -560,23 +387,9 @@ int gg_http_hash(const char *format, ...)
 	return (b < 0 ? -b : b);
 }
 
-/**
- * \internal Zestaw znaków kodowania base64.
- */
 static char gg_base64_charset[] =
 	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-/**
- * \internal Koduje ciąg znaków do base64.
- *
- * Wynik funkcji należy zwolnić za pomocą \c free.
- *
- * \param buf Bufor z danami do zakodowania
- *
- * \return Zaalokowany bufor z zakodowanymi danymi
- *
- * \ingroup helper
- */
 char *gg_base64_encode(const char *buf)
 {
 	char *out, *res;
@@ -625,17 +438,6 @@ char *gg_base64_encode(const char *buf)
 	return res;
 }
 
-/**
- * \internal Dekoduje ciąg znaków zapisany w base64.
- *
- * Wynik funkcji należy zwolnić za pomocą \c free.
- *
- * \param buf Bufor źródłowy z danymi do zdekodowania
- *
- * \return Zaalokowany bufor ze zdekodowanymi danymi
- *
- * \ingroup helper
- */
 char *gg_base64_decode(const char *buf)
 {
 	char *res, *save, *foo, val;
@@ -685,15 +487,6 @@ char *gg_base64_decode(const char *buf)
 	return save;
 }
 
-/**
- * \internal Tworzy nagłówek autoryzacji serwera pośredniczącego.
- *
- * Dane pobiera ze zmiennych globalnych \c gg_proxy_username i
- * \c gg_proxy_password.
- *
- * \return Zaalokowany bufor z tekstem lub NULL, jeśli serwer pośredniczący
- *         nie jest używany lub nie wymaga autoryzacji.
- */
 char *gg_proxy_auth()
 {
 	char *tmp, *enc, *out;
@@ -726,20 +519,11 @@ char *gg_proxy_auth()
 	return out;
 }
 
-/**
- * \internal Tablica pomocnicza do wyznaczania sumy kontrolnej.
- */
+
 static uint32_t gg_crc32_table[256];
 
-/**
- * \internal Flaga wypełnienia tablicy pomocniczej do wyznaczania sumy
- * kontrolnej.
- */
 static int gg_crc32_initialized = 0;
 
-/**
- * \internal Tworzy tablicę pomocniczą do wyznaczania sumy kontrolnej.
- */
 static void gg_crc32_make_table(void)
 {
 	uint32_t h = 1;
@@ -757,16 +541,6 @@ static void gg_crc32_make_table(void)
 	gg_crc32_initialized = 1;
 }
 
-/**
- * Wyznacza sumę kontrolną CRC32.
- *
- * \param crc Suma kontrola poprzedniego bloku danych lub 0 jeśli liczona
- *            jest suma kontrolna pierwszego bloku
- * \param buf Bufor danych
- * \param len Długość bufora danych
- *
- * \return Suma kontrolna.
- */
 uint32_t gg_crc32(uint32_t crc, const unsigned char *buf, int len)
 {
 	if (!gg_crc32_initialized)
@@ -783,9 +557,6 @@ uint32_t gg_crc32(uint32_t crc, const unsigned char *buf, int len)
 	return crc ^ 0xffffffffL;
 }
 
-/**
- * \internal Tablica konwersji między CP1250 a UTF-8.
- */
 static const uint16_t table_cp1250[] = {
 	0x20ac, '?',    0x201a,    '?', 0x201e, 0x2026, 0x2020, 0x2021, 
 	   '?', 0x2030, 0x0160, 0x2039, 0x015a, 0x0164, 0x017d, 0x0179, 
@@ -805,13 +576,6 @@ static const uint16_t table_cp1250[] = {
 	0x0159, 0x016f, 0x00fa, 0x0171, 0x00fc, 0x00fd, 0x0163, 0x02d9, 
 };
 
-/**
- * \internal Zamienia tekst kodowany CP1250 na UTF-8.
- *
- * \param b Tekst źródłowy w CP1250.
- *
- * \return Zaalokowany bufor z tekstem w UTF-8.
- */
 char *gg_cp_to_utf8(const char *b)
 {
 	unsigned char *buf = (unsigned char *) b;
@@ -852,19 +616,6 @@ char *gg_cp_to_utf8(const char *b)
 	return newbuf;
 }
 
-/**
- * \internal Dekoduje jeden znak UTF-8.
- *
- * \note Funkcja nie jest kompletną implementacją UTF-8, a wersją uproszczoną
- * do potrzeb kodowania CP1250.
- *
- * \param s Tekst źródłowy.
- * \param n Długość tekstu źródłowego.
- * \param ch Wskaźnik na wynik dekodowania.
- *
- * \return Długość zdekodowanej sekwencji w bajtach lub wartość mniejsza
- * od zera w przypadku błędu.
- */
 static int gg_utf8_helper(unsigned char *s, int n, uint16_t *ch)
 {
 	unsigned char c = s[0];
@@ -898,13 +649,6 @@ static int gg_utf8_helper(unsigned char *s, int n, uint16_t *ch)
 	return -1;
 }
 
-/**
- * \internal Zamienia tekst kodowany UTF-8 na CP1250.
- *
- * \param b Tekst źródłowy w UTF-8.
- *
- * \return Zaalokowany bufor z tekstem w CP1250.
- */
 char *gg_utf8_to_cp(const char *b)
 {
 	unsigned char *buf = (unsigned char *) b;
@@ -963,13 +707,3 @@ char *gg_utf8_to_cp(const char *b)
 
 	return newbuf;
 }
-
-/*
- * Local variables:
- * c-indentation-style: k&r
- * c-basic-offset: 8
- * indent-tabs-mode: notnil
- * End:
- *
- * vim: shiftwidth=8:
- */

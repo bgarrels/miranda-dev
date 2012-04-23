@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////////////////////
+/////////
 // Gadu-Gadu Protocol Plugin for Miranda IM
 // Based on unix ekg client functionlity and libgadu
 //
@@ -9,7 +9,7 @@
 //		   Liquid (Image send/recv), The Leech (Proxy fixes)
 //		   MirandaIM Polish Forum
 //		   Angeli-Ka (Gadu-Gadu plugin icons)
-///////////////////////////////////////////////////////////////////
+/////////
 
 1. About
 --------

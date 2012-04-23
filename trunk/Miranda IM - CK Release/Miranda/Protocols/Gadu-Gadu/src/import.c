@@ -1,26 +1,25 @@
-////////////////////////////////////////////////////////////////////////////////
-// Gadu-Gadu Plugin for Miranda IM
-//
-// Copyright (c) 2003-2006 Adam Strzelecki <ono+miranda@java.pl>
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-////////////////////////////////////////////////////////////////////////////////
+/*
+Gadu-Gadu Plugin for Miranda IM
+
+Copyright (c) 2003-2006 Adam Strzelecki <ono+miranda@java.pl>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
 
 #include "gg.h"
 
-////////////////////////////////////////////////////////////////////////////////
 // Checks if a group already exists in Miranda with
 // the specified name.
 // Returns 1 if a group with the name exists, returns 0 otherwise.
@@ -43,7 +42,6 @@ int GroupNameExists(const char *name)
 }
 
 
-////////////////////////////////////////////////////////////////////////////////
 // Creates a group with a specified name in the
 // Miranda contact list.
 // Returns proper group name
@@ -308,7 +306,6 @@ void gg_parsecontacts(GGPROTO *gg, char *contacts)
 	}
 }
 
-//////////////////////////////////////////////////////////
 // import from server
 static INT_PTR gg_import_server(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -359,7 +356,6 @@ static INT_PTR gg_import_server(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
 // remove from server
 static INT_PTR gg_remove_server(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -551,7 +547,6 @@ static INT_PTR gg_export_text(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
 // export to server
 static INT_PTR gg_export_server(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 {
@@ -612,7 +607,7 @@ static INT_PTR gg_export_server(GGPROTO *gg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-//////////////////////////////////////////////////////////
+
 // Import menus and stuff
 void gg_import_init(GGPROTO *gg, HGENMENU hRoot)
 {
