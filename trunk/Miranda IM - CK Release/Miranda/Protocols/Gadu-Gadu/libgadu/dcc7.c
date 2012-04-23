@@ -398,7 +398,7 @@ struct gg_dcc7 *gg_dcc7_send_file(struct gg_session *sess, uin_t rcpt, const cha
 		goto fail;
 	}
 
-	if ((fd = open(filename, O_RDONLY | O_BINARY)) == -1) {
+	if ((fd = _open(filename, O_RDONLY | O_BINARY)) == -1) {
 		gg_debug_session(sess, GG_DEBUG_MISC, "// gg_dcc7_send_file() open() failed (%s)\n", strerror(errno));
 		goto fail;
 	}
@@ -425,7 +425,7 @@ struct gg_dcc7 *gg_dcc7_send_file(struct gg_session *sess, uin_t rcpt, const cha
 fail:
 	if (fd != -1) {
 		int errsv = errno;
-		close(fd);
+		_close(fd);
 		errno = errsv;
 	}
 
@@ -1127,7 +1127,7 @@ struct gg_event *gg_dcc7_watch_fd(struct gg_dcc7 *dcc)
 				return e;
 			}
 
-			if (dcc->seek && lseek(dcc->file_fd, dcc->offset, SEEK_SET) == (off_t) -1) {
+			if (dcc->seek && _lseek(dcc->file_fd, dcc->offset, SEEK_SET) == (off_t) -1) {
 				gg_debug_session((dcc) ? (dcc)->sess : NULL, GG_DEBUG_MISC, "// gg_dcc7_watch_fd() lseek() failed (%s)\n", strerror(errno));
 				e->type = GG_EVENT_DCC7_ERROR;
 				e->event.dcc7_error = GG_ERROR_DCC7_FILE;
@@ -1138,7 +1138,7 @@ struct gg_event *gg_dcc7_watch_fd(struct gg_dcc7 *dcc)
 			if ((chunk = dcc->size - dcc->offset) > sizeof(buf))
 				chunk = sizeof(buf);
 
-			if ((res = read(dcc->file_fd, buf, chunk)) < 1) {
+			if ((res = _read(dcc->file_fd, buf, chunk)) < 1) {
 				gg_debug_session((dcc) ? (dcc)->sess : NULL, GG_DEBUG_MISC, "// gg_dcc7_watch_fd() read() failed (res=%d, %s)\n", res, strerror(errno));
 				e->type = GG_EVENT_DCC7_ERROR;
 				e->event.dcc7_error = (res == -1) ? GG_ERROR_DCC7_FILE : GG_ERROR_DCC7_EOF;
@@ -1194,7 +1194,7 @@ struct gg_event *gg_dcc7_watch_fd(struct gg_dcc7 *dcc)
 
 			// XXX zapisywać do skutku?
 
-			if ((wres = write(dcc->file_fd, buf, res)) < res) {
+			if ((wres = _write(dcc->file_fd, buf, res)) < res) {
 				gg_debug_session((dcc) ? (dcc)->sess : NULL, GG_DEBUG_MISC, "// gg_dcc7_watch_fd() write() failed (fd=%d, res=%d, %s)\n", dcc->file_fd, wres, strerror(errno));
 				e->type = GG_EVENT_DCC7_ERROR;
 				e->event.dcc7_error = GG_ERROR_DCC7_FILE;

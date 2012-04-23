@@ -992,9 +992,9 @@ struct gg_event *gg_dcc_watch_fd(struct gg_dcc *h)
 					return e;
 				}
 
-				lseek(h->file_fd, h->offset, SEEK_SET);
+				_lseek(h->file_fd, h->offset, SEEK_SET);
 
-				size = read(h->file_fd, buf, utmp);
+				size = _read(h->file_fd, buf, utmp);
 
 				/* błąd */
 				if (size == -1) {
