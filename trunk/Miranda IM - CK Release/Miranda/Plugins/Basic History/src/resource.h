@@ -85,6 +85,12 @@
 #define IDC_WINSCPLOG                   1077
 #define IDC_TASK_NAME                   1078
 #define IDC_TASK_ACTIVE                 1079
+#define IDC_TASK_FILTER_LABEL           1080
+#define IDC_EVENT_LABEL                 1081
+#define IDC_IMPORT_TYPE                 1082
+#define IDC_PASSWORD                    1083
+#define IDC_PASSWORD_LABEL              1084
+#define IDC_EXPIMP                      1085
 #define IDI_INM                         20000
 #define IDI_OUTM                        20001
 #define IDI_SHOW                        20002
@@ -125,6 +131,10 @@
 #define IDM_EXPORTRHTML                 40027
 #define IDM_EXPORTPHTML                 40028
 #define IDM_EXPORTTXT                   40029
+#define IDM_EXPORTBINARY                40030
+#define IDM_IMPORTBINARY                40031
+#define IDM_EXPORTDAT                   40032
+#define IDM_IMPORTDAT                   40033
 
 #define CUSTOMRES                       300
 

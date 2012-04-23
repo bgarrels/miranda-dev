@@ -1,6 +1,6 @@
 /*
 Basic History plugin
-Copyright (C) 2011 Krzysztof Kral
+Copyright (C) 2011-2012 Krzysztof Kral
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -17,6 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
 #pragma once
+#include "IImport.h"
 #include "IExport.h"
 
 struct FilterOptions
@@ -46,11 +47,16 @@ struct TaskOptions
 	bool useFtp;
 	bool isSystem;
 	bool active;
+	bool forceExecute;
+	bool showMBAfterExecute;
+	bool exportImported;
 	enum TaskType
 	{
 		Export,
 		Delete,
-		ExportAndDelete
+		ExportAndDelete,
+		Import,
+		ImportAndMarge
 	} type;
 
 	enum EventUnit
@@ -72,6 +78,7 @@ struct TaskOptions
 	} trigerType;
 
 	IExport::ExportType exportType;
+	IImport::ImportType importType;
 	int eventDeltaTime;
 	int filterId;
 	int dayTime;
@@ -84,13 +91,18 @@ struct TaskOptions
 	std::wstring filterName;
 	std::wstring filePath;
 	std::wstring taskName;
+	std::string zipPassword; // char* because zip file using ANSI password
 	std::vector<HANDLE> contacts;
 	TaskOptions()
 	{
+		forceExecute = false;
+		showMBAfterExecute = false;
+		exportImported = true;
 		type = Export;
 		eventUnit = Hour;
 		trigerType = AtStart;
 		exportType = IExport::RichHtml;
+		importType = IImport::Binary;
 		eventDeltaTime = 0;
 		filterId = 0;
 		compress = true;

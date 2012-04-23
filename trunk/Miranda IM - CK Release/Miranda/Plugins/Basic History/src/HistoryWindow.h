@@ -1,6 +1,6 @@
 /*
 Basic History plugin
-Copyright (C) 2011 Krzysztof Kral
+Copyright (C) 2011-2012 Krzysztof Kral
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -47,6 +47,7 @@ private:
 	void FormatQuote(std::wstring& quote, const MessageData& md, const std::wstring& msg);
 	void FontsChanged();
 	void ReloadMainOptions();
+	void DoImport(IImport::ImportType type);
 
 	static std::map<HANDLE, HistoryWindow*> windows;
 	static std::vector<HistoryWindow*> freeWindows;
@@ -73,6 +74,7 @@ public:
 	static void Deinit();
 	static void Open(HANDLE hContact);
 	static void Close(HANDLE hContact);
+	static void RebuildEvents(HANDLE hContact);
 	static bool IsInList(HWND hWnd);
 	static int FontsChanged(WPARAM wParam, LPARAM lParam);
 	static INT_PTR DeleteAllUserHistory(WPARAM wParam, LPARAM lParam);
