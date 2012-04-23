@@ -1,6 +1,6 @@
 /*
 Basic History plugin
-Copyright (C) 2011 Krzysztof Kral
+Copyright (C) 2011-2012 Krzysztof Kral
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -26,19 +26,23 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #define	MIID_BASICHISTORY { 0xe25367a2, 0x51ae, 0x4044, { 0xbe, 0x28, 0x13, 0x1b, 0xc1, 0x8b, 0x71, 0xa4 } }
 
 #define MS_HISTORY_DELETEALLCONTACTHISTORY       "BasicHistory/DeleteAllContactHistory" 
+#define MS_HISTORY_EXECUTE_TASK       "BasicHistory/ExecuteTask" 
 
 PLUGINLINK *pluginLink;
 HCURSOR     hCurSplitNS, hCurSplitWE;
+HANDLE  g_hMainThread=NULL;
 
 extern HINSTANCE hInst;
 
-HANDLE hModulesLoaded, hOptionsInit, hPrebuildContactMenu, hServiceShowContactHistory, hServiceDeleteAllContactHistory, hPreShutdownHistoryModule, hHistoryContactDelete, hFontsChanged,hToolBarLoaded, hSysOK;
+HANDLE hModulesLoaded, hOptionsInit, hPrebuildContactMenu, hServiceShowContactHistory, hServiceDeleteAllContactHistory, hServiceExecuteTask, hPreShutdownHistoryModule, hHistoryContactDelete, hFontsChanged,hToolBarLoaded, hSysOK;
 HANDLE *hEventIcons = NULL;
 int iconsNum;
 HANDLE hPlusIcon, hMinusIcon, hFindNextIcon, hFindPrevIcon;
 HANDLE hPlusExIcon, hMinusExIcon;
 HANDLE hToolbarButton;
 HGENMENU hContactMenu, hDeleteContactMenu;
+HGENMENU hTaskMainMenu;
+std::vector<HGENMENU> taskMenus;
 bool g_SmileyAddAvail = false;
 char* metaContactProto = NULL;
 const IID IID_ITextDocument={0x8CC497C0, 0xA1DF, 0x11ce, {0x80, 0x98, 0x00, 0xAA, 0x00, 0x47, 0xBE, 0x5D}};
@@ -84,10 +88,11 @@ extern "C" __declspec(dllexport) const MUUID* MirandaPluginInterfaces(void)
 void InitScheduler();
 void DeinitScheduler();
 int DoLastTask(WPARAM, LPARAM);
+INT_PTR ExecuteTaskService(WPARAM wParam, LPARAM lParam);
 
 int PrebuildContactMenu(WPARAM wParam, LPARAM lParam)
 {
-	int count = CallService(MS_DB_EVENT_GETCOUNT,wParam,0);
+	int count = EventList::GetContactMessageNumber((HANDLE)wParam);
 	bool isInList = HistoryWindow::IsInList(GetForegroundWindow());
 	CLISTMENUITEM mi = {0};
 	mi.cbSize = sizeof(mi);
@@ -149,6 +154,65 @@ void InitMenuItems()
 	hDeleteContactMenu = (HGENMENU)CallService(MS_CLIST_ADDCONTACTMENUITEM,0,(LPARAM)&mi);
 
 	hPrebuildContactMenu = HookEvent(ME_CLIST_PREBUILDCONTACTMENU, PrebuildContactMenu);
+}
+
+void InitTaskMenuItems()
+{
+	if(Options::instance->taskOptions.size() > 0)
+	{
+		CLISTMENUITEM mi = { 0 };
+		mi.cbSize = sizeof(mi);
+		if(hTaskMainMenu == NULL)
+		{
+			mi.position = 500060005;
+			mi.flags = CMIF_ROOTPOPUP | CMIF_ICONFROMICOLIB;
+			mi.icolibItem = LoadSkinnedIconHandle(SKINICON_OTHER_HISTORY);
+			mi.pszName = LPGEN("Execute history task");
+			hTaskMainMenu = (HGENMENU)CallService(MS_CLIST_ADDMAINMENUITEM,0,(LPARAM)&mi);
+		}
+		
+		std::vector<TaskOptions>::iterator taskIt = Options::instance->taskOptions.begin();
+		std::vector<HGENMENU>::iterator it = taskMenus.begin();
+		for(; it != taskMenus.end() && taskIt != Options::instance->taskOptions.end(); ++it, ++taskIt)
+		{
+			memset(&mi, 0, sizeof(mi));
+			mi.cbSize = sizeof(mi);
+			mi.flags = CMIM_FLAGS | CMIM_NAME | CMIF_CHILDPOPUP | CMIF_ROOTHANDLE | CMIF_TCHAR | CMIF_KEEPUNTRANSLATED;
+			mi.hParentMenu = hTaskMainMenu;
+			mi.ptszName = (TCHAR*)taskIt->taskName.c_str();
+			CallService(MS_CLIST_MODIFYMENUITEM, (WPARAM)(HGENMENU)*it, (LPARAM)&mi);
+		}
+
+		for(; it != taskMenus.end(); ++it)
+		{
+			memset(&mi, 0, sizeof(mi));
+			mi.cbSize = sizeof(mi);
+			mi.flags = CMIM_FLAGS | CMIF_CHILDPOPUP | CMIF_ROOTHANDLE | CMIF_TCHAR | CMIF_KEEPUNTRANSLATED | CMIF_HIDDEN;
+			mi.hParentMenu = hTaskMainMenu;
+			CallService(MS_CLIST_MODIFYMENUITEM, (WPARAM)(HGENMENU)*it, (LPARAM)&mi);
+		}
+		
+		int pos = (int)taskMenus.size();
+		for(; taskIt != Options::instance->taskOptions.end(); ++taskIt)
+		{
+			memset(&mi, 0, sizeof(mi));
+			mi.cbSize = sizeof(mi);
+			mi.flags = CMIF_CHILDPOPUP | CMIF_ROOTHANDLE | CMIF_TCHAR | CMIF_KEEPUNTRANSLATED;
+			mi.pszService = MS_HISTORY_EXECUTE_TASK;
+			mi.hParentMenu = hTaskMainMenu;
+			mi.popupPosition = pos++;	
+			mi.ptszName = (TCHAR*)taskIt->taskName.c_str();
+			HGENMENU menu = (HGENMENU)CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM)&mi);
+			taskMenus.push_back(menu);
+		}
+	}
+	else if(hTaskMainMenu != NULL)
+	{
+		CLISTMENUITEM mi = { 0 };
+		mi.cbSize = sizeof(mi);
+		mi.flags = CMIM_FLAGS | CMIF_ROOTPOPUP | CMIF_HIDDEN;
+		CallService(MS_CLIST_MODIFYMENUITEM, (WPARAM)hTaskMainMenu, (LPARAM)&mi);
+	}
 }
 
 void InitIcolib()
@@ -294,6 +358,7 @@ int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 	Options::instance->ftpLogPath = logAbsolute;
 	mir_free(logAbsolute);
 	Options::instance->Load();
+	InitTaskMenuItems();
 	
 	hPreShutdownHistoryModule = HookEvent(ME_SYSTEM_PRESHUTDOWN,PreShutdownHistoryModule);
 	hHistoryContactDelete = HookEvent(ME_DB_CONTACT_DELETED,HistoryContactDelete);
@@ -314,7 +379,9 @@ int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 
 extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 {
+	hTaskMainMenu = NULL;
 	pluginLink = link;
+	DuplicateHandle(GetCurrentProcess(),GetCurrentThread(),GetCurrentProcess(),&g_hMainThread,0,FALSE,DUPLICATE_SAME_ACCESS);
 	mir_getMMI(&mmi);
 	mir_getTMI(&tmi);
 	mir_getLP(&pluginInfo);
@@ -323,16 +390,20 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	hCurSplitWE = LoadCursor(NULL, IDC_SIZEWE);
 	hServiceShowContactHistory = CreateServiceFunction(MS_HISTORY_SHOWCONTACTHISTORY, ShowContactHistory);
 	hServiceDeleteAllContactHistory = CreateServiceFunction(MS_HISTORY_DELETEALLCONTACTHISTORY, HistoryWindow::DeleteAllUserHistory);
+	hServiceExecuteTask = CreateServiceFunction(MS_HISTORY_EXECUTE_TASK, ExecuteTaskService);
 	Options::instance = new Options();
 	hModulesLoaded = HookEvent(ME_SYSTEM_MODULESLOADED, ModulesLoaded);
 	hOptionsInit = HookEvent(ME_OPT_INITIALISE, Options::InitOptions);
 	hToolBarLoaded = HookEvent(ME_TB_MODULELOADED,ToolbarModuleLoaded);
+	EventList::Init();
 	InitIcolib();
 	return 0;
 }
 
 extern "C" int __declspec(dllexport) Unload(void) 
 {	
+    if(g_hMainThread) CloseHandle(g_hMainThread);
+    g_hMainThread=NULL;
 	UnhookEvent(hModulesLoaded);
 	UnhookEvent(hPrebuildContactMenu);
 	UnhookEvent(hPreShutdownHistoryModule);
@@ -343,11 +414,14 @@ extern "C" int __declspec(dllexport) Unload(void)
 	UnhookEvent(hSysOK);
 	DestroyServiceFunction(hServiceShowContactHistory);
 	DestroyServiceFunction(hServiceDeleteAllContactHistory);
+	DestroyServiceFunction(hServiceExecuteTask);
 	HistoryWindow::Deinit();
 	DestroyCursor(hCurSplitNS);
 	DestroyCursor(hCurSplitWE);
+	EventList::Deinit();
 	if(Options::instance != NULL)
 	{
+		Options::instance->Unload();
 		delete Options::instance;
 		Options::instance = NULL;
 	}

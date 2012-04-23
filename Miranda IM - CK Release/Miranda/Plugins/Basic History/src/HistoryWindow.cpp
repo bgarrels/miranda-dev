@@ -1,6 +1,6 @@
 /*
 Basic History plugin
-Copyright (C) 2011 Krzysztof Kral
+Copyright (C) 2011-2012 Krzysztof Kral
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "Options.h"
 #include "HotkeyHelper.h"
 #include "ImageDataObject.h"
-#include "ExportManeger.h"
+#include "ExportManager.h"
 
 extern HINSTANCE hInst;
 extern HCURSOR     hCurSplitNS, hCurSplitWE;
@@ -245,6 +245,26 @@ void  HistoryWindow::Close(HistoryWindow* historyWindow)
 	}
 }
 
+void HistoryWindow::RebuildEvents(HANDLE hContact)
+{
+	if(hContact != NULL)
+	{
+		std::map<HANDLE, HistoryWindow*>::iterator it = windows.find(hContact);
+		if(it != windows.end() && !it->second->isDestroyed)
+		{
+			SendMessage(it->second->hWnd,DM_HREBUILD,0,0);
+		}
+	}
+	
+	for(std::vector<HistoryWindow*>::iterator it = freeWindows.begin(); it != freeWindows.end(); ++it)
+	{
+		if((*it)->hContact == hContact && !(*it)->isDestroyed)
+		{
+			SendMessage((*it)->hWnd,DM_HREBUILD,0,0);
+		}
+	}
+}
+
 void HistoryWindow::ChangeToFreeWindow(HistoryWindow* historyWindow)
 {
 	std::map<HANDLE, HistoryWindow*>::iterator it = windows.find(historyWindow->hContact);
@@ -405,10 +425,9 @@ INT_PTR HistoryWindow::DeleteAllUserHistory(WPARAM wParam, LPARAM lParam)
 {
 	HANDLE hContact = (HANDLE)wParam;
 	HWND hWnd = NULL;
-	int toDelete = 1;
 	int start = 0;
 	int end = 0;
-	int count = CallService(MS_DB_EVENT_GETCOUNT,wParam,0);
+	int count = EventList::GetContactMessageNumber(hContact);
 	if(!count)
 		return FALSE;
 	
@@ -464,29 +483,17 @@ INT_PTR HistoryWindow::DeleteAllUserHistory(WPARAM wParam, LPARAM lParam)
 	{
 		CallService(MS_DB_EVENT_DELETE,(WPARAM)hContact,(LPARAM)(HANDLE)*it);
 	}
+
+	if(EventList::IsImportedHistory(hContact))
+	{
+		TCHAR *message = TranslateT("Do you want delete all imported messages for this contact?\nNote that next sheduler task import this messages again.");
+		if(MessageBox(hWnd, message, TranslateT("Are You sure?"), MB_YESNO | MB_ICONERROR) == IDYES)
+		{
+			EventList::DeleteImporter(hContact);
+		}
+	}
 		
-	for(std::map<HANDLE, HistoryWindow*>::iterator it = windows.begin(); it != windows.end(); ++it)
-	{
-		if(!it->second->isDestroyed)
-		{
-			if(it->second->hContact == hContact)
-			{
-				SendMessage(it->second->hWnd,DM_HREBUILD,0,0);
-			}
-		}
-	}
-
-	for(std::vector<HistoryWindow*>::iterator it = freeWindows.begin(); it != freeWindows.end(); ++it)
-	{
-		if(!(*it)->isDestroyed)
-		{
-			if((*it)->hContact == hContact)
-			{
-				SendMessage((*it)->hWnd,DM_HREBUILD,0,0);
-			}
-		}
-	}
-
+	RebuildEvents(hContact);
 	return TRUE;
 }
 
@@ -1401,8 +1408,6 @@ void HistoryWindow::FillHistoryThread(void* param)
 	ListView_DeleteAllItems(hwndList);
 	hInfo->SelectEventGroup(-1);
 	hInfo->EnableWindows(FALSE);
-	int i=CallService(MS_DB_EVENT_GETCOUNT,(WPARAM)hInfo->hContact,0);
-	ListView_SetItemCount(hwndList, i);
 	bool isNewOnTop = Options::instance->groupNewOnTop;
 
 	hInfo->RefreshEventList();
@@ -1502,15 +1507,10 @@ void HistoryWindow::SelectEventGroup(int sel)
 	if(sel < 0 || sel >= eventList.size())
 		return;
 
-#define MAXSELECTSTR 8184
 	TCHAR _str[MAXSELECTSTR + 8]; // for safety reason
 	TCHAR *str = _str + sizeof(int)/sizeof(TCHAR);
 	BSTR pStr = str;
 	int *strLen = (int*)_str;
-	DBEVENTINFO dbei = {0};
-	DWORD newBlobSize,oldBlobSize;
-	dbei.cbSize=sizeof(dbei);
-	oldBlobSize = 0;
 	str[0] = 0;
 	tm lastTime;
 	bool isFirst = true;
@@ -1519,6 +1519,7 @@ void HistoryWindow::SelectEventGroup(int sel)
 	long cnt;
 	std::wstring strStl;
 	IRichEditOle* RichEditOle;
+	EventData data;
 	if (SendMessage(editWindow, EM_GETOLEINTERFACE, 0, (LPARAM)&RichEditOle) == 0)
 		return;
 	ITextDocument* TextDocument;
@@ -1534,124 +1535,113 @@ void HistoryWindow::SelectEventGroup(int sel)
 	TextDocument->GetSelection(&TextSelection);
 	HDC hDC =  GetDC(NULL);
 	int caps = GetDeviceCaps(hDC, LOGPIXELSY);
-	std::deque<HANDLE> revDeq;
-	std::deque<HANDLE>& deq = eventList[sel];
+	std::deque<EventIndex> revDeq;
+	std::deque<EventIndex>& deq = eventList[sel];
 	if(Options::instance->messagesNewOnTop)
 	{
 		revDeq.insert(revDeq.begin(), deq.rbegin(), deq.rend());
 		deq = revDeq;
 	}
 	COLORREF backColor = GetSysColor(COLOR_WINDOW);
-	for(std::deque<HANDLE>::iterator it = deq.begin(); it != deq.end(); ++it)
+	for(std::deque<EventIndex>::iterator it = deq.begin(); it != deq.end(); ++it)
 	{
-		HANDLE hDbEvent = *it;
-		newBlobSize=CallService(MS_DB_EVENT_GETBLOBSIZE,(WPARAM)hDbEvent,0);
-		if ((int)dbei.cbBlob != -1)
+		EventIndex hDbEvent = *it;
+		if(GetEventData(hDbEvent, data))
 		{
-			if(newBlobSize>oldBlobSize) 
+			bool isUser = Options::instance->messagesShowName && (isFirst || (!lastMe && data.isMe) || (lastMe && !data.isMe));
+			lastMe = data.isMe;
+			backColor = Options::instance->GetColor(lastMe ? Options::OutBackground : Options::InBackground);
+			if(Options::instance->messagesShowEvents)
 			{
-				dbei.pBlob=(PBYTE)mir_realloc(dbei.pBlob,newBlobSize);
-				oldBlobSize=newBlobSize;
-			}
-			dbei.cbBlob = oldBlobSize;
-			if (CallService(MS_DB_EVENT_GET,(WPARAM)hDbEvent,(LPARAM)&dbei) == 0)
-			{
-				bool isUser = Options::instance->messagesShowName && (isFirst || (!lastMe && (dbei.flags & DBEF_SENT)) || (lastMe && !(dbei.flags & DBEF_SENT)));
-				lastMe = dbei.flags & DBEF_SENT;
-				backColor = Options::instance->GetColor(lastMe ? Options::OutBackground : Options::InBackground);
-				if(Options::instance->messagesShowEvents)
+				str[0] = _T('>');
+				str[1] = 0;
+				*strLen = 1 * sizeof(TCHAR);
+				TextSelection->SetStart(MAXLONG);
+				TextSelection->GetFont(&TextFont);
+				TextFont->SetBackColor(backColor);
+				TextSelection->SetText(pStr);
+				TextFont->Release();
+				int imId;
+				HICON ico;
+				if(GetEventIcon(lastMe, data.eventType, imId))
 				{
-					str[0] = _T('>');
-					str[1] = 0;
-					*strLen = 1 * sizeof(TCHAR);
-					TextSelection->SetStart(MAXLONG);
-					TextSelection->GetFont(&TextFont);
-					TextFont->SetBackColor(backColor);
-					TextSelection->SetText(pStr);
-					TextFont->Release();
-					int imId;
-					HICON ico;
-					if(GetEventIcon(lastMe, dbei.eventType, imId))
+					ico = eventIcoms[imId];
+				}
+				else
+				{
+					ico = GetEventCoreIcon(hDbEvent);
+					if(ico == NULL)
 					{
 						ico = eventIcoms[imId];
 					}
-					else
-					{
-						ico = (HICON)CallService(MS_DB_EVENT_GETICON, LR_SHARED, (LPARAM)&dbei);
-						HICON icoMsg = LoadSkinnedIcon(SKINICON_EVENT_MESSAGE);
-						if(ico == NULL || icoMsg == ico)
-						{
-							ico = eventIcoms[imId];
-						}
-					}
-
-					ImageDataObject::InsertIcon(RichEditOle, ico, backColor, 16, 16);
 				}
 
-				TCHAR* formatDate = Options::instance->messagesShowSec ? (isUser ? _T("d s ") : _T("d s\n")) : (isUser ? _T("d t ") : _T("d t\n"));
-				if(!Options::instance->messagesShowDate)
+				ImageDataObject::InsertIcon(RichEditOle, ico, backColor, 16, 16);
+			}
+
+			TCHAR* formatDate = Options::instance->messagesShowSec ? (isUser ? _T("d s ") : _T("d s\n")) : (isUser ? _T("d t ") : _T("d t\n"));
+			if(!Options::instance->messagesShowDate)
+			{
+				if(isFirst)
 				{
-					if(isFirst)
-					{
-						isFirst = false;
-						formatDate = Options::instance->messagesShowSec ? (isUser ? _T("s ") : _T("s\n")) : (isUser ? _T("t ") : _T("t\n"));
-						time_t tt = dbei.timestamp;
-						lastTime = *localtime(&tt);
-					}
-					else
-					{
-						time_t tt = dbei.timestamp;
-						tm* t = localtime(&tt);
-						if(lastTime.tm_yday == t->tm_yday && lastTime.tm_year == t->tm_year)
-							formatDate = Options::instance->messagesShowSec ? (isUser ? _T("s ") : _T("s\n")) : (isUser ? _T("t ") : _T("t\n"));
-					}
+					isFirst = false;
+					formatDate = Options::instance->messagesShowSec ? (isUser ? _T("s ") : _T("s\n")) : (isUser ? _T("t ") : _T("t\n"));
+					time_t tt = data.timestamp;
+					lastTime = *localtime(&tt);
 				}
+				else
+				{
+					time_t tt = data.timestamp;
+					tm* t = localtime(&tt);
+					if(lastTime.tm_yday == t->tm_yday && lastTime.tm_year == t->tm_year)
+						formatDate = Options::instance->messagesShowSec ? (isUser ? _T("s ") : _T("s\n")) : (isUser ? _T("t ") : _T("t\n"));
+				}
+			}
 
-				tmi.printTimeStamp(NULL, dbei.timestamp, formatDate, str , MAXSELECTSTR, 0);
+			tmi.printTimeStamp(NULL, data.timestamp, formatDate, str , MAXSELECTSTR, 0);
+			*strLen = _tcslen(str) * sizeof(TCHAR);
+			TextSelection->SetStart(MAXLONG);
+			TextSelection->GetFont(&TextFont);
+			SetFontFromOptions(TextFont, caps, lastMe ? Options::OutTimestamp : Options::InTimestamp);
+			TextFont->SetBackColor(backColor);
+			TextSelection->SetText(pStr);
+			TextFont->Release();
+
+			if(isUser)
+			{
+				if(lastMe)
+					mir_sntprintf( str, MAXSELECTSTR, _T("%s\n"), myName );
+				else
+					mir_sntprintf( str, MAXSELECTSTR, _T("%s\n"), contactName );
 				*strLen = _tcslen(str) * sizeof(TCHAR);
 				TextSelection->SetStart(MAXLONG);
 				TextSelection->GetFont(&TextFont);
-				SetFontFromOptions(TextFont, caps, lastMe ? Options::OutTimestamp : Options::InTimestamp);
-				TextFont->SetBackColor(backColor);
+				SetFontFromOptions(TextFont, caps, lastMe ? Options::OutName : Options::InName);
 				TextSelection->SetText(pStr);
 				TextFont->Release();
-
-				if(isUser)
-				{
-					if(lastMe)
-						mir_sntprintf( str, MAXSELECTSTR, _T("%s\n"), myName );
-					else
-						mir_sntprintf( str, MAXSELECTSTR, _T("%s\n"), contactName );
-					*strLen = _tcslen(str) * sizeof(TCHAR);
-					TextSelection->SetStart(MAXLONG);
-					TextSelection->GetFont(&TextFont);
-					SetFontFromOptions(TextFont, caps, lastMe ? Options::OutName : Options::InName);
-					TextSelection->SetText(pStr);
-					TextFont->Release();
-				}
-				
-				GetObjectDescription(&dbei,str, MAXSELECTSTR);
-				strStl = str;
-				int i = strStl.length();
-				if(i + 1 >= MAXSELECTSTR)
-					continue;
-				str[i++] = _T('\n');
-				str[i] = 0;
-				*strLen = i * sizeof(TCHAR);
-				TextSelection->SetStart(MAXLONG);
-				TextSelection->GetFont(&TextFont);
-				SetFontFromOptions(TextFont, caps, lastMe ? Options::OutMessages : Options::InMessages);
-				TextFont->SetBackColor(backColor);
-				TextSelection->GetStart(&startAt);
-				TextSelection->SetText(pStr);
-				TextFont->Release();
-
-				if(Options::instance->messagesUseSmileys)
-					ReplaceIcons(editWindow, startAt, lastMe);
-				TextSelection->SetStart(MAXLONG);
-				TextSelection->GetStart(&endAt);
-				currentGroup.push_back(MessageData(strStl, startAt, endAt, lastMe, dbei.timestamp));
 			}
+				
+			GetEventMessage(hDbEvent, str);
+			strStl = str;
+			int i = strStl.length();
+			if(i + 1 >= MAXSELECTSTR)
+				continue;
+			str[i++] = _T('\n');
+			str[i] = 0;
+			*strLen = i * sizeof(TCHAR);
+			TextSelection->SetStart(MAXLONG);
+			TextSelection->GetFont(&TextFont);
+			SetFontFromOptions(TextFont, caps, lastMe ? Options::OutMessages : Options::InMessages);
+			TextFont->SetBackColor(backColor);
+			TextSelection->GetStart(&startAt);
+			TextSelection->SetText(pStr);
+			TextFont->Release();
+
+			if(Options::instance->messagesUseSmileys)
+				ReplaceIcons(editWindow, startAt, lastMe);
+			TextSelection->SetStart(MAXLONG);
+			TextSelection->GetStart(&endAt);
+			currentGroup.push_back(MessageData(strStl, startAt, endAt, lastMe, data.timestamp));
 		}
 	}
 	
@@ -1666,8 +1656,6 @@ void HistoryWindow::SelectEventGroup(int sel)
 	{
 		UpdateWindow(editWindow);
 	}
-	
-	mir_free(dbei.pBlob);
 }
 
 LRESULT CALLBACK HistoryWindow::SplitterSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -1726,7 +1714,7 @@ void HistoryWindow::ReloadContacts()
 	bool isEmpty = true;
 	while(_hContact)
 	{
-		if(CallService(MS_DB_EVENT_GETCOUNT,(WPARAM) _hContact,0) && (metaContactProto == NULL || DBGetContactSettingByte(_hContact, metaContactProto, "IsSubcontact", 0) == 0))
+		if(EventList::GetContactMessageNumber(_hContact) && (metaContactProto == NULL || DBGetContactSettingByte(_hContact, metaContactProto, "IsSubcontact", 0) == 0))
 		{
 			/*TCHAR* d = (TCHAR*)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM) _hContact, GCDNF_TCHAR );
 			int pos = ListBox_AddString(GetDlgItem(hWnd,IDC_LIST_CONTACTS), d);
@@ -1818,20 +1806,42 @@ bool HistoryWindow::DoHotkey(UINT msg, LPARAM lParam, WPARAM wParam, int window)
 		break;
 	case HISTORY_HK_EXRHTML:
 		{
-			ExportManeger exp(hContact, GetFilterNr());
+			ExportManager exp(hWnd, hContact, GetFilterNr());
 			exp.Export(IExport::RichHtml);
 		}
 		break;
 	case HISTORY_HK_EXPHTML:
 		{
-			ExportManeger exp(hContact, GetFilterNr());
+			ExportManager exp(hWnd, hContact, GetFilterNr());
 			exp.Export(IExport::PlainHtml);
 		}
 		break;
 	case HISTORY_HK_EXTXT:
 		{
-			ExportManeger exp(hContact, GetFilterNr());
+			ExportManager exp(hWnd, hContact, GetFilterNr());
 			exp.Export(IExport::Txt);
+		}
+		break;
+	case HISTORY_HK_EXBIN:
+		{
+			ExportManager exp(hWnd, hContact, GetFilterNr());
+			exp.Export(IExport::Binary);
+		}
+		break;
+	case HISTORY_HK_EXDAT:
+		{
+			ExportManager exp(hWnd, hContact, GetFilterNr());
+			exp.Export(IExport::Dat);
+		}
+		break;
+	case HISTORY_HK_IMPBIN:
+		{
+			DoImport(IImport::Binary);
+		}
+		break;
+	case HISTORY_HK_IMPDAT:
+		{
+			DoImport(IImport::Dat);
 		}
 		break;
 	case HISTORY_HK_DELETE:
@@ -2009,7 +2019,15 @@ void HistoryWindow::ConfigToolbarClicked(LPNMTOOLBAR lpnmTB)
 		AppendMenu(hExportMenu, MF_STRING, IDM_EXPORTRHTML, TranslateT("Rich Html"));
 		AppendMenu(hExportMenu, MF_STRING, IDM_EXPORTPHTML, TranslateT("Plain Html"));
 		AppendMenu(hExportMenu, MF_STRING, IDM_EXPORTTXT, TranslateT("Txt"));
+		AppendMenu(hExportMenu, MF_STRING, IDM_EXPORTBINARY, TranslateT("Binary"));
+		AppendMenu(hExportMenu, MF_STRING, IDM_EXPORTDAT, TranslateT("Dat (mContacts)"));
+		
+		HMENU hImportMenu = CreatePopupMenu();
+		AppendMenu(hImportMenu, MF_STRING, IDM_IMPORTBINARY, TranslateT("Binary"));
+		AppendMenu(hImportMenu, MF_STRING, IDM_IMPORTDAT, TranslateT("Dat (mContacts)"));
+
 		AppendMenu(hPopupMenu, MF_STRING | MF_POPUP, (UINT_PTR)hExportMenu, TranslateT("Export"));
+		AppendMenu(hPopupMenu, MF_STRING | MF_POPUP, (UINT_PTR)hImportMenu, TranslateT("Import"));
 
 		AppendMenu(hPopupMenu, MFT_SEPARATOR, 0, NULL);
 		AppendMenu(hPopupMenu, MF_STRING, IDM_SAVEPOS, TranslateT("Save window position as default"));
@@ -2039,28 +2057,81 @@ void HistoryWindow::ConfigToolbarClicked(LPNMTOOLBAR lpnmTB)
 			break;
 		case IDM_EXPORTRHTML:
 			{
-				ExportManeger exp(hContact, GetFilterNr());
+				ExportManager exp(hWnd, hContact, GetFilterNr());
 				exp.Export(IExport::RichHtml);
 			}
 
 			break;
 		case IDM_EXPORTPHTML:
 			{
-				ExportManeger exp(hContact, GetFilterNr());
+				ExportManager exp(hWnd, hContact, GetFilterNr());
 				exp.Export(IExport::PlainHtml);
 			}
 
 			break;
 		case IDM_EXPORTTXT:
 			{
-				ExportManeger exp(hContact, GetFilterNr());
+				ExportManager exp(hWnd, hContact, GetFilterNr());
 				exp.Export(IExport::Txt);
 			}
 
 			break;
-		}
+		case IDM_EXPORTBINARY:
+			{
+				ExportManager exp(hWnd, hContact, GetFilterNr());
+				exp.Export(IExport::Binary);
+			}
 
+			break;
+		case IDM_EXPORTDAT:
+			{
+				ExportManager exp(hWnd, hContact, GetFilterNr());
+				exp.Export(IExport::Dat);
+			}
+
+			break;
+		case IDM_IMPORTBINARY:
+			{
+				DoImport(IImport::Binary);
+			}
+
+			break;
+		case IDM_IMPORTDAT:
+			{
+				DoImport(IImport::Dat);
+			}
+
+			break;
+		}
+		
+		DestroyMenu(hExportMenu);
+		DestroyMenu(hImportMenu);
 		DestroyMenu(hPopupMenu);
+	}
+}
+
+void HistoryWindow::DoImport(IImport::ImportType type)
+{
+	ExportManager exp(hWnd, hContact, GetFilterNr());
+	std::vector<IImport::ExternalMessage> messages;
+	std::wstring err;
+	if(exp.Import(type, messages, &err))
+	{
+		int act = MessageBox(hWnd, TranslateT("Do you want save imported messages to local profile?"), TranslateT("Import"), MB_ICONQUESTION | MB_YESNOCANCEL | MB_DEFBUTTON2);
+		if(act == IDYES)
+		{
+			MargeMessages(messages);
+			HistoryWindow::RebuildEvents(hContact);
+		}
+		else if(act == IDNO)
+		{
+			EventList::AddImporter(hContact, type, exp.GetFileName());
+			HistoryWindow::RebuildEvents(hContact);
+		}
+	}
+	else if(!err.empty())
+	{
+		MessageBox(hWnd, err.c_str(), TranslateT("Error"), MB_ICONERROR);
 	}
 }
 
@@ -2130,7 +2201,7 @@ void HistoryWindow::Delete(int what)
 	{
 		if(eventList.size() == 0)
 			return;
-		toDelete = eventList[0].size();
+		toDelete = 1;
 	}
 
 	if(toDelete == 0)
@@ -2143,44 +2214,58 @@ void HistoryWindow::Delete(int what)
 	if(MessageBox(hWnd, message, TranslateT("Are You sure?"), MB_OKCANCEL | MB_ICONERROR) != IDOK)
 		return;
 
+	bool areImpMessages = false;
+	bool rebuild = false;
 	if(what == 2)
 	{
 		for(int j = 0; j < eventList.size(); ++j)
 		{
 			for(int i = 0; i < eventList[j].size(); ++i)
 			{
-				CallService(MS_DB_EVENT_DELETE,(WPARAM)hContact,(LPARAM)(HANDLE)eventList[j][i]);
+				DeleteEvent(eventList[j][i]);
 			}
 		}
 		
-		SendMessage(hWnd,DM_HREBUILD,0,0);
+		areImpMessages = EventList::IsImportedHistory(hContact);
+		rebuild = true;
 	}
 	else
 	{
 		for(int i = start; i < end; ++i)
 		{
-			CallService(MS_DB_EVENT_DELETE,(WPARAM)hContact,(LPARAM)(HANDLE)eventList[selected][i]);
+			EventIndex& ev = eventList[selected][i];
+			DeleteEvent(ev);
+			areImpMessages |= ev.isExternal;
 		}
 
 		if(start == 0 && end == currentGroup.size())
 		{
-			SendMessage(hWnd,DM_HREBUILD,0,0);
+			rebuild = true;
 		}
 		else
 		{
-			std::deque<HANDLE> newGroup;
-			for(int i = 0; i < eventList[selected].size(); ++i)
-			{
-				if(CallService(MS_DB_EVENT_GETBLOBSIZE,(WPARAM)(HANDLE)eventList[selected][i],0) >= 0)
-				{
-					// If event exist, we add it to new group
-					newGroup.push_back(eventList[selected][i]);
-				}
-			}
-			eventList[selected].clear();
-			eventList[selected].insert(eventList[selected].begin(), newGroup.begin(), newGroup.end());
-			SelectEventGroup(selected);
+			rebuild = false;
 		}
+	}
+
+	if(areImpMessages)
+	{
+		TCHAR *message = TranslateT("Do you want delete all imported messages for this contact?\nNote that next sheduler task import this messages again.");
+		if(MessageBox(hWnd, message, TranslateT("Are You sure?"), MB_YESNO | MB_ICONERROR) == IDYES)
+		{
+			EventList::DeleteImporter(hContact);
+			rebuild = true;
+		}
+	}
+
+	if(rebuild)
+	{
+		RebuildEvents(hContact);
+	}
+	else
+	{
+		RebuildGroup(selected);
+		SelectEventGroup(selected);
 	}
 }
 

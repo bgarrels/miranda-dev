@@ -7,10 +7,6 @@
 
 #include "targetver.h"
 
-#if defined(__DEBUG__) || defined(_DEBUG) || defined(DEBUG)
-#define DEBUGMODE // Debug Mode
-#endif
-
 #ifndef _WIN64
 #define _USE_32BIT_TIME_T
 #endif
@@ -36,7 +32,7 @@
 #include <string>
 #include <fstream>
 
-#define MIRANDA_VER 0x0A00
+#define MIRANDA_VER		0x0900
 #define MIRANDA_CUSTOM_LP
 
 #include <newpluginapi.h>
@@ -62,7 +58,7 @@
 
 #include <win2k.h>
 
-//ExternalApi
+//External Api
 #include "m_updater.h"
 #include "m_smileyadd.h"
 #include "m_toolbar.h"
@@ -81,6 +77,10 @@
 #define HISTORY_HK_EXRHTML 110
 #define HISTORY_HK_EXPHTML 111
 #define HISTORY_HK_EXTXT 112
+#define HISTORY_HK_EXBIN 113
+#define HISTORY_HK_IMPBIN 114
+#define HISTORY_HK_EXDAT 115
+#define HISTORY_HK_IMPDAT 116
 
 #define EVENTTYPE_STATUSCHANGE          25368
 #define EVENTTYPE_SMTPSIMPLE            2350

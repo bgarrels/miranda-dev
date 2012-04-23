@@ -1,3 +1,21 @@
+/*
+Basic History plugin
+Copyright (C) 2011-2012 Krzysztof Kral
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation version 2
+of the License.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "StdAfx.h"
 #include "PlainHtmlExport.h"
 #include "Options.h"
@@ -61,7 +79,7 @@ void PlainHtmlExport::WriteFooter()
 	EXP_FILE << _T("<div class=mes></div>\n</body></html>\n");
 }
 
-void PlainHtmlExport::WriteGroup(bool isMe, const std::wstring &time, const std::wstring &user, const std::wstring &eventText, int ico)
+void PlainHtmlExport::WriteGroup(bool isMe, const std::wstring &time, const std::wstring &user, const std::wstring &eventText)
 {
 	TCHAR buf[256];
 	EXP_FILE << _T("<div class=mes id=session>\n");
@@ -70,7 +88,7 @@ void PlainHtmlExport::WriteGroup(bool isMe, const std::wstring &time, const std:
 	EXP_FILE << _T("</div>\n");
 }
 
-void PlainHtmlExport::WriteMessage(bool isMe, int ico, const std::wstring &longDate, const std::wstring &shortDate, const std::wstring &user, const std::wstring &message)
+void PlainHtmlExport::WriteMessage(bool isMe, const std::wstring &longDate, const std::wstring &shortDate, const std::wstring &user, const std::wstring &message, const DBEVENTINFO& dbei)
 {
 	TCHAR *id = isMe ? _T("out") : _T("inc");
 	TCHAR* ev = (isMe ? _T("1") : _T("0"));

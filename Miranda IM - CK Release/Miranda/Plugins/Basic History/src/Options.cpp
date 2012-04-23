@@ -1,6 +1,6 @@
 /*
 Basic History plugin
-Copyright (C) 2011 Krzysztof Kral
+Copyright (C) 2011-2012 Krzysztof Kral
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -212,6 +212,10 @@ static HotkeyOptionsList g_HotkeyOptionsList[] = {
 	{ "basichistory_hot_exrhtml", LPGENT("Export To Rich Html"), LPGENT("History"), 0, 0, HISTORY_HK_EXRHTML },
 	{ "basichistory_hot_exphtml", LPGENT("Export To Plain Html"), LPGENT("History"), 0, 0, HISTORY_HK_EXPHTML },
 	{ "basichistory_hot_extxt", LPGENT("Export To Txt"), LPGENT("History"), 0, 0, HISTORY_HK_EXTXT },
+	{ "basichistory_hot_exbin", LPGENT("Export To Binary"), LPGENT("History"), 0, 0, HISTORY_HK_EXBIN },
+	{ "basichistory_hot_impbin", LPGENT("Import From Binary"), LPGENT("History"), 0, 0, HISTORY_HK_IMPBIN },
+	{ "basichistory_hot_exdat", LPGENT("Export To Dat (mContacts)"), LPGENT("History"), 0, 0, HISTORY_HK_EXDAT },
+	{ "basichistory_hot_impdat", LPGENT("Import From Dat (mContacts)"), LPGENT("History"), 0, 0, HISTORY_HK_IMPDAT },
 };
 
 const int g_fontsSize = SIZEOF(g_FontOptionsList);
@@ -426,7 +430,7 @@ void Options::Load()
 	{
 		ftpExePath = ftpExePathDef;
 	}
-
+	
 	LoadTasks();
 }
 
@@ -538,6 +542,8 @@ void Options::SaveTasks(std::list<TaskOptions>* tasks)
 		DBWriteContactSettingByte(0, MODULE, buf, it->isSystem);
 		sprintf_s(buf, "Task_active_%d", i);
 		DBWriteContactSettingByte(0, MODULE, buf, it->active);
+		sprintf_s(buf, "Task_exportImported_%d", i);
+		DBWriteContactSettingByte(0, MODULE, buf, it->exportImported);
 		sprintf_s(buf, "Task_type_%d", i);
 		DBWriteContactSettingByte(0, MODULE, buf, it->type);
 		sprintf_s(buf, "Task_eventUnit_%d", i);
@@ -546,6 +552,8 @@ void Options::SaveTasks(std::list<TaskOptions>* tasks)
 		DBWriteContactSettingByte(0, MODULE, buf, it->trigerType);
 		sprintf_s(buf, "Task_exportType_%d", i);
 		DBWriteContactSettingByte(0, MODULE, buf, it->exportType);
+		sprintf_s(buf, "Task_importType_%d", i);
+		DBWriteContactSettingByte(0, MODULE, buf, it->importType);
 		sprintf_s(buf, "Task_eventDeltaTime_%d", i);
 		DBWriteContactSettingDword(0, MODULE, buf, it->eventDeltaTime);
 		sprintf_s(buf, "Task_filterId_%d", i);
@@ -570,6 +578,8 @@ void Options::SaveTasks(std::list<TaskOptions>* tasks)
 		DBWriteContactSettingWString(0, MODULE, buf, it->filePath.c_str());
 		sprintf_s(buf, "Task_taskName_%d", i);
 		DBWriteContactSettingWString(0, MODULE, buf, it->taskName.c_str());
+		sprintf_s(buf, "Task_zipPassword_%d", i);
+		DBWriteContactSettingString(0, MODULE, buf, it->zipPassword.c_str());
 
 		HANDLE _hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
 		sprintf_s(buf, "IsInTask_%d", i);
@@ -670,6 +680,8 @@ void Options::LoadTasks()
 		to.isSystem = DBGetContactSettingByte(0, MODULE, buf, to.isSystem);
 		sprintf_s(buf, "Task_active_%d", i);
 		to.active = DBGetContactSettingByte(0, MODULE, buf, to.active);
+		sprintf_s(buf, "Task_exportImported_%d", i);
+		to.exportImported = DBGetContactSettingByte(0, MODULE, buf, to.exportImported);
 		sprintf_s(buf, "Task_type_%d", i);
 		to.type = (TaskOptions::TaskType)DBGetContactSettingByte(0, MODULE, buf, to.type);
 		sprintf_s(buf, "Task_eventUnit_%d", i);
@@ -678,6 +690,8 @@ void Options::LoadTasks()
 		to.trigerType = (TaskOptions::TrigerType)DBGetContactSettingByte(0, MODULE, buf, to.trigerType);
 		sprintf_s(buf, "Task_exportType_%d", i);
 		to.exportType = (IExport::ExportType)DBGetContactSettingByte(0, MODULE, buf, to.exportType);
+		sprintf_s(buf, "Task_importType_%d", i);
+		to.importType = (IImport::ImportType)DBGetContactSettingByte(0, MODULE, buf, to.importType);
 		sprintf_s(buf, "Task_eventDeltaTime_%d", i);
 		to.eventDeltaTime = DBGetContactSettingDword(0, MODULE, buf, to.eventDeltaTime);
 		sprintf_s(buf, "Task_filterId_%d", i);
@@ -694,7 +708,7 @@ void Options::LoadTasks()
 		sprintf_s(buf, "Task_lastExport_low_%d", i);
 		to.lastExport = DBGetContactSettingDword(0, MODULE, buf, (int)le) & 0xffffffff;
 		sprintf_s(buf, "Task_lastExport_hi_%d", i);
-		to.lastExport |= ((unsigned int)DBGetContactSettingDword(0, MODULE, buf, le >> 32)) << 32;
+		to.lastExport |= ((unsigned long long int)DBGetContactSettingDword(0, MODULE, buf, le >> 32)) << 32;
 		sprintf_s(buf, "Task_ftpName_%d", i);
 		DBVARIANT var;
 		if(!DBGetContactSettingWString(0, MODULE, buf, &var))
@@ -720,6 +734,12 @@ void Options::LoadTasks()
 			to.taskName = var.ptszVal;
 			DBFreeVariant(&var);
 		}
+		sprintf_s(buf, "Task_zipPassword_%d", i);
+		if(!DBGetContactSettingString(0, MODULE, buf, &var))
+		{
+			to.zipPassword = var.pszVal;
+			DBFreeVariant(&var);
+		}
 
 		HANDLE _hContact = (HANDLE) CallService(MS_DB_CONTACT_FINDFIRST, 0, 0);
 		sprintf_s(buf, "IsInTask_%d", i);
@@ -743,6 +763,7 @@ void OptionsGroupChanged();
 void OptionsMessageChanged();
 void OptionsSearchingChanged();
 void OptionsSchedulerChanged();
+void InitTaskMenuItems();
 
 void SetEventCB(HWND hwndCB, int eventId)
 {
@@ -1580,6 +1601,7 @@ INT_PTR CALLBACK Options::DlgProcOptsScheduler(HWND hwndDlg, UINT msg, WPARAM wP
 				std::list<TaskOptions>* tasks = (std::list<TaskOptions>*)GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
 				Options::instance->SaveTasks(tasks);
 				OptionsSchedulerChanged();
+				InitTaskMenuItems();
 			}
 			return TRUE;
 		}
@@ -1652,7 +1674,6 @@ INT_PTR CALLBACK Options::DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam,
 	{
 		case WM_INITDIALOG:
 		{
-			TCHAR buf[1024];
 			TranslateDialogDefault(hwndDlg);
 			DlgTaskOpt* top = (DlgTaskOpt*)lParam;
 			TaskOptions* to = top->to;
@@ -1662,6 +1683,7 @@ INT_PTR CALLBACK Options::DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam,
 			HWND eventUnit = GetDlgItem(hwndDlg, IDC_EVENT_UNIT);
 			HWND trigerType = GetDlgItem(hwndDlg, IDC_TRIGER_TYPE);
 			HWND exportType = GetDlgItem(hwndDlg, IDC_EXPORT_TYPE);
+			HWND importType = GetDlgItem(hwndDlg, IDC_IMPORT_TYPE);
 			HWND compress = GetDlgItem(hwndDlg, IDC_COMPRESS);
 			HWND exportPath = GetDlgItem(hwndDlg, IDC_EXPORT_PATH);
 			HWND ftpFile = GetDlgItem(hwndDlg, IDC_FTP);
@@ -1674,15 +1696,21 @@ INT_PTR CALLBACK Options::DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam,
 			HWND name = GetDlgItem(hwndDlg, IDC_TASK_NAME);
 			HWND active = GetDlgItem(hwndDlg, IDC_TASK_ACTIVE);
 			HWND star = GetDlgItem(hwndDlg, IDC_TASK_STAR);
-
+			HWND password = GetDlgItem(hwndDlg, IDC_PASSWORD);
+			HWND expImp = GetDlgItem(hwndDlg, IDC_EXPIMP);
+			
 			Edit_LimitText(name, 16);
 			Edit_SetText(name, to->taskName.c_str());
 
 			Button_SetCheck(active, to->active);
 
+			Button_SetCheck(expImp, to->exportImported);
+
 			ComboBox_AddString(comboType, TranslateT("Export"));
 			ComboBox_AddString(comboType, TranslateT("Delete"));
 			ComboBox_AddString(comboType, TranslateT("Export and Delete"));
+			ComboBox_AddString(comboType, TranslateT("Import"));
+			ComboBox_AddString(comboType, TranslateT("Import and Marge"));
 			ComboBox_SetCurSel(comboType, to->type);
 
 			Edit_LimitText(GetDlgItem(hwndDlg, IDC_EVENT_TIME), 6);
@@ -1721,9 +1749,17 @@ INT_PTR CALLBACK Options::DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam,
 			ComboBox_AddString(exportType, TranslateT("Rich Html"));
 			ComboBox_AddString(exportType, TranslateT("Plain Html"));
 			ComboBox_AddString(exportType, TranslateT("Txt"));
+			ComboBox_AddString(exportType, TranslateT("Binary"));
+			ComboBox_AddString(exportType, TranslateT("Dat (mContacts)"));
 			ComboBox_SetCurSel(exportType, to->exportType);
 
+			ComboBox_AddString(importType, TranslateT("Binary"));
+			ComboBox_AddString(importType, TranslateT("Dat (mContacts)"));
+			ComboBox_SetCurSel(importType, to->importType);
+
 			Button_SetCheck(compress, to->compress);
+			Edit_LimitText(password, 99);
+			SetWindowTextA(password, to->zipPassword.c_str());
 			
 			Edit_LimitText(exportPath, MAX_PATH);
 			Edit_SetText(exportPath, to->filePath.c_str());
@@ -1732,7 +1768,7 @@ INT_PTR CALLBACK Options::DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam,
 			{
 				EnableWindow(ftpFile, FALSE);
 				EnableWindow(ftpFileButton, FALSE);
-				to->useFtp == false;
+				to->useFtp = false;
 			}
 
 			Button_SetCheck(ftpFileButton, to->useFtp);
@@ -1771,14 +1807,6 @@ INT_PTR CALLBACK Options::DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam,
 			DateTime_SetFormat(time, timeFormat);
 			DateTime_SetSystemtime(time, GDT_VALID, &st);
 
-			if(to->type != TaskOptions::Delete)
-			{
-				std::wstring str = TranslateT("* Use negative values to filter younger events");
-				str += _T("\n");
-				str += TranslateT("** Use <date> to insert date, <ext> to insert extension, <contact> to insert contact name");
-				Static_SetText(star, str.c_str());
-			}
-
 			CLCINFOITEM cii = { 0 };
 			cii.cbSize = sizeof(cii);
 			cii.flags = CLCIIF_GROUPFONT | CLCIIF_CHECKBOX;
@@ -1792,6 +1820,7 @@ INT_PTR CALLBACK Options::DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam,
 			SendMessage(hwndDlg, WM_COMMAND, MAKEWPARAM(IDC_TRIGER_TYPE, CBN_SELCHANGE), NULL);
 			SendMessage(hwndDlg, WM_COMMAND, MAKEWPARAM(IDC_COMPRESS, BN_CLICKED), NULL);
 			SendMessage(hwndDlg, WM_COMMAND, MAKEWPARAM(IDC_UPLOAD, BN_CLICKED), NULL);
+			SendMessage(hwndDlg, WM_COMMAND, MAKEWPARAM(IDC_COMPRESS, BN_CLICKED), NULL);
 			return TRUE;
 		}
 		case WM_COMMAND:
@@ -1807,6 +1836,7 @@ INT_PTR CALLBACK Options::DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam,
 					int nameLen = Edit_GetText(GetDlgItem(hwndDlg, IDC_TASK_NAME), (wchar_t*)toCp.taskName.c_str(), 17);
 					toCp.taskName.resize(nameLen);
 					toCp.active = Button_GetCheck(GetDlgItem(hwndDlg, IDC_TASK_ACTIVE));
+					toCp.exportImported = Button_GetCheck(GetDlgItem(hwndDlg, IDC_EXPIMP));
 					toCp.type = (enum TaskOptions::TaskType)ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_TASK_TYPE));
 					toCp.filterId = ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_TASK_FILTER));
 					if(toCp.filterId > 1)
@@ -1823,7 +1853,11 @@ INT_PTR CALLBACK Options::DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam,
 					toCp.eventUnit = (enum TaskOptions::EventUnit)ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_EVENT_UNIT));
 					toCp.trigerType = (enum TaskOptions::TrigerType)ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_TRIGER_TYPE));
 					toCp.exportType = (enum IExport::ExportType)ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_EXPORT_TYPE));
+					toCp.importType = (enum IImport::ImportType)ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_IMPORT_TYPE));
 					toCp.compress = Button_GetCheck(GetDlgItem(hwndDlg, IDC_COMPRESS)) != 0;
+					char bufC[100];
+					GetWindowTextA(GetDlgItem(hwndDlg, IDC_PASSWORD), bufC, 100);
+					toCp.zipPassword = bufC;
 					HWND exportPath = GetDlgItem(hwndDlg, IDC_EXPORT_PATH);
 					int exLen = Edit_GetTextLength(exportPath);
 					toCp.filePath.resize(exLen + 1);
@@ -1909,6 +1943,19 @@ INT_PTR CALLBACK Options::DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam,
 						EnableWindow(GetDlgItem(hwndDlg, IDC_FTP), TRUE);
 					}
 				}
+				else if(LOWORD(wParam) == IDC_COMPRESS)
+				{
+					if(Button_GetCheck(GetDlgItem(hwndDlg, IDC_COMPRESS)) == 0)
+					{
+						EnableWindow(GetDlgItem(hwndDlg, IDC_PASSWORD), FALSE);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_PASSWORD_LABEL), FALSE);
+					}
+					else
+					{
+						EnableWindow(GetDlgItem(hwndDlg, IDC_PASSWORD), TRUE);
+						EnableWindow(GetDlgItem(hwndDlg, IDC_PASSWORD_LABEL), TRUE);
+					}
+				}
 			}
 			else if (HIWORD(wParam) == CBN_SELCHANGE) 
 			{
@@ -1916,26 +1963,57 @@ INT_PTR CALLBACK Options::DlgProcOptsTask(HWND hwndDlg, UINT msg, WPARAM wParam,
 				{
 					TaskOptions::TaskType sel = (enum TaskOptions::TaskType)ComboBox_GetCurSel(GetDlgItem(hwndDlg, IDC_TASK_TYPE));
 					int show = sel == TaskOptions::Delete ? SW_HIDE : SW_SHOW;
+					int showFilter = (sel == TaskOptions::Import || sel == TaskOptions::ImportAndMarge) ? SW_HIDE : SW_SHOW;
+					int showImport = (sel == TaskOptions::Import || sel == TaskOptions::ImportAndMarge) ? SW_SHOW : SW_HIDE;
 					ShowWindow(GetDlgItem(hwndDlg, IDC_EXPORT_TYPE), show);  
 					ShowWindow(GetDlgItem(hwndDlg, IDC_EXPORT_TYPE_LABEL), show); 
 					ShowWindow(GetDlgItem(hwndDlg, IDC_COMPRESS), show); 
+					ShowWindow(GetDlgItem(hwndDlg, IDC_PASSWORD), show); 
+					ShowWindow(GetDlgItem(hwndDlg, IDC_PASSWORD_LABEL), show); 
 					ShowWindow(GetDlgItem(hwndDlg, IDC_EXPORT_PATH), show); 
 					ShowWindow(GetDlgItem(hwndDlg, IDC_EXPORT_PATH_LABEL), show); 
 					ShowWindow(GetDlgItem(hwndDlg, IDC_FTP), show); 
 					ShowWindow(GetDlgItem(hwndDlg, IDC_UPLOAD), show); 
 					ShowWindow(GetDlgItem(hwndDlg, IDC_FTP_LABEL), show); 
-					if(show == SW_HIDE)
+					ShowWindow(GetDlgItem(hwndDlg, IDC_EXPIMP), show);  
+					ShowWindow(GetDlgItem(hwndDlg, IDC_TASK_FILTER), showFilter); 
+					ShowWindow(GetDlgItem(hwndDlg, IDC_TASK_FILTER_LABEL), showFilter); 
+					ShowWindow(GetDlgItem(hwndDlg, IDC_EVENT_TIME), showFilter); 
+					ShowWindow(GetDlgItem(hwndDlg, IDC_EVENT_UNIT), showFilter); 
+					ShowWindow(GetDlgItem(hwndDlg, IDC_EVENT_LABEL), showFilter); 
+					if(show != showFilter)
 					{
-						std::wstring str = TranslateT("* Use negative values to filter younger events");
-						Static_SetText(GetDlgItem(hwndDlg, IDC_TASK_STAR), str.c_str());
+						ShowWindow(GetDlgItem(hwndDlg, IDC_EXPORT_TYPE), SW_HIDE);
+						ShowWindow(GetDlgItem(hwndDlg, IDC_EXPIMP), SW_HIDE);
+					}
+
+					ShowWindow(GetDlgItem(hwndDlg, IDC_IMPORT_TYPE), showImport);
+					std::wstring str;
+					TCHAR* compressText = TranslateT("Compress output files");
+					TCHAR* uploadText = TranslateT("Upload to FTP (WinSCP requred)");
+					TCHAR* typeText = TranslateT("Export to");
+					if(showFilter == SW_HIDE)
+					{
+						str = TranslateT("** Use <ext> to insert extension, <contact> to insert contact name");
+						compressText = TranslateT("Input files are compressed");
+						uploadText = TranslateT("Download from FTP (WinSCP requred)");
+						typeText = TranslateT("Import from");
+					}
+					else if(show == SW_HIDE)
+					{
+						str = TranslateT("* Use negative values to filter younger events");
 					}
 					else
 					{
-						std::wstring str = TranslateT("* Use negative values to filter younger events");
+						str = TranslateT("* Use negative values to filter younger events");
 						str += _T("\n");
 						str += TranslateT("** Use <date> to insert date, <ext> to insert extension, <contact> to insert contact name");
-						Static_SetText(GetDlgItem(hwndDlg, IDC_TASK_STAR), str.c_str());
 					}
+					
+					Static_SetText(GetDlgItem(hwndDlg, IDC_TASK_STAR), str.c_str());
+					Button_SetText(GetDlgItem(hwndDlg, IDC_COMPRESS), compressText);
+					Button_SetText(GetDlgItem(hwndDlg, IDC_UPLOAD), uploadText);
+					Static_SetText(GetDlgItem(hwndDlg, IDC_EXPORT_TYPE_LABEL), typeText);
 				}
 				else if(LOWORD(wParam) == IDC_TRIGER_TYPE)
 				{

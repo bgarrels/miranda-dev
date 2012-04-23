@@ -1,6 +1,6 @@
 /*
 Basic History plugin
-Copyright (C) 2011 Krzysztof Kral
+Copyright (C) 2011-2012 Krzysztof Kral
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -323,39 +323,23 @@ bool Searcher::IsInSel(int sel, TCHAR *strFind)
 	if(sel < 0 || sel >= context.eventList.size())
 		return false;
 
-#define MAXSELECTSTR 8184
 	TCHAR str[MAXSELECTSTR + 8]; // for safety reason
-	DBEVENTINFO dbei = {0};
-	DWORD newBlobSize,oldBlobSize;
-	oldBlobSize = 0;
-	dbei.cbSize=sizeof(dbei);
-	for(std::deque<HANDLE>::iterator it = context.eventList[sel].begin(); it != context.eventList[sel].end(); ++it)
+	EventList::EventData data;
+	for(std::deque<EventList::EventIndex>::iterator it = context.eventList[sel].begin(); it != context.eventList[sel].end(); ++it)
 	{
-		HANDLE hDbEvent = *it;
-		newBlobSize=CallService(MS_DB_EVENT_GETBLOBSIZE,(WPARAM)hDbEvent,0);
-		if ((int)dbei.cbBlob != -1)
+		EventList::EventIndex hDbEvent = *it;
+		if(context.GetEventData(hDbEvent, data))
 		{
-			if(newBlobSize>oldBlobSize) 
+			bool isMe = data.isMe;
+			if(onlyIn && isMe || onlyOut && !isMe)
+				continue;
+			context.GetEventMessage(hDbEvent, str);
+			if(CompareStr(str, strFind))
 			{
-				dbei.pBlob=(PBYTE)mir_realloc(dbei.pBlob,newBlobSize);
-				oldBlobSize=newBlobSize;
-			}
-			dbei.cbBlob = oldBlobSize;
-			if (CallService(MS_DB_EVENT_GET,(WPARAM)hDbEvent,(LPARAM)&dbei) == 0)
-			{
-				bool isMe = dbei.flags & DBEF_SENT;
-				if(onlyIn && isMe || onlyOut && !isMe)
-					continue;
-				context.GetObjectDescription(&dbei,str, MAXSELECTSTR);
-				if(CompareStr(str, strFind))
-				{
-					mir_free(dbei.pBlob);
-					return true;
-				}
+				return true;
 			}
 		}
 	}
 		
-	mir_free(dbei.pBlob);
 	return false;
 }

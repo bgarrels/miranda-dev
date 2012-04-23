@@ -71,13 +71,22 @@
     <ClInclude Include="src\EventList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExportManeger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\IExport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\TxtExport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExportManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BinaryExport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DatExport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IImport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -109,9 +118,6 @@
     <ClCompile Include="src\EventList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ExportManeger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\PlainHtmlExport.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -119,6 +125,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\TxtExport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DatExport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExportManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BinaryExport.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
