@@ -147,7 +147,7 @@ unsigned int __fastcall hashstrW(const char * key)
 {
 	if (key == NULL) return 0;
 	const unsigned int len = (unsigned int)wcslen((const wchar_t*)key);
-	char* buf = (char*)alloca(len + 1);
+	char* buf = (char*)_malloca(len + 1);
 	for (unsigned i = 0; i <= len ; ++i)
 		buf[i] = key[i << 1];
 	return hash(buf, len);
@@ -451,7 +451,7 @@ TCHAR* LangPackPcharToTchar( const char* pszStr )
 
 	#if defined( _UNICODE )
 	{	int len = (int)strlen( pszStr );
-		TCHAR* result = ( TCHAR* )alloca(( len+1 )*sizeof( TCHAR ));
+		TCHAR* result = ( TCHAR* )_malloca(( len+1 )*sizeof( TCHAR ));
 		MultiByteToWideChar( LangPackGetDefaultCodePage(), 0, pszStr, -1, result, len );
 		result[len] = 0;
 		return mir_wstrdup( TranslateW( result ));

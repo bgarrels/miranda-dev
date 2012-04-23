@@ -927,7 +927,7 @@ static INT_PTR CALLBACK DlgProcFindAdd(HWND hwndDlg, UINT msg, WPARAM wParam, LP
 			{
 				TCHAR *szProto;
 				int len = SendDlgItemMessage(hwndDlg,IDC_PROTOLIST,CB_GETLBTEXTLEN,SendDlgItemMessage(hwndDlg,IDC_PROTOLIST,CB_GETCURSEL,0,0),0);
-				szProto = ( TCHAR* )alloca( sizeof(TCHAR)*( len+1 ));
+				szProto = ( TCHAR* )_malloca( sizeof(TCHAR)*( len+1 ));
 				*szProto='\0';
 				SendDlgItemMessage(hwndDlg,IDC_PROTOLIST,CB_GETLBTEXT,SendDlgItemMessage(hwndDlg,IDC_PROTOLIST,CB_GETCURSEL,0,0),(LPARAM)szProto);
 				DBWriteContactSettingTString(NULL, "FindAdd", "LastSearched", szProto?szProto:_T(""));
