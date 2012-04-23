@@ -1,8 +1,9 @@
 /*
+
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011-2012 Robert Pösel
+Copyright © 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,6 +17,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 */
 
 #include "common.h"
@@ -39,7 +41,6 @@ OmegleProto::OmegleProto(const char* proto_name, const TCHAR* username)
 	CreateProtoService(m_szModuleName, PS_LEAVECHAT, &OmegleProto::OnLeaveChat, this);
 
 	CreateProtoService(m_szModuleName, PS_CREATEACCMGRUI, &OmegleProto::SvcCreateAccMgrUI, this);
-	CreateProtoService(m_szModuleName, PS_GETNAME, &OmegleProto::GetName, this);
 	
 	HookProtoEvent(ME_OPT_INITIALISE, &OmegleProto::OnOptionsInit, this);
 	HookProtoEvent(ME_GC_EVENT, &OmegleProto::OnChatEvent, this);
@@ -156,19 +157,6 @@ int OmegleProto::SetStatus( int new_status )
 }
 
 //////////////////////////////////////////////////////////////////////////////
-// SERVICES
-
-int OmegleProto::GetStatus( WPARAM wParam, LPARAM lParam )
-{
-	return m_iStatus;
-}
-
-int OmegleProto::SetStatus( WPARAM wParam, LPARAM lParam )
-{
-	return SetStatus( (int)wParam );
-}
-
-//////////////////////////////////////////////////////////////////////////////
 
 int OmegleProto::OnEvent(PROTOEVENTTYPE event,WPARAM wParam,LPARAM lParam)
 {
@@ -192,12 +180,6 @@ int OmegleProto::OnEvent(PROTOEVENTTYPE event,WPARAM wParam,LPARAM lParam)
 
 //////////////////////////////////////////////////////////////////////////////
 // EVENTS
-
-int OmegleProto::GetName( WPARAM wParam, LPARAM lParam )
-{
-	lstrcpynA(reinterpret_cast<char*>(lParam),m_szProtoName,wParam);
-	return 0;
-}
 
 int OmegleProto::SvcCreateAccMgrUI(WPARAM wParam,LPARAM lParam)
 {

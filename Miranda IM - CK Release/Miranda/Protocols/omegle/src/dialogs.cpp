@@ -158,6 +158,7 @@ INT_PTR CALLBACK OmegleOptionsProc( HWND hwnd, UINT message, WPARAM wparam, LPAR
 		LoadDBText(proto, hwnd, IDC_INTERESTS, OMEGLE_KEY_INTERESTS);
 		LoadDBText(proto, hwnd, IDC_HI_MESSAGE, OMEGLE_KEY_HI);
 		LoadDBText(proto, hwnd, IDC_ASL_MESSAGE, OMEGLE_KEY_ASL);
+		LoadDBText(proto, hwnd, IDC_LAST_QUESTION, OMEGLE_KEY_LAST_QUESTION);
 
 		LoadDBCheckState(proto, hwnd, IDC_MEET_COMMON, OMEGLE_KEY_MEET_COMMON);
 		LoadDBCheckState(proto, hwnd, IDC_HI_ENABLED, OMEGLE_KEY_HI_ENABLED);
