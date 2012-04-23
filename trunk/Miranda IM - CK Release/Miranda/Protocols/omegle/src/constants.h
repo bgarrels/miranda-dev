@@ -23,8 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 // Version management
-#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0,0,1,1)
-#define __VERSION_STRING            "0.0.1.1"
+#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0,0,2,0)
+#define __VERSION_STRING            "0.0.2.0"
 
 // Product management
 #define OMEGLE_NAME               "Omegle"
@@ -36,6 +36,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // There is "no limit" on Omegle, but we should set some wise limit
 #define OMEGLE_MESSAGE_LIMIT		4096
 #define OMEGLE_MESSAGE_LIMIT_TEXT	"4096"
+
+#define OMEGLE_QUESTION_MIN_LENGTH	10
 
 // Omegle request types
 #define OMEGLE_REQUEST_HOME						100 // getting server name

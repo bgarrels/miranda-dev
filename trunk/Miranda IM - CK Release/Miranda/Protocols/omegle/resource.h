@@ -12,12 +12,11 @@
 #define IDC_HI_ENABLED                  1208
 #define IDC_HI_MESSAGE                  1209
 #define IDC_ASL_MESSAGE                 1210
+#define IDC_LAST_QUESTION               1211
 #define IDC_NOCLEAR                     1213
 #define IDC_DONTSTOP                    1214
 #define IDC_REUSE_QUESTIONS             1215
-#define IDC_REUSE_QUESTIONS2            1216
 #define IDC_LOGGING                     1216
-#define IDC_REUSE_QUESTIONS3            1217
 #define IDC_SERVER_INFO                 1217
 
 // Next default values for new objects

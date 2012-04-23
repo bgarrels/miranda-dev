@@ -1,8 +1,9 @@
 /*
+
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011-2012 Robert Pösel
+Copyright © 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -26,7 +27,7 @@ http::response Omegle_client::flap( const int request_type, std::string* request
 	nlhr.requestType = choose_method( request_type );
 	std::string url = choose_request_url( request_type, request_data, get_data );
 	nlhr.szUrl = (char*)url.c_str( );
-	nlhr.flags = NLHRF_HTTP11 | /*NLHRF_NODUMP |*/ NLHRF_GENERATEHOST;
+	nlhr.flags = NLHRF_HTTP11 | NLHRF_NODUMP;
 	nlhr.headers = get_request_headers( request_type, &nlhr.headersCount );
 	nlhr.timeout = 1000 * (( request_type == OMEGLE_REQUEST_EVENTS ) ? 60 : 15);
 

@@ -1,8 +1,9 @@
 /*
+
 Omegle plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2011-2012 Robert Pösel
+Copyright © 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -92,8 +93,42 @@ int OmegleProto::OnChatEvent(WPARAM wParam,LPARAM lParam)
 				ForkThread(&OmegleProto::StopChatWorker, this, NULL);
 				break;
 			}
+			else if (!stricmp(command.c_str(), "spy"))
+			{
+				facy.spy_mode_ = true;
+				facy.question_ = "";
+				
+				ForkThread(&OmegleProto::NewChatWorker, this, NULL);
+				break;
+			}
 			else if (!stricmp(command.c_str(), "ask"))
-			{				
+			{						
+				if (params.empty()) {
+					// Load last question
+					DBVARIANT dbv;
+					if ( !getU8String( OMEGLE_KEY_LAST_QUESTION,&dbv ) ) {
+						params = dbv.pszVal;
+						DBFreeVariant(&dbv);
+					}
+					
+					if (params.empty()) {
+						UpdateChat(NULL, TranslateT("Last question is empty."), false);
+						break;
+					}
+				} else {
+					// Save actual question as last question
+					if (strlen(params.c_str()) >= OMEGLE_QUESTION_MIN_LENGTH)
+					{
+						setU8String( OMEGLE_KEY_LAST_QUESTION, params.c_str() );
+					}
+				}
+
+				if (strlen(params.c_str()) < OMEGLE_QUESTION_MIN_LENGTH)
+				{
+					UpdateChat(NULL, TranslateT("Your question is too short."), false);
+					break;
+				}
+
 				facy.spy_mode_ = true;
 				facy.question_ = params;
 				ForkThread(&OmegleProto::NewChatWorker, this, NULL);
@@ -112,17 +147,28 @@ int OmegleProto::OnChatEvent(WPARAM wParam,LPARAM lParam)
 			}
 			else if (!stricmp(command.c_str(), "help"))
 			{
+				UpdateChat(NULL, TranslateT("There are three different modes of chatting:\
+\n1) Standard mode\t - You chat with random stranger privately\
+\n2) Question mode\t - You ask two strangers a question and see how they discuss it (you can't join their conversation, only watch)\
+\n3) Spy mode\t - You and stranger got a question to discuss from third stranger (he can't join your conversation, only watch)\
+\n\nSend '/commands' for available commands."), false);
+			}
+			else if (!stricmp(command.c_str(), "commands"))
+			{
 				UpdateChat(NULL, TranslateT("You can use different commands:\
-\n/new\t - connect to new stranger or reconnect to different stranger\
+\n/help\t - show info about chat modes\
+\n/new\t - start standard mode\
+\n/ask <question> - start question mode with your question\
+\n/ask\t - start question mode with your last asked question\
+\n/spy\t - start spy mode\
 \n/quit\t - disconnect from stranger or stop connecting\
-\n/ask\t - question mode\
-\n/ask <question> - spy mode with your question\
-\n/asl\t - send your predefined ASL message"), false);
+\n/asl\t - send your predefined ASL message\
+\n\nNote: You can reconnect to different stranger without disconnecting from current one."), false);
 				break;
 			}
 			else
 			{
-				UpdateChat(NULL, TranslateT("Unknown command. Send '/help' for available commands."), false);
+				UpdateChat(NULL, TranslateT("Unknown command. Send '/commands' for list."), false);
 				break;
 			}
 
@@ -137,7 +183,7 @@ int OmegleProto::OnChatEvent(WPARAM wParam,LPARAM lParam)
 				break;
 
 			case STATE_INACTIVE:
-				UpdateChat(NULL, TranslateT("You aren't connected to any stranger. Send '/help' for available commands."), false);
+				UpdateChat(NULL, TranslateT("You aren't connected to any stranger. Send '/help' or '/commands' for help."), false);
 				break;
 
 			case STATE_SPY:
