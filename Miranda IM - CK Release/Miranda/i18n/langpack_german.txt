@@ -6,10 +6,8 @@ Authors: miranda-im.de Projekt Sprachdatei - diverse Autoren
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 15 Apr 2012 03:04:19
-; FLID: Deutsche Sprachdatei 0.12.04.15
-Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,AsSingleWindow,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Basic_History,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ConnectionNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirFox,MirOTR,MirOUT,MirPy_Scripting,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NewsAggregator,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,Smart_Auto_Replier,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XSoundNotify,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
-
+X-Langpack-creation-date: 23 Apr 2012 22:04:11
+; FLID: Deutsche Sprachdatei 0.12.04.23
 ; Start of langpack: Core (Letzte Änderung: 14:42, 14. Apr. 2012 )
 
 [0 = Default]
@@ -7929,14 +7927,15 @@ Benutzt Miranda IM um zu Ihren Freunden von battle.net zu sprechen.
 ; ##############################################
 ; End of langpack: BNET_Messenger
 ; ############################################## 
-; Start of langpack: Basic_History (Letzte Änderung: 13:02, 2. Apr. 2012 )
+; Start of langpack: Basic_History (Letzte Änderung: 22:53, 23. Apr. 2012 )
 
 ; Pluginname: Basic History 
-; Version: 1.0.0.5
+; Version: 1.0.1.4
 ; Dateiname: BasicHistory.dll
 ; Unique ID: {e25367a2-51ae-4044-be28-131bc18b71a4}
 ; Autor(en): Krzysztof Kral
 ; Übersetzung: 09.09.2011 von CHEF-KOCH
+; Besonderheiten: Die Rechtschreibfehler seitens Autor sind tatsächlich vorhanden!
 
 [Default Event Filter]
 Standard Ereignisfilter
@@ -8065,8 +8064,10 @@ WinSCP-Pfad
 [WinSCP log path]
 WinSCP-Log-Pfad
 
-[Path to output file**]
+[Path to file**]
 Pfad zur Ausgabe**
+[Path to file]
+Pfad zur Ausgabe
 [* Use negative values to filter younger events]
 * negative Werte verwenden um neuere Ereignisse zu filtern
 [** Use <date> to insert date, <ext> to insert extension, <contact> to insert contact name]
@@ -8088,13 +8089,31 @@ Speichere Fensterposition als Standard
 Speichere Fensterposition für alle Kontakte
 [Window background]
 Fenster-Hintergrund
+[Execute history task]
+Verlaufstask ausführen
+[Import and Marge]
+Importieren und verschmelzen
+[Input files are compressed]
+Eingabedateien sind komprimiert
+[Import from]
+Importieren von
+[** Use <ext> to insert extension, <contact> to insert contact name]
+** Benutze <ext> um Erweiterte Details einzugeben, <contact> um den Kontaktnamen einzugeben
 
 ; Dialoge
 [This operation will PERMANENTLY REMOVE all history for this contact.\nAre you sure you want to do this?]
 Diese Operation wird alle Verlaufseinträge für diesen Kontakt DAUERHAFT LÖSCHEN.\nSind Sie sich sicher, dass Sie dies machen wollen?
 [Number of history items to delete: %d.\nAre you sure you want to do this?]
 Anzahl der zu löschenden Verlaufseinträge: %d.\nSind Sie sich sicher, dass Sie dies machen wollen?
+[Do you want delete all imported messages for this contact?\nNote that next scheduler task import this messages again.]
+Möchten Sie alle importierten Nachrichten von diesem Benutzer löschen?\nAchtung: Bei der nächsten importierten Task der Zeitplanung werden sie erneut gefragt.
+[FTP path cannot contain <date> in import task]
+Der FTP-Pfad darf keine <date> im importierten Task enthalten!
 
+[Import From Dat (mContacts)]
+.DAT importieren (mContacts)
+[Export To Dat (mContacts)]
+Als .DAT exportieren (mContacts)
 [Export To Binary]
 Als Binärdatei exportieren
 [Import From Binary]
@@ -21964,7 +21983,7 @@ Neue E-Mail
 ; ##############################################
 ; End of langpack: MRA
 ; ############################################## 
-; Start of langpack: MRadio (Letzte Änderung: 22:44, 24. Jan. 2012 )
+; Start of langpack: MRadio (Letzte Änderung: 16:25, 15. Apr. 2012 )
 
 ; Pluginname: mRadio 
 ; Version: 0.0.1.4
@@ -22128,6 +22147,8 @@ Psychotisch
 Protokoll abhängig vom Status
 [Forced Mono]
 Mono fokusieren
+[Oops! BASS error]
+Oops! BASS.dll Fehler
  
 ; ##############################################
 ; End of langpack: MRadio
