@@ -9,7 +9,8 @@ function EditStructure(struct:pAnsiChar;parent:HWND=0):pAnsiChar;
 
 implementation
 
-uses io,messages, commctrl, common, wrapper, strans{$IFDEF Miranda}, m_api, mirutils{$ENDIF};
+uses io,messages, commctrl, common, wrapper, strans, memini
+  {$IFDEF Miranda}, m_api, mirutils{$ENDIF};
 {
   <STE_* set> <len> <data>
 }
@@ -22,6 +23,10 @@ const
   ACI_UP     :PAnsiChar = 'ACI_Up';
   ACI_DOWN   :PAnsiChar = 'ACI_Down';
   ACI_DELETE :PAnsiChar = 'ACI_Delete';
+
+const
+  API_STRUCT_FILE = 'plugins\services.ini';
+  namespace = 'Structure';
 {$ENDIF}
 
 type
@@ -41,6 +46,7 @@ const
 {$ENDIF}
 var
   OldLVProc:pointer;
+  storage:pointer;
 
 function GetTypeIndex(etype:integer):integer;
 var
@@ -77,11 +83,11 @@ procedure RegisterIcons;
 var
   sid:TSKINICONDESC;
 
-  procedure RegisterIcon(id:uint_ptr;name:PAnsiChar;descr:PAnsiChar);
+  procedure RegisterIcon(id,name:PAnsiChar;descr:PAnsiChar);
   var
     buf:array [0..63] of WideChar;
   begin
-    sid.hDefaultIcon   :=LoadImage(hInstance,MAKEINTRESOURCE(id),IMAGE_ICON,16,16,0);
+    sid.hDefaultIcon   :=LoadImageA(hInstance,id,IMAGE_ICON,16,16,0);
     sid.pszName        :=name;
     sid.szDescription.w:=FastAnsiToWideBuf(descr,buf);
     PluginLink^.CallService(MS_SKIN2_ADDICON,0,lparam(@sid));
@@ -89,6 +95,9 @@ var
   end;
 
 begin
+  if PluginLink^.CallService(MS_SKIN2_GETICON,0,LPARAM(ACI_NEW))<>0 then
+    exit;
+
   FillChar(sid,SizeOf(TSKINICONDESC),0);
   sid.cbSize     :=SizeOf(TSKINICONDESC);
   sid.cx         :=16;
@@ -96,10 +105,10 @@ begin
   sid.flags      :=SIDF_UNICODE;
   sid.szSection.w:='Actions';
 
-  RegisterIcon(IDI_NEW    ,ACI_NEW    ,'New');
-  RegisterIcon(IDI_DELETE ,ACI_DELETE ,'Delete');
-  RegisterIcon(IDI_UP     ,ACI_UP     ,'Up');
-  RegisterIcon(IDI_DOWN   ,ACI_DOWN   ,'Down');
+  RegisterIcon('IDI_NEW'    ,ACI_NEW    ,'New');
+  RegisterIcon('IDI_DELETE' ,ACI_DELETE ,'Delete');
+  RegisterIcon('IDI_UP'     ,ACI_UP     ,'Up');
+  RegisterIcon('IDI_DOWN'   ,ACI_DOWN   ,'Down');
 end;
 {$ENDIF}
 procedure SetDataButtonIcons(Dialog:HWND);
@@ -135,22 +144,22 @@ begin
 {$ELSE}
   ti.lpszText:='New';
   SendMessageW(ti.uId, BM_SETIMAGE, IMAGE_ICON,
-    LoadImage(hInstance,MAKEINTRESOURCE(IDI_NEW),IMAGE_ICON,16,16,0));
+    LoadImage(hInstance,'IDI_NEW',IMAGE_ICON,16,16,0));
   SendMessageW(hwndTooltip,TTM_ADDTOOLW,0,lparam(@ti));
   ti.uId     :=GetDlgItem(Dialog,IDC_DATA_UP);
   ti.lpszText:='Up';
   SendMessageW(ti.uId, BM_SETIMAGE, IMAGE_ICON,
-    LoadImage(hInstance,MAKEINTRESOURCE(IDI_UP),IMAGE_ICON,16,16,0));
+    LoadImage(hInstance,'IDI_UP',IMAGE_ICON,16,16,0));
   SendMessageW(hwndTooltip,TTM_ADDTOOLW,0,lparam(@ti));
   ti.uId     :=GetDlgItem(Dialog,IDC_DATA_DOWN);
   ti.lpszText:='Down';
   SendMessageW(ti.uId, BM_SETIMAGE, IMAGE_ICON,
-    LoadImage(hInstance,MAKEINTRESOURCE(IDI_DOWN),IMAGE_ICON,16,16,0));
+    LoadImage(hInstance,'IDI_DOWN',IMAGE_ICON,16,16,0));
   SendMessageW(hwndTooltip,TTM_ADDTOOLW,0,lparam(@ti));
   ti.uId     :=GetDlgItem(Dialog,IDC_DATA_DELETE);
   ti.lpszText:='Delete';
   SendMessageW(ti.uId, BM_SETIMAGE, IMAGE_ICON,
-    LoadImage(hInstance,MAKEINTRESOURCE(IDI_DELETE),IMAGE_ICON,16,16,0));
+    LoadImage(hInstance,'IDI_DELETE',IMAGE_ICON,16,16,0));
 {$ENDIF}
   SendMessageW(hwndTooltip,TTM_ADDTOOLW,0,lparam(@ti));
 end;
@@ -405,7 +414,9 @@ var
   p:pansiChar;
   element:tOneElement;
 begin
-  txt:=StrScan(txt,char_separator)+1;
+  SendMessage(list,LVM_DELETEALLITEMS,0,0);
+  if txt^ in sNum then
+    txt:=StrScan(txt,char_separator)+1;
   while txt^<>#0 do
   begin
     p:=StrScan(txt,char_separator);
@@ -429,7 +440,7 @@ var
   pc:pWideChar;
   pc1:pAnsiChar;
   len:integer;
-  isScript:boolean;
+  {$IFDEF Miranda}isScript:boolean;{$ENDIF}
 begin
   li.iItem:=item;
   
@@ -607,27 +618,34 @@ begin
   mFreeMem(p);
 end;
 {$IFDEF Miranda}
-function FindAddDlgResizer(Dialog:HWND;lParam:LPARAM;urc:PUTILRESIZECONTROL):int; cdecl;
+function StructEditDlgResizer(Dialog:HWND;lParam:LPARAM;urc:PUTILRESIZECONTROL):int; cdecl;
 begin
   case urc^.wId of
     IDC_DATA_FULL:   result:=RD_ANCHORX_WIDTH or RD_ANCHORY_HEIGHT;
+    IDC_DATA_TMPL:   result:=RD_ANCHORX_WIDTH or RD_ANCHORY_BOTTOM;
     IDC_DATA_EDIT:   result:=RD_ANCHORX_RIGHT or RD_ANCHORY_HEIGHT;
     IDC_DATA_EDTN:   result:=RD_ANCHORX_RIGHT or RD_ANCHORY_TOP;
-    IDC_DATA_VARS:   result:=RD_ANCHORX_RIGHT or RD_ANCHORY_BOTTOM;
-    IDC_DATA_MMI:    result:=RD_ANCHORX_RIGHT or RD_ANCHORY_BOTTOM;
     IDC_DATA_TYPE:   result:=RD_ANCHORX_RIGHT or RD_ANCHORY_TOP;
     IDC_DATA_LEN:    result:=RD_ANCHORX_RIGHT or RD_ANCHORY_TOP;
+    IDC_DATA_SLEN:   result:=RD_ANCHORX_RIGHT or RD_ANCHORY_TOP;
+
+    IDC_DATA_VARS:   result:=RD_ANCHORX_RIGHT or RD_ANCHORY_BOTTOM;
+    IDC_DATA_MMI:    result:=RD_ANCHORX_RIGHT or RD_ANCHORY_BOTTOM;
+
     IDC_DATA_NEW:    result:=RD_ANCHORX_RIGHT or RD_ANCHORY_TOP;
     IDC_DATA_UP:     result:=RD_ANCHORX_RIGHT or RD_ANCHORY_TOP;
     IDC_DATA_DOWN:   result:=RD_ANCHORX_RIGHT or RD_ANCHORY_TOP;
     IDC_DATA_DELETE: result:=RD_ANCHORX_RIGHT or RD_ANCHORY_TOP;
+    IDC_DATA_INFO:   result:=RD_ANCHORX_RIGHT or RD_ANCHORY_BOTTOM;
+    IDC_DATA_PASTE:  result:=RD_ANCHORX_RIGHT or RD_ANCHORY_BOTTOM;
+
     IDC_DATA_ALIGN : result:=RD_ANCHORX_RIGHT or RD_ANCHORY_TOP;
     IDC_DATA_SALGN : result:=RD_ANCHORX_RIGHT or RD_ANCHORY_TOP;
     IDC_DATA_SEP   : result:=RD_ANCHORX_RIGHT or RD_ANCHORY_TOP;
+
     IDC_DATA_CHANGE: result:=RD_ANCHORX_RIGHT or RD_ANCHORY_BOTTOM;
     IDOK:            result:=RD_ANCHORX_RIGHT or RD_ANCHORY_BOTTOM;
     IDCANCEL:        result:=RD_ANCHORX_RIGHT or RD_ANCHORY_BOTTOM;
-//    IDC_DATA_HELP:   result:=RD_ANCHORX_WIDTH or RD_ANCHORY_TOP;
   else
     result:=0;
   end;
@@ -678,7 +696,8 @@ var
   b,b1:boolean;
   idcshow,idchide:integer;
   li:TLVITEMW;
-  vflag,mflag,len:integer;
+  {$IFDEF Miranda}vflag,mflag,{$ENDIF}
+  len:integer;
   wnd:HWND;
 begin
   len:=LV_GetLParam(list,item);
@@ -828,6 +847,123 @@ begin
   LV_SetLParam(list,ltype,item);
 end;
 
+{$IFDEF Miranda}
+procedure FillTemplates(wnd:HWND;storage:pointer);
+var
+  p,pp:pAnsiChar;
+  i:integer;
+begin
+  SendMessage(wnd,CB_RESETCONTENT,0,0);
+
+  p:=GetSectionList(storage,namespace);
+  pp:=p;
+  i:=0;
+  while p^<>#0 do
+  begin
+    CB_AddStrData(wnd,p,int_ptr(SearchSection(storage,p,namespace)), i);
+
+    while p^<>#0 do inc(p); inc(p);
+    inc(i);
+  end;
+  FreeSectionList(pp);
+end;
+{$ENDIF}
+
+procedure ReadableForm(wnd:HWND; struct:pAnsiChar);
+var
+  p,pc,buf:pAnsiChar;
+  element:tOneElement;
+begin
+  GetMem(buf,StrLen(struct)*2);
+  pc:=buf;
+
+  struct:=StrScan(struct,char_separator)+1;
+  while struct^<>#0 do
+  begin
+    p:=StrScan(struct,char_separator);
+    GetOneElement(struct,element,false);
+
+    pc:=StrCopyE(pc,element.talias);
+    if element.etype in [SST_BARR,SST_WARR] then
+    begin
+      pc^:=' '; inc(pc);
+      pc^:='['; inc(pc);
+      pc:=StrEnd(IntToStr(pc,element.len));
+      pc^:=']'; inc(pc);
+    end;
+    pc^:=' '; inc(pc);
+    pc:=StrCopyE(pc,element.alias);
+{
+//    if (element.typ IN [SST_BYTE,SST_WORD,SST_DWORD, SST_QWORD, SST_NATIVE]) then
+    pc^:=' '; inc(pc);
+    pc^:='='; inc(pc);
+    pc^:=' '; inc(pc);
+    pc:=StrCopyE(pc,element.sValue);
+}
+    pc^:=#13; inc(pc);
+    pc^:=#10; inc(pc);
+
+    FreeElement(element);
+
+    if p=nil then break;
+    struct:=p+1;
+  end;
+  pc^:=#0;
+
+  SendMessageA(wnd,WM_SETTEXT,0,LPARAM(buf));
+  FreeMem(buf);
+end;
+
+function StructHelp(Dialog:HWnd;hMessage:uint;wParam:WPARAM;lParam:LPARAM):lresult; stdcall;
+var
+  tmp:pWideChar;
+  pc:pAnsiChar;
+begin
+  result:=0;
+  case hMessage of
+    WM_CLOSE: begin
+      DestroyWindow(Dialog); //??
+    end;
+
+    WM_INITDIALOG: begin
+{$IFDEF Miranda}
+      TranslateDialogDefault(Dialog);
+{$ENDIF}
+      result:=1;
+
+      if lParam<>0 then
+      begin
+        SetDlgItemTextA(Dialog,IDC_HLP_NAME,GetSectionName(pointer(lParam)));
+
+        SetDlgItemTextA(Dialog,IDC_HLP_PLUGIN,GetParamSectionStr(pointer(lParam),'plugin'));
+
+        FastAnsiToWide(GetParamSectionStr(pointer(lParam),'descr','Undefined'),tmp);
+        SetDlgItemTextW(Dialog,IDC_HLP_DESCR,{$IFDEF Miranda}TranslateW{$ENDIF}(tmp));
+        mFreeMem(tmp);
+
+        pc:=GetParamSectionStr(pointer(lParam),'full',nil);
+        if pc=nil then
+          pc:=GetParamSectionStr(pointer(lParam),'short',nil);
+        if pc<>nil then
+          ReadableForm(GetDlgItem(Dialog,IDC_HLP_STRUCT),pc);
+      end;
+    end;
+
+    WM_COMMAND: begin
+      if (wParam shr 16)=BN_CLICKED then
+      begin
+        case loword(wParam) of
+          IDOK,IDCANCEL: begin
+            DestroyWindow(Dialog);
+          end;
+        end;
+      end;
+    end;
+  else
+//!!    result:=DefWindowProc(Dialog,hMessage,wParam,lParam);
+  end;
+end;
+
 function StructEdit(Dialog:HWnd;hMessage:uint;wParam:WPARAM;lParam:LPARAM):lresult; stdcall;
 var
   wnd:HWND;
@@ -836,6 +972,7 @@ var
   b,b1:boolean;
   idchide,idcshow:integer;
 {$IFDEF Miranda}
+  pc:pAnsiChar;
   urd:TUTILRESIZEDIALOG;
 {$ELSE}
   rc,rc1:TRECT;
@@ -844,10 +981,17 @@ begin
   result:=0;
   case hMessage of
 
+    WM_DESTROY: begin
+      CloseStorage(storage);
+    end;
+
     WM_INITDIALOG: begin
+      result:=1;
 {$IFDEF Miranda}
       TranslateDialogDefault(Dialog);
       RegisterIcons;
+      storage:=OpenStorage(API_STRUCT_FILE);
+      FillTemplates(GetDlgItem(Dialog,IDC_DATA_TMPL),storage);
 {$ENDIF}
       wnd:=GetDlgItem(Dialog,IDC_DATA_FULL);
       MakeLVStructList(wnd);
@@ -880,11 +1024,10 @@ begin
       urd.cbSize    :=SizeOf(urd);
       urd.hwndDlg   :=Dialog;
       urd.hInstance :=hInstance;
-      urd.lpTemplate:=MAKEINTRESOURCEA(IDD_STRUCTURE);
+      urd.lpTemplate:='IDD_STRUCTURE';//MAKEINTRESOURCEA(IDD_STRUCTURE);
       urd.lParam    :=0;
-      urd.pfnResizer:=@FindAddDlgResizer;
+      urd.pfnResizer:=@StructEditDlgResizer;
       CallService(MS_UTILS_RESIZEDIALOG,0,tlparam(@urd));
-      InvalidateRect(GetDlgItem(Dialog,IDC_DATA_HELP),nil,true);
 {$ELSE}
       GetWindowRect(Dialog,rc);
 
@@ -897,13 +1040,6 @@ begin
       GetWindowRect(wnd,rc1);
       SetWindowPos(wnd,0,0,0,rc1.right-rc1.left, rc.bottom-rc1.top-8,
           SWP_NOMOVE or SWP_NOZORDER or SWP_SHOWWINDOW);
-(*
-      wnd:=GetDlgItem(Dialog,IDC_DATA_HELP);
-      GetWindowRect(wnd,rc1);
-      SetWindowPos(wnd,0,0,0,rc.right-rc1.left-8, rc.bottom-rc1.top-8,
-          SWP_NOMOVE or SWP_NOZORDER or SWP_SHOWWINDOW);
-      InvalidateRect(wnd,nil,true);
-*)
 {$ENDIF}
     end;
 
@@ -912,6 +1048,10 @@ begin
 
         CBN_SELENDOK{CBN_SELCHANGE}:  begin
           case loword(wParam) of
+{$IFDEF Miranda}
+            IDC_DATA_TMPL: begin
+            end;
+{$ENDIF}
             IDC_DATA_TYPE: begin
               i:=CB_GetData(lParam);
               case i of
@@ -965,6 +1105,11 @@ begin
               end;
 
 {$IFDEF Miranda}
+              if i IN [SST_PARAM,SST_LAST] then
+                ShowWindow(GetDlgItem(Dialog,IDC_DATA_VARS),SW_HIDE)
+              else
+                ShowWindow(GetDlgItem(Dialog,IDC_DATA_VARS),SW_SHOW);
+
               if i IN [SST_BPTR,SST_WPTR] then
                 ShowWindow(GetDlgItem(Dialog,IDC_DATA_MMI),SW_SHOW)
               else
@@ -977,6 +1122,22 @@ begin
         BN_CLICKED: begin
           case loword(wParam) of
 {$IFDEF Miranda}
+            IDC_DATA_INFO: begin
+               CreateDialogParamW(hInstance,'IDD_STRUCTHELP',//MAKEINTRESOURCEW(IDD_HELP),
+                  0{Dialog},@StructHelp,CB_GetData(GetDlgItem(Dialog,IDC_DATA_TMPL)));
+            end;
+
+            IDC_DATA_PASTE: begin
+              wnd:=GetDlgItem(Dialog,IDC_DATA_TMPL);
+              pc:=GetParamSectionStr(pointer(CB_GetData(wnd)),'full',nil);
+              if pc=nil then
+                pc:=GetParamSectionStr(pointer(CB_GetData(wnd)),'short',nil);
+              if pc<>nil then
+              begin
+                FillLVStruct(GetDlgItem(Dialog,IDC_DATA_FULL),pc); // fill lv with current structure
+              end;
+            end;
+
             IDC_DATA_VARS: begin
               i:=CB_GetData(GetDlgItem(Dialog,IDC_DATA_TYPE));
               if i IN [SST_BYTE,SST_WORD,SST_DWORD,SST_QWORD,SST_NATIVE] then
@@ -1131,7 +1292,7 @@ begin
       end;
     end;
   else
-    result:=DefWindowProc(Dialog,hMessage,wParam,lParam);
+//!!    result:=DefWindowProc(Dialog,hMessage,wParam,lParam);
   end;
 end;
 
@@ -1139,13 +1300,10 @@ function EditStructure(struct:pAnsiChar;parent:HWND=0):pAnsiChar;
 begin
   InitCommonControls;
 
-  result:=pAnsiChar(DialogBoxParamW(hInstance,MAKEINTRESOURCEW(IDD_STRUCTURE),
-                 parent,@StructEdit,LPARAM(struct)));
-(*
-  result:=pointer(CreateDialogParamW(hInstance,MAKEINTRESOURCEW(IDD_STRUCTURE),
-      parent,@StructEdit,TLPARAM(struct)));
-*)
-  if int_ptr(result)=int_ptr(-1) then
+  result:=pAnsiChar(uint_ptr(DialogBoxParamW(hInstance,'IDD_STRUCTURE',
+                 parent,@StructEdit,LPARAM(struct))));
+
+  if uint_ptr(result)=uint_ptr(-1) then
     result:=nil;
 end;
 
