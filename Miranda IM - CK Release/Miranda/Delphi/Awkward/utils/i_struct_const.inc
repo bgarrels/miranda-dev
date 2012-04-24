@@ -1,13 +1,14 @@
 {resource constants}
 const
   // dialogs
-  IDD_STRUCTURE     = 1027;
+//  IDD_STRUCTURE     = 1027;
+//  IDD_HELP          = 1028;
 
   // icons
-  IDI_NEW           = 1125;
-  IDI_UP            = 1126;
-  IDI_DOWN          = 1127;
-  IDI_DELETE        = 1128;
+//  IDI_NEW           = 1125;
+//  IDI_UP            = 1126;
+//  IDI_DOWN          = 1127;
+//  IDI_DELETE        = 1128;
 
   // Structure editor
   IDC_DATA_FULL     = 2001;
@@ -28,3 +29,15 @@ const
   IDC_DATA_SALGN    = 2016;
   IDC_DATA_SEP      = 2017;
   IDC_DATA_EDTN     = 2018;
+
+  IDC_DATA_TMPL     = 2019;
+  IDC_DATA_INFO     = 2020;
+  IDC_DATA_PASTE    = 2021;
+
+  IDC_DATA_SLEN     = 2022;
+
+  // Structure helper
+  IDC_HLP_NAME      = 2030;
+  IDC_HLP_PLUGIN    = 2031;
+  IDC_HLP_DESCR     = 2032;
+  IDC_HLP_STRUCT    = 2033;
