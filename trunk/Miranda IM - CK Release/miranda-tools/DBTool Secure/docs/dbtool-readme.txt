@@ -21,7 +21,7 @@ integration with Miranda to allow compaction when necessary. It's also
 possible to fix a larger range of faults than it currently can do, but that
 requires significantly more work.
 
-This programme is copyrighted by Richard Hughes 2001,2002,2003 and is covered
+This programme is copyrighted by Richard Hughes 2001 - 2012 and is covered
 under the terms of the GNU General Public License.
 
 Source code is available from the Miranda IM website.
