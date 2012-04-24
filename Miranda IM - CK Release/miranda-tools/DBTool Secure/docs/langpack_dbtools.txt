@@ -1,7 +1,7 @@
 Miranda Language Pack Version 1
 Language: Chinese (Traditional)
 Locale: 0404
-Last-Modified-Using: Miranda IM 0.6.0
+Last-Modified-Using: Miranda IM 0.8.0
 Authors: Stark Wong
 Author-email: starkwong@hotmail.com
 Plugins-included: 
