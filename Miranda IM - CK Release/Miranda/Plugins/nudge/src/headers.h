@@ -34,9 +34,9 @@
 #include <stddef.h>
 #include <process.h>
 
-#define MIRANDA_VER 0x1000
+#define MIRANDA_VER 0x0A00
 #include <newpluginapi.h>	//CallService,UnHookEvent
-#include <m_utils.h>			//window broadcasting
+#include <m_utils.h>		//window broadcasting
 #include <m_clist.h>			
 #include <m_langpack.h>	
 #include <m_system.h>	
