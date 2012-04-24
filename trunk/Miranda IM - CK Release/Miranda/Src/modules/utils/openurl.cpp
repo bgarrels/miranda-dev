@@ -1,7 +1,7 @@
 /*
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2012 Miranda IM project,
+Copyright 2000-2012 Miranda IM project, 
 all portions of this codebase are copyrighted to the people 
 listed in contributors.txt.
 
@@ -194,7 +194,7 @@ static void OpenURLThread(void *arg)
 			}
 		}
 	}
-	ShellExecuteA(NULL, "open", szResult, NULL, NULL, SW_SHOW);
+	ShellExecuteA(NULL, "open", szResult, NULL, NULL, SW_SHOWDEFAULT);
 	mir_free(szResult);
 	mir_free(hUrlInfo->szUrl);
 	mir_free(hUrlInfo);
