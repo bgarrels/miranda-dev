@@ -1,3 +1,19 @@
+0.0.8.1
+-------
+
+! Fixed getting notifications on login
+! Fixed getting unread messages on login
+! Getting unread messages on login with right timestamp
+! Fixed getting newsfeeds
+! Fixed related to deleting contacts from miranda/server
++ New newsfeed type option "Applications and Games"
++ Contacts now have MirVer "Facebook" (for Fingerpring plugin)
++ Getting attachements for unread messages on login
+! Fixed avatars in Miranda 0.10.0#3 and newer (thanks borkra)
+! Some small fixes (thanks borkra)
+
+x Doesn't work notification about friend requests
+
 0.0.8.0
 -------
 
