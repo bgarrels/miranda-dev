@@ -1,39 +1,37 @@
 ;============================================================
 ; Pluginname: Facebook Protokoll
-; Version: 0.0.5.0
+; Version: 0.0.8.1
 ; Dateiname: facebook.dll
 ; Unique ID: {dde897ad-e40a-4e2c-98d8-d20b575e96bc}
 ; Autor: robyer
 ; Übersetzung: CHEF-KOCH
 ;============================================================
 
-;== dialogs.cpp ==
-[Note: This option requires restart of Miranda IM to work properly.]
-Hinweis: Diese Option benötigt einen Miranda-IM-Neustart, damit sie funktioniert.
-
-
-;== main.cpp ==
-[The Facebook protocol plugin cannot be loaded. ]
-Das Facebook-Protokoll-Plugin konnte nicht geladen werden.
-[It requires Miranda IM 0.9.14 or later.]
-Es benötigt Miranda IM 0.9.14 oder höher!
+== Main.cpp ==
+[It requires Miranda IM 0.9.43 or later.]
+Es benötigt Miranda IM 0.9.43 oder höher!
 [It requires Miranda IM 0.10 alpha build #2 or later.]
 Es benötigt Miranda IM 0.10.0 Alpha Build #2 oder höher!
 
 
-;== messages.cpp ==
+== Konto ==
+[Automatically set 'Ignore status change' flag]
+Automatisch 'Ignoriere Statusänderung Flag' setzen
+[Use bigger avatars]
+Größere Avatare nutzen
+[Load contacts with 'On the Mobile' status]
+Lade auch Kontakte mit 'Am Telefon' Status
+
+
+== Icons + Popups + Erweitert (Facebook.rc) ==
+[Note: This option requires restart of Miranda IM to work properly.]
+Hinweis: Diese Option benötigt einen Miranda-IM-Neustart, damit sie funktioniert.
+[The Facebook protocol plugin cannot be loaded. ]
+Das Facebook-Protokoll-Plugin konnte nicht geladen werden.
 [Facebook protocol don't support offline messages.]
 Das Facebook-Protokoll unterstützt keine Offlinenachrichten.
-
-
-;== proto.cpp ==
-[Unable to get Netlib connection for Facebook]
-Es konnte keine Netlib-Verbindung zu Facebook hergestellt werden
 [Account && Integration]
 Konten && Integration
-
-
-;== communication.cpp ==
 [Use balloon notifications in system tray instead of popups]
 Benutze Ballonereignisse im Systemtray anstatt Popups
 [Got new messages: ]
@@ -46,12 +44,6 @@ Das Facebook-API wurde geändert, warten Sie und suchen Sie nach einem Facebook-P
 Loginfehler:
 [Login error, probably bad login credentials.]
 Loginfehler, wahrscheinlich falsche Anmeldeinformationen.
-[Unknown login error]
-Unbekannter Login-Fehler
-[Login error: Captcha code is required. Bad login credentials?]
-Login-Fehler: Ein Captcha-Code wird benötigt. Falsche Zugangsdaten?
-[Your account requires HTTPS connection. Activating.]
-Ihr Account benötigt eine HTTPS-Verbindung. Aktivierung.
 [Got new friend requests: ]
 Erhalte neue Freundschaftsanfragen:
 [Got new notifications: ]
@@ -60,13 +52,26 @@ Erhalte neue Ereignisbenachrichtigungen:
 Eine Channelerneuerung wird benötigt, vielleicht wurden nicht alle Nachrichten empfangen!\nSie sollten die Facebook-Seite prüfen um sicher zu sein.
 [Need confirmation for sending messages to other clients.\nOpen facebook website and try to send message to this contact again!]
 Eine Konfiguration zum Nachrichtenversand zu anderen Clients wird benötigt.\nÖffnen Sie die Facebook-Seite und senden Sie die Nachricht zu den Kontakt erneut!
-
-
-;== Einstellungen + Erweitere Einstellungen ==
+[Request friendship]
+Freundschaftsanfrage
+[Enable groupchats support (EXPERIMENTAL)]
+Aktiviere Gruppenchat-Unterstützung (Experimentell!)
+[Contacts Settings]
+Kontakte Einstellungen
+[Default group:]
+Standardgruppe:
+[Use secure connection also for channel requests]
+Nutze sichere Verbindung auch für Channel-Zugriffe
+[Also disconnect chat when going to offline]
+Die Chatverbindung im 'Offline' Status trennen
+[Map non-standard statuses to Invisible (instead of Online)]
+Setze 'Unsichtbar' anstatt 'Online' falls Status unbekannt
+[Get unread messages on login (EXPERIMENTAL)]
+Rufe ungelesene Nachrichten nach Login ab (Experimentell!)
 [Automatically close chat windows on website]
 Automatisch Chatfenster auf der Webseite schließen
 [Automatically close chat windows (on website)]
-Automatisch Chatfenster schließen (auf Webseite)
+Automatisch Chatfenster schließen (auf der Webseite)
 [Post Miranda statuses to Wall]
 Setze den Miranda IM Status auf die Pinnwand
 [Force secure (HTTPS) connection]
@@ -91,8 +96,6 @@ Pinnwand
 Was machst du gerade?
 [What's on your mind?]
 Was machst du gerade?
-[Visit Profile]
-Profil ansehen
 [Share]
 Mitteilen
 [Show cookies]
@@ -109,8 +112,12 @@ Benachrichtigungen aktivieren
 Feeds aktivieren
 [Request following types of News Feed items]
 Folgende Art von News Feeds holen:
-[Request following type of News Feed items]
-Folgende Art von News Feeds holen:
+
+;Newsfeed Settings
+[News Feed types to notify:]
+Newsfeed-Ereignisse melden:
+[Wall Posts]
+Wall Beiträge
 [Most Recent]
 Jüngste Nachrichten 
 [Most recent]
@@ -119,11 +126,10 @@ Jüngste Nachrichten
 Nach Aktualisierung
 [Top News]
 Aktuelle Nachrichten
-
-
-;== Popups ==
 [Client notifications]
 Benutzer Ereignis
+[Apps and Games]
+Apps und Spiele
 [Sample notification]
 Beispiel Benachrichtigung
 [Sample newsfeed]
@@ -141,16 +147,48 @@ Benachrichtigungsereignisse
 [Probably wrong password entered, please try again.]
 Möglicherweise wurde das falsche Passwort eingegeben, bitte versuchen Sie es erneut.
 [Something happened to Facebook. Maybe there was some major update or you have Facebook Lite set as default.]
-Etwas passierte mit Facebook. Vielleicht gab es ein großes Update oder Sie haben Facebook Lite als Standard gesetzt.
-
-
-;== json.cpp ==
+Etwas ist mit Facebook passiert. Vielleicht gab es ein großes Update oder Sie haben Facebook Lite als Standard gesetzt.
 [You have %s unseen messages]
 Sie haben %s ungelesene Nachrichten
 [Unseen messages]
 Ungelesene Nachrichten
+[Automatically close chat windows (on website) (NOT WORKING)]
+Schließe automatisch alle Chatfenster auf der Webseite (funzt nicht)
 
 
-;== Alte Strings ==
-[Set Facebook status through Miranda status]
-Miranda-Statustext als Mindtext verwenden.
+== dialogs.cpp ==
+[Note: Make sure you have disabled 'Validate SSL certificates' option in Network options to work properly.]
+Hinweis: Stellen Sie sicher das 'Nur valide SSL-Zertifikate' in den Netzwerkoptionen deaktiviert wurde, damit diese Funktion richtig funktioniert.
+
+
+== communication.cpp ==
+[Login error: Some Facebook things are required.]
+Loginfehler: Einige Facebook-Komponenten fehlen.
+[Your account requires HTTPS connection. Activating.]
+Ihr Account benötigt eine HTTPS-Verbindung. Aktivierung.
+[Login error: Captcha code is required. Bad login credentials?]
+Login-Fehler: Ein Captcha-Code wird benötigt. Falsche Zugangsdaten?
+[Unknown login error]
+Unbekannter Login-Fehler
+
+== contacts.cpp ==
+[Contact was sucessfully removed from server.]
+Der Kontakt wurde erfolgreich vom Sever entfernt.
+[Error occured when removing contact from server.]
+Fehler beim entfernen des Kontakts vom Server.
+[Request for friendship was sent successfully.]
+Freundschaftsanfrage wurde erfolgreich versendet.
+[Error occured when requesting friendship.]
+Fehler beim Versand der Freundschaftsanfrage.
+[Do you want to delete contact '%s' from server list?]
+Wollen Sie '%s' von ihrere Serverliste löschen?
+
+== proto.cpp ==
+[Unable to get Netlib connection for Facebook]
+Es konnte keine Netlib-Verbindung zu Facebook hergestellt werden.
+
+== theme.cpp ==
+[Remove from server]
+Entferne Kontakt vom Server
+[Visit Profile]
+Profil ansehen
