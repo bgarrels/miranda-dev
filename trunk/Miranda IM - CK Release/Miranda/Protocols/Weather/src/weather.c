@@ -69,15 +69,15 @@ static const PLUGININFOEX pluginInfoEx =
 {
 	sizeof(PLUGININFOEX),
 #ifdef _WIN64
-	"Weather Protocol x64 Mataes Release",
+	"Weather Protocol x64 CK Release",
 #else
-	"Weather Protocol Mataes Release",
+	"Weather Protocol CK Release",
 #endif
 	__VERSION_DWORD,
 	"Retrieve weather information and display them in your contact list. Mod for Mataes Pack.",
 	AUTH,
 	"borkra@miranda-im.org",
-	"(c) 2002-2005 NoName, 2005-2010 Boris Krasnovskiy",
+	"(c) 2002-2005 NoName, 2005-2012 Boris Krasnovskiy",
 	"http://addons.miranda-im.org/details.php?action=viewfile&id=2322",
 	UNICODE_AWARE,
 	0,
@@ -86,8 +86,8 @@ static const PLUGININFOEX pluginInfoEx =
 
 __declspec(dllexport) const PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion) 
 {
-	if (mirandaVersion < PLUGIN_MAKE_VERSION(0,8,0,0)) {
-		MessageBox(NULL, "Weather Protocol requires Miranda 0.8.0.0 or later to run.", "Weather Protocol", MB_OK|MB_ICONERROR|MB_APPLMODAL);
+	if (mirandaVersion < PLUGIN_MAKE_VERSION(0,9,0,0)) {
+		MessageBox(NULL, "Weather Protocol requires Miranda 0.9.0.0 or later to run.", "Weather Protocol", MB_OK|MB_ICONERROR|MB_APPLMODAL);
 		return NULL;
 	}
 	// if Miranda version is higher than 0.7.0
