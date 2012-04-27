@@ -22,7 +22,6 @@ Revision       : $Revision$
 Last change by : $Author$
 Last change on : $Date$
 */
-*/
 
 #include "common.h"
 
