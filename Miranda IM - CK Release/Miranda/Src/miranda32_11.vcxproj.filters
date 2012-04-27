@@ -616,9 +616,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Docs\license.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="..\Docs\mirandaboot.ini">
       <Filter>docs</Filter>
     </None>
