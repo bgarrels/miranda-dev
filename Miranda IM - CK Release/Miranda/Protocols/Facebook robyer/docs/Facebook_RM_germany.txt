@@ -13,7 +13,6 @@ Es benötigt Miranda IM 0.9.43 oder höher!
 [It requires Miranda IM 0.10 alpha build #2 or later.]
 Es benötigt Miranda IM 0.10.0 Alpha Build #2 oder höher!
 
-
 == Konto ==
 [Automatically set 'Ignore status change' flag]
 Automatisch 'Ignoriere Statusänderung Flag' setzen
@@ -21,7 +20,6 @@ Automatisch 'Ignoriere Statusänderung Flag' setzen
 Größere Avatare nutzen
 [Load contacts with 'On the Mobile' status]
 Lade auch Kontakte mit 'Am Telefon' Status
-
 
 == Icons + Popups + Erweitert (Facebook.rc) ==
 [Note: This option requires restart of Miranda IM to work properly.]
@@ -155,11 +153,9 @@ Ungelesene Nachrichten
 [Automatically close chat windows (on website) (NOT WORKING)]
 Schließe automatisch alle Chatfenster auf der Webseite (funzt nicht)
 
-
 == dialogs.cpp ==
 [Note: Make sure you have disabled 'Validate SSL certificates' option in Network options to work properly.]
 Hinweis: Stellen Sie sicher das 'Nur valide SSL-Zertifikate' in den Netzwerkoptionen deaktiviert wurde, damit diese Funktion richtig funktioniert.
-
 
 == communication.cpp ==
 [Login error: Some Facebook things are required.]

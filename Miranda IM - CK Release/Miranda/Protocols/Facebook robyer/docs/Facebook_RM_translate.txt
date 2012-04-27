@@ -1,156 +1,108 @@
 ;============================================================
 ; Pluginname: Facebook Protokoll
-; Version: 0.0.5.0
+; Version: 0.0.8.1
 ; Dateiname: facebook.dll
 ; Unique ID: {dde897ad-e40a-4e2c-98d8-d20b575e96bc}
 ; Autor: robyer
 ; Übersetzung: CHEF-KOCH
 ;============================================================
 
-;== dialogs.cpp ==
-[Note: This option requires restart of Miranda IM to work properly.]
-
-
-
-;== main.cpp ==
-[The Facebook protocol plugin cannot be loaded. ]
-
-[It requires Miranda IM 0.9.14 or later.]
-
+== Main.cpp ==
+[It requires Miranda IM 0.9.43 or later.]
 [It requires Miranda IM 0.10 alpha build #2 or later.]
 
+== Accounts ==
+[Automatically set 'Ignore status change' flag]
+[Use bigger avatars]
+[Load contacts with 'On the Mobile' status]
 
-
-;== messages.cpp ==
+== Facebook.rc ==
+[Note: This option requires restart of Miranda IM to work properly.]
+[The Facebook protocol plugin cannot be loaded. ]
 [Facebook protocol don't support offline messages.]
-
-
-
-;== proto.cpp ==
-[Unable to get Netlib connection for Facebook]
-
 [Account && Integration]
-
-
-
-;== communication.cpp ==
 [Use balloon notifications in system tray instead of popups]
-
 [Got new messages: ]
-
 [Something happened to Facebook. Maybe there was some major update so you should wait for an update.]
-
 [Facebook API version has changed, wait and watch for the Facebook protocol update.]
-
 [Login error: ]
-
 [Login error, probably bad login credentials.]
-
-[Unknown login error]
-
-[Login error: Captcha code is required. Bad login credentials?]
-
-[Your account requires HTTPS connection. Activating.]
 [Got new friend requests: ]
-
 [Got new notifications: ]
-
 [Required channel refresh, maybe we didn't received all messages.\nYou should check Facebook website to be sure.]
-
 [Need confirmation for sending messages to other clients.\nOpen facebook website and try to send message to this contact again!]
-
-
-
-
-;== Settings ==
+[Request friendship]
+[Enable groupchats support (EXPERIMENTAL)]
+[Contacts Settings]
+[Default group:]
+[Use secure connection also for channel requests]
+[Also disconnect chat when going to offline]
+[Map non-standard statuses to Invisible (instead of Online)]
+[Get unread messages on login (EXPERIMENTAL)]
 [Automatically close chat windows on website]
-
 [Automatically close chat windows (on website)]
-
 [Post Miranda statuses to Wall]
-
 [Force secure (HTTPS) connection]
-
 [Use a secure connection (HTTPS)]
-
 [Miranda IM (default)]
-
 [Facebook Protocol]
-
 [Default group for newly added contacts:]
-
 [User-Agent:]
-
 [Create a new Facebook account]
-
 [%s avatar connection]
-
 [Mind]
-
 [Mind...]
-
 [What's on your mind?]
-
-[Visit Profile]
-
 [Share]
-
 [Show cookies]
-
 [Info Dialog]
-
 [Enable logging for debugging purposes]
-
 [Set Facebook "What's on my mind" status through Miranda status]
-
 [Enable notifications]
-
 [Enable feeds]
-
 [Request following types of News Feed items]
 
-[Request following type of News Feed items]
-
+;Newsfeed Settings
+[News Feed types to notify:]
+[Wall Posts]
 [Most Recent]
-
 [Most recent]
-
 [Status Updates]
-
 [Top News]
-
-
-
-;== Popups ==
 [Client notifications]
-
+[Apps and Games]
 [Sample notification]
-
 [Sample newsfeed]
-
 [Sample request]
-
 [Sample event]
-
 [(0 = default, -1 = infinite)]
-
 [Timeout (sec.)]
-
 [Notify events]
-
 [Probably wrong password entered, please try again.]
-
 [Something happened to Facebook. Maybe there was some major update or you have Facebook Lite set as default.]
-
-
-
-;== json.cpp ==
 [You have %s unseen messages]
-
 [Unseen messages]
+[Automatically close chat windows (on website) (NOT WORKING)]
 
+== dialogs.cpp ==
+[Note: Make sure you have disabled 'Validate SSL certificates' option in Network options to work properly.]
 
+== communication.cpp ==
+[Login error: Some Facebook things are required.]
+[Your account requires HTTPS connection. Activating.]
+[Login error: Captcha code is required. Bad login credentials?]
+[Unknown login error]
 
-;== outdated Strings ==
+== contacts.cpp ==
+[Contact was sucessfully removed from server.]
+[Error occured when removing contact from server.]
+[Request for friendship was sent successfully.]
+[Error occured when requesting friendship.]
+[Do you want to delete contact '%s' from server list?]
 
-[Set Facebook status through Miranda status]
+== proto.cpp ==
+[Unable to get Netlib connection for Facebook]
+
+== theme.cpp ==
+[Remove from server]
+[Visit Profile]
