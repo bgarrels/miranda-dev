@@ -27,7 +27,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 1 TEXTINCLUDE 
 BEGIN
-    "src/resource.h\0"
+    "resource.h\0"
 END
 
 2 TEXTINCLUDE 
@@ -255,7 +255,7 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,8,0
+ FILEVERSION 0,0,8,1
  PRODUCTVERSION 0,9,43,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
@@ -272,7 +272,7 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "FileDescription", "Facebook protocol plugin for Miranda IM"
-            VALUE "FileVersion", "0.0.8.0"
+            VALUE "FileVersion", "0.0.8.1"
             VALUE "InternalName", "Facebook RM"
             VALUE "LegalCopyright", "Copyright © 2009-2011 Michal Zelinka, 2011-2012 Robert Pösel"
             VALUE "OriginalFilename", "facebook.dll"

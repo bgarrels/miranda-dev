@@ -2,7 +2,7 @@
 Facebook plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2009-2012 Michal Zelinka, 2011-2012 Robert Pösel
+Copyright © 2009-11 Michal Zelinka, 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -229,16 +229,6 @@ void FacebookProto::SetAwayMsgWorker(void *)
 //////////////////////////////////////////////////////////////////////////////
 // SERVICES
 
-int FacebookProto::GetStatus( WPARAM wParam, LPARAM lParam )
-{
-	return m_iStatus;
-}
-
-int FacebookProto::SetStatus( WPARAM wParam, LPARAM lParam )
-{
-	return SetStatus( (int)wParam );
-}
-
 int FacebookProto::GetMyAwayMsg( WPARAM wParam, LPARAM lParam )
 {
 	DBVARIANT dbv = { DBVT_TCHAR };
@@ -298,12 +288,6 @@ int FacebookProto::OnEvent(PROTOEVENTTYPE event,WPARAM wParam,LPARAM lParam)
 
 //////////////////////////////////////////////////////////////////////////////
 // EVENTS
-
-int FacebookProto::GetName( WPARAM wParam, LPARAM lParam )
-{
-	lstrcpynA(reinterpret_cast<char*>(lParam),m_szProtoName,wParam);
-	return 0;
-}
 
 int FacebookProto::SvcCreateAccMgrUI(WPARAM wParam,LPARAM lParam)
 {

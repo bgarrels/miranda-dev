@@ -1,8 +1,9 @@
 /*
+
 Facebook plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2009-2011 Michal Zelinka, 2011-2012 Robert Pösel
+Copyright © 2009-11 Michal Zelinka, 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,17 +18,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-File name      : $HeadURL$
-Revision       : $Revision$
-Last change by : $Author$
-Last change on : $Date$
 */
 
 #pragma once
 
 // Version management
-#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 8, 0)
-#define __VERSION_STRING            "0.0.8.0"
+#define __VERSION_DWORD             PLUGIN_MAKE_VERSION(0, 0, 8, 1)
+#define __VERSION_STRING            "0.0.8.1"
 
 // Product management
 #define FACEBOOK_NAME               "Facebook"
