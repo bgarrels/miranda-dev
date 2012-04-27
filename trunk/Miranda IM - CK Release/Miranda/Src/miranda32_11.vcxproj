@@ -563,7 +563,6 @@
     <None Include="..\Docs\changelog.txt" />
     <None Include="..\Docs\contributors.txt" />
     <None Include="..\Docs\Important Plugin Changes For Plugin Authors.txt" />
-    <None Include="..\Docs\license.txt" />
     <None Include="..\Docs\mirandaboot.ini" />
     <None Include="..\Docs\readme.txt" />
     <None Include="res\arrow_sort_column_down.bmp" />
