@@ -2,7 +2,7 @@
 Facebook plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2009-2012 Michal Zelinka
+Copyright © 2009-11 Michal Zelinka
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -202,6 +202,7 @@ void FacebookProto::UpdateLoop(void *)
 		LOG( "***** FacebookProto::UpdateLoop[%d] waking up...", tim );
 	}
 
+	ResetEvent(update_loop_lock_);
 	LOG( "<<<<< Exiting FacebookProto::UpdateLoop[%d]", tim );
 }
 

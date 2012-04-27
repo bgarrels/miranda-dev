@@ -1,8 +1,9 @@
 /*
+
 Facebook plugin for Miranda Instant Messenger
 _____________________________________________
 
-Copyright © 2009-2011 Michal Zelinka, 2011-2012 Robert Pösel
+Copyright © 2009-11 Michal Zelinka, 2011-12 Robert Pösel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,10 +18,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-File name      : $HeadURL$
-Revision       : $Revision$
-Last change by : $Author$
-Last change on : $Date$
 */
 
 #pragma once
@@ -112,9 +109,6 @@ public:
 	////////////////////////
 
 	// Services
-	int  __cdecl GetName( WPARAM, LPARAM );
-	int  __cdecl GetStatus( WPARAM, LPARAM );
-	int  __cdecl SetStatus( WPARAM, LPARAM );
 	int  __cdecl GetMyAwayMsg( WPARAM, LPARAM );
 	int  __cdecl SetMyAwayMsg( WPARAM, LPARAM );
 	int  __cdecl SvcCreateAccMgrUI( WPARAM, LPARAM );
