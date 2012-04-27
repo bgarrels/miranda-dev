@@ -187,7 +187,7 @@ int OmegleProto::OnChatEvent(WPARAM wParam,LPARAM lParam)
 				break;
 
 			case STATE_SPY:
-				UpdateChat(NULL, TranslateT("You can't send messages in spy mode."), false);
+				UpdateChat(NULL, TranslateT("You can't send messages in question mode."), false);
 				break;
 
 			//case STATE_WAITING:

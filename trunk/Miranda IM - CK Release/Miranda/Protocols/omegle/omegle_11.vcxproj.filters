@@ -100,4 +100,12 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Omegle_RM_germany.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="docs\Omegle_RM_translate.txt">
+      <Filter>docs</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

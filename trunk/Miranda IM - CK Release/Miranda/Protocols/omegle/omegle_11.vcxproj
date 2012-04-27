@@ -384,6 +384,10 @@
   <ItemGroup>
     <ResourceCompile Include="omegle.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Omegle_RM_germany.txt" />
+    <Text Include="docs\Omegle_RM_translate.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
