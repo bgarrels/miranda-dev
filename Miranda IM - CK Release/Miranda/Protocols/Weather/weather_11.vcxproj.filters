@@ -9,9 +9,6 @@
       <UniqueIdentifier>{4bb4ad90-2481-4874-93c7-33a43291b246}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
-    <Filter Include="Documentations">
-      <UniqueIdentifier>{7b0e3b6a-d860-44c4-86b7-94082e142140}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{4a88a619-935e-4a14-94cb-10b092dc8390}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
@@ -21,6 +18,9 @@
     </Filter>
     <Filter Include="Underground\docs">
       <UniqueIdentifier>{9e70d8ca-757f-4da2-9667-68976e5745f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{7b0e3b6a-d860-44c4-86b7-94082e142140}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -116,19 +116,19 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="docs\license.txt">
-      <Filter>Documentations</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="docs\weather-history.txt">
-      <Filter>Documentations</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="docs\weather-readme.html">
-      <Filter>Documentations</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="docs\weather-translation.txt">
-      <Filter>Documentations</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="docs\langpack_defweather.txt">
-      <Filter>Documentations</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="weather underground\wundergrnd_xml.ini">
       <Filter>Underground</Filter>
@@ -152,7 +152,7 @@
       <Filter>Underground\docs</Filter>
     </None>
     <None Include="docs\sample_ini.ini">
-      <Filter>Documentations</Filter>
+      <Filter>Docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
