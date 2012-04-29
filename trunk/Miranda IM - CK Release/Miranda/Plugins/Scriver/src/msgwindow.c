@@ -23,12 +23,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "statusicon.h"
 #include "../chat/chat.h"
 
-#ifndef __MINGW32__
-#if (_MSC_VER < 1300)
-#include "multimon.h"
-#endif
-#endif
-
 extern HINSTANCE g_hInst;
 extern HCURSOR hDragCursor;
 extern ITaskbarList3 * pTaskbarInterface;
@@ -1090,12 +1084,10 @@ INT_PTR CALLBACK DlgProcParentWindow(HWND hwndDlg, UINT msg, WPARAM wParam, LPAR
 					tci.mask |= TCIF_TEXT;
 					tci.pszText = tcd->pszText;
 					if (g_dat->flags2 & SMF2_LIMITNAMES) {
-						int len = lstrlen(tcd->pszText);
-						if (len > g_dat->limitNamesLength ) {
-							ptszTemp = mir_alloc(sizeof(TCHAR) * (len + 4));
-							_tcsncpy(ptszTemp, tcd->pszText, g_dat->limitNamesLength + 1);
-							_tcsncpy(ptszTemp + g_dat->limitNamesLength, _T("..."), 4);
-							tci.pszText = ptszTemp;
+						TCHAR * ltext = limitText(tcd->pszText, g_dat->limitNamesLength);
+						if (ltext != tcd->pszText) 
+						{
+							tci.pszText = ptszTemp = ltext;
 						}
 					}
 				}
