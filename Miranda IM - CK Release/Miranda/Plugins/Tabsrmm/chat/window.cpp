@@ -1,10 +1,7 @@
 /*
- * astyle --force-indent=tab=4 --brackets=linux --indent-switches
- *		  --pad=oper --one-line=keep-blocks  --unpad=paren
- *
  * Miranda IM: the free IM client for Microsoft* Windows*
  *
- * Copyright 2000-2009 Miranda ICQ/IM project,
+ * Copyright 2000-2012 Miranda IM project,
  * all portions of this codebase are copyrighted to the people
  * listed in contributors.txt.
  *
@@ -42,7 +39,7 @@
 
 //#include "../m_MathModule.h"
 
-// externs...
+// ExternalApi
 extern LRESULT CALLBACK SplitterSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 extern HRESULT(WINAPI *MyCloseThemeData)(HANDLE);
 extern REOLECallback *mREOLECallback;
@@ -242,8 +239,8 @@ static BOOL IsStringValidLink(TCHAR* pszText)
 }
 
 /*
- * called whenever a group chat tab becomes active (either by switching tabs or activating a
- * container window
+  called whenever a group chat tab becomes active (either by switching tabs or activating a
+  container window
  */
 
 static void Chat_UpdateWindowState(TWindowData *dat, UINT msg)
@@ -376,7 +373,7 @@ static void Chat_UpdateWindowState(TWindowData *dat, UINT msg)
 }
 
 /*
- * initialize button bar, set all the icons and ensure proper button state
+  initialize button bar, set all the icons and ensure proper button state
  */
 
 static void	InitButtons(HWND hwndDlg, SESSION_INFO* si)
@@ -3147,7 +3144,7 @@ LABEL_SHOWWINDOW:
 							if (g_Settings.DoubleClick4Privat ? GetKeyState(VK_SHIFT) & 0x8000 : !(GetKeyState(VK_SHIFT) & 0x8000)) {
 								LRESULT lResult = (LRESULT)SendMessage(GetDlgItem(hwndDlg, IDC_CHAT_MESSAGE), EM_GETSEL, (WPARAM)NULL, (LPARAM)NULL);
 								int start = LOWORD(lResult);
-								TCHAR* pszName = (TCHAR*)alloca(sizeof(TCHAR) * (lstrlen(ui->pszUID) + 3));
+								TCHAR* pszName = (TCHAR*)_malloca(sizeof(TCHAR) * (lstrlen(ui->pszUID) + 3));
 								if (start == 0)
 									mir_sntprintf(pszName, lstrlen(ui->pszUID) + 3, _T("%s: "), ui->pszUID);
 								else

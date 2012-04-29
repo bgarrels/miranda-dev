@@ -274,7 +274,7 @@ BOOL CList_AddEvent(HANDLE hContact, HICON Icon, HANDLE event, int type, const T
 {
 	CLISTEVENT cle;
 	va_list marker;
-	TCHAR* szBuf = (TCHAR*)alloca(4096 * sizeof(TCHAR));
+	TCHAR* szBuf = (TCHAR*)_malloca(4096 * sizeof(TCHAR));
 
 	if (!fmt || lstrlen(fmt) < 1 || lstrlen(fmt) > 2000)
 		return FALSE;
