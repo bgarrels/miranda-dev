@@ -75,7 +75,7 @@ static VOID CALLBACK MsgTimer(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTi
 		if (dwTime - item->ts > g_dat->msgTimeout)
 		{
 			if (!ntl)
-				tmlst = (TMsgQueue**)alloca((msgQueue.realCount - i) * sizeof(TMsgQueue*));
+				tmlst = (TMsgQueue**)_malloca((msgQueue.realCount - i) * sizeof(TMsgQueue*));
 			tmlst[ntl++] = item;
 
 			li.List_Remove(&msgQueue, i--);
@@ -96,7 +96,7 @@ void msgQueue_add(HANDLE hContact, HANDLE id, const TCHAR* szMsg, HANDLE hDbEven
 	item->id = id;
 	item->szMsg = mir_tstrdup(szMsg);
 	item->hDbEvent = hDbEvent;
-	item->ts = GetTickCount();
+	item->ts = GetTickCount64();
 
 	EnterCriticalSection(&csMsgQueue);
 	if (!msgQueue.realCount && !timerId)

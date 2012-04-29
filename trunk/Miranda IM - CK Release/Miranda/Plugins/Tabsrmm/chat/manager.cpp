@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-$Id: manager.cpp 12065 2010-06-25 17:30:24Z silvercircle $
+$Id: manager.cpp 14208 2012-03-26 13:56:42Z silvercircle $
 */
 
 #include "../src/commonheaders.h"
@@ -1037,19 +1037,10 @@ BOOL MM_RemoveAll(void)
 		MODULEINFO *pLast = m_ModList->next;
 		mir_free(m_ModList->pszModule);
 		mir_free(m_ModList->ptszModDispName);
-		mir_free(m_ModList->pszHeader);
+		if(m_ModList->pszHeader)
+			mir_free(m_ModList->pszHeader);
 		mir_free(m_ModList->crColors);
 
-		/*
-		if (m_ModList->hOfflineIcon)
-			DestroyIcon(m_ModList->hOfflineIcon);
-		if (m_ModList->hOnlineIcon)
-			DestroyIcon(m_ModList->hOnlineIcon);
-		if (m_ModList->hOnlineTalkIcon)
-			DestroyIcon(m_ModList->hOnlineTalkIcon);
-		if (m_ModList->hOfflineTalkIcon)
-			DestroyIcon(m_ModList->hOfflineTalkIcon);
-		*/
 		mir_free(m_ModList);
 		m_ModList = pLast;
 	}

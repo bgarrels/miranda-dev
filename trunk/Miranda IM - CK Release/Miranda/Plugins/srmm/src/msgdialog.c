@@ -85,7 +85,7 @@ static int RTL_Detect(const TCHAR *ptszText)
 	int i;
 	int iLen = (int)_tcslen(ptszText);
 
-	infoTypeC2 = (WORD*)alloca(sizeof(WORD) * (iLen + 2));
+	infoTypeC2 = (WORD*)_malloca(sizeof(WORD) * (iLen + 2));
 	GetStringTypeEx(LOCALE_USER_DEFAULT, CT_CTYPE2, ptszText, iLen, infoTypeC2);
 
 	for(i = 0; i < iLen; i++) {
@@ -340,8 +340,8 @@ static LRESULT CALLBACK MessageEditSubclassProc(HWND hwnd, UINT msg, WPARAM wPar
 			}
 			if (g_dat->flags & SMF_SENDONDBLENTER) 
 			{
-				if (dat->lastEnterTime + ENTERCLICKTIME < GetTickCount())
-					dat->lastEnterTime = GetTickCount();
+				if (dat->lastEnterTime + ENTERCLICKTIME < GetTickCount64())
+					dat->lastEnterTime = GetTickCount64();
 				else 
 				{
 					SendMessage(hwnd, WM_KEYDOWN, VK_BACK, 0);
@@ -1297,7 +1297,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 							iLen = mir_sntprintf(buffer, SIZEOF(buffer), TranslateT("is now %s (was %s)"), szNewStatus, szOldStatus);
 
 						{
-							char* blob = ( char* )alloca(1000);
+							char* blob = ( char* )_malloca(1000);
 #if defined( _UNICODE )
 							int ansiLen = WideCharToMultiByte(CP_ACP, 0, buffer, -1, blob, 1000, 0, 0);
 							memcpy( blob+ansiLen, buffer, sizeof(TCHAR)*(iLen+1));
@@ -1568,7 +1568,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 		else if (wParam == TIMERID_TYPE) 
 		{
 			ShowTime(dat);
-			if (dat->nTypeMode == PROTOTYPE_SELFTYPING_ON && GetTickCount() - dat->nLastTyping > TIMEOUT_TYPEOFF)
+			if (dat->nTypeMode == PROTOTYPE_SELFTYPING_ON && GetTickCount64() - dat->nLastTyping > TIMEOUT_TYPEOFF)
 				NotifyTyping(dat, PROTOTYPE_SELFTYPING_OFF);
 
 			if (dat->showTyping) 
@@ -1697,7 +1697,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 				HANDLE hNewEvent;
 
 				int bufSize = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_MESSAGE)) + 1;
-				TCHAR* temp = (TCHAR*)alloca(bufSize * sizeof(TCHAR));
+				TCHAR* temp = (TCHAR*)_malloca(bufSize * sizeof(TCHAR));
 				GetDlgItemText(hwndDlg, IDC_MESSAGE, temp, bufSize);
 				if (!temp[0]) break;
 
@@ -1775,7 +1775,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 				EnableWindow(GetDlgItem(hwndDlg, IDOK), len != 0);
 				if (!(GetKeyState(VK_CONTROL) & 0x8000) && !(GetKeyState(VK_SHIFT) & 0x8000)) 
 				{
-					dat->nLastTyping = GetTickCount();
+					dat->nLastTyping = GetTickCount64();
 					if (len) 
 					{
 						if (dat->nTypeMode == PROTOTYPE_SELFTYPING_OFF)
@@ -1903,7 +1903,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 						if (sel.cpMin != sel.cpMax)
 							break;
 						tr.chrg = ((ENLINK *) lParam)->chrg;
-						tr.lpstrText = _alloca((tr.chrg.cpMax - tr.chrg.cpMin + 8) * sizeof(TCHAR));
+						tr.lpstrText = _malloca((tr.chrg.cpMax - tr.chrg.cpMin + 8) * sizeof(TCHAR));
 						SendDlgItemMessage(hwndDlg, IDC_LOG, EM_GETTEXTRANGE, 0, (LPARAM) & tr);
 						if (_tcschr(tr.lpstrText, '@') != NULL && _tcschr(tr.lpstrText, ':') == NULL && _tcschr(tr.lpstrText, '/') == NULL) 
 						{
@@ -1978,7 +1978,7 @@ INT_PTR CALLBACK DlgProcMessage(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 		{
 			TCHAR* msg;
 			int len = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_MESSAGE)) + 1;
-			msg = (TCHAR*)alloca(sizeof(TCHAR) * len);
+			msg = (TCHAR*)_malloca(sizeof(TCHAR) * len);
 			GetDlgItemText(hwndDlg, IDC_MESSAGE, msg, len);
 			if (msg[0]) 
 				DBWriteContactSettingTString(dat->hContact, SRMSGMOD, DBSAVEDMSG, msg);
