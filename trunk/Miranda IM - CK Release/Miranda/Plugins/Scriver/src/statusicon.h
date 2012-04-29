@@ -1,7 +1,5 @@
 /*
-Scriver
-
-Copyright 2000-2009 Miranda ICQ/IM project,
+Scriver - Copyright 2000-2012 Miranda IM project,
 
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -20,6 +18,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
+
 #ifndef _STATUS_ICON_INC
 #define _STATUS_ICON_INC
 
