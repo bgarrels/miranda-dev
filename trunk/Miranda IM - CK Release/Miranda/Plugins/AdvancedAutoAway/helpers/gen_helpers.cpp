@@ -1,6 +1,6 @@
 /*
 	Helper functions for Miranda-IM (www.miranda-im.org)
-	Copyright 2006 P. Boon
+	Copyright 2006-2012 P. Boon
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
+
 #include "commonheaders.h"
 #include "gen_helpers.h"
 

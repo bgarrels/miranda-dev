@@ -32,10 +32,10 @@ PLUGINLINK *pluginLink;
 
 MM_INTERFACE mmi;
 LIST_INTERFACE li;
+int hLangpack = 0;
 
 HANDLE hCSModuleLoadedHook;
 HANDLE hStateChangedEvent;
-int hLangpack = 0;
 
 int CSModuleLoaded(WPARAM wParam, LPARAM lParam);
 

@@ -25,12 +25,12 @@
 	#define _UNICODE
 #endif
 
-#define MIRANDA_VER 0x0900
+#define MIRANDA_VER 0x0A00
 #define MIRANDA_CUSTOM_LP
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#define _WIN32_WINNT 0x0501
+#define _WIN32_WINNT 0x0600
 #include <windows.h>
 #include <shlobj.h>
 #include <uxtheme.h>
