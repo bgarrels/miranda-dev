@@ -20,7 +20,7 @@ PLUGININFOEX pluginInfoEx=
 	"This plugin is a simple way to enable/disable to launch Miranda IM with system startup.",
 	"Sergey V. Gershovich a.k.a. Jazzy$ (fixed by Wolfram3D)",
 	"",
-	"Copyright © 2002-2007 Sergey V. Gershovich a.k.a. Jazzy$",
+	"Copyright © 2002-2012 Sergey V. Gershovich a.k.a. Jazzy$",
 	"http://miranda-im.org/download/index.php?action=viewfile&id=285",
 	0, 0,
 	MIID_AUTORUN
