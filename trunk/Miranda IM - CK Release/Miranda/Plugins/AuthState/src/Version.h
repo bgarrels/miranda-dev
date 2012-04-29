@@ -16,8 +16,6 @@
 #else
 	#define __PLUGIN_NAME "Authorization State (Unicode)"
 #endif
-#else
-	#define __PLUGIN_NAME "Authorization State"
 #endif
 #define __INTERNAL_NAME				"AuthState"
 #define __FILENAME					"AuthState.dll"
@@ -25,4 +23,4 @@
 #define __AUTHOR					"Thief, idea by snwbrdr"
 #define __AUTHOREMAIL				"thief@miranda.im"
 #define __AUTHORWEB					"http://thief.miranda.im/"
-#define __COPYRIGHT					"© 2006-2010 Alexander Turyak"
+#define __COPYRIGHT					"© 2006-2012 Alexander Turyak"

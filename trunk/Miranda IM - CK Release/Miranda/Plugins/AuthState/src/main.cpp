@@ -1,6 +1,6 @@
 /*
    Authorization State plugin for Miranda-IM (www.miranda-im.org)
-   (c) 2006-2010 by Thief
+   (c) 2006-2012 by Thief
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -16,10 +16,10 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-   File name      : $URL: http://svn.miranda.im/mainrepo/authstate/trunk/main.cpp $
-   Revision       : $Rev: 1686 $
-   Last change on : $Date: 2010-10-06 08:26:58 +0200 (Ср, 06 окт 2010) $
-   Last change by : $Author: ghazan $
+   File name      : $URL:  
+   Revision       : $Rev: 
+   Last change on : $Date: 
+   Last change by : $Author: 
 
 */
 
