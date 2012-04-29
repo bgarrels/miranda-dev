@@ -160,13 +160,13 @@ void LoadOptions( OBJLIST<TAAAProtoSetting>& loadSettings, BOOL override)
 int LoadAutoAwaySetting(TAAAProtoSetting& autoAwaySetting, char* protoName)
 {
 	char setting[128];
-	_snprintf(setting, sizeof(setting), "%s_OptionFlags", protoName);
+	mir_snprintf(setting, sizeof(setting), "%s_OptionFlags", protoName);
 	autoAwaySetting.optionFlags = DBGetContactSettingByte(NULL,MODULENAME,setting,FLAG_LV2ONINACTIVE|FLAG_RESET);
-	_snprintf(setting, sizeof(setting), "%s_AwayTime", protoName);
+	mir_snprintf(setting, sizeof(setting), "%s_AwayTime", protoName);
 	autoAwaySetting.awayTime = DBGetContactSettingWord(NULL,MODULENAME,setting,SETTING_AWAYTIME_DEFAULT);
-	_snprintf(setting, sizeof(setting), "%s_NATime", protoName);
+	mir_snprintf(setting, sizeof(setting), "%s_NATime", protoName);
 	autoAwaySetting.naTime = DBGetContactSettingWord(NULL,MODULENAME,setting,SETTING_NATIME_DEFAULT);
-	_snprintf(setting, sizeof(setting), "%s_StatusFlags", protoName);
+	mir_snprintf(setting, sizeof(setting), "%s_StatusFlags", protoName);
 	autoAwaySetting.statusFlags = DBGetContactSettingWord(NULL,MODULENAME,setting, StatusModeToProtoFlag(ID_STATUS_ONLINE)|StatusModeToProtoFlag(ID_STATUS_FREECHAT));
 
 	int flags;
@@ -174,9 +174,9 @@ int LoadAutoAwaySetting(TAAAProtoSetting& autoAwaySetting, char* protoName)
 		flags = 0xFFFFFF;
 	else
 		flags = CallProtoService(protoName, PS_GETCAPS,PFLAGNUM_2,0)&~CallProtoService(protoName, PS_GETCAPS, (WPARAM)PFLAGNUM_5, 0);
-	_snprintf(setting, sizeof(setting), "%s_Lv1Status", protoName);
+	mir_snprintf(setting, sizeof(setting), "%s_Lv1Status", protoName);
 	autoAwaySetting.lv1Status = DBGetContactSettingWord(NULL, MODULENAME, setting, (flags&StatusModeToProtoFlag(ID_STATUS_AWAY))?ID_STATUS_AWAY:ID_STATUS_OFFLINE);
-	_snprintf(setting, sizeof(setting), "%s_Lv2Status", protoName);
+	mir_snprintf(setting, sizeof(setting), "%s_Lv2Status", protoName);
 	autoAwaySetting.lv2Status = DBGetContactSettingWord(NULL, MODULENAME, setting, (flags&StatusModeToProtoFlag(ID_STATUS_NA))?ID_STATUS_NA:ID_STATUS_OFFLINE);
 
 	return 0;
