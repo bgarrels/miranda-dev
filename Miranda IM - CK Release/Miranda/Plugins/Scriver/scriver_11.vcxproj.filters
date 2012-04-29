@@ -304,4 +304,12 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\gmaps.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\gtranslate.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

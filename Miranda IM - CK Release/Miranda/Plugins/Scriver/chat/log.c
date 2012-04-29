@@ -2,7 +2,7 @@
 Chat module plugin for Miranda IM
 
 Copyright (C) 2003 Jörgen Persson
-Copyright 2003-2012 Miranda ICQ/IM project,
+Copyright 2003-2012 Miranda IM project,
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -101,7 +101,7 @@ static int Log_AppendRTF(LOGSTREAMDATA* streamData, BOOL simpleMode, char **buff
 {
 	va_list va;
 	int lineLen, textCharsCount=0;
-	TCHAR* line = (TCHAR*)alloca( 8001*sizeof(TCHAR));
+	TCHAR* line = (TCHAR*)_malloca( 8001*sizeof(TCHAR));
 	char* d;
 
 	va_start(va, fmt);
@@ -224,7 +224,7 @@ static int Log_AppendIEView(LOGSTREAMDATA* streamData, BOOL simpleMode, TCHAR **
 {
 	va_list va;
 	int lineLen, textCharsCount=0;
-	TCHAR* line = (TCHAR*)alloca( 8001 * sizeof(TCHAR));
+	TCHAR* line = (TCHAR*)_malloca( 8001 * sizeof(TCHAR));
 	TCHAR* d;
 	MODULEINFO *mi = MM_FindModule(streamData->si->pszModule);
 

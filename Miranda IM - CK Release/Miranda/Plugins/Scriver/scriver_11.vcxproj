@@ -497,6 +497,10 @@
   <ItemGroup>
     <ResourceCompile Include="src\resource.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\gmaps.ico" />
+    <Image Include="res\gtranslate.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
