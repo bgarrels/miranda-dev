@@ -6,9 +6,9 @@ Authors: miranda-im.de Projekt Sprachdatei - diverse Autoren
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 28 Apr 2012 21:04:28
-; FLID: Deutsche Sprachdatei 0.12.04.28
-; Start of langpack: Core (Letzte Änderung: 14:42, 14. Apr. 2012 )
+X-Langpack-creation-date: 30 Apr 2012 01:04:07
+; FLID: Deutsche Sprachdatei 0.12.04.30
+; Start of langpack: Core (Letzte Änderung: 00:26, 30. Apr. 2012 )
 
 [0 = Default]
 0 = Standard
@@ -1394,6 +1394,8 @@ In bestehendem Fenster öffnen
 [Open message window]
 Nachrichtenfenster öffnen
 [Open log file]
+Logdatei öffnen
+[Open Log File...]
 Logdatei öffnen
 [Open Logging Options]
 Öffne Logeinstellungen
@@ -4536,7 +4538,7 @@ Update-Benachrichtigung (Core)
 [Miranda IM %s Now Available]
 Miranda IM %s ist jetzt verfügbar
 [A new version of Miranda IM is now available.  Click the download button to download this new update.]
-Eine neue Version von Miranda IM ist verfügbar.  Klicken Sie auf "Herunterladen" für das neue Update.
+Eine neue Version von Miranda IM ist verfügbar. Klicken Sie auf "Herunterladen" um das Update herunterladen zu können.
 [Current Version:]
 Aktuelle Version:
 [New Version:]
@@ -27172,7 +27174,7 @@ Dieses ist ein Beispiel-Popup für Nachrichten
 ; ##############################################
 ; End of langpack: NewEventNotify
 ; ############################################## 
-; Start of langpack: NewStatusNotify (Letzte Änderung: 18:49, 25. Jan. 2012 )
+; Start of langpack: NewStatusNotify (Letzte Änderung: 00:29, 30. Apr. 2012 )
 
 ; Pluginname: NewStatusNotify 
 ; Version: 1.1.3.0
@@ -27272,6 +27274,11 @@ Er telefoniert gerade.
 Sie telefoniert gerade.
 [(U) had to answer the phone]
 Kontakt telefoniert gerade.
+
+[Notification enabled]
+Benachrichtigung aktiviert
+[Notification disabled]
+Benachrichtigung deaktiviert
 
 [Use default...]
 Benutze Standard...
@@ -28809,16 +28816,21 @@ Unsicher
 ; ##############################################
 ; End of langpack: OTR
 ; ############################################## 
-; Start of langpack: Omegle (Letzte Änderung: 21:07, 28. Apr. 2012 )
+; Start of langpack: Omegle (Letzte Änderung: 00:44, 30. Apr. 2012 )
 
 ; Pluginname: Omegle Protokoll 
-; Version: 0.0.2.0
+; Version: 0.1.0.0
 ; Dateiname: omegle.dll
 ; Unique ID: {9e1d9244-606c-4ef4-99a0-1d7d23cb7601}
 ; Autor: Robert Pösel (RM)
-; Übersetzung: 23.04.12 von CHEF-KOCH
-; Besonderheiten: Strangers nicht übersetzen! 
+; Übersetzung: 23.04.12 von CHEF-KOCH, Freak
 
+[Stranger]
+Stranger (Fremder)
+[Stranger 1]
+Stranger 1 (1. Fremder)
+[Stranger 2]
+Stranger 2 (2. Fremder)
 [Last question is empty]
 Die letzte Frage ist leer. 
 [Your question is too short.]
@@ -39662,7 +39674,7 @@ Andere Optionen
 ; ##############################################
 ; End of langpack: VyPressChat
 ; ############################################## 
-; Start of langpack: WATrack (Letzte Änderung: 18:59, 12. Apr. 2012 )
+; Start of langpack: WATrack (Letzte Änderung: 00:31, 30. Apr. 2012 )
 
 ; Pluginname: WATrack 
 ; Version: 0.0.6.12
@@ -39823,6 +39835,8 @@ XStatus leer oder 'Musik' ist
 Plugin aktiviert
 [Plugin Disabled]
 Plugin deaktiviert
+[Create Report]
+Bericht erstellen
 
 ;Frame Controls (für Player-Kontrolle FFW usw.)
 
