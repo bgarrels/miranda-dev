@@ -37,19 +37,19 @@
   <PropertyGroup Label="Globals">
     <SccProjectName />
     <SccLocalPath />
-    <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and $(VisualStudioVersion) == ''">$(VCTargetsPath11)</VCTargetsPath>
     <ProjectName>AvatarHistory</ProjectName>
+    <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and $(VisualStudioVersion) == ''">$(VCTargetsPath11)</VCTargetsPath>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
+    <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
+    <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
@@ -61,7 +61,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
+    <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
@@ -88,18 +88,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>avatarhistW</TargetName>
+    <IntDir>$(SolutionDir)$(Configuration)/Obj/$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)/Plugins\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>avatarhistW</TargetName>
+    <IntDir>$(SolutionDir)$(Configuration)64/Obj/$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)64/Plugins\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>avatarhistW</TargetName>
+    <OutDir>$(SolutionDir)$(Configuration)/Plugins\</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)/Obj/$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>avatarhistW</TargetName>
+    <OutDir>$(SolutionDir)$(Configuration)64/Plugins\</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)64/Obj/$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <ClCompile>
@@ -111,8 +119,8 @@
       <WarningLevel>Level3</WarningLevel>
       <MinimalRebuild>false</MinimalRebuild>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../Utils/Pescuma;../../include;../../ExternalAPI;SDK</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;UNICODE;__UNICODE;_USRDLL;AvatarHistory_EXPORTS;DBGPOPUPS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../ExternalAPI;../Utils/Pescuma/;../../include;SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DBGPOPUPS;WIN32;_DEBUG;_WINDOWS;_UNICODE;UNICODE;_USRDLL;AvatarHistory_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformation>false</BrowseInformation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -126,21 +134,18 @@
     </Midl>
     <ResourceCompile>
       <Culture>0x0409</Culture>
-      <PreprocessorDefinitions>_DEBUG;DBGPOPUPS;_USRDLL;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+      <OutputFile>.\Unicode_Debug\AvatarHistory.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <ImportLibrary>
-      </ImportLibrary>
-      <AdditionalDependencies>advapi32.lib;comdlg32.lib;comctl32.lib;kernel32.lib;gdi32.lib;shell32.lib;ole32.lib;oleaut32.lib;user32.lib;winmm.lib;wsock32.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>msimg32.lib;comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
@@ -152,10 +157,11 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../Utils/Pescuma;../../include;../../ExternalAPI;SDK</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;UNICODE;_USRDLL;AvatarHistory_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../ExternalAPI;../Utils/Pescuma/;../../include;SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DBGPOPUPS;_WIN64;_DEBUG;_WINDOWS;_UNICODE;UNICODE;_USRDLL;AvatarHistory_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformation>true</BrowseInformation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -164,8 +170,8 @@
       <MkTypLibCompatible>true</MkTypLibCompatible>
     </Midl>
     <ResourceCompile>
-      <Culture>0x0809</Culture>
-      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -175,22 +181,24 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>msimg32.lib;comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
     <ClCompile>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <StringPooling>true</StringPooling>
+      <StringPooling>
+      </StringPooling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <Optimization>MinSpace</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>../Utils/Pescuma;../../include;../../ExternalAPI;SDK</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;UNICODE;_USRDLL;AvatarHistory_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../ExternalAPI;../Utils/Pescuma/;../../include;SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_UNICODE;UNICODE;_USRDLL;AvatarHistory_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformation>true</BrowseInformation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -210,24 +218,27 @@
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
-      <SubSystem>Console</SubSystem>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
       <ImportLibrary>.\Unicode_Release\avatarhistW.lib</ImportLibrary>
-      <AdditionalDependencies>comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>msimg32.lib;comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
     <ClCompile>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <StringPooling>true</StringPooling>
+      <StringPooling>
+      </StringPooling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <Optimization>MinSpace</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>../Utils/Pescuma;../../include;../../ExternalAPI;SDK</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN64;NDEBUG;_WINDOWS;UNICODE;_USRDLL;AvatarHistory_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../ExternalAPI;../Utils/Pescuma/;../../include;SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN64;NDEBUG;_WINDOWS;_UNICODE;UNICODE;_USRDLL;AvatarHistory_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformation>true</BrowseInformation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -246,12 +257,14 @@
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
-      <SubSystem>Console</SubSystem>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>msimg32.lib;comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Utils\Pescuma\mir_options.cpp" />
     <ClCompile Include="src\AvatarDlg.cpp" />
     <ClCompile Include="src\AvatarHistory.cpp" />
     <ClCompile Include="src\icolib.cpp" />
@@ -259,25 +272,22 @@
     <ClCompile Include="src\popup.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Utils\Pescuma\mir_buffer.h" />
+    <ClInclude Include="..\Utils\Pescuma\mir_memory.h" />
+    <ClInclude Include="..\Utils\Pescuma\mir_options.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SDK\m_avatarhist.h" />
-    <ClInclude Include="SDK\m_historyevents.h" />
     <ClInclude Include="src\AvatarHistory.h" />
     <ClInclude Include="src\popup.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Docs\avatarhist_changelog.txt" />
-    <Text Include="Docs\avatarhist_readme.txt" />
-    <Text Include="Docs\avatarhist_version.txt" />
-    <Text Include="Docs\langpack_avatarhist.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Docs\avatarhist.png" />
-    <Image Include="Icons\AvatarOverlay.ico" />
-    <Image Include="Icons\history.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="AvatarHistory.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Docs\avatarhist_changelog.txt" />
+    <CustomBuild Include="Docs\avatarhist_readme.txt" />
+    <CustomBuild Include="Docs\avatarhist_version.txt" />
+    <CustomBuild Include="Docs\langpack_avatarhist.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

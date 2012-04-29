@@ -1,23 +1,26 @@
 /*
 Avatar History Plugin
-Copyright (C) 2006  Matthew Wild - Email: mwild1@gmail.com
-Copyright (C) 2012  wishmaster51@gmail.com
+---------
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+ This plugin uses the event provided by Avatar Service to 
+ automatically back up contacts' avatars when they change.
+ Copyright (C) 2006  Matthew Wild - Email: mwild1@gmail.com
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
 */
-
 #include "AvatarHistory.h"
 
 HINSTANCE hInst;
@@ -66,24 +69,22 @@ BOOL CreateShortcut(TCHAR *file, TCHAR *shortcut);
 
 PLUGININFOEX pluginInfo={
 	sizeof(PLUGININFOEX),
-#ifdef WIN64
+#ifdef _WIN64
 	"Avatar History (x64)",
-#elif UNICODE
+#elif _UNICODE
 	"Avatar History (Unicode)",
-#else
-	"Avatar History (Ansi)",
 #endif
 	PLUGIN_MAKE_VERSION(0,0,3,0),
 	"This plugin keeps backups of all your contacts' avatar changes and/or shows popups",
 	"Matthew Wild (MattJ), Ricardo Pescuma Domenecci",
 	"mwild1@gmail.com",
 	"© 2006-2012 Matthew Wild, Ricardo Pescuma Domenecci",
-	"http://pescuma.org/miranda/avatarhist",
+	"https://code.google.com/p/pescuma/",
 	UNICODE_AWARE,
 	0,		//doesn't replace anything built-in
-#ifdef WIN64
+#ifdef _WIN64
 	{ 0xe04702a2, 0x379, 0x4c69, { 0xbf, 0x8a, 0x84, 0xd5, 0xd0, 0xc9, 0x19, 0xcc } } // {E04702A2-0379-4C69-BF8A-84D5D0C919CC}
-#elif UNICODE
+#elif _UNICODE
 	{ 0xdbe8c990, 0x7aa0, 0x458d, { 0xba, 0xb7, 0x33, 0xeb, 0x7, 0x23, 0x8e, 0x71 } } // {DBE8C990-7AA0-458d-BAB7-33EB07238E71}
 #else
 	{ 0x4079923c, 0x8aa1, 0x4a2e, { 0x95, 0x8b, 0x9d, 0xc, 0xd0, 0xe8, 0x2e, 0xb2 } } // {4079923C-8AA1-4a2e-958B-9D0CD0E82EB2}
@@ -259,16 +260,14 @@ static int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 
 		upd.szUpdateURL = UPDATER_AUTOREGISTER;
 
-		upd.szBetaVersionURL = "http://pescuma.org/miranda/avatarhist_version.txt";
-		upd.szBetaChangelogURL = "http://pescuma.org/miranda/avatarhist#Changelog";
+		upd.szBetaVersionURL = "http://pescuma.googlecode.com/svn/trunk/Miranda/Plugins/avatarhistory/Docs/avatarhist_version.txt";
+		upd.szBetaChangelogURL = "http://pescuma.googlecode.com/svn/trunk/Miranda/Plugins/avatarhistory/Docs/avatarhist_changelog.txt";
 		upd.pbBetaVersionPrefix = (BYTE *)"Avatar History ";
 		upd.cpbBetaVersionPrefix = (int) strlen((char *)upd.pbBetaVersionPrefix);
-#ifdef WIN64
-		upd.szBetaUpdateURL = "http://pescuma.org/miranda/avatarhist64.zip";
-#elif UNICODE
-		upd.szBetaUpdateURL = "http://pescuma.org/miranda/avatarhistW.zip";
-#else
-		upd.szBetaUpdateURL = "http://pescuma.org/miranda/avatarhist.zip";
+#ifdef _WIN64
+		upd.szBetaUpdateURL = "https://pescuma.googlecode.com/files/avatarhistW.0.0.3.0-x64.zip";
+#elif _UNICODE
+		upd.szBetaUpdateURL = "https://pescuma.googlecode.com/files/avatarhistW.0.0.3.0.zip";
 #endif
 
 		upd.pbVersion = (BYTE *)CreateVersionStringPluginEx(&pluginInfo, szCurrentVersion);
@@ -400,7 +399,7 @@ void ErrorExit(HANDLE hContact,LPTSTR lpszFunction)
     LocalFree(lpDisplayBuf);
 }
 
-#ifdef UNICODE
+#ifdef _UNICODE
 
 #define CS "%S"
 
@@ -808,7 +807,7 @@ BOOL CreateShortcut(TCHAR *file, TCHAR *shortcut)
 
         if (SUCCEEDED(hr))
         {
-#ifdef UNICODE
+#ifdef _UNICODE
 			hr = ppf->Save(shortcut, TRUE); 
 #else
 			WCHAR tmp[MAX_PATH]; 
@@ -842,7 +841,7 @@ BOOL ResolveShortcut(TCHAR *shortcut, TCHAR *file)
 
         if (SUCCEEDED(hr))
 		{
-#ifdef UNICODE
+#ifdef _UNICODE
 			hr = ppf->Load(shortcut, STGM_READ); 
 #else
 			WCHAR tmp[MAX_PATH]; 

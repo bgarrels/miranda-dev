@@ -17,9 +17,12 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.  
 */
 
+
 #include "AvatarHistory.h"
 
-// Prototypes
+
+
+// Prototypes /////////////////////////////////////////////////////////////////////////////////////
 
 #define WMU_ACTION	(WM_USER + 1)
 
@@ -34,7 +37,8 @@ static LRESULT CALLBACK DumbPopupDlgProc(HWND hWnd, UINT message, WPARAM wParam,
 
 
 
-// Functions 
+// Functions //////////////////////////////////////////////////////////////////////////////////////
+
 
 // Initializations needed by popups
 void InitPopups()
@@ -220,7 +224,7 @@ static LRESULT CALLBACK PopupDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 		case UM_FREEPLUGINDATA: 
 		{
 			PopupDataType* popup = (PopupDataType*)PUGetPluginData(hWnd);
-			if ((unsigned)popup != CALLSERVICE_NOTFOUND)
+			if ((INT_PTR)popup != CALLSERVICE_NOTFOUND)
 			{
 				DestroyIcon(popup->hIcon);
 				mir_free(popup);
@@ -252,7 +256,7 @@ static LRESULT CALLBACK DumbPopupDlgProc(HWND hWnd, UINT message, WPARAM wParam,
 		case UM_FREEPLUGINDATA: 
 		{
 			PopupDataType* popup = (PopupDataType*)PUGetPluginData(hWnd);
-			if ((unsigned)popup != CALLSERVICE_NOTFOUND)
+			if ((INT_PTR)popup != CALLSERVICE_NOTFOUND)
 			{
 				DestroyIcon(popup->hIcon);
 				mir_free(popup);
