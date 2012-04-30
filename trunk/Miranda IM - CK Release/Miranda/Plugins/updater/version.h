@@ -15,7 +15,7 @@
 #define __DESC						"Automatic Updater for Miranda IM"
 #define __AUTHOR					"Scott Ellis, Boris Krasnovskiy"
 #define __AUTHOREMAIL				"mail@scottellis.com.au"
-#define __COPYRIGHT					"© 2005,2006 Scott Ellis, 2009-2011 Boris Krasnovskiy"
+#define __COPYRIGHT					"© 2005,2006 Scott Ellis, 2009-2012 Boris Krasnovskiy"
 #define __AUTHORWEB					"http://www.scottellis.com.au"
 
 #if defined(_WIN64)

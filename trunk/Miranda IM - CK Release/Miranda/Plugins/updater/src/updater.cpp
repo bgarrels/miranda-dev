@@ -13,6 +13,7 @@ HANDLE hEventOptInit, hEventModulesLoaded, hEventIdleChanged, hToolBarLoaded;
 MM_INTERFACE   mmi;
 UTF8_INTERFACE utfi;
 LIST_INTERFACE li;
+int hLangpack;
 
 bool is_idle = false;
 //#define TESTING			// defined here to reduce build time blowout caused by changing common.h
@@ -48,7 +49,7 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvRese
 
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {
-	return mirandaVersion < PLUGIN_MAKE_VERSION(0, 8, 0, 0) ? NULL :&pluginInfo;
+	return mirandaVersion < PLUGIN_MAKE_VERSION(0, 9, 0, 0) ? NULL :&pluginInfo;
 }
 
 static const MUUID interfaces[] = {MIID_UPDATER, MIID_LAST};
