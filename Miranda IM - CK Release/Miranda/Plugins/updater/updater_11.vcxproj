@@ -90,8 +90,8 @@
     <ReferencePath Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib</ReferencePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);</LibraryPath>
     <ReferencePath Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">$(VCInstallDir)atlmfc\lib\amd64;$(VCInstallDir)lib\amd64</ReferencePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">$(VCInstallDir)lib\amd64;$(VCInstallDir)atlmfc\lib\amd64;$(WindowsSdkDir)lib\x64;</LibraryPath>
-    <ExcludePath Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;$(MSBuildToolsPath);$(MSBuildToolsPath32);$(VCInstallDir)atlmfc\lib\amd64;$(VCInstallDir)lib\amd64;</ExcludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">$(VCInstallDir)lib\amd64;$(VCInstallDir)atlmfc\lib\amd64;$(WindowsSDK_LibraryPath_x64);</LibraryPath>
+    <ExcludePath Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;$(MSBuildToolsPath);$(MSBuildToolsPath32);$(VCInstallDir)atlmfc\lib\amd64;$(VCInstallDir)lib\amd64</ExcludePath>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
@@ -149,7 +149,8 @@
       <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <SubSystem>Windows</SubSystem>
       <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
-      <LargeAddressAware>true</LargeAddressAware>
+      <LargeAddressAware>
+      </LargeAddressAware>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
@@ -196,7 +197,8 @@
       <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <SubSystem>Windows</SubSystem>
       <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
-      <LargeAddressAware>true</LargeAddressAware>
+      <LargeAddressAware>
+      </LargeAddressAware>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
@@ -321,7 +323,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>zbin/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../Lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>src/updater.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
@@ -394,6 +396,9 @@
     <ClInclude Include="zbin\minizip\unzip.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bzip2-1.0.6\docs\LICENSE" />
+    <None Include="bzip2-1.0.6\docs\README" />
+    <None Include="bzip2-1.0.6\docs\README.COMPILATION.PROBLEMS" />
     <None Include="icos\restart.ico" />
     <None Include="icos\u.ico" />
     <None Include="icos\ue.ico" />
@@ -401,6 +406,10 @@
   <ItemGroup>
     <ResourceCompile Include="updater.rc" />
     <ResourceCompile Include="version.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="bzip2-1.0.6\docs\bzip2.txt" />
+    <Text Include="Docs\licence_updater.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -22,6 +22,12 @@
     <Filter Include="minizip">
       <UniqueIdentifier>{bfe67567-27a6-495c-a026-4accb16a029d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="bzip2\Docs">
+      <UniqueIdentifier>{9fe50bec-f500-44db-9898-92fab75248ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{46c355ac-e108-4d97-b351-0a0f93a19bb4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="zbin\minizip\ioapi.c">
@@ -181,6 +187,15 @@
     <None Include="icos\ue.ico">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="bzip2-1.0.6\docs\LICENSE">
+      <Filter>bzip2\Docs</Filter>
+    </None>
+    <None Include="bzip2-1.0.6\docs\README.COMPILATION.PROBLEMS">
+      <Filter>bzip2\Docs</Filter>
+    </None>
+    <None Include="bzip2-1.0.6\docs\README">
+      <Filter>bzip2\Docs</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="updater.rc">
@@ -189,5 +204,13 @@
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="bzip2-1.0.6\docs\bzip2.txt">
+      <Filter>bzip2\Docs</Filter>
+    </Text>
+    <Text Include="Docs\licence_updater.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
