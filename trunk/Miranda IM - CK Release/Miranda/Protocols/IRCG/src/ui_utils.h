@@ -576,7 +576,7 @@ public:
 		if (GetDataType() == DBVT_TCHAR)
 		{
 			int len = GetWindowTextLength(m_hwnd) + 1;
-			TCHAR *buf = (TCHAR *)_alloca(sizeof(TCHAR) * len);
+			TCHAR *buf = (TCHAR *)_malloca(sizeof(TCHAR) * len);
 			GetWindowText(m_hwnd, buf, len);
 			SaveText(buf);
 		}
@@ -665,7 +665,7 @@ public:
 		if (GetDataType() == DBVT_TCHAR)
 		{
 			int len = GetWindowTextLength(m_hwnd) + 1;
-			TCHAR *buf = (TCHAR *)_alloca(sizeof(TCHAR) * len);
+			TCHAR *buf = (TCHAR *)_malloca(sizeof(TCHAR) * len);
 			GetWindowText(m_hwnd, buf, len);
 			SaveText(buf);
 		}

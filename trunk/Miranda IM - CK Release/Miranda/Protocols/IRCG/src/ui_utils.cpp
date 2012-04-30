@@ -321,7 +321,7 @@ TCHAR* CCtrlCombo::GetItemText(int index)
 
 TCHAR* CCtrlCombo::GetItemText(int index, TCHAR *buf, int size)
 {
-	TCHAR *result = (TCHAR *)_alloca(sizeof(TCHAR) * (SendMessage(m_hwnd, CB_GETLBTEXTLEN, index, 0) + 1));
+	TCHAR *result = (TCHAR *)_malloca(sizeof(TCHAR) * (SendMessage(m_hwnd, CB_GETLBTEXTLEN, index, 0) + 1));
 	SendMessage(m_hwnd, CB_GETLBTEXT, index, (LPARAM)result);
 	lstrcpyn(buf, result, size);
 	return buf;
@@ -409,7 +409,7 @@ TCHAR* CCtrlListBox::GetItemText(int index)
 
 TCHAR* CCtrlListBox::GetItemText(int index, TCHAR *buf, int size)
 {
-	TCHAR *result = (TCHAR *)_alloca(sizeof(TCHAR) * (SendMessage(m_hwnd, LB_GETTEXTLEN, index, 0) + 1));
+	TCHAR *result = (TCHAR *)_malloca(sizeof(TCHAR) * (SendMessage(m_hwnd, LB_GETTEXTLEN, index, 0) + 1));
 	SendMessage(m_hwnd, LB_GETTEXT, index, (LPARAM)result);
 	lstrcpyn(buf, result, size);
 	return buf;
@@ -1716,7 +1716,7 @@ char* CCtrlBase::GetTextA(char *buf, int size)
 int CCtrlBase::GetInt()
 {
 	int length = GetWindowTextLength(m_hwnd) + 1;
-	TCHAR *result = (TCHAR *)_alloca(length * sizeof(TCHAR));
+	TCHAR *result = (TCHAR *)_malloca(length * sizeof(TCHAR));
 	GetWindowText(m_hwnd, result, length);
 	return _ttoi(result);
 }
