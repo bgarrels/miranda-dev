@@ -1,3 +1,6 @@
+#ifndef M_DATABASE_H__
+#define M_DATABASE_H__ 1
+
 /*
 Miranda IM: the free IM client for Microsoft* Windows*
 
@@ -18,14 +21,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
 
-#ifndef M_DATABASE_H__
-#define M_DATABASE_H__ 1
+/******************* DATABASE MODULE NOTES ***************************/
 
-/******************* DATABASE MODULE ***************************/
-
-/*	Notes (as I think of them):
+/*
 - The module is 100% thread-safe
 - The database is the main routing point for the vast majority of Miranda.
   Events are sent from the protocol module to here, and the send/recv message

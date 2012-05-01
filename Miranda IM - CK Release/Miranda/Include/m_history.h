@@ -1,9 +1,12 @@
-/*
+#ifndef M_HISTORY_H__
+#define M_HISTORY_H__ 1
 
+/*
+Historydialog module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2012 Miranda IM project, 
-all portions of this codebase are copyrighted to the people 
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -19,15 +22,22 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
 
-#ifndef M_HISTORY_H__
-#define M_HISTORY_H__ 1
-
-//show the History dialog box for a contact
-//  wParam=(WPARAM)(HANDLE)hContact
-//  lParam=0
-//hContact can be NULL to show system messages
+/*	show the History dialog box for a contact
+	wParam=(WPARAM)(HANDLE)hContact
+	lParam=0
+	hContact can be NULL to show system messages
+*/
 #define MS_HISTORY_SHOWCONTACTHISTORY       "History/ShowContactHistory" 
 
 #endif // M_HISTORY_H__

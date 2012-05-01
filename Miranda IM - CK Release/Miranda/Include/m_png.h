@@ -1,13 +1,11 @@
 /*
-Plugin of Miranda IM for reading/writing PNG images.
-Copyright (c) 2004-5 George Hazan (ghazan@postman.ru)
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Portions of this code are gotten from the libpng codebase.
-Copyright 2000, Willem van Schaik.  For conditions of distribution and
-use, see the copyright/license/disclaimer notice in png.h
+Author George Hazan (ghazan@postman.ru)
 
-Miranda IM: the free icq client for MS Windows
-Copyright (C) 2000-2002 Richard Hughes, Roland Rabien & Tristan Van de Vreede
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,11 +21,14 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-File name      : $Source: /cvsroot/miranda/miranda/include/m_png.h,v $
-Revision       : $Revision$
-Last change on : $Date$
-Last change by : $Author$
+===============================================================================
 
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
 
 /* Image/Dib2Png

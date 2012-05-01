@@ -1,9 +1,11 @@
-/*
+#ifndef M_VERSION_H__
+#define M_VERSION_H__
 
+/* Version module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2010 Miranda IM project, 
-all portions of this codebase are copyrighted to the people 
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -19,9 +21,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
-#ifndef M_VERSION_H__
-#define M_VERSION_H__
 
 #ifndef MIRANDA_MAKE_VERSION
 #define MIRANDA_MAKE_VERSION(a,b,c,d)   (((((DWORD)(a))&0xFF)<<24)|((((DWORD)(b))&0xFF)<<16)|((((DWORD)(c))&0xFF)<<8)|(((DWORD)(d))&0xFF))
@@ -29,7 +38,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #define MIRANDA_VERSION_FILEVERSION 0,10,0,3                                
 #define MIRANDA_VERSION_STRING      "0.10.0.3"                              
-#define MIRANDA_VERSION_DISPLAY     "0.10.0 alpha build #3"                 
+#define MIRANDA_VERSION_DISPLAY     "0.10.0 Alpha build #3"                 
 #define MIRANDA_VERSION_DWORD       MIRANDA_MAKE_VERSION(0, 10, 0, 3)       
 #define MIRANDA_VERSION_CORE        MIRANDA_MAKE_VERSION(0, 10, 0, 0)        
 #define MIRANDA_VERSION_CORE_STRING "0.10.0.0"                               

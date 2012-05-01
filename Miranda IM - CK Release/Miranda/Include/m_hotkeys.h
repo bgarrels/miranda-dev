@@ -1,5 +1,8 @@
-/*
+#ifndef M_HOTKEYS_H__
+#define M_HOTKEYS_H__ 1
 
+/*
+Hotkey module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
 Copyright 2000-2012 Miranda IM project,
@@ -19,10 +22,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
 
-#ifndef M_HOTKEYS_H__
-#define M_HOTKEYS_H__ 1
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
 
 #define HKD_UNICODE 0x0001
 
@@ -35,7 +44,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 typedef struct
 {
 	int cbSize;
-	const char *pszName;          /* name to refer to hotkey when playing and in db */
+	const char *pszName;			/* name to refer to hotkey when playing and in db */
 	union {
 		const char *pszDescription;   /* description for options dialog */
 		const TCHAR *ptszDescription;
@@ -44,8 +53,8 @@ typedef struct
 		const char *pszSection;       /* section name used to group sounds (NULL is acceptable) */
 		const TCHAR *ptszSection;
 	};
-	const char *pszService;       /* Service to call when HotKey Pressed */
-	WORD DefHotKey;               /* default hot key for action */
+	const char *pszService;			/* Service to call when HotKey Pressed */
+	WORD DefHotKey;					 /* default hot key for action */
 	LPARAM lParam;                /* lParam to pass to service */
 	#if MIRANDA_VER >= 0x900
 		DWORD dwFlags;

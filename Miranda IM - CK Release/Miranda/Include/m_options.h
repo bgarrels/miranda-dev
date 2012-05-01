@@ -1,5 +1,7 @@
-/*
+#ifndef M_OPTIONS_H__
+#define M_OPTIONS_H__
 
+/*
 Miranda IM: the free IM client for Microsoft* Windows*
 
 Copyright 2000-2012 Miranda IM project,
@@ -19,10 +21,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
 
-#ifndef M_OPTIONS_H__
-#define M_OPTIONS_H__
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
 
 /* Opt/Initialise
 The user opened the options dialog. Modules should do whatever initialisation
@@ -57,20 +65,20 @@ typedef struct {
 	int cbSize;
 	int position;        //a position number, lower numbers are topmost
 	union {
-		char* pszTitle; // [TRANSLATED-BY-CORE]
+		char* pszTitle;		//v0.1.0.1+ [TRANSLATED-BY-CORE]
 		TCHAR* ptszTitle;
 	};
 	DLGPROC pfnDlgProc;
 	char *pszTemplate;
 	HINSTANCE hInstance;
-	HICON hIcon;		 //v0.1.0.1+
+	HICON hIcon;			 
 	union {
 		char* pszGroup;		 //v0.1.0.1+ [TRANSLATED-BY-CORE]
-		TCHAR* ptszGroup;		 //v0.1.0.1+
+		TCHAR* ptszGroup;		
 	};
-	int groupPosition;	 //v0.1.0.1+
-	HICON hGroupIcon;	 //v0.1.0.1+
-	DWORD flags;         //v0.1.2.1+
+	int groupPosition;	 
+	HICON hGroupIcon;	 
+	DWORD flags;         
 	int nIDBottomSimpleControl;  //v0.1.2.1+  if in simple mode the dlg will be cut off after this control, 0 to disable
 	int nIDRightSimpleControl;  //v0.1.2.1+  if in simple mode the dlg will be cut off after this control, 0 to disable
 	UINT *expertOnlyControls;
@@ -79,7 +87,7 @@ typedef struct {
 	#if MIRANDA_VER >= 0x0600
 	union {
 			char* pszTab;		 //v0.6.0.0+ [TRANSLATED-BY-CORE]
-			TCHAR* ptszTab;		 //v0.6.0.0+
+			TCHAR* ptszTab;		 
 		};
 	#endif
 
@@ -110,7 +118,7 @@ typedef struct {
 	#define ODPF_TCHAR     0
 #endif
 
-#define PSN_EXPERTCHANGED 2    //sent to pages via WM_NOTIFY when the expert checkbox is clicked. lParam=new state
+#define PSN_EXPERTCHANGED 2				//sent to pages via WM_NOTIFY when the expert checkbox is clicked. lParam=new state
 #define PSM_ISEXPERT      (WM_USER+101)   //returns true/false
 #define PSM_GETBOLDFONT   (WM_USER+102)   //returns HFONT used for group box titles
 #define MS_OPT_ADDPAGE      "Opt/AddPage"
