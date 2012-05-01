@@ -1,9 +1,18 @@
-/*
+#ifndef M_IGNORE_H__
+#define M_IGNORE_H__ 1
 
+/* Icq plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2012 Miranda IM project, 
-all portions of this codebase are copyrighted to the people 
+Authors
+Copyright © 2000-2001 Richard Hughes, Roland Rabien, Tristan Van de Vreede
+Copyright © 2001-2002 Jon Keating, Richard Hughes
+Copyright © 2002-2004 Martin Öberg, Sam Kothari, Robert Rainwater
+Copyright © 2004-2010 Joe Kucera
+Copyright © 2004-2012 Boris, g.hazan 
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -19,13 +28,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
 
-#ifndef M_IGNORE_H__
-#define M_IGNORE_H__ 1
-
-//this module provides UI and storage for blocking only, protocol modules are
-//responsible for implementing the block
+/*	This module provides UI and storage for blocking only, protocol modules are
+	responsible for implementing the block
+*/
 
 #define IGNOREEVENT_ALL        (LPARAM)(-1)
 #define IGNOREEVENT_MESSAGE       1

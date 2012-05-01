@@ -1,32 +1,47 @@
-/*
-
-Miranda IM: the free IM client for Microsoft* Windows*
-
-===============================================================================
-                                PopUp plugin
-Plugin Name: PopUp
-Plugin authors: Luca Santarelli aka hrk (hrk@users.sourceforge.net)
-                Victor Pavlychko aka zazoo (nullbie@gmail.com)
-===============================================================================
-The purpose of this plugin is to give developers a common "platform/interface"
-to show PopUps. It is born from the source code of NewStatusNotify, another
-plugin I've made.
-
-Remember that users *must* have this plugin enabled, or they won't get any
-popup. Write this in the requirements, do whatever you wish ;-)... but tell
-them!
-===============================================================================
-*/
-
 #ifndef M_POPUP_H
 #define M_POPUP_H
 
+/* PopUp plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors Luca Santarelli aka hrk (hrk@users.sourceforge.net)
+		Victor Pavlychko aka zazoo (nullbie@gmail.com)
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
+
 /*
-NOTE! Since Popup 1.0.1.2 there is a main meun group called "PopUps" where I
-have put a "Enable/Disable" item. You can add your own "enable/disable" items
-by adding these lines before you call MS_CLIST_ADDMAINMENUITEM:
-mi.pszPopUpName = Translate("PopUps");
-mi.position = 0; //You don't need it and it's better if you put it to zero.
+	NOTE! 
+		Since Popup 1.0.1.2 there is a main meun group called "PopUps" where I
+		have put a "Enable/Disable" item. You can add your own "enable/disable" items
+		by adding these lines before you call MS_CLIST_ADDMAINMENUITEM:
+		mi.pszPopUpName = Translate("PopUps");
+		mi.position = 0; //You don't need it and it's better if you put it to zero.
 */
 
 #define MAX_CONTACTNAME 2048

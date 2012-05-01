@@ -1,9 +1,11 @@
-/*
+#ifndef M_IDLE_H__
+#define M_IDLE_H__ 1
 
+/* IDLE module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2012 Miranda IM project, 
-all portions of this codebase are copyrighted to the people 
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -19,16 +21,23 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
 
-#ifndef M_IDLE_H__
-#define M_IDLE_H__ 1
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
 
 /* The idle module checks how long the user has been idle, it can be at the Miranda level
 or the OS level - the user has optional two settings, one for "short" idle and another
 for "long" idle. Thie module will generate long/short events based on these user preferences
 and other information too. If you are unsure which idle mode to report for, report it 
-for short idle.*/
+for short idle.
+*/
 
 #define IDF_ISIDLE		0x1 // idle has become active (if not set, inactive)
 #define IDF_PRIVACY		0x8 // if set, the information provided shouldn't be given to third parties.

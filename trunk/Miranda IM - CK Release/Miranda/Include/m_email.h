@@ -1,9 +1,12 @@
-/*
+#ifndef M_EMAIL_H__
+#define M_EMAIL_H__ 1
 
+/*
+Email module for 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2012 Miranda IM project, 
-all portions of this codebase are copyrighted to the people 
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -19,17 +22,24 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
 
-#ifndef M_EMAIL_H__
-#define M_EMAIL_H__ 1
-
-//send an e-mail to the specified contact     v0.1.0.1+
-//wParam=(WPARAM)(HANDLE)hContact
-//lParam=0
-//returns 0 on success or nonzero on failure
-//if an error occurs the service will display a message box with the error
-//text, so this service should not be used if you do not want this behaviour.
+/* send an e-mail to the specified contact     v0.1.0.1+
+   wParam=(WPARAM)(HANDLE)hContact
+   lParam=0
+   returns 0 on success or nonzero on failure
+   if an error occurs the service will display a message box with the error
+   text, so this service should not be used if you do not want this behaviour.
+ */
 #define MS_EMAIL_SENDEMAIL  "SREMail/SendCommand"
 
 #endif // M_EMAIL_H__

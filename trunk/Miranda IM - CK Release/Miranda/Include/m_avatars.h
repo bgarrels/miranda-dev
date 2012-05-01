@@ -1,6 +1,11 @@
-/*
+#ifndef _M_AVATARS_H
+#define _M_AVATARS_H
 
+/*
+Avatar support for
 Miranda IM: the free IM client for Microsoft* Windows*
+
+Author  Nightwish
 
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
@@ -20,7 +25,22 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Avatar service
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+
+- TODO
+- maintain recent avatars (store the last hashes to avoid re-fetching)
+- cache expiration, based on least recently used algorithm.
+*/
+
+/* Note: 
+		Avatar service
 
 - load and maintain a cache of contact avatars.
 - draw avatars to a given target device context
@@ -44,16 +64,7 @@ protocols which are in invisible status mode (may cause privacy issues and some 
 like MSN don't allow any outbound client communication when in invisible status mode)
 unless AF_FETCHALWAYS is set.
 
-- TODO
-- maintain recent avatars (store the last hashes to avoid re-fetching)
-- cache expiration, based on least recently used algorithm.
-
-(c) 2005 by Nightwish, silvercircle@gmail.com
-
 */
-
-#ifndef _M_AVATARS_H
-#define _M_AVATARS_H
 
 #define AVS_BITMAP_VALID 1
 #define AVS_BITMAP_EXPIRED 2        // the bitmap has been expired from the cache. (unused, currently.

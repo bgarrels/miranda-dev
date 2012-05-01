@@ -1,8 +1,11 @@
+#ifndef __M_IMGSRVC_H
+#define __M_IMGSRVC_H
+
 /*
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2008 Miranda IM project, 
-all portions of this codebase are copyrighted to the people 
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -19,7 +22,16 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
------------------------------------------------------------------------
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+
+Note:
 Miranda Image services plugin / API definitions
 Provides various services for image loading, saving and manipulations. 
 
@@ -31,24 +43,21 @@ by the FreeImage project (http://freeimage.sourceforge.net)
 
 */
 
-#ifndef __M_IMGSRVC_H
-#define __M_IMGSRVC_H
-
 #define _FI_MIMPLUGIN 1
 
 #include "m_freeimage.h"
 
 #define FI_IF_VERSION (PLUGIN_MAKE_VERSION(0, 0, 1, 0))           // interface version - must match
 
-// memory i/o defs
 
 /*
- * this struct defines a memio job.
- * datalen and filename must match and must be populated to the size of the memory buffer (caution)
+ * This struct defines a memio job.
+ * Datalen and filename must match and must be populated to the size of the memory buffer (caution)
  * data must point to the buffer.
- * curpos is internal and should be initialized to 0
+ * Curpos is internal and should be initialized to 0
  */
 
+// memory i/o defs
 typedef struct fiio_mem_handle_s {
 	long filelen,datalen,curpos;
 	void *data;
