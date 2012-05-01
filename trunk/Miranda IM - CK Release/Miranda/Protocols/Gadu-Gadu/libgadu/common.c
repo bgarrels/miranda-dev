@@ -1,6 +1,3 @@
-/* coding: UTF-8 */
-/* $Id$ */
-
 /*
  *  (C) Copyright 2001-2002 Wojtek Kaniewski <wojtekka@irc.pl>
  *                          Robert J. Woźny <speedy@ziew.org>

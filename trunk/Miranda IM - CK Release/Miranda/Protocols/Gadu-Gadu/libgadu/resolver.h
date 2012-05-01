@@ -1,6 +1,3 @@
-/* coding: UTF-8 */
-/* $Id$ */
-
 /*
  (C) Copyright 2008 Wojtek Kaniewski <wojtekka@irc.pl>
  
