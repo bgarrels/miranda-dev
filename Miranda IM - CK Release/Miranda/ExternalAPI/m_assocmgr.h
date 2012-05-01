@@ -1,9 +1,13 @@
-/*
+#ifndef M_ASSOCMGR_H__
+#define M_ASSOCMGR_H__
 
+/*
 'File Association Manager'-Plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright (C) 2005-2012 H. Herkenrath
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -16,12 +20,18 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program (AssocMgr-License.txt); if not, write to the Free Software
+along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
 
-#ifndef M_ASSOCMGR_H__
-#define M_ASSOCMGR_H__
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
 
 #if defined (_MSC_VER) && (_MSC_VER >= 1020)
    #pragma once

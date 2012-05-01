@@ -1,31 +1,63 @@
 #ifndef __mtext_h__
 #define __mtext_h__
 
-// NEW mtextcontrol interface:
-//
-// obtain the full mtextcontrol interface from the library. it is much faster as use of 
-// miranda core CallService to access to mtextcontrol (no core traffic).
-// This interface provides full access to mtextcontrol internal functions,
-// thus enabling devs to fully utilize the mtextcontrol API.
-// All functions will be exported as miranda services for compatibility.
-//
-// the interface is populated during the Load(PLUGINLINK *link) handler, so you can assume it is ready when Miranda
-// throw the ME_SYSTEM_MODULESLOADED event and you can generate a warning in your ModulesLoaded() when
-// it depends on the mtextcontrol interface and the mtextcontrol plugin is missing.
-// 
-// example:
-// 
-// MTEXT_INTERFACE MText = {0};
-// 
-// 	mir_getMTI(&MText);
-// 
-// all interface function designed as old mtextcontrol helper functions.
-// therefore it is easy to convert your old plugin code to new interface.
-//
-// example:
-//
-// old code: MTextCreate (...
-// new code: MText.Create(...
+/*
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
+
+/*
+NEW mtextcontrol interface:
+obtain the full mtextcontrol interface from the library. it is much faster as use of 
+miranda core CallService to access to mtextcontrol (no core traffic).
+This interface provides full access to mtextcontrol internal functions,
+thus enabling devs to fully utilize the mtextcontrol API.
+All functions will be exported as miranda services for compatibility.
+
+the interface is populated during the Load(PLUGINLINK *link) handler, so you can assume it is ready when Miranda
+throw the ME_SYSTEM_MODULESLOADED event and you can generate a warning in your ModulesLoaded() when
+it depends on the mtextcontrol interface and the mtextcontrol plugin is missing.
+ 
+	example:
+ 
+	MTEXT_INTERFACE MText = {0};
+ 
+	mir_getMTI(&MText);
+ 
+all interface function designed as old mtextcontrol helper functions.
+therefore it is easy to convert your old plugin code to new interface.
+
+	 example:
+
+	 old code: MTextCreate (...
+	 new code: MText.Create(...
+*/
 
 // Text control
 #define MTEXTCONTROLCLASS "MTextControl"

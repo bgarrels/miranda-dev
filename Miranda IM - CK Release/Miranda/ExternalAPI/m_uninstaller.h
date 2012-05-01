@@ -1,17 +1,41 @@
+#ifndef M_UNINSTALLER_H 
+#define M_UNINSTALLER_H 
+
+/*
+PluginUninstaller 1.1.2.1 for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author H. Herkenrath
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
+
 /* 
-
-   PluginUninstaller 1.1.2.1 for Miranda IM 0.3.3a and + 
-   ------------------------------------------------------------------------ 
-                  Developers - C/C++ Header File 
-             
-   Plugin Info: ---------------------------- 
-   | Version:     1.1.2.1 
-   | Filename:    uninstaller.dll 
-   | Author:      H. Herkenrath (hrathh@users.sourceforge.net) 
-   | Description: Extends the plugin options and offers the possibility 
-   |              to directly remove plugins and delete all associated 
-   |              settings and files. 
-
      Contents: -------------------------------    
    | > General Info: 
    |   - Uninstall Example/Template 
@@ -51,10 +75,7 @@
 
    If you have any whishes on some plugin uninstalling for your 
    plugin you can mail me, too. :-) 
-
 */ 
-#ifndef M_UNINSTALLER_H 
-#define M_UNINSTALLER_H 
 
 #ifndef CallService
  #pragma message("Mistake Alert!: "m_uninstaller.h" needs to be included after "newpluginapi.h"!\n         The following errors are resulting of this mistake.\n")
@@ -264,9 +285,6 @@ typedef struct {
 	char* pszIconsPath;             // Contains the icon directory for icon dlls (Added in version 1.1.2.0)
 	HELPERPROC pHelperProcAddress;  // Used internally (Contains proc address for PUICallService)
 } PLUGINUNINSTALLPARAMS;
-
-
-
 
 
 // | Helper 

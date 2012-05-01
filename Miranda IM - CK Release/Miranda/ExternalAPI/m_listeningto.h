@@ -1,3 +1,6 @@
+#ifndef __M_LISTENINGTO_H__
+#define __M_LISTENINGTO_H__
+
 /* 
 ListeningTo plugin for Miranda IM
 ==========================================================================
@@ -18,11 +21,16 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the
 Free Software Foundation, Inc.,
 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
-
-
-#ifndef __M_LISTENINGTO_H__
-# define __M_LISTENINGTO_H__
 
 #ifndef MIID_LISTENINGTO
 #define MIID_LISTENINGTO { 0x1fc1efa, 0xaa9f, 0x461b, { 0x92, 0x69, 0xaf, 0x66, 0x6b, 0x89, 0x31, 0xee } }

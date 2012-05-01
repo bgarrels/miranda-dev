@@ -1,5 +1,7 @@
-/*
+#ifndef M_HELP_H__
+#define M_HELP_H__
 
+/*
 Miranda IM Help Plugin
 Copyright (C) 2002 Richard Hughes, 2005-2007 H. Herkenrath
 
@@ -16,10 +18,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program (Help-License.txt); if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
 
-#ifndef M_HELP_H__
-#define M_HELP_H__
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
 
 #if defined (_MSC_VER) && (_MSC_VER >= 1020)
  #pragma once

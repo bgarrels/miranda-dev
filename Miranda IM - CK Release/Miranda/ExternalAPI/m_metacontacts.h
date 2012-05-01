@@ -1,9 +1,15 @@
-/*
+#ifndef M_METACONTACTS_H__
+#define M_METACONTACTS_H__ 1
 
+/*
+Metacontacts Plugin for 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright © 2004 Universite Louis PASTEUR, STRASBOURG.
-Copyright © 2004 Scott Ellis (www.scottellis.com.au mail@scottellis.com.au)
+Autors  Universite Louis PASTEUR, STRASBOURG, Scott Ellis
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -18,10 +24,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
 
-#ifndef M_METACONTACTS_H__
-#define M_METACONTACTS_H__ 1
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
 
 #ifndef MIID_METACONTACTS
 #define MIID_METACONTACTS	{0xc0325019, 0xc1a7, 0x40f5, { 0x83, 0x65, 0x4f, 0x46, 0xbe, 0x21, 0x86, 0x3e}}

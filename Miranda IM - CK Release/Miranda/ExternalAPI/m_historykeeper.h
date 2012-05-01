@@ -1,26 +1,38 @@
-/* 
-Copyright (C) 2006-2009 Ricardo Pescuma Domenecci
-
-This is free software; you can redistribute it and/or
-modify it under the terms of the GNU Library General Public
-License as published by the Free Software Foundation; either
-version 2 of the License, or (at your option) any later version.
-
-This is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Library General Public License for more details.
-
-You should have received a copy of the GNU Library General Public
-License along with this file; see the file license.txt.  If
-not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-Boston, MA 02111-1307, USA.  
-*/
-
-
 #ifndef __M_HISTORYKEEPER_H__
-# define __M_HISTORYKEEPER_H__
+#define __M_HISTORYKEEPER_H__
 
+/*
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author Pescuma
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
 
 #define MIID_STATUS_MESSAGE_CHANGE_LOGGER { 0x821be252, 0xe20b, 0x41e7, { 0xa5, 0x1d, 0x3c, 0x34, 0x2e, 0x38, 0xae, 0x22 } }
 #define MIID_STATUS_MESSAGE_CHANGE_NOTIFIER { 0xb628b23b, 0x47ae, 0x430e, { 0x94, 0x81, 0x15, 0x9f, 0xa7, 0x26, 0xc4, 0x3a } }

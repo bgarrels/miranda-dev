@@ -1,22 +1,39 @@
-/*
-===============================================================================
-								PopUp plugin
-Plugin Name: PopUp
-Plugin authors: Luca Santarelli aka hrk (hrk@users.sourceforge.net)
-				Victor Pavlychko (nullbie@gmail.com)
-===============================================================================
-The purpose of this plugin is to give developers a common "platform/interface"
-to show PopUps. It is born from the source code of NewStatusNotify, another
-plugin I've made.
-
-Remember that users *must* have this plugin enabled, or they won't get any
-popup. Write this in the requirements, do whatever you wish ;-)... but tell
-them!
-===============================================================================
-*/
-
 #ifndef __m_popup2_h__
 #define __m_popup2_h__
+
+/*
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors Luca Santarelli aka hrk (hrk@users.sourceforge.net), 
+		Victor Pavlychko (nullbie@gmail.com)
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
 
 #ifndef POPUP_VERSION
 #define POPUP_VERSION 0x02010003
