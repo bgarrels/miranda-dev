@@ -1,6 +1,10 @@
 /*
-Miranda Database Tool
-Copyright (C) 2001-2005  Richard Hughes
+Database Tool (Secure) for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -15,7 +19,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
+
 #include "../dbtool.h"
 
 static DWORD ofsThisSettings,ofsDestPrevSettings;
@@ -44,7 +59,7 @@ int WorkSettingsChain(DWORD ofsContact,DBContact *dbc,int firstTime)
 		ofsThisSettings=dbcsOld.ofsNext;
 		return ERROR_SUCCESS;
 	}
-	dbcsNew=(DBContactSettings*)_alloca(offsetof(DBContactSettings,blob)+dbcsOld.cbBlob);
+	dbcsNew=(DBContactSettings*)_malloca(offsetof(DBContactSettings,blob)+dbcsOld.cbBlob);
 	if((ret=ReadSegment(ofsThisSettings,dbcsNew,offsetof(DBContactSettings,blob)+dbcsOld.cbBlob))!=ERROR_SUCCESS) {
 		if(ret!=ERROR_HANDLE_EOF) {   //eof is OK because blank space at the end doesn't matter
 			return ERROR_NO_MORE_ITEMS;

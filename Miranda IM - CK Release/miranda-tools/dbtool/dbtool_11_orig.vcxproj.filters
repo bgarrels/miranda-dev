@@ -124,9 +124,6 @@
     <None Include="docs\langpack_dbtool.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="docs\dbtool-license.txt">
-      <Filter>docs</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
