@@ -1,18 +1,43 @@
-/* crc32.c -- compute the CRC-32 of a data stream
- * Copyright (C) 1995-2006, 2010, 2011 Mark Adler
- * For conditions of distribution and use, see copyright notice in zlib.h
- *
- * Thanks to Rodney Brown <rbrown64@csc.com.au> for his contribution of faster
- * CRC methods: exclusive-oring 32 bits of data at a time, and pre-computing
- * tables for updating the shift register in one step with three exclusive-ors
- * instead of four steps with four exclusive-ors.  This results in about a
- * factor of two increase in speed on a Power PC G4 (PPC7455) using gcc -O3.
+/*
+Zlib module for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author (C) 1995-2005 Jean-loup Gailly
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+ * crc32.c -- compute the CRC-32 of a data stream
  */
 
-/* @(#) $Id$ */
-
 /*
-  Note on the use of DYNAMIC_CRC_TABLE: there is no mutex or semaphore
+  Note:
+  On the use of DYNAMIC_CRC_TABLE: there is no mutex or semaphore
   protection on the static variables used to control the first-use generation
   of the crc tables.  Therefore, if you #define DYNAMIC_CRC_TABLE, you should
   first call get_crc_table() to initialize the tables before allowing more than
@@ -26,7 +51,7 @@
 #  ifndef DYNAMIC_CRC_TABLE
 #    define DYNAMIC_CRC_TABLE
 #  endif /* !DYNAMIC_CRC_TABLE */
-#endif /* MAKECRCH */
+#endif	/* MAKECRCH */
 
 #include "zutil.h"      /* for STDC and FAR definitions */
 
@@ -83,6 +108,7 @@ local void make_crc_table OF((void));
 #ifdef MAKECRCH
    local void write_table OF((FILE *, const crc_table_t FAR *));
 #endif /* MAKECRCH */
+
 /*
   Generate tables for a byte-wise 32-bit CRC calculation on the polynomial:
   x^32+x^26+x^23+x^22+x^16+x^12+x^11+x^10+x^8+x^7+x^5+x^4+x^2+x+1.
@@ -109,6 +135,7 @@ local void make_crc_table OF((void));
   allow for word-at-a-time CRC calculation for both big-endian and little-
   endian machines, where a word is four bytes.
 */
+
 local void make_crc_table()
 {
     crc_table_t c;

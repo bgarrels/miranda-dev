@@ -1,13 +1,43 @@
-/* infback.c -- inflate using a call-back interface
- * Copyright (C) 1995-2011 Mark Adler
- * For conditions of distribution and use, see copyright notice in zlib.h
- */
-
 /*
-   This code is largely copied from inflate.c.  Normally either infback.o or
-   inflate.o would be linked into an application--not both.  The interface
-   with inffast.c is retained so that optimized assembler-coded versions of
-   inflate_fast() can be used with either inflate.c or infback.c.
+Zlib module for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author (C) 1995-2005 Jean-loup Gailly
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+ * Inflate using a call-back interface
+
+ * This code is largely copied from inflate.c.  Normally either infback.o or
+ * inflate.o would be linked into an application--not both.  The interface
+ * with inffast.c is retained so that optimized assembler-coded versions of
+ * inflate_fast() can be used with either inflate.c or infback.c.
  */
 
 #include "zutil.h"
