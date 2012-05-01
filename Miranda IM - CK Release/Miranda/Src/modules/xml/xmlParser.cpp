@@ -1,53 +1,34 @@
-/**
-****************************************************************************
-* <P> XML.c - implementation file for basic XML parser written in ANSI C++
-* for portability. It works by using recursion and a node tree for breaking
-* down the elements of an XML document.  </P>
-*
-* @version     V2.43
-* @author      Frank Vanden Berghen
-*
-* NOTE:
-*
-*   If you add "#define STRICT_PARSING", on the first line of this file
-*   the parser will see the following XML-stream:
-*      <a><b>some text</b><b>other text    </a>
-*   as an error. Otherwise, this tring will be equivalent to:
-*      <a><b>some text</b><b>other text</b></a>
-*
-* NOTE:
-*
-*   If you add "#define APPROXIMATE_PARSING" on the first line of this file
-*   the parser will see the following XML-stream:
-*     <data name="n1">
-*     <data name="n2">
-*     <data name="n3" />
-*   as equivalent to the following XML-stream:
-*     <data name="n1" />
-*     <data name="n2" />
-*     <data name="n3" />
-*   This can be useful for badly-formed XML-streams but prevent the use
-*   of the following XML-stream (problem is: tags at contiguous levels
-*   have the same names):
-*     <data name="n1">
-*        <data name="n2">
-*            <data name="n3" />
-*        </data>
-*     </data>
-*
-* NOTE:
-*
-*   If you add "#define _XMLPARSER_NO_MESSAGEBOX_" on the first line of this file
-*   the "openFileHelper" function will always display error messages inside the
-*   console instead of inside a message-box-window. Message-box-windows are
-*   available on windows 9x/NT/2000/XP/Vista only.
-*
-* Copyright (c) 2002, Business-Insight
-* <a href="http://www.Business-Insight.com">Business-Insight</a>
-* All rights reserved.
-* See the file "AFPL-license.txt" about the licensing terms
-*
-****************************************************************************
+/*
+XML parser module for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "commonheaders.h"

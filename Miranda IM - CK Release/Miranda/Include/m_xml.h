@@ -2,6 +2,7 @@
 #define M_XML_H__
 
 /*
+XML parser module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
 Copyright 2000-2012 Miranda IM project,
@@ -28,6 +29,7 @@ File name      : $HeadURL:
 Revision       : $Revision: 
 Last change on : $Date: 
 Last change by : $Author:
+$Id$		   : $Id$:
 
 ===============================================================================
 */

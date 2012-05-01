@@ -1,90 +1,38 @@
-/****************************************************************************/
-/*! \mainpage XMLParser library
- * \section intro_sec Introduction
- *
- * This is a basic XML parser written in ANSI C++ for portability.
- * It works by using recursion and a node tree for breaking
- * down the elements of an XML document.
- *
- * @version     V2.43
- * @author      Frank Vanden Berghen
- *
- * Copyright (c) 2002, Business-Insight
- * <a href="http://www.Business-Insight.com">Business-Insight</a>
- * All rights reserved.
- * See the file <a href="../../AFPL-license.txt">AFPL-license.txt</a> about the licensing terms
- *
- * \section tutorial First Tutorial
- * You can follow a simple <a href="../../xmlParser.html">Tutorial</a> to know the basics...
- *
- * \section usage General usage: How to include the XMLParser library inside your project.
- *
- * The library is composed of two files: <a href="../../xmlParser.cpp">xmlParser.cpp</a> and
- * <a href="../../xmlParser.h">xmlParser.h</a>. These are the ONLY 2 files that you need when
- * using the library inside your own projects.
- *
- * All the functions of the library are documented inside the comments of the file
- * <a href="../../xmlParser.h">xmlParser.h</a>. These comments can be transformed in
- * full-fledged HTML documentation using the DOXYGEN software: simply type: "doxygen doxy.cfg"
- *
- * By default, the XMLParser library uses (char*) for string representation.To use the (wchar_t*)
- * version of the library, you need to define the "_UNICODE" preprocessor definition variable
- * (this is usually done inside your project definition file) (This is done automatically for you
- * when using Visual Studio).
- *
- * \section example Advanced Tutorial and Many Examples of usage.
- *
- * Some very small introductory examples are described inside the Tutorial file
- * <a href="../../xmlParser.html">xmlParser.html</a>
- *
- * Some additional small examples are also inside the file <a href="../../xmlTest.cpp">xmlTest.cpp</a>
- * (for the "char*" version of the library) and inside the file
- * <a href="../../xmlTestUnicode.cpp">xmlTestUnicode.cpp</a> (for the "wchar_t*"
- * version of the library). If you have a question, please review these additionnal examples
- * before sending an e-mail to the author.
- *
- * To build the examples:
- * - linux/unix: type "make"
- * - solaris: type "make -f makefile.solaris"
- * - windows: Visual Studio: double-click on xmlParser.dsw
- *   (under Visual Studio .NET, the .dsp and .dsw files will be automatically converted to .vcproj and .sln files)
- *
- * In order to build the examples you need some additional files:
- * - linux/unix: makefile
- * - solaris: makefile.solaris
- * - windows: Visual Studio: *.dsp, xmlParser.dsw and also xmlParser.lib and xmlParser.dll
- *
- * \section debugging Debugging with the XMLParser library
- *
- * \subsection debugwin Debugging under WINDOWS
- *
- * 	Inside Visual C++, the "debug versions" of the memory allocation functions are
- * 	very slow: Do not forget to compile in "release mode" to get maximum speed.
- * 	When I had to debug a software that was using the XMLParser Library, it was usually
- * 	a nightmare because the library was sooOOOoooo slow in debug mode (because of the
- *  slow memory allocations in Debug mode). To solve this
- * 	problem, during all the debugging session, I am now using a very fast DLL version of the
- * 	XMLParser Library (the DLL is compiled in release mode). Using the DLL version of
- * 	the XMLParser Library allows me to have lightening XML parsing speed even in debug!
- * 	Other than that, the DLL version is useless: In the release version of my tool,
- * 	I always use the normal, ".cpp"-based, XMLParser Library (I simply include the
- * <a href="../../xmlParser.cpp">xmlParser.cpp</a> and
- * <a href="../../xmlParser.h">xmlParser.h</a> files into the project).
- *
- * 	The file <a href="../../XMLNodeAutoexp.txt">XMLNodeAutoexp.txt</a> contains some
- * "tweaks" that improve substancially the display of the content of the XMLNode objects
- * inside the Visual Studio Debugger. Believe me, once you have seen inside the debugger
- * the "smooth" display of the XMLNode objects, you cannot live without it anymore!
- *
- * \subsection debuglinux Debugging under LINUX/UNIX
- *
- * 	The speed of the debug version of the XMLParser library is tolerable so no extra
- * work.has been done.
- *
- ****************************************************************************/
-
 #ifndef __INCLUDE_XML_NODE__
 #define __INCLUDE_XML_NODE__
+
+/*
+XML parser module for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
 
 #include <stdlib.h>
 
