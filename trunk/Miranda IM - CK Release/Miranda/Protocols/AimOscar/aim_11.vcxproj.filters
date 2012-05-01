@@ -176,12 +176,6 @@
     <None Include="icons\underline.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="docs\AIMOSCAR-Readme.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\AIMOSCAR-Changelog.txt">
-      <Filter>docs</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="aim.rc">
@@ -243,5 +237,13 @@
     <ClInclude Include="aim.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Readme.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="docs\Changelog.txt">
+      <Filter>docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -199,9 +199,6 @@
     <None Include="icons\settings.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="docs\gg-license.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\gg-readme.txt">
       <Filter>docs</Filter>
     </None>

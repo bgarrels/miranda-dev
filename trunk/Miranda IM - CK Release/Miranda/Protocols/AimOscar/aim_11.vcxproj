@@ -394,8 +394,6 @@
     <ClCompile Include="src\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\AIMOSCAR-Changelog.txt" />
-    <None Include="docs\AIMOSCAR-Readme.txt" />
     <None Include="icons\add.ico" />
     <None Include="icons\admin.ico" />
     <None Include="icons\aol.ico" />
@@ -447,6 +445,10 @@
     <ClInclude Include="src\ui.h" />
     <ClInclude Include="src\utility.h" />
     <ClInclude Include="version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Changelog.txt" />
+    <Text Include="docs\Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

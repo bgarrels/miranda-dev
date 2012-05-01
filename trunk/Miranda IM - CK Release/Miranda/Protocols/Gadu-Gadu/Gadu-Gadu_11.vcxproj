@@ -549,7 +549,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\build-howto.txt" />
-    <None Include="docs\gg-license.txt" />
     <None Include="docs\gg-readme.txt" />
     <None Include="docs\gg-translation-sample.txt" />
     <None Include="icons\clear_ignored_conference.ico" />
