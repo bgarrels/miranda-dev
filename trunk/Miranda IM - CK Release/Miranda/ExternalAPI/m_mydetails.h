@@ -1,29 +1,41 @@
-/* 
-Copyright (C) 2005 Ricardo Pescuma Domenecci
+#ifndef __M_MYDETAILS_H__
+#define __M_MYDETAILS_H__
 
-This is free software; you can redistribute it and/or
-modify it under the terms of the GNU Library General Public
-License as published by the Free Software Foundation; either
-version 2 of the License, or (at your option) any later version.
+/*
+MyDetails Plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-This is distributed in the hope that it will be useful,
+Author Ricardo Pescuma Domenecci
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Library General Public License for more details.
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-You should have received a copy of the GNU Library General Public
-License along with this file; see the file license.txt.  If
-not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-Boston, MA 02111-1307, USA.  
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
 
-
-#ifndef __M_MYDETAILS_H__
-# define __M_MYDETAILS_H__
-
-
 #define MIID_MDETAILS { 0xdba18dbc, 0x5be6, 0x4504, { 0xa7, 0x99, 0x29, 0xec, 0x6c, 0xca, 0x0, 0x65 } }
-
 
 
 /*

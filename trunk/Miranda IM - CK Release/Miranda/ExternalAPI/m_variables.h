@@ -1,24 +1,39 @@
-/*
-    Variables Plugin for Miranda-IM (www.miranda-im.org)
-    Copyright 2003-2006 P. Boon
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/
-
 #ifndef __M_VARS
 #define __M_VARS
+
+/*
+Variables Plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author P. Boon
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
 
 #if !defined(_TCHAR_DEFINED)
 #include <tchar.h>
@@ -56,7 +71,6 @@
 // stated that it should be free with this service.
 
 
-
 #define MS_VARS_GET_MMI "Vars/GetMMI"
 
 // Get Variable's RTL/CRT function poiners to malloc(), free() and
@@ -82,7 +96,6 @@ __inline static void variables_free(void *pntr) {
   CallService(MS_VARS_FREEMEMORY, (WPARAM)pntr, 0);
 }
 #endif
-
 
 
 // --------------------------------------------------------------------------

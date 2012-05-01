@@ -1,8 +1,15 @@
+#ifndef M_SIMPLEAWAY_H__
+#define M_SIMPLEAWAY_H__ 1
+
 /*
+SimpleAway plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-SimpleAway plugin for Miranda-IM
+Author Harven, © 2006-2008 Dezeath
 
-Copyright © 2005 Harven, © 2006-2008 Dezeath
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -17,10 +24,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
 
-#ifndef M_SIMPLEAWAY_H__
-#define M_SIMPLEAWAY_H__ 1
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
 
 // Represents status that a protocol(s) is/are currently in
 #define	ID_STATUS_CURRENT	40082

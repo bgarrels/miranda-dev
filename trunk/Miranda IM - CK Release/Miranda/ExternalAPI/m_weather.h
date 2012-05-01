@@ -1,12 +1,20 @@
+#ifndef M_WEATHER_H__
+#define M_WEATHER_H__ 1
+
 /*
-Weather Protocol plugin for Miranda IM
-Copyright (C) 2005-2009 Boris Krasnovskiy All Rights Reserved
-Copyright (C) 2002-2005 Calvin Che
+Weather plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors Boris Krasnovskiy, Calvin Che
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; version 2
-of the License.
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -14,11 +22,18 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-#ifndef M_WEATHER_H__
-#define M_WEATHER_H__ 1
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
 
 // {6B612A34-DCF2-4e32-85CF-B6FD006B745E}
 #define MIID_WEATHER { 0x6b612a34, 0xdcf2, 0x4e32, { 0x85, 0xcf, 0xb6, 0xfd, 0x0, 0x6b, 0x74, 0x5e } } 

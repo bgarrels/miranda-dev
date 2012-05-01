@@ -1,24 +1,58 @@
 #ifndef _M_UPDATER_H
 #define _M_UPDATER_H
 
-// NOTES:
-// - For langpack updates, include a string of the following format in the langpack text file:
-//    ";FLID: <file listing name> <version>"
-//    version must be four numbers seperated by '.', in the range 0-255 inclusive
-// - Updater will disable plugins that are downloaded but were not active prior to the update (this is so that, if an archive contains e.g. ansi and 
-//    unicode versions, the correct plugin will be the only one active after the new version is installed)...so if you add a support plugin, you may need 
-//    to install an ini file to make the plugin activate when miranda restarts after the update
-// - Updater will replace all dlls that have the same internal shortName as a downloaded update dll (this is so that msn1.dll and msn2.dll, for example,
-//    will both be updated) - so if you have a unicode and a non-unicode version of a plugin in your archive, you should make the internal names different (which will break automatic 
-//    updates from the file listing if there is only one file listing entry for both versions, unless you use the 'MS_UPDATE_REGISTER' service below)
-// - Updater will install all files in the root of the archive into the plugins folder, except for langpack files that contain the FLID string which go into the root folder (same
-//    folder as miranda32.exe)...all folders in the archive will also be copied to miranda's root folder, and their contents transferred into the new folders. The only exception is a 
-//    special folder called 'root_files' - if there is a folder by that name in the archive, it's contents will also be copied into miranda's root folder - this is intended to be used 
-//    to install additional dlls etc that a plugin may require)
+/*
+Updater plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-// if you set Update.szUpdateURL to the following value when registering, as well as setting your beta site and version data,
-// Updater will ignore szVersionURL and pbVersionPrefix, and attempt to find the file listing URL's from the backend XML data.
-// for this to work, the plugin name in pluginInfo.shortName must match the file listing exactly (except for case)
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
+
+/* NOTES:
+	For langpack updates, include a string of the following format in the langpack text file:
+    ";FLID: <file listing name> <version>"
+    version must be four numbers seperated by '.', in the range 0-255 inclusive
+    - Updater will disable plugins that are downloaded but were not active prior to the update (this is so that, if an archive contains e.g. ansi and 
+    unicode versions, the correct plugin will be the only one active after the new version is installed)...so if you add a support plugin, you may need 
+    to install an ini file to make the plugin activate when miranda restarts after the update
+    - Updater will replace all dlls that have the same internal shortName as a downloaded update dll (this is so that msn1.dll and msn2.dll, for example,
+    will both be updated) - so if you have a unicode and a non-unicode version of a plugin in your archive, you should make the internal names different (which will break automatic 
+    updates from the file listing if there is only one file listing entry for both versions, unless you use the 'MS_UPDATE_REGISTER' service below)
+    - Updater will install all files in the root of the archive into the plugins folder, except for langpack files that contain the FLID string which go into the root folder (same
+    folder as miranda32(64).exe)...all folders in the archive will also be copied to miranda's root folder, and their contents transferred into the new folders. The only exception is a 
+    special folder called 'root_files' - if there is a folder by that name in the archive, it's contents will also be copied into miranda's root folder - this is intended to be used 
+    to install additional dlls etc that a plugin may require)
+
+	if you set Update.szUpdateURL to the following value when registering, as well as setting your beta site and version data,
+    Updater will ignore szVersionURL and pbVersionPrefix, and attempt to find the file listing URL's from the backend XML data.
+    for this to work, the plugin name in pluginInfo.shortName must match the file listing exactly (except for case)
+*/
+
 #define UPDATER_AUTOREGISTER		"UpdaterAUTOREGISTER"
 // Updater will also use the backend xml data if you provide URL's that reference the miranda file listing for updates (so you can use that method 
 // if e.g. your plugin shortName does not match the file listing) - it will grab the file listing id from the end of these URLs
