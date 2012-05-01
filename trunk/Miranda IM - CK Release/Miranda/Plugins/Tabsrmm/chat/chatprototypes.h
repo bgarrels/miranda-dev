@@ -1,7 +1,12 @@
 /*
-Chat module plugin for Miranda IM
+Chat plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright (C) 2003-2009 Joergen Persson and others
+Authors Joergen Persson and others
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -17,8 +22,14 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-$Id: chatprototypes.h 13184 2010-12-07 14:16:58Z silvercircle $
+===============================================================================
 
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
 
 void LoadIcons(void);

@@ -377,7 +377,6 @@
     <ClInclude Include="src\statusicon.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Docs\srmm-license.txt" />
     <None Include="Docs\srmm-readme.txt" />
     <None Include="Docs\srmm-translation.txt" />
     <None Include="res\dragcopy.cur" />

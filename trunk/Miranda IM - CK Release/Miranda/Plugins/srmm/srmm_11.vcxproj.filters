@@ -79,9 +79,6 @@
     <None Include="Docs\srmm-translation.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="Docs\srmm-license.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="res\dropuser.cur">
       <Filter>Resource Files</Filter>
     </None>

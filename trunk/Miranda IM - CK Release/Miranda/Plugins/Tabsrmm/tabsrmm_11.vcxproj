@@ -549,21 +549,6 @@
     <ClInclude Include="include\typingnotify.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\version.h" />
-    <ClInclude Include="API\m_buttonbar.h" />
-    <ClInclude Include="API\m_cln_skinedit.h" />
-    <ClInclude Include="API\m_fingerprint.h" />
-    <ClInclude Include="API\m_flash.h" />
-    <ClInclude Include="API\m_folders.h" />
-    <ClInclude Include="API\m_historyevents.h" />
-    <ClInclude Include="API\m_ieview.h" />
-    <ClInclude Include="API\m_mathmodule.h" />
-    <ClInclude Include="API\m_metacontacts.h" />
-    <ClInclude Include="API\m_msg_buttonsbar.h" />
-    <ClInclude Include="API\m_nudge.h" />
-    <ClInclude Include="API\m_popup2.h" />
-    <ClInclude Include="API\m_smileyadd.h" />
-    <ClInclude Include="API\m_spellchecker.h" />
-    <ClInclude Include="API\m_updater.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="chat\chat.rc" />
@@ -587,6 +572,7 @@
     <None Include="chat\Icons\filter.ico" />
     <None Include="chat\Icons\filter2.ico" />
     <None Include="chat\Icons\highlight.ico" />
+    <None Include="docs\changelog.OLD" />
     <None Include="docs\langpack_tabsrmm_german.txt" />
     <None Include="res\overlay_disabled.ico" />
     <None Include="res\overlay_enabled.ico" />
@@ -621,6 +607,9 @@
     <None Include="docs\Popups.txt" />
     <None Include="docs\readme.txt" />
     <None Include="skin\tabsrmm.tsk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\contributors.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

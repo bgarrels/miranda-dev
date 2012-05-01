@@ -1,59 +1,63 @@
 /*
- * astyle --force-indent=tab=4 --brackets=linux --indent-switches
- *		  --pad=oper --one-line=keep-blocks  --unpad=paren
- *
- * Miranda IM: the free IM client for Microsoft* Windows*
- *
- * Copyright 2000-2009 Miranda IM project,
- * all portions of this codebase are copyrighted to the people
- * listed in contributors.txt.
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * you should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- *
- * part of tabSRMM messaging plugin for Miranda.
- *
- * (C) 2005-2010 by silvercircle _at_ gmail _dot_ com and contributors
- *
- * $Id: taskbar.cpp 13178 2010-12-05 21:29:17Z silvercircle $
- *
+Tabsrmm plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+Author Silvercircle
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+
  * Windows 7 taskbar integration
- *
- * - overlay icons
- * - custom taskbar thumbnails for aero peek in tabbed containers
- * - read Windows 7 task bar configuration from the registry.
+ *	- overlay icons
+ *	- custom taskbar thumbnails for aero peek in tabbed containers
+ *	- read Windows 7 taskbar configuration from the registry.
  */
-/**
- * how it works:
- *
- * Because of the fact, the DWM does not talk to non-toplevel windows
- * we need an invisible "proxy window" for each tab. This window is a very
- * small and hidden toplevel tool window which is used to communicate
- * with the dwm. Each proxy is associated with the client window (the "tab")
- * and registers itself with the message container window via
- * ITaskbarList3::RegisterTab().
- *
- * Instead of automatically created snapshots of the window content, we
- * use custom generated thumbnails for the task bar buttons, including
- * nickname, UID, status message and avatar. This makes the thumbnails
- * easily recognizable.
- *
- * Thumbnails are generated "on request", only when the desktop window
- * manager needs one.
- *
- * Each proxy window has a CThumbIM or CThumbMUC object which represents
- * the actual thumbnail bitmap.
+
+
+/*
+   How it works:
+ 
+   Because of the fact, the DWM does not talk to non-toplevel windows
+   we need an invisible "proxy window" for each tab. This window is a very
+   small and hidden toplevel tool window which is used to communicate
+   with the dwm. Each proxy is associated with the client window (the "tab")
+   and registers itself with the message container window via
+   ITaskbarList3::RegisterTab().
+ 
+   Instead of automatically created snapshots of the window content, we
+   use custom generated thumbnails for the task bar buttons, including
+   nickname, UID, status message and avatar. This makes the thumbnails
+   easily recognizable.
+  
+   Thumbnails are generated "on request", only when the desktop window
+   manager needs one.
+ 
+   Each proxy window has a CThumbIM or CThumbMUC object which represents
+   the actual thumbnail bitmap.
  */
 
 #include "commonheaders.h"

@@ -1,6 +1,11 @@
-/*
-Scriver - Copyright 2000-2012 Miranda IM project,
+#ifndef SRMM_COMMONHEADERS_H
+#define SRMM_COMMONHEADERS_H
 
+/*
+Scriver plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -17,14 +22,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
 
-#ifndef SRMM_COMMONHEADERS_H
-#define SRMM_COMMONHEADERS_H
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
 
 #define MIRANDA_VER 0x0A00
 
-#define COMPILE_MULTIMON_STUBS
+#define COMPILE_MULTIMON_STUBS  //Multiple Monitor Applications on Different Systems
 #define _WIN32_WINNT 0x0600
 #define _WIN32_IE 0x0600
 #define WIN32_LEAN_AND_MEAN
