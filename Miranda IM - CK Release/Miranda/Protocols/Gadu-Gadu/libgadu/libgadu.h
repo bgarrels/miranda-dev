@@ -1,6 +1,3 @@
-/* coding: UTF-8 */
-/* $Id$ */
-
 /*
  (C) Copyright 2001-2009 Wojtek Kaniewski <wojtekka@irc.pl>
                          Robert J. Woźny <speedy@ziew.org>
@@ -27,8 +24,6 @@
 
 /**
  * \file libgadu.h
- *
- * \brief Główny plik nagłówkowy biblioteki
  */
 
 #ifndef __GG_LIBGADU_H

@@ -1,6 +1,3 @@
-/* coding: UTF-8 */
-/* $Id$ */
-
 /*
  *  (C) Copyright 2001-2010 Wojtek Kaniewski <wojtekka@irc.pl>
  *                          Robert J. Woźny <speedy@ziew.org>
@@ -25,8 +22,6 @@
 
 /**
  * \file libgadu.c
- *
- * \brief Główny moduł biblioteki
  */
 
 #ifndef _WIN64
@@ -178,7 +173,7 @@ static char rcsid[]
 #ifdef __GNUC__
 __attribute__ ((unused))
 #endif
-= "$Id$";
+= "$Id: libgadu.c 1854 2012-04-23 17:52:13Z Nvinside@gmail.com $";
 #endif
 
 #endif /* DOXYGEN */

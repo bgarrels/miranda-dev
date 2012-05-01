@@ -1,6 +1,3 @@
-/* coding: UTF-8 */
-/* $Id$ */
-
 /*
  (C) Copyright 2001-2006 Wojtek Kaniewski <wojtekka@irc.pl>
                          Dawid Jarosz <dawjar@poczta.onet.pl>

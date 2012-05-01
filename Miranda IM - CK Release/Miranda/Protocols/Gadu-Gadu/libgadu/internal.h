@@ -1,6 +1,3 @@
-/* coding: UTF-8 */
-/* $Id$ */
-
 /*
  (C) Copyright 2009 Jakub Zawadzki <darkjames@darkjames.ath.cx>
  

@@ -1,5 +1,5 @@
 /* coding: UTF-8 */
-/* $Id$ */
+/* $Id: obsolete.c 1771 2012-03-30 14:07:09Z Nvinside@gmail.com $ */
 
 /*
  *  (C) Copyright 2001-2003 Wojtek Kaniewski <wojtekka@irc.pl>
