@@ -27,11 +27,11 @@
 #define	TINYJSON_HPP
 
 //Boost
-#include	<boost/shared_ptr.hpp>
-#include	<boost/any.hpp>
-#include	<boost/spirit/core.hpp>
-#include	<boost/spirit/utility/loops.hpp>
-#include	<boost/lexical_cast.hpp>
+#include	"boost/shared_ptr.hpp"
+#include	"boost/any.hpp"
+#include	"boost/spirit/home/classic/core.hpp"
+#include	"boost/spirit/home/classic/utility/loops.hpp"
+#include	"boost/lexical_cast.hpp"
 
 #include	<string>
 #include	<stack>
