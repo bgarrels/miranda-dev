@@ -1,6 +1,10 @@
 /*
-Miranda Database Tool
-Copyright (C) 2001-2005  Richard Hughes
+Database Tool (Secure) for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -15,7 +19,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
+
 #include "../dbtool.h"
 
 void GetProfileDirectory(TCHAR* szMirandaDir, TCHAR* szPath, int cbPath)
@@ -231,7 +246,7 @@ BOOL CALLBACK SelectDbDlgProc(HWND hdlg,UINT message,WPARAM wParam,LPARAM lParam
 					TCHAR *filter, *tmp, *tmp1, *tmp2;
 					tmp1 = TranslateT("Miranda Databases (*.dat)");
 					tmp2 = TranslateT("All Files");
-					filter = tmp = (TCHAR*)_alloca((_tcslen(tmp1)+_tcslen(tmp2)+11)*sizeof(TCHAR));
+					filter = tmp = (TCHAR*)_malloca((_tcslen(tmp1)+_tcslen(tmp2)+11)*sizeof(TCHAR));
 					tmp = addstring(tmp, tmp1);
 					tmp = addstring(tmp, _T("*.DAT"));
 					tmp = addstring(tmp, tmp2);
