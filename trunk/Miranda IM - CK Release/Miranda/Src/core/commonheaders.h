@@ -1,4 +1,5 @@
 /*
+Core module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
 Copyright 2000-2012 Miranda IM project,
@@ -18,16 +19,26 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
-// to enable all 0.10.0 core functions
+// to enable all 0.10.x core functions
 #define MIRANDA_VER 0x0A00
 
 #define _ALPHA_BASE_ 1	// defined for CVS builds
 #define _ALPHA_FUSE_ 1	// defined for fuse powered core
 
 #define WINVER 0x0700
-#define _WIN32_WINNT 0x0700
+#define _WIN32_WINNT 0x0600
 #define _WIN32_IE 0x0601
 
 #include "m_stdhdr.h"
