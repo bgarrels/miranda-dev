@@ -1,36 +1,54 @@
-/* trees.c -- output deflated data using Huffman coding
- * Copyright (C) 1995-2012 Jean-loup Gailly
- * detect_data_type() function provided freely by Cosmin Truta, 2006
- * For conditions of distribution and use, see copyright notice in zlib.h
+/*
+Zlib module for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors	(C) 1995-2005 Jean-loup Gailly
+		(C) 1995-2008, 2010 Mark Adler
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+ * Output deflated data using Huffman coding
  */
 
 /*
  *  ALGORITHM
  *
- *      The "deflation" process uses several Huffman trees. The more
- *      common source values are represented by shorter bit sequences.
+ *  The "deflation" process uses several Huffman trees. The more
+ *  common source values are represented by shorter bit sequences.
  *
- *      Each code tree is stored in a compressed form which is itself
- * a Huffman encoding of the lengths of all the code strings (in
- * ascending order by source values).  The actual code strings are
- * reconstructed from the lengths in the inflate process, as described
- * in the deflate specification.
- *
- *  REFERENCES
- *
- *      Deutsch, L.P.,"'Deflate' Compressed Data Format Specification".
- *      Available in ftp.uu.net:/pub/archiving/zip/doc/deflate-1.1.doc
- *
- *      Storer, James A.
- *          Data Compression:  Methods and Theory, pp. 49-50.
- *          Computer Science Press, 1988.  ISBN 0-7167-8156-5.
- *
- *      Sedgewick, R.
- *          Algorithms, p290.
- *          Addison-Wesley, 1983. ISBN 0-201-06672-6.
+ *  Each code tree is stored in a compressed form which is itself
+ *  a Huffman encoding of the lengths of all the code strings (in
+ *  ascending order by source values).  The actual code strings are
+ *  reconstructed from the lengths in the inflate process, as described
+ *  in the deflate specification.
  */
 
-/* @(#) $Id$ */
 
 /* #define GEN_TREES_H */
 
