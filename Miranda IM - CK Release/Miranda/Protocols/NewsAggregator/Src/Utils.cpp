@@ -150,7 +150,7 @@ VOID GetNewsData(TCHAR *tszUrl, char** szData, HANDLE hContact, HWND hwndDlg)
 
 	// initialize the netlib request
 	nlhr.cbSize = sizeof(nlhr);
-	nlhr.requestType = REQUEST_POST;
+	nlhr.requestType = REQUEST_GET;
 	nlhr.flags = NLHRF_NODUMP | NLHRF_HTTP11;
 	char *szUrl = mir_t2a(tszUrl);
 	nlhr.szUrl = szUrl;
@@ -627,6 +627,12 @@ TCHAR* CheckFeed(TCHAR* tszURL, HWND hwndDlg)
 				}
 			}
 			xi.destroyNode(hXml);
+		}
+		else
+		{
+			TCHAR mes[MAX_PATH];
+			mir_sntprintf(mes, SIZEOF(mes), TranslateT("%s\nis a not valid feed's address."), tszURL);
+			MessageBox(NULL, mes, TranslateT("New Aggregator"), MB_OK|MB_ICONERROR);
 		}
 	}
 	return NULL;
