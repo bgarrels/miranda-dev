@@ -1,10 +1,12 @@
 /*
-astyle --force-indent=tab=4 --brackets=linux --indent-switches
-		--pad=oper --one-line=keep-blocks  --unpad=paren
+Chat plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Chat module plugin for Miranda IM
+Authors Jörgen Persson
 
-Copyright (C) 2003 Jörgen Persson
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -20,8 +22,17 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-$Id: message.c 10402 2009-07-24 00:35:21Z silvercircle $
-*/
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+
+ * Chat module exports and functions to load/unload the plugin.
+ */
 
 #include "../src/commonheaders.h"
 #include <math.h>

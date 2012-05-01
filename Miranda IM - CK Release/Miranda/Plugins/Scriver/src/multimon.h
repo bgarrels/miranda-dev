@@ -13,7 +13,7 @@
 
 #ifdef __cplusplus
 extern "C" {            /* Assume C declarations for C++ */
-#endif  /* __cplusplus */
+#endif
 
 //
 // if we are building on Win95/NT4 headers we need to declare this stuff ourselves

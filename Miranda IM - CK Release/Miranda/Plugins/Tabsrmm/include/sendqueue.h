@@ -1,10 +1,15 @@
-/*
+#ifndef __SENDQUEUE_H
+#define __SENDQUEUE_H
 
+/*
+Tabsrmm plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2009 Miranda IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
+
+Author Silvercircle
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -20,12 +25,15 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-$Id: sendqueue.h 12065 2010-06-25 17:30:24Z silvercircle $
+===============================================================================
 
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
-
-#ifndef __SENDQUEUE_H
-#define __SENDQUEUE_H
 
 #define TIMERID_MSGSEND      100
 #define TIMERID_TYPE         3
