@@ -103,7 +103,7 @@
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">true</GenerateManifest>
     <ReferencePath Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">$(VCInstallDir)atlmfc\lib\amd64;$(VCInstallDir)lib\amd64</ReferencePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">$(VCInstallDir)lib\amd64;$(VCInstallDir)atlmfc\lib\amd64;$(WindowsSdkDir)lib\x64;</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">$(VCInstallDir)lib\amd64;$(VCInstallDir)atlmfc\lib\amd64;$(WindowsSDK_LibraryPath_x64);</LibraryPath>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">true</GenerateManifest>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">true</LinkIncremental>
@@ -403,14 +403,12 @@
     <ClInclude Include="src\icq_direct.h" />
     <ClInclude Include="src\icq_fieldnames.h" />
     <ClInclude Include="src\icq_http.h" />
-    <ClInclude Include="src\icq_infoupdate.h" />
     <ClInclude Include="src\icq_opts.h" />
     <ClInclude Include="src\icq_packet.h" />
     <ClInclude Include="src\icq_proto.h" />
     <ClInclude Include="src\icq_rates.h" />
     <ClInclude Include="src\icq_server.h" />
     <ClInclude Include="src\icq_servlist.h" />
-    <ClInclude Include="src\icq_uploadui.h" />
     <ClInclude Include="src\icq_xtraz.h" />
     <ClInclude Include="src\init.h" />
     <ClInclude Include="src\log.h" />
@@ -418,14 +416,10 @@
     <ClInclude Include="src\stdpackets.h" />
     <ClInclude Include="src\tlv.h" />
     <ClInclude Include="src\utilities.h" />
-    <ClInclude Include="UI\askauthentication.h" />
-    <ClInclude Include="UI\loginpassword.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="UI\userinfotab.h" />
     <ClInclude Include="changeinfo\changeinfo.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\icq-license.txt" />
     <None Include="icos\icq.ico" />
     <None Include="docs\icq-readme.txt" />
     <None Include="docs\IcqOscarJ-translation.txt" />

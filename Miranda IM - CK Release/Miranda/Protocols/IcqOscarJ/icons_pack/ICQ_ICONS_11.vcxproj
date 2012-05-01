@@ -234,7 +234,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ResourceCompile Include="ICONS.rc" />
+    <ResourceCompile Include="ICQ_ICONS.rc" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\icos\xstatus01.ico" />

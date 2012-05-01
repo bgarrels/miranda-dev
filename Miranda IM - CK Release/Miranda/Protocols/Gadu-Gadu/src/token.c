@@ -45,7 +45,6 @@ $Id$		   : $Id$:
 
 //////////////////////
 // User Util Dlg Page : Data
-
 typedef struct _GGTOKENDLGDATA
 {
 	int width;
