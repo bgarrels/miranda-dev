@@ -4,15 +4,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Icons", "Icons", "{F91F1F43
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{A9745BFF-148D-4FDF-A4E1-507E579BFC9F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protokolle", "Protokolle", "{FE86A267-423D-47FE-96D4-71CEAACE27BB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protocols", "Protocols", "{FE86A267-423D-47FE-96D4-71CEAACE27BB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Datenbanken", "Datenbanken", "{35B395AF-9BAF-4EC0-BFE5-730044E3517C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Databases", "Databases", "{35B395AF-9BAF-4EC0-BFE5-730044E3517C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xstatus_ICQ", "..\Protocols\IcqOscarJ\icons_pack\ICONS.vcxproj", "{7BA5ABA9-D00C-9977-329C-0B9277D7CFC8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kontaktlisten", "Kontaktlisten", "{16EEBE71-157C-42FE-93B0-7271BCCD489A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contact lists", "Contact lists", "{16EEBE71-157C-42FE-93B0-7271BCCD489A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nachrichtenfenster", "Nachrichtenfenster", "{6BF594C8-8D85-4525-B8E6-06C66DB5BF16}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Message window", "Message window", "{6BF594C8-8D85-4525-B8E6-06C66DB5BF16}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClientIcons_AIM", "..\Plugins\Fingerprint Mod+\iconpacks\ClientIcons_AIM.vcxproj", "{2D1D3D7C-F86B-4189-8D57-96575D441182}"
 EndProject
