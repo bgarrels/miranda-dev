@@ -1,7 +1,17 @@
-//{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
-// Used by db_autobackups.rc
-//
+/*
+{{NO_DEPENDENCIES}}
+Microsoft Visual C++ generated include file.
+Used by db_autobackups.rc
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
+
 #define IDD_OPTIONS                     101
 #define IDI_ICON1                       270
 #define IDD_COPYPROGRESS                271

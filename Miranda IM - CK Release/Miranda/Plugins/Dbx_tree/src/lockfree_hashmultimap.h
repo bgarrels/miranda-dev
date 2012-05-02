@@ -5,7 +5,7 @@
 lockfree hash-multi_map based on Ori Shalev and Nir Shavit
 
 implementation
-Copyright 2009-2010 Michael "Protogenes" Kunz
+Copyright 2009-2012 Michael "Protogenes" Kunz
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -21,6 +21,14 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
 
 #pragma once

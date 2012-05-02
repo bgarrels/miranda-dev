@@ -349,7 +349,7 @@ int CreateGroup(BYTE type, const char* name, HANDLE hContact)
 		return 0;
 
 	cbName = _tcslen(tmp);
-	tszGrpName = _alloca(( cbName+2 )*sizeof( TCHAR ));
+	tszGrpName = _malloca(( cbName+2 )*sizeof( TCHAR ));
 	tszGrpName[0] = 1 | GROUPF_EXPANDED;
 	_tcscpy( tszGrpName+1, tmp );
 	mir_free( tmp );
