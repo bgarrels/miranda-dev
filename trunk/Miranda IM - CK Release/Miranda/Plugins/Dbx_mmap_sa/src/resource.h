@@ -1,7 +1,18 @@
-//{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
-// Used by db3x_mmap.rc
-//
+/*
+{{NO_DEPENDENCIES}}
+Microsoft Visual C++ generated include file.
+Used by db3x_mmap.rc
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
+
 #define IDC_NOTOALL                     3
 #define IDREMOVE                        3
 #define IDD_OPTIONS                     101

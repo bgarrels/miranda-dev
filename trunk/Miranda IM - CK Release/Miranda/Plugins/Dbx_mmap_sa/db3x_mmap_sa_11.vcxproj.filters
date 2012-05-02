@@ -13,6 +13,9 @@
       <UniqueIdentifier>{5244a2e9-901b-4bc1-9429-a0721a2f1950}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{0571dae1-c44c-4b44-a974-dc6daea7863a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\commonheaders.c">
@@ -93,5 +96,10 @@
     <None Include="icos\backup.ico">
       <Filter>Resource Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="dbtool\docs\langpack_dbtool.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -1,3 +1,14 @@
+/*
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
+
 #ifndef _HEADERS_H
 #define _HEADERS_H
 

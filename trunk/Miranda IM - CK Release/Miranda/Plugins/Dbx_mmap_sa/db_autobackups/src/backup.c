@@ -1,8 +1,16 @@
+/*
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
+
 #include "headers.h"
 #include <commctrl.h>
-
-//debug reasons
-//#pragma warning( disable: 6386 )
 
 TCHAR dbname[MAX_PATH];
 

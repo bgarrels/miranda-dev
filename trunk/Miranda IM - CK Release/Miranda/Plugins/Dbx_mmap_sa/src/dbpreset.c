@@ -1,8 +1,10 @@
 /*
+Miranda Memory-Mapped Secured DataBase
+(C) Artem Shpynov aka FYR, Igonin Vitaliy aka chaos.persei, Victor Pavlychko aka nullbie, 2007 - 2008
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2003 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -19,9 +21,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
-// Miranda Memory-Mapped Secured DataBase
-// (C) Artem Shpynov aka FYR, Igonin Vitaliy aka chaos.persei, Victor Pavlychko aka nullbie, 2007 - 2008
 
 #include "commonheaders.h"
 

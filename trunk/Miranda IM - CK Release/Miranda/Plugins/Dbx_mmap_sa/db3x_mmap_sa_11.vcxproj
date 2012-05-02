@@ -385,6 +385,9 @@ mkdir Cryptors</Command>
     <None Include="icos\pass.ico" />
     <None Include="icos\restart.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="dbtool\docs\langpack_dbtool.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
