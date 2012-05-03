@@ -5,10 +5,6 @@
 Zlib module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Author	(C) 1995-2012 Jean-loup Gailly
-		(C) 2004, 2005, 2010, 2011, 2012 Mark Adler
-		(C) 1995-2012 Jean-loup Gailly
-
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -36,10 +32,7 @@ Last change by : $Author:
 $Id$		   : $Id$:
 
 ===============================================================================
-
- *  Internal interface and configuration of the compression library
- * Copyright (C) 1995-2012 Jean-loup Gailly.
- */
+*/
 
 /* WARNING: this file should *not* be used by applications. It is
    part of the implementation of the compression library and is

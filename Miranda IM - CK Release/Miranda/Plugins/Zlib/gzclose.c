@@ -2,8 +2,6 @@
 Zlib module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Author (C) 1995-2005 Jean-loup Gailly
-
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -32,8 +30,8 @@ $Id$		   : $Id$:
 
 ===============================================================================
 
- * zlib gzclose() function
- */
+* zlib gzclose() function
+*/
 
 #include "gzguts.h"
 

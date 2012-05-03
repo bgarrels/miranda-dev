@@ -2,9 +2,6 @@
 Zlib module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Author	(C) 1995-2012 Jean-loup Gailly
-		(C) 2004, 2005, 2010, 2011, 2012 Mark Adler
-
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -43,7 +40,7 @@ $Id$		   : $Id$:
 #  endif
 #endif
 
-#if ((__GNUC__-0) * 10 + __GNUC_MINOR__-0 >= 33) && !defined(NO_VIZ)
+#ifdef HAVE_HIDDEN
 #  define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
 #else
 #  define ZLIB_INTERNAL
@@ -58,7 +55,11 @@ $Id$		   : $Id$:
 #endif
 #include <fcntl.h>
 
-#ifdef __TURBOC__
+#ifdef _WIN32
+#  include <stddef.h>
+#endif
+
+#if defined(__TURBOC__) || defined(_MSC_VER) || defined(_WIN32)
 #  include <io.h>
 #endif
 
@@ -97,7 +98,6 @@ $Id$		   : $Id$:
 /* In Win32, vsnprintf is available as the "non-ANSI" _vsnprintf. */
 #    if !defined(vsnprintf) && !defined(NO_vsnprintf)
 #      if !defined(_MSC_VER) || ( defined(_MSC_VER) && _MSC_VER < 1500 )
-#         include <io.h>
 #         define vsnprintf _vsnprintf
 #      endif
 #    endif
@@ -132,7 +132,7 @@ $Id$		   : $Id$:
 #  include <windows.h>
 #  define zstrerror() gz_strwinerror((DWORD)GetLastError())
 #else
-#  ifdef STDC
+#  ifndef NO_STRERROR
 #    include <errno.h>
 #    define zstrerror() strerror(errno)
 #  else

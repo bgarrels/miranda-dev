@@ -2,9 +2,6 @@
 Zlib module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Authors	(C) 1995-2005 Jean-loup Gailly
-		(C) 1995-2008, 2010 Mark Adler
-
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -33,14 +30,14 @@ $Id$		   : $Id$:
 
 ===============================================================================
 
- * Decompress a memory buffer
- */
+* decompress a memory buffer
+*/
 
 #define ZLIB_INTERNAL
 #include "zlib.h"
 
 /* ===========================================================================
-     Decompresses the source buffer into the destination buffer.  sourceLen is
+   Decompresses the source buffer into the destination buffer.  sourceLen is
    the byte length of the source buffer. Upon entry, destLen is the total
    size of the destination buffer, which must be large enough to hold the
    entire uncompressed data. (The size of the uncompressed data must have

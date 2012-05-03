@@ -2,8 +2,6 @@
 Zlib module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Author (C) 1995-2005 Jean-loup Gailly
-
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -32,8 +30,8 @@ $Id$		   : $Id$:
 
 ===============================================================================
 
- * zlib functions for writing gzip files
- */
+* zlib functions for writing gzip files
+*/
 
 #include "gzguts.h"
 
@@ -113,7 +111,7 @@ local int gz_comp(state, flush)
 
     /* write directly if requested */
     if (state->direct) {
-        got = _write(state->fd, strm->next_in, strm->avail_in);
+        got = write(state->fd, strm->next_in, strm->avail_in);
         if (got < 0 || (unsigned)got != strm->avail_in) {
             gz_error(state, Z_ERRNO, zstrerror());
             return -1;
@@ -130,7 +128,7 @@ local int gz_comp(state, flush)
         if (strm->avail_out == 0 || (flush != Z_NO_FLUSH &&
             (flush != Z_FINISH || ret == Z_STREAM_END))) {
             have = (unsigned)(strm->next_out - state->x.next);
-            if (have && ((got = _write(state->fd, state->x.next, have)) < 0 ||
+            if (have && ((got = write(state->fd, state->x.next, have)) < 0 ||
                          (unsigned)got != have)) {
                 gz_error(state, Z_ERRNO, zstrerror());
                 return -1;
@@ -370,19 +368,19 @@ int ZEXPORTVA gzprintf (gzFile file, const char *format, ...)
     va_start(va, format);
 #ifdef NO_vsnprintf
 #  ifdef HAS_vsprintf_void
-    (void)vsprintf(state->in, format, va);
+    (void)vsprintf((char *)(state->in), format, va);
     va_end(va);
     for (len = 0; len < size; len++)
         if (state->in[len] == 0) break;
 #  else
-    len = vsprintf(state->in, format, va);
+    len = vsprintf((char *)(state->in), format, va);
     va_end(va);
 #  endif
 #else
 #  ifdef HAS_vsnprintf_void
-    (void)vsnprintf(state->in, size, format, va);
+    (void)vsnprintf((char *)(state->in), size, format, va);
     va_end(va);
-    len = strlen(state->in);
+    len = strlen((char *)(state->in));
 #  else
     len = vsnprintf((char *)(state->in), size, format, va);
     va_end(va);
@@ -448,22 +446,23 @@ int ZEXPORTVA gzprintf (file, format, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10,
     state->in[size - 1] = 0;
 #ifdef NO_snprintf
 #  ifdef HAS_sprintf_void
-    sprintf(state->in, format, a1, a2, a3, a4, a5, a6, a7, a8,
+    sprintf((char *)(state->in), format, a1, a2, a3, a4, a5, a6, a7, a8,
             a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20);
     for (len = 0; len < size; len++)
         if (state->in[len] == 0) break;
 #  else
-    len = sprintf(state->in, format, a1, a2, a3, a4, a5, a6, a7, a8,
-                a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20);
+    len = sprintf((char *)(state->in), format, a1, a2, a3, a4, a5, a6, a7, a8,
+                  a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20);
 #  endif
 #else
 #  ifdef HAS_snprintf_void
-    snprintf(state->in, size, format, a1, a2, a3, a4, a5, a6, a7, a8,
+    snprintf((char *)(state->in), size, format, a1, a2, a3, a4, a5, a6, a7, a8,
              a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20);
-    len = strlen(state->in);
+    len = strlen((char *)(state->in));
 #  else
-    len = snprintf(state->in, size, format, a1, a2, a3, a4, a5, a6, a7, a8,
-                 a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20);
+    len = snprintf((char *)(state->in), size, format, a1, a2, a3, a4, a5, a6,
+                   a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18,
+                   a19, a20);
 #  endif
 #endif
 
@@ -578,48 +577,19 @@ int ZEXPORT gzclose_w(file)
     }
 
     /* flush, free memory, and close file */
-    if (gz_comp(state, Z_FINISH) == -1)
-        ret = state->err;
-    if (!state->direct) {
-        (void)deflateEnd(&(state->strm));
-        free(state->out);
+    if (state->size) {
+        if (gz_comp(state, Z_FINISH) == -1)
+            ret = state->err;
+        if (!state->direct) {
+            (void)deflateEnd(&(state->strm));
+            free(state->out);
+        }
+        free(state->in);
     }
-    free(state->in);
     gz_error(state, Z_OK, NULL);
     free(state->path);
-    if (_close(state->fd) == -1)
+    if (close(state->fd) == -1)
         ret = Z_ERRNO;
     free(state);
     return ret;
-}
-
-/* used by zlibVersion() to get the vsnprintf story from the horse's mouth */
-unsigned long ZEXPORT gzflags()
-{
-    unsigned long flags = 0;
-#if defined(STDC) || defined(Z_HAVE_STDARG_H)
-#  ifdef NO_vsnprintf
-    flags += 1L << 25;
-#    ifdef HAS_vsprintf_void
-    flags += 1L << 26;
-#    endif
-#  else
-#    ifdef HAS_vsnprintf_void
-    flags += 1L << 26;
-#    endif
-#  endif
-#else
-    flags += 1L << 24;
-#  ifdef NO_snprintf
-    flags += 1L << 25;
-#    ifdef HAS_sprintf_void
-    flags += 1L << 26;
-#    endif
-#  else
-#    ifdef HAS_snprintf_void
-    flags += 1L << 26;
-#    endif
-#  endif
-#endif
-    return flags;
 }

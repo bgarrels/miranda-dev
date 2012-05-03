@@ -2,9 +2,6 @@
 Zlib module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Author	(C) 1995-2012 Jean-loup Gailly
-		(C) 2004, 2005, 2010, 2011, 2012 Mark Adler
-
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -33,8 +30,8 @@ $Id$		   : $Id$:
 
 ===============================================================================
 
- * inflate.h -- internal inflate state definition
- */
+* crc32.h -- tables for rapid CRC calculation
+*/
 
 /* WARNING: this file should *not* be used by applications. It is
    part of the implementation of the compression library and is
@@ -45,6 +42,7 @@ $Id$		   : $Id$:
    trailer decoding by inflate().  NO_GZIP would be used to avoid linking in
    the crc code when it is not needed.  For shared libraries, gzip decoding
    should be left enabled. */
+
 #ifndef NO_GZIP
 #  define GUNZIP
 #endif
