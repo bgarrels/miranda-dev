@@ -1,8 +1,8 @@
 /*
-
+db3x_mmap database plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2003 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -19,6 +19,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
 
 #include "commonheaders.h"
@@ -37,7 +46,7 @@ static PLUGININFOEX pluginInfo = {
 	"Provides Miranda database support: global settings, contacts, history, settings per contact.",
 	"Miranda-IM project",
 	"bio@msx.ru; ghazan@miranda-im.org",
-	"Copyright 2000-2011 Miranda IM project",
+	"Copyright 2000-2012 Miranda IM project",
 	"",
 	UNICODE_AWARE,
 	DEFMOD_DB,
@@ -177,7 +186,7 @@ __declspec(dllexport) DATABASELINK* DatabasePluginInfo(void * reserved)
 __declspec(dllexport) PLUGININFOEX * MirandaPluginInfoEx(DWORD mirandaVersion)
 {
 	if ( mirandaVersion < MIRANDA_VERSION_CORE ) {
-		MessageBox( NULL, _T("The db3x_mmap plugin cannot be loaded. It requires Miranda IM 0.7.0.0 or later."), _T("db3x_mmap Plugin"), MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST );
+		MessageBox( NULL, _T("The db3x_mmap plugin cannot be loaded. It requires Miranda IM 0.10.0.0 or later."), _T("db3x_mmap Plugin"), MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST );
 		return NULL;
 	}
 	return &pluginInfo;
