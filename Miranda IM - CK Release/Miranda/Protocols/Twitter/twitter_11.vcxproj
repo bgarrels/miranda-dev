@@ -272,10 +272,11 @@
     <ClInclude Include="src\version.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\changelog.html" />
-    <None Include="docs\LICENSE.txt" />
     <None Include="docs\README.txt" />
     <None Include="icons\twitter.ico" />
+    <None Include="src\betaVersion.html" />
+    <None Include="src\changelog.html" />
+    <None Include="src\version.html" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\twitter.rc" />

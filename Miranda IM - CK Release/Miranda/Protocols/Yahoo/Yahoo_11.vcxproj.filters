@@ -138,9 +138,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Docs\License.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="Docs\ReadMe.txt">
       <Filter>docs</Filter>
     </None>

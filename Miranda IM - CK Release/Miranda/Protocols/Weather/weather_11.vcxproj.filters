@@ -115,9 +115,6 @@
     <None Include="res\update2.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="docs\license.txt">
-      <Filter>Docs</Filter>
-    </None>
     <None Include="docs\weather-history.txt">
       <Filter>Docs</Filter>
     </None>
