@@ -22,6 +22,9 @@
     <Filter Include="Resource Files\Icons">
       <UniqueIdentifier>{7dbf611a-769b-4495-9d7a-b7008268c0dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Docs\Skin Readme">
+      <UniqueIdentifier>{2c6ef844-bbc5-429e-b512-ae57aa8103b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\buttonsbar.cpp">
@@ -267,16 +270,10 @@
     <None Include="docs\changelog.txt">
       <Filter>Docs</Filter>
     </None>
-    <None Include="docs\INSTALL">
-      <Filter>Docs</Filter>
-    </None>
     <None Include="docs\Popups.txt">
       <Filter>Docs</Filter>
     </None>
     <None Include="docs\readme.txt">
-      <Filter>Docs</Filter>
-    </None>
-    <None Include="skin\tabsrmm.tsk">
       <Filter>Docs</Filter>
     </None>
     <None Include="..\..\src\res\cursor_drag_copy.CUR">
@@ -409,9 +406,15 @@
     <None Include="docs\changelog.OLD">
       <Filter>Docs</Filter>
     </None>
+    <None Include="skin\tabsrmm.tsk">
+      <Filter>Docs\Skin Readme</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="docs\contributors.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\INSTALL.txt">
       <Filter>Docs</Filter>
     </Text>
   </ItemGroup>

@@ -7,12 +7,6 @@
 #define TVS_TRACKSELECT         0x0200
 #define TVS_FULLROWSELECT       0x1000
 
-#ifdef __GNUWIN32__
-	#define TVS_NONEVENHEIGHT 		16384
-	#define TVS_CHECKBOXES			256
-	#define IDC_STATIC				-1
-#endif
-
 #include "msgwindow.rc"
 #include "resource.rc"
 #include "chat/chat.rc"
