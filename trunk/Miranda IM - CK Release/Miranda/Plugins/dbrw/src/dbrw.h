@@ -1,7 +1,5 @@
 /*
-dbRW
-
-Copyright (c) 2005-2009 Robert Rainwater
+dbRW - Copyright (c) 2005-2012 Robert Rainwater
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -16,7 +14,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
+
 #ifndef DBRW_H
 #define DBRW_H
 
@@ -31,7 +38,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define DBRW_EVENTS_FLUSHCACHE   1000*60
 #define DBRW_COMPACT_DAYS        7
 
-#define MIRANDA_VER 0x0800
+#define MIRANDA_VER 0x0A00
 
 #include <m_stdhdr.h>
 
