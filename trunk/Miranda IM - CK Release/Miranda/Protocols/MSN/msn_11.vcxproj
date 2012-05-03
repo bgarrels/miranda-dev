@@ -372,7 +372,6 @@
     <ClCompile Include="src\msn_ws.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Docs\gpl.txt" />
     <None Include="Docs\history-msn.txt" />
     <None Include="Docs\readme-msn.txt" />
     <None Include="Docs\todo-msn.txt" />

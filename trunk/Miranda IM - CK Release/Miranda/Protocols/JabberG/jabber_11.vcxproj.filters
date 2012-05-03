@@ -440,14 +440,5 @@
     <Text Include="docs\translation_jabber.txt">
       <Filter>Docs</Filter>
     </Text>
-    <Text Include="docs\copyright.txt">
-      <Filter>Docs</Filter>
-    </Text>
-    <Text Include="docs\license.txt">
-      <Filter>Docs</Filter>
-    </Text>
-    <Text Include="docs\copying.txt">
-      <Filter>Docs</Filter>
-    </Text>
   </ItemGroup>
 </Project>
