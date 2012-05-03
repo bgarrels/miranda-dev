@@ -13,6 +13,9 @@
       <UniqueIdentifier>{fbaceae7-3e4a-4853-96f3-eec77981b2c9}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{7eb2f7a2-0b21-4126-8232-53205f4264c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\commonheaders.c">
@@ -53,10 +56,21 @@
     <ClInclude Include="src\database.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\db3x-translation.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\db3x-readme.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
