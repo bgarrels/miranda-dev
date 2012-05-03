@@ -115,13 +115,16 @@
     <None Include="icons\twitter.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="docs\LICENSE.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\README.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="docs\changelog.html">
+    <None Include="src\version.html">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="src\betaVersion.html">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="src\changelog.html">
       <Filter>docs</Filter>
     </None>
   </ItemGroup>

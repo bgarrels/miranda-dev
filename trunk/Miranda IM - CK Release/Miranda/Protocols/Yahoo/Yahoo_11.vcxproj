@@ -433,7 +433,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Docs\features.txt" />
-    <None Include="Docs\License.txt" />
     <None Include="Docs\ReadMe.txt" />
     <None Include="Docs\translation.txt" />
   </ItemGroup>

@@ -318,7 +318,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\langpack_defweather.txt" />
-    <None Include="docs\license.txt" />
     <None Include="docs\sample_ini.ini" />
     <None Include="docs\weather-history.txt" />
     <None Include="docs\weather-readme.html" />
