@@ -31,9 +31,6 @@ Last change by : $Author:
 $Id$		   : $Id$:
 
 ===============================================================================
-
-* Base64Coder.cpp: implementation of the Base64Coder class.
-* http://support.microsoft.com/kb/191239
 */
 
 #include "proto.h"

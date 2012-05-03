@@ -35,7 +35,7 @@ $Id$		   : $Id$:
 ===============================================================================
 
 * This file contain the source related to search and add a weather station
-to the contact list.  Contain code for both name and ID search.
+to the contact list. Contain code for both name and ID search.
 */
 
 #include "weather.h"
