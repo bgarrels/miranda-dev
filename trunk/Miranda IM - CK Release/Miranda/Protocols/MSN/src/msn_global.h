@@ -1,8 +1,15 @@
 /*
-Plugin of Miranda IM for communicating with users of the MSN Messenger protocol.
-Copyright (c) 2006-2012 Boris Krasnovskiy.
-Copyright (c) 2003-2005 George Hazan.
-Copyright (c) 2002-2003 Richard Hughes (original version).
+MSN Protocol plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors 
+			Copyright (c) 2006-2012 Boris Krasnovskiy.
+			Copyright (c) 2003-2005 George Hazan.
+			Copyright (c) 2002-2003 Richard Hughes (original version).
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -15,10 +22,21 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
-// this plugin is for Miranda 0.9 or later
+// this definition are for Miranda 0.9 or later
 #define MIRANDA_VER 0x0A00
 
 #include <m_stdhdr.h>
