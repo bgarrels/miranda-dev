@@ -7,4 +7,4 @@ want to work on it, but that's it; I make no promises that it even works
 
 To compile this code, you'll want to check out the Miranda IM header files and
 install them into <source>\miranda:
-<https://miranda.svn.sourceforge.net/svnroot/miranda/trunk/miranda/include>
+<http://miranda.googlecode.com/svn/trunk/miranda/include>
