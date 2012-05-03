@@ -368,9 +368,11 @@
     <ResourceCompile Include="zlib.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\ChangeLog" />
-    <None Include="docs\README" />
     <None Include="zlib.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\ChangeLog.txt" />
+    <Text Include="docs\README.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

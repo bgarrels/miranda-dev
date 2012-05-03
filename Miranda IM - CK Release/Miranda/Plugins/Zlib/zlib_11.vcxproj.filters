@@ -106,11 +106,13 @@
     <None Include="zlib.def">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="docs\README">
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\ChangeLog.txt">
       <Filter>docs</Filter>
-    </None>
-    <None Include="docs\ChangeLog">
+    </Text>
+    <Text Include="docs\README.txt">
       <Filter>docs</Filter>
-    </None>
+    </Text>
   </ItemGroup>
 </Project>
