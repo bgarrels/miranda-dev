@@ -57,19 +57,7 @@ d) Submit a bugreport.
 4. Compatibility issues
 -----------------------
 Miranda IM supports all released versions of Windows from
-Windows 95 to Windows 7.
-
-a) Windows 95
-
- - If you have trouble running Miranda IM on a Windows 95, make
-   sure that you have Winsock and DUN upgrades installed.
- - Menu icons are not supported in Windows 95.
- - Window transparency is only supported on Windows 2000 and later.
-
-b) Plugins
- - Third party plugins may have different requirements than
-   Miranda IM itself. The Miranda IM developers cannot guarantee
-   that all plugins will work on your system.
+Windows XP to Windows 7.
 
 
 5. Contact
@@ -92,7 +80,7 @@ will increase.
 
 7. License and Copyright
 ------------------------
-Source code is available at: http://www.miranda-im.org/download/
+Source code is available at: https://code.google.com/p/miranda/
 
 Miranda IM is released under the terms of the GNU General Public License. See
 "License.txt" for more details.
