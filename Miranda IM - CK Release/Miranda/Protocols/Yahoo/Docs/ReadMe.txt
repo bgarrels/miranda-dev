@@ -1,5 +1,5 @@
 =================================================================================
-Yahoo 0.3.0.9 plugin for Miranda IM
+Yahoo plugin for Miranda IM
 
 Copyright (C) 2003-6 Gennady Feldman (aka Gena01)
 Copyright (C) 2003-4 Laurent Marechal (aka Peorth)

@@ -2588,7 +2588,7 @@ GET /config/pwtoken_login?src=ymsgr&ts=1195577376&token=token HTTP/1.1
 	
 		while ( (*c) != '\0' && (*c) != '\r' && (*c) != '\n') c++;
 		
-		crumb = (char *) _alloca(c - t + 1);
+		crumb = (char *) _malloca(c - t + 1);
 		
 		memcpy(crumb, t, c - t);
 		crumb[c - t] = '\0';
