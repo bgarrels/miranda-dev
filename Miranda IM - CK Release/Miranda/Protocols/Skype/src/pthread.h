@@ -1,20 +1,43 @@
-/*
- * $Id$
- *
- * Skype Miranda Plugin 
- *
- * Authors: Gennady Feldman (aka Gena01) 
- *          Laurent Marechal (aka Peorth)
- *
- * Code borrowed for Skype plugin. Fixed to compile on Mingw by G.Feldman
- * Original Copyright (c) 2003 Robert Rainwater
- *
- * This code is under GPL and is based on AIM, MSN and Miranda source code.
- * I want to thank Robert Rainwater and George Hazan for their code and support
- * and for answering some of my questions during development of this plugin.
- */
 #ifndef PTHREAD_H
 #define PTHREAD_H
+
+/*
+Skype protocol for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors 
+			Copyright © 2008-2012 leecher, tweety, jls17,
+						Laurent Marechal (aka Peorth)
+						Gennady Feldman (aka Gena01) 
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
 
 unsigned long pthread_create(void (*threadcode) (void *), void *arg);
 typedef CRITICAL_SECTION pthread_mutex_t;

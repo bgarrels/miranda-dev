@@ -1,6 +1,42 @@
 /*
- * SkypeAPI - All more or less important functions that deal with Skype
- */
+Skype protocol for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors 
+			Copyright © 2008-2012 leecher, tweety, jls17,
+						Laurent Marechal (aka Peorth)
+						Gennady Feldman (aka Gena01) 
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+* Main Skypeapi
+*/
 
 #include "skype.h"
 #include "skypeapi.h"
@@ -500,7 +536,7 @@ static char *__SkypeGet(char *szID, char *szWhat, char *szWho, char *szProperty)
   time_t st = 0;
 
   st = *szID?0:SkypeTime(NULL);
-  str=(char *)_alloca((len=strlen(szWhat)+strlen(szWho)+strlen(szProperty)+(*szWho?2:1)+(len_id=strlen(szID)))+5);
+  str=(char *)_malloca((len=strlen(szWhat)+strlen(szWho)+strlen(szProperty)+(*szWho?2:1)+(len_id=strlen(szID)))+5);
   sprintf(str, "%sGET %s%s%s %s", szID, szWhat, *szWho?" ":"", szWho, szProperty);
   if (__sendMsg(str)) return NULL;
   if (*szProperty) len++;
