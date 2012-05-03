@@ -31,9 +31,6 @@ Last change by : $Author:
 $Id$		   : $Id$:
 
 ===============================================================================
-
-* Base64Coder.h: interface for the Base64Coder class.
-* http://support.microsoft.com/kb/191239
 */
 
 #pragma once
