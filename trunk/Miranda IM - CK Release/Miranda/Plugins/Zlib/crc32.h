@@ -29,11 +29,9 @@ Last change by : $Author:
 $Id$		   : $Id$:
 
 ===============================================================================
-*/
 
-/* crc32.h -- tables for rapid CRC calculation
- * Generated automatically by crc32.c
- */
+* crc32.h -- tables for rapid CRC calculation
+*/
 
 local const crc_table_t FAR crc_table[TBLS][256] =
 {

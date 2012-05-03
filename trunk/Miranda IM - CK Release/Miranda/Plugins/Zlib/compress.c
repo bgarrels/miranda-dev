@@ -2,8 +2,6 @@
 Zlib module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Author (C) 1995-2005 Jean-loup Gailly
-
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -32,7 +30,12 @@ $Id$		   : $Id$:
 
 ===============================================================================
 
- * Compress.c -- compress a memory buffer
+* Compress a memory buffer
+*/
+
+/* WARNING: this file should *not* be used by applications. It is
+   part of the implementation of the compression library and is
+   subject to change. Applications should only use zlib.h.
  */
 
 #define ZLIB_INTERNAL

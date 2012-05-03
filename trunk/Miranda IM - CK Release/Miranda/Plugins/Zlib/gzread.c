@@ -2,8 +2,6 @@
 Zlib module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Author (C) 1995-2005 Jean-loup Gailly
-
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -32,8 +30,8 @@ $Id$		   : $Id$:
 
 ===============================================================================
 
- * zlib functions for reading gzip files
- */
+* zlib functions for reading gzip files
+*/
 
 #include "gzguts.h"
 
@@ -59,7 +57,7 @@ local int gz_load(state, buf, len, have)
 
     *have = 0;
     do {
-        ret = _read(state->fd, buf + *have, len - *have);
+        ret = read(state->fd, buf + *have, len - *have);
         if (ret <= 0)
             break;
         *have += ret;
@@ -89,8 +87,13 @@ local int gz_avail(state)
     if (state->err != Z_OK && state->err != Z_BUF_ERROR)
         return -1;
     if (state->eof == 0) {
-        if (strm->avail_in)
-            memmove(state->in, strm->next_in, strm->avail_in);
+        if (strm->avail_in) {       /* copy what's there to the start */
+            unsigned char *p = state->in, *q = strm->next_in;
+            unsigned n = strm->avail_in;
+            do {
+                *p++ = *q++;
+            } while (--n);
+        }
         if (gz_load(state, state->in + strm->avail_in,
                     state->size - strm->avail_in, &got) == -1)
             return -1;
@@ -372,7 +375,7 @@ int ZEXPORT gzread(file, buf, len)
             /* get more output, looking for header if required */
             if (gz_fetch(state) == -1)
                 return -1;
-            continue;       /* no progress yet -- go back to memcpy() above */
+            continue;       /* no progress yet -- go back to copy above */
             /* the copy above assures that we will leave with space in the
                output buffer, allowing at least one gzungetc() to succeed */
         }
@@ -405,7 +408,8 @@ int ZEXPORT gzread(file, buf, len)
 }
 
 /* -- see zlib.h -- */
-int ZEXPORT gzgetc_(file)
+#undef gzgetc
+int ZEXPORT gzgetc(file)
     gzFile file;
 {
     int ret;
@@ -434,12 +438,11 @@ int ZEXPORT gzgetc_(file)
     return ret < 1 ? -1 : buf[0];
 }
 
-#undef gzgetc
-int ZEXPORT gzgetc(file)
+int ZEXPORT gzgetc_(file)
 gzFile file;
 {
-    return gzgetc_(file);
-}    
+    return gzgetc(file);
+}
 
 /* -- see zlib.h -- */
 int ZEXPORT gzungetc(c, file)
@@ -610,7 +613,7 @@ int ZEXPORT gzclose_r(file)
     err = state->err == Z_BUF_ERROR ? Z_BUF_ERROR : Z_OK;
     gz_error(state, Z_OK, NULL);
     free(state->path);
-    ret = _close(state->fd);
+    ret = close(state->fd);
     free(state);
     return ret ? Z_ERRNO : err;
 }

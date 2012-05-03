@@ -2,9 +2,6 @@
 Zlib module for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Authors	(C) 1995-2005 Jean-loup Gailly
-		(C) 1995-2008, 2010 Mark Adler
-
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
@@ -33,8 +30,8 @@ $Id$		   : $Id$:
 
 ===============================================================================
 
- * Target dependent utility functions for the compression library
- */
+* target dependent utility functions for the compression library
+*/
 
 #include "zutil.h"
 #ifndef Z_SOLO
