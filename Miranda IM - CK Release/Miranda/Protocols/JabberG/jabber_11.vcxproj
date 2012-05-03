@@ -460,9 +460,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="docs\copying.txt" />
-    <Text Include="docs\copyright.txt" />
-    <Text Include="docs\license.txt" />
     <Text Include="docs\todo_jabber.txt" />
     <Text Include="docs\translation_jabber.txt" />
   </ItemGroup>

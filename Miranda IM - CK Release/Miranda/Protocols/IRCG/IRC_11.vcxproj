@@ -431,7 +431,6 @@
     <None Include="Icons\show.ico" />
     <None Include="Icons\whois.ico" />
     <None Include="Icons\world.ico" />
-    <None Include="Docs\IRC_license.txt" />
     <None Include="Docs\IRC_Readme.txt" />
     <None Include="Docs\IRC_servers.ini" />
     <None Include="Docs\IRC_Translate.txt" />
