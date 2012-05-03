@@ -323,7 +323,6 @@
     <ClInclude Include="src\resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\License.txt" />
     <None Include="docs\Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
