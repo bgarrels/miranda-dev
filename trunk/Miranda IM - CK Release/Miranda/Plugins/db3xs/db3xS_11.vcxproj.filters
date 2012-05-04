@@ -102,9 +102,6 @@
     <None Include="icos\pass.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="docs\license.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\readme.txt">
       <Filter>docs</Filter>
     </None>
