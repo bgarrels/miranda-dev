@@ -1,34 +1,52 @@
 /*
-	BossKey - Hide Miranda IM from your boss :)
-	Copyright (C) 2002-2003 Goblineye Entertainment, (C) 2007-2010 Billy_Bons
+BossKey plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-	This program is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
-	(at your option) any later version.
+Author 
+			Copyright (C) 2002-2012 Sergey V. Gershovich a.k.a. Jazzy$
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "../BossKey.h"
 #include "m_updater.h"
 #include "m_msg_buttonsbar.h"
 
-// multiple instances support:
-// when hotkey is hit, handler notifies all listen windows
-//#pragma data_seg("Shared") // Shared data segment
-// these must be shared, since they're called by the hook (The hook is global and called from the context of each process)
-//HHOOK g_hKeyHook = NULL; // shared
-// this isn't referenced by hook, but should be shared to keep a reference count of multiple instances
-//WORD g_wRefCount = 0; // reference count. when this is 0 on init, the hook is created. when this is 0 on destruction, the hook is destroyed.
+/* Multiple instances support:
+   when hotkey is hit, handler notifies all listen windows
+// #pragma data_seg("Shared") // Shared data segment
+   these must be shared, since they're called by the hook (The hook is global and called from the context of each process)
+   HHOOK g_hKeyHook = NULL; // shared
+   this isn't referenced by hook, but should be shared to keep a reference count of multiple instances
+   WORD g_wRefCount = 0; // reference count. when this is 0 on init, the hook is created. when this is 0 on destruction, the hook is destroyed.
 //#pragma data_seg() // end of shared data segment
+*/
 
 // unique to this DLL, not to be shared 
 HINSTANCE g_hInstance;
@@ -87,8 +105,8 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {
-		if ( mirandaVersion < PLUGIN_MAKE_VERSION(0,8,0,0)) {
-		MessageBox( NULL, _T("The BossKey+ cannot be loaded. It requires Miranda IM 0.8 or later."), _T("BossKey+"), MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST );
+		if ( mirandaVersion < PLUGIN_MAKE_VERSION(0,9,0,0)) {
+		MessageBox( NULL, _T("The BossKey+ cannot be loaded. It requires Miranda IM 0.9 or later."), _T("BossKey+"), MB_OK|MB_ICONWARNING|MB_SETFOREGROUND|MB_TOPMOST );
 		return NULL;
 	}
 	pluginInfo.cbSize = sizeof(PLUGININFOEX);
