@@ -1,9 +1,10 @@
 /*
+Author Pescuma
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2008 Miranda ICQ/IM project, 
-all portions of this codebase are copyrighted to the people 
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -20,9 +21,16 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Created by Pescuma
+===============================================================================
 
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
+
 #include "../hdr/modern_commonheaders.h"
 #include "../hdr/modern_image_array.h"
 #include "../hdr/modern_commonprototypes.h"
@@ -39,7 +47,7 @@ static BOOL ImageArray_Alloc(LP_IMAGE_ARRAY_DATA iad, int size)
 {
 	int size_grow = size;
 
-	if (size_grow > iad->nodes_allocated_size)
+	if (size_grow > iad->nodes_mallocated_size)
 	{
 		size_grow += iad->grow_step - (size_grow % iad->grow_step);
 
@@ -56,7 +64,7 @@ static BOOL ImageArray_Alloc(LP_IMAGE_ARRAY_DATA iad, int size)
 			}
 
 			iad->nodes = tmp;
-			memset( &iad->nodes[iad->nodes_allocated_size], 0, (size_grow - iad->nodes_allocated_size) * sizeof(IMAGE_ARRAY_DATA_NODE) );
+			memset( &iad->nodes[iad->nodes_mallocated_size], 0, (size_grow - iad->nodes_mallocated_size) * sizeof(IMAGE_ARRAY_DATA_NODE) );
 		}
 		else
 		{
@@ -74,12 +82,12 @@ static BOOL ImageArray_Alloc(LP_IMAGE_ARRAY_DATA iad, int size)
 			ZeroMemory(iad->nodes, sizeof(IMAGE_ARRAY_DATA_NODE) * size_grow);
 		}
 
-		iad->nodes_allocated_size = size_grow;
+		iad->nodes_mallocated_size = size_grow;
 	}
-	else if (size < iad->nodes_allocated_size)
+	else if (size < iad->nodes_mallocated_size)
 	{
 		// Give some more space to try to avoid a free
-		if ( (iad->nodes_allocated_size - size) / iad->grow_step >= 2 )
+		if ( (iad->nodes_mallocated_size - size) / iad->grow_step >= 2 )
 		{
 			IMAGE_ARRAY_DATA_NODE *tmp;
 
@@ -124,7 +132,7 @@ void ImageArray_Initialize(LP_IMAGE_ARRAY_DATA iad, BOOL width_based, int grow_s
 	InitializeCriticalSection(&iad->cs);
 
 	iad->nodes = NULL;
-	iad->nodes_allocated_size = 0;
+	iad->nodes_mallocated_size = 0;
 	iad->nodes_size = 0;
 }
 
@@ -147,7 +155,7 @@ HBITMAP ImageArray_Free(LP_IMAGE_ARRAY_DATA iad, BOOL keep_bitmap)
 	{
 		free(iad->nodes);
 		iad->nodes = NULL;
-		iad->nodes_allocated_size = 0;
+		iad->nodes_mallocated_size = 0;
 		iad->nodes_size = 0;
 	}
 
@@ -175,7 +183,7 @@ void ImageArray_Clear(LP_IMAGE_ARRAY_DATA iad)
 	{
 		free(iad->nodes);
 		iad->nodes = NULL;
-		iad->nodes_allocated_size = 0;
+		iad->nodes_mallocated_size = 0;
 		iad->nodes_size = 0;
 	}
 }

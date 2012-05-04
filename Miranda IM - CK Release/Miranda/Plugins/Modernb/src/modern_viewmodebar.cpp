@@ -1,8 +1,10 @@
 /*
+Author Artem Shpynov aka FYR
+
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2003 Miranda ICQ/IM project, 
-all portions of this codebase are copyrighted to the people 
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -19,10 +21,14 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-contact list view modes (CLVM)
+===============================================================================
 
-$Id: viewmodes.c 2998 2006-06-01 07:11:52Z nightwish2004 $
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
 
+===============================================================================
 */
 
 #include "../hdr/modern_commonheaders.h"
@@ -1499,7 +1505,7 @@ void ApplyViewMode(const char *Name, bool onlySelector )
 	{
 		if (!ModernGetSettingString(NULL, CLVM_MODULE, szSetting, &dbv))
 		{
-			name=(char*)_alloca(strlen(dbv.pszVal)+1);
+			name=(char*)_malloca(strlen(dbv.pszVal)+1);
 			strcpy(name,dbv.pszVal);
 			mir_free(dbv.pszVal);
 		}        

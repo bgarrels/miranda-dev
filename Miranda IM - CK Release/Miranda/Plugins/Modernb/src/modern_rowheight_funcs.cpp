@@ -1,9 +1,8 @@
 /*
-
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2008 Miranda ICQ/IM project, 
-all portions of this codebase are copyrighted to the people 
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -20,9 +19,20 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Created by Pescuma, modified by Artem Shpynov
+===============================================================================
 
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
+
+/*
+Created by Anton Senko aka ZORG , tweaked by Artem Shpynov aka FYR
+*/
+
 #include "../hdr/modern_commonheaders.h"
 #include "../hdr/modern_rowheight_funcs.h"
 #include "../hdr/modern_commonprototypes.h"
@@ -38,7 +48,7 @@ int RowHeights_GetRowHeight_worker(struct ClcData *dat, HWND hwnd, struct ClcCon
 *
 */
 
-ROWCELL	* gl_RowTabAccess[TC_ELEMENTSCOUNT+1]={0};	// Массив, через который осуществляется доступ к элементам контакта.
+ROWCELL	* gl_RowTabAccess[TC_ELEMENTSCOUNT+1]={0};
 ROWCELL * gl_RowRoot;
 
 void FreeRowCell ()
@@ -363,7 +373,7 @@ BOOL RowHeights_Initialize(struct	ClcData	*dat)
 {
   dat->max_row_height	=	0;
   dat->row_heights_size	=	0;
-  dat->row_heights_allocated = 0;
+  dat->row_heights_mallocated = 0;
   dat->row_heights = NULL;
 
   return TRUE;
@@ -377,7 +387,7 @@ void RowHeights_Free(struct ClcData *dat)
 	dat->row_heights = NULL;
   }
 
-  dat->row_heights_allocated = 0;
+  dat->row_heights_mallocated = 0;
   dat->row_heights_size = 0;
 }
 
@@ -391,7 +401,7 @@ BOOL RowHeights_Alloc(struct ClcData *dat, int size)
 {
   if (size > dat->row_heights_size)
   {
-	if (size > dat->row_heights_allocated)
+	if (size > dat->row_heights_mallocated)
 	{
 	  int size_grow = size;
 
@@ -409,7 +419,7 @@ BOOL RowHeights_Alloc(struct ClcData *dat, int size)
 		}
 
 		dat->row_heights = tmp;
-		memset(dat->row_heights+(dat->row_heights_allocated),0,sizeof(int) * (size_grow-dat->row_heights_allocated));
+		memset(dat->row_heights+(dat->row_heights_mallocated),0,sizeof(int) * (size_grow-dat->row_heights_mallocated));
 	  }
 	  else
 	  {
@@ -424,7 +434,7 @@ BOOL RowHeights_Alloc(struct ClcData *dat, int size)
 		memset(dat->row_heights,0,sizeof(int) * size_grow);
 	  }
 
-	  dat->row_heights_allocated = size_grow;
+	  dat->row_heights_mallocated = size_grow;
 	}
 
 	dat->row_heights_size = size;
