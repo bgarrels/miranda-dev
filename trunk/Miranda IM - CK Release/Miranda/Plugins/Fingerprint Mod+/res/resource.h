@@ -1,5 +1,5 @@
 /*
-Client icons for the GaduGadu protocol plugin
+Fingerprint+ main icons for
 Miranda IM: the free IM client for Microsoft* Windows*
 
 Copyright 2000-2012 Miranda IM project,
