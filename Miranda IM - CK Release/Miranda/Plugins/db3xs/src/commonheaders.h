@@ -1,9 +1,9 @@
 /*
-
+db3xs (secure) database driver for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2003 Miranda ICQ/IM project, 
-all portions of this codebase are copyrighted to the people 
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -19,11 +19,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
-#define _CRT_SECURE_NO_DEPRECATE
 
-#define _WIN32_WINNT 0x0501
-#define MIRANDA_VER 0x0900
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
+
+#define MIRANDA_VER 0x0A00
+#define _WIN32_WINNT 0x0600
 
 #include "m_stdhdr.h"
 
@@ -48,11 +57,5 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 extern PLUGINLINK *pluginLink;
 
 extern struct LIST_INTERFACE li;
-
-#ifdef __GNUC__
-#define mir_i64(x) (x##LL)
-#else
-#define mir_i64(x) (x##i64)
-#endif
 
 #define NEWSTR_ALLOCA(A) (A==NULL)?NULL:strcpy((char*)alloca(strlen(A)+1),A)

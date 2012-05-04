@@ -309,7 +309,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <BaseAddress>0x5130000</BaseAddress>
       <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
-      <LinkStatus>false</LinkStatus>
+      <LinkStatus>
+      </LinkStatus>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
     </Link>
@@ -358,7 +359,6 @@
     <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\license.txt" />
     <None Include="docs\readme.txt" />
     <None Include="docs\translation.txt" />
     <None Include="icos\backup.ico" />
