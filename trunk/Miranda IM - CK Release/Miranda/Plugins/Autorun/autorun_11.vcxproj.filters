@@ -41,7 +41,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Docs\autorun.txt">
+    <Text Include="Docs\Readme.txt">
       <Filter>Docs</Filter>
     </Text>
   </ItemGroup>
