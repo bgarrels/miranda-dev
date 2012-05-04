@@ -5,14 +5,6 @@
       <UniqueIdentifier>{8368b55f-1388-4b20-86ca-8c24fc258af5}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{02cdafb7-9250-46a4-ace8-b1942b16d12d}</UniqueIdentifier>
-      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{d1455d87-f921-44b0-aea0-b3bc6675c17c}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl</Extensions>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="flags-angelika.rc">
