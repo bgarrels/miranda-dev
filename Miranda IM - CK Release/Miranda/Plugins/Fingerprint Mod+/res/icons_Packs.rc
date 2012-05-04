@@ -85,6 +85,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
    IDI_MIRANDA_YAOL        ICON    "..\\icons\\overlays\\packs\\overlay_packs_Yaol.ico"
    IDI_MIRANDA_ZELEBOBA    ICON    "..\\icons\\overlays\\packs\\overlay_packs_zeleboba.ico"
    IDI_MIRANDA_DEVIL       ICON    "..\\icons\\overlays\\packs\\overlay_packs_666.ico"
+   IDI_MIRANDA_LENINPACK   ICON    "..\\icons\\overlays\\packs\\overlay_packs_LeninPack.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
