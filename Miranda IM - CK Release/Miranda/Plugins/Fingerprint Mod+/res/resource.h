@@ -1,5 +1,5 @@
 /*
-Client icons for the ICQ protocol plugin
+Client icons for the IRC protocol plugin
 Miranda IM: the free IM client for Microsoft* Windows*
 
 Copyright 2000-2012 Miranda IM project,
