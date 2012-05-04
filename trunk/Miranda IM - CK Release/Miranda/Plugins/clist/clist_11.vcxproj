@@ -424,7 +424,6 @@
     <ClInclude Include="src\resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\clist-license.txt" />
     <None Include="docs\clist-readme.txt" />
     <None Include="docs\clist-translation.txt" />
     <None Include="res\blank.ico" />
