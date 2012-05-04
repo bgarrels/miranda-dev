@@ -358,7 +358,6 @@
     <ClInclude Include="INCLUDE\rowheight_funcs.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\README.SOURCE" />
     <None Include="res\accounts.ico" />
     <None Include="res\addgoupp.ico" />
     <None Include="res\arrow-down.ico" />
@@ -394,13 +393,14 @@
     <None Include="res\sounds_on.ico" />
     <None Include="res\tabsrmm_menu.ico" />
     <None Include="res\visible.ico" />
-    <None Include="docs\CHANGELOG" />
-    <None Include="docs\license.txt" />
-    <None Include="docs\README" />
-    <None Include="docs\Skinning.HOWTO" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\CHANGELOG.txt" />
+    <Text Include="docs\README.txt" />
+    <Text Include="docs\Skinning.HOWTO.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

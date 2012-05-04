@@ -283,25 +283,21 @@
     <None Include="res\visible.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="docs\CHANGELOG">
-      <Filter>Docs</Filter>
-    </None>
-    <None Include="docs\license.txt">
-      <Filter>Docs</Filter>
-    </None>
-    <None Include="docs\README">
-      <Filter>Docs</Filter>
-    </None>
-    <None Include="docs\Skinning.HOWTO">
-      <Filter>Docs</Filter>
-    </None>
-    <None Include="docs\README.SOURCE">
-      <Filter>Docs</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\README.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\Skinning.HOWTO.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\CHANGELOG.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
