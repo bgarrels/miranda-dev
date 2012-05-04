@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>toolbar_icons</ProjectName>
+    <ProjectName>Modernb_toolbar_icons</ProjectName>
     <ProjectGuid>{3ED61BF9-9568-4E23-BC89-DEB8460CA487}</ProjectGuid>
     <RootNamespace>ICONS</RootNamespace>
     <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and $(VisualStudioVersion) == ''">$(VCTargetsPath11)</VCTargetsPath>
@@ -40,15 +40,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>Static</UseOfMfc>
-    <CharacterSet>
-    </CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>Static</UseOfMfc>
-    <CharacterSet>
-    </CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -88,15 +86,19 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TargetName>toolbar_icons</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TargetName>toolbar_icons</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TargetName>toolbar_icons</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TargetName>toolbar_icons</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
     <Midl>
@@ -227,20 +229,20 @@
     <ResourceCompile Include="ICONS.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="icos\icon_accmgr.ico" />
-    <None Include="icos\icon_bookmarks.ico" />
-    <None Include="icos\icon_dbeditor.ico" />
-    <None Include="icos\icon_find_user.ico" />
-    <None Include="icos\icon_groups_off.ico" />
-    <None Include="icos\icon_groups_on.ico" />
-    <None Include="icos\icon_hideoffline.ico" />
-    <None Include="icos\icon_mainmenu.ico" />
-    <None Include="icos\icon_minimize.ico" />
-    <None Include="icos\icon_options.ico" />
-    <None Include="icos\icon_showoffline.ico" />
-    <None Include="icos\icon_sounds_off.ico" />
-    <None Include="icos\icon_sounds_on.ico" />
-    <None Include="icos\icon_statusmenu.ico" />
+    <Image Include="icos\icon_accmgr.ico" />
+    <Image Include="icos\icon_bookmarks.ico" />
+    <Image Include="icos\icon_dbeditor.ico" />
+    <Image Include="icos\icon_find_user.ico" />
+    <Image Include="icos\icon_groups_off.ico" />
+    <Image Include="icos\icon_groups_on.ico" />
+    <Image Include="icos\icon_hideoffline.ico" />
+    <Image Include="icos\icon_mainmenu.ico" />
+    <Image Include="icos\icon_minimize.ico" />
+    <Image Include="icos\icon_options.ico" />
+    <Image Include="icos\icon_showoffline.ico" />
+    <Image Include="icos\icon_sounds_off.ico" />
+    <Image Include="icos\icon_sounds_on.ico" />
+    <Image Include="icos\icon_statusmenu.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
