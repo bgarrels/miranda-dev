@@ -45,7 +45,7 @@ PLUGININFOEX pluginInfo = {
 		"Extra Icons Service.",
 		"Ricardo Pescuma Domenecci",
 		"",
-		"© 2009 Ricardo Pescuma Domenecci",
+		"© 2009-2012 Ricardo Pescuma Domenecci",
 		"http://pescuma.org/miranda/extraicons",
 		0,
 		0, //doesn't replace anything built-in
