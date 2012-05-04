@@ -76,9 +76,6 @@
     <None Include="Icons\icon1.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="docs\fsm.sdr">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\fsm.jpg">
       <Filter>docs</Filter>
     </None>
