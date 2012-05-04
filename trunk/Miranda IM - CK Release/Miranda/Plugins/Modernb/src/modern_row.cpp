@@ -1,8 +1,7 @@
 /*
-
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2008 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -20,27 +19,21 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Created by Anton Senko aka ZORG , tweaked by Artem Shpynov aka FYR
+===============================================================================
 
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
+
+/*
+Created by Anton Senko aka ZORG , tweaked by Artem Shpynov aka FYR
 */
 
 #include "../hdr/modern_commonheaders.h"
-
-/*
-#include "m_stdhdr.h"
-
-#include <windows.h>
-#include <commctrl.h>
-#include <stdio.h>
-#include <time.h>
-#include <stddef.h>
-#include <process.h>
-#include <io.h>
-#include <string.h>
-#include <direct.h>
-#include "resource.h"
-#include "hdr/modern_commonheaders.h"
-*/
 #include "../hdr/modern_row.h"
 
 //Futher declaration
@@ -48,18 +41,10 @@ void rowCalculateMinSize(ROWCELL* cell);
 void rowEqualize(ROWCELL* cell);
 void rowResetEmptyRects(ROWCELL* cell);
 void rowDeleteTree(ROWCELL* cell);
-////////
 
 
 
-//extern ROWCELL * gl_RowRoot;	// Указатель на корневой тэг <contact> в шаблоне
-//ROWOBJECTS RowTA;				// Структура, через которую осуществляется доступ к элементам контакта.
-// Формируется при выполнении фу-и RowParce. Неявный параметр фуи rowParserGetParam
-
-
-// Формируется при выполнении фу-и RowParce. Неявный параметр фуи rowParserGetParam
-
-char *tmplbuf;					// Буфер для хранения шаблона в текстовом виде
+char *tmplbuf;
 
 ROWCELL *cppInitModernRow(ROWCELL	** tabAccess)
 {
@@ -118,13 +103,7 @@ void cppCalculateRowItemsPos(ROWCELL	*RowRoot, int width)
 	rowSizeWithReposition(RowRoot, width);
 }
 
-// rowAddCell
-// Выделяет необходимое кол-во дин. памяти для структуры ROWCELL
-// и связывает ее с деревом описания контакта
-// link - поле child или next, родительской структуры ROWCELL
-// cont - тип контейнера: строка, столбец или корневой узел
-//
-//
+
 const ROWCELL * rowAddCell(ROWCELL* &link, int cont)
 {
 	link = (ROWCELL*)malloc(sizeof(ROWCELL));
@@ -133,11 +112,7 @@ const ROWCELL * rowAddCell(ROWCELL* &link, int cont)
 	return link;
 }
 
-// rowDeleteTree
-// Освобождает память занятую деревом описания контакта
-// cell - адрес корневого узла дерева описания контакта
-//
-//
+
 void rowDeleteTree(ROWCELL* cell)
 {
 	if (!cell) return;
@@ -150,16 +125,6 @@ void rowDeleteTree(ROWCELL* cell)
 	return;
 }
 
-// rowParserGetNextWord
-// Выбирает из потока данных (сейчас файлового) очередное слово.
-// Словом считается последовательность символов, ограниченная знаками: SP, <, >, ;, TAB, CR, LF
-// символы от ; и до конца строки считаются комментарием.
-// NOTE: Данная реализация не совсем подходит для включения ее в ModernCL,
-// а по сему, тут надо будет переделывать
-// tbuf - указатель на буфер содержащий текст шаблона
-// hbuf - указатель буфера
-//
-//
 char * rowParserGetNextWord(char *tbuf, int &hbuf)
 {
 	static char buf[256];
@@ -212,13 +177,7 @@ char * rowParserGetNextWord(char *tbuf, int &hbuf)
 	return NULL;
 }
 
-// rowParserGetParam
-// ищет и интерпретирует слова в шаблоне, заключенные между тэгами
-// cell - указатель на текущий интерпретируемый контейнер шаблона
-// tbuf - указатель на буфер содержащий текст шаблона
-// hbuf - указатель буфера
-//
-//
+
 void rowParserGetParam(ROWCELL* &cell, char *tbuf, int &hbuf)
 {
 	char * word=rowParserGetNextWord(tbuf, hbuf);
@@ -313,15 +272,7 @@ void rowParserGetParam(ROWCELL* &cell, char *tbuf, int &hbuf)
 	rowParserGetParam(cell, tbuf, hbuf);
 	return;
 }
-// rowParse
-// Ищет в шаблоне теги <contact>, <tr> и <tc>, и добавляет соответствующие узлы
-// в дерево описания контакта
-// cell - поле child или next родительского контейнера
-// parent - указатель на родительский контейнер
-// tbuf - указатель на буфер содержащий текст шаблона
-// hbuf - указатель буфера
-// sequence - нужно задавать 0, это очередность нахождения
-//
+
 BOOL rowParse(ROWCELL* &cell, ROWCELL* parent, char *tbuf, int &hbuf, int &sequence, ROWCELL** RowTabAccess )
 {
 	char * word;
@@ -370,12 +321,7 @@ void rowResetEmptyRects(ROWCELL* cell)
 	rowResetEmptyRects(cell->next);
 }
 
-// rowCalculateMinSize
-// Вычисление минимальных размеров каждого контейнера дерева описания контакта
-// Эта фу-я ВСЕГДА! должна вызываться непосредственно перед rowPositioning
-// cell - указатель на корневой узел дерева описания контакта
-// NOTE: Перед вызывом rowCalculateMinSize необходимо заполнить поля w и h структуры RowTA, для каждого элемента
-//
+
 void rowCalculateMinSize(ROWCELL* cell)
 {
 	ROWCELL* curchild=NULL;
@@ -446,11 +392,7 @@ void rowCalculateMinSize(ROWCELL* cell)
 	return;
 }
 
-// void rowEqualise(ROWCELL* cell)
-//
-// Уравнивает высоты детей внутри строк, и ширины детей внутри стобцов
-// cell - указатель на корневой узел дерева описания контакта
-//
+
 void rowEqualize(ROWCELL* cell)
 {
 	ROWCELL* curchild=NULL;
@@ -485,11 +427,7 @@ void rowEqualize(ROWCELL* cell)
 	//rowEqualize(cell->next);
 }
 
-// void rowPlacing(pttCell cell, pttCell parent)
-//
-// Позиционирует элемент строки контакта в его контейнере
-// cell - указатель на плавающий контейнер
-//
+
 void rowPlacing(pROWCELL cell)
 {
 	if (cell->type == 0) return;
@@ -531,12 +469,7 @@ void rowPlacing(pROWCELL cell)
 	cell->r.bottom = cell->r.top + cell->h;
 }
 
-// void ttTLProc(pROWCELL cell, pROWCELL parent)
-//
-// Позиционирует плавающий контейнер, внутри родительского
-// cell - указатель на плавающий контейнер
-// parent - указатель на родительский контейнер
-//
+
 void rowLayerProc(pROWCELL cell, pROWCELL parent)
 {
 	if (cell->sizing)
@@ -573,12 +506,7 @@ void rowLayerProc(pROWCELL cell, pROWCELL parent)
 	}
 }
 
-// void rowPositioning(pROWCELL cell, int &dist)
-//
-// Вычисляет прямоугольники элементов контакта, учитывая выравнивание в контейнере
-// cell - указатель на корневой узел дерева описания контакта
-// dist - новая ширина контакта
-//
+
 void rowPositioning(pROWCELL cell, int &dist)
 {
 	ROWCELL* curchild = NULL;
@@ -596,7 +524,6 @@ void rowPositioning(pROWCELL cell, int &dist)
 	int autosized=0;
 	int dummy = 0;
 
-	// Коррректировка назначаемой ширины dist
 	if (w < cell->r.right && (cell->type < TC_TEXT1 || cell->type > TC_TEXT3 && cell->type!=TC_SPACE) || !cell->sizing)
 		dist = w = cell->r.right;
 
@@ -608,13 +535,12 @@ void rowPositioning(pROWCELL cell, int &dist)
 		return;
 	}
 
-	// Позиционирование контейнеров в строке
 	if (cell->cont == TC_ROW)
 	{
 		fixedsized=cell->fixed_width;
 		while (curchild)
 		{
-			// Контейнеры layer не должны влиять на позиционирование контейнеров tc
+	
 			if (curchild->layer)
 			{
 				curchild = curchild->next;
@@ -693,11 +619,6 @@ void rowPositioning(pROWCELL cell, int &dist)
 						if (size<0) size=0;
 					}
 					else size = w;
-					/*  пока отключено ибо параметр влияет на выравнивание включается по левому краю
-					if (0 &&!curchild->fitwidth)
-					if(size>max(curchild->full_width,curchild->w))
-					size=max(curchild->full_width,curchild->w);
-					*/
 					r--;
 				}
 				else
@@ -714,12 +635,11 @@ void rowPositioning(pROWCELL cell, int &dist)
 		}
 	}
 
-	// Позиционирование контейнеров в столбце
 	if (cell->cont == TC_COL)
 	{
 		while (curchild)
 		{
-			// Контейнеры layer не должны влиять на позиционирование контейнеров tr
+
 			if (curchild->layer)
 			{
 				curchild = curchild->next;
@@ -771,11 +691,6 @@ void rowPositioning(pROWCELL cell, int &dist)
 
 }
 
-// void rowSizeWithReposition(ROWCELL* &root, int width)
-//
-// Производит просчет и позиционирование элементов котакта
-// Перед вызовом необходимо заполнить структуру RowTA
-//
 void rowSizeWithReposition(ROWCELL* &root, int width)
 {
 	root->h = 0;

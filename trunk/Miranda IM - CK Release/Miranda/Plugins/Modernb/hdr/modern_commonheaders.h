@@ -2,6 +2,7 @@
 #define commonheaders_h__
 
 /*
+Author Artem Shpynov aka FYR
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
@@ -22,6 +23,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
 
 #pragma once
@@ -68,7 +78,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define CLINTERFACE                  static
 
 #define PLUGININTERFACE extern "C" __declspec( dllexport )
-#define UPDATER_PATH "http://miranda-im.org/download/details.php?action=viewfile&id=3684"
+#define UPDATER_PATH "http://miranda-im.org/download/details.php?action=viewfile&id=3684"  //need to be upgraded 
 
 #include "m_stdhdr.h"
 

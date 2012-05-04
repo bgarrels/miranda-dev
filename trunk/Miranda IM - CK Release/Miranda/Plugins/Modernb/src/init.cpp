@@ -1,8 +1,9 @@
 /*
+Author Artem Shpynov aka FYR
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2008 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -19,6 +20,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
 
 //include
@@ -63,7 +73,7 @@ PLUGININFOEX pluginInfo = {
 	"Display contacts, event notifications, protocol status with advantage visual modifications. Supported MW modifications, enchanced metacontact cooperation.",
 	"Artem Shpynov, Ricardo Pescuma Domenecci and Anton Senko based on clist_mw by Bethoven",
 	"ashpynov@gmail.com" ,
-	"Copyright 2000-2010 Miranda-IM project ["__DATE__" "__TIME__"]",
+	"Copyright 2000-2012 Miranda-IM project ["__DATE__" "__TIME__"]",
 	"http://miranda-im.org/development",
 	UNICODE_AWARE,
 	DEFMOD_CLISTALL,

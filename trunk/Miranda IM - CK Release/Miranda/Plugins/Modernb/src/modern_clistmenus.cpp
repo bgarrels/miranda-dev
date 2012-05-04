@@ -1,8 +1,9 @@
 /*
+Author Artem Shpynov aka FYR
 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2008 Miranda ICQ/IM project,
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -19,7 +20,17 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
 */
+
 #include "../hdr/modern_commonheaders.h"
 #include "../hdr/modern_clist.h"
 #include "m_genmenu.h"
@@ -121,7 +132,7 @@ static int FAV_OnContactMenuBuild(WPARAM wParam,LPARAM lParam)
 		else
 		{
 			int bufsize=(lstrlen(FAVMENUROOTNAME)+lstrlen(rates[bContactRate])+15)*sizeof(TCHAR);
-			name=(TCHAR*)_alloca(bufsize);
+			name=(TCHAR*)_malloca(bufsize);
 			mir_sntprintf(name,bufsize/sizeof(TCHAR),_T("%s (%s)"),FAVMENUROOTNAME,rates[bContactRate]);
 			mi.ptszName=name;            
 		}

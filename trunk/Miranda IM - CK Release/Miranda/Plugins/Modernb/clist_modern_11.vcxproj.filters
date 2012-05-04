@@ -278,9 +278,6 @@
     <ClInclude Include="hdr\modern_cluiframes.h">
       <Filter>hdr</Filter>
     </ClInclude>
-    <ClInclude Include="hdr\modern_commonheaders.h">
-      <Filter>hdr</Filter>
-    </ClInclude>
     <ClInclude Include="hdr\modern_commonprototypes.h">
       <Filter>hdr</Filter>
     </ClInclude>
@@ -288,6 +285,9 @@
       <Filter>hdr</Filter>
     </ClInclude>
     <ClInclude Include="hdr\modern_effectenum.h">
+      <Filter>hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="hdr\modern_commonheaders.h">
       <Filter>hdr</Filter>
     </ClInclude>
   </ItemGroup>
