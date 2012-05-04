@@ -716,7 +716,7 @@ BOOL FASTCALL WildCompareA(LPSTR szName, LPSTR szMask)
 	{
 		size_t s = 1, e = 1;
 //		static char temp[100];		//lets made temp static local var - should be faster than dynamic
-		LPSTR szTemp = (LPSTR)_alloca(strlen(szMask) * sizeof(CHAR) + sizeof(CHAR));
+		LPSTR szTemp = (LPSTR)_malloca(strlen(szMask) * sizeof(CHAR) + sizeof(CHAR));
 		BOOL bExcept;
 
 		while(szMask[e] != '\0')
@@ -772,7 +772,7 @@ BOOL FASTCALL WildCompareW(LPWSTR wszName, LPWSTR wszMask)
 	{
 		size_t s = 1, e = 1;
 //		static char temp[100];		//lets made temp static local var - should be faster than dynamic
-		LPWSTR wszTemp = (LPWSTR)_alloca(wcslen(wszMask) * sizeof(WCHAR) + sizeof(WCHAR));
+		LPWSTR wszTemp = (LPWSTR)_malloca(wcslen(wszMask) * sizeof(WCHAR) + sizeof(WCHAR));
 		BOOL bExcept;
 
 		while(wszMask[e] != L'\0')
@@ -1684,7 +1684,7 @@ HICON FASTCALL CreateJoinedIcon(HICON hBottom, HICON hTop)
 				bb = BottomBuffer = (LPBYTE)bmp_bottom.bmBits;
 			else
 			{
-				BottomBuffer = (LPBYTE)_alloca(bmp_bottom.bmHeight * bmp_bottom.bmWidthBytes);
+				BottomBuffer = (LPBYTE)_malloca(bmp_bottom.bmHeight * bmp_bottom.bmWidthBytes);
 				GetBitmapBits(iciBottom.hbmColor, bmp_bottom.bmHeight * bmp_bottom.bmWidthBytes, BottomBuffer);
 				bb = BottomBuffer + vstep_b * (bmp_bottom.bmHeight - 1);
 				vstep_b = -vstep_b;
@@ -1693,7 +1693,7 @@ HICON FASTCALL CreateJoinedIcon(HICON hBottom, HICON hTop)
 				tb = TopBuffer = (LPBYTE)bmp_top.bmBits;
 			else
 			{
-				TopBuffer = (LPBYTE)_alloca(bmp_top.bmHeight * bmp_top.bmWidthBytes);
+				TopBuffer = (LPBYTE)_malloca(bmp_top.bmHeight * bmp_top.bmWidthBytes);
 				GetBitmapBits(iciTop.hbmColor, bmp_top.bmHeight * bmp_top.bmWidthBytes, TopBuffer);
 				tb = TopBuffer + vstep_t * (bmp_top.bmHeight - 1);
 				vstep_t = -vstep_t;
@@ -1702,7 +1702,7 @@ HICON FASTCALL CreateJoinedIcon(HICON hBottom, HICON hTop)
 				bmb = BottomMaskBuffer = (LPBYTE)bmp_bottom_mask.bmBits;
 			else
 			{
-				BottomMaskBuffer = (LPBYTE)_alloca(bmp_bottom_mask.bmHeight * bmp_bottom_mask.bmWidthBytes);
+				BottomMaskBuffer = (LPBYTE)_malloca(bmp_bottom_mask.bmHeight * bmp_bottom_mask.bmWidthBytes);
 				GetBitmapBits(iciBottom.hbmMask, bmp_bottom_mask.bmHeight * bmp_bottom_mask.bmWidthBytes, BottomMaskBuffer);
 				bmb = BottomMaskBuffer + vstep_bm * (bmp_bottom_mask.bmHeight - 1);
 				vstep_bm = -vstep_bm;
@@ -1711,7 +1711,7 @@ HICON FASTCALL CreateJoinedIcon(HICON hBottom, HICON hTop)
 				tmb = TopMaskBuffer = (LPBYTE)bmp_top_mask.bmBits;
 			else
 			{
-				TopMaskBuffer = (LPBYTE)_alloca(bmp_top_mask.bmHeight * bmp_top_mask.bmWidthBytes);
+				TopMaskBuffer = (LPBYTE)_malloca(bmp_top_mask.bmHeight * bmp_top_mask.bmWidthBytes);
 				GetBitmapBits(iciTop.hbmMask, bmp_top_mask.bmHeight * bmp_top_mask.bmWidthBytes, TopMaskBuffer);
 				tmb = TopMaskBuffer + vstep_tm * (bmp_top_mask.bmHeight - 1);
 				vstep_tm = -vstep_tm;
