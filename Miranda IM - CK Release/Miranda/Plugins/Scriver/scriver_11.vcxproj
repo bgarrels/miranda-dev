@@ -450,7 +450,6 @@
     <ClInclude Include="src\richutil.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Docs\scriver-license.txt" />
     <None Include="Docs\scriver-readme.txt" />
     <None Include="Docs\scriver-translation.txt" />
     <None Include="res\addcontact.ico" />
