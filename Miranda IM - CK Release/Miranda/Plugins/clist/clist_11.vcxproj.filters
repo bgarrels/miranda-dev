@@ -73,9 +73,6 @@
     <None Include="docs\clist-translation.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="docs\clist-license.txt">
-      <Filter>docs</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
