@@ -1,3 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{c293b38d-38d8-4a33-b5ad-05c8402fb182}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="proto_Quotes.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\res\up.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\CurrencyConverter.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\down.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\Export quotes.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\Import quotes.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\main.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\notchanged.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\proto_na.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\proto_occupied.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\proto_offline.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\proto_online.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\quote.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\Refresh.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\Section.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\res\swap.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

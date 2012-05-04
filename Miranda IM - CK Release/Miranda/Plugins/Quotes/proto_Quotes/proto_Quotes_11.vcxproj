@@ -190,13 +190,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="..\res\proto_na.ico" />
-    <None Include="..\res\proto_occupied.ico" />
-    <None Include="..\res\proto_offline.ico" />
-    <None Include="..\res\proto_online.ico" />
+    <ResourceCompile Include="proto_Quotes.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="proto_Quotes.rc" />
+    <Image Include="..\res\CurrencyConverter.ico" />
+    <Image Include="..\res\down.ico" />
+    <Image Include="..\res\Export quotes.ico" />
+    <Image Include="..\res\Import quotes.ico" />
+    <Image Include="..\res\main.ico" />
+    <Image Include="..\res\notchanged.ico" />
+    <Image Include="..\res\proto_na.ico" />
+    <Image Include="..\res\proto_occupied.ico" />
+    <Image Include="..\res\proto_offline.ico" />
+    <Image Include="..\res\proto_online.ico" />
+    <Image Include="..\res\quote.ico" />
+    <Image Include="..\res\Refresh.ico" />
+    <Image Include="..\res\Section.ico" />
+    <Image Include="..\res\swap.ico" />
+    <Image Include="..\res\up.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
