@@ -54,9 +54,6 @@
     <None Include="icos\logo.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="docs\bosskey_plus_license.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\bosskey_plus_readme.txt">
       <Filter>docs</Filter>
     </None>
