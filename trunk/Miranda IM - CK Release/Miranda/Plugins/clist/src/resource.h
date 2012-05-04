@@ -1,7 +1,18 @@
+/*
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
 // Used by resource.rc
-//
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+
+===============================================================================
+*/
+
 #define IDD_OPT_CLIST                   126
 #define IDR_CONTEXT                     180
 #define IDC_DROP                        183
