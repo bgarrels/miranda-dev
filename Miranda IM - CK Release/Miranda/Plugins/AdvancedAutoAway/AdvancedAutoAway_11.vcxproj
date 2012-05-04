@@ -334,7 +334,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\fsm.jpg" />
-    <None Include="docs\fsm.sdr" />
     <None Include="Icons\icon1.ico" />
     <None Include="Icons\ttbDown.bmp" />
     <None Include="Icons\ttbUp.bmp" />
