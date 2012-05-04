@@ -13,16 +13,7 @@
     <None Include="..\resources\iconttbdown.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="iconttbup.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="..\resources\icooffline.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icoyamn1.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icoyamn2.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="..\resources\icoyamn3.ico">
@@ -33,5 +24,10 @@
     <ResourceCompile Include="proto_YAMN.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\resources\yamn.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
