@@ -637,7 +637,7 @@ KN_FP_MASK def_kn_fp_overlays_mask[] =
 	{ "client_FINAL",			_T("*[FinalPack]*"),						_T("Final Pack"),						_T("ClientIcons_Packs"),	IDI_MIRANDA_FINAL, PACKS_CASE },
 	{ "client_CAPPUCCINO",		_T("*[HotCoffee]*"),						_T("HotCoffee"),						_T("ClientIcons_Packs"),	IDI_MIRANDA_CAPPUCCINO, PACKS_CASE },
 	{ "client_WATCHER",			_T("*[WatcherPack]*"),						_T("Watcher Pack"),						_T("ClientIcons_Packs"),	IDI_MIRANDA_WATCHER, PACKS_CASE },
-
+	{ "client_LENINPACK",		_T("*[Lenin Pack]*"),						_T("Lenin Pack"),						_T("ClientIcons_Packs"),	IDI_MIRANDA_LENINPACK, PACKS_CASE },
 //#########################################################################################################################################
 //#########################################################################################################################################
 	{ "client_AimOscar_over",			_T("Miranda*AIM*"),									_T("AIM"),								_T("ClientIcons_General"),	IDI_AIMOSCAR_OVERLAY, OVER1_CASE },		//FIX

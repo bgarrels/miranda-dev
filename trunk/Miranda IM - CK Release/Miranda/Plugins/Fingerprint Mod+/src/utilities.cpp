@@ -266,7 +266,7 @@ int utf8_decode_static(LPCSTR from, LPSTR to, int to_size)
 	{
 		size_t chars = strlennull(from) + 1;
 		LPWSTR unicode = (LPWSTR)_alloca(chars * sizeof(WCHAR));
-	
+    
 		make_unicode_string_static(from, unicode, chars);
 
 		WideCharToMultiByte(CP_ACP, WC_COMPOSITECHECK, unicode, -1, to, to_size, NULL, NULL);
