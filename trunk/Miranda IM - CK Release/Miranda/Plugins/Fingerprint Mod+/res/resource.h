@@ -1,5 +1,5 @@
 /*
-Fingerprint+ Client icons for the MSN protocol plugin
+Fingerprint+ multiprotocol icons for
 Miranda IM: the free IM client for Microsoft* Windows*
 
 Copyright 2000-2012 Miranda IM project,
