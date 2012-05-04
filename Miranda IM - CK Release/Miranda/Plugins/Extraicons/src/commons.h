@@ -1,30 +1,47 @@
-/*
- Copyright (C) 2009 Ricardo Pescuma Domenecci
-
- This is free software; you can redistribute it and/or
- modify it under the terms of the GNU Library General Public
- License as published by the Free Software Foundation; either
- version 2 of the License, or (at your option) any later version.
-
- This is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- Library General Public License for more details.
-
- You should have received a copy of the GNU Library General Public
- License along with this file; see the file license.txt.  If
- not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- Boston, MA 02111-1307, USA.
- */
-
 #ifndef __COMMONS_H__
 # define __COMMONS_H__
+
+/*
+Extraicons service plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			 Copyright (C) 2009-2012 Ricardo Pescuma Domenecci
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
 
 #ifdef UNICODE
 #error "Unicode not needed by this plugin"
 #endif
 
-#define _WIN32_IE 0x500
+#define _WIN32_IE 0x0600
 #include <windows.h>
 #include <tchar.h>
 #include <stdio.h>
@@ -37,8 +54,8 @@
 #include <algorithm>
 using namespace std;
 
-// Miranda headers
-#define MIRANDA_VER 0x0A00
+// Miranda headers and version
+#define MIRANDA_VER    0x0A00
 
 #include <newpluginapi.h>
 #include <m_system.h>
