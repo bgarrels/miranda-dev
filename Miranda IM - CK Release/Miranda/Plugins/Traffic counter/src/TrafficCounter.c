@@ -1,6 +1,14 @@
 /*
-Traffic Counter plugin for Miranda IM 
-Copyright 2007-2011 Mironych.
+Traffic Counter plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2007-2011 Mironych
+			Copyright (C) 2002-2006 Ghost
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -15,28 +23,34 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "commonheaders.h"
 
-/*-------------------------------------------------------------------------------------------------------------------*/
-//GLOBAL
-/*-------------------------------------------------------------------------------------------------------------------*/
+
 HINSTANCE hInst;
 PLUGINLINK *pluginLink;
+hLangpack;
 
-int hLangpack = 0; // Поддержка плагинозависимого перевода.
+int hLangpack = 0; 
 
 TCHAR* TRAFFIC_COUNTER_WINDOW_CLASS = _T("TrafficCounterWnd");
 
-/*-------------------------------------------------------------------------------------------------------------------*/
-//TRAFFIC COUNTER
-/*-------------------------------------------------------------------------------------------------------------------*/
-OPTTREE_OPTION *pOptions; // Через этот указатель модуль opttree.c может добраться до списка опций.
+
+OPTTREE_OPTION *pOptions; 
 WORD notify_send_size = 0;
 WORD notify_recv_size = 0;
-//
-// Цвет шрифта и фона
+
 COLORREF Traffic_BkColor,Traffic_FontColor;
 
 //notify
@@ -65,26 +79,23 @@ HANDLE h_OnAccListChange;
 HFONT Traffic_h_font = NULL;
 HMENU TrafficPopupMenu = NULL;
 
-/*-------------------------------------------------------------------------------------------------------------------*/
+
 //TIME COUNTER
-/*-------------------------------------------------------------------------------------------------------------------*/
 static HANDLE h_AckHook;
 BYTE online_count = 0;
 
-/*-------------------------------------------------------------------------------------------------------------------*/
+
 //font service support
-/*-------------------------------------------------------------------------------------------------------------------*/
 int TrafficFontHeight = 0;
 FontIDT TrafficFontID;
 ColourIDT TrafficBackgroundColorID;
 
-//---------------------------------------------------------------------------------------------
-// Для ToolTip
-//---------------------------------------------------------------------------------------------
+
+//ToolTip support
 BOOL TooltipShowing;
 POINT TooltipPosition;
 
-// Вспомогательные переменные чтобы заставить работать ключевой цвет
+
 BOOL UseKeyColor;
 COLORREF KeyColor;
 
@@ -104,7 +115,7 @@ PLUGININFOEX pluginInfoEx =
 	"Adding traffic and time counters",
 	"Ghost, Mironych",
 	"",
-	"© 2002-2006 Ghost, © 2007-2011 Mironych ["__DATE__" "__TIME__"]",
+	"© 2002-2006 Ghost, © 2007-2012 Mironych ["__DATE__" "__TIME__"]",
 	"",
 	UNICODE_AWARE,
 	0,
@@ -152,8 +163,7 @@ int __declspec(dllexport) Load(PLUGINLINK *link)
 	// set the memory manager
 	memoryManagerInterface.cbSize = sizeof(struct MM_INTERFACE);
 	CallService(MS_SYSTEM_GET_MMI,0,(LPARAM)&memoryManagerInterface);
-	
-	// Получаем дескриптор языкового пакета.
+
 	mir_getLP(&pluginInfoEx);
 	
 	h_OptInit = HookEvent(ME_OPT_INITIALISE,TrafficCounterOptInitialise);
@@ -205,7 +215,7 @@ int TrafficCounterModulesLoaded(WPARAM wParam,LPARAM lParam)
 
 	CreateProtocolList();
 
-	// Читаем флаги
+
 	unOptions.Flags = DBGetContactSettingDword(NULL, TRAFFIC_SETTINGS_GROUP, SETTINGS_WHAT_DRAW, 0x0882);
 	Stat_SelAcc = DBGetContactSettingWord(NULL, TRAFFIC_SETTINGS_GROUP, SETTINGS_STAT_ACC_OPT, 0x01);
 
@@ -221,7 +231,6 @@ int TrafficCounterModulesLoaded(WPARAM wParam,LPARAM lParam)
 	Traffic_PopupTimeoutDefault = DBGetContactSettingByte(NULL,TRAFFIC_SETTINGS_GROUP,SETTINGS_POPUP_TIMEOUT_DEFAULT,1);
 	Traffic_PopupTimeoutValue = DBGetContactSettingByte(NULL,TRAFFIC_SETTINGS_GROUP,SETTINGS_POPUP_TIMEOUT_VALUE,5);
 	
-	// Формат счётчика для каждого активного протокола
 	if (DBGetContactSettingTString(NULL, TRAFFIC_SETTINGS_GROUP, SETTINGS_COUNTER_FORMAT, &dbv) == 0)
 	{
 		if(lstrlen(dbv.ptszVal) > 0)
@@ -239,7 +248,6 @@ int TrafficCounterModulesLoaded(WPARAM wParam,LPARAM lParam)
 {L230}?if3(?tc_GetTime(%extratext%,total,d hh:mm),)"));
 	}
 
-	// Формат всплывающих подсказок
 	if (DBGetContactSettingTString(NULL, TRAFFIC_SETTINGS_GROUP, SETTINGS_TOOLTIP_FORMAT, &dbv) == 0)
 	{
 		if(lstrlen(dbv.ptszVal) > 0)
@@ -254,7 +262,6 @@ int TrafficCounterModulesLoaded(WPARAM wParam,LPARAM lParam)
 
 	Traffic_AdditionSpace = DBGetContactSettingByte(NULL, TRAFFIC_SETTINGS_GROUP, SETTINGS_ADDITION_SPACE, 0);
 
-	// Счётчик времени онлайна
 	OverallInfo.Total.Timer = DBGetContactSettingDword(NULL, TRAFFIC_SETTINGS_GROUP, SETTINGS_TOTAL_ONLINE_TIME, 0);
 
 	//register traffic font
@@ -272,7 +279,6 @@ int TrafficCounterModulesLoaded(WPARAM wParam,LPARAM lParam)
 	TrafficFontID.order = 0;
 	CallService(MS_FONT_REGISTERT, (WPARAM)&TrafficFontID, 0);
 
-	// Регистрируем цвет фона
 	TrafficBackgroundColorID.cbSize = sizeof(ColourIDT);
 	_tcscpy(TrafficBackgroundColorID.group, LPGENT("Traffic counter"));
 	_tcscpy(TrafficBackgroundColorID.name, LPGENT("Font"));
@@ -282,11 +288,9 @@ int TrafficCounterModulesLoaded(WPARAM wParam,LPARAM lParam)
 	CallService(MS_COLOUR_REGISTERT, (WPARAM)&TrafficBackgroundColorID, 0);
 	HookEvent(ME_FONT_RELOAD, UpdateFonts);
 
-	// Добавляем поддержку плагина Variables
 	RegisterVariablesTokens();
 
 	CreateServiceFunction("TrafficCounter/ShowHide", MenuCommand_TrafficShowHide);
-	// Регистрируем горячую клавишу для показа/скрытия фрейма
 	{
 		HOTKEYDESC hkd = {0};
 		hkd.cbSize = sizeof(hkd);
@@ -301,11 +305,10 @@ int TrafficCounterModulesLoaded(WPARAM wParam,LPARAM lParam)
 	CreateTrafficWindow((HWND)CallService(MS_CLUI_GETHWND, 0, 0));
 	UpdateFonts(0, 0);	//Load and create fonts here
 	
-	// Ключевой цвет
 	UseKeyColor = DBGetContactSettingByte(NULL, "ModernSettings", "UseKeyColor", 1);
 	KeyColor = DBGetContactSettingDword(NULL, "ModernSettings", "KeyColor", 0);
 
-	// Регистрируем обработчики событий Netlib
+	// Netlib support
 	h_OnRecv = HookEvent(ME_NETLIB_FASTRECV, TrafficRecv);
 	h_OnSend = HookEvent(ME_NETLIB_FASTSEND, TrafficSend);
 
@@ -433,8 +436,7 @@ static BOOL CALLBACK DlgProcTCOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 				OPTTREE_CHECK,	1,	NULL,	"ShowTooltip"},
 		{0,	LPGENT("General/") LPGENT("\"Toggle traffic counter\" in main menu"),
 				OPTTREE_CHECK,	1,	NULL,	"ShowMainMenuItem"},
-		// Резервируем место под активные и видимые протоколы
-		// Максимум 16 позиций видимых и 16 активных
+
 		{0,	NULL, OPTTREE_CHECK, OPTTREE_INVISIBLE,	NULL, NULL},
 		{0,	NULL, OPTTREE_CHECK, OPTTREE_INVISIBLE,	NULL, NULL},
 		{0,	NULL, OPTTREE_CHECK, OPTTREE_INVISIBLE,	NULL, NULL},
@@ -477,13 +479,11 @@ static BOOL CALLBACK DlgProcTCOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 	{
 		pOptions = options;
 		optionCount = SIZEOF(options);
-		// Если нет Variables, активируем галочки для старого метода рисования
 		if (!ServiceExists(MS_VARS_FORMATSTRING))
 		{
 			for (i = 0; i < 8; i++)	options[i].dwFlag = 1;
 		}
 
-		// Флажки для видимости аккаунтов создаются в любом случае.
 		for (i = j = 0; (j < NumberOfAccounts) && (i < optionCount) ; i++)
 			if ((options[i].dwFlag & OPTTREE_INVISIBLE) && !options[i].szSettingName)
 			{
@@ -515,11 +515,9 @@ static BOOL CALLBACK DlgProcTCOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 			//show/hide button
 			SetDlgItemText(hwndDlg,IDC_BSHOWHIDE,(IsWindowVisible(TrafficHwnd) != 0)? TranslateT("Hide now") : TranslateT("Show now"));
 
-			// Строки формата для счётчиков
 			EnableWindow(GetDlgItem(hwndDlg,IDC_EDIT_COUNTER_FORMAT),ServiceExists(MS_VARS_FORMATSTRING));
 			SetWindowText(GetDlgItem(hwndDlg, IDC_EDIT_COUNTER_FORMAT), Traffic_CounterFormat);
 
-			// Формат всплывающей подсказки
 			EnableWindow(GetDlgItem(hwndDlg,IDC_EDIT_TOOLTIP_FORMAT),
 				ServiceExists("mToolTip/ShowTipW") || ServiceExists("mToolTip/ShowTip"));
 			SetWindowText(GetDlgItem(hwndDlg, IDC_EDIT_TOOLTIP_FORMAT), Traffic_TooltipFormat);
@@ -531,7 +529,6 @@ static BOOL CALLBACK DlgProcTCOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 			SendDlgItemMessage(hwndDlg, IDC_COMBO_AUTO_CLEAR, CB_INSERTSTRING, -1, (LPARAM)TranslateT("Year"));
 			SendDlgItemMessage(hwndDlg, IDC_COMBO_AUTO_CLEAR, CB_SETCURSEL, unOptions.PeriodForShow, 0);
 			
-			// Интервал между строками
 			SetDlgItemInt(hwndDlg, IDC_EDIT_SPACE, Traffic_AdditionSpace, 0);
 			SendDlgItemMessage(hwndDlg, IDC_EDIT_SPACE, EM_LIMITTEXT, 2, 0);
 
@@ -547,7 +544,6 @@ static BOOL CALLBACK DlgProcTCOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 			OptTree_SetOptions(hwndDlg, IDC_APPEARANCEOPTIONS, options, optionCount, unOptions.ShowTooltip, "ShowTooltip");
 			OptTree_SetOptions(hwndDlg, IDC_APPEARANCEOPTIONS, options, optionCount, unOptions.ShowMainMenuItem, "ShowMainMenuItem");
 			
-			// Настройки видимости протоколов
 			for (i = 0; i < NumberOfAccounts; i++)
 			{
 				char buffer[32];
@@ -594,9 +590,7 @@ static BOOL CALLBACK DlgProcTCOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 				{
 					unOptions.PeriodForShow = (char)SendDlgItemMessage(hwndDlg,IDC_COMBO_AUTO_CLEAR,CB_GETCURSEL,0,0);
 							
-					// Интервал между строками
 					Traffic_AdditionSpace = GetDlgItemInt(hwndDlg, IDC_EDIT_SPACE, NULL, 0);
-					// Настройки Appearance
 					unOptions.DrawProtoIcon = OptTree_GetOptions(hwndDlg, IDC_APPEARANCEOPTIONS, options, optionCount, "DrawProtoIcon");
 					unOptions.DrawProtoName = OptTree_GetOptions(hwndDlg, IDC_APPEARANCEOPTIONS, options, optionCount, "DrawProtoName");
 					unOptions.DrawCurrentTraffic = OptTree_GetOptions(hwndDlg, IDC_APPEARANCEOPTIONS, options, optionCount, "DrawCurrentTraffic");
@@ -609,7 +603,6 @@ static BOOL CALLBACK DlgProcTCOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 					unOptions.ShowTooltip = OptTree_GetOptions(hwndDlg, IDC_APPEARANCEOPTIONS, options, optionCount, "ShowTooltip");
 					unOptions.ShowMainMenuItem = OptTree_GetOptions(hwndDlg, IDC_APPEARANCEOPTIONS, options, optionCount, "ShowMainMenuItem");
 
-					// Настройки видмости протоколов
 					for (i = 0; i < NumberOfAccounts; i++)
 					{
 						char buffer[32];
@@ -618,16 +611,12 @@ static BOOL CALLBACK DlgProcTCOptions(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 					}
 					unOptions.ShowOverall = OptTree_GetOptions(hwndDlg, IDC_APPEARANCEOPTIONS, options, optionCount, "ShowOverall");
 
-					// Формат счётчиков
 					GetWindowText(GetDlgItem(hwndDlg, IDC_EDIT_COUNTER_FORMAT), Traffic_CounterFormat, 512);
-					// Формат всплывающей подсказки
 					GetWindowText(GetDlgItem(hwndDlg, IDC_EDIT_TOOLTIP_FORMAT), Traffic_TooltipFormat, 512);
 
-					// Ключевой цвет
 					UseKeyColor = DBGetContactSettingByte(NULL, "ModernSettings", "UseKeyColor", 1);
 					KeyColor = DBGetContactSettingDword(NULL, "ModernSettings", "KeyColor", 0);
 
-					// Перерисовываем фрейм
 					UpdateTrafficWindowSize();
 							
 					SaveSettings(0);
@@ -686,12 +675,10 @@ void SaveSettings(BYTE OnlyCnt)
 {
 	unsigned short int i;
 
-	// Сохраняем счётчик времени онлайна
 	DBWriteContactSettingDword(NULL, TRAFFIC_SETTINGS_GROUP, SETTINGS_TOTAL_ONLINE_TIME, OverallInfo.Total.Timer);
 
 	if (OnlyCnt) return;
 
-	// Для каждого протокола сохраняем флаги
 	for (i = 0; i < NumberOfAccounts; i++)
 	{
 		if (!ProtoList[i].name) continue;
@@ -709,14 +696,12 @@ void SaveSettings(BYTE OnlyCnt)
 	//popup timeout
 	DBWriteContactSettingByte(NULL,TRAFFIC_SETTINGS_GROUP,SETTINGS_POPUP_TIMEOUT_DEFAULT,Traffic_PopupTimeoutDefault);
 	DBWriteContactSettingByte(NULL,TRAFFIC_SETTINGS_GROUP,SETTINGS_POPUP_TIMEOUT_VALUE,Traffic_PopupTimeoutValue);
-	//
-	// Формат счётчиков
+
 	DBWriteContactSettingTString(NULL, TRAFFIC_SETTINGS_GROUP, SETTINGS_COUNTER_FORMAT, Traffic_CounterFormat);
 
 	DBWriteContactSettingTString(NULL, TRAFFIC_SETTINGS_GROUP, SETTINGS_TOOLTIP_FORMAT, Traffic_TooltipFormat);
 
 	DBWriteContactSettingByte(NULL, TRAFFIC_SETTINGS_GROUP, SETTINGS_ADDITION_SPACE, Traffic_AdditionSpace);
-	// Сохраняем флаги
 	DBWriteContactSettingDword(NULL, TRAFFIC_SETTINGS_GROUP, SETTINGS_WHAT_DRAW, unOptions.Flags);
 	DBWriteContactSettingWord(NULL, TRAFFIC_SETTINGS_GROUP, SETTINGS_STAT_ACC_OPT, Stat_SelAcc);
 }
@@ -802,7 +787,6 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 	height = rect.bottom - rect.top;
 	width = rect.right - rect.left;
 
-	// Свой контекст устройства.
 	hdc = CreateCompatibleDC(hDC);
 	//
 	RGB32BitsBITMAPINFO.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
@@ -846,41 +830,32 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 
 	old_font = (HFONT)SelectObject(hdc, Traffic_h_font);
 
-	// Ограничиваем область рисования
 	rect.top += 2;
 	rect.left += 3;
 	rect.bottom -= 2;
 	rect.right -= 3;
 
-//-------------------
-// Если нет плагина Variables, рисуем упрощённо.
-//-------------------
 	if (!ServiceExists(MS_VARS_FORMATSTRING))
 	{
 		SummarySession = SummaryTotal = 0;
-		// Для каждого аккаунта
 		for (i = 0; i < NumberOfAccounts; i++)
 		{
-			// Только если разрешено его отображение.
 			if (ProtoList[i].Visible && ProtoList[i].Enabled)
 			{
 				dx = 0;
-				// Изображаем иконку аккаунта.
 				if (unOptions.DrawProtoIcon)
 				{
 					TC_DrawIconEx(hdc, rect.left, rect.top,
 						LoadSkinnedProtoIcon(ProtoList[i].name, CallProtoService(ProtoList[i].name,PS_GETSTATUS,0,0)), b, ClistModernPresent);
 					dx = 19;
 				}
-				// Изображаем имя аккаунта
 				if (unOptions.DrawProtoName)
 				{
 					rect.left += dx;
 					TC_AlphaText(hdc, ProtoList[i].tszAccountName, &rect, DT_SINGLELINE | DT_LEFT | DT_TOP, ClistModernPresent);
 					rect.left -= dx;
 				}
-				// Следующие позиции строятся от правого края.
-				// Общее время.
+
 				if (unOptions.DrawTotalTimeCounter)
 				{
 					TCHAR bu[32];
@@ -888,7 +863,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 					GetDurationFormatM(ProtoList[i].Total.Timer, _T("h:mm:ss"), bu, 32);
 					TC_AlphaText(hdc, bu, &rect, DT_SINGLELINE | DT_RIGHT | DT_TOP, ClistModernPresent);
 				}
-				// Текущее время.
+
 				if (unOptions.DrawCurrentTimeCounter)
 				{
 					TCHAR bu[32];
@@ -898,7 +873,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 					TC_AlphaText(hdc, bu, &rect, DT_SINGLELINE | DT_RIGHT | DT_TOP, ClistModernPresent);
 					rect.right += 50;
 				}
-				// Изображаем общий трафик.
+
 				if (unOptions.DrawTotalTraffic)
 				{
 					TCHAR bu[32];
@@ -911,7 +886,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 					if (ProtoList[i].Visible)
 						SummaryTotal += ProtoList[i].TotalRecvTraffic + ProtoList[i].TotalSentTraffic;
 				}
-				// Изображаем текущий трафик.
+
 				if (unOptions.DrawCurrentTraffic)
 				{
 					TCHAR bu[32];
@@ -928,10 +903,10 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 				rect.top += Traffic_LineHeight + Traffic_AdditionSpace;
 			}
 		}
-		// Рисуем суммарный трафик выбранных аккаунтов.
+
 		if (unOptions.ShowSummary)
 		{
-			// Изображаем иконку.
+
 			dx = 0;
 			if (unOptions.DrawProtoIcon)
 			{
@@ -939,8 +914,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 					LoadSkinnedIcon(SKINICON_OTHER_MIRANDA), b, ClistModernPresent);
 				dx = 19;
 			}
-			// Выводим текст
-			// Изображаем имя
+
 			if (unOptions.DrawProtoName)
 			{
 				TCHAR *bu = mir_a2t("Summary");
@@ -950,7 +924,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 				rect.left -= dx;
 				mir_free(bu);
 			}
-			// Общее время.
+
 			if (unOptions.DrawTotalTimeCounter)
 			{
 				TCHAR bu[32];
@@ -958,7 +932,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 				GetDurationFormatM(OverallInfo.Total.Timer, _T("h:mm:ss"), bu, 32);
 				TC_AlphaText(hdc, bu, &rect, DT_SINGLELINE | DT_RIGHT | DT_TOP, ClistModernPresent);
 			}
-			// Текущее время.
+
 			if (unOptions.DrawCurrentTimeCounter)
 			{
 				TCHAR bu[32];
@@ -968,7 +942,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 				TC_AlphaText(hdc, bu, &rect, DT_SINGLELINE | DT_RIGHT | DT_TOP, ClistModernPresent);
 				rect.right += 50;
 			}
-			// Изображаем общий трафик.
+
 			if (unOptions.DrawTotalTraffic)
 			{
 				TCHAR bu[32];
@@ -978,7 +952,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 				TC_AlphaText(hdc, bu, &rect, DT_SINGLELINE | DT_RIGHT | DT_TOP, ClistModernPresent);
 				rect.right += 100;
 			}
-			// Изображаем текущий трафик.
+
 			if (unOptions.DrawCurrentTraffic)
 			{
 				TCHAR bu[32];
@@ -990,10 +964,10 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 			}
 		}
 		rect.top += Traffic_LineHeight + Traffic_AdditionSpace;
-		// Рисуем всеобщий трафик.
+
 		if (unOptions.ShowOverall)
 		{
-			// Изображаем иконку.
+
 			dx = 0;
 			if (unOptions.DrawProtoIcon)
 			{
@@ -1001,8 +975,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 					LoadSkinnedIcon(SKINICON_OTHER_MIRANDA), b, ClistModernPresent);
 				dx = 19;
 			}
-			// Выводим текст
-			// Изображаем имя
+
 			if (unOptions.DrawProtoName)
 			{
 				TCHAR *bu = mir_a2t("Overall");
@@ -1012,8 +985,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 				rect.left -= dx;
 				mir_free(bu);
 			}
-			// Следующие позиции строятся от правого края.
-			// Изображаем общий трафик.
+
 			if (unOptions.DrawTotalTraffic)
 			{
 				TCHAR bu[32];
@@ -1023,7 +995,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 				TC_AlphaText(hdc, bu, &rect, DT_SINGLELINE | DT_RIGHT | DT_TOP, ClistModernPresent);
 				rect.right += 100;
 			}
-			// Изображаем текущий трафик.
+
 			if (unOptions.DrawCurrentTraffic)
 			{
 				TCHAR bu[32];
@@ -1036,20 +1008,18 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 		}
 	}
 	else
-//-------------
-// Если есть Variables - рисуем по-новому
-//-------------
+
 	{
 		RowItemInfo *ItemsList;
 		WORD ItemsNumber, RowsNumber;
 		TCHAR **ExtraText;
 		HICON *ahIcon;
 
-		// Готовим список строк для Variables и иконок.
+
 		ExtraText = (TCHAR**)mir_alloc(sizeof(TCHAR*));
 		ahIcon = (HICON*)mir_alloc(sizeof(HICON));
 		RowsNumber = 0;
-		// Цикл по аккаунтам.
+
 		for (i = 0; i < NumberOfAccounts; i++)
 		{
 			if (ProtoList[i].Visible && ProtoList[i].Enabled)
@@ -1061,7 +1031,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 				ahIcon[RowsNumber++] = LoadSkinnedProtoIcon(ProtoList[i].name, CallProtoService(ProtoList[i].name, PS_GETSTATUS, 0, 0));
 			}
 		}
-		// Ещё 2 особых элемента.
+
 		if (unOptions.ShowSummary)
 		{
 			ExtraText = (TCHAR**)mir_realloc(ExtraText, sizeof(TCHAR*) * (RowsNumber + 1));
@@ -1079,19 +1049,18 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 			ahIcon[RowsNumber++] = LoadSkinnedIcon(SKINICON_OTHER_MIRANDA);
 		}
 
-		// Рисуем свой счётчик для каждого из выбранных протоколов
 		for (i = 0; i < RowsNumber; i++)
 		{
 			buf = variables_parse(Traffic_CounterFormat, ExtraText[i], NULL);
 			if (ItemsNumber = GetRowItems(buf, &ItemsList))
 			{
-				// Рисуем текст.
+
 				for (dx = 0; dx < ItemsNumber; dx++)
 				{
-					// Делаем копию прямоугольника для рисования.
+
 					memcpy(&rect2, &rect, sizeof(RECT));
 					rect2.bottom = rect2.top + Traffic_LineHeight;
-					// Что за тег?
+
 					switch (ItemsList[dx].Alignment)
 					{
 						case 'I':
@@ -1114,7 +1083,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 					
 				}
 
-				// Нужно освободить память.
+
 				for (; ItemsNumber--; )
 				{
 					mir_free(ItemsList[ItemsNumber].String);
@@ -1125,7 +1094,7 @@ int PaintTrafficCounterWindow(HWND hwnd, HDC hDC)
 			}
 		}
 
-		// Удаляем список строк.
+
 		for (; RowsNumber--; )
 			mir_free(ExtraText[RowsNumber]);
 		mir_free(ExtraText);
@@ -1166,7 +1135,7 @@ void ProtocolIsOnLine(int num)
 		- 1000 * ProtoList[num].AllStatistics[ProtoList[num].NumberOfRecords - 1].Time;
 	ProtoList[num].Session.Timer = 0;
 
-	if (online_count == 1) // Хотя бы один аккаунт перешёл в онлайн - готовимся считать суммарное время.
+	if (online_count == 1) 
 	{
 		OverallInfo.Session.TimeAtStart = CurrentTimeMs - 1000 * OverallInfo.Session.Timer;
 		OverallInfo.Total.TimeAtStart = CurrentTimeMs - 1000 * OverallInfo.Total.Timer;
@@ -1277,13 +1246,12 @@ LRESULT CALLBACK TrafficCounterWndProc_MW(HWND hwnd, UINT msg, WPARAM wParam, LP
 					NotifyOnSend();
 					break;
 
-				case TIMER_REDRAW: // Перерисовка раз в полсекунды.
+				case TIMER_REDRAW: 
 					{
 						DWORD CurrentTimeMs;
 						SYSTEMTIME stNow;
 
 						SaveSettings(1);
-						// Перед подсчётом суммарного трафика обнуляем счётчики.
 						OverallInfo.CurrentRecvTraffic =
 							OverallInfo.CurrentSentTraffic =
 							OverallInfo.TotalRecvTraffic =
@@ -1303,11 +1271,10 @@ LRESULT CALLBACK TrafficCounterWndProc_MW(HWND hwnd, UINT msg, WPARAM wParam, LP
 
 							Stat_CheckStatistics(i);
 
-							{	// Здесь на основании статистики вычисляются значения всех трафиков и времени.
+							{	
 								DWORD Sum1, Sum2;
 								unsigned long int j;
 
-								// Значения для текущей сессии.
 								for (Sum1 = Sum2 = 0, j = ProtoList[i].StartIndex; j < ProtoList[i].NumberOfRecords; j++)
 								{
 									Sum1 += ProtoList[i].AllStatistics[j].Incoming;
@@ -1317,7 +1284,6 @@ LRESULT CALLBACK TrafficCounterWndProc_MW(HWND hwnd, UINT msg, WPARAM wParam, LP
 								ProtoList[i].CurrentSentTraffic = Sum2 - ProtoList[i].StartOutgoing;
 								OverallInfo.CurrentRecvTraffic += ProtoList[i].CurrentRecvTraffic;
 								OverallInfo.CurrentSentTraffic += ProtoList[i].CurrentSentTraffic;
-								// Значения для выбранного периода.
 								ProtoList[i].TotalRecvTraffic =
 									Stat_GetItemValue(1 << i,
 													  unOptions.PeriodForShow + 1,
@@ -1350,10 +1316,9 @@ LRESULT CALLBACK TrafficCounterWndProc_MW(HWND hwnd, UINT msg, WPARAM wParam, LP
 							NotifyOnSend();
 						}
 
-						// Счётчики суммарного времени.
 						GetLocalTime(&stNow);
 
-						// Не пора ли сбросить общий счётчик?
+
 						if (   (unOptions.PeriodForShow == 0
 								&& stNow.wHour == 0
 								&& stNow.wMinute == 0
@@ -1455,7 +1420,7 @@ void CreateTrafficWindow(HWND hCluiWnd)
 
 	if ( ServiceExists(MS_CLIST_FRAMES_ADDFRAME) )
 	{
-		// Готовимся создавать фрейм
+
 		ZeroMemory( &f, sizeof(CLISTFrame) );
 		f.align = alBottom;
 		f.cbSize = sizeof(CLISTFrame);
@@ -1464,7 +1429,7 @@ void CreateTrafficWindow(HWND hCluiWnd)
 		f.hWnd = TrafficHwnd;
 		f.TBname = ("Traffic counter");
 		f.name = ("Traffic counter");
-		// Создаём фрейм
+
 		Traffic_FrameID = (HANDLE)CallService(MS_CLIST_FRAMES_ADDFRAME,(WPARAM)&f,(LPARAM)0);
 		CallService(MS_SKINENG_REGISTERPAINTSUB,(WPARAM)f.hWnd,(LPARAM)TrafficCounter_PaintCallbackProc);
 
@@ -1472,7 +1437,6 @@ void CreateTrafficWindow(HWND hCluiWnd)
 		CreateTrafficMenu();
 	}
 
-	// Создаём таймеры.
 	SetTimer(TrafficHwnd, TIMER_REDRAW, 500, NULL);
 	UpdateNotifyTimer();
 }
@@ -1592,8 +1556,7 @@ void CreateProtocolList(void)
 		ProtoList[i].StartIndex = ProtoList[i].NumberOfRecords - 1;
 		ProtoList[i].StartIncoming = ProtoList[i].AllStatistics[ProtoList[i].StartIndex].Incoming;
 		ProtoList[i].StartOutgoing = ProtoList[i].AllStatistics[ProtoList[i].StartIndex].Outgoing;
-	} // цикл по аккаунтам
-	// Начальные значения для суммарной информации.
+	} 
 	OverallInfo.Session.Timer =	OverallInfo.Total.Timer = 0;
 }
 
@@ -1660,7 +1623,6 @@ int UpdateFonts(WPARAM wParam, LPARAM lParam)
 	TrafficFontHeight = abs(logfont.lfHeight) + 1;
 	Traffic_BkColor = CallService(MS_COLOUR_GETT, (WPARAM)&TrafficBackgroundColorID, 0);
 
-	// Ключевой цвет
 	UseKeyColor = DBGetContactSettingByte(NULL, "ModernSettings", "UseKeyColor", 1);
 	KeyColor = DBGetContactSettingDword(NULL, "ModernSettings", "KeyColor", 0);
 
@@ -1685,10 +1647,8 @@ unsigned short int TrafficWindowHeight(void)
 	for (i = 0, ActProto = unOptions.ShowOverall + unOptions.ShowSummary; i < NumberOfAccounts; i++)
 		ActProto += ProtoList[i].Visible && ProtoList[i].Enabled;
 
-	// Высота строки минимум 16 пикселей (для иконки).
 	Traffic_LineHeight = TrafficFontHeight > 16 ? TrafficFontHeight: 16;
 
-	// Высота фрейма равна количеству строк.
 	MaxWndHeight = ActProto * Traffic_LineHeight
 		+ Traffic_AdditionSpace * (ActProto - 1)
 		+ 4;
@@ -1696,7 +1656,6 @@ unsigned short int TrafficWindowHeight(void)
 	return (MaxWndHeight < TrafficFontHeight) ? 0 : MaxWndHeight;
 }
 
-// Функция вносит изменения в ProtoList при коммутации аккаунтов
 int OnAccountsListChange(WPARAM wParam, LPARAM lParam)
 {
 	BYTE i;

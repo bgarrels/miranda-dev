@@ -1,30 +1,56 @@
+/*
+Traffic Counter plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) Copyright 2007-2011 Mironych
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
+
 typedef struct
 {
-	TCHAR Alignment;	// Выравнивание. L - к левой границе, R - к правой.
-	WORD Interval;		// Расстояние, на которое граница строки отстоит от левого края фрейма.
-	TCHAR *String;		// Собственно строка.
+	TCHAR Alignment;
+	WORD Interval;	
+	TCHAR *String;		
 } RowItemInfo;
 
-/* Функция разбирает строку и возвращает список тегов и соответствующих им строк.
-Аргументы:
-InputString - строка для разбора;
-RowItemsList - список найденных элементов.
-Возвращаемое значение - количество элементов в списках. */
+
 WORD GetRowItems(TCHAR *InputString, RowItemInfo **RowItemsList);
 
-/* Функция возвращает количество дней в указанном месяце указанного года. */
+
 BYTE DaysInMonth(BYTE Month, WORD Year);
 
-// Функция определяет день недели по дате
-// 7 - ВС, 1 - ПН и т. д.
+
 BYTE DayOfWeek(BYTE Day, BYTE Month, WORD Year);
 
-/* Аргументы:
-	Value - количество байт;
-	Unit - единицы измерения (0 - байты, 1 - килобайты, 2 - мегабайты, 3 - автоматически);
-	Buffer - адрес строки для записи результата;
-	Size - размер буфера.
-Возвращаемое значение: требуемый размер буфера. */
+
 WORD GetFormattedTraffic(DWORD Value, BYTE Unit, TCHAR *Buffer, WORD Size);
 
 WORD GetDurationFormatM(DWORD Duration, TCHAR *Format, TCHAR *Buffer, WORD Size);

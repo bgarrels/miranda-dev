@@ -2,8 +2,15 @@
 #define commonheaders_h__
 
 /*
-Traffic Counter plugin for Miranda IM 
-Copyright 2007-2011 Mironych.
+Traffic Counter plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) Copyright 2007-2011 Mironych
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -18,6 +25,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #pragma warning(disable: 4786) // identifier was truncated in the debug information 
@@ -34,7 +51,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define _WIN32_WINNT 0x0601		// Win 7
 */
 
-#define MIRANDA_VER 0x0900
+#define MIRANDA_VER    0x0A00
 #define MIRANDA_CUSTOM_LP
 //#define _USE_32BIT_TIME_T 1
 
@@ -69,7 +86,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <m_hotkeys.h>
 
 // For Modern Contact List
-#include "../Modernb/modern_global_structure.h"
+#include "../include/modern_global_structure.h"
 #include "m_skin_eng.h"
 #include "m_variables.h"
 

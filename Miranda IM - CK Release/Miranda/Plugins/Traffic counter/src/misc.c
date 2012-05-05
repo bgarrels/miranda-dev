@@ -1,6 +1,13 @@
 /*
-Traffic Counter plugin for Miranda IM 
-Copyright 2007-2011 Mironych.
+Traffic Counter plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) Copyright 2007-2011 Mironych
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -15,59 +22,54 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "commonheaders.h"
 
-/* Функция разбирает строку и возвращает список тегов и соответствующих им строк.
-Аргументы:
-InputString - строка для разбора;
-RowItemsList - список найденных элементов.
-Возвращаемое значение - количество элементов в списках. */
+
 WORD GetRowItems(TCHAR *InputString, RowItemInfo **RowItemsList)
 {
 	TCHAR *begin, *end;
 	WORD c = 0;
 
-	// Ищем слева открывающую скобку.
 	begin = _tcschr(InputString, '{');
-	// Если скобка найдена...
 	if (begin)
 	{
-		// Выделяем память под указатели
 		*RowItemsList = (RowItemInfo*)mir_alloc(sizeof(RowItemInfo));
 	}
 	else return 0;
 
 	do
 	{
-		// Сразу вслед за ней ищем закрывающую.
 		end = _tcschr(begin, '}');
 
-		// Выделяем память под указатели
 		*RowItemsList = (RowItemInfo*)mir_realloc(*RowItemsList, sizeof(RowItemInfo) * (c + 1));
 
-		// Разбираем тег.
 		_stscanf(begin + 1, _T("%c%d"),
 				&((*RowItemsList)[c].Alignment),
 				&((*RowItemsList)[c].Interval));
 
-		// Ищем далее открывающую скобку - это конец строки, соответствующей тегу.
 		begin = _tcschr(end, '{');
 
 		if (begin)
 		{
-			// Выделяем память под строку.
 			(*RowItemsList)[c].String = (TCHAR*)mir_alloc(sizeof(TCHAR) * (begin - end));
-			// Копируем строку.
 			_tcsncpy((*RowItemsList)[c].String, end + 1, begin - end - 1);
 			(*RowItemsList)[c].String[begin - end - 1] = 0;
 		}
 		else
 		{
-			// Выделяем память под строку.
 			(*RowItemsList)[c].String = (TCHAR*)mir_alloc(sizeof(TCHAR) * _tcslen(end));
-			// Копируем строку.
 			_tcsncpy((*RowItemsList)[c].String, end + 1, _tcslen(end));
 		}
 
@@ -77,7 +79,6 @@ WORD GetRowItems(TCHAR *InputString, RowItemInfo **RowItemsList)
 	return c;
 }
 
-/* Функция возвращает количество дней в указанном месяце указанного года. */
 BYTE DaysInMonth(BYTE Month, WORD Year)
 {
 	switch (Month)
@@ -98,8 +99,6 @@ BYTE DaysInMonth(BYTE Month, WORD Year)
 	return 0;
 }
 
-// Функция определяет день недели по дате
-// 7 - ВС, 1 - ПН и т. д.
 BYTE DayOfWeek(BYTE Day, BYTE Month, WORD Year)
 {
 	WORD a, y, m;
@@ -114,20 +113,12 @@ BYTE DayOfWeek(BYTE Day, BYTE Month, WORD Year)
 	return a;
 }
 
-/*
-Аргументы:
-	Value - количество байт;
-	Unit - единицы измерения (0 - байты, 1 - килобайты, 2 - мегабайты, 3 - автоматически);
-	Buffer - адрес строки для записи результата;
-	Size - размер буфера.
-Возвращаемое значение: требуемый размер буфера.
-*/
 WORD GetFormattedTraffic(DWORD Value, BYTE Unit, TCHAR *Buffer, WORD Size)
 {
 	TCHAR Str1[32], szUnit[4] = {' ', 0};
 	DWORD Divider;
 	NUMBERFMT nf = {0, 1, 3, _T(","), _T(" "), 0};
-	TCHAR *Res; // Промежуточный результат.
+	TCHAR *Res; 
 	WORD l;
 
 	switch (Unit)
@@ -175,35 +166,26 @@ WORD GetFormattedTraffic(DWORD Value, BYTE Unit, TCHAR *Buffer, WORD Size)
 	return l;
 }
 
-/* Преобразование интервала времени в его строковое представление
-Аргументы:
-Duration: интервал времени в секундах;
-Format: строка формата;
-Buffer: адрес буфера, куда функция помещает результат.
-Size - размер буфера. */
 WORD GetDurationFormatM(DWORD Duration, TCHAR *Format, TCHAR *Buffer, WORD Size)
 {
 	DWORD q;
 	WORD TokenIndex, FormatIndex, Length;
-	TCHAR Token[256],  // Аккумулятор.
-		*Res; // Промежуточный результат.
+	TCHAR Token[256], 
+		*Res; 
 
-	Res = (TCHAR*)malloc(sizeof(TCHAR)); // Выделяем чуть-чуть памяти под результат, но это только начало.
+	Res = (TCHAR*)malloc(sizeof(TCHAR)); 
 	SecureZeroMemory(Res, sizeof(TCHAR));
 
 	for (FormatIndex = 0; Format[FormatIndex];)
 	{
-		// Ищем токены. Считается, что токен - только буквы.
 		TokenIndex = 0;
 		q = _istalpha(Format[FormatIndex]);
-		// Копируем символы в аккумулятор до смены флага.
 		do
 		{
 			Token[TokenIndex++] = Format[FormatIndex++];
 		} while (q == _istalpha(Format[FormatIndex]));
 		Token[TokenIndex] = 0;
 
-		// Что получили в аккумуляторе?
 		if (!_tcscmp(Token, _T("d")))
 		{
 			q = Duration / (60 * 60 * 24);
@@ -253,7 +235,6 @@ WORD GetDurationFormatM(DWORD Duration, TCHAR *Format, TCHAR *Buffer, WORD Size)
 			Duration -= q;
 		}
 
-		// Добавим памяти, если нужно.
 		Length = _tcslen(Res) + _tcslen(Token) + 1;
 		Res = (TCHAR*)realloc(Res, Length * sizeof(TCHAR));
 		_tcscat(Res, Token);
@@ -273,11 +254,6 @@ WORD GetDurationFormatM(DWORD Duration, TCHAR *Format, TCHAR *Buffer, WORD Size)
 	return Length;
 }
 
-/* Результат:
--1 - st1 < st2
- 0 - st1 = st2
-+1 - st1 > st2
-*/
 signed short int TimeCompare(SYSTEMTIME st1, SYSTEMTIME st2)
 {
 	signed short int a, b, c, d;
