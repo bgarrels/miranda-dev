@@ -40,7 +40,7 @@ $Id$		   : $Id$:
 
 HANDLE hMainThread = 0;
 unsigned long mainThreadId = 0;
-int hLangpack;
+int hLangpack = 0;
 
 HANDLE hCSModuleLoadedHook = NULL;
 
