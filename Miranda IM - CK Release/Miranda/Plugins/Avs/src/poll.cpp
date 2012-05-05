@@ -1,20 +1,38 @@
-/* 
-Copyright (C) 2006 Ricardo Pescuma Domenecci, Nightwish
+/*
+AVS plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-This is free software; you can redistribute it and/or
-modify it under the terms of the GNU Library General Public
-License as published by the Free Software Foundation; either
-version 2 of the License, or (at your option) any later version.
+Authors
+				Copyright (C) 2006 Ricardo Pescuma Domenecci, Nightwish
+				Copyright (C) 2006-2012 Boris Krasnovskiy
 
-This is distributed in the hope that it will be useful,
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Library General Public License for more details.
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-You should have received a copy of the GNU Library General Public
-License along with this file; see the file license.txt.  If
-not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-Boston, MA 02111-1307, USA.  
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "commonheaders.h"
@@ -241,12 +259,24 @@ int FetchAvatarFor(HANDLE hContact, char *szProto = NULL)
 			)
 		{
 			// Request it
-			PROTO_AVATAR_INFORMATIONT pai = {0};
-			pai.cbSize = sizeof(pai);
-			pai.hContact = hContact;
+			PROTO_AVATAR_INFORMATIONT pai_s = {0};
+			pai_s.cbSize = sizeof(pai_s);
+			pai_s.hContact = hContact;
 			//_DebugTrace(hContact, "schedule request");
-			result = CallProtoService(szProto, PS_GETAVATARINFOT, GAIF_FORCE, (LPARAM)&pai);
-			ProcessAvatarInfo(pai.hContact, result, &pai, szProto);
+			INT_PTR res = CallProtoService(szProto, PS_GETAVATARINFOT, GAIF_FORCE, (LPARAM)&pai_s);
+#ifdef _UNICODE
+			if (res == CALLSERVICE_NOTFOUND)
+			{
+				PROTO_AVATAR_INFORMATION pai = {0};
+				pai.cbSize = sizeof(pai);
+				pai.hContact = hContact;
+				res = CallProtoService(szProto, PS_GETAVATARINFO, GAIF_FORCE, (LPARAM)&pai);
+				MultiByteToWideChar( CP_ACP, 0, pai.filename, -1, pai_s.filename, SIZEOF(pai_s.filename));
+				pai_s.format = pai.format;
+			}
+#endif
+			if (res != CALLSERVICE_NOTFOUND) result = res;
+			ProcessAvatarInfo(pai_s.hContact, result, &pai_s, szProto);
 		}
 	}
 
