@@ -1,57 +1,50 @@
-/* ========================================================================
-
-                              Custom Status List
-                              __________________
-
-  Custom Status List plugin for Miranda-IM (www.miranda-im.org)
-  Follower of Custom Status History List by HANAX
-  Copyright © 2006-2008 HANAX
-  Copyright © 2007-2009 jarvis
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-
-  ============================================================================
-
-  File name      : $URL$
-  Revision       : $Rev$
-  Last change on : $Date$
-  Last change by : $Author$
-
-  ============================================================================
-
-
-  DESCRIPTION:
-
-  Offers List of your Custom Statuses.
-
-  ============================================================================
-
-// ====[ INCLUDES AND DEFINITIONS ]======================================== */
-
 #ifndef __CSLIST_H
 #define __CSLIST_H 1
 
+/*
+Custom Status List for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+                Copyright (C) 2006-2008 HANAX
+                Copyright (C) 2007-2009 jarvis
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+* Offers List of your Custom Statuses.
+*/
+
 #if defined UNICODE
-#define WINVER          0x501
-#define _WIN32_WINNT    0x501
+#define WINVER          0x601
+#define _WIN32_WINNT    0x601
 #define _WIN32_IE	    0x600
-#else
-#define WINVER          0x400
-#define _WIN32_WINNT    0x400
-#define _WIN32_IE       0x400
-#define LVIF_GROUPID    0
+//#define LVIF_GROUPID    0
 #endif
 #define MIRANDA_VER   0x0A00
 
@@ -80,10 +73,9 @@
 #include <m_hotkeys.h>
 #include <m_variables.h>
 
-// ====[ BASIC DEFINITIONS ]==================================================
 
 #include "resource.h"
-#include "version.h"
+#include "../version.h"
 
 #define MODULENAME	       "Custom Status List"
 
@@ -91,7 +83,6 @@
 #define PLUGIN_GUUID                  { 0xc8cc7414, 0x6507, 0x4af6, { 0x92, 0x5a, 0x83, 0xc1, 0xd2, 0xf7, 0xbe, 0x8c } }
 
 // ====[ LIMITS ]=============================================================
-
 #define EXTRASTATUS_TITLE_LIMIT			64   // limit of chars for extra status title
 #define EXTRASTATUS_MESSAGE_LIMIT		2048 // limit of chars for extra status message
 #define XSTATUS_COUNT					32
@@ -99,11 +90,9 @@
 #define MOODS_COUNT						84
 
 // ====[ SERVICES ]===========================================================
-
 #define MS_PSEUDO_PROTO_PROTOACCSENUM         ( CSList::bAccountsSupported ? MS_PROTO_ENUMACCOUNTS : MS_PROTO_ENUMPROTOCOLS )
 
 // ====[ DEFAULT DB VALUES ]==================================================
-
 #define DEFAULT_ICQ_XSTATUS_ENABLED                 1
 #define DEFAULT_PLUGIN_SHOW_RELNOTES                0
 #define DEFAULT_PLUGIN_SHOW_NONSTANDARD_XSTATUSES   1
@@ -117,7 +106,6 @@
 
 
 // ====[ FUNCTION MACROS ]====================================================
-
 // set which row is selected (cannot be only focused, but fully selected - second param ;))
 #define ListView_GetSelectedItemMacro( hwnd )   ListView_GetNextItem( hwnd, -1, LVNI_FOCUSED | LVNI_SELECTED );
 #ifndef ListView_SetSelectionMark
@@ -139,7 +127,6 @@ typedef void (__cdecl *pForAllProtosFunc)( char*, void* );
 
 
 // ====[ STRUCTURES ]=========================================================
-
 struct StatusItem { // list item structure
 	int     iIcon;
 	TCHAR   tszTitle[EXTRASTATUS_TITLE_LIMIT];
@@ -326,8 +313,6 @@ static struct CSMoods { // combobox moods icons
 	{ 84, LPGENT("Worried"),      "worried"       },
 };
 // ====[ MY BITCHY LIST IMPLEMENTATION x)) ]==================================
-// TODO: Optimize it all x))
-
 template< class T > struct ListItem
 {
 	T* item;
