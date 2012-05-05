@@ -75,9 +75,6 @@
     <None Include="Docs\Readme_eng.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="Docs\Readme_rus.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="Docs\ToDo.txt">
       <Filter>docs</Filter>
     </None>
