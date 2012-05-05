@@ -1,5 +1,10 @@
 /*
+Modernopt plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C) 2009 Victor Pavlychko
+			Copyright (C) 2010-2012 George Hazan
 
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
@@ -18,14 +23,24 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
-// to enable all 0.8.0 core functions
-#define MIRANDA_VER 0x800
+// to enable all 0.10.x core functions
+#define MIRANDA_VER    0x0A00
 
-#define WINVER 0x0501
-#define _WIN32_WINNT 0x0501
-#define _WIN32_IE 0x0501
+#define WINVER 0x0600
+#define _WIN32_WINNT 0x0600
+#define _WIN32_IE 0x0600
 
 #define _CRT_SECURE_NO_WARNINGS
 #define CINTERFACE
