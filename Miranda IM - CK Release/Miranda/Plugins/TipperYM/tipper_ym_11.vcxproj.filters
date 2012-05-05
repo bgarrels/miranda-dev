@@ -22,6 +22,12 @@
     <Filter Include="docs\sample skin">
       <UniqueIdentifier>{d2494fb7-de8a-4ad6-b9e8-4eee0882b963}</UniqueIdentifier>
     </Filter>
+    <Filter Include="docs\autoexcec">
+      <UniqueIdentifier>{97b70240-0079-4005-82f3-15a73dd0a778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{5ef9a5f1-e5af-4939-a944-9ee6b42d8e38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\bitmap_func.cpp">
@@ -103,43 +109,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\apply.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\arrow_down.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\arrow_up.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\copy_all_items.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\copy_item.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\reload.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\separator.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="docs\tipper_licence.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\tipper_orig_readme.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\tipper_readme.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\tipper_skins.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\autoexec_tipper_items_cz.ini">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\autoexec_tipper_items_eng.ini">
       <Filter>docs</Filter>
     </None>
     <None Include="docs\sample skin\preview.jpg">
@@ -163,6 +133,33 @@
     <None Include="docs\tipper classic\preview.jpg">
       <Filter>docs\tipper classic</Filter>
     </None>
+    <None Include="docs\autoexcec\autoexec_tipper_items_cz.ini">
+      <Filter>docs\autoexcec</Filter>
+    </None>
+    <None Include="docs\autoexcec\autoexec_tipper_items_eng.ini">
+      <Filter>docs\autoexcec</Filter>
+    </None>
+    <None Include="res\apply.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="res\arrow_down.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="res\arrow_up.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="res\copy_all_items.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="res\copy_item.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="res\reload.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="res\separator.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
@@ -171,5 +168,13 @@
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Orig. Readme.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="docs\Readme.txt">
+      <Filter>docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

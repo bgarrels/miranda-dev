@@ -1,3 +1,6 @@
+#ifndef __MIR_SMILEYS_H__
+#define __MIR_SMILEYS_H__
+
 /* 
 Copyright (C) 2005 Ricardo Pescuma Domenecci
 
@@ -16,9 +19,6 @@ License along with this file; see the file license.txt.  If
 not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.  
 */
-
-#ifndef __MIR_SMILEYS_H__
-#define __MIR_SMILEYS_H__
 
 #define DT_RESIZE_SMILEYS		0x10000000
 
