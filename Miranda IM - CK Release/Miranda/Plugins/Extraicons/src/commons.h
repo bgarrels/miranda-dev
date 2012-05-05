@@ -1,5 +1,5 @@
 #ifndef __COMMONS_H__
-# define __COMMONS_H__
+#define __COMMONS_H__
 
 /*
 Extraicons service plugin for
@@ -37,11 +37,13 @@ $Id$		   : $Id$:
 ===============================================================================
 */
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #ifdef UNICODE
 #error "Unicode not needed by this plugin"
 #endif
 
-#define _WIN32_IE 0x0600
+#define _WIN32_IE 0x500
 #include <windows.h>
 #include <tchar.h>
 #include <stdio.h>
@@ -54,8 +56,9 @@ $Id$		   : $Id$:
 #include <algorithm>
 using namespace std;
 
-// Miranda headers and version
-#define MIRANDA_VER    0x0A00
+// Miranda headers
+#define MIRANDA_VER 0x0800
+#define MIRANDA_CUSTOM_LP
 
 #include <newpluginapi.h>
 #include <m_system.h>
@@ -75,7 +78,7 @@ using namespace std;
 #include <m_skin.h>
 #include <m_userinfo.h>
 
-#include "mir_icons.h"
+#include "..\utils\mir_icons.h"
 
 #include "resource.h"
 #include "m_extraicons.h"
