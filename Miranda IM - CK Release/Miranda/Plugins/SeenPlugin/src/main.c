@@ -1,12 +1,19 @@
 /*
-"Last Seen mod" plugin for Miranda IM
-Copyright ( C ) 2002-03  micron-x
-Copyright ( C ) 2005-07  Y.B.
+Last Seen plugin for 
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C) 2002-03  micron-x
+			Copyright (C) 2005-07  Y.B.
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
-of the License, or ( at your option ) any later version.
+of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,13 +24,18 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-File name      : $URL: http://svn.berlios.de/svnroot/repos/mgoodies/trunk/lastseen-mod/main.c $
-Revision       : $Rev: 1571 $
-Last change on : $Date: 2007-12-30 04:55:51 +0300 (Вс, 30 дек 2007) $
-Last change by : $Author: y_b $
-*/
-#include "seen.h"
+===============================================================================
 
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
+
+#include "seen.h"
 
 HINSTANCE hInstance;
 HANDLE ehdb = NULL, ehproto = NULL, ehmissed = NULL, ehuserinfo = NULL, ehmissed_proto = NULL, hOptInit = NULL, hMainInit = NULL;
@@ -42,7 +54,7 @@ PLUGININFOEX pluginInfo={
 		"Log when a user was last seen online and which users were online while you were away.",
 		"Heiko Schillinger, YB",
 		authemail,
-		"� 2001-2002 Heiko Schillinger, 2003 modified by Bruno Rino, 2005-7 Modified by YB",
+		"� 2001-2002 Heiko Schillinger, 2003 modified by Bruno Rino, 2005-2008 Modified by YB",
 		"http://forums.miranda-im.org/showthread.php?t=2822",
 		0,
 #ifndef PERMITNSN

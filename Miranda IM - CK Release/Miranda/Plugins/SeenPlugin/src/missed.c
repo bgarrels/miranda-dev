@@ -1,12 +1,19 @@
 /*
-"Last Seen mod" plugin for Miranda IM
-Copyright ( C ) 2002-03  micron-x
-Copyright ( C ) 2005-07  Y.B.
+Last Seen plugin for 
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C) 2002-03  micron-x
+			Copyright (C) 2005-07  Y.B.
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
-of the License, or ( at your option ) any later version.
+of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,21 +24,25 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-File name      : $URL: http://svn.berlios.de/svnroot/repos/mgoodies/trunk/lastseen-mod/missed.c $
-Revision       : $Rev: 1570 $
-Last change on : $Date: 2007-12-30 01:30:07 +0300 (Вс, 30 дек 2007) $
-Last change by : $Author: y_b $
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
+
 #include "seen.h"
 
 #include <m_ignore.h>
 
 
-
 MISSEDCONTACTS mcs;
 extern HANDLE ehmissed;
 extern HINSTANCE hInstance;
-
 
 
 WPARAM IsUserMissed(WPARAM contact)
@@ -48,7 +59,6 @@ WPARAM IsUserMissed(WPARAM contact)
 }
 
 
-
 int RemoveUser(int pos)
 {
 	int loop;
@@ -60,7 +70,6 @@ int RemoveUser(int pos)
 
 	return 0;
 }
-
 
 
 int ResetMissed(void)
@@ -149,7 +158,6 @@ INT_PTR CALLBACK MissedDlgProc(HWND hdlg,UINT msg,WPARAM wparam,LPARAM lparam)
 
 
 
-
 int ShowMissed(void)
 {
 	int loop=0;
@@ -212,8 +220,8 @@ int LogStatus(WPARAM wparam,LPARAM lparam)
 
 	return 0;
 }
-
 */
+
 
 int Test(WPARAM wparam,LPARAM lparam)
 {

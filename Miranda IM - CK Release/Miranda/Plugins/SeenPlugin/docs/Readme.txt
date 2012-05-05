@@ -1,5 +1,3 @@
-This source code is licensed under the GPL (http://www.gnu.org/copyleft/gpl.html)
-
 Please notify me of any changes that improve the plugin or add
 new features.
 
