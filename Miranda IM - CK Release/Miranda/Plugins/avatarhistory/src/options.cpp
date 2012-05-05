@@ -1,7 +1,15 @@
 /*
-Avatar History Plugin
-Copyright (C) 2006  Matthew Wild - Email: mwild1@gmail.com
-Copyright (C) 2012  wishmaster51@gmail.com
+Avatar History Plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors:
+			Copyright (C) 2006  Matthew Wild - Email: mwild1@gmail.com
+			Copyright (C) 2006-2010 Pescuma
+			Copyright (C) 2012 wishmaster51
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -15,18 +23,25 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+==============================================================================
 */
 
 #include "AvatarHistory.h"
-#include <commctrl.h>
-#include <prsht.h>
-
-//Pescuma stuff
-#include "mir_options.h"
+#include "../../Utils/Pescuma/mir_options.h"
 
 
-// Prototypes 
+
+// Prototypes /////////////////////////////////////////////////////////////////////////////////////
 
 Options opts;
 
@@ -66,7 +81,7 @@ static UINT popupsExpertControls[] = {
 };
 
 
-// Functions
+// Functions //////////////////////////////////////////////////////////////////////////////////////
 
 
 int OptInit(WPARAM wParam,LPARAM lParam)
@@ -171,15 +186,15 @@ static INT_PTR CALLBACK PopupsDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPA
 	{
 		case WM_INITDIALOG:
 		{
-			SendDlgItemMessage(hwndDlg, IDC_RIGHT_ACTION, CB_ADDSTRING, 0, (LONG) TranslateT("Do nothing"));
-			SendDlgItemMessage(hwndDlg, IDC_RIGHT_ACTION, CB_ADDSTRING, 0, (LONG) TranslateT("Close popup"));
-			SendDlgItemMessage(hwndDlg, IDC_RIGHT_ACTION, CB_ADDSTRING, 0, (LONG) TranslateT("Show avatar history"));
-			SendDlgItemMessage(hwndDlg, IDC_RIGHT_ACTION, CB_ADDSTRING, 0, (LONG) TranslateT("Show contact history"));
+			SendDlgItemMessage(hwndDlg, IDC_RIGHT_ACTION, CB_ADDSTRING, 0, (LPARAM) TranslateT("Do nothing"));
+			SendDlgItemMessage(hwndDlg, IDC_RIGHT_ACTION, CB_ADDSTRING, 0, (LPARAM) TranslateT("Close popup"));
+			SendDlgItemMessage(hwndDlg, IDC_RIGHT_ACTION, CB_ADDSTRING, 0, (LPARAM) TranslateT("Show avatar history"));
+			SendDlgItemMessage(hwndDlg, IDC_RIGHT_ACTION, CB_ADDSTRING, 0, (LPARAM) TranslateT("Show contact history"));
 
-			SendDlgItemMessage(hwndDlg, IDC_LEFT_ACTION, CB_ADDSTRING, 0, (LONG) TranslateT("Do nothing"));
-			SendDlgItemMessage(hwndDlg, IDC_LEFT_ACTION, CB_ADDSTRING, 0, (LONG) TranslateT("Close popup"));
-			SendDlgItemMessage(hwndDlg, IDC_LEFT_ACTION, CB_ADDSTRING, 0, (LONG) TranslateT("Show avatar history"));
-			SendDlgItemMessage(hwndDlg, IDC_LEFT_ACTION, CB_ADDSTRING, 0, (LONG) TranslateT("Show contact history"));
+			SendDlgItemMessage(hwndDlg, IDC_LEFT_ACTION, CB_ADDSTRING, 0, (LPARAM) TranslateT("Do nothing"));
+			SendDlgItemMessage(hwndDlg, IDC_LEFT_ACTION, CB_ADDSTRING, 0, (LPARAM) TranslateT("Close popup"));
+			SendDlgItemMessage(hwndDlg, IDC_LEFT_ACTION, CB_ADDSTRING, 0, (LPARAM) TranslateT("Show avatar history"));
+			SendDlgItemMessage(hwndDlg, IDC_LEFT_ACTION, CB_ADDSTRING, 0, (LPARAM) TranslateT("Show contact history"));
 
 			// Needs to be called here in this case
 			BOOL ret = SaveOptsDlgProc(popupsControls, MAX_REGS(popupsControls), MODULE_NAME, hwndDlg, msg, wParam, lParam);

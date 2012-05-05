@@ -1,26 +1,41 @@
 /*
-Avatar History Plugin
----------
+Avatar History Plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
- This plugin uses the event provided by Avatar Service to 
- automatically back up contacts' avatars when they change.
- Copyright (C) 2006  Matthew Wild - Email: mwild1@gmail.com
+Authors:
+			Copyright (C) 2006  Matthew Wild - Email: mwild1@gmail.com
+			Copyright (C) 2006-2010 Pescuma
+			Copyright (C) 2012 wishmaster51
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+==============================================================================
 */
+
 #include "AvatarHistory.h"
 
 HINSTANCE hInst;
@@ -73,13 +88,15 @@ PLUGININFOEX pluginInfo={
 	"Avatar History (x64)",
 #elif _UNICODE
 	"Avatar History (Unicode)",
+#else
+	"Avatar History (Ansi)",
 #endif
-	PLUGIN_MAKE_VERSION(0,0,3,0),
+	PLUGIN_MAKE_VERSION(0,0,3,1),
 	"This plugin keeps backups of all your contacts' avatar changes and/or shows popups",
 	"Matthew Wild (MattJ), Ricardo Pescuma Domenecci",
 	"mwild1@gmail.com",
 	"© 2006-2012 Matthew Wild, Ricardo Pescuma Domenecci",
-	"https://code.google.com/p/pescuma/",
+	"http://pescuma.org/miranda/avatarhist",
 	UNICODE_AWARE,
 	0,		//doesn't replace anything built-in
 #ifdef _WIN64
@@ -260,14 +277,16 @@ static int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 
 		upd.szUpdateURL = UPDATER_AUTOREGISTER;
 
-		upd.szBetaVersionURL = "http://pescuma.googlecode.com/svn/trunk/Miranda/Plugins/avatarhistory/Docs/avatarhist_version.txt";
-		upd.szBetaChangelogURL = "http://pescuma.googlecode.com/svn/trunk/Miranda/Plugins/avatarhistory/Docs/avatarhist_changelog.txt";
+		upd.szBetaVersionURL = "http://pescuma.org/miranda/avatarhist_version.txt";
+		upd.szBetaChangelogURL = "http://pescuma.org/miranda/avatarhist#Changelog";
 		upd.pbBetaVersionPrefix = (BYTE *)"Avatar History ";
 		upd.cpbBetaVersionPrefix = (int) strlen((char *)upd.pbBetaVersionPrefix);
 #ifdef _WIN64
-		upd.szBetaUpdateURL = "https://pescuma.googlecode.com/files/avatarhistW.0.0.3.0-x64.zip";
+		upd.szBetaUpdateURL = "http://pescuma.org/miranda/avatarhist64.zip";
 #elif _UNICODE
-		upd.szBetaUpdateURL = "https://pescuma.googlecode.com/files/avatarhistW.0.0.3.0.zip";
+		upd.szBetaUpdateURL = "http://pescuma.org/miranda/avatarhistW.zip";
+#else
+		upd.szBetaUpdateURL = "http://pescuma.org/miranda/avatarhist.zip";
 #endif
 
 		upd.pbVersion = (BYTE *)CreateVersionStringPluginEx(&pluginInfo, szCurrentVersion);
