@@ -1,3 +1,39 @@
+/*
+Skype Status Change plugin for 
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2008-2010 Dioksin 
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
+
 #include <windows.h>
 #include <stdio.h>
 #include <tchar.h>
@@ -8,17 +44,17 @@
 #define MIRANDA_CUSTOM_LP
 
 #pragma warning(disable: 4996)
-#include "newpluginapi.h"
-#include "m_utils.h"
+#include <newpluginapi.h>
+#include <m_utils.h>
 
 #include "m_updater.h"
-#include "m_protocols.h"
-#include "m_protosvc.h"
+#include <m_protocols.h>
+#include <m_protosvc.h>
 #include <cassert>
-#include "m_awaymsg.h"
-#include "m_database.h"
-#include "m_options.h"
-#include "m_langpack.h"
+#include <m_awaymsg.h>
+#include <m_database.h>
+#include <m_options.h>
+#include <m_langpack.h>
 #pragma warning(default: 4996)
 #include "resource.h"
 #include <map>
@@ -568,23 +604,21 @@ namespace
 			Update update = {0};
 			char szVersion[16];
 
+			update.cbSize = sizeof(update);
 			update.szComponentName = g_pluginInfo.shortName;
-			update.szVersionURL = 0;
-			update.pbVersionPrefix = 0;
-			update.cpbVersionPrefix = 0;
 			update.szUpdateURL = UPDATER_AUTOREGISTER;
 
 			update.szBetaVersionURL = "http://code.google.com/p/dioksin/downloads/list";
 #ifdef WIN64
 			update.szBetaUpdateURL = "http://dioksin.googlecode.com/files/SkypeStatusChange64_%VERSION%.zip";
-			update.pbBetaVersionPrefix = (BYTE*) "SkypeStatusChange (x64) ";
+			update.pbBetaVersionPrefix = (BYTE*) "Skype Status Change (x64) ";
 #else
 			update.szBetaUpdateURL = "http://dioksin.googlecode.com/files/SkypeStatusChange_%VERSION%.zip";
-			update.pbBetaVersionPrefix = (BYTE*) "SkypeStatusChange ";
+			update.pbBetaVersionPrefix = (BYTE*) "Skype Status Change ";
 #endif
 			update.cpbBetaVersionPrefix = static_cast<int>(strlen((char *)update.pbBetaVersionPrefix));
 
-			update.pbVersion = (BYTE*)CreateVersionString(g_pluginInfo.version,szVersion);
+			update.pbVersion = (BYTE*)CreateVersionStringPluginEx(&g_pluginInfo, szVersion);
 			update.cpbVersion = static_cast<int>(strlen((char *)update.pbVersion));
 
 			update.szBetaChangelogURL = "http://code.google.com/p/dioksin/source/list";
