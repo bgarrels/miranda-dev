@@ -16,6 +16,9 @@
     <Filter Include="docs">
       <UniqueIdentifier>{53becc9a-eda1-4640-9c0a-42390c120821}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{37d7827f-a914-4042-8218-2deaf2f7ba6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\acc.cpp">
@@ -58,22 +61,21 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\avatar.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="docs\README">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\license.txt">
-      <Filter>docs</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="avs.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\README.txt">
+      <Filter>docs</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\avatar.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
   </ItemGroup>
 </Project>

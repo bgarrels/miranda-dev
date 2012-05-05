@@ -1,5 +1,9 @@
 /*
+AVS plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C) Nightwish, Pescuma
 
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
@@ -18,6 +22,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "commonheaders.h"
@@ -349,54 +363,6 @@ static struct CacheNode *AllocCacheBlock()
 	return(allocedBlock);
 }
 
-int _DebugPopup(HANDLE hContact, const char *fmt, ...)
-{
-	POPUPDATA ppd;
-	va_list va;
-	char	debug[1024];
-	int		ibsize = 1023;
-
-	if (!DBGetContactSettingByte(0, AVS_MODULE, "warnings", 0))
-		return 0;
-
-	va_start(va, fmt);
-	_vsnprintf(debug, ibsize, fmt, va);
-
-	if (CallService(MS_POPUP_QUERY, PUQS_GETSTATUS, 0) == 1) {
-		ZeroMemory((void *)&ppd, sizeof(ppd));
-		ppd.lchContact = hContact;
-		ppd.lchIcon = LoadSkinnedIcon(SKINICON_EVENT_MESSAGE);
-		strncpy(ppd.lpzContactName, "Avatar Service Warning:", MAX_CONTACTNAME);
-		mir_snprintf(ppd.lpzText, MAX_SECONDLINE - 5, "%s\nAffected contact: %s", debug, hContact != 0 ? (char *)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)hContact, 0) : "Global");
-		ppd.colorText = RGB(0,0,0);
-		ppd.colorBack = RGB(255,0,0);
-		CallService(MS_POPUP_ADDPOPUP, (WPARAM)&ppd, 0);
-	}
-	return 0;
-}
-
-int _TracePopup(HANDLE hContact, const char *fmt, ...)
-{
-	POPUPDATA ppd;
-	va_list va;
-	char	debug[1024];
-	int		ibsize = 1023;
-
-	va_start(va, fmt);
-	_vsnprintf(debug, ibsize, fmt, va);
-
-	ZeroMemory((void *)&ppd, sizeof(ppd));
-	ppd.lchContact = hContact;
-	ppd.lchIcon = g_hIcon;
-	strncpy(ppd.lpzContactName, "Avatar Service TRACE:", MAX_CONTACTNAME);
-	mir_snprintf(ppd.lpzText, MAX_SECONDLINE - 5, "%s\nAffected contact: %s", debug, hContact != 0 ? (char *)CallService(MS_CLIST_GETCONTACTDISPLAYNAME, (WPARAM)hContact, 0) : "Global");
-	ppd.colorText = RGB(0,0,0);
-	ppd.colorBack = RGB(255,0,0);
-	CallService(MS_POPUP_ADDPOPUP, (WPARAM)&ppd, 0);
-
-	return 0;
-}
-
 int SetAvatarAttribute(HANDLE hContact, DWORD attrib, int mode)
 {
 	struct CacheNode *cacheNode = g_Cache;
@@ -561,11 +527,11 @@ int CreateAvatarInCache(HANDLE hContact, avatarCacheEntry *ace, char *szProto)
 #if defined( _UNICODE )
 			else if (ProtoServiceExists(szProto, PS_GETMYAVATAR)) {
 				char szFileName[ MAX_PATH ];
-				if (CallProtoService(szProto, PS_GETMYAVATAR, (WPARAM)szFileName, (LPARAM)MAX_PATH)) 
+				if (CallProtoService(szProto, PS_GETMYAVATAR, (WPARAM)szFileName, (LPARAM)MAX_PATH))
 					tszFilename[0] = '\0';
 				else
 					MultiByteToWideChar( CP_ACP, 0, szFileName, -1, tszFilename, SIZEOF( tszFilename ));
-			} 
+			}
 #endif
 			else if (!DBGetContactSettingTString(NULL, szProto, "AvatarFile", &dbv)) {
 				AVS_pathToAbsolute(dbv.ptszVal, tszFilename);
@@ -2598,7 +2564,7 @@ protoPicCacheEntry::~protoPicCacheEntry()
 
 void protoPicCacheEntry::clear()
 {
-	if (hbmPic != 0) 
+	if (hbmPic != 0)
 		DeleteObject(hbmPic);
 
 	memset(this, 0, sizeof(avatarCacheEntry));
