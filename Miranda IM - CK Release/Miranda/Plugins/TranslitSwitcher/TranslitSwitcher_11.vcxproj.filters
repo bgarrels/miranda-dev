@@ -16,6 +16,9 @@
     <Filter Include="docs">
       <UniqueIdentifier>{221dc5bf-caee-4de6-9bce-905e6127ca13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{250e9c09-8077-4d50-aab5-cb08b600a692}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Version.h">
@@ -42,5 +45,16 @@
     <None Include="Docs\Readme.txt">
       <Filter>docs</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Res\TranslitSend.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\InvertSend.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\SwitchSend.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>
