@@ -354,27 +354,29 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\menuex_changelog.txt" />
-    <None Include="icons\Always Visible.ico" />
-    <None Include="icons\auth_added.ico" />
-    <None Include="icons\auth_ask.ico" />
-    <None Include="icons\change_proto.ico" />
-    <None Include="icons\CopyID_overlay.ico" />
-    <None Include="icons\copyip_overlay.ico" />
-    <None Include="icons\CopyMirVer.ico" />
-    <None Include="icons\hide_from_list.ico" />
-    <None Include="icons\Ignore_list.ico" />
-    <None Include="icons\msg_status.ico" />
-    <None Include="icons\msg_xStatus.ico" />
-    <None Include="icons\Never Visible.ico" />
-    <None Include="icons\recv_files.ico" />
-    <None Include="icons\salad.right.ico" />
-    <None Include="icons\show_in_list.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="include\images.h" />
     <ClInclude Include="include\menuex.h" />
     <ClInclude Include="include\version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Changelog.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\Always Visible.ico" />
+    <Image Include="icons\auth_added.ico" />
+    <Image Include="icons\auth_ask.ico" />
+    <Image Include="icons\change_proto.ico" />
+    <Image Include="icons\CopyID_overlay.ico" />
+    <Image Include="icons\copyip_overlay.ico" />
+    <Image Include="icons\CopyMirVer.ico" />
+    <Image Include="icons\hide_from_list.ico" />
+    <Image Include="icons\Ignore_list.ico" />
+    <Image Include="icons\msg_status.ico" />
+    <Image Include="icons\msg_xStatus.ico" />
+    <Image Include="icons\Never Visible.ico" />
+    <Image Include="icons\recv_files.ico" />
+    <Image Include="icons\salad.right.ico" />
+    <Image Include="icons\show_in_list.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

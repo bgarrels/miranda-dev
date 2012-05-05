@@ -16,6 +16,9 @@
     <Filter Include="docs">
       <UniqueIdentifier>{273a6a04-ec17-44ae-8e64-066e467d6b90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\icons">
+      <UniqueIdentifier>{81ea8b07-dea9-4ee9-b39d-cc5b0893b09d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\images.c">
@@ -34,56 +37,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\menuex_changelog.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="icons\hide_from_list.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\Ignore_list.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\msg_status.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\msg_xStatus.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\Never Visible.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\recv_files.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\salad.right.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\show_in_list.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\Always Visible.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\auth_added.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\auth_ask.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\change_proto.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\CopyID_overlay.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\copyip_overlay.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\CopyMirVer.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="include\images.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -93,5 +46,57 @@
     <ClInclude Include="include\version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Changelog.txt">
+      <Filter>docs</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\Ignore_list.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\msg_status.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\msg_xStatus.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\Never Visible.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\recv_files.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\salad.right.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\show_in_list.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\Always Visible.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\auth_added.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\auth_ask.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\change_proto.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\CopyID_overlay.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\copyip_overlay.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\CopyMirVer.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="icons\hide_from_list.ico">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>
