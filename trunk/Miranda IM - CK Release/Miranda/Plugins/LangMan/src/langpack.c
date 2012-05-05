@@ -1,8 +1,13 @@
 /*
+Language Pack Manager plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-'Language Pack Manager'-Plugin for Miranda IM
+Author
+			Copyright (C) 2005-2012 H. Herkenrath
 
-Copyright (C) 2005-2007 H. Herkenrath
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -15,8 +20,18 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program (LangMan-License.txt); if not, write to the Free Software
+along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "common.h"
@@ -141,18 +156,6 @@ static BOOL LoadPackData(LANGPACK_INFO *pack,BOOL fEnabledPacks,const char *pszF
 	TCHAR szFileName[MAX_PATH];
 	char line[4096],*pszColon,*buf;
 	char szLanguageA[64]; /* same size as pack->szLanguage */
-	/*
-		Miranda Language Pack Version 1
-		Language: (optional)
-		Locale: 0809
-		Authors: Miranda IM Development Team (multiple tags allowed)
-		Author-email: project-info at miranda-im.org (" at " instead of "@" allowed)
-		Last-Modified-Using: Miranda IM 0.7
-		Plugins-included: (multiple tags allowed)
-		X-FLName: name as used on the file listing (non-standard extension)
-		X-Version: 1.2.3.4 (non-standard extension)
-		see 'LangMan-Translation.txt' for some header quidelines 
-	*/
 	if ( !GetPackPath( szFileName, SIZEOF(szFileName), fEnabledPacks, pack->szFileName))
 		return FALSE;
 

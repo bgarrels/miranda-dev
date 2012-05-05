@@ -13,7 +13,7 @@
       <UniqueIdentifier>{835877bf-050d-4034-b3fb-78e456d60765}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-    <Filter Include="Documentation">
+    <Filter Include="Docs">
       <UniqueIdentifier>{b84ecfeb-8124-4339-b93d-5acdd3d205d9}</UniqueIdentifier>
       <Extensions>*.txt</Extensions>
     </Filter>
@@ -59,22 +59,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\LangMan-Developer.txt">
-      <Filter>Documentation</Filter>
-    </None>
-    <None Include="docs\LangMan-License.txt">
-      <Filter>Documentation</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="docs\LangMan-Readme.txt">
-      <Filter>Documentation</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="docs\LangMan-Translation.txt">
-      <Filter>Documentation</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="docs\Info_Src.txt">
-      <Filter>Documentation</Filter>
-    </None>
-    <None Include="docs\License_Appendix.txt">
-      <Filter>Documentation</Filter>
+      <Filter>Docs</Filter>
     </None>
   </ItemGroup>
 </Project>
