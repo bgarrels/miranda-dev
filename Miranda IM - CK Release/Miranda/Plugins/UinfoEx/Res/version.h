@@ -1,9 +1,12 @@
 /*
-
+UserinfoEx plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2009 Miranda ICQ/IM project, 
-all portions of this codebase are copyrighted to the people 
+Authors
+			Copyright (C) 2006-2010 DeathAxe, Yasnovidyashii, Merlin_de, K. Romanov, Kreol
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -17,9 +20,18 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-aLONG with this program; if not, write to the Free Software
+along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #define __MAJOR_VERSION   0
@@ -42,7 +54,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                       "If you know more you can add more."
 #define __AUTHOR      "DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol"
 #define __AUTHOREMAIL "deathaxe@web.de"
-#define __COPYRIGHT   "© 2006-2009 DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol"
+#define __COPYRIGHT   "© 2006-2012 DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol"
 #define __AUTHORWEB   "http://addons.miranda-im.org/details.php?action=viewfile&id=" __STRINGIFY(__UPDATER_DOWNLOAD_ID)
 
 #ifdef _WIN64
@@ -56,9 +68,5 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
   #define __UPDATER_DOWNLOAD_ID 2537
   #define __PLUGIN_DISPLAY_NAME	"UserInfoEx (Unicode)"	//ensure plugin shortName matches file listing! <title>UserInfoEx (Unicode)</title>
   #define __PLUGIN_FILENAME     "uinfoexw.dll"
- #else
-  #define __UPDATER_DOWNLOAD_ID 1971
-  #define __PLUGIN_DISPLAY_NAME	"UserInfoEx"			//ensure plugin shortName matches file listing! <title>UserInfoEx</title>
-  #define __PLUGIN_FILENAME     "uinfoex.dll"
  #endif
 #endif

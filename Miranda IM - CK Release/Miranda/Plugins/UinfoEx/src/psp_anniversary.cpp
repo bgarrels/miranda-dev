@@ -20,10 +20,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL: http://userinfoex.googlecode.com/svn/trunk/psp_anniversary.cpp $
-Revision       : $Revision: 187 $
-Last change on : $Date: 2010-09-08 16:05:54 +0400 (Ср, 08 сен 2010) $
-Last change by : $Author: ing.u.horn $
+File name      : $HeadURL$
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 ===============================================================================
 */
@@ -105,7 +105,7 @@ static INT_PTR CALLBACK DlgProc_AnniversaryEditor(HWND hDlg, UINT uMsg, WPARAM w
 
 						if (
 							len == 0 ||
-							(pszText = (LPTSTR)_alloca((len + 1) * sizeof(TCHAR))) == NULL ||
+							(pszText = (LPTSTR)_malloca((len + 1) * sizeof(TCHAR))) == NULL ||
 							!Edit_GetText(hEdit, pszText, len + 1)
 					)
 						{

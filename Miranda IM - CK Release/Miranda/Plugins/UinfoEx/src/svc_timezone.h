@@ -1,8 +1,16 @@
-/*
-UserinfoEx plugin for Miranda IM
+#ifndef _SVC_TIMEZONE_H_
+#define _SVC_TIMEZONE_H_
 
-Copyright:
-© 2006-2010 DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol
+/*
+UserinfoEx plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C) 2006-2010 DeathAxe, Yasnovidyashii, Merlin_de, K. Romanov, Kreol
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -11,29 +19,27 @@ of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL: https://userinfoex.googlecode.com/svn/trunk/svc_timezone.h $
-Revision       : $Revision: 191 $
-Last change on : $Date: 2010-09-20 11:52:01 +0200 (Mo, 20. Sep 2010) $
-Last change by : $Author: ing.u.horn $
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
 
 ===============================================================================
+
+* This structure is used by GetTimeZoneInformationByIndex to retrieve timezone
+* information from windows' registry
 */
-#ifndef _SVC_TIMEZONE_H_
-#define _SVC_TIMEZONE_H_
 
-/**
- * This structure is used by GetTimeZoneInformationByIndex to retrieve
- * timezone information from windows' registry
- **/
 typedef struct _REG_TZI_FORMAT
 {
 	LONG Bias;
