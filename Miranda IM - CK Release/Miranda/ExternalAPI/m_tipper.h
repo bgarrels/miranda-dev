@@ -1,8 +1,10 @@
 /*
-Tipper plugin for
+TipperYM plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Authors Jan Holub, Scott Ellis
+Authors
+            Copyright (C) 2006-2009 Scott Ellis
+            Copyright (C) 2007-2011 Jan Holub
 
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
@@ -28,15 +30,14 @@ File name      : $HeadURL:
 Revision       : $Revision: 
 Last change on : $Date: 
 Last change by : $Author:
+$Id$		   : $Id$:
 
 ===============================================================================
+
+* Tipper is internally unicode and requires unicows.dll to function correctly on
+  Windows 95/98/ME so you'll find a lot of wchar_t stuff in here.
 */
 
-
-/* Note:
- *		Tipper is internally unicode and requires unicows.dll to function correctly on 95/98/ME
- *		so you'll find a lot of wchar_t stuff in here
- */
 
 /*		Translation function type
  *		Use hContact, module and setting to read your db value(s) and put the resulting string into buff
