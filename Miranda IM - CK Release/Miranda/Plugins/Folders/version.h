@@ -1,7 +1,16 @@
-/*
-Custom profile folders plugin for Miranda IM
+#ifndef M_FOLDERS_VERSION_H
+#define M_FOLDERS_VERSION_H
 
-Copyright © 2005-2010 Cristian Libotean
+/*
+Custom profile folders plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			 Copyright © 2005 Cristian Libotean
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -16,10 +25,17 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
 
-#ifndef M_FOLDERS_VERSION_H
-#define M_FOLDERS_VERSION_H
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
 
 #define __MAJOR_VERSION   0
 #define __MINOR_VERSION   1
@@ -37,7 +53,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define __DESC                  "Service plugin. Allows plugins to save their data to user selected folders; supports variables."
 #define __AUTHOR                "Cristian Libotean"
 #define __AUTHOREMAIL           "eblis102@yahoo.com"
-#define __COPYRIGHT             "© 2005-2010 Cristian Libotean"
+#define __COPYRIGHT             "© 2005-2012 Cristian Libotean"
 #define __AUTHORWEB             "http://www.miranda-im.org/"
 
 #if defined(WIN64) || defined(_WIN64)
