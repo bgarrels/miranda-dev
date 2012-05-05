@@ -88,8 +88,6 @@ PLUGININFOEX pluginInfo={
 	"Avatar History (x64)",
 #elif _UNICODE
 	"Avatar History (Unicode)",
-#else
-	"Avatar History (Ansi)",
 #endif
 	PLUGIN_MAKE_VERSION(0,0,3,1),
 	"This plugin keeps backups of all your contacts' avatar changes and/or shows popups",
