@@ -22,6 +22,9 @@
     <Filter Include="docs">
       <UniqueIdentifier>{6d73329b-8be7-468f-9599-ce318603b6df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{8fef7e1a-deee-47f8-8ec7-f1d69b23dd62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\addeditsettingsdlg.cpp">
@@ -88,60 +91,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\Contacts.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Icon_1.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Icon_14.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Icon_15.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Icon_16.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Icon_17.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Icon_18.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Icon_4.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\offline2.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\online2.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Red.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Red_open.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Yellow.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Yellow_open.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Res\unicode.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\dbepp.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\handle.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\usermenu.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="docs\dbeditorpp_translation.txt">
       <Filter>docs</Filter>
     </None>
@@ -158,5 +107,67 @@
     <Text Include="docs\Readme.txt">
       <Filter>docs</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Res\Yellow_open.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\Contacts.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\dbepp.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\handle.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\handle1.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\ico_RegEdit.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\Icon_1.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\Icon_4.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\Icon_14.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\Icon_15.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\Icon_16.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\Icon_17.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\Icon_18.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\offline2.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\online2.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\Red.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\Red_open.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\unicode.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\UserMenu.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="Res\Yellow.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>

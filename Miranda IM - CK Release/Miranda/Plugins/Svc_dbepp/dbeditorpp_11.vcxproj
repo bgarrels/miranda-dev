@@ -338,24 +338,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\dbeditorpp_translation.txt" />
-    <None Include="res\Contacts.ico" />
-    <None Include="res\dbepp.ico" />
-    <None Include="res\handle.ico" />
-    <None Include="res\Icon_1.ico" />
-    <None Include="res\Icon_14.ico" />
-    <None Include="res\Icon_15.ico" />
-    <None Include="res\Icon_16.ico" />
-    <None Include="res\Icon_17.ico" />
-    <None Include="res\Icon_18.ico" />
-    <None Include="res\Icon_4.ico" />
-    <None Include="res\offline2.ico" />
-    <None Include="res\online2.ico" />
-    <None Include="res\Red.ico" />
-    <None Include="res\Red_open.ico" />
-    <None Include="Res\unicode.ico" />
-    <None Include="res\usermenu.ico" />
-    <None Include="res\Yellow.ico" />
-    <None Include="res\Yellow_open.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -363,6 +345,28 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="docs\Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Res\Contacts.ico" />
+    <Image Include="Res\dbepp.ico" />
+    <Image Include="Res\handle.ico" />
+    <Image Include="Res\handle1.ico" />
+    <Image Include="Res\Icon_1.ico" />
+    <Image Include="Res\Icon_14.ico" />
+    <Image Include="Res\Icon_15.ico" />
+    <Image Include="Res\Icon_16.ico" />
+    <Image Include="Res\Icon_17.ico" />
+    <Image Include="Res\Icon_18.ico" />
+    <Image Include="Res\Icon_4.ico" />
+    <Image Include="Res\ico_RegEdit.ico" />
+    <Image Include="Res\offline2.ico" />
+    <Image Include="Res\online2.ico" />
+    <Image Include="Res\Red.ico" />
+    <Image Include="Res\Red_open.ico" />
+    <Image Include="Res\unicode.ico" />
+    <Image Include="Res\UserMenu.ico" />
+    <Image Include="Res\Yellow.ico" />
+    <Image Include="Res\Yellow_open.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
