@@ -1,10 +1,18 @@
-/*
-Popup Plus plugin for Miranda IM
+#ifndef __popup_gdiplus_h__
+#define __popup_gdiplus_h__
 
-Copyright	� 2002 Luca Santarelli,
-			� 2004-2007 Victor Pavlychko
-			� 2010 MPK
-			� 2010 Merlin_de
+/*
+Popup Plus plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C)	2002 Luca Santarelli
+							2004-2007 Victor Pavlychko
+							2010-2012 Merlin_de, MPK
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -22,15 +30,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL$
-Revision       : $Revision$
-Last change on : $Date$
-Last change by : $Author$
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
 
 ===============================================================================
 */
-#ifndef __popup_gdiplus_h__
-#define __popup_gdiplus_h__
 
 void LoadGDIPlus();
 void UnloadGDIPlus();
