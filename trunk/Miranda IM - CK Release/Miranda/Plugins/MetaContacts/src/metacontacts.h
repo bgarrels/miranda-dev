@@ -1,7 +1,14 @@
 /*
-MetaContacts Plugin for Miranda IM.
+MetaContacts plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright © 2004 Universite Louis PASTEUR, STRASBOURG.
+Authors
+			Copyright (C) 2004 Universite Louis PASTEUR, STRASBOURG.
+			Copyright (C) 2005-2008 Scott Ellis
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -16,17 +23,27 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
 
-/** @file metacontacts.h 
-*
-* Header declaring functions that are accessed in multiple files.
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+* Set the version number here - it will affect the version resource and the version
+* field of the pluginInfo structure.
+* (Be careful that you don't have the resource file open when you change this and rebuild,
+* otherwise the changes may not take effect within the version resource).
 */
 
 #define _CRT_SECURE_NO_DEPRECATE
 
-#define _WIN32_WINNT 0x0400
-#define _WIN32_IE 0x0300
+#define _WIN32_WINNT 0x0600
+#define _WIN32_IE 0x0600
 
 #define MIRANDA_VER 0x0A00
 
@@ -36,7 +53,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <commctrl.h>
 #include <string.h>
 #include <time.h>
-#include "resource.h"
+#include "../include/resource.h"
 
 #include "m_metacontacts.h"
 

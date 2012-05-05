@@ -13,11 +13,11 @@
       <UniqueIdentifier>{84e0cae3-d6a7-4792-a808-7c015ba5af98}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-    <Filter Include="docs">
+    <Filter Include="Docs">
       <UniqueIdentifier>{eebd7dd9-ad3b-4cdf-9db2-88ffb9c9f996}</UniqueIdentifier>
     </Filter>
-    <Filter Include="docs\translation template">
-      <UniqueIdentifier>{2a22c3af-eea5-4684-9448-3cd39b21b0d3}</UniqueIdentifier>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{ef02f40a-a653-4870-a8ee-4b0540c33c49}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -61,32 +61,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="icons\mcmenuof.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\mcmenuoff2.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\meta_add.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\meta_convert.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\meta_edit.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\meta_remove2.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\meta_set_as_default.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\mcmenu.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="docs\metacontacts_template.txt">
-      <Filter>docs\translation template</Filter>
+      <Filter>Docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -96,5 +72,31 @@
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\meta_set_as_default.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\mcmenu.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\mcmenuof.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\mcmenuoff2.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\meta_add.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\meta_convert.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\meta_edit.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\meta_remove2.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>

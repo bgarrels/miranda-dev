@@ -135,9 +135,11 @@
       <MapFileName>
       </MapFileName>
       <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
       <SubSystem>Windows</SubSystem>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <SupportUnloadOfDelayLoadedDLL>
+      </SupportUnloadOfDelayLoadedDLL>
     </Link>
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
@@ -206,10 +208,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MapFileName>
       </MapFileName>
-      <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <SupportUnloadOfDelayLoadedDLL>
+      </SupportUnloadOfDelayLoadedDLL>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
@@ -257,9 +261,11 @@
       <MapFileName>
       </MapFileName>
       <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
       <SubSystem>Windows</SubSystem>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <SupportUnloadOfDelayLoadedDLL>
+      </SupportUnloadOfDelayLoadedDLL>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
@@ -333,10 +339,12 @@
       </LinkTimeCodeGeneration>
       <MapFileName>
       </MapFileName>
-      <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <SupportUnloadOfDelayLoadedDLL>
+      </SupportUnloadOfDelayLoadedDLL>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -357,18 +365,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\metacontacts_template.txt" />
-    <None Include="icons\mcmenu.ico" />
-    <None Include="icons\mcmenuof.ico" />
-    <None Include="icons\mcmenuoff2.ico" />
-    <None Include="icons\meta_add.ico" />
-    <None Include="icons\meta_convert.ico" />
-    <None Include="icons\meta_edit.ico" />
-    <None Include="icons\meta_remove2.ico" />
-    <None Include="icons\meta_set_as_default.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MetaContacts.rc" />
     <ResourceCompile Include="version.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\mcmenu.ico" />
+    <Image Include="icons\mcmenuof.ico" />
+    <Image Include="icons\mcmenuoff2.ico" />
+    <Image Include="icons\meta_add.ico" />
+    <Image Include="icons\meta_convert.ico" />
+    <Image Include="icons\meta_edit.ico" />
+    <Image Include="icons\meta_remove2.ico" />
+    <Image Include="icons\meta_set_as_default.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
