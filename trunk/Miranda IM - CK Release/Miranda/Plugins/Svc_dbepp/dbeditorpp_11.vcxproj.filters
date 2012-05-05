@@ -145,16 +145,18 @@
     <None Include="docs\dbeditorpp_translation.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="docs\dbeditorpp_readme.txt">
-      <Filter>docs</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
     <ResourceCompile Include="Version.rc">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Readme.txt">
+      <Filter>docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
