@@ -1,8 +1,13 @@
 /*
-UserinfoEx plugin for Miranda IM
+UserinfoEx plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright:
-© 2006-2010 DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol
+Authors
+			Copyright (C) 2006-2010 DeathAxe, Yasnovidyashii, Merlin_de, K. Romanov, Kreol
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -11,26 +16,26 @@ of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL$
-Revision       : $Revision$
-Last change on : $Date$
-Last change by : $Author$
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
 
 ===============================================================================
 */
 
-/**
- * System Includes:
- **/
+
+// System Includes:
 #include "commonheaders.h"
 #include "ctrl_combo.h"
 #include "ctrl_edit.h"
