@@ -1,25 +1,41 @@
-/* 
-Copyright (C) 2010 Unsane
-
-This is free software; you can redistribute it and/or
-modify it under the terms of the GNU Library General Public
-License as published by the Free Software Foundation; either
-version 2 of the License, or (at your option) any later version.
-
-This is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Library General Public License for more details.
-
-You should have received a copy of the GNU Library General Public
-License along with this file; see the file license.txt.  If
-not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-Boston, MA 02111-1307, USA.  
-*/
-
-
 #ifndef __QUICK_REPLY_H__
 #define __QUICK_REPLY_H__
+
+/*
+QuickReplies plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+Copyright (C) Copyright (C) 2010 Unsane
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
 
 #define MIRANDA_VER 0x0A00
 
@@ -39,8 +55,8 @@ Boston, MA 02111-1307, USA.
 #include "m_msg_buttonsbar.h"
 #include "m_variables.h"
 
-#include "resource.h"
-#include "version.h"
+#include "../resource.h"
+#include "../version.h"
 
 #define MODULE_NAME				__INTERNAL_NAME
 #define TEXT_LIMIT				2048
@@ -67,9 +83,9 @@ extern HANDLE hOnPreShutdown;
 
 INT_PTR QuickRepliesService(WPARAM wParam, LPARAM lParam);
 
-INT_PTR OnModulesLoaded(WPARAM wParam, LPARAM lParam);
-INT_PTR OnOptInitialized(WPARAM wParam, LPARAM lParam);
-INT_PTR OnButtonPressed(WPARAM wParam, LPARAM lParam);
-INT_PTR OnPreShutdown(WPARAM wParam, LPARAM lParam);
+INT OnModulesLoaded(WPARAM wParam, LPARAM lParam);
+INT OnOptInitialized(WPARAM wParam, LPARAM lParam);
+INT OnButtonPressed(WPARAM wParam, LPARAM lParam);
+INT OnPreShutdown(WPARAM wParam, LPARAM lParam);
 
 #endif //__QUICK_REPLY_H__
