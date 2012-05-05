@@ -1,7 +1,16 @@
-/*
-Chat module plugin for Miranda IM
+#ifndef _CHAT_H_
+#define _CHAT_H_
 
-Copyright (C) 2003 Jörgen Persson
+/*
+Chat module plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Autor
+			Copyright (C) 2003 Jörgen Persson
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -16,19 +25,26 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
-#ifndef _CHAT_H_
-#define _CHAT_H_
-
-#define MIRANDA_VER 0x1000
+#define MIRANDA_VER    0x0A00
 
 //#pragma warning( disable : 4786 ) // limitation in MSVC's debugger.
 //#pragma warning( disable : 4996 ) // limitation in MSVC's debugger.
 
 #define WIN32_LEAN_AND_MEAN
-#define _WIN32_WINNT 0x0501
-#define _WIN32_IE 0x0501
+#define _WIN32_WINNT 0x0600
+#define _WIN32_IE 0x0600
 
 #include <m_stdhdr.h>
 

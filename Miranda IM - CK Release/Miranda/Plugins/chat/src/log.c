@@ -1,7 +1,13 @@
 /*
-Chat module plugin for Miranda IM
+Chat module plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright (C) 2003 Jörgen Persson
+Autor
+			Copyright (C) 2003 Jörgen Persson
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -16,13 +22,22 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+* The code for streaming the text is to a large extent copied from the srmm module
+* and then modified to fit the chat module.
 */
 
 #include "chat.h"
-
-
-// The code for streaming the text is to a large extent copied from
-// the srmm module and then modified to fit the chat module.
 
 extern FONTINFO  aFonts[OPTIONS_FONTCOUNT];
 extern HICON     hIcons[30];
