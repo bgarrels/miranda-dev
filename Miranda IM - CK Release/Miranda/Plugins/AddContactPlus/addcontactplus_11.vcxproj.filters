@@ -13,6 +13,9 @@
       <UniqueIdentifier>{1fde158c-0beb-4134-92bc-db6fbeb39344}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{77d36d24-0442-40ff-ba29-018fbbdf8647}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\addcontactplus.h">
@@ -39,5 +42,13 @@
     <ClCompile Include="src\addcontact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\addcontactplus-translation.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\Readme.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
