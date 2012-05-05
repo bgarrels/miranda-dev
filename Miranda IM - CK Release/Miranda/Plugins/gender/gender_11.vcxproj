@@ -262,11 +262,13 @@
   <ItemGroup>
     <None Include="icons\female.ico" />
     <None Include="icons\male.ico" />
-    <None Include="docs\gender-readme.txt" />
     <None Include="docs\gender-translate.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="gender.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
