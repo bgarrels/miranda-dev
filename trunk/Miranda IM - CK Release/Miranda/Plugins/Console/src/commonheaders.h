@@ -1,8 +1,11 @@
 /*
-
+Console plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2008 Miranda ICQ/IM project,
+Author
+			Copyright (C) Bio
+
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -19,10 +22,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 
-#define _WIN32_WINNT 0x0502
+#define _WIN32_WINNT 0x0601
 #define MS_LANGPACK_REGISTER "LangPack/Register"
 
 #pragma comment( lib, "comctl32.lib")
@@ -40,8 +53,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <fcntl.h>
 
 
-//Miranda IM stuff
-#define MIRANDA_VER    0x1000
+//Miranda IM core and cutom language pack
+#define MIRANDA_VER    0x0A00
 #define MIRANDA_CUSTOM_LP
 
 #include <newpluginapi.h>
@@ -63,7 +76,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "m_toptoolbar.h"
 
 
-//res
+//resources
 #include "../resource.h"
 #include "../version.h"
 
