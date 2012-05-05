@@ -1,25 +1,39 @@
-// ---------------------------------------------------------------------------
-//                Contacts+ for Miranda Instant Messenger
-//                _______________________________________
-// 
-// Copyright © 2002 Dominus Procellarum 
-// Copyright © 2004-2008 Joe Kucera
-// 
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-//
-// ---------------------------------------------------------------------------
+/*
+Contacts+ for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright © 2002 Dominus Procellarum 
+			Copyright © 2004-2008 Joe Kucera
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
 
 #include "contacts.h"
 
@@ -120,13 +134,13 @@ char *GetContactUID(HANDLE hContact, int bTchar)
     {
       if (vrUid.type == DBVT_DWORD) 
       {
-        szUid = (char*)_alloca(17);
+        szUid = (char*)_malloca(17);
         szUid[0] = 0; // empty string
         _itoa(vrUid.dVal, szUid, 10);
       }  
       else if (vrUid.type == DBVT_ASCIIZ) 
       {
-        szUid = (char*)_alloca(strlennull(vrUid.pszVal) + 1);
+        szUid = (char*)_malloca(strlennull(vrUid.pszVal) + 1);
         strcpy(szUid, vrUid.pszVal);
       }
       else if (vrUid.type == DBVT_UTF8)
@@ -135,7 +149,7 @@ char *GetContactUID(HANDLE hContact, int bTchar)
 
         if (utf8_decode((unsigned char*)vrUid.pszVal, &szAnsi))
         {
-          szUid = (char*)_alloca(strlennull(szAnsi) + 1);
+          szUid = (char*)_malloca(strlennull(szAnsi) + 1);
           strcpy(szUid, szAnsi);
           SAFE_FREE((void**)&szAnsi);
         }
@@ -740,7 +754,7 @@ static int utf8_decode(const unsigned char *from, char **to)
     WCHAR *wszTemp = NULL;
     int inlen = (int)strlennull((char*)from);
 
-    wszTemp = (WCHAR *)_alloca(sizeof(WCHAR) * (inlen + 1));
+    wszTemp = (WCHAR *)_malloca(sizeof(WCHAR) * (inlen + 1));
 
     // Convert the UTF-8 string to UCS
     if (MultiByteToWideChar(CP_UTF8, 0, (char*)from, -1, wszTemp, inlen + 1))

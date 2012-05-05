@@ -1,25 +1,39 @@
-// --------------------------------------------------------------------------
-//                Contacts+ for Miranda Instant Messenger
-//                _______________________________________
-// 
-// Copyright © 2002 Dominus Procellarum 
-// Copyright © 2004-2008 Joe Kucera
-// 
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-//
-// -----------------------------------------------------------------------------
+/*
+Contacts+ for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright © 2002 Dominus Procellarum 
+			Copyright © 2004-2008 Joe Kucera
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
 
 #include "contacts.h"
 
@@ -106,7 +120,7 @@ static void RebuildGroupCombo(HWND hwndDlg)
 
     if (curs != CB_ERR)
     {
-      curst = (char*)_alloca((SendMessageT(hGroupsCombo, CB_GETLBTEXTLEN, curs, 0) + 1) * sizeof(WCHAR));
+      curst = (char*)_malloca((SendMessageT(hGroupsCombo, CB_GETLBTEXTLEN, curs, 0) + 1) * sizeof(WCHAR));
       SendMessageT(hGroupsCombo, CB_GETLBTEXT, curs, (LPARAM)curst);
     }
     SendMessageT(hGroupsCombo, CB_RESETCONTENT, 0, 0);
@@ -213,7 +227,7 @@ INT_PTR CALLBACK RecvDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPara
         dbe.cbSize = sizeof(DBEVENTINFO);
         dbe.cbBlob = CallService(MS_DB_EVENT_GETBLOBSIZE, (WPARAM)wndData->mhDbEvent, 0);
         if (dbe.cbBlob != -1)  // this marks an invalid hDbEvent - all smashed anyway...
-          dbe.pBlob = (PBYTE)_alloca(dbe.cbBlob);
+          dbe.pBlob = (PBYTE)_malloca(dbe.cbBlob);
         CallService(MS_DB_EVENT_GET, (WPARAM)wndData->mhDbEvent, (LPARAM)&dbe);
         char* pcBlob = (char*)dbe.pBlob;
         char* pcEnd = (char*)dbe.pBlob + dbe.cbBlob;
@@ -320,7 +334,7 @@ INT_PTR CALLBACK RecvDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPara
           int nGroupId = -1;
           if (curs != CB_ERR && IsWindowEnabled(hGroupsCheck) && SendMessageT(hGroupsCheck, BM_GETCHECK, 0, 0))
           { //got groups, get the one selected in combo
-            TCHAR* caGroup = (TCHAR*)_alloca((SendMessageT(hGroupsCombo, CB_GETLBTEXTLEN, curs, 0) + 1) * sizeof(WCHAR));
+            TCHAR* caGroup = (TCHAR*)_malloca((SendMessageT(hGroupsCombo, CB_GETLBTEXTLEN, curs, 0) + 1) * sizeof(WCHAR));
             SendMessageT(hGroupsCombo, CB_GETLBTEXT, curs, (LPARAM)caGroup);
             nGroupId = SendMessageT(hGroupsCombo, CB_GETITEMDATA, curs, 0);
           }
