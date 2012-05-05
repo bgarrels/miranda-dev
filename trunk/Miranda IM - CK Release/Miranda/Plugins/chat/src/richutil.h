@@ -1,7 +1,11 @@
-/*
-SRMM
+#ifndef SRMM_RICHUTIL_H
+#define SRMM_RICHUTIL_H
 
-Copyright 2000-2005 Miranda ICQ/IM project, 
+/*
+SRMM module for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Copyright 2000-2005 Miranda IM project, 
 all portions of this codebase are copyrighted to the people 
 listed in contributors.txt.
 
@@ -19,8 +23,6 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-#ifndef SRMM_RICHUTIL_H
-#define SRMM_RICHUTIL_H
 
 #define RWinVerMajor()      LOBYTE(LOWORD(GetVersion()))
 #define RIsWinVerXPPlus()   (RWinVerMajor()>=5 && LOWORD(GetVersion())!=5)

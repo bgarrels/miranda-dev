@@ -436,7 +436,6 @@
     <None Include="Icons\topicbut.ico" />
     <None Include="Icons\underline.ico" />
     <None Include="Icons\window.ico" />
-    <None Include="Docs\Chat_license.txt" />
     <None Include="Docs\Chat_Readme.txt" />
     <None Include="Docs\Chat_Translate.txt" />
   </ItemGroup>
