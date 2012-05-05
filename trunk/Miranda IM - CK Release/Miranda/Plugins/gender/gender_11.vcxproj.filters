@@ -17,25 +17,19 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\gender-readme.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\gender-translate.txt">
       <Filter>docs</Filter>
     </None>
     <None Include="icons\female.ico">
-      <Filter>icons</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="icons\male.ico">
-      <Filter>icons</Filter>
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="docs">
       <UniqueIdentifier>{8e55b74e-a109-4764-945a-4d57a70fb7c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="icons">
-      <UniqueIdentifier>{9fb98a50-8431-47a2-aac6-98f4cb109765}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{175b8e74-af75-4cdf-9de8-69c1deee7ce4}</UniqueIdentifier>
@@ -43,10 +37,18 @@
     <Filter Include="Source Files">
       <UniqueIdentifier>{c746fea0-d71f-4ecb-802e-fc5a6c983fb3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{9fb98a50-8431-47a2-aac6-98f4cb109765}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="gender.rc">
-      <Filter>icons</Filter>
+      <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Readme.txt">
+      <Filter>docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
