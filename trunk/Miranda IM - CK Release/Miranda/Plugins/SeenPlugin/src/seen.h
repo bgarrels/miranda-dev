@@ -1,12 +1,19 @@
 /*
-"Last Seen mod" plugin for Miranda IM
-Copyright ( C ) 2002-03  micron-x
-Copyright ( C ) 2005-07  Y.B.
+Last Seen plugin for 
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C) 2002-03  micron-x
+			Copyright (C) 2005-07  Y.B.
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
-of the License, or ( at your option ) any later version.
+of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,17 +24,24 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-File name      : $URL: http://svn.berlios.de/svnroot/repos/mgoodies/trunk/lastseen-mod/seen.h $
-Revision       : $Rev: 1570 $
-Last change on : $Date: 2007-12-30 01:30:07 +0300 (Вс, 30 дек 2007) $
-Last change by : $Author: y_b $
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
+
 #ifndef _WIN32_IE
-#define _WIN32_IE 0x0300
+#define _WIN32_IE 0x0600
 #endif
 #define ETDT_ENABLE         0x00000002
 #define ETDT_USETABTEXTURE  0x00000004
 #define ETDT_ENABLETAB      (ETDT_ENABLE  | ETDT_USETABTEXTURE)
+
 #define MIRANDA_VER    0x0A00
 
 #include <windows.h>
