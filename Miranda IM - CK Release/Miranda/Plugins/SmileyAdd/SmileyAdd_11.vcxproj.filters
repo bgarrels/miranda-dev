@@ -13,8 +13,11 @@
       <UniqueIdentifier>{a405a1fd-7d65-45f2-86a9-fde7bda579e7}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-    <Filter Include="Documents">
+    <Filter Include="Docs">
       <UniqueIdentifier>{e96d54af-3f94-4e7d-b6ce-3c48569b2585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{246cabf2-30db-4510-9350-1c130aec40eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,20 +120,19 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="RES\smiley.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="docs\smileyadd_msl_specification.txt">
-      <Filter>Documents</Filter>
-    </None>
-    <None Include="docs\smileyadd_readme.txt">
-      <Filter>Documents</Filter>
-    </None>
     <None Include="docs\smileyadd_translation.txt">
-      <Filter>Documents</Filter>
+      <Filter>Docs</Filter>
     </None>
-    <None Include="docs\smileyadd_screenshot.jpg">
-      <Filter>Documents</Filter>
+    <None Include="RES\smiley.ico">
+      <Filter>Resource Files\Icons</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Readme.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\Miranda Smiley Library specification.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

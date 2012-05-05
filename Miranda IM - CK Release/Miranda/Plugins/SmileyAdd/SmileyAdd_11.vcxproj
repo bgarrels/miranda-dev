@@ -338,11 +338,12 @@
     <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\smileyadd_screenshot.jpg" />
     <None Include="RES\smiley.ico" />
-    <None Include="docs\smileyadd_msl_specification.txt" />
-    <None Include="docs\smileyadd_readme.txt" />
     <None Include="docs\smileyadd_translation.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Miranda Smiley Library specification.txt" />
+    <Text Include="docs\Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
