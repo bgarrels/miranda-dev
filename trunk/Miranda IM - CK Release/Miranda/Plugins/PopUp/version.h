@@ -1,10 +1,15 @@
 /*
-Popup Plus plugin for Miranda IM
+Popup Plus plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright	© 2002 Luca Santarelli,
-			© 2004-2007 Victor Pavlychko
-			© 2010 MPK
-			© 2010 Merlin_de
+Authors
+			Copyright (C)	2002 Luca Santarelli
+							2004-2007 Victor Pavlychko
+							2010-2012 Merlin_de, MPK
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -22,13 +27,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL$
-Revision       : $Revision$
-Last change on : $Date$
-Last change by : $Author$
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
 
 ===============================================================================
 */
+
 	#define PU_COMMONMODUL				"PopUp"				//common DB modul name for all Popup plugins
 	#define PU_MODULNAME				"PopUpPlus"			//DB modul for this plugin
 	#define PU_MODULCLASS				"PopUpCLASS"		//temp DB modul for this plugin
@@ -78,7 +85,7 @@ Last change by : $Author$
 	#define POPUP_DESCRIPTION	"Provides popup notification services for different plugins. Mod for CK Pack."
 	#define POPUP_AUTHOR		"MPK, Merlin_de (Luca Santarelli, Victor Pavlychko)"
 	#define POPUP_EMAIL			"mataes2007@gmail.com"
-	#define POPUP_COPYRIGHT		"©2002 Luca Santarelli, ©2004-2007 Victor Pavlychko, ©2010 MPK, Merlin_de"
+	#define POPUP_COPYRIGHT		"©2002 Luca Santarelli, ©2004-2007 Victor Pavlychko, ©2010-2012 MPK, Merlin_de"
 	#define POPUP_WEBPAGE		"http://www.miranda-im.org/"
 	#define POPUP_UUID			{0x26a9125d, 0x7863, 0x4e01, {0xaf, 0xe, 0xd1, 0x4e, 0xf9, 0x5c, 0x50, 0x54}}
 	#define POPUP_PID			0x12a3fdbdecd273ee67dbc4d6d00e9268

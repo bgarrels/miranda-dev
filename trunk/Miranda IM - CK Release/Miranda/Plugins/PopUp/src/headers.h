@@ -1,10 +1,18 @@
-/*
-Popup Plus plugin for Miranda IM
+#ifndef HEADERS_H
+#define HEADERS_H
 
-Copyright	© 2002 Luca Santarelli,
-			© 2004-2007 Victor Pavlychko
-			© 2010 MPK
-			© 2010 Merlin_de
+/*
+Popup Plus plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C)	2002 Luca Santarelli
+							2004-2007 Victor Pavlychko
+							2010-2012 Merlin_de, MPK
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -19,6 +27,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 /*
@@ -36,24 +54,8 @@ project file.
 Written by: Hrk (Luca Santarelli)
 Updated by: Zazoo (Victor Pavlychko)
 
-Miranda IM can be found here:
-http://www.miranda-im.org/
-
-Miranda IM plugins and tools can be found here:
-http://addons.miranda-im.org/
-
-===============================================================================
-
-File name      : $HeadURL$
-Revision       : $Revision$
-Last change on : $Date$
-Last change by : $Author$
-
 ===============================================================================
 */
-
-#ifndef HEADERS_H
-#define HEADERS_H
 
 	// disable security warnings about "*_s" functions
 	#define _CRT_SECURE_NO_DEPRECATE
@@ -61,8 +63,8 @@ Last change by : $Author$
 	// disable warnings about underscore in stdc functions
 	#pragma warning(disable: 4996)
 
-	#define _WIN32_WINNT 0x0501
-	#define WINVER 0x0500
+	#define _WIN32_WINNT 0x0601
+	#define WINVER 0x0600
 	#define OEMRESOURCE
 
 	#include <windows.h>
