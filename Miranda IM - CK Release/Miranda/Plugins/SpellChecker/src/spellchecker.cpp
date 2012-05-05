@@ -1,28 +1,42 @@
-/* 
-Copyright (C) 2006-2010 Ricardo Pescuma Domenecci
+/*
+Spellchecker plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-This is free software; you can redistribute it and/or
-modify it under the terms of the GNU Library General Public
-License as published by the Free Software Foundation; either
-version 2 of the License, or (at your option) any later version.
+Author
+			Copyright (C) 2009-2010 Ricardo Pescuma Domenecci
 
-This is distributed in the hope that it will be useful,
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Library General Public License for more details.
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-You should have received a copy of the GNU Library General Public
-License along with this file; see the file license.txt.  If
-not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-Boston, MA 02111-1307, USA.  
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "commons.h"
 
-
-// Prototypes ///////////////////////////////////////////////////////////////////////////
-
-
+// Prototypes /////////////////////////////////////////////////////////////////
 PLUGININFOEX pluginInfo={
 	sizeof(PLUGININFOEX),
 	__PLUGIN_NAME,
@@ -68,6 +82,7 @@ PLUGINLINK *pluginLink;
 LIST_INTERFACE li;
 MM_INTERFACE mmi;
 UTF8_INTERFACE utfi;
+int hLangpack = 0;
 
 HANDLE hHooks[6];
 HANDLE hServices[3];
@@ -86,8 +101,6 @@ BITMAP bmpChecked;
 
 BOOL variables_enabled = FALSE;
 BOOL loaded = FALSE;
-
-int hLangpack;
 
 LIST<Dictionary> languages(1);
 
@@ -123,11 +136,11 @@ typedef void (*FoundWrongWordCallback)(TCHAR *word, CHARRANGE pos, void *param);
 
 
 #define DEFINE_GUIDXXX(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
-		const GUID CDECL name \
-				= { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
+        const GUID CDECL name \
+                = { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
 
 DEFINE_GUIDXXX(IID_ITextDocument,0x8CC497C0,0xA1DF,0x11CE,0x80,0x98,
-				0x00,0xAA,0x00,0x47,0xBE,0x5D);
+                0x00,0xAA,0x00,0x47,0xBE,0x5D);
 
 
 
@@ -214,20 +227,18 @@ int ModulesLoaded(WPARAM wParam, LPARAM lParam)
 		upd.szBetaChangelogURL = "http://pescuma.org/miranda/spellchecker#Changelog";
 		upd.pbBetaVersionPrefix = (BYTE *)"Spell Checker ";
 		upd.cpbBetaVersionPrefix = (int)strlen((char *)upd.pbBetaVersionPrefix);
+		upd.szUpdateURL = UPDATER_AUTOREGISTER;
 #ifdef WIN64
 		upd.szBetaUpdateURL = "http://pescuma.googlecode.com/files/spellchecker64.%VERSION%.zip";
 //		upd.szVersionURL = "http://addons.miranda-im.org/details.php?action=viewfile&id=";
-//		upd.szUpdateURL = "http://addons.miranda-im.org/download.php?dlfile=";
 		upd.pbVersionPrefix = (BYTE *)"<span class=\"fileNameHeader\">Spell Checker (x64) ";
 #elif UNICODE
 		upd.szBetaUpdateURL = "http://pescuma.googlecode.com/files/spellcheckerW.%VERSION%.zip";
 		upd.szVersionURL = "http://addons.miranda-im.org/details.php?action=viewfile&id=3691";
-		upd.szUpdateURL = "http://addons.miranda-im.org/download.php?dlfile=3691";
 		upd.pbVersionPrefix = (BYTE *)"<span class=\"fileNameHeader\">Spell Checker (Unicode) ";
 #else
 		upd.szBetaUpdateURL = "http://pescuma.googlecode.com/files/spellchecker.%VERSION%.zip";
 		upd.szVersionURL = "http://addons.miranda-im.org/details.php?action=viewfile&id=3690";
-		upd.szUpdateURL = "http://addons.miranda-im.org/download.php?dlfile=3690";
 		upd.pbVersionPrefix = (BYTE *)"<span class=\"fileNameHeader\">Spell Checker (Ansi) ";
 #endif
 		upd.cpbVersionPrefix = (int)strlen((char *)upd.pbVersionPrefix);
