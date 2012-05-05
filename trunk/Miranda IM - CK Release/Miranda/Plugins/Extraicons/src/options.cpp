@@ -42,7 +42,7 @@ $Id$		   : $Id$:
 
 HANDLE hOptHook = NULL;
 
-INT_PTR CALLBACK OptionsDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
+static INT_PTR CALLBACK OptionsDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 
 // Functions //////////////////////////////////////////////////////////////////////////////////////
 
@@ -427,7 +427,7 @@ static void UngroupSelectedItems(HWND tree)
 
 	bool selected = IsSelected(tree, hItem);
 
-	for (unsigned int i = (int)ids->size(); i > 0; --i)
+	for (size_t i = ids->size(); i > 0; --i)
 	{
 		BaseExtraIcon *extra = registeredExtraIcons[ids->at(i - 1) - 1];
 		Tree_AddExtraIcon(tree, extra, selected, hItem);
@@ -483,7 +483,7 @@ static int CALLBACK CompareFunc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSor
 	return registeredExtraIcons[a->at(0) - 1]->compare(registeredExtraIcons[b->at(0) - 1]);
 }
 
-INT_PTR CALLBACK OptionsDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
+static INT_PTR CALLBACK OptionsDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	static int dragging = 0;
 	static HANDLE hDragItem = NULL;
@@ -506,7 +506,7 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 			}
 
 			HWND tree = GetDlgItem(hwndDlg, IDC_EXTRAORDER);
-			SetWindowLongPtr(tree, GWL_STYLE, GetWindowLongPtr(tree, GWL_STYLE) | TVS_NOHSCROLL);
+			SetWindowLongPtr(tree, GWL_STYLE, GetWindowLong(tree, GWL_STYLE) | TVS_NOHSCROLL);
 
 			int cx = GetSystemMetrics(SM_CXSMICON);
 			HIMAGELIST hImageList = ImageList_Create(cx, cx, ILC_COLOR32 | ILC_MASK, 2, 2);
@@ -562,7 +562,7 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 			sort.lpfnCompare = CompareFunc;
 			TreeView_SortChildrenCB(tree, &sort, 0);
 
-			origTreeProc = (WNDPROC) SetWindowLongPtr(tree, GWLP_WNDPROC, (LONG) TreeProc);
+			origTreeProc = (WNDPROC) SetWindowLongPtr(tree, -4, (INT_PTR)TreeProc);
 
 			return TRUE;
 		}
@@ -659,14 +659,14 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lP
 					}
 
 					CallService(MS_DB_MODULE_DELETE, 0, (LPARAM) MODULE_NAME "Groups");
-					DBWriteContactSettingWord(NULL, MODULE_NAME "Groups", "Count", (WORD)groups.size());
+					DBWriteContactSettingWord(NULL, MODULE_NAME "Groups", "Count", groups.size());
 					for (i = 0; i < groups.size(); ++i)
 					{
 						ExtraIconGroup *group = groups[i];
 
 						char setting[512];
 						mir_snprintf(setting, MAX_REGS(setting), "%d_count", i);
-						DBWriteContactSettingWord(NULL, MODULE_NAME "Groups", setting, (WORD)group->items.size());
+						DBWriteContactSettingWord(NULL, MODULE_NAME "Groups", setting, group->items.size());
 
 						for (unsigned int j = 0; j < group->items.size(); ++j)
 						{

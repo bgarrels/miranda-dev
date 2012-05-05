@@ -4,6 +4,7 @@ Changelog:
 
 . 0.2.5.0
   * Fix for crash on reseting icons
+  * x64 compilations fix
 
 . 0.2.4.0
   * Fix for removing grouped icon

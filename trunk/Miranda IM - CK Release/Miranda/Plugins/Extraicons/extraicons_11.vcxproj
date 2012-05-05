@@ -323,7 +323,6 @@
     <ClInclude Include="src\usedIcons.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Docs\extraicons.png" />
     <None Include="res\AlwaysVis.ico" />
     <None Include="res\Chatchannel.ico" />
     <None Include="res\empty.ico" />
