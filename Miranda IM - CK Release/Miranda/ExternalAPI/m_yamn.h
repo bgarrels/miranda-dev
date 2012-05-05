@@ -41,10 +41,6 @@ Last change by : $Author:
 //================================== VARIABLES STRUCT ========================================
 //
 
-#ifndef MIRANDASERVICE
-typedef int (*MIRANDASERVICE)(WPARAM,LPARAM);
-#endif
-
 typedef struct CYAMNVariables
 {
 #define YAMN_VARIABLESVERSION	3
@@ -67,7 +63,7 @@ struct CExportedFunctions
 struct CExportedServices
 {
 	char* ID;
-	int (* Ptr)(WPARAM,LPARAM);
+	INT_PTR (* Ptr)(WPARAM,LPARAM);
 };
 
 //
