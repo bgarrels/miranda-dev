@@ -1,3 +1,39 @@
+/*
+Database Editor++ for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C) 2003-2011 Bio, Jonathan Gordon
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
+
 #include "headers.h"
 
 int Mode;
@@ -593,7 +629,7 @@ INT_PTR CALLBACK ImportDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
 				case IDC_CRLF:
 				{
 					int length = GetWindowTextLength(GetDlgItem(hwnd, IDC_TEXT));
-					char *string = (char*)_alloca(length+3);
+					char *string = (char*)_malloca(length+3);
 					int Pos = 2;
 
     				if (length)
@@ -640,7 +676,7 @@ INT_PTR CALLBACK ImportDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
 					char *string;
 					if (length)
 					{
-						string = (char*)_alloca(length+1);
+						string = (char*)_malloca(length+1);
 						if (!string) {msg(Translate("Couldnt allocate enough memory!"), modFullname); DestroyWindow(hwnd); }
 						GetDlgItemText(hwnd, IDC_TEXT, string, length+1);
 						importSettings(hContact, string);

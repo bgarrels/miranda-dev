@@ -139,7 +139,8 @@
       <DelayLoadDLLs>
       </DelayLoadDLLs>
       <SubSystem>Windows</SubSystem>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <SupportUnloadOfDelayLoadedDLL>
+      </SupportUnloadOfDelayLoadedDLL>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
@@ -178,7 +179,8 @@
       <DelayLoadDLLs>
       </DelayLoadDLLs>
       <SubSystem>Windows</SubSystem>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <SupportUnloadOfDelayLoadedDLL>
+      </SupportUnloadOfDelayLoadedDLL>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
@@ -335,7 +337,6 @@
     <ClInclude Include="Version.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\dbeditorpp_readme.txt" />
     <None Include="docs\dbeditorpp_translation.txt" />
     <None Include="res\Contacts.ico" />
     <None Include="res\dbepp.ico" />
@@ -359,6 +360,9 @@
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
     <ResourceCompile Include="Version.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,3 +1,39 @@
+/*
+Database Editor++ for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C) 2003-2011 Bio, Jonathan Gordon
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
+
 #include "headers.h"
 
 int UOS;
@@ -201,7 +237,7 @@ void additem(HWND hwnd2Settings,HANDLE hContact, char* module, char* setting, in
 
 				if (UOS)
 				{
-					WCHAR *wc = (WCHAR*)_alloca(length*sizeof(WCHAR));
+					WCHAR *wc = (WCHAR*)_malloca(length*sizeof(WCHAR));
 					MultiByteToWideChar(CP_UTF8, 0, dbv.pszVal, -1, wc, length);
 					ListView_SetItemTextW(hwnd2Settings,index,1,wc);
 				}
@@ -379,7 +415,7 @@ static LRESULT CALLBACK SettingLabelEditSubClassProc(HWND hwnd,UINT msg,WPARAM w
 				case IDOK:
 				{
 					int len = GetWindowTextLength(hwnd)+1;
-					char *value = (char*)_alloca(len);
+					char *value = (char*)_malloca(len);
 					WCHAR *wc = NULL;
 					DBVARIANT dbv = {0};
 
@@ -659,7 +695,7 @@ void EditLabel(HWND hwnd2List, int item, int subitem)
 			if (subitem && UOS)
 			{
 				int len = mir_strlen(dbv.pszVal)+1;
-				WCHAR *wc = (WCHAR*)_alloca(len*sizeof(WCHAR));
+				WCHAR *wc = (WCHAR*)_malloca(len*sizeof(WCHAR));
 				MultiByteToWideChar(CP_UTF8, 0, dbv.pszVal, -1, wc, len);
 				data->unicode = 1;
 				info->hwnd2Edit = CreateWindowW(L"EDIT",wc,WS_BORDER|WS_VISIBLE|WS_CHILD|WS_VSCROLL|ES_MULTILINE|ES_AUTOHSCROLL, rc.left,rc.top,(int)((rc.right - rc.left)*1.5),(rc.bottom - rc.top)*3,hwnd2List, 0,hInst,0);
@@ -702,7 +738,7 @@ void EditLabel(HWND hwnd2List, int item, int subitem)
 		{
 			int j;
 			char tmp[16];
-			char *data = (char*)_alloca(3*(dbv.cpbVal+1)+10);
+			char *data = (char*)_malloca(3*(dbv.cpbVal+1)+10);
 
 			if (!data) {msg(Translate("Couldnt allocate enough memory!"), modFullname); return;}
 			data[0] = '\0';

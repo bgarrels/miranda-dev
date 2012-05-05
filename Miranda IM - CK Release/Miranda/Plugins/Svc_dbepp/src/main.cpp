@@ -1,3 +1,39 @@
+/*
+Database Editor++ for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C) 2003-2011 Bio, Jonathan Gordon
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
+
 #include "headers.h"
 
 // {A8A417EF-07AA-4f37-869F-7BFD74886534}
@@ -40,7 +76,7 @@ PLUGININFOEX pluginInfoEx={
 
 extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {
-	if (mirandaVersion < PLUGIN_MAKE_VERSION(0, 7, 0, 0)) // 0.4 better. 0.3 have too many bugs
+	if (mirandaVersion < PLUGIN_MAKE_VERSION(0, 9, 0, 0))
 	{
 		return NULL;
 	}
@@ -428,7 +464,7 @@ int WriteBlobFromString(HANDLE hContact,const char *szModule,const char *szSetti
 	BYTE b;
 	int tmp;
 
-	if (!(data = (BYTE *)_alloca(2+len/2)))
+	if (!(data = (BYTE *)_malloca(2+len/2)))
 	{
 		msg(Translate("Couldnt allocate enough memory!"), modFullname);
 		return 0;
@@ -492,8 +528,8 @@ int GetValue(HANDLE hContact, const char* szModule, const char* szSetting, char*
 			if (UOS)
 			{
 				int len = (int)strlen(dbv.pszVal)+1;
-				char *sz = (char*)_alloca(len*3);
-				WCHAR *wc = (WCHAR*)_alloca(len*sizeof(WCHAR));
+				char *sz = (char*)_malloca(len*3);
+				WCHAR *wc = (WCHAR*)_malloca(len*sizeof(WCHAR));
 				MultiByteToWideChar(CP_UTF8, 0, dbv.pszVal, -1, wc, len);
 				WideCharToMultiByte(CP_ACP, 0, wc, -1, sz, len, NULL, NULL);
 				strncpy(Value, sz, length);
@@ -536,7 +572,7 @@ int GetValueW(HANDLE hContact, const char* szModule, const char* szSetting, WCHA
 		case DBVT_UTF8:
 			{
 				int len = (int)strlen(dbv.pszVal) + 1;
-				WCHAR *wc = (WCHAR*)_alloca(length*sizeof(WCHAR));
+				WCHAR *wc = (WCHAR*)_malloca(length*sizeof(WCHAR));
 				MultiByteToWideChar(CP_UTF8, 0, dbv.pszVal, -1, wc, len);
 				wcsncpy((WCHAR*)Value, wc, length);
 			}
@@ -544,7 +580,7 @@ int GetValueW(HANDLE hContact, const char* szModule, const char* szSetting, WCHA
 		case DBVT_ASCIIZ:
 			{
 				int len = (int)strlen(dbv.pszVal) + 1;
-				WCHAR *wc = (WCHAR*)_alloca(len*sizeof(WCHAR));
+				WCHAR *wc = (WCHAR*)_malloca(len*sizeof(WCHAR));
 				MultiByteToWideChar(CP_ACP, 0, dbv.pszVal, -1, wc, len);
 				wcsncpy((WCHAR*)Value, wc, length);
 			}

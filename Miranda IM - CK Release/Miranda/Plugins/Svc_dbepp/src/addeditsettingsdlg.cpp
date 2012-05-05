@@ -1,3 +1,39 @@
+/*
+Database Editor++ for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C) 2003-2011 Bio, Jonathan Gordon
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
+
 #include "headers.h"
 
 
@@ -57,7 +93,7 @@ BOOL convertSetting(HANDLE hContact, char* module, char* setting, int toType) //
 				if (toType == 4) // convert to UNICODE
 				{
 					int len = (int)strlen(dbv.pszVal) + 1;
-					WCHAR *wc = (WCHAR*)_alloca(len*sizeof(WCHAR));
+					WCHAR *wc = (WCHAR*)_malloca(len*sizeof(WCHAR));
 					MultiByteToWideChar(CP_ACP, 0, dbv.pszVal, -1, wc, len);
 					Result = !DBWriteContactSettingWString(hContact, module, setting, wc);
 				}
@@ -75,8 +111,8 @@ BOOL convertSetting(HANDLE hContact, char* module, char* setting, int toType) //
 				if (toType == 3 && UOS) // convert to ANSI
 				{
 					int len = (int)strlen(dbv.pszVal) + 1;
-					char *sz = (char*)_alloca(len*3);
-					WCHAR *wc = (WCHAR*)_alloca(len*sizeof(WCHAR));
+					char *sz = (char*)_malloca(len*3);
+					WCHAR *wc = (WCHAR*)_malloca(len*sizeof(WCHAR));
 					MultiByteToWideChar(CP_UTF8, 0, dbv.pszVal, -1, wc, len);
 					WideCharToMultiByte(CP_ACP, 0, wc, -1, sz, len, NULL, NULL);
 					Result = !DBWriteContactSettingString(hContact, module, setting, sz);
@@ -208,7 +244,7 @@ INT_PTR CALLBACK EditSettingDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
 						if (UOS)
 						{
 							int length = (int)strlen(tmp) + 1;
-							WCHAR *wc = (WCHAR*)_alloca(length*sizeof(WCHAR));
+							WCHAR *wc = (WCHAR*)_malloca(length*sizeof(WCHAR));
 							MultiByteToWideChar(CP_UTF8, 0, tmp, -1, wc, length);
 							SendMessageW(GetDlgItem(hwnd, IDC_STRING), WM_SETTEXT, 0, (LPARAM)wc);
 						}
@@ -235,7 +271,7 @@ INT_PTR CALLBACK EditSettingDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
 						int j;
 						char tmp[16];
 						int len = ((struct DBsetting*)lParam)->dbv.cpbVal;
-						char *data = (char*)_alloca(3*(len+1)+10);
+						char *data = (char*)_malloca(3*(len+1)+10);
 						BYTE *p = ((struct DBsetting*)lParam)->dbv.pbVal;
 
 						if (!data) return TRUE;
@@ -291,7 +327,7 @@ INT_PTR CALLBACK EditSettingDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
 						settingLength = GetWindowTextLength(GetDlgItem(hwnd, IDC_SETTINGVALUE));
 						if (settingLength)
 						{
-							setting = (char*)_alloca(settingLength + 1);
+							setting = (char*)_malloca(settingLength + 1);
 							if (setting)
 							{
 								// havta convert it with sprintf()
@@ -337,12 +373,12 @@ INT_PTR CALLBACK EditSettingDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
 					if (settingLength)
 					{
 						int settingValue;
-						setting = (char*)_alloca(settingLength + 1);
+						setting = (char*)_malloca(settingLength + 1);
 
 						if (valueLength)
-							value = (char*)_alloca(valueLength + 2);
+							value = (char*)_malloca(valueLength + 2);
 						else
-							value = (char*)_alloca(2);
+							value = (char*)_malloca(2);
 
 						if (!setting || !value)
 						{
