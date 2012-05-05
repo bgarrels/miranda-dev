@@ -1,8 +1,11 @@
 /*
-
+Console plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2008 Miranda ICQ/IM project,
+Author
+			Copyright (C) Bio
+
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -19,21 +22,27 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
 
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
 
 #define __FILEVERSION_STRING 0,0,7,2
 #define __VERSION_STRING     "0.0.7.2"
 #define __VERSION_DWORD      0x00000702
 
-
-
-
-#define __PLUGIN_DESC        "Console log window for Miranda 0.8.0.3+"
+#define __PLUGIN_DESC        "Console log window for Miranda 0.9.0.0+"
 #define __PLUGIN_LONGDESC    __PLUGIN_DESC ". Compiled by Bio. Enjoy! 8-)          [ Built "__DATE__"  "__TIME__" ]"
 #define __PLUGIN_AUTHOR      "Bio"
 #define __PLUGIN_EMAIL       "bio@msx.ru"
-#define __PLUGIN_RIGHTS      "© 2005-2009 Bio"
+#define __PLUGIN_RIGHTS      "© 2005-2012 Bio"
 #define __PLUGIN_FILE        "Console.dll"
 #define __PLUGIN_SHORTNAME   "Console"
 

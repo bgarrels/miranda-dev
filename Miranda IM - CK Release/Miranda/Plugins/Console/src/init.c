@@ -1,8 +1,11 @@
 /*
-
+Console plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2008 Miranda ICQ/IM project,
+Author
+			Copyright (C) Bio
+
+Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
@@ -19,6 +22,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "commonheaders.h"
@@ -27,8 +40,7 @@ HINSTANCE hInst;
 DWORD mirandaVer;
 
 
-
-static const PLUGININFOEX pluginInfo = 
+static const PLUGININFOEX pluginInfo =
 {
 	sizeof(PLUGININFOEX),
 #if defined(_WIN64)
@@ -44,39 +56,13 @@ static const PLUGININFOEX pluginInfo =
 	__PLUGIN_RIGHTS,
 	__PLUGIN_URL,
 #if defined(UNICODE) | defined(_UNICODE)
-	UNICODE_AWARE,		//not transient
+	UNICODE_AWARE,	
 	0,
 	MIID_CONSOLE
-	//{0xa6872bcd, 0xf2a1, 0x41b8, {0xb2, 0xf1, 0xdd, 0x7c, 0xec, 0x05, 0x57, 0x34}}
-	// a6872bcd-f2a1-41b8-b2f1-dd7cec055734
 };
 
-/*
-static const PLUGININFOEX pluginInfoEx = {
-	sizeof(PLUGININFOEX),
-	__PLUGIN_NAME,
-	__VERSION_DWORD,
-	__PLUGIN_LONGDESC,
-	__PLUGIN_AUTHOR,
-	__PLUGIN_EMAIL,
-	__PLUGIN_RIGHTS,
-	__PLUGIN_URL,
-	UNICODE_AWARE,
-	0,
-	MIID_CONSOLE
-};*/
 
-
-/*
- * WINAPI DllMain - main entry point into a DLL
- * Parameters: 
- *          HINSTANCE hinst,
- *          DWORD fdwReason,
- *          LPVOID lpvReserved
- * Returns : 
- *           BOOL
- * 
- */
+// entry point
 BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 {
 	hInst = hinstDLL;

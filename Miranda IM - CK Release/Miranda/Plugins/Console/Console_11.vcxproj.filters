@@ -13,6 +13,9 @@
       <UniqueIdentifier>{1e71008e-a4e4-44c1-a0a9-d5fd17cd53f2}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{6a27a4e6-3f7a-4429-bba3-9f460a60f168}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\commonheaders.c">
@@ -90,5 +93,13 @@
     <ResourceCompile Include="resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Changelog.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\Console_readme.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
