@@ -1,6 +1,14 @@
 /*
-Traffic Counter plugin for Miranda IM 
-Copyright 2007-2011 Mironych.
+Traffic Counter plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2007-2011 Mironych
+			Copyright (C) 2002-2006 Ghost
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -15,11 +23,17 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
-/* ======================================================================================
-Здесь содержатся функции для поддержки плагина Variables
-Автор: Mironych
-=======================================================================================*/
 
 #include "commonheaders.h"
 
@@ -52,7 +66,7 @@ static TCHAR* GetTraffic(ARGUMENTSINFO *ai)
 			}
 	}
 	else
-	{	// Ищем индекс протокола, переданного первым аргументом
+	{	
 		for (tmp = ed = 0; ed < NumberOfAccounts; ed++)
 		{
 			TCHAR *buf;
@@ -64,7 +78,7 @@ static TCHAR* GetTraffic(ARGUMENTSINFO *ai)
 				tmprn = ProtoList[ed].CurrentRecvTraffic;
 				tmpst = ProtoList[ed].TotalSentTraffic;
 				tmprt = ProtoList[ed].TotalRecvTraffic;
-				tmp = 0xAA; // Признак того, что протокол был найден
+				tmp = 0xAA;
 			}
 			mir_free(buf);
 		}
@@ -101,8 +115,6 @@ static TCHAR* GetTraffic(ARGUMENTSINFO *ai)
 	if (!_tcscmp(ai->targv[4], _T("d"))) ed = 3;
 	else return NULL;
 
-	// Получаем форматированную строку и возвращаем указатель на неё.
-	// Сначала узнаем размер буфера.
 	l = GetFormattedTraffic(tmp, ed, NULL, 0);
 	res = (TCHAR*)mir_alloc(l * sizeof(TCHAR));
 	if (!res) return NULL;
@@ -121,7 +133,7 @@ static TCHAR* GetTime(ARGUMENTSINFO *ai)
 
 	if (ai->argc != 4) return NULL;
 
-	// Ищем индекс протокола, переданного первым аргументом
+
 	for (flag = ed = 0; ed < NumberOfAccounts; ed++)
 	{
 		TCHAR *buf;
@@ -151,8 +163,6 @@ static TCHAR* GetTime(ARGUMENTSINFO *ai)
 	
 	if (flag != 0xAA) return NULL;
 
-	// Получаем форматированную строку и возвращаем указатель на неё.
-	// Сначала узнаем размер буфера.
 	l = GetDurationFormatM(Duration, ai->targv[3], NULL, 0);
 	res = (TCHAR*)mir_alloc(l * sizeof(TCHAR));
 	if (!res) return NULL;
@@ -170,14 +180,13 @@ void RegisterVariablesTokens(void)
 	ZeroMemory(&trs, sizeof(trs));
 	trs.cbSize = sizeof(TOKENREGISTER);
 
-	// Функция, возвращающая трафик
 	trs.tszTokenString = _T("tc_GetTraffic");
 	trs.parseFunctionT = GetTraffic;
 	trs.szHelpText = "Traffic counter\t(A,B,C,D)\tGet traffic counter value. A: <ProtocolName> OR overall OR summary; B: now OR total; C: sent OR recieved OR both; D: b - in bytes, k - in kilobytes, m - in megabytes, d - dynamic";
 	trs.flags = TRF_TCHAR | TRF_PARSEFUNC | TRF_FUNCTION | TRF_FREEMEM;
 	trs.memType = TR_MEM_MIRANDA;
 	CallService(MS_VARS_REGISTERTOKEN, 0, (LPARAM)&trs);
-	// Функция, возвращающая время
+
 	trs.tszTokenString = _T("tc_GetTime");
 	trs.parseFunctionT = GetTime;
 	trs.szHelpText = "Traffic counter\t(A,B,C)\tGet time counter value. A: <ProtocolName> OR summary; B: now OR total; C: format";

@@ -1,6 +1,13 @@
 /*
-Traffic Counter plugin for Miranda IM 
-Copyright 2007-2011 Mironych.
+Traffic Counter plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) Copyright 2007-2011 Mironych
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -15,11 +22,17 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
-/* ======================================================================================
-Здесь содержатся переменные и функции для работы со статистикой
-Автор: Mironych
-=======================================================================================*/
 
 #include "commonheaders.h"
 #include <math.h>
@@ -44,7 +57,6 @@ BOOL CALLBACK DlgProcOptStatistics(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 	{
 		case WM_INITDIALOG:
 			TranslateDialogDefault(hwndDlg);
-			// Создаём ListBox c перечнем аккаунтов.
 			hListAccs = CreateWindowEx(WS_EX_CLIENTEDGE,
 								_T("ListBox"),
 								NULL, WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP | LBS_SORT | LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | LBS_NOTIFY,
@@ -53,19 +65,16 @@ BOOL CALLBACK DlgProcOptStatistics(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 			SendMessage(hListAccs, WM_SETFONT, (WPARAM)(HFONT)GetStockObject(DEFAULT_GUI_FONT), 0);
 			for (i = NumberOfAccounts; i--; )
 			{
-				// Готовим список аккаунтов
 				if (ProtoList[i].tszAccountName)
 					SendMessage(hListAccs, LB_ADDSTRING, 0, (LPARAM)ProtoList[i].tszAccountName);
 			}
 			for (i = NumberOfAccounts; i--; )
 				SendMessage(hListAccs, LB_SETSEL, (WPARAM)0x01&(Stat_SelAcc>>i), (LPARAM)i);
-			// Готовим список единиц измерения
 			SendDlgItemMessage(hwndDlg, IDC_COMBO_UNITS, CB_INSERTSTRING, -1, (LPARAM)TranslateT("Bytes"));
 			SendDlgItemMessage(hwndDlg, IDC_COMBO_UNITS, CB_INSERTSTRING, -1, (LPARAM)TranslateT("KB"));
 			SendDlgItemMessage(hwndDlg, IDC_COMBO_UNITS, CB_INSERTSTRING, -1, (LPARAM)TranslateT("MB"));
 			SendDlgItemMessage(hwndDlg, IDC_COMBO_UNITS, CB_INSERTSTRING, -1, (LPARAM)TranslateT("Adaptive"));
 			SendDlgItemMessage(hwndDlg, IDC_COMBO_UNITS, CB_SETCURSEL, unOptions.Stat_Units, 0);
-			// Готовим закладки
 			{
 				TCITEM tci;
 				tci.mask = TCIF_TEXT;
@@ -82,7 +91,6 @@ BOOL CALLBACK DlgProcOptStatistics(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 				SendDlgItemMessage(hwndDlg, IDC_TAB_STATS, TCM_INSERTITEM, 4, (LPARAM)&tci);
 				SendDlgItemMessage(hwndDlg, IDC_TAB_STATS, TCM_SETCURSEL, unOptions.Stat_Tab, 0);
 			}
-			// Готовим ListView - колонки и стили
 			{
 				LVCOLUMN lvc ={0};
 
@@ -203,11 +211,9 @@ BOOL CALLBACK DlgProcOptStatistics(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 
 									if (!(pdi->item.mask & LVIF_TEXT)) return 0;
 
-									// Если нужна надпись.
 									if (!pdi->item.iSubItem)
 									{
 										EldestAcc = Stat_GetEldestAcc(Stat_SelAcc);
-										// Индекс применим только для самого старого аккаунта!
 										Index = Stat_GetStartIndex(EldestAcc, unOptions.Stat_Tab, pdi->item.iItem, &st);
 										switch (unOptions.Stat_Tab)
 										{
@@ -222,12 +228,10 @@ BOOL CALLBACK DlgProcOptStatistics(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 												GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, &st, NULL, pdi->item.pszText, 32);
 												break;
 											case 2: // Weekly
-												// Уходим к первому понедельнику слева.
 												SystemTimeToVariantTime(&st, &vartime);
 												vartime -= DayOfWeek(st.wDay, st.wMonth, st.wYear) - 1;
 												VariantTimeToSystemTime(vartime, &st);
 												GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, &st, NULL, pdi->item.pszText, 32);
-												// Теперь к воскресенью.
 												SystemTimeToVariantTime(&st, &vartime);
 												vartime += 6;
 												VariantTimeToSystemTime(vartime, &st);
@@ -246,15 +250,14 @@ BOOL CALLBACK DlgProcOptStatistics(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 
 									Value = Stat_GetItemValue(Stat_SelAcc, unOptions.Stat_Tab, pdi->item.iItem, pdi->item.iSubItem);
 
-									// Теперь можно записать в ListView циферки.
 									switch (pdi->item.iSubItem)
 									{
-										case 1: // Входящий
-										case 2: // Исходящий
-										case 3: // Сумма
+										case 1:
+										case 2:
+										case 3:
 											GetFormattedTraffic(Value, unOptions.Stat_Units, pdi->item.pszText, 32);
 											break;
-										case 4: // Время
+										case 4:
 											{
 												TCHAR *Fmt[5] = {_T("m:ss"), _T("h:mm:ss"), _T("h:mm:ss"), _T("d hh:mm:ss"), _T("d hh:mm:ss")};
 												GetDurationFormatM(Value, Fmt[unOptions.Stat_Tab], pdi->item.pszText, 32);
@@ -286,10 +289,10 @@ BOOL CALLBACK DlgProcOptStatistics(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 
 									switch (lplvcd->nmcd.dwDrawStage)
 									{
-										case CDDS_PREPAINT: // Перед началом рисования всего ListView.
+										case CDDS_PREPAINT: 
 											SetWindowLong(hwndDlg, DWL_MSGRESULT, CDRF_NOTIFYITEMDRAW);
 											return TRUE;
-										case CDDS_ITEMPREPAINT: // Перед началом рисования строки.
+										case CDDS_ITEMPREPAINT:
 											{
 												COLORREF Color;
 												BYTE r, g, b;
@@ -320,9 +323,6 @@ BOOL CALLBACK DlgProcOptStatistics(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM
 	return 0;
 }
 
-/*
-Функция читает статистику из файла для аккаунта с номером n.
-*/
 void Stat_ReadFile(BYTE n)
 {
 	LARGE_INTEGER Size;
@@ -338,9 +338,8 @@ void Stat_ReadFile(BYTE n)
 	ProtoList[n].hFile = CreateFile(FileName, GENERIC_READ | GENERIC_WRITE,
 		FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	GetFileSizeEx(ProtoList[n].hFile, &Size);
-	if (Size.QuadPart != 0) // Если файл со статистикой существует и имеет ненулевой размер...
+	if (Size.QuadPart != 0) 
 	{
-		// ...то читаем статистику из файла
 		ProtoList[n].NumberOfRecords = Size.QuadPart/sizeof(HOURLYSTATS);
 		ProtoList[n].AllStatistics = (HOURLYSTATS*)mir_alloc(sizeof(HOURLYSTATS)*ProtoList[n].NumberOfRecords);
 		ReadFile(ProtoList[n].hFile, &ProtoList[n].AllStatistics[0], sizeof(HOURLYSTATS)*ProtoList[n].NumberOfRecords, &BytesRead, NULL);
@@ -352,7 +351,6 @@ void Stat_ReadFile(BYTE n)
 	}
 	else
 	{
-		// Необходимо создать новый файл.
 		ProtoList[n].NumberOfRecords = 1;
 		ProtoList[n].AllStatistics = (HOURLYSTATS*)mir_alloc(sizeof(HOURLYSTATS));
 		ProtoList[n].AllStatistics[0].Hour = stNow.wHour;
@@ -366,17 +364,12 @@ void Stat_ReadFile(BYTE n)
 	Stat_CheckStatistics(n);
 }
 
-/* Функция готовит вывод в ListView статистики.
-Аргументы: hwndDialog - хэндл окна диалога. */
 void Stat_Show(HWND hwndDialog)
 {
 	DWORD MaxRecords;
 
-	// Нужно узнать количество записей.
 	MaxRecords = Stat_GetRecordsNumber(Stat_GetEldestAcc(Stat_SelAcc), unOptions.Stat_Tab);
-	// Установим такое же количество строк в ListView.
 	SendDlgItemMessage(hwndDialog, IDC_LIST_DATA, LVM_SETITEMCOUNT, MaxRecords, 0);
-	// Надо показать самые свежие записи.
 	SendDlgItemMessage(hwndDialog, IDC_LIST_DATA, LVM_ENSUREVISIBLE, (WPARAM)(MaxRecords - 1), 0);
 }
 
@@ -392,13 +385,7 @@ void Stat_UpdateTotalTraffic(HWND hwndDialog, DWORD Incoming, DWORD Outgoing)
 	SetDlgItemText(hwndDialog, IDC_STATIC_SUMM, tmp);
 }
 
-/*
-Функция сравнивает с текущим время последней записи в статистике для аккаунта с номером n.
-Если они совпадают, ничего не происходит.
-Если текущее время меньше времени последней записи (часы перевели назад), 
-	количество записей уменьшается на соответствующее количество часов.
-Если текущее время больше, в статистику включается необходимое количество пустых записей.
-*/
+
 void Stat_CheckStatistics(BYTE n)
 {
 	SYSTEMTIME stNow, stLast = {0};
@@ -413,16 +400,13 @@ void Stat_CheckStatistics(BYTE n)
 	
 	GetLocalTime(&stNow);
 	d = TimeCompare(stNow, stLast);
-	// Если текущее время совпадает со временем последней записи...
 	if (!d)
 	{
-		// ...сохраняем запись в файл и уходим.
 		SetFilePointer(ProtoList[n].hFile, 0-sizeof(HOURLYSTATS), NULL, FILE_END);
 		WriteFile(ProtoList[n].hFile, &ProtoList[n].AllStatistics[ProtoList[n].NumberOfRecords-1], sizeof(HOURLYSTATS), &q, NULL);
 		return;	
 	}
 
-	// Если часы перевели назад.
 	if (d < 0)
 	{
 		do
@@ -450,14 +434,11 @@ void Stat_CheckStatistics(BYTE n)
 
 	if (d > 0)
 	{
-		// Сохраняем.
 		SetFilePointer(ProtoList[n].hFile, 0-sizeof(HOURLYSTATS), NULL, FILE_END);
 		WriteFile(ProtoList[n].hFile, &ProtoList[n].AllStatistics[ProtoList[n].NumberOfRecords-1], sizeof(HOURLYSTATS), &q, NULL);
 
-		// Последняя запись из статистики понадобится для вычисления новых записей, поэтому копируем её (кроме трафика и времени).
 		memcpy(&htTmp, &ProtoList[n].AllStatistics[ProtoList[n].NumberOfRecords - 1],
 					sizeof(HOURLYSTATS) - 2 * sizeof(DWORD) - sizeof(WORD));
-		// Счётчик времени каждый час должен начинать считать с нуля.
 		ProtoList[n].Total.TimeAtStart = GetTickCount() - stNow.wMilliseconds;
 
 		do
@@ -484,7 +465,6 @@ void Stat_CheckStatistics(BYTE n)
 			stLast.wMonth = htTmp.Month;
 			stLast.wYear = htTmp.Year;
 
-			// Добавляем записи одновременно в ОЗУ и в файл.
 			WriteFile(ProtoList[n].hFile, &htTmp, sizeof(HOURLYSTATS), &q, NULL);
 			memcpy(&ProtoList[n].AllStatistics[ProtoList[n].NumberOfRecords - 1], &htTmp, sizeof(HOURLYSTATS));
 
@@ -492,16 +472,10 @@ void Stat_CheckStatistics(BYTE n)
 	}
 }
 
-/* Функция возращает индекс первой записи в статистике, относящейся к выбранному интервалу.
-При вычислении учитывается выбранный интервал и аккаунты.
-Аргументы:
-ItemNumber - номер строки в ListView (номер периода).
-stReq - дата, соответствующая вычисленному индексу.
-*/
 DWORD Stat_GetStartIndex(BYTE AccNum, BYTE Interval, DWORD ItemNumber, SYSTEMTIME *stReq)
 {
-	DWORD Left, Right, Probe; // Границы интервала для поиска (индексы статистики).
-	SYSTEMTIME stProbe = {0}; // Время тыка.
+	DWORD Left, Right, Probe;
+	SYSTEMTIME stProbe = {0}; 
 	signed short int d = 1;
 
 	if (!ItemNumber) 
@@ -513,7 +487,6 @@ DWORD Stat_GetStartIndex(BYTE AccNum, BYTE Interval, DWORD ItemNumber, SYSTEMTIM
 		return 0;
 	}
 
-	// Вычисляем время, соответствующее началу интервала.
 	for (Probe = 0, Left = 1; Left < ProtoList[AccNum].NumberOfRecords; Left++)
 	{
 		switch(Interval)
@@ -555,7 +528,6 @@ DWORD Stat_GetStartIndex(BYTE AccNum, BYTE Interval, DWORD ItemNumber, SYSTEMTIM
 
 	Left = 0; Right = ProtoList[AccNum].NumberOfRecords - 1;
 
-	// Вычисляем индекс начала интервала.
 	while (TRUE)
 	{
 		if (Right - Left == 1) return Right;
@@ -572,12 +544,9 @@ DWORD Stat_GetStartIndex(BYTE AccNum, BYTE Interval, DWORD ItemNumber, SYSTEMTIM
 	return Probe;
 }
 
-/* Функция устанавливает величину сдвига для заданного аккаунта,
-то есть номер записи в статистике старейшего из выбранных аккаунтов,
-дата которой соответствует началу статистики указанного аккаунта. */
 void Stat_SetAccShift(BYTE AccNum, BYTE EldestAccount)
 {
-	DWORD Left, Right, Probe; // Границы интервала для поиска (индексы статистики).
+	DWORD Left, Right, Probe;
 	SYSTEMTIME stReq = {0}, stProbe;
 	signed short int d = 1;
 
@@ -592,7 +561,6 @@ void Stat_SetAccShift(BYTE AccNum, BYTE EldestAccount)
 	stReq.wMonth = ProtoList[AccNum].AllStatistics[0].Month;
 	stReq.wYear = ProtoList[AccNum].AllStatistics[0].Year;
 
-	// Вычисляем индекс начала интервала.
 	Left = 0; Right = ProtoList[EldestAccount].NumberOfRecords - 1;
 	while (TRUE)
 	{
@@ -614,13 +582,6 @@ void Stat_SetAccShift(BYTE AccNum, BYTE EldestAccount)
 	ProtoList[AccNum].Shift = Probe;
 }
 
-/* Функция вычисляет значение, соответствующее указанному подэлементу
-указанной строки ListView.
-Аргументы:
-SelectedAccs - слово, в котором единичные биты соответствуют выбранным аккаунтам;
-Interval - выбранный интервал;
-ItemNum - номер строки в ListVew;
-SubitemNum - номер колонки, определяет вид информации. */
 DWORD Stat_GetItemValue(WORD SelectedAccs, BYTE Interval, DWORD ItemNum, BYTE SubItemNum)
 {
 	DWORD Result = 0;
@@ -644,29 +605,28 @@ DWORD Stat_GetItemValue(WORD SelectedAccs, BYTE Interval, DWORD ItemNum, BYTE Su
 			if (IndexM >= 0)
 				switch (SubItemNum)
 				{
-					case 1: // Входящий
+					case 1: 
 						Result += ProtoList[a].AllStatistics[IndexM].Incoming;
 						break;
-					case 2: // Исходящий
+					case 2:
 						Result += ProtoList[a].AllStatistics[IndexM].Outgoing;
 						break;
-					case 3: // Сумма
+					case 3:
 						Result += ProtoList[a].AllStatistics[IndexM].Incoming
 								+ ProtoList[a].AllStatistics[IndexM].Outgoing;
 						break;
-					case 4: // Время
+					case 4:
 						Result += ProtoList[a].AllStatistics[IndexM].Time;
 						break;
 				}
 
-			IndexM++; IndexP++; // Переходим к следующей записи.
+			IndexM++; IndexP++;
 			if (IndexM == ProtoList[a].NumberOfRecords) break;
 									
-				// Когда остановиться?
 			switch (Interval)
 			{
 				case STAT_INTERVAL_HOUR:
-					i = 1; // Новый час начинается каждый час.
+					i = 1;
 					break;
 				case STAT_INTERVAL_DAY:
 					i = (0 == ProtoList[EldestAcc].AllStatistics[IndexP].Hour);
@@ -695,17 +655,14 @@ DWORD Stat_GetItemValue(WORD SelectedAccs, BYTE Interval, DWORD ItemNum, BYTE Su
 	return Result;
 }
 
-/* Функция возвращает количество записей в статистике для
-заданного аккаунта и заданного интервала. */
 DWORD Stat_GetRecordsNumber(BYTE AccNum, BYTE Interval)
 {
 	DWORD Result, i;
 
-	// Нужно узнать количество записей.
 	switch (Interval)
 	{
 		case STAT_INTERVAL_HOUR:
-			Result = ProtoList[AccNum].NumberOfRecords; // Для почасовой статистики совпадает.
+			Result = ProtoList[AccNum].NumberOfRecords; 
 			break;
 		case STAT_INTERVAL_DAY:
 			for (Result = 1, i = ProtoList[AccNum].NumberOfRecords - 1; i--; )
@@ -739,18 +696,14 @@ BYTE Stat_GetEldestAcc(WORD SelectedAccs)
 {
 	BYTE Result, i;
 
-	// Узнаём номер аккаунта из числа выбранных, имеющего самую старую первую запись.
-	// (Это аккаунт с максимальным количеством записей.)
 	for (Result = i = 0; i < NumberOfAccounts; i++)
 	{
-		// Надо с чего-то начать поиск.
 		if ( 0x01 & (SelectedAccs >> i))
 		{
 			Result = i;
 			break;
 		}
 	}
-	// Продолжаем поиск.
 	for (; ++i < NumberOfAccounts; )
 	{
 		if ( 0x01 & (SelectedAccs >> i)	&& (ProtoList[i].NumberOfRecords > ProtoList[Result].NumberOfRecords) )

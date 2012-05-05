@@ -13,8 +13,11 @@
       <UniqueIdentifier>{379f9a87-c54b-4f64-ae10-cddbc3c96dbf}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
-    <Filter Include="Header Files\Modernb">
+    <Filter Include="include %28SDK%29">
       <UniqueIdentifier>{08b35516-9fb4-4581-8d06-487423803b6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{c08aab0e-cd66-43b1-a914-6d0e822eb41a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,11 +36,6 @@
     <ClCompile Include="src\vars.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\network.ico">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
@@ -64,13 +62,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Modernb\modern_commonheaders.h">
-      <Filter>Header Files\Modernb</Filter>
+      <Filter>include %28SDK%29</Filter>
     </ClInclude>
     <ClInclude Include="Modernb\modern_global_structure.h">
-      <Filter>Header Files\Modernb</Filter>
+      <Filter>include %28SDK%29</Filter>
     </ClInclude>
     <ClInclude Include="Modernb\m_skin_eng.h">
-      <Filter>Header Files\Modernb</Filter>
+      <Filter>include %28SDK%29</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\network.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
   </ItemGroup>
 </Project>
