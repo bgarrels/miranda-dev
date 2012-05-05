@@ -63,8 +63,8 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\KeepStatus.txt">
+    <Text Include="docs\Readme.txt">
       <Filter>docs</Filter>
-    </None>
+    </Text>
   </ItemGroup>
 </Project>
