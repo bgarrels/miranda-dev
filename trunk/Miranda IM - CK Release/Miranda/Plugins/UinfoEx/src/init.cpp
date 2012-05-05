@@ -20,10 +20,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL: http://userinfoex.googlecode.com/svn/trunk/init.cpp $
-Revision       : $Revision: 212 $
-Last change on : $Date: 2011-04-20 15:02:24 +0400 (Ср, 20 апр 2011) $
-Last change by : $Author: kreol13 $
+File name      : $HeadURL$
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 ===============================================================================
 */

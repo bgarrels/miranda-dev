@@ -20,10 +20,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL: http://userinfoex.googlecode.com/svn/trunk/psp_origin.cpp $
-Revision       : $Revision: 191 $
-Last change on : $Date: 2010-09-20 13:52:01 +0400 (Пн, 20 сен 2010) $
-Last change by : $Author: ing.u.horn $
+File name      : $HeadURL$
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 ===============================================================================
 */

@@ -1,8 +1,13 @@
 /*
-UserinfoEx plugin for Miranda IM
+UserinfoEx plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright:
-� 2006-2010 DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol
+Authors
+			Copyright (C) 2006-2010 DeathAxe, Yasnovidyashii, Merlin_de, K. Romanov, Kreol
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -11,22 +16,24 @@ of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL: http://userinfoex.googlecode.com/svn/trunk/commonheaders.h $
-Revision       : $Revision: 212 $
-Last change on : $Date: 2011-04-20 15:02:24 +0400 (Ср, 20 апр 2011) $
-Last change by : $Author: kreol13 $
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
 
 ===============================================================================
 */
+
 #pragma once
 
 /***********************************************************************************************************
@@ -35,8 +42,8 @@ Last change by : $Author: kreol13 $
 
 #define MIRANDA_CUSTOM_LP
 
-#define _WIN32_WINNT	0x0501
-#define _WIN32_IE			0x0500
+#define _WIN32_WINNT	0x0600
+#define _WIN32_IE		0x0600
 #define WIN32_LEAN_AND_MEAN
 
 #define _CRT_SECURE_NO_DEPRECATE 1
@@ -96,9 +103,11 @@ typedef std::basic_string<TCHAR>	tstring;
 #include <m_imgsrvc.h>
 #include <m_message.h>
 #include <m_userinfo.h>
+
+//Windows bits 
 #include <win2k.h>
-#include <msapi/vsstyle.h>
-#include <msapi/vssym32.h>
+#include <vsstyle.h>
+#include <vssym32.h>
 
 /***********************************************************************************************************
  * Used Plugins SDK includes and macros

@@ -20,10 +20,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL: http://userinfoex.googlecode.com/svn/trunk/svc_email.cpp $
-Revision       : $Revision: 211 $
-Last change on : $Date: 2011-04-04 21:10:59 +0400 (Пн, 04 апр 2011) $
-Last change by : $Author: kreol13@gmail.com $
+File name      : $HeadURL$
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 ===============================================================================
 */
@@ -108,7 +108,7 @@ static INT_PTR MenuCommand(WPARAM wParam,LPARAM lParam)
 
 			len = mir_strlen(val) + strlen("mailto:");
 
-			szUrl = (LPSTR)_alloca(len + 1);
+			szUrl = (LPSTR)_malloca(len + 1);
 
 			mir_snprintf(szUrl, len + 1, "mailto:%s", val);
 			mir_free(val);

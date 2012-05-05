@@ -20,10 +20,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL: http://userinfoex.googlecode.com/svn/trunk/ex_import/svc_ExImINI.cpp $
-Revision       : $Revision: 196 $
-Last change on : $Date: 2010-09-21 03:24:30 +0400 (Вт, 21 сен 2010) $
-Last change by : $Author: ing.u.horn $
+File name      : $HeadURL$
+Revision       : $Revision$
+Last change on : $Date$
+Last change by : $Author$
 
 ===============================================================================
 */

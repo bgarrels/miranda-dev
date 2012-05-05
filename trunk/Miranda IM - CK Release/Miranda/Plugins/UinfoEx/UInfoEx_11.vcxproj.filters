@@ -48,6 +48,9 @@
     <Filter Include="Header Files\Services">
       <UniqueIdentifier>{9b3bf43e-84d4-4255-a34e-11d36576f7a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{40ea44f2-88e4-405b-b802-a49adf6a1bb4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ex_import\classExImContactBase.cpp">
@@ -369,18 +372,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Res\default.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Res\dragcopy.cur">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Res\main.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Res\flags.png">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="docs\uinfoex_translate.txt">
       <Filter>docs</Filter>
     </None>
@@ -395,6 +386,18 @@
     </None>
     <None Include="sounds\reminder.wav">
       <Filter>sounds</Filter>
+    </None>
+    <None Include="Res\dragcopy.cur">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="Res\default.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="Res\flags.png">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="Res\main.ico">
+      <Filter>Resource Files\Icons</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

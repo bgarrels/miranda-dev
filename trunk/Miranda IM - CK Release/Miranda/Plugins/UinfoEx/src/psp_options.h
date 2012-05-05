@@ -1,8 +1,16 @@
-/*
-UserinfoEx plugin for Miranda IM
+#ifndef _UINFOEX_OPTIONS_H_INCLUDED_
+#define _UINFOEX_OPTIONS_H_INCLUDED_
 
-Copyright:
-� 2006-2010 DeathAxe, Yasnovidyashii, Merlin, K. Romanov, Kreol
+/*
+UserinfoEx plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+			Copyright (C) 2006-2010 DeathAxe, Yasnovidyashii, Merlin_de, K. Romanov, Kreol
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -11,25 +19,23 @@ of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL: http://userinfoex.googlecode.com/svn/trunk/psp_options.h $
-Revision       : $Revision: 211 $
-Last change on : $Date: 2011-04-04 21:10:59 +0400 (Пн, 04 апр 2011) $
-Last change by : $Author: kreol13@gmail.com $
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
 
 ===============================================================================
 */
-
-#ifndef _UINFOEX_OPTIONS_H_INCLUDED_
-#define _UINFOEX_OPTIONS_H_INCLUDED_
 
 struct MenuOptionsList {
 	LPCSTR		pszKey;
