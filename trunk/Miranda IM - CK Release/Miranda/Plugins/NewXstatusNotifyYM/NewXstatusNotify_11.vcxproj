@@ -400,7 +400,6 @@
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\nxsn_readme.txt" />
     <None Include="docs\nxsn_translate.txt" />
     <None Include="res\disable_all.ico" />
     <None Include="res\enable_all.ico" />
@@ -417,6 +416,9 @@
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
     <ResourceCompile Include="version.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
