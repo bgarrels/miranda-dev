@@ -13,8 +13,11 @@
       <UniqueIdentifier>{7e43c061-a674-474a-98d1-e3a91ea453d4}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-    <Filter Include="docs">
+    <Filter Include="Docs">
       <UniqueIdentifier>{2a35c978-e676-42aa-8879-acf3e5ddec28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{e5b7d7f7-323b-48f4-97d4-c03ee20544e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -35,9 +38,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\commonheaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -50,45 +50,52 @@
     <ClInclude Include="src\simplestatusmsg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\cbook.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\copy.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\cross.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\csmsg.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\history.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\msg.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\plus.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="docs\simplestatusmsg-license.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\simplestatusmsg-readme.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\simplestatusmsg-translation.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\simplestatusmsg-changelog.txt">
-      <Filter>docs</Filter>
+      <Filter>Docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Changelog.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\Readme.txt">
+      <Filter>Docs</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\cross.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\csmsg.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\gotourl.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\history.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\msg.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\plus.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\cbook.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\copy.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -23,10 +23,10 @@
 //
 // -----------------------------------------------------------------------------
 //
-// File name      : $URL: https://miranda.googlecode.com/svn/trunk/miranda/protocols/IcqOscarJ/icq_constants.h $
-// Revision       : $Revision: 13304 $
-// Last change on : $Date: 2011-01-21 01:53:22 +0100 (Pt, 21 sty 2011) $
-// Last change by : $Author: borkra $
+// File name      : $URL$
+// Revision       : $Revision$
+// Last change on : $Date$
+// Last change by : $Author$
 //
 // DESCRIPTION:
 //
