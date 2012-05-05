@@ -1,8 +1,8 @@
 /*
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2012 Miranda IM project, 
-all portions of this codebase are copyrighted to the people 
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -18,27 +18,22 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "commonheaders.h"
 #include "skineditres.h"
 
 #define ID_EXTBKSEPARATOR           40200
-
-/*
-PLUGININFO pluginInfo = {
-	sizeof(PLUGININFO), 
-	"Skin editor",
-	PLUGIN_MAKE_VERSION(0, 0, 0, 4), 
-	"Skin editor for clist_nicer+", 
-	"Nightwish", 
-	"", 
-	"Copyright 2000-2006 Miranda-IM project", 
-	"http://www.miranda-im.org", 
-	0, 
-	0
-};
-*/
 
 PLUGININFOEX pluginInfo = {
 #if defined(_UNICODE)
@@ -47,7 +42,8 @@ PLUGININFOEX pluginInfo = {
 		sizeof(PLUGININFOEX), "Skin editor for clist_nicer+", PLUGIN_MAKE_VERSION(0, 0, 0, 4),
 #endif		
 		"Allow inline skin item editing for clist nicer+",
-		"Nightwish, Pixel", "", "Copyright 2000-2006 Miranda-IM project", "http://www.miranda-im.org",
+		"Nightwish, Pixel", "", "Copyright 2000-2022 Miranda-IM project",
+		"http://www.miranda-im.org",
 		UNICODE_AWARE,
 		0,
 #if defined(_UNICODE)
@@ -59,6 +55,8 @@ PLUGININFOEX pluginInfo = {
 
 HINSTANCE g_hInst = 0;
 PLUGINLINK *pluginLink;
+int hLangpack;
+
 struct MM_INTERFACE memoryManagerInterface;
 
 StatusItems_t *StatusItems;
@@ -69,10 +67,8 @@ static int last_selcount = 0;
 static int last_indizes[64];
 static int ID_EXTBK_LAST = 0, ID_EXTBK_FIRST = 0;
 
-/*                                                              
- * prototypes                                                                
- */
 
+// prototypes                                                                
 static void ChangeControlItems(HWND hwndDlg, int status, int except);
 static BOOL CheckItem(int item, HWND hwndDlg);
 

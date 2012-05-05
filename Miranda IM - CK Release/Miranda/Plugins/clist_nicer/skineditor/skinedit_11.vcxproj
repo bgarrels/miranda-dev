@@ -162,10 +162,12 @@
       <TargetMachine>MachineX86</TargetMachine>
       <MapFileName>
       </MapFileName>
-      <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <SupportUnloadOfDelayLoadedDLL>
+      </SupportUnloadOfDelayLoadedDLL>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
@@ -275,10 +277,12 @@
       <TargetMachine>MachineX64</TargetMachine>
       <MapFileName>
       </MapFileName>
-      <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <SupportUnloadOfDelayLoadedDLL>
+      </SupportUnloadOfDelayLoadedDLL>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
@@ -331,14 +335,13 @@
     <ClInclude Include="src\skineditres.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\CHANGELOG" />
-    <None Include="docs\README" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\skinedit.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\README.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

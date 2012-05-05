@@ -26,14 +26,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\CHANGELOG">
-      <Filter>Docs</Filter>
-    </None>
-    <None Include="docs\README">
-      <Filter>Docs</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,5 +34,10 @@
     <ResourceCompile Include="src\skinedit.rc">
       <Filter>Source Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\README.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
