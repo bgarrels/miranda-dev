@@ -44,10 +44,7 @@ static	name_day_core_t		name_day_core;
 HINSTANCE hInst;
 PLUGINLINK *pluginLink;
 
-/**
- * @brief Plugin info.
- *
- */
+
 PLUGININFO pluginInfo={
 	sizeof(PLUGININFO),
 	"Name Day Plugin",
@@ -61,10 +58,7 @@ PLUGININFO pluginInfo={
 	0		//doesn't replace anything built-in
 };
 
-/**
- * @brief DllMain
- *
- */
+
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
 	hInst = hinstDLL;
@@ -72,19 +66,13 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 }
 
 
-/**
- * @brief Plugin Info
- *
- */
-extern "C" __declspec(dllexport) PLUGININFO* MirandaPluginInfo(DWORD mirandaVersion)
+//Plugin Infos
+	extern "C" __declspec(dllexport) PLUGININFO* MirandaPluginInfo(DWORD mirandaVersion)
 {
 	return &pluginInfo;
 }
 
-/**
- * @brief Load
- *
- */
+//initial
 extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 {
 	pluginLink = link;
@@ -99,10 +87,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	return 0;
 }
 
-/**
- * @brief Unload
- *
- */
+//unload the plugin
 extern "C" int __declspec(dllexport) Unload(void)
 {
 	return 0;

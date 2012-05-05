@@ -1,6 +1,42 @@
 #ifndef calendars_h
 #define calendars_h
 
+/*
+Name_day plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2005 Tibor Szabo
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
+
 /**
  * @brief Czech names database
  *
@@ -83,25 +119,56 @@ static char *slovak_names[] = {
 
 	"Tatiana", "Erik a Erika", "Blazej", "Veronika", "Agata", "Dorota", "Vanda", "Zoja", "Zdenko", 
 	"Gabriela", "Dezider", "Perla", "Arpad", "Valentin", "Pravoslav", "Ida a Liana", "Miloslava", "Jaromir", 
-	"Vlasta", "Livia", "Eleonora", "Etela", "Roman a Romana", "Matej", "Frederik", "Viktor", "Alexander", 	"Zlatica", "....",
+	"Vlasta", "Livia", "Eleonora", "Etela", "Roman a Romana", "Matej", "Frederik", "Viktor", "Alexander", 
+	"Zlatica", "....",
 
-	"Albin", "Anezka", "Bohumil a Bohumila", "Kazimir", "Fridrich", "Radoslav", "Tomas", "Alan", "Frantiska", 	"Branislav", "Angela", "Gregor", "Vlastimil", "Matilda", "Svetlana", "Boleslav", "Lubica", "Eduard", 	"Jozef", "Vítazoslav", "Blahoslav", "Benadik", "Adrian", "Gabriel", "Marian", "Emanuel", "Alena", "Sona", 	"Miroslav", "Vieroslava", "Benjamin",
+	"Albin", "Anezka", "Bohumil a Bohumila", "Kazimir", "Fridrich", "Radoslav", "Tomas", "Alan", "Frantiska", 
+	"Branislav", "Angela", "Gregor", "Vlastimil", "Matilda", "Svetlana", "Boleslav", "Lubica", "Eduard", 
+	"Jozef", "Vítazoslav", "Blahoslav", "Benadik", "Adrian", "Gabriel", "Marian", "Emanuel", "Alena", "Sona", 
+	"Miroslav", "Vieroslava", "Benjamin",
 
-	"Hugo", "Zita", "Richard", "Izidor", "Miroslava", "Irena", "Zoltan", "Albert", "Milena", "Igor", 	"Julius", "Estera", "Ales", "Justina", "Fedor", "Dana a Danica", "Rudolf", "Valer", "Jela", "Marcel", 	"Ervin", "Slavomir", "Vojtech", "Juraj", "Marek", "Jaroslava", "Jaroslav", "Jarmila", "Lea", "Anastazia",
+	"Hugo", "Zita", "Richard", "Izidor", "Miroslava", "Irena", "Zoltan", "Albert", "Milena", "Igor", 
+	"Julius", "Estera", "Ales", "Justina", "Fedor", "Dana a Danica", "Rudolf", "Valer", "Jela", "Marcel", 
+	"Ervin", "Slavomir", "Vojtech", "Juraj", "Marek", "Jaroslava", "Jaroslav", "Jarmila", "Lea", "Anastazia",
 
-	"Sviatok prace", "Zigmund", "Galina", "Florian", "Lesana", "Hermina", "Monika", "Ingrida", "Roland", 	"Viktoria", "Blazena", "Pankrac", "Servác", "Bonifac", "Zofia", "Svetozar", "Gizela", "Viola", 	"Gertruda", "Bernard", "Zina", "Julia a Juliana", "Zelmira", "Ela", "Urban", "Dusan", "Iveta", "Viliam", 	"Vilma", "Ferdinand", "Petronela",
-		"Zaneta", "Xenia", "Karolina", "Lenka", "Laura", "Norbert", "Robert", "Medard", "Stanislava", 	"Margareta", "Dobroslava", "Zlatko", "Anton", "Vasil", "Vit", "Blanka", "Adolf", "Vratislav", "Alfred", 	"Valeria", "Alojz", "Paulina", "Sidonia", "Jan", "Tadeas", "Adriana", "Ladislav", "Beata", 	"Peter a Pavol a Petra", "Melania",
-	"Diana", "Berta", "Miloslav", "Prokop", "Cyril a Metod", "Patrik a Patricia", "Oliver", "Ivan", "Lujza", 	"Amalia", "Milota", "Nina", "Margita", "Kamil", "Henrich", "Drahomir", "Bohuslav", "Kamila", "Dusana", 	"Ilja", "Daniel", "Magdalena", "Olga", "Vladimir", "Jakub", "Anna", "Bozena", "Kristof", "Marta", 	"Libusa", "Ignac",
+	"Sviatok prace", "Zigmund", "Galina", "Florian", "Lesana", "Hermina", "Monika", "Ingrida", "Roland", 
+	"Viktoria", "Blazena", "Pankrac", "Servác", "Bonifac", "Zofia", "Svetozar", "Gizela", "Viola", 
+	"Gertruda", "Bernard", "Zina", "Julia a Juliana", "Zelmira", "Ela", "Urban", "Dusan", "Iveta", "Viliam", 
+	"Vilma", "Ferdinand", "Petronela",
+	
+	"Zaneta", "Xenia", "Karolina", "Lenka", "Laura", "Norbert", "Robert", "Medard", "Stanislava", 
+	"Margareta", "Dobroslava", "Zlatko", "Anton", "Vasil", "Vit", "Blanka", "Adolf", "Vratislav", "Alfred", 
+	"Valeria", "Alojz", "Paulina", "Sidonia", "Jan", "Tadeas", "Adriana", "Ladislav", "Beata", 
+	"Peter a Pavol a Petra", "Melania",
 
-	"Bozidara", "Gustav", "Jergus", "Dominik", "Hortenzia", "Jozefina", "Stefania", "Oskar", "Lubomira", 	"Vavrinec", "Zuzana", "Darina", "Lubomir", "Mojmir", "Marcela", "Leonard", "Milica", "Elena", "Lydia", 	"Anabela", "Jana", "Tichomir", "Filip", "Bartolomej", "Ludovit", "Samuel", "Silvia", "Augustin", 	"Nikola", "Ruzena", "Nora",
+	"Diana", "Berta", "Miloslav", "Prokop", "Cyril a Metod", "Patrik a Patricia", "Oliver", "Ivan", "Lujza", 
+	"Amalia", "Milota", "Nina", "Margita", "Kamil", "Henrich", "Drahomir", "Bohuslav", "Kamila", "Dusana", 
+	"Ilja", "Daniel", "Magdalena", "Olga", "Vladimir", "Jakub", "Anna", "Bozena", "Kristof", "Marta", 
+	"Libusa", "Ignac",
 
-	"Drahoslava", "Linda", "Belo", "Rozalia", "Regina", "Alica", "Marianna", "Miriama", "Martina", "Oleg", 	"Bystrik", "Maria", "Ctibor", "Ludomil", "Jolana", "Ludomila a Ludmila", "Olympia", "Eugenia", 	"Konstantin", "Luboslava", "Matus", "Moric", "Zdenka", "Lubos", "Vladislav", "Edita", "Cyprian", 	"Vaclav", "Michal", "Jarolim", 
+	"Bozidara", "Gustav", "Jergus", "Dominik", "Hortenzia", "Jozefina", "Stefania", "Oskar", "Lubomira", 
+	"Vavrinec", "Zuzana", "Darina", "Lubomir", "Mojmir", "Marcela", "Leonard", "Milica", "Elena", "Lydia", 
+	"Anabela", "Jana", "Tichomir", "Filip", "Bartolomej", "Ludovit", "Samuel", "Silvia", "Augustin", 
+	"Nikola", "Ruzena", "Nora",
 
-	"Arnold", "Levoslav", "Stela", "Frantisek", "Viera", "Natalia", "Eliska", "Brigita", "Dionyz", 	"Slavomira", "Valentina", "Maximilian", "Koloman", "Boris", "Terezia", "Vladimira", "Hedviga", "Lukas", 	"Kristian", "Vendelin", "Ursula", "Sergej", "Alojza", "Kvetoslava", "Aurel", "Demeter", "Sabina", 	"Dobromila", "Klara", "Simona", "Aurelia",
+	"Drahoslava", "Linda", "Belo", "Rozalia", "Regina", "Alica", "Marianna", "Miriama", "Martina", "Oleg", 
+	"Bystrik", "Maria", "Ctibor", "Ludomil", "Jolana", "Ludomila a Ludmila", "Olympia", "Eugenia", 
+	"Konstantin", "Luboslava", "Matus", "Moric", "Zdenka", "Lubos", "Vladislav", "Edita", "Cyprian", 
+	"Vaclav", "Michal", "Jarolim", 
 
-	"Denisa", "Pamiatka zosnulych", "Hubert", "Karol", "Imrich", "Renata", "Rene", "Bohumir", "Teodor", 	"Tibor", "Martin", "Svatopluk", "Stanislav", "Irma", "Leopold", "Agnesa", "Klaudia", "Eugen", "Alzbeta", 	"Felix", "Elvira", "Cecilia", "Klement", "Emilia", "Katarina", "Kornel", "Milan", "Henrieta", "Vratko", 	"Ondrej a Andrej",
+	"Arnold", "Levoslav", "Stela", "Frantisek", "Viera", "Natalia", "Eliska", "Brigita", "Dionyz", 
+	"Slavomira", "Valentina", "Maximilian", "Koloman", "Boris", "Terezia", "Vladimira", "Hedviga", "Lukas", 
+	"Kristian", "Vendelin", "Ursula", "Sergej", "Alojza", "Kvetoslava", "Aurel", "Demeter", "Sabina", 
+	"Dobromila", "Klara", "Simona", "Aurelia",
 
-	"Edmund", "Bibiana", "Oldrich", "Barbora", "Oto", "Mikulas", "Ambroz", "Marina", "Izabela", "Raduz", 	"Hilda", "Otilia", "Lucia", "Branislava", "Ivica", "Albina", "Kornelia", "Slava", "Judita", "Dagmara", 	"Bohdan", "Adela", "Nadezda", "Adam a Eva", "sviatok vianocny", "Stefan", "Filomena", "Ivana", "Milada", 
+	"Denisa", "Pamiatka zosnulych", "Hubert", "Karol", "Imrich", "Renata", "Rene", "Bohumir", "Teodor", 
+	"Tibor", "Martin", "Svatopluk", "Stanislav", "Irma", "Leopold", "Agnesa", "Klaudia", "Eugen", "Alzbeta", 
+	"Felix", "Elvira", "Cecilia", "Klement", "Emilia", "Katarina", "Kornel", "Milan", "Henrieta", "Vratko", 
+	"Ondrej a Andrej",
+
+	"Edmund", "Bibiana", "Oldrich", "Barbora", "Oto", "Mikulas", "Ambroz", "Marina", "Izabela", "Raduz", 
+	"Hilda", "Otilia", "Lucia", "Branislava", "Ivica", "Albina", "Kornelia", "Slava", "Judita", "Dagmara", 
+	"Bohdan", "Adela", "Nadezda", "Adam a Eva", "sviatok vianocny", "Stefan", "Filomena", "Ivana", "Milada", 
 	"David", "Silvester" };
 
 /**
