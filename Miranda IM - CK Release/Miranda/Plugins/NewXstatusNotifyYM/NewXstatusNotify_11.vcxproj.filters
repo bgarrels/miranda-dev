@@ -100,9 +100,6 @@
     <None Include="docs\nxsn_translate.txt">
       <Filter>Docs</Filter>
     </None>
-    <None Include="docs\nxsn_readme.txt">
-      <Filter>Docs</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
@@ -111,5 +108,10 @@
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Readme.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
