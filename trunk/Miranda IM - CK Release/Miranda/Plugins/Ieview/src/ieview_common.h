@@ -1,7 +1,16 @@
-/*
+#ifndef IEVIEW_COMMON_H
+#define IEVIEW_COMMON_H
 
-IEView Plugin for Miranda IM
-Copyright (C) 2005-2010  Piotr Piastucki
+/*
+IEView Plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author 
+			Copyright (C) 2005-2010  Piotr Piastucki
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -17,16 +26,25 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
+
 #if defined( UNICODE ) && !defined( _UNICODE )
    #define _UNICODE
 #endif
 
-#ifndef IEVIEW_COMMON_H
-#define IEVIEW_COMMON_H
+#define WINVER 0x600
+#define _WIN32_IE 0x601
 
-#define MIRANDA_VER 0x0900
-#define MIRANDA_CUSTOM_LP
+#define MIRANDA_VER 0x0A00
 
 #include <windows.h>
 #include <commctrl.h>
@@ -38,10 +56,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <oleauto.h>
 #include <mshtml.h>
 
-//which version
 #include <win2k.h>
 
-//Miranda stuff
 #include <newpluginapi.h>
 #include <m_utils.h>
 #include <m_clist.h>

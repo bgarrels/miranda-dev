@@ -45,12 +45,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Version.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\IEView.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\ChatHTMLBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -93,6 +87,12 @@
     <ClInclude Include="src\ScriverHTMLBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\IEView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ieview.rc">
@@ -118,31 +118,101 @@
     <Filter Include="docs\css">
       <UniqueIdentifier>{1134cdfc-44a2-4d87-881f-617383adb167}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{325a205b-7f01-4313-84ad-6f4ab93738c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\ieview-readme.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\ieview-templates.txt">
       <Filter>docs</Filter>
     </None>
     <None Include="docs\ieview-translation.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="docs\ieview-license.txt">
+    <None Include="docs\css\scriver.css">
+      <Filter>docs\css</Filter>
+    </None>
+    <None Include="docs\css\srmm.css">
+      <Filter>docs\css</Filter>
+    </None>
+    <None Include="docs\css\tabsrmm.css">
+      <Filter>docs\css</Filter>
+    </None>
+    <None Include="docs\css\chat.css">
+      <Filter>docs\css</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Readme.txt">
       <Filter>docs</Filter>
-    </None>
-    <None Include="docs\chat.css">
-      <Filter>docs\css</Filter>
-    </None>
-    <None Include="docs\scriver.css">
-      <Filter>docs\css</Filter>
-    </None>
-    <None Include="docs\srmm.css">
-      <Filter>docs\css</Filter>
-    </None>
-    <None Include="docs\tabsrmm.css">
-      <Filter>docs\css</Filter>
-    </None>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icos\status.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\topic.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\url.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\action.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\addstatus.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\file.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\group_off.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\group_on.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\info.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\join.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\kick.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\message_in.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\message_in_chat.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\message_out.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\message_out_chat.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\nick.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\notice.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\part.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\quit.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\removestatus.gif">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\rtl_off.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icos\rtl_on.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>
