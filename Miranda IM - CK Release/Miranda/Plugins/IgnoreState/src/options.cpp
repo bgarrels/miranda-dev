@@ -1,40 +1,58 @@
 /*
-   IgnoreState plugin for Miranda-IM (www.miranda-im.org)
-   (c) 2010 by Kildor
+Miranda IM: the free IM client for Microsoft* Windows*
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+Author
+			Copyright (C) 2010 by Kildor
+			Copyright (C) 2011-2012 Mataes, CHEF-KOCH
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "commonheaders.h"
 
-//extern byte bUseAuthIcon, bUseGrantIcon, bContactMenuItem, bIconsForRecentContacts;
+/*
+extern byte bUseAuthIcon, bUseGrantIcon, bContactMenuItem, bIconsForRecentContacts;
 
-//#define  EXTRA_ICON_RES0	0	// only used by nicer
-//#define  EXTRA_ICON_EMAIL	1
-//#define  EXTRA_ICON_WEB		2
-//#define  EXTRA_ICON_SMS		3
-//#define  EXTRA_ICON_ADV1	4
-//#define  EXTRA_ICON_ADV2	5
-//#define  EXTRA_ICON_ADV3	6
-//#define  EXTRA_ICON_CLIENT	7
-//#define  EXTRA_ICON_ADV4	8
-//#define  EXTRA_ICON_RES1	9	// only used by nicer
-//#define  EXTRA_ICON_PROTO	9	// used by mwclist and modern
-//#define  EXTRA_ICON_RES2	10	// only used by nicer
-//#define  EXTRA_ICON_VISMODE	10	// only used by modern
+#define  EXTRA_ICON_RES0	0	// only used by nicer
+#define  EXTRA_ICON_EMAIL	1
+#define  EXTRA_ICON_WEB		2
+#define  EXTRA_ICON_SMS		3
+#define  EXTRA_ICON_ADV1	4
+#define  EXTRA_ICON_ADV2	5
+#define  EXTRA_ICON_ADV3	6
+#define  EXTRA_ICON_CLIENT	7
+#define  EXTRA_ICON_ADV4	8
+#define  EXTRA_ICON_RES1	9	// only used by nicer
+#define  EXTRA_ICON_PROTO	9	// used by mwclist and modern
+#define  EXTRA_ICON_RES2	10	// only used by nicer
+#define  EXTRA_ICON_VISMODE	10	// only used by modern
+*/
 
 #define MS_SKINENG_DRAWICONEXFIX "SkinEngine/DrawIconEx_Fix"
 

@@ -16,6 +16,9 @@
     <Filter Include="Docs">
       <UniqueIdentifier>{ff5fe82d-72b5-4a1c-b4a0-8741f7b22c5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{7ee4b923-c874-4907-b0cf-40d49f9adfde}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Version.h">
@@ -25,32 +28,26 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\resource.h">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ignore.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
     <ResourceCompile Include="Version.rc">
       <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="ignore.rc">
+      <Filter>Resource Files\Icons</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="icons\ignore_full.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Icons</Filter>
     </None>
     <None Include="icons\ignore_message.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Icons</Filter>
     </None>
     <None Include="icons\ignore_partial.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="docs\ignore_state.txt">
-      <Filter>Docs</Filter>
-    </None>
-    <None Include="docs\IgnoreState-readme.txt">
-      <Filter>Docs</Filter>
+      <Filter>Resource Files\Icons</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -60,5 +57,13 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\ignore_state_version.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\Readme.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
