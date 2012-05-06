@@ -1,7 +1,16 @@
 /*
-Fingerprint Mod+ (client version) icons module for Miranda IM
+Fingerprint Mod+ (client version) for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright © 2006-2007 Artem Shpynov aka FYR, Bio, Faith Healer. 2009-2010 HierOS
+Authors
+Copyright (C) 2006-2007 Artem Shpynov aka FYR, Bio
+						Faith Healer
+			  2009-2010 HierOS
+			  2011-2012 Mataes
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -16,6 +25,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 					
 //Start of header
@@ -75,7 +94,7 @@ BOOL __inline WildCompareProcW(LPWSTR name, LPWSTR mask);
 
 HINSTANCE		g_hInst;
 PLUGINLINK*		pluginLink;
-MM_INTERFACE	mmi;					// miranda memory interface
+struct MM_INTERFACE	mmi;					// miranda memory interface
 int hLangpack;
 
 BOOL g_bExtraIcon_Register_ServiceExist		= FALSE;
@@ -716,7 +735,7 @@ BOOL FASTCALL WildCompareA(LPSTR szName, LPSTR szMask)
 	{
 		size_t s = 1, e = 1;
 //		static char temp[100];		//lets made temp static local var - should be faster than dynamic
-		LPSTR szTemp = (LPSTR)_malloca(strlen(szMask) * sizeof(CHAR) + sizeof(CHAR));
+		LPSTR szTemp = (LPSTR)_alloca(strlen(szMask) * sizeof(CHAR) + sizeof(CHAR));
 		BOOL bExcept;
 
 		while(szMask[e] != '\0')
@@ -772,7 +791,7 @@ BOOL FASTCALL WildCompareW(LPWSTR wszName, LPWSTR wszMask)
 	{
 		size_t s = 1, e = 1;
 //		static char temp[100];		//lets made temp static local var - should be faster than dynamic
-		LPWSTR wszTemp = (LPWSTR)_malloca(wcslen(wszMask) * sizeof(WCHAR) + sizeof(WCHAR));
+		LPWSTR wszTemp = (LPWSTR)_alloca(wcslen(wszMask) * sizeof(WCHAR) + sizeof(WCHAR));
 		BOOL bExcept;
 
 		while(wszMask[e] != L'\0')
@@ -1387,7 +1406,7 @@ INT_PTR ServiceSameClientsA(WPARAM wParam, LPARAM lParam)
 			{
 				if(WildCompare(tszMirVerSecondUp, def_kn_fp_mask[secondIndex].szMask))
 					break;
-				secondIndex++;
+	 			secondIndex++;
 			}
 
 		mir_free(tszMirVerFirstUp);
@@ -1501,7 +1520,7 @@ INT_PTR ServiceSameClientsW(WPARAM wParam, LPARAM lParam)
 			{
 				if(WildCompareW(wszMirVerSecondUp, def_kn_fp_mask[secondIndex].szMask))
 					break;
-				secondIndex++;
+	 			secondIndex++;
 			}
 
 		mir_free(wszMirVerFirstUp);
@@ -1553,7 +1572,7 @@ HBITMAP FASTCALL CreateBitmap32Point(int cx, int cy, LPVOID* bits)
 					DIB_RGB_COLORS,
 					&ptPixels,
 					NULL, 0);
-	GdiFlush();
+ 	GdiFlush();
 	if(ptPixels) memset(ptPixels, 0, cx * cy * 4);
 	if(bits != NULL) *bits = ptPixels;
 
@@ -1684,7 +1703,7 @@ HICON FASTCALL CreateJoinedIcon(HICON hBottom, HICON hTop)
 				bb = BottomBuffer = (LPBYTE)bmp_bottom.bmBits;
 			else
 			{
-				BottomBuffer = (LPBYTE)_malloca(bmp_bottom.bmHeight * bmp_bottom.bmWidthBytes);
+				BottomBuffer = (LPBYTE)_alloca(bmp_bottom.bmHeight * bmp_bottom.bmWidthBytes);
 				GetBitmapBits(iciBottom.hbmColor, bmp_bottom.bmHeight * bmp_bottom.bmWidthBytes, BottomBuffer);
 				bb = BottomBuffer + vstep_b * (bmp_bottom.bmHeight - 1);
 				vstep_b = -vstep_b;
@@ -1693,7 +1712,7 @@ HICON FASTCALL CreateJoinedIcon(HICON hBottom, HICON hTop)
 				tb = TopBuffer = (LPBYTE)bmp_top.bmBits;
 			else
 			{
-				TopBuffer = (LPBYTE)_malloca(bmp_top.bmHeight * bmp_top.bmWidthBytes);
+				TopBuffer = (LPBYTE)_alloca(bmp_top.bmHeight * bmp_top.bmWidthBytes);
 				GetBitmapBits(iciTop.hbmColor, bmp_top.bmHeight * bmp_top.bmWidthBytes, TopBuffer);
 				tb = TopBuffer + vstep_t * (bmp_top.bmHeight - 1);
 				vstep_t = -vstep_t;
@@ -1702,7 +1721,7 @@ HICON FASTCALL CreateJoinedIcon(HICON hBottom, HICON hTop)
 				bmb = BottomMaskBuffer = (LPBYTE)bmp_bottom_mask.bmBits;
 			else
 			{
-				BottomMaskBuffer = (LPBYTE)_malloca(bmp_bottom_mask.bmHeight * bmp_bottom_mask.bmWidthBytes);
+				BottomMaskBuffer = (LPBYTE)_alloca(bmp_bottom_mask.bmHeight * bmp_bottom_mask.bmWidthBytes);
 				GetBitmapBits(iciBottom.hbmMask, bmp_bottom_mask.bmHeight * bmp_bottom_mask.bmWidthBytes, BottomMaskBuffer);
 				bmb = BottomMaskBuffer + vstep_bm * (bmp_bottom_mask.bmHeight - 1);
 				vstep_bm = -vstep_bm;
@@ -1711,7 +1730,7 @@ HICON FASTCALL CreateJoinedIcon(HICON hBottom, HICON hTop)
 				tmb = TopMaskBuffer = (LPBYTE)bmp_top_mask.bmBits;
 			else
 			{
-				TopMaskBuffer = (LPBYTE)_malloca(bmp_top_mask.bmHeight * bmp_top_mask.bmWidthBytes);
+				TopMaskBuffer = (LPBYTE)_alloca(bmp_top_mask.bmHeight * bmp_top_mask.bmWidthBytes);
 				GetBitmapBits(iciTop.hbmMask, bmp_top_mask.bmHeight * bmp_top_mask.bmWidthBytes, TopMaskBuffer);
 				tmb = TopMaskBuffer + vstep_tm * (bmp_top_mask.bmHeight - 1);
 				vstep_tm = -vstep_tm;

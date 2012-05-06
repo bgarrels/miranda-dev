@@ -1,7 +1,16 @@
 /*
-Fingerprint Mod+ (client version) icons module for Miranda IM
+Fingerprint Mod+ (client version) for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright © 2006-2007 Artem Shpynov aka FYR, Bio, Faith Healer. 2009-2010 HierOS
+Authors
+Copyright (C) 2006-2007 Artem Shpynov aka FYR, Bio
+						Faith Healer
+			  2009-2010 HierOS
+			  2011-2012 Mataes
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -16,6 +25,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 /************************************************************************/
@@ -529,7 +548,8 @@ KN_FP_MASK def_kn_fp_mask[] =
 //#########################################################################################################################################
 //###################################################### Mail.Ru clients ##################################################################
 //#########################################################################################################################################
-	{ "client_MailRu_official",			_T("|magent*|Mail.ru Agent*official*|Mail.ru Agent*PC*"),	_T("Mail.Ru Agent (official client)"),	_T("ClientIcons_MRA"),	IDI_MAIL_RU_OFFICIAL, 14 },
+	{ "client_MailRu_official",			_T("|magent*|Mail.ru Agent*official*|Mail.ru Agent*PC*")
+										_T("|http://agent.mail.ru*"),								_T("Mail.Ru Agent (official client)"),	_T("ClientIcons_MRA"),	IDI_MAIL_RU_OFFICIAL, 14 },
 	{ "client_MailRu_Mobile",			_T("|wmagent*|MobileAgent*|sagent*|Mail.ru Agent*Symbian*")										
 										_T("|jagent*"),												_T("Mail.Ru Mobile Agent"),				_T("ClientIcons_MRA"),	IDI_MAIL_RU_MOBILE, 14 },
 	{ "client_MailRu_web_official",		_T("Web Agent*"),											_T("Mail.Ru Web Agent"),				_T("ClientIcons_MRA"),	IDI_MAIL_RU_WEBAGENT, 14 },
