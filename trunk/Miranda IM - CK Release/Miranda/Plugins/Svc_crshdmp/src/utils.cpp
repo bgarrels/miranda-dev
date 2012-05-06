@@ -1,11 +1,18 @@
 /*
-Miranda Crash Dumper Plugin
-Copyright (C) 2008 - 2009 Boris Krasnovskiy All Rights Reserved
+Crash Dumper plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2008 - 2012 Boris Krasnovskiy All Rights Reserved
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation version 2
-of the License.
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -13,7 +20,18 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "utils.h"
@@ -72,139 +90,148 @@ void GetOSDisplayString(bkstring& buffer)
 	if (NULL != pGetNativeSystemInfo) pGetNativeSystemInfo(&si);
 	else GetSystemInfo(&si);
 
-	if ( VER_PLATFORM_WIN32_NT == osvi.dwPlatformId && osvi.dwMajorVersion > 4 )
+	if (VER_PLATFORM_WIN32_NT == osvi.dwPlatformId && osvi.dwMajorVersion > 4)
 	{
 		buffer.append(TEXT("Operating System: Microsoft "));
 
 		// Test for the specific product.
-		if ( osvi.dwMajorVersion == 6)
+		if (osvi.dwMajorVersion == 6)
 		{
-            if (osvi.dwMinorVersion)
-            {
-			    if ( osvi.wProductType == VER_NT_WORKSTATION )
-				    buffer.append(TEXT("Windows 7 "));
-			    else 
-				    buffer.append(TEXT("Windows Server 2008 R2 "));
-            }
-            else
-            {
-			    if ( osvi.wProductType == VER_NT_WORKSTATION )
-				    buffer.append(TEXT("Windows Vista "));
-			    else 
-				    buffer.append(TEXT("Windows Server 2008 "));
-            }
+			switch (osvi.dwMinorVersion)
+			{
+			case 0:
+				if (osvi.wProductType == VER_NT_WORKSTATION)
+					buffer.append(TEXT("Windows Vista "));
+				else 
+					buffer.append(TEXT("Windows Server 2008 "));
+				break;
+
+			case 1:
+				if (osvi.wProductType == VER_NT_WORKSTATION)
+					buffer.append(TEXT("Windows 7 "));
+				else 
+					buffer.append(TEXT("Windows Server 2008 R2 "));
+				break;
+
+			default:
+				if (osvi.wProductType == VER_NT_WORKSTATION)
+					buffer.append(TEXT("Windows 8 "));
+				else 
+					buffer.append(TEXT("Windows Server 2012 "));
+				break;
+			}
 
 			pGetProductInfo = (tGetProductInfo) GetProcAddress(hKernel, "GetProductInfo");
 			if (pGetProductInfo != NULL) pGetProductInfo(6, 0, 0, 0, &dwType);
 
-			switch( dwType )
+			switch(dwType)
 			{
 			case PRODUCT_ULTIMATE:
-			   buffer.append(TEXT("Ultimate Edition"));
-			   break;
+				buffer.append(TEXT("Ultimate Edition"));
+				break;
 			case PRODUCT_HOME_PREMIUM:
-			   buffer.append(TEXT("Home Premium Edition"));
-			   break;
+				buffer.append(TEXT("Home Premium Edition"));
+				break;
 			case PRODUCT_HOME_BASIC:
-			   buffer.append(TEXT("Home Basic Edition"));
-			   break;
+				buffer.append(TEXT("Home Basic Edition"));
+				break;
 			case PRODUCT_ENTERPRISE:
-			   buffer.append(TEXT("Enterprise Edition"));
-			   break;
+				buffer.append(TEXT("Enterprise Edition"));
+				break;
 			case PRODUCT_BUSINESS:
-			   buffer.append(TEXT("Business Edition"));
-			   break;
+				buffer.append(TEXT("Business Edition"));
+				break;
 			case PRODUCT_STARTER:
-			   buffer.append(TEXT("Starter Edition"));
-			   break;
+				buffer.append(TEXT("Starter Edition"));
+				break;
 			case PRODUCT_CLUSTER_SERVER:
-			   buffer.append(TEXT("Cluster Server Edition"));
-			   break;
+				buffer.append(TEXT("Cluster Server Edition"));
+				break;
 			case PRODUCT_DATACENTER_SERVER:
-			   buffer.append(TEXT("Datacenter Edition"));
-			   break;
+				buffer.append(TEXT("Datacenter Edition"));
+				break;
 			case PRODUCT_DATACENTER_SERVER_CORE:
-			   buffer.append(TEXT("Datacenter Edition (core installation)"));
-			   break;
+				buffer.append(TEXT("Datacenter Edition (core installation)"));
+				break;
 			case PRODUCT_ENTERPRISE_SERVER:
-			   buffer.append(TEXT("Enterprise Edition"));
-			   break;
+				buffer.append(TEXT("Enterprise Edition"));
+				break;
 			case PRODUCT_ENTERPRISE_SERVER_CORE:
-			   buffer.append(TEXT("Enterprise Edition (core installation)"));
-			   break;
+				buffer.append(TEXT("Enterprise Edition (core installation)"));
+				break;
 			case PRODUCT_ENTERPRISE_SERVER_IA64:
-			   buffer.append(TEXT("Enterprise Edition for Itanium-based Systems"));
-			   break;
+				buffer.append(TEXT("Enterprise Edition for Itanium-based Systems"));
+				break;
 			case PRODUCT_SMALLBUSINESS_SERVER:
-			   buffer.append(TEXT("Small Business Server"));
-			   break;
+				buffer.append(TEXT("Small Business Server"));
+				break;
 			case PRODUCT_SMALLBUSINESS_SERVER_PREMIUM:
-			   buffer.append(TEXT("Small Business Server Premium Edition"));
-			   break;
+				buffer.append(TEXT("Small Business Server Premium Edition"));
+				break;
 			case PRODUCT_STANDARD_SERVER:
-			   buffer.append(TEXT("Standard Edition"));
-			   break;
+				buffer.append(TEXT("Standard Edition"));
+				break;
 			case PRODUCT_STANDARD_SERVER_CORE:
-			   buffer.append(TEXT("Standard Edition (core installation)"));
-			   break;
+				buffer.append(TEXT("Standard Edition (core installation)"));
+				break;
 			case PRODUCT_WEB_SERVER:
-			   buffer.append(TEXT("Web Server Edition"));
-			   break;
+				buffer.append(TEXT("Web Server Edition"));
+				break;
 			}
 
-			if ( si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64 )
+			if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64)
 				buffer.append(TEXT(", 64-bit"));
-			else if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_INTEL )
+			else if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_INTEL)
 				buffer.append(TEXT(", 32-bit"));
 		}
 
-		if ( osvi.dwMajorVersion == 5 && osvi.dwMinorVersion == 2 )
+		if (osvi.dwMajorVersion == 5 && osvi.dwMinorVersion == 2)
 		{
 			if (GetSystemMetrics(SM_SERVERR2))
 				buffer.append(TEXT("Windows Server 2003 R2, "));
 			else if (osvi.wSuiteMask==VER_SUITE_STORAGE_SERVER)
 				buffer.append(TEXT("Windows Storage Server 2003"));
 			else if (osvi.wProductType == VER_NT_WORKSTATION && 
-					 si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64)
+				si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64)
 				buffer.append(TEXT("Windows XP Professional x64 Edition"));
 			else buffer.append(TEXT("Windows Server 2003, "));
 
 			// Test for the server type.
-			if ( osvi.wProductType != VER_NT_WORKSTATION )
+			if (osvi.wProductType != VER_NT_WORKSTATION)
 			{
-				if ( si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_IA64 )
+				if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_IA64)
 				{
-					if( osvi.wSuiteMask & VER_SUITE_DATACENTER )
-					   buffer.append(TEXT("Datacenter Edition for Itanium-based Systems"));
-					else if( osvi.wSuiteMask & VER_SUITE_ENTERPRISE )
-					   buffer.append(TEXT("Enterprise Edition for Itanium-based Systems"));
+					if(osvi.wSuiteMask & VER_SUITE_DATACENTER)
+						buffer.append(TEXT("Datacenter Edition for Itanium-based Systems"));
+					else if(osvi.wSuiteMask & VER_SUITE_ENTERPRISE)
+						buffer.append(TEXT("Enterprise Edition for Itanium-based Systems"));
 				}
 
-				else if ( si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64 )
+				else if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64)
 				{
-					if( osvi.wSuiteMask & VER_SUITE_DATACENTER )
-					   buffer.append(TEXT( "Datacenter x64 Edition"));
-					else if( osvi.wSuiteMask & VER_SUITE_ENTERPRISE )
-					   buffer.append(TEXT("Enterprise x64 Edition"));
+					if(osvi.wSuiteMask & VER_SUITE_DATACENTER)
+						buffer.append(TEXT("Datacenter x64 Edition"));
+					else if(osvi.wSuiteMask & VER_SUITE_ENTERPRISE)
+						buffer.append(TEXT("Enterprise x64 Edition"));
 					else buffer.append(TEXT("Standard x64 Edition"));
 				}
 
 				else
 				{
 					if (osvi.wSuiteMask & VER_SUITE_COMPUTE_SERVER)
-					   buffer.append(TEXT("Compute Cluster Edition"));
-					else if( osvi.wSuiteMask & VER_SUITE_DATACENTER )
-					   buffer.append(TEXT("Datacenter Edition"));
-					else if( osvi.wSuiteMask & VER_SUITE_ENTERPRISE )
-					   buffer.append(TEXT("Enterprise Edition"));
-					else if ( osvi.wSuiteMask & VER_SUITE_BLADE )
-					   buffer.append(TEXT("Web Edition"));
+						buffer.append(TEXT("Compute Cluster Edition"));
+					else if(osvi.wSuiteMask & VER_SUITE_DATACENTER)
+						buffer.append(TEXT("Datacenter Edition"));
+					else if(osvi.wSuiteMask & VER_SUITE_ENTERPRISE)
+						buffer.append(TEXT("Enterprise Edition"));
+					else if (osvi.wSuiteMask & VER_SUITE_BLADE)
+						buffer.append(TEXT("Web Edition"));
 					else buffer.append(TEXT("Standard Edition"));
 				}
 			}
 		}
 
-		if (osvi.dwMajorVersion == 5 && osvi.dwMinorVersion == 1 )
+		if (osvi.dwMajorVersion == 5 && osvi.dwMinorVersion == 1)
 		{
 			buffer.append(TEXT("Windows XP "));
 			if (osvi.wSuiteMask & VER_SUITE_PERSONAL)
@@ -213,26 +240,26 @@ void GetOSDisplayString(bkstring& buffer)
 				buffer.append(TEXT("Professional"));
 		}
 
-		if ( osvi.dwMajorVersion == 5 && osvi.dwMinorVersion == 0 )
+		if (osvi.dwMajorVersion == 5 && osvi.dwMinorVersion == 0)
 		{
 			buffer.append(TEXT("Windows 2000 "));
 
-			if ( osvi.wProductType == VER_NT_WORKSTATION )
+			if (osvi.wProductType == VER_NT_WORKSTATION)
 			{
 				buffer.append(TEXT("Professional"));
 			}
 			else 
 			{
-				if( osvi.wSuiteMask & VER_SUITE_DATACENTER )
-				   buffer.append(TEXT("Datacenter Server"));
-				else if( osvi.wSuiteMask & VER_SUITE_ENTERPRISE )
-				   buffer.append(TEXT("Advanced Server"));
+				if(osvi.wSuiteMask & VER_SUITE_DATACENTER)
+					buffer.append(TEXT("Datacenter Server"));
+				else if(osvi.wSuiteMask & VER_SUITE_ENTERPRISE)
+					buffer.append(TEXT("Advanced Server"));
 				else buffer.append(TEXT("Server"));
 			}
 		}
-		if( _tcslen(osvi.szCSDVersion) > 0 )
+		if (_tcslen(osvi.szCSDVersion) > 0)
 		{
-			buffer.append(TEXT(" ") );
+			buffer.append(TEXT(" "));
 			buffer.append(osvi.szCSDVersion);
 		}
 
@@ -246,24 +273,24 @@ void GetOSDisplayString(bkstring& buffer)
 			if (osvi.wProductType == VER_NT_WORKSTATION)
 				buffer.append(TEXT("Workstation 4.0 "));
 			else if (osvi.wSuiteMask & VER_SUITE_ENTERPRISE)
-                buffer.append(TEXT("Server 4.0, Enterprise Edition "));
-            else 
-				buffer.append(TEXT("Server 4.0 " ));
+				buffer.append(TEXT("Server 4.0, Enterprise Edition "));
+			else 
+				buffer.append(TEXT("Server 4.0 "));
 		}
 
 		if (osvi.dwPlatformId == VER_PLATFORM_WIN32_WINDOWS && osvi.dwMajorVersion == 4)
 		{
 			if (osvi.dwMinorVersion == 0)
 			{
-			  buffer.append(TEXT("Microsoft Windows 95 "));
-			  if (osvi.szCSDVersion[1]==TEXT('C') || osvi.szCSDVersion[1]==TEXT('B'))
-				 buffer.append(TEXT("OSR2 "));
+				buffer.append(TEXT("Microsoft Windows 95 "));
+				if (osvi.szCSDVersion[1]==TEXT('C') || osvi.szCSDVersion[1]==TEXT('B'))
+					buffer.append(TEXT("OSR2 "));
 			} 
 
 			if (osvi.dwMinorVersion == 10)
 			{
 				buffer.append(TEXT("Microsoft Windows 98 "));
-				if ( osvi.szCSDVersion[1]==TEXT('A') || osvi.szCSDVersion[1]==TEXT('B'))
+				if (osvi.szCSDVersion[1]==TEXT('A') || osvi.szCSDVersion[1]==TEXT('B'))
 					buffer.append(TEXT("SE "));
 			} 
 
@@ -288,17 +315,17 @@ int GetTZOffset(void)
 	int offset = 0;
 	switch (type)
 	{
-		case TIME_ZONE_ID_DAYLIGHT:
-			offset = -(tzInfo.Bias + tzInfo.DaylightBias);
-			break;
-		
-		case TIME_ZONE_ID_STANDARD:
-			offset = -(tzInfo.Bias + tzInfo.StandardBias);
-			break;
-		
-		case TIME_ZONE_ID_UNKNOWN:
-			offset = -tzInfo.Bias;
-			break;
+	case TIME_ZONE_ID_DAYLIGHT:
+		offset = -(tzInfo.Bias + tzInfo.DaylightBias);
+		break;
+
+	case TIME_ZONE_ID_STANDARD:
+		offset = -(tzInfo.Bias + tzInfo.StandardBias);
+		break;
+
+	case TIME_ZONE_ID_UNKNOWN:
+		offset = -tzInfo.Bias;
+		break;
 	}
 	return offset;
 }
@@ -312,28 +339,28 @@ void GetISO8061Time(SYSTEMTIME* stLocal, LPTSTR lpszString, DWORD dwSize)
 		GetLocalTime(stLocal);
 	}
 
-    if (clsdates)
-    {
-        GetDateFormat(LOCALE_INVARIANT, 0, stLocal, TEXT("d MMM yyyy"), lpszString, dwSize);
-        int dlen = (int)_tcslen(lpszString);
-        GetTimeFormat(LOCALE_INVARIANT, 0, stLocal, TEXT(" H:mm:ss"), lpszString+dlen, dwSize-dlen);
-    }
-    else
-    {
-	    int offset = GetTZOffset();
+	if (clsdates)
+	{
+		GetDateFormat(LOCALE_INVARIANT, 0, stLocal, TEXT("d MMM yyyy"), lpszString, dwSize);
+		int dlen = (int)_tcslen(lpszString);
+		GetTimeFormat(LOCALE_INVARIANT, 0, stLocal, TEXT(" H:mm:ss"), lpszString+dlen, dwSize-dlen);
+	}
+	else
+	{
+		int offset = GetTZOffset();
 
-	    // Build a string showing the date and time.
-	    crs_sntprintf(lpszString, dwSize, TEXT("%d-%02d-%02d %02d:%02d:%02d%+03d%02d"), 
-		    stLocal->wYear, stLocal->wMonth, stLocal->wDay, 
-		    stLocal->wHour, stLocal->wMinute, stLocal->wSecond,
-		    offset / 60, offset % 60);
-    }
+		// Build a string showing the date and time.
+		crs_sntprintf(lpszString, dwSize, TEXT("%d-%02d-%02d %02d:%02d:%02d%+03d%02d"), 
+			stLocal->wYear, stLocal->wMonth, stLocal->wDay, 
+			stLocal->wHour, stLocal->wMinute, stLocal->wSecond,
+			offset / 60, offset % 60);
+	}
 }
 
 void GetLastWriteTime(FILETIME* ftime, LPTSTR lpszString, DWORD dwSize)
 {
-    FILETIME ftLocal;
-    SYSTEMTIME stLocal;
+	FILETIME ftLocal;
+	SYSTEMTIME stLocal;
 
 	// Convert the last-write time to local time.
 	FileTimeToLocalFileTime(ftime, &ftLocal);
@@ -344,17 +371,17 @@ void GetLastWriteTime(FILETIME* ftime, LPTSTR lpszString, DWORD dwSize)
 
 void GetLastWriteTime(LPCTSTR fileName, LPTSTR lpszString, DWORD dwSize)
 {
-    WIN32_FIND_DATA FindFileData;
+	WIN32_FIND_DATA FindFileData;
 
 	HANDLE hFind = FindFirstFile(fileName, &FindFileData);
-    if (hFind == INVALID_HANDLE_VALUE) return;
+	if (hFind == INVALID_HANDLE_VALUE) return;
 	FindClose(hFind);
 
 	GetLastWriteTime(&FindFileData.ftLastWriteTime, lpszString, dwSize);
 }
 
 
-typedef PLUGININFO * (__cdecl * Miranda_Plugin_Info) ( DWORD mirandaVersion );
+typedef PLUGININFO * (__cdecl * Miranda_Plugin_Info) (DWORD mirandaVersion);
 
 PLUGININFO* GetMirInfo(HMODULE hModule)
 {
@@ -374,7 +401,7 @@ void GetInternetExplorerVersion(bkstring& buffer)
 	TCHAR ieVersion[1024] = {0};
 	TCHAR ieBuild[512] = {0};
 	TCHAR iVer[64] = {0};
-	
+
 	if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, TEXT("SOFTWARE\\Microsoft\\Internet Explorer"), 0, 
 		KEY_QUERY_VALUE, &hKey) == ERROR_SUCCESS)
 	{
@@ -459,8 +486,8 @@ void GetProcessorString(bkstring& buffer)
 
 		size = sizeof(cpuIdent)/sizeof(cpuIdent[0]);
 		if (RegQueryValueEx(hKey, TEXT("Identifier"), NULL, NULL, (LPBYTE) cpuIdent, &size) != ERROR_SUCCESS)
-		    if (RegQueryValueEx(hKey, TEXT("VendorIdentifier"), NULL, NULL, (LPBYTE) cpuIdent, &size) != ERROR_SUCCESS)
-			    _tcscpy(cpuIdent, TEXT("Unknown"));
+			if (RegQueryValueEx(hKey, TEXT("VendorIdentifier"), NULL, NULL, (LPBYTE) cpuIdent, &size) != ERROR_SUCCESS)
+				_tcscpy(cpuIdent, TEXT("Unknown"));
 
 		RegCloseKey(hKey);
 	}
@@ -510,7 +537,7 @@ void GetFreeDiskString(LPCTSTR dirname, bkstring& buffer)
 
 		GetDiskFreeSpace(dirname, &SectorsPerCluster, &BytesPerSector, 
 			&NumberOfFreeClusters, &TotalNumberOfClusters);
-		
+
 		fs.QuadPart = BytesPerSector * SectorsPerCluster;
 		fs.QuadPart *= NumberOfFreeClusters;
 	}
@@ -536,7 +563,7 @@ void ReadableExceptionInfo(PEXCEPTION_RECORD excrec, bkstring& buffer)
 	case EXCEPTION_ARRAY_BOUNDS_EXCEEDED:
 		buffer.append(TEXT("Array Bounds Exceeded"));
 		break;
-	 
+
 	case EXCEPTION_DATATYPE_MISALIGNMENT:
 		buffer.append(TEXT("Datatype Misalignment"));
 		break;
@@ -600,7 +627,7 @@ void ReadableExceptionInfo(PEXCEPTION_RECORD excrec, bkstring& buffer)
 	default:
 		buffer.appendfmt(TEXT("%x"), excrec->ExceptionCode); 
 		break;
- 	}
+	}
 
 	buffer.appendfmt(TEXT(" at address %p."), excrec->ExceptionAddress); 
 
@@ -636,7 +663,7 @@ void GetAdminString(bkstring& buffer)
 			DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &AdministratorsGroup); 
 		if (b) 
 		{
-			if (!CheckTokenMembership( NULL, AdministratorsGroup, &b))
+			if (!CheckTokenMembership(NULL, AdministratorsGroup, &b))
 				b = FALSE;
 			FreeSid(AdministratorsGroup); 
 		}
@@ -682,12 +709,12 @@ void GetLanguagePackString(bkstring& buffer)
 		TCHAR path[MAX_PATH] = TEXT("Locale id invalid");
 		GetLocaleInfo(packlcid, LOCALE_SENGLANGUAGE, path, MAX_PATH);
 		buffer.append(path);
-		 
+
 		GetLocaleInfo(packlcid, LOCALE_SISO3166CTRYNAME, path, MAX_PATH);
 		buffer.appendfmt(TEXT(" (%s) [%04x]"), path, packlcid);
 
 		GetModuleFileName(NULL, path, MAX_PATH);
-		
+
 		LPTSTR fname = _tcsrchr(path, TEXT('\\'));
 		if (fname == NULL) fname = path;
 		crs_sntprintf(fname, MAX_PATH-(fname-path), TEXT("\\langpack_*.txt"));
@@ -721,9 +748,9 @@ void GetLanguagePackString(bkstring& buffer)
 				TCHAR mirtime[30];
 				GetLastWriteTime(path, mirtime, 30);
 
-                TCHAR* tid;
-                crsi_a2t(tid, id+5);
-                buffer.appendfmt(TEXT(", %s, modified: %s"), tid, mirtime);
+				TCHAR* tid;
+				crsi_a2t(tid, id+5);
+				buffer.appendfmt(TEXT(", %s, modified: %s"), tid, mirtime);
 			}
 			CloseHandle(hDumpFile);
 		}
@@ -759,7 +786,7 @@ bool CreateDirectoryTree(LPTSTR szDir)
 	*pszSlash = TEXT('\\');
 
 	if (res) res = CreateDirectory(szDir, NULL) != 0;
-	
+
 	return res;
 }
 
@@ -777,7 +804,7 @@ int crs_sntprintf(TCHAR *buffer, size_t count, const TCHAR* fmt, ...)
 
 void GetVersionInfo(HMODULE hLib, bkstring& buffer)
 {
-	HRSRC hVersion = FindResource(hLib, MAKEINTRESOURCE(VS_VERSION_INFO), RT_VERSION );
+	HRSRC hVersion = FindResource(hLib, MAKEINTRESOURCE(VS_VERSION_INFO), RT_VERSION);
 	if (hVersion != NULL)
 	{
 		HGLOBAL hGlobal = LoadResource(hLib, hVersion); 
@@ -792,10 +819,10 @@ void GetVersionInfo(HMODULE hLib, bkstring& buffer)
 
 				if (((char*)res - (char*)versionInfo) < vl)
 				{
-					 VS_FIXEDFILEINFO *vsInfo = (VS_FIXEDFILEINFO*)res;
-					 buffer.appendfmt(TEXT(" v.%u.%u.%u.%u"), 
-						 HIWORD(vsInfo->dwFileVersionMS), LOWORD(vsInfo->dwFileVersionMS),
-						 HIWORD(vsInfo->dwFileVersionLS), LOWORD(vsInfo->dwFileVersionLS));
+					VS_FIXEDFILEINFO *vsInfo = (VS_FIXEDFILEINFO*)res;
+					buffer.appendfmt(TEXT(" v.%u.%u.%u.%u"), 
+						HIWORD(vsInfo->dwFileVersionMS), LOWORD(vsInfo->dwFileVersionMS),
+						HIWORD(vsInfo->dwFileVersionLS), LOWORD(vsInfo->dwFileVersionLS));
 				}
 			}
 			FreeResource(hGlobal);  
@@ -825,7 +852,7 @@ void StoreStringToClip(bkstring& buffer)
 
 bool IsPluginEnabled(TCHAR* filename)
 {
-    char* fname;
+	char* fname;
 	crsi_t2a(fname, filename);
 	char* ext = strstr(_strlwr(fname), ".dll");
 	bool res = ext && ext[4] == '\0' && DBGetContactSettingByte(NULL, "PluginDisable", fname, 0) == 0;

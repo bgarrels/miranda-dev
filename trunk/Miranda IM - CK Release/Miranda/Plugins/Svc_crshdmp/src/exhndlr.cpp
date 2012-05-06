@@ -1,3 +1,39 @@
+/*
+Crash Dumper plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2008 - 2012 Boris Krasnovskiy All Rights Reserved
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
+
 #include "utils.h"
 #include "crtdbg.h"
 
@@ -13,8 +49,8 @@ tRtlCaptureContext pRtlCaptureContext = (tRtlCaptureContext)GetProcAddress(hKern
 
 void SetExceptionHandler(void)
 {
-//	if (pAddVectoredExceptionHandler && !exchndlrv)
-//		exchndlrv = pAddVectoredExceptionHandler(0, myfilterv);
+	//	if (pAddVectoredExceptionHandler && !exchndlrv)
+	//		exchndlrv = pAddVectoredExceptionHandler(0, myfilterv);
 	/*exchndlr = */ SetUnhandledExceptionFilter(myfilter);
 }
 
@@ -30,11 +66,11 @@ void RemoveExceptionHandler(void)
 void UnloadDbgHlp(void)
 {
 #ifdef _MSC_VER
-	#if _MSC_VER > 1200
-		__FUnloadDelayLoadedDLL2("dbghelp.dll");
-	#else
-		__FUnloadDelayLoadedDLL("dbghelp.dll");
-	#endif
+#if _MSC_VER > 1200
+	__FUnloadDelayLoadedDLL2("dbghelp.dll");
+#else
+	__FUnloadDelayLoadedDLL("dbghelp.dll");
+#endif
 #endif
 }
 
@@ -53,7 +89,7 @@ int myDebugFilter(unsigned int code, PEXCEPTION_POINTERS ep)
 			mir_snprintf(str+off, SIZEOF(str)-off, "Function: %s ", dlld->dlp.szProcName);
 		else
 			mir_snprintf(str+off, SIZEOF(str)-off, "Ordinal: %x ", dlld->dlp.dwOrdinal);
-		
+
 		MessageBoxA(NULL, str, "Miranda Crash Dumper", MB_OK | MB_ICONERROR | MB_TASKMODAL | MB_TOPMOST);
 	}
 
@@ -64,7 +100,7 @@ int myDebugFilter(unsigned int code, PEXCEPTION_POINTERS ep)
 void myfilterWorker(PEXCEPTION_POINTERS exc_ptr, bool notify)
 {
 	TCHAR path[MAX_PATH];
-	SYSTEMTIME st;
+	SYSTEMTIME st; 
 	HANDLE hDumpFile = NULL;
 
 	GetLocalTime(&st);
@@ -72,24 +108,14 @@ void myfilterWorker(PEXCEPTION_POINTERS exc_ptr, bool notify)
 
 	__try 
 	{
-		if (dtsubfldr)
-		{
-			crs_sntprintf(path, MAX_PATH, TEXT("%s\\%02d.%02d.%02d"), CrashLogFolder, st.wYear, st.wMonth, st.wDay);
-			CreateDirectory(path, NULL);
-			crs_sntprintf(path, MAX_PATH, TEXT("%s\\%02d.%02d.%02d\\crash%02d%02d%02d%02d%02d%02d.mdmp"), CrashLogFolder, 
-				st.wYear, st.wMonth, st.wDay, st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
-		}
-		else
-		{
-			crs_sntprintf(path, MAX_PATH, TEXT("%s\\crash%02d%02d%02d%02d%02d%02d.mdmp"), CrashLogFolder, 
-				st.wYear, st.wMonth, st.wDay, st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
-		}
+		crs_sntprintf(path, MAX_PATH, TEXT("%s\\crash%02d%02d%02d%02d%02d%02d.mdmp"), CrashLogFolder, 
+			st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
 		hDumpFile = CreateFile(path, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (hDumpFile != INVALID_HANDLE_VALUE) 
 			CreateMiniDump(hDumpFile, exc_ptr);
 		else if (GetLastError() != ERROR_ALREADY_EXISTS)
 			MessageBox(NULL, TranslateT("Crash Report write location is inaccesible"),
-				TEXT("Miranda Crash Dumper"), MB_OK | MB_ICONERROR | MB_TASKMODAL | MB_TOPMOST);
+			TEXT("Miranda Crash Dumper"), MB_OK | MB_ICONERROR | MB_TASKMODAL | MB_TOPMOST);
 
 	} 
 	__except(EXCEPTION_EXECUTE_HANDLER) {}
@@ -100,24 +126,14 @@ void myfilterWorker(PEXCEPTION_POINTERS exc_ptr, bool notify)
 
 	__try 
 	{
-		if (dtsubfldr)
-		{
-			crs_sntprintf(path, MAX_PATH, TEXT("%s\\%02d.%02d.%02d"), CrashLogFolder, st.wYear, st.wMonth, st.wDay);
-			CreateDirectory(path, NULL);
-			crs_sntprintf(path, MAX_PATH, TEXT("%s\\%02d.%02d.%02d\\crash%02d%02d%02d%02d%02d%02d.txt"), CrashLogFolder, 
-				st.wYear, st.wMonth, st.wDay, st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
-		}
-		else
-		{
-			crs_sntprintf(path, MAX_PATH, TEXT("%s\\crash%02d%02d%02d%02d%02d%02d.txt"), CrashLogFolder, 
-				st.wYear, st.wMonth, st.wDay, st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
-		}
+		crs_sntprintf(path, MAX_PATH, TEXT("%s\\crash%02d%02d%02d%02d%02d%02d.txt"), CrashLogFolder, 
+			st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
 		hDumpFile = CreateFile(path, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
 
 		crs_sntprintf(path, MAX_PATH, TranslateT("Miranda crashed. Crash report stored in the folder:\n %s\n\n Would you like store it in the clipboard as well?"), CrashLogFolder); 
 
-        if (hDumpFile != INVALID_HANDLE_VALUE) 
-            CreateCrashReport(hDumpFile, exc_ptr, notify ? path : NULL);
+		if (hDumpFile != INVALID_HANDLE_VALUE) 
+			CreateCrashReport(hDumpFile, exc_ptr, notify ? path : NULL);
 	} 
 	__except(myDebugFilter(GetExceptionCode(), GetExceptionInformation())) {}
 
@@ -133,7 +149,7 @@ LONG WINAPI myfilter(PEXCEPTION_POINTERS exc_ptr)
 	if (exc_ptr == lastptr) return EXCEPTION_EXECUTE_HANDLER;
 	lastptr = exc_ptr;
 
-    myfilterWorker(exc_ptr, true);
+	myfilterWorker(exc_ptr, true);
 
 	return exchndlr ? ((LPTOP_LEVEL_EXCEPTION_FILTER)exchndlr)(exc_ptr) : EXCEPTION_CONTINUE_SEARCH;
 }
@@ -176,15 +192,15 @@ void InvalidParameterHandler(const wchar_t*, const wchar_t*, const wchar_t*, uns
 	}
 
 #if defined(_AMD64_)
-    ExceptionRecord.ExceptionAddress = (PVOID)ContextRecord.Rip;
+	ExceptionRecord.ExceptionAddress = (PVOID)ContextRecord.Rip;
 #elif defined(_IA64_)
-    ExceptionRecord.ExceptionAddress = (PVOID)ContextRecord.BrRp;
+	ExceptionRecord.ExceptionAddress = (PVOID)ContextRecord.BrRp;
 #else
-    ExceptionRecord.ExceptionAddress = (PVOID)ContextRecord.Eip;
+	ExceptionRecord.ExceptionAddress = (PVOID)ContextRecord.Eip;
 #endif
 
-    ExceptionRecord.ExceptionCode  = STATUS_INVALID_CRUNTIME_PARAMETER;
-    ExceptionRecord.ExceptionFlags = EXCEPTION_NONCONTINUABLE;
+	ExceptionRecord.ExceptionCode  = STATUS_INVALID_CRUNTIME_PARAMETER;
+	ExceptionRecord.ExceptionFlags = EXCEPTION_NONCONTINUABLE;
 
 	myfilterWorker(&info, true);
 }

@@ -52,6 +52,10 @@ Licensing terms could be found below.
 Change Log
 ==========
 
+0.0.4.20
+--------
+Added Windows 8 detection
+
 0.0.4.19
 --------
 Improved reporting for MS RTL failures
