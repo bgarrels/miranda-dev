@@ -72,9 +72,6 @@
     <None Include="res\btnClose.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Docs\Readme_eng.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="Docs\ToDo.txt">
       <Filter>docs</Filter>
     </None>
@@ -87,5 +84,10 @@
     <None Include="Docs\Templates\File1.ini">
       <Filter>docs\Templates</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\Readme.txt">
+      <Filter>docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
