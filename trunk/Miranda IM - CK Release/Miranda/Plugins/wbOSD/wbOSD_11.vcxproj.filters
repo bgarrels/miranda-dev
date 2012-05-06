@@ -40,22 +40,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\lpgen.pl">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\readme">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\wbOSD-translation.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\langpack_wbOSD.txt">
-      <Filter>docs</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="src\wbOSD.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Readme.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="docs\wbOSD-translation.txt">
+      <Filter>docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
