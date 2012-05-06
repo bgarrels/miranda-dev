@@ -50,8 +50,6 @@ PLUGININFOEX pluginInfo = {
 	"AddContact+ (x64)",
 #elif defined(_UNICODE)
 	"AddContact+ (Unicode)",
-#else
-	"AddContact+ (ANSI)",
 #endif
 	PLUGIN_MAKE_VERSION(0, 9, 9, 0),
 	"Provides the ability to quickly add new contacts",
