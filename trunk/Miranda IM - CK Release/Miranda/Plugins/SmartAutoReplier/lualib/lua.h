@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lua.h 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Lua - An Extensible Extension Language
 ** Tecgraf: Computer Graphics Technology Group, PUC-Rio, Brazil
 ** http://www.lua.org	mailto:info@lua.org

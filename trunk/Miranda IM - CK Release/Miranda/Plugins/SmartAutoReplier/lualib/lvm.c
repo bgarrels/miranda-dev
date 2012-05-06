@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lvm.c 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Lua virtual machine
 ** See Copyright Notice in lua.h
 */
@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* needed only when `lua_number2str' uses `sprintf' */
+/* needed only when `lua_number2str' uses `sprintf_s' */
 #include <stdio.h>
 
 #define lvm_c
@@ -32,7 +32,7 @@
 
 /* function to convert a lua_Number to a string */
 #ifndef lua_number2str
-#define lua_number2str(s,n)     sprintf((s), LUA_NUMBER_FMT, (n))
+#define lua_number2str(s,n)     sprintf_s((s), LUA_NUMBER_FMT, (n))
 #endif
 
 

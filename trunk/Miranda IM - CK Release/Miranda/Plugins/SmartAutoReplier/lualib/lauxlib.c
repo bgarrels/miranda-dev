@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lauxlib.c 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Auxiliary functions for building Lua libraries
 ** See Copyright Notice in lua.h
 */
@@ -477,7 +477,7 @@ static const char *getF (lua_State *L, void *ud, size_t *size) {
 
 static int errfile (lua_State *L, int fnameindex) {
   const char *filename = lua_tostring(L, fnameindex) + 1;
-  lua_pushfstring(L, "cannot read %s: %s", filename, strerror(errno));
+  lua_pushfstring(L, "cannot read %s: %s", filename, strerror_s(errno));
   lua_remove(L, fnameindex);
   return LUA_ERRFILE;
 }

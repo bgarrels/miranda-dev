@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lcode.h 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Code generator for Lua
 ** See Copyright Notice in lua.h
 */

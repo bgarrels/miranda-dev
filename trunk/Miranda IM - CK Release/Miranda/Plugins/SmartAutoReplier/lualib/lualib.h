@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lualib.h 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Lua standard libraries
 ** See Copyright Notice in lua.h
 */

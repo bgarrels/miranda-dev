@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: ltm.c 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Tag methods
 ** See Copyright Notice in lua.h
 */

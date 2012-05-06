@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: ldebug.h 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Auxiliary functions from Debug Interface module
 ** See Copyright Notice in lua.h
 */

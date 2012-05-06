@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: liolib.c 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Standard I/O (and system) library
 ** See Copyright Notice in lua.h
 */
@@ -77,9 +77,9 @@ static int pushresult (lua_State *L, int i, const char *filename) {
   else {
     lua_pushnil(L);
     if (filename)
-      lua_pushfstring(L, "%s: %s", filename, strerror(errno));
+      lua_pushfstring(L, "%s: %s", filename, strerror_s(errno));
     else
-      lua_pushfstring(L, "%s", strerror(errno));
+      lua_pushfstring(L, "%s", strerror_s(errno));
     lua_pushnumber(L, errno);
     return 3;
   }
@@ -178,9 +178,9 @@ static int io_tostring (lua_State *L) {
   char buff[32];
   FILE **f = topfile(L, 1);
   if (*f == NULL)
-    strcpy(buff, "closed");
+    strcpy_s(buff, "closed");
   else
-    sprintf(buff, "%p", lua_touserdata(L, 1));
+    sprintf_s(buff, "%p", lua_touserdata(L, 1));
   lua_pushfstring(L, "file (%s)", buff);
   return 1;
 }
@@ -231,7 +231,7 @@ static int g_iofile (lua_State *L, const char *name, const char *mode) {
       FILE **pf = newfile(L);
       *pf = fopen(filename, mode);
       if (*pf == NULL) {
-        lua_pushfstring(L, "%s: %s", filename, strerror(errno));
+        lua_pushfstring(L, "%s: %s", filename, strerror_s(errno));
         luaL_argerror(L, 1, lua_tostring(L, -1));
       }
     }
@@ -287,7 +287,7 @@ static int io_lines (lua_State *L) {
     const char *filename = luaL_checkstring(L, 1);
     FILE **pf = newfile(L);
     *pf = fopen(filename, "r");
-    luaL_argcheck(L, *pf, 1,  strerror(errno));
+    luaL_argcheck(L, *pf, 1,  strerror_s(errno));
     aux_lines(L, lua_gettop(L), 1);
     return 1;
   }
@@ -570,7 +570,7 @@ static int io_tmpname (lua_State *L) {
 
 
 static int io_getenv (lua_State *L) {
-  lua_pushstring(L, getenv(luaL_checkstring(L, 1)));  /* if NULL push nil */
+  lua_pushstring(L, _dupenv_s(luaL_checkstring(L, 1)));  /* if NULL push nil */
   return 1;
 }
 
@@ -723,7 +723,7 @@ static const luaL_reg syslib[] = {
   {"difftime",  io_difftime},
   {"execute",   io_execute},
   {"exit",      io_exit},
-  {"getenv",    io_getenv},
+  {"_dupenv_s", io_getenv},
   {"remove",    io_remove},
   {"rename",    io_rename},
   {"setlocale", io_setloc},
