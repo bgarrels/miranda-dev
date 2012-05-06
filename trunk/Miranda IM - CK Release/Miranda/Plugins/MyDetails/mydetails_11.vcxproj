@@ -162,6 +162,7 @@
     <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\commons.h" />
     <ClInclude Include="src\data.h" />
     <ClInclude Include="src\frame.h" />
@@ -169,10 +170,18 @@
     <ClInclude Include="src\options.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\Skins\Default\MyDetails.msk" />
+    <None Include="data\Skins\Pidgin\MyDetails.msk" />
     <None Include="res\leftarrow.ico" />
     <None Include="res\listening_to.ico" />
     <None Include="res\mail.ico" />
     <None Include="res\rightarrow.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\Changelog.txt" />
+    <Text Include="Docs\MyDetails_langpack.txt" />
+    <Text Include="Docs\mydetails_version.txt" />
+    <Text Include="Docs\Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
