@@ -1,6 +1,6 @@
 // Microsoft Visual C++ generated resource script.
 //
-#include "resource.h"
+#include "src/resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -31,7 +31,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 1 TEXTINCLUDE 
 BEGIN
-    "resource.h\0"
+    "src/resource.h\0"
 END
 
 2 TEXTINCLUDE 
@@ -171,11 +171,11 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_VI                  ICON                    "Vi.ico"
-IDI_VISHOW              ICON                    "Vi show.ico"
-IDI_VITOCLIP            ICON                    "Vi to clipboard.ico"
-IDI_VITOFILE            ICON                    "Vi to file.ico"
-IDI_VIUPLOAD            ICON                    "Vi upload.ico"
+IDI_VI                  ICON                    "icons//Vi.ico"
+IDI_VISHOW              ICON                    "icons//Vi show.ico"
+IDI_VITOCLIP            ICON                    "icons//Vi to clipboard.ico"
+IDI_VITOFILE            ICON                    "icons//Vi to file.ico"
+IDI_VIUPLOAD            ICON                    "icons//Vi upload.ico"
 #endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
 
