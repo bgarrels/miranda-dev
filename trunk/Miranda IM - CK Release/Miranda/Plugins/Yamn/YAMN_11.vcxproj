@@ -341,10 +341,7 @@
   <ItemGroup>
     <None Include="docs\ChangeLog.txt" />
     <None Include="docs\language.pop3.txt" />
-    <None Include="docs\language.txt" />
-    <None Include="docs\YAMN-License.txt" />
     <None Include="docs\YAMN-Readme.developers.txt" />
-    <None Include="docs\YAMN-Readme.txt" />
     <None Include="resources\iconeutral.ico" />
     <None Include="resources\iconttbdown.ico" />
     <None Include="resources\icooffline.ico" />
@@ -363,6 +360,10 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\YAMN.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Readme.txt" />
+    <Text Include="docs\Yamn_translation.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

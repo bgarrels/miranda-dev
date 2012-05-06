@@ -24,6 +24,9 @@
     <Filter Include="docs">
       <UniqueIdentifier>{78fe97e0-7427-428b-9ec4-ab07cd66a76e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{6cd43463-2f71-43a1-b989-eee081c3957b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="browser\badconnect.cpp">
@@ -82,31 +85,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\iconeutral.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resources\iconttbdown.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resources\icooffline.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resources\icoyamn3.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resources\yamn.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="docs\language.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\YAMN-License.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\YAMN-Readme.developers.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="docs\YAMN-Readme.txt">
       <Filter>docs</Filter>
     </None>
     <None Include="docs\ChangeLog.txt">
@@ -114,6 +93,21 @@
     </None>
     <None Include="docs\language.pop3.txt">
       <Filter>docs</Filter>
+    </None>
+    <None Include="resources\iconeutral.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="resources\iconttbdown.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="resources\icooffline.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="resources\icoyamn3.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="resources\yamn.bmp">
+      <Filter>Resource Files\Icons</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -138,11 +132,21 @@
     <ClInclude Include="src\yamn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\version.h" />
+    <ClInclude Include="src\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\YAMN.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Yamn_translation.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="docs\Readme.txt">
+      <Filter>docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
