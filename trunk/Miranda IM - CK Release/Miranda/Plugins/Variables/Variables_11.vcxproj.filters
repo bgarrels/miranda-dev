@@ -166,9 +166,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\copying.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\Variables.txt">
       <Filter>docs</Filter>
     </None>
