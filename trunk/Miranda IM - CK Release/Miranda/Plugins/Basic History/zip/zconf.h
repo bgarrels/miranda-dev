@@ -3,7 +3,7 @@
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
-/* @(#) $Id$ */
+/* @(#) $Id: zconf.h 1856 2012-04-23 19:19:32Z Nvinside@gmail.com $ */
 
 #ifndef ZCONF_H
 #define ZCONF_H
