@@ -1,9 +1,4 @@
 /*
-{{NO_DEPENDENCIES}}
-Microsoft Visual C++ generated include file.
-Used by resource.rc
-
-
 Author Artem Shpynov aka FYR
 
 Miranda IM: the free IM client for Microsoft* Windows*
@@ -678,7 +673,6 @@ Last change by : $Author:
 #define POPUP_DELETEGROUP               40053
 
 // Next default values for new objects
-// 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        347
