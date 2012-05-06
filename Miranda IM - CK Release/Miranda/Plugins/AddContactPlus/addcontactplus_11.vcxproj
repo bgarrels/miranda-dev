@@ -365,9 +365,6 @@
     <ClInclude Include="src\m_addcontactplus.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="icons\contact_add.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="src\resource.rc" />
   </ItemGroup>
   <ItemGroup>
@@ -377,6 +374,9 @@
   <ItemGroup>
     <Text Include="docs\addcontactplus-translation.txt" />
     <Text Include="docs\Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\contact_add.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -16,6 +16,9 @@
     <Filter Include="Docs">
       <UniqueIdentifier>{77d36d24-0442-40ff-ba29-018fbbdf8647}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{bf08a5d7-e009-46c9-8b9e-61be4ff976e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\addcontactplus.h">
@@ -24,11 +27,6 @@
     <ClInclude Include="src\m_addcontactplus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\contact_add.ico">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\resource.rc">
@@ -50,5 +48,10 @@
     <Text Include="docs\Readme.txt">
       <Filter>Docs</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\contact_add.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>
