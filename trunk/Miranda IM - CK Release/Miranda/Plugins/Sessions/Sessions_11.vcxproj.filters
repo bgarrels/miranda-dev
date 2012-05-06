@@ -13,6 +13,12 @@
       <UniqueIdentifier>{b6a581e7-b460-4f40-b782-acff3afc0a00}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{4570f73e-898a-420c-8c12-fe583989303f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SDK">
+      <UniqueIdentifier>{a26c5f00-2a22-47c8-b477-d8a65ed951e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Main.cpp">
@@ -32,34 +38,34 @@
     <ClInclude Include="Src\Sessions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalAPI\m_sessions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalAPI\m_sessions.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="icons\checked.ico">
-      <Filter>Resource Files</Filter>
+    <None Include="Icons\Checked.ico">
+      <Filter>Resource Files\Icons</Filter>
     </None>
-    <None Include="icons\load.ico">
-      <Filter>Resource Files</Filter>
+    <None Include="Icons\Load.ico">
+      <Filter>Resource Files\Icons</Filter>
     </None>
-    <None Include="icons\loadlast.ico">
-      <Filter>Resource Files</Filter>
+    <None Include="Icons\Loadlast.ico">
+      <Filter>Resource Files\Icons</Filter>
     </None>
-    <None Include="icons\save.ico">
-      <Filter>Resource Files</Filter>
+    <None Include="Icons\Save.ico">
+      <Filter>Resource Files\Icons</Filter>
     </None>
-    <None Include="icons\sessions.ico">
-      <Filter>Resource Files</Filter>
+    <None Include="Icons\Sessions.ico">
+      <Filter>Resource Files\Icons</Filter>
     </None>
-    <None Include="icons\unchecked.ico">
-      <Filter>Resource Files</Filter>
+    <None Include="Icons\Unchecked.ico">
+      <Filter>Resource Files\Icons</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
