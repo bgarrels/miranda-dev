@@ -102,15 +102,17 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>../../include;../../include_API;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;POPUPS2_EXPORTS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
+      <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <Link>
       <AdditionalDependencies>unicows.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -125,11 +127,12 @@
       </MapFileName>
       <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
-      <LargeAddressAware>true</LargeAddressAware>
+      <LargeAddressAware>
+      </LargeAddressAware>
       <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
     </Link>
     <ResourceCompile>
-      <PreprocessorDefinitions>_WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
@@ -236,7 +239,8 @@
       <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
       <AdditionalDependencies>comctl32.lib;comdlg32.lib;shlwapi.lib;kernel32.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;shell32.lib;oleaut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
-      <LargeAddressAware>true</LargeAddressAware>
+      <LargeAddressAware>
+      </LargeAddressAware>
       <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
     </Link>
     <ClCompile>
@@ -252,7 +256,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>_WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
