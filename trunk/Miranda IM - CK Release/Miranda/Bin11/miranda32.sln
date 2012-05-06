@@ -540,7 +540,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Actions_icons", "..\Icons\A
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tabsrmm_icons", "..\Plugins\Tabsrmm\icons\ICONS_NOVA\ICONS_NOVA_11.vcxproj", "{31A14093-F346-4715-965D-96E72E799D5D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "toolbar_icons", "..\Plugins\Modernb\icons_pack\ICONS_11.vcxproj", "{3ED61BF9-9568-4E23-BC89-DEB8460CA487}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Modernb_toolbar_icons", "..\Plugins\Modernb\icons_pack\ICONS_11.vcxproj", "{3ED61BF9-9568-4E23-BC89-DEB8460CA487}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xstatus_jabber", "..\Protocols\JabberG\jabber_xstatus\JABBER_XSTATUS_11.vcxproj", "{39CF65BD-B423-C429-BA7E-E0FBC79305EB}"
 EndProject
