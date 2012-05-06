@@ -39,11 +39,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="icons\secured.ico">
-      <Filter>Resource Files</Filter>
+    <None Include="docs\utf8cpp.html">
+      <Filter>Docs</Filter>
     </None>
     <None Include="icons\unsecured.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="icons\secured.ico">
+      <Filter>Resource Files\Icons</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +61,12 @@
     </Filter>
     <Filter Include="utf8">
       <UniqueIdentifier>{3064768b-4b1c-4402-98bf-7243533050c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{3b311150-d412-4247-936c-1c673209914b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{e750fe06-6c2b-4b38-bc70-aad6c405069f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -90,9 +99,6 @@
     <ClInclude Include="src\metacontacts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -108,5 +114,16 @@
     <ClInclude Include="utf8\utf8\checked.h">
       <Filter>utf8</Filter>
     </ClInclude>
+    <ClInclude Include="src\resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\README.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\new_gpg_lang_ru.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
