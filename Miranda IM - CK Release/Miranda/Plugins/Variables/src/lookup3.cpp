@@ -1,6 +1,39 @@
 /*
--------------------------------------------------------------------------------
-lookup3.c, by Bob Jenkins, May 2006, Public Domain.
+Variables plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors 
+			Copyright 2003-2006 P. Boon
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+* lookup3.c, by Bob Jenkins, May 2006, Public Domain.
 These are functions for producing 32-bit hashes for hash table lookup.
 hashword(), hashlittle(), hashbig(), mix(), and final() are externally 
 useful functions.  Routines to test the hash are included if SELF_TEST 
@@ -11,19 +44,17 @@ hash byte arrays.  hashlittle() is is faster than hashbig() on
 little-endian machines.  Intel and AMD are little-endian machines.
 
 If you want to find a hash of, say, exactly 7 integers, do
-  a = i1;  b = i2;  c = i3;
-  mix(a,b,c);
-  a += i4; b += i5; c += i6;
-  mix(a,b,c);
-  a += i7;
-  final(a,b,c);
+a = i1;  b = i2;  c = i3;
+mix(a,b,c);
+a += i4; b += i5; c += i6;
+mix(a,b,c);
+a += i7;
+final(a,b,c);
 then use c as the hash value.  If you have a variable length array of
 4-byte integers to hash, use hashword().  If you have a byte array (like
 a character string), use hashlittle().  If you have several byte arrays, or
 a mix of things, see the comments above hashlittle().
--------------------------------------------------------------------------------
 */
-//#define SELF_TEST 1
 
 #include <stdio.h>
 #include <stddef.h>
