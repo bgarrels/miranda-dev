@@ -13,8 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="Docs">
-      <UniqueIdentifier>{a815306e-1e71-4ebb-b357-8cfcb3b6b3f6}</UniqueIdentifier>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{2937be1a-c0a5-45af-984b-98680e0b6e6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -84,11 +84,8 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\licence_YAPP.txt">
-      <Filter>Docs</Filter>
-    </None>
     <None Include="ico\PPh2.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Icons</Filter>
     </None>
   </ItemGroup>
 </Project>
