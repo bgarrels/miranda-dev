@@ -1,6 +1,4 @@
 /*
-{{NO_DEPENDENCIES}}
-Microsoft Visual C++ generated include file.
 Author Artem Shpynov aka FYR
 
 Miranda IM: the free IM client for Microsoft* Windows*
@@ -29,8 +27,11 @@ File name      : $HeadURL:
 Revision       : $Revision: 
 Last change on : $Date: 
 Last change by : $Author:
+$Id$		   : $Id$:
 
 ===============================================================================
+
+* VisualStyle Core Win32/ComCtl32 symbols
 */
 
 #define IDD_OPT_VIEWMODES               1
@@ -444,7 +445,6 @@ Last change by : $Author:
 #define IDC_FLT_BORDERCOLOUR            40072
 
 // Next default values for new objects
-// 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        10

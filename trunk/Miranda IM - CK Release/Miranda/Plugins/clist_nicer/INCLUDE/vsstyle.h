@@ -1,22 +1,48 @@
-//-------------------------------------------------------------------------//
-//  VisualStyle Style Guide symbols
-//-------------------------------------------------------------------------//
-
 #ifndef __VSSTYLE_H__
 #define __VSSTYLE_H__
 
-//
-//  property symbol definitions
-//
+/*
+Author Artem Shpynov aka FYR
 
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+* VisualStyle Style Guide symbols
+*/
+
+//  property symbol definitions
 #define TMTVS_RESERVEDLOW	100000
 #define TMTVS_RESERVEDHIGH	19999
 
 
-
-//
 //  AEROWIZARDSTYLE class parts and states 
-//
 #define VSCLASS_AEROWIZARDSTYLE	L"AEROWIZARDSTYLE"
 #define VSCLASS_AEROWIZARD	L"AEROWIZARD"
 
@@ -44,9 +70,7 @@ enum CONTENTAREASTATES {
 };
 
 
-//
 //  BUTTONSTYLE class parts and states 
-//
 #define VSCLASS_BUTTONSTYLE	L"BUTTONSTYLE"
 #define VSCLASS_BUTTON	L"BUTTON"
 
@@ -128,9 +152,7 @@ enum COMMANDLINKGLYPHSTATES {
 };
 
 
-//
 //  COMBOBOXSTYLE class parts and states 
-//
 #define VSCLASS_COMBOBOXSTYLE	L"COMBOBOXSTYLE"
 #define VSCLASS_COMBOBOX	L"COMBOBOX"
 
@@ -197,9 +219,7 @@ enum CUEBANNERSTATES {
 };
 
 
-//
 //  COMMUNICATIONSSTYLE class parts and states 
-//
 #define VSCLASS_COMMUNICATIONSSTYLE	L"COMMUNICATIONSSTYLE"
 #define VSCLASS_COMMUNICATIONS	L"COMMUNICATIONS"
 
@@ -216,9 +236,7 @@ enum TABSTATES {
 };
 
 
-//
 //  CONTROLPANELSTYLE class parts and states 
-//
 #define VSCLASS_CONTROLPANELSTYLE	L"CONTROLPANELSTYLE"
 #define VSCLASS_CONTROLPANEL	L"CONTROLPANEL"
 
@@ -274,9 +292,7 @@ enum SECTIONTITLELINKSTATES {
 };
 
 
-//
 //  DATEPICKERSTYLE class parts and states 
-//
 #define VSCLASS_DATEPICKERSTYLE	L"DATEPICKERSTYLE"
 #define VSCLASS_DATEPICKER	L"DATEPICKER"
 
@@ -309,9 +325,7 @@ enum SHOWCALENDARBUTTONRIGHTSTATES {
 };
 
 
-//
 //  DRAGDROPSTYLE class parts and states 
-//
 #define VSCLASS_DRAGDROPSTYLE	L"DRAGDROPSTYLE"
 #define VSCLASS_DRAGDROP	L"DRAGDROP"
 
@@ -359,9 +373,7 @@ enum NONESTATES {
 };
 
 
-//
 //  EDITSTYLE class parts and states 
-//
 #define VSCLASS_EDITSTYLE	L"EDITSTYLE"
 #define VSCLASS_EDIT	L"EDIT"
 
@@ -435,9 +447,7 @@ enum EDITBORDER_HVSCROLLSTATES {
 };
 
 
-//
 //  EXPLORERBARSTYLE class parts and states 
-//
 #define VSCLASS_EXPLORERBARSTYLE	L"EXPLORERBARSTYLE"
 #define VSCLASS_EXPLORERBAR	L"EXPLORERBAR"
 

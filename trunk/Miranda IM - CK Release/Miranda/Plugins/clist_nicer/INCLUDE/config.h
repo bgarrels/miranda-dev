@@ -1,3 +1,6 @@
+#ifndef __CONFIG_H_
+#define __CONFIG_H_
+
 /*
 Author Artem Shpynov aka FYR
 
@@ -27,14 +30,14 @@ File name      : $HeadURL:
 Revision       : $Revision: 
 Last change on : $Date: 
 Last change by : $Author:
+$Id$		   : $Id$:
 
 ===============================================================================
+
+* VisualStyle Core Win32/ComCtl32 symbols
 */
 
 #include <stdexcept>
-
-#ifndef __CONFIG_H_
-#define __CONFIG_H_
 
 #define	DEFAULT_MODULE "Clist"
 

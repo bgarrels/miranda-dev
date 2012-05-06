@@ -1,7 +1,9 @@
 /*
-Author Robert Rainwater
-
+Clist_nicer plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
+
+Author 
+			Copyright (C) Author Robert Rainwater
 
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
@@ -29,12 +31,9 @@ Last change on : $Date:
 Last change by : $Author:
 
 ===============================================================================
-*/
 
-#include <commonheaders.h>
-
-/* the CLC uses 3 different ways to identify elements in its list, this file
-contains routines to convert between them.
+* The CLC uses 3 different ways to identify elements in its list, this file
+* contains routines to convert between them.
 
 1) struct ClcContact/struct ClcGroup pair. Only ever used within the duration
    of a single operation, but used at some point in nearly everything
@@ -49,6 +48,8 @@ contains routines to convert between them.
 3->1: FindItem()
 2->1: GetRowByIndex()
 */
+
+#include <commonheaders.h>
 
 int FindItem(HWND hwnd, struct ClcData *dat, HANDLE hItem, struct ClcContact **contact, struct ClcGroup **subgroup, int *isVisible)
 {

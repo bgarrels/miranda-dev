@@ -27,19 +27,19 @@ File name      : $HeadURL:
 Revision       : $Revision: 
 Last change on : $Date: 
 Last change by : $Author:
+$Id$		   : $Id$:
 
 ===============================================================================
+
+* VisualStyle Core Win32/ComCtl32 symbols
 */
 
-/*
- * services
- */
+
+// services
 #define MS_CLNSE_INVOKE "CLN_Skinedit/Invoke"
 #define MS_CLNSE_FILLBYCURRENTSEL "CLN_Skinedit/FillByCurrentSel"
 
-/*
- * data structs
- */
+// data structs
 typedef struct _tagImageItem {
     char    szName[40];
     HBITMAP hbm;
