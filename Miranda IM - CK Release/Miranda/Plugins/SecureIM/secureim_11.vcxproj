@@ -368,6 +368,25 @@
   <ItemGroup>
     <Text Include="docs\Changelog.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\cl_dis.ico" />
+    <Image Include="icons\cl_est.ico" />
+    <Image Include="icons\cm_dis.ico" />
+    <Image Include="icons\cm_est.ico" />
+    <Image Include="icons\mw_dis.ico" />
+    <Image Include="icons\mw_est.ico" />
+    <Image Include="icons\ov_gpg.ico" />
+    <Image Include="icons\ov_nat.ico" />
+    <Image Include="icons\ov_pgp.ico" />
+    <Image Include="icons\ov_rsa.ico" />
+    <Image Include="icons\pu_dis.ico" />
+    <Image Include="icons\pu_est.ico" />
+    <Image Include="icons\pu_msg.ico" />
+    <Image Include="icons\pu_prc.ico" />
+    <Image Include="icons\st_dis.ico" />
+    <Image Include="icons\st_ena.ico" />
+    <Image Include="icons\st_try.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

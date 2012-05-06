@@ -16,6 +16,9 @@
     <Filter Include="docs">
       <UniqueIdentifier>{b7bcdfbb-dd85-41f7-85f3-78b2d77e93e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{943131ca-3370-4362-9e6d-0a4465e5d58a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
@@ -23,9 +26,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -88,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="src\svcs_srmm.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -171,5 +174,58 @@
     <Text Include="docs\Changelog.txt">
       <Filter>docs</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\st_try.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\cl_dis.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\cl_est.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\cm_dis.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\cm_est.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\mw_dis.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\mw_est.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\ov_gpg.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\ov_nat.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\ov_pgp.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\ov_rsa.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\pu_dis.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\pu_est.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\pu_msg.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\pu_prc.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\st_dis.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\st_ena.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>
