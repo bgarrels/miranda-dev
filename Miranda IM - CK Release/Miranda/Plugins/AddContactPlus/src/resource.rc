@@ -1,5 +1,5 @@
 //Microsoft Developer Studio generated resource script.
-//
+
 #include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
@@ -74,7 +74,7 @@ BEGIN
             VALUE "FileDescription", "AddContact+ plugin for Miranda IM\0"
             VALUE "FileVersion", "0.9.9.0\0"
             VALUE "InternalName", "addcontactplus\0"
-            VALUE "LegalCopyright", "© 2007-2011 Bartosz 'Dezeath' Bia³ek\0"
+            VALUE "LegalCopyright", "© 2007-2012 Bartosz 'Dezeath' Bia³ek\0"
             VALUE "OriginalFilename", "addcontactplus.dll\0"
             VALUE "ProductName", "AddContact+\0"
             VALUE "ProductVersion", "0.9.9.0\0"
