@@ -179,7 +179,7 @@ BEGIN
             VALUE "FileDescription", "StopSpam plugin for Miranda IM"
             VALUE "FileVersion", "0.0.2.0"
             VALUE "InternalName", "stopspam"
-            VALUE "LegalCopyright", "Copyright © 2000-2010 Miranda IM Project. This software is released under the terms of the GNU General Public License."
+            VALUE "LegalCopyright", "Copyright © 2000-2012 Miranda IM Project. This software is released under the terms of the GNU General Public License."
             VALUE "OriginalFilename", "stopspam.dll"
             VALUE "ProductName", "StopSpam"
             VALUE "ProductVersion", "0.7.0.0"
