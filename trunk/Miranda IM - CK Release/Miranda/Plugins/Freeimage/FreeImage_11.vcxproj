@@ -510,9 +510,6 @@
     <ClInclude Include="Miranda\version.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\Todo.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="docs\FreeImage Public License.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
