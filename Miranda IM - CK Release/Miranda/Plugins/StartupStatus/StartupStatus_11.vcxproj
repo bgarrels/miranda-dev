@@ -328,6 +328,12 @@
     <ResourceCompile Include="StartupStatus.rc" />
     <ResourceCompile Include="version.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\ttbDown.bmp" />
+    <Image Include="res\ttbDown.ico" />
+    <Image Include="res\ttbUp.bmp" />
+    <Image Include="res\ttbUp.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
