@@ -396,9 +396,6 @@
     <ClInclude Include="zbin\minizip\unzip.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bzip2-1.0.6\docs\LICENSE" />
-    <None Include="bzip2-1.0.6\docs\README" />
-    <None Include="bzip2-1.0.6\docs\README.COMPILATION.PROBLEMS" />
     <None Include="icos\restart.ico" />
     <None Include="icos\u.ico" />
     <None Include="icos\ue.ico" />
@@ -408,8 +405,10 @@
     <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="bzip2-1.0.6\docs\bzip2.txt" />
-    <Text Include="Docs\licence_updater.txt" />
+    <Text Include="docs\bzip2.txt" />
+    <Text Include="docs\bzip_license.txt" />
+    <Text Include="docs\README  bzip2 and libzip2.txt" />
+    <Text Include="docs\README.COMPILATION.PROBLEMS.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
