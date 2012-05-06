@@ -1,9 +1,12 @@
 /*
-
+W7ui plugin for
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright 2000-2003 Miranda ICQ/IM project, 
-all portions of this codebase are copyrighted to the people 
+Author
+			Copyright (C) 2009 nullbie, persei
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
@@ -19,6 +22,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #define _CRT_SECURE_NO_DEPRECATE
@@ -28,7 +41,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #endif
 
 #include <tchar.h>
-#define _WIN32_WINNT 0x0501
+#define _WIN32_WINNT 0x0600
 #include <windows.h>
 #include <shlobj.h>
 #include <commctrl.h>
@@ -38,7 +51,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <propkey.h>
 #include <propvarutil.h>
 
-#define MIRANDA_VER	0x800
+//Miranda IM stuff
+#define MIRANDA_VER    0x0A00
 #include <win2k.h>
 #include <newpluginapi.h>
 #include <m_system.h>
