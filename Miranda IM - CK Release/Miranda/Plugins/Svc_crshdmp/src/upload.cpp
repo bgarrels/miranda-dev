@@ -1,11 +1,18 @@
 /*
-Miranda Crash Dumper Plugin
-Copyright (C) 2008 - 2009 Boris Krasnovskiy All Rights Reserved
+Crash Dumper plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2008 - 2012 Boris Krasnovskiy All Rights Reserved
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation version 2
-of the License.
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -13,7 +20,18 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "utils.h"
@@ -41,15 +59,15 @@ void GetLoginStr(char* user, size_t szuser, char* pass)
 {
 	DBVARIANT dbv;
 
-    if (DBGetContactSettingString(NULL, PluginName, "Username", &dbv) == 0)
+	if (DBGetContactSettingString(NULL, PluginName, "Username", &dbv) == 0)
 	{
 		mir_snprintf(user, szuser, "%s", dbv.pszVal);
 		DBFreeVariant(&dbv);
 	}
-    else
-        user[0] = 0;
+	else
+		user[0] = 0;
 
-    if (DBGetContactSettingString(NULL, PluginName, "Password", &dbv) == 0)
+	if (DBGetContactSettingString(NULL, PluginName, "Password", &dbv) == 0)
 	{
 		CallService(MS_DB_CRYPT_DECODESTRING, strlen(dbv.pszVal)+1, (LPARAM)dbv.pszVal);
 
@@ -64,37 +82,37 @@ void GetLoginStr(char* user, size_t szuser, char* pass)
 
 		DBFreeVariant(&dbv);
 	}
-    else
-        pass[0] = 0;
+	else
+		pass[0] = 0;
 }
 
 void OpenAuthUrl(const char* url)
 {
-    char user[64], pass[40];
-    GetLoginStr(user, sizeof(user), pass);
+	char user[64], pass[40];
+	GetLoginStr(user, sizeof(user), pass);
 
-    if (user[0] && pass[0])
-    {
-	    char str[256];
+	if (user[0] && pass[0])
+	{
+		char str[256];
 
-        mir_snprintf(str, sizeof(str), url, user);
-        char* eurl = (char*)CallService(MS_NETLIB_URLENCODE, 0, (LPARAM)str);
+		mir_snprintf(str, sizeof(str), url, user);
+		char* eurl = (char*)CallService(MS_NETLIB_URLENCODE, 0, (LPARAM)str);
 
-        mir_snprintf(str, sizeof(str), "http://www.miranda-vi.org/cdlogin?name=%s&pass=%s&redir=%s", user, pass, eurl);
-	    CallService(MS_UTILS_OPENURL, 1, (LPARAM)str);
-        HeapFree(GetProcessHeap(), 0, eurl);
-    }
-    else
-	    CallService(MS_UTILS_OPENURL, 1, (LPARAM)"http://www.miranda-vi.org/");
+		mir_snprintf(str, sizeof(str), "http://www.miranda-vi.org/cdlogin?name=%s&pass=%s&redir=%s", user, pass, eurl);
+		CallService(MS_UTILS_OPENURL, 1, (LPARAM)str);
+		HeapFree(GetProcessHeap(), 0, eurl);
+	}
+	else
+		CallService(MS_UTILS_OPENURL, 1, (LPARAM)"http://www.miranda-vi.org/");
 }
 
 void CreateAuthString(char* auth)
 {
-    char user[64], pass[40];
-    GetLoginStr(user, sizeof(user), pass);
+	char user[64], pass[40];
+	GetLoginStr(user, sizeof(user), pass);
 
 	char str[110];
-    int len = mir_snprintf(str, sizeof(str), "%s:%s", user, pass);
+	int len = mir_snprintf(str, sizeof(str), "%s:%s", user, pass);
 
 	strcpy(auth, "Basic ");
 	NETLIBBASE64 nlb = { auth+6, 250, (PBYTE)str, len };
@@ -125,15 +143,15 @@ bool InternetDownloadFile(const char *szUrl, VerTrnsfr* szReq)
 	nlhr.headers[3].szName  = "Content-Type";
 	nlhr.headers[3].szValue = "text/plain; charset=utf-8";
 	nlhr.headers[4].szName  = "AutoUpload";
-    nlhr.headers[4].szValue = (char*)(szReq->autot ? "1" : "0");
+	nlhr.headers[4].szValue = (char*)(szReq->autot ? "1" : "0");
 	nlhr.headers[5].szName  = "Authorization";
 
 	char auth[256];
 	CreateAuthString(auth);
 	nlhr.headers[5].szValue = auth;
 
-    nlhr.pData = szReq->buf;
-    nlhr.dataLength = (int)strlen(szReq->buf);
+	nlhr.pData = szReq->buf;
+	nlhr.dataLength = (int)strlen(szReq->buf);
 
 	while (result == 0xBADBAD)
 	{
@@ -148,72 +166,72 @@ bool InternetDownloadFile(const char *szUrl, VerTrnsfr* szReq)
 			// if the recieved code is 200 OK
 			switch(nlhrReply->resultCode)
 			{
-				case 200: 
-					if (DBGetContactSettingByte(NULL, PluginName, "UploadChanged", 0))
-						ProcessVIHash(true);
+			case 200: 
+				if (DBGetContactSettingByte(NULL, PluginName, "UploadChanged", 0))
+					ProcessVIHash(true);
 
-					for (i=nlhrReply->headersCount; i--; )
+				for (i=nlhrReply->headersCount; i--; )
+				{
+					if (_stricmp(nlhrReply->headers[i].szName, "OldPlugins") == 0)
 					{
-						if (_stricmp(nlhrReply->headers[i].szName, "OldPlugins") == 0)
-						{
-							i = atoi(nlhrReply->headers[i].szValue);
-							break;
-						}
+						i = atoi(nlhrReply->headers[i].szValue);
+						break;
 					}
+				}
 
-					ShowMessage(1, TranslateT("VersionInfo upload successful,\n %d old plugins"), i);
-					result = 0;
-					break;
+				ShowMessage(1, TranslateT("VersionInfo upload successful,\n %d old plugins"), i);
+				result = 0;
+				break;
 
-				case 401:
-					ShowMessage(0, TranslateT("Cannot upload VersionInfo. Incorrect username or password"));
-					result = 1;
-					break;
+			case 401:
+				ShowMessage(0, TranslateT("Cannot upload VersionInfo. Incorrect username or password"));
+				result = 1;
+				break;
 
-				case 510:
-					ShowMessage(0, TranslateT("Cannot upload VersionInfo. User is banned"));
-					result = 1;
-					break;
+			case 510:
+				ShowMessage(0, TranslateT("Cannot upload VersionInfo. User is banned"));
+				result = 1;
+				break;
 
-				case 511:
-					ShowMessage(0, TranslateT("Cannot upload VersionInfo. Daily upload limit exceeded"));
-					result = 1;
-					break;
+			case 511:
+				ShowMessage(0, TranslateT("Cannot upload VersionInfo. Daily upload limit exceeded"));
+				result = 1;
+				break;
 
-				case 301:
-				case 302:
-				case 307:
-					// get the url for the new location and save it to szInfo
-					// look for the reply header "Location"
-					for (i=0; i<nlhrReply->headersCount; i++) 
+			case 301:
+			case 302:
+			case 307:
+				// get the url for the new location and save it to szInfo
+				// look for the reply header "Location"
+				for (i=0; i<nlhrReply->headersCount; i++) 
+				{
+					if (!strcmp(nlhrReply->headers[i].szName, "Location")) 
 					{
-						if (!strcmp(nlhrReply->headers[i].szName, "Location")) 
+						size_t rlen = 0;
+						if (nlhrReply->headers[i].szValue[0] == '/')
 						{
-							size_t rlen = 0;
-							if (nlhrReply->headers[i].szValue[0] == '/')
-							{
-								const char* szPath;
-								const char* szPref = strstr(szUrl, "://");
-								szPref = szPref ? szPref + 3 : szUrl;
-								szPath = strchr(szPref, '/');
-								rlen = szPath != NULL ? szPath - szUrl : strlen(szUrl); 
-							}
-
-							szRedirUrl = (char*)mir_realloc(szRedirUrl, 
-								rlen + strlen(nlhrReply->headers[i].szValue)*3 + 1);
-
-							strncpy(szRedirUrl, szUrl, rlen);
-							strcpy(szRedirUrl+rlen, nlhrReply->headers[i].szValue); 
-							
-							nlhr.szUrl = szRedirUrl;
-							break;
+							const char* szPath;
+							const char* szPref = strstr(szUrl, "://");
+							szPref = szPref ? szPref + 3 : szUrl;
+							szPath = strchr(szPref, '/');
+							rlen = szPath != NULL ? szPath - szUrl : strlen(szUrl); 
 						}
-					}
-					break;
 
-				default:
-					result = 1;
-					ShowMessage(0, TranslateT("Cannot upload VersionInfo. Unknown error"));
+						szRedirUrl = (char*)mir_realloc(szRedirUrl, 
+							rlen + strlen(nlhrReply->headers[i].szValue)*3 + 1);
+
+						strncpy(szRedirUrl, szUrl, rlen);
+						strcpy(szRedirUrl+rlen, nlhrReply->headers[i].szValue); 
+
+						nlhr.szUrl = szRedirUrl;
+						break;
+					}
+				}
+				break;
+
+			default:
+				result = 1;
+				ShowMessage(0, TranslateT("Cannot upload VersionInfo. Unknown error"));
 			}
 		}
 		else 
@@ -233,9 +251,9 @@ bool InternetDownloadFile(const char *szUrl, VerTrnsfr* szReq)
 
 void __cdecl VersionInfoUploadThread(void* arg)
 {
-    VerTrnsfr* trn = (VerTrnsfr*)arg;
+	VerTrnsfr* trn = (VerTrnsfr*)arg;
 	InternetDownloadFile("http://www.miranda-vi.org/uploadpost", trn);
-    mir_free(trn->buf);
+	mir_free(trn->buf);
 	mir_free(trn);
 }
 

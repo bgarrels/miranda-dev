@@ -1,11 +1,18 @@
 /*
-Miranda Crash Dumper Plugin
-Copyright (C) 2008 - 2009 Boris Krasnovskiy All Rights Reserved
+Crash Dumper plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2008 - 2012 Boris Krasnovskiy All Rights Reserved
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation version 2
-of the License.
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -13,10 +20,21 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
-#define MIRANDA_VER    0x0A00
+#define MIRANDA_VER 0x0A00
 
 #include <m_stdhdr.h>
 #include "sdkstuff.h"
@@ -32,6 +50,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <newpluginapi.h>
 
 #ifdef _MSC_VER
+
 #pragma warning( push )
 #pragma warning( disable : 4201 4100 )
 #include <m_database.h>
@@ -65,7 +84,7 @@ int  crs_sntprintf(TCHAR *buffer, size_t count, const TCHAR* fmt, ...);
 { \
 	int cbLen = WideCharToMultiByte(CP_ACP, 0, src, -1, NULL, 0, NULL, NULL); \
 	dst = (char*)alloca(cbLen+1); \
-    WideCharToMultiByte(CP_ACP, 0, src, -1, dst, cbLen, NULL, NULL); \
+	WideCharToMultiByte(CP_ACP, 0, src, -1, dst, cbLen, NULL, NULL); \
 }
 
 #define crsi_a2u(dst, src, alloc) \
@@ -76,13 +95,17 @@ int  crs_sntprintf(TCHAR *buffer, size_t count, const TCHAR* fmt, ...);
 }
 
 #ifdef _UNICODE
-	#define crsi_t2a(d,s) crsi_u2a(d,s)
-	#define crsi_a2t(d,s) crsi_a2u(d,s,alloca)
-	#define crs_a2t(d,s) crsi_a2u(d,s,mir_alloc)
+
+#define crsi_t2a(d,s) crsi_u2a(d,s)
+#define crsi_a2t(d,s) crsi_a2u(d,s,alloca)
+#define crs_a2t(d,s) crsi_a2u(d,s,mir_alloc)
+
 #else
-	#define crsi_t2a(d,s) (d=s)
-	#define crsi_a2t(d,s) (d=s)
-	#define crs_a2t(d,s) (d=mir_strdup(s))
+
+#define crsi_t2a(d,s) (d=s)
+#define crsi_a2t(d,s) (d=s)
+#define crs_a2t(d,s) (d=mir_strdup(s))
+
 #endif
 
 #define SIZEOF(X) (sizeof(X)/sizeof(X[0]))
@@ -103,8 +126,8 @@ int  crs_sntprintf(TCHAR *buffer, size_t count, const TCHAR* fmt, ...);
 
 struct VerTrnsfr
 {
-    char* buf;
-    bool  autot;
+	char* buf;
+	bool  autot;
 };
 
 extern HMODULE hInst;
@@ -112,7 +135,6 @@ extern DWORD mirandaVersion;
 extern LCID packlcid;
 extern bool servicemode; 
 extern bool clsdates;
-extern bool dtsubfldr;
 
 extern TCHAR CrashLogFolder[MAX_PATH];
 extern TCHAR VersionInfoFolder[MAX_PATH];

@@ -1,11 +1,18 @@
 /*
-Miranda Crash Dumper Plugin
-Copyright (C) 2008 - 2009 Boris Krasnovskiy All Rights Reserved
+Crash Dumper plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2008 - 2012 Boris Krasnovskiy All Rights Reserved
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation version 2
-of the License.
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -13,7 +20,18 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "utils.h"
@@ -31,7 +49,7 @@ void CreateMiniDump(HANDLE hDumpFile, PEXCEPTION_POINTERS exc_ptr)
 	exceptionInfo.ClientPointers = false;
 
 	MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), 
-	  hDumpFile, MiniDumpNormal, &exceptionInfo, NULL, NULL);
+		hDumpFile, MiniDumpNormal, &exceptionInfo, NULL, NULL);
 }
 
 
@@ -48,9 +66,9 @@ void WriteUtfFile(HANDLE hDumpFile, char* bufu)
 {
 	DWORD bytes;
 
-    static const unsigned char bytemark[] = { 0xEF, 0xBB, 0xBF };
-    WriteFile(hDumpFile, bytemark, 3, &bytes, NULL);
-    WriteFile(hDumpFile, bufu, (DWORD)strlen(bufu), &bytes, NULL);
+	static const unsigned char bytemark[] = { 0xEF, 0xBB, 0xBF };
+	WriteFile(hDumpFile, bytemark, 3, &bytes, NULL);
+	WriteFile(hDumpFile, bufu, (DWORD)strlen(bufu), &bytes, NULL);
 }
 
 
@@ -65,12 +83,12 @@ BOOL CALLBACK LoadedModules64(LPCSTR, DWORD64 ModuleBase, ULONG ModuleSize, PVOI
 
 	buffer.appendfmt(TEXT("%s  %p - %p"), path, (LPVOID)ModuleBase, (LPVOID)(ModuleBase + ModuleSize));
 
-    GetVersionInfo(hModule, buffer);
-	
+	GetVersionInfo(hModule, buffer);
+
 	TCHAR timebuf[30] = TEXT("");
 	GetLastWriteTime(path, timebuf, 30);
 
-    buffer.appendfmt(TEXT(" [%s]\r\n"), timebuf);
+	buffer.appendfmt(TEXT(" [%s]\r\n"), timebuf);
 
 	return TRUE;
 }
@@ -107,7 +125,7 @@ void GetLinkedModulesInfo(TCHAR *moduleName, bkstring &buffer)
 	HANDLE hDllFile = CreateFile(moduleName, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hDllFile == INVALID_HANDLE_VALUE) return;
 
-    HANDLE hDllMapping = CreateFileMapping(hDllFile, NULL, PAGE_READONLY, 0, 0, NULL);
+	HANDLE hDllMapping = CreateFileMapping(hDllFile, NULL, PAGE_READONLY, 0, 0, NULL);
 	if (hDllMapping == INVALID_HANDLE_VALUE) 
 	{
 		CloseHandle(hDllFile);
@@ -163,7 +181,7 @@ void GetLinkedModulesInfo(TCHAR *moduleName, bkstring &buffer)
 			buffer.append(TEXT("    This dll is not a Miranda plugin and should be removed from plugins directory\r\n"));
 	}
 	__except(EXCEPTION_EXECUTE_HANDLER) {}
-	
+
 	UnmapViewOfFile(dllAddr);
 	CloseHandle(hDllMapping);
 	CloseHandle(hDllFile);
@@ -184,7 +202,7 @@ static void GetPluginsString(bkstring& buffer, unsigned& flags)
 
 	TCHAR path[MAX_PATH];
 	GetModuleFileName(NULL, path, MAX_PATH);
-	
+
 	LPTSTR fname = _tcsrchr(path, TEXT('\\'));
 	if (fname == NULL) fname = path;
 	crs_sntprintf(fname, MAX_PATH-(fname-path), TEXT("\\plugins\\*.dll"));
@@ -243,7 +261,7 @@ static void GetPluginsString(bkstring& buffer, unsigned& flags)
 
 			bool ep = (size_t)pi->cbSize > sizeof(PLUGININFO);
 			const TCHAR *unica = (ep && ((PLUGININFOEX*)pi)->flags & 1) ? TEXT("|Unicode aware|") : TEXT("");
-			
+
 			ListItem* lst = new ListItem;
 			DWORD ver = pi->version;
 			lst->str.appendfmt(format, ep ? TEXT('\xa4') : TEXT(' '), FindFileData.cFileName, 
@@ -267,8 +285,8 @@ static void GetPluginsString(bkstring& buffer, unsigned& flags)
 			else
 				lsttmppv->next = lst;
 
-            if (_tcsicmp(FindFileData.cFileName, TEXT("weather.dll")) == 0)
-                flags |= VI_FLAG_WEATHER;
+			if (_tcsicmp(FindFileData.cFileName, TEXT("weather.dll")) == 0)
+				flags |= VI_FLAG_WEATHER;
 
 			++count;
 		}
@@ -300,80 +318,80 @@ static void GetPluginsString(bkstring& buffer, unsigned& flags)
 
 struct ProtoCount
 {
-    char countse;
-    char countsd;
-    bool nloaded;
+	char countse;
+	char countsd;
+	bool nloaded;
 };
 
 static void GetProtocolStrings(bkstring& buffer)
 {
 	PROTOACCOUNT **accList;
 	int accCount, protoCount;
-    int i, j;
+	int i, j;
 
-    PROTOCOLDESCRIPTOR **protoList;
+	PROTOCOLDESCRIPTOR **protoList;
 	if (ProtoEnumAccounts(&accCount, &accList) == CALLSERVICE_NOTFOUND || (accCount > 0 && accList[0]->cbSize == 0))
 	{
-	    CallService(MS_PROTO_ENUMPROTOCOLS, (WPARAM)&protoCount, (LPARAM)&protoList);
+		CallService(MS_PROTO_ENUMPROTOCOLS, (WPARAM)&protoCount, (LPARAM)&protoList);
 		for (i = 0; i < protoCount; i++) 
 		{
 			if (protoList[i]->type != PROTOTYPE_PROTOCOL) continue;
 
-            TCHAR* nm;
-            crsi_a2t(nm, protoList[i]->szName);
+			TCHAR* nm;
+			crsi_a2t(nm, protoList[i]->szName);
 			buffer.appendfmt(TEXT(" 1  -  %s\r\n"), nm);
-        }
-    }
-    else
-    {
-	    CallService(MS_PROTO_ENUMPROTOS, (WPARAM)&protoCount, (LPARAM)&protoList);
+		}
+	}
+	else
+	{
+		CallService(MS_PROTO_ENUMPROTOS, (WPARAM)&protoCount, (LPARAM)&protoList);
 
-        int protoCountMy = 0;
-        char** protoListMy = (char**)alloca((protoCount + accCount) * sizeof(char*));
+		int protoCountMy = 0;
+		char** protoListMy = (char**)alloca((protoCount + accCount) * sizeof(char*));
 
-        for (i = 0; i < protoCount; i++) 
+		for (i = 0; i < protoCount; i++) 
 		{
 			if (protoList[i]->type != PROTOTYPE_PROTOCOL) continue;
-            protoListMy[protoCountMy++] = protoList[i]->szName;
-        }
+			protoListMy[protoCountMy++] = protoList[i]->szName;
+		}
 
 		for (j = 0; j < accCount; j++) 
-        {
-		    for (i = 0; i < protoCountMy; i++) 
-            {
-                if (strcmp(protoListMy[i], accList[j]->szProtoName) == 0)
-                    break;
-            }
-            if (i == protoCountMy)
-                protoListMy[protoCountMy++] = accList[j]->szProtoName;
-        }
+		{
+			for (i = 0; i < protoCountMy; i++) 
+			{
+				if (strcmp(protoListMy[i], accList[j]->szProtoName) == 0)
+					break;
+			}
+			if (i == protoCountMy)
+				protoListMy[protoCountMy++] = accList[j]->szProtoName;
+		}
 
-        ProtoCount *protos = (ProtoCount*)alloca(sizeof(ProtoCount) * protoCountMy);
-        memset(protos, 0, sizeof(ProtoCount) * protoCountMy);
-		
-        for (j = 0; j < accCount; j++) 
-        {
-		    for (i = 0; i < protoCountMy; i++) 
-            {
-                if (strcmp(protoListMy[i], accList[j]->szProtoName) == 0)
-                {
-                    protos[i].nloaded = accList[j]->bDynDisabled != 0;
-                    if (IsAccountEnabled(accList[j]))
-                        ++protos[i].countse;
-                    else
-                        ++protos[i].countsd;
-                    break;
-                }
-            }
-        }
-	    for (i = 0; i < protoCountMy; i++) 
-        {
-            TCHAR* nm; 
-            crsi_a2t(nm, protoListMy[i]);
+		ProtoCount *protos = (ProtoCount*)alloca(sizeof(ProtoCount) * protoCountMy);
+		memset(protos, 0, sizeof(ProtoCount) * protoCountMy);
+
+		for (j = 0; j < accCount; j++) 
+		{
+			for (i = 0; i < protoCountMy; i++) 
+			{
+				if (strcmp(protoListMy[i], accList[j]->szProtoName) == 0)
+				{
+					protos[i].nloaded = accList[j]->bDynDisabled != 0;
+					if (IsAccountEnabled(accList[j]))
+						++protos[i].countse;
+					else
+						++protos[i].countsd;
+					break;
+				}
+			}
+		}
+		for (i = 0; i < protoCountMy; i++) 
+		{
+			TCHAR* nm; 
+			crsi_a2t(nm, protoListMy[i]);
 			buffer.appendfmt(TEXT("%-24s %d - Enabled %d - Disabled  %sLoaded\r\n"), nm, protos[i].countse, 
-                protos[i].countsd, protos[i].nloaded ? _T("Not ") : _T(""));
-        }
-    }
+				protos[i].countsd, protos[i].nloaded ? _T("Not ") : _T(""));
+		}
+	}
 }
 
 
@@ -381,7 +399,7 @@ static void GetWeatherStrings(bkstring& buffer, unsigned flags)
 {
 	TCHAR path[MAX_PATH];
 	GetModuleFileName(NULL, path, MAX_PATH);
-	
+
 	LPTSTR fname = _tcsrchr(path, TEXT('\\'));
 	if (fname == NULL) fname = path;
 	crs_sntprintf(fname, MAX_PATH-(fname-path), TEXT("\\plugins\\weather\\*.ini"));
@@ -392,45 +410,45 @@ static void GetWeatherStrings(bkstring& buffer, unsigned flags)
 
 	do 
 	{
-        if (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue;
+		if (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue;
 
-	    crs_sntprintf(fname, MAX_PATH-(fname-path), TEXT("\\plugins\\weather\\%s"), FindFileData.cFileName);
-	    HANDLE hDumpFile = CreateFile(path, GENERIC_READ, FILE_SHARE_READ, NULL,
-		    OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		crs_sntprintf(fname, MAX_PATH-(fname-path), TEXT("\\plugins\\weather\\%s"), FindFileData.cFileName);
+		HANDLE hDumpFile = CreateFile(path, GENERIC_READ, FILE_SHARE_READ, NULL,
+			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
-	    if (hDumpFile != INVALID_HANDLE_VALUE) 
-	    {
-		    char buf[8192];
+		if (hDumpFile != INVALID_HANDLE_VALUE) 
+		{
+			char buf[8192];
 
-		    DWORD bytes = 0;
-		    ReadFile(hDumpFile, buf, 8190, &bytes, NULL);
-		    buf[bytes] = 0;
+			DWORD bytes = 0;
+			ReadFile(hDumpFile, buf, 8190, &bytes, NULL);
+			buf[bytes] = 0;
 
-		    char* ver = strstr(buf, "Version=");
-		    if (ver != NULL)
-		    {
-			    char *endid = strchr(ver, '\r');
-			    if (endid != NULL) *endid = 0;
-                else
-                {
-			        endid = strchr(ver, '\n');
-			        if (endid != NULL) *endid = 0;
-                }
-                ver += 8;
-            }
+			char* ver = strstr(buf, "Version=");
+			if (ver != NULL)
+			{
+				char *endid = strchr(ver, '\r');
+				if (endid != NULL) *endid = 0;
+				else
+				{
+					endid = strchr(ver, '\n');
+					if (endid != NULL) *endid = 0;
+				}
+				ver += 8;
+			}
 
-            char *id = strstr(buf, "Name=");
-		    if (id != NULL)
-		    {
-			    char *endid = strchr(id, '\r');
-			    if (endid != NULL) *endid = 0;
-                else
-                {
-			        endid = strchr(id, '\n');
-			        if (endid != NULL) *endid = 0;
-                }
-                id += 5; 
-            }
+			char *id = strstr(buf, "Name=");
+			if (id != NULL)
+			{
+				char *endid = strchr(id, '\r');
+				if (endid != NULL) *endid = 0;
+				else
+				{
+					endid = strchr(id, '\n');
+					if (endid != NULL) *endid = 0;
+				}
+				id += 5; 
+			}
 
 			TCHAR timebuf[30] = TEXT("");
 			GetLastWriteTime(&FindFileData.ftLastWriteTime, timebuf, 30);
@@ -440,13 +458,13 @@ static void GetWeatherStrings(bkstring& buffer, unsigned flags)
 #else
 			static const TCHAR format[] = TEXT(" %s v.%s%s%s [%s] - $s\r\n");
 #endif
-            buffer.appendfmt(format, FindFileData.cFileName, 
-                (flags & VI_FLAG_FORMAT) ? TEXT("[b]") : TEXT(""),
-                ver,
-                (flags & VI_FLAG_FORMAT) ? TEXT("[/b]") : TEXT(""),
-                timebuf, id);
-		    CloseHandle(hDumpFile);
-        }
+			buffer.appendfmt(format, FindFileData.cFileName, 
+				(flags & VI_FLAG_FORMAT) ? TEXT("[b]") : TEXT(""),
+				ver,
+				(flags & VI_FLAG_FORMAT) ? TEXT("[/b]") : TEXT(""),
+				timebuf, id);
+			CloseHandle(hDumpFile);
+		}
 	}
 	while (FindNextFile(hFind, &FindFileData));
 	FindClose(hFind);
@@ -457,7 +475,7 @@ static void GetIconStrings(bkstring& buffer)
 {
 	TCHAR path[MAX_PATH];
 	GetModuleFileName(NULL, path, MAX_PATH);
-	
+
 	LPTSTR fname = _tcsrchr(path, TEXT('\\'));
 	if (fname == NULL) fname = path;
 	crs_sntprintf(fname, MAX_PATH-(fname-path), TEXT("\\Icons\\*.*"));
@@ -468,12 +486,12 @@ static void GetIconStrings(bkstring& buffer)
 
 	do 
 	{
-        if (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue;
+		if (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue;
 
 		TCHAR timebuf[30] = TEXT("");
 		GetLastWriteTime(&FindFileData.ftLastWriteTime, timebuf, 30);
 
-        buffer.appendfmt(TEXT(" %s [%s]\r\n"), FindFileData.cFileName, timebuf);
+		buffer.appendfmt(TEXT(" %s [%s]\r\n"), FindFileData.cFileName, timebuf);
 	}
 	while (FindNextFile(hFind, &FindFileData));
 	FindClose(hFind);
@@ -517,10 +535,8 @@ void PrintVersionInfo(bkstring& buffer, unsigned flags)
 
 	TCHAR profpn[MAX_PATH];
 	crs_sntprintf(profpn, sizeof(profpn), TEXT("%s\\%s"), profpath, profname);
-	TCHAR* tszFolder = Utils_ReplaceVarsT(profpn);
 
-	buffer.appendfmt(TEXT("Profile: %s\r\n"), tszFolder);
-	mir_free(tszFolder);
+	buffer.appendfmt(TEXT("Profile: %s\r\n"), profpn);
 
 	if (flags & VI_FLAG_PRNVAR)
 	{
@@ -528,15 +544,15 @@ void PrintVersionInfo(bkstring& buffer, unsigned flags)
 
 		HANDLE hFind = FindFirstFile(profpn, &FindFileData);
 		if (hFind != INVALID_HANDLE_VALUE) 
-        {
-		    FindClose(hFind);
+		{
+			FindClose(hFind);
 
-		    unsigned __int64 fsize = (unsigned __int64)FindFileData.nFileSizeHigh << 32 | FindFileData.nFileSizeLow;
-		    buffer.appendfmt(TEXT("Profile size: %I64u Bytes\r\n"), fsize), 
+			unsigned __int64 fsize = (unsigned __int64)FindFileData.nFileSizeHigh << 32 | FindFileData.nFileSizeLow;
+			buffer.appendfmt(TEXT("Profile size: %I64u Bytes\r\n"), fsize), 
 
-		    GetLastWriteTime(&FindFileData.ftCreationTime, mirtime, 30);
-		    buffer.appendfmt(TEXT("Profile creation date: %s\r\n"), mirtime);
-        }
+				GetLastWriteTime(&FindFileData.ftCreationTime, mirtime, 30);
+			buffer.appendfmt(TEXT("Profile creation date: %s\r\n"), mirtime);
+		}
 	}
 
 	GetLanguagePackString(buffer);
@@ -548,28 +564,28 @@ void PrintVersionInfo(bkstring& buffer, unsigned flags)
 	GetPluginsString(buffer, flags);
 
 	if (flags & VI_FLAG_WEATHER)
-    {
-	    buffer.appendfmt(TEXT("\r\n%sWeather ini files:%s\r\n-------------------------------------------------------------------------------\r\n"),
-            (flags & VI_FLAG_FORMAT) ? TEXT("[b]") : TEXT(""),
-            (flags & VI_FLAG_FORMAT) ? TEXT("[/b]") : TEXT(""));
-        GetWeatherStrings(buffer, flags);
-    }
+	{
+		buffer.appendfmt(TEXT("\r\n%sWeather ini files:%s\r\n-------------------------------------------------------------------------------\r\n"),
+			(flags & VI_FLAG_FORMAT) ? TEXT("[b]") : TEXT(""),
+			(flags & VI_FLAG_FORMAT) ? TEXT("[/b]") : TEXT(""));
+		GetWeatherStrings(buffer, flags);
+	}
 
 	if (flags & VI_FLAG_PRNVAR && !servicemode)
-    {
+	{
 		buffer.appendfmt(TEXT("\r\n%sProtocols and Accounts:%s\r\n-------------------------------------------------------------------------------\r\n"),
-            (flags & VI_FLAG_FORMAT) ? TEXT("[b]") : TEXT(""),
-            (flags & VI_FLAG_FORMAT) ? TEXT("[/b]") : TEXT(""));
-        GetProtocolStrings(buffer);
-    }
+			(flags & VI_FLAG_FORMAT) ? TEXT("[b]") : TEXT(""),
+			(flags & VI_FLAG_FORMAT) ? TEXT("[/b]") : TEXT(""));
+		GetProtocolStrings(buffer);
+	}
 
-    if (flags & VI_FLAG_PRNVAR)
-    {
+	if (flags & VI_FLAG_PRNVAR)
+	{
 		buffer.appendfmt(TEXT("\r\n%sIcon Packs:%s\r\n-------------------------------------------------------------------------------\r\n"),
-            (flags & VI_FLAG_FORMAT) ? TEXT("[b]") : TEXT(""),
-            (flags & VI_FLAG_FORMAT) ? TEXT("[/b]") : TEXT(""));
-        GetIconStrings(buffer);
-    }
+			(flags & VI_FLAG_FORMAT) ? TEXT("[b]") : TEXT(""),
+			(flags & VI_FLAG_FORMAT) ? TEXT("[/b]") : TEXT(""));
+		GetIconStrings(buffer);
+	}
 
 	if (flags & VI_FLAG_PRNDLL)
 	{
@@ -595,23 +611,23 @@ void CreateCrashReport(HANDLE hDumpFile, PEXCEPTION_POINTERS exc_ptr, const TCHA
 	STACKFRAME64 frame = {0};
 
 #if defined(_AMD64_)
-	#define IMAGE_FILE_MACHINE IMAGE_FILE_MACHINE_AMD64
+#define IMAGE_FILE_MACHINE IMAGE_FILE_MACHINE_AMD64
 	frame.AddrPC.Offset = context.Rip;
 	frame.AddrFrame.Offset = context.Rbp;
 	frame.AddrStack.Offset = context.Rsp;
 #elif defined(_IA64_)
-	#define IMAGE_FILE_MACHINE IMAGE_FILE_MACHINE_IA64
+#define IMAGE_FILE_MACHINE IMAGE_FILE_MACHINE_IA64
 	frame.AddrPC.Offset = context.StIIP;
 	frame.AddrFrame.Offset = context.AddrBStore;
 	frame.AddrStack.Offset = context.SP;
 #else
-	#define IMAGE_FILE_MACHINE IMAGE_FILE_MACHINE_I386
+#define IMAGE_FILE_MACHINE IMAGE_FILE_MACHINE_I386
 	frame.AddrPC.Offset = context.Eip;
 	frame.AddrFrame.Offset = context.Ebp;
 	frame.AddrStack.Offset = context.Esp;
 #endif
 
-    frame.AddrPC.Mode = AddrModeFlat;
+	frame.AddrPC.Mode = AddrModeFlat;
 	frame.AddrFrame.Mode = AddrModeFlat;
 	frame.AddrStack.Mode = AddrModeFlat;
 
@@ -640,15 +656,15 @@ void CreateCrashReport(HANDLE hDumpFile, PEXCEPTION_POINTERS exc_ptr, const TCHA
 	SymInitialize(hProcess, NULL, TRUE);
 
 	buffer.append(TEXT("\r\nStack Trace:\r\n---------------------------------------------------------------\r\n"));
-	
+
 	for (int i=81; --i;)
 	{
-/*
+		/*
 		char symbuf[sizeof(SYMBOL_INFO) + MAX_SYM_NAME * sizeof(TCHAR) + 4] = {0};
 		PSYMBOL_INFO pSym = (PSYMBOL_INFO)symbuf;
 		pSym->SizeOfStruct = sizeof(SYMBOL_INFO);
 		pSym->MaxNameLen = MAX_SYM_NAME;
-*/
+		*/
 
 		char symbuf[sizeof(IMAGEHLP_SYMBOL64) + MAX_SYM_NAME * sizeof(TCHAR) + 4] = {0};
 		PIMAGEHLP_SYMBOL64 pSym = (PIMAGEHLP_SYMBOL64)symbuf;
@@ -675,7 +691,7 @@ void CreateCrashReport(HANDLE hDumpFile, PEXCEPTION_POINTERS exc_ptr, const TCHA
 		if (frame.AddrPC.Offset != 0)
 		{
 			if (SymGetSymFromAddr64(hProcess, frame.AddrPC.Offset, &offsetFromSmybol, pSym))
-//			if (SymFromAddr(hProcess, frame.AddrPC.Offset, &offsetFromSmybol, pSym))
+				//			if (SymFromAddr(hProcess, frame.AddrPC.Offset, &offsetFromSmybol, pSym))
 			{
 				UnDecorateSymbolName(pSym->Name, undName, MAX_SYM_NAME, UNDNAME_NAME_ONLY);
 				UnDecorateSymbolName(pSym->Name, undFullName, MAX_SYM_NAME, UNDNAME_COMPLETE);
@@ -742,17 +758,17 @@ void CreateCrashReport(HANDLE hDumpFile, PEXCEPTION_POINTERS exc_ptr, const TCHA
 
 #ifdef _UNICODE
 	int len = WideCharToMultiByte(CP_UTF8, 0, buffer.c_str(), -1, NULL, 0, NULL, NULL);
-    char* dst = (char*)(len > 8192 ? malloc(len) : alloca(len));
-    WideCharToMultiByte(CP_UTF8, 0, buffer.c_str(), -1, dst, len, NULL, NULL);
+	char* dst = (char*)(len > 8192 ? malloc(len) : alloca(len));
+	WideCharToMultiByte(CP_UTF8, 0, buffer.c_str(), -1, dst, len, NULL, NULL);
 
-    WriteUtfFile(hDumpFile, dst);
+	WriteUtfFile(hDumpFile, dst);
 
-    if (len > 8192) free(dst);
+	if (len > 8192) free(dst);
 #else
-    DWORD bytes;
+	DWORD bytes;
 	WriteFile(hDumpFile, buffer.c_str(), buffer.sizebytes(), &bytes, NULL);
 #endif
 
 	if (msg && MessageBox(NULL, msg, TEXT("Miranda Crash Dumper"), MB_YESNO | MB_ICONERROR | MB_TASKMODAL | MB_DEFBUTTON2 | MB_TOPMOST) == IDYES)
-        StoreStringToClip(buffer);
+		StoreStringToClip(buffer);
 }

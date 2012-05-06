@@ -1,11 +1,18 @@
 /*
-Miranda Crash Dumper Plugin
-Copyright (C) 2008 - 2010 Boris Krasnovskiy All Rights Reserved
+Crash Dumper plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2008 - 2012 Boris Krasnovskiy All Rights Reserved
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation version 2
-of the License.
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -13,18 +20,31 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "utils.h"
 #include <m_options.h>
 #include "m_folders.h"
 #include "m_toolbar.h"
-#include "../version.h"
+#include "version.h"
 
 MM_INTERFACE  mmi;
 MD5_INTERFACE md5i;
 UTF8_INTERFACE utfi;
+
+int hLangpack;
 
 HINSTANCE hInst;
 DWORD mirandaVersion;
@@ -35,29 +55,25 @@ HMODULE hRichModule;
 TCHAR* vertxt;
 TCHAR* profname;
 TCHAR* profpath;
-TCHAR* mirpath;
 
 TCHAR CrashLogFolder[MAX_PATH];
 TCHAR VersionInfoFolder[MAX_PATH];
 
 bool servicemode;
 bool clsdates;
-bool dtsubfldr;
 
-int hLangpack;
-
-PLUGININFOEX pluginInfoEx = 
+static const PLUGININFOEX pluginInfoEx = 
 {
 	sizeof(PLUGININFOEX),
 #if defined(_WIN64) 
-	"Crash Dumper (x64) CK Release",
+	"Crash Dumper x64",
 #elif defined(_UNICODE)
-	"Crash Dumper (Unicode) CK Release",
+	"Crash Dumper Unicode",
 #else
-	"Crash Dumper Mataes Release",
+	"Crash Dumper",
 #endif
 	__VERSION_DWORD,
-	"Crash Dumper for Miranda IM. Mod for CK Pack.",
+	"Crash Dumper for Miranda IM",
 	"borkra",
 	"borkra@miranda-im.org",
 	"Copyright© 2008 - 2012 Boris Krasnovskiy All Rights Reserved",
@@ -155,8 +171,8 @@ INT_PTR UploadVersionInfo(WPARAM, LPARAM lParam)
 
 INT_PTR ViewVersionInfo(WPARAM wParam, LPARAM)
 {
-//	unsigned *p = (unsigned*)0x15;
-//	*p = 324;
+	//	unsigned *p = (unsigned*)0x15;
+	//	*p = 324;
 
 	if (hRichModule == NULL && GetModuleHandle(TEXT("Riched20.dll")) == NULL)
 		hRichModule = LoadLibrary(TEXT("Riched20.dll"));
@@ -224,7 +240,7 @@ static int ToolbarModulesLoaded(WPARAM, LPARAM)
 {
 	TBButton tbb = {0};
 	tbb.cbSize = sizeof(TBButton);
-	
+
 	tbb.pszButtonID = "clipvi_btn";
 	tbb.pszButtonName = LPGEN("Version Information To Clipboard");
 	tbb.pszServiceName = MS_CRASHDUMPER_STORETOCLIP;
@@ -267,39 +283,6 @@ static int ToolbarModulesLoaded(WPARAM, LPARAM)
 
 static int ModulesLoaded(WPARAM, LPARAM)
 {
-	char temp[MAX_PATH];
-	CallService(MS_SYSTEM_GETVERSIONTEXT, (WPARAM)SIZEOF(temp), (LPARAM)temp);
-	crs_a2t(vertxt, temp);
-
-	if (CallService(MS_SYSTEM_GETVERSION, 0, 0) >= PLUGIN_MAKE_VERSION(0,9,0,12))
-	{
-		profname = Utils_ReplaceVarsT(_T("%miranda_profilename%.dat"));
-		if (ServiceExists(MS_FOLDERS_REGISTER_PATH))
-		{
-			profpath = _T("%miranda_userdata%");
-			mirpath = _T("%miranda_path%");
-		}
-		else
-		{
-			profpath = Utils_ReplaceVarsT(_T("%miranda_userdata%"));
-			mirpath = Utils_ReplaceVarsT(_T("%miranda_path%"));
-		}
-	}
-	else
-	{
-		CallService(MS_DB_GETPROFILENAME, SIZEOF(temp), (LPARAM)temp);
-		crs_a2t(profname, temp);
-
-		CallService(MS_DB_GETPROFILEPATH, SIZEOF(temp), (LPARAM)temp);
-		crs_a2t(profpath, temp);
-
-		CallService(MS_DB_GETPROFILEPATH, SIZEOF(temp), (LPARAM)temp);
-		crs_a2t(mirpath, temp);
-	}
-
-	crs_sntprintf(CrashLogFolder, MAX_PATH, TEXT("%s\\CrashLog"), profpath);
-	crs_sntprintf(VersionInfoFolder, MAX_PATH, TEXT("%s"), mirpath);
-
 	SetExceptionHandler();
 
 	hCrashLogFolder = FoldersRegisterCustomPathT(PluginName, "Crash Reports", CrashLogFolder);
@@ -323,57 +306,57 @@ static int ModulesLoaded(WPARAM, LPARAM)
 
 	mi.popupPosition = 2000089999;
 	mi.position = 2000089999;
-	mi.flags = CMIF_ROOTPOPUP | CMIF_ICONFROMICOLIB | CMIF_TCHAR;
+	mi.flags = CMIF_ROOTPOPUP | CMIF_ICONFROMICOLIB;
 	mi.icolibItem = GetIconHandle("versionInfo");
-	mi.ptszName = LPGENT("Version Information");
+	mi.pszName = LPGEN("Version Information");
 	mi.pszPopupName = (char *)-1;
 	HANDLE hMenuRoot = (HANDLE)CallService( MS_CLIST_ADDMAINMENUITEM,  (WPARAM)0, (LPARAM)&mi);
 
-	mi.flags = CMIF_CHILDPOPUP | CMIF_ICONFROMICOLIB | CMIF_TCHAR;
+	mi.flags = CMIF_CHILDPOPUP | CMIF_ICONFROMICOLIB;
 	mi.pszPopupName = (char *)hMenuRoot;
 	mi.popupPosition = 0;
 
 	mi.position = 2000089995;
-	mi.ptszName = LPGENT("Copy to clipboard");
+	mi.pszName = LPGEN("Copy to clipboard");
 	mi.icolibItem = GetIconHandle("storeToClip");
 	mi.pszService = MS_CRASHDUMPER_STORETOCLIP;
 	CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM)&mi);
 
 	mi.position = 2000089996;
-	mi.ptszName = LPGENT("Store to file");
+	mi.pszName = LPGEN("Store to file");
 	mi.icolibItem = GetIconHandle("storeToFile");
 	mi.pszService = MS_CRASHDUMPER_STORETOFILE;
 	CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM)&mi);
 
 	mi.position  = 2000089997;
-	mi.ptszName = LPGENT("Show");
+	mi.pszName = LPGEN("Show");
 	mi.icolibItem = GetIconHandle("showInfo");
 	mi.pszService = MS_CRASHDUMPER_VIEWINFO;
 	CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM)&mi);
 
 	mi.popupPosition = 1;
 	mi.position  = 2000089998;
-	mi.ptszName = LPGENT("Show with DLLs");
+	mi.pszName = LPGEN("Show with DLLs");
 	mi.icolibItem = GetIconHandle("showInfo");
 	mi.pszService = MS_CRASHDUMPER_VIEWINFO;
 	CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM)&mi);
 
 	mi.popupPosition = 0;
 	mi.position  = 2000089999;
-	mi.ptszName = LPGENT("Upload");
+	mi.pszName = LPGEN("Upload");
 	mi.icolibItem = GetIconHandle("uploadInfo");
 	mi.pszService = MS_CRASHDUMPER_UPLOAD;
 	CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM)&mi);
 
 	mi.position  = 2000099990;
-	mi.ptszName = LPGENT("Open crash report directory");
+	mi.pszName = LPGEN("Open crash report directory");
 	mi.icolibItem = LoadSkinnedIconHandle(SKINICON_EVENT_FILE);
 	mi.pszService = MS_CRASHDUMPER_URL;
 	CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM)&mi);
 
 	mi.popupPosition = 1;
 	mi.position  = 2000099991;
-	mi.ptszName = LPGENT("Open miranda-vi.org");
+	mi.pszName = LPGEN("Open miranda-vi.org");
 	mi.icolibItem = LoadSkinnedIconHandle(SKINICON_EVENT_URL);
 	mi.pszService = MS_CRASHDUMPER_URL;
 	CallService(MS_CLIST_ADDMAINMENUITEM, 0, (LPARAM)&mi);
@@ -423,9 +406,7 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 {
 	pluginLink = link;
 
-	clsdates = DBGetContactSettingByte(NULL, PluginName, "ClassicDates", 1) != 0;
-
-	dtsubfldr = DBGetContactSettingByte(NULL, PluginName, "SubFolders", 1) != 0;
+	clsdates = DBGetContactSettingByte(NULL, PluginName, "ClassicDates", 0) != 0;
 
 	mir_getMMI(&mmi);
 	mir_getMD5I(&md5i);
@@ -441,6 +422,27 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 
 	InitIcons();
 
+	char temp[MAX_PATH];
+	CallService(MS_SYSTEM_GETVERSIONTEXT, (WPARAM)SIZEOF(temp), (LPARAM)temp);
+	crs_a2t(vertxt, temp);
+
+	if (CallService(MS_SYSTEM_GETVERSION, 0, 0) >= PLUGIN_MAKE_VERSION(0,9,0,12))
+	{
+		profname = Utils_ReplaceVarsT(_T("%miranda_profilename%.dat"));
+		profpath = Utils_ReplaceVarsT(_T("%miranda_profile%\\%miranda_profilename%"));
+	}
+	else
+	{
+		CallService(MS_DB_GETPROFILENAME, SIZEOF(temp), (LPARAM)temp);
+		crs_a2t(profname, temp);
+
+		CallService(MS_DB_GETPROFILEPATH, SIZEOF(temp), (LPARAM)temp);
+		crs_a2t(profpath, temp);
+	}
+
+	crs_sntprintf(CrashLogFolder, MAX_PATH, TEXT("%s\\CrashLog"), profpath);
+	crs_sntprintf(VersionInfoFolder, MAX_PATH, TEXT("%s"), profpath);
+
 	InitExceptionHandler();
 
 	hServices[0] = CreateServiceFunction(MS_CRASHDUMPER_STORETOFILE, StoreVersionInfoToFile);
@@ -449,9 +451,9 @@ extern "C" int __declspec(dllexport) Load(PLUGINLINK *link)
 	hServices[3] = CreateServiceFunction(MS_CRASHDUMPER_UPLOAD, UploadVersionInfo);
 	hServices[4] = CreateServiceFunction(MS_CRASHDUMPER_URL, OpenUrl);
 	hServices[5] = CreateServiceFunction(MS_SERVICEMODE_LAUNCH, ServiceModeLaunch);
-	
-//	unsigned *p = (unsigned*)0x15;
-//	*p = 324;
+
+	//	unsigned *p = (unsigned*)0x15;
+	//	*p = 324;
 
 	return 0;
 }
@@ -464,14 +466,9 @@ extern "C" int __declspec(dllexport) Unload(void)
 
 	DestroyExceptionHandler();
 
-	if (!_tcsstr(profpath, _T("%miranda")))
-	{
-		mir_free(profpath);
-		mir_free(mirpath);
-	}
+	mir_free(profpath);
 	mir_free(profname);
 	mir_free(vertxt);
-	
 
 	return 0;
 }
@@ -481,13 +478,13 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID /*lpv
 {
 	switch(fdwReason)
 	{
-		case DLL_PROCESS_ATTACH:
-			DisableThreadLibraryCalls(hinstDLL);
-			hInst = hinstDLL;
-			break;
+	case DLL_PROCESS_ATTACH:
+		DisableThreadLibraryCalls(hinstDLL);
+		hInst = hinstDLL;
+		break;
 
-		case DLL_PROCESS_DETACH:
-			break;
+	case DLL_PROCESS_DETACH:
+		break;
 	}
 
 	return TRUE;

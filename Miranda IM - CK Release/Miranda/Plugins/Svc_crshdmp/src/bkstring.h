@@ -1,11 +1,21 @@
+#ifndef _BKSTRING_H_
+#define _BKSTRING_H_
+
 /*
-Miranda Crash Dumper Plugin
-Copyright (C) 2008 - 2009 Boris Krasnovskiy All Rights Reserved
+Crash Dumper plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2008 - 2012 Boris Krasnovskiy All Rights Reserved
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation version 2
-of the License.
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -13,11 +23,19 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-#ifndef _BKSTRING_H_
-#define _BKSTRING_H_
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -97,37 +115,37 @@ public:
 
 	int compare(const bkstring& _Str) const 
 	{ return _tcscmp(buf, _Str.c_str()); }
-	
+
 	int compare(size_type _Pos1, size_type _Num1, const bkstring& _Str) const 
 	{ return _tcsncmp(&buf[_Pos1], _Str.c_str(), _Num1); }
-	
+
 	int compare(size_type _Pos1, size_type _Num1, const bkstring& _Str, size_type _Off, size_type _Count) const
 	{ return _tcsncmp(&buf[_Pos1], _Str.c_str()+_Off, min(_Num1, _Count)); }
 
 	int compare(const value_type* _Ptr) const 
 	{ return _tcscmp(buf, _Ptr); }
-	
+
 	int compare(size_type _Pos1, size_type _Num1, const value_type* _Ptr) const
 	{ return _tcsncmp(&buf[_Pos1], _Ptr, _Num1); }
-	
+
 	int compare(size_type _Pos1, size_type _Num1, const value_type* _Ptr, size_type _Num2) const
 	{ return _tcsncmp(&buf[_Pos1], _Ptr, min(_Num1, _Num2)); }
 
 	int comparei(const bkstring& _Str) const 
 	{ return _tcsicmp(buf, _Str.c_str()); }
-	
+
 	int comparei(size_type _Pos1, size_type _Num1, const bkstring& _Str) const 
 	{ return _tcsnicmp(&buf[_Pos1], _Str.c_str(), _Num1); }
-	
+
 	int comparei(size_type _Pos1, size_type _Num1, const bkstring& _Str, size_type _Off, size_type _Count) const
 	{ return _tcsnicmp(&buf[_Pos1], _Str.c_str()+_Off, min(_Num1, _Count)); }
 
 	int comparei(const value_type* _Ptr) const 
 	{ return _tcsicmp(buf, _Ptr); }
-	
+
 	int comparei(size_type _Pos1, size_type _Num1, const value_type* _Ptr) const
 	{ return _tcsnicmp(&buf[_Pos1], _Ptr, _Num1); }
-	
+
 	int comparei(size_type _Pos1, size_type _Num1, const value_type* _Ptr, size_type _Num2) const
 	{ return _tcsnicmp(&buf[_Pos1], _Ptr, min(_Num1, _Num2)); }
 
@@ -143,7 +161,7 @@ public:
 
 	bkstring& insert(size_type _P0, const value_type* _Ptr)
 	{ return insert(_P0, _Ptr, _tcslen(_Ptr)); }
-	
+
 	bkstring& insert(size_type _P0, const bkstring& _Str)
 	{ return insert(_P0, _Str.c_str(), _Str.size()); };
 
@@ -254,16 +272,16 @@ public:
 
 	iterator begin(void)
 	{ return buf; }
-	
+
 	const_iterator begin(void) const
 	{ return buf; }
-	
+
 	iterator end(void)
 	{ return buf + lenBuf; }
 
 	const_iterator end(void) const
 	{ return buf + lenBuf; }
-	  
+
 	// Custom extentions
 
 	void appendfmt(const value_type *fmt, ...);

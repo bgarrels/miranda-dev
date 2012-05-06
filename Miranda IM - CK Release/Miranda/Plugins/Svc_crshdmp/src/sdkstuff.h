@@ -1,11 +1,18 @@
 /*
-Miranda Crash Dumper Plugin
-Copyright (C) 2008 - 2009 Boris Krasnovskiy All Rights Reserved
+Crash Dumper plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2008 - 2012 Boris Krasnovskiy All Rights Reserved
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation version 2
-of the License.
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -13,14 +20,27 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include <windows.h>
 
-//#ifdef _UNICODE
-//#define DBGHELP_TRANSLATE_TCHAR
-//#endif
+/*
+#ifdef _UNICODE
+#define DBGHELP_TRANSLATE_TCHAR
+#endif
+*/
 
 #ifndef __in_bcount_opt
 #define __in_bcount_opt(x)
@@ -82,29 +102,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 typedef struct _IMAGEHLP_MODULE64_V2 {
-    DWORD    SizeOfStruct;           // set to sizeof(IMAGEHLP_MODULE64)
-    DWORD64  BaseOfImage;            // base load address of module
-    DWORD    ImageSize;              // virtual size of the loaded module
-    DWORD    TimeDateStamp;          // date/time stamp from pe header
-    DWORD    CheckSum;               // checksum from the pe header
-    DWORD    NumSyms;                // number of symbols in the symbol table
-    SYM_TYPE SymType;                // type of symbols loaded
-    CHAR     ModuleName[32];         // module name
-    CHAR     ImageName[256];         // image name
-    CHAR     LoadedImageName[256];   // symbol file name
+	DWORD    SizeOfStruct;           // set to sizeof(IMAGEHLP_MODULE64)
+	DWORD64  BaseOfImage;            // base load address of module
+	DWORD    ImageSize;              // virtual size of the loaded module
+	DWORD    TimeDateStamp;          // date/time stamp from pe header
+	DWORD    CheckSum;               // checksum from the pe header
+	DWORD    NumSyms;                // number of symbols in the symbol table
+	SYM_TYPE SymType;                // type of symbols loaded
+	CHAR     ModuleName[32];         // module name
+	CHAR     ImageName[256];         // image name
+	CHAR     LoadedImageName[256];   // symbol file name
 } IMAGEHLP_MODULE64_V2;
 
 typedef struct _IMAGEHLP_MODULEW64_V2 {
-    DWORD    SizeOfStruct;           // set to sizeof(IMAGEHLP_MODULE64)
-    DWORD64  BaseOfImage;            // base load address of module
-    DWORD    ImageSize;              // virtual size of the loaded module
-    DWORD    TimeDateStamp;          // date/time stamp from pe header
-    DWORD    CheckSum;               // checksum from the pe header
-    DWORD    NumSyms;                // number of symbols in the symbol table
-    SYM_TYPE SymType;                // type of symbols loaded
-    WCHAR    ModuleName[32];         // module name
-    WCHAR    ImageName[256];         // image name
-    WCHAR    LoadedImageName[256];   // symbol file name
+	DWORD    SizeOfStruct;           // set to sizeof(IMAGEHLP_MODULE64)
+	DWORD64  BaseOfImage;            // base load address of module
+	DWORD    ImageSize;              // virtual size of the loaded module
+	DWORD    TimeDateStamp;          // date/time stamp from pe header
+	DWORD    CheckSum;               // checksum from the pe header
+	DWORD    NumSyms;                // number of symbols in the symbol table
+	SYM_TYPE SymType;                // type of symbols loaded
+	WCHAR    ModuleName[32];         // module name
+	WCHAR    ImageName[256];         // image name
+	WCHAR    LoadedImageName[256];   // symbol file name
 } IMAGEHLP_MODULEW64_V2;
 
 #ifdef DBGHELP_TRANSLATE_TCHAR
