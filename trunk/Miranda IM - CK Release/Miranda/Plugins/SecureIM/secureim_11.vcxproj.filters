@@ -168,8 +168,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\!whatsnew.txt">
+    <Text Include="docs\Changelog.txt">
       <Filter>docs</Filter>
-    </None>
+    </Text>
   </ItemGroup>
 </Project>
