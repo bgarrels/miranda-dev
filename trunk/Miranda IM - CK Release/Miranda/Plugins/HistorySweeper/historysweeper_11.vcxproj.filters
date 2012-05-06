@@ -13,8 +13,11 @@
       <UniqueIdentifier>{3e64af17-cbe5-4d87-aee3-d5ac09ecf48c}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-    <Filter Include="Documents">
+    <Filter Include="Docs">
       <UniqueIdentifier>{441a121d-dd16-4ae0-8d9a-3f6c7a08742c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{1ba04fa2-2feb-4ede-b2c1-2c2d67185b0f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,28 +43,33 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\readme_historysweeper.txt">
-      <Filter>Documents</Filter>
-    </None>
-    <None Include="docs\translation_historysweeper.txt">
-      <Filter>Documents</Filter>
+    <None Include="icos\history_disabled.ico">
+      <Filter>Resource Files\Icons</Filter>
     </None>
     <None Include="icos\history_delete.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icos\history_disabled.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Icons</Filter>
     </None>
     <None Include="icos\history_enabled.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Icons</Filter>
     </None>
     <None Include="icos\hsp.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Icons</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="historysweeper.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Todo.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\translation_historysweeper.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\Readme.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
