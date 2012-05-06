@@ -331,28 +331,36 @@
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\CurrencyConverter.ico" />
-    <None Include="res\down.ico" />
-    <None Include="res\Export quotes.ico" />
-    <None Include="res\Import quotes.ico" />
-    <None Include="res\main.ico" />
-    <None Include="res\notchanged.ico" />
-    <None Include="res\quote.ico" />
-    <None Include="res\Refresh.ico" />
-    <None Include="res\Section.ico" />
-    <None Include="res\swap.ico" />
-    <None Include="res\up.ico" />
     <None Include="Utility\DukasCopy.py" />
     <None Include="Utility\Dukascopy.xml" />
     <None Include="Utility\Google.py" />
     <None Include="Utility\google.xml" />
     <None Include="Utility\GoogleFinance.xml" />
-    <None Include="Utility\Quotes_Readme.txt" />
     <None Include="Utility\Yahoo.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Forex.rc" />
+    <ResourceCompile Include="Quotes.rc" />
     <ResourceCompile Include="Version.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\CurrencyConverter.ico" />
+    <Image Include="res\down.ico" />
+    <Image Include="res\Export quotes.ico" />
+    <Image Include="res\Import quotes.ico" />
+    <Image Include="res\main.ico" />
+    <Image Include="res\notchanged.ico" />
+    <Image Include="res\proto_na.ico" />
+    <Image Include="res\proto_occupied.ico" />
+    <Image Include="res\proto_offline.ico" />
+    <Image Include="res\proto_online.ico" />
+    <Image Include="res\quote.ico" />
+    <Image Include="res\Refresh.ico" />
+    <Image Include="res\Section.ico" />
+    <Image Include="res\swap.ico" />
+    <Image Include="res\up.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
