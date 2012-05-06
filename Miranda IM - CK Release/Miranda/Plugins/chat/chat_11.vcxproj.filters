@@ -182,13 +182,15 @@
     <None Include="Docs\Chat_Readme.txt">
       <Filter>Docs</Filter>
     </None>
-    <None Include="Docs\Chat_Translate.txt">
-      <Filter>Docs</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\chat.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\Chat_translation.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
