@@ -318,7 +318,7 @@
     <ResourceCompile Include="res\version.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\readme.txt" />
+    <Text Include="docs\Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
