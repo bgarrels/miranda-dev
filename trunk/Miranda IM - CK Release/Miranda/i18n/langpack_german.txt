@@ -6,8 +6,8 @@ Authors: miranda-im.de Projekt Sprachdatei - diverse Autoren
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 30 Apr 2012 01:04:07
-; FLID: Deutsche Sprachdatei 0.12.04.30
+X-Langpack-creation-date: 06 May 2012 18:05:15
+; FLID: Deutsche Sprachdatei 0.12.05.06
 ; Start of langpack: Core (Letzte Änderung: 00:26, 30. Apr. 2012 )
 
 [0 = Default]
@@ -6522,10 +6522,10 @@ Falsches Anzeigename oder Passwort.
 ; ##############################################
 ; End of langpack: AIM
 ; ############################################## 
-; Start of langpack: ActMan (Letzte Änderung: 01:45, 24. Apr. 2012 )
+; Start of langpack: ActMan (Letzte Änderung: 17:16, 5. Mai 2012 )
 
 ; Pluginname: ActMan
-; Version: 0.1.1.10
+; Version: 0.2.0.1
 ; Dateiname: actman.dll 
 ; Unique ID: {9584da04-fb4f-40c1-9325-e4f9caafcb5d}
 ; Autor: Awkward
@@ -6587,7 +6587,7 @@ Kontaktfenster
 [Open contact window]
 Kontaktfenster öffnen
 [Choose Contact]
-Kontakt wählen
+Kontakt auswählen
 
 [Open File Folder]
 Öffne Dateiordner
@@ -6613,19 +6613,6 @@ Ergebnis als Int
 Ergebnis als Hex
 [Result as string]
 Ergebnis als String
-
-[Signed value]
-Positive und negative Werte
-[wParam type]
-wParam-Typ
-[lParam type]
-lParam-Typ
-[last result]
-Letzes Ergebnis
-[parameter]
-Parameter
-[structure]
-Struktur
 
 [Execute program]
 Programm ausführen
@@ -6659,7 +6646,7 @@ Kopieren nach
 [Paste from as]
 Einfügen als
 [Text to insert]
-Text, der eingefügt werden soll
+Text, der eingefügt werden soll:
 [Use Variables]
 Variablen benutzen
 
@@ -6724,6 +6711,24 @@ Rückgabewert
 Ergebnistyp des Dienstes
 [Structure]
 Struktur
+[structure]
+Struktur
+[Signed value]
+Positive und negative Werte
+[wParam type]
+wParam-Typ
+[lParam type]
+lParam-Typ
+[last result]
+Letzes Ergebnis
+[parameter]
+Parameter
+[Active accounts only]
+Nur aktive Konten
+[Apply format]
+Format akzeptieren
+[Dropdown list format]
+Dropdownliste formatieren
 
 [Link to action]
 Verknüpfung zu Aktion
@@ -6731,6 +6736,8 @@ Verknüpfung zu Aktion
 Andere Aktionsgruppen
 [Contact list format]
 Kontaklistenformat
+[You can use %name%, %uid%, %account% and %group% macros]
+Sie können %name%, %uid%, %account% und %group% Makros benutzen.
 
 [Read]
 Lesen
@@ -7565,10 +7572,10 @@ Dieses Plugin ermöglicht ein automatisches Starten von Miranda IM beim Hochfahre
 ; ##############################################
 ; End of langpack: Autorun
 ; ############################################## 
-; Start of langpack: Avatar_History (Letzte Änderung: 00:00, 28. Aug. 2010 )
+; Start of langpack: Avatar_History (Letzte Änderung: 17:45, 5. Mai 2012 )
 
 ; Pluginname: Avatar History 
-; Version: 0.0.2.10
+; Version: 0.0.3.1
 ; Dateiname: avatarhist.dll, avatarhistW.dll, avatarhistory.dll, avatarhistoryW.dll
 ; Autor: MattJ, pescuma
 ; Link: http://pescuma.mirandaim.ru/miranda/avatarhist
@@ -7611,6 +7618,8 @@ Avatarentfernung:
 [removed his/her avatar]
 entfernt sein/ihr Avatar
 
+[Avatar History for %s]
+Avatarverlauf für %s
 [Store this user's old avatars in disk]
 Avatare auf Datenträger speichern
 [Log this user's avatars changes to history]
@@ -13475,14 +13484,13 @@ Hilfedateiendownload beendet
 ; ##############################################
 ; End of langpack: Help
 ; ############################################## 
-; Start of langpack: History (Letzte Änderung: 07:30, 12. Okt. 2011 )
+; Start of langpack: History (Letzte Änderung: 02:46, 30. Apr. 2012 )
 
 ; Pluginname: History++ 
 ; Version: 1.5.1.5 Alpha
 ; Dateiname: historypp.dll
 ; Unqiue ID: {b92282ac-686b-4541-a12d-6e9971a253b7}
 ; Autor: theMIROn, Art Fedorov
-; Link: http://themiron.mirandaim.ru
 ; Übersetzung: 26.05.2006 von Dober
 
 [Easy, fast and feature complete history viewer.]
@@ -13555,7 +13563,7 @@ Verlaufssuche
 [Empty history...]
 Verlauf leeren
 [&Empty History]
-V&erlauf leeren
+&Verlauf leeren
 
 ; hpp_translate.txt
 [Customize Filters]
@@ -22146,10 +22154,10 @@ Oops! BASS.dll Fehler
 ; ##############################################
 ; End of langpack: MRadio
 ; ############################################## 
-; Start of langpack: MSN (Letzte Änderung: 16:20, 9. Apr. 2012 )
+; Start of langpack: MSN (Letzte Änderung: 18:06, 1. Mai 2012 )
 
 ; Pluginname: MSN Protocol 
-; Version: 0.10.0.2
+; Version: 0.10.0.3
 ; Dateiname: MSN.dll
 ; Unique ID: {97724af9-f3fb-47d3-a3bf-eaa935c74e6d}
 ; Autor(en): Borkra, GHazan, RHughes
@@ -22176,7 +22184,7 @@ Blockieren a&ufheben
 [&Invite to chat]
 Zum Chat e&inladen
 [&Start Netmeeting]
-NetMeeting &starten
+&NetMeeting starten
 [View Live &Space]
 Live-&Space/WordPress ansehen
 [Send &Hotmail E-mail]
@@ -39019,7 +39027,7 @@ WARNUNG: Werte unter 7 Sekunden werden nicht empfohlen!
 ; ##############################################
 ; End of langpack: Var-Toys
 ; ############################################## 
-; Start of langpack: Variables (Letzte Änderung: 18:09, 12. Sep. 2011 )
+; Start of langpack: Variables (Letzte Änderung: 17:29, 5. Mai 2012 )
 
 ; Pluginname: Variables 
 ; Version: 0.2.3.9
@@ -39062,6 +39070,8 @@ Variablenhilfe
 Externe Anwendungen
 [retrieves song name of the song currently playing in Winamp]
 Empfängt den Titel des aktuell in Winamp abgespielten Liedes
+[retrieves song name of the song currently playing in Winamp (Simple Status Message compatible)]
+Empfängt den Titel des aktuell in Winamp abgespielten Liedes (Simple Status Message kompatibel)
 [retrieves current Winamp state (Playing/Paused/Stopped)]
 Empfängt den Status von Winamp (Spielt/Pausiert/Gestoppt)
 
