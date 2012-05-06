@@ -486,8 +486,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "quickmessages", "..\Plugins
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QuickReplies", "..\Plugins\QuickReplies\quickreplies_11.vcxproj", "{E4C93C6A-2940-49E2-B1BF-78E316CA91D4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Quotes", "..\Plugins\Quotes\Forex_11.vcxproj", "{7DA44146-B1C7-4035-813E-DC20BF775D23}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SeenPlugin", "..\Plugins\SeenPlugin\seenplugin_11.vcxproj", "{EFD45F48-63D5-48AE-96CD-8ADB3545A4EE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sessions", "..\Plugins\Sessions\Sessions_11.vcxproj", "{90120C68-3A34-4D8E-962D-60E23B2B9301}"
@@ -587,6 +585,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AvatarHistory", "..\Plugins\avatarhistory\AvatarHistory_11.vcxproj", "{067105EC-5756-8034-1315-73463003ED72}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xstatus_ICQ", "..\Protocols\IcqOscarJ\icons_pack\ICQ_ICONS_11.vcxproj", "{A031E7AC-B073-8618-1544-5A411CE7C273}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Quotes", "..\Plugins\Quotes\Quotes_11.vcxproj", "{7DA44146-B1C7-4035-813E-DC20BF775D23}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
