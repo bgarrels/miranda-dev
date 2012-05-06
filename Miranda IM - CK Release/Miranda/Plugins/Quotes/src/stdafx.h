@@ -1,12 +1,44 @@
-// stdafx.h : include file for standard system include files,
-// or project specific include files that are used frequently, but
-// are changed infrequently
-//
+/*
+Quotes (Forex) plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) Dioksin
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
 
 #pragma once
 
 #include "targetver.h"
 #define MIRANDA_VER 0x0A00
+
 // #define CHART_IMPLEMENT
 #define TEST_IMPORT_EXPORT
 
@@ -53,7 +85,7 @@
 #include <m_userinfo.h>
 #include <m_variables.h>
 
-// boost headers
+// boost c++ lib
 #include <boost\shared_ptr.hpp>
 #include <boost/bind.hpp>
 #include <boost\lexical_cast.hpp>
@@ -155,10 +187,3 @@ template<typename T> struct safe_string : public detail::safe_string_impl<T,deta
 {
 	safe_string(PTR p) : detail::safe_string_impl<T,detail::OwnerFree<T>>(p){}
 };
-
-
-// #ifdef MIRANDA_VER
-// #undef MIRANDA_VER
-// #endif
-
-// TODO: reference additional headers your program requires here
