@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lbaselib.c 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Basic library
 ** See Copyright Notice in lua.h
 */
@@ -339,17 +339,17 @@ static int luaB_tostring (lua_State *L) {
       lua_pushstring(L, (lua_toboolean(L, 1) ? "true" : "false"));
       return 1;
     case LUA_TTABLE:
-      sprintf(buff, "table: %p", lua_topointer(L, 1));
+      sprintf_s(buff, "table: %p", lua_topointer(L, 1));
       break;
     case LUA_TFUNCTION:
-      sprintf(buff, "function: %p", lua_topointer(L, 1));
+      sprintf_s(buff, "function: %p", lua_topointer(L, 1));
       break;
     case LUA_TUSERDATA:
     case LUA_TLIGHTUSERDATA:
-      sprintf(buff, "userdata: %p", lua_touserdata(L, 1));
+      sprintf_s(buff, "userdata: %p", lua_touserdata(L, 1));
       break;
     case LUA_TTHREAD:
-      sprintf(buff, "thread: %p", (void *)lua_tothread(L, 1));
+      sprintf_s(buff, "thread: %p", (void *)lua_tothread(L, 1));
       break;
     case LUA_TNIL:
       lua_pushliteral(L, "nil");
@@ -418,7 +418,7 @@ static const char *getpath (lua_State *L) {
   path = lua_tostring(L, -1);
   lua_pop(L, 1);
   if (path) return path;
-  path = getenv(LUA_PATH);  /* else try environment variable */
+  path = _dupenv_s(LUA_PATH);  /* else try environment variable */
   if (path) return path;
   return LUA_PATH_DEFAULT;  /* else use default */
 }

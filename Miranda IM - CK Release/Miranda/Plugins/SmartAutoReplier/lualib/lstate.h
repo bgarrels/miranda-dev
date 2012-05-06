@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lstate.h 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Global State
 ** See Copyright Notice in lua.h
 */

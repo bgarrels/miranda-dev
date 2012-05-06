@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lstrlib.c 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Standard library for string operations and pattern-matching
 ** See Copyright Notice in lua.h
 */
@@ -672,7 +672,7 @@ static const char *scanformat (lua_State *L, const char *strfrmt,
   if (p-strfrmt+2 > MAX_FORMAT)  /* +2 to include `%' and the specifier */
     luaL_error(L, "invalid format (too long)");
   form[0] = '%';
-  strncpy(form+1, strfrmt, p-strfrmt+1);
+  strncpy_s(form+1, strfrmt, p-strfrmt+1);
   form[p-strfrmt+2] = 0;
   return p;
 }
@@ -700,11 +700,11 @@ static int str_format (lua_State *L) {
       strfrmt = scanformat(L, strfrmt, form, &hasprecision);
       switch (*strfrmt++) {
         case 'c':  case 'd':  case 'i': {
-          sprintf(buff, form, luaL_checkint(L, arg));
+          sprintf_s(buff, form, luaL_checkint(L, arg));
           break;
         }
         case 'o':  case 'u':  case 'x':  case 'X': {
-          sprintf(buff, form, (unsigned int)(luaL_checknumber(L, arg)));
+          sprintf_s(buff, form, (unsigned int)(luaL_checknumber(L, arg)));
           break;
         }
         case 'e':  case 'E': case 'f':
@@ -727,7 +727,7 @@ static int str_format (lua_State *L) {
             continue;  /* skip the `addsize' at the end */
           }
           else {
-            sprintf(buff, form, s);
+            sprintf_s(buff, form, s);
             break;
           }
         }

@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lmem.h 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Interface to Memory Manager
 ** See Copyright Notice in lua.h
 */

@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lopcodes.c 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** extracted automatically from lopcodes.h by mkprint.lua
 ** DO NOT EDIT
 ** See Copyright Notice in lua.h

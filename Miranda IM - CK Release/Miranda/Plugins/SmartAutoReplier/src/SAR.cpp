@@ -1,41 +1,60 @@
 /*
- *  Smart Auto Replier (SAR) - auto replier plugin for Miranda IM
- *
- *  Copyright (C) 2004 - 2012 by Volodymyr M. Shcherbyna <volodymyr@shcherbyna.com>
- *
- *      This file is part of SAR.
- *
- *  SAR is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  SAR is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with SAR.  If not, see <http://www.gnu.org/licenses/>.
+Smart Auto Replier (SAR) for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2004 - 2012 by Volodymyr M. Shcherbyna <volodymyr@shcherbyna.com>
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "stdafx.h"
-#include "../resource.h"
+#include "resource.h"
 
 /// these dlg are necessary here..
 #include "gui\settingsdlgholder.h"
 #include "gui\EditReplyDlg.h" 
 #include "gui\addruledlg.h"
 
-//Miranda updater support
-#include "m_updater.h"
+#include "../updater/m_updater.h"
 
-/// let's advertise myselft and this plugin 
+/// let's advertise myselft and this plugin ;)
 #define ICQPROTONAME		"SAR"
-#if defined( _UNICODE )
-#define ICQPROTODECRSHORT   "Smart Auto Replier"
+#ifdef WIN64
+#define ICQPROTODECRSHORT   "Smart Auto Replier x64 (Unicode)"
+#define PLUGIN_UUID { 0x98f73c6, 0xd963, 0x4c2f, { 0x88, 0x38, 0x97, 0xa0, 0xec, 0x92, 0x69, 0xe0 } } // {098F73C6-D963-4C2F-8838-97A0EC9269E0}
+#elif( _UNICODE )
+#define ICQPROTODECRSHORT   "Smart Auto Replier (Unicode)"
+#define PLUGIN_UUID { 0x9e536082, 0x17e, 0x423b, { 0xbf, 0x4f, 0xde, 0xdf, 0xeb, 0x9b, 0x3b, 0x60 } } // {9E536082-017E-423B-BF4F-DEDFEB9B3B60}
 #else
 #define ICQPROTODECRSHORT   "Smart Auto Replier"
+#define PLUGIN_UUID { 0x1b7152c1, 0xcdef, 0x4d39, { 0xa2, 0x6e, 0xef, 0x71, 0x7a, 0x4c, 0x79, 0x21 } } // {1B7152C1-CDEF-4D39-A26E-EF717A4C7921}
 #endif
 #define ICQPROTODECR		"Plugin is able to reply on all incoming messages, making possible use of rules that are applied to specific contacts. Plugin allows to use Lua scripts as a rules, thus allowing user to make virtually any type of customizations."
 #define DEVNAME				"Volodymyr M. Shcherbyna"
@@ -50,19 +69,19 @@
 
 //#define 
 /// global data...
-HINSTANCE		hInst = NULL;					/// hinstance 
-PLUGINLINK		*pluginLink = NULL;				/// ptr to plugin object
-CMessagesHandler *g_pMessHandler = NULL;		/// ptr to "main" global manager object
+HINSTANCE		hInst = NULL;				/// hinstance 
+PLUGINLINK		*pluginLink = NULL;			/// ptr to plugin object
+CMessagesHandler *g_pMessHandler = NULL;	/// ptr to "main" global manager object
 CSettingsDlgHolder *g_pSettingsDlg = NULL;
-static HANDLE g_hHook[GLOB_HOOKS] = {NULL};		/// global hooks
-CLISTMENUITEM g_mi = {NULL};					/// handle to menu item that is used to switch on/off plugin
-CLISTMENUITEM g_miAUR2This = {NULL};			/// handle to menu item that is used to add user to aur 
-bool g_bEnableMItem = true;						/// flag for menu item..
-HANDLE g_hMenuItem;								/// global handle to menu service
-CCrushLog CRUSHLOGOBJ;							/// global object that handles all crushes
-LPTSTR g_strPluginName = TEXT(ICQPROTONAME);	/// global string that represents plugin name...
-INT	   g_nCurrentMode = 0;						/// current mode of a protocol == i duno which exactly protocol...
-HANDLE g_hAUR2User = NULL;						/// handle to proto service of "autoreply to this user"
+static HANDLE g_hHook[GLOB_HOOKS] = {NULL};	/// global hooks
+CLISTMENUITEM g_mi = {NULL};				/// handle to menu item that is used to switch on/off plugin
+CLISTMENUITEM g_miAUR2This = {NULL};		/// handle to menu item that is used to add user to aur 
+bool g_bEnableMItem = true;					/// flag for menu item..
+HANDLE g_hMenuItem;							/// global handle to menu service
+CCrushLog CRUSHLOGOBJ;						/// global object that handles all crushes
+LPTSTR g_strPluginName = TEXT(ICQPROTONAME);		/// global string that represents plugin name...
+INT	   g_nCurrentMode = 0;					/// current mode of a protocol == i duno which exactly protocol...
+HANDLE g_hAUR2User = NULL;					/// handle to proto service of "autoreply to this user"
 HANDLE hMenuCommand,hUserCommand;
 
 struct MM_INTERFACE mmi;
@@ -73,7 +92,7 @@ PLUGININFOEX pluginInfo =
 {
 	sizeof(PLUGININFOEX),
 	ICQPROTODECRSHORT,
-	PLUGIN_MAKE_VERSION(2, 0, 0, 4),
+	PLUGIN_MAKE_VERSION(2, 0, 0, 5),
 	ICQPROTODECR,
 	DEVNAME,
 	DEVMAIL,
@@ -81,17 +100,11 @@ PLUGININFOEX pluginInfo =
 	DEVWWW,
 	UNICODE_AWARE,	
 	0,
-//#if defined( _UNICODE )
-//	// {B9C9AC38-9D81-45D3-A9D7-67A7D8EA9D29} 
-//	{ 0xb9c9ac38, 0x9d81, 0x45d3, { 0xa9, 0xd7, 0x67, 0xa7, 0xd8, 0xea, 0x9d, 0x29 } }
-//#else
-	// {9E536082-017E-423B-BF4F-DEDFEB9B3B60}
-	{ 0x9e536082, 0x17e, 0x423b, { 0xbf, 0x4f, 0xde, 0xdf, 0xeb, 0x9b, 0x3b, 0x60 } }
-//#endif
+	PLUGIN_UUID
 };
 
 /// mapping into mirandaim.exe
-BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
+extern "C" BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 {	
 BEGIN_PROTECT_AND_LOG_CODE
 	hInst = hinstDLL;
@@ -100,14 +113,14 @@ BEGIN_PROTECT_AND_LOG_CODE
 END_PROTECT_AND_LOG_CODE
 }
 
-__declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
+extern "C" __declspec(dllexport) PLUGININFOEX* MirandaPluginInfoEx(DWORD mirandaVersion)
 {	
 	return &pluginInfo;
 }
 
 static const MUUID interfaces[] = {MIID_CHAT, MIID_SRMM, MIID_LAST};
 
-__declspec(dllexport) const MUUID * MirandaPluginInterfaces(void)
+extern "C" __declspec(dllexport) const MUUID * MirandaPluginInterfaces(void)
 {
 	return interfaces;
 }
@@ -123,7 +136,7 @@ BEGIN_PROTECT_AND_LOG_CODE
 	optsDialog.pszTemplate = MAKEINTRESOURCEA(IDD_SDLGHOLDER);
 	
 	optsDialog.ptszGroup = LPGENT("Plugins");
-	optsDialog.ptszTitle = _T(ICQPROTODECRSHORT);
+	optsDialog.ptszTitle = LPGENT("Smart Auto Replier");
 
 	optsDialog.pfnDlgProc = &CSettingsDlgHolder::FakeDlgProc;
 	optsDialog.flags = ODPF_BOLDGROUPS | ODPF_TCHAR /*|ODPF_EXPERTONLY*/; /// some lames are scaring that option...
@@ -291,35 +304,37 @@ END_PROTECT_AND_LOG_CODE
 
 int OnModulesLoaded(WPARAM wParam, LPARAM lParam)
 {
-	Update update = {0}; // for c you'd use memset or ZeroMemory...
-	char szVersion[16];
+	if(ServiceExists(MS_UPDATE_REGISTER)) 
+	{
+		Update update = {0}; // for c you'd use memset or ZeroMemory...
+		char szVersion[16];
 
-	update.cbSize = sizeof(Update);
+		update.cbSize = sizeof(Update);
 
-	update.szComponentName	= pluginInfo.shortName;
-	update.pbVersion		= (BYTE*)CreateVersionStringPluginEx(&pluginInfo, szVersion);
-	update.cpbVersion		= strlen((char*)update.pbVersion);
+		update.szComponentName	= pluginInfo.shortName;
+		update.pbVersion		= (BYTE*)CreateVersionStringPluginEx(&pluginInfo, szVersion);
+		update.cpbVersion		= (int) strlen((char *)update.pbVersion);
 
+		update.szUpdateURL = UPDATER_AUTOREGISTER;
+
+		update.szBetaVersionURL = "http://code.google.com/p/smart-auto-replier/downloads/list";
+#ifdef WIN64
+		update.szBetaUpdateURL = "http://smart-auto-replier.googlecode.com/files/sar-%VERSION%-x64.zip";
+		update.pbBetaVersionPrefix = (BYTE*) "Smart Auto Replier (x64) ";
+#else
+		update.szBetaUpdateURL = "http://smart-auto-replier.googlecode.com/files/sar-%VERSION%-x86.zip";
+		update.pbBetaVersionPrefix = (BYTE*) "Smart Auto Replier ";
+#endif
+		update.cpbBetaVersionPrefix = (int) (strlen((char *)update.pbBetaVersionPrefix));
 	// these are the three lines that matter - the archive, the page containing the version string, and the text (or data) 
 	// before the version that we use to locate it on the page
 	// (note that if the update URL and the version URL point to standard file listing entries, the backend xml
 	// data will be used to check for updates rather than the actual web page - this is not true for beta urls)
-	//update.szUpdateURL		= "http://www.shcherbyna.com/files/sar/SAR.zip";
-	//update.szVersionURL		= "http://www.shcherbyna.com/files/sar/SAR.html";
 
-	update.szUpdateURL = "http://addons.miranda-im.org/details.php?action=viewfile&id=1609";
-	
-	//update.pbVersionPrefix	= (BYTE *)"SAR version ";
-	
-	//update.cpbVersionPrefix = strlen((char *)update.pbVersionPrefix);
+		update.szBetaChangelogURL = "http://code.google.com/p/smart-auto-replier/source/list";
 
-	// do the same for the beta versions of the above struct members if you wish to allow beta updates from another URL
-
-	CallService(MS_UPDATE_REGISTER, 0, (WPARAM)&update);
-
-	// Alternatively, to register a plugin with e.g. file ID 2254 on the file listing...
-	// CallService(MS_UPDATE_REGISTERFL, (WPARAM)2254, (LPARAM)&pluginInfo);	
-
+		CallService(MS_UPDATE_REGISTER,0,(WPARAM)&update);
+	}
 	return 0;
 }
 

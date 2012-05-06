@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: ltests.c 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Internal Module for Debugging of the Lua Implementation
 ** See Copyright Notice in lua.h
 */
@@ -159,17 +159,17 @@ static char *buildop (Proto *p, int pc, char *buff) {
   OpCode o = GET_OPCODE(i);
   const char *name = luaP_opnames[o];
   int line = getline(p, pc);
-  sprintf(buff, "(%4d) %4d - ", line, pc);
+  sprintf_s(buff, "(%4d) %4d - ", line, pc);
   switch (getOpMode(o)) {  
     case iABC:
-      sprintf(buff+strlen(buff), "%-12s%4d %4d %4d", name,
+      sprintf_s(buff+strlen(buff), "%-12s%4d %4d %4d", name,
               GETARG_A(i), GETARG_B(i), GETARG_C(i));
       break;
     case iABx:
-      sprintf(buff+strlen(buff), "%-12s%4d %4d", name, GETARG_A(i), GETARG_Bx(i));
+      sprintf_s(buff+strlen(buff), "%-12s%4d %4d", name, GETARG_A(i), GETARG_Bx(i));
       break;
     case iAsBx:
-      sprintf(buff+strlen(buff), "%-12s%4d %4d", name, GETARG_A(i), GETARG_sBx(i));
+      sprintf_s(buff+strlen(buff), "%-12s%4d %4d", name, GETARG_A(i), GETARG_sBx(i));
       break;
   }
   return buff;
@@ -842,7 +842,7 @@ int luaB_opentests (lua_State *L) {
 
 #undef main
 int main (int argc, char *argv[]) {
-  char *limit = getenv("MEMLIMIT");
+  char *limit = _dupenv_s("MEMLIMIT");
   if (limit)
     memdebug_memlimit = strtoul(limit, NULL, 10);
   l_main(argc, argv);

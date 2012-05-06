@@ -13,9 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ReadMe.txt" />
+    <Filter Include="Docs">
+      <UniqueIdentifier>{a59133f6-c9dd-4baa-979b-9f38a7245f9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -182,5 +182,26 @@
     <ClCompile Include="lzio.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\ReadMe.txt">
+      <Filter>Docs</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="docs\logo.gif">
+      <Filter>Docs</Filter>
+    </Image>
+    <Image Include="docs\osi-certified-72x60.png">
+      <Filter>Docs</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\manual.css">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="docs\README">
+      <Filter>Docs</Filter>
+    </None>
   </ItemGroup>
 </Project>

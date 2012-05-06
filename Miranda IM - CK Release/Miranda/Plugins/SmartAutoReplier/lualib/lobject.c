@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lobject.c 1738 2012-03-12 21:30:27Z Nvinside@gmail.com $
 ** Some generic functions over Lua objects
 ** See Copyright Notice in lua.h
 */
@@ -174,9 +174,9 @@ void luaO_chunkid (char *out, const char *source, int bufflen) {
       strcpy(out, "");
       if (l>bufflen) {
         source += (l-bufflen);  /* get last part of file name */
-        strcat(out, "...");
+        strcat_s(out, "...");
       }
-      strcat(out, source);
+      strcat_s(out, source);
     }
     else {  /* out = [string "string"] */
       int len = strcspn(source, "\n");  /* stop at first newline */
@@ -185,11 +185,11 @@ void luaO_chunkid (char *out, const char *source, int bufflen) {
       strcpy(out, "[string \"");
       if (source[len] != '\0') {  /* must truncate? */
         strncat(out, source, len);
-        strcat(out, "...");
+        strcat_s(out, "...");
       }
       else
-        strcat(out, source);
-      strcat(out, "\"]");
+        strcat_s(out, source);
+      strcat_s(out, "\"]");
     }
   }
 }
