@@ -1,8 +1,39 @@
-// Set the version number here - it will affect the version resource and the version field of the pluginInfo structure
-// (Be careful that you don't have the resource file open when you change this and rebuild, otherwise the changes may not 
-// take effect within the version resource)
-// Do not forget to define symbol "_DEBUG" for resource compiler if you use debug configuration (in VisualStudio you can 
-//  find it under Project properties - Configuration properties - Resource - General - Preprocessor definitions)
+/*
+UseActions plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2009-2012 2012 Igor Abakumov
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
+
 
 // plugin version part
 #define __MAJOR_VERSION				0
@@ -31,7 +62,7 @@
 #define __AUTHOR					"Igor Abakumov"
 #define __AUTHOREMAIL				"abakumoff@mail.ru"
 #define __AUTHORWEB					"http://vasilich.org/blog"
-#define __COPYRIGHT					"© 2012 Igor Abakumov"
+#define __COPYRIGHT					"© 2009-2012 Igor Abakumov"
 
 // other stuff for Version resource
 #define __STRINGIFY_IMPL(x)			#x
