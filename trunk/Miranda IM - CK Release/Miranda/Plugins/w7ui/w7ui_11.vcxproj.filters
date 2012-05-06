@@ -22,9 +22,6 @@
     <ClCompile Include="src\srmmproxywindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\subclassmgr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\w7ui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

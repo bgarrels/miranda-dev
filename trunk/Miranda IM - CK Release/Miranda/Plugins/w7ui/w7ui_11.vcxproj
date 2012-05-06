@@ -248,7 +248,6 @@
     <ClCompile Include="src\jumplistbuilder.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\srmmproxywindow.cpp" />
-    <ClCompile Include="src\subclassmgr.cpp" />
     <ClCompile Include="src\w7ui.cpp" />
     <ClCompile Include="src\win7api.cpp" />
   </ItemGroup>
