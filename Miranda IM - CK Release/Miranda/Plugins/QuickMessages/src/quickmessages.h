@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #define _CRT_SECURE_NO_DEPRECATE
-#define MIRANDA_VER  0x0900
+#define MIRANDA_VER    0x0A00
 
 #include <tchar.h>
 #include <windows.h>
