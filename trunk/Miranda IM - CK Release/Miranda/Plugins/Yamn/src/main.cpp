@@ -1,20 +1,44 @@
 /*
- * YAMN plugin main file
- * Miranda homepage: http://code.google.com/p/miranda/
- * YAMN homepage: http://www.majvan.host.sk/Projekty/YAMN
- *
- * initializes all variables for further work
- *
- * (c) majvan 2002-2012
- */
+YAMN plugin for 
+Miranda IM: the free IM client for Microsoft* Windows*
 
+Author
+			Copyright (C) 2002-2004 majvan
+			Copyright (C) 2005-2007 tweety y_b
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
 
 #include "main.h"
 #include "yamn.h"
-#include "../resources/resource.h"
+#include "resources/resource.h"
 #include <io.h>
-//- imported ---------------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------------------------
 
 //CRITICAL_SECTION MWCS;
 //CRITICAL_SECTION ASCS;
@@ -33,8 +57,8 @@ extern LPCRITICAL_SECTION FileWritingCS;
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 
-WCHAR	*ProfileName		= NULL;		//e.g. "majvan"
-WCHAR	*UserDirectory		= NULL;		//e.g. "F:\WINNT\Profiles\UserXYZ"
+WCHAR	*ProfileName		= NULL;				//e.g. "majvan"
+WCHAR	*UserDirectory		= NULL;				//e.g. "C:\WINNT\Profiles\UserXYZ"
 char	*ProtoName			= YAMN_DBMODULE;
 //char *AltProtoName;
 char	*szMirandaDir		= NULL;
@@ -64,7 +88,7 @@ PLUGININFOEX pluginInfo={
 	"Mail notifier and browser for Miranda IM. Included POP3 protocol. Mod for Mataes Pack.",
 	"y_b tweety (majvan)",
 	"francois.mean@skynet.be",
-	"© (2002-2004 majvan) 2005-2012 tweety y_b Miranda community",
+	"© (2002-2004 majvan) 2005-2007 tweety y_b Miranda community",
 	"http://www.miranda-im.org/download/details.php?action=viewfile&id=3411", //"http://www.majvan.host.sk/Projekty/YAMN?fm=soft",
 	UNICODE_AWARE,
 	0,		//doesn't replace anything built-in
@@ -226,31 +250,6 @@ void SetDefaultProtocolIcons()
 
 extern "C" BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 {
-#ifndef WIN2IN1
-	OSVERSIONINFO OSversion;
-	
-	OSversion.dwOSVersionInfoSize=sizeof(OSVERSIONINFO);
-
-	GetVersionEx(&OSversion);
-	switch(OSversion.dwPlatformId)
-	{
-		case VER_PLATFORM_WIN32s:
-		case VER_PLATFORM_WIN32_WINDOWS:
-#ifndef WIN9X
-			MessageBoxA(NULL,"This YAMN cannot run on Windows 95, 98 or Me. Why? Read FAQ. You should download Win9x version.","YAMN error",MB_OK | MB_ICONSTOP);
-			return FALSE;
-#else
-			break;
-#endif
-		case VER_PLATFORM_WIN32_NT:
-#ifdef WIN9X
-			MessageBoxA(NULL,"This YAMN is intended for Windows 95, 98 or Me. You should use native WinNT version.","YAMN error",MB_OK | MB_ICONSTOP);
-			return FALSE;
-#else
-			break;
-#endif
-	}
-#endif // WIN2IN1
 	YAMNVar.hInst=hinstDLL;
 	if(fdwReason==DLL_PROCESS_ATTACH)
 	{

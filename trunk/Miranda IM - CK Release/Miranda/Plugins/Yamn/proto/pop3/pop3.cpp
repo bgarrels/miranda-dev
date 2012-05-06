@@ -1,27 +1,55 @@
 /*
- * This code implements basics of POP3 protocol
- *
- * (c) majvan 2002-2004
- */
-/* This was made from the libspopc project
- * copyright c 2002 Benoit Rouits <brouits@free.fr>
- * released under the terms of GNU LGPL
- * (GNU Lesser General Public Licence).
- * libspopc offers simple API for a pop3 client (MTA).
- * See RFC 1725 for pop3 specifications.
- * more information on http://brouits.free.fr/libspopc/
- */
-/*
- * This file is not original and is changed by majvan <om3tn@psg.sk>
- * for mail checker purpose. Please see original web page to
- * obtain the original. I rewrote it in C++, but good ideas were,
- * I think, unchanged.
- *
- * Note that this file was not designed to work under Unix. It's
- * needed to add Unix-specific features. I was interested only in
- * Windows for my project. majvan
- *
- */
+YAMN plugin for 
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2002-2004 majvan
+			Copyright (C) 2005-2007 tweety y_b
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+* This code implements basics of POP3 protocol
+
+* This was made from the libspopc project copyright c 2002 Benoit Rouits <brouits@free.fr>
+* released under the terms of GNU LGPL (GNU Lesser General Public Licence).
+* Libspopc offers simple API for a pop3 client (MTA).
+* See RFC 1725 for pop3 specifications. More information on http://brouits.free.fr/libspopc/
+
+
+* This file is not original and is changed by majvan <om3tn@psg.sk> for mail checker purpose.
+* Please see original web page to obtain the original. I rewrote it in C++, but good ideas were,
+* I think, unchanged.
+*
+* Note:
+* That this file was not designed to work under Unix. It's needed to add Unix-specific features.
+  I was interested only in Windows for my project.
+*/
 
 #pragma warning( disable : 4290 )
 

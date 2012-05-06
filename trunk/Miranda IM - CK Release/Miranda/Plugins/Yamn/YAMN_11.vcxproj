@@ -108,7 +108,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../include;../../include_API;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>browser;src;../../include;../../ExternalAPI</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;_DEBUG;YAMN_DEBUG;YAMN_VER_BETA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -125,7 +125,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>./libs/unicows.lib;comctl32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../../Lib/unicows.lib;uuid.lib;shell32.lib;kernel32.lib;wsock32.lib;comctl32.lib;comdlg32.lib;shlwapi.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;oleaut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <BaseAddress>0x60010000</BaseAddress>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
@@ -136,10 +136,14 @@
       <MapFileName>
       </MapFileName>
       <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
       <SubSystem>Windows</SubSystem>
-      <LargeAddressAware>true</LargeAddressAware>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <LargeAddressAware>
+      </LargeAddressAware>
+      <SupportUnloadOfDelayLoadedDLL>
+      </SupportUnloadOfDelayLoadedDLL>
+      <ImageHasSafeExceptionHandlers />
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
@@ -269,7 +273,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../include;../../include_API;../../ExternalAPI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>browser;src;../../include;../../ExternalAPI</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN64;_DEBUG;_WINDOWS;_USRDLL;YAMN_DEBUG;YAMN_VER_BETA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -290,7 +294,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>comctl32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../../Lib/unicows.lib;uuid.lib;shell32.lib;kernel32.lib;wsock32.lib;comctl32.lib;comdlg32.lib;shlwapi.lib;user32.lib;gdi32.lib;ole32.lib;odbc32.lib;odbccp32.lib;oleaut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <BaseAddress>0x60010000</BaseAddress>
@@ -302,10 +306,13 @@
       <MapFileName>
       </MapFileName>
       <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <DelayLoadDLLs>d3d9.dll;gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
       <SubSystem>Windows</SubSystem>
-      <LargeAddressAware>true</LargeAddressAware>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <LargeAddressAware>
+      </LargeAddressAware>
+      <SupportUnloadOfDelayLoadedDLL>
+      </SupportUnloadOfDelayLoadedDLL>
     </Link>
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>

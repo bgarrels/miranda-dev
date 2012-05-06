@@ -1,14 +1,49 @@
 /*
- * This code implements window handling (new mail)
- *
- * (c) majvan 2002-2012
- */
-/* There can be problems when compiling this file, because in this file
- * we are using both unicode and no-unicode functions and compiler does not
- * like it in one file
- * When you got errors, try to comment the #define <stdio.h> and compile, then
- * put it back to uncommented and compile again :)
- */
+YAMN plugin for 
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2002-2004 majvan
+			Copyright (C) 2005-2007 tweety y_b
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+* This code implements window handling (new mail)
+
+* Note:
+*  There can be problems when compiling this file, because in this file
+*  we are using both unicode and no-unicode functions and compiler does not like it in
+*  one file. When you got errors, try to comment the #define <stdio.h> and compile, then
+*  put it back to uncommented and compile again.
+*/
+
+
 #ifndef _WIN32_IE
 	#define _WIN32_IE 0x0600
 #endif
@@ -21,6 +56,7 @@
 #include <stdio.h>
 #include <stddef.h>
 #undef UNICODE
+
 #include <newpluginapi.h>
 #include <m_utils.h>
 #include <m_skin.h>
@@ -29,10 +65,10 @@
 #include <m_clist.h>
 #include <m_popup.h>
 #include "m_kbdnotify.h"
-#include "main.h"
+#include "../src/main.h"
 #include "m_protoplugin.h"
 #include "m_account.h"
-#include "debug.h"
+#include "../src/debug.h"
 #include "m_messages.h"
 #include "../mails/m_mails.h"
 #include "m_yamn.h"
@@ -114,7 +150,7 @@ static WNDPROC OldListViewSubclassProc;
 
 struct CMailNumbersSub
 {
-	int Total;		//any mail
+	int Total;			//any mail
 	int New;			//uses YAMN_MSG_NEW flag
 	int UnSeen;			//uses YAMN_MSG_UNSEEN flag
 //	int Browser;		//uses YAMN_MSG_BROWSER flag
@@ -130,10 +166,10 @@ struct CMailNumbersSub
 	int PopUpSL3NC;		//uses YAMN_MSG_SPAML3 flag and YAMN_MSG_NEW flag
 //	int SysTray;		//uses YAMN_MSG_SYSTRAY flag
 	int SysTrayUC;		//uses YAMN_MSG_SYSTRAY flag and YAMN_MSG_UNSEEN flag
-//	int Sound;		//uses YAMN_MSG_SOUND flag
+//	int Sound;			//uses YAMN_MSG_SOUND flag
 	int SoundNC;		//uses YAMN_MSG_SOUND flag and YAMN_MSG_NEW flag
-//	int App;		//uses YAMN_MSG_APP flag
-	int AppNC;		//uses YAMN_MSG_APP flag and YAMN_MSG_NEW flag
+//	int App;			//uses YAMN_MSG_APP flag
+	int AppNC;			//uses YAMN_MSG_APP flag and YAMN_MSG_NEW flag
 	int EventNC;		//uses YAMN_MSG_NEVENT flag and YAMN_MSG_NEW flag
 };
 

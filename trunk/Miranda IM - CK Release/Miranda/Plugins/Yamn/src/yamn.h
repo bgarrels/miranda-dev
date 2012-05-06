@@ -1,14 +1,52 @@
 #ifndef __YAMN_H
 #define __YAMN_H
+
+/*
+YAMN plugin for 
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2002-2004 majvan
+			Copyright (C) 2005-2007 tweety y_b
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
+
 #ifndef _WIN32_IE
-	#define _WIN32_IE 0x0600
+	#define _WIN32_IE 0x0500
 #endif
 #ifndef _WIN32_WINNT
-	#define _WIN32_WINNT 0x0502
+	#define _WIN32_WINNT 0x0601
 #endif
 
 #if !defined(_WIN64)
-	#include "../filter/simple/AggressiveOptimize.h"
+	#include "filter/simple/AggressiveOptimize.h"
 #endif
 #include <wchar.h>
 #include <tchar.h>
@@ -16,41 +54,40 @@
 #include <stdio.h>
 #include <direct.h>			//For _chdir()
 
-//Miranda IM bits
 #define MIRANDA_VER 0x0A00
 
-#include <commctrl.h>			//For hotkeys
+#include <commctrl.h>		//For hotkeys
 #include "win2k.h"
-#include "newpluginapi.h"		//CallService,UnHookEvent
-#include "m_utils.h"			//window broadcasting
+#include "newpluginapi.h"	//CallService,UnHookEvent
+#include "m_utils.h"		//window broadcasting
 #include "m_system.h"
 #include "m_skin.h"
 #include "m_langpack.h"
 #include "m_clist.h"
 #include "m_clui.h"
 #include "m_options.h"
-#include "m_database.h"			//database
-#include "m_contacts.h"			//contact
-#include "m_protocols.h"		//protocols
-#include "m_protomod.h"			//protocols module
+#include "m_database.h"		//database
+#include "m_contacts.h"		//contact
+#include "m_protocols.h"	//protocols
+#include "m_protomod.h"		//protocols module
 #include "m_protosvc.h"
-#include "m_uninstaller.h"		//PluginUninstaller structures
+#include "m_uninstaller.h"	//PluginUninstaller structures
 #include "m_toptoolbar.h"
 #include "m_icolib.h"
 #include "m_kbdnotify.h"
 #include "m_popup.h"
 #include "m_updater.h"
-#include "m_account.h"			//Account structure and all needed structures to cooperate with YAMN
-#include "m_messages.h"			//Messages sent to YAMN windows
-#include "../mails/m_mails.h"		//use YAMN's mails
-#include "../mails/m_decode.h"		//use decoding macros (needed for header extracting)
-#include "m_browser.h"	//we want to run YAMN mailbrowser, no new mail notification and bad connect window
-#include "../resources/resource.h"
+#include "m_account.h"		//Account structure and all needed structures to cooperate with YAMN
+#include "m_messages.h"		//Messages sent to YAMN windows
+#include "mails/m_mails.h"	//use YAMN's mails
+#include "mails/m_decode.h"	//use decoding macros (needed for header extracting)
+#include "browser/m_browser.h"	//we want to run YAMN mailbrowser, no new mail notification and bad connect window
+#include "resources/resource.h"
 #include "m_protoplugin.h"
 #include "m_filterplugin.h"
-#include "m_yamn.h"				//Main YAMN's variables
-#include "m_protoplugin.h"		//Protocol registration and so on
-#include "m_synchro.h"			//Synchronization
+#include "m_yamn.h"			//Main YAMN's variables
+#include "m_protoplugin.h"	//Protocol registration and so on
+#include "m_synchro.h"		//Synchronization
 #include "debug.h"
 #include <m_folders.h>
 
