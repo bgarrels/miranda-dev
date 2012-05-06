@@ -213,7 +213,6 @@
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\dbtool-readme.txt" />
     <None Include="docs\langpack_dbtools.txt" />
     <None Include="res\dbtool.bmp" />
     <None Include="res\dbtool.ico" />
@@ -227,6 +226,9 @@
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="dbtool.exe.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
