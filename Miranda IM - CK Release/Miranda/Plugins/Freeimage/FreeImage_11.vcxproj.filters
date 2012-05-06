@@ -524,11 +524,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\Todo.txt">
-      <Filter>docs</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="docs\FreeImage Public License.txt">
       <Filter>docs</Filter>
     </Text>
