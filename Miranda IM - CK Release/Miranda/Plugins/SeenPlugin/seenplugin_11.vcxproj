@@ -336,7 +336,7 @@
     <ClInclude Include="src\seen.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\readme_src.txt" />
+    <None Include="docs\Readme.txt" />
     <None Include="docs\seen_info.txt" />
     <None Include="docs\seen_langpack.txt" />
   </ItemGroup>

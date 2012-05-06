@@ -58,7 +58,7 @@
     <None Include="docs\seen_langpack.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="docs\readme_src.txt">
+    <None Include="docs\Readme.txt">
       <Filter>docs</Filter>
     </None>
   </ItemGroup>
