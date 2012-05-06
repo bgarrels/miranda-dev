@@ -556,6 +556,7 @@
     <ResourceCompile Include="new_gpg.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docs\utf8cpp.html" />
     <None Include="icons\secured.ico" />
     <None Include="icons\unsecured.ico" />
   </ItemGroup>
@@ -574,6 +575,10 @@
     <ClInclude Include="utf8\utf8\checked.h" />
     <ClInclude Include="utf8\utf8\core.h" />
     <ClInclude Include="utf8\utf8\unchecked.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\new_gpg_lang_ru.txt" />
+    <Text Include="docs\README.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
