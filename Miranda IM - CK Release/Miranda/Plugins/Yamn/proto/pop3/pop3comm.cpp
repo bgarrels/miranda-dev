@@ -1,18 +1,50 @@
 /*
- * This code implements POP3 server checking for new mail and so on.
- * There's function SynchroPOP3 in this file- for checking and synchronising POP3 account
- * and DeleteMailsPOP3- for deleting mails from POP3 server
- *
- * Note this file acts as main file for internal plugin.
- *
- * (c) majvan 2002-2004
- * 18/08
+YAMN plugin for 
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author
+			Copyright (C) 2002-2004 majvan
+			Copyright (C) 2005-2007 tweety y_b
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+* This code implements POP3 server checking for new mail and so on.
+* There's function SynchroPOP3 in this file- for checking and synchronising POP3 account
+* and DeleteMailsPOP3- for deleting mails from POP3 server
+*
+* Note this file acts as main file for internal plugin.
 */
 
+#pragma warning( disable : 4290 )		//disable C4290
 
-#pragma warning( disable : 4290 )
-#include "main.h"				//main functions for yamn
-#include "yamn.h"				
+#include "../../src/main.h"				//main functions for yamn
+#include "../../src/yamn.h"				
 #include "pop3.h"
 #include "pop3comm.h"			//all we need for POP3 account (POP3 account= YAMN account + some more POP3 specified members)
 #include <m_netlib.h>			//socket thorugh proxy functions
