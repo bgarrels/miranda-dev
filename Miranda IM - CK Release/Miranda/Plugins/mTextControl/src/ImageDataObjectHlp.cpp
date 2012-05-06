@@ -1,6 +1,14 @@
 /*
-Miranda SmileyAdd Plugin
-Copyright (C) 2004-2005 Rein-Peter de Boer (peacow) and followers
+Miranda Text Control for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors 
+				Copyright (C) 2005 Victor Pavlychko (nullbie@gmail.com),
+							  2010 Merlin_de
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -15,10 +23,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
 
-//imagedataobject
-//code taken partly from public example on the internet, source unknown.
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+* Author : Yves Maurer
+* imagedataobject
+*/
 
 #include "headers.h"
 
