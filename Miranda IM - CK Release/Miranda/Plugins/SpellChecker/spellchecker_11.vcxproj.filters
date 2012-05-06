@@ -22,11 +22,11 @@
     <Filter Include="Docs">
       <UniqueIdentifier>{437a04fa-5422-4a59-bf81-a7a42e195870}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{28b69570-73e5-4130-b7ab-d4332333e5b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="hunspell\affentry.hxx">
       <Filter>Header Files\hunspell Header Files</Filter>
     </ClInclude>
@@ -105,31 +105,25 @@
     <ClInclude Include="src\RichEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\no_spellcheck.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\spellcheck.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\unknown.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="Docs\langpack_spellchecker.txt">
-      <Filter>Docs</Filter>
-    </None>
-    <None Include="Docs\spellchecker_changelog.txt">
-      <Filter>Docs</Filter>
-    </None>
-    <None Include="Docs\spellchecker_readme.txt">
       <Filter>Docs</Filter>
     </None>
     <None Include="Docs\spellchecker_version.txt">
       <Filter>Docs</Filter>
     </None>
-    <None Include="Docs\spellchecker.png">
-      <Filter>Docs</Filter>
+    <None Include="res\no_spellcheck.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="res\spellcheck.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </None>
+    <None Include="res\unknown.ico">
+      <Filter>Resource Files\Icons</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -189,5 +183,13 @@
     <ClCompile Include="src\spellchecker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\Readme.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="Docs\Changelog.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

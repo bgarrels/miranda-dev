@@ -60,14 +60,14 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc\splash_readme.txt">
+    <Text Include="doc\splash_translation.txt">
       <Filter>Docs</Filter>
-    </None>
-    <None Include="doc\splash_translate.txt">
+    </Text>
+    <Text Include="doc\ToDo.txt">
       <Filter>Docs</Filter>
-    </None>
-    <None Include="doc\todo.txt">
+    </Text>
+    <Text Include="doc\Readme.txt">
       <Filter>Docs</Filter>
-    </None>
+    </Text>
   </ItemGroup>
 </Project>
