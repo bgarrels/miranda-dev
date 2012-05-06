@@ -366,7 +366,7 @@
     <ClCompile Include="src\svcs_srmm.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\!whatsnew.txt" />
+    <Text Include="docs\Changelog.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
