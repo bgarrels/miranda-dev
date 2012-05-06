@@ -304,15 +304,15 @@
     <ClCompile Include="src\splash.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\bitmap_funcs.h" />
     <ClInclude Include="src\debug.h" />
     <ClInclude Include="src\headers.h" />
-    <ClInclude Include="src\version.h" />
-    <ClInclude Include="src\resource.h" />
+    <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="src\splash.rc" />
-    <ResourceCompile Include="src\version.rc" />
+    <ResourceCompile Include="splash.rc" />
+    <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="doc\Readme.txt" />
