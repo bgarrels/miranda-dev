@@ -29,6 +29,9 @@
     <Filter Include="Header Files\TriggerPlugin">
       <UniqueIdentifier>{4b30c67c-bb3e-495c-a5ac-a1ef33910b4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{08b0b01a-73d3-4e2b-8ef5-50be7598ace5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helpers\db_helpers.cpp">
@@ -170,7 +173,7 @@
       <Filter>docs</Filter>
     </None>
     <None Include="ico\V.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Icons</Filter>
     </None>
   </ItemGroup>
 </Project>
