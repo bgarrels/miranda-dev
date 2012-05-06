@@ -13,6 +13,21 @@
       <UniqueIdentifier>{64762b7d-e772-408d-a339-85fc8c854cd7}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{292a1e67-5a02-4056-90f0-b105ad167a7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{b015ab04-2cc7-4d79-b280-92e20a5f6c88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Skins">
+      <UniqueIdentifier>{3ee88154-591b-42f4-9a63-5fd29a0d0d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Skins\Default">
+      <UniqueIdentifier>{3a5b52a9-a218-4cd4-92ef-aa20dd7c4365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Skins\Pidgin">
+      <UniqueIdentifier>{ed9bcd85-02b8-4afc-b810-3aac6cebcdf9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\data.cpp">
@@ -49,19 +64,42 @@
     <ClInclude Include="src\options.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\leftarrow.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Icons</Filter>
     </None>
     <None Include="res\listening_to.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Icons</Filter>
     </None>
     <None Include="res\mail.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Icons</Filter>
     </None>
     <None Include="res\rightarrow.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Icons</Filter>
     </None>
+    <None Include="data\Skins\Default\MyDetails.msk">
+      <Filter>Skins\Default</Filter>
+    </None>
+    <None Include="data\Skins\Pidgin\MyDetails.msk">
+      <Filter>Skins\Pidgin</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\mydetails_version.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="Docs\Readme.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="Docs\Changelog.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="Docs\MyDetails_langpack.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>
