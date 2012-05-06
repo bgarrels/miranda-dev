@@ -130,9 +130,6 @@
     <None Include="res\profiley.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="docs\dbtool-license.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="docs\dbtool-readme.txt">
       <Filter>docs</Filter>
     </None>

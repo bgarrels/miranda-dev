@@ -213,7 +213,6 @@
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\dbtool-license.txt" />
     <None Include="docs\dbtool-readme.txt" />
     <None Include="docs\langpack_dbtools.txt" />
     <None Include="res\dbtool.bmp" />
