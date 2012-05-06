@@ -1,8 +1,16 @@
 /*
+Import plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Import plugin for Miranda IM
+Authors
+			Copyright (C) 2000-2012 Martin Öberg
+									Richard Hughes
+									Dmitry Kuzkin
+									George Hazan
 
-Copyright (C) 2001-2005 Martin Öberg, Richard Hughes, Roland Rabien & Tristan Van de Vreede
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -18,11 +26,20 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include "import.h"
-#include "version.h"
-#include "resource.h"
+#include "../version.h"
+#include "../resource.h"
 
 void FreeVariant( DBVARIANT* dbv );
 void WriteVariant( HANDLE hContact, const char* module, const char* var, DBVARIANT* dbv );
@@ -57,7 +74,7 @@ PLUGININFOEX pluginInfo = {
 	"Imports contacts and messages from Mirabilis ICQ and Miranda IM.",
 	"Miranda team",
 	"info@miranda-im.org",
-	"© 2000-2010 Martin Öberg, Richard Hughes, Dmitry Kuzkin, George Hazan",
+	"© 2000-2012 Martin Öberg, Richard Hughes, Dmitry Kuzkin, George Hazan",
 	"http://www.miranda-im.org",
 	UNICODE_AWARE,
 	0,	//{2D77A746-00A6-4343-BFC5-F808CDD772EA}
@@ -352,7 +369,7 @@ int CreateGroup(BYTE type, const char* name, HANDLE hContact)
 		return 0;
 
 	cbName = _tcslen(tmp);
-	tszGrpName = _alloca(( cbName+2 )*sizeof( TCHAR ));
+	tszGrpName = _malloca(( cbName+2 )*sizeof( TCHAR ));
 	tszGrpName[0] = 1 | GROUPF_EXPANDED;
 	_tcscpy( tszGrpName+1, tmp );
 	mir_free( tmp );

@@ -1,8 +1,16 @@
 /*
+Import plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Import plugin for Miranda IM
+Authors
+			Copyright (C) 2000-2012 Martin Öberg
+									Richard Hughes
+									Dmitry Kuzkin
+									George Hazan
 
-Copyright (C) 2001-2005 Martin Öberg, Richard Hughes, Roland Rabien & Tristan Van de Vreede
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -18,6 +26,15 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #include <windows.h>
@@ -25,7 +42,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <commctrl.h>
 
 #include "import.h"
-#include "resource.h"
+#include "../resource.h"
 
 #define PROGM_START   (WM_USER+100)
 

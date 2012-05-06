@@ -1,8 +1,16 @@
 /*
+Import plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Import plugin for Miranda IM
+Authors
+			Copyright (C) 2000-2012 Martin Öberg
+									Richard Hughes
+									Dmitry Kuzkin
+									George Hazan
 
-Copyright (C) 2001-2005 Martin Öberg, Richard Hughes, Roland Rabien & Tristan Van de Vreede
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -18,15 +26,20 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-*/
+===============================================================================
 
-// ==============
-// == INCLUDES ==
-// ==============
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+*/
 
 #include "import.h"
 #include "mirabilis.h"
-#include "resource.h"
+#include "../resource.h"
 
 BOOL IsDuplicateEvent(HANDLE hContact, DBEVENTINFO dbei);
 BOOL IsProtocolLoaded(char* pszProtocolName);
@@ -963,7 +976,7 @@ BOOL ImportMessage(DWORD dwOffset)
 	// Convert timestamp
 	dbei.timestamp = footer->timestamp + nUCTOffset;
 	dbei.cbBlob = msg->textLen;
-	dbei.pBlob = (PBYTE)alloca(msg->textLen);
+	dbei.pBlob = (PBYTE)_malloca(msg->textLen);
 	CopyMemory(dbei.pBlob, msg->text, dbei.cbBlob);
 	dbei.pBlob[dbei.cbBlob - 1] = 0;
 
@@ -1126,7 +1139,7 @@ BOOL ImportURLMessage(DWORD dwOffset)
 	// Convert timestamp
 	dbei.timestamp = footer->timestamp + nUCTOffset;
 	dbei.cbBlob = msg->textLen;
-	dbei.pBlob = (PBYTE)alloca(msg->textLen);
+	dbei.pBlob = (PBYTE)_malloca(msg->textLen);
 	CopyMemory(dbei.pBlob, msg->text, dbei.cbBlob);
 	dbei.pBlob[dbei.cbBlob - 1] = 0;
 	// Separate URL and description
