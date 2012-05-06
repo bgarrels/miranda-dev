@@ -152,13 +152,11 @@
     <ClInclude Include="src\wbOSD.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\langpack_wbOSD.txt" />
-    <None Include="docs\lpgen.pl" />
-    <None Include="docs\readme" />
-    <None Include="docs\wbOSD-translation.txt" />
+    <ResourceCompile Include="src\wbOSD.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="src\wbOSD.rc" />
+    <Text Include="docs\Readme.txt" />
+    <Text Include="docs\wbOSD-translation.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
