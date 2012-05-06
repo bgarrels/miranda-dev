@@ -357,13 +357,10 @@
     <ClInclude Include="src\RichEdit.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Docs\spellchecker.png" />
     <None Include="res\no_spellcheck.ico" />
     <None Include="res\spellcheck.ico" />
     <None Include="res\unknown.ico" />
     <None Include="Docs\langpack_spellchecker.txt" />
-    <None Include="Docs\spellchecker_changelog.txt" />
-    <None Include="Docs\spellchecker_readme.txt" />
     <None Include="Docs\spellchecker_version.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -491,6 +488,10 @@
     <ClCompile Include="src\options.cpp" />
     <ClCompile Include="src\RichEdit.cpp" />
     <ClCompile Include="src\spellchecker.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\Changelog.txt" />
+    <Text Include="Docs\Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
