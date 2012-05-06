@@ -1,8 +1,14 @@
 /*
-Miranda Text Control - Plugin for Miranda IM
+Miranda Text Control for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-Copyright	© 2005 Victor Pavlychko (nullbie@gmail.com),
-			© 2010 Merlin_de
+Authors 
+				Copyright (C) 2005 Victor Pavlychko (nullbie@gmail.com),
+							  2010 Merlin_de
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -20,10 +26,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ===============================================================================
 
-File name      : $HeadURL$
-Revision       : $Revision$
-Last change on : $Date$
-Last change by : $Author$
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
 
 ===============================================================================
 */
