@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{6c65d294-ddf2-4945-ab04-d75968fce051}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\avatar.cpp">
@@ -77,9 +80,6 @@
     <ClInclude Include="src\popups.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\resources.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -89,10 +89,21 @@
     <ClInclude Include="src\tipper_items.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\resources.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="res\settings.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\pseudoava.png">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\PopupIcon.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>
