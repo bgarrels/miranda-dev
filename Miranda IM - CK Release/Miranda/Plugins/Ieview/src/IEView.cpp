@@ -1,7 +1,13 @@
 /*
+IEView Plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-IEView Plugin for Miranda IM
-Copyright (C) 2005-2012 Piotr Piastucki
+Author 
+			Copyright (C) 2005-2010  Piotr Piastucki
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -17,7 +23,17 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
+
 #include "IEView.h"
 #include "resource.h"
 #include "Options.h"
@@ -153,7 +169,7 @@ STDMETHODIMP IEViewSink::GetIDsOfNames(REFIID riid, LPOLESTR* rgszNames, UINT cN
 STDMETHODIMP IEViewSink::Invoke(DISPID dispIdMember, REFIID riid, LCID lcid , WORD wFlags,
 							DISPPARAMS* pDispParams, VARIANT* pVarResult, EXCEPINFO*pExcepInfo, UINT*puArgErr) {
 	if (!pDispParams) return E_INVALIDARG;
-	switch (dispIdMember) {
+ 	switch (dispIdMember) {
 		case DISPID_BEFORENAVIGATE2:
 			BeforeNavigate2(pDispParams->rgvarg[6].pdispVal,
 							pDispParams->rgvarg[5].pvarVal,
@@ -302,9 +318,9 @@ IEView::IEView(HWND parent, HTMLBuilder* builder, int x, int y, int cx, int cy) 
 			 // Step 3: Advise the connection point that you
 			 // want to sink its events.
 				sink = new IEViewSink(this);
-				if (FAILED(m_pConnectionPoint->Advise((IUnknown *)sink, &m_dwCookie)))	 {
+			 	if (FAILED(m_pConnectionPoint->Advise((IUnknown *)sink, &m_dwCookie)))	 {
 					MessageBoxA(NULL, "Failed to Advise", "C++ Event Sink", MB_OK);
-				}
+			 	}
 			}
 			pCPContainer->Release();
 		}
@@ -460,7 +476,7 @@ STDMETHODIMP IEView::GetIDsOfNames(REFIID riid, LPOLESTR* rgszNames, UINT cNames
 
 STDMETHODIMP IEView::Invoke(DISPID dispIdMember, REFIID riid, LCID lcid , WORD wFlags,
 							DISPPARAMS* pDispParams, VARIANT* pVarResult, EXCEPINFO*pExcepInfo, UINT*puArgErr) {
-	switch (dispIdMember) {
+ 	switch (dispIdMember) {
 		case  DISPID_AMBIENT_DLCONTROL:
 			break;
 	}
@@ -596,7 +612,7 @@ STDMETHODIMP IEView::ShowContextMenu(DWORD dwID, POINT *ppt, IUnknown *pcmdTarge
 			pOleWindow->GetWindow(&hSPWnd);
 			HMENU hMenu;
 			hMenu = GetSubMenu(LoadMenu(hInstance, MAKEINTRESOURCE(IDR_CONTEXTMENU)),0);
-			CallService(MS_LANGPACK_TRANSLATEMENU,(WPARAM)hMenu,0);
+		 	CallService(MS_LANGPACK_TRANSLATEMENU,(WPARAM)hMenu,0);
 			if (dwID == 5) { // anchor
 				EnableMenuItem(hMenu, ID_MENU_COPYLINK, MF_BYCOMMAND | MF_ENABLED);
 			} else if (dwID == 4) { // text select
@@ -607,7 +623,7 @@ STDMETHODIMP IEView::ShowContextMenu(DWORD dwID, POINT *ppt, IUnknown *pcmdTarge
 			if (builder!=NULL) {
 
 			}
-			int iSelection = TrackPopupMenu(hMenu,
+		 	int iSelection = TrackPopupMenu(hMenu,
 											TPM_LEFTALIGN | TPM_RIGHTBUTTON | TPM_RETURNCMD,
 											ppt->x,
 											ppt->y,
@@ -628,15 +644,15 @@ STDMETHODIMP IEView::ShowContextMenu(DWORD dwID, POINT *ppt, IUnknown *pcmdTarge
 	return S_OK;
 }
 STDMETHODIMP IEView::GetHostInfo(DOCHOSTUIINFO *pInfo) {
-	pInfo->dwFlags = DOCHOSTUIFLAG_NO3DBORDER;// | DOCHOSTUIFLAG_DISABLE_SCRIPT_INACTIVE;
+ 	pInfo->dwFlags = DOCHOSTUIFLAG_NO3DBORDER;// | DOCHOSTUIFLAG_DISABLE_SCRIPT_INACTIVE;
 	if (builder == NULL) {
 		pInfo->dwFlags |= DOCHOSTUIFLAG_DIALOG;
 	}
-	return S_OK;
+ 	return S_OK;
 }
 STDMETHODIMP IEView::ShowUI(DWORD dwID, IOleInPlaceActiveObject *pActiveObject, IOleCommandTarget *pCommandTarget,
 							IOleInPlaceFrame *pFrame, IOleInPlaceUIWindow *pDoc) {
-	return S_OK;
+ 	return S_OK;
 }
 
 STDMETHODIMP IEView::HideUI(void) {return S_OK;}
@@ -753,7 +769,7 @@ void IEView::setWindowPos(int x, int y, int cx, int cy) {
 	rcClient.top = y;
 	rcClient.right = cx;
 	rcClient.bottom = cy;//y + cy;
-	if (builder == NULL) {
+ 	if (builder == NULL) {
 		//scrollToTop();
 	} else {
 //		scrollToBottomSoft();
@@ -832,7 +848,7 @@ void IEView::scrollToBottom() {/*
 				variant.lVal = len-1;
 				if (SUCCEEDED(collection->item(variant, variant, &dispatch)) && (dispatch != NULL)) {
 					if (SUCCEEDED(dispatch->QueryInterface(IID_IHTMLElement,(void**)&element)) && (element != NULL)) {
-						variant.vt = VT_BOOL;
+ 						variant.vt = VT_BOOL;
 						variant.boolVal = VARIANT_FALSE;
 						if (SUCCEEDED(element->scrollIntoView(variant))) {
 							}

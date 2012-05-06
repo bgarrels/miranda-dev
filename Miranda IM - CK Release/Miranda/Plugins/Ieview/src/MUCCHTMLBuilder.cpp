@@ -1,7 +1,13 @@
 /*
+IEView Plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-IEView Plugin for Miranda IM
-Copyright (C) 2005-2012 Piotr Piastucki
+Author 
+			Copyright (C) 2005-2010  Piotr Piastucki
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -17,8 +23,19 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
+
 #include "MUCCHTMLBuilder.h"
+
 #include "Options.h"
 #include "Utils.h"
 
@@ -123,12 +140,12 @@ void MUCCHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 	if (protoSettings == NULL) {
 		return;
 	}
-	if (protoSettings->getChatMode() == Options::MODE_TEMPLATE) {
+ 	if (protoSettings->getChatMode() == Options::MODE_TEMPLATE) {
 //		buildHeadTemplate(view, event);
 		return;
 	}
-	if (protoSettings->getChatMode() == Options::MODE_CSS) {
-		const char *externalCSS = protoSettings->getChatCssFilename();
+ 	if (protoSettings->getChatMode() == Options::MODE_CSS) {
+	 	const char *externalCSS = protoSettings->getChatCssFilename();
 		Utils::appendText(&output, &outputSize, "<html><head><link rel=\"stylesheet\" href=\"%s\"/></head><body class=\"body\">\n", externalCSS);
 	} else {
 		HDC hdc = GetDC(NULL);
@@ -145,7 +162,7 @@ void MUCCHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 			protoSettings->getChatFlags() & Options::LOG_IMAGE_SCROLL ? "scroll" : "fixed", (int) bkgColor, protoSettings->getChatBackgroundFilename());
 		} else {
 			Utils::appendText(&output, &outputSize, ".body {margin: 0px; text-align: left; background-color: #%06X; overflow: auto;}\n",
-						(int) bkgColor);
+				 		(int) bkgColor);
 		}
 		Utils::appendText(&output, &outputSize, ".link {color: #0000FF; text-decoration: underline;}\n");
 		Utils::appendText(&output, &outputSize, ".img {vertical-align: middle;}\n");
@@ -162,7 +179,7 @@ void MUCCHTMLBuilder::buildHead(IEView *view, IEVIEWEVENT *event) {
 			Utils::appendText(&output, &outputSize, ".divUserLeft {padding-left: 2px; padding-right: 2px; word-wrap: break-word; background-color: #%06X;}\n", (int) inColor);
 			Utils::appendText(&output, &outputSize, ".divTopicChange {padding-left: 2px; padding-right: 2px; word-wrap: break-word; background-color: #%06X;}\n", (int) inColor);
 		}
-		for (int i = 0; i < FONT_NUM; i++) {
+	 	for (int i = 0; i < FONT_NUM; i++) {
 			loadMsgDlgFont(i, &lf, &color);
 			Utils::appendText(&output, &outputSize, "%s {font-family: %s; font-size: %dpt; font-weight: %s; color: #%06X; %s }\n",
 			classNames[i],

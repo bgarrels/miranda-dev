@@ -1,7 +1,13 @@
 /*
+IEView Plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
 
-IEView Plugin for Miranda IM
-Copyright (C) 2005-2012 Piotr Piastucki
+Author 
+			Copyright (C) 2005-2010  Piotr Piastucki
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -17,7 +23,17 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
+
 #include "TemplateHTMLBuilder.h"
 
 #include <io.h>
@@ -48,8 +64,8 @@ TemplateHTMLBuilder::~TemplateHTMLBuilder() {
 
 char *TemplateHTMLBuilder::getAvatar(HANDLE hContact, const char * szProto) {
 	DBVARIANT dbv;
-	char tmpPath[MAX_PATH];
-	char *result = NULL;
+	TCHAR tmpPath[MAX_PATH];
+	TCHAR *result = NULL;
 
 	if (Options::getAvatarServiceFlags() == Options::AVATARSERVICE_PRESENT) {
 		struct avatarCacheEntry *ace  = NULL;
@@ -59,41 +75,47 @@ char *TemplateHTMLBuilder::getAvatar(HANDLE hContact, const char * szProto) {
 			ace = (struct avatarCacheEntry *)CallService(MS_AV_GETAVATARBITMAP, (WPARAM)hContact, (LPARAM)0);
 		}
 		if (ace!=NULL) {
-			ace->szFilename[0] = 0;
-			//result = ace->szFilename;
+			if ( ace->cbSize == sizeof(avatarCacheEntry))
+				result = ace->szFilename;
+			else {
+				// compatibility: in M0.9 it will always be char*
+				#if defined( _UNICODE )
+					MultiByteToWideChar( CP_ACP, 0, (char*)ace->szFilename, -1, tmpPath, SIZEOF(tmpPath));
+				#endif
+			}
 		}
 	}
-	if (!DBGetContactSetting(hContact, "ContactPhoto", "File",&dbv)) {
-		if (strlen(dbv.pszVal) > 0) {
-			char* ext = strrchr(dbv.pszVal, '.');
-			if (ext && strcmpi(ext, ".xml") == 0) {
-				result = (char *)getFlashAvatar(dbv.pszVal, (hContact == NULL) ? 1 : 0);
+	if (!DBGetContactSettingTString(hContact, "ContactPhoto", "File", &dbv)) {
+		if (_tcslen(dbv.ptszVal) > 0) {
+			TCHAR* ext = _tcsrchr(dbv.ptszVal, '.');
+			if (ext && lstrcmpi(ext, _T(".xml")) == 0) {
+				result = ( TCHAR* )getFlashAvatar(dbv.ptszVal, (hContact == NULL) ? 1 : 0);
 			} else {
 				if (result == NULL) {
 					/* relative -> absolute */
-					strcpy (tmpPath, dbv.pszVal);
-					if (ServiceExists(MS_UTILS_PATHTOABSOLUTE)&& strncmp(tmpPath, "http://", 7)) {
-						CallService(MS_UTILS_PATHTOABSOLUTE, (WPARAM)dbv.pszVal, (LPARAM)tmpPath);
-					}
+					_tcscpy (tmpPath, dbv.ptszVal);
+					if (ServiceExists(MS_UTILS_PATHTOABSOLUTET) && _tcsncmp(tmpPath, _T("http://"), 7))
+						CallService(MS_UTILS_PATHTOABSOLUTET, (WPARAM)dbv.ptszVal, (LPARAM)tmpPath);
+
 					result = tmpPath;
 				}
 			}
 		}
 		DBFreeVariant(&dbv);
 	}
-	result = Utils::UTF8Encode(result);
-	Utils::convertPath(result);
-	return result;
+	char* res = Utils::UTF8Encode(result);
+	Utils::convertPath(res);
+	return res;
 }
 
-const char *TemplateHTMLBuilder::getFlashAvatar(const char *file, int index) {
+const char *TemplateHTMLBuilder::getFlashAvatar(const TCHAR *file, int index) {
 	if (time(NULL) - flashAvatarsTime[index] > 600 || flashAvatars[index] == NULL) {
 		if (flashAvatars[index] != NULL) {
 			delete flashAvatars[index];
 			flashAvatars[index] = NULL;
 		}
 		flashAvatarsTime[index] = time(NULL);
-		int src = _open(file, _O_BINARY | _O_RDONLY);
+		int src = _topen(file, _O_BINARY | _O_RDONLY);
 		if (src != -1) {
 			char pBuf[2048];
 			char *urlBuf;
@@ -161,10 +183,10 @@ void TemplateHTMLBuilder::buildHeadTemplate(IEView *view, IEVIEWEVENT *event, Pr
 	char *szProto = NULL;
 	char *szNameIn = NULL;
 	char *szNameOut = NULL;
-	char *szUINIn = NULL;
-	char *szUINOut = NULL;
 	char *szAvatarIn = NULL;
 	char *szAvatarOut = NULL;
+	char *szUINIn = NULL;
+	char *szUINOut = NULL;
 	char *szNickIn = NULL;
 	char *szNickOut = NULL;
 	char *szStatusMsg = NULL;
@@ -176,14 +198,12 @@ void TemplateHTMLBuilder::buildHeadTemplate(IEView *view, IEVIEWEVENT *event, Pr
 	szRealProto = getProto(hRealContact);
 	szProto = getProto(event->pszProto, event->hContact);
 	tempBase[0]='\0';
-	if (protoSettings == NULL) {
+	if (protoSettings == NULL)
 		return;
-	}
 
 	TemplateMap *tmpm = getTemplateMap(protoSettings);
-	if (tmpm==NULL) {
+	if (tmpm==NULL)
 		return;
-	}
 
 	strcpy(tempBase, "file://");
 	strcat(tempBase, tmpm->getFilename());
@@ -276,7 +296,7 @@ void TemplateHTMLBuilder::buildHeadTemplate(IEView *view, IEVIEWEVENT *event, Pr
 				case Token::NICKIN:
 					tokenVal = szNickIn;
 					break;
-				case Token::NICKOUT:
+ 				case Token::NICKOUT:
 					tokenVal = szNickOut;
 					break;
 			}
@@ -419,7 +439,7 @@ void TemplateHTMLBuilder::appendEventTemplate(IEView *view, IEVIEWEVENT *event, 
 			int isRTL = (eventData->dwFlags & IEEDF_RTL) && tmpm->isRTL();
 			int isHistory = (eventData->time < (DWORD)getStartedTime() && (eventData->dwFlags & IEEDF_READ || eventData->dwFlags & IEEDF_SENT));
 			int isGroupBreak = TRUE;
-			if ((getFlags(protoSettings) & Options::LOG_GROUP_MESSAGES) && eventData->dwFlags == LOWORD(getLastEventType())
+ 		  	if ((getFlags(protoSettings) & Options::LOG_GROUP_MESSAGES) && eventData->dwFlags == LOWORD(getLastEventType())
 			  && eventData->iType == IEED_EVENT_MESSAGE && HIWORD(getLastEventType()) == IEED_EVENT_MESSAGE
 			  && (isSameDate(eventData->time, getLastEventTime()))
 //			  && ((eventData->time < today) == (getLastEventTime() < today))
@@ -448,12 +468,12 @@ void TemplateHTMLBuilder::appendEventTemplate(IEView *view, IEVIEWEVENT *event, 
 			}
 			if (eventData->dwFlags & IEEDF_UNICODE_TEXT) {
 				szText = encodeUTF8(event->hContact, szRealProto, eventData->pszTextW, eventData->iType == IEED_EVENT_MESSAGE ? ENF_ALL : 0, isSent);
-			} else {
+   			} else {
 				szText = encodeUTF8(event->hContact, szRealProto, eventData->pszText, event->codepage, eventData->iType == IEED_EVENT_MESSAGE ? ENF_ALL : 0, isSent);
 			}
 			if (eventData->dwFlags & IEEDF_UNICODE_TEXT2) {
 				szFileDesc = encodeUTF8(event->hContact, szRealProto, eventData->pszText2W, 0, isSent);
-			} else {
+   			} else {
 				szFileDesc = encodeUTF8(event->hContact, szRealProto, eventData->pszText2, event->codepage, 0, isSent);
 			}
 			if ((eventData->iType == IEED_EVENT_MESSAGE)) {
@@ -529,13 +549,13 @@ void TemplateHTMLBuilder::appendEventTemplate(IEView *view, IEVIEWEVENT *event, 
 								tokenVal = "&nbsp;";
 							}
 							break;
-						case Token::TEXT:
+	  					case Token::TEXT:
 							tokenVal = szText;
 							break;
-						case Token::AVATAR:
+	  					case Token::AVATAR:
 							tokenVal = szAvatar;
 							break;
-						case Token::CID:
+	  					case Token::CID:
 							tokenVal = szCID;
 							break;
 						case Token::BASE:
@@ -587,7 +607,7 @@ void TemplateHTMLBuilder::appendEventTemplate(IEView *view, IEVIEWEVENT *event, 
 						case Token::NICKIN:
 							tokenVal = szNickIn;
 							break;
-						case Token::NICKOUT:
+		 				case Token::NICKOUT:
 							tokenVal = szNickOut;
 							break;
 						case Token::FILEDESC:

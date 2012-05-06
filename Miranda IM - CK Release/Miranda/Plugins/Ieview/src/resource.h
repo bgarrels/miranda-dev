@@ -1,6 +1,13 @@
 /*
-IEView Plugin for Miranda IM
-Copyright (C) 2005-2012 Piotr Piastucki
+IEView Plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Author 
+			Copyright (C) 2005-2010  Piotr Piastucki
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -15,6 +22,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
 */
 
 #define ID_MENU_COPY                    15
@@ -37,8 +54,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define IDC_ENABLE_PNGHACK              1007
 #define IDC_SMILEYS_IN_NAMES            1008
 #define IDC_NO_BORDER                   1009
-#define IDC_ENABLE_EMBED				1010
-#define IDC_EMBED_SIZE					1011
+#define IDC_ENABLE_EMBED		1010
+#define IDC_EMBED_SIZE			1011
 #define IDC_EXTERNALCSS                 1020
 #define IDC_EXTERNALCSS_FILENAME        1021
 #define IDC_BROWSE_EXTERNALCSS          1022
@@ -49,7 +66,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define IDC_BROWSE_TEMPLATES            1032
 #define IDC_TEMPLATES_FILENAME_RTL      1033
 #define IDC_BROWSE_TEMPLATES_RTL        1034
-#define IDC_SIMPLE                      1041
 #define IDC_LOG_SHOW_NICKNAMES          1043
 #define IDC_LOG_SHOW_TIME               1044
 #define IDC_LOG_SHOW_DATE               1045
@@ -77,7 +93,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define ID_MENU_CLEARLOG                40000
 
 // Next default values for new objects
-// 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        101
