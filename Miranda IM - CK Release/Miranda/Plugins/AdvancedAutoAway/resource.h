@@ -4,6 +4,7 @@ Miranda IM: the free IM client for Microsoft* Windows*
 
 Author 
 			Copyright (C) 2003-2012 P. Boon
+			Copyright (C) 2008-2012 George Hazan
 
 Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
