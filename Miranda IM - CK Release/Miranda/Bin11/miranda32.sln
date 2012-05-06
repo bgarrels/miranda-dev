@@ -304,8 +304,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{BC17
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cryptlib", "..\Plugins\CryptoPP\crypto\cryptlib_9.vcxproj", "{290C5ED4-71A7-4040-AD26-4820CF7A9E60}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cryptopp", "..\Plugins\CryptoPP\cryptopp_9.vcxproj", "{4AC1E062-0236-4E49-AA04-F732043D2DCF}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Smart Auto Replier (SAR)", "..\Plugins\SmartAutoReplier\SAR_11.vcxproj", "{C71749EF-EBA8-4317-9F9E-327E1A7366EC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6DB53D29-2EA9-407B-84F3-06E8031F3314} = {6DB53D29-2EA9-407B-84F3-06E8031F3314}
@@ -587,6 +585,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xstatus_ICQ", "..\Protocols\IcqOscarJ\icons_pack\ICQ_ICONS_11.vcxproj", "{A031E7AC-B073-8618-1544-5A411CE7C273}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Quotes", "..\Plugins\Quotes\Quotes_11.vcxproj", "{7DA44146-B1C7-4035-813E-DC20BF775D23}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cryptopp", "..\Plugins\CryptoPP\cryptopp_11.vcxproj", "{4AC1E062-0236-4E49-AA04-F732043D2DCF}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
