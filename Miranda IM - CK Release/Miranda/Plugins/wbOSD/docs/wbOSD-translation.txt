@@ -40,3 +40,4 @@ Plugins-included:
 ;[Text color]
 ;[Timeout (ms):]
 ;[Transparent]
+;[%s is %s]
