@@ -245,10 +245,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Docs\BasicHistory_langpack_polish.txt" />
-    <None Include="Docs\BasicHistory_licence.txt" />
-    <None Include="Docs\BasicHistory_readme.txt" />
     <None Include="Docs\BasicHistory_translate.txt" />
-    <None Include="Docs\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BinaryExport.h" />
@@ -290,6 +287,20 @@
   <ItemGroup>
     <ResourceCompile Include="BasicHistory.rc" />
     <ResourceCompile Include="version.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\FindNext.ico" />
+    <Image Include="icons\FindPrev.ico" />
+    <Image Include="icons\Incom.ico" />
+    <Image Include="icons\minus.ico" />
+    <Image Include="icons\mnode.ico" />
+    <Image Include="icons\Outg.ico" />
+    <Image Include="icons\plus.ico" />
+    <Image Include="icons\pnode.ico" />
+    <Image Include="icons\Status change.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

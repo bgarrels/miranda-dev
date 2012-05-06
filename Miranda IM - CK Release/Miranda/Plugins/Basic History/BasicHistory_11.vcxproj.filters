@@ -16,18 +16,12 @@
     <Filter Include="docs">
       <UniqueIdentifier>{a238fbb2-01da-446a-ab0b-6bc3324eb85a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{4ec88d20-37d0-4b3a-bfc8-6970189ac634}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Docs\ReadMe.txt">
-      <Filter>docs</Filter>
-    </None>
     <None Include="Docs\BasicHistory_langpack_polish.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="Docs\BasicHistory_licence.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="Docs\BasicHistory_readme.txt">
       <Filter>docs</Filter>
     </None>
     <None Include="Docs\BasicHistory_translate.txt">
@@ -144,5 +138,39 @@
     <ResourceCompile Include="BasicHistory.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\Readme.txt">
+      <Filter>docs</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\Status change.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\FindNext.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\FindPrev.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\Incom.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\minus.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\mnode.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\Outg.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\plus.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\pnode.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>
