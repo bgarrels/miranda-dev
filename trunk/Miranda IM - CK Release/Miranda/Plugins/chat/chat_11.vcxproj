@@ -437,10 +437,12 @@
     <None Include="Icons\underline.ico" />
     <None Include="Icons\window.ico" />
     <None Include="Docs\Chat_Readme.txt" />
-    <None Include="Docs\Chat_Translate.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\chat.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\Chat_translation.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
