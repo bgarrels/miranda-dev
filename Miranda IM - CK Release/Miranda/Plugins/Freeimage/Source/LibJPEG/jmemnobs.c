@@ -71,7 +71,7 @@ jpeg_free_large (j_common_ptr cinfo, void FAR * object, size_t sizeofobject)
 
 GLOBAL(long)
 jpeg_mem_available (j_common_ptr cinfo, long min_bytes_needed,
-		    long max_bytes_needed, long already_allocated)
+		    long max_bytes_needed, long already_mallocated)
 {
   return max_bytes_needed;
 }
