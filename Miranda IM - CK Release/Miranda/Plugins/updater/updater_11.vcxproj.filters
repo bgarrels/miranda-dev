@@ -22,11 +22,11 @@
     <Filter Include="minizip">
       <UniqueIdentifier>{bfe67567-27a6-495c-a026-4accb16a029d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="bzip2\Docs">
-      <UniqueIdentifier>{9fe50bec-f500-44db-9898-92fab75248ce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Docs">
       <UniqueIdentifier>{46c355ac-e108-4d97-b351-0a0f93a19bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\icons">
+      <UniqueIdentifier>{b09d6825-8aad-4abe-a275-2668bd15c70d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -110,9 +110,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="updater.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -176,25 +173,19 @@
     <ClInclude Include="bzip2-1.0.6\bzlib_private.h">
       <Filter>bzip2</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="icos\restart.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\icons</Filter>
     </None>
     <None Include="icos\u.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\icons</Filter>
     </None>
     <None Include="icos\ue.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bzip2-1.0.6\docs\LICENSE">
-      <Filter>bzip2\Docs</Filter>
-    </None>
-    <None Include="bzip2-1.0.6\docs\README.COMPILATION.PROBLEMS">
-      <Filter>bzip2\Docs</Filter>
-    </None>
-    <None Include="bzip2-1.0.6\docs\README">
-      <Filter>bzip2\Docs</Filter>
+      <Filter>Resource Files\icons</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -206,10 +197,16 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="bzip2-1.0.6\docs\bzip2.txt">
-      <Filter>bzip2\Docs</Filter>
+    <Text Include="docs\README.COMPILATION.PROBLEMS.txt">
+      <Filter>Docs</Filter>
     </Text>
-    <Text Include="Docs\licence_updater.txt">
+    <Text Include="docs\bzip_license.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\bzip2.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="docs\README  bzip2 and libzip2.txt">
       <Filter>Docs</Filter>
     </Text>
   </ItemGroup>
