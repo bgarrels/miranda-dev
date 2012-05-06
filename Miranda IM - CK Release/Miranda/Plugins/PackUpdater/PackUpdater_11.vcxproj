@@ -304,7 +304,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Docs\Langpack.txt" />
-    <None Include="Docs\Readme_eng.txt" />
     <None Include="Docs\Templates\Autoexec_PackUpdater.ini" />
     <None Include="Docs\Templates\File1.ini" />
     <None Include="Docs\ToDo.txt" />
@@ -312,6 +311,9 @@
     <None Include="res\btnOk.ico" />
     <None Include="res\delete.ico" />
     <None Include="res\menu.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
