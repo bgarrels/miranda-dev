@@ -88,7 +88,7 @@ EXTERN(void) jpeg_free_large JPP((j_common_ptr cinfo, void FAR * object,
  * jpeg_mem_available returns zero.  The maximum space needed, enough to hold
  * all working storage in memory, is also passed in case it is useful.
  * Finally, the total space already allocated is passed.  If no better
- * method is available, cinfo->mem->max_memory_to_use - already_allocated
+ * method is available, cinfo->mem->max_memory_to_use - already_mallocated
  * is often a suitable calculation.
  *
  * It is OK for jpeg_mem_available to underestimate the space available
@@ -103,7 +103,7 @@ EXTERN(void) jpeg_free_large JPP((j_common_ptr cinfo, void FAR * object,
 EXTERN(long) jpeg_mem_available JPP((j_common_ptr cinfo,
 				     long min_bytes_needed,
 				     long max_bytes_needed,
-				     long already_allocated));
+				     long already_mallocated));
 
 
 /*

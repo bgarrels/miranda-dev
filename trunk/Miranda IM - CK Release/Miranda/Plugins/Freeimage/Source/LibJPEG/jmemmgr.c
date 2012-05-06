@@ -129,7 +129,7 @@ typedef struct {
   jvirt_barray_ptr virt_barray_list;
 
   /* This counts total space obtained from jpeg_get_small/large */
-  long total_space_allocated;
+  long total_space_mallocated;
 
   /* alloc_sarray and alloc_barray set this value for use by virtual
    * array routines.
@@ -194,7 +194,7 @@ print_mem_stats (j_common_ptr cinfo, int pool_id)
    * This is helpful because message parm array can't handle longs.
    */
   fprintf(stderr, "Freeing pool %d, total space = %ld\n",
-	  pool_id, mem->total_space_allocated);
+	  pool_id, mem->total_space_mallocated);
 
   for (lhdr_ptr = mem->large_list[pool_id]; lhdr_ptr != NULL;
        lhdr_ptr = lhdr_ptr->hdr.next) {
@@ -303,7 +303,7 @@ alloc_small (j_common_ptr cinfo, int pool_id, size_t sizeofobject)
       if (slop < MIN_SLOP)	/* give up when it gets real small */
 	out_of_memory(cinfo, 2); /* jpeg_get_small failed */
     }
-    mem->total_space_allocated += min_request + slop;
+    mem->total_space_mallocated += min_request + slop;
     /* Success, initialize the new pool header and add to end of list */
     hdr_ptr->hdr.next = NULL;
     hdr_ptr->hdr.bytes_used = 0;
@@ -363,7 +363,7 @@ alloc_large (j_common_ptr cinfo, int pool_id, size_t sizeofobject)
 					    SIZEOF(large_pool_hdr));
   if (hdr_ptr == NULL)
     out_of_memory(cinfo, 4);	/* jpeg_get_large failed */
-  mem->total_space_allocated += sizeofobject + SIZEOF(large_pool_hdr);
+  mem->total_space_mallocated += sizeofobject + SIZEOF(large_pool_hdr);
 
   /* Success, initialize the new pool header and add to list */
   hdr_ptr->hdr.next = mem->large_list[pool_id];
@@ -617,7 +617,7 @@ realize_virt_arrays (j_common_ptr cinfo)
 
   /* Determine amount of memory to actually use; this is system-dependent. */
   avail_mem = jpeg_mem_available(cinfo, space_per_minheight, maximum_space,
-				 mem->total_space_allocated);
+				 mem->total_space_mallocated);
 
   /* If the maximum space needed is available, make all the buffers full
    * height; otherwise parcel it out with the same number of minheights
@@ -973,7 +973,7 @@ free_pool (j_common_ptr cinfo, int pool_id)
 		  lhdr_ptr->hdr.bytes_left +
 		  SIZEOF(large_pool_hdr);
     jpeg_free_large(cinfo, (void FAR *) lhdr_ptr, space_freed);
-    mem->total_space_allocated -= space_freed;
+    mem->total_space_mallocated -= space_freed;
     lhdr_ptr = next_lhdr_ptr;
   }
 
@@ -987,7 +987,7 @@ free_pool (j_common_ptr cinfo, int pool_id)
 		  shdr_ptr->hdr.bytes_left +
 		  SIZEOF(small_pool_hdr);
     jpeg_free_small(cinfo, (void *) shdr_ptr, space_freed);
-    mem->total_space_allocated -= space_freed;
+    mem->total_space_mallocated -= space_freed;
     shdr_ptr = next_shdr_ptr;
   }
 }
@@ -1089,7 +1089,7 @@ jinit_memory_mgr (j_common_ptr cinfo)
   mem->virt_sarray_list = NULL;
   mem->virt_barray_list = NULL;
 
-  mem->total_space_allocated = SIZEOF(my_memory_mgr);
+  mem->total_space_mallocated = SIZEOF(my_memory_mgr);
 
   /* Declare ourselves open for business */
   cinfo->mem = & mem->pub;

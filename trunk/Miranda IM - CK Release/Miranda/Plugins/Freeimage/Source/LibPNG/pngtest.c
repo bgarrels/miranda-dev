@@ -567,10 +567,10 @@ typedef struct memory_information
 typedef memory_information FAR *memory_infop;
 
 static memory_infop pinformation = NULL;
-static int current_allocation = 0;
-static int maximum_allocation = 0;
-static int total_allocation = 0;
-static int num_allocations = 0;
+static int current_mallocation = 0;
+static int maximum_mallocation = 0;
+static int total_mallocation = 0;
+static int num_mallocations = 0;
 
 png_voidp PNGCBAPI png_debug_malloc PNGARG((png_structp png_ptr,
     png_alloc_size_t size));
@@ -596,12 +596,12 @@ PNGCBAPI png_debug_malloc(png_structp png_ptr, png_alloc_size_t size)
       pinfo = (memory_infop)png_malloc(png_ptr,
          png_sizeof(*pinfo));
       pinfo->size = size;
-      current_allocation += size;
-      total_allocation += size;
-      num_allocations ++;
+      current_mallocation += size;
+      total_mallocation += size;
+      num_mallocations ++;
 
-      if (current_allocation > maximum_allocation)
-         maximum_allocation = current_allocation;
+      if (current_mallocation > maximum_mallocation)
+         maximum_mallocation = current_mallocation;
 
       pinfo->pointer = png_malloc(png_ptr, size);
       /* Restore malloc_fn and free_fn */
@@ -611,8 +611,8 @@ PNGCBAPI png_debug_malloc(png_structp png_ptr, png_alloc_size_t size)
 
       if (size != 0 && pinfo->pointer == NULL)
       {
-         current_allocation -= size;
-         total_allocation -= size;
+         current_mallocation -= size;
+         total_mallocation -= size;
          png_error(png_ptr,
            "out of memory in pngtest->png_debug_malloc");
       }
@@ -656,8 +656,8 @@ png_debug_free(png_structp png_ptr, png_voidp ptr)
          if (pinfo->pointer == ptr)
          {
             *ppinfo = pinfo->next;
-            current_allocation -= pinfo->size;
-            if (current_allocation < 0)
+            current_mallocation -= pinfo->size;
+            if (current_mallocation < 0)
                fprintf(STDERR, "Duplicate free of memory\n");
             /* We must free the list element too, but first kill
                the memory that is to be freed. */
@@ -1612,7 +1612,7 @@ main(int argc, char *argv[])
    {
       int i;
 #if defined(PNG_USER_MEM_SUPPORTED) && PNG_DEBUG
-      int allocation_now = current_allocation;
+      int allocation_now = current_mallocation;
 #endif
       for (i=2; i<argc; ++i)
       {
@@ -1650,16 +1650,16 @@ main(int argc, char *argv[])
             ierror += kerror;
          }
 #if defined(PNG_USER_MEM_SUPPORTED) && PNG_DEBUG
-         if (allocation_now != current_allocation)
+         if (allocation_now != current_mallocation)
             fprintf(STDERR, "MEMORY ERROR: %d bytes lost\n",
-               current_allocation - allocation_now);
+               current_mallocation - allocation_now);
 
-         if (current_allocation != 0)
+         if (current_mallocation != 0)
          {
             memory_infop pinfo = pinformation;
 
             fprintf(STDERR, "MEMORY ERROR: %d bytes still allocated\n",
-               current_allocation);
+               current_mallocation);
 
             while (pinfo != NULL)
             {
@@ -1673,13 +1673,13 @@ main(int argc, char *argv[])
       }
 #if defined(PNG_USER_MEM_SUPPORTED) && PNG_DEBUG
          fprintf(STDERR, " Current memory allocation: %10d bytes\n",
-            current_allocation);
+            current_mallocation);
          fprintf(STDERR, " Maximum memory allocation: %10d bytes\n",
-            maximum_allocation);
+            maximum_mallocation);
          fprintf(STDERR, " Total   memory allocation: %10d bytes\n",
-            total_allocation);
+            total_mallocation);
          fprintf(STDERR, "     Number of allocations: %10d\n",
-            num_allocations);
+            num_mallocations);
 #endif
    }
 
@@ -1690,7 +1690,7 @@ main(int argc, char *argv[])
       {
          int kerror;
 #if defined(PNG_USER_MEM_SUPPORTED) && PNG_DEBUG
-         int allocation_now = current_allocation;
+         int allocation_now = current_mallocation;
 #endif
          if (i == 1)
             status_dots_requested = 1;
@@ -1738,16 +1738,16 @@ main(int argc, char *argv[])
             ierror += kerror;
          }
 #if defined(PNG_USER_MEM_SUPPORTED) && PNG_DEBUG
-         if (allocation_now != current_allocation)
+         if (allocation_now != current_mallocation)
              fprintf(STDERR, "MEMORY ERROR: %d bytes lost\n",
-               current_allocation - allocation_now);
+               current_mallocation - allocation_now);
 
-         if (current_allocation != 0)
+         if (current_mallocation != 0)
          {
              memory_infop pinfo = pinformation;
 
              fprintf(STDERR, "MEMORY ERROR: %d bytes still allocated\n",
-                current_allocation);
+                current_mallocation);
 
              while (pinfo != NULL)
              {
@@ -1760,13 +1760,13 @@ main(int argc, char *argv[])
        }
 #if defined(PNG_USER_MEM_SUPPORTED) && PNG_DEBUG
        fprintf(STDERR, " Current memory allocation: %10d bytes\n",
-          current_allocation);
+          current_mallocation);
        fprintf(STDERR, " Maximum memory allocation: %10d bytes\n",
-          maximum_allocation);
+          maximum_mallocation);
        fprintf(STDERR, " Total   memory allocation: %10d bytes\n",
-          total_allocation);
+          total_mallocation);
        fprintf(STDERR, "     Number of allocations: %10d\n",
-            num_allocations);
+            num_mallocations);
 #endif
    }
 

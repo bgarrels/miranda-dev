@@ -527,11 +527,10 @@
     <None Include="docs\Todo.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="docs\license-fi.txt">
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\FreeImage Public License.txt">
       <Filter>docs</Filter>
-    </None>
-    <None Include="docs\license-gpl.txt">
-      <Filter>docs</Filter>
-    </None>
+    </Text>
   </ItemGroup>
 </Project>
