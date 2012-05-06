@@ -337,7 +337,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\Readme.txt" />
-    <None Include="docs\seen_info.txt" />
     <None Include="docs\seen_langpack.txt" />
   </ItemGroup>
   <ItemGroup>
