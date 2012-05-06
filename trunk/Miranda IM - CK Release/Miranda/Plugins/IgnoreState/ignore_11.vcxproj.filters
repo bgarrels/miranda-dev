@@ -36,7 +36,7 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
     <ResourceCompile Include="ignore.rc">
-      <Filter>Resource Files\Icons</Filter>
+      <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
