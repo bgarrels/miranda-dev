@@ -1,31 +1,57 @@
-/* eventhooker.h - Helper for hooking events in Miranda. 
-* Copyright (C) Miklashevsky Roman
-*
-* To hook event just write 
-*     MIRANDA_HOOK_EVENT('name of the event', wParam, lParam) { 'your code' }
-* Include following in your Load function
-*     miranda::EventHooker::HookAll();
-* And following in your Unload function
-*     miranda::EventHooker::UnhookAll();
-* That's all
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 2
-* of the License, or (at your option) any later version.
-* 
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* 
-* You should have received a copy of the GNU General Public License
-* along with this program; if not, write to the Free Software
-* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
-
 #ifndef EVENTHOOKER_H_C8EAA58A_7C4D_45f7_A88E_0E41FE93754D
 #define EVENTHOOKER_H_C8EAA58A_7C4D_45f7_A88E_0E41FE93754D
+
+/*
+StopSpam+ plugin for
+Miranda IM: the free IM client for Microsoft* Windows*
+
+Authors
+            Copyright (C) 2004-2011 Roman Miklashevsky
+                                    A. Petkevich
+                                    Kosh&chka
+                                    persei
+
+
+Copyright 2000-2012 Miranda IM project,
+all portions of this codebase are copyrighted to the people
+listed in contributors.txt.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+===============================================================================
+
+File name      : $HeadURL: 
+Revision       : $Revision: 
+Last change on : $Date: 
+Last change by : $Author:
+$Id$		   : $Id$:
+
+===============================================================================
+
+* eventhooker.h - Helper for hooking events in Miranda. Copyright (C) Miklashevsky Roman
+
+
+* To hook event just write 
+* MIRANDA_HOOK_EVENT('name of the event', wParam, lParam) { 'your code' }
+
+* Include following in your Load function
+* miranda::EventHooker::HookAll();
+
+* And following in your Unload function
+* miranda::EventHooker::UnhookAll();
+*/
 
 #pragma warning( once : 4430 )
 
