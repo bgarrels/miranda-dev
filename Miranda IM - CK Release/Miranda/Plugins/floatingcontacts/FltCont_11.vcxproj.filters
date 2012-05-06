@@ -16,6 +16,9 @@
     <Filter Include="docs">
       <UniqueIdentifier>{5053f2b0-c799-43ae-ac4a-ca14c2628fe5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{f00949b8-ddc3-41b7-b0dc-71dee90946d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\bitmap_funcs.cpp">
@@ -44,9 +47,6 @@
     <ClInclude Include="fltcont.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\stdhdr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -55,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="version.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -69,23 +72,28 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\fltcontacts_readme.txt">
+    <Text Include="docs\fltcontacts_russian_langpack.txt">
       <Filter>docs</Filter>
-    </None>
-    <None Include="docs\fltcontacts_russian_langpack.txt">
+    </Text>
+    <Text Include="docs\Readme.txt">
       <Filter>docs</Filter>
-    </None>
-    <None Include="docs\fltcontacts_langpack.txt">
+    </Text>
+    <Text Include="docs\fltcontacts_langpack.txt">
       <Filter>docs</Filter>
-    </None>
-    <None Include="docs\Readme.txt">
-      <Filter>docs</Filter>
-    </None>
-    <None Include="icons\show.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="icons\hide.ico">
-      <Filter>Resource Files</Filter>
-    </None>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\show.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\hide.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\icon1.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="icons\icon2.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>

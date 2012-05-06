@@ -314,12 +314,15 @@
     <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\fltcontacts_langpack.txt" />
-    <None Include="docs\fltcontacts_readme.txt" />
-    <None Include="docs\fltcontacts_russian_langpack.txt" />
-    <None Include="docs\Readme.txt" />
-    <None Include="icons\hide.ico" />
-    <None Include="icons\show.ico" />
+    <Text Include="docs\fltcontacts_langpack.txt" />
+    <Text Include="docs\fltcontacts_russian_langpack.txt" />
+    <Text Include="docs\Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icons\hide.ico" />
+    <Image Include="icons\icon1.ico" />
+    <Image Include="icons\icon2.ico" />
+    <Image Include="icons\show.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
