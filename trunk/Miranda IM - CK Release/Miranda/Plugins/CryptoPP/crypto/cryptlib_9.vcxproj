@@ -906,24 +906,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="adhoc.cpp.proto">
-      <Command Condition="'$(Configuration)|$(Platform)'=='DLL-Import Debug|Win32'">if not exist adhoc.cpp copy "%(FullPath)" adhoc.cpp
-echo: &gt;&gt; adhoc.cpp.copied
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='DLL-Import Debug|Win32'">adhoc.cpp.copied;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='DLL-Import Release|Win32'">if not exist adhoc.cpp copy "%(FullPath)" adhoc.cpp
-echo: &gt;&gt; adhoc.cpp.copied
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='DLL-Import Release|Win32'">adhoc.cpp.copied;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">if not exist adhoc.cpp copy "%(FullPath)" adhoc.cpp
-echo: &gt;&gt; adhoc.cpp.copied
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">adhoc.cpp.copied;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">if not exist adhoc.cpp copy "%(FullPath)" adhoc.cpp
-echo: &gt;&gt; adhoc.cpp.copied
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">adhoc.cpp.copied;%(Outputs)</Outputs>
-    </CustomBuild>
     <None Include="Doxyfile" />
     <None Include="GNUmakefile" />
     <None Include="license.txt" />

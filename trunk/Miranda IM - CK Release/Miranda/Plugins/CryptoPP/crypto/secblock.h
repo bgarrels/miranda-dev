@@ -199,15 +199,15 @@ class FixedSizeAllocatorWithCleanup : public AllocatorBase<T>
 public:
 	CRYPTOPP_INHERIT_ALLOCATOR_TYPES
 
-	FixedSizeAllocatorWithCleanup() : m_allocated(false) {}
+	FixedSizeAllocatorWithCleanup() : m_mallocated(false) {}
 
 	pointer allocate(size_type n)
 	{
 		assert(IsAlignedOn(m_array, 8));
 
-		if (n <= S && !m_allocated)
+		if (n <= S && !m_mallocated)
 		{
-			m_allocated = true;
+			m_mallocated = true;
 			return GetAlignedArray();
 		}
 		else
@@ -216,9 +216,9 @@ public:
 
 	pointer allocate(size_type n, const void *hint)
 	{
-		if (n <= S && !m_allocated)
+		if (n <= S && !m_mallocated)
 		{
-			m_allocated = true;
+			m_mallocated = true;
 			return GetAlignedArray();
 		}
 		else
@@ -230,8 +230,8 @@ public:
 		if (p == GetAlignedArray())
 		{
 			assert(n <= S);
-			assert(m_allocated);
-			m_allocated = false;
+			assert(m_mallocated);
+			m_mallocated = false;
 			memset(p, 0, n*sizeof(T));
 		}
 		else
@@ -266,7 +266,7 @@ private:
 	CRYPTOPP_ALIGN_DATA(8) T m_array[T_Align16 ? S+8/sizeof(T) : S];
 #endif
 	A m_fallbackAllocator;
-	bool m_allocated;
+	bool m_mallocated;
 };
 
 //! a block of memory allocated using A
