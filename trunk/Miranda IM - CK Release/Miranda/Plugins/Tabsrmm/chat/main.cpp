@@ -51,7 +51,6 @@ char		*pszActiveWndModule = 0;
 /*
  * load the group chat module
  */
-
 int Chat_Load(PLUGINLINK *link)
 {
 	if(M->GetByte("forceDisableMUC", 0)) {

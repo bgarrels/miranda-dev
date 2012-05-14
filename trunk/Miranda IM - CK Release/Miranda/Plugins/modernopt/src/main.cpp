@@ -57,7 +57,7 @@ PLUGININFOEX pluginInfoEx = {
 	"Support for new options design.",
 	"Victor Pavlychko, George Hazan",
 	"ghazan@miranda-im.org",
-	"© 2009 Victor Pavlychko, George Hazan",
+	"© 2009-2012 Victor Pavlychko, George Hazan",
 	"http://www.miranda-im.org",
 	UNICODE_AWARE,
 	0,
