@@ -75,11 +75,6 @@ static INT_PTR GetCachedAvatar(WPARAM wParam, LPARAM lParam);
 TCHAR * GetCachedAvatar(char *proto, TCHAR *hash);
 BOOL CreateShortcut(TCHAR *file, TCHAR *shortcut);
 
-#ifdef DBGPOPUPS
-#define ShowDebugPopup ShowPopup
-#else
-#define ShowDebugPopup 
-#endif
 
 
 PLUGININFOEX pluginInfo={
@@ -88,12 +83,14 @@ PLUGININFOEX pluginInfo={
 	"Avatar History (x64)",
 #elif _UNICODE
 	"Avatar History (Unicode)",
+#else
+	"Avatar History (Ansi)",
 #endif
 	PLUGIN_MAKE_VERSION(0,0,3,1),
 	"This plugin keeps backups of all your contacts' avatar changes and/or shows popups",
 	"Matthew Wild (MattJ), Ricardo Pescuma Domenecci",
 	"mwild1@gmail.com",
-	"© 2006-2012 Matthew Wild, Ricardo Pescuma Domenecci",
+	"Â© 2006-2012 Matthew Wild, Ricardo Pescuma Domenecci",
 	"http://pescuma.org/miranda/avatarhist",
 	UNICODE_AWARE,
 	0,		//doesn't replace anything built-in
@@ -521,8 +518,8 @@ static int AvatarChanged(WPARAM wParam, LPARAM lParam)
 		// Is a flash avatar or avs could not load it
 		DBWriteContactSettingTString(hContact, MODULE_NAME, "AvatarHash", _T("-"));
 
-		if (ContactEnabled(hContact, "AvatarPopups", AVH_DEF_AVPOPUPS) && opts.popup_show_changed)
-			ShowPopup(hContact, NULL, opts.popup_changed);
+		if (ContactEnabled(hContact, "AvatarPopups", AVH_DEF_AVPOPUPS) && opts.popup_show_removed)
+			ShowPopup(hContact, NULL, opts.popup_removed);
 
 		if (ContactEnabled(hContact, "LogToHistory", AVH_DEF_LOGTOHISTORY))
 			HistoryEvents_AddToHistorySimple(hContact, EVENTTYPE_AVATAR_CHANGE, 1, DBEF_READ);

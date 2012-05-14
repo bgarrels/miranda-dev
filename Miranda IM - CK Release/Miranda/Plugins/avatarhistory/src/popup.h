@@ -36,6 +36,7 @@ void DeInitPopups();
 
 // Show an popup
 void ShowPopup(HANDLE hContact, const TCHAR *title, const TCHAR *description);
+void ShowDebugPopup(HANDLE hContact, const TCHAR *title, const TCHAR *description);
 
 // Show an test
 void ShowTestPopup(HANDLE hContact,const TCHAR *title, const TCHAR *description, const Options *op);

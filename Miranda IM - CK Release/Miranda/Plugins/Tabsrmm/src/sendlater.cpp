@@ -6,7 +6,7 @@ Copyright 2000-2012 Miranda IM project,
 all portions of this codebase are copyrighted to the people
 listed in contributors.txt.
 
-Author Silvercircle
+Authors Silvercircle, Protogenes
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@ Last change by : $Author:
 
 ===============================================================================
  
- * The sendlater class implementation
+ * Send later dialog
  */
 
 #include "commonheaders.h"
@@ -182,7 +182,7 @@ CSendLater::CSendLater()
 {
 	m_sendLaterContactList.clear();
 	m_sendLaterJobList.clear();
-	m_fAvail = M->GetByte("sendLaterAvail", 1) ? true : false;
+	m_fAvail = M->GetByte("sendLaterAvail", 0) ? true : false;
 	m_last_sendlater_processed = time(0);
 	m_hwndDlg = 0;
 	m_fIsInteractive = false;
@@ -819,8 +819,9 @@ INT_PTR CALLBACK CSendLater::DlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
 					case NM_RCLICK: {
 						HMENU hMenu = ::LoadMenu(g_hInst, MAKEINTRESOURCE(IDR_TABCONTEXT));
 						HMENU hSubMenu = ::GetSubMenu(hMenu, 13);
-						POINT pt;
+						::TranslateMenu(hSubMenu);
 
+						POINT pt;
 						::GetCursorPos(&pt);
 						/*
 						 * copy to clipboard only allowed with a single selection

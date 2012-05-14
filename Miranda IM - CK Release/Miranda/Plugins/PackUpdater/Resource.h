@@ -2,7 +2,7 @@
 PackUpdater plugin for 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Author
+Authors
 			Copyright (C)	2010-2012 Mataes
 							2007 ZERO_BiT
 
@@ -79,6 +79,12 @@ $Id$		   : $Id$:
 #define IDC_PROGR_DLG2                  1032
 #define IDC_NOTIFY2                     1033
 #define IDC_NOTIFY                      1034
+#define IDC_UPDATEONSTARTUP             1035
+#define IDC_ONLYONCEADAY                1036
+#define IDC_UPDATEONPERIOD              1037
+#define IDC_PERIOD                      1038
+#define IDC_PERIODSPIN                  1039
+#define IDC_PERIODMEASURE               1040
 #define IDC_MSG_BOXES                   40071
 #define IDC_ERRORS                      40072
 #define IDC_INFO_MESSAGES               40073
@@ -93,12 +99,11 @@ $Id$		   : $Id$:
 #define IDC_PROGR_DLG_BG                42074
 
 // Next default values for new objects
-// 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        110
 #define _APS_NEXT_COMMAND_VALUE         40075
-#define _APS_NEXT_CONTROL_VALUE         1035
+#define _APS_NEXT_CONTROL_VALUE         1041
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

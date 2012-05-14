@@ -2,7 +2,7 @@
 PackUpdater plugin for 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Author
+Authors
 			Copyright (C)	2010-2012 Mataes
 							2007 ZERO_BiT
 
@@ -37,8 +37,8 @@ $Id$		   : $Id$:
 
 #define __MAJOR_VERSION				0
 #define __MINOR_VERSION				0
-#define __RELEASE_NUM				0
-#define __BUILD_NUM					9
+#define __RELEASE_NUM				1
+#define __BUILD_NUM					1
 
 #define __FILEVERSION_STRING		__MAJOR_VERSION,__MINOR_VERSION,__RELEASE_NUM,__BUILD_NUM
 #define __FILEVERSION_DOTS			__MAJOR_VERSION.__MINOR_VERSION.__RELEASE_NUM.__BUILD_NUM
@@ -53,8 +53,7 @@ $Id$		   : $Id$:
 #else
 	#define __PLUGIN_NAME "PackUpdater (Unicode)"
 #endif
-#else
-	#define __PLUGIN_NAME "PackUpdater"
+
 #endif
 #define __INTERNAL_NAME				"PackUpdater"
 #define __FILENAME					"PackUpdater.dll"
@@ -62,4 +61,4 @@ $Id$		   : $Id$:
 #define __AUTHOR					"Mataes, ZERO_BiT"
 #define __AUTHOREMAIL				"mataes2007@gmail.com, zero-bit@mail.ru"
 #define __AUTHORWEB					"http://mataes.googlecode.com/svn/Miranda/Plugins/PackUpdater/"
-#define __COPYRIGHT					"© 2010-2012 Mataes, 2007 ZERO_BiT"
+#define __COPYRIGHT					"© 2011-2012 Mataes, 2007 ZERO_BiT"

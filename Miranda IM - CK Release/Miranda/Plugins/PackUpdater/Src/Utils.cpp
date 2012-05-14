@@ -2,7 +2,7 @@
 PackUpdater plugin for 
 Miranda IM: the free IM client for Microsoft* Windows*
 
-Author
+Authors
 			Copyright (C)	2010-2012 Mataes
 							2007 ZERO_BiT
 
@@ -41,6 +41,8 @@ vector<FILEINFO> Files;
 BOOL DlgDld;
 INT FileCount = 0, CurrentFile = 0, Number = 0;
 BYTE Reminder, AutoUpdate;
+BYTE UpdateOnStartup, UpdateOnPeriod, OnlyOnceADay, PeriodMeasure;
+INT Period;
 TCHAR tszDialogMsg[2048] = {0};
 FILEINFO* pFileInfo = NULL;
 FILEURL* pFileUrl = NULL;
@@ -130,7 +132,11 @@ VOID LoadOptions()
 	MyOptions.LeftClickAction= DBGetContactSettingByte(NULL, MODNAME, "LeftClickAction", DEFAULT_POPUP_LCLICK);
 	MyOptions.RightClickAction = DBGetContactSettingByte(NULL, MODNAME, "RightClickAction", DEFAULT_POPUP_RCLICK);
 	MyOptions.Timeout = DBGetContactSettingDword(NULL, MODNAME, "Timeout", DEFAULT_TIMEOUT_VALUE);
-	AutoUpdate = DBGetContactSettingByte(NULL, MODNAME, "AutoUpdate", DEFAULT_AUTOUPDATE);
+	UpdateOnStartup = DBGetContactSettingByte(NULL, MODNAME, "UpdateOnStartup", DEFAULT_UPDATEONSTARTUP);
+	OnlyOnceADay = DBGetContactSettingByte(NULL, MODNAME, "OnlyOnceADay", DEFAULT_ONLYONCEADAY);
+	UpdateOnPeriod = DBGetContactSettingByte(NULL, MODNAME, "UpdateOnPeriod", DEFAULT_UPDATEONPERIOD);
+	Period = DBGetContactSettingDword(NULL, MODNAME, "Period", DEFAULT_PERIOD);
+	PeriodMeasure = DBGetContactSettingByte(NULL, MODNAME, "PeriodMeasure", DEFAULT_PERIODMEASURE);
 	Reminder = DBGetContactSettingByte(NULL, MODNAME, "Reminder", DEFAULT_REMINDER);
 	FileCount = DBGetContactSettingDword(NULL, MODNAME, "FileCount", DEFAULT_FILECOUNT);
 }
@@ -194,12 +200,12 @@ VOID __stdcall RestartMe(void*)
 
 BOOL Exists(LPCTSTR strName)
 {   
-	return GetFileAttributes(strName) != INVALID_FILE_ATTRIBUTES;   
+    return GetFileAttributes(strName) != INVALID_FILE_ATTRIBUTES;   
 }
 
 BOOL IsPluginDisabled(TCHAR* filename)
 {
-	char* fname = mir_t2a(filename);
+    char* fname = mir_t2a(filename);
 	int res = DBGetContactSettingByte(NULL, "PluginDisable", fname, 0);
 	mir_free(fname);
 	return res;
@@ -221,7 +227,7 @@ static void CheckUpdates(void *)
 	vector<FILEINFO> UpdateFiles;
 
 	if(!Exists(tszRoot))
-		CreateDirectory(tszRoot, NULL);
+        CreateDirectory(tszRoot, NULL);
 	Files.clear();
 	Reminder = DBGetContactSettingByte(NULL, MODNAME, "Reminder", DEFAULT_REMINDER);
 	FileCount = DBGetContactSettingDword(NULL, MODNAME, "FileCount", DEFAULT_FILECOUNT);
@@ -309,8 +315,8 @@ static void CheckUpdates(void *)
 		} // end check update name
 		lstrcpyn(Files[CurrentFile].File.tszDiskPath, tszBuff, SIZEOF(Files[CurrentFile].File.tszDiskPath));
 		GetPrivateProfileString(tszFileInfo, _T("InfoURL"), _T(""), Files[CurrentFile].tszInfoURL, SIZEOF(Files[CurrentFile].tszInfoURL), tszTmpIni);
-		GetPrivateProfileString(tszFileInfo, _T("FileType"), _T(""), tszBuff, SIZEOF(tszBuff), tszTmpIni);
-		Files[CurrentFile].FileType = _tstoi(tszBuff);
+		Files[CurrentFile].FileType = GetPrivateProfileInt(tszFileInfo, _T("FileType"), 0, tszTmpIni);
+		Files[CurrentFile].Force = GetPrivateProfileInt(tszFileInfo, _T("Force"), 0, tszTmpIni);
 		Files[CurrentFile].FileNum = CurrentFile+1;
 
 		if (Files[CurrentFile].FileType == 2)
@@ -339,7 +345,46 @@ static void CheckUpdates(void *)
 			} // user have not admin's rights
 			else
 			{
-				UpdateFiles.push_back(Files[CurrentFile]);
+				//добавить проверку на существование файла
+				TCHAR tszFilePathDest[MAX_PATH] = {0};
+				TCHAR* tszUtilRootPlug = NULL; 
+				TCHAR* tszUtilRootIco = NULL;
+				TCHAR* tszUtilRoot = NULL;
+						
+				switch (Files[CurrentFile].FileType)
+				{
+					case 0:
+					case 1:
+						break;
+					case 2:
+						tszUtilRootPlug = Utils_ReplaceVarsT(_T("%miranda_path%\\Plugins"));
+						if (lstrcmp(Files[CurrentFile].tszAdvFolder, _T("")) == 0)
+							mir_sntprintf(tszFilePathDest, SIZEOF(tszFilePathDest), _T("%s\\%s"), tszUtilRootPlug, Files[CurrentFile].File.tszDiskPath);
+						else
+							mir_sntprintf(tszFilePathDest, SIZEOF(tszFilePathDest), _T("%s\\%s\\%s"), tszUtilRootPlug, Files[CurrentFile].tszAdvFolder, Files[CurrentFile].File.tszDiskPath);
+						mir_free(tszUtilRootPlug);
+						break;
+					case 3:
+						tszUtilRootIco = Utils_ReplaceVarsT(_T("%miranda_path%\\Icons"));
+						if (lstrcmp(Files[CurrentFile].tszAdvFolder, _T("")) == 0)
+							mir_sntprintf(tszFilePathDest, SIZEOF(tszFilePathDest), _T("%s\\%s"), tszUtilRootIco, Files[CurrentFile].File.tszDiskPath);
+						else
+							mir_sntprintf(tszFilePathDest, SIZEOF(tszFilePathDest), _T("%s\\%s\\%s"), tszUtilRootIco, Files[CurrentFile].tszAdvFolder, Files[CurrentFile].File.tszDiskPath);
+						mir_free(tszUtilRootIco);
+						break;
+					case 4:
+					case 5:
+						tszUtilRoot = Utils_ReplaceVarsT(_T("%miranda_path%"));
+						if (lstrcmp(Files[CurrentFile].tszAdvFolder, _T("")) == 0)
+							mir_sntprintf(tszFilePathDest, SIZEOF(tszFilePathDest), _T("%s\\%s"), tszUtilRoot, Files[CurrentFile].File.tszDiskPath);
+						else
+							mir_sntprintf(tszFilePathDest, SIZEOF(tszFilePathDest), _T("%s\\%s\\%s"), tszUtilRoot, Files[CurrentFile].tszAdvFolder, Files[CurrentFile].File.tszDiskPath);
+						mir_free(tszUtilRoot);
+						break;
+				}//end* switch (Files[CurrentFile].FileType)
+
+				if (Files[CurrentFile].Force || Exists(tszFilePathDest))
+					UpdateFiles.push_back(Files[CurrentFile]);
 				// Save last version
 				lstrcpyn(Files[CurrentFile].tszLastVer, Files[CurrentFile].tszNewVer, SIZEOF(Files[CurrentFile].tszLastVer));
 				mir_snprintf(szKey, SIZEOF(szKey), "File_%d_LastVersion", CurrentFile + 1);
@@ -403,5 +448,61 @@ void DoCheck(int iFlag, int iFlag2)
 	else if (iFlag)
 	{
 		CheckThread = mir_forkthread(CheckUpdates, 0);
+		DBWriteContactSettingDword(NULL, MODNAME, "LastUpdate", time(NULL));
+	}
+}
+
+BOOL AllowUpdateOnStartup()
+{
+	if(OnlyOnceADay)
+	{
+		time_t now = time(NULL);
+		time_t was = DBGetContactSettingDword(NULL, MODNAME, "LastUpdate", 0);
+
+		if((now - was) < 86400) 
+			return FALSE;
+	}
+	return TRUE;
+}
+
+LONG PeriodToMilliseconds(const INT period, BYTE& periodMeasure)
+{
+	LONG result = period * 1000;
+	switch(periodMeasure)
+	{
+		case 1:
+			// day
+			result *= 60 * 60 * 24;
+			break;
+
+		default:
+			// hour
+			if(periodMeasure != 0) 
+				periodMeasure = 0;
+			result *= 60 * 60;
+			break;
+	}
+	return result;
+}
+
+VOID CALLBACK TimerAPCProc(LPVOID lpArg, DWORD dwTimerLowValue, DWORD dwTimerHighValue)
+{
+	DoCheck(1, (int)CheckThread);
+}
+
+VOID InitTimer()
+{
+	CancelWaitableTimer(Timer);  
+	if(UpdateOnPeriod)
+	{
+		LONG interval = PeriodToMilliseconds(Period, PeriodMeasure);
+
+		_int64 qwDueTime = -10000i64 * interval;
+
+		LARGE_INTEGER li = {0};
+		li.LowPart  = (DWORD) ( qwDueTime & 0xFFFFFFFF );
+		li.HighPart = (LONG)  ( qwDueTime >> 32 );
+
+		SetWaitableTimer(Timer, &li, interval, TimerAPCProc, NULL, 0);
 	}
 }

@@ -549,11 +549,11 @@ KN_FP_MASK def_kn_fp_mask[] =
 //###################################################### Mail.Ru clients ##################################################################
 //#########################################################################################################################################
 	{ "client_MailRu_official",			_T("|magent*|Mail.ru Agent*official*|Mail.ru Agent*PC*")
-										_T("|http://agent.mail.ru*"),								_T("Mail.Ru Agent (official client)"),	_T("ClientIcons_MRA"),	IDI_MAIL_RU_OFFICIAL, 14 },
+										_T("|http://agent.mail.ru*"),								_T("Mail.Ru Agent (official client)"),	_T("ClientIcons_MRA"),	IDI_MAIL_RU_OFFICIAL, MRA_CASE },
 	{ "client_MailRu_Mobile",			_T("|wmagent*|MobileAgent*|sagent*|Mail.ru Agent*Symbian*")										
-										_T("|jagent*"),												_T("Mail.Ru Mobile Agent"),				_T("ClientIcons_MRA"),	IDI_MAIL_RU_MOBILE, 14 },
-	{ "client_MailRu_web_official",		_T("Web Agent*"),											_T("Mail.Ru Web Agent"),				_T("ClientIcons_MRA"),	IDI_MAIL_RU_WEBAGENT, 14 },
-	{ "client_MailRu_unknown",			_T("Mail.ru Agent*"),										_T("Mail.Ru (unknown client)"),			_T("ClientIcons_MRA"),	IDI_MAIL_RU_UNKNOWN, 14 },
+										_T("|jagent*"),												_T("Mail.Ru Mobile Agent"),				_T("ClientIcons_MRA"),	IDI_MAIL_RU_MOBILE, MRA_CASE },
+	{ "client_MailRu_web_official",		_T("Web Agent*"),											_T("Mail.Ru Web Agent"),				_T("ClientIcons_MRA"),	IDI_MAIL_RU_WEBAGENT, MRA_CASE },
+	{ "client_MailRu_unknown",			_T("Mail.ru Agent*"),										_T("Mail.Ru (unknown client)"),			_T("ClientIcons_MRA"),	IDI_MAIL_RU_UNKNOWN, MRA_CASE },
 
 //#########################################################################################################################################
 //####################################################### Skype clients ###################################################################
