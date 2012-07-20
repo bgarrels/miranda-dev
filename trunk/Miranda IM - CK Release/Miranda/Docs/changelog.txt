@@ -3,7 +3,7 @@
 					www.miranda-im.org
 
 * New in 0.10.0
-      Bugfixes:
+    Bugfixes:
     – Fixed rare crash
     – AIM: Fixed memory leaks
     – AIM: Fixed chat invitation messages
@@ -19,9 +19,9 @@
     – MSN: Added Windows Phone detection
     – Yahoo: Added conference support
 
-	
+
 * New in v0.10.0 Beta #1	
-	  Bugfixes:
+	Bugfixes:
     – Fixed rare crash
     – AIM: Fixed memory leaks
     – AIM: Fixed chat invitation messages
@@ -36,6 +36,7 @@
     – Jabber: Re-designed resource selection logic to comply with RFC
     – MSN: Added Windows Phone detection
     – Yahoo: Added conference support
+
 	
 * New in 0.10.0 Alpha Build #6
      - Redesigned Jabber resource selection logic to comply with RFC
@@ -52,10 +53,36 @@
      - Fixed Crash with Association Manager
      - Fixed Yahoo Create Conference menu item
 
+
 * New in 0.9.52
     Bugfixes:
     – Fixed minor avatar issues
     – Fixed issues with avatars in Clist Nicer
+
+
+* New in 0.10.0 Alpha Build #4
+	Bugfixes:
+	- Fixed random crashes on exit
+    - Yahoo: Added conferences (multi-user chat) support
+    - AIM: Fixed memory leaks
+    - AIM: Fixed chat invitation messages
+    - MSN: Improved P2P connectivity
+
+
+* New in 0.10.0 Alpha Build #3
+	- Unicode support for the avatars’ paths;
+	- upgrade of zlib & FreeImage;
+	- bunch of fixes & improvements from the stable version.
+
+	
+* New in 0.10.0 Alpha Build #2	
+	- new feature in the language packs: plugin’s specific translations;
+	- merge of the whole bunch of fixed added to the stable version;
+	- minor improvements for Jabber & ICQ protocols
+
+
+* New in 0.10.0 Alpha Build #1
+	- Ok, the next development cycle started. 0.10.0.1 incorporates all bugfixes committed into the trunk since the 0.9.x release.
 
 
 * New in 0.9.51
