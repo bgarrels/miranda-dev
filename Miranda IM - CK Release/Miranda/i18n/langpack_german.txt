@@ -1,13 +1,15 @@
 Miranda Language Pack Version 1
 Language: German (DE)
 Locale: 0407
-Last-Modified-Using: Miranda IM 0.10.0 alpha build #3
+Last-Modified-Using: Miranda IM 0.10.0
 Authors: miranda-im.de Projekt Sprachdatei - diverse Autoren
 ; Deutsche Miranda IM Webseite: http://miranda-im.de
 ; License: Creative Commons 3.0 (Attribution-Noncommercial-Share Alike)
 
-X-Langpack-creation-date: 06 May 2012 18:05:15
-; FLID: Deutsche Sprachdatei 0.12.05.06
+X-Langpack-creation-date: 21 Jul 2012 16:07:17
+; FLID: Deutsche Sprachdatei 0.12.07.21
+Plugins included: Core,4x4x4,AIM,ActMan,ActMan_Hooks,AddContact,AdvancedAutoAway,Alarms,Alias,Anna_the_Alicebot,AsSingleWindow,Atomic,Attache,Authorization_State,AutoReplacer,AutoRespond,AutoShutdown,Autorun,Avatar_History,Avatar_service,BGSM,BNET_Messenger,Basic_History,Battleship,Behind_The_Edge,Birthday_reminder,Boltun,Bonsai,BossKey,Buddy_Expectator,C6,CList_Nicer,Call_Netmeeting,Camera_LED_Notify,ChangeKeyboardLayout,Chess4Net,ClientChangeNotify,ConnectionNotify,ContactVisibility,Contact_merge_plugin_cleaner,Contacts,ContactsMenuItemEx,Contacts_Rate,Contacts_Status_Notification,CopyIP,Country_Flags,Crash_Dumper,Custom_Status_List,Custom_User_Details,Custom_profile_folders,CycleAvatars,DBEditor,DBTool,DbExport,Dbx_mmap,Dbx_rw,Dbx_tree,Display_Control,Docking,Elizatalk,EmLanBackup,Emoticons,ExtApp,Extended_Idle_System,Extra_Icons_Service,FTP_File_YM,Facebook,Fast_Messages,Fetion,File_Association_Manager,Find_A_Message,Fingerprint_Mod,Fingerprint_Plus,FlashAvatars,Fltcontacts,GTalkExt,Gadu-Gadu,Gamer,GamerStatus_beta,Ghostify,Gmail_Multiple_Notifier,GnuPG,GoMoku,HDD_Info,HTTPServer,Help,History,HistoryStats,History_Events,History_Keeper,History_Linklist_Plus,History_Sweeper,History_Sweeper_Light,History_Viewer,HotContact,Hotkeys_Plus,HwHotKey,IAX,ICQCorp,ICQOscarJ,ICQOscarJ_(BM_Mod),ICQOscarJ_(Plus_Mod),ICQOscarJ_(S!N_Mod),ICQ_Status_Checker,IEView,IEView_History_Viewer,IM2SMS,IRC,IgnoreState,Import,ImportTXT,InetAccess,Invisible4Invisible,Jabber,KeepStatus,KexX,Keyboard_Notify_Ext,Kopfzeile,Language_Pack_Manager,Last_seen,ListeningTo,LogService,Log_Statistics,LotusNotify,MBirthday,MContacts,MDynDNS,MIMLocker,MIpper,MNetSend,MPhantomUser,MRA,MRadio,MSN,MSN_Account_Setup,MSecure,MTV,MToolTip,Magnetic_Windows,MathModule,MeBeam,MeSpeak,MenuItemEx,MessageNotify,MessagePopup,Message_Converter,Message_Export,Message_Notify,Messages_Total,Messages_Total_Notify,MetaContacts,MiOverlay,MicqBirthday,MirFox,MirOTR,MirOUT,MirPy_Scripting,MirandaComm,MirandaG15,MirandaQQ,Miranda_Image_services,Miranda_Juick_Plugin,Miranda_Scripting_Plugin_(mBot),Miranda_Secure_database_with_AutoBackups,Miranda_Text_Control,Modern_Contact_List_Layered,MultiWindow_Contact_List,Multiprotocol_contact_merge_plugin,MySpace,My_Details,NConvers,Name_Day,NetAccessNotify,NetConfig,NewEventNotify,NewStatusNotify,New_Away_System,New_GPG_encryption,New_Notes_and_Reminders,New_Trilimport,NewsAggregator,NickChangeNotify,Nick_History,Nim-Contact,NoHTML,NoHistory,Nudge,OTR,Omegle,OptionFont,PackUpdater,Paste_It,Ping,Popup,ProtoLink,QuickSearch_Mod,Quick_Contacts,Quick_Messages,Quick_Replies,Quotes,RSSNews,Realreconnect,Received_Files_Folders,Remove_Personal_Settings,Replacer,Roamie,SIP,SMS,SOMWO,SRAMM,Sametime,Scriptc,Scriver,Search_Bar,SecVirtDB,SecureIM,Send_Screenshot,Services_list,Sessions_Manager,ShellFileSend,Shlext,ShowUIN,Show_Contact_Gender,Shutdown,Simple_Auto_Replier,Simple_Status_Message,Skype,Skype_Status_Change,Skype_to_imo.im_Gateway,Smart_Auto_Away,Smart_Auto_Replier,SmileyAdd,Sound_Volume,Spam-o-tron,Spam_Filter_(beta),Spell_Checker,SpinChat,Splash_Screen,StartupStatus,StatusChange,StatusMessageChangeNotify,StatusMessageRequestNotify,Status_Message_History,Status_Message_Retriever,Status_Statistics,Stocks,StopSpam,Switch_Layout_or_Transliterate,TV_plugin_YM,TabSRMM,Tipper,Tlen,Tooltip_Notify,TopToolBar,Traffic_counter,Translator,Trigger,Trillian_message_history_importer,TweakUI,Twitter,UINBackup,Un4seens_bass_interface,Updater,UseActions,UserInfoEx,VKontakte,Var-Toys,Variables,VersionInfo_Uploader,Version_Information,Virtualizable_SecureDB,Voice_Service,VyChat,VyPressChat,WATrack,WUMF:_Who_uses_my_files,WannaBe_OSD,Wassup,Weather,WebCam_Video,WebPager_(ICQ),WebView,Web_Detail_(UMCP),Webi,WhenWasIt_birthday_reminder,WhoIsReadingMyStatusMsgNotify,WinPopup,WinampNotify,Window_Start_Position,Windows_Live_Messenger_History_Import,Winter_speak,WordLookUp,World_Time,XFire,XSoundNotify,XStatus_Notify,YAMN_tweety,YAPP,Yahoo,Yahoo_Groups,Yahoo_Mail_Informer,Zero_Notifications
+
 ; Start of langpack: Core (Letzte Änderung: 00:26, 30. Apr. 2012 )
 
 [0 = Default]
@@ -10435,7 +10437,7 @@ Versionsinformation hochladen
 ; ##############################################
 ; End of langpack: Crash_Dumper
 ; ############################################## 
-; Start of langpack: Custom_Status_List (Letzte Änderung: 16:08, 26. Nov. 2011 )
+; Start of langpack: Custom_Status_List (Letzte Änderung: 06:28, 17. Jul. 2012 )
 
 ; Pluginname: Custom Status List
 ; Version: 0.1.0.5
@@ -21984,7 +21986,7 @@ Neue E-Mail
 ; ##############################################
 ; End of langpack: MRA
 ; ############################################## 
-; Start of langpack: MRadio (Letzte Änderung: 16:25, 15. Apr. 2012 )
+; Start of langpack: MRadio (Letzte Änderung: 17:40, 13. Mai 2012 )
 
 ; Pluginname: mRadio 
 ; Version: 0.0.1.4
@@ -21999,6 +22001,8 @@ Neue E-Mail
 ; Autor: Awkward
 ; Übersetzung: 02.07.07
 
+[Mute with Miranda]
+Mit Miranda IM stumm schalten
 [Simple pseudo protocol with live streaming audio]
 Einfaches Pseudoprotokoll mit Live-Musikstreams
 [Playing music from:]
@@ -22027,17 +22031,6 @@ Entschuldigung!
 Bass.dll nicht gefunden! Wählen Sie das BASS.dll Verzeichnis manuell.
 [Choose BASS.dll path]
 Wählen Sie das Bass.dll Verzeichnis
-
-[Frequency:]
-Frequenz:
-[Now playing:]
-Es wird gespielt:
-[bits]
-Bits
-
-[This plugin plays and records Internet radio streams. Also local media files can be played.]
-Diese Plugin spielt Internetradiostreams ab und nimmt sie auf. Auch lokale Mediendateien können abgespielt werden.
-
 [Hide Window]
 Fenster verstecken
 [&Hide Window]
@@ -22150,6 +22143,15 @@ Protokoll abhängig vom Status
 Mono fokusieren
 [Oops! BASS error]
 Oops! BASS.dll Fehler
+[Frequency:]
+Frequenz:
+[Now playing:]
+Es wird gespielt:
+[bits]
+Bits
+
+[This plugin plays and records Internet radio streams. Also local media files can be played.]
+Diese Plugin spielt Internetradiostreams ab und nimmt sie auf. Auch lokale Mediendateien können abgespielt werden.
  
 ; ##############################################
 ; End of langpack: MRadio
@@ -27182,7 +27184,7 @@ Dieses ist ein Beispiel-Popup für Nachrichten
 ; ##############################################
 ; End of langpack: NewEventNotify
 ; ############################################## 
-; Start of langpack: NewStatusNotify (Letzte Änderung: 00:29, 30. Apr. 2012 )
+; Start of langpack: NewStatusNotify (Letzte Änderung: 15:12, 3. Jun. 2012 )
 
 ; Pluginname: NewStatusNotify 
 ; Version: 1.1.3.0
@@ -27465,11 +27467,8 @@ Entfernen:
 [Title and message separator:]
 Trenner für Titel und Nachricht:
 
-;wird noch geändert - nächste Release
-[These variables are available:\r\n\r\n%n ... new XStatus name\r\n%o ... old XStatus name\r\n%d ... XStatus details (title[separator]message)\r\n%b ... line break (can be used as separator)]
-Diese Variablen sind verfügbar:\n\n%n ... neuer XStatus-Name\n%o ... alter XStatus-Name\n%d ... XStatus-Details (Titel[Trenner]Nachricht)\n%b ... Zeilenumbruch (kann als Trenner verwendet werden)
-[These variables are available:\r\n\r\n\ %n\tNew Status Message\r\n\ %o\tOld Status Message\r\n\ %c\tCustom Nickname\r\n\ \\n\tline break\r\n\ \\t\ttab stop]
-Diese Variablen sind verfügbar:\r\n\r\n\ %n\tNeue Statusnachricht\r\n\ %o\tAlte Statusnachricht\r\n\ %c\tWunsch Nickname\r\n\ \\n\tZeilenumbruch\r\n\ \\t\tTabstopp
+[These variables are available:\r\n\r\n%n\tNew Status Message\r\n%o\tOld Status Message\r\n%c\tCustom Nickname\r\n\\n\tline break\r\n\\t\ttab stop]
+Diese Variablen sind verfügbar:\r\n\r\n%n\tNeue Statusnachricht\r\n%o\tAlte Statusnachricht\r\n%c\tBenutzerdef. Nickname\r\n\\n\tZeilenumbruch\r\n\\t\tTabstopp
 [Reset templates]
 Vorlagen zurücksetzen
 [Do you want to reset all templates to default?]
@@ -28824,7 +28823,7 @@ Unsicher
 ; ##############################################
 ; End of langpack: OTR
 ; ############################################## 
-; Start of langpack: Omegle (Letzte Änderung: 00:44, 30. Apr. 2012 )
+; Start of langpack: Omegle (Letzte Änderung: 18:42, 15. Mai 2012 )
 
 ; Pluginname: Omegle Protokoll 
 ; Version: 0.1.0.0
@@ -28834,11 +28833,11 @@ Unsicher
 ; Übersetzung: 23.04.12 von CHEF-KOCH, Freak
 
 [Stranger]
-Stranger (Fremder)
+Fremder
 [Stranger 1]
-Stranger 1 (1. Fremder)
+Fremder 1
 [Stranger 2]
-Stranger 2 (2. Fremder)
+Fremder 2
 [Last question is empty]
 Die letzte Frage ist leer. 
 [Your question is too short.]
@@ -28848,44 +28847,44 @@ Ihre '/asl' Einstellungen sind leer.
 [There are three different modes of chatting:\n1) Standard mode\t - You chat with random stranger privately\n2) Question mode\t - You ask two strangers a question and see how they discuss it (you can't join their conversation, only watch)\n3) Spy mode\t - You and stranger got a question to discuss from third stranger (he can't join your conversation, only watch)\n\nSend '/commands' for available commands.]
 Es gibt drei verschiedene Chat-Modus:\n1) Standard-Modus\t- Sie chatten privat mit einem zufällig ausgewählten Fremden\n2) Frage-Modus\t- Sie können zwei Fremden eine Frage stellen und deren Diskussion beobachten (Sie können selbst nichts schreiben, nur zusehen)\n3) 'Spy'-Modus\t- Sie können mit einem Fremden über eine Frage eines dritten Fremden diskutieren (er kann nichts schreiben, nur zusehen)
 [You can use different commands:\n/help\t - show info about chat modes\n/new\t - start standard mode\n/ask <question> - start question mode with your question\n/ask\t - start question mode with your last asked question\n/spy\t - start spy mode\n/quit\t - disconnect from stranger or stop connecting\n/asl\t - send your predefined ASL message\n\nNote: You can reconnect to different stranger without disconnecting from current one.]
-Sie können verschiedene Befehle verwenden:\n/help\t- Informationen über die verfügbaren Chat-Modus anzeigen\n/new\t- Standard-Modus starten\n/ask <Frage>\t- Frage-Modus mit Ihrer Frage starten\n/ask\t\t- Frage-Modus mit Ihrer letzten Frage starten\n/spy\t\t- 'Spy'-Modus starten\n/quit\t- Vom aktuellen Fremden trennen, bzw die Verbindung abbrechen\n/asl\t\t- Senden Sie Ihre vordefinierte ASL-Nachricht\n\nHinweis: Sie können sich mit einem neuen Fremden verbinden ohne sich vom aktuellen zu trennen.
+Sie können verschiedene Befehle verwenden:\n/help\t- Informationen über die verfügbaren Chat-Modus anzeigen\n/new\t- Standard-Modus starten\n/ask <Frage>\t- Frage-Modus mit Ihrer Frage starten\n/ask\t\t- Frage-Modus mit Ihrer letzten Frage starten\n/spy\t\t- Spion-Modus starten\n/quit\t- Vom aktuellen Fremden trennen, bzw die Verbindung abbrechen\n/asl\t\t- Senden Sie Ihre vordefinierte ASL-Nachricht\n\nHinweis: Sie können sich mit einem neuen Fremden verbinden ohne sich vom aktuellen zu trennen.
 [Recaptcha is required.\nOpen Omegle chat in webbrowser, solve Recaptcha and try again.]
 reCAPTCHA wird benötigt.\Öffnen Sie Omegle in Ihrem Webbrowser, lösen Sie das reCAPTCHA und versuchen Sie es erneut.
 [Unknown command. Send '/commands' for list.]
 Unbekannter Befehl. Benutzen Sie '/commands' für eine Übersicht.
 [You aren't connected to any stranger. Send '/help' or '/commands' for help.]
-Sie sind zu keinem Stranger verbunden. Senden Sie '/help' oder '/commands' für Hilfe oder Übersicht.
+Sie sind zu keinem Fremden verbunden. Senden Sie '/help' oder '/commands' für Hilfe oder Übersicht.
 [You can't send messages in spy mode.]
-Sie können keine Nachrichten im 'Spy'-Modus senden.
+Sie können keine Nachrichten im Spion-Modus senden.
 [Omegle is a great way of meeting new friends!]
 Das Omegle-Protokoll ist ein schöner Weg neue Freunde zu finden!
 [Connected to server %s. There are %s users online now.]
 Verbinde zum Server %s. Es sind insgesamt %s Nutzer online.
 [You and the Stranger both like: ]
-Sie und der Stranger mögen beide:
+Sie und der Fremde mögen beide:
 [Waiting for Stranger...]
-Warte auf Stranger...
+Warte auf Fremden...
 
 [Visible name:]
 Sichtbarer Name:
 [Meet strangers with common interests (separated by commas):]
-Treffe neue Strangers mit gemeinsamen Interessen (durch Komma trennen):
+Treffe neue Fremde mit gemeinsamen Interessen (durch Komma trennen):
 [Automatically send this message to stranger after connection:]
-Sende automatisch diese Nachricht zu den Strangers nach dem Verbinden:
+Sende automatisch diese Nachricht zu Fremden nach dem Verbinden:
 [This text will be sent when you use ""/asl"" message:]
 Dieser Text wird gesendet nachdem Sie ""/asl"" Nachrichten nutzen:
 [Don't clear chat before connecting to new stranger]
-Den Chat nicht säubern bevor sie zu einem neuen Stranger verbinden
+Den Chat nicht säubern bevor sie zu einem neuen Fremden verbinden
 [Automatically connect to another stranger when current disconnects]
-Automatisch zu einem neuen Stranger verbinden falls aktuelle Verbindung verloren geht
+Automatisch zu einem neuen Fremden verbinden falls aktuelle Verbindung verloren geht
 [I want Omegle to reuse my questions if they are good enough (Question mode)]
-Gleiche Frage erneut benutzen, falls diese gut genug ist ('Frage'-Modus)
+Gleiche Frage erneut benutzen, falls diese gut genug ist (Frage-Modus)
 [Load count of users on actual server after connection]
 Lade aktuelle Benutzerzahl des Severs nach dem verbinden
 [Last used question (Question mode):]
-Zuletzt genutzte Frage ('Frage'-Modus):
+Zuletzt genutzte Frage (Frage-Modus):
 [Meet strangers with common interests]
-Treffe neue Strangers mit gemeinsamen Interessen
+Treffe neue Fremde mit gemeinsamen Interessen
 [Your interests (separated by commas):]
 Ihre Interessen (durch Komma trennen)
  
